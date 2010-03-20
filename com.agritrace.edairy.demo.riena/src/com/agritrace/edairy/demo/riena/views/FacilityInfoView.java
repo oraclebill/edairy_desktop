@@ -12,13 +12,19 @@ package com.agritrace.edairy.demo.riena.views;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
@@ -31,60 +37,108 @@ public class FacilityInfoView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		Composite top = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 0;
-		layout.marginWidth = 0;
-		top.setLayout(layout);
-		// top banner
-		Composite banner = new Composite(top, SWT.NONE);
-		banner.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL, GridData.VERTICAL_ALIGN_BEGINNING, true,
-				false));
-		layout = new GridLayout();
-		layout.marginHeight = 5;
-		layout.marginWidth = 10;
-		layout.numColumns = 2;
-		banner.setLayout(layout);
+		top.setLayout(new FormLayout());
 
-		// setup bold font
-		Font boldFont = JFaceResources.getFontRegistry().getBold(JFaceResources.DEFAULT_FONT);
+		Text txtName;
+		Text txtId;
+		Text txtLicense;
+		Text txtEstablishedAs;
+		Text txtJohnJones;
+		Text text_1;
 
-		Label l = new Label(banner, SWT.WRAP);
-		l.setText("Subject:"); //$NON-NLS-1$
-		l.setFont(boldFont);
-		l = new Label(banner, SWT.WRAP);
-		l.setText("This is a message about the cool Eclipse RCP!"); //$NON-NLS-1$
+		// Construct Dairy Name/ID Area
+		Group nameArea = new Group(top, SWT.NONE);
+		nameArea.setText("General Information");
 
-		l = new Label(banner, SWT.WRAP);
-		l.setText("From:"); //$NON-NLS-1$
-		l.setFont(boldFont);
+		// Construct Dairy Image
+		CLabel lblDairyImage = new CLabel(top, SWT.NONE);
+		lblDairyImage.setImage(ImageStore.getInstance().getImage("map.jpg"));
 
-		final Link link = new Link(banner, SWT.NONE);
-		link.setText("<a>nicole@mail.org</a>"); //$NON-NLS-1$
-		link.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				MessageDialog.openInformation(getSite().getShell(),
-						"Not Implemented", "Imagine the address book or a new message being created now."); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-		});
+		// Construct Dairy Location Component
+		LocationInfoGroup locationInfoGroup = new LocationInfoGroup(top, SWT.NONE);
+		
+		// Populate Dairy Name/ID Area		
+		GridLayout gl_nameArea = new GridLayout(2, false);
+		gl_nameArea.marginTop = 5;
+		gl_nameArea.marginRight = 5;
+		gl_nameArea.marginLeft = 5;
+		nameArea.setLayout(gl_nameArea);
+		
+		Label lblName = new Label(nameArea, SWT.NONE);
+		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblName.setText("Name");
+		txtName = new Text(nameArea, SWT.BORDER);
+		txtName.setText("Limuru Dairy Milk Processing Plant");
+		txtName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		l = new Label(banner, SWT.WRAP);
-		l.setText("Date:"); //$NON-NLS-1$
-		l.setFont(boldFont);
-		l = new Label(banner, SWT.WRAP);
-		l.setText("10:34 am"); //$NON-NLS-1$
-		// message contents
-		Text text = new Text(top, SWT.MULTI | SWT.WRAP);
-		text
-				.setText("This RCP EDairyManagerApplication was generated from the PDE Plug-in Project wizard. This sample shows how to:\n" + //$NON-NLS-1$
-						"- add a top-level menu and toolbar with actions\n" + //$NON-NLS-1$
-						"- add keybindings to actions\n" + //$NON-NLS-1$
-						"- create views that can't be closed and\n" + //$NON-NLS-1$
-						"  multiple instances of the same view\n" + //$NON-NLS-1$
-						"- perspectives with placeholders for new views\n" + //$NON-NLS-1$
-						"- use the default about dialog\n" + //$NON-NLS-1$
-						"- create a product definition\n"); //$NON-NLS-1$
-		text.setLayoutData(new GridData(GridData.FILL_BOTH));
+		Label lblId = new Label(nameArea, SWT.NONE);
+		lblId.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblId.setText("ID");
+		txtId = new Text(nameArea, SWT.BORDER);
+		txtId.setText("# 33422314");
+		txtId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		
+		Label lblLicense = new Label(nameArea, SWT.NONE);
+		lblLicense.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblLicense.setText("License #");		
+		txtLicense = new Text(nameArea, SWT.BORDER);
+		txtLicense.setText("AD-123445-112");
+		txtLicense.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		
+		// Populate Image Area		
+		// Populate Location Area		
+		
+		// Layout name area
+		FormData fd_composite = new FormData();
+		fd_composite.top = new FormAttachment(0, 10);
+		fd_composite.bottom = new FormAttachment(locationInfoGroup, -5);
+		fd_composite.left = new FormAttachment(0, 10);
+		fd_composite.right = new FormAttachment(lblDairyImage, 5);
+		nameArea.setLayoutData(fd_composite);
+		
+		Label lblManager = new Label(nameArea, SWT.NONE);
+		lblManager.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblManager.setText("Manager");
+		
+		txtJohnJones = new Text(nameArea, SWT.BORDER);
+		txtJohnJones.setText("John Jones");
+		txtJohnJones.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblMembership = new Label(nameArea, SWT.NONE);
+		lblMembership.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblMembership.setText("Membership");
+		
+		text_1 = new Text(nameArea, SWT.BORDER);
+		text_1.setText("134");
+		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblDetails = new Label(nameArea, SWT.NONE);
+		lblDetails.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
+		lblDetails.setText("Notes");
+		
+		txtEstablishedAs = new Text(nameArea, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		txtEstablishedAs.setText("Established 1976 as Limuru Community Processing Play");
+		txtEstablishedAs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+		// Layout image area
+		FormData fd_lblDairyImage = new FormData();
+		fd_lblDairyImage.width = 200;
+		fd_lblDairyImage.height = 200;
+		fd_lblDairyImage.top = new FormAttachment(0, 10);
+//		fd_lblDairyImage.bottom = new FormAttachment(0, 210);
+//		fd_lblDairyImage.left = new FormAttachment(100, -179);
+		fd_lblDairyImage.right = new FormAttachment(100, -10);
+		lblDairyImage.setLayoutData(fd_lblDairyImage);
+		
+		// Layout address area
+		FormData fd_locationInfoGroup = new FormData();
+		fd_locationInfoGroup.height = 320;
+		fd_locationInfoGroup.top = new FormAttachment(lblDairyImage, 5);
+		fd_locationInfoGroup.bottom = new FormAttachment(100);
+		fd_locationInfoGroup.left = new FormAttachment(0, 10);
+		fd_locationInfoGroup.right = new FormAttachment(100, -10);
+		locationInfoGroup.setLayoutData(fd_locationInfoGroup);
+
 	}
 
 	@Override
