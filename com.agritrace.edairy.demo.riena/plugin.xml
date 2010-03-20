@@ -1,0 +1,40 @@
+<plugin>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/releng_gears.gif"
+            id="com.agritrace.edairy.manager.perspective"
+            name="com.agritrace.edairy.manager.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="Application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.agritrace.edairy.demo.riena.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="Dairy Info"
+            allowMultiple="true"
+            icon="icons/sample2.gif"
+            class="com.agritrace.edairy.demo.riena.views.FacilityInfoView"
+            id="com.agritrace.edairy.demo.riena.views.FacilityInfoView">
+      </view>
+      <view
+            name="Demo Dairy Home"
+            allowMultiple="true"
+            icon="icons/sample2.gif"
+            class="com.agritrace.edairy.demo.riena.views.DairyHomeView"
+            id="com.agritrace.edairy.demo.riena.views.DairyHomeView">
+      </view>
+   </extension>
+</plugin>
