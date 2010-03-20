@@ -64,13 +64,12 @@ public class EDairyManagerApplication extends SwtApplication {
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
 				new NavigationNodeId("edm.supplychain"), "Milk Processing", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 			moduleSupplyChain.setClosable(false);
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Facility Info", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Staff Directory", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.admin"), "Administrative", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Deliveries", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleMembers = NodeFactory.createModule(
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
-			moduleDairy.setClosable(false);
+			moduleMembers.setClosable(false);
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Member Accounts", moduleMembers, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 //			NodeFactory.createSubMobule(new NavigationNodeId("edm.members.farms"), "Member Farms", moduleMembers, View.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
