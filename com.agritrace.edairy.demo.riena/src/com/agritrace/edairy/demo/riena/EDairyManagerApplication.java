@@ -14,12 +14,10 @@ import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
-import org.eclipse.swt.graphics.RGB;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.demo.riena.views.DairyHomeView;
 import com.agritrace.edairy.demo.riena.views.FacilityInfoView;
-import org.eclipse.jface.resource.JFaceResources;
 
 /**
  * @author oraclebill

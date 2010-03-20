@@ -1,22 +1,10 @@
 package com.agritrace.edairy.demo.riena;
 
-import java.util.Map;
-
-import org.eclipse.riena.ui.ridgets.AbstractMarkerSupport;
-import org.eclipse.riena.ui.ridgets.IRidget;
-import org.eclipse.riena.ui.swt.lnf.ILnfMarkerSupportExtension;
-import org.eclipse.riena.ui.swt.lnf.ILnfRenderer;
-import org.eclipse.riena.ui.swt.lnf.ILnfRendererExtension;
-import org.eclipse.riena.ui.swt.lnf.ILnfResource;
 import org.eclipse.riena.ui.swt.lnf.ILnfTheme;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultLnf;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Resource;
-import org.eclipse.ui.internal.Workbench;
 
 public class EDairyManagerLookAndFeel extends RienaDefaultLnf {
 
