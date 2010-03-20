@@ -12,25 +12,38 @@ import org.eclipse.riena.navigation.model.ApplicationNode;
 import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
+import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
+import org.eclipse.swt.graphics.RGB;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.demo.riena.views.DairyHomeView;
 import com.agritrace.edairy.demo.riena.views.FacilityInfoView;
+import org.eclipse.jface.resource.JFaceResources;
 
 /**
  * @author oraclebill
  *
  */
-public class Application extends SwtApplication {
+public class EDairyManagerApplication extends SwtApplication {
 
-//    @Override
+	public static final String BG_DARK =  "edm_dark_background";
+	public static final String BG_LIGHT =  "edm_light_background";
+	
+	
+	public EDairyManagerApplication() {
+		super();
+		LnfManager.setLnf(new EDairyManagerLookAndFeel());
+	}
+
+	//    @Override
     protected Bundle getBundle() {
         return Activator.getDefault().getBundle();
     }
 
     @Override
 	protected IApplicationNode createModel() {
+    	
 		ApplicationNode app = new ApplicationNode("eDairy Manager"); //$NON-NLS-1$
 
 		ISubApplicationNode subApp = new SubApplicationNode("Demo"); //$NON-NLS-1$

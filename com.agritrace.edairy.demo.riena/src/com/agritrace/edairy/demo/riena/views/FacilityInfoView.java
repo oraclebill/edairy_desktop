@@ -76,7 +76,7 @@ public class FacilityInfoView extends ViewPart {
 		// message contents
 		Text text = new Text(top, SWT.MULTI | SWT.WRAP);
 		text
-				.setText("This RCP Application was generated from the PDE Plug-in Project wizard. This sample shows how to:\n" + //$NON-NLS-1$
+				.setText("This RCP EDairyManagerApplication was generated from the PDE Plug-in Project wizard. This sample shows how to:\n" + //$NON-NLS-1$
 						"- add a top-level menu and toolbar with actions\n" + //$NON-NLS-1$
 						"- add keybindings to actions\n" + //$NON-NLS-1$
 						"- create views that can't be closed and\n" + //$NON-NLS-1$

@@ -16,7 +16,7 @@
             thread="main"
             visible="true">
          <run
-               class="com.agritrace.edairy.demo.riena.Application">
+               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
          </run>
       </application>
    </extension>
@@ -36,5 +36,11 @@
             class="com.agritrace.edairy.demo.riena.views.DairyHomeView"
             id="com.agritrace.edairy.demo.riena.views.DairyHomeView">
       </view>
+   </extension>
+   <extension
+         point="org.eclipse.riena.ui.swt.imagePaths">
+      <path
+            path="resources">
+      </path>
    </extension>
 </plugin>
