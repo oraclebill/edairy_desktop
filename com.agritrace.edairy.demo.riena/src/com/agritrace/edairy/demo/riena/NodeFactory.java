@@ -16,6 +16,7 @@ import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ModuleNode;
 import org.eclipse.riena.navigation.model.SubModuleNode;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 /**
@@ -40,6 +41,16 @@ public final class NodeFactory {
 		result.setIcon("generic_element.gif"); //$NON-NLS-1$
 		parent.addChild(result);
 		WorkareaManager.getInstance().registerDefinition(result, viewId);
+		return result;
+	}
+	
+	public static ISubModuleNode createSubMobule(NavigationNodeId nodeId, String caption, IModuleNode parent,
+			String viewId,Class<? extends IController> controllerClass) {
+		ISubModuleNode result = new SubModuleNode(nodeId, caption);
+		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
+		result.setIcon("generic_element.gif"); //$NON-NLS-1$
+		parent.addChild(result);
+		WorkareaManager.getInstance().registerDefinition(result, controllerClass,viewId);
 		return result;
 	}
 }

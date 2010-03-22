@@ -14,12 +14,19 @@ import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
-import org.eclipse.swt.graphics.RGB;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.demo.riena.views.DairyHomeView;
 import com.agritrace.edairy.demo.riena.views.FacilityInfoView;
-import org.eclipse.jface.resource.JFaceResources;
+import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
+import com.agritrace.edairy.demo.riena.views.LocalDairyView;
+import com.agritrace.edairy.demo.riena.views.LocalDairyViewController;
+import com.agritrace.edairy.demo.riena.views.MemberInfoViewController;
+import com.agritrace.edairy.demo.riena.views.MembersInfoView;
+import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
+import com.agritrace.edairy.demo.riena.views.StaffInfoView;
+import com.agritrace.edairy.demo.riena.views.StaffInfoViewController;
+import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
 
 /**
  * @author oraclebill
@@ -48,7 +55,10 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		ISubApplicationNode subApp = new SubApplicationNode("Demo"); //$NON-NLS-1$
 		app.addChild(subApp);
-		WorkareaManager.getInstance().registerDefinition(subApp, "com.agritrace.edairy.manager.perspective"); //$NON-NLS-1$
+		
+		final WorkareaManager workarea = WorkareaManager.getInstance();
+
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.perspective"); //$NON-NLS-1$
 
 		IModuleGroupNode groupTopLevel = new ModuleGroupNode(new NavigationNodeId("primary.navgroup"));
 		subApp.addChild(groupTopLevel);
@@ -58,7 +68,8 @@ public class EDairyManagerApplication extends SwtApplication {
 			moduleDairy.setClosable(false);
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.home"), "Dairy Demo Home", moduleDairy, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.info"), "Facility Info", moduleDairy, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.staff"), "Staff Directory", moduleDairy, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.staff"), "Staff Directory", moduleDairy, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.admin"), "Administrative", moduleDairy, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
@@ -66,24 +77,25 @@ public class EDairyManagerApplication extends SwtApplication {
 			moduleSupplyChain.setClosable(false);
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Deliveries", moduleSupplyChain, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.accounts"), "Member Accounts", moduleSupplyChain, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleMembers = NodeFactory.createModule(
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 			moduleMembers.setClosable(false);
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Member Accounts", moduleMembers, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//			NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Member Accounts", moduleMembers, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 //			NodeFactory.createSubMobule(new NavigationNodeId("edm.members.farms"), "Member Farms", moduleMembers, View.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleServices = NodeFactory.createModule(
 				new NavigationNodeId("edm.services"), "Services", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 			moduleServices.setClosable(false);
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.veterinary"), "Veterinary", moduleServices, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.insemination"), "Insemination", moduleServices, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.other"), "Other", moduleServices, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.veterinary"), "Veterinary", moduleServices, VeterinaryRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.insemination"), "Insemination", moduleServices, InseminationRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.other"), "Request Log", moduleServices, ServiceRequestLogView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleDirectory = NodeFactory.createModule(
 				new NavigationNodeId("edm.directory"), "Directory", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 			moduleDirectory.setClosable(false);
-			NodeFactory.createSubMobule(new NavigationNodeId("edm.directory.local"), "Local Dairy", moduleDirectory, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubMobule(new NavigationNodeId("edm.directory.local"), "Local Dairy", moduleDirectory, LocalDairyView.ID, LocalDairyViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.directory.global"), "All Network Dairies", moduleDirectory, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubMobule(new NavigationNodeId("edm.services.external"), "Suppliers", moduleDirectory, FacilityInfoView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
