@@ -48,24 +48,24 @@ public class InseminationRequestView extends VeterinaryRequestView {
 		gd.horizontalSpan =3;
 		requestTypePanel.setLayoutData(gd);
 
-		Label requestTypeLabel = new Label(requestTypePanel, SWT.NULL);
-		requestTypeLabel.setText("Request Type:");
-		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
-				SWT.BEGINNING, false, false));
-
-		Button clinicalButton = new Button(requestTypePanel, SWT.RADIO);
-		clinicalButton.setText("clinical");
-		clinicalButton.setSelection(false);
-//		clinicalButton.setEnabled(false);
-		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-				false, false));
-
-		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
-		inseminationButton.setText("insemination");
-		inseminationButton.setSelection(true);
-//		inseminationButton.setEnabled(false);
-		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-				false, false));
+//		Label requestTypeLabel = new Label(requestTypePanel, SWT.NULL);
+//		requestTypeLabel.setText("Request Type:");
+//		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
+//				SWT.BEGINNING, false, false));
+//
+//		Button clinicalButton = new Button(requestTypePanel, SWT.RADIO);
+//		clinicalButton.setText("clinical");
+//		clinicalButton.setSelection(false);
+////		clinicalButton.setEnabled(false);
+//		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
+//				false, false));
+//
+//		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
+//		inseminationButton.setText("insemination");
+//		inseminationButton.setSelection(true);
+////		inseminationButton.setEnabled(false);
+//		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
+//				false, false));
 	}
 	
 	protected void createBottomGroup(Composite parent) {

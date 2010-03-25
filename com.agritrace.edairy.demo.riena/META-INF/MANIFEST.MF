@@ -5,10 +5,9 @@ Bundle-SymbolicName: com.agritrace.edairy.demo.riena;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.demo.riena.Activator
 Bundle-Vendor: AGRITRACE
-Require-Bundle: org.eclipse.ui;bundle-version="3.6.0",
- org.eclipse.core.runtime,
- org.eclipse.riena.client;bundle-version="2.0.0"
+Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.demo.riena,
- com.agritrace.edairy.demo.riena.views
+ com.agritrace.edairy.demo.riena.views,
+ com.agritrace.edairy.demo.riena.views.data

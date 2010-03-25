@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Table;
 
 public class StaffInfoMasterDetailsComposite extends MasterDetailsComposite {
@@ -18,6 +19,13 @@ public class StaffInfoMasterDetailsComposite extends MasterDetailsComposite {
 	}
 	
 	
+//	@Override
+//	public void setLayout(Layout layout) {
+//		// TODO Auto-generated method stub
+//		super.setLayout(org.eclipse.jface.layout.RowLayoutFactory.swtDefaults().create());
+//	}
+
+
 	@Override
 	protected Table createTable(Composite tableComposite, TableColumnLayout layout) {
 		if(tableComposite.getParent() != null){

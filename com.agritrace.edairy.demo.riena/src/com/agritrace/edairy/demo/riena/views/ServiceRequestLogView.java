@@ -38,8 +38,7 @@ public class ServiceRequestLogView extends ViewPart {
 		
 		Table logTable = new Table(tablePanel, SWT.SINGLE|SWT.BORDER|SWT.FULL_SELECTION);
 		logTable.setLinesVisible(true);
-		logTable.setHeaderVisible(true);
-		
+		logTable.setHeaderVisible(true);		
 		
 		TableColumn columnDate = new TableColumn(logTable, SWT.LEFT);
 		columnDate.setText("Date");
@@ -52,38 +51,31 @@ public class ServiceRequestLogView extends ViewPart {
 		TableColumn columnRequestType = new TableColumn(logTable, SWT.LEFT);
 		columnRequestType.setText("Request Type");
 		
-		TableColumn columnStatus = new TableColumn(logTable, SWT.LEFT);
-		columnStatus.setText("Status");
+//		TableColumn columnStatus = new TableColumn(logTable, SWT.LEFT);
+//		columnStatus.setText("Status");
 
 		TableColumnLayout layout = new TableColumnLayout();
 		layout.setColumnData(columnDate, new ColumnWeightData(20));
 		layout.setColumnData(columnMember, new ColumnWeightData(20));
 		layout.setColumnData(columnRequestType, new ColumnWeightData(20));
 		layout.setColumnData(columnFarm, new ColumnWeightData(20));
-		layout.setColumnData(columnStatus, new ColumnWeightData(20));
+//		layout.setColumnData(columnStatus, new ColumnWeightData(20));
 		
 		TableItem item1 = new TableItem(logTable, SWT.NONE);
-		item1.setText(new String[] { "01/04/2009", "John Smith", "Golden Star","Veterinary","" });
+		item1.setText(new String[] { "01/04/2009", "John Smith", "Golden Star","Veterinary"});
 		TableItem item2 = new TableItem(logTable, SWT.NONE);
-		item2.setText(new String[] { "08/23/2009", "Reese Miiler ", "Golden Star","Insemination" ,""});
+		item2.setText(new String[] { "08/23/2009", "Reese Miiler ", "Golden Star","Insemination" });
 		TableItem item3 = new TableItem(logTable, SWT.NONE);
-		item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Star","Veterinary","" });
+		item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Star","Veterinary" });
+		
+		for ( int ii = 0; ii< 25; ii++) {
+			item3 = new TableItem(logTable, SWT.NONE);
+			item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Star","Veterinary" });
+		}
 		
 		
 		tablePanel.setLayout(layout);
 		
-		
-		Composite savePanel = new Composite(panel, SWT.NULL);
-		savePanel.setLayoutData(new GridData(SWT.END,SWT.FILL,false,false));
-		savePanel.setLayout(new GridLayout(2,false));
-		
-		Button saveButton = new Button(savePanel,SWT.PUSH);
-		saveButton.setText("Save");
-		saveButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
-		
-		Button cancelButton = new Button(savePanel,SWT.PUSH);
-		cancelButton.setText("Cancel");
-		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 	}
 
 	@Override
