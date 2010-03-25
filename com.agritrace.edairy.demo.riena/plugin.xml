@@ -9,18 +9,6 @@
       </perspective>
    </extension>
    <extension
-         id="Application"
-         point="org.eclipse.core.runtime.applications">
-      <application
-            cardinality="singleton-global"
-            thread="main"
-            visible="true">
-         <run
-               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
-         </run>
-      </application>
-   </extension>
-   <extension
          point="org.eclipse.ui.views">
       <view
             name="Dairy Info"
@@ -74,11 +62,60 @@
             name="LocalDairyView"
             restorable="true">
       </view>
-   </extension>
+       <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
+            id="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
+            name="MilkCollectionInfoView">
+      </view>
+          <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.demo.riena.views.DeliveryView"
+            id="com.agritrace.edairy.demo.riena.views.DeliveryView"
+            name="DeliveryView">
+        </view>
+        <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.demo.riena.views.CreditJournalView"
+            id="com.agritrace.edairy.demo.riena.views.CreditJournalView"
+            name="CreditJournalViews">
+        </view>
+         <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
+            id="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
+            name="NetworklDairyView">
+        </view>
+        
+        </extension>
    <extension
          point="org.eclipse.riena.ui.swt.imagePaths">
       <path
             path="resources">
       </path>
+   </extension>
+   <extension
+         id="eDairy"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="id1"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
+         </run>
+      </application>
    </extension>
 </plugin>

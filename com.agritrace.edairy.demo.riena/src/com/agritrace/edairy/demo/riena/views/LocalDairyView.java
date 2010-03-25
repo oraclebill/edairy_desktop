@@ -9,6 +9,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -89,12 +90,14 @@ public class LocalDairyView extends SubModuleView {
 				1, 1));
 
 		Label imageLable = new Label(detailGroup, SWT.BORDER); //$NON-NLS-1$
-		GridData imagData = new GridData();
-		imagData.heightHint = 100;
-		imagData.widthHint = 100;
+//		GridData imagData = new GridData();
+//		imagData.heightHint = 100;
+//		imagData.widthHint = 100;
 		// imagData.minimumHeight =48;
 		// imagData.minimumWidth=48;
+		GridData imagData = new GridData(SWT.FILL,SWT.TOP,false,false);
 		imagData.verticalSpan = 4;
+
 		Image photoImage = Activator.getImage(ImageRegistry.smileFace);
 		imageLable.setImage(photoImage);
 		imageLable.setLayoutData(imagData);
@@ -141,6 +144,16 @@ public class LocalDairyView extends SubModuleView {
 		//		mdComposite.addUIControl(ccPets, "pets"); //$NON-NLS-1$
 
 		this.addUIControl(mdComposite, "master"); //$NON-NLS-1$
+		
+		Composite buttonPanel = UIControlsFactory.createComposite(details);
+		buttonPanel
+		.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
+		buttonPanel.setLayout(new GridLayout(2,false));
+		Button saveButton = UIControlsFactory.createButton(buttonPanel,"Save");
+		saveButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
+
+		Button cancelButton = UIControlsFactory.createButton(buttonPanel,"Cancel");
+		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
 		// DefaultButtonManager dbm = new
 		// DefaultButtonManager(parent.getShell());

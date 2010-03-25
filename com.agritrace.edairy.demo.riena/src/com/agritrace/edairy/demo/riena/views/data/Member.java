@@ -1,5 +1,6 @@
 package com.agritrace.edairy.demo.riena.views.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,10 +35,12 @@ public class Member extends Staff {
 	private boolean isActive;
 	private int crdit;
 	private Address addressInfo;
+	private List<Farm> farmList; 
 
 	public Member(String lastname, String firstname) {
 		super(lastname, firstname);
 		addressInfo = new Address();
+		farmList =  new ArrayList<Farm>();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -132,6 +135,14 @@ public class Member extends Staff {
 	
 	public List<STATUS> getStatuses() {
 		return Arrays.asList(STATUS.STATUSES);
+	}
+
+	public List<Farm> getFarmList() {
+		return farmList;
+	}
+
+	public void setFarmList(List<Farm> farmList) {
+		this.farmList = farmList;
 	}
 
 }

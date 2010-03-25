@@ -18,9 +18,8 @@ public class MemberFactory {
 	 */
 	public static List<Member> createMemberList() {
 		List<Member> newList = new ArrayList<Member>();
-		
 
-		Member person = new Member("Richard", "Fielle");
+		Member person = new Member("Joseph", "Limuru");
 		person.setId(1002);
 		person.setPhoneNumber("(608)923-2345");
 		person.setAddress("87 south Rd., Princeton Junction, NJ 08550");
@@ -36,7 +35,7 @@ public class MemberFactory {
 
 		newList.add(person);
 
-		person  = new Member("Jackson", "Janet");
+		person  = new Member("John", "Smith");
 		person.setId(1045);
 		person.setPhoneNumber("(608)923-2488");
 		person.setAddress("222 Rading Rd., Princeton Junction, NJ 08550");

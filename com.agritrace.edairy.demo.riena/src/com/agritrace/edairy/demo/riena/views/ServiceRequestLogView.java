@@ -3,10 +3,15 @@ package com.agritrace.edairy.demo.riena.views;
 
 
 import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -19,9 +24,19 @@ public class ServiceRequestLogView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		Composite panel = new Composite(parent, SWT.NULL);
-		panel.setLayout(new GridLayout());
+		panel.setLayout(new GridLayout(1,false));
 		
-		Table logTable = new Table(panel, SWT.SINGLE|SWT.BORDER|SWT.FULL_SELECTION);
+		Label titleLabel = new Label(panel, SWT.NULL);
+		titleLabel.setText("Service Request Logs");
+		Font labelFont = JFaceResources.getFontRegistry().getBold(
+				JFaceResources.HEADER_FONT);
+		titleLabel.setFont(labelFont);
+		
+		Composite tablePanel = new Composite(panel, SWT.NULL);
+		tablePanel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		//tablePanel.setLayout(new GridLayout(1,false));
+		
+		Table logTable = new Table(tablePanel, SWT.SINGLE|SWT.BORDER|SWT.FULL_SELECTION);
 		logTable.setLinesVisible(true);
 		logTable.setHeaderVisible(true);
 		
@@ -52,13 +67,23 @@ public class ServiceRequestLogView extends ViewPart {
 		TableItem item2 = new TableItem(logTable, SWT.NONE);
 		item2.setText(new String[] { "08/23/2009", "Reese Miiler ", "Golden Star","Insemination" ,""});
 		TableItem item3 = new TableItem(logTable, SWT.NONE);
-		item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Start","Veterinary","" });
-
-
-		panel.setLayout(layout);
+		item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Star","Veterinary","" });
 		
 		
-
+		tablePanel.setLayout(layout);
+		
+		
+		Composite savePanel = new Composite(panel, SWT.NULL);
+		savePanel.setLayoutData(new GridData(SWT.END,SWT.FILL,false,false));
+		savePanel.setLayout(new GridLayout(2,false));
+		
+		Button saveButton = new Button(savePanel,SWT.PUSH);
+		saveButton.setText("Save");
+		saveButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+		
+		Button cancelButton = new Button(savePanel,SWT.PUSH);
+		cancelButton.setText("Cancel");
+		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 	}
 
 	@Override

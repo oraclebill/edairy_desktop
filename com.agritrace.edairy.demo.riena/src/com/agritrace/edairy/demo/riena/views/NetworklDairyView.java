@@ -7,10 +7,10 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.internal.ole.win32.COMObject;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -19,11 +19,11 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.demo.riena.Activator;
 import com.agritrace.edairy.demo.riena.ImageRegistry;
 
-public class StaffInfoView extends SubModuleView {
+public class NetworklDairyView extends SubModuleView {
 
-	public static final String ID = StaffInfoView.class.getName();
+	public static final String ID = NetworklDairyView.class.getName();
 
-	public StaffInfoView() {
+	public NetworklDairyView() {
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class StaffInfoView extends SubModuleView {
 
 	private Group createMasterDetails(Composite parent) {
 		Group result = UIControlsFactory.createGroup(parent,
-				"Staff Information:"); //$NON-NLS-1$
+				"Network Dairy Information:"); //$NON-NLS-1$
 		result.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		//
 		GridLayout layout = new GridLayout();
@@ -97,8 +97,8 @@ public class StaffInfoView extends SubModuleView {
 		// imagData.minimumHeight =48;
 		// imagData.minimumWidth=48;
 		GridData imagData = new GridData(SWT.FILL,SWT.TOP,false,false);
-
 		imagData.verticalSpan = 4;
+
 		Image photoImage = Activator.getImage(ImageRegistry.smileFace);
 		imageLable.setImage(photoImage);
 		imageLable.setLayoutData(imagData);
@@ -115,9 +115,9 @@ public class StaffInfoView extends SubModuleView {
 		txtPhone.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
 				1, 1));
 		
-		UIControlsFactory.createLabel(detailGroup, "Department"); //$NON-NLS-1$
+		UIControlsFactory.createLabel(detailGroup, "Farm"); //$NON-NLS-1$
 		Text txtDep = UIControlsFactory.createText(detailGroup, SWT.BORDER,
-				"department"); //$NON-NLS-1$
+				"farm"); //$NON-NLS-1$
 		txtDep.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
 				1, 1));
 		
@@ -125,6 +125,18 @@ public class StaffInfoView extends SubModuleView {
 		Text txtAdd = UIControlsFactory.createText(detailGroup, SWT.BORDER,
 				"address"); //$NON-NLS-1$
 		txtAdd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
+				2, 1));
+		
+		// status
+		UIControlsFactory.createLabel(detailGroup, "Organization Type:"); //$NON-NLS-1$
+		Combo comboStatus = UIControlsFactory.createCombo(detailGroup, "organizationType");
+		comboStatus.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+		
+		UIControlsFactory.createLabel(detailGroup, "Organization Name"); //$NON-NLS-1$
+		Text txtOragText = UIControlsFactory.createText(detailGroup, SWT.BORDER,
+				"organizationName"); //$NON-NLS-1$
+		txtOragText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
 				2, 1));
 
 		UIControlsFactory.createLabel(detailGroup, "Gender:"); //$NON-NLS-1$
@@ -155,12 +167,13 @@ public class StaffInfoView extends SubModuleView {
 
 		Button cancelButton = UIControlsFactory.createButton(buttonPanel,"Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
-		
-//		 DefaultButtonManager dbm = new
-//		 DefaultButtonManager(parent.getShell());
-//		 dbm.addButton(mdComposite.getButtonApply(), mdComposite);
+
+		// DefaultButtonManager dbm = new
+		// DefaultButtonManager(parent.getShell());
+		// dbm.addButton(mdComposite.getButtonApply(), mdComposite);
 
 		return result;
 	}
 
 }
+
