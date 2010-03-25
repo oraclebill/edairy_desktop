@@ -128,6 +128,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.events"), "Events", moduleReports, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.marketplace"), "Marketplace", moduleReports, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.dairy"), "Dairy", moduleReports, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.custom"), "Custom", moduleReports, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleSystem = NodeFactory.createModule(
 				new NavigationNodeId("edm.sysadmin"), "Setup", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$

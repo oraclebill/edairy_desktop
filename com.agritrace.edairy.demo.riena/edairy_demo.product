@@ -27,6 +27,12 @@
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OSGi%Minimum-1.0</macos>
    </vm>
 
+   <license>
+        <url>http://www.agritrace.co.ke/license/index.html</url>
+        <text>
+   Copyright 2010 Agritrace Ltd.
+         </text>
+   </license>
 
    <plugins>
       <plugin id="com.agritrace.edairy.demo.riena"/>
@@ -107,6 +113,7 @@
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
+      <plugin id="org.eclipse.ui.intro"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.hamcrest.core" fragment=""/>
       <plugin id="org.junit"/>
