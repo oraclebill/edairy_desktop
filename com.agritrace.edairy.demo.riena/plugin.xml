@@ -107,4 +107,24 @@
          </run>
       </application>
    </extension>
+   <extension
+         id="edairy_demo_product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.agritrace.edairy.demo.riena.id1"
+            name="edairy_demo">
+         <property
+               name="appName"
+               value="edairy_demo">
+         </property>
+      </product>
+   </extension>
+   <extension
+         id="edairy_demo_product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.agritrace.edairy.demo.riena.id1"
+            name="edairy_demo">
+      </product>
+   </extension>
 </plugin>
