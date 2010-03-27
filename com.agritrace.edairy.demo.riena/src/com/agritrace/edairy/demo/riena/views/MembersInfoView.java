@@ -24,6 +24,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.demo.riena.Activator;
 import com.agritrace.edairy.demo.riena.ImageRegistry;
+import com.swtdesigner.ResourceManager;
+import org.eclipse.swt.widgets.DateTime;
 
 public class MembersInfoView extends SubModuleView {
 
@@ -42,6 +44,7 @@ public class MembersInfoView extends SubModuleView {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridData data = new GridData();
+		data.minimumWidth = 600;
 		data.grabExcessHorizontalSpace = true;
 		data.horizontalAlignment = SWT.FILL;
 		data.grabExcessVerticalSpace = true;
@@ -92,6 +95,7 @@ public class MembersInfoView extends SubModuleView {
 		tabfolder.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		tabfolder.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 
+		// member info
 		TabItem membersTab = new TabItem(tabfolder, SWT.NULL);
 		membersTab.setText("Member");
 		Composite membersComposite = new Composite(tabfolder, SWT.NONE);
@@ -100,6 +104,7 @@ public class MembersInfoView extends SubModuleView {
 		createMembersTabcontrol(membersComposite);
 		membersTab.setControl(membersComposite);
 
+		// account summary
 		TabItem accountTab = new TabItem(tabfolder, SWT.NULL);
 		accountTab.setText("Account Summary");
 		Composite accountComposite = new Composite(tabfolder, SWT.NONE);
@@ -108,8 +113,6 @@ public class MembersInfoView extends SubModuleView {
 		createAccountSummaryTab(accountComposite);
 		accountTab.setControl(accountComposite);
 
-
-
 		TabItem transactionTab = new TabItem(tabfolder, SWT.NULL);
 		transactionTab.setText("Transactions");
 		Composite transComposite = new Composite(tabfolder, SWT.NONE);
@@ -117,12 +120,33 @@ public class MembersInfoView extends SubModuleView {
 		createTrasactionsTab(transComposite);
 		transactionTab.setControl(transComposite);
 
+		TabItem collectionTab = new TabItem(tabfolder, SWT.NULL);
+		collectionTab.setText("Milk");
+		Composite collectionComposite = new Composite(tabfolder, SWT.NONE);
+		collectionComposite.setLayout(new GridLayout(1,true));
+		createCollectionInfoTab(collectionComposite);
+		collectionTab.setControl(collectionComposite);
+
 		TabItem farmTab = new TabItem(tabfolder, SWT.NULL);
 		farmTab.setText("Farm");
 		Composite farmComposite = new Composite(tabfolder, SWT.NONE);
 		farmComposite.setLayout(new GridLayout(1,true));
 		createFarmInfoTab(farmComposite);
 		farmTab.setControl(farmComposite);
+
+		TabItem livestockTab = new TabItem(tabfolder, SWT.NULL);
+		livestockTab.setText("Livestock");
+		Composite livestockComposite = new Composite(tabfolder, SWT.NONE);
+		livestockComposite.setLayout(new GridLayout(1,true));
+		createLivestockInfoTab(livestockComposite);
+		livestockTab.setControl(livestockComposite);
+
+		TabItem containerTab = new TabItem(tabfolder, SWT.NULL);
+		containerTab.setText("Containers");
+		Composite containerComposite = new Composite(tabfolder, SWT.NONE);
+		containerComposite.setLayout(new GridLayout(1,true));
+		createContainerInfoTab(containerComposite);
+		containerTab.setControl(containerComposite);
 
 		this.addUIControl(mdComposite, "master"); //$NON-NLS-1$
 
@@ -139,8 +163,24 @@ public class MembersInfoView extends SubModuleView {
 		return result;
 	}
 
+	private void createCollectionInfoTab(Composite collectionComposite) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createContainerInfoTab(Composite containerComposite) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createLivestockInfoTab(Composite livestockComposite) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void createMembersTabcontrol(Composite parent){
 		Composite upperPanel = UIControlsFactory.createComposite(parent);
+		upperPanel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		GridLayout upperPanelLayout = new GridLayout();
 		upperPanelLayout.numColumns = 6;
 		upperPanelLayout.makeColumnsEqualWidth = false;
@@ -149,21 +189,28 @@ public class MembersInfoView extends SubModuleView {
 		// member Id
 		UIControlsFactory.createLabel(upperPanel, "Member ID:"); //$NON-NLS-1$
 		Text txtId = UIControlsFactory.createText(upperPanel, SWT.BORDER, "id"); //$NON-NLS-1$
-		txtId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
+		GridData gd_txtId = new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+				1);
+		gd_txtId.minimumWidth = 50;
+		txtId.setLayoutData(gd_txtId);
 
 		// join date
 		UIControlsFactory.createLabel(upperPanel, "Joined Date:"); //$NON-NLS-1$
-		Text txtDate = UIControlsFactory.createText(upperPanel, SWT.BORDER,
-		"date"); //$NON-NLS-1$
-		txtDate.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		DateTime txtDate = new DateTime(upperPanel, SWT.BORDER); //$NON-NLS-1$
+		GridData gd_txtDate = new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1);
+		gd_txtDate.minimumWidth = 70;
+		txtDate.setLayoutData(gd_txtDate);
 
 		// status
 		UIControlsFactory.createLabel(upperPanel, "Status:"); //$NON-NLS-1$
 		Combo comboStatus = UIControlsFactory.createCombo(upperPanel, "status");
-		comboStatus.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1));
+		comboStatus.setItems(new String[] {"Active", "Inactive", "Dormant"});
+		GridData gd_comboStatus = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1);
+		gd_comboStatus.minimumWidth = 70;
+		comboStatus.setLayoutData(gd_comboStatus);
+		comboStatus.setText("Active");
 
 		// bottom panel-"name group","address group" and "photo"
 		Composite bottomPanel = UIControlsFactory.createComposite(parent);
@@ -181,8 +228,10 @@ public class MembersInfoView extends SubModuleView {
 		UIControlsFactory.createLabel(nameGroup, "First Name:"); //$NON-NLS-1$
 		Text txtFirst = UIControlsFactory.createText(nameGroup, SWT.BORDER,
 		"first"); //$NON-NLS-1$
-		txtFirst.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		GridData gd_txtFirst = new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1);
+		gd_txtFirst.minimumWidth = 100;
+		txtFirst.setLayoutData(gd_txtFirst);
 
 		//		Label imageLable = new Label(detailGroup, SWT.BORDER); //$NON-NLS-1$
 		// GridData imagData = new GridData();
@@ -214,7 +263,10 @@ public class MembersInfoView extends SubModuleView {
 		addressGroup
 		.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		// address
-		UIControlsFactory.createLabel(addressGroup, "Address:"); //$NON-NLS-1$
+		Label label = UIControlsFactory.createLabel(addressGroup, "Address:"); //$NON-NLS-1$
+		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_label.minimumWidth = 100;
+		label.setLayoutData(gd_label);
 		Text txtAddress = UIControlsFactory.createText(addressGroup,
 				SWT.BORDER, "address");
 		txtAddress.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
@@ -252,7 +304,7 @@ public class MembersInfoView extends SubModuleView {
 		//		imagData.heightHint = 90;
 		//		imagData.widthHint = 80;
 		Image photoImage = Activator.getImage(ImageRegistry.smileFace);
-		imageLable.setImage(photoImage);
+		imageLable.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/farmerheadshot.png"));
 		imageLable.setLayoutData(new GridData(SWT.FILL,SWT.TOP,false,false));
 	}
 
