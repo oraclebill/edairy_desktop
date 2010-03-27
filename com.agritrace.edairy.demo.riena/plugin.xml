@@ -12,76 +12,76 @@
          point="org.eclipse.ui.views">
       <view
             name="Dairy Info"
-            allowMultiple="false"
+            allowMultiple="true"
             icon="icons/edairymanagericon16.png"
             class="com.agritrace.edairy.demo.riena.views.FacilityInfoView"
             id="com.agritrace.edairy.demo.riena.views.FacilityInfoView">
       </view>
       <view
             name="Demo Dairy Home"
-            allowMultiple="false"
+            allowMultiple="true"
             icon="icons/edairymanagericon16.png"
             class="com.agritrace.edairy.demo.riena.views.DairyHomeView"
             id="com.agritrace.edairy.demo.riena.views.DairyHomeView">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.StaffInfoView"
             id="com.agritrace.edairy.demo.riena.views.StaffInfoView"
             name="StaffInfoView">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.MembersInfoView"
             id="com.agritrace.edairy.demo.riena.views.MembersInfoView"
             name="MemebersInfo">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.VeterinaryRequestView"
             id="com.agritrace.edairy.demo.riena.views.VeterinaryRequestView"
             name="VeterinaryRequestView">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.InseminationRequestView"
             id="com.agritrace.edairy.demo.riena.views.InseminationRequestView"
             name="InseminationRequestView">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.ServiceRequestLogView"
             id="com.agritrace.edairy.demo.riena.views.ServiceRequestLogView"
             name="ServiceRequestLogView"
             restorable="true">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.LocalDairyView"
             id="com.agritrace.edairy.demo.riena.views.LocalDairyView"
             name="LocalDairyView"
             restorable="true">
       </view>
        <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
             id="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
             name="MilkCollectionInfoView">
       </view>
           <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.DeliveryView"
             id="com.agritrace.edairy.demo.riena.views.DeliveryView"
             name="DeliveryView">
         </view>
         <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.CreditJournalView"
             id="com.agritrace.edairy.demo.riena.views.CreditJournalView"
             name="CreditJournalViews">
         </view>
          <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
             id="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
             name="NetworklDairyView">
@@ -124,6 +124,22 @@
          <property
                name="windowImages"
                value="icons/edairymanagericon16.png,icons/edairymanagericon32.png,icons/edairymanagericon48.png,icons/edairymanagericon64.png,icons/edairymanagericon128.png">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="000000">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="7,252,445,20">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
          </property>
       </product>
    </extension>

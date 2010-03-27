@@ -18,7 +18,10 @@
    <windowImages i16="/com.agritrace.edairy.demo.riena/icons/edairymanagericon16.png" i32="/com.agritrace.edairy.demo.riena/icons/edairymanagericon32.png" i48="/com.agritrace.edairy.demo.riena/icons/edairymanagericon48.png" i64="/com.agritrace.edairy.demo.riena/icons/edairymanagericon64.png" i128="/com.agritrace.edairy.demo.riena/icons/edairymanagericon128.png"/>
 
    <splash
-      location="com.agritrace.edairy.demo.riena" />
+      location="com.agritrace.edairy.demo.riena"
+      startupProgressRect="5,275,445,15"
+      startupMessageRect="7,252,445,20"
+      startupForegroundColor="000000" />
    <launcher name="DairyManager">
       <solaris/>
       <win useIco="false">

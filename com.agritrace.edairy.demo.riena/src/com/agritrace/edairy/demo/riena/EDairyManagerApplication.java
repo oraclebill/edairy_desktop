@@ -16,21 +16,21 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
+import com.agritrace.edairy.demo.riena.controllers.LocalDairyViewController;
+import com.agritrace.edairy.demo.riena.controllers.MemberInfoViewController;
+import com.agritrace.edairy.demo.riena.controllers.NetworklDairyViewController;
+import com.agritrace.edairy.demo.riena.controllers.StaffInfoViewController;
 import com.agritrace.edairy.demo.riena.views.CreditJournalView;
 import com.agritrace.edairy.demo.riena.views.DairyHomeView;
 import com.agritrace.edairy.demo.riena.views.DeliveryView;
 import com.agritrace.edairy.demo.riena.views.FacilityInfoView;
 import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
 import com.agritrace.edairy.demo.riena.views.LocalDairyView;
-import com.agritrace.edairy.demo.riena.views.LocalDairyViewController;
-import com.agritrace.edairy.demo.riena.views.MemberInfoViewController;
 import com.agritrace.edairy.demo.riena.views.MembersInfoView;
 import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
 import com.agritrace.edairy.demo.riena.views.NetworklDairyView;
-import com.agritrace.edairy.demo.riena.views.NetworklDairyViewController;
 import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
 import com.agritrace.edairy.demo.riena.views.StaffInfoView;
-import com.agritrace.edairy.demo.riena.views.StaffInfoViewController;
 import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
 
 /**

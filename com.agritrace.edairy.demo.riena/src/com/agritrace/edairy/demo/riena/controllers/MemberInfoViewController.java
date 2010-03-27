@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.demo.riena.controllers;
 
 import java.util.List;
 
