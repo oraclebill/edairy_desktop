@@ -18,6 +18,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.part.ViewPart;
 
 public class ServiceRequestLogView extends ViewPart {
+	public ServiceRequestLogView() {
+	}
 
 	public static final String ID = ServiceRequestLogView.class.getName();
 

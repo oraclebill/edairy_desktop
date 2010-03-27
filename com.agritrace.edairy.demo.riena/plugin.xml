@@ -100,9 +100,8 @@
         </extension>
    <extension
          point="org.eclipse.riena.ui.swt.imagePaths">
-      <path
-            path="resources">
-      </path>
+      <path path="resources" />
+      <path path="icons" />
    </extension>
    <extension
          id="edm2"

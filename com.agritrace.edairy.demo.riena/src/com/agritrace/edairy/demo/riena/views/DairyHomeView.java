@@ -11,6 +11,8 @@
 package com.agritrace.edairy.demo.riena.views;
 
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
+import org.eclipse.riena.navigation.ui.swt.presentation.SwtViewProvider;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
@@ -20,9 +22,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
+
 import com.swtdesigner.SWTResourceManager;
 
 public class DairyHomeView extends ViewPart {
+	
 	public DairyHomeView() {
 	}
 
@@ -62,6 +66,11 @@ public class DairyHomeView extends ViewPart {
 		Image backImage = ImageStore.getInstance().getImage("edairydashboard.jpg");	
 		l_1.setImage(backImage);
 		l_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+//		ApplicationController ac = (ApplicationController) SwtViewProvider.getInstance().
+//		getNavigationNodeController(); 
+//		ac.getStatusline().setMessage("Hello World!");
+		
 	}
 
 	@Override

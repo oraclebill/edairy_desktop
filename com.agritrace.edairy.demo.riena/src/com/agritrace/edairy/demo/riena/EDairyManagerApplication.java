@@ -6,19 +6,19 @@ package com.agritrace.edairy.demo.riena;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
+import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubApplicationNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ApplicationNode;
 import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
+import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
-import com.agritrace.edairy.demo.riena.controllers.LocalDairyViewController;
 import com.agritrace.edairy.demo.riena.controllers.MemberInfoViewController;
-import com.agritrace.edairy.demo.riena.controllers.NetworklDairyViewController;
 import com.agritrace.edairy.demo.riena.controllers.StaffInfoViewController;
 import com.agritrace.edairy.demo.riena.views.CreditJournalView;
 import com.agritrace.edairy.demo.riena.views.DairyHomeView;
@@ -26,10 +26,8 @@ import com.agritrace.edairy.demo.riena.views.BlankView;
 import com.agritrace.edairy.demo.riena.views.DeliveryView;
 import com.agritrace.edairy.demo.riena.views.DairyProfileView;
 import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
-import com.agritrace.edairy.demo.riena.views.LocalDairyView;
 import com.agritrace.edairy.demo.riena.views.MembersInfoView;
 import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
-import com.agritrace.edairy.demo.riena.views.NetworklDairyView;
 import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
 import com.agritrace.edairy.demo.riena.views.StaffInfoView;
 import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
@@ -52,6 +50,12 @@ public class EDairyManagerApplication extends SwtApplication {
 	//    @Override
 	protected Bundle getBundle() {
 		return Activator.getDefault().getBundle();
+	}
+
+	@Override
+	protected void initializeNodeDefaultIcon(INavigationNode<?> node) {
+		// TODO Auto-generated method stub
+		super.initializeNodeDefaultIcon(node);
 	}
 
 	@Override
@@ -141,8 +145,13 @@ public class EDairyManagerApplication extends SwtApplication {
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.vehicles"), "Vehicles", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.bins"), "Bins", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
+//		ApplicationController ac = (ApplicationController) app.getNavigationNodeController(); 
+//		ac.getStatusline().setMessage("Hello World!");
+
 		return app;
 
 	}
+	
+	
 
 }

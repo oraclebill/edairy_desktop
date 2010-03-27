@@ -38,7 +38,7 @@ public final class NodeFactory {
 			String viewId) {
 		ISubModuleNode result = new SubModuleNode(nodeId, caption);
 		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
-		result.setIcon("generic_element.gif"); //$NON-NLS-1$
+		result.setIcon("arrow_right.png"); //$NON-NLS-1$
 		parent.addChild(result);
 		WorkareaManager.getInstance().registerDefinition(result, viewId);
 		return result;
@@ -48,7 +48,7 @@ public final class NodeFactory {
 			String viewId,Class<? extends IController> controllerClass) {
 		ISubModuleNode result = new SubModuleNode(nodeId, caption);
 		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
-		result.setIcon("generic_element.gif"); //$NON-NLS-1$
+		result.setIcon("arrow_right.png"); //$NON-NLS-1$
 		parent.addChild(result);
 		WorkareaManager.getInstance().registerDefinition(result, controllerClass,viewId);
 		return result;

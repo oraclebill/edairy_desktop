@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.demo.riena.Activator;
@@ -129,10 +131,10 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		nameSearchButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 		nameSearchButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected (SelectionEvent e) {
-				Shell shell = new Shell(Display.getDefault().getActiveShell());
-				shell.setSize(250, 400);
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//				shell.setSize(250, 400);
 				MemberSearchDialog dialog = new MemberSearchDialog(shell);
-				 dialog.open();
+				dialog.open();
 			}
 
 			public void widgetDefaultSelected (SelectionEvent e) {

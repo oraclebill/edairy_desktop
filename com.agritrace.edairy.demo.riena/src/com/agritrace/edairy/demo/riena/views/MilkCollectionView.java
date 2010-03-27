@@ -51,6 +51,8 @@ import com.agritrace.edairy.demo.riena.views.data.MilkRecord.TestResult;
 import com.agritrace.edairy.demo.riena.views.data.MilkRecordsFactory;
 
 public class MilkCollectionView extends ViewPart implements SelectionListener {
+	public MilkCollectionView() {
+	}
 
 	public static final String ID = MilkCollectionView.class.getName();
 
