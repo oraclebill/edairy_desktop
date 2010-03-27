@@ -14,8 +14,11 @@
             name="Dairy Info"
             allowMultiple="true"
             icon="icons/edairymanagericon16.png"
-            class="com.agritrace.edairy.demo.riena.views.FacilityInfoView"
-            id="com.agritrace.edairy.demo.riena.views.FacilityInfoView">
+            class="com.agritrace.edairy.demo.riena.views.DairyProfileView"
+            id="com.agritrace.edairy.demo.riena.views.DairyProfileView">
+         <description>
+            description body text
+         </description>
       </view>
       <view
             name="Demo Dairy Home"
@@ -86,6 +89,13 @@
             id="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
             name="NetworklDairyView">
         </view>
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.demo.riena.views.BlankView"
+               id="com.agritrace.edairy.demo.riena.views.BlankView"
+               name="Blank"
+               restorable="true">
+         </view>
         
         </extension>
    <extension

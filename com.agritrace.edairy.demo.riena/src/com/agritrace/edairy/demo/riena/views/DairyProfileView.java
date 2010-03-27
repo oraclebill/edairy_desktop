@@ -30,9 +30,9 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-public class FacilityInfoView extends ViewPart {
+public class DairyProfileView extends ViewPart {
 
-	public static final String ID = "com.agritrace.edairy.demo.riena.views.FacilityInfoView"; //$NON-NLS-1$
+	public static final String ID = "com.agritrace.edairy.demo.riena.views.DairyProfileView"; //$NON-NLS-1$
 
 	@Override
 	public void createPartControl(Composite parent) {

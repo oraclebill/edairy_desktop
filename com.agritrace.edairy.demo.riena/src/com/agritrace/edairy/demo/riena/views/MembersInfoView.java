@@ -248,13 +248,12 @@ public class MembersInfoView extends SubModuleView {
 				false, 1, 1));
 
 		//photo
-		Label imageLable = new Label(bottomPanel, SWT.NULL); //$NON-NLS-1$
-		GridData imagData = new GridData(SWT.FILL,SWT.TOP,false,false);
+		Label imageLable = new Label(bottomPanel, SWT.NULL);
 		//		imagData.heightHint = 90;
 		//		imagData.widthHint = 80;
 		Image photoImage = Activator.getImage(ImageRegistry.smileFace);
 		imageLable.setImage(photoImage);
-		imageLable.setLayoutData(imagData);
+		imageLable.setLayoutData(new GridData(SWT.FILL,SWT.TOP,false,false));
 	}
 
 	public void createTrasactionsTab(Composite parent){
