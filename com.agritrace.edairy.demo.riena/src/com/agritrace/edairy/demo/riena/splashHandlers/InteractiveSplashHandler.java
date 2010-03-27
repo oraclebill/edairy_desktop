@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.splash.AbstractSplashHandler;
+import com.swtdesigner.ResourceManager;
 
 /**
  * @since 3.3
@@ -21,7 +22,7 @@ import org.eclipse.ui.splash.AbstractSplashHandler;
  */
 public class InteractiveSplashHandler extends AbstractSplashHandler {
 	
-	private final static int F_LABEL_HORIZONTAL_INDENT = 175;
+	private final static int F_LABEL_HORIZONTAL_INDENT = 250;
 
 	private final static int F_BUTTON_WIDTH_HINT = 80;
 
@@ -264,6 +265,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	 */
 	private void createUICompositeBlank() {
 		Composite spanner = new Composite(fCompositeLogin, SWT.NONE);
+//		spanner.setBackgroundImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "splash.bmp"));
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.horizontalSpan = F_COLUMN_COUNT;
 		spanner.setLayoutData(data);

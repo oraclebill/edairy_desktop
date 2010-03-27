@@ -13,7 +13,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import com.agritrace.edairy.demo.riena.views.StaffInfoMasterDetailsComposite;
+import com.agritrace.edairy.demo.riena.views.PersonInfoMasterDetailsComposite;
 
 /**
  * The activator class controls the plug-in life cycle

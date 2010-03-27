@@ -67,7 +67,7 @@ public class LocalDairyView extends SubModuleView {
 		layout.numColumns = 1;
 		result.setLayout(layout);
 
-		StaffInfoMasterDetailsComposite mdComposite = new StaffInfoMasterDetailsComposite(
+		PersonInfoMasterDetailsComposite mdComposite = new PersonInfoMasterDetailsComposite(
 				result, SWT.NONE);
 		Composite details = mdComposite.getDetails();
 		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));

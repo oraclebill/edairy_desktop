@@ -64,8 +64,7 @@ public class MembersInfoView extends SubModuleView {
 	// ////////////////
 
 	private Group createMasterDetails(Composite parent) {
-		Group result = UIControlsFactory.createGroup(parent,
-		"Members Information:"); //$NON-NLS-1$
+		Group result = UIControlsFactory.createGroup(parent, "Members Information:"); //$NON-NLS-1$
 		result.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		//
 		GridLayout layout = new GridLayout();
@@ -74,7 +73,7 @@ public class MembersInfoView extends SubModuleView {
 		layout.numColumns = 1;
 		result.setLayout(layout);
 
-		StaffInfoMasterDetailsComposite mdComposite = new StaffInfoMasterDetailsComposite(
+		PersonInfoMasterDetailsComposite mdComposite = new PersonInfoMasterDetailsComposite(
 				result, SWT.NONE);
 		Composite details = mdComposite.getDetails();
 		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));

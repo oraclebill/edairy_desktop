@@ -136,21 +136,20 @@
                value="icons/edairymanagericon16.png,icons/edairymanagericon32.png,icons/edairymanagericon48.png,icons/edairymanagericon64.png,icons/edairymanagericon128.png">
          </property>
          <property
-               name="startupForegroundColor"
-               value="000000">
-         </property>
-         <property
-               name="startupMessageRect"
-               value="7,252,445,20">
-         </property>
-         <property
-               name="startupProgressRect"
-               value="5,275,445,15">
-         </property>
-         <property
                name="preferenceCustomization"
                value="plugin_customization.ini">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="com.agritrace.edairy.demo.riena.splashHandlers.InteractiveSplashHandler"
+            id="com.agritrace.edairy.demo.riena.splashHandlers.interactive">
+      </splashHandler>
+      <splashHandlerProductBinding
+            productId="com.agritrace.edairy.demo.riena.edairy_demo_product"
+            splashId="com.agritrace.edairy.demo.riena.splashHandlers.interactive">
+      </splashHandlerProductBinding>
    </extension>
 </plugin>
