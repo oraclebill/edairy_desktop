@@ -45,6 +45,10 @@ public class EDairyManagerLookAndFeel extends RienaDefaultLnf {
 		else if ( LnfKeyConstants.TITLELESS_SHELL_LOGO.equals(key) ) {
 			return ImageStore.getInstance().getImage("edairy_logo.gif");
 		}
+//		else if ( LnfKeyConstants.SUB_MODULE_BACKGROUND.equals(key) ) {
+//			return ImageStore.getInstance().getImage("edairy_logo.gif");
+//		}
+		
 		
 		return super.getImage(key);
 	}
