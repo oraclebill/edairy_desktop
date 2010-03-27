@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="edm2" uid="edm2" id="com.agritrace.edairy.demo.riena.edm2" application="com.agritrace.edairy.demo.riena.id1" version="0.0.2" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager" uid="com.agritrace.edairy.demo.riena.edm2" id="com.agritrace.edairy.demo.riena.edairy_demo_product" application="com.agritrace.edairy.demo.riena.edm2" version="0.0.2" useFeatures="false" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/com.agritrace.edairy.demo.riena/resources/edairy_splash.png"/>
+   </aboutInfo>
 
    <configIni use="default">
    </configIni>
@@ -10,6 +14,28 @@
       <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
+
+   <windowImages i16="/com.agritrace.edairy.demo.riena/icons/edairymanagericon16.png" i32="/com.agritrace.edairy.demo.riena/icons/edairymanagericon32.png" i48="/com.agritrace.edairy.demo.riena/icons/edairymanagericon48.png" i64="/com.agritrace.edairy.demo.riena/icons/edairymanagericon64.png" i128="/com.agritrace.edairy.demo.riena/icons/edairymanagericon128.png"/>
+
+   <splash
+      location="com.agritrace.edairy.demo.riena" />
+   <launcher name="DairyManager">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+
+   <vm>
+   </vm>
+
+   <license>
+        <url>http://www.agritrace.co.ke/licensing</url>
+        <text>
+   Copyright 2010 Agritrace Ltd. Kenya
+         </text>
+   </license>
 
    <plugins>
       <plugin id="com.agritrace.edairy.demo.riena"/>
@@ -35,12 +61,27 @@
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.launcher"/>
+      <plugin id="org.eclipse.equinox.launcher.carbon.macosx" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.equinox.launcher.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.solaris.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.equinox.log"/>
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
       <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
@@ -70,7 +111,9 @@
       <plugin id="org.eclipse.riena.ui.workarea"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.junit"/>

@@ -3,7 +3,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/releng_gears.gif"
+            icon="icons/edairymanagericon16.png"
             id="com.agritrace.edairy.manager.perspective"
             name="com.agritrace.edairy.manager.perspective">
       </perspective>
@@ -12,76 +12,76 @@
          point="org.eclipse.ui.views">
       <view
             name="Dairy Info"
-            allowMultiple="true"
-            icon="icons/releng_gears.gif"
+            allowMultiple="false"
+            icon="icons/edairymanagericon16.png"
             class="com.agritrace.edairy.demo.riena.views.FacilityInfoView"
             id="com.agritrace.edairy.demo.riena.views.FacilityInfoView">
       </view>
       <view
             name="Demo Dairy Home"
-            allowMultiple="true"
-            icon="icons/releng_gears.gif"
+            allowMultiple="false"
+            icon="icons/edairymanagericon16.png"
             class="com.agritrace.edairy.demo.riena.views.DairyHomeView"
             id="com.agritrace.edairy.demo.riena.views.DairyHomeView">
       </view>
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.StaffInfoView"
             id="com.agritrace.edairy.demo.riena.views.StaffInfoView"
             name="StaffInfoView">
       </view>
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.MembersInfoView"
             id="com.agritrace.edairy.demo.riena.views.MembersInfoView"
             name="MemebersInfo">
       </view>
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.VeterinaryRequestView"
             id="com.agritrace.edairy.demo.riena.views.VeterinaryRequestView"
             name="VeterinaryRequestView">
       </view>
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.InseminationRequestView"
             id="com.agritrace.edairy.demo.riena.views.InseminationRequestView"
             name="InseminationRequestView">
       </view>
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.ServiceRequestLogView"
             id="com.agritrace.edairy.demo.riena.views.ServiceRequestLogView"
             name="ServiceRequestLogView"
             restorable="true">
       </view>
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.LocalDairyView"
             id="com.agritrace.edairy.demo.riena.views.LocalDairyView"
             name="LocalDairyView"
             restorable="true">
       </view>
        <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
             id="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
             name="MilkCollectionInfoView">
       </view>
           <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.DeliveryView"
             id="com.agritrace.edairy.demo.riena.views.DeliveryView"
             name="DeliveryView">
         </view>
         <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.CreditJournalView"
             id="com.agritrace.edairy.demo.riena.views.CreditJournalView"
             name="CreditJournalViews">
         </view>
          <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
             id="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
             name="NetworklDairyView">
@@ -95,7 +95,7 @@
       </path>
    </extension>
    <extension
-         id="id1"
+         id="edm2"
          name="ID198"
          point="org.eclipse.core.runtime.applications">
       <application
@@ -111,31 +111,19 @@
          id="edairy_demo_product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.demo.riena.id1"
-            name="edairy_demo">
+            application="com.agritrace.edairy.demo.riena.edm2"
+            name="eDairy Manager">
          <property
                name="appName"
-               value="edairy_demo">
+               value="eDairy Manager">
          </property>
-      </product>
-   </extension>
-   <extension
-         id="edairy_demo_product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="com.agritrace.edairy.demo.riena.id1"
-            name="edairy_demo">
-      </product>
-   </extension>
-   <extension
-         id="edm2"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="com.agritrace.edairy.demo.riena.id1"
-            name="edm2">
          <property
-               name="appName"
-               value="edm2">
+               name="aboutImage"
+               value="resources/edairy_splash.png">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/edairymanagericon16.png,icons/edairymanagericon32.png,icons/edairymanagericon48.png,icons/edairymanagericon64.png,icons/edairymanagericon128.png">
          </property>
       </product>
    </extension>
