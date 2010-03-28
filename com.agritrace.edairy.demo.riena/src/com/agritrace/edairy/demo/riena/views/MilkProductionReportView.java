@@ -24,6 +24,7 @@ import com.swtdesigner.SWTResourceManager;
 import com.swtdesigner.ResourceManager;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.custom.ScrolledComposite;
 
 public class MilkProductionReportView extends ViewPart {
 	public MilkProductionReportView() {
@@ -39,10 +40,16 @@ public class MilkProductionReportView extends ViewPart {
 		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		top.setLayout(new GridLayout(1, false));
 		
-		Label label = new Label(top, SWT.NONE);
+		ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		Label label = new Label(scrolledComposite, SWT.NONE);
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
 		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/eDairyReportTemplate-milkproduction.jpg"));
+		scrolledComposite.setContent(label);
+		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
 
 	@Override
