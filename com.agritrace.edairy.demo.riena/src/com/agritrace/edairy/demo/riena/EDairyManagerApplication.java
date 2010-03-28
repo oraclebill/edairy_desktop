@@ -28,6 +28,7 @@ import com.agritrace.edairy.demo.riena.views.DairyProfileView;
 import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
 import com.agritrace.edairy.demo.riena.views.MembersInfoView;
 import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
+import com.agritrace.edairy.demo.riena.views.MilkProductionReportView;
 import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
 import com.agritrace.edairy.demo.riena.views.StaffInfoView;
 import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
@@ -58,6 +59,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		super.initializeNodeDefaultIcon(node);
 	}
 
+	
 	@Override
 	protected IApplicationNode createModel() {
 
@@ -126,7 +128,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		IModuleNode moduleReports = NodeFactory.createModule(
 				new NavigationNodeId("edm.reports"), "Reports", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleReports.setClosable(false);
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.intake"), "Milk Collection", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.intake"), "Milk Collection", moduleReports, MilkProductionReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.members"), "Members", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.finance"), "Finance", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.services"), "Services", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$

@@ -96,6 +96,13 @@
                name="Blank"
                restorable="true">
          </view>
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.demo.riena.views.MilkProductionReportView"
+               id="com.agritrace.edairy.demo.riena.views.MilkProductionReportView"
+               name="Milk Production Report"
+               restorable="true">
+         </view>
         
         </extension>
    <extension

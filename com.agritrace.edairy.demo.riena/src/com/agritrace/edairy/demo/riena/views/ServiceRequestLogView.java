@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.jface.viewers.ColumnPixelData;
 
 public class ServiceRequestLogView extends ViewPart {
 	public ServiceRequestLogView() {
@@ -41,40 +42,42 @@ public class ServiceRequestLogView extends ViewPart {
 		Table logTable = new Table(tablePanel, SWT.SINGLE|SWT.BORDER|SWT.FULL_SELECTION);
 		logTable.setLinesVisible(true);
 		logTable.setHeaderVisible(true);		
+				
+		TableColumn columnId = new TableColumn(logTable, SWT.NONE);
+		columnId.setText("Req. #");
 		
+		TableColumn columnRequestType = new TableColumn(logTable, SWT.LEFT);
+		columnRequestType.setText("Request Type");
+
 		TableColumn columnDate = new TableColumn(logTable, SWT.LEFT);
 		columnDate.setText("Date");
+		
+		
 		TableColumn columnMember = new TableColumn(logTable, SWT.LEFT);
 		columnMember.setText("Member");
 		
 		TableColumn columnFarm = new TableColumn(logTable, SWT.LEFT);
 		columnFarm.setText("Farm");
-
-		TableColumn columnRequestType = new TableColumn(logTable, SWT.LEFT);
-		columnRequestType.setText("Request Type");
 		
 //		TableColumn columnStatus = new TableColumn(logTable, SWT.LEFT);
 //		columnStatus.setText("Status");
 
 		TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnDate, new ColumnWeightData(20));
-		layout.setColumnData(columnMember, new ColumnWeightData(20));
-		layout.setColumnData(columnRequestType, new ColumnWeightData(20));
-		layout.setColumnData(columnFarm, new ColumnWeightData(20));
-//		layout.setColumnData(columnStatus, new ColumnWeightData(20));
+		layout.setColumnData(columnId, new ColumnWeightData(50,50));
+		layout.setColumnData(columnRequestType, new ColumnWeightData(100,100));
+		layout.setColumnData(columnDate, new ColumnWeightData(100,100));
+		layout.setColumnData(columnMember, new ColumnWeightData(400));
+		layout.setColumnData(columnFarm, new ColumnWeightData(300));
 		
-		TableItem item1 = new TableItem(logTable, SWT.NONE);
-		item1.setText(new String[] { "01/04/2009", "John Smith", "Golden Star","Veterinary"});
-		TableItem item2 = new TableItem(logTable, SWT.NONE);
-		item2.setText(new String[] { "08/23/2009", "Reese Miiler ", "Golden Star","Insemination" });
-		TableItem item3 = new TableItem(logTable, SWT.NONE);
-		item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Star","Veterinary" });
-		
-		for ( int ii = 0; ii< 25; ii++) {
-			item3 = new TableItem(logTable, SWT.NONE);
-			item3.setText(new String[] { "12/03/2009", "John Smith", "Golden Star","Veterinary" });
+		TableItem item;
+		for ( int i=0; i < 25; i++) {
+			item = new TableItem(logTable, SWT.NONE);
+			item.setText(new String[] { new Integer(2423+i).toString(), "Veterinary", "01/04/2009", "Cosby Njoya", "Chuma route #2"});
+			item = new TableItem(logTable, SWT.NONE);
+			item.setText(new String[] { new Integer(2423+i).toString(), "Insemination", "08/23/2009", "Pryor Thuku", "Ngeche #56" });
+			item = new TableItem(logTable, SWT.NONE);
+			item.setText(new String[] { new Integer(2423+i).toString(), "Veterinary", "12/03/2009", "Murphy Njeru", "Gathara Route #6" });
 		}
-		
 		
 		tablePanel.setLayout(layout);
 		
