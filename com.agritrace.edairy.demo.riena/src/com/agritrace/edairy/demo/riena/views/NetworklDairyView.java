@@ -68,7 +68,7 @@ public class NetworklDairyView extends SubModuleView {
 		layout.numColumns = 1;
 		result.setLayout(layout);
 
-		PersonInfoMasterDetailsComposite mdComposite = new PersonInfoMasterDetailsComposite(
+		PersonInfoMDList mdComposite = new PersonInfoMDList(
 				result, SWT.NONE);
 		Composite details = mdComposite.getDetails();
 		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));

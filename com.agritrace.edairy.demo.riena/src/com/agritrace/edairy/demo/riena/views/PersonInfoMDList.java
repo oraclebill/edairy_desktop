@@ -10,9 +10,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Table;
 
-public class PersonInfoMasterDetailsComposite extends MasterDetailsComposite {
+public class PersonInfoMDList extends MasterDetailsComposite {
 
-	public PersonInfoMasterDetailsComposite(Composite parent, int style) {
+	public PersonInfoMDList(Composite parent, int style) {
 		super(parent, style);
 		setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
 		// TODO Auto-generated constructor stub

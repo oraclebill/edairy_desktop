@@ -26,12 +26,24 @@ import com.agritrace.edairy.demo.riena.Activator;
 import com.agritrace.edairy.demo.riena.ImageRegistry;
 import com.swtdesigner.ResourceManager;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.core.databinding.beans.PojoObservables;
 
-public class MembersInfoView extends SubModuleView {
+public class MemberListView extends SubModuleView {
+	private DataBindingContext m_bindingContext;
 
-	public static final String ID = MembersInfoView.class.getName();
+	public static final String ID = MemberListView.class.getName();
+	private Composite main;
+	private Text txtName;
+	private Text txtId;
+	private List lstMembers;
 
-	public MembersInfoView() {
+	public MemberListView() {
 	}
 
 	@Override
@@ -42,46 +54,98 @@ public class MembersInfoView extends SubModuleView {
 
 		parent.setLayout(new GridLayout(1, false));
 
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridData data = new GridData();
-		data.minimumWidth = 600;
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalAlignment = SWT.FILL;
-		data.grabExcessVerticalSpace = true;
-		data.verticalAlignment = SWT.FILL;
-		composite.setLayoutData(data);
-
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 5;
-		layout.marginWidth = 5;
-		layout.numColumns = 1;
-		composite.setLayout(layout);
-		createMasterDetails(composite);
+		main = new Composite(parent, SWT.NONE);
+		main.setLayout(new GridLayout(2, false));
+		GridData gd_main = new GridData();
+		gd_main.minimumWidth = 600;
+		gd_main.grabExcessHorizontalSpace = true;
+		gd_main.horizontalAlignment = SWT.FILL;
+		gd_main.grabExcessVerticalSpace = true;
+		gd_main.verticalAlignment = SWT.FILL;
+		main.setLayoutData(gd_main);
+		
+		createMemberSelectorGroup(main);
+		
+		createMemberSnapshotGroup(main);
+		
+//		createMemberDetailGroup(main);
+		createMasterDetails(main);
 
 	}
 
-	// helping methods
-	// ////////////////
-
-	private Group createMasterDetails(Composite parent) {
-		Group result = UIControlsFactory.createGroup(parent, "Members Information:"); //$NON-NLS-1$
-		result.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	private void createMemberSelectorGroup(Composite composite) {
+		Group memberSelector = new Group(main, SWT.NONE);
+		memberSelector.setLayout(new GridLayout(2, false));
+		GridData gd_memberSelector = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		gd_memberSelector.widthHint = 300;
+		memberSelector.setLayoutData(gd_memberSelector);
+		memberSelector.setText("Search");
+		
+		Label lblName = new Label(memberSelector, SWT.NONE);
+		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblName.setText("Name");
+		
+		txtName = new Text(memberSelector, SWT.BORDER);
+		GridData gd_txtName = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_txtName.minimumWidth = 150;
+		txtName.setLayoutData(gd_txtName);
+		
+		Label lblId = new Label(memberSelector, SWT.NONE);
+		lblId.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblId.setText("Member ID");
+		
+		txtId = new Text(memberSelector, SWT.BORDER);
+		GridData gd_txtId = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_txtId.minimumWidth = 150;
+		txtId.setLayoutData(gd_txtId);
+		
+		ScrolledComposite scrolledComposite = new ScrolledComposite(memberSelector, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		lstMembers = new List(scrolledComposite, SWT.BORDER);
+		lstMembers.setItems(new String[] {"Kofi Annan", "Kyle Rama", "Siri Dilettante", "Ronald McDonald", "Richard Pryor"});
+		scrolledComposite.setContent(lstMembers);
+		scrolledComposite.setMinSize(lstMembers.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		
+	}
+	
+	
+	private void createMemberSnapshotGroup(Composite composite) {
+		MemberBadge memberBadge = new MemberBadge(composite, "Kofi Annan", "#124-100327", "#2 - Ngeche");
+		memberBadge.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false));
+		
+	}
+	
+	private void createMemberDetailGroup(Composite composite) {
+		Composite memberDetail = UIControlsFactory.createComposite(composite);
+		GridData gd_memberDetail = new GridData(SWT.LEFT, SWT.CENTER, true, true, 2, 1);
+		gd_memberDetail.heightHint = 126;
+		gd_memberDetail.widthHint = 352;
+		memberDetail.setLayoutData(gd_memberDetail);
+		m_bindingContext = initDataBindings();
+		
+	}
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 20;
-		layout.marginWidth = 20;
-		layout.numColumns = 1;
-		result.setLayout(layout);
+		IObservableValue lstMembersObserveSelectionObserveWidget = SWTObservables.observeSelection(lstMembers);
+		IObservableValue txtNameTextObserveValue = PojoObservables.observeValue(txtName, "text");
+		bindingContext.bindValue(lstMembersObserveSelectionObserveWidget, txtNameTextObserveValue, null, null);
+		//
+		return bindingContext;
+	}
+	
+	private Composite createMasterDetails(Composite parent) {
 
-		PersonInfoMDList mdComposite = new PersonInfoMDList(
-				result, SWT.NONE);
-		Composite details = mdComposite.getDetails();
-		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		Composite details = UIControlsFactory.createComposite(parent);
+		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 		GridLayout detaLayout = new GridLayout();
 		detaLayout.numColumns = 1;
 		details.setLayout(detaLayout);
 
-		Group detailGroup = UIControlsFactory.createGroup(details, "Details");
+		Group detailGroup = UIControlsFactory.createGroup(details, "Members Information");
 		detailGroup
 		.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		GridLayout groupLayout = new GridLayout();
@@ -147,8 +211,6 @@ public class MembersInfoView extends SubModuleView {
 		createContainerInfoTab(containerComposite);
 		containerTab.setControl(containerComposite);
 
-		this.addUIControl(mdComposite, "master"); //$NON-NLS-1$
-
 		Composite buttonPanel = UIControlsFactory.createComposite(details);
 		buttonPanel
 		.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
@@ -159,7 +221,7 @@ public class MembersInfoView extends SubModuleView {
 		Button cancelButton = UIControlsFactory.createButton(buttonPanel,"Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
-		return result;
+		return details;
 	}
 
 	private void createCollectionInfoTab(Composite collectionComposite) {
@@ -469,5 +531,4 @@ public class MembersInfoView extends SubModuleView {
 		cashBalanceTxt.setText("1000");
 
 	}
-
 }

@@ -26,11 +26,11 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.custom.ScrolledComposite;
 
-public class MilkProductionReportView extends ViewPart {
+public class MonthlyCreditReportView extends ViewPart {
 
-	public static final String ID = MilkProductionReportView.class.getName(); 
+	public static final String ID = MonthlyCreditReportView.class.getName(); 
 
-	public MilkProductionReportView() {
+	public MonthlyCreditReportView() {
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class MilkProductionReportView extends ViewPart {
 		
 		Label label = new Label(scrolledComposite, SWT.NONE);
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/eDairyReportTemplate-milkproduction.jpg"));
+		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/reports/eDairyReport-monthlycreditsales.jpg"));
 		scrolledComposite.setContent(label);
 		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}

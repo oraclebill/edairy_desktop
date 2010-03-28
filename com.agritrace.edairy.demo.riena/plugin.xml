@@ -37,7 +37,7 @@
             allowMultiple="true"
             class="com.agritrace.edairy.demo.riena.views.MembersInfoView"
             id="com.agritrace.edairy.demo.riena.views.MembersInfoView"
-            name="MemebersInfo">
+            name="Member Lookup">
       </view>
       <view
             allowMultiple="true"
@@ -103,7 +103,35 @@
                name="Milk Production Report"
                restorable="true">
          </view>
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.demo.riena.views.MemberListView"
+               id="com.agritrace.edairy.demo.riena.views.MemberListView"
+               name="Member List "
+               restorable="true">
+         </view>
         
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.demo.riena.views.MemberPayablesReportView"
+               id="com.agritrace.edairy.demo.riena.views.MemberPayablesReportView"
+               name="Member Payables Report"
+               restorable="true">
+         </view>
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView"
+               id="com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView"
+               name="Monthly Credit Report"
+               restorable="true">
+         </view>
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.demo.riena.views.MemberStatementReportView"
+               id="com.agritrace.edairy.demo.riena.views.MemberStatementReportView"
+               name="Member Statement Report"
+               restorable="true">
+         </view>
         </extension>
    <extension
          point="org.eclipse.riena.ui.swt.imagePaths">

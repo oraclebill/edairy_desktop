@@ -26,9 +26,13 @@ import com.agritrace.edairy.demo.riena.views.BlankView;
 import com.agritrace.edairy.demo.riena.views.DeliveryView;
 import com.agritrace.edairy.demo.riena.views.DairyProfileView;
 import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
+import com.agritrace.edairy.demo.riena.views.MemberListView;
+import com.agritrace.edairy.demo.riena.views.MemberPayablesReportView;
+import com.agritrace.edairy.demo.riena.views.MemberStatementReportView;
 import com.agritrace.edairy.demo.riena.views.MembersInfoView;
 import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
 import com.agritrace.edairy.demo.riena.views.MilkProductionReportView;
+import com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView;
 import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
 import com.agritrace.edairy.demo.riena.views.StaffInfoView;
 import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
@@ -93,6 +97,7 @@ public class EDairyManagerApplication extends SwtApplication {
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleMembers.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Directory", moduleMembers, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search", moduleMembers, MemberListView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 //		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.farms"), "Member Farms", moduleMembers, MembersInfoView.ID); 
 
 		IModuleNode moduleServices = NodeFactory.createModule(
@@ -130,6 +135,11 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleReports.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.intake"), "Milk Collection", moduleReports, MilkProductionReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.members"), "Members", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.members.payables"), "Members Payables", moduleReports, MemberPayablesReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.members.statement"), "Member Statement", moduleReports, MemberStatementReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.finance.credit"), "Monthly Credit Sales", moduleReports, MonthlyCreditReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.finance"), "Finance", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.services"), "Services", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.events"), "Events", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
