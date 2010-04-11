@@ -5,6 +5,7 @@ import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.SWT;
 
 public class SplashLoginDialogView extends AbstractDialogView {
 
@@ -19,7 +20,7 @@ public class SplashLoginDialogView extends AbstractDialogView {
 	@Override
 	protected Control buildView(Composite parent) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Composite(parent, SWT.NONE);
 	}
 
 	/* (non-Javadoc)
@@ -31,4 +32,9 @@ public class SplashLoginDialogView extends AbstractDialogView {
 		return null;
 	}
 
+	public static void main(String[] args) {
+		Shell shell = new Shell();
+		SplashLoginDialogView dlg  = new SplashLoginDialogView(shell);
+		dlg.create();
+	}
 }

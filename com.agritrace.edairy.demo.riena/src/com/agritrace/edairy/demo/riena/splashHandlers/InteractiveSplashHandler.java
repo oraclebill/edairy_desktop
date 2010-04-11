@@ -21,7 +21,7 @@ import org.eclipse.ui.splash.AbstractSplashHandler;
  */
 public class InteractiveSplashHandler extends AbstractSplashHandler {
 	
-	private final static int F_LABEL_HORIZONTAL_INDENT = 175;
+	private final static int F_LABEL_HORIZONTAL_INDENT = 250;
 
 	private final static int F_BUTTON_WIDTH_HINT = 80;
 

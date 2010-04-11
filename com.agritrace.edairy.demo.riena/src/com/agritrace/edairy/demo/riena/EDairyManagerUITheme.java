@@ -19,6 +19,8 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 		// TODO Auto-generated method stub
 		super.addCustomColors(table);
 		table.put(LnfKeyConstants.NAVIGATION_BACKGROUND, new ColorLnfResource(231,244,211));
+		table.put(LnfKeyConstants.SUB_MODULE_BACKGROUND, new ColorLnfResource(255,255,255));
+		
 	}
 
 	/* (non-Javadoc)
