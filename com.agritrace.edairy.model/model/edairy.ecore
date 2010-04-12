@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="edairy"
+    nsURI="http://com.agritrace.edairy/model/" nsPrefix="edairy">
+  <eSubpackages name="core" nsURI="http://com.agritrace.edairy/model/core/" nsPrefix="core">
+    <eClassifiers xsi:type="ecore:EClass" name="Party" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
+          upperBound="-1" eType="#//core/Location" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Location" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="postalComponent" lowerBound="1"
+          eType="#//core/PostalLocation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MapLocation" eSuperTypes="#//core/Location">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PostalLocation" eSuperTypes="#//core/Location">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="province" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="division" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="district" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="subLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="village" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="postalCode" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StatutoryLocation" eSuperTypes="#//core/Location">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="landReferenceNumber"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Audited" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="voidDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+        <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+          <details key="kind" value="element"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//core/Party">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nationalId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nhifNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nssfNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Company" eSuperTypes="#//core/Party">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contactPerson" lowerBound="1"
+          upperBound="-1" eType="#//core/Person" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DescriptiveLocation" eSuperTypes="#//core/Location">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="directions" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="tracking" nsURI="http://com.agritrace.edairy/model/tracking/"
+      nsPrefix="tracking">
+    <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="#//core/Company">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Farm">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
+          eType="#//tracking/Animal" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="cans" upperBound="-1"
+          eType="#//tracking/Container" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Animal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="breed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Container">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
+          eType="#//dairy/Membership"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//core/Company">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="#//core/Company"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Collection" eSuperTypes="#//tracking/Transfer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//tracking/Farm"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contributedTo" lowerBound="1"
+          eType="#//tracking/Lot"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Lot">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+          eType="#//tracking/Container"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Delivery" eSuperTypes="#//tracking/Transfer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lot" lowerBound="1" eType="#//tracking/Lot"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
+          eType="#//tracking/Processor"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transfer">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" lowerBound="1"
+          eType="#//tracking/Dairy"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+          eType="#//tracking/Container"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="dairy" nsURI="http://com.agritrace.edairy/model/dairy/" nsPrefix="dairy">
+    <eClassifiers xsi:type="ecore:EClass" name="Vehicle">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="serviceRecords" lowerBound="1"
+          upperBound="-1" eType="#//dairy/ServiceRecord" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="make" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="model" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="engineNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="chassisNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="logBookNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="insurancePolicyNumber"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="insurancePurchaseDate"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="purchaseDate" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dominantColour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacityInTonnes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Driver" eSuperTypes="#//dairy/Employee">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vehicleAssignment" eType="#//dairy/Vehicle"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionRecord" eSuperTypes="#//tracking/Collection">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="suspended" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="notRecorded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="recordedMember" lowerBound="1"
+          eType="#//dairy/Membership"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="offRoute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          derived="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="#//core/Person">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobFunction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionCentre">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceRecord">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Workstation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionJournal">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
+          eType="#//dairy/CollectionRecord" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalDate" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"
+          eType="#//dairy/Employee"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1"
+          eType="#//dairy/RouteDefinition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="session" lowerBound="1"
+          eType="#//dairy/Session"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="can" lowerBound="1" eType="#//tracking/Container"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bin" lowerBound="1" eType="#//tracking/Container"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" lowerBound="1"
+          eType="#//dairy/Vehicle"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverTotal" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+          defaultValueLiteral="0" derived="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RouteDefinition">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stops" upperBound="-1"
+          eType="#//dairy/CollectionCentre"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Trip">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="collections" lowerBound="1"
+          upperBound="-1" eType="#//dairy/CollectionJournal"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="deliveries" lowerBound="1"
+          upperBound="-1" eType="#//dairy/DeliveryJournal"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="started" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="ended" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Session">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequence" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="#//tracking/Dairy">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nhifNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nssfNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="federalPin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="workstations" upperBound="-1"
+          eType="#//dairy/Workstation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
+          eType="#//dairy/RouteDefinition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" upperBound="-1"
+          eType="#//dairy/Vehicle" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="employees" upperBound="-1"
+          eType="#//dairy/Employee" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" lowerBound="2"
+          upperBound="-1" eType="#//dairy/Session" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" upperBound="-1"
+          eType="#//dairy/Membership" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Membership">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationDate" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectiveDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
+          eType="#//dairy/MembershipStatus"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" lowerBound="1"
+          eType="#//dairy/RouteDefinition"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus"/>
+  </eSubpackages>
+  <eSubpackages name="managers" nsURI="http://com.agritrace.edairy/model/dairy/managers"
+      nsPrefix="managers">
+    <eClassifiers xsi:type="ecore:EClass" name="DairyManager">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="routes" lowerBound="1"
+          transient="true">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="#//dairy/RouteDefinition"/>
+        </eGenericType>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sessions" lowerBound="1"
+          transient="true">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="#//dairy/Session"/>
+        </eGenericType>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="vehicles" lowerBound="1"
+          transient="true">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="#//dairy/Vehicle"/>
+        </eGenericType>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="employees" lowerBound="1"
+          transient="true">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="#//dairy/Employee"/>
+        </eGenericType>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="containers" lowerBound="1"
+          transient="true">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="#//tracking/Container"/>
+        </eGenericType>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionManager">
+      <eOperations name="createJournal" eType="#//dairy/CollectionJournal">
+        <eParameters name="refNum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eParameters name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+        <eParameters name="route" eType="#//dairy/RouteDefinition"/>
+        <eParameters name="driver" eType="#//dairy/Driver"/>
+      </eOperations>
+      <eOperations name="saveValidJournal" lowerBound="1"/>
+      <eOperations name="saveSuspendedJournal"/>
+      <eOperations name="voidJournal"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="journals" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceManager"/>
+  </eSubpackages>
+</ecore:EPackage>
