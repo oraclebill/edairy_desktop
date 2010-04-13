@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="">
+  <eClassifiers xsi:type="ecore:EClass" name="Dairy">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" eType="#//Membership"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
+        eType="#//Route" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bins" upperBound="-1" eType="#//Container"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" lowerBound="1"
+        upperBound="-1" eType="#//Session" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Membership">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
+        eType="#//Member"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Member" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
+        eType="#//Farm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Farm" eSuperTypes="#//TrackedItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
+        eType="#//Animal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cans" upperBound="-1" eType="#//Container"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Animal" eSuperTypes="#//TrackedItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Collection" eSuperTypes="#//Transfer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farm" eType="#//Farm" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="can" eType="#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Member"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="npr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suspended" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Delivery" eSuperTypes="#//Transfer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
+        eType="#//Processor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lots" upperBound="-1" eType="#//Lot"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transfer" abstract="true" eSuperTypes="#//TrackedEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Container" eSuperTypes="#//TrackedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackedItem" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="#//UniqueID"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//TrackedItem #//Party"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Party">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackedEvent" abstract="true" eSuperTypes="#//TrackedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Route"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Lot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" lowerBound="1" eType="#//Container"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionJournal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" lowerBound="1"
+        upperBound="-1" eType="#//Collection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="session"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="session" lowerBound="1"
+        eType="#//Session"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Session">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduledTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//Party"/>
+</ecore:EPackage>
