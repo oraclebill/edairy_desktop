@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.edairy_manager" application="com.agritrace.edairy.demo.riena.Application" version="0.0.1" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.edairy_manager" application="com.agritrace.edairy.demo.riena.edm2" version="0.0.1" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.demo.riena/resources/edairy_helpabout.png"/>
@@ -30,7 +30,6 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -44,7 +43,7 @@
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.servlet"/>
       <plugin id="org.apache.commons.beanutils"/>
-      <plugin id="org.apache.commons.collections"/>
+      <plugin id="org.apache.commons.collections" fragment=""/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.easymock"/>
@@ -57,6 +56,9 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.net"/>
+      <plugin id="org.eclipse.core.net.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.net.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.variables"/>
@@ -68,6 +70,7 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
       <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
@@ -76,11 +79,11 @@
       <plugin id="org.eclipse.nebula.widgets.compositetable"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.rap.jface"/>
-      <plugin id="org.eclipse.rap.jface.databinding"/>
-      <plugin id="org.eclipse.rap.rwt"/>
-      <plugin id="org.eclipse.rap.ui"/>
-      <plugin id="org.eclipse.rap.ui.workbench"/>
+      <plugin id="org.eclipse.rap.jface" fragment=""/>
+      <plugin id="org.eclipse.rap.jface.databinding" fragment=""/>
+      <plugin id="org.eclipse.rap.rwt" fragment=""/>
+      <plugin id="org.eclipse.rap.ui" fragment=""/>
+      <plugin id="org.eclipse.rap.ui.workbench" fragment=""/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
       <plugin id="org.eclipse.riena.communication.console"/>
@@ -100,8 +103,27 @@
       <plugin id="org.eclipse.riena.ui.swt.rcp"/>
       <plugin id="org.eclipse.riena.ui.workarea"/>
       <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.hpux.PA_RISC" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.photon.qnx.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.wpf.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.junit"/>
