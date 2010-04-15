@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eDairy
 Bundle-SymbolicName: com.agritrace.edairy.demo.riena;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.edairy.demo.riena.Activator
+Bundle-Activator: com.agritrace.edairy.demo.riena.EDairyActivator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

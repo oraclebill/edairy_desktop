@@ -19,6 +19,7 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.demo.riena.controllers.MemberInfoViewController;
+import com.agritrace.edairy.demo.riena.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.demo.riena.controllers.StaffInfoViewController;
 import com.agritrace.edairy.demo.riena.views.CreditJournalView;
 import com.agritrace.edairy.demo.riena.views.DairyHomeView;
@@ -30,6 +31,7 @@ import com.agritrace.edairy.demo.riena.views.MemberListView;
 import com.agritrace.edairy.demo.riena.views.MemberPayablesReportView;
 import com.agritrace.edairy.demo.riena.views.MemberStatementReportView;
 import com.agritrace.edairy.demo.riena.views.MembersInfoView;
+import com.agritrace.edairy.demo.riena.views.MilkCollectionJournalView;
 import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
 import com.agritrace.edairy.demo.riena.views.MilkProductionReportView;
 import com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView;
@@ -54,7 +56,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	//    @Override
 	protected Bundle getBundle() {
-		return Activator.getDefault().getBundle();
+		return EDairyActivator.getDefault().getBundle();
 	}
 
 	@Override
@@ -89,7 +91,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
 				new NavigationNodeId("edm.supplychain"), "Milk Collection", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSupplyChain.setClosable(false);
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain, MilkCollectionView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain,MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Deliveries", moduleSupplyChain, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 //			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.accounts"), "Member Accounts", moduleSupplyChain, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 

@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.demo.riena.Activator;
+import com.agritrace.edairy.demo.riena.EDairyActivator;
 import com.agritrace.edairy.demo.riena.ImageRegistry;
 import com.swtdesigner.ResourceManager;
 import org.eclipse.swt.widgets.DateTime;
@@ -364,7 +364,6 @@ public class MemberListView extends SubModuleView {
 		Label imageLable = new Label(bottomPanel, SWT.NULL);
 		//		imagData.heightHint = 90;
 		//		imagData.widthHint = 80;
-		Image photoImage = Activator.getImage(ImageRegistry.smileFace);
 		imageLable.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/farmerheadshot.png"));
 		imageLable.setLayoutData(new GridData(SWT.FILL,SWT.TOP,false,false));
 	}

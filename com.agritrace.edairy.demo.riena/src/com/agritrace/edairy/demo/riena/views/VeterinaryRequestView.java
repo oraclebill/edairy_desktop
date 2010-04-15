@@ -21,11 +21,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.demo.riena.Activator;
+import com.agritrace.edairy.demo.riena.EDairyActivator;
 import com.agritrace.edairy.demo.riena.ImageRegistry;
 
 public class VeterinaryRequestView extends ViewPart implements SelectionListener{
@@ -70,7 +68,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		textField.setText("3/22/2009");
 
 		calendarButton = new Button(requestGroup, SWT.PUSH);
-		Image searchImage = Activator.getImage(ImageRegistry.search);
+		Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
 		calendarButton.setImage(searchImage);
 		calendarButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
@@ -131,10 +129,10 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		nameSearchButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 		nameSearchButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected (SelectionEvent e) {
-				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//				shell.setSize(250, 400);
+				Shell shell = new Shell(Display.getDefault().getActiveShell());
+				shell.setSize(250, 400);
 				MemberSearchDialog dialog = new MemberSearchDialog(shell);
-				dialog.open();
+				 dialog.open();
 			}
 
 			public void widgetDefaultSelected (SelectionEvent e) {
@@ -206,24 +204,24 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		gd.horizontalSpan =3;
 		requestTypePanel.setLayoutData(gd);
 
-//		Label requestTypeLabel = new Label(requestTypePanel, SWT.NULL);
-//		requestTypeLabel.setText("Request Type:");
-//		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
-//				SWT.BEGINNING, false, false));
-//
-//		Button clinicalButton = new Button(requestTypePanel, SWT.RADIO);
-//		clinicalButton.setText("clinical");
-//		clinicalButton.setSelection(true);
-//		//		clinicalButton.setEnabled(false);
-//		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-//				false, false));
-//
-//		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
-//		inseminationButton.setText("insemination");
-//		inseminationButton.setSelection(false);
-//		//		inseminationButton.setEnabled(false);
-//		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-//				false, false));
+		Label requestTypeLabel = new Label(requestTypePanel, SWT.NULL);
+		requestTypeLabel.setText("Request Type:");
+		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
+				SWT.BEGINNING, false, false));
+
+		Button clinicalButton = new Button(requestTypePanel, SWT.RADIO);
+		clinicalButton.setText("clinical");
+		clinicalButton.setSelection(true);
+		//		clinicalButton.setEnabled(false);
+		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
+				false, false));
+
+		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
+		inseminationButton.setText("insemination");
+		inseminationButton.setSelection(false);
+		//		inseminationButton.setEnabled(false);
+		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
+				false, false));
 	}
 
 	protected void createBottomGroup(Composite parent) {
@@ -248,7 +246,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 
 	}
 
-	@Override
+
 	public void widgetSelected(SelectionEvent e) {
 		if(e.getSource() == nameCombo){
 			int i = nameCombo.getSelectionIndex();
@@ -275,7 +273,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 
 	}
 
-	@Override
+	
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
 	}

@@ -112,7 +112,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 
 	}
 
-	@Override
+
 	public void modifyText(ModifyEvent e) {
 		if(e.getSource() == idText){
 			newItem.setId(idText.getText().trim());

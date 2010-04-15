@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.demo.riena.Activator;
+import com.agritrace.edairy.demo.riena.EDairyActivator;
 import com.agritrace.edairy.demo.riena.ImageRegistry;
 import com.agritrace.edairy.demo.riena.views.data.CreditRecord;
 import com.agritrace.edairy.demo.riena.views.data.CreditRecordFactory;
@@ -96,7 +96,7 @@ public class CreditJournalView extends ViewPart {
 		dateField.setText(formatter.format(current));
 
 		calendarButton = new Button(upperPanel, SWT.PUSH);
-		Image searchImage = Activator.getImage(ImageRegistry.search);
+		Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
 		calendarButton.setImage(searchImage);
 
 		calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
@@ -199,7 +199,7 @@ public class CreditJournalView extends ViewPart {
 		addButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		addButton.addSelectionListener(new SelectionListener() {
 
-			@Override
+		
 			public void widgetSelected(SelectionEvent e) {
 				CreditRecord record = new CreditRecord();
 
@@ -219,7 +219,7 @@ public class CreditJournalView extends ViewPart {
 
 			}
 
-			@Override
+			
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 
@@ -232,7 +232,7 @@ public class CreditJournalView extends ViewPart {
 				.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		clearButton.addSelectionListener(new SelectionListener() {
 			
-			@Override
+		
 			public void widgetSelected(SelectionEvent e) {
 				if(MessageDialog.openConfirm(clearButton.getShell(), "Clear input fields" , "Do you want to clear input fields?")){
 					referenceText.setText("");
@@ -244,7 +244,7 @@ public class CreditJournalView extends ViewPart {
 				
 			}
 			
-			@Override
+			
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 				
@@ -303,7 +303,7 @@ public class CreditJournalView extends ViewPart {
 		removeButton.setText("Remove");
 		removeButton.addSelectionListener(new SelectionListener() {
 
-			@Override
+			
 			public void widgetSelected(SelectionEvent e) {
 				IStructuredSelection selection = (IStructuredSelection) tableViewer
 						.getSelection();
@@ -323,7 +323,7 @@ public class CreditJournalView extends ViewPart {
 
 			}
 
-			@Override
+			
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 
@@ -346,7 +346,7 @@ public class CreditJournalView extends ViewPart {
 		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 	}
 
-	@Override
+	
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
@@ -354,37 +354,37 @@ public class CreditJournalView extends ViewPart {
 
 	private class CreditRecordLabelProivder implements ITableLabelProvider {
 
-		@Override
+	
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+	
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+	
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+	
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof CreditRecord) {
 				switch (columnIndex) {
