@@ -63,6 +63,7 @@ public class LocalDairyViewController extends SubModuleController {
 			
 			ITextRidget addTxt = (ITextRidget) container.getRidget("address"); //$NON-NLS-1$
 			addTxt.setMandatory(true);
+			
 			addTxt.addValidationRule(new NotEmpty(),
 					ValidationTime.ON_UI_CONTROL_EDIT);
 			addTxt.bindToModel(workingCopy, LocalDairy.PROPERTY_ADDRESS);
