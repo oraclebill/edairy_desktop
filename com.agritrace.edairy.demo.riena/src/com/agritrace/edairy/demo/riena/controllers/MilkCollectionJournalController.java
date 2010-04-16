@@ -130,7 +130,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 
 			@Override
 			public Object convert(Object fromObject) {
-				if(fromObject instanceof String){
+				if(fromObject instanceof String && !((String)fromObject).isEmpty()){
 					String text = (String) fromObject;
 					String firstChar = text.substring(0,1);
 					if(firstChar.equalsIgnoreCase("N")){
