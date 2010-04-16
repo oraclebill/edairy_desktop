@@ -1,9 +1,11 @@
 package com.agritrace.edairy.demo.riena.views;
 
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -43,32 +45,35 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 
 	@Override
 	public void createPartControl(Composite parent) {
+		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		parent.setLayout(new GridLayout(1, false));
+
+		GridDataFactory gdf = GridDataFactory.fillDefaults().grab(true, false);
 		parent.setBackground(LnfManager.getLnf().getColor(
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		parent.setLayout(new GridLayout(1, false));
 		
-		Composite upperPanel = new Composite(parent, SWT.BORDER);
+		Composite upperPanel = UIControlsFactory.createComposite(parent);
 		upperPanel.setLayout(new GridLayout());
-		upperPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		gdf.applyTo(upperPanel);
 		
 		createHeadlerLabel(upperPanel);
 
 		// request group
-		Group requestGroup = new Group(parent, SWT.BORDER);
+		Group requestGroup = UIControlsFactory.createGroup(parent,"");
 		//requestGroup.setText("Animal Service Request");
 		requestGroup.setLayout(new GridLayout(3, false));
-		requestGroup
-		.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		requestGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		Label dateLable = new Label(requestGroup,SWT.NULL); //$NON-NLS-1$
-		dateLable.setText("Date:");
-		textField = new Text(requestGroup,SWT.BORDER);
+		Label dateLable =UIControlsFactory.createLabel(requestGroup, "Date:");
+		
+		textField = UIControlsFactory.createText(requestGroup);
 		textField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false));
 		textField.setText("3/22/2009");
 
-		calendarButton = new Button(requestGroup, SWT.PUSH);
-		Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
+		calendarButton = UIControlsFactory.createButton(requestGroup);
+		Image searchImage = EDairyActivator.getImage(ImageRegistry.calendar);
 		calendarButton.setImage(searchImage);
 		calendarButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
@@ -108,23 +113,23 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 				dialog.open ();
 			}
 		});
-		Label memberIdLabel = new Label(requestGroup,SWT.NULL); //$NON-NLS-1$
-		memberIdLabel.setText("MemberID:");
-		Text textId = new Text(requestGroup,SWT.BORDER);
+		Label memberIdLabel = UIControlsFactory.createLabel(requestGroup, "MemberID:");
+
+		Text textId = UIControlsFactory.createText(requestGroup);
 		textId.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,2,1));
 		textId.setText("LM212234");
 
-		Label memberNameLabel = new Label(requestGroup,SWT.NULL); //$NON-NLS-1$
-		memberNameLabel.setText("Member Name:");
+		Label memberNameLabel =UIControlsFactory.createLabel(requestGroup, "Member Name:");
+		
 
-		nameCombo = new Combo(requestGroup,SWT.BORDER|SWT.DROP_DOWN|SWT.READ_ONLY);
+		nameCombo = UIControlsFactory.createCombo(requestGroup);
 		nameCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false));
 		nameCombo.setItems(new String[]{"Joseph Limuru","John Smith"});
 		nameCombo.setText("Joseph Limuru");
 		nameCombo.addSelectionListener(this);
 
-		nameSearchButton = new Button(requestGroup, SWT.PUSH);
+		nameSearchButton =UIControlsFactory.createButton(requestGroup);
 		nameSearchButton.setImage(searchImage);
 		nameSearchButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 		nameSearchButton.addSelectionListener(new SelectionAdapter() {
@@ -140,10 +145,9 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 			}
 		});
 
-		Label farmLabel = new Label(requestGroup,SWT.NULL); //$NON-NLS-1$
-		farmLabel.setText("Farm Name:");
-
-		farmCombo = new Combo(requestGroup,SWT.BORDER|SWT.DROP_DOWN|SWT.READ_ONLY);
+		Label farmLabel = UIControlsFactory.createLabel(requestGroup, "Farm Name:");
+		
+		farmCombo =UIControlsFactory.createCombo(requestGroup);
 		farmCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false,2,1));
 		farmCombo.setItems(new String[]{"Golden Star","Little Farm"});
@@ -154,9 +158,9 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 //		farmSearchButton.setImage(searchImage);
 //		farmSearchButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
-		Label locationLabel = new Label(requestGroup,SWT.NULL); //$NON-NLS-1$
-		locationLabel.setText("Farm Location:"); //$NON-NLS-1$
-		farmlocation = new Text(requestGroup,SWT.BORDER|SWT.H_SCROLL|SWT.V_SCROLL|SWT.MULTI);
+		Label locationLabel = UIControlsFactory.createLabel(requestGroup, "Farm Location:");
+		
+		farmlocation =UIControlsFactory.createText(requestGroup,SWT.BORDER|SWT.H_SCROLL|SWT.V_SCROLL|SWT.MULTI);
 		GridData locationGD = new GridData(SWT.FILL, SWT.FILL, true,false);
 		locationGD.heightHint = 50;
 		locationGD.horizontalSpan=2;
@@ -164,22 +168,22 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		farmlocation.setText("");
 
 
-		createRequestTypePanel(requestGroup);
+	//	createRequestTypePanel(requestGroup);
 		createBottomGroup(requestGroup);
 		
 //		Composite bottomPanel = new Composite(parent, SWT.NULL);
 //		bottomPanel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 //		bottomPanel.setLayout(new GridLayout(1,false));
 		
-		Composite savePanel = new Composite(requestGroup, SWT.NULL);
+		Composite savePanel = UIControlsFactory.createComposite(requestGroup);
 		savePanel.setLayoutData(new GridData(SWT.END,SWT.FILL,false,false,3,1));
 		savePanel.setLayout(new GridLayout(2,false));
 		
-		Button saveButton = new Button(savePanel,SWT.PUSH);
+		Button saveButton = UIControlsFactory.createButton(savePanel);
 		saveButton.setText("Save");
 		saveButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 		
-		Button cancelButton = new Button(savePanel,SWT.PUSH);
+		Button cancelButton =UIControlsFactory.createButton(savePanel);
 		cancelButton.setText("Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 
@@ -187,55 +191,25 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	
 	protected void createHeadlerLabel(Composite parent){
 		
-
-		Label titleLabel = new Label(parent, SWT.NULL);
-		titleLabel.setText("Veterinary Service Request");
-
+		Label titleLabel = UIControlsFactory.createLabel(parent, "Veterinary Service Request");
+//		Label titleLabel = new Label(parent, SWT.NULL);
+		
 		Font labelFont = JFaceResources.getFontRegistry().getBold(
 				JFaceResources.HEADER_FONT);
 		titleLabel.setFont(labelFont);
 	}
 
-	protected void createRequestTypePanel(Composite parent) {
-		Composite requestTypePanel = new Composite(parent,
-				SWT.NULL);
-		requestTypePanel.setLayout(new GridLayout(3, false));
-		GridData gd = new GridData(SWT.FILL,SWT.FILL, true, false);
-		gd.horizontalSpan =3;
-		requestTypePanel.setLayoutData(gd);
-
-		Label requestTypeLabel = new Label(requestTypePanel, SWT.NULL);
-		requestTypeLabel.setText("Request Type:");
-		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
-				SWT.BEGINNING, false, false));
-
-		Button clinicalButton = new Button(requestTypePanel, SWT.RADIO);
-		clinicalButton.setText("clinical");
-		clinicalButton.setSelection(true);
-		//		clinicalButton.setEnabled(false);
-		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-				false, false));
-
-		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
-		inseminationButton.setText("insemination");
-		inseminationButton.setSelection(false);
-		//		inseminationButton.setEnabled(false);
-		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-				false, false));
-	}
-
 	protected void createBottomGroup(Composite parent) {
 		// request group
-		Group requestGroup = new Group(parent, SWT.NULL);
-		requestGroup.setText("Request Details");
+		Group requestGroup = UIControlsFactory.createGroup(parent,"Request Details");
 		requestGroup.setLayout(new GridLayout(1, false));
 		requestGroup
 		.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,3,1));
 
-		Label l =new Label(requestGroup, SWT.NULL); //$NON-NLS-1$
-		l.setText("Complaint:");
-		Text textArea = new Text(requestGroup, SWT.MULTI
-				| SWT.H_SCROLL | SWT.V_SCROLL|SWT.BORDER);
+		Label l =UIControlsFactory.createLabel(requestGroup,"Complaint:");
+		Text textArea = UIControlsFactory.createText(requestGroup,  SWT.MULTI| SWT.H_SCROLL | SWT.V_SCROLL|SWT.BORDER);
+//		Text textArea = new Text(requestGroup, SWT.MULTI
+//				| SWT.H_SCROLL | SWT.V_SCROLL|SWT.BORDER);
 		textArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 	}
