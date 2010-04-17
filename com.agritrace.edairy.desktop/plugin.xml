@@ -17,36 +17,16 @@
       </initializer>
    </extension>
    <extension
-         point="org.eclipse.ui.views">
-      <category
-            name="eDairy Manager Desktop"
-            id="com.agritrace.edairy.desktop">
-      </category>
-      <view
-            name="Home"
-            icon="icons/sample.gif"
-            category="com.agritrace.edairy.desktop"
-            class="com.agritrace.edairy.desktop.core.views.HomeView"
-            id="com.agritrace.edairy.desktop.core.views.HomeView">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaPerspective">
-         <view
-               ratio="0.5"
-               relative="org.eclipse.ui.views.TaskList"
-               relationship="right"
-               id="com.agritrace.edairy.desktop.core.views.HomeView">
-         </view>
-      </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.help.contexts">
-      <contexts
-            file="contexts.xml">
-      </contexts>
+         id="id1"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
+         </run>
+      </application>
    </extension>
 
 </plugin>

@@ -176,14 +176,27 @@
       </product>
    </extension>
    <extension
-         point="org.eclipse.ui.splashHandlers">
-      <splashHandler
-            class="com.agritrace.edairy.demo.riena.splashHandlers.InteractiveSplashHandler"
-            id="com.agritrace.edairy.demo.riena.splashHandlers.interactive">
-      </splashHandler>
-      <splashHandlerProductBinding
-            productId="com.agritrace.edairy.demo.riena.edairy_manager"
-            splashId="com.agritrace.edairy.demo.riena.splashHandlers.interactive">
-      </splashHandlerProductBinding>
+         id="edairy_manager"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.agritrace.edairy.demo.riena.dairy_manager"
+            name="eDairy Manager">
+         <property
+               name="windowImages"
+               value="icons/cow16.png,icons/cow32.png,icons/cow48.png,icons/cow64.png,icons/cow128.png">
+         </property>
+         <property
+               name="aboutText"
+               value="eDairy Manager v0.1a">
+         </property>
+         <property
+               name="aboutImage"
+               value="resources/edairy_helpabout.png">
+         </property>
+         <property
+               name="appName"
+               value="eDairy Manager">
+         </property>
+      </product>
    </extension>
 </plugin>

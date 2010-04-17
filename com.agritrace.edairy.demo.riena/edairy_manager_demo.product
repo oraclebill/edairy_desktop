@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.edairy_manager" application="com.agritrace.edairy.demo.riena.edm2" version="0.0.3" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.edairy_manager" application="com.agritrace.edairy.demo.riena.dairy_manager" version="0.0.3" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.demo.riena/resources/edairy_helpabout.png"/>
@@ -20,14 +20,9 @@
 
    <windowImages i16="/com.agritrace.edairy.demo.riena/icons/cow16.png" i32="/com.agritrace.edairy.demo.riena/icons/cow32.png" i48="/com.agritrace.edairy.demo.riena/icons/cow48.png" i64="/com.agritrace.edairy.demo.riena/icons/cow64.png" i128="/com.agritrace.edairy.demo.riena/icons/cow128.png"/>
 
-   <splash
-      location="com.agritrace.edairy.demo.riena"
-      handlerType="interactive" />
    <launcher name="edairymgr">
       <solaris/>
-      <win useIco="false">
-         <bmp/>
-      </win>
+      <win/>
    </launcher>
 
    <vm>
