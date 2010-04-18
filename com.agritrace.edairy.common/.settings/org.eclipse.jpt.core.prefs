@@ -1,4 +1,3 @@
-#Thu Apr 15 16:04:22 EDT 2010
+#Sun Apr 18 02:40:18 EDT 2010
 eclipse.preferences.version=1
-org.eclipse.jpt.core.discoverAnnotatedClasses=false
-org.eclipse.jpt.core.platform=eclipselink1_1
+org.eclipse.jpt.core.platform=eclipselink2_1
