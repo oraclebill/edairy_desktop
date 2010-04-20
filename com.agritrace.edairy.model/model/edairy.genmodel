@@ -2,14 +2,11 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.agritrace.edairy.model/src"
-    modelPluginID="com.agritrace.edairy.model" modelName="Edairy" rootExtendsInterface=""
-    rootExtendsClass="" suppressEMFTypes="true" suppressEMFMetaData="true" suppressEMFModelTags="true"
-    suppressInterfaces="true" importerID="org.eclipse.emf.importer.ecore" suppressContainment="true"
+    modelPluginID="com.agritrace.edairy.model" modelName="Edairy" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
   <foreignModel>edairy.ecore</foreignModel>
-  <genPackages prefix="Edairy" basePackage="com.agritrace" disposableProviderFactory="true"
-      ecorePackage="edairy.ecore#/">
-    <nestedGenPackages prefix="Model" resource="XML" disposableProviderFactory="true"
+  <genPackages prefix="Edairy" disposableProviderFactory="true" ecorePackage="edairy.ecore#/">
+    <nestedGenPackages prefix="Model" basePackage="edairy" resource="XML" disposableProviderFactory="true"
         ecorePackage="edairy.ecore#//model">
       <genDataTypes ecoreDataType="edairy.ecore#//model/TransactionID"/>
       <genDataTypes ecoreDataType="edairy.ecore#//model/UniqueID"/>
@@ -53,8 +50,8 @@
       <genClasses ecoreClass="edairy.ecore#//model/DescriptiveLocation">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/DescriptiveLocation/directions"/>
       </genClasses>
-      <nestedGenPackages prefix="Tracking" resource="XML" disposableProviderFactory="true"
-          ecorePackage="edairy.ecore#//model/tracking">
+      <nestedGenPackages prefix="Tracking" basePackage="edairy.model" resource="XML"
+          disposableProviderFactory="true" ecorePackage="edairy.ecore#//model/tracking">
         <genClasses ecoreClass="edairy.ecore#//model/tracking/Dairy">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Dairy/registrationNumber"/>
         </genClasses>
@@ -104,8 +101,8 @@
               ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Transfer/container"/>
         </genClasses>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Dairy" resource="XML" disposableProviderFactory="true"
-          ecorePackage="edairy.ecore#//model/dairy">
+      <nestedGenPackages prefix="Dairy" basePackage="edairy.model" resource="XML"
+          disposableProviderFactory="true" ecorePackage="edairy.ecore#//model/dairy">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/dairy/MembershipStatus"/>
         <genClasses ecoreClass="edairy.ecore#//model/dairy/Vehicle">
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Vehicle/serviceRecords"/>
@@ -212,7 +209,7 @@
         </genClasses>
       </nestedGenPackages>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Services" resource="XML" disposableProviderFactory="true"
+    <nestedGenPackages prefix="Services" basePackage="edairy" resource="XML" disposableProviderFactory="true"
         ecorePackage="edairy.ecore#//services">
       <genClasses ecoreClass="edairy.ecore#//services/DairyService">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/DairyService/routes"/>
@@ -238,7 +235,6 @@
         </genOperations>
       </genClasses>
       <genClasses ecoreClass="edairy.ecore#//services/RequestService"/>
-      <genClasses ecoreClass="edairy.ecore#//services/JournalException"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>
