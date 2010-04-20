@@ -1,6 +1,6 @@
-package com.agritrace.edairy.common.model.dairy;
+package com.agritrace.edairy.common.datamodel.farm;
 
-public class DairyAnimalIdentifier {
+public class AnimalIdentifier {
 	public enum Mechanism { BRAND, BADGE, COLLAR, EARTAG, RFID, GSMGPRS, OTHER }
 	
 	private Mechanism mechanism;

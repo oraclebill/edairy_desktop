@@ -1,6 +1,6 @@
-package com.agritrace.edairy.common.model.dairy;
+package com.agritrace.edairy.common.datamodel.security;
 
-import com.agritrace.edairy.common.model.core.Person;
+
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
@@ -8,13 +8,16 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.agritrace.edairy.common.datamodel.dairy.Employee;
+
+
 /**
  * Entity implementation class for Entity: SystemUser
  * 
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class SystemUser extends Person implements Serializable {
+public class SystemUser extends Employee implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

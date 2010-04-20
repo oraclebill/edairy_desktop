@@ -1,4 +1,4 @@
-package com.agritrace.edairy.common.model.dairy;
+package com.agritrace.edairy.common.datamodel.dairy;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.agritrace.edairy.common.model.core.Person;
+import com.agritrace.edairy.common.datamodel.common.Person;
 
 @Entity
 public class Employee {

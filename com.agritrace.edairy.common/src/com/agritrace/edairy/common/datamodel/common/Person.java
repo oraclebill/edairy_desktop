@@ -1,4 +1,4 @@
-package com.agritrace.edairy.common.model.core;
+package com.agritrace.edairy.common.datamodel.common;
 
 import javax.persistence.*;
 

@@ -5,6 +5,8 @@ Bundle-SymbolicName: com.agritrace.edairy.common
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.common.Activator
 Bundle-Vendor: AGRITRACE
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ javax.persistence;bundle-version="2.0.0",
+ org.eclipse.persistence.jpa;bundle-version="2.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

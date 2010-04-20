@@ -1,4 +1,4 @@
-package com.agritrace.edairy.common.model.core;
+package com.agritrace.edairy.common.datamodel.common;
 
 import javax.persistence.*;
 
@@ -14,8 +14,6 @@ public class ContactMethod {
 	private CMType contactType;
 	private String contactInfo;
 
-	@Id
-	@GeneratedValue
 	public CMType getContactType() {
 		return contactType;
 	}
@@ -32,6 +30,8 @@ public class ContactMethod {
 		this.contactInfo = contactInfo;
 	}
 
+	@Id
+	@GeneratedValue
 	public Long getContactMethodId() {
 		return contactMethodId;
 	}

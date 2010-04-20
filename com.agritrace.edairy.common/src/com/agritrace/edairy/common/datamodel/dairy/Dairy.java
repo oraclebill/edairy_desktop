@@ -1,11 +1,14 @@
-package com.agritrace.edairy.common.model.dairy;
+package com.agritrace.edairy.common.datamodel.dairy;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 
-import com.agritrace.edairy.common.model.core.Location;
+import com.agritrace.edairy.common.datamodel.common.Container;
+import com.agritrace.edairy.common.datamodel.common.Location;
+import com.agritrace.edairy.common.datamodel.security.SecurityRole;
+
 import org.eclipse.persistence.annotations.JoinFetch;
 import static org.eclipse.persistence.annotations.JoinFetchType.INNER;
 import static org.eclipse.persistence.annotations.JoinFetchType.OUTER;
@@ -40,12 +43,18 @@ public class Dairy {
 	
 	private List<SecurityRole> roles;
 	
-	private List<Route> routes;
+	private List<Route> routeDefinitions;
+	
+	private List<CollectionCentre> collectionCentres;
 	
 	private List<Vehicle> vehicles;
 	
 	private List<Container> bins;
 
+	private String pin;
+	private String nssfNumber;
+
+	
 	@Id
 	@GeneratedValue
 	public Long getDairyId() {
@@ -114,7 +123,7 @@ public class Dairy {
 		this.publicDescription = publicDescription;
 	}
 
-	public List<Employee> getStaff() {
+	public List<Employee> getEmployees() {
 		return staff;
 	}
 
@@ -139,11 +148,11 @@ public class Dairy {
 	}
 
 	public List<Route> getRoutes() {
-		return routes;
+		return routeDefinitions;
 	}
 
-	public void setRoutes(List<Route> routes) {
-		this.routes = routes;
+	public void setRoutes(List<Route> routeDefinitions) {
+		this.routeDefinitions = routeDefinitions;
 	}
 
 	public List<Vehicle> getVehicles() {
