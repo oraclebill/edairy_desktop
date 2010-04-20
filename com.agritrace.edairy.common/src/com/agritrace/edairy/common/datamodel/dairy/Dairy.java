@@ -2,18 +2,11 @@ package com.agritrace.edairy.common.datamodel.dairy;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.*;
 
 import com.agritrace.edairy.common.datamodel.common.Container;
 import com.agritrace.edairy.common.datamodel.common.Location;
 import com.agritrace.edairy.common.datamodel.security.SecurityRole;
-
-import org.eclipse.persistence.annotations.JoinFetch;
-import static org.eclipse.persistence.annotations.JoinFetchType.INNER;
-import static org.eclipse.persistence.annotations.JoinFetchType.OUTER;
-import org.eclipse.persistence.annotations.PrivateOwned;
-import static javax.persistence.CascadeType.ALL;
 
 @Entity
 public class Dairy {
@@ -53,6 +46,7 @@ public class Dairy {
 
 	private String pin;
 	private String nssfNumber;
+	private String nhifNumber;
 
 	
 	@Id

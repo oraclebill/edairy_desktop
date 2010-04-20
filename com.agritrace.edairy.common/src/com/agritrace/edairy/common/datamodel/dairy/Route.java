@@ -1,6 +1,5 @@
 package com.agritrace.edairy.common.datamodel.dairy;
 
-import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
 

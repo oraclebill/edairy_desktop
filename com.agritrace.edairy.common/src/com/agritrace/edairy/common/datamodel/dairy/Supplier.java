@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
 import com.agritrace.edairy.common.datamodel.common.Party;
 import com.agritrace.edairy.common.datamodel.common.Person;
 
@@ -26,6 +27,7 @@ public class Supplier extends Party {
 	public void setSupplierId(Long supplierId) {
 		_supplierId = supplierId;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getEffectiveDate() {
 		return _effectiveDate;
 	}

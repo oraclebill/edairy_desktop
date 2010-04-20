@@ -1,6 +1,5 @@
 package com.agritrace.edairy.common.datamodel.farm;
 
-import com.agritrace.edairy.common.datamodel.common.Party;
 import com.agritrace.edairy.common.datamodel.common.Person;
 
 public class Farm {

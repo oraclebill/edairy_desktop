@@ -2,7 +2,6 @@ package com.agritrace.edairy.common.datamodel.dairy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +29,7 @@ public class CollectionJournal {
 	public void setId(Long id) {
 		_id = id;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getEntryDate() {
 		return _entryDate;
 	}
@@ -54,6 +54,7 @@ public class CollectionJournal {
 	public void setDriver(Employee driver) {
 		_driver = driver;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getJournalDate() {
 		return _journalDate;
 	}
