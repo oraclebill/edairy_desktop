@@ -139,8 +139,8 @@
       <path path="icons" />
    </extension>
    <extension
-         id="edm2"
-         name="ID198"
+         id="dairy_manager"
+         name="Dairy Manager"
          point="org.eclipse.core.runtime.applications">
       <application
             cardinality="singleton-global"
@@ -155,11 +155,11 @@
          id="edairy_demo_product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.demo.riena.edm2"
-            name="eDairy Manager">
+            application="com.agritrace.edairy.demo.riena.dairy_manager"
+            name="eDairy Manager Desktop">
          <property
                name="appName"
-               value="eDairy Manager">
+               value="eDairy Manager Desktop">
          </property>
          <property
                name="aboutImage"
@@ -176,21 +176,10 @@
       </product>
    </extension>
    <extension
-         point="org.eclipse.ui.splashHandlers">
-      <splashHandler
-            class="com.agritrace.edairy.demo.riena.splashHandlers.InteractiveSplashHandler"
-            id="com.agritrace.edairy.demo.riena.splashHandlers.interactive">
-      </splashHandler>
-      <splashHandlerProductBinding
-            productId="com.agritrace.edairy.demo.riena.edairy_manager"
-            splashId="com.agritrace.edairy.demo.riena.splashHandlers.interactive">
-      </splashHandlerProductBinding>
-   </extension>
-   <extension
          id="edairy_manager"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.demo.riena.edm2"
+            application="com.agritrace.edairy.demo.riena.dairy_manager"
             name="eDairy Manager">
          <property
                name="windowImages"

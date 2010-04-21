@@ -37,7 +37,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="landReferenceNumber"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Audited" abstract="true" interface="true">
+    <eClassifiers xsi:type="ecore:EClass" name="Audited">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="voidDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
         <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -312,6 +312,5 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RequestService"/>
-    <eClassifiers xsi:type="ecore:EClass" name="JournalException" instanceClassName="java.lang.Exception"/>
   </eSubpackages>
 </ecore:EPackage>

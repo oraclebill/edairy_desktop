@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="eDairy Manager Preferences"
+            class="com.agritrace.edairy.desktop.preferences.EDairyPreferencePage"
+            id="com.agritrace.edairy.desktop.preferences.EDairyPreferencePage">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.agritrace.edairy.desktop.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         id="id1"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
+         </run>
+      </application>
+   </extension>
+
+</plugin>
