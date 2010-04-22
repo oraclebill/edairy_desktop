@@ -24,9 +24,16 @@
             thread="main"
             visible="true">
          <run
-               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
+               class="com.agritrace.edairy.desktop.app.DairyManagerDesktopApplication">
          </run>
       </application>
    </extension>
+	<extension point="org.eclipse.ui.perspectives">
+	   <perspective
+	         class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+	         id="subapplication.main"
+	         name="subapplication.main">
+	   </perspective>
+	</extension>
 
 </plugin>

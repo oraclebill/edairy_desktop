@@ -6,11 +6,13 @@ package com.agritrace.edairy.desktop.app;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubApplicationNode;
+import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ApplicationNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.DesktopActivator;
@@ -38,13 +40,13 @@ import com.agritrace.edairy.desktop.DesktopActivator;
  * @author oraclebill
  *
  */
-public class DesktopApplication extends SwtApplication {
+public class DairyManagerDesktopApplication extends SwtApplication {
 
 	public static final String BG_DARK =  "edm_dark_background";
 	public static final String BG_LIGHT =  "edm_light_background";
 
 
-	public DesktopApplication() {
+	public DairyManagerDesktopApplication() {
 		super();
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
 	}
@@ -75,17 +77,26 @@ public class DesktopApplication extends SwtApplication {
 	@Override
 	protected IApplicationNode createModel() {
 
-		ApplicationNode app = new ApplicationNode("eDairy Manager Desktop"); //$NON-NLS-1$
+		IApplicationNode applicationNode = super.createModel();
+		applicationNode.setLabel("eDairy Manager Desktop");
+//		applicationNode.setIcon("path to icon");
+		
+		
+		NavigationNodeId nodeId = new NavigationNodeId("com.agritrace.edairy.desktop.navigation.subapplication");
+		ISubApplicationNode subApplication = new SubApplicationNode(nodeId, "Main");
+		WorkareaManager.getInstance().registerDefinition(subApplication, "subapplication.main");
+		applicationNode.addChild(subApplication);
 
-		ISubApplicationNode dataEntry = new SubApplicationNode("Data Entry"); //$NON-NLS-1$
-		app.addChild(dataEntry);
-		ISubApplicationNode reports = new SubApplicationNode("Reports"); //$NON-NLS-1$
-		app.addChild(reports);
+
+//		ISubApplicationNode dataEntry = new SubApplicationNode("Data Entry"); //$NON-NLS-1$
+//		applicationNode.addChild(dataEntry);
+//		ISubApplicationNode reports = new SubApplicationNode("Reports"); //$NON-NLS-1$
+//		applicationNode.addChild(reports);
 
 //		ApplicationController ac = (ApplicationController) app.getNavigationNodeController(); 
 //		ac.getStatusline().setMessage("Hello World!");
 
-		return app;
+		return applicationNode;
 
 	}
 	

@@ -19,12 +19,13 @@ public class AnimalRegistration {
 	
 	private Farm location;
 	
-	private Image photo;
+	private String photoFilename;
 	private String givenName;
 	private Gender gender;
 	private ReferenceAnimalType animalType; 
 	private ReferenceAnimalType sireType;
 	private Purpose purpose;
+	@Temporal(TemporalType.DATE)
 	private Date dateOfAcquisition;
 	private AcquisitionType acquisitionType;
 	private List<AnimalIdentifier> identifiers;
