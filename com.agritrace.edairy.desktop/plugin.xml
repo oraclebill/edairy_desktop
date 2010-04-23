@@ -35,5 +35,85 @@
 	         name="subapplication.main">
 	   </perspective>
 	</extension>
+	
+   <extension
+         point="org.eclipse.riena.ui.swt.imagePaths">
+      <path path="resources" />
+      <path path="icons" />
+   </extension>
+
+	<extension point="org.eclipse.riena.navigation.assemblies">		
+	   <assembly
+	         id="com.agritrace.edairy.desktop.navigation.assembly"
+	         autostartsequence="100"
+	         parentTypeId="application">
+	      	<!-- create subapplication -->
+	      	<subapplication 
+	           	 label="Reports"
+	           	 typeId="subapplication.main"
+	        	 view="subapplication.main">
+	    	  </subapplication>
+	   	</assembly>
+	</extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="true"
+          class="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          id="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          name="Dairy Profile"
+          restorable="true">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="false"
+          class="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          id="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          name="Dairy Profile"
+          restorable="true">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="false"
+          category="com.agritrace.edairy.desktop"
+          class="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          id="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          name="Dairy Profile"
+          restorable="true">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="false"
+          class="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          id="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          name="Dairy Profile"
+          restorable="true">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          allowMultiple="false"
+          class="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          id="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          name="name"
+          restorable="true">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          class="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          id="com.agritrace.edairy.desktop.modules.dairy.DairyProfileView"
+          name="name"
+          restorable="true">
+    </view>
+ </extension>
 
 </plugin>

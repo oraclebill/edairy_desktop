@@ -4,10 +4,13 @@
 package com.agritrace.edairy.desktop.app;
 
 import org.eclipse.riena.navigation.IApplicationNode;
+import org.eclipse.riena.navigation.IModuleGroupNode;
+import org.eclipse.riena.navigation.IModuleNode;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubApplicationNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ApplicationNode;
+import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
@@ -17,24 +20,7 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.DesktopActivator;
 
-//import com.agritrace.edairy.demo.riena.controllers.MemberInfoViewController;
-//import com.agritrace.edairy.demo.riena.controllers.StaffInfoViewController;
-//import com.agritrace.edairy.demo.riena.views.CreditJournalView;
-//import com.agritrace.edairy.demo.riena.views.DairyHomeView;
-//import com.agritrace.edairy.demo.riena.views.BlankView;
-//import com.agritrace.edairy.demo.riena.views.DeliveryView;
-//import com.agritrace.edairy.demo.riena.views.DairyProfileView;
-//import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
-//import com.agritrace.edairy.demo.riena.views.MemberListView;
-//import com.agritrace.edairy.demo.riena.views.MemberPayablesReportView;
-//import com.agritrace.edairy.demo.riena.views.MemberStatementReportView;
-//import com.agritrace.edairy.demo.riena.views.MembersInfoView;
-//import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
-//import com.agritrace.edairy.demo.riena.views.MilkProductionReportView;
-//import com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView;
-//import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
-//import com.agritrace.edairy.demo.riena.views.StaffInfoView;
-//import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
+import com.agritrace.edairy.desktop.modules.dairy.DairyProfileView;
 
 /**
  * @author oraclebill
@@ -82,11 +68,19 @@ public class DairyManagerDesktopApplication extends SwtApplication {
 //		applicationNode.setIcon("path to icon");
 		
 		
-		NavigationNodeId nodeId = new NavigationNodeId("com.agritrace.edairy.desktop.navigation.subapplication");
-		ISubApplicationNode subApplication = new SubApplicationNode(nodeId, "Main");
+		ISubApplicationNode subApplication = new SubApplicationNode(
+				new NavigationNodeId("com.agritrace.edairy.desktop.navigation.subapplication"), 
+				"Main");
 		WorkareaManager.getInstance().registerDefinition(subApplication, "subapplication.main");
 		applicationNode.addChild(subApplication);
+		
+		IModuleGroupNode groupTopLevel = new ModuleGroupNode(new NavigationNodeId("primary.navgroup"));
+		subApplication.addChild(groupTopLevel);
 
+		IModuleNode moduleSystem = NodeFactory.createModule(
+				new NavigationNodeId("edm.sysadmin"), "Setup", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleSystem.setClosable(false);
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.info"), "Dairy Profile", moduleSystem, DairyProfileView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 //		ISubApplicationNode dataEntry = new SubApplicationNode("Data Entry"); //$NON-NLS-1$
 //		applicationNode.addChild(dataEntry);
