@@ -80,7 +80,8 @@ public class DairyManagerDesktopApplication extends SwtApplication {
 		IModuleNode moduleSystem = NodeFactory.createModule(
 				new NavigationNodeId("edm.sysadmin"), "Setup", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSystem.setClosable(false);
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.info"), "Dairy Profile", moduleSystem, DairyProfileView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.info"), "Dairy Profile", moduleSystem, DairyProfileView.ID, 
+				com.agritrace.edairy.desktop.modules.dairy.DairyProfileController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 //		ISubApplicationNode dataEntry = new SubApplicationNode("Data Entry"); //$NON-NLS-1$
 //		applicationNode.addChild(dataEntry);

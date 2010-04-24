@@ -66,7 +66,7 @@ public class DairyProfileView extends SubModuleView {
 		setupGeneralInfo(grpGeneralInfo);
 
 		// Construct Dairy Image
-		Label lblDairyImage = UIControlsFactory.createLabel(top, "", "lblDairyImage");
+		Label lblDairyImage = UIControlsFactory.createLabel(top, "", "dairy.profile.dairyimage");
 		lblDairyImage.setImage(ImageStore.getInstance().getImage("map.jpg"));
 
 		Group grpLocationInfo = UIControlsFactory.createGroup(top, "Location Information"); //, SWT.NONE);
@@ -95,7 +95,6 @@ public class DairyProfileView extends SubModuleView {
 //		fd_lblDairyImage.left = new FormAttachment(100, -179);
 		fd_lblDairyImage.right = new FormAttachment(100, -10);
 		lblDairyImage.setLayoutData(fd_lblDairyImage);
-		addUIControl(lblDairyImage, "lblDairyImage");
 		
 		// Layout address area
 		FormData fd_locationInfoGroup = new FormData();
@@ -133,48 +132,41 @@ public class DairyProfileView extends SubModuleView {
 		Label lblName = UIControlsFactory.createLabel(parent, "Name");
 		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		
-		txtDairyName = UIControlsFactory.createText(parent);
+		txtDairyName = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.dairyname");
 		txtDairyName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		addUIControl(txtDairyName, "txtDairyName");
 
 		Label lblId = UIControlsFactory.createLabel(parent, "ID");
 		lblId.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblId.setText("ID");
 		
-		txtId = UIControlsFactory.createText(parent);
+		txtId = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.dairyid");
 		txtId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		addUIControl(txtId, "txtId");
 		
 		Label lblLicense = UIControlsFactory.createLabel(parent, "License Number");
 		lblLicense.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 
-		txtLicense = UIControlsFactory.createText(parent);
+		txtLicense = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.licence");
 		txtLicense.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		addUIControl(txtLicense, "txtLicense");
 
 		Label lblManager = UIControlsFactory.createLabel(parent, "Manager");
 		lblManager.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		
-		txtManager = UIControlsFactory.createText(parent);
+		txtManager = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.manager.name");
 		txtManager.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		addUIControl(txtManager, "txtManager");
 		
 		Label lblMembership = UIControlsFactory.createLabel(parent, "Membership");
 		lblMembership.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		
-		txtMemberCount = UIControlsFactory.createText(parent);
+		txtMemberCount = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.memberCount");
 		txtMemberCount.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		addUIControl(txtMemberCount, "txtMemberCount");
-
 		
 		Label lblDetails = UIControlsFactory.createLabel(parent, "Notes");
 		lblDetails.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));		
 		
-		txtDairyDescription = UIControlsFactory.createText(parent, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		txtDairyDescription = UIControlsFactory.createText(parent, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI, "dairy.profile.description");
 		txtDairyDescription.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		addUIControl(txtDairyDescription, "txtDairyDescription");
 		
-		// test data 
+		// demo data 
 		txtDairyName.setText("Limuru Dairy Milk Processing Plant");
 		txtId.setText("# 33422314");
 		txtLicense.setText("AD-123445-112");
@@ -192,68 +184,48 @@ public class DairyProfileView extends SubModuleView {
 			parent.setLayout(gl_parent);
 			
 			Label label = UIControlsFactory.createLabel(parent, "Address");
-			txtAddress = UIControlsFactory.createText(parent);		
+			txtAddress = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.address.address");		
 			txtAddress.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_1 = UIControlsFactory.createLabel(parent, "Section/Homestead");
-			txtSection = UIControlsFactory.createText(parent);		
+			txtSection = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.address.section");		
 			txtSection.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_2 = UIControlsFactory.createLabel(parent, "Estate/Nearest Centre");
-			txtEstate = UIControlsFactory.createText(parent);
+			txtEstate = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.address.estate");
 			txtEstate.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_3 = UIControlsFactory.createLabel(parent, "Town/Village");
-			txtTown = UIControlsFactory.createText(parent);
+			txtTown = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.address.town");
 			txtTown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_4 = UIControlsFactory.createLabel(parent, "Sub Location");
-			txtSubLocation = UIControlsFactory.createText(parent);
+			txtSubLocation = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.address.sublocation");
 			txtSubLocation.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_5 = UIControlsFactory.createLabel(parent, "Location");
-			txtLocation = new Combo(parent, SWT.READ_ONLY);
+			txtLocation = UIControlsFactory.createCombo(parent, "dairy.profile.address.location");
 			txtLocation.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_6 = UIControlsFactory.createLabel(parent, "Division");
-			divisionCombo = new Combo(parent, SWT.READ_ONLY);
+			divisionCombo = UIControlsFactory.createCombo(parent, "dairy.profile.address.division");
 //			divisionCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_7 = UIControlsFactory.createLabel(parent, "District");
-			districtCombo = new Combo(parent, SWT.READ_ONLY);
+			districtCombo = UIControlsFactory.createCombo(parent, "dairy.profile.address.district");
 //			districtCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_8 = UIControlsFactory.createLabel(parent, "Province");
-			provinceCombo = new Combo(parent, SWT.READ_ONLY);
+			provinceCombo = UIControlsFactory.createCombo(parent,  "dairy.profile.address.province");
 //			provinceCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			
 			Label label_9 = UIControlsFactory.createLabel(parent, "Postal Code");
-			txtPostalCode = UIControlsFactory.createText(parent);
+			txtPostalCode = UIControlsFactory.createText(parent, SWT.BORDER, "dairy.profile.address.postalCode");
+			
 			GridData gd_txtPostalCode = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 			gd_txtPostalCode.minimumWidth = 50;
 			txtPostalCode.setLayoutData(gd_txtPostalCode);
 
-			// sample data
-			txtLocation.setItems(new String[] {"Gatamaiyu\t", "Gitithia\t", "Kamae\t", "Kamburu\t", "Kijabe\t", "Kinale\t", "Kirenga\t", "Lari\t", "Nyanduma\t"});
-			txtLocation.select(0);
-			divisionCombo.setItems(new String[] {"Githunguri", "Kiambaa", "Kikuyu", "Lari\t", "Limuru"});
-			divisionCombo.select(1);
-			districtCombo.setItems(new String[] {"Baringo District (Kabarnet)", "Bomet District (Bomet)", "Bondo District (Bondo)", "Bungoma District (Bungoma)", "Buret District (Litein)", "Busia (Busia)", "Butere/Mumias District (Butere)", "Embu District (Embu)", "Garissa District (Garissa)", "Gucha District (Ogembo)", "Homa Bay District (Homa Bay)", "Ijara District (Ijara)", "Isiolo District (Isiolo)", "Kajiado District (Kajiado)", "Kakamega District (Kakamega)", "Keiyo District (Iten/Tambach)", "Kericho District (Kericho)", "Kiambu District (Kiambu)", "Kilifi District (Kilifi)", "Kirinyaga District (Kerugoya/Kutus)", "Kisii Central (Kisii)", "Kisumu District (Kisumu)", "Kitui District (Kitui)", "Koibatek District (Eldama Ravine)", "Kuria District (Kehancha)", "Kwale District (Kwale)", "Laikipia District (Nanyuki)", "Lamu District (Lamu)", "Lugari District (Lugari)", "Machakos District (Machakos)", "Makueni District (Makueni)", "Malindi District (Malindi)", "Mandera District (Mandera)", "Maragua District (Maragua)", "Marakwet District (Kapsowar)", "Marsabit District (Marsabit)", "Mbeere District (Mbeere)", "Meru Central District (Meru)", "Meru North District (Maua)", "Meru South District (Chuka)", "Migori District (Migori)", "Mombasa District (Mombasa)", "Mount Elgon District (Mount Elgon)", "Moyale District (Moyale)", "Murang'a District (Murang'a)", "Mwingi District (Mwingi)", "Nairobi District (Nairobi)", "Nakuru District (Nakuru)", "Nandi (Kapsabet)", "Narok District (Narok)", "Nyamira District (Nyamira)", "Nyandarua District (Ol Kalou)", "Nyando District (Awasi)", "Nyeri District (Nyeri)", "Rachuonyo District (Oyugis)", "Samburu District (Maralal)", "Siaya District (Siaya)", "Suba District (Mbita)", "Taita-Taveta District (Wundanyi)", "Tana River District (Tana River)", "Teso District (Malaba)", "Tharaka District (Tharaka)", "Thika District (Thika)", "Trans Mara District (Kilgoris)", "Trans Nzoia District (Kitale)", "Turkana District (Lodwar)", "Uasin Gishu District (Eldoret)", "Vihiga District (Vihiga)", "Wajir District (Wajir)", "West Pokot District (Kapenguria)"});
-			districtCombo.select(1);
-			provinceCombo.setItems(new String[] {"Central", "Coast", "Eastern", "Nairobi", "North Eastern", "Nyanza", "Rift Valley", "Western"});
-			provinceCombo.select(1);
-			txtPostalCode.setText("112345");
-
-			
-			addUIControl(txtAddress, "txtAddress");
-			addUIControl(txtEstate, "txtEstate");
-			addUIControl(txtLocation, "txtLocation");
-			addUIControl(txtSubLocation, "txtSubLocation");
-			addUIControl(txtPostalCode, "txtPostalCode");
-			addUIControl(txtSection, "txtSection");
-			addUIControl(districtCombo, "districtCombo");
-			addUIControl(divisionCombo, "divisionCombo");
-			addUIControl(provinceCombo, "provinceCombo");
 			
 	}
 	
@@ -265,8 +237,8 @@ public class DairyProfileView extends SubModuleView {
 		FillLayout filler = new FillLayout();
 		parent.setLayout(filler);
 		
-		btnCancel = UIControlsFactory.createButton(parent, "Cancel", "btnCancel");		
-		btnSave = UIControlsFactory.createButton(parent, "Save", "btnSave");
+		btnCancel = UIControlsFactory.createButton(parent, "Cancel", "dairy.profile.button.cancel");		
+		btnSave = UIControlsFactory.createButton(parent, "Save", "dairy.profile.button.save");
 	}
 	
 	@Override
