@@ -26,13 +26,13 @@ import com.agritrace.edairy.desktop.modules.dairy.DairyProfileView;
  * @author oraclebill
  *
  */
-public class DairyManagerDesktopApplication extends SwtApplication {
+public class EDMApplication extends SwtApplication {
 
 	public static final String BG_DARK =  "edm_dark_background";
 	public static final String BG_LIGHT =  "edm_light_background";
 
 
-	public DairyManagerDesktopApplication() {
+	public EDMApplication() {
 		super();
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
 	}
@@ -54,8 +54,7 @@ public class DairyManagerDesktopApplication extends SwtApplication {
     @Override
     protected ApplicationController createApplicationController(
                     IApplicationNode node) {
-            ApplicationController controller = super
-                            .createApplicationController(node);
+            ApplicationController controller = super.createApplicationController(node);
             controller.setMenubarVisible(true);
             return controller;
     }
@@ -95,6 +94,51 @@ public class DairyManagerDesktopApplication extends SwtApplication {
 
 	}
 	
+	public boolean validateUserLogin(String username, String password) {
+		return false;
+	}
 	
+	private void initPersistence() {
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+
+		// Begin a new local transaction so that we can persist a new entity
+		em.getTransaction().begin();
+
+		// Read the existing entries
+		Query q = em.createQuery("select m from Person m");
+		// Persons should be empty
+
+		// Do we have entries?
+		boolean createNewEntries = (q.getResultList().size() == 0);
+
+		// No, so lets create new entries
+		if (createNewEntries) {
+			assertTrue(q.getResultList().size() == 0);
+			Family family = new Family();
+			family.setDescription("Family for the Knopfs");
+			em.persist(family);
+			for (int i = 0; i < 40; i++) {
+				Person person = new Person();
+				person.setFirstName("Jim_" + i);
+				person.setLastName("Knopf_" + i);
+				em.persist(person);
+				// First we have to persists the job
+				// Now persists the new person
+				family.getMembers().add(person);
+				em.persist(person);
+				em.persist(family);
+			}
+		}
+
+		// Commit the transaction, which will cause the entity to
+		// be stored in the database
+		em.getTransaction().commit();
+
+		// It is always good practice to close the EntityManager so that
+		// resources are conserved.
+		em.close();
+		
+	}
 
 }

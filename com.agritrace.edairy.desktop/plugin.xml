@@ -17,14 +17,15 @@
       </initializer>
    </extension>
    <extension
-         id="id1"
+         id="edairy_desktop_application"
+         name="eDairy Desktop"
          point="org.eclipse.core.runtime.applications">
       <application
             cardinality="singleton-global"
             thread="main"
             visible="true">
          <run
-               class="com.agritrace.edairy.desktop.app.DairyManagerDesktopApplication">
+               class="com.agritrace.edairy.desktop.app.EDMApplication">
          </run>
       </application>
    </extension>
@@ -114,6 +115,29 @@
           name="name"
           restorable="true">
     </view>
+ </extension>
+ <extension
+       id="edairy_desktop"
+       point="org.eclipse.core.runtime.products">
+    <product
+          application="com.agritrace.edairy.desktop.edairy_desktop_application"
+          name="edairy_desktop">
+       <property
+             name="appName"
+             value="edairy_desktop">
+       </property>
+    </product>
+ </extension>
+ <extension
+       point="org.eclipse.ui.splashHandlers">
+    <splashHandler
+          class="com.agritrace.edairy.desktop.splashHandlers.InteractiveSplashHandler"
+          id="com.agritrace.edairy.desktop.splashHandlers.interactive">
+    </splashHandler>
+    <splashHandlerProductBinding
+          productId="com.agritrace.edairy.desktop.edairy_desktop"
+          splashId="com.agritrace.edairy.desktop.splashHandlers.interactive">
+    </splashHandlerProductBinding>
  </extension>
 
 </plugin>

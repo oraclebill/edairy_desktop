@@ -21,12 +21,43 @@ import javax.persistence.*;
  */
 @Entity
 public class DomainElement {
-	@Id
-	@GeneratedValue
 	private Long domainElementId;
 	private String domainName;
 	private String elementCode;
 	private String elementName;
 	private String elementDescription;
+	
+	@Id
+	@GeneratedValue	
+	public Long getDomainElementId() {
+		return domainElementId;
+	}
+	public void setDomainElementId(Long domainElementId) {
+		this.domainElementId = domainElementId;
+	}
+	public String getDomainName() {
+		return domainName;
+	}
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+	public String getElementCode() {
+		return elementCode;
+	}
+	public void setElementCode(String elementCode) {
+		this.elementCode = elementCode;
+	}
+	public String getElementName() {
+		return elementName;
+	}
+	public void setElementName(String elementName) {
+		this.elementName = elementName;
+	}
+	public String getElementDescription() {
+		return elementDescription;
+	}
+	public void setElementDescription(String elementDescription) {
+		this.elementDescription = elementDescription;
+	}
 	
 }

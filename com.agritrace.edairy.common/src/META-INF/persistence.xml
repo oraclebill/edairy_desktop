@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="com.agritrace.edairy.common.datamodel.activator" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="com.agritrace.edairy.persistence" transaction-type="RESOURCE_LOCAL">
 		<description>edairy manager basic persistence </description>
 		<class>com.agritrace.edairy.common.datamodel.security.SystemUser</class>
 		<class>com.agritrace.edairy.common.datamodel.security.SecurityRole</class>
@@ -25,6 +25,7 @@
 		<class>com.agritrace.edairy.common.datamodel.common.DomainElement</class>
 		<class>com.agritrace.edairy.common.datamodel.common.Container</class>
 		<class>com.agritrace.edairy.common.datamodel.common.ContactMethod</class>
+		<class>com.agritrace.edairy.common.datamodel.security.LoginHistory</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"></property>
 			<property name="eclipselink.ddl-generation.output-mode" value="sql-script"></property>
