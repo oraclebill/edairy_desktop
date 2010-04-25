@@ -57,20 +57,20 @@ public class PersistenceManager {
 		if (createNewEntries) {
 			assert(q.getResultList().size() == 0);
 			
-			Family family = new Family();
-			family.setDescription("Family for the Knopfs");
-			em.persist(family);
-			for (int i = 0; i < 40; i++) {
-				Person person = new Person();
-				person.setFirstName("Jim_" + i);
-				person.setLastName("Knopf_" + i);
-				em.persist(person);
-				// First we have to persists the job
-				// Now persists the new person
-				family.getMembers().add(person);
-				em.persist(person);
-				em.persist(family);
-			}
+//			Family family = new Family();
+//			family.setDescription("Family for the Knopfs");
+//			em.persist(family);
+//			for (int i = 0; i < 40; i++) {
+//				Person person = new Person();
+//				person.setFirstName("Jim_" + i);
+//				person.setLastName("Knopf_" + i);
+//				em.persist(person);
+//				// First we have to persists the job
+//				// Now persists the new person
+//				family.getMembers().add(person);
+//				em.persist(person);
+//				em.persist(family);
+//			}
 		}
 
 		// Commit the transaction, which will cause the entity to

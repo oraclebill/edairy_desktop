@@ -3,7 +3,7 @@
 
 <target name="edairy_desktop">
 <locations>
-<location path="/Users/oraclebill/Projects/Workspaces/TARGET_PLATFORM" type="Directory"/>
+<location path="/Users/bjones/Development/Projects/Workspaces/TARGET_PLATFORM" type="Directory"/>
 </locations>
 <includeBundles>
 <plugin id="org.eclipse.core.runtime.source"/>
