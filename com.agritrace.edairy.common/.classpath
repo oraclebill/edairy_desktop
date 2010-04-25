@@ -7,7 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="con" path="eclipse.fproj.jdt.libprov.osgi/jpt.jpa"/>
 	<classpathentry kind="lib" path="lib/jconn3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

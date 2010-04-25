@@ -23,8 +23,9 @@ public class SystemUser extends Employee implements Serializable {
 
 	private Long systemUserId;
 	private String userName;
-	private String password;
+	private String encryptedPassword;
 	private List<SecurityRole> securityRoles;
+	private List<LoginHistory> loginHistory;
 
 	public SystemUser() {
 		super();
@@ -46,14 +47,6 @@ public class SystemUser extends Employee implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public List<SecurityRole> getSecurityRoles() {
 		return this.securityRoles;
 	}
@@ -61,5 +54,14 @@ public class SystemUser extends Employee implements Serializable {
 	public void setSecurityRoles(List<SecurityRole> securityRoles) {
 		this.securityRoles = securityRoles;
 	}
+
+	public String getEncryptedPassword() {
+		return encryptedPassword;
+	}
+
+	public void setEncryptedPassword(String encryptedPassword) {
+		this.encryptedPassword = encryptedPassword;
+	}
+
 
 }

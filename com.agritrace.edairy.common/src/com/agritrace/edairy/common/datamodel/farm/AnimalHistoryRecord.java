@@ -13,6 +13,7 @@ public class AnimalHistoryRecord {
 	private RegisteredAnimal _registrationId;
 	
 	private State _newStatus;
+	@Temporal(TemporalType.DATE)
 	private Date _newStatusDate;
 	private String _statusInfo;
 	
