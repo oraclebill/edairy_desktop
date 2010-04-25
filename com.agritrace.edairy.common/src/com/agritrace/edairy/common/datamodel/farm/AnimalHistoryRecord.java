@@ -10,7 +10,7 @@ public class AnimalHistoryRecord {
 	
 	@Id
 	private Long _animalHistoryRecordId;
-	private AnimalRegistration _registrationId;
+	private RegisteredAnimal _registrationId;
 	
 	private State _newStatus;
 	private Date _newStatusDate;
