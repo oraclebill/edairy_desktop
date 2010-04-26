@@ -1,12 +1,12 @@
-package com.agritrace.edairy.demo.riena.controllers;
+package com.agritrace.edairy.riena.ui.controllers;
 
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.demo.riena.views.ViewWidgetId;
-import com.agritrace.edairy.demo.riena.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
+import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
 
 public class CalendarSelectionDialogController extends AbstractWindowController {
 

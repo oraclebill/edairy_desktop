@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,12 +36,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.demo.riena.EDairyActivator;
-import com.agritrace.edairy.demo.riena.ImageRegistry;
-import com.agritrace.edairy.demo.riena.views.data.CreditRecord;
-import com.agritrace.edairy.demo.riena.views.data.CreditRecordFactory;
-import com.agritrace.edairy.demo.riena.views.data.Item;
-import com.agritrace.edairy.demo.riena.views.data.ItemsFactory;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
+import com.agritrace.edairy.riena.ui.ImageRegistry;
+import com.agritrace.edairy.riena.ui.views.data.CreditRecord;
+import com.agritrace.edairy.riena.ui.views.data.CreditRecordFactory;
+import com.agritrace.edairy.riena.ui.views.data.Item;
+import com.agritrace.edairy.riena.ui.views.data.ItemsFactory;
 
 public class CreditJournalView extends ViewPart {
 

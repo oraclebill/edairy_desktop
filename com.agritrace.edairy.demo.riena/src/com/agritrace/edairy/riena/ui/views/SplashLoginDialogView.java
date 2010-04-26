@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;

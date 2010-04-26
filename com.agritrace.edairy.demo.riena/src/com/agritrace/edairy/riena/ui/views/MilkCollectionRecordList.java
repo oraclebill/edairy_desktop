@@ -1,9 +1,9 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.agritrace.edairy.demo.riena.views.data.MilkCollectionRecord;
+import com.agritrace.edairy.riena.ui.views.data.MilkCollectionRecord;
 
 public class MilkCollectionRecordList {
 	

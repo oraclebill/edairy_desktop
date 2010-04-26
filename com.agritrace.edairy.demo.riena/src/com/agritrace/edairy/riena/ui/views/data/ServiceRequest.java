@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views.data;
+package com.agritrace.edairy.riena.ui.views.data;
 
 import java.util.Date;
 

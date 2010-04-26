@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;

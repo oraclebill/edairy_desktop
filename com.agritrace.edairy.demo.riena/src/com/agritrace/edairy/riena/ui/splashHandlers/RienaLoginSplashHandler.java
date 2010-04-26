@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.splashHandlers;
+package com.agritrace.edairy.riena.ui.splashHandlers;
 
 import org.eclipse.riena.navigation.ui.swt.splashHandlers.AbstractLoginSplashHandler;
 

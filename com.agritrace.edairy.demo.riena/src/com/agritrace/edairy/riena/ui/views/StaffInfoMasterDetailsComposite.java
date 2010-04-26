@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.layout.TableColumnLayout;

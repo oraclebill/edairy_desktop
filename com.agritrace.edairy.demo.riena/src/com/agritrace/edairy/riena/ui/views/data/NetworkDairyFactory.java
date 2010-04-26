@@ -1,9 +1,9 @@
-package com.agritrace.edairy.demo.riena.views.data;
+package com.agritrace.edairy.riena.ui.views.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.agritrace.edairy.demo.riena.views.data.NetworkDairy.ORGANIZATIONTYPE;
+import com.agritrace.edairy.riena.ui.views.data.NetworkDairy.ORGANIZATIONTYPE;
 
 public class NetworkDairyFactory {
 	

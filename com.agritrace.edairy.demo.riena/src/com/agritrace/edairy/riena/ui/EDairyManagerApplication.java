@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.agritrace.edairy.demo.riena;
+package com.agritrace.edairy.riena.ui;
 
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
@@ -18,26 +18,26 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
-import com.agritrace.edairy.demo.riena.controllers.MemberInfoViewController;
-import com.agritrace.edairy.demo.riena.controllers.MilkCollectionJournalController;
-import com.agritrace.edairy.demo.riena.controllers.StaffInfoViewController;
-import com.agritrace.edairy.demo.riena.views.CreditJournalView;
-import com.agritrace.edairy.demo.riena.views.DairyHomeView;
-import com.agritrace.edairy.demo.riena.views.BlankView;
-import com.agritrace.edairy.demo.riena.views.DeliveryView;
-import com.agritrace.edairy.demo.riena.views.DairyProfileView;
-import com.agritrace.edairy.demo.riena.views.InseminationRequestView;
-import com.agritrace.edairy.demo.riena.views.MemberListView;
-import com.agritrace.edairy.demo.riena.views.MemberPayablesReportView;
-import com.agritrace.edairy.demo.riena.views.MemberStatementReportView;
-import com.agritrace.edairy.demo.riena.views.MembersInfoView;
-import com.agritrace.edairy.demo.riena.views.MilkCollectionJournalView;
-import com.agritrace.edairy.demo.riena.views.MilkCollectionView;
-import com.agritrace.edairy.demo.riena.views.MilkProductionReportView;
-import com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView;
-import com.agritrace.edairy.demo.riena.views.ServiceRequestLogView;
-import com.agritrace.edairy.demo.riena.views.StaffInfoView;
-import com.agritrace.edairy.demo.riena.views.VeterinaryRequestView;
+import com.agritrace.edairy.riena.ui.controllers.MemberInfoViewController;
+import com.agritrace.edairy.riena.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.riena.ui.controllers.StaffInfoViewController;
+import com.agritrace.edairy.riena.ui.views.BlankView;
+import com.agritrace.edairy.riena.ui.views.CreditJournalView;
+import com.agritrace.edairy.riena.ui.views.DairyHomeView;
+import com.agritrace.edairy.riena.ui.views.DairyProfileView;
+import com.agritrace.edairy.riena.ui.views.DeliveryView;
+import com.agritrace.edairy.riena.ui.views.InseminationRequestView;
+import com.agritrace.edairy.riena.ui.views.MemberListView;
+import com.agritrace.edairy.riena.ui.views.MemberPayablesReportView;
+import com.agritrace.edairy.riena.ui.views.MemberStatementReportView;
+import com.agritrace.edairy.riena.ui.views.MembersInfoView;
+import com.agritrace.edairy.riena.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.riena.ui.views.MilkCollectionView;
+import com.agritrace.edairy.riena.ui.views.MilkProductionReportView;
+import com.agritrace.edairy.riena.ui.views.MonthlyCreditReportView;
+import com.agritrace.edairy.riena.ui.views.ServiceRequestLogView;
+import com.agritrace.edairy.riena.ui.views.StaffInfoView;
+import com.agritrace.edairy.riena.ui.views.VeterinaryRequestView;
 
 /**
  * @author oraclebill
@@ -59,7 +59,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		return EDairyActivator.getDefault().getBundle();
 	}
 
-	@Override
+	
 	protected void initializeNodeDefaultIcon(INavigationNode<?> node) {
 		// TODO Auto-generated method stub
 		super.initializeNodeDefaultIcon(node);

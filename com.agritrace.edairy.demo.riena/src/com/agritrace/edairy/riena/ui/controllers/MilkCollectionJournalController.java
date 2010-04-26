@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.controllers;
+package com.agritrace.edairy.riena.ui.controllers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +25,12 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
-import com.agritrace.edairy.demo.riena.views.MilkCollectionRecordList;
-import com.agritrace.edairy.demo.riena.views.ModifyMilkRecordDialog;
-import com.agritrace.edairy.demo.riena.views.StringNumberValidator;
-import com.agritrace.edairy.demo.riena.views.ViewWidgetId;
-import com.agritrace.edairy.demo.riena.views.data.MilkCollectionRecord;
-import com.agritrace.edairy.demo.riena.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.riena.ui.views.MilkCollectionRecordList;
+import com.agritrace.edairy.riena.ui.views.ModifyMilkRecordDialog;
+import com.agritrace.edairy.riena.ui.views.StringNumberValidator;
+import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
+import com.agritrace.edairy.riena.ui.views.data.MilkCollectionRecord;
+import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
 
 public class MilkCollectionJournalController extends SubModuleController  {
 
@@ -128,7 +128,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		memberText.setMandatory(true);
 		memberText.setInputToUIControlConverter(new Converter(String.class,String.class){
 
-			@Override
+			
 			public Object convert(Object fromObject) {
 				if(fromObject instanceof String && !((String)fromObject).isEmpty()){
 					String text = (String) fromObject;
@@ -170,7 +170,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		table.setSelectionType(SelectionType.MULTI);
 		table.addSelectionListener(new ISelectionListener(){
 
-			@Override
+		
 			public void ridgetSelected(SelectionEvent event) {
 				if(table.getSelection().size()==0){
 					updateBottomButtons(false);

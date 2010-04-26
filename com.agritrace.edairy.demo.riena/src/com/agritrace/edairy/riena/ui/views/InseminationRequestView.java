@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -19,8 +19,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.demo.riena.EDairyActivator;
-import com.agritrace.edairy.demo.riena.ImageRegistry;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
+import com.agritrace.edairy.riena.ui.ImageRegistry;
 
 public class InseminationRequestView extends VeterinaryRequestView {
 

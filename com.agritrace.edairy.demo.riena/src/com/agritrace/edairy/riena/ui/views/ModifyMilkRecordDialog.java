@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.demo.riena.views.data.MilkCollectionRecord;
+import com.agritrace.edairy.riena.ui.views.data.MilkCollectionRecord;
 
 public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyListener,SelectionListener{
 	

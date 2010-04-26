@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 
-import com.agritrace.edairy.demo.riena.controllers.CalendarSelectionDialogController;
+import com.agritrace.edairy.riena.ui.controllers.CalendarSelectionDialogController;
 
 public class CalendarSelectionDialog extends AbstractDialogView{
 	

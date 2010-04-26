@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -43,12 +43,12 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.demo.riena.EDairyActivator;
-import com.agritrace.edairy.demo.riena.ImageRegistry;
-import com.agritrace.edairy.demo.riena.views.data.CreditRecord;
-import com.agritrace.edairy.demo.riena.views.data.MilkRecord;
-import com.agritrace.edairy.demo.riena.views.data.MilkRecord.TestResult;
-import com.agritrace.edairy.demo.riena.views.data.MilkRecordsFactory;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
+import com.agritrace.edairy.riena.ui.ImageRegistry;
+import com.agritrace.edairy.riena.ui.views.data.CreditRecord;
+import com.agritrace.edairy.riena.ui.views.data.MilkRecord;
+import com.agritrace.edairy.riena.ui.views.data.MilkRecordsFactory;
+import com.agritrace.edairy.riena.ui.views.data.MilkRecord.TestResult;
 
 public class MilkCollectionView extends ViewPart implements SelectionListener {
 

@@ -8,7 +8,7 @@
  * Contributors:
  *    compeople AG - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.JFaceResources;

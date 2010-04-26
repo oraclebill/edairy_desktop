@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views.data;
+package com.agritrace.edairy.riena.ui.views.data;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +7,7 @@ import java.util.Date;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.riena.beans.common.AbstractBean;
 
-import com.agritrace.edairy.demo.riena.EDairyActivator;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
 
 
 public class SimpleFormattedDateBean extends AbstractBean {

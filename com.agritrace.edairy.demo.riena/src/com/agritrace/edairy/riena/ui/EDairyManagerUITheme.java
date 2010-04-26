@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena;
+package com.agritrace.edairy.riena.ui;
 
 import java.util.Map;
 

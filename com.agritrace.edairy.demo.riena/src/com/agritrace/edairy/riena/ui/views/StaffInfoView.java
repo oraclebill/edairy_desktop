@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.demo.riena.EDairyActivator;
-import com.agritrace.edairy.demo.riena.ImageRegistry;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
+import com.agritrace.edairy.riena.ui.ImageRegistry;
 
 public class StaffInfoView extends SubModuleView {
 

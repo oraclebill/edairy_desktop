@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 import java.util.Date;
 
@@ -27,9 +27,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.demo.riena.EDairyActivator;
-import com.agritrace.edairy.demo.riena.ImageRegistry;
-import com.agritrace.edairy.demo.riena.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
+import com.agritrace.edairy.riena.ui.ImageRegistry;
+import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView {

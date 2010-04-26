@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.controllers;
+package com.agritrace.edairy.riena.ui.controllers;
 
 import java.util.Locale;
 

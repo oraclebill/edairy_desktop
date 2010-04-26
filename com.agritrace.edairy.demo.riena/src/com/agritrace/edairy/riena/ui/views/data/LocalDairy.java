@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views.data;
+package com.agritrace.edairy.riena.ui.views.data;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.riena.beans.common.AbstractBean;

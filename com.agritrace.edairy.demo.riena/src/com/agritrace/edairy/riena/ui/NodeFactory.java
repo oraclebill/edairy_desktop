@@ -8,7 +8,7 @@
  * Contributors:
  *    compeople AG - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.demo.riena;
+package com.agritrace.edairy.riena.ui;
 
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;

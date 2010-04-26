@@ -1,5 +1,5 @@
 
-package com.agritrace.edairy.demo.riena.splashHandlers;
+package com.agritrace.edairy.riena.ui.splashHandlers;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;

@@ -1,11 +1,11 @@
-package com.agritrace.edairy.demo.riena.views.data;
+package com.agritrace.edairy.riena.ui.views.data;
 
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.agritrace.edairy.demo.riena.views.data.MilkRecord.TestResult;
+import com.agritrace.edairy.riena.ui.views.data.MilkRecord.TestResult;
 
 public class MilkRecordsFactory {
 

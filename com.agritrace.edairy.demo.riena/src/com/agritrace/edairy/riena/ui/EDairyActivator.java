@@ -1,19 +1,10 @@
-package com.agritrace.edairy.demo.riena;
+package com.agritrace.edairy.riena.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.riena.internal.ui.ridgets.swt.SharedImages;
-import org.eclipse.riena.internal.ui.ridgets.swt.StatuslineUIProcessRidget;
-import org.eclipse.riena.internal.ui.ridgets.swt.uiprocess.UIProcessRidget;
-import org.eclipse.riena.navigation.ui.swt.binding.DelegatingRidgetMapper;
-import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
-import org.eclipse.riena.ui.swt.uiprocess.UIProcessControl;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
-import com.agritrace.edairy.demo.riena.views.PersonInfoMDList;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -21,12 +12,10 @@ import com.agritrace.edairy.demo.riena.views.PersonInfoMDList;
 public class EDairyActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.agritrace.edairy.demo.riena"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.agritrace.edairy.riena.ui"; //$NON-NLS-1$
 
 	// The shared instance
 	private static EDairyActivator plugin;
-
-	private static ImageRegistry sharedImages;
 
 	/**
 	 * The constructor

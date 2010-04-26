@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena;
+package com.agritrace.edairy.riena.ui;
 
 import org.eclipse.riena.ui.swt.lnf.ILnfTheme;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;

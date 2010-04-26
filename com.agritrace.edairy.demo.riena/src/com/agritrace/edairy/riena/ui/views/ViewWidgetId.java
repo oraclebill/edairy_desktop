@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 public class ViewWidgetId {
 	
@@ -57,6 +57,24 @@ public class ViewWidgetId {
 	public static final String rejectedCombo = "Rejected";
 	
 	public static final String entryInputClear = "entryInputClear";
+	
+	public static final String memberInfo_id="memberId";
+	
+	public static final String memberInfo_firstName="firstName";
+	
+	public static final String memberInfo_lastName="lastName";
+	
+	public static final String memberInfo_applicationDate="applicationDate";
+	
+	public static final String memberInfo_effectiveDate="effectiveDate";
+	
+	public static final String memberInfo_status="status";
+	
+	public static final String memberInfo_phone="phone";
+	
+	public static final String memberInfo_route="route";
+	
+	public static final String memberInfo_stops="stops";
 
 
 

@@ -10,7 +10,17 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.eclipse.emf.teneo.orm;bundle-version="1.0.0",
- org.eclipse.emf.teneo.eclipse;bundle-version="1.1.2",
  org.apache.commons.logging;bundle-version="1.0.4"
 Bundle-ActivationPolicy: lazy
+Export-Package: com.agritrace.edairy.model,
+ com.agritrace.edairy.model.dairy,
+ com.agritrace.edairy.model.dairy.impl,
+ com.agritrace.edairy.model.dairy.util,
+ com.agritrace.edairy.model.impl,
+ com.agritrace.edairy.model.tracking,
+ com.agritrace.edairy.model.tracking.impl,
+ com.agritrace.edairy.model.tracking.util,
+ com.agritrace.edairy.model.util,
+ com.agritrace.edairy.services,
+ com.agritrace.edairy.services.impl,
+ com.agritrace.edairy.services.util

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.demo.riena.views;
+package com.agritrace.edairy.riena.ui.views;
 
 
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.demo.riena.views.data.Member;
-import com.agritrace.edairy.demo.riena.views.data.MemberFactory;
+import com.agritrace.edairy.riena.ui.views.data.MemberShip;
+import com.agritrace.edairy.riena.ui.views.data.MemberFactory;
 
 public class TentativeLoginDialogView extends TitleAreaDialog {
 
@@ -157,47 +157,46 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 
 	public class MemberLabelProvider implements ITableLabelProvider{
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+	
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+	
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+	
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+	
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+	
 		public String getColumnText(Object element, int columnIndex) {
-			if(element instanceof Member){
+			if(element instanceof MemberShip){
 				switch(columnIndex){
 				case 0:
-					return ((Member)element).getId().toString();
+					return ((MemberShip)element).getId().toString();
 				case 1:
-					return ((Member)element).getFirstname()+((Member)element).getLastname();
+					return ((MemberShip)element).getFirstname()+((MemberShip)element).getLastname();
 				case 2:
 					return 
-					((Member)element).getAddress();
+					((MemberShip)element).getAddress();
 				}
 			}
 			return null;
