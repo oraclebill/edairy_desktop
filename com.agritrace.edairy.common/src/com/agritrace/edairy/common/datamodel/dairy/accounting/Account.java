@@ -11,7 +11,7 @@ import java.util.Date;
 public class Account {
 
 	private Long accountId;
-	private Membership owner;
+	private Membership member;
 	private Date established;
 	private String type;
 
@@ -29,11 +29,11 @@ public class Account {
 	}
 
 	public Membership getOwner() {
-		return owner;
+		return member;
 	}
 
 	public void setOwner(Membership owner) {
-		this.owner = owner;
+		this.member = owner;
 	}
 
 	public Date getEstablished() {

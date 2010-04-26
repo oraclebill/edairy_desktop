@@ -19,7 +19,7 @@ public class CollectionJournal {
 	private Vehicle _vehicle;
 	private String _session;
 	private BigDecimal _journalTotal;
-	private boolean _flagged;
+	private boolean _flagged;           // tbd - should be "suspended" 
 	private List<CollectionRecord> _entries;
 	
 	@Id @GeneratedValue

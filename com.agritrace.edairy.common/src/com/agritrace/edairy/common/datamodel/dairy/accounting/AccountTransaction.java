@@ -7,7 +7,9 @@ public class AccountTransaction {
 
 	private Long transactionId;
 	private TransactionType type;
+	private String source;
 	private BigDecimal amount;
+	private String description;
 	
 
 }

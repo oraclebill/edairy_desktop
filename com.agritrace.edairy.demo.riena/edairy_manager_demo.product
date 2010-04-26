@@ -14,7 +14,7 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
+      <programArgs>-Driena.application.width=768 -Driena.application.height=800  -os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
@@ -22,7 +22,9 @@
 
    <launcher name="edairymgr">
       <solaris/>
-      <win/>
+      <win useIco="false">
+         <bmp/>
+      </win>
    </launcher>
 
    <vm>
@@ -38,7 +40,7 @@
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.servlet"/>
       <plugin id="org.apache.commons.beanutils"/>
-      <plugin id="org.apache.commons.collections" fragment=""/>
+      <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.easymock"/>
@@ -74,11 +76,11 @@
       <plugin id="org.eclipse.nebula.widgets.compositetable"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.rap.jface" fragment=""/>
-      <plugin id="org.eclipse.rap.jface.databinding" fragment=""/>
-      <plugin id="org.eclipse.rap.rwt" fragment=""/>
-      <plugin id="org.eclipse.rap.ui" fragment=""/>
-      <plugin id="org.eclipse.rap.ui.workbench" fragment=""/>
+      <plugin id="org.eclipse.rap.jface"/>
+      <plugin id="org.eclipse.rap.jface.databinding"/>
+      <plugin id="org.eclipse.rap.rwt"/>
+      <plugin id="org.eclipse.rap.ui"/>
+      <plugin id="org.eclipse.rap.ui.workbench"/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
       <plugin id="org.eclipse.riena.communication.console"/>

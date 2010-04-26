@@ -3,6 +3,8 @@
  */
 package com.agritrace.edairy.demo.riena;
 
+import org.eclipse.equinox.app.IApplication;
+import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -14,8 +16,11 @@ import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
+import org.eclipse.riena.navigation.ui.swt.views.ApplicationAdvisor;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.demo.riena.controllers.MemberInfoViewController;
@@ -52,7 +57,6 @@ public class EDairyManagerApplication extends SwtApplication {
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
 	}
 
-	//    @Override
 	protected Bundle getBundle() {
 		return Activator.getDefault().getBundle();
 	}

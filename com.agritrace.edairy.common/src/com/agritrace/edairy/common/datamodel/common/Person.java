@@ -3,7 +3,7 @@ package com.agritrace.edairy.common.datamodel.common;
 import javax.persistence.*;
 
 @Entity
-public class Person extends Party {
+public class Person {
 
 	private Long personId;
 	
@@ -14,7 +14,6 @@ public class Person extends Party {
 	private String familyName;
 	private String[] additionalNames;
 	private String suffix;
-
 	
 	public String getHonorific() {
 		return honorific;

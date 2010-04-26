@@ -1,7 +1,10 @@
 package com.agritrace.edairy.common.datamodel.dairy;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
+
 import javax.persistence.*;
 
 import com.agritrace.edairy.common.datamodel.common.Container;
@@ -24,30 +27,30 @@ public class Dairy {
 	private Date kdbLicenseExpirationDate;
 
 	// locations
-	private Location primaryLocation;
+	private Location primaryLocation = new Location();
 
 	private Employee manager;
 	
 	private String publicDescription;
-	
-	private List<Employee> staff;
-	
-	private List<Membership> members;
-	
-	private List<SecurityRole> roles;
-	
-	private List<Route> routeDefinitions;
-	
-	private List<CollectionCentre> collectionCentres;
-	
-	private List<Vehicle> vehicles;
-	
-	private List<Container> bins;
-
 	private String pin;
 	private String nssfNumber;
 	private String nhifNumber;
+    	
+	private List<Employee> employees = new ArrayList<Employee>();
+	
+	private List<Membership> members = new ArrayList<Membership>();
+	
+	private List<SecurityRole> roles = new ArrayList<SecurityRole>();
+	
+	private List<Route> routeDefinitions = new ArrayList<Route>();
+	
+	private List<CollectionCentre> collectionCentres = new ArrayList<CollectionCentre>();
+	
+	private List<Vehicle> vehicles = new ArrayList<Vehicle>();
+	
+	private List<Container> bins = new ArrayList<Container>();
 
+    private List<String> transactionSources = new ArrayList<String>();
 	
 	@Id
 	@GeneratedValue
@@ -118,50 +121,71 @@ public class Dairy {
 	}
 
 	public List<Employee> getEmployees() {
-		return staff;
+		return employees;
 	}
-
-	public void setStaff(List<Employee> staff) {
-		this.staff = staff;
+	
+	public void addEmployee(Employee emp) {
+		employees.add(emp);
 	}
 
 	public List<Membership> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<Membership> members) {
-		this.members = members;
-	}
-
 	public List<SecurityRole> getRoles() {
 		return roles;
-	}
-
-	public void setRoles(List<SecurityRole> roles) {
-		this.roles = roles;
 	}
 
 	public List<Route> getRoutes() {
 		return routeDefinitions;
 	}
 
-	public void setRoutes(List<Route> routeDefinitions) {
-		this.routeDefinitions = routeDefinitions;
-	}
-
 	public List<Vehicle> getVehicles() {
 		return vehicles;
-	}
-
-	public void setVehicles(List<Vehicle> vehicles) {
-		this.vehicles = vehicles;
 	}
 
 	public List<Container> getBins() {
 		return bins;
 	}
 
-	public void setBins(List<Container> bins) {
-		this.bins = bins;
+	public List<Route> getRouteDefinitions() {
+		return routeDefinitions;
 	}
+
+	public List<CollectionCentre> getCollectionCentres() {
+		return collectionCentres;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
+	public String getNssfNumber() {
+		return nssfNumber;
+	}
+
+	public void setNssfNumber(String nssfNumber) {
+		this.nssfNumber = nssfNumber;
+	}
+
+	public String getNhifNumber() {
+		return nhifNumber;
+	}
+
+	public void setNhifNumber(String nhifNumber) {
+		this.nhifNumber = nhifNumber;
+	}
+
+	public List<String> getTransactionSources() {
+		return transactionSources;
+	}
+
+	public void setTransactionSources(List<String> transactionSources) {
+		this.transactionSources = transactionSources;
+	}
+
 }

@@ -4,10 +4,13 @@
 		<description>edairy manager basic persistence </description>
 		<class>com.agritrace.edairy.common.datamodel.security.SystemUser</class>
 		<class>com.agritrace.edairy.common.datamodel.security.SecurityRole</class>
-		<class>com.agritrace.edairy.common.datamodel.farm.ReferenceAnimalType</class>
+		<class>com.agritrace.edairy.common.datamodel.security.LoginHistory</class>
 		<class>com.agritrace.edairy.common.datamodel.farm.RegisteredAnimal</class>
+		<class>com.agritrace.edairy.common.datamodel.farm.ReferenceAnimalType</class>
 		<class>com.agritrace.edairy.common.datamodel.farm.Farm</class>
 		<class>com.agritrace.edairy.common.datamodel.farm.AnimalHistoryRecord</class>
+		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.MilkPrice</class>
+		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.Account</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.Vehicle</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.Supplier</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.Route</class>
@@ -20,12 +23,10 @@
 		<class>com.agritrace.edairy.common.datamodel.dairy.Bin</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.AssetData</class>
 		<class>com.agritrace.edairy.common.datamodel.common.Person</class>
-		<class>com.agritrace.edairy.common.datamodel.common.Party</class>
 		<class>com.agritrace.edairy.common.datamodel.common.Location</class>
 		<class>com.agritrace.edairy.common.datamodel.common.DomainElement</class>
 		<class>com.agritrace.edairy.common.datamodel.common.Container</class>
 		<class>com.agritrace.edairy.common.datamodel.common.ContactMethod</class>
-		<class>com.agritrace.edairy.common.datamodel.security.LoginHistory</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"></property>
 			<property name="eclipselink.ddl-generation.output-mode" value="sql-script"></property>

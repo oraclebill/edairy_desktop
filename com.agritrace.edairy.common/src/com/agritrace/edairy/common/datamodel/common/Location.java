@@ -23,6 +23,10 @@ public class Location {
 	private double _latitude;
 	private double _longitude;
 
+	// universal locators
+	private String landmarkLocations;
+	private String locationDirections;	
+
 	// statutory locators
 	private String _landReferenceNumber;
 
@@ -130,4 +134,21 @@ public class Location {
 		_landReferenceNumber = landReferenceNumber;
 	}
 
+	public String getLandmarkLocations() {
+		return landmarkLocations;
+	}
+
+	public void setLandmarkLocations(String landmarkLocations) {
+		this.landmarkLocations = landmarkLocations;
+	}
+
+	public String getLocationDirections() {
+		return locationDirections;
+	}
+
+	public void setLocationDirections(String locationDirections) {
+		this.locationDirections = locationDirections;
+	}
+
+	
 }
