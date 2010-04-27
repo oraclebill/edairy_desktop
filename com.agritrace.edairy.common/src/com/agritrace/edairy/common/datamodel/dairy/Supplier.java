@@ -10,9 +10,12 @@ import com.agritrace.edairy.common.datamodel.common.Person;
 
 @Entity
 public class Supplier extends Party {
+    
+	public enum SupplierStatus { PENDING, ACTIVE, CANCELLED};
 	
+	private String _name;
 	private Long _supplierId;
-	private String _status;
+	private SupplierStatus _status;
 	private String _category;
 	private List<Person> _contacts;
 	private String _description;
@@ -40,10 +43,10 @@ public class Supplier extends Party {
 	public void setContractDuration(Long contractDuration) {
 		_contractDuration = contractDuration;
 	}
-	public String getStatus() {
+	public SupplierStatus getStatus() {
 		return _status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(SupplierStatus status) {
 		_status = status;
 	}
 	public String getCategory() {

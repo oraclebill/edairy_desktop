@@ -32,6 +32,8 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/subLocation"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/village"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/postalCode"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/estate"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/section"/>
       </genClasses>
       <genClasses ecoreClass="edairy.ecore#//model/StatutoryLocation">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/StatutoryLocation/landReferenceNumber"/>

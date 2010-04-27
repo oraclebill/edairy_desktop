@@ -21,13 +21,13 @@ import org.osgi.framework.Bundle;
 import com.agritrace.edairy.riena.ui.controllers.MemberInfoViewController;
 import com.agritrace.edairy.riena.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.riena.ui.controllers.StaffInfoViewController;
+import com.agritrace.edairy.riena.ui.controllers.members.MemberSearchViewController;
 import com.agritrace.edairy.riena.ui.views.BlankView;
 import com.agritrace.edairy.riena.ui.views.CreditJournalView;
 import com.agritrace.edairy.riena.ui.views.DairyHomeView;
 import com.agritrace.edairy.riena.ui.views.DairyProfileView;
 import com.agritrace.edairy.riena.ui.views.DeliveryView;
 import com.agritrace.edairy.riena.ui.views.InseminationRequestView;
-import com.agritrace.edairy.riena.ui.views.MemberListView;
 import com.agritrace.edairy.riena.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.riena.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.riena.ui.views.MembersInfoView;
@@ -38,6 +38,7 @@ import com.agritrace.edairy.riena.ui.views.MonthlyCreditReportView;
 import com.agritrace.edairy.riena.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.riena.ui.views.StaffInfoView;
 import com.agritrace.edairy.riena.ui.views.VeterinaryRequestView;
+import com.agritrace.edairy.riena.ui.views.members.MemberSearchView;
 
 /**
  * @author oraclebill
@@ -99,7 +100,7 @@ public class EDairyManagerApplication extends SwtApplication {
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleMembers.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Directory", moduleMembers, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search", moduleMembers, MemberListView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search", moduleMembers, MemberSearchView.ID,MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 //		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.farms"), "Member Farms", moduleMembers, MembersInfoView.ID); 
 
 		IModuleNode moduleServices = NodeFactory.createModule(

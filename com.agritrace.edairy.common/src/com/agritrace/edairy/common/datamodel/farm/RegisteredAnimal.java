@@ -33,14 +33,14 @@ public class RegisteredAnimal {
 	private String givenName;
 	private Gender gender;
 	private ReferenceAnimalType animalType;
-	private ReferenceAnimalType sireType;
+	private ReferenceAnimalType sireType;       // optional
 	private Purpose purpose;
 	private Date dateOfAcquisition;
 	private AcquisitionType acquisitionType;
 	private List<AnimalIdentifier> identifiers;
 	private String identifyingFeatures;
 	private RearingMode rearingMode;
-	private List<String> pastOwners;
+	private List<String> pastOwners;        // in ui, 
 	private String insuranceNumber;
 
 	@Id

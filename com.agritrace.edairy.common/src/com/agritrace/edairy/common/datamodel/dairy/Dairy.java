@@ -38,7 +38,7 @@ public class Dairy {
 	
 	private List<Route> routeDefinitions;
 	
-	private List<CollectionCentre> collectionCentres;
+	private List<CollectionCenter> collectionCentres;
 	
 	private List<Vehicle> vehicles;
 	
@@ -47,7 +47,8 @@ public class Dairy {
 	private String pin;
 	private String nssfNumber;
 	private String nhifNumber;
-
+    
+    private List<String> transactionSources;
 	
 	@Id
 	@GeneratedValue

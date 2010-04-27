@@ -57,11 +57,11 @@ public class MemberInfoViewController extends SubModuleController {
 
 			IComboRidget comboStatus = (IComboRidget) container
 					.getRidget("status"); //$NON-NLS-1$
-			comboStatus
-					.bindToModel(
+			comboStatus.bindToModel(
 							workingCopy,
 							"statuses", STATUS.class, null, workingCopy, MemberShip.PROPERTY_STATUS); //$NON-NLS-1$ //$NON-NLS-2$
 			comboStatus.updateFromModel();
+			
 
 			// first name
 			ITextRidget txtFirst = (ITextRidget) container.getRidget("first"); //$NON-NLS-1$

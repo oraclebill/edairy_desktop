@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.riena.ui.edairy_manager" application="com.agritrace.edairy.riena.ui.dairy_manager" version="0.0.3" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.riena.ui.edairy_manager" application="com.agritrace.edairy.desktop.edairy_desktop_application" version="0.0.3" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.riena.ui/resources/edairy_helpabout.png"/>
@@ -16,10 +16,11 @@
    <launcherArgs>
       <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgsWin>-Driena.application.width=1120
+-Driena.application.height=850</vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="/com.agritrace.edairy.riena.ui/icons/cow16.png" i32="/com.agritrace.edairy.riena.ui/icons/cow32.png" i48="/com.agritrace.edairy.riena.ui/icons/cow48.png" i64="/com.agritrace.edairy.riena.ui/icons/cow64.png" i128="/com.agritrace.edairy.riena.ui/icons/cow128.png"/>
-
 
    <launcher name="edairymgr">
       <solaris/>
@@ -27,7 +28,6 @@
          <bmp/>
       </win>
    </launcher>
-
 
    <vm>
    </vm>

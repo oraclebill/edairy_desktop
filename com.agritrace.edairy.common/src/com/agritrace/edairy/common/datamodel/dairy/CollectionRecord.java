@@ -7,13 +7,14 @@ import com.agritrace.edairy.common.datamodel.common.Container;
 
 @Entity
 public class CollectionRecord {
-	private Long _collectionRecordId;
-	private int _journalSequence;
-	private String _recordedMemberId;
+	private Long _collectionRecordId;       // database id
+	private int _journalSequence;           // line number
+	private String _recordedMemberId;       // membership number
 	private Container _can;
 	private BigDecimal _quantityCollected;
 	
 	private boolean _isNotRecorded;
+	private boolean _isRejected;
 	private boolean _isSuspended; // flagged
 	private boolean _isOffRoute;
 	
@@ -66,6 +67,7 @@ public class CollectionRecord {
 	public void setOffRoute(boolean isOffRoute) {
 		_isOffRoute = isOffRoute;
 	}
+	
 	
 	// TODO: derived farm..
 	// 

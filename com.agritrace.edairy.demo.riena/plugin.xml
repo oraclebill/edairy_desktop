@@ -105,9 +105,9 @@
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.riena.ui.views.MemberListView"
-               id="com.agritrace.edairy.riena.ui.views.MemberListView"
-               name="Member List "
+               class="com.agritrace.edairy.riena.ui.views.members.MemberSearchView"
+               id="com.agritrace.edairy.riena.ui.views.members.MemberSearchView"
+               name="Member Search"
                restorable="true">
          </view>
         
@@ -179,7 +179,7 @@
          id="edairy_manager"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.riena.ui.dairy_manager"
+            application="com.agritrace.edairy.riena.ui.newId"
             name="eDairy Manager">
          <property
                name="windowImages"
