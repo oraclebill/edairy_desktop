@@ -16,24 +16,21 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Party/phoneNumber"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/Party/location"/>
       </genClasses>
-      <genClasses image="false" ecoreClass="edairy.ecore#//model/Location">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/Location/postalComponent"/>
-      </genClasses>
       <genClasses ecoreClass="edairy.ecore#//model/MapLocation">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/MapLocation/longitude"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/MapLocation/latitude"/>
       </genClasses>
-      <genClasses ecoreClass="edairy.ecore#//model/PostalLocation">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/address"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/province"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/division"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/district"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/location"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/subLocation"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/village"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/postalCode"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/estate"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/PostalLocation/section"/>
+      <genClasses image="false" ecoreClass="edairy.ecore#//model/Location">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/address"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/province"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/division"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/district"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/location"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/subLocation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/village"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/postalCode"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/estate"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/section"/>
       </genClasses>
       <genClasses ecoreClass="edairy.ecore#//model/StatutoryLocation">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/StatutoryLocation/landReferenceNumber"/>

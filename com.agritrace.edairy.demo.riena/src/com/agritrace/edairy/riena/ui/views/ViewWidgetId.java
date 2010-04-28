@@ -75,7 +75,21 @@ public class ViewWidgetId {
 	public static final String memberInfo_route="route";
 	
 	public static final String memberInfo_stops="stops";
-
+	
+	public static final String memberInfo_cacelButton="Cancel";
+	
+	public static final String memberInfo_saveButton="Save";
+	
+	public static final String ADDRESS_TXT="Address";
+	public static final String SECTION_TXT="Section";
+	public static final String ESTATE_TXT="Estate";
+	public static final String LOCATION_TXT="Location";
+	public static final String SUBLOCATION_TXT="Sublocation";
+	public static final String VILLAGE_TXT="Village";
+	public static final String DIVISION_TXT="Division";
+	public static final String DISTRICT_TXT="District";
+	public static final String PROVINCE_TXT="Province";
+	public static final String POSTAL_CODE_TXT="PostalCode";
 
 
 }
