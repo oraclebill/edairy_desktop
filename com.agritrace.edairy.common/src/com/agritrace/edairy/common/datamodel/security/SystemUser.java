@@ -47,6 +47,7 @@ public class SystemUser extends Employee implements Serializable {
 		this.userName = userName;
 	}
 
+	@ManyToMany
 	public List<SecurityRole> getSecurityRoles() {
 		return this.securityRoles;
 	}

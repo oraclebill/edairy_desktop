@@ -4,6 +4,11 @@
 		<persistence-unit-defaults>
 			<schema>dairy</schema>
 			<catalog>dairy</catalog>
+			<access>FIELD</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<package>com.agritrace.edairy.common.datamodel</package>
+	<schema>dairy</schema>
+	<catalog>dairy</catalog>
+	<sequence-generator name="idgen"></sequence-generator>
 </entity-mappings>

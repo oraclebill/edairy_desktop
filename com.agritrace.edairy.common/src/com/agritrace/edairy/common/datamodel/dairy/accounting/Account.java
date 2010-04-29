@@ -10,16 +10,19 @@ import java.util.Date;
 @Entity
 public class Account {
 
+	@Id
+	@GeneratedValue
 	private Long accountId;
 	private Membership member;
+	@Temporal(TemporalType.DATE)
 	private Date established;
 	private String type;
 
+	@OneToMany(mappedBy="account")
 	private List<AccountTransaction> transactions;
+	@OneToMany(mappedBy="account")
 	private List<BalancePoint> balances;
 
-	@Id
-	@GeneratedValue
 	public Long getAccountId() {
 		return accountId;
 	}
@@ -28,7 +31,14 @@ public class Account {
 		this.accountId = accountId;
 	}
 
-	
+	public Membership getOwner() {
+		return member;
+	}
+
+	public void setOwner(Membership owner) {
+		this.member = owner;
+	}
+
 	public Date getEstablished() {
 		return established;
 	}
@@ -59,14 +69,6 @@ public class Account {
 
 	public void setBalances(List<BalancePoint> balances) {
 		this.balances = balances;
-	}
-
-	public Membership getMember() {
-		return member;
-	}
-
-	public void setMember(Membership member) {
-		this.member = member;
 	}
 
 }

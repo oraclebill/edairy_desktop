@@ -81,6 +81,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case ModelPackage.CONTAINER_TYPE:
+				return createContainerTypeFromString(eDataType, initialValue);
+			case ModelPackage.UNIT_OF_MEASURE:
+				return createUnitOfMeasureFromString(eDataType, initialValue);
 			case ModelPackage.TRANSACTION_ID:
 				return createTransactionIDFromString(eDataType, initialValue);
 			case ModelPackage.UNIQUE_ID:
@@ -98,6 +102,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case ModelPackage.CONTAINER_TYPE:
+				return convertContainerTypeToString(eDataType, instanceValue);
+			case ModelPackage.UNIT_OF_MEASURE:
+				return convertUnitOfMeasureToString(eDataType, instanceValue);
 			case ModelPackage.TRANSACTION_ID:
 				return convertTransactionIDToString(eDataType, instanceValue);
 			case ModelPackage.UNIQUE_ID:
@@ -175,6 +183,46 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public DescriptiveLocation createDescriptiveLocation() {
 		DescriptiveLocationImpl descriptiveLocation = new DescriptiveLocationImpl();
 		return descriptiveLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
+		ContainerType result = ContainerType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
+		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUnitOfMeasureToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

@@ -7,11 +7,12 @@ import javax.persistence.*;
 @Entity
 public class MilkPrice {
 
+	@Id @GeneratedValue
 	private Long priceId;
+	@Temporal(value = TemporalType.DATE)
 	private Date priceDate;
 	private BigDecimal price;
 
-	@Id @GeneratedValue
 	public Long getPriceId() {
 		return priceId;
 	}

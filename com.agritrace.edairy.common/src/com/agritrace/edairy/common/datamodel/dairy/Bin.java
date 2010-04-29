@@ -7,7 +7,7 @@ import com.agritrace.edairy.common.datamodel.common.*;
 public class Bin extends Container {
 	private Long _binId;
 	private Route _route;
-	private CollectionCenter _collectionCentre;
+	private DairyLocation _collectionCentre;
 
 	@GeneratedValue
 	public Long getBinId() {
@@ -22,10 +22,10 @@ public class Bin extends Container {
 	public void setRoute(Route route) {
 		_route = route;
 	}
-	public CollectionCenter getCollectionCentre() {
+	public DairyLocation getCollectionCentre() {
 		return _collectionCentre;
 	}
-	public void setCollectionCentre(CollectionCenter collectionCentre) {
+	public void setCollectionCentre(DairyLocation collectionCentre) {
 		_collectionCentre = collectionCentre;
 	}
 }
