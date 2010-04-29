@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.riena.ui.edairy_manager" application="com.agritrace.edairy.desktop.edairy_desktop_application" version="0.0.3" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.riena.ui.edairy_manager" application="com.agritrace.edairy.riena.ui.newId" version="0.0.3" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.riena.ui/resources/edairy_helpabout.png"/>
@@ -37,12 +37,13 @@
    </license>
 
    <plugins>
+      <plugin id="com.agritrace.edairy.model"/>
       <plugin id="com.agritrace.edairy.riena.ui"/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.servlet"/>
       <plugin id="org.apache.commons.beanutils"/>
-      <plugin id="org.apache.commons.collections"/>
+      <plugin id="org.apache.commons.collections" fragment=""/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.easymock"/>
@@ -61,6 +62,10 @@
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.databinding"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.http.registry"/>
@@ -78,11 +83,12 @@
       <plugin id="org.eclipse.nebula.widgets.compositetable"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.rap.jface"/>
-      <plugin id="org.eclipse.rap.jface.databinding"/>
-      <plugin id="org.eclipse.rap.rwt"/>
-      <plugin id="org.eclipse.rap.ui"/>
-      <plugin id="org.eclipse.rap.ui.workbench"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
+      <plugin id="org.eclipse.rap.jface" fragment=""/>
+      <plugin id="org.eclipse.rap.jface.databinding" fragment=""/>
+      <plugin id="org.eclipse.rap.rwt" fragment=""/>
+      <plugin id="org.eclipse.rap.ui" fragment=""/>
+      <plugin id="org.eclipse.rap.ui.workbench" fragment=""/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
       <plugin id="org.eclipse.riena.communication.console"/>
