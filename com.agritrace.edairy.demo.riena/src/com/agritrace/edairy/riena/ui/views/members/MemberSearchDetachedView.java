@@ -43,6 +43,10 @@ import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
 import com.agritrace.edairy.model.dairy.RouteDefinition;
+import com.agritrace.edairy.model.tracking.Container;
+import com.agritrace.edairy.model.tracking.ContainerType;
+import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.model.tracking.UnitOfMeasure;
 
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener, ISelectionChangedListener, SelectionListener {
@@ -276,6 +280,43 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			defaultLocation.setProvince("Jersey");
 			defaultLocation.setPostalCode("08550");
 			member.getLocation().add(defaultLocation);
+			
+			
+			Container container= TrackingFactory.eINSTANCE.createContainer();
+			container.setType(ContainerType.BIN);
+			container.setContainerId("1001");
+			container.setOwner(member1);
+			container.setMeasureType(UnitOfMeasure.LITRE);
+			container.setUnits(50);
+			container.setCapacity(50);
+			member1.getContainers().add(container);
+			
+			container= TrackingFactory.eINSTANCE.createContainer();
+			container.setType(ContainerType.BIN);
+			container.setContainerId("1002");
+			container.setOwner(member1);
+			container.setMeasureType(UnitOfMeasure.LITRE);
+			container.setUnits(50);
+			container.setCapacity(40);
+			member1.getContainers().add(container);
+			
+			container= TrackingFactory.eINSTANCE.createContainer();
+			container.setType(ContainerType.BIN);
+			container.setContainerId("1003");
+			container.setOwner(member1);
+			container.setMeasureType(UnitOfMeasure.LITRE);
+			container.setUnits(50);
+			container.setCapacity(40);
+			member1.getContainers().add(container);
+			
+			container= TrackingFactory.eINSTANCE.createContainer();
+			container.setType(ContainerType.BIN);
+			container.setContainerId("1004");
+			container.setOwner(member1);
+			container.setMeasureType(UnitOfMeasure.LITRE);
+			container.setUnits(50);
+			container.setCapacity(30);
+			member1.getContainers().add(container);
 			
 			members.add(member1);
 			

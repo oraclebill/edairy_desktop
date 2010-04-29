@@ -53,6 +53,10 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	public static final String SAVE_BUTTON="Save";
 	public static final String CANCEL_BUTTON="Cancel";
 	
+	//container button
+	public static final String ADD_BUTTON="Add";
+	public static final String REMOVE_BUTTON="Remove";
+	
 	private Composite main;
 	private Text txtName;
 	private Text txtId;
@@ -218,27 +222,24 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 	private void createContainerInfoTab(Composite containerComposite) {
 		Composite containerPanel = UIControlsFactory.createComposite(containerComposite, SWT.NULL);
-		containerPanel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		
-		Table table = UIControlsFactory.createTable(containerPanel, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
-		//			Table table = UIControlsFactory.createTable(tablePanel, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION,
-		//					"transactionTable"); //$NON-NLS-1$
+		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true, true).applyTo(containerPanel);
+		Table table = UIControlsFactory.createTable(containerPanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION, ViewWidgetId.CONTAINER_TABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
 		TableColumn columnID = new TableColumn(table, SWT.LEFT);
-		columnID.setText("ID");
+//		columnID.setText("ID");
 		TableColumn columnType = new TableColumn(table, SWT.LEFT);
-		columnType.setText("Type");
+//		columnType.setText("Type");
 
 		TableColumn columnUnits = new TableColumn(table, SWT.LEFT);
-		columnUnits.setText("Units");
+//		columnUnits.setText("Units");
 		
 		TableColumn columnMeasure = new TableColumn(table, SWT.LEFT);
-		columnMeasure.setText("Measure");
+//		columnMeasure.setText("Measure");
 		
 		TableColumn columnCapacity = new TableColumn(table, SWT.LEFT);
-		columnCapacity.setText("Capacity");
+//		columnCapacity.setText("Capacity");
 
 		
 		TableColumnLayout layout = new TableColumnLayout();
@@ -247,9 +248,19 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		layout.setColumnData(columnUnits, new ColumnWeightData(20));
 		layout.setColumnData(columnMeasure, new ColumnWeightData(20));
 		layout.setColumnData(columnCapacity, new ColumnWeightData(20));
-
 		containerPanel.setLayout(layout);
 		
+		Composite buttonsPanel = UIControlsFactory.createComposite(containerComposite,SWT.NULL);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).applyTo(buttonsPanel);
+		buttonsPanel.setLayout(new GridLayout(2,false));
+		
+		Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.CONTAINER_ADD);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(false, false).applyTo(addButton);
+
+		Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON, ViewWidgetId.CONTAINER_Remove);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(false, false).applyTo(removeButton);
+
+
 	}
 
 	private void createLivestockInfoTab(Composite livestockComposite) {

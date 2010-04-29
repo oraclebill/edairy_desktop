@@ -52,6 +52,15 @@
       </genClasses>
       <nestedGenPackages prefix="Tracking" basePackage="com.agritrace.edairy.model"
           resource="XML" disposableProviderFactory="true" ecorePackage="edairy.ecore#//model/tracking">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/UnitOfMeasure">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/UnitOfMeasure/LITRE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/UnitOfMeasure/KILOGRAM"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/UnitOfMeasure/UNKNOWN"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/ContainerType">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/ContainerType/BIN"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/ContainerType/CAN"/>
+        </genEnums>
         <genClasses ecoreClass="edairy.ecore#//model/tracking/Dairy">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Dairy/registrationNumber"/>
         </genClasses>
@@ -68,9 +77,12 @@
         </genClasses>
         <genClasses ecoreClass="edairy.ecore#//model/tracking/Container">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/containerId"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/size"/>
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Container/owner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/capacity"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/units"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/measureType"/>
         </genClasses>
         <genClasses ecoreClass="edairy.ecore#//model/tracking/Processor">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Processor/registrationNumber"/>
@@ -213,7 +225,10 @@
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Membership/member"/>
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Membership/memberId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Membership/containers"/>
         </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Bin"/>
       </nestedGenPackages>
     </nestedGenPackages>
     <nestedGenPackages prefix="Services" basePackage="com.agritrace.edairy" resource="XML"

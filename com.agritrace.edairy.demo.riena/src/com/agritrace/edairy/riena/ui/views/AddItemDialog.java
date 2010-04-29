@@ -56,8 +56,9 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 	}
 	
 	 protected void configureShell(Shell newShell) {
-	        newShell.setSize(350, 250);
 	        super.configureShell(newShell);
+	        newShell.setSize(350, 250);
+
 	    }
 
 
@@ -140,6 +141,10 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 
 	public void setNewItem(Item newItem) {
 		this.newItem = newItem;
+	}
+	
+	protected boolean isResizable() {
+		return true;
 	}
 
 
