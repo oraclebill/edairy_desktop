@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity
 public class ReferenceAnimalType {
+	@Id @GeneratedValue
 	private Long _animalTypeId;
 	private String _species;  // e.g. cow, goat, buffalo
 	private String _breed;	  // e.g. jersey, guernsey, zebu, etc
 	
-	@Id
 	public Long getAnimalTypeId() {
 		return _animalTypeId;
 	}

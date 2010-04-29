@@ -15,6 +15,8 @@ import com.agritrace.edairy.common.datamodel.security.SecurityRole;
 public class Dairy {
 	
 	// identification info
+	@Id
+	@GeneratedValue
 	private Long dairyId;
 
 	private String name;
@@ -22,13 +24,16 @@ public class Dairy {
 	// licensing info
 	private String kdbLicenseNum;
 
+	@Temporal(value = TemporalType.DATE)
 	private Date kdbLicenseEffectiveDate;
 	
+	@Temporal(value = TemporalType.DATE)
 	private Date kdbLicenseExpirationDate;
 
 	// locations
 	private Location primaryLocation = new Location();
 
+	@OneToOne
 	private Employee manager;
 	
 	private String publicDescription;
@@ -36,24 +41,29 @@ public class Dairy {
 	private String nssfNumber;
 	private String nhifNumber;
     	
+	@OneToMany
 	private List<Employee> employees = new ArrayList<Employee>();
 	
+	@OneToMany
 	private List<Membership> members = new ArrayList<Membership>();
 	
+	@OneToMany
 	private List<SecurityRole> roles = new ArrayList<SecurityRole>();
 	
+	@OneToMany
 	private List<Route> routeDefinitions = new ArrayList<Route>();
 	
-	private List<CollectionCentre> collectionCentres = new ArrayList<CollectionCentre>();
+	@OneToMany
+	private List<DairyLocation> collectionCentres = new ArrayList<DairyLocation>();
 	
+	@OneToMany
 	private List<Vehicle> vehicles = new ArrayList<Vehicle>();
 	
+	@OneToMany
 	private List<Container> bins = new ArrayList<Container>();
 
     private List<String> transactionSources = new ArrayList<String>();
 	
-	@Id
-	@GeneratedValue
 	public Long getDairyId() {
 		return dairyId;
 	}
@@ -78,7 +88,6 @@ public class Dairy {
 		this.kdbLicenseNum = kdbLicenseNum;
 	}
 
-	@Temporal(value = TemporalType.DATE)
 	public Date getKdbLicenseEffectiveDate() {
 		return kdbLicenseEffectiveDate;
 	}
@@ -87,7 +96,6 @@ public class Dairy {
 		this.kdbLicenseEffectiveDate = kdbLicenseEffectiveDate;
 	}
 
-	@Temporal(value = TemporalType.DATE)
 	public Date getKdbLicenseExpirationDate() {
 		return kdbLicenseExpirationDate;
 	}
@@ -152,7 +160,7 @@ public class Dairy {
 		return routeDefinitions;
 	}
 
-	public List<CollectionCentre> getCollectionCentres() {
+	public List<DairyLocation> getCollectionCentres() {
 		return collectionCentres;
 	}
 

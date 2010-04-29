@@ -60,6 +60,7 @@ public class Supplier {
 		_category = category;
 	}
 
+	@ManyToMany
 	public List<Person> getContacts() {
 		return _contacts;
 	}

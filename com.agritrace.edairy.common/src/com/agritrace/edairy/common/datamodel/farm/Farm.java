@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import com.agritrace.edairy.common.datamodel.common.Location;
 import com.agritrace.edairy.common.datamodel.common.Person;
-import com.agritrace.edairy.common.datamodel.dairy.CollectionCentre;
+import com.agritrace.edairy.common.datamodel.dairy.DairyLocation;
 
 @Entity
 public class Farm  {
@@ -19,7 +19,7 @@ public class Farm  {
 	private Location location;
 	
 	// location info
-	private CollectionCentre defaultCollectionCenter;
+	private DairyLocation defaultCollectionCenter;
 	
 		
 	public List<RegisteredAnimal> getAnimals() {
@@ -71,11 +71,11 @@ public class Farm  {
 		this.location = location;
 	}
 
-	public CollectionCentre getDefaultCollectionCenter() {
+	public DairyLocation getDefaultCollectionCenter() {
 		return defaultCollectionCenter;
 	}
 
-	public void setDefaultCollectionCenter(CollectionCentre defaultCollectionCenter) {
+	public void setDefaultCollectionCenter(DairyLocation defaultCollectionCenter) {
 		this.defaultCollectionCenter = defaultCollectionCenter;
 	}
 	

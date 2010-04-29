@@ -8,6 +8,7 @@ import com.agritrace.edairy.common.datamodel.common.Container;
 @Entity
 public class CollectionRecord {
 	private Long _collectionRecordId; // database id
+	private CollectionJournal _collectionJournal; // collection journal parent
 	private int _journalSequence; // line number
 	private String _recordedMemberId; // membership number
 	private Container _can;
@@ -90,6 +91,15 @@ public class CollectionRecord {
 
 	public void setRejected(boolean isRejected) {
 		_isRejected = isRejected;
+	}
+
+	@ManyToOne
+	public CollectionJournal getCollectionJournal() {
+		return _collectionJournal;
+	}
+
+	public void setCollectionJournal(CollectionJournal collectionJournal) {
+		_collectionJournal = collectionJournal;
 	}
 
 	// TODO: derived farm..

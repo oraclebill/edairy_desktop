@@ -10,16 +10,19 @@ import java.util.Date;
 @Entity
 public class Account {
 
+	@Id
+	@GeneratedValue
 	private Long accountId;
 	private Membership member;
+	@Temporal(TemporalType.DATE)
 	private Date established;
 	private String type;
 
+	@OneToMany(mappedBy="account")
 	private List<AccountTransaction> transactions;
+	@OneToMany(mappedBy="account")
 	private List<BalancePoint> balances;
 
-	@Id
-	@GeneratedValue
 	public Long getAccountId() {
 		return accountId;
 	}

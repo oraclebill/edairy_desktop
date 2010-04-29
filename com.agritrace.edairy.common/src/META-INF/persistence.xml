@@ -2,15 +2,12 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="com.agritrace.edairy.persistence" transaction-type="RESOURCE_LOCAL">
 		<description>edairy manager basic persistence </description>
+		<mapping-file>META-INF/orm.xml</mapping-file>
 		<class>com.agritrace.edairy.common.datamodel.security.SystemUser</class>
 		<class>com.agritrace.edairy.common.datamodel.security.SecurityRole</class>
-		<class>com.agritrace.edairy.common.datamodel.security.LoginHistory</class>
-		<class>com.agritrace.edairy.common.datamodel.farm.RegisteredAnimal</class>
 		<class>com.agritrace.edairy.common.datamodel.farm.ReferenceAnimalType</class>
 		<class>com.agritrace.edairy.common.datamodel.farm.Farm</class>
 		<class>com.agritrace.edairy.common.datamodel.farm.AnimalHistoryRecord</class>
-		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.MilkPrice</class>
-		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.Account</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.Vehicle</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.Supplier</class>
 		<class>com.agritrace.edairy.common.datamodel.dairy.Route</class>
@@ -27,15 +24,20 @@
 		<class>com.agritrace.edairy.common.datamodel.common.DomainElement</class>
 		<class>com.agritrace.edairy.common.datamodel.common.Container</class>
 		<class>com.agritrace.edairy.common.datamodel.common.ContactMethod</class>
+		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.Account</class>
+		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.AccountTransaction</class>
+		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.BalancePoint</class>
+		<class>com.agritrace.edairy.common.datamodel.dairy.accounting.MilkPrice</class>
+		<class>com.agritrace.edairy.common.datamodel.farm.RegisteredAnimal</class>
+		<class>com.agritrace.edairy.common.datamodel.security.LoginHistory</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"></property>
 			<property name="eclipselink.ddl-generation.output-mode" value="sql-script"></property>
-			<property name="eclipselink.target-database" value="SQLAnywhere"></property>
 			<property name="eclipselink.target-server" value="None"></property>
 			<property name="eclipselink.session-name" value="dairy"></property>
 			<property name="eclipselink.orm.validate.schema" value="true"></property>
-			<property name="javax.persistence.jdbc.driver" value="org.eclipse.persistence.platform.database.SybasePlatform"></property>
-			<property name="javax.persistence.jdbc.url" value="jdbc:sybase:Tds:localhost:2638/dairy?ServiceName=dairy"></property>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"></property>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dairy"></property>
 			<property name="javax.persistence.jdbc.user" value="dairy"></property>
 			<property name="javax.persistence.jdbc.password" value="dairy"></property>
 		</properties>

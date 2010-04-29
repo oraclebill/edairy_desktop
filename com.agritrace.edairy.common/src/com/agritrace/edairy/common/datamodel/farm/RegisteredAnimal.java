@@ -25,26 +25,43 @@ public class RegisteredAnimal {
 		BIRTH, PURCHASE, OTHER
 	}
 
+	@Id
+	@GeneratedValue
 	private Long animnalRegistrationId;
 
+	@ManyToOne
 	private Farm location;
 
+	@Transient
 	private Image photo;
+	
+	@Column(nullable = false)
 	private String givenName;
+	
+	@Column(nullable = false)
 	private Gender gender;
+	
+	@ManyToOne 
 	private ReferenceAnimalType animalType;
-	private ReferenceAnimalType sireType;       // optional
+	
+	@ManyToOne 
+	private ReferenceAnimalType sireType; // optional
+	
+	@Column(nullable = false)
 	private Purpose purpose;
+	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date dateOfAcquisition;
+	
 	private AcquisitionType acquisitionType;
+	// @OneToMany
 	private List<AnimalIdentifier> identifiers;
 	private String identifyingFeatures;
 	private RearingMode rearingMode;
-	private List<String> pastOwners;        // in ui, 
+	private List<String> pastOwners; // in ui,
 	private String insuranceNumber;
 
-	@Id
-	@GeneratedValue
 	public Long getAnimnalRegistrationId() {
 		return animnalRegistrationId;
 	}
@@ -53,7 +70,6 @@ public class RegisteredAnimal {
 		this.animnalRegistrationId = animnalRegistrationId;
 	}
 
-	@Column(nullable=false)
 	public Farm getLocation() {
 		return location;
 	}
@@ -70,7 +86,6 @@ public class RegisteredAnimal {
 		this.photo = photo;
 	}
 
-	@Column(nullable=false)
 	public String getGivenName() {
 		return givenName;
 	}
@@ -79,7 +94,6 @@ public class RegisteredAnimal {
 		this.givenName = givenName;
 	}
 
-	@Column(nullable=false)
 	public Gender getGender() {
 		return gender;
 	}
@@ -88,7 +102,6 @@ public class RegisteredAnimal {
 		this.gender = gender;
 	}
 
-	@Column(nullable=false)
 	public ReferenceAnimalType getAnimalType() {
 		return animalType;
 	}
@@ -105,7 +118,6 @@ public class RegisteredAnimal {
 		this.sireType = sireType;
 	}
 
-	@Column(nullable=false)
 	public Purpose getPurpose() {
 		return purpose;
 	}
@@ -138,7 +150,6 @@ public class RegisteredAnimal {
 		this.identifiers = identifiers;
 	}
 
-	@Column(nullable=false)
 	public String getIdentifyingFeatures() {
 		return identifyingFeatures;
 	}
@@ -147,7 +158,6 @@ public class RegisteredAnimal {
 		this.identifyingFeatures = identifyingFeatures;
 	}
 
-	@Column(nullable=false)
 	public RearingMode getRearingMode() {
 		return rearingMode;
 	}

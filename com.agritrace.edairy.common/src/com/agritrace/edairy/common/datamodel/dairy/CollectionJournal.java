@@ -91,6 +91,8 @@ public class CollectionJournal {
 	public void setFlagged(boolean flagged) {
 		_flagged = flagged;
 	}
+	
+	@OneToMany(mappedBy="collectionJournal")
 	public List<CollectionRecord> getEntries() {
 		return _entries;
 	}
