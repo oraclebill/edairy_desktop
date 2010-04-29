@@ -3,14 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eDairy
 Bundle-SymbolicName: com.agritrace.edairy.demo.riena;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.edairy.demo.riena.Activator
+Bundle-Activator: com.agritrace.edairy.riena.ui.Activator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.demo.riena,
- com.agritrace.edairy.demo.riena.controllers,
- com.agritrace.edairy.demo.riena.splashHandlers,
- com.agritrace.edairy.demo.riena.views,
- com.agritrace.edairy.demo.riena.views.data,
+Export-Package: com.agritrace.edairy.riena.ui,
+ com.agritrace.edairy.riena.ui.controllers,
+ com.agritrace.edairy.riena.ui.splashHandlers,
+ com.agritrace.edairy.riena.ui.views,
+ com.agritrace.edairy.riena.ui.views.data,
  com.swtdesigner

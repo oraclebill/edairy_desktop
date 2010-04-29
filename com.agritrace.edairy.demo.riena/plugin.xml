@@ -14,7 +14,7 @@
             name="Dairy Info"
             allowMultiple="true"
             icon="icons/edairymanagericon16.png"
-            class="com.agritrace.edairy.demo.riena.views.DairyProfileView"
+            class="com.agritrace.edairy.riena.ui.views.DairyProfileView"
             id="com.agritrace.edairy.demo.riena.views.DairyProfileView">
          <description>
             description body text
@@ -24,88 +24,88 @@
             name="Demo Dairy Home"
             allowMultiple="true"
             icon="icons/edairymanagericon16.png"
-            class="com.agritrace.edairy.demo.riena.views.DairyHomeView"
+            class="com.agritrace.edairy.riena.ui.views.DairyHomeView"
             id="com.agritrace.edairy.demo.riena.views.DairyHomeView">
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.StaffInfoView"
+            class="com.agritrace.edairy.riena.ui.views.StaffInfoView"
             id="com.agritrace.edairy.demo.riena.views.StaffInfoView"
             name="StaffInfoView">
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.MembersInfoView"
+            class="com.agritrace.edairy.riena.ui.views.MembersInfoView"
             id="com.agritrace.edairy.demo.riena.views.MembersInfoView"
             name="Member Lookup">
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.VeterinaryRequestView"
+            class="com.agritrace.edairy.riena.ui.views.VeterinaryRequestView"
             id="com.agritrace.edairy.demo.riena.views.VeterinaryRequestView"
             name="VeterinaryRequestView">
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.InseminationRequestView"
+            class="com.agritrace.edairy.riena.ui.views.InseminationRequestView"
             id="com.agritrace.edairy.demo.riena.views.InseminationRequestView"
             name="InseminationRequestView">
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.ServiceRequestLogView"
+            class="com.agritrace.edairy.riena.ui.views.ServiceRequestLogView"
             id="com.agritrace.edairy.demo.riena.views.ServiceRequestLogView"
             name="ServiceRequestLogView"
             restorable="true">
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.LocalDairyView"
+            class="com.agritrace.edairy.riena.ui.views.LocalDairyView"
             id="com.agritrace.edairy.demo.riena.views.LocalDairyView"
             name="LocalDairyView"
             restorable="true">
       </view>
        <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
+            class="com.agritrace.edairy.riena.ui.views.MilkCollectionView"
             id="com.agritrace.edairy.demo.riena.views.MilkCollectionView"
             name="MilkCollectionInfoView">
       </view>
           <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.DeliveryView"
+            class="com.agritrace.edairy.riena.ui.views.DeliveryView"
             id="com.agritrace.edairy.demo.riena.views.DeliveryView"
             name="DeliveryView">
         </view>
         <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.CreditJournalView"
+            class="com.agritrace.edairy.riena.ui.views.CreditJournalView"
             id="com.agritrace.edairy.demo.riena.views.CreditJournalView"
             name="CreditJournalViews">
         </view>
          <view
             allowMultiple="true"
-            class="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
+            class="com.agritrace.edairy.riena.ui.views.NetworklDairyView"
             id="com.agritrace.edairy.demo.riena.views.NetworklDairyView"
             name="NetworklDairyView">
         </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.demo.riena.views.BlankView"
+               class="com.agritrace.edairy.riena.ui.views.BlankView"
                id="com.agritrace.edairy.demo.riena.views.BlankView"
                name="Blank"
                restorable="true">
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.demo.riena.views.MilkProductionReportView"
+               class="com.agritrace.edairy.riena.ui.views.MilkProductionReportView"
                id="com.agritrace.edairy.demo.riena.views.MilkProductionReportView"
                name="Milk Production Report"
                restorable="true">
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.demo.riena.views.MemberListView"
+               class="com.agritrace.edairy.riena.ui.views.MemberListView"
                id="com.agritrace.edairy.demo.riena.views.MemberListView"
                name="Member List "
                restorable="true">
@@ -113,21 +113,21 @@
         
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.demo.riena.views.MemberPayablesReportView"
+               class="com.agritrace.edairy.riena.ui.views.MemberPayablesReportView"
                id="com.agritrace.edairy.demo.riena.views.MemberPayablesReportView"
                name="Member Payables Report"
                restorable="true">
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView"
+               class="com.agritrace.edairy.riena.ui.views.MonthlyCreditReportView"
                id="com.agritrace.edairy.demo.riena.views.MonthlyCreditReportView"
                name="Monthly Credit Report"
                restorable="true">
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.demo.riena.views.MemberStatementReportView"
+               class="com.agritrace.edairy.riena.ui.views.MemberStatementReportView"
                id="com.agritrace.edairy.demo.riena.views.MemberStatementReportView"
                name="Member Statement Report"
                restorable="true">
@@ -147,7 +147,7 @@
             thread="main"
             visible="true">
          <run
-               class="com.agritrace.edairy.demo.riena.EDairyManagerApplication">
+               class="com.agritrace.edairy.riena.ui.EDairyManagerApplication">
          </run>
       </application>
    </extension>
