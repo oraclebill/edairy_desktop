@@ -19,10 +19,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getContainerId <em>Container Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.tracking.Container#getSize <em>Size</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getUnits <em>Units</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Container#getType <em>Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Container#getMeasureType <em>Measure Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,32 +57,6 @@ public interface Container extends EObject {
 	 * @generated
 	 */
 	void setContainerId(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Size</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Size</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Size</em>' attribute.
-	 * @see #setSize(Double)
-	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Size()
-	 * @model
-	 * @generated
-	 */
-	Double getSize();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getSize <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Size</em>' attribute.
-	 * @see #getSize()
-	 * @generated
-	 */
-	void setSize(Double value);
 
 	/**
 	 * Returns the value of the '<em><b>Owner</b></em>' reference.
@@ -160,5 +135,63 @@ public interface Container extends EObject {
 	 * @generated
 	 */
 	void setUnits(double value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.model.tracking.ContainerType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.tracking.ContainerType
+	 * @see #setType(ContainerType)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Type()
+	 * @model
+	 * @generated
+	 */
+	ContainerType getType();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.tracking.ContainerType
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(ContainerType value);
+
+	/**
+	 * Returns the value of the '<em><b>Measure Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.model.tracking.UnitOfMeasure}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Measure Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Measure Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.tracking.UnitOfMeasure
+	 * @see #setMeasureType(UnitOfMeasure)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_MeasureType()
+	 * @model
+	 * @generated
+	 */
+	UnitOfMeasure getMeasureType();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getMeasureType <em>Measure Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Measure Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.tracking.UnitOfMeasure
+	 * @see #getMeasureType()
+	 * @generated
+	 */
+	void setMeasureType(UnitOfMeasure value);
 
 } // Container

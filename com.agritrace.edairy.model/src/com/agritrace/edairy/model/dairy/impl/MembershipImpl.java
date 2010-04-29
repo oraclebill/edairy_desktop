@@ -13,15 +13,22 @@ import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
 import com.agritrace.edairy.model.dairy.RouteDefinition;
 
+import com.agritrace.edairy.model.tracking.Container;
+
+import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +43,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getMemberId <em>Member Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getContainers <em>Containers</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,6 +149,16 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @ordered
 	 */
 	protected String memberId = MEMBER_ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getContainers() <em>Containers</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Container> containers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -326,6 +344,18 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Container> getContainers() {
+		if (containers == null) {
+			containers = new EObjectResolvingEList<Container>(Container.class, this, DairyPackage.MEMBERSHIP__CONTAINERS);
+		}
+		return containers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -343,6 +373,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return basicGetMember();
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				return getMemberId();
+			case DairyPackage.MEMBERSHIP__CONTAINERS:
+				return getContainers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -352,6 +384,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -372,6 +405,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				setMemberId((String)newValue);
+				return;
+			case DairyPackage.MEMBERSHIP__CONTAINERS:
+				getContainers().clear();
+				getContainers().addAll((Collection<? extends Container>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -403,6 +440,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				setMemberId(MEMBER_ID_EDEFAULT);
 				return;
+			case DairyPackage.MEMBERSHIP__CONTAINERS:
+				getContainers().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -427,6 +467,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return member != null;
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				return MEMBER_ID_EDEFAULT == null ? memberId != null : !MEMBER_ID_EDEFAULT.equals(memberId);
+			case DairyPackage.MEMBERSHIP__CONTAINERS:
+				return containers != null && !containers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

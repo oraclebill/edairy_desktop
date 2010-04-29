@@ -9,7 +9,6 @@ package com.agritrace.edairy.model;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -565,26 +564,6 @@ public interface ModelPackage extends EPackage {
 	int DESCRIPTIVE_LOCATION_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.model.ContainerType <em>Container Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.model.ContainerType
-	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContainerType()
-	 * @generated
-	 */
-	int CONTAINER_TYPE = 8;
-
-	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.model.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.model.UnitOfMeasure
-	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUnitOfMeasure()
-	 * @generated
-	 */
-	int UNIT_OF_MEASURE = 9;
-
-	/**
 	 * The meta object id for the '<em>Transaction ID</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -592,7 +571,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getTransactionID()
 	 * @generated
 	 */
-	int TRANSACTION_ID = 10;
+	int TRANSACTION_ID = 8;
 
 	/**
 	 * The meta object id for the '<em>Unique ID</em>' data type.
@@ -602,7 +581,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUniqueID()
 	 * @generated
 	 */
-	int UNIQUE_ID = 11;
+	int UNIQUE_ID = 9;
 
 
 	/**
@@ -939,26 +918,6 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDescriptiveLocation_Directions();
 
 	/**
-	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.ContainerType <em>Container Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Container Type</em>'.
-	 * @see com.agritrace.edairy.model.ContainerType
-	 * @generated
-	 */
-	EEnum getContainerType();
-
-	/**
-	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.UnitOfMeasure <em>Unit Of Measure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Unit Of Measure</em>'.
-	 * @see com.agritrace.edairy.model.UnitOfMeasure
-	 * @generated
-	 */
-	EEnum getUnitOfMeasure();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Transaction ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1265,26 +1224,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DESCRIPTIVE_LOCATION__DIRECTIONS = eINSTANCE.getDescriptiveLocation_Directions();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.model.ContainerType <em>Container Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.model.ContainerType
-		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContainerType()
-		 * @generated
-		 */
-		EEnum CONTAINER_TYPE = eINSTANCE.getContainerType();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.model.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.model.UnitOfMeasure
-		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUnitOfMeasure()
-		 * @generated
-		 */
-		EEnum UNIT_OF_MEASURE = eINSTANCE.getUnitOfMeasure();
 
 		/**
 		 * The meta object literal for the '<em>Transaction ID</em>' data type.

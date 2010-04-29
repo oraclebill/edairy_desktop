@@ -8,7 +8,11 @@ package com.agritrace.edairy.model.dairy;
 
 import com.agritrace.edairy.model.Person;
 
+import com.agritrace.edairy.model.tracking.Container;
+
 import java.util.Date;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -26,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getMemberId <em>Member Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getContainers <em>Containers</em>}</li>
  * </ul>
  * </p>
  *
@@ -192,5 +197,21 @@ public interface Membership extends EObject {
 	 * @generated
 	 */
 	void setMemberId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Containers</b></em>' reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.tracking.Container}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Containers</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Containers</em>' reference list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getMembership_Containers()
+	 * @model
+	 * @generated
+	 */
+	EList<Container> getContainers();
 
 } // Membership

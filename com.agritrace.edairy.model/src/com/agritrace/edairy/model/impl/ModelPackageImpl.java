@@ -8,7 +8,6 @@ package com.agritrace.edairy.model.impl;
 
 import com.agritrace.edairy.model.Audited;
 import com.agritrace.edairy.model.Company;
-import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.MapLocation;
@@ -17,7 +16,6 @@ import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.Party;
 import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.StatutoryLocation;
-import com.agritrace.edairy.model.UnitOfMeasure;
 
 import com.agritrace.edairy.model.dairy.DairyPackage;
 
@@ -34,7 +32,6 @@ import com.agritrace.edairy.services.impl.ServicesPackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -102,20 +99,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass descriptiveLocationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum containerTypeEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum unitOfMeasureEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -487,24 +470,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getContainerType() {
-		return containerTypeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnum getUnitOfMeasure() {
-		return unitOfMeasureEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getTransactionID() {
 		return transactionIDEDataType;
 	}
@@ -584,10 +549,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		descriptiveLocationEClass = createEClass(DESCRIPTIVE_LOCATION);
 		createEAttribute(descriptiveLocationEClass, DESCRIPTIVE_LOCATION__DIRECTIONS);
-
-		// Create enums
-		containerTypeEEnum = createEEnum(CONTAINER_TYPE);
-		unitOfMeasureEEnum = createEEnum(UNIT_OF_MEASURE);
 
 		// Create data types
 		transactionIDEDataType = createEDataType(TRANSACTION_ID);
@@ -673,16 +634,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(descriptiveLocationEClass, DescriptiveLocation.class, "DescriptiveLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDescriptiveLocation_Directions(), ecorePackage.getEString(), "directions", null, 1, 1, DescriptiveLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Initialize enums and add enum literals
-		initEEnum(containerTypeEEnum, ContainerType.class, "ContainerType");
-		addEEnumLiteral(containerTypeEEnum, ContainerType.BIN);
-		addEEnumLiteral(containerTypeEEnum, ContainerType.CAN);
-
-		initEEnum(unitOfMeasureEEnum, UnitOfMeasure.class, "UnitOfMeasure");
-		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.LITRE);
-		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.KILOGRAM);
-		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.UNKNOWN);
 
 		// Initialize data types
 		initEDataType(transactionIDEDataType, String.class, "TransactionID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
