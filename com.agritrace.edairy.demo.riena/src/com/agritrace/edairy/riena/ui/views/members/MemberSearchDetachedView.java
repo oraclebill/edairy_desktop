@@ -202,7 +202,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 
 	}
 
-
+
 
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
