@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.agritrace.edairy.desktop.feature"
+      label="eDairy Manager Desktop"
+      version="1.0.0.qualifier"
+      provider-name="AGRITRACE"
+      exclusive="true">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <update label="dummy update site" url="http://dummy.org/update"/>
+   </url>
+
+   <includes
+         id="org.eclipse.rcp"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="javax.persistence" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.persistence.jpa" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.riena.client" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.databinding" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.common" version="1.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.agritrace.edairy.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.riena.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.services"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

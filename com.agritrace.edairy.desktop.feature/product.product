@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="eDairy Desktop Manager" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.riena.ui.edairy_desktop_product" application="com.agritrace.edairy.riena.ui.application" version="0.1.0" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <launcher name="edairymgr">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="com.agritrace.edairy.model"/>
+      <plugin id="com.agritrace.edairy.riena.ui"/>
+      <plugin id="com.caucho.hessian"/>
+      <plugin id="com.ibm.icu"/>
+      <plugin id="javax.persistence"/>
+      <plugin id="javax.servlet"/>
+      <plugin id="org.apache.commons.beanutils"/>
+      <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.beans"/>
+      <plugin id="org.eclipse.core.databinding.observable"/>
+      <plugin id="org.eclipse.core.databinding.property"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.databinding"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.log"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
+      <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.persistence.asm"/>
+      <plugin id="org.eclipse.persistence.core"/>
+      <plugin id="org.eclipse.persistence.jpa"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox" fragment="true"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
+      <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
+      <plugin id="org.eclipse.riena.beans.common"/>
+      <plugin id="org.eclipse.riena.client"/>
+      <plugin id="org.eclipse.riena.communication.console"/>
+      <plugin id="org.eclipse.riena.communication.core"/>
+      <plugin id="org.eclipse.riena.communication.factory.hessian"/>
+      <plugin id="org.eclipse.riena.core"/>
+      <plugin id="org.eclipse.riena.navigation"/>
+      <plugin id="org.eclipse.riena.navigation.ui"/>
+      <plugin id="org.eclipse.riena.navigation.ui.swt"/>
+      <plugin id="org.eclipse.riena.ui.common"/>
+      <plugin id="org.eclipse.riena.ui.core"/>
+      <plugin id="org.eclipse.riena.ui.filter"/>
+      <plugin id="org.eclipse.riena.ui.ridgets"/>
+      <plugin id="org.eclipse.riena.ui.ridgets.swt"/>
+      <plugin id="org.eclipse.riena.ui.swt"/>
+      <plugin id="org.eclipse.riena.ui.swt.rcp"/>
+      <plugin id="org.eclipse.riena.ui.workarea"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+      <plugin id="org.junit"/>
+      <plugin id="org.pushingpixels.trident"/>
+   </plugins>
+
+   <features>
+      <feature id="com.agritrace.edairy.desktop.feature" version="1.0.0.qualifier"/>
+      <feature id="org.eclipse.emf" version="2.6.0.v201003151457-7a8X-9e7C9iV-xQXul4-DgnI8"/>
+      <feature id="org.eclipse.emf.databinding" version="1.2.0.v201003151457-21-7w312114262568"/>
+      <feature id="org.eclipse.emf.ecore" version="2.6.0.v201003151457-777F-9oB5855E8K8HKQ"/>
+      <feature id="org.eclipse.emf.codegen" version="2.5.0.v201003151457-35-7w312114262568"/>
+   </features>
+
+
+</product>
