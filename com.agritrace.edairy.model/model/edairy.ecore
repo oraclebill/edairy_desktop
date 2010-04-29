@@ -62,17 +62,17 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="TransactionID" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.String"/>
-    <eClassifiers xsi:type="ecore:EEnum" name="ContainerType">
-      <eLiterals name="BIN"/>
-      <eLiterals name="CAN" value="1"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="UnitOfMeasure">
-      <eLiterals name="LITRE"/>
-      <eLiterals name="KILOGRAM" value="1"/>
-      <eLiterals name="UNKNOWN" value="2"/>
-    </eClassifiers>
     <eSubpackages name="tracking" nsURI="http://com.agritrace.edairy.model/tracking/"
         nsPrefix="tracking">
+      <eClassifiers xsi:type="ecore:EEnum" name="UnitOfMeasure">
+        <eLiterals name="LITRE"/>
+        <eLiterals name="KILOGRAM" value="1"/>
+        <eLiterals name="UNKNOWN" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ContainerType">
+        <eLiterals name="BIN"/>
+        <eLiterals name="CAN" value="1"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="#//model/Company">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -92,11 +92,12 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Container">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
             eType="#//model/dairy/Membership"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="units" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//model/tracking/ContainerType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="measureType" eType="#//model/tracking/UnitOfMeasure"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//model/Company">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber"
@@ -271,6 +272,8 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
             eType="#//model/Person"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="containers" upperBound="-1"
+            eType="#//model/tracking/Container"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
         <eLiterals name="Active"/>

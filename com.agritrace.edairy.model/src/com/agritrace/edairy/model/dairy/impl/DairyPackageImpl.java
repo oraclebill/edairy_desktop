@@ -943,6 +943,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMembership_Containers() {
+		return (EReference)membershipEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBin() {
 		return binEClass;
 	}
@@ -1075,6 +1084,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(membershipEClass, MEMBERSHIP__DEFAULT_ROUTE);
 		createEReference(membershipEClass, MEMBERSHIP__MEMBER);
 		createEAttribute(membershipEClass, MEMBERSHIP__MEMBER_ID);
+		createEReference(membershipEClass, MEMBERSHIP__CONTAINERS);
 
 		binEClass = createEClass(BIN);
 
@@ -1212,6 +1222,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getMembership_DefaultRoute(), this.getRouteDefinition(), null, "defaultRoute", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMembership_Member(), theModelPackage.getPerson(), null, "member", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_MemberId(), ecorePackage.getEString(), "memberId", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMembership_Containers(), theTrackingPackage.getContainer(), null, "containers", null, 0, -1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(binEClass, Bin.class, "Bin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

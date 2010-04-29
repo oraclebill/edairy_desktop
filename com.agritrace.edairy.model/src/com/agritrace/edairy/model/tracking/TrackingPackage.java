@@ -10,6 +10,7 @@ import com.agritrace.edairy.model.ModelPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -246,22 +247,13 @@ public interface TrackingPackage extends EPackage {
 	int CONTAINER__CONTAINER_ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTAINER__SIZE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__OWNER = 2;
+	int CONTAINER__OWNER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Capacity</b></em>' attribute.
@@ -270,7 +262,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__CAPACITY = 3;
+	int CONTAINER__CAPACITY = 2;
 
 	/**
 	 * The feature id for the '<em><b>Units</b></em>' attribute.
@@ -279,7 +271,25 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__UNITS = 4;
+	int CONTAINER__UNITS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__TYPE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Measure Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__MEASURE_TYPE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Container</em>' class.
@@ -288,7 +298,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_FEATURE_COUNT = 5;
+	int CONTAINER_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.tracking.impl.ProcessorImpl <em>Processor</em>}' class.
@@ -638,6 +648,26 @@ public interface TrackingPackage extends EPackage {
 	 */
 	int DELIVERY_FEATURE_COUNT = TRANSFER_FEATURE_COUNT + 2;
 
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.tracking.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.tracking.UnitOfMeasure
+	 * @see com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl#getUnitOfMeasure()
+	 * @generated
+	 */
+	int UNIT_OF_MEASURE = 10;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.tracking.ContainerType <em>Container Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.tracking.ContainerType
+	 * @see com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl#getContainerType()
+	 * @generated
+	 */
+	int CONTAINER_TYPE = 11;
+
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.tracking.Dairy <em>Dairy</em>}'.
@@ -779,17 +809,6 @@ public interface TrackingPackage extends EPackage {
 	EAttribute getContainer_ContainerId();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.tracking.Container#getSize <em>Size</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Size</em>'.
-	 * @see com.agritrace.edairy.model.tracking.Container#getSize()
-	 * @see #getContainer()
-	 * @generated
-	 */
-	EAttribute getContainer_Size();
-
-	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.model.tracking.Container#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -821,6 +840,28 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getContainer_Units();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.tracking.Container#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see com.agritrace.edairy.model.tracking.Container#getType()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EAttribute getContainer_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.tracking.Container#getMeasureType <em>Measure Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Measure Type</em>'.
+	 * @see com.agritrace.edairy.model.tracking.Container#getMeasureType()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EAttribute getContainer_MeasureType();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.tracking.Processor <em>Processor</em>}'.
@@ -993,6 +1034,26 @@ public interface TrackingPackage extends EPackage {
 	EReference getTransfer_Container();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.tracking.UnitOfMeasure <em>Unit Of Measure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Unit Of Measure</em>'.
+	 * @see com.agritrace.edairy.model.tracking.UnitOfMeasure
+	 * @generated
+	 */
+	EEnum getUnitOfMeasure();
+
+	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.tracking.ContainerType <em>Container Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Container Type</em>'.
+	 * @see com.agritrace.edairy.model.tracking.ContainerType
+	 * @generated
+	 */
+	EEnum getContainerType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1127,14 +1188,6 @@ public interface TrackingPackage extends EPackage {
 		EAttribute CONTAINER__CONTAINER_ID = eINSTANCE.getContainer_ContainerId();
 
 		/**
-		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTAINER__SIZE = eINSTANCE.getContainer_Size();
-
-		/**
 		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1157,6 +1210,22 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTAINER__UNITS = eINSTANCE.getContainer_Units();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTAINER__TYPE = eINSTANCE.getContainer_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Measure Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTAINER__MEASURE_TYPE = eINSTANCE.getContainer_MeasureType();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.tracking.impl.ProcessorImpl <em>Processor</em>}' class.
@@ -1297,6 +1366,26 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFER__CONTAINER = eINSTANCE.getTransfer_Container();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.tracking.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.tracking.UnitOfMeasure
+		 * @see com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl#getUnitOfMeasure()
+		 * @generated
+		 */
+		EEnum UNIT_OF_MEASURE = eINSTANCE.getUnitOfMeasure();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.tracking.ContainerType <em>Container Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.tracking.ContainerType
+		 * @see com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl#getContainerType()
+		 * @generated
+		 */
+		EEnum CONTAINER_TYPE = eINSTANCE.getContainerType();
 
 	}
 

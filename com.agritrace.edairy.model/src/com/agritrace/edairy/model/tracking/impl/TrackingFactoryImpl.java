@@ -9,6 +9,7 @@ package com.agritrace.edairy.model.tracking.impl;
 import com.agritrace.edairy.model.tracking.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -72,6 +73,40 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 			case TrackingPackage.TRANSFER: return createTransfer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case TrackingPackage.UNIT_OF_MEASURE:
+				return createUnitOfMeasureFromString(eDataType, initialValue);
+			case TrackingPackage.CONTAINER_TYPE:
+				return createContainerTypeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case TrackingPackage.UNIT_OF_MEASURE:
+				return convertUnitOfMeasureToString(eDataType, instanceValue);
+			case TrackingPackage.CONTAINER_TYPE:
+				return convertContainerTypeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -173,6 +208,46 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	public Transfer createTransfer() {
 		TransferImpl transfer = new TransferImpl();
 		return transfer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
+		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUnitOfMeasureToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
+		ContainerType result = ContainerType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

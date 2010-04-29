@@ -16,6 +16,7 @@ import com.agritrace.edairy.model.impl.ModelPackageImpl;
 
 import com.agritrace.edairy.model.tracking.Animal;
 import com.agritrace.edairy.model.tracking.Collection;
+import com.agritrace.edairy.model.tracking.ContainerType;
 import com.agritrace.edairy.model.tracking.Dairy;
 import com.agritrace.edairy.model.tracking.Delivery;
 import com.agritrace.edairy.model.tracking.Farm;
@@ -25,6 +26,7 @@ import com.agritrace.edairy.model.tracking.Supplier;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 import com.agritrace.edairy.model.tracking.Transfer;
+import com.agritrace.edairy.model.tracking.UnitOfMeasure;
 
 import com.agritrace.edairy.services.ServicesPackage;
 
@@ -32,6 +34,7 @@ import com.agritrace.edairy.services.impl.ServicesPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -113,6 +116,20 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	private EClass transferEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum unitOfMeasureEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum containerTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -308,17 +325,8 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getContainer_Size() {
-		return (EAttribute)containerEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getContainer_Owner() {
-		return (EReference)containerEClass.getEStructuralFeatures().get(2);
+		return (EReference)containerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -327,7 +335,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EAttribute getContainer_Capacity() {
-		return (EAttribute)containerEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)containerEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -336,7 +344,25 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EAttribute getContainer_Units() {
+		return (EAttribute)containerEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContainer_Type() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContainer_MeasureType() {
+		return (EAttribute)containerEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -488,6 +514,24 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getUnitOfMeasure() {
+		return unitOfMeasureEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getContainerType() {
+		return containerTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TrackingFactory getTrackingFactory() {
 		return (TrackingFactory)getEFactoryInstance();
 	}
@@ -527,10 +571,11 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		containerEClass = createEClass(CONTAINER);
 		createEAttribute(containerEClass, CONTAINER__CONTAINER_ID);
-		createEAttribute(containerEClass, CONTAINER__SIZE);
 		createEReference(containerEClass, CONTAINER__OWNER);
 		createEAttribute(containerEClass, CONTAINER__CAPACITY);
 		createEAttribute(containerEClass, CONTAINER__UNITS);
+		createEAttribute(containerEClass, CONTAINER__TYPE);
+		createEAttribute(containerEClass, CONTAINER__MEASURE_TYPE);
 
 		processorEClass = createEClass(PROCESSOR);
 		createEAttribute(processorEClass, PROCESSOR__REGISTRATION_NUMBER);
@@ -553,6 +598,10 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEAttribute(transferEClass, TRANSFER__QUANTITY);
 		createEReference(transferEClass, TRANSFER__DAIRY);
 		createEReference(transferEClass, TRANSFER__CONTAINER);
+
+		// Create enums
+		unitOfMeasureEEnum = createEEnum(UNIT_OF_MEASURE);
+		containerTypeEEnum = createEEnum(CONTAINER_TYPE);
 	}
 
 	/**
@@ -610,10 +659,11 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		initEClass(containerEClass, com.agritrace.edairy.model.tracking.Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContainer_ContainerId(), ecorePackage.getEString(), "containerId", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContainer_Size(), ecorePackage.getEDoubleObject(), "size", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainer_Owner(), theDairyPackage.getMembership(), null, "owner", null, 1, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Units(), ecorePackage.getEDouble(), "units", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContainer_Type(), this.getContainerType(), "type", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContainer_MeasureType(), this.getUnitOfMeasure(), "measureType", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(processorEClass, Processor.class, "Processor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProcessor_RegistrationNumber(), ecorePackage.getEString(), "registrationNumber", null, 0, 1, Processor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -636,6 +686,16 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEAttribute(getTransfer_Quantity(), ecorePackage.getEDouble(), "quantity", null, 0, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransfer_Dairy(), this.getDairy(), null, "dairy", null, 1, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransfer_Container(), this.getContainer(), null, "container", null, 1, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(unitOfMeasureEEnum, UnitOfMeasure.class, "UnitOfMeasure");
+		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.LITRE);
+		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.KILOGRAM);
+		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.UNKNOWN);
+
+		initEEnum(containerTypeEEnum, ContainerType.class, "ContainerType");
+		addEEnumLiteral(containerTypeEEnum, ContainerType.BIN);
+		addEEnumLiteral(containerTypeEEnum, ContainerType.CAN);
 	}
 
 } //TrackingPackageImpl

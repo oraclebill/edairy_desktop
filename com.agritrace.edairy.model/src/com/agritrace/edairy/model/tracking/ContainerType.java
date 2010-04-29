@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.model;
+package com.agritrace.edairy.model.tracking;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,119 +14,93 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Unit Of Measure</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Container Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see com.agritrace.edairy.model.ModelPackage#getUnitOfMeasure()
+ * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainerType()
  * @model
  * @generated
  */
-public enum UnitOfMeasure implements Enumerator {
+public enum ContainerType implements Enumerator {
 	/**
-	 * The '<em><b>LITRE</b></em>' literal object.
+	 * The '<em><b>BIN</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LITRE_VALUE
+	 * @see #BIN_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	LITRE(0, "LITRE", "LITRE"),
+	BIN(0, "BIN", "BIN"),
 
 	/**
-	 * The '<em><b>KILOGRAM</b></em>' literal object.
+	 * The '<em><b>CAN</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #KILOGRAM_VALUE
+	 * @see #CAN_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	KILOGRAM(1, "KILOGRAM", "KILOGRAM"),
+	CAN(1, "CAN", "CAN");
 
 	/**
-	 * The '<em><b>UNKNOWN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNKNOWN_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	UNKNOWN(2, "UNKNOWN", "UNKNOWN");
-
-	/**
-	 * The '<em><b>LITRE</b></em>' literal value.
+	 * The '<em><b>BIN</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>LITRE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>BIN</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LITRE
+	 * @see #BIN
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LITRE_VALUE = 0;
+	public static final int BIN_VALUE = 0;
 
 	/**
-	 * The '<em><b>KILOGRAM</b></em>' literal value.
+	 * The '<em><b>CAN</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>KILOGRAM</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>CAN</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #KILOGRAM
+	 * @see #CAN
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int KILOGRAM_VALUE = 1;
+	public static final int CAN_VALUE = 1;
 
 	/**
-	 * The '<em><b>UNKNOWN</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>UNKNOWN</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #UNKNOWN
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int UNKNOWN_VALUE = 2;
-
-	/**
-	 * An array of all the '<em><b>Unit Of Measure</b></em>' enumerators.
+	 * An array of all the '<em><b>Container Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final UnitOfMeasure[] VALUES_ARRAY =
-		new UnitOfMeasure[] {
-			LITRE,
-			KILOGRAM,
-			UNKNOWN,
+	private static final ContainerType[] VALUES_ARRAY =
+		new ContainerType[] {
+			BIN,
+			CAN,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Unit Of Measure</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Container Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<UnitOfMeasure> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ContainerType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Unit Of Measure</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Container Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static UnitOfMeasure get(String literal) {
+	public static ContainerType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			UnitOfMeasure result = VALUES_ARRAY[i];
+			ContainerType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -135,14 +109,14 @@ public enum UnitOfMeasure implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Unit Of Measure</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Container Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static UnitOfMeasure getByName(String name) {
+	public static ContainerType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			UnitOfMeasure result = VALUES_ARRAY[i];
+			ContainerType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -151,16 +125,15 @@ public enum UnitOfMeasure implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Unit Of Measure</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Container Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static UnitOfMeasure get(int value) {
+	public static ContainerType get(int value) {
 		switch (value) {
-			case LITRE_VALUE: return LITRE;
-			case KILOGRAM_VALUE: return KILOGRAM;
-			case UNKNOWN_VALUE: return UNKNOWN;
+			case BIN_VALUE: return BIN;
+			case CAN_VALUE: return CAN;
 		}
 		return null;
 	}
@@ -192,7 +165,7 @@ public enum UnitOfMeasure implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private UnitOfMeasure(int value, String name, String literal) {
+	private ContainerType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -236,4 +209,4 @@ public enum UnitOfMeasure implements Enumerator {
 		return literal;
 	}
 	
-} //UnitOfMeasure
+} //ContainerType

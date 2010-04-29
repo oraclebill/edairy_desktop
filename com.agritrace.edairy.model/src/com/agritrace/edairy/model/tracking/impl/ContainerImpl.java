@@ -9,7 +9,9 @@ package com.agritrace.edairy.model.tracking.impl;
 import com.agritrace.edairy.model.dairy.Membership;
 
 import com.agritrace.edairy.model.tracking.Container;
+import com.agritrace.edairy.model.tracking.ContainerType;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
+import com.agritrace.edairy.model.tracking.UnitOfMeasure;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -27,10 +29,11 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getContainerId <em>Container Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getSize <em>Size</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getType <em>Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getMeasureType <em>Measure Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,26 +59,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @ordered
 	 */
 	protected String containerId = CONTAINER_ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Double SIZE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected Double size = SIZE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
@@ -128,6 +111,46 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	protected double units = UNITS_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ContainerType TYPE_EDEFAULT = ContainerType.BIN;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ContainerType type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMeasureType() <em>Measure Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMeasureType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final UnitOfMeasure MEASURE_TYPE_EDEFAULT = UnitOfMeasure.LITRE;
+
+	/**
+	 * The cached value of the '{@link #getMeasureType() <em>Measure Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMeasureType()
+	 * @generated
+	 * @ordered
+	 */
+	protected UnitOfMeasure measureType = MEASURE_TYPE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -165,27 +188,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		containerId = newContainerId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__CONTAINER_ID, oldContainerId, containerId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Double getSize() {
-		return size;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSize(Double newSize) {
-		Double oldSize = size;
-		size = newSize;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__SIZE, oldSize, size));
 	}
 
 	/**
@@ -273,13 +275,53 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ContainerType getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(ContainerType newType) {
+		ContainerType oldType = type;
+		type = newType == null ? TYPE_EDEFAULT : newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitOfMeasure getMeasureType() {
+		return measureType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMeasureType(UnitOfMeasure newMeasureType) {
+		UnitOfMeasure oldMeasureType = measureType;
+		measureType = newMeasureType == null ? MEASURE_TYPE_EDEFAULT : newMeasureType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__MEASURE_TYPE, oldMeasureType, measureType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return getContainerId();
-			case TrackingPackage.CONTAINER__SIZE:
-				return getSize();
 			case TrackingPackage.CONTAINER__OWNER:
 				if (resolve) return getOwner();
 				return basicGetOwner();
@@ -287,6 +329,10 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return getCapacity();
 			case TrackingPackage.CONTAINER__UNITS:
 				return getUnits();
+			case TrackingPackage.CONTAINER__TYPE:
+				return getType();
+			case TrackingPackage.CONTAINER__MEASURE_TYPE:
+				return getMeasureType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,9 +348,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId((String)newValue);
 				return;
-			case TrackingPackage.CONTAINER__SIZE:
-				setSize((Double)newValue);
-				return;
 			case TrackingPackage.CONTAINER__OWNER:
 				setOwner((Membership)newValue);
 				return;
@@ -313,6 +356,12 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return;
 			case TrackingPackage.CONTAINER__UNITS:
 				setUnits((Double)newValue);
+				return;
+			case TrackingPackage.CONTAINER__TYPE:
+				setType((ContainerType)newValue);
+				return;
+			case TrackingPackage.CONTAINER__MEASURE_TYPE:
+				setMeasureType((UnitOfMeasure)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -329,9 +378,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId(CONTAINER_ID_EDEFAULT);
 				return;
-			case TrackingPackage.CONTAINER__SIZE:
-				setSize(SIZE_EDEFAULT);
-				return;
 			case TrackingPackage.CONTAINER__OWNER:
 				setOwner((Membership)null);
 				return;
@@ -340,6 +386,12 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return;
 			case TrackingPackage.CONTAINER__UNITS:
 				setUnits(UNITS_EDEFAULT);
+				return;
+			case TrackingPackage.CONTAINER__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+			case TrackingPackage.CONTAINER__MEASURE_TYPE:
+				setMeasureType(MEASURE_TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -355,14 +407,16 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return CONTAINER_ID_EDEFAULT == null ? containerId != null : !CONTAINER_ID_EDEFAULT.equals(containerId);
-			case TrackingPackage.CONTAINER__SIZE:
-				return SIZE_EDEFAULT == null ? size != null : !SIZE_EDEFAULT.equals(size);
 			case TrackingPackage.CONTAINER__OWNER:
 				return owner != null;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				return capacity != CAPACITY_EDEFAULT;
 			case TrackingPackage.CONTAINER__UNITS:
 				return units != UNITS_EDEFAULT;
+			case TrackingPackage.CONTAINER__TYPE:
+				return type != TYPE_EDEFAULT;
+			case TrackingPackage.CONTAINER__MEASURE_TYPE:
+				return measureType != MEASURE_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -379,12 +433,14 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (containerId: ");
 		result.append(containerId);
-		result.append(", size: ");
-		result.append(size);
 		result.append(", capacity: ");
 		result.append(capacity);
 		result.append(", units: ");
 		result.append(units);
+		result.append(", type: ");
+		result.append(type);
+		result.append(", measureType: ");
+		result.append(measureType);
 		result.append(')');
 		return result.toString();
 	}
