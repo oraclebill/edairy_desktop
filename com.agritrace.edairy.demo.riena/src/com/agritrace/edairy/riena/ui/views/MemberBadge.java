@@ -1,19 +1,16 @@
 package com.agritrace.edairy.riena.ui.views;
 
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.ui.core.uiprocess.UICallbackDispatcher;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.RowLayout;
-import com.swtdesigner.ResourceManager;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+
+import com.agritrace.edairy.riena.ui.EDairyActivator;
+import com.agritrace.edairy.riena.ui.ImageRegistry;
 import com.swtdesigner.SWTResourceManager;
 
 public class MemberBadge extends Composite {
@@ -37,7 +34,7 @@ public class MemberBadge extends Composite {
 		panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		Label lblFarmerImage = UIControlsFactory.createLabel(main, "");
-		lblFarmerImage.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.riena.ui", "resources/farmerheadshot.png"));
+		lblFarmerImage.setImage(EDairyActivator.getImage(ImageRegistry.sample_memberphoto));
 		lblFarmerImage.setLayoutData( new GridData(SWT.RIGHT, SWT.TOP, false, true, 1, 1) );
 
 		Label lblFarmerName = UIControlsFactory.createLabel(panel, name);

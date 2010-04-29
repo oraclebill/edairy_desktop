@@ -13,9 +13,9 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 
-import com.agritrace.edairy.riena.ui.views.data.Member;
+import com.agritrace.edairy.riena.ui.views.data.MemberShip;
 import com.agritrace.edairy.riena.ui.views.data.MemberFactory;
-import com.agritrace.edairy.riena.ui.views.data.Member.STATUS;
+import com.agritrace.edairy.riena.ui.views.data.MemberShip.STATUS;
 
 public class MemberInfoViewController extends SubModuleController {
 
@@ -30,14 +30,14 @@ public class MemberInfoViewController extends SubModuleController {
 
 		// private static final String[] GENDER = { Staff.FEMALE, Staff.MALE };
 
-		private final Member workingCopy = createWorkingCopy();
+		private final MemberShip workingCopy = createWorkingCopy();
 
 		public void configureRidgets(IRidgetContainer container) {
 
 			// member Id
 			ITextRidget txtId = (ITextRidget) container.getRidget("id"); //$NON-NLS-1$
 			txtId.setMandatory(true);
-			txtId.bindToModel(workingCopy, Member.PROPERTY_ID);
+			txtId.bindToModel(workingCopy, MemberShip.PROPERTY_ID);
 			txtId.updateFromModel();
 
 			/**
@@ -57,28 +57,28 @@ public class MemberInfoViewController extends SubModuleController {
 
 			IComboRidget comboStatus = (IComboRidget) container
 					.getRidget("status"); //$NON-NLS-1$
-			comboStatus
-					.bindToModel(
+			comboStatus.bindToModel(
 							workingCopy,
-							"statuses", STATUS.class, null, workingCopy, Member.PROPERTY_STATUS); //$NON-NLS-1$ //$NON-NLS-2$
+							"statuses", STATUS.class, null, workingCopy, MemberShip.PROPERTY_STATUS); //$NON-NLS-1$ //$NON-NLS-2$
 			comboStatus.updateFromModel();
+			
 
 			// first name
 			ITextRidget txtFirst = (ITextRidget) container.getRidget("first"); //$NON-NLS-1$
 			txtFirst.setMandatory(true);
-			txtFirst.bindToModel(workingCopy, Member.PROPERTY_FIRSTNAME);
+			txtFirst.bindToModel(workingCopy, MemberShip.PROPERTY_FIRSTNAME);
 			txtFirst.updateFromModel();
 
 			// last name
 			ITextRidget txtLast = (ITextRidget) container.getRidget("last"); //$NON-NLS-1$
 			txtLast.setMandatory(true);
-			txtLast.bindToModel(workingCopy, Member.PROPERTY_LASTNAME);
+			txtLast.bindToModel(workingCopy, MemberShip.PROPERTY_LASTNAME);
 			txtLast.updateFromModel();
 
 			// phone
 			ITextRidget txtPhone = (ITextRidget) container.getRidget("phone"); //$NON-NLS-1$
 			txtPhone.setMandatory(true);
-			txtPhone.bindToModel(workingCopy, Member.PROPERTY_PHONENUMBER);
+			txtPhone.bindToModel(workingCopy, MemberShip.PROPERTY_PHONENUMBER);
 			txtPhone.updateFromModel();
 
 			// address
@@ -113,14 +113,14 @@ public class MemberInfoViewController extends SubModuleController {
 
 		}
 
-		public Member createWorkingCopy() {
-			return new Member("", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		public MemberShip createWorkingCopy() {
+			return new MemberShip("", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		public Member copyBean(final Object source, final Object target) {
-			Member from = source != null ? (Member) source
+		public MemberShip copyBean(final Object source, final Object target) {
+			MemberShip from = source != null ? (MemberShip) source
 					: createWorkingCopy();
-			Member to = target != null ? (Member) target : createWorkingCopy();
+			MemberShip to = target != null ? (MemberShip) target : createWorkingCopy();
 			to.setFirstname(from.getFirstname());
 			to.setLastname(from.getLastname());
 			to.setGender(from.getGender());
@@ -139,8 +139,8 @@ public class MemberInfoViewController extends SubModuleController {
 
 		@Override
 		public boolean isChanged(Object source, Object target) {
-			Member p1 = (Member) source;
-			Member p2 = (Member) target;
+			MemberShip p1 = (MemberShip) source;
+			MemberShip p2 = (MemberShip) target;
 			boolean equals = p1.getFirstname().equals(p2.getFirstname())
 					&& p1.getLastname().equals(p2.getLastname())
 					&& p1.getGender().equals(p2.getGender())
@@ -158,7 +158,7 @@ public class MemberInfoViewController extends SubModuleController {
 		}
 	}
 
-	private List<Member> input = MemberFactory.createMemberList();
+	private List<MemberShip> input = MemberFactory.createMemberList();
 
 	@Override
 	public void configureRidgets() {
@@ -170,8 +170,8 @@ public class MemberInfoViewController extends SubModuleController {
 		final IMasterDetailsRidget master = (IMasterDetailsRidget) getRidget("master"); //$NON-NLS-1$
 		if (master != null) {
 			master.setDelegate(new MemberDelegation());
-			master.bindToModel(new WritableList(input, Member.class),
-					Member.class, properties, headers);
+			master.bindToModel(new WritableList(input, MemberShip.class),
+					MemberShip.class, properties, headers);
 			master.updateFromModel();
 
 			IActionRidget actionApply = master.getRidget(IActionRidget.class,

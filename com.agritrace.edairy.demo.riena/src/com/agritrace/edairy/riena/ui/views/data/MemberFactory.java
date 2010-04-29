@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.riena.beans.common.Address;
 
-import com.agritrace.edairy.riena.ui.views.data.Member.CREDIT;
+import com.agritrace.edairy.riena.ui.views.data.MemberShip.CREDIT;
 
 public class MemberFactory {
 	
@@ -16,10 +16,10 @@ public class MemberFactory {
 	/**
 	 * Create a collection of persons.
 	 */
-	public static List<Member> createMemberList() {
-		List<Member> newList = new ArrayList<Member>();
+	public static List<MemberShip> createMemberList() {
+		List<MemberShip> newList = new ArrayList<MemberShip>();
 
-		Member person = new Member("Joseph", "Limuru");
+		MemberShip person = new MemberShip("Joseph", "Limuru");
 		person.setId(1002);
 		person.setPhoneNumber("(608)923-2345");
 		person.setAddress("87 south Rd., Princeton Junction, NJ 08550");
@@ -35,7 +35,7 @@ public class MemberFactory {
 
 		newList.add(person);
 
-		person  = new Member("John", "Smith");
+		person  = new MemberShip("John", "Smith");
 		person.setId(1045);
 		person.setPhoneNumber("(608)923-2488");
 		person.setAddress("222 Rading Rd., Princeton Junction, NJ 08550");

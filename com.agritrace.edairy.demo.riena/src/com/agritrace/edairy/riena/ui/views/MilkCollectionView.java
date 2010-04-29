@@ -25,7 +25,7 @@ import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
-// import org.eclipse.swt.internal.ole.win32.COMObject;
+import org.eclipse.swt.internal.ole.win32.COMObject;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -43,7 +43,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.riena.ui.Activator;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
 import com.agritrace.edairy.riena.ui.views.data.CreditRecord;
 import com.agritrace.edairy.riena.ui.views.data.MilkRecord;
@@ -51,8 +51,6 @@ import com.agritrace.edairy.riena.ui.views.data.MilkRecordsFactory;
 import com.agritrace.edairy.riena.ui.views.data.MilkRecord.TestResult;
 
 public class MilkCollectionView extends ViewPart implements SelectionListener {
-	public MilkCollectionView() {
-	}
 
 	public static final String ID = MilkCollectionView.class.getName();
 
@@ -81,7 +79,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 	private List<MilkRecord> input = MilkRecordsFactory.createMilkRecords();
 
 
-	@Override
+
 	public void createPartControl(Composite parent) {
 		// parent.setBackground(LnfManager.getLnf().getColor(
 		// LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -132,7 +130,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		dateField.setText("3/22/2010");
 
 		calendarButton = new Button(collectionGroup, SWT.PUSH);
-		Image searchImage = Activator.getImage(ImageRegistry.search);
+		Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
 		calendarButton.setImage(searchImage);
 
 		calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
@@ -284,7 +282,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 	}
 
 
-	@Override
+
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
@@ -357,7 +355,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		treePanel.setLayout(layout);
 	}
 
-	@Override
+
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == addResultsButton) {
 			MilkRecord newRecord = new MilkRecord();
@@ -399,7 +397,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 
 	}
 
-	@Override
+
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
 
@@ -521,7 +519,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 			case 8:
 				valueString = ((String) value).trim();
 				Double number ;
-				if(valueString==null || valueString.isEmpty()){
+				if(valueString==null || valueString.equals("")){
 					valueString="0";
 				}
 				number = new Double(valueString);
@@ -547,37 +545,37 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 
 	public class MilkRecordLabelProvider implements ITableLabelProvider {
 
-		@Override
+		
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+		
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+		
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+		
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+		
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof MilkRecord){
 				MilkRecord record = (MilkRecord)element;

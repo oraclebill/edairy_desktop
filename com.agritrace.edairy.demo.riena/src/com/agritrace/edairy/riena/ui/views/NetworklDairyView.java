@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.riena.ui.Activator;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
 
 public class NetworklDairyView extends SubModuleView {
@@ -68,7 +68,7 @@ public class NetworklDairyView extends SubModuleView {
 		layout.numColumns = 1;
 		result.setLayout(layout);
 
-		PersonInfoMDList mdComposite = new PersonInfoMDList(
+		StaffInfoMasterDetailsComposite mdComposite = new StaffInfoMasterDetailsComposite(
 				result, SWT.NONE);
 		Composite details = mdComposite.getDetails();
 		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -99,7 +99,7 @@ public class NetworklDairyView extends SubModuleView {
 		GridData imagData = new GridData(SWT.FILL,SWT.TOP,false,false);
 		imagData.verticalSpan = 4;
 
-		Image photoImage = Activator.getImage(ImageRegistry.smileFace);
+		Image photoImage = EDairyActivator.getImage(ImageRegistry.smileFace);
 		imageLable.setImage(photoImage);
 		imageLable.setLayoutData(imagData);
 

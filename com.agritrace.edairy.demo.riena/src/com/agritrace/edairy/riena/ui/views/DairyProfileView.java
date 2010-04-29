@@ -26,7 +26,7 @@ import org.eclipse.ui.part.ViewPart;
 
 public class DairyProfileView extends ViewPart {
 
-	public static final String ID = "com.agritrace.edairy.riena.ui.views.DairyProfileView"; //$NON-NLS-1$
+	public static final String ID = "com.agritrace.edairy.demo.riena.views.DairyProfileView"; //$NON-NLS-1$
 
 	@Override
 	public void createPartControl(Composite parent) {

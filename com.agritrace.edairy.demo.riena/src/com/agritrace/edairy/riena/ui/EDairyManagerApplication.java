@@ -3,8 +3,6 @@
  */
 package com.agritrace.edairy.riena.ui;
 
-import org.eclipse.equinox.app.IApplication;
-import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -16,31 +14,31 @@ import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
-import org.eclipse.riena.navigation.ui.swt.views.ApplicationAdvisor;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.riena.ui.controllers.MemberInfoViewController;
+import com.agritrace.edairy.riena.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.riena.ui.controllers.StaffInfoViewController;
+import com.agritrace.edairy.riena.ui.controllers.members.MemberSearchViewController;
 import com.agritrace.edairy.riena.ui.views.BlankView;
 import com.agritrace.edairy.riena.ui.views.CreditJournalView;
 import com.agritrace.edairy.riena.ui.views.DairyHomeView;
 import com.agritrace.edairy.riena.ui.views.DairyProfileView;
 import com.agritrace.edairy.riena.ui.views.DeliveryView;
 import com.agritrace.edairy.riena.ui.views.InseminationRequestView;
-import com.agritrace.edairy.riena.ui.views.MemberListView;
 import com.agritrace.edairy.riena.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.riena.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.riena.ui.views.MembersInfoView;
+import com.agritrace.edairy.riena.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.riena.ui.views.MilkCollectionView;
 import com.agritrace.edairy.riena.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.riena.ui.views.MonthlyCreditReportView;
 import com.agritrace.edairy.riena.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.riena.ui.views.StaffInfoView;
 import com.agritrace.edairy.riena.ui.views.VeterinaryRequestView;
+import com.agritrace.edairy.riena.ui.views.members.MemberSearchView;
 
 /**
  * @author oraclebill
@@ -57,11 +55,12 @@ public class EDairyManagerApplication extends SwtApplication {
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
 	}
 
+	//    @Override
 	protected Bundle getBundle() {
-		return Activator.getDefault().getBundle();
+		return EDairyActivator.getDefault().getBundle();
 	}
 
-	@Override
+	
 	protected void initializeNodeDefaultIcon(INavigationNode<?> node) {
 		// TODO Auto-generated method stub
 		super.initializeNodeDefaultIcon(node);
@@ -93,7 +92,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
 				new NavigationNodeId("edm.supplychain"), "Milk Collection", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSupplyChain.setClosable(false);
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain, MilkCollectionView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain,MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Deliveries", moduleSupplyChain, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 //			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.accounts"), "Member Accounts", moduleSupplyChain, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -101,7 +100,7 @@ public class EDairyManagerApplication extends SwtApplication {
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleMembers.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Directory", moduleMembers, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search", moduleMembers, MemberListView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search", moduleMembers, MemberSearchView.ID,MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 //		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.farms"), "Member Farms", moduleMembers, MembersInfoView.ID); 
 
 		IModuleNode moduleServices = NodeFactory.createModule(

@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.riena.ui.Activator;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
 import com.agritrace.edairy.riena.ui.views.data.Item;
 import com.agritrace.edairy.riena.ui.views.data.ItemsFactory;
@@ -50,7 +50,7 @@ public class DeliveryView extends ViewPart {
 	
 	private List<Item> input = ItemsFactory.createItemList();
 
-	@Override
+
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 
@@ -74,7 +74,7 @@ public class DeliveryView extends ViewPart {
         dateField.setText("3/24/2010");
         
 		calendarButton = new Button(upperPanel, SWT.PUSH);
-		Image searchImage = Activator.getImage(ImageRegistry.search);
+		Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
 		calendarButton.setImage(searchImage);
 
 		calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
@@ -185,7 +185,7 @@ public class DeliveryView extends ViewPart {
 		addButton.setLayoutData(new GridData(SWT.FILL,SWT.TOP,false,false));
 		addButton.addSelectionListener(new SelectionListener() {
 			
-			@Override
+		
 			public void widgetSelected(SelectionEvent e) {
 				AddItemDialog addItem = new AddItemDialog(addButton.getShell());
 				if(addItem.open() ==Window.OK){
@@ -198,7 +198,7 @@ public class DeliveryView extends ViewPart {
 				}
 			}
 			
-			@Override
+		
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 				
@@ -209,7 +209,7 @@ public class DeliveryView extends ViewPart {
 		removeButton.setText("Remove");
 		removeButton.addSelectionListener(new SelectionListener() {
 			
-			@Override
+		
 			public void widgetSelected(SelectionEvent e) {
 				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
 				if(!selection.isEmpty()){
@@ -226,7 +226,7 @@ public class DeliveryView extends ViewPart {
 				
 			}
 			
-			@Override
+		
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 				
@@ -248,7 +248,7 @@ public class DeliveryView extends ViewPart {
 		cancelButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 	}
 
-	@Override
+
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
@@ -256,37 +256,37 @@ public class DeliveryView extends ViewPart {
 	
 	private class ItemLabelProivder implements ITableLabelProvider{
 
-		@Override
+		
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 			
 		}
 
-		@Override
+		
 		public void dispose() {
 			// TODO Auto-generated method stub
 			
 		}
 
-		@Override
+		
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 			
 		}
 
-		@Override
+		
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+		
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof Item){
 				switch(columnIndex){

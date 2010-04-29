@@ -47,7 +47,7 @@ public class MilkProductionReportView extends ViewPart {
 		
 		Label label = new Label(scrolledComposite, SWT.NONE);
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.riena.ui", "resources/eDairyReportTemplate-milkproduction.jpg"));
+		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/eDairyReportTemplate-milkproduction.jpg"));
 		scrolledComposite.setContent(label);
 		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}

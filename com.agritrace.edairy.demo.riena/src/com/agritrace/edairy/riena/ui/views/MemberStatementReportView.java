@@ -47,7 +47,7 @@ public class MemberStatementReportView extends ViewPart {
 		
 		Label label = new Label(scrolledComposite, SWT.NONE);
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.riena.ui", "resources/reports/eDairyReport-farmerstatement.jpg"));
+		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/reports/eDairyReport-farmerstatement.jpg"));
 		scrolledComposite.setContent(label);
 		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}

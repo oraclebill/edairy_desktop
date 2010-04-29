@@ -1,6 +1,7 @@
 package com.agritrace.edairy.riena.ui.views;
 
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -18,71 +19,65 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.riena.ui.Activator;
+import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
 
 public class InseminationRequestView extends VeterinaryRequestView {
-	
+
 	public static final String ID = InseminationRequestView.class.getName();
-	
+
 	private Text textArea;
-	
+
 	private Button calendarButton;
-	
+
 	protected void createHeadlerLabel(Composite parent){
-		
-
-		Label titleLabel = new Label(parent, SWT.NULL);
-		titleLabel.setText("Insemination Service Request");
-
+		Label titleLabel = UIControlsFactory.createLabel(parent, "Insemination Service Request");
 		Font labelFont = JFaceResources.getFontRegistry().getBold(
 				JFaceResources.HEADER_FONT);
 		titleLabel.setFont(labelFont);
 	}
 
 	protected void createRequestTypePanel(Composite parent) {
-		Composite requestTypePanel = new Composite(parent,
-				SWT.NULL);
+		Composite requestTypePanel = UIControlsFactory.createComposite(parent);
 		requestTypePanel.setLayout(new GridLayout(3, false));
 		GridData gd = new GridData(SWT.FILL,SWT.FILL, true, false);
 		gd.horizontalSpan =3;
 		requestTypePanel.setLayoutData(gd);
 
-//		Label requestTypeLabel = new Label(requestTypePanel, SWT.NULL);
-//		requestTypeLabel.setText("Request Type:");
-//		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
-//				SWT.BEGINNING, false, false));
-//
-//		Button clinicalButton = new Button(requestTypePanel, SWT.RADIO);
-//		clinicalButton.setText("clinical");
-//		clinicalButton.setSelection(false);
-////		clinicalButton.setEnabled(false);
-//		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-//				false, false));
-//
-//		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
-//		inseminationButton.setText("insemination");
-//		inseminationButton.setSelection(true);
-////		inseminationButton.setEnabled(false);
-//		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
-//				false, false));
+		Label requestTypeLabel = UIControlsFactory.createLabel(requestTypePanel, "Request Type:");
+
+		requestTypeLabel.setLayoutData(new GridData(SWT.BEGINNING,
+				SWT.BEGINNING, false, false));
+
+		Button clinicalButton = UIControlsFactory.createButton(requestTypePanel);
+		clinicalButton.setText("clinical");
+		clinicalButton.setSelection(false);
+		//		clinicalButton.setEnabled(false);
+		clinicalButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
+				false, false));
+
+		Button inseminationButton = new Button(requestTypePanel, SWT.RADIO);
+		inseminationButton.setText("insemination");
+		inseminationButton.setSelection(true);
+		//		inseminationButton.setEnabled(false);
+		inseminationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL,
+				false, false));
 	}
-	
+
 	protected void createBottomGroup(Composite parent) {
 		// request group
-		Group requestGroup = new Group(parent, SWT.NULL);
-		requestGroup.setText("Request Details");
+		Group requestGroup = UIControlsFactory.createGroup(parent, "Request Details");
 		requestGroup.setLayout(new GridLayout(3, false));
 		requestGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,3,1));
 
-		Label l =new Label(requestGroup, SWT.NULL); //$NON-NLS-1$
-		l.setText("Time Heat Detected:");
-		textArea = new Text(requestGroup, SWT.SINGLE|SWT.BORDER);
-	    textArea.setText("3/12/2010");
+		Label l =UIControlsFactory.createLabel(requestGroup, "Time Heat Detected:");
+
+		textArea = UIControlsFactory.createText(requestGroup, SWT.SINGLE|SWT.BORDER);
+		textArea.setText("3/12/2010");
 		textArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		
-		calendarButton = new Button(requestGroup, SWT.PUSH);
-		Image searchImage = Activator.getImage(ImageRegistry.search);
+
+		calendarButton = UIControlsFactory.createButton(requestGroup);
+		Image searchImage = EDairyActivator.getImage(ImageRegistry.calendar);
 		calendarButton.setImage(searchImage);
 		calendarButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
@@ -123,27 +118,17 @@ public class InseminationRequestView extends VeterinaryRequestView {
 			}
 		});
 
-		
-//		Group inseminationGroup = new Group(requestGroup, SWT.NULL);
-//		inseminationGroup.setText("");
-//		inseminationGroup.setLayout(new GridLayout(2, false));
-//		inseminationGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,2,1));
-//		
-		Label firstRequestLabel =new Label(requestGroup, SWT.NULL); //$NON-NLS-1$
-		firstRequestLabel.setText("Insemination Numbers");
-		
-		
+		Label firstRequestLabel =UIControlsFactory.createLabel(requestGroup, "Insemination Numbers"); //$NON-NLS-1$
 		Spinner spinner = new Spinner (requestGroup, SWT.BORDER);
 		spinner.setMinimum(0);
 		spinner.setMaximum(100);
-		spinner.setSelection(1);
 		spinner.setIncrement(1);
 		spinner.setPageIncrement(10);
 		spinner.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false));
 
 
-		
-		
+
+
 	}
 
 
