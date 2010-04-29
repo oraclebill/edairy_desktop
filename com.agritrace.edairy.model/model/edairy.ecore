@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="edairy"
-    nsURI="http://com.agritrace.edairy/model/" nsPrefix="edairy">
+    nsURI="http://com.agritrace.edairy/model/" nsPrefix="com.agritrace.edairy">
   <eSubpackages name="model" nsURI="http://com.agritrace.edairy.model/" nsPrefix="model">
     <eClassifiers xsi:type="ecore:EClass" name="Party" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
@@ -11,15 +11,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
           upperBound="-1" eType="#//model/Location" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Location" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="postalComponent" lowerBound="1"
-          eType="#//model/PostalLocation" containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MapLocation" eSuperTypes="#//model/Location">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PostalLocation" eSuperTypes="#//model/Location">
+    <eClassifiers xsi:type="ecore:EClass" name="Location">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="province" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -27,17 +23,22 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="district" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="subLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="village" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="village" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="postalCode" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="estate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="section" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="StatutoryLocation" eSuperTypes="#//model/Location">
+    <eClassifiers xsi:type="ecore:EClass" name="StatutoryLocation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="landReferenceNumber"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Audited" abstract="true" interface="true">
+    <eClassifiers xsi:type="ecore:EClass" name="Audited">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="voidDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
         <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -55,7 +56,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="contactPerson" lowerBound="1"
           upperBound="-1" eType="#//model/Person" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DescriptiveLocation" eSuperTypes="#//model/Location">
+    <eClassifiers xsi:type="ecore:EClass" name="DescriptiveLocation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="directions" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
@@ -63,6 +64,15 @@
     <eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.String"/>
     <eSubpackages name="tracking" nsURI="http://com.agritrace.edairy.model/tracking/"
         nsPrefix="tracking">
+      <eClassifiers xsi:type="ecore:EEnum" name="UnitOfMeasure">
+        <eLiterals name="LITRE"/>
+        <eLiterals name="KILOGRAM" value="1"/>
+        <eLiterals name="UNKNOWN" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ContainerType">
+        <eLiterals name="BIN"/>
+        <eLiterals name="CAN" value="1"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="#//model/Company">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -82,9 +92,12 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Container">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
             eType="#//model/dairy/Membership"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="units" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//model/tracking/ContainerType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="measureType" eType="#//model/tracking/UnitOfMeasure"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Processor" eSuperTypes="#//model/Company">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber"
@@ -256,8 +269,18 @@
             eType="#//model/dairy/MembershipStatus"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" lowerBound="1"
             eType="#//model/dairy/RouteDefinition"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
+            eType="#//model/Person"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="containers" upperBound="-1"
+            eType="#//model/tracking/Container"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus"/>
+      <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
+        <eLiterals name="Active"/>
+        <eLiterals name="Inactive" value="1"/>
+        <eLiterals name="Dormant" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Bin" eSuperTypes="#//model/tracking/Container"/>
     </eSubpackages>
   </eSubpackages>
   <eSubpackages name="services" nsURI="http://com.agritrace.edairy.model/services"
@@ -312,6 +335,5 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RequestService"/>
-    <eClassifiers xsi:type="ecore:EClass" name="JournalException" instanceClassName="java.lang.Exception"/>
   </eSubpackages>
 </ecore:EPackage>
