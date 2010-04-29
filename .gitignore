@@ -1,3 +1,5 @@
 .metadata
 *.class
 org.eclipse.*/
+build/
+bin/
