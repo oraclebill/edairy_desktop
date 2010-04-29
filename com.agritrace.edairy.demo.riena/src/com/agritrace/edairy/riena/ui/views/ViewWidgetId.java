@@ -90,6 +90,9 @@ public class ViewWidgetId {
 	public static final String DISTRICT_TXT="District";
 	public static final String PROVINCE_TXT="Province";
 	public static final String POSTAL_CODE_TXT="PostalCode";
-
+	
+	public static final String CONTAINER_TABLE="Container";
+	public static final String CONTAINER_ADD="ContainerAdd";
+	public static final String CONTAINER_Remove="ContainerRemove";
 
 }

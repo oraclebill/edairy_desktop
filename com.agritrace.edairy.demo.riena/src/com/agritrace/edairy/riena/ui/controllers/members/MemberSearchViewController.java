@@ -3,24 +3,34 @@ package com.agritrace.edairy.riena.ui.controllers.members;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
+import org.eclipse.riena.ui.ridgets.ISelectableRidget;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
+import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
 import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.riena.ui.views.members.AddContainerDialog;
 import com.agritrace.edairy.riena.ui.views.members.MemberSearchSelectionListener;
 import com.agritrace.edairy.riena.ui.views.members.MemberSearchSelectionManager;
 
@@ -48,6 +58,13 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITextRidget provinceTxt;
 	private ITextRidget postalCodeTxt;
 	
+	//container tab
+	private ITableRidget containerTable;
+	private IActionRidget containerAddButton;
+	private IActionRidget containerRemoveButton;
+	
+	public static final String containerRemoveTitle="Remove Containers";
+	public static final String containerRemoveMessage="Do you want to remove selected containers?";
 
 	public MemberSearchViewController(){
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
@@ -55,6 +72,23 @@ public class MemberSearchViewController extends SubModuleController implements M
 	
 	@Override
 	public void configureRidgets(){
+		configureUpperPanel();
+		configureContainerTab();
+		
+		if(selectedMember != null){
+			updateBindings();
+		}
+		
+		//save button
+		((IActionRidget)getRidget(ViewWidgetId.memberInfo_saveButton)).addListener(new IActionListener() {
+
+			public void callback() {
+				saveMember();
+			}
+		});
+	}
+	
+	private void configureUpperPanel(){
 		memberIdRidget = getRidget(ITextRidget.class,ViewWidgetId.memberInfo_id);
 		appliedDate=getRidget(ITextRidget.class,ViewWidgetId.memberInfo_applicationDate);
 		effectiveDate=getRidget(ITextRidget.class,ViewWidgetId.memberInfo_effectiveDate);
@@ -75,21 +109,53 @@ public class MemberSearchViewController extends SubModuleController implements M
 		districtTxt=getRidget(ITextRidget.class,ViewWidgetId.DISTRICT_TXT);
 //		provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 		postalCodeTxt=getRidget(ITextRidget.class,ViewWidgetId.POSTAL_CODE_TXT);
-		
-		if(selectedMember != null){
-			updateBindings();
-		}
-		
-		//save button
-		((IActionRidget)getRidget(ViewWidgetId.memberInfo_saveButton)).addListener(new IActionListener() {
-
+	}
+	
+	private void configureContainerTab(){
+		containerTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
+		containerAddButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_ADD);
+		containerAddButton.addListener(new IActionListener() {
+			
+			@Override
 			public void callback() {
-				saveMember();
+				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
+				shell.setSize(550, 450);
+				AddContainerDialog dialog = new AddContainerDialog(shell);
+				if(dialog.open()==Window.OK){
+					Container newContainer = dialog.getNewContainer();
+					newContainer.setOwner(selectedMember);
+					selectedMember.getContainers().add(newContainer);
+					containerTable.updateFromModel();
+				}
 			}
+		});
+		
+		containerRemoveButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_Remove);
+		containerRemoveButton.setEnabled(false);
+		containerRemoveButton.addListener(new IActionListener(){
+
+			@Override
+			public void callback() {
+				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle , containerRemoveMessage)){
+					List<Object> selection = containerTable.getSelection();
+					if(selectedMember != null){
+						selectedMember.getContainers().removeAll(selection);
+						containerTable.updateFromModel();
+					}
+				}
+				
+				
+			}
+			
 		});
 	}
 	
 	private void updateBindings(){
+		updateUpperPanelBinding();
+		updateContainerBinding();
+	}
+	
+	private void updateUpperPanelBinding(){
 		memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 		memberIdRidget.updateFromModel();
   	    comboStatus = (IComboRidget) getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status); //$NON-NLS-1$
@@ -135,8 +201,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 			postalCodeTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__POSTAL_CODE));
 			postalCodeTxt.updateFromModel();
 		}
-		
-
 	}
 
 	@Override
@@ -167,6 +231,17 @@ public class MemberSearchViewController extends SubModuleController implements M
 			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);	
 		}
 	}
+	
+	private void updateContainerBinding(){
+			List<Container>input = selectedMember.getContainers();
+			String[] columnPropertyNames = { "containerId", "type", "units", "measureType","capacity"};
+			String[] columnHeaders = { "ID", "Container Type", "Units","Units Of Measure","Capacity" }; 
+			containerTable.bindToModel(new WritableList(input, Container.class), Container.class, columnPropertyNames, columnHeaders);
+			containerTable.updateFromModel();
+			containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
+			containerTable.addSelectionListener(this);
+		
+	}
 
 	@Override
 	public void ridgetSelected(SelectionEvent event) {
@@ -174,6 +249,13 @@ public class MemberSearchViewController extends SubModuleController implements M
 		  if(selectedMember != null){
 			  selectedMember.setStatus((MembershipStatus)event.getNewSelection().get(0));
 		  }
+		}else if(event.getSource() == containerTable){
+			List<Object> selection =  event.getNewSelection();
+			if(selection.size() > 0){
+				containerRemoveButton.setEnabled(true);
+			}else{
+				containerRemoveButton.setEnabled(false);
+			}
 		}
 		
 	}
