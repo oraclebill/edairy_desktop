@@ -7,6 +7,13 @@ import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.IBaseLabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -21,10 +28,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.ContainerType;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.model.tracking.UnitOfMeasure;
+import com.agritrace.edairy.model.tracking.Farm;
 
 public class AddContainerDialog extends TitleAreaDialog implements ModifyListener{
 
@@ -36,6 +45,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	private Text capacityText;
 	private ControlDecoration unitsDecorator ;
 	private ControlDecoration capacityDecorator ;
+	private Membership memberShip;
 	/**
 	 * MyTitleAreaDialog constructor
 	 * 
@@ -43,6 +53,12 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	 */
 	public AddContainerDialog(Shell shell) {
 		super(shell);
+
+	}
+	
+	public AddContainerDialog(Shell shell, Membership selectedMembership) {
+		super(shell);
+		this.memberShip = selectedMembership;
 
 	}
 
@@ -99,6 +115,15 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		ComboViewer containerComboViewer = new ComboViewer(containerCombo);
 		containerComboViewer.setContentProvider(new ArrayContentProvider());
 		containerComboViewer.setInput(ContainerType.values());
+		containerComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				String value = (String)((IStructuredSelection)event.getSelection()).getFirstElement();
+				newContainer.setContainerId(value);
+				
+			}
+		});
 		containerComboViewer.getControl().setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 
 		Label unitsLabel = UIControlsFactory.createLabel(dialogArea, "Units:");
@@ -116,6 +141,15 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		measureComboViewer.setContentProvider(new ArrayContentProvider());
 		measureComboViewer.setInput(UnitOfMeasure.values());
 		measureComboViewer.getControl().setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+		measureComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				UnitOfMeasure value = (UnitOfMeasure)((IStructuredSelection)event.getSelection()).getFirstElement();
+				newContainer.setMeasureType(value);
+				
+			}
+		});
 		
 		Label capacityLabel =  UIControlsFactory.createLabel(dialogArea, "Capacity:");
 		
@@ -124,6 +158,40 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		capacityText.addModifyListener(this);
 		capacityDecorator  = createDecorator(numberText, "");
 		capacityDecorator.hide();
+		
+		Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");
+		Combo farmCombo = UIControlsFactory.createCombo(dialogArea);
+		ComboViewer farmComboViewer = new ComboViewer(farmCombo);
+		farmComboViewer.setContentProvider(new ArrayContentProvider());
+		if(memberShip != null){
+			farmComboViewer.setInput(memberShip.getFarms());
+			farmComboViewer.setLabelProvider(new LabelProvider(){
+				public String getText(Object element) {
+					if(element instanceof Farm){
+						return ((Farm)element).getName();
+					}
+					return super.getText(element);
+				}
+			});
+			
+		}
+		
+		farmComboViewer.getControl().setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+		farmComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				Farm value = (Farm)((IStructuredSelection)event.getSelection()).getFirstElement();
+				newContainer.setOwner(value);
+				
+			}
+		});
+		
+		if(memberShip != null && memberShip.getFarms().size()>0){
+			farmComboViewer.setSelection(new StructuredSelection(memberShip.getFarms().get(0)));	
+		}
+		containerComboViewer.getCombo().select(0);
+		measureComboViewer.getCombo().select(0);
 		return composite;
 	}
 
@@ -205,6 +273,14 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 
 	public void setNewContainer(Container newContainer) {
 		this.newContainer = newContainer;
+	}
+
+	public Membership getMemberShip() {
+		return memberShip;
+	}
+
+	public void setMemberShip(Membership memberShip) {
+		this.memberShip = memberShip;
 	}
 
 	protected boolean isResizable() {

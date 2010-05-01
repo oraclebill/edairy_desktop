@@ -45,6 +45,7 @@ import com.agritrace.edairy.model.dairy.MembershipStatus;
 import com.agritrace.edairy.model.dairy.RouteDefinition;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.ContainerType;
+import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.model.tracking.UnitOfMeasure;
 
@@ -202,7 +203,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 
 	}
 
-
+
 
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -281,42 +282,49 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			defaultLocation.setPostalCode("08550");
 			member.getLocation().add(defaultLocation);
 			
+			Farm farm = TrackingFactory.eINSTANCE.createFarm();
+			farm.setName("Green Farm");
+			member1.getFarms().add(farm);
 			
 			Container container= TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.BIN);
 			container.setContainerId("1001");
-			container.setOwner(member1);
+			container.setOwner(farm);
 			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setUnits(50);
 			container.setCapacity(50);
-			member1.getContainers().add(container);
+			farm.getCans().add(container);
 			
 			container= TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.BIN);
 			container.setContainerId("1002");
-			container.setOwner(member1);
+			container.setOwner(farm);
 			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setUnits(50);
 			container.setCapacity(40);
-			member1.getContainers().add(container);
+			farm.getCans().add(container);
 			
+			Farm farm1 = TrackingFactory.eINSTANCE.createFarm();
+			farm1.setName("Harvest Farm");
+			member1.getFarms().add(farm1);
+
 			container= TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.BIN);
 			container.setContainerId("1003");
-			container.setOwner(member1);
+			container.setOwner(farm1);
 			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setUnits(50);
 			container.setCapacity(40);
-			member1.getContainers().add(container);
+			farm1.getCans().add(container);
 			
-			container= TrackingFactory.eINSTANCE.createContainer();
+		    container= TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.BIN);
 			container.setContainerId("1004");
-			container.setOwner(member1);
+			container.setOwner(farm1);
 			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setUnits(50);
 			container.setCapacity(30);
-			member1.getContainers().add(container);
+			farm1.getCans().add(container);
 			
 			members.add(member1);
 			
