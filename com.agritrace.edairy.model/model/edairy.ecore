@@ -62,6 +62,10 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="TransactionID" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="Gender">
+      <eLiterals name="MALE"/>
+      <eLiterals name="FEMALE" value="1"/>
+    </eClassifiers>
     <eSubpackages name="tracking" nsURI="http://com.agritrace.edairy.model/tracking/"
         nsPrefix="tracking">
       <eClassifiers xsi:type="ecore:EEnum" name="UnitOfMeasure">
@@ -93,7 +97,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="Container">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
-            eType="#//model/dairy/Membership"/>
+            eType="#//model/tracking/Farm"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="units" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//model/tracking/ContainerType"/>
@@ -127,6 +131,65 @@
             eType="#//model/tracking/Dairy"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
             eType="#//model/tracking/Container"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RegisteredAnimal">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="animnalRegistrationId"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
+            eType="#//model/tracking/Farm"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//model/Gender"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="animalType" eType="#//model/tracking/ReferenceAnimalType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="sireType" eType="#//model/tracking/ReferenceAnimalType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" eType="#//model/tracking/Purpose"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfAcquisition"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="acquisitionType" eType="#//model/tracking/AcquisitionType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="identifiers" upperBound="-1"
+            eType="#//model/tracking/AnimalIdentifier"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifyingFeatures"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="rearingMode" eType="#//model/tracking/RearingMode"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="pastOwners" upperBound="-1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="insuranceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="AcquisitionType">
+        <eLiterals name="BIRTH"/>
+        <eLiterals name="PURCHASE" value="1"/>
+        <eLiterals name="OTHER" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="Purpose">
+        <eLiterals name="DAIRY"/>
+        <eLiterals name="BEEF" value="1"/>
+        <eLiterals name="BREEDING" value="2"/>
+        <eLiterals name="HIDE" value="3"/>
+        <eLiterals name="TRANSPORT" value="4"/>
+        <eLiterals name="OTHER" value="5"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="RearingMode">
+        <eLiterals name="GRAZE"/>
+        <eLiterals name="ZEROGRAZE" value="1"/>
+        <eLiterals name="PASTORALHERD" value="2"/>
+        <eLiterals name="OTHER" value="3"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ReferenceAnimalType">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="animalTypeId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="breed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="AnimalIdentifier">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="issuer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="Mechanism">
+        <eLiterals name="BRAND"/>
+        <eLiterals name="BADGE" value="1"/>
+        <eLiterals name="COLLAR" value="2"/>
+        <eLiterals name="EARTAG" value="3"/>
+        <eLiterals name="RFID" value="4"/>
+        <eLiterals name="GSMGPRS" value="5"/>
+        <eLiterals name="OTHER" value="6"/>
       </eClassifiers>
     </eSubpackages>
     <eSubpackages name="dairy" nsURI="http://com.agritrace.edairy.model/dairy/" nsPrefix="dairy">
@@ -272,15 +335,14 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
             eType="#//model/Person"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="containers" upperBound="-1"
-            eType="#//model/tracking/Container"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
+            eType="#//model/tracking/Farm"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
         <eLiterals name="Active"/>
         <eLiterals name="Inactive" value="1"/>
         <eLiterals name="Dormant" value="2"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Bin" eSuperTypes="#//model/tracking/Container"/>
     </eSubpackages>
   </eSubpackages>
   <eSubpackages name="services" nsURI="http://com.agritrace.edairy.model/services"
