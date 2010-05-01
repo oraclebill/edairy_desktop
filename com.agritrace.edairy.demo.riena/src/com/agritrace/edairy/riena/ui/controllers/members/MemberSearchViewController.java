@@ -1,5 +1,6 @@
 package com.agritrace.edairy.riena.ui.controllers.members;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
@@ -12,11 +13,13 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IColumnFormatter;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -28,6 +31,7 @@ import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
 import com.agritrace.edairy.model.tracking.Container;
+import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
 import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
 import com.agritrace.edairy.riena.ui.views.members.AddContainerDialog;
@@ -65,6 +69,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 	
 	public static final String containerRemoveTitle="Remove Containers";
 	public static final String containerRemoveMessage="Do you want to remove selected containers?";
+	
+	private List<Container>input = new ArrayList<Container>();
 
 	public MemberSearchViewController(){
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
@@ -121,10 +127,11 @@ public class MemberSearchViewController extends SubModuleController implements M
 				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
 				AddContainerDialog dialog = new AddContainerDialog(shell);
+				dialog.setMemberShip(selectedMember);
 				if(dialog.open()==Window.OK){
 					Container newContainer = dialog.getNewContainer();
-					newContainer.setOwner(selectedMember);
-					selectedMember.getContainers().add(newContainer);
+					newContainer.getOwner().getCans().add(newContainer);
+					input.add(newContainer);
 					containerTable.updateFromModel();
 				}
 			}
@@ -137,9 +144,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 			@Override
 			public void callback() {
 				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle , containerRemoveMessage)){
-					List<Object> selection = containerTable.getSelection();
+					List<Object> selections = containerTable.getSelection();
 					if(selectedMember != null){
-						selectedMember.getContainers().removeAll(selection);
+						for(Object selObject : selections ){
+							((Container)selObject).getOwner().getCans().remove(selObject);
+							input.remove(selObject);
+						}
 						containerTable.updateFromModel();
 					}
 				}
@@ -233,9 +243,26 @@ public class MemberSearchViewController extends SubModuleController implements M
 	}
 	
 	private void updateContainerBinding(){
-			List<Container>input = selectedMember.getContainers();
-			String[] columnPropertyNames = { "containerId", "type", "units", "measureType","capacity"};
-			String[] columnHeaders = { "ID", "Container Type", "Units","Units Of Measure","Capacity" }; 
+		List<Farm> farms = selectedMember.getFarms();
+		
+		for(Farm farm :farms){
+			input.addAll( farm.getCans());	
+		}
+		
+			String[] columnPropertyNames = { "containerId", "owner","type", "units", "measureType","capacity"};
+			String[] columnHeaders = { "ID", "Farm","Container Type", "Units","Units Of Measure","Capacity" }; 
+			containerTable.setColumnFormatter(1, new ColumnFormatter() {
+				
+				@Override
+				public String getText(Object element) {
+					if(element instanceof Container){
+						return ((Container)element).getOwner().getName();
+					}
+					return null;
+				}
+				
+				
+			});
 			containerTable.bindToModel(new WritableList(input, Container.class), Container.class, columnPropertyNames, columnHeaders);
 			containerTable.updateFromModel();
 			containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
