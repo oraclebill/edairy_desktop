@@ -6,8 +6,6 @@
  */
 package com.agritrace.edairy.model.tracking;
 
-import com.agritrace.edairy.model.dairy.Membership;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -67,12 +65,12 @@ public interface Container extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owner</em>' reference.
-	 * @see #setOwner(Membership)
+	 * @see #setOwner(Farm)
 	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Owner()
 	 * @model required="true"
 	 * @generated
 	 */
-	Membership getOwner();
+	Farm getOwner();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getOwner <em>Owner</em>}' reference.
@@ -82,7 +80,7 @@ public interface Container extends EObject {
 	 * @see #getOwner()
 	 * @generated
 	 */
-	void setOwner(Membership value);
+	void setOwner(Farm value);
 
 	/**
 	 * Returns the value of the '<em><b>Capacity</b></em>' attribute.

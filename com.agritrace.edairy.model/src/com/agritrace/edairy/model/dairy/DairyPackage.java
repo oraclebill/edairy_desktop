@@ -1132,13 +1132,13 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP__MEMBER_ID = 5;
 
 	/**
-	 * The feature id for the '<em><b>Containers</b></em>' reference list.
+	 * The feature id for the '<em><b>Farms</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__CONTAINERS = 6;
+	int MEMBERSHIP__FARMS = 6;
 
 	/**
 	 * The number of structural features of the '<em>Membership</em>' class.
@@ -1150,79 +1150,6 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP_FEATURE_COUNT = 7;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.BinImpl <em>Bin</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.model.dairy.impl.BinImpl
-	 * @see com.agritrace.edairy.model.dairy.impl.DairyPackageImpl#getBin()
-	 * @generated
-	 */
-	int BIN = 14;
-
-	/**
-	 * The feature id for the '<em><b>Container Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__CONTAINER_ID = TrackingPackage.CONTAINER__CONTAINER_ID;
-
-	/**
-	 * The feature id for the '<em><b>Owner</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__OWNER = TrackingPackage.CONTAINER__OWNER;
-
-	/**
-	 * The feature id for the '<em><b>Capacity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__CAPACITY = TrackingPackage.CONTAINER__CAPACITY;
-
-	/**
-	 * The feature id for the '<em><b>Units</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__UNITS = TrackingPackage.CONTAINER__UNITS;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__TYPE = TrackingPackage.CONTAINER__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Measure Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__MEASURE_TYPE = TrackingPackage.CONTAINER__MEASURE_TYPE;
-
-	/**
-	 * The number of structural features of the '<em>Bin</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1230,7 +1157,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 15;
+	int MEMBERSHIP_STATUS = 14;
 
 
 	/**
@@ -2078,25 +2005,15 @@ public interface DairyPackage extends EPackage {
 	EAttribute getMembership_MemberId();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.model.dairy.Membership#getContainers <em>Containers</em>}'.
+	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.model.dairy.Membership#getFarms <em>Farms</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Containers</em>'.
-	 * @see com.agritrace.edairy.model.dairy.Membership#getContainers()
+	 * @return the meta object for the reference list '<em>Farms</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Membership#getFarms()
 	 * @see #getMembership()
 	 * @generated
 	 */
-	EReference getMembership_Containers();
-
-	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.model.dairy.Bin <em>Bin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bin</em>'.
-	 * @see com.agritrace.edairy.model.dairy.Bin
-	 * @generated
-	 */
-	EClass getBin();
+	EReference getMembership_Farms();
 
 	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.dairy.MembershipStatus <em>Membership Status</em>}'.
@@ -2783,22 +2700,12 @@ public interface DairyPackage extends EPackage {
 		EAttribute MEMBERSHIP__MEMBER_ID = eINSTANCE.getMembership_MemberId();
 
 		/**
-		 * The meta object literal for the '<em><b>Containers</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Farms</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MEMBERSHIP__CONTAINERS = eINSTANCE.getMembership_Containers();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.impl.BinImpl <em>Bin</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.model.dairy.impl.BinImpl
-		 * @see com.agritrace.edairy.model.dairy.impl.DairyPackageImpl#getBin()
-		 * @generated
-		 */
-		EClass BIN = eINSTANCE.getBin();
+		EReference MEMBERSHIP__FARMS = eINSTANCE.getMembership_Farms();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.

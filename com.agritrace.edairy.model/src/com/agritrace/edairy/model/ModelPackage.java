@@ -9,6 +9,7 @@ package com.agritrace.edairy.model;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -564,6 +565,16 @@ public interface ModelPackage extends EPackage {
 	int DESCRIPTIVE_LOCATION_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.Gender <em>Gender</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.Gender
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getGender()
+	 * @generated
+	 */
+	int GENDER = 8;
+
+	/**
 	 * The meta object id for the '<em>Transaction ID</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -571,7 +582,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getTransactionID()
 	 * @generated
 	 */
-	int TRANSACTION_ID = 8;
+	int TRANSACTION_ID = 9;
 
 	/**
 	 * The meta object id for the '<em>Unique ID</em>' data type.
@@ -581,7 +592,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUniqueID()
 	 * @generated
 	 */
-	int UNIQUE_ID = 9;
+	int UNIQUE_ID = 10;
 
 
 	/**
@@ -918,6 +929,16 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDescriptiveLocation_Directions();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.Gender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Gender</em>'.
+	 * @see com.agritrace.edairy.model.Gender
+	 * @generated
+	 */
+	EEnum getGender();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Transaction ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1224,6 +1245,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DESCRIPTIVE_LOCATION__DIRECTIONS = eINSTANCE.getDescriptiveLocation_Directions();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.Gender <em>Gender</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.Gender
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getGender()
+		 * @generated
+		 */
+		EEnum GENDER = eINSTANCE.getGender();
 
 		/**
 		 * The meta object literal for the '<em>Transaction ID</em>' data type.

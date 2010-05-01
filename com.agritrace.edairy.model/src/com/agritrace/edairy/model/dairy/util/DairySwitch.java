@@ -13,7 +13,6 @@ import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.*;
 
 import com.agritrace.edairy.model.tracking.Collection;
-import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Transfer;
 
 import java.util.List;
@@ -186,13 +185,6 @@ public class DairySwitch<T> {
 			case DairyPackage.MEMBERSHIP: {
 				Membership membership = (Membership)theEObject;
 				T result = caseMembership(membership);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.BIN: {
-				Bin bin = (Bin)theEObject;
-				T result = caseBin(bin);
-				if (result == null) result = caseContainer(bin);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -411,21 +403,6 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bin</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bin</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBin(Bin object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Party</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -512,21 +489,6 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T caseTracking_Dairy(com.agritrace.edairy.model.tracking.Dairy object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Container</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainer(Container object) {
 		return null;
 	}
 

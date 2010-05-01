@@ -81,6 +81,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case ModelPackage.GENDER:
+				return createGenderFromString(eDataType, initialValue);
 			case ModelPackage.TRANSACTION_ID:
 				return createTransactionIDFromString(eDataType, initialValue);
 			case ModelPackage.UNIQUE_ID:
@@ -98,6 +100,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case ModelPackage.GENDER:
+				return convertGenderToString(eDataType, instanceValue);
 			case ModelPackage.TRANSACTION_ID:
 				return convertTransactionIDToString(eDataType, instanceValue);
 			case ModelPackage.UNIQUE_ID:
@@ -175,6 +179,26 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public DescriptiveLocation createDescriptiveLocation() {
 		DescriptiveLocationImpl descriptiveLocation = new DescriptiveLocationImpl();
 		return descriptiveLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Gender createGenderFromString(EDataType eDataType, String initialValue) {
+		Gender result = Gender.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

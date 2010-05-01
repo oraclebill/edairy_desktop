@@ -14,14 +14,21 @@ import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
 
 import com.agritrace.edairy.model.impl.ModelPackageImpl;
 
+import com.agritrace.edairy.model.tracking.AcquisitionType;
 import com.agritrace.edairy.model.tracking.Animal;
+import com.agritrace.edairy.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.model.tracking.Collection;
 import com.agritrace.edairy.model.tracking.ContainerType;
 import com.agritrace.edairy.model.tracking.Dairy;
 import com.agritrace.edairy.model.tracking.Delivery;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.Lot;
+import com.agritrace.edairy.model.tracking.Mechanism;
 import com.agritrace.edairy.model.tracking.Processor;
+import com.agritrace.edairy.model.tracking.Purpose;
+import com.agritrace.edairy.model.tracking.RearingMode;
+import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
+import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.Supplier;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
@@ -122,6 +129,27 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass registeredAnimalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass referenceAnimalTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass animalIdentifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum unitOfMeasureEEnum = null;
 
 	/**
@@ -130,6 +158,34 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	private EEnum containerTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum acquisitionTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum purposeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum rearingModeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum mechanismEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -514,6 +570,204 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRegisteredAnimal() {
+		return registeredAnimalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_AnimnalRegistrationId() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_GivenName() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegisteredAnimal_Location() {
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Gender() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegisteredAnimal_AnimalType() {
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegisteredAnimal_SireType() {
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Purpose() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_DateOfAcquisition() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_AcquisitionType() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegisteredAnimal_Identifiers() {
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_IdentifyingFeatures() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_RearingMode() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_PastOwners() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_InsuranceNumber() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReferenceAnimalType() {
+		return referenceAnimalTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceAnimalType_AnimalTypeId() {
+		return (EAttribute)referenceAnimalTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceAnimalType_Species() {
+		return (EAttribute)referenceAnimalTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceAnimalType_Breed() {
+		return (EAttribute)referenceAnimalTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAnimalIdentifier() {
+		return animalIdentifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnimalIdentifier_Issuer() {
+		return (EAttribute)animalIdentifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAnimalIdentifier_Value() {
+		return (EAttribute)animalIdentifierEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getUnitOfMeasure() {
 		return unitOfMeasureEEnum;
 	}
@@ -525,6 +779,42 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 */
 	public EEnum getContainerType() {
 		return containerTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getAcquisitionType() {
+		return acquisitionTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getPurpose() {
+		return purposeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getRearingMode() {
+		return rearingModeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getMechanism() {
+		return mechanismEEnum;
 	}
 
 	/**
@@ -599,9 +889,38 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEReference(transferEClass, TRANSFER__DAIRY);
 		createEReference(transferEClass, TRANSFER__CONTAINER);
 
+		registeredAnimalEClass = createEClass(REGISTERED_ANIMAL);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__GIVEN_NAME);
+		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__LOCATION);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__GENDER);
+		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__ANIMAL_TYPE);
+		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__SIRE_TYPE);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__PURPOSE);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__ACQUISITION_TYPE);
+		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__IDENTIFIERS);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__IDENTIFYING_FEATURES);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__REARING_MODE);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__PAST_OWNERS);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__INSURANCE_NUMBER);
+
+		referenceAnimalTypeEClass = createEClass(REFERENCE_ANIMAL_TYPE);
+		createEAttribute(referenceAnimalTypeEClass, REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID);
+		createEAttribute(referenceAnimalTypeEClass, REFERENCE_ANIMAL_TYPE__SPECIES);
+		createEAttribute(referenceAnimalTypeEClass, REFERENCE_ANIMAL_TYPE__BREED);
+
+		animalIdentifierEClass = createEClass(ANIMAL_IDENTIFIER);
+		createEAttribute(animalIdentifierEClass, ANIMAL_IDENTIFIER__ISSUER);
+		createEAttribute(animalIdentifierEClass, ANIMAL_IDENTIFIER__VALUE);
+
 		// Create enums
 		unitOfMeasureEEnum = createEEnum(UNIT_OF_MEASURE);
 		containerTypeEEnum = createEEnum(CONTAINER_TYPE);
+		acquisitionTypeEEnum = createEEnum(ACQUISITION_TYPE);
+		purposeEEnum = createEEnum(PURPOSE);
+		rearingModeEEnum = createEEnum(REARING_MODE);
+		mechanismEEnum = createEEnum(MECHANISM);
 	}
 
 	/**
@@ -629,7 +948,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
-		DairyPackage theDairyPackage = (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -659,7 +977,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		initEClass(containerEClass, com.agritrace.edairy.model.tracking.Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContainer_ContainerId(), ecorePackage.getEString(), "containerId", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainer_Owner(), theDairyPackage.getMembership(), null, "owner", null, 1, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainer_Owner(), this.getFarm(), null, "owner", null, 1, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Units(), ecorePackage.getEDouble(), "units", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Type(), this.getContainerType(), "type", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -687,6 +1005,31 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEReference(getTransfer_Dairy(), this.getDairy(), null, "dairy", null, 1, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransfer_Container(), this.getContainer(), null, "container", null, 1, 1, Transfer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(registeredAnimalEClass, RegisteredAnimal.class, "RegisteredAnimal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRegisteredAnimal_AnimnalRegistrationId(), ecorePackage.getELong(), "animnalRegistrationId", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_GivenName(), ecorePackage.getEString(), "givenName", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegisteredAnimal_Location(), this.getFarm(), null, "location", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Gender(), theModelPackage.getGender(), "gender", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegisteredAnimal_AnimalType(), this.getReferenceAnimalType(), null, "animalType", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegisteredAnimal_SireType(), this.getReferenceAnimalType(), null, "sireType", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Purpose(), this.getPurpose(), "purpose", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_DateOfAcquisition(), ecorePackage.getEDate(), "dateOfAcquisition", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_AcquisitionType(), this.getAcquisitionType(), "acquisitionType", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegisteredAnimal_Identifiers(), this.getAnimalIdentifier(), null, "identifiers", null, 0, -1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_IdentifyingFeatures(), ecorePackage.getEString(), "identifyingFeatures", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_RearingMode(), this.getRearingMode(), "rearingMode", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_PastOwners(), ecorePackage.getEString(), "pastOwners", null, 0, -1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_InsuranceNumber(), ecorePackage.getEString(), "insuranceNumber", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(referenceAnimalTypeEClass, ReferenceAnimalType.class, "ReferenceAnimalType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getReferenceAnimalType_AnimalTypeId(), ecorePackage.getELong(), "animalTypeId", null, 0, 1, ReferenceAnimalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReferenceAnimalType_Species(), ecorePackage.getEString(), "species", null, 0, 1, ReferenceAnimalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReferenceAnimalType_Breed(), ecorePackage.getEString(), "breed", null, 0, 1, ReferenceAnimalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(animalIdentifierEClass, AnimalIdentifier.class, "AnimalIdentifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAnimalIdentifier_Issuer(), ecorePackage.getEString(), "issuer", null, 0, 1, AnimalIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimalIdentifier_Value(), ecorePackage.getEString(), "value", null, 0, 1, AnimalIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(unitOfMeasureEEnum, UnitOfMeasure.class, "UnitOfMeasure");
 		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.LITRE);
@@ -696,6 +1039,34 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEEnum(containerTypeEEnum, ContainerType.class, "ContainerType");
 		addEEnumLiteral(containerTypeEEnum, ContainerType.BIN);
 		addEEnumLiteral(containerTypeEEnum, ContainerType.CAN);
+
+		initEEnum(acquisitionTypeEEnum, AcquisitionType.class, "AcquisitionType");
+		addEEnumLiteral(acquisitionTypeEEnum, AcquisitionType.BIRTH);
+		addEEnumLiteral(acquisitionTypeEEnum, AcquisitionType.PURCHASE);
+		addEEnumLiteral(acquisitionTypeEEnum, AcquisitionType.OTHER);
+
+		initEEnum(purposeEEnum, Purpose.class, "Purpose");
+		addEEnumLiteral(purposeEEnum, Purpose.DAIRY);
+		addEEnumLiteral(purposeEEnum, Purpose.BEEF);
+		addEEnumLiteral(purposeEEnum, Purpose.BREEDING);
+		addEEnumLiteral(purposeEEnum, Purpose.HIDE);
+		addEEnumLiteral(purposeEEnum, Purpose.TRANSPORT);
+		addEEnumLiteral(purposeEEnum, Purpose.OTHER);
+
+		initEEnum(rearingModeEEnum, RearingMode.class, "RearingMode");
+		addEEnumLiteral(rearingModeEEnum, RearingMode.GRAZE);
+		addEEnumLiteral(rearingModeEEnum, RearingMode.ZEROGRAZE);
+		addEEnumLiteral(rearingModeEEnum, RearingMode.PASTORALHERD);
+		addEEnumLiteral(rearingModeEEnum, RearingMode.OTHER);
+
+		initEEnum(mechanismEEnum, Mechanism.class, "Mechanism");
+		addEEnumLiteral(mechanismEEnum, Mechanism.BRAND);
+		addEEnumLiteral(mechanismEEnum, Mechanism.BADGE);
+		addEEnumLiteral(mechanismEEnum, Mechanism.COLLAR);
+		addEEnumLiteral(mechanismEEnum, Mechanism.EARTAG);
+		addEEnumLiteral(mechanismEEnum, Mechanism.RFID);
+		addEEnumLiteral(mechanismEEnum, Mechanism.GSMGPRS);
+		addEEnumLiteral(mechanismEEnum, Mechanism.OTHER);
 	}
 
 } //TrackingPackageImpl

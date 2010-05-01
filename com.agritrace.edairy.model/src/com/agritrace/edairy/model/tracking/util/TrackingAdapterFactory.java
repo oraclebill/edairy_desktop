@@ -115,6 +115,18 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 				return createTransferAdapter();
 			}
 			@Override
+			public Adapter caseRegisteredAnimal(RegisteredAnimal object) {
+				return createRegisteredAnimalAdapter();
+			}
+			@Override
+			public Adapter caseReferenceAnimalType(ReferenceAnimalType object) {
+				return createReferenceAnimalTypeAdapter();
+			}
+			@Override
+			public Adapter caseAnimalIdentifier(AnimalIdentifier object) {
+				return createAnimalIdentifierAdapter();
+			}
+			@Override
 			public Adapter caseParty(Party object) {
 				return createPartyAdapter();
 			}
@@ -279,6 +291,48 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransferAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.RegisteredAnimal <em>Registered Animal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.model.tracking.RegisteredAnimal
+	 * @generated
+	 */
+	public Adapter createRegisteredAnimalAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType <em>Reference Animal Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.model.tracking.ReferenceAnimalType
+	 * @generated
+	 */
+	public Adapter createReferenceAnimalTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.AnimalIdentifier <em>Animal Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.model.tracking.AnimalIdentifier
+	 * @generated
+	 */
+	public Adapter createAnimalIdentifierAdapter() {
 		return null;
 	}
 

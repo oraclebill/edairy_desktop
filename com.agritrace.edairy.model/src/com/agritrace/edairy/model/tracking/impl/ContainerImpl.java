@@ -6,10 +6,9 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import com.agritrace.edairy.model.dairy.Membership;
-
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.ContainerType;
+import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 import com.agritrace.edairy.model.tracking.UnitOfMeasure;
 
@@ -68,7 +67,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @generated
 	 * @ordered
 	 */
-	protected Membership owner;
+	protected Farm owner;
 
 	/**
 	 * The default value of the '{@link #getCapacity() <em>Capacity</em>}' attribute.
@@ -195,10 +194,10 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Membership getOwner() {
+	public Farm getOwner() {
 		if (owner != null && owner.eIsProxy()) {
 			InternalEObject oldOwner = (InternalEObject)owner;
-			owner = (Membership)eResolveProxy(oldOwner);
+			owner = (Farm)eResolveProxy(oldOwner);
 			if (owner != oldOwner) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.CONTAINER__OWNER, oldOwner, owner));
@@ -212,7 +211,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Membership basicGetOwner() {
+	public Farm basicGetOwner() {
 		return owner;
 	}
 
@@ -221,8 +220,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwner(Membership newOwner) {
-		Membership oldOwner = owner;
+	public void setOwner(Farm newOwner) {
+		Farm oldOwner = owner;
 		owner = newOwner;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__OWNER, oldOwner, owner));
@@ -349,7 +348,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				setContainerId((String)newValue);
 				return;
 			case TrackingPackage.CONTAINER__OWNER:
-				setOwner((Membership)newValue);
+				setOwner((Farm)newValue);
 				return;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				setCapacity((Double)newValue);
@@ -379,7 +378,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				setContainerId(CONTAINER_ID_EDEFAULT);
 				return;
 			case TrackingPackage.CONTAINER__OWNER:
-				setOwner((Membership)null);
+				setOwner((Farm)null);
 				return;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				setCapacity(CAPACITY_EDEFAULT);

@@ -75,7 +75,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.SESSION: return createSession();
 			case DairyPackage.DAIRY: return createDairy();
 			case DairyPackage.MEMBERSHIP: return createMembership();
-			case DairyPackage.BIN: return createBin();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -249,16 +248,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public Membership createMembership() {
 		MembershipImpl membership = new MembershipImpl();
 		return membership;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Bin createBin() {
-		BinImpl bin = new BinImpl();
-		return bin;
 	}
 
 	/**

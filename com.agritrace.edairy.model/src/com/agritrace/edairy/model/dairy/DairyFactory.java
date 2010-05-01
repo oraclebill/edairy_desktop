@@ -152,15 +152,6 @@ public interface DairyFactory extends EFactory {
 	Membership createMembership();
 
 	/**
-	 * Returns a new object of class '<em>Bin</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bin</em>'.
-	 * @generated
-	 */
-	Bin createBin();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

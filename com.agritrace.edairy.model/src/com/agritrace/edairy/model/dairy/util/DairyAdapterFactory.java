@@ -13,7 +13,6 @@ import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.*;
 
 import com.agritrace.edairy.model.tracking.Collection;
-import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Transfer;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -136,10 +135,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createMembershipAdapter();
 			}
 			@Override
-			public Adapter caseBin(Bin object) {
-				return createBinAdapter();
-			}
-			@Override
 			public Adapter caseParty(Party object) {
 				return createPartyAdapter();
 			}
@@ -162,10 +157,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTracking_Dairy(com.agritrace.edairy.model.tracking.Dairy object) {
 				return createTracking_DairyAdapter();
-			}
-			@Override
-			public Adapter caseContainer(Container object) {
-				return createContainerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -384,20 +375,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Bin <em>Bin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.Bin
-	 * @generated
-	 */
-	public Adapter createBinAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.Party <em>Party</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -478,20 +455,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTracking_DairyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Container <em>Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Container
-	 * @generated
-	 */
-	public Adapter createContainerAdapter() {
 		return null;
 	}
 

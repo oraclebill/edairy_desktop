@@ -116,6 +116,33 @@ public interface TrackingFactory extends EFactory {
 	Transfer createTransfer();
 
 	/**
+	 * Returns a new object of class '<em>Registered Animal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Registered Animal</em>'.
+	 * @generated
+	 */
+	RegisteredAnimal createRegisteredAnimal();
+
+	/**
+	 * Returns a new object of class '<em>Reference Animal Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference Animal Type</em>'.
+	 * @generated
+	 */
+	ReferenceAnimalType createReferenceAnimalType();
+
+	/**
+	 * Returns a new object of class '<em>Animal Identifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Animal Identifier</em>'.
+	 * @generated
+	 */
+	AnimalIdentifier createAnimalIdentifier();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

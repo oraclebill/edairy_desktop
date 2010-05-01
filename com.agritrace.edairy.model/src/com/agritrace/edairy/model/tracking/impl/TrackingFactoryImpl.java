@@ -71,6 +71,9 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 			case TrackingPackage.LOT: return createLot();
 			case TrackingPackage.DELIVERY: return createDelivery();
 			case TrackingPackage.TRANSFER: return createTransfer();
+			case TrackingPackage.REGISTERED_ANIMAL: return createRegisteredAnimal();
+			case TrackingPackage.REFERENCE_ANIMAL_TYPE: return createReferenceAnimalType();
+			case TrackingPackage.ANIMAL_IDENTIFIER: return createAnimalIdentifier();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -88,6 +91,14 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 				return createUnitOfMeasureFromString(eDataType, initialValue);
 			case TrackingPackage.CONTAINER_TYPE:
 				return createContainerTypeFromString(eDataType, initialValue);
+			case TrackingPackage.ACQUISITION_TYPE:
+				return createAcquisitionTypeFromString(eDataType, initialValue);
+			case TrackingPackage.PURPOSE:
+				return createPurposeFromString(eDataType, initialValue);
+			case TrackingPackage.REARING_MODE:
+				return createRearingModeFromString(eDataType, initialValue);
+			case TrackingPackage.MECHANISM:
+				return createMechanismFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -105,6 +116,14 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 				return convertUnitOfMeasureToString(eDataType, instanceValue);
 			case TrackingPackage.CONTAINER_TYPE:
 				return convertContainerTypeToString(eDataType, instanceValue);
+			case TrackingPackage.ACQUISITION_TYPE:
+				return convertAcquisitionTypeToString(eDataType, instanceValue);
+			case TrackingPackage.PURPOSE:
+				return convertPurposeToString(eDataType, instanceValue);
+			case TrackingPackage.REARING_MODE:
+				return convertRearingModeToString(eDataType, instanceValue);
+			case TrackingPackage.MECHANISM:
+				return convertMechanismToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -215,6 +234,36 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public RegisteredAnimal createRegisteredAnimal() {
+		RegisteredAnimalImpl registeredAnimal = new RegisteredAnimalImpl();
+		return registeredAnimal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferenceAnimalType createReferenceAnimalType() {
+		ReferenceAnimalTypeImpl referenceAnimalType = new ReferenceAnimalTypeImpl();
+		return referenceAnimalType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnimalIdentifier createAnimalIdentifier() {
+		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
+		return animalIdentifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
 		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -247,6 +296,86 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * @generated
 	 */
 	public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AcquisitionType createAcquisitionTypeFromString(EDataType eDataType, String initialValue) {
+		AcquisitionType result = AcquisitionType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAcquisitionTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Purpose createPurposeFromString(EDataType eDataType, String initialValue) {
+		Purpose result = Purpose.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPurposeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RearingMode createRearingModeFromString(EDataType eDataType, String initialValue) {
+		RearingMode result = RearingMode.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertRearingModeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Mechanism createMechanismFromString(EDataType eDataType, String initialValue) {
+		Mechanism result = Mechanism.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMechanismToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -158,6 +158,24 @@ public class TrackingSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackingPackage.REGISTERED_ANIMAL: {
+				RegisteredAnimal registeredAnimal = (RegisteredAnimal)theEObject;
+				T result = caseRegisteredAnimal(registeredAnimal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackingPackage.REFERENCE_ANIMAL_TYPE: {
+				ReferenceAnimalType referenceAnimalType = (ReferenceAnimalType)theEObject;
+				T result = caseReferenceAnimalType(referenceAnimalType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackingPackage.ANIMAL_IDENTIFIER: {
+				AnimalIdentifier animalIdentifier = (AnimalIdentifier)theEObject;
+				T result = caseAnimalIdentifier(animalIdentifier);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -309,6 +327,51 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	public T caseTransfer(Transfer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Registered Animal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Registered Animal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRegisteredAnimal(RegisteredAnimal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reference Animal Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reference Animal Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferenceAnimalType(ReferenceAnimalType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Animal Identifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Animal Identifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnimalIdentifier(AnimalIdentifier object) {
 		return null;
 	}
 
