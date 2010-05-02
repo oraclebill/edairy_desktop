@@ -165,9 +165,9 @@ import com.agritrace.edairy.model.dairy.provider.DairyItemProviderAdapterFactory
 
 import com.agritrace.edairy.model.provider.ModelItemProviderAdapterFactory;
 
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import com.agritrace.edairy.model.requests.requests.provider.RequestsItemProviderAdapterFactory;
 
-import requests.provider.RequestsItemProviderAdapterFactory;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 
 /**

@@ -88,4 +88,30 @@
       </editor>
    </extension>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.agritrace.edairy.model.requests.requests.presentation.RequestsModelWizardID"
+            name="%_UI_RequestsModelWizard_label"
+            class="com.agritrace.edairy.model.requests.requests.presentation.RequestsModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/RequestsModelFile.gif">
+         <description>%_UI_RequestsModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.agritrace.edairy.model.requests.requests.presentation.RequestsEditorID"
+            name="%_UI_RequestsEditor_label"
+            icon="icons/full/obj16/RequestsModelFile.gif"
+            extensions="requests"
+            class="com.agritrace.edairy.model.requests.requests.presentation.RequestsEditor"
+            contributorClass="com.agritrace.edairy.model.requests.requests.presentation.RequestsActionBarContributor">
+      </editor>
+   </extension>
+
 </plugin>

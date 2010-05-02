@@ -10,6 +10,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.agritrace.edairy.model.dairy.provider,
  com.agritrace.edairy.model.provider,
+ com.agritrace.edairy.model.requests.requests.provider,
  com.agritrace.edairy.model.tracking.provider
 Require-Bundle: org.eclipse.core.runtime,
  com.agritrace.edairy.model;visibility:=reexport,

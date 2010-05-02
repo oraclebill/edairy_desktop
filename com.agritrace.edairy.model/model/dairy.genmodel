@@ -297,26 +297,26 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//AnimalIdentifier/value"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Requests" ecorePackage="../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//RequestType">
-      <genEnumLiterals ecoreEnumLiteral="../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//RequestType/Veterinary"/>
-      <genEnumLiterals ecoreEnumLiteral="../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//RequestType/Insemination"/>
+  <genPackages prefix="Requests" basePackage="com.agritrace.edairy.model.requests" ecorePackage="requests.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="requests.ecore#//RequestType">
+      <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Veterinary"/>
+      <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Insemination"/>
     </genEnums>
-    <genClasses ecoreClass="../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/requestId"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/requestingMember"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/dairy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/date"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/reportedProblem"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/reportedAnimal"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/dateHeatDetected"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/firstTreatment"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/secondTreatment"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/thirdTreatment"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/member"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/farm"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../com.agritrace.edairy.desktop.requests.model/model/requests.ecore#//AnimalHealthRequest/referredTo"/>
+    <genClasses ecoreClass="requests.ecore#//AnimalHealthRequest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/requestId"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requests.ecore#//AnimalHealthRequest/requestingMember"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requests.ecore#//AnimalHealthRequest/dairy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/reportedProblem"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requests.ecore#//AnimalHealthRequest/reportedAnimal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/dateHeatDetected"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/firstTreatment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/secondTreatment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute requests.ecore#//AnimalHealthRequest/thirdTreatment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requests.ecore#//AnimalHealthRequest/member"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requests.ecore#//AnimalHealthRequest/farm"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference requests.ecore#//AnimalHealthRequest/referredTo"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

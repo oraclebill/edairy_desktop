@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.agritrace.edairy.model.dairy.tests,
+ com.agritrace.edairy.model.requests.requests.tests,
  com.agritrace.edairy.model.tests,
  com.agritrace.edairy.model.tracking.tests
 Require-Bundle: org.eclipse.core.runtime,

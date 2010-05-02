@@ -15,6 +15,8 @@ import com.agritrace.edairy.model.dairy.DairyPackage;
 
 import com.agritrace.edairy.model.provider.CompanyItemProvider;
 
+import com.agritrace.edairy.model.requests.requests.RequestsFactory;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -34,8 +36,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import requests.RequestsFactory;
 
 /**
  * This is the item provider adapter for a {@link com.agritrace.edairy.model.dairy.Dairy} object.

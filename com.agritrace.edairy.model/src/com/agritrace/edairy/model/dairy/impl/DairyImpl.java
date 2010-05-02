@@ -18,6 +18,8 @@ import com.agritrace.edairy.model.dairy.Vehicle;
 
 import com.agritrace.edairy.model.impl.CompanyImpl;
 
+import com.agritrace.edairy.model.requests.requests.AnimalHealthRequest;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -33,8 +35,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import requests.AnimalHealthRequest;
 
 /**
  * <!-- begin-user-doc -->

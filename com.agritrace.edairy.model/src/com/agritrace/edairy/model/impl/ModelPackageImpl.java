@@ -27,6 +27,10 @@ import com.agritrace.edairy.model.dairy.DairyPackage;
 
 import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
 
+import com.agritrace.edairy.model.requests.requests.RequestsPackage;
+
+import com.agritrace.edairy.model.requests.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
 import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
@@ -39,10 +43,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import requests.RequestsPackage;
-
-import requests.impl.RequestsPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

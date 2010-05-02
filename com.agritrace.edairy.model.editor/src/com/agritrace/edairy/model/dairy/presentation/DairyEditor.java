@@ -161,11 +161,11 @@ import com.agritrace.edairy.model.dairy.provider.DairyItemProviderAdapterFactory
 
 import com.agritrace.edairy.model.provider.ModelItemProviderAdapterFactory;
 
+import com.agritrace.edairy.model.requests.requests.provider.RequestsItemProviderAdapterFactory;
+
 import com.agritrace.edairy.model.tracking.provider.TrackingItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-
-import requests.provider.RequestsItemProviderAdapterFactory;
 
 
 /**

@@ -8,9 +8,9 @@ package com.agritrace.edairy.model.dairy;
 
 import com.agritrace.edairy.model.Company;
 
-import org.eclipse.emf.common.util.EList;
+import com.agritrace.edairy.model.requests.requests.AnimalHealthRequest;
 
-import requests.AnimalHealthRequest;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -258,7 +258,7 @@ public interface Dairy extends Company {
 
 	/**
 	 * Returns the value of the '<em><b>Animal Health Requests</b></em>' containment reference list.
-	 * The list contents are of type {@link requests.AnimalHealthRequest}.
+	 * The list contents are of type {@link com.agritrace.edairy.model.requests.requests.AnimalHealthRequest}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Animal Health Requests</em>' containment reference list isn't clear,
