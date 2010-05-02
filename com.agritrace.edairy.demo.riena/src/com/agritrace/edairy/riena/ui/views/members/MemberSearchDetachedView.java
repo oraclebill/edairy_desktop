@@ -37,23 +37,24 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.model.Gender;
 import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
-import com.agritrace.edairy.model.dairy.CollectionCentre;
+import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.RouteDefinition;
+import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.tracking.AcquisitionType;
 import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.tracking.ContainerType;
+import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.Purpose;
 import com.agritrace.edairy.model.tracking.RearingMode;
 import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.model.tracking.UnitOfMeasure;
+import com.agritrace.edairy.model.UnitOfMeasure;
 
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener, ISelectionChangedListener, SelectionListener {
@@ -198,7 +199,8 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 				case 0:
 					return ((Membership)element).getMemberId();
 				case 1:
-					return ((Membership)element).getMember().getName();
+//					return ((Membership)element).getMember().getName();
+					return "Not Implemented";
 				case 2:
 					return 
 					((Membership)element).getDefaultRoute().getName();
@@ -258,24 +260,24 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			member1.setStatus(MembershipStatus.ACTIVE);
 			
 			Person member = ModelFactory.eINSTANCE.createPerson();
-			member.setName("Joseph Limuru");
+//			member.setName("Joseph Limuru");
 			member.setPhoneNumber("609-356-3421");
 			member1.setMember(member);
 			
-			RouteDefinition defaultRoute = DairyFactory.eINSTANCE.createRouteDefinition();
+			Route defaultRoute = DairyFactory.eINSTANCE.createRoute();
 			defaultRoute.setName("2 - Ngeche");
 			
-			CollectionCentre stop1 = DairyFactory.eINSTANCE.createCollectionCentre();
+			DairyLocation stop1 = DairyFactory.eINSTANCE.createDairyLocation();
 			stop1.setName("stop 1");
 			defaultRoute.getStops().add(stop1);
 			
-			CollectionCentre stop2 = DairyFactory.eINSTANCE.createCollectionCentre();
+			DairyLocation stop2 = DairyFactory.eINSTANCE.createDairyLocation();
 			stop2.setName("stop 2");
 			defaultRoute.getStops().add(stop2);
 			
 			member1.setDefaultRoute(defaultRoute);
 			
-			Location defaultLocation = ModelFactory.eINSTANCE.createLocation();
+			PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
 			defaultLocation.setAddress("2 - Ngeche");
 			defaultLocation.setSection("Section A");
 			defaultLocation.setEstate("Building B");
@@ -286,10 +288,13 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			defaultLocation.setDistrict("Central");
 			defaultLocation.setProvince("Jersey");
 			defaultLocation.setPostalCode("08550");
-			member.getLocation().add(defaultLocation);
+			
+			Location memberLocation = ModelFactory.eINSTANCE.createLocation();
+			memberLocation.setPostalLocation(defaultLocation);
+			member.setLocation(memberLocation);
 			
 			Farm farm = TrackingFactory.eINSTANCE.createFarm();
-			farm.setFarmId(1001);
+//			farm.(1001);
 			farm.setName("Green Farm");
 			member1.getFarms().add(farm);
 			
@@ -329,7 +334,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			farm.getAnimals().add(animal1);
 			
 			Farm farm1 = TrackingFactory.eINSTANCE.createFarm();
-			farm1.setFarmId(1002);
+//			farm1.setFarmId(1002);
 			farm1.setName("Harvest Farm");
 			member1.getFarms().add(farm1);
 

@@ -40,6 +40,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="ecore:EClass farm.ecore#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="common.ecore#//Person">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
