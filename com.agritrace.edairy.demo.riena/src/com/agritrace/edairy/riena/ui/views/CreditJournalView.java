@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -40,8 +39,6 @@ import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
 import com.agritrace.edairy.riena.ui.views.data.CreditRecord;
 import com.agritrace.edairy.riena.ui.views.data.CreditRecordFactory;
-import com.agritrace.edairy.riena.ui.views.data.Item;
-import com.agritrace.edairy.riena.ui.views.data.ItemsFactory;
 
 public class CreditJournalView extends ViewPart {
 

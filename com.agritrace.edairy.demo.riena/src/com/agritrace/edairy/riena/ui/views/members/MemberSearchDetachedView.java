@@ -35,10 +35,11 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Membership;
@@ -47,8 +48,6 @@ import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.model.ContainerType;
-import com.agritrace.edairy.model.UnitOfMeasure;
 
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener, ISelectionChangedListener, SelectionListener {

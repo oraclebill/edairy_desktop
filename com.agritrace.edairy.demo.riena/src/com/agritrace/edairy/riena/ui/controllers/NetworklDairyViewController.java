@@ -16,10 +16,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 
-
 import com.agritrace.edairy.riena.ui.views.data.NetworkDairy;
-import com.agritrace.edairy.riena.ui.views.data.NetworkDairyFactory;
 import com.agritrace.edairy.riena.ui.views.data.NetworkDairy.ORGANIZATIONTYPE;
+import com.agritrace.edairy.riena.ui.views.data.NetworkDairyFactory;
 
 public class NetworklDairyViewController extends SubModuleController {
 

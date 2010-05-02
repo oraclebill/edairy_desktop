@@ -7,8 +7,6 @@ import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -28,12 +26,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.model.ContainerType;
+import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.ContainerType;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.model.tracking.TrackingFactory;
 
 public class AddContainerDialog extends TitleAreaDialog implements ModifyListener{
 

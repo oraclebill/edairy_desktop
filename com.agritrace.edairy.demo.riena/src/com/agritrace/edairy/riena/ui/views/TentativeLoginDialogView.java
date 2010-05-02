@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.riena.ui.views.data.MemberShip;
 import com.agritrace.edairy.riena.ui.views.data.MemberFactory;
+import com.agritrace.edairy.riena.ui.views.data.MemberShip;
 
 public class TentativeLoginDialogView extends TitleAreaDialog {
 
