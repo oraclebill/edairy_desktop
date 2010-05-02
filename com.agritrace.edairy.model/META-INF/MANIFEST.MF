@@ -21,6 +21,6 @@ Export-Package: com.agritrace.edairy.model,
  com.agritrace.edairy.model.tracking.impl,
  com.agritrace.edairy.model.tracking.util,
  com.agritrace.edairy.model.util,
- com.agritrace.edairy.services,
- com.agritrace.edairy.services.impl,
- com.agritrace.edairy.services.util
+ requests,
+ requests.impl,
+ requests.util

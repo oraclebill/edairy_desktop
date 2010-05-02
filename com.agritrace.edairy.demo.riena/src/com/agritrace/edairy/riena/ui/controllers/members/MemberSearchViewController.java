@@ -176,7 +176,7 @@ public class MemberSearchViewController extends SubModuleController implements M
   	    comboStatus.setSelection(selectedMember.getStatus().getValue());
 		phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__PHONE_NUMBER));
 		phoneRidget.updateFromModel();
-		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__NAME));
+		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));  // TODO: fix back
 		nameRidget.updateFromModel();
 		
 		SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
@@ -192,8 +192,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 		}
 		effectiveDate.setText(bean.getFormattedDate());
 		
-		if(selectedMember.getMember().getLocation().getLocation() != null){
-			PostalLocation location = selectedMember.getMember().getLocation().getLocation();
+		if(selectedMember.getMember().getLocation().getPostalLocation() != null){
+			PostalLocation location = selectedMember.getMember().getLocation().getPostalLocation();
 			addressTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
 			addressTxt.updateFromModel();
 		    sectionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__SECTION));

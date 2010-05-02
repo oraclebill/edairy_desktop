@@ -21,8 +21,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dominantColour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacityInTonnes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assetInfo" lowerBound="1"
-        eType="#//Asset" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalLine">
@@ -74,8 +72,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"
         eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="session" lowerBound="1"
-        eType="#//Session"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bin" lowerBound="1" eType="#//DairyContainer"/>
@@ -110,15 +106,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nhifNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nssfNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="federalPin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="workstations" upperBound="-1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
         eType="#//Route" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" upperBound="-1"
         eType="#//Vehicle" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="employees" upperBound="-1"
         eType="#//Employee" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" lowerBound="2"
-        upperBound="-1" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" upperBound="-1"
         eType="#//Membership" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" upperBound="-1"
@@ -163,10 +156,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalReason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalWitness" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DairyContainer" eSuperTypes="farm.ecore#//Container #//Asset">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assetInfo" lowerBound="1"
-        eType="#//Asset" containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DairyContainer" eSuperTypes="farm.ecore#//Container #//Asset"/>
   <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
     <eLiterals name="Active"/>
     <eLiterals name="Inactive" value="1"/>

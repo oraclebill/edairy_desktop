@@ -18,7 +18,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="thirdTreatment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
         eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Membership"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" lowerBound="1" eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Dairy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farm" lowerBound="1" eType="ecore:EClass ../../com.agritrace.edairy.model/model/farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTo" eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Supplier"/>
   </eClassifiers>

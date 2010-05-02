@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.agritrace.edairy.model.dairy.presentation.DairyModelWizardID"
+            name="%_UI_DairyModelWizard_label"
+            class="com.agritrace.edairy.model.dairy.presentation.DairyModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DairyModelFile.gif">
+         <description>%_UI_DairyModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.agritrace.edairy.model.dairy.presentation.DairyEditorID"
+            name="%_UI_DairyEditor_label"
+            icon="icons/full/obj16/DairyModelFile.gif"
+            extensions="dairy"
+            class="com.agritrace.edairy.model.dairy.presentation.DairyEditor"
+            contributorClass="com.agritrace.edairy.model.dairy.presentation.DairyActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.agritrace.edairy.model.presentation.ModelModelWizardID"
+            name="%_UI_ModelModelWizard_label"
+            class="com.agritrace.edairy.model.presentation.ModelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ModelModelFile.gif">
+         <description>%_UI_ModelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.agritrace.edairy.model.presentation.ModelEditorID"
+            name="%_UI_ModelEditor_label"
+            icon="icons/full/obj16/ModelModelFile.gif"
+            extensions="model"
+            class="com.agritrace.edairy.model.presentation.ModelEditor"
+            contributorClass="com.agritrace.edairy.model.presentation.ModelActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.agritrace.edairy.model.tracking.presentation.TrackingModelWizardID"
+            name="%_UI_TrackingModelWizard_label"
+            class="com.agritrace.edairy.model.tracking.presentation.TrackingModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TrackingModelFile.gif">
+         <description>%_UI_TrackingModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.agritrace.edairy.model.tracking.presentation.TrackingEditorID"
+            name="%_UI_TrackingEditor_label"
+            icon="icons/full/obj16/TrackingModelFile.gif"
+            extensions="tracking"
+            class="com.agritrace.edairy.model.tracking.presentation.TrackingEditor"
+            contributorClass="com.agritrace.edairy.model.tracking.presentation.TrackingActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

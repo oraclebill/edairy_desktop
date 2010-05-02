@@ -199,7 +199,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 				case 0:
 					return ((Membership)element).getMemberId();
 				case 1:
-					return ((Membership)element).getMember().getName();
+					return ((Membership)element).getMember().toString();
 				case 2:
 					return 
 					((Membership)element).getDefaultRoute().getName();
@@ -259,7 +259,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			member1.setStatus(MembershipStatus.ACTIVE);
 			
 			Person member = ModelFactory.eINSTANCE.createPerson();
-			member.setName("Joseph Limuru");
+//			member.set("Joseph Limuru");
 			member.setPhoneNumber("609-356-3421");
 			member1.setMember(member);
 			
@@ -287,7 +287,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			defaultLocation.setDistrict("Central");
 			defaultLocation.setProvince("Jersey");
 			defaultLocation.setPostalCode("08550");
-			member.getLocation().setLocation(defaultLocation);
+			member.getLocation().setPostalLocation(defaultLocation);
 			
 			Farm farm = TrackingFactory.eINSTANCE.createFarm();
 			farm.setName("Green Farm");
