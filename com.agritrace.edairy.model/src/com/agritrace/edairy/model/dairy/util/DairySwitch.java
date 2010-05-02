@@ -12,8 +12,7 @@ import com.agritrace.edairy.model.Person;
 
 import com.agritrace.edairy.model.dairy.*;
 
-import com.agritrace.edairy.model.tracking.Collection;
-import com.agritrace.edairy.model.tracking.Transfer;
+import com.agritrace.edairy.model.tracking.Container;
 
 import java.util.List;
 
@@ -97,23 +96,13 @@ public class DairySwitch<T> {
 			case DairyPackage.VEHICLE: {
 				Vehicle vehicle = (Vehicle)theEObject;
 				T result = caseVehicle(vehicle);
+				if (result == null) result = caseAsset(vehicle);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DRIVER: {
-				Driver driver = (Driver)theEObject;
-				T result = caseDriver(driver);
-				if (result == null) result = caseEmployee(driver);
-				if (result == null) result = casePerson(driver);
-				if (result == null) result = caseParty(driver);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.COLLECTION_RECORD: {
-				CollectionRecord collectionRecord = (CollectionRecord)theEObject;
-				T result = caseCollectionRecord(collectionRecord);
-				if (result == null) result = caseCollection(collectionRecord);
-				if (result == null) result = caseTransfer(collectionRecord);
+			case DairyPackage.COLLECTION_JOURNAL_LINE: {
+				CollectionJournalLine collectionJournalLine = (CollectionJournalLine)theEObject;
+				T result = caseCollectionJournalLine(collectionJournalLine);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -125,21 +114,9 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.COLLECTION_CENTRE: {
-				CollectionCentre collectionCentre = (CollectionCentre)theEObject;
-				T result = caseCollectionCentre(collectionCentre);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.SERVICE_RECORD: {
-				ServiceRecord serviceRecord = (ServiceRecord)theEObject;
-				T result = caseServiceRecord(serviceRecord);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.WORKSTATION: {
-				Workstation workstation = (Workstation)theEObject;
-				T result = caseWorkstation(workstation);
+			case DairyPackage.DAIRY_LOCATION: {
+				DairyLocation dairyLocation = (DairyLocation)theEObject;
+				T result = caseDairyLocation(dairyLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -149,9 +126,9 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.ROUTE_DEFINITION: {
-				RouteDefinition routeDefinition = (RouteDefinition)theEObject;
-				T result = caseRouteDefinition(routeDefinition);
+			case DairyPackage.ROUTE: {
+				Route route = (Route)theEObject;
+				T result = caseRoute(route);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -167,16 +144,9 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.SESSION: {
-				Session session = (Session)theEObject;
-				T result = caseSession(session);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case DairyPackage.DAIRY: {
 				Dairy dairy = (Dairy)theEObject;
 				T result = caseDairy(dairy);
-				if (result == null) result = caseTracking_Dairy(dairy);
 				if (result == null) result = caseCompany(dairy);
 				if (result == null) result = caseParty(dairy);
 				if (result == null) result = defaultCase(theEObject);
@@ -185,6 +155,28 @@ public class DairySwitch<T> {
 			case DairyPackage.MEMBERSHIP: {
 				Membership membership = (Membership)theEObject;
 				T result = caseMembership(membership);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.ASSET: {
+				Asset asset = (Asset)theEObject;
+				T result = caseAsset(asset);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.DAIRY_CONTAINER: {
+				DairyContainer dairyContainer = (DairyContainer)theEObject;
+				T result = caseDairyContainer(dairyContainer);
+				if (result == null) result = caseContainer(dairyContainer);
+				if (result == null) result = caseAsset(dairyContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.SUPPLIER: {
+				Supplier supplier = (Supplier)theEObject;
+				T result = caseSupplier(supplier);
+				if (result == null) result = casePerson(supplier);
+				if (result == null) result = caseParty(supplier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -208,32 +200,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Driver</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Journal Line</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Driver</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Journal Line</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDriver(Driver object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection Record</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection Record</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCollectionRecord(CollectionRecord object) {
+	public T caseCollectionJournalLine(CollectionJournalLine object) {
 		return null;
 	}
 
@@ -253,47 +230,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection Centre</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Location</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection Centre</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Location</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCollectionCentre(CollectionCentre object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Service Record</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Service Record</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseServiceRecord(ServiceRecord object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Workstation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Workstation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWorkstation(Workstation object) {
+	public T caseDairyLocation(DairyLocation object) {
 		return null;
 	}
 
@@ -313,17 +260,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Route Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Route</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Route Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Route</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRouteDefinition(RouteDefinition object) {
+	public T caseRoute(Route object) {
 		return null;
 	}
 
@@ -358,21 +305,6 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Session</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Session</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSession(Session object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Dairy</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -399,6 +331,51 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T caseMembership(Membership object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Asset</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Asset</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAsset(Asset object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDairyContainer(DairyContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Supplier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Supplier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSupplier(Supplier object) {
 		return null;
 	}
 
@@ -433,36 +410,6 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transfer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transfer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTransfer(Transfer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCollection(Collection object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Company</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -478,17 +425,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Dairy</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Dairy</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Container</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTracking_Dairy(com.agritrace.edairy.model.tracking.Dairy object) {
+	public T caseContainer(Container object) {
 		return null;
 	}
 

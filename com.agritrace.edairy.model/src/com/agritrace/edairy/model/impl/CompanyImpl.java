@@ -72,7 +72,7 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 */
 	public EList<Person> getContactPerson() {
 		if (contactPerson == null) {
-			contactPerson = new EObjectContainmentEList.Resolving<Person>(Person.class, this, ModelPackage.COMPANY__CONTACT_PERSON);
+			contactPerson = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACT_PERSON);
 		}
 		return contactPerson;
 	}

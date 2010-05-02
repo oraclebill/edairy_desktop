@@ -54,6 +54,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.RegisteredAnimalImpl#getRearingMode <em>Rearing Mode</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.RegisteredAnimalImpl#getPastOwners <em>Past Owners</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.RegisteredAnimalImpl#getInsuranceNumber <em>Insurance Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.impl.RegisteredAnimalImpl#getDateOfBirth <em>Date Of Birth</em>}</li>
  * </ul>
  * </p>
  *
@@ -289,6 +290,26 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @ordered
 	 */
 	protected String insuranceNumber = INSURANCE_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDateOfBirth() <em>Date Of Birth</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDateOfBirth()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date DATE_OF_BIRTH_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDateOfBirth() <em>Date Of Birth</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDateOfBirth()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date dateOfBirth = DATE_OF_BIRTH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -641,6 +662,27 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDateOfBirth(Date newDateOfBirth) {
+		Date oldDateOfBirth = dateOfBirth;
+		dateOfBirth = newDateOfBirth;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH, oldDateOfBirth, dateOfBirth));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -675,6 +717,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return getPastOwners();
 			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_NUMBER:
 				return getInsuranceNumber();
+			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
+				return getDateOfBirth();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -732,6 +776,9 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_NUMBER:
 				setInsuranceNumber((String)newValue);
 				return;
+			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
+				setDateOfBirth((Date)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -786,6 +833,9 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_NUMBER:
 				setInsuranceNumber(INSURANCE_NUMBER_EDEFAULT);
 				return;
+			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
+				setDateOfBirth(DATE_OF_BIRTH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -826,6 +876,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return pastOwners != null && !pastOwners.isEmpty();
 			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_NUMBER:
 				return INSURANCE_NUMBER_EDEFAULT == null ? insuranceNumber != null : !INSURANCE_NUMBER_EDEFAULT.equals(insuranceNumber);
+			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
+				return DATE_OF_BIRTH_EDEFAULT == null ? dateOfBirth != null : !DATE_OF_BIRTH_EDEFAULT.equals(dateOfBirth);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -860,6 +912,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 		result.append(pastOwners);
 		result.append(", insuranceNumber: ");
 		result.append(insuranceNumber);
+		result.append(", dateOfBirth: ");
+		result.append(dateOfBirth);
 		result.append(')');
 		return result.toString();
 	}

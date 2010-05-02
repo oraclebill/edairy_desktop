@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_nyiLsFXPEd-h9Oey52s2gQ" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_n3ztQFXPEd-h9Oey52s2gQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_n30UUFXPEd-h9Oey52s2gQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_n30UUVXPEd-h9Oey52s2gQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_n33XoFXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/requestId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n33XoVXPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n33-sFXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/date"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n33-sVXPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n33-slXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/type"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n33-s1XPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n33-tFXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/reportedProblem"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n33-tVXPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n33-tlXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/dateHeatDetected"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n33-t1XPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n33-uFXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/firstTreatment"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n33-uVXPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n34lwFXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/secondTreatment"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n34lwVXPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n34lwlXPEd-h9Oey52s2gQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="requests.ecore#//AnimalHealthRequest/thirdTreatment"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n34lw1XPEd-h9Oey52s2gQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_n30UUlXPEd-h9Oey52s2gQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_n30UU1XPEd-h9Oey52s2gQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_n30UVFXPEd-h9Oey52s2gQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_n30UVVXPEd-h9Oey52s2gQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_n30UVlXPEd-h9Oey52s2gQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_n30UV1XPEd-h9Oey52s2gQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_n30UWFXPEd-h9Oey52s2gQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_n3ztQVXPEd-h9Oey52s2gQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="requests.ecore#//AnimalHealthRequest"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_n3ztQlXPEd-h9Oey52s2gQ"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_n34lxFXPEd-h9Oey52s2gQ" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_n35M0FXPEd-h9Oey52s2gQ" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_n35M0VXPEd-h9Oey52s2gQ" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_n35M1VXPEd-h9Oey52s2gQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="requests.ecore#//RequestType/Veterinary"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n35M1lXPEd-h9Oey52s2gQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_n35M11XPEd-h9Oey52s2gQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="requests.ecore#//RequestType/Insemination"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_n35M2FXPEd-h9Oey52s2gQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_n35M0lXPEd-h9Oey52s2gQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_n35M01XPEd-h9Oey52s2gQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_n35M1FXPEd-h9Oey52s2gQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_n34lxVXPEd-h9Oey52s2gQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="requests.ecore#//RequestType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_n34lxlXPEd-h9Oey52s2gQ" x="217"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_nyiLsVXPEd-h9Oey52s2gQ"/>
+  <element xmi:type="ecore:EPackage" href="requests.ecore#/"/>
+</notation:Diagram>

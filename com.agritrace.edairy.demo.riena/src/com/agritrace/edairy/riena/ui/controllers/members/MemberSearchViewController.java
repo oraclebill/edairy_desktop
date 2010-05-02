@@ -15,6 +15,7 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IColumnFormatter;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
@@ -27,6 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
@@ -40,6 +42,7 @@ import com.agritrace.edairy.riena.ui.views.members.MemberSearchSelectionManager;
 
 public class MemberSearchViewController extends SubModuleController implements MemberSearchSelectionListener, ISelectionListener{
 
+		
 	private Membership workingCopy;
 	private Membership selectedMember;
 	
@@ -173,7 +176,7 @@ public class MemberSearchViewController extends SubModuleController implements M
   	    comboStatus.setSelection(selectedMember.getStatus().getValue());
 		phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__PHONE_NUMBER));
 		phoneRidget.updateFromModel();
-		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__NAME));
+		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));  // TODO: fix back
 		nameRidget.updateFromModel();
 		
 		SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
@@ -189,26 +192,26 @@ public class MemberSearchViewController extends SubModuleController implements M
 		}
 		effectiveDate.setText(bean.getFormattedDate());
 		
-		if(!selectedMember.getMember().getLocation().isEmpty()){
-			Location location = selectedMember.getMember().getLocation().get(0);
-			addressTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__ADDRESS));
+		if(selectedMember.getMember().getLocation().getPostalLocation() != null){
+			PostalLocation location = selectedMember.getMember().getLocation().getPostalLocation();
+			addressTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
 			addressTxt.updateFromModel();
-		    sectionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__SECTION));
+		    sectionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__SECTION));
 		    sectionTxt.updateFromModel();
-			estateTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__ESTATE));
+			estateTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__ESTATE));
 			estateTxt.updateFromModel();
-			locationTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__LOCATION));
+			locationTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__LOCATION));
 			locationTxt.updateFromModel();
-			subLocationTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__SUB_LOCATION));
+			subLocationTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__SUB_LOCATION));
 			subLocationTxt.updateFromModel();
-			villageTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__VILLAGE));
+			villageTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__VILLAGE));
 			villageTxt.updateFromModel();
-			divisionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__DIVISION));
+			divisionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__DIVISION));
 			divisionTxt.updateFromModel();
-			districtTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__DISTRICT));
+			districtTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
 			districtTxt.updateFromModel();
 //			provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
-			postalCodeTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.LOCATION__POSTAL_CODE));
+			postalCodeTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 			postalCodeTxt.updateFromModel();
 		}
 	}

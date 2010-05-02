@@ -72,13 +72,13 @@ public interface ModelPackage extends EPackage {
 	int PARTY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Party Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTY__NAME = 0;
+	int PARTY__PARTY_ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
@@ -90,7 +90,7 @@ public interface ModelPackage extends EPackage {
 	int PARTY__PHONE_NUMBER = 1;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -99,122 +99,22 @@ public interface ModelPackage extends EPackage {
 	int PARTY__LOCATION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTY__CONTACT_METHODS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Party</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTY_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.LocationImpl <em>Location</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.model.impl.LocationImpl
-	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getLocation()
-	 * @generated
-	 */
-	int LOCATION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Address</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__ADDRESS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Province</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__PROVINCE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Division</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__DIVISION = 2;
-
-	/**
-	 * The feature id for the '<em><b>District</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__DISTRICT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__LOCATION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Sub Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__SUB_LOCATION = 5;
-
-	/**
-	 * The feature id for the '<em><b>Village</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__VILLAGE = 6;
-
-	/**
-	 * The feature id for the '<em><b>Postal Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__POSTAL_CODE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Estate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__ESTATE = 8;
-
-	/**
-	 * The feature id for the '<em><b>Section</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION__SECTION = 9;
-
-	/**
-	 * The number of structural features of the '<em>Location</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCATION_FEATURE_COUNT = 10;
+	int PARTY_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.MapLocationImpl <em>Map Location</em>}' class.
@@ -227,103 +127,13 @@ public interface ModelPackage extends EPackage {
 	int MAP_LOCATION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Address</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__ADDRESS = LOCATION__ADDRESS;
-
-	/**
-	 * The feature id for the '<em><b>Province</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__PROVINCE = LOCATION__PROVINCE;
-
-	/**
-	 * The feature id for the '<em><b>Division</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__DIVISION = LOCATION__DIVISION;
-
-	/**
-	 * The feature id for the '<em><b>District</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__DISTRICT = LOCATION__DISTRICT;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__LOCATION = LOCATION__LOCATION;
-
-	/**
-	 * The feature id for the '<em><b>Sub Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__SUB_LOCATION = LOCATION__SUB_LOCATION;
-
-	/**
-	 * The feature id for the '<em><b>Village</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__VILLAGE = LOCATION__VILLAGE;
-
-	/**
-	 * The feature id for the '<em><b>Postal Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__POSTAL_CODE = LOCATION__POSTAL_CODE;
-
-	/**
-	 * The feature id for the '<em><b>Estate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__ESTATE = LOCATION__ESTATE;
-
-	/**
-	 * The feature id for the '<em><b>Section</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAP_LOCATION__SECTION = LOCATION__SECTION;
-
-	/**
 	 * The feature id for the '<em><b>Longitude</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAP_LOCATION__LONGITUDE = LOCATION_FEATURE_COUNT + 0;
+	int MAP_LOCATION__LONGITUDE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Latitude</b></em>' attribute.
@@ -332,7 +142,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAP_LOCATION__LATITUDE = LOCATION_FEATURE_COUNT + 1;
+	int MAP_LOCATION__LATITUDE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Map Location</em>' class.
@@ -341,7 +151,116 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAP_LOCATION_FEATURE_COUNT = LOCATION_FEATURE_COUNT + 2;
+	int MAP_LOCATION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.PostalLocationImpl <em>Postal Location</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.impl.PostalLocationImpl
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getPostalLocation()
+	 * @generated
+	 */
+	int POSTAL_LOCATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__ADDRESS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Section</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__SECTION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Estate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__ESTATE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Village</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__VILLAGE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Sub Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__SUB_LOCATION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__LOCATION = 5;
+
+	/**
+	 * The feature id for the '<em><b>District</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__DISTRICT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Division</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__DIVISION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Province</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__PROVINCE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Postal Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION__POSTAL_CODE = 9;
+
+	/**
+	 * The number of structural features of the '<em>Postal Location</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_LOCATION_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.StatutoryLocationImpl <em>Statutory Location</em>}' class.
@@ -419,13 +338,13 @@ public interface ModelPackage extends EPackage {
 	int PERSON = 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Party Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NAME = PARTY__NAME;
+	int PERSON__PARTY_ID = PARTY__PARTY_ID;
 
 	/**
 	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
@@ -437,7 +356,7 @@ public interface ModelPackage extends EPackage {
 	int PERSON__PHONE_NUMBER = PARTY__PHONE_NUMBER;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -446,31 +365,22 @@ public interface ModelPackage extends EPackage {
 	int PERSON__LOCATION = PARTY__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>National Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NATIONAL_ID = PARTY_FEATURE_COUNT + 0;
+	int PERSON__CONTACT_METHODS = PARTY__CONTACT_METHODS;
 
 	/**
-	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NHIF_NUMBER = PARTY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__NSSF_NUMBER = PARTY_FEATURE_COUNT + 2;
+	int PERSON__PHOTO = PARTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Person</em>' class.
@@ -479,7 +389,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = PARTY_FEATURE_COUNT + 3;
+	int PERSON_FEATURE_COUNT = PARTY_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.CompanyImpl <em>Company</em>}' class.
@@ -492,13 +402,13 @@ public interface ModelPackage extends EPackage {
 	int COMPANY = 6;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Party Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY__NAME = PARTY__NAME;
+	int COMPANY__PARTY_ID = PARTY__PARTY_ID;
 
 	/**
 	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
@@ -510,13 +420,22 @@ public interface ModelPackage extends EPackage {
 	int COMPANY__PHONE_NUMBER = PARTY__PHONE_NUMBER;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int COMPANY__LOCATION = PARTY__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPANY__CONTACT_METHODS = PARTY__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Contact Person</b></em>' containment reference list.
@@ -556,13 +475,114 @@ public interface ModelPackage extends EPackage {
 	int DESCRIPTIVE_LOCATION__DIRECTIONS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Landmarks</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTIVE_LOCATION__LANDMARKS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Descriptive Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTIVE_LOCATION_FEATURE_COUNT = 1;
+	int DESCRIPTIVE_LOCATION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.LocationImpl <em>Location</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.impl.LocationImpl
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getLocation()
+	 * @generated
+	 */
+	int LOCATION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Postal Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__POSTAL_LOCATION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Map Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__MAP_LOCATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Statutory Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__STATUTORY_LOCATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Descriptive Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__DESCRIPTIVE_LOCATION = 3;
+
+	/**
+	 * The number of structural features of the '<em>Location</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.impl.ContactMethodImpl <em>Contact Method</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.impl.ContactMethodImpl
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContactMethod()
+	 * @generated
+	 */
+	int CONTACT_METHOD = 9;
+
+	/**
+	 * The feature id for the '<em><b>Cm Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT_METHOD__CM_TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Cm Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT_METHOD__CM_VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Contact Method</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTACT_METHOD_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.Gender <em>Gender</em>}' enum.
@@ -572,7 +592,37 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 8;
+	int GENDER = 10;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.ContactMethodType <em>Contact Method Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.ContactMethodType
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContactMethodType()
+	 * @generated
+	 */
+	int CONTACT_METHOD_TYPE = 11;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.UnitOfMeasure
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUnitOfMeasure()
+	 * @generated
+	 */
+	int UNIT_OF_MEASURE = 12;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.ContainerType <em>Container Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.ContainerType
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContainerType()
+	 * @generated
+	 */
+	int CONTAINER_TYPE = 13;
 
 	/**
 	 * The meta object id for the '<em>Transaction ID</em>' data type.
@@ -582,17 +632,27 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getTransactionID()
 	 * @generated
 	 */
-	int TRANSACTION_ID = 9;
+	int TRANSACTION_ID = 14;
 
 	/**
 	 * The meta object id for the '<em>Unique ID</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.lang.String
+	 * @see java.lang.Long
 	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUniqueID()
 	 * @generated
 	 */
-	int UNIQUE_ID = 10;
+	int UNIQUE_ID = 15;
+
+	/**
+	 * The meta object id for the '<em>Image Reference</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getImageReference()
+	 * @generated
+	 */
+	int IMAGE_REFERENCE = 16;
 
 
 	/**
@@ -606,15 +666,15 @@ public interface ModelPackage extends EPackage {
 	EClass getParty();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Party#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Party#getPartyId <em>Party Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.agritrace.edairy.model.Party#getName()
+	 * @return the meta object for the attribute '<em>Party Id</em>'.
+	 * @see com.agritrace.edairy.model.Party#getPartyId()
 	 * @see #getParty()
 	 * @generated
 	 */
-	EAttribute getParty_Name();
+	EAttribute getParty_PartyId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Party#getPhoneNumber <em>Phone Number</em>}'.
@@ -628,15 +688,26 @@ public interface ModelPackage extends EPackage {
 	EAttribute getParty_PhoneNumber();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.model.Party#getLocation <em>Location</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.model.Party#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Location</em>'.
+	 * @return the meta object for the containment reference '<em>Location</em>'.
 	 * @see com.agritrace.edairy.model.Party#getLocation()
 	 * @see #getParty()
 	 * @generated
 	 */
 	EReference getParty_Location();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.model.Party#getContactMethods <em>Contact Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Contact Methods</em>'.
+	 * @see com.agritrace.edairy.model.Party#getContactMethods()
+	 * @see #getParty()
+	 * @generated
+	 */
+	EReference getParty_ContactMethods();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.MapLocation <em>Map Location</em>}'.
@@ -671,124 +742,124 @@ public interface ModelPackage extends EPackage {
 	EAttribute getMapLocation_Latitude();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.model.Location <em>Location</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.model.PostalLocation <em>Postal Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Location</em>'.
-	 * @see com.agritrace.edairy.model.Location
+	 * @return the meta object for class '<em>Postal Location</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation
 	 * @generated
 	 */
-	EClass getLocation();
+	EClass getPostalLocation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getAddress <em>Address</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getAddress <em>Address</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Address</em>'.
-	 * @see com.agritrace.edairy.model.Location#getAddress()
-	 * @see #getLocation()
+	 * @see com.agritrace.edairy.model.PostalLocation#getAddress()
+	 * @see #getPostalLocation()
 	 * @generated
 	 */
-	EAttribute getLocation_Address();
+	EAttribute getPostalLocation_Address();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getProvince <em>Province</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Province</em>'.
-	 * @see com.agritrace.edairy.model.Location#getProvince()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_Province();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getDivision <em>Division</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Division</em>'.
-	 * @see com.agritrace.edairy.model.Location#getDivision()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_Division();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getDistrict <em>District</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>District</em>'.
-	 * @see com.agritrace.edairy.model.Location#getDistrict()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_District();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getLocation <em>Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Location</em>'.
-	 * @see com.agritrace.edairy.model.Location#getLocation()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_Location();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getSubLocation <em>Sub Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Sub Location</em>'.
-	 * @see com.agritrace.edairy.model.Location#getSubLocation()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_SubLocation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getVillage <em>Village</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Village</em>'.
-	 * @see com.agritrace.edairy.model.Location#getVillage()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_Village();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getPostalCode <em>Postal Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Postal Code</em>'.
-	 * @see com.agritrace.edairy.model.Location#getPostalCode()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_PostalCode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getEstate <em>Estate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Estate</em>'.
-	 * @see com.agritrace.edairy.model.Location#getEstate()
-	 * @see #getLocation()
-	 * @generated
-	 */
-	EAttribute getLocation_Estate();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Location#getSection <em>Section</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getSection <em>Section</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Section</em>'.
-	 * @see com.agritrace.edairy.model.Location#getSection()
-	 * @see #getLocation()
+	 * @see com.agritrace.edairy.model.PostalLocation#getSection()
+	 * @see #getPostalLocation()
 	 * @generated
 	 */
-	EAttribute getLocation_Section();
+	EAttribute getPostalLocation_Section();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getEstate <em>Estate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Estate</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getEstate()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_Estate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getVillage <em>Village</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Village</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getVillage()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_Village();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getSubLocation <em>Sub Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sub Location</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getSubLocation()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_SubLocation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getLocation()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_Location();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getDistrict <em>District</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>District</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getDistrict()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_District();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getDivision <em>Division</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Division</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getDivision()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_Division();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getProvince <em>Province</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Province</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getProvince()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_Province();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.PostalLocation#getPostalCode <em>Postal Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Postal Code</em>'.
+	 * @see com.agritrace.edairy.model.PostalLocation#getPostalCode()
+	 * @see #getPostalLocation()
+	 * @generated
+	 */
+	EAttribute getPostalLocation_PostalCode();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.StatutoryLocation <em>Statutory Location</em>}'.
@@ -854,37 +925,15 @@ public interface ModelPackage extends EPackage {
 	EClass getPerson();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Person#getNationalId <em>National Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Person#getPhoto <em>Photo</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>National Id</em>'.
-	 * @see com.agritrace.edairy.model.Person#getNationalId()
+	 * @return the meta object for the attribute '<em>Photo</em>'.
+	 * @see com.agritrace.edairy.model.Person#getPhoto()
 	 * @see #getPerson()
 	 * @generated
 	 */
-	EAttribute getPerson_NationalId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Person#getNhifNumber <em>Nhif Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Nhif Number</em>'.
-	 * @see com.agritrace.edairy.model.Person#getNhifNumber()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EAttribute getPerson_NhifNumber();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.Person#getNssfNumber <em>Nssf Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Nssf Number</em>'.
-	 * @see com.agritrace.edairy.model.Person#getNssfNumber()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EAttribute getPerson_NssfNumber();
+	EAttribute getPerson_Photo();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.Company <em>Company</em>}'.
@@ -929,6 +978,103 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDescriptiveLocation_Directions();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.DescriptiveLocation#getLandmarks <em>Landmarks</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Landmarks</em>'.
+	 * @see com.agritrace.edairy.model.DescriptiveLocation#getLandmarks()
+	 * @see #getDescriptiveLocation()
+	 * @generated
+	 */
+	EAttribute getDescriptiveLocation_Landmarks();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.model.Location <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Location</em>'.
+	 * @see com.agritrace.edairy.model.Location
+	 * @generated
+	 */
+	EClass getLocation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.model.Location#getPostalLocation <em>Postal Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Postal Location</em>'.
+	 * @see com.agritrace.edairy.model.Location#getPostalLocation()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EReference getLocation_PostalLocation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.model.Location#getMapLocation <em>Map Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Map Location</em>'.
+	 * @see com.agritrace.edairy.model.Location#getMapLocation()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EReference getLocation_MapLocation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.model.Location#getStatutoryLocation <em>Statutory Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Statutory Location</em>'.
+	 * @see com.agritrace.edairy.model.Location#getStatutoryLocation()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EReference getLocation_StatutoryLocation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.model.Location#getDescriptiveLocation <em>Descriptive Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Descriptive Location</em>'.
+	 * @see com.agritrace.edairy.model.Location#getDescriptiveLocation()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EReference getLocation_DescriptiveLocation();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.model.ContactMethod <em>Contact Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Contact Method</em>'.
+	 * @see com.agritrace.edairy.model.ContactMethod
+	 * @generated
+	 */
+	EClass getContactMethod();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.ContactMethod#getCmType <em>Cm Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cm Type</em>'.
+	 * @see com.agritrace.edairy.model.ContactMethod#getCmType()
+	 * @see #getContactMethod()
+	 * @generated
+	 */
+	EAttribute getContactMethod_CmType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.ContactMethod#getCmValue <em>Cm Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cm Value</em>'.
+	 * @see com.agritrace.edairy.model.ContactMethod#getCmValue()
+	 * @see #getContactMethod()
+	 * @generated
+	 */
+	EAttribute getContactMethod_CmValue();
+
+	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.Gender <em>Gender</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -937,6 +1083,36 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getGender();
+
+	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.ContactMethodType <em>Contact Method Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Contact Method Type</em>'.
+	 * @see com.agritrace.edairy.model.ContactMethodType
+	 * @generated
+	 */
+	EEnum getContactMethodType();
+
+	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.UnitOfMeasure <em>Unit Of Measure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Unit Of Measure</em>'.
+	 * @see com.agritrace.edairy.model.UnitOfMeasure
+	 * @generated
+	 */
+	EEnum getUnitOfMeasure();
+
+	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.ContainerType <em>Container Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Container Type</em>'.
+	 * @see com.agritrace.edairy.model.ContainerType
+	 * @generated
+	 */
+	EEnum getContainerType();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Transaction ID</em>}'.
@@ -950,15 +1126,26 @@ public interface ModelPackage extends EPackage {
 	EDataType getTransactionID();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>Unique ID</em>}'.
+	 * Returns the meta object for data type '{@link java.lang.Long <em>Unique ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Unique ID</em>'.
+	 * @see java.lang.Long
+	 * @model instanceClass="java.lang.Long"
+	 * @generated
+	 */
+	EDataType getUniqueID();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>Image Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Image Reference</em>'.
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
 	 * @generated
 	 */
-	EDataType getUniqueID();
+	EDataType getImageReference();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -993,12 +1180,12 @@ public interface ModelPackage extends EPackage {
 		EClass PARTY = eINSTANCE.getParty();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Party Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARTY__NAME = eINSTANCE.getParty_Name();
+		EAttribute PARTY__PARTY_ID = eINSTANCE.getParty_PartyId();
 
 		/**
 		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
@@ -1009,12 +1196,20 @@ public interface ModelPackage extends EPackage {
 		EAttribute PARTY__PHONE_NUMBER = eINSTANCE.getParty_PhoneNumber();
 
 		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PARTY__LOCATION = eINSTANCE.getParty_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Contact Methods</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTY__CONTACT_METHODS = eINSTANCE.getParty_ContactMethods();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.MapLocationImpl <em>Map Location</em>}' class.
@@ -1043,14 +1238,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute MAP_LOCATION__LATITUDE = eINSTANCE.getMapLocation_Latitude();
 
 		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.LocationImpl <em>Location</em>}' class.
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.PostalLocationImpl <em>Postal Location</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.model.impl.LocationImpl
-		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getLocation()
+		 * @see com.agritrace.edairy.model.impl.PostalLocationImpl
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getPostalLocation()
 		 * @generated
 		 */
-		EClass LOCATION = eINSTANCE.getLocation();
+		EClass POSTAL_LOCATION = eINSTANCE.getPostalLocation();
 
 		/**
 		 * The meta object literal for the '<em><b>Address</b></em>' attribute feature.
@@ -1058,71 +1253,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LOCATION__ADDRESS = eINSTANCE.getLocation_Address();
-
-		/**
-		 * The meta object literal for the '<em><b>Province</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__PROVINCE = eINSTANCE.getLocation_Province();
-
-		/**
-		 * The meta object literal for the '<em><b>Division</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__DIVISION = eINSTANCE.getLocation_Division();
-
-		/**
-		 * The meta object literal for the '<em><b>District</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__DISTRICT = eINSTANCE.getLocation_District();
-
-		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__LOCATION = eINSTANCE.getLocation_Location();
-
-		/**
-		 * The meta object literal for the '<em><b>Sub Location</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__SUB_LOCATION = eINSTANCE.getLocation_SubLocation();
-
-		/**
-		 * The meta object literal for the '<em><b>Village</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__VILLAGE = eINSTANCE.getLocation_Village();
-
-		/**
-		 * The meta object literal for the '<em><b>Postal Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__POSTAL_CODE = eINSTANCE.getLocation_PostalCode();
-
-		/**
-		 * The meta object literal for the '<em><b>Estate</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOCATION__ESTATE = eINSTANCE.getLocation_Estate();
+		EAttribute POSTAL_LOCATION__ADDRESS = eINSTANCE.getPostalLocation_Address();
 
 		/**
 		 * The meta object literal for the '<em><b>Section</b></em>' attribute feature.
@@ -1130,7 +1261,71 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LOCATION__SECTION = eINSTANCE.getLocation_Section();
+		EAttribute POSTAL_LOCATION__SECTION = eINSTANCE.getPostalLocation_Section();
+
+		/**
+		 * The meta object literal for the '<em><b>Estate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__ESTATE = eINSTANCE.getPostalLocation_Estate();
+
+		/**
+		 * The meta object literal for the '<em><b>Village</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__VILLAGE = eINSTANCE.getPostalLocation_Village();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__SUB_LOCATION = eINSTANCE.getPostalLocation_SubLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__LOCATION = eINSTANCE.getPostalLocation_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>District</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__DISTRICT = eINSTANCE.getPostalLocation_District();
+
+		/**
+		 * The meta object literal for the '<em><b>Division</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__DIVISION = eINSTANCE.getPostalLocation_Division();
+
+		/**
+		 * The meta object literal for the '<em><b>Province</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__PROVINCE = eINSTANCE.getPostalLocation_Province();
+
+		/**
+		 * The meta object literal for the '<em><b>Postal Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_LOCATION__POSTAL_CODE = eINSTANCE.getPostalLocation_PostalCode();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.StatutoryLocationImpl <em>Statutory Location</em>}' class.
@@ -1187,28 +1382,12 @@ public interface ModelPackage extends EPackage {
 		EClass PERSON = eINSTANCE.getPerson();
 
 		/**
-		 * The meta object literal for the '<em><b>National Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Photo</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PERSON__NATIONAL_ID = eINSTANCE.getPerson_NationalId();
-
-		/**
-		 * The meta object literal for the '<em><b>Nhif Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON__NHIF_NUMBER = eINSTANCE.getPerson_NhifNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Nssf Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON__NSSF_NUMBER = eINSTANCE.getPerson_NssfNumber();
+		EAttribute PERSON__PHOTO = eINSTANCE.getPerson_Photo();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.CompanyImpl <em>Company</em>}' class.
@@ -1247,6 +1426,82 @@ public interface ModelPackage extends EPackage {
 		EAttribute DESCRIPTIVE_LOCATION__DIRECTIONS = eINSTANCE.getDescriptiveLocation_Directions();
 
 		/**
+		 * The meta object literal for the '<em><b>Landmarks</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DESCRIPTIVE_LOCATION__LANDMARKS = eINSTANCE.getDescriptiveLocation_Landmarks();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.LocationImpl <em>Location</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.impl.LocationImpl
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getLocation()
+		 * @generated
+		 */
+		EClass LOCATION = eINSTANCE.getLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Postal Location</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION__POSTAL_LOCATION = eINSTANCE.getLocation_PostalLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Map Location</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION__MAP_LOCATION = eINSTANCE.getLocation_MapLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Statutory Location</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION__STATUTORY_LOCATION = eINSTANCE.getLocation_StatutoryLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Descriptive Location</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCATION__DESCRIPTIVE_LOCATION = eINSTANCE.getLocation_DescriptiveLocation();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.impl.ContactMethodImpl <em>Contact Method</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.impl.ContactMethodImpl
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContactMethod()
+		 * @generated
+		 */
+		EClass CONTACT_METHOD = eINSTANCE.getContactMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Cm Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTACT_METHOD__CM_TYPE = eINSTANCE.getContactMethod_CmType();
+
+		/**
+		 * The meta object literal for the '<em><b>Cm Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTACT_METHOD__CM_VALUE = eINSTANCE.getContactMethod_CmValue();
+
+		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.Gender <em>Gender</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1255,6 +1510,36 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GENDER = eINSTANCE.getGender();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.ContactMethodType <em>Contact Method Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.ContactMethodType
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContactMethodType()
+		 * @generated
+		 */
+		EEnum CONTACT_METHOD_TYPE = eINSTANCE.getContactMethodType();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.UnitOfMeasure
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUnitOfMeasure()
+		 * @generated
+		 */
+		EEnum UNIT_OF_MEASURE = eINSTANCE.getUnitOfMeasure();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.ContainerType <em>Container Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.ContainerType
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getContainerType()
+		 * @generated
+		 */
+		EEnum CONTAINER_TYPE = eINSTANCE.getContainerType();
 
 		/**
 		 * The meta object literal for the '<em>Transaction ID</em>' data type.
@@ -1270,11 +1555,21 @@ public interface ModelPackage extends EPackage {
 		 * The meta object literal for the '<em>Unique ID</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.lang.String
+		 * @see java.lang.Long
 		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getUniqueID()
 		 * @generated
 		 */
 		EDataType UNIQUE_ID = eINSTANCE.getUniqueID();
+
+		/**
+		 * The meta object literal for the '<em>Image Reference</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see com.agritrace.edairy.model.impl.ModelPackageImpl#getImageReference()
+		 * @generated
+		 */
+		EDataType IMAGE_REFERENCE = eINSTANCE.getImageReference();
 
 	}
 

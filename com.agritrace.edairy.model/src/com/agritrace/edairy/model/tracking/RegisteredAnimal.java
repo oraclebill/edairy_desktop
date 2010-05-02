@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getRearingMode <em>Rearing Mode</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getPastOwners <em>Past Owners</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getInsuranceNumber <em>Insurance Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getDateOfBirth <em>Date Of Birth</em>}</li>
  * </ul>
  * </p>
  *
@@ -399,5 +400,31 @@ public interface RegisteredAnimal extends EObject {
 	 * @generated
 	 */
 	void setInsuranceNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Date Of Birth</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Date Of Birth</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Date Of Birth</em>' attribute.
+	 * @see #setDateOfBirth(Date)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getRegisteredAnimal_DateOfBirth()
+	 * @model
+	 * @generated
+	 */
+	Date getDateOfBirth();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getDateOfBirth <em>Date Of Birth</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Date Of Birth</em>' attribute.
+	 * @see #getDateOfBirth()
+	 * @generated
+	 */
+	void setDateOfBirth(Date value);
 
 } // RegisteredAnimal

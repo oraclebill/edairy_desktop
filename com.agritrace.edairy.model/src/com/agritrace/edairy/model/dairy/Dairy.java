@@ -6,6 +6,10 @@
  */
 package com.agritrace.edairy.model.dairy;
 
+import com.agritrace.edairy.model.Company;
+
+import com.agritrace.edairy.model.requests.requests.AnimalHealthRequest;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -19,12 +23,15 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getNssfNumber <em>Nssf Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getFederalPin <em>Federal Pin</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getWorkstations <em>Workstations</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getRoutes <em>Routes</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getVehicles <em>Vehicles</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getEmployees <em>Employees</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getSessions <em>Sessions</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getMemberships <em>Memberships</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getBranchLocations <em>Branch Locations</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getRegistrationNumber <em>Registration Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getCollectionJournals <em>Collection Journals</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +39,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Dairy extends com.agritrace.edairy.model.tracking.Dairy {
+public interface Dairy extends Company {
 	/**
 	 * Returns the value of the '<em><b>Nhif Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -112,24 +119,8 @@ public interface Dairy extends com.agritrace.edairy.model.tracking.Dairy {
 	void setFederalPin(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Workstations</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.Workstation}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Workstations</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Workstations</em>' reference list.
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Workstations()
-	 * @model
-	 * @generated
-	 */
-	EList<Workstation> getWorkstations();
-
-	/**
 	 * Returns the value of the '<em><b>Routes</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.RouteDefinition}.
+	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.Route}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Routes</em>' containment reference list isn't clear,
@@ -138,10 +129,10 @@ public interface Dairy extends com.agritrace.edairy.model.tracking.Dairy {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Routes</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Routes()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<RouteDefinition> getRoutes();
+	EList<Route> getRoutes();
 
 	/**
 	 * Returns the value of the '<em><b>Vehicles</b></em>' containment reference list.
@@ -154,7 +145,7 @@ public interface Dairy extends com.agritrace.edairy.model.tracking.Dairy {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vehicles</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Vehicles()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Vehicle> getVehicles();
@@ -170,26 +161,10 @@ public interface Dairy extends com.agritrace.edairy.model.tracking.Dairy {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Employees</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Employees()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Employee> getEmployees();
-
-	/**
-	 * Returns the value of the '<em><b>Sessions</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.Session}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sessions</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sessions</em>' containment reference list.
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Sessions()
-	 * @model containment="true" resolveProxies="true" lower="2"
-	 * @generated
-	 */
-	EList<Session> getSessions();
 
 	/**
 	 * Returns the value of the '<em><b>Memberships</b></em>' containment reference list.
@@ -202,9 +177,99 @@ public interface Dairy extends com.agritrace.edairy.model.tracking.Dairy {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Memberships</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Memberships()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Membership> getMemberships();
+
+	/**
+	 * Returns the value of the '<em><b>Branch Locations</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.DairyLocation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Branch Locations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Branch Locations</em>' containment reference list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_BranchLocations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DairyLocation> getBranchLocations();
+
+	/**
+	 * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Registration Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Registration Number</em>' attribute.
+	 * @see #setRegistrationNumber(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_RegistrationNumber()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getRegistrationNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Dairy#getRegistrationNumber <em>Registration Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Registration Number</em>' attribute.
+	 * @see #getRegistrationNumber()
+	 * @generated
+	 */
+	void setRegistrationNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Collection Journals</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.CollectionJournal}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Collection Journals</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Collection Journals</em>' containment reference list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_CollectionJournals()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CollectionJournal> getCollectionJournals();
+
+	/**
+	 * Returns the value of the '<em><b>Suppliers</b></em>' reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.Supplier}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Suppliers</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Suppliers</em>' reference list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_Suppliers()
+	 * @model
+	 * @generated
+	 */
+	EList<Supplier> getSuppliers();
+
+	/**
+	 * Returns the value of the '<em><b>Animal Health Requests</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.requests.requests.AnimalHealthRequest}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Animal Health Requests</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Animal Health Requests</em>' containment reference list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_AnimalHealthRequests()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AnimalHealthRequest> getAnimalHealthRequests();
 
 } // Dairy

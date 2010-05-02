@@ -7,24 +7,15 @@
 package com.agritrace.edairy.model.dairy.impl;
 
 import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.ServiceRecord;
+import com.agritrace.edairy.model.dairy.Employee;
 import com.agritrace.edairy.model.dairy.Vehicle;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +24,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getServiceRecords <em>Service Records</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getRegistrationNumber <em>Registration Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getMake <em>Make</em>}</li>
@@ -43,26 +33,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getLogBookNumber <em>Log Book Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getInsurancePolicyNumber <em>Insurance Policy Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getInsurancePurchaseDate <em>Insurance Purchase Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getPurchaseDate <em>Purchase Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getDisposalDate <em>Disposal Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getDominantColour <em>Dominant Colour</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getDriver <em>Driver</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VehicleImpl extends EObjectImpl implements Vehicle {
-	/**
-	 * The cached value of the '{@link #getServiceRecords() <em>Service Records</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getServiceRecords()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ServiceRecord> serviceRecords;
-
+public class VehicleImpl extends AssetImpl implements Vehicle {
 	/**
 	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -244,46 +223,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	protected String insurancePurchaseDate = INSURANCE_PURCHASE_DATE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPurchaseDate() <em>Purchase Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPurchaseDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PURCHASE_DATE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPurchaseDate() <em>Purchase Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPurchaseDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected String purchaseDate = PURCHASE_DATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDisposalDate() <em>Disposal Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDisposalDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DISPOSAL_DATE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDisposalDate() <em>Disposal Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDisposalDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected String disposalDate = DISPOSAL_DATE_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -324,6 +263,16 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	protected String capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDriver()
+	 * @generated
+	 * @ordered
+	 */
+	protected Employee driver;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -340,18 +289,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.VEHICLE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ServiceRecord> getServiceRecords() {
-		if (serviceRecords == null) {
-			serviceRecords = new EObjectContainmentEList.Resolving<ServiceRecord>(ServiceRecord.class, this, DairyPackage.VEHICLE__SERVICE_RECORDS);
-		}
-		return serviceRecords;
 	}
 
 	/**
@@ -548,48 +485,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPurchaseDate() {
-		return purchaseDate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPurchaseDate(String newPurchaseDate) {
-		String oldPurchaseDate = purchaseDate;
-		purchaseDate = newPurchaseDate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__PURCHASE_DATE, oldPurchaseDate, purchaseDate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getDisposalDate() {
-		return disposalDate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDisposalDate(String newDisposalDate) {
-		String oldDisposalDate = disposalDate;
-		disposalDate = newDisposalDate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DISPOSAL_DATE, oldDisposalDate, disposalDate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getDominantColour() {
 		return dominantColour;
 	}
@@ -632,13 +527,37 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case DairyPackage.VEHICLE__SERVICE_RECORDS:
-				return ((InternalEList<?>)getServiceRecords()).basicRemove(otherEnd, msgs);
+	public Employee getDriver() {
+		if (driver != null && driver.eIsProxy()) {
+			InternalEObject oldDriver = (InternalEObject)driver;
+			driver = (Employee)eResolveProxy(oldDriver);
+			if (driver != oldDriver) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
+			}
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return driver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Employee basicGetDriver() {
+		return driver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDriver(Employee newDriver) {
+		Employee oldDriver = driver;
+		driver = newDriver;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
 	}
 
 	/**
@@ -649,8 +568,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.VEHICLE__SERVICE_RECORDS:
-				return getServiceRecords();
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				return getRegistrationNumber();
 			case DairyPackage.VEHICLE__TYPE:
@@ -669,14 +586,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 				return getInsurancePolicyNumber();
 			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
 				return getInsurancePurchaseDate();
-			case DairyPackage.VEHICLE__PURCHASE_DATE:
-				return getPurchaseDate();
-			case DairyPackage.VEHICLE__DISPOSAL_DATE:
-				return getDisposalDate();
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				return getDominantColour();
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
 				return getCapacityInTonnes();
+			case DairyPackage.VEHICLE__DRIVER:
+				if (resolve) return getDriver();
+				return basicGetDriver();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -686,14 +602,9 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.VEHICLE__SERVICE_RECORDS:
-				getServiceRecords().clear();
-				getServiceRecords().addAll((Collection<? extends ServiceRecord>)newValue);
-				return;
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				setRegistrationNumber((String)newValue);
 				return;
@@ -721,17 +632,14 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
 				setInsurancePurchaseDate((String)newValue);
 				return;
-			case DairyPackage.VEHICLE__PURCHASE_DATE:
-				setPurchaseDate((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__DISPOSAL_DATE:
-				setDisposalDate((String)newValue);
-				return;
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				setDominantColour((String)newValue);
 				return;
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
 				setCapacityInTonnes((String)newValue);
+				return;
+			case DairyPackage.VEHICLE__DRIVER:
+				setDriver((Employee)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -745,9 +653,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.VEHICLE__SERVICE_RECORDS:
-				getServiceRecords().clear();
-				return;
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
 				return;
@@ -775,17 +680,14 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
 				setInsurancePurchaseDate(INSURANCE_PURCHASE_DATE_EDEFAULT);
 				return;
-			case DairyPackage.VEHICLE__PURCHASE_DATE:
-				setPurchaseDate(PURCHASE_DATE_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__DISPOSAL_DATE:
-				setDisposalDate(DISPOSAL_DATE_EDEFAULT);
-				return;
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				setDominantColour(DOMINANT_COLOUR_EDEFAULT);
 				return;
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
 				setCapacityInTonnes(CAPACITY_IN_TONNES_EDEFAULT);
+				return;
+			case DairyPackage.VEHICLE__DRIVER:
+				setDriver((Employee)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -799,8 +701,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.VEHICLE__SERVICE_RECORDS:
-				return serviceRecords != null && !serviceRecords.isEmpty();
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
 			case DairyPackage.VEHICLE__TYPE:
@@ -819,14 +719,12 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 				return INSURANCE_POLICY_NUMBER_EDEFAULT == null ? insurancePolicyNumber != null : !INSURANCE_POLICY_NUMBER_EDEFAULT.equals(insurancePolicyNumber);
 			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
 				return INSURANCE_PURCHASE_DATE_EDEFAULT == null ? insurancePurchaseDate != null : !INSURANCE_PURCHASE_DATE_EDEFAULT.equals(insurancePurchaseDate);
-			case DairyPackage.VEHICLE__PURCHASE_DATE:
-				return PURCHASE_DATE_EDEFAULT == null ? purchaseDate != null : !PURCHASE_DATE_EDEFAULT.equals(purchaseDate);
-			case DairyPackage.VEHICLE__DISPOSAL_DATE:
-				return DISPOSAL_DATE_EDEFAULT == null ? disposalDate != null : !DISPOSAL_DATE_EDEFAULT.equals(disposalDate);
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				return DOMINANT_COLOUR_EDEFAULT == null ? dominantColour != null : !DOMINANT_COLOUR_EDEFAULT.equals(dominantColour);
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
 				return CAPACITY_IN_TONNES_EDEFAULT == null ? capacityInTonnes != null : !CAPACITY_IN_TONNES_EDEFAULT.equals(capacityInTonnes);
+			case DairyPackage.VEHICLE__DRIVER:
+				return driver != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -859,10 +757,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 		result.append(insurancePolicyNumber);
 		result.append(", insurancePurchaseDate: ");
 		result.append(insurancePurchaseDate);
-		result.append(", purchaseDate: ");
-		result.append(purchaseDate);
-		result.append(", disposalDate: ");
-		result.append(disposalDate);
 		result.append(", dominantColour: ");
 		result.append(dominantColour);
 		result.append(", capacityInTonnes: ");

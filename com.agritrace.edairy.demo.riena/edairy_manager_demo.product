@@ -41,9 +41,11 @@
       <plugin id="com.agritrace.edairy.riena.ui"/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="javax.persistence"/>
       <plugin id="javax.servlet"/>
+      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.beanutils"/>
-      <plugin id="org.apache.commons.collections" fragment=""/>
+      <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.easymock"/>
@@ -61,6 +63,7 @@
       <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.databinding"/>
@@ -83,12 +86,12 @@
       <plugin id="org.eclipse.nebula.widgets.compositetable"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.persistence.asm"/>
+      <plugin id="org.eclipse.persistence.core"/>
+      <plugin id="org.eclipse.persistence.jpa"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox" fragment="true"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
-      <plugin id="org.eclipse.rap.jface" fragment=""/>
-      <plugin id="org.eclipse.rap.jface.databinding" fragment=""/>
-      <plugin id="org.eclipse.rap.rwt" fragment=""/>
-      <plugin id="org.eclipse.rap.ui" fragment=""/>
-      <plugin id="org.eclipse.rap.ui.workbench" fragment=""/>
+      <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
       <plugin id="org.eclipse.riena.communication.console"/>
@@ -131,6 +134,7 @@
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
       <plugin id="org.pushingpixels.trident"/>
    </plugins>

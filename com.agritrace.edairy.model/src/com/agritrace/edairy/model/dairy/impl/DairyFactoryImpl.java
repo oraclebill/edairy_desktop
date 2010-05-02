@@ -62,19 +62,18 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DairyPackage.VEHICLE: return createVehicle();
-			case DairyPackage.DRIVER: return createDriver();
-			case DairyPackage.COLLECTION_RECORD: return createCollectionRecord();
+			case DairyPackage.COLLECTION_JOURNAL_LINE: return createCollectionJournalLine();
 			case DairyPackage.EMPLOYEE: return createEmployee();
-			case DairyPackage.COLLECTION_CENTRE: return createCollectionCentre();
-			case DairyPackage.SERVICE_RECORD: return createServiceRecord();
-			case DairyPackage.WORKSTATION: return createWorkstation();
+			case DairyPackage.DAIRY_LOCATION: return createDairyLocation();
 			case DairyPackage.COLLECTION_JOURNAL: return createCollectionJournal();
-			case DairyPackage.ROUTE_DEFINITION: return createRouteDefinition();
+			case DairyPackage.ROUTE: return createRoute();
 			case DairyPackage.TRIP: return createTrip();
 			case DairyPackage.DELIVERY_JOURNAL: return createDeliveryJournal();
-			case DairyPackage.SESSION: return createSession();
 			case DairyPackage.DAIRY: return createDairy();
 			case DairyPackage.MEMBERSHIP: return createMembership();
+			case DairyPackage.ASSET: return createAsset();
+			case DairyPackage.DAIRY_CONTAINER: return createDairyContainer();
+			case DairyPackage.SUPPLIER: return createSupplier();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -90,6 +89,10 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		switch (eDataType.getClassifierID()) {
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return createMembershipStatusFromString(eDataType, initialValue);
+			case DairyPackage.SESSION:
+				return createSessionFromString(eDataType, initialValue);
+			case DairyPackage.VENDOR_STATUS:
+				return createVendorStatusFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -105,6 +108,10 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		switch (eDataType.getClassifierID()) {
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return convertMembershipStatusToString(eDataType, instanceValue);
+			case DairyPackage.SESSION:
+				return convertSessionToString(eDataType, instanceValue);
+			case DairyPackage.VENDOR_STATUS:
+				return convertVendorStatusToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -125,19 +132,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Driver createDriver() {
-		DriverImpl driver = new DriverImpl();
-		return driver;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CollectionRecord createCollectionRecord() {
-		CollectionRecordImpl collectionRecord = new CollectionRecordImpl();
-		return collectionRecord;
+	public CollectionJournalLine createCollectionJournalLine() {
+		CollectionJournalLineImpl collectionJournalLine = new CollectionJournalLineImpl();
+		return collectionJournalLine;
 	}
 
 	/**
@@ -155,29 +152,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionCentre createCollectionCentre() {
-		CollectionCentreImpl collectionCentre = new CollectionCentreImpl();
-		return collectionCentre;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ServiceRecord createServiceRecord() {
-		ServiceRecordImpl serviceRecord = new ServiceRecordImpl();
-		return serviceRecord;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Workstation createWorkstation() {
-		WorkstationImpl workstation = new WorkstationImpl();
-		return workstation;
+	public DairyLocation createDairyLocation() {
+		DairyLocationImpl dairyLocation = new DairyLocationImpl();
+		return dairyLocation;
 	}
 
 	/**
@@ -195,9 +172,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RouteDefinition createRouteDefinition() {
-		RouteDefinitionImpl routeDefinition = new RouteDefinitionImpl();
-		return routeDefinition;
+	public Route createRoute() {
+		RouteImpl route = new RouteImpl();
+		return route;
 	}
 
 	/**
@@ -225,16 +202,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Session createSession() {
-		SessionImpl session = new SessionImpl();
-		return session;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Dairy createDairy() {
 		DairyImpl dairy = new DairyImpl();
 		return dairy;
@@ -255,6 +222,36 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Asset createAsset() {
+		AssetImpl asset = new AssetImpl();
+		return asset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyContainer createDairyContainer() {
+		DairyContainerImpl dairyContainer = new DairyContainerImpl();
+		return dairyContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Supplier createSupplier() {
+		SupplierImpl supplier = new SupplierImpl();
+		return supplier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MembershipStatus createMembershipStatusFromString(EDataType eDataType, String initialValue) {
 		MembershipStatus result = MembershipStatus.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -267,6 +264,46 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertMembershipStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Session createSessionFromString(EDataType eDataType, String initialValue) {
+		Session result = Session.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSessionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VendorStatus createVendorStatusFromString(EDataType eDataType, String initialValue) {
+		VendorStatus result = VendorStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVendorStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

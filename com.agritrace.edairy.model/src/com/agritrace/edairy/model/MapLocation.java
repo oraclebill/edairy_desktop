@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.model;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +25,7 @@ package com.agritrace.edairy.model;
  * @model
  * @generated
  */
-public interface MapLocation extends Location {
+public interface MapLocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Longitude</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ public interface MapLocation extends Location {
 	 * @return the value of the '<em>Longitude</em>' attribute.
 	 * @see #setLongitude(String)
 	 * @see com.agritrace.edairy.model.ModelPackage#getMapLocation_Longitude()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getLongitude();
@@ -62,7 +63,7 @@ public interface MapLocation extends Location {
 	 * @return the value of the '<em>Latitude</em>' attribute.
 	 * @see #setLatitude(String)
 	 * @see com.agritrace.edairy.model.ModelPackage#getMapLocation_Latitude()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getLatitude();

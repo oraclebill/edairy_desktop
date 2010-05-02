@@ -6,9 +6,6 @@
  */
 package com.agritrace.edairy.model.tracking.util;
 
-import com.agritrace.edairy.model.Company;
-import com.agritrace.edairy.model.Party;
-
 import com.agritrace.edairy.model.tracking.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -75,44 +72,12 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	protected TrackingSwitch<Adapter> modelSwitch =
 		new TrackingSwitch<Adapter>() {
 			@Override
-			public Adapter caseDairy(Dairy object) {
-				return createDairyAdapter();
-			}
-			@Override
 			public Adapter caseFarm(Farm object) {
 				return createFarmAdapter();
 			}
 			@Override
-			public Adapter caseAnimal(Animal object) {
-				return createAnimalAdapter();
-			}
-			@Override
 			public Adapter caseContainer(Container object) {
 				return createContainerAdapter();
-			}
-			@Override
-			public Adapter caseProcessor(Processor object) {
-				return createProcessorAdapter();
-			}
-			@Override
-			public Adapter caseSupplier(Supplier object) {
-				return createSupplierAdapter();
-			}
-			@Override
-			public Adapter caseCollection(Collection object) {
-				return createCollectionAdapter();
-			}
-			@Override
-			public Adapter caseLot(Lot object) {
-				return createLotAdapter();
-			}
-			@Override
-			public Adapter caseDelivery(Delivery object) {
-				return createDeliveryAdapter();
-			}
-			@Override
-			public Adapter caseTransfer(Transfer object) {
-				return createTransferAdapter();
 			}
 			@Override
 			public Adapter caseRegisteredAnimal(RegisteredAnimal object) {
@@ -125,14 +90,6 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAnimalIdentifier(AnimalIdentifier object) {
 				return createAnimalIdentifierAdapter();
-			}
-			@Override
-			public Adapter caseParty(Party object) {
-				return createPartyAdapter();
-			}
-			@Override
-			public Adapter caseCompany(Company object) {
-				return createCompanyAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -155,20 +112,6 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Dairy <em>Dairy</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Dairy
-	 * @generated
-	 */
-	public Adapter createDairyAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Farm <em>Farm</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -183,20 +126,6 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Animal <em>Animal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Animal
-	 * @generated
-	 */
-	public Adapter createAnimalAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Container <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -207,90 +136,6 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Processor <em>Processor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Processor
-	 * @generated
-	 */
-	public Adapter createProcessorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Supplier <em>Supplier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Supplier
-	 * @generated
-	 */
-	public Adapter createSupplierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Collection <em>Collection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Collection
-	 * @generated
-	 */
-	public Adapter createCollectionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Lot <em>Lot</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Lot
-	 * @generated
-	 */
-	public Adapter createLotAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Delivery <em>Delivery</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Delivery
-	 * @generated
-	 */
-	public Adapter createDeliveryAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Transfer <em>Transfer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Transfer
-	 * @generated
-	 */
-	public Adapter createTransferAdapter() {
 		return null;
 	}
 
@@ -333,34 +178,6 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAnimalIdentifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.Party <em>Party</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.Party
-	 * @generated
-	 */
-	public Adapter createPartyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.Company <em>Company</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.Company
-	 * @generated
-	 */
-	public Adapter createCompanyAdapter() {
 		return null;
 	}
 

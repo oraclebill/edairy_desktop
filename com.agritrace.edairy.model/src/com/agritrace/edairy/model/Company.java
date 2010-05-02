@@ -36,7 +36,7 @@ public interface Company extends Party {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Contact Person</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.ModelPackage#getCompany_ContactPerson()
-	 * @model containment="true" resolveProxies="true" required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<Person> getContactPerson();

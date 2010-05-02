@@ -6,12 +6,18 @@
  */
 package com.agritrace.edairy.model.impl;
 
+import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.MapLocation;
 import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.StatutoryLocation;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -23,16 +29,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getAddress <em>Address</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getProvince <em>Province</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getDivision <em>Division</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getDistrict <em>District</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getLocation <em>Location</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getSubLocation <em>Sub Location</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getVillage <em>Village</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getPostalCode <em>Postal Code</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getEstate <em>Estate</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getSection <em>Section</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getPostalLocation <em>Postal Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getMapLocation <em>Map Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getStatutoryLocation <em>Statutory Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.LocationImpl#getDescriptiveLocation <em>Descriptive Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,204 +40,44 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class LocationImpl extends EObjectImpl implements Location {
 	/**
-	 * The default value of the '{@link #getAddress() <em>Address</em>}' attribute.
+	 * The cached value of the '{@link #getPostalLocation() <em>Postal Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAddress()
+	 * @see #getPostalLocation()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ADDRESS_EDEFAULT = null;
+	protected PostalLocation postalLocation;
 
 	/**
-	 * The cached value of the '{@link #getAddress() <em>Address</em>}' attribute.
+	 * The cached value of the '{@link #getMapLocation() <em>Map Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAddress()
+	 * @see #getMapLocation()
 	 * @generated
 	 * @ordered
 	 */
-	protected String address = ADDRESS_EDEFAULT;
+	protected MapLocation mapLocation;
 
 	/**
-	 * The default value of the '{@link #getProvince() <em>Province</em>}' attribute.
+	 * The cached value of the '{@link #getStatutoryLocation() <em>Statutory Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProvince()
+	 * @see #getStatutoryLocation()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PROVINCE_EDEFAULT = null;
+	protected StatutoryLocation statutoryLocation;
 
 	/**
-	 * The cached value of the '{@link #getProvince() <em>Province</em>}' attribute.
+	 * The cached value of the '{@link #getDescriptiveLocation() <em>Descriptive Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProvince()
+	 * @see #getDescriptiveLocation()
 	 * @generated
 	 * @ordered
 	 */
-	protected String province = PROVINCE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDivision() <em>Division</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDivision()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DIVISION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDivision() <em>Division</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDivision()
-	 * @generated
-	 * @ordered
-	 */
-	protected String division = DIVISION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDistrict() <em>District</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDistrict()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String DISTRICT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDistrict() <em>District</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDistrict()
-	 * @generated
-	 * @ordered
-	 */
-	protected String district = DISTRICT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLocation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String LOCATION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLocation() <em>Location</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLocation()
-	 * @generated
-	 * @ordered
-	 */
-	protected String location = LOCATION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSubLocation() <em>Sub Location</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubLocation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SUB_LOCATION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSubLocation() <em>Sub Location</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubLocation()
-	 * @generated
-	 * @ordered
-	 */
-	protected String subLocation = SUB_LOCATION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getVillage() <em>Village</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVillage()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VILLAGE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVillage() <em>Village</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVillage()
-	 * @generated
-	 * @ordered
-	 */
-	protected String village = VILLAGE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getPostalCode() <em>Postal Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPostalCode()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String POSTAL_CODE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPostalCode() <em>Postal Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPostalCode()
-	 * @generated
-	 * @ordered
-	 */
-	protected String postalCode = POSTAL_CODE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEstate() <em>Estate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEstate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ESTATE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEstate() <em>Estate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEstate()
-	 * @generated
-	 * @ordered
-	 */
-	protected String estate = ESTATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSection() <em>Section</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSection()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SECTION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSection() <em>Section</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSection()
-	 * @generated
-	 * @ordered
-	 */
-	protected String section = SECTION_EDEFAULT;
+	protected DescriptiveLocation descriptiveLocation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -263,8 +103,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getAddress() {
-		return address;
+	public PostalLocation getPostalLocation() {
+		return postalLocation;
 	}
 
 	/**
@@ -272,11 +112,14 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAddress(String newAddress) {
-		String oldAddress = address;
-		address = newAddress;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__ADDRESS, oldAddress, address));
+	public NotificationChain basicSetPostalLocation(PostalLocation newPostalLocation, NotificationChain msgs) {
+		PostalLocation oldPostalLocation = postalLocation;
+		postalLocation = newPostalLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, oldPostalLocation, newPostalLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -284,8 +127,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getProvince() {
-		return province;
+	public void setPostalLocation(PostalLocation newPostalLocation) {
+		if (newPostalLocation != postalLocation) {
+			NotificationChain msgs = null;
+			if (postalLocation != null)
+				msgs = ((InternalEObject)postalLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
+			if (newPostalLocation != null)
+				msgs = ((InternalEObject)newPostalLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
+			msgs = basicSetPostalLocation(newPostalLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, newPostalLocation, newPostalLocation));
 	}
 
 	/**
@@ -293,11 +146,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setProvince(String newProvince) {
-		String oldProvince = province;
-		province = newProvince;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__PROVINCE, oldProvince, province));
+	public MapLocation getMapLocation() {
+		return mapLocation;
 	}
 
 	/**
@@ -305,8 +155,14 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDivision() {
-		return division;
+	public NotificationChain basicSetMapLocation(MapLocation newMapLocation, NotificationChain msgs) {
+		MapLocation oldMapLocation = mapLocation;
+		mapLocation = newMapLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, oldMapLocation, newMapLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -314,11 +170,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDivision(String newDivision) {
-		String oldDivision = division;
-		division = newDivision;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DIVISION, oldDivision, division));
+	public void setMapLocation(MapLocation newMapLocation) {
+		if (newMapLocation != mapLocation) {
+			NotificationChain msgs = null;
+			if (mapLocation != null)
+				msgs = ((InternalEObject)mapLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
+			if (newMapLocation != null)
+				msgs = ((InternalEObject)newMapLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
+			msgs = basicSetMapLocation(newMapLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, newMapLocation, newMapLocation));
 	}
 
 	/**
@@ -326,8 +189,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDistrict() {
-		return district;
+	public StatutoryLocation getStatutoryLocation() {
+		return statutoryLocation;
 	}
 
 	/**
@@ -335,11 +198,14 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDistrict(String newDistrict) {
-		String oldDistrict = district;
-		district = newDistrict;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DISTRICT, oldDistrict, district));
+	public NotificationChain basicSetStatutoryLocation(StatutoryLocation newStatutoryLocation, NotificationChain msgs) {
+		StatutoryLocation oldStatutoryLocation = statutoryLocation;
+		statutoryLocation = newStatutoryLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, oldStatutoryLocation, newStatutoryLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -347,8 +213,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLocation() {
-		return location;
+	public void setStatutoryLocation(StatutoryLocation newStatutoryLocation) {
+		if (newStatutoryLocation != statutoryLocation) {
+			NotificationChain msgs = null;
+			if (statutoryLocation != null)
+				msgs = ((InternalEObject)statutoryLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
+			if (newStatutoryLocation != null)
+				msgs = ((InternalEObject)newStatutoryLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
+			msgs = basicSetStatutoryLocation(newStatutoryLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, newStatutoryLocation, newStatutoryLocation));
 	}
 
 	/**
@@ -356,11 +232,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLocation(String newLocation) {
-		String oldLocation = location;
-		location = newLocation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__LOCATION, oldLocation, location));
+	public DescriptiveLocation getDescriptiveLocation() {
+		return descriptiveLocation;
 	}
 
 	/**
@@ -368,8 +241,14 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSubLocation() {
-		return subLocation;
+	public NotificationChain basicSetDescriptiveLocation(DescriptiveLocation newDescriptiveLocation, NotificationChain msgs) {
+		DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
+		descriptiveLocation = newDescriptiveLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, oldDescriptiveLocation, newDescriptiveLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -377,11 +256,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSubLocation(String newSubLocation) {
-		String oldSubLocation = subLocation;
-		subLocation = newSubLocation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__SUB_LOCATION, oldSubLocation, subLocation));
+	public void setDescriptiveLocation(DescriptiveLocation newDescriptiveLocation) {
+		if (newDescriptiveLocation != descriptiveLocation) {
+			NotificationChain msgs = null;
+			if (descriptiveLocation != null)
+				msgs = ((InternalEObject)descriptiveLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
+			if (newDescriptiveLocation != null)
+				msgs = ((InternalEObject)newDescriptiveLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
+			msgs = basicSetDescriptiveLocation(newDescriptiveLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, newDescriptiveLocation, newDescriptiveLocation));
 	}
 
 	/**
@@ -389,83 +275,19 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getVillage() {
-		return village;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVillage(String newVillage) {
-		String oldVillage = village;
-		village = newVillage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__VILLAGE, oldVillage, village));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPostalCode(String newPostalCode) {
-		String oldPostalCode = postalCode;
-		postalCode = newPostalCode;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_CODE, oldPostalCode, postalCode));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getEstate() {
-		return estate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEstate(String newEstate) {
-		String oldEstate = estate;
-		estate = newEstate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__ESTATE, oldEstate, estate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSection() {
-		return section;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSection(String newSection) {
-		String oldSection = section;
-		section = newSection;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__SECTION, oldSection, section));
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				return basicSetPostalLocation(null, msgs);
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				return basicSetMapLocation(null, msgs);
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				return basicSetStatutoryLocation(null, msgs);
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				return basicSetDescriptiveLocation(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -476,26 +298,14 @@ public class LocationImpl extends EObjectImpl implements Location {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.LOCATION__ADDRESS:
-				return getAddress();
-			case ModelPackage.LOCATION__PROVINCE:
-				return getProvince();
-			case ModelPackage.LOCATION__DIVISION:
-				return getDivision();
-			case ModelPackage.LOCATION__DISTRICT:
-				return getDistrict();
-			case ModelPackage.LOCATION__LOCATION:
-				return getLocation();
-			case ModelPackage.LOCATION__SUB_LOCATION:
-				return getSubLocation();
-			case ModelPackage.LOCATION__VILLAGE:
-				return getVillage();
-			case ModelPackage.LOCATION__POSTAL_CODE:
-				return getPostalCode();
-			case ModelPackage.LOCATION__ESTATE:
-				return getEstate();
-			case ModelPackage.LOCATION__SECTION:
-				return getSection();
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				return getPostalLocation();
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				return getMapLocation();
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				return getStatutoryLocation();
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				return getDescriptiveLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -508,35 +318,17 @@ public class LocationImpl extends EObjectImpl implements Location {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.LOCATION__ADDRESS:
-				setAddress((String)newValue);
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				setPostalLocation((PostalLocation)newValue);
 				return;
-			case ModelPackage.LOCATION__PROVINCE:
-				setProvince((String)newValue);
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				setMapLocation((MapLocation)newValue);
 				return;
-			case ModelPackage.LOCATION__DIVISION:
-				setDivision((String)newValue);
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				setStatutoryLocation((StatutoryLocation)newValue);
 				return;
-			case ModelPackage.LOCATION__DISTRICT:
-				setDistrict((String)newValue);
-				return;
-			case ModelPackage.LOCATION__LOCATION:
-				setLocation((String)newValue);
-				return;
-			case ModelPackage.LOCATION__SUB_LOCATION:
-				setSubLocation((String)newValue);
-				return;
-			case ModelPackage.LOCATION__VILLAGE:
-				setVillage((String)newValue);
-				return;
-			case ModelPackage.LOCATION__POSTAL_CODE:
-				setPostalCode((String)newValue);
-				return;
-			case ModelPackage.LOCATION__ESTATE:
-				setEstate((String)newValue);
-				return;
-			case ModelPackage.LOCATION__SECTION:
-				setSection((String)newValue);
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				setDescriptiveLocation((DescriptiveLocation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -550,35 +342,17 @@ public class LocationImpl extends EObjectImpl implements Location {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.LOCATION__ADDRESS:
-				setAddress(ADDRESS_EDEFAULT);
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				setPostalLocation((PostalLocation)null);
 				return;
-			case ModelPackage.LOCATION__PROVINCE:
-				setProvince(PROVINCE_EDEFAULT);
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				setMapLocation((MapLocation)null);
 				return;
-			case ModelPackage.LOCATION__DIVISION:
-				setDivision(DIVISION_EDEFAULT);
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				setStatutoryLocation((StatutoryLocation)null);
 				return;
-			case ModelPackage.LOCATION__DISTRICT:
-				setDistrict(DISTRICT_EDEFAULT);
-				return;
-			case ModelPackage.LOCATION__LOCATION:
-				setLocation(LOCATION_EDEFAULT);
-				return;
-			case ModelPackage.LOCATION__SUB_LOCATION:
-				setSubLocation(SUB_LOCATION_EDEFAULT);
-				return;
-			case ModelPackage.LOCATION__VILLAGE:
-				setVillage(VILLAGE_EDEFAULT);
-				return;
-			case ModelPackage.LOCATION__POSTAL_CODE:
-				setPostalCode(POSTAL_CODE_EDEFAULT);
-				return;
-			case ModelPackage.LOCATION__ESTATE:
-				setEstate(ESTATE_EDEFAULT);
-				return;
-			case ModelPackage.LOCATION__SECTION:
-				setSection(SECTION_EDEFAULT);
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				setDescriptiveLocation((DescriptiveLocation)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -592,62 +366,16 @@ public class LocationImpl extends EObjectImpl implements Location {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.LOCATION__ADDRESS:
-				return ADDRESS_EDEFAULT == null ? address != null : !ADDRESS_EDEFAULT.equals(address);
-			case ModelPackage.LOCATION__PROVINCE:
-				return PROVINCE_EDEFAULT == null ? province != null : !PROVINCE_EDEFAULT.equals(province);
-			case ModelPackage.LOCATION__DIVISION:
-				return DIVISION_EDEFAULT == null ? division != null : !DIVISION_EDEFAULT.equals(division);
-			case ModelPackage.LOCATION__DISTRICT:
-				return DISTRICT_EDEFAULT == null ? district != null : !DISTRICT_EDEFAULT.equals(district);
-			case ModelPackage.LOCATION__LOCATION:
-				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
-			case ModelPackage.LOCATION__SUB_LOCATION:
-				return SUB_LOCATION_EDEFAULT == null ? subLocation != null : !SUB_LOCATION_EDEFAULT.equals(subLocation);
-			case ModelPackage.LOCATION__VILLAGE:
-				return VILLAGE_EDEFAULT == null ? village != null : !VILLAGE_EDEFAULT.equals(village);
-			case ModelPackage.LOCATION__POSTAL_CODE:
-				return POSTAL_CODE_EDEFAULT == null ? postalCode != null : !POSTAL_CODE_EDEFAULT.equals(postalCode);
-			case ModelPackage.LOCATION__ESTATE:
-				return ESTATE_EDEFAULT == null ? estate != null : !ESTATE_EDEFAULT.equals(estate);
-			case ModelPackage.LOCATION__SECTION:
-				return SECTION_EDEFAULT == null ? section != null : !SECTION_EDEFAULT.equals(section);
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				return postalLocation != null;
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				return mapLocation != null;
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				return statutoryLocation != null;
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				return descriptiveLocation != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (address: ");
-		result.append(address);
-		result.append(", province: ");
-		result.append(province);
-		result.append(", division: ");
-		result.append(division);
-		result.append(", district: ");
-		result.append(district);
-		result.append(", location: ");
-		result.append(location);
-		result.append(", subLocation: ");
-		result.append(subLocation);
-		result.append(", village: ");
-		result.append(village);
-		result.append(", postalCode: ");
-		result.append(postalCode);
-		result.append(", estate: ");
-		result.append(estate);
-		result.append(", section: ");
-		result.append(section);
-		result.append(')');
-		return result.toString();
 	}
 
 } //LocationImpl

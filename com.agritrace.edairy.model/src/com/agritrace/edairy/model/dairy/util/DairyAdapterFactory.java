@@ -12,8 +12,7 @@ import com.agritrace.edairy.model.Person;
 
 import com.agritrace.edairy.model.dairy.*;
 
-import com.agritrace.edairy.model.tracking.Collection;
-import com.agritrace.edairy.model.tracking.Transfer;
+import com.agritrace.edairy.model.tracking.Container;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -83,36 +82,24 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createVehicleAdapter();
 			}
 			@Override
-			public Adapter caseDriver(Driver object) {
-				return createDriverAdapter();
-			}
-			@Override
-			public Adapter caseCollectionRecord(CollectionRecord object) {
-				return createCollectionRecordAdapter();
+			public Adapter caseCollectionJournalLine(CollectionJournalLine object) {
+				return createCollectionJournalLineAdapter();
 			}
 			@Override
 			public Adapter caseEmployee(Employee object) {
 				return createEmployeeAdapter();
 			}
 			@Override
-			public Adapter caseCollectionCentre(CollectionCentre object) {
-				return createCollectionCentreAdapter();
-			}
-			@Override
-			public Adapter caseServiceRecord(ServiceRecord object) {
-				return createServiceRecordAdapter();
-			}
-			@Override
-			public Adapter caseWorkstation(Workstation object) {
-				return createWorkstationAdapter();
+			public Adapter caseDairyLocation(DairyLocation object) {
+				return createDairyLocationAdapter();
 			}
 			@Override
 			public Adapter caseCollectionJournal(CollectionJournal object) {
 				return createCollectionJournalAdapter();
 			}
 			@Override
-			public Adapter caseRouteDefinition(RouteDefinition object) {
-				return createRouteDefinitionAdapter();
+			public Adapter caseRoute(Route object) {
+				return createRouteAdapter();
 			}
 			@Override
 			public Adapter caseTrip(Trip object) {
@@ -123,16 +110,24 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createDeliveryJournalAdapter();
 			}
 			@Override
-			public Adapter caseSession(Session object) {
-				return createSessionAdapter();
-			}
-			@Override
 			public Adapter caseDairy(Dairy object) {
 				return createDairyAdapter();
 			}
 			@Override
 			public Adapter caseMembership(Membership object) {
 				return createMembershipAdapter();
+			}
+			@Override
+			public Adapter caseAsset(Asset object) {
+				return createAssetAdapter();
+			}
+			@Override
+			public Adapter caseDairyContainer(DairyContainer object) {
+				return createDairyContainerAdapter();
+			}
+			@Override
+			public Adapter caseSupplier(Supplier object) {
+				return createSupplierAdapter();
 			}
 			@Override
 			public Adapter caseParty(Party object) {
@@ -143,20 +138,12 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createPersonAdapter();
 			}
 			@Override
-			public Adapter caseTransfer(Transfer object) {
-				return createTransferAdapter();
-			}
-			@Override
-			public Adapter caseCollection(Collection object) {
-				return createCollectionAdapter();
-			}
-			@Override
 			public Adapter caseCompany(Company object) {
 				return createCompanyAdapter();
 			}
 			@Override
-			public Adapter caseTracking_Dairy(com.agritrace.edairy.model.tracking.Dairy object) {
-				return createTracking_DairyAdapter();
+			public Adapter caseContainer(Container object) {
+				return createContainerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -193,30 +180,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Driver <em>Driver</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine <em>Collection Journal Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.Driver
+	 * @see com.agritrace.edairy.model.dairy.CollectionJournalLine
 	 * @generated
 	 */
-	public Adapter createDriverAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.CollectionRecord <em>Collection Record</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.CollectionRecord
-	 * @generated
-	 */
-	public Adapter createCollectionRecordAdapter() {
+	public Adapter createCollectionJournalLineAdapter() {
 		return null;
 	}
 
@@ -235,44 +208,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.CollectionCentre <em>Collection Centre</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.DairyLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.CollectionCentre
+	 * @see com.agritrace.edairy.model.dairy.DairyLocation
 	 * @generated
 	 */
-	public Adapter createCollectionCentreAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.ServiceRecord <em>Service Record</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.ServiceRecord
-	 * @generated
-	 */
-	public Adapter createServiceRecordAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Workstation <em>Workstation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.Workstation
-	 * @generated
-	 */
-	public Adapter createWorkstationAdapter() {
+	public Adapter createDairyLocationAdapter() {
 		return null;
 	}
 
@@ -291,16 +236,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.RouteDefinition <em>Route Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Route <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.RouteDefinition
+	 * @see com.agritrace.edairy.model.dairy.Route
 	 * @generated
 	 */
-	public Adapter createRouteDefinitionAdapter() {
+	public Adapter createRouteAdapter() {
 		return null;
 	}
 
@@ -333,20 +278,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Session <em>Session</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.dairy.Session
-	 * @generated
-	 */
-	public Adapter createSessionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Dairy <em>Dairy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -371,6 +302,48 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMembershipAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Asset <em>Asset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.model.dairy.Asset
+	 * @generated
+	 */
+	public Adapter createAssetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.DairyContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.model.dairy.DairyContainer
+	 * @generated
+	 */
+	public Adapter createDairyContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.dairy.Supplier <em>Supplier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.model.dairy.Supplier
+	 * @generated
+	 */
+	public Adapter createSupplierAdapter() {
 		return null;
 	}
 
@@ -403,34 +376,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Transfer <em>Transfer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Transfer
-	 * @generated
-	 */
-	public Adapter createTransferAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Collection <em>Collection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Collection
-	 * @generated
-	 */
-	public Adapter createCollectionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.Company <em>Company</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -445,16 +390,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Dairy <em>Dairy</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.model.tracking.Container <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.model.tracking.Dairy
+	 * @see com.agritrace.edairy.model.tracking.Container
 	 * @generated
 	 */
-	public Adapter createTracking_DairyAdapter() {
+	public Adapter createContainerAdapter() {
 		return null;
 	}
 

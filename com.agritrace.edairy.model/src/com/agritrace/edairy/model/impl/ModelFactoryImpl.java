@@ -62,12 +62,14 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.MAP_LOCATION: return createMapLocation();
-			case ModelPackage.LOCATION: return createLocation();
+			case ModelPackage.POSTAL_LOCATION: return createPostalLocation();
 			case ModelPackage.STATUTORY_LOCATION: return createStatutoryLocation();
 			case ModelPackage.AUDITED: return createAudited();
 			case ModelPackage.PERSON: return createPerson();
 			case ModelPackage.COMPANY: return createCompany();
 			case ModelPackage.DESCRIPTIVE_LOCATION: return createDescriptiveLocation();
+			case ModelPackage.LOCATION: return createLocation();
+			case ModelPackage.CONTACT_METHOD: return createContactMethod();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -83,10 +85,18 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.GENDER:
 				return createGenderFromString(eDataType, initialValue);
+			case ModelPackage.CONTACT_METHOD_TYPE:
+				return createContactMethodTypeFromString(eDataType, initialValue);
+			case ModelPackage.UNIT_OF_MEASURE:
+				return createUnitOfMeasureFromString(eDataType, initialValue);
+			case ModelPackage.CONTAINER_TYPE:
+				return createContainerTypeFromString(eDataType, initialValue);
 			case ModelPackage.TRANSACTION_ID:
 				return createTransactionIDFromString(eDataType, initialValue);
 			case ModelPackage.UNIQUE_ID:
 				return createUniqueIDFromString(eDataType, initialValue);
+			case ModelPackage.IMAGE_REFERENCE:
+				return createImageReferenceFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -102,10 +112,18 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.GENDER:
 				return convertGenderToString(eDataType, instanceValue);
+			case ModelPackage.CONTACT_METHOD_TYPE:
+				return convertContactMethodTypeToString(eDataType, instanceValue);
+			case ModelPackage.UNIT_OF_MEASURE:
+				return convertUnitOfMeasureToString(eDataType, instanceValue);
+			case ModelPackage.CONTAINER_TYPE:
+				return convertContainerTypeToString(eDataType, instanceValue);
 			case ModelPackage.TRANSACTION_ID:
 				return convertTransactionIDToString(eDataType, instanceValue);
 			case ModelPackage.UNIQUE_ID:
 				return convertUniqueIDToString(eDataType, instanceValue);
+			case ModelPackage.IMAGE_REFERENCE:
+				return convertImageReferenceToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -126,9 +144,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Location createLocation() {
-		LocationImpl location = new LocationImpl();
-		return location;
+	public PostalLocation createPostalLocation() {
+		PostalLocationImpl postalLocation = new PostalLocationImpl();
+		return postalLocation;
 	}
 
 	/**
@@ -186,6 +204,26 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Location createLocation() {
+		LocationImpl location = new LocationImpl();
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContactMethod createContactMethod() {
+		ContactMethodImpl contactMethod = new ContactMethodImpl();
+		return contactMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Gender createGenderFromString(EDataType eDataType, String initialValue) {
 		Gender result = Gender.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -198,6 +236,66 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContactMethodType createContactMethodTypeFromString(EDataType eDataType, String initialValue) {
+		ContactMethodType result = ContactMethodType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertContactMethodTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
+		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUnitOfMeasureToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
+		ContainerType result = ContainerType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -224,8 +322,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String createUniqueIDFromString(EDataType eDataType, String initialValue) {
-		return (String)super.createFromString(eDataType, initialValue);
+	public Long createUniqueIDFromString(EDataType eDataType, String initialValue) {
+		return (Long)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -234,6 +332,24 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public String convertUniqueIDToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createImageReferenceFromString(EDataType eDataType, String initialValue) {
+		return (String)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImageReferenceToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

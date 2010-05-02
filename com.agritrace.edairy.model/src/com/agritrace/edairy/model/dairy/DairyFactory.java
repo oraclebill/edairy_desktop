@@ -35,22 +35,13 @@ public interface DairyFactory extends EFactory {
 	Vehicle createVehicle();
 
 	/**
-	 * Returns a new object of class '<em>Driver</em>'.
+	 * Returns a new object of class '<em>Collection Journal Line</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Driver</em>'.
+	 * @return a new object of class '<em>Collection Journal Line</em>'.
 	 * @generated
 	 */
-	Driver createDriver();
-
-	/**
-	 * Returns a new object of class '<em>Collection Record</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection Record</em>'.
-	 * @generated
-	 */
-	CollectionRecord createCollectionRecord();
+	CollectionJournalLine createCollectionJournalLine();
 
 	/**
 	 * Returns a new object of class '<em>Employee</em>'.
@@ -62,31 +53,13 @@ public interface DairyFactory extends EFactory {
 	Employee createEmployee();
 
 	/**
-	 * Returns a new object of class '<em>Collection Centre</em>'.
+	 * Returns a new object of class '<em>Location</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection Centre</em>'.
+	 * @return a new object of class '<em>Location</em>'.
 	 * @generated
 	 */
-	CollectionCentre createCollectionCentre();
-
-	/**
-	 * Returns a new object of class '<em>Service Record</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Service Record</em>'.
-	 * @generated
-	 */
-	ServiceRecord createServiceRecord();
-
-	/**
-	 * Returns a new object of class '<em>Workstation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Workstation</em>'.
-	 * @generated
-	 */
-	Workstation createWorkstation();
+	DairyLocation createDairyLocation();
 
 	/**
 	 * Returns a new object of class '<em>Collection Journal</em>'.
@@ -98,13 +71,13 @@ public interface DairyFactory extends EFactory {
 	CollectionJournal createCollectionJournal();
 
 	/**
-	 * Returns a new object of class '<em>Route Definition</em>'.
+	 * Returns a new object of class '<em>Route</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Route Definition</em>'.
+	 * @return a new object of class '<em>Route</em>'.
 	 * @generated
 	 */
-	RouteDefinition createRouteDefinition();
+	Route createRoute();
 
 	/**
 	 * Returns a new object of class '<em>Trip</em>'.
@@ -125,15 +98,6 @@ public interface DairyFactory extends EFactory {
 	DeliveryJournal createDeliveryJournal();
 
 	/**
-	 * Returns a new object of class '<em>Session</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Session</em>'.
-	 * @generated
-	 */
-	Session createSession();
-
-	/**
 	 * Returns a new object of class '<em>Dairy</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,6 +114,33 @@ public interface DairyFactory extends EFactory {
 	 * @generated
 	 */
 	Membership createMembership();
+
+	/**
+	 * Returns a new object of class '<em>Asset</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Asset</em>'.
+	 * @generated
+	 */
+	Asset createAsset();
+
+	/**
+	 * Returns a new object of class '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Container</em>'.
+	 * @generated
+	 */
+	DairyContainer createDairyContainer();
+
+	/**
+	 * Returns a new object of class '<em>Supplier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Supplier</em>'.
+	 * @generated
+	 */
+	Supplier createSupplier();
 
 	/**
 	 * Returns the package supported by this factory.

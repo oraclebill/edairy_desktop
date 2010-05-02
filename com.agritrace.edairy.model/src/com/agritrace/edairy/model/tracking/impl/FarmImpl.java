@@ -6,9 +6,9 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import com.agritrace.edairy.model.tracking.Animal;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
 import java.util.Collection;
@@ -71,7 +71,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Animal> animals;
+	protected EList<RegisteredAnimal> animals;
 
 	/**
 	 * The cached value of the '{@link #getCans() <em>Cans</em>}' containment reference list.
@@ -128,9 +128,9 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Animal> getAnimals() {
+	public EList<RegisteredAnimal> getAnimals() {
 		if (animals == null) {
-			animals = new EObjectContainmentEList.Resolving<Animal>(Animal.class, this, TrackingPackage.FARM__ANIMALS);
+			animals = new EObjectContainmentEList<RegisteredAnimal>(RegisteredAnimal.class, this, TrackingPackage.FARM__ANIMALS);
 		}
 		return animals;
 	}
@@ -142,7 +142,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	public EList<Container> getCans() {
 		if (cans == null) {
-			cans = new EObjectContainmentEList.Resolving<Container>(Container.class, this, TrackingPackage.FARM__CANS);
+			cans = new EObjectContainmentEList<Container>(Container.class, this, TrackingPackage.FARM__CANS);
 		}
 		return cans;
 	}
@@ -195,7 +195,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 				return;
 			case TrackingPackage.FARM__ANIMALS:
 				getAnimals().clear();
-				getAnimals().addAll((Collection<? extends Animal>)newValue);
+				getAnimals().addAll((Collection<? extends RegisteredAnimal>)newValue);
 				return;
 			case TrackingPackage.FARM__CANS:
 				getCans().clear();

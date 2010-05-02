@@ -57,7 +57,7 @@ public interface Farm extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Animals</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.model.tracking.Animal}.
+	 * The list contents are of type {@link com.agritrace.edairy.model.tracking.RegisteredAnimal}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Animals</em>' containment reference list isn't clear,
@@ -66,10 +66,10 @@ public interface Farm extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Animals</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getFarm_Animals()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Animal> getAnimals();
+	EList<RegisteredAnimal> getAnimals();
 
 	/**
 	 * Returns the value of the '<em><b>Cans</b></em>' containment reference list.
@@ -82,7 +82,7 @@ public interface Farm extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Cans</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getFarm_Cans()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Container> getCans();

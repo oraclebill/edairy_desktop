@@ -24,12 +24,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getMemberId <em>Member Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getApplicationDate <em>Application Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getEffectiveDate <em>Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getMember <em>Member</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getMemberId <em>Member Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Membership#getFarms <em>Farms</em>}</li>
  * </ul>
  * </p>
@@ -39,6 +39,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Membership extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Member Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Member Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Member Id</em>' attribute.
+	 * @see #setMemberId(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getMembership_MemberId()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getMemberId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Membership#getMemberId <em>Member Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Member Id</em>' attribute.
+	 * @see #getMemberId()
+	 * @generated
+	 */
+	void setMemberId(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Application Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -129,12 +155,12 @@ public interface Membership extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default Route</em>' reference.
-	 * @see #setDefaultRoute(RouteDefinition)
+	 * @see #setDefaultRoute(Route)
 	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getMembership_DefaultRoute()
 	 * @model required="true"
 	 * @generated
 	 */
-	RouteDefinition getDefaultRoute();
+	Route getDefaultRoute();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}' reference.
@@ -144,7 +170,7 @@ public interface Membership extends EObject {
 	 * @see #getDefaultRoute()
 	 * @generated
 	 */
-	void setDefaultRoute(RouteDefinition value);
+	void setDefaultRoute(Route value);
 
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' reference.
@@ -171,32 +197,6 @@ public interface Membership extends EObject {
 	 * @generated
 	 */
 	void setMember(Person value);
-
-	/**
-	 * Returns the value of the '<em><b>Member Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Member Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Member Id</em>' attribute.
-	 * @see #setMemberId(String)
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getMembership_MemberId()
-	 * @model
-	 * @generated
-	 */
-	String getMemberId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Membership#getMemberId <em>Member Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Member Id</em>' attribute.
-	 * @see #getMemberId()
-	 * @generated
-	 */
-	void setMemberId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Farms</b></em>' reference list.

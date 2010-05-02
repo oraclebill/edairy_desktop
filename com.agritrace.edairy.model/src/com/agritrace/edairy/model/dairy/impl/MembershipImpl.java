@@ -11,7 +11,7 @@ import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.RouteDefinition;
+import com.agritrace.edairy.model.dairy.Route;
 
 import com.agritrace.edairy.model.tracking.Farm;
 
@@ -37,12 +37,12 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getMemberId <em>Member Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getApplicationDate <em>Application Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getEffectiveDate <em>Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getMember <em>Member</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getMemberId <em>Member Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl#getFarms <em>Farms</em>}</li>
  * </ul>
  * </p>
@@ -50,6 +50,26 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * @generated
  */
 public class MembershipImpl extends EObjectImpl implements Membership {
+	/**
+	 * The default value of the '{@link #getMemberId() <em>Member Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemberId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MEMBER_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMemberId() <em>Member Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemberId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String memberId = MEMBER_ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getApplicationDate() <em>Application Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -118,7 +138,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected RouteDefinition defaultRoute;
+	protected Route defaultRoute;
 
 	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' reference.
@@ -129,26 +149,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @ordered
 	 */
 	protected Person member;
-
-	/**
-	 * The default value of the '{@link #getMemberId() <em>Member Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMemberId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String MEMBER_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMemberId() <em>Member Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMemberId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String memberId = MEMBER_ID_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getFarms() <em>Farms</em>}' reference list.
@@ -177,6 +177,27 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.MEMBERSHIP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMemberId() {
+		return memberId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMemberId(String newMemberId) {
+		String oldMemberId = memberId;
+		memberId = newMemberId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_ID, oldMemberId, memberId));
 	}
 
 	/**
@@ -247,10 +268,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RouteDefinition getDefaultRoute() {
+	public Route getDefaultRoute() {
 		if (defaultRoute != null && defaultRoute.eIsProxy()) {
 			InternalEObject oldDefaultRoute = (InternalEObject)defaultRoute;
-			defaultRoute = (RouteDefinition)eResolveProxy(oldDefaultRoute);
+			defaultRoute = (Route)eResolveProxy(oldDefaultRoute);
 			if (defaultRoute != oldDefaultRoute) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
@@ -264,7 +285,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RouteDefinition basicGetDefaultRoute() {
+	public Route basicGetDefaultRoute() {
 		return defaultRoute;
 	}
 
@@ -273,8 +294,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefaultRoute(RouteDefinition newDefaultRoute) {
-		RouteDefinition oldDefaultRoute = defaultRoute;
+	public void setDefaultRoute(Route newDefaultRoute) {
+		Route oldDefaultRoute = defaultRoute;
 		defaultRoute = newDefaultRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
@@ -323,27 +344,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMemberId() {
-		return memberId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMemberId(String newMemberId) {
-		String oldMemberId = memberId;
-		memberId = newMemberId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_ID, oldMemberId, memberId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Farm> getFarms() {
 		if (farms == null) {
 			farms = new EObjectResolvingEList<Farm>(Farm.class, this, DairyPackage.MEMBERSHIP__FARMS);
@@ -359,6 +359,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.MEMBERSHIP__MEMBER_ID:
+				return getMemberId();
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				return getApplicationDate();
 			case DairyPackage.MEMBERSHIP__EFFECTIVE_DATE:
@@ -371,8 +373,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				if (resolve) return getMember();
 				return basicGetMember();
-			case DairyPackage.MEMBERSHIP__MEMBER_ID:
-				return getMemberId();
 			case DairyPackage.MEMBERSHIP__FARMS:
 				return getFarms();
 		}
@@ -388,6 +388,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.MEMBERSHIP__MEMBER_ID:
+				setMemberId((String)newValue);
+				return;
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				setApplicationDate((Date)newValue);
 				return;
@@ -398,13 +401,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				setStatus((MembershipStatus)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
-				setDefaultRoute((RouteDefinition)newValue);
+				setDefaultRoute((Route)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				setMember((Person)newValue);
-				return;
-			case DairyPackage.MEMBERSHIP__MEMBER_ID:
-				setMemberId((String)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__FARMS:
 				getFarms().clear();
@@ -422,6 +422,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.MEMBERSHIP__MEMBER_ID:
+				setMemberId(MEMBER_ID_EDEFAULT);
+				return;
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				setApplicationDate(APPLICATION_DATE_EDEFAULT);
 				return;
@@ -432,13 +435,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				setStatus(STATUS_EDEFAULT);
 				return;
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
-				setDefaultRoute((RouteDefinition)null);
+				setDefaultRoute((Route)null);
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				setMember((Person)null);
-				return;
-			case DairyPackage.MEMBERSHIP__MEMBER_ID:
-				setMemberId(MEMBER_ID_EDEFAULT);
 				return;
 			case DairyPackage.MEMBERSHIP__FARMS:
 				getFarms().clear();
@@ -455,6 +455,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.MEMBERSHIP__MEMBER_ID:
+				return MEMBER_ID_EDEFAULT == null ? memberId != null : !MEMBER_ID_EDEFAULT.equals(memberId);
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				return APPLICATION_DATE_EDEFAULT == null ? applicationDate != null : !APPLICATION_DATE_EDEFAULT.equals(applicationDate);
 			case DairyPackage.MEMBERSHIP__EFFECTIVE_DATE:
@@ -465,8 +467,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return defaultRoute != null;
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				return member != null;
-			case DairyPackage.MEMBERSHIP__MEMBER_ID:
-				return MEMBER_ID_EDEFAULT == null ? memberId != null : !MEMBER_ID_EDEFAULT.equals(memberId);
 			case DairyPackage.MEMBERSHIP__FARMS:
 				return farms != null && !farms.isEmpty();
 		}
@@ -483,14 +483,14 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (applicationDate: ");
+		result.append(" (memberId: ");
+		result.append(memberId);
+		result.append(", applicationDate: ");
 		result.append(applicationDate);
 		result.append(", effectiveDate: ");
 		result.append(effectiveDate);
 		result.append(", status: ");
 		result.append(status);
-		result.append(", memberId: ");
-		result.append(memberId);
 		result.append(')');
 		return result.toString();
 	}

@@ -6,9 +6,6 @@
  */
 package com.agritrace.edairy.model.tracking.util;
 
-import com.agritrace.edairy.model.Company;
-import com.agritrace.edairy.model.Party;
-
 import com.agritrace.edairy.model.tracking.*;
 
 import java.util.List;
@@ -90,71 +87,15 @@ public class TrackingSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TrackingPackage.DAIRY: {
-				Dairy dairy = (Dairy)theEObject;
-				T result = caseDairy(dairy);
-				if (result == null) result = caseCompany(dairy);
-				if (result == null) result = caseParty(dairy);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TrackingPackage.FARM: {
 				Farm farm = (Farm)theEObject;
 				T result = caseFarm(farm);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackingPackage.ANIMAL: {
-				Animal animal = (Animal)theEObject;
-				T result = caseAnimal(animal);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TrackingPackage.CONTAINER: {
 				Container container = (Container)theEObject;
 				T result = caseContainer(container);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.PROCESSOR: {
-				Processor processor = (Processor)theEObject;
-				T result = caseProcessor(processor);
-				if (result == null) result = caseCompany(processor);
-				if (result == null) result = caseParty(processor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.SUPPLIER: {
-				Supplier supplier = (Supplier)theEObject;
-				T result = caseSupplier(supplier);
-				if (result == null) result = caseCompany(supplier);
-				if (result == null) result = caseParty(supplier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.COLLECTION: {
-				Collection collection = (Collection)theEObject;
-				T result = caseCollection(collection);
-				if (result == null) result = caseTransfer(collection);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.LOT: {
-				Lot lot = (Lot)theEObject;
-				T result = caseLot(lot);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.DELIVERY: {
-				Delivery delivery = (Delivery)theEObject;
-				T result = caseDelivery(delivery);
-				if (result == null) result = caseTransfer(delivery);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.TRANSFER: {
-				Transfer transfer = (Transfer)theEObject;
-				T result = caseTransfer(transfer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -181,21 +122,6 @@ public class TrackingSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Dairy</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Dairy</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDairy(Dairy object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Farm</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -211,21 +137,6 @@ public class TrackingSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Animal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Animal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnimal(Animal object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -237,96 +148,6 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainer(Container object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Processor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Processor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProcessor(Processor object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Supplier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Supplier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSupplier(Supplier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCollection(Collection object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Lot</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Lot</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLot(Lot object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Delivery</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Delivery</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDelivery(Delivery object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transfer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transfer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTransfer(Transfer object) {
 		return null;
 	}
 
@@ -372,36 +193,6 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	public T caseAnimalIdentifier(AnimalIdentifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Party</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Party</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParty(Party object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Company</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Company</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCompany(Company object) {
 		return null;
 	}
 

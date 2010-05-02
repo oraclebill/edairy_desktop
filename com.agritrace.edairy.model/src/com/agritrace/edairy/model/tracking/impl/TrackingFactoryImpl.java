@@ -61,16 +61,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TrackingPackage.DAIRY: return createDairy();
 			case TrackingPackage.FARM: return createFarm();
-			case TrackingPackage.ANIMAL: return createAnimal();
 			case TrackingPackage.CONTAINER: return createContainer();
-			case TrackingPackage.PROCESSOR: return createProcessor();
-			case TrackingPackage.SUPPLIER: return createSupplier();
-			case TrackingPackage.COLLECTION: return createCollection();
-			case TrackingPackage.LOT: return createLot();
-			case TrackingPackage.DELIVERY: return createDelivery();
-			case TrackingPackage.TRANSFER: return createTransfer();
 			case TrackingPackage.REGISTERED_ANIMAL: return createRegisteredAnimal();
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE: return createReferenceAnimalType();
 			case TrackingPackage.ANIMAL_IDENTIFIER: return createAnimalIdentifier();
@@ -87,10 +79,6 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case TrackingPackage.UNIT_OF_MEASURE:
-				return createUnitOfMeasureFromString(eDataType, initialValue);
-			case TrackingPackage.CONTAINER_TYPE:
-				return createContainerTypeFromString(eDataType, initialValue);
 			case TrackingPackage.ACQUISITION_TYPE:
 				return createAcquisitionTypeFromString(eDataType, initialValue);
 			case TrackingPackage.PURPOSE:
@@ -112,10 +100,6 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case TrackingPackage.UNIT_OF_MEASURE:
-				return convertUnitOfMeasureToString(eDataType, instanceValue);
-			case TrackingPackage.CONTAINER_TYPE:
-				return convertContainerTypeToString(eDataType, instanceValue);
 			case TrackingPackage.ACQUISITION_TYPE:
 				return convertAcquisitionTypeToString(eDataType, instanceValue);
 			case TrackingPackage.PURPOSE:
@@ -134,16 +118,6 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dairy createDairy() {
-		DairyImpl dairy = new DairyImpl();
-		return dairy;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Farm createFarm() {
 		FarmImpl farm = new FarmImpl();
 		return farm;
@@ -154,79 +128,9 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Animal createAnimal() {
-		AnimalImpl animal = new AnimalImpl();
-		return animal;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public com.agritrace.edairy.model.tracking.Container createContainer() {
 		ContainerImpl container = new ContainerImpl();
 		return container;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Processor createProcessor() {
-		ProcessorImpl processor = new ProcessorImpl();
-		return processor;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Supplier createSupplier() {
-		SupplierImpl supplier = new SupplierImpl();
-		return supplier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Collection createCollection() {
-		CollectionImpl collection = new CollectionImpl();
-		return collection;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Lot createLot() {
-		LotImpl lot = new LotImpl();
-		return lot;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Delivery createDelivery() {
-		DeliveryImpl delivery = new DeliveryImpl();
-		return delivery;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Transfer createTransfer() {
-		TransferImpl transfer = new TransferImpl();
-		return transfer;
 	}
 
 	/**
@@ -257,46 +161,6 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	public AnimalIdentifier createAnimalIdentifier() {
 		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
 		return animalIdentifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
-		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertUnitOfMeasureToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
-		ContainerType result = ContainerType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

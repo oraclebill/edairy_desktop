@@ -22,9 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.model.impl.PersonImpl#getNationalId <em>National Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.PersonImpl#getNhifNumber <em>Nhif Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.impl.PersonImpl#getNssfNumber <em>Nssf Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.PersonImpl#getPhoto <em>Photo</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,64 +30,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class PersonImpl extends PartyImpl implements Person {
 	/**
-	 * The default value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
+	 * The default value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNationalId()
+	 * @see #getPhoto()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NATIONAL_ID_EDEFAULT = null;
+	protected static final String PHOTO_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
+	 * The cached value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNationalId()
+	 * @see #getPhoto()
 	 * @generated
 	 * @ordered
 	 */
-	protected String nationalId = NATIONAL_ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNhifNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NHIF_NUMBER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNhifNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected String nhifNumber = NHIF_NUMBER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNssfNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NSSF_NUMBER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNssfNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected String nssfNumber = NSSF_NUMBER_EDEFAULT;
+	protected String photo = PHOTO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,8 +73,8 @@ public class PersonImpl extends PartyImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getNationalId() {
-		return nationalId;
+	public String getPhoto() {
+		return photo;
 	}
 
 	/**
@@ -124,53 +82,11 @@ public class PersonImpl extends PartyImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNationalId(String newNationalId) {
-		String oldNationalId = nationalId;
-		nationalId = newNationalId;
+	public void setPhoto(String newPhoto) {
+		String oldPhoto = photo;
+		photo = newPhoto;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NATIONAL_ID, oldNationalId, nationalId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getNhifNumber() {
-		return nhifNumber;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNhifNumber(String newNhifNumber) {
-		String oldNhifNumber = nhifNumber;
-		nhifNumber = newNhifNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NHIF_NUMBER, oldNhifNumber, nhifNumber));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getNssfNumber() {
-		return nssfNumber;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNssfNumber(String newNssfNumber) {
-		String oldNssfNumber = nssfNumber;
-		nssfNumber = newNssfNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NSSF_NUMBER, oldNssfNumber, nssfNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHOTO, oldPhoto, photo));
 	}
 
 	/**
@@ -181,12 +97,8 @@ public class PersonImpl extends PartyImpl implements Person {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.PERSON__NATIONAL_ID:
-				return getNationalId();
-			case ModelPackage.PERSON__NHIF_NUMBER:
-				return getNhifNumber();
-			case ModelPackage.PERSON__NSSF_NUMBER:
-				return getNssfNumber();
+			case ModelPackage.PERSON__PHOTO:
+				return getPhoto();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,14 +111,8 @@ public class PersonImpl extends PartyImpl implements Person {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.PERSON__NATIONAL_ID:
-				setNationalId((String)newValue);
-				return;
-			case ModelPackage.PERSON__NHIF_NUMBER:
-				setNhifNumber((String)newValue);
-				return;
-			case ModelPackage.PERSON__NSSF_NUMBER:
-				setNssfNumber((String)newValue);
+			case ModelPackage.PERSON__PHOTO:
+				setPhoto((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,14 +126,8 @@ public class PersonImpl extends PartyImpl implements Person {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.PERSON__NATIONAL_ID:
-				setNationalId(NATIONAL_ID_EDEFAULT);
-				return;
-			case ModelPackage.PERSON__NHIF_NUMBER:
-				setNhifNumber(NHIF_NUMBER_EDEFAULT);
-				return;
-			case ModelPackage.PERSON__NSSF_NUMBER:
-				setNssfNumber(NSSF_NUMBER_EDEFAULT);
+			case ModelPackage.PERSON__PHOTO:
+				setPhoto(PHOTO_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -241,12 +141,8 @@ public class PersonImpl extends PartyImpl implements Person {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.PERSON__NATIONAL_ID:
-				return NATIONAL_ID_EDEFAULT == null ? nationalId != null : !NATIONAL_ID_EDEFAULT.equals(nationalId);
-			case ModelPackage.PERSON__NHIF_NUMBER:
-				return NHIF_NUMBER_EDEFAULT == null ? nhifNumber != null : !NHIF_NUMBER_EDEFAULT.equals(nhifNumber);
-			case ModelPackage.PERSON__NSSF_NUMBER:
-				return NSSF_NUMBER_EDEFAULT == null ? nssfNumber != null : !NSSF_NUMBER_EDEFAULT.equals(nssfNumber);
+			case ModelPackage.PERSON__PHOTO:
+				return PHOTO_EDEFAULT == null ? photo != null : !PHOTO_EDEFAULT.equals(photo);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -261,12 +157,8 @@ public class PersonImpl extends PartyImpl implements Person {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (nationalId: ");
-		result.append(nationalId);
-		result.append(", nhifNumber: ");
-		result.append(nhifNumber);
-		result.append(", nssfNumber: ");
-		result.append(nssfNumber);
+		result.append(" (photo: ");
+		result.append(photo);
 		result.append(')');
 		return result.toString();
 	}

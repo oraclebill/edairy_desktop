@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.model.impl;
 
+import com.agritrace.edairy.model.ContactMethod;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.Party;
@@ -33,9 +34,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.model.impl.PartyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.PartyImpl#getPartyId <em>Party Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.impl.PartyImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.impl.PartyImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.impl.PartyImpl#getContactMethods <em>Contact Methods</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,24 +45,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class PartyImpl extends EObjectImpl implements Party {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getPartyId() <em>Party Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getPartyId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String PARTY_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getPartyId() <em>Party Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getPartyId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String partyId = PARTY_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
@@ -83,14 +85,24 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference list.
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLocation()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Location> location;
+	protected Location location;
+
+	/**
+	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContactMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ContactMethod> contactMethods;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,8 +128,8 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public String getPartyId() {
+		return partyId;
 	}
 
 	/**
@@ -125,11 +137,11 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setPartyId(String newPartyId) {
+		String oldPartyId = partyId;
+		partyId = newPartyId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__PARTY_ID, oldPartyId, partyId));
 	}
 
 	/**
@@ -158,11 +170,54 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Location> getLocation() {
-		if (location == null) {
-			location = new EObjectContainmentEList.Resolving<Location>(Location.class, this, ModelPackage.PARTY__LOCATION);
-		}
+	public Location getLocation() {
 		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(Location newLocation) {
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PARTY__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PARTY__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__LOCATION, newLocation, newLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ContactMethod> getContactMethods() {
+		if (contactMethods == null) {
+			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.PARTY__CONTACT_METHODS);
+		}
+		return contactMethods;
 	}
 
 	/**
@@ -174,7 +229,9 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.PARTY__LOCATION:
-				return ((InternalEList<?>)getLocation()).basicRemove(otherEnd, msgs);
+				return basicSetLocation(null, msgs);
+			case ModelPackage.PARTY__CONTACT_METHODS:
+				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -187,12 +244,14 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.PARTY__NAME:
-				return getName();
+			case ModelPackage.PARTY__PARTY_ID:
+				return getPartyId();
 			case ModelPackage.PARTY__PHONE_NUMBER:
 				return getPhoneNumber();
 			case ModelPackage.PARTY__LOCATION:
 				return getLocation();
+			case ModelPackage.PARTY__CONTACT_METHODS:
+				return getContactMethods();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -206,15 +265,18 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.PARTY__NAME:
-				setName((String)newValue);
+			case ModelPackage.PARTY__PARTY_ID:
+				setPartyId((String)newValue);
 				return;
 			case ModelPackage.PARTY__PHONE_NUMBER:
 				setPhoneNumber((String)newValue);
 				return;
 			case ModelPackage.PARTY__LOCATION:
-				getLocation().clear();
-				getLocation().addAll((Collection<? extends Location>)newValue);
+				setLocation((Location)newValue);
+				return;
+			case ModelPackage.PARTY__CONTACT_METHODS:
+				getContactMethods().clear();
+				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,14 +290,17 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.PARTY__NAME:
-				setName(NAME_EDEFAULT);
+			case ModelPackage.PARTY__PARTY_ID:
+				setPartyId(PARTY_ID_EDEFAULT);
 				return;
 			case ModelPackage.PARTY__PHONE_NUMBER:
 				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
 				return;
 			case ModelPackage.PARTY__LOCATION:
-				getLocation().clear();
+				setLocation((Location)null);
+				return;
+			case ModelPackage.PARTY__CONTACT_METHODS:
+				getContactMethods().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -249,12 +314,14 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.PARTY__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.PARTY__PARTY_ID:
+				return PARTY_ID_EDEFAULT == null ? partyId != null : !PARTY_ID_EDEFAULT.equals(partyId);
 			case ModelPackage.PARTY__PHONE_NUMBER:
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
 			case ModelPackage.PARTY__LOCATION:
-				return location != null && !location.isEmpty();
+				return location != null;
+			case ModelPackage.PARTY__CONTACT_METHODS:
+				return contactMethods != null && !contactMethods.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -269,8 +336,8 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (partyId: ");
+		result.append(partyId);
 		result.append(", phoneNumber: ");
 		result.append(phoneNumber);
 		result.append(')');

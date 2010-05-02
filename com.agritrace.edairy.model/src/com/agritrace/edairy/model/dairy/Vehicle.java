@@ -6,9 +6,6 @@
  */
 package com.agritrace.edairy.model.dairy;
 
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getServiceRecords <em>Service Records</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getRegistrationNumber <em>Registration Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getMake <em>Make</em>}</li>
@@ -28,10 +24,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getLogBookNumber <em>Log Book Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePolicyNumber <em>Insurance Policy Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePurchaseDate <em>Insurance Purchase Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getPurchaseDate <em>Purchase Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDisposalDate <em>Disposal Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour <em>Dominant Colour</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDriver <em>Driver</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,23 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Vehicle extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Service Records</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.ServiceRecord}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Service Records</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Service Records</em>' containment reference list.
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_ServiceRecords()
-	 * @model containment="true" resolveProxies="true" required="true"
-	 * @generated
-	 */
-	EList<ServiceRecord> getServiceRecords();
-
+public interface Vehicle extends Asset {
 	/**
 	 * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -291,58 +270,6 @@ public interface Vehicle extends EObject {
 	void setInsurancePurchaseDate(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Purchase Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Purchase Date</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Purchase Date</em>' attribute.
-	 * @see #setPurchaseDate(String)
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_PurchaseDate()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getPurchaseDate();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getPurchaseDate <em>Purchase Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Purchase Date</em>' attribute.
-	 * @see #getPurchaseDate()
-	 * @generated
-	 */
-	void setPurchaseDate(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Disposal Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Disposal Date</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Disposal Date</em>' attribute.
-	 * @see #setDisposalDate(String)
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_DisposalDate()
-	 * @model
-	 * @generated
-	 */
-	String getDisposalDate();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getDisposalDate <em>Disposal Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Disposal Date</em>' attribute.
-	 * @see #getDisposalDate()
-	 * @generated
-	 */
-	void setDisposalDate(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Dominant Colour</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -393,5 +320,31 @@ public interface Vehicle extends EObject {
 	 * @generated
 	 */
 	void setCapacityInTonnes(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Driver</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Driver</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Driver</em>' reference.
+	 * @see #setDriver(Employee)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_Driver()
+	 * @model
+	 * @generated
+	 */
+	Employee getDriver();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getDriver <em>Driver</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Driver</em>' reference.
+	 * @see #getDriver()
+	 * @generated
+	 */
+	void setDriver(Employee value);
 
 } // Vehicle

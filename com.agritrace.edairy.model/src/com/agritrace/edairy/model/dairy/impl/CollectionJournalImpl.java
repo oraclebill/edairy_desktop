@@ -7,10 +7,11 @@
 package com.agritrace.edairy.model.dairy.impl;
 
 import com.agritrace.edairy.model.dairy.CollectionJournal;
-import com.agritrace.edairy.model.dairy.CollectionRecord;
+import com.agritrace.edairy.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.model.dairy.DairyContainer;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
-import com.agritrace.edairy.model.dairy.RouteDefinition;
+import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.dairy.Session;
 import com.agritrace.edairy.model.dairy.Vehicle;
 
@@ -45,14 +46,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getSession <em>Session</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getCan <em>Can</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getFarmContainer <em>Farm Container</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getDriverTotal <em>Driver Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getTotal <em>Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl#getRecordTotal <em>Record Total</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,7 +68,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CollectionRecord> journalEntries;
+	protected EList<CollectionJournalLine> journalEntries;
 
 	/**
 	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
@@ -110,6 +111,26 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	protected Date journalDate = JOURNAL_DATE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getSession() <em>Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Session SESSION_EDEFAULT = Session.EARLY_MORNING;
+
+	/**
+	 * The cached value of the '{@link #getSession() <em>Session</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected Session session = SESSION_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -127,27 +148,17 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * @generated
 	 * @ordered
 	 */
-	protected RouteDefinition route;
+	protected Route route;
 
 	/**
-	 * The cached value of the '{@link #getSession() <em>Session</em>}' reference.
+	 * The cached value of the '{@link #getFarmContainer() <em>Farm Container</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSession()
+	 * @see #getFarmContainer()
 	 * @generated
 	 * @ordered
 	 */
-	protected Session session;
-
-	/**
-	 * The cached value of the '{@link #getCan() <em>Can</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCan()
-	 * @generated
-	 * @ordered
-	 */
-	protected Container can;
+	protected Container farmContainer;
 
 	/**
 	 * The cached value of the '{@link #getBin() <em>Bin</em>}' reference.
@@ -157,7 +168,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * @generated
 	 * @ordered
 	 */
-	protected Container bin;
+	protected DairyContainer bin;
 
 	/**
 	 * The cached value of the '{@link #getVehicle() <em>Vehicle</em>}' reference.
@@ -190,24 +201,24 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	protected BigDecimal driverTotal = DRIVER_TOTAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getTotal() <em>Total</em>}' attribute.
+	 * The default value of the '{@link #getRecordTotal() <em>Record Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTotal()
+	 * @see #getRecordTotal()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal TOTAL_EDEFAULT = new BigDecimal("0");
+	protected static final BigDecimal RECORD_TOTAL_EDEFAULT = new BigDecimal("0");
 
 	/**
-	 * The cached value of the '{@link #getTotal() <em>Total</em>}' attribute.
+	 * The cached value of the '{@link #getRecordTotal() <em>Record Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTotal()
+	 * @see #getRecordTotal()
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal total = TOTAL_EDEFAULT;
+	protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -233,9 +244,9 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionRecord> getJournalEntries() {
+	public EList<CollectionJournalLine> getJournalEntries() {
 		if (journalEntries == null) {
-			journalEntries = new EObjectContainmentEList.Resolving<CollectionRecord>(CollectionRecord.class, this, DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
+			journalEntries = new EObjectContainmentEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
 		}
 		return journalEntries;
 	}
@@ -287,6 +298,27 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Session getSession() {
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSession(Session newSession) {
+		Session oldSession = session;
+		session = newSession == null ? SESSION_EDEFAULT : newSession;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__SESSION, oldSession, session));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Employee getDriver() {
 		if (driver != null && driver.eIsProxy()) {
 			InternalEObject oldDriver = (InternalEObject)driver;
@@ -325,10 +357,10 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RouteDefinition getRoute() {
+	public Route getRoute() {
 		if (route != null && route.eIsProxy()) {
 			InternalEObject oldRoute = (InternalEObject)route;
-			route = (RouteDefinition)eResolveProxy(oldRoute);
+			route = (Route)eResolveProxy(oldRoute);
 			if (route != oldRoute) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__ROUTE, oldRoute, route));
@@ -342,7 +374,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RouteDefinition basicGetRoute() {
+	public Route basicGetRoute() {
 		return route;
 	}
 
@@ -351,8 +383,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoute(RouteDefinition newRoute) {
-		RouteDefinition oldRoute = route;
+	public void setRoute(Route newRoute) {
+		Route oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__ROUTE, oldRoute, route));
@@ -363,16 +395,16 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Session getSession() {
-		if (session != null && session.eIsProxy()) {
-			InternalEObject oldSession = (InternalEObject)session;
-			session = (Session)eResolveProxy(oldSession);
-			if (session != oldSession) {
+	public Container getFarmContainer() {
+		if (farmContainer != null && farmContainer.eIsProxy()) {
+			InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
+			farmContainer = (Container)eResolveProxy(oldFarmContainer);
+			if (farmContainer != oldFarmContainer) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__SESSION, oldSession, session));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER, oldFarmContainer, farmContainer));
 			}
 		}
-		return session;
+		return farmContainer;
 	}
 
 	/**
@@ -380,8 +412,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Session basicGetSession() {
-		return session;
+	public Container basicGetFarmContainer() {
+		return farmContainer;
 	}
 
 	/**
@@ -389,11 +421,11 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSession(Session newSession) {
-		Session oldSession = session;
-		session = newSession;
+	public void setFarmContainer(Container newFarmContainer) {
+		Container oldFarmContainer = farmContainer;
+		farmContainer = newFarmContainer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__SESSION, oldSession, session));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER, oldFarmContainer, farmContainer));
 	}
 
 	/**
@@ -401,48 +433,10 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Container getCan() {
-		if (can != null && can.eIsProxy()) {
-			InternalEObject oldCan = (InternalEObject)can;
-			can = (Container)eResolveProxy(oldCan);
-			if (can != oldCan) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__CAN, oldCan, can));
-			}
-		}
-		return can;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Container basicGetCan() {
-		return can;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCan(Container newCan) {
-		Container oldCan = can;
-		can = newCan;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__CAN, oldCan, can));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Container getBin() {
+	public DairyContainer getBin() {
 		if (bin != null && bin.eIsProxy()) {
 			InternalEObject oldBin = (InternalEObject)bin;
-			bin = (Container)eResolveProxy(oldBin);
+			bin = (DairyContainer)eResolveProxy(oldBin);
 			if (bin != oldBin) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__BIN, oldBin, bin));
@@ -456,7 +450,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Container basicGetBin() {
+	public DairyContainer basicGetBin() {
 		return bin;
 	}
 
@@ -465,8 +459,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBin(Container newBin) {
-		Container oldBin = bin;
+	public void setBin(DairyContainer newBin) {
+		DairyContainer oldBin = bin;
 		bin = newBin;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__BIN, oldBin, bin));
@@ -536,8 +530,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigDecimal getTotal() {
-		return total;
+	public BigDecimal getRecordTotal() {
+		return recordTotal;
 	}
 
 	/**
@@ -545,11 +539,11 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTotal(BigDecimal newTotal) {
-		BigDecimal oldTotal = total;
-		total = newTotal;
+	public void setRecordTotal(BigDecimal newRecordTotal) {
+		BigDecimal oldRecordTotal = recordTotal;
+		recordTotal = newRecordTotal;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__TOTAL, oldTotal, total));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL, oldRecordTotal, recordTotal));
 	}
 
 	/**
@@ -580,18 +574,17 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 				return getReferenceNumber();
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
 				return getJournalDate();
+			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+				return getSession();
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
 				if (resolve) return getDriver();
 				return basicGetDriver();
 			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
 				if (resolve) return getRoute();
 				return basicGetRoute();
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
-				if (resolve) return getSession();
-				return basicGetSession();
-			case DairyPackage.COLLECTION_JOURNAL__CAN:
-				if (resolve) return getCan();
-				return basicGetCan();
+			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+				if (resolve) return getFarmContainer();
+				return basicGetFarmContainer();
 			case DairyPackage.COLLECTION_JOURNAL__BIN:
 				if (resolve) return getBin();
 				return basicGetBin();
@@ -600,8 +593,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 				return basicGetVehicle();
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
 				return getDriverTotal();
-			case DairyPackage.COLLECTION_JOURNAL__TOTAL:
-				return getTotal();
+			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+				return getRecordTotal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -617,7 +610,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
-				getJournalEntries().addAll((Collection<? extends CollectionRecord>)newValue);
+				getJournalEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
@@ -625,20 +618,20 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
 				setJournalDate((Date)newValue);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+				setSession((Session)newValue);
+				return;
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
 				setDriver((Employee)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
-				setRoute((RouteDefinition)newValue);
+				setRoute((Route)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
-				setSession((Session)newValue);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL__CAN:
-				setCan((Container)newValue);
+			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+				setFarmContainer((Container)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__BIN:
-				setBin((Container)newValue);
+				setBin((DairyContainer)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
 				setVehicle((Vehicle)newValue);
@@ -646,8 +639,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
 				setDriverTotal((BigDecimal)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__TOTAL:
-				setTotal((BigDecimal)newValue);
+			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+				setRecordTotal((BigDecimal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -670,20 +663,20 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
 				setJournalDate(JOURNAL_DATE_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+				setSession(SESSION_EDEFAULT);
+				return;
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
 				setDriver((Employee)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
-				setRoute((RouteDefinition)null);
+				setRoute((Route)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
-				setSession((Session)null);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL__CAN:
-				setCan((Container)null);
+			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+				setFarmContainer((Container)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__BIN:
-				setBin((Container)null);
+				setBin((DairyContainer)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
 				setVehicle((Vehicle)null);
@@ -691,8 +684,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
 				setDriverTotal(DRIVER_TOTAL_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__TOTAL:
-				setTotal(TOTAL_EDEFAULT);
+			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+				setRecordTotal(RECORD_TOTAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -712,22 +705,22 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
 				return JOURNAL_DATE_EDEFAULT == null ? journalDate != null : !JOURNAL_DATE_EDEFAULT.equals(journalDate);
+			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+				return session != SESSION_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
 				return driver != null;
 			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
 				return route != null;
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
-				return session != null;
-			case DairyPackage.COLLECTION_JOURNAL__CAN:
-				return can != null;
+			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+				return farmContainer != null;
 			case DairyPackage.COLLECTION_JOURNAL__BIN:
 				return bin != null;
 			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
 				return vehicle != null;
 			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
 				return DRIVER_TOTAL_EDEFAULT == null ? driverTotal != null : !DRIVER_TOTAL_EDEFAULT.equals(driverTotal);
-			case DairyPackage.COLLECTION_JOURNAL__TOTAL:
-				return TOTAL_EDEFAULT == null ? total != null : !TOTAL_EDEFAULT.equals(total);
+			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -746,10 +739,12 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		result.append(referenceNumber);
 		result.append(", journalDate: ");
 		result.append(journalDate);
+		result.append(", session: ");
+		result.append(session);
 		result.append(", driverTotal: ");
 		result.append(driverTotal);
-		result.append(", total: ");
-		result.append(total);
+		result.append(", recordTotal: ");
+		result.append(recordTotal);
 		result.append(')');
 		return result.toString();
 	}
