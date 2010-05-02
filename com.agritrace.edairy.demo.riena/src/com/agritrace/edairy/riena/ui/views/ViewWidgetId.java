@@ -94,5 +94,17 @@ public class ViewWidgetId {
 	public static final String CONTAINER_TABLE="Container";
 	public static final String CONTAINER_ADD="ContainerAdd";
 	public static final String CONTAINER_Remove="ContainerRemove";
-
+	
+	public static final String LIVESTOCK_TABLE="LiveStock";
+	public static final String LIVESTOCK_ADD="LiveStockAdd";
+	public static final String LIVESTOCK_Remove="LiveStockRemove";
+	
+	public static final String FARM_TABLE="FarmTable";
+	public static final String FARM_ADD="FarmAdd";
+	public static final String FARM_Remove="FarmRemove";
+	//membership_collection tab
+	public static final String COLLECTION_TABLE="CollectionTable";
+	//membership_transaction tab
+	public static final String TRANSACTION_TABLE="TransactionTable";
+	
 }

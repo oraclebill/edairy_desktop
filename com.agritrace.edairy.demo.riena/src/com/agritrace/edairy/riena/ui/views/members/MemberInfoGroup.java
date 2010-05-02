@@ -308,7 +308,7 @@ public class MemberInfoGroup  {
 		
 		bindingContext.bindValue(ViewersObservables.observeSingleSelection(comboStatus), EMFObservables.observeValue(memberShip,DairyPackage.Literals.MEMBERSHIP__STATUS), null, null);
 	    bindingContext.bindValue(SWTObservables.observeText(txtPhone,SWT.Modify),EMFObservables.observeValue(memberShip.getMember(),ModelPackage.Literals.PARTY__PHONE_NUMBER));
-		bindingContext.bindValue(SWTObservables.observeText(txtFirst,SWT.Modify), EMFObservables.observeValue(memberShip.getMember(),com.agritrace.edairy.model.dairy.DairyPackage.Literals.MEMBERSHIP__MEMBER),null,null);
+		bindingContext.bindValue(SWTObservables.observeText(txtFirst,SWT.Modify), EMFObservables.observeValue(memberShip.getMember(),ModelPackage.Literals.PARTY__NAME),null,null);
 //		bindingContext.bindValue(SWTObservables.observeText(txtRoute,SWT.Modify), EMFObservables.observeValue(memberShip.getDefaultRoute(), DairyPackage.Literals.ROUTE_DEFINITION__NAME));
 
 	}

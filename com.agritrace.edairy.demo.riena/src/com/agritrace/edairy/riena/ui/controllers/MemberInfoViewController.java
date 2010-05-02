@@ -13,8 +13,8 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 
-import com.agritrace.edairy.riena.ui.views.data.MemberFactory;
 import com.agritrace.edairy.riena.ui.views.data.MemberShip;
+import com.agritrace.edairy.riena.ui.views.data.MemberFactory;
 import com.agritrace.edairy.riena.ui.views.data.MemberShip.STATUS;
 
 public class MemberInfoViewController extends SubModuleController {

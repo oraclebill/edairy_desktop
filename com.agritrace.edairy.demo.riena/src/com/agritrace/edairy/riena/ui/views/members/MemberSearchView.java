@@ -169,7 +169,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		transactionTab.setControl(transComposite);
 
 		TabItem collectionTab = new TabItem(tabfolder, SWT.NULL);
-		collectionTab.setText("Milk");
+		collectionTab.setText("Collection Records");
 		Composite collectionComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		collectionComposite.setLayout(new GridLayout(1,true));
 		createCollectionInfoTab(collectionComposite);
@@ -216,8 +216,32 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	}
 
 	private void createCollectionInfoTab(Composite collectionComposite) {
-		// TODO Auto-generated method stub
-		
+		Composite tablePanel = UIControlsFactory.createComposite(collectionComposite, SWT.NULL);
+		tablePanel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+
+		Table table =  UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION, ViewWidgetId.COLLECTION_TABLE);
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+
+		TableColumn columnId = new TableColumn(table, SWT.LEFT);
+		TableColumn columnDate = new TableColumn(table, SWT.LEFT);
+		TableColumn columnCan = new TableColumn(table, SWT.LEFT);
+		TableColumn columnQuantity = new TableColumn(table, SWT.LEFT);
+		TableColumn columnNPRMissing = new TableColumn(table, SWT.LEFT);
+		TableColumn columnRejected = new TableColumn(table, SWT.LEFT);
+		TableColumn columnSuspected = new TableColumn(table, SWT.LEFT);
+
+		TableColumnLayout layout = new TableColumnLayout();
+		layout.setColumnData(columnId, new ColumnWeightData(10));
+		layout.setColumnData(columnDate, new ColumnWeightData(15));
+		layout.setColumnData(columnCan, new ColumnWeightData(15));
+		layout.setColumnData(columnQuantity, new ColumnWeightData(15));
+		layout.setColumnData(columnNPRMissing, new ColumnWeightData(15));
+		layout.setColumnData(columnRejected, new ColumnWeightData(15));
+		layout.setColumnData(columnSuspected, new ColumnWeightData(15));
+
+		tablePanel.setLayout(layout);
+
 	}
 
 	private void createContainerInfoTab(Composite containerComposite) {
@@ -264,7 +288,42 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	}
 
 	private void createLivestockInfoTab(Composite livestockComposite) {
-		// TODO Auto-generated method stub
+
+		Composite containerPanel = UIControlsFactory.createComposite(livestockComposite, SWT.NULL);
+		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true, true).applyTo(containerPanel);
+		Table table = UIControlsFactory.createTable(containerPanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION, ViewWidgetId.LIVESTOCK_TABLE);
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+
+		TableColumn columnID = new TableColumn(table, SWT.LEFT);
+		TableColumn columnFarm = new TableColumn(table, SWT.LEFT);
+		TableColumn columnPurpose = new TableColumn(table, SWT.LEFT);
+		TableColumn columnName = new TableColumn(table, SWT.LEFT);
+		TableColumn columnType = new TableColumn(table, SWT.LEFT);
+		TableColumn columnAcquisionDate = new TableColumn(table, SWT.LEFT);
+		TableColumn columnAcquisionType = new TableColumn(table, SWT.LEFT);
+		
+	
+		TableColumnLayout layout = new TableColumnLayout();
+		layout.setColumnData(columnID, new ColumnWeightData(14));
+		layout.setColumnData(columnFarm, new ColumnWeightData(14));
+		layout.setColumnData(columnPurpose, new ColumnWeightData(14));
+		layout.setColumnData(columnName, new ColumnWeightData(14));
+		layout.setColumnData(columnType, new ColumnWeightData(14));
+		layout.setColumnData(columnAcquisionDate, new ColumnWeightData(15));
+		layout.setColumnData(columnAcquisionType, new ColumnWeightData(15));
+		containerPanel.setLayout(layout);
+		
+		Composite buttonsPanel = UIControlsFactory.createComposite(livestockComposite,SWT.NULL);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).applyTo(buttonsPanel);
+		buttonsPanel.setLayout(new GridLayout(2,false));
+		
+		Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.LIVESTOCK_ADD);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(false, false).applyTo(addButton);
+
+		Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON, ViewWidgetId.LIVESTOCK_Remove);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(false, false).applyTo(removeButton);
+	
 		
 	}
 
@@ -274,9 +333,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		Composite tablePanel = UIControlsFactory.createComposite(parent, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
 
-		Table table = new Table(tablePanel, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
-		//			Table table = UIControlsFactory.createTable(tablePanel, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION,
-		//					"transactionTable"); //$NON-NLS-1$
+		Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION, ViewWidgetId.TRANSACTION_TABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
@@ -304,9 +361,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		Composite tablePanel = UIControlsFactory.createComposite(parent, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
 
-		Table table = new Table(tablePanel, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION);
-		//			Table table = UIControlsFactory.createTable(tablePanel, SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION,
-		//					"transactionTable"); //$NON-NLS-1$
+		Table table =  UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION, ViewWidgetId.FARM_TABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
@@ -314,28 +369,32 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		columnId.setText("Id");
 		TableColumn columnName = new TableColumn(table, SWT.LEFT);
 		columnName.setText("Name");
-		TableColumn columnRoute = new TableColumn(table, SWT.LEFT);
-		columnRoute.setText("Route");
-		TableColumn columnAnimal = new TableColumn(table, SWT.LEFT);
-		columnAnimal.setText("Number of Animals");
 		TableColumn columnLocation = new TableColumn(table, SWT.LEFT);
 		columnLocation.setText("Location");
-		TableColumn columnSubLocation = new TableColumn(table, SWT.LEFT);
-		columnSubLocation.setText("Sub Location");
-		TableColumn columnViallage = new TableColumn(table, SWT.LEFT);
-		columnViallage.setText("village");
+		TableColumn columnAnimal = new TableColumn(table, SWT.LEFT);
+		columnAnimal.setText("Number of Animals");
+		TableColumn columnCan = new TableColumn(table, SWT.LEFT);
+		columnLocation.setText("Number of Containers");
+
 
 		TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnId, new ColumnWeightData(10));
-		layout.setColumnData(columnName, new ColumnWeightData(15));
-		layout.setColumnData(columnRoute, new ColumnWeightData(15));
-		layout.setColumnData(columnAnimal, new ColumnWeightData(15));
-		layout.setColumnData(columnLocation, new ColumnWeightData(15));
-		layout.setColumnData(columnSubLocation, new ColumnWeightData(15));
-		layout.setColumnData(columnViallage, new ColumnWeightData(15));
-
-
+		layout.setColumnData(columnId, new ColumnWeightData(20));
+		layout.setColumnData(columnName, new ColumnWeightData(20));
+		layout.setColumnData(columnLocation, new ColumnWeightData(20));
+		layout.setColumnData(columnAnimal, new ColumnWeightData(20));
+		layout.setColumnData(columnCan, new ColumnWeightData(20));
 		tablePanel.setLayout(layout);
+		
+		Composite buttonsPanel = UIControlsFactory.createComposite(parent,SWT.NULL);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).applyTo(buttonsPanel);
+		buttonsPanel.setLayout(new GridLayout(2,false));
+		
+		Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.FARM_ADD);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(false, false).applyTo(addButton);
+
+		Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON, ViewWidgetId.FARM_Remove);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(false, false).applyTo(removeButton);
+
 	}
 
 	public void createAccountSummaryTab(Composite parent){

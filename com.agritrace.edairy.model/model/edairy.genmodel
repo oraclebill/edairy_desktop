@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.agritrace.edairy.model/src"
+    modelPluginID="com.agritrace.edairy.model" modelName="Edairy" importerID="org.eclipse.emf.importer.ecore"
+    containmentProxies="true" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>edairy.ecore</foreignModel>
+  <genPackages prefix="Edairy" basePackage="com.agritrace.edairy" disposableProviderFactory="true"
+      ecorePackage="edairy.ecore#/">
+    <nestedGenPackages prefix="Model" basePackage="com.agritrace.edairy" resource="XML"
+        disposableProviderFactory="true" ecorePackage="edairy.ecore#//model">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/Gender">
+        <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/Gender/MALE"/>
+        <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/Gender/FEMALE"/>
+      </genEnums>
+      <genDataTypes ecoreDataType="edairy.ecore#//model/TransactionID"/>
+      <genDataTypes ecoreDataType="edairy.ecore#//model/UniqueID"/>
+      <genClasses image="false" ecoreClass="edairy.ecore#//model/Party">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Party/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Party/phoneNumber"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/Party/location"/>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//model/MapLocation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/MapLocation/longitude"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/MapLocation/latitude"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="edairy.ecore#//model/Location">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/address"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/province"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/division"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/district"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/location"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/subLocation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/village"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/postalCode"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/estate"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Location/section"/>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//model/StatutoryLocation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/StatutoryLocation/landReferenceNumber"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="edairy.ecore#//model/Audited">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Audited/lastUpdated"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Audited/voidDate"/>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//model/Person">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Person/nationalId"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Person/nhifNumber"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/Person/nssfNumber"/>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//model/Company">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/Company/contactPerson"/>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//model/DescriptiveLocation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/DescriptiveLocation/directions"/>
+      </genClasses>
+      <nestedGenPackages prefix="Tracking" basePackage="com.agritrace.edairy.model"
+          resource="XML" disposableProviderFactory="true" ecorePackage="edairy.ecore#//model/tracking">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/UnitOfMeasure">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/UnitOfMeasure/LITRE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/UnitOfMeasure/KILOGRAM"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/UnitOfMeasure/UNKNOWN"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/ContainerType">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/ContainerType/BIN"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/ContainerType/CAN"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/AcquisitionType">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/AcquisitionType/BIRTH"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/AcquisitionType/PURCHASE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/AcquisitionType/OTHER"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/Purpose">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Purpose/DAIRY"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Purpose/BEEF"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Purpose/BREEDING"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Purpose/HIDE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Purpose/TRANSPORT"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Purpose/OTHER"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/RearingMode">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/RearingMode/GRAZE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/RearingMode/ZEROGRAZE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/RearingMode/PASTORALHERD"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/RearingMode/OTHER"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/tracking/Mechanism">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/BRAND"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/BADGE"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/COLLAR"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/EARTAG"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/RFID"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/GSMGPRS"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/tracking/Mechanism/OTHER"/>
+        </genEnums>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Dairy">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Dairy/registrationNumber"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Farm">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Farm/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Farm/animals"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Farm/cans"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Farm/owner"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Farm/location"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Farm/farmId"/>
+          <genOperations ecoreOperation="edairy.ecore#//model/tracking/Farm/getNumberOfContainers"/>
+          <genOperations ecoreOperation="edairy.ecore#//model/tracking/Farm/getNumberOfAnimals"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Animal">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Animal/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Animal/name"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Animal/breed"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Animal/age"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Container">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/containerId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Container/owner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/capacity"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/units"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Container/measureType"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Processor">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Processor/registrationNumber"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Supplier"/>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Collection">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Collection/from"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Collection/contributedTo"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Lot">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Lot/container"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Delivery">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Delivery/lot"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Delivery/customer"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/Transfer">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Transfer/date"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/Transfer/quantity"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Transfer/dairy"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/Transfer/container"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/RegisteredAnimal">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/animnalRegistrationId"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/givenName"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/RegisteredAnimal/location"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/gender"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/RegisteredAnimal/animalType"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/RegisteredAnimal/sireType"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/purpose"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/dateOfAcquisition"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/acquisitionType"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/tracking/RegisteredAnimal/identifiers"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/identifyingFeatures"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/rearingMode"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/pastOwners"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/RegisteredAnimal/insuranceNumber"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/ReferenceAnimalType">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/ReferenceAnimalType/animalTypeId"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/ReferenceAnimalType/species"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/ReferenceAnimalType/breed"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/tracking/AnimalIdentifier">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/AnimalIdentifier/issuer"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/tracking/AnimalIdentifier/value"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Dairy" basePackage="com.agritrace.edairy.model" resource="XML"
+          disposableProviderFactory="true" ecorePackage="edairy.ecore#//model/dairy">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/dairy/MembershipStatus">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/dairy/MembershipStatus/Active"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/dairy/MembershipStatus/Inactive"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/dairy/MembershipStatus/Dormant"/>
+        </genEnums>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Vehicle">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Vehicle/serviceRecords"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/registrationNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/make"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/model"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/engineNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/chassisNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/logBookNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/insurancePolicyNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/insurancePurchaseDate"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/purchaseDate"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/disposalDate"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/dominantColour"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Vehicle/capacityInTonnes"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Driver">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Driver/vehicleAssignment"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/CollectionRecord">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/suspended"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/notRecorded"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionRecord/recordedMember"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/offRoute"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/collectionRecordId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionRecord/collectionJournal"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/journalSequence"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionRecord/can"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/quantityCollected"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionRecord/rejected"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Employee">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Employee/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Employee/startDate"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Employee/jobFunction"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/CollectionCentre">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionCentre/name"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/ServiceRecord">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/ServiceRecord/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/ServiceRecord/date"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/ServiceRecord/description"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Workstation">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Workstation/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Workstation/location"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Workstation/type"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/CollectionJournal">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/journalEntries"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionJournal/referenceNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionJournal/entryDate"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/driver"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/route"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/session"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/can"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/bin"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/CollectionJournal/vehicle"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionJournal/driverTotal"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionJournal/total"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionJournal/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/CollectionJournal/flagged"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/RouteDefinition">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/RouteDefinition/name"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/RouteDefinition/stops"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Trip">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Trip/collections"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Trip/deliveries"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Trip/started"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Trip/ended"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/DeliveryJournal">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/DeliveryJournal/referenceNumber"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Session">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Session/name"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Session/sequence"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Dairy">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Dairy/nhifNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Dairy/nssfNumber"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Dairy/federalPin"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Dairy/workstations"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Dairy/routes"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Dairy/vehicles"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Dairy/employees"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Dairy/sessions"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Dairy/memberships"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/dairy/Membership">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Membership/applicationDate"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Membership/effectiveDate"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Membership/status"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Membership/defaultRoute"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Membership/member"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/dairy/Membership/memberId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/dairy/Membership/farms"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.model"
+          resource="XML" disposableProviderFactory="true" ecorePackage="edairy.ecore#//model/account">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="edairy.ecore#//model/account/TransactionType">
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/account/TransactionType/CREDIT"/>
+          <genEnumLiterals ecoreEnumLiteral="edairy.ecore#//model/account/TransactionType/DEBIT"/>
+        </genEnums>
+        <genClasses ecoreClass="edairy.ecore#//model/account/Account">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/Account/accountId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/account/Account/member"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/Account/established"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/Account/type"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/account/Account/transactions"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/account/Account/balances"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/account/AccountTransaction">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/AccountTransaction/transactionId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/account/AccountTransaction/account"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/AccountTransaction/transactionType"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/AccountTransaction/soure"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/AccountTransaction/amount"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/AccountTransaction/description"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/AccountTransaction/transactionDate"/>
+        </genClasses>
+        <genClasses ecoreClass="edairy.ecore#//model/account/BalancePoint">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/BalancePoint/accountBalanceId"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/account/BalancePoint/account"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference edairy.ecore#//model/account/BalancePoint/previousBalance"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/BalancePoint/asOf"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//model/account/BalancePoint/amount"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Services" basePackage="com.agritrace.edairy" resource="XML"
+        disposableProviderFactory="true" ecorePackage="edairy.ecore#//services">
+      <genClasses ecoreClass="edairy.ecore#//services/DairyService">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/DairyService/routes"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/DairyService/sessions"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/DairyService/vehicles"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/DairyService/employees"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/DairyService/containers"/>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//services/CollectionService">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute edairy.ecore#//services/CollectionService/journals"/>
+        <genOperations ecoreOperation="edairy.ecore#//services/CollectionService/createJournal">
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/createJournal/refNum"/>
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/createJournal/date"/>
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/createJournal/route"/>
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/createJournal/driver"/>
+        </genOperations>
+        <genOperations ecoreOperation="edairy.ecore#//services/CollectionService/postJournal">
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/postJournal/journal"/>
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/postJournal/suspend"/>
+        </genOperations>
+        <genOperations ecoreOperation="edairy.ecore#//services/CollectionService/voidJournal">
+          <genParameters ecoreParameter="edairy.ecore#//services/CollectionService/voidJournal/journalID"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="edairy.ecore#//services/RequestService"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

@@ -35,19 +35,25 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.model.ContainerType;
+import com.agritrace.edairy.model.Gender;
+import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.UnitOfMeasure;
+import com.agritrace.edairy.model.dairy.CollectionCentre;
 import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.model.dairy.RouteDefinition;
+import com.agritrace.edairy.model.tracking.AcquisitionType;
 import com.agritrace.edairy.model.tracking.Container;
+import com.agritrace.edairy.model.tracking.ContainerType;
 import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.model.tracking.Purpose;
+import com.agritrace.edairy.model.tracking.RearingMode;
+import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
+import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.model.tracking.UnitOfMeasure;
 
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener, ISelectionChangedListener, SelectionListener {
@@ -156,49 +162,43 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	public class MemberLabelProvider implements ITableLabelProvider{
 
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 
-		@Override
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 
-		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof Membership){
 				switch(columnIndex){
 				case 0:
 					return ((Membership)element).getMemberId();
 				case 1:
-					return ((Membership)element).getMember().toString();
+					return ((Membership)element).getMember().getName();
 				case 2:
 					return 
 					((Membership)element).getDefaultRoute().getName();
@@ -258,24 +258,24 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			member1.setStatus(MembershipStatus.ACTIVE);
 			
 			Person member = ModelFactory.eINSTANCE.createPerson();
-//			member.set("Joseph Limuru");
+			member.setName("Joseph Limuru");
 			member.setPhoneNumber("609-356-3421");
 			member1.setMember(member);
 			
-			Route defaultRoute = DairyFactory.eINSTANCE.createRoute();
+			RouteDefinition defaultRoute = DairyFactory.eINSTANCE.createRouteDefinition();
 			defaultRoute.setName("2 - Ngeche");
 			
-			DairyLocation stop1 = DairyFactory.eINSTANCE.createDairyLocation();
+			CollectionCentre stop1 = DairyFactory.eINSTANCE.createCollectionCentre();
 			stop1.setName("stop 1");
 			defaultRoute.getStops().add(stop1);
 			
-			DairyLocation stop2 = DairyFactory.eINSTANCE.createDairyLocation();
+			CollectionCentre stop2 = DairyFactory.eINSTANCE.createCollectionCentre();
 			stop2.setName("stop 2");
 			defaultRoute.getStops().add(stop2);
 			
 			member1.setDefaultRoute(defaultRoute);
 			
-			PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
+			Location defaultLocation = ModelFactory.eINSTANCE.createLocation();
 			defaultLocation.setAddress("2 - Ngeche");
 			defaultLocation.setSection("Section A");
 			defaultLocation.setEstate("Building B");
@@ -286,17 +286,18 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			defaultLocation.setDistrict("Central");
 			defaultLocation.setProvince("Jersey");
 			defaultLocation.setPostalCode("08550");
-			member.getLocation().setPostalLocation(defaultLocation);
+			member.getLocation().add(defaultLocation);
 			
 			Farm farm = TrackingFactory.eINSTANCE.createFarm();
+			farm.setFarmId(1001);
 			farm.setName("Green Farm");
 			member1.getFarms().add(farm);
 			
 			Container container= TrackingFactory.eINSTANCE.createContainer();
-			container.setType(com.agritrace.edairy.model.ContainerType.BIN);
+			container.setType(ContainerType.BIN);
 			container.setContainerId("1001");
 			container.setOwner(farm);
-			container.setMeasureType(com.agritrace.edairy.model.UnitOfMeasure.LITRE);
+			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setUnits(50);
 			container.setCapacity(50);
 			farm.getCans().add(container);
@@ -310,7 +311,25 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			container.setCapacity(40);
 			farm.getCans().add(container);
 			
+			RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
+			animal1.setAnimnalRegistrationId(10001);
+			animal1.setGivenName("animal1");
+			animal1.setLocation(farm);
+			animal1.setDateOfAcquisition(effectedDate);
+			animal1.setPurpose(Purpose.DAIRY);
+			animal1.setGender(Gender.FEMALE);
+			animal1.setRearingMode(RearingMode.GRAZE);
+			animal1.setAcquisitionType(AcquisitionType.PURCHASE);			
+			
+			ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
+			animal1_type.setAnimalTypeId(10001);
+			animal1_type.setSpecies("Cow");
+			animal1_type.setSpecies("jersey");
+			animal1.setAnimalType(animal1_type);
+			farm.getAnimals().add(animal1);
+			
 			Farm farm1 = TrackingFactory.eINSTANCE.createFarm();
+			farm1.setFarmId(1002);
 			farm1.setName("Harvest Farm");
 			member1.getFarms().add(farm1);
 
