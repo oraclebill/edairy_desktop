@@ -38,16 +38,17 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
-import com.agritrace.edairy.model.dairy.CollectionCentre;
+import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;
+import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.RouteDefinition;
+import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.tracking.ContainerType;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.model.tracking.UnitOfMeasure;
+import com.agritrace.edairy.model.ContainerType;
+import com.agritrace.edairy.model.UnitOfMeasure;
 
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener, ISelectionChangedListener, SelectionListener {
@@ -156,36 +157,42 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	public class MemberLabelProvider implements ITableLabelProvider{
 
 
+		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
 
+		@Override
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof Membership){
 				switch(columnIndex){
@@ -256,20 +263,20 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			member.setPhoneNumber("609-356-3421");
 			member1.setMember(member);
 			
-			RouteDefinition defaultRoute = DairyFactory.eINSTANCE.createRouteDefinition();
+			Route defaultRoute = DairyFactory.eINSTANCE.createRoute();
 			defaultRoute.setName("2 - Ngeche");
 			
-			CollectionCentre stop1 = DairyFactory.eINSTANCE.createCollectionCentre();
+			DairyLocation stop1 = DairyFactory.eINSTANCE.createDairyLocation();
 			stop1.setName("stop 1");
 			defaultRoute.getStops().add(stop1);
 			
-			CollectionCentre stop2 = DairyFactory.eINSTANCE.createCollectionCentre();
+			DairyLocation stop2 = DairyFactory.eINSTANCE.createDairyLocation();
 			stop2.setName("stop 2");
 			defaultRoute.getStops().add(stop2);
 			
 			member1.setDefaultRoute(defaultRoute);
 			
-			Location defaultLocation = ModelFactory.eINSTANCE.createLocation();
+			PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
 			defaultLocation.setAddress("2 - Ngeche");
 			defaultLocation.setSection("Section A");
 			defaultLocation.setEstate("Building B");
@@ -280,17 +287,17 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			defaultLocation.setDistrict("Central");
 			defaultLocation.setProvince("Jersey");
 			defaultLocation.setPostalCode("08550");
-			member.getLocation().add(defaultLocation);
+			member.getLocation().setLocation(defaultLocation);
 			
 			Farm farm = TrackingFactory.eINSTANCE.createFarm();
 			farm.setName("Green Farm");
 			member1.getFarms().add(farm);
 			
 			Container container= TrackingFactory.eINSTANCE.createContainer();
-			container.setType(ContainerType.BIN);
+			container.setType(com.agritrace.edairy.model.ContainerType.BIN);
 			container.setContainerId("1001");
 			container.setOwner(farm);
-			container.setMeasureType(UnitOfMeasure.LITRE);
+			container.setMeasureType(com.agritrace.edairy.model.UnitOfMeasure.LITRE);
 			container.setUnits(50);
 			container.setCapacity(50);
 			farm.getCans().add(container);

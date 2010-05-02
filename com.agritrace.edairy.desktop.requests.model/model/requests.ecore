@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="requests"
+    nsURI="http://edairy.agritrace.com/requests/" nsPrefix="requests">
+  <eClassifiers xsi:type="ecore:EClass" name="AnimalHealthRequest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestId" eType="ecore:EDataType ../../com.agritrace.edairy.model/model/common.ecore#//UniqueID"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requestingMember" lowerBound="1"
+        eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Membership"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" lowerBound="1" eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Dairy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//RequestType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reportedProblem" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reportedAnimal" eType="ecore:EClass ../../com.agritrace.edairy.model/model/farm.ecore#//RegisteredAnimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateHeatDetected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstTreatment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secondTreatment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thirdTreatment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
+        eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Membership"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farm" lowerBound="1" eType="ecore:EClass ../../com.agritrace.edairy.model/model/farm.ecore#//Farm"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTo" eType="ecore:EClass ../../com.agritrace.edairy.model/model/dairy.ecore#//Supplier"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RequestType">
+    <eLiterals name="Veterinary"/>
+    <eLiterals name="Insemination" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

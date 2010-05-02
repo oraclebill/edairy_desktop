@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="services"
+    nsURI="http://com.agritrace.edairy.model/services" nsPrefix="services">
+  <eClassifiers xsi:type="ecore:EClass" name="DairyService">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routes" lowerBound="1"
+        eType="ecore:EClass dairy.ecore#//Route" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" lowerBound="1"
+        eType="ecore:EClass dairy.ecore#//Session" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" lowerBound="1"
+        eType="ecore:EClass dairy.ecore#//Vehicle" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employees" lowerBound="1"
+        eType="ecore:EClass dairy.ecore#//Employee" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containers" lowerBound="1"
+        eType="ecore:EClass farm.ecore#//Container" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionService">
+    <eOperations name="createJournal" lowerBound="1" eType="ecore:EClass dairy.ecore#//CollectionJournal">
+      <eParameters name="refNum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eParameters name="route" eType="ecore:EClass dairy.ecore#//Route"/>
+      <eParameters name="driver" eType="ecore:EClass dairy.ecore#//Driver"/>
+    </eOperations>
+    <eOperations name="postJournal" lowerBound="1" eType="ecore:EDataType common.ecore#//TransactionID">
+      <eParameters name="journal" eType="ecore:EClass dairy.ecore#//CollectionJournal"/>
+      <eParameters name="suspend" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eOperations>
+    <eOperations name="voidJournal" lowerBound="1" eType="ecore:EDataType common.ecore#//TransactionID">
+      <eParameters name="journalID" eType="ecore:EDataType common.ecore#//UniqueID"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="journals" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequestService"/>
+</ecore:EPackage>
