@@ -159,6 +159,7 @@ import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import com.agritrace.edairy.model.provider.ModelItemProviderAdapterFactory;
 
+import com.agritrace.edairy.model.dairy.account.provider.AccountItemProviderAdapterFactory;
 import com.agritrace.edairy.model.dairy.presentation.DairyEditorPlugin;
 
 import com.agritrace.edairy.model.dairy.provider.DairyItemProviderAdapterFactory;
@@ -703,6 +704,7 @@ public class ModelEditor
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new DairyItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new AccountItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TrackingItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new RequestsItemProviderAdapterFactory());

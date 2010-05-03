@@ -21,12 +21,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -64,8 +66,54 @@ public class CompanyItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addLegalNamePropertyDescriptor(object);
+			addCompanyNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Legal Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLegalNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Company_legalName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Company_legalName_feature", "_UI_Company_type"),
+				 ModelPackage.Literals.COMPANY__LEGAL_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Company Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCompanyNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Company_companyName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Company_companyName_feature", "_UI_Company_type"),
+				 ModelPackage.Literals.COMPANY__COMPANY_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -80,7 +128,7 @@ public class CompanyItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ModelPackage.Literals.COMPANY__CONTACT_PERSON);
+			childrenFeatures.add(ModelPackage.Literals.COMPANY__CONTACTS);
 		}
 		return childrenFeatures;
 	}
@@ -117,7 +165,7 @@ public class CompanyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Company)object).getPartyId();
+		String label = ((Company)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Company_type") :
 			getString("_UI_Company_type") + " " + label;
@@ -135,7 +183,11 @@ public class CompanyItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Company.class)) {
-			case ModelPackage.COMPANY__CONTACT_PERSON:
+			case ModelPackage.COMPANY__LEGAL_NAME:
+			case ModelPackage.COMPANY__COMPANY_NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case ModelPackage.COMPANY__CONTACTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -155,17 +207,17 @@ public class CompanyItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ModelPackage.Literals.COMPANY__CONTACT_PERSON,
+				(ModelPackage.Literals.COMPANY__CONTACTS,
 				 ModelFactory.eINSTANCE.createPerson()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ModelPackage.Literals.COMPANY__CONTACT_PERSON,
+				(ModelPackage.Literals.COMPANY__CONTACTS,
 				 DairyFactory.eINSTANCE.createEmployee()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ModelPackage.Literals.COMPANY__CONTACT_PERSON,
+				(ModelPackage.Literals.COMPANY__CONTACTS,
 				 DairyFactory.eINSTANCE.createSupplier()));
 	}
 

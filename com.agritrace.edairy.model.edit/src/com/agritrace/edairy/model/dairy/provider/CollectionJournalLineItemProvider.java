@@ -64,6 +64,7 @@ public class CollectionJournalLineItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addLineNumberPropertyDescriptor(object);
 			addRecordedMemberPropertyDescriptor(object);
 			addQuantityPropertyDescriptor(object);
 			addFlaggedPropertyDescriptor(object);
@@ -74,8 +75,32 @@ public class CollectionJournalLineItemProvider
 			addFromPropertyDescriptor(object);
 			addFarmContainerPropertyDescriptor(object);
 			addDairyContainerPropertyDescriptor(object);
+			addCollectionJournalPropertyDescriptor(object);
+			addRejectedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Line Number feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLineNumberPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CollectionJournalLine_lineNumber_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CollectionJournalLine_lineNumber_feature", "_UI_CollectionJournalLine_type"),
+				 DairyPackage.Literals.COLLECTION_JOURNAL_LINE__LINE_NUMBER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -299,6 +324,50 @@ public class CollectionJournalLineItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Collection Journal feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCollectionJournalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CollectionJournalLine_collectionJournal_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CollectionJournalLine_collectionJournal_feature", "_UI_CollectionJournalLine_type"),
+				 DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Rejected feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRejectedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CollectionJournalLine_rejected_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CollectionJournalLine_rejected_feature", "_UI_CollectionJournalLine_type"),
+				 DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns CollectionJournalLine.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -317,10 +386,8 @@ public class CollectionJournalLineItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((CollectionJournalLine)object).getRecordedMember();
-		return label == null || label.length() == 0 ?
-			getString("_UI_CollectionJournalLine_type") :
-			getString("_UI_CollectionJournalLine_type") + " " + label;
+		CollectionJournalLine collectionJournalLine = (CollectionJournalLine)object;
+		return getString("_UI_CollectionJournalLine_type") + " " + collectionJournalLine.getLineNumber();
 	}
 
 	/**
@@ -335,12 +402,14 @@ public class CollectionJournalLineItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CollectionJournalLine.class)) {
+			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 			case DairyPackage.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER:
 			case DairyPackage.COLLECTION_JOURNAL_LINE__QUANTITY:
 			case DairyPackage.COLLECTION_JOURNAL_LINE__FLAGGED:
 			case DairyPackage.COLLECTION_JOURNAL_LINE__UNIT_OF_MEASURE:
 			case DairyPackage.COLLECTION_JOURNAL_LINE__NOT_RECORDED:
 			case DairyPackage.COLLECTION_JOURNAL_LINE__OFF_ROUTE:
+			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

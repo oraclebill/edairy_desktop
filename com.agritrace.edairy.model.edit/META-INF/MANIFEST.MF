@@ -8,7 +8,8 @@ Bundle-Activator: com.agritrace.edairy.model.dairy.provider.DairyEditPlugin$Impl
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.agritrace.edairy.model.dairy.provider,
+Export-Package: com.agritrace.edairy.model.dairy.account.provider,
+ com.agritrace.edairy.model.dairy.provider,
  com.agritrace.edairy.model.provider,
  com.agritrace.edairy.model.requests.requests.provider,
  com.agritrace.edairy.model.tracking.provider

@@ -62,6 +62,13 @@ public class PersonItemProvider
 			super.getPropertyDescriptors(object);
 
 			addPhotoPropertyDescriptor(object);
+			addHonorificPropertyDescriptor(object);
+			addFamilyNamePropertyDescriptor(object);
+			addGivenNamePropertyDescriptor(object);
+			addMiddleNamePropertyDescriptor(object);
+			addAdditionalNamesPropertyDescriptor(object);
+			addSuffixPropertyDescriptor(object);
+			addNickNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,6 +96,160 @@ public class PersonItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Honorific feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHonorificPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_honorific_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_honorific_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__HONORIFIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Family Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFamilyNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_familyName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_familyName_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__FAMILY_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Given Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGivenNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_givenName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_givenName_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__GIVEN_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Middle Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMiddleNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_middleName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_middleName_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__MIDDLE_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Additional Names feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAdditionalNamesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_additionalNames_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_additionalNames_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__ADDITIONAL_NAMES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Suffix feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuffixPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_suffix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_suffix_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__SUFFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Nick Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNickNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_nickName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_nickName_feature", "_UI_Person_type"),
+				 ModelPackage.Literals.PERSON__NICK_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Person.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,7 +268,7 @@ public class PersonItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Person)object).getPartyId();
+		String label = ((Person)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Person_type") :
 			getString("_UI_Person_type") + " " + label;
@@ -126,6 +287,13 @@ public class PersonItemProvider
 
 		switch (notification.getFeatureID(Person.class)) {
 			case ModelPackage.PERSON__PHOTO:
+			case ModelPackage.PERSON__HONORIFIC:
+			case ModelPackage.PERSON__FAMILY_NAME:
+			case ModelPackage.PERSON__GIVEN_NAME:
+			case ModelPackage.PERSON__MIDDLE_NAME:
+			case ModelPackage.PERSON__ADDITIONAL_NAMES:
+			case ModelPackage.PERSON__SUFFIX:
+			case ModelPackage.PERSON__NICK_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

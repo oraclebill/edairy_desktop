@@ -246,7 +246,7 @@ public class DairyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Dairy)object).getPartyId();
+		String label = ((Dairy)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Dairy_type") :
 			getString("_UI_Dairy_type") + " " + label;
@@ -342,7 +342,7 @@ public class DairyItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == ModelPackage.Literals.COMPANY__CONTACT_PERSON ||
+			childFeature == ModelPackage.Literals.COMPANY__CONTACTS ||
 			childFeature == DairyPackage.Literals.DAIRY__EMPLOYEES;
 
 		if (qualify) {

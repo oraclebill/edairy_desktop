@@ -226,7 +226,7 @@ public class EmployeeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Employee)object).getId();
+		String label = ((Employee)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Employee_type") :
 			getString("_UI_Employee_type") + " " + label;

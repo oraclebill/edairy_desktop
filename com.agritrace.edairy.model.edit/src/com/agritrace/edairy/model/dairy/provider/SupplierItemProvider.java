@@ -73,8 +73,6 @@ public class SupplierItemProvider
 			addExpirationDatePropertyDescriptor(object);
 			addNotesPropertyDescriptor(object);
 			addRatingPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
-			addContactPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -256,50 +254,6 @@ public class SupplierItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Supplier_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Supplier_name_feature", "_UI_Supplier_type"),
-				 DairyPackage.Literals.SUPPLIER__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Contact feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addContactPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Supplier_contact_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Supplier_contact_feature", "_UI_Supplier_type"),
-				 DairyPackage.Literals.SUPPLIER__CONTACT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns Supplier.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,7 +298,6 @@ public class SupplierItemProvider
 			case DairyPackage.SUPPLIER__EXPIRATION_DATE:
 			case DairyPackage.SUPPLIER__NOTES:
 			case DairyPackage.SUPPLIER__RATING:
-			case DairyPackage.SUPPLIER__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

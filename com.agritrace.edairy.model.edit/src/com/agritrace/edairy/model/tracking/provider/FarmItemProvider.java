@@ -72,6 +72,8 @@ public class FarmItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addLocationPropertyDescriptor(object);
+			addFarmIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +92,50 @@ public class FarmItemProvider
 				 getString("_UI_Farm_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Farm_name_feature", "_UI_Farm_type"),
 				 TrackingPackage.Literals.FARM__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Location feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLocationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Farm_location_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Farm_location_feature", "_UI_Farm_type"),
+				 TrackingPackage.Literals.FARM__LOCATION,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Farm Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFarmIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Farm_farmId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Farm_farmId_feature", "_UI_Farm_type"),
+				 TrackingPackage.Literals.FARM__FARM_ID,
 				 true,
 				 false,
 				 false,
@@ -167,6 +213,7 @@ public class FarmItemProvider
 
 		switch (notification.getFeatureID(Farm.class)) {
 			case TrackingPackage.FARM__NAME:
+			case TrackingPackage.FARM__FARM_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackingPackage.FARM__ANIMALS:
