@@ -27,7 +27,7 @@ CREATE TABLE collections
 	vehicle_num   		varchar(8) NULL ,
 	account_number        	varchar(15) NULL ,
 	isCleared     		bit NULL , 
-	 PRIMARY KEY (trxn_id, member_number, txn_date, sessions),
+	 PRIMARY KEY (trxn_id, member_number, txn_date, sessions)
 	
 )
 ;
@@ -77,7 +77,7 @@ CREATE TABLE route
 	route_num     		varchar(8) NOT NULL ,
 	route_name    		varchar(15) NULL ,
 	opr_code      		varchar(8) NULL ,
-	desc  			varchar(45) NULL ,
+	descr  			varchar(45) NULL ,
 	scale_serial  		varchar(10) NULL ,
 	route_desc    		varchar(45) NULL , 
 	 PRIMARY KEY (route_num)
@@ -108,9 +108,7 @@ ALTER TABLE scale_user ADD  UNIQUE
 	user_id
 )
 ;
-COMMENT ON TABLE scale_user IS 
-	'Dont worry about the choice of name, it''s just system users and their roles.'
-;
+
 CREATE TABLE truck
 (
 	reg_number    		varchar(10) NOT NULL ,
