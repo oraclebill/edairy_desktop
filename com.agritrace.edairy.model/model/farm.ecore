@@ -4,11 +4,23 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracking"
     nsURI="http://com.agritrace.edairy.model/tracking/" nsPrefix="tracking">
   <eClassifiers xsi:type="ecore:EClass" name="Farm">
+    <eOperations name="getNumberOfAnimals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getAnimals().size();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getNumberOfContainers" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getCans().size();"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
         eType="#//RegisteredAnimal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cans" upperBound="-1" eType="#//Container"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="ecore:EClass common.ecore#//Location"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -20,24 +32,32 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RegisteredAnimal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="animnalRegistrationId"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
         eType="#//Farm"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="ecore:EEnum common.ecore#//Gender"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="animalType" eType="#//ReferenceAnimalType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" lowerBound="1"
+        eType="ecore:EEnum common.ecore#//Gender" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="animalType" lowerBound="1"
+        eType="#//ReferenceAnimalType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sireType" eType="#//ReferenceAnimalType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" eType="#//Purpose"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfAcquisition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="acquisitionType" eType="#//AcquisitionType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" lowerBound="1"
+        eType="#//Purpose" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfAcquisition" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="acquisitionType" lowerBound="1"
+        eType="#//AcquisitionType" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="identifiers" upperBound="-1"
         eType="#//AnimalIdentifier"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifyingFeatures" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rearingMode" eType="#//RearingMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rearingMode" lowerBound="1"
+        eType="#//RearingMode" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pastOwners" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="insuranceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfBirth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfBirth" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceAnimalType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="animalTypeId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>

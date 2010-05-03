@@ -7,6 +7,8 @@ import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.IBaseLabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -26,12 +28,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.model.ContainerType;
-import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.model.UnitOfMeasure;
+import com.agritrace.edairy.model.tracking.Farm;
 
 public class AddContainerDialog extends TitleAreaDialog implements ModifyListener{
 
@@ -151,7 +153,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		
 		Label capacityLabel =  UIControlsFactory.createLabel(dialogArea, "Capacity:");
 		
-		capacityText = new Text(dialogArea, SWT.BORDER|SWT.MULTI);
+		capacityText = new Text(dialogArea, SWT.BORDER|SWT.SINGLE);
 		capacityText.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
 		capacityText.addModifyListener(this);
 		capacityDecorator  = createDecorator(numberText, "");

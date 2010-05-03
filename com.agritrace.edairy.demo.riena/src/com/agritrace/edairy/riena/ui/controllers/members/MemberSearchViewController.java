@@ -1,6 +1,7 @@
 package com.agritrace.edairy.riena.ui.controllers.members;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
@@ -26,23 +27,28 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.dairy.CollectionJournal;
+import com.agritrace.edairy.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
+import com.agritrace.edairy.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
 import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.riena.ui.views.members.AddAnimalDialog;
 import com.agritrace.edairy.riena.ui.views.members.AddContainerDialog;
 import com.agritrace.edairy.riena.ui.views.members.MemberSearchSelectionListener;
 import com.agritrace.edairy.riena.ui.views.members.MemberSearchSelectionManager;
 
 public class MemberSearchViewController extends SubModuleController implements MemberSearchSelectionListener, ISelectionListener{
 
-		
 	private Membership workingCopy;
 	private Membership selectedMember;
-	
+
 	//upper panel fields
 	private ITextRidget memberIdRidget;
 	private IComboRidget comboStatus;
@@ -50,7 +56,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITextRidget nameRidget;
 	private ITextRidget appliedDate;
 	private ITextRidget effectiveDate;
-	
+
 	private ITextRidget addressTxt;
 	private ITextRidget sectionTxt;
 	private ITextRidget estateTxt;
@@ -61,30 +67,62 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITextRidget districtTxt;
 	private ITextRidget provinceTxt;
 	private ITextRidget postalCodeTxt;
-	
+
 	//container tab
 	private ITableRidget containerTable;
 	private IActionRidget containerAddButton;
 	private IActionRidget containerRemoveButton;
-	
+	private String[] containerPropertyNames = { "containerId", "owner","type", "units", "measureType","capacity"};
+	private String[] containerColumnHeaders = { "ID", "Farm","Container Type", "Units","Units Of Measure","Capacity" }; 
 	public static final String containerRemoveTitle="Remove Containers";
 	public static final String containerRemoveMessage="Do you want to remove selected containers?";
-	
-	private List<Container>input = new ArrayList<Container>();
+	private List<Container>containerInput = new ArrayList<Container>();
+
+	//live stock tab
+	private ITableRidget liveStockTable;
+	private IActionRidget liveStockAddButton;
+	private IActionRidget liveStockRemoveButton;
+	private String[] liveStockPropertyNames = { "animnalRegistrationId", "location","purpose","givenName","animalType", "dateOfAcquisition", "acquisitionType"};
+	private String[] liveStockColumnHeaders = { "ID", "Farm","Purpose", "Name","Type","Acquisition Date","Acquisition Type" };
+	public static final String liveStockRemoveTitle="Remove Registered Animales";
+	public static final String liveStockRemoveMessage="Do you want to remove selected animals?";
+	private List<RegisteredAnimal>animalInput = new ArrayList<RegisteredAnimal>();
+
+	//farm tab
+	private ITableRidget farmTable;
+	private IActionRidget farmAddButton;
+	private IActionRidget farmRemoveButton;
+	private String[] farmPropertyNames = { "farmId", "name","location","numberOfAnimals","numberOfContainers"};
+	private String[] farmColumnHeaders = { "ID", "Name","Location", "Number of Animals","Number of Conatiners" };
+	public static final String farmRemoveTitle="Remove Farm";
+	public static final String farmRemoveMessage="Do you want to remove selected farms?";
+
+	//collection tab
+	private ITableRidget collectionTable;
+	private String[] collectionPropertyNames = { "lineNumber", "collectionJournal","dairyContainer","quantity","notRecorded","rejected","flagged"};
+	private String[] collectionColumnHeaders = { "Line", "Date","Container", "Quantity","NPR Missing","Rejected","Suspended" };
+	//transaction tab
+	private ITableRidget transactionTable;
+	private String[] transactionPropertyNames = { "transactionId", "transactionDate","transactionType","description","amount"};
+	private String[] transactionColumnHeaders = { "ID", "Date","Type", "Description","Amount"};
+
 
 	public MemberSearchViewController(){
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
 	}
-	
+
 	@Override
 	public void configureRidgets(){
 		configureUpperPanel();
+		configureFarmTab();
+		configureCollectionTab();
+		configureLiveStockTab();
 		configureContainerTab();
-		
+		configureTransactionTab();
 		if(selectedMember != null){
 			updateBindings();
 		}
-		
+
 		//save button
 		((IActionRidget)getRidget(ViewWidgetId.memberInfo_saveButton)).addListener(new IActionListener() {
 
@@ -93,7 +131,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 			}
 		});
 	}
-	
+
 	private void configureUpperPanel(){
 		memberIdRidget = getRidget(ITextRidget.class,ViewWidgetId.memberInfo_id);
 		appliedDate=getRidget(ITextRidget.class,ViewWidgetId.memberInfo_applicationDate);
@@ -104,7 +142,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 		comboStatus.addSelectionListener(this);
 		phoneRidget = getRidget(ITextRidget.class,ViewWidgetId.memberInfo_phone); 
 		nameRidget = getRidget(ITextRidget.class,ViewWidgetId.memberInfo_firstName);
-		
+
 		addressTxt=getRidget(ITextRidget.class,ViewWidgetId.ADDRESS_TXT);
 		sectionTxt=getRidget(ITextRidget.class,ViewWidgetId.SECTION_TXT);
 		estateTxt=getRidget(ITextRidget.class,ViewWidgetId.ESTATE_TXT);
@@ -113,15 +151,101 @@ public class MemberSearchViewController extends SubModuleController implements M
 		villageTxt=getRidget(ITextRidget.class,ViewWidgetId.VILLAGE_TXT);
 		divisionTxt=getRidget(ITextRidget.class,ViewWidgetId.DIVISION_TXT);
 		districtTxt=getRidget(ITextRidget.class,ViewWidgetId.DISTRICT_TXT);
-//		provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
+		//		provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 		postalCodeTxt=getRidget(ITextRidget.class,ViewWidgetId.POSTAL_CODE_TXT);
 	}
-	
+
+	private void configureLiveStockTab(){
+		liveStockTable = getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
+		liveStockTable.setColumnFormatter(1, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof RegisteredAnimal){
+					return ((RegisteredAnimal)element).getLocation().getName();
+				}
+				return null;
+			}
+		});
+
+		liveStockTable.setColumnFormatter(4, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof RegisteredAnimal){
+					return ((RegisteredAnimal)element).getAnimalType().getSpecies();
+				}
+				return null;
+			}
+		});
+
+		liveStockTable.setColumnFormatter(5, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof RegisteredAnimal){
+					Date acquisitionDate = ((RegisteredAnimal)element).getDateOfAcquisition();
+					SimpleFormattedDateBean formatter = new SimpleFormattedDateBean();
+					formatter.setDate(acquisitionDate);
+					return formatter.getFormattedDate();
+				}
+				return null;
+			}
+		});
+
+
+		liveStockAddButton = getRidget(IActionRidget.class,ViewWidgetId.LIVESTOCK_ADD);
+		liveStockAddButton.addListener(new IActionListener() {
+
+			@Override
+			public void callback() {
+				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
+				shell.setSize(550, 450);
+				AddAnimalDialog dialog = new AddAnimalDialog(shell);
+				dialog.setMemberShip(selectedMember);
+				if(dialog.open()==Window.OK){
+					RegisteredAnimal newAnimal = dialog.getNewAnimal();
+					newAnimal.getLocation().getAnimals().add(newAnimal);
+					animalInput.add(newAnimal);
+					liveStockTable.updateFromModel();
+				}
+			}
+		});
+
+		liveStockRemoveButton = getRidget(IActionRidget.class,ViewWidgetId.LIVESTOCK_Remove);
+		liveStockRemoveButton.setEnabled(false);
+		liveStockRemoveButton.addListener(new IActionListener(){
+
+			@Override
+			public void callback() {
+				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), liveStockRemoveTitle , liveStockRemoveMessage)){
+					List<Object> selections = liveStockTable.getSelection();
+					if(selectedMember != null){
+						for(Object selObject : selections ){
+							((RegisteredAnimal)selObject).getLocation().getAnimals().remove(selObject);
+							animalInput.remove(selObject);
+						}
+						liveStockTable.updateFromModel();
+					}
+				}
+			}
+		});
+	}
 	private void configureContainerTab(){
 		containerTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
+		containerTable.setColumnFormatter(1, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof Container){
+					return ((Container)element).getOwner().getName();
+				}
+				return null;
+			}
+		});
 		containerAddButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_ADD);
 		containerAddButton.addListener(new IActionListener() {
-			
+
 			@Override
 			public void callback() {
 				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
@@ -131,12 +255,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 				if(dialog.open()==Window.OK){
 					Container newContainer = dialog.getNewContainer();
 					newContainer.getOwner().getCans().add(newContainer);
-					input.add(newContainer);
+					containerInput.add(newContainer);
 					containerTable.updateFromModel();
 				}
 			}
 		});
-		
+
 		containerRemoveButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_Remove);
 		containerRemoveButton.setEnabled(false);
 		containerRemoveButton.addListener(new IActionListener(){
@@ -148,34 +272,88 @@ public class MemberSearchViewController extends SubModuleController implements M
 					if(selectedMember != null){
 						for(Object selObject : selections ){
 							((Container)selObject).getOwner().getCans().remove(selObject);
-							input.remove(selObject);
+							animalInput.remove(selObject);
 						}
 						containerTable.updateFromModel();
 					}
 				}
-				
-				
+
+
 			}
-			
+
 		});
 	}
-	
+
+	private void configureFarmTab(){
+		farmTable = getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
+		farmAddButton = getRidget(IActionRidget.class,ViewWidgetId.FARM_ADD);
+		farmAddButton.addListener(new IActionListener() {
+
+			@Override
+			public void callback() {
+				//				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
+				//				shell.setSize(550, 450);
+				//				AddContainerDialog dialog = new AddContainerDialog(shell);
+				//				dialog.setMemberShip(selectedMember);
+				//				if(dialog.open()==Window.OK){
+				//					Container newContainer = dialog.getNewContainer();
+				//					newContainer.getOwner().getCans().add(newContainer);
+				//					containerInput.add(newContainer);
+				//					containerTable.updateFromModel();
+				//				}
+			}
+		});
+
+		farmRemoveButton = getRidget(IActionRidget.class,ViewWidgetId.FARM_Remove);
+		farmRemoveButton.setEnabled(false);
+		farmRemoveButton.addListener(new IActionListener(){
+
+			@Override
+			public void callback() {
+				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), farmRemoveTitle , farmRemoveMessage)){
+					List<Object> selections = farmTable.getSelection();
+					if(selectedMember != null){
+						for(Object selObject : selections ){
+							selectedMember.getFarms().remove((Farm)selObject);
+						}
+						farmTable.updateFromModel();
+					}
+				}
+
+
+			}
+
+		});
+	}
+
+	private void configureCollectionTab(){
+		collectionTable = getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
+	}
+
+	private void configureTransactionTab(){
+		transactionTable = getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
+	}
+
 	private void updateBindings(){
 		updateUpperPanelBinding();
+		updateFarmBinding();
+		updateCollectionBinding();
+		updateLiveStockBinding();
 		updateContainerBinding();
+		updateTransactionBinding();
 	}
-	
+
 	private void updateUpperPanelBinding(){
 		memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 		memberIdRidget.updateFromModel();
-  	    comboStatus = (IComboRidget) getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status); //$NON-NLS-1$
-  	    comboStatus.updateFromModel();
-  	    comboStatus.setSelection(selectedMember.getStatus().getValue());
+		comboStatus = (IComboRidget) getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status); //$NON-NLS-1$
+		comboStatus.updateFromModel();
+		comboStatus.setSelection(selectedMember.getStatus().getValue());
 		phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__PHONE_NUMBER));
 		phoneRidget.updateFromModel();
-		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));  // TODO: fix back
-		nameRidget.updateFromModel();
-		
+//		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__NAME));
+//		nameRidget.updateFromModel();
+
 		SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
 		if(workingCopy.getApplicationDate() != null){
 			bean.setDate(selectedMember.getApplicationDate());
@@ -188,13 +366,14 @@ public class MemberSearchViewController extends SubModuleController implements M
 			bean.setFormattedDate("");
 		}
 		effectiveDate.setText(bean.getFormattedDate());
-		
-		if(selectedMember.getMember().getLocation().getPostalLocation() != null){
+
+		if(selectedMember.getMember().getLocation() != null){
 			PostalLocation location = selectedMember.getMember().getLocation().getPostalLocation();
+			
 			addressTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
 			addressTxt.updateFromModel();
-		    sectionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__SECTION));
-		    sectionTxt.updateFromModel();
+			sectionTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__SECTION));
+			sectionTxt.updateFromModel();
 			estateTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__ESTATE));
 			estateTxt.updateFromModel();
 			locationTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__LOCATION));
@@ -207,7 +386,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 			divisionTxt.updateFromModel();
 			districtTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
 			districtTxt.updateFromModel();
-//			provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
+			//			provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 			postalCodeTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 			postalCodeTxt.updateFromModel();
 		}
@@ -225,57 +404,133 @@ public class MemberSearchViewController extends SubModuleController implements M
 	@Override
 	public void memberModified(Membership modifiedMember) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	private void copySelectedMember(){
 		if(selectedMember != null){
 			workingCopy = (Membership)EcoreUtil.copy(selectedMember);	
 		}
-		
-		
-		
+
+
+
 	}
 	private void saveMember(){
 		if(selectedMember != null){
 			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);	
 		}
 	}
-	
+
+	private void updateLiveStockBinding(){
+		List<Farm> farms = selectedMember.getFarms();
+		for(Farm farm :farms){
+			animalInput.addAll( farm.getAnimals());	
+		}
+		liveStockTable.bindToModel(new WritableList(animalInput, RegisteredAnimal.class), RegisteredAnimal.class, liveStockPropertyNames, liveStockColumnHeaders);
+		liveStockTable.updateFromModel();
+		liveStockTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
+		liveStockTable.addSelectionListener(this);
+	}
+
 	private void updateContainerBinding(){
 		List<Farm> farms = selectedMember.getFarms();
-		
 		for(Farm farm :farms){
-			input.addAll( farm.getCans());	
+			containerInput.addAll( farm.getCans());	
 		}
-		
-			String[] columnPropertyNames = { "containerId", "owner","type", "units", "measureType","capacity"};
-			String[] columnHeaders = { "ID", "Farm","Container Type", "Units","Units Of Measure","Capacity" }; 
-			containerTable.setColumnFormatter(1, new ColumnFormatter() {
-				
-				@Override
-				public String getText(Object element) {
-					if(element instanceof Container){
-						return ((Container)element).getOwner().getName();
-					}
-					return null;
+		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
+		containerTable.updateFromModel();
+		containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
+		containerTable.addSelectionListener(this);
+	}
+
+	private void updateFarmBinding(){
+		List<Farm> farms = selectedMember.getFarms();
+		farmTable.bindToModel(new WritableList(farms, Farm.class), Farm.class, farmPropertyNames, farmColumnHeaders);
+		farmTable.updateFromModel();
+		farmTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
+		farmTable.addSelectionListener(this);
+	}
+
+	private void updateCollectionBinding(){
+		List<CollectionJournalLine> records = getCollectionJournalLines();
+		collectionTable.setColumnFormatter(1, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof CollectionJournalLine){
+					Date entryDate = ((CollectionJournalLine)element).getCollectionJournal().getJournalDate();
+					SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
+					dateFormatter.setDate(entryDate);
+					return dateFormatter.getFormattedDate();
 				}
-				
-				
-			});
-			containerTable.bindToModel(new WritableList(input, Container.class), Container.class, columnPropertyNames, columnHeaders);
-			containerTable.updateFromModel();
-			containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
-			containerTable.addSelectionListener(this);
-		
+				return null;
+			}
+		});
+		collectionTable.setColumnFormatter(2, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof CollectionJournalLine){
+					if(((CollectionJournalLine)element).getDairyContainer() != null){
+						return ((CollectionJournalLine)element).getDairyContainer().getContainerId();
+					}
+				}
+				return null;
+			}
+		});
+		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class), CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
+		collectionTable.updateFromModel();
+
+	}
+	//todo: temporary util method, get a list of collection records
+	private List<CollectionJournalLine> getCollectionJournalLines(){
+		List<CollectionJournalLine> records = new ArrayList<CollectionJournalLine>();
+		CollectionJournalLine record = DairyFactory.eINSTANCE.createCollectionJournalLine();
+		record.setLineNumber(10001);
+		record.setRecordedMember(selectedMember.getMemberId());
+		record.setValidatedMember(selectedMember);
+		record.setFarmContainer(selectedMember.getFarms().get(0).getCans().get(0));
+		record.setQuantity(25.2);
+
+		CollectionJournal journal = DairyFactory.eINSTANCE.createCollectionJournal();
+		SimpleFormattedDateBean date = new SimpleFormattedDateBean("02/20/2010");
+		journal.setJournalDate(date.getDate());
+		record.setCollectionJournal(journal);
+		records.add(record);
+
+		return records;
+
+	}
+	
+	private void updateTransactionBinding(){
+		List<AccountTransaction> records = getAccountTransactions();
+		transactionTable.setColumnFormatter(1, new ColumnFormatter() {
+			@Override
+			public String getText(Object element) {
+				if(element instanceof AccountTransaction){
+					Date entryDate = ((AccountTransaction)element).getTransactionDate();
+					SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
+					dateFormatter.setDate(entryDate);
+					return dateFormatter.getFormattedDate();
+				}
+				return null;
+			}
+		});
+		transactionTable.bindToModel(new WritableList(records, AccountTransaction.class), AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
+		transactionTable.updateFromModel();
+	}
+	
+	private List<AccountTransaction> getAccountTransactions(){
+		List<AccountTransaction> transactions = new ArrayList<AccountTransaction>();
+		return transactions;
 	}
 
 	@Override
 	public void ridgetSelected(SelectionEvent event) {
 		if(event.getSource() == comboStatus){
-		  if(selectedMember != null){
-			  selectedMember.setStatus((MembershipStatus)event.getNewSelection().get(0));
-		  }
+			if(selectedMember != null){
+				selectedMember.setStatus((MembershipStatus)event.getNewSelection().get(0));
+			}
 		}else if(event.getSource() == containerTable){
 			List<Object> selection =  event.getNewSelection();
 			if(selection.size() > 0){
@@ -283,8 +538,22 @@ public class MemberSearchViewController extends SubModuleController implements M
 			}else{
 				containerRemoveButton.setEnabled(false);
 			}
+		}else if(event.getSource() == liveStockTable){
+			List<Object> selection =  event.getNewSelection();
+			if(selection.size() > 0){
+				liveStockRemoveButton.setEnabled(true);
+			}else{
+				liveStockRemoveButton.setEnabled(false);
+			}
+		}else if(event.getSource() == farmTable){
+			List<Object> selection =  event.getNewSelection();
+			if(selection.size() > 0){
+				farmRemoveButton.setEnabled(true);
+			}else{
+				farmRemoveButton.setEnabled(false);
+			}
 		}
-		
+
 	}
 
 }

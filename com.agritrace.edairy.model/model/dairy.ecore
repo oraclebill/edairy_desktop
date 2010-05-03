@@ -24,6 +24,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalLine">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordedMember" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" lowerBound="1"
@@ -39,6 +40,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="ecore:EClass farm.ecore#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="common.ecore#//Person">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -123,8 +126,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" upperBound="-1"
         eType="#//Supplier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
-        eType="ecore:EClass requests.ecore#//AnimalHealthRequest"
-        containment="true"/>
+        eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Membership">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" lowerBound="1"
@@ -194,4 +196,42 @@
     <eLiterals name="Suspended" value="3"/>
     <eLiterals name="Other" value="4"/>
   </eClassifiers>
+  <eSubpackages name="account" nsURI="http://com.agritrace.edairy.model/account" nsPrefix="account">
+    <eClassifiers xsi:type="ecore:EClass" name="Account">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Membership"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="established" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transactions" upperBound="-1"
+          eType="#//account/AccountTransaction"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="balances" upperBound="-1"
+          eType="#//account/BalancePoint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AccountTransaction">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionId" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
+          eType="#//account/Account"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionType" lowerBound="1"
+          eType="#//account/TransactionType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="soure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionDate" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TransactionType">
+      <eLiterals name="CREDIT"/>
+      <eLiterals name="DEBIT" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BalancePoint">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountBalanceId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
+          eType="#//account/Account"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="previousBalance" lowerBound="1"
+          eType="#//account/BalancePoint"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="asOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eClassifiers>
+  </eSubpackages>
 </ecore:EPackage>

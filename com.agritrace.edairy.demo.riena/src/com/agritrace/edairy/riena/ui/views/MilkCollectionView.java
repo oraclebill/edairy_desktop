@@ -21,6 +21,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -42,9 +44,10 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
+import com.agritrace.edairy.riena.ui.views.data.CreditRecord;
 import com.agritrace.edairy.riena.ui.views.data.MilkRecord;
-import com.agritrace.edairy.riena.ui.views.data.MilkRecord.TestResult;
 import com.agritrace.edairy.riena.ui.views.data.MilkRecordsFactory;
+import com.agritrace.edairy.riena.ui.views.data.MilkRecord.TestResult;
 
 public class MilkCollectionView extends ViewPart implements SelectionListener {
 
