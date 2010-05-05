@@ -23,7 +23,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.internal.win32.MEASUREITEMSTRUCT;
+//import org.eclipse.swt.internal.win32.MEASUREITEMSTRUCT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
