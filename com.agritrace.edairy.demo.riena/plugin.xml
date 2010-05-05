@@ -9,6 +9,33 @@
       </perspective>
    </extension>
    <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.manager.reports"
+            name="com.agritrace.edairy.manager.reports">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.manager.administration"
+            name="com.agritrace.edairy.manager.administration">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.manager.main"
+            name="com.agritrace.edairy.manager.main">
+      </perspective>
+   </extension>
+   <extension
          point="org.eclipse.ui.views">
       <view
             name="Dairy Info"

@@ -70,7 +70,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		ApplicationNode app = new ApplicationNode("eDairy Manager"); //$NON-NLS-1$
 
-		ISubApplicationNode subApp = new SubApplicationNode("Demo"); //$NON-NLS-1$
+		ISubApplicationNode subApp = new SubApplicationNode(  "Home"); //$NON-NLS-1$
 		app.addChild(subApp);
 
 		final WorkareaManager workarea = WorkareaManager.getInstance();
@@ -85,6 +85,16 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleDairy.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.home"), "Home", moduleDairy, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
+
+		//
+		// REPORTS TAB
+		// 
+		
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.main"), "Main"); //$NON-NLS-1$
+		app.addChild(subApp);
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.main"); //$NON-NLS-1$
+		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("main.navgroup"));
+		subApp.addChild(groupTopLevel);
 
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
 				new NavigationNodeId("edm.supplychain"), "Milk Collection", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -124,6 +134,16 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleDirectory.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.suppliers"), "Supplier Directory", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
+		
+		//
+		// REPORTS TAB
+		// 
+		
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.reports"), "Reports"); //$NON-NLS-1$
+		app.addChild(subApp);
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.reports"); //$NON-NLS-1$
+		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("reports.navgroup"));
+		subApp.addChild(groupTopLevel);
 
 		IModuleNode moduleReports = NodeFactory.createModule(
 				new NavigationNodeId("edm.reports"), "Reports", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -142,6 +162,13 @@ public class EDairyManagerApplication extends SwtApplication {
 //		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.dairy"), "Dairy", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.reports.custom"), "Custom", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.administration"), "Admin"); //$NON-NLS-1$
+		app.addChild(subApp);
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.administration"); //$NON-NLS-1$
+		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("admin.navgroup"));
+		subApp.addChild(groupTopLevel);
+
+		
 		IModuleNode moduleSystem = NodeFactory.createModule(
 				new NavigationNodeId("edm.sysadmin"), "Administration", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSystem.setClosable(false);
