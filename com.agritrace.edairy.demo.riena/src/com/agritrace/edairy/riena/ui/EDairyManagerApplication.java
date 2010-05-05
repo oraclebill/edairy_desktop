@@ -85,37 +85,32 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleDairy.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.home"), "Home", moduleDairy, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
-//		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.admin"), "Administrative", moduleDairy, DairyProfileView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
 				new NavigationNodeId("edm.supplychain"), "Milk Collection", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSupplyChain.setClosable(false);
+		
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collectionslog"), "Collection Log", moduleSupplyChain,BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections", moduleSupplyChain,MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Deliveries", moduleSupplyChain, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-//			NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.accounts"), "Member Accounts", moduleSupplyChain, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleMembers = NodeFactory.createModule(
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleMembers.setClosable(false);
-//		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.accounts"), "Directory", moduleMembers, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search", moduleMembers, MemberSearchView.ID,MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-//		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.farms"), "Member Farms", moduleMembers, MembersInfoView.ID); 
 
 		IModuleNode moduleServices = NodeFactory.createModule(
 				new NavigationNodeId("edm.services"), "Services", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleServices.setClosable(false);
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.log"), "Request Log", moduleServices, ServiceRequestLogView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.veterinary"), "Veterinary", moduleServices, VeterinaryRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.insemination"), "Insemination", moduleServices, InseminationRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.insurance"), "Insurance", moduleServices, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.loans"), "Loans", moduleServices, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.log"), "Request Log", moduleServices, ServiceRequestLogView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode financeMembers = NodeFactory.createModule(
 				new NavigationNodeId("edm.finances"), "Finance", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		financeMembers.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.finances.credits"), "Credit Journal", financeMembers, CreditJournalView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.finances.payments"), "Payment Journal", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-//		NodeFactory.createSubMobule(new NavigationNodeId("edm.finances.credits2"), "", financeMembers, MembersInfoView.ID,MemberInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 		IModuleNode moduleEvents = NodeFactory.createModule(
@@ -123,12 +118,9 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleEvents.setClosable(false);
 		
 		IModuleNode moduleDirectory = NodeFactory.createModule(
-				new NavigationNodeId("edm.directory"), "Marketplace", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
+				new NavigationNodeId("edm.directory"), "Suppliers", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleDirectory.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.suppliers"), "Suppliers", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.tenders"), "Tenders", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.forsale"), "For Sale", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.wantedtobuy"), "Wanted", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 		IModuleNode moduleReports = NodeFactory.createModule(
@@ -157,9 +149,6 @@ public class EDairyManagerApplication extends SwtApplication {
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.routes"), "Routes", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.vehicles"), "Vehicles", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.bins"), "Bins", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-
-//		ApplicationController ac = (ApplicationController) app.getNavigationNodeController(); 
-//		ac.getStatusline().setMessage("Hello World!");
 
 		return app;
 
