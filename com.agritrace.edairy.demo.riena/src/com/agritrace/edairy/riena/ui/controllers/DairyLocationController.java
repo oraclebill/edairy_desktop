@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -19,12 +20,14 @@ import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.common.datamodel.common.Location;
 import com.agritrace.edairy.common.datamodel.dairy.DairyLocation;
 import com.agritrace.edairy.common.datamodel.dairy.DairyLocation.DairyFunction;
 import com.agritrace.edairy.common.datamodel.dairy.Route;
 import com.agritrace.edairy.common.services.DairyLocations;
+import com.agritrace.edairy.riena.ui.dialogs.RouteListDialog;
 
 public class DairyLocationController extends SubModuleController {
 	//top-half window
@@ -194,6 +197,7 @@ public class DairyLocationController extends SubModuleController {
 		postalCode.bindToModel(dairyLocation.getLocation(), "postalCode");
 		postalCode.updateFromModel();
 		
+		
 	}
 	
 	private void configureDirectionsTab(DairyLocation dairyLocation)
@@ -246,7 +250,7 @@ public class DairyLocationController extends SubModuleController {
 		return ret;
 	}
 	
-	public final class RouteService
+	public static final class RouteService
 	{
 		private ArrayList<Route> routes = new ArrayList<Route>() ;
 
@@ -329,7 +333,11 @@ public class DairyLocationController extends SubModuleController {
 	private class AddRouteCallback implements IActionListener {
 
 		public void callback() {
-			
+				
+				RouteListDialog dialog = new RouteListDialog();
+				dialog.setBlockOnOpen(true);
+				dialog.open();
+
 		}
 	}
 	

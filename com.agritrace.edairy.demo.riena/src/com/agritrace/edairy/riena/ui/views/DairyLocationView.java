@@ -92,7 +92,7 @@ public class DairyLocationView extends SubModuleView {
 
 		Combo routeCombo = UIControlsFactory.createCombo(contentArea, DairyLocationController.RIDGET_ID_ROUTE);
 		
-		Button addRouteButton = UIControlsFactory.createButton(contentArea, "Add", DairyLocationController.RIDGET_ID_ADD_ROUTE_ACTION);
+		Button addRouteButton = UIControlsFactory.createButton(contentArea, "?", DairyLocationController.RIDGET_ID_ADD_ROUTE_ACTION);
 		
 		
 		TabFolder tabs = new TabFolder(contentArea, SWT.None);
