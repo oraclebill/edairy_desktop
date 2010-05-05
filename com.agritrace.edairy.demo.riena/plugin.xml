@@ -132,6 +132,12 @@
                name="Member Statement Report"
                restorable="true">
          </view>
+         <view
+         		allowMultiple="true"
+	            name="Dairy Location"
+    	        class="com.agritrace.edairy.riena.ui.views.DairyLocationView"
+        	    id="com.agritrace.edairy.riena.ui.views.DairyLocationView">
+      	 </view>
         </extension>
    <extension
          point="org.eclipse.riena.ui.swt.imagePaths">

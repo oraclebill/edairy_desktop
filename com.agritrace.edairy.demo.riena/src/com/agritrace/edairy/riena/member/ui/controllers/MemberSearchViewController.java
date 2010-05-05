@@ -135,13 +135,13 @@ public class MemberSearchViewController extends SubModuleController implements M
 		}
 		
 		//search button
-		((IActionRidget)getRidget(ViewWidgetId.memberInfo_searchButton)).addListener(new IActionListener() {
+		/*((IActionRidget)getRidget(ViewWidgetId.memberInfo_searchButton)).addListener(new IActionListener() {
 
 			public void callback() {
 //				saveMember();
 				MemberSearchSelectionManager.INSTANCE.getSearchNode().showView(true);
 			}
-		});
+		});*/
 
 		//save button
 		((IActionRidget)getRidget(ViewWidgetId.memberInfo_saveButton)).addListener(new IActionListener() {
@@ -253,7 +253,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 		});
 	}
 	private void configureContainerTab(){
-		columnCombo = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_ColumnFilterCombo);
+		/*columnCombo = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_ColumnFilterCombo);
 		List<String> comboColumList =  Arrays.asList(new String[] {"ID","Capacity"}); 
 		columnCombo.bindToModel(new WritableList(comboColumList, String.class), String.class, null, new WritableValue());
 		columnCombo.updateFromModel();
@@ -314,7 +314,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 				}
 				return null;
 			}
-		});
+		});*/
 		containerAddButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_ADD);
 		containerAddButton.addListener(new IActionListener() {
 

@@ -2,6 +2,8 @@ package com.agritrace.edairy.common.services;
 
 import com.agritrace.edairy.common.datamodel.dairy.DairyLocation;
 
+
+
 public interface DairyLocations {
 	void save(DairyLocation dl);
 	void delete(long dairyLocationId);
