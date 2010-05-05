@@ -105,8 +105,8 @@
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.riena.ui.views.members.MemberSearchView"
-               id="com.agritrace.edairy.riena.ui.views.members.MemberSearchView"
+               class="com.agritrace.edairy.riena.member.ui.views.MemberSearchView"
+               id="com.agritrace.edairy.riena.member.ui.views.MemberSearchView"
                name="Member Search"
                restorable="true">
          </view>

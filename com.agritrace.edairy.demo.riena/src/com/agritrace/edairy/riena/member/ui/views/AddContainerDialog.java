@@ -7,8 +7,6 @@ import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -65,6 +63,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	/**
 	 * Closes the dialog box Override so we can dispose the image we created
 	 */
+	@Override
 	public boolean close() {
 
 		return super.close();
@@ -76,6 +75,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createContents(Composite parent) {
 		Control contents = super.createContents(parent);
 		setTitle("Add Container Record");
@@ -83,7 +83,8 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		return contents;
 	}
 	
-	 protected void configureShell(Shell newShell) {
+	 @Override
+	protected void configureShell(Shell newShell) {
 	        super.configureShell(newShell);
 	        newShell.setSize(550, 450);
 	    }
@@ -97,6 +98,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		Composite dialogArea = UIControlsFactory.createComposite(composite);
@@ -166,6 +168,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		if(memberShip != null){
 			farmComboViewer.setInput(memberShip.getFarms());
 			farmComboViewer.setLabelProvider(new LabelProvider(){
+				@Override
 				public String getText(Object element) {
 					if(element instanceof Farm){
 						return ((Farm)element).getName();
@@ -200,6 +203,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	 * 
 	 * @param parent the parent composite
 	 */
+	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		okButton.setEnabled(false);
@@ -208,6 +212,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	}
 
 	//@Override
+	@Override
 	public void modifyText(ModifyEvent e) {
 		if(e.getSource() == idText){
 			newContainer.setContainerId(idText.getText().trim());
@@ -283,6 +288,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		this.memberShip = memberShip;
 	}
 
+	@Override
 	protected boolean isResizable() {
 		return true;
 	}

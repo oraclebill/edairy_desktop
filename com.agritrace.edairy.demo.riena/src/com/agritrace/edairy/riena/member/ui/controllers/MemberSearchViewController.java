@@ -137,6 +137,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 		//search button
 		((IActionRidget)getRidget(ViewWidgetId.memberInfo_searchButton)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 //				saveMember();
 				MemberSearchSelectionManager.INSTANCE.getSearchNode().showView(true);
@@ -146,6 +147,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 		//save button
 		((IActionRidget)getRidget(ViewWidgetId.memberInfo_saveButton)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 //				saveMember();
 				MemberSearchSelectionManager.INSTANCE.getSearchNode().showView(false);
@@ -157,8 +159,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 		memberIdRidget = getRidget(ITextRidget.class,ViewWidgetId.memberInfo_id);
 		appliedDate=getRidget(ITextRidget.class,ViewWidgetId.memberInfo_applicationDate);
 		effectiveDate=getRidget(ITextRidget.class,ViewWidgetId.memberInfo_effectiveDate);
-		comboStatus = (IComboRidget) getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status);
-		comboStatus.bindToModel(Observables.staticObservableList(MembershipStatus.VALUES), MembershipStatus.class, null, new WritableValue()); //$NON-NLS-1$ //$NON-NLS-2$
+		comboStatus = getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status);
+		comboStatus.bindToModel(Observables.staticObservableList(MembershipStatus.VALUES), MembershipStatus.class, null, new WritableValue()); 
 		comboStatus.updateFromModel();
 		comboStatus.addSelectionListener(this);
 		phoneRidget = getRidget(ITextRidget.class,ViewWidgetId.memberInfo_phone); 
@@ -386,7 +388,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 					List<Object> selections = farmTable.getSelection();
 					if(selectedMember != null){
 						for(Object selObject : selections ){
-							selectedMember.getFarms().remove((Farm)selObject);
+							selectedMember.getFarms().remove(selObject);
 						}
 						farmTable.updateFromModel();
 					}
@@ -418,7 +420,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private void updateUpperPanelBinding(){
 		memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 		memberIdRidget.updateFromModel();
-		comboStatus = (IComboRidget) getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status); //$NON-NLS-1$
+		comboStatus = getRidget(IComboRidget.class,ViewWidgetId.memberInfo_status); 
 		comboStatus.updateFromModel();
 		comboStatus.setSelection(selectedMember.getStatus().getValue());
 		phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__PHONE_NUMBER));
@@ -481,7 +483,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 
 	private void copySelectedMember(){
 		if(selectedMember != null){
-			workingCopy = (Membership)EcoreUtil.copy(selectedMember);	
+			workingCopy = EcoreUtil.copy(selectedMember);	
 		}
 
 
