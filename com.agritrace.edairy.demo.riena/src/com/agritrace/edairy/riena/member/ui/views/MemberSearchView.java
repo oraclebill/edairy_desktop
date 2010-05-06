@@ -112,6 +112,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	
 	private void createMemberDetailGroup(Composite composite) {
 		Composite memberDetail = UIControlsFactory.createComposite(composite);
+		memberDetail.setEnabled(false);
 		GridData gd_memberDetail = new GridData(SWT.LEFT, SWT.CENTER, true, true, 2, 1);
 		gd_memberDetail.heightHint = 126;
 		gd_memberDetail.widthHint = 352;
@@ -131,14 +132,15 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	private Composite createMasterDetails(Composite parent) {
 
 		Composite details = UIControlsFactory.createComposite(parent);
-		details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
+		GridData detailsGD = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		detailsGD.minimumHeight=200;
+		details.setLayoutData(detailsGD);
 		GridLayout detaLayout = new GridLayout();
 		detaLayout.numColumns = 1;
 		details.setLayout(detaLayout);
 
 		Group detailGroup = UIControlsFactory.createGroup(details, MEMBER_INFO_GROUP);
-		detailGroup
-		.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		detailGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		GridLayout groupLayout = new GridLayout();
 		groupLayout.numColumns = 1;
 		detailGroup.setLayout(groupLayout);

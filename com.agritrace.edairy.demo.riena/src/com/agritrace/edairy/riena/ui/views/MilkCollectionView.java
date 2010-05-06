@@ -93,7 +93,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		titleLabel.setFont(labelFont);
 
 		Group collectionGroup = new Group(upperPanel, SWT.NULL);
-		collectionGroup.setLayout(new GridLayout(5, false));
+		collectionGroup.setLayout(new GridLayout(4, false));
 		collectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false));
 

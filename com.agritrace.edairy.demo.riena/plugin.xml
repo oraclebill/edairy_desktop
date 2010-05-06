@@ -94,8 +94,8 @@
       </view>
        <view
             allowMultiple="true"
-            class="com.agritrace.edairy.riena.ui.views.MilkCollectionJournalView"
-            id="com.agritrace.edairy.riena.ui.views.MilkCollectionJournalView"
+            class="com.agritrace.edairy.riena.millCollection.ui.views.MilkCollectionJournalView"
+            id="com.agritrace.edairy.riena.millCollection.ui.views.MilkCollectionJournalView"
             name="MilkCollectionJournalView">
       </view>
           <view

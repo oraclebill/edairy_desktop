@@ -19,8 +19,9 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.riena.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.riena.member.ui.views.MemberSearchView;
+import com.agritrace.edairy.riena.milkCollection.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.riena.millCollection.ui.views.MilkCollectionJournalView;
 
-import com.agritrace.edairy.riena.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.riena.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.riena.ui.views.BlankView;
 import com.agritrace.edairy.riena.ui.views.CreditJournalView;
@@ -30,7 +31,6 @@ import com.agritrace.edairy.riena.ui.views.DeliveryView;
 import com.agritrace.edairy.riena.ui.views.InseminationRequestView;
 import com.agritrace.edairy.riena.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.riena.ui.views.MemberStatementReportView;
-import com.agritrace.edairy.riena.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.riena.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.riena.ui.views.MonthlyCreditReportView;
 import com.agritrace.edairy.riena.ui.views.ServiceRequestLogView;

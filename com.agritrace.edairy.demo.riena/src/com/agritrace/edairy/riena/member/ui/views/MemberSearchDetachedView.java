@@ -327,10 +327,11 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			member.setLocation(memberLocation);
 			
 			Farm farm = TrackingFactory.eINSTANCE.createFarm();
-//			farm.(1001);
+			farm.setFarmId(new Long(1001).longValue());
 			farm.setName("Green Farm");
+			farm.setLocation(memberLocation);
 			member1.getFarms().add(farm);
-			
+
 			
 			Container container= TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.BIN);
@@ -368,9 +369,10 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			farm.getAnimals().add(animal1);
 			
 			Farm farm1 = TrackingFactory.eINSTANCE.createFarm();
-//			farm1.setFarmId(1002);
+			farm1.setFarmId(new Long(1002).longValue());
 			farm1.setName("Harvest Farm");
 			member1.getFarms().add(farm1);
+			farm1.setLocation(memberLocation);
 
 			container= TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.BIN);

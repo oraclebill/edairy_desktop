@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.controllers;
+package com.agritrace.edairy.riena.milkCollection.ui.controllers;
 
 import java.util.Arrays;
 import java.util.List;

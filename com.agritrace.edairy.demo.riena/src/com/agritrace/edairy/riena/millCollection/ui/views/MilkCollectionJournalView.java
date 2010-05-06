@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.views;
+package com.agritrace.edairy.riena.millCollection.ui.views;
 
 import java.util.Date;
 
@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.riena.ui.EDairyActivator;
 import com.agritrace.edairy.riena.ui.ImageRegistry;
+import com.agritrace.edairy.riena.ui.views.CalendarSelectionDialog;
+import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
 import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
 import com.swtdesigner.ResourceManager;
 
@@ -43,17 +45,17 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 	public static final String MILK_ENTRY_GROUP_TITLE="Milk Collection Entry";
 
-	public static final String DATE_LABEL="Date :";
+	public static final String DATE_LABEL="Date:";
 
-	public static final String ROUTE_LABEL="Route #:";
+	public static final String ROUTE_LABEL="Route:";
 
-	public static final String SECTION_LABEL="Section #:";
+	public static final String SECTION_LABEL="Section:";
 
-	public static final String VEHICLE_LABEL="Vehicle #:";
+	public static final String VEHICLE_LABEL="Vehicle:";
 
-	public static final String DRIVER_LABEL="Driver :";
+	public static final String DRIVER_LABEL="Driver:";
 
-	public static final String JOURNAL_LABEL="Journal :";
+	public static final String JOURNAL_LABEL="Journal:";
 
 	public static final String JOURNAL_TOTAL_LABEL="Journal Total:";
 
@@ -61,9 +63,9 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 	public static final String LINE_COLUMN_HEADER="Line";
 
-	public static final String MEMBER_COLUMN_HEADER="Member #";
+	public static final String MEMBER_COLUMN_HEADER="Member";
 
-	public static final String BIN_COLUMN_HEADER="Bin #";
+	public static final String BIN_COLUMN_HEADER="Bin";
 
 	public static final String QUANTITY_COLUMN_HEADER="Quantity";
 
@@ -79,11 +81,10 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 	public static final String SAVE_LABEL="Save and Create New Journal";
 
-
-
 	private Text dateText; 
-
 	private Button calendarButton;
+	
+	public static final int MINIMUM_LABEL_WIDTH=65;
 
 
 
@@ -113,23 +114,27 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 	private Group createJournalBookGroup(Composite parent){
 		Group group = UIControlsFactory.createGroup(parent, MILK_JOURNAL_BOOK_GROUP_TITLE, ViewWidgetId.milkJournalGroup);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(7).applyTo(group);
+		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);
 
 		Label dateLabel = UIControlsFactory.createLabel(group,DATE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
-
-		dateText = UIControlsFactory.createText(group, SWT.READ_ONLY|SWT.BORDER);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(dateLabel);
+		
+		Composite dateComposite = UIControlsFactory.createComposite(group);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateComposite);
+		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(dateComposite);
+		
+		dateText = UIControlsFactory.createText(dateComposite, SWT.READ_ONLY|SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 		addUIControl(dateText,ViewWidgetId.calendarDate);
 
-		calendarButton = new Button(group,SWT.PUSH);
+		calendarButton = new Button(dateComposite,SWT.PUSH);
 		//		calendarButton = UIControlsFactory.createButton(group);
 		Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
 
 
 		//		Image calendarButtonImage = new Image(parent.getDisplay(), calendar.getImageData().scaledTo(16, 16));
 		calendarButton.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 		//addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
@@ -145,9 +150,12 @@ public class MilkCollectionJournalView extends SubModuleView {
 				}
 			}
 		});
+		
+		Label padComposite = UIControlsFactory.createLabel(group, "");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2,1).applyTo(padComposite);
 
 		Label routeLabel = UIControlsFactory.createLabel(group,ROUTE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(routeLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(routeLabel);
 
 //		Combo combo = new Combo(group, SWT.BORDER|SWT.DROP_DOWN);
 		Combo combo = UIControlsFactory.createCombo(group);
@@ -155,28 +163,28 @@ public class MilkCollectionJournalView extends SubModuleView {
 		addUIControl(combo, ViewWidgetId.routeCombo);
 
 		Label sectionLabel = UIControlsFactory.createLabel(group,SECTION_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(sectionLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(sectionLabel);
 
 		Combo combo2 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo2);
 		addUIControl(combo2,ViewWidgetId.sessionCombo);
 
-		Composite pane = UIControlsFactory.createComposite(group);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(pane);
-		GridDataFactory.fillDefaults().grab(true,false).span(7, 1).applyTo(pane);
+//		Composite pane = UIControlsFactory.createComposite(group);
+//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(pane);
+//		GridDataFactory.fillDefaults().grab(true,false).span(7, 1).applyTo(pane);
 
-		Label vehicleLabel = UIControlsFactory.createLabel(pane,VEHICLE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(vehicleLabel);
+		Label vehicleLabel = UIControlsFactory.createLabel(group,VEHICLE_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(vehicleLabel);
 
-		Combo combo3 = UIControlsFactory.createCombo(pane);
+		Combo combo3 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo3);
 		addUIControl(combo3,ViewWidgetId.vehicleCombo);
 
 
-		Label driverLabel = UIControlsFactory.createLabel(pane,DRIVER_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(driverLabel);
+		Label driverLabel = UIControlsFactory.createLabel(group,DRIVER_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(driverLabel);
 
-		Combo combo4 = UIControlsFactory.createCombo(pane);
+		Combo combo4 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo4);
 		addUIControl(combo4,ViewWidgetId.driverCombo);
 
@@ -186,10 +194,10 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 	private Group createMilkBookGroup(Composite parent){
 		Group group = UIControlsFactory.createGroup(parent, MILK_BOOK_GROUP_TITLE, ViewWidgetId.milkGroup);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(6).applyTo(group);
+		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);
 
 		Label journalLabel = UIControlsFactory.createLabel(group,JOURNAL_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(journalLabel);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(journalLabel);
 
 		Text journalText = UIControlsFactory.createText(group, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalText);
@@ -197,14 +205,14 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 
 		Label journalTotalLabel = UIControlsFactory.createLabel(group,JOURNAL_TOTAL_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(journalTotalLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(journalTotalLabel);
 
 		Text journalTotalText = UIControlsFactory.createTextDecimal(group);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalTotalText);
 		addUIControl(journalTotalText,ViewWidgetId.journalTotalText);
 
 		Label binLabel = UIControlsFactory.createLabel(group,BIN_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(binLabel);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(binLabel);
 
 		Text binText = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(binText);
@@ -219,7 +227,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 	
 		Group panel = UIControlsFactory.createGroup(group,"");
 		GridDataFactory.fillDefaults().grab(true,true).span(1, 2).applyTo(panel);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(6).applyTo(panel);
+		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(panel);
 
 		Label memberLabel = UIControlsFactory.createLabel(panel,MEMBER_ID_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(memberLabel);
@@ -243,12 +251,17 @@ public class MilkCollectionJournalView extends SubModuleView {
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(quantityText);
 		addUIControl(quantityText,ViewWidgetId.quantityText);
 		
-		final Button nprMissingButton = UIControlsFactory.createButtonCheck(panel, NPR_COLUMN_HEADER, ViewWidgetId.nprMissingCombo);
-		GridDataFactory.fillDefaults().align(SWT.FILL,SWT.FILL).applyTo(nprMissingButton);
+		Composite buttonComposite = UIControlsFactory.createComposite(panel);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).span(2,1).applyTo(buttonComposite);
+		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(buttonComposite);
+
+
+		final Button nprMissingButton = UIControlsFactory.createButtonCheck(buttonComposite, NPR_COLUMN_HEADER, ViewWidgetId.nprMissingCombo);
+		GridDataFactory.fillDefaults().align(SWT.END,SWT.FILL).applyTo(nprMissingButton);
 		
 		
-		final Button rejectedButton = UIControlsFactory.createButtonCheck(panel, REJECTED_COLUMN_HEADER, ViewWidgetId.rejectedCombo);
-		GridDataFactory.fillDefaults().align(SWT.FILL,SWT.FILL).applyTo(rejectedButton);
+		final Button rejectedButton = UIControlsFactory.createButtonCheck(buttonComposite, REJECTED_COLUMN_HEADER, ViewWidgetId.rejectedCombo);
+		GridDataFactory.fillDefaults().align(SWT.END,SWT.FILL).applyTo(rejectedButton);
 		
 		Button addButton = UIControlsFactory.createButton(group, "Add", ViewWidgetId.addButton); 
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(addButton);

@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.model.ContainerType;
+import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.UnitOfMeasure;
@@ -43,6 +44,7 @@ import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.riena.member.ui.views.AddAnimalDialog;
 import com.agritrace.edairy.riena.member.ui.views.AddContainerDialog;
+import com.agritrace.edairy.riena.member.ui.views.AddFarmDialog;
 import com.agritrace.edairy.riena.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.riena.member.ui.views.MemberSearchSelectionManager;
 import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
@@ -107,15 +109,18 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private String[] farmColumnHeaders = { "ID", "Name","Location", "Number of Animals","Number of Conatiners" };
 	public static final String farmRemoveTitle="Remove Farm";
 	public static final String farmRemoveMessage="Do you want to remove selected farms?";
+	private List<Farm> farms = new ArrayList<Farm>();
 
 	//collection tab
 	private ITableRidget collectionTable;
 	private String[] collectionPropertyNames = { "lineNumber", "collectionJournal","dairyContainer","quantity","notRecorded","rejected","flagged"};
 	private String[] collectionColumnHeaders = { "Line", "Date","Container", "Quantity","NPR Missing","Rejected","Suspended" };
+	private List<CollectionJournalLine> records;
 	//transaction tab
 	private ITableRidget transactionTable;
 	private String[] transactionPropertyNames = { "transactionId", "transactionDate","transactionType","description","amount"};
 	private String[] transactionColumnHeaders = { "ID", "Date","Type", "Description","Amount"};
+	private List<AccountTransaction> transactionRecords ;
 
 
 	public MemberSearchViewController(){
@@ -215,6 +220,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 				return null;
 			}
 		});
+		liveStockTable.bindToModel(new WritableList(animalInput, RegisteredAnimal.class), RegisteredAnimal.class, liveStockPropertyNames, liveStockColumnHeaders);
 
 
 		liveStockAddButton = getRidget(IActionRidget.class,ViewWidgetId.LIVESTOCK_ADD);
@@ -317,6 +323,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 				return null;
 			}
 		});
+		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
+
 		containerAddButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_ADD);
 		containerAddButton.addListener(new IActionListener() {
 
@@ -360,21 +368,41 @@ public class MemberSearchViewController extends SubModuleController implements M
 
 	private void configureFarmTab(){
 		farmTable = getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
+		farmTable.bindToModel(new WritableList(farms, Farm.class), Farm.class, farmPropertyNames, farmColumnHeaders);
+
 		farmAddButton = getRidget(IActionRidget.class,ViewWidgetId.FARM_ADD);
+		
+		farmTable.setColumnFormatter(2, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof Farm){
+					Location location = ((Farm)element).getLocation();
+					if(location != null){
+						PostalLocation postalLocation = location.getPostalLocation();
+						if(postalLocation != null){
+							return postalLocation.getAddress()+","+postalLocation.getVillage()+","+postalLocation.getPostalCode();
+						}
+					}
+					
+				}
+				return null;
+			}
+		});
 		farmAddButton.addListener(new IActionListener() {
 
 			@Override
 			public void callback() {
-				//				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
-				//				shell.setSize(550, 450);
-				//				AddContainerDialog dialog = new AddContainerDialog(shell);
-				//				dialog.setMemberShip(selectedMember);
-				//				if(dialog.open()==Window.OK){
-				//					Container newContainer = dialog.getNewContainer();
-				//					newContainer.getOwner().getCans().add(newContainer);
-				//					containerInput.add(newContainer);
-				//					containerTable.updateFromModel();
-				//				}
+				Shell shell = new Shell(Display.getDefault(),SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX| SWT.APPLICATION_MODAL);
+				shell.setSize(550, 450);
+				AddFarmDialog dialog = new AddFarmDialog(shell);
+				dialog.setMemberShip(selectedMember);
+				if(dialog.open()==Window.OK){
+					Farm newFarm = dialog.getNewFarm();
+					selectedMember.getFarms().add(newFarm);
+					farms.add(newFarm);
+					farmTable.updateFromModel();
+				}
 			}
 		});
 
@@ -389,6 +417,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 					if(selectedMember != null){
 						for(Object selObject : selections ){
 							selectedMember.getFarms().remove(selObject);
+							farms.remove(selObject);
 						}
 						farmTable.updateFromModel();
 					}
@@ -402,10 +431,14 @@ public class MemberSearchViewController extends SubModuleController implements M
 
 	private void configureCollectionTab(){
 		collectionTable = getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
+		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class), CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
+
 	}
 
 	private void configureTransactionTab(){
 		transactionTable = getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
+		transactionTable.bindToModel(new WritableList(transactionRecords, AccountTransaction.class), AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
+
 	}
 
 	private void updateBindings(){
@@ -425,8 +458,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 		comboStatus.setSelection(selectedMember.getStatus().getValue());
 		phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__PHONE_NUMBER));
 		phoneRidget.updateFromModel();
-//		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__NAME));
-//		nameRidget.updateFromModel();
+		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),ModelPackage.Literals.PARTY__NAME));
+		nameRidget.updateFromModel();
 
 		SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
 		if(workingCopy.getApplicationDate() != null){
@@ -500,7 +533,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 		for(Farm farm :farms){
 			animalInput.addAll( farm.getAnimals());	
 		}
-		liveStockTable.bindToModel(new WritableList(animalInput, RegisteredAnimal.class), RegisteredAnimal.class, liveStockPropertyNames, liveStockColumnHeaders);
 		liveStockTable.updateFromModel();
 		liveStockTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		liveStockTable.addSelectionListener(this);
@@ -511,22 +543,20 @@ public class MemberSearchViewController extends SubModuleController implements M
 		for(Farm farm :farms){
 			containerInput.addAll( farm.getCans());	
 		}
-		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
 		containerTable.updateFromModel();
 		containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		containerTable.addSelectionListener(this);
 	}
 
 	private void updateFarmBinding(){
-		List<Farm> farms = selectedMember.getFarms();
-		farmTable.bindToModel(new WritableList(farms, Farm.class), Farm.class, farmPropertyNames, farmColumnHeaders);
+		farms= selectedMember.getFarms();
 		farmTable.updateFromModel();
 		farmTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		farmTable.addSelectionListener(this);
 	}
 
 	private void updateCollectionBinding(){
-		List<CollectionJournalLine> records = getCollectionJournalLines();
+		records = getCollectionJournalLines();
 		collectionTable.setColumnFormatter(1, new ColumnFormatter() {
 
 			@Override
@@ -552,7 +582,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 				return null;
 			}
 		});
-		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class), CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
 		collectionTable.updateFromModel();
 
 	}
@@ -577,7 +606,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 	}
 	
 	private void updateTransactionBinding(){
-		List<AccountTransaction> records = getAccountTransactions();
+		transactionRecords= getAccountTransactions();
 		transactionTable.setColumnFormatter(1, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
@@ -590,7 +619,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 				return null;
 			}
 		});
-		transactionTable.bindToModel(new WritableList(records, AccountTransaction.class), AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
 		transactionTable.updateFromModel();
 	}
 	
