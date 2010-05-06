@@ -18,5 +18,6 @@
 <unit id="org.eclipse.tptp.test.tools.junit.feature.group" version="4.6.2.v200912101900-7H7L4AkF7AG7LAIBGHB"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
+<location id="org.eclipse.platform" path="${eclipse_home}" type="Feature"/>
 </locations>
 </target>
