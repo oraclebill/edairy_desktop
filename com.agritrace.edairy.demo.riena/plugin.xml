@@ -132,7 +132,7 @@
          </view>
          <view
                allowMultiple="true"
-               class="com.agritrace.edairy.riena.member.ui.views.MemberSearchView"
+               class="com.agritrace.edairy.member.ui.views.MemberSearchView"
                id="com.agritrace.edairy.riena.member.ui.views.MemberSearchView"
                name="Member Search"
                restorable="true">

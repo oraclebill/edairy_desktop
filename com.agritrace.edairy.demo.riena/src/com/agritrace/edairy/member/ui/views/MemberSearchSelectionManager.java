@@ -1,10 +1,10 @@
-package com.agritrace.edairy.riena.member.ui.views;
+package com.agritrace.edairy.member.ui.views;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.agritrace.edairy.member.ui.views.MemberSearchView.MemberSearchNodeListener;
 import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.riena.member.ui.views.MemberSearchView.MemberSearchNodeListener;
 
 public class MemberSearchSelectionManager {
 	

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.member.ui.controllers;
+package com.agritrace.edairy.member.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +27,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.member.ui.views.AddAnimalDialog;
+import com.agritrace.edairy.member.ui.views.AddContainerDialog;
+import com.agritrace.edairy.member.ui.views.MemberSearchSelectionListener;
+import com.agritrace.edairy.member.ui.views.MemberSearchSelectionManager;
 import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
@@ -41,10 +45,6 @@ import com.agritrace.edairy.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.riena.member.ui.views.AddAnimalDialog;
-import com.agritrace.edairy.riena.member.ui.views.AddContainerDialog;
-import com.agritrace.edairy.riena.member.ui.views.MemberSearchSelectionListener;
-import com.agritrace.edairy.riena.member.ui.views.MemberSearchSelectionManager;
 import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
 import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
 

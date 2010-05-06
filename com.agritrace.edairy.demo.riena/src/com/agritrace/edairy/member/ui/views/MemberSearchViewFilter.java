@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.member.ui.views;
+package com.agritrace.edairy.member.ui.views;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;

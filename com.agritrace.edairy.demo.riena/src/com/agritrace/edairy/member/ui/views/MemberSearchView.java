@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.member.ui.views;
+package com.agritrace.edairy.member.ui.views;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoObservables;

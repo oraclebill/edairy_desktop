@@ -17,8 +17,8 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
-import com.agritrace.edairy.riena.member.ui.controllers.MemberSearchViewController;
-import com.agritrace.edairy.riena.member.ui.views.MemberSearchView;
+import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
+import com.agritrace.edairy.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.riena.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.riena.ui.controllers.StaffInfoViewController;
@@ -173,8 +173,8 @@ public class EDairyManagerApplication extends SwtApplication {
 				new NavigationNodeId("edm.sysadmin"), "Administration", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSystem.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.info"), "Dairy Profile", moduleSystem, DairyProfileView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.routes"), "Branch Locations", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.location"), "Dairy Location", moduleSystem, DairyLocationView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.location"), "Branch Locations", moduleSystem, DairyLocationView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.routes"), "Routes", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.staff"), "Employee Directory", moduleSystem, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.vehicles"), "Vehicle Log", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.bins"), "Container Log", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
