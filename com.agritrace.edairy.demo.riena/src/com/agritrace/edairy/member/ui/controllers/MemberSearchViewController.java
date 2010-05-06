@@ -45,8 +45,8 @@ import com.agritrace.edairy.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
-import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.ui.views.ViewWidgetId;
+import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
 
 public class MemberSearchViewController extends SubModuleController implements MemberSearchSelectionListener, ISelectionListener{
 

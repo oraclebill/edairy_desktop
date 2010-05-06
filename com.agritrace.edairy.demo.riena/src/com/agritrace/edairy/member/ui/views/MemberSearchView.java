@@ -34,8 +34,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.riena.ui.views.MemberBadge;
-import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
+import com.agritrace.edairy.ui.views.MemberBadge;
+import com.agritrace.edairy.ui.views.ViewWidgetId;
 
 public class MemberSearchView extends SubModuleView implements SelectionListener{
 

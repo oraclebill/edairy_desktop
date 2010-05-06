@@ -42,9 +42,9 @@ import com.agritrace.edairy.model.tracking.RearingMode;
 import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.riena.ui.EDairyActivator;
-import com.agritrace.edairy.riena.ui.ImageRegistry;
-import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.ui.EDairyActivator;
+import com.agritrace.edairy.ui.ImageRegistry;
+import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
 
 public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, SelectionListener{
 

@@ -34,11 +34,11 @@ import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.riena.ui.EDairyActivator;
-import com.agritrace.edairy.riena.ui.ImageRegistry;
-import com.agritrace.edairy.riena.ui.views.CalendarSelectionDialog;
-import com.agritrace.edairy.riena.ui.views.ViewWidgetId;
-import com.agritrace.edairy.riena.ui.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.ui.EDairyActivator;
+import com.agritrace.edairy.ui.ImageRegistry;
+import com.agritrace.edairy.ui.views.CalendarSelectionDialog;
+import com.agritrace.edairy.ui.views.ViewWidgetId;
+import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
 
 public class MemberInfoGroup  {
 
