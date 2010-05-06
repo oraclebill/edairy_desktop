@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.controllers;
+package com.agritrace.edairy.dairy.ui.controllers;
 
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -8,7 +8,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.common.datamodel.dairy.Route;
-import com.agritrace.edairy.riena.ui.controllers.DairyLocationController.RouteService;
+import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController.RouteService;
 
 public class AddRouteDialogController extends AbstractWindowController {
 	public static final String RIDGET_ID_ROUTE_ID = "routeId"; //$NON-NLS-1$

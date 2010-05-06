@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.views;
+package com.agritrace.edairy.dairy.ui.views;
 
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import com.agritrace.edairy.riena.ui.controllers.DairyLocationController;
+import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController;
 
 public class DairyLocationView extends SubModuleView {
 	public final static String ID = DairyLocationView.class.getName();

@@ -135,7 +135,7 @@
          <view
          		allowMultiple="true"
 	            name="Dairy Location"
-    	        class="com.agritrace.edairy.riena.ui.views.DairyLocationView"
+    	        class="com.agritrace.edairy.dairy.ui.views.DairyLocationView"
         	    id="com.agritrace.edairy.riena.ui.views.DairyLocationView">
       	 </view>
         </extension>

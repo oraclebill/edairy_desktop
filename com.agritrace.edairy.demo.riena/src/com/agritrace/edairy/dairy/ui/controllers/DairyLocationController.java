@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.controllers;
+package com.agritrace.edairy.dairy.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +27,7 @@ import com.agritrace.edairy.common.datamodel.dairy.DairyLocation;
 import com.agritrace.edairy.common.datamodel.dairy.DairyLocation.DairyFunction;
 import com.agritrace.edairy.common.datamodel.dairy.Route;
 import com.agritrace.edairy.common.services.DairyLocations;
-import com.agritrace.edairy.riena.ui.dialogs.RouteListDialog;
+import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
 
 public class DairyLocationController extends SubModuleController {
 	//top-half window

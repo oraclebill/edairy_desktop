@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.dialogs;
+package com.agritrace.edairy.dairy.ui.dialogs;
 
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 
-import com.agritrace.edairy.riena.ui.controllers.RouteListDialogController;
+import com.agritrace.edairy.dairy.ui.controllers.RouteListDialogController;
 
 public class RouteListDialog extends AbstractDialogView {
 	private final static int WIDTH_UNIT = 100;
