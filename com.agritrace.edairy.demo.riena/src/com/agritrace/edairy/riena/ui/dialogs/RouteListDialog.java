@@ -14,7 +14,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 
-import com.agritrace.edairy.riena.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.riena.ui.controllers.RouteListDialogController;
 
 public class RouteListDialog extends AbstractDialogView {
@@ -69,7 +68,7 @@ public class RouteListDialog extends AbstractDialogView {
 	private void createMessageBoxes()
 	{
 		MessageBox deleteConfirmMessage  = UIControlsFactory.createMessageBox(contentArea);
-		this.addUIControl(deleteConfirmMessage, DairyLocationController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
+		this.addUIControl(deleteConfirmMessage, RouteListDialogController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
 	}
 	
 	

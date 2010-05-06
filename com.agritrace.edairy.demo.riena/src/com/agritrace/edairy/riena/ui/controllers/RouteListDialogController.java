@@ -8,6 +8,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.common.datamodel.dairy.Route;
 import com.agritrace.edairy.riena.ui.controllers.DairyLocationController.RouteService;
+import com.agritrace.edairy.riena.ui.dialogs.AddRouteDialog;
 
 public class RouteListDialogController extends AbstractWindowController {
 	public static final String RIDGET_ID_ROUTE_TABLE = "routeTable";
@@ -27,15 +28,16 @@ public class RouteListDialogController extends AbstractWindowController {
 		initialize();
 	}
 
+	private ITableRidget routeTable;
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
 
 		getWindowRidget().setTitle("Route List");
 
-		final ITableRidget table = (ITableRidget) getRidget(RIDGET_ID_ROUTE_TABLE);
-		table.bindToModel(service, "routes", Route.class, new String[]{"routeId", "name", "description"}, new String[]{"Id", "Route Name", "Description"});
-		table.updateFromModel();
+		routeTable = (ITableRidget) getRidget(RIDGET_ID_ROUTE_TABLE);
+		routeTable.bindToModel(service, "routes", Route.class, new String[]{"routeId", "name", "description"}, new String[]{"Id", "Route Name", "Description"});
+		routeTable.updateFromModel();
 		
 		deleteConfirmDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DELETE_CONFIRM_DIALOG);
 		deleteConfirmDialog.setType(IMessageBoxRidget.Type.QUESTION);
@@ -48,18 +50,22 @@ public class RouteListDialogController extends AbstractWindowController {
 		IActionRidget addAction = (IActionRidget) getRidget(RIDGET_ID_ADD);
 		addAction.addListener(new IActionListener() {
 			public void callback() {
-				
+				AddRouteDialog dialog = new AddRouteDialog();
+				dialog.setBlockOnOpen(true);
+				dialog.open();
 			}
 		});
 		
 		IActionRidget deleteAction = (IActionRidget) getRidget(RIDGET_ID_DELETE);
 		deleteAction.addListener(new IActionListener() {
 			public void callback() {
-				
-				if (deleteConfirmDialog.show().getLabel().equals("Yes"))
-				{
-					//#TODO : delete the route
+				if (routeTable.getSelectionIndex() >=0) {
+					if (deleteConfirmDialog.show().getLabel().equals("Yes"))
+					{
+						//#TODO : delete the route
+					}
 				}
+				
 			}
 		});
 		

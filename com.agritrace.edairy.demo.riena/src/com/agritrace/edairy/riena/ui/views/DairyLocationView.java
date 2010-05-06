@@ -36,8 +36,6 @@ public class DairyLocationView extends SubModuleView {
 		this.contentArea = parent;
 		contentArea.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		
-		/*FormLayout layout = new FormLayout();
-		layout.marginWidth = layout.marginHeight = FORM_MARGIN;*/
 		GridLayout layout = new GridLayout(3, false);
 		contentArea.setLayout(layout);
 
@@ -47,9 +45,6 @@ public class DairyLocationView extends SubModuleView {
 		GridData gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		gd.horizontalSpan = 2;
-
-/*		gd.grabExcessVerticalSpace = true;
-		gd.verticalAlignment = SWT.FILL;*/
 		idText.setEditable(false);
 		idText.setLayoutData(gd);
 
