@@ -136,7 +136,7 @@
          		allowMultiple="true"
 	            name="Dairy Location"
     	        class="com.agritrace.edairy.dairy.ui.views.DairyLocationView"
-        	    id="com.agritrace.edairy.riena.ui.views.DairyLocationView">
+        	    id="com.agritrace.edairy.dairy.ui.views.DairyLocationView">
       	 </view>
         </extension>
    <extension
@@ -185,11 +185,11 @@
          id="edairy_manager"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.riena.ui.newId"
+            application="com.agritrace.edairy.riena.ui.dairy_manager"
             name="eDairy Manager">
          <property
                name="windowImages"
-               value="icons/cow16.png,icons/cow32.png,icons/cow48.png,icons/cow64.png,icons/cow128.png">
+               value="/com.agritrace.edairy.riena.ui/icons/cow16.png,/com.agritrace.edairy.riena.ui/icons/cow32.png,/com.agritrace.edairy.riena.ui/icons/cow48.png,/com.agritrace.edairy.riena.ui/icons/cow64.png,/com.agritrace.edairy.riena.ui/icons/cow128.png">
          </property>
          <property
                name="aboutText"
@@ -197,7 +197,7 @@
          </property>
          <property
                name="aboutImage"
-               value="resources/edairy_helpabout.png">
+               value="/com.agritrace.edairy.riena.ui/resources/edairy_helpabout.png">
          </property>
          <property
                name="appName"

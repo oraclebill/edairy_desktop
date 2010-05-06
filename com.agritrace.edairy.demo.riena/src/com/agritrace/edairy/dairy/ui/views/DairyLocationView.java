@@ -26,7 +26,7 @@ import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController;
 public class DairyLocationView extends SubModuleView {
 	public final static String ID = DairyLocationView.class.getName();
 	private final static int WIDTH_UNIT = 100;
-	private final static int COLUMN_MARGIN = 10;
+	private final static int COLUMN_MARGIN = 20;
 	private final static int FORM_MARGIN = 10;
 	private final static int ROW_MARGIN = 10;
 	private Composite contentArea;
@@ -170,7 +170,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text sectionText = UIControlsFactory.createText(parent, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_SECTION);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		sectionText.setLayoutData(gd);
 		
 		Label townLabel = UIControlsFactory.createLabel(parent, "Town/Village");
@@ -179,7 +179,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text townText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_TOWN);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		townText.setLayoutData(gd);
 		
 		//#TODO: Should this UI component be removed or update the dairy.escore file?
@@ -189,7 +189,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text estateText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_ESTATE);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		estateText.setLayoutData(gd);
 		
 		Label locationLabel = UIControlsFactory.createLabel(parent, "Location");
@@ -198,7 +198,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text locationText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_LOCATION);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		locationText.setLayoutData(gd);
 		
 		Label subLocationLabel = UIControlsFactory.createLabel(parent, "Sub");
@@ -207,7 +207,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text subLocationText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_SUB);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		subLocationText.setLayoutData(gd);
 		
 		Label districtLabel = UIControlsFactory.createLabel(parent, "District");
@@ -216,7 +216,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text districtText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_DISTRICT);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		districtText.setLayoutData(gd);
 		
 		Label divisionLabel = UIControlsFactory.createLabel(parent, "Division");
@@ -225,7 +225,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text divisionText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_DIVISION);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		divisionText.setLayoutData(gd);
 		
 		Label postalCodeLabel = UIControlsFactory.createLabel(parent, "Postal Code");
@@ -234,7 +234,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text postalCodeText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_POSTALCODE);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		postalCodeText.setLayoutData(gd);
 		
 		/*Label provinceLabel = UIControlsFactory.createLabel(parent, "Province");
@@ -243,7 +243,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Text provinceText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_PROVINCE);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 2;
 		provinceText.setLayoutData(gd);*/
 	}
 	
