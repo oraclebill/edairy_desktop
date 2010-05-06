@@ -80,6 +80,8 @@ public class ViewWidgetId {
 	
 	public static final String memberInfo_saveButton="Save";
 	
+	public static final String memberInfo_searchButton="Search";
+	
 	public static final String ADDRESS_TXT="Address";
 	public static final String SECTION_TXT="Section";
 	public static final String ESTATE_TXT="Estate";
@@ -94,6 +96,15 @@ public class ViewWidgetId {
 	public static final String CONTAINER_TABLE="Container";
 	public static final String CONTAINER_ADD="ContainerAdd";
 	public static final String CONTAINER_Remove="ContainerRemove";
+	public static final String CONTAINER_ColumnFilterCombo="Column Filter";
+	public static final String CONTAINER_CompareExpressionCombo="CompareExpression";
+	public static final String CONTAINER_CompareText="CompareText";
+	public static final String CONTAINER_CompareLabel="CompareHelpLabel";
+	public static final String CONTAINER_FarmCombo="farmFilter";
+	public static final String CONTAINER_ContainerTypeCombo="typeFilter";
+	public static final String CONTAINER_UnitOfMeasureCombo="unitFilter";
+	public static final String CONTAINER_FilterButton="filter";
+
 	
 	public static final String LIVESTOCK_TABLE="LiveStock";
 	public static final String LIVESTOCK_ADD="LiveStockAdd";
