@@ -117,5 +117,21 @@ public class ViewWidgetId {
 	public static final String COLLECTION_TABLE="CollectionTable";
 	//membership_transaction tab
 	public static final String TRANSACTION_TABLE="TransactionTable";
+
+	public static final String CONTAINER_FilterButton = "CONTAINER_FilterButton";
+
+	public static final String CONTAINER_UnitOfMeasureCombo = "CONTAINER_UnitOfMeasureCombo";
+
+	public static final String CONTAINER_ContainerTypeCombo = "CONTAINER_ContainerTypeCombo";
+
+	public static final String CONTAINER_FarmCombo = "CONTAINER_FarmCombo";
+
+	public static final String CONTAINER_CompareText = "CONTAINER_CompareText";
+
+	public static final String CONTAINER_CompareExpressionCombo = "CONTAINER_CompareExpressionCombo";
+
+	public static final String CONTAINER_ColumnFilterCombo = "CONTAINER_ColumnFilterCombo";
+
+	public static final String memberInfo_searchButton = "memberInfo_searchButton";
 	
 }

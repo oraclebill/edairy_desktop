@@ -17,14 +17,10 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
-import org.eclipse.riena.ui.core.marker.DisabledMarker;
 import org.eclipse.riena.ui.swt.EmbeddedTitleBar;
-import org.eclipse.riena.ui.swt.IEmbeddedTitleBarListener;
-import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.lnf.renderer.EmbeddedTitlebarRenderer;
-import org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultLnf;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -196,36 +192,42 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	public class MemberLabelProvider implements ITableLabelProvider{
 
 
+		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
 
+		@Override
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof Membership){
 				switch(columnIndex){
@@ -448,6 +450,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		
 	}
 	
+	@Override
 	protected void addUIControl(Object uiControl, String bindingId) {
 		if(uiControl instanceof EmbeddedTitleBar){
 			((EmbeddedTitleBar)uiControl).setCloseable(true);
@@ -468,6 +471,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		/**
 		 * @see org.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.MouseEvent)
 		 */
+		@Override
 		public void mouseUp(MouseEvent e) {
 			
 			if (!shouldIgnore(e)) {
@@ -486,6 +490,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		/**
 		 * @see org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events.MouseEvent)
 		 */
+		@Override
 		public void mouseDown(MouseEvent e) {
 			
 			if (!shouldIgnore(e)) {
@@ -497,6 +502,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		/**
 		 * @see org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt.events.MouseEvent)
 		 */
+		@Override
 		public void mouseDoubleClick(MouseEvent e) {
 			// nothing to do
 		}

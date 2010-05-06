@@ -105,13 +105,13 @@ public class MemberInfoGroup  {
 		// member Id
 		UIControlsFactory.createLabel(upperPanel, memberId); 
 
-		txtId = UIControlsFactory.createText(upperPanel, SWT.BORDER|SWT.READ_ONLY, ViewWidgetId.memberInfo_id); //$NON-NLS-1$
+		txtId = UIControlsFactory.createText(upperPanel, SWT.BORDER|SWT.READ_ONLY, ViewWidgetId.memberInfo_id); 
 		GridData gd_txtId = new GridData(SWT.FILL, SWT.FILL, true, false, 2,1);
 		//		gd_txtId.minimumWidth = 50;
 		txtId.setLayoutData(gd_txtId);
 
-		UIControlsFactory.createLabel(upperPanel, firstName); //$NON-NLS-1$
-		txtFirst = UIControlsFactory.createText(upperPanel, SWT.BORDER,ViewWidgetId.memberInfo_firstName); //$NON-NLS-1$
+		UIControlsFactory.createLabel(upperPanel, firstName); 
+		txtFirst = UIControlsFactory.createText(upperPanel, SWT.BORDER,ViewWidgetId.memberInfo_firstName); 
 		GridData gd_txtFirst = new GridData(SWT.FILL, SWT.FILL, true, false,2, 1);
 		//		gd_txtFirst.minimumWidth = 100;
 		txtFirst.setLayoutData(gd_txtFirst);
@@ -140,6 +140,7 @@ public class MemberInfoGroup  {
 		//addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP, dateText.getText());
@@ -154,7 +155,7 @@ public class MemberInfoGroup  {
 		});
 
 		// effective date
-		UIControlsFactory.createLabel(upperPanel, effectiveDate); //$NON-NLS-1$
+		UIControlsFactory.createLabel(upperPanel, effectiveDate); 
 		effectDateText = UIControlsFactory.createText(upperPanel, SWT.READ_ONLY|SWT.BORDER,ViewWidgetId.memberInfo_effectiveDate);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(effectDateText);
 		//		addUIControl(dateText,ViewWidgetId.calendarDate);
@@ -165,6 +166,7 @@ public class MemberInfoGroup  {
 		//addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton2.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP, dateText.getText());
@@ -179,14 +181,14 @@ public class MemberInfoGroup  {
 		});
 
 		// status
-		UIControlsFactory.createLabel(upperPanel, status); //$NON-NLS-1$
+		UIControlsFactory.createLabel(upperPanel, status); 
 		comboStatus = new ComboViewer(UIControlsFactory.createCombo(upperPanel, ViewWidgetId.memberInfo_status));
 		//		comboStatus.setItems(new String[] {"Active", "Inactive", "Dormant"});
 		GridData gd_comboStatus = new GridData(SWT.FILL, SWT.FILL, true,false, 2, 1);
 		comboStatus.getControl().setLayoutData(gd_comboStatus);
 
-		UIControlsFactory.createLabel(upperPanel, phoneNumber); //$NON-NLS-1$
-		txtPhone = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_phone); //$NON-NLS-1$
+		UIControlsFactory.createLabel(upperPanel, phoneNumber); 
+		txtPhone = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_phone); 
 		txtPhone.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,2, 1));
 
 		
@@ -230,40 +232,40 @@ public class MemberInfoGroup  {
 
 		
 		// address
-		Label label = UIControlsFactory.createLabel(addressPanel,ADDRESS_LABEL); //$NON-NLS-1$
+		Label label = UIControlsFactory.createLabel(addressPanel,ADDRESS_LABEL); 
 		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_label.minimumWidth = 100;
 		label.setLayoutData(gd_label);
 		Text txtAddress = UIControlsFactory.createText(addressPanel,SWT.BORDER, ViewWidgetId.ADDRESS_TXT);
 		txtAddress.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 5, 1));
 		// section
-		UIControlsFactory.createLabel(addressPanel, SECTION_LABEL); //$NON-NLS-1$
+		UIControlsFactory.createLabel(addressPanel, SECTION_LABEL); 
 		Text txtAddress2 = UIControlsFactory.createText(addressPanel,	SWT.BORDER, ViewWidgetId.SECTION_TXT);
 		txtAddress2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 5, 1));
 		
 		// estate
-		UIControlsFactory.createLabel(addressPanel, ESTATE_LABEL); //$NON-NLS-1$
+		UIControlsFactory.createLabel(addressPanel, ESTATE_LABEL); 
 		Text estateAddress = UIControlsFactory.createText(addressPanel,	SWT.BORDER, ViewWidgetId.ESTATE_TXT);
 		estateAddress.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 2, 1));
 
 		// town
-		UIControlsFactory.createLabel(addressPanel, VILLAGE_LABEL); //$NON-NLS-1$
+		UIControlsFactory.createLabel(addressPanel, VILLAGE_LABEL); 
 		Text txtVillage = UIControlsFactory.createText(addressPanel, SWT.BORDER,ViewWidgetId.VILLAGE_TXT);
 		txtVillage.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 2, 1));
 		
 		// sublocation
-		UIControlsFactory.createLabel(addressPanel, SUBLOCATION_LABEL); //$NON-NLS-1$
+		UIControlsFactory.createLabel(addressPanel, SUBLOCATION_LABEL); 
 		Text txtSubLocation = UIControlsFactory.createText(addressPanel, SWT.BORDER,ViewWidgetId.SUBLOCATION_TXT);
 		txtSubLocation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 2, 1));
 		
 
 		// location
-		UIControlsFactory.createLabel(addressPanel, LOCATION_LABEL); //$NON-NLS-1$
+		UIControlsFactory.createLabel(addressPanel, LOCATION_LABEL); 
 		Text txtLocation = UIControlsFactory.createText(addressPanel, SWT.BORDER,ViewWidgetId.LOCATION_TXT);
 		txtLocation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 2, 1));
 		
 		// division
-		UIControlsFactory.createLabel(addressPanel, DIVISION_LABEL); //$NON-NLS-1$
+		UIControlsFactory.createLabel(addressPanel, DIVISION_LABEL); 
 		Text txtDivision = UIControlsFactory.createText(addressPanel, SWT.BORDER,ViewWidgetId.DIVISION_TXT);
 		txtDivision.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false, 2, 1));
 		

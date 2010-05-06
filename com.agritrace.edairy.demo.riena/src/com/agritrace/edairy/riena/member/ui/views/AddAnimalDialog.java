@@ -81,6 +81,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	/**
 	 * Closes the dialog box Override so we can dispose the image we created
 	 */
+	@Override
 	public boolean close() {
 		return super.close();
 	}
@@ -91,6 +92,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createContents(Composite parent) {
 		Control contents = super.createContents(parent);
 		setTitle("Add Animal");
@@ -98,6 +100,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 		return contents;
 	}
 
+	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setSize(550, 450);
@@ -109,6 +112,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		Composite dialogArea = UIControlsFactory.createComposite(composite);
@@ -134,6 +138,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 		if(memberShip != null){
 			farmComboViewer.setInput(memberShip.getFarms());
 			farmComboViewer.setLabelProvider(new LabelProvider(){
+				@Override
 				public String getText(Object element) {
 					if(element instanceof Farm){
 						return ((Farm)element).getName();
@@ -206,6 +211,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 		calendarButton.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				final Shell dialog = new Shell(Display.getDefault()
 						.getActiveShell(), SWT.DIALOG_TRIM);
@@ -233,6 +239,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 				ok.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false,
 						false));
 				ok.addSelectionListener(new SelectionAdapter() {
+					@Override
 					public void widgetSelected(SelectionEvent e) {
 						String textDate = (calendar.getMonth() + 1) + "/"
 								+ calendar.getDay() + "/" + calendar.getYear();
@@ -349,6 +356,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	 * 
 	 * @param parent the parent composite
 	 */
+	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 //		okButton.setEnabled(false);
@@ -388,6 +396,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 		this.memberShip = memberShip;
 	}
 
+	@Override
 	protected boolean isResizable() {
 		return true;
 	}

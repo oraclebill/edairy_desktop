@@ -553,6 +553,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 	}
 	
+	@Override
 	public void dispose() {
 		MemberSearchSelectionManager.INSTANCE.clearListeners();
 	}
