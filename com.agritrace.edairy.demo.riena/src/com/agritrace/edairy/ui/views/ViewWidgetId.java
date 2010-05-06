@@ -103,19 +103,39 @@ public class ViewWidgetId {
 	public static final String CONTAINER_ContainerTypeCombo="typeFilter";
 	public static final String CONTAINER_UnitOfMeasureCombo="unitFilter";
 	public static final String CONTAINER_FilterButton="filter";
+	public static final String CONTAINER_ShowAllButton="container_show_all";
 
 	
 	public static final String LIVESTOCK_TABLE="LiveStock";
 	public static final String LIVESTOCK_ADD="LiveStockAdd";
 	public static final String LIVESTOCK_Remove="LiveStockRemove";
+	public static final String LIVESTOCK_FILTER_STARTDATE="LiveStock_Start_Date";
+	public static final String LIVESTOCK_FILTER_ENDDATE="LiveStock_END_Date";
+	public static final String LIVESTOCK_FarmCombo="farmFilter";
+	public static final String LIVESTOCK_ContainerSpeciesFilter="speciesFilter";
+	public static final String LIVESTOCK_ContainerBreedFilter="breedFilter";
+	public static final String LIVESTOCK_ContainerFilterButton="LiveStock_Filter";
+	public static final String LIVESTOCK_ContainerShowAllButton="LiveStock_Showall";
 	
 	public static final String FARM_TABLE="FarmTable";
 	public static final String FARM_ADD="FarmAdd";
 	public static final String FARM_Remove="FarmRemove";
 	//membership_collection tab
 	public static final String COLLECTION_TABLE="CollectionTable";
+	public static final String COLLECTION_FILTER_STARTDATE="Collection_Start_Date";
+	public static final String COLLECTION_FILTER_ENDDATE="Collection_END_Date";
+	public static final String COLLECTION_FILTER_NPRMISSING="Collection_Filter_NPR";
+	public static final String COLLECTION_FILTER_REJECTED="Collection_Filter_Rejected";
+	public static final String COLLECTION_FILTER_FLAG="Collection_Filter_Flag";
+	public static final String COLLECTION_FILTER_APPLY="Collection_APPLY";
+	public static final String COLLECTION_FILTER_SHOWALL="Collection_ShowAll";
+
 	//membership_transaction tab
 	public static final String TRANSACTION_TABLE="TransactionTable";
+	public static final String TRANSACTION_FILTER_STARTDATE="TRANSACTION_Start_Date";
+	public static final String TRANSACTION_FILTER_ENDDATE="TRANSACTION_END_Date";
+	public static final String TRANSACTION_FILTER_APPLY="TRANSACTION_APPLY";
+	public static final String TRANSACTION_FILTER_SHOWALL="TRANSACTION_ShowAll";
 
 	public static final String memberInfo_searchButton = "memberInfo_searchButton";
 	

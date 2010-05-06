@@ -85,8 +85,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITableRidget containerTable;
 	private IActionRidget containerAddButton;
 	private IActionRidget containerRemoveButton;
-	private String[] containerPropertyNames = { "containerId", "owner","type", "units", "measureType","capacity"};
-	private String[] containerColumnHeaders = { "ID", "Farm","Container Type", "Units","Units Of Measure","Capacity" }; 
+	private String[] containerPropertyNames = { "containerId", "owner","type", "measureType","capacity"};
+	private String[] containerColumnHeaders = { "ID", "Farm","Container Type", "Units Of Measure","Capacity" }; 
 	public static final String containerRemoveTitle="Remove Containers";
 	public static final String containerRemoveMessage="Do you want to remove selected containers?";
 	private List<Container>containerInput = new ArrayList<Container>();
@@ -95,8 +95,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
 	private IActionRidget liveStockRemoveButton;
-	private String[] liveStockPropertyNames = { "animnalRegistrationId", "location","purpose","givenName","animalType", "dateOfAcquisition", "acquisitionType"};
-	private String[] liveStockColumnHeaders = { "ID", "Farm","Purpose", "Name","Type","Acquisition Date","Acquisition Type" };
+	private String[] liveStockPropertyNames = { "animnalRegistrationId", "location","purpose","givenName","animalType","animalType", "dateOfAcquisition", "acquisitionType"};
+	private String[] liveStockColumnHeaders = { "ID", "Farm","Purpose", "Name","Species","Breed","Acquisition Date","Acquisition Type" };
 	public static final String liveStockRemoveTitle="Remove Registered Animales";
 	public static final String liveStockRemoveMessage="Do you want to remove selected animals?";
 	private List<RegisteredAnimal>animalInput = new ArrayList<RegisteredAnimal>();
@@ -207,8 +207,20 @@ public class MemberSearchViewController extends SubModuleController implements M
 				return null;
 			}
 		});
-
+		
 		liveStockTable.setColumnFormatter(5, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				if(element instanceof RegisteredAnimal){
+					return ((RegisteredAnimal)element).getAnimalType().getBreed();
+				}
+				return null;
+			}
+		});
+
+
+		liveStockTable.setColumnFormatter(6, new ColumnFormatter() {
 
 			@Override
 			public String getText(Object element) {
@@ -262,56 +274,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 		});
 	}
 	private void configureContainerTab(){
-//		columnCombo = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_ColumnFilterCombo);
-//		List<String> comboColumList =  Arrays.asList(new String[] {"ID","Capacity"}); 
-//		columnCombo.bindToModel(new WritableList(comboColumList, String.class), String.class, null, new WritableValue());
-//		columnCombo.updateFromModel();
-//		columnCombo.setSelection(0);
-//		
-//		compareExpression = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_CompareExpressionCombo);
-//		List<String> compareList =  Arrays.asList(new String[] {"=",">","<"}); 
-//		compareExpression.bindToModel(new WritableList(compareList, String.class), String.class, null, new WritableValue());
-//		compareExpression.updateFromModel();
-//    	compareExpression.setSelection(0);
-//    	
-//		numberRidget = getRidget(ITextRidget.class,ViewWidgetId.CONTAINER_CompareText);
-//		numberRidget.setText("*");
-//		
-//		farmRidget = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_FarmCombo);
-//		List<String> farmList =  Arrays.asList(new String[] {"All Farms"}); 
-//		farmRidget.bindToModel(new WritableList(farmList, String.class), String.class, null, new WritableValue());
-//		farmRidget.updateFromModel();
-//		farmRidget.setSelection(0);
-//
-//		//container search combo
-//		containterTypeRidget = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_ContainerTypeCombo);
-//		List<String> typeOfContainerList = new ArrayList<String>();
-//		typeOfContainerList.add("All Types of Container");
-//
-//		List<ContainerType> cValues = ContainerType.VALUES;
-//		for(ContainerType cValue : cValues){
-//			typeOfContainerList.add(cValue.toString());
-//		}
-//		
-//		containterTypeRidget.bindToModel(new WritableList(typeOfContainerList, String.class), String.class, null, new WritableValue());
-//		containterTypeRidget.updateFromModel();
-//		containterTypeRidget.setEmptySelectionItem("All Types of Container");
-//		containterTypeRidget.setSelection(0);
-//		//unit search combo
-//		unitMeasureRidget = getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_UnitOfMeasureCombo);
-//		List<String> unitOfMeasureList = new ArrayList<String>(); 
-//		unitOfMeasureList.add("All Unit of Measure");
-//
-//		List<UnitOfMeasure> values = UnitOfMeasure.VALUES;
-//		for(UnitOfMeasure value : values){
-//			unitOfMeasureList.add(value.toString());
-//		}
-//		unitMeasureRidget.bindToModel(new WritableList(unitOfMeasureList, String.class), String.class, null, new WritableValue());
-//		unitMeasureRidget.updateFromModel();
-//		unitMeasureRidget.setEmptySelectionItem("All Units of Measure");
-//		unitMeasureRidget.setSelection(0);
-//		
-//		filterButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_FilterButton);
+
 		
 		containerTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 		containerTable.setColumnFormatter(1, new ColumnFormatter() {
