@@ -86,9 +86,9 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		main.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,true).applyTo(main);
 		
-		Button searchButton = UIControlsFactory.createButton(main,"Search", ViewWidgetId.memberInfo_searchButton);
+		/*Button searchButton = UIControlsFactory.createButton(main,"Search", ViewWidgetId.memberInfo_searchButton);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false,false).applyTo(searchButton);
-		
+		*/
 		createMemberSelectorGroup(main);
 		createMasterDetails(main);
 		
@@ -248,7 +248,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		Composite filterPanel = UIControlsFactory.createComposite(containerComposite, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true, false).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(4,false));
-		Combo columnCombo =  UIControlsFactory.createCombo(filterPanel, ViewWidgetId.CONTAINER_ColumnFilterCombo);
+		/*Combo columnCombo =  UIControlsFactory.createCombo(filterPanel, ViewWidgetId.CONTAINER_ColumnFilterCombo);
 		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true, false).applyTo(columnCombo);
 		
 		Combo compareCombo =  UIControlsFactory.createCombo(filterPanel, ViewWidgetId.CONTAINER_CompareExpressionCombo);
@@ -274,7 +274,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		addUIControl(filterButton,ViewWidgetId.CONTAINER_FilterButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true, false).applyTo(filterButton);
 		
-		
+		*/
 		Composite containerPanel = UIControlsFactory.createComposite(containerComposite, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true, true).applyTo(containerPanel);
 		
