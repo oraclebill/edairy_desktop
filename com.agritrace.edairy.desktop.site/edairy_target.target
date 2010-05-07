@@ -17,5 +17,11 @@
 <unit id="org.eclipse.riena.build.feature.core.sdk.feature.group" version="2.0.0.v20100316_2_0_0_M6"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.query.sdk.feature.group" version="1.4.0.v20091215-1624-67DBg95GFyJEJHqPQVWPNZUpIt95"/>
+<unit id="org.eclipse.emf.teneo.eclipselink.sdk.feature.group" version="1.1.0.v201003162147"/>
+<unit id="org.eclipse.emf.teneo.hibernate.sdk.feature.group" version="1.1.2.v201003162147"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
 </locations>
 </target>

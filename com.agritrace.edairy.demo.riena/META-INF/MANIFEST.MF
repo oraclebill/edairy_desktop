@@ -8,7 +8,10 @@ Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
  com.agritrace.edairy.model;bundle-version="1.0.0",
  org.eclipse.emf.databinding;bundle-version="1.2.0",
- com.agritrace.edairy.common
+ com.agritrace.edairy.common,
+ org.eclipse.emf.query;bundle-version="1.2.100",
+ org.eclipse.emf.teneo;bundle-version="1.1.2",
+ org.eclipse.emf.teneo.eclipselink;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.ui,
