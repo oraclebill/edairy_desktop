@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
  com.agritrace.edairy.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.ui,
+Export-Package: com.agritrace.edairy.dairy.ui.controllers,
+ com.agritrace.edairy.ui,
  com.agritrace.edairy.ui.controllers,
  com.agritrace.edairy.ui.splashHandlers,
  com.agritrace.edairy.ui.views,

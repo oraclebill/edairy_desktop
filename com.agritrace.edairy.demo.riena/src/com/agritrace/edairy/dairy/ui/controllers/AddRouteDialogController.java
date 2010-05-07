@@ -3,17 +3,19 @@ package com.agritrace.edairy.dairy.ui.controllers;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
-import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.common.datamodel.dairy.Route;
 import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController.RouteService;
+import com.agritrace.edairy.model.dairy.DairyFactory;
+import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class AddRouteDialogController extends AbstractWindowController {
 	public static final String RIDGET_ID_ROUTE_ID = "routeId"; //$NON-NLS-1$
 	public static final String RIDGET_ID_NAME = "name"; //$NON-NLS-1$
 	public static final String RIDGET_ID_DESCRIPTION = "description"; //$NON-NLS-1$
+	public static final String RIDGET_ID_CODE = "code"; //$NON-NLS-1$
 	public static final String RIDGET_ID_SAVE = "saveButton"; //$NON-NLS-1$
 	public static final String RIDGET_ID_CANCEL = "cancelButton"; //$NON-NLS-1$
 	
@@ -37,10 +39,10 @@ public class AddRouteDialogController extends AbstractWindowController {
 
 		final Route route = service.getRoutes().get(0);
 		
-		final ITextRidget routeId = getRidget(ITextRidget.class, RIDGET_ID_ROUTE_ID);
+/*		final ITextRidget routeId = getRidget(ITextRidget.class, RIDGET_ID_ROUTE_ID);
 		routeId.setOutputOnly(true);
 		routeId.bindToModel(route, "routeId");
-		routeId.updateFromModel();
+		routeId.updateFromModel();*/
 		
 		textName = getRidget(ITextRidget.class, RIDGET_ID_NAME);
 		textName.bindToModel(route, "name");
@@ -49,6 +51,10 @@ public class AddRouteDialogController extends AbstractWindowController {
 		final ITextRidget routeDescription = getRidget(ITextRidget.class, RIDGET_ID_DESCRIPTION);
 		routeDescription.bindToModel(route, "description");
 		routeDescription.updateFromModel();
+		
+		final ITextRidget routeCode = getRidget(ITextRidget.class, RIDGET_ID_CODE);
+		routeCode.bindToModel(route, "code");
+		routeCode.updateFromModel();
 		
 		duplicateNameDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DUPLICATE_NAME_DIALOG);
 		duplicateNameDialog.setType(IMessageBoxRidget.Type.ERROR);
@@ -78,11 +84,11 @@ public class AddRouteDialogController extends AbstractWindowController {
 	{
 		service = new RouteService();
 		for (int i = 0 ; i < 5; i ++) {
-			Route r = new Route();
+			Route r = DairyFactory.eINSTANCE.createRoute();
 			r.setName("route name " + i);
 			r.setDescription("route description" + i);
-			r.setRouteId((long)i);
 			r.setDescription("route desc " + i);
+			r.setCode("#12345" + i);
 			service.getRoutes().add(r);
 		}
 		
