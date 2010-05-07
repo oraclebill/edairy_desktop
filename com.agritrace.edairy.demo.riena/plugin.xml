@@ -90,8 +90,8 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.ServiceRequestLogView"
-            id="com.agritrace.edairy.ui.views.ServiceRequestLogView"
+            class="com.agritrace.edairy.service.ui.views.ServiceRequestLogView"
+            id="com.agritrace.edairy.service.ui.views.ServiceRequestLogView"
             name="ServiceRequestLogView"
             restorable="true">
       </view>
