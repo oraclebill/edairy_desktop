@@ -18,9 +18,9 @@ import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
 
 import com.agritrace.edairy.model.impl.ModelPackageImpl;
 
-import com.agritrace.edairy.model.requests.requests.RequestsPackage;
+import com.agritrace.edairy.model.requests.RequestsPackage;
 
-import com.agritrace.edairy.model.requests.requests.impl.RequestsPackageImpl;
+import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
 
 import com.agritrace.edairy.model.tracking.AcquisitionType;
 import com.agritrace.edairy.model.tracking.AnimalIdentifier;
@@ -281,7 +281,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getContainer_Units() {
+	public EAttribute getContainer_Type() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -290,17 +290,8 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getContainer_Type() {
-		return (EAttribute)containerEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getContainer_MeasureType() {
-		return (EAttribute)containerEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)containerEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -585,7 +576,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEAttribute(containerEClass, CONTAINER__CONTAINER_ID);
 		createEReference(containerEClass, CONTAINER__OWNER);
 		createEAttribute(containerEClass, CONTAINER__CAPACITY);
-		createEAttribute(containerEClass, CONTAINER__UNITS);
 		createEAttribute(containerEClass, CONTAINER__TYPE);
 		createEAttribute(containerEClass, CONTAINER__MEASURE_TYPE);
 
@@ -670,7 +660,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEAttribute(getContainer_ContainerId(), ecorePackage.getEString(), "containerId", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainer_Owner(), this.getFarm(), null, "owner", null, 1, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContainer_Units(), ecorePackage.getEDouble(), "units", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Type(), theModelPackage.getContainerType(), "type", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_MeasureType(), theModelPackage.getUnitOfMeasure(), "measureType", null, 0, 1, com.agritrace.edairy.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

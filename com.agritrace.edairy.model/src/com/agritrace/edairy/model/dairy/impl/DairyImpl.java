@@ -18,11 +18,12 @@ import com.agritrace.edairy.model.dairy.Vehicle;
 
 import com.agritrace.edairy.model.impl.CompanyImpl;
 
-import com.agritrace.edairy.model.requests.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 
 import com.agritrace.edairy.model.tracking.Farm;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -45,24 +46,47 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getRegistrationNumber <em>Registration Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getNssfNumber <em>Nssf Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getFederalPin <em>Federal Pin</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getLicenseEffectiveDate <em>License Effective Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getLicenseExpirationDate <em>License Expiration Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getRoutes <em>Routes</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getVehicles <em>Vehicles</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getEmployees <em>Employees</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getMemberships <em>Memberships</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getBranchLocations <em>Branch Locations</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getRegistrationNumber <em>Registration Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getCollectionJournals <em>Collection Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getDairyId <em>Dairy Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class DairyImpl extends CompanyImpl implements Dairy {
+	/**
+	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegistrationNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REGISTRATION_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegistrationNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String registrationNumber = REGISTRATION_NUMBER_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,6 +148,46 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected String federalPin = FEDERAL_PIN_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getLicenseEffectiveDate() <em>License Effective Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLicenseEffectiveDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date LICENSE_EFFECTIVE_DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLicenseEffectiveDate() <em>License Effective Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLicenseEffectiveDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date licenseEffectiveDate = LICENSE_EFFECTIVE_DATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLicenseExpirationDate() <em>License Expiration Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLicenseExpirationDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date LICENSE_EXPIRATION_DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLicenseExpirationDate() <em>License Expiration Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLicenseExpirationDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date licenseExpirationDate = LICENSE_EXPIRATION_DATE_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getRoutes() <em>Routes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -174,26 +238,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected EList<DairyLocation> branchLocations;
 
 	/**
-	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRegistrationNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String REGISTRATION_NUMBER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRegistrationNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected String registrationNumber = REGISTRATION_NUMBER_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getCollectionJournals() <em>Collection Journals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -224,6 +268,26 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected EList<AnimalHealthRequest> animalHealthRequests;
 
 	/**
+	 * The default value of the '{@link #getDairyId() <em>Dairy Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDairyId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long DAIRY_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDairyId() <em>Dairy Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDairyId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long dairyId = DAIRY_ID_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -240,6 +304,27 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.DAIRY;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getRegistrationNumber() {
+		return registrationNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRegistrationNumber(String newRegistrationNumber) {
+		String oldRegistrationNumber = registrationNumber;
+		registrationNumber = newRegistrationNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
 	}
 
 	/**
@@ -310,6 +395,48 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Date getLicenseEffectiveDate() {
+		return licenseEffectiveDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLicenseEffectiveDate(Date newLicenseEffectiveDate) {
+		Date oldLicenseEffectiveDate = licenseEffectiveDate;
+		licenseEffectiveDate = newLicenseEffectiveDate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE, oldLicenseEffectiveDate, licenseEffectiveDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Date getLicenseExpirationDate() {
+		return licenseExpirationDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLicenseExpirationDate(Date newLicenseExpirationDate) {
+		Date oldLicenseExpirationDate = licenseExpirationDate;
+		licenseExpirationDate = newLicenseExpirationDate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__LICENSE_EXPIRATION_DATE, oldLicenseExpirationDate, licenseExpirationDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Route> getRoutes() {
 		if (routes == null) {
 			routes = new EObjectContainmentEList<Route>(Route.class, this, DairyPackage.DAIRY__ROUTES);
@@ -370,27 +497,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getRegistrationNumber() {
-		return registrationNumber;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRegistrationNumber(String newRegistrationNumber) {
-		String oldRegistrationNumber = registrationNumber;
-		registrationNumber = newRegistrationNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<CollectionJournal> getCollectionJournals() {
 		if (collectionJournals == null) {
 			collectionJournals = new EObjectContainmentEList<CollectionJournal>(CollectionJournal.class, this, DairyPackage.DAIRY__COLLECTION_JOURNALS);
@@ -420,6 +526,27 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			animalHealthRequests = new EObjectContainmentEList<AnimalHealthRequest>(AnimalHealthRequest.class, this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS);
 		}
 		return animalHealthRequests;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getDairyId() {
+		return dairyId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDairyId(Long newDairyId) {
+		Long oldDairyId = dairyId;
+		dairyId = newDairyId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__DAIRY_ID, oldDairyId, dairyId));
 	}
 
 	/**
@@ -467,12 +594,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
+				return getRegistrationNumber();
 			case DairyPackage.DAIRY__NHIF_NUMBER:
 				return getNhifNumber();
 			case DairyPackage.DAIRY__NSSF_NUMBER:
 				return getNssfNumber();
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				return getFederalPin();
+			case DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE:
+				return getLicenseEffectiveDate();
+			case DairyPackage.DAIRY__LICENSE_EXPIRATION_DATE:
+				return getLicenseExpirationDate();
 			case DairyPackage.DAIRY__ROUTES:
 				return getRoutes();
 			case DairyPackage.DAIRY__VEHICLES:
@@ -483,14 +616,14 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getMemberships();
 			case DairyPackage.DAIRY__BRANCH_LOCATIONS:
 				return getBranchLocations();
-			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
-				return getRegistrationNumber();
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				return getCollectionJournals();
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return getSuppliers();
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return getAnimalHealthRequests();
+			case DairyPackage.DAIRY__DAIRY_ID:
+				return getDairyId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -504,6 +637,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
+				setRegistrationNumber((String)newValue);
+				return;
 			case DairyPackage.DAIRY__NHIF_NUMBER:
 				setNhifNumber((String)newValue);
 				return;
@@ -512,6 +648,12 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				setFederalPin((String)newValue);
+				return;
+			case DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE:
+				setLicenseEffectiveDate((Date)newValue);
+				return;
+			case DairyPackage.DAIRY__LICENSE_EXPIRATION_DATE:
+				setLicenseExpirationDate((Date)newValue);
 				return;
 			case DairyPackage.DAIRY__ROUTES:
 				getRoutes().clear();
@@ -533,9 +675,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				getBranchLocations().clear();
 				getBranchLocations().addAll((Collection<? extends DairyLocation>)newValue);
 				return;
-			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
-				setRegistrationNumber((String)newValue);
-				return;
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				getCollectionJournals().clear();
 				getCollectionJournals().addAll((Collection<? extends CollectionJournal>)newValue);
@@ -547,6 +686,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				getAnimalHealthRequests().clear();
 				getAnimalHealthRequests().addAll((Collection<? extends AnimalHealthRequest>)newValue);
+				return;
+			case DairyPackage.DAIRY__DAIRY_ID:
+				setDairyId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -560,6 +702,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
+				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
+				return;
 			case DairyPackage.DAIRY__NHIF_NUMBER:
 				setNhifNumber(NHIF_NUMBER_EDEFAULT);
 				return;
@@ -568,6 +713,12 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				setFederalPin(FEDERAL_PIN_EDEFAULT);
+				return;
+			case DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE:
+				setLicenseEffectiveDate(LICENSE_EFFECTIVE_DATE_EDEFAULT);
+				return;
+			case DairyPackage.DAIRY__LICENSE_EXPIRATION_DATE:
+				setLicenseExpirationDate(LICENSE_EXPIRATION_DATE_EDEFAULT);
 				return;
 			case DairyPackage.DAIRY__ROUTES:
 				getRoutes().clear();
@@ -584,9 +735,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__BRANCH_LOCATIONS:
 				getBranchLocations().clear();
 				return;
-			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
-				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
-				return;
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				getCollectionJournals().clear();
 				return;
@@ -595,6 +743,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				getAnimalHealthRequests().clear();
+				return;
+			case DairyPackage.DAIRY__DAIRY_ID:
+				setDairyId(DAIRY_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -608,12 +759,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
+				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
 			case DairyPackage.DAIRY__NHIF_NUMBER:
 				return NHIF_NUMBER_EDEFAULT == null ? nhifNumber != null : !NHIF_NUMBER_EDEFAULT.equals(nhifNumber);
 			case DairyPackage.DAIRY__NSSF_NUMBER:
 				return NSSF_NUMBER_EDEFAULT == null ? nssfNumber != null : !NSSF_NUMBER_EDEFAULT.equals(nssfNumber);
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				return FEDERAL_PIN_EDEFAULT == null ? federalPin != null : !FEDERAL_PIN_EDEFAULT.equals(federalPin);
+			case DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE:
+				return LICENSE_EFFECTIVE_DATE_EDEFAULT == null ? licenseEffectiveDate != null : !LICENSE_EFFECTIVE_DATE_EDEFAULT.equals(licenseEffectiveDate);
+			case DairyPackage.DAIRY__LICENSE_EXPIRATION_DATE:
+				return LICENSE_EXPIRATION_DATE_EDEFAULT == null ? licenseExpirationDate != null : !LICENSE_EXPIRATION_DATE_EDEFAULT.equals(licenseExpirationDate);
 			case DairyPackage.DAIRY__ROUTES:
 				return routes != null && !routes.isEmpty();
 			case DairyPackage.DAIRY__VEHICLES:
@@ -624,14 +781,14 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return memberships != null && !memberships.isEmpty();
 			case DairyPackage.DAIRY__BRANCH_LOCATIONS:
 				return branchLocations != null && !branchLocations.isEmpty();
-			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
-				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				return collectionJournals != null && !collectionJournals.isEmpty();
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return suppliers != null && !suppliers.isEmpty();
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return animalHealthRequests != null && !animalHealthRequests.isEmpty();
+			case DairyPackage.DAIRY__DAIRY_ID:
+				return DAIRY_ID_EDEFAULT == null ? dairyId != null : !DAIRY_ID_EDEFAULT.equals(dairyId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -646,14 +803,20 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (nhifNumber: ");
+		result.append(" (registrationNumber: ");
+		result.append(registrationNumber);
+		result.append(", nhifNumber: ");
 		result.append(nhifNumber);
 		result.append(", nssfNumber: ");
 		result.append(nssfNumber);
 		result.append(", federalPin: ");
 		result.append(federalPin);
-		result.append(", registrationNumber: ");
-		result.append(registrationNumber);
+		result.append(", licenseEffectiveDate: ");
+		result.append(licenseEffectiveDate);
+		result.append(", licenseExpirationDate: ");
+		result.append(licenseExpirationDate);
+		result.append(", dairyId: ");
+		result.append(dairyId);
 		result.append(')');
 		return result.toString();
 	}

@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getContainerId <em>Container Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getCapacity <em>Capacity</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getUnits <em>Units</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.impl.ContainerImpl#getMeasureType <em>Measure Type</em>}</li>
  * </ul>
@@ -89,26 +88,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @ordered
 	 */
 	protected double capacity = CAPACITY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getUnits() <em>Units</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUnits()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double UNITS_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getUnits() <em>Units</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUnits()
-	 * @generated
-	 * @ordered
-	 */
-	protected double units = UNITS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -254,27 +233,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getUnits() {
-		return units;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUnits(double newUnits) {
-		double oldUnits = units;
-		units = newUnits;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__UNITS, oldUnits, units));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ContainerType getType() {
 		return type;
 	}
@@ -327,8 +285,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return basicGetOwner();
 			case TrackingPackage.CONTAINER__CAPACITY:
 				return getCapacity();
-			case TrackingPackage.CONTAINER__UNITS:
-				return getUnits();
 			case TrackingPackage.CONTAINER__TYPE:
 				return getType();
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
@@ -353,9 +309,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				setCapacity((Double)newValue);
-				return;
-			case TrackingPackage.CONTAINER__UNITS:
-				setUnits((Double)newValue);
 				return;
 			case TrackingPackage.CONTAINER__TYPE:
 				setType((ContainerType)newValue);
@@ -384,9 +337,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__CAPACITY:
 				setCapacity(CAPACITY_EDEFAULT);
 				return;
-			case TrackingPackage.CONTAINER__UNITS:
-				setUnits(UNITS_EDEFAULT);
-				return;
 			case TrackingPackage.CONTAINER__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -411,8 +361,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return owner != null;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				return capacity != CAPACITY_EDEFAULT;
-			case TrackingPackage.CONTAINER__UNITS:
-				return units != UNITS_EDEFAULT;
 			case TrackingPackage.CONTAINER__TYPE:
 				return type != TYPE_EDEFAULT;
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
@@ -435,8 +383,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		result.append(containerId);
 		result.append(", capacity: ");
 		result.append(capacity);
-		result.append(", units: ");
-		result.append(units);
 		result.append(", type: ");
 		result.append(type);
 		result.append(", measureType: ");

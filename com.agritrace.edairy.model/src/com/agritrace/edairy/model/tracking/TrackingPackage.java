@@ -162,22 +162,13 @@ public interface TrackingPackage extends EPackage {
 	int CONTAINER__CAPACITY = 2;
 
 	/**
-	 * The feature id for the '<em><b>Units</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTAINER__UNITS = 3;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__TYPE = 4;
+	int CONTAINER__TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Measure Type</b></em>' attribute.
@@ -186,7 +177,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__MEASURE_TYPE = 5;
+	int CONTAINER__MEASURE_TYPE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Container</em>' class.
@@ -195,7 +186,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_FEATURE_COUNT = 6;
+	int CONTAINER_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.tracking.impl.RegisteredAnimalImpl <em>Registered Animal</em>}' class.
@@ -582,17 +573,6 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getContainer_Capacity();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.tracking.Container#getUnits <em>Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Units</em>'.
-	 * @see com.agritrace.edairy.model.tracking.Container#getUnits()
-	 * @see #getContainer()
-	 * @generated
-	 */
-	EAttribute getContainer_Units();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.tracking.Container#getType <em>Type</em>}'.
@@ -1011,14 +991,6 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTAINER__CAPACITY = eINSTANCE.getContainer_Capacity();
-
-		/**
-		 * The meta object literal for the '<em><b>Units</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTAINER__UNITS = eINSTANCE.getContainer_Units();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.

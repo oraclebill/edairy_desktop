@@ -7,11 +7,6 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4"
-Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.model,
  com.agritrace.edairy.model.dairy,
  com.agritrace.edairy.model.dairy.account,
@@ -20,10 +15,14 @@ Export-Package: com.agritrace.edairy.model,
  com.agritrace.edairy.model.dairy.impl,
  com.agritrace.edairy.model.dairy.util,
  com.agritrace.edairy.model.impl,
- com.agritrace.edairy.model.requests.requests,
- com.agritrace.edairy.model.requests.requests.impl,
- com.agritrace.edairy.model.requests.requests.util,
+ com.agritrace.edairy.model.requests,
+ com.agritrace.edairy.model.requests.impl,
+ com.agritrace.edairy.model.requests.util,
  com.agritrace.edairy.model.tracking,
  com.agritrace.edairy.model.tracking.impl,
  com.agritrace.edairy.model.tracking.util,
  com.agritrace.edairy.model.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport
+Bundle-ActivationPolicy: lazy

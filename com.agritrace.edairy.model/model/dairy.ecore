@@ -113,9 +113,14 @@
         <eTypeArguments eClassifier="ecore:EClass farm.ecore#//Farm"/>
       </eGenericType>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nhifNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nssfNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="federalPin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseEffectiveDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseExpirationDate"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
         eType="#//Route" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" upperBound="-1"
@@ -126,14 +131,14 @@
         eType="#//Membership" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" upperBound="-1"
         eType="#//DairyLocation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
         eType="#//CollectionJournal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" upperBound="-1"
         eType="#//Supplier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
         eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dairyId" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Membership">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" lowerBound="1"

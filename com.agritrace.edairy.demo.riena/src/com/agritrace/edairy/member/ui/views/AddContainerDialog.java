@@ -221,14 +221,14 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 			if(value != null && !value.trim().equals("")){
 				try{
 					double unitsValue  = new Double(value).doubleValue();
-					newContainer.setUnits(unitsValue);
+//					newContainer.setUnits(unitsValue);
 					if(unitsDecorator.isVisible()){
 						setErrorMessage(null);
 						unitsDecorator.hide();	
 					}
 					
 				}catch(NumberFormatException ex){
-					newContainer.setUnits(0);
+//					newContainer.setUnits(0);
 					unitsDecorator.show();
 					setErrorMessage("Invalid number format");
 				}
@@ -259,7 +259,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		
 	}
 	private boolean validate(){
-		return newContainer.getContainerId() != null && newContainer.getType() != null && newContainer.getUnits() != 0 && newContainer.getMeasureType() != null && newContainer.getCapacity() != 0;
+		return newContainer.getContainerId() != null && newContainer.getType() != null && newContainer.getMeasureType() != null && newContainer.getCapacity() != 0;
 	}
 
 	private ControlDecoration createDecorator(Text text, String message) {

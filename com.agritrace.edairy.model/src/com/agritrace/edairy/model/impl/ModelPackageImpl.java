@@ -31,9 +31,9 @@ import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
 
 import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
 
-import com.agritrace.edairy.model.requests.requests.RequestsPackage;
+import com.agritrace.edairy.model.requests.RequestsPackage;
 
-import com.agritrace.edairy.model.requests.requests.impl.RequestsPackageImpl;
+import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
 
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 

@@ -1128,13 +1128,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__REGISTRATION_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__NHIF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 0;
+	int DAIRY__NHIF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
@@ -1143,7 +1152,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__NSSF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 1;
+	int DAIRY__NSSF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Federal Pin</b></em>' attribute.
@@ -1152,7 +1161,25 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__FEDERAL_PIN = ModelPackage.COMPANY_FEATURE_COUNT + 2;
+	int DAIRY__FEDERAL_PIN = ModelPackage.COMPANY_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>License Effective Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__LICENSE_EFFECTIVE_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>License Expiration Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__LICENSE_EXPIRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Routes</b></em>' containment reference list.
@@ -1161,7 +1188,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__ROUTES = ModelPackage.COMPANY_FEATURE_COUNT + 3;
+	int DAIRY__ROUTES = ModelPackage.COMPANY_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Vehicles</b></em>' containment reference list.
@@ -1170,7 +1197,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__VEHICLES = ModelPackage.COMPANY_FEATURE_COUNT + 4;
+	int DAIRY__VEHICLES = ModelPackage.COMPANY_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Employees</b></em>' containment reference list.
@@ -1179,7 +1206,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__EMPLOYEES = ModelPackage.COMPANY_FEATURE_COUNT + 5;
+	int DAIRY__EMPLOYEES = ModelPackage.COMPANY_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Memberships</b></em>' containment reference list.
@@ -1188,7 +1215,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__MEMBERSHIPS = ModelPackage.COMPANY_FEATURE_COUNT + 6;
+	int DAIRY__MEMBERSHIPS = ModelPackage.COMPANY_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Branch Locations</b></em>' containment reference list.
@@ -1197,16 +1224,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__BRANCH_LOCATIONS = ModelPackage.COMPANY_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__REGISTRATION_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 8;
+	int DAIRY__BRANCH_LOCATIONS = ModelPackage.COMPANY_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Collection Journals</b></em>' containment reference list.
@@ -1215,7 +1233,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 9;
+	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Suppliers</b></em>' reference list.
@@ -1224,7 +1242,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__SUPPLIERS = ModelPackage.COMPANY_FEATURE_COUNT + 10;
+	int DAIRY__SUPPLIERS = ModelPackage.COMPANY_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Animal Health Requests</b></em>' containment reference list.
@@ -1233,7 +1251,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
+	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Dairy Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__DAIRY_ID = ModelPackage.COMPANY_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
@@ -1242,7 +1269,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 12;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -1362,15 +1389,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int DAIRY_CONTAINER__CAPACITY = TrackingPackage.CONTAINER__CAPACITY;
-
-	/**
-	 * The feature id for the '<em><b>Units</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY_CONTAINER__UNITS = TrackingPackage.CONTAINER__UNITS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -2469,6 +2487,17 @@ public interface DairyPackage extends EPackage {
 	EClass getDairy();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Dairy#getRegistrationNumber <em>Registration Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Registration Number</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Dairy#getRegistrationNumber()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_RegistrationNumber();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Dairy#getNhifNumber <em>Nhif Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2500,6 +2529,28 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDairy_FederalPin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Dairy#getLicenseEffectiveDate <em>License Effective Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>License Effective Date</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Dairy#getLicenseEffectiveDate()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_LicenseEffectiveDate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Dairy#getLicenseExpirationDate <em>License Expiration Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>License Expiration Date</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Dairy#getLicenseExpirationDate()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_LicenseExpirationDate();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.model.dairy.Dairy#getRoutes <em>Routes</em>}'.
@@ -2557,17 +2608,6 @@ public interface DairyPackage extends EPackage {
 	EReference getDairy_BranchLocations();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Dairy#getRegistrationNumber <em>Registration Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Registration Number</em>'.
-	 * @see com.agritrace.edairy.model.dairy.Dairy#getRegistrationNumber()
-	 * @see #getDairy()
-	 * @generated
-	 */
-	EAttribute getDairy_RegistrationNumber();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.model.dairy.Dairy#getCollectionJournals <em>Collection Journals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2599,6 +2639,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDairy_AnimalHealthRequests();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Dairy#getDairyId <em>Dairy Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Dairy Id</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Dairy#getDairyId()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_DairyId();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.dairy.Membership <em>Membership</em>}'.
@@ -3529,6 +3580,14 @@ public interface DairyPackage extends EPackage {
 		EClass DAIRY = eINSTANCE.getDairy();
 
 		/**
+		 * The meta object literal for the '<em><b>Registration Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__REGISTRATION_NUMBER = eINSTANCE.getDairy_RegistrationNumber();
+
+		/**
 		 * The meta object literal for the '<em><b>Nhif Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3551,6 +3610,22 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DAIRY__FEDERAL_PIN = eINSTANCE.getDairy_FederalPin();
+
+		/**
+		 * The meta object literal for the '<em><b>License Effective Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__LICENSE_EFFECTIVE_DATE = eINSTANCE.getDairy_LicenseEffectiveDate();
+
+		/**
+		 * The meta object literal for the '<em><b>License Expiration Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__LICENSE_EXPIRATION_DATE = eINSTANCE.getDairy_LicenseExpirationDate();
 
 		/**
 		 * The meta object literal for the '<em><b>Routes</b></em>' containment reference list feature.
@@ -3593,14 +3668,6 @@ public interface DairyPackage extends EPackage {
 		EReference DAIRY__BRANCH_LOCATIONS = eINSTANCE.getDairy_BranchLocations();
 
 		/**
-		 * The meta object literal for the '<em><b>Registration Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DAIRY__REGISTRATION_NUMBER = eINSTANCE.getDairy_RegistrationNumber();
-
-		/**
 		 * The meta object literal for the '<em><b>Collection Journals</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3623,6 +3690,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DAIRY__ANIMAL_HEALTH_REQUESTS = eINSTANCE.getDairy_AnimalHealthRequests();
+
+		/**
+		 * The meta object literal for the '<em><b>Dairy Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__DAIRY_ID = eINSTANCE.getDairy_DairyId();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.

@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getContainerId <em>Container Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getCapacity <em>Capacity</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.tracking.Container#getUnits <em>Units</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.tracking.Container#getMeasureType <em>Measure Type</em>}</li>
  * </ul>
@@ -110,32 +109,6 @@ public interface Container extends EObject {
 	 * @generated
 	 */
 	void setCapacity(double value);
-
-	/**
-	 * Returns the value of the '<em><b>Units</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Units</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Units</em>' attribute.
-	 * @see #setUnits(double)
-	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Units()
-	 * @model
-	 * @generated
-	 */
-	double getUnits();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getUnits <em>Units</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Units</em>' attribute.
-	 * @see #getUnits()
-	 * @generated
-	 */
-	void setUnits(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

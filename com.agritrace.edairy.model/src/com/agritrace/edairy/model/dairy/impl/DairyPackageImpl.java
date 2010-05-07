@@ -34,9 +34,9 @@ import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
 
 import com.agritrace.edairy.model.impl.ModelPackageImpl;
 
-import com.agritrace.edairy.model.requests.requests.RequestsPackage;
+import com.agritrace.edairy.model.requests.RequestsPackage;
 
-import com.agritrace.edairy.model.requests.requests.impl.RequestsPackageImpl;
+import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
 
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
@@ -870,7 +870,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairy_NhifNumber() {
+	public EAttribute getDairy_RegistrationNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -879,7 +879,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairy_NssfNumber() {
+	public EAttribute getDairy_NhifNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -888,7 +888,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairy_FederalPin() {
+	public EAttribute getDairy_NssfNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -897,34 +897,34 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDairy_FederalPin() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDairy_LicenseEffectiveDate() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDairy_LicenseExpirationDate() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getDairy_Routes() {
-		return (EReference)dairyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDairy_Vehicles() {
-		return (EReference)dairyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDairy_Employees() {
-		return (EReference)dairyEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDairy_Memberships() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -933,7 +933,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_BranchLocations() {
+	public EReference getDairy_Vehicles() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -942,8 +942,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairy_RegistrationNumber() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(8);
+	public EReference getDairy_Employees() {
+		return (EReference)dairyEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -951,7 +951,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_CollectionJournals() {
+	public EReference getDairy_Memberships() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -960,7 +960,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_Suppliers() {
+	public EReference getDairy_BranchLocations() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -969,8 +969,35 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_AnimalHealthRequests() {
+	public EReference getDairy_CollectionJournals() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDairy_Suppliers() {
+		return (EReference)dairyEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDairy_AnimalHealthRequests() {
+		return (EReference)dairyEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDairy_DairyId() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1365,18 +1392,21 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__REFERENCE_NUMBER);
 
 		dairyEClass = createEClass(DAIRY);
+		createEAttribute(dairyEClass, DAIRY__REGISTRATION_NUMBER);
 		createEAttribute(dairyEClass, DAIRY__NHIF_NUMBER);
 		createEAttribute(dairyEClass, DAIRY__NSSF_NUMBER);
 		createEAttribute(dairyEClass, DAIRY__FEDERAL_PIN);
+		createEAttribute(dairyEClass, DAIRY__LICENSE_EFFECTIVE_DATE);
+		createEAttribute(dairyEClass, DAIRY__LICENSE_EXPIRATION_DATE);
 		createEReference(dairyEClass, DAIRY__ROUTES);
 		createEReference(dairyEClass, DAIRY__VEHICLES);
 		createEReference(dairyEClass, DAIRY__EMPLOYEES);
 		createEReference(dairyEClass, DAIRY__MEMBERSHIPS);
 		createEReference(dairyEClass, DAIRY__BRANCH_LOCATIONS);
-		createEAttribute(dairyEClass, DAIRY__REGISTRATION_NUMBER);
 		createEReference(dairyEClass, DAIRY__COLLECTION_JOURNALS);
 		createEReference(dairyEClass, DAIRY__SUPPLIERS);
 		createEReference(dairyEClass, DAIRY__ANIMAL_HEALTH_REQUESTS);
+		createEAttribute(dairyEClass, DAIRY__DAIRY_ID);
 
 		membershipEClass = createEClass(MEMBERSHIP);
 		createEAttribute(membershipEClass, MEMBERSHIP__MEMBER_ID);
@@ -1538,18 +1568,21 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getDeliveryJournal_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyEClass, Dairy.class, "Dairy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDairy_RegistrationNumber(), ecorePackage.getEString(), "registrationNumber", null, 1, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairy_NhifNumber(), ecorePackage.getEString(), "nhifNumber", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairy_NssfNumber(), ecorePackage.getEString(), "nssfNumber", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairy_FederalPin(), ecorePackage.getEString(), "federalPin", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDairy_LicenseEffectiveDate(), ecorePackage.getEDate(), "licenseEffectiveDate", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDairy_LicenseExpirationDate(), ecorePackage.getEDate(), "licenseExpirationDate", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Routes(), this.getRoute(), null, "routes", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Vehicles(), this.getVehicle(), null, "vehicles", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Employees(), this.getEmployee(), null, "employees", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Memberships(), this.getMembership(), null, "memberships", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_BranchLocations(), this.getDairyLocation(), null, "branchLocations", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDairy_RegistrationNumber(), ecorePackage.getEString(), "registrationNumber", null, 1, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_CollectionJournals(), this.getCollectionJournal(), null, "collectionJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_AnimalHealthRequests(), theRequestsPackage.getAnimalHealthRequest(), null, "animalHealthRequests", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDairy_DairyId(), theModelPackage.getUniqueID(), "dairyId", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(dairyEClass, null, "getMemberFarms", 1, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEEList());

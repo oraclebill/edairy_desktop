@@ -338,7 +338,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			container.setContainerId("1001");
 			container.setOwner(farm);
 			container.setMeasureType(UnitOfMeasure.LITRE);
-			container.setUnits(50);
+//			container.setUnits(50);
 			container.setCapacity(50);
 			farm.getCans().add(container);
 			
@@ -347,7 +347,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			container.setContainerId("1002");
 			container.setOwner(farm);
 			container.setMeasureType(UnitOfMeasure.LITRE);
-			container.setUnits(50);
+//			container.setUnits(50);
 			container.setCapacity(40);
 			farm.getCans().add(container);
 			
@@ -379,7 +379,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			container.setContainerId("1003");
 			container.setOwner(farm1);
 			container.setMeasureType(UnitOfMeasure.LITRE);
-			container.setUnits(50);
+//			container.setUnits(50);
 			container.setCapacity(40);
 			farm1.getCans().add(container);
 			
@@ -388,7 +388,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			container.setContainerId("1004");
 			container.setOwner(farm1);
 			container.setMeasureType(UnitOfMeasure.LITRE);
-			container.setUnits(50);
+//			container.setUnits(50);
 			container.setCapacity(30);
 			farm1.getCans().add(container);
 			
