@@ -3,21 +3,19 @@
 
 <target name="edairy">
 <locations>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.rcp.sdk.id" version="3.6.0.I20100312-1448"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.0.v201003151457-8BA7-FXz1WHLEfz0L0HkGBYl9350"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.tptp.test.tools.junit.feature.group" version="4.6.2.v200912101900-7H7L4AkF7AG7LAIBGHB"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
 <unit id="org.eclipse.persistence.jpa.feature.group" version="2.1.0.v20100316-r6816"/>
 <unit id="org.eclipse.equinox.sdk.feature.group" version="3.6.0.v20090923-7G7R-7lz-qoAbhH4v9RpUbdn-4qz"/>
 <unit id="org.eclipse.riena.build.feature.core.sdk.feature.group" version="2.0.0.v20100316_2_0_0_M6"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.0.v201003151457-8BA7-FXz1WHLEfz0L0HkGBYl9350"/>
-<repository location="http://download.eclipse.org/releases/helios"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.tptp.test.tools.junit.feature.group" version="4.6.2.v200912101900-7H7L4AkF7AG7LAIBGHB"/>
-<repository location="http://download.eclipse.org/releases/helios"/>
-</location>
-<location id="org.eclipse.platform" path="${eclipse_home}" type="Feature"/>
 </locations>
 </target>

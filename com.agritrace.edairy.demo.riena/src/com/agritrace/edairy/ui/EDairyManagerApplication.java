@@ -173,7 +173,7 @@ public class EDairyManagerApplication extends SwtApplication {
 				new NavigationNodeId("edm.sysadmin"), "Administration", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleSystem.setClosable(false);
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.info"), "Dairy Profile", moduleSystem, DairyProfileView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.routes"), "Branch Locations", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.routes"), "Branch Locations", moduleSystem, DairyLocationView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.staff"), "Employee Directory", moduleSystem, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.vehicles"), "Vehicle Log", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.dairy.bins"), "Container Log", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
