@@ -21,12 +21,12 @@ import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.member.ui.views.MemberSearchView;
-
+import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
+import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
 import com.agritrace.edairy.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.ui.views.BlankView;
 import com.agritrace.edairy.ui.views.CreditJournalView;
 import com.agritrace.edairy.ui.views.DairyHomeView;
-import com.agritrace.edairy.ui.views.DairyProfileView;
 import com.agritrace.edairy.ui.views.DeliveryView;
 import com.agritrace.edairy.ui.views.InseminationRequestView;
 import com.agritrace.edairy.ui.views.MemberPayablesReportView;

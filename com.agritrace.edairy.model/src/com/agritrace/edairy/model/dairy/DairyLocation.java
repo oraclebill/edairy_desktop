@@ -10,6 +10,8 @@ import com.agritrace.edairy.model.Location;
 
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -27,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getFunctions <em>Functions</em>}</li>
  * </ul>
  * </p>
  *
@@ -216,5 +219,23 @@ public interface DairyLocation extends EObject {
 	 * @generated
 	 */
 	void setLocation(Location value);
+
+	/**
+	 * Returns the value of the '<em><b>Functions</b></em>' attribute list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.DairyFunction}.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.model.dairy.DairyFunction}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Functions</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Functions</em>' attribute list.
+	 * @see com.agritrace.edairy.model.dairy.DairyFunction
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairyLocation_Functions()
+	 * @model
+	 * @generated
+	 */
+	EList<DairyFunction> getFunctions();
 
 } // DairyLocation

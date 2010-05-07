@@ -772,13 +772,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_LOCATION__LOCATION = 6;
 
 	/**
+	 * The feature id for the '<em><b>Functions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_LOCATION__FUNCTIONS = 7;
+
+	/**
 	 * The number of structural features of the '<em>Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION_FEATURE_COUNT = 7;
+	int DAIRY_LOCATION_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl <em>Collection Journal</em>}' class.
@@ -1709,6 +1718,16 @@ public interface DairyPackage extends EPackage {
 	 */
 	int VENDOR_STATUS = 15;
 
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.DairyFunction <em>Function</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.model.dairy.DairyFunction
+	 * @see com.agritrace.edairy.model.dairy.impl.DairyPackageImpl#getDairyFunction()
+	 * @generated
+	 */
+	int DAIRY_FUNCTION = 16;
+
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.dairy.Vehicle <em>Vehicle</em>}'.
@@ -2167,6 +2186,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDairyLocation_Location();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.agritrace.edairy.model.dairy.DairyLocation#getFunctions <em>Functions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Functions</em>'.
+	 * @see com.agritrace.edairy.model.dairy.DairyLocation#getFunctions()
+	 * @see #getDairyLocation()
+	 * @generated
+	 */
+	EAttribute getDairyLocation_Functions();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.dairy.CollectionJournal <em>Collection Journal</em>}'.
@@ -2905,6 +2935,16 @@ public interface DairyPackage extends EPackage {
 	EEnum getVendorStatus();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.model.dairy.DairyFunction <em>Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Function</em>'.
+	 * @see com.agritrace.edairy.model.dairy.DairyFunction
+	 * @generated
+	 */
+	EEnum getDairyFunction();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3269,6 +3309,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DAIRY_LOCATION__LOCATION = eINSTANCE.getDairyLocation_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Functions</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY_LOCATION__FUNCTIONS = eINSTANCE.getDairyLocation_Functions();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl <em>Collection Journal</em>}' class.
@@ -3837,6 +3885,16 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum VENDOR_STATUS = eINSTANCE.getVendorStatus();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.DairyFunction <em>Function</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.model.dairy.DairyFunction
+		 * @see com.agritrace.edairy.model.dairy.impl.DairyPackageImpl#getDairyFunction()
+		 * @generated
+		 */
+		EEnum DAIRY_FUNCTION = eINSTANCE.getDairyFunction();
 
 	}
 

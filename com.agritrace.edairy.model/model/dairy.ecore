@@ -62,6 +62,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
         eType="ecore:EClass common.ecore#//Location" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functions" upperBound="-1"
+        eType="#//DairyFunction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionJournal">
     <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
@@ -197,6 +199,13 @@
     <eLiterals name="Invalid" value="2"/>
     <eLiterals name="Suspended" value="3"/>
     <eLiterals name="Other" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DairyFunction">
+    <eLiterals name="MilkCollection"/>
+    <eLiterals name="MilkStorage" value="1"/>
+    <eLiterals name="StoreSales" value="2"/>
+    <eLiterals name="Warehouse" value="3"/>
+    <eLiterals name="MilkProcessing" value="4"/>
   </eClassifiers>
   <eSubpackages name="account" nsURI="http://com.agritrace.edairy.model/account" nsPrefix="account">
     <eClassifiers xsi:type="ecore:EClass" name="Account">

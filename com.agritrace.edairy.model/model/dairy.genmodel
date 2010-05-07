@@ -27,6 +27,13 @@
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//VendorStatus/Suspended"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//VendorStatus/Other"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//DairyFunction">
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/MilkCollection"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/MilkStorage"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/StoreSales"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/Warehouse"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/MilkProcessing"/>
+    </genEnums>
     <genClasses ecoreClass="dairy.ecore#//Vehicle">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/registrationNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/type"/>
@@ -72,6 +79,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/code"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//DairyLocation/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/functions"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//CollectionJournal">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournal/journalEntries"/>

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -49,6 +50,7 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * @ordered
 	 */
 	protected EList<Person> contacts;
+
 	/**
 	 * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -58,6 +60,7 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * @ordered
 	 */
 	protected static final String LEGAL_NAME_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,6 +70,7 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * @ordered
 	 */
 	protected String legalName = LEGAL_NAME_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -76,6 +80,7 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * @ordered
 	 */
 	protected static final String COMPANY_NAME_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -85,6 +90,7 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * @ordered
 	 */
 	protected String companyName = COMPANY_NAME_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -8,7 +8,7 @@
  * Contributors:
  *    compeople AG - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.ui.views;
+package com.agritrace.edairy.dairy.ui.views;
 
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.SWT;
@@ -23,6 +23,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
+
+import com.agritrace.edairy.ui.views.LocationInfoGroup;
 
 public class DairyProfileView extends ViewPart {
 

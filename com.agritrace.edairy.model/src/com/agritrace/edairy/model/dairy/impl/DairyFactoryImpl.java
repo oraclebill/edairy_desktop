@@ -93,6 +93,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createSessionFromString(eDataType, initialValue);
 			case DairyPackage.VENDOR_STATUS:
 				return createVendorStatusFromString(eDataType, initialValue);
+			case DairyPackage.DAIRY_FUNCTION:
+				return createDairyFunctionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +114,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertSessionToString(eDataType, instanceValue);
 			case DairyPackage.VENDOR_STATUS:
 				return convertVendorStatusToString(eDataType, instanceValue);
+			case DairyPackage.DAIRY_FUNCTION:
+				return convertDairyFunctionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -304,6 +308,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertVendorStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyFunction createDairyFunctionFromString(EDataType eDataType, String initialValue) {
+		DairyFunction result = DairyFunction.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDairyFunctionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

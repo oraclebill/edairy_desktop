@@ -8,20 +8,26 @@ package com.agritrace.edairy.model.dairy.impl;
 
 import com.agritrace.edairy.model.Location;
 
+import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Route;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +43,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getFunctions <em>Functions</em>}</li>
  * </ul>
  * </p>
  *
@@ -162,6 +169,16 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @ordered
 	 */
 	protected Location location;
+
+	/**
+	 * The cached value of the '{@link #getFunctions() <em>Functions</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFunctions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DairyFunction> functions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -373,6 +390,18 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DairyFunction> getFunctions() {
+		if (functions == null) {
+			functions = new EDataTypeUniqueEList<DairyFunction>(DairyFunction.class, this, DairyPackage.DAIRY_LOCATION__FUNCTIONS);
+		}
+		return functions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -405,6 +434,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				return getCode();
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
 				return getLocation();
+			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
+				return getFunctions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -414,6 +445,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -437,6 +469,10 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				return;
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
 				setLocation((Location)newValue);
+				return;
+			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
+				getFunctions().clear();
+				getFunctions().addAll((Collection<? extends DairyFunction>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -471,6 +507,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
 				setLocation((Location)null);
 				return;
+			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
+				getFunctions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -497,6 +536,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
 				return location != null;
+			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
+				return functions != null && !functions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -521,6 +562,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		result.append(description);
 		result.append(", code: ");
 		result.append(code);
+		result.append(", functions: ");
+		result.append(functions);
 		result.append(')');
 		return result.toString();
 	}

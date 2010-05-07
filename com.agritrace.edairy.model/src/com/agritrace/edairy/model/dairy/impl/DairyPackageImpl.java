@@ -14,6 +14,7 @@ import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.DairyContainer;
 import com.agritrace.edairy.model.dairy.DairyFactory;
+import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.DeliveryJournal;
@@ -169,6 +170,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum vendorStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum dairyFunctionEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -621,6 +629,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EReference getDairyLocation_Location() {
 		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDairyLocation_Functions() {
+		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1240,6 +1257,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getDairyFunction() {
+		return dairyFunctionEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DairyFactory getDairyFactory() {
 		return (DairyFactory)getEFactoryInstance();
 	}
@@ -1308,6 +1334,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__DESCRIPTION);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__CODE);
 		createEReference(dairyLocationEClass, DAIRY_LOCATION__LOCATION);
+		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__FUNCTIONS);
 
 		collectionJournalEClass = createEClass(COLLECTION_JOURNAL);
 		createEReference(collectionJournalEClass, COLLECTION_JOURNAL__JOURNAL_ENTRIES);
@@ -1387,6 +1414,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
 		sessionEEnum = createEEnum(SESSION);
 		vendorStatusEEnum = createEEnum(VENDOR_STATUS);
+		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 	}
 
 	/**
@@ -1479,6 +1507,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getDairyLocation_Description(), ecorePackage.getEString(), "description", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_Code(), ecorePackage.getEString(), "code", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairyLocation_Location(), theModelPackage.getLocation(), null, "location", null, 1, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDairyLocation_Functions(), this.getDairyFunction(), "functions", null, 0, -1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collectionJournalEClass, CollectionJournal.class, "CollectionJournal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCollectionJournal_JournalEntries(), this.getCollectionJournalLine(), null, "journalEntries", null, 0, -1, CollectionJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1580,6 +1609,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(vendorStatusEEnum, VendorStatus.INVALID);
 		addEEnumLiteral(vendorStatusEEnum, VendorStatus.SUSPENDED);
 		addEEnumLiteral(vendorStatusEEnum, VendorStatus.OTHER);
+
+		initEEnum(dairyFunctionEEnum, DairyFunction.class, "DairyFunction");
+		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.MILK_COLLECTION);
+		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.MILK_STORAGE);
+		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.STORE_SALES);
+		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.WAREHOUSE);
+		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.MILK_PROCESSING);
 
 		// Create resource
 		createResource(eNS_URI);
