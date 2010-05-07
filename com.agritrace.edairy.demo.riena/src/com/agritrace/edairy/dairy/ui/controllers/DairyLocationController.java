@@ -34,6 +34,7 @@ import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class DairyLocationController extends SubModuleController {
+	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
 	//top-half window
 	public static final String RIDGET_ID_COLLECTION_CENTRE_ID = "collectionCentreId";
 	public static final String RIDGET_ID_NAME = "name";
@@ -55,6 +56,7 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_PL_DIVISION = "postalLocation.division";
 	public static final String RIDGET_ID_PL_POSTALCODE = "postalLocation.postalCode";
 	public static final String RIDGET_ID_PL_PROVINCE = "postalLocation.province";
+	public static final String DATE_FORMATE = "dd/MM/yyyy";
 	
 	//directions tab
 	public static final String RIDGET_ID_DL_LANDMARK = "locationLandmarks";
@@ -123,11 +125,11 @@ public class DairyLocationController extends SubModuleController {
 		phone.updateFromModel();
 		
 		final IDateTextRidget dateOpened = getRidget(IDateTextRidget.class, RIDGET_ID_DATEOPENED);
-		dateOpened.setFormat("dd/MM/yyyy");
+		dateOpened.setFormat(DATE_FORMATE);
 		dateOpened.bindToModel(dairyLocation, "dateOpened");
 		dateOpened.updateFromModel();
 
-		final IMultipleChoiceRidget functions = (IMultipleChoiceRidget) getRidget(RIDGET_ID_FUNCTIONS);
+		final IMultipleChoiceRidget functions = getRidget(IMultipleChoiceRidget.class, RIDGET_ID_FUNCTIONS);
 		functions.bindToModel(Arrays.asList(DairyFunction.MILK_COLLECTION, DairyFunction.MILK_STORAGE, DairyFunction.MILK_PROCESSING, DairyFunction.WAREHOUSE, DairyFunction.STORE_SALES), 
 				  			Arrays.asList("Collection", "Storage", "Processing", "Warehouse", "Sales"), 
 				  			dairyLocation,
@@ -135,7 +137,7 @@ public class DairyLocationController extends SubModuleController {
 		functions.updateFromModel();
 		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
 		
-		final IComboRidget route = (IComboRidget) getRidget(RIDGET_ID_ROUTE);
+		final IComboRidget route = getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 		RouteService rs = new RouteService();
 		rs.getRoutes().add(this.dairyLocation.getRoute());
 		route.bindToModel(rs, "routes", Route.class, "getName", this.dairyLocation, "route");
@@ -234,17 +236,17 @@ public class DairyLocationController extends SubModuleController {
 	
 	private void configureMessageBoxes()
 	{
-		duplicateNameDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DUPLICATE_NAME_DIALOG);
+		duplicateNameDialog = getRidget(IMessageBoxRidget.class, RIDGET_ID_DUPLICATE_NAME_DIALOG);
 		duplicateNameDialog.setType(IMessageBoxRidget.Type.ERROR);
 		duplicateNameDialog.setTitle("Duplicate Name"); 
 		duplicateNameDialog.setText("The name '" + textName.getText() + "' is already in use.\r\n\rPlease select a unique name for this new location.");
 		
-		addressRequiredDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
+		addressRequiredDialog = getRidget(IMessageBoxRidget.class, RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
 		addressRequiredDialog.setType(IMessageBoxRidget.Type.ERROR);
 		addressRequiredDialog.setTitle("Address Required"); 
 		addressRequiredDialog.setText("You must specify an address for this location - either in the \"Address\" tab or the \"Directions\" tab.");
 		
-		deleteConfirmDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DELETE_CONFIRM_DIALOG);
+		deleteConfirmDialog = getRidget(IMessageBoxRidget.class, RIDGET_ID_DELETE_CONFIRM_DIALOG);
 		deleteConfirmDialog.setType(IMessageBoxRidget.Type.QUESTION);
 		deleteConfirmDialog.setTitle("Confirm"); 
 		deleteConfirmDialog.setText("Do you want to delete this item?");
@@ -349,6 +351,15 @@ public class DairyLocationController extends SubModuleController {
 				dialog.open();
 
 		}
+	}
+	public DairyLocation getDairyLocation()
+	{
+		return dairyLocation;
+	}
+	
+	public void setDairyLocation(DairyLocation dl)
+	{
+		this.dairyLocation = dl;
 	}
 	
 	private void initialize() {
