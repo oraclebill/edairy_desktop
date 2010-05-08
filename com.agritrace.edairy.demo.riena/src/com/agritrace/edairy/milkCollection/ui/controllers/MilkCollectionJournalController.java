@@ -10,7 +10,6 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
-import org.eclipse.riena.internal.ui.ridgets.swt.DecimalTextRidget;
 import org.eclipse.riena.internal.ui.ridgets.swt.NumericTextRidget;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
@@ -142,6 +141,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		memberText.setInputToUIControlConverter(new Converter(String.class,String.class){
 
 			
+			@Override
 			public Object convert(Object fromObject) {
 				if(fromObject instanceof String && !((String)fromObject).isEmpty()){
 					String text = (String) fromObject;
@@ -178,7 +178,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 
 
 		table = getRidget(ITableRidget.class, ViewWidgetId.milkEntryTable);
-		String[] columnNames = {LINE_COLUMN_HEADER,MEMBER_COLUMN_HEADER,CAN_COLUMN_HEADER,QUANTITY_COLUMN_HEADER,NPR_COLUMN_HEADER,REJECTED_COLUMN_HEADER }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		String[] columnNames = {LINE_COLUMN_HEADER,MEMBER_COLUMN_HEADER,CAN_COLUMN_HEADER,QUANTITY_COLUMN_HEADER,NPR_COLUMN_HEADER,REJECTED_COLUMN_HEADER }; 
 		String[] propertyNames = { "lineNumber", "recordedMember", "farmContainer", "quantity", "notRecorded", "rejected"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		table.setColumnFormatter(2, new ColumnFormatter() {
 
@@ -199,6 +199,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		table.addSelectionListener(new ISelectionListener(){
 
 		
+			@Override
 			public void ridgetSelected(SelectionEvent event) {
 				if(table.getSelection().size()==0){
 					updateBottomButtons(false);
@@ -211,12 +212,13 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		//buttons
 		((IActionRidget)getRidget(ViewWidgetId.addButton)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 				CollectionJournalLine aRecord = DairyFactory.eINSTANCE.createCollectionJournalLine();
 				/**
 				 * todo should get container based on the CAN ID, now I created manually
 				 */
-				String quaitityTextStr = DecimalTextRidget.ungroup(quantityText.getText());
+				String quaitityTextStr = NumericTextRidget.ungroup(quantityText.getText());
 
 				Container can = TrackingFactory.eINSTANCE.createContainer();
 				can.setContainerId(canText.getText());
@@ -236,6 +238,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 
 		((IActionRidget)getRidget(ViewWidgetId.entryInputClear)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Clear Input", "Do you want to clear input fields?")){
 					memberText.setText("");
@@ -251,6 +254,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 
 		((IActionRidget)getRidget(ViewWidgetId.modifyButton)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 				MilkCollectionRecord aRecord = (MilkCollectionRecord) table.getSelection().get(0);
 				ModifyMilkRecordDialog modifyDialog = new ModifyMilkRecordDialog(Display.getDefault().getActiveShell());
@@ -266,6 +270,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 
 		((IActionRidget)getRidget(ViewWidgetId.deleteButton)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Milk Collection Records", "Do you want to delete the selected milk collection records?")){
 					List<Object> selectedRecords =table.getSelection();
@@ -281,6 +286,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		
 		((IActionRidget)getRidget(ViewWidgetId.clearButton)).addListener(new IActionListener() {
 
+			@Override
 			public void callback() {
 				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Milk Collection Records", "Do you want to delete all milk collection records?")){
 					records.clear();
@@ -299,6 +305,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 		
 	}
 
+	@Override
 	public void afterBind() {
 		super.afterBind();
 		setSubGroupsVisible(false);
@@ -317,6 +324,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 	}
 	private class GroupOneSelectionListener implements ISelectionListener{
 
+		@Override
 		public void ridgetSelected(SelectionEvent event) {
 			if(routeRidget.getSelection() != null && vehicleRidget.getSelection() != null && vehicleRidget.getSelection() != null && driverRidget.getSelection() != null){
 				setSubGroupsVisible(true);

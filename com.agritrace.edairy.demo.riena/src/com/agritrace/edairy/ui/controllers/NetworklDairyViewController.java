@@ -14,9 +14,11 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
+import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 
 
+import com.agritrace.edairy.ui.views.data.LocalDairy;
 import com.agritrace.edairy.ui.views.data.NetworkDairy;
 import com.agritrace.edairy.ui.views.data.NetworkDairyFactory;
 import com.agritrace.edairy.ui.views.data.NetworkDairy.ORGANIZATIONTYPE;
@@ -37,38 +39,39 @@ public class NetworklDairyViewController extends SubModuleController {
 
 		private final NetworkDairy workingCopy = createWorkingCopy();
 
+		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			ITextRidget txtFirst = (ITextRidget) container.getRidget("first"); //$NON-NLS-1$
 			txtFirst.setMandatory(true);
-			txtFirst.bindToModel(workingCopy, NetworkDairy.PROPERTY_FIRSTNAME);
+			txtFirst.bindToModel(workingCopy, LocalDairy.PROPERTY_FIRSTNAME);
 			txtFirst.updateFromModel();
 
 			ITextRidget txtLast = (ITextRidget) container.getRidget("last"); //$NON-NLS-1$
 			txtLast.setMandatory(true);
 			txtLast.addValidationRule(new NotEmpty(),
 					ValidationTime.ON_UI_CONTROL_EDIT);
-			txtLast.bindToModel(workingCopy, NetworkDairy.PROPERTY_LASTNAME);
+			txtLast.bindToModel(workingCopy, LocalDairy.PROPERTY_LASTNAME);
 			txtLast.updateFromModel();
 
 			ITextRidget phoneTxt = (ITextRidget) container.getRidget("phone"); //$NON-NLS-1$
 			phoneTxt.setMandatory(true);
 			phoneTxt.addValidationRule(new NotEmpty(),
 					ValidationTime.ON_UI_CONTROL_EDIT);
-			phoneTxt.bindToModel(workingCopy, NetworkDairy.PROPERTY_PHONENUMBER);
+			phoneTxt.bindToModel(workingCopy, LocalDairy.PROPERTY_PHONENUMBER);
 			phoneTxt.updateFromModel();
 
 			ITextRidget depTxt = (ITextRidget) container.getRidget("farm"); //$NON-NLS-1$
 			depTxt.setMandatory(true);
 			depTxt.addValidationRule(new NotEmpty(),
 					ValidationTime.ON_UI_CONTROL_EDIT);
-			depTxt.bindToModel(workingCopy, NetworkDairy.PROPERTY_DEPARTMENT);
+			depTxt.bindToModel(workingCopy, LocalDairy.PROPERTY_DEPARTMENT);
 			depTxt.updateFromModel();
 
 			ITextRidget addTxt = (ITextRidget) container.getRidget("address"); //$NON-NLS-1$
 			addTxt.setMandatory(true);
 			addTxt.addValidationRule(new NotEmpty(),
 					ValidationTime.ON_UI_CONTROL_EDIT);
-			addTxt.bindToModel(workingCopy, NetworkDairy.PROPERTY_ADDRESS);
+			addTxt.bindToModel(workingCopy, LocalDairy.PROPERTY_ADDRESS);
 			addTxt.updateFromModel();
 
 			IComboRidget comboStatus = (IComboRidget) container
@@ -89,16 +92,18 @@ public class NetworklDairyViewController extends SubModuleController {
 					.getRidget("gender"); //$NON-NLS-1$
 			if (gender != null) {
 				gender.bindToModel(Arrays.asList(GENDER), (List<String>) null,
-						workingCopy, NetworkDairy.PROPERTY_GENDER);
+						workingCopy, LocalDairy.PROPERTY_GENDER);
 				gender.updateFromModel();
 			}
 
 		}
 
+		@Override
 		public NetworkDairy createWorkingCopy() {
 			return new NetworkDairy("", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
+		@Override
 		public NetworkDairy copyBean(final Object source, final Object target) {
 			NetworkDairy from = source != null ? (NetworkDairy) source
 					: createWorkingCopy();
@@ -116,6 +121,7 @@ public class NetworklDairyViewController extends SubModuleController {
 			return to;
 		}
 
+		@Override
 		public Object getWorkingCopy() {
 			return workingCopy;
 		}
@@ -158,7 +164,7 @@ public class NetworklDairyViewController extends SubModuleController {
 			master.updateFromModel();
 
 			IActionRidget actionApply = master.getRidget(IActionRidget.class,
-					MasterDetailsComposite.BIND_ID_APPLY);
+					AbstractMasterDetailsComposite.BIND_ID_APPLY);
 			addDefaultAction(master, actionApply);
 		}
 

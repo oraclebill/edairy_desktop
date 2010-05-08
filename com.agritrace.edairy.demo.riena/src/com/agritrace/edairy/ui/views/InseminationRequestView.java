@@ -30,6 +30,7 @@ public class InseminationRequestView extends VeterinaryRequestView {
 
 	private Button calendarButton;
 
+	@Override
 	protected void createHeadlerLabel(Composite parent){
 		Label titleLabel = UIControlsFactory.createLabel(parent, "Insemination Service Request");
 		Font labelFont = JFaceResources.getFontRegistry().getBold(
@@ -64,6 +65,7 @@ public class InseminationRequestView extends VeterinaryRequestView {
 				false, false));
 	}
 
+	@Override
 	protected void createBottomGroup(Composite parent) {
 		// request group
 		Group requestGroup = UIControlsFactory.createGroup(parent, "Request Details");
@@ -82,6 +84,7 @@ public class InseminationRequestView extends VeterinaryRequestView {
 		calendarButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
 		calendarButton.addSelectionListener (new SelectionAdapter () {
+			@Override
 			public void widgetSelected (SelectionEvent e) {
 				final Shell dialog = new Shell (Display.getDefault().getActiveShell(), SWT.DIALOG_TRIM);
 				dialog.setLayout (new GridLayout (3, false));
@@ -106,6 +109,7 @@ public class InseminationRequestView extends VeterinaryRequestView {
 				ok.setText ("OK");
 				ok.setLayoutData(new GridData (SWT.FILL, SWT.CENTER, false, false));
 				ok.addSelectionListener (new SelectionAdapter () {
+					@Override
 					public void widgetSelected (SelectionEvent e) {
 						String textDate = (calendar.getMonth () + 1) + "/" + calendar.getDay () + "/" + calendar.getYear ();
 						textArea.setText(textDate);

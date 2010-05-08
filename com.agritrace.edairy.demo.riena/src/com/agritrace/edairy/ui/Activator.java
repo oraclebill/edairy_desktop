@@ -1,19 +1,10 @@
 package com.agritrace.edairy.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.riena.internal.ui.ridgets.swt.SharedImages;
-import org.eclipse.riena.internal.ui.ridgets.swt.StatuslineUIProcessRidget;
-import org.eclipse.riena.internal.ui.ridgets.swt.uiprocess.UIProcessRidget;
-import org.eclipse.riena.navigation.ui.swt.binding.DelegatingRidgetMapper;
-import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
-import org.eclipse.riena.ui.swt.uiprocess.UIProcessControl;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
-import com.agritrace.edairy.ui.views.PersonInfoMDList;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -25,8 +16,6 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-
-	private static ImageRegistry sharedImages;
 
 	/**
 	 * The constructor
@@ -41,6 +30,7 @@ public class Activator extends AbstractUIPlugin {
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
 	 */
+	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
@@ -56,6 +46,7 @@ public class Activator extends AbstractUIPlugin {
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
 	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
@@ -75,7 +66,6 @@ public class Activator extends AbstractUIPlugin {
 	 * are managed automatically and must not be disposed by client code.
 	 * 
 	 * @param imageKey
-	 *            a non-null String; see {@link SharedImages} for valid keys
 	 * @return a non-null Image instance
 	 */
 	public static synchronized Image getImage(final String path) {

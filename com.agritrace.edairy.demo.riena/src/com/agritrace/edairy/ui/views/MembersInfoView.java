@@ -246,7 +246,7 @@ public class MembersInfoView extends SubModuleView {
 				false, 1, 1));
 
 		//photo
-		Label imageLable = new Label(bottomPanel, SWT.NULL); //$NON-NLS-1$
+		Label imageLable = new Label(bottomPanel, SWT.NULL); 
 		GridData imagData = new GridData(SWT.FILL,SWT.TOP,false,false);
 		//		imagData.heightHint = 90;
 		//		imagData.widthHint = 80;

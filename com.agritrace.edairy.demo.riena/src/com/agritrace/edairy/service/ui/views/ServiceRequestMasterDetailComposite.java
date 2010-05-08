@@ -153,7 +153,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
 		dateData.horizontalSpan = 1;
 		txtDate.setLayoutData(dateData);
-		addUIControl(txtDate, INSE_TIME_HEATED_DETECTED); //$NON-NLS-1$
+		addUIControl(txtDate, INSE_TIME_HEATED_DETECTED); 
 		ImageButton button = UIControlsFactory.createImageButton(group,
 				SWT.None);
 
@@ -169,7 +169,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		Label firstLabel = UIControlsFactory.createLabel(group, "First"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstLabel);
 
-		Text firstText = UIControlsFactory.createText(group); //$NON-NLS-1$
+		Text firstText = UIControlsFactory.createText(group); 
 		textGridFactory.applyTo(firstText);
 
 		// First Repeat
@@ -177,7 +177,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 				"First Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstRepeatLabel);
 
-		Text firstRepeatText = UIControlsFactory.createText(group); //$NON-NLS-1$
+		Text firstRepeatText = UIControlsFactory.createText(group); 
 		textGridFactory.applyTo(firstRepeatText);
 
 		// 2nd Repeat
@@ -185,7 +185,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 				"2nd Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(secondRepeatLabel);
 
-		Text secondRepeatText = UIControlsFactory.createText(group); //$NON-NLS-1$
+		Text secondRepeatText = UIControlsFactory.createText(group); 
 		textGridFactory.applyTo(secondRepeatText);
 	}
 
@@ -219,7 +219,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		if (isVeterinary) {
 			// Create veterinaryControls
 			disposeAllChildrens(this.specialComp);
-			createVeterinaryControls(specialComp); //$NON-NLS-1$);
+			createVeterinaryControls(specialComp); //);
 			specialComp.pack(true);
 
 		} else {

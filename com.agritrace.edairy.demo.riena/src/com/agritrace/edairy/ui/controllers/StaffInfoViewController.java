@@ -8,14 +8,13 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
-import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
-import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
+import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 
 import com.agritrace.edairy.ui.views.data.Staff;
@@ -36,6 +35,7 @@ public class StaffInfoViewController extends SubModuleController {
 
 		private final Staff workingCopy = createWorkingCopy();
 
+		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			ITextRidget txtFirst = (ITextRidget) container.getRidget("first"); //$NON-NLS-1$
 			txtFirst.setMandatory(true);
@@ -81,10 +81,12 @@ public class StaffInfoViewController extends SubModuleController {
 
 		}
 
+		@Override
 		public Staff createWorkingCopy() {
 			return new Staff("", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
+		@Override
 		public Staff copyBean(final Object source, final Object target) {
 			Staff from = source != null ? (Staff) source : createWorkingCopy();
 			Staff to = target != null ? (Staff) target : createWorkingCopy();
@@ -98,6 +100,7 @@ public class StaffInfoViewController extends SubModuleController {
 			return to;
 		}
 
+		@Override
 		public Object getWorkingCopy() {
 			return workingCopy;
 		}
@@ -138,7 +141,7 @@ public class StaffInfoViewController extends SubModuleController {
 			master.updateFromModel();
 
 			IActionRidget actionApply = master.getRidget(IActionRidget.class,
-					MasterDetailsComposite.BIND_ID_APPLY);
+					AbstractMasterDetailsComposite.BIND_ID_APPLY);
 			addDefaultAction(master, actionApply);
 		}
 

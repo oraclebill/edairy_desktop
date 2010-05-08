@@ -18,6 +18,7 @@ public class ServiceRequestLogView extends SubModuleView {
 
 	public static final String ID = ServiceRequestLogView.class.getName();
 
+	@Override
 	protected void basicCreatePartControl(Composite parent) {
 
 		parent.setBackground(LnfManager.getLnf().getColor(

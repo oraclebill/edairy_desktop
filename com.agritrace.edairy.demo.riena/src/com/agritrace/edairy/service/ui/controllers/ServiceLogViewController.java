@@ -41,8 +41,6 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
-import org.eclipse.swt.widgets.Text;
-
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.Person;
@@ -92,6 +90,7 @@ public class ServiceLogViewController extends SubModuleController {
 
 		private final AnimalHealthRequest workingCopy = createWorkingCopy();
 
+		@Override
 		public void configureRidgets(IRidgetContainer container) {
 
 			// Configure column formatter for table rgiet
@@ -179,6 +178,7 @@ public class ServiceLogViewController extends SubModuleController {
 
 		}
 
+		@Override
 		public AnimalHealthRequest copyBean(Object source, Object target) {
 			AnimalHealthRequest from = source != null ? (AnimalHealthRequest) source
 					: createWorkingCopy();
@@ -205,10 +205,12 @@ public class ServiceLogViewController extends SubModuleController {
 			}
 		}
 
+		@Override
 		public AnimalHealthRequest createWorkingCopy() {
-			return RequestsFactory.eINSTANCE.createAnimalHealthRequest(); //$NON-NLS-1$ //$NON-NLS-2$
+			return RequestsFactory.eINSTANCE.createAnimalHealthRequest(); 
 		}
 
+		@Override
 		public AnimalHealthRequest getWorkingCopy() {
 			return workingCopy;
 		}
@@ -332,6 +334,7 @@ public class ServiceLogViewController extends SubModuleController {
 	private List<EObject> getFilteredResult() throws ParseException {
 		List<EObject> objs = new ArrayList<EObject>();
 		NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
+			@Override
 			public long longValue(Object object) {
 				return ((Date) object).getTime();
 			}
@@ -343,7 +346,7 @@ public class ServiceLogViewController extends SubModuleController {
 		};
 
 		// Start Date
-		ITextRidget memberIdText = (ITextRidget) getRidget(ServiceRequestFilterSection.STARTE_DATE); //$NON-NLS-1$
+		ITextRidget memberIdText = (ITextRidget) getRidget(ServiceRequestFilterSection.STARTE_DATE); 
 		List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
 		SELECT select = null;
@@ -384,7 +387,7 @@ public class ServiceLogViewController extends SubModuleController {
 
 		// Request Type
 		// Verterinary
-		IToggleButtonRidget veterinaryRidget = (IToggleButtonRidget) getRidget(ServiceRequestFilterSection.REQUEST_TYPE_VERTERNARY); //$NON-NLS-1$
+		IToggleButtonRidget veterinaryRidget = (IToggleButtonRidget) getRidget(ServiceRequestFilterSection.REQUEST_TYPE_VERTERNARY); 
 		if (veterinaryRidget != null) {
 			boolean isVerterinaryType = veterinaryRidget.isSelected();
 			if (isVerterinaryType) {
@@ -429,7 +432,7 @@ public class ServiceLogViewController extends SubModuleController {
 		}
 
 		// Member name field
-		ITextRidget memberText = (ITextRidget) getRidget(ServiceRequestFilterSection.MEMBER_LOOKUP_TEXT); //$NON-NLS-1$
+		ITextRidget memberText = (ITextRidget) getRidget(ServiceRequestFilterSection.MEMBER_LOOKUP_TEXT); 
 		if (memberText != null) {
 			String memberName = memberText.getText();
 			if (!"".equals(memberName)) {
@@ -448,7 +451,7 @@ public class ServiceLogViewController extends SubModuleController {
 		}
 
 		// Member name field
-		ITextRidget farmText = (ITextRidget) getRidget(ServiceRequestFilterSection.FARM_LOOKUP_TEXT); //$NON-NLS-1$
+		ITextRidget farmText = (ITextRidget) getRidget(ServiceRequestFilterSection.FARM_LOOKUP_TEXT); 
 		if (farmText != null) {
 			String farmName = farmText.getText();
 			if (!"".equals(farmName)) {

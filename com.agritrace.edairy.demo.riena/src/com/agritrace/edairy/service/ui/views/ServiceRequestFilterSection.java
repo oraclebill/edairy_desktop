@@ -138,6 +138,7 @@ public class ServiceRequestFilterSection {
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(
@@ -170,6 +171,7 @@ public class ServiceRequestFilterSection {
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton2.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(

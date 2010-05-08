@@ -9,7 +9,6 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController.RouteService;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class AddRouteDialogController extends AbstractWindowController {
 	public static final String RIDGET_ID_ROUTE_ID = "routeId"; //$NON-NLS-1$
@@ -63,6 +62,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 		
 		IActionRidget saveAction = (IActionRidget) getRidget(RIDGET_ID_SAVE);
 		saveAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				if (textName.getText().equals(route.getName())) {
 					duplicateNameDialog.show();
@@ -73,6 +73,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 		
 		IActionRidget cencelAction = (IActionRidget) getRidget(RIDGET_ID_CANCEL);
 		cencelAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				
 				getWindowRidget().dispose();

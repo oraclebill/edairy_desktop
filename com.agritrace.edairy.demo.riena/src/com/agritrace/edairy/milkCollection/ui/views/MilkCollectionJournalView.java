@@ -139,6 +139,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		//addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP, dateText.getText());
@@ -231,7 +232,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 	}
 
 	private Group createMilkEntryInputGroup(Composite parent){
-		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); //$NON-NLS-1$
+		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); 
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
 		Group panel = UIControlsFactory.createGroup(group,"");
@@ -293,7 +294,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 	//	}
 
 	private Group createMilkEntryGroup(Composite parent) {
-		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); //$NON-NLS-1$
+		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); 
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
 		Composite panel= UIControlsFactory.createComposite(group);
@@ -304,7 +305,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tableComposite);
 
 		Table table = UIControlsFactory.createTable(tableComposite, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.milkEntryTable); //$NON-NLS-1$
+				ViewWidgetId.milkEntryTable); 
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 

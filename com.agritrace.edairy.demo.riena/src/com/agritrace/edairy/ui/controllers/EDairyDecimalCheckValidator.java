@@ -11,6 +11,7 @@ public class EDairyDecimalCheckValidator extends ValidRange {
 	public EDairyDecimalCheckValidator(final Number min, final Number max, final Locale locale) {
 		super(min,max,locale);
 	}
+	@Override
 	public IStatus validate(final Object value){
 		IStatus status = super.validate(value);
 		if(!status.isOK()){

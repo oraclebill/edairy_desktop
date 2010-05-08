@@ -278,7 +278,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	}
 	
 	public List<Membership> createMemberShip(){
-		List<Membership> members = new ArrayList();
+		List<Membership> members = new ArrayList<Membership>();
 		Membership member1 = DairyFactory.eINSTANCE.createMembership();
 		member1.setMemberId("1001");
 		SimpleDateFormat sdf = new SimpleDateFormat();
