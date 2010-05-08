@@ -34,22 +34,21 @@ public class AddRouteDialog extends AbstractDialogView {
 		contentArea = new Composite(parent, SWT.NONE);
 		contentArea.setLayout(new GridLayout(2, false));
 
-		Label idLabel = UIControlsFactory.createLabel(contentArea, "Id", SWT.LEFT);
+		/*Label idLabel = UIControlsFactory.createLabel(contentArea, "Id", SWT.LEFT);
 		Text idText = UIControlsFactory.createText(contentArea, SWT.BORDER| SWT.SINGLE, AddRouteDialogController.RIDGET_ID_ROUTE_ID);
 		GridData gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		idText.setEditable(false);
-		idText.setLayoutData(gd);
+		idText.setLayoutData(gd);*/
 		
 		Label nameLabel = UIControlsFactory.createLabel(contentArea, "Name", SWT.LEFT);
 		Text nameText = UIControlsFactory.createText(contentArea, SWT.BORDER| SWT.SINGLE, AddRouteDialogController.RIDGET_ID_NAME);
-		gd = new GridData();
+		GridData gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 3;
 		nameText.setLayoutData(gd);
 		
 		Label descriptionLabel = UIControlsFactory.createLabel(contentArea, "Description", SWT.LEFT | SWT.TOP);
 		gd = new GridData();
-		
 		gd.verticalAlignment = GridData.FILL_VERTICAL;
 		descriptionLabel.setLayoutData(gd);
 		
@@ -58,6 +57,16 @@ public class AddRouteDialog extends AbstractDialogView {
 		gd.widthHint = WIDTH_UNIT* 3;
 		gd.heightHint = 60;
 		descriptionText.setLayoutData(gd);
+		
+		Label codeLabel = UIControlsFactory.createLabel(contentArea, "Code", SWT.LEFT | SWT.TOP);
+		gd = new GridData();
+		gd.verticalAlignment = GridData.FILL_VERTICAL;
+		codeLabel.setLayoutData(gd);
+		
+		Text codeText = UIControlsFactory.createTextMulti(contentArea, false, false, AddRouteDialogController.RIDGET_ID_CODE);
+		gd = new GridData();
+		gd.widthHint = WIDTH_UNIT;
+		codeText.setLayoutData(gd);
 		
 		Button saveButton = UIControlsFactory.createButton(contentArea, "Save", AddRouteDialogController.RIDGET_ID_SAVE);
 		gd = new GridData();

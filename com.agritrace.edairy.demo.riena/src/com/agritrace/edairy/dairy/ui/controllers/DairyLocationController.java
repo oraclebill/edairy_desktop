@@ -8,7 +8,6 @@ import java.util.List;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -18,18 +17,24 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
-import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
+import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.common.datamodel.common.Location;
-import com.agritrace.edairy.common.datamodel.dairy.DairyLocation;
-import com.agritrace.edairy.common.datamodel.dairy.DairyLocation.DairyFunction;
-import com.agritrace.edairy.common.datamodel.dairy.Route;
 import com.agritrace.edairy.common.services.DairyLocations;
 import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
+import com.agritrace.edairy.model.DescriptiveLocation;
+import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.MapLocation;
+import com.agritrace.edairy.model.ModelFactory;
+import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.dairy.DairyFactory;
+import com.agritrace.edairy.model.dairy.DairyFunction;
+import com.agritrace.edairy.model.dairy.DairyLocation;
+import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class DairyLocationController extends SubModuleController {
+	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
 	//top-half window
 	public static final String RIDGET_ID_COLLECTION_CENTRE_ID = "collectionCentreId";
 	public static final String RIDGET_ID_NAME = "name";
@@ -37,7 +42,7 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_DATEOPENED = "dateOpened";
 	public static final String RIDGET_ID_PHONE = "phone";
 	public static final String RIDGET_ID_CODE = "code";
-	public static final String RIDGET_ID_FUNCTION = "function";
+	public static final String RIDGET_ID_FUNCTIONS = "functions";
 	public static final String RIDGET_ID_ROUTE = "route";
 	
 	//address tab
@@ -51,6 +56,7 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_PL_DIVISION = "postalLocation.division";
 	public static final String RIDGET_ID_PL_POSTALCODE = "postalLocation.postalCode";
 	public static final String RIDGET_ID_PL_PROVINCE = "postalLocation.province";
+	public static final String DATE_FORMATE = "dd/MM/yyyy";
 	
 	//directions tab
 	public static final String RIDGET_ID_DL_LANDMARK = "locationLandmarks";
@@ -101,10 +107,10 @@ public class DairyLocationController extends SubModuleController {
 		DairyLocation dairyLocation = this.dairyLocation;
 
 		//bindings for top-half window
-		final ITextRidget dairyLocationId = getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
+		/*final ITextRidget dairyLocationId = getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
 		dairyLocationId.setOutputOnly(true);
 		dairyLocationId.bindToModel(dairyLocation, "collectionCentreId");
-		dairyLocationId.updateFromModel();
+		dairyLocationId.updateFromModel();*/
 
 		textName = getRidget(ITextRidget.class, RIDGET_ID_NAME);
 		textName.bindToModel(dairyLocation, "name");
@@ -114,21 +120,24 @@ public class DairyLocationController extends SubModuleController {
 		description.bindToModel(dairyLocation, "description");
 		description.updateFromModel();
 		
+		final ITextRidget phone = getRidget(ITextRidget.class, RIDGET_ID_PHONE);
+		phone.bindToModel(dairyLocation, "phone");
+		phone.updateFromModel();
+		
 		final IDateTextRidget dateOpened = getRidget(IDateTextRidget.class, RIDGET_ID_DATEOPENED);
-		dateOpened.setFormat("dd/MM/yyyy");
+		dateOpened.setFormat(DATE_FORMATE);
 		dateOpened.bindToModel(dairyLocation, "dateOpened");
 		dateOpened.updateFromModel();
 
-		final ISingleChoiceRidget  function = (ISingleChoiceRidget) getRidget(RIDGET_ID_FUNCTION);
-		function.bindToModel(Arrays.asList(DairyFunction.MILK_COLLECTION, DairyFunction.MILK_STORAGE, DairyFunction.MILK_PROCESSING, DairyFunction.WAREHOUSE, DairyFunction.OFFICES, DairyFunction.STORE_SALES), 
-				  			Arrays.asList("Collection", "Storage", "Processing", "Warehouse", "Offices", "Sales"), 
+		final IMultipleChoiceRidget functions = getRidget(IMultipleChoiceRidget.class, RIDGET_ID_FUNCTIONS);
+		functions.bindToModel(Arrays.asList(DairyFunction.MILK_COLLECTION, DairyFunction.MILK_STORAGE, DairyFunction.MILK_PROCESSING, DairyFunction.WAREHOUSE, DairyFunction.STORE_SALES), 
+				  			Arrays.asList("Collection", "Storage", "Processing", "Warehouse", "Sales"), 
 				  			dairyLocation,
-							"function");
-	
-		function.updateFromModel();
-		function.setSelection(dairyLocation.getFunction()); //$NON-NLS-1$
+							"functions");						
+		functions.updateFromModel();
+		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
 		
-		final IComboRidget route = (IComboRidget) getRidget(RIDGET_ID_ROUTE);
+		final IComboRidget route = getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 		RouteService rs = new RouteService();
 		rs.getRoutes().add(this.dairyLocation.getRoute());
 		route.bindToModel(rs, "routes", Route.class, "getName", this.dairyLocation, "route");
@@ -161,80 +170,83 @@ public class DairyLocationController extends SubModuleController {
 	private void configureAddressTab(DairyLocation dairyLocation)
 	{
 		textAddress = getRidget(ITextRidget.class, RIDGET_ID_PL_ADDRESS);
-		textAddress.bindToModel(dairyLocation.getLocation(), "address");
+		textAddress.bindToModel(dairyLocation.getLocation().getPostalLocation(), "address");
 		textAddress.updateFromModel();
 			
 		ITextRidget section = getRidget(ITextRidget.class, RIDGET_ID_PL_SECTION);
-		section.bindToModel(dairyLocation.getLocation(), "section");
+		section.bindToModel(dairyLocation.getLocation().getPostalLocation(), "section");
 		section.updateFromModel();
 		
 		ITextRidget town = getRidget(ITextRidget.class, RIDGET_ID_PL_TOWN);
-		town.bindToModel(dairyLocation.getLocation(), "village");
+		town.bindToModel(dairyLocation.getLocation().getPostalLocation(), "village");
 		town.updateFromModel();
 		
 		
 		ITextRidget estate = getRidget(ITextRidget.class, RIDGET_ID_PL_ESTATE);
-		estate.bindToModel(dairyLocation.getLocation(), "estate");
+		estate.bindToModel(dairyLocation.getLocation().getPostalLocation(), "estate");
 		estate.updateFromModel();
 		
 		ITextRidget location = getRidget(ITextRidget.class, RIDGET_ID_PL_LOCATION);
-		location.bindToModel(dairyLocation.getLocation(), "location");
+		location.bindToModel(dairyLocation.getLocation().getPostalLocation(), "location");
 		location.updateFromModel();
 		
 		ITextRidget sub = getRidget(ITextRidget.class, RIDGET_ID_PL_SUB);
-		sub.bindToModel(dairyLocation.getLocation(), "subLocation");
+		sub.bindToModel(dairyLocation.getLocation().getPostalLocation(), "subLocation");
 		sub.updateFromModel();
 		
 		ITextRidget district = getRidget(ITextRidget.class, RIDGET_ID_PL_DISTRICT);
-		district.bindToModel(dairyLocation.getLocation(), "district");
+		district.bindToModel(dairyLocation.getLocation().getPostalLocation(), "district");
 		district.updateFromModel();
 		
 		ITextRidget division = getRidget(ITextRidget.class, RIDGET_ID_PL_DIVISION);
-		division.bindToModel(dairyLocation.getLocation(), "division");
+		division.bindToModel(dairyLocation.getLocation().getPostalLocation(), "division");
 		division.updateFromModel();
 		
 		ITextRidget postalCode = getRidget(ITextRidget.class, RIDGET_ID_PL_POSTALCODE);
-		postalCode.bindToModel(dairyLocation.getLocation(), "postalCode");
+		postalCode.bindToModel(dairyLocation.getLocation().getPostalLocation(), "postalCode");
 		postalCode.updateFromModel();
 		
+		ITextRidget province = getRidget(ITextRidget.class, RIDGET_ID_PL_PROVINCE);
+		province.bindToModel(dairyLocation.getLocation().getPostalLocation(), "province");
+		province.updateFromModel();
 		
 	}
 	
 	private void configureDirectionsTab(DairyLocation dairyLocation)
 	{
 		ITextRidget landmark = getRidget(ITextRidget.class, RIDGET_ID_DL_LANDMARK);
-		landmark.bindToModel(dairyLocation.getLocation(), "landmarkLocations");
+		landmark.bindToModel(dairyLocation.getLocation().getDescriptiveLocation(), "landmarks");
 		landmark.updateFromModel();
 		
 		ITextRidget directions = getRidget(ITextRidget.class, RIDGET_ID_DL_DIRECTIONS);
-		directions.bindToModel(dairyLocation.getLocation(), "locationDirections");
+		directions.bindToModel(dairyLocation.getLocation().getDescriptiveLocation(), "directions");
 		directions.updateFromModel();
 	}
 	
 	private void configureMapTab(DairyLocation dairyLocation)
 	{
 		ITextRidget latitude = getRidget(ITextRidget.class, RIDGET_ID_ML_LATITUDE);
-		latitude.bindToModel(dairyLocation.getLocation(), "latitude");
+		latitude.bindToModel(dairyLocation.getLocation().getMapLocation(), "latitude");
 		latitude.updateFromModel();
 		
 		ITextRidget longitude = getRidget(ITextRidget.class, RIDGET_ID_ML_LONGITUDE);
-		longitude.bindToModel(dairyLocation.getLocation(), "longitude");
+		longitude.bindToModel(dairyLocation.getLocation().getMapLocation(), "longitude");
 		longitude.updateFromModel();
 	}
 	
 	private void configureMessageBoxes()
 	{
-		duplicateNameDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DUPLICATE_NAME_DIALOG);
+		duplicateNameDialog = getRidget(IMessageBoxRidget.class, RIDGET_ID_DUPLICATE_NAME_DIALOG);
 		duplicateNameDialog.setType(IMessageBoxRidget.Type.ERROR);
 		duplicateNameDialog.setTitle("Duplicate Name"); 
 		duplicateNameDialog.setText("The name '" + textName.getText() + "' is already in use.\r\n\rPlease select a unique name for this new location.");
 		
-		addressRequiredDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
+		addressRequiredDialog = getRidget(IMessageBoxRidget.class, RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
 		addressRequiredDialog.setType(IMessageBoxRidget.Type.ERROR);
 		addressRequiredDialog.setTitle("Address Required"); 
 		addressRequiredDialog.setText("You must specify an address for this location - either in the \"Address\" tab or the \"Directions\" tab.");
 		
-		deleteConfirmDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DELETE_CONFIRM_DIALOG);
+		deleteConfirmDialog = getRidget(IMessageBoxRidget.class, RIDGET_ID_DELETE_CONFIRM_DIALOG);
 		deleteConfirmDialog.setType(IMessageBoxRidget.Type.QUESTION);
 		deleteConfirmDialog.setTitle("Confirm"); 
 		deleteConfirmDialog.setText("Do you want to delete this item?");
@@ -340,38 +352,58 @@ public class DairyLocationController extends SubModuleController {
 
 		}
 	}
+	public DairyLocation getDairyLocation()
+	{
+		return dairyLocation;
+	}
+	
+	public void setDairyLocation(DairyLocation dl)
+	{
+		this.dairyLocation = dl;
+	}
 	
 	private void initialize() {
 		long id = 1;
 		for (int i = 0 ; i < 1; i ++) {
-			DairyLocation dairyLocation = new DairyLocation();
-			dairyLocation.setCollectionCentreId(id);
+			DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
 			dairyLocation.setName("testDairylocationName" + id);
 			dairyLocation.setDescription("test dairy location description " + id);
 			dairyLocation.setDateOpened(new Date());
-			dairyLocation.setPhoneNumber("555-111-222");
-			dairyLocation.setFunction(DairyFunction.OFFICES);
-			dairyLocation.setColorCode("#66778" + id);
-			Route route = new Route();
-			route.setRouteId(id);
+			dairyLocation.setPhone("555-111-222");
+			dairyLocation.getFunctions().addAll(Arrays.asList(DairyFunction.MILK_COLLECTION, DairyFunction.MILK_STORAGE, DairyFunction.MILK_PROCESSING, DairyFunction.WAREHOUSE, DairyFunction.STORE_SALES));
+			dairyLocation.setCode("#66778" + id);
+			
+			Route route = DairyFactory.eINSTANCE.createRoute();
 			route.setName("testroute" + id);
 			route.setDescription("testroutedesc" + id);
-
+			route.setCode("#66778" + id);
+			
 			dairyLocation.setRoute(route);
-			Location location = new Location();
-			location.setAddress("test address " + id);
-			location.setSection("test section " + id);
-			location.setVillage("test village " + id);
-			location.setLocation("test location " + id);
-			location.setSubLocation("test sublocation " + id);
-			location.setDistrict("test district " + id);
-			location.setDivision("test division " + id);
-			location.setPostalCode("123456 " + id);
-			location.setEstate("test estate" + id);
-			location.setLandmarkLocations("test landmark" + id);
-			location.setLocationDirections("test directions " + id);
-			location.setLatitude(123.0);
-			location.setLongitude(-123);
+			Location location = ModelFactoryImpl.eINSTANCE.createLocation();
+
+			PostalLocation postalLocation = ModelFactory.eINSTANCE.createPostalLocation();
+			postalLocation.setAddress("test address " + id);
+			postalLocation.setSection("test section " + id);
+			postalLocation.setEstate("test estate " + id);
+			postalLocation.setVillage("test village " + id);
+			postalLocation.setLocation("test location " + id);
+			postalLocation.setSubLocation("test sublocation " + id);
+			postalLocation.setDistrict("test district " + id);
+			postalLocation.setDivision("test division " + id);
+			postalLocation.setPostalCode("123456 " + id);
+			postalLocation.setProvince("TP " + id);
+			
+			DescriptiveLocation descriptiveLocation = ModelFactory.eINSTANCE.createDescriptiveLocation();
+			descriptiveLocation.setLandmarks("test landmarks " + id);
+			descriptiveLocation.setDirections("test directions " + id);
+			
+			MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
+			mapLocation.setLatitude("123.00");
+			mapLocation.setLongitude("-100.00");
+			
+			location.setPostalLocation(postalLocation);
+			location.setDescriptiveLocation(descriptiveLocation);
+			location.setMapLocation(mapLocation);
 			dairyLocation.setLocation(location);
 		
 			this.dairyLocation = dairyLocation;

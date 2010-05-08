@@ -39,19 +39,19 @@ public class DairyLocationView extends SubModuleView {
 		GridLayout layout = new GridLayout(3, false);
 		contentArea.setLayout(layout);
 
-		Label idLabel = UIControlsFactory.createLabel(contentArea, "Location #", SWT.LEFT);
+		/*Label idLabel = UIControlsFactory.createLabel(contentArea, "Location #", SWT.LEFT);
 
 		Text idText = UIControlsFactory.createText(contentArea, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
 		GridData gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		gd.horizontalSpan = 2;
 		idText.setEditable(false);
-		idText.setLayoutData(gd);
+		idText.setLayoutData(gd);*/
 
 		Label nameLabel = UIControlsFactory.createLabel(contentArea, "Name", SWT.LEFT);
 
 		Text nameText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_NAME);
-		gd = new GridData();
+		GridData gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
 		gd.grabExcessHorizontalSpace = true;
@@ -68,20 +68,28 @@ public class DairyLocationView extends SubModuleView {
 		gd.horizontalAlignment = SWT.FILL;
 		descriptionText.setLayoutData(gd);
 		
+		Label phoneLabel = UIControlsFactory.createLabel(contentArea, "Phone", SWT.LEFT);
+		
+		Text phoneText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_PHONE);
+		gd = new GridData();
+		gd.widthHint = WIDTH_UNIT;
+		gd.horizontalSpan = 2;
+		phoneText.setLayoutData(gd);
+
 		Label dateOpenedLabel = UIControlsFactory.createLabel(contentArea, "Date Opened", SWT.LEFT);
 		
 		DatePickerComposite dateOpenedPicker = UIControlsFactory.createDatePickerComposite(contentArea, DairyLocationController.RIDGET_ID_DATEOPENED);
 		gd = new GridData();
 		gd.horizontalSpan = 2;
 		dateOpenedPicker.setLayoutData(gd);
-
-		Label functionsLabel = UIControlsFactory.createLabel(contentArea, "Function", SWT.LEFT);
 		
-		ChoiceComposite functionChoice = UIControlsFactory.createChoiceComposite(contentArea, SWT.None, false, DairyLocationController.RIDGET_ID_FUNCTION); //$NON-NLS-1$
-		functionChoice.setOrientation(SWT.HORIZONTAL);
+		Label functionsLabel = UIControlsFactory.createLabel(contentArea, "Functions", SWT.LEFT);
+		
+		ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(contentArea, SWT.None, true, DairyLocationController.RIDGET_ID_FUNCTIONS); //$NON-NLS-1$
+		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		gd = new GridData();
 		gd.horizontalSpan = 2;
-		functionChoice.setLayoutData(gd);
+		functionsChoice.setLayoutData(gd);
 		
 		Label routeLabel = UIControlsFactory.createLabel(contentArea, "Route", SWT.LEFT);
 
@@ -237,14 +245,14 @@ public class DairyLocationView extends SubModuleView {
 		gd.widthHint = WIDTH_UNIT * 2;
 		postalCodeText.setLayoutData(gd);
 		
-		/*Label provinceLabel = UIControlsFactory.createLabel(parent, "Province");
+		Label provinceLabel = UIControlsFactory.createLabel(parent, "Province");
 		gd = new GridData();
 		provinceLabel.setLayoutData(gd);
 		
 		Text provinceText = UIControlsFactory.createText(parent, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_PL_PROVINCE);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 2;
-		provinceText.setLayoutData(gd);*/
+		provinceText.setLayoutData(gd);
 	}
 	
 	private void createDirectionsTab(Composite parent) 
