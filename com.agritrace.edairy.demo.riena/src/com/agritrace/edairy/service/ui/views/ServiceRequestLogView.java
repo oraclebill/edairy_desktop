@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 public class ServiceRequestLogView extends SubModuleView {
 
 	public static final String ID = ServiceRequestLogView.class.getName();
+	public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
@@ -38,7 +39,7 @@ public class ServiceRequestLogView extends SubModuleView {
 		// Since Master/Detail are in different composite, we need to pass the panel as detail composite
 		ServiceRequestMasterDetailComposite mdComposite = new ServiceRequestMasterDetailComposite(
 				panel, SWT.NONE);
-		this.addUIControl(mdComposite, "master"); //$NON-NLS-1$
+		addUIControl(mdComposite, BIND_ID_MASTER);
 
 	}
 

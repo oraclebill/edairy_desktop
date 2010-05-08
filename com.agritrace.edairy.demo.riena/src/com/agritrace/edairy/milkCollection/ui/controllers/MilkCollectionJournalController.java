@@ -10,7 +10,7 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
-import org.eclipse.riena.internal.ui.ridgets.swt.NumericTextRidget;
+import org.eclipse.riena.internal.ui.ridgets.swt.DecimalTextRidget;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -218,7 +218,7 @@ public class MilkCollectionJournalController extends SubModuleController  {
 				/**
 				 * todo should get container based on the CAN ID, now I created manually
 				 */
-				String quaitityTextStr = NumericTextRidget.ungroup(quantityText.getText());
+				String quaitityTextStr = DecimalTextRidget.ungroup(quantityText.getText());
 
 				Container can = TrackingFactory.eINSTANCE.createContainer();
 				can.setContainerId(canText.getText());

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Desktop Manager" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.riena.ui.edairy_desktop_product" application="com.agritrace.edairy.riena.ui.application" version="0.1.0" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Desktop Manager" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.demo.riena.edairy_demo_product" application="com.agritrace.edairy.demo.riena.newId" version="0.1.0" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -22,10 +22,10 @@
 
    <plugins>
       <plugin id="com.agritrace.edairy.model"/>
-      <plugin id="com.agritrace.edairy.riena.ui"/>
+      <plugin id="com.agritrace.edairy.riena.ui" fragment=""/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="javax.persistence"/>
+      <plugin id="javax.persistence" fragment=""/>
       <plugin id="javax.servlet"/>
       <plugin id="org.apache.commons.beanutils"/>
       <plugin id="org.apache.commons.logging"/>
@@ -50,9 +50,9 @@
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.persistence.asm"/>
-      <plugin id="org.eclipse.persistence.core"/>
-      <plugin id="org.eclipse.persistence.jpa"/>
+      <plugin id="org.eclipse.persistence.asm" fragment=""/>
+      <plugin id="org.eclipse.persistence.core" fragment=""/>
+      <plugin id="org.eclipse.persistence.jpa" fragment=""/>
       <plugin id="org.eclipse.persistence.jpa.equinox" fragment="true"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
