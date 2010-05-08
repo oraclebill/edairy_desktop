@@ -75,13 +75,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITextRidget postalCodeTxt;
 
 	//container tab
-	private IComboRidget columnCombo;
-	private IComboRidget compareExpression;
-	private ITextRidget numberRidget;
-	private IComboRidget farmRidget;
-	private IComboRidget containterTypeRidget;
-	private IComboRidget unitMeasureRidget;
-	private IActionRidget filterButton;
 	private ITableRidget containerTable;
 	private IActionRidget containerAddButton;
 	private IActionRidget containerRemoveButton;
