@@ -134,7 +134,7 @@ public class ServiceRequestResourceManager {
 	private void createReq2() throws ParseException {
 		AnimalHealthRequest req = RequestsFactory.eINSTANCE
 				.createAnimalHealthRequest();
-		req.setRequestId(1001l);
+		req.setRequestId(1002l);
 		req.setDate(ServiceUtils.DATE_FORMAT.parse("04/01/2010"));
 
 		serviceRequestResource.getContents().add(req);
@@ -152,7 +152,7 @@ public class ServiceRequestResourceManager {
 		ship.setMemberId("1002");
 		req.setRequestingMember(ship);
 
-		req.setType(RequestType.VETERINARY);
+		req.setType(RequestType.INSEMINATION);
 		req.setDateHeatDetected(Calendar.getInstance().getTime());
 		req.setSecondTreatment(Calendar.getInstance().getTime());
 		req.setThirdTreatment(Calendar.getInstance().getTime());
@@ -196,7 +196,7 @@ public class ServiceRequestResourceManager {
 
 		Person person = ModelFactory.eINSTANCE.createPerson();
 		person.setPhoneNumber("12345678");
-		person.setName("John	Smith");
+		person.setName("John Smith");
 		serviceRequestResource.getContents().add(person);
 
 		ship.setMember(person);
