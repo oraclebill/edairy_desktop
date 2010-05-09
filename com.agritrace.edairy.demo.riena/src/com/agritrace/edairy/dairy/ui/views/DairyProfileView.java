@@ -13,7 +13,7 @@ package com.agritrace.edairy.dairy.ui.views;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 
-import com.agritrace.edairy.dairy.ui.DairyProfileControls; 
+import com.agritrace.edairy.dairy.ui.DairyProfileViewWidgetID; 
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -55,7 +55,7 @@ public class DairyProfileView extends SubModuleView {
 		nameArea.setText("General Information");
 
 		// Construct Dairy Image
-		lblDairyImage = UIControlsFactory.createLabel(top, "", DairyProfileControls.DAIRY_PROFILE_IMAGE);
+		lblDairyImage = UIControlsFactory.createLabel(top, "", DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 
 		// Construct Dairy Location Component
 		LocationInfoGroup locationInfoGroup = new LocationInfoGroup(top, SWT.NONE);
@@ -80,21 +80,21 @@ public class DairyProfileView extends SubModuleView {
 				UIControlsFactory.createLabel(nameArea, "Name")
 				);
 		fieldGridDataFactory.applyTo(
-				txtName = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileControls.DAIRY_NAME)
+				txtName = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_NAME)
 				);
 		// id field
 		labelGridDataFactory.applyTo(
 				UIControlsFactory.createLabel(nameArea, "ID")
 				);
 		fieldGridDataFactory.applyTo(
-				txtId = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileControls.DAIRY_ID)
+				txtId = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_ID)
 				);
 		// license field
 		labelGridDataFactory.applyTo(
 				UIControlsFactory.createLabel(nameArea, "License #")
 				);
 		fieldGridDataFactory.applyTo(
-				txtLicense = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileControls.DAIRY_LICENSE)
+				txtLicense = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_LICENSE)
 				);
 
 		
@@ -116,7 +116,7 @@ public class DairyProfileView extends SubModuleView {
 				UIControlsFactory.createLabel(nameArea, "Dairy Manager")
 				);
 		fieldGridDataFactory.applyTo(
-				txtManagerName = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileControls.DAIRY_MANAGER_NAME)
+				txtManagerName = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_MANAGER_NAME)
 				);
 		
 		// member count field 
@@ -124,7 +124,7 @@ public class DairyProfileView extends SubModuleView {
 				UIControlsFactory.createLabel(nameArea, "Membership")
 				);
 		fieldGridDataFactory.applyTo(
-				txtMemberCount = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileControls.DAIRY_MEMBER_COUNT)
+				txtMemberCount = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT)
 				);
 		
 		// description field
@@ -134,7 +134,7 @@ public class DairyProfileView extends SubModuleView {
 		fieldGridDataFactory.align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(
 				txtDairyDescription = UIControlsFactory.createText(nameArea, 
 						SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI, 
-						DairyProfileControls.DAIRY_PUBLIC_DESCRIPTION)
+						DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION)
 				);
 		
 		
