@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.ui.ImageRegistry;
 

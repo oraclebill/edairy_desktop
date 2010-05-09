@@ -1,4 +1,4 @@
-package com.agritrace.edairy.ui.views;
+package com.agritrace.edairy.common.ui.dialogs;
 
 
 import org.eclipse.jface.dialogs.IDialogConstants;
