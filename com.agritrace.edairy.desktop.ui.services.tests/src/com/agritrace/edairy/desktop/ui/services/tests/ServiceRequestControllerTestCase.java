@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
@@ -26,10 +25,10 @@ import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.service.core.ServiceRequestResourceManager;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.service.ui.views.ServiceRequestFilterSection;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.DairyDemoResourceManager;
 
 /**
  * @author Hui(Spark) Wan
@@ -46,7 +45,8 @@ public class ServiceRequestControllerTestCase extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		DairyDemoResourceManager.INSTANCE.createDairyResource();
+		//DairyDemoResourceManager.INSTANCE.createDairyResource();
+		ServiceRequestResourceManager.INSTANCE.createServiceRequestsResource();
 		File file = new File(EMF_MODEL_PATH);
 		if (!file.exists()) {
 			
