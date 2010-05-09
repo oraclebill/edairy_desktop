@@ -66,15 +66,9 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.StaffInfoView"
-            id="com.agritrace.edairy.ui.views.StaffInfoView"
+            class="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
+            id="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
             name="StaffInfoView">
-      </view>
-      <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.MembersInfoView"
-            id="com.agritrace.edairy.ui.views.MembersInfoView"
-            name="Member Lookup">
       </view>
       <view
             allowMultiple="true"
@@ -97,13 +91,6 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.LocalDairyView"
-            id="com.agritrace.edairy.ui.views.LocalDairyView"
-            name="LocalDairyView"
-            restorable="true">
-      </view>
-       <view
-            allowMultiple="true"
             class="com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView"
             id="com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView"
             name="MilkCollectionJournalView">
@@ -116,8 +103,8 @@
         </view>
         <view
             allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.CreditJournalView"
-            id="com.agritrace.edairy.ui.views.CreditJournalView"
+            class="com.agritrace.edairy.finance.ui.CreditJournalView"
+            id="com.agritrace.edairy.finance.ui.CreditJournalView"
             name="CreditJournalViews">
         </view>
          <view
