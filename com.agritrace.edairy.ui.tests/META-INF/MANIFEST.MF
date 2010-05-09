@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: com.agritrace.edairy.ui.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: AGRITRACE
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ org.eclipse.riena.navigation.ui.swt,
+ org.eclipse.riena.core,
+ org.eclipse.riena.ui.core,
+ com.agritrace.edairy.ui,
+ org.eclipse.riena.ui.ridgets,
+ com.agritrace.edairy.model
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

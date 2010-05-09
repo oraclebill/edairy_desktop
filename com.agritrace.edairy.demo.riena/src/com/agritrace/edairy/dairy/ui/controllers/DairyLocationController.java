@@ -20,6 +20,7 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.common.services.DairyLocations;
 import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
@@ -134,7 +135,7 @@ public class DairyLocationController extends SubModuleController {
 				  			dairyLocation,
 							"functions");						
 		functions.updateFromModel();
-		functions.setSelection(dairyLocation.getFunctions()); 
+		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
 		
 		final IComboRidget route = getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 		RouteService rs = new RouteService();

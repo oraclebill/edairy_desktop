@@ -85,7 +85,7 @@ public class DairyLocationView extends SubModuleView {
 		
 		Label functionsLabel = UIControlsFactory.createLabel(contentArea, "Functions", SWT.LEFT);
 		
-		ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(contentArea, SWT.None, true, DairyLocationController.RIDGET_ID_FUNCTIONS); 
+		ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(contentArea, SWT.None, true, DairyLocationController.RIDGET_ID_FUNCTIONS); //$NON-NLS-1$
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		gd = new GridData();
 		gd.horizontalSpan = 2;
