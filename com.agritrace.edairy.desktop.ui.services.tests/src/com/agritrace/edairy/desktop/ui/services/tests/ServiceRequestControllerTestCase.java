@@ -15,6 +15,7 @@ import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.ui.swt.controllers.AbstractSubModuleControllerTest;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
@@ -28,6 +29,7 @@ import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.service.ui.views.ServiceRequestFilterSection;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
+import com.agritrace.edairy.ui.DairyDemoResourceManager;
 
 /**
  * @author Hui(Spark) Wan
@@ -44,6 +46,7 @@ public class ServiceRequestControllerTestCase extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DairyDemoResourceManager.INSTANCE.createDairyResource();
 		File file = new File(EMF_MODEL_PATH);
 		if (!file.exists()) {
 			
@@ -97,6 +100,20 @@ public class ServiceRequestControllerTestCase extends
 		ITextRidget endDate = (ITextRidget) getController().getRidget(
 				ITextRidget.class, ServiceRequestFilterSection.END_DATE); //$NON-NLS-1$
 		assertEquals(endDate.getText(), ServiceUtils.getLastDayofMonth());
+		
+		// All type button
+		IToggleButtonRidget allTypeBtn = (IToggleButtonRidget) getController().getRidget(
+				IToggleButtonRidget.class, ServiceRequestFilterSection.REQUEST_TYPE_ALL); //$NON-NLS-1$
+		assertTrue(allTypeBtn.isSelected());
+		
+		// Verternary (Request type)
+		IToggleButtonRidget verterTypeBtn = (IToggleButtonRidget) getController().getRidget(
+				IToggleButtonRidget.class, ServiceRequestFilterSection.REQUEST_TYPE_VERTERNARY); //$NON-NLS-1$
+		assertFalse(verterTypeBtn.isSelected());
+		
+		IToggleButtonRidget insemenitationTypeBtn = (IToggleButtonRidget) getController().getRidget(
+				IToggleButtonRidget.class, ServiceRequestFilterSection.REQUEST_TYPE_INSEMINATION); //$NON-NLS-1$
+		assertFalse(insemenitationTypeBtn.isSelected());
 		
 		
 		
