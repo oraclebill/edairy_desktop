@@ -4,8 +4,35 @@
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.perspective"
-            name="com.agritrace.edairy.manager.perspective">
+            id="com.agritrace.edairy.manager.home"
+            name="com.agritrace.edairy.manager.home">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.manager.milk"
+            name="com.agritrace.edairy.manager.milk">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.manager.members"
+            name="com.agritrace.edairy.manager.members">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.manager.tools"
+            name="com.agritrace.edairy.manager.tools">
       </perspective>
    </extension>
    <extension
@@ -24,15 +51,6 @@
             icon="icons/edairymanagericon16.png"
             id="com.agritrace.edairy.manager.administration"
             name="com.agritrace.edairy.manager.administration">
-      </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.main"
-            name="com.agritrace.edairy.manager.main">
       </perspective>
    </extension>
    <extension
@@ -176,55 +194,27 @@
       </application>
    </extension>
    <extension
-         id="edairy_demo_product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="com.agritrace.edairy.demo.riena.dairy_manager"
-            name="eDairy Desktop Manager">
-         <property
-               name="appName"
-               value="eDairy Desktop Manager">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
-         </property>
-      </product>
-   </extension>
-   <extension
          id="edairy_manager"
          point="org.eclipse.core.runtime.products">
       <product
             application="com.agritrace.edairy.demo.riena.dairy_manager"
-            name="eDairy Manager">
+            name="eDairy Manager Desktop">
          <property
                name="appName"
-               value="eDairy Manager">
+               value="eDairy Manager Desktop">
          </property>
          <property
                name="aboutImage"
-               value="resources/edairy_helpabout.png">
+               value="/com.agritrace.edairy.ui/resources/edairy_helpabout.png">
          </property>
          <property
                name="aboutText"
-               value="eDairy Manager v0.1a">
+               value="eDairy Manager v1.0a">
          </property>
          <property
                name="windowImages"
-               value="icons/cow16.png,icons/cow32.png,icons/cow48.png,icons/cow64.png,icons/cow128.png">
+               value="/com.agritrace.edairy.ui/icons/edairymanagericon16.png,/com.agritrace.edairy.ui/icons/edairymanagericon32.png,/com.agritrace.edairy.ui/icons/edairymanagericon48.png,/com.agritrace.edairy.ui/icons/edairymanagericon64.png,/com.agritrace.edairy.ui/icons/edairymanagericon128.png">
          </property>
       </product>
-   </extension>
-   <extension
-         id="newId"
-         point="org.eclipse.core.runtime.applications">
-      <application
-            cardinality="singleton-global"
-            thread="main"
-            visible="true">
-         <run
-               class="com.agritrace.edairy.ui.EDairyManagerApplication">
-         </run>
-      </application>
    </extension>
 </plugin>

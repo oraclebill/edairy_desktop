@@ -77,7 +77,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		final WorkareaManager workarea = WorkareaManager.getInstance();
 
-		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.perspective"); //$NON-NLS-1$
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.home"); //$NON-NLS-1$
 
 		IModuleGroupNode groupTopLevel = new ModuleGroupNode(new NavigationNodeId("primary.navgroup"));
 		subApp.addChild(groupTopLevel);
@@ -89,13 +89,13 @@ public class EDairyManagerApplication extends SwtApplication {
 
 
 		//
-		// REPORTS TAB
+		// MAIN TAB
 		// 
 		
-	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.main"), "Main"); //$NON-NLS-1$
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.main"), "Milk Operations"); //$NON-NLS-1$
 		app.addChild(subApp);
-		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.main"); //$NON-NLS-1$
-		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("main.navgroup"));
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.milk"); //$NON-NLS-1$
+		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("milk.navgroup"));
 		subApp.addChild(groupTopLevel);
 
 		IModuleNode moduleSupplyChain = NodeFactory.createModule(
@@ -105,6 +105,12 @@ public class EDairyManagerApplication extends SwtApplication {
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collectionslog"), "Milk Logs", moduleSupplyChain,BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.collections"), "Collections Entry", moduleSupplyChain,MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.supplychain.deliveries"), "Deliveries Entry", moduleSupplyChain, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.members"), "Membership Management"); //$NON-NLS-1$
+		app.addChild(subApp);
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.members"); //$NON-NLS-1$
+		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("members.navgroup"));
+		subApp.addChild(groupTopLevel);
 
 		IModuleNode moduleMembers = NodeFactory.createModule(
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -125,6 +131,12 @@ public class EDairyManagerApplication extends SwtApplication {
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.finances.log"), "Journal Log", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.finances.credits"), "Credit Journal Entry", financeMembers, CreditJournalView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.finances.payments"), "Payment Journal Entry", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.members"), "Office Tools"); //$NON-NLS-1$
+		app.addChild(subApp);
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.tools"); //$NON-NLS-1$
+		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("tools.navgroup"));
+		subApp.addChild(groupTopLevel);
 
 
 		IModuleNode moduleEvents = NodeFactory.createModule(
