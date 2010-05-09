@@ -72,12 +72,6 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.MembersInfoView"
-            id="com.agritrace.edairy.ui.views.MembersInfoView"
-            name="Member Lookup">
-      </view>
-      <view
-            allowMultiple="true"
             class="com.agritrace.edairy.ui.views.VeterinaryRequestView"
             id="com.agritrace.edairy.ui.views.VeterinaryRequestView"
             name="VeterinaryRequestView">
