@@ -89,7 +89,7 @@ public class LocalDairyView extends SubModuleView {
 		txtFirst.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
 				1, 1));
 
-		Label imageLable = new Label(detailGroup, SWT.BORDER); //$NON-NLS-1$
+		Label imageLable = new Label(detailGroup, SWT.BORDER); 
 //		GridData imagData = new GridData();
 //		imagData.heightHint = 100;
 //		imagData.widthHint = 100;

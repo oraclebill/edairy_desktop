@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -40,8 +39,6 @@ import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.ui.ImageRegistry;
 import com.agritrace.edairy.ui.views.data.CreditRecord;
 import com.agritrace.edairy.ui.views.data.CreditRecordFactory;
-import com.agritrace.edairy.ui.views.data.Item;
-import com.agritrace.edairy.ui.views.data.ItemsFactory;
 
 public class CreditJournalView extends ViewPart {
 
@@ -102,6 +99,7 @@ public class CreditJournalView extends ViewPart {
 		calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
 				false));
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				final Shell dialog = new Shell(Display.getDefault()
 						.getActiveShell(), SWT.DIALOG_TRIM);
@@ -130,6 +128,7 @@ public class CreditJournalView extends ViewPart {
 				ok.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false,
 						false));
 				ok.addSelectionListener(new SelectionAdapter() {
+					@Override
 					public void widgetSelected(SelectionEvent e) {
 						String textDate = (calendar.getMonth() + 1) + "/"
 								+ calendar.getDay() + "/" + calendar.getYear();
@@ -200,6 +199,7 @@ public class CreditJournalView extends ViewPart {
 		addButton.addSelectionListener(new SelectionListener() {
 
 		
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CreditRecord record = new CreditRecord();
 
@@ -220,6 +220,7 @@ public class CreditJournalView extends ViewPart {
 			}
 
 			
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 
@@ -233,6 +234,7 @@ public class CreditJournalView extends ViewPart {
 		clearButton.addSelectionListener(new SelectionListener() {
 			
 		
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if(MessageDialog.openConfirm(clearButton.getShell(), "Clear input fields" , "Do you want to clear input fields?")){
 					referenceText.setText("");
@@ -245,6 +247,7 @@ public class CreditJournalView extends ViewPart {
 			}
 			
 			
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 				
@@ -304,6 +307,7 @@ public class CreditJournalView extends ViewPart {
 		removeButton.addSelectionListener(new SelectionListener() {
 
 			
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				IStructuredSelection selection = (IStructuredSelection) tableViewer
 						.getSelection();
@@ -324,6 +328,7 @@ public class CreditJournalView extends ViewPart {
 			}
 
 			
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 
@@ -347,6 +352,7 @@ public class CreditJournalView extends ViewPart {
 	}
 
 	
+	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
@@ -355,36 +361,42 @@ public class CreditJournalView extends ViewPart {
 	private class CreditRecordLabelProivder implements ITableLabelProvider {
 
 	
+		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 	
+		@Override
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
 
+		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
 
+		@Override
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 	
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 	
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof CreditRecord) {
 				switch (columnIndex) {

@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.Status;
 
 public class StringNumberValidator implements IValidator {
 
+	@Override
 	public IStatus validate(Object value) {
 		if(value == null){
 			throw new IllegalArgumentException(

@@ -14,6 +14,8 @@ import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -32,7 +34,7 @@ import com.agritrace.edairy.ui.views.ViewWidgetId;
 import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
 import com.swtdesigner.ResourceManager;
 
-public class MilkCollectionJournalView extends SubModuleView {
+public class MilkCollectionJournalView extends SubModuleView implements TraverseListener{
 
 	public static final String ID = MilkCollectionJournalView.class.getName();
 
@@ -81,7 +83,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 	private Text dateText; 
 	private Button calendarButton;
-	
+
 	public static final int MINIMUM_LABEL_WIDTH=65;
 
 
@@ -98,7 +100,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 		Group groupTwo = createMilkBookGroup(parent);
 		gdf.applyTo(groupTwo);
-		
+
 		Group groupThree = createMilkEntryInputGroup(parent);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupThree);
 
@@ -116,14 +118,15 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 		Label dateLabel = UIControlsFactory.createLabel(group,DATE_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(dateLabel);
-		
+
 		Composite dateComposite = UIControlsFactory.createComposite(group);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateComposite);
 		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(dateComposite);
-		
+
 		dateText = UIControlsFactory.createText(dateComposite, SWT.READ_ONLY|SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 		addUIControl(dateText,ViewWidgetId.calendarDate);
+		dateText.addTraverseListener(this);
 
 		calendarButton = new Button(dateComposite,SWT.PUSH);
 		//		calendarButton = UIControlsFactory.createButton(group);
@@ -136,6 +139,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		//addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP, dateText.getText());
@@ -148,17 +152,18 @@ public class MilkCollectionJournalView extends SubModuleView {
 				}
 			}
 		});
-		
+
 		Label padComposite = UIControlsFactory.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2,1).applyTo(padComposite);
 
 		Label routeLabel = UIControlsFactory.createLabel(group,ROUTE_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(routeLabel);
 
-//		Combo combo = new Combo(group, SWT.BORDER|SWT.DROP_DOWN);
+		//		Combo combo = new Combo(group, SWT.BORDER|SWT.DROP_DOWN);
 		Combo combo = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo);
 		addUIControl(combo, ViewWidgetId.routeCombo);
+		combo.addTraverseListener(this);
 
 		Label sectionLabel = UIControlsFactory.createLabel(group,SECTION_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(sectionLabel);
@@ -166,16 +171,19 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Combo combo2 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo2);
 		addUIControl(combo2,ViewWidgetId.sessionCombo);
+		combo2.addTraverseListener(this);
 
-//		Composite pane = UIControlsFactory.createComposite(group);
-//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(pane);
-//		GridDataFactory.fillDefaults().grab(true,false).span(7, 1).applyTo(pane);
+		//		Composite pane = UIControlsFactory.createComposite(group);
+		//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(pane);
+		//		GridDataFactory.fillDefaults().grab(true,false).span(7, 1).applyTo(pane);
 
 		Label vehicleLabel = UIControlsFactory.createLabel(group,VEHICLE_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(vehicleLabel);
 
 		Combo combo3 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo3);
+		combo3.addTraverseListener(this);
+
 		addUIControl(combo3,ViewWidgetId.vehicleCombo);
 
 
@@ -185,6 +193,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Combo combo4 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo4);
 		addUIControl(combo4,ViewWidgetId.driverCombo);
+		combo4.addTraverseListener(this);
 
 
 		return group;
@@ -200,6 +209,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Text journalText = UIControlsFactory.createText(group, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalText);
 		addUIControl(journalText,ViewWidgetId.journalText);
+		journalText.addTraverseListener(this);
 
 
 		Label journalTotalLabel = UIControlsFactory.createLabel(group,JOURNAL_TOTAL_LABEL);
@@ -207,6 +217,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 		Text journalTotalText = UIControlsFactory.createTextDecimal(group);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalTotalText);
+		journalTotalText.addTraverseListener(this);
 		addUIControl(journalTotalText,ViewWidgetId.journalTotalText);
 
 		Label binLabel = UIControlsFactory.createLabel(group,BIN_LABEL);
@@ -215,14 +226,15 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Text binText = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(binText);
 		addUIControl(binText,ViewWidgetId.binText);
+		binText.addTraverseListener(this);
 
 		return group;
 	}
 
 	private Group createMilkEntryInputGroup(Composite parent){
-		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); //$NON-NLS-1$
+		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); 
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
-	
+
 		Group panel = UIControlsFactory.createGroup(group,"");
 		GridDataFactory.fillDefaults().grab(true,true).span(1, 2).applyTo(panel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(panel);
@@ -233,6 +245,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		final Text memberText = UIControlsFactory.createText(panel, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(memberText);
 		addUIControl(memberText,ViewWidgetId.memberIdText);
+		memberText.addTraverseListener(this);
 
 		Label canLabel = UIControlsFactory.createLabel(panel,CAN_ID_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(canLabel);
@@ -240,6 +253,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Text canText = UIControlsFactory.createText(panel, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(canText);
 		addUIControl(canText,ViewWidgetId.canIdText);
+		canText.addTraverseListener(this);
 
 
 		Label quantityLabel = UIControlsFactory.createLabel(panel,QUANTITY_LABEL);
@@ -248,7 +262,8 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Text quantityText = UIControlsFactory.createTextDecimal(panel);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(quantityText);
 		addUIControl(quantityText,ViewWidgetId.quantityText);
-		
+		quantityText.addTraverseListener(this);
+
 		Composite buttonComposite = UIControlsFactory.createComposite(panel);
 		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).span(2,1).applyTo(buttonComposite);
 		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(buttonComposite);
@@ -256,14 +271,16 @@ public class MilkCollectionJournalView extends SubModuleView {
 
 		final Button nprMissingButton = UIControlsFactory.createButtonCheck(buttonComposite, NPR_COLUMN_HEADER, ViewWidgetId.nprMissingCombo);
 		GridDataFactory.fillDefaults().align(SWT.END,SWT.FILL).applyTo(nprMissingButton);
-		
-		
+		nprMissingButton.addTraverseListener(this);
+
+
 		final Button rejectedButton = UIControlsFactory.createButtonCheck(buttonComposite, REJECTED_COLUMN_HEADER, ViewWidgetId.rejectedCombo);
 		GridDataFactory.fillDefaults().align(SWT.END,SWT.FILL).applyTo(rejectedButton);
-		
+		rejectedButton.addTraverseListener(this);
+
 		Button addButton = UIControlsFactory.createButton(group, "Add", ViewWidgetId.addButton); 
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(addButton);
-		
+
 		Button clearButton = UIControlsFactory.createButton(group, "Clear", ViewWidgetId.entryInputClear); 
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(clearButton);
 
@@ -277,7 +294,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 	//	}
 
 	private Group createMilkEntryGroup(Composite parent) {
-		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); //$NON-NLS-1$
+		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); 
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
 		Composite panel= UIControlsFactory.createComposite(group);
@@ -288,7 +305,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tableComposite);
 
 		Table table = UIControlsFactory.createTable(tableComposite, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.milkEntryTable); //$NON-NLS-1$
+				ViewWidgetId.milkEntryTable); 
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
@@ -335,7 +352,7 @@ public class MilkCollectionJournalView extends SubModuleView {
 		Composite buttonComposite = UIControlsFactory.createComposite(group);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(buttonComposite);
 
-	
+
 		Button modifyButton = UIControlsFactory.createButton(buttonComposite, "Modify", ViewWidgetId.modifyButton); 
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(modifyButton);
 
@@ -348,7 +365,11 @@ public class MilkCollectionJournalView extends SubModuleView {
 		return buttonComposite;
 	}
 
-
-
-
+	@Override
+	public void keyTraversed(TraverseEvent e) {
+		if (e.detail == SWT.TRAVERSE_RETURN) {
+			e.doit = true;
+			e.detail = SWT.TRAVERSE_TAB_NEXT;
+		}
+	}
 }

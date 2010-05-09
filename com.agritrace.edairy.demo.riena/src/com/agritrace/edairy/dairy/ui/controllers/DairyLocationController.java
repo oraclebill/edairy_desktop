@@ -20,7 +20,10 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+<<<<<<< HEAD
 import com.agritrace.edairy.common.services.DairyLocations;
+=======
+>>>>>>> master
 import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
@@ -135,7 +138,11 @@ public class DairyLocationController extends SubModuleController {
 				  			dairyLocation,
 							"functions");						
 		functions.updateFromModel();
+<<<<<<< HEAD
 		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
+=======
+		functions.setSelection(dairyLocation.getFunctions()); 
+>>>>>>> master
 		
 		final IComboRidget route = getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 		RouteService rs = new RouteService();
@@ -143,7 +150,7 @@ public class DairyLocationController extends SubModuleController {
 		route.bindToModel(rs, "routes", Route.class, "getName", this.dairyLocation, "route");
 		route.updateFromModel();
 		
-		final IActionRidget addRouteAction = (IActionRidget) getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
+		final IActionRidget addRouteAction = getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
 		addRouteAction.addListener(new AddRouteCallback());
 		
 		
@@ -283,6 +290,7 @@ public class DairyLocationController extends SubModuleController {
 	private  class SaveCallback implements IActionListener {
 		IValidator uniqueNameValidator = new IValidator()
 		{
+			@Override
 			public IStatus validate(Object value) {
 				//#TODO invoke the real service to query locationby name
 				if ("testDairylocationName1".equals(textName.getText()))
@@ -296,6 +304,7 @@ public class DairyLocationController extends SubModuleController {
 		
 		IValidator addressValidator = new IValidator()
 		{
+			@Override
 			public IStatus validate(Object value) {
 				if ("".equals(textAddress.getText()))
 				{
@@ -305,6 +314,7 @@ public class DairyLocationController extends SubModuleController {
 			}
 			
 		};
+		@Override
 		public void callback() {
 			textName.addValidationRule(uniqueNameValidator, ValidationTime.ON_UPDATE_TO_MODEL);
 			if (!textName.revalidate())
@@ -326,6 +336,7 @@ public class DairyLocationController extends SubModuleController {
 	
 	
 	private  class CancelCallback implements IActionListener {
+		@Override
 		public void callback() {
 			
 		}

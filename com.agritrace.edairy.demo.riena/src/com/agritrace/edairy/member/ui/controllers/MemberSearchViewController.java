@@ -1,7 +1,7 @@
 package com.agritrace.edairy.member.ui.controllers;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +9,16 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.query.conditions.Condition;
+import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
+import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
+import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectReferenceValueCondition;
+import org.eclipse.emf.query.statements.FROM;
+import org.eclipse.emf.query.statements.IQueryResult;
+import org.eclipse.emf.query.statements.SELECT;
+import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -27,11 +36,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.DairyFactory;
@@ -42,6 +49,7 @@ import com.agritrace.edairy.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
+import com.agritrace.edairy.model.tracking.TrackingPackage;
 import com.agritrace.edairy.member.ui.views.AddAnimalDialog;
 import com.agritrace.edairy.member.ui.views.AddContainerDialog;
 import com.agritrace.edairy.member.ui.views.AddFarmDialog;
@@ -75,21 +83,17 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITextRidget postalCodeTxt;
 
 	//container tab
-	private IComboRidget columnCombo;
-	private IComboRidget compareExpression;
-	private ITextRidget numberRidget;
-	private IComboRidget farmRidget;
-	private IComboRidget containterTypeRidget;
-	private IComboRidget unitMeasureRidget;
-	private IActionRidget filterButton;
 	private ITableRidget containerTable;
 	private IActionRidget containerAddButton;
 	private IActionRidget containerRemoveButton;
 	private String[] containerPropertyNames = { "containerId", "owner","type", "measureType","capacity"};
 	private String[] containerColumnHeaders = { "ID", "Farm","Container Type", "Units Of Measure","Capacity" }; 
+	private List<Container>containerInput = new ArrayList<Container>();
+	private IComboRidget farmFilterCombo;
+	private IActionRidget containerApplyRidget;
 	public static final String containerRemoveTitle="Remove Containers";
 	public static final String containerRemoveMessage="Do you want to remove selected containers?";
-	private List<Container>containerInput = new ArrayList<Container>();
+	public static final String ALL_FARM="All Farms";
 
 	//live stock tab
 	private ITableRidget liveStockTable;
@@ -274,8 +278,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 		});
 	}
 	private void configureContainerTab(){
-
-		
 		containerTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 		containerTable.setColumnFormatter(1, new ColumnFormatter() {
 
@@ -288,7 +290,6 @@ public class MemberSearchViewController extends SubModuleController implements M
 			}
 		});
 		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
-
 		containerAddButton = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_ADD);
 		containerAddButton.addListener(new IActionListener() {
 
@@ -302,7 +303,16 @@ public class MemberSearchViewController extends SubModuleController implements M
 					Container newContainer = dialog.getNewContainer();
 					newContainer.getOwner().getCans().add(newContainer);
 					containerInput.add(newContainer);
-					containerTable.updateFromModel();
+					List<Container> containers;
+					try {
+						containers = getContainerFilteredResult();
+						containerTable.bindToModel(new WritableList(containers, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
+						containerTable.updateFromModel();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}
 			}
 		});
@@ -320,11 +330,36 @@ public class MemberSearchViewController extends SubModuleController implements M
 							((Container)selObject).getOwner().getCans().remove(selObject);
 							containerInput.remove(selObject);
 						}
-						containerTable.updateFromModel();
+						List<Container> containers;
+						try {
+							containers = getContainerFilteredResult();
+							containerTable.bindToModel(new WritableList(containers, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
+							containerTable.updateFromModel();
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 
 
+			}
+
+		});
+		containerApplyRidget = getRidget(IActionRidget.class,ViewWidgetId.CONTAINER_FilterButton);
+		containerApplyRidget.addListener(new IActionListener(){
+
+			@Override
+			public void callback() {
+				try {
+					List<Container> containers = getContainerFilteredResult();
+					containerTable.bindToModel(new WritableList(containers, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
+					containerTable.updateFromModel();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 
 		});
@@ -505,14 +540,24 @@ public class MemberSearchViewController extends SubModuleController implements M
 	}
 
 	private void updateContainerBinding(){
+		
 		containerInput.clear();
 		List<Farm> farms = selectedMember.getFarms();
+		List<String>farmFilterList = new ArrayList<String>();
+		farmFilterList.add(ALL_FARM);
 		for(Farm farm :farms){
-			containerInput.addAll( farm.getCans());	
+			containerInput.addAll( farm.getCans());
+			if(!farmFilterList.contains(farm.getName())){
+				farmFilterList.add(farm.getName());	
+			}
 		}
 		containerTable.updateFromModel();
 		containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		containerTable.addSelectionListener(this);
+		
+		farmFilterCombo= getRidget(IComboRidget.class,ViewWidgetId.CONTAINER_FarmCombo);
+		farmFilterCombo.bindToModel(new WritableList(farmFilterList,String.class), String.class, null, new WritableValue());
+		farmFilterCombo.updateFromModel();
 	}
 
 	private void updateFarmBinding(){
@@ -627,5 +672,36 @@ public class MemberSearchViewController extends SubModuleController implements M
 		}
 
 	}
+	
+	private List<Container> getContainerFilteredResult() throws ParseException {
+		List<Container> objs = new ArrayList<Container>();
+		farmFilterCombo = getRidget(IComboRidget.class,ViewWidgetId.CONTAINER_FarmCombo);
+
+		SELECT select = null;
+		
+		String selectedValue = (String) farmFilterCombo.getSelection();
+		if(selectedValue.equals(ALL_FARM)){
+			return containerInput;
+		}
+		Condition farmName = new org.eclipse.emf.query.conditions.strings.StringValue(
+				selectedValue);
+		EObjectCondition farmNameCondition = new EObjectAttributeValueCondition(
+				TrackingPackage.Literals.FARM__NAME, farmName);
+		EObjectCondition farmCondidtion = new EObjectReferenceValueCondition(
+				TrackingPackage.Literals.CONTAINER__OWNER, farmNameCondition);
+		
+	
+		select = new SELECT(new FROM(containerInput), new WHERE(
+					farmCondidtion));
+
+		
+		IQueryResult result = select.execute();
+		for (EObject object : result.getEObjects()) {
+			objs.add((Container)object);
+		}
+
+		return objs;
+	}
+
 
 }

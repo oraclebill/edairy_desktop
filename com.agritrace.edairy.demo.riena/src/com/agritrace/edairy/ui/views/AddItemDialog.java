@@ -37,6 +37,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 	/**
 	 * Closes the dialog box Override so we can dispose the image we created
 	 */
+	@Override
 	public boolean close() {
 
 		return super.close();
@@ -48,6 +49,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createContents(Composite parent) {
 		Control contents = super.createContents(parent);
 		setTitle("Add Delivery Record");
@@ -55,7 +57,8 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 		return contents;
 	}
 	
-	 protected void configureShell(Shell newShell) {
+	 @Override
+	protected void configureShell(Shell newShell) {
 	        super.configureShell(newShell);
 	        newShell.setSize(350, 250);
 
@@ -70,6 +73,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		Composite dialogArea = new Composite(composite,SWT.NULL);
@@ -106,6 +110,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 	 * 
 	 * @param parent the parent composite
 	 */
+	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		okButton.setEnabled(false);
@@ -114,6 +119,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 	}
 
 	//@Override
+	@Override
 	public void modifyText(ModifyEvent e) {
 		if(e.getSource() == idText){
 			newItem.setId(idText.getText().trim());
@@ -143,6 +149,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener{
 		this.newItem = newItem;
 	}
 	
+	@Override
 	protected boolean isResizable() {
 		return true;
 	}

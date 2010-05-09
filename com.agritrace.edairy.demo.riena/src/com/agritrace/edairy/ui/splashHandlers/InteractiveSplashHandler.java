@@ -58,6 +58,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	 * 
 	 * @see org.eclipse.ui.splash.AbstractSplashHandler#init(org.eclipse.swt.widgets.Shell)
 	 */
+	@Override
 	public void init(final Shell splash) {
 		// Store the shell
 		super.init(splash);
@@ -101,6 +102,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	 */
 	private void createUIListenersButtonCancel() {
 		fButtonCancel.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleButtonCancelWidgetSelected();
 			}
@@ -121,6 +123,7 @@ public class InteractiveSplashHandler extends AbstractSplashHandler {
 	 */
 	private void createUIListenersButtonOK() {
 		fButtonOK.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleButtonOKWidgetSelected();
 			}

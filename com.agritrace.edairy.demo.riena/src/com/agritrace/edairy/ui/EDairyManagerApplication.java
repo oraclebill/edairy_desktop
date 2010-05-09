@@ -23,6 +23,8 @@ import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
+import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
+import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.ui.views.BlankView;
 import com.agritrace.edairy.ui.views.CreditJournalView;
@@ -33,7 +35,7 @@ import com.agritrace.edairy.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.ui.views.MonthlyCreditReportView;
-import com.agritrace.edairy.ui.views.ServiceRequestLogView;
+//import com.agritrace.edairy.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.ui.views.StaffInfoView;
 import com.agritrace.edairy.ui.views.VeterinaryRequestView;
 
@@ -113,7 +115,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		IModuleNode moduleServices = NodeFactory.createModule(
 				new NavigationNodeId("edm.services"), "Services", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleServices.setClosable(false);
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.log"), "Request Log", moduleServices, ServiceRequestLogView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.log"), "Request Log", moduleServices, ServiceRequestLogView.ID, ServiceLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.veterinary"), "Vet Request Entry", moduleServices, VeterinaryRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.insemination"), "A.I. Request Entry", moduleServices, InseminationRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 

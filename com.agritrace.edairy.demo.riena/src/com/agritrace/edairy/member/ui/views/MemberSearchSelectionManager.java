@@ -17,7 +17,7 @@ public class MemberSearchSelectionManager {
 	
 
 	private MemberSearchSelectionManager (){
-		listeners = new ArrayList();
+		listeners = new ArrayList<MemberSearchSelectionListener>();
 	}
 	
 	public synchronized void addSearchSelectionListener(MemberSearchSelectionListener listener){

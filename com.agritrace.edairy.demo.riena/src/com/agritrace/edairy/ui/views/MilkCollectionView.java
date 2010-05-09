@@ -76,6 +76,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 
 
 
+	@Override
 	public void createPartControl(Composite parent) {
 		// parent.setBackground(LnfManager.getLnf().getColor(
 		// LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -132,6 +133,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
 				false));
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				final Shell dialog = new Shell(Display.getDefault()
 						.getActiveShell(), SWT.DIALOG_TRIM);
@@ -160,6 +162,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 				ok.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false,
 						false));
 				ok.addSelectionListener(new SelectionAdapter() {
+					@Override
 					public void widgetSelected(SelectionEvent e) {
 						String textDate = (calendar.getMonth() + 1) + "/"
 						+ calendar.getDay() + "/" + calendar.getYear();
@@ -279,6 +282,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 
 
 
+	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
@@ -352,6 +356,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 	}
 
 
+	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == addResultsButton) {
 			MilkRecord newRecord = new MilkRecord();
@@ -394,6 +399,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 	}
 
 
+	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
 
@@ -419,6 +425,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		/**
 		 * @see org.eclipse.jface.viewers.ICellModifier#canModify(java.lang.Object, java.lang.String)
 		 */
+		@Override
 		public boolean canModify(Object element, String property) {
 			return true;
 		}
@@ -426,6 +433,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		/**
 		 * @see org.eclipse.jface.viewers.ICellModifier#getValue(java.lang.Object, java.lang.String)
 		 */
+		@Override
 		public Object getValue(Object element, String property) {
 
 			// Find the index of the column
@@ -476,6 +484,7 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 		/**
 		 * @see org.eclipse.jface.viewers.ICellModifier#modify(java.lang.Object, java.lang.String, java.lang.Object)
 		 */
+		@Override
 		public void modify(Object element, String property, Object value) {	
 
 			// Find the index of the column 
@@ -542,36 +551,42 @@ public class MilkCollectionView extends ViewPart implements SelectionListener {
 	public class MilkRecordLabelProvider implements ITableLabelProvider {
 
 		
+		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 		
+		@Override
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
 		
+		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
 		
+		@Override
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 		
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof MilkRecord){
 				MilkRecord record = (MilkRecord)element;
