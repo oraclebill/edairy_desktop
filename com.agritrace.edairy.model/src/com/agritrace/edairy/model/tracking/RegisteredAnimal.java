@@ -293,7 +293,7 @@ public interface RegisteredAnimal extends EObject {
 	void setAcquisitionType(AcquisitionType value);
 
 	/**
-	 * Returns the value of the '<em><b>Identifiers</b></em>' reference list.
+	 * Returns the value of the '<em><b>Identifiers</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.model.tracking.AnimalIdentifier}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -301,9 +301,9 @@ public interface RegisteredAnimal extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Identifiers</em>' reference list.
+	 * @return the value of the '<em>Identifiers</em>' containment reference list.
 	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getRegisteredAnimal_Identifiers()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<AnimalIdentifier> getIdentifiers();
