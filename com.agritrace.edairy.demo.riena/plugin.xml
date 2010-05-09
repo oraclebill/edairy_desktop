@@ -181,7 +181,7 @@
       <path path="icons" />
    </extension>
    <extension
-         id="dairy_manager"
+         id="dairy_manager_app"
          name="Dairy Manager"
          point="org.eclipse.core.runtime.applications">
       <application
@@ -194,10 +194,10 @@
       </application>
    </extension>
    <extension
-         id="edairy_manager"
+         id="dairy_manager_prod"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.demo.riena.dairy_manager"
+            application="com.agritrace.edairy.demo.riena.dairy_manager_app"
             name="eDairy Manager Desktop">
          <property
                name="appName"
