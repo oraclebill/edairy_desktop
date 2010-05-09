@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.views;
+package com.agritrace.edairy.dairy.ui.views;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +36,7 @@ import com.agritrace.edairy.ui.views.CalendarSelectionDialog;
  * @author Spark Wan
  * 
  */
-public class ServiceRequestFilterSection {
+public class VehicleFilterSection {
 
 	private static final int INDENT_WIDTH = 10;
 	public static final String BIND_ID_APPLY = "filter.button";

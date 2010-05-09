@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Desktop Manager" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.demo.riena.edairy_demo_product" application="com.agritrace.edairy.demo.riena.dairy_manager" version="0.1.0" useFeatures="true" includeLaunchers="true">
+<product name="eDairy Manager Desktop" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.demo.riena.dairy_manager_prod" application="com.agritrace.edairy.demo.riena.dairy_manager_app" version="1.0a" useFeatures="false" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/com.agritrace.edairy.ui/resources/edairy_helpabout.png"/>
+      <text>
+         eDairy Manager v1.0a
+      </text>
+   </aboutInfo>
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch}
+			-nl ${target.nl} -consoleLog</programArgs>
+      <vmArgsMac>-XstartOnFirstThread
+			-Dorg.eclipse.swt.internal.carbon.smallFonts
+			-Driena.application.width=1120 -Driena.application.height=850
+		</vmArgsMac>
+      <vmArgsWin>-Driena.application.width=1120
+			-Driena.application.height=850</vmArgsWin>
    </launcherArgs>
 
-   <launcher name="edairymgr">
+   <windowImages i16="/com.agritrace.edairy.ui/icons/edairymanagericon16.png" i32="/com.agritrace.edairy.ui/icons/edairymanagericon32.png" i48="/com.agritrace.edairy.ui/icons/edairymanagericon48.png" i64="/com.agritrace.edairy.ui/icons/edairymanagericon64.png" i128="/com.agritrace.edairy.ui/icons/edairymanagericon128.png"/>
+
+   <launcher name="dairymgr">
       <solaris/>
       <win useIco="false">
          <bmp/>
@@ -20,27 +36,35 @@
    <vm>
    </vm>
 
+   <license>
+        <url>http://www.agritrace.co.ke/licensing/index.php</url>
+   </license>
+
    <plugins>
+      <plugin id="com.agritrace.edairy.demo.riena"/>
       <plugin id="com.agritrace.edairy.model"/>
-      <plugin id="com.agritrace.edairy.riena.ui" fragment=""/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="javax.persistence"/>
       <plugin id="javax.servlet"/>
       <plugin id="org.apache.commons.beanutils"/>
       <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.oro"/>
+      <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
       <plugin id="org.eclipse.core.databinding.beans"/>
       <plugin id="org.eclipse.core.databinding.observable"/>
       <plugin id="org.eclipse.core.databinding.property"/>
+      <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.databinding"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.query"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.log"/>
@@ -48,14 +72,13 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.persistence.asm"/>
-      <plugin id="org.eclipse.persistence.core"/>
-      <plugin id="org.eclipse.persistence.jpa"/>
-      <plugin id="org.eclipse.persistence.jpa.equinox" fragment="true"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
-      <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
+      <plugin id="org.eclipse.rcp"/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
       <plugin id="org.eclipse.riena.communication.console"/>
@@ -74,31 +97,13 @@
       <plugin id="org.eclipse.riena.ui.swt.rcp"/>
       <plugin id="org.eclipse.riena.ui.workarea"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
-      <plugin id="org.junit"/>
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
+      <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.pushingpixels.trident"/>
    </plugins>
 
-   <features>
-      <feature id="com.agritrace.edairy.desktop.feature" version="1.0.0.qualifier"/>
-      <feature id="org.eclipse.rcp" version="3.6.0.v20100427-9KAjFGCFs-Uz-02qq_uWSth7"/>
-      <feature id="org.eclipse.emf.query.sdk" version="1.4.0.v20100428-2315-67J-95GFz01DOIuNNRTWK_NPj507"/>
-      <feature id="org.eclipse.emf.databinding" version="1.2.0.v20100504-1259"/>
-      <feature id="org.eclipse.emf.sdk" version="2.6.0.v20100504-1259"/>
-      <feature id="com.agritrace.edairy.desktop.site" version="1.0.0.qualifier"/>
-      <feature id="org.eclipse.equinox.core.sdk" version="3.6.0.v20100421-7sF99Fp7FUu63Xc4bf-5HsRV"/>
-      <feature id="org.eclipse.equinox.executable" version="3.4.0.v20100421-7M7J8ZFIhIeynfgHgHsU7Z"/>
-      <feature id="org.eclipse.riena.build.feature.core.sdk" version="2.0.0.v20100503_2_0_0_M7"/>
-   </features>
-
-   <configurations>
-      <plugin id="com.agritrace.edairy.riena.ui" autoStart="false" startLevel="0" />
-   </configurations>
 
 </product>
