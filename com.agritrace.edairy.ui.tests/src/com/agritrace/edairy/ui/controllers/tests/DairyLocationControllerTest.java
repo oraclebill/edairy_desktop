@@ -38,7 +38,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 		node.setNodeId(new NavigationNodeId(DairyLocationController.NODE_ID));
 		DairyLocationController newInst = new DairyLocationController(node);
 		newInst.setNavigationNode(node);
-		newInst.setDairyLocation(dairyLocation);
+		newInst.getInput().add(dairyLocation);
 		return newInst;
 	}
 	
@@ -115,6 +115,8 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 		IMultipleChoiceRidget functions = getController().getRidget(IMultipleChoiceRidget.class, DairyLocationController.RIDGET_ID_FUNCTIONS);
 		List<DairyFunction>  list1 = dairyLocation.getFunctions();
 		Assert.assertEquals(list1.size(), functions.getSelection().size());
+		functions.setSelection(null);
+		Assert.assertEquals(0, list1.size());
 		
 		IComboRidget route = getController().getRidget(IComboRidget.class, DairyLocationController.RIDGET_ID_ROUTE);
 		Assert.assertEquals(dairyLocation.getRoute().getName(), ((Route)route.getSelection()).getName());

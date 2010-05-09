@@ -1,9 +1,11 @@
 package com.agritrace.edairy.dairy.ui.views;
 
+import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
+import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.riena.ui.swt.MessageBox;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -15,9 +17,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
@@ -25,7 +29,7 @@ import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController;
 
 public class DairyLocationView extends SubModuleView {
 	public final static String ID = DairyLocationView.class.getName();
-	private final static int WIDTH_UNIT = 100;
+	private final static int WIDTH_UNIT = 60;
 	private final static int COLUMN_MARGIN = 20;
 	private final static int FORM_MARGIN = 10;
 	private final static int ROW_MARGIN = 10;
@@ -33,12 +37,46 @@ public class DairyLocationView extends SubModuleView {
 
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
-		this.contentArea = parent;
+		this.contentArea =  parent;
 		contentArea.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		
-		GridLayout layout = new GridLayout(3, false);
+		GridLayout layout = new GridLayout(1, false);
 		contentArea.setLayout(layout);
-
+		/*DairyLocationMasterDetailsComposite mdComposite = new DairyLocationMasterDetailsComposite(
+				contentArea, SWT.NONE);*/
+		DairyLocationMasterDetailsComposite master = new DairyLocationMasterDetailsComposite(contentArea, SWT.NONE);
+		this.addUIControl(master, "master");
+		GridData gd = new GridData();
+		gd.grabExcessHorizontalSpace = true;
+		gd.horizontalAlignment = SWT.FILL;
+		gd.grabExcessVerticalSpace = true;
+		gd.verticalAlignment = SWT.FILL;
+		master.setLayoutData(gd);
+		Composite table = master.getTable();
+		/*gd = new GridData();
+		gd.grabExcessVerticalSpace = false;
+		gd.verticalAlignment = SWT.TOP;
+		gd.heightHint = ROW_MARGIN * 3;
+		table.setLayoutData(gd);*/
+		Composite details = master.getDetails();
+		gd = new GridData();
+		gd.grabExcessHorizontalSpace = true;
+		gd.grabExcessVerticalSpace = true;
+		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.FILL;
+		//gd.heightHint = ROW_MARGIN * 2;
+		details.setLayoutData(gd);
+		
+		GridLayout detaLayout = new GridLayout();
+		detaLayout.numColumns = 1;
+		details.setLayout(detaLayout);
+		
+		Group detailGroup = UIControlsFactory.createGroup(details, "Details");
+		gd = new GridData();
+		gd.grabExcessHorizontalSpace = true;
+		gd.horizontalAlignment = SWT.FILL;
+		detailGroup.setLayoutData(gd);
+		GridLayout layout2 = new GridLayout(3, false);
+		detailGroup.setLayout(layout2);
 		/*Label idLabel = UIControlsFactory.createLabel(contentArea, "Location #", SWT.LEFT);
 
 		Text idText = UIControlsFactory.createText(contentArea, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
@@ -48,19 +86,19 @@ public class DairyLocationView extends SubModuleView {
 		idText.setEditable(false);
 		idText.setLayoutData(gd);*/
 
-		Label nameLabel = UIControlsFactory.createLabel(contentArea, "Name", SWT.LEFT);
+		Label nameLabel = UIControlsFactory.createLabel(detailGroup, "Name", SWT.LEFT);
 
-		Text nameText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_NAME);
-		GridData gd = new GridData();
+		Text nameText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_NAME);
+		 gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
 		gd.grabExcessHorizontalSpace = true;
 		gd.horizontalAlignment = SWT.FILL;
 		nameText.setLayoutData(gd);
 		
-		Label descriptionLabel = UIControlsFactory.createLabel(contentArea, "Description", SWT.LEFT);
+		Label descriptionLabel = UIControlsFactory.createLabel(detailGroup, "Description", SWT.LEFT);
 		
-		Text descriptionText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_DESCRIPTION);
+		Text descriptionText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_DESCRIPTION);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
@@ -68,37 +106,37 @@ public class DairyLocationView extends SubModuleView {
 		gd.horizontalAlignment = SWT.FILL;
 		descriptionText.setLayoutData(gd);
 		
-		Label phoneLabel = UIControlsFactory.createLabel(contentArea, "Phone", SWT.LEFT);
+		Label phoneLabel = UIControlsFactory.createLabel(detailGroup, "Phone", SWT.LEFT);
 		
-		Text phoneText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_PHONE);
+		Text phoneText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_PHONE);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		gd.horizontalSpan = 2;
 		phoneText.setLayoutData(gd);
 
-		Label dateOpenedLabel = UIControlsFactory.createLabel(contentArea, "Date Opened", SWT.LEFT);
+		Label dateOpenedLabel = UIControlsFactory.createLabel(detailGroup, "Date Opened", SWT.LEFT);
 		
-		DatePickerComposite dateOpenedPicker = UIControlsFactory.createDatePickerComposite(contentArea, DairyLocationController.RIDGET_ID_DATEOPENED);
+		DatePickerComposite dateOpenedPicker = UIControlsFactory.createDatePickerComposite(detailGroup, DairyLocationController.RIDGET_ID_DATEOPENED);
 		gd = new GridData();
 		gd.horizontalSpan = 2;
 		dateOpenedPicker.setLayoutData(gd);
 		
-		Label functionsLabel = UIControlsFactory.createLabel(contentArea, "Functions", SWT.LEFT);
+		Label functionsLabel = UIControlsFactory.createLabel(detailGroup, "Functions", SWT.LEFT);
 		
-		ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(contentArea, SWT.None, true, DairyLocationController.RIDGET_ID_FUNCTIONS); //$NON-NLS-1$
+		ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(detailGroup, SWT.None, true, DairyLocationController.RIDGET_ID_FUNCTIONS); //$NON-NLS-1$
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		gd = new GridData();
 		gd.horizontalSpan = 2;
 		functionsChoice.setLayoutData(gd);
 		
-		Label routeLabel = UIControlsFactory.createLabel(contentArea, "Route", SWT.LEFT);
+		Label routeLabel = UIControlsFactory.createLabel(detailGroup, "Route", SWT.LEFT);
 
-		Combo routeCombo = UIControlsFactory.createCombo(contentArea, DairyLocationController.RIDGET_ID_ROUTE);
+		Combo routeCombo = UIControlsFactory.createCombo(detailGroup, DairyLocationController.RIDGET_ID_ROUTE);
 		
-		Button addRouteButton = UIControlsFactory.createButton(contentArea, "?", DairyLocationController.RIDGET_ID_ADD_ROUTE_ACTION);
+		Button addRouteButton = UIControlsFactory.createButton(detailGroup, "?", DairyLocationController.RIDGET_ID_ADD_ROUTE_ACTION);
 		
 		
-		TabFolder tabs = new TabFolder(contentArea, SWT.None);
+		TabFolder tabs = new TabFolder(detailGroup, SWT.None);
 		gd = new GridData();
 		gd.horizontalSpan = 3;
 		gd.grabExcessHorizontalSpace = true;
@@ -126,7 +164,7 @@ public class DairyLocationView extends SubModuleView {
 		mapTab.setControl(tab3);
 		createMapTab(tab3);
 		
-		Composite buttonPanel = UIControlsFactory.createComposite(contentArea);
+		Composite buttonPanel = UIControlsFactory.createComposite(detailGroup);
 		gd = new GridData(SWT.END, SWT.FILL, true, false);
 		gd.horizontalSpan = 3;
 		gd.horizontalAlignment = GridData.END; 
@@ -150,7 +188,12 @@ public class DairyLocationView extends SubModuleView {
 		
 		
 		
-		createMessageBoxes();
+		createMessageBoxes(buttonPanel);
+	}
+	
+	private void createDairyLocationList(Composite parent)
+	{
+		
 	}
 	
 	private void createAddressTab(Composite parent)
@@ -321,13 +364,13 @@ public class DairyLocationView extends SubModuleView {
 		
 		
 	}
-	private void createMessageBoxes()
+	private void createMessageBoxes(Composite parent)
 	{
-		MessageBox nameErrorMessage = UIControlsFactory.createMessageBox(contentArea);
+		MessageBox nameErrorMessage = UIControlsFactory.createMessageBox(parent);
 		this.addUIControl(nameErrorMessage, DairyLocationController.RIDGET_ID_DUPLICATE_NAME_DIALOG);
-		MessageBox addressErrorMessage  = UIControlsFactory.createMessageBox(contentArea);
+		MessageBox addressErrorMessage  = UIControlsFactory.createMessageBox(parent);
 		this.addUIControl(addressErrorMessage, DairyLocationController.RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
-		MessageBox deleteConfirmMessage  = UIControlsFactory.createMessageBox(contentArea);
+		MessageBox deleteConfirmMessage  = UIControlsFactory.createMessageBox(parent);
 		this.addUIControl(deleteConfirmMessage, DairyLocationController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
 	}
 
@@ -340,4 +383,27 @@ public class DairyLocationView extends SubModuleView {
 	protected DairyLocationController createController(ISubModuleNode subModuleNode) {
 		return new DairyLocationController(subModuleNode);
 	}
+	
+	
+	private static class DairyLocationMasterDetailsComposite extends MasterDetailsComposite {
+
+		public DairyLocationMasterDetailsComposite(Composite parent, int style) {
+			super(parent, style);
+			setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		}
+		
+		
+		@Override
+		protected Table createTable(Composite tableComposite, TableColumnLayout layout) {
+			if(tableComposite.getParent() != null){
+				tableComposite.getParent().setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+
+			}
+			tableComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+			tableComposite.setLayout(layout);
+
+			return super.createTable(tableComposite, layout);
+		}
+	}
+
 }

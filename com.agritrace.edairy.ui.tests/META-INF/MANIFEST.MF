@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.riena.navigation.ui.swt,
  org.eclipse.riena.core,
  org.eclipse.riena.ui.core,
- com.agritrace.edairy.ui,
+ com.agritrace.edairy.demo.riena,
  org.eclipse.riena.ui.ridgets,
  com.agritrace.edairy.model
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
