@@ -295,12 +295,12 @@ public class ServiceRequestLogFilterControllerDelegate extends
 				ret = ret.AND(condtions.get(i));
 			}
 			select = new SELECT(new FROM(((ServiceLogViewController) this
-					.getSubModuleController()).getServiceRequestList()),
+					.getSubModuleController()).getAllRequests()),
 					new WHERE(ret));
 
 		} else {
 			select = new SELECT(new FROM(((ServiceLogViewController) this
-					.getSubModuleController()).getServiceRequestList()),
+					.getSubModuleController()).getAllRequests()),
 					new WHERE(EObjectCondition.E_TRUE));
 		}
 		IQueryResult result = select.execute();

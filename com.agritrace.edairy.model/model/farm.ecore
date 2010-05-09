@@ -19,7 +19,8 @@
         eType="#//RegisteredAnimal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cans" upperBound="-1" eType="#//Container"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="ecore:EClass common.ecore#//Location"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="ecore:EClass common.ecore#//Location"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
@@ -48,7 +49,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="acquisitionType" lowerBound="1"
         eType="#//AcquisitionType" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="identifiers" upperBound="-1"
-        eType="#//AnimalIdentifier"/>
+        eType="#//AnimalIdentifier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifyingFeatures" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rearingMode" lowerBound="1"
         eType="#//RearingMode" defaultValueLiteral=""/>
