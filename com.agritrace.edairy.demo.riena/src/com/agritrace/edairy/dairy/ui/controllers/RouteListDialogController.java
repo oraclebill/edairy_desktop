@@ -50,6 +50,7 @@ public class RouteListDialogController extends AbstractWindowController {
 		
 		IActionRidget addAction = (IActionRidget) getRidget(RIDGET_ID_ADD);
 		addAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				AddRouteDialog dialog = new AddRouteDialog();
 				dialog.setBlockOnOpen(true);
@@ -59,6 +60,7 @@ public class RouteListDialogController extends AbstractWindowController {
 		
 		IActionRidget deleteAction = (IActionRidget) getRidget(RIDGET_ID_DELETE);
 		deleteAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				if (routeTable.getSelectionIndex() >=0) {
 					if (deleteConfirmDialog.show().getLabel().equals("Yes"))
@@ -72,6 +74,7 @@ public class RouteListDialogController extends AbstractWindowController {
 		
 		IActionRidget closeAction = (IActionRidget) getRidget(RIDGET_ID_CLOSE);
 		closeAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				
 				getWindowRidget().dispose();

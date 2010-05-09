@@ -193,18 +193,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.agritrace.edairy.demo.riena.dairy_manager"
-            name="eDairy Manager Desktop">
+            name="eDairy Desktop Manager">
          <property
                name="appName"
-               value="eDairy Manager Desktop">
-         </property>
-         <property
-               name="aboutImage"
-               value="resources/edairy_splash.png">
-         </property>
-         <property
-               name="windowImages"
-               value="icons/edairymanagericon16.png,icons/edairymanagericon32.png,icons/edairymanagericon48.png,icons/edairymanagericon64.png,icons/edairymanagericon128.png">
+               value="eDairy Desktop Manager">
          </property>
          <property
                name="preferenceCustomization"
@@ -216,23 +208,11 @@
          id="edairy_manager"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.ui.newId"
-            name="eDairy Manager">
-         <property
-               name="windowImages"
-               value="/com.agritrace.edairy.ui/icons/cow16.png,/com.agritrace.edairy.ui/icons/cow32.png,/com.agritrace.edairy.ui/icons/cow48.png,/com.agritrace.edairy.ui/icons/cow64.png,/com.agritrace.edairy.ui/icons/cow128.png">
-         </property>
-         <property
-               name="aboutText"
-               value="eDairy Manager v0.1a">
-         </property>
-         <property
-               name="aboutImage"
-               value="/com.agritrace.edairy.ui/resources/edairy_helpabout.png">
-         </property>
+            application="com.agritrace.edairy.demo.riena.dairy_manager"
+            name="eDairy Desktop Manager">
          <property
                name="appName"
-               value="eDairy Manager">
+               value="eDairy Desktop Manager">
          </property>
       </product>
    </extension>

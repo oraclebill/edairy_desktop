@@ -22,7 +22,7 @@ public class CalendarSelectionDialogController extends AbstractWindowController 
 	public void configureRidgets() {
 		super.configureRidgets();
 
-		getWindowRidget().setTitle(DIALOG_TITLE); //$NON-NLS-1$
+		getWindowRidget().setTitle(DIALOG_TITLE); 
 		getWindowRidget().setIcon("calendar_icon-16.gif");
 		
 		final IDateTimeRidget calenderRidget = (IDateTimeRidget) getRidget(ViewWidgetId.calendarDate);
@@ -35,6 +35,7 @@ public class CalendarSelectionDialogController extends AbstractWindowController 
 
 		IActionRidget okAction = (IActionRidget) getRidget(ViewWidgetId.okButton);
 		okAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				setReturnCode(OK);
 				setContext(SimpleFormattedDateBean.DATE_PROR, calenderRidget.getDate());
@@ -43,6 +44,7 @@ public class CalendarSelectionDialogController extends AbstractWindowController 
 		});
 		IActionRidget cancelAction = (IActionRidget) getRidget(ViewWidgetId.cancelButton);
 		cancelAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				setReturnCode(CANCEL);
 				getWindowRidget().dispose();

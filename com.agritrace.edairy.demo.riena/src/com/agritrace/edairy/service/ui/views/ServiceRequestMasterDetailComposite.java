@@ -11,7 +11,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -20,6 +19,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
+import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 
 /**
  * Service Log view Master detail Composite
@@ -30,6 +30,10 @@ import com.agritrace.edairy.model.requests.RequestType;
 public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite {
 
 	private Composite specialComp;
+	private Group inseminationGroup;
+	private Composite verternaryComp;
+	private Composite inseminationComp;
+	private RequestType previousType;
 	public static final String INSE_TIME_HEATED_DETECTED = "time_heated_detected";//$NON-NLS-1$
 
 	public ServiceRequestMasterDetailComposite(Composite parent, int style) {
@@ -44,10 +48,18 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		Table table = super.createTable(tableComposite, layout);
 		GridData data = new GridData(GridData.FILL_BOTH);
 		data.grabExcessVerticalSpace = true;
-		tableComposite.setLayoutData(data);
-		tableComposite.setLayoutData(GridDataFactory.copyData(data));
+		// Same height with the filter section
+		data.heightHint = getParent().getChildren()[0].computeSize(-1, -1).y;
+		tableComposite.setLayoutData(data);		
 		tableComposite.setLayout(layout);
 		return table;
+	}
+	@Override
+	protected Composite createButtons(Composite parent) {
+		Composite compoiste = super.createButtons(parent);
+		// hidden the buttons using zero size
+		GridDataFactory.fillDefaults().hint(0, 0).applyTo(compoiste);
+		return compoiste;
 	}
 
 	@Override
@@ -136,68 +148,22 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		specialComp.setLayout(new GridLayout(1, false));
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		specialComp.setLayoutData(data);
+		//createVeterinaryControls(specialComp);
+		//createInseminationControls(specialComp);
 		this.addUIControl(specialComp, "sepcialcomp"); //$NON-NLS-1$		
 
 	}
-
-	private void createInseminationControls(Composite parent) {
-
-		Group group = UIControlsFactory.createGroup(parent, "Request Details");
-		GridLayout layout = new GridLayout(3, false);
-		group.setLayout(layout);
-		group.setLayoutData(new GridData(GridData.FILL_BOTH));
-		this.addUIControl(group, "insemination-group");
-
-		UIControlsFactory.createLabel(group, "Time Heat Detected"); //$NON-NLS-1$
-		Text txtDate = UIControlsFactory.createText(group);
-		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
-		dateData.horizontalSpan = 1;
-		txtDate.setLayoutData(dateData);
-		addUIControl(txtDate, INSE_TIME_HEATED_DETECTED); //$NON-NLS-1$
-		ImageButton button = UIControlsFactory.createImageButton(group,
-				SWT.None);
-
-		// Insemination
-		Label insemLabel = UIControlsFactory.createLabel(group, "Insemination"); //$NON-NLS-1$
-		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
-
-		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(
-				2, 1);
-		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults()
-				.indent(10, 0);
-		// First
-		Label firstLabel = UIControlsFactory.createLabel(group, "First"); //$NON-NLS-1$
-		indentGridFactory.applyTo(firstLabel);
-
-		Text firstText = UIControlsFactory.createText(group); //$NON-NLS-1$
-		textGridFactory.applyTo(firstText);
-
-		// First Repeat
-		Label firstRepeatLabel = UIControlsFactory.createLabel(group,
-				"First Repeat"); //$NON-NLS-1$
-		indentGridFactory.applyTo(firstRepeatLabel);
-
-		Text firstRepeatText = UIControlsFactory.createText(group); //$NON-NLS-1$
-		textGridFactory.applyTo(firstRepeatText);
-
-		// 2nd Repeat
-		Label secondRepeatLabel = UIControlsFactory.createLabel(group,
-				"2nd Repeat"); //$NON-NLS-1$
-		indentGridFactory.applyTo(secondRepeatLabel);
-
-		Text secondRepeatText = UIControlsFactory.createText(group); //$NON-NLS-1$
-		textGridFactory.applyTo(secondRepeatText);
-	}
-
+	
 	private void createVeterinaryControls(Composite parent) {
-		Group group = UIControlsFactory.createGroup(parent, "");
+		verternaryComp = UIControlsFactory.createComposite(parent);
 		GridLayout layout = new GridLayout(1, false);
-		group.setLayout(layout);
-		group.setLayoutData(new GridData(GridData.FILL_BOTH));
-		this.addUIControl(group, "veterinary-group");
+		verternaryComp.setLayout(layout);
+		verternaryComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+//		GridDataFactory.fillDefaults().hint(0, 0).applyTo(verternaryComp);
+		this.addUIControl(verternaryComp, "veterinary-group");
 
-		UIControlsFactory.createLabel(group, "Complaint");
-		Text complaintText = UIControlsFactory.createText(group);
+		UIControlsFactory.createLabel(verternaryComp, "Complaint");
+		Text complaintText = UIControlsFactory.createText(verternaryComp);
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		data.heightHint = 100;
 		data.widthHint = 300;
@@ -206,6 +172,62 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		this.addUIControl(complaintText, "complaint");
 
 	}
+
+	private void createInseminationControls(Composite parent) {
+
+		inseminationComp = UIControlsFactory.createComposite(parent);
+		inseminationComp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).create());
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationComp);
+		this.addUIControl(inseminationComp, "insemination-comp");
+		
+		inseminationGroup = UIControlsFactory.createGroup(inseminationComp, "Request Details");
+		GridLayout layout = new GridLayout(3, false);
+		inseminationGroup.setLayout(layout);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationGroup);
+		this.addUIControl(inseminationGroup, "insemination-group");
+
+		UIControlsFactory.createLabel(inseminationGroup, "Time Heat Detected"); //$NON-NLS-1$
+		Text txtDate = UIControlsFactory.createText(inseminationGroup);
+		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
+		dateData.horizontalSpan = 1;
+		txtDate.setLayoutData(dateData);
+		addUIControl(txtDate, INSE_TIME_HEATED_DETECTED); 
+		ImageButton button = UIControlsFactory.createImageButton(inseminationGroup,
+				SWT.None);
+
+		// Insemination
+		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup, "Insemination"); //$NON-NLS-1$
+		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
+
+		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(
+				2, 1);
+		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults()
+				.indent(10, 0);
+		// First
+		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup, "First"); //$NON-NLS-1$
+		indentGridFactory.applyTo(firstLabel);
+
+		Text firstText = UIControlsFactory.createText(inseminationGroup); 
+		textGridFactory.applyTo(firstText);
+
+		// First Repeat
+		Label firstRepeatLabel = UIControlsFactory.createLabel(inseminationGroup,
+				"First Repeat"); //$NON-NLS-1$
+		indentGridFactory.applyTo(firstRepeatLabel);
+
+		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup); 
+		textGridFactory.applyTo(firstRepeatText);
+
+		// 2nd Repeat
+		Label secondRepeatLabel = UIControlsFactory.createLabel(inseminationGroup,
+				"2nd Repeat"); //$NON-NLS-1$
+		indentGridFactory.applyTo(secondRepeatLabel);
+
+		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup); 
+		textGridFactory.applyTo(secondRepeatText);
+	}
+
+	
 
 	@Override
 	protected int getDetailsStyle() {
@@ -216,30 +238,19 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 
 		boolean isVeterinary = RequestType.VETERINARY.equals(request.getType());
 
+		// If type doesn't change,we didn't need to do anything here
+		if (request.getType().equals(this.previousType)) {
+			return;
+		}
+		ServiceUtils.disposeAllChildrens(this.specialComp);
 		if (isVeterinary) {
 			// Create veterinaryControls
-			disposeAllChildrens(this.specialComp);
-			createVeterinaryControls(specialComp); //$NON-NLS-1$);
-			specialComp.pack(true);
-
+			createVeterinaryControls(specialComp);
 		} else {
-			disposeAllChildrens(specialComp);
 			createInseminationControls(specialComp);
-			specialComp.pack(true);
 		}
+		this.getParent().layout(true, true);
+		this.previousType = request.getType();
 
 	}
-
-	private void disposeAllChildrens(Composite comp) {
-		for (Control control : comp.getChildren()) {
-			if (control instanceof Composite) {
-				disposeAllChildrens((Composite) control);
-
-			}
-			if (!control.isDisposed()) {
-				control.dispose();
-			}
-		}
-	}
-
 }

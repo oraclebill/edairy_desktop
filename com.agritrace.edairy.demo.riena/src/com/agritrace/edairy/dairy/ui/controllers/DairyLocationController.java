@@ -143,7 +143,7 @@ public class DairyLocationController extends SubModuleController {
 		route.bindToModel(rs, "routes", Route.class, "getName", this.dairyLocation, "route");
 		route.updateFromModel();
 		
-		final IActionRidget addRouteAction = (IActionRidget) getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
+		final IActionRidget addRouteAction = getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
 		addRouteAction.addListener(new AddRouteCallback());
 		
 		
@@ -283,6 +283,7 @@ public class DairyLocationController extends SubModuleController {
 	private  class SaveCallback implements IActionListener {
 		IValidator uniqueNameValidator = new IValidator()
 		{
+			@Override
 			public IStatus validate(Object value) {
 				//#TODO invoke the real service to query locationby name
 				if ("testDairylocationName1".equals(textName.getText()))
@@ -296,6 +297,7 @@ public class DairyLocationController extends SubModuleController {
 		
 		IValidator addressValidator = new IValidator()
 		{
+			@Override
 			public IStatus validate(Object value) {
 				if ("".equals(textAddress.getText()))
 				{
@@ -305,6 +307,7 @@ public class DairyLocationController extends SubModuleController {
 			}
 			
 		};
+		@Override
 		public void callback() {
 			textName.addValidationRule(uniqueNameValidator, ValidationTime.ON_UPDATE_TO_MODEL);
 			if (!textName.revalidate())
@@ -326,6 +329,7 @@ public class DairyLocationController extends SubModuleController {
 	
 	
 	private  class CancelCallback implements IActionListener {
+		@Override
 		public void callback() {
 			
 		}

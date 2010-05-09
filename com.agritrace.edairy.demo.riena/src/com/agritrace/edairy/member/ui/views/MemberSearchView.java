@@ -7,7 +7,6 @@ import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.navigation.INavigationNode;
@@ -672,6 +671,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(
@@ -696,6 +696,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 				17, 16).applyTo(calendarButton2);
 
 		calendarButton2.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(

@@ -7,7 +7,6 @@ import org.eclipse.riena.ui.swt.lnf.FontLnfResource;
 import org.eclipse.riena.ui.swt.lnf.ILnfResource;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 
 public class EDairyManagerUITheme extends RienaDefaultTheme {

@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
+import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 
 
@@ -34,6 +35,7 @@ public class LocalDairyViewController extends SubModuleController {
 
 		private final LocalDairy workingCopy = createWorkingCopy();
 
+		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			ITextRidget txtFirst = (ITextRidget) container.getRidget("first"); //$NON-NLS-1$
 			txtFirst.setMandatory(true);
@@ -80,10 +82,12 @@ public class LocalDairyViewController extends SubModuleController {
 
 		}
 
+		@Override
 		public LocalDairy createWorkingCopy() {
 			return new LocalDairy("", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
+		@Override
 		public LocalDairy copyBean(final Object source, final Object target) {
 			LocalDairy from = source != null ? (LocalDairy) source : createWorkingCopy();
 			LocalDairy to = target != null ? (LocalDairy) target : createWorkingCopy();
@@ -97,6 +101,7 @@ public class LocalDairyViewController extends SubModuleController {
 			return to;
 		}
 
+		@Override
 		public Object getWorkingCopy() {
 			return workingCopy;
 		}
@@ -137,7 +142,7 @@ public class LocalDairyViewController extends SubModuleController {
 			master.updateFromModel();
 
 			IActionRidget actionApply = master.getRidget(IActionRidget.class,
-					MasterDetailsComposite.BIND_ID_APPLY);
+					AbstractMasterDetailsComposite.BIND_ID_APPLY);
 			addDefaultAction(master, actionApply);
 		}
 

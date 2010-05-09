@@ -44,6 +44,7 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 	/**
 	 * Closes the dialog box Override so we can dispose the image we created
 	 */
+	@Override
 	public boolean close() {
 
 		return super.close();
@@ -55,6 +56,7 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createContents(Composite parent) {
 		Control contents = super.createContents(parent);
 		setTitle("Member Lookup");
@@ -62,7 +64,8 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 		return contents;
 	}
 	
-	 protected void configureShell(Shell newShell) {
+	 @Override
+	protected void configureShell(Shell newShell) {
 	        newShell.setSize(450, 500);
 	        super.configureShell(newShell);
 	    }
@@ -74,6 +77,7 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		Composite dialogArea = new Composite(composite,SWT.NULL);
@@ -100,6 +104,7 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 			 *
 			 * @param e an event containing information about the selection
 			 */
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 
@@ -109,6 +114,7 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 			 *
 			 * @param e an event containing information about the default selection
 			 */
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
@@ -151,42 +157,49 @@ public class TentativeLoginDialogView extends TitleAreaDialog {
 	 * 
 	 * @param parent the parent composite
 	 */
+	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, "Select", true);
 	}
 
 	public class MemberLabelProvider implements ITableLabelProvider{
 
+		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 	
+		@Override
 		public void dispose() {
 			// TODO Auto-generated method stub
 
 		}
 
 	
+		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
 	
+		@Override
 		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
 
 	
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 	
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if(element instanceof MemberShip){
 				switch(columnIndex){

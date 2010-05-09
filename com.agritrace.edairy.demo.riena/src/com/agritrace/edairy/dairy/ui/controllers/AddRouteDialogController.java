@@ -63,6 +63,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 		
 		IActionRidget saveAction = (IActionRidget) getRidget(RIDGET_ID_SAVE);
 		saveAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				if (textName.getText().equals(route.getName())) {
 					duplicateNameDialog.show();
@@ -73,6 +74,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 		
 		IActionRidget cencelAction = (IActionRidget) getRidget(RIDGET_ID_CANCEL);
 		cencelAction.addListener(new IActionListener() {
+			@Override
 			public void callback() {
 				
 				getWindowRidget().dispose();

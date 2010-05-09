@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.riena.beans.common.AbstractBean;
 
@@ -60,7 +61,7 @@ public class SimpleFormattedDateBean extends AbstractBean {
 				date = dateFormat.parse(formattedDate);
 			}
 		} catch (ParseException e) {
-			Status error = new Status(Status.ERROR,EDairyActivator.PLUGIN_ID,e.getMessage(),e);
+			Status error = new Status(IStatus.ERROR,EDairyActivator.PLUGIN_ID,e.getMessage(),e);
 			EDairyActivator.getDefault().getLog().log(error);
 		}
 	}

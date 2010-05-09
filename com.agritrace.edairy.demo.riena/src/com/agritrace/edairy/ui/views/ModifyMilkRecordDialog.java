@@ -48,6 +48,7 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 	/**
 	 * Closes the dialog box Override so we can dispose the image we created
 	 */
+	@Override
 	public boolean close() {
 
 		return super.close();
@@ -59,6 +60,7 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createContents(Composite parent) {
 		Control contents = super.createContents(parent);
 		setTitle("Add Milk Collection Records");
@@ -66,7 +68,8 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 		return contents;
 	}
 	
-	 protected void configureShell(Shell newShell) {
+	 @Override
+	protected void configureShell(Shell newShell) {
 	        newShell.setSize(650, 450);
 	        super.configureShell(newShell);
 	    }
@@ -78,6 +81,7 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 	 * @param parent the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		Composite dialogArea = new Composite(composite,SWT.NULL);
@@ -133,6 +137,7 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 	 * 
 	 * @param parent the parent composite
 	 */
+	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, true);
@@ -140,6 +145,7 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 
 	}
 
+	@Override
 	public void modifyText(ModifyEvent e) {
 		if(record == null){
 			return;
@@ -183,11 +189,13 @@ public class ModifyMilkRecordDialog extends TitleAreaDialog implements ModifyLis
 		this.record = record;
 	}
 
+	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
 		
 	}
 
+	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if(record != null){
 			record.setnPRMissing(nprMissing.getSelection());

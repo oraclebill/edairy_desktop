@@ -44,6 +44,10 @@ public class ServiceRequestFilterSection {
 	public static final String STARTE_DATE = "filter.start.date";
 	public static final String END_DATE = "filter.end.date";
 	/**
+	 * Binding ID for All Request Types Radio Button Binding ID
+	 */
+	public static final String REQUEST_TYPE_ALL = "filter.type.all";
+	/**
 	 * Binding ID for Request Type-- VERTERNARY Radio Button Binding ID
 	 */
 	public static final String REQUEST_TYPE_VERTERNARY = "filter.type.veterinary";
@@ -138,6 +142,7 @@ public class ServiceRequestFilterSection {
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(
@@ -170,6 +175,7 @@ public class ServiceRequestFilterSection {
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton2.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(
@@ -192,12 +198,13 @@ public class ServiceRequestFilterSection {
 		// Request Type
 		UIControlsFactory.createLabel(parent, "Request Type");
 		Composite requestTypeComp = UIControlsFactory.createComposite(parent);
-		requestTypeComp.setLayout(new GridLayout(2, false));
-		GridLayout requestTypeLayout = new GridLayout(2, false);
+		GridLayout requestTypeLayout = new GridLayout(3, false);
 		requestTypeLayout.marginLeft = INDENT_WIDTH;
 		requestTypeComp.setLayout(requestTypeLayout);
 		// Text startText = UIControlsFactory.createText(dateComp);
 		// By default the start text is the beginning of current month
+		UIControlsFactory.createButtonRadio(requestTypeComp,
+				"All", REQUEST_TYPE_ALL);
 		UIControlsFactory.createButtonRadio(requestTypeComp,
 				"Velterinary", REQUEST_TYPE_VERTERNARY);
 		UIControlsFactory.createButtonRadio(requestTypeComp,
@@ -246,9 +253,11 @@ public class ServiceRequestFilterSection {
 		// Reset Apply buttons
 		Composite comp = UIControlsFactory.createComposite(parent);
 		GridLayout layout = new GridLayout(2, false);
+		layout.horizontalSpacing = 40;
 		comp.setLayout(layout);
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalAlignment = GridData.CENTER;
+	
 		comp.setLayoutData(data);
 		// ResetButton
 		Button resetBtn = UIControlsFactory.createButton(comp,"Reset", BIND_ID_RESET);

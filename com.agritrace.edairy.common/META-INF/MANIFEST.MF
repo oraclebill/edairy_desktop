@@ -15,5 +15,4 @@ Export-Package: com.agritrace.edairy.common.datamodel.common,
  com.agritrace.edairy.common.datamodel.dairy.accounting,
  com.agritrace.edairy.common.datamodel.dairy.services,
  com.agritrace.edairy.common.datamodel.farm,
- com.agritrace.edairy.common.datamodel.security,
- com.agritrace.edairy.common.services
+ com.agritrace.edairy.common.datamodel.security

@@ -28,7 +28,7 @@ import com.agritrace.edairy.ui.views.LocationInfoGroup;
 
 public class DairyProfileView extends ViewPart {
 
-	public static final String ID = DairyProfileView.class.getName(); //$NON-NLS-1$
+	public static final String ID = DairyProfileView.class.getName(); 
 
 	@Override
 	public void createPartControl(Composite parent) {

@@ -78,6 +78,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		calendarButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 
 		calendarButton.addSelectionListener (new SelectionAdapter () {
+			@Override
 			public void widgetSelected (SelectionEvent e) {
 				final Shell dialog = new Shell (Display.getDefault().getActiveShell(), SWT.DIALOG_TRIM);
 				dialog.setLayout (new GridLayout (3, false));
@@ -102,6 +103,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 				ok.setText ("OK");
 				ok.setLayoutData(new GridData (SWT.FILL, SWT.CENTER, false, false));
 				ok.addSelectionListener (new SelectionAdapter () {
+					@Override
 					public void widgetSelected (SelectionEvent e) {
 						String textDate = (calendar.getMonth () + 1) + "/" + calendar.getDay () + "/" + calendar.getYear ();
 						textField.setText(textDate);
@@ -133,6 +135,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		nameSearchButton.setImage(searchImage);
 		nameSearchButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 		nameSearchButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected (SelectionEvent e) {
 				Shell shell = new Shell(Display.getDefault().getActiveShell());
 				shell.setSize(250, 400);
@@ -140,6 +143,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 				 dialog.open();
 			}
 
+			@Override
 			public void widgetDefaultSelected (SelectionEvent e) {
 				widgetSelected(e);
 			}
@@ -221,6 +225,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	}
 
 
+	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if(e.getSource() == nameCombo){
 			int i = nameCombo.getSelectionIndex();
@@ -248,6 +253,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	}
 
 	
+	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
 	}
