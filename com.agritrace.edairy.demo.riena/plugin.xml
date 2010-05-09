@@ -196,10 +196,22 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.agritrace.edairy.demo.riena.dairy_manager"
-            name="eDairy Desktop Manager">
+            name="eDairy Manager">
          <property
                name="appName"
-               value="eDairy Desktop Manager">
+               value="eDairy Manager">
+         </property>
+         <property
+               name="aboutImage"
+               value="resources/edairy_helpabout.png">
+         </property>
+         <property
+               name="aboutText"
+               value="eDairy Manager v0.1a">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/cow16.png,icons/cow32.png,icons/cow48.png,icons/cow64.png,icons/cow128.png">
          </property>
       </product>
    </extension>

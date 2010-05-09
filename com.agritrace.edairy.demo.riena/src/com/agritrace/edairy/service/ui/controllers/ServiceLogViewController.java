@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.DairyFactory;
@@ -32,8 +34,13 @@ public class ServiceLogViewController extends CommonSubModuleViewController {
 
 	public ServiceLogViewController() {
 		super();
-		this.createServiceRequestList();
+		//this.createServiceRequestList();
 		this.setFilteredResult(this.getServiceRequestList());
+	}
+	
+	public void setEMFModels(List<AnimalHealthRequest> eobjs)
+	{
+		this.origalRequestList = eobjs;
 	}
 
 	/*

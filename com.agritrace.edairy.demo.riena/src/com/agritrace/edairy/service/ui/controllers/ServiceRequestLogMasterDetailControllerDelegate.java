@@ -1,7 +1,5 @@
 package com.agritrace.edairy.service.ui.controllers;
 
-import java.util.Date;
-
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
@@ -25,6 +23,7 @@ import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.service.ui.converters.DateToStringModelConvertor;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.service.ui.views.ServiceRequestMasterDetailComposite;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
@@ -256,30 +255,8 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 		//
 		ITextRidget textDate = getRidget(ITextRidget.class,
 				"date"); //$NON-NLS-1$
-		textDate.setModelToUIControlConverter(new IConverter() {
-
-			@Override
-			public Object getFromType() {
-				return EMFObservables.observeValue(request,
-						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE)
-						.getValueType();
-			}
-
-			@Override
-			public Object getToType() {
-				return String.class;
-			}
-
-			@Override
-			public Object convert(Object fromObject) {
-				if (fromObject instanceof Date) {
-					Date date = (Date) fromObject;
-					return ServiceUtils.DATE_FORMAT.format(date);
-
-				}
-				return null;
-			}
-		});
+		textDate.setModelToUIControlConverter(new DateToStringModelConvertor(
+				request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));		
 		textDate.bindToModel(EMFObservables.observeValue(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));
 
