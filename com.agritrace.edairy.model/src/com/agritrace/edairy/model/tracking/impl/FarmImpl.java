@@ -88,7 +88,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	protected EList<Container> cans;
 
 	/**
-	 * The cached value of the '{@link #getLocation() <em>Location</em>}' reference.
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLocation()
@@ -187,14 +187,6 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public Location getLocation() {
-		if (location != null && location.eIsProxy()) {
-			InternalEObject oldLocation = (InternalEObject)location;
-			location = (Location)eResolveProxy(oldLocation);
-			if (location != oldLocation) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.FARM__LOCATION, oldLocation, location));
-			}
-		}
 		return location;
 	}
 
@@ -203,8 +195,14 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Location basicGetLocation() {
-		return location;
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -213,10 +211,17 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public void setLocation(Location newLocation) {
-		Location oldLocation = location;
-		location = newLocation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, oldLocation, location));
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.FARM__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.FARM__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, newLocation, newLocation));
 	}
 
 	/**
@@ -270,6 +275,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 				return ((InternalEList<?>)getAnimals()).basicRemove(otherEnd, msgs);
 			case TrackingPackage.FARM__CANS:
 				return ((InternalEList<?>)getCans()).basicRemove(otherEnd, msgs);
+			case TrackingPackage.FARM__LOCATION:
+				return basicSetLocation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -289,8 +296,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 			case TrackingPackage.FARM__CANS:
 				return getCans();
 			case TrackingPackage.FARM__LOCATION:
-				if (resolve) return getLocation();
-				return basicGetLocation();
+				return getLocation();
 			case TrackingPackage.FARM__FARM_ID:
 				return getFarmId();
 		}

@@ -98,7 +98,7 @@ public interface TrackingPackage extends EPackage {
 	int FARM__CANS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -280,7 +280,7 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL__ACQUISITION_TYPE = 8;
 
 	/**
-	 * The feature id for the '<em><b>Identifiers</b></em>' reference list.
+	 * The feature id for the '<em><b>Identifiers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -510,10 +510,10 @@ public interface TrackingPackage extends EPackage {
 	EReference getFarm_Cans();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Location</em>'.
+	 * @return the meta object for the containment reference '<em>Location</em>'.
 	 * @see com.agritrace.edairy.model.tracking.Farm#getLocation()
 	 * @see #getFarm()
 	 * @generated
@@ -706,10 +706,10 @@ public interface TrackingPackage extends EPackage {
 	EAttribute getRegisteredAnimal_AcquisitionType();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getIdentifiers <em>Identifiers</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.model.tracking.RegisteredAnimal#getIdentifiers <em>Identifiers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Identifiers</em>'.
+	 * @return the meta object for the containment reference list '<em>Identifiers</em>'.
 	 * @see com.agritrace.edairy.model.tracking.RegisteredAnimal#getIdentifiers()
 	 * @see #getRegisteredAnimal()
 	 * @generated
@@ -943,7 +943,7 @@ public interface TrackingPackage extends EPackage {
 		EReference FARM__CANS = eINSTANCE.getFarm_Cans();
 
 		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1091,7 +1091,7 @@ public interface TrackingPackage extends EPackage {
 		EAttribute REGISTERED_ANIMAL__ACQUISITION_TYPE = eINSTANCE.getRegisteredAnimal_AcquisitionType();
 
 		/**
-		 * The meta object literal for the '<em><b>Identifiers</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Identifiers</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

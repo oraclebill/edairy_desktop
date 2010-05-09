@@ -22,6 +22,7 @@ import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -31,6 +32,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -212,7 +215,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	protected AcquisitionType acquisitionType = ACQUISITION_TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' reference list.
+	 * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIdentifiers()
@@ -577,7 +580,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 */
 	public EList<AnimalIdentifier> getIdentifiers() {
 		if (identifiers == null) {
-			identifiers = new EObjectResolvingEList<AnimalIdentifier>(AnimalIdentifier.class, this, TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS);
+			identifiers = new EObjectContainmentEList<AnimalIdentifier>(AnimalIdentifier.class, this, TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS);
 		}
 		return identifiers;
 	}
@@ -676,6 +679,20 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 		dateOfBirth = newDateOfBirth;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH, oldDateOfBirth, dateOfBirth));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS:
+				return ((InternalEList<?>)getIdentifiers()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

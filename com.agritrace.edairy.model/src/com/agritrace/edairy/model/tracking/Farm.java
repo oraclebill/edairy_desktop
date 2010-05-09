@@ -92,26 +92,26 @@ public interface Farm extends EObject {
 	EList<Container> getCans();
 
 	/**
-	 * Returns the value of the '<em><b>Location</b></em>' reference.
+	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Location</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Location</em>' reference.
+	 * @return the value of the '<em>Location</em>' containment reference.
 	 * @see #setLocation(Location)
 	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getFarm_Location()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Location getLocation();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Location</em>' reference.
+	 * @param value the new value of the '<em>Location</em>' containment reference.
 	 * @see #getLocation()
 	 * @generated
 	 */
