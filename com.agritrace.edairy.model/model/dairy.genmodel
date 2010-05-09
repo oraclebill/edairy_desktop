@@ -5,7 +5,7 @@
     modelPluginID="com.agritrace.edairy.model" modelName="Dairy" modelPluginClass=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>dairy.ecore</foreignModel>
-  <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.model" resource="XML"
+  <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.model" resource="XMI"
       disposableProviderFactory="true" ecorePackage="dairy.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//MembershipStatus">
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Active"/>
