@@ -2,12 +2,12 @@ package com.agritrace.edairy.dairy.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.riena.core.wire.InjectService;
@@ -23,6 +23,7 @@ import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
 import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
+import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
@@ -37,7 +38,6 @@ import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.impl.ModelFactoryImpl;
-import com.agritrace.edairy.ui.views.data.Staff;
 
 public class DairyLocationController extends SubModuleController {
 	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
@@ -83,7 +83,8 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_ADDRESS_REQUIRED_DIALOG = "addressRequiredDialog";
 	public static final String RIDGET_ID_DELETE_CONFIRM_DIALOG = "deleteConfirmDialog";
 	private DairyLocations service;
-	private ArrayList<DairyLocation> input = new ArrayList<DairyLocation>();
+	
+	private List<DairyLocation> input = new ArrayList<DairyLocation>();
 	public DairyLocationController(ISubModuleNode navigationNode) {
 		super(navigationNode);
 		initialize();
@@ -100,6 +101,25 @@ public class DairyLocationController extends SubModuleController {
 			this.service = null;
 	}
 
+	public void store()
+	{
+		DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().clear();
+		for (int i = 0 ; i < input.size(); i ++) {
+			DairyLocation dl = input.get(i);
+			DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().add(dl);
+			if (dl.getRoute() != null) {
+				dl.eResource().getContents().add(dl.getRoute());
+			}
+			/*if (DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().add(input.get(i).getRoute()DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().add(input.get(i).getRoute());
+			DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().addAll(input);*/
+		}
+		try {
+			DairyLocationResourceManager.INSTANCE.saveResource(DairyLocationResourceManager.INSTANCE.getDairyLocationsResource());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@Override
 	public void configureRidgets() {
@@ -119,7 +139,17 @@ public class DairyLocationController extends SubModuleController {
 
 			IActionRidget actionApply = master.getRidget(IActionRidget.class,
 					AbstractMasterDetailsComposite.BIND_ID_APPLY);
+			
 			addDefaultAction(master, actionApply);
+			
+			actionApply.addListener(new IActionListener() {
+
+				@Override
+				public void callback() {
+					store();
+				}
+				
+			});
 		}
 		//bindings for top-half window
 		/*final ITextRidget dairyLocationId = getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
@@ -139,17 +169,18 @@ public class DairyLocationController extends SubModuleController {
 	}
 
 	
-	public ArrayList<DairyLocation> getInput()
+	public List<DairyLocation> getInput()
 	{
 		return input;
 	}
 	
-	public void setInput(ArrayList<DairyLocation> input)
+	public void saveInput(List<DairyLocation> input)
 	{
 		this.input = input;
 	}
 	
-	private static final class DairyLocationDelegation extends	AbstractMasterDetailsDelegate {
+	 
+	private final class DairyLocationDelegation extends	AbstractMasterDetailsDelegate {
 		private DairyLocation workingCopy = createWorkingCopy();
 		private DairyLocation dairyLocation;
 		private ITextRidget textName;
@@ -157,12 +188,32 @@ public class DairyLocationController extends SubModuleController {
 		private IMessageBoxRidget duplicateNameDialog;
 		private IMessageBoxRidget addressRequiredDialog;
 		private IMessageBoxRidget deleteConfirmDialog;
-
+		private IComboRidget routeCombo;
+		private final RouteService routeService = new RouteService();
+		private ITableRidget table;
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
+			table = container.getRidget(ITableRidget.class, AbstractMasterDetailsComposite.BIND_ID_TABLE);
 			textName =  container.getRidget(ITextRidget.class, RIDGET_ID_NAME);
 			textName.bindToModel(workingCopy, "name");
 			textName.updateFromModel();
+			textName.setMandatory(true);
+			textName.addValidationRule(new IValidator() {
+
+				@Override
+				public IStatus validate(Object value) {
+					if ("".equals(textName.getText())) return Status.CANCEL_STATUS;
+					
+					for (int i = 0 ; i < input.size(); i++) {
+						if (textName.getText().equals(input.get(i).getName()) && i != table.getSelectionIndex()) {
+							
+							return Status.CANCEL_STATUS;
+						}
+					}
+					return Status.OK_STATUS;
+				}
+				
+			}, ValidationTime.ON_UPDATE_TO_MODEL);
 			
 			final ITextRidget description = container.getRidget(ITextRidget.class, RIDGET_ID_DESCRIPTION);
 			description.bindToModel(workingCopy, "description");
@@ -184,11 +235,11 @@ public class DairyLocationController extends SubModuleController {
 	        functions.updateFromModel();
 	        
 	        
-			final IComboRidget route = container.getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
+	        routeCombo = container.getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 			RouteService rs = new RouteService();
-			rs.getRoutes().add(this.workingCopy.getRoute());
-			route.bindToModel(rs, "routes", Route.class, "getName", this.workingCopy, "route");
-			route.updateFromModel();
+			routeCombo.bindToModel(rs, "routes", Route.class, "getName", this.workingCopy, "route");
+			routeCombo.updateFromModel();
+			routeCombo.setSelection(this.workingCopy.getRoute());
 
 			
 			final IActionRidget addRouteAction = container.getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
@@ -200,7 +251,7 @@ public class DairyLocationController extends SubModuleController {
 			configureMapTab(container, workingCopy);
 			//configureMessageBoxes(container);
 			
-			IActionRidget saveAction = container.getRidget(IActionRidget.class, RIDGET_ID_SAVE_ACTION);
+			/*IActionRidget saveAction = container.getRidget(IActionRidget.class, RIDGET_ID_SAVE_ACTION);
 			saveAction.addListener(new SaveCallback());
 			saveAction.setText("Save");
 			
@@ -210,7 +261,7 @@ public class DairyLocationController extends SubModuleController {
 
 			IActionRidget deleteAction = container.getRidget(IActionRidget.class, RIDGET_ID_DELETE_ACTION);
 			deleteAction.addListener(new DeleteCallback());
-			deleteAction.setText("Delete");
+			deleteAction.setText("Delete");*/
 			
 		}
 
@@ -220,7 +271,6 @@ public class DairyLocationController extends SubModuleController {
 			
 			
 			Route route = DairyFactory.eINSTANCE.createRoute();
-			route.setName("testroute1");
 			dairyLocation.setRoute(route);
 			Location location = ModelFactoryImpl.eINSTANCE.createLocation();
 
@@ -247,9 +297,16 @@ public class DairyLocationController extends SubModuleController {
 			to.setDateOpened(from.getDateOpened());
 			to.setDescription(from.getDescription());
 			to.setPhone(from.getPhone());
-			to.getRoute().setName(from.getRoute().getName());
-			to.getRoute().setDescription(from.getRoute().getDescription());
-			to.getRoute().setCode(from.getRoute().getCode());
+			
+			if (from.getRoute() == null )
+				to.setRoute(null);
+			else {
+				if (to.getRoute() == null)
+					to.setRoute(DairyFactory.eINSTANCE.createRoute());
+				to.getRoute().setName(from.getRoute().getName());
+				to.getRoute().setDescription(from.getRoute().getDescription());
+				to.getRoute().setCode(from.getRoute().getCode());
+			}
 			//to.setLocation(from.getLocation());
 			to.setRoute(from.getRoute());
 			to.getFunctions().addAll(from.getFunctions());
@@ -436,81 +493,68 @@ public class DairyLocationController extends SubModuleController {
 					RouteListDialog dialog = new RouteListDialog();
 					dialog.setBlockOnOpen(true);
 					dialog.open();
-
+					routeService.refresh();
+					routeCombo.updateFromModel();
+					
 			}
 		}
 		
-		private List<Route> getAllRoutes()
-		{
-			List<Route> ret = new ArrayList<Route>();
-			
-			return ret;
-		}
+		
 		
 		
 	
 	}
 	
 	private void initialize() {
-		long id = 1;
-		for (int i = 0 ; i < 5; i ++) {
-			DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
-			dairyLocation.setName("testDairylocationName" + id);
-			dairyLocation.setDescription("test dairy location description " + id);
-			dairyLocation.setDateOpened(new Date());
-			dairyLocation.setPhone("555-111-222");
-			dairyLocation.getFunctions().addAll(Arrays.asList(DairyFunction.MILK_COLLECTION, DairyFunction.MILK_STORAGE, DairyFunction.MILK_PROCESSING, DairyFunction.WAREHOUSE, DairyFunction.STORE_SALES));
-			dairyLocation.setCode("#66778" + id);
-			
-			Route route = DairyFactory.eINSTANCE.createRoute();
-			route.setName("testroute" + id);
-			route.setDescription("testroutedesc" + id);
-			route.setCode("#66778" + id);
-			
-			dairyLocation.setRoute(route);
-			Location location = ModelFactoryImpl.eINSTANCE.createLocation();
-
-			PostalLocation postalLocation = ModelFactory.eINSTANCE.createPostalLocation();
-			postalLocation.setAddress("test address " + id);
-			postalLocation.setSection("test section " + id);
-			postalLocation.setEstate("test estate " + id);
-			postalLocation.setVillage("test village " + id);
-			postalLocation.setLocation("test location " + id);
-			postalLocation.setSubLocation("test sublocation " + id);
-			postalLocation.setDistrict("test district " + id);
-			postalLocation.setDivision("test division " + id);
-			postalLocation.setPostalCode("123456 " + id);
-			postalLocation.setProvince("TP " + id);
-			
-			DescriptiveLocation descriptiveLocation = ModelFactory.eINSTANCE.createDescriptiveLocation();
-			descriptiveLocation.setLandmarks("test landmarks " + id);
-			descriptiveLocation.setDirections("test directions " + id);
-			
-			MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
-			mapLocation.setLatitude("123.00");
-			mapLocation.setLongitude("-100.00");
-			
-			location.setPostalLocation(postalLocation);
-			location.setDescriptiveLocation(descriptiveLocation);
-			location.setMapLocation(mapLocation);
-			dairyLocation.setLocation(location);
 		
-			input.add(dairyLocation);
-			id ++;
+		DairyLocationResourceManager.INSTANCE.loadDairyLocationsResources();
+		try {
+			input = DairyLocationResourceManager.INSTANCE.getObjectsFromDairyModel(DairyLocation.class);
+		} catch (CoreException e) {
+			// TODO 			
+			e.printStackTrace();
 		}
+		DairyLocationResourceManager.INSTANCE.loadRoutesResources();
+		
 	}
 
 	public static final class RouteService
 	{
-		private ArrayList<Route> routes = new ArrayList<Route>() ;
+		private List<Route> routes = null;
 
-		public ArrayList<Route> getRoutes() {
+		public List<Route> getRoutes() {
+			if (routes == null) {
+				try {
+					routes = DairyLocationResourceManager.INSTANCE.getObjectsFromDairyModel(Route.class);
+				} catch (Exception e) {
+					e.printStackTrace();
+					routes = new ArrayList<Route>();
+				}
+			}
 			return routes;
 		}
 
-		public void setRoutes(ArrayList<Route> routes) {
-			this.routes = routes;
+		public void store()
+		{
+			DairyLocationResourceManager.INSTANCE.getRoutesResource().getContents().clear();
+			DairyLocationResourceManager.INSTANCE.getRoutesResource().getContents().addAll(routes);
+			try {
+				DairyLocationResourceManager.INSTANCE.saveResource(DairyLocationResourceManager.INSTANCE.getRoutesResource());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
+		public void refresh()
+		{
+			try {
+				routes = DairyLocationResourceManager.INSTANCE.getObjectsFromDairyModel(Route.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+				routes = new ArrayList<Route>();
+			}
+		}
 	}
+	
+	
 }

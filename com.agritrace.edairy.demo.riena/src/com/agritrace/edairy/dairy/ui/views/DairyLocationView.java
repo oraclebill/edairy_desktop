@@ -164,7 +164,7 @@ public class DairyLocationView extends SubModuleView {
 		mapTab.setControl(tab3);
 		createMapTab(tab3);
 		
-		Composite buttonPanel = UIControlsFactory.createComposite(detailGroup);
+		/*Composite buttonPanel = UIControlsFactory.createComposite(detailGroup);
 		gd = new GridData(SWT.END, SWT.FILL, true, false);
 		gd.horizontalSpan = 3;
 		gd.horizontalAlignment = GridData.END; 
@@ -185,10 +185,10 @@ public class DairyLocationView extends SubModuleView {
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		cancelButton.setLayoutData(gd);
+		*/
 		
 		
-		
-		createMessageBoxes(buttonPanel);
+		//createMessageBoxes(buttonPanel);
 	}
 	
 	private void createDairyLocationList(Composite parent)
