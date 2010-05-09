@@ -39,6 +39,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getDairyId <em>Dairy Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
  * </ul>
  * </p>
  *
@@ -356,6 +357,22 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	void setDairyId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Dairy Bins</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.model.dairy.DairyContainer}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dairy Bins</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dairy Bins</em>' containment reference list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairy_DairyBins()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DairyContainer> getDairyBins();
 
 	/**
 	 * <!-- begin-user-doc -->

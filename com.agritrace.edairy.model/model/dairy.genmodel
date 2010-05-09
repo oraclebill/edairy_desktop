@@ -125,6 +125,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/suppliers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/animalHealthRequests"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/dairyId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/dairyBins"/>
       <genOperations ecoreOperation="dairy.ecore#//Dairy/getMemberFarms"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Membership">

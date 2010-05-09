@@ -8,6 +8,7 @@ package com.agritrace.edairy.model.dairy.impl;
 
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.Dairy;
+import com.agritrace.edairy.model.dairy.DairyContainer;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
@@ -61,6 +62,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getDairyId <em>Dairy Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
  * </ul>
  * </p>
  *
@@ -286,6 +288,16 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected Long dairyId = DAIRY_ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDairyBins() <em>Dairy Bins</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDairyBins()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DairyContainer> dairyBins;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -554,6 +566,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DairyContainer> getDairyBins() {
+		if (dairyBins == null) {
+			dairyBins = new EObjectContainmentEList<DairyContainer>(DairyContainer.class, this, DairyPackage.DAIRY__DAIRY_BINS);
+		}
+		return dairyBins;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Farm> getMemberFarms() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -582,6 +606,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return ((InternalEList<?>)getCollectionJournals()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return ((InternalEList<?>)getAnimalHealthRequests()).basicRemove(otherEnd, msgs);
+			case DairyPackage.DAIRY__DAIRY_BINS:
+				return ((InternalEList<?>)getDairyBins()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -624,6 +650,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getAnimalHealthRequests();
 			case DairyPackage.DAIRY__DAIRY_ID:
 				return getDairyId();
+			case DairyPackage.DAIRY__DAIRY_BINS:
+				return getDairyBins();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -690,6 +718,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__DAIRY_ID:
 				setDairyId((Long)newValue);
 				return;
+			case DairyPackage.DAIRY__DAIRY_BINS:
+				getDairyBins().clear();
+				getDairyBins().addAll((Collection<? extends DairyContainer>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -747,6 +779,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__DAIRY_ID:
 				setDairyId(DAIRY_ID_EDEFAULT);
 				return;
+			case DairyPackage.DAIRY__DAIRY_BINS:
+				getDairyBins().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -789,6 +824,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return animalHealthRequests != null && !animalHealthRequests.isEmpty();
 			case DairyPackage.DAIRY__DAIRY_ID:
 				return DAIRY_ID_EDEFAULT == null ? dairyId != null : !DAIRY_ID_EDEFAULT.equals(dairyId);
+			case DairyPackage.DAIRY__DAIRY_BINS:
+				return dairyBins != null && !dairyBins.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

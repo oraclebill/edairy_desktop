@@ -1263,13 +1263,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__DAIRY_ID = ModelPackage.COMPANY_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Dairy Bins</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -2652,6 +2661,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getDairy_DairyId();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Dairy Bins</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Dairy#getDairyBins()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EReference getDairy_DairyBins();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.dairy.Membership <em>Membership</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3698,6 +3718,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DAIRY__DAIRY_ID = eINSTANCE.getDairy_DairyId();
+
+		/**
+		 * The meta object literal for the '<em><b>Dairy Bins</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DAIRY__DAIRY_BINS = eINSTANCE.getDairy_DairyBins();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
