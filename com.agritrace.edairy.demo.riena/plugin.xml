@@ -110,8 +110,8 @@
         </view>
         <view
             allowMultiple="true"
-            class="com.agritrace.edairy.ui.views.CreditJournalView"
-            id="com.agritrace.edairy.ui.views.CreditJournalView"
+            class="com.agritrace.edairy.finance.ui.CreditJournalView"
+            id="com.agritrace.edairy.finance.ui.CreditJournalView"
             name="CreditJournalViews">
         </view>
          <view
