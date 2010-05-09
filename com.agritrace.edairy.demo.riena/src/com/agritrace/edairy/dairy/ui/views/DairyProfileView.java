@@ -10,9 +10,13 @@
  *******************************************************************************/
 package com.agritrace.edairy.dairy.ui.views;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
+
+import com.agritrace.edairy.dairy.ui.DairyProfileViewWidgetID; 
 import org.eclipse.riena.ui.swt.utils.ImageStore;
+import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -22,33 +26,36 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.ui.views.LocationInfoGroup;
 
-public class DairyProfileView extends ViewPart {
+public class DairyProfileView extends SubModuleView {
 
 	public static final String ID = DairyProfileView.class.getName(); 
-
+	
+	
+	private Text txtName;
+	private Text txtId;
+	private Text txtLicense;
+	private Text txtDairyDescription;
+	private Text txtManagerName;
+	private Text txtMemberCount;
+	private Label lblMemberCount;
+	private Label lblDairyImage;
+	
+	
 	@Override
-	public void createPartControl(Composite parent) {
-		Composite top = new Composite(parent, SWT.NONE);
+	protected void basicCreatePartControl(Composite parent) {
+//		Composite top = new Composite(parent, SWT.NONE);
+		Composite top = parent;
 		top.setLayout(new FormLayout());
 
-		Text txtName;
-		Text txtId;
-		Text txtLicense;
-		Text txtEstablishedAs;
-		Text txtJohnJones;
-		Text text_1;
 
 		// Construct Dairy Name/ID Area
 		Group nameArea = new Group(top, SWT.NONE);
 		nameArea.setText("General Information");
 
 		// Construct Dairy Image
-		CLabel lblDairyImage = new CLabel(top, SWT.NONE);
-		lblDairyImage.setImage(ImageStore.getInstance().getImage("map.jpg"));
+		lblDairyImage = UIControlsFactory.createLabel(top, "", DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 
 		// Construct Dairy Location Component
 		LocationInfoGroup locationInfoGroup = new LocationInfoGroup(top, SWT.NONE);
@@ -60,26 +67,37 @@ public class DairyProfileView extends ViewPart {
 		gl_nameArea.marginLeft = 5;
 		nameArea.setLayout(gl_nameArea);
 		
-		Label lblName = new Label(nameArea, SWT.NONE);
-		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblName.setText("Name");
-		txtName = new Text(nameArea, SWT.BORDER);
-		txtName.setText("Limuru Dairy Milk Processing Plant");
-		txtName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+//		Label lblName = UIControlsFactory.createLabel(nameArea, "Name");
+//		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 
-		Label lblId = new Label(nameArea, SWT.NONE);
-		lblId.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblId.setText("ID");
-		txtId = new Text(nameArea, SWT.BORDER);
-		txtId.setText("# 33422314");
-		txtId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		GridDataFactory labelGridDataFactory = GridDataFactory.createFrom(
+				new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		GridDataFactory fieldGridDataFactory = GridDataFactory.createFrom(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblLicense = new Label(nameArea, SWT.NONE);
-		lblLicense.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblLicense.setText("License #");		
-		txtLicense = new Text(nameArea, SWT.BORDER);
-		txtLicense.setText("AD-123445-112");
-		txtLicense.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		// name field
+		labelGridDataFactory.applyTo(
+				UIControlsFactory.createLabel(nameArea, "Name")
+				);
+		fieldGridDataFactory.applyTo(
+				txtName = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_NAME)
+				);
+		// id field
+		labelGridDataFactory.applyTo(
+				UIControlsFactory.createLabel(nameArea, "ID")
+				);
+		fieldGridDataFactory.applyTo(
+				txtId = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_ID)
+				);
+		// license field
+		labelGridDataFactory.applyTo(
+				UIControlsFactory.createLabel(nameArea, "License #")
+				);
+		fieldGridDataFactory.applyTo(
+				txtLicense = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_LICENSE)
+				);
+
+		
 		
 		// Populate Image Area		
 		// Populate Location Area		
@@ -92,30 +110,34 @@ public class DairyProfileView extends ViewPart {
 		fd_composite.right = new FormAttachment(lblDairyImage, 5);
 		nameArea.setLayoutData(fd_composite);
 		
-		Label lblManager = new Label(nameArea, SWT.NONE);
-		lblManager.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblManager.setText("Manager");
 		
-		txtJohnJones = new Text(nameArea, SWT.BORDER);
-		txtJohnJones.setText("John Jones");
-		txtJohnJones.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		// manager field 
+		labelGridDataFactory.applyTo(
+				UIControlsFactory.createLabel(nameArea, "Dairy Manager")
+				);
+		fieldGridDataFactory.applyTo(
+				txtManagerName = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_MANAGER_NAME)
+				);
 		
-		Label lblMembership = new Label(nameArea, SWT.NONE);
-		lblMembership.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblMembership.setText("Membership");
+		// member count field 
+		labelGridDataFactory.applyTo(
+				UIControlsFactory.createLabel(nameArea, "Membership")
+				);
+		fieldGridDataFactory.applyTo(
+				txtMemberCount = UIControlsFactory.createText(nameArea, SWT.NONE, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT)
+				);
 		
-		text_1 = new Text(nameArea, SWT.BORDER);
-		text_1.setText("134");
-		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		// description field
+		labelGridDataFactory.align(SWT.RIGHT, SWT.TOP).applyTo(
+				UIControlsFactory.createLabel(nameArea, "Description")
+				);
+		fieldGridDataFactory.align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(
+				txtDairyDescription = UIControlsFactory.createText(nameArea, 
+						SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI, 
+						DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION)
+				);
 		
-		Label lblDetails = new Label(nameArea, SWT.NONE);
-		lblDetails.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
-		lblDetails.setText("Notes");
 		
-		txtEstablishedAs = new Text(nameArea, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
-		txtEstablishedAs.setText("Established 1976 as Limuru Community Processing Play");
-		txtEstablishedAs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
 		// Layout image area
 		FormData fd_lblDairyImage = new FormData();
 		fd_lblDairyImage.width = 200;
@@ -135,10 +157,13 @@ public class DairyProfileView extends ViewPart {
 		fd_locationInfoGroup.right = new FormAttachment(100, -10);
 		locationInfoGroup.setLayoutData(fd_locationInfoGroup);
 
-	}
-
-	@Override
-	public void setFocus() {
+		lblDairyImage.setImage(ImageStore.getInstance().getImage("map.jpg"));
+		txtDairyDescription.setText("Established 1976 as Limuru Community Processing Play");
+		txtMemberCount.setText("134");
+		txtName.setText("Limuru Dairy");
+		txtManagerName.setText("John Jones");
+		txtId.setText("# 33422314");
+		txtLicense.setText("AD-123445-112");
 	}
 
 }

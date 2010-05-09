@@ -15,8 +15,6 @@ import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
-import org.eclipse.riena.ui.swt.MasterDetailsComposite;
-
 import com.agritrace.edairy.ui.views.data.Staff;
 import com.agritrace.edairy.ui.views.data.StaffFactory;
 

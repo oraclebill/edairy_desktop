@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -129,12 +131,14 @@ public class DairyLocationController extends SubModuleController {
 		dateOpened.updateFromModel();
 
 		final IMultipleChoiceRidget functions = getRidget(IMultipleChoiceRidget.class, RIDGET_ID_FUNCTIONS);
-		functions.bindToModel(Arrays.asList(DairyFunction.MILK_COLLECTION, DairyFunction.MILK_STORAGE, DairyFunction.MILK_PROCESSING, DairyFunction.WAREHOUSE, DairyFunction.STORE_SALES), 
-				  			Arrays.asList("Collection", "Storage", "Processing", "Warehouse", "Sales"), 
-				  			dairyLocation,
-							"functions");						
+		IObservableList optionValues = new WritableList( Arrays.asList(DairyFunction.values()), DairyFunction.class ) ;
+		IObservableList selectionValues = new WritableList( dairyLocation.getFunctions(), DairyFunction.class );
+		functions.bindToModel( optionValues, selectionValues );
+//				  			Arrays.asList("Collection", "Storage", "Processing", "Warehouse", "Sales"), 
+//				  			dairyLocation,
+//							"functions");						
 		functions.updateFromModel();
-		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
+//		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
 		
 		final IComboRidget route = getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 		RouteService rs = new RouteService();

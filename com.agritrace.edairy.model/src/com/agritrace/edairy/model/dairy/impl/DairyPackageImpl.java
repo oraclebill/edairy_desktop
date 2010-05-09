@@ -1005,6 +1005,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDairy_DairyBins() {
+		return (EReference)dairyEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMembership() {
 		return membershipEClass;
 	}
@@ -1407,6 +1416,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(dairyEClass, DAIRY__SUPPLIERS);
 		createEReference(dairyEClass, DAIRY__ANIMAL_HEALTH_REQUESTS);
 		createEAttribute(dairyEClass, DAIRY__DAIRY_ID);
+		createEReference(dairyEClass, DAIRY__DAIRY_BINS);
 
 		membershipEClass = createEClass(MEMBERSHIP);
 		createEAttribute(membershipEClass, MEMBERSHIP__MEMBER_ID);
@@ -1583,6 +1593,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_AnimalHealthRequests(), theRequestsPackage.getAnimalHealthRequest(), null, "animalHealthRequests", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairy_DairyId(), theModelPackage.getUniqueID(), "dairyId", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDairy_DairyBins(), this.getDairyContainer(), null, "dairyBins", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(dairyEClass, null, "getMemberFarms", 1, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEEList());

@@ -25,6 +25,7 @@ Export-Package: com.agritrace.edairy.dairy.ui.controllers;
  com.agritrace.edairy.milkCollection.ui.controllers,
  com.agritrace.edairy.milkCollection.ui.views,
  com.agritrace.edairy.riena.ui.views,
+ com.agritrace.edairy.service.core,
  com.agritrace.edairy.service.ui.controllers,
  com.agritrace.edairy.service.ui.views,
  com.agritrace.edairy.service.ui.views.utils,

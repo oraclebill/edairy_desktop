@@ -21,6 +21,7 @@ import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.dairy.Dairy;
+import com.agritrace.edairy.model.dairy.DairyContainer;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
@@ -39,22 +40,22 @@ import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 
 public class DairyDemoResourceManager{
-	
+
 	public static DairyDemoResourceManager INSTANCE = new DairyDemoResourceManager();
-	
+
 	private Resource farmResource;
-	
+
 	private Resource dairyResource;
-	
+
 	private DairyDemoResourceManager(){
-		
+
 	}
-	
+
 	public List<Farm> createFarmResource()throws ParseException{
 		List<Farm> farms = new ArrayList<Farm>();
 		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
 		farmResource = ResourceManager.INSTANCE.createResource(farmResourceURI);
-		
+
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
 		farm.setFarmId(new Long(5001).longValue());
 		farm.setName("Green Farm");
@@ -74,7 +75,7 @@ public class DairyDemoResourceManager{
 		farm.setLocation(location1);
 		createFarmProperties(farm,20,20,8000,9000);
 		farms.add(farm);
-		
+
 		Farm farm1 = TrackingFactory.eINSTANCE.createFarm();
 		farm.setFarmId(new Long(5001).longValue());
 		farm.setName("Farm2");
@@ -94,12 +95,12 @@ public class DairyDemoResourceManager{
 		farm1.setLocation(location2);
 		createFarmProperties(farm1,10,15,8050,9050);
 		farms.add(farm1);
-		
+
 		for(Farm f :farms){
 			farmResource.getContents().add(f);
 
 		}
-		
+
 		try {
 			ResourceManager.INSTANCE.saveResource(farmResource);
 		} catch (IllegalArgumentException e) {
@@ -110,18 +111,18 @@ public class DairyDemoResourceManager{
 			e.printStackTrace();
 		}
 		return farms;
-		
-		
 
-		
-		
+
+
+
+
 	}
 
 	public void createDairyResource() throws ParseException{
 		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
 
 		dairyResource = ResourceManager.INSTANCE.createResource(dairyResourceURI);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
 		//location
@@ -138,8 +139,8 @@ public class DairyDemoResourceManager{
 		defaultLocation.setProvince("Jersey");
 		defaultLocation.setPostalCode("08550");
 		location1.setPostalLocation(defaultLocation);
-//	
-//		
+		//	
+		//		
 		Location location2 = ModelFactory.eINSTANCE.createLocation();
 		PostalLocation pLocation2 = ModelFactory.eINSTANCE.createPostalLocation();
 		pLocation2.setAddress("12 -North Post");
@@ -153,7 +154,7 @@ public class DairyDemoResourceManager{
 		pLocation2.setProvince("Jersey");
 		pLocation2.setPostalCode("08550");
 		location2.setPostalLocation(pLocation2);
-//		
+		//		
 		Location location3 = ModelFactory.eINSTANCE.createLocation();
 		PostalLocation pLocation3 = ModelFactory.eINSTANCE.createPostalLocation();
 		pLocation3.setAddress("12 -North Post");
@@ -167,12 +168,12 @@ public class DairyDemoResourceManager{
 		pLocation3.setProvince("Jersey");
 		pLocation3.setPostalCode("08550");
 		location3.setPostalLocation(pLocation3);
-		
+
 		//add locations to contents
-//		dairyResource.getContents().add(location1);
-//		dairyResource.getContents().add(location2);
-//		dairyResource.getContents().add(location3);
-		
+		//		dairyResource.getContents().add(location1);
+		//		dairyResource.getContents().add(location2);
+		//		dairyResource.getContents().add(location3);
+
 		//drivers
 		Employee driver1 = DairyFactory.eINSTANCE.createEmployee();
 		driver1.setName("Joseph Limuru");
@@ -183,7 +184,7 @@ public class DairyDemoResourceManager{
 		driver1.setJobFunction("Driver");
 		Date startDate  = sdf.parse("04/18/1998");
 		driver1.setStartDate(startDate);
-//		
+		//		
 		Employee driver2 = DairyFactory.eINSTANCE.createEmployee();
 		driver2.setName("John Smith");
 		driver2.setGivenName("John");
@@ -193,7 +194,7 @@ public class DairyDemoResourceManager{
 		driver2.setJobFunction("Driver");
 		Date startDate2  = sdf.parse("02/03/1994");
 		driver2.setStartDate(startDate2);
-//		
+		//		
 		Employee driver3 = DairyFactory.eINSTANCE.createEmployee();
 		driver3.setName("Jason Spencer");
 		driver3.setGivenName("Jason");
@@ -204,10 +205,10 @@ public class DairyDemoResourceManager{
 		Date startDate3  = sdf.parse("07/14/1994");
 		driver3.setStartDate(startDate3);
 		//add drivers to contents
-//		dairyResource.getContents().add(driver1);
-//		dairyResource.getContents().add(driver2);
-//		dairyResource.getContents().add(driver3);
-				
+		//		dairyResource.getContents().add(driver1);
+		//		dairyResource.getContents().add(driver2);
+		//		dairyResource.getContents().add(driver3);
+
 		//create vehicles
 		Vehicle v1 = DairyFactory.eINSTANCE.createVehicle();
 		v1.setAssetId(new Long(1001));
@@ -220,7 +221,8 @@ public class DairyDemoResourceManager{
 		v1.setLogBookNumber("23001");
 		v1.setMake("Toyota");
 		v1.setModel("Tacoma");
-		
+		v1.setRegistrationNumber("1001- Toyota Tacoma");
+
 		Vehicle v2 = DairyFactory.eINSTANCE.createVehicle();
 		v2.setAssetId(new Long(1002));
 		v2.setCapacityInTonnes("2");
@@ -232,7 +234,9 @@ public class DairyDemoResourceManager{
 		v2.setLogBookNumber("56558");
 		v2.setMake("Toyota");
 		v2.setModel("Tacoma");
-		
+		v2.setRegistrationNumber("1002- Toyota Tacoma");
+
+
 		Vehicle v3 = DairyFactory.eINSTANCE.createVehicle();
 		v3.setAssetId(new Long(1003));
 		v3.setCapacityInTonnes("2");
@@ -244,13 +248,15 @@ public class DairyDemoResourceManager{
 		v3.setLogBookNumber("56559");
 		v3.setMake("Toyota");
 		v3.setModel("Tacoma");
+		v3.setRegistrationNumber("1003- Toyota Tacoma");
+
 		//add vehicles
-		dairyResource.getContents().add(v1);
-		dairyResource.getContents().add(v2);
-		dairyResource.getContents().add(v3);
-//
-//		
-//		//dairyLocation
+		//		dairyResource.getContents().add(v1);
+		//		dairyResource.getContents().add(v2);
+		//		dairyResource.getContents().add(v3);
+		//
+		//		
+		//		//dairyLocation
 		DairyLocation dLocation = DairyFactory.eINSTANCE.createDairyLocation();
 		dLocation.setName("stop1");
 		Date openDate  = sdf.parse("04/27/2005");
@@ -272,7 +278,7 @@ public class DairyDemoResourceManager{
 		p1.setPostalCode("08550");
 		dairyLocation1.setPostalLocation(p1);
 		dLocation.setLocation(dairyLocation1);
-//		
+		//		
 		DairyLocation dLocation2 = DairyFactory.eINSTANCE.createDairyLocation();
 		dLocation2.setName("stop2");
 		Date openDate2  = sdf.parse("04/27/2005");
@@ -294,7 +300,7 @@ public class DairyDemoResourceManager{
 		p2.setPostalCode("08550");
 		dairyLocation2.setPostalLocation(p2);
 		dLocation2.setLocation(dairyLocation2);
-//		
+		//		
 		DairyLocation dLocation3 = DairyFactory.eINSTANCE.createDairyLocation();
 		dLocation3.setName("stop3");
 		Date openDate3  = sdf.parse("04/27/2005");
@@ -302,7 +308,7 @@ public class DairyDemoResourceManager{
 		dLocation3.setCode("DL003");
 		dLocation3.setPhone("609-457-8989");
 		dLocation3.getFunctions().add(DairyFunction.MILK_COLLECTION);
-//		
+		//		
 		Location dairyLocation3 = ModelFactory.eINSTANCE.createLocation();
 		PostalLocation p3 = ModelFactory.eINSTANCE.createPostalLocation();
 		p3.setAddress("566 - Ngeche");
@@ -317,8 +323,8 @@ public class DairyDemoResourceManager{
 		p3.setPostalCode("08550");
 		dairyLocation3.setPostalLocation(p3);
 		dLocation3.setLocation(dairyLocation3);
-//
-//		
+		//
+		//		
 		DairyLocation dLocation2_1 = DairyFactory.eINSTANCE.createDairyLocation();
 		dLocation2_1.setName("route2_stop1");
 		Date openDate2_1  = sdf.parse("03/26/2008");
@@ -340,7 +346,7 @@ public class DairyDemoResourceManager{
 		p2_1.setPostalCode("08550");
 		location2_1.setPostalLocation(p2_1);
 		dLocation2_1.setLocation(location2_1);
-//		
+		//		
 		DairyLocation dLocation2_2 = DairyFactory.eINSTANCE.createDairyLocation();
 		dLocation2_2.setName("route2_stop2");
 		Date openDate2_2  = sdf.parse("03/26/2008");
@@ -362,7 +368,7 @@ public class DairyDemoResourceManager{
 		p2_2.setPostalCode("08550");
 		location2_2.setPostalLocation(p2_2);
 		dLocation2_2.setLocation(location2_2);
-//		
+		//		
 		DairyLocation dLocation2_3 = DairyFactory.eINSTANCE.createDairyLocation();
 		dLocation2_3.setName("route2_stop3");
 		Date openDate2_3  = sdf.parse("04/27/2008");
@@ -383,46 +389,47 @@ public class DairyDemoResourceManager{
 		p2_3.setProvince("Jersey");
 		p2_3.setPostalCode("08550");
 		location2_3.setPostalLocation(p2_3);
-//	
+		//	
 		dLocation2_3.setLocation(location2_3);
-//		
-//		//add dairyLocations
-		dairyResource.getContents().add(dLocation);
-		dairyResource.getContents().add(dLocation2);
-		dairyResource.getContents().add(dLocation3);
-		dairyResource.getContents().add(dLocation2_1);
-		dairyResource.getContents().add(dLocation2_2);
-		dairyResource.getContents().add(dLocation2_3);
-//		//route
+		//		
+		//		//add dairyLocations
+		//		dairyResource.getContents().add(dLocation);
+		//		dairyResource.getContents().add(dLocation2);
+		//		dairyResource.getContents().add(dLocation3);
+		//		dairyResource.getContents().add(dLocation2_1);
+		//		dairyResource.getContents().add(dLocation2_2);
+		//		dairyResource.getContents().add(dLocation2_3);
+		//		//route
 		Route route1 = DairyFactory.eINSTANCE.createRoute();
 		route1.setCode("R0001");
 		route1.setName("Route 1");
 		route1.getStops().add(dLocation);
 		route1.getStops().add(dLocation2);
 		route1.getStops().add(dLocation3);
-		
+
 		Route route2 = DairyFactory.eINSTANCE.createRoute();
 		route2.setCode("R0002");
 		route2.setName("Route 2");
 		route2.getStops().add(dLocation2_1);
 		route2.getStops().add(dLocation2_2);
 		route2.getStops().add(dLocation2_3);
-		dairyResource.getContents().add(route1);
-		dairyResource.getContents().add(route2);
-//		
+		//		dairyResource.getContents().add(route1);
+		//		dairyResource.getContents().add(route2);
+		//		
 		List<Farm> farms = createFarmResource();
 		Membership member1 = DairyFactory.eINSTANCE.createMembership();
 		member1.setMemberId("1001");
 		Date applicationDate = sdf.parse("02/04/2007");
 		member1.setApplicationDate(applicationDate);
-		
+
 		Date effectiveDate = sdf.parse("02/05/2007");
 		member1.setEffectiveDate(effectiveDate);
 		member1.setStatus(MembershipStatus.ACTIVE);
 		member1.getFarms().addAll(farms);
-		
-		
-		dairyResource.getContents().add(member1);
+		//		dairyResource.getContents().add(member1);
+
+		//dairy conatiner
+		List<DairyContainer>bins = createDairyContainer(10,10000);
 		
 		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("Demo Dairy");
@@ -431,10 +438,24 @@ public class DairyDemoResourceManager{
 		dairy.getEmployees().add(driver1);
 		dairy.getEmployees().add(driver2);
 		dairy.getEmployees().add(driver3);
+		dairy.getVehicles().add(v1);
+		dairy.getVehicles().add(v2);
+		dairy.getVehicles().add(v3);
+		dairy.getBranchLocations().add(dLocation);
+		dairy.getBranchLocations().add(dLocation2);
+		dairy.getBranchLocations().add(dLocation3);
+		dairy.getBranchLocations().add(dLocation2_1);
+		dairy.getBranchLocations().add(dLocation2_2);
+		dairy.getBranchLocations().add(dLocation2_3);
+
+		dairy.getRoutes().add(route1);
+		dairy.getRoutes().add(route2);
+		dairy.getDairyBins().addAll(bins);
 		dairy.getMemberships().add(member1);
+
 		dairyResource.getContents().add(dairy);
 		try {
-//			dairyResource.save(null);
+			//			dairyResource.save(null);
 			ResourceManager.INSTANCE.saveResource(dairyResource);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -444,19 +465,19 @@ public class DairyDemoResourceManager{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void loadResources(){
 		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
 		dairyResource =  ResourceManager.INSTANCE.loadResource(dairyResourceURI);
-//		try {
-//			Dairy dairy = getObjectsFromDairyModel(Dairy.class).get(0);
-//			
-//		} catch (CoreException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			Dairy dairy = getObjectsFromDairyModel(Dairy.class).get(0);
+		//			
+		//		} catch (CoreException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
 	}
-	
+
 	public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T>  type) throws CoreException{
 		List<T> objectList = new ArrayList<T>();
 		if(dairyResource == null){
@@ -467,22 +488,22 @@ public class DairyDemoResourceManager{
 		}
 		List<EObject> objects = dairyResource.getContents();
 		for(EObject object :objects){
-			 if(type.isAssignableFrom(object.getClass())){
-				 objectList.add((T) object);
-			 }
+			if(type.isAssignableFrom(object.getClass())){
+				objectList.add((T) object);
+			}
 		}
 		return objectList;
 	}
-	
-	
-	
+
+
+
 
 	private void createFarmProperties(Farm farm, int containerNumber, int animalNumber, int containerId, int animalId)throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
 		for(int i=0; i<containerNumber; i++){
 			Container container= TrackingFactory.eINSTANCE.createContainer();
-			container.setType(ContainerType.BIN);
+			container.setType(ContainerType.CAN);
 			int id = containerId+i;
 			container.setContainerId(""+id);
 			container.setOwner(farm);
@@ -490,7 +511,7 @@ public class DairyDemoResourceManager{
 			container.setCapacity(50);
 			farm.getCans().add(container);
 		}
-		
+
 		for(int i=0; i<animalNumber; i++){
 			RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
 			animal1.setAnimnalRegistrationId(10001);
@@ -511,7 +532,7 @@ public class DairyDemoResourceManager{
 			animal1.setRearingMode(RearingMode.get(rearingModelValue));
 			int acquisionType = i%5;
 			animal1.setAcquisitionType(AcquisitionType.get(acquisionType));			
-			
+
 			ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
 			animal1_type.setAnimalTypeId(animalId+i);
 			animal1_type.setSpecies("Cow");
@@ -519,5 +540,20 @@ public class DairyDemoResourceManager{
 			animal1.setAnimalType(animal1_type);
 			farm.getAnimals().add(animal1);
 		}
+	}
+
+	private List<DairyContainer> createDairyContainer(int binNumber, int binId){ 
+		List<DairyContainer> binList = new ArrayList<DairyContainer>();
+		for(int i=0; i<binNumber; i++){
+			DairyContainer bin= DairyFactory.eINSTANCE.createDairyContainer();
+			bin.setType(ContainerType.BIN);
+			int id = binId+i;
+			bin.setContainerId(""+id);
+			bin.setAssetId(new Long(id).longValue());
+			bin.setMeasureType(UnitOfMeasure.LITRE);
+			bin.setCapacity(200);
+			binList.add(bin);
+		}
+		return binList;
 	}
 }

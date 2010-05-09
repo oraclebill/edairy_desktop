@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.controllers;
+package com.agritrace.edairy.dairy.ui.controllers.x;
 
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
