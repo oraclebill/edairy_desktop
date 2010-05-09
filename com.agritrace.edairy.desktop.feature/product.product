@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Desktop Manager" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.demo.riena.edairy_demo_product" application="com.agritrace.edairy.demo.riena.newId" version="0.1.0" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Desktop Manager" uid="com.agritrace.edairy.desktop" id="com.agritrace.edairy.demo.riena.edairy_demo_product" application="com.agritrace.edairy.demo.riena.dairy_manager" version="0.1.0" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -25,7 +25,7 @@
       <plugin id="com.agritrace.edairy.riena.ui" fragment=""/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="javax.persistence" fragment=""/>
+      <plugin id="javax.persistence"/>
       <plugin id="javax.servlet"/>
       <plugin id="org.apache.commons.beanutils"/>
       <plugin id="org.apache.commons.logging"/>
@@ -50,9 +50,9 @@
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.persistence.asm" fragment=""/>
-      <plugin id="org.eclipse.persistence.core" fragment=""/>
-      <plugin id="org.eclipse.persistence.jpa" fragment=""/>
+      <plugin id="org.eclipse.persistence.asm"/>
+      <plugin id="org.eclipse.persistence.core"/>
+      <plugin id="org.eclipse.persistence.jpa"/>
       <plugin id="org.eclipse.persistence.jpa.equinox" fragment="true"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
@@ -87,11 +87,18 @@
 
    <features>
       <feature id="com.agritrace.edairy.desktop.feature" version="1.0.0.qualifier"/>
-      <feature id="org.eclipse.emf" version="2.6.0.v201003151457-7a8X-9e7C9iV-xQXul4-DgnI8"/>
-      <feature id="org.eclipse.emf.databinding" version="1.2.0.v201003151457-21-7w312114262568"/>
-      <feature id="org.eclipse.emf.ecore" version="2.6.0.v201003151457-777F-9oB5855E8K8HKQ"/>
-      <feature id="org.eclipse.emf.codegen" version="2.5.0.v201003151457-35-7w312114262568"/>
+      <feature id="org.eclipse.rcp" version="3.6.0.v20100427-9KAjFGCFs-Uz-02qq_uWSth7"/>
+      <feature id="org.eclipse.emf.query.sdk" version="1.4.0.v20100428-2315-67J-95GFz01DOIuNNRTWK_NPj507"/>
+      <feature id="org.eclipse.emf.databinding" version="1.2.0.v20100504-1259"/>
+      <feature id="org.eclipse.emf.sdk" version="2.6.0.v20100504-1259"/>
+      <feature id="com.agritrace.edairy.desktop.site" version="1.0.0.qualifier"/>
+      <feature id="org.eclipse.equinox.core.sdk" version="3.6.0.v20100421-7sF99Fp7FUu63Xc4bf-5HsRV"/>
+      <feature id="org.eclipse.equinox.executable" version="3.4.0.v20100421-7M7J8ZFIhIeynfgHgHsU7Z"/>
+      <feature id="org.eclipse.riena.build.feature.core.sdk" version="2.0.0.v20100503_2_0_0_M7"/>
    </features>
 
+   <configurations>
+      <plugin id="com.agritrace.edairy.riena.ui" autoStart="false" startLevel="0" />
+   </configurations>
 
 </product>
