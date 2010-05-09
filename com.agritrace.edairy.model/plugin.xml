@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://com.agritrace.edairy.model/dairy/"
+            class="com.agritrace.edairy.model.dairy.DairyPackage"
+            genModel="model/dairy.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="dairy"
+            class="com.agritrace.edairy.model.dairy.util.DairyResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://com.agritrace.edairy.model/account"
+            class="com.agritrace.edairy.model.dairy.account.AccountPackage"
+            genModel="model/dairy.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="account"
+            class="com.agritrace.edairy.model.dairy.account.util.AccountResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://com.agritrace.edairy.model/"
+            class="com.agritrace.edairy.model.ModelPackage"
+            genModel="model/dairy.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="model"
+            class="com.agritrace.edairy.model.util.ModelResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://com.agritrace.edairy.model/tracking/"
+            class="com.agritrace.edairy.model.tracking.TrackingPackage"
+            genModel="model/dairy.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://edairy.agritrace.com/requests/"
+            class="com.agritrace.edairy.model.requests.RequestsPackage"
+            genModel="model/dairy.genmodel"/>
+   </extension>
+
+</plugin>

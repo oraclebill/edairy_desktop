@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="edairy local">
+<locations>
+<location id="org.eclipse.emf.databinding.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.databinding" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.mint" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.query.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.query.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.rcp.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.rcp" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.compendium.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.core.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.executable" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.p2.discovery.feature" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.p2.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.server.core" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.server.jetty" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.server.p2" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.server.servletbridge" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.server.simple" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.serverside.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.riena.build.feature.core.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.riena.build.feature.samples.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.riena.build.feature.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location id="org.eclipse.riena.build.feature" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipselink-2.1.0.v20100503-r7134/plugins" type="Directory"/>
+<location id="org.eclipse.emf.ecore.edit.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.ecore.edit" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.ecore.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.ecore" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.query.sdk" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.query.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.query" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.source" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.emf" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+<location id="org.eclipse.epp.package.modeling.feature" path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse" type="Feature"/>
+</locations>
+</target>
