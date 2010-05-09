@@ -220,6 +220,7 @@ public class DairyDemoResourceManager{
 		v1.setLogBookNumber("23001");
 		v1.setMake("Toyota");
 		v1.setModel("Tacoma");
+		v1.setRegistrationNumber("1001- Toyota Tacoma");
 		
 		Vehicle v2 = DairyFactory.eINSTANCE.createVehicle();
 		v2.setAssetId(new Long(1002));
@@ -232,6 +233,8 @@ public class DairyDemoResourceManager{
 		v2.setLogBookNumber("56558");
 		v2.setMake("Toyota");
 		v2.setModel("Tacoma");
+		v2.setRegistrationNumber("1002- Toyota Tacoma");
+
 		
 		Vehicle v3 = DairyFactory.eINSTANCE.createVehicle();
 		v3.setAssetId(new Long(1003));
@@ -244,10 +247,12 @@ public class DairyDemoResourceManager{
 		v3.setLogBookNumber("56559");
 		v3.setMake("Toyota");
 		v3.setModel("Tacoma");
+		v3.setRegistrationNumber("1003- Toyota Tacoma");
+		
 		//add vehicles
-		dairyResource.getContents().add(v1);
-		dairyResource.getContents().add(v2);
-		dairyResource.getContents().add(v3);
+//		dairyResource.getContents().add(v1);
+//		dairyResource.getContents().add(v2);
+//		dairyResource.getContents().add(v3);
 //
 //		
 //		//dairyLocation
@@ -387,12 +392,12 @@ public class DairyDemoResourceManager{
 		dLocation2_3.setLocation(location2_3);
 //		
 //		//add dairyLocations
-		dairyResource.getContents().add(dLocation);
-		dairyResource.getContents().add(dLocation2);
-		dairyResource.getContents().add(dLocation3);
-		dairyResource.getContents().add(dLocation2_1);
-		dairyResource.getContents().add(dLocation2_2);
-		dairyResource.getContents().add(dLocation2_3);
+//		dairyResource.getContents().add(dLocation);
+//		dairyResource.getContents().add(dLocation2);
+//		dairyResource.getContents().add(dLocation3);
+//		dairyResource.getContents().add(dLocation2_1);
+//		dairyResource.getContents().add(dLocation2_2);
+//		dairyResource.getContents().add(dLocation2_3);
 //		//route
 		Route route1 = DairyFactory.eINSTANCE.createRoute();
 		route1.setCode("R0001");
@@ -407,8 +412,8 @@ public class DairyDemoResourceManager{
 		route2.getStops().add(dLocation2_1);
 		route2.getStops().add(dLocation2_2);
 		route2.getStops().add(dLocation2_3);
-		dairyResource.getContents().add(route1);
-		dairyResource.getContents().add(route2);
+//		dairyResource.getContents().add(route1);
+//		dairyResource.getContents().add(route2);
 //		
 		List<Farm> farms = createFarmResource();
 		Membership member1 = DairyFactory.eINSTANCE.createMembership();
@@ -431,7 +436,20 @@ public class DairyDemoResourceManager{
 		dairy.getEmployees().add(driver1);
 		dairy.getEmployees().add(driver2);
 		dairy.getEmployees().add(driver3);
+		dairy.getVehicles().add(v1);
+		dairy.getVehicles().add(v2);
+		dairy.getVehicles().add(v3);
+		dairy.getBranchLocations().add(dLocation);
+		dairy.getBranchLocations().add(dLocation2);
+		dairy.getBranchLocations().add(dLocation3);
+		dairy.getBranchLocations().add(dLocation2_1);
+		dairy.getBranchLocations().add(dLocation2_2);
+		dairy.getBranchLocations().add(dLocation2_3);
+		
+		dairy.getRoutes().add(route1);
+		dairy.getRoutes().add(route2);
 		dairy.getMemberships().add(member1);
+
 		dairyResource.getContents().add(dairy);
 		try {
 //			dairyResource.save(null);
