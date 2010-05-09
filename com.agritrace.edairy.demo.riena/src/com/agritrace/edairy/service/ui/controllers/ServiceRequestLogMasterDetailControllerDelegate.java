@@ -23,7 +23,7 @@ import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.Farm;
-//import com.agritrace.edairy.service.ui.converters.DateToStringModelConvertor;
+import com.agritrace.edairy.service.ui.converters.DateToStringModelConvertor;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.service.ui.views.ServiceRequestMasterDetailComposite;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
@@ -255,8 +255,8 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 		//
 		ITextRidget textDate = getRidget(ITextRidget.class,
 				"date"); //$NON-NLS-1$
-//		textDate.setModelToUIControlConverter(new DateToStringModelConvertor(
-//				request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));		
+		textDate.setModelToUIControlConverter(new DateToStringModelConvertor(
+				request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));		
 		textDate.bindToModel(EMFObservables.observeValue(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));
 
