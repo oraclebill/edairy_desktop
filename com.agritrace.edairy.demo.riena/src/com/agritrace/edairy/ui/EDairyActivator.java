@@ -3,6 +3,7 @@ package com.agritrace.edairy.ui;
 import java.text.ParseException;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.riena.core.RienaLocations;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -95,7 +96,9 @@ public class EDairyActivator extends AbstractUIPlugin {
 	
 	private void setupDairyResource(){
 		try {
-			DairyDemoResourceManager.INSTANCE.createDairyResource();
+		    	// String baseDir = RienaLocations.getDataArea(plugin.getBundle()).getAbsolutePath();
+		    	String baseDir = System.getProperty("edairy.db.root", "/tmp");
+			DairyDemoResourceManager.INSTANCE.createDairyResource(baseDir);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

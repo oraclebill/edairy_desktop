@@ -43,20 +43,19 @@ import com.agritrace.edairy.model.tracking.TrackingFactory;
 public class DairyDemoResourceManager{
 
 	public static DairyDemoResourceManager INSTANCE = new DairyDemoResourceManager();
-	public static final String XMLDB_BASE = "edairy.xmldb.basedir";
+//	public static final String XMLDB_BASE = System.getProperty("edairy.db.root", "c:/temp/edairy");
+	public static final String XMLDB_BASE = "/tmp";
 
 	private Resource farmResource;
 
 	private Resource dairyResource;
-	private String   fileBase;
 
 	
 	private DairyDemoResourceManager(){
-	    fileBase = System.getProperty(XMLDB_BASE, "c:/temp/eDairy");
 	}
 
 	public void  createFarmResource(){
-		URI farmResourceURI = URI.createFileURI( fileBase + "/farmDB.farm");
+		URI farmResourceURI = URI.createFileURI( XMLDB_BASE + "/farmDB.farm");
 		farmResource = ResourceManager.INSTANCE.createResource(farmResourceURI);
 	}
 	
@@ -106,7 +105,11 @@ public class DairyDemoResourceManager{
 	}
 
 	public void createDairyResource() throws ParseException{
-		URI dairyResourceURI = URI.createFileURI(fileBase + "/dairyDB.dairy");
+	    createDairyResource(XMLDB_BASE);
+	}
+	
+	public void createDairyResource(String baseDir) throws ParseException{
+		URI dairyResourceURI = URI.createFileURI(baseDir + "/dairyDB.dairy");
 
 		dairyResource = ResourceManager.INSTANCE.createResource(dairyResourceURI);
 
@@ -495,7 +498,7 @@ public class DairyDemoResourceManager{
 	}
 	
 	public void loadFarmResources(){
-		URI farmResourceURI = URI.createFileURI(fileBase + "/farmDB.farm");
+		URI farmResourceURI = URI.createFileURI( XMLDB_BASE+ "/farmDB.farm");
 		farmResource =  ResourceManager.INSTANCE.loadResource(farmResourceURI);
 	}
 
@@ -503,7 +506,7 @@ public class DairyDemoResourceManager{
 		
 		loadFarmResources();
 		
-		URI dairyResourceURI = URI.createFileURI(fileBase + "/dairyDB.dairy");
+		URI dairyResourceURI = URI.createFileURI(XMLDB_BASE + "/dairyDB.dairy");
 		dairyResource =  ResourceManager.INSTANCE.loadResource(dairyResourceURI);
 		//		try {
 		//			Dairy dairy = getObjectsFromDairyModel(Dairy.class).get(0);

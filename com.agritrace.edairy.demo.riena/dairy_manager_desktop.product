@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.dairy_manager_prod" application="com.agritrace.edairy.demo.riena.dairy_manager_app" version="0.0.3" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager Destop" uid="com.agritrace.edairy.dairy_manager_prod" id="com.agritrace.edairy.demo.riena.dairy_manager_prod" application="com.agritrace.edairy.demo.riena.dairy_manager_app" version="1.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.ui/resources/edairy_helpabout.png"/>
@@ -15,7 +15,8 @@
 
    <launcherArgs>
       <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
+-Dedairy.xmldb.basedir=/var/db</vmArgsMac>
       <vmArgsWin>-Driena.application.width=1120
 -Driena.application.height=850</vmArgsWin>
    </launcherArgs>
@@ -96,6 +97,7 @@
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.pushingpixels.trident"/>
