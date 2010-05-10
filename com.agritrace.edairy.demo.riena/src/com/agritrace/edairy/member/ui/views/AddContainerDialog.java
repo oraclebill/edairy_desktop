@@ -128,14 +128,13 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		});
 		containerComboViewer.getControl().setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 
-		Label unitsLabel = UIControlsFactory.createLabel(dialogArea, "Units:");
-		numberText = new Text(dialogArea, SWT.BORDER|SWT.SINGLE);
-		numberText.setTextLimit(10);
-		numberText.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
-		numberText.addModifyListener(this);
-		unitsDecorator = createDecorator(numberText, "");
-		unitsDecorator.hide();
-
+//		Label unitsLabel = UIControlsFactory.createLabel(dialogArea, "Units:");
+//		numberText = new Text(dialogArea, SWT.BORDER|SWT.SINGLE);
+//		numberText.setTextLimit(10);
+//		numberText.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+//		numberText.addModifyListener(this);
+//		unitsDecorator = createDecorator(numberText, "");
+//		unitsDecorator.hide();
 		
 		Label measureLabel = UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
 		Combo measureCombo = UIControlsFactory.createCombo(dialogArea);
@@ -158,7 +157,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 		capacityText = new Text(dialogArea, SWT.BORDER|SWT.SINGLE);
 		capacityText.setLayoutData(new GridData(SWT.FILL,SWT.TOP,true,false));
 		capacityText.addModifyListener(this);
-		capacityDecorator  = createDecorator(numberText, "");
+		capacityDecorator  = createDecorator(capacityText, "");
 		capacityDecorator.hide();
 		
 		Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");

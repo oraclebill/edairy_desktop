@@ -10,4 +10,5 @@ public interface MemberSearchSelectionListener {
 	
 	public void memberModified(Membership modifiedMember);
 	
+	public void refreshView(String viewId);
 }

@@ -220,14 +220,6 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		journalTotalText.addTraverseListener(this);
 		addUIControl(journalTotalText,ViewWidgetId.journalTotalText);
 
-		Label binLabel = UIControlsFactory.createLabel(group,BIN_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(binLabel);
-
-		Text binText = UIControlsFactory.createText(group);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(binText);
-		addUIControl(binText,ViewWidgetId.binText);
-		binText.addTraverseListener(this);
-
 		return group;
 	}
 
@@ -238,6 +230,13 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		Group panel = UIControlsFactory.createGroup(group,"");
 		GridDataFactory.fillDefaults().grab(true,true).span(1, 2).applyTo(panel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(panel);
+		
+		Label binLabel = UIControlsFactory.createLabel(panel,BIN_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(binLabel);
+
+		Combo binList = UIControlsFactory.createCombo(panel, ViewWidgetId.binCombo);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(binList);
+		binList.addTraverseListener(this);
 
 		Label memberLabel = UIControlsFactory.createLabel(panel,MEMBER_ID_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(memberLabel);
@@ -265,7 +264,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		quantityText.addTraverseListener(this);
 
 		Composite buttonComposite = UIControlsFactory.createComposite(panel);
-		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).span(2,1).applyTo(buttonComposite);
+		GridDataFactory.swtDefaults().align(SWT.END,SWT.FILL).grab(true, false).span(4,1).applyTo(buttonComposite);
 		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(buttonComposite);
 
 

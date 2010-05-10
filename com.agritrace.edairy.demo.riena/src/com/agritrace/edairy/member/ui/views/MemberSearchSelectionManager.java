@@ -51,6 +51,11 @@ public class MemberSearchSelectionManager {
 		
 	}
 	
+	public void refreshView(String viewId){
+		for(MemberSearchSelectionListener listener : listeners){
+			listener.refreshView(viewId);
+		}
+	}
 
 	public void clearListeners(){
 		listeners.clear();

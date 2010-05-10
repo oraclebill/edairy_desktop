@@ -206,21 +206,21 @@ public class AddFarmDialog  extends TitleAreaDialog implements ModifyListener{
 
 		// province
 		UIControlsFactory.createLabel(parent,PROVINCE_LABEL); 
-		Combo comboProvince = UIControlsFactory.createCombo(parent, ViewWidgetId.PROVINCE_TXT);
+		final Combo comboProvince = UIControlsFactory.createCombo(parent, ViewWidgetId.PROVINCE_TXT);
+		comboProvince.setItems(ViewWidgetId.PROVINCES_LIST);
 		comboProvince.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,false,1, 1));
 		createDecorator(comboProvince, "",false);
 		comboProvince.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
+				newFarm.getLocation().getPostalLocation().setProvince(comboProvince.getText());
 
 			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
+				widgetSelected(e);
 			}
 		});
 

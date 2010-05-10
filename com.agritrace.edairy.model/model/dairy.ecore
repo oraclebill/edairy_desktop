@@ -153,7 +153,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" lowerBound="1"
         eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
-        eType="ecore:EClass common.ecore#//Person"/>
+        eType="ecore:EClass common.ecore#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
         eType="ecore:EClass farm.ecore#//Farm"/>
   </eClassifiers>

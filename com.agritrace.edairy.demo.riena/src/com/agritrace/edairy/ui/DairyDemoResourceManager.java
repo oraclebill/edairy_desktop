@@ -18,6 +18,7 @@ import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.Gender;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
+import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.dairy.Dairy;
@@ -51,14 +52,16 @@ public class DairyDemoResourceManager{
 
 	}
 
-	public List<Farm> createFarmResource()throws ParseException{
-		List<Farm> farms = new ArrayList<Farm>();
+	public void  createFarmResource(){
 		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
 		farmResource = ResourceManager.INSTANCE.createResource(farmResourceURI);
-
+   }
+	
+	private List<Farm> createFarms(int farmId)throws ParseException{
+		List<Farm> farms = new ArrayList<Farm>();
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
-		farm.setFarmId(new Long(5001).longValue());
-		farm.setName("Green Farm");
+		farm.setFarmId(new Long(farmId).longValue());
+		farm.setName("Green Farm_"+farmId);
 		Location location1 = ModelFactory.eINSTANCE.createLocation();
 		PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
 		defaultLocation.setAddress("2 - Ngeche");
@@ -69,7 +72,7 @@ public class DairyDemoResourceManager{
 		defaultLocation.setLocation("Princeton");
 		defaultLocation.setDivision("Mercer");
 		defaultLocation.setDistrict("Central");
-		defaultLocation.setProvince("Jersey");
+		defaultLocation.setProvince("Western");
 		defaultLocation.setPostalCode("08550");
 		location1.setPostalLocation(defaultLocation);
 		farm.setLocation(location1);
@@ -77,8 +80,8 @@ public class DairyDemoResourceManager{
 		farms.add(farm);
 
 		Farm farm1 = TrackingFactory.eINSTANCE.createFarm();
-		farm.setFarmId(new Long(5001).longValue());
-		farm.setName("Farm2");
+		farm1.setFarmId(new Long(farmId+1).longValue());
+		farm1.setName("Farm_"+farmId);
 		Location location2 = ModelFactory.eINSTANCE.createLocation();
 		PostalLocation pLocation2 = ModelFactory.eINSTANCE.createPostalLocation();
 		pLocation2.setAddress("12 -North Post");
@@ -89,33 +92,14 @@ public class DairyDemoResourceManager{
 		pLocation2.setLocation("Princeton");
 		pLocation2.setDivision("Mercer");
 		pLocation2.setDistrict("Central");
-		pLocation2.setProvince("Jersey");
+		pLocation2.setProvince("Western");
 		pLocation2.setPostalCode("08550");
 		location2.setPostalLocation(pLocation2);
 		farm1.setLocation(location2);
 		createFarmProperties(farm1,10,15,8050,9050);
 		farms.add(farm1);
-
-		for(Farm f :farms){
-			farmResource.getContents().add(f);
-
-		}
-
-		try {
-			ResourceManager.INSTANCE.saveResource(farmResource);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return farms;
-
-
-
-
-
 	}
 
 	public void createDairyResource() throws ParseException{
@@ -136,7 +120,7 @@ public class DairyDemoResourceManager{
 		defaultLocation.setLocation("Princeton");
 		defaultLocation.setDivision("Mercer");
 		defaultLocation.setDistrict("Central");
-		defaultLocation.setProvince("Jersey");
+		defaultLocation.setProvince("Western");
 		defaultLocation.setPostalCode("08550");
 		location1.setPostalLocation(defaultLocation);
 		//	
@@ -151,7 +135,7 @@ public class DairyDemoResourceManager{
 		pLocation2.setLocation("Princeton");
 		pLocation2.setDivision("Mercer");
 		pLocation2.setDistrict("Central");
-		pLocation2.setProvince("Jersey");
+		pLocation2.setProvince("Western");
 		pLocation2.setPostalCode("08550");
 		location2.setPostalLocation(pLocation2);
 		//		
@@ -165,7 +149,7 @@ public class DairyDemoResourceManager{
 		pLocation3.setLocation("Princeton");
 		pLocation3.setDivision("Middlesex ");
 		pLocation3.setDistrict("Central");
-		pLocation3.setProvince("Jersey");
+		pLocation3.setProvince("Western");
 		pLocation3.setPostalCode("08550");
 		location3.setPostalLocation(pLocation3);
 
@@ -274,7 +258,7 @@ public class DairyDemoResourceManager{
 		p1.setLocation("Princeton");
 		p1.setDivision("Mercer");
 		p1.setDistrict("Central");
-		p1.setProvince("Jersey");
+		p1.setProvince("Western");
 		p1.setPostalCode("08550");
 		dairyLocation1.setPostalLocation(p1);
 		dLocation.setLocation(dairyLocation1);
@@ -296,7 +280,7 @@ public class DairyDemoResourceManager{
 		p2.setLocation("Princeton");
 		p2.setDivision("Mercer");
 		p2.setDistrict("Central");
-		p2.setProvince("Jersey");
+		p2.setProvince("Western");
 		p2.setPostalCode("08550");
 		dairyLocation2.setPostalLocation(p2);
 		dLocation2.setLocation(dairyLocation2);
@@ -319,7 +303,7 @@ public class DairyDemoResourceManager{
 		p3.setLocation("Princeton");
 		p3.setDivision("Mercer");
 		p3.setDistrict("Central");
-		p3.setProvince("Jersey");
+		p3.setProvince("Western");
 		p3.setPostalCode("08550");
 		dairyLocation3.setPostalLocation(p3);
 		dLocation3.setLocation(dairyLocation3);
@@ -342,7 +326,7 @@ public class DairyDemoResourceManager{
 		p2_1.setLocation("Princeton");
 		p2_1.setDivision("Mercer");
 		p2_1.setDistrict("Central");
-		p2_1.setProvince("Jersey");
+		p2_1.setProvince("Western");
 		p2_1.setPostalCode("08550");
 		location2_1.setPostalLocation(p2_1);
 		dLocation2_1.setLocation(location2_1);
@@ -364,7 +348,7 @@ public class DairyDemoResourceManager{
 		p2_2.setLocation("Princeton");
 		p2_2.setDivision("Mercer");
 		p2_2.setDistrict("Central");
-		p2_2.setProvince("Jersey");
+		p2_2.setProvince("Western");
 		p2_2.setPostalCode("08550");
 		location2_2.setPostalLocation(p2_2);
 		dLocation2_2.setLocation(location2_2);
@@ -386,7 +370,7 @@ public class DairyDemoResourceManager{
 		p2_3.setLocation("Princeton");
 		p2_3.setDivision("Mercer");
 		p2_3.setDistrict("Central");
-		p2_3.setProvince("Jersey");
+		p2_3.setProvince("Western");
 		p2_3.setPostalCode("08550");
 		location2_3.setPostalLocation(p2_3);
 		//	
@@ -416,20 +400,15 @@ public class DairyDemoResourceManager{
 		//		dairyResource.getContents().add(route1);
 		//		dairyResource.getContents().add(route2);
 		//		
-		List<Farm> farms = createFarmResource();
-		Membership member1 = DairyFactory.eINSTANCE.createMembership();
-		member1.setMemberId("1001");
-		Date applicationDate = sdf.parse("02/04/2007");
-		member1.setApplicationDate(applicationDate);
+		if(farmResource == null){
+			createFarmResource();
+		}
+		
 
-		Date effectiveDate = sdf.parse("02/05/2007");
-		member1.setEffectiveDate(effectiveDate);
-		member1.setStatus(MembershipStatus.ACTIVE);
-		member1.getFarms().addAll(farms);
-		//		dairyResource.getContents().add(member1);
+		
 
 		//dairy conatiner
-		List<DairyContainer>bins = createDairyContainer(10,10000);
+		List<DairyContainer>bins = createDairyContianer(10,10000);
 		
 		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("Demo Dairy");
@@ -451,12 +430,58 @@ public class DairyDemoResourceManager{
 		dairy.getRoutes().add(route1);
 		dairy.getRoutes().add(route2);
 		dairy.getDairyBins().addAll(bins);
-		dairy.getMemberships().add(member1);
+		
+		for(int i=0; i<20; i++){
+			int farmId = 5000+i*100;
+			List<Farm> farms = createFarms(farmId);
+			for(Farm f :farms){
+				farmResource.getContents().add(f);
+			}
+			Membership member1 = DairyFactory.eINSTANCE.createMembership();
+			member1.setMemberId(""+1000+i);
+			Person member = ModelFactory.eINSTANCE.createPerson();
+			member.setName("Joseph Limuru"+"_"+i);
+			member.setPhoneNumber("609-356-3400"+i);
+			member1.setMember(member);
+			
+			Location memberLocation = ModelFactory.eINSTANCE.createLocation();
+			
+			PostalLocation mLocation = ModelFactory.eINSTANCE.createPostalLocation();
+			mLocation.setAddress(i+" - Ngeche");
+			mLocation.setSection("Section A");
+			mLocation.setEstate("Building B");
+			mLocation.setVillage("West Windosr");
+			mLocation.setSubLocation("Princeton Junction");
+			mLocation.setLocation("Princeton");
+			mLocation.setDivision("Mercer");
+			mLocation.setDistrict("Central");
+			mLocation.setProvince("Western");
+			mLocation.setPostalCode("08550");
+			memberLocation.setPostalLocation(mLocation);
+			member.setLocation(memberLocation);
+			
+			String dateString = i<9? "02/0"+i+"/2007":"02/"+i+"/2007";
+			Date applicationDate = sdf.parse(dateString);
+			member1.setApplicationDate(applicationDate);
+
+			Date effectiveDate = sdf.parse("03/05/2007");
+			member1.setDefaultRoute(route1);
+			member1.setEffectiveDate(effectiveDate);
+			member1.setStatus(MembershipStatus.ACTIVE);
+			member1.getFarms().addAll(farms);
+			if(i%2==0){
+				member1.setDefaultRoute(route2);
+			}else{
+				member1.setDefaultRoute(route1);
+			}
+			dairy.getMemberships().add(member1);
+		}
 
 		dairyResource.getContents().add(dairy);
 		try {
-			//			dairyResource.save(null);
-			ResourceManager.INSTANCE.saveResource(dairyResource);
+			saveFarmResource();
+			saveDairyResource();
+		
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -465,8 +490,16 @@ public class DairyDemoResourceManager{
 			e.printStackTrace();
 		}
 	}
+	
+	public void loadFarmResources(){
+		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
+		farmResource =  ResourceManager.INSTANCE.loadResource(farmResourceURI);
+	}
 
-	public void loadResources(){
+	public void loadDairyResources(){
+		
+		loadFarmResources();
+		
 		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
 		dairyResource =  ResourceManager.INSTANCE.loadResource(dairyResourceURI);
 		//		try {
@@ -477,11 +510,21 @@ public class DairyDemoResourceManager{
 		//			e.printStackTrace();
 		//		}
 	}
+	
+	public void reLoadDairyResource(){
+		if(farmResource.isLoaded()){
+			farmResource.unload();
+		}
+		if(dairyResource.isLoaded()){
+			dairyResource.unload();
+		}
+		loadDairyResources();
+	}
 
 	public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T>  type) throws CoreException{
 		List<T> objectList = new ArrayList<T>();
 		if(dairyResource == null){
-			loadResources();
+			loadDairyResources();
 		}
 		if(dairyResource == null){
 			throw new CoreException(new Status(IStatus.ERROR,EDairyActivator.PLUGIN_ID,"can't load dairy modle"));
@@ -494,8 +537,6 @@ public class DairyDemoResourceManager{
 		}
 		return objectList;
 	}
-
-
 
 
 	private void createFarmProperties(Farm farm, int containerNumber, int animalNumber, int containerId, int animalId)throws ParseException{
@@ -514,7 +555,7 @@ public class DairyDemoResourceManager{
 
 		for(int i=0; i<animalNumber; i++){
 			RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
-			animal1.setAnimnalRegistrationId(10001);
+			animal1.setAnimnalRegistrationId(10000+i);
 			animal1.setGivenName("animal_"+i);
 			animal1.setLocation(farm);
 			int n = (int)(10.0 * Math.random());
@@ -536,13 +577,13 @@ public class DairyDemoResourceManager{
 			ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
 			animal1_type.setAnimalTypeId(animalId+i);
 			animal1_type.setSpecies("Cow");
-			animal1_type.setSpecies("jersey");
+			animal1_type.setBreed("Western");
 			animal1.setAnimalType(animal1_type);
 			farm.getAnimals().add(animal1);
 		}
 	}
 
-	private List<DairyContainer> createDairyContainer(int binNumber, int binId){ 
+	private List<DairyContainer> createDairyContianer(int binNumber, int binId){ 
 		List<DairyContainer> binList = new ArrayList<DairyContainer>();
 		for(int i=0; i<binNumber; i++){
 			DairyContainer bin= DairyFactory.eINSTANCE.createDairyContainer();
@@ -556,4 +597,48 @@ public class DairyDemoResourceManager{
 		}
 		return binList;
 	}
+	
+	public Dairy getDairy(){
+		List<Dairy> dairyList;
+		try {
+			dairyList = getObjectsFromDairyModel(Dairy.class);
+			if(dairyList.size()>0){
+				return dairyList.get(0);
+
+			}
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public void addFarm(Farm newFarm){
+		if(farmResource == null){
+			loadFarmResources();
+		}
+		if(farmResource != null){
+			farmResource.getContents().add(newFarm);
+
+		}
+	}
+	
+	public void saveDairyResource() throws IllegalArgumentException, IOException{
+		ResourceManager.INSTANCE.saveResource(dairyResource);
+	}
+	
+	public void saveFarmResource(){
+		try {
+			ResourceManager.INSTANCE.saveResource(farmResource);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
+
+

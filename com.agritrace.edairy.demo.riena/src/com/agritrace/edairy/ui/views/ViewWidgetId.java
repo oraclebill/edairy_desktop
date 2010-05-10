@@ -38,7 +38,7 @@ public class ViewWidgetId {
 	
 	public static final String journalTotalText ="journalTotalText";
 	
-	public static final String binText ="binText";
+	public static final String binCombo ="binList";
 	
 	public static final String memberIdText ="memberIdText";
 	
@@ -137,6 +137,13 @@ public class ViewWidgetId {
 	public static final String TRANSACTION_FILTER_APPLY="TRANSACTION_APPLY";
 	public static final String TRANSACTION_FILTER_SHOWALL="TRANSACTION_ShowAll";
 
+	//mebership_save_cancel button
+	public static final String MEMBERSHIP_SAVE="membership_save";
+	public static final String MEMBERSHIP_CANCEL="membership_cancel";
+	
+	
 	public static final String memberInfo_searchButton = "memberInfo_searchButton";
+	
+	public static final String[] PROVINCES_LIST= new String[]{"Central","Coast","Eastern","Nairobi","North Eastern","Nyanza","Rift Valley","Western"};
 	
 }

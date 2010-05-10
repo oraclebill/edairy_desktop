@@ -1,7 +1,9 @@
 package com.agritrace.edairy.member.ui.controllers;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -53,8 +55,11 @@ import com.agritrace.edairy.model.tracking.TrackingPackage;
 import com.agritrace.edairy.member.ui.views.AddAnimalDialog;
 import com.agritrace.edairy.member.ui.views.AddContainerDialog;
 import com.agritrace.edairy.member.ui.views.AddFarmDialog;
+import com.agritrace.edairy.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.member.ui.views.MemberSearchSelectionManager;
+import com.agritrace.edairy.member.ui.views.MemberSearchView;
+import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.views.ViewWidgetId;
 import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
 
@@ -79,7 +84,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 	private ITextRidget villageTxt;
 	private ITextRidget divisionTxt;
 	private ITextRidget districtTxt;
-	private ITextRidget provinceTxt;
+	private IComboRidget provinceComo;
 	private ITextRidget postalCodeTxt;
 
 	//container tab
@@ -163,6 +168,16 @@ public class MemberSearchViewController extends SubModuleController implements M
 //				MemberSearchSelectionManager.INSTANCE.getSearchNode().showView(false);
 			}
 		});
+		//cancel button
+		((IActionRidget)getRidget(ViewWidgetId.memberInfo_cacelButton)).addListener(new IActionListener() {
+
+			@Override
+			public void callback() {
+				if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Cacel modificatin ", "Do you want to cacel membership modification?")){
+					MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
+				}
+			}
+		});
 	}
 
 	private void configureUpperPanel(){
@@ -186,6 +201,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 		districtTxt=getRidget(ITextRidget.class,ViewWidgetId.DISTRICT_TXT);
 		//		provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 		postalCodeTxt=getRidget(ITextRidget.class,ViewWidgetId.POSTAL_CODE_TXT);
+		provinceComo =  getRidget(IComboRidget.class,ViewWidgetId.PROVINCE_TXT);
+		provinceComo.bindToModel(Observables.staticObservableList(Arrays.asList(ViewWidgetId.PROVINCES_LIST)), String.class, null, new WritableValue());
+		provinceComo.updateFromModel();
+		provinceComo.addSelectionListener(this);
+
+
 	}
 
 	private void configureLiveStockTab(){
@@ -271,6 +292,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 							((RegisteredAnimal)selObject).getLocation().getAnimals().remove(selObject);
 							animalInput.remove(selObject);
 						}
+
 						liveStockTable.updateFromModel();
 					}
 				}
@@ -398,6 +420,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 				if(dialog.open()==Window.OK){
 					Farm newFarm = dialog.getNewFarm();
 					selectedMember.getFarms().add(newFarm);
+					DairyDemoResourceManager.INSTANCE.addFarm(newFarm);
 					farms.add(newFarm);
 					farmTable.updateFromModel();
 				}
@@ -415,8 +438,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 					if(selectedMember != null){
 						for(Object selObject : selections ){
 							selectedMember.getFarms().remove(selObject);
+							((Farm)selObject).getAnimals().clear();
+							((Farm)selObject).setLocation(null);
+							selectedMember.getFarms().remove(((Farm)selObject));
 							farms.remove(selObject);
 						}
+					
 						farmTable.updateFromModel();
 					}
 				}
@@ -493,7 +520,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 			divisionTxt.updateFromModel();
 			districtTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
 			districtTxt.updateFromModel();
-			//			provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
+			provinceComo.setSelection(location.getProvince());
 			postalCodeTxt.bindToModel(EMFObservables.observeValue(location,ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 			postalCodeTxt.updateFromModel();
 		}
@@ -510,8 +537,8 @@ public class MemberSearchViewController extends SubModuleController implements M
 
 	@Override
 	public void memberModified(Membership modifiedMember) {
-		// TODO Auto-generated method stub
-
+		this.selectedMember = modifiedMember;
+		updateBindings();
 	}
 
 	private void copySelectedMember(){
@@ -524,7 +551,18 @@ public class MemberSearchViewController extends SubModuleController implements M
 	}
 	private void saveMember(){
 		if(selectedMember != null){
-			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);	
+			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
+			try {
+				DairyDemoResourceManager.INSTANCE.saveFarmResource();
+				DairyDemoResourceManager.INSTANCE.saveDairyResource();
+				MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -551,6 +589,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 				farmFilterList.add(farm.getName());	
 			}
 		}
+		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class, containerPropertyNames, containerColumnHeaders);
 		containerTable.updateFromModel();
 		containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		containerTable.addSelectionListener(this);
@@ -669,6 +708,13 @@ public class MemberSearchViewController extends SubModuleController implements M
 			}else{
 				farmRemoveButton.setEnabled(false);
 			}
+		}else if(event.getSource() == provinceComo){
+			if(selectedMember != null && selectedMember.getMember() != null && selectedMember.getMember().getLocation()!= null){
+				PostalLocation location = selectedMember.getMember().getLocation().getPostalLocation();
+				if(location != null){
+					location.setProvince((String)event.getNewSelection().get(0));
+				}
+			}
 		}
 
 	}
@@ -680,7 +726,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 		SELECT select = null;
 		
 		String selectedValue = (String) farmFilterCombo.getSelection();
-		if(selectedValue.equals(ALL_FARM)){
+		if(selectedValue == null ||selectedValue.equals(ALL_FARM)){
 			return containerInput;
 		}
 		Condition farmName = new org.eclipse.emf.query.conditions.strings.StringValue(
@@ -701,6 +747,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 		}
 
 		return objs;
+	}
+
+	@Override
+	public void refreshView(String viewId) {
+		//empty;
+		
 	}
 
 

@@ -1,5 +1,7 @@
 package com.agritrace.edairy.ui;
 
+import java.text.ParseException;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
@@ -36,6 +38,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 		plugin = this;
 		// SwtControlRidgetMapper.getInstance().addMapping(CommonMasterDetailsComposite.class,
 		// StatuslineUIProcessRidget.class);
+		setupDairyResource();
 
 	}
 
@@ -88,5 +91,14 @@ public class EDairyActivator extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
+	private void setupDairyResource(){
+		try {
+			DairyDemoResourceManager.INSTANCE.createDairyResource();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

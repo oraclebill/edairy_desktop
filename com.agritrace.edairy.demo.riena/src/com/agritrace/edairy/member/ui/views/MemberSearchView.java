@@ -60,10 +60,6 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	public static final String PROVINCE_LABEL="Province:";
 	public static final String POSTAL_CODE_LABEL="Postal Code:";
 
-	//save button
-	public static final String SAVE_BUTTON="Save";
-	public static final String CANCEL_BUTTON="Cancel";
-
 	//container button
 	public static final String ADD_BUTTON="Add";
 	public static final String REMOVE_BUTTON="Remove";
@@ -219,7 +215,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		Button searchButton = UIControlsFactory.createButton(buttonPanel,"Search", ViewWidgetId.memberInfo_searchButton);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false,false).applyTo(searchButton);
 
-		saveButton = UIControlsFactory.createButton(buttonPanel,SAVE_BUTTON);
+		saveButton = UIControlsFactory.createButton(buttonPanel,"Save");
 		saveButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 		addUIControl(saveButton,ViewWidgetId.memberInfo_saveButton);
 
@@ -599,10 +595,13 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		@Override
 		public void activated(INavigationNode<?> source) {
 			//			showView(true);
+			System.out.println("active !!!!!!!!!!!!!!!!");
 		}
 
 		@Override
 		public void deactivated(INavigationNode<?> source) {
+			System.out.println("deactive !!!!!!!!!!!!!!!!");
+
 			showView(false);
 		}
 
@@ -618,10 +617,10 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 		public void showView(boolean show){
 			if(show){
-				dvManager.showView("Search Member", MemberSearchDetachedView.class, SWT.RIGHT); //$NON-NLS-1$
+				dvManager.showView(MemberSearchDetachedView.ID, MemberSearchDetachedView.class, SWT.RIGHT); //$NON-NLS-1$
 
 			}else{
-				dvManager.hideView("Search Member"); //$NON-NLS-1$
+				dvManager.hideView(MemberSearchDetachedView.ID); //$NON-NLS-1$
 			}
 		}
 	}
