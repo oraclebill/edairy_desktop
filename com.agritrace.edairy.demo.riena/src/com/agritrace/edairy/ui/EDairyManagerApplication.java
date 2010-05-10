@@ -17,17 +17,17 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
-import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
-import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalController;
-import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
-import com.agritrace.edairy.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
-import com.agritrace.edairy.dairy.ui.views.StaffInfoView;
 import com.agritrace.edairy.finance.ui.CreditJournalView;
+import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
+import com.agritrace.edairy.member.ui.views.MemberSearchView;
+import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
-import com.agritrace.edairy.ui.controllers.StaffInfoViewController;
+import com.agritrace.edairy.setup.ui.controllers.StaffInfoViewController;
+import com.agritrace.edairy.setup.ui.views.StaffInfoView;
 import com.agritrace.edairy.ui.views.BlankView;
 import com.agritrace.edairy.ui.views.DairyHomeView;
 import com.agritrace.edairy.ui.views.DeliveryView;
@@ -36,7 +36,6 @@ import com.agritrace.edairy.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.ui.views.MonthlyCreditReportView;
-//import com.agritrace.edairy.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.ui.views.VeterinaryRequestView;
 
 /**

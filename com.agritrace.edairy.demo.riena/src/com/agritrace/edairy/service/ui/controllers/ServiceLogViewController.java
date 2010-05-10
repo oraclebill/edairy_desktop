@@ -79,11 +79,5 @@ public class ServiceLogViewController extends CommonSubModuleViewController {
 		filtedResult = result;
 	}
 
-	public void fireListeners(int eventType) {
-		for (ISubModuleControllerDelegate delegate : this
-				.getSubModuleControllerDelegates()) {
-			delegate.fireListener(eventType);
-		}
 
-	}
 }

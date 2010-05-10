@@ -84,8 +84,8 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
-            id="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
+            class="com.agritrace.edairy.setup.ui.views.StaffInfoView"
+            id="com.agritrace.edairy.setup.ui.views.StaffInfoView"
             name="StaffInfoView">
       </view>
       <view
