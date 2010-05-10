@@ -43,17 +43,20 @@ import com.agritrace.edairy.model.tracking.TrackingFactory;
 public class DairyDemoResourceManager{
 
 	public static DairyDemoResourceManager INSTANCE = new DairyDemoResourceManager();
+	public static final String XMLDB_BASE = "edairy.xmldb.basedir";
 
 	private Resource farmResource;
 
 	private Resource dairyResource;
+	private String   fileBase;
 
+	
 	private DairyDemoResourceManager(){
-
+	    fileBase = System.getProperty(XMLDB_BASE, "c:/temp/eDairy");
 	}
 
 	public void  createFarmResource(){
-		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
+		URI farmResourceURI = URI.createFileURI( fileBase + "/farmDB.farm");
 		farmResource = ResourceManager.INSTANCE.createResource(farmResourceURI);
 	}
 	
@@ -103,7 +106,7 @@ public class DairyDemoResourceManager{
 	}
 
 	public void createDairyResource() throws ParseException{
-		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
+		URI dairyResourceURI = URI.createFileURI(fileBase + "/dairyDB.dairy");
 
 		dairyResource = ResourceManager.INSTANCE.createResource(dairyResourceURI);
 
@@ -492,7 +495,7 @@ public class DairyDemoResourceManager{
 	}
 	
 	public void loadFarmResources(){
-		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
+		URI farmResourceURI = URI.createFileURI(fileBase + "/farmDB.farm");
 		farmResource =  ResourceManager.INSTANCE.loadResource(farmResourceURI);
 	}
 
@@ -500,7 +503,7 @@ public class DairyDemoResourceManager{
 		
 		loadFarmResources();
 		
-		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
+		URI dairyResourceURI = URI.createFileURI(fileBase + "/dairyDB.dairy");
 		dairyResource =  ResourceManager.INSTANCE.loadResource(dairyResourceURI);
 		//		try {
 		//			Dairy dairy = getObjectsFromDairyModel(Dairy.class).get(0);
@@ -614,21 +617,6 @@ public class DairyDemoResourceManager{
 		return binList;
 	}
 	
-	public Dairy getDairy(){
-		List<Dairy> dairyList;
-		try {
-			dairyList = getObjectsFromDairyModel(Dairy.class);
-			if(dairyList.size()>0){
-				return dairyList.get(0);
-
-			}
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 	
 	public void addFarm(Farm newFarm){
 		if(farmResource == null){

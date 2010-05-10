@@ -147,7 +147,7 @@ public class DairyProfileViewController extends SubModuleController {
 	saveAction.addListener(new IActionListener() {
 	    @Override
 	    public void callback() {
-		DairyDemoResourceManager.INSTANCE.???
+		DairyDemoResourceManager.INSTANCE.getLocalDairy(); //TODO
 	    }
 	});
 
@@ -155,8 +155,7 @@ public class DairyProfileViewController extends SubModuleController {
 	cencelAction.addListener(new IActionListener() {
 	    @Override
 	    public void callback() {
-		DairyDemoResourceManager.INSTANCE.???
-		
+		DairyDemoResourceManager.INSTANCE.getLocalDairy();	//TODO	
 	    }
 	});
 
