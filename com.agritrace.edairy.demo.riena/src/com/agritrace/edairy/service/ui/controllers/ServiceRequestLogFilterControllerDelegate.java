@@ -61,15 +61,7 @@ public class ServiceRequestLogFilterControllerDelegate extends
 
 				@Override
 				public void callback() {
-					try {
-						((ServiceLogViewController) getSubModuleController())
-								.setFilteredResult(getFilteredResult());
-						((ServiceLogViewController) getSubModuleController())
-								.fireListeners(ServiceLogViewController.EVENT_TYPE_TABLE_INPUT_CHANGED);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					filter();
 
 				}
 			});
@@ -88,7 +80,21 @@ public class ServiceRequestLogFilterControllerDelegate extends
 			});
 		}
 		resetCondtions();
+		//filter();
 
+	}
+	
+	private void filter()
+	{
+		try {
+			((ServiceLogViewController) getSubModuleController())
+					.setFilteredResult(getFilteredResult());
+			((ServiceLogViewController) getSubModuleController())
+					.fireListeners(ServiceLogViewController.EVENT_TYPE_TABLE_INPUT_CHANGED);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void resetCondtions() {

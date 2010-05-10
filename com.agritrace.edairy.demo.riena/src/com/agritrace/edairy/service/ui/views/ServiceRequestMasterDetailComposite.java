@@ -1,12 +1,15 @@
 package com.agritrace.edairy.service.ui.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -20,6 +23,9 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
+import com.agritrace.edairy.ui.Activator;
+import com.agritrace.edairy.ui.EDairyActivator;
+import com.agritrace.edairy.ui.ImageRegistry;
 
 /**
  * Service Log view Master detail Composite
@@ -28,13 +34,24 @@ import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
  * 
  */
 public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite {
+	
+	private List<IRequestTypeChangeListener> typeChangedListener= new ArrayList<IRequestTypeChangeListener>();
 
 	private Composite specialComp;
 	private Group inseminationGroup;
 	private Composite verternaryComp;
 	private Composite inseminationComp;
 	private RequestType previousType;
-	public static final String INSE_TIME_HEATED_DETECTED = "time_heated_detected";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = "time.heated.detected";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_FIRST_TRETMENT = "time.first.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_SECOND_TRETMENT = "time.second.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_THIRD_TRETMENT = "time.third.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_VERY_THIRD_COMPLAINT = "complaint";//$NON-NLS-1$
+	public static final String BIND_ID_REQUEST_DATE = "date";//$NON-NLS-1$
+	public static final String BIND_ID_MEMBER_NAME = "name";//$NON-NLS-1$
+	public static final String BIND_ID_MEMBER_ID = "id";//$NON-NLS-1$
+	public static final String BIND_ID_FARM_NAME = "name";//$NON-NLS-1$
+	public static final int REQUEST_TYPE_CHANGED = 9999999;
 
 	public ServiceRequestMasterDetailComposite(Composite parent, int style) {
 		super(parent, style);
@@ -100,28 +117,40 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 	private void createCommonControls(Composite parent) {
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(3, false));
+		
 
-		UIControlsFactory.createLabel(comonComp, "Date"); //$NON-NLS-1$
-		Text txtDate = UIControlsFactory.createText(comonComp);
-		GridData dateData = new GridData();
+
+		UIControlsFactory.createLabel(comonComp, "Date"); 
+		Composite dateComposte = UIControlsFactory.createComposite(comonComp);
+		dateComposte.setLayout(GridLayoutFactory.swtDefaults().numColumns(2)
+				.margins(0, 0).create());
+		
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(dateComposte);
+		
+		Text txtDate = UIControlsFactory.createText(dateComposte);
+		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
 		dateData.horizontalSpan = 1;
+		dateData.grabExcessHorizontalSpace =true;
 		txtDate.setLayoutData(dateData);
-		addUIControl(txtDate, "date"); //$NON-NLS-1$
+		addUIControl(txtDate, BIND_ID_REQUEST_DATE); //$NON-NLS-1$
 
-		ImageButton button = UIControlsFactory.createImageButton(comonComp,
-				SWT.None);
+		Button button = new Button(dateComposte, SWT.PUSH);
+		Image calendar = Activator.getImage(ImageRegistry.calendar);
+		button.setImage(calendar);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
+				17, 16).applyTo(button);
 
 		UIControlsFactory.createLabel(comonComp, "Member ID"); //$NON-NLS-1$
 		Text txtID = UIControlsFactory.createText(comonComp);
 		GridData textData = new GridData(GridData.FILL_HORIZONTAL);
 		textData.horizontalSpan = 2;
 		txtID.setLayoutData(textData);
-		addUIControl(txtID, "id"); //$NON-NLS-1$
+		addUIControl(txtID, BIND_ID_MEMBER_ID); //$NON-NLS-1$
 
 		UIControlsFactory.createLabel(comonComp, "Member Name"); //$NON-NLS-1$
 		Text txtName = UIControlsFactory.createText(comonComp);
 		txtName.setLayoutData(GridDataFactory.copyData(textData));
-		addUIControl(txtName, "name"); //$NON-NLS-1$
+		addUIControl(txtName, BIND_ID_MEMBER_NAME); //$NON-NLS-1$
 
 		UIControlsFactory.createLabel(comonComp, "Farm Location"); //$NON-NLS-1$
 		Text txtFarm = UIControlsFactory.createText(comonComp, SWT.MULTI);
@@ -129,7 +158,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		data.heightHint = 50;
 		data.horizontalSpan = 2;
 		txtFarm.setLayoutData(data);
-		addUIControl(txtFarm, "farm"); //$NON-NLS-1$
+		addUIControl(txtFarm, BIND_ID_FARM_NAME); //$NON-NLS-1$
 
 		UIControlsFactory.createLabel(comonComp, "Request Type"); //$NON-NLS-1$
 		Button veterinaryBtn = UIControlsFactory.createButtonRadio(comonComp);
@@ -169,7 +198,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		data.widthHint = 300;
 		parent.getParent().layout(true);
 		complaintText.setLayoutData(data);
-		this.addUIControl(complaintText, "complaint");
+		this.addUIControl(complaintText, BIND_ID_VERY_THIRD_COMPLAINT);
 
 	}
 
@@ -184,17 +213,20 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		GridLayout layout = new GridLayout(3, false);
 		inseminationGroup.setLayout(layout);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationGroup);
-		this.addUIControl(inseminationGroup, "insemination-group");
 
 		UIControlsFactory.createLabel(inseminationGroup, "Time Heat Detected"); //$NON-NLS-1$
 		Text txtDate = UIControlsFactory.createText(inseminationGroup);
 		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
 		dateData.horizontalSpan = 1;
 		txtDate.setLayoutData(dateData);
-		addUIControl(txtDate, INSE_TIME_HEATED_DETECTED); 
-		ImageButton button = UIControlsFactory.createImageButton(inseminationGroup,
-				SWT.None);
-
+		addUIControl(txtDate, BIND_ID_INSE_TIME_HEATED_DETECTED); 
+		
+		// Calendar Button
+		Button button = new Button(inseminationGroup, SWT.PUSH);
+		Image calendar = Activator.getImage(ImageRegistry.calendar);
+		button.setImage(calendar);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
+				17, 16).applyTo(button);
 		// Insemination
 		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup, "Insemination"); //$NON-NLS-1$
 		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
@@ -208,7 +240,9 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		indentGridFactory.applyTo(firstLabel);
 
 		Text firstText = UIControlsFactory.createText(inseminationGroup); 
+		
 		textGridFactory.applyTo(firstText);
+		addUIControl(firstText, BIND_ID_INSE_FIRST_TRETMENT); 
 
 		// First Repeat
 		Label firstRepeatLabel = UIControlsFactory.createLabel(inseminationGroup,
@@ -217,6 +251,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 
 		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup); 
 		textGridFactory.applyTo(firstRepeatText);
+		addUIControl(firstRepeatText, BIND_ID_INSE_SECOND_TRETMENT); 
 
 		// 2nd Repeat
 		Label secondRepeatLabel = UIControlsFactory.createLabel(inseminationGroup,
@@ -225,6 +260,8 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 
 		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup); 
 		textGridFactory.applyTo(secondRepeatText);
+		
+		addUIControl(secondRepeatText, BIND_ID_INSE_THIRD_TRETMENT); 
 	}
 
 	
@@ -234,7 +271,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		return SWT.None;
 	}
 
-	public void typeChanged(AnimalHealthRequest request) {
+	public void updateUI(AnimalHealthRequest request) {
 
 		boolean isVeterinary = RequestType.VETERINARY.equals(request.getType());
 
@@ -251,6 +288,24 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		}
 		this.getParent().layout(true, true);
 		this.previousType = request.getType();
+		notifyAllRequestTypeChangeListeners();
+		this.getTable().forceFocus();
+		this.getTable().showSelection();
+		this.getTable().select(this.getTable().getSelectionIndex());
 
+
+	}
+	
+	public void addTypeChangeListener(IRequestTypeChangeListener listener)
+	{
+		this.typeChangedListener.add(listener);
+	}
+	
+	public void notifyAllRequestTypeChangeListeners()
+	{
+		for (IRequestTypeChangeListener listener: this.typeChangedListener)
+		{
+			listener.typeChanged();
+		}
 	}
 }

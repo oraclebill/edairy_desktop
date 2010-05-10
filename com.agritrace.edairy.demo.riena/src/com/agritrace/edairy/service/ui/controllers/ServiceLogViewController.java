@@ -25,7 +25,7 @@ public class ServiceLogViewController extends CommonSubModuleViewController {
 	public ServiceLogViewController() {
 		super();
 		initModel();
-		this.setFilteredResult(this.getAllRequests());
+		this.setFilteredResult(this.allRequests);
 	}
 	
 	/**

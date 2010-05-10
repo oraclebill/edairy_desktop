@@ -15,6 +15,8 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
@@ -24,6 +26,7 @@ import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.service.ui.converters.DateToStringModelConvertor;
+import com.agritrace.edairy.service.ui.converters.StringToStringModelConverter;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.service.ui.views.ServiceRequestMasterDetailComposite;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
@@ -78,7 +81,7 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 				IMasterDetailsRidget.class,
 				ServiceRequestLogView.BIND_ID_MASTER); 
 
-		if (master != null) {
+		if (master != null && master.getDelegate() != null) {
 
 			WritableList input;
 			input = new WritableList(((ServiceLogViewController) this
@@ -88,10 +91,8 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 					MASTER_PROPTIES, MASTER_HEADERS);
 			master.updateFromModel();
 
+			updateDetailBindings(null);
 		}
-
-		updateDetailBindings(RequestsFactory.eINSTANCE
-				.createAnimalHealthRequest());
 
 	}
 
@@ -185,11 +186,20 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 			if (newSelection instanceof AnimalHealthRequest) {
 				AnimalHealthRequest request = (AnimalHealthRequest) newSelection;
 				// Notify the UI control
-				((ServiceRequestMasterDetailComposite) getRidget(
-						IMasterDetailsRidget.class, ServiceRequestLogView.BIND_ID_MASTER).getUIControl())
-						.typeChanged(request);
+				ServiceRequestMasterDetailComposite mdComposite =
+				(ServiceRequestMasterDetailComposite) getRidget(
+						IMasterDetailsRidget.class, ServiceRequestLogView.BIND_ID_MASTER).getUIControl();
+				if (mdComposite != null) {
+					mdComposite.updateUI(request);
+					for (Object control : mdComposite.getUIControls()) {
+//						getSubModuleController().addUIControl(control, SWTBindingPropertyLocator
+//								.getInstance().locateBindingProperty(control));
+					}
+				}
 				// Updates the bindings
 				updateDetailBindings(request);
+//				mdComposite.getTable().setFocus();
+	
 			}
 
 		}
@@ -244,17 +254,55 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 
 	private void updateDetailBindings(final AnimalHealthRequest request) {
 
+		if (request == null) {
+			
+			// Date
+			ITextRidget textDate = getRidget(ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_REQUEST_DATE); 
+			
+			textDate.setOutputOnly(false);
+			textDate.setText("");
+			textDate.setOutputOnly(true);
+			
+			// Member ID
+			ITextRidget memberIdText = getRidget(ITextRidget.class, ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_ID); //$NON-NLS-1$
+			memberIdText.setOutputOnly(false);
+			memberIdText.setText("");
+			memberIdText.setOutputOnly(true);
+			
+			// Member Name
+			ITextRidget memberNameText = getRidget(ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_NAME); //$NON-NLS-1$
+			memberNameText.setOutputOnly(false);
+			memberNameText.setText("");
+			memberNameText.setOutputOnly(true);
+			
+			// Farm Name
+			ITextRidget farmText = getRidget(ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_FARM_NAME); //$NON-NLS-1$
+			farmText.setOutputOnly(false);
+			farmText.setText("");
+			farmText.setOutputOnly(true);
+			
+			return;
+		}
 		ITextRidget memberIdText = getRidget(ITextRidget.class,
-				"id"); //$NON-NLS-1$
+				ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_ID); //$NON-NLS-1$
+		memberIdText.setDirectWriting(true);
+		memberIdText
+				.setModelToUIControlConverter(new StringToStringModelConverter(
+						request.getRequestingMember(),
+						DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 		memberIdText.setOutputOnly(false);
 		memberIdText.bindToModel(EMFObservables.observeValue(request
 				.getRequestingMember(),
 				DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 		memberIdText.updateFromModel();
+
 		memberIdText.setOutputOnly(true);
 		//
 		ITextRidget textDate = getRidget(ITextRidget.class,
-				"date"); //$NON-NLS-1$
+				ServiceRequestMasterDetailComposite.BIND_ID_REQUEST_DATE);
 		textDate.setModelToUIControlConverter(new DateToStringModelConvertor(
 				request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));		
 		textDate.bindToModel(EMFObservables.observeValue(request,
@@ -265,7 +313,7 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 
 		// Configure Member name
 		ITextRidget txtMemberName = getRidget(ITextRidget.class,
-				"name"); //$NON-NLS-1$
+				ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_NAME); //$NON-NLS-1$
 		//
 		txtMemberName.setModelToUIControlConverter(new IConverter() {
 
@@ -302,7 +350,8 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 		txtMemberName.updateFromModel();
 		txtMemberName.setOutputOnly(true);
 		// Farm Location
-		ITextRidget txtFarm = getRidget(ITextRidget.class, "farm"); //$NON-NLS-1$
+		ITextRidget txtFarm = getRidget(ITextRidget.class,
+				ServiceRequestMasterDetailComposite.BIND_ID_FARM_NAME); 
 		txtFarm.setModelToUIControlConverter(new IConverter() {
 
 			@Override
@@ -401,28 +450,107 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 		insementationRadionBtn.setOutputOnly(true);
 
 		if (RequestType.INSEMINATION == request.getType()) {
-			// Request Type/Insementation
+			
+			// Heate date
 			ITextRidget heatTimeTextBtn = getRidget(
 					ITextRidget.class,
-					ServiceRequestMasterDetailComposite.INSE_TIME_HEATED_DETECTED);
-			//
-			// heatTimeTextBtn
-			// .setModelToUIControlConverter(new
-			// DateToStringModelConvertor(RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__MEMBER,
-			// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__MEMBER){
-			//
-			// @Override
-			// protected Object filter(Object object) {
-			// // TODO Auto-generated method stub
-			// return super.filter(object);
-			// }});
-			// insementationRadionBtn.setOutputOnly(false);
-			// insementationRadionBtn.bindToModel(EMFObservables.observeValue(
-			// request,
-			// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__MEMBER));
-			// // RequestsPackage.Literals.REQUEST_TYPE));
-			// insementationRadionBtn.updateFromModel();
-			// insementationRadionBtn.setOutputOnly(true);
+					ServiceRequestMasterDetailComposite.BIND_ID_INSE_TIME_HEATED_DETECTED);
+			heatTimeTextBtn.setDirectWriting(true);
+			heatTimeTextBtn
+					.setModelToUIControlConverter(new DateToStringModelConvertor(
+							request,
+							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED));
+			heatTimeTextBtn.setOutputOnly(false);
+			heatTimeTextBtn
+					.bindToModel(EMFObservables
+							.observeValue(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED));
+
+			heatTimeTextBtn.updateFromModel();
+			heatTimeTextBtn.setOutputOnly(true);
+			
+			
+			// First
+			ITextRidget firstTextBtn = getRidget(
+					ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_INSE_FIRST_TRETMENT);
+			firstTextBtn.setDirectWriting(true);
+			firstTextBtn
+					.setModelToUIControlConverter(new DateToStringModelConvertor(
+							request,
+							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT));
+			firstTextBtn.setOutputOnly(false);
+			firstTextBtn
+					.bindToModel(EMFObservables
+							.observeValue(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT));
+
+			firstTextBtn.updateFromModel();
+			firstTextBtn.setOutputOnly(true);
+			
+			
+			// Second
+			ITextRidget secondTextBtn = getRidget(
+					ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_INSE_SECOND_TRETMENT);
+			secondTextBtn.setDirectWriting(true);
+			secondTextBtn
+					.setModelToUIControlConverter(new DateToStringModelConvertor(
+							request,
+							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT));
+			secondTextBtn.setOutputOnly(false);
+			secondTextBtn
+					.bindToModel(EMFObservables
+							.observeValue(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT));
+
+			secondTextBtn.updateFromModel();
+			secondTextBtn.setOutputOnly(true);
+			
+			// Third
+			ITextRidget thirdTextBtn = getRidget(
+					ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_INSE_THIRD_TRETMENT);
+			thirdTextBtn.setDirectWriting(true);
+			thirdTextBtn
+					.setModelToUIControlConverter(new DateToStringModelConvertor(
+							request,
+							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT));
+			thirdTextBtn.setOutputOnly(false);
+			thirdTextBtn
+					.bindToModel(EMFObservables
+							.observeValue(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT));
+
+			thirdTextBtn.updateFromModel();
+			thirdTextBtn.setOutputOnly(true);
+	
+		}
+		else
+		{
+			// Complaint
+			// Third
+			ITextRidget complaintTextBtn = getRidget(
+					ITextRidget.class,
+					ServiceRequestMasterDetailComposite.BIND_ID_VERY_THIRD_COMPLAINT);
+			complaintTextBtn.setDirectWriting(true);
+			complaintTextBtn
+					.setModelToUIControlConverter(new StringToStringModelConverter(
+							request,
+							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM));
+			complaintTextBtn.setOutputOnly(false);
+			complaintTextBtn
+					.bindToModel(EMFObservables
+							.observeValue(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM));
+
+			complaintTextBtn.updateFromModel();
+			complaintTextBtn.setOutputOnly(true);
 		}
 
 	}

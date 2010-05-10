@@ -81,12 +81,12 @@ public class ServiceRequestResourceManager {
 	}
 
 	private void createReq1() throws ParseException {
-		AnimalHealthRequest req1 = RequestsFactory.eINSTANCE
+		AnimalHealthRequest req = RequestsFactory.eINSTANCE
 				.createAnimalHealthRequest();
-		req1.setRequestId(1001l);
-		req1.setDate(ServiceUtils.DATE_FORMAT.parse("05/03/2010"));
+		req.setRequestId(1001l);
+		req.setDate(ServiceUtils.DATE_FORMAT.parse("05/03/2010"));
 
-		serviceRequestResource.getContents().add(req1);
+		serviceRequestResource.getContents().add(req);
 
 		// MemberShiip
 		Membership ship = DairyFactory.eINSTANCE.createMembership();
@@ -99,12 +99,14 @@ public class ServiceRequestResourceManager {
 
 		ship.setMember(person);
 		ship.setMemberId("1001");
-		req1.setRequestingMember(ship);
+		req.setRequestingMember(ship);
 
-		req1.setType(RequestType.VETERINARY);
-		req1.setDateHeatDetected(Calendar.getInstance().getTime());
-		req1.setSecondTreatment(Calendar.getInstance().getTime());
-		req1.setThirdTreatment(Calendar.getInstance().getTime());
+		req.setType(RequestType.VETERINARY);
+		req.setDateHeatDetected(Calendar.getInstance().getTime());
+		req.setFirstTreatment(Calendar.getInstance().getTime());
+		req.setSecondTreatment(Calendar.getInstance().getTime());
+		req.setThirdTreatment(Calendar.getInstance().getTime());
+		req.setReportedProblem("problem 1");
 
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
 		farm.setFarmId(new Long(5001).longValue());
@@ -126,7 +128,7 @@ public class ServiceRequestResourceManager {
 		farm.setLocation(location1);
 		createFarmProperties(farm, 20, 20, 8000, 9000);
 
-		req1.setFarm(farm);
+		req.setFarm(farm);
 		serviceRequestResource.getContents().add(farm);
 
 	}
@@ -154,9 +156,11 @@ public class ServiceRequestResourceManager {
 
 		req.setType(RequestType.INSEMINATION);
 		req.setDateHeatDetected(Calendar.getInstance().getTime());
+		req.setFirstTreatment(Calendar.getInstance().getTime());
 		req.setSecondTreatment(Calendar.getInstance().getTime());
 		req.setThirdTreatment(Calendar.getInstance().getTime());
-
+		req.setReportedProblem("problem 2");
+		
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
 		farm.setFarmId(new Long(5001).longValue());
 		farm.setName("Blue Farm");
@@ -205,8 +209,10 @@ public class ServiceRequestResourceManager {
 
 		req.setType(RequestType.VETERINARY);
 		req.setDateHeatDetected(Calendar.getInstance().getTime());
+		req.setFirstTreatment(Calendar.getInstance().getTime());
 		req.setSecondTreatment(Calendar.getInstance().getTime());
 		req.setThirdTreatment(Calendar.getInstance().getTime());
+		req.setReportedProblem("problem 3");
 
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
 		farm.setFarmId(new Long(5001).longValue());
