@@ -15,11 +15,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
-import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 
+import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsFactory;
@@ -191,15 +189,9 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 						IMasterDetailsRidget.class, ServiceRequestLogView.BIND_ID_MASTER).getUIControl();
 				if (mdComposite != null) {
 					mdComposite.updateUI(request);
-					for (Object control : mdComposite.getUIControls()) {
-//						getSubModuleController().addUIControl(control, SWTBindingPropertyLocator
-//								.getInstance().locateBindingProperty(control));
-					}
 				}
 				// Updates the bindings
-				updateDetailBindings(request);
-//				mdComposite.getTable().setFocus();
-	
+				updateDetailBindings(request);	
 			}
 
 		}
@@ -313,39 +305,19 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 
 		// Configure Member name
 		ITextRidget txtMemberName = getRidget(ITextRidget.class,
-				ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_NAME); //$NON-NLS-1$
+				ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_NAME);
+		txtMemberName.setDirectWriting(true);
 		//
-		txtMemberName.setModelToUIControlConverter(new IConverter() {
-
-			@Override
-			public Object getFromType() {
-				return EMFObservables
-						.observeValue(
-								request,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER)
-						.getValueType();
-			}
-
-			@Override
-			public Object getToType() {
-				return String.class;
-			}
-
-			@Override
-			public Object convert(Object fromObject) {
-				if (fromObject instanceof Membership) {
-					Membership member = (Membership) fromObject;
-					return member.getMember().getName();
-
-				}
-				return null;
-			}
-		});
+		txtMemberName
+				.setModelToUIControlConverter(new StringToStringModelConverter(
+						request.getRequestingMember().getMember(),
+						ModelPackage.Literals.PARTY__NAME));
+		txtMemberName.setOutputOnly(false);
 		txtMemberName
 				.bindToModel(EMFObservables
 						.observeValue(
-								request,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER));
+								request.getRequestingMember().getMember(),
+								ModelPackage.Literals.PARTY__NAME));
 
 		txtMemberName.updateFromModel();
 		txtMemberName.setOutputOnly(true);

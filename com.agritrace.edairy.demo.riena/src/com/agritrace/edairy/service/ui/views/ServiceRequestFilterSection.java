@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.riena.ui.views.FarmSearchDialog;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.Activator;
 import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.ui.ImageRegistry;
 import com.agritrace.edairy.ui.views.CalendarSelectionDialog;
@@ -133,7 +132,7 @@ public class ServiceRequestFilterSection {
 				.getFirstDayOfMonth(Calendar.getInstance().getTime())));
 	
 		Button calendarButton = new Button(dateComp, SWT.PUSH);
-		Image calendar = Activator.getImage(ImageRegistry.calendar);
+		Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
 		calendarButton.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
 				17, 16).applyTo(calendarButton);

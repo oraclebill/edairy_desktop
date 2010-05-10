@@ -33,9 +33,6 @@ public class ServiceRequestLogView extends SubModuleView {
 
 	public static final String ID = ServiceRequestLogView.class.getName();
 	public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
-	private static final IBindingManager BINDING_MAN = new DefaultBindingManager(SWTBindingPropertyLocator
-			.getInstance(), SwtControlRidgetMapper.getInstance());
-
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
 
