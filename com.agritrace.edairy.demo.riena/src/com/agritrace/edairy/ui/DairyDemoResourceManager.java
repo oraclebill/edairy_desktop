@@ -521,6 +521,22 @@ public class DairyDemoResourceManager{
 		loadDairyResources();
 	}
 
+	private Dairy localDairy = null;
+
+	public synchronized Dairy getLocalDairy() {
+		try {
+			if (null == localDairy) {
+				List<Dairy> localDairyList = getObjectsFromDairyModel(Dairy.class);
+				if (localDairyList != null) {
+					localDairy = localDairyList.get(0);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return localDairy;
+	}
+	
 	public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T>  type) throws CoreException{
 		List<T> objectList = new ArrayList<T>();
 		if(dairyResource == null){
