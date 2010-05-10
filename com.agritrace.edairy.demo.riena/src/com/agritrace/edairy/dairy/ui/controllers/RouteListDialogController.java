@@ -8,7 +8,6 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController.RouteService;
 import com.agritrace.edairy.dairy.ui.dialogs.AddRouteDialog;
-import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Route;
 
 public class RouteListDialogController extends AbstractWindowController {
@@ -20,13 +19,12 @@ public class RouteListDialogController extends AbstractWindowController {
 	
 	public static final String RIDGET_ID_NO_SELECTION_DIALOG = "noSelectionError";
 
-	private RouteService service ;
+	private RouteService service = new RouteService();
 	
 	private IMessageBoxRidget deleteConfirmDialog;
 	
 	public RouteListDialogController() {
 		super();
-		initialize();
 	}
 
 	private ITableRidget routeTable;
@@ -55,6 +53,8 @@ public class RouteListDialogController extends AbstractWindowController {
 				AddRouteDialog dialog = new AddRouteDialog();
 				dialog.setBlockOnOpen(true);
 				dialog.open();
+				service.refresh();
+				routeTable.updateFromModel();
 			}
 		});
 		
@@ -65,7 +65,10 @@ public class RouteListDialogController extends AbstractWindowController {
 				if (routeTable.getSelectionIndex() >=0) {
 					if (deleteConfirmDialog.show().getLabel().equals("Yes"))
 					{
-						//#TODO : delete the route
+						service.refresh();
+						service.getRoutes().remove(routeTable.getSelection().get(0));
+						service.store();
+						routeTable.updateFromModel();
 					}
 				}
 				
@@ -82,18 +85,6 @@ public class RouteListDialogController extends AbstractWindowController {
 		});
 	}
 	
-	private void initialize()
-	{
-		service = new RouteService();
-		for (int i = 0 ; i < 5; i ++) {
-			Route r = DairyFactory.eINSTANCE.createRoute();
-			r.setName("route name " + i);
-			r.setDescription("route description" + i);
-			r.setDescription("route desc " + i);
-			r.setCode("RED" + i);
-			service.getRoutes().add(r);
-		}
-		
-	}
+	
 
 }
