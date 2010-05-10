@@ -55,7 +55,7 @@ public class DairyDemoResourceManager{
 	public void  createFarmResource(){
 		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
 		farmResource = ResourceManager.INSTANCE.createResource(farmResourceURI);
-   }
+	}
 	
 	private List<Farm> createFarms(int farmId)throws ParseException{
 		List<Farm> farms = new ArrayList<Farm>();

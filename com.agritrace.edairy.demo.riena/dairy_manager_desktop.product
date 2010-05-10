@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.edairy_manager" application="com.agritrace.edairy.demo.riena.dairy_manager" version="0.0.3" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager" uid="com.agritrace.edairy.demo" id="com.agritrace.edairy.demo.riena.dairy_manager_prod" application="com.agritrace.edairy.demo.riena.dairy_manager_app" version="0.0.3" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.ui/resources/edairy_helpabout.png"/>
