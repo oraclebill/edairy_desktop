@@ -43,17 +43,19 @@ import com.agritrace.edairy.model.tracking.TrackingFactory;
 public class DairyDemoResourceManager{
 
 	public static DairyDemoResourceManager INSTANCE = new DairyDemoResourceManager();
+//	public static final String XMLDB_BASE = System.getProperty("edairy.db.root", "c:/temp/edairy");
+	public static final String XMLDB_BASE = "/tmp";
 
 	private Resource farmResource;
 
 	private Resource dairyResource;
 
+	
 	private DairyDemoResourceManager(){
-
 	}
 
 	public void  createFarmResource(){
-		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
+		URI farmResourceURI = URI.createFileURI( XMLDB_BASE + "/farmDB.farm");
 		farmResource = ResourceManager.INSTANCE.createResource(farmResourceURI);
 	}
 	
@@ -103,7 +105,11 @@ public class DairyDemoResourceManager{
 	}
 
 	public void createDairyResource() throws ParseException{
-		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
+	    createDairyResource(XMLDB_BASE);
+	}
+	
+	public void createDairyResource(String baseDir) throws ParseException{
+		URI dairyResourceURI = URI.createFileURI(baseDir + "/dairyDB.dairy");
 
 		dairyResource = ResourceManager.INSTANCE.createResource(dairyResourceURI);
 
@@ -492,7 +498,7 @@ public class DairyDemoResourceManager{
 	}
 	
 	public void loadFarmResources(){
-		URI farmResourceURI = URI.createFileURI("c:/temp/eDairy/farmDB.farm");
+		URI farmResourceURI = URI.createFileURI( XMLDB_BASE+ "/farmDB.farm");
 		farmResource =  ResourceManager.INSTANCE.loadResource(farmResourceURI);
 	}
 
@@ -500,7 +506,7 @@ public class DairyDemoResourceManager{
 		
 		loadFarmResources();
 		
-		URI dairyResourceURI = URI.createFileURI("c:/temp/eDairy/dairyDB.dairy");
+		URI dairyResourceURI = URI.createFileURI(XMLDB_BASE + "/dairyDB.dairy");
 		dairyResource =  ResourceManager.INSTANCE.loadResource(dairyResourceURI);
 		//		try {
 		//			Dairy dairy = getObjectsFromDairyModel(Dairy.class).get(0);
@@ -521,6 +527,22 @@ public class DairyDemoResourceManager{
 		loadDairyResources();
 	}
 
+	private Dairy localDairy = null;
+
+	public synchronized Dairy getLocalDairy() {
+		try {
+			if (null == localDairy) {
+				List<Dairy> localDairyList = getObjectsFromDairyModel(Dairy.class);
+				if (localDairyList != null) {
+					localDairy = localDairyList.get(0);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return localDairy;
+	}
+	
 	public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T>  type) throws CoreException{
 		List<T> objectList = new ArrayList<T>();
 		if(dairyResource == null){
@@ -598,21 +620,6 @@ public class DairyDemoResourceManager{
 		return binList;
 	}
 	
-	public Dairy getDairy(){
-		List<Dairy> dairyList;
-		try {
-			dairyList = getObjectsFromDairyModel(Dairy.class);
-			if(dairyList.size()>0){
-				return dairyList.get(0);
-
-			}
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 	
 	public void addFarm(Farm newFarm){
 		if(farmResource == null){

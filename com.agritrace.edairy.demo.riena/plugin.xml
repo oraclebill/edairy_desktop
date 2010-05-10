@@ -7,45 +7,30 @@
             id="com.agritrace.edairy.manager.home"
             name="com.agritrace.edairy.manager.home">
       </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
             id="com.agritrace.edairy.manager.milk"
             name="com.agritrace.edairy.manager.milk">
       </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
             id="com.agritrace.edairy.manager.members"
             name="com.agritrace.edairy.manager.members">
       </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.tools"
+            id="com.agritrace.edairy.manager.ftools"
             name="com.agritrace.edairy.manager.tools">
       </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
             id="com.agritrace.edairy.manager.reports"
             name="com.agritrace.edairy.manager.reports">
       </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
@@ -87,6 +72,12 @@
             class="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
             id="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
             name="StaffInfoView">
+      </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.tools.ui.views.SupplierListView"
+            id="com.agritrace.edairy.tools.ui.views.SupplierListView"
+            name="Supplier List">
       </view>
       <view
             allowMultiple="true"
@@ -198,10 +189,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.agritrace.edairy.demo.riena.dairy_manager_app"
-            name="eDairy Manager">
+            name="eDairy Manager Destop">
          <property
                name="appName"
-               value="eDairy Manager">
+               value="eDairy Manager Destop">
          </property>
          <property
                name="aboutImage"

@@ -29,13 +29,14 @@ import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.impl.ModelFactoryImpl;
+import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.EDairyActivator;
 
 
 
 public class DairyLocationResourceManager {
-	public static final String DAIRY_LOCATIONS_RESOURCE = "c:/temp/eDairy/dairyLocations.xml";
-	public static final String ROUTES_RESOURCE = "c:/temp/eDairy/routes.xml";
+	public static final String DAIRY_LOCATIONS_RESOURCE = DairyDemoResourceManager.XMLDB_BASE + "/dairyLocations.xml";
+	public static final String ROUTES_RESOURCE = DairyDemoResourceManager.XMLDB_BASE + "/routes.xml";
 	private Resource dairyLocationsResource;
 	private Resource routesResource;
 	private Map<String, Object> saveOptions = new HashMap<String, Object>();

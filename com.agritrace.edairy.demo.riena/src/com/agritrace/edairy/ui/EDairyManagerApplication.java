@@ -27,6 +27,7 @@ import com.agritrace.edairy.dairy.ui.views.StaffInfoView;
 import com.agritrace.edairy.finance.ui.CreditJournalView;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
+import com.agritrace.edairy.tools.ui.views.SupplierListView;
 import com.agritrace.edairy.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.ui.views.BlankView;
 import com.agritrace.edairy.ui.views.DairyHomeView;
@@ -145,21 +146,22 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 		// TOOLS TAB
 		// 
-	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.tools"), "Office Tools"); //$NON-NLS-1$
+	    subApp = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.manager.ftools"), "Office Tools"); //$NON-NLS-1$
 		app.addChild(subApp);
-		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.tools"); //$NON-NLS-1$
+		workarea.registerDefinition(subApp, "com.agritrace.edairy.manager.ftools"); //$NON-NLS-1$
 		groupTopLevel = new ModuleGroupNode(new NavigationNodeId("tools.navgroup"));
 		subApp.addChild(groupTopLevel);
-
 
 		IModuleNode moduleEvents = NodeFactory.createModule(
 				new NavigationNodeId("edm.events"), "Events", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleEvents.setClosable(false);
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.events"), "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		IModuleNode moduleDirectory = NodeFactory.createModule(
 				new NavigationNodeId("edm.directory"), "Suppliers", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleDirectory.setClosable(false);
-		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.suppliers"), "Supplier Directory", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.suppliers"), "Supplier Directory", moduleDirectory, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.services.suppliers"), "Supplier Directory", moduleDirectory, SupplierListView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 		
 		//
