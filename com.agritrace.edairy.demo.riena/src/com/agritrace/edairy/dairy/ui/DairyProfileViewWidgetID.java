@@ -24,4 +24,6 @@ public interface DairyProfileViewWidgetID {
 	public static final String DAIRY_LOCATION_POSTALCODE = "DAIRY_LOCATION_POSTALCODE";
 	public static final String DAIRY_PUBLIC_DESCRIPTION = "DAIRY_PUBLIC_DESCRIPTION";
 	
+	public static final String DAIRY_SAVE = "DAIRY_BUTTON_SAVE";
+	public static final String DAIRY_CANCEL = "DAIRY_BUTTON_CANCEL";
 }
