@@ -269,7 +269,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	}
 	
 	private void loadDairy(){
-		DairyDemoResourceManager.INSTANCE.loadDairyResources();
+		DairyDemoResourceManager.INSTANCE.reLoadDairyResource();
 		List<Dairy> dairys;
 		try {
 			dairys = DairyDemoResourceManager.INSTANCE.getObjectsFromDairyModel(Dairy.class);

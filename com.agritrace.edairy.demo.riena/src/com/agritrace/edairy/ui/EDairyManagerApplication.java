@@ -21,7 +21,7 @@ import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
 import com.agritrace.edairy.finance.ui.CreditJournalView;
 import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
-import com.agritrace.edairy.member.ui.views.MemberSearchView;
+import com.agritrace.edairy.member.ui.controllers.NewMembeViewController;
 import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
@@ -40,6 +40,7 @@ import com.agritrace.edairy.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.ui.views.MonthlyCreditReportView;
 import com.agritrace.edairy.ui.views.VeterinaryRequestView;
+import com.agritrace.edairy.member.ui.views.MemberSearchView;
 
 /**
  * @author oraclebill
@@ -127,7 +128,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		IModuleNode moduleMembers = NodeFactory.createModule(
 				new NavigationNodeId("edm.members"), "Members", groupTopLevel); //$NON-NLS-1$ //$NON-NLS-2$
 		moduleMembers.setClosable(false);
-//		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Member List", moduleMembers, MemberSearchView.ID,MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.newMember"), "Add Member", moduleMembers, MemberSearchView.ID,NewMembeViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubMobule(new NavigationNodeId("edm.members.list"), "Search Members", moduleMembers, MemberSearchView.ID,MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IModuleNode moduleServices = NodeFactory.createModule(

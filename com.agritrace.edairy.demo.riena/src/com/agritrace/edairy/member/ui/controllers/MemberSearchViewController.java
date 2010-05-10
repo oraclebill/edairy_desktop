@@ -36,17 +36,21 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.SWT;
-//import org.eclipse.swt.internal.win32.MEASUREITEMSTRUCT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.member.ui.views.AddAnimalDialog;
+import com.agritrace.edairy.member.ui.views.AddContainerDialog;
+import com.agritrace.edairy.member.ui.views.AddFarmDialog;
+import com.agritrace.edairy.member.ui.views.MemberSearchDetachedView;
+import com.agritrace.edairy.member.ui.views.MemberSearchSelectionListener;
+import com.agritrace.edairy.member.ui.views.MemberSearchSelectionManager;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.MembershipStatus;
@@ -55,20 +59,13 @@ import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
-import com.agritrace.edairy.member.ui.views.AddAnimalDialog;
-import com.agritrace.edairy.member.ui.views.AddContainerDialog;
-import com.agritrace.edairy.member.ui.views.AddFarmDialog;
-import com.agritrace.edairy.member.ui.views.MemberSearchDetachedView;
-import com.agritrace.edairy.member.ui.views.MemberSearchSelectionListener;
-import com.agritrace.edairy.member.ui.views.MemberSearchSelectionManager;
-import com.agritrace.edairy.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.views.ViewWidgetId;
 import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
 
 public class MemberSearchViewController extends SubModuleController implements MemberSearchSelectionListener, ISelectionListener{
 
-	private Membership workingCopy;
+//	private Membership workingCopy;
 	private Membership selectedMember;
 
 	//upper panel fields
@@ -106,6 +103,14 @@ public class MemberSearchViewController extends SubModuleController implements M
 	//live stock tab
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
+	public Membership getSelectedMember() {
+		return selectedMember;
+	}
+
+	public void setSelectedMember(Membership selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+
 	private IActionRidget liveStockRemoveButton;
 	private String[] liveStockPropertyNames = { "animnalRegistrationId", "location","purpose","givenName","animalType","animalType", "dateOfAcquisition", "acquisitionType"};
 	private String[] liveStockColumnHeaders = { "ID", "Farm","Purpose", "Name","Species","Breed","Acquisition Date","Acquisition Type" };
@@ -493,12 +498,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 		nameRidget.updateFromModel();
 
 		SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-		if(workingCopy.getApplicationDate() != null){
+		if(selectedMember.getApplicationDate() != null){
 			bean.setDate(selectedMember.getApplicationDate());
 		}
 		appliedDate.setText(bean.getFormattedDate());
 
-		if(workingCopy.getEffectiveDate() != null){
+		if(selectedMember.getEffectiveDate() != null){
 			bean.setDate(selectedMember.getEffectiveDate());
 		}else{
 			bean.setFormattedDate("");
@@ -546,14 +551,12 @@ public class MemberSearchViewController extends SubModuleController implements M
 	}
 
 	private void copySelectedMember(){
-		if(selectedMember != null){
-			workingCopy = EcoreUtil.copy(selectedMember);	
-		}
-
-
-
+//		if(selectedMember != null){
+//			workingCopy = EcoreUtil.copy(selectedMember);	
+//		}
 	}
-	private void saveMember(){
+	
+	protected void saveMember(){
 		if(selectedMember != null){
 			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
 			try {
