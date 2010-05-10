@@ -3,6 +3,7 @@ package com.agritrace.edairy.service.ui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 
 /**
@@ -15,6 +16,7 @@ import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 public class CommonSubModuleViewController extends SubModuleController {
 
 	private List<ISubModuleControllerDelegate> delegates = new ArrayList<ISubModuleControllerDelegate>();
+	private List<EObject> _eobjs = new ArrayList<EObject>();
 
 	/**
 	 * Adds module controller delegate
@@ -59,6 +61,20 @@ public class CommonSubModuleViewController extends SubModuleController {
 	 */
 	protected void addSubModuleControllers() {
 		// empty
+	}
+
+		
+	public List<EObject> getModleOjects() {
+
+		return _eobjs;
+	}
+	
+	public void fireListeners(int eventType) {
+		for (ISubModuleControllerDelegate delegate : this
+				.getSubModuleControllerDelegates()) {
+			delegate.fireListener(eventType);
+		}
+
 	}
 
 }

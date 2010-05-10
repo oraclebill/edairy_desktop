@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.wire.Wire;
 import org.eclipse.riena.internal.ui.ridgets.Activator;
 import org.eclipse.riena.ui.common.IComplexComponent;
@@ -209,5 +212,15 @@ public class ServiceUtils {
 					Activator.getDefault().getContext());
 		}
 
+	}
+	
+	public static void copy(EObject source, EObject target) {
+		EClass eClass = source.eClass();
+		for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
+			EStructuralFeature eStructuralFeature = eClass
+					.getEStructuralFeature(i);
+			target.eSet(eStructuralFeature, source.eGet(eStructuralFeature));
+
+		}
 	}
 }

@@ -69,8 +69,8 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
-            id="com.agritrace.edairy.dairy.ui.views.StaffInfoView"
+            class="com.agritrace.edairy.setup.ui.views.StaffInfoView"
+            id="com.agritrace.edairy.setup.ui.views.StaffInfoView"
             name="StaffInfoView">
       </view>
       <view
@@ -196,7 +196,7 @@
          </property>
          <property
                name="aboutImage"
-               value="/com.agritrace.edairy.ui/resources/edairy_helpabout.png">
+               value="resources/edairy_helpabout.png">
          </property>
          <property
                name="aboutText"
@@ -204,7 +204,7 @@
          </property>
          <property
                name="windowImages"
-               value="/com.agritrace.edairy.ui/icons/cow16.png,/com.agritrace.edairy.ui/icons/cow32.png,/com.agritrace.edairy.ui/icons/cow48.png,/com.agritrace.edairy.ui/icons/cow64.png,/com.agritrace.edairy.ui/icons/cow128.png">
+               value="icons/cow16.png,icons/cow32.png,icons/cow48.png,icons/cow64.png,icons/cow128.png">
          </property>
       </product>
    </extension>

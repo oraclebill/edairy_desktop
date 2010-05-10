@@ -89,23 +89,8 @@ public class ServiceRequestLogView extends SubModuleView {
 						ServiceRequestLogView.this.getController(),
 						injectedControls, SWTBindingPropertyLocator
 						.getInstance());
-				//mdComposite.forceFocus();
 				
 			}});
-//				ServiceRequestMasterDetailComposite.REQUEST_TYPE_CHANGED,
-//				new Listener() {
-//
-//					@Override
-//					public void handleEvent(Event event) {
-//						
-//					
-//						
-//						
-//			
-//
-//					}
-//				});
-		// Add master details controls into 
 		for (Object control : mdComposite.getUIControls()) {
 			addUIControl(control, SWTBindingPropertyLocator.getInstance()
 					.locateBindingProperty(control));

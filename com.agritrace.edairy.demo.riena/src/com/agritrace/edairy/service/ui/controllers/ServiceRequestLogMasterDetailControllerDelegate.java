@@ -213,11 +213,9 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 
 		private void copy(EObject source, EObject target) {
 			EClass eClass = source.eClass();
-			EClass toClass = source.eClass();
 			for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
 				EStructuralFeature eStructuralFeature = eClass
 						.getEStructuralFeature(i);
-
 				target.eSet(eStructuralFeature, source.eGet(eStructuralFeature));
 
 			}
