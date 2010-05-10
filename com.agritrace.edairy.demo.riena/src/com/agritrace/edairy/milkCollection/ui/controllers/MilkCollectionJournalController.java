@@ -495,6 +495,9 @@ public class MilkCollectionJournalController extends SubModuleController{
 		}
 		newJournal.setDriverTotal(new BigDecimal(driverTotal));
 		newJournal.setRecordTotal(new BigDecimal(recordTotal));
+		for(CollectionJournalLine record :records){
+			record.setCollectionJournal(newJournal);
+		}
 		newJournal.getJournalEntries().addAll(records);
 
 		dairy.getCollectionJournals().add(newJournal);

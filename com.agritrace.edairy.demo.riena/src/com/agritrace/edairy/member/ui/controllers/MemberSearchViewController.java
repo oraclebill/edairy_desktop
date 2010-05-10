@@ -23,6 +23,8 @@ import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -43,6 +45,7 @@ import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
@@ -139,6 +142,7 @@ public class MemberSearchViewController extends SubModuleController implements M
 
 	@Override
 	public void configureRidgets(){
+		getNavigationNode().addSimpleListener(new MemberSearchNodeListern());
 		configureUpperPanel();
 		configureFarmTab();
 		configureCollectionTab();
@@ -641,20 +645,36 @@ public class MemberSearchViewController extends SubModuleController implements M
 	//todo: temporary util method, get a list of collection records
 	private List<CollectionJournalLine> getCollectionJournalLines(){
 		List<CollectionJournalLine> collectionJournalRecords = new ArrayList<CollectionJournalLine>();
-		CollectionJournalLine record = DairyFactory.eINSTANCE.createCollectionJournalLine();
-		record.setLineNumber(10001);
-		record.setRecordedMember(selectedMember.getMemberId());
-		record.setValidatedMember(selectedMember);
-		record.setFarmContainer(selectedMember.getFarms().get(0).getCans().get(0));
-		record.setQuantity(25.2);
-
-		CollectionJournal journal = DairyFactory.eINSTANCE.createCollectionJournal();
-		SimpleFormattedDateBean date = new SimpleFormattedDateBean("02/20/2010");
-		journal.setJournalDate(date.getDate());
-		record.setCollectionJournal(journal);
-		collectionJournalRecords.add(record);
-
+		if(selectedMember != null){
+			String selectedMemberId = selectedMember.getMemberId();
+			EObject container = selectedMember.eContainer();
+			if(container != null && container instanceof Dairy){
+				List<CollectionJournal> allRecords =((Dairy)container).getCollectionJournals();
+				for(CollectionJournal j:allRecords){
+					List<CollectionJournalLine> jEntries = j.getJournalEntries();
+					for(CollectionJournalLine e:jEntries){
+						if(selectedMemberId.equals(e.getRecordedMember())){
+							collectionJournalRecords.add(e);
+						}
+					}
+				}
+			}
+		}
 		return collectionJournalRecords;
+//		CollectionJournalLine record = DairyFactory.eINSTANCE.createCollectionJournalLine();
+//		record.setLineNumber(10001);
+//		record.setRecordedMember(selectedMember.getMemberId());
+//		record.setValidatedMember(selectedMember);
+//		record.setFarmContainer(selectedMember.getFarms().get(0).getCans().get(0));
+//		record.setQuantity(25.2);
+//
+//		CollectionJournal journal = DairyFactory.eINSTANCE.createCollectionJournal();
+//		SimpleFormattedDateBean date = new SimpleFormattedDateBean("02/20/2010");
+//		journal.setJournalDate(date.getDate());
+//		record.setCollectionJournal(journal);
+//		collectionJournalRecords.add(record);
+
+//		return collectionJournalRecords;
 
 	}
 	
@@ -755,5 +775,24 @@ public class MemberSearchViewController extends SubModuleController implements M
 		
 	}
 
+private class MemberSearchNodeListern extends SimpleNavigationNodeAdapter{
+		
+		@Override
+		public void activated(INavigationNode<?> source) {
+			if(selectedMember != null){
+				updateBindings();
+			}
+			
+		}
 
+		@Override
+		public void deactivated(INavigationNode<?> source) {
+			
+		}
+
+		@Override
+		public void disposed(INavigationNode<?> source) {
+			 
+		}
+	}
 }

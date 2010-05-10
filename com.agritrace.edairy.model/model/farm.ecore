@@ -40,8 +40,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" lowerBound="1"
         eType="ecore:EEnum common.ecore#//Gender" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalType" lowerBound="1"
-        eType="#//ReferenceAnimalType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sireType" eType="#//ReferenceAnimalType"/>
+        eType="#//ReferenceAnimalType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sireType" eType="#//ReferenceAnimalType"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" lowerBound="1"
         eType="#//Purpose" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfAcquisition" lowerBound="1"
