@@ -14,7 +14,7 @@ import org.osgi.framework.BundleContext;
 public class EDairyActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.agritrace.edairy.ui"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.agritrace.edairy.demo.riena"; //$NON-NLS-1$
 
 	// The shared instance
 	private static EDairyActivator plugin;

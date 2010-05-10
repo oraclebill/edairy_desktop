@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.Activator;
 import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.ui.ImageRegistry;
 
@@ -47,10 +46,10 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 	public static final String BIND_ID_INSE_SECOND_TRETMENT = "time.second.repeat";//$NON-NLS-1$
 	public static final String BIND_ID_INSE_THIRD_TRETMENT = "time.third.repeat";//$NON-NLS-1$
 	public static final String BIND_ID_VERY_THIRD_COMPLAINT = "complaint";//$NON-NLS-1$
-	public static final String BIND_ID_REQUEST_DATE = "date";//$NON-NLS-1$
-	public static final String BIND_ID_MEMBER_NAME = "name";//$NON-NLS-1$
-	public static final String BIND_ID_MEMBER_ID = "id";//$NON-NLS-1$
-	public static final String BIND_ID_FARM_NAME = "name";//$NON-NLS-1$
+	public static final String BIND_ID_REQUEST_DATE = "request.date";//$NON-NLS-1$
+	public static final String BIND_ID_MEMBER_NAME = "member.name";//$NON-NLS-1$
+	public static final String BIND_ID_MEMBER_ID = "member.id";//$NON-NLS-1$
+	public static final String BIND_ID_FARM_NAME = "farm.name";//$NON-NLS-1$
 	public static final int REQUEST_TYPE_CHANGED = 9999999;
 
 	public ServiceRequestMasterDetailComposite(Composite parent, int style) {
@@ -69,6 +68,8 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		data.heightHint = getParent().getChildren()[0].computeSize(-1, -1).y;
 		tableComposite.setLayoutData(data);		
 		tableComposite.setLayout(layout);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
 		return table;
 	}
 	@Override
@@ -135,7 +136,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		addUIControl(txtDate, BIND_ID_REQUEST_DATE); //$NON-NLS-1$
 
 		Button button = new Button(dateComposte, SWT.PUSH);
-		Image calendar = Activator.getImage(ImageRegistry.calendar);
+		Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
 		button.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
 				17, 16).applyTo(button);
@@ -223,7 +224,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		
 		// Calendar Button
 		Button button = new Button(inseminationGroup, SWT.PUSH);
-		Image calendar = Activator.getImage(ImageRegistry.calendar);
+		Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
 		button.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
 				17, 16).applyTo(button);
