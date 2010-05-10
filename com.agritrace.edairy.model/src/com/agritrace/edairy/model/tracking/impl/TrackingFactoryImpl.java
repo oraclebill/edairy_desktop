@@ -25,242 +25,242 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+         * Creates the default factory implementation.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public static TrackingFactory init() {
-		try {
-			TrackingFactory theTrackingFactory = (TrackingFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.model/tracking/"); 
-			if (theTrackingFactory != null) {
-				return theTrackingFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new TrackingFactoryImpl();
-	}
+                try {
+                        TrackingFactory theTrackingFactory = (TrackingFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.model/tracking/"); 
+                        if (theTrackingFactory != null) {
+                                return theTrackingFactory;
+                        }
+                }
+                catch (Exception exception) {
+                        EcorePlugin.INSTANCE.log(exception);
+                }
+                return new TrackingFactoryImpl();
+        }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+         * Creates an instance of the factory.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public TrackingFactoryImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case TrackingPackage.FARM: return createFarm();
-			case TrackingPackage.CONTAINER: return createContainer();
-			case TrackingPackage.REGISTERED_ANIMAL: return createRegisteredAnimal();
-			case TrackingPackage.REFERENCE_ANIMAL_TYPE: return createReferenceAnimalType();
-			case TrackingPackage.ANIMAL_IDENTIFIER: return createAnimalIdentifier();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eClass.getClassifierID()) {
+                        case TrackingPackage.FARM: return createFarm();
+                        case TrackingPackage.CONTAINER: return createContainer();
+                        case TrackingPackage.REGISTERED_ANIMAL: return createRegisteredAnimal();
+                        case TrackingPackage.REFERENCE_ANIMAL_TYPE: return createReferenceAnimalType();
+                        case TrackingPackage.ANIMAL_IDENTIFIER: return createAnimalIdentifier();
+                        default:
+                                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case TrackingPackage.ACQUISITION_TYPE:
-				return createAcquisitionTypeFromString(eDataType, initialValue);
-			case TrackingPackage.PURPOSE:
-				return createPurposeFromString(eDataType, initialValue);
-			case TrackingPackage.REARING_MODE:
-				return createRearingModeFromString(eDataType, initialValue);
-			case TrackingPackage.MECHANISM:
-				return createMechanismFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eDataType.getClassifierID()) {
+                        case TrackingPackage.ACQUISITION_TYPE:
+                                return createAcquisitionTypeFromString(eDataType, initialValue);
+                        case TrackingPackage.PURPOSE:
+                                return createPurposeFromString(eDataType, initialValue);
+                        case TrackingPackage.REARING_MODE:
+                                return createRearingModeFromString(eDataType, initialValue);
+                        case TrackingPackage.MECHANISM:
+                                return createMechanismFromString(eDataType, initialValue);
+                        default:
+                                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case TrackingPackage.ACQUISITION_TYPE:
-				return convertAcquisitionTypeToString(eDataType, instanceValue);
-			case TrackingPackage.PURPOSE:
-				return convertPurposeToString(eDataType, instanceValue);
-			case TrackingPackage.REARING_MODE:
-				return convertRearingModeToString(eDataType, instanceValue);
-			case TrackingPackage.MECHANISM:
-				return convertMechanismToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eDataType.getClassifierID()) {
+                        case TrackingPackage.ACQUISITION_TYPE:
+                                return convertAcquisitionTypeToString(eDataType, instanceValue);
+                        case TrackingPackage.PURPOSE:
+                                return convertPurposeToString(eDataType, instanceValue);
+                        case TrackingPackage.REARING_MODE:
+                                return convertRearingModeToString(eDataType, instanceValue);
+                        case TrackingPackage.MECHANISM:
+                                return convertMechanismToString(eDataType, instanceValue);
+                        default:
+                                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Farm createFarm() {
-		FarmImpl farm = new FarmImpl();
-		return farm;
-	}
+                FarmImpl farm = new FarmImpl();
+                return farm;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public com.agritrace.edairy.model.tracking.Container createContainer() {
-		ContainerImpl container = new ContainerImpl();
-		return container;
-	}
+                ContainerImpl container = new ContainerImpl();
+                return container;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public RegisteredAnimal createRegisteredAnimal() {
-		RegisteredAnimalImpl registeredAnimal = new RegisteredAnimalImpl();
-		return registeredAnimal;
-	}
+                RegisteredAnimalImpl registeredAnimal = new RegisteredAnimalImpl();
+                return registeredAnimal;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public ReferenceAnimalType createReferenceAnimalType() {
-		ReferenceAnimalTypeImpl referenceAnimalType = new ReferenceAnimalTypeImpl();
-		return referenceAnimalType;
-	}
+                ReferenceAnimalTypeImpl referenceAnimalType = new ReferenceAnimalTypeImpl();
+                return referenceAnimalType;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public AnimalIdentifier createAnimalIdentifier() {
-		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
-		return animalIdentifier;
-	}
+                AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
+                return animalIdentifier;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public AcquisitionType createAcquisitionTypeFromString(EDataType eDataType, String initialValue) {
-		AcquisitionType result = AcquisitionType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+                AcquisitionType result = AcquisitionType.get(initialValue);
+                if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+                return result;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String convertAcquisitionTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+                return instanceValue == null ? null : instanceValue.toString();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Purpose createPurposeFromString(EDataType eDataType, String initialValue) {
-		Purpose result = Purpose.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+                Purpose result = Purpose.get(initialValue);
+                if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+                return result;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String convertPurposeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+                return instanceValue == null ? null : instanceValue.toString();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public RearingMode createRearingModeFromString(EDataType eDataType, String initialValue) {
-		RearingMode result = RearingMode.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+                RearingMode result = RearingMode.get(initialValue);
+                if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+                return result;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String convertRearingModeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+                return instanceValue == null ? null : instanceValue.toString();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Mechanism createMechanismFromString(EDataType eDataType, String initialValue) {
-		Mechanism result = Mechanism.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+                Mechanism result = Mechanism.get(initialValue);
+                if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+                return result;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String convertMechanismToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+                return instanceValue == null ? null : instanceValue.toString();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public TrackingPackage getTrackingPackage() {
-		return (TrackingPackage)getEPackage();
-	}
+                return (TrackingPackage)getEPackage();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+         * @deprecated
+         * @generated
+         */
 	@Deprecated
 	public static TrackingPackage getPackage() {
-		return TrackingPackage.eINSTANCE;
-	}
+                return TrackingPackage.eINSTANCE;
+        }
 
 } //TrackingFactoryImpl

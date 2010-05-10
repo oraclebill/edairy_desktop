@@ -32,190 +32,190 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	/**
-	 * The default value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLongitude()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLongitude()
+         * @generated
+         * @ordered
+         */
 	protected static final String LONGITUDE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLongitude()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLongitude()
+         * @generated
+         * @ordered
+         */
 	protected String longitude = LONGITUDE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLatitude()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLatitude()
+         * @generated
+         * @ordered
+         */
 	protected static final String LATITUDE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLatitude()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLatitude()
+         * @generated
+         * @ordered
+         */
 	protected String latitude = LATITUDE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected MapLocationImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.MAP_LOCATION;
-	}
+                return ModelPackage.Literals.MAP_LOCATION;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getLongitude() {
-		return longitude;
-	}
+                return longitude;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setLongitude(String newLongitude) {
-		String oldLongitude = longitude;
-		longitude = newLongitude;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LONGITUDE, oldLongitude, longitude));
-	}
+                String oldLongitude = longitude;
+                longitude = newLongitude;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LONGITUDE, oldLongitude, longitude));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getLatitude() {
-		return latitude;
-	}
+                return latitude;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setLatitude(String newLatitude) {
-		String oldLatitude = latitude;
-		latitude = newLatitude;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LATITUDE, oldLatitude, latitude));
-	}
+                String oldLatitude = latitude;
+                latitude = newLatitude;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LATITUDE, oldLatitude, latitude));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ModelPackage.MAP_LOCATION__LONGITUDE:
-				return getLongitude();
-			case ModelPackage.MAP_LOCATION__LATITUDE:
-				return getLatitude();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case ModelPackage.MAP_LOCATION__LONGITUDE:
+                                return getLongitude();
+                        case ModelPackage.MAP_LOCATION__LATITUDE:
+                                return getLatitude();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ModelPackage.MAP_LOCATION__LONGITUDE:
-				setLongitude((String)newValue);
-				return;
-			case ModelPackage.MAP_LOCATION__LATITUDE:
-				setLatitude((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case ModelPackage.MAP_LOCATION__LONGITUDE:
+                                setLongitude((String)newValue);
+                                return;
+                        case ModelPackage.MAP_LOCATION__LATITUDE:
+                                setLatitude((String)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ModelPackage.MAP_LOCATION__LONGITUDE:
-				setLongitude(LONGITUDE_EDEFAULT);
-				return;
-			case ModelPackage.MAP_LOCATION__LATITUDE:
-				setLatitude(LATITUDE_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case ModelPackage.MAP_LOCATION__LONGITUDE:
+                                setLongitude(LONGITUDE_EDEFAULT);
+                                return;
+                        case ModelPackage.MAP_LOCATION__LATITUDE:
+                                setLatitude(LATITUDE_EDEFAULT);
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ModelPackage.MAP_LOCATION__LONGITUDE:
-				return LONGITUDE_EDEFAULT == null ? longitude != null : !LONGITUDE_EDEFAULT.equals(longitude);
-			case ModelPackage.MAP_LOCATION__LATITUDE:
-				return LATITUDE_EDEFAULT == null ? latitude != null : !LATITUDE_EDEFAULT.equals(latitude);
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case ModelPackage.MAP_LOCATION__LONGITUDE:
+                                return LONGITUDE_EDEFAULT == null ? longitude != null : !LONGITUDE_EDEFAULT.equals(longitude);
+                        case ModelPackage.MAP_LOCATION__LATITUDE:
+                                return LATITUDE_EDEFAULT == null ? latitude != null : !LATITUDE_EDEFAULT.equals(latitude);
+                }
+                return super.eIsSet(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+                if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (longitude: ");
-		result.append(longitude);
-		result.append(", latitude: ");
-		result.append(latitude);
-		result.append(')');
-		return result.toString();
-	}
+                StringBuffer result = new StringBuffer(super.toString());
+                result.append(" (longitude: ");
+                result.append(longitude);
+                result.append(", latitude: ");
+                result.append(latitude);
+                result.append(')');
+                return result.toString();
+        }
 
 } //MapLocationImpl

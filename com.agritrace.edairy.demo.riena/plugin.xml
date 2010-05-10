@@ -205,7 +205,7 @@
          </property>
          <property
                name="aboutImage"
-               value="resources/edairy_helpabout.png">
+               value="/com.agritrace.edairy.ui/resources/edairy_helpabout.png">
          </property>
          <property
                name="aboutText"
@@ -213,7 +213,7 @@
          </property>
          <property
                name="windowImages"
-               value="icons/edairymanagericon16.png,icons/edairymanagericon32.png,icons/edairymanagericon48.png,icons/edairymanagericon64.png,icons/edairymanagericon128.png">
+               value="/com.agritrace.edairy.ui/icons/edairymanagericon16.png,/com.agritrace.edairy.ui/icons/edairymanagericon32.png,/com.agritrace.edairy.ui/icons/edairymanagericon48.png,/com.agritrace.edairy.ui/icons/edairymanagericon64.png,/com.agritrace.edairy.ui/icons/edairymanagericon128.png">
          </property>
       </product>
    </extension>

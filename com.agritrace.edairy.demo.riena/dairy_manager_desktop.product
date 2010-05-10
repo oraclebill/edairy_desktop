@@ -16,12 +16,12 @@
    <launcherArgs>
       <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch}
 			-nl ${target.nl} -consoleLog</programArgs>
+      <vmArgs>-Driena.application.width=1120
+			-Driena.application.height=850</vmArgs>
       <vmArgsMac>-XstartOnFirstThread
 			-Dorg.eclipse.swt.internal.carbon.smallFonts
 			-Driena.application.width=1120 -Driena.application.height=850
 		</vmArgsMac>
-      <vmArgsWin>-Driena.application.width=1120
-			-Driena.application.height=850</vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="/com.agritrace.edairy.ui/icons/edairymanagericon16.png" i32="/com.agritrace.edairy.ui/icons/edairymanagericon32.png" i48="/com.agritrace.edairy.ui/icons/edairymanagericon48.png" i64="/com.agritrace.edairy.ui/icons/edairymanagericon64.png" i128="/com.agritrace.edairy.ui/icons/edairymanagericon128.png"/>
