@@ -43,8 +43,8 @@ import com.agritrace.edairy.model.tracking.TrackingFactory;
 public class DairyDemoResourceManager{
 
 	public static DairyDemoResourceManager INSTANCE = new DairyDemoResourceManager();
-//	public static final String XMLDB_BASE = System.getProperty("edairy.db.root", "c:/temp/edairy");
-	public static final String XMLDB_BASE = "/tmp";
+	public static final String XMLDB_BASE = System.getProperty("edairy.db.root", "c:/temp/edairy");
+//	public static final String XMLDB_BASE = "/tmp";
 
 	private Resource farmResource;
 

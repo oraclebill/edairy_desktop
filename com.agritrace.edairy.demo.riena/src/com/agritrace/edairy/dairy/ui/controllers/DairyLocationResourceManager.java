@@ -232,9 +232,10 @@ public class DairyLocationResourceManager {
 	private void createDairyLocationsData()
 	{
 		
-		for (int i = 0 ; i < 5; i ++) {
+		for (int i = 1 ; i <= 5; i ++) {
 			long id = (long) i;
 			DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
+			dairyLocation.setId(id);
 			dairyLocation.setName("testDairylocationName" + id);
 			dairyLocation.setDescription("test dairy location description " + id);
 			dairyLocation.setDateOpened(new Date());
@@ -244,6 +245,7 @@ public class DairyLocationResourceManager {
 			
 			
 			Route route = DairyFactory.eINSTANCE.createRoute();
+			route.setId(id);
 			route.setName("testroute" + id);
 			route.setDescription("testroutedesc" + id);
 			route.setCode("#66778" + id);
@@ -293,8 +295,9 @@ public class DairyLocationResourceManager {
 	
 	private void createRoutesData()
 	{
-		for (int i = 0 ; i < 5; i++) {
+		for (int i = 1 ; i <= 5; i++) {
 			Route route = DairyFactory.eINSTANCE.createRoute();
+			route.setId((long)i);
 			route.setName("testroute" + i);
 			route.setDescription("testroutedesc" + i);
 			route.setCode("#66778" + i);

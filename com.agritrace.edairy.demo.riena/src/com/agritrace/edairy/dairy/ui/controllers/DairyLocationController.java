@@ -1,7 +1,5 @@
 package com.agritrace.edairy.dairy.ui.controllers;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +11,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -28,10 +27,12 @@ import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.databinding.ConverterFactory;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
+import com.agritrace.edairy.dairy.ui.util.EMFUtil;
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.MapLocation;
@@ -41,6 +42,7 @@ import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.model.dairy.util.DairyAdapterFactory;
 import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class DairyLocationController extends SubModuleController {
@@ -77,7 +79,7 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_ML_LONGITUDE = "longitude";
 	
 	//actions
-	public static final String RIDGET_ID_ADD_ROUTE_ACTION = "addRouteAction";
+	public static final String RIDGET_ID_CONFIGURE_ROUTE_ACTION = "configureRouteAction";
 	public static final String RIDGET_ID_SAVE_ACTION = "saveAction";
 	public static final String RIDGET_ID_CANCEL_ACTION = "cancelAction";
 	public static final String RIDGET_ID_DELETE_ACTION = "deleteAction";
@@ -186,7 +188,7 @@ public class DairyLocationController extends SubModuleController {
 	 
 	private final class DairyLocationDelegation extends	AbstractMasterDetailsDelegate {
 		private DairyLocation workingCopy = createWorkingCopy();
-		private DairyLocation dairyLocation;
+		private Route workingRoute;
 		private ITextRidget textName;
 		private ITextRidget textAddress;
 		private IMessageBoxRidget duplicateNameDialog;
@@ -198,6 +200,12 @@ public class DairyLocationController extends SubModuleController {
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			table = container.getRidget(ITableRidget.class, AbstractMasterDetailsComposite.BIND_ID_TABLE);
+		
+			ITextRidget textId = container.getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
+			textId.bindToModel(workingCopy, "id");
+			textId.updateFromModel();
+			
+			
 			textName =  container.getRidget(ITextRidget.class, RIDGET_ID_NAME);
 			textName.bindToModel(workingCopy, "name");
 			textName.updateFromModel();
@@ -237,73 +245,81 @@ public class DairyLocationController extends SubModuleController {
 	        IObservableList selectionValues = new WritableList( workingCopy.getFunctions(), DairyFunction.class );
 	        functions.bindToModel( optionValues, selectionValues );                      
 	        functions.updateFromModel();
-//		functions.setSelection(dairyLocation.getFunctions()); //$NON-NLS-1$
 	        
 	        
 	        routeCombo = container.getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
-			RouteService rs = new RouteService();
-			//IObservableList selectValues = new WritableList( Arrays.asList(rs.getRoutes()), Route.class ) ;
-			/*WritableList values = new WritableList(rs.getRoutes(), Route.class);
-			WritableValue selection = new WritableValue(workingCopy.getRoute(), Route.class);
-
-			ConverterFactory<Route, String> factory = new ConverterFactory<Route, String>(Route.class, String.class);
-			for (Route r : rs.getRoutes()) {
-				factory.add(r, r.getName());
-			}
-			
-			routeCombo.setModelToUIControlConverter(factory.createFromToConverter());
-			routeCombo.setUIControlToModelConverter(factory.createToFromConverter());
-			routeCombo.bindToModel(values, Route.class, null, selection);
-			routeCombo.updateFromModel();*/
-
-			//routeCombo.bindToModel(new WritableList(rs.getRoutes(), Route.class), Route.class, "getName", new WritableValue());
-			
-			routeCombo.bindToModel(rs, "names", String.class, null, this.workingCopy.getRoute(), "name");
-			routeCombo.updateFromModel();
-			//routeCombo.updateFromModel();
-			/*routeCombo.addPropertyChangeListener(new PropertyChangeListener() {
-				public void propertyChange(PropertyChangeEvent evt) {
-					evt.getNewValue()
-				}
-			});*/
-			//routeCombo.setSelection(this.workingCopy.getRoute());
+			routeCombo.setMandatory(true);
+			bindRouteCombo();
+			routeCombo.addSelectionListener(new RouteSelectCallback());
 
 			
-			final IActionRidget addRouteAction = container.getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
-			addRouteAction.addListener(new AddRouteCallback());
+			final IActionRidget configureRouteAction = container.getRidget(IActionRidget.class, RIDGET_ID_CONFIGURE_ROUTE_ACTION);
+			configureRouteAction.addListener(new ConfigureRouteCallback());
 			
 			
 			configureAddressTab(container, workingCopy);
 			configureDirectionsTab(container, workingCopy);
 			configureMapTab(container, workingCopy);
 			//configureMessageBoxes(container);
-			
-			/*IActionRidget saveAction = container.getRidget(IActionRidget.class, RIDGET_ID_SAVE_ACTION);
-			saveAction.addListener(new SaveCallback());
-			saveAction.setText("Save");
-			
-			IActionRidget cancelAction = container.getRidget(IActionRidget.class, RIDGET_ID_CANCEL_ACTION);
-			cancelAction.addListener(new CancelCallback());
-			cancelAction.setText("Cancel");
 
-			IActionRidget deleteAction = container.getRidget(IActionRidget.class, RIDGET_ID_DELETE_ACTION);
-			deleteAction.addListener(new DeleteCallback());
-			deleteAction.setText("Delete");*/
 			
 		}
+
+
 
 		@Override
 		public void updateDetails(IRidgetContainer container) {
-			// TODO Auto-generated method stub
+			//reconstruct items list every time details is updated
+			//bindRouteCombo();
+			
 			super.updateDetails(container);
 		}
 
+		private void bindRouteCombo()
+		{
+			RouteService rs = new RouteService();
+			routeCombo.bindToModel(rs, "names", String.class, "toString", workingRoute, "name");
+			routeCombo.updateFromModel();
+			
+		}
+
+		@Override
+		public void itemApplied(Object changedItem) {
+			// TODO Auto-generated method stub
+			super.itemApplied(changedItem);
+		}
+
+
+
+		@Override
+		public boolean isChanged(Object source, Object target) {
+			if (source != null && target != null) {
+				DairyLocation src = (DairyLocation) source;
+				DairyLocation dst = (DairyLocation) target;
+				if (EMFUtil.compare(src, dst)
+						&& EMFUtil.compare(src.getRoute(), dst.getRoute())
+						&& EMFUtil.compare(src.getLocation().getPostalLocation(), dst.getLocation().getPostalLocation())
+						&& EMFUtil.compare(src.getLocation().getDescriptiveLocation(), dst.getLocation().getDescriptiveLocation())
+						&& EMFUtil.compare(src.getLocation().getMapLocation(), dst.getLocation().getMapLocation())) {
+					return  false;
+				}
+			}
+			
+			return true;
+		}
+
+
+
 		@Override
 		public DairyLocation createWorkingCopy() {
+			if (workingCopy != null) {
+				return workingCopy;
+			}
 			DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
-			
+			workingCopy = dairyLocation;
 			
 			Route route = DairyFactory.eINSTANCE.createRoute();
+			workingRoute = route;
 			dairyLocation.setRoute(route);
 			dairyLocation.getRoute().setName("");
 			
@@ -319,7 +335,7 @@ public class DairyLocationController extends SubModuleController {
 			location.setDescriptiveLocation(descriptiveLocation);
 			location.setMapLocation(mapLocation);
 			dairyLocation.setLocation(location);
-			return dairyLocation;
+			return workingCopy;
 		}
 
 		@Override
@@ -327,23 +343,25 @@ public class DairyLocationController extends SubModuleController {
 			
 			DairyLocation from = source != null ? (DairyLocation) source : createWorkingCopy();
 			DairyLocation to = target != null ? (DairyLocation) target : createWorkingCopy();
-			
+			to.setId(from.getId());
 			to.setName(from.getName());
 			to.setDateOpened(from.getDateOpened());
 			to.setDescription(from.getDescription());
 			to.setPhone(from.getPhone());
-			
+			to.setCode(from.getCode());
 			if (from.getRoute() == null )
 				to.setRoute(null);
 			else {
 				if (to.getRoute() == null)
 					to.setRoute(DairyFactory.eINSTANCE.createRoute());
+				to.getRoute().setId(from.getRoute().getId());
 				to.getRoute().setName(from.getRoute().getName());
 				to.getRoute().setDescription(from.getRoute().getDescription());
 				to.getRoute().setCode(from.getRoute().getCode());
+				//ECoreUtil.co
 			}
 			//to.setLocation(from.getLocation());
-			to.setRoute(from.getRoute());
+			to.getFunctions().clear();
 			to.getFunctions().addAll(from.getFunctions());
 			to.getLocation().getPostalLocation().setAddress(from.getLocation().getPostalLocation().getAddress());
 			to.getLocation().getPostalLocation().setEstate(from.getLocation().getPostalLocation().getEstate());
@@ -455,6 +473,29 @@ public class DairyLocationController extends SubModuleController {
 					new IMessageBoxRidget.MessageBoxOption("Yes"), new IMessageBoxRidget.MessageBoxOption("No") };
 			deleteConfirmDialog.setOptions(customOptions);
 		}
+		
+		private class RouteSelectCallback implements ISelectionListener
+		{
+
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				if (event.getNewSelection().size() > 0) {
+					String selectedName = (String) event.getNewSelection().get(0);
+					RouteService rs = new RouteService();
+					Route r = rs.findByName(selectedName);
+					IComboRidget select = (IComboRidget) event.getSource();
+					if (r == null) { //selection is invalid since the route might be removed by someone else.
+						select.setErrorMarked(true);
+					} else {
+						select.setErrorMarked(false);
+					}
+					workingRoute.setId(r.getId());
+					workingRoute.setDescription(r.getDescription());
+					workingRoute.setCode(r.getCode());
+				}
+			}
+				
+		}
 		private  class SaveCallback implements IActionListener {
 			IValidator uniqueNameValidator = new IValidator()
 			{
@@ -501,27 +542,7 @@ public class DairyLocationController extends SubModuleController {
 			}
 		}
 		
-		
-		
-		private  class CancelCallback implements IActionListener {
-			@Override
-			public void callback() {
-				
-			}
-		}
-
-		private class DeleteCallback implements IActionListener {
-
-			public void callback() {
-				if (deleteConfirmDialog.show().getLabel().equals("Yes"))
-				{
-					//#TODO delete the item
-					
-				}
-			}
-		}
-		
-		private class AddRouteCallback implements IActionListener {
+		private class ConfigureRouteCallback implements IActionListener {
 
 			public void callback() {
 					
@@ -530,7 +551,7 @@ public class DairyLocationController extends SubModuleController {
 					dialog.open();
 					routeService.refresh();
 					routeCombo.updateFromModel();
-					
+					bindRouteCombo();
 			}
 		}
 		

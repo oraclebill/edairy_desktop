@@ -41,8 +41,6 @@ public class DairyLocationView extends SubModuleView {
 		contentArea.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		GridLayout layout = new GridLayout(1, false);
 		contentArea.setLayout(layout);
-		/*DairyLocationMasterDetailsComposite mdComposite = new DairyLocationMasterDetailsComposite(
-				contentArea, SWT.NONE);*/
 		DairyLocationMasterDetailsComposite master = new DairyLocationMasterDetailsComposite(contentArea, SWT.NONE);
 		this.addUIControl(master, "master");
 		GridData gd = new GridData();
@@ -52,13 +50,16 @@ public class DairyLocationView extends SubModuleView {
 		gd.verticalAlignment = SWT.FILL;
 		master.setLayoutData(gd);
 		Composite table = master.getTable();
-		/*gd = new GridData();
-		gd.grabExcessVerticalSpace = false;
-		gd.verticalAlignment = SWT.TOP;
-		gd.heightHint = ROW_MARGIN * 3;
-		table.setLayoutData(gd);*/
 		Composite details = master.getDetails();
-		gd = new GridData();
+		createDetailsPanel(details);
+		
+	
+		//createMessageBoxes(buttonPanel);
+	}
+	
+	private void createDetailsPanel(Composite details)
+	{
+		GridData gd = new GridData();
 		gd.grabExcessHorizontalSpace = true;
 		gd.grabExcessVerticalSpace = true;
 		gd.horizontalAlignment = SWT.FILL;
@@ -77,14 +78,15 @@ public class DairyLocationView extends SubModuleView {
 		detailGroup.setLayoutData(gd);
 		GridLayout layout2 = new GridLayout(3, false);
 		detailGroup.setLayout(layout2);
-		/*Label idLabel = UIControlsFactory.createLabel(contentArea, "Location #", SWT.LEFT);
+		
+		Label idLabel = UIControlsFactory.createLabel(detailGroup, "Location #", SWT.LEFT);
 
-		Text idText = UIControlsFactory.createText(contentArea, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
-		GridData gd = new GridData();
+		Text idText = UIControlsFactory.createText(detailGroup, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
+		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		gd.horizontalSpan = 2;
 		idText.setEditable(false);
-		idText.setLayoutData(gd);*/
+		idText.setLayoutData(gd);
 
 		Label nameLabel = UIControlsFactory.createLabel(detailGroup, "Name", SWT.LEFT);
 
@@ -133,7 +135,7 @@ public class DairyLocationView extends SubModuleView {
 
 		Combo routeCombo = UIControlsFactory.createCombo(detailGroup, DairyLocationController.RIDGET_ID_ROUTE);
 		
-		Button addRouteButton = UIControlsFactory.createButton(detailGroup, "?", DairyLocationController.RIDGET_ID_ADD_ROUTE_ACTION);
+		Button configureRouteButton = UIControlsFactory.createButton(detailGroup, "?", DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
 		
 		
 		TabFolder tabs = new TabFolder(detailGroup, SWT.None);
@@ -163,37 +165,6 @@ public class DairyLocationView extends SubModuleView {
 		Composite tab3 = new Composite(tabs, SWT.NONE);
 		mapTab.setControl(tab3);
 		createMapTab(tab3);
-		
-		/*Composite buttonPanel = UIControlsFactory.createComposite(detailGroup);
-		gd = new GridData(SWT.END, SWT.FILL, true, false);
-		gd.horizontalSpan = 3;
-		gd.horizontalAlignment = GridData.END; 
-		buttonPanel.setLayoutData(gd);
-		buttonPanel.setLayout(new GridLayout(3,false));
-	
-		Button saveButton = UIControlsFactory.createButton(buttonPanel, "Save", DairyLocationController.RIDGET_ID_SAVE_ACTION);
-		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
-		saveButton.setLayoutData(gd);
-		
-		Button deleteButton = UIControlsFactory.createButton(buttonPanel, "Delete", DairyLocationController.RIDGET_ID_DELETE_ACTION);
-		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
-		deleteButton.setLayoutData(gd);
-		
-		Button cancelButton = UIControlsFactory.createButton(buttonPanel, "Cancel", DairyLocationController.RIDGET_ID_CANCEL_ACTION);
-		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
-		cancelButton.setLayoutData(gd);
-		*/
-		
-		
-		//createMessageBoxes(buttonPanel);
-	}
-	
-	private void createDairyLocationList(Composite parent)
-	{
-		
 	}
 	
 	private void createAddressTab(Composite parent)
@@ -375,7 +346,7 @@ public class DairyLocationView extends SubModuleView {
 	}
 
 	public Image getIcon() {
-		return AbstractUIPlugin.imageDescriptorFromPlugin("com.averline.edm_client", "/icons/user_16.png")
+		return AbstractUIPlugin.imageDescriptorFromPlugin("com.agritrace.edairy.demo.riena", "/icons/edairymanagericon16.png")
 				.createImage();
 	}
 
