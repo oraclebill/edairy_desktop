@@ -3,7 +3,6 @@ package com.agritrace.edairy.setup.ui.controllers;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -14,10 +13,14 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
+import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
+import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 import com.agritrace.edairy.service.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.service.ui.controllers.SubModuleControllerDelegate;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
@@ -27,7 +30,7 @@ import com.agritrace.edairy.setup.ui.views.StaffInfoMasterDetailComposite;
  * Controller delegate for Staff info view
  * 
  * @author Hui(Spark) Wan
- *
+ * 
  */
 public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 
@@ -79,12 +82,62 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
+			// First name
+			ITextRidget firstName = container.getRidget(ITextRidget.class,
+					StaffInfoMasterDetailComposite.BIND_ID_FIRST_NAME);
+			firstName.setDirectWriting(true);
+			firstName.bindToModel(workingCopy,
+					ModelPackage.Literals.PERSON__GIVEN_NAME.getName());
+			firstName.updateFromModel();
 
+			// Last Name
+			ITextRidget lastNameText = container.getRidget(ITextRidget.class,
+					StaffInfoMasterDetailComposite.BIND_ID_LAST_NAME);
+			lastNameText.setDirectWriting(true);
+			lastNameText.bindToModel(workingCopy,
+					ModelPackage.Literals.PERSON__FAMILY_NAME.getName());
+			lastNameText.updateFromModel();
+
+			// Phone Number
+			ITextRidget phoneNoText = container.getRidget(ITextRidget.class,
+					StaffInfoMasterDetailComposite.BIND_ID_PHONE_NUM);
+			phoneNoText.setDirectWriting(true);
+			phoneNoText.bindToModel(workingCopy,
+					ModelPackage.Literals.PARTY__PHONE_NUMBER.getName());
+			phoneNoText.updateFromModel();
+
+			// Department
+			ITextRidget departText = container.getRidget(ITextRidget.class,
+					StaffInfoMasterDetailComposite.BIND_ID_DEPARTMENT);
+			departText.setDirectWriting(true);
+			departText.bindToModel(workingCopy,
+					DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION.getName());
+			departText.updateFromModel();
+
+			// Address
+			ITextRidget addressText = container.getRidget(ITextRidget.class,
+					StaffInfoMasterDetailComposite.BIND_ID_DEPARTMENT);
+			addressText.setDirectWriting(true);
+			if (workingCopy.getLocation() != null
+					&& workingCopy.getLocation().getPostalLocation() != null) {
+				addressText.bindToModel(workingCopy.getLocation()
+						.getPostalLocation(),
+						ModelPackage.Literals.POSTAL_LOCATION__ADDRESS
+								.getName());
+
+				addressText.updateFromModel();
+			}
 		}
 
 		@Override
 		public Employee createWorkingCopy() {
-			return DairyFactory.eINSTANCE.createEmployee(); 
+			Employee employee = DairyFactory.eINSTANCE.createEmployee();
+			Location location = ModelFactoryImpl.eINSTANCE.createLocation();
+			employee.setLocation(location);
+			PostalLocation postalLocation = ModelFactory.eINSTANCE
+					.createPostalLocation();
+			location.setPostalLocation(postalLocation);
+			return DairyFactory.eINSTANCE.createEmployee();
 		}
 
 		@Override
@@ -126,79 +179,6 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 			return null;
 		}
 
-		@Override
-		public void itemSelected(Object newSelection) {
-
-			super.itemSelected(newSelection);
-			if (newSelection instanceof Employee) {
-				Employee employee = (Employee) newSelection;
-				// Updates the bindings
-				updateDetailBindings(employee);
-			}
-
-		}
-
 	}
 
-	private void updateDetailBindings(Employee employee) {
-
-		// First name
-		ITextRidget firstName = getRidget(ITextRidget.class,
-				StaffInfoMasterDetailComposite.BIND_ID_FIRST_NAME);
-
-		// Last Name
-		ITextRidget lastNameText = getRidget(ITextRidget.class,
-				StaffInfoMasterDetailComposite.BIND_ID_LAST_NAME);
-
-		// Phone Number
-		ITextRidget phoneNoText = getRidget(ITextRidget.class,
-				StaffInfoMasterDetailComposite.BIND_ID_PHONE_NUM);
-
-		// Department
-		ITextRidget departText = getRidget(ITextRidget.class,
-				StaffInfoMasterDetailComposite.BIND_ID_DEPARTMENT);
-
-		// Address
-		ITextRidget addressText = getRidget(ITextRidget.class,
-				StaffInfoMasterDetailComposite.BIND_ID_DEPARTMENT);
-
-		if (employee == null) {
-			firstName.setText("");
-			lastNameText.setText("");
-			phoneNoText.setText("");
-			departText.setText("");
-			addressText.setText("");
-			return;
-		} else {
-			firstName.setDirectWriting(true);
-			firstName.bindToModel(EMFObservables.observeValue(employee,
-					ModelPackage.Literals.PERSON__GIVEN_NAME));
-			firstName.updateFromModel();
-			
-			lastNameText.setDirectWriting(true);
-			lastNameText.bindToModel(EMFObservables.observeValue(employee,
-					ModelPackage.Literals.PERSON__FAMILY_NAME));
-			lastNameText.updateFromModel();
-			
-			phoneNoText.setDirectWriting(true);
-			phoneNoText.bindToModel(EMFObservables.observeValue(employee,
-					ModelPackage.Literals.PARTY__PHONE_NUMBER));
-			phoneNoText.updateFromModel();
-			
-			departText.setDirectWriting(true);
-			departText.bindToModel(EMFObservables.observeValue(employee,
-					DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION));
-			departText.updateFromModel();
-			
-			addressText.setDirectWriting(true);
-			if (employee.getLocation() != null
-					&& employee.getLocation().getPostalLocation() != null) {
-				addressText.bindToModel(EMFObservables.observeValue(employee
-						.getLocation().getPostalLocation(),
-						ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
-				addressText.updateFromModel();
-			}
-		}
-
-	}
 }

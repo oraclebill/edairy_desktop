@@ -1,7 +1,5 @@
 package com.agritrace.edairy.setup.ui.controllers;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.CoreException;
 
 import com.agritrace.edairy.model.dairy.Employee;
@@ -17,8 +15,7 @@ import com.agritrace.edairy.setup.core.StaffInfoResourceManager;
 public class StaffInfoViewController extends CommonSubModuleViewController {
 
 	public static final String ID = StaffInfoViewController.class.getName();
-	private List<Employee> employees;
-
+	
 	public StaffInfoViewController() {
 		super();
 		initModel();

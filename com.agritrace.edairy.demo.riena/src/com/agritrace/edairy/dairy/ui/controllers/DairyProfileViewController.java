@@ -167,10 +167,10 @@ public class DairyProfileViewController extends SubModuleController {
 	super.addDefaultAction(focusRidget, action);
     }
 
-    @Override
-    public void setInitialFocus(IRidget ridget) {
-	// TODO Auto-generated method stub
-	super.setInitialFocus(ridget);
-    }
+//    @Override
+//    public void setInitialFocus(IRidget ridget) {
+//	// TODO Auto-generated method stub
+//	super.setInitialFocus(ridget);
+//    }
 
 }

@@ -42,12 +42,12 @@ public class StaffInfoView extends SubModuleView {
 				composite, SWT.NONE);
 
 		addUIControl(mdComposite, BIND_ID_MASTER);
-		this.addUIControl(mdComposite.getTable(),
-				AbstractMasterDetailsComposite.BIND_ID_TABLE);
-		for (Object control : mdComposite.getUIControls()) {
-			addUIControl(control, SWTBindingPropertyLocator.getInstance()
-					.locateBindingProperty(control));
-		}
+//		this.addUIControl(mdComposite.getTable(),
+//				AbstractMasterDetailsComposite.BIND_ID_TABLE);
+//		for (Object control : mdComposite.getUIControls()) {
+//			addUIControl(control, SWTBindingPropertyLocator.getInstance()
+//					.locateBindingProperty(control));
+//		}
 
 
 	}
