@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getDateOpened <em>Date Opened</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getPhone <em>Phone</em>}</li>
@@ -38,6 +39,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DairyLocation extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(long)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairyLocation_Id()
+	 * @model id="true"
+	 * @generated
+	 */
+	long getId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(long value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

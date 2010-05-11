@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getDateOpened <em>Date Opened</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.DairyLocationImpl#getPhone <em>Phone</em>}</li>
@@ -50,6 +51,26 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * @generated
  */
 public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -197,6 +218,27 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.DAIRY_LOCATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ID, oldId, id));
 	}
 
 	/**
@@ -419,6 +461,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_LOCATION__ID:
+				return getId();
 			case DairyPackage.DAIRY_LOCATION__NAME:
 				return getName();
 			case DairyPackage.DAIRY_LOCATION__DATE_OPENED:
@@ -449,6 +493,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_LOCATION__ID:
+				setId((Long)newValue);
+				return;
 			case DairyPackage.DAIRY_LOCATION__NAME:
 				setName((String)newValue);
 				return;
@@ -486,6 +533,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_LOCATION__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case DairyPackage.DAIRY_LOCATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -522,6 +572,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_LOCATION__ID:
+				return id != ID_EDEFAULT;
 			case DairyPackage.DAIRY_LOCATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DairyPackage.DAIRY_LOCATION__DATE_OPENED:
@@ -552,7 +604,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (Id: ");
+		result.append(id);
+		result.append(", name: ");
 		result.append(name);
 		result.append(", dateOpened: ");
 		result.append(dateOpened);

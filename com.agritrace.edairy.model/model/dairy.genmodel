@@ -46,8 +46,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/insuranceExpirationDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/dominantColour"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/capacityInTonnes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Vehicle/driver"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/year"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Vehicle/driver"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//CollectionJournalLine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/lineNumber"/>
@@ -73,6 +73,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nssfNumber"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//DairyLocation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/Id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/dateOpened"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/phone"/>
@@ -96,6 +97,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournal/recordTotal"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Route">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/Id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Route/stops"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/code"/>

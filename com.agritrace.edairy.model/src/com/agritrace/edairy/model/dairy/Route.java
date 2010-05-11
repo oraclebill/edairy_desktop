@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Route#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Route#getStops <em>Stops</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Route#getCode <em>Code</em>}</li>
@@ -30,6 +31,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Route extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(long)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getRoute_Id()
+	 * @model
+	 * @generated
+	 */
+	long getId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(long value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

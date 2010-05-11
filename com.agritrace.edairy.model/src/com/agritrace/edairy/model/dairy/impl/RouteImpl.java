@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.RouteImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.RouteImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.RouteImpl#getStops <em>Stops</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.RouteImpl#getCode <em>Code</em>}</li>
@@ -40,6 +42,26 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * @generated
  */
 public class RouteImpl extends EObjectImpl implements Route {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -134,6 +156,27 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
@@ -212,6 +255,8 @@ public class RouteImpl extends EObjectImpl implements Route {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.ROUTE__ID:
+				return getId();
 			case DairyPackage.ROUTE__NAME:
 				return getName();
 			case DairyPackage.ROUTE__STOPS:
@@ -233,6 +278,9 @@ public class RouteImpl extends EObjectImpl implements Route {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.ROUTE__ID:
+				setId((Long)newValue);
+				return;
 			case DairyPackage.ROUTE__NAME:
 				setName((String)newValue);
 				return;
@@ -258,6 +306,9 @@ public class RouteImpl extends EObjectImpl implements Route {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.ROUTE__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case DairyPackage.ROUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -282,6 +333,8 @@ public class RouteImpl extends EObjectImpl implements Route {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.ROUTE__ID:
+				return id != ID_EDEFAULT;
 			case DairyPackage.ROUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DairyPackage.ROUTE__STOPS:
@@ -304,7 +357,9 @@ public class RouteImpl extends EObjectImpl implements Route {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (Id: ");
+		result.append(id);
+		result.append(", name: ");
 		result.append(name);
 		result.append(", code: ");
 		result.append(code);
