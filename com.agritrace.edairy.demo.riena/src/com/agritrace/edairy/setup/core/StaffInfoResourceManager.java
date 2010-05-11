@@ -18,6 +18,7 @@ import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Employee;
+import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.ui.ResourceManager;
 
@@ -33,7 +34,7 @@ public class StaffInfoResourceManager {
 
 	private Resource staffInfoResource;
 
-	public static final String FILE_PATH = "c:/temp/eDairy/staffinfo.xml";
+	public static final String FILE_PATH = DairyDemoResourceManager.XMLDB_BASE + "staffinfo.xml";
 
 	private StaffInfoResourceManager() {
 
