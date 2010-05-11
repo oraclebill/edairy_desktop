@@ -582,7 +582,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairyLocation_Name() {
+	public EAttribute getDairyLocation_Id() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -591,7 +591,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairyLocation_DateOpened() {
+	public EAttribute getDairyLocation_Name() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -600,7 +600,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairyLocation_Phone() {
+	public EAttribute getDairyLocation_DateOpened() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -609,8 +609,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDairyLocation_Phone() {
+		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getDairyLocation_Route() {
-		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(3);
+		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -619,15 +628,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getDairyLocation_Description() {
-		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getDairyLocation_Code() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -636,8 +636,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDairyLocation_Code() {
+		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getDairyLocation_Location() {
-		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(6);
+		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -646,7 +655,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getDairyLocation_Functions() {
-		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -771,7 +780,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRoute_Name() {
+	public EAttribute getRoute_Id() {
 		return (EAttribute)routeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -780,8 +789,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRoute_Name() {
+		return (EAttribute)routeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getRoute_Stops() {
-		return (EReference)routeEClass.getEStructuralFeatures().get(1);
+		return (EReference)routeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -790,7 +808,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getRoute_Code() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)routeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -799,7 +817,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getRoute_Description() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)routeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1373,6 +1391,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__NSSF_NUMBER);
 
 		dairyLocationEClass = createEClass(DAIRY_LOCATION);
+		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__ID);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__NAME);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__DATE_OPENED);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__PHONE);
@@ -1396,6 +1415,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionJournalEClass, COLLECTION_JOURNAL__RECORD_TOTAL);
 
 		routeEClass = createEClass(ROUTE);
+		createEAttribute(routeEClass, ROUTE__ID);
 		createEAttribute(routeEClass, ROUTE__NAME);
 		createEReference(routeEClass, ROUTE__STOPS);
 		createEAttribute(routeEClass, ROUTE__CODE);
@@ -1551,6 +1571,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_NssfNumber(), ecorePackage.getEString(), "nssfNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyLocationEClass, DairyLocation.class, "DairyLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDairyLocation_Id(), ecorePackage.getELong(), "Id", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_Name(), ecorePackage.getEString(), "name", null, 1, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_DateOpened(), ecorePackage.getEDate(), "dateOpened", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_Phone(), ecorePackage.getEString(), "phone", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1574,6 +1595,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionJournal_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 1, 1, CollectionJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRoute_Id(), ecorePackage.getELong(), "Id", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRoute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Stops(), this.getDairyLocation(), null, "stops", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRoute_Code(), ecorePackage.getEString(), "code", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

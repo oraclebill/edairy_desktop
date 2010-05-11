@@ -718,13 +718,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_LOCATION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_LOCATION__ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__NAME = 0;
+	int DAIRY_LOCATION__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Date Opened</b></em>' attribute.
@@ -733,7 +742,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__DATE_OPENED = 1;
+	int DAIRY_LOCATION__DATE_OPENED = 2;
 
 	/**
 	 * The feature id for the '<em><b>Phone</b></em>' attribute.
@@ -742,7 +751,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__PHONE = 2;
+	int DAIRY_LOCATION__PHONE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Route</b></em>' reference.
@@ -751,7 +760,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__ROUTE = 3;
+	int DAIRY_LOCATION__ROUTE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -760,7 +769,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__DESCRIPTION = 4;
+	int DAIRY_LOCATION__DESCRIPTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -769,7 +778,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__CODE = 5;
+	int DAIRY_LOCATION__CODE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -778,7 +787,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__LOCATION = 6;
+	int DAIRY_LOCATION__LOCATION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Functions</b></em>' attribute list.
@@ -787,7 +796,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION__FUNCTIONS = 7;
+	int DAIRY_LOCATION__FUNCTIONS = 8;
 
 	/**
 	 * The number of structural features of the '<em>Location</em>' class.
@@ -796,7 +805,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION_FEATURE_COUNT = 8;
+	int DAIRY_LOCATION_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl <em>Collection Journal</em>}' class.
@@ -927,13 +936,22 @@ public interface DairyPackage extends EPackage {
 	int ROUTE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUTE__ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__NAME = 0;
+	int ROUTE__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Stops</b></em>' reference list.
@@ -942,7 +960,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__STOPS = 1;
+	int ROUTE__STOPS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -951,7 +969,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__CODE = 2;
+	int ROUTE__CODE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -960,7 +978,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__DESCRIPTION = 3;
+	int ROUTE__DESCRIPTION = 4;
 
 	/**
 	 * The number of structural features of the '<em>Route</em>' class.
@@ -969,7 +987,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE_FEATURE_COUNT = 4;
+	int ROUTE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.TripImpl <em>Trip</em>}' class.
@@ -2158,6 +2176,17 @@ public interface DairyPackage extends EPackage {
 	EClass getDairyLocation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.agritrace.edairy.model.dairy.DairyLocation#getId()
+	 * @see #getDairyLocation()
+	 * @generated
+	 */
+	EAttribute getDairyLocation_Id();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.DairyLocation#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2385,6 +2414,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRoute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Route#getId()
+	 * @see #getRoute()
+	 * @generated
+	 */
+	EAttribute getRoute_Id();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Route#getName <em>Name</em>}'.
@@ -3354,6 +3394,14 @@ public interface DairyPackage extends EPackage {
 		EClass DAIRY_LOCATION = eINSTANCE.getDairyLocation();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY_LOCATION__ID = eINSTANCE.getDairyLocation_Id();
+
+		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3524,6 +3572,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ROUTE = eINSTANCE.getRoute();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROUTE__ID = eINSTANCE.getRoute_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
