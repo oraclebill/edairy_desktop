@@ -39,25 +39,27 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 	public static final String ID = MilkCollectionJournalView.class.getName();
 
 
-	public static final String MILK_JOURNAL_BOOK_GROUP_TITLE="Journal Book";
+	public static final String MILK_JOURNAL_BOOK_GROUP_TITLE="Journal Book / Collection Details";
 
-	public static final String MILK_BOOK_GROUP_TITLE="Milk Journal Book";
+	public static final String MILK_BOOK_GROUP_TITLE="Journal Page";
 
-	public static final String MILK_ENTRY_GROUP_TITLE="Milk Collection Entry";
+	public static final String MILK_ENTRY_GROUP_TITLE="Add New Entry";
+	
+	public static final String MILK_ENTRY_LIST_GROUP_TITLE="Milk Collection Entries";
 
 	public static final String DATE_LABEL="Date:";
 
 	public static final String ROUTE_LABEL="Route:";
 
-	public static final String SECTION_LABEL="Section:";
+	public static final String SECTION_LABEL="Session:";
 
-	public static final String VEHICLE_LABEL="Vehicle:";
+	public static final String VEHICLE_LABEL="Truck:";
 
 	public static final String DRIVER_LABEL="Driver:";
 
-	public static final String JOURNAL_LABEL="Journal:";
+	public static final String JOURNAL_LABEL="Page Number:";
 
-	public static final String JOURNAL_TOTAL_LABEL="Journal Total:";
+	public static final String JOURNAL_TOTAL_LABEL="Page Total:";
 
 	public static final String BIN_LABEL="Bin :";
 
@@ -84,7 +86,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 	private Text dateText; 
 	private Button calendarButton;
 
-	public static final int MINIMUM_LABEL_WIDTH=65;
+	public static final int MINIMUM_LABEL_WIDTH=70;
 
 
 
@@ -293,7 +295,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 	//	}
 
 	private Group createMilkEntryGroup(Composite parent) {
-		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE); 
+		Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_LIST_GROUP_TITLE); 
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
 		Composite panel= UIControlsFactory.createComposite(group);
