@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="7.6.1" version="7.6.1" Modules="freeware" RootPath="." Language="en">
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="ALLUSERS" Value="2"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="BannerBitmap" MultiBuildValue="DefaultBuild:banner_image.jpg" Type="1"/>
+    <ROW Property="DialogBitmap" MultiBuildValue="DefaultBuild:dialog_image.jpg" Type="1"/>
+    <ROW Property="Manufacturer" Value="Agritrace Ltd." ValueLocId="*"/>
+    <ROW Property="ProductCode" Value="1033:{88973C65-8897-42DD-AEFA-0612573D07DD} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="eDairy Manager Desktop" ValueLocId="*"/>
+    <ROW Property="ProductVersion" Value="1.0"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{736849C9-FE90-4676-8BF0-9ABCF49EDA05}"/>
+    <ROW Property="WindowsFamily9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="META_INF_1_DIR" Directory_Parent="org.junit_3.8.2.v20090203_1005_DIR" DefaultDir="META-INF"/>
+    <ROW Directory="META_INF_DIR" Directory_Parent="org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307_DIR" DefaultDir="META-INF"/>
+    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="__1_DIR" Directory_Parent="__DIR" DefaultDir="1"/>
+    <ROW Directory="__2_DIR" Directory_Parent="bundles_DIR" DefaultDir="51"/>
+    <ROW Directory="__3_DIR" Directory_Parent="__2_DIR" DefaultDir="1"/>
+    <ROW Directory="__4_DIR" Directory_Parent="bundles_DIR" DefaultDir="54"/>
+    <ROW Directory="__5_DIR" Directory_Parent="__4_DIR" DefaultDir="1"/>
+    <ROW Directory="__6_DIR" Directory_Parent="bundles_DIR" DefaultDir="58"/>
+    <ROW Directory="__7_DIR" Directory_Parent="__6_DIR" DefaultDir="1"/>
+    <ROW Directory="__8_DIR" Directory_Parent="bundles_DIR" DefaultDir="59"/>
+    <ROW Directory="__9_DIR" Directory_Parent="__8_DIR" DefaultDir="1"/>
+    <ROW Directory="__DIR" Directory_Parent="bundles_DIR" DefaultDir="3"/>
+    <ROW Directory="about_files_DIR" Directory_Parent="org.junit_3.8.2.v20090203_1005_DIR" DefaultDir="about_~1|about_files"/>
+    <ROW Directory="binary_DIR" Directory_Parent="cache_DIR" DefaultDir="binary"/>
+    <ROW Directory="bundles_DIR" Directory_Parent="org.eclipse.osgi_DIR" DefaultDir="bundles"/>
+    <ROW Directory="cache_DIR" Directory_Parent="org.eclipse.equinox.p2.core_DIR" DefaultDir="cache"/>
+    <ROW Directory="configuration_DIR" Directory_Parent="APPDIR" DefaultDir="config~1|configuration"/>
+    <ROW Directory="cp_1_DIR" Directory_Parent="__3_DIR" DefaultDir="cp~1|.cp"/>
+    <ROW Directory="cp_2_DIR" Directory_Parent="__5_DIR" DefaultDir="cp~1|.cp"/>
+    <ROW Directory="cp_3_DIR" Directory_Parent="__7_DIR" DefaultDir="cp~1|.cp"/>
+    <ROW Directory="cp_4_DIR" Directory_Parent="__9_DIR" DefaultDir="cp~1|.cp"/>
+    <ROW Directory="cp_DIR" Directory_Parent="__1_DIR" DefaultDir="cp~1|.cp"/>
+    <ROW Directory="eview16_DIR" Directory_Parent="full_DIR" DefaultDir="eview16"/>
+    <ROW Directory="full_DIR" Directory_Parent="icons_2_DIR" DefaultDir="full"/>
+    <ROW Directory="icons_1_DIR" Directory_Parent="cp_2_DIR" DefaultDir="icons"/>
+    <ROW Directory="icons_2_DIR" Directory_Parent="cp_4_DIR" DefaultDir="icons"/>
+    <ROW Directory="icons_DIR" Directory_Parent="cp_DIR" DefaultDir="icons"/>
+    <ROW Directory="lib_DIR" Directory_Parent="cp_1_DIR" DefaultDir="lib"/>
+    <ROW Directory="manager_1_DIR" Directory_Parent="org.eclipse.equinox.app_DIR" DefaultDir="manage~1|.manager"/>
+    <ROW Directory="manager_2_DIR" Directory_Parent="org.eclipse.osgi_DIR" DefaultDir="manage~1|.manager"/>
+    <ROW Directory="manager_DIR" Directory_Parent="org.eclipse.core.runtime_DIR" DefaultDir="manage~1|.manager"/>
+    <ROW Directory="metadata_DIR" Directory_Parent="workspace_DIR" DefaultDir="metada~1|.metadata"/>
+    <ROW Directory="org.eclipse.core.runtime_1_DIR" Directory_Parent="plugins_1_DIR" DefaultDir="orgecl~1.run|org.eclipse.core.runtime"/>
+    <ROW Directory="org.eclipse.core.runtime_DIR" Directory_Parent="configuration_DIR" DefaultDir="orgecl~1.run|org.eclipse.core.runtime"/>
+    <ROW Directory="org.eclipse.equinox.app_DIR" Directory_Parent="configuration_DIR" DefaultDir="orgecl~1.app|org.eclipse.equinox.app"/>
+    <ROW Directory="org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307_DIR" Directory_Parent="plugins_DIR" DefaultDir="orgecl~1.v20|org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307"/>
+    <ROW Directory="org.eclipse.equinox.p2.core_DIR" Directory_Parent="p2_DIR" DefaultDir="orgecl~1.cor|org.eclipse.equinox.p2.core"/>
+    <ROW Directory="org.eclipse.equinox.p2.engine_DIR" Directory_Parent="p2_DIR" DefaultDir="orgecl~1.eng|org.eclipse.equinox.p2.engine"/>
+    <ROW Directory="org.eclipse.osgi_DIR" Directory_Parent="configuration_DIR" DefaultDir="orgecl~1.osg|org.eclipse.osgi"/>
+    <ROW Directory="org.eclipse.ui.workbench_DIR" Directory_Parent="plugins_1_DIR" DefaultDir="orgecl~1.wor|org.eclipse.ui.workbench"/>
+    <ROW Directory="org.junit_3.8.2.v20090203_1005_DIR" Directory_Parent="plugins_DIR" DefaultDir="orgjun~1.v20|org.junit_3.8.2.v20090203-1005"/>
+    <ROW Directory="p2_DIR" Directory_Parent="APPDIR" DefaultDir="p2"/>
+    <ROW Directory="plugins_1_DIR" Directory_Parent="metadata_DIR" DefaultDir="plugin~1|.plugins"/>
+    <ROW Directory="plugins_DIR" Directory_Parent="APPDIR" DefaultDir="plugins"/>
+    <ROW Directory="profile.profile_DIR" Directory_Parent="profileRegistry_DIR" DefaultDir="profil~1.pro|profile.profile"/>
+    <ROW Directory="profileRegistry_DIR" Directory_Parent="org.eclipse.equinox.p2.engine_DIR" DefaultDir="profil~1|profileRegistry"/>
+    <ROW Directory="resources_DIR" Directory_Parent="cp_DIR" DefaultDir="resour~1|resources"/>
+    <ROW Directory="settings_1_DIR" Directory_Parent="org.eclipse.core.runtime_1_DIR" DefaultDir="settin~1|.settings"/>
+    <ROW Directory="settings_DIR" Directory_Parent="org.eclipse.equinox.p2.engine_DIR" DefaultDir="settin~1|.settings"/>
+    <ROW Directory="workspace_DIR" Directory_Parent="APPDIR" DefaultDir="worksp~1|workspace"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="SHORTCUTDIR" ComponentId="{882DE3AD-2989-4FAD-A1BE-4603C6884AC8}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="about.html" ComponentId="{622AAC33-6AF1-4CBD-9A0C-B17F69E95540}" Directory_="org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307_DIR" Attributes="0" KeyPath="about.html" Type="0"/>
+    <ROW Component="about.html_1" ComponentId="{C98A63B5-B006-4AA4-AC11-DAB54F0960E3}" Directory_="org.junit_3.8.2.v20090203_1005_DIR" Attributes="0" KeyPath="about.html_1" Type="0"/>
+    <ROW Component="arrowDown.gif" ComponentId="{7DD4A1E3-E9E7-4758-84BB-DCD11099A323}" Directory_="icons_1_DIR" Attributes="0" KeyPath="arrowDown.gif" Type="0"/>
+    <ROW Component="arrow_right.png" ComponentId="{011F2499-9EC3-497F-804F-2C5BA6ADF0E1}" Directory_="icons_DIR" Attributes="0" KeyPath="arrow_right.png" Type="0"/>
+    <ROW Component="artifacts.xml" ComponentId="{24566753-08FF-4EB6-9A2C-F2C4C02077C9}" Directory_="APPDIR" Attributes="0" KeyPath="artifacts.xml" Type="0"/>
+    <ROW Component="artifacts.xml_1" ComponentId="{4C577E98-AB09-4C6B-9E90-89AB8484FCD4}" Directory_="cache_DIR" Attributes="0" KeyPath="artifacts.xml_1" Type="0"/>
+    <ROW Component="bundledata.2" ComponentId="{BC5CAAEA-B52A-413E-81E3-43B822754392}" Directory_="org.eclipse.osgi_DIR" Attributes="0" KeyPath="bundledata.2" Type="0"/>
+    <ROW Component="com.agritrace.edairy.demo.riena_1.0.0.20" ComponentId="{7F65BA00-509B-4F11-8145-ACA928F2A951}" Directory_="plugins_DIR" Attributes="0" KeyPath="com.agritrace.edairy.demo.riena_1.0.0.201004150357.jar" Type="0"/>
+    <ROW Component="com.agritrace.edairy.demo_root.win32.win" ComponentId="{48DC0DA3-8AB0-4D8E-8078-8C35757B533A}" Directory_="binary_DIR" Attributes="0" KeyPath="com.agritrace.edairy.demo_root.win32.win32.x86_0.0.3" Type="0"/>
+    <ROW Component="commons_validator_1.3.1.jar" ComponentId="{8F7EA689-A439-4E7A-9B3A-F4C8AE301E88}" Directory_="lib_DIR" Attributes="0" KeyPath="commons_validator_1.3.1.jar" Type="0"/>
+    <ROW Component="config.ini" ComponentId="{DCDCFB38-264B-4A5C-AFDC-CC63D6DD0575}" Directory_="configuration_DIR" Attributes="0" KeyPath="config.ini" Type="0"/>
+    <ROW Component="contributions.2" ComponentId="{DE73FC7F-B90E-4982-B985-C24186773374}" Directory_="org.eclipse.core.runtime_DIR" Attributes="0" KeyPath="contributions.2" Type="0"/>
+    <ROW Component="cpl_v10.html" ComponentId="{3CA18189-9F58-41D8-BC72-D63EE183723B}" Directory_="about_files_DIR" Attributes="0" KeyPath="cpl_v10.html" Type="0"/>
+    <ROW Component="defaultview_misc.gif" ComponentId="{7CFDFB13-8FBC-439F-8F81-1C774F1FA057}" Directory_="eview16_DIR" Attributes="0" KeyPath="defaultview_misc.gif" Type="0"/>
+    <ROW Component="dialog_settings.xml" ComponentId="{DFE83EEE-DCB5-4705-A679-25D3CE5B64B1}" Directory_="org.eclipse.ui.workbench_DIR" Attributes="0" KeyPath="dialog_settings.xml" Type="0"/>
+    <ROW Component="eclipse.inf" ComponentId="{8113353E-FB87-41B2-8BA7-08835ECE60EE}" Directory_="META_INF_DIR" Attributes="0" KeyPath="eclipse.inf" Type="0"/>
+    <ROW Component="eclipse.inf_1" ComponentId="{9AA34FFC-BF52-4FFA-931E-1D39497FA01A}" Directory_="META_INF_1_DIR" Attributes="0" KeyPath="eclipse.inf_1" Type="0"/>
+    <ROW Component="eclipse_1306.dll" ComponentId="{63C3141F-A326-49B9-8F67-F852F92DE8B8}" Directory_="org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307_DIR" Attributes="0" KeyPath="eclipse_1306.dll"/>
+    <ROW Component="edairydashboard.jpg" ComponentId="{E1EB66E0-CB90-4060-8082-13A4DA92C6D5}" Directory_="resources_DIR" Attributes="0" KeyPath="edairydashboard.jpg" Type="0"/>
+    <ROW Component="edairymgr.exe" ComponentId="{470CCB86-C7EE-413E-8691-4FCDFE6274B2}" Directory_="APPDIR" Attributes="0" KeyPath="edairymgr.exe"/>
+    <ROW Component="fileTable.6" ComponentId="{484DA2D2-D56A-4769-8884-0391EF493322}" Directory_="manager_2_DIR" Attributes="0" KeyPath="fileTable.6" Type="0"/>
+    <ROW Component="fileTable.8" ComponentId="{37EC926F-4AD8-4E17-9634-05074C47F8A1}" Directory_="manager_DIR" Attributes="0" KeyPath="fileTable.8" Type="0"/>
+    <ROW Component="fileTableLock" ComponentId="{A20FF891-BFF0-4669-9A44-91D706049F53}" Directory_="manager_1_DIR" Attributes="0" KeyPath="fileTableLock_1" Type="0"/>
+    <ROW Component="lock" ComponentId="{6049974A-B60E-48BA-9767-952D3BDE7868}" Directory_="profile.profile_DIR" Attributes="0" KeyPath="lock" Type="0"/>
+    <ROW Component="log" ComponentId="{A333CE05-A8D5-49DD-9463-B55F31F18572}" Directory_="metadata_DIR" Attributes="0" KeyPath="log" Type="0"/>
+    <ROW Component="org.eclipse.equinox.p2.artifact.reposito" ComponentId="{993908AD-5400-4406-974F-B1E0993A0FD8}" Directory_="settings_DIR" Attributes="0" KeyPath="org.eclipse.equinox.p2.artifact.repository.prefs" Type="0"/>
+    <ROW Component="org.eclipse.ui.prefs" ComponentId="{A7579113-4BB3-4ED3-AF78-F4C275B9771A}" Directory_="settings_1_DIR" Attributes="0" KeyPath="org.eclipse.ui.prefs" Type="0"/>
+    <ROW Component="swt_gdip_win32_3637.dll" ComponentId="{E7EA8B6D-AF86-4FFF-8BC6-9CC153EBB27F}" Directory_="cp_3_DIR" Attributes="0" KeyPath="swt_gdip_win32_3637.dll"/>
+    <ROW Component="swt_win32_3637.dll" ComponentId="{CF080D42-43F8-4A4C-AFE4-8573D52C2713}" Directory_="cp_3_DIR" Attributes="0" KeyPath="swt_win32_3637.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="artifacts.xml config.ini contributions.2 fileTable.8 fileTableLock bundledata.2 fileTable.6 arrow_right.png edairydashboard.jpg commons_validator_1.3.1.jar arrowDown.gif swt_gdip_win32_3637.dll swt_win32_3637.dll defaultview_misc.gif edairymgr.exe artifacts.xml_1 com.agritrace.edairy.demo_root.win32.win org.eclipse.equinox.p2.artifact.reposito lock com.agritrace.edairy.demo.riena_1.0.0.20 about.html eclipse_1306.dll eclipse.inf about.html_1 cpl_v10.html eclipse.inf_1 log org.eclipse.ui.prefs dialog_settings.xml SHORTCUTDIR"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="ECLIPSEF.RSA" Component_="eclipse.inf" FileName="ECLIPSEF.RSA" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\META-INF\ECLIPSEF.RSA" SelfReg="false" Sequence="93"/>
+    <ROW File="ECLIPSEF.RSA_1" Component_="eclipse.inf_1" FileName="ECLIPSEF.RSA" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\META-INF\ECLIPSEF.RSA" SelfReg="false" Sequence="136"/>
+    <ROW File="ECLIPSEF.SF" Component_="eclipse.inf" FileName="ECLIPSEF.SF" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\META-INF\ECLIPSEF.SF" SelfReg="false" Sequence="94"/>
+    <ROW File="ECLIPSEF.SF_1" Component_="eclipse.inf_1" FileName="ECLIPSEF.SF" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\META-INF\ECLIPSEF.SF" SelfReg="false" Sequence="137"/>
+    <ROW File="MANIFEST.MF" Component_="eclipse.inf" FileName="MANIFEST.MF" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\META-INF\MANIFEST.MF" SelfReg="false" Sequence="95"/>
+    <ROW File="MANIFEST.MF_1" Component_="eclipse.inf_1" FileName="MANIFEST.MF" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\META-INF\MANIFEST.MF" SelfReg="false" Sequence="138"/>
+    <ROW File="about.html" Component_="about.html" FileName="about~1.htm|about.html" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\about.html" SelfReg="false" Sequence="89"/>
+    <ROW File="about.html_1" Component_="about.html_1" FileName="about~1.htm|about.html" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\about.html" SelfReg="false" Sequence="132"/>
+    <ROW File="arrowDown.gif" Component_="arrowDown.gif" FileName="arrowD~1.gif|arrowDown.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\arrowDown.gif" SelfReg="false" Sequence="34"/>
+    <ROW File="arrowUp.gif" Component_="arrowDown.gif" FileName="arrowUp.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\arrowUp.gif" SelfReg="false" Sequence="35"/>
+    <ROW File="arrow_right.png" Component_="arrow_right.png" FileName="arrow_~1.png|arrow_right.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\arrow_right.png" SelfReg="false" Sequence="20"/>
+    <ROW File="artifacts.xml" Component_="artifacts.xml" FileName="artifa~1.xml|artifacts.xml" Attributes="0" SourcePath="..\product\artifacts.xml" SelfReg="false" Sequence="1"/>
+    <ROW File="artifacts.xml_1" Component_="artifacts.xml_1" FileName="artifa~1.xml|artifacts.xml" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.core\cache\artifacts.xml" SelfReg="false" Sequence="57"/>
+    <ROW File="bundledata.2" Component_="bundledata.2" FileName="bundle~1.2|.bundledata.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\.bundledata.2" SelfReg="false" Sequence="14"/>
+    <ROW File="closeModule.png" Component_="arrowDown.gif" FileName="closeM~1.png|closeModule.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\closeModule.png" SelfReg="false" Sequence="36"/>
+    <ROW File="com.agritrace.edairy.demo.riena_1.0.0.201004150357.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="comagr~1.jar|com.agritrace.edairy.demo.riena_1.0.0.201004150357.jar" Attributes="0" SourcePath="..\product\plugins\com.agritrace.edairy.demo.riena_1.0.0.201004150357.jar" SelfReg="false" Sequence="65"/>
+    <ROW File="com.agritrace.edairy.demo_root.win32.win32.x86_0.0.3" Component_="com.agritrace.edairy.demo_root.win32.win" FileName="comagr~1.3|com.agritrace.edairy.demo_root.win32.win32.x86_0.0.3" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.core\cache\binary\com.agritrace.edairy.demo_root.win32.win32.x86_0.0.3" SelfReg="false" Sequence="58"/>
+    <ROW File="com.caucho.hessian_3.2.0.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="comcau~1.jar|com.caucho.hessian_3.2.0.jar" Attributes="0" SourcePath="..\product\plugins\com.caucho.hessian_3.2.0.jar" SelfReg="false" Sequence="66"/>
+    <ROW File="com.ibm.icu_4.2.1.v20100212.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="comibm~1.jar|com.ibm.icu_4.2.1.v20100212.jar" Attributes="0" SourcePath="..\product\plugins\com.ibm.icu_4.2.1.v20100212.jar" SelfReg="false" Sequence="67"/>
+    <ROW File="commons_validator_1.3.1.jar" Component_="commons_validator_1.3.1.jar" FileName="common~1.jar|commons-validator-1.3.1.jar" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\51\1\.cp\lib\commons-validator-1.3.1.jar" SelfReg="false" Sequence="32"/>
+    <ROW File="config.ini" Component_="config.ini" FileName="config.ini" Attributes="0" SourcePath="..\product\configuration\config.ini" SelfReg="false" Sequence="2"/>
+    <ROW File="contributions.2" Component_="contributions.2" FileName="contri~1.2|.contributions.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.contributions.2" SelfReg="false" Sequence="3"/>
+    <ROW File="contributors.2" Component_="contributions.2" FileName="contri~2.2|.contributors.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.contributors.2" SelfReg="false" Sequence="4"/>
+    <ROW File="cow128.png" Component_="arrow_right.png" FileName="cow128.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\cow128.png" SelfReg="false" Sequence="21"/>
+    <ROW File="cow16.png" Component_="arrow_right.png" FileName="cow16.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\cow16.png" SelfReg="false" Sequence="22"/>
+    <ROW File="cow32.png" Component_="arrow_right.png" FileName="cow32.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\cow32.png" SelfReg="false" Sequence="23"/>
+    <ROW File="cow48.png" Component_="arrow_right.png" FileName="cow48.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\cow48.png" SelfReg="false" Sequence="24"/>
+    <ROW File="cow64.png" Component_="arrow_right.png" FileName="cow64.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\cow64.png" SelfReg="false" Sequence="25"/>
+    <ROW File="cpl_v10.html" Component_="cpl_v10.html" FileName="cpl-v1~1.htm|cpl-v10.html" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\about_files\cpl-v10.html" SelfReg="false" Sequence="133"/>
+    <ROW File="defaultview_misc.gif" Component_="defaultview_misc.gif" FileName="defaul~1.gif|defaultview_misc.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\59\1\.cp\icons\full\eview16\defaultview_misc.gif" SelfReg="false" Sequence="54"/>
+    <ROW File="dialog_settings.xml" Component_="dialog_settings.xml" FileName="dialog~1.xml|dialog_settings.xml" Attributes="0" SourcePath="..\product\workspace\.metadata\.plugins\org.eclipse.ui.workbench\dialog_settings.xml" SelfReg="false" Sequence="144"/>
+    <ROW File="eclipse.inf" Component_="eclipse.inf" FileName="eclipse.inf" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\META-INF\eclipse.inf" SelfReg="false" Sequence="92"/>
+    <ROW File="eclipse.inf_1" Component_="eclipse.inf_1" FileName="eclipse.inf" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\META-INF\eclipse.inf" SelfReg="false" Sequence="135"/>
+    <ROW File="eclipse_1306.dll" Component_="eclipse_1306.dll" FileName="eclips~1.dll|eclipse_1306.dll" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\eclipse_1306.dll" SelfReg="false" Sequence="90"/>
+    <ROW File="edairy_background.gif" Component_="edairydashboard.jpg" FileName="edairy~1.gif|edairy_background.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\resources\edairy_background.gif" SelfReg="false" Sequence="29"/>
+    <ROW File="edairy_logo.gif" Component_="edairydashboard.jpg" FileName="edairy~2.gif|edairy_logo.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\resources\edairy_logo.gif" SelfReg="false" Sequence="30"/>
+    <ROW File="edairydashboard.jpg" Component_="edairydashboard.jpg" FileName="edairy~1.jpg|edairydashboard.jpg" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\resources\edairydashboard.jpg" SelfReg="false" Sequence="28"/>
+    <ROW File="edairymanagericon16.png" Component_="arrow_right.png" FileName="edairy~1.png|edairymanagericon16.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\edairymanagericon16.png" SelfReg="false" Sequence="26"/>
+    <ROW File="edairymgr.exe" Component_="edairymgr.exe" FileName="edairy~1.exe|edairymgr.exe" Attributes="0" SourcePath="..\product\edairymgr.exe" SelfReg="false" Sequence="55"/>
+    <ROW File="edairymgr.ini" Component_="artifacts.xml" FileName="edairy~1.ini|edairymgr.ini" Attributes="0" SourcePath="..\product\edairymgr.ini" SelfReg="false" Sequence="56"/>
+    <ROW File="errorMarker.png" Component_="arrowDown.gif" FileName="errorM~1.png|errorMarker.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\errorMarker.png" SelfReg="false" Sequence="37"/>
+    <ROW File="extraData.2" Component_="contributions.2" FileName="extraD~1.2|.extraData.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.extraData.2" SelfReg="false" Sequence="5"/>
+    <ROW File="fileTable.6" Component_="fileTable.6" FileName="fileTa~1.6|.fileTable.6" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\.manager\.fileTable.6" SelfReg="false" Sequence="16"/>
+    <ROW File="fileTable.7" Component_="fileTable.6" FileName="fileTa~1.7|.fileTable.7" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\.manager\.fileTable.7" SelfReg="false" Sequence="17"/>
+    <ROW File="fileTable.8" Component_="fileTable.8" FileName="fileTa~1.8|.fileTable.8" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.manager\.fileTable.8" SelfReg="false" Sequence="7"/>
+    <ROW File="fileTable.9" Component_="fileTable.8" FileName="fileTa~1.9|.fileTable.9" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.manager\.fileTable.9" SelfReg="false" Sequence="8"/>
+    <ROW File="fileTableLock" Component_="fileTable.8" FileName="fileTa~1|.fileTableLock" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.manager\.fileTableLock" SelfReg="false" Sequence="9"/>
+    <ROW File="fileTableLock_1" Component_="fileTableLock" FileName="fileTa~1|.fileTableLock" Attributes="0" SourcePath="..\product\configuration\org.eclipse.equinox.app\.manager\.fileTableLock" SelfReg="false" Sequence="13"/>
+    <ROW File="fileTableLock_2" Component_="fileTable.6" FileName="fileTa~1|.fileTableLock" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\.manager\.fileTableLock" SelfReg="false" Sequence="18"/>
+    <ROW File="grabCorner.png" Component_="arrowDown.gif" FileName="grabCo~1.png|grabCorner.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\grabCorner.png" SelfReg="false" Sequence="38"/>
+    <ROW File="hand.gif" Component_="arrowDown.gif" FileName="hand.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\hand.gif" SelfReg="false" Sequence="39"/>
+    <ROW File="insp_sbook.gif" Component_="arrow_right.png" FileName="insp_s~1.gif|insp_sbook.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\icons\insp_sbook.gif" SelfReg="false" Sequence="27"/>
+    <ROW File="jakarta_oro_2.0.8.jar" Component_="commons_validator_1.3.1.jar" FileName="jakart~1.jar|jakarta-oro-2.0.8.jar" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\51\1\.cp\lib\jakarta-oro-2.0.8.jar" SelfReg="false" Sequence="33"/>
+    <ROW File="javax.servlet_2.5.0.v200910301333.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="javaxs~1.jar|javax.servlet_2.5.0.v200910301333.jar" Attributes="0" SourcePath="..\product\plugins\javax.servlet_2.5.0.v200910301333.jar" SelfReg="false" Sequence="68"/>
+    <ROW File="junit.jar" Component_="about.html_1" FileName="junit.jar" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\junit.jar" SelfReg="false" Sequence="134"/>
+    <ROW File="launcher.win32.win32.x86.properties" Component_="about.html" FileName="launch~1.pro|launcher.win32.win32.x86.properties" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100307\launcher.win32.win32.x86.properties" SelfReg="false" Sequence="91"/>
+    <ROW File="lazy.2" Component_="bundledata.2" FileName="lazy~1.2|.lazy.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\.lazy.2" SelfReg="false" Sequence="15"/>
+    <ROW File="lock" Component_="lock" FileName="lock~1|.lock" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.engine\profileRegistry\profile.profile\.lock" SelfReg="false" Sequence="60"/>
+    <ROW File="log" Component_="log" FileName="log~1|.log" Attributes="0" SourcePath="..\product\workspace\.metadata\.log" SelfReg="false" Sequence="141"/>
+    <ROW File="mainData.2" Component_="contributions.2" FileName="mainDa~1.2|.mainData.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.mainData.2" SelfReg="false" Sequence="6"/>
+    <ROW File="manager_small.png" Component_="edairydashboard.jpg" FileName="manage~1.png|manager-small.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\3\1\.cp\resources\manager-small.png" SelfReg="false" Sequence="31"/>
+    <ROW File="mb_close.gif" Component_="arrowDown.gif" FileName="mb_close.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_close.gif" SelfReg="false" Sequence="40"/>
+    <ROW File="mb_close_hover.gif" Component_="arrowDown.gif" FileName="mb_clo~1.gif|mb_close_hover.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_close_hover.gif" SelfReg="false" Sequence="41"/>
+    <ROW File="mb_close_hover_selected.gif" Component_="arrowDown.gif" FileName="mb_clo~2.gif|mb_close_hover_selected.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_close_hover_selected.gif" SelfReg="false" Sequence="42"/>
+    <ROW File="mb_max.gif" Component_="arrowDown.gif" FileName="mb_max.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_max.gif" SelfReg="false" Sequence="43"/>
+    <ROW File="mb_max_hover.gif" Component_="arrowDown.gif" FileName="mb_max~1.gif|mb_max_hover.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_max_hover.gif" SelfReg="false" Sequence="44"/>
+    <ROW File="mb_max_hover_selected.gif" Component_="arrowDown.gif" FileName="mb_max~2.gif|mb_max_hover_selected.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_max_hover_selected.gif" SelfReg="false" Sequence="45"/>
+    <ROW File="mb_min.gif" Component_="arrowDown.gif" FileName="mb_min.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_min.gif" SelfReg="false" Sequence="46"/>
+    <ROW File="mb_restore.gif" Component_="arrowDown.gif" FileName="mb_res~1.gif|mb_restore.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_restore.gif" SelfReg="false" Sequence="47"/>
+    <ROW File="mb_restore_hover.gif" Component_="arrowDown.gif" FileName="mb_res~2.gif|mb_restore_hover.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_restore_hover.gif" SelfReg="false" Sequence="48"/>
+    <ROW File="mb_restore_hover_selected.gif" Component_="arrowDown.gif" FileName="mb_res~3.gif|mb_restore_hover_selected.gif" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\mb_restore_hover_selected.gif" SelfReg="false" Sequence="49"/>
+    <ROW File="namespaces.2" Component_="contributions.2" FileName="namesp~1.2|.namespaces.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.namespaces.2" SelfReg="false" Sequence="10"/>
+    <ROW File="org.apache.commons.beanutils_1.7.0.v200902170505.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgapa~1.jar|org.apache.commons.beanutils_1.7.0.v200902170505.jar" Attributes="0" SourcePath="..\product\plugins\org.apache.commons.beanutils_1.7.0.v200902170505.jar" SelfReg="false" Sequence="69"/>
+    <ROW File="org.apache.commons.logging_1.0.4.v200904062259.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgapa~2.jar|org.apache.commons.logging_1.0.4.v200904062259.jar" Attributes="0" SourcePath="..\product\plugins\org.apache.commons.logging_1.0.4.v200904062259.jar" SelfReg="false" Sequence="70"/>
+    <ROW File="org.apache.log4j_1.2.13.v200903072027.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgapa~3.jar|org.apache.log4j_1.2.13.v200903072027.jar" Attributes="0" SourcePath="..\product\plugins\org.apache.log4j_1.2.13.v200903072027.jar" SelfReg="false" Sequence="71"/>
+    <ROW File="org.easymock_2.4.0.v20090202_0900.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgeas~1.jar|org.easymock_2.4.0.v20090202-0900.jar" Attributes="0" SourcePath="..\product\plugins\org.easymock_2.4.0.v20090202-0900.jar" SelfReg="false" Sequence="72"/>
+    <ROW File="org.eclipse.core.commands_3.6.0.I20100122_0800.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~1.jar|org.eclipse.core.commands_3.6.0.I20100122-0800.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.commands_3.6.0.I20100122-0800.jar" SelfReg="false" Sequence="73"/>
+    <ROW File="org.eclipse.core.contenttype_3.4.100.v20100301.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~2.jar|org.eclipse.core.contenttype_3.4.100.v20100301.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.contenttype_3.4.100.v20100301.jar" SelfReg="false" Sequence="74"/>
+    <ROW File="org.eclipse.core.databinding.beans_1.2.100.I20100310_1300.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~3.jar|org.eclipse.core.databinding.beans_1.2.100.I20100310-1300.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.databinding.beans_1.2.100.I20100310-1300.jar" SelfReg="false" Sequence="75"/>
+    <ROW File="org.eclipse.core.databinding.observable_1.3.0.I20100310_1300.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~4.jar|org.eclipse.core.databinding.observable_1.3.0.I20100310-1300.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.databinding.observable_1.3.0.I20100310-1300.jar" SelfReg="false" Sequence="76"/>
+    <ROW File="org.eclipse.core.databinding.property_1.3.0.I20100310_1300.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~5.jar|org.eclipse.core.databinding.property_1.3.0.I20100310-1300.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.databinding.property_1.3.0.I20100310-1300.jar" SelfReg="false" Sequence="77"/>
+    <ROW File="org.eclipse.core.databinding_1.3.100.I20100310_1300.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~6.jar|org.eclipse.core.databinding_1.3.100.I20100310-1300.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.databinding_1.3.100.I20100310-1300.jar" SelfReg="false" Sequence="78"/>
+    <ROW File="org.eclipse.core.expressions_3.4.200.v20100222.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~7.jar|org.eclipse.core.expressions_3.4.200.v20100222.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.expressions_3.4.200.v20100222.jar" SelfReg="false" Sequence="79"/>
+    <ROW File="org.eclipse.core.jobs_3.5.0.v20100304.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~8.jar|org.eclipse.core.jobs_3.5.0.v20100304.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.jobs_3.5.0.v20100304.jar" SelfReg="false" Sequence="80"/>
+    <ROW File="org.eclipse.core.net.win32.x86_1.0.0.I20080909.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgecl~9.jar|org.eclipse.core.net.win32.x86_1.0.0.I20080909.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.net.win32.x86_1.0.0.I20080909.jar" SelfReg="false" Sequence="81"/>
+    <ROW File="org.eclipse.core.net_1.2.100.I20091117_0800.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~10.jar|org.eclipse.core.net_1.2.100.I20091117-0800.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.net_1.2.100.I20091117-0800.jar" SelfReg="false" Sequence="82"/>
+    <ROW File="org.eclipse.core.runtime.compatibility.auth_3.2.100.v20090413.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~11.jar|org.eclipse.core.runtime.compatibility.auth_3.2.100.v20090413.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.runtime.compatibility.auth_3.2.100.v20090413.jar" SelfReg="false" Sequence="83"/>
+    <ROW File="org.eclipse.core.runtime_3.6.0.v20091204.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~12.jar|org.eclipse.core.runtime_3.6.0.v20091204.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.runtime_3.6.0.v20091204.jar" SelfReg="false" Sequence="84"/>
+    <ROW File="org.eclipse.core.variables_3.2.300.v20090911.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~13.jar|org.eclipse.core.variables_3.2.300.v20090911.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.core.variables_3.2.300.v20090911.jar" SelfReg="false" Sequence="85"/>
+    <ROW File="org.eclipse.equinox.app_1.3.0.v20100304.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~14.jar|org.eclipse.equinox.app_1.3.0.v20100304.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.app_1.3.0.v20100304.jar" SelfReg="false" Sequence="86"/>
+    <ROW File="org.eclipse.equinox.common_3.6.0.v20100222.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~15.jar|org.eclipse.equinox.common_3.6.0.v20100222.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.common_3.6.0.v20100222.jar" SelfReg="false" Sequence="87"/>
+    <ROW File="org.eclipse.equinox.http.registry_1.1.0.v20100307.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~16.jar|org.eclipse.equinox.http.registry_1.1.0.v20100307.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.http.registry_1.1.0.v20100307.jar" SelfReg="false" Sequence="88"/>
+    <ROW File="org.eclipse.equinox.launcher_1.1.0.v20100307.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~17.jar|org.eclipse.equinox.launcher_1.1.0.v20100307.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.launcher_1.1.0.v20100307.jar" SelfReg="false" Sequence="96"/>
+    <ROW File="org.eclipse.equinox.log_1.2.100.v20100118.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~18.jar|org.eclipse.equinox.log_1.2.100.v20100118.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.log_1.2.100.v20100118.jar" SelfReg="false" Sequence="97"/>
+    <ROW File="org.eclipse.equinox.p2.artifact.repository.prefs" Component_="org.eclipse.equinox.p2.artifact.reposito" FileName="orgecl~1.pre|org.eclipse.equinox.p2.artifact.repository.prefs" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.engine\.settings\org.eclipse.equinox.p2.artifact.repository.prefs" SelfReg="false" Sequence="59"/>
+    <ROW File="org.eclipse.equinox.preferences_3.3.0.v20100307.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~19.jar|org.eclipse.equinox.preferences_3.3.0.v20100307.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.preferences_3.3.0.v20100307.jar" SelfReg="false" Sequence="98"/>
+    <ROW File="org.eclipse.equinox.registry_3.5.0.v20100301.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~20.jar|org.eclipse.equinox.registry_3.5.0.v20100301.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.registry_3.5.0.v20100301.jar" SelfReg="false" Sequence="99"/>
+    <ROW File="org.eclipse.equinox.security.win32.x86_1.0.100.v20090520_1800.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~21.jar|org.eclipse.equinox.security.win32.x86_1.0.100.v20090520-1800.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.security.win32.x86_1.0.100.v20090520-1800.jar" SelfReg="false" Sequence="100"/>
+    <ROW File="org.eclipse.equinox.security_1.0.200.v20100301.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~22.jar|org.eclipse.equinox.security_1.0.200.v20100301.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.security_1.0.200.v20100301.jar" SelfReg="false" Sequence="101"/>
+    <ROW File="org.eclipse.equinox.servletbridge.extensionbundle_1.2.0.v20100111.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~23.jar|org.eclipse.equinox.servletbridge.extensionbundle_1.2.0.v20100111.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.servletbridge.extensionbundle_1.2.0.v20100111.jar" SelfReg="false" Sequence="102"/>
+    <ROW File="org.eclipse.equinox.transforms.hook_1.0.200.v20100118.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~24.jar|org.eclipse.equinox.transforms.hook_1.0.200.v20100118.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.equinox.transforms.hook_1.0.200.v20100118.jar" SelfReg="false" Sequence="103"/>
+    <ROW File="org.eclipse.help_3.5.0.v20100304.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~25.jar|org.eclipse.help_3.5.0.v20100304.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.help_3.5.0.v20100304.jar" SelfReg="false" Sequence="104"/>
+    <ROW File="org.eclipse.jface.databinding_1.4.0.I20100310_1300.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~26.jar|org.eclipse.jface.databinding_1.4.0.I20100310-1300.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.jface.databinding_1.4.0.I20100310-1300.jar" SelfReg="false" Sequence="105"/>
+    <ROW File="org.eclipse.jface_3.6.0.I20100305_0800.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~27.jar|org.eclipse.jface_3.6.0.I20100305-0800.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.jface_3.6.0.I20100305-0800.jar" SelfReg="false" Sequence="106"/>
+    <ROW File="org.eclipse.nebula.widgets.compositetable_1.0.0.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~28.jar|org.eclipse.nebula.widgets.compositetable_1.0.0.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.nebula.widgets.compositetable_1.0.0.jar" SelfReg="false" Sequence="107"/>
+    <ROW File="org.eclipse.osgi.services_3.2.100.v20100108.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~29.jar|org.eclipse.osgi.services_3.2.100.v20100108.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.osgi.services_3.2.100.v20100108.jar" SelfReg="false" Sequence="108"/>
+    <ROW File="org.eclipse.osgi_3.6.0.v20100301.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~30.jar|org.eclipse.osgi_3.6.0.v20100301.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.osgi_3.6.0.v20100301.jar" SelfReg="false" Sequence="109"/>
+    <ROW File="org.eclipse.riena.beans.common_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~31.jar|org.eclipse.riena.beans.common_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.beans.common_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="110"/>
+    <ROW File="org.eclipse.riena.client_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~32.jar|org.eclipse.riena.client_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.client_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="111"/>
+    <ROW File="org.eclipse.riena.communication.console_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~33.jar|org.eclipse.riena.communication.console_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.communication.console_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="112"/>
+    <ROW File="org.eclipse.riena.communication.core_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~34.jar|org.eclipse.riena.communication.core_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.communication.core_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="113"/>
+    <ROW File="org.eclipse.riena.communication.factory.hessian_2.0.0.v20100316_2_0_0" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~35.jar|org.eclipse.riena.communication.factory.hessian_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.communication.factory.hessian_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="114"/>
+    <ROW File="org.eclipse.riena.core_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~36.jar|org.eclipse.riena.core_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.core_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="115"/>
+    <ROW File="org.eclipse.riena.navigation.ui.swt_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~37.jar|org.eclipse.riena.navigation.ui.swt_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.navigation.ui.swt_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="116"/>
+    <ROW File="org.eclipse.riena.navigation.ui_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~38.jar|org.eclipse.riena.navigation.ui_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.navigation.ui_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="117"/>
+    <ROW File="org.eclipse.riena.navigation_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~39.jar|org.eclipse.riena.navigation_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.navigation_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="118"/>
+    <ROW File="org.eclipse.riena.ui.common_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~40.jar|org.eclipse.riena.ui.common_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.common_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="119"/>
+    <ROW File="org.eclipse.riena.ui.core_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~41.jar|org.eclipse.riena.ui.core_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.core_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="120"/>
+    <ROW File="org.eclipse.riena.ui.filter_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~42.jar|org.eclipse.riena.ui.filter_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.filter_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="121"/>
+    <ROW File="org.eclipse.riena.ui.ridgets.swt.optional_2.0.0.v20100316_2_0_0_M6.ja" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~43.jar|org.eclipse.riena.ui.ridgets.swt.optional_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.ridgets.swt.optional_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="122"/>
+    <ROW File="org.eclipse.riena.ui.ridgets.swt_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~44.jar|org.eclipse.riena.ui.ridgets.swt_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.ridgets.swt_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="123"/>
+    <ROW File="org.eclipse.riena.ui.ridgets_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~45.jar|org.eclipse.riena.ui.ridgets_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.ridgets_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="124"/>
+    <ROW File="org.eclipse.riena.ui.swt.rcp_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~46.jar|org.eclipse.riena.ui.swt.rcp_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.swt.rcp_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="125"/>
+    <ROW File="org.eclipse.riena.ui.swt_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~47.jar|org.eclipse.riena.ui.swt_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.swt_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="126"/>
+    <ROW File="org.eclipse.riena.ui.workarea_2.0.0.v20100316_2_0_0_M6.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~48.jar|org.eclipse.riena.ui.workarea_2.0.0.v20100316_2_0_0_M6.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.riena.ui.workarea_2.0.0.v20100316_2_0_0_M6.jar" SelfReg="false" Sequence="127"/>
+    <ROW File="org.eclipse.swt.win32.win32.x86_3.6.0.v3637e.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~49.jar|org.eclipse.swt.win32.win32.x86_3.6.0.v3637e.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.swt.win32.win32.x86_3.6.0.v3637e.jar" SelfReg="false" Sequence="128"/>
+    <ROW File="org.eclipse.swt_3.6.0.v3637e.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~50.jar|org.eclipse.swt_3.6.0.v3637e.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.swt_3.6.0.v3637e.jar" SelfReg="false" Sequence="129"/>
+    <ROW File="org.eclipse.ui.prefs" Component_="org.eclipse.ui.prefs" FileName="orgecl~1.pre|org.eclipse.ui.prefs" Attributes="0" SourcePath="..\product\workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ui.prefs" SelfReg="false" Sequence="142"/>
+    <ROW File="org.eclipse.ui.workbench.prefs" Component_="org.eclipse.ui.prefs" FileName="orgecl~2.pre|org.eclipse.ui.workbench.prefs" Attributes="0" SourcePath="..\product\workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ui.workbench.prefs" SelfReg="false" Sequence="143"/>
+    <ROW File="org.eclipse.ui.workbench_3.6.0.I20100310_1300b.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~51.jar|org.eclipse.ui.workbench_3.6.0.I20100310-1300b.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.ui.workbench_3.6.0.I20100310-1300b.jar" SelfReg="false" Sequence="130"/>
+    <ROW File="org.eclipse.ui_3.6.0.I20100311_1200.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgec~52.jar|org.eclipse.ui_3.6.0.I20100311-1200.jar" Attributes="0" SourcePath="..\product\plugins\org.eclipse.ui_3.6.0.I20100311-1200.jar" SelfReg="false" Sequence="131"/>
+    <ROW File="org.pushingpixels.trident_1.2.0.v20100204_1500.jar" Component_="com.agritrace.edairy.demo.riena_1.0.0.20" FileName="orgpus~1.jar|org.pushingpixels.trident_1.2.0.v20100204-1500.jar" Attributes="0" SourcePath="..\product\plugins\org.pushingpixels.trident_1.2.0.v20100204-1500.jar" SelfReg="false" Sequence="140"/>
+    <ROW File="orphans.2" Component_="contributions.2" FileName="orphan~1.2|.orphans.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.orphans.2" SelfReg="false" Sequence="11"/>
+    <ROW File="plugin.properties" Component_="about.html_1" FileName="plugin~1.pro|plugin.properties" Attributes="0" SourcePath="..\product\plugins\org.junit_3.8.2.v20090203-1005\plugin.properties" SelfReg="false" Sequence="139"/>
+    <ROW File="profile.gz" Component_="lock" FileName="127131~1.gz|1271318281971.profile.gz" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.engine\profileRegistry\profile.profile\1271318281971.profile.gz" SelfReg="false" Sequence="61"/>
+    <ROW File="profile.gz_1" Component_="lock" FileName="127131~2.gz|1271318282034.profile.gz" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.engine\profileRegistry\profile.profile\1271318282034.profile.gz" SelfReg="false" Sequence="62"/>
+    <ROW File="profile.gz_2" Component_="lock" FileName="127131~3.gz|1271318290534.profile.gz" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.engine\profileRegistry\profile.profile\1271318290534.profile.gz" SelfReg="false" Sequence="63"/>
+    <ROW File="profile.gz_3" Component_="lock" FileName="127131~4.gz|1271318290761.profile.gz" Attributes="0" SourcePath="..\product\p2\org.eclipse.equinox.p2.engine\profileRegistry\profile.profile\1271318290761.profile.gz" SelfReg="false" Sequence="64"/>
+    <ROW File="spacer.png" Component_="arrowDown.gif" FileName="spacer.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\spacer.png" SelfReg="false" Sequence="50"/>
+    <ROW File="state.2" Component_="bundledata.2" FileName="state~1.2|.state.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\.state.2" SelfReg="false" Sequence="19"/>
+    <ROW File="swt_gdip_win32_3637.dll" Component_="swt_gdip_win32_3637.dll" FileName="swt-gd~1.dll|swt-gdip-win32-3637.dll" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\58\1\.cp\swt-gdip-win32-3637.dll" SelfReg="false" Sequence="52"/>
+    <ROW File="swt_win32_3637.dll" Component_="swt_win32_3637.dll" FileName="swt-wi~1.dll|swt-win32-3637.dll" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\58\1\.cp\swt-win32-3637.dll" SelfReg="false" Sequence="53"/>
+    <ROW File="table.2" Component_="contributions.2" FileName="table~1.2|.table.2" Attributes="0" SourcePath="..\product\configuration\org.eclipse.core.runtime\.table.2" SelfReg="false" Sequence="12"/>
+    <ROW File="uiProcess.png" Component_="arrowDown.gif" FileName="uiProc~1.png|uiProcess.png" Attributes="0" SourcePath="..\product\configuration\org.eclipse.osgi\bundles\54\1\.cp\icons\uiProcess.png" SelfReg="false" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="." PackageFileName="setup" Languages="en" InstallationType="4"/>
+    <ATTRIBUTE name="CurrentBuild" value="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+    <ROW Name="banner_image.jpg" SourcePath="&lt;AI_THEMES&gt;classic\resources\banner-image.jpg"/>
+    <ROW Name="dialog_image.jpg" SourcePath="&lt;AI_THEMES&gt;classic\resources\dialog-image.jpg"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
+    <ATTRIBUTE name="FixedSizeBitmaps" value="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="3"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="2"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="3"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="Not Installed" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsFamily9X]" DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="edairymgr.exe" Directory_="SHORTCUTDIR" Name="edairy~1.exe|edairymgr.exe" Component_="edairymgr.exe" Target="[#edairymgr.exe]" Description="edairymgr.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="edairymgr.exe_1" Directory_="DesktopFolder" Name="edairy~1.exe|edairymgr.exe" Component_="edairymgr.exe" Target="[#edairymgr.exe]" Description="edairymgr.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMax="[|ProductVersion]" Attributes="1025" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+</DOCUMENT>
