@@ -1,11 +1,14 @@
 package com.agritrace.edairy.dairy.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -25,6 +28,7 @@ import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.databinding.ConverterFactory;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
@@ -238,9 +242,31 @@ public class DairyLocationController extends SubModuleController {
 	        
 	        routeCombo = container.getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 			RouteService rs = new RouteService();
-			routeCombo.bindToModel(rs, "routes", Route.class, "getName", this.workingCopy, "route");
+			//IObservableList selectValues = new WritableList( Arrays.asList(rs.getRoutes()), Route.class ) ;
+			/*WritableList values = new WritableList(rs.getRoutes(), Route.class);
+			WritableValue selection = new WritableValue(workingCopy.getRoute(), Route.class);
+
+			ConverterFactory<Route, String> factory = new ConverterFactory<Route, String>(Route.class, String.class);
+			for (Route r : rs.getRoutes()) {
+				factory.add(r, r.getName());
+			}
+			
+			routeCombo.setModelToUIControlConverter(factory.createFromToConverter());
+			routeCombo.setUIControlToModelConverter(factory.createToFromConverter());
+			routeCombo.bindToModel(values, Route.class, null, selection);
+			routeCombo.updateFromModel();*/
+
+			//routeCombo.bindToModel(new WritableList(rs.getRoutes(), Route.class), Route.class, "getName", new WritableValue());
+			
+			routeCombo.bindToModel(rs, "names", String.class, null, this.workingCopy.getRoute(), "name");
 			routeCombo.updateFromModel();
-			routeCombo.setSelection(this.workingCopy.getRoute());
+			//routeCombo.updateFromModel();
+			/*routeCombo.addPropertyChangeListener(new PropertyChangeListener() {
+				public void propertyChange(PropertyChangeEvent evt) {
+					evt.getNewValue()
+				}
+			});*/
+			//routeCombo.setSelection(this.workingCopy.getRoute());
 
 			
 			final IActionRidget addRouteAction = container.getRidget(IActionRidget.class, RIDGET_ID_ADD_ROUTE_ACTION);
@@ -267,12 +293,20 @@ public class DairyLocationController extends SubModuleController {
 		}
 
 		@Override
+		public void updateDetails(IRidgetContainer container) {
+			// TODO Auto-generated method stub
+			super.updateDetails(container);
+		}
+
+		@Override
 		public DairyLocation createWorkingCopy() {
 			DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
 			
 			
 			Route route = DairyFactory.eINSTANCE.createRoute();
 			dairyLocation.setRoute(route);
+			dairyLocation.getRoute().setName("");
+			
 			Location location = ModelFactoryImpl.eINSTANCE.createLocation();
 
 			PostalLocation postalLocation = ModelFactory.eINSTANCE.createPostalLocation();
@@ -554,6 +588,25 @@ public class DairyLocationController extends SubModuleController {
 				e.printStackTrace();
 				routes = new ArrayList<Route>();
 			}
+		}
+		
+		public Route findByName(String name) {
+			getRoutes();
+			for (Route r : routes) {
+				if (r.getName().equals(name)) {
+					return r;
+				}
+			}
+			return null;
+		}
+		
+		public List<String> getNames() {
+			getRoutes();
+			List<String> ret= new ArrayList<String>();
+			for (Route r : routes) {
+				ret.add(r.getName());
+			}
+			return ret;
 		}
 	}
 	
