@@ -26,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DeliveryJournal extends EObject {
 	/**
-         * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Reference Number</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Reference Number</em>' attribute.
-         * @see #setReferenceNumber(String)
-         * @see com.agritrace.edairy.model.dairy.DairyPackage#getDeliveryJournal_ReferenceNumber()
-         * @model
-         * @generated
-         */
+	 * @return the value of the '<em>Reference Number</em>' attribute.
+	 * @see #setReferenceNumber(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDeliveryJournal_ReferenceNumber()
+	 * @model
+	 * @generated
+	 */
 	String getReferenceNumber();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DeliveryJournal#getReferenceNumber <em>Reference Number</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DeliveryJournal#getReferenceNumber <em>Reference Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Reference Number</em>' attribute.
-         * @see #getReferenceNumber()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Reference Number</em>' attribute.
+	 * @see #getReferenceNumber()
+	 * @generated
+	 */
 	void setReferenceNumber(String value);
 
 } // DeliveryJournal

@@ -34,188 +34,188 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AccountTransaction extends EObject {
 	/**
-         * Returns the value of the '<em><b>Transaction Id</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Transaction Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transaction Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Transaction Id</em>' attribute.
-         * @see #setTransactionId(long)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_TransactionId()
-         * @model required="true"
-         * @generated
-         */
+	 * @return the value of the '<em>Transaction Id</em>' attribute.
+	 * @see #setTransactionId(long)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_TransactionId()
+	 * @model required="true"
+	 * @generated
+	 */
 	long getTransactionId();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getTransactionId <em>Transaction Id</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getTransactionId <em>Transaction Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Transaction Id</em>' attribute.
-         * @see #getTransactionId()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Transaction Id</em>' attribute.
+	 * @see #getTransactionId()
+	 * @generated
+	 */
 	void setTransactionId(long value);
 
 	/**
-         * Returns the value of the '<em><b>Account</b></em>' reference.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Account</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Account</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Account</em>' reference.
-         * @see #setAccount(Account)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Account()
-         * @model required="true"
-         * @generated
-         */
+	 * @return the value of the '<em>Account</em>' reference.
+	 * @see #setAccount(Account)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Account()
+	 * @model required="true"
+	 * @generated
+	 */
 	Account getAccount();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}' reference.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Account</em>' reference.
-         * @see #getAccount()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Account</em>' reference.
+	 * @see #getAccount()
+	 * @generated
+	 */
 	void setAccount(Account value);
 
 	/**
-         * Returns the value of the '<em><b>Transaction Type</b></em>' attribute.
-         * The literals are from the enumeration {@link com.agritrace.edairy.model.dairy.account.TransactionType}.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Transaction Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.model.dairy.account.TransactionType}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transaction Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Transaction Type</em>' attribute.
-         * @see com.agritrace.edairy.model.dairy.account.TransactionType
-         * @see #setTransactionType(TransactionType)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_TransactionType()
-         * @model required="true"
-         * @generated
-         */
+	 * @return the value of the '<em>Transaction Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.dairy.account.TransactionType
+	 * @see #setTransactionType(TransactionType)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_TransactionType()
+	 * @model required="true"
+	 * @generated
+	 */
 	TransactionType getTransactionType();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getTransactionType <em>Transaction Type</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getTransactionType <em>Transaction Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Transaction Type</em>' attribute.
-         * @see com.agritrace.edairy.model.dairy.account.TransactionType
-         * @see #getTransactionType()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Transaction Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.dairy.account.TransactionType
+	 * @see #getTransactionType()
+	 * @generated
+	 */
 	void setTransactionType(TransactionType value);
 
 	/**
-         * Returns the value of the '<em><b>Soure</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Soure</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Soure</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Soure</em>' attribute.
-         * @see #setSoure(String)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Soure()
-         * @model
-         * @generated
-         */
+	 * @return the value of the '<em>Soure</em>' attribute.
+	 * @see #setSoure(String)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Soure()
+	 * @model
+	 * @generated
+	 */
 	String getSoure();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getSoure <em>Soure</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getSoure <em>Soure</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Soure</em>' attribute.
-         * @see #getSoure()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Soure</em>' attribute.
+	 * @see #getSoure()
+	 * @generated
+	 */
 	void setSoure(String value);
 
 	/**
-         * Returns the value of the '<em><b>Amount</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Amount</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Amount</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Amount</em>' attribute.
-         * @see #setAmount(double)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Amount()
-         * @model
-         * @generated
-         */
+	 * @return the value of the '<em>Amount</em>' attribute.
+	 * @see #setAmount(double)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Amount()
+	 * @model
+	 * @generated
+	 */
 	double getAmount();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getAmount <em>Amount</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getAmount <em>Amount</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Amount</em>' attribute.
-         * @see #getAmount()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Amount</em>' attribute.
+	 * @see #getAmount()
+	 * @generated
+	 */
 	void setAmount(double value);
 
 	/**
-         * Returns the value of the '<em><b>Description</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Description</em>' attribute.
-         * @see #setDescription(String)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Description()
-         * @model
-         * @generated
-         */
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_Description()
+	 * @model
+	 * @generated
+	 */
 	String getDescription();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getDescription <em>Description</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Description</em>' attribute.
-         * @see #getDescription()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
 	void setDescription(String value);
 
 	/**
-         * Returns the value of the '<em><b>Transaction Date</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Transaction Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transaction Date</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Transaction Date</em>' attribute.
-         * @see #setTransactionDate(Date)
-         * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_TransactionDate()
-         * @model required="true"
-         * @generated
-         */
+	 * @return the value of the '<em>Transaction Date</em>' attribute.
+	 * @see #setTransactionDate(Date)
+	 * @see com.agritrace.edairy.model.dairy.account.AccountPackage#getAccountTransaction_TransactionDate()
+	 * @model required="true"
+	 * @generated
+	 */
 	Date getTransactionDate();
 
 	/**
-         * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getTransactionDate <em>Transaction Date</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.account.AccountTransaction#getTransactionDate <em>Transaction Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Transaction Date</em>' attribute.
-         * @see #getTransactionDate()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Transaction Date</em>' attribute.
+	 * @see #getTransactionDate()
+	 * @generated
+	 */
 	void setTransactionDate(Date value);
 
 } // AccountTransaction

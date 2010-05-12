@@ -12,7 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
         eType="#//ContactMethod" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="" derived="true"/>
+        volatile="true" transient="true" defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MapLocation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" lowerBound="1"

@@ -43,257 +43,257 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class TripImpl extends EObjectImpl implements Trip {
 	/**
-         * The cached value of the '{@link #getCollections() <em>Collections</em>}' reference list.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getCollections() <em>Collections</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getCollections()
-         * @generated
-         * @ordered
-         */
+	 * @see #getCollections()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<CollectionJournal> collections;
 
 	/**
-         * The cached value of the '{@link #getDeliveries() <em>Deliveries</em>}' reference list.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDeliveries() <em>Deliveries</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getDeliveries()
-         * @generated
-         * @ordered
-         */
+	 * @see #getDeliveries()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<DeliveryJournal> deliveries;
 
 	/**
-         * The default value of the '{@link #getStarted() <em>Started</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getStarted() <em>Started</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getStarted()
-         * @generated
-         * @ordered
-         */
+	 * @see #getStarted()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Date STARTED_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getStarted() <em>Started</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getStarted() <em>Started</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getStarted()
-         * @generated
-         * @ordered
-         */
+	 * @see #getStarted()
+	 * @generated
+	 * @ordered
+	 */
 	protected Date started = STARTED_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getEnded() <em>Ended</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getEnded() <em>Ended</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getEnded()
-         * @generated
-         * @ordered
-         */
+	 * @see #getEnded()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Date ENDED_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getEnded() <em>Ended</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getEnded() <em>Ended</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getEnded()
-         * @generated
-         * @ordered
-         */
+	 * @see #getEnded()
+	 * @generated
+	 * @ordered
+	 */
 	protected Date ended = ENDED_EDEFAULT;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	protected TripImpl() {
-                super();
-        }
+		super();
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-                return DairyPackage.Literals.TRIP;
-        }
+		return DairyPackage.Literals.TRIP;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public EList<CollectionJournal> getCollections() {
-                if (collections == null) {
-                        collections = new EObjectResolvingEList<CollectionJournal>(CollectionJournal.class, this, DairyPackage.TRIP__COLLECTIONS);
-                }
-                return collections;
-        }
+		if (collections == null) {
+			collections = new EObjectResolvingEList<CollectionJournal>(CollectionJournal.class, this, DairyPackage.TRIP__COLLECTIONS);
+		}
+		return collections;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public EList<DeliveryJournal> getDeliveries() {
-                if (deliveries == null) {
-                        deliveries = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.TRIP__DELIVERIES);
-                }
-                return deliveries;
-        }
+		if (deliveries == null) {
+			deliveries = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.TRIP__DELIVERIES);
+		}
+		return deliveries;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public Date getStarted() {
-                return started;
-        }
+		return started;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setStarted(Date newStarted) {
-                Date oldStarted = started;
-                started = newStarted;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__STARTED, oldStarted, started));
-        }
+		Date oldStarted = started;
+		started = newStarted;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__STARTED, oldStarted, started));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public Date getEnded() {
-                return ended;
-        }
+		return ended;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setEnded(Date newEnded) {
-                Date oldEnded = ended;
-                ended = newEnded;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__ENDED, oldEnded, ended));
-        }
+		Date oldEnded = ended;
+		ended = newEnded;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__ENDED, oldEnded, ended));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-                switch (featureID) {
-                        case DairyPackage.TRIP__COLLECTIONS:
-                                return getCollections();
-                        case DairyPackage.TRIP__DELIVERIES:
-                                return getDeliveries();
-                        case DairyPackage.TRIP__STARTED:
-                                return getStarted();
-                        case DairyPackage.TRIP__ENDED:
-                                return getEnded();
-                }
-                return super.eGet(featureID, resolve, coreType);
-        }
+		switch (featureID) {
+			case DairyPackage.TRIP__COLLECTIONS:
+				return getCollections();
+			case DairyPackage.TRIP__DELIVERIES:
+				return getDeliveries();
+			case DairyPackage.TRIP__STARTED:
+				return getStarted();
+			case DairyPackage.TRIP__ENDED:
+				return getEnded();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-                switch (featureID) {
-                        case DairyPackage.TRIP__COLLECTIONS:
-                                getCollections().clear();
-                                getCollections().addAll((Collection<? extends CollectionJournal>)newValue);
-                                return;
-                        case DairyPackage.TRIP__DELIVERIES:
-                                getDeliveries().clear();
-                                getDeliveries().addAll((Collection<? extends DeliveryJournal>)newValue);
-                                return;
-                        case DairyPackage.TRIP__STARTED:
-                                setStarted((Date)newValue);
-                                return;
-                        case DairyPackage.TRIP__ENDED:
-                                setEnded((Date)newValue);
-                                return;
-                }
-                super.eSet(featureID, newValue);
-        }
+		switch (featureID) {
+			case DairyPackage.TRIP__COLLECTIONS:
+				getCollections().clear();
+				getCollections().addAll((Collection<? extends CollectionJournal>)newValue);
+				return;
+			case DairyPackage.TRIP__DELIVERIES:
+				getDeliveries().clear();
+				getDeliveries().addAll((Collection<? extends DeliveryJournal>)newValue);
+				return;
+			case DairyPackage.TRIP__STARTED:
+				setStarted((Date)newValue);
+				return;
+			case DairyPackage.TRIP__ENDED:
+				setEnded((Date)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-                switch (featureID) {
-                        case DairyPackage.TRIP__COLLECTIONS:
-                                getCollections().clear();
-                                return;
-                        case DairyPackage.TRIP__DELIVERIES:
-                                getDeliveries().clear();
-                                return;
-                        case DairyPackage.TRIP__STARTED:
-                                setStarted(STARTED_EDEFAULT);
-                                return;
-                        case DairyPackage.TRIP__ENDED:
-                                setEnded(ENDED_EDEFAULT);
-                                return;
-                }
-                super.eUnset(featureID);
-        }
+		switch (featureID) {
+			case DairyPackage.TRIP__COLLECTIONS:
+				getCollections().clear();
+				return;
+			case DairyPackage.TRIP__DELIVERIES:
+				getDeliveries().clear();
+				return;
+			case DairyPackage.TRIP__STARTED:
+				setStarted(STARTED_EDEFAULT);
+				return;
+			case DairyPackage.TRIP__ENDED:
+				setEnded(ENDED_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-                switch (featureID) {
-                        case DairyPackage.TRIP__COLLECTIONS:
-                                return collections != null && !collections.isEmpty();
-                        case DairyPackage.TRIP__DELIVERIES:
-                                return deliveries != null && !deliveries.isEmpty();
-                        case DairyPackage.TRIP__STARTED:
-                                return STARTED_EDEFAULT == null ? started != null : !STARTED_EDEFAULT.equals(started);
-                        case DairyPackage.TRIP__ENDED:
-                                return ENDED_EDEFAULT == null ? ended != null : !ENDED_EDEFAULT.equals(ended);
-                }
-                return super.eIsSet(featureID);
-        }
+		switch (featureID) {
+			case DairyPackage.TRIP__COLLECTIONS:
+				return collections != null && !collections.isEmpty();
+			case DairyPackage.TRIP__DELIVERIES:
+				return deliveries != null && !deliveries.isEmpty();
+			case DairyPackage.TRIP__STARTED:
+				return STARTED_EDEFAULT == null ? started != null : !STARTED_EDEFAULT.equals(started);
+			case DairyPackage.TRIP__ENDED:
+				return ENDED_EDEFAULT == null ? ended != null : !ENDED_EDEFAULT.equals(ended);
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-                if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-                StringBuffer result = new StringBuffer(super.toString());
-                result.append(" (started: ");
-                result.append(started);
-                result.append(", ended: ");
-                result.append(ended);
-                result.append(')');
-                return result.toString();
-        }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (started: ");
+		result.append(started);
+		result.append(", ended: ");
+		result.append(ended);
+		result.append(')');
+		return result.toString();
+	}
 
 } //TripImpl
