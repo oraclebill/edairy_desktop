@@ -33,23 +33,30 @@ import com.agritrace.edairy.ui.ImageRegistry;
  * 
  */
 public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite {
-	
-	private List<IRequestTypeChangeListener> typeChangedListener= new ArrayList<IRequestTypeChangeListener>();
+
+	private List<IRequestTypeChangeListener> typeChangedListener = new ArrayList<IRequestTypeChangeListener>();
 
 	private Composite specialComp;
 	private Group inseminationGroup;
 	private Composite verternaryComp;
 	private Composite inseminationComp;
 	private RequestType previousType;
-	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = "time.heated.detected";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_FIRST_TRETMENT = "time.first.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_SECOND_TRETMENT = "time.second.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_THIRD_TRETMENT = "time.third.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_VERY_THIRD_COMPLAINT = "complaint";//$NON-NLS-1$
+	public static final String SPECIFIC_RPEFIX = "specific";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = SPECIFIC_RPEFIX
+			+ "time.heated.detected";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_FIRST_TRETMENT = SPECIFIC_RPEFIX
+			+ "time.first.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_SECOND_TRETMENT = SPECIFIC_RPEFIX
+			+ "time.second.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_THIRD_TRETMENT = SPECIFIC_RPEFIX
+			+ "time.third.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_VERY_THIRD_COMPLAINT = SPECIFIC_RPEFIX
+			+ "complaint";//$NON-NLS-1$
 	public static final String BIND_ID_REQUEST_DATE = "request.date";//$NON-NLS-1$
 	public static final String BIND_ID_MEMBER_NAME = "member.name";//$NON-NLS-1$
 	public static final String BIND_ID_MEMBER_ID = "member.id";//$NON-NLS-1$
 	public static final String BIND_ID_FARM_NAME = "farm.name";//$NON-NLS-1$
+	public static final String BIND_ID_SPECIFIC_CONTAINER = "specific.container";//$NON-NLS-1$
 	public static final int REQUEST_TYPE_CHANGED = 9999999;
 
 	public ServiceRequestMasterDetailComposite(Composite parent, int style) {
@@ -66,12 +73,13 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		data.grabExcessVerticalSpace = true;
 		// Same height with the filter section
 		data.heightHint = getParent().getChildren()[0].computeSize(-1, -1).y;
-		tableComposite.setLayoutData(data);		
+		tableComposite.setLayoutData(data);
 		tableComposite.setLayout(layout);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		return table;
 	}
+
 	@Override
 	protected Composite createButtons(Composite parent) {
 		Composite compoiste = super.createButtons(parent);
@@ -111,27 +119,26 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		// Create common controls
 		createCommonControls(detailGroup);
 		// Create specific controls
-		createSpecificControls(detailGroup);
+		createTypeSpecificControls(detailGroup);
 
 	}
 
 	private void createCommonControls(Composite parent) {
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(3, false));
-		
 
-
-		UIControlsFactory.createLabel(comonComp, "Date"); 
+		UIControlsFactory.createLabel(comonComp, "Date");
 		Composite dateComposte = UIControlsFactory.createComposite(comonComp);
 		dateComposte.setLayout(GridLayoutFactory.swtDefaults().numColumns(2)
 				.margins(0, 0).create());
-		
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(dateComposte);
-		
+
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(
+				dateComposte);
+
 		Text txtDate = UIControlsFactory.createText(dateComposte);
 		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
 		dateData.horizontalSpan = 1;
-		dateData.grabExcessHorizontalSpace =true;
+		dateData.grabExcessHorizontalSpace = true;
 		txtDate.setLayoutData(dateData);
 		addUIControl(txtDate, BIND_ID_REQUEST_DATE); //$NON-NLS-1$
 
@@ -171,26 +178,22 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 
 	}
 
-	private void createSpecificControls(Group parent) {
+	private void createTypeSpecificControls(Group parent) {
 		// "Veterinary"
 		// Complaint
 		specialComp = UIControlsFactory.createComposite(parent);
 		specialComp.setLayout(new GridLayout(1, false));
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		specialComp.setLayoutData(data);
-		//createVeterinaryControls(specialComp);
-		//createInseminationControls(specialComp);
-		this.addUIControl(specialComp, "sepcialcomp"); //$NON-NLS-1$		
+		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); //$NON-NLS-1$		
 
 	}
-	
+
 	private void createVeterinaryControls(Composite parent) {
 		verternaryComp = UIControlsFactory.createComposite(parent);
 		GridLayout layout = new GridLayout(1, false);
 		verternaryComp.setLayout(layout);
 		verternaryComp.setLayoutData(new GridData(GridData.FILL_BOTH));
-//		GridDataFactory.fillDefaults().hint(0, 0).applyTo(verternaryComp);
-		this.addUIControl(verternaryComp, "veterinary-group");
 
 		UIControlsFactory.createLabel(verternaryComp, "Complaint");
 		Text complaintText = UIControlsFactory.createText(verternaryComp);
@@ -206,22 +209,26 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 	private void createInseminationControls(Composite parent) {
 
 		inseminationComp = UIControlsFactory.createComposite(parent);
-		inseminationComp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).create());
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationComp);
+		inseminationComp.setLayout(GridLayoutFactory.swtDefaults()
+				.margins(0, 0).create());
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				inseminationComp);
 		this.addUIControl(inseminationComp, "insemination-comp");
-		
-		inseminationGroup = UIControlsFactory.createGroup(inseminationComp, "Request Details");
+
+		inseminationGroup = UIControlsFactory.createGroup(inseminationComp,
+				"Request Details");
 		GridLayout layout = new GridLayout(3, false);
 		inseminationGroup.setLayout(layout);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationGroup);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				inseminationGroup);
 
 		UIControlsFactory.createLabel(inseminationGroup, "Time Heat Detected"); //$NON-NLS-1$
 		Text txtDate = UIControlsFactory.createText(inseminationGroup);
 		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
 		dateData.horizontalSpan = 1;
 		txtDate.setLayoutData(dateData);
-		addUIControl(txtDate, BIND_ID_INSE_TIME_HEATED_DETECTED); 
-		
+		addUIControl(txtDate, BIND_ID_INSE_TIME_HEATED_DETECTED);
+
 		// Calendar Button
 		Button button = new Button(inseminationGroup, SWT.PUSH);
 		Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
@@ -229,7 +236,8 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
 				17, 16).applyTo(button);
 		// Insemination
-		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup, "Insemination"); //$NON-NLS-1$
+		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup,
+				"Insemination"); //$NON-NLS-1$
 		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
 
 		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(
@@ -237,35 +245,34 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults()
 				.indent(10, 0);
 		// First
-		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup, "First"); //$NON-NLS-1$
+		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup,
+				"First"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstLabel);
 
-		Text firstText = UIControlsFactory.createText(inseminationGroup); 
-		
+		Text firstText = UIControlsFactory.createText(inseminationGroup);
+
 		textGridFactory.applyTo(firstText);
-		addUIControl(firstText, BIND_ID_INSE_FIRST_TRETMENT); 
+		addUIControl(firstText, BIND_ID_INSE_FIRST_TRETMENT);
 
 		// First Repeat
-		Label firstRepeatLabel = UIControlsFactory.createLabel(inseminationGroup,
-				"First Repeat"); //$NON-NLS-1$
+		Label firstRepeatLabel = UIControlsFactory.createLabel(
+				inseminationGroup, "First Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstRepeatLabel);
 
-		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup); 
+		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup);
 		textGridFactory.applyTo(firstRepeatText);
-		addUIControl(firstRepeatText, BIND_ID_INSE_SECOND_TRETMENT); 
+		addUIControl(firstRepeatText, BIND_ID_INSE_SECOND_TRETMENT);
 
 		// 2nd Repeat
-		Label secondRepeatLabel = UIControlsFactory.createLabel(inseminationGroup,
-				"2nd Repeat"); //$NON-NLS-1$
+		Label secondRepeatLabel = UIControlsFactory.createLabel(
+				inseminationGroup, "2nd Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(secondRepeatLabel);
 
-		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup); 
+		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup);
 		textGridFactory.applyTo(secondRepeatText);
-		
-		addUIControl(secondRepeatText, BIND_ID_INSE_THIRD_TRETMENT); 
-	}
 
-	
+		addUIControl(secondRepeatText, BIND_ID_INSE_THIRD_TRETMENT);
+	}
 
 	@Override
 	protected int getDetailsStyle() {
@@ -289,24 +296,18 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 		}
 		this.getParent().layout(true, true);
 		this.previousType = request.getType();
-		notifyAllRequestTypeChangeListeners();
 		this.getTable().forceFocus();
 		this.getTable().showSelection();
 		this.getTable().select(this.getTable().getSelectionIndex());
 
+	}
 
-	}
-	
-	public void addTypeChangeListener(IRequestTypeChangeListener listener)
-	{
-		this.typeChangedListener.add(listener);
-	}
-	
-	public void notifyAllRequestTypeChangeListeners()
-	{
-		for (IRequestTypeChangeListener listener: this.typeChangedListener)
-		{
-			listener.typeChanged();
-		}
+	/**
+	 * Get type specific container composite
+	 * 
+	 * @return
+	 */
+	public Composite getTypeSpecialComposite() {
+		return this.specialComp;
 	}
 }

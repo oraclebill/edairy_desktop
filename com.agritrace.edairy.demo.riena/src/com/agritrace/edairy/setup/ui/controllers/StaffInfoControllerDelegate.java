@@ -147,10 +147,6 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 			Employee to = target != null ? (Employee) target
 					: createWorkingCopy();
 			ServiceUtils.copy(from, to);
-			EcoreUtil.Copier copier = new EcoreUtil.Copier();
-			Employee cloned = (Employee) copier.copy(from);
-			copier.copyReferences();
-			to.setLocation(cloned.getLocation());
 			return to;
 		}
 
