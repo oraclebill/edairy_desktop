@@ -166,7 +166,7 @@ public class DairyDemoResourceManager{
 
 		//drivers
 		Employee driver1 = DairyFactory.eINSTANCE.createEmployee();
-		driver1.setName("Joseph Limuru");
+//		driver1.setName("Joseph Limuru");
 		driver1.setGivenName("Joseph");
 		driver1.setFamilyName("Limuru");
 		driver1.setLocation(location1);
@@ -176,7 +176,7 @@ public class DairyDemoResourceManager{
 		driver1.setStartDate(startDate);
 		//		
 		Employee driver2 = DairyFactory.eINSTANCE.createEmployee();
-		driver2.setName("John Smith");
+//		driver2.setName("John Smith");
 		driver2.setGivenName("John");
 		driver2.setFamilyName("Smith");
 		driver2.setLocation(location2);
@@ -186,7 +186,7 @@ public class DairyDemoResourceManager{
 		driver2.setStartDate(startDate2);
 		//		
 		Employee driver3 = DairyFactory.eINSTANCE.createEmployee();
-		driver3.setName("Jason Spencer");
+//		driver3.setName("Jason Spencer");
 		driver3.setGivenName("Jason");
 		driver3.setFamilyName("Spencer");
 		driver3.setLocation(location3);
@@ -418,7 +418,7 @@ public class DairyDemoResourceManager{
 		
 		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("Demo Dairy");
-		dairy.setName("Demo Dairy");
+//		dairy.setName("Demo Dairy");
 		dairy.setDairyId(new Long("30001"));
 		dairy.getEmployees().add(driver1);
 		dairy.getEmployees().add(driver2);
@@ -446,7 +446,7 @@ public class DairyDemoResourceManager{
 			Membership member1 = DairyFactory.eINSTANCE.createMembership();
 			member1.setMemberId(""+1000+i);
 			Person member = ModelFactory.eINSTANCE.createPerson();
-			member.setName("Joseph Limuru"+"_"+i);
+			member.setGivenName("Joseph Limuru"+"_"+i);
 			member.setPhoneNumber("609-356-3400"+i);
 			member1.setMember(member);
 			

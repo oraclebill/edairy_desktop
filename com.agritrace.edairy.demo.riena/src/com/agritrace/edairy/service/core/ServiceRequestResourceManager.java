@@ -37,6 +37,7 @@ import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
+import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.ui.ResourceManager;
 
@@ -52,7 +53,7 @@ public class ServiceRequestResourceManager {
 
 	private Resource serviceRequestResource;
 
-	public static final String FILE_PATH = "c:/temp/eDairy/servicerequests.xml";
+	public static final String FILE_PATH = DairyDemoResourceManager.XMLDB_BASE + "/servicerequests.xml";
 
 	private ServiceRequestResourceManager() {
 
@@ -94,7 +95,8 @@ public class ServiceRequestResourceManager {
 
 		Person person = ModelFactory.eINSTANCE.createPerson();
 		person.setPhoneNumber("13816442241");
-		person.setName("Spark Wan");
+		person.setGivenName("Spark");
+		person.setFamilyName("Wan");
 		serviceRequestResource.getContents().add(person);
 
 		ship.setMember(person);
@@ -147,7 +149,8 @@ public class ServiceRequestResourceManager {
 
 		Person person = ModelFactory.eINSTANCE.createPerson();
 		person.setPhoneNumber("13816424140");
-		person.setName("Tracy Copper");
+		person.setGivenName("Tracy");
+		person.setFamilyName("Copper");
 		serviceRequestResource.getContents().add(person);
 
 		ship.setMember(person);
@@ -200,7 +203,8 @@ public class ServiceRequestResourceManager {
 
 		Person person = ModelFactory.eINSTANCE.createPerson();
 		person.setPhoneNumber("12345678");
-		person.setName("John Smith");
+		person.setGivenName("John");
+		person.setFamilyName("Smith");
 		serviceRequestResource.getContents().add(person);
 
 		ship.setMember(person);
