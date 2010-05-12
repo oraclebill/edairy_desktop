@@ -1,8 +1,5 @@
 package com.agritrace.edairy.service.ui.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -33,8 +30,6 @@ import com.agritrace.edairy.ui.ImageRegistry;
  * 
  */
 public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite {
-
-	private List<IRequestTypeChangeListener> typeChangedListener = new ArrayList<IRequestTypeChangeListener>();
 
 	private Composite specialComp;
 	private Group inseminationGroup;
