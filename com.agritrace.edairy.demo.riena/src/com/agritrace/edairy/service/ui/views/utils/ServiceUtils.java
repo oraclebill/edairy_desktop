@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.wire.Wire;
 import org.eclipse.riena.internal.ui.ridgets.Activator;
@@ -215,12 +217,43 @@ public class ServiceUtils {
 	}
 	
 	public static void copy(EObject source, EObject target) {
+		if (source == null || target == null) {
+			return;
+		}
+		if (!source.getClass().equals(target.getClass())) {
+			return;
+		}
 		EClass eClass = source.eClass();
 		for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
-			EStructuralFeature eStructuralFeature = eClass
-					.getEStructuralFeature(i);
-			target.eSet(eStructuralFeature, source.eGet(eStructuralFeature));
 
+			EStructuralFeature feature = eClass.getEStructuralFeature(i);
+			if (feature instanceof EAttribute) {
+				target.eSet(feature, source.eGet(feature));
+			} else if (feature instanceof EReference
+					&& source.eGet(feature) instanceof EObject
+					&& target.eGet(feature) instanceof EObject) {
+				copy((EObject) source.eGet(feature), (EObject) target
+						.eGet(feature));
+//			} else if (feature instanceof EReference
+//					&& source.eGet(feature) instanceof List
+//					&& target.eGet(feature) instanceof List) {
+//				{
+//					List sourceList = (List) source.eGet(feature);
+//					List targetList = (List) target.eGet(feature);
+//
+//					if (sourceList.size)
+//					for (int j = 0; j < sourceList.size(); j++) {
+//						Object sourceObj = sourceList.get(j);
+//						Object targetObj = targetList.get(j);
+//						if (sourceObj instanceof EObject
+//								&& targetObj instanceof EObject) {
+//							copy((EObject) sourceObj, (EObject) targetObj);
+//						}
+//
+//					}
+//				}
+			}
 		}
+
 	}
 }
