@@ -78,11 +78,6 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_CANCEL_ACTION = "cancelAction";
 	public static final String RIDGET_ID_DELETE_ACTION = "deleteAction";
 	
-	//messageboxes
-	public static final String RIDGET_ID_DUPLICATE_NAME_DIALOG = "duplicateNameDialog";
-	public static final String RIDGET_ID_ADDRESS_REQUIRED_DIALOG = "addressRequiredDialog";
-	public static final String RIDGET_ID_DELETE_CONFIRM_DIALOG = "deleteConfirmDialog";
-	
 	private List<DairyLocation> input = new ArrayList<DairyLocation>();
 	public DairyLocationController(ISubModuleNode navigationNode) {
 		super(navigationNode);
@@ -149,21 +144,23 @@ public class DairyLocationController extends SubModuleController {
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			detailsContainer = container;
-			table = container.getRidget(ITableRidget.class, AbstractMasterDetailsComposite.BIND_ID_TABLE);
+			bindRidgets(container);
+			configureValidators(container);
+			configureActionListeners(container);
+		}
 		
+		private void bindRidgets(IRidgetContainer container) {
+			table = container.getRidget(ITableRidget.class, AbstractMasterDetailsComposite.BIND_ID_TABLE);
+			
 			ITextRidget textId = container.getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
 			textId.bindToModel(workingCopy, "id");
 			textId.setOutputOnly(true);
 			textId.updateFromModel();
 			
-			
 			textName =  container.getRidget(ITextRidget.class, RIDGET_ID_NAME);
 			textName.bindToModel(workingCopy, "name");
 			textName.updateFromModel();
-			DairyLocationNameValidator validator = new DairyLocationNameValidator();
-			if (textName.getValidationRules().size() <= 0) {
-				textName.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
-			}
+			
 			
 			final ITextRidget description = container.getRidget(ITextRidget.class, RIDGET_ID_DESCRIPTION);
 			description.bindToModel(workingCopy, "description");
@@ -188,16 +185,29 @@ public class DairyLocationController extends SubModuleController {
 	        
 	        routeCombo = container.getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
 			bindRouteCombo();
-			routeCombo.addSelectionListener(new RouteSelectCallback());
-
-			
-			final IActionRidget configureRouteAction = container.getRidget(IActionRidget.class, RIDGET_ID_CONFIGURE_ROUTE_ACTION);
-			configureRouteAction.addListener(new ConfigureRouteCallback());
-			
 			
 			configureAddressTab(container, workingCopy);
 			configureDirectionsTab(container, workingCopy);
 			configureMapTab(container, workingCopy);
+		}
+		
+		private void configureValidators(IRidgetContainer container) {
+			DairyLocationNameValidator nameValidator = new DairyLocationNameValidator();
+			if (textName.getValidationRules().size() <= 0) {
+				textName.addValidationRule(nameValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+			}
+			AddressValidator addressValidator = new AddressValidator();
+			if (textAddress.getValidationRules().size() <= 0) {
+				textAddress.addValidationRule(addressValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+				textAddress.addValidationMessage("required", addressValidator);
+			}
+		}
+		 
+		private void configureActionListeners(IRidgetContainer container) {
+			routeCombo.addSelectionListener(new RouteSelectCallback());
+
+			final IActionRidget configureRouteAction = container.getRidget(IActionRidget.class, RIDGET_ID_CONFIGURE_ROUTE_ACTION);
+			configureRouteAction.addListener(new ConfigureRouteCallback());
 		}
 
 		private void bindRouteCombo()
@@ -281,7 +291,7 @@ public class DairyLocationController extends SubModuleController {
 
 		@Override
 		public void itemCreated(Object newItem) {
-			this.configureRidgets(detailsContainer);
+			bindRidgets(detailsContainer);
 			super.itemCreated(newItem);
 		}
 
@@ -374,11 +384,7 @@ public class DairyLocationController extends SubModuleController {
 			textAddress.setMandatory(true);
 			textAddress.bindToModel(dairyLocation.getLocation().getPostalLocation(), "address");
 			textAddress.updateFromModel();
-			AddressValidator validator = new AddressValidator();
-			if (textAddress.getValidationRules().size() <= 0) {
-				textAddress.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
-				textAddress.addValidationMessage("required", validator);
-			}
+			
 				
 			ITextRidget section = container.getRidget(ITextRidget.class, RIDGET_ID_PL_SECTION);
 			section.bindToModel(dairyLocation.getLocation().getPostalLocation(), "section");
@@ -471,8 +477,6 @@ public class DairyLocationController extends SubModuleController {
 					RouteListDialog dialog = new RouteListDialog();
 					dialog.setBlockOnOpen(true);
 					dialog.open();
-					//RouteService.getInstance().refresh();
-					//routeCombo.updateFromModel();
 					bindRouteCombo();
 			}
 		}
