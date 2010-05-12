@@ -6,7 +6,6 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController.RouteService;
 import com.agritrace.edairy.dairy.ui.dialogs.AddRouteDialog;
 import com.agritrace.edairy.model.dairy.Route;
 
@@ -19,7 +18,7 @@ public class RouteListDialogController extends AbstractWindowController {
 	
 	public static final String RIDGET_ID_NO_SELECTION_DIALOG = "noSelectionError";
 
-	private RouteService service = new RouteService();
+	private RouteService service = RouteService.getInstance();
 	
 	private IMessageBoxRidget deleteConfirmDialog;
 	

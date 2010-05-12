@@ -10,7 +10,6 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController.RouteService;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Route;
 
@@ -24,7 +23,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 	
 	public static final String RIDGET_ID_DUPLICATE_NAME_DIALOG = "duplicateNameDialog"; //$NON-NLS-1$
 
-	private RouteService service = new RouteService();;
+	private RouteService service = RouteService.getInstance();
 	
 	private ITextRidget textName;
 	private IMessageBoxRidget duplicateNameDialog;

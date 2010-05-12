@@ -1,20 +1,18 @@
 package com.agritrace.edairy.dairy.ui.views;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
-import org.eclipse.riena.ui.swt.MessageBox;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
@@ -49,12 +47,8 @@ public class DairyLocationView extends SubModuleView {
 		gd.grabExcessVerticalSpace = true;
 		gd.verticalAlignment = SWT.FILL;
 		master.setLayoutData(gd);
-		Composite table = master.getTable();
 		Composite details = master.getDetails();
 		createDetailsPanel(details);
-		
-	
-		//createMessageBoxes(buttonPanel);
 	}
 	
 	private void createDetailsPanel(Composite details)
@@ -79,7 +73,7 @@ public class DairyLocationView extends SubModuleView {
 		GridLayout layout2 = new GridLayout(3, false);
 		detailGroup.setLayout(layout2);
 		
-		Label idLabel = UIControlsFactory.createLabel(detailGroup, "Location #", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Location #", SWT.LEFT);
 
 		Text idText = UIControlsFactory.createText(detailGroup, SWT.BORDER| SWT.SINGLE, DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
 		gd = new GridData();
@@ -88,7 +82,7 @@ public class DairyLocationView extends SubModuleView {
 		idText.setEditable(false);
 		idText.setLayoutData(gd);
 
-		Label nameLabel = UIControlsFactory.createLabel(detailGroup, "Name", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Name", SWT.LEFT);
 
 		Text nameText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_NAME);
 		 gd = new GridData();
@@ -98,7 +92,7 @@ public class DairyLocationView extends SubModuleView {
 		gd.horizontalAlignment = SWT.FILL;
 		nameText.setLayoutData(gd);
 		
-		Label descriptionLabel = UIControlsFactory.createLabel(detailGroup, "Description", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Description", SWT.LEFT);
 		
 		Text descriptionText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_DESCRIPTION);
 		gd = new GridData();
@@ -108,7 +102,7 @@ public class DairyLocationView extends SubModuleView {
 		gd.horizontalAlignment = SWT.FILL;
 		descriptionText.setLayoutData(gd);
 		
-		Label phoneLabel = UIControlsFactory.createLabel(detailGroup, "Phone", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Phone", SWT.LEFT);
 		
 		Text phoneText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE, DairyLocationController.RIDGET_ID_PHONE);
 		gd = new GridData();
@@ -116,14 +110,14 @@ public class DairyLocationView extends SubModuleView {
 		gd.horizontalSpan = 2;
 		phoneText.setLayoutData(gd);
 
-		Label dateOpenedLabel = UIControlsFactory.createLabel(detailGroup, "Date Opened", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Date Opened", SWT.LEFT);
 		
 		DatePickerComposite dateOpenedPicker = UIControlsFactory.createDatePickerComposite(detailGroup, DairyLocationController.RIDGET_ID_DATEOPENED);
 		gd = new GridData();
 		gd.horizontalSpan = 2;
 		dateOpenedPicker.setLayoutData(gd);
 		
-		Label functionsLabel = UIControlsFactory.createLabel(detailGroup, "Functions", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Functions", SWT.LEFT);
 		
 		ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(detailGroup, SWT.None, true, DairyLocationController.RIDGET_ID_FUNCTIONS); //$NON-NLS-1$
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
@@ -131,11 +125,11 @@ public class DairyLocationView extends SubModuleView {
 		gd.horizontalSpan = 2;
 		functionsChoice.setLayoutData(gd);
 		
-		Label routeLabel = UIControlsFactory.createLabel(detailGroup, "Route", SWT.LEFT);
+		UIControlsFactory.createLabel(detailGroup, "Route", SWT.LEFT);
 
-		Combo routeCombo = UIControlsFactory.createCombo(detailGroup, DairyLocationController.RIDGET_ID_ROUTE);
+		UIControlsFactory.createCombo(detailGroup, DairyLocationController.RIDGET_ID_ROUTE);
 		
-		Button configureRouteButton = UIControlsFactory.createButton(detailGroup, "?", DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
+		UIControlsFactory.createButton(detailGroup, "?", DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
 		
 		
 		TabFolder tabs = new TabFolder(detailGroup, SWT.None);
@@ -335,15 +329,6 @@ public class DairyLocationView extends SubModuleView {
 		
 		
 	}
-	private void createMessageBoxes(Composite parent)
-	{
-		MessageBox nameErrorMessage = UIControlsFactory.createMessageBox(parent);
-		this.addUIControl(nameErrorMessage, DairyLocationController.RIDGET_ID_DUPLICATE_NAME_DIALOG);
-		MessageBox addressErrorMessage  = UIControlsFactory.createMessageBox(parent);
-		this.addUIControl(addressErrorMessage, DairyLocationController.RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
-		MessageBox deleteConfirmMessage  = UIControlsFactory.createMessageBox(parent);
-		this.addUIControl(deleteConfirmMessage, DairyLocationController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
-	}
 
 	public Image getIcon() {
 		return AbstractUIPlugin.imageDescriptorFromPlugin("com.agritrace.edairy.demo.riena", "/icons/edairymanagericon16.png")
@@ -375,6 +360,17 @@ public class DairyLocationView extends SubModuleView {
 
 			return super.createTable(tableComposite, layout);
 		}
+
+
+		@Override
+		public boolean confirmRemove(Object item) {
+			String title = "Confirm Remove";
+			String message = "Do you want to delete this item?"; //$NON-NLS-1$
+			boolean result = MessageDialog.openQuestion(getShell(), title, message);
+			return result;
+		}
+		
+		
 	}
 
 }

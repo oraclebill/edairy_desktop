@@ -6,13 +6,9 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
@@ -22,7 +18,6 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
-import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -42,7 +37,6 @@ import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.dairy.util.DairyAdapterFactory;
 import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class DairyLocationController extends SubModuleController {
@@ -88,7 +82,6 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_DUPLICATE_NAME_DIALOG = "duplicateNameDialog";
 	public static final String RIDGET_ID_ADDRESS_REQUIRED_DIALOG = "addressRequiredDialog";
 	public static final String RIDGET_ID_DELETE_CONFIRM_DIALOG = "deleteConfirmDialog";
-	private DairyLocations service;
 	
 	private List<DairyLocation> input = new ArrayList<DairyLocation>();
 	public DairyLocationController(ISubModuleNode navigationNode) {
@@ -96,47 +89,20 @@ public class DairyLocationController extends SubModuleController {
 		initialize();
 	}
 
-	
-	@InjectService(service = DairyLocations.class)
-	public void bind(DairyLocations service) {
-		this.service = service;
-	}
-
-	public void unbind(DairyLocations service) {
-		if (this.service == service)
-			this.service = null;
-	}
-
 	public void store()
 	{
-		DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().clear();
-		for (int i = 0 ; i < input.size(); i ++) {
-			DairyLocation dl = input.get(i);
-			DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().add(dl);
-			if (dl.getRoute() != null) {
-				dl.eResource().getContents().add(dl.getRoute());
-			}
-			/*if (DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().add(input.get(i).getRoute()DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().add(input.get(i).getRoute());
-			DairyLocationResourceManager.INSTANCE.getDairyLocationsResource().getContents().addAll(input);*/
-		}
-		try {
-			DairyLocationResourceManager.INSTANCE.saveResource(DairyLocationResourceManager.INSTANCE.getDairyLocationsResource());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		DairyLocationService.getInstance().store();
 	}
 	
 	
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
-
-		//DairyLocation dairyLocation = this.dairyLocation;
-
+		
 		String[] properties = new String[] {"name","description" };
 		String[] headers = new String[] { "Name","Description"};
 
-		final IMasterDetailsRidget master = (IMasterDetailsRidget) getRidget("master"); //$NON-NLS-1$
+		final IMasterDetailsRidget master = (IMasterDetailsRidget) getRidget("master"); 
 		if (master != null) {
 			master.setDelegate(new DairyLocationDelegation());
 			master.bindToModel(new WritableList(input, DairyLocation.class),
@@ -156,25 +122,11 @@ public class DairyLocationController extends SubModuleController {
 				}
 				
 			});
+			
+			
 		}
-		//bindings for top-half window
-		/*final ITextRidget dairyLocationId = getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
-		dairyLocationId.setOutputOnly(true);
-		dairyLocationId.bindToModel(dairyLocation, "collectionCentreId");
-		dairyLocationId.updateFromModel();*/
-
-		
-		
-		
 	}
-	
-	
-
-	private DairyLocation query(long id) {
-		return null;
-	}
-
-	
+		
 	public List<DairyLocation> getInput()
 	{
 		return input;
@@ -191,45 +143,32 @@ public class DairyLocationController extends SubModuleController {
 		private Route workingRoute;
 		private ITextRidget textName;
 		private ITextRidget textAddress;
-		private IMessageBoxRidget duplicateNameDialog;
-		private IMessageBoxRidget addressRequiredDialog;
-		private IMessageBoxRidget deleteConfirmDialog;
 		private IComboRidget routeCombo;
-		private final RouteService routeService = new RouteService();
 		private ITableRidget table;
+		private IRidgetContainer detailsContainer;
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
+			detailsContainer = container;
 			table = container.getRidget(ITableRidget.class, AbstractMasterDetailsComposite.BIND_ID_TABLE);
 		
 			ITextRidget textId = container.getRidget(ITextRidget.class, RIDGET_ID_COLLECTION_CENTRE_ID);
 			textId.bindToModel(workingCopy, "id");
+			textId.setOutputOnly(true);
 			textId.updateFromModel();
 			
 			
 			textName =  container.getRidget(ITextRidget.class, RIDGET_ID_NAME);
 			textName.bindToModel(workingCopy, "name");
 			textName.updateFromModel();
-			textName.setMandatory(true);
-			textName.addValidationRule(new IValidator() {
-
-				@Override
-				public IStatus validate(Object value) {
-					if ("".equals(textName.getText())) return Status.CANCEL_STATUS;
-					
-					for (int i = 0 ; i < input.size(); i++) {
-						if (textName.getText().equals(input.get(i).getName()) && i != table.getSelectionIndex()) {
-							
-							return Status.CANCEL_STATUS;
-						}
-					}
-					return Status.OK_STATUS;
-				}
-				
-			}, ValidationTime.ON_UPDATE_TO_MODEL);
+			DairyLocationNameValidator validator = new DairyLocationNameValidator();
+			if (textName.getValidationRules().size() <= 0) {
+				textName.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
+			}
 			
 			final ITextRidget description = container.getRidget(ITextRidget.class, RIDGET_ID_DESCRIPTION);
 			description.bindToModel(workingCopy, "description");
 			description.updateFromModel();
+			description.setMandatory(true);
 			
 			final ITextRidget phone = container.getRidget(ITextRidget.class, RIDGET_ID_PHONE);
 			phone.bindToModel(workingCopy, "phone");
@@ -248,7 +187,6 @@ public class DairyLocationController extends SubModuleController {
 	        
 	        
 	        routeCombo = container.getRidget(IComboRidget.class, RIDGET_ID_ROUTE);
-			routeCombo.setMandatory(true);
 			bindRouteCombo();
 			routeCombo.addSelectionListener(new RouteSelectCallback());
 
@@ -260,24 +198,11 @@ public class DairyLocationController extends SubModuleController {
 			configureAddressTab(container, workingCopy);
 			configureDirectionsTab(container, workingCopy);
 			configureMapTab(container, workingCopy);
-			//configureMessageBoxes(container);
-
-			
-		}
-
-
-
-		@Override
-		public void updateDetails(IRidgetContainer container) {
-			//reconstruct items list every time details is updated
-			//bindRouteCombo();
-			
-			super.updateDetails(container);
 		}
 
 		private void bindRouteCombo()
 		{
-			RouteService rs = new RouteService();
+			RouteService rs = RouteService.getInstance();
 			routeCombo.bindToModel(rs, "names", String.class, "toString", workingRoute, "name");
 			routeCombo.updateFromModel();
 			
@@ -285,17 +210,34 @@ public class DairyLocationController extends SubModuleController {
 
 		@Override
 		public void itemApplied(Object changedItem) {
-			// TODO Auto-generated method stub
+			if (changedItem instanceof DairyLocation) {
+				DairyLocation changedDairyLocation = (DairyLocation) changedItem;
+				if (changedDairyLocation.getId() == 0) {
+					//perform create action to SQL
+					DairyLocationService.getInstance().create(changedDairyLocation);
+				} else {
+					//perform update action to SQL
+					
+				}
+			}
 			super.itemApplied(changedItem);
 		}
 
-
+		@Override
+		public void itemRemoved(Object oldItem) {
+			DairyLocationService.getInstance().store();
+		}
 
 		@Override
 		public boolean isChanged(Object source, Object target) {
 			if (source != null && target != null) {
+				
 				DairyLocation src = (DairyLocation) source;
 				DairyLocation dst = (DairyLocation) target;
+				if (src.getId() == 0) {
+					//always return true for id=0 since it's a new created object;
+					return true;
+				}
 				if (EMFUtil.compare(src, dst)
 						&& EMFUtil.compare(src.getRoute(), dst.getRoute())
 						&& EMFUtil.compare(src.getLocation().getPostalLocation(), dst.getLocation().getPostalLocation())
@@ -312,9 +254,6 @@ public class DairyLocationController extends SubModuleController {
 
 		@Override
 		public DairyLocation createWorkingCopy() {
-			if (workingCopy != null) {
-				return workingCopy;
-			}
 			DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
 			workingCopy = dairyLocation;
 			
@@ -322,6 +261,8 @@ public class DairyLocationController extends SubModuleController {
 			workingRoute = route;
 			dairyLocation.setRoute(route);
 			dairyLocation.getRoute().setName("");
+			dairyLocation.getFunctions();
+			
 			
 			Location location = ModelFactoryImpl.eINSTANCE.createLocation();
 
@@ -339,8 +280,15 @@ public class DairyLocationController extends SubModuleController {
 		}
 
 		@Override
+		public void itemCreated(Object newItem) {
+			this.configureRidgets(detailsContainer);
+			super.itemCreated(newItem);
+		}
+
+		@Override
 		public Object copyBean(Object source, Object target) {
-			
+			if (source.equals(target))
+				return source;
 			DairyLocation from = source != null ? (DairyLocation) source : createWorkingCopy();
 			DairyLocation to = target != null ? (DairyLocation) target : createWorkingCopy();
 			to.setId(from.getId());
@@ -377,8 +325,42 @@ public class DairyLocationController extends SubModuleController {
 			to.getLocation().getDescriptiveLocation().setLandmarks(from.getLocation().getDescriptiveLocation().getLandmarks());
 			to.getLocation().getMapLocation().setLatitude(from.getLocation().getMapLocation().getLatitude());
 			to.getLocation().getMapLocation().setLongitude(from.getLocation().getMapLocation().getLongitude());
-			return source;
+			return target;
 		}
+
+		@Override
+		public String isRemovable(Object item) {
+			// TODO Auto-generated method stub
+			return super.isRemovable(item);
+		}
+
+		@Override
+		public String isValid(IRidgetContainer container) {
+			if (!textName.revalidate()) {
+				if ("".equals(textName.getText())) {
+					return "The name can't be empty!";
+				}
+				textName.requestFocus();
+				return "The name '" + textName.getText() + "' is already in use.\r\n\rPlease select a unique name for this new location.";
+			} else if (!textAddress.revalidate()) {
+				textAddress.requestFocus();
+				return "You must specify an address for this location.";
+			}
+			return super.isValid(container);
+		}
+
+		@Override
+		public void prepareItemSelected(Object newSelection) {
+			// TODO Auto-generated method stub
+			super.prepareItemSelected(newSelection);
+		}
+
+		@Override
+		public void itemSelected(Object newSelection) {
+			// TODO Auto-generated method stub
+			super.itemSelected(newSelection);
+		}
+
 
 		@Override
 		public DairyLocation getWorkingCopy() {
@@ -389,8 +371,14 @@ public class DairyLocationController extends SubModuleController {
 		private void configureAddressTab(IRidgetContainer container, DairyLocation dairyLocation)
 		{
 			textAddress = container.getRidget(ITextRidget.class, RIDGET_ID_PL_ADDRESS);
+			textAddress.setMandatory(true);
 			textAddress.bindToModel(dairyLocation.getLocation().getPostalLocation(), "address");
 			textAddress.updateFromModel();
+			AddressValidator validator = new AddressValidator();
+			if (textAddress.getValidationRules().size() <= 0) {
+				textAddress.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
+				textAddress.addValidationMessage("required", validator);
+			}
 				
 			ITextRidget section = container.getRidget(ITextRidget.class, RIDGET_ID_PL_SECTION);
 			section.bindToModel(dairyLocation.getLocation().getPostalLocation(), "section");
@@ -453,27 +441,6 @@ public class DairyLocationController extends SubModuleController {
 			longitude.updateFromModel();
 		}
 		
-		private void configureMessageBoxes(IRidgetContainer container)
-		{
-			duplicateNameDialog = container.getRidget(IMessageBoxRidget.class, RIDGET_ID_DUPLICATE_NAME_DIALOG);
-			duplicateNameDialog.setType(IMessageBoxRidget.Type.ERROR);
-			duplicateNameDialog.setTitle("Duplicate Name"); 
-			duplicateNameDialog.setText("The name '" + textName.getText() + "' is already in use.\r\n\rPlease select a unique name for this new location.");
-			
-			addressRequiredDialog = container.getRidget(IMessageBoxRidget.class, RIDGET_ID_ADDRESS_REQUIRED_DIALOG);
-			addressRequiredDialog.setType(IMessageBoxRidget.Type.ERROR);
-			addressRequiredDialog.setTitle("Address Required"); 
-			addressRequiredDialog.setText("You must specify an address for this location - either in the \"Address\" tab or the \"Directions\" tab.");
-			
-			deleteConfirmDialog = container.getRidget(IMessageBoxRidget.class, RIDGET_ID_DELETE_CONFIRM_DIALOG);
-			deleteConfirmDialog.setType(IMessageBoxRidget.Type.QUESTION);
-			deleteConfirmDialog.setTitle("Confirm"); 
-			deleteConfirmDialog.setText("Do you want to delete this item?");
-			IMessageBoxRidget.MessageBoxOption[] customOptions = new IMessageBoxRidget.MessageBoxOption[] {
-					new IMessageBoxRidget.MessageBoxOption("Yes"), new IMessageBoxRidget.MessageBoxOption("No") };
-			deleteConfirmDialog.setOptions(customOptions);
-		}
-		
 		private class RouteSelectCallback implements ISelectionListener
 		{
 
@@ -481,7 +448,7 @@ public class DairyLocationController extends SubModuleController {
 			public void ridgetSelected(SelectionEvent event) {
 				if (event.getNewSelection().size() > 0) {
 					String selectedName = (String) event.getNewSelection().get(0);
-					RouteService rs = new RouteService();
+					RouteService rs = RouteService.getInstance();
 					Route r = rs.findByName(selectedName);
 					IComboRidget select = (IComboRidget) event.getSource();
 					if (r == null) { //selection is invalid since the route might be removed by someone else.
@@ -496,51 +463,6 @@ public class DairyLocationController extends SubModuleController {
 			}
 				
 		}
-		private  class SaveCallback implements IActionListener {
-			IValidator uniqueNameValidator = new IValidator()
-			{
-				@Override
-				public IStatus validate(Object value) {
-					//#TODO invoke the real service to query locationby name
-					if ("testDairylocationName1".equals(textName.getText()))
-					{
-							return Status.CANCEL_STATUS;
-					}
-					return Status.OK_STATUS;
-				}
-				
-			};
-			
-			IValidator addressValidator = new IValidator()
-			{
-				@Override
-				public IStatus validate(Object value) {
-					if ("".equals(textAddress.getText()))
-					{
-							return Status.CANCEL_STATUS;
-					}
-					return Status.OK_STATUS;
-				}
-				
-			};
-			@Override
-			public void callback() {
-				textName.addValidationRule(uniqueNameValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-				if (!textName.revalidate())
-				{
-					duplicateNameDialog.show();
-					textName.requestFocus();
-				}
-				textName.removeValidationRule(uniqueNameValidator);
-				textAddress.addValidationRule(addressValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-				if (!textAddress.revalidate())
-				{
-					addressRequiredDialog.show();
-					textAddress.requestFocus();
-				}
-				textAddress.removeValidationRule(addressValidator);
-			}
-		}
 		
 		private class ConfigureRouteCallback implements IActionListener {
 
@@ -549,87 +471,43 @@ public class DairyLocationController extends SubModuleController {
 					RouteListDialog dialog = new RouteListDialog();
 					dialog.setBlockOnOpen(true);
 					dialog.open();
-					routeService.refresh();
-					routeCombo.updateFromModel();
+					//RouteService.getInstance().refresh();
+					//routeCombo.updateFromModel();
 					bindRouteCombo();
 			}
 		}
 		
+		private class DairyLocationNameValidator implements IValidator {
+			@Override
+			public IStatus validate(Object value) {
+				if ("".equals(textName.getText())) return Status.CANCEL_STATUS;
+				
+				for (int i = 0 ; i < input.size(); i++) {
+					if (textName.getText().equals(input.get(i).getName()) && i != table.getSelectionIndex()) {
+						
+						return Status.CANCEL_STATUS;
+					}
+				}
+				return Status.OK_STATUS;
+			}
+		}
 		
-		
-		
-	
+		private class AddressValidator implements IValidator {
+			@Override
+			public IStatus validate(Object value) {
+				if ("".equals(textAddress.getText())) 
+					return Status.CANCEL_STATUS;
+				
+				return Status.OK_STATUS;
+			}
+		}
 	}
 	
 	private void initialize() {
 		
-		DairyLocationResourceManager.INSTANCE.loadDairyLocationsResources();
-		try {
-			input = DairyLocationResourceManager.INSTANCE.getObjectsFromDairyModel(DairyLocation.class);
-		} catch (CoreException e) {
-			// TODO 			
-			e.printStackTrace();
-		}
-		DairyLocationResourceManager.INSTANCE.loadRoutesResources();
+		this.input = DairyLocationService.getInstance().getDairyLocations();
 		
 	}
 
-	public static final class RouteService
-	{
-		private List<Route> routes = null;
-
-		public List<Route> getRoutes() {
-			if (routes == null) {
-				try {
-					routes = DairyLocationResourceManager.INSTANCE.getObjectsFromDairyModel(Route.class);
-				} catch (Exception e) {
-					e.printStackTrace();
-					routes = new ArrayList<Route>();
-				}
-			}
-			return routes;
-		}
-
-		public void store()
-		{
-			DairyLocationResourceManager.INSTANCE.getRoutesResource().getContents().clear();
-			DairyLocationResourceManager.INSTANCE.getRoutesResource().getContents().addAll(routes);
-			try {
-				DairyLocationResourceManager.INSTANCE.saveResource(DairyLocationResourceManager.INSTANCE.getRoutesResource());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		public void refresh()
-		{
-			try {
-				routes = DairyLocationResourceManager.INSTANCE.getObjectsFromDairyModel(Route.class);
-			} catch (Exception e) {
-				e.printStackTrace();
-				routes = new ArrayList<Route>();
-			}
-		}
-		
-		public Route findByName(String name) {
-			getRoutes();
-			for (Route r : routes) {
-				if (r.getName().equals(name)) {
-					return r;
-				}
-			}
-			return null;
-		}
-		
-		public List<String> getNames() {
-			getRoutes();
-			List<String> ret= new ArrayList<String>();
-			for (Route r : routes) {
-				ret.add(r.getName());
-			}
-			return ret;
-		}
-	}
-	
 	
 }
