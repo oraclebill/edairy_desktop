@@ -242,10 +242,17 @@ public class ServiceUtils {
 
 			EStructuralFeature feature = eClass.getEStructuralFeature(i);
 			if (feature instanceof EAttribute) {
+				try
+				{
 				target.eSet(feature, source.eGet(feature));
+				}
+				catch (Exception e)
+				{
+					
+				}
 			} else if (feature instanceof EReference
 					&& source.eGet(feature) instanceof EObject
-					&& target.eGet(feature) instanceof EObject) {
+					&& target.eGet(feature) instanceof EObject) {				
 				copy((EObject) source.eGet(feature), (EObject) target
 						.eGet(feature));
 //			} else if (feature instanceof EReference

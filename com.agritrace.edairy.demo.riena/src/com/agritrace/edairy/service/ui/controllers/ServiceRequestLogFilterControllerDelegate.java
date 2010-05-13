@@ -259,20 +259,20 @@ public class ServiceRequestLogFilterControllerDelegate extends
 		ITextRidget memberText = getRidget(ITextRidget.class,
 				ServiceRequestFilterSection.MEMBER_LOOKUP_TEXT); 
 		if (memberText != null) {
-			String memberName = memberText.getText();
-			if (!"".equals(memberName)) {
-				Condition name = new org.eclipse.emf.query.conditions.strings.StringValue(
-						memberName);
-				EObjectCondition partyName = new EObjectAttributeValueCondition(
-						ModelPackage.Literals.PARTY__NAME, name);
-				EObjectCondition memberRef = new EObjectReferenceValueCondition(
-						DairyPackage.Literals.MEMBERSHIP__MEMBER, partyName);
-				EObjectCondition requestingMember = new EObjectReferenceValueCondition(
-						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER,
-						memberRef);
-
-				condtions.add(requestingMember);
-			}
+//			String memberName = memberText.getText();
+//			if (!"".equals(memberName)) {
+//				Condition name = new org.eclipse.emf.query.conditions.strings.StringValue(
+//						memberName);
+//				EObjectCondition partyName = new EObjectAttributeValueCondition(
+//						ModelPackage.Literals.PARTY__NAME, name);
+//				EObjectCondition memberRef = new EObjectReferenceValueCondition(
+//						DairyPackage.Literals.MEMBERSHIP__MEMBER, partyName);
+//				EObjectCondition requestingMember = new EObjectReferenceValueCondition(
+//						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER,
+//						memberRef);
+//
+//				condtions.add(requestingMember);
+//			}
 		}
 
 		// Member name field

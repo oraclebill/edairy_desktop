@@ -211,9 +211,9 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 					ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_NAME);
 			txtMemberName.setDirectWriting(true);
 			txtMemberName.setOutputOnly(false);
-			txtMemberName.bindToModel(EMFObservables.observeValue(workingCopy
-					.getRequestingMember().getMember(),
-					ModelPackage.Literals.PARTY__NAME));
+//			txtMemberName.bindToModel(EMFObservables.observeValue(workingCopy
+//					.getRequestingMember().getMember(),
+//					ModelPackage.Literals.PARTY__NAME));
 
 			txtMemberName.updateFromModel();
 			txtMemberName.setOutputOnly(true);
