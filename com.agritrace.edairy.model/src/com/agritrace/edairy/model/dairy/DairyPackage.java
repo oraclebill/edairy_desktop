@@ -328,13 +328,13 @@ public interface DairyPackage extends EPackage {
 	int VEHICLE__INSURANCE_POLICY_NUMBER = ASSET_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Insurance Purchase Date</b></em>' attribute.
+	 * The feature id for the '<em><b>Insurance Expiration Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__INSURANCE_PURCHASE_DATE = ASSET_FEATURE_COUNT + 8;
+	int VEHICLE__INSURANCE_EXPIRATION_DATE = ASSET_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Dominant Colour</b></em>' attribute.
@@ -364,13 +364,22 @@ public interface DairyPackage extends EPackage {
 	int VEHICLE__DRIVER = ASSET_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Year</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__YEAR = ASSET_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>Vehicle</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE_FEATURE_COUNT = ASSET_FEATURE_COUNT + 12;
+	int VEHICLE_FEATURE_COUNT = ASSET_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalLineImpl <em>Collection Journal Line</em>}' class.
@@ -1855,15 +1864,15 @@ public interface DairyPackage extends EPackage {
 	EAttribute getVehicle_InsurancePolicyNumber();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePurchaseDate <em>Insurance Purchase Date</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate <em>Insurance Expiration Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Insurance Purchase Date</em>'.
-	 * @see com.agritrace.edairy.model.dairy.Vehicle#getInsurancePurchaseDate()
+	 * @return the meta object for the attribute '<em>Insurance Expiration Date</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate()
 	 * @see #getVehicle()
 	 * @generated
 	 */
-	EAttribute getVehicle_InsurancePurchaseDate();
+	EAttribute getVehicle_InsuranceExpirationDate();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour <em>Dominant Colour</em>}'.
@@ -1897,6 +1906,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVehicle_Driver();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Year</em>'.
+	 * @see com.agritrace.edairy.model.dairy.Vehicle#getYear()
+	 * @see #getVehicle()
+	 * @generated
+	 */
+	EAttribute getVehicle_Year();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine <em>Collection Journal Line</em>}'.
@@ -3112,12 +3132,12 @@ public interface DairyPackage extends EPackage {
 		EAttribute VEHICLE__INSURANCE_POLICY_NUMBER = eINSTANCE.getVehicle_InsurancePolicyNumber();
 
 		/**
-		 * The meta object literal for the '<em><b>Insurance Purchase Date</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Insurance Expiration Date</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VEHICLE__INSURANCE_PURCHASE_DATE = eINSTANCE.getVehicle_InsurancePurchaseDate();
+		EAttribute VEHICLE__INSURANCE_EXPIRATION_DATE = eINSTANCE.getVehicle_InsuranceExpirationDate();
 
 		/**
 		 * The meta object literal for the '<em><b>Dominant Colour</b></em>' attribute feature.
@@ -3142,6 +3162,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VEHICLE__DRIVER = eINSTANCE.getVehicle_Driver();
+
+		/**
+		 * The meta object literal for the '<em><b>Year</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VEHICLE__YEAR = eINSTANCE.getVehicle_Year();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.model.dairy.impl.CollectionJournalLineImpl <em>Collection Journal Line</em>}' class.

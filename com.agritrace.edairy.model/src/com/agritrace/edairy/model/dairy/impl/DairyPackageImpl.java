@@ -339,7 +339,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_InsurancePurchaseDate() {
+	public EAttribute getVehicle_InsuranceExpirationDate() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -368,6 +368,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EReference getVehicle_Driver() {
 		return (EReference)vehicleEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVehicle_Year() {
+		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1334,10 +1343,11 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(vehicleEClass, VEHICLE__CHASSIS_NUMBER);
 		createEAttribute(vehicleEClass, VEHICLE__LOG_BOOK_NUMBER);
 		createEAttribute(vehicleEClass, VEHICLE__INSURANCE_POLICY_NUMBER);
-		createEAttribute(vehicleEClass, VEHICLE__INSURANCE_PURCHASE_DATE);
+		createEAttribute(vehicleEClass, VEHICLE__INSURANCE_EXPIRATION_DATE);
 		createEAttribute(vehicleEClass, VEHICLE__DOMINANT_COLOUR);
 		createEAttribute(vehicleEClass, VEHICLE__CAPACITY_IN_TONNES);
 		createEReference(vehicleEClass, VEHICLE__DRIVER);
+		createEAttribute(vehicleEClass, VEHICLE__YEAR);
 
 		collectionJournalLineEClass = createEClass(COLLECTION_JOURNAL_LINE);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__LINE_NUMBER);
@@ -1511,10 +1521,11 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getVehicle_ChassisNumber(), ecorePackage.getEString(), "chassisNumber", null, 1, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_LogBookNumber(), ecorePackage.getEString(), "logBookNumber", null, 1, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_InsurancePolicyNumber(), ecorePackage.getEString(), "insurancePolicyNumber", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVehicle_InsurancePurchaseDate(), ecorePackage.getEString(), "insurancePurchaseDate", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVehicle_InsuranceExpirationDate(), ecorePackage.getEDate(), "insuranceExpirationDate", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_DominantColour(), ecorePackage.getEString(), "dominantColour", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_CapacityInTonnes(), ecorePackage.getEString(), "capacityInTonnes", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVehicle_Driver(), this.getEmployee(), null, "driver", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVehicle_Year(), ecorePackage.getEString(), "year", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collectionJournalLineEClass, CollectionJournalLine.class, "CollectionJournalLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollectionJournalLine_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

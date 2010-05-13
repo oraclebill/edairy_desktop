@@ -35,8 +35,6 @@ import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.service.ui.converters.DateToStringModelConvertor;
-import com.agritrace.edairy.service.ui.converters.StringToStringModelConverter;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.service.ui.views.ServiceRequestMasterDetailComposite;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
@@ -61,6 +59,7 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
 	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm",
 			"Type" };
+
 
 	public ServiceRequestLogMasterDetailControllerDelegate(
 			SubModuleController controller) {
@@ -190,26 +189,20 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 			ITextRidget memberIdText = container.getRidget(ITextRidget.class,
 					ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_ID); //$NON-NLS-1$
 			memberIdText.setDirectWriting(true);
-			memberIdText
-					.setModelToUIControlConverter(new StringToStringModelConverter(
-							workingCopy.getRequestingMember(),
-							DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 			memberIdText.setOutputOnly(false);
-			memberIdText.bindToModel(EMFObservables.observeValue(workingCopy
+			memberIdText.bindToModel(workingCopy
 					.getRequestingMember(),
-					DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
+					DairyPackage.Literals.MEMBERSHIP__MEMBER_ID.getName());
 			memberIdText.updateFromModel();
 
 			memberIdText.setOutputOnly(true);
 			//
 			ITextRidget textDate = container.getRidget(ITextRidget.class,
-					ServiceRequestMasterDetailComposite.BIND_ID_REQUEST_DATE);
-			textDate.setModelToUIControlConverter(new DateToStringModelConvertor(
-					workingCopy,
-					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));
-			textDate.bindToModel(EMFObservables.observeValue(workingCopy,
-					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));
-
+					ServiceRequestMasterDetailComposite.BIND_ID_REQUEST_DATE);	
+			textDate.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
+			textDate.bindToModel(workingCopy,
+					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
+							.getName());
 			textDate.updateFromModel();
 			textDate.setOutputOnly(true);
 
@@ -217,11 +210,6 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 			ITextRidget txtMemberName = container.getRidget(ITextRidget.class,
 					ServiceRequestMasterDetailComposite.BIND_ID_MEMBER_NAME);
 			txtMemberName.setDirectWriting(true);
-			//
-			txtMemberName
-					.setModelToUIControlConverter(new StringToStringModelConverter(
-							workingCopy.getRequestingMember().getMember(),
-							ModelPackage.Literals.PARTY__NAME));
 			txtMemberName.setOutputOnly(false);
 			txtMemberName.bindToModel(EMFObservables.observeValue(workingCopy
 					.getRequestingMember().getMember(),
@@ -338,121 +326,7 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 			// RequestsPackage.Literals.REQUEST_TYPE));
 			insementationRadionBtn.updateFromModel();
 			insementationRadionBtn.setOutputOnly(true);
-
-			if (RequestType.INSEMINATION == workingCopy.getType()) {
-
-				// Heate date
-				ITextRidget heatTimeTextBtn = container
-						.getRidget(
-								ITextRidget.class,
-								ServiceRequestMasterDetailComposite.BIND_ID_INSE_TIME_HEATED_DETECTED);
-				if (heatTimeTextBtn != null) {
-					heatTimeTextBtn.setDirectWriting(true);
-					heatTimeTextBtn
-							.setModelToUIControlConverter(new DateToStringModelConvertor(
-									workingCopy,
-									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED));
-					heatTimeTextBtn.setOutputOnly(false);
-					heatTimeTextBtn
-							.bindToModel(EMFObservables
-									.observeValue(
-											workingCopy,
-											RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED));
-
-					heatTimeTextBtn.updateFromModel();
-					heatTimeTextBtn.setOutputOnly(true);
-				}
-
-				// First
-				ITextRidget firstTextBtn = container
-						.getRidget(
-								ITextRidget.class,
-								ServiceRequestMasterDetailComposite.BIND_ID_INSE_FIRST_TRETMENT);
-				if (firstTextBtn != null) {
-					firstTextBtn.setDirectWriting(true);
-					firstTextBtn
-							.setModelToUIControlConverter(new DateToStringModelConvertor(
-									workingCopy,
-									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT));
-					firstTextBtn.setOutputOnly(false);
-					firstTextBtn
-							.bindToModel(EMFObservables
-									.observeValue(
-											workingCopy,
-											RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT));
-
-					firstTextBtn.updateFromModel();
-					firstTextBtn.setOutputOnly(true);
-				}
-
-				// Second
-				ITextRidget secondTextBtn = container
-						.getRidget(
-								ITextRidget.class,
-								ServiceRequestMasterDetailComposite.BIND_ID_INSE_SECOND_TRETMENT);
-				if (secondTextBtn != null) {
-					secondTextBtn.setDirectWriting(true);
-					secondTextBtn
-							.setModelToUIControlConverter(new DateToStringModelConvertor(
-									workingCopy,
-									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT));
-					secondTextBtn.setOutputOnly(false);
-					secondTextBtn
-							.bindToModel(EMFObservables
-									.observeValue(
-											workingCopy,
-											RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT));
-
-					secondTextBtn.updateFromModel();
-					secondTextBtn.setOutputOnly(true);
-				}
-
-				// Third
-				ITextRidget thirdTextBtn = container
-						.getRidget(
-								ITextRidget.class,
-								ServiceRequestMasterDetailComposite.BIND_ID_INSE_THIRD_TRETMENT);
-				if (thirdTextBtn != null) {
-					thirdTextBtn.setDirectWriting(true);
-					thirdTextBtn
-							.setModelToUIControlConverter(new DateToStringModelConvertor(
-									workingCopy,
-									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT));
-					thirdTextBtn.setOutputOnly(false);
-					thirdTextBtn
-							.bindToModel(EMFObservables
-									.observeValue(
-											workingCopy,
-											RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT));
-
-					thirdTextBtn.updateFromModel();
-					thirdTextBtn.setOutputOnly(true);
-				}
-
-			} else {
-				// Complaint
-				// Third
-				ITextRidget complaintTextBtn = container
-						.getRidget(
-								ITextRidget.class,
-								ServiceRequestMasterDetailComposite.BIND_ID_VERY_THIRD_COMPLAINT);
-				if (complaintTextBtn != null) {
-					complaintTextBtn.setDirectWriting(true);
-					complaintTextBtn
-							.setModelToUIControlConverter(new StringToStringModelConverter(
-									workingCopy,
-									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM));
-					complaintTextBtn.setOutputOnly(false);
-					complaintTextBtn
-							.bindToModel(EMFObservables
-									.observeValue(
-											workingCopy,
-											RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM));
-
-					complaintTextBtn.updateFromModel();
-					complaintTextBtn.setOutputOnly(true);
-				}
-			}
+			
 		}
 
 		@Override
@@ -510,23 +384,20 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 					ServiceRequestMasterDetailComposite.BIND_ID_SPECIFIC_CONTAINER);
 			if (RequestType.INSEMINATION == request.getType()) {
 
-				// Heate date
+				// Heated date
 				ITextRidget heatTimeTextBtn = container
 						.getRidget(
 								ITextRidget.class,
 								ServiceRequestMasterDetailComposite.BIND_ID_INSE_TIME_HEATED_DETECTED);
 				heatTimeTextBtn.setDirectWriting(true);
 				heatTimeTextBtn
-						.setModelToUIControlConverter(new DateToStringModelConvertor(
-								workingCopy,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED));
+						.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
 				heatTimeTextBtn.setOutputOnly(false);
 				heatTimeTextBtn
-						.bindToModel(EMFObservables
-								.observeValue(
-										workingCopy,
-										RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED));
-
+						.bindToModel(
+								workingCopy,
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED
+										.getName());
 				heatTimeTextBtn.updateFromModel();
 				heatTimeTextBtn.setOutputOnly(true);
 
@@ -537,15 +408,13 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 								ServiceRequestMasterDetailComposite.BIND_ID_INSE_FIRST_TRETMENT);
 				firstTextBtn.setDirectWriting(true);
 				firstTextBtn
-						.setModelToUIControlConverter(new DateToStringModelConvertor(
-								workingCopy,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT));
+						.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
 				firstTextBtn.setOutputOnly(false);
 				firstTextBtn
-						.bindToModel(EMFObservables
-								.observeValue(
-										workingCopy,
-										RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT));
+						.bindToModel(
+								workingCopy,
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT
+										.getName());
 
 				firstTextBtn.updateFromModel();
 				firstTextBtn.setOutputOnly(true);
@@ -557,15 +426,13 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 								ServiceRequestMasterDetailComposite.BIND_ID_INSE_SECOND_TRETMENT);
 				secondTextBtn.setDirectWriting(true);
 				secondTextBtn
-						.setModelToUIControlConverter(new DateToStringModelConvertor(
-								workingCopy,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT));
+						.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
 				secondTextBtn.setOutputOnly(false);
 				secondTextBtn
-						.bindToModel(EMFObservables
-								.observeValue(
-										workingCopy,
-										RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT));
+						.bindToModel(
+								workingCopy,
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT
+										.getName());
 
 				secondTextBtn.updateFromModel();
 				secondTextBtn.setOutputOnly(true);
@@ -577,15 +444,13 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 								ServiceRequestMasterDetailComposite.BIND_ID_INSE_THIRD_TRETMENT);
 				thirdTextBtn.setDirectWriting(true);
 				thirdTextBtn
-						.setModelToUIControlConverter(new DateToStringModelConvertor(
-								workingCopy,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT));
+						.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
 				thirdTextBtn.setOutputOnly(false);
 				thirdTextBtn
-						.bindToModel(EMFObservables
-								.observeValue(
-										workingCopy,
-										RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT));
+						.bindToModel(
+								workingCopy,
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT
+										.getName());
 
 				thirdTextBtn.updateFromModel();
 				thirdTextBtn.setOutputOnly(true);
@@ -598,17 +463,12 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends
 								ITextRidget.class,
 								ServiceRequestMasterDetailComposite.BIND_ID_VERY_THIRD_COMPLAINT);
 				complaintTextBtn.setDirectWriting(true);
-				complaintTextBtn
-						.setModelToUIControlConverter(new StringToStringModelConverter(
-								workingCopy,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM));
 				complaintTextBtn.setOutputOnly(false);
 				complaintTextBtn
-						.bindToModel(EMFObservables
-								.observeValue(
-										workingCopy,
-										RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM));
-
+						.bindToModel(
+								workingCopy,
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM
+										.getName());
 				complaintTextBtn.updateFromModel();
 				complaintTextBtn.setOutputOnly(true);
 			}

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -22,6 +23,7 @@ import org.eclipse.riena.ui.ridgets.IComplexRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
+import org.eclipse.riena.ui.ridgets.databinding.DateToStringConverter;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.riena.ui.ridgets.uibinding.CorrespondingLabelMapper;
 import org.eclipse.riena.ui.ridgets.uibinding.DefaultBindingManager;
@@ -39,8 +41,20 @@ import org.eclipse.swt.widgets.Control;
  */
 public class ServiceUtils {
 
-	public static DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
-
+	/**
+	 * Defaults date format pattern
+	 */
+	public static String DEFAULT_DATE_PATTERN = "MM/dd/yyyy";
+	/**
+	 * Default date format instance
+	 */
+	public static DateFormat DATE_FORMAT = new SimpleDateFormat(
+			DEFAULT_DATE_PATTERN);
+	/**
+	 * Date to String converter using default date pattern
+	 */
+	public static IConverter DEFAULT_DATE_STRING_CONVERTER = new DateToStringConverter(
+			ServiceUtils.DEFAULT_DATE_PATTERN);
 
 
 	private static class BindingManager extends DefaultBindingManager {

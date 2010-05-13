@@ -10,6 +10,7 @@ import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
 import com.agritrace.edairy.model.dairy.Vehicle;
 
+import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -32,10 +33,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getChassisNumber <em>Chassis Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getLogBookNumber <em>Log Book Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getInsurancePolicyNumber <em>Insurance Policy Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getInsurancePurchaseDate <em>Insurance Purchase Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getInsuranceExpirationDate <em>Insurance Expiration Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getDominantColour <em>Dominant Colour</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.impl.VehicleImpl#getYear <em>Year</em>}</li>
  * </ul>
  * </p>
  *
@@ -203,24 +205,24 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	protected String insurancePolicyNumber = INSURANCE_POLICY_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getInsurancePurchaseDate() <em>Insurance Purchase Date</em>}' attribute.
+	 * The default value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsurancePurchaseDate()
+	 * @see #getInsuranceExpirationDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INSURANCE_PURCHASE_DATE_EDEFAULT = null;
+	protected static final Date INSURANCE_EXPIRATION_DATE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getInsurancePurchaseDate() <em>Insurance Purchase Date</em>}' attribute.
+	 * The cached value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsurancePurchaseDate()
+	 * @see #getInsuranceExpirationDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected String insurancePurchaseDate = INSURANCE_PURCHASE_DATE_EDEFAULT;
+	protected Date insuranceExpirationDate = INSURANCE_EXPIRATION_DATE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
@@ -271,6 +273,26 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * @ordered
 	 */
 	protected Employee driver;
+
+	/**
+	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getYear()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String YEAR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getYear()
+	 * @generated
+	 * @ordered
+	 */
+	protected String year = YEAR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -464,8 +486,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getInsurancePurchaseDate() {
-		return insurancePurchaseDate;
+	public Date getInsuranceExpirationDate() {
+		return insuranceExpirationDate;
 	}
 
 	/**
@@ -473,11 +495,11 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInsurancePurchaseDate(String newInsurancePurchaseDate) {
-		String oldInsurancePurchaseDate = insurancePurchaseDate;
-		insurancePurchaseDate = newInsurancePurchaseDate;
+	public void setInsuranceExpirationDate(Date newInsuranceExpirationDate) {
+		Date oldInsuranceExpirationDate = insuranceExpirationDate;
+		insuranceExpirationDate = newInsuranceExpirationDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE, oldInsurancePurchaseDate, insurancePurchaseDate));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE, oldInsuranceExpirationDate, insuranceExpirationDate));
 	}
 
 	/**
@@ -565,6 +587,27 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getYear() {
+		return year;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setYear(String newYear) {
+		String oldYear = year;
+		year = newYear;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -584,8 +627,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 				return getLogBookNumber();
 			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
 				return getInsurancePolicyNumber();
-			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
-				return getInsurancePurchaseDate();
+			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+				return getInsuranceExpirationDate();
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				return getDominantColour();
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
@@ -593,6 +636,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__DRIVER:
 				if (resolve) return getDriver();
 				return basicGetDriver();
+			case DairyPackage.VEHICLE__YEAR:
+				return getYear();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -629,8 +674,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
 				setInsurancePolicyNumber((String)newValue);
 				return;
-			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
-				setInsurancePurchaseDate((String)newValue);
+			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+				setInsuranceExpirationDate((Date)newValue);
 				return;
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				setDominantColour((String)newValue);
@@ -640,6 +685,9 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 				return;
 			case DairyPackage.VEHICLE__DRIVER:
 				setDriver((Employee)newValue);
+				return;
+			case DairyPackage.VEHICLE__YEAR:
+				setYear((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -677,8 +725,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
 				setInsurancePolicyNumber(INSURANCE_POLICY_NUMBER_EDEFAULT);
 				return;
-			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
-				setInsurancePurchaseDate(INSURANCE_PURCHASE_DATE_EDEFAULT);
+			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+				setInsuranceExpirationDate(INSURANCE_EXPIRATION_DATE_EDEFAULT);
 				return;
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				setDominantColour(DOMINANT_COLOUR_EDEFAULT);
@@ -688,6 +736,9 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 				return;
 			case DairyPackage.VEHICLE__DRIVER:
 				setDriver((Employee)null);
+				return;
+			case DairyPackage.VEHICLE__YEAR:
+				setYear(YEAR_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -717,14 +768,16 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 				return LOG_BOOK_NUMBER_EDEFAULT == null ? logBookNumber != null : !LOG_BOOK_NUMBER_EDEFAULT.equals(logBookNumber);
 			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
 				return INSURANCE_POLICY_NUMBER_EDEFAULT == null ? insurancePolicyNumber != null : !INSURANCE_POLICY_NUMBER_EDEFAULT.equals(insurancePolicyNumber);
-			case DairyPackage.VEHICLE__INSURANCE_PURCHASE_DATE:
-				return INSURANCE_PURCHASE_DATE_EDEFAULT == null ? insurancePurchaseDate != null : !INSURANCE_PURCHASE_DATE_EDEFAULT.equals(insurancePurchaseDate);
+			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+				return INSURANCE_EXPIRATION_DATE_EDEFAULT == null ? insuranceExpirationDate != null : !INSURANCE_EXPIRATION_DATE_EDEFAULT.equals(insuranceExpirationDate);
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				return DOMINANT_COLOUR_EDEFAULT == null ? dominantColour != null : !DOMINANT_COLOUR_EDEFAULT.equals(dominantColour);
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
 				return CAPACITY_IN_TONNES_EDEFAULT == null ? capacityInTonnes != null : !CAPACITY_IN_TONNES_EDEFAULT.equals(capacityInTonnes);
 			case DairyPackage.VEHICLE__DRIVER:
 				return driver != null;
+			case DairyPackage.VEHICLE__YEAR:
+				return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -755,12 +808,14 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		result.append(logBookNumber);
 		result.append(", insurancePolicyNumber: ");
 		result.append(insurancePolicyNumber);
-		result.append(", insurancePurchaseDate: ");
-		result.append(insurancePurchaseDate);
+		result.append(", insuranceExpirationDate: ");
+		result.append(insuranceExpirationDate);
 		result.append(", dominantColour: ");
 		result.append(dominantColour);
 		result.append(", capacityInTonnes: ");
 		result.append(capacityInTonnes);
+		result.append(", year: ");
+		result.append(year);
 		result.append(')');
 		return result.toString();
 	}

@@ -165,6 +165,13 @@
                name="Member Statement Report"
                restorable="true">
          </view>
+         <view
+               allowMultiple="true"
+               class="com.agritrace.edairy.setup.ui.views.VehicleLogView"
+               id="com.agritrace.edairy.setup.ui.views.VehicleLogView"
+               name="Vehicle Log"
+               restorable="true">
+         </view>
         </extension>
    <extension
          point="org.eclipse.riena.ui.swt.imagePaths">

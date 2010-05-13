@@ -6,6 +6,8 @@
  */
 package com.agritrace.edairy.model.dairy;
 
+import java.util.Date;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +25,11 @@ package com.agritrace.edairy.model.dairy;
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getChassisNumber <em>Chassis Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getLogBookNumber <em>Log Book Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePolicyNumber <em>Insurance Policy Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePurchaseDate <em>Insurance Purchase Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate <em>Insurance Expiration Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour <em>Dominant Colour</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
  *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}</li>
  * </ul>
  * </p>
  *
@@ -244,30 +247,30 @@ public interface Vehicle extends Asset {
 	void setInsurancePolicyNumber(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Insurance Purchase Date</b></em>' attribute.
+	 * Returns the value of the '<em><b>Insurance Expiration Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Insurance Purchase Date</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Insurance Expiration Date</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Insurance Purchase Date</em>' attribute.
-	 * @see #setInsurancePurchaseDate(String)
-	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_InsurancePurchaseDate()
+	 * @return the value of the '<em>Insurance Expiration Date</em>' attribute.
+	 * @see #setInsuranceExpirationDate(Date)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_InsuranceExpirationDate()
 	 * @model
 	 * @generated
 	 */
-	String getInsurancePurchaseDate();
+	Date getInsuranceExpirationDate();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePurchaseDate <em>Insurance Purchase Date</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate <em>Insurance Expiration Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Insurance Purchase Date</em>' attribute.
-	 * @see #getInsurancePurchaseDate()
+	 * @param value the new value of the '<em>Insurance Expiration Date</em>' attribute.
+	 * @see #getInsuranceExpirationDate()
 	 * @generated
 	 */
-	void setInsurancePurchaseDate(String value);
+	void setInsuranceExpirationDate(Date value);
 
 	/**
 	 * Returns the value of the '<em><b>Dominant Colour</b></em>' attribute.
@@ -346,5 +349,31 @@ public interface Vehicle extends Asset {
 	 * @generated
 	 */
 	void setDriver(Employee value);
+
+	/**
+	 * Returns the value of the '<em><b>Year</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Year</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Year</em>' attribute.
+	 * @see #setYear(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_Year()
+	 * @model
+	 * @generated
+	 */
+	String getYear();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Year</em>' attribute.
+	 * @see #getYear()
+	 * @generated
+	 */
+	void setYear(String value);
 
 } // Vehicle
