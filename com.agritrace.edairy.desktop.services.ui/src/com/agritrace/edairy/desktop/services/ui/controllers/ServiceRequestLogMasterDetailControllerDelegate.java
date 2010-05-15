@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.controllers;
+package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,9 @@ import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.swt.widgets.Control;
 
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestMasterDetailComposite;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
@@ -34,9 +37,6 @@ import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
-import com.agritrace.edairy.service.ui.views.ServiceRequestMasterDetailComposite;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 
 /**
  * Master-detail controller delegate

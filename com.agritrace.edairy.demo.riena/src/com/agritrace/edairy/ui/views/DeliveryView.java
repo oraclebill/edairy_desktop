@@ -206,7 +206,7 @@ public class DeliveryView extends ViewPart {
 		if (!selection.isEmpty()) {
 		    if (MessageDialog.openConfirm(removeButton.getShell(), "Remove Items",
 			    "Do you want to remove the selected items?")) {
-			final Iterator i = selection.iterator();
+			final Iterator<?> i = selection.iterator();
 			while (i.hasNext()) {
 			    final Item item = (Item) i.next();
 			    input.remove(item);

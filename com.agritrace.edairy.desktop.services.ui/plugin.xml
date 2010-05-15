@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView"
+            id="com.agritrace.edairy.desktop.services.request.view"
+            name="Service Request Log"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView"
+            id="com.agritrace.edairy.desktop.services.request.view"
+            name="Service Request Log"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.agritrace.edairy.desktop.services.ui.ViewPart1"
+            id="com.agritrace.edairy.desktop.services.request.view"
+            name="name"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

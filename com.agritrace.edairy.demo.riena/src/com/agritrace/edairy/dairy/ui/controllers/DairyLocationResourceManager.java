@@ -29,7 +29,6 @@ import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 import com.agritrace.edairy.ui.EDairyActivator;
 
 public class DairyLocationResourceManager {
@@ -200,6 +199,7 @@ public class DairyLocationResourceManager {
 	routesResource = loadResource(dairyResourceURI);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T> type) throws CoreException {
 	final List<T> objectList = new ArrayList<T>();
 	List<EObject> objects = null;

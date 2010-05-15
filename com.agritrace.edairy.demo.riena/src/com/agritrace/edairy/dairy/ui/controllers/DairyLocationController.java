@@ -37,7 +37,6 @@ import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.impl.ModelFactoryImpl;
 
 public class DairyLocationController extends SubModuleController {
     public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";

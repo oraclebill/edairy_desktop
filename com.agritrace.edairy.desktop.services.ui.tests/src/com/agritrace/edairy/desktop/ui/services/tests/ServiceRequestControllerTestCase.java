@@ -14,11 +14,10 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestFilterSection;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.service.core.ServiceRequestResourceManager;
-import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
-import com.agritrace.edairy.service.ui.views.ServiceRequestFilterSection;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.services.ui.controllers.*;
 
 /**
  * Test case for service request controller

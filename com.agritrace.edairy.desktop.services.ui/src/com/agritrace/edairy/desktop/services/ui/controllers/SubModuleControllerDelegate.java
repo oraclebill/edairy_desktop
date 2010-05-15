@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.controllers;
+package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IRidget;

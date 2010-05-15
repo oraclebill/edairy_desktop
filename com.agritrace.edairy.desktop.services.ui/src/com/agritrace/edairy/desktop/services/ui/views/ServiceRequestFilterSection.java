@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.views;
+package com.agritrace.edairy.desktop.services.ui.views;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,13 +21,13 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
-import com.agritrace.edairy.riena.ui.views.FarmSearchDialog;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.EDairyActivator;
+import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.services.ui.Activator;
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 
 /**
  * @author Spark Wan
@@ -129,7 +129,7 @@ public class ServiceRequestFilterSection {
 		.getTime())));
 
 	final Button calendarButton = new Button(dateComp, SWT.PUSH);
-	final Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
+	final Image calendar = Activator.getImage(ImageRegistry.calendar);
 	calendarButton.setImage(calendar);
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 	// addUIControl(calendarButton,ViewWidgetId.calendarButton);
@@ -207,7 +207,7 @@ public class ServiceRequestFilterSection {
 	memberText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	// Search Button
 	memberSearchButton = UIControlsFactory.createImageButton(comp, SWT.None);
-	memberSearchButton.setImage(EDairyActivator.getImage(SEARCH_ICON_PATH));
+	memberSearchButton.setImage(Activator.getImage(SEARCH_ICON_PATH));
 	memberSearchButton.addListener(SWT.Selection, listener);
 
     }
@@ -224,7 +224,7 @@ public class ServiceRequestFilterSection {
 	farmText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	// Search Button
 	farmLookupButton = UIControlsFactory.createImageButton(comp, SWT.None);
-	farmLookupButton.setImage(EDairyActivator.getImage(SEARCH_ICON_PATH));
+	farmLookupButton.setImage(Activator.getImage(SEARCH_ICON_PATH));
 	farmLookupButton.addListener(SWT.Selection, listener);
 
     }

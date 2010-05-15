@@ -1,4 +1,4 @@
-package com.agritrace.edairy.riena.ui.views;
+package com.agritrace.edairy.desktop.common.ui.dialogs;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -24,16 +24,13 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.ui.views.data.MemberFactory;
-import com.agritrace.edairy.ui.views.data.MemberShip;
+import com.agritrace.edairy.model.dairy.Membership;
 
-/**
- * This is a demo dialog copied from MemberSearchDialog
- * 
- * @author Hui(Spark) Wan
- * 
- */
-public class FarmSearchDialog extends TitleAreaDialog {
+
+public class MemberSearchDialog extends TitleAreaDialog {
+    
+    String dlgTitle = "Member Lookup";
+    String dlgPrompt = "Please input member search criterias";
 
     /**
      * MyTitleAreaDialog constructor
@@ -41,7 +38,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
      * @param shell
      *            the parent shell
      */
-    public FarmSearchDialog(Shell shell) {
+    public MemberSearchDialog(Shell shell ) {
 	super(shell);
 
     }
@@ -65,8 +62,8 @@ public class FarmSearchDialog extends TitleAreaDialog {
     @Override
     protected Control createContents(Composite parent) {
 	final Control contents = super.createContents(parent);
-	setTitle("Farm Lookup");
-	setMessage("Please input farm search criterias");
+	setTitle(dlgTitle);
+	setMessage(dlgPrompt);
 	return contents;
     }
 
@@ -152,7 +149,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 	tableView.setContentProvider(new ArrayContentProvider());
 	tableView.setLabelProvider(new MemberLabelProvider());
-	tableView.setInput(MemberFactory.createMemberList());
+	tableView.setInput(null); // TODO: FIX TEST - inject member list into dialog
 
 	panel.setLayout(layout);
 	return composite;
@@ -203,14 +200,20 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
-	    if (element instanceof MemberShip) {
+	    if (element instanceof Membership) {
+		Membership member = (Membership) element;
+		assert(member.getMember() != null);
 		switch (columnIndex) {
 		case 0:
-		    return ((MemberShip) element).getId().toString();
+		    return member.getMemberId().toString();
 		case 1:
-		    return ((MemberShip) element).getFirstname() + ((MemberShip) element).getLastname();
+		    return member.getMember().getGivenName() + member.getMember().getFamilyName();
 		case 2:
-		    return ((MemberShip) element).getAddress();
+		    try {		
+			return member.getMember().getLocation().getPostalLocation().getAddress();
+		    } catch (Exception e) {
+			return "<location not found>";
+		    }
 		}
 	    }
 	    return null;

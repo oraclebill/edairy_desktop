@@ -13,13 +13,13 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
+import com.agritrace.edairy.desktop.services.ui.controllers.CommonSubModuleViewController;
+import com.agritrace.edairy.desktop.services.ui.controllers.SubModuleControllerDelegate;
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
 import com.agritrace.edairy.model.dairy.Vehicle;
-import com.agritrace.edairy.service.ui.controllers.CommonSubModuleViewController;
-import com.agritrace.edairy.service.ui.controllers.SubModuleControllerDelegate;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 import com.agritrace.edairy.setup.ui.views.VehicleMasterDetailComposite;
 
 /**

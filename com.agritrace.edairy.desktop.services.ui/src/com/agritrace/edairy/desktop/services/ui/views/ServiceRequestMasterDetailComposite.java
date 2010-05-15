@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.views;
+package com.agritrace.edairy.desktop.services.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -18,10 +18,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
+import com.agritrace.edairy.desktop.services.ui.Activator;
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.EDairyActivator;
 
 /**
  * Service Log view Master detail Composite
@@ -128,7 +128,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 	addUIControl(txtDate, BIND_ID_REQUEST_DATE);
 
 	final Button button = new Button(dateComposte, SWT.PUSH);
-	final Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
+	final Image calendar = Activator.getImage(ImageRegistry.calendar);
 	button.setImage(calendar);
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(button);
 
@@ -211,7 +211,7 @@ public class ServiceRequestMasterDetailComposite extends MasterDetailsComposite 
 
 	// Calendar Button
 	final Button button = new Button(inseminationGroup, SWT.PUSH);
-	final Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
+	final Image calendar = Activator.getImage(ImageRegistry.calendar);
 	button.setImage(calendar);
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(button);
 	// Insemination

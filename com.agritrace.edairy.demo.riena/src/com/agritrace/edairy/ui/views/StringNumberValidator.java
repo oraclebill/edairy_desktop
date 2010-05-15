@@ -14,6 +14,7 @@ public class StringNumberValidator implements IValidator {
 	} else {
 	    final String strValue = (String) value;
 	    try {
+		@SuppressWarnings("unused")
 		final Integer i = new Integer(strValue);
 	    } catch (final NumberFormatException ex) {
 		return ValidationStatus.error(ex.getMessage());

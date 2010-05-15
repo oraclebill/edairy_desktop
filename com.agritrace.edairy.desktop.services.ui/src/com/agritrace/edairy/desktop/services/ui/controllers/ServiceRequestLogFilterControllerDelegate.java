@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.controllers;
+package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,12 +28,12 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestFilterSection;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
-import com.agritrace.edairy.service.ui.views.ServiceRequestFilterSection;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 
 /**
  * Filter section controller delegatesssss

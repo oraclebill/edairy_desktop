@@ -21,12 +21,12 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
-import com.agritrace.edairy.riena.ui.views.FarmSearchDialog;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.ui.EDairyActivator;
 
 /**

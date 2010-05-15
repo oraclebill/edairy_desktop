@@ -68,7 +68,7 @@ public class InseminationRequestView extends VeterinaryRequestView {
 	requestGroup.setLayout(new GridLayout(3, false));
 	requestGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 
-	final Label l = UIControlsFactory.createLabel(requestGroup, "Time Heat Detected:");
+	UIControlsFactory.createLabel(requestGroup, "Time Heat Detected:");
 
 	textArea = UIControlsFactory.createText(requestGroup, SWT.SINGLE | SWT.BORDER);
 	textArea.setText("3/12/2010");
@@ -119,7 +119,7 @@ public class InseminationRequestView extends VeterinaryRequestView {
 	    }
 	});
 
-	final Label firstRequestLabel = UIControlsFactory.createLabel(requestGroup, "Insemination Numbers"); //$NON-NLS-1$
+	UIControlsFactory.createLabel(requestGroup, "Insemination Numbers"); //$NON-NLS-1$
 	final Spinner spinner = new Spinner(requestGroup, SWT.BORDER);
 	spinner.setMinimum(0);
 	spinner.setMaximum(100);

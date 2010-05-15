@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.views;
+package com.agritrace.edairy.desktop.services.ui.views;
 
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class ServiceRequestLogView extends SubModuleView {
 
-    public static final String ID = ServiceRequestLogView.class.getName();
+    public static final String ID = "com.agritrace.edairy.desktop.services.request.view"; //$NON-NLS-1$
     public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 
     @Override

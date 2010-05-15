@@ -1,12 +1,12 @@
-package com.agritrace.edairy.service.ui.controllers;
+package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 
+import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.service.core.ServiceRequestResourceManager;
 
 /**
  * Service log view controller
@@ -16,6 +16,7 @@ import com.agritrace.edairy.service.core.ServiceRequestResourceManager;
  */
 public class ServiceLogViewController extends CommonSubModuleViewController {
 
+    private IDairyResourceManager resMgr = null;
     private List<AnimalHealthRequest> filtedResult;
     private List<AnimalHealthRequest> allRequests = new ArrayList<AnimalHealthRequest>();
     public static final String ID = ServiceLogViewController.class.getName();
@@ -28,15 +29,26 @@ public class ServiceLogViewController extends CommonSubModuleViewController {
 	this.setFilteredResult(this.allRequests);
     }
 
+    public void setResourceManager(IDairyResourceManager resmgr) {
+	this.resMgr = resmgr;
+    }
+    
+    public IDairyResourceManager getResourceManager() {
+	return this.resMgr;
+    }
+    
+    
     /**
      * Currently we load EMF models from file In the future this code should be
      * replaced teneo/eclipselink framework to load DB objects to EMF models
      */
     private void initModel() {
-	ServiceRequestResourceManager.INSTANCE.loadResources();
+//	ServiceRequestResourceManager.INSTANCE.loadResources();
 	try {
-	    allRequests = ServiceRequestResourceManager.INSTANCE.getObjectsFromDairyModel(AnimalHealthRequest.class);
-	} catch (final CoreException e) {
+//	    allRequests = ServiceRequestResourceManager.INSTANCE.getObjectsFromDairyModel(AnimalHealthRequest.class);
+	    this.allRequests = this.resMgr.getLocalDairy().getAnimalHealthRequests();  // TODO: TEST 
+	} catch (final Exception e) {
+	    
 	    // TODO
 	    e.printStackTrace();
 	}

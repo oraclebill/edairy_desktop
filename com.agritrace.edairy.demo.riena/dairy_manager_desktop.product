@@ -15,8 +15,7 @@
 
    <launcherArgs>
       <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
-      <vmArgs>-Driena.application.width=1120
--Driena.application.height=850</vmArgs>
+      <vmArgs>-Dedairy.db.root=/tmp/x2db</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
       <vmArgsWin>-Driena.application.width=1120
@@ -24,6 +23,7 @@
    </launcherArgs>
 
    <windowImages i16="/com.agritrace.edairy.ui/icons/cow16.png" i32="/com.agritrace.edairy.ui/icons/cow32.png" i48="/com.agritrace.edairy.ui/icons/cow48.png" i64="/com.agritrace.edairy.ui/icons/cow64.png" i128="/com.agritrace.edairy.ui/icons/cow128.png"/>
+
 
    <launcher name="edairymgr">
       <solaris/>
@@ -44,6 +44,7 @@
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
       <plugin id="com.agritrace.edairy.desktop.finance.ui"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.model"/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>

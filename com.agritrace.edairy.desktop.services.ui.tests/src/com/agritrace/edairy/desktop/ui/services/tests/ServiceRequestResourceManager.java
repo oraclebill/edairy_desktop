@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.core;
+package com.agritrace.edairy.desktop.ui.services.tests;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.desktop.model.ResourceManager;
+import com.agritrace.edairy.desktop.services.ui.Activator;
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.Gender;
 import com.agritrace.edairy.model.Location;
@@ -38,8 +40,6 @@ import com.agritrace.edairy.model.tracking.RearingMode;
 import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.EDairyActivator;
 
 /**
  * Service Request resource manager
@@ -262,7 +262,7 @@ public class ServiceRequestResourceManager {
 	    loadResources();
 	}
 	if (serviceRequestResource == null) {
-	    throw new CoreException(new Status(IStatus.ERROR, EDairyActivator.PLUGIN_ID, "can't load dairy modle"));
+	    throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "can't load dairy modle"));
 	}
 	final List<EObject> objects = serviceRequestResource.getContents();
 	for (final EObject object : objects) {

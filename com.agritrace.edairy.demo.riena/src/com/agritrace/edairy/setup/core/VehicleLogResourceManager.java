@@ -16,13 +16,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.desktop.model.ResourceManager;
+import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Employee;
 import com.agritrace.edairy.model.dairy.Vehicle;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 import com.agritrace.edairy.ui.EDairyActivator;
 
 /**
@@ -233,10 +233,11 @@ public class VehicleLogResourceManager {
 	    }
 
 	}
-	final URI dairyResourceURI = URI.createFileURI(this.FILE_PATH);
+	final URI dairyResourceURI = URI.createFileURI(VehicleLogResourceManager.FILE_PATH);
 	vehicleResource = ResourceManager.INSTANCE.loadResource(dairyResourceURI);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T> type) throws CoreException {
 	final List<T> objectList = new ArrayList<T>();
 	if (vehicleResource == null) {
@@ -248,7 +249,8 @@ public class VehicleLogResourceManager {
 	final List<EObject> objects = vehicleResource.getContents();
 	for (final EObject object : objects) {
 	    if (type.isAssignableFrom(object.getClass())) {
-		objectList.add((T) object);
+		T e = (T) object;
+		objectList.add(e);
 	    }
 	}
 	return objectList;

@@ -24,8 +24,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.ui.EDairyActivator;
 
 public class VeterinaryRequestView extends ViewPart implements SelectionListener {
@@ -35,7 +35,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
     private Text farmlocation;
     private Button calendarButton;
     private Button nameSearchButton;
-    private Button farmSearchButton;
+//    private Button farmSearchButton;
     private Text textField;
 
     public VeterinaryRequestView() {
@@ -64,7 +64,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	requestGroup.setLayout(new GridLayout(3, false));
 	requestGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	final Label dateLable = UIControlsFactory.createLabel(requestGroup, "Date:");
+	UIControlsFactory.createLabel(requestGroup, "Date:");
 
 	textField = UIControlsFactory.createText(requestGroup);
 	textField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -114,13 +114,13 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 		dialog.open();
 	    }
 	});
-	final Label memberIdLabel = UIControlsFactory.createLabel(requestGroup, "MemberID:");
+	UIControlsFactory.createLabel(requestGroup, "MemberID:");
 
 	final Text textId = UIControlsFactory.createText(requestGroup);
 	textId.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 	textId.setText("LM212234");
 
-	final Label memberNameLabel = UIControlsFactory.createLabel(requestGroup, "Member Name:");
+	UIControlsFactory.createLabel(requestGroup, "Member Name:");
 
 	nameCombo = UIControlsFactory.createCombo(requestGroup);
 	nameCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -146,7 +146,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	    }
 	});
 
-	final Label farmLabel = UIControlsFactory.createLabel(requestGroup, "Farm Name:");
+	UIControlsFactory.createLabel(requestGroup, "Farm Name:");
 
 	farmCombo = UIControlsFactory.createCombo(requestGroup);
 	farmCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
@@ -159,7 +159,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	// farmSearchButton.setLayoutData(new
 	// GridData(SWT.FILL,SWT.FILL,false,false));
 
-	final Label locationLabel = UIControlsFactory.createLabel(requestGroup, "Farm Location:");
+	UIControlsFactory.createLabel(requestGroup, "Farm Location:");
 
 	farmlocation = UIControlsFactory.createText(requestGroup, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
 	final GridData locationGD = new GridData(SWT.FILL, SWT.FILL, true, false);
@@ -205,7 +205,7 @@ public class VeterinaryRequestView extends ViewPart implements SelectionListener
 	requestGroup.setLayout(new GridLayout(1, false));
 	requestGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 
-	final Label l = UIControlsFactory.createLabel(requestGroup, "Complaint:");
+	UIControlsFactory.createLabel(requestGroup, "Complaint:");
 	final Text textArea = UIControlsFactory.createText(requestGroup, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
 		| SWT.BORDER);
 	// Text textArea = new Text(requestGroup, SWT.MULTI

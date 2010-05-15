@@ -37,7 +37,6 @@ public class DairyProfileView extends SubModuleView {
     private Text txtDairyDescription;
     private Text txtManagerName;
     private Text txtMemberCount;
-    private Label lblMemberCount;
     private Label lblDairyImage;
 
     @Override

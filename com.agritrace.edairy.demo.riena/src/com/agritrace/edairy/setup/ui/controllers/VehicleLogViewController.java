@@ -2,8 +2,8 @@ package com.agritrace.edairy.setup.ui.controllers;
 
 import org.eclipse.core.runtime.CoreException;
 
+import com.agritrace.edairy.desktop.services.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.model.dairy.Vehicle;
-import com.agritrace.edairy.service.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.setup.core.VehicleLogResourceManager;
 
 /**

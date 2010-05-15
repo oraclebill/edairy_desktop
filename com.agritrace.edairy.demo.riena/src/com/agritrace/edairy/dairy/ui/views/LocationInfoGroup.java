@@ -135,7 +135,7 @@ public class LocationInfoGroup extends Group {
 	setLayout(new FillLayout());
 
 	// create address and map areas
-	final Composite addressArea = createAddressArea(this);
+	createAddressArea(this);
     }
 
     @Override

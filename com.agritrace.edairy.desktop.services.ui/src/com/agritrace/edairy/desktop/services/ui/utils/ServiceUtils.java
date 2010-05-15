@@ -1,4 +1,4 @@
-package com.agritrace.edairy.service.ui.views.utils;
+package com.agritrace.edairy.desktop.services.ui.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.wire.Wire;
-import org.eclipse.riena.internal.ui.ridgets.Activator;
 import org.eclipse.riena.ui.common.IComplexComponent;
 import org.eclipse.riena.ui.ridgets.IComplexRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
@@ -32,6 +31,8 @@ import org.eclipse.riena.ui.ridgets.uibinding.IControlRidgetMapper;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+
+import com.agritrace.edairy.desktop.services.ui.Activator;
 
 /**
  * Utilities class for Service
@@ -174,7 +175,7 @@ public class ServiceUtils {
 	    IBindingPropertyLocator propertyStrategy) {
 	final CorrespondingLabelMapper ridgetMapper = new CorrespondingLabelMapper(ridgetContainer);
 	if (Activator.getDefault() != null) {
-	    Wire.instance(ridgetMapper).andStart(Activator.getDefault().getContext());
+	    Wire.instance(ridgetMapper).andStart(Activator.getDefault().getBundle().getBundleContext());
 	}
 
 	final Map<String, IRidget> controls = new HashMap<String, IRidget>();
@@ -213,7 +214,7 @@ public class ServiceUtils {
 	    // TODO This unveils a weakness of the wiring stuff because the
 	    // dependency (to the wiring) is just moved the ridget containers to
 	    // here :-(
-	    Wire.instance(ridgetContainer).andStart(Activator.getDefault().getContext());
+	    Wire.instance(ridgetContainer).andStart(Activator.getDefault().getBundle().getBundleContext());
 	}
 
     }

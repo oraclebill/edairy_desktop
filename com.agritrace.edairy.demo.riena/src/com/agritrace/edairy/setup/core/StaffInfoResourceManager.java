@@ -161,6 +161,7 @@ public class StaffInfoResourceManager {
 	staffInfoResource = ResourceManager.INSTANCE.loadResource(dairyResourceURI);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends EObject> List<T> getObjectsFromDairyModel(Class<T> type) throws CoreException {
 	final List<T> objectList = new ArrayList<T>();
 	if (staffInfoResource == null) {
