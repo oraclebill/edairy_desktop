@@ -6,6 +6,19 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.DairyContainer;
@@ -16,29 +29,9 @@ import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.dairy.Supplier;
 import com.agritrace.edairy.model.dairy.Vehicle;
-
 import com.agritrace.edairy.model.impl.CompanyImpl;
-
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-
 import com.agritrace.edairy.model.tracking.Farm;
-
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->

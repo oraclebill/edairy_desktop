@@ -3,9 +3,6 @@ package com.agritrace.edairy.dairy.ui.controllers;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.SELECT;
 
 import com.agritrace.edairy.model.dairy.DairyLocation;
 

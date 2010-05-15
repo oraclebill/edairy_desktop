@@ -6,34 +6,25 @@
  */
 package com.agritrace.edairy.model.requests.impl;
 
-import com.agritrace.edairy.model.ModelPackage;
-
-import com.agritrace.edairy.model.dairy.DairyPackage;
-
-import com.agritrace.edairy.model.dairy.account.AccountPackage;
-
-import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
-
-import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
-
-import com.agritrace.edairy.model.impl.ModelPackageImpl;
-
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsFactory;
-import com.agritrace.edairy.model.requests.RequestsPackage;
-
-import com.agritrace.edairy.model.tracking.TrackingPackage;
-
-import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.dairy.DairyPackage;
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
+import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
+import com.agritrace.edairy.model.impl.ModelPackageImpl;
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.requests.RequestType;
+import com.agritrace.edairy.model.requests.RequestsFactory;
+import com.agritrace.edairy.model.requests.RequestsPackage;
+import com.agritrace.edairy.model.tracking.TrackingPackage;
+import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

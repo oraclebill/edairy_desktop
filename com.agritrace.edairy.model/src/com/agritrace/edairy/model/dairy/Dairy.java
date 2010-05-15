@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.model.dairy;
 
-import com.agritrace.edairy.model.Company;
-
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-
-import com.agritrace.edairy.model.tracking.Farm;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
+
+import com.agritrace.edairy.model.Company;
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.tracking.Farm;
 
 /**
  * <!-- begin-user-doc -->

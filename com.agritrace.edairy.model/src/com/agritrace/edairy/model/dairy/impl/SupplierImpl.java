@@ -6,24 +6,19 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Supplier;
-import com.agritrace.edairy.model.dairy.VendorStatus;
-
-import com.agritrace.edairy.model.impl.PersonImpl;
-
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
+import com.agritrace.edairy.model.dairy.DairyPackage;
+import com.agritrace.edairy.model.dairy.Supplier;
+import com.agritrace.edairy.model.dairy.VendorStatus;
+import com.agritrace.edairy.model.impl.PersonImpl;
 
 /**
  * <!-- begin-user-doc -->

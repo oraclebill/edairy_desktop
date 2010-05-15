@@ -7,7 +7,6 @@
 package com.agritrace.edairy.model.dairy.account;
 
 import java.math.BigDecimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;

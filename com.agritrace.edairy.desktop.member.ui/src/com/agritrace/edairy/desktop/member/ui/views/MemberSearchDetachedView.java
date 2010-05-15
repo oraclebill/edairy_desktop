@@ -1,9 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -25,7 +22,6 @@ import org.eclipse.riena.ui.swt.EmbeddedTitleBar;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.lnf.renderer.EmbeddedTitlebarRenderer;
-import org.eclipse.riena.ui.swt.utils.DetachedViewsManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -48,27 +44,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
-import com.agritrace.edairy.model.Gender;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyLocation;
-import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.tracking.AcquisitionType;
-import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.ContainerType;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.Purpose;
-import com.agritrace.edairy.model.tracking.RearingMode;
-import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
-import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.model.UnitOfMeasure;
 
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener, ISelectionChangedListener, SelectionListener {

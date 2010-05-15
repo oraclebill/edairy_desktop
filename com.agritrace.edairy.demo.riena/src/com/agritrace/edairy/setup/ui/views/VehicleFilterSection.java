@@ -21,9 +21,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-//import com.agritrace.edairy.riena.ui.Activator;
-//import com.agritrace.edairy.riena.ui.EDairyActivator;
-//import com.agritrace.edairy.ui.views.CalendarSelectionDialog;
 import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;

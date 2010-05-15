@@ -6,26 +6,22 @@
  */
 package com.agritrace.edairy.model.requests.impl;
 
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.dairy.Supplier;
-
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsPackage;
-
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.model.dairy.Dairy;
+import com.agritrace.edairy.model.dairy.Membership;
+import com.agritrace.edairy.model.dairy.Supplier;
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.requests.RequestType;
+import com.agritrace.edairy.model.requests.RequestsPackage;
+import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 
 /**
  * <!-- begin-user-doc -->

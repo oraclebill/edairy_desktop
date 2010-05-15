@@ -6,6 +6,14 @@
  */
 package com.agritrace.edairy.model.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.agritrace.edairy.model.Audited;
 import com.agritrace.edairy.model.Company;
 import com.agritrace.edairy.model.ContactMethod;
@@ -22,31 +30,14 @@ import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.StatutoryLocation;
 import com.agritrace.edairy.model.UnitOfMeasure;
-
 import com.agritrace.edairy.model.dairy.DairyPackage;
-
 import com.agritrace.edairy.model.dairy.account.AccountPackage;
-
 import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
-
 import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
-
 import com.agritrace.edairy.model.requests.RequestsPackage;
-
 import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
-
 import com.agritrace.edairy.model.tracking.TrackingPackage;
-
 import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

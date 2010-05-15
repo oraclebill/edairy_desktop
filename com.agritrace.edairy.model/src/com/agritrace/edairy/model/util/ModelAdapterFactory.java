@@ -6,14 +6,22 @@
  */
 package com.agritrace.edairy.model.util;
 
-import com.agritrace.edairy.model.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.model.Audited;
+import com.agritrace.edairy.model.Company;
+import com.agritrace.edairy.model.ContactMethod;
+import com.agritrace.edairy.model.DescriptiveLocation;
+import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.MapLocation;
+import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.Party;
+import com.agritrace.edairy.model.Person;
+import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.StatutoryLocation;
 
 /**
  * <!-- begin-user-doc -->

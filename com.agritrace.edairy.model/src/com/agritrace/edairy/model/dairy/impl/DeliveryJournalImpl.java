@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.DeliveryJournal;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.model.dairy.DairyPackage;
+import com.agritrace.edairy.model.dairy.DeliveryJournal;
 
 /**
  * <!-- begin-user-doc -->

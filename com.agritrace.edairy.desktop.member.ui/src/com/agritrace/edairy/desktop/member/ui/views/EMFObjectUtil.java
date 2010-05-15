@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.agritrace.edairy.model.Location;

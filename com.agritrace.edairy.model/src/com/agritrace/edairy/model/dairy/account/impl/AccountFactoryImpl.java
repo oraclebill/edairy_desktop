@@ -6,16 +6,19 @@
  */
 package com.agritrace.edairy.model.dairy.account.impl;
 
-import com.agritrace.edairy.model.dairy.account.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.agritrace.edairy.model.dairy.account.Account;
+import com.agritrace.edairy.model.dairy.account.AccountFactory;
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.model.dairy.account.TransactionType;
 
 /**
  * <!-- begin-user-doc -->

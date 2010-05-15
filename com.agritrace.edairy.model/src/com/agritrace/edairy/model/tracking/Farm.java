@@ -6,11 +6,10 @@
  */
 package com.agritrace.edairy.model.tracking;
 
-import com.agritrace.edairy.model.Location;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.model.Location;
 
 /**
  * <!-- begin-user-doc -->

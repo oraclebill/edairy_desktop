@@ -6,12 +6,11 @@
  */
 package com.agritrace.edairy.model.dairy;
 
-import com.agritrace.edairy.model.UnitOfMeasure;
+import org.eclipse.emf.ecore.EObject;
 
+import com.agritrace.edairy.model.UnitOfMeasure;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

@@ -28,8 +28,6 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsPackage;

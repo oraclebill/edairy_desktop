@@ -6,21 +6,19 @@
  */
 package com.agritrace.edairy.model.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.MapLocation;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.StatutoryLocation;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

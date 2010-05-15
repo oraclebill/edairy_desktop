@@ -14,9 +14,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 
-//import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialogController;
-
 public class CalendarSelectionDialog extends AbstractDialogView{
     
     public static String CALENDAR_DATE = "calendar.date";

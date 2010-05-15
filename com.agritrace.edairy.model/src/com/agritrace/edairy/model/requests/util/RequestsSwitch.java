@@ -6,12 +6,13 @@
  */
 package com.agritrace.edairy.model.requests.util;
 
-import com.agritrace.edairy.model.requests.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.requests.RequestsPackage;
 
 /**
  * <!-- begin-user-doc -->

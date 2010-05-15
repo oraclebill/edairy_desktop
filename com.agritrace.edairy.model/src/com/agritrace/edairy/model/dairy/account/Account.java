@@ -6,13 +6,12 @@
  */
 package com.agritrace.edairy.model.dairy.account;
 
-import com.agritrace.edairy.model.dairy.Membership;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.model.dairy.Membership;
 
 /**
  * <!-- begin-user-doc -->

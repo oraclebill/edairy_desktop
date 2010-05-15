@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Control;
 
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;

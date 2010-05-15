@@ -6,20 +6,29 @@
  */
 package com.agritrace.edairy.model.dairy.util;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
+
 import com.agritrace.edairy.model.Company;
 import com.agritrace.edairy.model.Party;
 import com.agritrace.edairy.model.Person;
-
-import com.agritrace.edairy.model.dairy.*;
-
+import com.agritrace.edairy.model.dairy.Asset;
+import com.agritrace.edairy.model.dairy.CollectionJournal;
+import com.agritrace.edairy.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.model.dairy.Dairy;
+import com.agritrace.edairy.model.dairy.DairyContainer;
+import com.agritrace.edairy.model.dairy.DairyLocation;
+import com.agritrace.edairy.model.dairy.DairyPackage;
+import com.agritrace.edairy.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.model.dairy.Employee;
+import com.agritrace.edairy.model.dairy.Membership;
+import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.model.dairy.Supplier;
+import com.agritrace.edairy.model.dairy.Trip;
+import com.agritrace.edairy.model.dairy.Vehicle;
 import com.agritrace.edairy.model.tracking.Container;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

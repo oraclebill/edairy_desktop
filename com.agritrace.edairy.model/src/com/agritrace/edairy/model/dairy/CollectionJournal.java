@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.model.dairy;
 
-import com.agritrace.edairy.model.tracking.Container;
-
 import java.math.BigDecimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.model.tracking.Container;
 
 /**
  * <!-- begin-user-doc -->

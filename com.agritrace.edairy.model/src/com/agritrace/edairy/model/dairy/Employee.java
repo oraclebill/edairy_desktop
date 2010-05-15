@@ -6,9 +6,9 @@
  */
 package com.agritrace.edairy.model.dairy;
 
-import com.agritrace.edairy.model.Person;
-
 import java.util.Date;
+
+import com.agritrace.edairy.model.Person;
 
 /**
  * <!-- begin-user-doc -->

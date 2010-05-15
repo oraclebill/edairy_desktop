@@ -15,10 +15,11 @@ import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
+
 import com.agritrace.edairy.ui.views.data.LocalDairy;
 import com.agritrace.edairy.ui.views.data.NetworkDairy;
-import com.agritrace.edairy.ui.views.data.NetworkDairyFactory;
 import com.agritrace.edairy.ui.views.data.NetworkDairy.ORGANIZATIONTYPE;
+import com.agritrace.edairy.ui.views.data.NetworkDairyFactory;
 
 public class NetworklDairyViewController extends SubModuleController {
 

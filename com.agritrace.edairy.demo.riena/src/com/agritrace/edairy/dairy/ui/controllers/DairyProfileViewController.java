@@ -1,35 +1,15 @@
 package com.agritrace.edairy.dairy.ui.controllers;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
-import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.dairy.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.model.IDairyResourceManager;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsFactory;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 
 /**
  * Dairy Profile view controller

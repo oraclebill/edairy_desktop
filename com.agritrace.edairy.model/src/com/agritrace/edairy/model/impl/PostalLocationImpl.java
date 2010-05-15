@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.PostalLocation;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.PostalLocation;
 
 /**
  * <!-- begin-user-doc -->

@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.model.dairy.account.util;
 
-import com.agritrace.edairy.model.dairy.account.AccountPackage;
-
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
+
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents

@@ -3,7 +3,6 @@ package com.agritrace.edairy.ui;
 import java.text.ParseException;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.riena.core.RienaLocations;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

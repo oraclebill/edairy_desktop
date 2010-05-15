@@ -35,8 +35,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.desktop.finance.ui.Activator;
-//import com.agritrace.edairy.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.finance.ui.beans.CreditRecord;
 import com.agritrace.edairy.desktop.finance.ui.beans.CreditRecordFactory;
 

@@ -28,11 +28,11 @@ import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalC
 import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.service.ui.views.ServiceRequestLogView;
-import com.agritrace.edairy.tools.ui.views.SupplierListView;
 import com.agritrace.edairy.setup.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.setup.ui.controllers.VehicleLogViewController;
 import com.agritrace.edairy.setup.ui.views.StaffInfoView;
 import com.agritrace.edairy.setup.ui.views.VehicleLogView;
+import com.agritrace.edairy.tools.ui.views.SupplierListView;
 import com.agritrace.edairy.ui.views.BlankView;
 import com.agritrace.edairy.ui.views.DairyHomeView;
 import com.agritrace.edairy.ui.views.DeliveryView;

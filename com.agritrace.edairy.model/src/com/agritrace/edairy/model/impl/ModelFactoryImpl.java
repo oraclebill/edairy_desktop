@@ -6,16 +6,28 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import com.agritrace.edairy.model.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.agritrace.edairy.model.Audited;
+import com.agritrace.edairy.model.Company;
+import com.agritrace.edairy.model.ContactMethod;
+import com.agritrace.edairy.model.ContactMethodType;
+import com.agritrace.edairy.model.ContainerType;
+import com.agritrace.edairy.model.DescriptiveLocation;
+import com.agritrace.edairy.model.Gender;
+import com.agritrace.edairy.model.Location;
+import com.agritrace.edairy.model.MapLocation;
+import com.agritrace.edairy.model.ModelFactory;
+import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.Person;
+import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.StatutoryLocation;
+import com.agritrace.edairy.model.UnitOfMeasure;
 
 /**
  * <!-- begin-user-doc -->

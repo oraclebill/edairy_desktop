@@ -13,7 +13,6 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.window.Window;
 import org.eclipse.riena.internal.ui.ridgets.swt.DecimalTextRidget;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
@@ -36,6 +35,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
+import com.agritrace.edairy.milkCollection.ui.ViewWidgetId;
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.Dairy;
@@ -49,7 +49,6 @@ import com.agritrace.edairy.model.dairy.Vehicle;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.ui.views.StringNumberValidator;
-import com.agritrace.edairy.milkCollection.ui.ViewWidgetId;
 
 public class MilkCollectionJournalController extends SubModuleController{
 

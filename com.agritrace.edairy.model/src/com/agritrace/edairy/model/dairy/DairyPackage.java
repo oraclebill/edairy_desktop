@@ -6,15 +6,14 @@
  */
 package com.agritrace.edairy.model.dairy;
 
-import com.agritrace.edairy.model.ModelPackage;
-
-import com.agritrace.edairy.model.tracking.TrackingPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
+import com.agritrace.edairy.model.ModelPackage;
+import com.agritrace.edairy.model.tracking.TrackingPackage;
 
 /**
  * <!-- begin-user-doc -->

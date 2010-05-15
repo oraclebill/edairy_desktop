@@ -6,12 +6,15 @@
  */
 package com.agritrace.edairy.model.dairy.account.util;
 
-import com.agritrace.edairy.model.dairy.account.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.model.dairy.account.Account;
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.model.dairy.account.BalancePoint;
 
 /**
  * <!-- begin-user-doc -->

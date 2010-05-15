@@ -12,7 +12,6 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.query.conditions.Condition;
 import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
 import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
@@ -47,6 +46,7 @@ import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
+import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
@@ -61,7 +61,6 @@ import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
 
 public class MemberSearchViewController extends SubModuleController implements MemberSearchSelectionListener, ISelectionListener{
 

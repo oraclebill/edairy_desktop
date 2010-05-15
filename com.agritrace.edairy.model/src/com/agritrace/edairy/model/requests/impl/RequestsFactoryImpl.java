@@ -6,16 +6,17 @@
  */
 package com.agritrace.edairy.model.requests.impl;
 
-import com.agritrace.edairy.model.requests.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.requests.RequestType;
+import com.agritrace.edairy.model.requests.RequestsFactory;
+import com.agritrace.edairy.model.requests.RequestsPackage;
 
 /**
  * <!-- begin-user-doc -->

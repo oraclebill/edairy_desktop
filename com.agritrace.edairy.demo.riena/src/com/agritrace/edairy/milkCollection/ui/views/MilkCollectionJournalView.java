@@ -30,8 +30,8 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
-import com.agritrace.edairy.ui.EDairyActivator;
 import com.agritrace.edairy.milkCollection.ui.ViewWidgetId;
+import com.agritrace.edairy.ui.EDairyActivator;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView implements TraverseListener{
