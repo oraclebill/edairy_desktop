@@ -12,7 +12,9 @@ Require-Bundle: com.agritrace.edairy.model;bundle-version="1.0.0",
  org.eclipse.emf.query;bundle-version="1.2.100",
  com.agritrace.edairy.desktop.finance.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.member.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.services.ui;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.services.ui;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.collection.ui;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.suppliers.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.dairy.ui.controllers;
@@ -23,8 +25,6 @@ Export-Package: com.agritrace.edairy.dairy.ui.controllers;
    com.agritrace.edairy.common.services",
  com.agritrace.edairy.dairy.ui.dialogs,
  com.agritrace.edairy.dairy.ui.views,
- com.agritrace.edairy.milkCollection.ui.controllers,
- com.agritrace.edairy.milkCollection.ui.views,
  com.agritrace.edairy.ui;
   uses:="org.eclipse.jface.resource,
    org.eclipse.ui.plugin,

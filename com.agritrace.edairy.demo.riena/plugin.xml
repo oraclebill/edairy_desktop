@@ -75,12 +75,6 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.tools.ui.views.SupplierListView"
-            id="com.agritrace.edairy.tools.ui.views.SupplierListView"
-            name="Supplier List">
-      </view>
-      <view
-            allowMultiple="true"
             class="com.agritrace.edairy.ui.views.VeterinaryRequestView"
             id="com.agritrace.edairy.ui.views.VeterinaryRequestView"
             name="VeterinaryRequestView">
@@ -90,19 +84,6 @@
             class="com.agritrace.edairy.ui.views.InseminationRequestView"
             id="com.agritrace.edairy.ui.views.InseminationRequestView"
             name="InseminationRequestView">
-      </view>
-      <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView"
-            id="com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView"
-            name="ServiceRequestLogView"
-            restorable="true">
-      </view>
-      <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView"
-            id="com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView"
-            name="MilkCollectionJournalView">
       </view>
           <view
             allowMultiple="true"
@@ -130,26 +111,12 @@
                name="Milk Production Report"
                restorable="true">
          </view>
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.desktop.member.ui.views.MemberSearchView"
-               id="com.agritrace.edairy.desktop.member.ui.views.MemberSearchView"
-               name="Member Search"
-               restorable="true">
-         </view>
         
          <view
                allowMultiple="true"
                class="com.agritrace.edairy.ui.views.MemberPayablesReportView"
                id="com.agritrace.edairy.ui.views.MemberPayablesReportView"
                name="Member Payables Report"
-               restorable="true">
-         </view>
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.ui.views.MonthlyCreditReportView"
-               id="com.agritrace.edairy.ui.views.MonthlyCreditReportView"
-               name="Monthly Credit Report"
                restorable="true">
          </view>
          <view

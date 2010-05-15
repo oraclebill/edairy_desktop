@@ -12,4 +12,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,
  com.agritrace.edairy.desktop.common.ui.beans,
  com.agritrace.edairy.desktop.common.ui.dialogs,
+ com.agritrace.edairy.desktop.common.ui.validators,
  com.swtdesigner;uses:="org.eclipse.jface.resource,org.eclipse.swt.graphics"

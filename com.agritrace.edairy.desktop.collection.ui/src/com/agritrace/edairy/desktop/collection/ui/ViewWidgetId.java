@@ -1,4 +1,4 @@
-package com.agritrace.edairy.milkCollection.ui;
+package com.agritrace.edairy.desktop.collection.ui;
 
 public class ViewWidgetId {
 

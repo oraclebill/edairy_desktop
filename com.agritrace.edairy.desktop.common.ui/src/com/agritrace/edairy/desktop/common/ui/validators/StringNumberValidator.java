@@ -1,4 +1,4 @@
-package com.agritrace.edairy.ui.views;
+package com.agritrace.edairy.desktop.common.ui.validators;
 
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;

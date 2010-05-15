@@ -1,4 +1,4 @@
-package com.agritrace.edairy.tools.ui.views;
+package com.agritrace.edairy.desktop.operations.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Text;
 
 public class SupplierListView extends SubModuleView {
 
-    public static final String ID = SupplierListView.class.getName();
+    public static final String ID = "edairy.supplier.list.view";
 
     public SupplierListView() {
     }

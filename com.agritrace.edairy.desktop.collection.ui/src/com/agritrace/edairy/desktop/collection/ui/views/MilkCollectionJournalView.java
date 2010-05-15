@@ -1,4 +1,4 @@
-package com.agritrace.edairy.milkCollection.ui.views;
+package com.agritrace.edairy.desktop.collection.ui.views;
 
 import java.util.Date;
 
@@ -30,13 +30,13 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
-import com.agritrace.edairy.milkCollection.ui.ViewWidgetId;
-import com.agritrace.edairy.ui.EDairyActivator;
+import com.agritrace.edairy.desktop.collection.ui.*;
+import com.agritrace.edairy.desktop.collection.ui.Activator;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView implements TraverseListener {
 
-    public static final String ID = MilkCollectionJournalView.class.getName();
+    public static final String ID = "edairy.collection.entry.view";
 
     public static final String MILK_JOURNAL_BOOK_GROUP_TITLE = "Journal Book / Collection Details";
 
@@ -130,7 +130,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 	calendarButton = new Button(dateComposite, SWT.PUSH);
 	// calendarButton = UIControlsFactory.createButton(group);
-	final Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
+	final Image calendar = Activator.getImage(ImageRegistry.calendar);
 
 	// Image calendarButtonImage = new Image(parent.getDisplay(),
 	// calendar.getImageData().scaledTo(16, 16));
