@@ -1,4 +1,4 @@
-package com.agritrace.edairy.ui.views.data;
+package com.agritrace.edairy.desktop.finance.ui.beans;
 
 public class CreditRecord {
 	

@@ -3,6 +3,7 @@
  */
 package com.agritrace.edairy.ui;
 
+import org.eclipse.riena.internal.core.test.ExtensionRegistryAnalyzer;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -19,7 +20,7 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
-import com.agritrace.edairy.finance.ui.CreditJournalView;
+import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
 import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.member.ui.controllers.NewMembeViewController;
 import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalController;
@@ -73,6 +74,8 @@ public class EDairyManagerApplication extends SwtApplication {
 	@Override
 	protected IApplicationNode createModel() {
 
+	    
+	    ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 		ApplicationNode app = new ApplicationNode("eDairy Manager"); //$NON-NLS-1$
 
 		ISubApplicationNode subApp = new SubApplicationNode(  "Home"); //$NON-NLS-1$

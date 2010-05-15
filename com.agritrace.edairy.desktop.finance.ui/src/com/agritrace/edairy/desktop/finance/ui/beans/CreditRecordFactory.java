@@ -1,4 +1,4 @@
-package com.agritrace.edairy.ui.views.data;
+package com.agritrace.edairy.desktop.finance.ui.beans;
 
 import java.util.ArrayList;
 import java.util.List;

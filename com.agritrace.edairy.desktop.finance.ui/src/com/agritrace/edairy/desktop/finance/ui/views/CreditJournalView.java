@@ -1,4 +1,4 @@
-package com.agritrace.edairy.finance.ui;
+package com.agritrace.edairy.desktop.finance.ui.views;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,14 +35,14 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ImageRegistry;
-import com.agritrace.edairy.ui.views.data.CreditRecord;
-import com.agritrace.edairy.ui.views.data.CreditRecordFactory;
+import com.agritrace.edairy.desktop.finance.ui.Activator;
+//import com.agritrace.edairy.ui.ImageRegistry;
+import com.agritrace.edairy.desktop.finance.ui.beans.CreditRecord;
+import com.agritrace.edairy.desktop.finance.ui.beans.CreditRecordFactory;
 
 public class CreditJournalView extends ViewPart {
 
-	public static final String ID = CreditJournalView.class.getName();
+	public static final String ID = "edairy.desktop.credit-journal-entry";
 
 	private Text dateField;
 	private Button calendarButton;
@@ -93,8 +93,8 @@ public class CreditJournalView extends ViewPart {
 		dateField.setText(formatter.format(current));
 
 		calendarButton = new Button(upperPanel, SWT.PUSH);
-		Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
-		calendarButton.setImage(searchImage);
+		//Image searchImage = Activator.getImage( "search.png" );
+		//calendarButton.setImage(searchImage);
 
 		calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
 				false));
