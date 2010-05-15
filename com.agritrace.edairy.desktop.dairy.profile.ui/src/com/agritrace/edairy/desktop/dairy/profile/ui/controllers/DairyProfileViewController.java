@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -6,7 +6,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
-import com.agritrace.edairy.dairy.ui.DairyProfileViewWidgetID;
+import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.model.dairy.Dairy;

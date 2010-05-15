@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;

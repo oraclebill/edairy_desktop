@@ -8,7 +8,7 @@
  * Contributors:
  *    compeople AG - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.dairy.ui.views;
+package com.agritrace.edairy.desktop.dairy.profile.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
@@ -25,11 +25,12 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.dairy.ui.DairyProfileViewWidgetID;
+import com.agritrace.edairy.desktop.common.ui.controls.*;
+import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 
 public class DairyProfileView extends SubModuleView {
 
-    public static final String ID = DairyProfileView.class.getName();
+    public static final String ID = "dairy.profile.editor";
 
     private Text txtName;
     private Text txtId;

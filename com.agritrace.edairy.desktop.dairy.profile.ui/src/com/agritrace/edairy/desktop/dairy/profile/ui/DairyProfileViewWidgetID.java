@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui;
+package com.agritrace.edairy.desktop.dairy.profile.ui;
 
 public interface DairyProfileViewWidgetID {
     public static final String ID = "com.agritrace.edairy.desktop.ui.dairyprofile";

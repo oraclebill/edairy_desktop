@@ -19,9 +19,9 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
-import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.NewMembeViewController;
