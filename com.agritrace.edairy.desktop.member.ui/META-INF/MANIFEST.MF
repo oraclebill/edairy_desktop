@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: member-entry
+Bundle-SymbolicName: com.agritrace.edairy.desktop.member.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.agritrace.edairy.desktop.member.ui.Activator
+Bundle-Vendor: AGRITRACE
+Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
+ com.agritrace.edairy.model;bundle-version="1.0.0",
+ org.eclipse.emf.databinding;bundle-version="1.2.0",
+ org.eclipse.emf.query;bundle-version="1.2.100",
+ com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.agritrace.edairy.desktop.member.ui,
+ com.agritrace.edairy.desktop.member.ui.controllers,
+ com.agritrace.edairy.desktop.member.ui.views

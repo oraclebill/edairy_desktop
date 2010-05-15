@@ -16,6 +16,8 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.dairy.ui.DairyProfileViewWidgetID;
+import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.dairy.Dairy;
@@ -28,7 +30,6 @@ import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.DairyDemoResourceManager;
 
 /**
  * Dairy Profile view controller
@@ -38,10 +39,12 @@ import com.agritrace.edairy.ui.DairyDemoResourceManager;
  */
 public class DairyProfileViewController extends SubModuleController {
 
-    private Dairy localDairy;
 
     public static final String ID = DairyProfileViewController.class.getName();
 
+    private IDairyResourceManager dairyManager;
+    private Dairy localDairy;
+    
     public DairyProfileViewController() {
 	super();
     }

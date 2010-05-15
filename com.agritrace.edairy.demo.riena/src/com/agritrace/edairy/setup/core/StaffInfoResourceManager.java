@@ -13,14 +13,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.agritrace.edairy.desktop.model.IDairyResourceManager;
+import com.agritrace.edairy.desktop.model.ResourceManager;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Employee;
-import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ResourceManager;
 
 /**
  * Staff info resource manager
@@ -34,7 +34,7 @@ public class StaffInfoResourceManager {
 
 	private Resource staffInfoResource;
 
-	public static final String FILE_PATH = DairyDemoResourceManager.XMLDB_BASE + "staffinfo.xml";
+	public static final String FILE_PATH = IDairyResourceManager.XMLDB_BASE + "staffinfo.xml";
 
 	private StaffInfoResourceManager() {
 

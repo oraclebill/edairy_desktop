@@ -21,8 +21,9 @@ import org.osgi.framework.Bundle;
 import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.dairy.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
-import com.agritrace.edairy.member.ui.controllers.MemberSearchViewController;
-import com.agritrace.edairy.member.ui.controllers.NewMembeViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.NewMembeViewController;
+import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.milkCollection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.milkCollection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.service.ui.controllers.ServiceLogViewController;
@@ -41,7 +42,6 @@ import com.agritrace.edairy.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.ui.views.MonthlyCreditReportView;
 import com.agritrace.edairy.ui.views.VeterinaryRequestView;
-import com.agritrace.edairy.member.ui.views.MemberSearchView;
 
 /**
  * @author oraclebill

@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.agritrace.edairy.model,
+Export-Package: com.agritrace.edairy.desktop.model,
+ com.agritrace.edairy.model,
  com.agritrace.edairy.model.dairy,
  com.agritrace.edairy.model.dairy.account,
  com.agritrace.edairy.model.dairy.account.impl,

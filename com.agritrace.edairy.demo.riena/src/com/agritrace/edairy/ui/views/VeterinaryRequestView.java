@@ -26,8 +26,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ImageRegistry;
 
 public class VeterinaryRequestView extends ViewPart implements SelectionListener{
 

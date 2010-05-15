@@ -17,11 +17,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
 import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ImageRegistry;
 
 /**
  * Service Log view Master detail Composite

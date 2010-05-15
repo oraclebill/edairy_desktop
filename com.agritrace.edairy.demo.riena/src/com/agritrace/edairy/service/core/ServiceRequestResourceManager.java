@@ -16,6 +16,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.agritrace.edairy.desktop.model.IDairyResourceManager;
+import com.agritrace.edairy.desktop.model.ResourceManager;
 import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.Gender;
 import com.agritrace.edairy.model.Location;
@@ -37,9 +39,7 @@ import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.service.ui.views.utils.ServiceUtils;
-import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ResourceManager;
 
 /**
  * Service Request resource manager
@@ -53,7 +53,7 @@ public class ServiceRequestResourceManager {
 
 	private Resource serviceRequestResource;
 
-	public static final String FILE_PATH = DairyDemoResourceManager.XMLDB_BASE + "/servicerequests.xml";
+	public static final String FILE_PATH = IDairyResourceManager.XMLDB_BASE + "/servicerequests.xml";
 
 	private ServiceRequestResourceManager() {
 

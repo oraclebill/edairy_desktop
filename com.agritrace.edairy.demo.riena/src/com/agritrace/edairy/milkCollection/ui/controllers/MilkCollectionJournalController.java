@@ -34,7 +34,8 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
-import com.agritrace.edairy.member.ui.views.MemberSearchSelectionManager;
+import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.Dairy;
@@ -47,10 +48,8 @@ import com.agritrace.edairy.model.dairy.Session;
 import com.agritrace.edairy.model.dairy.Vehicle;
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.ui.DairyDemoResourceManager;
 import com.agritrace.edairy.ui.views.StringNumberValidator;
-import com.agritrace.edairy.ui.views.ViewWidgetId;
-import com.agritrace.edairy.ui.views.data.SimpleFormattedDateBean;
+import com.agritrace.edairy.milkCollection.ui.ViewWidgetId;
 
 public class MilkCollectionJournalController extends SubModuleController{
 

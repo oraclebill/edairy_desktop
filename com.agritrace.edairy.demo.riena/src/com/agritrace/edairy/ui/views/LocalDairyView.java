@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.dairy.ui.StaffInfoMasterDetailsComposite;
+import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ImageRegistry;
 
 public class LocalDairyView extends SubModuleView {
 

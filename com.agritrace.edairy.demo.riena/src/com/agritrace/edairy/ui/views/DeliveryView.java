@@ -35,8 +35,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.ui.EDairyActivator;
-import com.agritrace.edairy.ui.ImageRegistry;
 import com.agritrace.edairy.ui.views.data.Item;
 import com.agritrace.edairy.ui.views.data.ItemsFactory;
 
