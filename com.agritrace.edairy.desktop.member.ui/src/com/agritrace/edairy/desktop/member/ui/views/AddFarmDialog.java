@@ -105,7 +105,7 @@ public class AddFarmDialog extends TitleAreaDialog implements ModifyListener {
 	dialogArea.setLayout(new GridLayout(4, false));
 	dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	final Label id = UIControlsFactory.createLabel(dialogArea, "ID:");
+	UIControlsFactory.createLabel(dialogArea, "ID:");
 
 	idText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	idText.setTextLimit(50);
@@ -115,7 +115,7 @@ public class AddFarmDialog extends TitleAreaDialog implements ModifyListener {
 	idError = createDecorator(idText, "Invalid format, only number String is allowed", true);
 	idError.hide();
 
-	final Label name = UIControlsFactory.createLabel(dialogArea, "Name:");
+	UIControlsFactory.createLabel(dialogArea, "Name:");
 	nameText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	nameText.setTextLimit(50);
 	nameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));

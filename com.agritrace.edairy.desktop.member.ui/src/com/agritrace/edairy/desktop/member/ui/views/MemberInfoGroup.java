@@ -1,9 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.databinding.swt.SWTObservables;
@@ -11,7 +9,6 @@ import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -26,7 +23,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
@@ -69,20 +65,20 @@ public class MemberInfoGroup {
     private final Composite composite;
     private Text txtId;
     private Text txtFirst;
-    private Text txtLast;
+//    private Text txtLast;
     private Label photoLabel;
     private Text dateText;
     private Text effectDateText;
     private ComboViewer comboStatus;
     private Text txtPhone;
-    private List listStops;
-    private Text txtRoute;
+//    private List listStops;
+//    private Text txtRoute;
     private Membership memberShip;
-    private ListViewer stopsViewer;
+//    private ListViewer stopsViewer;
 
     private final DataBindingContext bindingContext;
 
-    private ArrayList<Binding> bindingList;
+//    private ArrayList<Binding> bindingList;
 
     public MemberInfoGroup(Composite parent) {
 	composite = UIControlsFactory.createComposite(parent);

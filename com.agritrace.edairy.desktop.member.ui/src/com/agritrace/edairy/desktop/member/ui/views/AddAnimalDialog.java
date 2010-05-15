@@ -122,19 +122,19 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	dialogArea.setLayout(new GridLayout(6, false));
 	dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	final Label id = UIControlsFactory.createLabel(dialogArea, "ID:");
+	UIControlsFactory.createLabel(dialogArea, "ID:");
 	idText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	idText.setTextLimit(10);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(idText);
 	idText.addFocusListener(this);
 
-	final Label nameLabel = UIControlsFactory.createLabel(dialogArea, "Name:");
+	UIControlsFactory.createLabel(dialogArea, "Name:");
 	nameText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	nameText.setTextLimit(10);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(nameText);
 	nameText.addFocusListener(this);
 
-	final Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");
+	UIControlsFactory.createLabel(dialogArea, "Farm:");
 	final Combo farmCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
 	farmComboViewer.setContentProvider(new ArrayContentProvider());
@@ -164,7 +164,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	    }
 	});
 
-	final Label gender = UIControlsFactory.createLabel(dialogArea, "Gender:");
+	UIControlsFactory.createLabel(dialogArea, "Gender:");
 	final Composite genderComposite = UIControlsFactory.createComposite(dialogArea);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(genderComposite);
 
@@ -181,7 +181,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	maleButton.addSelectionListener(this);
 	maleButton.setSelection(true);
 
-	final Label purpose = UIControlsFactory.createLabel(dialogArea, "Purpse:");
+	UIControlsFactory.createLabel(dialogArea, "Purpse:");
 	final Combo purposeCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer purposeViewer = new ComboViewer(purposeCombo);
 	purposeViewer.setContentProvider(new ArrayContentProvider());
@@ -199,7 +199,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	    }
 	});
 
-	final Label identifierFeature = UIControlsFactory.createLabel(dialogArea, "Identifier Feature:");
+	UIControlsFactory.createLabel(dialogArea, "Identifier Feature:");
 	identifierFeatureText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1)
 		.applyTo(identifierFeatureText);
@@ -260,7 +260,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	    }
 	});
 	//
-	final Label acquisionLabel = UIControlsFactory.createLabel(dialogArea, "Acquisition Type:");
+	UIControlsFactory.createLabel(dialogArea, "Acquisition Type:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	final Combo acquisitionCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer acquisitionViewer = new ComboViewer(acquisitionCombo);
@@ -280,7 +280,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	});
 	//
 	//
-	final Label identifiersLabel = UIControlsFactory.createLabel(dialogArea, "Animal Identifies:");
+	UIControlsFactory.createLabel(dialogArea, "Animal Identifies:");
 	final Combo identifiersCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer identifiersViewer = new ComboViewer(identifiersCombo);
 	identifiersViewer.setContentProvider(new ArrayContentProvider());
@@ -290,7 +290,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	final Button addIdentiferButton = UIControlsFactory.createButton(dialogArea, "...");
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(addIdentiferButton);
 
-	final Label ownerLabel = UIControlsFactory.createLabel(dialogArea, "Past Owners:");
+	UIControlsFactory.createLabel(dialogArea, "Past Owners:");
 	final Combo ownersCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer ownersViewer = new ComboViewer(ownersCombo);
 	ownersViewer.setContentProvider(new ArrayContentProvider());
@@ -299,14 +299,14 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	final Button addOwnersButton = UIControlsFactory.createButton(dialogArea, "...");
 	GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addOwnersButton);
 
-	final Label insuranceLabel = UIControlsFactory.createLabel(dialogArea, "Insurance Number:");
+	UIControlsFactory.createLabel(dialogArea, "Insurance Number:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	insuranceText = UIControlsFactory.createText(dialogArea, SWT.SINGLE | SWT.BORDER);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1)
 		.applyTo(insuranceText);
 	insuranceText.addFocusListener(this);
 
-	final Label rearingMode = UIControlsFactory.createLabel(dialogArea, "Rearing Mode:");
+	UIControlsFactory.createLabel(dialogArea, "Rearing Mode:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	final Combo rearingModeCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer rearingModeViewer = new ComboViewer(rearingModeCombo);
@@ -328,13 +328,13 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(animalType);
 	animalType.setLayout(new GridLayout(3, false));
 
-	final Label speciesLabel = UIControlsFactory.createLabel(animalType, "Species:");
+	UIControlsFactory.createLabel(animalType, "Species:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	speciesText = UIControlsFactory.createText(animalType, SWT.SINGLE | SWT.BORDER);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1).applyTo(speciesText);
 	speciesText.addFocusListener(this);
 
-	final Label breedLabel = UIControlsFactory.createLabel(animalType, "Breed:");
+	UIControlsFactory.createLabel(animalType, "Breed:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	breedText = UIControlsFactory.createText(animalType, SWT.SINGLE | SWT.BORDER);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1).applyTo(breedText);
@@ -344,13 +344,13 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(sireType);
 	sireType.setLayout(new GridLayout(3, false));
 
-	final Label speciesLabel2 = UIControlsFactory.createLabel(sireType, "Species:");
+	UIControlsFactory.createLabel(sireType, "Species:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	speciesText2 = UIControlsFactory.createText(sireType, SWT.SINGLE | SWT.BORDER);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1).applyTo(speciesText2);
 	speciesText2.addFocusListener(this);
 
-	final Label breedLabel2 = UIControlsFactory.createLabel(sireType, "Breed:");
+	UIControlsFactory.createLabel(sireType, "Breed:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
 	breedText2 = UIControlsFactory.createText(sireType, SWT.SINGLE | SWT.BORDER);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1).applyTo(breedText2);

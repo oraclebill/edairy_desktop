@@ -101,7 +101,7 @@ public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListen
 	dialogArea.setLayout(new GridLayout(6, false));
 	dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	final Label id = UIControlsFactory.createLabel(dialogArea, "ID:");
+	UIControlsFactory.createLabel(dialogArea, "ID:");
 	idText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	idText.setTextLimit(50);
 	idText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
@@ -110,7 +110,7 @@ public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListen
 	idError = createDecorator(idText, "Invalid format, only number String is allowed", true);
 	idError.hide();
 
-	final Label name = UIControlsFactory.createLabel(dialogArea, "Name:");
+	UIControlsFactory.createLabel(dialogArea, "Name:");
 	nameText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	nameText.setTextLimit(50);
 	final GridData nameGD = new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1);
@@ -118,7 +118,7 @@ public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListen
 	nameText.addModifyListener(this);
 	createDecorator(nameText, "", false);
 
-	final Label defaultRoute = UIControlsFactory.createLabel(dialogArea, "Route:");
+	UIControlsFactory.createLabel(dialogArea, "Route:");
 	route = UIControlsFactory.createCombo(dialogArea);
 	route.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 	route.addSelectionListener(new SelectionListener() {
@@ -137,7 +137,7 @@ public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListen
 	});
 	createDecorator(route, "", false);
 
-	final Label photoLabel = UIControlsFactory.createLabel(dialogArea, "Photo:");
+	UIControlsFactory.createLabel(dialogArea, "Photo:");
 	photoText = UIControlsFactory.createText(dialogArea, SWT.READ_ONLY);
 	photoText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	photoText.addModifyListener(this);

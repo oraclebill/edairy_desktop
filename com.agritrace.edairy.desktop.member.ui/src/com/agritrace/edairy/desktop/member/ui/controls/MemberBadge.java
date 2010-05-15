@@ -46,11 +46,11 @@ public class MemberBadge extends Composite {
 	// spacer.setLayoutData(GridDataFactory.fillDefaults().span(2,1).create());
 
 	final Font labelFont = SWTResourceManager.getFont("Lucida Grande", 11, SWT.BOLD);
-	final Label lblFarmerId = UIControlsFactory.createLabel(panel, "Member No.");
+	UIControlsFactory.createLabel(panel, "Member No.");
 	final Label lblFarmerIdValue = UIControlsFactory.createLabel(panel, id);
 	lblFarmerIdValue.setFont(labelFont);
 
-	final Label lblFarmerRoute = UIControlsFactory.createLabel(panel, "Primary Route");
+	UIControlsFactory.createLabel(panel, "Primary Route");
 	final Label lblFarmerRouteValue = UIControlsFactory.createLabel(panel, location);
 	lblFarmerRouteValue.setFont(labelFont);
 

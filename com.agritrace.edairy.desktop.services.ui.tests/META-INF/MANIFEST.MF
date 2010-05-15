@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
-Bundle-SymbolicName: com.agritrace.edairy.desktop.ui.services.tests
+Bundle-SymbolicName: com.agritrace.edairy.desktop.services.ui.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.ui.services.tests.ServiceTestActivator
 Bundle-Vendor: AGRITRACE

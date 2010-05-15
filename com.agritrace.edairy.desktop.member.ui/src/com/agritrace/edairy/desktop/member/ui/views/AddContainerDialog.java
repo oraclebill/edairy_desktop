@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
+//import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -105,14 +105,14 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	dialogArea.setLayout(new GridLayout(2, false));
 	dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	final Label id = UIControlsFactory.createLabel(dialogArea, "ID:");
+	UIControlsFactory.createLabel(dialogArea, "ID:");
 
 	idText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
 	idText.setTextLimit(10);
 	idText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	idText.addModifyListener(this);
 
-	final Label typeLabel = UIControlsFactory.createLabel(dialogArea, "Container Type:");
+	UIControlsFactory.createLabel(dialogArea, "Container Type:");
 	final Combo containerCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer containerComboViewer = new ComboViewer(containerCombo);
 	containerComboViewer.setContentProvider(new ArrayContentProvider());
@@ -137,7 +137,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	// unitsDecorator = createDecorator(numberText, "");
 	// unitsDecorator.hide();
 
-	final Label measureLabel = UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
+	UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
 	final Combo measureCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer measureComboViewer = new ComboViewer(measureCombo);
 	measureComboViewer.setContentProvider(new ArrayContentProvider());
@@ -154,7 +154,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	    }
 	});
 
-	final Label capacityLabel = UIControlsFactory.createLabel(dialogArea, "Capacity:");
+	UIControlsFactory.createLabel(dialogArea, "Capacity:");
 
 	capacityText = new Text(dialogArea, SWT.BORDER | SWT.SINGLE);
 	capacityText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -162,7 +162,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	capacityDecorator = createDecorator(capacityText, "");
 	capacityDecorator.hide();
 
-	final Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");
+	UIControlsFactory.createLabel(dialogArea, "Farm:");
 	final Combo farmCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
 	farmComboViewer.setContentProvider(new ArrayContentProvider());

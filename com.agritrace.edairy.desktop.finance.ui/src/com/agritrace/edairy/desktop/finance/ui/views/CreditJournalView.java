@@ -281,6 +281,7 @@ public class CreditJournalView extends ViewPart {
 	removeButton.setText("Remove");
 	removeButton.addSelectionListener(new SelectionListener() {
 
+	    @SuppressWarnings("rawtypes")
 	    @Override
 	    public void widgetSelected(SelectionEvent e) {
 		final IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();

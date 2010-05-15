@@ -66,7 +66,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
     private Composite main;
     private Text txtName;
-    private Text txtId;
+//    private Text txtId;
     private List lstMembers;
     private Membership selectedMember;
 
@@ -368,7 +368,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(speciesText);
 
-	final Label breedLabel = UIControlsFactory.createLabel(filterPanel, "Filter By Breed:");
+	UIControlsFactory.createLabel(filterPanel, "Filter By Breed:");
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(typeLabel);
 
 	final Text breedText = UIControlsFactory.createText(filterPanel, SWT.BORDER | SWT.SINGLE,
@@ -521,19 +521,19 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	deliveriesGroup.setLayout(new GridLayout(2, false));
 	deliveriesGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
 
-	final Label totalLabel = UIControlsFactory.createLabel(deliveriesGroup, "Total Deliveries:");
+	UIControlsFactory.createLabel(deliveriesGroup, "Total Deliveries:");
 
 	final Text deliveryField = UIControlsFactory.createText(deliveriesGroup, SWT.SINGLE | SWT.BORDER);
 	deliveryField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	// deliveryField.setText("2500");
 
-	final Label acceptLabel = UIControlsFactory.createLabel(deliveriesGroup, "Total Accepted:");
+	UIControlsFactory.createLabel(deliveriesGroup, "Total Accepted:");
 
 	final Text acceptField = UIControlsFactory.createText(deliveriesGroup, SWT.SINGLE | SWT.BORDER);
 	acceptField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	// acceptField.setText("2500");
 
-	final Label rejectLabel = UIControlsFactory.createLabel(deliveriesGroup, "Total Rejected:");
+	UIControlsFactory.createLabel(deliveriesGroup, "Total Rejected:");
 
 	final Text rejectField = UIControlsFactory.createText(deliveriesGroup, SWT.SINGLE | SWT.BORDER);
 	rejectField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -543,13 +543,13 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	sharesGroupd.setLayout(new GridLayout(4, false));
 	sharesGroupd.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
-	final Label recCovLabel = UIControlsFactory.createLabel(sharesGroupd, "Total/Recov. :");
+	UIControlsFactory.createLabel(sharesGroupd, "Total/Recov. :");
 
 	final Text recCobTxt1 = UIControlsFactory.createText(sharesGroupd, SWT.SINGLE | SWT.BORDER);
 	recCobTxt1.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 	// recCobTxt1.setText("2500");
 
-	final Label slashLabel = UIControlsFactory.createLabel(sharesGroupd, "/");
+	UIControlsFactory.createLabel(sharesGroupd, "/");
 
 	final Text recCobTxt2 = UIControlsFactory.createText(sharesGroupd, SWT.SINGLE | SWT.BORDER);
 	recCobTxt2.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
@@ -559,31 +559,31 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	creditsGroup.setLayout(new GridLayout(4, false));
 	creditsGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	final Label creditScoreL = UIControlsFactory.createLabel(creditsGroup, "Credit Score :");
+	UIControlsFactory.createLabel(creditsGroup, "Credit Score :");
 
 	final Text creditScoreTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 	creditScoreTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3, 1));
 	// creditScoreTxt.setText("700");
 
-	final Label creditLimit = UIControlsFactory.createLabel(creditsGroup, "Credit Limit/Available :");
+	UIControlsFactory.createLabel(creditsGroup, "Credit Limit/Available :");
 
 	final Text creditLimitTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 	creditLimitTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
 	// creditLimitTxt.setText("2000");
 
-	final Label slashLabel2 = UIControlsFactory.createLabel(creditsGroup, "/");
+	UIControlsFactory.createLabel(creditsGroup, "/");
 
 	final Text creditLimitTxt2 = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 	creditLimitTxt2.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
 	// creditLimitTxt2.setText("1250");
 
-	final Label creditBalanceL = UIControlsFactory.createLabel(creditsGroup, "Credit Balance :");
+	UIControlsFactory.createLabel(creditsGroup, "Credit Balance :");
 
 	final Text creditBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 	creditBalanceTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3, 1));
 	// creditBalanceTxt.setText("1000");
 
-	final Label cashBalanceL = UIControlsFactory.createLabel(creditsGroup, "Cash Balance :");
+	UIControlsFactory.createLabel(creditsGroup, "Cash Balance :");
 
 	final Text cashBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 	cashBalanceTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3, 1));
