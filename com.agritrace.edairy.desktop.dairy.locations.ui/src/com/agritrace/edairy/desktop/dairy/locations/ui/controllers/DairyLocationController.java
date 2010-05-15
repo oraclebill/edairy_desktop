@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.locations.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,13 +26,16 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
-import com.agritrace.edairy.dairy.ui.dialogs.RouteListDialog;
-import com.agritrace.edairy.dairy.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.*;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.MapLocation;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.PostalLocation;
+import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
@@ -77,17 +80,50 @@ public class DairyLocationController extends SubModuleController {
     public static final String RIDGET_ID_CANCEL_ACTION = "cancelAction";
     public static final String RIDGET_ID_DELETE_ACTION = "deleteAction";
 
-    private List<DairyLocation> input = new ArrayList<DairyLocation>();
+    private IDairyResourceManager resourceManager = null;
+    private Dairy myDairy = null;
 
+    
+    public DairyLocationController() {
+	initResources();
+    }
+    
+    
     public DairyLocationController(ISubModuleNode navigationNode) {
 	super(navigationNode);
-	initialize();
+	initResources();
     }
+    
+    private void initResources() {
+	resourceManager = DairyDemoResourceManager.INSTANCE;
+	try {	
+	    	myDairy = resourceManager.getLocalDairy();
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}	
+    }
+
+//    public void setResourceManager(IDairyResourceManager manager) {
+//	resourceManager = manager;
+//	if (null != manager) {
+//	    myDairy = manager.getLocalDairy();	    
+//	}
+//	else {
+//	    myDairy = null;
+//	}
+//    }
+//
+//    public IDairyResourceManager getResourceManager() {
+//	return resourceManager;
+//    }
 
     public void store() {
-	DairyLocationService.getInstance().store();
+	assert(null != resourceManager);
+	resourceManager.store(myDairy);
+	
     }
-
+    
     @Override
     public void configureRidgets() {
 	super.configureRidgets();
@@ -97,8 +133,8 @@ public class DairyLocationController extends SubModuleController {
 
 	final IMasterDetailsRidget master = (IMasterDetailsRidget) getRidget("master");
 	if (master != null) {
-	    master.setDelegate(new DairyLocationDelegation());
-	    master.bindToModel(new WritableList(input, DairyLocation.class), DairyLocation.class, properties, headers);
+	    master.setDelegate(new DairyLocationDelegate());
+	    master.bindToModel(new WritableList(myDairy.getBranchLocations(), DairyLocation.class), DairyLocation.class, properties, headers);
 	    master.updateFromModel();
 
 	    final IActionRidget actionApply = master.getRidget(IActionRidget.class,
@@ -118,15 +154,7 @@ public class DairyLocationController extends SubModuleController {
 	}
     }
 
-    public List<DairyLocation> getInput() {
-	return input;
-    }
-
-    public void saveInput(List<DairyLocation> input) {
-	this.input = input;
-    }
-
-    private final class DairyLocationDelegation extends AbstractMasterDetailsDelegate {
+    private final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	private DairyLocation workingCopy = createWorkingCopy();
 	private Route workingRoute;
 	private ITextRidget textName;
@@ -206,9 +234,11 @@ public class DairyLocationController extends SubModuleController {
 	}
 
 	private void bindRouteCombo() {
-	    final RouteService rs = RouteService.getInstance();
-	    routeCombo.bindToModel(rs, "names", String.class, "toString", workingRoute, "name");
-	    routeCombo.updateFromModel();
+	    if (null != myDairy) {
+//		routeCombo.bindToModel(myDairy.getRoutes(), "name", Route.class, "name", workingRoute, "name");
+//		routeCombo.bindToModel(new WritableList(myDairy.getRoutes()), Route, Route.class, "name", new IO
+		routeCombo.updateFromModel();
+	    }
 
 	}
 
@@ -218,7 +248,7 @@ public class DairyLocationController extends SubModuleController {
 		final DairyLocation changedDairyLocation = (DairyLocation) changedItem;
 		if (changedDairyLocation.getId() == 0) {
 		    // perform create action to SQL
-		    DairyLocationService.getInstance().create(changedDairyLocation);
+		    resourceManager.store(changedDairyLocation);
 		} else {
 		    // perform update action to SQL
 
@@ -229,7 +259,8 @@ public class DairyLocationController extends SubModuleController {
 
 	@Override
 	public void itemRemoved(Object oldItem) {
-	    DairyLocationService.getInstance().store();
+//	    DairyLocationService.getInstance().store(); 
+	    throw new UnsupportedOperationException(); // TODO: persist deletions.
 	}
 
 	@Override
@@ -447,18 +478,24 @@ public class DairyLocationController extends SubModuleController {
 	    public void ridgetSelected(SelectionEvent event) {
 		if (event.getNewSelection().size() > 0) {
 		    final String selectedName = (String) event.getNewSelection().get(0);
-		    final RouteService rs = RouteService.getInstance();
-		    final Route r = rs.findByName(selectedName);
+		    Route selectedRoute = null;
+		    for (Route test : myDairy.getRoutes()) {
+			String testName = test.getName();
+			if ( null != testName && testName.equals(selectedName) ) {
+			    selectedRoute = test;
+			    break;
+			}
+		    }		    
 		    final IComboRidget select = (IComboRidget) event.getSource();
-		    if (r == null) { // selection is invalid since the route
-				     // might be removed by someone else.
+		    if (selectedRoute == null) { 			// selection is invalid since the route
+				     			// might be removed by someone else.
 			select.setErrorMarked(true);
 		    } else {
 			select.setErrorMarked(false);
 		    }
-		    workingRoute.setId(r.getId());
-		    workingRoute.setDescription(r.getDescription());
-		    workingRoute.setCode(r.getCode());
+		    workingRoute.setId(selectedRoute.getId());
+		    workingRoute.setDescription(selectedRoute.getDescription());
+		    workingRoute.setCode(selectedRoute.getCode());
 		}
 	    }
 
@@ -483,6 +520,7 @@ public class DairyLocationController extends SubModuleController {
 		    return Status.CANCEL_STATUS;
 		}
 
+		List<DairyLocation> input = myDairy.getBranchLocations();
 		for (int i = 0; i < input.size(); i++) {
 		    if (textName.getText().equals(input.get(i).getName()) && i != table.getSelectionIndex()) {
 
@@ -503,12 +541,6 @@ public class DairyLocationController extends SubModuleController {
 		return Status.OK_STATUS;
 	    }
 	}
-    }
-
-    private void initialize() {
-
-	this.input = DairyLocationService.getInstance().getDairyLocations();
-
     }
 
 }

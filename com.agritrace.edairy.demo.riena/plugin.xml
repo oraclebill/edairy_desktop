@@ -41,16 +41,6 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="Dairy Info"
-            allowMultiple="true"
-            icon="icons/edairymanagericon16.png"
-            class="com.agritrace.edairy.dairy.ui.views.DairyLocationView"
-            id="com.agritrace.edairy.dairy.ui.views.DairyLocationView">
-         <description>
-            description body text
-         </description>
-      </view>
-      <view
             name="Demo Dairy Home"
             allowMultiple="true"
             icon="icons/edairymanagericon16.png"

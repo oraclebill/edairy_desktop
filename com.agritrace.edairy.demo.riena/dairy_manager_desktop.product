@@ -42,6 +42,7 @@
       <plugin id="com.agritrace.edairy.demo.riena"/>
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
       <plugin id="com.agritrace.edairy.desktop.finance.ui"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
@@ -65,6 +66,7 @@
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.emf"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.databinding"/>
       <plugin id="org.eclipse.emf.ecore"/>

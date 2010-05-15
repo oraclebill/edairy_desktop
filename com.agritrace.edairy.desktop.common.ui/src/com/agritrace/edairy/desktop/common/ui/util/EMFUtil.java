@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.util;
+package com.agritrace.edairy.desktop.common.ui.util;
 
 import org.eclipse.emf.ecore.EObject;
 

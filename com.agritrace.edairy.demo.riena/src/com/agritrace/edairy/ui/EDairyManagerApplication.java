@@ -18,9 +18,10 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
-import com.agritrace.edairy.dairy.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
@@ -236,7 +237,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	NodeFactory.createSubMobule(
 		new NavigationNodeId("edm.dairy.info"), "Dairy Profile", moduleSystem, DairyProfileView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubMobule(
-		new NavigationNodeId("edm.dairy.routes"), "Branch Locations", moduleSystem, DairyLocationView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		new NavigationNodeId("edm.dairy.routes"), "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory
 		.createSubMobule(
 			new NavigationNodeId("edm.dairy.staff"), "Employee Directory", moduleSystem, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.locations.ui.dialogs;
 
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -6,7 +6,7 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.dairy.ui.dialogs.AddRouteDialog;
+import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.Route;
 
 public class RouteListDialogController extends AbstractWindowController {
@@ -18,7 +18,9 @@ public class RouteListDialogController extends AbstractWindowController {
 
     public static final String RIDGET_ID_NO_SELECTION_DIALOG = "noSelectionError";
 
-    private final RouteService service = RouteService.getInstance();
+    private ITableRidget routeTable;
+
+    private Dairy myDairy;
 
     private IMessageBoxRidget deleteConfirmDialog;
 
@@ -26,7 +28,13 @@ public class RouteListDialogController extends AbstractWindowController {
 	super();
     }
 
-    private ITableRidget routeTable;
+    public void setDairy(Dairy dairy) {
+	myDairy = dairy;
+    }
+
+    public Dairy getDairy() {
+	return myDairy;
+    }
 
     @Override
     public void configureRidgets() {
@@ -35,7 +43,7 @@ public class RouteListDialogController extends AbstractWindowController {
 	getWindowRidget().setTitle("Route List");
 
 	routeTable = (ITableRidget) getRidget(RIDGET_ID_ROUTE_TABLE);
-	routeTable.bindToModel(service, "routes", Route.class, new String[] { "name", "description", "code" },
+	routeTable.bindToModel(myDairy, "routes", Route.class, new String[] { "name", "description", "code" },
 		new String[] { "Name", "Description", "Code" });
 	routeTable.updateFromModel();
 
@@ -51,10 +59,9 @@ public class RouteListDialogController extends AbstractWindowController {
 	addAction.addListener(new IActionListener() {
 	    @Override
 	    public void callback() {
-		final AddRouteDialog dialog = new AddRouteDialog();
+		final AddRouteDialog dialog = new AddRouteDialog( new AddRouteDialogController(myDairy) );
 		dialog.setBlockOnOpen(true);
 		dialog.open();
-		service.refresh();
 		routeTable.updateFromModel();
 	    }
 	});
@@ -65,9 +72,7 @@ public class RouteListDialogController extends AbstractWindowController {
 	    public void callback() {
 		if (routeTable.getSelectionIndex() >= 0) {
 		    if (deleteConfirmDialog.show().getLabel().equals("Yes")) {
-			service.refresh();
-			service.getRoutes().remove(routeTable.getSelection().get(0));
-			service.store();
+			myDairy.getRoutes().remove(routeTable.getSelection().get(0));
 			routeTable.updateFromModel();
 		    }
 		}

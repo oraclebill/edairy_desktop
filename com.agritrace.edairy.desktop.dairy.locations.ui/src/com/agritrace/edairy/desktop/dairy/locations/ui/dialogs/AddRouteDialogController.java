@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.locations.ui.dialogs;
 
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
@@ -10,37 +10,28 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
+import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.Route;
 
 public class AddRouteDialogController extends AbstractWindowController {
-    public static final String RIDGET_ID_ROUTE_ID = "routeId"; //$NON-NLS-1$
-    public static final String RIDGET_ID_NAME = "name"; //$NON-NLS-1$
-    public static final String RIDGET_ID_DESCRIPTION = "description"; //$NON-NLS-1$
-    public static final String RIDGET_ID_CODE = "code"; //$NON-NLS-1$
-    public static final String RIDGET_ID_SAVE = "saveButton"; //$NON-NLS-1$
-    public static final String RIDGET_ID_CANCEL = "cancelButton"; //$NON-NLS-1$
-
-    public static final String RIDGET_ID_DUPLICATE_NAME_DIALOG = "duplicateNameDialog"; //$NON-NLS-1$
-
-    private final RouteService service = RouteService.getInstance();
-
     private ITextRidget textName;
     private IMessageBoxRidget duplicateNameDialog;
-    private Route input;
+    private Route newRoute;
+    private Dairy myDairy;
 
-    public AddRouteDialogController() {
+    public AddRouteDialogController(Dairy dairy) {
 	super();
-
+	myDairy = dairy;
     }
-
+    
     @Override
     public void configureRidgets() {
 	super.configureRidgets();
 
 	getWindowRidget().setTitle("Add Route");
 
-	input = DairyFactory.eINSTANCE.createRoute();
+	newRoute = DairyFactory.eINSTANCE.createRoute();
 
 	/*
 	 * final ITextRidget routeId = getRidget(ITextRidget.class,
@@ -48,8 +39,8 @@ public class AddRouteDialogController extends AbstractWindowController {
 	 * routeId.bindToModel(route, "routeId"); routeId.updateFromModel();
 	 */
 
-	textName = getRidget(ITextRidget.class, RIDGET_ID_NAME);
-	textName.bindToModel(input, "name");
+	textName = getRidget(ITextRidget.class, AddRouteDialogIDs.RIDGET_ID_NAME);
+	textName.bindToModel(newRoute, "name");
 	textName.updateFromModel();
 	textName.addValidationMessage("Invalid route name!");
 	textName.setMandatory(true);
@@ -60,8 +51,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 		if ("".equals(textName.getText())) {
 		    return Status.CANCEL_STATUS;
 		}
-		service.refresh();
-		for (final Route r : service.getRoutes()) {
+		for (final Route r : myDairy.getRoutes()) {
 		    if (textName.getText().equals(r.getName())) {
 
 			return Status.CANCEL_STATUS;
@@ -72,33 +62,33 @@ public class AddRouteDialogController extends AbstractWindowController {
 
 	}, ValidationTime.ON_UPDATE_TO_MODEL);
 
-	final ITextRidget routeDescription = getRidget(ITextRidget.class, RIDGET_ID_DESCRIPTION);
-	routeDescription.bindToModel(input, "description");
+	final ITextRidget routeDescription = getRidget(ITextRidget.class, AddRouteDialogIDs.RIDGET_ID_DESCRIPTION);
+	routeDescription.bindToModel(newRoute, "description");
 	routeDescription.updateFromModel();
 
-	final ITextRidget routeCode = getRidget(ITextRidget.class, RIDGET_ID_CODE);
-	routeCode.bindToModel(input, "code");
+	final ITextRidget routeCode = getRidget(ITextRidget.class, AddRouteDialogIDs.RIDGET_ID_CODE);
+	routeCode.bindToModel(newRoute, "code");
 	routeCode.updateFromModel();
 
-	duplicateNameDialog = (IMessageBoxRidget) getRidget(RIDGET_ID_DUPLICATE_NAME_DIALOG);
+	duplicateNameDialog = (IMessageBoxRidget) getRidget(AddRouteDialogIDs.RIDGET_ID_DUPLICATE_NAME_DIALOG);
 	duplicateNameDialog.setType(IMessageBoxRidget.Type.ERROR);
 	duplicateNameDialog.setTitle("Duplicate Name");
 	duplicateNameDialog.setText("The name '" + textName.getText()
 		+ "' is already in use.\r\n\rPlease select a unique name for this new location.");
 
-	final IActionRidget saveAction = (IActionRidget) getRidget(RIDGET_ID_SAVE);
+	final IActionRidget saveAction = (IActionRidget) getRidget(AddRouteDialogIDs.RIDGET_ID_SAVE);
 	saveAction.addListener(new IActionListener() {
 	    @Override
 	    public void callback() {
 		if (textName.revalidate()) {
-		    service.getRoutes().add(input);
-		    service.store();
+		    myDairy.getRoutes().add(newRoute);
+//		    service.store();  // TODO: TEST PERSISTENCE
 		    getWindowRidget().dispose();
 		}
 	    }
 	});
 
-	final IActionRidget cencelAction = (IActionRidget) getRidget(RIDGET_ID_CANCEL);
+	final IActionRidget cencelAction = (IActionRidget) getRidget(AddRouteDialogIDs.RIDGET_ID_CANCEL);
 	cencelAction.addListener(new IActionListener() {
 	    @Override
 	    public void callback() {

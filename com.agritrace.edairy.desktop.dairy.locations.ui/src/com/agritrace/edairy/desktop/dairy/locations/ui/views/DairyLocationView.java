@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.views;
+package com.agritrace.edairy.desktop.dairy.locations.ui.views;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -23,10 +23,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.*;
 
 public class DairyLocationView extends SubModuleView {
-    public final static String ID = DairyLocationView.class.getName();
+    public final static String ID = "dairy.locations.editor";
     private final static int WIDTH_UNIT = 60;
     private final static int COLUMN_MARGIN = 20;
     private final static int FORM_MARGIN = 10;
@@ -344,13 +344,8 @@ public class DairyLocationView extends SubModuleView {
     }
 
     public Image getIcon() {
-	return AbstractUIPlugin.imageDescriptorFromPlugin("com.agritrace.edairy.demo.riena",
+	return AbstractUIPlugin.imageDescriptorFromPlugin("com.agritrace.edairy.desktop",
 		"/icons/edairymanagericon16.png").createImage();
-    }
-
-    @Override
-    protected DairyLocationController createController(ISubModuleNode subModuleNode) {
-	return new DairyLocationController(subModuleNode);
     }
 
     private static class DairyLocationMasterDetailsComposite extends MasterDetailsComposite {

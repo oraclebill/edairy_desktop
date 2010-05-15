@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView"
+            id="dairy.locations.editor"
+            name="Branch Location Editor"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView"
+            id="dairy.locations.editor"
+            name="Branch Location Editor"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

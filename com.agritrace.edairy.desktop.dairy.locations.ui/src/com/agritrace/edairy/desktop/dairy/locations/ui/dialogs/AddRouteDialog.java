@@ -1,4 +1,4 @@
-package com.agritrace.edairy.dairy.ui.dialogs;
+package com.agritrace.edairy.desktop.dairy.locations.ui.dialogs;
 
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
@@ -15,16 +15,18 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.dairy.ui.controllers.AddRouteDialogController;
+import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.*;
 
 @SuppressWarnings("unused")
 public class AddRouteDialog extends AbstractDialogView {
     private final static int WIDTH_UNIT = 100;
 
     private Composite contentArea;
+    private AbstractWindowController myController;
 
-    public AddRouteDialog() {
+    public AddRouteDialog(AbstractWindowController controller) {
 	super(null);
+	myController = controller;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class AddRouteDialog extends AbstractDialogView {
 
 	final Label nameLabel = UIControlsFactory.createLabel(contentArea, "Name", SWT.LEFT);
 	final Text nameText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE,
-		AddRouteDialogController.RIDGET_ID_NAME);
+		AddRouteDialogIDs.RIDGET_ID_NAME);
 	GridData gd = new GridData();
 	gd.widthHint = WIDTH_UNIT * 3;
 	nameText.setLayoutData(gd);
@@ -54,7 +56,7 @@ public class AddRouteDialog extends AbstractDialogView {
 	descriptionLabel.setLayoutData(gd);
 
 	final Text descriptionText = UIControlsFactory.createTextMulti(contentArea, false, false,
-		AddRouteDialogController.RIDGET_ID_DESCRIPTION);
+		AddRouteDialogIDs.RIDGET_ID_DESCRIPTION);
 	gd = new GridData();
 	gd.widthHint = WIDTH_UNIT * 3;
 	gd.heightHint = 60;
@@ -66,19 +68,19 @@ public class AddRouteDialog extends AbstractDialogView {
 	codeLabel.setLayoutData(gd);
 
 	final Text codeText = UIControlsFactory.createTextMulti(contentArea, false, false,
-		AddRouteDialogController.RIDGET_ID_CODE);
+		AddRouteDialogIDs.RIDGET_ID_CODE);
 	gd = new GridData();
 	gd.widthHint = WIDTH_UNIT;
 	codeText.setLayoutData(gd);
 
 	final Button saveButton = UIControlsFactory.createButton(contentArea, "Save",
-		AddRouteDialogController.RIDGET_ID_SAVE);
+		AddRouteDialogIDs.RIDGET_ID_SAVE);
 	gd = new GridData();
 	gd.widthHint = WIDTH_UNIT;
 	saveButton.setLayoutData(gd);
 
 	final Button cancelButton = UIControlsFactory.createButton(contentArea, "Cancel",
-		AddRouteDialogController.RIDGET_ID_CANCEL);
+		AddRouteDialogIDs.RIDGET_ID_CANCEL);
 	gd = new GridData();
 	gd.widthHint = WIDTH_UNIT;
 	cancelButton.setLayoutData(gd);
@@ -89,12 +91,12 @@ public class AddRouteDialog extends AbstractDialogView {
 
     private void createMessageBoxes() {
 	final MessageBox nameErrorMessage = UIControlsFactory.createMessageBox(contentArea);
-	this.addUIControl(nameErrorMessage, AddRouteDialogController.RIDGET_ID_DUPLICATE_NAME_DIALOG);
+	this.addUIControl(nameErrorMessage, AddRouteDialogIDs.RIDGET_ID_DUPLICATE_NAME_DIALOG);
     }
 
     @Override
     protected AbstractWindowController createController() {
-	return new AddRouteDialogController();
+	return myController;
     }
 
 }

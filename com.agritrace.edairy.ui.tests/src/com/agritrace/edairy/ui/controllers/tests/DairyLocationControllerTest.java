@@ -15,7 +15,7 @@ import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
-import com.agritrace.edairy.dairy.ui.controllers.DairyLocationController;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.MapLocation;
@@ -37,7 +37,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 	node.setNodeId(new NavigationNodeId(DairyLocationController.NODE_ID));
 	final DairyLocationController newInst = new DairyLocationController(node);
 	newInst.setNavigationNode(node);
-	newInst.getInput().add(dairyLocation);
+//	newInst.getInput().add(dairyLocation);
 	return newInst;
     }
 

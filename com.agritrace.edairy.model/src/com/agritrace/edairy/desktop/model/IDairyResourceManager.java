@@ -38,4 +38,6 @@ public interface IDairyResourceManager {
 
     public abstract void saveFarmResource();
 
+    public abstract void store(EObject updatedObject);
+
 }

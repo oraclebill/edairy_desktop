@@ -709,4 +709,15 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	    e.printStackTrace();
 	}
     }
+
+    @Override
+    public void store(EObject updatedObject) {
+	try {
+	    saveDairyResource();	    
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}
+	
+    }
 }
