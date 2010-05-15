@@ -15,94 +15,95 @@ import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
  */
 public class EDairyActivator extends AbstractUIPlugin {
 
-	// The plug-in ID
-	public static final String PLUGIN_ID = "com.agritrace.edairy.demo.riena"; //$NON-NLS-1$
+    // The plug-in ID
+    public static final String PLUGIN_ID = "com.agritrace.edairy.demo.riena"; //$NON-NLS-1$
 
-	// The shared instance
-	private static EDairyActivator plugin;
+    // The shared instance
+    private static EDairyActivator plugin;
 
-	/**
-	 * The constructor
-	 */
-	public EDairyActivator() {
+    /**
+     * The constructor
+     */
+    public EDairyActivator() {
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+     * )
+     */
+    @Override
+    public void start(BundleContext context) throws Exception {
+	super.start(context);
+	plugin = this;
+	// SwtControlRidgetMapper.getInstance().addMapping(CommonMasterDetailsComposite.class,
+	// StatuslineUIProcessRidget.class);
+	setupDairyResource();
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+     * )
+     */
+    @Override
+    public void stop(BundleContext context) throws Exception {
+	plugin = null;
+	super.stop(context);
+    }
+
+    /**
+     * Returns the shared instance
+     * 
+     * @return the shared instance
+     */
+    public static EDairyActivator getDefault() {
+	return plugin;
+    }
+
+    /**
+     * Return a "shared" image instance using the given colorKey. Shared images
+     * are managed automatically and must not be disposed by client code.
+     * 
+     * @param imageKey
+     *            a non-null String; see {@link SharedImages} for valid keys
+     * @return a non-null Image instance
+     */
+    public static synchronized Image getImage(final String path) {
+	final ImageDescriptor imageDescriptor = getImageDescriptor(path);
+	if (imageDescriptor != null) {
+	    return imageDescriptor.createImage();
 	}
+	return ImageStore.getInstance().getImage(path);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-	 * )
-	 */
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-		// SwtControlRidgetMapper.getInstance().addMapping(CommonMasterDetailsComposite.class,
-		// StatuslineUIProcessRidget.class);
-		setupDairyResource();
+    }
 
+    /**
+     * Returns an image descriptor for the image file at the given plug-in
+     * relative path
+     * 
+     * @param path
+     *            the path
+     * @return the image descriptor
+     */
+    public static ImageDescriptor getImageDescriptor(String path) {
+	return imageDescriptorFromPlugin(PLUGIN_ID, path);
+    }
+
+    private void setupDairyResource() {
+	try {
+	    // String baseDir =
+	    // RienaLocations.getDataArea(plugin.getBundle()).getAbsolutePath();
+	    final String baseDir = System.getProperty("edairy.db.root", "/tmp");
+	    DairyDemoResourceManager.INSTANCE.createDairyResource(baseDir);
+	} catch (final ParseException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
-	 */
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
-
-	/**
-	 * Returns the shared instance
-	 * 
-	 * @return the shared instance
-	 */
-	public static EDairyActivator getDefault() {
-		return plugin;
-	}
-
-	/**
-	 * Return a "shared" image instance using the given colorKey. Shared images
-	 * are managed automatically and must not be disposed by client code.
-	 * 
-	 * @param imageKey
-	 *            a non-null String; see {@link SharedImages} for valid keys
-	 * @return a non-null Image instance
-	 */
-	public static synchronized Image getImage(final String path) {
-		ImageDescriptor imageDescriptor = getImageDescriptor(path);
-		if (imageDescriptor != null) {
-			return imageDescriptor.createImage();
-		}
-		return ImageStore.getInstance().getImage(path);
-
-	}
-
-	/**
-	 * Returns an image descriptor for the image file at the given plug-in
-	 * relative path
-	 * 
-	 * @param path
-	 *            the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
-	
-	private void setupDairyResource(){
-		try {
-		    	// String baseDir = RienaLocations.getDataArea(plugin.getBundle()).getAbsolutePath();
-		    	String baseDir = System.getProperty("edairy.db.root", "/tmp");
-			DairyDemoResourceManager.INSTANCE.createDairyResource(baseDir);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    }
 }

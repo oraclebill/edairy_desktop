@@ -23,42 +23,39 @@ import org.eclipse.ui.part.ViewPart;
 
 public class DairyHomeView extends ViewPart {
 
-	public static final String ID = DairyHomeView.class.getName(); 
+    public static final String ID = DairyHomeView.class.getName();
 
-	@Override
-	public void createPartControl(Composite parent) {
-		Composite top = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 0;
-		layout.marginWidth = 0;
-		top.setLayout(layout);
-		// top banner
-		Composite banner = new Composite(top, SWT.NONE);
-		banner.setLayoutData(
-				new GridData(GridData.HORIZONTAL_ALIGN_FILL, 
-							 GridData.VERTICAL_ALIGN_BEGINNING, 
-							 true,
-							 false));
-		layout = new GridLayout();
-		layout.marginHeight = 5;
-		layout.marginWidth = 10;
-		layout.numColumns = 2;
-		banner.setLayout(layout);
+    @Override
+    public void createPartControl(Composite parent) {
+	final Composite top = new Composite(parent, SWT.NONE);
+	GridLayout layout = new GridLayout();
+	layout.marginHeight = 0;
+	layout.marginWidth = 0;
+	top.setLayout(layout);
+	// top banner
+	final Composite banner = new Composite(top, SWT.NONE);
+	banner.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL, GridData.VERTICAL_ALIGN_BEGINNING, true,
+		false));
+	layout = new GridLayout();
+	layout.marginHeight = 5;
+	layout.marginWidth = 10;
+	layout.numColumns = 2;
+	banner.setLayout(layout);
 
-		Font boldFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
+	final Font boldFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
 
-		Label l = new Label(banner, SWT.WRAP);
-		l.setText("Welcome to eDairy Manager"); //$NON-NLS-1$
-		l.setFont(boldFont);
+	Label l = new Label(banner, SWT.WRAP);
+	l.setText("Welcome to eDairy Manager"); //$NON-NLS-1$
+	l.setFont(boldFont);
 
-		l = new Label(top, SWT.NONE);
-		Image backImage = ImageStore.getInstance().getImage("dairy_staff_photo.jpg");	
-		l.setImage(backImage);
-		l.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-	}
+	l = new Label(top, SWT.NONE);
+	final Image backImage = ImageStore.getInstance().getImage("dairy_staff_photo.jpg");
+	l.setImage(backImage);
+	l.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    }
 
-	@Override
-	public void setFocus() {
-	}
+    @Override
+    public void setFocus() {
+    }
 
 }

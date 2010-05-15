@@ -9,22 +9,21 @@ import org.eclipse.swt.widgets.Table;
 
 public class StaffInfoMasterDetailsComposite extends MasterDetailsComposite {
 
-	public StaffInfoMasterDetailsComposite(Composite parent, int style) {
-		super(parent, style);
-		setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	@Override
-	protected Table createTable(Composite tableComposite, TableColumnLayout layout) {
-		if(tableComposite.getParent() != null){
-			tableComposite.getParent().setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+    public StaffInfoMasterDetailsComposite(Composite parent, int style) {
+	super(parent, style);
+	setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	// TODO Auto-generated constructor stub
+    }
 
-		}
-		tableComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		tableComposite.setLayout(layout);
+    @Override
+    protected Table createTable(Composite tableComposite, TableColumnLayout layout) {
+	if (tableComposite.getParent() != null) {
+	    tableComposite.getParent().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		return super.createTable(tableComposite, layout);
 	}
+	tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	tableComposite.setLayout(layout);
+
+	return super.createTable(tableComposite, layout);
+    }
 }

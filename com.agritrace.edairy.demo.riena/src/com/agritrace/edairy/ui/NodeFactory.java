@@ -24,33 +24,33 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
  */
 public final class NodeFactory {
 
-	private NodeFactory() {
-		// prevent instantiation
-	}
+    private NodeFactory() {
+	// prevent instantiation
+    }
 
-	public static IModuleNode createModule(NavigationNodeId nodeId, String caption, IModuleGroupNode parent) {
-		IModuleNode result = new ModuleNode(nodeId, caption);
-		parent.addChild(result);
-		return result;
-	}
+    public static IModuleNode createModule(NavigationNodeId nodeId, String caption, IModuleGroupNode parent) {
+	final IModuleNode result = new ModuleNode(nodeId, caption);
+	parent.addChild(result);
+	return result;
+    }
 
-	public static ISubModuleNode createSubMobule(NavigationNodeId nodeId, String caption, IModuleNode parent,
-			String viewId) {
-		ISubModuleNode result = new SubModuleNode(nodeId, caption);
-		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
-		result.setIcon("arrow_right.png"); //$NON-NLS-1$
-		parent.addChild(result);
-		WorkareaManager.getInstance().registerDefinition(result, viewId);
-		return result;
-	}
-	
-	public static ISubModuleNode createSubMobule(NavigationNodeId nodeId, String caption, IModuleNode parent,
-			String viewId,Class<? extends IController> controllerClass) {
-		ISubModuleNode result = new SubModuleNode(nodeId, caption);
-		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
-		result.setIcon("arrow_right.png"); //$NON-NLS-1$
-		parent.addChild(result);
-		WorkareaManager.getInstance().registerDefinition(result, controllerClass,viewId);
-		return result;
-	}
+    public static ISubModuleNode createSubMobule(NavigationNodeId nodeId, String caption, IModuleNode parent,
+	    String viewId) {
+	final ISubModuleNode result = new SubModuleNode(nodeId, caption);
+	// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
+	result.setIcon("arrow_right.png"); //$NON-NLS-1$
+	parent.addChild(result);
+	WorkareaManager.getInstance().registerDefinition(result, viewId);
+	return result;
+    }
+
+    public static ISubModuleNode createSubMobule(NavigationNodeId nodeId, String caption, IModuleNode parent,
+	    String viewId, Class<? extends IController> controllerClass) {
+	final ISubModuleNode result = new SubModuleNode(nodeId, caption);
+	// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
+	result.setIcon("arrow_right.png"); //$NON-NLS-1$
+	parent.addChild(result);
+	WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
+	return result;
+    }
 }

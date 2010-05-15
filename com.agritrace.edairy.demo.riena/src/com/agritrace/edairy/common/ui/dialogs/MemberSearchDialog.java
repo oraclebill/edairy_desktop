@@ -1,6 +1,5 @@
 package com.agritrace.edairy.common.ui.dialogs;
 
-
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -30,194 +29,186 @@ import com.agritrace.edairy.ui.views.data.MemberShip;
 
 public class MemberSearchDialog extends TitleAreaDialog {
 
+    /**
+     * MyTitleAreaDialog constructor
+     * 
+     * @param shell
+     *            the parent shell
+     */
+    public MemberSearchDialog(Shell shell) {
+	super(shell);
 
-	/**
-	 * MyTitleAreaDialog constructor
-	 * 
-	 * @param shell the parent shell
-	 */
-	public MemberSearchDialog(Shell shell) {
-		super(shell);
+    }
 
-	}
+    /**
+     * Closes the dialog box Override so we can dispose the image we created
+     */
+    @Override
+    public boolean close() {
 
-	/**
-	 * Closes the dialog box Override so we can dispose the image we created
-	 */
-	@Override
-	public boolean close() {
+	return super.close();
+    }
 
-		return super.close();
-	}
+    /**
+     * Creates the dialog's contents
+     * 
+     * @param parent
+     *            the parent composite
+     * @return Control
+     */
+    @Override
+    protected Control createContents(Composite parent) {
+	final Control contents = super.createContents(parent);
+	setTitle("Member Lookup");
+	setMessage("Please input member search criterias");
+	return contents;
+    }
 
-	/**
-	 * Creates the dialog's contents
-	 * 
-	 * @param parent the parent composite
-	 * @return Control
-	 */
-	@Override
-	protected Control createContents(Composite parent) {
-		Control contents = super.createContents(parent);
-		setTitle("Member Lookup");
-		setMessage("Please input member search criterias");
-		return contents;
-	}
-	
-	 @Override
-	protected void configureShell(Shell newShell) {
-	        newShell.setSize(450, 500);
-	        super.configureShell(newShell);
+    @Override
+    protected void configureShell(Shell newShell) {
+	newShell.setSize(450, 500);
+	super.configureShell(newShell);
+    }
+
+    /**
+     * Creates the gray area
+     * 
+     * @param parent
+     *            the parent composite
+     * @return Control
+     */
+    @Override
+    protected Control createDialogArea(Composite parent) {
+	final Composite composite = (Composite) super.createDialogArea(parent);
+	final Composite dialogArea = new Composite(composite, SWT.NULL);
+	dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	dialogArea.setLayout(new GridLayout(4, false));
+	final Label label = new Label(dialogArea, SWT.NULL);
+	label.setText("Lookup field:");
+	label.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false));
+
+	final Combo combo = new Combo(dialogArea, SWT.BORDER);
+	combo.setItems(new String[] { "ID", "Name", "Location" });
+	combo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+
+	final Text filterText = new Text(dialogArea, SWT.NULL | SWT.BORDER | SWT.SINGLE);
+	filterText.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
+
+	final Button lookupButton = new Button(dialogArea, SWT.PUSH);
+	lookupButton.setText("Lookup");
+	lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
+	lookupButton.addSelectionListener(new SelectionAdapter() {
+	    /**
+	     * Sent when selection occurs in the control. The default behavior
+	     * is to do nothing.
+	     * 
+	     * @param e
+	     *            an event containing information about the selection
+	     */
+	    @Override
+	    public void widgetSelected(SelectionEvent e) {
 	    }
 
+	    /**
+	     * Sent when default selection occurs in the control. The default
+	     * behavior is to do nothing.
+	     * 
+	     * @param e
+	     *            an event containing information about the default
+	     *            selection
+	     */
+	    @Override
+	    public void widgetDefaultSelected(SelectionEvent e) {
+	    }
+	});
 
-	/**
-	 * Creates the gray area
-	 * 
-	 * @param parent the parent composite
-	 * @return Control
-	 */
+	final Composite panel = new Composite(dialogArea, SWT.NULL);
+	panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 1));
+	final TableViewer tableView = new TableViewer(panel, SWT.FULL_SELECTION | SWT.BORDER | SWT.MULTI);
+	final Table table = tableView.getTable();
+	table.setHeaderVisible(true);
+	table.setLinesVisible(true);
+
+	// Create two columns and show
+	final TableColumn id = new TableColumn(table, SWT.LEFT);
+	id.setText("ID");
+
+	final TableColumn name = new TableColumn(table, SWT.LEFT);
+	name.setText("Name");
+
+	final TableColumn location = new TableColumn(table, SWT.LEFT);
+	location.setText("Location");
+
+	final TableColumnLayout layout = new TableColumnLayout();
+	layout.setColumnData(id, new ColumnWeightData(20));
+	layout.setColumnData(name, new ColumnWeightData(30));
+	layout.setColumnData(location, new ColumnWeightData(50));
+
+	tableView.setContentProvider(new ArrayContentProvider());
+	tableView.setLabelProvider(new MemberLabelProvider());
+	tableView.setInput(MemberFactory.createMemberList());
+
+	panel.setLayout(layout);
+	return composite;
+    }
+
+    /**
+     * Creates the buttons for the button bar
+     * 
+     * @param parent
+     *            the parent composite
+     */
+    @Override
+    protected void createButtonsForButtonBar(Composite parent) {
+	createButton(parent, IDialogConstants.OK_ID, "Select", true);
+    }
+
+    public class MemberLabelProvider implements ITableLabelProvider {
+
 	@Override
-	protected Control createDialogArea(Composite parent) {
-		Composite composite = (Composite) super.createDialogArea(parent);
-		Composite dialogArea = new Composite(composite,SWT.NULL);
-		dialogArea.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
-		dialogArea.setLayout(new GridLayout(4,false));
-		Label label = new Label(dialogArea,SWT.NULL);
-		label.setText("Lookup field:");
-		label.setLayoutData(new GridData(SWT.BEGINNING,SWT.BEGINNING,false,false));
+	public void addListener(ILabelProviderListener listener) {
+	    // TODO Auto-generated method stub
 
-		Combo combo = new Combo(dialogArea,SWT.BORDER);
-		combo.setItems(new String[]{"ID","Name","Location"});
-		combo.setLayoutData(new GridData(SWT.FILL,SWT.BEGINNING,false,false));
-
-		Text filterText = new Text(dialogArea,SWT.NULL|SWT.BORDER|SWT.SINGLE);
-		filterText.setLayoutData(new GridData(SWT.FILL,SWT.BEGINNING,true,false));
-
-		Button lookupButton = new Button(dialogArea,SWT.PUSH);
-		lookupButton.setText("Lookup");
-		lookupButton.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
-		lookupButton.addSelectionListener(new SelectionAdapter() {
-			/**
-			 * Sent when selection occurs in the control.
-			 * The default behavior is to do nothing.
-			 *
-			 * @param e an event containing information about the selection
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-
-			/**
-			 * Sent when default selection occurs in the control.
-			 * The default behavior is to do nothing.
-			 *
-			 * @param e an event containing information about the default selection
-			 */
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-		});
-
-		Composite panel = new Composite(dialogArea, SWT.NULL);
-		panel.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true,4,1));
-		TableViewer tableView = new TableViewer(panel,SWT.FULL_SELECTION | SWT.BORDER|SWT.MULTI);
-		Table table=tableView.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-
-
-		// Create two columns and show
-		TableColumn id = new TableColumn(table, SWT.LEFT);
-		id.setText("ID");
-
-		TableColumn name = new TableColumn(table, SWT.LEFT);
-		name.setText("Name");
-
-		TableColumn location = new TableColumn(table, SWT.LEFT);
-		location.setText("Location");
-
-
-		TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(id, new ColumnWeightData(20));
-		layout.setColumnData(name, new ColumnWeightData(30));
-		layout.setColumnData(location, new ColumnWeightData(50));
-
-		tableView.setContentProvider(new ArrayContentProvider());
-		tableView.setLabelProvider(new MemberLabelProvider());
-		tableView.setInput(MemberFactory.createMemberList());
-
-		panel.setLayout(layout);
-		return composite;
 	}
 
-	/**
-	 * Creates the buttons for the button bar
-	 * 
-	 * @param parent the parent composite
-	 */
 	@Override
-	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Select", true);
-	}
-
-	public class MemberLabelProvider implements ITableLabelProvider{
-
-		
-		@Override
-		public void addListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
-		
-		@Override
-		public void dispose() {
-			// TODO Auto-generated method stub
-
-		}
-
-		
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
-		
-		@Override
-		public Image getColumnImage(Object element, int columnIndex) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		
-		@Override
-		public String getColumnText(Object element, int columnIndex) {
-			if(element instanceof MemberShip){
-				switch(columnIndex){
-				case 0:
-					return ((MemberShip)element).getId().toString();
-				case 1:
-					return ((MemberShip)element).getFirstname()+((MemberShip)element).getLastname();
-				case 2:
-					return 
-					((MemberShip)element).getAddress();
-				}
-			}
-			return null;
-		}
+	public void dispose() {
+	    // TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public boolean isLabelProperty(Object element, String property) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+
+	@Override
+	public void removeListener(ILabelProviderListener listener) {
+	    // TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Image getColumnImage(Object element, int columnIndex) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
+
+	@Override
+	public String getColumnText(Object element, int columnIndex) {
+	    if (element instanceof MemberShip) {
+		switch (columnIndex) {
+		case 0:
+		    return ((MemberShip) element).getId().toString();
+		case 1:
+		    return ((MemberShip) element).getFirstname() + ((MemberShip) element).getLastname();
+		case 2:
+		    return ((MemberShip) element).getAddress();
+		}
+	    }
+	    return null;
+	}
+
+    }
 }
-
-
-

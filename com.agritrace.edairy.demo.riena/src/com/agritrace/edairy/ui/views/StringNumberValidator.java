@@ -7,22 +7,21 @@ import org.eclipse.core.runtime.Status;
 
 public class StringNumberValidator implements IValidator {
 
-	@Override
-	public IStatus validate(Object value) {
-		if(value == null){
-			throw new IllegalArgumentException(
-			"Parameter 'value' cannot be null.");
-		}else{
-			String strValue = (String)value;
-			try{
-				Integer i = new Integer(strValue);	
-			}catch(NumberFormatException ex){
-				return  ValidationStatus.error(ex.getMessage());
-			}
+    @Override
+    public IStatus validate(Object value) {
+	if (value == null) {
+	    throw new IllegalArgumentException("Parameter 'value' cannot be null.");
+	} else {
+	    final String strValue = (String) value;
+	    try {
+		final Integer i = new Integer(strValue);
+	    } catch (final NumberFormatException ex) {
+		return ValidationStatus.error(ex.getMessage());
+	    }
 
-			return Status.OK_STATUS;
-			
-		}
+	    return Status.OK_STATUS;
+
 	}
+    }
 
 }

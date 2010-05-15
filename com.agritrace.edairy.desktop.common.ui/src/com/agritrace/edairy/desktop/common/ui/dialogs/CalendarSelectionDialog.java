@@ -14,52 +14,51 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 
-public class CalendarSelectionDialog extends AbstractDialogView{
-    
+public class CalendarSelectionDialog extends AbstractDialogView {
+
     public static String CALENDAR_DATE = "calendar.date";
     public static String CALENDAR_OK = "calendar.ok";
     public static String CALENDAR_CANCEL = "calendar.cancel";
-	
-	public CalendarSelectionDialog(){
-		super(null);
-	}
-	
-	public CalendarSelectionDialog(String dateString){
-		super(null);
-	}
 
-	@Override
-	protected Control buildView(Composite parent) {
-		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		parent.setLayout(new GridLayout(2, false));
-		DateTime calendar = UIControlsFactory.createCalendar(parent);
-		addUIControl(calendar, CALENDAR_DATE);
-		GridDataFactory.fillDefaults().span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));
-		return null;
-	}
+    public CalendarSelectionDialog() {
+	super(null);
+    }
 
-	@Override
-	protected AbstractWindowController createController() {
-		// TODO Auto-generated method stub
-		return new CalendarSelectionDialogController();
-	}
-	
+    public CalendarSelectionDialog(String dateString) {
+	super(null);
+    }
 
-	private Composite createOkCancelButtons(Composite parent) {
+    @Override
+    protected Control buildView(Composite parent) {
+	parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+	parent.setLayout(new GridLayout(2, false));
+	final DateTime calendar = UIControlsFactory.createCalendar(parent);
+	addUIControl(calendar, CALENDAR_DATE);
+	GridDataFactory.fillDefaults().span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));
+	return null;
+    }
 
-		Composite buttonComposite = UIControlsFactory.createComposite(parent);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(buttonComposite);
+    @Override
+    protected AbstractWindowController createController() {
+	// TODO Auto-generated method stub
+	return new CalendarSelectionDialogController();
+    }
 
-		Button okButton = UIControlsFactory.createButton(buttonComposite);
-		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.BEGINNING).applyTo(okButton);
-		okButton.setText("Ok"); //$NON-NLS-1$
-		addUIControl(okButton, CALENDAR_OK);
+    private Composite createOkCancelButtons(Composite parent) {
 
-		Button cancelButton = UIControlsFactory.createButton(buttonComposite);
-		cancelButton.setText("Cancel"); //$NON-NLS-1$
-		addUIControl(cancelButton, CALENDAR_CANCEL);
+	final Composite buttonComposite = UIControlsFactory.createComposite(parent);
+	GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(buttonComposite);
 
-		return buttonComposite;
-	}
+	final Button okButton = UIControlsFactory.createButton(buttonComposite);
+	GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.BEGINNING).applyTo(okButton);
+	okButton.setText("Ok"); //$NON-NLS-1$
+	addUIControl(okButton, CALENDAR_OK);
+
+	final Button cancelButton = UIControlsFactory.createButton(buttonComposite);
+	cancelButton.setText("Cancel"); //$NON-NLS-1$
+	addUIControl(cancelButton, CALENDAR_CANCEL);
+
+	return buttonComposite;
+    }
 
 }

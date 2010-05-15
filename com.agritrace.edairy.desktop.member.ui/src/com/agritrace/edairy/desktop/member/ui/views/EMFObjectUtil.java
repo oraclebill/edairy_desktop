@@ -13,33 +13,35 @@ import com.agritrace.edairy.model.tracking.TrackingFactory;
 
 public class EMFObjectUtil {
 
-	/**
-	 * Create a Farm object
-	 * @return
-	 */
-	public static Farm createFarm(){
-		Farm farm = TrackingFactory.eINSTANCE.createFarm();
-		Location location = ModelFactory.eINSTANCE.createLocation();
-		PostalLocation postalLocation =  ModelFactory.eINSTANCE.createPostalLocation();
-		location.setPostalLocation(postalLocation);
-		farm.setLocation(location);
-		return farm;
-	}
+    /**
+     * Create a Farm object
+     * 
+     * @return
+     */
+    public static Farm createFarm() {
+	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
+	final Location location = ModelFactory.eINSTANCE.createLocation();
+	final PostalLocation postalLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	location.setPostalLocation(postalLocation);
+	farm.setLocation(location);
+	return farm;
+    }
 
-	public static Membership createMembership(){
-		Membership member1 = DairyFactory.eINSTANCE.createMembership();
-		long now = System.currentTimeMillis();
-		Date appliedDate = new Date(now);;
-		member1.setApplicationDate(appliedDate);
+    public static Membership createMembership() {
+	final Membership member1 = DairyFactory.eINSTANCE.createMembership();
+	final long now = System.currentTimeMillis();
+	final Date appliedDate = new Date(now);
+	;
+	member1.setApplicationDate(appliedDate);
 
-		Person member = ModelFactory.eINSTANCE.createPerson();
-		member1.setMember(member);
+	final Person member = ModelFactory.eINSTANCE.createPerson();
+	member1.setMember(member);
 
-		Location memberLocation = ModelFactory.eINSTANCE.createLocation();
-		PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
-		memberLocation.setPostalLocation(defaultLocation);
-		member.setLocation(memberLocation);
-		return member1;
-	}
+	final Location memberLocation = ModelFactory.eINSTANCE.createLocation();
+	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	memberLocation.setPostalLocation(defaultLocation);
+	member.setLocation(memberLocation);
+	return member1;
+    }
 
 }

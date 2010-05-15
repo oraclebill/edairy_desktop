@@ -12,34 +12,35 @@ import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
 import com.agritrace.edairy.model.dairy.Membership;
 
 public class NewMembeViewController extends MemberSearchViewController {
-	
-	public NewMembeViewController(){
-		this.setSelectedMember(EMFObjectUtil.createMembership());
-	}
-	public void configureRidgets(){
-		super.configureRidgets();
-		((IActionRidget)getRidget(ViewWidgetId.memberInfo_searchButton)).setVisible(false);
-		
-		
-	}
-	
-	protected void saveMember(){
-		Membership newMembership = getSelectedMember();
-		if(newMembership != null){
-			try {
-				DairyDemoResourceManager.INSTANCE.getLocalDairy().getMemberships().add(newMembership);
-				DairyDemoResourceManager.INSTANCE.saveFarmResource();
-				DairyDemoResourceManager.INSTANCE.saveDairyResource();
-				MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
 
+    public NewMembeViewController() {
+	this.setSelectedMember(EMFObjectUtil.createMembership());
+    }
+
+    @Override
+    public void configureRidgets() {
+	super.configureRidgets();
+	((IActionRidget) getRidget(ViewWidgetId.memberInfo_searchButton)).setVisible(false);
+
+    }
+
+    @Override
+    protected void saveMember() {
+	final Membership newMembership = getSelectedMember();
+	if (newMembership != null) {
+	    try {
+		DairyDemoResourceManager.INSTANCE.getLocalDairy().getMemberships().add(newMembership);
+		DairyDemoResourceManager.INSTANCE.saveFarmResource();
+		DairyDemoResourceManager.INSTANCE.saveDairyResource();
+		MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
+	    } catch (final IllegalArgumentException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (final IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+    }
 
 }

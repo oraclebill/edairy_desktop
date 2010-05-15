@@ -16,68 +16,61 @@ import com.agritrace.edairy.service.core.ServiceRequestResourceManager;
  */
 public class ServiceLogViewController extends CommonSubModuleViewController {
 
-	private List<AnimalHealthRequest> filtedResult;
-	private List<AnimalHealthRequest> allRequests = new ArrayList<AnimalHealthRequest>();
-	public static final String ID = ServiceLogViewController.class.getName();
+    private List<AnimalHealthRequest> filtedResult;
+    private List<AnimalHealthRequest> allRequests = new ArrayList<AnimalHealthRequest>();
+    public static final String ID = ServiceLogViewController.class.getName();
 
-	public static final int EVENT_TYPE_TABLE_INPUT_CHANGED = 1;
+    public static final int EVENT_TYPE_TABLE_INPUT_CHANGED = 1;
 
-	public ServiceLogViewController() {
-		super();
-		initModel();
-		this.setFilteredResult(this.allRequests);
+    public ServiceLogViewController() {
+	super();
+	initModel();
+	this.setFilteredResult(this.allRequests);
+    }
+
+    /**
+     * Currently we load EMF models from file In the future this code should be
+     * replaced teneo/eclipselink framework to load DB objects to EMF models
+     */
+    private void initModel() {
+	ServiceRequestResourceManager.INSTANCE.loadResources();
+	try {
+	    allRequests = ServiceRequestResourceManager.INSTANCE.getObjectsFromDairyModel(AnimalHealthRequest.class);
+	} catch (final CoreException e) {
+	    // TODO
+	    e.printStackTrace();
 	}
-	
-	/**
-	 * Currently we load EMF models from file
-	 * In the future this code should be replaced teneo/eclipselink framework to load DB objects to EMF models
-	 */
-	private void initModel()
-	{
-		ServiceRequestResourceManager.INSTANCE.loadResources();
-		try {
-			allRequests = ServiceRequestResourceManager.INSTANCE
-					.getObjectsFromDairyModel(AnimalHealthRequest.class);
-		} catch (CoreException e) {
-			// TODO 			
-			e.printStackTrace();
-		}
-	}
-	
-	public void setEMFModels(List<AnimalHealthRequest> eobjs)
-	{
-		this.allRequests = eobjs;
-	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.agritrace.edairy.service.ui.controllers.CommonSubModuleViewController
-	 * #addSubModuleControllers()
-	 */
-	@Override
-	protected void addSubModuleControllers() {
+    public void setEMFModels(List<AnimalHealthRequest> eobjs) {
+	this.allRequests = eobjs;
+    }
 
-		addSubModuleControllerDelegate(new ServiceRequestLogFilterControllerDelegate(
-				this));
-		addSubModuleControllerDelegate(new ServiceRequestLogMasterDetailControllerDelegate(
-				this));
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.agritrace.edairy.service.ui.controllers.CommonSubModuleViewController
+     * #addSubModuleControllers()
+     */
+    @Override
+    protected void addSubModuleControllers() {
 
-	public List<AnimalHealthRequest> getAllRequests() {
+	addSubModuleControllerDelegate(new ServiceRequestLogFilterControllerDelegate(this));
+	addSubModuleControllerDelegate(new ServiceRequestLogMasterDetailControllerDelegate(this));
+    }
 
-		return this.allRequests;
-	}
+    public List<AnimalHealthRequest> getAllRequests() {
 
-	
-	public List<AnimalHealthRequest> getFilteredResult() {
-		return filtedResult;
-	}
+	return this.allRequests;
+    }
 
-	public void setFilteredResult(List<AnimalHealthRequest> result) {
-		filtedResult = result;
-	}
+    public List<AnimalHealthRequest> getFilteredResult() {
+	return filtedResult;
+    }
 
+    public void setFilteredResult(List<AnimalHealthRequest> result) {
+	filtedResult = result;
+    }
 
 }

@@ -4,9 +4,9 @@ import org.eclipse.riena.navigation.ui.swt.splashHandlers.AbstractLoginSplashHan
 
 public class RienaLoginSplashHandler extends AbstractLoginSplashHandler {
 
-	public RienaLoginSplashHandler() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public RienaLoginSplashHandler() {
+	super();
+	// TODO Auto-generated constructor stub
+    }
 
 }

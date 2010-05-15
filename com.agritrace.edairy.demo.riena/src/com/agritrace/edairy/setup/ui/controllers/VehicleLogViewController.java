@@ -14,33 +14,30 @@ import com.agritrace.edairy.setup.core.VehicleLogResourceManager;
  */
 public class VehicleLogViewController extends CommonSubModuleViewController {
 
-	public static final String ID = VehicleLogViewController.class.getName();
-	
-	public VehicleLogViewController() {
-		super();
-		initModel();
-	}
+    public static final String ID = VehicleLogViewController.class.getName();
 
-	/**
-	 * Currently we load EMF models from file In the future this code should be
-	 * replaced teneo/eclipselink framework to load DB objects to EMF models
-	 */
-	private void initModel() {
-		// ServiceRequestResourceManager.INSTANCE.loadResources();
-		try {
-			this.getModleOjects().addAll(
-					VehicleLogResourceManager.INSTANCE
-							.getObjectsFromDairyModel(Vehicle.class));
-		} catch (CoreException e) {
-			// TODO
-			e.printStackTrace();
-		}
-	}
+    public VehicleLogViewController() {
+	super();
+	initModel();
+    }
 
-	@Override
-	protected void addSubModuleControllers() {
-		this.addSubModuleControllerDelegate(new VehicleControllerDelegate(
-				this));
+    /**
+     * Currently we load EMF models from file In the future this code should be
+     * replaced teneo/eclipselink framework to load DB objects to EMF models
+     */
+    private void initModel() {
+	// ServiceRequestResourceManager.INSTANCE.loadResources();
+	try {
+	    this.getModleOjects().addAll(VehicleLogResourceManager.INSTANCE.getObjectsFromDairyModel(Vehicle.class));
+	} catch (final CoreException e) {
+	    // TODO
+	    e.printStackTrace();
 	}
+    }
+
+    @Override
+    protected void addSubModuleControllers() {
+	this.addSubModuleControllerDelegate(new VehicleControllerDelegate(this));
+    }
 
 }

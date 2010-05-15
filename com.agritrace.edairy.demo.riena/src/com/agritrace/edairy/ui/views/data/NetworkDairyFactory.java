@@ -6,13 +6,12 @@ import java.util.List;
 import com.agritrace.edairy.ui.views.data.NetworkDairy.ORGANIZATIONTYPE;
 
 public class NetworkDairyFactory {
-	
 
-	/**
- * Create a collection of persons.
- */
-public static List<NetworkDairy> createPersonList() {
-	List<NetworkDairy> newList = new ArrayList<NetworkDairy>();
+    /**
+     * Create a collection of persons.
+     */
+    public static List<NetworkDairy> createPersonList() {
+	final List<NetworkDairy> newList = new ArrayList<NetworkDairy>();
 
 	NetworkDairy person = new NetworkDairy("Doe", "John");
 	person.setId(1002);
@@ -53,7 +52,6 @@ public static List<NetworkDairy> createPersonList() {
 	person.setOrganizationType(ORGANIZATIONTYPE.AGRITRACE);
 	person.setOrganizationName("Agriculture foundation");
 
-
 	newList.add(person);
 
 	person = new NetworkDairy("JJ Jr. Shabadoo", "Joey");
@@ -64,7 +62,6 @@ public static List<NetworkDairy> createPersonList() {
 	person.setOrganizationType(ORGANIZATIONTYPE.DAIRY);
 	person.setOrganizationName("");
 
-
 	newList.add(person);
 
 	person = new NetworkDairy("Johnson", "Jack"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -74,7 +71,6 @@ public static List<NetworkDairy> createPersonList() {
 	person.setAddress("222 Campus Dr., Princeton Junction, NJ 08550");
 	person.setOrganizationType(ORGANIZATIONTYPE.DAIRY);
 	person.setOrganizationName("");
-
 
 	newList.add(person);
 
@@ -100,8 +96,6 @@ public static List<NetworkDairy> createPersonList() {
 	newList.add(person);
 
 	return newList;
-}
-
-
+    }
 
 }

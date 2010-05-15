@@ -14,7 +14,7 @@ public interface IDairyResourceManager {
 
     public static final String XMLDB_BASE = System.getProperty("edairy.db.root", "c:/temp/edairy");
 
-    //	public static final String XMLDB_BASE = "/tmp";
+    // public static final String XMLDB_BASE = "/tmp";
 
     public abstract void createFarmResource();
 

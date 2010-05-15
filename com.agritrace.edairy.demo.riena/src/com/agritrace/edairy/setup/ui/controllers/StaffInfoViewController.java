@@ -14,33 +14,30 @@ import com.agritrace.edairy.setup.core.StaffInfoResourceManager;
  */
 public class StaffInfoViewController extends CommonSubModuleViewController {
 
-	public static final String ID = StaffInfoViewController.class.getName();
-	
-	public StaffInfoViewController() {
-		super();
-		initModel();
-	}
+    public static final String ID = StaffInfoViewController.class.getName();
 
-	/**
-	 * Currently we load EMF models from file In the future this code should be
-	 * replaced teneo/eclipselink framework to load DB objects to EMF models
-	 */
-	private void initModel() {
-		// ServiceRequestResourceManager.INSTANCE.loadResources();
-		try {
-			this.getModleOjects().addAll(
-					StaffInfoResourceManager.INSTANCE
-							.getObjectsFromDairyModel(Employee.class));
-		} catch (CoreException e) {
-			// TODO
-			e.printStackTrace();
-		}
-	}
+    public StaffInfoViewController() {
+	super();
+	initModel();
+    }
 
-	@Override
-	protected void addSubModuleControllers() {
-		this.addSubModuleControllerDelegate(new StaffInfoControllerDelegate(
-				this));
+    /**
+     * Currently we load EMF models from file In the future this code should be
+     * replaced teneo/eclipselink framework to load DB objects to EMF models
+     */
+    private void initModel() {
+	// ServiceRequestResourceManager.INSTANCE.loadResources();
+	try {
+	    this.getModleOjects().addAll(StaffInfoResourceManager.INSTANCE.getObjectsFromDairyModel(Employee.class));
+	} catch (final CoreException e) {
+	    // TODO
+	    e.printStackTrace();
 	}
+    }
+
+    @Override
+    protected void addSubModuleControllers() {
+	this.addSubModuleControllerDelegate(new StaffInfoControllerDelegate(this));
+    }
 
 }

@@ -24,31 +24,32 @@ import com.swtdesigner.SWTResourceManager;
 
 public class MonthlyCreditReportView extends ViewPart {
 
-	public static final String ID = MonthlyCreditReportView.class.getName(); 
+    public static final String ID = MonthlyCreditReportView.class.getName();
 
-	public MonthlyCreditReportView() {
-	}
+    public MonthlyCreditReportView() {
+    }
 
-	@Override
-	public void createPartControl(Composite parent) {
-		Composite top = new Composite(parent, SWT.NONE);
-		top.setSize(new Point(800, 800));
-		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		top.setLayout(new GridLayout(1, false));
-		
-		ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		scrolledComposite.setExpandHorizontal(true);
-		scrolledComposite.setExpandVertical(true);
-		
-		Label label = new Label(scrolledComposite, SWT.NONE);
-		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena", "resources/reports/eDairyReport-monthlycreditsales.jpg"));
-		scrolledComposite.setContent(label);
-		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-	}
+    @Override
+    public void createPartControl(Composite parent) {
+	final Composite top = new Composite(parent, SWT.NONE);
+	top.setSize(new Point(800, 800));
+	top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+	top.setLayout(new GridLayout(1, false));
 
-	@Override
-	public void setFocus() {
-	}
+	final ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+	scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+	scrolledComposite.setExpandHorizontal(true);
+	scrolledComposite.setExpandVertical(true);
+
+	final Label label = new Label(scrolledComposite, SWT.NONE);
+	label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+	label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena",
+		"resources/reports/eDairyReport-monthlycreditsales.jpg"));
+	scrolledComposite.setContent(label);
+	scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+    }
+
+    @Override
+    public void setFocus() {
+    }
 }

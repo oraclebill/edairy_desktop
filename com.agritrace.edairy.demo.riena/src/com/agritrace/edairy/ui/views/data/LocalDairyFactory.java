@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocalDairyFactory {
-	/**
- * Create a collection of persons.
- */
-public static List<LocalDairy> createPersonList() {
-	List<LocalDairy> newList = new ArrayList<LocalDairy>();
+    /**
+     * Create a collection of persons.
+     */
+    public static List<LocalDairy> createPersonList() {
+	final List<LocalDairy> newList = new ArrayList<LocalDairy>();
 
 	LocalDairy person = new LocalDairy("Doe", "John");
 	person.setId(1002);
@@ -23,7 +23,6 @@ public static List<LocalDairy> createPersonList() {
 	person.setFarm("Green Farm");
 	person.setPhoneNumber("(608)923-2488");
 	person.setAddress("222 Rading Rd., Princeton Junction, NJ 08550");
-
 
 	person.setGender(LocalDairy.FEMALE);
 	newList.add(person);
@@ -41,7 +40,6 @@ public static List<LocalDairy> createPersonList() {
 	person.setPhoneNumber("(608)923-7656");
 	person.setAddress("142 New Dr., Princeton Junction, NJ 08550");
 
-
 	newList.add(person);
 
 	person = new LocalDairy("JJ Jr. Shabadoo", "Joey");
@@ -49,7 +47,6 @@ public static List<LocalDairy> createPersonList() {
 	person.setFarm("Little Farm");
 	person.setPhoneNumber("(608)923-1234");
 	person.setAddress("786 New Dr., Princeton Junction, NJ 08550");
-
 
 	newList.add(person);
 
@@ -59,7 +56,6 @@ public static List<LocalDairy> createPersonList() {
 	person.setPhoneNumber("(608)923-0000");
 	person.setAddress("222 Campus Dr., Princeton Junction, NJ 08550");
 
-
 	newList.add(person);
 
 	person = new LocalDairy("Johnson", "Jane");
@@ -68,7 +64,6 @@ public static List<LocalDairy> createPersonList() {
 	person.setGender(LocalDairy.FEMALE);
 	person.setPhoneNumber("(608)923-7777");
 	person.setAddress("999 Victoria PI., Princeton Junction, NJ 08550");
-
 
 	newList.add(person);
 
@@ -81,7 +76,6 @@ public static List<LocalDairy> createPersonList() {
 	newList.add(person);
 
 	return newList;
-}
+    }
 
 }
-

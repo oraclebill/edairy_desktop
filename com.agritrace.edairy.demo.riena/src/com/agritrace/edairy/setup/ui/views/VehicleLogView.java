@@ -16,32 +16,29 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class VehicleLogView extends SubModuleView {
 
-	public static final String ID = VehicleLogView.class.getName();
-	public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
-	
-	@Override	
-	protected void basicCreatePartControl(Composite parent) {
+    public static final String ID = VehicleLogView.class.getName();
+    public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 
-		parent.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+    @Override
+    protected void basicCreatePartControl(Composite parent) {
 
-		parent.setLayout(new GridLayout(1, false));
+	parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
-		Composite panel = new Composite(parent, SWT.NULL);
-		panel.setLayout(new GridLayout(2, false));
-		panel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		panel.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+	parent.setLayout(new GridLayout(1, false));
 
-		// Creates filter section
-		VehicleFilterSection filterSection = new VehicleFilterSection();
-		filterSection.createSection(panel);	
-		// Since Master/Detail are in different composite, we need to pass the panel as detail composite
-		VehicleMasterDetailComposite mdComposite = new VehicleMasterDetailComposite(
-				panel, SWT.NONE);
-		addUIControl(mdComposite, BIND_ID_MASTER);
+	final Composite panel = new Composite(parent, SWT.NULL);
+	panel.setLayout(new GridLayout(2, false));
+	panel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	panel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
-	}
+	// Creates filter section
+	final VehicleFilterSection filterSection = new VehicleFilterSection();
+	filterSection.createSection(panel);
+	// Since Master/Detail are in different composite, we need to pass the
+	// panel as detail composite
+	final VehicleMasterDetailComposite mdComposite = new VehicleMasterDetailComposite(panel, SWT.NONE);
+	addUIControl(mdComposite, BIND_ID_MASTER);
 
+    }
 
 }
