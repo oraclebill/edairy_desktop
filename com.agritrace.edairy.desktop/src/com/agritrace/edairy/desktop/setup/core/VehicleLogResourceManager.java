@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import com.agritrace.edairy.desktop.common.managers.IDairyResourceManager;
-import com.agritrace.edairy.desktop.common.managers.ResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.ResourceManager;
 import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.desktop.ui.EDairyActivator;
 import com.agritrace.edairy.model.Location;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 
-import com.agritrace.edairy.desktop.common.managers.IDairyResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 
 /**

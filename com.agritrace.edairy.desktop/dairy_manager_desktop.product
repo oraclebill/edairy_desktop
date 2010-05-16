@@ -41,13 +41,13 @@
    <plugins>
       <plugin id="com.agritrace.edairy.desktop"/>
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.common"/>
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
+      <plugin id="com.agritrace.edairy.desktop.common.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
       <plugin id="com.agritrace.edairy.desktop.deliveries.ui"/>
       <plugin id="com.agritrace.edairy.desktop.finance.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.home"/>
+      <plugin id="com.agritrace.edairy.desktop.home.ui"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui.tests"/>

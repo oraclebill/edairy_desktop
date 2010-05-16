@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 
-import com.agritrace.edairy.desktop.common.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;

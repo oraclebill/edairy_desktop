@@ -8,7 +8,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import com.agritrace.edairy.desktop.common.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 /**
  * The activator class controls the plug-in life cycle

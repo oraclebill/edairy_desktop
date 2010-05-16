@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.ui.EDairyActivator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.common;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  org.eclipse.emf.databinding;bundle-version="1.2.0",
  org.eclipse.riena.client;bundle-version="2.0.0",
  org.eclipse.emf.query;bundle-version="1.2.100",
@@ -17,7 +17,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  com.agritrace.edairy.desktop.suppliers.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.profile.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.home;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.home.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.deliveries.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

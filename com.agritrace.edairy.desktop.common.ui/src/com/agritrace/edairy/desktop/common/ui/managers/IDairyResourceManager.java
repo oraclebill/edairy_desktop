@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.managers;
+package com.agritrace.edairy.desktop.common.ui.managers;
 
 import java.io.IOException;
 import java.text.ParseException;
