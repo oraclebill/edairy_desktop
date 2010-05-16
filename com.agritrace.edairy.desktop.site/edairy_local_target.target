@@ -11,7 +11,6 @@
 <location id="org.eclipse.riena.build.feature.samples.sdk" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.server.servletbridge" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.executable" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
-<location path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse/plugins" type="Directory"/>
 <location id="org.eclipse.equinox.p2.discovery.feature" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.server.core" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.p2.sdk" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
@@ -21,5 +20,6 @@
 <location id="org.eclipse.equinox.serverside.sdk" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.compendium.sdk" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.server.simple" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
+<location path="${workspace_loc}/../eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse/plugins" type="Directory"/>
 </locations>
 </target>
