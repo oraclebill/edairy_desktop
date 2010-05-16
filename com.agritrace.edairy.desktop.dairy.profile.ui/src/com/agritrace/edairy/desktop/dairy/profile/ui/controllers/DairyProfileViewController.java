@@ -6,9 +6,9 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.desktop.common.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
-import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.model.IDairyResourceManager;
 import com.agritrace.edairy.model.dairy.Dairy;
 
 /**

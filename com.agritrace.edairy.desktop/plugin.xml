@@ -4,38 +4,50 @@
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.home"
-            name="com.agritrace.edairy.manager.home">
+            id="com.agritrace.edairy.desktop.home"
+            name="Home">
       </perspective>
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.milk"
-            name="com.agritrace.edairy.manager.milk">
+            id="com.agritrace.edairy.desktop.milk"
+            name="Milk">
       </perspective>
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.members"
-            name="com.agritrace.edairy.manager.members">
+            id="com.agritrace.edairy.desktop.members"
+            name="Members">
       </perspective>
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.ftools"
-            name="com.agritrace.edairy.manager.tools">
+            id="com.agritrace.edairy.desktop.finance"
+            name="Finance">
       </perspective>
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.reports"
-            name="com.agritrace.edairy.manager.reports">
+            id="com.agritrace.edairy.desktop.veterinary"
+            name="Veterinary">
       </perspective>
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
             icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.manager.administration"
-            name="com.agritrace.edairy.manager.administration">
+            id="com.agritrace.edairy.desktop.operations"
+            name="Operations">
+      </perspective>
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.desktop.reports"
+            name="Reports">
+      </perspective>
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            icon="icons/edairymanagericon16.png"
+            id="com.agritrace.edairy.desktop.system"
+            name="System">
       </perspective>
    </extension>
    <extension
@@ -45,7 +57,7 @@
             allowMultiple="true"
             icon="icons/edairymanagericon16.png"
             class="com.agritrace.edairy.desktop.ui.views.DairyHomeView"
-            id="com.agritrace.edairy.ui.views.DairyHomeView">
+            id="com.agritrace.edairy.desktop.home.view">
       </view>
       <view
             allowMultiple="true"
@@ -136,7 +148,7 @@
          id="dairy_manager_prod"
          point="org.eclipse.core.runtime.products">
       <product
-            application="com.agritrace.edairy.demo.riena.dairy_manager_app"
+            application="com.agritrace.edairy.desktop.dairy_manager_app"
             name="eDairy Manager Destop">
          <property
                name="appName"
@@ -144,7 +156,7 @@
          </property>
          <property
                name="aboutImage"
-               value="/com.agritrace.edairy.ui/resources/edairy_helpabout.png">
+               value="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png">
          </property>
          <property
                name="aboutText"
@@ -152,7 +164,7 @@
          </property>
          <property
                name="windowImages"
-               value="/com.agritrace.edairy.ui/icons/cow16.png,/com.agritrace.edairy.ui/icons/cow32.png,/com.agritrace.edairy.ui/icons/cow48.png,/com.agritrace.edairy.ui/icons/cow64.png,/com.agritrace.edairy.ui/icons/cow128.png">
+               value="/com.agritrace.edairy.desktop.ui/icons/cow16.png,/com.agritrace.edairy.desktop.ui/icons/cow32.png,/com.agritrace.edairy.desktop.ui/icons/cow48.png,/com.agritrace.edairy.desktop.ui/icons/cow64.png,/com.agritrace.edairy.desktop.ui/icons/cow128.png">
          </property>
       </product>
    </extension>

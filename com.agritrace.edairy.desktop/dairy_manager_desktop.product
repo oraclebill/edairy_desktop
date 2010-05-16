@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.demo.riena.dairy_manager_prod" application="com.agritrace.edairy.desktop.demo.riena.dairy_manager_app" version="1.0" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="1.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png"/>
@@ -39,16 +39,19 @@
    </license>
 
    <plugins>
-      <plugin id="com.agritrace.edairy.desktop.demo.riena"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.collection.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.common.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.dairy.locations.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.dairy.profile.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.finance.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.member.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.services.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.desktop.suppliers.ui"/>
+      <plugin id="com.agritrace.edairy.desktop"/>
+      <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.common"/>
+      <plugin id="com.agritrace.edairy.desktop.common.model"/>
+      <plugin id="com.agritrace.edairy.desktop.common.ui" fragment=""/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.finance.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.member.ui"/>
       <plugin id="com.agritrace.edairy.desktop.model"/>
+      <plugin id="com.agritrace.edairy.desktop.services.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.services.ui.tests"/>
+      <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>
       <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.servlet"/>
@@ -113,5 +116,8 @@
       <plugin id="org.pushingpixels.trident"/>
    </plugins>
 
+   <configurations>
+      <plugin id="com.agritrace.edairy.desktop" autoStart="false" startLevel="0" />
+   </configurations>
 
 </product>

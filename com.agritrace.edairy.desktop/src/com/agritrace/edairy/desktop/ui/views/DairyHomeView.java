@@ -23,7 +23,7 @@ import org.eclipse.ui.part.ViewPart;
 
 public class DairyHomeView extends ViewPart {
 
-    public static final String ID = DairyHomeView.class.getName();
+    public static final String ID = "desktop.home.view";
 
     @Override
     public void createPartControl(Composite parent) {

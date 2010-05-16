@@ -43,7 +43,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.model.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.Membership;
 
