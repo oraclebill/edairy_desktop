@@ -11,9 +11,9 @@ import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
 import com.agritrace.edairy.model.dairy.Membership;
 
-public class NewMembeViewController extends MemberSearchViewController {
+public class NewMemberViewController extends MemberSearchViewController {
 
-    public NewMembeViewController() {
+    public NewMemberViewController() {
 	this.setSelectedMember(EMFObjectUtil.createMembership());
     }
 

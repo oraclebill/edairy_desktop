@@ -1,10 +1,11 @@
-package com.agritrace.edairy.desktop.ui.views;
+package com.agritrace.edairy.desktop.deliveries.ui.views;
 
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -13,6 +14,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -33,15 +35,17 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
-import com.agritrace.edairy.desktop.ui.EDairyActivator;
-import com.agritrace.edairy.desktop.ui.views.data.Item;
-import com.agritrace.edairy.desktop.ui.views.data.ItemsFactory;
+import com.agritrace.edairy.desktop.deliveries.ui.dialogs.AddItemDialog;
+import com.agritrace.edairy.desktop.deliveries.ui.beans.Item;
+import com.agritrace.edairy.desktop.deliveries.ui.beans.ItemsFactory;
 
-public class DeliveryView extends ViewPart {
+public class DeliveryView extends SubModuleView {
 
-    public static final String ID = DeliveryView.class.getName();
+    public static final String ID = "milk.delivery.entry";
+
+    private static final String RESOURCE_PLUGIN = "com.agritrace.edairy.desktop.resources";
 
     private Text dateField;
     private Button calendarButton;
@@ -49,7 +53,7 @@ public class DeliveryView extends ViewPart {
     private final List<Item> input = ItemsFactory.createItemList();
 
     @Override
-    public void createPartControl(Composite parent) {
+    public void basicCreatePartControl(Composite parent) {
 	parent.setLayout(new GridLayout(1, false));
 
 	final Label titleLabel = new Label(parent, SWT.NULL);
@@ -69,8 +73,10 @@ public class DeliveryView extends ViewPart {
 	dateField.setText("3/24/2010");
 
 	calendarButton = new Button(upperPanel, SWT.PUSH);
-	final Image searchImage = EDairyActivator.getImage(ImageRegistry.search);
-	calendarButton.setImage(searchImage);
+	ImageDescriptor desc = AbstractUIPlugin.imageDescriptorFromPlugin(RESOURCE_PLUGIN, "icons/search.png");
+	if (desc != null ) {
+	    calendarButton.setImage(desc.createImage());
+	}
 
 	calendarButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 	calendarButton.addSelectionListener(new SelectionAdapter() {

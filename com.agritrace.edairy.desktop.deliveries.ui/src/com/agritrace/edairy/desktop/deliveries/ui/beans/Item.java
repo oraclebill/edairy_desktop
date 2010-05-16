@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.ui.views.data;
+package com.agritrace.edairy.desktop.deliveries.ui.beans;
 
 public class Item {
 

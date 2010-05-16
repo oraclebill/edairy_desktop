@@ -45,6 +45,7 @@
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.deliveries.ui"/>
       <plugin id="com.agritrace.edairy.desktop.finance.ui"/>
       <plugin id="com.agritrace.edairy.desktop.home"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>

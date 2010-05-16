@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.ui.views;
+package com.agritrace.edairy.desktop.deliveries.ui.dialogs;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.ui.views.data.Item;
+import com.agritrace.edairy.desktop.deliveries.ui.beans.Item;
 
 public class AddItemDialog extends TitleAreaDialog implements ModifyListener {
 

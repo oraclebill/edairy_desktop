@@ -1,7 +1,8 @@
-package com.agritrace.edairy.desktop.ui.views.data;
+package com.agritrace.edairy.desktop.deliveries.ui.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ItemsFactory {
 

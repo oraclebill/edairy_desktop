@@ -1,184 +1,135 @@
 <plugin>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.home"
-            name="Home">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.milk"
-            name="Milk">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.members"
-            name="Members">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.finance"
-            name="Finance">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.veterinary"
-            name="Veterinary">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.operations"
-            name="Operations">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.reports"
-            name="Reports">
-      </perspective>
-      <perspective
-            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            icon="icons/edairymanagericon16.png"
-            id="com.agritrace.edairy.desktop.system"
-            name="System">
-      </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView"
-            id="com.agritrace.edairy.setup.ui.views.StaffInfoView"
-            name="StaffInfoView">
-      </view>
-      <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.desktop.ui.views.VeterinaryRequestView"
-            id="com.agritrace.edairy.ui.views.VeterinaryRequestView"
-            name="VeterinaryRequestView">
-      </view>
-      <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.desktop.ui.views.InseminationRequestView"
-            id="com.agritrace.edairy.ui.views.InseminationRequestView"
-            name="InseminationRequestView">
-      </view>
-          <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.desktop.ui.views.DeliveryView"
-            id="com.agritrace.edairy.ui.views.DeliveryView"
-            name="DeliveryView">
-        </view>
-         <view
-            allowMultiple="true"
-            class="com.agritrace.edairy.desktop.ui.views.NetworklDairyView"
-            id="com.agritrace.edairy.ui.views.NetworklDairyView"
-            name="NetworklDairyView">
-        </view>
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.desktop.ui.views.BlankView"
-               id="com.agritrace.edairy.ui.views.BlankView"
-               name="Blank"
-               restorable="true">
-         </view>
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.desktop.ui.views.MilkProductionReportView"
-               id="com.agritrace.edairy.ui.views.MilkProductionReportView"
-               name="Milk Production Report"
-               restorable="true">
-         </view>
-        
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView"
-               id="com.agritrace.edairy.ui.views.MemberPayablesReportView"
-               name="Member Payables Report"
-               restorable="true">
-         </view>
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView"
-               id="com.agritrace.edairy.ui.views.MemberStatementReportView"
-               name="Member Statement Report"
-               restorable="true">
-         </view>
-         <view
-               allowMultiple="true"
-               class="com.agritrace.edairy.desktop.setup.ui.views.VehicleLogView"
-               id="com.agritrace.edairy.setup.ui.views.VehicleLogView"
-               name="Vehicle Log"
-               restorable="true">
-         </view>
-        </extension>
-   <extension
-         point="org.eclipse.riena.ui.swt.imagePaths">
-      <path path="resources" />
-      <path path="icons" />
-   </extension>
-   <extension
-         id="dairy_manager_app"
-         name="Dairy Manager"
-         point="org.eclipse.core.runtime.applications">
-      <application
-            cardinality="singleton-global"
-            thread="main"
-            visible="true">
-         <run
-               class="com.agritrace.edairy.desktop.ui.EDairyManagerApplication">
-         </run>
-      </application>
-   </extension>
-   <extension
-         id="dairy_manager_prod"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="com.agritrace.edairy.desktop.dairy_manager_app"
-            name="eDairy Manager Destop">
-         <property
-               name="appName"
-               value="eDairy Manager Destop">
-         </property>
-         <property
-               name="aboutImage"
-               value="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png">
-         </property>
-         <property
-               name="aboutText"
-               value="eDairy Manager v0.1a">
-         </property>
-         <property
-               name="windowImages"
-               value="/com.agritrace.edairy.desktop.ui/icons/cow16.png,/com.agritrace.edairy.desktop.ui/icons/cow32.png,/com.agritrace.edairy.desktop.ui/icons/cow48.png,/com.agritrace.edairy.desktop.ui/icons/cow64.png,/com.agritrace.edairy.desktop.ui/icons/cow128.png">
-         </property>
-      </product>
-   </extension>
-   <extension
-         id="edairy_manager"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="com.agritrace.edairy.demo.riena.dairy_manager"
-            name="eDairy Manager">
-         <property
-               name="windowImages"
-               value="/com.agritrace.edairy.ui/icons/cow16.png,/com.agritrace.edairy.ui/icons/cow32.png,/com.agritrace.edairy.ui/icons/cow48.png,/com.agritrace.edairy.ui/icons/cow64.png,/com.agritrace.edairy.ui/icons/cow128.png">
-         </property>
-         <property
-               name="aboutText"
-               value="eDairy Manager v0.1a">
-         </property>
-         <property
-               name="aboutImage"
-               value="/com.agritrace.edairy.ui/resources/edairy_helpabout.png">
-         </property>
-      </product>
-   </extension>
+	<extension point="org.eclipse.ui.perspectives">
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.home"
+			name="Home">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.milk"
+			name="Milk">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.members"
+			name="Members">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.finance"
+			name="Finance">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.animalhealth"
+			name="Veterinary">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.operations"
+			name="Operations">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.reports"
+			name="Reports">
+		</perspective>
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.system"
+			name="System">
+		</perspective>
+	</extension>
+	<extension point="org.eclipse.ui.views">
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView" id="com.agritrace.edairy.setup.ui.views.StaffInfoView"
+			name="StaffInfoView">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.VeterinaryRequestView"
+			id="com.agritrace.edairy.ui.views.VeterinaryRequestView" name="VeterinaryRequestView">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.InseminationRequestView"
+			id="com.agritrace.edairy.ui.views.InseminationRequestView" name="InseminationRequestView">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.deliveries.ui.views.DeliveryView" id="com.agritrace.edairy.ui.views.DeliveryView"
+			name="DeliveryView">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.NetworklDairyView" id="com.agritrace.edairy.ui.views.NetworklDairyView"
+			name="NetworklDairyView">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="com.agritrace.edairy.ui.views.BlankView"
+			name="Blank" restorable="true">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.MilkProductionReportView"
+			id="com.agritrace.edairy.ui.views.MilkProductionReportView" name="Milk Production Report"
+			restorable="true">
+		</view>
+
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView"
+			id="com.agritrace.edairy.ui.views.MemberPayablesReportView" name="Member Payables Report"
+			restorable="true">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView"
+			id="com.agritrace.edairy.ui.views.MemberStatementReportView" name="Member Statement Report"
+			restorable="true">
+		</view>
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.setup.ui.views.VehicleLogView"
+			id="com.agritrace.edairy.setup.ui.views.VehicleLogView" name="Vehicle Log"
+			restorable="true">
+		</view>
+	</extension>
+
+
+
+	<extension point="org.eclipse.riena.ui.swt.imagePaths">
+		<path path="resources" />
+		<path path="icons" />
+	</extension>
+	<extension id="dairy_manager_app" name="Dairy Manager"
+		point="org.eclipse.core.runtime.applications">
+		<application cardinality="singleton-global" thread="main"
+			visible="true">
+			<run class="com.agritrace.edairy.desktop.ui.EDairyManagerApplication">
+			</run>
+		</application>
+	</extension>
+
+	<extension id="dairy_manager_prod" point="org.eclipse.core.runtime.products">
+		<product application="com.agritrace.edairy.desktop.dairy_manager_app"
+			name="eDairy Manager Destop">
+			<property name="appName" value="eDairy Manager Destop">
+			</property>
+			<property name="aboutImage"
+				value="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png">
+			</property>
+			<property name="aboutText" value="eDairy Manager v0.1a">
+			</property>
+			<property name="windowImages"
+				value="/com.agritrace.edairy.desktop.ui/icons/cow16.png,/com.agritrace.edairy.desktop.ui/icons/cow32.png,/com.agritrace.edairy.desktop.ui/icons/cow48.png,/com.agritrace.edairy.desktop.ui/icons/cow64.png,/com.agritrace.edairy.desktop.ui/icons/cow128.png">
+			</property>
+		</product>
+	</extension>
+ <extension
+       id="dairy_manager_app"
+       name="eDairy Manager Application"
+       point="org.eclipse.core.runtime.applications">
+    <application
+          cardinality="singleton-global"
+          thread="main"
+          visible="true">
+       <run
+             class="com.agritrace.edairy.desktop.ui.EDairyManagerApplication">
+       </run>
+    </application>
+ </extension>
 </plugin>
