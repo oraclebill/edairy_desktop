@@ -53,13 +53,6 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="Demo Dairy Home"
-            allowMultiple="true"
-            icon="icons/edairymanagericon16.png"
-            class="com.agritrace.edairy.desktop.ui.views.DairyHomeView"
-            id="com.agritrace.edairy.desktop.home.view">
-      </view>
-      <view
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView"
             id="com.agritrace.edairy.setup.ui.views.StaffInfoView"

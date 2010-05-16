@@ -8,7 +8,7 @@
  * Contributors:
  *    compeople AG - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.desktop.ui.views;
+package com.agritrace.edairy.desktop.home.views;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.riena.ui.swt.utils.ImageStore;

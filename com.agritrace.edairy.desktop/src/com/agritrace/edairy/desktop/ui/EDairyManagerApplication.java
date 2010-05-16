@@ -24,6 +24,7 @@ import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
+import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.NewMembeViewController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
@@ -35,7 +36,6 @@ import com.agritrace.edairy.desktop.setup.ui.controllers.VehicleLogViewControlle
 import com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.setup.ui.views.VehicleLogView;
 import com.agritrace.edairy.desktop.ui.views.BlankView;
-import com.agritrace.edairy.desktop.ui.views.DairyHomeView;
 import com.agritrace.edairy.desktop.ui.views.DeliveryView;
 import com.agritrace.edairy.desktop.ui.views.InseminationRequestView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;

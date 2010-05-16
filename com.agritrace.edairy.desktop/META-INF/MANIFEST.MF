@@ -16,7 +16,8 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  com.agritrace.edairy.desktop.collection.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.suppliers.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.profile.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.home;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.dairy.ui.controllers;
