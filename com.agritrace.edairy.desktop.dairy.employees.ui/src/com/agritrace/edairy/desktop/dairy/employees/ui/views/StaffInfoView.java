@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.setup.ui.views;
+package com.agritrace.edairy.desktop.dairy.employees.ui.views;
 
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;

@@ -1,10 +1,9 @@
-package com.agritrace.edairy.desktop.setup.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.employees.ui.controllers;
 
 import org.eclipse.core.runtime.CoreException;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.setup.core.StaffInfoResourceManager;
 import com.agritrace.edairy.model.dairy.Employee;
 
 /**

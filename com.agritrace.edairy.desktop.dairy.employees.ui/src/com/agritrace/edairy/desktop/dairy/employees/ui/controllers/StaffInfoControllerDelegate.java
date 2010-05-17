@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.setup.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.employees.ui.controllers;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
-import com.agritrace.edairy.desktop.setup.ui.views.StaffInfoMasterDetailComposite;
+import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoMasterDetailComposite;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
 import com.agritrace.edairy.model.ModelPackage;
