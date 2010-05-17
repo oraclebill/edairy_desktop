@@ -59,7 +59,7 @@
 			name="DeliveryView">
 		</view>
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="com.agritrace.edairy.ui.views.BlankView"
+			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="default.blank.view"
 			name="Blank" restorable="true">
 		</view>
 		<view allowMultiple="true"
