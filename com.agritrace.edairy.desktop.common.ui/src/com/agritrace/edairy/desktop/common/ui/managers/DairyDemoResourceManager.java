@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -35,6 +36,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -773,18 +775,28 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
     }
 
     @Override
-    public AccountTransaction[] findAccountTransaction(AccountTransaction sample) {
+    public AccountTransaction[] findAccountTransaction(Date start, Date end, Long memberId, Set<TransactionType> typeSet) {
 	Dairy current = getLocalDairy();
-	Membership member = current.getMemberships().get(0);
+	Membership member = current.getMemberships().get(0);	
 	
 	Account tstAccount = AccountFactory.eINSTANCE.createAccount();
-	tstAccount.setAccountId(2001l);
-	tstAccount.setEstablished( new Date() );
+	tstAccount.setAccountId(2112l);
+	tstAccount.setEstablished(new Date());
 	tstAccount.setMember(member);
-	AccountTransaction tstTransaction = AccountFactory.eINSTANCE.createAccountTransaction();
+	tstAccount.setType("test");
+	member.setAccount(tstAccount);
 	
+	AccountTransaction tstTransaction = AccountFactory.eINSTANCE.createAccountTransaction();
+	tstTransaction.setAccount(tstAccount);
+	tstTransaction.setTransactionId(789123l);
+	tstTransaction.setTransactionType(TransactionType.CREDIT);
+	tstTransaction.setTransactionDate(new Date());
+	tstTransaction.setSource("test source");
+	tstTransaction.setDescription("test transaction description");
+	tstTransaction.setAmount(200d);
 	tstTransaction.setAccount(tstAccount);
 	
-	return null;
+	
+	return new AccountTransaction[] { tstTransaction };
     }
 }

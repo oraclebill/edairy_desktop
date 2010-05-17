@@ -4,6 +4,8 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.navigation.ui.swt.presentation.SwtViewProvider;
+import org.eclipse.riena.ui.swt.ChoiceComposite;
+import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -30,7 +32,9 @@ public class AccountTransactionListSubModuleView extends AbstractDirectoryView i
 
     private Table searchResultTable;
 
-    private Text lastNameText, firstNameText;
+    private DatePickerComposite startDatePicker, endDatePicker;
+    private Text memberIdText;
+    private ChoiceComposite typeCodeChoice;
 
     @Override
     public void basicCreatePartControl(Composite parent) {
@@ -64,48 +68,100 @@ public class AccountTransactionListSubModuleView extends AbstractDirectoryView i
     protected void setupFilterPanel(Composite parent) 
     {
 	parent.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	
+	// filter is a stack of composite rows.. each row uses formlayout..
+	GridLayout topLayout = new GridLayout(1, true);
+	parent.setLayout(topLayout);
+	
+	// first row: date range
+	//
+	Composite row = UIControlsFactory.createComposite(parent);	
 	FormLayout layout = new FormLayout();
 	layout.marginWidth = layout.marginHeight = 10;
-	parent.setLayout(layout);
+	row.setLayout(layout);
+	GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(row);
 
-	Label lastNameLabel = new Label(parent, SWT.LEFT);
-	lastNameLabel.setText("Last Name");
-	lastNameLabel.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	Label startDateLabel = new Label(row, SWT.LEFT);
+	startDateLabel.setText("Date Range - Start: ");
+	startDateLabel.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 	FormData fd = new FormData();
 	fd.top = new FormAttachment(0, 0);
 	fd.left = new FormAttachment(0, 0);
-	lastNameLabel.setLayoutData(fd);
+	startDateLabel.setLayoutData(fd);
 
-	lastNameText = new Text(parent, SWT.BORDER | SWT.SINGLE);
+	startDatePicker = new DatePickerComposite(row, SWT.BORDER | SWT.SINGLE);
 	fd = new FormData();
-	fd.top = new FormAttachment(lastNameLabel, 0, SWT.CENTER);
-	fd.left = new FormAttachment(lastNameLabel, 5, SWT.RIGHT);
+	fd.top = new FormAttachment(startDateLabel, 0, SWT.CENTER);
+	fd.left = new FormAttachment(startDateLabel, 5, SWT.RIGHT);
 	fd.width = FIELD_WIDTH;
-	lastNameText.setLayoutData(fd);
-	addUIControl(lastNameText, "lastNameRidget");
+	startDatePicker.setLayoutData(fd);
+	addUIControl(startDatePicker, "startDateRidget");
 
-	Label firstNameLabel = new Label(parent, SWT.LEFT);
-	firstNameLabel.setText("First Name");
-	firstNameLabel.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	Label endDateLabel = new Label(row, SWT.LEFT);
+	endDateLabel.setText("End: ");
+	endDateLabel.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 	fd = new FormData();
-	fd.top = new FormAttachment(lastNameText, 0, SWT.CENTER);
-	fd.left = new FormAttachment(lastNameText, 20, SWT.RIGHT);
-	firstNameLabel.setLayoutData(fd);
+	fd.top = new FormAttachment(startDatePicker, 0, SWT.CENTER);
+	fd.left = new FormAttachment(startDatePicker, 20, SWT.RIGHT);
+	endDateLabel.setLayoutData(fd);
 
-	firstNameText = new Text(parent, SWT.BORDER | SWT.SINGLE);
+	endDatePicker = new DatePickerComposite(row, SWT.BORDER | SWT.SINGLE);
 	fd = new FormData();
-	fd.top = new FormAttachment(firstNameLabel, 0, SWT.CENTER);
-	fd.left = new FormAttachment(firstNameLabel, 5, SWT.RIGHT);
+	fd.top = new FormAttachment(endDateLabel, 0, SWT.CENTER);
+	fd.left = new FormAttachment(endDateLabel, 5, SWT.RIGHT);
 	fd.width = FIELD_WIDTH;
-	firstNameText.setLayoutData(fd);
-	addUIControl(firstNameText, "firstNameRidget");
-
+	endDatePicker.setLayoutData(fd);
+	addUIControl(endDatePicker, "endDateRidget");
+	
+	// second row: member lookup
+	//
+	row = UIControlsFactory.createComposite(parent);	
+	layout = new FormLayout();
+	layout.marginWidth = layout.marginHeight = 10;
+	row.setLayout(layout);	
+	GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(row);
+	
+	Label memberLookupLabel = UIControlsFactory.createLabel(row, "Member Lookup");
+	fd = new FormData();
+	fd.top = new FormAttachment(0, 0);
+	fd.left = new FormAttachment(0, 0);
+	memberLookupLabel.setLayoutData(fd);
+	
+	memberIdText = UIControlsFactory.createText(row, SWT.NONE, "memberIdRidget");
+	fd = new FormData();
+	fd.top = new FormAttachment(memberLookupLabel, 0, SWT.CENTER);
+	fd.left = new FormAttachment(memberLookupLabel, 5, SWT.RIGHT);
+	fd.width = FIELD_WIDTH * 3;
+	memberIdText.setLayoutData(fd);
+	
+	// third row: source choices
+	//
+	row = UIControlsFactory.createComposite(parent);	
+	layout = new FormLayout();
+	layout.marginWidth = layout.marginHeight = 10;
+	row.setLayout(layout);	
+	GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(row);
+	
+	Label transactionSourceLabel = UIControlsFactory.createLabel(row, "Transaction Source");
+	fd = new FormData();
+	fd.top = new FormAttachment(0, 0);
+	fd.left = new FormAttachment(0, 0);
+	transactionSourceLabel.setLayoutData(fd);
+	
+	typeCodeChoice = UIControlsFactory.createChoiceComposite(row, LEFT, true, "typeSetRidget");
+	fd = new FormData();
+	fd.top = new FormAttachment(transactionSourceLabel, 0, SWT.CENTER);
+	fd.left = new FormAttachment(transactionSourceLabel, 5, SWT.RIGHT);
+	fd.width = FIELD_WIDTH;
+	typeCodeChoice.setLayoutData(fd);
+	
+	
     }
 
     protected void setupFilterButtonsPanel(Composite parent) {
 	FormData fd;
 	parent.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_CYAN));
-	parent.setLayout(new FillLayout());
+	parent.setLayout(new RowLayout());
 	
 	Button clearButton = new Button(parent, 0);
 	clearButton.setText("Clear");
@@ -124,16 +180,23 @@ public class AccountTransactionListSubModuleView extends AbstractDirectoryView i
 	// create table
 	searchResultTable = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION);
 	searchResultTable.setLinesVisible(true);
-
+	
 	addUIControl(searchResultTable, "tableRidget");
-	TableColumn customerNumberColumn = new TableColumn(searchResultTable, SWT.CENTER);
-	TableColumn lastNameColumn = new TableColumn(searchResultTable, SWT.LEFT);
-	TableColumn firstNameColumn = new TableColumn(searchResultTable, SWT.LEFT);
-	TableColumn phoneColumn = new TableColumn(searchResultTable, SWT.CENTER);
-	customerNumberColumn.setWidth(80);
-	firstNameColumn.setWidth(120);
-	lastNameColumn.setWidth(120);
-	phoneColumn.setWidth(100);
+	
+	TableColumn txDateCol = new TableColumn(searchResultTable, SWT.CENTER);
+	TableColumn txIdCol = new TableColumn(searchResultTable, SWT.CENTER);
+	TableColumn txSourceCol = new TableColumn(searchResultTable, SWT.CENTER);
+	TableColumn txTypeCol = new TableColumn(searchResultTable, SWT.CENTER);
+	TableColumn txDescriptionCol = new TableColumn(searchResultTable, SWT.CENTER);
+	TableColumn txAmountCol = new TableColumn(searchResultTable, SWT.CENTER);
+	
+	txDateCol.setWidth(120);
+	txIdCol.setWidth(80);
+	txSourceCol.setWidth(120);
+	txTypeCol.setWidth(120);
+	txDescriptionCol.setWidth(500);
+	txAmountCol.setWidth(120);
+	
 	searchResultTable.setHeaderVisible(true);	
     }
     
