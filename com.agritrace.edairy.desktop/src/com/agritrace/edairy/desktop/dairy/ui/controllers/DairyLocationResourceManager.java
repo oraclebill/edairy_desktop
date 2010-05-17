@@ -19,17 +19,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.MapLocation;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.ui.EDairyActivator;
-import com.agritrace.edairy.model.DescriptiveLocation;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.MapLocation;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyFunction;
-import com.agritrace.edairy.model.dairy.DairyLocation;
-import com.agritrace.edairy.model.dairy.Route;
 
 public class DairyLocationResourceManager {
     public static final String DAIRY_LOCATIONS_RESOURCE = IDairyResourceManager.XMLDB_BASE + "/dairyLocations.xml";

@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dairy"
-    nsURI="http://com.agritrace.edairy.model/dairy/" nsPrefix="dairy">
+    nsURI="http://com.agritrace.edairy.desktop.common.model/dairy/" nsPrefix="dairy">
   <eClassifiers xsi:type="ecore:EClass" name="Vehicle" eSuperTypes="#//Asset">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -218,7 +218,8 @@
     <eLiterals name="Warehouse" value="3"/>
     <eLiterals name="MilkProcessing" value="4"/>
   </eClassifiers>
-  <eSubpackages name="account" nsURI="http://com.agritrace.edairy.model/account" nsPrefix="account">
+  <eSubpackages name="account" nsURI="http://com.agritrace.edairy.desktop.common.model/account"
+      nsPrefix="account">
     <eClassifiers xsi:type="ecore:EClass" name="Account">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Membership"/>
@@ -236,7 +237,7 @@
           eType="#//account/Account"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionType" lowerBound="1"
           eType="#//account/TransactionType"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="soure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionDate" lowerBound="1"

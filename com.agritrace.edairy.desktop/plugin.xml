@@ -2,42 +2,42 @@
 	<extension point="org.eclipse.ui.perspectives">
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.home"
+			 id="com.agritrace.edairy.desktop.home"
 			name="Home">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.milk"
+			 id="com.agritrace.edairy.desktop.milk"
 			name="Milk">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.members"
+			 id="com.agritrace.edairy.desktop.members"
 			name="Members">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.finance"
+			 id="com.agritrace.edairy.desktop.finance"
 			name="Finance">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.animalhealth"
+			 id="com.agritrace.edairy.desktop.animalhealth"
 			name="Veterinary">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.operations"
+			 id="com.agritrace.edairy.desktop.operations"
 			name="Operations">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.reports"
+			 id="com.agritrace.edairy.desktop.reports"
 			name="Reports">
 		</perspective>
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			icon="icons/edairymanagericon16.png" id="com.agritrace.edairy.desktop.system"
+			 id="com.agritrace.edairy.desktop.system"
 			name="System">
 		</perspective>
 	</extension>

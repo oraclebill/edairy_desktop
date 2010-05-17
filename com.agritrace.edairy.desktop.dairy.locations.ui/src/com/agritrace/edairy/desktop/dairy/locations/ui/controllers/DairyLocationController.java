@@ -27,19 +27,19 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.*;
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.MapLocation;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.model.DescriptiveLocation;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.MapLocation;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyFunction;
-import com.agritrace.edairy.model.dairy.DairyLocation;
-import com.agritrace.edairy.model.dairy.Route;
 
 public class DairyLocationController extends SubModuleController {
     public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";

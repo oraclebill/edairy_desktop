@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracking"
-    nsURI="http://com.agritrace.edairy.model/tracking/" nsPrefix="tracking">
+    nsURI="http://com.agritrace.edairy.desktop.common.model/tracking/" nsPrefix="tracking">
   <eClassifiers xsi:type="ecore:EClass" name="Farm">
     <eOperations name="getNumberOfAnimals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

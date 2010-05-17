@@ -7,21 +7,15 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.agritrace.edairy.model,
- com.agritrace.edairy.model.dairy,
- com.agritrace.edairy.model.dairy.account,
- com.agritrace.edairy.model.dairy.account.impl,
- com.agritrace.edairy.model.dairy.account.util,
- com.agritrace.edairy.model.dairy.impl,
- com.agritrace.edairy.model.dairy.util,
- com.agritrace.edairy.model.impl,
- com.agritrace.edairy.model.requests,
- com.agritrace.edairy.model.requests.impl,
- com.agritrace.edairy.model.requests.util,
- com.agritrace.edairy.model.tracking,
- com.agritrace.edairy.model.tracking.impl,
- com.agritrace.edairy.model.tracking.util,
- com.agritrace.edairy.model.util
+Export-Package: com.agritrace.edairy.desktop.common.model.base,
+ com.agritrace.edairy.desktop.common.model.dairy,
+ com.agritrace.edairy.desktop.common.model.dairy.account,
+ com.agritrace.edairy.desktop.common.model.dairy.account.util,
+ com.agritrace.edairy.desktop.common.model.dairy.util,
+ com.agritrace.edairy.desktop.common.model.requests,
+ com.agritrace.edairy.desktop.common.model.requests.util,
+ com.agritrace.edairy.desktop.common.model.tracking,
+ com.agritrace.edairy.desktop.common.model.tracking.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport

@@ -5,8 +5,8 @@
     modelPluginID="com.agritrace.edairy.desktop.common.model" modelName="Dairy" modelPluginClass=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>dairy.ecore</foreignModel>
-  <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.model" resource="XMI"
-      disposableProviderFactory="true" ecorePackage="dairy.ecore#/">
+  <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.desktop.common.model"
+      resource="XMI" disposableProviderFactory="true" ecorePackage="dairy.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//MembershipStatus">
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Active"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Inactive"/>
@@ -162,7 +162,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Supplier/notes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Supplier/rating"/>
     </genClasses>
-    <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.model.dairy"
+    <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.desktop.common.model.dairy"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionType">
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionType/CREDIT"/>
@@ -184,7 +184,7 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference dairy.ecore#//account/AccountTransaction/account"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/transactionType"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/soure"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/source"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/amount"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/description"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/transactionDate"/>
@@ -291,8 +291,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ContactMethod/cmValue"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Tracking" basePackage="com.agritrace.edairy.model" disposableProviderFactory="true"
-      ecorePackage="farm.ecore#/">
+  <genPackages prefix="Tracking" basePackage="com.agritrace.edairy.desktop.common.model"
+      disposableProviderFactory="true" ecorePackage="farm.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="farm.ecore#//AcquisitionType">
       <genEnumLiterals ecoreEnumLiteral="farm.ecore#//AcquisitionType/BIRTH"/>
       <genEnumLiterals ecoreEnumLiteral="farm.ecore#//AcquisitionType/PURCHASE"/>
@@ -364,7 +364,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//AnimalIdentifier/value"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Requests" basePackage="com.agritrace.edairy.model" ecorePackage="requests.ecore#/">
+  <genPackages prefix="Requests" basePackage="com.agritrace.edairy.desktop.common.model"
+      ecorePackage="requests.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="requests.ecore#//RequestType">
       <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Veterinary"/>
       <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Insemination"/>

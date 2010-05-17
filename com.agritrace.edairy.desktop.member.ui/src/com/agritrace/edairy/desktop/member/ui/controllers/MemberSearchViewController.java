@@ -38,6 +38,20 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -47,20 +61,6 @@ import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.CollectionJournal;
-import com.agritrace.edairy.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.model.tracking.TrackingPackage;
 
 public class MemberSearchViewController extends SubModuleController implements MemberSearchSelectionListener,
 	ISelectionListener {

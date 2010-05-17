@@ -26,7 +26,7 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.dairy.ui.controllers;
   uses:="org.eclipse.riena.ui.ridgets.controller,
    org.eclipse.riena.navigation,
-   com.agritrace.edairy.model.dairy,
+   com.agritrace.edairy.desktop.common.model.dairy,
    org.eclipse.riena.navigation.ui.controllers,
    com.agritrace.edairy.common.services",
  com.agritrace.edairy.desktop.ui;

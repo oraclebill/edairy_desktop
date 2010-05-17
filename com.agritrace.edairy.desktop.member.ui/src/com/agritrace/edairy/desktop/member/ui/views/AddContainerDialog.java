@@ -26,12 +26,12 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.model.ContainerType;
-import com.agritrace.edairy.model.UnitOfMeasure;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.tracking.Container;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.model.base.ContainerType;
+import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 public class AddContainerDialog extends TitleAreaDialog implements ModifyListener {
 

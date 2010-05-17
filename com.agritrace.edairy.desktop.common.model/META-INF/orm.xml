@@ -6,7 +6,7 @@
       <orm:access>FIELD</orm:access>
     </orm:persistence-unit-defaults>
   </orm:persistence-unit-metadata>
-  <orm:entity class="com.agritrace.edairy.model.impl.PartyImpl" name="Party">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.PartyImpl" name="Party">
     <orm:table name="PARTY"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Party</orm:discriminator-value>
@@ -17,21 +17,21 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="location" target-entity="com.agritrace.edairy.model.impl.LocationImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="location" target-entity="com.agritrace.edairy.desktop.common.model.impl.LocationImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.MapLocationImpl" name="MapLocation">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.MapLocationImpl" name="MapLocation">
     <orm:discriminator-value>MapLocation</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="longitude" optional="true"/>
       <orm:basic fetch="EAGER" name="latitude" optional="true"/>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.LocationImpl" name="Location">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.LocationImpl" name="Location">
     <orm:table name="LOCATION"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Location</orm:discriminator-value>
@@ -50,7 +50,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.impl.PartyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.impl.PartyImpl">
         <orm:join-column name="PARTY_LOCATION_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -58,7 +58,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.StatutoryLocationImpl" name="StatutoryLocation">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.StatutoryLocationImpl" name="StatutoryLocation">
     <orm:table name="STATUTORYLOCATION"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>StatutoryLocation</orm:discriminator-value>
@@ -70,7 +70,7 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.AuditedImpl" name="Audited">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.AuditedImpl" name="Audited">
     <orm:table name="AUDITED"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Audited</orm:discriminator-value>
@@ -87,13 +87,13 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.PersonImpl" name="Person">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.PersonImpl" name="Person">
     <orm:discriminator-value>Person</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="nationalId" optional="true"/>
       <orm:basic fetch="EAGER" name="nhifNumber" optional="true"/>
       <orm:basic fetch="EAGER" name="nssfNumber" optional="true"/>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.impl.CompanyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.impl.CompanyImpl">
         <orm:join-column name="COMPANY_CONTACTPERSON_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -101,17 +101,17 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.CompanyImpl" name="Company">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.CompanyImpl" name="Company">
     <orm:discriminator-value>Company</orm:discriminator-value>
     <orm:attributes>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="contactPerson" target-entity="com.agritrace.edairy.model.impl.PersonImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="contactPerson" target-entity="com.agritrace.edairy.desktop.common.model.impl.PersonImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.impl.DescriptiveLocationImpl" name="DescriptiveLocation">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.impl.DescriptiveLocationImpl" name="DescriptiveLocation">
     <orm:table name="DESCRIPTIVELOCATION"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>DescriptiveLocation</orm:discriminator-value>
@@ -123,13 +123,13 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.DairyImpl" name="Dairy">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.DairyImpl" name="Dairy">
     <orm:discriminator-value>Dairy</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="registrationNumber" optional="false"/>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.FarmImpl" name="Farm">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl" name="Farm">
     <orm:table name="FARM"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Farm</orm:discriminator-value>
@@ -139,19 +139,19 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="animals" target-entity="com.agritrace.edairy.model.tracking.impl.AnimalImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="animals" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="cans" target-entity="com.agritrace.edairy.model.tracking.impl.ContainerImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="cans" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.AnimalImpl" name="Animal">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalImpl" name="Animal">
     <orm:table name="ANIMAL"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Animal</orm:discriminator-value>
@@ -164,7 +164,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.tracking.impl.FarmImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl">
         <orm:join-column name="FARM_ANIMALS_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -172,7 +172,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.ContainerImpl" name="Container">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl" name="Container">
     <orm:table name="CONTAINER"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Container</orm:discriminator-value>
@@ -190,7 +190,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one fetch="EAGER" name="owner" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.FarmImpl">
+      <orm:many-to-one fetch="EAGER" name="owner" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl">
         <orm:join-column insertable="true" name="FARM_OWNER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -198,7 +198,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.tracking.impl.FarmImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl">
         <orm:join-column name="FARM_CANS_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -206,20 +206,20 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.ProcessorImpl" name="Processor">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.ProcessorImpl" name="Processor">
     <orm:discriminator-value>Processor</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="registrationNumber" optional="true"/>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.SupplierImpl" name="Supplier">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.SupplierImpl" name="Supplier">
     <orm:discriminator-value>Supplier</orm:discriminator-value>
     <orm:attributes/>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.CollectionImpl" name="Collection">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.CollectionImpl" name="Collection">
     <orm:discriminator-value>Collection</orm:discriminator-value>
     <orm:attributes>
-      <orm:many-to-one fetch="EAGER" name="from" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.FarmImpl">
+      <orm:many-to-one fetch="EAGER" name="from" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl">
         <orm:join-column insertable="true" name="FARM_FROM_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -227,7 +227,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="contributedTo" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.LotImpl">
+      <orm:many-to-one fetch="EAGER" name="contributedTo" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.LotImpl">
         <orm:join-column insertable="true" name="LOT_CONTRIBUTEDTO_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -237,7 +237,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.LotImpl" name="Lot">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.LotImpl" name="Lot">
     <orm:table name="LOT"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Lot</orm:discriminator-value>
@@ -246,7 +246,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one fetch="EAGER" name="container" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.ContainerImpl">
+      <orm:many-to-one fetch="EAGER" name="container" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl">
         <orm:join-column insertable="true" name="CONTAINER_CONTAINER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -256,10 +256,10 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.DeliveryImpl" name="Delivery">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.DeliveryImpl" name="Delivery">
     <orm:discriminator-value>Delivery</orm:discriminator-value>
     <orm:attributes>
-      <orm:many-to-one fetch="EAGER" name="lot" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.LotImpl">
+      <orm:many-to-one fetch="EAGER" name="lot" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.LotImpl">
         <orm:join-column insertable="true" name="LOT_LOT_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -267,7 +267,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="customer" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.ProcessorImpl">
+      <orm:many-to-one fetch="EAGER" name="customer" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ProcessorImpl">
         <orm:join-column insertable="true" name="PROCESSOR_CUSTOMER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -277,7 +277,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.TransferImpl" name="Transfer">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.TransferImpl" name="Transfer">
     <orm:table name="TRANSFER"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Transfer</orm:discriminator-value>
@@ -290,7 +290,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one fetch="EAGER" name="dairy" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.DairyImpl">
+      <orm:many-to-one fetch="EAGER" name="dairy" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.DairyImpl">
         <orm:join-column insertable="true" name="DAIRY_DAIRY_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -298,7 +298,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="container" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.ContainerImpl">
+      <orm:many-to-one fetch="EAGER" name="container" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl">
         <orm:join-column insertable="true" name="CONTAINER_CONTAINER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -308,7 +308,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.RegisteredAnimalImpl" name="RegisteredAnimal">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl" name="RegisteredAnimal">
     <orm:table name="REGISTEREDANIMAL"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>RegisteredAnimal</orm:discriminator-value>
@@ -336,7 +336,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one fetch="EAGER" name="location" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.FarmImpl">
+      <orm:many-to-one fetch="EAGER" name="location" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl">
         <orm:join-column insertable="true" name="FARM_LOCATION_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -344,7 +344,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="animalType" optional="true" target-entity="com.agritrace.edairy.model.tracking.impl.ReferenceAnimalTypeImpl">
+      <orm:many-to-one fetch="EAGER" name="animalType" optional="true" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl">
         <orm:join-column insertable="true" name="REFERENCEANIMALTYPE_ANIMALTYPE_E_ID" nullable="true" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -352,7 +352,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="sireType" optional="true" target-entity="com.agritrace.edairy.model.tracking.impl.ReferenceAnimalTypeImpl">
+      <orm:many-to-one fetch="EAGER" name="sireType" optional="true" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl">
         <orm:join-column insertable="true" name="REFERENCEANIMALTYPE_SIRETYPE_E_ID" nullable="true" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -360,7 +360,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:one-to-many fetch="LAZY" name="identifiers" target-entity="com.agritrace.edairy.model.tracking.impl.AnimalIdentifierImpl">
+      <orm:one-to-many fetch="LAZY" name="identifiers" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl">
         <orm:join-table name="REGISTEREDANIMAL_IDENTIFIERS">
           <orm:join-column insertable="true" name="REGISTEREDANIMAL_E_ID" nullable="false" unique="false" updatable="true"/>
           <orm:inverse-join-column insertable="true" name="ANIMALIDENTIFIER_E_ID" nullable="false" unique="false" updatable="true"/>
@@ -373,7 +373,7 @@
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.ReferenceAnimalTypeImpl" name="ReferenceAnimalType">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl" name="ReferenceAnimalType">
     <orm:table name="REFERENCEANIMALTYPE"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>ReferenceAnimalType</orm:discriminator-value>
@@ -387,7 +387,7 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.tracking.impl.AnimalIdentifierImpl" name="AnimalIdentifier">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl" name="AnimalIdentifier">
     <orm:table name="ANIMALIDENTIFIER"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>AnimalIdentifier</orm:discriminator-value>
@@ -400,7 +400,7 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.VehicleImpl" name="Vehicle">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl" name="Vehicle">
     <orm:table name="VEHICLE"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Vehicle</orm:discriminator-value>
@@ -422,23 +422,23 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.DairyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl">
         <orm:join-column name="DAIRY_VEHICLES_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="serviceRecords" target-entity="com.agritrace.edairy.model.dairy.impl.ServiceRecordImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="serviceRecords" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.ServiceRecordImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.DriverImpl" name="Driver">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.DriverImpl" name="Driver">
     <orm:discriminator-value>Driver</orm:discriminator-value>
     <orm:attributes>
-      <orm:many-to-one fetch="EAGER" name="vehicleAssignment" optional="true" target-entity="com.agritrace.edairy.model.dairy.impl.VehicleImpl">
+      <orm:many-to-one fetch="EAGER" name="vehicleAssignment" optional="true" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl">
         <orm:join-column insertable="true" name="VEHICLE_VEHICLEASSIGNMENT_E_ID" nullable="true" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -448,13 +448,13 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.CollectionRecordImpl" name="CollectionRecord">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionRecordImpl" name="CollectionRecord">
     <orm:discriminator-value>CollectionRecord</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="suspended" optional="true"/>
       <orm:basic fetch="EAGER" name="notRecorded" optional="true"/>
       <orm:basic fetch="EAGER" name="offRoute" optional="true"/>
-      <orm:many-to-one fetch="EAGER" name="recordedMember" optional="false" target-entity="com.agritrace.edairy.model.dairy.impl.MembershipImpl">
+      <orm:many-to-one fetch="EAGER" name="recordedMember" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl">
         <orm:join-column insertable="true" name="MEMBERSHIP_RECORDEDMEMBER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -462,7 +462,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl">
         <orm:join-column name="COLLECTIONJOURNAL_JOURNALENTRIES_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -470,7 +470,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.EmployeeImpl" name="Employee">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl" name="Employee">
     <orm:discriminator-value>Employee</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="id" optional="false"/>
@@ -478,7 +478,7 @@
         <orm:temporal>TIMESTAMP</orm:temporal>
       </orm:basic>
       <orm:basic fetch="EAGER" name="jobFunction" optional="true"/>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.DairyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl">
         <orm:join-column name="DAIRY_EMPLOYEES_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -486,7 +486,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.CollectionCentreImpl" name="CollectionCentre">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionCentreImpl" name="CollectionCentre">
     <orm:table name="COLLECTIONCENTRE"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>CollectionCentre</orm:discriminator-value>
@@ -498,7 +498,7 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.ServiceRecordImpl" name="ServiceRecord">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.ServiceRecordImpl" name="ServiceRecord">
     <orm:table name="SERVICERECORD"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>ServiceRecord</orm:discriminator-value>
@@ -512,7 +512,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.VehicleImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl">
         <orm:join-column name="VEHICLE_SERVICERECORDS_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -520,7 +520,7 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.WorkstationImpl" name="Workstation">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.WorkstationImpl" name="Workstation">
     <orm:table name="WORKSTATION"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Workstation</orm:discriminator-value>
@@ -534,7 +534,7 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl" name="CollectionJournal">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl" name="CollectionJournal">
     <orm:table name="COLLECTIONJOURNAL"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>CollectionJournal</orm:discriminator-value>
@@ -549,7 +549,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one fetch="EAGER" name="driver" optional="false" target-entity="com.agritrace.edairy.model.dairy.impl.EmployeeImpl">
+      <orm:many-to-one fetch="EAGER" name="driver" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl">
         <orm:join-column insertable="true" name="EMPLOYEE_DRIVER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -557,7 +557,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="route" optional="false" target-entity="com.agritrace.edairy.model.dairy.impl.RouteDefinitionImpl">
+      <orm:many-to-one fetch="EAGER" name="route" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.RouteDefinitionImpl">
         <orm:join-column insertable="true" name="ROUTEDEFINITION_ROUTE_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -565,7 +565,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="session" optional="false" target-entity="com.agritrace.edairy.model.dairy.impl.SessionImpl">
+      <orm:many-to-one fetch="EAGER" name="session" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.SessionImpl">
         <orm:join-column insertable="true" name="SESSION_SESSION_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -573,7 +573,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="can" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.ContainerImpl">
+      <orm:many-to-one fetch="EAGER" name="can" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl">
         <orm:join-column insertable="true" name="CONTAINER_CAN_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -581,7 +581,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="bin" optional="false" target-entity="com.agritrace.edairy.model.tracking.impl.ContainerImpl">
+      <orm:many-to-one fetch="EAGER" name="bin" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl">
         <orm:join-column insertable="true" name="CONTAINER_BIN_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -589,7 +589,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="vehicle" optional="false" target-entity="com.agritrace.edairy.model.dairy.impl.VehicleImpl">
+      <orm:many-to-one fetch="EAGER" name="vehicle" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl">
         <orm:join-column insertable="true" name="VEHICLE_VEHICLE_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -597,14 +597,14 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="journalEntries" target-entity="com.agritrace.edairy.model.dairy.impl.CollectionRecordImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="journalEntries" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionRecordImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.RouteDefinitionImpl" name="RouteDefinition">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.RouteDefinitionImpl" name="RouteDefinition">
     <orm:table name="ROUTEDEFINITION"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>RouteDefinition</orm:discriminator-value>
@@ -614,13 +614,13 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.DairyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl">
         <orm:join-column name="DAIRY_ROUTES_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:one-to-many fetch="LAZY" name="stops" target-entity="com.agritrace.edairy.model.dairy.impl.CollectionCentreImpl">
+      <orm:one-to-many fetch="LAZY" name="stops" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionCentreImpl">
         <orm:join-table name="ROUTEDEFINITION_STOPS">
           <orm:join-column insertable="true" name="ROUTEDEFINITION_E_ID" nullable="false" unique="false" updatable="true"/>
           <orm:inverse-join-column insertable="true" name="COLLECTIONCENTRE_E_ID" nullable="false" unique="false" updatable="true"/>
@@ -633,7 +633,7 @@
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.TripImpl" name="Trip">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl" name="Trip">
     <orm:table name="TRIP"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Trip</orm:discriminator-value>
@@ -648,7 +648,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:one-to-many fetch="LAZY" name="collections" target-entity="com.agritrace.edairy.model.dairy.impl.CollectionJournalImpl">
+      <orm:one-to-many fetch="LAZY" name="collections" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl">
         <orm:join-table name="TRIP_COLLECTIONS">
           <orm:join-column insertable="true" name="TRIP_E_ID" nullable="false" unique="false" updatable="true"/>
           <orm:inverse-join-column insertable="true" name="COLLECTIONJOURNAL_E_ID" nullable="false" unique="false" updatable="true"/>
@@ -659,7 +659,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" name="deliveries" target-entity="com.agritrace.edairy.model.dairy.impl.DeliveryJournalImpl">
+      <orm:one-to-many fetch="LAZY" name="deliveries" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl">
         <orm:join-table name="TRIP_DELIVERIES">
           <orm:join-column insertable="true" name="TRIP_E_ID" nullable="false" unique="false" updatable="true"/>
           <orm:inverse-join-column insertable="true" name="DELIVERYJOURNAL_E_ID" nullable="false" unique="false" updatable="true"/>
@@ -672,7 +672,7 @@
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.DeliveryJournalImpl" name="DeliveryJournal">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl" name="DeliveryJournal">
     <orm:table name="DELIVERYJOURNAL"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>DeliveryJournal</orm:discriminator-value>
@@ -684,7 +684,7 @@
       </orm:basic>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.SessionImpl" name="Session">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.SessionImpl" name="Session">
     <orm:table name="SESSION"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Session</orm:discriminator-value>
@@ -695,7 +695,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.DairyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl">
         <orm:join-column name="DAIRY_SESSIONS_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
@@ -703,13 +703,13 @@
       </orm:many-to-one>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.DairyImpl" name="Dairy">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl" name="Dairy">
     <orm:discriminator-value>Dairy</orm:discriminator-value>
     <orm:attributes>
       <orm:basic fetch="EAGER" name="nhifNumber" optional="true"/>
       <orm:basic fetch="EAGER" name="nssfNumber" optional="true"/>
       <orm:basic fetch="EAGER" name="federalPin" optional="true"/>
-      <orm:one-to-many fetch="LAZY" name="workstations" target-entity="com.agritrace.edairy.model.dairy.impl.WorkstationImpl">
+      <orm:one-to-many fetch="LAZY" name="workstations" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.WorkstationImpl">
         <orm:join-table name="DAIRY_WORKSTATIONS">
           <orm:join-column insertable="true" name="DAIRY_E_ID" nullable="false" unique="false" updatable="true"/>
           <orm:inverse-join-column insertable="true" name="WORKSTATION_E_ID" nullable="false" unique="false" updatable="true"/>
@@ -720,34 +720,34 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="routes" target-entity="com.agritrace.edairy.model.dairy.impl.RouteDefinitionImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="routes" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.RouteDefinitionImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="vehicles" target-entity="com.agritrace.edairy.model.dairy.impl.VehicleImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="vehicles" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="employees" target-entity="com.agritrace.edairy.model.dairy.impl.EmployeeImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="employees" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="sessions" target-entity="com.agritrace.edairy.model.dairy.impl.SessionImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="sessions" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.SessionImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
-      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="memberships" target-entity="com.agritrace.edairy.model.dairy.impl.MembershipImpl">
+      <orm:one-to-many fetch="LAZY" mapped-by="eContainer" name="memberships" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl">
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:one-to-many>
     </orm:attributes>
   </orm:entity>
-  <orm:entity class="com.agritrace.edairy.model.dairy.impl.MembershipImpl" name="Membership">
+  <orm:entity class="com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl" name="Membership">
     <orm:table name="MEMBERSHIP"/>
     <orm:inheritance strategy="SINGLE_TABLE"/>
     <orm:discriminator-value>Membership</orm:discriminator-value>
@@ -766,7 +766,7 @@
       <orm:basic name="eContainerFeatureID">
         <orm:column name="ECONT_FEAT_ID"/>
       </orm:basic>
-      <orm:many-to-one fetch="EAGER" name="defaultRoute" optional="false" target-entity="com.agritrace.edairy.model.dairy.impl.RouteDefinitionImpl">
+      <orm:many-to-one fetch="EAGER" name="defaultRoute" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.RouteDefinitionImpl">
         <orm:join-column insertable="true" name="ROUTEDEFINITION_DEFAULTROUTE_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -774,7 +774,7 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one fetch="EAGER" name="member" optional="false" target-entity="com.agritrace.edairy.model.impl.PersonImpl">
+      <orm:many-to-one fetch="EAGER" name="member" optional="false" target-entity="com.agritrace.edairy.desktop.common.model.impl.PersonImpl">
         <orm:join-column insertable="true" name="PERSON_MEMBER_E_ID" nullable="false" unique="false" updatable="true"/>
         <orm:cascade>
           <orm:cascade-persist/>
@@ -782,13 +782,13 @@
           <orm:cascade-refresh/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.model.dairy.impl.DairyImpl">
+      <orm:many-to-one name="eContainer" target-entity="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl">
         <orm:join-column name="DAIRY_MEMBERSHIPS_E_ID"/>
         <orm:cascade>
           <orm:cascade-all/>
         </orm:cascade>
       </orm:many-to-one>
-      <orm:one-to-many fetch="LAZY" name="farms" target-entity="com.agritrace.edairy.model.tracking.impl.FarmImpl">
+      <orm:one-to-many fetch="LAZY" name="farms" target-entity="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl">
         <orm:join-table name="MEMBERSHIP_FARMS">
           <orm:join-column insertable="true" name="MEMBERSHIP_E_ID" nullable="false" unique="false" updatable="true"/>
           <orm:inverse-join-column insertable="true" name="FARM_E_ID" nullable="false" unique="false" updatable="true"/>

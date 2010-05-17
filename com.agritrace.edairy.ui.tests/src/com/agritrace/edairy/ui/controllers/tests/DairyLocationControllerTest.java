@@ -15,16 +15,16 @@ import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.MapLocation;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
-import com.agritrace.edairy.model.DescriptiveLocation;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.MapLocation;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyFunction;
-import com.agritrace.edairy.model.dairy.DairyLocation;
-import com.agritrace.edairy.model.dairy.Route;
 
 public class DairyLocationControllerTest extends AbstractSubModuleControllerTest<DairyLocationController> {
 

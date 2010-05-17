@@ -12,18 +12,17 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoMasterDetailComposite;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Employee;
-//import com.agritrace.edairy.desktop.model.impl.ModelFactoryImpl;
 
 /**
  * Controller delegate for Staff info view

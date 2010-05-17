@@ -20,15 +20,12 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
-import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
-import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
-import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogViewController;
-import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
 import com.agritrace.edairy.desktop.deliveries.ui.views.DeliveryView;
 import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
+import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.NewMemberViewController;
@@ -206,7 +203,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.finance"), "Finance"); //$NON-NLS-1$
 	app.addChild(subAppNode);
 	workarea.registerDefinition(subAppNode, TAB_FINANCE); //$NON-NLS-1$
-	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("animalhealth.navgroup"));
+	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("finance.navgroup"));
 	subAppNode.addChild(moduleGroupNode);
 
 	//
@@ -214,7 +211,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	//
 
 	final IModuleNode financeMembers = NodeFactory.createModule("edm.finances", "Finance", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.finances.log", "Journal Log", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.finances.log", "Journal Log", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.finances.credits", "Credit Journal Entry", financeMembers, CreditJournalView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.finances.payments", "Payment Journal Entry", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 

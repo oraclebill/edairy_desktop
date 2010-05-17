@@ -2,9 +2,9 @@ package com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;
 
 import org.eclipse.core.runtime.CoreException;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.model.dairy.Vehicle;
 
 /**
  * Vehicle log view controller

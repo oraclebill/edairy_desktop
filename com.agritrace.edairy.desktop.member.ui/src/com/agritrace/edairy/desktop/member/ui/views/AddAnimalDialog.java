@@ -33,18 +33,18 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.base.Gender;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
+import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
+import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
+import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.member.ui.Activator;
-import com.agritrace.edairy.model.Gender;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.tracking.AcquisitionType;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.Purpose;
-import com.agritrace.edairy.model.tracking.RearingMode;
-import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
-import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
 
 public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, SelectionListener {
 
