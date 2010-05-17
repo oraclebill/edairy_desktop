@@ -160,6 +160,8 @@
         eType="ecore:EClass common.ecore#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
         eType="ecore:EClass farm.ecore#//Farm"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//account/Account"
+        eOpposite="#//account/Account/member"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Asset">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="assetId" lowerBound="1"
@@ -222,7 +224,8 @@
       nsPrefix="account">
     <eClassifiers xsi:type="ecore:EClass" name="Account">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Membership"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Membership"
+          eOpposite="#//Membership/account"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="established" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="transactions" upperBound="-1"

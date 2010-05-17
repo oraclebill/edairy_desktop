@@ -139,6 +139,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/defaultRoute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/member"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/farms"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/account"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Asset">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Asset/assetId"/>
@@ -200,8 +201,8 @@
       </genClasses>
     </nestedGenPackages>
   </genPackages>
-  <genPackages prefix="Model" basePackage="com.agritrace.edairy" resource="XML" disposableProviderFactory="true"
-      ecorePackage="common.ecore#/">
+  <genPackages prefix="Model" basePackage="com.agritrace.edairy.desktop.common.model"
+      resource="XML" disposableProviderFactory="true" ecorePackage="common.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="common.ecore#//Gender">
       <genEnumLiterals ecoreEnumLiteral="common.ecore#//Gender/MALE"/>
       <genEnumLiterals ecoreEnumLiteral="common.ecore#//Gender/FEMALE"/>
