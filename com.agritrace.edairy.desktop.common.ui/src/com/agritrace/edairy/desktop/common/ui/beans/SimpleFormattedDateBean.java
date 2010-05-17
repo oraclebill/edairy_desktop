@@ -21,13 +21,15 @@ public class SimpleFormattedDateBean extends AbstractBean {
     public static String FORMATTED_DATE_VALUE_PROP = "formattedDate";
 
     public static String DATE_PROR = "date";
+    
+    private static final String STD_DATE_FORMAT = "dd/mm/yyyy"; 
 
     public SimpleFormattedDateBean() {
 	this(null);
     }
 
     public SimpleFormattedDateBean(String dateValue) {
-	dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+	dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
 	setFormattedDate(dateValue);
 
     }
@@ -38,7 +40,8 @@ public class SimpleFormattedDateBean extends AbstractBean {
 
     public void setDate(Date date) {
 	this.date = date;
-	formattedDate = dateFormat.format(date);
+	if ( null != date )
+	    formattedDate = dateFormat.format(date);
     }
 
     public String getFormattedDate() {
@@ -48,13 +51,11 @@ public class SimpleFormattedDateBean extends AbstractBean {
     public void setFormattedDate(String formattedDate) {
 	this.formattedDate = formattedDate;
 	if (dateFormat == null) {
-	    dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+	    dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
 	}
 	try {
 	    if (formattedDate == null || formattedDate.trim().equals("")) {
-		final long now = System.currentTimeMillis();
-		date = new Date(now);
-		this.formattedDate = dateFormat.format(date);
+		this.formattedDate = dateFormat.format(new Date());
 	    } else {
 		date = dateFormat.parse(formattedDate);
 	    }

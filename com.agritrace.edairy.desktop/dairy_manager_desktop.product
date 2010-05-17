@@ -50,6 +50,7 @@
       <plugin id="com.agritrace.edairy.desktop.deliveries.ui"/>
       <plugin id="com.agritrace.edairy.desktop.finance.ui"/>
       <plugin id="com.agritrace.edairy.desktop.home.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.icons"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui.tests"/>
