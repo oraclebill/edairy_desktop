@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.setup.ui.views;
+package com.agritrace.edairy.desktop.dairy.vehicles.ui.views;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -26,8 +26,8 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
-import com.agritrace.edairy.desktop.ui.EDairyActivator;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.*;
 
 /**
  * @author Spark Wan
@@ -129,7 +129,7 @@ public class VehicleFilterSection {
 		.getTime())));
 
 	final Button calendarButton = new Button(dateComp, SWT.PUSH);
-	final Image calendar = EDairyActivator.getImage(ImageRegistry.calendar);
+	final Image calendar = Activator.getDefault().getImageRegistry().get("icons/calendar.png");
 	calendarButton.setImage(calendar);
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 	// addUIControl(calendarButton,ViewWidgetId.calendarButton);
@@ -207,7 +207,7 @@ public class VehicleFilterSection {
 	memberText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	// Search Button
 	memberSearchButton = UIControlsFactory.createImageButton(comp, SWT.None);
-	memberSearchButton.setImage(EDairyActivator.getImage(SEARCH_ICON_PATH));
+	memberSearchButton.setImage(Activator.getDefault().getImageRegistry().get(SEARCH_ICON_PATH));
 	memberSearchButton.addListener(SWT.Selection, listener);
 
     }
@@ -224,7 +224,7 @@ public class VehicleFilterSection {
 	farmText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	// Search Button
 	farmLookupButton = UIControlsFactory.createImageButton(comp, SWT.None);
-	farmLookupButton.setImage(EDairyActivator.getImage(SEARCH_ICON_PATH));
+	farmLookupButton.setImage(Activator.getDefault().getImageRegistry().get(SEARCH_ICON_PATH));
 	farmLookupButton.addListener(SWT.Selection, listener);
 
     }

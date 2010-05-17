@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Composite;
 
 public class StaffInfoView extends SubModuleView {
 
-    public static final String ID = StaffInfoView.class.getName();
+    public static final String ID = "dairy.employee.masterdetail.view";
     public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 
     public StaffInfoView() {

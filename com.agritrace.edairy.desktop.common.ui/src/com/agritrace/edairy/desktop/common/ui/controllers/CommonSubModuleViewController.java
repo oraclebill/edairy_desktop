@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.services.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class CommonSubModuleViewController extends SubModuleController {
 	// empty
     }
 
-    public List<EObject> getModleOjects() {
+    public List<EObject> getModelObjects() {
 
 	return _eobjs;
     }

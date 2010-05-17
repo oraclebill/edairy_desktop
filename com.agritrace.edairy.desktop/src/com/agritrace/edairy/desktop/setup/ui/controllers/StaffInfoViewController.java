@@ -2,7 +2,8 @@ package com.agritrace.edairy.desktop.setup.ui.controllers;
 
 import org.eclipse.core.runtime.CoreException;
 
-import com.agritrace.edairy.desktop.services.ui.controllers.CommonSubModuleViewController;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.setup.core.StaffInfoResourceManager;
 import com.agritrace.edairy.model.dairy.Employee;
 
@@ -26,9 +27,8 @@ public class StaffInfoViewController extends CommonSubModuleViewController {
      * replaced teneo/eclipselink framework to load DB objects to EMF models
      */
     private void initModel() {
-	// ServiceRequestResourceManager.INSTANCE.loadResources();
 	try {
-	    this.getModleOjects().addAll(StaffInfoResourceManager.INSTANCE.getObjectsFromDairyModel(Employee.class));
+	    this.getModelObjects().addAll(DairyDemoResourceManager.INSTANCE.getObjectsFromDairyModel(Employee.class));
 	} catch (final CoreException e) {
 	    // TODO
 	    e.printStackTrace();

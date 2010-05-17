@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.services.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.riena.ui.ridgets.IRidget;
 

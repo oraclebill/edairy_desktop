@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.setup.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
-import com.agritrace.edairy.desktop.services.ui.controllers.CommonSubModuleViewController;
-import com.agritrace.edairy.desktop.services.ui.controllers.SubModuleControllerDelegate;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
-import com.agritrace.edairy.desktop.setup.ui.views.VehicleMasterDetailComposite;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
+import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleMasterDetailComposite;
 import com.agritrace.edairy.model.dairy.DairyFactory;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
@@ -47,7 +47,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 		DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName() };
 
 	final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
-	final List<EObject> vehicles = ((CommonSubModuleViewController) this.getSubModuleController()).getModleOjects();
+	final List<EObject> vehicles = ((CommonSubModuleViewController) this.getSubModuleController()).getModelObjects();
 	if (master != null) {
 	    master.setDelegate(new VehicleLogMasterDetailDelegate());
 	    master.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, properties, headers);

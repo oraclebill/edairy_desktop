@@ -12,9 +12,9 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
-import com.agritrace.edairy.desktop.services.ui.controllers.CommonSubModuleViewController;
-import com.agritrace.edairy.desktop.services.ui.controllers.SubModuleControllerDelegate;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
+import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.setup.ui.views.StaffInfoMasterDetailComposite;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelFactory;
@@ -49,7 +49,7 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 
 	final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 	final List<EObject> employees = ((CommonSubModuleViewController) this.getSubModuleController())
-		.getModleOjects();
+		.getModelObjects();
 	if (master != null) {
 	    master.setDelegate(new StaffDelegation());
 	    master.bindToModel(new WritableList(employees, Employee.class), Employee.class, properties, headers);

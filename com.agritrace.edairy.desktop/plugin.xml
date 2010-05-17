@@ -43,7 +43,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.views">
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView" id="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView"
+			class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView" id="dairy.employee.masterdetail.view"
 			name="StaffInfoView">
 		</view>
 		<view allowMultiple="true"
@@ -59,11 +59,7 @@
 			name="DeliveryView">
 		</view>
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.NetworklDairyView" id="com.agritrace.edairy.ui.views.NetworklDairyView"
-			name="NetworklDairyView">
-		</view>
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="blank.view"
+			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="com.agritrace.edairy.ui.views.BlankView"
 			name="Blank" restorable="true">
 		</view>
 		<view allowMultiple="true"
@@ -83,8 +79,8 @@
 			restorable="true">
 		</view>
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.setup.ui.views.VehicleLogView"
-			id="com.agritrace.edairy.setup.ui.views.VehicleLogView" name="Vehicle Log"
+			class="com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView"
+			id="dairy.vehicle.masterdetail.view" name="Vehicle Log"
 			restorable="true">
 		</view>
 	</extension>

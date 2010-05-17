@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.setup.ui.views;
+package com.agritrace.edairy.desktop.dairy.vehicles.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;

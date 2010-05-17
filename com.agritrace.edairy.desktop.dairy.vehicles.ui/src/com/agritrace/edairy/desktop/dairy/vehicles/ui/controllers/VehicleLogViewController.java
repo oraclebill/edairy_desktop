@@ -1,9 +1,9 @@
-package com.agritrace.edairy.desktop.setup.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;
 
 import org.eclipse.core.runtime.CoreException;
 
-import com.agritrace.edairy.desktop.services.ui.controllers.CommonSubModuleViewController;
-import com.agritrace.edairy.desktop.setup.core.VehicleLogResourceManager;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.model.dairy.Vehicle;
 
 /**
@@ -28,7 +28,7 @@ public class VehicleLogViewController extends CommonSubModuleViewController {
     private void initModel() {
 	// ServiceRequestResourceManager.INSTANCE.loadResources();
 	try {
-	    this.getModleOjects().addAll(VehicleLogResourceManager.INSTANCE.getObjectsFromDairyModel(Vehicle.class));
+	    this.getModelObjects().addAll(DairyDemoResourceManager.INSTANCE.getObjectsFromDairyModel(Vehicle.class));
 	} catch (final CoreException e) {
 	    // TODO
 	    e.printStackTrace();

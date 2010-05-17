@@ -5,7 +5,6 @@ import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -15,8 +14,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
-import com.agritrace.edairy.desktop.ui.EDairyActivator;
 
 public class StaffInfoMasterDetailComposite extends MasterDetailsComposite {
 
@@ -69,8 +66,6 @@ public class StaffInfoMasterDetailComposite extends MasterDetailsComposite {
 	imagData.verticalAlignment = GridData.FILL;
 
 	imagData.verticalSpan = 4;
-	final Image photoImage = EDairyActivator.getImage(ImageRegistry.smileFace);
-	imageLable.setImage(photoImage);
 	imageLable.setLayoutData(imagData);
 
 	UIControlsFactory.createLabel(detailGroup, "Last Name:"); //$NON-NLS-1$

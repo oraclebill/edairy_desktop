@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.ResourceManager;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.services.ui.Activator;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.Gender;
 import com.agritrace.edairy.model.Location;

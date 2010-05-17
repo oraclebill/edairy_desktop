@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.setup.ui.views;
+package com.agritrace.edairy.desktop.dairy.vehicles.ui.views;
 
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
@@ -8,6 +8,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleMasterDetailComposite;
+
+
 /**
  * Vehicle log view
  * 
@@ -16,7 +19,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class VehicleLogView extends SubModuleView {
 
-    public static final String ID = VehicleLogView.class.getName();
+    public static final String ID = "dairy.vehicle.masterdetail.view";
     public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 
     @Override

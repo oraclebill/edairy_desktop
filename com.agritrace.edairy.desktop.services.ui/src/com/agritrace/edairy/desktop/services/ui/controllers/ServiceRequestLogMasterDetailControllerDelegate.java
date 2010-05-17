@@ -20,8 +20,11 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.swt.widgets.Control;
+import org.osgi.framework.BundleContext;
 
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.services.ui.Activator;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestMasterDetailComposite;
 import com.agritrace.edairy.model.Location;
@@ -37,6 +40,8 @@ import com.agritrace.edairy.model.requests.RequestsFactory;
 import com.agritrace.edairy.model.requests.RequestsPackage;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
+
+
 
 /**
  * Master-detail controller delegate
@@ -322,8 +327,14 @@ public class ServiceRequestLogMasterDetailControllerDelegate extends SubModuleCo
 		    }
 		}
 		// SwtRidgetFactory.
+		BundleContext ctx = null;
+		try {
+		    ctx = Activator.getDefault().getBundle().getBundleContext();
+		} catch( Throwable t ) {
+		    ;
+		}
 		ServiceUtils
-			.injectRidgets(specificContainer, injectedControls, SWTBindingPropertyLocator.getInstance());
+			.injectRidgets(ctx, specificContainer, injectedControls, SWTBindingPropertyLocator.getInstance());
 		// Updates the bindings
 		configTypeSpecificRidgets(request);
 	    }
