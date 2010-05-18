@@ -11,5 +11,15 @@
             restorable="true">
       </view>
    </extension>
+     <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.member.ui.views.MemberListView"
+            id="com.agritrace.edairy.desktop.member.ui.views.MemberListView"
+            name="Member List"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>

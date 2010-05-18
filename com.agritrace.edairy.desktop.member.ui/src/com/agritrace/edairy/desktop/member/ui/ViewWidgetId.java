@@ -143,5 +143,7 @@ public class ViewWidgetId {
 
     public static final String[] PROVINCES_LIST = new String[] { "Central", "Coast", "Eastern", "Nairobi",
 	    "North Eastern", "Nyanza", "Rift Valley", "Western" };
-
+    
+    //member list view
+    public static final String MEMBERLIST_SEARCHTEXT = "memberList_searchText";
 }
