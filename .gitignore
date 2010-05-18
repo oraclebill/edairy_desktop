@@ -5,4 +5,3 @@ org.eclipse.*/
 build/
 bin/
 *_.java
-.settings

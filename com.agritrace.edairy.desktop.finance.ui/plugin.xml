@@ -29,6 +29,15 @@
             name="Transaction Register"
             restorable="true">
       </view>
+      <category
+            id="com.agritrace.edairy.desktop.finance.ui.category"
+            name="Finance">
+      </category>
+      <view
+            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntry"
+            id="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntry"
+            name="Transaction Batch Entry">
+      </view>
    </extension>
 
 </plugin>

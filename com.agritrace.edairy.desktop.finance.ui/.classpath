@@ -3,5 +3,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="swt-grouplayout.jar" sourcepath="swt-grouplayout.zip"/>
+	<classpathentry kind="lib" path="radiogroup-0.1.0.jar" sourcepath="radiogroup-0.1.0-src.zip"/>
+	<classpathentry kind="lib" path="formattedtext-1.0.0.jar" sourcepath="formattedtext-1.0.0-src.zip"/>
+	<classpathentry kind="lib" path="datechooser-1.0.0.jar" sourcepath="datechooser-1.0.0-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
