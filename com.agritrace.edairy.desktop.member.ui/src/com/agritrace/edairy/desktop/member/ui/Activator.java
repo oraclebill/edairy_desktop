@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -56,9 +58,33 @@ public class Activator extends AbstractUIPlugin {
 	return plugin;
     }
 
-    public static Image getImage(String calendar) {
-	// TODO Auto-generated method stub
-	throw new UnsupportedOperationException("unimplemented");
-    }
+    /**
+	 * Return a "shared" image instance using the given colorKey. Shared images
+	 * are managed automatically and must not be disposed by client code.
+	 * 
+	 * @param imageKey
+	 *            a non-null String; see {@link SharedImages} for valid keys
+	 * @return a non-null Image instance
+	 */
+	public static synchronized Image getImage(final String path) {
+		ImageDescriptor imageDescriptor = getImageDescriptor(path);
+		if (imageDescriptor != null) {
+			return imageDescriptor.createImage();
+		}
+		return ImageStore.getInstance().getImage(path);
 
+	}
+
+	/**
+	 * Returns an image descriptor for the image file at the given plug-in
+	 * relative path
+	 * 
+	 * @param path
+	 *            the path
+	 * @return the image descriptor
+	 */
+	public static ImageDescriptor getImageDescriptor(String path) {
+		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
 }

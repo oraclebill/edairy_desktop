@@ -118,7 +118,7 @@ public class MemberInfoGroup {
 	// 1));
 
 	photoLabel = UIControlsFactory.createLabel(upperPanel, ""); //$NON-NLS-1$
-	photoLabel.setImage(Activator.getImage(ImageRegistry.sample_memberphoto));
+//	photoLabel.setImage(Activator.getImage(ImageRegistry.sample_memberphoto));
 	photoLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, true, 1, 4));
 
 	// Composite datePanel = UIControlsFactory.createComposite(upperPanel);
