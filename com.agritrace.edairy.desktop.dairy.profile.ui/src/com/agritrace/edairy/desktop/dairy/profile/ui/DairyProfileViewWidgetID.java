@@ -14,6 +14,7 @@ public interface DairyProfileViewWidgetID {
 
     public static final String DAIRY_LOCATION_ADDRESS = "DAIRY_LOCATION_ADDRESS";
     public static final String DAIRY_LOCATION_SECTION = "DAIRYSECTION";
+    public static final String DAIRY_LOCATION_VILLAGE="DAIRYVILLAGE";
 
     public static final String DAIRY_LOCATION_ESTATE = "DAIRY_LOCATION_ESTATE";
     public static final String DAIRY_LOCATION_LOCATION = "DAIRY_LOCATION_LOCATION";
