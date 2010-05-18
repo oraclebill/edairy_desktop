@@ -17,25 +17,14 @@
             name="Transaction Register"
             restorable="true">
       </view>
-      <view
-            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView"
-            id="dairy.transactions.register"
-            name="Transaction Register"
-            restorable="true">
+      <view allowMultiple="true"
+            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView"
+            id="transaction.batch-entry.view"
+            name="Transaction Batch Entry">
       </view>
-      <view
-            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView"
-            id="dairy.finance.transactionlog"
-            name="Transaction Register"
-            restorable="true">
-      </view>
-      <category
-            id="com.agritrace.edairy.desktop.finance.ui.category"
-            name="Finance">
-      </category>
-      <view
-            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntry"
-            id="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntry"
+      <view allowMultiple="true"
+            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView"
+            id="transaction.batch-entry.mdview"
             name="Transaction Batch Entry">
       </view>
    </extension>

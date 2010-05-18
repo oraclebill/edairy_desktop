@@ -42,6 +42,7 @@
       <plugin id="com.agritrace.edairy.desktop"/>
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
+      <plugin id="com.agritrace.edairy.desktop.common.model.edit"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.employees.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
@@ -77,6 +78,7 @@
       <plugin id="org.eclipse.emf.databinding"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.edit"/>
       <plugin id="org.eclipse.emf.query"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>

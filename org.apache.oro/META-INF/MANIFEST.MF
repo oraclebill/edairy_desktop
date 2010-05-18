@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.apache.oro
+Bundle-Version: 2.0.8.v200903061218
+Bundle-ClassPath: org.apache.oro_2.0.8.v200903061218.jar
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.apache.oro.io;version="2.0.8",
+ org.apache.oro.text;version="2.0.8",
+ org.apache.oro.text.awk;version="2.0.8",
+ org.apache.oro.text.perl;version="2.0.8",
+ org.apache.oro.text.regex;version="2.0.8",
+ org.apache.oro.util;version="2.0.8"
+Bundle-RequiredExecutionEnvironment: J2SE-1.2

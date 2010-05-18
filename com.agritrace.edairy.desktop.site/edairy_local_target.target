@@ -21,5 +21,6 @@
 <location id="org.eclipse.equinox.compendium.sdk" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location id="org.eclipse.equinox.server.simple" path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse" type="Feature"/>
 <location path="${workspace_loc}/../eclipse-lib/eclipse-modeling-helios-M7-incubation/eclipse/plugins" type="Directory"/>
+<location path="/Users/oraclebill/Development/Projects/eclipse-lib/ui-extras" type="Directory"/>
 </locations>
 </target>
