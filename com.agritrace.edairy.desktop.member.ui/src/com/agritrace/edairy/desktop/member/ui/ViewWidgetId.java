@@ -146,4 +146,14 @@ public class ViewWidgetId {
     
     //member list view
     public static final String MEMBERLIST_SEARCHTEXT = "memberList_searchText";
+    
+    //member directions group
+    public static final String LANDMARK_TEXT = "landMarkText";
+    public static final String DIRECTIONS_TEXT = "directionsText";
+    public static final String LATITUDE_TEXT="latitudeText";
+	public static final String LONGTITUDE_TEXT="longtitueText";
+	public static final String EMAIL_TEXT="EMAIL";
+	public static final String PHONE_TEXT="PHONE";
+	public static final String SECOND_PHONE_TEXT="SECOND_PHONE";
+
 }
