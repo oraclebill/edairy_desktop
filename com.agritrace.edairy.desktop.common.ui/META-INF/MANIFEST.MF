@@ -11,9 +11,11 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,
  com.agritrace.edairy.desktop.common.ui.beans,
+ com.agritrace.edairy.desktop.common.ui.controllers,
  com.agritrace.edairy.desktop.common.ui.controls,
  com.agritrace.edairy.desktop.common.ui.dialogs,
  com.agritrace.edairy.desktop.common.ui.managers,
  com.agritrace.edairy.desktop.common.ui.util,
  com.agritrace.edairy.desktop.common.ui.validators,
+ com.agritrace.edairy.desktop.common.ui.views,
  com.swtdesigner;uses:="org.eclipse.jface.resource,org.eclipse.swt.graphics"
