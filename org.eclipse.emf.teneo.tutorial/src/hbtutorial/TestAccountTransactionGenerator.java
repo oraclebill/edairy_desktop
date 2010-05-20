@@ -1,5 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.beans;
-
+package hbtutorial;
 
 import java.util.Date;
 import java.util.ArrayList;
