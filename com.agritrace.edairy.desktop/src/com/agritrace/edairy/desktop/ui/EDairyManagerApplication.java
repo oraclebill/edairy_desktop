@@ -29,6 +29,7 @@ import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.NewMemberViewController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
@@ -271,7 +272,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	//
 
 	final IModuleNode moduleDirectory = NodeFactory.createModule("edm.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierListViewController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//

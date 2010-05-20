@@ -13,17 +13,15 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Audited</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.Audited#getLastUpdated <em>Last Updated
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.Audited#getVoidDate <em>Void Date</em>}
- * </li>
+ *   <li>{@link com.agritrace.edairy.model.Audited#getLastUpdated <em>Last Updated</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Audited#getVoidDate <em>Void Date</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.ModelPackage#getAudited()
  * @model
  * @generated
@@ -47,16 +45,13 @@ public interface Audited extends EObject {
     Date getLastUpdated();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Audited#getLastUpdated
-     * <em>Last Updated</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Audited#getLastUpdated <em>Last Updated</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Last Updated</em>' attribute.
-     * @see #getLastUpdated()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Last Updated</em>' attribute.
+	 * @see #getLastUpdated()
+	 * @generated
+	 */
     void setLastUpdated(Date value);
 
     /**
@@ -77,15 +72,12 @@ public interface Audited extends EObject {
     Date getVoidDate();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Audited#getVoidDate <em>Void Date</em>}
-     * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Void Date</em>' attribute.
-     * @see #getVoidDate()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Audited#getVoidDate <em>Void Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Void Date</em>' attribute.
+	 * @see #getVoidDate()
+	 * @generated
+	 */
     void setVoidDate(Date value);
 
 } // Audited

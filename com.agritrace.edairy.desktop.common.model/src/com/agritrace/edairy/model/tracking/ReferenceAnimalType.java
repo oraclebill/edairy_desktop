@@ -11,21 +11,16 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Reference Animal Type</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getAnimalTypeId
- * <em>Animal Type Id</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getSpecies
- * <em>Species</em>}</li>
- * <li>{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getBreed
- * <em>Breed</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getAnimalTypeId <em>Animal Type Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getSpecies <em>Species</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getBreed <em>Breed</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.tracking.TrackingPackage#getReferenceAnimalType()
  * @model
  * @generated
@@ -49,16 +44,13 @@ public interface ReferenceAnimalType extends EObject {
     long getAnimalTypeId();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getAnimalTypeId
-     * <em>Animal Type Id</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getAnimalTypeId <em>Animal Type Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Animal Type Id</em>' attribute.
-     * @see #getAnimalTypeId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Animal Type Id</em>' attribute.
+	 * @see #getAnimalTypeId()
+	 * @generated
+	 */
     void setAnimalTypeId(long value);
 
     /**
@@ -109,15 +101,12 @@ public interface ReferenceAnimalType extends EObject {
     String getBreed();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getBreed
-     * <em>Breed</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Breed</em>' attribute.
-     * @see #getBreed()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.ReferenceAnimalType#getBreed <em>Breed</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Breed</em>' attribute.
+	 * @see #getBreed()
+	 * @generated
+	 */
     void setBreed(String value);
 
 } // ReferenceAnimalType

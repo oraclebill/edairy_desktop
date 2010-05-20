@@ -43,7 +43,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.views">
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView" id="com.agritrace.edairy.setup.ui.views.StaffInfoView"
+			class="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView" id="com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView"
 			name="StaffInfoView">
 		</view>
 		<view allowMultiple="true"

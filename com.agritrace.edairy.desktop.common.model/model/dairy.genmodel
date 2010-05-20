@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.agritrace.edairy.model/src"
-    modelPluginID="com.agritrace.edairy.model" modelName="Dairy" modelPluginClass=""
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.agritrace.edairy.desktop.common.model/src"
+    modelPluginID="com.agritrace.edairy.desktop.common.model" modelName="Dairy" modelPluginClass=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>dairy.ecore</foreignModel>
   <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.model" resource="XMI"
@@ -162,7 +162,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Supplier/notes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Supplier/rating"/>
     </genClasses>
-    <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.model.dairy"
+    <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.dairy.model"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionType">
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionType/CREDIT"/>

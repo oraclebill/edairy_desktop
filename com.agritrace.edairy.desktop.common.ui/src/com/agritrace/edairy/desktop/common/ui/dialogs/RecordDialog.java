@@ -7,6 +7,7 @@ import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -14,8 +15,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
-import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
+/**
+ * Record List Dialog
+ * 
+ * @author Hui(Spark) Wan
+ *
+ */
 public abstract class RecordDialog extends AbstractDialogView {
 
 	public static final int DIALOG_STYLE_NEW = 1;
@@ -37,6 +43,15 @@ public abstract class RecordDialog extends AbstractDialogView {
 
 	}
 
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		this.setShellStyle(SWT.RESIZE | SWT.CLOSE | SWT.TITLE);
+		newShell.setSize(240, 400);
+		newShell.setBackground(LnfManager.getLnf().getColor(
+				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+	}
+	
 	public EObject getSelectedEObject() {
 		return this.selectedEObject;
 	}
@@ -56,6 +71,8 @@ public abstract class RecordDialog extends AbstractDialogView {
 		comp.setLayout(GridLayoutFactory.swtDefaults().create());
 		GridDataFactory.swtDefaults().grab(true, true).applyTo(comp);
 		comp.setBackground(LnfManager.getLnf().getColor(
+				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		comp.getParent().setBackground(LnfManager.getLnf().getColor(
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		createUIComponent(comp);

@@ -11,40 +11,37 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Contact Method</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.ContactMethod#getCmType <em>Cm Type
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.ContactMethod#getCmValue <em>Cm Value
- * </em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.ContactMethod#getCmType <em>Cm Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.ContactMethod#getCmValue <em>Cm Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.ModelPackage#getContactMethod()
  * @model
  * @generated
  */
 public interface ContactMethod extends EObject {
     /**
-     * Returns the value of the '<em><b>Cm Type</b></em>' attribute. The
-     * literals are from the enumeration
-     * {@link com.agritrace.edairy.model.ContactMethodType}. <!-- begin-user-doc
+	 * Returns the value of the '<em><b>Cm Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.model.ContactMethodType}.
+	 * <!-- begin-user-doc
      * -->
      * <p>
      * If the meaning of the '<em>Cm Type</em>' attribute isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Cm Type</em>' attribute.
-     * @see com.agritrace.edairy.model.ContactMethodType
-     * @see #setCmType(ContactMethodType)
-     * @see com.agritrace.edairy.model.ModelPackage#getContactMethod_CmType()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Cm Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.ContactMethodType
+	 * @see #setCmType(ContactMethodType)
+	 * @see com.agritrace.edairy.model.ModelPackage#getContactMethod_CmType()
+	 * @model
+	 * @generated
+	 */
     ContactMethodType getCmType();
 
     /**

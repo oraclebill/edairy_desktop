@@ -13,6 +13,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 
 /**
@@ -27,6 +28,8 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * Binding id of the table control {@value} .
 	 */
 	public static final String BIND_ID_TABLE = "list.table"; //$NON-NLS-1$
+	
+	public static final String BIND_ID_TABLE_GROUP = "list.button.table.group"; //$NON-NLS-1$
 	/**
 	 * Binding id of the new button {@value} .
 	 */
@@ -106,13 +109,18 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * @param parent
 	 */
 	private void createTable(Composite parent) {
-		Composite result = UIControlsFactory.createComposite(parent);
+		// Group
+		Group group = UIControlsFactory.createGroup(parent,"");
+		group.setLayout(new GridLayout());
+		group.setLayoutData(new GridData(GridData.FILL_BOTH));
+		addUIControl(group, BIND_ID_TABLE_GROUP);
+		
+		// Tables
+		Composite result = UIControlsFactory.createComposite(group);
 		TableColumnLayout layout = new TableColumnLayout();
 		// We will first create a empty table here
 		Table table = new Table(result, getTableStyle());
 		result.setLayout(layout);
-		int wHint = 200;
-		int hHint = 450;
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(result);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);

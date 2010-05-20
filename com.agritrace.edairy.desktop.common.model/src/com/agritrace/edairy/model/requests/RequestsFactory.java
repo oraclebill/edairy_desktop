@@ -11,17 +11,16 @@ import org.eclipse.emf.ecore.EFactory;
 /**
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
- * 
  * @see com.agritrace.edairy.model.requests.RequestsPackage
  * @generated
  */
 public interface RequestsFactory extends EFactory {
     /**
-     * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @generated
-     */
+	 * @generated
+	 */
     RequestsFactory eINSTANCE = com.agritrace.edairy.model.requests.impl.RequestsFactoryImpl.init();
 
     /**
@@ -34,12 +33,12 @@ public interface RequestsFactory extends EFactory {
     AnimalHealthRequest createAnimalHealthRequest();
 
     /**
-     * Returns the package supported by this factory. <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
-     * @return the package supported by this factory.
-     * @generated
-     */
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
     RequestsPackage getRequestsPackage();
 
 } // RequestsFactory

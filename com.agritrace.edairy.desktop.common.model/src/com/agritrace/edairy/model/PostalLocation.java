@@ -11,33 +11,23 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Postal Location</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getAddress <em>Address
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getSection <em>Section
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getEstate <em>Estate
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getVillage <em>Village
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getSubLocation <em>Sub
- * Location</em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getLocation <em>Location
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getDistrict <em>District
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getDivision <em>Division
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getProvince <em>Province
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.PostalLocation#getPostalCode <em>Postal
- * Code</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getAddress <em>Address</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getSection <em>Section</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getEstate <em>Estate</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getVillage <em>Village</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getSubLocation <em>Sub Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getDistrict <em>District</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getDivision <em>Division</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getProvince <em>Province</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.PostalLocation#getPostalCode <em>Postal Code</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.ModelPackage#getPostalLocation()
  * @model
  * @generated
@@ -181,16 +171,13 @@ public interface PostalLocation extends EObject {
     String getSubLocation();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.PostalLocation#getSubLocation
-     * <em>Sub Location</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.PostalLocation#getSubLocation <em>Sub Location</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Sub Location</em>' attribute.
-     * @see #getSubLocation()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Sub Location</em>' attribute.
+	 * @see #getSubLocation()
+	 * @generated
+	 */
     void setSubLocation(String value);
 
     /**
@@ -331,16 +318,13 @@ public interface PostalLocation extends EObject {
     String getPostalCode();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.PostalLocation#getPostalCode
-     * <em>Postal Code</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.PostalLocation#getPostalCode <em>Postal Code</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Postal Code</em>' attribute.
-     * @see #getPostalCode()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Postal Code</em>' attribute.
+	 * @see #getPostalCode()
+	 * @generated
+	 */
     void setPostalCode(String value);
 
 } // PostalLocation

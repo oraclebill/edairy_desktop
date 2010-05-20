@@ -12,19 +12,18 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Route</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Route#getName <em>Name</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Route#getStops <em>Stops</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Route#getCode <em>Code</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Route#getDescription <em>
- * Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Route#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Route#getStops <em>Stops</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Route#getCode <em>Code</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Route#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getRoute()
  * @model
  * @generated
@@ -48,15 +47,12 @@ public interface Route extends EObject {
     long getId();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Route#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
     void setId(long value);
 
     /**
@@ -77,15 +73,12 @@ public interface Route extends EObject {
     String getName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Route#getName <em>Name</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Name</em>' attribute.
-     * @see #getName()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Route#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
     void setName(String value);
 
     /**
@@ -124,15 +117,12 @@ public interface Route extends EObject {
     String getCode();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Route#getCode <em>Code</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Code</em>' attribute.
-     * @see #getCode()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Route#getCode <em>Code</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Code</em>' attribute.
+	 * @see #getCode()
+	 * @generated
+	 */
     void setCode(String value);
 
     /**
@@ -153,16 +143,13 @@ public interface Route extends EObject {
     String getDescription();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Route#getDescription
-     * <em>Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Route#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Description</em>' attribute.
-     * @see #getDescription()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
     void setDescription(String value);
 
 } // Route

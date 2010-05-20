@@ -31,10 +31,12 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
 import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
+import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsPackage;
@@ -405,6 +407,8 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 	@Override
 	protected void doCreation() {
+		
+		//DairyDemoResourceManager.INSTANCE.getObjectsFromDairyModel(Dairy.class);
 //		if (getContainer() instanceof Dairy) {
 //			Dairy dairy = (Dairy) getContainer();
 //			dairy.getAnimalHealthRequests().add(

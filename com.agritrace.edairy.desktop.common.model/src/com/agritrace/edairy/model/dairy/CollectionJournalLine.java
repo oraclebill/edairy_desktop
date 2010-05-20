@@ -15,48 +15,26 @@ import com.agritrace.edairy.model.tracking.Farm;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Collection Journal Line</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getLineNumber
- * <em>Line Number</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getRecordedMember
- * <em>Recorded Member</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getQuantity
- * <em>Quantity</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isFlagged
- * <em>Flagged</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getUnitOfMeasure
- * <em>Unit Of Measure</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isNotRecorded
- * <em>Not Recorded</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getValidatedMember
- * <em>Validated Member</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isOffRoute
- * <em>Off Route</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFrom
- * <em>From</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFarmContainer
- * <em>Farm Container</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getDairyContainer
- * <em>Dairy Container</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getCollectionJournal
- * <em>Collection Journal</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isRejected
- * <em>Rejected</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getLineNumber <em>Line Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getRecordedMember <em>Recorded Member</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getQuantity <em>Quantity</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isFlagged <em>Flagged</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getUnitOfMeasure <em>Unit Of Measure</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isNotRecorded <em>Not Recorded</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getValidatedMember <em>Validated Member</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isOffRoute <em>Off Route</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFrom <em>From</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFarmContainer <em>Farm Container</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isRejected <em>Rejected</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine()
  * @model
  * @generated
@@ -80,46 +58,39 @@ public interface CollectionJournalLine extends EObject {
     int getLineNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getLineNumber
-     * <em>Line Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getLineNumber <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Line Number</em>' attribute.
-     * @see #getLineNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Line Number</em>' attribute.
+	 * @see #getLineNumber()
+	 * @generated
+	 */
     void setLineNumber(int value);
 
     /**
-     * Returns the value of the '<em><b>Recorded Member</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Recorded Member</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Recorded Member</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Recorded Member</em>' attribute.
-     * @see #setRecordedMember(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_RecordedMember()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Recorded Member</em>' attribute.
+	 * @see #setRecordedMember(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_RecordedMember()
+	 * @model required="true"
+	 * @generated
+	 */
     String getRecordedMember();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getRecordedMember
-     * <em>Recorded Member</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getRecordedMember <em>Recorded Member</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Recorded Member</em>' attribute.
-     * @see #getRecordedMember()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Recorded Member</em>' attribute.
+	 * @see #getRecordedMember()
+	 * @generated
+	 */
     void setRecordedMember(String value);
 
     /**
@@ -203,17 +174,14 @@ public interface CollectionJournalLine extends EObject {
     UnitOfMeasure getUnitOfMeasure();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getUnitOfMeasure
-     * <em>Unit Of Measure</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getUnitOfMeasure <em>Unit Of Measure</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Unit Of Measure</em>' attribute.
-     * @see com.agritrace.edairy.model.UnitOfMeasure
-     * @see #getUnitOfMeasure()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Unit Of Measure</em>' attribute.
+	 * @see com.agritrace.edairy.model.UnitOfMeasure
+	 * @see #getUnitOfMeasure()
+	 * @generated
+	 */
     void setUnitOfMeasure(UnitOfMeasure value);
 
     /**
@@ -234,46 +202,39 @@ public interface CollectionJournalLine extends EObject {
     boolean isNotRecorded();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isNotRecorded
-     * <em>Not Recorded</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#isNotRecorded <em>Not Recorded</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Not Recorded</em>' attribute.
-     * @see #isNotRecorded()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Not Recorded</em>' attribute.
+	 * @see #isNotRecorded()
+	 * @generated
+	 */
     void setNotRecorded(boolean value);
 
     /**
-     * Returns the value of the '<em><b>Validated Member</b></em>' reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Validated Member</b></em>' reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Validated Member</em>' reference isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Validated Member</em>' reference.
-     * @see #setValidatedMember(Membership)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_ValidatedMember()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Validated Member</em>' reference.
+	 * @see #setValidatedMember(Membership)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_ValidatedMember()
+	 * @model
+	 * @generated
+	 */
     Membership getValidatedMember();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getValidatedMember
-     * <em>Validated Member</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getValidatedMember <em>Validated Member</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Validated Member</em>' reference.
-     * @see #getValidatedMember()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Validated Member</em>' reference.
+	 * @see #getValidatedMember()
+	 * @generated
+	 */
     void setValidatedMember(Membership value);
 
     /**
@@ -324,15 +285,12 @@ public interface CollectionJournalLine extends EObject {
     Farm getFrom();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFrom
-     * <em>From</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>From</em>' reference.
-     * @see #getFrom()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFrom <em>From</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>From</em>' reference.
+	 * @see #getFrom()
+	 * @generated
+	 */
     void setFrom(Farm value);
 
     /**
@@ -353,76 +311,65 @@ public interface CollectionJournalLine extends EObject {
     Container getFarmContainer();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFarmContainer
-     * <em>Farm Container</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getFarmContainer <em>Farm Container</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Farm Container</em>' reference.
-     * @see #getFarmContainer()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Farm Container</em>' reference.
+	 * @see #getFarmContainer()
+	 * @generated
+	 */
     void setFarmContainer(Container value);
 
     /**
-     * Returns the value of the '<em><b>Dairy Container</b></em>' reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Dairy Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Dairy Container</em>' reference isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Dairy Container</em>' reference.
-     * @see #setDairyContainer(Container)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_DairyContainer()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Dairy Container</em>' reference.
+	 * @see #setDairyContainer(Container)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_DairyContainer()
+	 * @model
+	 * @generated
+	 */
     Container getDairyContainer();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getDairyContainer
-     * <em>Dairy Container</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Dairy Container</em>' reference.
-     * @see #getDairyContainer()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Dairy Container</em>' reference.
+	 * @see #getDairyContainer()
+	 * @generated
+	 */
     void setDairyContainer(Container value);
 
     /**
-     * Returns the value of the '<em><b>Collection Journal</b></em>' reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Collection Journal</b></em>' reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Collection Journal</em>' reference isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Collection Journal</em>' reference.
-     * @see #setCollectionJournal(CollectionJournal)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_CollectionJournal()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Collection Journal</em>' reference.
+	 * @see #setCollectionJournal(CollectionJournal)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournalLine_CollectionJournal()
+	 * @model
+	 * @generated
+	 */
     CollectionJournal getCollectionJournal();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getCollectionJournal
-     * <em>Collection Journal</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Collection Journal</em>' reference.
-     * @see #getCollectionJournal()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Collection Journal</em>' reference.
+	 * @see #getCollectionJournal()
+	 * @generated
+	 */
     void setCollectionJournal(CollectionJournal value);
 
     /**
