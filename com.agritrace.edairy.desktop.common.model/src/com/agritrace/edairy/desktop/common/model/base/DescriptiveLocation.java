@@ -26,56 +26,56 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DescriptiveLocation extends EObject {
-        /**
-         * Returns the value of the '<em><b>Directions</b></em>' attribute.
-         * <!-- begin-user-doc -->
-         * <p>
-         * If the meaning of the '<em>Directions</em>' attribute isn't clear,
-         * there really should be more of a description here...
-         * </p>
-         * <!-- end-user-doc -->
-         * @return the value of the '<em>Directions</em>' attribute.
-         * @see #setDirections(String)
-         * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getDescriptiveLocation_Directions()
-         * @model required="true"
-         * @generated
-         */
-        String getDirections();
+	/**
+	 * Returns the value of the '<em><b>Directions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Directions</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Directions</em>' attribute.
+	 * @see #setDirections(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getDescriptiveLocation_Directions()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getDirections();
 
-        /**
-         * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation#getDirections <em>Directions</em>}' attribute.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Directions</em>' attribute.
-         * @see #getDirections()
-         * @generated
-         */
-        void setDirections(String value);
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation#getDirections <em>Directions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Directions</em>' attribute.
+	 * @see #getDirections()
+	 * @generated
+	 */
+	void setDirections(String value);
 
-        /**
-         * Returns the value of the '<em><b>Landmarks</b></em>' attribute.
-         * <!-- begin-user-doc -->
-         * <p>
-         * If the meaning of the '<em>Landmarks</em>' attribute isn't clear,
-         * there really should be more of a description here...
-         * </p>
-         * <!-- end-user-doc -->
-         * @return the value of the '<em>Landmarks</em>' attribute.
-         * @see #setLandmarks(String)
-         * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getDescriptiveLocation_Landmarks()
-         * @model
-         * @generated
-         */
-        String getLandmarks();
+	/**
+	 * Returns the value of the '<em><b>Landmarks</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Landmarks</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Landmarks</em>' attribute.
+	 * @see #setLandmarks(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getDescriptiveLocation_Landmarks()
+	 * @model
+	 * @generated
+	 */
+	String getLandmarks();
 
-        /**
-         * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation#getLandmarks <em>Landmarks</em>}' attribute.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Landmarks</em>' attribute.
-         * @see #getLandmarks()
-         * @generated
-         */
-        void setLandmarks(String value);
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation#getLandmarks <em>Landmarks</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Landmarks</em>' attribute.
+	 * @see #getLandmarks()
+	 * @generated
+	 */
+	void setLandmarks(String value);
 
 } // DescriptiveLocation

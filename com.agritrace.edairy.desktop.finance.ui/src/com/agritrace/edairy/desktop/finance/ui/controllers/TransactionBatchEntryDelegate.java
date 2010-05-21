@@ -31,6 +31,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 
 	private final AccountTransaction workingCopy = createWorkingCopy();
 
+	@Override
 	public void configureRidgets(IRidgetContainer container) {
 
 		// setup observables first..
@@ -95,14 +96,14 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		ridgetStore.updateFromModel();
 		
 		// Reference Number
-		ITextRidget ridgetRefNo = container.getRidget(ITextRidget.class, FormConstants.REF_NO_TEXT_RIDGET); //$NON-NLS-1$
+		ITextRidget ridgetRefNo = container.getRidget(ITextRidget.class, FormConstants.REF_NO_TEXT_RIDGET); 
 		ridgetRefNo.bindToModel(EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_ID));
 		ridgetRefNo.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		ridgetRefNo.updateFromModel();
 
 		// Record Id // TODO: fix model - no record id
-		ITextRidget ridgetRecId = container.getRidget(ITextRidget.class, FormConstants.RECORD_ID_TEXT); //$NON-NLS-1$
+		ITextRidget ridgetRecId = container.getRidget(ITextRidget.class, FormConstants.RECORD_ID_TEXT); 
 		// txtRecordId.bindToModel(workingCopy,
 		// AccountPackage.Literals.ACCOUNT_TRANSACTION__);
 		// txtRecordId.addValidationRule(new NotEmpty(),
@@ -110,19 +111,19 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		// txtRecordId.updateFromModel();
 
 		// Member Id
-		ITextRidget ridgetMemberId = container.getRidget(ITextRidget.class, FormConstants.MEMBER_ID_TEXT_RIDGET); //$NON-NLS-1$
+		ITextRidget ridgetMemberId = container.getRidget(ITextRidget.class, FormConstants.MEMBER_ID_TEXT_RIDGET); 
 		ridgetMemberId.bindToModel(obMemberId);
 		ridgetMemberId.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		ridgetMemberId.updateFromModel();
 
 		// Member Id
-		ILabelRidget ridgetMemberName = container.getRidget(ILabelRidget.class, FormConstants.LBL_MEMBER_NAME_RIDGET); //$NON-NLS-1$
+		ILabelRidget ridgetMemberName = container.getRidget(ILabelRidget.class, FormConstants.LBL_MEMBER_NAME_RIDGET); 
 		ridgetMemberName.bindToModel(obMemberName);
 		ridgetMemberName.updateFromModel();
 
 		// Amount
 //		INumericTextRidget ridgetAmt = container.getRidget(INumericTextRidget.class, FormConstants.AMT_TEXT_RIDGET); //$NON-NLS-1$
-		ITextRidget ridgetAmt = container.getRidget(ITextRidget.class, FormConstants.AMT_TEXT_RIDGET); //$NON-NLS-1$
+		ITextRidget ridgetAmt = container.getRidget(ITextRidget.class, FormConstants.AMT_TEXT_RIDGET); 
 		ridgetAmt.bindToModel(obAmt);
 		ridgetAmt.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		ridgetAmt.updateFromModel();
@@ -154,6 +155,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		// txtFirst.updateFromModel();
 	}
 
+	@Override
 	public AccountTransaction copyBean(Object source, Object target) {
 		AccountTransaction from = source != null ? (AccountTransaction) source : createWorkingCopy();
 		AccountTransaction to = target != null ? (AccountTransaction) target : createWorkingCopy();
@@ -166,10 +168,12 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		return to;
 	}
 
+	@Override
 	public AccountTransaction createWorkingCopy() {
 		return AccountFactory.eINSTANCE.createAccountTransaction();
 	}
 
+	@Override
 	public AccountTransaction getWorkingCopy() {
 		return workingCopy;
 	}

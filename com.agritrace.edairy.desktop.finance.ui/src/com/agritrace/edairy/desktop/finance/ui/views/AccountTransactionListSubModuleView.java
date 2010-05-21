@@ -29,8 +29,6 @@ import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionLis
 //import org.eclipse.swt.layout.grouplayout.GroupLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
 public class AccountTransactionListSubModuleView extends AbstractDirectoryView
 		implements ViewConstants {
