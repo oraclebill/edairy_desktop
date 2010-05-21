@@ -109,22 +109,6 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
     }
 
-    private void createMemberSnapshotGroup(Composite composite) {
-	final MemberBadge memberBadge = new MemberBadge(composite, "Kofi Annan", "#124-100327", "#2 - Ngeche");
-	memberBadge.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false));
-
-    }
-
-    private void createMemberDetailGroup(Composite composite) {
-	final Composite memberDetail = UIControlsFactory.createComposite(composite);
-	memberDetail.setEnabled(false);
-	final GridData gd_memberDetail = new GridData(SWT.LEFT, SWT.CENTER, true, true, 2, 1);
-	gd_memberDetail.heightHint = 126;
-	gd_memberDetail.widthHint = 352;
-	memberDetail.setLayoutData(gd_memberDetail);
-
-    }
-
     protected DataBindingContext initDataBindings() {
 	final DataBindingContext bindingContext = new DataBindingContext();
 	//
@@ -637,11 +621,6 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		dvManager.hideView(MemberSearchDetachedView.ID);
 	    }
 	}
-    }
-
-    public void update() {
-	infoGroup.setMemberShip(selectedMember);
-
     }
 
     @Override

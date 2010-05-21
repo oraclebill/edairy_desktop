@@ -23,7 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.Activator;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 
 public class ServiceRequestView extends AbstractRecordListView {
 

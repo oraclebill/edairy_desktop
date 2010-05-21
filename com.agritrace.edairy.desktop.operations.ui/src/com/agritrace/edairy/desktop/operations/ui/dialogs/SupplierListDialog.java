@@ -22,11 +22,11 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Supplier;
-import com.agritrace.edairy.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 
 public class SupplierListDialog extends RecordDialog {
 
