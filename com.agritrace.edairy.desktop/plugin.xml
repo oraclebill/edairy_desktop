@@ -47,18 +47,6 @@
 			name="StaffInfoView">
 		</view>
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.VeterinaryRequestView"
-			id="com.agritrace.edairy.ui.views.VeterinaryRequestView" name="VeterinaryRequestView">
-		</view>
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.InseminationRequestView"
-			id="com.agritrace.edairy.ui.views.InseminationRequestView" name="InseminationRequestView">
-		</view>
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.deliveries.ui.views.DeliveryView" id="com.agritrace.edairy.ui.views.DeliveryView"
-			name="DeliveryView">
-		</view>
-		<view allowMultiple="true"
 			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="default.blank.view"
 			name="Blank" restorable="true">
 		</view>
@@ -76,11 +64,6 @@
 		<view allowMultiple="true"
 			class="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView"
 			id="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView" name="Member Statement Report"
-			restorable="true">
-		</view>
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView"
-			id="dairy.vehicle.masterdetail.view" name="Vehicle Log"
 			restorable="true">
 		</view>
 	</extension>

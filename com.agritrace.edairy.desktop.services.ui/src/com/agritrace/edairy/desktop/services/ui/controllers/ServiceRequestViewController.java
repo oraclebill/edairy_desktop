@@ -204,8 +204,11 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	@Override
 	protected List<?> getFilteredResult() {
 		try {
-			List<AnimalHealthRequest> requests = ServiceRequestResourceManager.INSTANCE
-					.getObjectsFromDairyModel(AnimalHealthRequest.class);
+//			List<AnimalHealthRequest> requests = ServiceRequestResourceManager.INSTANCE
+//			.getObjectsFromDairyModel(AnimalHealthRequest.class);
+			Dairy myDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
+			List<AnimalHealthRequest> requests = myDairy.getAnimalHealthRequests();
+			 
 			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
 			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 				@Override
@@ -390,9 +393,9 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			// DairyDemoResourceManager.INSTANCE.loadDairyResources();
 			// return DairyDemoResourceManager.INSTANCE
 			// .getObjectsFromDairyModel(AnimalHealthRequest.class);
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		} catch (CoreException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -44,6 +48,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 
 public class DairyDemoResourceManager implements IDairyResourceManager {
 
@@ -499,7 +504,8 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	    }
 	    dairy.getMemberships().add(member1);
 	}
-
+	
+	addRequests(dairy);
 	dairyResource.getContents().add(dairy);
 	try {
 	    saveFarmResource();
@@ -512,6 +518,18 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+    }
+
+    private void addRequests(Dairy dairy) {
+	try {
+	    createReq1(dairy);
+	    createReq2(dairy);
+	    createReq3(dairy);
+	}
+	catch (ParseException pe) {
+	    pe.printStackTrace();
+	}
+	
     }
 
     /*
@@ -609,8 +627,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	return objectList;
     }
 
-    private void createFarmProperties(Farm farm, int containerNumber, int animalNumber, int containerId, int animalId)
-	    throws ParseException {
+    private void createFarmProperties(Farm farm, int containerNumber, int animalNumber, int containerId, int animalId) throws ParseException {
 	final SimpleDateFormat sdf = new SimpleDateFormat();
 	sdf.applyPattern("MM/dd/yyyy");
 	for (int i = 0; i < containerNumber; i++) {
@@ -718,26 +735,26 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
     @Override
     public void store(EObject updatedObject) {
 	try {
-	    saveDairyResource();	    
+	    saveDairyResource();
 	} catch (Exception e) {
 	    // TODO: handle exception
 	    e.printStackTrace();
 	}
-	
+
     }
 
     @Override
     public AccountTransaction[] findAccountTransaction(Date start, Date end, Long memberId, Set<TransactionType> typeSet) {
 	Dairy current = getLocalDairy();
-	Membership member = current.getMemberships().get(0);	
-	
+	Membership member = current.getMemberships().get(0);
+
 	Account tstAccount = AccountFactory.eINSTANCE.createAccount();
 	tstAccount.setAccountId(2112l);
 	tstAccount.setEstablished(new Date());
 	tstAccount.setMember(member);
 	tstAccount.setType("test");
 	member.setAccount(tstAccount);
-	
+
 	AccountTransaction tstTransaction = AccountFactory.eINSTANCE.createAccountTransaction();
 	tstTransaction.setAccount(tstAccount);
 	tstTransaction.setTransactionId(789123l);
@@ -747,8 +764,164 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	tstTransaction.setDescription("test transaction description");
 	tstTransaction.setAmount(200d);
 	tstTransaction.setAccount(tstAccount);
-	
-	
+
 	return new AccountTransaction[] { tstTransaction };
+    }
+
+   
+    private void createReq1(Dairy dairy) throws ParseException {
+	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
+	req.setRequestId(1001l);
+	req.setDate(ServiceUtils.DATE_FORMAT.parse("05/03/2010"));
+
+	dairy.getAnimalHealthRequests().add(req);
+
+	// MemberShiip
+	final Membership ship = DairyFactory.eINSTANCE.createMembership();
+	dairy.getMemberships().add(ship);
+
+	final Person person = ModelFactory.eINSTANCE.createPerson();
+	person.setPhoneNumber("13816442241");
+	person.setGivenName("Spark");
+	person.setFamilyName("Wan");
+//	dairy.getAnimalHealthRequests().add(person);
+
+	ship.setMember(person);
+	ship.setMemberId("1001");
+	req.setRequestingMember(ship);
+
+	req.setType(RequestType.VETERINARY);
+	req.setDateHeatDetected(Calendar.getInstance().getTime());
+	req.setFirstTreatment(Calendar.getInstance().getTime());
+	req.setSecondTreatment(Calendar.getInstance().getTime());
+	req.setThirdTreatment(Calendar.getInstance().getTime());
+	req.setReportedProblem("problem 1");
+
+	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
+	farm.setFarmId(new Long(5001).longValue());
+	farm.setName("Green Farm");
+	final Location location1 = ModelFactory.eINSTANCE.createLocation();
+	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	defaultLocation.setAddress("2 - Ngeche");
+	defaultLocation.setSection("Section A");
+	defaultLocation.setEstate("Building B");
+	defaultLocation.setVillage("West Windosr");
+	defaultLocation.setSubLocation("Princeton Junction");
+	defaultLocation.setLocation("Princeton");
+	defaultLocation.setDivision("Mercer");
+	defaultLocation.setDistrict("Central");
+	defaultLocation.setProvince("Jersey");
+	defaultLocation.setPostalCode("08550");
+	location1.setPostalLocation(defaultLocation);
+	farm.setLocation(location1);
+	createFarmProperties(farm, 20, 20, 8000, 9000);
+
+	req.setFarm(farm);
+	dairy.getMemberFarms().add(farm);
+
+    }
+
+    private void createReq2(Dairy dairy) throws ParseException {
+	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
+	req.setRequestId(1002l);
+	req.setDate(ServiceUtils.DATE_FORMAT.parse("04/01/2010"));
+
+	dairy.getAnimalHealthRequests().add(req);
+
+	// MemberShiip
+	final Membership ship = DairyFactory.eINSTANCE.createMembership();
+	dairy.getMemberships().add(ship);
+
+	final Person person = ModelFactory.eINSTANCE.createPerson();
+	person.setPhoneNumber("13816424140");
+	person.setGivenName("Tracy");
+	person.setFamilyName("Copper");
+//	dairy.getAnimalHealthRequests().add(person);
+
+	ship.setMember(person);
+	ship.setMemberId("1002");
+	req.setRequestingMember(ship);
+
+	req.setType(RequestType.INSEMINATION);
+	req.setDateHeatDetected(Calendar.getInstance().getTime());
+	req.setFirstTreatment(Calendar.getInstance().getTime());
+	req.setSecondTreatment(Calendar.getInstance().getTime());
+	req.setThirdTreatment(Calendar.getInstance().getTime());
+	req.setReportedProblem("problem 2");
+
+	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
+	farm.setFarmId(new Long(5001).longValue());
+	farm.setName("Blue Farm");
+	final Location location1 = ModelFactory.eINSTANCE.createLocation();
+	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	defaultLocation.setAddress("2 - Ngeche");
+	defaultLocation.setSection("Section A");
+	defaultLocation.setEstate("Building B");
+	defaultLocation.setVillage("West Windosr");
+	defaultLocation.setSubLocation("Princeton Junction");
+	defaultLocation.setLocation("Princeton");
+	defaultLocation.setDivision("Mercer");
+	defaultLocation.setDistrict("Central");
+	defaultLocation.setProvince("Jersey");
+	defaultLocation.setPostalCode("08550");
+	location1.setPostalLocation(defaultLocation);
+	farm.setLocation(location1);
+	createFarmProperties(farm, 20, 20, 8000, 9000);
+
+	req.setFarm(farm);
+	dairy.getMemberFarms().add(farm);
+
+    }
+
+    private void createReq3(Dairy dairy) throws ParseException {
+	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
+	req.setRequestId(1003l);
+	req.setDate(Calendar.getInstance().getTime());
+
+	dairy.getAnimalHealthRequests().add(req);
+
+	// MemberShiip
+	final Membership ship = DairyFactory.eINSTANCE.createMembership();
+	dairy.getMemberships().add(ship);
+
+	final Person person = ModelFactory.eINSTANCE.createPerson();
+	person.setPhoneNumber("12345678");
+	person.setGivenName("John");
+	person.setFamilyName("Smith");
+//	dairy.getAnimalHealthRequests().add(person);
+
+	ship.setMember(person);
+	ship.setMemberId("1003");
+	req.setRequestingMember(ship);
+
+	req.setType(RequestType.VETERINARY);
+	req.setDateHeatDetected(Calendar.getInstance().getTime());
+	req.setFirstTreatment(Calendar.getInstance().getTime());
+	req.setSecondTreatment(Calendar.getInstance().getTime());
+	req.setThirdTreatment(Calendar.getInstance().getTime());
+	req.setReportedProblem("problem 3");
+
+	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
+	farm.setFarmId(new Long(5001).longValue());
+	farm.setName("Yellow Farm");
+	final Location location1 = ModelFactory.eINSTANCE.createLocation();
+	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	defaultLocation.setAddress("2 - Ngeche");
+	defaultLocation.setSection("Section A");
+	defaultLocation.setEstate("Building B");
+	defaultLocation.setVillage("West Windosr");
+	defaultLocation.setSubLocation("Princeton Junction");
+	defaultLocation.setLocation("Princeton");
+	defaultLocation.setDivision("Mercer");
+	defaultLocation.setDistrict("Central");
+	defaultLocation.setProvince("Jersey");
+	defaultLocation.setPostalCode("08550");
+	location1.setPostalLocation(defaultLocation);
+	farm.setLocation(location1);
+	createFarmProperties(farm, 20, 20, 8000, 9000);
+
+	req.setFarm(farm);
+	dairy.getMemberFarms().add(farm);
+
     }
 }
