@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.model.requests.impl;
 
+import com.agritrace.edairy.model.requests.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
