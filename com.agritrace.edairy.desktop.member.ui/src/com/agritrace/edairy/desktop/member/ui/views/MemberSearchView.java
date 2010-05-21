@@ -153,50 +153,55 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		MemberProfileWidget profileWidget = new MemberProfileWidget(profileComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(profileWidget.getComposite());
 		profileTab.setControl(profileComposite);
-		
+
 
 		// account summary
 		final CTabItem accountTab = new CTabItem(tabfolder, SWT.NULL);
 		accountTab.setText("Account Summary");
 		final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		accountComposite.setLayout(new GridLayout(1, true));
-		accountComposite.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		createAccountSummaryTab(accountComposite);
+		MemberAccountWidget accountWidget = new MemberAccountWidget(accountComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(accountWidget.getComposite());		accountTab.setControl(accountComposite);
 		accountTab.setControl(accountComposite);
 
 		final CTabItem transactionTab = new CTabItem(tabfolder, SWT.NULL);
 		transactionTab.setText("Transactions");
-		final Composite transComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		transComposite.setLayout(new GridLayout(2, false));
-		createTrasactionsTab(transComposite);
+		Composite transComposite =  UIControlsFactory.createComposite(tabfolder,SWT.NONE);
+		transComposite.setLayout(new GridLayout(1, true));
+		MemberTransactionWidget transWidget = new MemberTransactionWidget(transComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(transWidget.getComposite());
 		transactionTab.setControl(transComposite);
 
 		final CTabItem collectionTab = new CTabItem(tabfolder, SWT.NULL);
 		collectionTab.setText("Collection Records");
 		final Composite collectionComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		collectionComposite.setLayout(new GridLayout(2, false));
-		createCollectionInfoTab(collectionComposite);
+		collectionComposite.setLayout(new GridLayout(1, true));
+		MemberCollectionRecordsWidget collectionWidget = new MemberCollectionRecordsWidget(collectionComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(collectionWidget.getComposite());
 		collectionTab.setControl(collectionComposite);
 
 		final CTabItem farmTab = new CTabItem(tabfolder, SWT.NULL);
 		farmTab.setText("Farm");
 		final Composite farmComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		farmComposite.setLayout(new GridLayout(1, true));
-		createFarmInfoTab(farmComposite);
+		MemberFarmWidget farmWidget = new MemberFarmWidget(farmComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(farmWidget.getComposite());
 		farmTab.setControl(farmComposite);
 
 		final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
 		livestockTab.setText("Livestock");
 		final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		livestockComposite.setLayout(new GridLayout(3, false));
-		createLivestockInfoTab(livestockComposite);
+		livestockComposite.setLayout(new GridLayout(1, true));
+		MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(liveStockWidget.getComposite());
 		livestockTab.setControl(livestockComposite);
 
 		final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
 		containerTab.setText("Containers");
 		final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		containerComposite.setLayout(new GridLayout(3, false));
-		createContainerInfoTab(containerComposite);
+		containerComposite.setLayout(new GridLayout(1, false));
+		MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerWidget.getComposite());
 		containerTab.setControl(containerComposite);
 
 		tabfolder.setSelection(accountTab);
@@ -220,121 +225,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		return details;
 	}
 
-	private void createCollectionInfoTab(Composite collectionComposite) {
-		// fitler panel
-		final Composite filterPanel = UIControlsFactory.createComposite(collectionComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(filterPanel);
-		filterPanel.setLayout(new GridLayout(1, false));
 
-		createDataRangeSearch(filterPanel, "Collection Date Range", ViewWidgetId.COLLECTION_FILTER_STARTDATE,
-				ViewWidgetId.COLLECTION_FILTER_ENDDATE);
-
-		final Button nprMissing = UIControlsFactory.createButtonCheck(filterPanel, "NPR Missing",
-				ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(nprMissing);
-
-		final Button rejected = UIControlsFactory.createButtonCheck(filterPanel, "Rejected",
-				ViewWidgetId.COLLECTION_FILTER_REJECTED);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(rejected);
-
-		final Button flaged = UIControlsFactory.createButtonCheck(filterPanel, "Suspended",
-				ViewWidgetId.COLLECTION_FILTER_FLAG);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(flaged);
-
-		final Button filterButton = UIControlsFactory.createButton(filterPanel, "Apply");
-		addUIControl(filterButton, ViewWidgetId.COLLECTION_FILTER_APPLY);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(true, true).applyTo(filterButton);
-
-		final Button showAllButton = UIControlsFactory.createButton(filterPanel, "Show All");
-		addUIControl(showAllButton, ViewWidgetId.COLLECTION_FILTER_SHOWALL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(true, false).applyTo(showAllButton);
-
-		final Composite tablePanel = UIControlsFactory.createComposite(collectionComposite, SWT.NULL);
-		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		final Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.COLLECTION_TABLE);
-		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
-
-		final TableColumn columnId = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnDate = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnCan = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnQuantity = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnNPRMissing = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnRejected = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnSuspected = new TableColumn(table, SWT.LEFT);
-
-		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnId, new ColumnWeightData(10));
-		layout.setColumnData(columnDate, new ColumnWeightData(15));
-		layout.setColumnData(columnCan, new ColumnWeightData(15));
-		layout.setColumnData(columnQuantity, new ColumnWeightData(15));
-		layout.setColumnData(columnNPRMissing, new ColumnWeightData(15));
-		layout.setColumnData(columnRejected, new ColumnWeightData(15));
-		layout.setColumnData(columnSuspected, new ColumnWeightData(15));
-
-		tablePanel.setLayout(layout);
-
-	}
-
-	private void createContainerInfoTab(Composite containerComposite) {
-		final Composite filterPanel = UIControlsFactory.createComposite(containerComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(filterPanel);
-		filterPanel.setLayout(new GridLayout(1, false));
-		final Label emptyLabel = UIControlsFactory.createLabel(filterPanel, "Filter By farm:");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(emptyLabel);
-
-		final Combo farmCombo = UIControlsFactory.createCombo(filterPanel, ViewWidgetId.CONTAINER_FarmCombo);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(farmCombo);
-		final Button filterButton = UIControlsFactory.createButton(filterPanel, "Apply");
-		addUIControl(filterButton, ViewWidgetId.CONTAINER_FilterButton);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(filterButton);
-
-		// Button showAllButton = UIControlsFactory.createButton(filterPanel,
-		// "Show All");
-		// addUIControl(showAllButton,ViewWidgetId.CONTAINER_ShowAllButton);
-		// GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(false,
-		// false).applyTo(showAllButton);
-
-		final Composite containerPanel = UIControlsFactory.createComposite(containerComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerPanel);
-
-		final Table table = UIControlsFactory.createTable(containerPanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.CONTAINER_TABLE);
-		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
-
-		final TableColumn columnID = new TableColumn(table, SWT.LEFT);
-		// columnID.setText("ID");
-		final TableColumn columnType = new TableColumn(table, SWT.LEFT);
-		// columnType.setText("Type");
-
-		final TableColumn columnMeasure = new TableColumn(table, SWT.LEFT);
-		// columnMeasure.setText("Measure");
-
-		final TableColumn columnCapacity = new TableColumn(table, SWT.LEFT);
-		// columnCapacity.setText("Capacity");
-
-		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnID, new ColumnWeightData(25));
-		layout.setColumnData(columnType, new ColumnWeightData(25));
-		layout.setColumnData(columnMeasure, new ColumnWeightData(25));
-		layout.setColumnData(columnCapacity, new ColumnWeightData(25));
-		containerPanel.setLayout(layout);
-
-		final Composite buttonsPanel = UIControlsFactory.createComposite(containerComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, true).applyTo(buttonsPanel);
-		buttonsPanel.setLayout(new GridLayout(1, false));
-
-		final Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.CONTAINER_ADD);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(addButton);
-
-		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON,
-				ViewWidgetId.CONTAINER_Remove);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
-
-	}
 
 	private void createLivestockInfoTab(Composite livestockComposite) {
 
@@ -343,8 +234,8 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(1, false));
 
-		createDataRangeSearch(filterPanel, "Acqusion Date Range", ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
-				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE);
+		//		createDataRangeSearch(filterPanel, "Acqusion Date Range", ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
+		//				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE);
 
 		final Label emptyLabel = UIControlsFactory.createLabel(filterPanel, "Filter By farm:");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(emptyLabel);
@@ -415,50 +306,6 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 	}
 
-	public void createTrasactionsTab(Composite parent) {
-
-		// fitler panel
-		final Composite filterPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(filterPanel);
-		filterPanel.setLayout(new GridLayout(1, false));
-
-		createDataRangeSearch(filterPanel, "Transaction Date Range", ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
-				ViewWidgetId.TRANSACTION_FILTER_ENDDATE);
-
-		final Button filterButton = UIControlsFactory.createButton(filterPanel, "Apply");
-		addUIControl(filterButton, ViewWidgetId.TRANSACTION_FILTER_APPLY);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(true, true).applyTo(filterButton);
-
-		final Button showAllButton = UIControlsFactory.createButton(filterPanel, "Show All");
-		addUIControl(showAllButton, ViewWidgetId.TRANSACTION_FILTER_SHOWALL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(true, false).applyTo(showAllButton);
-
-		final Composite tablePanel = UIControlsFactory.createComposite(parent, SWT.NULL);
-		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		final Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.TRANSACTION_TABLE);
-		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
-
-		final TableColumn columnDate = new TableColumn(table, SWT.LEFT);
-		columnDate.setText("Date");
-		final TableColumn columnType = new TableColumn(table, SWT.LEFT);
-		columnType.setText("Type");
-
-		final TableColumn columnDescription = new TableColumn(table, SWT.LEFT);
-		columnDescription.setText("Description");
-
-		final TableColumn columnAmount = new TableColumn(table, SWT.LEFT);
-		columnAmount.setText("Amount");
-
-		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnDate, new ColumnWeightData(20));
-		layout.setColumnData(columnType, new ColumnWeightData(20));
-		layout.setColumnData(columnAmount, new ColumnWeightData(20));
-		layout.setColumnData(columnDescription, new ColumnWeightData(40));
-		tablePanel.setLayout(layout);
-	}
 
 	public void createFarmInfoTab(Composite parent) {
 
@@ -502,85 +349,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 	}
 
-	public void createAccountSummaryTab(Composite parent) {
 
-		final Composite accountPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
-		accountPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		accountPanel.setLayout(new GridLayout(2, true));
-
-		final Group deliveriesGroup = UIControlsFactory.createGroup(accountPanel, "Deliveries");
-		deliveriesGroup.setLayout(new GridLayout(2, false));
-		deliveriesGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
-
-		UIControlsFactory.createLabel(deliveriesGroup, "Total Deliveries:");
-
-		final Text deliveryField = UIControlsFactory.createText(deliveriesGroup, SWT.SINGLE | SWT.BORDER);
-		deliveryField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		// deliveryField.setText("2500");
-
-		UIControlsFactory.createLabel(deliveriesGroup, "Total Accepted:");
-
-		final Text acceptField = UIControlsFactory.createText(deliveriesGroup, SWT.SINGLE | SWT.BORDER);
-		acceptField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		// acceptField.setText("2500");
-
-		UIControlsFactory.createLabel(deliveriesGroup, "Total Rejected:");
-
-		final Text rejectField = UIControlsFactory.createText(deliveriesGroup, SWT.SINGLE | SWT.BORDER);
-		rejectField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		// rejectField.setText("0");
-
-		final Group sharesGroupd = UIControlsFactory.createGroup(accountPanel, "Shares");
-		sharesGroupd.setLayout(new GridLayout(4, false));
-		sharesGroupd.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-
-		UIControlsFactory.createLabel(sharesGroupd, "Total/Recov. :");
-
-		final Text recCobTxt1 = UIControlsFactory.createText(sharesGroupd, SWT.SINGLE | SWT.BORDER);
-		recCobTxt1.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		// recCobTxt1.setText("2500");
-
-		UIControlsFactory.createLabel(sharesGroupd, "/");
-
-		final Text recCobTxt2 = UIControlsFactory.createText(sharesGroupd, SWT.SINGLE | SWT.BORDER);
-		recCobTxt2.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		// recCobTxt2.setText("1250");
-
-		final Group creditsGroup = UIControlsFactory.createGroup(accountPanel, "Credits");
-		creditsGroup.setLayout(new GridLayout(4, false));
-		creditsGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Score :");
-
-		final Text creditScoreTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditScoreTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3, 1));
-		// creditScoreTxt.setText("700");
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Limit/Available :");
-
-		final Text creditLimitTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditLimitTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
-		// creditLimitTxt.setText("2000");
-
-		UIControlsFactory.createLabel(creditsGroup, "/");
-
-		final Text creditLimitTxt2 = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditLimitTxt2.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
-		// creditLimitTxt2.setText("1250");
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Balance :");
-
-		final Text creditBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditBalanceTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3, 1));
-		// creditBalanceTxt.setText("1000");
-
-		UIControlsFactory.createLabel(creditsGroup, "Cash Balance :");
-
-		final Text cashBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		cashBalanceTxt.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3, 1));
-		// cashBalanceTxt.setText("1000");
-
-	}
 
 	public class MemberSearchNodeListener extends SimpleNavigationNodeAdapter {
 
@@ -640,64 +409,5 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 	}
 
-	private void createDataRangeSearch(Composite parent, String rangeLabelTxt, String startTxtId, String endTxtId) {
-
-		UIControlsFactory.createLabel(parent, rangeLabelTxt);
-		final Composite datePanel = UIControlsFactory.createComposite(parent);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(datePanel);
-		datePanel.setLayout(new GridLayout(3, false));
-
-		UIControlsFactory.createLabel(datePanel, "Start");
-		final Text startDateText = UIControlsFactory.createText(datePanel, SWT.READ_ONLY | SWT.BORDER, startTxtId);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(startDateText);
-
-		final Button calendarButton = new Button(datePanel, SWT.PUSH);
-		final Image calendar = Activator.getImage(ImageRegistry.calendar);
-		calendarButton.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
-
-		calendarButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						startDateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
-					final Date selectedDate = (Date) calDialog.getController().getContext(
-							SimpleFormattedDateBean.DATE_PROR);
-					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					startDateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
-
-		UIControlsFactory.createLabel(datePanel, "End");
-		final Text endDateText = UIControlsFactory.createText(datePanel, SWT.READ_ONLY | SWT.BORDER, endTxtId);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(endDateText);
-
-		final Button calendarButton2 = new Button(datePanel, SWT.PUSH);
-		calendarButton2.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton2);
-
-		calendarButton2.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						endDateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
-					final Date selectedDate = (Date) calDialog.getController().getContext(
-							SimpleFormattedDateBean.DATE_PROR);
-					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					endDateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
-
-	}
 
 }

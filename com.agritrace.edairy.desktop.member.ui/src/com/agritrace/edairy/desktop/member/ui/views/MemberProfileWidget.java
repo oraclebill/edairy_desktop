@@ -5,7 +5,6 @@ package com.agritrace.edairy.desktop.member.ui.views;
 import java.util.Date;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -26,6 +25,11 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
+/**
+ * MemberProfile Tab widget
+ * @author CJ
+ *
+ */
 public class MemberProfileWidget {
 	
 	private Composite composite;
