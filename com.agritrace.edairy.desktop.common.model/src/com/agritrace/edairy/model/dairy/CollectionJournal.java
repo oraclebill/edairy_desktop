@@ -17,38 +17,24 @@ import com.agritrace.edairy.model.tracking.Container;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Collection Journal</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getJournalEntries
- * <em>Journal Entries</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getReferenceNumber
- * <em>Reference Number</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getJournalDate
- * <em>Journal Date</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getSession <em>
- * Session</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getDriver <em>
- * Driver</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getRoute <em>
- * Route</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getFarmContainer
- * <em>Farm Container</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getBin <em>Bin
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getVehicle <em>
- * Vehicle</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getDriverTotal
- * <em>Driver Total</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getRecordTotal
- * <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getJournalEntries <em>Journal Entries</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getReferenceNumber <em>Reference Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getRoute <em>Route</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getFarmContainer <em>Farm Container</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getBin <em>Bin</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getDriverTotal <em>Driver Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.CollectionJournal#getRecordTotal <em>Record Total</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal()
  * @model
  * @generated
@@ -74,33 +60,29 @@ public interface CollectionJournal extends EObject {
     EList<CollectionJournalLine> getJournalEntries();
 
     /**
-     * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Reference Number</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Reference Number</em>' attribute.
-     * @see #setReferenceNumber(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal_ReferenceNumber()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Reference Number</em>' attribute.
+	 * @see #setReferenceNumber(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal_ReferenceNumber()
+	 * @model required="true"
+	 * @generated
+	 */
     String getReferenceNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getReferenceNumber
-     * <em>Reference Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getReferenceNumber <em>Reference Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Reference Number</em>' attribute.
-     * @see #getReferenceNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Reference Number</em>' attribute.
+	 * @see #getReferenceNumber()
+	 * @generated
+	 */
     void setReferenceNumber(String value);
 
     /**
@@ -121,35 +103,32 @@ public interface CollectionJournal extends EObject {
     Date getJournalDate();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getJournalDate
-     * <em>Journal Date</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getJournalDate <em>Journal Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Journal Date</em>' attribute.
-     * @see #getJournalDate()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Journal Date</em>' attribute.
+	 * @see #getJournalDate()
+	 * @generated
+	 */
     void setJournalDate(Date value);
 
     /**
-     * Returns the value of the '<em><b>Session</b></em>' attribute. The default
-     * value is <code>"0"</code>. The literals are from the enumeration
-     * {@link com.agritrace.edairy.model.dairy.Session}. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Session</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.model.dairy.Session}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Session</em>' attribute isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Session</em>' attribute.
-     * @see com.agritrace.edairy.model.dairy.Session
-     * @see #setSession(Session)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal_Session()
-     * @model default="0" required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Session</em>' attribute.
+	 * @see com.agritrace.edairy.model.dairy.Session
+	 * @see #setSession(Session)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal_Session()
+	 * @model default="0" required="true"
+	 * @generated
+	 */
     Session getSession();
 
     /**
@@ -214,15 +193,12 @@ public interface CollectionJournal extends EObject {
     Route getRoute();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getRoute
-     * <em>Route</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Route</em>' reference.
-     * @see #getRoute()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getRoute <em>Route</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Route</em>' reference.
+	 * @see #getRoute()
+	 * @generated
+	 */
     void setRoute(Route value);
 
     /**
@@ -243,16 +219,13 @@ public interface CollectionJournal extends EObject {
     Container getFarmContainer();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getFarmContainer
-     * <em>Farm Container</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getFarmContainer <em>Farm Container</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Farm Container</em>' reference.
-     * @see #getFarmContainer()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Farm Container</em>' reference.
+	 * @see #getFarmContainer()
+	 * @generated
+	 */
     void setFarmContainer(Container value);
 
     /**
@@ -273,15 +246,12 @@ public interface CollectionJournal extends EObject {
     DairyContainer getBin();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getBin
-     * <em>Bin</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Bin</em>' reference.
-     * @see #getBin()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getBin <em>Bin</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bin</em>' reference.
+	 * @see #getBin()
+	 * @generated
+	 */
     void setBin(DairyContainer value);
 
     /**
@@ -332,46 +302,40 @@ public interface CollectionJournal extends EObject {
     BigDecimal getDriverTotal();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getDriverTotal
-     * <em>Driver Total</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getDriverTotal <em>Driver Total</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Driver Total</em>' attribute.
-     * @see #getDriverTotal()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Driver Total</em>' attribute.
+	 * @see #getDriverTotal()
+	 * @generated
+	 */
     void setDriverTotal(BigDecimal value);
 
     /**
-     * Returns the value of the '<em><b>Record Total</b></em>' attribute. The
-     * default value is <code>"0"</code>. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Record Total</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Record Total</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Record Total</em>' attribute.
-     * @see #setRecordTotal(BigDecimal)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal_RecordTotal()
-     * @model default="0" required="true" derived="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Record Total</em>' attribute.
+	 * @see #setRecordTotal(BigDecimal)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getCollectionJournal_RecordTotal()
+	 * @model default="0" required="true" derived="true"
+	 * @generated
+	 */
     BigDecimal getRecordTotal();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.CollectionJournal#getRecordTotal
-     * <em>Record Total</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.CollectionJournal#getRecordTotal <em>Record Total</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Record Total</em>' attribute.
-     * @see #getRecordTotal()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Record Total</em>' attribute.
+	 * @see #getRecordTotal()
+	 * @generated
+	 */
     void setRecordTotal(BigDecimal value);
 
 } // CollectionJournal

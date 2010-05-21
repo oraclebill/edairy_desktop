@@ -14,20 +14,17 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Trip</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.dairy.Trip#getCollections <em>
- * Collections</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Trip#getDeliveries <em>Deliveries
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Trip#getStarted <em>Started</em>}
- * </li>
- * <li>{@link com.agritrace.edairy.model.dairy.Trip#getEnded <em>Ended</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Trip#getCollections <em>Collections</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Trip#getDeliveries <em>Deliveries</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Trip#getStarted <em>Started</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Trip#getEnded <em>Ended</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getTrip()
  * @model
  * @generated
@@ -87,15 +84,12 @@ public interface Trip extends EObject {
     Date getStarted();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Trip#getStarted <em>Started</em>}
-     * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Started</em>' attribute.
-     * @see #getStarted()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Trip#getStarted <em>Started</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Started</em>' attribute.
+	 * @see #getStarted()
+	 * @generated
+	 */
     void setStarted(Date value);
 
     /**
@@ -116,15 +110,12 @@ public interface Trip extends EObject {
     Date getEnded();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Trip#getEnded <em>Ended</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Ended</em>' attribute.
-     * @see #getEnded()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Trip#getEnded <em>Ended</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ended</em>' attribute.
+	 * @see #getEnded()
+	 * @generated
+	 */
     void setEnded(Date value);
 
 } // Trip

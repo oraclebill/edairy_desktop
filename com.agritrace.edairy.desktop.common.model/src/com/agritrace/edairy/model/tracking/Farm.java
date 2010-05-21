@@ -14,21 +14,18 @@ import com.agritrace.edairy.model.Location;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Farm</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.tracking.Farm#getName <em>Name</em>}</li>
- * <li>{@link com.agritrace.edairy.model.tracking.Farm#getAnimals <em>Animals
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.tracking.Farm#getCans <em>Cans</em>}</li>
- * <li>{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.tracking.Farm#getFarmId <em>Farm Id
- * </em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Farm#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Farm#getAnimals <em>Animals</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Farm#getCans <em>Cans</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.tracking.Farm#getFarmId <em>Farm Id</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.tracking.TrackingPackage#getFarm()
  * @model
  * @generated
@@ -52,15 +49,12 @@ public interface Farm extends EObject {
     String getName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.tracking.Farm#getName <em>Name</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Name</em>' attribute.
-     * @see #getName()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Farm#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
     void setName(String value);
 
     /**
@@ -100,34 +94,29 @@ public interface Farm extends EObject {
     EList<Container> getCans();
 
     /**
-     * Returns the value of the '<em><b>Location</b></em>' containment
-     * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Location</em>' reference isn't clear, there
      * really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Location</em>' containment reference.
-     * @see #setLocation(Location)
-     * @see com.agritrace.edairy.model.tracking.TrackingPackage#getFarm_Location()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Location</em>' containment reference.
+	 * @see #setLocation(Location)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getFarm_Location()
+	 * @model containment="true"
+	 * @generated
+	 */
     Location getLocation();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.tracking.Farm#getLocation
-     * <em>Location</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Farm#getLocation <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Location</em>' containment
-     *            reference.
-     * @see #getLocation()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Location</em>' containment reference.
+	 * @see #getLocation()
+	 * @generated
+	 */
     void setLocation(Location value);
 
     /**
@@ -161,21 +150,19 @@ public interface Farm extends EObject {
     void setFarmId(Long value);
 
     /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model kind="operation" annotation=
-     *        "http://www.eclipse.org/emf/2002/GenModel body='return getAnimals().size();'"
-     * @generated
-     */
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getAnimals().size();'"
+	 * @generated
+	 */
     int getNumberOfAnimals();
 
     /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @model kind="operation" annotation=
-     *        "http://www.eclipse.org/emf/2002/GenModel body='return getCans().size();'"
-     * @generated
-     */
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getCans().size();'"
+	 * @generated
+	 */
     int getNumberOfContainers();
 
 } // Farm

@@ -198,6 +198,7 @@ public class ServiceUtils {
 		    BINDING_MAN.injectRidgets(complexRidget, complexComponent.getUIControls());
 		}
 		ridget.setUIControl(control);
+		
 	    }
 	}
 

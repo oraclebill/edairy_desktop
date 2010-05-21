@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.model.dairy;
 
+import com.agritrace.edairy.model.Company;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,34 +16,26 @@ import com.agritrace.edairy.model.Person;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Supplier</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getSupplierId <em>
- * Supplier Id</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getCategories <em>
- * Categories</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getPublicDescription
- * <em>Public Description</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getStatus <em>Status
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getRegistrationDate <em>
- * Registration Date</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getExpirationDate <em>
- * Expiration Date</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getNotes <em>Notes</em>}
- * </li>
- * <li>{@link com.agritrace.edairy.model.dairy.Supplier#getRating <em>Rating
- * </em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getSupplierId <em>Supplier Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getCategories <em>Categories</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getPublicDescription <em>Public Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getStatus <em>Status</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getRegistrationDate <em>Registration Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getExpirationDate <em>Expiration Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getNotes <em>Notes</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Supplier#getRating <em>Rating</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier()
  * @model
  * @generated
  */
-public interface Supplier extends Person {
+public interface Supplier extends Company {
     /**
      * Returns the value of the '<em><b>Supplier Id</b></em>' attribute. <!--
      * begin-user-doc -->
@@ -61,63 +54,56 @@ public interface Supplier extends Person {
     Long getSupplierId();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Supplier#getSupplierId
-     * <em>Supplier Id</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Supplier#getSupplierId <em>Supplier Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Supplier Id</em>' attribute.
-     * @see #getSupplierId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Supplier Id</em>' attribute.
+	 * @see #getSupplierId()
+	 * @generated
+	 */
     void setSupplierId(Long value);
 
     /**
-     * Returns the value of the '<em><b>Categories</b></em>' attribute list. The
-     * list contents are of type {@link java.lang.String}. <!-- begin-user-doc
+	 * Returns the value of the '<em><b>Categories</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc
      * -->
      * <p>
      * If the meaning of the '<em>Categories</em>' attribute list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Categories</em>' attribute list.
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_Categories()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Categories</em>' attribute list.
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_Categories()
+	 * @model
+	 * @generated
+	 */
     EList<String> getCategories();
 
     /**
-     * Returns the value of the '<em><b>Public Description</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Public Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Public Description</em>' attribute isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Public Description</em>' attribute.
-     * @see #setPublicDescription(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_PublicDescription()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Public Description</em>' attribute.
+	 * @see #setPublicDescription(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_PublicDescription()
+	 * @model required="true"
+	 * @generated
+	 */
     String getPublicDescription();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Supplier#getPublicDescription
-     * <em>Public Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Supplier#getPublicDescription <em>Public Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Public Description</em>' attribute.
-     * @see #getPublicDescription()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Public Description</em>' attribute.
+	 * @see #getPublicDescription()
+	 * @generated
+	 */
     void setPublicDescription(String value);
 
     /**
@@ -155,63 +141,55 @@ public interface Supplier extends Person {
     void setStatus(VendorStatus value);
 
     /**
-     * Returns the value of the '<em><b>Registration Date</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Registration Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Registration Date</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Registration Date</em>' attribute.
-     * @see #setRegistrationDate(Date)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_RegistrationDate()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Registration Date</em>' attribute.
+	 * @see #setRegistrationDate(Date)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_RegistrationDate()
+	 * @model required="true"
+	 * @generated
+	 */
     Date getRegistrationDate();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Supplier#getRegistrationDate
-     * <em>Registration Date</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Supplier#getRegistrationDate <em>Registration Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Registration Date</em>' attribute.
-     * @see #getRegistrationDate()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Registration Date</em>' attribute.
+	 * @see #getRegistrationDate()
+	 * @generated
+	 */
     void setRegistrationDate(Date value);
 
     /**
-     * Returns the value of the '<em><b>Expiration Date</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Expiration Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Expiration Date</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Expiration Date</em>' attribute.
-     * @see #setExpirationDate(Date)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_ExpirationDate()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Expiration Date</em>' attribute.
+	 * @see #setExpirationDate(Date)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getSupplier_ExpirationDate()
+	 * @model
+	 * @generated
+	 */
     Date getExpirationDate();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Supplier#getExpirationDate
-     * <em>Expiration Date</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Supplier#getExpirationDate <em>Expiration Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Expiration Date</em>' attribute.
-     * @see #getExpirationDate()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Expiration Date</em>' attribute.
+	 * @see #getExpirationDate()
+	 * @generated
+	 */
     void setExpirationDate(Date value);
 
     /**
@@ -232,15 +210,12 @@ public interface Supplier extends Person {
     String getNotes();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Supplier#getNotes <em>Notes</em>}
-     * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Notes</em>' attribute.
-     * @see #getNotes()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Supplier#getNotes <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Notes</em>' attribute.
+	 * @see #getNotes()
+	 * @generated
+	 */
     void setNotes(String value);
 
     /**

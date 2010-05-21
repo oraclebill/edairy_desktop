@@ -4,5 +4,5 @@ Bundle-Name: Tests
 Bundle-SymbolicName: com.agritrace.edairy.model.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: com.agritrace.edairy.model.tests
-Require-Bundle: com.agritrace.edairy.model;bundle-version="1.0.0",
- org.junit;bundle-version="4.8.1"
+Require-Bundle: org.junit;bundle-version="4.8.1",
+ com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"

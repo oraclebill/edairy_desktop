@@ -49,7 +49,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public static Image getImage(String calendar) {
-	    throw new UnsupportedOperationException("unimplemented");
+	    return null;
 	}
 
 }

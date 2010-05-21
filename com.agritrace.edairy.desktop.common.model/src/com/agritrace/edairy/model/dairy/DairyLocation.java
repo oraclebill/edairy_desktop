@@ -16,30 +16,22 @@ import com.agritrace.edairy.model.Location;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Location</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getName <em>Name
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getDateOpened <em>
- * Date Opened</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getPhone <em>Phone
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getRoute <em>Route
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getDescription <em>
- * Description</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getCode <em>Code
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getLocation <em>
- * Location</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getFunctions <em>
- * Functions</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getDateOpened <em>Date Opened</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getPhone <em>Phone</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getRoute <em>Route</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getCode <em>Code</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.DairyLocation#getFunctions <em>Functions</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairyLocation()
  * @model
  * @generated
@@ -63,15 +55,12 @@ public interface DairyLocation extends EObject {
     long getId();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
     void setId(long value);
 
     /**
@@ -92,15 +81,12 @@ public interface DairyLocation extends EObject {
     String getName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getName
-     * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Name</em>' attribute.
-     * @see #getName()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
     void setName(String value);
 
     /**
@@ -121,16 +107,13 @@ public interface DairyLocation extends EObject {
     Date getDateOpened();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getDateOpened
-     * <em>Date Opened</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getDateOpened <em>Date Opened</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Date Opened</em>' attribute.
-     * @see #getDateOpened()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Date Opened</em>' attribute.
+	 * @see #getDateOpened()
+	 * @generated
+	 */
     void setDateOpened(Date value);
 
     /**
@@ -151,15 +134,12 @@ public interface DairyLocation extends EObject {
     String getPhone();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getPhone
-     * <em>Phone</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Phone</em>' attribute.
-     * @see #getPhone()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getPhone <em>Phone</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Phone</em>' attribute.
+	 * @see #getPhone()
+	 * @generated
+	 */
     void setPhone(String value);
 
     /**
@@ -180,15 +160,12 @@ public interface DairyLocation extends EObject {
     Route getRoute();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getRoute
-     * <em>Route</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Route</em>' reference.
-     * @see #getRoute()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getRoute <em>Route</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Route</em>' reference.
+	 * @see #getRoute()
+	 * @generated
+	 */
     void setRoute(Route value);
 
     /**
@@ -209,16 +186,13 @@ public interface DairyLocation extends EObject {
     String getDescription();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getDescription
-     * <em>Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Description</em>' attribute.
-     * @see #getDescription()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
     void setDescription(String value);
 
     /**
@@ -239,46 +213,38 @@ public interface DairyLocation extends EObject {
     String getCode();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getCode
-     * <em>Code</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Code</em>' attribute.
-     * @see #getCode()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getCode <em>Code</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Code</em>' attribute.
+	 * @see #getCode()
+	 * @generated
+	 */
     void setCode(String value);
 
     /**
-     * Returns the value of the '<em><b>Location</b></em>' containment
-     * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Location</em>' containment reference isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Location</em>' containment reference.
-     * @see #setLocation(Location)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairyLocation_Location()
-     * @model containment="true" required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Location</em>' containment reference.
+	 * @see #setLocation(Location)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairyLocation_Location()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
     Location getLocation();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.DairyLocation#getLocation
-     * <em>Location</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.DairyLocation#getLocation <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Location</em>' containment
-     *            reference.
-     * @see #getLocation()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Location</em>' containment reference.
+	 * @see #getLocation()
+	 * @generated
+	 */
     void setLocation(Location value);
 
     /**

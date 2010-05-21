@@ -9,26 +9,21 @@ package com.agritrace.edairy.model;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Person</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.Person#getPhoto <em>Photo</em>}</li>
- * <li>{@link com.agritrace.edairy.model.Person#getHonorific <em>Honorific</em>}
- * </li>
- * <li>{@link com.agritrace.edairy.model.Person#getFamilyName <em>Family Name
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.Person#getGivenName <em>Given Name
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.Person#getMiddleName <em>Middle Name
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.Person#getAdditionalNames <em>
- * Additional Names</em>}</li>
- * <li>{@link com.agritrace.edairy.model.Person#getSuffix <em>Suffix</em>}</li>
- * <li>{@link com.agritrace.edairy.model.Person#getNickName <em>Nick Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getPhoto <em>Photo</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getHonorific <em>Honorific</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getFamilyName <em>Family Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getGivenName <em>Given Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getMiddleName <em>Middle Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getAdditionalNames <em>Additional Names</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getSuffix <em>Suffix</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.Person#getNickName <em>Nick Name</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.ModelPackage#getPerson()
  * @model
  * @generated
@@ -52,14 +47,12 @@ public interface Person extends Party {
     String getPhoto();
 
     /**
-     * Sets the value of the '{@link com.agritrace.edairy.model.Person#getPhoto
-     * <em>Photo</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Photo</em>' attribute.
-     * @see #getPhoto()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getPhoto <em>Photo</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Photo</em>' attribute.
+	 * @see #getPhoto()
+	 * @generated
+	 */
     void setPhoto(String value);
 
     /**
@@ -80,15 +73,12 @@ public interface Person extends Party {
     String getHonorific();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getHonorific <em>Honorific</em>}
-     * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Honorific</em>' attribute.
-     * @see #getHonorific()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getHonorific <em>Honorific</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Honorific</em>' attribute.
+	 * @see #getHonorific()
+	 * @generated
+	 */
     void setHonorific(String value);
 
     /**
@@ -109,16 +99,13 @@ public interface Person extends Party {
     String getFamilyName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getFamilyName
-     * <em>Family Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getFamilyName <em>Family Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Family Name</em>' attribute.
-     * @see #getFamilyName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Family Name</em>' attribute.
+	 * @see #getFamilyName()
+	 * @generated
+	 */
     void setFamilyName(String value);
 
     /**
@@ -139,16 +126,13 @@ public interface Person extends Party {
     String getGivenName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getGivenName
-     * <em>Given Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getGivenName <em>Given Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Given Name</em>' attribute.
-     * @see #getGivenName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Given Name</em>' attribute.
+	 * @see #getGivenName()
+	 * @generated
+	 */
     void setGivenName(String value);
 
     /**
@@ -169,46 +153,39 @@ public interface Person extends Party {
     String getMiddleName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getMiddleName
-     * <em>Middle Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getMiddleName <em>Middle Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Middle Name</em>' attribute.
-     * @see #getMiddleName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Middle Name</em>' attribute.
+	 * @see #getMiddleName()
+	 * @generated
+	 */
     void setMiddleName(String value);
 
     /**
-     * Returns the value of the '<em><b>Additional Names</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Additional Names</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Additional Names</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Additional Names</em>' attribute.
-     * @see #setAdditionalNames(String)
-     * @see com.agritrace.edairy.model.ModelPackage#getPerson_AdditionalNames()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Additional Names</em>' attribute.
+	 * @see #setAdditionalNames(String)
+	 * @see com.agritrace.edairy.model.ModelPackage#getPerson_AdditionalNames()
+	 * @model
+	 * @generated
+	 */
     String getAdditionalNames();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getAdditionalNames
-     * <em>Additional Names</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getAdditionalNames <em>Additional Names</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Additional Names</em>' attribute.
-     * @see #getAdditionalNames()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Additional Names</em>' attribute.
+	 * @see #getAdditionalNames()
+	 * @generated
+	 */
     void setAdditionalNames(String value);
 
     /**
@@ -229,15 +206,12 @@ public interface Person extends Party {
     String getSuffix();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getSuffix <em>Suffix</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Suffix</em>' attribute.
-     * @see #getSuffix()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getSuffix <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Suffix</em>' attribute.
+	 * @see #getSuffix()
+	 * @generated
+	 */
     void setSuffix(String value);
 
     /**
@@ -258,15 +232,12 @@ public interface Person extends Party {
     String getNickName();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.Person#getNickName <em>Nick Name</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Nick Name</em>' attribute.
-     * @see #getNickName()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.Person#getNickName <em>Nick Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Nick Name</em>' attribute.
+	 * @see #getNickName()
+	 * @generated
+	 */
     void setNickName(String value);
 
 } // Person

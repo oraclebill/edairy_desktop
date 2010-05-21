@@ -11,17 +11,15 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Map Location</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.MapLocation#getLongitude <em>Longitude
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.MapLocation#getLatitude <em>Latitude
- * </em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.MapLocation#getLongitude <em>Longitude</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.MapLocation#getLatitude <em>Latitude</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.ModelPackage#getMapLocation()
  * @model
  * @generated

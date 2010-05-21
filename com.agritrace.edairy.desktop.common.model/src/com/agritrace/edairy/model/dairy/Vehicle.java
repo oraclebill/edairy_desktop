@@ -11,69 +11,55 @@ import java.util.Date;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Vehicle</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getRegistrationNumber
- * <em>Registration Number</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getType <em>Type</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getMake <em>Make</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getModel <em>Model</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getEngineNumber <em>
- * Engine Number</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getChassisNumber <em>
- * Chassis Number</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getLogBookNumber <em>Log
- * Book Number</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePolicyNumber
- * <em>Insurance Policy Number</em>}</li>
- * <li>
- * {@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate
- * <em>Insurance Expiration Date</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour <em>
- * Dominant Colour</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getCapacityInTonnes <em>
- * Capacity In Tonnes</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDriver <em>Driver
- * </em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getRegistrationNumber <em>Registration Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getType <em>Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getMake <em>Make</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getModel <em>Model</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getEngineNumber <em>Engine Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getChassisNumber <em>Chassis Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getLogBookNumber <em>Log Book Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePolicyNumber <em>Insurance Policy Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate <em>Insurance Expiration Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour <em>Dominant Colour</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Vehicle#getDriver <em>Driver</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle()
  * @model
  * @generated
  */
 public interface Vehicle extends Asset {
     /**
-     * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Registration Number</em>' attribute isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Registration Number</em>' attribute.
-     * @see #setRegistrationNumber(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_RegistrationNumber()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Registration Number</em>' attribute.
+	 * @see #setRegistrationNumber(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_RegistrationNumber()
+	 * @model required="true"
+	 * @generated
+	 */
     String getRegistrationNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getRegistrationNumber
-     * <em>Registration Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getRegistrationNumber <em>Registration Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Registration Number</em>' attribute.
-     * @see #getRegistrationNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Registration Number</em>' attribute.
+	 * @see #getRegistrationNumber()
+	 * @generated
+	 */
     void setRegistrationNumber(String value);
 
     /**
@@ -94,15 +80,12 @@ public interface Vehicle extends Asset {
     String getType();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getType <em>Type</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Type</em>' attribute.
-     * @see #getType()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see #getType()
+	 * @generated
+	 */
     void setType(String value);
 
     /**
@@ -123,15 +106,12 @@ public interface Vehicle extends Asset {
     String getMake();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getMake <em>Make</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Make</em>' attribute.
-     * @see #getMake()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getMake <em>Make</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Make</em>' attribute.
+	 * @see #getMake()
+	 * @generated
+	 */
     void setMake(String value);
 
     /**
@@ -152,15 +132,12 @@ public interface Vehicle extends Asset {
     String getModel();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getModel <em>Model</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Model</em>' attribute.
-     * @see #getModel()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getModel <em>Model</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Model</em>' attribute.
+	 * @see #getModel()
+	 * @generated
+	 */
     void setModel(String value);
 
     /**
@@ -181,16 +158,13 @@ public interface Vehicle extends Asset {
     String getEngineNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getEngineNumber
-     * <em>Engine Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getEngineNumber <em>Engine Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Engine Number</em>' attribute.
-     * @see #getEngineNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Engine Number</em>' attribute.
+	 * @see #getEngineNumber()
+	 * @generated
+	 */
     void setEngineNumber(String value);
 
     /**
@@ -211,168 +185,143 @@ public interface Vehicle extends Asset {
     String getChassisNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getChassisNumber
-     * <em>Chassis Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getChassisNumber <em>Chassis Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Chassis Number</em>' attribute.
-     * @see #getChassisNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Chassis Number</em>' attribute.
+	 * @see #getChassisNumber()
+	 * @generated
+	 */
     void setChassisNumber(String value);
 
     /**
-     * Returns the value of the '<em><b>Log Book Number</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Log Book Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Log Book Number</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Log Book Number</em>' attribute.
-     * @see #setLogBookNumber(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_LogBookNumber()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Log Book Number</em>' attribute.
+	 * @see #setLogBookNumber(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_LogBookNumber()
+	 * @model required="true"
+	 * @generated
+	 */
     String getLogBookNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getLogBookNumber
-     * <em>Log Book Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getLogBookNumber <em>Log Book Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Log Book Number</em>' attribute.
-     * @see #getLogBookNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Log Book Number</em>' attribute.
+	 * @see #getLogBookNumber()
+	 * @generated
+	 */
     void setLogBookNumber(String value);
 
     /**
-     * Returns the value of the '<em><b>Insurance Policy Number</b></em>'
-     * attribute. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Insurance Policy Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Insurance Policy Number</em>' attribute isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Insurance Policy Number</em>' attribute.
-     * @see #setInsurancePolicyNumber(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_InsurancePolicyNumber()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Insurance Policy Number</em>' attribute.
+	 * @see #setInsurancePolicyNumber(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_InsurancePolicyNumber()
+	 * @model
+	 * @generated
+	 */
     String getInsurancePolicyNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePolicyNumber
-     * <em>Insurance Policy Number</em>}' attribute. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getInsurancePolicyNumber <em>Insurance Policy Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Insurance Policy Number</em>'
-     *            attribute.
-     * @see #getInsurancePolicyNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Insurance Policy Number</em>' attribute.
+	 * @see #getInsurancePolicyNumber()
+	 * @generated
+	 */
     void setInsurancePolicyNumber(String value);
 
     /**
-     * Returns the value of the '<em><b>Insurance Expiration Date</b></em>'
-     * attribute. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Insurance Expiration Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Insurance Expiration Date</em>' attribute
      * isn't clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Insurance Expiration Date</em>' attribute.
-     * @see #setInsuranceExpirationDate(Date)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_InsuranceExpirationDate()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Insurance Expiration Date</em>' attribute.
+	 * @see #setInsuranceExpirationDate(Date)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_InsuranceExpirationDate()
+	 * @model
+	 * @generated
+	 */
     Date getInsuranceExpirationDate();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate
-     * <em>Insurance Expiration Date</em>}' attribute. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getInsuranceExpirationDate <em>Insurance Expiration Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Insurance Expiration Date</em>'
-     *            attribute.
-     * @see #getInsuranceExpirationDate()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Insurance Expiration Date</em>' attribute.
+	 * @see #getInsuranceExpirationDate()
+	 * @generated
+	 */
     void setInsuranceExpirationDate(Date value);
 
     /**
-     * Returns the value of the '<em><b>Dominant Colour</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Dominant Colour</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Dominant Colour</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Dominant Colour</em>' attribute.
-     * @see #setDominantColour(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_DominantColour()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Dominant Colour</em>' attribute.
+	 * @see #setDominantColour(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_DominantColour()
+	 * @model
+	 * @generated
+	 */
     String getDominantColour();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour
-     * <em>Dominant Colour</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getDominantColour <em>Dominant Colour</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Dominant Colour</em>' attribute.
-     * @see #getDominantColour()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Dominant Colour</em>' attribute.
+	 * @see #getDominantColour()
+	 * @generated
+	 */
     void setDominantColour(String value);
 
     /**
-     * Returns the value of the '<em><b>Capacity In Tonnes</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Capacity In Tonnes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Capacity In Tonnes</em>' attribute isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Capacity In Tonnes</em>' attribute.
-     * @see #setCapacityInTonnes(String)
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_CapacityInTonnes()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Capacity In Tonnes</em>' attribute.
+	 * @see #setCapacityInTonnes(String)
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#getVehicle_CapacityInTonnes()
+	 * @model
+	 * @generated
+	 */
     String getCapacityInTonnes();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getCapacityInTonnes
-     * <em>Capacity In Tonnes</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getCapacityInTonnes <em>Capacity In Tonnes</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Capacity In Tonnes</em>' attribute.
-     * @see #getCapacityInTonnes()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Capacity In Tonnes</em>' attribute.
+	 * @see #getCapacityInTonnes()
+	 * @generated
+	 */
     void setCapacityInTonnes(String value);
 
     /**
@@ -423,15 +372,12 @@ public interface Vehicle extends Asset {
     String getYear();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Year</em>' attribute.
-     * @see #getYear()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Vehicle#getYear <em>Year</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Year</em>' attribute.
+	 * @see #getYear()
+	 * @generated
+	 */
     void setYear(String value);
 
 } // Vehicle

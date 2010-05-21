@@ -13,24 +13,19 @@ import com.agritrace.edairy.model.Person;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Employee</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link com.agritrace.edairy.model.dairy.Employee#getId <em>Id</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Employee#getStartDate <em>Start
- * Date</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Employee#getJobFunction <em>Job
- * Function</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Employee#getNationalId <em>
- * National Id</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Employee#getNhifNumber <em>Nhif
- * Number</em>}</li>
- * <li>{@link com.agritrace.edairy.model.dairy.Employee#getNssfNumber <em>Nssf
- * Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Employee#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Employee#getStartDate <em>Start Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Employee#getJobFunction <em>Job Function</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Employee#getNationalId <em>National Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Employee#getNhifNumber <em>Nhif Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.model.dairy.Employee#getNssfNumber <em>Nssf Number</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getEmployee()
  * @model
  * @generated
@@ -54,15 +49,12 @@ public interface Employee extends Person {
     String getId();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Employee#getId <em>Id</em>}'
-     * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Employee#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
     void setId(String value);
 
     /**
@@ -83,16 +75,13 @@ public interface Employee extends Person {
     Date getStartDate();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Employee#getStartDate
-     * <em>Start Date</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Employee#getStartDate <em>Start Date</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Start Date</em>' attribute.
-     * @see #getStartDate()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Start Date</em>' attribute.
+	 * @see #getStartDate()
+	 * @generated
+	 */
     void setStartDate(Date value);
 
     /**
@@ -113,16 +102,13 @@ public interface Employee extends Person {
     String getJobFunction();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Employee#getJobFunction
-     * <em>Job Function</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Employee#getJobFunction <em>Job Function</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Job Function</em>' attribute.
-     * @see #getJobFunction()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Job Function</em>' attribute.
+	 * @see #getJobFunction()
+	 * @generated
+	 */
     void setJobFunction(String value);
 
     /**
@@ -143,16 +129,13 @@ public interface Employee extends Person {
     String getNationalId();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Employee#getNationalId
-     * <em>National Id</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Employee#getNationalId <em>National Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>National Id</em>' attribute.
-     * @see #getNationalId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>National Id</em>' attribute.
+	 * @see #getNationalId()
+	 * @generated
+	 */
     void setNationalId(String value);
 
     /**
@@ -173,16 +156,13 @@ public interface Employee extends Person {
     String getNhifNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Employee#getNhifNumber
-     * <em>Nhif Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Employee#getNhifNumber <em>Nhif Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Nhif Number</em>' attribute.
-     * @see #getNhifNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Nhif Number</em>' attribute.
+	 * @see #getNhifNumber()
+	 * @generated
+	 */
     void setNhifNumber(String value);
 
     /**
@@ -203,16 +183,13 @@ public interface Employee extends Person {
     String getNssfNumber();
 
     /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.dairy.Employee#getNssfNumber
-     * <em>Nssf Number</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link com.agritrace.edairy.model.dairy.Employee#getNssfNumber <em>Nssf Number</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Nssf Number</em>' attribute.
-     * @see #getNssfNumber()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Nssf Number</em>' attribute.
+	 * @see #getNssfNumber()
+	 * @generated
+	 */
     void setNssfNumber(String value);
 
 } // Employee
