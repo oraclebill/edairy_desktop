@@ -6,17 +6,20 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.StatutoryLocation;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Statutory Location</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Statutory Location</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -27,70 +30,73 @@ import com.agritrace.edairy.model.StatutoryLocation;
  * @generated
  */
 public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocation {
-    /**
+	/**
 	 * The default value of the '{@link #getLandReferenceNumber() <em>Land Reference Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLandReferenceNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String LAND_REFERENCE_NUMBER_EDEFAULT = null;
+	protected static final String LAND_REFERENCE_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLandReferenceNumber() <em>Land Reference Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLandReferenceNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String landReferenceNumber = LAND_REFERENCE_NUMBER_EDEFAULT;
+	protected String landReferenceNumber = LAND_REFERENCE_NUMBER_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected StatutoryLocationImpl() {
+	protected StatutoryLocationImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.STATUTORY_LOCATION;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLandReferenceNumber() {
+	public String getLandReferenceNumber() {
 		return landReferenceNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLandReferenceNumber(String newLandReferenceNumber) {
+	public void setLandReferenceNumber(String newLandReferenceNumber) {
 		String oldLandReferenceNumber = landReferenceNumber;
 		landReferenceNumber = newLandReferenceNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER, oldLandReferenceNumber, landReferenceNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				return getLandReferenceNumber();
@@ -98,12 +104,13 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				setLandReferenceNumber((String)newValue);
@@ -112,12 +119,13 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				setLandReferenceNumber(LAND_REFERENCE_NUMBER_EDEFAULT);
@@ -126,12 +134,13 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				return LAND_REFERENCE_NUMBER_EDEFAULT == null ? landReferenceNumber != null : !LAND_REFERENCE_NUMBER_EDEFAULT.equals(landReferenceNumber);
@@ -139,12 +148,13 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -154,4 +164,4 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 		return result.toString();
 	}
 
-} // StatutoryLocationImpl
+} //StatutoryLocationImpl

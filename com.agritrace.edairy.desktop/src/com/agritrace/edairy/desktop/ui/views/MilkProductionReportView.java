@@ -24,7 +24,7 @@ import com.swtdesigner.SWTResourceManager;
 
 public class MilkProductionReportView extends ViewPart {
 
-    public static final String ID = MilkProductionReportView.class.getName();
+    public static final String ID = "reports.milk.production";
 
     public MilkProductionReportView() {
     }

@@ -7,48 +7,30 @@
 package com.agritrace.edairy.model.dairy.impl;
 
 import com.agritrace.edairy.model.dairy.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.dairy.Asset;
-import com.agritrace.edairy.model.dairy.CollectionJournal;
-import com.agritrace.edairy.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyContainer;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyFunction;
-import com.agritrace.edairy.model.dairy.DairyLocation;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.model.dairy.Employee;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.dairy.MembershipStatus;
-import com.agritrace.edairy.model.dairy.Route;
-import com.agritrace.edairy.model.dairy.Session;
-import com.agritrace.edairy.model.dairy.Supplier;
-import com.agritrace.edairy.model.dairy.Trip;
-import com.agritrace.edairy.model.dairy.Vehicle;
-import com.agritrace.edairy.model.dairy.VendorStatus;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
-    /**
+	/**
 	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static DairyFactory init() {
+	public static DairyFactory init() {
 		try {
 			DairyFactory theDairyFactory = (DairyFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.model/dairy/"); 
 			if (theDairyFactory != null) {
@@ -61,22 +43,23 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		return new DairyFactoryImpl();
 	}
 
-    /**
+	/**
 	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public DairyFactoryImpl() {
+	public DairyFactoryImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EObject create(EClass eClass) {
+	@Override
+	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DairyPackage.VEHICLE: return createVehicle();
 			case DairyPackage.COLLECTION_JOURNAL_LINE: return createCollectionJournalLine();
@@ -96,12 +79,13 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object createFromString(EDataType eDataType, String initialValue) {
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return createMembershipStatusFromString(eDataType, initialValue);
@@ -116,12 +100,13 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String convertToString(EDataType eDataType, Object instanceValue) {
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return convertMembershipStatusToString(eDataType, instanceValue);
@@ -136,228 +121,234 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Vehicle createVehicle() {
+	public Vehicle createVehicle() {
 		VehicleImpl vehicle = new VehicleImpl();
 		return vehicle;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public CollectionJournalLine createCollectionJournalLine() {
+	public CollectionJournalLine createCollectionJournalLine() {
 		CollectionJournalLineImpl collectionJournalLine = new CollectionJournalLineImpl();
 		return collectionJournalLine;
 	}
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated NOT
-     */
-    @Override
-    public Employee createEmployee() {
-	final EmployeeImpl employee = new EmployeeImpl();
-	final Location homeAddress = ModelFactory.eINSTANCE.createLocation();
-	employee.setLocation(homeAddress);
-	return employee;
-    }
-
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DairyLocation createDairyLocation() {
+	public Employee createEmployee() {
+		EmployeeImpl employee = new EmployeeImpl();
+		return employee;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyLocation createDairyLocation() {
 		DairyLocationImpl dairyLocation = new DairyLocationImpl();
 		return dairyLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public CollectionJournal createCollectionJournal() {
+	public CollectionJournal createCollectionJournal() {
 		CollectionJournalImpl collectionJournal = new CollectionJournalImpl();
 		return collectionJournal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Route createRoute() {
+	public Route createRoute() {
 		RouteImpl route = new RouteImpl();
 		return route;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Trip createTrip() {
+	public Trip createTrip() {
 		TripImpl trip = new TripImpl();
 		return trip;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DeliveryJournal createDeliveryJournal() {
+	public DeliveryJournal createDeliveryJournal() {
 		DeliveryJournalImpl deliveryJournal = new DeliveryJournalImpl();
 		return deliveryJournal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Dairy createDairy() {
+	public Dairy createDairy() {
 		DairyImpl dairy = new DairyImpl();
 		return dairy;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Membership createMembership() {
+	public Membership createMembership() {
 		MembershipImpl membership = new MembershipImpl();
 		return membership;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Asset createAsset() {
+	public Asset createAsset() {
 		AssetImpl asset = new AssetImpl();
 		return asset;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DairyContainer createDairyContainer() {
+	public DairyContainer createDairyContainer() {
 		DairyContainerImpl dairyContainer = new DairyContainerImpl();
 		return dairyContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Supplier createSupplier() {
+	public Supplier createSupplier() {
 		SupplierImpl supplier = new SupplierImpl();
 		return supplier;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public MembershipStatus createMembershipStatusFromString(EDataType eDataType, String initialValue) {
+	public MembershipStatus createMembershipStatusFromString(EDataType eDataType, String initialValue) {
 		MembershipStatus result = MembershipStatus.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertMembershipStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertMembershipStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Session createSessionFromString(EDataType eDataType, String initialValue) {
+	public Session createSessionFromString(EDataType eDataType, String initialValue) {
 		Session result = Session.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertSessionToString(EDataType eDataType, Object instanceValue) {
+	public String convertSessionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public VendorStatus createVendorStatusFromString(EDataType eDataType, String initialValue) {
+	public VendorStatus createVendorStatusFromString(EDataType eDataType, String initialValue) {
 		VendorStatus result = VendorStatus.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertVendorStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertVendorStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public DairyFunction createDairyFunctionFromString(EDataType eDataType, String initialValue) {
+	public DairyFunction createDairyFunctionFromString(EDataType eDataType, String initialValue) {
 		DairyFunction result = DairyFunction.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertDairyFunctionToString(EDataType eDataType, Object instanceValue) {
+	public String convertDairyFunctionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DairyPackage getDairyPackage() {
+	public DairyPackage getDairyPackage() {
 		return (DairyPackage)getEPackage();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
-    @Deprecated
-    public static DairyPackage getPackage() {
+	@Deprecated
+	public static DairyPackage getPackage() {
 		return DairyPackage.eINSTANCE;
 	}
 
-} // DairyFactoryImpl
+} //DairyFactoryImpl

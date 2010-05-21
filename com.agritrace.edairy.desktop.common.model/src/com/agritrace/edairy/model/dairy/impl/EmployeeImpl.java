@@ -6,19 +6,23 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
+import com.agritrace.edairy.model.dairy.DairyPackage;
+import com.agritrace.edairy.model.dairy.Employee;
+
+import com.agritrace.edairy.model.impl.PersonImpl;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Employee;
-import com.agritrace.edairy.model.impl.PersonImpl;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Employee</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Employee</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -34,265 +38,278 @@ import com.agritrace.edairy.model.impl.PersonImpl;
  * @generated
  */
 public class EmployeeImpl extends PersonImpl implements Employee {
-    /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
-    protected static final String ID_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
-    /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
-    protected String id = ID_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getStartDate() <em>Start Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getStartDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date START_DATE_EDEFAULT = null;
+	protected static final Date START_DATE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getStartDate() <em>Start Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getStartDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date startDate = START_DATE_EDEFAULT;
+	protected Date startDate = START_DATE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getJobFunction() <em>Job Function</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getJobFunction()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String JOB_FUNCTION_EDEFAULT = null;
+	protected static final String JOB_FUNCTION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getJobFunction() <em>Job Function</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getJobFunction()
 	 * @generated
 	 * @ordered
 	 */
-    protected String jobFunction = JOB_FUNCTION_EDEFAULT;
+	protected String jobFunction = JOB_FUNCTION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNationalId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NATIONAL_ID_EDEFAULT = null;
+	protected static final String NATIONAL_ID_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNationalId()
 	 * @generated
 	 * @ordered
 	 */
-    protected String nationalId = NATIONAL_ID_EDEFAULT;
+	protected String nationalId = NATIONAL_ID_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNhifNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NHIF_NUMBER_EDEFAULT = null;
+	protected static final String NHIF_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNhifNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String nhifNumber = NHIF_NUMBER_EDEFAULT;
+	protected String nhifNumber = NHIF_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNssfNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NSSF_NUMBER_EDEFAULT = null;
+	protected static final String NSSF_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNssfNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String nssfNumber = NSSF_NUMBER_EDEFAULT;
+	protected String nssfNumber = NSSF_NUMBER_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected EmployeeImpl() {
+	protected EmployeeImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.EMPLOYEE;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getId() {
+	public String getId() {
 		return id;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setId(String newId) {
+	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__ID, oldId, id));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setStartDate(Date newStartDate) {
+	public void setStartDate(Date newStartDate) {
 		Date oldStartDate = startDate;
 		startDate = newStartDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__START_DATE, oldStartDate, startDate));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getJobFunction() {
+	public String getJobFunction() {
 		return jobFunction;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setJobFunction(String newJobFunction) {
+	public void setJobFunction(String newJobFunction) {
 		String oldJobFunction = jobFunction;
 		jobFunction = newJobFunction;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__JOB_FUNCTION, oldJobFunction, jobFunction));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getNationalId() {
+	public String getNationalId() {
 		return nationalId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setNationalId(String newNationalId) {
+	public void setNationalId(String newNationalId) {
 		String oldNationalId = nationalId;
 		nationalId = newNationalId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__NATIONAL_ID, oldNationalId, nationalId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getNhifNumber() {
+	public String getNhifNumber() {
 		return nhifNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setNhifNumber(String newNhifNumber) {
+	public void setNhifNumber(String newNhifNumber) {
 		String oldNhifNumber = nhifNumber;
 		nhifNumber = newNhifNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__NHIF_NUMBER, oldNhifNumber, nhifNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getNssfNumber() {
+	public String getNssfNumber() {
 		return nssfNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setNssfNumber(String newNssfNumber) {
+	public void setNssfNumber(String newNssfNumber) {
 		String oldNssfNumber = nssfNumber;
 		nssfNumber = newNssfNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__NSSF_NUMBER, oldNssfNumber, nssfNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				return getId();
@@ -310,12 +327,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				setId((String)newValue);
@@ -339,12 +357,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				setId(ID_EDEFAULT);
@@ -368,12 +387,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
@@ -391,12 +411,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -416,4 +437,4 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		return result.toString();
 	}
 
-} // EmployeeImpl
+} //EmployeeImpl

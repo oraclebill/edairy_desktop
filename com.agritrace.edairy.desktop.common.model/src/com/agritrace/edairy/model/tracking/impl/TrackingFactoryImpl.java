@@ -7,37 +7,30 @@
 package com.agritrace.edairy.model.tracking.impl;
 
 import com.agritrace.edairy.model.tracking.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.model.tracking.AcquisitionType;
-import com.agritrace.edairy.model.tracking.AnimalIdentifier;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.Mechanism;
-import com.agritrace.edairy.model.tracking.Purpose;
-import com.agritrace.edairy.model.tracking.RearingMode;
-import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
-import com.agritrace.edairy.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
-import com.agritrace.edairy.model.tracking.TrackingPackage;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory {
-    /**
+	/**
 	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static TrackingFactory init() {
+	public static TrackingFactory init() {
 		try {
 			TrackingFactory theTrackingFactory = (TrackingFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.model/tracking/"); 
 			if (theTrackingFactory != null) {
@@ -50,22 +43,23 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 		return new TrackingFactoryImpl();
 	}
 
-    /**
+	/**
 	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public TrackingFactoryImpl() {
+	public TrackingFactoryImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EObject create(EClass eClass) {
+	@Override
+	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case TrackingPackage.FARM: return createFarm();
 			case TrackingPackage.CONTAINER: return createContainer();
@@ -77,12 +71,13 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object createFromString(EDataType eDataType, String initialValue) {
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case TrackingPackage.ACQUISITION_TYPE:
 				return createAcquisitionTypeFromString(eDataType, initialValue);
@@ -97,12 +92,13 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String convertToString(EDataType eDataType, Object instanceValue) {
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case TrackingPackage.ACQUISITION_TYPE:
 				return convertAcquisitionTypeToString(eDataType, instanceValue);
@@ -117,145 +113,154 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Farm createFarm() {
+	public Farm createFarm() {
 		FarmImpl farm = new FarmImpl();
 		return farm;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public com.agritrace.edairy.model.tracking.Container createContainer() {
+	public com.agritrace.edairy.model.tracking.Container createContainer() {
 		ContainerImpl container = new ContainerImpl();
 		return container;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public RegisteredAnimal createRegisteredAnimal() {
+	public RegisteredAnimal createRegisteredAnimal() {
 		RegisteredAnimalImpl registeredAnimal = new RegisteredAnimalImpl();
 		return registeredAnimal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public ReferenceAnimalType createReferenceAnimalType() {
+	public ReferenceAnimalType createReferenceAnimalType() {
 		ReferenceAnimalTypeImpl referenceAnimalType = new ReferenceAnimalTypeImpl();
 		return referenceAnimalType;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public AnimalIdentifier createAnimalIdentifier() {
+	public AnimalIdentifier createAnimalIdentifier() {
 		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
 		return animalIdentifier;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public AcquisitionType createAcquisitionTypeFromString(EDataType eDataType, String initialValue) {
+	public AcquisitionType createAcquisitionTypeFromString(EDataType eDataType, String initialValue) {
 		AcquisitionType result = AcquisitionType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertAcquisitionTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertAcquisitionTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Purpose createPurposeFromString(EDataType eDataType, String initialValue) {
+	public Purpose createPurposeFromString(EDataType eDataType, String initialValue) {
 		Purpose result = Purpose.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertPurposeToString(EDataType eDataType, Object instanceValue) {
+	public String convertPurposeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public RearingMode createRearingModeFromString(EDataType eDataType, String initialValue) {
+	public RearingMode createRearingModeFromString(EDataType eDataType, String initialValue) {
 		RearingMode result = RearingMode.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertRearingModeToString(EDataType eDataType, Object instanceValue) {
+	public String convertRearingModeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Mechanism createMechanismFromString(EDataType eDataType, String initialValue) {
+	public Mechanism createMechanismFromString(EDataType eDataType, String initialValue) {
 		Mechanism result = Mechanism.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertMechanismToString(EDataType eDataType, Object instanceValue) {
+	public String convertMechanismToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public TrackingPackage getTrackingPackage() {
+	public TrackingPackage getTrackingPackage() {
 		return (TrackingPackage)getEPackage();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
-    @Deprecated
-    public static TrackingPackage getPackage() {
+	@Deprecated
+	public static TrackingPackage getPackage() {
 		return TrackingPackage.eINSTANCE;
 	}
 
-} // TrackingFactoryImpl
+} //TrackingFactoryImpl

@@ -6,20 +6,6 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.DairyContainer;
@@ -28,11 +14,32 @@ import com.agritrace.edairy.model.dairy.Employee;
 import com.agritrace.edairy.model.dairy.Route;
 import com.agritrace.edairy.model.dairy.Session;
 import com.agritrace.edairy.model.dairy.Vehicle;
+
 import com.agritrace.edairy.model.tracking.Container;
 
+import java.math.BigDecimal;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Collection Journal</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Collection Journal</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -53,254 +60,266 @@ import com.agritrace.edairy.model.tracking.Container;
  * @generated
  */
 public class CollectionJournalImpl extends EObjectImpl implements CollectionJournal {
-    /**
-     * The cached value of the '{@link #getJournalEntries()
-     * <em>Journal Entries</em>}' containment reference list. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getJournalEntries()
-     * @generated
-     * @ordered
-     */
-    protected EList<CollectionJournalLine> journalEntries;
+	/**
+	 * The cached value of the '{@link #getJournalEntries() <em>Journal Entries</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalEntries()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CollectionJournalLine> journalEntries;
 
-    /**
+	/**
 	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReferenceNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String REFERENCE_NUMBER_EDEFAULT = null;
+	protected static final String REFERENCE_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReferenceNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String referenceNumber = REFERENCE_NUMBER_EDEFAULT;
+	protected String referenceNumber = REFERENCE_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getJournalDate() <em>Journal Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getJournalDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date JOURNAL_DATE_EDEFAULT = null;
+	protected static final Date JOURNAL_DATE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getJournalDate() <em>Journal Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getJournalDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date journalDate = JOURNAL_DATE_EDEFAULT;
+	protected Date journalDate = JOURNAL_DATE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getSession() <em>Session</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSession()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Session SESSION_EDEFAULT = Session.EARLY_MORNING;
+	protected static final Session SESSION_EDEFAULT = Session.EARLY_MORNING;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getSession() <em>Session</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSession()
 	 * @generated
 	 * @ordered
 	 */
-    protected Session session = SESSION_EDEFAULT;
+	protected Session session = SESSION_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDriver()
 	 * @generated
 	 * @ordered
 	 */
-    protected Employee driver;
+	protected Employee driver;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRoute() <em>Route</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRoute()
 	 * @generated
 	 * @ordered
 	 */
-    protected Route route;
+	protected Route route;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFarmContainer() <em>Farm Container</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFarmContainer()
 	 * @generated
 	 * @ordered
 	 */
-    protected Container farmContainer;
+	protected Container farmContainer;
 
-    /**
-     * The cached value of the '{@link #getBin() <em>Bin</em>}' reference. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getBin()
-     * @generated
-     * @ordered
-     */
-    protected DairyContainer bin;
+	/**
+	 * The cached value of the '{@link #getBin() <em>Bin</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBin()
+	 * @generated
+	 * @ordered
+	 */
+	protected DairyContainer bin;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getVehicle() <em>Vehicle</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getVehicle()
 	 * @generated
 	 * @ordered
 	 */
-    protected Vehicle vehicle;
+	protected Vehicle vehicle;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDriverTotal() <em>Driver Total</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDriverTotal()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final BigDecimal DRIVER_TOTAL_EDEFAULT = null;
+	protected static final BigDecimal DRIVER_TOTAL_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDriverTotal() <em>Driver Total</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDriverTotal()
 	 * @generated
 	 * @ordered
 	 */
-    protected BigDecimal driverTotal = DRIVER_TOTAL_EDEFAULT;
+	protected BigDecimal driverTotal = DRIVER_TOTAL_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getRecordTotal() <em>Record Total</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRecordTotal()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final BigDecimal RECORD_TOTAL_EDEFAULT = new BigDecimal("0");
+	protected static final BigDecimal RECORD_TOTAL_EDEFAULT = new BigDecimal("0");
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRecordTotal() <em>Record Total</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRecordTotal()
 	 * @generated
 	 * @ordered
 	 */
-    protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
+	protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected CollectionJournalImpl() {
+	protected CollectionJournalImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.COLLECTION_JOURNAL;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<CollectionJournalLine> getJournalEntries() {
+	public EList<CollectionJournalLine> getJournalEntries() {
 		if (journalEntries == null) {
 			journalEntries = new EObjectContainmentEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
 		}
 		return journalEntries;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getReferenceNumber() {
+	public String getReferenceNumber() {
 		return referenceNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setReferenceNumber(String newReferenceNumber) {
+	public void setReferenceNumber(String newReferenceNumber) {
 		String oldReferenceNumber = referenceNumber;
 		referenceNumber = newReferenceNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getJournalDate() {
+	public Date getJournalDate() {
 		return journalDate;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setJournalDate(Date newJournalDate) {
+	public void setJournalDate(Date newJournalDate) {
 		Date oldJournalDate = journalDate;
 		journalDate = newJournalDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE, oldJournalDate, journalDate));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Session getSession() {
+	public Session getSession() {
 		return session;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setSession(Session newSession) {
+	public void setSession(Session newSession) {
 		Session oldSession = session;
 		session = newSession == null ? SESSION_EDEFAULT : newSession;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__SESSION, oldSession, session));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Employee getDriver() {
+	public Employee getDriver() {
 		if (driver != null && driver.eIsProxy()) {
 			InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
@@ -312,32 +331,33 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return driver;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Employee basicGetDriver() {
+	public Employee basicGetDriver() {
 		return driver;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDriver(Employee newDriver) {
+	public void setDriver(Employee newDriver) {
 		Employee oldDriver = driver;
 		driver = newDriver;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__DRIVER, oldDriver, driver));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Route getRoute() {
+	public Route getRoute() {
 		if (route != null && route.eIsProxy()) {
 			InternalEObject oldRoute = (InternalEObject)route;
 			route = (Route)eResolveProxy(oldRoute);
@@ -349,32 +369,33 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return route;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Route basicGetRoute() {
+	public Route basicGetRoute() {
 		return route;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRoute(Route newRoute) {
+	public void setRoute(Route newRoute) {
 		Route oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__ROUTE, oldRoute, route));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Container getFarmContainer() {
+	public Container getFarmContainer() {
 		if (farmContainer != null && farmContainer.eIsProxy()) {
 			InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
 			farmContainer = (Container)eResolveProxy(oldFarmContainer);
@@ -386,32 +407,33 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return farmContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Container basicGetFarmContainer() {
+	public Container basicGetFarmContainer() {
 		return farmContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFarmContainer(Container newFarmContainer) {
+	public void setFarmContainer(Container newFarmContainer) {
 		Container oldFarmContainer = farmContainer;
 		farmContainer = newFarmContainer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER, oldFarmContainer, farmContainer));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DairyContainer getBin() {
+	public DairyContainer getBin() {
 		if (bin != null && bin.eIsProxy()) {
 			InternalEObject oldBin = (InternalEObject)bin;
 			bin = (DairyContainer)eResolveProxy(oldBin);
@@ -423,32 +445,33 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return bin;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public DairyContainer basicGetBin() {
+	public DairyContainer basicGetBin() {
 		return bin;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setBin(DairyContainer newBin) {
+	public void setBin(DairyContainer newBin) {
 		DairyContainer oldBin = bin;
 		bin = newBin;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__BIN, oldBin, bin));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Vehicle getVehicle() {
+	public Vehicle getVehicle() {
 		if (vehicle != null && vehicle.eIsProxy()) {
 			InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
@@ -460,74 +483,76 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return vehicle;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Vehicle basicGetVehicle() {
+	public Vehicle basicGetVehicle() {
 		return vehicle;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setVehicle(Vehicle newVehicle) {
+	public void setVehicle(Vehicle newVehicle) {
 		Vehicle oldVehicle = vehicle;
 		vehicle = newVehicle;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__VEHICLE, oldVehicle, vehicle));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public BigDecimal getDriverTotal() {
+	public BigDecimal getDriverTotal() {
 		return driverTotal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDriverTotal(BigDecimal newDriverTotal) {
+	public void setDriverTotal(BigDecimal newDriverTotal) {
 		BigDecimal oldDriverTotal = driverTotal;
 		driverTotal = newDriverTotal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL, oldDriverTotal, driverTotal));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public BigDecimal getRecordTotal() {
+	public BigDecimal getRecordTotal() {
 		return recordTotal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRecordTotal(BigDecimal newRecordTotal) {
+	public void setRecordTotal(BigDecimal newRecordTotal) {
 		BigDecimal oldRecordTotal = recordTotal;
 		recordTotal = newRecordTotal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL, oldRecordTotal, recordTotal));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
 				return ((InternalEList<?>)getJournalEntries()).basicRemove(otherEnd, msgs);
@@ -535,12 +560,13 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
 				return getJournalEntries();
@@ -573,13 +599,14 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
@@ -619,12 +646,13 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
@@ -663,12 +691,13 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
 				return journalEntries != null && !journalEntries.isEmpty();
@@ -696,12 +725,13 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -719,4 +749,4 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return result.toString();
 	}
 
-} // CollectionJournalImpl
+} //CollectionJournalImpl

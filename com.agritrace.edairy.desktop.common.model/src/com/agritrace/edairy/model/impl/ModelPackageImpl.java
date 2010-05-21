@@ -6,16 +6,8 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import com.agritrace.edairy.dairy.model.account.AccountPackage;
-import com.agritrace.edairy.dairy.model.account.impl.AccountPackageImpl;
+
 import com.agritrace.edairy.model.Audited;
 import com.agritrace.edairy.model.Company;
 import com.agritrace.edairy.model.ContactMethod;
@@ -32,162 +24,195 @@ import com.agritrace.edairy.model.Person;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.StatutoryLocation;
 import com.agritrace.edairy.model.UnitOfMeasure;
+
 import com.agritrace.edairy.model.dairy.DairyPackage;
+
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
 import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
+
 import com.agritrace.edairy.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.model.tracking.TrackingPackage;
+
 import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass partyEClass = null;
+	private EClass partyEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass mapLocationEClass = null;
+	private EClass mapLocationEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass postalLocationEClass = null;
+	private EClass postalLocationEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass statutoryLocationEClass = null;
+	private EClass statutoryLocationEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass auditedEClass = null;
+	private EClass auditedEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass personEClass = null;
+	private EClass personEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass companyEClass = null;
+	private EClass companyEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass descriptiveLocationEClass = null;
+	private EClass descriptiveLocationEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass locationEClass = null;
+	private EClass locationEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass contactMethodEClass = null;
+	private EClass contactMethodEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum genderEEnum = null;
+	private EEnum genderEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum contactMethodTypeEEnum = null;
+	private EEnum contactMethodTypeEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum unitOfMeasureEEnum = null;
+	private EEnum unitOfMeasureEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum containerTypeEEnum = null;
+	private EEnum containerTypeEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EDataType transactionIDEDataType = null;
+	private EDataType transactionIDEDataType = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EDataType uniqueIDEDataType = null;
+	private EDataType uniqueIDEDataType = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EDataType imageReferenceEDataType = null;
+	private EDataType imageReferenceEDataType = null;
 
-    /**
-     * Creates an instance of the model <b>Package</b>, registered with
-     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-     * package package URI value.
-     * <p>
-     * Note: the correct way to create the package is via the static factory
-     * method {@link #init init()}, which also performs initialization of the
-     * package, or returns the registered package, if one already exists. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see com.agritrace.edairy.model.ModelPackage#eNS_URI
-     * @see #init()
-     * @generated
-     */
-    private ModelPackageImpl() {
+	/**
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.ecore.EPackage.Registry
+	 * @see com.agritrace.edairy.model.ModelPackage#eNS_URI
+	 * @see #init()
+	 * @generated
+	 */
+	private ModelPackageImpl() {
 		super(eNS_URI, ModelFactory.eINSTANCE);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private static boolean isInited = false;
+	private static boolean isInited = false;
 
-    /**
-     * Creates, registers, and initializes the <b>Package</b> for this model,
-     * and for any others upon which it depends.
-     * 
-     * <p>
-     * This method is used to initialize {@link ModelPackage#eINSTANCE} when
-     * that field is accessed. Clients should not invoke it directly. Instead,
-     * they should simply access that field to obtain the package. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #eNS_URI
-     * @see #createPackageContents()
-     * @see #initializePackageContents()
-     * @generated
-     */
-    public static ModelPackage init() {
+	/**
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link ModelPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
+	 * @generated
+	 */
+	public static ModelPackage init() {
 		if (isInited) return (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Obtain or create and register package
@@ -224,516 +249,534 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		return theModelPackage;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getParty() {
+	public EClass getParty() {
 		return partyEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getParty_PartyId() {
+	public EAttribute getParty_PartyId() {
 		return (EAttribute)partyEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getParty_PhoneNumber() {
+	public EAttribute getParty_PhoneNumber() {
 		return (EAttribute)partyEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getParty_Location() {
+	public EReference getParty_Location() {
 		return (EReference)partyEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getParty_ContactMethods() {
+	public EReference getParty_ContactMethods() {
 		return (EReference)partyEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getParty_Name() {
+	public EAttribute getParty_Name() {
 		return (EAttribute)partyEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getMapLocation() {
+	public EClass getMapLocation() {
 		return mapLocationEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getMapLocation_Longitude() {
+	public EAttribute getMapLocation_Longitude() {
 		return (EAttribute)mapLocationEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getMapLocation_Latitude() {
+	public EAttribute getMapLocation_Latitude() {
 		return (EAttribute)mapLocationEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getPostalLocation() {
+	public EClass getPostalLocation() {
 		return postalLocationEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Address() {
+	public EAttribute getPostalLocation_Address() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Section() {
+	public EAttribute getPostalLocation_Section() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Estate() {
+	public EAttribute getPostalLocation_Estate() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Village() {
+	public EAttribute getPostalLocation_Village() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_SubLocation() {
+	public EAttribute getPostalLocation_SubLocation() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Location() {
+	public EAttribute getPostalLocation_Location() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_District() {
+	public EAttribute getPostalLocation_District() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Division() {
+	public EAttribute getPostalLocation_Division() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_Province() {
+	public EAttribute getPostalLocation_Province() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPostalLocation_PostalCode() {
+	public EAttribute getPostalLocation_PostalCode() {
 		return (EAttribute)postalLocationEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getStatutoryLocation() {
+	public EClass getStatutoryLocation() {
 		return statutoryLocationEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getStatutoryLocation_LandReferenceNumber() {
+	public EAttribute getStatutoryLocation_LandReferenceNumber() {
 		return (EAttribute)statutoryLocationEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getAudited() {
+	public EClass getAudited() {
 		return auditedEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAudited_LastUpdated() {
+	public EAttribute getAudited_LastUpdated() {
 		return (EAttribute)auditedEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAudited_VoidDate() {
+	public EAttribute getAudited_VoidDate() {
 		return (EAttribute)auditedEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getPerson() {
+	public EClass getPerson() {
 		return personEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_Photo() {
+	public EAttribute getPerson_Photo() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_Honorific() {
+	public EAttribute getPerson_Honorific() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_FamilyName() {
+	public EAttribute getPerson_FamilyName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_GivenName() {
+	public EAttribute getPerson_GivenName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_MiddleName() {
+	public EAttribute getPerson_MiddleName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_AdditionalNames() {
+	public EAttribute getPerson_AdditionalNames() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_Suffix() {
+	public EAttribute getPerson_Suffix() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getPerson_NickName() {
+	public EAttribute getPerson_NickName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getCompany() {
+	public EClass getCompany() {
 		return companyEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getCompany_Contacts() {
+	public EReference getCompany_Contacts() {
 		return (EReference)companyEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getCompany_LegalName() {
+	public EAttribute getCompany_LegalName() {
 		return (EAttribute)companyEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getCompany_CompanyName() {
+	public EAttribute getCompany_CompanyName() {
 		return (EAttribute)companyEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getDescriptiveLocation() {
+	public EClass getDescriptiveLocation() {
 		return descriptiveLocationEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getDescriptiveLocation_Directions() {
+	public EAttribute getDescriptiveLocation_Directions() {
 		return (EAttribute)descriptiveLocationEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDescriptiveLocation_Landmarks() {
+	public EAttribute getDescriptiveLocation_Landmarks() {
 		return (EAttribute)descriptiveLocationEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getLocation() {
+	public EClass getLocation() {
 		return locationEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getLocation_PostalLocation() {
+	public EReference getLocation_PostalLocation() {
 		return (EReference)locationEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getLocation_MapLocation() {
+	public EReference getLocation_MapLocation() {
 		return (EReference)locationEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getLocation_StatutoryLocation() {
+	public EReference getLocation_StatutoryLocation() {
 		return (EReference)locationEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getLocation_DescriptiveLocation() {
+	public EReference getLocation_DescriptiveLocation() {
 		return (EReference)locationEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getContactMethod() {
+	public EClass getContactMethod() {
 		return contactMethodEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getContactMethod_CmType() {
+	public EAttribute getContactMethod_CmType() {
 		return (EAttribute)contactMethodEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getContactMethod_CmValue() {
+	public EAttribute getContactMethod_CmValue() {
 		return (EAttribute)contactMethodEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getGender() {
+	public EEnum getGender() {
 		return genderEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getContactMethodType() {
+	public EEnum getContactMethodType() {
 		return contactMethodTypeEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getUnitOfMeasure() {
+	public EEnum getUnitOfMeasure() {
 		return unitOfMeasureEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getContainerType() {
+	public EEnum getContainerType() {
 		return containerTypeEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EDataType getTransactionID() {
+	public EDataType getTransactionID() {
 		return transactionIDEDataType;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EDataType getUniqueID() {
+	public EDataType getUniqueID() {
 		return uniqueIDEDataType;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EDataType getImageReference() {
+	public EDataType getImageReference() {
 		return imageReferenceEDataType;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public ModelFactory getModelFactory() {
+	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isCreated = false;
+	private boolean isCreated = false;
 
-    /**
+	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void createPackageContents() {
+	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
 
@@ -809,20 +852,21 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		imageReferenceEDataType = createEDataType(IMAGE_REFERENCE);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isInitialized = false;
+	private boolean isInitialized = false;
 
-    /**
-     * Complete the initialization of the package and its meta-model. This
-     * method is guarded to have no affect on any invocation but its first. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public void initializePackageContents() {
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -939,14 +983,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createExtendedMetaDataAnnotations();
 	}
 
-    /**
-     * Initializes the annotations for
-     * <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    protected void createExtendedMetaDataAnnotations() {
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
 		  (getAudited_VoidDate(), 
@@ -956,4 +999,4 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   });
 	}
 
-} // ModelPackageImpl
+} //ModelPackageImpl

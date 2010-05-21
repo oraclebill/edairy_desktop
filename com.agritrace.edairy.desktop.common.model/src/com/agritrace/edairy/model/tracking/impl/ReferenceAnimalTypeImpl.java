@@ -6,17 +6,20 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Reference Animal Type</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Reference Animal Type</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -29,148 +32,155 @@ import com.agritrace.edairy.model.tracking.TrackingPackage;
  * @generated
  */
 public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAnimalType {
-    /**
+	/**
 	 * The default value of the '{@link #getAnimalTypeId() <em>Animal Type Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAnimalTypeId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final long ANIMAL_TYPE_ID_EDEFAULT = 0L;
+	protected static final long ANIMAL_TYPE_ID_EDEFAULT = 0L;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getAnimalTypeId() <em>Animal Type Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAnimalTypeId()
 	 * @generated
 	 * @ordered
 	 */
-    protected long animalTypeId = ANIMAL_TYPE_ID_EDEFAULT;
+	protected long animalTypeId = ANIMAL_TYPE_ID_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getSpecies() <em>Species</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSpecies()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String SPECIES_EDEFAULT = null;
+	protected static final String SPECIES_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getSpecies() <em>Species</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSpecies()
 	 * @generated
 	 * @ordered
 	 */
-    protected String species = SPECIES_EDEFAULT;
+	protected String species = SPECIES_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getBreed() <em>Breed</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getBreed()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String BREED_EDEFAULT = null;
+	protected static final String BREED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getBreed() <em>Breed</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getBreed()
 	 * @generated
 	 * @ordered
 	 */
-    protected String breed = BREED_EDEFAULT;
+	protected String breed = BREED_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected ReferenceAnimalTypeImpl() {
+	protected ReferenceAnimalTypeImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return TrackingPackage.Literals.REFERENCE_ANIMAL_TYPE;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public long getAnimalTypeId() {
+	public long getAnimalTypeId() {
 		return animalTypeId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setAnimalTypeId(long newAnimalTypeId) {
+	public void setAnimalTypeId(long newAnimalTypeId) {
 		long oldAnimalTypeId = animalTypeId;
 		animalTypeId = newAnimalTypeId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID, oldAnimalTypeId, animalTypeId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getSpecies() {
+	public String getSpecies() {
 		return species;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setSpecies(String newSpecies) {
+	public void setSpecies(String newSpecies) {
 		String oldSpecies = species;
 		species = newSpecies;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES, oldSpecies, species));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getBreed() {
+	public String getBreed() {
 		return breed;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setBreed(String newBreed) {
+	public void setBreed(String newBreed) {
 		String oldBreed = breed;
 		breed = newBreed;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REFERENCE_ANIMAL_TYPE__BREED, oldBreed, breed));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
 				return getAnimalTypeId();
@@ -182,12 +192,13 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
 				setAnimalTypeId((Long)newValue);
@@ -202,12 +213,13 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
 				setAnimalTypeId(ANIMAL_TYPE_ID_EDEFAULT);
@@ -222,12 +234,13 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
 				return animalTypeId != ANIMAL_TYPE_ID_EDEFAULT;
@@ -239,12 +252,13 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -258,4 +272,4 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 		return result.toString();
 	}
 
-} // ReferenceAnimalTypeImpl
+} //ReferenceAnimalTypeImpl

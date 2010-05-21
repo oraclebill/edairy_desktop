@@ -6,17 +6,20 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Postal Location</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Postal Location</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -36,419 +39,442 @@ import com.agritrace.edairy.model.PostalLocation;
  * @generated
  */
 public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
-    /**
+	/**
 	 * The default value of the '{@link #getAddress() <em>Address</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAddress()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String ADDRESS_EDEFAULT = null;
+	protected static final String ADDRESS_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getAddress() <em>Address</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAddress()
 	 * @generated
 	 * @ordered
 	 */
-    protected String address = ADDRESS_EDEFAULT;
+	protected String address = ADDRESS_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getSection() <em>Section</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSection()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String SECTION_EDEFAULT = null;
+	protected static final String SECTION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getSection() <em>Section</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSection()
 	 * @generated
 	 * @ordered
 	 */
-    protected String section = SECTION_EDEFAULT;
+	protected String section = SECTION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getEstate() <em>Estate</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getEstate()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String ESTATE_EDEFAULT = null;
+	protected static final String ESTATE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getEstate() <em>Estate</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getEstate()
 	 * @generated
 	 * @ordered
 	 */
-    protected String estate = ESTATE_EDEFAULT;
+	protected String estate = ESTATE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getVillage() <em>Village</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getVillage()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String VILLAGE_EDEFAULT = null;
+	protected static final String VILLAGE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getVillage() <em>Village</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getVillage()
 	 * @generated
 	 * @ordered
 	 */
-    protected String village = VILLAGE_EDEFAULT;
+	protected String village = VILLAGE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getSubLocation() <em>Sub Location</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSubLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String SUB_LOCATION_EDEFAULT = null;
+	protected static final String SUB_LOCATION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getSubLocation() <em>Sub Location</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSubLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected String subLocation = SUB_LOCATION_EDEFAULT;
+	protected String subLocation = SUB_LOCATION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String LOCATION_EDEFAULT = null;
+	protected static final String LOCATION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLocation() <em>Location</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected String location = LOCATION_EDEFAULT;
+	protected String location = LOCATION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDistrict() <em>District</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDistrict()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DISTRICT_EDEFAULT = null;
+	protected static final String DISTRICT_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDistrict() <em>District</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDistrict()
 	 * @generated
 	 * @ordered
 	 */
-    protected String district = DISTRICT_EDEFAULT;
+	protected String district = DISTRICT_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDivision() <em>Division</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDivision()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DIVISION_EDEFAULT = null;
+	protected static final String DIVISION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDivision() <em>Division</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDivision()
 	 * @generated
 	 * @ordered
 	 */
-    protected String division = DIVISION_EDEFAULT;
+	protected String division = DIVISION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getProvince() <em>Province</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getProvince()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String PROVINCE_EDEFAULT = null;
+	protected static final String PROVINCE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getProvince() <em>Province</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getProvince()
 	 * @generated
 	 * @ordered
 	 */
-    protected String province = PROVINCE_EDEFAULT;
+	protected String province = PROVINCE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getPostalCode() <em>Postal Code</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPostalCode()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String POSTAL_CODE_EDEFAULT = null;
+	protected static final String POSTAL_CODE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getPostalCode() <em>Postal Code</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPostalCode()
 	 * @generated
 	 * @ordered
 	 */
-    protected String postalCode = POSTAL_CODE_EDEFAULT;
+	protected String postalCode = POSTAL_CODE_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected PostalLocationImpl() {
+	protected PostalLocationImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.POSTAL_LOCATION;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setAddress(String newAddress) {
+	public void setAddress(String newAddress) {
 		String oldAddress = address;
 		address = newAddress;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__ADDRESS, oldAddress, address));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getSection() {
+	public String getSection() {
 		return section;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setSection(String newSection) {
+	public void setSection(String newSection) {
 		String oldSection = section;
 		section = newSection;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__SECTION, oldSection, section));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getEstate() {
+	public String getEstate() {
 		return estate;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setEstate(String newEstate) {
+	public void setEstate(String newEstate) {
 		String oldEstate = estate;
 		estate = newEstate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__ESTATE, oldEstate, estate));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getVillage() {
+	public String getVillage() {
 		return village;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setVillage(String newVillage) {
+	public void setVillage(String newVillage) {
 		String oldVillage = village;
 		village = newVillage;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__VILLAGE, oldVillage, village));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getSubLocation() {
+	public String getSubLocation() {
 		return subLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setSubLocation(String newSubLocation) {
+	public void setSubLocation(String newSubLocation) {
 		String oldSubLocation = subLocation;
 		subLocation = newSubLocation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__SUB_LOCATION, oldSubLocation, subLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLocation() {
+	public String getLocation() {
 		return location;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLocation(String newLocation) {
+	public void setLocation(String newLocation) {
 		String oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__LOCATION, oldLocation, location));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDistrict() {
+	public String getDistrict() {
 		return district;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDistrict(String newDistrict) {
+	public void setDistrict(String newDistrict) {
 		String oldDistrict = district;
 		district = newDistrict;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__DISTRICT, oldDistrict, district));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDivision() {
+	public String getDivision() {
 		return division;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDivision(String newDivision) {
+	public void setDivision(String newDivision) {
 		String oldDivision = division;
 		division = newDivision;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__DIVISION, oldDivision, division));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getProvince() {
+	public String getProvince() {
 		return province;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setProvince(String newProvince) {
+	public void setProvince(String newProvince) {
 		String oldProvince = province;
 		province = newProvince;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__PROVINCE, oldProvince, province));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setPostalCode(String newPostalCode) {
+	public void setPostalCode(String newPostalCode) {
 		String oldPostalCode = postalCode;
 		postalCode = newPostalCode;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__POSTAL_CODE, oldPostalCode, postalCode));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				return getAddress();
@@ -474,12 +500,13 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				setAddress((String)newValue);
@@ -515,12 +542,13 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				setAddress(ADDRESS_EDEFAULT);
@@ -556,12 +584,13 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				return ADDRESS_EDEFAULT == null ? address != null : !ADDRESS_EDEFAULT.equals(address);
@@ -587,12 +616,13 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -620,4 +650,4 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 		return result.toString();
 	}
 
-} // PostalLocationImpl
+} //PostalLocationImpl

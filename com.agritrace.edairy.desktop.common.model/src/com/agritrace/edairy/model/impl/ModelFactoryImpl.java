@@ -7,42 +7,30 @@
 package com.agritrace.edairy.model.impl;
 
 import com.agritrace.edairy.model.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.model.Audited;
-import com.agritrace.edairy.model.Company;
-import com.agritrace.edairy.model.ContactMethod;
-import com.agritrace.edairy.model.ContactMethodType;
-import com.agritrace.edairy.model.ContainerType;
-import com.agritrace.edairy.model.DescriptiveLocation;
-import com.agritrace.edairy.model.Gender;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.MapLocation;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.Person;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.StatutoryLocation;
-import com.agritrace.edairy.model.UnitOfMeasure;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
-    /**
+	/**
 	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static ModelFactory init() {
+	public static ModelFactory init() {
 		try {
 			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.model/"); 
 			if (theModelFactory != null) {
@@ -55,22 +43,23 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		return new ModelFactoryImpl();
 	}
 
-    /**
+	/**
 	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public ModelFactoryImpl() {
+	public ModelFactoryImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EObject create(EClass eClass) {
+	@Override
+	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.MAP_LOCATION: return createMapLocation();
 			case ModelPackage.POSTAL_LOCATION: return createPostalLocation();
@@ -86,12 +75,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object createFromString(EDataType eDataType, String initialValue) {
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.GENDER:
 				return createGenderFromString(eDataType, initialValue);
@@ -112,12 +102,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String convertToString(EDataType eDataType, Object instanceValue) {
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.GENDER:
 				return convertGenderToString(eDataType, instanceValue);
@@ -138,239 +129,248 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		}
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public MapLocation createMapLocation() {
+	public MapLocation createMapLocation() {
 		MapLocationImpl mapLocation = new MapLocationImpl();
 		return mapLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public PostalLocation createPostalLocation() {
+	public PostalLocation createPostalLocation() {
 		PostalLocationImpl postalLocation = new PostalLocationImpl();
 		return postalLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public StatutoryLocation createStatutoryLocation() {
+	public StatutoryLocation createStatutoryLocation() {
 		StatutoryLocationImpl statutoryLocation = new StatutoryLocationImpl();
 		return statutoryLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Audited createAudited() {
+	public Audited createAudited() {
 		AuditedImpl audited = new AuditedImpl();
 		return audited;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Person createPerson() {
+	public Person createPerson() {
 		PersonImpl person = new PersonImpl();
 		return person;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Company createCompany() {
+	public Company createCompany() {
 		CompanyImpl company = new CompanyImpl();
 		return company;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DescriptiveLocation createDescriptiveLocation() {
+	public DescriptiveLocation createDescriptiveLocation() {
 		DescriptiveLocationImpl descriptiveLocation = new DescriptiveLocationImpl();
 		return descriptiveLocation;
 	}
 
-    /**
-     * <!-- begin-user-doc --> Create a fully populated Location object, since
-     * no one really wants an empty one. <!-- end-user-doc -->
-     * 
-     * @generated NOT
-     */
-    @Override
-    public Location createLocation() {
-	final LocationImpl location = new LocationImpl();
-	location.setMapLocation(createMapLocation());
-	location.setDescriptiveLocation(createDescriptiveLocation());
-	location.setPostalLocation(createPostalLocation());
-	location.setStatutoryLocation(createStatutoryLocation());
-	return location;
-    }
-
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public ContactMethod createContactMethod() {
+	public Location createLocation() {
+		LocationImpl location = new LocationImpl();
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContactMethod createContactMethod() {
 		ContactMethodImpl contactMethod = new ContactMethodImpl();
 		return contactMethod;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Gender createGenderFromString(EDataType eDataType, String initialValue) {
+	public Gender createGenderFromString(EDataType eDataType, String initialValue) {
 		Gender result = Gender.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertGenderToString(EDataType eDataType, Object instanceValue) {
+	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public ContactMethodType createContactMethodTypeFromString(EDataType eDataType, String initialValue) {
+	public ContactMethodType createContactMethodTypeFromString(EDataType eDataType, String initialValue) {
 		ContactMethodType result = ContactMethodType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertContactMethodTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertContactMethodTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
+	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
 		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertUnitOfMeasureToString(EDataType eDataType, Object instanceValue) {
+	public String convertUnitOfMeasureToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
+	public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
 		ContainerType result = ContainerType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertContainerTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String createTransactionIDFromString(EDataType eDataType, String initialValue) {
+	public String createTransactionIDFromString(EDataType eDataType, String initialValue) {
 		return (String)super.createFromString(eDataType, initialValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertTransactionIDToString(EDataType eDataType, Object instanceValue) {
+	public String convertTransactionIDToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Long createUniqueIDFromString(EDataType eDataType, String initialValue) {
+	public Long createUniqueIDFromString(EDataType eDataType, String initialValue) {
 		return (Long)super.createFromString(eDataType, initialValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertUniqueIDToString(EDataType eDataType, Object instanceValue) {
+	public String convertUniqueIDToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String createImageReferenceFromString(EDataType eDataType, String initialValue) {
+	public String createImageReferenceFromString(EDataType eDataType, String initialValue) {
 		return (String)super.createFromString(eDataType, initialValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public String convertImageReferenceToString(EDataType eDataType, Object instanceValue) {
+	public String convertImageReferenceToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public ModelPackage getModelPackage() {
+	public ModelPackage getModelPackage() {
 		return (ModelPackage)getEPackage();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
-    @Deprecated
-    public static ModelPackage getPackage() {
+	@Deprecated
+	public static ModelPackage getPackage() {
 		return ModelPackage.eINSTANCE;
 	}
 
-} // ModelFactoryImpl
+} //ModelFactoryImpl

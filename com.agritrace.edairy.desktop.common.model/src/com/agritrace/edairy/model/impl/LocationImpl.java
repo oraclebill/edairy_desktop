@@ -6,13 +6,6 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.MapLocation;
@@ -20,9 +13,19 @@ import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.PostalLocation;
 import com.agritrace.edairy.model.StatutoryLocation;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Location</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Location</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -36,77 +39,80 @@ import com.agritrace.edairy.model.StatutoryLocation;
  * @generated
  */
 public class LocationImpl extends EObjectImpl implements Location {
-    /**
+	/**
 	 * The cached value of the '{@link #getPostalLocation() <em>Postal Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPostalLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected PostalLocation postalLocation;
+	protected PostalLocation postalLocation;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getMapLocation() <em>Map Location</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMapLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected MapLocation mapLocation;
+	protected MapLocation mapLocation;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getStatutoryLocation() <em>Statutory Location</em>}' containment reference.
-	 * <!-- begin-user-doc
-     * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getStatutoryLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected StatutoryLocation statutoryLocation;
+	protected StatutoryLocation statutoryLocation;
 
-    /**
-     * The cached value of the '{@link #getDescriptiveLocation()
-     * <em>Descriptive Location</em>}' containment reference. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getDescriptiveLocation()
-     * @generated
-     * @ordered
-     */
-    protected DescriptiveLocation descriptiveLocation;
+	/**
+	 * The cached value of the '{@link #getDescriptiveLocation() <em>Descriptive Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescriptiveLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected DescriptiveLocation descriptiveLocation;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected LocationImpl() {
+	protected LocationImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.LOCATION;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public PostalLocation getPostalLocation() {
+	public PostalLocation getPostalLocation() {
 		return postalLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetPostalLocation(PostalLocation newPostalLocation, NotificationChain msgs) {
+	public NotificationChain basicSetPostalLocation(PostalLocation newPostalLocation, NotificationChain msgs) {
 		PostalLocation oldPostalLocation = postalLocation;
 		postalLocation = newPostalLocation;
 		if (eNotificationRequired()) {
@@ -116,12 +122,12 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setPostalLocation(PostalLocation newPostalLocation) {
+	public void setPostalLocation(PostalLocation newPostalLocation) {
 		if (newPostalLocation != postalLocation) {
 			NotificationChain msgs = null;
 			if (postalLocation != null)
@@ -135,20 +141,21 @@ public class LocationImpl extends EObjectImpl implements Location {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, newPostalLocation, newPostalLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public MapLocation getMapLocation() {
+	public MapLocation getMapLocation() {
 		return mapLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetMapLocation(MapLocation newMapLocation, NotificationChain msgs) {
+	public NotificationChain basicSetMapLocation(MapLocation newMapLocation, NotificationChain msgs) {
 		MapLocation oldMapLocation = mapLocation;
 		mapLocation = newMapLocation;
 		if (eNotificationRequired()) {
@@ -158,12 +165,12 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setMapLocation(MapLocation newMapLocation) {
+	public void setMapLocation(MapLocation newMapLocation) {
 		if (newMapLocation != mapLocation) {
 			NotificationChain msgs = null;
 			if (mapLocation != null)
@@ -177,20 +184,21 @@ public class LocationImpl extends EObjectImpl implements Location {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, newMapLocation, newMapLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public StatutoryLocation getStatutoryLocation() {
+	public StatutoryLocation getStatutoryLocation() {
 		return statutoryLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetStatutoryLocation(StatutoryLocation newStatutoryLocation, NotificationChain msgs) {
+	public NotificationChain basicSetStatutoryLocation(StatutoryLocation newStatutoryLocation, NotificationChain msgs) {
 		StatutoryLocation oldStatutoryLocation = statutoryLocation;
 		statutoryLocation = newStatutoryLocation;
 		if (eNotificationRequired()) {
@@ -200,12 +208,12 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setStatutoryLocation(StatutoryLocation newStatutoryLocation) {
+	public void setStatutoryLocation(StatutoryLocation newStatutoryLocation) {
 		if (newStatutoryLocation != statutoryLocation) {
 			NotificationChain msgs = null;
 			if (statutoryLocation != null)
@@ -219,21 +227,21 @@ public class LocationImpl extends EObjectImpl implements Location {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, newStatutoryLocation, newStatutoryLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public DescriptiveLocation getDescriptiveLocation() {
+	public DescriptiveLocation getDescriptiveLocation() {
 		return descriptiveLocation;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetDescriptiveLocation(DescriptiveLocation newDescriptiveLocation,
-	    NotificationChain msgs) {
+	public NotificationChain basicSetDescriptiveLocation(DescriptiveLocation newDescriptiveLocation, NotificationChain msgs) {
 		DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
 		descriptiveLocation = newDescriptiveLocation;
 		if (eNotificationRequired()) {
@@ -243,12 +251,12 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDescriptiveLocation(DescriptiveLocation newDescriptiveLocation) {
+	public void setDescriptiveLocation(DescriptiveLocation newDescriptiveLocation) {
 		if (newDescriptiveLocation != descriptiveLocation) {
 			NotificationChain msgs = null;
 			if (descriptiveLocation != null)
@@ -262,12 +270,13 @@ public class LocationImpl extends EObjectImpl implements Location {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, newDescriptiveLocation, newDescriptiveLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				return basicSetPostalLocation(null, msgs);
@@ -281,12 +290,13 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				return getPostalLocation();
@@ -300,12 +310,13 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				setPostalLocation((PostalLocation)newValue);
@@ -323,12 +334,13 @@ public class LocationImpl extends EObjectImpl implements Location {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				setPostalLocation((PostalLocation)null);
@@ -346,12 +358,13 @@ public class LocationImpl extends EObjectImpl implements Location {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				return postalLocation != null;
@@ -365,4 +378,4 @@ public class LocationImpl extends EObjectImpl implements Location {
 		return super.eIsSet(featureID);
 	}
 
-} // LocationImpl
+} //LocationImpl

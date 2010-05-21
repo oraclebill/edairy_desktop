@@ -9,8 +9,9 @@ package com.agritrace.edairy.model;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Contact Method</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Contact Method</b></em>'.
+ * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
@@ -25,16 +26,15 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ContactMethod extends EObject {
-    /**
+	/**
 	 * Returns the value of the '<em><b>Cm Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.agritrace.edairy.model.ContactMethodType}.
-	 * <!-- begin-user-doc
-     * -->
-     * <p>
-     * If the meaning of the '<em>Cm Type</em>' attribute isn't clear, there
-     * really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cm Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Cm Type</em>' attribute.
 	 * @see com.agritrace.edairy.model.ContactMethodType
 	 * @see #setCmType(ContactMethodType)
@@ -42,50 +42,43 @@ public interface ContactMethod extends EObject {
 	 * @model
 	 * @generated
 	 */
-    ContactMethodType getCmType();
+	ContactMethodType getCmType();
 
-    /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.ContactMethod#getCmType
-     * <em>Cm Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-     * -->
-     * 
-     * @param value
-     *            the new value of the '<em>Cm Type</em>' attribute.
-     * @see com.agritrace.edairy.model.ContactMethodType
-     * @see #getCmType()
-     * @generated
-     */
-    void setCmType(ContactMethodType value);
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.ContactMethod#getCmType <em>Cm Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cm Type</em>' attribute.
+	 * @see com.agritrace.edairy.model.ContactMethodType
+	 * @see #getCmType()
+	 * @generated
+	 */
+	void setCmType(ContactMethodType value);
 
-    /**
-     * Returns the value of the '<em><b>Cm Value</b></em>' attribute. <!--
-     * begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Cm Value</em>' attribute isn't clear, there
-     * really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Cm Value</em>' attribute.
-     * @see #setCmValue(String)
-     * @see com.agritrace.edairy.model.ModelPackage#getContactMethod_CmValue()
-     * @model
-     * @generated
-     */
-    String getCmValue();
+	/**
+	 * Returns the value of the '<em><b>Cm Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cm Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cm Value</em>' attribute.
+	 * @see #setCmValue(String)
+	 * @see com.agritrace.edairy.model.ModelPackage#getContactMethod_CmValue()
+	 * @model
+	 * @generated
+	 */
+	String getCmValue();
 
-    /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.ContactMethod#getCmValue
-     * <em>Cm Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-     * -->
-     * 
-     * @param value
-     *            the new value of the '<em>Cm Value</em>' attribute.
-     * @see #getCmValue()
-     * @generated
-     */
-    void setCmValue(String value);
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.ContactMethod#getCmValue <em>Cm Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cm Value</em>' attribute.
+	 * @see #getCmValue()
+	 * @generated
+	 */
+	void setCmValue(String value);
 
 } // ContactMethod

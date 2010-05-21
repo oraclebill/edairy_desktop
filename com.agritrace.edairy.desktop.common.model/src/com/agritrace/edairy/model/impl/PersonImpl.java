@@ -6,16 +6,19 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.Person;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Person</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Person</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -33,343 +36,360 @@ import com.agritrace.edairy.model.Person;
  * @generated
  */
 public class PersonImpl extends PartyImpl implements Person {
-    /**
+	/**
 	 * The default value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPhoto()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String PHOTO_EDEFAULT = null;
+	protected static final String PHOTO_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPhoto()
 	 * @generated
 	 * @ordered
 	 */
-    protected String photo = PHOTO_EDEFAULT;
+	protected String photo = PHOTO_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getHonorific() <em>Honorific</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getHonorific()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String HONORIFIC_EDEFAULT = null;
+	protected static final String HONORIFIC_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getHonorific() <em>Honorific</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getHonorific()
 	 * @generated
 	 * @ordered
 	 */
-    protected String honorific = HONORIFIC_EDEFAULT;
+	protected String honorific = HONORIFIC_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getFamilyName() <em>Family Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFamilyName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String FAMILY_NAME_EDEFAULT = null;
+	protected static final String FAMILY_NAME_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFamilyName() <em>Family Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFamilyName()
 	 * @generated
 	 * @ordered
 	 */
-    protected String familyName = FAMILY_NAME_EDEFAULT;
+	protected String familyName = FAMILY_NAME_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getGivenName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String GIVEN_NAME_EDEFAULT = null;
+	protected static final String GIVEN_NAME_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getGivenName()
 	 * @generated
 	 * @ordered
 	 */
-    protected String givenName = GIVEN_NAME_EDEFAULT;
+	protected String givenName = GIVEN_NAME_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getMiddleName() <em>Middle Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMiddleName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String MIDDLE_NAME_EDEFAULT = null;
+	protected static final String MIDDLE_NAME_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getMiddleName() <em>Middle Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMiddleName()
 	 * @generated
 	 * @ordered
 	 */
-    protected String middleName = MIDDLE_NAME_EDEFAULT;
+	protected String middleName = MIDDLE_NAME_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getAdditionalNames() <em>Additional Names</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAdditionalNames()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String ADDITIONAL_NAMES_EDEFAULT = null;
+	protected static final String ADDITIONAL_NAMES_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getAdditionalNames() <em>Additional Names</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAdditionalNames()
 	 * @generated
 	 * @ordered
 	 */
-    protected String additionalNames = ADDITIONAL_NAMES_EDEFAULT;
+	protected String additionalNames = ADDITIONAL_NAMES_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSuffix()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String SUFFIX_EDEFAULT = null;
+	protected static final String SUFFIX_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSuffix()
 	 * @generated
 	 * @ordered
 	 */
-    protected String suffix = SUFFIX_EDEFAULT;
+	protected String suffix = SUFFIX_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getNickName() <em>Nick Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNickName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NICK_NAME_EDEFAULT = null;
+	protected static final String NICK_NAME_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getNickName() <em>Nick Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getNickName()
 	 * @generated
 	 * @ordered
 	 */
-    protected String nickName = NICK_NAME_EDEFAULT;
+	protected String nickName = NICK_NAME_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected PersonImpl() {
+	protected PersonImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.PERSON;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setPhoto(String newPhoto) {
+	public void setPhoto(String newPhoto) {
 		String oldPhoto = photo;
 		photo = newPhoto;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHOTO, oldPhoto, photo));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getHonorific() {
+	public String getHonorific() {
 		return honorific;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setHonorific(String newHonorific) {
+	public void setHonorific(String newHonorific) {
 		String oldHonorific = honorific;
 		honorific = newHonorific;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__HONORIFIC, oldHonorific, honorific));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getFamilyName() {
+	public String getFamilyName() {
 		return familyName;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFamilyName(String newFamilyName) {
+	public void setFamilyName(String newFamilyName) {
 		String oldFamilyName = familyName;
 		familyName = newFamilyName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__FAMILY_NAME, oldFamilyName, familyName));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getGivenName() {
+	public String getGivenName() {
 		return givenName;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setGivenName(String newGivenName) {
+	public void setGivenName(String newGivenName) {
 		String oldGivenName = givenName;
 		givenName = newGivenName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__GIVEN_NAME, oldGivenName, givenName));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getMiddleName() {
+	public String getMiddleName() {
 		return middleName;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setMiddleName(String newMiddleName) {
+	public void setMiddleName(String newMiddleName) {
 		String oldMiddleName = middleName;
 		middleName = newMiddleName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__MIDDLE_NAME, oldMiddleName, middleName));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getAdditionalNames() {
+	public String getAdditionalNames() {
 		return additionalNames;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setAdditionalNames(String newAdditionalNames) {
+	public void setAdditionalNames(String newAdditionalNames) {
 		String oldAdditionalNames = additionalNames;
 		additionalNames = newAdditionalNames;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__ADDITIONAL_NAMES, oldAdditionalNames, additionalNames));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getSuffix() {
+	public String getSuffix() {
 		return suffix;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setSuffix(String newSuffix) {
+	public void setSuffix(String newSuffix) {
 		String oldSuffix = suffix;
 		suffix = newSuffix;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__SUFFIX, oldSuffix, suffix));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getNickName() {
+	public String getNickName() {
 		return nickName;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setNickName(String newNickName) {
+	public void setNickName(String newNickName) {
 		String oldNickName = nickName;
 		nickName = newNickName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NICK_NAME, oldNickName, nickName));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.PERSON__PHOTO:
 				return getPhoto();
@@ -391,12 +411,13 @@ public class PersonImpl extends PartyImpl implements Person {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.PERSON__PHOTO:
 				setPhoto((String)newValue);
@@ -426,12 +447,13 @@ public class PersonImpl extends PartyImpl implements Person {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.PERSON__PHOTO:
 				setPhoto(PHOTO_EDEFAULT);
@@ -461,12 +483,13 @@ public class PersonImpl extends PartyImpl implements Person {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.PERSON__PHOTO:
 				return PHOTO_EDEFAULT == null ? photo != null : !PHOTO_EDEFAULT.equals(photo);
@@ -488,12 +511,13 @@ public class PersonImpl extends PartyImpl implements Person {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -517,16 +541,4 @@ public class PersonImpl extends PartyImpl implements Person {
 		return result.toString();
 	}
 
-    @Override
-    public String getName() {
-	final StringBuffer result = new StringBuffer();
-	result.append(getGivenName());
-	result.append(" ");
-	result.append(getMiddleName());
-	result.append(" ");
-	result.append(getFamilyName());
-	result.append(" ");
-	result.append(getAdditionalNames());
-	return result.toString();
-    }
-} // PersonImpl
+} //PersonImpl

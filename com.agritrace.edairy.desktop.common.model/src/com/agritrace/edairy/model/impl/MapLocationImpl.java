@@ -6,17 +6,20 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.MapLocation;
 import com.agritrace.edairy.model.ModelPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Map Location</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Map Location</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -28,107 +31,114 @@ import com.agritrace.edairy.model.ModelPackage;
  * @generated
  */
 public class MapLocationImpl extends EObjectImpl implements MapLocation {
-    /**
+	/**
 	 * The default value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLongitude()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String LONGITUDE_EDEFAULT = null;
+	protected static final String LONGITUDE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLongitude()
 	 * @generated
 	 * @ordered
 	 */
-    protected String longitude = LONGITUDE_EDEFAULT;
+	protected String longitude = LONGITUDE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLatitude()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String LATITUDE_EDEFAULT = null;
+	protected static final String LATITUDE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLatitude()
 	 * @generated
 	 * @ordered
 	 */
-    protected String latitude = LATITUDE_EDEFAULT;
+	protected String latitude = LATITUDE_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected MapLocationImpl() {
+	protected MapLocationImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.MAP_LOCATION;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLongitude(String newLongitude) {
+	public void setLongitude(String newLongitude) {
 		String oldLongitude = longitude;
 		longitude = newLongitude;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LONGITUDE, oldLongitude, longitude));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLatitude(String newLatitude) {
+	public void setLatitude(String newLatitude) {
 		String oldLatitude = latitude;
 		latitude = newLatitude;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LATITUDE, oldLatitude, latitude));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				return getLongitude();
@@ -138,12 +148,13 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				setLongitude((String)newValue);
@@ -155,12 +166,13 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				setLongitude(LONGITUDE_EDEFAULT);
@@ -172,12 +184,13 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				return LONGITUDE_EDEFAULT == null ? longitude != null : !LONGITUDE_EDEFAULT.equals(longitude);
@@ -187,12 +200,13 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -204,4 +218,4 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 		return result.toString();
 	}
 
-} // MapLocationImpl
+} //MapLocationImpl

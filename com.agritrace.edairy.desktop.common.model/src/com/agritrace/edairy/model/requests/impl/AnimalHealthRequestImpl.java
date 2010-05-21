@@ -6,26 +6,31 @@
  */
 package com.agritrace.edairy.model.requests.impl;
 
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.dairy.Dairy;
 import com.agritrace.edairy.model.dairy.Membership;
 import com.agritrace.edairy.model.dairy.Supplier;
+
 import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.model.requests.RequestType;
 import com.agritrace.edairy.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Animal Health Request</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Animal Health Request</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -49,260 +54,272 @@ import com.agritrace.edairy.model.tracking.RegisteredAnimal;
  * @generated
  */
 public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealthRequest {
-    /**
+	/**
 	 * The default value of the '{@link #getRequestId() <em>Request Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRequestId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Long REQUEST_ID_EDEFAULT = null;
+	protected static final Long REQUEST_ID_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRequestId() <em>Request Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRequestId()
 	 * @generated
 	 * @ordered
 	 */
-    protected Long requestId = REQUEST_ID_EDEFAULT;
+	protected Long requestId = REQUEST_ID_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRequestingMember() <em>Requesting Member</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRequestingMember()
 	 * @generated
 	 * @ordered
 	 */
-    protected Membership requestingMember;
+	protected Membership requestingMember;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDairy() <em>Dairy</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDairy()
 	 * @generated
 	 * @ordered
 	 */
-    protected Dairy dairy;
+	protected Dairy dairy;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date DATE_EDEFAULT = null;
+	protected static final Date DATE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDate() <em>Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date date = DATE_EDEFAULT;
+	protected Date date = DATE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final RequestType TYPE_EDEFAULT = RequestType.VETERINARY;
+	protected static final RequestType TYPE_EDEFAULT = RequestType.VETERINARY;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-    protected RequestType type = TYPE_EDEFAULT;
+	protected RequestType type = TYPE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getReportedProblem() <em>Reported Problem</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReportedProblem()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String REPORTED_PROBLEM_EDEFAULT = null;
+	protected static final String REPORTED_PROBLEM_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getReportedProblem() <em>Reported Problem</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReportedProblem()
 	 * @generated
 	 * @ordered
 	 */
-    protected String reportedProblem = REPORTED_PROBLEM_EDEFAULT;
+	protected String reportedProblem = REPORTED_PROBLEM_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getReportedAnimal() <em>Reported Animal</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReportedAnimal()
 	 * @generated
 	 * @ordered
 	 */
-    protected RegisteredAnimal reportedAnimal;
+	protected RegisteredAnimal reportedAnimal;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDateHeatDetected() <em>Date Heat Detected</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateHeatDetected()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date DATE_HEAT_DETECTED_EDEFAULT = null;
+	protected static final Date DATE_HEAT_DETECTED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDateHeatDetected() <em>Date Heat Detected</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateHeatDetected()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date dateHeatDetected = DATE_HEAT_DETECTED_EDEFAULT;
+	protected Date dateHeatDetected = DATE_HEAT_DETECTED_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getFirstTreatment() <em>First Treatment</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFirstTreatment()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date FIRST_TREATMENT_EDEFAULT = null;
+	protected static final Date FIRST_TREATMENT_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFirstTreatment() <em>First Treatment</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFirstTreatment()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date firstTreatment = FIRST_TREATMENT_EDEFAULT;
+	protected Date firstTreatment = FIRST_TREATMENT_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getSecondTreatment() <em>Second Treatment</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSecondTreatment()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date SECOND_TREATMENT_EDEFAULT = null;
+	protected static final Date SECOND_TREATMENT_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getSecondTreatment() <em>Second Treatment</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSecondTreatment()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date secondTreatment = SECOND_TREATMENT_EDEFAULT;
+	protected Date secondTreatment = SECOND_TREATMENT_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getThirdTreatment() <em>Third Treatment</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getThirdTreatment()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date THIRD_TREATMENT_EDEFAULT = null;
+	protected static final Date THIRD_TREATMENT_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getThirdTreatment() <em>Third Treatment</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getThirdTreatment()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date thirdTreatment = THIRD_TREATMENT_EDEFAULT;
+	protected Date thirdTreatment = THIRD_TREATMENT_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMember()
 	 * @generated
 	 * @ordered
 	 */
-    protected Membership member;
+	protected Membership member;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFarm() <em>Farm</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFarm()
 	 * @generated
 	 * @ordered
 	 */
-    protected Farm farm;
+	protected Farm farm;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getReferredTo() <em>Referred To</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReferredTo()
 	 * @generated
 	 * @ordered
 	 */
-    protected Supplier referredTo;
+	protected Supplier referredTo;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected AnimalHealthRequestImpl() {
+	protected AnimalHealthRequestImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Long getRequestId() {
+	public Long getRequestId() {
 		return requestId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRequestId(Long newRequestId) {
+	public void setRequestId(Long newRequestId) {
 		Long oldRequestId = requestId;
 		requestId = newRequestId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID, oldRequestId, requestId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Membership getRequestingMember() {
+	public Membership getRequestingMember() {
 		if (requestingMember != null && requestingMember.eIsProxy()) {
 			InternalEObject oldRequestingMember = (InternalEObject)requestingMember;
 			requestingMember = (Membership)eResolveProxy(oldRequestingMember);
@@ -314,32 +331,33 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return requestingMember;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Membership basicGetRequestingMember() {
+	public Membership basicGetRequestingMember() {
 		return requestingMember;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRequestingMember(Membership newRequestingMember) {
+	public void setRequestingMember(Membership newRequestingMember) {
 		Membership oldRequestingMember = requestingMember;
 		requestingMember = newRequestingMember;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER, oldRequestingMember, requestingMember));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Dairy getDairy() {
+	public Dairy getDairy() {
 		if (dairy != null && dairy.eIsProxy()) {
 			InternalEObject oldDairy = (InternalEObject)dairy;
 			dairy = (Dairy)eResolveProxy(oldDairy);
@@ -351,95 +369,96 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return dairy;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Dairy basicGetDairy() {
+	public Dairy basicGetDairy() {
 		return dairy;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDairy(Dairy newDairy) {
+	public void setDairy(Dairy newDairy) {
 		Dairy oldDairy = dairy;
 		dairy = newDairy;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY, oldDairy, dairy));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDate(Date newDate) {
+	public void setDate(Date newDate) {
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE, oldDate, date));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public RequestType getType() {
+	public RequestType getType() {
 		return type;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setType(RequestType newType) {
+	public void setType(RequestType newType) {
 		RequestType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__TYPE, oldType, type));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getReportedProblem() {
+	public String getReportedProblem() {
 		return reportedProblem;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setReportedProblem(String newReportedProblem) {
+	public void setReportedProblem(String newReportedProblem) {
 		String oldReportedProblem = reportedProblem;
 		reportedProblem = newReportedProblem;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM, oldReportedProblem, reportedProblem));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public RegisteredAnimal getReportedAnimal() {
+	public RegisteredAnimal getReportedAnimal() {
 		if (reportedAnimal != null && reportedAnimal.eIsProxy()) {
 			InternalEObject oldReportedAnimal = (InternalEObject)reportedAnimal;
 			reportedAnimal = (RegisteredAnimal)eResolveProxy(oldReportedAnimal);
@@ -451,116 +470,117 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return reportedAnimal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public RegisteredAnimal basicGetReportedAnimal() {
+	public RegisteredAnimal basicGetReportedAnimal() {
 		return reportedAnimal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setReportedAnimal(RegisteredAnimal newReportedAnimal) {
+	public void setReportedAnimal(RegisteredAnimal newReportedAnimal) {
 		RegisteredAnimal oldReportedAnimal = reportedAnimal;
 		reportedAnimal = newReportedAnimal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_ANIMAL, oldReportedAnimal, reportedAnimal));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getDateHeatDetected() {
+	public Date getDateHeatDetected() {
 		return dateHeatDetected;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDateHeatDetected(Date newDateHeatDetected) {
+	public void setDateHeatDetected(Date newDateHeatDetected) {
 		Date oldDateHeatDetected = dateHeatDetected;
 		dateHeatDetected = newDateHeatDetected;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED, oldDateHeatDetected, dateHeatDetected));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getFirstTreatment() {
+	public Date getFirstTreatment() {
 		return firstTreatment;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFirstTreatment(Date newFirstTreatment) {
+	public void setFirstTreatment(Date newFirstTreatment) {
 		Date oldFirstTreatment = firstTreatment;
 		firstTreatment = newFirstTreatment;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT, oldFirstTreatment, firstTreatment));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getSecondTreatment() {
+	public Date getSecondTreatment() {
 		return secondTreatment;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setSecondTreatment(Date newSecondTreatment) {
+	public void setSecondTreatment(Date newSecondTreatment) {
 		Date oldSecondTreatment = secondTreatment;
 		secondTreatment = newSecondTreatment;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT, oldSecondTreatment, secondTreatment));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getThirdTreatment() {
+	public Date getThirdTreatment() {
 		return thirdTreatment;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setThirdTreatment(Date newThirdTreatment) {
+	public void setThirdTreatment(Date newThirdTreatment) {
 		Date oldThirdTreatment = thirdTreatment;
 		thirdTreatment = newThirdTreatment;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT, oldThirdTreatment, thirdTreatment));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Membership getMember() {
+	public Membership getMember() {
 		if (member != null && member.eIsProxy()) {
 			InternalEObject oldMember = (InternalEObject)member;
 			member = (Membership)eResolveProxy(oldMember);
@@ -572,32 +592,33 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return member;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Membership basicGetMember() {
+	public Membership basicGetMember() {
 		return member;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setMember(Membership newMember) {
+	public void setMember(Membership newMember) {
 		Membership oldMember = member;
 		member = newMember;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER, oldMember, member));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Farm getFarm() {
+	public Farm getFarm() {
 		if (farm != null && farm.eIsProxy()) {
 			InternalEObject oldFarm = (InternalEObject)farm;
 			farm = (Farm)eResolveProxy(oldFarm);
@@ -609,32 +630,33 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return farm;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Farm basicGetFarm() {
+	public Farm basicGetFarm() {
 		return farm;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFarm(Farm newFarm) {
+	public void setFarm(Farm newFarm) {
 		Farm oldFarm = farm;
 		farm = newFarm;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM, oldFarm, farm));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Supplier getReferredTo() {
+	public Supplier getReferredTo() {
 		if (referredTo != null && referredTo.eIsProxy()) {
 			InternalEObject oldReferredTo = (InternalEObject)referredTo;
 			referredTo = (Supplier)eResolveProxy(oldReferredTo);
@@ -646,32 +668,34 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return referredTo;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Supplier basicGetReferredTo() {
+	public Supplier basicGetReferredTo() {
 		return referredTo;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setReferredTo(Supplier newReferredTo) {
+	public void setReferredTo(Supplier newReferredTo) {
 		Supplier oldReferredTo = referredTo;
 		referredTo = newReferredTo;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REFERRED_TO, oldReferredTo, referredTo));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				return getRequestId();
@@ -711,12 +735,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				setRequestId((Long)newValue);
@@ -764,12 +789,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				setRequestId(REQUEST_ID_EDEFAULT);
@@ -817,12 +843,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				return REQUEST_ID_EDEFAULT == null ? requestId != null : !REQUEST_ID_EDEFAULT.equals(requestId);
@@ -856,12 +883,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -885,4 +913,4 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 		return result.toString();
 	}
 
-} // AnimalHealthRequestImpl
+} //AnimalHealthRequestImpl

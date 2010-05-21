@@ -6,23 +6,22 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import static com.agritrace.edairy.model.tracking.TrackingPackage.CONTAINER;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import com.agritrace.edairy.dairy.model.account.AccountPackage;
-import com.agritrace.edairy.dairy.model.account.impl.AccountPackageImpl;
 import com.agritrace.edairy.model.ModelPackage;
+
 import com.agritrace.edairy.model.dairy.DairyPackage;
+
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
 import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
+
 import com.agritrace.edairy.model.impl.ModelPackageImpl;
+
 import com.agritrace.edairy.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.model.tracking.AcquisitionType;
 import com.agritrace.edairy.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.model.tracking.Farm;
@@ -34,107 +33,123 @@ import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingFactory;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage {
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass farmEClass = null;
+	private EClass farmEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass containerEClass = null;
+	private EClass containerEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass registeredAnimalEClass = null;
+	private EClass registeredAnimalEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass referenceAnimalTypeEClass = null;
+	private EClass referenceAnimalTypeEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass animalIdentifierEClass = null;
+	private EClass animalIdentifierEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum acquisitionTypeEEnum = null;
+	private EEnum acquisitionTypeEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum purposeEEnum = null;
+	private EEnum purposeEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum rearingModeEEnum = null;
+	private EEnum rearingModeEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum mechanismEEnum = null;
+	private EEnum mechanismEEnum = null;
 
-    /**
-     * Creates an instance of the model <b>Package</b>, registered with
-     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-     * package package URI value.
-     * <p>
-     * Note: the correct way to create the package is via the static factory
-     * method {@link #init init()}, which also performs initialization of the
-     * package, or returns the registered package, if one already exists. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see com.agritrace.edairy.model.tracking.TrackingPackage#eNS_URI
-     * @see #init()
-     * @generated
-     */
-    private TrackingPackageImpl() {
+	/**
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.ecore.EPackage.Registry
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#eNS_URI
+	 * @see #init()
+	 * @generated
+	 */
+	private TrackingPackageImpl() {
 		super(eNS_URI, TrackingFactory.eINSTANCE);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private static boolean isInited = false;
+	private static boolean isInited = false;
 
-    /**
-     * Creates, registers, and initializes the <b>Package</b> for this model,
-     * and for any others upon which it depends.
-     * 
-     * <p>
-     * This method is used to initialize {@link TrackingPackage#eINSTANCE} when
-     * that field is accessed. Clients should not invoke it directly. Instead,
-     * they should simply access that field to obtain the package. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #eNS_URI
-     * @see #createPackageContents()
-     * @see #initializePackageContents()
-     * @generated
-     */
-    public static TrackingPackage init() {
+	/**
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link TrackingPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
+	 * @generated
+	 */
+	public static TrackingPackage init() {
 		if (isInited) return (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
 
 		// Obtain or create and register package
@@ -171,380 +186,381 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		return theTrackingPackage;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getFarm() {
+	public EClass getFarm() {
 		return farmEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getFarm_Name() {
+	public EAttribute getFarm_Name() {
 		return (EAttribute)farmEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getFarm_Animals() {
+	public EReference getFarm_Animals() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getFarm_Cans() {
+	public EReference getFarm_Cans() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getFarm_Location() {
+	public EReference getFarm_Location() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getFarm_FarmId() {
+	public EAttribute getFarm_FarmId() {
 		return (EAttribute)farmEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getContainer() {
+	public EClass getContainer() {
 		return containerEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getContainer_ContainerId() {
+	public EAttribute getContainer_ContainerId() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getContainer_Owner() {
+	public EReference getContainer_Owner() {
 		return (EReference)containerEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getContainer_Capacity() {
+	public EAttribute getContainer_Capacity() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getContainer_Type() {
+	public EAttribute getContainer_Type() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getContainer_MeasureType() {
+	public EAttribute getContainer_MeasureType() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getRegisteredAnimal() {
+	public EClass getRegisteredAnimal() {
 		return registeredAnimalEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_AnimnalRegistrationId() {
+	public EAttribute getRegisteredAnimal_AnimnalRegistrationId() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_GivenName() {
+	public EAttribute getRegisteredAnimal_GivenName() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getRegisteredAnimal_Location() {
+	public EReference getRegisteredAnimal_Location() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_Gender() {
+	public EAttribute getRegisteredAnimal_Gender() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getRegisteredAnimal_AnimalType() {
+	public EReference getRegisteredAnimal_AnimalType() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getRegisteredAnimal_SireType() {
+	public EReference getRegisteredAnimal_SireType() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_Purpose() {
+	public EAttribute getRegisteredAnimal_Purpose() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_DateOfAcquisition() {
+	public EAttribute getRegisteredAnimal_DateOfAcquisition() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_AcquisitionType() {
+	public EAttribute getRegisteredAnimal_AcquisitionType() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getRegisteredAnimal_Identifiers() {
+	public EReference getRegisteredAnimal_Identifiers() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_IdentifyingFeatures() {
+	public EAttribute getRegisteredAnimal_IdentifyingFeatures() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(10);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_RearingMode() {
+	public EAttribute getRegisteredAnimal_RearingMode() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(11);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_PastOwners() {
+	public EAttribute getRegisteredAnimal_PastOwners() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(12);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_InsuranceNumber() {
+	public EAttribute getRegisteredAnimal_InsuranceNumber() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(13);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getRegisteredAnimal_DateOfBirth() {
+	public EAttribute getRegisteredAnimal_DateOfBirth() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(14);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getReferenceAnimalType() {
+	public EClass getReferenceAnimalType() {
 		return referenceAnimalTypeEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getReferenceAnimalType_AnimalTypeId() {
+	public EAttribute getReferenceAnimalType_AnimalTypeId() {
 		return (EAttribute)referenceAnimalTypeEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getReferenceAnimalType_Species() {
+	public EAttribute getReferenceAnimalType_Species() {
 		return (EAttribute)referenceAnimalTypeEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getReferenceAnimalType_Breed() {
+	public EAttribute getReferenceAnimalType_Breed() {
 		return (EAttribute)referenceAnimalTypeEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getAnimalIdentifier() {
+	public EClass getAnimalIdentifier() {
 		return animalIdentifierEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalIdentifier_Issuer() {
+	public EAttribute getAnimalIdentifier_Issuer() {
 		return (EAttribute)animalIdentifierEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalIdentifier_Value() {
+	public EAttribute getAnimalIdentifier_Value() {
 		return (EAttribute)animalIdentifierEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EEnum getAcquisitionType() {
+	public EEnum getAcquisitionType() {
 		return acquisitionTypeEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EEnum getPurpose() {
+	public EEnum getPurpose() {
 		return purposeEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EEnum getRearingMode() {
+	public EEnum getRearingMode() {
 		return rearingModeEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EEnum getMechanism() {
+	public EEnum getMechanism() {
 		return mechanismEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public TrackingFactory getTrackingFactory() {
+	public TrackingFactory getTrackingFactory() {
 		return (TrackingFactory)getEFactoryInstance();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isCreated = false;
+	private boolean isCreated = false;
 
-    /**
+	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void createPackageContents() {
+	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
 
@@ -596,20 +612,21 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		mechanismEEnum = createEEnum(MECHANISM);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isInitialized = false;
+	private boolean isInitialized = false;
 
-    /**
-     * Complete the initialization of the package and its meta-model. This
-     * method is guarded to have no affect on any invocation but its first. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public void initializePackageContents() {
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -705,4 +722,4 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createResource(eNS_URI);
 	}
 
-} // TrackingPackageImpl
+} //TrackingPackageImpl

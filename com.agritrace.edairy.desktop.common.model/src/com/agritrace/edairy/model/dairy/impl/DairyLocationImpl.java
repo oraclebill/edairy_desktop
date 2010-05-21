@@ -6,27 +6,33 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-
 import com.agritrace.edairy.model.Location;
+
 import com.agritrace.edairy.model.dairy.DairyFunction;
 import com.agritrace.edairy.model.dairy.DairyLocation;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Route;
 
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Location</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Location</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -45,250 +51,265 @@ import com.agritrace.edairy.model.dairy.Route;
  * @generated
  */
 public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
-    /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
-    protected static final long ID_EDEFAULT = 0L;
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
 
-    /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
-    protected long id = ID_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NAME_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-    protected String name = NAME_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDateOpened() <em>Date Opened</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateOpened()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date DATE_OPENED_EDEFAULT = null;
+	protected static final Date DATE_OPENED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDateOpened() <em>Date Opened</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateOpened()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date dateOpened = DATE_OPENED_EDEFAULT;
+	protected Date dateOpened = DATE_OPENED_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getPhone() <em>Phone</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPhone()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String PHONE_EDEFAULT = null;
+	protected static final String PHONE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getPhone() <em>Phone</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPhone()
 	 * @generated
 	 * @ordered
 	 */
-    protected String phone = PHONE_EDEFAULT;
+	protected String phone = PHONE_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRoute() <em>Route</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRoute()
 	 * @generated
 	 * @ordered
 	 */
-    protected Route route;
+	protected Route route;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DESCRIPTION_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-    protected String description = DESCRIPTION_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getCode() <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCode()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String CODE_EDEFAULT = null;
+	protected static final String CODE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getCode() <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCode()
 	 * @generated
 	 * @ordered
 	 */
-    protected String code = CODE_EDEFAULT;
+	protected String code = CODE_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected Location location;
+	protected Location location;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFunctions() <em>Functions</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFunctions()
 	 * @generated
 	 * @ordered
 	 */
-    protected EList<DairyFunction> functions;
+	protected EList<DairyFunction> functions;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected DairyLocationImpl() {
+	protected DairyLocationImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.DAIRY_LOCATION;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public long getId() {
+	public long getId() {
 		return id;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setId(long newId) {
+	public void setId(long newId) {
 		long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ID, oldId, id));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getName() {
+	public String getName() {
 		return name;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setName(String newName) {
+	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__NAME, oldName, name));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getDateOpened() {
+	public Date getDateOpened() {
 		return dateOpened;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDateOpened(Date newDateOpened) {
+	public void setDateOpened(Date newDateOpened) {
 		Date oldDateOpened = dateOpened;
 		dateOpened = newDateOpened;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__DATE_OPENED, oldDateOpened, dateOpened));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setPhone(String newPhone) {
+	public void setPhone(String newPhone) {
 		String oldPhone = phone;
 		phone = newPhone;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__PHONE, oldPhone, phone));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Route getRoute() {
+	public Route getRoute() {
 		if (route != null && route.eIsProxy()) {
 			InternalEObject oldRoute = (InternalEObject)route;
 			route = (Route)eResolveProxy(oldRoute);
@@ -300,82 +321,84 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		return route;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Route basicGetRoute() {
+	public Route basicGetRoute() {
 		return route;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRoute(Route newRoute) {
+	public void setRoute(Route newRoute) {
 		Route oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, route));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDescription(String newDescription) {
+	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__DESCRIPTION, oldDescription, description));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getCode() {
+	public String getCode() {
 		return code;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setCode(String newCode) {
+	public void setCode(String newCode) {
 		String oldCode = code;
 		code = newCode;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__CODE, oldCode, code));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Location getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
 		Location oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired()) {
@@ -385,12 +408,12 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLocation(Location newLocation) {
+	public void setLocation(Location newLocation) {
 		if (newLocation != location) {
 			NotificationChain msgs = null;
 			if (location != null)
@@ -404,24 +427,25 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__LOCATION, newLocation, newLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<DairyFunction> getFunctions() {
+	public EList<DairyFunction> getFunctions() {
 		if (functions == null) {
 			functions = new EDataTypeUniqueEList<DairyFunction>(DairyFunction.class, this, DairyPackage.DAIRY_LOCATION__FUNCTIONS);
 		}
 		return functions;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
 				return basicSetLocation(null, msgs);
@@ -429,12 +453,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__ID:
 				return getId();
@@ -459,13 +484,14 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__ID:
 				setId((Long)newValue);
@@ -499,12 +525,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__ID:
 				setId(ID_EDEFAULT);
@@ -537,12 +564,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__ID:
 				return id != ID_EDEFAULT;
@@ -566,12 +594,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -593,4 +622,4 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		return result.toString();
 	}
 
-} // DairyLocationImpl
+} //DairyLocationImpl

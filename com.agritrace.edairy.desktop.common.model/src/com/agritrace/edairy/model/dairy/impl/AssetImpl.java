@@ -6,19 +6,22 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.dairy.Asset;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Asset</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Asset</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -37,390 +40,401 @@ import com.agritrace.edairy.model.dairy.DairyPackage;
  * @generated
  */
 public class AssetImpl extends EObjectImpl implements Asset {
-    /**
+	/**
 	 * The default value of the '{@link #getAssetId() <em>Asset Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAssetId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Long ASSET_ID_EDEFAULT = null;
+	protected static final Long ASSET_ID_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getAssetId() <em>Asset Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAssetId()
 	 * @generated
 	 * @ordered
 	 */
-    protected Long assetId = ASSET_ID_EDEFAULT;
+	protected Long assetId = ASSET_ID_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getTagType() <em>Tag Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTagType()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String TAG_TYPE_EDEFAULT = null;
+	protected static final String TAG_TYPE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getTagType() <em>Tag Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTagType()
 	 * @generated
 	 * @ordered
 	 */
-    protected String tagType = TAG_TYPE_EDEFAULT;
+	protected String tagType = TAG_TYPE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getTagValue() <em>Tag Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTagValue()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String TAG_VALUE_EDEFAULT = null;
+	protected static final String TAG_VALUE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getTagValue() <em>Tag Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTagValue()
 	 * @generated
 	 * @ordered
 	 */
-    protected String tagValue = TAG_VALUE_EDEFAULT;
+	protected String tagValue = TAG_VALUE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDateAcquired() <em>Date Acquired</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateAcquired()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date DATE_ACQUIRED_EDEFAULT = null;
+	protected static final Date DATE_ACQUIRED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDateAcquired() <em>Date Acquired</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateAcquired()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date dateAcquired = DATE_ACQUIRED_EDEFAULT;
+	protected Date dateAcquired = DATE_ACQUIRED_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDamageDate() <em>Damage Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDamageDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date DAMAGE_DATE_EDEFAULT = null;
+	protected static final Date DAMAGE_DATE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDamageDate() <em>Damage Date</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDamageDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date damageDate = DAMAGE_DATE_EDEFAULT;
+	protected Date damageDate = DAMAGE_DATE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDamageDescription() <em>Damage Description</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDamageDescription()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DAMAGE_DESCRIPTION_EDEFAULT = null;
+	protected static final String DAMAGE_DESCRIPTION_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDamageDescription() <em>Damage Description</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDamageDescription()
 	 * @generated
 	 * @ordered
 	 */
-    protected String damageDescription = DAMAGE_DESCRIPTION_EDEFAULT;
+	protected String damageDescription = DAMAGE_DESCRIPTION_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDateDisposed() <em>Date Disposed</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateDisposed()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date DATE_DISPOSED_EDEFAULT = null;
+	protected static final Date DATE_DISPOSED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDateDisposed() <em>Date Disposed</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDateDisposed()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date dateDisposed = DATE_DISPOSED_EDEFAULT;
+	protected Date dateDisposed = DATE_DISPOSED_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDisposalReason() <em>Disposal Reason</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDisposalReason()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DISPOSAL_REASON_EDEFAULT = null;
+	protected static final String DISPOSAL_REASON_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDisposalReason() <em>Disposal Reason</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDisposalReason()
 	 * @generated
 	 * @ordered
 	 */
-    protected String disposalReason = DISPOSAL_REASON_EDEFAULT;
+	protected String disposalReason = DISPOSAL_REASON_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDisposalWitness() <em>Disposal Witness</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDisposalWitness()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DISPOSAL_WITNESS_EDEFAULT = null;
+	protected static final String DISPOSAL_WITNESS_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDisposalWitness() <em>Disposal Witness</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDisposalWitness()
 	 * @generated
 	 * @ordered
 	 */
-    protected String disposalWitness = DISPOSAL_WITNESS_EDEFAULT;
+	protected String disposalWitness = DISPOSAL_WITNESS_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected AssetImpl() {
+	protected AssetImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.ASSET;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Long getAssetId() {
+	public Long getAssetId() {
 		return assetId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setAssetId(Long newAssetId) {
+	public void setAssetId(Long newAssetId) {
 		Long oldAssetId = assetId;
 		assetId = newAssetId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__ASSET_ID, oldAssetId, assetId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getTagType() {
+	public String getTagType() {
 		return tagType;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setTagType(String newTagType) {
+	public void setTagType(String newTagType) {
 		String oldTagType = tagType;
 		tagType = newTagType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__TAG_TYPE, oldTagType, tagType));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getTagValue() {
+	public String getTagValue() {
 		return tagValue;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setTagValue(String newTagValue) {
+	public void setTagValue(String newTagValue) {
 		String oldTagValue = tagValue;
 		tagValue = newTagValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__TAG_VALUE, oldTagValue, tagValue));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getDateAcquired() {
+	public Date getDateAcquired() {
 		return dateAcquired;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDateAcquired(Date newDateAcquired) {
+	public void setDateAcquired(Date newDateAcquired) {
 		Date oldDateAcquired = dateAcquired;
 		dateAcquired = newDateAcquired;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DATE_ACQUIRED, oldDateAcquired, dateAcquired));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getDamageDate() {
+	public Date getDamageDate() {
 		return damageDate;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDamageDate(Date newDamageDate) {
+	public void setDamageDate(Date newDamageDate) {
 		Date oldDamageDate = damageDate;
 		damageDate = newDamageDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DAMAGE_DATE, oldDamageDate, damageDate));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDamageDescription() {
+	public String getDamageDescription() {
 		return damageDescription;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDamageDescription(String newDamageDescription) {
+	public void setDamageDescription(String newDamageDescription) {
 		String oldDamageDescription = damageDescription;
 		damageDescription = newDamageDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DAMAGE_DESCRIPTION, oldDamageDescription, damageDescription));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getDateDisposed() {
+	public Date getDateDisposed() {
 		return dateDisposed;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDateDisposed(Date newDateDisposed) {
+	public void setDateDisposed(Date newDateDisposed) {
 		Date oldDateDisposed = dateDisposed;
 		dateDisposed = newDateDisposed;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DATE_DISPOSED, oldDateDisposed, dateDisposed));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDisposalReason() {
+	public String getDisposalReason() {
 		return disposalReason;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDisposalReason(String newDisposalReason) {
+	public void setDisposalReason(String newDisposalReason) {
 		String oldDisposalReason = disposalReason;
 		disposalReason = newDisposalReason;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DISPOSAL_REASON, oldDisposalReason, disposalReason));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDisposalWitness() {
+	public String getDisposalWitness() {
 		return disposalWitness;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDisposalWitness(String newDisposalWitness) {
+	public void setDisposalWitness(String newDisposalWitness) {
 		String oldDisposalWitness = disposalWitness;
 		disposalWitness = newDisposalWitness;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DISPOSAL_WITNESS, oldDisposalWitness, disposalWitness));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.ASSET__ASSET_ID:
 				return getAssetId();
@@ -444,12 +458,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.ASSET__ASSET_ID:
 				setAssetId((Long)newValue);
@@ -482,12 +497,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.ASSET__ASSET_ID:
 				setAssetId(ASSET_ID_EDEFAULT);
@@ -520,12 +536,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.ASSET__ASSET_ID:
 				return ASSET_ID_EDEFAULT == null ? assetId != null : !ASSET_ID_EDEFAULT.equals(assetId);
@@ -549,12 +566,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -580,4 +598,4 @@ public class AssetImpl extends EObjectImpl implements Asset {
 		return result.toString();
 	}
 
-} // AssetImpl
+} //AssetImpl

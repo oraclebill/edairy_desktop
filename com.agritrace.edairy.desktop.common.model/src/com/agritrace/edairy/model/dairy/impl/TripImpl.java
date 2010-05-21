@@ -6,24 +6,29 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.model.dairy.Trip;
 
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Trip</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Trip</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -37,149 +42,158 @@ import com.agritrace.edairy.model.dairy.Trip;
  * @generated
  */
 public class TripImpl extends EObjectImpl implements Trip {
-    /**
+	/**
 	 * The cached value of the '{@link #getCollections() <em>Collections</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCollections()
 	 * @generated
 	 * @ordered
 	 */
-    protected EList<CollectionJournal> collections;
+	protected EList<CollectionJournal> collections;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDeliveries() <em>Deliveries</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDeliveries()
 	 * @generated
 	 * @ordered
 	 */
-    protected EList<DeliveryJournal> deliveries;
+	protected EList<DeliveryJournal> deliveries;
 
-    /**
+	/**
 	 * The default value of the '{@link #getStarted() <em>Started</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getStarted()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date STARTED_EDEFAULT = null;
+	protected static final Date STARTED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getStarted() <em>Started</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getStarted()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date started = STARTED_EDEFAULT;
+	protected Date started = STARTED_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getEnded() <em>Ended</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getEnded()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date ENDED_EDEFAULT = null;
+	protected static final Date ENDED_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getEnded() <em>Ended</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getEnded()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date ended = ENDED_EDEFAULT;
+	protected Date ended = ENDED_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected TripImpl() {
+	protected TripImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.TRIP;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<CollectionJournal> getCollections() {
+	public EList<CollectionJournal> getCollections() {
 		if (collections == null) {
 			collections = new EObjectResolvingEList<CollectionJournal>(CollectionJournal.class, this, DairyPackage.TRIP__COLLECTIONS);
 		}
 		return collections;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<DeliveryJournal> getDeliveries() {
+	public EList<DeliveryJournal> getDeliveries() {
 		if (deliveries == null) {
 			deliveries = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.TRIP__DELIVERIES);
 		}
 		return deliveries;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getStarted() {
+	public Date getStarted() {
 		return started;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setStarted(Date newStarted) {
+	public void setStarted(Date newStarted) {
 		Date oldStarted = started;
 		started = newStarted;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__STARTED, oldStarted, started));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getEnded() {
+	public Date getEnded() {
 		return ended;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setEnded(Date newEnded) {
+	public void setEnded(Date newEnded) {
 		Date oldEnded = ended;
 		ended = newEnded;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__ENDED, oldEnded, ended));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.TRIP__COLLECTIONS:
 				return getCollections();
@@ -193,13 +207,14 @@ public class TripImpl extends EObjectImpl implements Trip {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.TRIP__COLLECTIONS:
 				getCollections().clear();
@@ -219,12 +234,13 @@ public class TripImpl extends EObjectImpl implements Trip {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.TRIP__COLLECTIONS:
 				getCollections().clear();
@@ -242,12 +258,13 @@ public class TripImpl extends EObjectImpl implements Trip {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.TRIP__COLLECTIONS:
 				return collections != null && !collections.isEmpty();
@@ -261,12 +278,13 @@ public class TripImpl extends EObjectImpl implements Trip {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -278,4 +296,4 @@ public class TripImpl extends EObjectImpl implements Trip {
 		return result.toString();
 	}
 
-} // TripImpl
+} //TripImpl

@@ -6,23 +6,28 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.UnitOfMeasure;
+
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Membership;
+
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Collection Journal Line</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Collection Journal Line</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -45,352 +50,367 @@ import com.agritrace.edairy.model.tracking.Farm;
  * @generated
  */
 public class CollectionJournalLineImpl extends EObjectImpl implements CollectionJournalLine {
-    /**
+	/**
 	 * The default value of the '{@link #getLineNumber() <em>Line Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLineNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final int LINE_NUMBER_EDEFAULT = 0;
+	protected static final int LINE_NUMBER_EDEFAULT = 0;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLineNumber() <em>Line Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLineNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected int lineNumber = LINE_NUMBER_EDEFAULT;
+	protected int lineNumber = LINE_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getRecordedMember() <em>Recorded Member</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRecordedMember()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String RECORDED_MEMBER_EDEFAULT = null;
+	protected static final String RECORDED_MEMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRecordedMember() <em>Recorded Member</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRecordedMember()
 	 * @generated
 	 * @ordered
 	 */
-    protected String recordedMember = RECORDED_MEMBER_EDEFAULT;
+	protected String recordedMember = RECORDED_MEMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getQuantity()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final double QUANTITY_EDEFAULT = 0.0;
+	protected static final double QUANTITY_EDEFAULT = 0.0;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getQuantity()
 	 * @generated
 	 * @ordered
 	 */
-    protected double quantity = QUANTITY_EDEFAULT;
+	protected double quantity = QUANTITY_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #isFlagged() <em>Flagged</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isFlagged()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final boolean FLAGGED_EDEFAULT = false;
+	protected static final boolean FLAGGED_EDEFAULT = false;
 
-    /**
+	/**
 	 * The cached value of the '{@link #isFlagged() <em>Flagged</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isFlagged()
 	 * @generated
 	 * @ordered
 	 */
-    protected boolean flagged = FLAGGED_EDEFAULT;
+	protected boolean flagged = FLAGGED_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getUnitOfMeasure() <em>Unit Of Measure</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getUnitOfMeasure()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final UnitOfMeasure UNIT_OF_MEASURE_EDEFAULT = UnitOfMeasure.LITRE;
+	protected static final UnitOfMeasure UNIT_OF_MEASURE_EDEFAULT = UnitOfMeasure.LITRE;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getUnitOfMeasure() <em>Unit Of Measure</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getUnitOfMeasure()
 	 * @generated
 	 * @ordered
 	 */
-    protected UnitOfMeasure unitOfMeasure = UNIT_OF_MEASURE_EDEFAULT;
+	protected UnitOfMeasure unitOfMeasure = UNIT_OF_MEASURE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #isNotRecorded() <em>Not Recorded</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isNotRecorded()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final boolean NOT_RECORDED_EDEFAULT = false;
+	protected static final boolean NOT_RECORDED_EDEFAULT = false;
 
-    /**
+	/**
 	 * The cached value of the '{@link #isNotRecorded() <em>Not Recorded</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isNotRecorded()
 	 * @generated
 	 * @ordered
 	 */
-    protected boolean notRecorded = NOT_RECORDED_EDEFAULT;
+	protected boolean notRecorded = NOT_RECORDED_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getValidatedMember() <em>Validated Member</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValidatedMember()
 	 * @generated
 	 * @ordered
 	 */
-    protected Membership validatedMember;
+	protected Membership validatedMember;
 
-    /**
+	/**
 	 * The default value of the '{@link #isOffRoute() <em>Off Route</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isOffRoute()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final boolean OFF_ROUTE_EDEFAULT = false;
+	protected static final boolean OFF_ROUTE_EDEFAULT = false;
 
-    /**
+	/**
 	 * The cached value of the '{@link #isOffRoute() <em>Off Route</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isOffRoute()
 	 * @generated
 	 * @ordered
 	 */
-    protected boolean offRoute = OFF_ROUTE_EDEFAULT;
+	protected boolean offRoute = OFF_ROUTE_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFrom()
 	 * @generated
 	 * @ordered
 	 */
-    protected Farm from;
+	protected Farm from;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFarmContainer() <em>Farm Container</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFarmContainer()
 	 * @generated
 	 * @ordered
 	 */
-    protected Container farmContainer;
+	protected Container farmContainer;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDairyContainer() <em>Dairy Container</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDairyContainer()
 	 * @generated
 	 * @ordered
 	 */
-    protected Container dairyContainer;
+	protected Container dairyContainer;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getCollectionJournal() <em>Collection Journal</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCollectionJournal()
 	 * @generated
 	 * @ordered
 	 */
-    protected CollectionJournal collectionJournal;
+	protected CollectionJournal collectionJournal;
 
-    /**
+	/**
 	 * The default value of the '{@link #isRejected() <em>Rejected</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isRejected()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final boolean REJECTED_EDEFAULT = false;
+	protected static final boolean REJECTED_EDEFAULT = false;
 
-    /**
+	/**
 	 * The cached value of the '{@link #isRejected() <em>Rejected</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isRejected()
 	 * @generated
 	 * @ordered
 	 */
-    protected boolean rejected = REJECTED_EDEFAULT;
+	protected boolean rejected = REJECTED_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected CollectionJournalLineImpl() {
+	protected CollectionJournalLineImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.COLLECTION_JOURNAL_LINE;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int getLineNumber() {
+	public int getLineNumber() {
 		return lineNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLineNumber(int newLineNumber) {
+	public void setLineNumber(int newLineNumber) {
 		int oldLineNumber = lineNumber;
 		lineNumber = newLineNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER, oldLineNumber, lineNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getRecordedMember() {
+	public String getRecordedMember() {
 		return recordedMember;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRecordedMember(String newRecordedMember) {
+	public void setRecordedMember(String newRecordedMember) {
 		String oldRecordedMember = recordedMember;
 		recordedMember = newRecordedMember;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER, oldRecordedMember, recordedMember));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public double getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setQuantity(double newQuantity) {
+	public void setQuantity(double newQuantity) {
 		double oldQuantity = quantity;
 		quantity = newQuantity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__QUANTITY, oldQuantity, quantity));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean isFlagged() {
+	public boolean isFlagged() {
 		return flagged;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFlagged(boolean newFlagged) {
+	public void setFlagged(boolean newFlagged) {
 		boolean oldFlagged = flagged;
 		flagged = newFlagged;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__FLAGGED, oldFlagged, flagged));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public UnitOfMeasure getUnitOfMeasure() {
+	public UnitOfMeasure getUnitOfMeasure() {
 		return unitOfMeasure;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setUnitOfMeasure(UnitOfMeasure newUnitOfMeasure) {
+	public void setUnitOfMeasure(UnitOfMeasure newUnitOfMeasure) {
 		UnitOfMeasure oldUnitOfMeasure = unitOfMeasure;
 		unitOfMeasure = newUnitOfMeasure == null ? UNIT_OF_MEASURE_EDEFAULT : newUnitOfMeasure;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__UNIT_OF_MEASURE, oldUnitOfMeasure, unitOfMeasure));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean isNotRecorded() {
+	public boolean isNotRecorded() {
 		return notRecorded;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setNotRecorded(boolean newNotRecorded) {
+	public void setNotRecorded(boolean newNotRecorded) {
 		boolean oldNotRecorded = notRecorded;
 		notRecorded = newNotRecorded;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__NOT_RECORDED, oldNotRecorded, notRecorded));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Membership getValidatedMember() {
+	public Membership getValidatedMember() {
 		if (validatedMember != null && validatedMember.eIsProxy()) {
 			InternalEObject oldValidatedMember = (InternalEObject)validatedMember;
 			validatedMember = (Membership)eResolveProxy(oldValidatedMember);
@@ -402,53 +422,54 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return validatedMember;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Membership basicGetValidatedMember() {
+	public Membership basicGetValidatedMember() {
 		return validatedMember;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setValidatedMember(Membership newValidatedMember) {
+	public void setValidatedMember(Membership newValidatedMember) {
 		Membership oldValidatedMember = validatedMember;
 		validatedMember = newValidatedMember;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__VALIDATED_MEMBER, oldValidatedMember, validatedMember));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean isOffRoute() {
+	public boolean isOffRoute() {
 		return offRoute;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setOffRoute(boolean newOffRoute) {
+	public void setOffRoute(boolean newOffRoute) {
 		boolean oldOffRoute = offRoute;
 		offRoute = newOffRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__OFF_ROUTE, oldOffRoute, offRoute));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Farm getFrom() {
+	public Farm getFrom() {
 		if (from != null && from.eIsProxy()) {
 			InternalEObject oldFrom = (InternalEObject)from;
 			from = (Farm)eResolveProxy(oldFrom);
@@ -460,32 +481,33 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return from;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Farm basicGetFrom() {
+	public Farm basicGetFrom() {
 		return from;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFrom(Farm newFrom) {
+	public void setFrom(Farm newFrom) {
 		Farm oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__FROM, oldFrom, from));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Container getFarmContainer() {
+	public Container getFarmContainer() {
 		if (farmContainer != null && farmContainer.eIsProxy()) {
 			InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
 			farmContainer = (Container)eResolveProxy(oldFarmContainer);
@@ -497,32 +519,33 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return farmContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Container basicGetFarmContainer() {
+	public Container basicGetFarmContainer() {
 		return farmContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFarmContainer(Container newFarmContainer) {
+	public void setFarmContainer(Container newFarmContainer) {
 		Container oldFarmContainer = farmContainer;
 		farmContainer = newFarmContainer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__FARM_CONTAINER, oldFarmContainer, farmContainer));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Container getDairyContainer() {
+	public Container getDairyContainer() {
 		if (dairyContainer != null && dairyContainer.eIsProxy()) {
 			InternalEObject oldDairyContainer = (InternalEObject)dairyContainer;
 			dairyContainer = (Container)eResolveProxy(oldDairyContainer);
@@ -534,32 +557,33 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return dairyContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Container basicGetDairyContainer() {
+	public Container basicGetDairyContainer() {
 		return dairyContainer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDairyContainer(Container newDairyContainer) {
+	public void setDairyContainer(Container newDairyContainer) {
 		Container oldDairyContainer = dairyContainer;
 		dairyContainer = newDairyContainer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER, oldDairyContainer, dairyContainer));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public CollectionJournal getCollectionJournal() {
+	public CollectionJournal getCollectionJournal() {
 		if (collectionJournal != null && collectionJournal.eIsProxy()) {
 			InternalEObject oldCollectionJournal = (InternalEObject)collectionJournal;
 			collectionJournal = (CollectionJournal)eResolveProxy(oldCollectionJournal);
@@ -571,53 +595,55 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return collectionJournal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public CollectionJournal basicGetCollectionJournal() {
+	public CollectionJournal basicGetCollectionJournal() {
 		return collectionJournal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setCollectionJournal(CollectionJournal newCollectionJournal) {
+	public void setCollectionJournal(CollectionJournal newCollectionJournal) {
 		CollectionJournal oldCollectionJournal = collectionJournal;
 		collectionJournal = newCollectionJournal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL, oldCollectionJournal, collectionJournal));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean isRejected() {
+	public boolean isRejected() {
 		return rejected;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRejected(boolean newRejected) {
+	public void setRejected(boolean newRejected) {
 		boolean oldRejected = rejected;
 		rejected = newRejected;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED, oldRejected, rejected));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				return getLineNumber();
@@ -654,12 +680,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				setLineNumber((Integer)newValue);
@@ -704,12 +731,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				setLineNumber(LINE_NUMBER_EDEFAULT);
@@ -754,12 +782,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				return lineNumber != LINE_NUMBER_EDEFAULT;
@@ -791,12 +820,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -820,4 +850,4 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		return result.toString();
 	}
 
-} // CollectionJournalLineImpl
+} //CollectionJournalLineImpl

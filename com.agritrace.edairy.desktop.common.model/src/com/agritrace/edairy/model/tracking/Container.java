@@ -6,14 +6,15 @@
  */
 package com.agritrace.edairy.model.tracking;
 
-import org.eclipse.emf.ecore.EObject;
-
 import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.UnitOfMeasure;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Container</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Container</b></em>'.
+ * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
@@ -31,98 +32,93 @@ import com.agritrace.edairy.model.UnitOfMeasure;
  * @generated
  */
 public interface Container extends EObject {
-    /**
-     * Returns the value of the '<em><b>Container Id</b></em>' attribute. <!--
-     * begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Container Id</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Container Id</em>' attribute.
-     * @see #setContainerId(String)
-     * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_ContainerId()
-     * @model
-     * @generated
-     */
-    String getContainerId();
+	/**
+	 * Returns the value of the '<em><b>Container Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Container Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Container Id</em>' attribute.
+	 * @see #setContainerId(String)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_ContainerId()
+	 * @model
+	 * @generated
+	 */
+	String getContainerId();
 
-    /**
+	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getContainerId <em>Container Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Container Id</em>' attribute.
 	 * @see #getContainerId()
 	 * @generated
 	 */
-    void setContainerId(String value);
+	void setContainerId(String value);
 
-    /**
-     * Returns the value of the '<em><b>Owner</b></em>' reference. <!--
-     * begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Owner</em>' reference isn't clear, there
-     * really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Owner</em>' reference.
-     * @see #setOwner(Farm)
-     * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Owner()
-     * @model required="true"
-     * @generated
-     */
-    Farm getOwner();
+	/**
+	 * Returns the value of the '<em><b>Owner</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owner</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owner</em>' reference.
+	 * @see #setOwner(Farm)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Owner()
+	 * @model required="true"
+	 * @generated
+	 */
+	Farm getOwner();
 
-    /**
+	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getOwner <em>Owner</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owner</em>' reference.
 	 * @see #getOwner()
 	 * @generated
 	 */
-    void setOwner(Farm value);
+	void setOwner(Farm value);
 
-    /**
-     * Returns the value of the '<em><b>Capacity</b></em>' attribute. <!--
-     * begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Capacity</em>' attribute isn't clear, there
-     * really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Capacity</em>' attribute.
-     * @see #setCapacity(double)
-     * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Capacity()
-     * @model
-     * @generated
-     */
-    double getCapacity();
+	/**
+	 * Returns the value of the '<em><b>Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Capacity</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Capacity</em>' attribute.
+	 * @see #setCapacity(double)
+	 * @see com.agritrace.edairy.model.tracking.TrackingPackage#getContainer_Capacity()
+	 * @model
+	 * @generated
+	 */
+	double getCapacity();
 
-    /**
-     * Sets the value of the '
-     * {@link com.agritrace.edairy.model.tracking.Container#getCapacity
-     * <em>Capacity</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-     * -->
-     * 
-     * @param value
-     *            the new value of the '<em>Capacity</em>' attribute.
-     * @see #getCapacity()
-     * @generated
-     */
-    void setCapacity(double value);
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getCapacity <em>Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Capacity</em>' attribute.
+	 * @see #getCapacity()
+	 * @generated
+	 */
+	void setCapacity(double value);
 
-    /**
+	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.agritrace.edairy.model.ContainerType}.
 	 * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Type</em>' attribute isn't clear, there really
-     * should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see com.agritrace.edairy.model.ContainerType
 	 * @see #setType(ContainerType)
@@ -130,27 +126,28 @@ public interface Container extends EObject {
 	 * @model
 	 * @generated
 	 */
-    ContainerType getType();
+	ContainerType getType();
 
-    /**
+	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' attribute.
 	 * @see com.agritrace.edairy.model.ContainerType
 	 * @see #getType()
 	 * @generated
 	 */
-    void setType(ContainerType value);
+	void setType(ContainerType value);
 
-    /**
+	/**
 	 * Returns the value of the '<em><b>Measure Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.agritrace.edairy.model.UnitOfMeasure}.
 	 * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Measure Type</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Measure Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Measure Type</em>' attribute.
 	 * @see com.agritrace.edairy.model.UnitOfMeasure
 	 * @see #setMeasureType(UnitOfMeasure)
@@ -158,17 +155,17 @@ public interface Container extends EObject {
 	 * @model
 	 * @generated
 	 */
-    UnitOfMeasure getMeasureType();
+	UnitOfMeasure getMeasureType();
 
-    /**
+	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.model.tracking.Container#getMeasureType <em>Measure Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Measure Type</em>' attribute.
 	 * @see com.agritrace.edairy.model.UnitOfMeasure
 	 * @see #getMeasureType()
 	 * @generated
 	 */
-    void setMeasureType(UnitOfMeasure value);
+	void setMeasureType(UnitOfMeasure value);
 
 } // Container

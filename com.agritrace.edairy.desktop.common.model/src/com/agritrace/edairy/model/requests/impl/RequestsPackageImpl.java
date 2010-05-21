@@ -6,85 +6,95 @@
  */
 package com.agritrace.edairy.model.requests.impl;
 
+
+
+import com.agritrace.edairy.model.ModelPackage;
+
+import com.agritrace.edairy.model.dairy.DairyPackage;
+
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
+import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
+
+import com.agritrace.edairy.model.impl.ModelPackageImpl;
+
+import com.agritrace.edairy.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.model.requests.RequestType;
+import com.agritrace.edairy.model.requests.RequestsFactory;
+import com.agritrace.edairy.model.requests.RequestsPackage;
+
+import com.agritrace.edairy.model.tracking.TrackingPackage;
+
+import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import com.agritrace.edairy.dairy.model.account.AccountPackage;
-import com.agritrace.edairy.dairy.model.account.impl.AccountPackageImpl;
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.impl.DairyPackageImpl;
-import com.agritrace.edairy.model.impl.ModelPackageImpl;
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsFactory;
-import com.agritrace.edairy.model.requests.RequestsPackage;
-import com.agritrace.edairy.model.tracking.TrackingPackage;
-import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
-
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage {
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass animalHealthRequestEClass = null;
+	private EClass animalHealthRequestEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum requestTypeEEnum = null;
+	private EEnum requestTypeEEnum = null;
 
-    /**
-     * Creates an instance of the model <b>Package</b>, registered with
-     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-     * package package URI value.
-     * <p>
-     * Note: the correct way to create the package is via the static factory
-     * method {@link #init init()}, which also performs initialization of the
-     * package, or returns the registered package, if one already exists. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see com.agritrace.edairy.model.requests.RequestsPackage#eNS_URI
-     * @see #init()
-     * @generated
-     */
-    private RequestsPackageImpl() {
+	/**
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.ecore.EPackage.Registry
+	 * @see com.agritrace.edairy.model.requests.RequestsPackage#eNS_URI
+	 * @see #init()
+	 * @generated
+	 */
+	private RequestsPackageImpl() {
 		super(eNS_URI, RequestsFactory.eINSTANCE);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private static boolean isInited = false;
+	private static boolean isInited = false;
 
-    /**
-     * Creates, registers, and initializes the <b>Package</b> for this model,
-     * and for any others upon which it depends.
-     * 
-     * <p>
-     * This method is used to initialize {@link RequestsPackage#eINSTANCE} when
-     * that field is accessed. Clients should not invoke it directly. Instead,
-     * they should simply access that field to obtain the package. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #eNS_URI
-     * @see #createPackageContents()
-     * @see #initializePackageContents()
-     * @generated
-     */
-    public static RequestsPackage init() {
+	/**
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link RequestsPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
+	 * @generated
+	 */
+	public static RequestsPackage init() {
 		if (isInited) return (RequestsPackage)EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI);
 
 		// Obtain or create and register package
@@ -121,173 +131,174 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		return theRequestsPackage;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EClass getAnimalHealthRequest() {
+	public EClass getAnimalHealthRequest() {
 		return animalHealthRequestEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_RequestId() {
+	public EAttribute getAnimalHealthRequest_RequestId() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getAnimalHealthRequest_RequestingMember() {
+	public EReference getAnimalHealthRequest_RequestingMember() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getAnimalHealthRequest_Dairy() {
+	public EReference getAnimalHealthRequest_Dairy() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_Date() {
+	public EAttribute getAnimalHealthRequest_Date() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_Type() {
+	public EAttribute getAnimalHealthRequest_Type() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_ReportedProblem() {
+	public EAttribute getAnimalHealthRequest_ReportedProblem() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getAnimalHealthRequest_ReportedAnimal() {
+	public EReference getAnimalHealthRequest_ReportedAnimal() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_DateHeatDetected() {
+	public EAttribute getAnimalHealthRequest_DateHeatDetected() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_FirstTreatment() {
+	public EAttribute getAnimalHealthRequest_FirstTreatment() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_SecondTreatment() {
+	public EAttribute getAnimalHealthRequest_SecondTreatment() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EAttribute getAnimalHealthRequest_ThirdTreatment() {
+	public EAttribute getAnimalHealthRequest_ThirdTreatment() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(10);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getAnimalHealthRequest_Member() {
+	public EReference getAnimalHealthRequest_Member() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(11);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getAnimalHealthRequest_Farm() {
+	public EReference getAnimalHealthRequest_Farm() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(12);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EReference getAnimalHealthRequest_ReferredTo() {
+	public EReference getAnimalHealthRequest_ReferredTo() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(13);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EEnum getRequestType() {
+	public EEnum getRequestType() {
 		return requestTypeEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public RequestsFactory getRequestsFactory() {
+	public RequestsFactory getRequestsFactory() {
 		return (RequestsFactory)getEFactoryInstance();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isCreated = false;
+	private boolean isCreated = false;
 
-    /**
+	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void createPackageContents() {
+	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
 
@@ -312,20 +323,21 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		requestTypeEEnum = createEEnum(REQUEST_TYPE);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isInitialized = false;
+	private boolean isInitialized = false;
 
-    /**
-     * Complete the initialization of the package and its meta-model. This
-     * method is guarded to have no affect on any invocation but its first. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public void initializePackageContents() {
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -371,4 +383,4 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		createResource(eNS_URI);
 	}
 
-} // RequestsPackageImpl
+} //RequestsPackageImpl

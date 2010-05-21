@@ -6,17 +6,20 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.DescriptiveLocation;
 import com.agritrace.edairy.model.ModelPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Descriptive Location</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Descriptive Location</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -28,107 +31,114 @@ import com.agritrace.edairy.model.ModelPackage;
  * @generated
  */
 public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveLocation {
-    /**
+	/**
 	 * The default value of the '{@link #getDirections() <em>Directions</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDirections()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DIRECTIONS_EDEFAULT = null;
+	protected static final String DIRECTIONS_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDirections() <em>Directions</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDirections()
 	 * @generated
 	 * @ordered
 	 */
-    protected String directions = DIRECTIONS_EDEFAULT;
+	protected String directions = DIRECTIONS_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getLandmarks() <em>Landmarks</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLandmarks()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String LANDMARKS_EDEFAULT = null;
+	protected static final String LANDMARKS_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLandmarks() <em>Landmarks</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLandmarks()
 	 * @generated
 	 * @ordered
 	 */
-    protected String landmarks = LANDMARKS_EDEFAULT;
+	protected String landmarks = LANDMARKS_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected DescriptiveLocationImpl() {
+	protected DescriptiveLocationImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.DESCRIPTIVE_LOCATION;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDirections() {
+	public String getDirections() {
 		return directions;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDirections(String newDirections) {
+	public void setDirections(String newDirections) {
 		String oldDirections = directions;
 		directions = newDirections;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS, oldDirections, directions));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLandmarks() {
+	public String getLandmarks() {
 		return landmarks;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLandmarks(String newLandmarks) {
+	public void setLandmarks(String newLandmarks) {
 		String oldLandmarks = landmarks;
 		landmarks = newLandmarks;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DESCRIPTIVE_LOCATION__LANDMARKS, oldLandmarks, landmarks));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				return getDirections();
@@ -138,12 +148,13 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				setDirections((String)newValue);
@@ -155,12 +166,13 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				setDirections(DIRECTIONS_EDEFAULT);
@@ -172,12 +184,13 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				return DIRECTIONS_EDEFAULT == null ? directions != null : !DIRECTIONS_EDEFAULT.equals(directions);
@@ -187,12 +200,13 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -204,4 +218,4 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 		return result.toString();
 	}
 
-} // DescriptiveLocationImpl
+} //DescriptiveLocationImpl

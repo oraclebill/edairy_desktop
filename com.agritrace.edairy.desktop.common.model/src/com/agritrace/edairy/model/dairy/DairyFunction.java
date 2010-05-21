@@ -13,148 +13,148 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc --> A representation of the literals of the enumeration '
- * <em><b>Function</b></em>', and utility methods for working with them. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the literals of the enumeration '<em><b>Function</b></em>',
+ * and utility methods for working with them.
+ * <!-- end-user-doc -->
  * @see com.agritrace.edairy.model.dairy.DairyPackage#getDairyFunction()
  * @model
  * @generated
  */
 public enum DairyFunction implements Enumerator {
-    /**
+	/**
 	 * The '<em><b>Milk Collection</b></em>' literal object.
-	 * <!-- begin-user-doc
-     * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MILK_COLLECTION_VALUE
 	 * @generated
 	 * @ordered
 	 */
-    MILK_COLLECTION(0, "MilkCollection", "MilkCollection"),
+	MILK_COLLECTION(0, "MilkCollection", "MilkCollection"),
 
-    /**
+	/**
 	 * The '<em><b>Milk Storage</b></em>' literal object.
-	 * <!-- begin-user-doc
-     * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MILK_STORAGE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-    MILK_STORAGE(1, "MilkStorage", "MilkStorage"),
+	MILK_STORAGE(1, "MilkStorage", "MilkStorage"),
 
-    /**
+	/**
 	 * The '<em><b>Store Sales</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #STORE_SALES_VALUE
 	 * @generated
 	 * @ordered
 	 */
-    STORE_SALES(2, "StoreSales", "StoreSales"),
+	STORE_SALES(2, "StoreSales", "StoreSales"),
 
-    /**
+	/**
 	 * The '<em><b>Warehouse</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #WAREHOUSE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-    WAREHOUSE(3, "Warehouse", "Warehouse"),
+	WAREHOUSE(3, "Warehouse", "Warehouse"),
 
-    /**
+	/**
 	 * The '<em><b>Milk Processing</b></em>' literal object.
-	 * <!-- begin-user-doc
-     * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #MILK_PROCESSING_VALUE
 	 * @generated
 	 * @ordered
 	 */
-    MILK_PROCESSING(4, "MilkProcessing", "MilkProcessing");
+	MILK_PROCESSING(4, "MilkProcessing", "MilkProcessing");
 
-    /**
+	/**
 	 * The '<em><b>Milk Collection</b></em>' literal value.
-	 * <!-- begin-user-doc
-     * -->
-     * <p>
-     * If the meaning of '<em><b>Milk Collection</b></em>' literal object isn't
-     * clear, there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Milk Collection</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @see #MILK_COLLECTION
 	 * @model name="MilkCollection"
 	 * @generated
 	 * @ordered
 	 */
-    public static final int MILK_COLLECTION_VALUE = 0;
+	public static final int MILK_COLLECTION_VALUE = 0;
 
-    /**
+	/**
 	 * The '<em><b>Milk Storage</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of '<em><b>Milk Storage</b></em>' literal object isn't
-     * clear, there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Milk Storage</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @see #MILK_STORAGE
 	 * @model name="MilkStorage"
 	 * @generated
 	 * @ordered
 	 */
-    public static final int MILK_STORAGE_VALUE = 1;
+	public static final int MILK_STORAGE_VALUE = 1;
 
-    /**
+	/**
 	 * The '<em><b>Store Sales</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of '<em><b>Store Sales</b></em>' literal object isn't
-     * clear, there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Store Sales</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @see #STORE_SALES
 	 * @model name="StoreSales"
 	 * @generated
 	 * @ordered
 	 */
-    public static final int STORE_SALES_VALUE = 2;
+	public static final int STORE_SALES_VALUE = 2;
 
-    /**
+	/**
 	 * The '<em><b>Warehouse</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of '<em><b>Warehouse</b></em>' literal object isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Warehouse</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @see #WAREHOUSE
 	 * @model name="Warehouse"
 	 * @generated
 	 * @ordered
 	 */
-    public static final int WAREHOUSE_VALUE = 3;
+	public static final int WAREHOUSE_VALUE = 3;
 
-    /**
+	/**
 	 * The '<em><b>Milk Processing</b></em>' literal value.
-	 * <!-- begin-user-doc
-     * -->
-     * <p>
-     * If the meaning of '<em><b>Milk Processing</b></em>' literal object isn't
-     * clear, there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Milk Processing</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @see #MILK_PROCESSING
 	 * @model name="MilkProcessing"
 	 * @generated
 	 * @ordered
 	 */
-    public static final int MILK_PROCESSING_VALUE = 4;
+	public static final int MILK_PROCESSING_VALUE = 4;
 
-    /**
-     * An array of all the '<em><b>Function</b></em>' enumerators. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    private static final DairyFunction[] VALUES_ARRAY = new DairyFunction[] {
+	/**
+	 * An array of all the '<em><b>Function</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static final DairyFunction[] VALUES_ARRAY =
+		new DairyFunction[] {
 			MILK_COLLECTION,
 			MILK_STORAGE,
 			STORE_SALES,
@@ -162,19 +162,21 @@ public enum DairyFunction implements Enumerator {
 			MILK_PROCESSING,
 		};
 
-    /**
+	/**
 	 * A public read-only list of all the '<em><b>Function</b></em>' enumerators.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final List<DairyFunction> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<DairyFunction> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
-    /**
+	/**
 	 * Returns the '<em><b>Function</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static DairyFunction get(String literal) {
+	public static DairyFunction get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			DairyFunction result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -184,12 +186,13 @@ public enum DairyFunction implements Enumerator {
 		return null;
 	}
 
-    /**
+	/**
 	 * Returns the '<em><b>Function</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static DairyFunction getByName(String name) {
+	public static DairyFunction getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			DairyFunction result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -199,12 +202,13 @@ public enum DairyFunction implements Enumerator {
 		return null;
 	}
 
-    /**
+	/**
 	 * Returns the '<em><b>Function</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static DairyFunction get(int value) {
+	public static DairyFunction get(int value) {
 		switch (value) {
 			case MILK_COLLECTION_VALUE: return MILK_COLLECTION;
 			case MILK_STORAGE_VALUE: return MILK_STORAGE;
@@ -215,71 +219,75 @@ public enum DairyFunction implements Enumerator {
 		return null;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private final int value;
+	private final int value;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private final String name;
+	private final String name;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private final String literal;
+	private final String literal;
 
-    /**
+	/**
 	 * Only this class can construct instances.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private DairyFunction(int value, String name, String literal) {
+	private DairyFunction(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int getValue() {
+	public int getValue() {
 	  return value;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getName() {
+	public String getName() {
 	  return name;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLiteral() {
+	public String getLiteral() {
 	  return literal;
 	}
 
-    /**
+	/**
 	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		return literal;
 	}
-
-} // DairyFunction
+	
+} //DairyFunction

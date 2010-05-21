@@ -6,17 +6,20 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Animal Identifier</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Animal Identifier</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -28,107 +31,114 @@ import com.agritrace.edairy.model.tracking.TrackingPackage;
  * @generated
  */
 public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifier {
-    /**
+	/**
 	 * The default value of the '{@link #getIssuer() <em>Issuer</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getIssuer()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String ISSUER_EDEFAULT = null;
+	protected static final String ISSUER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getIssuer() <em>Issuer</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getIssuer()
 	 * @generated
 	 * @ordered
 	 */
-    protected String issuer = ISSUER_EDEFAULT;
+	protected String issuer = ISSUER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String VALUE_EDEFAULT = null;
+	protected static final String VALUE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-    protected String value = VALUE_EDEFAULT;
+	protected String value = VALUE_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected AnimalIdentifierImpl() {
+	protected AnimalIdentifierImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return TrackingPackage.Literals.ANIMAL_IDENTIFIER;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getIssuer() {
+	public String getIssuer() {
 		return issuer;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setIssuer(String newIssuer) {
+	public void setIssuer(String newIssuer) {
 		String oldIssuer = issuer;
 		issuer = newIssuer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.ANIMAL_IDENTIFIER__ISSUER, oldIssuer, issuer));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getValue() {
+	public String getValue() {
 		return value;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setValue(String newValue) {
+	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.ANIMAL_IDENTIFIER__VALUE, oldValue, value));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				return getIssuer();
@@ -138,12 +148,13 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				setIssuer((String)newValue);
@@ -155,12 +166,13 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				setIssuer(ISSUER_EDEFAULT);
@@ -172,12 +184,13 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				return ISSUER_EDEFAULT == null ? issuer != null : !ISSUER_EDEFAULT.equals(issuer);
@@ -187,12 +200,13 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -204,4 +218,4 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 		return result.toString();
 	}
 
-} // AnimalIdentifierImpl
+} //AnimalIdentifierImpl

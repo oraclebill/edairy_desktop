@@ -17,19 +17,20 @@ import org.eclipse.ui.part.ViewPart;
 import com.swtdesigner.SWTResourceManager;
 
 public class BlankView extends ViewPart {
-    public BlankView() {
-    }
 
-    public static final String ID = BlankView.class.getName();
+	public BlankView() {
+	}
 
-    @Override
-    public void createPartControl(Composite parent) {
-	final Composite top = new Composite(parent, SWT.NONE);
-	top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-    }
+	public static final String ID = "blank.view";
 
-    @Override
-    public void setFocus() {
-    }
+	@Override
+	public void createPartControl(Composite parent) {
+		final Composite top = new Composite(parent, SWT.NONE);
+		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+	}
+
+	@Override
+	public void setFocus() {
+	}
 
 }

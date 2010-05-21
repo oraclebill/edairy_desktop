@@ -63,23 +63,23 @@
 			name="NetworklDairyView">
 		</view>
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="com.agritrace.edairy.ui.views.BlankView"
+			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="blank.view"
 			name="Blank" restorable="true">
 		</view>
 		<view allowMultiple="true"
 			class="com.agritrace.edairy.desktop.ui.views.MilkProductionReportView"
-			id="com.agritrace.edairy.ui.views.MilkProductionReportView" name="Milk Production Report"
+			id="reports.milk.production" name="Milk Production Report"
 			restorable="true">
 		</view>
 
 		<view allowMultiple="true"
 			class="com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView"
-			id="com.agritrace.edairy.ui.views.MemberPayablesReportView" name="Member Payables Report"
+			id="com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView" name="Member Payables Report"
 			restorable="true">
 		</view>
 		<view allowMultiple="true"
 			class="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView"
-			id="com.agritrace.edairy.ui.views.MemberStatementReportView" name="Member Statement Report"
+			id="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView" name="Member Statement Report"
 			restorable="true">
 		</view>
 		<view allowMultiple="true"

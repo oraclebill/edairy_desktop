@@ -162,7 +162,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Supplier/notes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Supplier/rating"/>
     </genClasses>
-    <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.dairy.model"
+    <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.model.dairy"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionType">
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionType/CREDIT"/>

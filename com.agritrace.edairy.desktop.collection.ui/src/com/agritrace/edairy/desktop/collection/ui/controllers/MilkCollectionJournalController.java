@@ -128,7 +128,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	// List<String> driverList = Arrays.asList(new String[] {
 	// "23 - John Jones", "45 - Joseph Limuru", "66 - John Smith" });
 	final List<Employee> driverList = getDriverList();
-	driverRidget.bindToModel(new WritableList(driverList, Employee.class), Employee.class, "getName",
+	driverRidget.bindToModel(new WritableList(driverList, Employee.class), Employee.class, "getGivenName",
 		new WritableValue());
 	driverRidget.updateFromModel();
 	driverRidget.setMandatory(true);

@@ -6,20 +6,23 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import com.agritrace.edairy.model.dairy.DairyPackage;
 import com.agritrace.edairy.model.dairy.Employee;
 import com.agritrace.edairy.model.dairy.Vehicle;
 
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Vehicle</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Vehicle</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -42,501 +45,533 @@ import com.agritrace.edairy.model.dairy.Vehicle;
  * @generated
  */
 public class VehicleImpl extends AssetImpl implements Vehicle {
-    /**
+	/**
 	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRegistrationNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String REGISTRATION_NUMBER_EDEFAULT = null;
+	protected static final String REGISTRATION_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getRegistrationNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String registrationNumber = REGISTRATION_NUMBER_EDEFAULT;
+	protected String registrationNumber = REGISTRATION_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String TYPE_EDEFAULT = null;
+	protected static final String TYPE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-    protected String type = TYPE_EDEFAULT;
+	protected String type = TYPE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getMake() <em>Make</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMake()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String MAKE_EDEFAULT = null;
+	protected static final String MAKE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getMake() <em>Make</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMake()
 	 * @generated
 	 * @ordered
 	 */
-    protected String make = MAKE_EDEFAULT;
+	protected String make = MAKE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getModel() <em>Model</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getModel()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String MODEL_EDEFAULT = null;
+	protected static final String MODEL_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getModel() <em>Model</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getModel()
 	 * @generated
 	 * @ordered
 	 */
-    protected String model = MODEL_EDEFAULT;
+	protected String model = MODEL_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getEngineNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String ENGINE_NUMBER_EDEFAULT = null;
+	protected static final String ENGINE_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getEngineNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String engineNumber = ENGINE_NUMBER_EDEFAULT;
+	protected String engineNumber = ENGINE_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getChassisNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String CHASSIS_NUMBER_EDEFAULT = null;
+	protected static final String CHASSIS_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getChassisNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String chassisNumber = CHASSIS_NUMBER_EDEFAULT;
+	protected String chassisNumber = CHASSIS_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLogBookNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String LOG_BOOK_NUMBER_EDEFAULT = null;
+	protected static final String LOG_BOOK_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLogBookNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String logBookNumber = LOG_BOOK_NUMBER_EDEFAULT;
+	protected String logBookNumber = LOG_BOOK_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getInsurancePolicyNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String INSURANCE_POLICY_NUMBER_EDEFAULT = null;
+	protected static final String INSURANCE_POLICY_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getInsurancePolicyNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String insurancePolicyNumber = INSURANCE_POLICY_NUMBER_EDEFAULT;
+	protected String insurancePolicyNumber = INSURANCE_POLICY_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getInsuranceExpirationDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Date INSURANCE_EXPIRATION_DATE_EDEFAULT = null;
+	protected static final Date INSURANCE_EXPIRATION_DATE_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getInsuranceExpirationDate()
 	 * @generated
 	 * @ordered
 	 */
-    protected Date insuranceExpirationDate = INSURANCE_EXPIRATION_DATE_EDEFAULT;
+	protected Date insuranceExpirationDate = INSURANCE_EXPIRATION_DATE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDominantColour()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String DOMINANT_COLOUR_EDEFAULT = null;
+	protected static final String DOMINANT_COLOUR_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDominantColour()
 	 * @generated
 	 * @ordered
 	 */
-    protected String dominantColour = DOMINANT_COLOUR_EDEFAULT;
+	protected String dominantColour = DOMINANT_COLOUR_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCapacityInTonnes()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String CAPACITY_IN_TONNES_EDEFAULT = null;
+	protected static final String CAPACITY_IN_TONNES_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCapacityInTonnes()
 	 * @generated
 	 * @ordered
 	 */
-    protected String capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
+	protected String capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getYear()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String YEAR_EDEFAULT = null;
+	protected static final String YEAR_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getYear()
 	 * @generated
 	 * @ordered
 	 */
-    protected String year = YEAR_EDEFAULT;
+	protected String year = YEAR_EDEFAULT;
 
-				/**
+	/**
 	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getDriver()
 	 * @generated
 	 * @ordered
 	 */
-    protected Employee driver;
+	protected Employee driver;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected VehicleImpl() {
+	protected VehicleImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return DairyPackage.Literals.VEHICLE;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getRegistrationNumber() {
+	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setRegistrationNumber(String newRegistrationNumber) {
+	public void setRegistrationNumber(String newRegistrationNumber) {
 		String oldRegistrationNumber = registrationNumber;
 		registrationNumber = newRegistrationNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getType() {
+	public String getType() {
 		return type;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setType(String newType) {
+	public void setType(String newType) {
 		String oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__TYPE, oldType, type));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getMake() {
+	public String getMake() {
 		return make;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setMake(String newMake) {
+	public void setMake(String newMake) {
 		String oldMake = make;
 		make = newMake;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MAKE, oldMake, make));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getModel() {
+	public String getModel() {
 		return model;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setModel(String newModel) {
+	public void setModel(String newModel) {
 		String oldModel = model;
 		model = newModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MODEL, oldModel, model));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getEngineNumber() {
+	public String getEngineNumber() {
 		return engineNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setEngineNumber(String newEngineNumber) {
+	public void setEngineNumber(String newEngineNumber) {
 		String oldEngineNumber = engineNumber;
 		engineNumber = newEngineNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ENGINE_NUMBER, oldEngineNumber, engineNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getChassisNumber() {
+	public String getChassisNumber() {
 		return chassisNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setChassisNumber(String newChassisNumber) {
+	public void setChassisNumber(String newChassisNumber) {
 		String oldChassisNumber = chassisNumber;
 		chassisNumber = newChassisNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CHASSIS_NUMBER, oldChassisNumber, chassisNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getLogBookNumber() {
+	public String getLogBookNumber() {
 		return logBookNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLogBookNumber(String newLogBookNumber) {
+	public void setLogBookNumber(String newLogBookNumber) {
 		String oldLogBookNumber = logBookNumber;
 		logBookNumber = newLogBookNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__LOG_BOOK_NUMBER, oldLogBookNumber, logBookNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getInsurancePolicyNumber() {
+	public String getInsurancePolicyNumber() {
 		return insurancePolicyNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setInsurancePolicyNumber(String newInsurancePolicyNumber) {
+	public void setInsurancePolicyNumber(String newInsurancePolicyNumber) {
 		String oldInsurancePolicyNumber = insurancePolicyNumber;
 		insurancePolicyNumber = newInsurancePolicyNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER, oldInsurancePolicyNumber, insurancePolicyNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Date getInsuranceExpirationDate() {
+	public Date getInsuranceExpirationDate() {
 		return insuranceExpirationDate;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setInsuranceExpirationDate(Date newInsuranceExpirationDate) {
+	public void setInsuranceExpirationDate(Date newInsuranceExpirationDate) {
 		Date oldInsuranceExpirationDate = insuranceExpirationDate;
 		insuranceExpirationDate = newInsuranceExpirationDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE, oldInsuranceExpirationDate, insuranceExpirationDate));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getDominantColour() {
+	public String getDominantColour() {
 		return dominantColour;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDominantColour(String newDominantColour) {
+	public void setDominantColour(String newDominantColour) {
 		String oldDominantColour = dominantColour;
 		dominantColour = newDominantColour;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DOMINANT_COLOUR, oldDominantColour, dominantColour));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getCapacityInTonnes() {
+	public String getCapacityInTonnes() {
 		return capacityInTonnes;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setCapacityInTonnes(String newCapacityInTonnes) {
+	public void setCapacityInTonnes(String newCapacityInTonnes) {
 		String oldCapacityInTonnes = capacityInTonnes;
 		capacityInTonnes = newCapacityInTonnes;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CAPACITY_IN_TONNES, oldCapacityInTonnes, capacityInTonnes));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Employee getDriver() {
+	public String getYear() {
+		return year;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setYear(String newYear) {
+		String oldYear = year;
+		year = newYear;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Employee getDriver() {
 		if (driver != null && driver.eIsProxy()) {
 			InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
@@ -548,53 +583,34 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		return driver;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Employee basicGetDriver() {
+	public Employee basicGetDriver() {
 		return driver;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setDriver(Employee newDriver) {
+	public void setDriver(Employee newDriver) {
 		Employee oldDriver = driver;
 		driver = newDriver;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getYear() {
-		return year;
-	}
-
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-    @Override
-    public void setYear(String newYear) {
-		String oldYear = year;
-		year = newYear;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
-	}
-
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				return getRegistrationNumber();
@@ -627,12 +643,13 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				setRegistrationNumber((String)newValue);
@@ -677,12 +694,13 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
@@ -727,12 +745,13 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
@@ -764,12 +783,13 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -801,4 +821,4 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		return result.toString();
 	}
 
-} // VehicleImpl
+} //VehicleImpl

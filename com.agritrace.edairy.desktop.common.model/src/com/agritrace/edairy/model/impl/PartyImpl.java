@@ -6,26 +6,31 @@
  */
 package com.agritrace.edairy.model.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.model.ContactMethod;
 import com.agritrace.edairy.model.Location;
 import com.agritrace.edairy.model.ModelPackage;
 import com.agritrace.edairy.model.Party;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Party</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Party</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -40,144 +45,152 @@ import com.agritrace.edairy.model.Party;
  * @generated
  */
 public abstract class PartyImpl extends EObjectImpl implements Party {
-    /**
+	/**
 	 * The default value of the '{@link #getPartyId() <em>Party Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPartyId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String PARTY_ID_EDEFAULT = null;
+	protected static final String PARTY_ID_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getPartyId() <em>Party Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPartyId()
 	 * @generated
 	 * @ordered
 	 */
-    protected String partyId = PARTY_ID_EDEFAULT;
+	protected String partyId = PARTY_ID_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPhoneNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String PHONE_NUMBER_EDEFAULT = null;
+	protected static final String PHONE_NUMBER_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getPhoneNumber()
 	 * @generated
 	 * @ordered
 	 */
-    protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
+	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected Location location;
+	protected Location location;
 
-    /**
-     * The cached value of the '{@link #getContactMethods()
-     * <em>Contact Methods</em>}' containment reference list. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getContactMethods()
-     * @generated
-     * @ordered
-     */
-    protected EList<ContactMethod> contactMethods;
+	/**
+	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContactMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ContactMethod> contactMethods;
 
-    /**
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NAME_EDEFAULT = "";
+	protected static final String NAME_EDEFAULT = "";
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected PartyImpl() {
+	protected PartyImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return ModelPackage.Literals.PARTY;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getPartyId() {
+	public String getPartyId() {
 		return partyId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setPartyId(String newPartyId) {
+	public void setPartyId(String newPartyId) {
 		String oldPartyId = partyId;
 		partyId = newPartyId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__PARTY_ID, oldPartyId, partyId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setPhoneNumber(String newPhoneNumber) {
+	public void setPhoneNumber(String newPhoneNumber) {
 		String oldPhoneNumber = phoneNumber;
 		phoneNumber = newPhoneNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Location getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
 		Location oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired()) {
@@ -187,12 +200,12 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLocation(Location newLocation) {
+	public void setLocation(Location newLocation) {
 		if (newLocation != location) {
 			NotificationChain msgs = null;
 			if (location != null)
@@ -206,46 +219,47 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PARTY__LOCATION, newLocation, newLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<ContactMethod> getContactMethods() {
+	public EList<ContactMethod> getContactMethods() {
 		if (contactMethods == null) {
 			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.PARTY__CONTACT_METHODS);
 		}
 		return contactMethods;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getName() {
+	public String getName() {
 		// TODO: implement this method to return the 'Name' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setName(String newName) {
+	public void setName(String newName) {
 		// TODO: implement this method to set the 'Name' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.PARTY__LOCATION:
 				return basicSetLocation(null, msgs);
@@ -255,12 +269,13 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.PARTY__PARTY_ID:
 				return getPartyId();
@@ -276,13 +291,14 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.PARTY__PARTY_ID:
 				setPartyId((String)newValue);
@@ -304,12 +320,13 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.PARTY__PARTY_ID:
 				setPartyId(PARTY_ID_EDEFAULT);
@@ -330,12 +347,13 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.PARTY__PARTY_ID:
 				return PARTY_ID_EDEFAULT == null ? partyId != null : !PARTY_ID_EDEFAULT.equals(partyId);
@@ -351,12 +369,13 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -368,4 +387,4 @@ public abstract class PartyImpl extends EObjectImpl implements Party {
 		return result.toString();
 	}
 
-} // PartyImpl
+} //PartyImpl

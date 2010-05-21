@@ -6,21 +6,25 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.model.ContainerType;
 import com.agritrace.edairy.model.UnitOfMeasure;
+
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Container</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Container</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -35,131 +39,142 @@ import com.agritrace.edairy.model.tracking.TrackingPackage;
  * @generated
  */
 public class ContainerImpl extends EObjectImpl implements Container {
-    /**
+	/**
 	 * The default value of the '{@link #getContainerId() <em>Container Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getContainerId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String CONTAINER_ID_EDEFAULT = null;
+	protected static final String CONTAINER_ID_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getContainerId() <em>Container Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getContainerId()
 	 * @generated
 	 * @ordered
 	 */
-    protected String containerId = CONTAINER_ID_EDEFAULT;
+	protected String containerId = CONTAINER_ID_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getOwner()
 	 * @generated
 	 * @ordered
 	 */
-    protected Farm owner;
+	protected Farm owner;
 
-    /**
+	/**
 	 * The default value of the '{@link #getCapacity() <em>Capacity</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCapacity()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final double CAPACITY_EDEFAULT = 0.0;
+	protected static final double CAPACITY_EDEFAULT = 0.0;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getCapacity() <em>Capacity</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCapacity()
 	 * @generated
 	 * @ordered
 	 */
-    protected double capacity = CAPACITY_EDEFAULT;
+	protected double capacity = CAPACITY_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final ContainerType TYPE_EDEFAULT = ContainerType.BIN;
+	protected static final ContainerType TYPE_EDEFAULT = ContainerType.BIN;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-    protected ContainerType type = TYPE_EDEFAULT;
+	protected ContainerType type = TYPE_EDEFAULT;
 
-    /**
+	/**
 	 * The default value of the '{@link #getMeasureType() <em>Measure Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMeasureType()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final UnitOfMeasure MEASURE_TYPE_EDEFAULT = UnitOfMeasure.LITRE;
+	protected static final UnitOfMeasure MEASURE_TYPE_EDEFAULT = UnitOfMeasure.LITRE;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getMeasureType() <em>Measure Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMeasureType()
 	 * @generated
 	 * @ordered
 	 */
-    protected UnitOfMeasure measureType = MEASURE_TYPE_EDEFAULT;
+	protected UnitOfMeasure measureType = MEASURE_TYPE_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected ContainerImpl() {
+	protected ContainerImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return TrackingPackage.Literals.CONTAINER;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getContainerId() {
+	public String getContainerId() {
 		return containerId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setContainerId(String newContainerId) {
+	public void setContainerId(String newContainerId) {
 		String oldContainerId = containerId;
 		containerId = newContainerId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__CONTAINER_ID, oldContainerId, containerId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Farm getOwner() {
+	public Farm getOwner() {
 		if (owner != null && owner.eIsProxy()) {
 			InternalEObject oldOwner = (InternalEObject)owner;
 			owner = (Farm)eResolveProxy(oldOwner);
@@ -171,95 +186,97 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		return owner;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public Farm basicGetOwner() {
+	public Farm basicGetOwner() {
 		return owner;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setOwner(Farm newOwner) {
+	public void setOwner(Farm newOwner) {
 		Farm oldOwner = owner;
 		owner = newOwner;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__OWNER, oldOwner, owner));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public double getCapacity() {
+	public double getCapacity() {
 		return capacity;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setCapacity(double newCapacity) {
+	public void setCapacity(double newCapacity) {
 		double oldCapacity = capacity;
 		capacity = newCapacity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__CAPACITY, oldCapacity, capacity));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public ContainerType getType() {
+	public ContainerType getType() {
 		return type;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setType(ContainerType newType) {
+	public void setType(ContainerType newType) {
 		ContainerType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__TYPE, oldType, type));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public UnitOfMeasure getMeasureType() {
+	public UnitOfMeasure getMeasureType() {
 		return measureType;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setMeasureType(UnitOfMeasure newMeasureType) {
+	public void setMeasureType(UnitOfMeasure newMeasureType) {
 		UnitOfMeasure oldMeasureType = measureType;
 		measureType = newMeasureType == null ? MEASURE_TYPE_EDEFAULT : newMeasureType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__MEASURE_TYPE, oldMeasureType, measureType));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return getContainerId();
@@ -276,12 +293,13 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId((String)newValue);
@@ -302,12 +320,13 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId(CONTAINER_ID_EDEFAULT);
@@ -328,12 +347,13 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return CONTAINER_ID_EDEFAULT == null ? containerId != null : !CONTAINER_ID_EDEFAULT.equals(containerId);
@@ -349,12 +369,13 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -370,4 +391,4 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		return result.toString();
 	}
 
-} // ContainerImpl
+} //ContainerImpl

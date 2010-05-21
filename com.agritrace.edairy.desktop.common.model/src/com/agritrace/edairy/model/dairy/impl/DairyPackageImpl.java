@@ -6,18 +6,10 @@
  */
 package com.agritrace.edairy.model.dairy.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import com.agritrace.edairy.dairy.model.account.AccountPackage;
-import com.agritrace.edairy.dairy.model.account.impl.AccountPackageImpl;
+
 import com.agritrace.edairy.model.ModelPackage;
+
 import com.agritrace.edairy.model.dairy.Asset;
 import com.agritrace.edairy.model.dairy.CollectionJournal;
 import com.agritrace.edairy.model.dairy.CollectionJournalLine;
@@ -37,161 +29,194 @@ import com.agritrace.edairy.model.dairy.Supplier;
 import com.agritrace.edairy.model.dairy.Trip;
 import com.agritrace.edairy.model.dairy.Vehicle;
 import com.agritrace.edairy.model.dairy.VendorStatus;
+import com.agritrace.edairy.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.model.dairy.account.impl.AccountPackageImpl;
+
 import com.agritrace.edairy.model.impl.ModelPackageImpl;
+
 import com.agritrace.edairy.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.model.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.model.tracking.TrackingPackage;
+
 import com.agritrace.edairy.model.tracking.impl.TrackingPackageImpl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * @generated
  */
 public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass vehicleEClass = null;
+	private EClass vehicleEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass collectionJournalLineEClass = null;
+	private EClass collectionJournalLineEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass employeeEClass = null;
+	private EClass employeeEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass dairyLocationEClass = null;
+	private EClass dairyLocationEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass collectionJournalEClass = null;
+	private EClass collectionJournalEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass routeEClass = null;
+	private EClass routeEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass tripEClass = null;
+	private EClass tripEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass deliveryJournalEClass = null;
+	private EClass deliveryJournalEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass dairyEClass = null;
+	private EClass dairyEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass membershipEClass = null;
+	private EClass membershipEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass assetEClass = null;
+	private EClass assetEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass dairyContainerEClass = null;
+	private EClass dairyContainerEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass supplierEClass = null;
+	private EClass supplierEClass = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum membershipStatusEEnum = null;
+	private EEnum membershipStatusEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum sessionEEnum = null;
+	private EEnum sessionEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum vendorStatusEEnum = null;
+	private EEnum vendorStatusEEnum = null;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EEnum dairyFunctionEEnum = null;
+	private EEnum dairyFunctionEEnum = null;
 
-    /**
-     * Creates an instance of the model <b>Package</b>, registered with
-     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-     * package package URI value.
-     * <p>
-     * Note: the correct way to create the package is via the static factory
-     * method {@link #init init()}, which also performs initialization of the
-     * package, or returns the registered package, if one already exists. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see com.agritrace.edairy.model.dairy.DairyPackage#eNS_URI
-     * @see #init()
-     * @generated
-     */
-    private DairyPackageImpl() {
+	/**
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.ecore.EPackage.Registry
+	 * @see com.agritrace.edairy.model.dairy.DairyPackage#eNS_URI
+	 * @see #init()
+	 * @generated
+	 */
+	private DairyPackageImpl() {
 		super(eNS_URI, DairyFactory.eINSTANCE);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private static boolean isInited = false;
+	private static boolean isInited = false;
 
-    /**
-     * Creates, registers, and initializes the <b>Package</b> for this model,
-     * and for any others upon which it depends.
-     * 
-     * <p>
-     * This method is used to initialize {@link DairyPackage#eINSTANCE} when
-     * that field is accessed. Clients should not invoke it directly. Instead,
-     * they should simply access that field to obtain the package. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #eNS_URI
-     * @see #createPackageContents()
-     * @see #initializePackageContents()
-     * @generated
-     */
-    public static DairyPackage init() {
+	/**
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link DairyPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
+	 * @generated
+	 */
+	public static DairyPackage init() {
 		if (isInited) return (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
 
 		// Obtain or create and register package
@@ -228,980 +253,1101 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		return theDairyPackage;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getVehicle() {
+	public EClass getVehicle() {
 		return vehicleEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_RegistrationNumber() {
+	public EAttribute getVehicle_RegistrationNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_Type() {
+	public EAttribute getVehicle_Type() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_Make() {
+	public EAttribute getVehicle_Make() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_Model() {
+	public EAttribute getVehicle_Model() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_EngineNumber() {
+	public EAttribute getVehicle_EngineNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_ChassisNumber() {
+	public EAttribute getVehicle_ChassisNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_LogBookNumber() {
+	public EAttribute getVehicle_LogBookNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_InsurancePolicyNumber() {
+	public EAttribute getVehicle_InsurancePolicyNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_InsuranceExpirationDate() {
+	public EAttribute getVehicle_InsuranceExpirationDate() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_DominantColour() {
+	public EAttribute getVehicle_DominantColour() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getVehicle_CapacityInTonnes() {
+	public EAttribute getVehicle_CapacityInTonnes() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(10);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getVehicle_Driver() {
-		return (EReference)vehicleEClass.getEStructuralFeatures().get(12);
-	}
-
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-    public EAttribute getVehicle_Year() {
+	public EAttribute getVehicle_Year() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(11);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getCollectionJournalLine() {
+	public EReference getVehicle_Driver() {
+		return (EReference)vehicleEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCollectionJournalLine() {
 		return collectionJournalLineEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_LineNumber() {
+	public EAttribute getCollectionJournalLine_LineNumber() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_RecordedMember() {
+	public EAttribute getCollectionJournalLine_RecordedMember() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_Quantity() {
+	public EAttribute getCollectionJournalLine_Quantity() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_Flagged() {
+	public EAttribute getCollectionJournalLine_Flagged() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_UnitOfMeasure() {
+	public EAttribute getCollectionJournalLine_UnitOfMeasure() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_NotRecorded() {
+	public EAttribute getCollectionJournalLine_NotRecorded() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournalLine_ValidatedMember() {
+	public EReference getCollectionJournalLine_ValidatedMember() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_OffRoute() {
+	public EAttribute getCollectionJournalLine_OffRoute() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournalLine_From() {
+	public EReference getCollectionJournalLine_From() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournalLine_FarmContainer() {
+	public EReference getCollectionJournalLine_FarmContainer() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournalLine_DairyContainer() {
+	public EReference getCollectionJournalLine_DairyContainer() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(10);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournalLine_CollectionJournal() {
+	public EReference getCollectionJournalLine_CollectionJournal() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(11);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournalLine_Rejected() {
+	public EAttribute getCollectionJournalLine_Rejected() {
 		return (EAttribute)collectionJournalLineEClass.getEStructuralFeatures().get(12);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getEmployee() {
+	public EClass getEmployee() {
 		return employeeEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getEmployee_Id() {
+	public EAttribute getEmployee_Id() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getEmployee_StartDate() {
+	public EAttribute getEmployee_StartDate() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getEmployee_JobFunction() {
+	public EAttribute getEmployee_JobFunction() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getEmployee_NationalId() {
+	public EAttribute getEmployee_NationalId() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getEmployee_NhifNumber() {
+	public EAttribute getEmployee_NhifNumber() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getEmployee_NssfNumber() {
+	public EAttribute getEmployee_NssfNumber() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getDairyLocation() {
+	public EClass getDairyLocation() {
 		return dairyLocationEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_Id() {
+	public EAttribute getDairyLocation_Id() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_Name() {
+	public EAttribute getDairyLocation_Name() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_DateOpened() {
+	public EAttribute getDairyLocation_DateOpened() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_Phone() {
+	public EAttribute getDairyLocation_Phone() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairyLocation_Route() {
+	public EReference getDairyLocation_Route() {
 		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_Description() {
+	public EAttribute getDairyLocation_Description() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_Code() {
+	public EAttribute getDairyLocation_Code() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairyLocation_Location() {
+	public EReference getDairyLocation_Location() {
 		return (EReference)dairyLocationEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairyLocation_Functions() {
+	public EAttribute getDairyLocation_Functions() {
 		return (EAttribute)dairyLocationEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getCollectionJournal() {
+	public EClass getCollectionJournal() {
 		return collectionJournalEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournal_JournalEntries() {
+	public EReference getCollectionJournal_JournalEntries() {
 		return (EReference)collectionJournalEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournal_ReferenceNumber() {
+	public EAttribute getCollectionJournal_ReferenceNumber() {
 		return (EAttribute)collectionJournalEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournal_JournalDate() {
+	public EAttribute getCollectionJournal_JournalDate() {
 		return (EAttribute)collectionJournalEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournal_Session() {
+	public EAttribute getCollectionJournal_Session() {
 		return (EAttribute)collectionJournalEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournal_Driver() {
+	public EReference getCollectionJournal_Driver() {
 		return (EReference)collectionJournalEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournal_Route() {
+	public EReference getCollectionJournal_Route() {
 		return (EReference)collectionJournalEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournal_FarmContainer() {
+	public EReference getCollectionJournal_FarmContainer() {
 		return (EReference)collectionJournalEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournal_Bin() {
+	public EReference getCollectionJournal_Bin() {
 		return (EReference)collectionJournalEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getCollectionJournal_Vehicle() {
+	public EReference getCollectionJournal_Vehicle() {
 		return (EReference)collectionJournalEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournal_DriverTotal() {
+	public EAttribute getCollectionJournal_DriverTotal() {
 		return (EAttribute)collectionJournalEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getCollectionJournal_RecordTotal() {
+	public EAttribute getCollectionJournal_RecordTotal() {
 		return (EAttribute)collectionJournalEClass.getEStructuralFeatures().get(10);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getRoute() {
+	public EClass getRoute() {
 		return routeEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getRoute_Id() {
+	public EAttribute getRoute_Id() {
 		return (EAttribute)routeEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getRoute_Name() {
+	public EAttribute getRoute_Name() {
 		return (EAttribute)routeEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getRoute_Stops() {
+	public EReference getRoute_Stops() {
 		return (EReference)routeEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getRoute_Code() {
+	public EAttribute getRoute_Code() {
 		return (EAttribute)routeEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getRoute_Description() {
+	public EAttribute getRoute_Description() {
 		return (EAttribute)routeEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getTrip() {
+	public EClass getTrip() {
 		return tripEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getTrip_Collections() {
+	public EReference getTrip_Collections() {
 		return (EReference)tripEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getTrip_Deliveries() {
+	public EReference getTrip_Deliveries() {
 		return (EReference)tripEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getTrip_Started() {
+	public EAttribute getTrip_Started() {
 		return (EAttribute)tripEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getTrip_Ended() {
+	public EAttribute getTrip_Ended() {
 		return (EAttribute)tripEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getDeliveryJournal() {
+	public EClass getDeliveryJournal() {
 		return deliveryJournalEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDeliveryJournal_ReferenceNumber() {
+	public EAttribute getDeliveryJournal_ReferenceNumber() {
 		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getDairy() {
+	public EClass getDairy() {
 		return dairyEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_RegistrationNumber() {
+	public EAttribute getDairy_RegistrationNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_NhifNumber() {
+	public EAttribute getDairy_NhifNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_NssfNumber() {
+	public EAttribute getDairy_NssfNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_FederalPin() {
+	public EAttribute getDairy_FederalPin() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_LicenseEffectiveDate() {
+	public EAttribute getDairy_LicenseEffectiveDate() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_LicenseExpirationDate() {
+	public EAttribute getDairy_LicenseExpirationDate() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_Routes() {
+	public EReference getDairy_Routes() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_Vehicles() {
+	public EReference getDairy_Vehicles() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_Employees() {
+	public EReference getDairy_Employees() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_Memberships() {
+	public EReference getDairy_Memberships() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(9);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_BranchLocations() {
+	public EReference getDairy_BranchLocations() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(10);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_CollectionJournals() {
+	public EReference getDairy_CollectionJournals() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(11);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_Suppliers() {
+	public EReference getDairy_Suppliers() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(12);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_AnimalHealthRequests() {
+	public EReference getDairy_AnimalHealthRequests() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(13);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getDairy_DairyId() {
+	public EAttribute getDairy_DairyId() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(14);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getDairy_DairyBins() {
+	public EReference getDairy_DairyBins() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(15);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getMembership() {
+	public EClass getMembership() {
 		return membershipEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getMembership_MemberId() {
+	public EAttribute getMembership_MemberId() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getMembership_ApplicationDate() {
+	public EAttribute getMembership_ApplicationDate() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getMembership_EffectiveDate() {
+	public EAttribute getMembership_EffectiveDate() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getMembership_Status() {
+	public EAttribute getMembership_Status() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getMembership_DefaultRoute() {
+	public EReference getMembership_DefaultRoute() {
 		return (EReference)membershipEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getMembership_Member() {
+	public EReference getMembership_Member() {
 		return (EReference)membershipEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getMembership_Farms() {
+	public EReference getMembership_Farms() {
 		return (EReference)membershipEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getAsset() {
+	public EClass getAsset() {
 		return assetEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_AssetId() {
+	public EAttribute getAsset_AssetId() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_TagType() {
+	public EAttribute getAsset_TagType() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_TagValue() {
+	public EAttribute getAsset_TagValue() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_DateAcquired() {
+	public EAttribute getAsset_DateAcquired() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_DamageDate() {
+	public EAttribute getAsset_DamageDate() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_DamageDescription() {
+	public EAttribute getAsset_DamageDescription() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_DateDisposed() {
+	public EAttribute getAsset_DateDisposed() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_DisposalReason() {
+	public EAttribute getAsset_DisposalReason() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getAsset_DisposalWitness() {
+	public EAttribute getAsset_DisposalWitness() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(8);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getDairyContainer() {
+	public EClass getDairyContainer() {
 		return dairyContainerEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getSupplier() {
+	public EClass getSupplier() {
 		return supplierEClass;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_SupplierId() {
+	public EAttribute getSupplier_SupplierId() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_Categories() {
+	public EAttribute getSupplier_Categories() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_PublicDescription() {
+	public EAttribute getSupplier_PublicDescription() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_Status() {
+	public EAttribute getSupplier_Status() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_RegistrationDate() {
+	public EAttribute getSupplier_RegistrationDate() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_ExpirationDate() {
+	public EAttribute getSupplier_ExpirationDate() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_Notes() {
+	public EAttribute getSupplier_Notes() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getSupplier_Rating() {
+	public EAttribute getSupplier_Rating() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getMembershipStatus() {
+	public EEnum getMembershipStatus() {
 		return membershipStatusEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getSession() {
+	public EEnum getSession() {
 		return sessionEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getVendorStatus() {
+	public EEnum getVendorStatus() {
 		return vendorStatusEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EEnum getDairyFunction() {
+	public EEnum getDairyFunction() {
 		return dairyFunctionEEnum;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public DairyFactory getDairyFactory() {
+	public DairyFactory getDairyFactory() {
 		return (DairyFactory)getEFactoryInstance();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isCreated = false;
+	private boolean isCreated = false;
 
-    /**
+	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void createPackageContents() {
+	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
 
@@ -1341,20 +1487,21 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isInitialized = false;
+	private boolean isInitialized = false;
 
-    /**
-     * Complete the initialization of the package and its meta-model. This
-     * method is guarded to have no affect on any invocation but its first. <!--
-     * begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public void initializePackageContents() {
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -1551,4 +1698,4 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createResource(eNS_URI);
 	}
 
-} // DairyPackageImpl
+} //DairyPackageImpl

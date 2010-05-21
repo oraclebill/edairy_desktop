@@ -6,27 +6,33 @@
  */
 package com.agritrace.edairy.model.tracking.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.model.Location;
+
 import com.agritrace.edairy.model.tracking.Container;
 import com.agritrace.edairy.model.tracking.Farm;
 import com.agritrace.edairy.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.model.tracking.TrackingPackage;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Farm</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Farm</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -41,145 +47,155 @@ import com.agritrace.edairy.model.tracking.TrackingPackage;
  * @generated
  */
 public class FarmImpl extends EObjectImpl implements Farm {
-    /**
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final String NAME_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-    protected String name = NAME_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getAnimals() <em>Animals</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAnimals()
 	 * @generated
 	 * @ordered
 	 */
-    protected EList<RegisteredAnimal> animals;
+	protected EList<RegisteredAnimal> animals;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getCans() <em>Cans</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCans()
 	 * @generated
 	 * @ordered
 	 */
-    protected EList<Container> cans;
+	protected EList<Container> cans;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getLocation()
 	 * @generated
 	 * @ordered
 	 */
-    protected Location location;
+	protected Location location;
 
-    /**
+	/**
 	 * The default value of the '{@link #getFarmId() <em>Farm Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFarmId()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final Long FARM_ID_EDEFAULT = null;
+	protected static final Long FARM_ID_EDEFAULT = null;
 
-    /**
+	/**
 	 * The cached value of the '{@link #getFarmId() <em>Farm Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFarmId()
 	 * @generated
 	 * @ordered
 	 */
-    protected Long farmId = FARM_ID_EDEFAULT;
+	protected Long farmId = FARM_ID_EDEFAULT;
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    protected FarmImpl() {
+	protected FarmImpl() {
 		super();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    protected EClass eStaticClass() {
+	@Override
+	protected EClass eStaticClass() {
 		return TrackingPackage.Literals.FARM;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String getName() {
+	public String getName() {
 		return name;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setName(String newName) {
+	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__NAME, oldName, name));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<RegisteredAnimal> getAnimals() {
+	public EList<RegisteredAnimal> getAnimals() {
 		if (animals == null) {
 			animals = new EObjectContainmentEList<RegisteredAnimal>(RegisteredAnimal.class, this, TrackingPackage.FARM__ANIMALS);
 		}
 		return animals;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EList<Container> getCans() {
+	public EList<Container> getCans() {
 		if (cans == null) {
 			cans = new EObjectContainmentEList<Container>(Container.class, this, TrackingPackage.FARM__CANS);
 		}
 		return cans;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Location getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
 		Location oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired()) {
@@ -189,12 +205,12 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		return msgs;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setLocation(Location newLocation) {
+	public void setLocation(Location newLocation) {
 		if (newLocation != location) {
 			NotificationChain msgs = null;
 			if (location != null)
@@ -208,51 +224,52 @@ public class FarmImpl extends EObjectImpl implements Farm {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, newLocation, newLocation));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Long getFarmId() {
+	public Long getFarmId() {
 		return farmId;
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void setFarmId(Long newFarmId) {
+	public void setFarmId(Long newFarmId) {
 		Long oldFarmId = farmId;
 		farmId = newFarmId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__FARM_ID, oldFarmId, farmId));
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int getNumberOfAnimals() {
+	public int getNumberOfAnimals() {
 		return getAnimals().size();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public int getNumberOfContainers() {
+	public int getNumberOfContainers() {
 		return getCans().size();
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackingPackage.FARM__ANIMALS:
 				return ((InternalEList<?>)getAnimals()).basicRemove(otherEnd, msgs);
@@ -264,12 +281,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackingPackage.FARM__NAME:
 				return getName();
@@ -285,13 +303,14 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackingPackage.FARM__NAME:
 				setName((String)newValue);
@@ -314,12 +333,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		super.eSet(featureID, newValue);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.FARM__NAME:
 				setName(NAME_EDEFAULT);
@@ -340,12 +360,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		super.eUnset(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public boolean eIsSet(int featureID) {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackingPackage.FARM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
@@ -361,12 +382,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		return super.eIsSet(featureID);
 	}
 
-    /**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -378,4 +400,4 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		return result.toString();
 	}
 
-} // FarmImpl
+} //FarmImpl
