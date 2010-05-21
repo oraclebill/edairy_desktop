@@ -390,24 +390,24 @@ public class MemberSearchViewController extends SubModuleController implements M
 	    }
 
 	});
-	containerApplyRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_FilterButton);
-	containerApplyRidget.addListener(new IActionListener() {
-
-	    @Override
-	    public void callback() {
-		try {
-		    final List<Container> containers = getContainerFilteredResult();
-		    containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
-			    containerPropertyNames, containerColumnHeaders);
-		    containerTable.updateFromModel();
-		} catch (final ParseException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
-
-	    }
-
-	});
+//	containerApplyRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_FilterButton);
+//	containerApplyRidget.addListener(new IActionListener() {
+//
+//	    @Override
+//	    public void callback() {
+//		try {
+//		    final List<Container> containers = getContainerFilteredResult();
+//		    containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
+//			    containerPropertyNames, containerColumnHeaders);
+//		    containerTable.updateFromModel();
+//		} catch (final ParseException e) {
+//		    // TODO Auto-generated catch block
+//		    e.printStackTrace();
+//		}
+//
+//	    }
+//
+//	});
     }
 
     private void configureFarmTab() {

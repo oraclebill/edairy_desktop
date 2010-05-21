@@ -106,6 +106,7 @@ public class ViewWidgetId {
 
     public static final String LIVESTOCK_TABLE = "LiveStock";
     public static final String LIVESTOCK_ADD = "LiveStockAdd";
+    public static final String LIVESTOCK_VIEW = "LiveStockView";
     public static final String LIVESTOCK_Remove = "LiveStockRemove";
     public static final String LIVESTOCK_FILTER_STARTDATE = "LiveStock_Start_Date";
     public static final String LIVESTOCK_FILTER_ENDDATE = "LiveStock_END_Date";
@@ -155,5 +156,15 @@ public class ViewWidgetId {
 	public static final String EMAIL_TEXT="EMAIL";
 	public static final String PHONE_TEXT="PHONE";
 	public static final String SECOND_PHONE_TEXT="SECOND_PHONE";
+	//member account tab
+	public static final String DELIVERIES_GROUP_TOTOAL_DELIVERIES_TXT="Total_Deliveries";
+	public static final String DELIVERIES_GROUP_TOTOAL_ACCEPTED_TXT="Total_Accepted";
+	public static final String DELIVERIES_GROUP_TOTOAL_REJECTED_TXT="Total_Rejected";
+	
+	//member transaction tab
+	public static final String TRANSACTION_ADD_BUTTON="TRANSACTION_ADD";
+	public static final String TRANSACTION_VIEW_BUTTON="TRANSACTION_VIEW";
+
+
 
 }
