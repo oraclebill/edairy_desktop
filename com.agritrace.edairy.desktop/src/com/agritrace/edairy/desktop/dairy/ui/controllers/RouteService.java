@@ -3,7 +3,7 @@ package com.agritrace.edairy.desktop.dairy.ui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
 public final class RouteService {
     private static RouteService instance = new RouteService();

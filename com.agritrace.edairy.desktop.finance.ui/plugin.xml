@@ -10,6 +10,23 @@
             name="Credit Journal Entry"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView"
+            id="dairy.transactions.register"
+            name="Transaction Register"
+            restorable="true">
+      </view>
+      <view allowMultiple="true"
+            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView"
+            id="transaction.batch-entry.view"
+            name="Transaction Batch Entry">
+      </view>
+      <view allowMultiple="true"
+            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView"
+            id="transaction.batch-entry.mdview"
+            name="Transaction Batch Entry">
+      </view>
    </extension>
 
 </plugin>

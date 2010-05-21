@@ -7,10 +7,10 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
-public interface IDairyResourceManager {
+public interface IDairyResourceManager extends IAccountTransactionSearch {
 
     public static final String XMLDB_BASE = System.getProperty("edairy.db.root", "c:/temp/edairy");
 

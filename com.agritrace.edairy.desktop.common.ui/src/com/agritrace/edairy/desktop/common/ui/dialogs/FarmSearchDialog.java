@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 // TODO: get domain objects out of dialog
-import com.agritrace.edairy.model.dairy.*;
+import com.agritrace.edairy.desktop.common.model.dairy.*;
 
 /**
  * This is a demo dialog copied from MemberSearchDialog

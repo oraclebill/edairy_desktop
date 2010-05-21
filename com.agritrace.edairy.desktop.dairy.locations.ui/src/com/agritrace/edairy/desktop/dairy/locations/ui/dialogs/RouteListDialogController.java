@@ -6,8 +6,8 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
 public class RouteListDialogController extends AbstractWindowController {
     public static final String RIDGET_ID_ROUTE_TABLE = "routeTable";

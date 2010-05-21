@@ -34,13 +34,13 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsPackage;
-import com.agritrace.edairy.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 /**
  * Service Requests view controller
@@ -204,8 +204,11 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	@Override
 	protected List<?> getFilteredResult() {
 		try {
-			List<AnimalHealthRequest> requests = ServiceRequestResourceManager.INSTANCE
-					.getObjectsFromDairyModel(AnimalHealthRequest.class);
+//			List<AnimalHealthRequest> requests = ServiceRequestResourceManager.INSTANCE
+//			.getObjectsFromDairyModel(AnimalHealthRequest.class);
+			Dairy myDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
+			List<AnimalHealthRequest> requests = myDairy.getAnimalHealthRequests();
+			 
 			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
 			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 				@Override
@@ -390,9 +393,9 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			// DairyDemoResourceManager.INSTANCE.loadDairyResources();
 			// return DairyDemoResourceManager.INSTANCE
 			// .getObjectsFromDairyModel(AnimalHealthRequest.class);
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		} catch (CoreException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

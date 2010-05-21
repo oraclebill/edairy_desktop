@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 
-import com.agritrace.edairy.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 
 public class DairyLocationService {
     private static DairyLocationService instance = new DairyLocationService();

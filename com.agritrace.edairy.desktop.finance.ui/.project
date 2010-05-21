@@ -3,6 +3,8 @@
 	<name>com.agritrace.edairy.desktop.finance.ui</name>
 	<comment></comment>
 	<projects>
+		<project>com.agritrace.edairy.desktop.common.model</project>
+		<project>com.agritrace.edairy.desktop.common.model.edit</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

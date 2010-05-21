@@ -23,9 +23,11 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.Activator;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 
 public class ServiceRequestView extends AbstractRecordListView {
+
+	public static final String ID = "animalhealth.services.edit.view";
 
 	public static final String STARTE_DATE = "filter.start.date";
 	public static final String END_DATE = "filter.end.date";
@@ -44,7 +46,6 @@ public class ServiceRequestView extends AbstractRecordListView {
 	public static final String MEMBER_LOOKUP_TEXT = "filter.member.text";
 	public static final String FARM_LOOKUP_TEXT = "filter.farm.text";
 	public static final String SEARCH_ICON_PATH = "icons/ext/search16.png";
-	public static final String ID = ServiceRequestView.class.getName();
 
 	@Override
 	protected void createFilterCondtions(Composite comp) {

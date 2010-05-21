@@ -43,9 +43,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.Membership;
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener,
 	ISelectionChangedListener, SelectionListener {
@@ -196,7 +196,8 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		case 1:
 		    return ((Membership) element).getMember().getName();
 		case 2:
-		    return ((Membership) element).getDefaultRoute().getName();
+		    return "N/A";
+//		    return ((Membership) element).getDefaultRoute().getName();
 		}
 	    }
 	    return null;

@@ -7,10 +7,10 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListCont
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
-import com.agritrace.edairy.model.ModelPackage;
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 
 public class SupplierListViewController extends AbstractRecordListController {
 

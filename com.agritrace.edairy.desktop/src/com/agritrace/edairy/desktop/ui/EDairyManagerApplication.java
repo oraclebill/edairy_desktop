@@ -18,32 +18,31 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
+import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
-import com.agritrace.edairy.desktop.deliveries.ui.views.DeliveryView;
-import com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogViewController;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
+import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
-import com.agritrace.edairy.desktop.member.ui.controllers.NewMemberViewController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
+import com.agritrace.edairy.desktop.services.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
-import com.agritrace.edairy.desktop.setup.ui.controllers.StaffInfoViewController;
-import com.agritrace.edairy.desktop.setup.ui.controllers.VehicleLogViewController;
-import com.agritrace.edairy.desktop.setup.ui.views.StaffInfoView;
-import com.agritrace.edairy.desktop.setup.ui.views.VehicleLogView;
 import com.agritrace.edairy.desktop.ui.views.BlankView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
 import com.agritrace.edairy.desktop.ui.views.VeterinaryRequestView;
+import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView;
+import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView;
 
 /**
  * @author oraclebill
@@ -58,23 +57,24 @@ public class EDairyManagerApplication extends SwtApplication {
     public static final String BG_DARK = "edm_dark_background";
     public static final String BG_LIGHT = "edm_light_background";
 
-        public static final String TAB_HOME 		= "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
-        public static final String TAB_MILK	 	= "com.agritrace.edairy.desktop.milk"; //$NON-NLS-1$
-        public static final String TAB_MEMBERS 		= "com.agritrace.edairy.desktop.members"; //$NON-NLS-1$
-        public static final String TAB_FINANCE 		= "com.agritrace.edairy.desktop.finance"; //$NON-NLS-1$
-        public static final String TAB_ANIMALHEALTH 	= "com.agritrace.edairy.desktop.animalhealth"; //$NON-NLS-1$
-        public static final String TAB_OPERATIONS 		= "com.agritrace.edairy.desktop.operations"; //$NON-NLS-1$
-        public static final String TAB_REPORTS 		= "com.agritrace.edairy.desktop.reports"; //$NON-NLS-1$
-        public static final String TAB_SYSTEM 		= "com.agritrace.edairy.desktop.system"; //$NON-NLS-1$
-    
-        public static final String MODULEGROUP_HOME 	= "modulegroup.desktop.home"; //$NON-NLS-1$
-        public static final String MODULEGROUP_MILK 	= "modulegroup.desktop.milk"; //$NON-NLS-1$
-        public static final String MODULEGROUP_MEMBERS 	= "modulegroup.desktop.members"; //$NON-NLS-1$
-        public static final String MODULEGROUP_FINANCE 	= "modulegroup.desktop.finance"; //$NON-NLS-1$
-        public static final String MODULEGROUP_OPERATONS 	= "modulegroup.desktop.operations"; //$NON-NLS-1$
-        public static final String MODULEGROUP_ANIMALHEALTH = "modulegroup.desktop.animalhealth"; //$NON-NLS-1$
-        public static final String MODULEGROUP_REPORTS 	= "modulegroup.desktop.reports"; //$NON-NLS-1$
-        public static final String MODULEGROUP_SYSTEM 	= "modulegroup.desktop.system"; //$NON-NLS-1$
+    public static final String TAB_HOME = "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
+    public static final String TAB_MILK = "com.agritrace.edairy.desktop.milk"; //$NON-NLS-1$
+    public static final String TAB_MEMBERS = "com.agritrace.edairy.desktop.members"; //$NON-NLS-1$
+    public static final String TAB_FINANCE = "com.agritrace.edairy.desktop.finance"; //$NON-NLS-1$
+    public static final String TAB_ANIMALHEALTH = "com.agritrace.edairy.desktop.animalhealth"; //$NON-NLS-1$
+    public static final String TAB_OPERATIONS = "com.agritrace.edairy.desktop.operations"; //$NON-NLS-1$
+    public static final String TAB_REPORTS = "com.agritrace.edairy.desktop.reports"; //$NON-NLS-1$
+    public static final String TAB_SYSTEM = "com.agritrace.edairy.desktop.system"; //$NON-NLS-1$
+
+    public static final String MODULEGROUP_HOME = "modulegroup.desktop.home"; //$NON-NLS-1$
+    public static final String MODULEGROUP_MILK = "modulegroup.desktop.milk"; //$NON-NLS-1$
+    public static final String MODULEGROUP_MEMBERS = "modulegroup.desktop.members"; //$NON-NLS-1$
+    public static final String MODULEGROUP_FINANCE = "modulegroup.desktop.finance"; //$NON-NLS-1$
+    public static final String MODULEGROUP_OPERATONS = "modulegroup.desktop.operations"; //$NON-NLS-1$
+    public static final String MODULEGROUP_ANIMALHEALTH = "modulegroup.desktop.animalhealth"; //$NON-NLS-1$
+    public static final String MODULEGROUP_REPORTS = "modulegroup.desktop.reports"; //$NON-NLS-1$
+    public static final String MODULEGROUP_SYSTEM = "modulegroup.desktop.system"; //$NON-NLS-1$
+
     //
     //
     // public static final String LABEL_APPLICATION = "eDairy Manager Desktop";
@@ -122,7 +122,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode("Home"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_HOME); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_HOME);
 
 	//
 	// HOME MODULE GROUP
@@ -139,7 +139,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.milk"), "Milk"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_MILK); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_MILK);
 
 	//
 	// COLLECTION MODULE GROUP
@@ -147,17 +147,17 @@ public class EDairyManagerApplication extends SwtApplication {
 	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MILK_MODULEGRP));
 	subAppNode.addChild(moduleGroupNode);
 
-	moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+	moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
 	NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, BlankView.ID);
-	NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
-		"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	// NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
+	//		"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// DELIVERY MODULE GROUP
 	//
 	moduleNode = NodeFactory.createModule("edm.milk.delivery", "Milk Deliveries", moduleGroupNode);
 	NodeFactory.createSubModule("edm.milk.delivery.log", "Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// MEMBER TAB
@@ -165,7 +165,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.members"), "Membership"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_MEMBERS); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_MEMBERS);
 
 	//
 	// MEMBER MODULE GROUP
@@ -176,7 +176,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	moduleNode = NodeFactory.createModule("edm.members", "Members", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.member.directory", "Member Directory", moduleNode, MemberListView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.member.edit", "Register Member", moduleNode, MemberSearchView.ID, NewMemberViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.member.edit", "Register Member", moduleNode, MemberSearchView.ID, MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// FARM MODULE GROUP
@@ -186,7 +186,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	moduleNode = NodeFactory.createModule("edm.farms", "Farms", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.farms.directory", "Farm Directory", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.farms.edit", "Register Farm", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	//	NodeFactory.createSubModule("edm.farms.edit", "Register Farm", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// LIVESTOCK MODULE GROUP
@@ -197,7 +197,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	moduleNode = NodeFactory.createModule("edm.livestock", "Livestock", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.livestock.directory", "Livestock Directory", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.livestock.edit", "Register Animal", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	//	NodeFactory.createSubModule("edm.livestock.edit", "Register Animal", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// FINANCE TAB
@@ -205,8 +205,8 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.finance"), "Finance"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_FINANCE); //$NON-NLS-1$
-	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("animalhealth.navgroup"));
+	workarea.registerDefinition(subAppNode, TAB_FINANCE);
+	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("finance.navgroup"));
 	subAppNode.addChild(moduleGroupNode);
 
 	//
@@ -214,9 +214,11 @@ public class EDairyManagerApplication extends SwtApplication {
 	//
 
 	final IModuleNode financeMembers = NodeFactory.createModule("edm.finances", "Finance", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.finances.log", "Journal Log", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.finances.credits", "Credit Journal Entry", financeMembers, CreditJournalView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.finances.payments", "Payment Journal Entry", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.finances.log", "Transaction Journal", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.finances.blog", "Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.finances.mdlog", "Transaction Journal 9", financeMembers, TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.finances.credits", "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.finances.milklog", "Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// VETERINARY TAB
@@ -224,7 +226,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.animalhealth"), "Veterinary"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_ANIMALHEALTH); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_ANIMALHEALTH);
 	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("animalhealth.navgroup"));
 	subAppNode.addChild(moduleGroupNode);
 
@@ -233,8 +235,8 @@ public class EDairyManagerApplication extends SwtApplication {
 	//
 
 	final IModuleNode moduleServices = NodeFactory.createModule("edm.services", "Requests", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.services.log", "Request Log", moduleServices, ServiceRequestView.ID, ServiceRequestViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.services.animalhealth", "Request Entry", moduleServices, VeterinaryRequestView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.services.log", "Request Log (OLD)", moduleServices, ServiceRequestLogView.ID, ServiceLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.services.edit", "Request Log", moduleServices, ServiceRequestView.ID, ServiceRequestViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// OPERATIONS TAB
@@ -242,7 +244,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.operations"), "Operations"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_OPERATIONS); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_OPERATIONS);
 	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("operations.navgroup"));
 	subAppNode.addChild(moduleGroupNode);
 
@@ -265,16 +267,15 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	final IModuleNode moduleEvents = NodeFactory.createModule("edm.events", "Events", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-
-	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	//	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// SUPPLIERS GRP
 	//
 
 	final IModuleNode moduleDirectory = NodeFactory.createModule("edm.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierListViewController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// REPORTS TAB
@@ -282,7 +283,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.reports"), "Reports"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_REPORTS); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_REPORTS);
 	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("reports.navgroup"));
 	subAppNode.addChild(moduleGroupNode);
 
@@ -310,14 +311,14 @@ public class EDairyManagerApplication extends SwtApplication {
 
 	subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.system"), "System"); //$NON-NLS-1$
 	app.addChild(subAppNode);
-	workarea.registerDefinition(subAppNode, TAB_SYSTEM); //$NON-NLS-1$
+	workarea.registerDefinition(subAppNode, TAB_SYSTEM);
 	moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("system.navgroup"));
 	subAppNode.addChild(moduleGroupNode);
 
 	moduleNode = NodeFactory.createModule("edm.system", "Security", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.system.permissions", "Permissions", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	
+
 	return app;
 
     }

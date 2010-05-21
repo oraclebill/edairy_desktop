@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import com.agritrace.edairy.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 public interface MemberSearchSelectionListener {
 

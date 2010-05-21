@@ -16,7 +16,9 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class ServiceRequestLogView extends SubModuleView {
 
-    public static final String ID = "com.agritrace.edairy.desktop.services.request.view"; //$NON-NLS-1$
+    public static final String ID = "animalhealth.services.log.view"; //$NON-NLS-1$
+    
+    
     public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 
     @Override

@@ -28,12 +28,13 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestFilterSection;
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsPackage;
-import com.agritrace.edairy.model.tracking.TrackingPackage;
 
 /**
  * Filter section controller delegatesssss

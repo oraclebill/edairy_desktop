@@ -3,8 +3,8 @@ package com.agritrace.edairy.desktop.member.ui.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView.MemberSearchNodeListener;
-import com.agritrace.edairy.model.dairy.Membership;
 
 public class MemberSearchSelectionManager {
 

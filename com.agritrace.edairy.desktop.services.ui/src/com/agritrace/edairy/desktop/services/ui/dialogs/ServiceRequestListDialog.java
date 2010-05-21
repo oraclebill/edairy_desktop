@@ -33,20 +33,20 @@ import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogContro
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.services.ui.Activator;
-import com.agritrace.edairy.desktop.services.ui.utils.ServiceUtils;
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.Person;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.DairyPackage;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.model.requests.RequestType;
-import com.agritrace.edairy.model.requests.RequestsFactory;
-import com.agritrace.edairy.model.requests.RequestsPackage;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 /**
  * Service request list dialog
@@ -415,8 +415,10 @@ public class ServiceRequestListDialog extends RecordDialog {
 				// UIChanges
 				updateUI(request);
 				// SwtRidgetFactory.
-				ServiceUtils.injectRidgets(getController(), injectedControls,
-						SWTBindingPropertyLocator.getInstance());
+				ServiceUtils.injectRidgets(
+					Activator.getDefault().getBundle().getBundleContext(),  
+					getController(), injectedControls,
+					SWTBindingPropertyLocator.getInstance());
 				// Updates the bindings
 				configTypeSpecificRidgets(request);
 

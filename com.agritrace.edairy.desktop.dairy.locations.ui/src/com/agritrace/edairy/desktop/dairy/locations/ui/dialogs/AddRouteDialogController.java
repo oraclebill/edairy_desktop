@@ -10,9 +10,9 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.model.dairy.Dairy;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
 public class AddRouteDialogController extends AbstractWindowController {
     private ITextRidget textName;

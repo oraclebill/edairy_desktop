@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 
 public class MemberSearchDialog extends TitleAreaDialog {

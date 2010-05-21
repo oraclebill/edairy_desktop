@@ -2,14 +2,14 @@ package com.agritrace.edairy.desktop.member.ui.views;
 
 import java.util.Date;
 
-import com.agritrace.edairy.model.Location;
-import com.agritrace.edairy.model.ModelFactory;
-import com.agritrace.edairy.model.Person;
-import com.agritrace.edairy.model.PostalLocation;
-import com.agritrace.edairy.model.dairy.DairyFactory;
-import com.agritrace.edairy.model.dairy.Membership;
-import com.agritrace.edairy.model.tracking.Farm;
-import com.agritrace.edairy.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 public class EMFObjectUtil {
 

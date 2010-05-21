@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
-import com.agritrace.edairy.model.requests.AnimalHealthRequest;
 
 /**
  * Service log view controller
