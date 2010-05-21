@@ -154,8 +154,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectiveDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//MembershipStatus"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" lowerBound="1"
-        eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
         eType="ecore:EClass common.ecore#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"

@@ -196,7 +196,8 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		case 1:
 		    return ((Membership) element).getMember().getName();
 		case 2:
-		    return ((Membership) element).getDefaultRoute().getName();
+		    return "N/A";
+//		    return ((Membership) element).getDefaultRoute().getName();
 		}
 	    }
 	    return null;

@@ -84,6 +84,7 @@ public class QuickStart {
 
 		// initialize, also creates the database tables
 		hbds.initialize();
+		System.err.println(hbds.getMappingXML());
 
 		SessionFactory sessionFactory = hbds.getSessionFactory();
 
@@ -98,12 +99,13 @@ public class QuickStart {
 		
 		// create an account and make it persistent
 		Account acct = gen.randomAccount();
-		session.save(acct);
 
 		// create a transaction, adding it to the account
 		AccountTransaction transaction = gen.createTestAccountTransaction(acct, 1);
 		acct.getTransactions().add(transaction);
 
+		session.save(acct);
+		session.save(transaction);
 
 		// at commit the objects will be present in the database
 		tx.commit();

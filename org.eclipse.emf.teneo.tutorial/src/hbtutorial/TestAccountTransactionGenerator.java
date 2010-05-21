@@ -52,6 +52,8 @@ public class TestAccountTransactionGenerator {
 	p.setFamilyName(randomSelect(NAMES));
 	p.setGivenName(randomSelect(NAMES));
 	p.setMiddleName(randomSelect(NAMES));
+	p.setPartyId(Long.toString(rand.nextLong()));
+	p.setLocation(ModelFactory.eINSTANCE.createLocation());
 
 	return p;
     }
@@ -60,6 +62,8 @@ public class TestAccountTransactionGenerator {
 	Membership member = DairyFactory.eINSTANCE.createMembership();
 	member.setMember(randomPerson());
 	member.setMemberId(Long.toString(rand.nextLong()));
+	member.setApplicationDate(randomDate());
+//	member.setDefaultRoute(value);
 	return member;
     }
 
@@ -94,6 +98,7 @@ public class TestAccountTransactionGenerator {
 	temp.setSource(randomSource());
 	temp.setTransactionId(rand.nextLong());
 	temp.setTransactionType(randomTransactionType());
+	temp.setTransactionDate(randomDate());
 	return temp;
     }
 

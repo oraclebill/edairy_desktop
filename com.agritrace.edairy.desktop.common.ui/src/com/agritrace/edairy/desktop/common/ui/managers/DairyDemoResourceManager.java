@@ -515,15 +515,15 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	    member1.setApplicationDate(applicationDate);
 
 	    final Date effectiveDate = sdf.parse("03/05/2007");
-	    member1.setDefaultRoute(route1);
+//	    member1.setDefaultRoute(route1);
 	    member1.setEffectiveDate(effectiveDate);
 	    member1.setStatus(MembershipStatus.ACTIVE);
 	    member1.getFarms().addAll(farms);
-	    if (i % 2 == 0) {
-		member1.setDefaultRoute(route2);
-	    } else {
-		member1.setDefaultRoute(route1);
-	    }
+//	    if (i % 2 == 0) {
+//		member1.setDefaultRoute(route2);
+//	    } else {
+//		member1.setDefaultRoute(route1);
+//	    }
 	    dairy.getMemberships().add(member1);
 	}
 
