@@ -16,8 +16,8 @@ import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
-import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestFilterSection;
-import com.agritrace.edairy.desktop.services.ui.controllers.*;
+import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
 
 /**
  * Test case for service request controller
@@ -25,94 +25,101 @@ import com.agritrace.edairy.desktop.services.ui.controllers.*;
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<ServiceLogViewController> {
+public class ServiceRequestControllerTestCase extends
+		AbstractSubModuleControllerTest<ServiceRequestViewController> {
 
-    List<AnimalHealthRequest> requests = new ArrayList<AnimalHealthRequest>();
-    private ServiceLogViewController newInst;
+	List<AnimalHealthRequest> requests = new ArrayList<AnimalHealthRequest>();
+	private ServiceRequestViewController newInst;
 
-    @Override
-    protected ServiceLogViewController createController(ISubModuleNode node) {
-	try {
-	    initModel();
-	} catch (final ParseException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (final CoreException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	@Override
+	protected ServiceRequestViewController createController(ISubModuleNode node) {
+		try {
+			initModel();
+		} catch (final ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (final CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		newInst = new ServiceRequestViewController();
+		node.setNodeId(new NavigationNodeId("edm.services.log"));
+		newInst.setNavigationNode(node);
+		// newInst.setEMFModels(requests);
+		return newInst;
+
 	}
-	newInst = new ServiceLogViewController();
-	node.setNodeId(new NavigationNodeId("edm.services.log"));
-	newInst.setNavigationNode(node);
-	newInst.setEMFModels(requests);
-	return newInst;
 
-    }
+	/**
+	 * Initial model from the XML file
+	 * 
+	 * @throws ParseException
+	 * @throws CoreException
+	 */
+	private void initModel() throws ParseException, CoreException {
+		ServiceRequestResourceManager.INSTANCE.loadResources();
+		requests = ServiceRequestResourceManager.INSTANCE
+				.getObjectsFromDairyModel(AnimalHealthRequest.class);
 
-    /**
-     * Initial model from the XML file
-     * 
-     * @throws ParseException
-     * @throws CoreException
-     */
-    private void initModel() throws ParseException, CoreException {
-	ServiceRequestResourceManager.INSTANCE.loadResources();
-	requests = ServiceRequestResourceManager.INSTANCE.getObjectsFromDairyModel(AnimalHealthRequest.class);
+	}
 
-    }
+	/**
+	 * Test the filter section and buttons
+	 */
+	public void testFilterSection() {
 
-    /**
-     * Test the filter section and buttons
-     */
-    public void testFilterSection() {
+		// Default value of Start Date
+		final ITextRidget startDate = getController().getRidget(
+				ITextRidget.class, ServiceRequestView.STARTE_DATE);
+		assertEquals(startDate.getText(), ServiceUtils.getFirstDayofMonth());
 
-	// Default value of Start Date
-	final ITextRidget startDate = getController().getRidget(ITextRidget.class,
-		ServiceRequestFilterSection.STARTE_DATE);
-	assertEquals(startDate.getText(), ServiceUtils.getFirstDayofMonth());
+		// Default value of End date
+		final ITextRidget endDate = getController().getRidget(
+				ITextRidget.class, ServiceRequestView.END_DATE);
+		assertEquals(endDate.getText(), ServiceUtils.getLastDayofMonth());
 
-	// Default value of End date
-	final ITextRidget endDate = getController().getRidget(ITextRidget.class, ServiceRequestFilterSection.END_DATE);
-	assertEquals(endDate.getText(), ServiceUtils.getLastDayofMonth());
+		// All type button
+		final IToggleButtonRidget allTypeBtn = getController().getRidget(
+				IToggleButtonRidget.class,
+				ServiceRequestView.REQUEST_TYPE_ALL);
+		assertTrue(allTypeBtn.isSelected());
 
-	// All type button
-	final IToggleButtonRidget allTypeBtn = getController().getRidget(IToggleButtonRidget.class,
-		ServiceRequestFilterSection.REQUEST_TYPE_ALL);
-	assertTrue(allTypeBtn.isSelected());
+		// Verternary (Request type), By defalut verternary button is unchecked
+		final IToggleButtonRidget verterTypeBtn = getController().getRidget(
+				IToggleButtonRidget.class,
+				ServiceRequestView.REQUEST_TYPE_VERTERNARY);
+		assertFalse(verterTypeBtn.isSelected());
 
-	// Verternary (Request type), By defalut verternary button is unchecked
-	final IToggleButtonRidget verterTypeBtn = getController().getRidget(IToggleButtonRidget.class,
-		ServiceRequestFilterSection.REQUEST_TYPE_VERTERNARY);
-	assertFalse(verterTypeBtn.isSelected());
+		// By default insemeniation button is unchecked
+		final IToggleButtonRidget insemenitationTypeBtn = getController()
+				.getRidget(IToggleButtonRidget.class,
+						ServiceRequestView.REQUEST_TYPE_INSEMINATION);
+		assertFalse(insemenitationTypeBtn.isSelected());
 
-	// By default insemeniation button is unchecked
-	final IToggleButtonRidget insemenitationTypeBtn = getController().getRidget(IToggleButtonRidget.class,
-		ServiceRequestFilterSection.REQUEST_TYPE_INSEMINATION);
-	assertFalse(insemenitationTypeBtn.isSelected());
+		// Verfiy
+		// Configure column formatter for table ridget
+		final ITableRidget masterTable = getController().getRidget(
+				ITableRidget.class,
+				AbstractMasterDetailsComposite.BIND_ID_TABLE);
+		assertEquals(masterTable.getObservableList().size(), 3);
 
-	// Verfiy
-	// Configure column formatter for table ridget
-	final ITableRidget masterTable = getController().getRidget(ITableRidget.class,
-		AbstractMasterDetailsComposite.BIND_ID_TABLE);
-	assertEquals(masterTable.getObservableList().size(), 3);
+		// Test Apply Button, Change some condition
+		final IActionRidget apply = getController().getRidget(
+				IActionRidget.class, ServiceRequestView.BIND_ID_FILTER_SEARCH);
 
-	// Test Apply Button, Change some condition
-	final IActionRidget apply = getController().getRidget(IActionRidget.class,
-		ServiceRequestFilterSection.BIND_ID_APPLY);
+		// Test Reset Button
+		// final IActionRidget reset = (IActionRidget)
+		// getController().getRidget(
+		// IActionRidget.class, ServiceRequestFilterSection.BIND_ID_RESET);
+		// reset.fireAction();
 
-	// Test Reset Button
-	// final IActionRidget reset = (IActionRidget)
-	// getController().getRidget(
-	// IActionRidget.class, ServiceRequestFilterSection.BIND_ID_RESET);
-	// reset.fireAction();
+		// TODO More items
 
-	// TODO More items
+	}
 
-    }
+	public void testMasterDetail() {
+		// TODO
 
-    public void testMasterDetail() {
-	// TODO
-
-    }
+	}
 
 }

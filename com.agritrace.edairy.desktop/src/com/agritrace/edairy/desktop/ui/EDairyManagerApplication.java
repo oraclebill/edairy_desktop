@@ -34,9 +34,7 @@ import com.agritrace.edairy.desktop.member.ui.views.MemberListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
-import com.agritrace.edairy.desktop.services.ui.controllers.ServiceLogViewController;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
-import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
 import com.agritrace.edairy.desktop.ui.views.BlankView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
@@ -235,7 +233,6 @@ public class EDairyManagerApplication extends SwtApplication {
 	//
 
 	final IModuleNode moduleServices = NodeFactory.createModule("edm.services", "Requests", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.services.log", "Request Log (OLD)", moduleServices, ServiceRequestLogView.ID, ServiceLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 	NodeFactory.createSubModule("edm.services.edit", "Request Log", moduleServices, ServiceRequestView.ID, ServiceRequestViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//

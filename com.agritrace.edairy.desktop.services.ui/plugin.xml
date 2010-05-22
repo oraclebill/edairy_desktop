@@ -5,13 +5,6 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.services.ui.views.ServiceRequestLogView"
-            id="animalhealth.services.log.view"
-            name="Service Request Log"
-            restorable="true">
-      </view>
-      <view
-            allowMultiple="true"
             class="com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView"
             id="animalhealth.services.edit.view"
             name="Service Request"
