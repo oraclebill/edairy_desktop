@@ -6,6 +6,9 @@
  */
 package com.agritrace.edairy.desktop.common.model.base;
 
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +26,9 @@ package com.agritrace.edairy.desktop.common.model.base;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getAdditionalNames <em>Additional Names</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getSuffix <em>Suffix</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getNickName <em>Nick Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getContactMethods <em>Contact Methods</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,7 +36,7 @@ package com.agritrace.edairy.desktop.common.model.base;
  * @model
  * @generated
  */
-public interface Person extends Party {
+public interface Person extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -238,5 +244,73 @@ public interface Person extends Party {
 	 * @generated
 	 */
 	void setNickName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Phone Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Phone Number</em>' attribute.
+	 * @see #setPhoneNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_PhoneNumber()
+	 * @model
+	 * @generated
+	 */
+	String getPhoneNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Person#getPhoneNumber <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Phone Number</em>' attribute.
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	void setPhoneNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location</em>' containment reference.
+	 * @see #setLocation(Location)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_Location()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	Location getLocation();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Location</em>' containment reference.
+	 * @see #getLocation()
+	 * @generated
+	 */
+	void setLocation(Location value);
+
+	/**
+	 * Returns the value of the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.ContactMethod}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contact Methods</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Contact Methods</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_ContactMethods()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ContactMethod> getContactMethods();
 
 } // Person

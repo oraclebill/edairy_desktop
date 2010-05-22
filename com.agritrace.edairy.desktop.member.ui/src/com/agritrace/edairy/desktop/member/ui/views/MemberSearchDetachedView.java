@@ -43,6 +43,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
@@ -194,7 +195,8 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		case 0:
 		    return ((Membership) element).getMemberId();
 		case 1:
-		    return ((Membership) element).getMember().getName();
+			Person member = ((Membership) element).getMember();
+		    return member.getFamilyName() + ", " + member.getGivenName();
 		case 2:
 		    return "N/A";
 //		    return ((Membership) element).getDefaultRoute().getName();

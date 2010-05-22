@@ -7,6 +7,8 @@
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
@@ -21,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -35,12 +38,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLegalName <em>Legal Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyName <em>Company Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContactMethods <em>Contact Methods</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CompanyImpl extends PartyImpl implements Company {
+public class CompanyImpl extends EObjectImpl implements Company {
 	/**
 	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -90,6 +96,46 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * @ordered
 	 */
 	protected String companyName = COMPANY_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhoneNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PHONE_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhoneNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Location location;
+
+	/**
+	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContactMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ContactMethod> contactMethods;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,11 +215,91 @@ public class CompanyImpl extends PartyImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPhoneNumber(String newPhoneNumber) {
+		String oldPhoneNumber = phoneNumber;
+		phoneNumber = newPhoneNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location getLocation() {
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(Location newLocation) {
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, newLocation, newLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ContactMethod> getContactMethods() {
+		if (contactMethods == null) {
+			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
+		}
+		return contactMethods;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.COMPANY__CONTACTS:
 				return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPANY__LOCATION:
+				return basicSetLocation(null, msgs);
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -192,6 +318,12 @@ public class CompanyImpl extends PartyImpl implements Company {
 				return getLegalName();
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				return getCompanyName();
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				return getPhoneNumber();
+			case ModelPackage.COMPANY__LOCATION:
+				return getLocation();
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return getContactMethods();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +347,16 @@ public class CompanyImpl extends PartyImpl implements Company {
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				setCompanyName((String)newValue);
 				return;
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				setPhoneNumber((String)newValue);
+				return;
+			case ModelPackage.COMPANY__LOCATION:
+				setLocation((Location)newValue);
+				return;
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				getContactMethods().clear();
+				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -236,6 +378,15 @@ public class CompanyImpl extends PartyImpl implements Company {
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				setCompanyName(COMPANY_NAME_EDEFAULT);
 				return;
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
+				return;
+			case ModelPackage.COMPANY__LOCATION:
+				setLocation((Location)null);
+				return;
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				getContactMethods().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -254,6 +405,12 @@ public class CompanyImpl extends PartyImpl implements Company {
 				return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				return COMPANY_NAME_EDEFAULT == null ? companyName != null : !COMPANY_NAME_EDEFAULT.equals(companyName);
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
+			case ModelPackage.COMPANY__LOCATION:
+				return location != null;
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return contactMethods != null && !contactMethods.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -272,6 +429,8 @@ public class CompanyImpl extends PartyImpl implements Company {
 		result.append(legalName);
 		result.append(", companyName: ");
 		result.append(companyName);
+		result.append(", phoneNumber: ");
+		result.append(phoneNumber);
 		result.append(')');
 		return result.toString();
 	}

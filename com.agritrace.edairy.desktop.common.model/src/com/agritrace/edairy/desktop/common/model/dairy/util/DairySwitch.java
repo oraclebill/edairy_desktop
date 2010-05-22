@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.dairy.util;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.Party;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
 import com.agritrace.edairy.desktop.common.model.dairy.*;
@@ -110,7 +109,6 @@ public class DairySwitch<T> {
 				Employee employee = (Employee)theEObject;
 				T result = caseEmployee(employee);
 				if (result == null) result = casePerson(employee);
-				if (result == null) result = caseParty(employee);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,7 +146,6 @@ public class DairySwitch<T> {
 				Dairy dairy = (Dairy)theEObject;
 				T result = caseDairy(dairy);
 				if (result == null) result = caseCompany(dairy);
-				if (result == null) result = caseParty(dairy);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -176,7 +173,6 @@ public class DairySwitch<T> {
 				Supplier supplier = (Supplier)theEObject;
 				T result = caseSupplier(supplier);
 				if (result == null) result = caseCompany(supplier);
-				if (result == null) result = caseParty(supplier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -376,21 +372,6 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T caseSupplier(Supplier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Party</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Party</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParty(Party object) {
 		return null;
 	}
 

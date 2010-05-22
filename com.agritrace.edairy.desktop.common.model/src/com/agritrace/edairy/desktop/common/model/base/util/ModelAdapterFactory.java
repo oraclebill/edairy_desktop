@@ -72,10 +72,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	protected ModelSwitch<Adapter> modelSwitch =
 		new ModelSwitch<Adapter>() {
 			@Override
-			public Adapter caseParty(Party object) {
-				return createPartyAdapter();
-			}
-			@Override
 			public Adapter caseMapLocation(MapLocation object) {
 				return createMapLocationAdapter();
 			}
@@ -130,20 +126,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Party <em>Party</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Party
-	 * @generated
-	 */
-	public Adapter createPartyAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation <em>Map Location</em>}'.

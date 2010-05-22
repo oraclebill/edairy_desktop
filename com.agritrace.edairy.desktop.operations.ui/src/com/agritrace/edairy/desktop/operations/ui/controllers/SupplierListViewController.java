@@ -28,7 +28,7 @@ public class SupplierListViewController extends AbstractRecordListController {
 			ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(),
 			DairyPackage.Literals.SUPPLIER__CATEGORIES.getName(),
 			ModelPackage.Literals.COMPANY__CONTACTS.getName(),
-			ModelPackage.Literals.PARTY__PHONE_NUMBER.getName(),
+			ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(),
 			DairyPackage.Literals.SUPPLIER__STATUS.getName() };
 	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category",
 			"Contact", "Contact #", "Status" };

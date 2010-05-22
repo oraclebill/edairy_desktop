@@ -87,12 +87,6 @@ public class ModelSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ModelPackage.PARTY: {
-				Party party = (Party)theEObject;
-				T result = caseParty(party);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.MAP_LOCATION: {
 				MapLocation mapLocation = (MapLocation)theEObject;
 				T result = caseMapLocation(mapLocation);
@@ -120,14 +114,12 @@ public class ModelSwitch<T> {
 			case ModelPackage.PERSON: {
 				Person person = (Person)theEObject;
 				T result = casePerson(person);
-				if (result == null) result = caseParty(person);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.COMPANY: {
 				Company company = (Company)theEObject;
 				T result = caseCompany(company);
-				if (result == null) result = caseParty(company);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -151,21 +143,6 @@ public class ModelSwitch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Party</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Party</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParty(Party object) {
-		return null;
 	}
 
 	/**

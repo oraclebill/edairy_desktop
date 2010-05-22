@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
-import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;

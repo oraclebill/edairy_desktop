@@ -528,51 +528,6 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Party Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__PARTY_ID = ModelPackage.PERSON__PARTY_ID;
-
-	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__PHONE_NUMBER = ModelPackage.PERSON__PHONE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__LOCATION = ModelPackage.PERSON__LOCATION;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__NAME = ModelPackage.PERSON__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -643,6 +598,33 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMPLOYEE__NICK_NAME = ModelPackage.PERSON__NICK_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__PHONE_NUMBER = ModelPackage.PERSON__PHONE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__LOCATION = ModelPackage.PERSON__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1083,13 +1065,31 @@ public interface DairyPackage extends EPackage {
 	int DAIRY = 8;
 
 	/**
-	 * The feature id for the '<em><b>Party Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__PARTY_ID = ModelPackage.COMPANY__PARTY_ID;
+	int DAIRY__CONTACTS = ModelPackage.COMPANY__CONTACTS;
+
+	/**
+	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__LEGAL_NAME = ModelPackage.COMPANY__LEGAL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
@@ -1117,42 +1117,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int DAIRY__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__NAME = ModelPackage.COMPANY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__CONTACTS = ModelPackage.COMPANY__CONTACTS;
-
-	/**
-	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__LEGAL_NAME = ModelPackage.COMPANY__LEGAL_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
@@ -1554,13 +1518,31 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER = 12;
 
 	/**
-	 * The feature id for the '<em><b>Party Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PARTY_ID = ModelPackage.COMPANY__PARTY_ID;
+	int SUPPLIER__CONTACTS = ModelPackage.COMPANY__CONTACTS;
+
+	/**
+	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__LEGAL_NAME = ModelPackage.COMPANY__LEGAL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
@@ -1588,42 +1570,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUPPLIER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__NAME = ModelPackage.COMPANY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__CONTACTS = ModelPackage.COMPANY__CONTACTS;
-
-	/**
-	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__LEGAL_NAME = ModelPackage.COMPANY__LEGAL_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.

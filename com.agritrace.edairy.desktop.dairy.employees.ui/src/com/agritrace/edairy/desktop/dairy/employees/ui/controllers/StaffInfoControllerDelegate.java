@@ -94,7 +94,7 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 	    final ITextRidget phoneNoText = container.getRidget(ITextRidget.class,
 		    StaffInfoMasterDetailComposite.BIND_ID_PHONE_NUM);
 	    phoneNoText.setDirectWriting(true);
-	    phoneNoText.bindToModel(workingCopy, ModelPackage.Literals.PARTY__PHONE_NUMBER.getName());
+	    phoneNoText.bindToModel(workingCopy, ModelPackage.Literals.PERSON__PHONE_NUMBER.getName());
 	    phoneNoText.updateFromModel();
 
 	    // Department

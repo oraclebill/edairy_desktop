@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.dairy;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.Person;
 
 import java.util.Date;
 
