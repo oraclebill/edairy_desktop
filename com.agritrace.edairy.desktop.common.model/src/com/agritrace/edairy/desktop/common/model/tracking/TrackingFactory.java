@@ -18,65 +18,65 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface TrackingFactory extends EFactory {
 	/**
-         * The singleton instance of the factory.
-         * <!-- begin-user-doc -->
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	TrackingFactory eINSTANCE = com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingFactoryImpl.init();
 
 	/**
-         * Returns a new object of class '<em>Farm</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Farm</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Farm</em>'.
-         * @generated
-         */
+	 * @return a new object of class '<em>Farm</em>'.
+	 * @generated
+	 */
 	Farm createFarm();
 
 	/**
-         * Returns a new object of class '<em>Container</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Container</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Container</em>'.
-         * @generated
-         */
+	 * @return a new object of class '<em>Container</em>'.
+	 * @generated
+	 */
 	Container createContainer();
 
 	/**
-         * Returns a new object of class '<em>Registered Animal</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Registered Animal</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Registered Animal</em>'.
-         * @generated
-         */
+	 * @return a new object of class '<em>Registered Animal</em>'.
+	 * @generated
+	 */
 	RegisteredAnimal createRegisteredAnimal();
 
 	/**
-         * Returns a new object of class '<em>Reference Animal Type</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Reference Animal Type</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Reference Animal Type</em>'.
-         * @generated
-         */
+	 * @return a new object of class '<em>Reference Animal Type</em>'.
+	 * @generated
+	 */
 	ReferenceAnimalType createReferenceAnimalType();
 
 	/**
-         * Returns a new object of class '<em>Animal Identifier</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Animal Identifier</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return a new object of class '<em>Animal Identifier</em>'.
-         * @generated
-         */
+	 * @return a new object of class '<em>Animal Identifier</em>'.
+	 * @generated
+	 */
 	AnimalIdentifier createAnimalIdentifier();
 
 	/**
-         * Returns the package supported by this factory.
-         * <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return the package supported by this factory.
-         * @generated
-         */
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
 	TrackingPackage getTrackingPackage();
 
 } //TrackingFactory

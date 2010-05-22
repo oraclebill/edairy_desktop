@@ -28,145 +28,145 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class AccountSwitch<T> {
 	/**
-         * The cached model package
-         * <!-- begin-user-doc -->
+	 * The cached model package
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	protected static AccountPackage modelPackage;
 
 	/**
-         * Creates an instance of the switch.
-         * <!-- begin-user-doc -->
+	 * Creates an instance of the switch.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public AccountSwitch() {
-                if (modelPackage == null) {
-                        modelPackage = AccountPackage.eINSTANCE;
-                }
-        }
+		if (modelPackage == null) {
+			modelPackage = AccountPackage.eINSTANCE;
+		}
+	}
 
 	/**
-         * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-         * <!-- begin-user-doc -->
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return the first non-null result returned by a <code>caseXXX</code> call.
-         * @generated
-         */
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
 	public T doSwitch(EObject theEObject) {
-                return doSwitch(theEObject.eClass(), theEObject);
-        }
+		return doSwitch(theEObject.eClass(), theEObject);
+	}
 
 	/**
-         * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-         * <!-- begin-user-doc -->
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return the first non-null result returned by a <code>caseXXX</code> call.
-         * @generated
-         */
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-                if (theEClass.eContainer() == modelPackage) {
-                        return doSwitch(theEClass.getClassifierID(), theEObject);
-                }
-                else {
-                        List<EClass> eSuperTypes = theEClass.getESuperTypes();
-                        return
-                                eSuperTypes.isEmpty() ?
-                                        defaultCase(theEObject) :
-                                        doSwitch(eSuperTypes.get(0), theEObject);
-                }
-        }
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch(eSuperTypes.get(0), theEObject);
+		}
+	}
 
 	/**
-         * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-         * <!-- begin-user-doc -->
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @return the first non-null result returned by a <code>caseXXX</code> call.
-         * @generated
-         */
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-                switch (classifierID) {
-                        case AccountPackage.ACCOUNT: {
-                                Account account = (Account)theEObject;
-                                T result = caseAccount(account);
-                                if (result == null) result = defaultCase(theEObject);
-                                return result;
-                        }
-                        case AccountPackage.ACCOUNT_TRANSACTION: {
-                                AccountTransaction accountTransaction = (AccountTransaction)theEObject;
-                                T result = caseAccountTransaction(accountTransaction);
-                                if (result == null) result = defaultCase(theEObject);
-                                return result;
-                        }
-                        case AccountPackage.BALANCE_POINT: {
-                                BalancePoint balancePoint = (BalancePoint)theEObject;
-                                T result = caseBalancePoint(balancePoint);
-                                if (result == null) result = defaultCase(theEObject);
-                                return result;
-                        }
-                        default: return defaultCase(theEObject);
-                }
-        }
+		switch (classifierID) {
+			case AccountPackage.ACCOUNT: {
+				Account account = (Account)theEObject;
+				T result = caseAccount(account);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AccountPackage.ACCOUNT_TRANSACTION: {
+				AccountTransaction accountTransaction = (AccountTransaction)theEObject;
+				T result = caseAccountTransaction(accountTransaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AccountPackage.BALANCE_POINT: {
+				BalancePoint balancePoint = (BalancePoint)theEObject;
+				T result = caseBalancePoint(balancePoint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			default: return defaultCase(theEObject);
+		}
+	}
 
 	/**
-         * Returns the result of interpreting the object as an instance of '<em>Account</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>Account</em>'.
+	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-         * @param object the target of the switch.
-         * @return the result of interpreting the object as an instance of '<em>Account</em>'.
-         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-         * @generated
-         */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Account</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
 	public T caseAccount(Account object) {
-                return null;
-        }
+		return null;
+	}
 
 	/**
-         * Returns the result of interpreting the object as an instance of '<em>Transaction</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>Transaction</em>'.
+	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-         * @param object the target of the switch.
-         * @return the result of interpreting the object as an instance of '<em>Transaction</em>'.
-         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-         * @generated
-         */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transaction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
 	public T caseAccountTransaction(AccountTransaction object) {
-                return null;
-        }
+		return null;
+	}
 
 	/**
-         * Returns the result of interpreting the object as an instance of '<em>Balance Point</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>Balance Point</em>'.
+	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-         * @param object the target of the switch.
-         * @return the result of interpreting the object as an instance of '<em>Balance Point</em>'.
-         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-         * @generated
-         */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Balance Point</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
 	public T caseBalancePoint(BalancePoint object) {
-                return null;
-        }
+		return null;
+	}
 
 	/**
-         * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-         * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
-         * @param object the target of the switch.
-         * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-         * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-         * @generated
-         */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+	 * @generated
+	 */
 	public T defaultCase(EObject object) {
-                return null;
-        }
+		return null;
+	}
 
 } //AccountSwitch

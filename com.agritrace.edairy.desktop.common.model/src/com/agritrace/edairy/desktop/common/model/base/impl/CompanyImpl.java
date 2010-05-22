@@ -7,6 +7,8 @@
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
@@ -21,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -32,248 +35,350 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLegalName <em>Legal Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyName <em>Company Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContactMethods <em>Contact Methods</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CompanyImpl extends PartyImpl implements Company {
+public class CompanyImpl extends EObjectImpl implements Company {
 	/**
-         * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getContacts()
-         * @generated
-         * @ordered
-         */
-	protected EList<Person> contacts;
-
-	/**
-         * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @see #getLegalName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getLegalName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String LEGAL_NAME_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getLegalName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getLegalName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String legalName = LEGAL_NAME_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getCompanyName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getCompanyName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String COMPANY_NAME_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getCompanyName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getCompanyName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String companyName = COMPANY_NAME_EDEFAULT;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
-	protected CompanyImpl() {
-                super();
-        }
+	 * @see #getContactMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ContactMethod> contactMethods;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @see #getContacts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Person> contacts;
+
+	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Location location;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CompanyImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-                return ModelPackage.Literals.COMPANY;
-        }
+		return ModelPackage.Literals.COMPANY;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
-	public EList<Person> getContacts() {
-                if (contacts == null) {
-                        contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
-                }
-                return contacts;
-        }
-
-	/**
-         * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getLegalName() {
-                return legalName;
-        }
+		return legalName;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setLegalName(String newLegalName) {
-                String oldLegalName = legalName;
-                legalName = newLegalName;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LEGAL_NAME, oldLegalName, legalName));
-        }
+		String oldLegalName = legalName;
+		legalName = newLegalName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LEGAL_NAME, oldLegalName, legalName));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getCompanyName() {
-                return companyName;
-        }
+		return companyName;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setCompanyName(String newCompanyName) {
-                String oldCompanyName = companyName;
-                companyName = newCompanyName;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_NAME, oldCompanyName, companyName));
-        }
+		String oldCompanyName = companyName;
+		companyName = newCompanyName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_NAME, oldCompanyName, companyName));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
+	public EList<ContactMethod> getContactMethods() {
+		if (contactMethods == null) {
+			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
+		}
+		return contactMethods;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Person> getContacts() {
+		if (contacts == null) {
+			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
+		}
+		return contacts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location getLocation() {
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(Location newLocation) {
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, newLocation, newLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-                switch (featureID) {
-                        case ModelPackage.COMPANY__CONTACTS:
-                                return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
-                }
-                return super.eInverseRemove(otherEnd, featureID, msgs);
-        }
+		switch (featureID) {
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPANY__CONTACTS:
+				return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
+			case ModelPackage.COMPANY__LOCATION:
+				return basicSetLocation(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-                switch (featureID) {
-                        case ModelPackage.COMPANY__CONTACTS:
-                                return getContacts();
-                        case ModelPackage.COMPANY__LEGAL_NAME:
-                                return getLegalName();
-                        case ModelPackage.COMPANY__COMPANY_NAME:
-                                return getCompanyName();
-                }
-                return super.eGet(featureID, resolve, coreType);
-        }
+		switch (featureID) {
+			case ModelPackage.COMPANY__LEGAL_NAME:
+				return getLegalName();
+			case ModelPackage.COMPANY__COMPANY_NAME:
+				return getCompanyName();
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return getContactMethods();
+			case ModelPackage.COMPANY__CONTACTS:
+				return getContacts();
+			case ModelPackage.COMPANY__LOCATION:
+				return getLocation();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-                switch (featureID) {
-                        case ModelPackage.COMPANY__CONTACTS:
-                                getContacts().clear();
-                                getContacts().addAll((Collection<? extends Person>)newValue);
-                                return;
-                        case ModelPackage.COMPANY__LEGAL_NAME:
-                                setLegalName((String)newValue);
-                                return;
-                        case ModelPackage.COMPANY__COMPANY_NAME:
-                                setCompanyName((String)newValue);
-                                return;
-                }
-                super.eSet(featureID, newValue);
-        }
+		switch (featureID) {
+			case ModelPackage.COMPANY__LEGAL_NAME:
+				setLegalName((String)newValue);
+				return;
+			case ModelPackage.COMPANY__COMPANY_NAME:
+				setCompanyName((String)newValue);
+				return;
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				getContactMethods().clear();
+				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
+				return;
+			case ModelPackage.COMPANY__CONTACTS:
+				getContacts().clear();
+				getContacts().addAll((Collection<? extends Person>)newValue);
+				return;
+			case ModelPackage.COMPANY__LOCATION:
+				setLocation((Location)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-                switch (featureID) {
-                        case ModelPackage.COMPANY__CONTACTS:
-                                getContacts().clear();
-                                return;
-                        case ModelPackage.COMPANY__LEGAL_NAME:
-                                setLegalName(LEGAL_NAME_EDEFAULT);
-                                return;
-                        case ModelPackage.COMPANY__COMPANY_NAME:
-                                setCompanyName(COMPANY_NAME_EDEFAULT);
-                                return;
-                }
-                super.eUnset(featureID);
-        }
+		switch (featureID) {
+			case ModelPackage.COMPANY__LEGAL_NAME:
+				setLegalName(LEGAL_NAME_EDEFAULT);
+				return;
+			case ModelPackage.COMPANY__COMPANY_NAME:
+				setCompanyName(COMPANY_NAME_EDEFAULT);
+				return;
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				getContactMethods().clear();
+				return;
+			case ModelPackage.COMPANY__CONTACTS:
+				getContacts().clear();
+				return;
+			case ModelPackage.COMPANY__LOCATION:
+				setLocation((Location)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-                switch (featureID) {
-                        case ModelPackage.COMPANY__CONTACTS:
-                                return contacts != null && !contacts.isEmpty();
-                        case ModelPackage.COMPANY__LEGAL_NAME:
-                                return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
-                        case ModelPackage.COMPANY__COMPANY_NAME:
-                                return COMPANY_NAME_EDEFAULT == null ? companyName != null : !COMPANY_NAME_EDEFAULT.equals(companyName);
-                }
-                return super.eIsSet(featureID);
-        }
+		switch (featureID) {
+			case ModelPackage.COMPANY__LEGAL_NAME:
+				return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
+			case ModelPackage.COMPANY__COMPANY_NAME:
+				return COMPANY_NAME_EDEFAULT == null ? companyName != null : !COMPANY_NAME_EDEFAULT.equals(companyName);
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return contactMethods != null && !contactMethods.isEmpty();
+			case ModelPackage.COMPANY__CONTACTS:
+				return contacts != null && !contacts.isEmpty();
+			case ModelPackage.COMPANY__LOCATION:
+				return location != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-                if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-                StringBuffer result = new StringBuffer(super.toString());
-                result.append(" (legalName: ");
-                result.append(legalName);
-                result.append(", companyName: ");
-                result.append(companyName);
-                result.append(')');
-                return result.toString();
-        }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (legalName: ");
+		result.append(legalName);
+		result.append(", companyName: ");
+		result.append(companyName);
+		result.append(')');
+		return result.toString();
+	}
 
 } //CompanyImpl

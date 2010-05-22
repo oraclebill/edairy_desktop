@@ -40,342 +40,342 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class LocationImpl extends EObjectImpl implements Location {
 	/**
-         * The cached value of the '{@link #getPostalLocation() <em>Postal Location</em>}' containment reference.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPostalLocation() <em>Postal Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getPostalLocation()
-         * @generated
-         * @ordered
-         */
+	 * @see #getPostalLocation()
+	 * @generated
+	 * @ordered
+	 */
 	protected PostalLocation postalLocation;
 
 	/**
-         * The cached value of the '{@link #getMapLocation() <em>Map Location</em>}' containment reference.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMapLocation() <em>Map Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getMapLocation()
-         * @generated
-         * @ordered
-         */
+	 * @see #getMapLocation()
+	 * @generated
+	 * @ordered
+	 */
 	protected MapLocation mapLocation;
 
 	/**
-         * The cached value of the '{@link #getStatutoryLocation() <em>Statutory Location</em>}' containment reference.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getStatutoryLocation() <em>Statutory Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getStatutoryLocation()
-         * @generated
-         * @ordered
-         */
+	 * @see #getStatutoryLocation()
+	 * @generated
+	 * @ordered
+	 */
 	protected StatutoryLocation statutoryLocation;
 
 	/**
-         * The cached value of the '{@link #getDescriptiveLocation() <em>Descriptive Location</em>}' containment reference.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDescriptiveLocation() <em>Descriptive Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getDescriptiveLocation()
-         * @generated
-         * @ordered
-         */
+	 * @see #getDescriptiveLocation()
+	 * @generated
+	 * @ordered
+	 */
 	protected DescriptiveLocation descriptiveLocation;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	protected LocationImpl() {
-                super();
-        }
+		super();
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-                return ModelPackage.Literals.LOCATION;
-        }
+		return ModelPackage.Literals.LOCATION;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public PostalLocation getPostalLocation() {
-                return postalLocation;
-        }
+		return postalLocation;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public NotificationChain basicSetPostalLocation(PostalLocation newPostalLocation, NotificationChain msgs) {
-                PostalLocation oldPostalLocation = postalLocation;
-                postalLocation = newPostalLocation;
-                if (eNotificationRequired()) {
-                        ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, oldPostalLocation, newPostalLocation);
-                        if (msgs == null) msgs = notification; else msgs.add(notification);
-                }
-                return msgs;
-        }
+		PostalLocation oldPostalLocation = postalLocation;
+		postalLocation = newPostalLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, oldPostalLocation, newPostalLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setPostalLocation(PostalLocation newPostalLocation) {
-                if (newPostalLocation != postalLocation) {
-                        NotificationChain msgs = null;
-                        if (postalLocation != null)
-                                msgs = ((InternalEObject)postalLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
-                        if (newPostalLocation != null)
-                                msgs = ((InternalEObject)newPostalLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
-                        msgs = basicSetPostalLocation(newPostalLocation, msgs);
-                        if (msgs != null) msgs.dispatch();
-                }
-                else if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, newPostalLocation, newPostalLocation));
-        }
+		if (newPostalLocation != postalLocation) {
+			NotificationChain msgs = null;
+			if (postalLocation != null)
+				msgs = ((InternalEObject)postalLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
+			if (newPostalLocation != null)
+				msgs = ((InternalEObject)newPostalLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
+			msgs = basicSetPostalLocation(newPostalLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, newPostalLocation, newPostalLocation));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public MapLocation getMapLocation() {
-                return mapLocation;
-        }
+		return mapLocation;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public NotificationChain basicSetMapLocation(MapLocation newMapLocation, NotificationChain msgs) {
-                MapLocation oldMapLocation = mapLocation;
-                mapLocation = newMapLocation;
-                if (eNotificationRequired()) {
-                        ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, oldMapLocation, newMapLocation);
-                        if (msgs == null) msgs = notification; else msgs.add(notification);
-                }
-                return msgs;
-        }
+		MapLocation oldMapLocation = mapLocation;
+		mapLocation = newMapLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, oldMapLocation, newMapLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setMapLocation(MapLocation newMapLocation) {
-                if (newMapLocation != mapLocation) {
-                        NotificationChain msgs = null;
-                        if (mapLocation != null)
-                                msgs = ((InternalEObject)mapLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
-                        if (newMapLocation != null)
-                                msgs = ((InternalEObject)newMapLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
-                        msgs = basicSetMapLocation(newMapLocation, msgs);
-                        if (msgs != null) msgs.dispatch();
-                }
-                else if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, newMapLocation, newMapLocation));
-        }
+		if (newMapLocation != mapLocation) {
+			NotificationChain msgs = null;
+			if (mapLocation != null)
+				msgs = ((InternalEObject)mapLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
+			if (newMapLocation != null)
+				msgs = ((InternalEObject)newMapLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
+			msgs = basicSetMapLocation(newMapLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, newMapLocation, newMapLocation));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public StatutoryLocation getStatutoryLocation() {
-                return statutoryLocation;
-        }
+		return statutoryLocation;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public NotificationChain basicSetStatutoryLocation(StatutoryLocation newStatutoryLocation, NotificationChain msgs) {
-                StatutoryLocation oldStatutoryLocation = statutoryLocation;
-                statutoryLocation = newStatutoryLocation;
-                if (eNotificationRequired()) {
-                        ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, oldStatutoryLocation, newStatutoryLocation);
-                        if (msgs == null) msgs = notification; else msgs.add(notification);
-                }
-                return msgs;
-        }
+		StatutoryLocation oldStatutoryLocation = statutoryLocation;
+		statutoryLocation = newStatutoryLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, oldStatutoryLocation, newStatutoryLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setStatutoryLocation(StatutoryLocation newStatutoryLocation) {
-                if (newStatutoryLocation != statutoryLocation) {
-                        NotificationChain msgs = null;
-                        if (statutoryLocation != null)
-                                msgs = ((InternalEObject)statutoryLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
-                        if (newStatutoryLocation != null)
-                                msgs = ((InternalEObject)newStatutoryLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
-                        msgs = basicSetStatutoryLocation(newStatutoryLocation, msgs);
-                        if (msgs != null) msgs.dispatch();
-                }
-                else if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, newStatutoryLocation, newStatutoryLocation));
-        }
+		if (newStatutoryLocation != statutoryLocation) {
+			NotificationChain msgs = null;
+			if (statutoryLocation != null)
+				msgs = ((InternalEObject)statutoryLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
+			if (newStatutoryLocation != null)
+				msgs = ((InternalEObject)newStatutoryLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
+			msgs = basicSetStatutoryLocation(newStatutoryLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, newStatutoryLocation, newStatutoryLocation));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public DescriptiveLocation getDescriptiveLocation() {
-                return descriptiveLocation;
-        }
+		return descriptiveLocation;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public NotificationChain basicSetDescriptiveLocation(DescriptiveLocation newDescriptiveLocation, NotificationChain msgs) {
-                DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
-                descriptiveLocation = newDescriptiveLocation;
-                if (eNotificationRequired()) {
-                        ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, oldDescriptiveLocation, newDescriptiveLocation);
-                        if (msgs == null) msgs = notification; else msgs.add(notification);
-                }
-                return msgs;
-        }
+		DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
+		descriptiveLocation = newDescriptiveLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, oldDescriptiveLocation, newDescriptiveLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setDescriptiveLocation(DescriptiveLocation newDescriptiveLocation) {
-                if (newDescriptiveLocation != descriptiveLocation) {
-                        NotificationChain msgs = null;
-                        if (descriptiveLocation != null)
-                                msgs = ((InternalEObject)descriptiveLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
-                        if (newDescriptiveLocation != null)
-                                msgs = ((InternalEObject)newDescriptiveLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
-                        msgs = basicSetDescriptiveLocation(newDescriptiveLocation, msgs);
-                        if (msgs != null) msgs.dispatch();
-                }
-                else if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, newDescriptiveLocation, newDescriptiveLocation));
-        }
+		if (newDescriptiveLocation != descriptiveLocation) {
+			NotificationChain msgs = null;
+			if (descriptiveLocation != null)
+				msgs = ((InternalEObject)descriptiveLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
+			if (newDescriptiveLocation != null)
+				msgs = ((InternalEObject)newDescriptiveLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
+			msgs = basicSetDescriptiveLocation(newDescriptiveLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, newDescriptiveLocation, newDescriptiveLocation));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-                switch (featureID) {
-                        case ModelPackage.LOCATION__POSTAL_LOCATION:
-                                return basicSetPostalLocation(null, msgs);
-                        case ModelPackage.LOCATION__MAP_LOCATION:
-                                return basicSetMapLocation(null, msgs);
-                        case ModelPackage.LOCATION__STATUTORY_LOCATION:
-                                return basicSetStatutoryLocation(null, msgs);
-                        case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
-                                return basicSetDescriptiveLocation(null, msgs);
-                }
-                return super.eInverseRemove(otherEnd, featureID, msgs);
-        }
+		switch (featureID) {
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				return basicSetPostalLocation(null, msgs);
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				return basicSetMapLocation(null, msgs);
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				return basicSetStatutoryLocation(null, msgs);
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				return basicSetDescriptiveLocation(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-                switch (featureID) {
-                        case ModelPackage.LOCATION__POSTAL_LOCATION:
-                                return getPostalLocation();
-                        case ModelPackage.LOCATION__MAP_LOCATION:
-                                return getMapLocation();
-                        case ModelPackage.LOCATION__STATUTORY_LOCATION:
-                                return getStatutoryLocation();
-                        case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
-                                return getDescriptiveLocation();
-                }
-                return super.eGet(featureID, resolve, coreType);
-        }
+		switch (featureID) {
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				return getPostalLocation();
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				return getMapLocation();
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				return getStatutoryLocation();
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				return getDescriptiveLocation();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-                switch (featureID) {
-                        case ModelPackage.LOCATION__POSTAL_LOCATION:
-                                setPostalLocation((PostalLocation)newValue);
-                                return;
-                        case ModelPackage.LOCATION__MAP_LOCATION:
-                                setMapLocation((MapLocation)newValue);
-                                return;
-                        case ModelPackage.LOCATION__STATUTORY_LOCATION:
-                                setStatutoryLocation((StatutoryLocation)newValue);
-                                return;
-                        case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
-                                setDescriptiveLocation((DescriptiveLocation)newValue);
-                                return;
-                }
-                super.eSet(featureID, newValue);
-        }
+		switch (featureID) {
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				setPostalLocation((PostalLocation)newValue);
+				return;
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				setMapLocation((MapLocation)newValue);
+				return;
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				setStatutoryLocation((StatutoryLocation)newValue);
+				return;
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				setDescriptiveLocation((DescriptiveLocation)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-                switch (featureID) {
-                        case ModelPackage.LOCATION__POSTAL_LOCATION:
-                                setPostalLocation((PostalLocation)null);
-                                return;
-                        case ModelPackage.LOCATION__MAP_LOCATION:
-                                setMapLocation((MapLocation)null);
-                                return;
-                        case ModelPackage.LOCATION__STATUTORY_LOCATION:
-                                setStatutoryLocation((StatutoryLocation)null);
-                                return;
-                        case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
-                                setDescriptiveLocation((DescriptiveLocation)null);
-                                return;
-                }
-                super.eUnset(featureID);
-        }
+		switch (featureID) {
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				setPostalLocation((PostalLocation)null);
+				return;
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				setMapLocation((MapLocation)null);
+				return;
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				setStatutoryLocation((StatutoryLocation)null);
+				return;
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				setDescriptiveLocation((DescriptiveLocation)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-                switch (featureID) {
-                        case ModelPackage.LOCATION__POSTAL_LOCATION:
-                                return postalLocation != null;
-                        case ModelPackage.LOCATION__MAP_LOCATION:
-                                return mapLocation != null;
-                        case ModelPackage.LOCATION__STATUTORY_LOCATION:
-                                return statutoryLocation != null;
-                        case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
-                                return descriptiveLocation != null;
-                }
-                return super.eIsSet(featureID);
-        }
+		switch (featureID) {
+			case ModelPackage.LOCATION__POSTAL_LOCATION:
+				return postalLocation != null;
+			case ModelPackage.LOCATION__MAP_LOCATION:
+				return mapLocation != null;
+			case ModelPackage.LOCATION__STATUTORY_LOCATION:
+				return statutoryLocation != null;
+			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
+				return descriptiveLocation != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //LocationImpl

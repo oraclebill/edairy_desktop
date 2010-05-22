@@ -6,14 +6,26 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
+import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,515 +42,684 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getAdditionalNames <em>Additional Names</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getSuffix <em>Suffix</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getNickName <em>Nick Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getContactMethods <em>Contact Methods</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PersonImpl extends PartyImpl implements Person {
+public class PersonImpl extends EObjectImpl implements Person {
 	/**
-         * The default value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getPhoto()
-         * @generated
-         * @ordered
-         */
+	 * @see #getPhoto()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String PHOTO_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getPhoto()
-         * @generated
-         * @ordered
-         */
+	 * @see #getPhoto()
+	 * @generated
+	 * @ordered
+	 */
 	protected String photo = PHOTO_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getHonorific() <em>Honorific</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getHonorific() <em>Honorific</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getHonorific()
-         * @generated
-         * @ordered
-         */
+	 * @see #getHonorific()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String HONORIFIC_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getHonorific() <em>Honorific</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getHonorific() <em>Honorific</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getHonorific()
-         * @generated
-         * @ordered
-         */
+	 * @see #getHonorific()
+	 * @generated
+	 * @ordered
+	 */
 	protected String honorific = HONORIFIC_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getFamilyName() <em>Family Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getFamilyName() <em>Family Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getFamilyName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getFamilyName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String FAMILY_NAME_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getFamilyName() <em>Family Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getFamilyName() <em>Family Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getFamilyName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getFamilyName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String familyName = FAMILY_NAME_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getGivenName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getGivenName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String GIVEN_NAME_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getGivenName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getGivenName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String givenName = GIVEN_NAME_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getMiddleName() <em>Middle Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getMiddleName() <em>Middle Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getMiddleName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getMiddleName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String MIDDLE_NAME_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getMiddleName() <em>Middle Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMiddleName() <em>Middle Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getMiddleName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getMiddleName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String middleName = MIDDLE_NAME_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getAdditionalNames() <em>Additional Names</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getAdditionalNames() <em>Additional Names</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getAdditionalNames()
-         * @generated
-         * @ordered
-         */
+	 * @see #getAdditionalNames()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String ADDITIONAL_NAMES_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getAdditionalNames() <em>Additional Names</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAdditionalNames() <em>Additional Names</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getAdditionalNames()
-         * @generated
-         * @ordered
-         */
+	 * @see #getAdditionalNames()
+	 * @generated
+	 * @ordered
+	 */
 	protected String additionalNames = ADDITIONAL_NAMES_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getSuffix()
-         * @generated
-         * @ordered
-         */
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String SUFFIX_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSuffix() <em>Suffix</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getSuffix()
-         * @generated
-         * @ordered
-         */
+	 * @see #getSuffix()
+	 * @generated
+	 * @ordered
+	 */
 	protected String suffix = SUFFIX_EDEFAULT;
 
 	/**
-         * The default value of the '{@link #getNickName() <em>Nick Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNickName() <em>Nick Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getNickName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getNickName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String NICK_NAME_EDEFAULT = null;
 
 	/**
-         * The cached value of the '{@link #getNickName() <em>Nick Name</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNickName() <em>Nick Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getNickName()
-         * @generated
-         * @ordered
-         */
+	 * @see #getNickName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String nickName = NICK_NAME_EDEFAULT;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
-	protected PersonImpl() {
-                super();
-        }
+	 * @see #getPhoneNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PHONE_NUMBER_EDEFAULT = null;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @see #getPhoneNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Location location;
+
+	/**
+	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContactMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ContactMethod> contactMethods;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PersonImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-                return ModelPackage.Literals.PERSON;
-        }
+		return ModelPackage.Literals.PERSON;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getPhoto() {
-                return photo;
-        }
+		return photo;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setPhoto(String newPhoto) {
-                String oldPhoto = photo;
-                photo = newPhoto;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHOTO, oldPhoto, photo));
-        }
+		String oldPhoto = photo;
+		photo = newPhoto;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHOTO, oldPhoto, photo));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getHonorific() {
-                return honorific;
-        }
+		return honorific;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setHonorific(String newHonorific) {
-                String oldHonorific = honorific;
-                honorific = newHonorific;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__HONORIFIC, oldHonorific, honorific));
-        }
+		String oldHonorific = honorific;
+		honorific = newHonorific;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__HONORIFIC, oldHonorific, honorific));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getFamilyName() {
-                return familyName;
-        }
+		return familyName;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setFamilyName(String newFamilyName) {
-                String oldFamilyName = familyName;
-                familyName = newFamilyName;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__FAMILY_NAME, oldFamilyName, familyName));
-        }
+		String oldFamilyName = familyName;
+		familyName = newFamilyName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__FAMILY_NAME, oldFamilyName, familyName));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getGivenName() {
-                return givenName;
-        }
+		return givenName;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setGivenName(String newGivenName) {
-                String oldGivenName = givenName;
-                givenName = newGivenName;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__GIVEN_NAME, oldGivenName, givenName));
-        }
+		String oldGivenName = givenName;
+		givenName = newGivenName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__GIVEN_NAME, oldGivenName, givenName));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getMiddleName() {
-                return middleName;
-        }
+		return middleName;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setMiddleName(String newMiddleName) {
-                String oldMiddleName = middleName;
-                middleName = newMiddleName;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__MIDDLE_NAME, oldMiddleName, middleName));
-        }
+		String oldMiddleName = middleName;
+		middleName = newMiddleName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__MIDDLE_NAME, oldMiddleName, middleName));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getAdditionalNames() {
-                return additionalNames;
-        }
+		return additionalNames;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setAdditionalNames(String newAdditionalNames) {
-                String oldAdditionalNames = additionalNames;
-                additionalNames = newAdditionalNames;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__ADDITIONAL_NAMES, oldAdditionalNames, additionalNames));
-        }
+		String oldAdditionalNames = additionalNames;
+		additionalNames = newAdditionalNames;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__ADDITIONAL_NAMES, oldAdditionalNames, additionalNames));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getSuffix() {
-                return suffix;
-        }
+		return suffix;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setSuffix(String newSuffix) {
-                String oldSuffix = suffix;
-                suffix = newSuffix;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__SUFFIX, oldSuffix, suffix));
-        }
+		String oldSuffix = suffix;
+		suffix = newSuffix;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__SUFFIX, oldSuffix, suffix));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public String getNickName() {
-                return nickName;
-        }
+		return nickName;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setNickName(String newNickName) {
-                String oldNickName = nickName;
-                nickName = newNickName;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NICK_NAME, oldNickName, nickName));
-        }
+		String oldNickName = nickName;
+		nickName = newNickName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NICK_NAME, oldNickName, nickName));
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPhoneNumber(String newPhoneNumber) {
+		String oldPhoneNumber = phoneNumber;
+		phoneNumber = newPhoneNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location getLocation() {
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(Location newLocation) {
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PERSON__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PERSON__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__LOCATION, newLocation, newLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ContactMethod> getContactMethods() {
+		if (contactMethods == null) {
+			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.PERSON__CONTACT_METHODS);
+		}
+		return contactMethods;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.PERSON__LOCATION:
+				return basicSetLocation(null, msgs);
+			case ModelPackage.PERSON__CONTACT_METHODS:
+				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-                switch (featureID) {
-                        case ModelPackage.PERSON__PHOTO:
-                                return getPhoto();
-                        case ModelPackage.PERSON__HONORIFIC:
-                                return getHonorific();
-                        case ModelPackage.PERSON__FAMILY_NAME:
-                                return getFamilyName();
-                        case ModelPackage.PERSON__GIVEN_NAME:
-                                return getGivenName();
-                        case ModelPackage.PERSON__MIDDLE_NAME:
-                                return getMiddleName();
-                        case ModelPackage.PERSON__ADDITIONAL_NAMES:
-                                return getAdditionalNames();
-                        case ModelPackage.PERSON__SUFFIX:
-                                return getSuffix();
-                        case ModelPackage.PERSON__NICK_NAME:
-                                return getNickName();
-                }
-                return super.eGet(featureID, resolve, coreType);
-        }
+		switch (featureID) {
+			case ModelPackage.PERSON__PHOTO:
+				return getPhoto();
+			case ModelPackage.PERSON__HONORIFIC:
+				return getHonorific();
+			case ModelPackage.PERSON__FAMILY_NAME:
+				return getFamilyName();
+			case ModelPackage.PERSON__GIVEN_NAME:
+				return getGivenName();
+			case ModelPackage.PERSON__MIDDLE_NAME:
+				return getMiddleName();
+			case ModelPackage.PERSON__ADDITIONAL_NAMES:
+				return getAdditionalNames();
+			case ModelPackage.PERSON__SUFFIX:
+				return getSuffix();
+			case ModelPackage.PERSON__NICK_NAME:
+				return getNickName();
+			case ModelPackage.PERSON__PHONE_NUMBER:
+				return getPhoneNumber();
+			case ModelPackage.PERSON__LOCATION:
+				return getLocation();
+			case ModelPackage.PERSON__CONTACT_METHODS:
+				return getContactMethods();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-                switch (featureID) {
-                        case ModelPackage.PERSON__PHOTO:
-                                setPhoto((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__HONORIFIC:
-                                setHonorific((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__FAMILY_NAME:
-                                setFamilyName((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__GIVEN_NAME:
-                                setGivenName((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__MIDDLE_NAME:
-                                setMiddleName((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__ADDITIONAL_NAMES:
-                                setAdditionalNames((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__SUFFIX:
-                                setSuffix((String)newValue);
-                                return;
-                        case ModelPackage.PERSON__NICK_NAME:
-                                setNickName((String)newValue);
-                                return;
-                }
-                super.eSet(featureID, newValue);
-        }
+		switch (featureID) {
+			case ModelPackage.PERSON__PHOTO:
+				setPhoto((String)newValue);
+				return;
+			case ModelPackage.PERSON__HONORIFIC:
+				setHonorific((String)newValue);
+				return;
+			case ModelPackage.PERSON__FAMILY_NAME:
+				setFamilyName((String)newValue);
+				return;
+			case ModelPackage.PERSON__GIVEN_NAME:
+				setGivenName((String)newValue);
+				return;
+			case ModelPackage.PERSON__MIDDLE_NAME:
+				setMiddleName((String)newValue);
+				return;
+			case ModelPackage.PERSON__ADDITIONAL_NAMES:
+				setAdditionalNames((String)newValue);
+				return;
+			case ModelPackage.PERSON__SUFFIX:
+				setSuffix((String)newValue);
+				return;
+			case ModelPackage.PERSON__NICK_NAME:
+				setNickName((String)newValue);
+				return;
+			case ModelPackage.PERSON__PHONE_NUMBER:
+				setPhoneNumber((String)newValue);
+				return;
+			case ModelPackage.PERSON__LOCATION:
+				setLocation((Location)newValue);
+				return;
+			case ModelPackage.PERSON__CONTACT_METHODS:
+				getContactMethods().clear();
+				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-                switch (featureID) {
-                        case ModelPackage.PERSON__PHOTO:
-                                setPhoto(PHOTO_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__HONORIFIC:
-                                setHonorific(HONORIFIC_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__FAMILY_NAME:
-                                setFamilyName(FAMILY_NAME_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__GIVEN_NAME:
-                                setGivenName(GIVEN_NAME_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__MIDDLE_NAME:
-                                setMiddleName(MIDDLE_NAME_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__ADDITIONAL_NAMES:
-                                setAdditionalNames(ADDITIONAL_NAMES_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__SUFFIX:
-                                setSuffix(SUFFIX_EDEFAULT);
-                                return;
-                        case ModelPackage.PERSON__NICK_NAME:
-                                setNickName(NICK_NAME_EDEFAULT);
-                                return;
-                }
-                super.eUnset(featureID);
-        }
+		switch (featureID) {
+			case ModelPackage.PERSON__PHOTO:
+				setPhoto(PHOTO_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__HONORIFIC:
+				setHonorific(HONORIFIC_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__FAMILY_NAME:
+				setFamilyName(FAMILY_NAME_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__GIVEN_NAME:
+				setGivenName(GIVEN_NAME_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__MIDDLE_NAME:
+				setMiddleName(MIDDLE_NAME_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__ADDITIONAL_NAMES:
+				setAdditionalNames(ADDITIONAL_NAMES_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__SUFFIX:
+				setSuffix(SUFFIX_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__NICK_NAME:
+				setNickName(NICK_NAME_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__PHONE_NUMBER:
+				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__LOCATION:
+				setLocation((Location)null);
+				return;
+			case ModelPackage.PERSON__CONTACT_METHODS:
+				getContactMethods().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-                switch (featureID) {
-                        case ModelPackage.PERSON__PHOTO:
-                                return PHOTO_EDEFAULT == null ? photo != null : !PHOTO_EDEFAULT.equals(photo);
-                        case ModelPackage.PERSON__HONORIFIC:
-                                return HONORIFIC_EDEFAULT == null ? honorific != null : !HONORIFIC_EDEFAULT.equals(honorific);
-                        case ModelPackage.PERSON__FAMILY_NAME:
-                                return FAMILY_NAME_EDEFAULT == null ? familyName != null : !FAMILY_NAME_EDEFAULT.equals(familyName);
-                        case ModelPackage.PERSON__GIVEN_NAME:
-                                return GIVEN_NAME_EDEFAULT == null ? givenName != null : !GIVEN_NAME_EDEFAULT.equals(givenName);
-                        case ModelPackage.PERSON__MIDDLE_NAME:
-                                return MIDDLE_NAME_EDEFAULT == null ? middleName != null : !MIDDLE_NAME_EDEFAULT.equals(middleName);
-                        case ModelPackage.PERSON__ADDITIONAL_NAMES:
-                                return ADDITIONAL_NAMES_EDEFAULT == null ? additionalNames != null : !ADDITIONAL_NAMES_EDEFAULT.equals(additionalNames);
-                        case ModelPackage.PERSON__SUFFIX:
-                                return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
-                        case ModelPackage.PERSON__NICK_NAME:
-                                return NICK_NAME_EDEFAULT == null ? nickName != null : !NICK_NAME_EDEFAULT.equals(nickName);
-                }
-                return super.eIsSet(featureID);
-        }
+		switch (featureID) {
+			case ModelPackage.PERSON__PHOTO:
+				return PHOTO_EDEFAULT == null ? photo != null : !PHOTO_EDEFAULT.equals(photo);
+			case ModelPackage.PERSON__HONORIFIC:
+				return HONORIFIC_EDEFAULT == null ? honorific != null : !HONORIFIC_EDEFAULT.equals(honorific);
+			case ModelPackage.PERSON__FAMILY_NAME:
+				return FAMILY_NAME_EDEFAULT == null ? familyName != null : !FAMILY_NAME_EDEFAULT.equals(familyName);
+			case ModelPackage.PERSON__GIVEN_NAME:
+				return GIVEN_NAME_EDEFAULT == null ? givenName != null : !GIVEN_NAME_EDEFAULT.equals(givenName);
+			case ModelPackage.PERSON__MIDDLE_NAME:
+				return MIDDLE_NAME_EDEFAULT == null ? middleName != null : !MIDDLE_NAME_EDEFAULT.equals(middleName);
+			case ModelPackage.PERSON__ADDITIONAL_NAMES:
+				return ADDITIONAL_NAMES_EDEFAULT == null ? additionalNames != null : !ADDITIONAL_NAMES_EDEFAULT.equals(additionalNames);
+			case ModelPackage.PERSON__SUFFIX:
+				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
+			case ModelPackage.PERSON__NICK_NAME:
+				return NICK_NAME_EDEFAULT == null ? nickName != null : !NICK_NAME_EDEFAULT.equals(nickName);
+			case ModelPackage.PERSON__PHONE_NUMBER:
+				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
+			case ModelPackage.PERSON__LOCATION:
+				return location != null;
+			case ModelPackage.PERSON__CONTACT_METHODS:
+				return contactMethods != null && !contactMethods.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-                if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-                StringBuffer result = new StringBuffer(super.toString());
-                result.append(" (photo: ");
-                result.append(photo);
-                result.append(", honorific: ");
-                result.append(honorific);
-                result.append(", familyName: ");
-                result.append(familyName);
-                result.append(", givenName: ");
-                result.append(givenName);
-                result.append(", middleName: ");
-                result.append(middleName);
-                result.append(", additionalNames: ");
-                result.append(additionalNames);
-                result.append(", suffix: ");
-                result.append(suffix);
-                result.append(", nickName: ");
-                result.append(nickName);
-                result.append(')');
-                return result.toString();
-        }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (photo: ");
+		result.append(photo);
+		result.append(", honorific: ");
+		result.append(honorific);
+		result.append(", familyName: ");
+		result.append(familyName);
+		result.append(", givenName: ");
+		result.append(givenName);
+		result.append(", middleName: ");
+		result.append(middleName);
+		result.append(", additionalNames: ");
+		result.append(additionalNames);
+		result.append(", suffix: ");
+		result.append(suffix);
+		result.append(", nickName: ");
+		result.append(nickName);
+		result.append(", phoneNumber: ");
+		result.append(phoneNumber);
+		result.append(')');
+		return result.toString();
+	}
 
 } //PersonImpl

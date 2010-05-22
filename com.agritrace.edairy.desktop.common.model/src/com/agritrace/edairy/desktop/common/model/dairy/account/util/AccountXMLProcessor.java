@@ -25,30 +25,30 @@ import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 public class AccountXMLProcessor extends XMLProcessor {
 
 	/**
-         * Public constructor to instantiate the helper.
-         * <!-- begin-user-doc -->
+	 * Public constructor to instantiate the helper.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public AccountXMLProcessor() {
-                super((EPackage.Registry.INSTANCE));
-                AccountPackage.eINSTANCE.eClass();
-        }
+		super((EPackage.Registry.INSTANCE));
+		AccountPackage.eINSTANCE.eClass();
+	}
 	
 	/**
-         * Register for "*" and "xml" file extensions the AccountResourceFactoryImpl factory.
-         * <!-- begin-user-doc -->
+	 * Register for "*" and "xml" file extensions the AccountResourceFactoryImpl factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	protected Map<String, Resource.Factory> getRegistrations() {
-                if (registrations == null) {
-                        super.getRegistrations();
-                        registrations.put(XML_EXTENSION, new AccountResourceFactoryImpl());
-                        registrations.put(STAR_EXTENSION, new AccountResourceFactoryImpl());
-                }
-                return registrations;
-        }
+		if (registrations == null) {
+			super.getRegistrations();
+			registrations.put(XML_EXTENSION, new AccountResourceFactoryImpl());
+			registrations.put(STAR_EXTENSION, new AccountResourceFactoryImpl());
+		}
+		return registrations;
+	}
 
 } //AccountXMLProcessor
