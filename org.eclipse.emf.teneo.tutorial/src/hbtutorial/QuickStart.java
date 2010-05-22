@@ -16,6 +16,7 @@
 
 package hbtutorial;
 
+import java.text.ParseException;
 import java.util.Properties;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -27,12 +28,15 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 /**
  * Quick Start Tutorial
@@ -48,9 +52,18 @@ public class QuickStart {
 		String dbName = "edairy";
 		doQuickStart(dbName); // ignore return
 	}
+	
+	private static HbDataStore DATASTORE = null;
+	
+	public static HbDataStore getDataStore() { 
+	    if ( DATASTORE == null ) {
+		DATASTORE = doQuickStart("edairy");
+	    }
+	    return DATASTORE;
+	}
 
 	/** Methodn which can be called by others */
-	public static HbDataStore doQuickStart(String dbName) {
+	private static HbDataStore doQuickStart(String dbName) {
 		// the name of the session factory
 		String hbName = "eDairy";
 
@@ -91,21 +104,34 @@ public class QuickStart {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.getTransaction();
 
-		TestAccountTransactionGenerator gen = TestAccountTransactionGenerator.INSTANCE;
+//		TestAccountTransactionGenerator gen = TestAccountTransactionGenerator.INSTANCE;
 		
 		// Start a transaction
 		tx.begin();
 		
-		// create an account and make it persistent
-		Account acct = gen.randomAccount();
+//		// create an account and make it persistent
+//		Account acct = gen.randomAccount();
+//
+//		// create a transaction, adding it to the account
+//		AccountTransaction transaction = gen.createTestAccountTransaction(acct, 1);
+//		acct.getTransactions().add(transaction);
+//
+//		session.save(acct);
+//		session.save(transaction);
 
-		// create a transaction, adding it to the account
-		AccountTransaction transaction = gen.createTestAccountTransaction(acct, 1);
-		acct.getTransactions().add(transaction);
-
-		session.save(acct);
-		session.save(transaction);
-
+		DairyPackage.eINSTANCE.getAsset();
+		TrackingPackage.eINSTANCE.getAcquisitionType();
+		DairyDemoResourceManager.INSTANCE.createFarmResource();
+		try {
+		    DairyDemoResourceManager.INSTANCE.createDairyResource();
+		} catch (ParseException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		
+		Dairy d = DairyDemoResourceManager.INSTANCE.getLocalDairy();
+		session.save(d);
+		
 		// at commit the objects will be present in the database
 		tx.commit();
 		// and close of, this should actually be done in a finally block

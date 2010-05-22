@@ -46,779 +46,779 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class VehicleImpl extends AssetImpl implements Vehicle {
 	/**
-	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRegistrationNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getRegistrationNumber()
+         * @generated
+         * @ordered
+         */
 	protected static final String REGISTRATION_NUMBER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRegistrationNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getRegistrationNumber()
+         * @generated
+         * @ordered
+         */
 	protected String registrationNumber = REGISTRATION_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getType()
+         * @generated
+         * @ordered
+         */
 	protected static final String TYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getType()
+         * @generated
+         * @ordered
+         */
 	protected String type = TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getMake() <em>Make</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getMake() <em>Make</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMake()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getMake()
+         * @generated
+         * @ordered
+         */
 	protected static final String MAKE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getMake() <em>Make</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getMake() <em>Make</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMake()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getMake()
+         * @generated
+         * @ordered
+         */
 	protected String make = MAKE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getModel() <em>Model</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getModel() <em>Model</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModel()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getModel()
+         * @generated
+         * @ordered
+         */
 	protected static final String MODEL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getModel() <em>Model</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getModel() <em>Model</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModel()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getModel()
+         * @generated
+         * @ordered
+         */
 	protected String model = MODEL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEngineNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getEngineNumber()
+         * @generated
+         * @ordered
+         */
 	protected static final String ENGINE_NUMBER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEngineNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getEngineNumber()
+         * @generated
+         * @ordered
+         */
 	protected String engineNumber = ENGINE_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChassisNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getChassisNumber()
+         * @generated
+         * @ordered
+         */
 	protected static final String CHASSIS_NUMBER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChassisNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getChassisNumber()
+         * @generated
+         * @ordered
+         */
 	protected String chassisNumber = CHASSIS_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLogBookNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLogBookNumber()
+         * @generated
+         * @ordered
+         */
 	protected static final String LOG_BOOK_NUMBER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLogBookNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLogBookNumber()
+         * @generated
+         * @ordered
+         */
 	protected String logBookNumber = LOG_BOOK_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsurancePolicyNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getInsurancePolicyNumber()
+         * @generated
+         * @ordered
+         */
 	protected static final String INSURANCE_POLICY_NUMBER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsurancePolicyNumber()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getInsurancePolicyNumber()
+         * @generated
+         * @ordered
+         */
 	protected String insurancePolicyNumber = INSURANCE_POLICY_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsuranceExpirationDate()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getInsuranceExpirationDate()
+         * @generated
+         * @ordered
+         */
 	protected static final Date INSURANCE_EXPIRATION_DATE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getInsuranceExpirationDate() <em>Insurance Expiration Date</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsuranceExpirationDate()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getInsuranceExpirationDate()
+         * @generated
+         * @ordered
+         */
 	protected Date insuranceExpirationDate = INSURANCE_EXPIRATION_DATE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDominantColour()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getDominantColour()
+         * @generated
+         * @ordered
+         */
 	protected static final String DOMINANT_COLOUR_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDominantColour()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getDominantColour()
+         * @generated
+         * @ordered
+         */
 	protected String dominantColour = DOMINANT_COLOUR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCapacityInTonnes()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getCapacityInTonnes()
+         * @generated
+         * @ordered
+         */
 	protected static final String CAPACITY_IN_TONNES_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCapacityInTonnes()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getCapacityInTonnes()
+         * @generated
+         * @ordered
+         */
 	protected String capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getYear()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getYear()
+         * @generated
+         * @ordered
+         */
 	protected static final String YEAR_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getYear()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getYear()
+         * @generated
+         * @ordered
+         */
 	protected String year = YEAR_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDriver()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getDriver()
+         * @generated
+         * @ordered
+         */
 	protected Employee driver;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected VehicleImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.VEHICLE;
-	}
+                return DairyPackage.Literals.VEHICLE;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getRegistrationNumber() {
-		return registrationNumber;
-	}
+                return registrationNumber;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setRegistrationNumber(String newRegistrationNumber) {
-		String oldRegistrationNumber = registrationNumber;
-		registrationNumber = newRegistrationNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
-	}
+                String oldRegistrationNumber = registrationNumber;
+                registrationNumber = newRegistrationNumber;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getType() {
-		return type;
-	}
+                return type;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setType(String newType) {
-		String oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__TYPE, oldType, type));
-	}
+                String oldType = type;
+                type = newType;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__TYPE, oldType, type));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getMake() {
-		return make;
-	}
+                return make;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setMake(String newMake) {
-		String oldMake = make;
-		make = newMake;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MAKE, oldMake, make));
-	}
+                String oldMake = make;
+                make = newMake;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MAKE, oldMake, make));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getModel() {
-		return model;
-	}
+                return model;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setModel(String newModel) {
-		String oldModel = model;
-		model = newModel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MODEL, oldModel, model));
-	}
+                String oldModel = model;
+                model = newModel;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MODEL, oldModel, model));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getEngineNumber() {
-		return engineNumber;
-	}
+                return engineNumber;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setEngineNumber(String newEngineNumber) {
-		String oldEngineNumber = engineNumber;
-		engineNumber = newEngineNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ENGINE_NUMBER, oldEngineNumber, engineNumber));
-	}
+                String oldEngineNumber = engineNumber;
+                engineNumber = newEngineNumber;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ENGINE_NUMBER, oldEngineNumber, engineNumber));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getChassisNumber() {
-		return chassisNumber;
-	}
+                return chassisNumber;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setChassisNumber(String newChassisNumber) {
-		String oldChassisNumber = chassisNumber;
-		chassisNumber = newChassisNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CHASSIS_NUMBER, oldChassisNumber, chassisNumber));
-	}
+                String oldChassisNumber = chassisNumber;
+                chassisNumber = newChassisNumber;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CHASSIS_NUMBER, oldChassisNumber, chassisNumber));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getLogBookNumber() {
-		return logBookNumber;
-	}
+                return logBookNumber;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setLogBookNumber(String newLogBookNumber) {
-		String oldLogBookNumber = logBookNumber;
-		logBookNumber = newLogBookNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__LOG_BOOK_NUMBER, oldLogBookNumber, logBookNumber));
-	}
+                String oldLogBookNumber = logBookNumber;
+                logBookNumber = newLogBookNumber;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__LOG_BOOK_NUMBER, oldLogBookNumber, logBookNumber));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getInsurancePolicyNumber() {
-		return insurancePolicyNumber;
-	}
+                return insurancePolicyNumber;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setInsurancePolicyNumber(String newInsurancePolicyNumber) {
-		String oldInsurancePolicyNumber = insurancePolicyNumber;
-		insurancePolicyNumber = newInsurancePolicyNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER, oldInsurancePolicyNumber, insurancePolicyNumber));
-	}
+                String oldInsurancePolicyNumber = insurancePolicyNumber;
+                insurancePolicyNumber = newInsurancePolicyNumber;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER, oldInsurancePolicyNumber, insurancePolicyNumber));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Date getInsuranceExpirationDate() {
-		return insuranceExpirationDate;
-	}
+                return insuranceExpirationDate;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setInsuranceExpirationDate(Date newInsuranceExpirationDate) {
-		Date oldInsuranceExpirationDate = insuranceExpirationDate;
-		insuranceExpirationDate = newInsuranceExpirationDate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE, oldInsuranceExpirationDate, insuranceExpirationDate));
-	}
+                Date oldInsuranceExpirationDate = insuranceExpirationDate;
+                insuranceExpirationDate = newInsuranceExpirationDate;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE, oldInsuranceExpirationDate, insuranceExpirationDate));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getDominantColour() {
-		return dominantColour;
-	}
+                return dominantColour;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setDominantColour(String newDominantColour) {
-		String oldDominantColour = dominantColour;
-		dominantColour = newDominantColour;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DOMINANT_COLOUR, oldDominantColour, dominantColour));
-	}
+                String oldDominantColour = dominantColour;
+                dominantColour = newDominantColour;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DOMINANT_COLOUR, oldDominantColour, dominantColour));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getCapacityInTonnes() {
-		return capacityInTonnes;
-	}
+                return capacityInTonnes;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setCapacityInTonnes(String newCapacityInTonnes) {
-		String oldCapacityInTonnes = capacityInTonnes;
-		capacityInTonnes = newCapacityInTonnes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CAPACITY_IN_TONNES, oldCapacityInTonnes, capacityInTonnes));
-	}
+                String oldCapacityInTonnes = capacityInTonnes;
+                capacityInTonnes = newCapacityInTonnes;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CAPACITY_IN_TONNES, oldCapacityInTonnes, capacityInTonnes));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getYear() {
-		return year;
-	}
+                return year;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setYear(String newYear) {
-		String oldYear = year;
-		year = newYear;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
-	}
+                String oldYear = year;
+                year = newYear;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Employee getDriver() {
-		if (driver != null && driver.eIsProxy()) {
-			InternalEObject oldDriver = (InternalEObject)driver;
-			driver = (Employee)eResolveProxy(oldDriver);
-			if (driver != oldDriver) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
-			}
-		}
-		return driver;
-	}
+                if (driver != null && driver.eIsProxy()) {
+                        InternalEObject oldDriver = (InternalEObject)driver;
+                        driver = (Employee)eResolveProxy(oldDriver);
+                        if (driver != oldDriver) {
+                                if (eNotificationRequired())
+                                        eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
+                        }
+                }
+                return driver;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public Employee basicGetDriver() {
-		return driver;
-	}
+                return driver;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setDriver(Employee newDriver) {
-		Employee oldDriver = driver;
-		driver = newDriver;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
-	}
+                Employee oldDriver = driver;
+                driver = newDriver;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
-				return getRegistrationNumber();
-			case DairyPackage.VEHICLE__TYPE:
-				return getType();
-			case DairyPackage.VEHICLE__MAKE:
-				return getMake();
-			case DairyPackage.VEHICLE__MODEL:
-				return getModel();
-			case DairyPackage.VEHICLE__ENGINE_NUMBER:
-				return getEngineNumber();
-			case DairyPackage.VEHICLE__CHASSIS_NUMBER:
-				return getChassisNumber();
-			case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
-				return getLogBookNumber();
-			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
-				return getInsurancePolicyNumber();
-			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
-				return getInsuranceExpirationDate();
-			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
-				return getDominantColour();
-			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				return getCapacityInTonnes();
-			case DairyPackage.VEHICLE__YEAR:
-				return getYear();
-			case DairyPackage.VEHICLE__DRIVER:
-				if (resolve) return getDriver();
-				return basicGetDriver();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
+                                return getRegistrationNumber();
+                        case DairyPackage.VEHICLE__TYPE:
+                                return getType();
+                        case DairyPackage.VEHICLE__MAKE:
+                                return getMake();
+                        case DairyPackage.VEHICLE__MODEL:
+                                return getModel();
+                        case DairyPackage.VEHICLE__ENGINE_NUMBER:
+                                return getEngineNumber();
+                        case DairyPackage.VEHICLE__CHASSIS_NUMBER:
+                                return getChassisNumber();
+                        case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
+                                return getLogBookNumber();
+                        case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
+                                return getInsurancePolicyNumber();
+                        case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+                                return getInsuranceExpirationDate();
+                        case DairyPackage.VEHICLE__DOMINANT_COLOUR:
+                                return getDominantColour();
+                        case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
+                                return getCapacityInTonnes();
+                        case DairyPackage.VEHICLE__YEAR:
+                                return getYear();
+                        case DairyPackage.VEHICLE__DRIVER:
+                                if (resolve) return getDriver();
+                                return basicGetDriver();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
-				setRegistrationNumber((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__TYPE:
-				setType((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__MAKE:
-				setMake((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__MODEL:
-				setModel((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__ENGINE_NUMBER:
-				setEngineNumber((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__CHASSIS_NUMBER:
-				setChassisNumber((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
-				setLogBookNumber((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
-				setInsurancePolicyNumber((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
-				setInsuranceExpirationDate((Date)newValue);
-				return;
-			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
-				setDominantColour((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				setCapacityInTonnes((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__YEAR:
-				setYear((String)newValue);
-				return;
-			case DairyPackage.VEHICLE__DRIVER:
-				setDriver((Employee)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
+                                setRegistrationNumber((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__TYPE:
+                                setType((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__MAKE:
+                                setMake((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__MODEL:
+                                setModel((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__ENGINE_NUMBER:
+                                setEngineNumber((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__CHASSIS_NUMBER:
+                                setChassisNumber((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
+                                setLogBookNumber((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
+                                setInsurancePolicyNumber((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+                                setInsuranceExpirationDate((Date)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__DOMINANT_COLOUR:
+                                setDominantColour((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
+                                setCapacityInTonnes((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__YEAR:
+                                setYear((String)newValue);
+                                return;
+                        case DairyPackage.VEHICLE__DRIVER:
+                                setDriver((Employee)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
-				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__MAKE:
-				setMake(MAKE_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__MODEL:
-				setModel(MODEL_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__ENGINE_NUMBER:
-				setEngineNumber(ENGINE_NUMBER_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__CHASSIS_NUMBER:
-				setChassisNumber(CHASSIS_NUMBER_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
-				setLogBookNumber(LOG_BOOK_NUMBER_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
-				setInsurancePolicyNumber(INSURANCE_POLICY_NUMBER_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
-				setInsuranceExpirationDate(INSURANCE_EXPIRATION_DATE_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
-				setDominantColour(DOMINANT_COLOUR_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				setCapacityInTonnes(CAPACITY_IN_TONNES_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__YEAR:
-				setYear(YEAR_EDEFAULT);
-				return;
-			case DairyPackage.VEHICLE__DRIVER:
-				setDriver((Employee)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
+                                setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__TYPE:
+                                setType(TYPE_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__MAKE:
+                                setMake(MAKE_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__MODEL:
+                                setModel(MODEL_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__ENGINE_NUMBER:
+                                setEngineNumber(ENGINE_NUMBER_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__CHASSIS_NUMBER:
+                                setChassisNumber(CHASSIS_NUMBER_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
+                                setLogBookNumber(LOG_BOOK_NUMBER_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
+                                setInsurancePolicyNumber(INSURANCE_POLICY_NUMBER_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+                                setInsuranceExpirationDate(INSURANCE_EXPIRATION_DATE_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__DOMINANT_COLOUR:
+                                setDominantColour(DOMINANT_COLOUR_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
+                                setCapacityInTonnes(CAPACITY_IN_TONNES_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__YEAR:
+                                setYear(YEAR_EDEFAULT);
+                                return;
+                        case DairyPackage.VEHICLE__DRIVER:
+                                setDriver((Employee)null);
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
-				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
-			case DairyPackage.VEHICLE__TYPE:
-				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case DairyPackage.VEHICLE__MAKE:
-				return MAKE_EDEFAULT == null ? make != null : !MAKE_EDEFAULT.equals(make);
-			case DairyPackage.VEHICLE__MODEL:
-				return MODEL_EDEFAULT == null ? model != null : !MODEL_EDEFAULT.equals(model);
-			case DairyPackage.VEHICLE__ENGINE_NUMBER:
-				return ENGINE_NUMBER_EDEFAULT == null ? engineNumber != null : !ENGINE_NUMBER_EDEFAULT.equals(engineNumber);
-			case DairyPackage.VEHICLE__CHASSIS_NUMBER:
-				return CHASSIS_NUMBER_EDEFAULT == null ? chassisNumber != null : !CHASSIS_NUMBER_EDEFAULT.equals(chassisNumber);
-			case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
-				return LOG_BOOK_NUMBER_EDEFAULT == null ? logBookNumber != null : !LOG_BOOK_NUMBER_EDEFAULT.equals(logBookNumber);
-			case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
-				return INSURANCE_POLICY_NUMBER_EDEFAULT == null ? insurancePolicyNumber != null : !INSURANCE_POLICY_NUMBER_EDEFAULT.equals(insurancePolicyNumber);
-			case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
-				return INSURANCE_EXPIRATION_DATE_EDEFAULT == null ? insuranceExpirationDate != null : !INSURANCE_EXPIRATION_DATE_EDEFAULT.equals(insuranceExpirationDate);
-			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
-				return DOMINANT_COLOUR_EDEFAULT == null ? dominantColour != null : !DOMINANT_COLOUR_EDEFAULT.equals(dominantColour);
-			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				return CAPACITY_IN_TONNES_EDEFAULT == null ? capacityInTonnes != null : !CAPACITY_IN_TONNES_EDEFAULT.equals(capacityInTonnes);
-			case DairyPackage.VEHICLE__YEAR:
-				return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
-			case DairyPackage.VEHICLE__DRIVER:
-				return driver != null;
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
+                                return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
+                        case DairyPackage.VEHICLE__TYPE:
+                                return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+                        case DairyPackage.VEHICLE__MAKE:
+                                return MAKE_EDEFAULT == null ? make != null : !MAKE_EDEFAULT.equals(make);
+                        case DairyPackage.VEHICLE__MODEL:
+                                return MODEL_EDEFAULT == null ? model != null : !MODEL_EDEFAULT.equals(model);
+                        case DairyPackage.VEHICLE__ENGINE_NUMBER:
+                                return ENGINE_NUMBER_EDEFAULT == null ? engineNumber != null : !ENGINE_NUMBER_EDEFAULT.equals(engineNumber);
+                        case DairyPackage.VEHICLE__CHASSIS_NUMBER:
+                                return CHASSIS_NUMBER_EDEFAULT == null ? chassisNumber != null : !CHASSIS_NUMBER_EDEFAULT.equals(chassisNumber);
+                        case DairyPackage.VEHICLE__LOG_BOOK_NUMBER:
+                                return LOG_BOOK_NUMBER_EDEFAULT == null ? logBookNumber != null : !LOG_BOOK_NUMBER_EDEFAULT.equals(logBookNumber);
+                        case DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER:
+                                return INSURANCE_POLICY_NUMBER_EDEFAULT == null ? insurancePolicyNumber != null : !INSURANCE_POLICY_NUMBER_EDEFAULT.equals(insurancePolicyNumber);
+                        case DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE:
+                                return INSURANCE_EXPIRATION_DATE_EDEFAULT == null ? insuranceExpirationDate != null : !INSURANCE_EXPIRATION_DATE_EDEFAULT.equals(insuranceExpirationDate);
+                        case DairyPackage.VEHICLE__DOMINANT_COLOUR:
+                                return DOMINANT_COLOUR_EDEFAULT == null ? dominantColour != null : !DOMINANT_COLOUR_EDEFAULT.equals(dominantColour);
+                        case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
+                                return CAPACITY_IN_TONNES_EDEFAULT == null ? capacityInTonnes != null : !CAPACITY_IN_TONNES_EDEFAULT.equals(capacityInTonnes);
+                        case DairyPackage.VEHICLE__YEAR:
+                                return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
+                        case DairyPackage.VEHICLE__DRIVER:
+                                return driver != null;
+                }
+                return super.eIsSet(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+                if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (registrationNumber: ");
-		result.append(registrationNumber);
-		result.append(", type: ");
-		result.append(type);
-		result.append(", make: ");
-		result.append(make);
-		result.append(", model: ");
-		result.append(model);
-		result.append(", engineNumber: ");
-		result.append(engineNumber);
-		result.append(", chassisNumber: ");
-		result.append(chassisNumber);
-		result.append(", logBookNumber: ");
-		result.append(logBookNumber);
-		result.append(", insurancePolicyNumber: ");
-		result.append(insurancePolicyNumber);
-		result.append(", insuranceExpirationDate: ");
-		result.append(insuranceExpirationDate);
-		result.append(", dominantColour: ");
-		result.append(dominantColour);
-		result.append(", capacityInTonnes: ");
-		result.append(capacityInTonnes);
-		result.append(", year: ");
-		result.append(year);
-		result.append(')');
-		return result.toString();
-	}
+                StringBuffer result = new StringBuffer(super.toString());
+                result.append(" (registrationNumber: ");
+                result.append(registrationNumber);
+                result.append(", type: ");
+                result.append(type);
+                result.append(", make: ");
+                result.append(make);
+                result.append(", model: ");
+                result.append(model);
+                result.append(", engineNumber: ");
+                result.append(engineNumber);
+                result.append(", chassisNumber: ");
+                result.append(chassisNumber);
+                result.append(", logBookNumber: ");
+                result.append(logBookNumber);
+                result.append(", insurancePolicyNumber: ");
+                result.append(insurancePolicyNumber);
+                result.append(", insuranceExpirationDate: ");
+                result.append(insuranceExpirationDate);
+                result.append(", dominantColour: ");
+                result.append(dominantColour);
+                result.append(", capacityInTonnes: ");
+                result.append(capacityInTonnes);
+                result.append(", year: ");
+                result.append(year);
+                result.append(')');
+                return result.toString();
+        }
 
 } //VehicleImpl

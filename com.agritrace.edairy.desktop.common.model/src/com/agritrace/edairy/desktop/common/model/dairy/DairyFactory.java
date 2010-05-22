@@ -18,137 +18,137 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface DairyFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+         * The singleton instance of the factory.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	DairyFactory eINSTANCE = com.agritrace.edairy.desktop.common.model.dairy.impl.DairyFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Vehicle</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Vehicle</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vehicle</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Vehicle</em>'.
+         * @generated
+         */
 	Vehicle createVehicle();
 
 	/**
-	 * Returns a new object of class '<em>Collection Journal Line</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Collection Journal Line</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection Journal Line</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Collection Journal Line</em>'.
+         * @generated
+         */
 	CollectionJournalLine createCollectionJournalLine();
 
 	/**
-	 * Returns a new object of class '<em>Employee</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Employee</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Employee</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Employee</em>'.
+         * @generated
+         */
 	Employee createEmployee();
 
 	/**
-	 * Returns a new object of class '<em>Location</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Location</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Location</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Location</em>'.
+         * @generated
+         */
 	DairyLocation createDairyLocation();
 
 	/**
-	 * Returns a new object of class '<em>Collection Journal</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Collection Journal</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection Journal</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Collection Journal</em>'.
+         * @generated
+         */
 	CollectionJournal createCollectionJournal();
 
 	/**
-	 * Returns a new object of class '<em>Route</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Route</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Route</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Route</em>'.
+         * @generated
+         */
 	Route createRoute();
 
 	/**
-	 * Returns a new object of class '<em>Trip</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Trip</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Trip</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Trip</em>'.
+         * @generated
+         */
 	Trip createTrip();
 
 	/**
-	 * Returns a new object of class '<em>Delivery Journal</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Delivery Journal</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Delivery Journal</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Delivery Journal</em>'.
+         * @generated
+         */
 	DeliveryJournal createDeliveryJournal();
 
 	/**
-	 * Returns a new object of class '<em>Dairy</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Dairy</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dairy</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Dairy</em>'.
+         * @generated
+         */
 	Dairy createDairy();
 
 	/**
-	 * Returns a new object of class '<em>Membership</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Membership</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Membership</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Membership</em>'.
+         * @generated
+         */
 	Membership createMembership();
 
 	/**
-	 * Returns a new object of class '<em>Asset</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Asset</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Asset</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Asset</em>'.
+         * @generated
+         */
 	Asset createAsset();
 
 	/**
-	 * Returns a new object of class '<em>Container</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Container</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Container</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Container</em>'.
+         * @generated
+         */
 	DairyContainer createDairyContainer();
 
 	/**
-	 * Returns a new object of class '<em>Supplier</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns a new object of class '<em>Supplier</em>'.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Supplier</em>'.
-	 * @generated
-	 */
+         * @return a new object of class '<em>Supplier</em>'.
+         * @generated
+         */
 	Supplier createSupplier();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+         * Returns the package supported by this factory.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+         * @return the package supported by this factory.
+         * @generated
+         */
 	DairyPackage getDairyPackage();
 
 } //DairyFactory

@@ -49,10 +49,11 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.common.ui.validators.StringNumberValidator;
 
 public class MilkCollectionJournalController extends SubModuleController {
-
+    
     // journal book group ridgets
     private ITextRidget dateRidget;
     private IComboRidget routeRidget;
@@ -96,6 +97,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
     @Override
     public void configureRidgets() {
+	
 	records.clear();
 	// add a node listener to load dairy whenever it is active.
 	addSimpleListener();

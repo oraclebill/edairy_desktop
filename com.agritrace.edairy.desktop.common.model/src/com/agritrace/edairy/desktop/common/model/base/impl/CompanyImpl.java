@@ -48,56 +48,57 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class CompanyImpl extends EObjectImpl implements Company {
 	/**
-	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContacts()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getContacts()
+         * @generated
+         * @ordered
+         */
 	protected EList<Person> contacts;
 
 	/**
-	 * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLegalName()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLegalName()
+         * @generated
+         * @ordered
+         */
 	protected static final String LEGAL_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLegalName()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLegalName()
+         * @generated
+         * @ordered
+         */
 	protected String legalName = LEGAL_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCompanyName()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getCompanyName()
+         * @generated
+         * @ordered
+         */
 	protected static final String COMPANY_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getCompanyName() <em>Company Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCompanyName()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getCompanyName()
+         * @generated
+         * @ordered
+         */
 	protected String companyName = COMPANY_NAME_EDEFAULT;
 
 	/**
+<<<<<<< HEAD
 	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,80 +140,84 @@ public class CompanyImpl extends EObjectImpl implements Company {
 
 	/**
 	 * <!-- begin-user-doc -->
+=======
+         * <!-- begin-user-doc -->
+>>>>>>> sync before party removal
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected CompanyImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.COMPANY;
-	}
+                return ModelPackage.Literals.COMPANY;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public EList<Person> getContacts() {
-		if (contacts == null) {
-			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
-		}
-		return contacts;
-	}
+                if (contacts == null) {
+                        contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
+                }
+                return contacts;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getLegalName() {
-		return legalName;
-	}
+                return legalName;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setLegalName(String newLegalName) {
-		String oldLegalName = legalName;
-		legalName = newLegalName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LEGAL_NAME, oldLegalName, legalName));
-	}
+                String oldLegalName = legalName;
+                legalName = newLegalName;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LEGAL_NAME, oldLegalName, legalName));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public String getCompanyName() {
-		return companyName;
-	}
+                return companyName;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public void setCompanyName(String newCompanyName) {
-		String oldCompanyName = companyName;
-		companyName = newCompanyName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_NAME, oldCompanyName, companyName));
-	}
+                String oldCompanyName = companyName;
+                companyName = newCompanyName;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_NAME, oldCompanyName, companyName));
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+<<<<<<< HEAD
 	 * @generated
 	 */
 	public String getPhoneNumber() {
@@ -303,14 +308,27 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
+=======
+         * @generated
+         */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+                switch (featureID) {
+                        case ModelPackage.COMPANY__CONTACTS:
+                                return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
+                }
+                return super.eInverseRemove(otherEnd, featureID, msgs);
+        }
+>>>>>>> sync before party removal
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+<<<<<<< HEAD
 		switch (featureID) {
 			case ModelPackage.COMPANY__CONTACTS:
 				return getContacts();
@@ -327,15 +345,28 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
+=======
+                switch (featureID) {
+                        case ModelPackage.COMPANY__CONTACTS:
+                                return getContacts();
+                        case ModelPackage.COMPANY__LEGAL_NAME:
+                                return getLegalName();
+                        case ModelPackage.COMPANY__COMPANY_NAME:
+                                return getCompanyName();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
+>>>>>>> sync before party removal
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+<<<<<<< HEAD
 		switch (featureID) {
 			case ModelPackage.COMPANY__CONTACTS:
 				getContacts().clear();
@@ -360,14 +391,31 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		}
 		super.eSet(featureID, newValue);
 	}
+=======
+                switch (featureID) {
+                        case ModelPackage.COMPANY__CONTACTS:
+                                getContacts().clear();
+                                getContacts().addAll((Collection<? extends Person>)newValue);
+                                return;
+                        case ModelPackage.COMPANY__LEGAL_NAME:
+                                setLegalName((String)newValue);
+                                return;
+                        case ModelPackage.COMPANY__COMPANY_NAME:
+                                setCompanyName((String)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
+>>>>>>> sync before party removal
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
+<<<<<<< HEAD
 		switch (featureID) {
 			case ModelPackage.COMPANY__CONTACTS:
 				getContacts().clear();
@@ -390,14 +438,30 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		}
 		super.eUnset(featureID);
 	}
+=======
+                switch (featureID) {
+                        case ModelPackage.COMPANY__CONTACTS:
+                                getContacts().clear();
+                                return;
+                        case ModelPackage.COMPANY__LEGAL_NAME:
+                                setLegalName(LEGAL_NAME_EDEFAULT);
+                                return;
+                        case ModelPackage.COMPANY__COMPANY_NAME:
+                                setCompanyName(COMPANY_NAME_EDEFAULT);
+                                return;
+                }
+                super.eUnset(featureID);
+        }
+>>>>>>> sync before party removal
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
+<<<<<<< HEAD
 		switch (featureID) {
 			case ModelPackage.COMPANY__CONTACTS:
 				return contacts != null && !contacts.isEmpty();
@@ -414,16 +478,29 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		}
 		return super.eIsSet(featureID);
 	}
+=======
+                switch (featureID) {
+                        case ModelPackage.COMPANY__CONTACTS:
+                                return contacts != null && !contacts.isEmpty();
+                        case ModelPackage.COMPANY__LEGAL_NAME:
+                                return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
+                        case ModelPackage.COMPANY__COMPANY_NAME:
+                                return COMPANY_NAME_EDEFAULT == null ? companyName != null : !COMPANY_NAME_EDEFAULT.equals(companyName);
+                }
+                return super.eIsSet(featureID);
+        }
+>>>>>>> sync before party removal
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+                if (eIsProxy()) return super.toString();
 
+<<<<<<< HEAD
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (legalName: ");
 		result.append(legalName);
@@ -434,5 +511,15 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		result.append(')');
 		return result.toString();
 	}
+=======
+                StringBuffer result = new StringBuffer(super.toString());
+                result.append(" (legalName: ");
+                result.append(legalName);
+                result.append(", companyName: ");
+                result.append(companyName);
+                result.append(')');
+                return result.toString();
+        }
+>>>>>>> sync before party removal
 
 } //CompanyImpl

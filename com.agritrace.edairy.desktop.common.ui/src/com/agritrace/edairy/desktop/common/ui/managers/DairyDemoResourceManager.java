@@ -56,7 +56,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
     public static DairyDemoResourceManager INSTANCE = new DairyDemoResourceManager();
     private Resource farmResource;
-
     private Resource dairyResource;
 
     private DairyDemoResourceManager() {
@@ -1010,4 +1009,13 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	ship.getFarms().add(farm);
 
     }
+    
+    public static void main(String[] args) {
+
+	DairyFactory.eINSTANCE.createAsset();
+	DairyDemoResourceManager.INSTANCE.createFarmResource();
+	DairyDemoResourceManager.INSTANCE.reLoadDairyResource();
+
+    }
+
 }

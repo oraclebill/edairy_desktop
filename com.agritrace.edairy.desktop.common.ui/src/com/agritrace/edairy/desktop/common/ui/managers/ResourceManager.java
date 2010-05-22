@@ -55,6 +55,7 @@ public class ResourceManager {
 	if (uri == null) {
 	    return null;
 	}
+	System.err.println(uri);
 	return resourceSet.getResource(uri, true);
     }
 
