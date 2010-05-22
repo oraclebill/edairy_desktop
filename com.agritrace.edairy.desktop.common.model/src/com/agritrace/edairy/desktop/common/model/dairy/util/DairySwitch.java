@@ -175,7 +175,7 @@ public class DairySwitch<T> {
 			case DairyPackage.SUPPLIER: {
 				Supplier supplier = (Supplier)theEObject;
 				T result = caseSupplier(supplier);
-				if (result == null) result = casePerson(supplier);
+				if (result == null) result = caseCompany(supplier);
 				if (result == null) result = caseParty(supplier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

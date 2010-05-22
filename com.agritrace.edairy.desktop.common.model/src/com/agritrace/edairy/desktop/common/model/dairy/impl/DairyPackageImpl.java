@@ -1539,7 +1539,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		dairyEClass.getESuperTypes().add(theModelPackage.getCompany());
 		dairyContainerEClass.getESuperTypes().add(theTrackingPackage.getContainer());
 		dairyContainerEClass.getESuperTypes().add(this.getAsset());
-		supplierEClass.getESuperTypes().add(theModelPackage.getPerson());
+		supplierEClass.getESuperTypes().add(theModelPackage.getCompany());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(vehicleEClass, Vehicle.class, "Vehicle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
 import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -45,7 +46,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public class SupplierImpl extends PersonImpl implements Supplier {
+public class SupplierImpl extends CompanyImpl implements Supplier {
 	/**
 	 * The default value of the '{@link #getSupplierId() <em>Supplier Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

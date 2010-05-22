@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.dairy.provider;
 
 
+import com.agritrace.edairy.desktop.common.model.base.provider.CompanyItemProvider;
 import com.agritrace.edairy.desktop.common.model.base.provider.PersonItemProvider;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -37,7 +38,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class SupplierItemProvider
-	extends PersonItemProvider
+	extends CompanyItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

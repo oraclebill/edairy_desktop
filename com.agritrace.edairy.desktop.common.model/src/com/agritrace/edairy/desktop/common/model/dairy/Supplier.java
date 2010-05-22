@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
+import com.agritrace.edairy.desktop.common.model.base.Company;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
 import java.util.Date;
@@ -35,7 +36,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Supplier extends Person {
+public interface Supplier extends Company {
 	/**
 	 * Returns the value of the '<em><b>Supplier Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

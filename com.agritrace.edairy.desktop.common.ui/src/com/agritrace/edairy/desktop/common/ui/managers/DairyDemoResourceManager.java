@@ -32,7 +32,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
@@ -506,6 +508,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	}
 	
 	addRequests(dairy);
+	addSuppliers(dairy);
 	dairyResource.getContents().add(dairy);
 	try {
 	    saveFarmResource();
@@ -531,8 +534,91 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	}
 	
     }
+    
+    private void addSuppliers(Dairy dairy) {
+    	try {
+    		createSupplier1(dairy);
+    		createSupplier2(dairy);
+    		createSupplier3(dairy);
+    	}
+    	catch (ParseException pe) {
+    		pe.printStackTrace();
+    	}
+    	
+    }
 
-    /*
+    private void createSupplier1(Dairy dairy) throws ParseException {
+    	Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
+		supplier.setSupplierId(10001l);
+		supplier.setCompanyName("John Inventory Ltd ");
+		supplier.setLegalName("JHVEN");
+		supplier.setStatus(VendorStatus.VALID);
+		final SimpleDateFormat sdf = new SimpleDateFormat();
+		sdf.applyPattern("MM/dd/yyyy");
+		supplier.setExpirationDate(sdf.parse("01/01/2011"));
+		// Categories
+		supplier.getCategories().add("Category 1");
+		supplier.getCategories().add("Category 2");
+		dairy.getSuppliers().add(supplier);
+		Person person = ModelFactory.eINSTANCE.createPerson();
+		person.setPhoneNumber("343432322");
+		person.setGivenName("Edward");
+		person.setFamilyName("Clinton");		
+		supplier.getContacts().add(person);
+		dairyResource.getContents().add(supplier);
+	}
+    
+    private void createSupplier2(Dairy dairy) throws ParseException {
+    	Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
+		supplier.setSupplierId(10002l);
+		supplier.setCompanyName("Tom  Amusement Ltd ");
+		supplier.setLegalName("TAL");
+		supplier.setStatus(VendorStatus.VALID);
+		final SimpleDateFormat sdf = new SimpleDateFormat();
+		sdf.applyPattern("MM/dd/yyyy");
+		supplier.setExpirationDate(sdf.parse("02/01/2011"));
+		dairy.getSuppliers().add(supplier);
+		supplier.getCategories().add("Category 4");
+		supplier.getCategories().add("Category 5");
+		Person person = ModelFactory.eINSTANCE.createPerson();
+		person.setPhoneNumber("434212");
+		person.setGivenName("Tracy");
+		person.setFamilyName("Bill");		
+		supplier.getContacts().add(person);
+		dairyResource.getContents().add(supplier);
+		
+	}
+    
+    private void createSupplier3(Dairy dairy) throws ParseException {
+
+    	Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
+		supplier.setSupplierId(10003l);
+		supplier.setCompanyName("Gold Store Ltd ");
+		supplier.setLegalName("GSLD");
+		supplier.setStatus(VendorStatus.INVALID);
+		final SimpleDateFormat sdf = new SimpleDateFormat();
+		sdf.applyPattern("MM/dd/yyyy");
+		supplier.setExpirationDate(sdf.parse("03/01/2011"));
+		dairy.getSuppliers().add(supplier);
+		supplier.getCategories().add("Category 6");
+		supplier.getCategories().add("Category 7");
+
+		Person person = ModelFactory.eINSTANCE.createPerson();
+		person.setPhoneNumber("13816442241");
+		person.setGivenName("Spark");
+		person.setFamilyName("Wan");		
+		supplier.getContacts().add(person);
+		
+		Person person2 = ModelFactory.eINSTANCE.createPerson();
+		person2.setPhoneNumber("13816442241");
+		person2.setGivenName("John");
+		person2.setFamilyName("Smith");		
+		supplier.getContacts().add(person2);
+		
+		dairyResource.getContents().add(supplier);
+	}
+
+	/*
      * (non-Javadoc)
      * 
      * @see com.agritrace.edairy.ui.IDairyResourceManager#loadFarmResources()

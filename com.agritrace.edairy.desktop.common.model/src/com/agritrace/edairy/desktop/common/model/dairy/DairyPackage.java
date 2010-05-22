@@ -1560,7 +1560,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PARTY_ID = ModelPackage.PERSON__PARTY_ID;
+	int SUPPLIER__PARTY_ID = ModelPackage.COMPANY__PARTY_ID;
 
 	/**
 	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
@@ -1569,7 +1569,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PHONE_NUMBER = ModelPackage.PERSON__PHONE_NUMBER;
+	int SUPPLIER__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -1578,7 +1578,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__LOCATION = ModelPackage.PERSON__LOCATION;
+	int SUPPLIER__LOCATION = ModelPackage.COMPANY__LOCATION;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -1587,7 +1587,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
+	int SUPPLIER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1596,79 +1596,34 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__NAME = ModelPackage.PERSON__NAME;
+	int SUPPLIER__NAME = ModelPackage.COMPANY__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Photo</b></em>' attribute.
+	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PHOTO = ModelPackage.PERSON__PHOTO;
+	int SUPPLIER__CONTACTS = ModelPackage.COMPANY__CONTACTS;
 
 	/**
-	 * The feature id for the '<em><b>Honorific</b></em>' attribute.
+	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__HONORIFIC = ModelPackage.PERSON__HONORIFIC;
+	int SUPPLIER__LEGAL_NAME = ModelPackage.COMPANY__LEGAL_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Family Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__FAMILY_NAME = ModelPackage.PERSON__FAMILY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__GIVEN_NAME = ModelPackage.PERSON__GIVEN_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Middle Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__MIDDLE_NAME = ModelPackage.PERSON__MIDDLE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Additional Names</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__ADDITIONAL_NAMES = ModelPackage.PERSON__ADDITIONAL_NAMES;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__SUFFIX = ModelPackage.PERSON__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Nick Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__NICK_NAME = ModelPackage.PERSON__NICK_NAME;
+	int SUPPLIER__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.
@@ -1677,7 +1632,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__SUPPLIER_ID = ModelPackage.PERSON_FEATURE_COUNT + 0;
+	int SUPPLIER__SUPPLIER_ID = ModelPackage.COMPANY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
@@ -1686,7 +1641,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__CATEGORIES = ModelPackage.PERSON_FEATURE_COUNT + 1;
+	int SUPPLIER__CATEGORIES = ModelPackage.COMPANY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Public Description</b></em>' attribute.
@@ -1695,7 +1650,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PUBLIC_DESCRIPTION = ModelPackage.PERSON_FEATURE_COUNT + 2;
+	int SUPPLIER__PUBLIC_DESCRIPTION = ModelPackage.COMPANY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1704,7 +1659,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__STATUS = ModelPackage.PERSON_FEATURE_COUNT + 3;
+	int SUPPLIER__STATUS = ModelPackage.COMPANY_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Registration Date</b></em>' attribute.
@@ -1713,7 +1668,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__REGISTRATION_DATE = ModelPackage.PERSON_FEATURE_COUNT + 4;
+	int SUPPLIER__REGISTRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Expiration Date</b></em>' attribute.
@@ -1722,7 +1677,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__EXPIRATION_DATE = ModelPackage.PERSON_FEATURE_COUNT + 5;
+	int SUPPLIER__EXPIRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Notes</b></em>' attribute.
@@ -1731,7 +1686,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__NOTES = ModelPackage.PERSON_FEATURE_COUNT + 6;
+	int SUPPLIER__NOTES = ModelPackage.COMPANY_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Rating</b></em>' attribute.
@@ -1740,7 +1695,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__RATING = ModelPackage.PERSON_FEATURE_COUNT + 7;
+	int SUPPLIER__RATING = ModelPackage.COMPANY_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Supplier</em>' class.
@@ -1749,7 +1704,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 8;
+	int SUPPLIER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.

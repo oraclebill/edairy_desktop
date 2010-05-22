@@ -192,7 +192,7 @@
     <eLiterals name="Evening1" value="4"/>
     <eLiterals name="Evening2" value="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="common.ecore#//Person">
+  <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="common.ecore#//Company">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="supplierId" eType="ecore:EDataType common.ecore#//UniqueID"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="categories" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -214,11 +214,6 @@ public class CompanyItemProvider
 			(createChildParameter
 				(ModelPackage.Literals.COMPANY__CONTACTS,
 				 DairyFactory.eINSTANCE.createEmployee()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ModelPackage.Literals.COMPANY__CONTACTS,
-				 DairyFactory.eINSTANCE.createSupplier()));
 	}
 
 }
