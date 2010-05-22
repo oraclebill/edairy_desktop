@@ -903,7 +903,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	createFarmProperties(farm, 20, 20, 8000, 9000);
 
 	req.setFarm(farm);
-	dairy.getMemberFarms().add(farm);
+	ship.getFarms().add(farm);
 
     }
 
@@ -955,7 +955,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	createFarmProperties(farm, 20, 20, 8000, 9000);
 
 	req.setFarm(farm);
-	dairy.getMemberFarms().add(farm);
+	ship.getFarms().add(farm);
 
     }
 
@@ -1007,7 +1007,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	createFarmProperties(farm, 20, 20, 8000, 9000);
 
 	req.setFarm(farm);
-	dairy.getMemberFarms().add(farm);
+	ship.getFarms().add(farm);
 
     }
 }

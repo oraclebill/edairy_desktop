@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 import java.util.Collection;
 import java.util.Date;
@@ -581,7 +582,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	public EList<Farm> getMemberFarms() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		EList<Farm> farms = null;
+		
+		return farms;
 	}
 
 	/**
