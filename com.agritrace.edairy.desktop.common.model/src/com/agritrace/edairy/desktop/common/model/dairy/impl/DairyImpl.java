@@ -11,6 +11,7 @@ import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -22,7 +23,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 import java.util.Collection;
 import java.util.Date;
@@ -30,6 +30,7 @@ import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -577,14 +578,16 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
+	 * FIXME: This is guaranteed to be terribly inefficient... replace with query
 	 */
 	public EList<Farm> getMemberFarms() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		EList<Farm> farms = null;
-		
-		return farms;
+	    BasicEList<Farm> memberFarms = new BasicEList<Farm>();
+	    EList<Membership> members = getMemberships();
+	    for (Membership member : members) {
+		memberFarms.addAll(member.getFarms());
+	    }
+	    return memberFarms;
 	}
 
 	/**

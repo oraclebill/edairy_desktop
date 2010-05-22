@@ -86,70 +86,6 @@ public class ModelSwitch<T> {
          * @generated
          */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-<<<<<<< HEAD
-		switch (classifierID) {
-			case ModelPackage.MAP_LOCATION: {
-				MapLocation mapLocation = (MapLocation)theEObject;
-				T result = caseMapLocation(mapLocation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.POSTAL_LOCATION: {
-				PostalLocation postalLocation = (PostalLocation)theEObject;
-				T result = casePostalLocation(postalLocation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.STATUTORY_LOCATION: {
-				StatutoryLocation statutoryLocation = (StatutoryLocation)theEObject;
-				T result = caseStatutoryLocation(statutoryLocation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.AUDITED: {
-				Audited audited = (Audited)theEObject;
-				T result = caseAudited(audited);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.PERSON: {
-				Person person = (Person)theEObject;
-				T result = casePerson(person);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.COMPANY: {
-				Company company = (Company)theEObject;
-				T result = caseCompany(company);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.DESCRIPTIVE_LOCATION: {
-				DescriptiveLocation descriptiveLocation = (DescriptiveLocation)theEObject;
-				T result = caseDescriptiveLocation(descriptiveLocation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.LOCATION: {
-				Location location = (Location)theEObject;
-				T result = caseLocation(location);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.CONTACT_METHOD: {
-				ContactMethod contactMethod = (ContactMethod)theEObject;
-				T result = caseContactMethod(contactMethod);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Map Location</em>'.
-	 * <!-- begin-user-doc -->
-=======
                 switch (classifierID) {
                         case ModelPackage.PARTY: {
                                 Party party = (Party)theEObject;
@@ -235,7 +171,6 @@ public class ModelSwitch<T> {
 	/**
          * Returns the result of interpreting the object as an instance of '<em>Map Location</em>'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->

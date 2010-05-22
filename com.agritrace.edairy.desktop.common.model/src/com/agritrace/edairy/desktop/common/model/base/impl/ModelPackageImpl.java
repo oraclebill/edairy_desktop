@@ -17,6 +17,7 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Party;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
@@ -57,10 +58,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	/**
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @generated
-	 */
-=======
          * @generated
          */
 	private EClass partyEClass = null;
@@ -70,7 +67,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
          * @generated
          */
->>>>>>> sync before party removal
 	private EClass mapLocationEClass = null;
 
 	/**
@@ -256,10 +252,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	/**
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @generated
-	 */
-=======
          * @generated
          */
 	public EClass getParty() {
@@ -316,7 +308,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
          * @generated
          */
->>>>>>> sync before party removal
 	public EClass getMapLocation() {
                 return mapLocationEClass;
         }
@@ -567,40 +558,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	/**
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @generated
-	 */
-	public EAttribute getPerson_PhoneNumber() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPerson_Location() {
-		return (EReference)personEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPerson_ContactMethods() {
-		return (EReference)personEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-=======
          * @generated
          */
->>>>>>> sync before party removal
 	public EClass getCompany() {
                 return companyEClass;
         }
@@ -635,40 +594,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	/**
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @generated
-	 */
-	public EAttribute getCompany_PhoneNumber() {
-		return (EAttribute)companyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCompany_Location() {
-		return (EReference)companyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCompany_ContactMethods() {
-		return (EReference)companyEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-=======
          * @generated
          */
->>>>>>> sync before party removal
 	public EClass getDescriptiveLocation() {
                 return descriptiveLocationEClass;
         }
@@ -850,87 +777,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
          * @generated
          */
 	public void createPackageContents() {
-<<<<<<< HEAD
-		if (isCreated) return;
-		isCreated = true;
-
-		// Create classes and their features
-		mapLocationEClass = createEClass(MAP_LOCATION);
-		createEAttribute(mapLocationEClass, MAP_LOCATION__LONGITUDE);
-		createEAttribute(mapLocationEClass, MAP_LOCATION__LATITUDE);
-
-		postalLocationEClass = createEClass(POSTAL_LOCATION);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__ADDRESS);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__SECTION);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__ESTATE);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__VILLAGE);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__SUB_LOCATION);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__LOCATION);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__DISTRICT);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__DIVISION);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__PROVINCE);
-		createEAttribute(postalLocationEClass, POSTAL_LOCATION__POSTAL_CODE);
-
-		statutoryLocationEClass = createEClass(STATUTORY_LOCATION);
-		createEAttribute(statutoryLocationEClass, STATUTORY_LOCATION__LAND_REFERENCE_NUMBER);
-
-		auditedEClass = createEClass(AUDITED);
-		createEAttribute(auditedEClass, AUDITED__LAST_UPDATED);
-		createEAttribute(auditedEClass, AUDITED__VOID_DATE);
-
-		personEClass = createEClass(PERSON);
-		createEAttribute(personEClass, PERSON__PHOTO);
-		createEAttribute(personEClass, PERSON__HONORIFIC);
-		createEAttribute(personEClass, PERSON__FAMILY_NAME);
-		createEAttribute(personEClass, PERSON__GIVEN_NAME);
-		createEAttribute(personEClass, PERSON__MIDDLE_NAME);
-		createEAttribute(personEClass, PERSON__ADDITIONAL_NAMES);
-		createEAttribute(personEClass, PERSON__SUFFIX);
-		createEAttribute(personEClass, PERSON__NICK_NAME);
-		createEAttribute(personEClass, PERSON__PHONE_NUMBER);
-		createEReference(personEClass, PERSON__LOCATION);
-		createEReference(personEClass, PERSON__CONTACT_METHODS);
-
-		companyEClass = createEClass(COMPANY);
-		createEReference(companyEClass, COMPANY__CONTACTS);
-		createEAttribute(companyEClass, COMPANY__LEGAL_NAME);
-		createEAttribute(companyEClass, COMPANY__COMPANY_NAME);
-		createEAttribute(companyEClass, COMPANY__PHONE_NUMBER);
-		createEReference(companyEClass, COMPANY__LOCATION);
-		createEReference(companyEClass, COMPANY__CONTACT_METHODS);
-
-		descriptiveLocationEClass = createEClass(DESCRIPTIVE_LOCATION);
-		createEAttribute(descriptiveLocationEClass, DESCRIPTIVE_LOCATION__DIRECTIONS);
-		createEAttribute(descriptiveLocationEClass, DESCRIPTIVE_LOCATION__LANDMARKS);
-
-		locationEClass = createEClass(LOCATION);
-		createEReference(locationEClass, LOCATION__POSTAL_LOCATION);
-		createEReference(locationEClass, LOCATION__MAP_LOCATION);
-		createEReference(locationEClass, LOCATION__STATUTORY_LOCATION);
-		createEReference(locationEClass, LOCATION__DESCRIPTIVE_LOCATION);
-
-		contactMethodEClass = createEClass(CONTACT_METHOD);
-		createEAttribute(contactMethodEClass, CONTACT_METHOD__CM_TYPE);
-		createEAttribute(contactMethodEClass, CONTACT_METHOD__CM_VALUE);
-
-		// Create enums
-		genderEEnum = createEEnum(GENDER);
-		contactMethodTypeEEnum = createEEnum(CONTACT_METHOD_TYPE);
-		unitOfMeasureEEnum = createEEnum(UNIT_OF_MEASURE);
-		containerTypeEEnum = createEEnum(CONTAINER_TYPE);
-
-		// Create data types
-		transactionIDEDataType = createEDataType(TRANSACTION_ID);
-		uniqueIDEDataType = createEDataType(UNIQUE_ID);
-		imageReferenceEDataType = createEDataType(IMAGE_REFERENCE);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-=======
                 if (isCreated) return;
                 isCreated = true;
 
@@ -1011,7 +857,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
          * @generated
          */
->>>>>>> sync before party removal
 	private boolean isInitialized = false;
 
 	/**
@@ -1022,127 +867,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
          * @generated
          */
 	public void initializePackageContents() {
-<<<<<<< HEAD
-		if (isInitialized) return;
-		isInitialized = true;
-
-		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
-
-		// Create type parameters
-
-		// Set bounds for type parameters
-
-		// Add supertypes to classes
-
-		// Initialize classes and features; add operations and parameters
-		initEClass(mapLocationEClass, MapLocation.class, "MapLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMapLocation_Longitude(), ecorePackage.getEString(), "longitude", null, 1, 1, MapLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMapLocation_Latitude(), ecorePackage.getEString(), "latitude", null, 1, 1, MapLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(postalLocationEClass, PostalLocation.class, "PostalLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPostalLocation_Address(), ecorePackage.getEString(), "address", null, 0, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_Section(), ecorePackage.getEString(), "section", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_Estate(), ecorePackage.getEString(), "estate", null, 0, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_Village(), ecorePackage.getEString(), "village", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_SubLocation(), ecorePackage.getEString(), "subLocation", null, 0, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_Location(), ecorePackage.getEString(), "location", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_District(), ecorePackage.getEString(), "district", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_Division(), ecorePackage.getEString(), "division", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_Province(), ecorePackage.getEString(), "province", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPostalLocation_PostalCode(), ecorePackage.getEString(), "postalCode", null, 1, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(statutoryLocationEClass, StatutoryLocation.class, "StatutoryLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStatutoryLocation_LandReferenceNumber(), ecorePackage.getEString(), "landReferenceNumber", null, 1, 1, StatutoryLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(auditedEClass, Audited.class, "Audited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAudited_LastUpdated(), ecorePackage.getEDate(), "lastUpdated", null, 0, 1, Audited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAudited_VoidDate(), ecorePackage.getEDate(), "voidDate", null, 0, 1, Audited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPerson_Photo(), this.getImageReference(), "photo", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_Honorific(), ecorePackage.getEString(), "honorific", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_FamilyName(), ecorePackage.getEString(), "familyName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_GivenName(), ecorePackage.getEString(), "givenName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_MiddleName(), ecorePackage.getEString(), "middleName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_AdditionalNames(), ecorePackage.getEString(), "additionalNames", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_Suffix(), ecorePackage.getEString(), "suffix", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_NickName(), ecorePackage.getEString(), "nickName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPerson_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_Location(), this.getLocation(), null, "location", null, 1, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(companyEClass, Company.class, "Company", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCompany_Contacts(), this.getPerson(), null, "contacts", null, 1, -1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCompany_LegalName(), ecorePackage.getEString(), "legalName", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCompany_CompanyName(), ecorePackage.getEString(), "companyName", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCompany_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompany_Location(), this.getLocation(), null, "location", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompany_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(descriptiveLocationEClass, DescriptiveLocation.class, "DescriptiveLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDescriptiveLocation_Directions(), ecorePackage.getEString(), "directions", null, 1, 1, DescriptiveLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDescriptiveLocation_Landmarks(), ecorePackage.getEString(), "landmarks", null, 0, 1, DescriptiveLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(locationEClass, Location.class, "Location", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLocation_PostalLocation(), this.getPostalLocation(), null, "postalLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLocation_MapLocation(), this.getMapLocation(), null, "mapLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLocation_StatutoryLocation(), this.getStatutoryLocation(), null, "statutoryLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLocation_DescriptiveLocation(), this.getDescriptiveLocation(), null, "descriptiveLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(contactMethodEClass, ContactMethod.class, "ContactMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getContactMethod_CmType(), this.getContactMethodType(), "cmType", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContactMethod_CmValue(), ecorePackage.getEString(), "cmValue", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Initialize enums and add enum literals
-		initEEnum(genderEEnum, Gender.class, "Gender");
-		addEEnumLiteral(genderEEnum, Gender.MALE);
-		addEEnumLiteral(genderEEnum, Gender.FEMALE);
-
-		initEEnum(contactMethodTypeEEnum, ContactMethodType.class, "ContactMethodType");
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.EMAIL);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.SMS);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.PHONE);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.FAX);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.IM_AIM);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.IM_SKYPE);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.IM_MSN);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.IM_GTALK);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.IM_YAHOO);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.IM_OTHER);
-		addEEnumLiteral(contactMethodTypeEEnum, ContactMethodType.OTHER);
-
-		initEEnum(unitOfMeasureEEnum, UnitOfMeasure.class, "UnitOfMeasure");
-		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.LITRE);
-		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.KILOGRAM);
-		addEEnumLiteral(unitOfMeasureEEnum, UnitOfMeasure.UNKNOWN);
-
-		initEEnum(containerTypeEEnum, ContainerType.class, "ContainerType");
-		addEEnumLiteral(containerTypeEEnum, ContainerType.BIN);
-		addEEnumLiteral(containerTypeEEnum, ContainerType.CAN);
-
-		// Initialize data types
-		initEDataType(transactionIDEDataType, String.class, "TransactionID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(uniqueIDEDataType, Long.class, "UniqueID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(imageReferenceEDataType, String.class, "ImageReference", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
-
-		// Create annotations
-		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
-		createExtendedMetaDataAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-=======
                 if (isInitialized) return;
                 isInitialized = true;
 
@@ -1267,7 +991,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
          * @generated
          */
->>>>>>> sync before party removal
 	protected void createExtendedMetaDataAnnotations() {
                 String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
                 addAnnotation

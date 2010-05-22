@@ -71,49 +71,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
          */
 	protected ModelSwitch<Adapter> modelSwitch =
 		new ModelSwitch<Adapter>() {
-<<<<<<< HEAD
-			@Override
-			public Adapter caseMapLocation(MapLocation object) {
-				return createMapLocationAdapter();
-			}
-			@Override
-			public Adapter casePostalLocation(PostalLocation object) {
-				return createPostalLocationAdapter();
-			}
-			@Override
-			public Adapter caseStatutoryLocation(StatutoryLocation object) {
-				return createStatutoryLocationAdapter();
-			}
-			@Override
-			public Adapter caseAudited(Audited object) {
-				return createAuditedAdapter();
-			}
-			@Override
-			public Adapter casePerson(Person object) {
-				return createPersonAdapter();
-			}
-			@Override
-			public Adapter caseCompany(Company object) {
-				return createCompanyAdapter();
-			}
-			@Override
-			public Adapter caseDescriptiveLocation(DescriptiveLocation object) {
-				return createDescriptiveLocationAdapter();
-			}
-			@Override
-			public Adapter caseLocation(Location object) {
-				return createLocationAdapter();
-			}
-			@Override
-			public Adapter caseContactMethod(ContactMethod object) {
-				return createContactMethodAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
-=======
                         @Override
                         public Adapter caseParty(Party object) {
                                 return createPartyAdapter();
@@ -159,7 +116,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
                                 return createEObjectAdapter();
                         }
                 };
->>>>>>> sync before party removal
 
 	/**
          * Creates an adapter for the <code>target</code>.
@@ -176,10 +132,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-<<<<<<< HEAD
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation <em>Map Location</em>}'.
-	 * <!-- begin-user-doc -->
-=======
          * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Party <em>Party</em>}'.
          * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -196,7 +148,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	/**
          * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation <em>Map Location</em>}'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->

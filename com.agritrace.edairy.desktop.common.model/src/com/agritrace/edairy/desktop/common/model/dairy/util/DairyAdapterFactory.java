@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.dairy.util;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Party;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
 import com.agritrace.edairy.desktop.common.model.dairy.*;
@@ -76,77 +77,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
          */
 	protected DairySwitch<Adapter> modelSwitch =
 		new DairySwitch<Adapter>() {
-<<<<<<< HEAD
-			@Override
-			public Adapter caseVehicle(Vehicle object) {
-				return createVehicleAdapter();
-			}
-			@Override
-			public Adapter caseCollectionJournalLine(CollectionJournalLine object) {
-				return createCollectionJournalLineAdapter();
-			}
-			@Override
-			public Adapter caseEmployee(Employee object) {
-				return createEmployeeAdapter();
-			}
-			@Override
-			public Adapter caseDairyLocation(DairyLocation object) {
-				return createDairyLocationAdapter();
-			}
-			@Override
-			public Adapter caseCollectionJournal(CollectionJournal object) {
-				return createCollectionJournalAdapter();
-			}
-			@Override
-			public Adapter caseRoute(Route object) {
-				return createRouteAdapter();
-			}
-			@Override
-			public Adapter caseTrip(Trip object) {
-				return createTripAdapter();
-			}
-			@Override
-			public Adapter caseDeliveryJournal(DeliveryJournal object) {
-				return createDeliveryJournalAdapter();
-			}
-			@Override
-			public Adapter caseDairy(Dairy object) {
-				return createDairyAdapter();
-			}
-			@Override
-			public Adapter caseMembership(Membership object) {
-				return createMembershipAdapter();
-			}
-			@Override
-			public Adapter caseAsset(Asset object) {
-				return createAssetAdapter();
-			}
-			@Override
-			public Adapter caseDairyContainer(DairyContainer object) {
-				return createDairyContainerAdapter();
-			}
-			@Override
-			public Adapter caseSupplier(Supplier object) {
-				return createSupplierAdapter();
-			}
-			@Override
-			public Adapter casePerson(Person object) {
-				return createPersonAdapter();
-			}
-			@Override
-			public Adapter caseCompany(Company object) {
-				return createCompanyAdapter();
-			}
-			@Override
-			public Adapter caseContainer(Container object) {
-				return createContainerAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
-=======
                         @Override
                         public Adapter caseVehicle(Vehicle object) {
                                 return createVehicleAdapter();
@@ -220,7 +150,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
                                 return createEObjectAdapter();
                         }
                 };
->>>>>>> sync before party removal
 
 	/**
          * Creates an adapter for the <code>target</code>.
@@ -419,10 +348,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
         }
 
 	/**
-<<<<<<< HEAD
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Person <em>Person</em>}'.
-	 * <!-- begin-user-doc -->
-=======
          * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Party <em>Party</em>}'.
          * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -439,7 +364,6 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	/**
          * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Person <em>Person</em>}'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->

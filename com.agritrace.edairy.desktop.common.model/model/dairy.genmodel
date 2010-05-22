@@ -232,13 +232,6 @@
     <genDataTypes ecoreDataType="common.ecore#//TransactionID"/>
     <genDataTypes ecoreDataType="common.ecore#//UniqueID"/>
     <genDataTypes ecoreDataType="common.ecore#//ImageReference"/>
-    <genClasses image="false" ecoreClass="common.ecore#//Party">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Party/partyId"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Party/phoneNumber"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Party/location"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Party/contactMethods"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Party/name"/>
-    </genClasses>
     <genClasses ecoreClass="common.ecore#//MapLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//MapLocation/longitude"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//MapLocation/latitude"/>
@@ -271,11 +264,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/additionalNames"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/suffix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/nickName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/phoneNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/location"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/contactMethods"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//Company">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contacts"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/legalName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/companyName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contactMethods"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contacts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/location"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//DescriptiveLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//DescriptiveLocation/directions"/>

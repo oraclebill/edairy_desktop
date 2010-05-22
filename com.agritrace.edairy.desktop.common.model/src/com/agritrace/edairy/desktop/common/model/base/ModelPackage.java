@@ -62,16 +62,6 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl.init();
 
 	/**
-<<<<<<< HEAD
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.MapLocationImpl <em>Map Location</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.MapLocationImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getMapLocation()
-	 * @generated
-	 */
-	int MAP_LOCATION = 0;
-=======
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.PartyImpl <em>Party</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,7 +134,6 @@ public interface ModelPackage extends EPackage {
          * @generated
          */
 	int MAP_LOCATION = 1;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Longitude</b></em>' attribute.
@@ -177,19 +166,11 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.PostalLocationImpl <em>Postal Location</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.PostalLocationImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getPostalLocation()
-	 * @generated
-	 */
-	int POSTAL_LOCATION = 1;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.PostalLocationImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getPostalLocation()
          * @generated
          */
 	int POSTAL_LOCATION = 2;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Address</b></em>' attribute.
@@ -294,19 +275,11 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.StatutoryLocationImpl <em>Statutory Location</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.StatutoryLocationImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getStatutoryLocation()
-	 * @generated
-	 */
-	int STATUTORY_LOCATION = 2;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.StatutoryLocationImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getStatutoryLocation()
          * @generated
          */
 	int STATUTORY_LOCATION = 3;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Land Reference Number</b></em>' attribute.
@@ -330,19 +303,11 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.AuditedImpl <em>Audited</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.AuditedImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getAudited()
-	 * @generated
-	 */
-	int AUDITED = 3;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.AuditedImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getAudited()
          * @generated
          */
 	int AUDITED = 4;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Last Updated</b></em>' attribute.
@@ -375,112 +340,6 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl <em>Person</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getPerson()
-	 * @generated
-	 */
-	int PERSON = 4;
-
-	/**
-	 * The feature id for the '<em><b>Photo</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__PHOTO = 0;
-
-	/**
-	 * The feature id for the '<em><b>Honorific</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__HONORIFIC = 1;
-
-	/**
-	 * The feature id for the '<em><b>Family Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__FAMILY_NAME = 2;
-
-	/**
-	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__GIVEN_NAME = 3;
-
-	/**
-	 * The feature id for the '<em><b>Middle Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__MIDDLE_NAME = 4;
-
-	/**
-	 * The feature id for the '<em><b>Additional Names</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__ADDITIONAL_NAMES = 5;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__SUFFIX = 6;
-
-	/**
-	 * The feature id for the '<em><b>Nick Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__NICK_NAME = 7;
-
-	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__PHONE_NUMBER = 8;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__LOCATION = 9;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON__CONTACT_METHODS = 10;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getPerson()
          * @generated
@@ -603,89 +462,20 @@ public interface ModelPackage extends EPackage {
          * @ordered
          */
 	int PERSON__NICK_NAME = PARTY_FEATURE_COUNT + 7;
->>>>>>> sync before party removal
 
 	/**
          * The number of structural features of the '<em>Person</em>' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_FEATURE_COUNT = 11;
-=======
          * @generated
          * @ordered
          */
 	int PERSON_FEATURE_COUNT = PARTY_FEATURE_COUNT + 8;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getCompany()
-	 * @generated
-	 */
-	int COMPANY = 5;
-
-	/**
-	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__CONTACTS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__LEGAL_NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__COMPANY_NAME = 2;
-
-	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__PHONE_NUMBER = 3;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__LOCATION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__CONTACT_METHODS = 5;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getCompany()
          * @generated
@@ -763,41 +553,25 @@ public interface ModelPackage extends EPackage {
          * @ordered
          */
 	int COMPANY__COMPANY_NAME = PARTY_FEATURE_COUNT + 2;
->>>>>>> sync before party removal
 
 	/**
          * The number of structural features of the '<em>Company</em>' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY_FEATURE_COUNT = 6;
-=======
          * @generated
          * @ordered
          */
 	int COMPANY_FEATURE_COUNT = PARTY_FEATURE_COUNT + 3;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getDescriptiveLocation()
-	 * @generated
-	 */
-	int DESCRIPTIVE_LOCATION = 6;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getDescriptiveLocation()
          * @generated
          */
 	int DESCRIPTIVE_LOCATION = 7;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Directions</b></em>' attribute.
@@ -830,19 +604,11 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl <em>Location</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getLocation()
-	 * @generated
-	 */
-	int LOCATION = 7;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getLocation()
          * @generated
          */
 	int LOCATION = 8;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Postal Location</b></em>' containment reference.
@@ -893,19 +659,11 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ContactMethodImpl <em>Contact Method</em>}' class.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ContactMethodImpl
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethod()
-	 * @generated
-	 */
-	int CONTACT_METHOD = 8;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ContactMethodImpl
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethod()
          * @generated
          */
 	int CONTACT_METHOD = 9;
->>>>>>> sync before party removal
 
 	/**
          * The feature id for the '<em><b>Cm Type</b></em>' attribute.
@@ -938,126 +696,66 @@ public interface ModelPackage extends EPackage {
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.Gender <em>Gender</em>}' enum.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.Gender
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getGender()
-	 * @generated
-	 */
-	int GENDER = 9;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.Gender
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getGender()
          * @generated
          */
 	int GENDER = 10;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.ContactMethodType <em>Contact Method Type</em>}' enum.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.ContactMethodType
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethodType()
-	 * @generated
-	 */
-	int CONTACT_METHOD_TYPE = 10;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.ContactMethodType
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethodType()
          * @generated
          */
 	int CONTACT_METHOD_TYPE = 11;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUnitOfMeasure()
-	 * @generated
-	 */
-	int UNIT_OF_MEASURE = 11;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUnitOfMeasure()
          * @generated
          */
 	int UNIT_OF_MEASURE = 12;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.ContainerType <em>Container Type</em>}' enum.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see com.agritrace.edairy.desktop.common.model.base.ContainerType
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContainerType()
-	 * @generated
-	 */
-	int CONTAINER_TYPE = 12;
-=======
          * @see com.agritrace.edairy.desktop.common.model.base.ContainerType
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContainerType()
          * @generated
          */
 	int CONTAINER_TYPE = 13;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '<em>Transaction ID</em>' data type.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see java.lang.String
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getTransactionID()
-	 * @generated
-	 */
-	int TRANSACTION_ID = 13;
-=======
          * @see java.lang.String
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getTransactionID()
          * @generated
          */
 	int TRANSACTION_ID = 14;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '<em>Unique ID</em>' data type.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see java.lang.Long
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUniqueID()
-	 * @generated
-	 */
-	int UNIQUE_ID = 14;
-=======
          * @see java.lang.Long
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUniqueID()
          * @generated
          */
 	int UNIQUE_ID = 15;
->>>>>>> sync before party removal
 
 	/**
          * The meta object id for the '<em>Image Reference</em>' data type.
          * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-<<<<<<< HEAD
-	 * @see java.lang.String
-	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageReference()
-	 * @generated
-	 */
-	int IMAGE_REFERENCE = 15;
-
-
-	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation <em>Map Location</em>}'.
-	 * <!-- begin-user-doc -->
-=======
          * @see java.lang.String
          * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageReference()
          * @generated
@@ -1133,7 +831,6 @@ public interface ModelPackage extends EPackage {
 	/**
          * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation <em>Map Location</em>}'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * <!-- end-user-doc -->
          * @return the meta object for class '<em>Map Location</em>'.
          * @see com.agritrace.edairy.desktop.common.model.base.MapLocation
@@ -1435,46 +1132,8 @@ public interface ModelPackage extends EPackage {
 	EAttribute getPerson_NickName();
 
 	/**
-<<<<<<< HEAD
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Person#getPhoneNumber <em>Phone Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Phone Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getPhoneNumber()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EAttribute getPerson_PhoneNumber();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Location</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getLocation()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EReference getPerson_Location();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.base.Person#getContactMethods <em>Contact Methods</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contact Methods</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getContactMethods()
-	 * @see #getPerson()
-	 * @generated
-	 */
-	EReference getPerson_ContactMethods();
-
-	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Company <em>Company</em>}'.
-	 * <!-- begin-user-doc -->
-=======
          * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Company <em>Company</em>}'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * <!-- end-user-doc -->
          * @return the meta object for class '<em>Company</em>'.
          * @see com.agritrace.edairy.desktop.common.model.base.Company
@@ -1516,46 +1175,8 @@ public interface ModelPackage extends EPackage {
 	EAttribute getCompany_CompanyName();
 
 	/**
-<<<<<<< HEAD
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Phone Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber()
-	 * @see #getCompany()
-	 * @generated
-	 */
-	EAttribute getCompany_PhoneNumber();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Location</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getLocation()
-	 * @see #getCompany()
-	 * @generated
-	 */
-	EReference getCompany_Location();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods <em>Contact Methods</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contact Methods</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods()
-	 * @see #getCompany()
-	 * @generated
-	 */
-	EReference getCompany_ContactMethods();
-
-	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation <em>Descriptive Location</em>}'.
-	 * <!-- begin-user-doc -->
-=======
          * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation <em>Descriptive Location</em>}'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * <!-- end-user-doc -->
          * @return the meta object for class '<em>Descriptive Location</em>'.
          * @see com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation
@@ -1767,10 +1388,6 @@ public interface ModelPackage extends EPackage {
          */
 	interface Literals {
 		/**
-<<<<<<< HEAD
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.MapLocationImpl <em>Map Location</em>}' class.
-		 * <!-- begin-user-doc -->
-=======
                  * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.PartyImpl <em>Party</em>}' class.
                  * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1823,7 +1440,6 @@ public interface ModelPackage extends EPackage {
 		/**
                  * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.MapLocationImpl <em>Map Location</em>}' class.
                  * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 		 * <!-- end-user-doc -->
                  * @see com.agritrace.edairy.desktop.common.model.base.impl.MapLocationImpl
                  * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getMapLocation()
@@ -2056,37 +1672,8 @@ public interface ModelPackage extends EPackage {
 		EAttribute PERSON__NICK_NAME = eINSTANCE.getPerson_NickName();
 
 		/**
-<<<<<<< HEAD
-		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERSON__PHONE_NUMBER = eINSTANCE.getPerson_PhoneNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PERSON__LOCATION = eINSTANCE.getPerson_Location();
-
-		/**
-		 * The meta object literal for the '<em><b>Contact Methods</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PERSON__CONTACT_METHODS = eINSTANCE.getPerson_ContactMethods();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.
-		 * <!-- begin-user-doc -->
-=======
                  * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.
                  * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 		 * <!-- end-user-doc -->
                  * @see com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl
                  * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getCompany()
@@ -2119,37 +1706,8 @@ public interface ModelPackage extends EPackage {
 		EAttribute COMPANY__COMPANY_NAME = eINSTANCE.getCompany_CompanyName();
 
 		/**
-<<<<<<< HEAD
-		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COMPANY__PHONE_NUMBER = eINSTANCE.getCompany_PhoneNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPANY__LOCATION = eINSTANCE.getCompany_Location();
-
-		/**
-		 * The meta object literal for the '<em><b>Contact Methods</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPANY__CONTACT_METHODS = eINSTANCE.getCompany_ContactMethods();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
-		 * <!-- begin-user-doc -->
-=======
                  * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
                  * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 		 * <!-- end-user-doc -->
                  * @see com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl
                  * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getDescriptiveLocation()

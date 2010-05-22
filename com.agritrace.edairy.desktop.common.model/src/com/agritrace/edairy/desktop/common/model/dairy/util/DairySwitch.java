@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.dairy.util;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Party;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
 import com.agritrace.edairy.desktop.common.model.dairy.*;
@@ -91,96 +92,6 @@ public class DairySwitch<T> {
          * @generated
          */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-<<<<<<< HEAD
-		switch (classifierID) {
-			case DairyPackage.VEHICLE: {
-				Vehicle vehicle = (Vehicle)theEObject;
-				T result = caseVehicle(vehicle);
-				if (result == null) result = caseAsset(vehicle);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.COLLECTION_JOURNAL_LINE: {
-				CollectionJournalLine collectionJournalLine = (CollectionJournalLine)theEObject;
-				T result = caseCollectionJournalLine(collectionJournalLine);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.EMPLOYEE: {
-				Employee employee = (Employee)theEObject;
-				T result = caseEmployee(employee);
-				if (result == null) result = casePerson(employee);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.DAIRY_LOCATION: {
-				DairyLocation dairyLocation = (DairyLocation)theEObject;
-				T result = caseDairyLocation(dairyLocation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.COLLECTION_JOURNAL: {
-				CollectionJournal collectionJournal = (CollectionJournal)theEObject;
-				T result = caseCollectionJournal(collectionJournal);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.ROUTE: {
-				Route route = (Route)theEObject;
-				T result = caseRoute(route);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.TRIP: {
-				Trip trip = (Trip)theEObject;
-				T result = caseTrip(trip);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.DELIVERY_JOURNAL: {
-				DeliveryJournal deliveryJournal = (DeliveryJournal)theEObject;
-				T result = caseDeliveryJournal(deliveryJournal);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.DAIRY: {
-				Dairy dairy = (Dairy)theEObject;
-				T result = caseDairy(dairy);
-				if (result == null) result = caseCompany(dairy);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.MEMBERSHIP: {
-				Membership membership = (Membership)theEObject;
-				T result = caseMembership(membership);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.ASSET: {
-				Asset asset = (Asset)theEObject;
-				T result = caseAsset(asset);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.DAIRY_CONTAINER: {
-				DairyContainer dairyContainer = (DairyContainer)theEObject;
-				T result = caseDairyContainer(dairyContainer);
-				if (result == null) result = caseContainer(dairyContainer);
-				if (result == null) result = caseAsset(dairyContainer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DairyPackage.SUPPLIER: {
-				Supplier supplier = (Supplier)theEObject;
-				T result = caseSupplier(supplier);
-				if (result == null) result = caseCompany(supplier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
-=======
                 switch (classifierID) {
                         case DairyPackage.VEHICLE: {
                                 Vehicle vehicle = (Vehicle)theEObject;
@@ -272,7 +183,6 @@ public class DairySwitch<T> {
                         default: return defaultCase(theEObject);
                 }
         }
->>>>>>> sync before party removal
 
 	/**
          * Returns the result of interpreting the object as an instance of '<em>Vehicle</em>'.
@@ -470,10 +380,6 @@ public class DairySwitch<T> {
         }
 
 	/**
-<<<<<<< HEAD
-	 * Returns the result of interpreting the object as an instance of '<em>Person</em>'.
-	 * <!-- begin-user-doc -->
-=======
          * Returns the result of interpreting the object as an instance of '<em>Party</em>'.
          * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -491,7 +397,6 @@ public class DairySwitch<T> {
 	/**
          * Returns the result of interpreting the object as an instance of '<em>Person</em>'.
          * <!-- begin-user-doc -->
->>>>>>> sync before party removal
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
