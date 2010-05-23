@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -62,10 +63,25 @@ public class LookupControllerDelegate extends ControllerDelegate {
 
 					ITextRidget textRidget = container.getRidget(
 							ITextRidget.class, textId);
-					calDialog.getController().setContext(
-							SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-							DateTimeUtils.DATE_FORMAT.format(value.getValue()));
-					if (calDialog.open() == AbstractWindowController.OK) {
+					if (value.getValue() != null) {
+						calDialog
+								.getController()
+								.setContext(
+										SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+										DateTimeUtils.DATE_FORMAT.format(value
+												.getValue()));
+					}
+					else
+					{
+						// By default it will be today
+						calDialog
+						.getController()
+						.setContext(
+								SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+								DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
+					}
+					int ret = calDialog.open();
+					if (ret == AbstractWindowController.OK) {
 						final Date selectedDate = (Date) calDialog
 								.getController().getContext(
 										SimpleFormattedDateBean.DATE_PROR);
