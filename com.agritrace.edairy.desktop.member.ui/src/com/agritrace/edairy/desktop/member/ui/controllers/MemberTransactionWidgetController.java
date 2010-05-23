@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -16,7 +17,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidgetController implements WidgetController {
 	
-	private SubModuleController controller;
+	private IController controller;
 	
 	private Membership member;
 	
@@ -54,12 +55,12 @@ public class MemberTransactionWidgetController implements WidgetController {
 	}
 
 	@Override
-	public SubModuleController getSubModuleController() {
+	public IController getController() {
 		return controller;
 	}
 
 	@Override
-	public void setSubModuleController(SubModuleController controller) {
+	public void setController(IController controller) {
 		this.controller = controller;
  	}
 

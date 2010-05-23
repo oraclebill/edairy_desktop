@@ -11,6 +11,7 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -29,7 +30,7 @@ import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
 
 public class MemberFarmWidgetController implements WidgetController,ISelectionListener{
 
-	private SubModuleController controller;
+	private IController controller;
 
 	private ITableRidget farmTable;
 
@@ -144,13 +145,13 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 	}
 
 	@Override
-	public SubModuleController getSubModuleController() {
+	public IController getController() {
 		return controller ;
 	}
 
 
 	@Override
-	public void setSubModuleController(SubModuleController controller) {
+	public void setController(IController controller) {
 		this.controller = controller;
 	}
 

@@ -23,6 +23,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -39,7 +40,7 @@ import com.agritrace.edairy.desktop.member.ui.views.AddContainerDialog;
 
 public class MemberContainerWidgetController implements WidgetController, ISelectionListener{
 
-	private SubModuleController controller;
+	private IController controller;
 	private Membership selectedMember;
 
 	private ITableRidget containerTable;
@@ -155,12 +156,12 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	}
 
 	@Override
-	public SubModuleController getSubModuleController() {
+	public IController getController() {
 		return controller;
 	}
 
 	@Override
-	public void setSubModuleController(SubModuleController controller) {
+	public void setController(IController controller) {
 		this.controller = controller;
 	}
 

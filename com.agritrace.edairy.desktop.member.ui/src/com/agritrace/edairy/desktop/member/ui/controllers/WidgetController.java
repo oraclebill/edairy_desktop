@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 
 public interface WidgetController {
 	
@@ -10,9 +10,9 @@ public interface WidgetController {
 	
 	public void setInputModel(Object model);
 	
-	public SubModuleController getSubModuleController();
+	public IController getController();
 	
-	public void setSubModuleController(SubModuleController controller);
+	public void setController(IController controller);
 	
 	public void updateBinding();
 
