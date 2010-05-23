@@ -446,13 +446,22 @@ public interface ModelPackage extends EPackage {
 	int COMPANY__LOCATION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPANY__PHONE_NUMBER = 5;
+
+	/**
 	 * The number of structural features of the '<em>Company</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY_FEATURE_COUNT = 5;
+	int COMPANY_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
@@ -1056,6 +1065,17 @@ public interface ModelPackage extends EPackage {
 	EReference getCompany_Location();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Phone Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber()
+	 * @see #getCompany()
+	 * @generated
+	 */
+	EAttribute getCompany_PhoneNumber();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation <em>Descriptive Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1575,6 +1595,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPANY__LOCATION = eINSTANCE.getCompany_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPANY__PHONE_NUMBER = eINSTANCE.getCompany_PhoneNumber();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.

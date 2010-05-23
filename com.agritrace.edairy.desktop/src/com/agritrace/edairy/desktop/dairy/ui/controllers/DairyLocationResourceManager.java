@@ -270,8 +270,8 @@ public class DairyLocationResourceManager {
 	    descriptiveLocation.setDirections("test directions " + id);
 
 	    final MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
-	    mapLocation.setLatitude("123.00");
-	    mapLocation.setLongitude("-100.00");
+	    mapLocation.setLatitude(Double.valueOf("123.00"));
+	    mapLocation.setLongitude(Double.valueOf("-100.00"));
 
 	    location.setPostalLocation(postalLocation);
 	    location.setDescriptiveLocation(descriptiveLocation);

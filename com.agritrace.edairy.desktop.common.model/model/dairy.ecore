@@ -259,5 +259,12 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="asOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TransactionSource">
+      <eLiterals name="Store Credit" literal="STORE_CREDIT"/>
+      <eLiterals name="Animal Health Services" value="1" literal="HEALTH_SVCS"/>
+      <eLiterals name="Share Recovery" value="2" literal="SHARE RECOVERY"/>
+      <eLiterals name="Cash Payment" value="3" literal="CASH PAYMENT"/>
+      <eLiterals name="Other" value="4" literal="OTHER"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

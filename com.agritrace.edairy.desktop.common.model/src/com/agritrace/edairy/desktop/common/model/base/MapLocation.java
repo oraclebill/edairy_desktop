@@ -36,12 +36,12 @@ public interface MapLocation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Longitude</em>' attribute.
-	 * @see #setLongitude(String)
+	 * @see #setLongitude(double)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation_Longitude()
 	 * @model
 	 * @generated
 	 */
-	String getLongitude();
+	double getLongitude();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation#getLongitude <em>Longitude</em>}' attribute.
@@ -51,7 +51,7 @@ public interface MapLocation extends EObject {
 	 * @see #getLongitude()
 	 * @generated
 	 */
-	void setLongitude(String value);
+	void setLongitude(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Latitude</b></em>' attribute.
@@ -62,12 +62,12 @@ public interface MapLocation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Latitude</em>' attribute.
-	 * @see #setLatitude(String)
+	 * @see #setLatitude(double)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation_Latitude()
 	 * @model
 	 * @generated
 	 */
-	String getLatitude();
+	double getLatitude();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.MapLocation#getLatitude <em>Latitude</em>}' attribute.
@@ -77,6 +77,6 @@ public interface MapLocation extends EObject {
 	 * @see #getLatitude()
 	 * @generated
 	 */
-	void setLatitude(String value);
+	void setLatitude(double value);
 
 } // MapLocation

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods <em>Contact Methods</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -140,5 +141,31 @@ public interface Company extends EObject {
 	 * @generated
 	 */
 	void setLocation(Location value);
+
+	/**
+	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Phone Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Phone Number</em>' attribute.
+	 * @see #setPhoneNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_PhoneNumber()
+	 * @model
+	 * @generated
+	 */
+	String getPhoneNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Phone Number</em>' attribute.
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	void setPhoneNumber(String value);
 
 } // Company

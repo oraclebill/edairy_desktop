@@ -1110,6 +1110,15 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__LOCATION = ModelPackage.COMPANY__LOCATION;
 
 	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
+
+	/**
 	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1552,6 +1561,15 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUPPLIER__LOCATION = ModelPackage.COMPANY__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.
