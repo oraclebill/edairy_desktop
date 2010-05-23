@@ -22,7 +22,10 @@ public class SimpleFormattedDateBean extends AbstractBean {
 
     public static String DATE_PROR = "date";
     
-    private static final String STD_DATE_FORMAT = "dd/mm/yyyy"; 
+    /**
+     * note: MM is format of month, mm is format of minutes
+     */
+    private static final String STD_DATE_FORMAT = "dd/MM/yyyy"; 
 
     public SimpleFormattedDateBean() {
 	this(null);
