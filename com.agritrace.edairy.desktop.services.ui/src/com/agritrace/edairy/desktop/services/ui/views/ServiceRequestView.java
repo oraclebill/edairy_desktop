@@ -4,7 +4,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -65,15 +64,17 @@ public class ServiceRequestView extends AbstractRecordListView {
 		GridDataFactory.swtDefaults().grab(true, true).align(SWT.BEGINNING,
 				SWT.BEGINNING).applyTo(comp);
 		// Create farm/member lookup
-		LookupComposite composite = new LookupComposite(new String[] {
-				"Farm Lookup", "Member Lookup" }, new Image[] {
+		LookupComposite farmLookup = new LookupComposite("Farm Lookup",
 				Activator.getDefault().getImageRegistry().get(
-						Activator.FARM_SEARCH_ICON),
+						Activator.FARM_SEARCH_ICON), FARM_LOOKUP_TEXT,
+				FARM_LOOKUP_BUTTON);
+		farmLookup.createSection(comp);
+
+		LookupComposite memberLookup = new LookupComposite("Member Lookup",
 				Activator.getDefault().getImageRegistry().get(
-						Activator.MEMBER_SEARCH_ICON) }, new String[] {
-				FARM_LOOKUP_TEXT, MEMBER_LOOKUP_TEXT }, new String[] {
-				FARM_LOOKUP_BUTTON, MEMBER_LOOKUP_BUTTON });
-		composite.createSection(comp);
+						Activator.MEMBER_SEARCH_ICON), MEMBER_LOOKUP_TEXT,
+				MEMBER_LOOKUP_BUTTON);
+		memberLookup.createSection(comp);
 
 	}
 
@@ -86,11 +87,10 @@ public class ServiceRequestView extends AbstractRecordListView {
 		startDateComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// Create Start Date lookup
-		LookupComposite startDateLookup = new LookupComposite(
-				new String[] { "Start" }, new Image[] { Activator.getDefault()
-						.getImageRegistry().get(Activator.CALENDAR_ICON) },
-				new String[] { START_DATE_TEXT },
-				new String[] { START_DATE_BUTTON });
+		LookupComposite startDateLookup = new LookupComposite("Start",
+				Activator.getDefault().getImageRegistry().get(
+						Activator.CALENDAR_ICON), START_DATE_TEXT,
+				START_DATE_BUTTON);
 		startDateLookup.createSection(startDateComp);
 
 		// UIControlsFactory.createLabel(startDateComp, "Start");
@@ -133,11 +133,9 @@ public class ServiceRequestView extends AbstractRecordListView {
 		endDateComp.setLayout(GridLayoutFactory.swtDefaults().numColumns(3)
 				.margins(0, 0).create());
 		endDateComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		LookupComposite endDateLookup = new LookupComposite(
-				new String[] { "End" }, new Image[] { Activator.getDefault()
-						.getImageRegistry().get(Activator.CALENDAR_ICON) },
-				new String[] { END_DATE_TEXT },
-				new String[] { END_DATE_BUTTON });
+		LookupComposite endDateLookup = new LookupComposite("End", Activator
+				.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON),
+				END_DATE_TEXT, END_DATE_BUTTON);
 		endDateLookup.createSection(endDateComp);
 		// UIControlsFactory.createLabel(endDateComp, "End");
 		// final Text endDateText = UIControlsFactory.createText(endDateComp,

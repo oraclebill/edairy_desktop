@@ -90,7 +90,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 	public ServiceRequestListDialog(int style, Shell parentShell,
 			EObject selectedEObject) {
 		super(style, parentShell, selectedEObject);
-	
+
 	}
 
 	@Override
@@ -136,11 +136,9 @@ public class ServiceRequestListDialog extends RecordDialog {
 				false).applyTo(comonComp);
 
 		// Create Start Date lookup
-		LookupComposite startDateLookup = new LookupComposite(
-				new String[] { "Date" }, new Image[] { Activator.getDefault()
-						.getImageRegistry().get(Activator.CALENDAR_ICON) },
-				new String[] { BIND_ID_REQUEST_DATE_TEXT },
-				new String[] { BIND_ID_REQUEST_DATE_BUTTON });
+		LookupComposite startDateLookup = new LookupComposite("Date", Activator
+				.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON),
+				BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
 		startDateLookup.createSection(comonComp);
 
 		// UIControlsFactory.createLabel(comonComp, "Date");
@@ -203,16 +201,18 @@ public class ServiceRequestListDialog extends RecordDialog {
 		// SWT.BEGINNING).grab(true, false).span(2,1).applyTo(farmCombo);
 		// addUIControl(farmCombo, BIND_ID_FARM);
 
-		// Create farm/member lookup
-		LookupComposite composite = new LookupComposite(new String[] { "Farm",
-				"Member" }, new Image[] {
-				Activator.getDefault().getImageRegistry().get(
-						Activator.FARM_SEARCH_ICON),
-				Activator.getDefault().getImageRegistry().get(
-						Activator.MEMBER_SEARCH_ICON) }, new String[] {
-				BIND_ID_MEMBER_TEXT, BIND_ID_FARM_TEXT }, new String[] {
-				BIND_ID_MEMBER_BUTTON, BIND_ID_FARM_BUTTON });
-		composite.createSection(comonComp);
+		// Create farm lookup
+		LookupComposite farmLookup = new LookupComposite("Farm", Activator
+				.getDefault().getImageRegistry()
+				.get(Activator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT,
+				BIND_ID_FARM_BUTTON);
+		farmLookup.createSection(comonComp);
+		// Create member lookup
+		LookupComposite memberLookup = new LookupComposite("Member", Activator
+				.getDefault().getImageRegistry()
+				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT,
+				BIND_ID_MEMBER_BUTTON);
+		memberLookup.createSection(comonComp);
 
 		UIControlsFactory.createLabel(comonComp, "Request Type"); //$NON-NLS-1$
 		Composite typeComposite = UIControlsFactory.createComposite(comonComp);
@@ -234,7 +234,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 
 	@Override
 	protected AbstractWindowController createController() {
-		ResultListDialogController controller = new ResultListDialogController(this) {
+		ResultListDialogController controller = new ResultListDialogController(
+				this) {
 
 			@Override
 			public EObject createWorkingCopy() {

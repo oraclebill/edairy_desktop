@@ -23,6 +23,9 @@ import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
+import org.eclipse.jface.window.Window;
+import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
@@ -37,6 +40,8 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
@@ -432,6 +437,45 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 				ServiceRequestView.END_DATE_TEXT,
 				ServiceRequestView.END_DATE_BUTTON);
 		endDelegate.configureRidgets();
+
+		// Farm lookup
+		IActionRidget farmLookupButton = this.getRidget(IActionRidget.class,
+				ServiceRequestView.FARM_LOOKUP_BUTTON);
+		farmLookupButton.addListener(new IActionListener() {
+
+			@Override
+			public void callback() {
+				final FarmSearchDialog dialog = new FarmSearchDialog(
+						new Shell());
+				final int ret = dialog.open();
+				if (Window.OK == ret) {
+					// Demo code
+					// farmText.setText("Farm1");
+
+				}
+
+			}
+		});
+		
+		// Farm lookup
+		IActionRidget memberLookupButton = this.getRidget(IActionRidget.class,
+				ServiceRequestView.MEMBER_LOOKUP_BUTTON);
+		memberLookupButton.addListener(new IActionListener() {
+
+			@Override
+			public void callback() {
+				final MemberSearchDialog dialog = new MemberSearchDialog(
+						new Shell());
+				final int ret = dialog.open();
+				if (Window.OK == ret) {
+					// Demo code
+					// farmText.setText("Farm1");
+
+				}
+
+			}
+		});
+
 	}
 
 }

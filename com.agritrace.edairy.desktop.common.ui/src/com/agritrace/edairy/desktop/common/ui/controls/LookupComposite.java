@@ -22,10 +22,10 @@ import org.eclipse.swt.widgets.Text;
 public class LookupComposite {
 
 	private List<Object> controls = new ArrayList<Object>();
-	private String[] labels;
-	private Image[] icons;
-	private String[] textBindIds;
-	private String[] buttonIds;
+	private String label;
+	private Image icon;
+	private String textBindId;
+	private String buttonId;
 
 	/**
 	 * @param parent
@@ -38,22 +38,20 @@ public class LookupComposite {
 	 *            Icon which will pop up the dialog
 	 */
 
-	public LookupComposite(String[] labels, Image[] iconImages,
-			String[] textBindIds, String[] buttonBindIds) {
+	public LookupComposite(String label, Image icon, String textBindId,
+			String buttonBindId) {
 
-		Assert.isTrue(labels.length == iconImages.length);
-		this.labels = labels;
-		this.icons = iconImages;
-		this.textBindIds = textBindIds;
-		this.buttonIds = buttonBindIds;
+		this.label = label;
+		this.icon = icon;
+		this.textBindId = textBindId;
+		this.buttonId = buttonBindId;
 
 	}
 
 	public void createSection(Composite parent) {
-		for (int i = 0; i < labels.length; i++) {
-			createControl(parent, labels[i], icons[i], textBindIds[i],
-					buttonIds[i]);
-		}
+
+		createControl(parent, label, icon, textBindId, buttonId);
+
 	}
 
 	private void createControl(Composite parent, String label, Image icon,
