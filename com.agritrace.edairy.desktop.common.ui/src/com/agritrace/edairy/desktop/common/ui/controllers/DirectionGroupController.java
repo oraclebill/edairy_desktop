@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -7,7 +7,7 @@ import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class DirectionGroupController implements WidgetController {
 	

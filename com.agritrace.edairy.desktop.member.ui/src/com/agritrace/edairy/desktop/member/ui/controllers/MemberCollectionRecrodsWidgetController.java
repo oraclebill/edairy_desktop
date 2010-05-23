@@ -16,7 +16,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MemberCollectionRecrodsWidgetController implements
 		WidgetController {

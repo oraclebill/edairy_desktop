@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui;
+package com.agritrace.edairy.desktop.common.ui.util;
 
 public class ViewWidgetId {
 

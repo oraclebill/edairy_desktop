@@ -24,8 +24,9 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
 
 public class MemberFarmWidgetController implements WidgetController,ISelectionListener{

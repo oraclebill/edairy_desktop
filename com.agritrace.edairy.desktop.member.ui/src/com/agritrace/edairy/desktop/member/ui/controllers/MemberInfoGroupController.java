@@ -12,7 +12,8 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MemberInfoGroupController implements WidgetController, ISelectionListener {
 	

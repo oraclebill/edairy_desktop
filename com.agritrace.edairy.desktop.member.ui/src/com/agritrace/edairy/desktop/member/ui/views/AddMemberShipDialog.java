@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListener {
 

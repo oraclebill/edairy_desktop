@@ -9,7 +9,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MemberSearchViewController extends SubModuleController{
 

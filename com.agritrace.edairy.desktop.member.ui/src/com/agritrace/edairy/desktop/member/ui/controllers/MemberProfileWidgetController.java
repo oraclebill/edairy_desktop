@@ -7,6 +7,11 @@ import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 
 public class MemberProfileWidgetController implements WidgetController {
 

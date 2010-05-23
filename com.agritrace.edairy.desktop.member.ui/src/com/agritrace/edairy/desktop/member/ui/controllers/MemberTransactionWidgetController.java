@@ -13,7 +13,8 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MemberTransactionWidgetController implements WidgetController {
 	

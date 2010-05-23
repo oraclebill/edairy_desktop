@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.Arrays;
 
@@ -14,7 +14,7 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class AddressGroupWidgetController implements WidgetController, ISelectionListener{
 

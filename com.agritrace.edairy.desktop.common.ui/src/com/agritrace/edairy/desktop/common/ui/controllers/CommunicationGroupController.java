@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.eclipse.riena.ui.ridgets.controller.IController;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class CommunicationGroupController implements WidgetController {
 	
