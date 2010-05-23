@@ -30,6 +30,7 @@ import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySub
 import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
@@ -173,8 +174,8 @@ public class EDairyManagerApplication extends SwtApplication {
 	subAppNode.addChild(moduleGroupNode);
 
 	moduleNode = NodeFactory.createModule("edm.members", "Members", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.member.directory", "Member Directory", moduleNode, MemberListView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.member.edit", "Register Member", moduleNode, MemberSearchView.ID, MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.member.directory", "Member Directory", moduleNode, MemberListView.ID, MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.member.edit", "Register Member", moduleNode, MemberSearchView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// FARM MODULE GROUP

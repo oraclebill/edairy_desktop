@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MemberListView extends SubModuleView {
 
@@ -84,7 +84,7 @@ public class MemberListView extends SubModuleView {
 		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		final Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-			ViewWidgetId.FARM_TABLE);
+			ViewWidgetId.MEMBERLIST_MEMBERTABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 

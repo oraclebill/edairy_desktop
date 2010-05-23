@@ -6,12 +6,12 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
 
-public class NewMemberViewController extends MemberSearchViewController {
+public class NewMemberViewController extends MemberRegisterViewController {
 
     public NewMemberViewController() {
 	this.setSelectedMember(EMFObjectUtil.createMembership());

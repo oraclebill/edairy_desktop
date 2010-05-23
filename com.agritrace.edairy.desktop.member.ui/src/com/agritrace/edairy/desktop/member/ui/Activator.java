@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
@@ -11,54 +13,54 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-    // The plug-in ID
-    public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.member.ui"; //$NON-NLS-1$
+	// The plug-in ID
+	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.member.ui"; //$NON-NLS-1$
 
-    // The shared instance
-    private static Activator plugin;
+	// The shared instance
+	private static Activator plugin;
 
-    /**
-     * The constructor
-     */
-    public Activator() {
-    }
+	/**
+	 * The constructor
+	 */
+	public Activator() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-     * )
-     */
-    @Override
-    public void start(BundleContext context) throws Exception {
-	super.start(context);
-	plugin = this;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-     * )
-     */
-    @Override
-    public void stop(BundleContext context) throws Exception {
-	plugin = null;
-	super.stop(context);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
 
-    /**
-     * Returns the shared instance
-     * 
-     * @return the shared instance
-     */
-    public static Activator getDefault() {
-	return plugin;
-    }
+	/**
+	 * Returns the shared instance
+	 * 
+	 * @return the shared instance
+	 */
+	public static Activator getDefault() {
+		return plugin;
+	}
 
-    /**
+	/**
 	 * Return a "shared" image instance using the given colorKey. Shared images
 	 * are managed automatically and must not be disposed by client code.
 	 * 
@@ -86,5 +88,17 @@ public class Activator extends AbstractUIPlugin {
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
+
+	public void log(String message){
+		Status newLog = new Status(IStatus.INFO, PLUGIN_ID, message);
+		getLog().log(newLog);
+
+	}
 	
+	public void logError(Throwable e,String message){
+		Status newLog = new Status(IStatus.ERROR, PLUGIN_ID, message,e);
+		getLog().log(newLog);
+
+	}
+
 }
