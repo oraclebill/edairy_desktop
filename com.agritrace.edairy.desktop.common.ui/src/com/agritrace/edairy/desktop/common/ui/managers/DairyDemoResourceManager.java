@@ -470,7 +470,8 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	    final Membership member1 = DairyFactory.eINSTANCE.createMembership();
 	    member1.setMemberId("" + 1000 + i);
 	    final Person member = ModelFactory.eINSTANCE.createPerson();
-	    member.setGivenName("Joseph Limuru" + "_" + i);
+	    member.setGivenName("Joseph" + "_" + i);
+	    member.setFamilyName("Limuru");
 	    member.setPhoneNumber("609-356-3400" + i);
 	    member1.setMember(member);
 

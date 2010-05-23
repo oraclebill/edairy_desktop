@@ -147,6 +147,7 @@ public class ViewWidgetId {
     
     //member list view
     public static final String MEMBERLIST_SEARCHTEXT = "memberList_searchText";
+    public static final String MEMBERLIST_MEMBERTABLE="memberList_table";
     
     //member directions group
     public static final String LANDMARK_TEXT = "landMarkText";
@@ -164,6 +165,8 @@ public class ViewWidgetId {
 	//member transaction tab
 	public static final String TRANSACTION_ADD_BUTTON="TRANSACTION_ADD";
 	public static final String TRANSACTION_VIEW_BUTTON="TRANSACTION_VIEW";
+	
+
 
 
 
