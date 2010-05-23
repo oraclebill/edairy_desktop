@@ -19,6 +19,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleMasterDetailComposite;
 
@@ -157,7 +158,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 	    // Date Acquired
 	    final ITextRidget dateAcquiredText = container.getRidget(ITextRidget.class,
 		    VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_ACQUIRED);
-	    dateAcquiredText.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
+	    dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 	    dateAcquiredText.setDirectWriting(true);
 	    dateAcquiredText.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName());
 	    dateAcquiredText.updateFromModel();
@@ -165,7 +166,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 	    // Date Damaged
 	    final ITextRidget damangeDateText = container.getRidget(ITextRidget.class,
 		    VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_DAMAGE);
-	    damangeDateText.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
+	    damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 	    damangeDateText.setDirectWriting(true);
 	    damangeDateText.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName());
 	    damangeDateText.updateFromModel();
@@ -181,7 +182,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 	    final ITextRidget disposalDate = container.getRidget(ITextRidget.class,
 		    VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_DISPOSAL);
 	    disposalDate.setDirectWriting(true);
-	    disposalDate.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
+	    disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 	    disposalDate.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName());
 	    disposalDate.updateFromModel();
 
@@ -211,7 +212,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 	    // Expiration Date
 	    final ITextRidget expDateText = container.getRidget(ITextRidget.class,
 		    VehicleMasterDetailComposite.BIND_ID_INSURANCE_EXP_DATE);
-	    expDateText.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
+	    expDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 	    expDateText.setDirectWriting(true);
 	    expDateText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE.getName());
 	    expDateText.updateFromModel();

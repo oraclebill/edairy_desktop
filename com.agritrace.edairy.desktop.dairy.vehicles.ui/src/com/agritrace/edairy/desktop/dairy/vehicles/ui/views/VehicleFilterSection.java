@@ -26,7 +26,7 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.*;
 
 /**
@@ -125,7 +125,7 @@ public class VehicleFilterSection {
 	startDateText = UIControlsFactory.createText(dateComp, SWT.BORDER, STARTE_DATE);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(startDateText);
 	// Default start time is the first day of this month
-	startDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils.getFirstDayOfMonth(Calendar.getInstance()
+	startDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance()
 		.getTime())));
 
 	final ImageButton calendarButton = new ImageButton(dateComp, SWT.PUSH);
@@ -154,7 +154,7 @@ public class VehicleFilterSection {
 	UIControlsFactory.createLabel(dateComp, "End");
 	endDateText = UIControlsFactory.createText(dateComp, SWT.READ_ONLY | SWT.BORDER, END_DATE);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(endDateText);
-	endDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils.getLastDayOfMonth(Calendar.getInstance()
+	endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance()
 		.getTime())));
 
 	final ImageButton calendarButton2 = new ImageButton(dateComp, SWT.PUSH);

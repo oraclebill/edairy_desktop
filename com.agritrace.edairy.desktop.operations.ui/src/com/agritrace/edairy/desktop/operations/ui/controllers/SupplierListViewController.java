@@ -117,11 +117,6 @@ public class SupplierListViewController extends AbstractRecordListController {
 	}
 
 	@Override
-	protected void doCreation() {
-
-	}
-
-	@Override
 	protected RecordDialog getListDialog(int dialogStyle) {
 		return new SupplierListDialog(dialogStyle, null, this
 				.getSelectedEObject());

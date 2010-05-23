@@ -38,7 +38,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.ResourceManager;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.Activator;
 
 /**
@@ -83,7 +83,7 @@ public class ServiceRequestResourceManager {
     private void createReq1() throws ParseException {
 	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 	req.setRequestId(1001l);
-	req.setDate(ServiceUtils.DATE_FORMAT.parse("05/03/2010"));
+	req.setDate(DateTimeUtils.DATE_FORMAT.parse("05/03/2010"));
 
 	serviceRequestResource.getContents().add(req);
 
@@ -135,7 +135,7 @@ public class ServiceRequestResourceManager {
     private void createReq2() throws ParseException {
 	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 	req.setRequestId(1002l);
-	req.setDate(ServiceUtils.DATE_FORMAT.parse("04/01/2010"));
+	req.setDate(DateTimeUtils.DATE_FORMAT.parse("04/01/2010"));
 
 	serviceRequestResource.getContents().add(req);
 

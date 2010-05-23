@@ -40,6 +40,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 		super(parentShell);
 		this.style = style;
 		this.selectedEObject = selectedObject;
+		((ResultListDialogController) this.getController()).itemSelected();
 
 	}
 
@@ -69,7 +70,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 	protected Control buildView(Composite parent) {
 		Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayout(GridLayoutFactory.swtDefaults().create());
-		GridDataFactory.swtDefaults().grab(true, true).applyTo(comp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comp);
 		comp.setBackground(LnfManager.getLnf().getColor(
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		comp.getParent().setBackground(LnfManager.getLnf().getColor(

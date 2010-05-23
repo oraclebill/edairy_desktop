@@ -15,6 +15,7 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
@@ -70,13 +71,13 @@ public class ServiceRequestControllerTestCase extends
 
 		// Default value of Start Date
 		final ITextRidget startDate = getController().getRidget(
-				ITextRidget.class, ServiceRequestView.STARTE_DATE);
-		assertEquals(startDate.getText(), ServiceUtils.getFirstDayofMonth());
+				ITextRidget.class, ServiceRequestView.START_DATE_TEXT);
+		assertEquals(startDate.getText(), DateTimeUtils.getFirstDayofMonth());
 
 		// Default value of End date
 		final ITextRidget endDate = getController().getRidget(
-				ITextRidget.class, ServiceRequestView.END_DATE);
-		assertEquals(endDate.getText(), ServiceUtils.getLastDayofMonth());
+				ITextRidget.class, ServiceRequestView.END_DATE_TEXT);
+		assertEquals(endDate.getText(), DateTimeUtils.getLastDayofMonth());
 
 		// All type button
 		final IToggleButtonRidget allTypeBtn = getController().getRidget(

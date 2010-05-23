@@ -50,6 +50,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 
 public class DairyDemoResourceManager implements IDairyResourceManager {
@@ -859,7 +860,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
     private void createReq1(Dairy dairy) throws ParseException {
 	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 	req.setRequestId(1001l);
-	req.setDate(ServiceUtils.DATE_FORMAT.parse("05/03/2010"));
+	req.setDate(DateTimeUtils.DATE_FORMAT.parse("05/03/2010"));
 
 	dairy.getAnimalHealthRequests().add(req);
 
@@ -885,7 +886,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	req.setReportedProblem("problem 1");
 
 	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
-	farm.setFarmId(new Long(5001).longValue());
+	farm.setFarmId(new Long(106001).longValue());
 	farm.setName("Green Farm");
 	final Location location1 = ModelFactory.eINSTANCE.createLocation();
 	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
@@ -904,14 +905,15 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	createFarmProperties(farm, 20, 20, 8000, 9000);
 
 	req.setFarm(farm);
-	ship.getFarms().add(farm);
+	dairy.getMemberFarms().add(farm);
+	farmResource.getContents().add(farm);
 
     }
 
     private void createReq2(Dairy dairy) throws ParseException {
 	final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 	req.setRequestId(1002l);
-	req.setDate(ServiceUtils.DATE_FORMAT.parse("04/01/2010"));
+	req.setDate(DateTimeUtils.DATE_FORMAT.parse("04/01/2010"));
 
 	dairy.getAnimalHealthRequests().add(req);
 
@@ -937,7 +939,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	req.setReportedProblem("problem 2");
 
 	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
-	farm.setFarmId(new Long(5001).longValue());
+	farm.setFarmId(new Long(106002).longValue());
 	farm.setName("Blue Farm");
 	final Location location1 = ModelFactory.eINSTANCE.createLocation();
 	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
@@ -956,7 +958,8 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	createFarmProperties(farm, 20, 20, 8000, 9000);
 
 	req.setFarm(farm);
-	ship.getFarms().add(farm);
+	dairy.getMemberFarms().add(farm);
+	farmResource.getContents().add(farm);
 
     }
 
@@ -989,7 +992,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	req.setReportedProblem("problem 3");
 
 	final Farm farm = TrackingFactory.eINSTANCE.createFarm();
-	farm.setFarmId(new Long(5001).longValue());
+	farm.setFarmId(new Long(106003).longValue());
 	farm.setName("Yellow Farm");
 	final Location location1 = ModelFactory.eINSTANCE.createLocation();
 	final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();
@@ -1008,7 +1011,8 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	createFarmProperties(farm, 20, 20, 8000, 9000);
 
 	req.setFarm(farm);
-	ship.getFarms().add(farm);
+	dairy.getMemberFarms().add(farm);
+	farmResource.getContents().add(farm);
 
     }
 }

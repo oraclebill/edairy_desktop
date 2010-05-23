@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.query.conditions.Condition;
 import org.eclipse.emf.query.conditions.booleans.BooleanAdapter;
@@ -29,18 +29,20 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
-import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
-import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
+import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
+import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
 
 /**
  * Service Requests view controller
@@ -74,7 +76,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 				@Override
 				public String getText(Object element) {
 					if (element instanceof AnimalHealthRequest) {
-						return ServiceUtils.DATE_FORMAT
+						return DateTimeUtils.DATE_FORMAT
 								.format(((AnimalHealthRequest) element)
 										.getDate());
 					}
@@ -89,9 +91,12 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 				public String getText(Object element) {
 					if (element instanceof AnimalHealthRequest) {
 						final String name = ((AnimalHealthRequest) element)
-								.getRequestingMember().getMember().getGivenName()+ " "
-								+  ((AnimalHealthRequest) element)
-								.getRequestingMember().getMember().getFamilyName();
+								.getRequestingMember().getMember()
+								.getGivenName()
+								+ " "
+								+ ((AnimalHealthRequest) element)
+										.getRequestingMember().getMember()
+										.getFamilyName();
 						return name == null ? "" : name;
 					}
 					return null;
@@ -149,18 +154,18 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		// for date range
 		// Start Date Default value
 		final ITextRidget startText = getRidget(ITextRidget.class,
-				ServiceRequestView.STARTE_DATE);
+				ServiceRequestView.START_DATE_TEXT);
 		if (startText != null) {
 			startText.setDirectWriting(true);
-			startText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
+			startText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils
 					.getFirstDayOfMonth(Calendar.getInstance().getTime())));
 		}
 		// End date default value
 		final ITextRidget endDateText = getRidget(ITextRidget.class,
-				ServiceRequestView.END_DATE);
+				ServiceRequestView.END_DATE_TEXT);
 		if (endDateText != null) {
 			endDateText.setDirectWriting(true);
-			endDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
+			endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils
 					.getLastDayOfMonth(Calendar.getInstance().getTime())));
 
 		}
@@ -204,11 +209,10 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	@Override
 	protected List<?> getFilteredResult() {
 		try {
-//			List<AnimalHealthRequest> requests = ServiceRequestResourceManager.INSTANCE
-//			.getObjectsFromDairyModel(AnimalHealthRequest.class);
 			Dairy myDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-			List<AnimalHealthRequest> requests = myDairy.getAnimalHealthRequests();
-			 
+			List<AnimalHealthRequest> requests = myDairy
+					.getAnimalHealthRequests();
+
 			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
 			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 				@Override
@@ -224,7 +228,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 			// Start Date
 			final ITextRidget memberIdText = getRidget(ITextRidget.class,
-					ServiceRequestView.STARTE_DATE);
+					ServiceRequestView.START_DATE_TEXT);
 			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
 			SELECT select = null;
@@ -235,7 +239,8 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 				if (!"".equals(startDate)) {
 					final Condition startDateCondtion = new NumberCondition<Long>(
-							ServiceUtils.DATE_FORMAT.parse(startDate).getTime(),
+							DateTimeUtils.DATE_FORMAT.parse(startDate)
+									.getTime(),
 							RelationalOperator.GREATER_THAN_OR_EQUAL_TO,
 							dateAdapter);
 
@@ -248,13 +253,13 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			}
 			// End Date
 			final ITextRidget endDateText = getRidget(ITextRidget.class,
-					ServiceRequestView.END_DATE);
+					ServiceRequestView.END_DATE_TEXT);
 			if (endDateText != null) {
 				final String endDateStr = endDateText.getText();
 
 				if (!"".equals(endDateStr)) {
 					final Condition startDateCondtion = new NumberCondition<Long>(
-							ServiceUtils.DATE_FORMAT.parse(endDateStr)
+							DateTimeUtils.DATE_FORMAT.parse(endDateStr)
 									.getTime() + 86400000l,
 							RelationalOperator.LESS_THAN_OR_EQUAL_TO,
 							dateAdapter);
@@ -390,12 +395,6 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			});
 
 			return objs;
-			// DairyDemoResourceManager.INSTANCE.loadDairyResources();
-			// return DairyDemoResourceManager.INSTANCE
-			// .getObjectsFromDairyModel(AnimalHealthRequest.class);
-//		} catch (CoreException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -405,37 +404,34 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 	@Override
 	protected RecordDialog getListDialog(int dialogStyle) {
-		return new ServiceRequestListDialog(dialogStyle, new Shell(), this.getSelectedEObject());
+		return new ServiceRequestListDialog(dialogStyle, new Shell(), this
+				.getSelectedEObject());
 	}
 
 	@Override
-	protected void doCreation() {
-		
-		//DairyDemoResourceManager.INSTANCE.getObjectsFromDairyModel(Dairy.class);
-//		if (getContainer() instanceof Dairy) {
-//			Dairy dairy = (Dairy) getContainer();
-//			dairy.getAnimalHealthRequests().add(
-//					(AnimalHealthRequest) this.getWorkingCopy());
-//		}
-//		try {
-//			DairyDemoResourceManager.INSTANCE.saveDairyResource();
-//		} catch (IllegalArgumentException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
+	protected void configureFilterRidgets() {
+		super.configureFilterRidgets();
+		SimpleFormattedDateBean startBean = new SimpleFormattedDateBean();
+		// By default, it is the first day of this month
+		startBean.setDate(DateTimeUtils.getFirstDayOfMonth(Calendar
+				.getInstance().getTime()));
+		// Start date
+		LookupControllerDelegate delegate = new LookupControllerDelegate(this,
+				PojoObservables.observeValue(startBean, "date"),
+				ServiceRequestView.START_DATE_TEXT,
+				ServiceRequestView.START_DATE_BUTTON);
+		delegate.configureRidgets();
+		// End date
+		SimpleFormattedDateBean endDateBean = new SimpleFormattedDateBean();
+		// By default, it is the first day of this month
+		endDateBean.setDate(DateTimeUtils.getLastDayOfMonth(Calendar
+				.getInstance().getTime()));
+		// Start date
+		LookupControllerDelegate endDelegate = new LookupControllerDelegate(
+				this, PojoObservables.observeValue(endDateBean, "date"),
+				ServiceRequestView.END_DATE_TEXT,
+				ServiceRequestView.END_DATE_BUTTON);
+		endDelegate.configureRidgets();
 	}
-
-	@Override
-	protected void doSave() {
-		super.doSave();
-		// Following statment is temp workround since DairyDemoResourceManager doesn't work for Requests package
-		ServiceRequestResourceManager.INSTANCE.save();
-	}
-	
-	
 
 }

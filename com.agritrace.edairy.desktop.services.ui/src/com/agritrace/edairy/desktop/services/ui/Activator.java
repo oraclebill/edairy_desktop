@@ -1,13 +1,14 @@
 package com.agritrace.edairy.desktop.services.ui;
 
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends DesktopBaseActivator {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.services.ui"; //$NON-NLS-1$
