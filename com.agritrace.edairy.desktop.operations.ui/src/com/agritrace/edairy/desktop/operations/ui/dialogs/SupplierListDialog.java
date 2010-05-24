@@ -25,9 +25,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 
 /**
  * Supplier list dialog to add/view/edit supplier
@@ -55,7 +57,7 @@ public class SupplierListDialog extends RecordDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(400, 500);
+		newShell.setSize(500, 580);
 		if (this.getDialogStyle() == DIALOG_STYLE_NEW) {
 			this.setTitle("Add Supplier");
 		} else if (this.getDialogStyle() == DIALOG_STYLE_VIEW) {
@@ -124,6 +126,7 @@ public class SupplierListDialog extends RecordDialog {
 				false).span(2, 1).applyTo(companyContactGroup);
 		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(
 				companyContactGroup);
+		new AddressGroupWidget(companyContactGroup);
 	}
 
 	protected AbstractWindowController createController() {
@@ -190,6 +193,12 @@ public class SupplierListDialog extends RecordDialog {
 						DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION
 								.getName());
 				desc.updateFromModel();
+				
+				// Configure address group
+				AddressGroupWidgetController addressGroupController  = new AddressGroupWidgetController(getController());
+				addressGroupController.setInputModel(supplier.getLocation());
+				addressGroupController.updateBinding();
+				
 
 			}
 

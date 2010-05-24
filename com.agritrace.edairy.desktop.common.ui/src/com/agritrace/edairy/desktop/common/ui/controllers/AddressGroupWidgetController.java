@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -33,7 +32,7 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	private ITextRidget postalCodeTxt;
 
 
-	public AddressGroupWidgetController(SubModuleController controller){
+	public AddressGroupWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}
