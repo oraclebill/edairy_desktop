@@ -110,6 +110,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" eType="#//Session"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" eType="#//Route"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="common.ecore#//Company">
     <eOperations name="getMemberFarms" lowerBound="1">

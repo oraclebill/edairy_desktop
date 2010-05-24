@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.riena.beans.common.AbstractBean;
 
 import com.agritrace.edairy.desktop.common.ui.Activator;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
 public class SimpleFormattedDateBean extends AbstractBean {
 
@@ -18,14 +19,11 @@ public class SimpleFormattedDateBean extends AbstractBean {
 
     private SimpleDateFormat dateFormat;
 
-    public static String FORMATTED_DATE_VALUE_PROP = "formattedDate";
+	public static String FORMATTED_DATE_VALUE_PROP = "formattedDate";
 
     public static String DATE_PROR = "date";
     
-    /**
-     * note: MM is format of month, mm is format of minutes
-     */
-    private static final String STD_DATE_FORMAT = "MM/dd/yyyy"; 
+    private static final String STD_DATE_FORMAT = DateTimeUtils.DEFAULT_DATE_PATTERN; 
 
     public SimpleFormattedDateBean() {
 	this(null);

@@ -14,7 +14,6 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 
 /**
@@ -25,8 +24,17 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
  */
 public abstract class AbstractRecordListController extends SubModuleController {
 
+
 	private EObject selectedEObject;
 	private EObject container;
+	private ISelectionListener selectionListener = new ISelectionListener() {
+
+		@Override
+		public void ridgetSelected(SelectionEvent event) {
+
+			itemSelected(event);
+		}
+	};
 
 	public AbstractRecordListController() {
 		super();
@@ -126,14 +134,7 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		// Configure Table Widgets
 		ITableRidget tableRidget = this.getRidget(ITableRidget.class,
 				AbstractRecordListView.BIND_ID_TABLE);
-		tableRidget.addSelectionListener(new ISelectionListener() {
-
-			@Override
-			public void ridgetSelected(SelectionEvent event) {
-
-				itemSelected(event);
-			}
-		});
+		tableRidget.addSelectionListener(selectionListener);
 		tableRidget.addDoubleClickListener(new IActionListener() {
 
 			@Override
@@ -191,35 +192,17 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		}
 	}
 
+
 	private void popUpDialog(int dialogStyle) {
 		RecordDialog dialog = getListDialog(dialogStyle);
 		int ret = dialog.open();
 		if (ret == Window.OK) {
-			if (dialog.getDialogStyle() != RecordDialog.DIALOG_STYLE_NEW
-					&& this.getSelectedEObject() != null) {
-				// Editing
-				doSave();
-			
-			} else if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
-
-				// Create a new
-				doCreation();
-				doSave();
-
-			}
 			ITableRidget tableRidget = getRidget(ITableRidget.class,
 					AbstractRecordListView.BIND_ID_TABLE);
 			tableRidget.updateFromModel();
 		}
 
 	}
-	
-	protected void doSave()
-	{
-		DairyDemoResourceManager.INSTANCE.store(getSelectedEObject());
-	}
-
-	protected abstract void doCreation();
 
 	protected abstract RecordDialog getListDialog(int dialogStyle);
 

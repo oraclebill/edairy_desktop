@@ -1,36 +1,27 @@
 package com.agritrace.edairy.desktop.services.ui.views;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
-import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
+import com.agritrace.edairy.desktop.common.ui.controls.LookupComposite;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.Activator;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 
+/**
+ * Service request view
+ * 
+ * @author Hui(Spark) Wan
+ * 
+ */
 public class ServiceRequestView extends AbstractRecordListView {
 
 	public static final String ID = "animalhealth.services.edit.view";
 
-	public static final String STARTE_DATE = "filter.start.date";
-	public static final String END_DATE = "filter.end.date";
 	/**
 	 * Binding ID for All Request Types Radio Button Binding ID
 	 */
@@ -45,12 +36,17 @@ public class ServiceRequestView extends AbstractRecordListView {
 	public static final String REQUEST_TYPE_INSEMINATION = "filter.type.insemination";
 	public static final String MEMBER_LOOKUP_TEXT = "filter.member.text";
 	public static final String FARM_LOOKUP_TEXT = "filter.farm.text";
-	public static final String SEARCH_ICON_PATH = "icons/ext/search16.png";
+	public static final String MEMBER_LOOKUP_BUTTON = "filter.member.button";
+	public static final String FARM_LOOKUP_BUTTON = "filter.farm.button";
+	public static final String START_DATE_TEXT = "start.date.text";
+	public static final String START_DATE_BUTTON = "start.date.button";
+	public static final String END_DATE_TEXT = "end.date.text";
+	public static final String END_DATE_BUTTON = "end.date.button";
 
 	@Override
 	protected void createFilterCondtions(Composite comp) {
 		super.createFilterCondtions(comp);
-		
+
 		// Date Range
 		createDateRange(comp);
 
@@ -64,96 +60,115 @@ public class ServiceRequestView extends AbstractRecordListView {
 	private void createMemberFarm(Composite parent) {
 		Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
-				.numColumns(2).create());
-		GridDataFactory.swtDefaults().grab(true, true).applyTo(comp);
+				.numColumns(3).create());
+		GridDataFactory.swtDefaults().grab(true, true).align(SWT.BEGINNING,
+				SWT.BEGINNING).applyTo(comp);
+		// Create farm/member lookup
+		LookupComposite farmLookup = new LookupComposite("Farm Lookup",
+				Activator.getDefault().getImageRegistry().get(
+						Activator.FARM_SEARCH_ICON), FARM_LOOKUP_TEXT,
+				FARM_LOOKUP_BUTTON);
+		farmLookup.createSection(comp);
 
-		// Member Lookup
-		createMemberLookup(comp);
-
-		// Create farm lookup
-		createFarmLookup(comp);
+		LookupComposite memberLookup = new LookupComposite("Member Lookup",
+				Activator.getDefault().getImageRegistry().get(
+						Activator.MEMBER_SEARCH_ICON), MEMBER_LOOKUP_TEXT,
+				MEMBER_LOOKUP_BUTTON);
+		memberLookup.createSection(comp);
 
 	}
 
 	private void createDateRange(Composite parent) {
 		// Creates Date Range control
 		UIControlsFactory.createLabel(parent, "Date Range");
-
 		Composite startDateComp = UIControlsFactory.createComposite(parent);
 		GridLayout layout = new GridLayout(3, false);
 		startDateComp.setLayout(layout);
 		startDateComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		UIControlsFactory.createLabel(startDateComp, "Start");
-		final Text startDateText = UIControlsFactory.createText(startDateComp, SWT.BORDER,
-				STARTE_DATE);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
-				false).applyTo(startDateText);
-		// Default start time is the first day of this month
-		startDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
-				.getFirstDayOfMonth(Calendar.getInstance().getTime())));
+		// Create Start Date lookup
+		LookupComposite startDateLookup = new LookupComposite("Start",
+				Activator.getDefault().getImageRegistry().get(
+						Activator.CALENDAR_ICON), START_DATE_TEXT,
+				START_DATE_BUTTON);
+		startDateLookup.createSection(startDateComp);
 
-		Button calendarButton = new Button(startDateComp, SWT.PUSH);
-		Image calendar = Activator.getImage(ImageRegistry.calendar);
-		calendarButton.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
-				17, 16).applyTo(calendarButton);
-		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
-
-		calendarButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(
-						SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						startDateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
-					Date selectedDate = (Date) calDialog.getController()
-							.getContext(SimpleFormattedDateBean.DATE_PROR);
-					SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					startDateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
+		// UIControlsFactory.createLabel(startDateComp, "Start");
+		// final Text startDateText =
+		// UIControlsFactory.createText(startDateComp,
+		// SWT.BORDER, STARTE_DATE);
+		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
+		// false).applyTo(startDateText);
+		// // Default start time is the first day of this month
+		// startDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
+		// .getFirstDayOfMonth(Calendar.getInstance().getTime())));
+		//
+		// Button calendarButton = new Button(startDateComp, SWT.PUSH);
+		// Image calendar = Activator.getImage(ImageRegistry.calendar);
+		// calendarButton.setImage(calendar);
+		// GridDataFactory.swtDefaults().align(SWT.BEGINNING,
+		// SWT.BEGINNING).hint(
+		// 17, 16).applyTo(calendarButton);
+		// // addUIControl(calendarButton,ViewWidgetId.calendarButton);
+		//
+		// calendarButton.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
+		// calDialog.getController().setContext(
+		// SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+		// startDateText.getText());
+		//
+		// if (calDialog.open() == AbstractWindowController.OK) {
+		// Date selectedDate = (Date) calDialog.getController()
+		// .getContext(SimpleFormattedDateBean.DATE_PROR);
+		// SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+		// bean.setDate(selectedDate);
+		// startDateText.setText(bean.getFormattedDate());
+		// }
+		// }
+		// });
 
 		Composite endDateComp = UIControlsFactory.createComposite(parent);
 		endDateComp.setLayout(GridLayoutFactory.swtDefaults().numColumns(3)
 				.margins(0, 0).create());
 		endDateComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		UIControlsFactory.createLabel(endDateComp, "End");
-		final Text endDateText = UIControlsFactory.createText(endDateComp, SWT.READ_ONLY
-				| SWT.BORDER, END_DATE);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
-				false).applyTo(endDateText);
-		endDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
-				.getLastDayOfMonth(Calendar.getInstance().getTime())));
-
-		Button calendarButton2 = new Button(endDateComp, SWT.PUSH);
-		calendarButton2.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
-				17, 16).applyTo(calendarButton2);
-		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
-
-		calendarButton2.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(
-						SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						endDateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
-					Date selectedDate = (Date) calDialog.getController()
-							.getContext(SimpleFormattedDateBean.DATE_PROR);
-					SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					endDateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
+		LookupComposite endDateLookup = new LookupComposite("End", Activator
+				.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON),
+				END_DATE_TEXT, END_DATE_BUTTON);
+		endDateLookup.createSection(endDateComp);
+		// UIControlsFactory.createLabel(endDateComp, "End");
+		// final Text endDateText = UIControlsFactory.createText(endDateComp,
+		// SWT.READ_ONLY | SWT.BORDER, END_DATE);
+		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
+		// false).applyTo(endDateText);
+		// endDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
+		// .getLastDayOfMonth(Calendar.getInstance().getTime())));
+		//
+		// Button calendarButton2 = new Button(endDateComp, SWT.PUSH);
+		// calendarButton2.setImage(calendar);
+		// GridDataFactory.swtDefaults().align(SWT.BEGINNING,
+		// SWT.BEGINNING).hint(
+		// 17, 16).applyTo(calendarButton2);
+		// // addUIControl(calendarButton,ViewWidgetId.calendarButton);
+		//
+		// calendarButton2.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
+		// calDialog.getController().setContext(
+		// SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+		// endDateText.getText());
+		//
+		// if (calDialog.open() == AbstractWindowController.OK) {
+		// Date selectedDate = (Date) calDialog.getController()
+		// .getContext(SimpleFormattedDateBean.DATE_PROR);
+		// SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+		// bean.setDate(selectedDate);
+		// endDateText.setText(bean.getFormattedDate());
+		// }
+		// }
+		// });
 
 	}
 
@@ -172,40 +187,4 @@ public class ServiceRequestView extends AbstractRecordListView {
 		UIControlsFactory.createButtonRadio(requestTypeComp, "Insemination",
 				REQUEST_TYPE_INSEMINATION);
 	}
-
-	private void createMemberLookup(Composite parent) {
-		// Member lookup
-		UIControlsFactory.createLabel(parent, "Member Lookup");
-		Composite comp = UIControlsFactory.createComposite(parent);
-		GridLayout layout = new GridLayout(2, false);
-		comp.setLayout(layout);
-		comp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		Text memberText = UIControlsFactory.createText(comp, SWT.None,
-				MEMBER_LOOKUP_TEXT);
-		memberText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		// Search Button
-		ImageButton memberSearchButton = UIControlsFactory
-				.createImageButton(comp, SWT.None);
-		memberSearchButton.setImage(Activator.getImage(SEARCH_ICON_PATH));
-
-
-	}
-
-	private void createFarmLookup(Composite parent) {
-		// Farm lookup
-		UIControlsFactory.createLabel(parent, "Farm Lookup");
-		Composite comp = UIControlsFactory.createComposite(parent);
-		comp.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-		GridDataFactory.swtDefaults().grab(true, true).applyTo(comp);
-		Text farmText = UIControlsFactory.createText(comp, SWT.None,
-				FARM_LOOKUP_TEXT);
-		farmText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		// Search Button
-		ImageButton farmLookupButton = UIControlsFactory.createImageButton(comp, SWT.None);
-		farmLookupButton.setImage(Activator.getImage(SEARCH_ICON_PATH));
-		//farmLookupButton.addListener(SWT.Selection, listener);
-
-	}
-	
-
 }
