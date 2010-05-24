@@ -24,7 +24,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getAudited()
- * @model
+ * @model extendedMetaData="name='Audited' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@Embeddable'"
  * @generated
  */
 public interface Audited extends EObject {

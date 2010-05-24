@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLegalName <em>Legal Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getCompanyName <em>Company Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods <em>Contact Methods</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}</li>
  * </ul>
  * </p>
  *

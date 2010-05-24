@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getStatutoryLocation()
- * @model
+ * @model extendedMetaData="name='StatutoryLocation' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@Embeddable'"
  * @generated
  */
 public interface StatutoryLocation extends EObject {
@@ -36,7 +37,7 @@ public interface StatutoryLocation extends EObject {
 	 * @return the value of the '<em>Land Reference Number</em>' attribute.
 	 * @see #setLandReferenceNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getStatutoryLocation_LandReferenceNumber()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getLandReferenceNumber();

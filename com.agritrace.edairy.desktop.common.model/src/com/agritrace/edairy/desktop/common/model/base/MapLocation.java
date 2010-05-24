@@ -22,7 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation()
- * @model
+ * @model extendedMetaData="name='MapLocation' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@Embeddable'"
  * @generated
  */
 public interface MapLocation extends EObject {
@@ -37,7 +38,7 @@ public interface MapLocation extends EObject {
 	 * @return the value of the '<em>Longitude</em>' attribute.
 	 * @see #setLongitude(double)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation_Longitude()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	double getLongitude();
@@ -63,7 +64,7 @@ public interface MapLocation extends EObject {
 	 * @return the value of the '<em>Latitude</em>' attribute.
 	 * @see #setLatitude(double)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation_Latitude()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	double getLatitude();

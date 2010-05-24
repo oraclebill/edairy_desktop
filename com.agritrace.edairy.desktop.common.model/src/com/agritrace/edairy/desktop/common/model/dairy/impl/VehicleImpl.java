@@ -253,7 +253,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CAPACITY_IN_TONNES_EDEFAULT = null;
+	protected static final double CAPACITY_IN_TONNES_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
@@ -263,7 +263,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected String capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
+	protected double capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
@@ -529,7 +529,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCapacityInTonnes() {
+	public double getCapacityInTonnes() {
 		return capacityInTonnes;
 	}
 
@@ -538,8 +538,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCapacityInTonnes(String newCapacityInTonnes) {
-		String oldCapacityInTonnes = capacityInTonnes;
+	public void setCapacityInTonnes(double newCapacityInTonnes) {
+		double oldCapacityInTonnes = capacityInTonnes;
 		capacityInTonnes = newCapacityInTonnes;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CAPACITY_IN_TONNES, oldCapacityInTonnes, capacityInTonnes));
@@ -682,7 +682,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 				setDominantColour((String)newValue);
 				return;
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				setCapacityInTonnes((String)newValue);
+				setCapacityInTonnes((Double)newValue);
 				return;
 			case DairyPackage.VEHICLE__YEAR:
 				setYear((String)newValue);
@@ -774,7 +774,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				return DOMINANT_COLOUR_EDEFAULT == null ? dominantColour != null : !DOMINANT_COLOUR_EDEFAULT.equals(dominantColour);
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				return CAPACITY_IN_TONNES_EDEFAULT == null ? capacityInTonnes != null : !CAPACITY_IN_TONNES_EDEFAULT.equals(capacityInTonnes);
+				return capacityInTonnes != CAPACITY_IN_TONNES_EDEFAULT;
 			case DairyPackage.VEHICLE__YEAR:
 				return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
 			case DairyPackage.VEHICLE__DRIVER:

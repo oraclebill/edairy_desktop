@@ -169,13 +169,6 @@
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionType/CREDIT"/>
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionType/DEBIT"/>
       </genEnums>
-      <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionSource">
-        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/StoreCredit"/>
-        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/AnimalHealthServices"/>
-        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/ShareRecovery"/>
-        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/CashPayment"/>
-        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/Other"/>
-      </genEnums>
       <genClasses ecoreClass="dairy.ecore#//account/Account">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Account/accountId"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -276,12 +269,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/contactMethods"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//Company">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contacts"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/legalName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/companyName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/phoneNumber"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/location"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contactMethods"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contacts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/location"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//DescriptiveLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//DescriptiveLocation/directions"/>
