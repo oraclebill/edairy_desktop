@@ -57,7 +57,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
 
-	public MemberContainerWidgetController(SubModuleController controller){
+	public MemberContainerWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}

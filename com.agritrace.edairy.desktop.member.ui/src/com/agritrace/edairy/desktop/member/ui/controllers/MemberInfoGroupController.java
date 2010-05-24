@@ -28,7 +28,7 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 
 	
 	
-	public MemberInfoGroupController(SubModuleController controller){
+	public MemberInfoGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}

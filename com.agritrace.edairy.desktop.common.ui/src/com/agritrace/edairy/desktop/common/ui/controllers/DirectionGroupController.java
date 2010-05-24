@@ -17,7 +17,7 @@ public class DirectionGroupController implements WidgetController {
 	private ITextRidget landmarkTxt;
 	private ITextRidget directionsTxt;
 	
-	public DirectionGroupController(SubModuleController controller){
+	public DirectionGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}

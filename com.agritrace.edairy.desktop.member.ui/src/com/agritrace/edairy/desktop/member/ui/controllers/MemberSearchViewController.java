@@ -1,15 +1,25 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.MemberRegisterDialog;
 
 public class MemberSearchViewController extends SubModuleController{
 
@@ -18,6 +28,7 @@ public class MemberSearchViewController extends SubModuleController{
 	private Dairy dairy;
 	private final String[] memberPropertyNames = { "memberId", "member", "status", "member",	"account", "account", "account" };
 	private final String[] memberColumnHeaders = { "ID", "Name", "Status", "Phone", "Milk Collection","Monthly Credit Sales", "Credit Balance" };
+	private List<Membership> membershipList = new ArrayList<Membership>();
 
 	@Override
 	public void configureRidgets() {
@@ -34,7 +45,8 @@ public class MemberSearchViewController extends SubModuleController{
 			loadDairy();
 		}
 		if(dairy != null){
-			memberList.bindToModel(new WritableList(dairy.getMemberships(), Membership.class), Membership.class, memberPropertyNames, memberColumnHeaders);
+			membershipList = dairy.getMemberships();
+			memberList.bindToModel(new WritableList(membershipList, Membership.class), Membership.class, memberPropertyNames, memberColumnHeaders);
 			memberList.setColumnFormatter(1, new ColumnFormatter(){
 				public String getText(Object element) {
 					if(element instanceof Membership){
@@ -77,6 +89,37 @@ public class MemberSearchViewController extends SubModuleController{
 				}
 			});
 			memberList.updateFromModel();
+			getRidget(IActionRidget.class,ViewWidgetId.MEMBERLIST_ADD).addListener(new IActionListener() {
+
+				@Override
+				public void callback() {
+					// TODO Auto-generated method stub
+
+				}
+			});
+			getRidget(IActionRidget.class,ViewWidgetId.MEMBERLIST_VIEW).addListener(new IActionListener() {
+
+				@Override
+				public void callback() {
+					Membership selectedMember = (Membership)memberList.getSelection().get(0);
+					int index = membershipList.indexOf(selectedMember);
+					final MemberRegisterDialog memberDialog = new MemberRegisterDialog();
+					memberDialog.getController().setContext("selectedMember",
+							selectedMember);
+
+					int returnCode  = memberDialog.open();
+					if (returnCode == AbstractWindowController.OK) {
+						selectedMember= (Membership) memberDialog.getController().getContext(
+								"selectedMember");
+						membershipList.set(index,selectedMember);
+						memberList.updateFromModel();
+					}else{
+//						System.out.println("return code "+returnCode);
+					}
+				}
+
+			});
+
 
 		}
 

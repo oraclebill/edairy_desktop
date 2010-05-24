@@ -74,7 +74,7 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 	public static final String ALL_SPECIES="All Species";
 	public static final String ALL_STATUS="All Status";
 
-	public MemberLiveStockController(SubModuleController controller){
+	public MemberLiveStockController(IController controller){
 		this.controller = controller;
 		configue();
 	}

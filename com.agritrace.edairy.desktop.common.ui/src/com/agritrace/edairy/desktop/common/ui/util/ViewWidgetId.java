@@ -154,6 +154,8 @@ public class ViewWidgetId {
     //member list view
     public static final String MEMBERLIST_SEARCHTEXT = "memberList_searchText";
     public static final String MEMBERLIST_MEMBERTABLE="memberList_table";
+    public static final String MEMBERLIST_ADD="memberList_add";
+    public static final String MEMBERLIST_VIEW="memberList_view";
     
     //member directions group
     public static final String LANDMARK_TEXT = "landMarkText";

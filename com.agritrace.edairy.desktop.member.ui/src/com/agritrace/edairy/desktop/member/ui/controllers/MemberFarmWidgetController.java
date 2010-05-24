@@ -48,7 +48,7 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 
 	private final List<Farm> farms = new ArrayList<Farm>();
 
-	public MemberFarmWidgetController(SubModuleController controller){
+	public MemberFarmWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}

@@ -212,7 +212,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 
 	calendarButton = new Button(dialogArea, SWT.PUSH);
-	final Image calendar = Activator.getImage(ImageRegistry.calendar);
+	final Image calendar = Activator.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON);
 
 	calendarButton.setImage(calendar);
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
@@ -280,24 +280,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	});
 	//
 	//
-	UIControlsFactory.createLabel(dialogArea, "Animal Identifies:");
-	final Combo identifiersCombo = UIControlsFactory.createCombo(dialogArea);
-	final ComboViewer identifiersViewer = new ComboViewer(identifiersCombo);
-	identifiersViewer.setContentProvider(new ArrayContentProvider());
-	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false)
-		.applyTo(identifiersViewer.getControl());
-	//
-	final Button addIdentiferButton = UIControlsFactory.createButton(dialogArea, "...");
-	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(addIdentiferButton);
-
-	UIControlsFactory.createLabel(dialogArea, "Past Owners:");
-	final Combo ownersCombo = UIControlsFactory.createCombo(dialogArea);
-	final ComboViewer ownersViewer = new ComboViewer(ownersCombo);
-	ownersViewer.setContentProvider(new ArrayContentProvider());
-	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(ownersViewer.getControl());
-
-	final Button addOwnersButton = UIControlsFactory.createButton(dialogArea, "...");
-	GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addOwnersButton);
+	
 
 	UIControlsFactory.createLabel(dialogArea, "Insurance Number:");
 	GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(dateLabel);
@@ -311,7 +294,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	final Combo rearingModeCombo = UIControlsFactory.createCombo(dialogArea);
 	final ComboViewer rearingModeViewer = new ComboViewer(rearingModeCombo);
 	rearingModeViewer.setContentProvider(new ArrayContentProvider());
-	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false)
+	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1)
 		.applyTo(rearingModeViewer.getControl());
 	rearingModeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
@@ -323,7 +306,17 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	    }
 	});
 	rearingModeViewer.setInput(RearingMode.VALUES);
-
+	
+	Label animal_identifies = UIControlsFactory.createLabel(dialogArea, "Animal Identifies:");
+	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.TOP).grab(true, false).applyTo(animal_identifies);
+	final Text identifiersText = UIControlsFactory.createText(dialogArea,SWT.MULTI|SWT.H_SCROLL|SWT.V_SCROLL);
+	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2,1).applyTo(identifiersText);
+	
+	Label owners_label = 	UIControlsFactory.createLabel(dialogArea, "Past Owners:");
+	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.TOP).grab(true,false).applyTo(owners_label);
+	final Text ownersText = UIControlsFactory.createText(dialogArea,SWT.MULTI|SWT.H_SCROLL|SWT.V_SCROLL);
+	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2,1).applyTo(ownersText);
+	
 	final Group animalType = UIControlsFactory.createGroup(dialogArea, "Animal Type");
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(animalType);
 	animalType.setLayout(new GridLayout(3, false));
@@ -339,6 +332,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	breedText = UIControlsFactory.createText(animalType, SWT.SINGLE | SWT.BORDER);
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1).applyTo(breedText);
 	breedText.addFocusListener(this);
+	//
 
 	final Group sireType = UIControlsFactory.createGroup(dialogArea, "Sire Type");
 	GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(sireType);

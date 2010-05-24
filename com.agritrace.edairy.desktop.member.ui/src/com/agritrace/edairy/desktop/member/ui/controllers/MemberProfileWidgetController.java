@@ -24,7 +24,7 @@ public class MemberProfileWidgetController implements WidgetController {
 	private MapGroupController mapGroup;
 	private CommunicationGroupController communicationGroup;
 
-	public MemberProfileWidgetController(SubModuleController controller) {
+	public MemberProfileWidgetController(IController controller) {
 		this.controller = controller;
 		infoGroup = new MemberInfoGroupController(controller);
 		addressGroup = new AddressGroupWidgetController(controller);

@@ -57,7 +57,7 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 	private IToggleButtonRidget rejected;
 	private IToggleButtonRidget suspended;
 
-	public MemberCollectionRecrodsWidgetController(SubModuleController controller){
+	public MemberCollectionRecrodsWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}
