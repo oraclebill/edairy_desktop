@@ -291,6 +291,17 @@ public interface AccountPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource <em>Transaction Source</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getTransactionSource()
+	 * @generated
+	 */
+	int TRANSACTION_SOURCE = 4;
+
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -529,6 +540,16 @@ public interface AccountPackage extends EPackage {
 	EEnum getTransactionType();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource <em>Transaction Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Transaction Source</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
+	 * @generated
+	 */
+	EEnum getTransactionSource();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -733,6 +754,16 @@ public interface AccountPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TRANSACTION_TYPE = eINSTANCE.getTransactionType();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource <em>Transaction Source</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getTransactionSource()
+		 * @generated
+		 */
+		EEnum TRANSACTION_SOURCE = eINSTANCE.getTransactionSource();
 
 	}
 

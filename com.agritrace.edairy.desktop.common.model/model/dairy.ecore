@@ -110,8 +110,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" eType="#//Session"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="route" eType="#//Route"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="common.ecore#//Company">
     <eOperations name="getMemberFarms" lowerBound="1">
@@ -260,6 +258,13 @@
           eType="#//account/BalancePoint"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="asOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TransactionSource">
+      <eLiterals name="StoreCredit" literal="Store Credit"/>
+      <eLiterals name="AnimalHealthServices" value="1" literal="Animal Health Services"/>
+      <eLiterals name="ShareRecovery" value="2" literal="Share Recovery"/>
+      <eLiterals name="CashPayment" value="3" literal="Cash Payment"/>
+      <eLiterals name="Other" value="4" literal="Other"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
