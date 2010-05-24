@@ -114,7 +114,7 @@ public class ViewWidgetId {
     public static final String LIVESTOCK_FILTER_ENDDATE_BUTTON = "LiveStock_END_Date_Button";
     public static final String LIVESTOCK_FarmCombo = "farmFilter";
     public static final String LIVESTOCK_ContainerSpeciesFilter = "speciesFilter";
-    public static final String LIVESTOCK_ContainerBreedFilter = "breedFilter";
+    public static final String LIVESTOCK_ContainerStatusFilter = "liveStock_Status";
     public static final String LIVESTOCK_ContainerFilterButton = "LiveStock_Filter";
     public static final String LIVESTOCK_ContainerShowAllButton = "LiveStock_Showall";
 

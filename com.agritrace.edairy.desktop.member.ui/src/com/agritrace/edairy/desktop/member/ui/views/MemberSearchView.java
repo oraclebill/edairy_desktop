@@ -5,8 +5,6 @@ import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
@@ -23,14 +21,10 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
@@ -215,132 +209,6 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 		return details;
 	}
-
-
-
-	private void createLivestockInfoTab(Composite livestockComposite) {
-
-		// fitler panel
-		final Composite filterPanel = UIControlsFactory.createComposite(livestockComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(filterPanel);
-		filterPanel.setLayout(new GridLayout(1, false));
-
-		//		createDataRangeSearch(filterPanel, "Acqusion Date Range", ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
-		//				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE);
-
-		final Label emptyLabel = UIControlsFactory.createLabel(filterPanel, "Filter By farm:");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(emptyLabel);
-
-		final Combo farmCombo = UIControlsFactory.createCombo(filterPanel, ViewWidgetId.LIVESTOCK_FarmCombo);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmCombo);
-
-		final Label typeLabel = UIControlsFactory.createLabel(filterPanel, "Filter By Species:");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(typeLabel);
-
-		final Text speciesText = UIControlsFactory.createText(filterPanel, SWT.BORDER | SWT.SINGLE,
-				ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(speciesText);
-
-		UIControlsFactory.createLabel(filterPanel, "Filter By Breed:");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(typeLabel);
-
-		final Text breedText = UIControlsFactory.createText(filterPanel, SWT.BORDER | SWT.SINGLE,
-				ViewWidgetId.LIVESTOCK_ContainerBreedFilter);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(breedText);
-
-		final Button filterButton = UIControlsFactory.createButton(filterPanel, "Apply");
-		addUIControl(filterButton, ViewWidgetId.LIVESTOCK_ContainerFilterButton);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterButton);
-
-		final Button showAllButton = UIControlsFactory.createButton(filterPanel, "Show All");
-		addUIControl(showAllButton, ViewWidgetId.LIVESTOCK_ContainerShowAllButton);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(showAllButton);
-
-		final Composite containerPanel = UIControlsFactory.createComposite(livestockComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerPanel);
-		final Table table = UIControlsFactory.createTable(containerPanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.LIVESTOCK_TABLE);
-		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
-
-		final TableColumn columnID = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnFarm = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnPurpose = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnName = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnSpecies = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnBreed = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnAcquisionDate = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnAcquisionType = new TableColumn(table, SWT.LEFT);
-
-		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnID, new ColumnWeightData(9));
-		layout.setColumnData(columnFarm, new ColumnWeightData(13));
-		layout.setColumnData(columnPurpose, new ColumnWeightData(13));
-		layout.setColumnData(columnName, new ColumnWeightData(13));
-		layout.setColumnData(columnSpecies, new ColumnWeightData(13));
-		layout.setColumnData(columnBreed, new ColumnWeightData(13));
-		layout.setColumnData(columnAcquisionDate, new ColumnWeightData(13));
-		layout.setColumnData(columnAcquisionType, new ColumnWeightData(13));
-		containerPanel.setLayout(layout);
-
-		final Composite addbuttonsPanel = UIControlsFactory.createComposite(livestockComposite, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, true).applyTo(addbuttonsPanel);
-		addbuttonsPanel.setLayout(new GridLayout(1, false));
-
-		final Button addButton = UIControlsFactory
-		.createButton(addbuttonsPanel, ADD_BUTTON, ViewWidgetId.LIVESTOCK_ADD);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(true, false).applyTo(addButton);
-
-		final Button removeButton = UIControlsFactory.createButton(addbuttonsPanel, REMOVE_BUTTON,
-				ViewWidgetId.LIVESTOCK_Remove);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
-
-	}
-
-
-	public void createFarmInfoTab(Composite parent) {
-
-		final Composite tablePanel = UIControlsFactory.createComposite(parent, SWT.NULL);
-		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		final Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.FARM_TABLE);
-		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
-
-		final TableColumn columnId = new TableColumn(table, SWT.LEFT);
-		columnId.setText("Id");
-		final TableColumn columnName = new TableColumn(table, SWT.LEFT);
-		columnName.setText("Name");
-		final TableColumn columnLocation = new TableColumn(table, SWT.LEFT);
-		columnLocation.setText("Location");
-		final TableColumn columnAnimal = new TableColumn(table, SWT.LEFT);
-		columnAnimal.setText("Number of Animals");
-		final TableColumn columnCan = new TableColumn(table, SWT.LEFT);
-		columnLocation.setText("Number of Containers");
-
-		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnId, new ColumnWeightData(20));
-		layout.setColumnData(columnName, new ColumnWeightData(20));
-		layout.setColumnData(columnLocation, new ColumnWeightData(20));
-		layout.setColumnData(columnAnimal, new ColumnWeightData(20));
-		layout.setColumnData(columnCan, new ColumnWeightData(20));
-		tablePanel.setLayout(layout);
-
-		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
-		buttonsPanel.setLayout(new GridLayout(2, false));
-
-		final Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.FARM_ADD);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
-
-		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON,
-				ViewWidgetId.FARM_Remove);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(removeButton);
-
-	}
-
-
 
 	public class MemberSearchNodeListener extends SimpleNavigationNodeAdapter {
 
