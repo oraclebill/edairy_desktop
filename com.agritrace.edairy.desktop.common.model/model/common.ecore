@@ -1,117 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="base"
-    nsURI="http://com.agritrace.edairy.desktop.common.model/base/" nsPrefix="base">
-  <eClassifiers xsi:type="ecore:EClass" name="MapLocation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PostalLocation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="section" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="estate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="village" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="district" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="division" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="province" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="postalCode" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatutoryLocation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="landReferenceNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Audited">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="voidDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="kind" value="element"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Person">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="photo" eType="#//ImageReference"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="honorific" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="familyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="middleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalNames" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suffix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nickName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
-        eType="#//Location" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
-        eType="#//ContactMethod" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Company">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contacts" lowerBound="1"
-        upperBound="-1" eType="#//Person" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="legalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="companyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
-        eType="#//Location" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
-        eType="#//ContactMethod" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DescriptiveLocation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="directions" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="landmarks" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Location">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="postalLocation" eType="#//PostalLocation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapLocation" eType="#//MapLocation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statutoryLocation" eType="#//StatutoryLocation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="descriptiveLocation" eType="#//DescriptiveLocation"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContactMethod">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cmType" eType="#//ContactMethodType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cmValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Gender">
-    <eLiterals name="MALE"/>
-    <eLiterals name="FEMALE" value="1"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ContactMethodType">
-    <eLiterals name="EMAIL"/>
-    <eLiterals name="SMS" value="1"/>
-    <eLiterals name="PHONE" value="2"/>
-    <eLiterals name="FAX" value="3"/>
-    <eLiterals name="IM_AIM" value="4"/>
-    <eLiterals name="IM_SKYPE" value="5"/>
-    <eLiterals name="IM_MSN" value="6"/>
-    <eLiterals name="IM_GTALK" value="7"/>
-    <eLiterals name="IM_YAHOO" value="8"/>
-    <eLiterals name="IM_OTHER" value="9"/>
-    <eLiterals name="OTHER" value="10"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="UnitOfMeasure">
-    <eLiterals name="LITRE"/>
-    <eLiterals name="KILOGRAM" value="1"/>
-    <eLiterals name="UNKNOWN" value="2"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ContainerType">
-    <eLiterals name="BIN"/>
-    <eLiterals name="CAN" value="1"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="TransactionID" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.Long"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="ImageReference" instanceClassName="java.lang.String"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="base" nsURI="http://com.agritrace.edairy.desktop.common.model/base/"
+	nsPrefix="base">
+	<eClassifiers xsi:type="ecore:EClass" name="MapLocation">
+		<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+			<details key="name" value="MapLocation" />
+			<details key="kind" value="elementOnly" />
+		</eAnnotations>
+		<eAnnotations source="teneo.jpa">
+			<details key="appinfo" value="@Embeddable" />
+		</eAnnotations>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="PostalLocation">
+		<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+			<details key="name" value="PostalLocation" />
+			<details key="kind" value="elementOnly" />
+		</eAnnotations>
+		<eAnnotations source="teneo.jpa">
+			<details key="appinfo" value="@Embeddable" />
+		</eAnnotations>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="address"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="section" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="estate"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="village" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="subLocation"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="district" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="division" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="province" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="postalCode" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="StatutoryLocation">
+		<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+			<details key="name" value="StatutoryLocation" />
+			<details key="kind" value="elementOnly" />
+		</eAnnotations>
+		<eAnnotations source="teneo.jpa">
+			<details key="appinfo" value="
+			@Embeddable" />
+		</eAnnotations>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="landReferenceNumber" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Audited">
+		<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+			<details key="name" value="Audited" />
+			<details key="kind" value="elementOnly" />
+		</eAnnotations>
+		<eAnnotations source="teneo.jpa">
+			<details key="appinfo" value="@Embeddable" />
+		</eAnnotations>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdated"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="voidDate"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+			<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+				<details key="kind" value="element" />
+			</eAnnotations>
+		</eStructuralFeatures>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Person">
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="photo" eType="#//ImageReference" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="honorific"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="familyName"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="middleName"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalNames"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="suffix"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="nickName"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1" eType="#//Location"
+			containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
+			eType="#//ContactMethod" containment="true" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Company">
+		<eStructuralFeatures xsi:type="ecore:EReference" name="contacts" lowerBound="1" upperBound="-1"
+			eType="#//Person" containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="legalName"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="companyName"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1" eType="#//Location"
+			containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
+			eType="#//ContactMethod" containment="true" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="DescriptiveLocation">
+		<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+			<details key="name" value="DescriptiveLocation" />
+			<details key="kind" value="elementOnly" />
+		</eAnnotations>
+		<eAnnotations source="teneo.jpa">
+			<details key="appinfo" value="@Embeddable" />
+		</eAnnotations>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="directions" lowerBound="1"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="landmarks"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Location">
+		<eStructuralFeatures xsi:type="ecore:EReference" name="postalLocation" eType="#//PostalLocation"
+			containment="true">
+			<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+				<details key="name" value="postalLocation" />
+				<details key="kind" value="element" />
+			</eAnnotations>
+			<eAnnotations source="teneo.jpa">
+				<details key="appinfo" value="@Embedded" />
+			</eAnnotations>
+		</eStructuralFeatures>
+		<eStructuralFeatures xsi:type="ecore:EReference" name="mapLocation" eType="#//MapLocation"
+			containment="true">
+			<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+				<details key="name" value="mapLocation" />
+				<details key="kind" value="element" />
+			</eAnnotations>
+			<eAnnotations source="teneo.jpa">
+				<details key="appinfo" value="@Embedded" />
+			</eAnnotations>
+		</eStructuralFeatures>
+		<eStructuralFeatures xsi:type="ecore:EReference" name="statutoryLocation" eType="#//StatutoryLocation"
+			containment="true">
+			<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+				<details key="name" value="statutoryLocation" />
+				<details key="kind" value="element" />
+			</eAnnotations>
+			<eAnnotations source="teneo.jpa">
+				<details key="appinfo" value="@Embedded" />
+			</eAnnotations>
+		</eStructuralFeatures>
+		<eStructuralFeatures xsi:type="ecore:EReference" name="descriptiveLocation" eType="#//DescriptiveLocation"
+			containment="true">
+			<eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+				<details key="name" value="descriptiveLocation" />
+				<details key="kind" value="element" />
+			</eAnnotations>
+			<eAnnotations source="teneo.jpa">
+				<details key="appinfo" value="@Embedded" />
+			</eAnnotations>
+		</eStructuralFeatures>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="ContactMethod">
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="cmType" eType="#//ContactMethodType" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="cmValue"
+			eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EEnum" name="Gender">
+		<eLiterals name="MALE" />
+		<eLiterals name="FEMALE" value="1" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EEnum" name="ContactMethodType">
+		<eLiterals name="EMAIL" />
+		<eLiterals name="SMS" value="1" />
+		<eLiterals name="PHONE" value="2" />
+		<eLiterals name="FAX" value="3" />
+		<eLiterals name="IM_AIM" value="4" />
+		<eLiterals name="IM_SKYPE" value="5" />
+		<eLiterals name="IM_MSN" value="6" />
+		<eLiterals name="IM_GTALK" value="7" />
+		<eLiterals name="IM_YAHOO" value="8" />
+		<eLiterals name="IM_OTHER" value="9" />
+		<eLiterals name="OTHER" value="10" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EEnum" name="UnitOfMeasure">
+		<eLiterals name="LITRE" />
+		<eLiterals name="KILOGRAM" value="1" />
+		<eLiterals name="UNKNOWN" value="2" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EEnum" name="ContainerType">
+		<eLiterals name="BIN" />
+		<eLiterals name="CAN" value="1" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EDataType" name="TransactionID" instanceClassName="java.lang.String" />
+	<eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.Long" />
+	<eClassifiers xsi:type="ecore:EDataType" name="ImageReference" instanceClassName="java.lang.String" />
 </ecore:EPackage>
