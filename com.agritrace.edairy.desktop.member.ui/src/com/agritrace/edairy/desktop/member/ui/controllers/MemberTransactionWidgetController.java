@@ -34,6 +34,7 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.Activator;
@@ -141,7 +142,7 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 					// StartDate
 					if (!"".equals(startDate)) {
 						final Condition startDateCondition = new NumberCondition<Long>(
-								ServiceUtils.DATE_FORMAT.parse(startDate).getTime(),
+								DateTimeUtils.DATE_FORMAT.parse(startDate).getTime(),
 								RelationalOperator.GREATER_THAN_OR_EQUAL_TO,
 								dateAdapter);
 
@@ -150,13 +151,13 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 								startDateCondition);
 						condtions.add(startDateAttributeCondition);
 					}
-
 				}
+				
 				// End Date
 				if (endDate != null) {
 					if (!"".equals(endDate)) {
 						final Condition endDateCondition = new NumberCondition<Long>(
-								ServiceUtils.DATE_FORMAT.parse(endDate)
+								DateTimeUtils.DATE_FORMAT.parse(endDate)
 								.getTime() + 86400000l,
 								RelationalOperator.LESS_THAN_OR_EQUAL_TO,
 								dateAdapter);
