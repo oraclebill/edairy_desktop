@@ -40,6 +40,7 @@ public class DateRangeSearchController {
 		this.endDateTxtId = endDateTxtId;
 		this.startDateButtonId = startDateButtonId;
 		this.endDateButtonId = endDateButtonId;
+		this.filter = dateFilter;
 		config();
 	}
 	
@@ -115,7 +116,20 @@ public class DateRangeSearchController {
 		this.filter = filter;
 	}
 	
+	public String getStartDate(){
+		if(startDateText != null){
+			return startDateText.getText();	
+		}
+		return "";
+		
+	}
 	
+	public String getEndDate(){
+		if(endDateText != null){
+			return endDateText.getText();	
+		}
+		return "";
+	}
 
 	
 }
