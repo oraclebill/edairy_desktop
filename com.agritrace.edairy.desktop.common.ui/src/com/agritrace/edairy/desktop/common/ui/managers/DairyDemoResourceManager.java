@@ -190,7 +190,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		// create some vehicles
 		final Vehicle v1 = DairyFactory.eINSTANCE.createVehicle();
 		v1.setAssetId(new Long(1001));
-		v1.setCapacityInTonnes("2");
+		v1.setCapacityInTonnes(2);
 		v1.setChassisNumber("23489-1");
 		final Date acquiredDate = sdf.parse("02/18/2008");
 		v1.setDateAcquired(acquiredDate);
@@ -203,7 +203,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		final Vehicle v2 = DairyFactory.eINSTANCE.createVehicle();
 		v2.setAssetId(new Long(1002));
-		v2.setCapacityInTonnes("2");
+		v2.setCapacityInTonnes(2);
 		v2.setChassisNumber("45789-1");
 		final Date acquiredDate2 = sdf.parse("07/21/2007");
 		v2.setDateAcquired(acquiredDate2);
@@ -216,7 +216,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		final Vehicle v3 = DairyFactory.eINSTANCE.createVehicle();
 		v3.setAssetId(new Long(1003));
-		v3.setCapacityInTonnes("2");
+		v3.setCapacityInTonnes(2);
 		v3.setChassisNumber("47878-1");
 		final Date acquiredDate3 = sdf.parse("07/27/2007");
 		v3.setDateAcquired(acquiredDate3);
