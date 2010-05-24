@@ -260,11 +260,11 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="TransactionSource">
-      <eLiterals name="StoreCredit" literal="Store Credit"/>
-      <eLiterals name="AnimalHealthServices" value="1" literal="Animal Health Services"/>
-      <eLiterals name="ShareRecovery" value="2" literal="Share Recovery"/>
-      <eLiterals name="CashPayment" value="3" literal="Cash Payment"/>
-      <eLiterals name="Other" value="4" literal="Other"/>
+      <eLiterals name="StoreCredit" literal="STORE_CREDIT"/>
+      <eLiterals name="AnimalHealthServices" value="1" literal="HEALTH_SVCS"/>
+      <eLiterals name="ShareRecovery" value="2" literal="SHARE RECOVERY"/>
+      <eLiterals name="CashPayment" value="3" literal="CASH PAYMENT"/>
+      <eLiterals name="Other" value="4" literal="OTHER"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

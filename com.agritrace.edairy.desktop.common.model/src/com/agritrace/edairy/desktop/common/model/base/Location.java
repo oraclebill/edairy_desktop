@@ -40,6 +40,8 @@ public interface Location extends EObject {
 	 * @see #setPostalLocation(PostalLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_PostalLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='postalLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	PostalLocation getPostalLocation();
@@ -66,6 +68,8 @@ public interface Location extends EObject {
 	 * @see #setMapLocation(MapLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_MapLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='mapLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	MapLocation getMapLocation();
@@ -92,6 +96,8 @@ public interface Location extends EObject {
 	 * @see #setStatutoryLocation(StatutoryLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_StatutoryLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='statutoryLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	StatutoryLocation getStatutoryLocation();
@@ -118,6 +124,8 @@ public interface Location extends EObject {
 	 * @see #setDescriptiveLocation(DescriptiveLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_DescriptiveLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='descriptiveLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	DescriptiveLocation getDescriptiveLocation();

@@ -30,7 +30,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation()
- * @model
+ * @model extendedMetaData="name='PostalLocation' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@Embeddable'"
  * @generated
  */
 public interface PostalLocation extends EObject {
@@ -71,7 +72,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>Section</em>' attribute.
 	 * @see #setSection(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_Section()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getSection();
@@ -123,7 +124,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>Village</em>' attribute.
 	 * @see #setVillage(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_Village()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getVillage();
@@ -175,7 +176,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>Location</em>' attribute.
 	 * @see #setLocation(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_Location()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getLocation();
@@ -201,7 +202,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>District</em>' attribute.
 	 * @see #setDistrict(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_District()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getDistrict();
@@ -227,7 +228,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>Division</em>' attribute.
 	 * @see #setDivision(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_Division()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getDivision();
@@ -253,7 +254,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>Province</em>' attribute.
 	 * @see #setProvince(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_Province()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getProvince();
@@ -279,7 +280,7 @@ public interface PostalLocation extends EObject {
 	 * @return the value of the '<em>Postal Code</em>' attribute.
 	 * @see #setPostalCode(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPostalLocation_PostalCode()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getPostalCode();

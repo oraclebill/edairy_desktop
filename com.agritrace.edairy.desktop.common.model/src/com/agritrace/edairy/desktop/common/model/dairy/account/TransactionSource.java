@@ -30,7 +30,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STORE_CREDIT(0, "StoreCredit", "Store Credit"),
+	STORE_CREDIT(0, "StoreCredit", "STORE_CREDIT"),
 
 	/**
 	 * The '<em><b>Animal Health Services</b></em>' literal object.
@@ -40,7 +40,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ANIMAL_HEALTH_SERVICES(1, "AnimalHealthServices", "Animal Health Services"),
+	ANIMAL_HEALTH_SERVICES(1, "AnimalHealthServices", "HEALTH_SVCS"),
 
 	/**
 	 * The '<em><b>Share Recovery</b></em>' literal object.
@@ -50,7 +50,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SHARE_RECOVERY(2, "ShareRecovery", "Share Recovery"),
+	SHARE_RECOVERY(2, "ShareRecovery", "SHARE RECOVERY"),
 
 	/**
 	 * The '<em><b>Cash Payment</b></em>' literal object.
@@ -60,7 +60,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CASH_PAYMENT(3, "CashPayment", "Cash Payment"),
+	CASH_PAYMENT(3, "CashPayment", "CASH PAYMENT"),
 
 	/**
 	 * The '<em><b>Other</b></em>' literal object.
@@ -70,7 +70,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	OTHER(4, "Other", "Other");
+	OTHER(4, "Other", "OTHER");
 
 	/**
 	 * The '<em><b>Store Credit</b></em>' literal value.
@@ -81,7 +81,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #STORE_CREDIT
-	 * @model name="StoreCredit" literal="Store Credit"
+	 * @model name="StoreCredit" literal="STORE_CREDIT"
 	 * @generated
 	 * @ordered
 	 */
@@ -96,7 +96,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #ANIMAL_HEALTH_SERVICES
-	 * @model name="AnimalHealthServices" literal="Animal Health Services"
+	 * @model name="AnimalHealthServices" literal="HEALTH_SVCS"
 	 * @generated
 	 * @ordered
 	 */
@@ -111,7 +111,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SHARE_RECOVERY
-	 * @model name="ShareRecovery" literal="Share Recovery"
+	 * @model name="ShareRecovery" literal="SHARE RECOVERY"
 	 * @generated
 	 * @ordered
 	 */
@@ -126,7 +126,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CASH_PAYMENT
-	 * @model name="CashPayment" literal="Cash Payment"
+	 * @model name="CashPayment" literal="CASH PAYMENT"
 	 * @generated
 	 * @ordered
 	 */
@@ -141,7 +141,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #OTHER
-	 * @model name="Other"
+	 * @model name="Other" literal="OTHER"
 	 * @generated
 	 * @ordered
 	 */

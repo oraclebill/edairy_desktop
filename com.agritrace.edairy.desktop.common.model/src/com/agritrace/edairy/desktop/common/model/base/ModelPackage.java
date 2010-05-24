@@ -401,22 +401,13 @@ public interface ModelPackage extends EPackage {
 	int COMPANY = 5;
 
 	/**
-	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPANY__CONTACTS = 0;
-
-	/**
 	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY__LEGAL_NAME = 1;
+	int COMPANY__LEGAL_NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Company Name</b></em>' attribute.
@@ -425,16 +416,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY__COMPANY_NAME = 2;
+	int COMPANY__COMPANY_NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY__PHONE_NUMBER = 3;
+	int COMPANY__CONTACT_METHODS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPANY__CONTACTS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -446,13 +446,13 @@ public interface ModelPackage extends EPackage {
 	int COMPANY__LOCATION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY__CONTACT_METHODS = 5;
+	int COMPANY__PHONE_NUMBER = 5;
 
 	/**
 	 * The number of structural features of the '<em>Company</em>' class.
