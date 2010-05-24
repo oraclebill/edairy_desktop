@@ -32,8 +32,8 @@ public class MemberCollectionRecordsWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(2, false));
 		
-		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ", ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
-				ViewWidgetId.TRANSACTION_FILTER_ENDDATE);
+		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ", ViewWidgetId.COLLECTION_FILTER_STARTDATE,
+				ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(dateRangeWidget.getComposite());
 
 		Composite filterButtonPanel = UIControlsFactory.createComposite(filterPanel);
@@ -61,7 +61,7 @@ public class MemberCollectionRecordsWidget {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
-		final TableColumn columnId = new TableColumn(table, SWT.LEFT);
+		final TableColumn columnFarm = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnDate = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnCan = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnQuantity = new TableColumn(table, SWT.LEFT);
@@ -70,7 +70,7 @@ public class MemberCollectionRecordsWidget {
 		final TableColumn columnSuspected = new TableColumn(table, SWT.LEFT);
 
 		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnId, new ColumnWeightData(10));
+		layout.setColumnData(columnFarm, new ColumnWeightData(10));
 		layout.setColumnData(columnDate, new ColumnWeightData(15));
 		layout.setColumnData(columnCan, new ColumnWeightData(15));
 		layout.setColumnData(columnQuantity, new ColumnWeightData(15));

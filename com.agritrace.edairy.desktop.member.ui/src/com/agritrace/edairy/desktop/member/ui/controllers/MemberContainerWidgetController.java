@@ -37,6 +37,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.views.AddContainerDialog;
 
 public class MemberContainerWidgetController implements WidgetController, ISelectionListener{
@@ -51,8 +52,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	private final String[] containerColumnHeaders = { "ID", "Farm", "Container Type", "Units Of Measure", "Capacity" };
 	private final List<Container> containerInput = new ArrayList<Container>();
 	private IComboRidget farmFilterCombo;
-	private IActionRidget containerApplyRidget;
-
+	
 	public static final String containerRemoveTitle = "Remove Containers";
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
@@ -187,6 +187,8 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 		farmFilterCombo.bindToModel(new WritableList(farmFilterList, String.class), String.class, null,
 				new WritableValue());
 		farmFilterCombo.updateFromModel();
+		farmFilterCombo.setSelection(0);
+		farmFilterCombo.addSelectionListener(this);
 	}
 
 	private List<Container> getContainerFilteredResult() throws ParseException {
@@ -222,7 +224,18 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 			} else {
 				containerRemoveButton.setEnabled(false);
 			}
+		}else if(event.getSource() == farmFilterCombo){
+			List<Container> filterResults;
+			try {
+				filterResults = getContainerFilteredResult();
+				containerTable.bindToModel(new WritableList(filterResults, Container.class), Container.class,
+						containerPropertyNames, containerColumnHeaders);
+				containerTable.updateFromModel();
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Activator.getDefault().logError(e, e.getMessage());
+			}
+			
 		}
 	}
-
 }
