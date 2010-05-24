@@ -110,6 +110,8 @@ public class ViewWidgetId {
     public static final String LIVESTOCK_Remove = "LiveStockRemove";
     public static final String LIVESTOCK_FILTER_STARTDATE = "LiveStock_Start_Date";
     public static final String LIVESTOCK_FILTER_ENDDATE = "LiveStock_END_Date";
+    public static final String LIVESTOCK_FILTER_STARTDATE_BUTTON = "LiveStock_Start_Date_Button";
+    public static final String LIVESTOCK_FILTER_ENDDATE_BUTTON = "LiveStock_END_Date_Button";
     public static final String LIVESTOCK_FarmCombo = "farmFilter";
     public static final String LIVESTOCK_ContainerSpeciesFilter = "speciesFilter";
     public static final String LIVESTOCK_ContainerBreedFilter = "breedFilter";
@@ -122,7 +124,9 @@ public class ViewWidgetId {
     // membership_collection tab
     public static final String COLLECTION_TABLE = "CollectionTable";
     public static final String COLLECTION_FILTER_STARTDATE = "Collection_Start_Date";
+    public static final String COLLECTION_FILTER_STARTBUTTON="Collection_Start_Button";
     public static final String COLLECTION_FILTER_ENDDATE = "Collection_END_Date";
+    public static final String COLLECTION_FILTER_ENDBUTTON = "Collection_END_Button";
     public static final String COLLECTION_FILTER_NPRMISSING = "Collection_Filter_NPR";
     public static final String COLLECTION_FILTER_REJECTED = "Collection_Filter_Rejected";
     public static final String COLLECTION_FILTER_FLAG = "Collection_Filter_Flag";
@@ -133,6 +137,8 @@ public class ViewWidgetId {
     public static final String TRANSACTION_TABLE = "TransactionTable";
     public static final String TRANSACTION_FILTER_STARTDATE = "TRANSACTION_Start_Date";
     public static final String TRANSACTION_FILTER_ENDDATE = "TRANSACTION_END_Date";
+    public static final String TRANSACTION_FILTER_STARTDATE_BUTTON = "TRANSACTION_Start_Date_Button";
+    public static final String TRANSACTION_FILTER_ENDDATE_BUTTON = "TRANSACTION_END_Date_Button";
     public static final String TRANSACTION_FILTER_APPLY = "TRANSACTION_APPLY";
     public static final String TRANSACTION_FILTER_SHOWALL = "TRANSACTION_ShowAll";
 

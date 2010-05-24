@@ -30,7 +30,7 @@ public class MemberTransactionWidget {
 	public void initGUI(){
 		// fitler panel
 		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Transaction Date Range: ", ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
-				ViewWidgetId.TRANSACTION_FILTER_ENDDATE);
+				ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(dateRangeWidget.getComposite());
 
 

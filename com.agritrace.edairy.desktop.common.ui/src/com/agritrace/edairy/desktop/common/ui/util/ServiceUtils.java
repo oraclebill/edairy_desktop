@@ -301,4 +301,41 @@ public class ServiceUtils {
 		}
 
 	}
+	
+	/**
+	 * Get one month date before the current date
+	 * @return date one month ago, {@link Date}
+	 */
+	public static Date getOneMonthBeforeCurrentDate(){
+		  Calendar now = Calendar.getInstance();
+		  now.add(Calendar.MONDAY,-1);
+		  return now.getTime();
+	}
+	
+	/**
+	 * Get the formatted String of the date one month before the current date.
+	 * @return the formatted String "MM/dd/yyyy"
+	 */
+	public static String getOneMonthBeforeCurrentDateString(){
+		Date date = getOneMonthBeforeCurrentDate();
+		return DATE_FORMAT.format(date);
+	}
+	
+	/**
+	 * Get the current date
+	 * @return date one month ago, {@link Date}
+	 */
+	public static Date getCurrentDate(){
+		  Calendar now = Calendar.getInstance();
+		  return now.getTime();
+	}
+	
+	/**
+	 * Get the formatted String of the current date.
+	 * @return the formatted String "MM/dd/yyyy"
+	 */
+	public static String getCurrentDateString(){
+		Date date = getCurrentDate();
+		return DATE_FORMAT.format(date);
+	}
 }
