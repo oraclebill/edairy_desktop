@@ -36,7 +36,7 @@ public class MemberLiveStockWidget {
 		filterPanel.setLayout(new GridLayout(2, false));
 
 		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Acqusion Date Range: ", ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
-				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE);
+				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(dateRangeWidget.getComposite());
 	
 		Composite filterPanel2= UIControlsFactory.createComposite(filterPanel,SWT.NULL);

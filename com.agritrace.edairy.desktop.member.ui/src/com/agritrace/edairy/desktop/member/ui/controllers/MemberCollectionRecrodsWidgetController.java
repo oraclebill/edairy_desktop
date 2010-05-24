@@ -15,32 +15,50 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
+import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
-public class MemberCollectionRecrodsWidgetController implements
-		WidgetController {
+public class MemberCollectionRecrodsWidgetController implements WidgetController, DateRangeFilter {
 
 	private IController controller;
 	private Membership membership;
 	
+	private DateRangeSearchController dateSearchController;
+	
 	private ITableRidget collectionTable;
-	private final String[] collectionPropertyNames = { "lineNumber", "collectionJournal", "dairyContainer", "quantity",
+	private final String[] collectionPropertyNames = { "from", "collectionJournal", "dairyContainer", "quantity",
 			"notRecorded", "rejected", "flagged" };
-	private final String[] collectionColumnHeaders = { "Line", "Date", "Container", "Quantity", "NPR Missing",
+	private final String[] collectionColumnHeaders = { "Farm", "Date", "Container", "Quantity", "NPR Missing",
 			"Rejected", "Suspended" };
 	private final List<CollectionJournalLine> records = new ArrayList<CollectionJournalLine>();
 	
 	public MemberCollectionRecrodsWidgetController(SubModuleController controller){
 		this.controller = controller;
+		configue();
 	}
 	@Override
 	public void configue() {
 		if(controller == null){
 			return;
 		}
+		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON, this);
 		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
+		collectionTable.setColumnFormatter(0, new ColumnFormatter(){
+			@Override
+			public String getText(Object element) {
+				if (element instanceof CollectionJournalLine) {
+					Farm farm = ((CollectionJournalLine)element).getFrom();
+					if(farm != null){
+						return farm.getName();
+					}
+				}
+				return null;
+			}
+		});
 		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class),
 				CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
 
@@ -126,6 +144,11 @@ public class MemberCollectionRecrodsWidgetController implements
 			}
 		}
 		return collectionJournalRecords;
+	}
+	@Override
+	public List<Object> filter(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

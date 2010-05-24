@@ -24,15 +24,19 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
+import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddAnimalDialog;
 
-public class MemberLiveStockController implements WidgetController, ISelectionListener {
+public class MemberLiveStockController implements WidgetController, ISelectionListener, DateRangeFilter {
 
 	private IController controller;
 	private Membership member;
 
+	private DateRangeSearchController dateSearchController;
+	
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
 	private IActionRidget liveStockRemoveButton;
@@ -54,6 +58,7 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 		if(controller == null){
 			return;
 		}
+		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
 		liveStockTable = controller.getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
 		liveStockTable.setColumnFormatter(1, new ColumnFormatter() {
 
@@ -195,6 +200,12 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 				liveStockRemoveButton.setEnabled(false);
 			}
 		}
+	}
+
+	@Override
+	public List<Object> filter(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

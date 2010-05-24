@@ -25,7 +25,7 @@ public class SimpleFormattedDateBean extends AbstractBean {
     /**
      * note: MM is format of month, mm is format of minutes
      */
-    private static final String STD_DATE_FORMAT = "dd/MM/yyyy"; 
+    private static final String STD_DATE_FORMAT = "MM/dd/yyyy"; 
 
     public SimpleFormattedDateBean() {
 	this(null);
