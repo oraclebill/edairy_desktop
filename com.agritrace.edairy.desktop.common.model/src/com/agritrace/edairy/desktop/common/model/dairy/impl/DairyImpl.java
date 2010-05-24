@@ -582,9 +582,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	public EList<Farm> getMemberFarms() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
-		EList<Farm> farms = null;
-		
-		return farms;
+		throw new UnsupportedOperationException();
 	}
 
 	/**
