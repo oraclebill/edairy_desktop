@@ -32,7 +32,7 @@ public interface IDairyResourceManager extends IAccountTransactionSearch {
 
     public abstract <T extends EObject> List<T> getObjectsFromDairyModel(Class<T> type) throws CoreException;
 
-//    public abstract void addFarm(Farm newFarm);
+    public abstract void addFarm(Farm newFarm);
 
     public abstract void saveDairyResource() throws IllegalArgumentException, IOException;
 

@@ -709,23 +709,23 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		return binList;
 	}
 
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see
-//	 * com.agritrace.edairy.ui.IDairyResourceManager#addFarm(com.agritrace.edairy
-//	 * .model.tracking.Farm)
-//	 */
-//	@Override
-//	public void addFarm(Farm newFarm) {
-//		if (farmResource == null) {
-//			loadFarmResources();
-//		}
-//		if (farmResource != null) {
-//			farmResource.getContents().add(newFarm);
-//
-//		}
-//	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.agritrace.edairy.ui.IDairyResourceManager#addFarm(com.agritrace.edairy
+	 * .model.tracking.Farm)
+	 */
+	@Override
+	public void addFarm(Farm newFarm) {
+		if (farmResource == null) {
+			loadFarmResources();
+		}
+		if (farmResource != null) {
+			farmResource.getContents().add(newFarm);
+
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
