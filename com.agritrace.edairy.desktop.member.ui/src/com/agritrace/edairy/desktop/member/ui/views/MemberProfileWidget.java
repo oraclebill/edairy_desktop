@@ -19,7 +19,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
@@ -90,7 +89,7 @@ public class MemberProfileWidget {
 		// addUIControl(dateText,ViewWidgetId.calendarDate);
 
 		final Button calendarButton = new Button(infoGroup, SWT.PUSH);
-		final Image calendar = Activator.getImage(ImageRegistry.calendar);
+		final Image calendar = Activator.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON);
 		calendarButton.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
@@ -144,7 +143,6 @@ public class MemberProfileWidget {
 		// status
 		UIControlsFactory.createLabel(infoGroup, status);
 		comboStatus = new ComboViewer(UIControlsFactory.createCombo(infoGroup, ViewWidgetId.memberInfo_status));
-		// comboStatus.setItems(new String[] {"Active", "Inactive", "Dormant"});
 		final GridData gd_comboStatus = new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1);
 		comboStatus.getControl().setLayoutData(gd_comboStatus);
 

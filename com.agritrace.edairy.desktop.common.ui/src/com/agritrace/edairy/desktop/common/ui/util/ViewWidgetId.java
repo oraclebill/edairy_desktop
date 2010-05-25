@@ -174,6 +174,13 @@ public class ViewWidgetId {
 	public static final String TRANSACTION_ADD_BUTTON="TRANSACTION_ADD";
 	public static final String TRANSACTION_VIEW_BUTTON="TRANSACTION_VIEW";
 	
+	//ViewMemberDialog
+	public static final String VIEW_MEMBER_NAME_HEADER="VIEW_MEMBER_NAME_HEADER";
+	public static final String VIEW_MEMBER_ID="VIEW_MEMBER_ID";
+	public static final String VIEW_MEMBER_BALANCE="VIEW_MEMBER_BALANCE";
+	public static final String VIEW_MEMBER_NAME_PHOTO="VIEW_MEMBER_NAME_PHOTO";
+
+	
 
 
 

@@ -3,12 +3,13 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberCollectionRecrodsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberContainerWidgetController;
@@ -20,28 +21,30 @@ import com.agritrace.edairy.desktop.member.ui.controllers.MemberTransactionWidge
 public class MemberRegisterDialogController extends AbstractWindowController{
 
 	public static final String DIALOG_TITLE = "Membership";
+	
+	private String generatedMemberId;
 
-	private Membership selectedMember;
+	protected Membership selectedMember;
 
 	// upper panel fields
-	private ITextRidget memberIdRidget;
+	private ILabelRidget memberIdRidget;
 	private ITextRidget nameRidget;
 
-	MemberProfileWidgetController memberProfileController;
+	private MemberProfileWidgetController memberProfileController;
 
 	// container tab
-	MemberContainerWidgetController containerController;
+	private MemberContainerWidgetController containerController;
 
 	// live stock tab
-	MemberLiveStockController liveStockController;
+	private MemberLiveStockController liveStockController;
 
 	// farm tab
-	MemberFarmWidgetController farmController;
+	private MemberFarmWidgetController farmController;
 
 	// collection tab
-	MemberCollectionRecrodsWidgetController collectionController;
+	private MemberCollectionRecrodsWidgetController collectionController;
 	// transaction tab
-	MemberTransactionWidgetController transactionController;
+	private MemberTransactionWidgetController transactionController;
 
 	public MemberRegisterDialogController() {
 
@@ -55,6 +58,8 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 		selectedMember = (Membership) getContext("selectedMember");
 
 		configureUpperPanel();
+		
+		memberProfileController = new MemberProfileWidgetController(this);
 		farmController = new MemberFarmWidgetController(this);
 		collectionController = new MemberCollectionRecrodsWidgetController(this);
 		liveStockController = new MemberLiveStockController(this);
@@ -64,7 +69,11 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 		if (selectedMember != null) {
 			updateBindings();
 		}
-
+		configureButtonsPanel();
+		
+	}
+	
+	protected void configureButtonsPanel(){
 		final IActionRidget okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
 		okAction.addListener(new IActionListener() {
 			@Override
@@ -82,17 +91,29 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 				getWindowRidget().dispose();
 			}
 		});
+		
+		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
+		deleteAction.setVisible(false);
+		deleteAction.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				setReturnCode(2);
+				getWindowRidget().dispose();
+			}
+		});
 	}
 
-	private void configureUpperPanel() {
-		memberIdRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_id);
+	protected  void configureUpperPanel() {
+		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
+//		generatedMemberId = System.currentTimeMillis()+"";
+//		memberIdRidget.setText(generatedMemberId);
 		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
-		memberProfileController = new MemberProfileWidgetController(this);
 
 	}
 
 	private void updateBindings() {
 		updateUpperPanelBinding();
+		memberProfileController.setInputModel(selectedMember);
 		farmController.setInputModel(selectedMember);
 		collectionController.setInputModel(selectedMember);
 		liveStockController.setInputModel(selectedMember);		
@@ -100,15 +121,12 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 		transactionController.setInputModel(selectedMember);
 	}
 
-	private void updateUpperPanelBinding() {
-		memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,
-				DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
-		memberIdRidget.updateFromModel();
-
+	protected void updateUpperPanelBinding() {
 		if(selectedMember.getMember() != null){
+			memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,	DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
+			memberIdRidget.updateFromModel();
 			nameRidget.setText(selectedMember.getMember().getFamilyName()+","+selectedMember.getMember().getGivenName());	
 		}
-		memberProfileController.setInputModel(selectedMember);
 	}
 
 

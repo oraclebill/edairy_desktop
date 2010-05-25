@@ -10,6 +10,7 @@ import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Display;
 
@@ -27,9 +28,11 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	// private Membership workingCopy;
 	private Membership selectedMember;
+	
+	private String generatedMemberId;
 
 	// upper panel fields
-	private ITextRidget memberIdRidget;
+	private ILabelRidget memberIdRidget;
 	private ITextRidget nameRidget;
 	
 	MemberProfileWidgetController memberProfileController;
@@ -99,7 +102,9 @@ public class MemberRegisterViewController extends SubModuleController implements
 	}
 
 	private void configureUpperPanel() {
-		memberIdRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_id);
+		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
+		generatedMemberId = System.currentTimeMillis()+"";
+		memberIdRidget.setText(generatedMemberId);
 		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
 		memberProfileController = new MemberProfileWidgetController(this);
 
@@ -115,9 +120,6 @@ public class MemberRegisterViewController extends SubModuleController implements
 	}
 
 	private void updateUpperPanelBinding() {
-		memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,
-				DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
-		memberIdRidget.updateFromModel();
 		
 		if(selectedMember.getMember() != null){
 			nameRidget.setText(selectedMember.getMember().getFamilyName()+","+selectedMember.getMember().getGivenName());	
