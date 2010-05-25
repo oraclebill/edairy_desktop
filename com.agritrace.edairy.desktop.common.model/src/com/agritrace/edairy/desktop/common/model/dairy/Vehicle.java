@@ -306,12 +306,12 @@ public interface Vehicle extends Asset {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Capacity In Tonnes</em>' attribute.
-	 * @see #setCapacityInTonnes(String)
+	 * @see #setCapacityInTonnes(double)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_CapacityInTonnes()
 	 * @model
 	 * @generated
 	 */
-	String getCapacityInTonnes();
+	double getCapacityInTonnes();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getCapacityInTonnes <em>Capacity In Tonnes</em>}' attribute.
@@ -321,7 +321,7 @@ public interface Vehicle extends Asset {
 	 * @see #getCapacityInTonnes()
 	 * @generated
 	 */
-	void setCapacityInTonnes(String value);
+	void setCapacityInTonnes(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Year</b></em>' attribute.

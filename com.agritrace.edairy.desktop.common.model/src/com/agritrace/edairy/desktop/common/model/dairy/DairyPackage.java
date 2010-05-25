@@ -1046,31 +1046,13 @@ public interface DairyPackage extends EPackage {
 	int DELIVERY_JOURNAL__REFERENCE_NUMBER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Session</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DELIVERY_JOURNAL__SESSION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Route</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DELIVERY_JOURNAL__ROUTE = 2;
-
-	/**
 	 * The number of structural features of the '<em>Delivery Journal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_FEATURE_COUNT = 3;
+	int DELIVERY_JOURNAL_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl <em>Dairy</em>}' class.
@@ -1081,15 +1063,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	int DAIRY = 8;
-
-	/**
-	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__CONTACTS = ModelPackage.COMPANY__CONTACTS;
 
 	/**
 	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
@@ -1110,13 +1083,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
+	int DAIRY__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+
+	/**
+	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__CONTACTS = ModelPackage.COMPANY__CONTACTS;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -1128,13 +1110,13 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__LOCATION = ModelPackage.COMPANY__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+	int DAIRY__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
@@ -1536,15 +1518,6 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER = 12;
 
 	/**
-	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__CONTACTS = ModelPackage.COMPANY__CONTACTS;
-
-	/**
 	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1563,13 +1536,22 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
+	int SUPPLIER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+
+	/**
+	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__CONTACTS = ModelPackage.COMPANY__CONTACTS;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -1581,13 +1563,13 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER__LOCATION = ModelPackage.COMPANY__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+	int SUPPLIER__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.
@@ -2472,28 +2454,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDeliveryJournal_ReferenceNumber();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Session</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession()
-	 * @see #getDeliveryJournal()
-	 * @generated
-	 */
-	EAttribute getDeliveryJournal_Session();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getRoute <em>Route</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Route</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getRoute()
-	 * @see #getDeliveryJournal()
-	 * @generated
-	 */
-	EReference getDeliveryJournal_Route();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy <em>Dairy</em>}'.
@@ -3633,22 +3593,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DELIVERY_JOURNAL__REFERENCE_NUMBER = eINSTANCE.getDeliveryJournal_ReferenceNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Session</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DELIVERY_JOURNAL__SESSION = eINSTANCE.getDeliveryJournal_Session();
-
-		/**
-		 * The meta object literal for the '<em><b>Route</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DELIVERY_JOURNAL__ROUTE = eINSTANCE.getDeliveryJournal_Route();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl <em>Dairy</em>}' class.

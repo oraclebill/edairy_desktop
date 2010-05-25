@@ -17,6 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
@@ -71,6 +72,13 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * @generated
 	 */
 	private EEnum transactionTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum transactionSourceEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -350,6 +358,15 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getTransactionSource() {
+		return transactionSourceEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AccountFactory getAccountFactory() {
 		return (AccountFactory)getEFactoryInstance();
 	}
@@ -399,6 +416,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 
 		// Create enums
 		transactionTypeEEnum = createEEnum(TRANSACTION_TYPE);
+		transactionSourceEEnum = createEEnum(TRANSACTION_SOURCE);
 	}
 
 	/**
@@ -462,6 +480,13 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		initEEnum(transactionTypeEEnum, TransactionType.class, "TransactionType");
 		addEEnumLiteral(transactionTypeEEnum, TransactionType.CREDIT);
 		addEEnumLiteral(transactionTypeEEnum, TransactionType.DEBIT);
+
+		initEEnum(transactionSourceEEnum, TransactionSource.class, "TransactionSource");
+		addEEnumLiteral(transactionSourceEEnum, TransactionSource.STORE_CREDIT);
+		addEEnumLiteral(transactionSourceEEnum, TransactionSource.ANIMAL_HEALTH_SERVICES);
+		addEEnumLiteral(transactionSourceEEnum, TransactionSource.SHARE_RECOVERY);
+		addEEnumLiteral(transactionSourceEEnum, TransactionSource.CASH_PAYMENT);
+		addEEnumLiteral(transactionSourceEEnum, TransactionSource.OTHER);
 	}
 
 } //AccountPackageImpl

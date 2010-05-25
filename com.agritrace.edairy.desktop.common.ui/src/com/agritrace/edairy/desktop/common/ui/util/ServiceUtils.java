@@ -234,7 +234,7 @@ public class ServiceUtils {
 	 */
 	public static String getOneMonthBeforeCurrentDateString(){
 		Date date = getOneMonthBeforeCurrentDate();
-		return DATE_FORMAT.format(date);
+		return DateTimeUtils.DATE_FORMAT.format(date);
 	}
 	
 	/**
@@ -252,6 +252,6 @@ public class ServiceUtils {
 	 */
 	public static String getCurrentDateString(){
 		Date date = getCurrentDate();
-		return DATE_FORMAT.format(date);
+		return DateTimeUtils.DATE_FORMAT.format(date);
 	}
 }

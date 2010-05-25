@@ -18,9 +18,9 @@ public interface IDairyResourceManager extends IAccountTransactionSearch {
 
     public abstract void createFarmResource();
 
-    public abstract void createDairyResource() throws ParseException;
+    public abstract void createDairyResource() throws ParseException, IllegalArgumentException, IOException;
 
-    public abstract void createDairyResource(String baseDir) throws ParseException;
+    public abstract void createDairyResource(String baseDir) throws ParseException, IllegalArgumentException, IOException;
 
     public abstract void loadFarmResources();
 

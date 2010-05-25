@@ -39,7 +39,7 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LONGITUDE_EDEFAULT = null;
+	protected static final double LONGITUDE_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
@@ -49,7 +49,7 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected String longitude = LONGITUDE_EDEFAULT;
+	protected double longitude = LONGITUDE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
@@ -59,7 +59,7 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LATITUDE_EDEFAULT = null;
+	protected static final double LATITUDE_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
@@ -69,7 +69,7 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected String latitude = LATITUDE_EDEFAULT;
+	protected double latitude = LATITUDE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,7 +95,7 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
@@ -104,8 +104,8 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLongitude(String newLongitude) {
-		String oldLongitude = longitude;
+	public void setLongitude(double newLongitude) {
+		double oldLongitude = longitude;
 		longitude = newLongitude;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LONGITUDE, oldLongitude, longitude));
@@ -116,7 +116,7 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
@@ -125,8 +125,8 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLatitude(String newLatitude) {
-		String oldLatitude = latitude;
+	public void setLatitude(double newLatitude) {
+		double oldLatitude = latitude;
 		latitude = newLatitude;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LATITUDE, oldLatitude, latitude));
@@ -157,10 +157,10 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
-				setLongitude((String)newValue);
+				setLongitude((Double)newValue);
 				return;
 			case ModelPackage.MAP_LOCATION__LATITUDE:
-				setLatitude((String)newValue);
+				setLatitude((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,9 +193,9 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
-				return LONGITUDE_EDEFAULT == null ? longitude != null : !LONGITUDE_EDEFAULT.equals(longitude);
+				return longitude != LONGITUDE_EDEFAULT;
 			case ModelPackage.MAP_LOCATION__LATITUDE:
-				return LATITUDE_EDEFAULT == null ? latitude != null : !LATITUDE_EDEFAULT.equals(latitude);
+				return latitude != LATITUDE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
