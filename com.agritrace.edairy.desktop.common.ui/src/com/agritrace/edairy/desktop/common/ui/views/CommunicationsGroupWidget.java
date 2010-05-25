@@ -24,6 +24,7 @@ public class CommunicationsGroupWidget {
 
 	public CommunicationsGroupWidget(Composite parent){
 		communicationGroup = UIControlsFactory.createGroup(parent, COMMUNICATION_GROUP_TXT);
+		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true,false).applyTo(communicationGroup);
 		creatDirectonsGroup();
 	}
 

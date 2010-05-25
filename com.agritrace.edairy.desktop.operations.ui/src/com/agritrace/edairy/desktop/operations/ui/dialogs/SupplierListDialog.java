@@ -30,6 +30,9 @@ import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogContro
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
 
 /**
  * Supplier list dialog to add/view/edit supplier
@@ -40,7 +43,7 @@ import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 public class SupplierListDialog extends RecordDialog {
 
 	private static int WIDTH_HEIGHT = 400;
-	private static int HEIGHT_HEIGHT = 50;
+	private static int DESC_HEIGHT_HEIGHT = 100;
 
 	public static final String BIND_ID_SUPPLIER_ID = "bind.id.supplier.id";
 	public static final String BIND_ID_SUPPLIER_STATUS = "bind.id.supplier.status";
@@ -57,7 +60,7 @@ public class SupplierListDialog extends RecordDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(500, 580);
+		newShell.setSize(500, 700);
 		if (this.getDialogStyle() == DIALOG_STYLE_NEW) {
 			this.setTitle("Add Supplier");
 		} else if (this.getDialogStyle() == DIALOG_STYLE_VIEW) {
@@ -72,14 +75,16 @@ public class SupplierListDialog extends RecordDialog {
 
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(2, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(comonComp);
 
-		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false);
+		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL,
+				SWT.BEGINNING).grab(true, false);
 		// Supplier Id
 		UIControlsFactory.createLabel(comonComp, "Supplier ID");
 		Text txtDate = UIControlsFactory.createText(comonComp);
 		factory.applyTo(txtDate);
-		
+
 		addUIControl(txtDate, BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
 
 		// Status
@@ -103,16 +108,16 @@ public class SupplierListDialog extends RecordDialog {
 		// Category
 		UIControlsFactory.createLabel(comonComp, "Category");
 		List categoryList = UIControlsFactory.createList(comonComp, true, true);
-		GridDataFactory.swtDefaults().grab(true, false).hint(WIDTH_HEIGHT, -1)
-				.applyTo(categoryList);
+		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL,
+				SWT.BEGINNING).applyTo(categoryList);
 		addUIControl(categoryList, BIND_ID_CATEGORY); //$NON-NLS-1$
 
 		// Description
 		UIControlsFactory.createLabel(comonComp, "Description");
 		Text descText = UIControlsFactory
 				.createTextMulti(comonComp, true, true);
-		GridDataFactory.swtDefaults().grab(true, false).hint(WIDTH_HEIGHT,
-				HEIGHT_HEIGHT).applyTo(descText);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
+				false).hint(-1, 100).applyTo(descText);
 		addUIControl(descText, BIND_ID_DESCRIPTION); //$NON-NLS-1$
 
 		createContactGroup(comonComp);
@@ -126,12 +131,37 @@ public class SupplierListDialog extends RecordDialog {
 				false).span(2, 1).applyTo(companyContactGroup);
 		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(
 				companyContactGroup);
-		new AddressGroupWidget(companyContactGroup);
+		AddressGroupWidget addressWidget = new AddressGroupWidget(
+				companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1)
+				.applyTo(addressWidget.getGroup());
+		addressWidget.getGroup().pack();
+
+		DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(
+				companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
+				directionWidget.getGroup());
+		directionWidget.getGroup().pack();
+
+		MapGroupWidget mapWidget = new MapGroupWidget(companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
+				mapWidget.getGroup());
+		mapWidget.getGroup().pack();
+		
+
+		
+		CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(
+				companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
+				commGroup.getGroup());
+		
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1)
+//				.applyTo(commGroup.getGroup());
 	}
 
 	protected AbstractWindowController createController() {
-		ResultListDialogController controller = new ResultListDialogController(this
-				) {
+		ResultListDialogController controller = new ResultListDialogController(
+				this) {
 
 			@Override
 			public EObject createWorkingCopy() {
@@ -193,12 +223,12 @@ public class SupplierListDialog extends RecordDialog {
 						DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION
 								.getName());
 				desc.updateFromModel();
-				
+
 				// Configure address group
-				AddressGroupWidgetController addressGroupController  = new AddressGroupWidgetController(getController());
+				AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(
+						getController());
 				addressGroupController.setInputModel(supplier.getLocation());
 				addressGroupController.updateBinding();
-				
 
 			}
 
