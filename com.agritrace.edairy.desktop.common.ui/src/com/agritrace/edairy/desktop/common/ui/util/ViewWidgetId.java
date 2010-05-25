@@ -180,7 +180,14 @@ public class ViewWidgetId {
 	public static final String VIEW_MEMBER_BALANCE="VIEW_MEMBER_BALANCE";
 	public static final String VIEW_MEMBER_NAME_PHOTO="VIEW_MEMBER_NAME_PHOTO";
 
-	
+	//FarmListView
+	public static final String FARM_LIST_MEMBER_LOOKUP_TXT="Farm_list_memberLookup_txt";
+	public static final String FARM_LIST_MEMBER_LOOKUP_BUTTON="Farm_list_memberLookup_btn";
+	public static final String FARM_LIST_ROUTE_COMBO="Farm_list_routeCombo";
+	public static final String FARM_LIST_SEARCH_BUTTON="Farm_list_search_btn";
+	public static final String FARM_LIST_CLEAR_BUTTON="Farm_list_clear_btn";
+	public static final String FARM_LIST_TABLE="Farm_list_table";
+
 
 
 
