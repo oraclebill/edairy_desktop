@@ -114,7 +114,7 @@ public class ViewWidgetId {
     public static final String LIVESTOCK_FILTER_ENDDATE_BUTTON = "LiveStock_END_Date_Button";
     public static final String LIVESTOCK_FarmCombo = "farmFilter";
     public static final String LIVESTOCK_ContainerSpeciesFilter = "speciesFilter";
-    public static final String LIVESTOCK_ContainerBreedFilter = "breedFilter";
+    public static final String LIVESTOCK_ContainerStatusFilter = "liveStock_Status";
     public static final String LIVESTOCK_ContainerFilterButton = "LiveStock_Filter";
     public static final String LIVESTOCK_ContainerShowAllButton = "LiveStock_Showall";
 
@@ -154,6 +154,8 @@ public class ViewWidgetId {
     //member list view
     public static final String MEMBERLIST_SEARCHTEXT = "memberList_searchText";
     public static final String MEMBERLIST_MEMBERTABLE="memberList_table";
+    public static final String MEMBERLIST_ADD="memberList_add";
+    public static final String MEMBERLIST_VIEW="memberList_view";
     
     //member directions group
     public static final String LANDMARK_TEXT = "landMarkText";

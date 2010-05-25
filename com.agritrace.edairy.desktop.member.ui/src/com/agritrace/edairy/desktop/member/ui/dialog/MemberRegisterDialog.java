@@ -1,40 +1,49 @@
-package com.agritrace.edairy.desktop.member.ui.views;
+package com.agritrace.edairy.desktop.member.ui.dialog;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.riena.navigation.INavigationNode;
-import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
-import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
+import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
-import org.eclipse.riena.ui.swt.utils.DetachedViewsManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberRegisterDialogController;
+import com.agritrace.edairy.desktop.member.ui.views.MemberAccountWidget;
+import com.agritrace.edairy.desktop.member.ui.views.MemberCollectionRecordsWidget;
+import com.agritrace.edairy.desktop.member.ui.views.MemberContainerWidget;
+import com.agritrace.edairy.desktop.member.ui.views.MemberFarmWidget;
+import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
+import com.agritrace.edairy.desktop.member.ui.views.MemberLiveStockWidget;
+import com.agritrace.edairy.desktop.member.ui.views.MemberProfileWidget;
+import com.agritrace.edairy.desktop.member.ui.views.MemberTransactionWidget;
 
-public class MemberSearchView extends SubModuleView implements SelectionListener {
+public class MemberRegisterDialog extends AbstractDialogView {
 
-	public static final String ID = MemberSearchView.class.getName();
+	public static String CALENDAR_DATE = "calendar.date";
+	public static String CALENDAR_OK = "calendar.ok";
+	public static String CALENDAR_CANCEL = "calendar.cancel";
 
 	public static final String MEMBER_INFO_GROUP = "Members Information";
-	
+
 
 	// container button
 	public static final String ADD_BUTTON = "Add";
@@ -50,33 +59,33 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	private Button saveButton;
 	private Button cancelButton;
 
-	public MemberSearchView() {
+
+	public MemberRegisterDialog() {
+		super(null);
 	}
 
+
+
 	@Override
-	protected void basicCreatePartControl(Composite parent) {
-
+	protected Control buildView(Composite parent) {
 		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-
 		parent.setLayout(new GridLayout(1, false));
 
 		main = UIControlsFactory.createComposite(parent);
 		main.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
 
-		/*
-		 * Button searchButton = UIControlsFactory.createButton(main,"Search",
-		 * ViewWidgetId.memberInfo_searchButton);
-		 * GridDataFactory.swtDefaults().align(SWT.END,
-		 * SWT.FILL).grab(false,false).applyTo(searchButton);
-		 */
 		createMemberSelectorGroup(main);
 		createMasterDetails(main);
 
-		final MemberSearchNodeListener newListener = new MemberSearchNodeListener();
-		getNavigationNode().addSimpleListener(newListener);
-		MemberSearchSelectionManager.INSTANCE.setSearchNode(newListener);
+		
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));
+		return null;
+	}
 
+	@Override
+	protected AbstractWindowController createController() {
+		return new MemberRegisterDialogController();
 	}
 
 	private void createMemberSelectorGroup(Composite composite) {
@@ -113,15 +122,14 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 		final CTabFolder tabfolder = new CTabFolder(detailGroup, SWT.NULL);
 		tabfolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		// tabfolder.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		// tabfolder.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		
 		final Color startColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_START_COLOR);
 		final Color endColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_END_COLOR);
 		tabfolder.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		tabfolder.setSelectionBackground(new Color[] { startColor, endColor }, new int[] { 50 }, true);
-		// tabfolder.setSimple(false);
+		
 
 		//profile tab
 		final CTabItem profileTab = new CTabItem(tabfolder, SWT.NULL);
@@ -184,82 +192,22 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 
 		tabfolder.setSelection(accountTab);
 
-		final Composite buttonPanel = UIControlsFactory.createComposite(details);
-		buttonPanel.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
-		buttonPanel.setLayout(new GridLayout(3, false));
+		return details;
+	}
+	private Composite createOkCancelButtons(Composite parent) {
 
-		final Button searchButton = UIControlsFactory.createButton(buttonPanel, "Search",
-				ViewWidgetId.memberInfo_searchButton);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(searchButton);
+		final Composite buttonComposite = UIControlsFactory.createComposite(parent);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(buttonComposite);
 
-		saveButton = UIControlsFactory.createButton(buttonPanel, "Save");
+		saveButton = UIControlsFactory.createButton(buttonComposite, "Save");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		addUIControl(saveButton, ViewWidgetId.memberInfo_saveButton);
 
-		cancelButton = UIControlsFactory.createButton(buttonPanel, "Cancel");
+		cancelButton = UIControlsFactory.createButton(buttonComposite, "Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		addUIControl(cancelButton, ViewWidgetId.memberInfo_cacelButton);
-
-		return details;
+		return buttonComposite;
 	}
-
-	public class MemberSearchNodeListener extends SimpleNavigationNodeAdapter {
-
-		private final DetachedViewsManager dvManager = new DetachedViewsManager(getSite());
-
-		@Override
-		public void activated(INavigationNode<?> source) {
-			// showView(true);
-			System.out.println("active !!!!!!!!!!!!!!!!");
-		}
-
-		@Override
-		public void deactivated(INavigationNode<?> source) {
-			System.out.println("deactive !!!!!!!!!!!!!!!!");
-
-			showView(false);
-		}
-
-		@Override
-		public void disposed(INavigationNode<?> source) {
-			// closes all detached views by this manager
-			dvManager.dispose();
-			// remove this listener - if not removing here, this can also be
-			// done in in
-			// the view's dispose method.
-			getNavigationNode().removeSimpleListener(this);
-			MemberSearchSelectionManager.INSTANCE.setSearchNode(null);
-		}
-
-		public void showView(boolean show) {
-			if (show) {
-				dvManager.showView(MemberSearchDetachedView.ID, MemberSearchDetachedView.class, SWT.RIGHT);
-
-			} else {
-				dvManager.hideView(MemberSearchDetachedView.ID);
-			}
-		}
-	}
-
-	@Override
-	public void dispose() {
-		MemberSearchSelectionManager.INSTANCE.clearListeners();
-	}
-
-	@Override
-	public void widgetSelected(SelectionEvent e) {
-		if (e.getSource() == saveButton) {
-			// MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this,
-			// selectedMember);
-		}
-
-	}
-
-	@Override
-	public void widgetDefaultSelected(SelectionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 
 }
+

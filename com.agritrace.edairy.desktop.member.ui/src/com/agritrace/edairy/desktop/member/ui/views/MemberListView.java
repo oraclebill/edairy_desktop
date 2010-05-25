@@ -117,11 +117,11 @@ public class MemberListView extends SubModuleView {
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
 		buttonsPanel.setLayout(new GridLayout(2, false));
 
-		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "View", ViewWidgetId.FARM_ADD);
+		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "View", ViewWidgetId.MEMBERLIST_VIEW);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 
 		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, "Add",
-			ViewWidgetId.FARM_Remove);
+			ViewWidgetId.MEMBERLIST_ADD);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(removeButton);
 
 	    

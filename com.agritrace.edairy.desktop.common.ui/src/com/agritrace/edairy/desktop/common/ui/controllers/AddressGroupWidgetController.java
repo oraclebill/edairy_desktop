@@ -33,7 +33,7 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	private ITextRidget postalCodeTxt;
 
 
-	public AddressGroupWidgetController(SubModuleController controller){
+	public AddressGroupWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}

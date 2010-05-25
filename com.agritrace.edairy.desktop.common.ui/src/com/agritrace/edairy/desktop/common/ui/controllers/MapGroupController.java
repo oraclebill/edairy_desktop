@@ -18,7 +18,7 @@ public class MapGroupController implements WidgetController {
 	private ITextRidget latituteTxt;
 	private ITextRidget longtituteTxt;
 
-	public MapGroupController(SubModuleController controller){
+	public MapGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}

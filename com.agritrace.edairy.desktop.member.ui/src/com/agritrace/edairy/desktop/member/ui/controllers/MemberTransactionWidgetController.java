@@ -52,7 +52,7 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	private final String[] transactionColumnHeaders = { "ID", "Date", "Type", "Description", "Amount" };
 	private final List<AccountTransaction> transactionRecords = new ArrayList<AccountTransaction>();
 
-	public MemberTransactionWidgetController(SubModuleController controller){
+	public MemberTransactionWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}

@@ -40,17 +40,14 @@ public class MemberLiveStockWidget {
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(dateRangeWidget.getComposite());
 	
 		Composite filterPanel2= UIControlsFactory.createComposite(filterPanel,SWT.NULL);
-		filterPanel2.setLayout(new GridLayout(3,false));
+		filterPanel2.setLayout(new GridLayout(2,false));
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(filterPanel2);
-	
-		final Combo farmCombo = UIControlsFactory.createCombo(filterPanel2, ViewWidgetId.LIVESTOCK_FarmCombo);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmCombo);
 
 		final Combo speciesText = UIControlsFactory.createCombo(filterPanel2, ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(speciesText);
 
-		final Combo breedText = UIControlsFactory.createCombo(filterPanel2,ViewWidgetId.LIVESTOCK_ContainerBreedFilter);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(breedText);
+		final Combo statusText = UIControlsFactory.createCombo(filterPanel2,ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(statusText);
 
 		final Composite containerPanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerPanel);
@@ -59,24 +56,22 @@ public class MemberLiveStockWidget {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
-		final TableColumn columnID = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnFarm = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnPurpose = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnName = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnSpecies = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnBreed = new TableColumn(table, SWT.LEFT);
 		final TableColumn columnAcquisionDate = new TableColumn(table, SWT.LEFT);
-		final TableColumn columnAcquisionType = new TableColumn(table, SWT.LEFT);
+		final TableColumn columnStatus = new TableColumn(table, SWT.LEFT);
 
 		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnID, new ColumnWeightData(9));
 		layout.setColumnData(columnFarm, new ColumnWeightData(13));
 		layout.setColumnData(columnPurpose, new ColumnWeightData(13));
 		layout.setColumnData(columnName, new ColumnWeightData(13));
 		layout.setColumnData(columnSpecies, new ColumnWeightData(13));
 		layout.setColumnData(columnBreed, new ColumnWeightData(13));
-		layout.setColumnData(columnAcquisionDate, new ColumnWeightData(13));
-		layout.setColumnData(columnAcquisionType, new ColumnWeightData(13));
+		layout.setColumnData(columnAcquisionDate, new ColumnWeightData(22));
+		layout.setColumnData(columnStatus, new ColumnWeightData(13));
 		containerPanel.setLayout(layout);
 
 		final Composite addbuttonsPanel = UIControlsFactory.createComposite(composite, SWT.NULL);

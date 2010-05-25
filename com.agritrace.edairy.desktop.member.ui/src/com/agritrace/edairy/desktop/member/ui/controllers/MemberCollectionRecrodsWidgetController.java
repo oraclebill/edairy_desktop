@@ -20,6 +20,7 @@ import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -36,13 +37,14 @@ import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchControl
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.Activator;
 
 
 public class MemberCollectionRecrodsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
 
 	private IController controller;
 	private Membership membership;
-
+	
 	private DateRangeSearchController dateSearchController;
 
 	private ITableRidget collectionTable;
@@ -55,7 +57,7 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 	private IToggleButtonRidget rejected;
 	private IToggleButtonRidget suspended;
 
-	public MemberCollectionRecrodsWidgetController(SubModuleController controller){
+	public MemberCollectionRecrodsWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}
@@ -262,6 +264,7 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Activator.getDefault().logError(e,e.getMessage());
 		}
 		return objs;
 	}
