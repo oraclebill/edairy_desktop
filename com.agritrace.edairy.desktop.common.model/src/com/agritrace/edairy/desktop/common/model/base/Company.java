@@ -33,22 +33,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Company extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Contacts</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.Person}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Contacts</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contacts</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_Contacts()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	EList<Person> getContacts();
-
-	/**
 	 * Returns the value of the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -101,30 +85,36 @@ public interface Company extends EObject {
 	void setCompanyName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
+	 * Returns the value of the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.ContactMethod}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Phone Number</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Contact Methods</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Phone Number</em>' attribute.
-	 * @see #setPhoneNumber(String)
-	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_PhoneNumber()
-	 * @model
+	 * @return the value of the '<em>Contact Methods</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_ContactMethods()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getPhoneNumber();
+	EList<ContactMethod> getContactMethods();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}' attribute.
+	 * Returns the value of the '<em><b>Contacts</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.Person}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contacts</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Phone Number</em>' attribute.
-	 * @see #getPhoneNumber()
+	 * @return the value of the '<em>Contacts</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_Contacts()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	void setPhoneNumber(String value);
+	EList<Person> getContacts();
 
 	/**
 	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
@@ -153,19 +143,29 @@ public interface Company extends EObject {
 	void setLocation(Location value);
 
 	/**
-	 * Returns the value of the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.ContactMethod}.
+	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Contact Methods</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Phone Number</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contact Methods</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_ContactMethods()
-	 * @model containment="true"
+	 * @return the value of the '<em>Phone Number</em>' attribute.
+	 * @see #setPhoneNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_PhoneNumber()
+	 * @model
 	 * @generated
 	 */
-	EList<ContactMethod> getContactMethods();
+	String getPhoneNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Phone Number</em>' attribute.
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	void setPhoneNumber(String value);
 
 } // Company

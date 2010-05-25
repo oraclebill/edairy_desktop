@@ -161,18 +161,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Person> getContacts() {
-		if (contacts == null) {
-			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
-		}
-		return contacts;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getLegalName() {
 		return legalName;
 	}
@@ -215,8 +203,11 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public EList<ContactMethod> getContactMethods() {
+		if (contactMethods == null) {
+			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
+		}
+		return contactMethods;
 	}
 
 	/**
@@ -224,11 +215,11 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPhoneNumber(String newPhoneNumber) {
-		String oldPhoneNumber = phoneNumber;
-		phoneNumber = newPhoneNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	public EList<Person> getContacts() {
+		if (contacts == null) {
+			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
+		}
+		return contacts;
 	}
 
 	/**
@@ -279,11 +270,20 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ContactMethod> getContactMethods() {
-		if (contactMethods == null) {
-			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
-		}
-		return contactMethods;
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPhoneNumber(String newPhoneNumber) {
+		String oldPhoneNumber = phoneNumber;
+		phoneNumber = newPhoneNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
 	}
 
 	/**

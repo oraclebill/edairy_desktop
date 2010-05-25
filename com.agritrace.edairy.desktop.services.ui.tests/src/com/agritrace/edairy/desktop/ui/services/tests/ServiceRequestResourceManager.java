@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.ui.services.tests;
 
+import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createFarmer;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -97,7 +99,7 @@ public class ServiceRequestResourceManager {
 	person.setFamilyName("Wan");
 	serviceRequestResource.getContents().add(person);
 
-	ship.setMember(person);
+	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
 	ship.setMemberId("1001");
 	req.setRequestingMember(ship);
 
@@ -149,7 +151,7 @@ public class ServiceRequestResourceManager {
 	person.setFamilyName("Copper");
 	serviceRequestResource.getContents().add(person);
 
-	ship.setMember(person);
+	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
 	ship.setMemberId("1002");
 	req.setRequestingMember(ship);
 
@@ -201,7 +203,7 @@ public class ServiceRequestResourceManager {
 	person.setFamilyName("Smith");
 	serviceRequestResource.getContents().add(person);
 
-	ship.setMember(person);
+	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
 	ship.setMemberId("1003");
 	req.setRequestingMember(ship);
 

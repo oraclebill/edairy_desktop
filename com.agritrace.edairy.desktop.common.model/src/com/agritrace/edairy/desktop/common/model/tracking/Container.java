@@ -69,7 +69,7 @@ public interface Container extends EObject {
 	 * @return the value of the '<em>Owner</em>' reference.
 	 * @see #setOwner(Farm)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_Owner()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Farm getOwner();

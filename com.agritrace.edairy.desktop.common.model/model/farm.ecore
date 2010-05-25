@@ -25,7 +25,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Farm"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum common.ecore#//ContainerType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="measureType" eType="ecore:EEnum common.ecore#//UnitOfMeasure"/>
@@ -96,5 +96,9 @@
     <eLiterals name="RFID" value="4"/>
     <eLiterals name="GSMGPRS" value="5"/>
     <eLiterals name="OTHER" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Farmer" eSuperTypes="common.ecore#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
+        eType="#//Farm" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

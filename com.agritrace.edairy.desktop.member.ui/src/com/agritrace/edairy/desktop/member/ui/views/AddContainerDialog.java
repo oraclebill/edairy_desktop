@@ -167,7 +167,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
 	farmComboViewer.setContentProvider(new ArrayContentProvider());
 	if (memberShip != null) {
-	    farmComboViewer.setInput(memberShip.getFarms());
+	    farmComboViewer.setInput(memberShip.getMember().getFarms());
 	    farmComboViewer.setLabelProvider(new LabelProvider() {
 		@Override
 		public String getText(Object element) {
@@ -191,8 +191,8 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	    }
 	});
 
-	if (memberShip != null && memberShip.getFarms().size() > 0) {
-	    farmComboViewer.setSelection(new StructuredSelection(memberShip.getFarms().get(0)));
+	if (memberShip != null && memberShip.getMember().getFarms().size() > 0) {
+	    farmComboViewer.setSelection(new StructuredSelection(memberShip.getMember().getFarms().get(0)));
 	}
 	containerComboViewer.getCombo().select(0);
 	measureComboViewer.getCombo().select(0);

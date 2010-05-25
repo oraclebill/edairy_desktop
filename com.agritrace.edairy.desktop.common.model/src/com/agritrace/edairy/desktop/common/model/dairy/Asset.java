@@ -31,7 +31,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset()
- * @model
+ * @model extendedMetaData="name='Asset' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@Inheritance(strategy=JOINED)'"
  * @generated
  */
 public interface Asset extends EObject {
@@ -47,6 +48,8 @@ public interface Asset extends EObject {
 	 * @see #setAssetId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset_AssetId()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
+	 *        extendedMetaData="name='assetId' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Id\n@GeneratedValue'"
 	 * @generated
 	 */
 	Long getAssetId();

@@ -344,6 +344,7 @@ public interface Dairy extends Company {
 	 * @see #setDairyId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DairyId()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 *        extendedMetaData="name='dairyId' kind='elementOnly'"
 	 * @generated
 	 */
 	Long getDairyId();

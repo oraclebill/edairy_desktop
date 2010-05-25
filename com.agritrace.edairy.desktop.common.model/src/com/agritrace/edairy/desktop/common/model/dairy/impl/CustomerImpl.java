@@ -6,56 +6,57 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Delivery Journal</b></em>'.
+ * An implementation of the model object '<em><b>Customer</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getReferenceNumber <em>Reference Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getCustomerId <em>Customer Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal {
+public class CustomerImpl extends CompanyImpl implements Customer {
 	/**
-	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
+	 * The default value of the '{@link #getCustomerId() <em>Customer Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferenceNumber()
+	 * @see #getCustomerId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REFERENCE_NUMBER_EDEFAULT = null;
+	protected static final Long CUSTOMER_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
+	 * The cached value of the '{@link #getCustomerId() <em>Customer Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferenceNumber()
+	 * @see #getCustomerId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String referenceNumber = REFERENCE_NUMBER_EDEFAULT;
+	protected Long customerId = CUSTOMER_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DeliveryJournalImpl() {
+	protected CustomerImpl() {
 		super();
 	}
 
@@ -66,7 +67,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.DELIVERY_JOURNAL;
+		return DairyPackage.Literals.CUSTOMER;
 	}
 
 	/**
@@ -74,8 +75,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getReferenceNumber() {
-		return referenceNumber;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
 	/**
@@ -83,11 +84,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferenceNumber(String newReferenceNumber) {
-		String oldReferenceNumber = referenceNumber;
-		referenceNumber = newReferenceNumber;
+	public void setCustomerId(Long newCustomerId) {
+		Long oldCustomerId = customerId;
+		customerId = newCustomerId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.CUSTOMER__CUSTOMER_ID, oldCustomerId, customerId));
 	}
 
 	/**
@@ -98,8 +99,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
-				return getReferenceNumber();
+			case DairyPackage.CUSTOMER__CUSTOMER_ID:
+				return getCustomerId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,8 +113,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
-				setReferenceNumber((String)newValue);
+			case DairyPackage.CUSTOMER__CUSTOMER_ID:
+				setCustomerId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,8 +128,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
-				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
+			case DairyPackage.CUSTOMER__CUSTOMER_ID:
+				setCustomerId(CUSTOMER_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -142,8 +143,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
-				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
+			case DairyPackage.CUSTOMER__CUSTOMER_ID:
+				return CUSTOMER_ID_EDEFAULT == null ? customerId != null : !CUSTOMER_ID_EDEFAULT.equals(customerId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -158,10 +159,10 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (referenceNumber: ");
-		result.append(referenceNumber);
+		result.append(" (customerId: ");
+		result.append(customerId);
 		result.append(')');
 		return result.toString();
 	}
 
-} //DeliveryJournalImpl
+} //CustomerImpl

@@ -272,26 +272,26 @@ public interface Person extends EObject {
 	void setPhoneNumber(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Location</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Location</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Location</em>' containment reference.
+	 * @return the value of the '<em>Location</em>' reference.
 	 * @see #setLocation(Location)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_Location()
-	 * @model containment="true" required="true"
+	 * @model
 	 * @generated
 	 */
 	Location getLocation();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}' containment reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Location</em>' containment reference.
+	 * @param value the new value of the '<em>Location</em>' reference.
 	 * @see #getLocation()
 	 * @generated
 	 */

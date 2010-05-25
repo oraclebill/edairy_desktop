@@ -25,6 +25,7 @@ import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageIm
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.Mechanism;
 import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
 import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
@@ -82,6 +83,13 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	private EClass animalIdentifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass farmerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -506,6 +514,24 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFarmer() {
+		return farmerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFarmer_Farms() {
+		return (EReference)farmerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAcquisitionType() {
 		return acquisitionTypeEEnum;
 	}
@@ -605,6 +631,9 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEAttribute(animalIdentifierEClass, ANIMAL_IDENTIFIER__ISSUER);
 		createEAttribute(animalIdentifierEClass, ANIMAL_IDENTIFIER__VALUE);
 
+		farmerEClass = createEClass(FARMER);
+		createEReference(farmerEClass, FARMER__FARMS);
+
 		// Create enums
 		acquisitionTypeEEnum = createEEnum(ACQUISITION_TYPE);
 		purposeEEnum = createEEnum(PURPOSE);
@@ -643,6 +672,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		farmerEClass.getESuperTypes().add(theModelPackage.getPerson());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(farmEClass, Farm.class, "Farm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -658,7 +688,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		initEClass(containerEClass, com.agritrace.edairy.desktop.common.model.tracking.Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContainer_ContainerId(), ecorePackage.getEString(), "containerId", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainer_Owner(), this.getFarm(), null, "owner", null, 1, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainer_Owner(), this.getFarm(), null, "owner", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Type(), theModelPackage.getContainerType(), "type", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_MeasureType(), theModelPackage.getUnitOfMeasure(), "measureType", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -688,6 +718,9 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEClass(animalIdentifierEClass, AnimalIdentifier.class, "AnimalIdentifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAnimalIdentifier_Issuer(), ecorePackage.getEString(), "issuer", null, 0, 1, AnimalIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimalIdentifier_Value(), ecorePackage.getEString(), "value", null, 0, 1, AnimalIdentifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(farmerEClass, Farmer.class, "Farmer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFarmer_Farms(), this.getFarm(), null, "farms", null, 0, -1, Farmer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(acquisitionTypeEEnum, AcquisitionType.class, "AcquisitionType");

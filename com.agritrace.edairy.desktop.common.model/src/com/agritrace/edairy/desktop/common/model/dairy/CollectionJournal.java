@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal#getJournalId <em>Journal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -323,5 +324,33 @@ public interface CollectionJournal extends EObject {
 	 * @generated
 	 */
 	void setRecordTotal(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Journal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Journal Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Journal Id</em>' attribute.
+	 * @see #setJournalId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournal_JournalId()
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
+	 *        extendedMetaData="name='journalId' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Id'"
+	 * @generated
+	 */
+	Long getJournalId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal#getJournalId <em>Journal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Journal Id</em>' attribute.
+	 * @see #getJournalId()
+	 * @generated
+	 */
+	void setJournalId(Long value);
 
 } // CollectionJournal

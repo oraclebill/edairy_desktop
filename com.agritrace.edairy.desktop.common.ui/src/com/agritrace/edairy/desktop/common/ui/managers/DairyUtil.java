@@ -1,6 +1,11 @@
 package com.agritrace.edairy.desktop.common.ui.managers;
 
+import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createVehicle;
+
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -12,13 +17,22 @@ import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 public class DairyUtil {
@@ -77,6 +91,8 @@ public class DairyUtil {
 
 	public static Location createLocation(PostalLocation pLoc, MapLocation mLoc, DescriptiveLocation dLoc) {
 		Location loc = ModelFactory.eINSTANCE.createLocation();
+		if (pLoc == null && mLoc == null && dLoc == null)
+			dLoc = createDescriptiveLocation("", "");
 		if (null != pLoc)
 			loc.setPostalLocation(pLoc);
 		if (null != mLoc)
@@ -96,19 +112,36 @@ public class DairyUtil {
 				Collections.EMPTY_SET);
 	}
 
+	/**
+	 * Create a person, ensuring proper initialization.
+	 * 
+	 * @param givenName
+	 * @param middleName
+	 * @param familyName
+	 * @param phoneNumber
+	 * @param location
+	 * @param contactMethods
+	 * @return
+	 */
 	public static Person createPerson(String givenName, String middleName, String familyName, String phoneNumber,
 			Location location, Collection<ContactMethod> contactMethods) {
 
 		Person p = ModelFactory.eINSTANCE.createPerson();
+		initPersonInfo(p, givenName, middleName, familyName, phoneNumber, location, contactMethods);
+		return p;
+	}
+
+	private static void initPersonInfo(Person p, String givenName, String middleName, String familyName,
+			String phoneNumber, Location location, Collection<ContactMethod> contactMethods) {
 		p.setGivenName(givenName);
 		p.setMiddleName(middleName);
 		p.setFamilyName(familyName);
 		p.setPhoneNumber(phoneNumber);
+		if (null == location)
+			location = createLocation(null, null, null);
 		p.setLocation(location);
 		if (null != contactMethods)
 			p.getContactMethods().addAll(contactMethods);
-
-		return p;
 	}
 
 	public static Supplier createSupplier(long id, String companyName, String legalName, VendorStatus status,
@@ -174,8 +207,9 @@ public class DairyUtil {
 		return branch;
 	}
 
-	public static Employee createEmployee(String id, String jobFunction, Date startDate, String givenName, String middleName,
-			String familyName, String phoneNumber, Location location, Collection<ContactMethod> contactMethods) {
+	public static Employee createEmployee(String id, String jobFunction, Date startDate, String givenName,
+			String middleName, String familyName, String phoneNumber, Location location,
+			Collection<ContactMethod> contactMethods) {
 		return createEmployee(createPerson(givenName, middleName, familyName, phoneNumber, location, contactMethods),
 				id, startDate, jobFunction);
 	}
@@ -187,7 +221,7 @@ public class DairyUtil {
 	public static Employee createEmployee(Person p, String id, Date startDate, String jobFunction, String nssfNumber,
 			String nationalId) {
 		Employee emp = DairyFactory.eINSTANCE.createEmployee();
-
+		
 		// copy person fields
 		emp.setHonorific(p.getHonorific());
 		emp.setGivenName(p.getGivenName());
@@ -208,10 +242,160 @@ public class DairyUtil {
 		return emp;
 	}
 
-	public static Farm createFarm(long id, String name, Location farmLocation) {
+	public static Vehicle createVehicle(String logNo, String regNo, String modelYear, String make, String model,
+			String color, double tonnage, String chassisNo, Date acquiredDate, String engineNo, Employee driver,
+			String tagType, String tagValue) {
+		final Vehicle v1 = DairyFactory.eINSTANCE.createVehicle();
+
+		v1.setLogBookNumber(logNo);
+		v1.setRegistrationNumber(regNo);
+		v1.setYear(modelYear);
+		v1.setMake(make);
+		v1.setModel(model);
+		v1.setDominantColour(color);
+		v1.setCapacityInTonnes(tonnage);
+		v1.setChassisNumber(chassisNo);
+		v1.setEngineNumber(engineNo);
+		v1.setDriver(driver);
+		v1.setAssetInfo(createAssetInfo(tagType, tagValue, acquiredDate));
+
+		return v1;
+
+	}
+
+	private static Asset createAssetInfo(String tagType, String tagValue, Date acquiredDate) {
+		final Asset asset = DairyFactory.eINSTANCE.createAsset();
+		// asset.setAssetId(assetId);
+		asset.setTagType(tagType);
+		asset.setTagValue(tagValue);
+		return asset;
+	}
+
+	/**
+	 * Create a farmer with the most common 'Person' related fields set.
+	 * 
+	 * @param givenName
+	 * @param middleName
+	 * @param familyName
+	 * @param phoneNumber
+	 * @param location
+	 * @param contactMethods
+	 * @param farms
+	 * @return
+	 */
+	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
+			Location location, Collection<ContactMethod> contactMethods, Collection<Farm> farms) {
+		Farmer toBe = TrackingFactory.eINSTANCE.createFarmer();
+
+		initPersonInfo(toBe, givenName, middleName, familyName, phoneNumber, location, contactMethods);
+		toBe.getFarms().addAll(farms);
+		
+		return toBe;
+	}
+	
+	/**
+	 * Create a farmer using the location of his first farm as the farmers location. If there are no farms, 
+	 * use a 'blank' location.
+	 * 
+	 * @param givenName
+	 * @param middleName
+	 * @param familyName
+	 * @param phoneNumber
+	 * @param farms
+	 * @return
+	 */
+	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
+			Collection<Farm> farms) {
+		Location loc = null;
+		if (null != farms && farms.size() > 0)
+			loc = farms.iterator().next().getLocation();
+		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, farms);
+	}	
+
+	/**
+	 * Create a farmer who resides at the location of their one and only farm - probably the most common case.
+	 * 
+	 * @param givenName
+	 * @param middleName
+	 * @param familyName
+	 * @param phoneNumber
+	 * @param farm
+	 * @return
+	 */
+	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
+			Farm farm) {
+		Location loc = null;
+		if (null != farm )
+			loc = farm.getLocation();
+		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, Arrays.asList(farm));
+	}	
+
+	/**
+	 * Create a new membership.
+	 * 
+	 * @param memberId
+	 * @param applicationDate
+	 * @param effectiveDate
+	 * @param farmer
+	 * @return
+	 */
+	public static Membership createMembership(Date applicationDate, Date effectiveDate, Farmer farmer) {
+		Membership member = DairyFactory.eINSTANCE.createMembership();
+
+		member.setMember(farmer);
+		member.setEffectiveDate(effectiveDate);
+		member.setApplicationDate(applicationDate);
+		return member;
+	}
+
+	/**
+	 * Create a generic request that can be specialized to Vet or AI.
+	 * 
+	 * @param dairy
+	 * @param member
+	 * @param farm
+	 * @param reqDate
+	 * @return
+	 */
+	public static AnimalHealthRequest createGenericRequest(Dairy dairy, Membership member, Farm farm, Date reqDate) {
+		final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
+		req.setDairy(dairy);
+		req.setType(RequestType.VETERINARY);
+		// req.setRequestId(id);
+		req.setDate(reqDate);
+		req.setFarm(farm);
+		req.setMember(member);
+		req.setRequestingMember(member);
+		return req;
+	}
+
+	public static AnimalHealthRequest addVeterinaryRequest(Dairy dairy, Membership member, Farm farm, Date reqDate,
+			String problemReport, RegisteredAnimal animal, Supplier referral) {
+		final AnimalHealthRequest req = createGenericRequest(dairy, member, farm, reqDate);
+		req.setReportedProblem(problemReport);
+		req.setReportedAnimal(animal);
+		req.setReferredTo(referral);
+
+		dairy.getAnimalHealthRequests().add(req);
+
+		return req;
+	}
+
+	public static AnimalHealthRequest addInseminationRequest(Dairy dairy, Membership member, Farm farm, Date reqDate,
+			Date heatDetected, Date treat1, Date treat2, Date treat3) {
+		final AnimalHealthRequest req = createGenericRequest(dairy, member, farm, reqDate);
+
+		req.setDateHeatDetected(Calendar.getInstance().getTime());
+		req.setFirstTreatment(Calendar.getInstance().getTime());
+		req.setSecondTreatment(Calendar.getInstance().getTime());
+		req.setThirdTreatment(Calendar.getInstance().getTime());
+
+		return req;
+	}
+
+	public static Farm createFarm(String name, Location farmLocation) {
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
 
-		farm.setFarmId(id);
 		farm.setName(name);
 		farm.setLocation(farmLocation);
 

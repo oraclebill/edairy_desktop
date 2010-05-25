@@ -364,7 +364,7 @@ public interface ModelPackage extends EPackage {
 	int PERSON__PHONE_NUMBER = 8;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' containment reference.
+	 * The feature id for the '<em><b>Location</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -978,10 +978,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getPerson_PhoneNumber();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Location</em>'.
+	 * @return the meta object for the reference '<em>Location</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getLocation()
 	 * @see #getPerson()
 	 * @generated
@@ -1010,17 +1010,6 @@ public interface ModelPackage extends EPackage {
 	EClass getCompany();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contacts</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getContacts()
-	 * @see #getCompany()
-	 * @generated
-	 */
-	EReference getCompany_Contacts();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getLegalName <em>Legal Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1043,15 +1032,26 @@ public interface ModelPackage extends EPackage {
 	EAttribute getCompany_CompanyName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods <em>Contact Methods</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Phone Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber()
+	 * @return the meta object for the containment reference list '<em>Contact Methods</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods()
 	 * @see #getCompany()
 	 * @generated
 	 */
-	EAttribute getCompany_PhoneNumber();
+	EReference getCompany_ContactMethods();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Contacts</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getContacts()
+	 * @see #getCompany()
+	 * @generated
+	 */
+	EReference getCompany_Contacts();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}'.
@@ -1065,15 +1065,15 @@ public interface ModelPackage extends EPackage {
 	EReference getCompany_Location();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods <em>Contact Methods</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contact Methods</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods()
+	 * @return the meta object for the attribute '<em>Phone Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber()
 	 * @see #getCompany()
 	 * @generated
 	 */
-	EReference getCompany_ContactMethods();
+	EAttribute getCompany_PhoneNumber();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation <em>Descriptive Location</em>}'.
@@ -1531,7 +1531,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute PERSON__PHONE_NUMBER = eINSTANCE.getPerson_PhoneNumber();
 
 		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Location</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1557,14 +1557,6 @@ public interface ModelPackage extends EPackage {
 		EClass COMPANY = eINSTANCE.getCompany();
 
 		/**
-		 * The meta object literal for the '<em><b>Contacts</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPANY__CONTACTS = eINSTANCE.getCompany_Contacts();
-
-		/**
 		 * The meta object literal for the '<em><b>Legal Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1581,12 +1573,20 @@ public interface ModelPackage extends EPackage {
 		EAttribute COMPANY__COMPANY_NAME = eINSTANCE.getCompany_CompanyName();
 
 		/**
-		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Contact Methods</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COMPANY__PHONE_NUMBER = eINSTANCE.getCompany_PhoneNumber();
+		EReference COMPANY__CONTACT_METHODS = eINSTANCE.getCompany_ContactMethods();
+
+		/**
+		 * The meta object literal for the '<em><b>Contacts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPANY__CONTACTS = eINSTANCE.getCompany_Contacts();
 
 		/**
 		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
@@ -1597,12 +1597,12 @@ public interface ModelPackage extends EPackage {
 		EReference COMPANY__LOCATION = eINSTANCE.getCompany_Location();
 
 		/**
-		 * The meta object literal for the '<em><b>Contact Methods</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPANY__CONTACT_METHODS = eINSTANCE.getCompany_ContactMethods();
+		EAttribute COMPANY__PHONE_NUMBER = eINSTANCE.getCompany_PhoneNumber();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.

@@ -6,15 +6,11 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import com.agritrace.edairy.desktop.common.model.base.Person;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 import java.util.Date;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -32,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarms <em>Farms</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}</li>
  * </ul>
  * </p>
@@ -54,6 +49,7 @@ public interface Membership extends EObject {
 	 * @see #setMemberId(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MemberId()
 	 * @model required="true"
+	 *        extendedMetaData="name='memberId' kind='elementOnly'"
 	 * @generated
 	 */
 	String getMemberId();
@@ -184,12 +180,12 @@ public interface Membership extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Member</em>' containment reference.
-	 * @see #setMember(Person)
+	 * @see #setMember(Farmer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Member()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Person getMember();
+	Farmer getMember();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}' containment reference.
@@ -199,23 +195,7 @@ public interface Membership extends EObject {
 	 * @see #getMember()
 	 * @generated
 	 */
-	void setMember(Person value);
-
-	/**
-	 * Returns the value of the '<em><b>Farms</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.tracking.Farm}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Farms</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Farms</em>' reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Farms()
-	 * @model
-	 * @generated
-	 */
-	EList<Farm> getFarms();
+	void setMember(Farmer value);
 
 	/**
 	 * Returns the value of the '<em><b>Account</b></em>' reference.

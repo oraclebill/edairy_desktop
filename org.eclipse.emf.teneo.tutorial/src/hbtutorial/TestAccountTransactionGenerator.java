@@ -17,6 +17,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
 import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.*;
 
@@ -70,16 +73,11 @@ public class TestAccountTransactionGenerator {
 		return createLocation(pLoc, mLoc, dLoc);
 	}
 
-	Person randomPerson() {
-		Person p = ModelFactory.eINSTANCE.createPerson();
-		p.setFamilyName(randomSelect(NAMES));
-		p.setGivenName(randomSelect(NAMES));
-		p.setMiddleName(randomSelect(NAMES));
-		p.setLocation(ModelFactory.eINSTANCE.createLocation());
-
+	Farmer randomPerson() {
+		Farmer p = DairyUtil.createFarmer(randomSelect(NAMES), randomSelect(NAMES),randomSelect(NAMES), "",  (Farm)null); 
+				
 		return p;
 	}
-
 	Membership randomMember() {
 		Membership member = DairyFactory.eINSTANCE.createMembership();
 		member.setMember(randomPerson());

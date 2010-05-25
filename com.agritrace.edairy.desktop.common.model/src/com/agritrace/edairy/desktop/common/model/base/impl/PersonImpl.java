@@ -232,7 +232,7 @@ public class PersonImpl extends EObjectImpl implements Person {
 	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLocation()
@@ -465,6 +465,14 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @generated
 	 */
 	public Location getLocation() {
+		if (location != null && location.eIsProxy()) {
+			InternalEObject oldLocation = (InternalEObject)location;
+			location = (Location)eResolveProxy(oldLocation);
+			if (location != oldLocation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PERSON__LOCATION, oldLocation, location));
+			}
+		}
 		return location;
 	}
 
@@ -473,14 +481,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
-		Location oldLocation = location;
-		location = newLocation;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__LOCATION, oldLocation, newLocation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Location basicGetLocation() {
+		return location;
 	}
 
 	/**
@@ -489,17 +491,10 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @generated
 	 */
 	public void setLocation(Location newLocation) {
-		if (newLocation != location) {
-			NotificationChain msgs = null;
-			if (location != null)
-				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PERSON__LOCATION, null, msgs);
-			if (newLocation != null)
-				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PERSON__LOCATION, null, msgs);
-			msgs = basicSetLocation(newLocation, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__LOCATION, newLocation, newLocation));
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__LOCATION, oldLocation, location));
 	}
 
 	/**
@@ -522,8 +517,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.PERSON__LOCATION:
-				return basicSetLocation(null, msgs);
 			case ModelPackage.PERSON__CONTACT_METHODS:
 				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 		}
@@ -557,7 +550,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case ModelPackage.PERSON__PHONE_NUMBER:
 				return getPhoneNumber();
 			case ModelPackage.PERSON__LOCATION:
-				return getLocation();
+				if (resolve) return getLocation();
+				return basicGetLocation();
 			case ModelPackage.PERSON__CONTACT_METHODS:
 				return getContactMethods();
 		}
