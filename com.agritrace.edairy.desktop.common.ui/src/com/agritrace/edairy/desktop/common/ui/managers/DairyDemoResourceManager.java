@@ -591,7 +591,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		desLocation.setDirections("South");
 		desLocation.setLandmarks("Land Mark");		
 		location.setDescriptiveLocation(desLocation);		
-		
+		supplier.setPublicDescription("Description 1");
 		supplier.setLocation(location);
 		dairyResource.getContents().add(supplier);
 	}
@@ -636,7 +636,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		desLocation.setDirections("South");
 		desLocation.setLandmarks("Land Mark");		
 		location.setDescriptiveLocation(desLocation);		
-		
+		supplier.setPublicDescription("Description 2");
 		supplier.setLocation(location);
 		dairyResource.getContents().add(supplier);
 		
@@ -692,7 +692,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		location.setDescriptiveLocation(desLocation);		
 		
 		supplier.setLocation(location);
-		
+		supplier.setPublicDescription("Description 3");
 		supplier.getContacts().add(person2);
 		
 		dairyResource.getContents().add(supplier);

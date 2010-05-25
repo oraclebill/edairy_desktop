@@ -20,14 +20,9 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
@@ -38,7 +33,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
@@ -174,24 +168,6 @@ public class SupplierListDialog extends RecordDialog {
 				this) {
 
 			@Override
-			public EObject createWorkingCopy() {
-				Supplier supllier = DairyFactory.eINSTANCE.createSupplier();
-				Location location = ModelFactory.eINSTANCE.createLocation();
-				PostalLocation pLocation = ModelFactory.eINSTANCE
-						.createPostalLocation();
-				location.setPostalLocation(pLocation);
-				MapLocation mLocation = ModelFactory.eINSTANCE.createMapLocation();
-				location.setMapLocation(mLocation);
-				DescriptiveLocation desLoction = ModelFactory.eINSTANCE.createDescriptiveLocation();
-				location.setDescriptiveLocation(desLoction);
-				
-				//location.setStatutoryLocation(value)
-				supllier.setLocation(location);
-				EObject object = EMFUtil.createWorkingCopy(DairyPackage.eINSTANCE.getSupplier());
-				return supllier;
-			}
-
-			@Override
 			public void configureRidgets() {
 				super.configureRidgets();
 				// configure supplier ID
@@ -220,8 +196,7 @@ public class SupplierListDialog extends RecordDialog {
 				// Company Name
 				ITextRidget companyName = getRidget(ITextRidget.class,
 						BIND_ID_COMPANY_NAME); //$NON-NLS-1$
-				companyName.bindToModel(supplier,
-						DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName());
+				companyName.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_NAME.getName());
 				companyName.updateFromModel();
 
 				// Legal Name

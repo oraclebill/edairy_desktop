@@ -43,7 +43,7 @@ public abstract class ResultListDialogController extends
 	 * @return
 	 */
 	public  EObject createWorkingCopy(){
-		return EMFUtil.createObject(this.getEClass());
+		return EMFUtil.createWorkingCopy(this.getEClass());
 	}
 
 	protected abstract EClass getEClass();
