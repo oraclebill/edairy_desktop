@@ -20,7 +20,7 @@ public class CommunicationGroupController implements WidgetController {
 	private ITextRidget phoneTxt;
 	private ITextRidget secondPhoneTxt;
 	
-	public CommunicationGroupController(SubModuleController controller){
+	public CommunicationGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}

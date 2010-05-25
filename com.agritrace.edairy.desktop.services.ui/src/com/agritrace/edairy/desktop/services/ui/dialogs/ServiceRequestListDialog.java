@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -29,18 +30,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
@@ -237,28 +229,28 @@ public class ServiceRequestListDialog extends RecordDialog {
 		ResultListDialogController controller = new ResultListDialogController(
 				this) {
 
-			@Override
-			public EObject createWorkingCopy() {
-				AnimalHealthRequest req = RequestsFactory.eINSTANCE
-						.createAnimalHealthRequest();
-
-				// MemberShiip
-				Membership ship = DairyFactory.eINSTANCE.createMembership();
-				Person person = ModelFactory.eINSTANCE.createPerson();
-				ship.setMember(person);
-				req.setRequestingMember(ship);
-				Location location1 = ModelFactory.eINSTANCE.createLocation();
-				PostalLocation defaultLocation = ModelFactory.eINSTANCE
-						.createPostalLocation();
-
-				location1.setPostalLocation(defaultLocation);
-				Farm farm = TrackingFactory.eINSTANCE.createFarm();
-				farm.setLocation(location1);
-				req.setFarm(farm);
-
-				return req;
-
-			}
+//			@Override
+//			public EObject createWorkingCopy() {
+//				AnimalHealthRequest req = RequestsFactory.eINSTANCE
+//						.createAnimalHealthRequest();
+//
+//				// MemberShiip
+//				Membership ship = DairyFactory.eINSTANCE.createMembership();
+//				Person person = ModelFactory.eINSTANCE.createPerson();
+//				ship.setMember(person);
+//				req.setRequestingMember(ship);
+//				Location location1 = ModelFactory.eINSTANCE.createLocation();
+//				PostalLocation defaultLocation = ModelFactory.eINSTANCE
+//						.createPostalLocation();
+//
+//				location1.setPostalLocation(defaultLocation);
+//				Farm farm = TrackingFactory.eINSTANCE.createFarm();
+//				farm.setLocation(location1);
+//				req.setFarm(farm);
+//
+//				return req;
+//
+//			}
 
 			@Override
 			public void configureRidgets() {
@@ -594,6 +586,11 @@ public class ServiceRequestListDialog extends RecordDialog {
 			protected void doUpdate() {
 				// TODO Auto-generated method stub
 
+			}
+
+			@Override
+			protected EClass getEClass() {
+				return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
 			}
 
 		};

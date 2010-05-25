@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -19,16 +20,25 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.MapLocation;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
@@ -43,7 +53,7 @@ import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
 public class SupplierListDialog extends RecordDialog {
 
 	private static int WIDTH_HEIGHT = 400;
-	private static int DESC_HEIGHT_HEIGHT = 100;
+	private static int DESC_HEIGHT_HEIGHT = 50;
 
 	public static final String BIND_ID_SUPPLIER_ID = "bind.id.supplier.id";
 	public static final String BIND_ID_SUPPLIER_STATUS = "bind.id.supplier.status";
@@ -60,7 +70,7 @@ public class SupplierListDialog extends RecordDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(500, 700);
+		newShell.setSize(500, 750);
 		if (this.getDialogStyle() == DIALOG_STYLE_NEW) {
 			this.setTitle("Add Supplier");
 		} else if (this.getDialogStyle() == DIALOG_STYLE_VIEW) {
@@ -79,7 +89,7 @@ public class SupplierListDialog extends RecordDialog {
 				.grab(true, true).applyTo(comonComp);
 
 		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL,
-				SWT.BEGINNING).grab(true, false);
+				SWT.FILL).grab(true, true);
 		// Supplier Id
 		UIControlsFactory.createLabel(comonComp, "Supplier ID");
 		Text txtDate = UIControlsFactory.createText(comonComp);
@@ -117,7 +127,7 @@ public class SupplierListDialog extends RecordDialog {
 		Text descText = UIControlsFactory
 				.createTextMulti(comonComp, true, true);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
-				false).hint(-1, 100).applyTo(descText);
+				false).hint(-1, 50).applyTo(descText);
 		addUIControl(descText, BIND_ID_DESCRIPTION); //$NON-NLS-1$
 
 		createContactGroup(comonComp);
@@ -127,36 +137,36 @@ public class SupplierListDialog extends RecordDialog {
 	private void createContactGroup(Composite parent) {
 		Group companyContactGroup = UIControlsFactory.createGroup(parent,
 				"Company Contact");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
-				false).span(2, 1).applyTo(companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).span(2, 1).applyTo(companyContactGroup);
 		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(
 				companyContactGroup);
 		AddressGroupWidget addressWidget = new AddressGroupWidget(
 				companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1)
-				.applyTo(addressWidget.getGroup());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).span(2, 1).applyTo(addressWidget.getGroup());
 		addressWidget.getGroup().pack();
 
 		DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(
 				companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
-				directionWidget.getGroup());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(directionWidget.getGroup());
 		directionWidget.getGroup().pack();
 
 		MapGroupWidget mapWidget = new MapGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
-				mapWidget.getGroup());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(mapWidget.getGroup());
 		mapWidget.getGroup().pack();
-		
 
-		
 		CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(
 				companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
-				commGroup.getGroup());
-		
-//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1)
-//				.applyTo(commGroup.getGroup());
+		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
+		// commGroup.getGroup());
+		// commGroup.getGroup().pack();
+		//
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1)
+				.applyTo(commGroup.getGroup());
+		commGroup.getGroup().pack();
 	}
 
 	protected AbstractWindowController createController() {
@@ -166,6 +176,18 @@ public class SupplierListDialog extends RecordDialog {
 			@Override
 			public EObject createWorkingCopy() {
 				Supplier supllier = DairyFactory.eINSTANCE.createSupplier();
+				Location location = ModelFactory.eINSTANCE.createLocation();
+				PostalLocation pLocation = ModelFactory.eINSTANCE
+						.createPostalLocation();
+				location.setPostalLocation(pLocation);
+				MapLocation mLocation = ModelFactory.eINSTANCE.createMapLocation();
+				location.setMapLocation(mLocation);
+				DescriptiveLocation desLoction = ModelFactory.eINSTANCE.createDescriptiveLocation();
+				location.setDescriptiveLocation(desLoction);
+				
+				//location.setStatutoryLocation(value)
+				supllier.setLocation(location);
+				EObject object = EMFUtil.createWorkingCopy(DairyPackage.eINSTANCE.getSupplier());
 				return supllier;
 			}
 
@@ -227,8 +249,31 @@ public class SupplierListDialog extends RecordDialog {
 				// Configure address group
 				AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(
 						getController());
-				addressGroupController.setInputModel(supplier.getLocation());
+				addressGroupController.setInputModel(supplier.getLocation()
+						.getPostalLocation());
 				addressGroupController.updateBinding();
+
+				// Configure Direction Group
+				DirectionGroupController directionController = new DirectionGroupController(
+						getController());
+				directionController.setInputModel(supplier.getLocation()
+						.getDescriptiveLocation());
+				directionController.updateBinding();
+
+				// Configure Map Group
+				MapGroupController mapController = new MapGroupController(
+						getController());
+				mapController.setInputModel(supplier.getLocation()
+						.getMapLocation());
+				mapController.updateBinding();
+
+				// Configure Communication Group
+				CommunicationGroupController commController = new CommunicationGroupController(
+						getController());
+				commController.setInputModel(supplier.getContactMethods()
+						.size() > 0 ? supplier.getContactMethods().get(0)
+						: ModelFactory.eINSTANCE.createPerson());
+				commController.updateBinding();
 
 			}
 
@@ -243,6 +288,11 @@ public class SupplierListDialog extends RecordDialog {
 			@Override
 			protected void doUpdate() {
 				doSave();
+			}
+
+			@Override
+			protected EClass getEClass() {
+				return DairyPackage.eINSTANCE.getSupplier();
 			}
 
 		};

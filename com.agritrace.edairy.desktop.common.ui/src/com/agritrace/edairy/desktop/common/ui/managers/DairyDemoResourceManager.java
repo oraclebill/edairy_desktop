@@ -17,8 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
@@ -51,7 +53,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 
 public class DairyDemoResourceManager implements IDairyResourceManager {
 
@@ -567,6 +568,31 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Edward");
 		person.setFamilyName("Clinton");		
 		supplier.getContacts().add(person);
+		Location location = ModelFactory.eINSTANCE.createLocation();	
+		PostalLocation pLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	    pLocation.setAddress(1 + " - Ngeche");
+	    pLocation.setSection("Section A");
+	    pLocation.setEstate("Building B");
+	    pLocation.setVillage("West Windosr");
+	    pLocation.setSubLocation("Princeton Junction");
+	    pLocation.setLocation("Princeton");
+	    pLocation.setDivision("Mercer");
+	    pLocation.setDistrict("Central");
+	    pLocation.setProvince("Western");
+	    pLocation.setPostalCode("08550");
+	    location.setPostalLocation(pLocation);
+	    
+		MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
+		mapLocation.setLatitude(110.42);
+		mapLocation.setLongitude(120.22);
+		location.setMapLocation(mapLocation);
+		
+		DescriptiveLocation desLocation = ModelFactory.eINSTANCE.createDescriptiveLocation();
+		desLocation.setDirections("South");
+		desLocation.setLandmarks("Land Mark");		
+		location.setDescriptiveLocation(desLocation);		
+		
+		supplier.setLocation(location);
 		dairyResource.getContents().add(supplier);
 	}
     
@@ -587,6 +613,31 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Tracy");
 		person.setFamilyName("Bill");		
 		supplier.getContacts().add(person);
+		Location location = ModelFactory.eINSTANCE.createLocation();	
+		PostalLocation pLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	    pLocation.setAddress(1 + " - Ngeche");
+	    pLocation.setSection("Section A");
+	    pLocation.setEstate("Building B");
+	    pLocation.setVillage("West Windosr");
+	    pLocation.setSubLocation("Princeton Junction");
+	    pLocation.setLocation("Princeton");
+	    pLocation.setDivision("Mercer");
+	    pLocation.setDistrict("Central");
+	    pLocation.setProvince("Western");
+	    pLocation.setPostalCode("08550");
+	    location.setPostalLocation(pLocation);
+	    
+		MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
+		mapLocation.setLatitude(110.42);
+		mapLocation.setLongitude(120.22);
+		location.setMapLocation(mapLocation);
+		
+		DescriptiveLocation desLocation = ModelFactory.eINSTANCE.createDescriptiveLocation();
+		desLocation.setDirections("South");
+		desLocation.setLandmarks("Land Mark");		
+		location.setDescriptiveLocation(desLocation);		
+		
+		supplier.setLocation(location);
 		dairyResource.getContents().add(supplier);
 		
 	}
@@ -615,6 +666,33 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person2.setPhoneNumber("13816442241");
 		person2.setGivenName("John");
 		person2.setFamilyName("Smith");		
+		
+		Location location = ModelFactory.eINSTANCE.createLocation();	
+		PostalLocation pLocation = ModelFactory.eINSTANCE.createPostalLocation();
+	    pLocation.setAddress(1 + " - Ngeche");
+	    pLocation.setSection("Section A");
+	    pLocation.setEstate("Building B");
+	    pLocation.setVillage("West Windosr");
+	    pLocation.setSubLocation("Princeton Junction");
+	    pLocation.setLocation("Princeton");
+	    pLocation.setDivision("Mercer");
+	    pLocation.setDistrict("Central");
+	    pLocation.setProvince("Western");
+	    pLocation.setPostalCode("08550");
+	    location.setPostalLocation(pLocation);
+	    
+		MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
+		mapLocation.setLatitude(110.42);
+		mapLocation.setLongitude(120.22);
+		location.setMapLocation(mapLocation);
+		
+		DescriptiveLocation desLocation = ModelFactory.eINSTANCE.createDescriptiveLocation();
+		desLocation.setDirections("South");
+		desLocation.setLandmarks("Land Mark");		
+		location.setDescriptiveLocation(desLocation);		
+		
+		supplier.setLocation(location);
+		
 		supplier.getContacts().add(person2);
 		
 		dairyResource.getContents().add(supplier);
