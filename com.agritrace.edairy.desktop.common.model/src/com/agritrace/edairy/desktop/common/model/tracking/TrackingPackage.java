@@ -201,13 +201,13 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL = 2;
 
 	/**
-	 * The feature id for the '<em><b>Animnal Registration Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Registration Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID = 0;
+	int REGISTERED_ANIMAL__REGISTRATION_ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
@@ -736,15 +736,15 @@ public interface TrackingPackage extends EPackage {
 	EClass getRegisteredAnimal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimnalRegistrationId <em>Animnal Registration Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId <em>Registration Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Animnal Registration Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimnalRegistrationId()
+	 * @return the meta object for the attribute '<em>Registration Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId()
 	 * @see #getRegisteredAnimal()
 	 * @generated
 	 */
-	EAttribute getRegisteredAnimal_AnimnalRegistrationId();
+	EAttribute getRegisteredAnimal_RegistrationId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getGivenName <em>Given Name</em>}'.
@@ -1169,12 +1169,12 @@ public interface TrackingPackage extends EPackage {
 		EClass REGISTERED_ANIMAL = eINSTANCE.getRegisteredAnimal();
 
 		/**
-		 * The meta object literal for the '<em><b>Animnal Registration Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Registration Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID = eINSTANCE.getRegisteredAnimal_AnimnalRegistrationId();
+		EAttribute REGISTERED_ANIMAL__REGISTRATION_ID = eINSTANCE.getRegisteredAnimal_RegistrationId();
 
 		/**
 		 * The meta object literal for the '<em><b>Given Name</b></em>' attribute feature.

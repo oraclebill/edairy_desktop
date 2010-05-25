@@ -579,7 +579,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		for (int i = 0; i < animalNumber; i++) {
 			final RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
-			animal1.setAnimnalRegistrationId(10000 + i);
+			animal1.setRegistrationId(10000 + i);
 			animal1.setGivenName("animal_" + i);
 			animal1.setLocation(farm);
 			final int n = (int) (10.0 * Math.random());

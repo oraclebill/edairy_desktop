@@ -31,8 +31,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="measureType" eType="ecore:EEnum common.ecore#//UnitOfMeasure"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RegisteredAnimal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="animnalRegistrationId"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"

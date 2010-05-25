@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimnalRegistrationId <em>Animnal Registration Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId <em>Registration Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getGivenName <em>Given Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getGender <em>Gender</em>}</li>
@@ -46,30 +46,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface RegisteredAnimal extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Animnal Registration Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Registration Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Animnal Registration Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Registration Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Animnal Registration Id</em>' attribute.
-	 * @see #setAnimnalRegistrationId(long)
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_AnimnalRegistrationId()
+	 * @return the value of the '<em>Registration Id</em>' attribute.
+	 * @see #setRegistrationId(long)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_RegistrationId()
 	 * @model required="true"
 	 * @generated
 	 */
-	long getAnimnalRegistrationId();
+	long getRegistrationId();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimnalRegistrationId <em>Animnal Registration Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId <em>Registration Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Animnal Registration Id</em>' attribute.
-	 * @see #getAnimnalRegistrationId()
+	 * @param value the new value of the '<em>Registration Id</em>' attribute.
+	 * @see #getRegistrationId()
 	 * @generated
 	 */
-	void setAnimnalRegistrationId(long value);
+	void setRegistrationId(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Given Name</b></em>' attribute.

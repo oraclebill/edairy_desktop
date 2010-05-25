@@ -316,7 +316,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_AnimnalRegistrationId() {
+	public EAttribute getRegisteredAnimal_RegistrationId() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -606,7 +606,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEAttribute(containerEClass, CONTAINER__MEASURE_TYPE);
 
 		registeredAnimalEClass = createEClass(REGISTERED_ANIMAL);
-		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__REGISTRATION_ID);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__GIVEN_NAME);
 		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__LOCATION);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__GENDER);
@@ -694,7 +694,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEAttribute(getContainer_MeasureType(), theModelPackage.getUnitOfMeasure(), "measureType", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(registeredAnimalEClass, RegisteredAnimal.class, "RegisteredAnimal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRegisteredAnimal_AnimnalRegistrationId(), ecorePackage.getELong(), "animnalRegistrationId", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_RegistrationId(), ecorePackage.getELong(), "registrationId", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegisteredAnimal_GivenName(), ecorePackage.getEString(), "givenName", "", 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRegisteredAnimal_Location(), this.getFarm(), null, "location", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegisteredAnimal_Gender(), theModelPackage.getGender(), "gender", "", 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
