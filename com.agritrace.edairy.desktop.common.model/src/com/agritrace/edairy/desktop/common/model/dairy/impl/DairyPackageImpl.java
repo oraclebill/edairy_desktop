@@ -1067,17 +1067,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairy_DairyId() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(14);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getDairy_DairyBins() {
-		return (EReference)dairyEClass.getEStructuralFeatures().get(15);
+		return (EReference)dairyEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1166,7 +1157,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_AssetId() {
+	public EAttribute getAsset_TagType() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1175,7 +1166,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_TagType() {
+	public EAttribute getAsset_TagValue() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1184,7 +1175,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_TagValue() {
+	public EAttribute getAsset_DateAcquired() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1193,7 +1184,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_DateAcquired() {
+	public EAttribute getAsset_DamageDate() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1202,7 +1193,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_DamageDate() {
+	public EAttribute getAsset_DamageDescription() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1211,7 +1202,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_DamageDescription() {
+	public EAttribute getAsset_DateDisposed() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1220,7 +1211,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_DateDisposed() {
+	public EAttribute getAsset_DisposalReason() {
 		return (EAttribute)assetEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1229,17 +1220,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAsset_DisposalReason() {
-		return (EAttribute)assetEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAsset_DisposalWitness() {
-		return (EAttribute)assetEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)assetEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1520,7 +1502,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(dairyEClass, DAIRY__COLLECTION_JOURNALS);
 		createEReference(dairyEClass, DAIRY__SUPPLIERS);
 		createEReference(dairyEClass, DAIRY__ANIMAL_HEALTH_REQUESTS);
-		createEAttribute(dairyEClass, DAIRY__DAIRY_ID);
 		createEReference(dairyEClass, DAIRY__DAIRY_BINS);
 
 		membershipEClass = createEClass(MEMBERSHIP);
@@ -1533,7 +1514,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(membershipEClass, MEMBERSHIP__ACCOUNT);
 
 		assetEClass = createEClass(ASSET);
-		createEAttribute(assetEClass, ASSET__ASSET_ID);
 		createEAttribute(assetEClass, ASSET__TAG_TYPE);
 		createEAttribute(assetEClass, ASSET__TAG_VALUE);
 		createEAttribute(assetEClass, ASSET__DATE_ACQUIRED);
@@ -1646,7 +1626,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_Id(), ecorePackage.getEString(), "id", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_StartDate(), ecorePackage.getEDate(), "startDate", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_JobFunction(), ecorePackage.getEString(), "jobFunction", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_NationalId(), ecorePackage.getEString(), "nationalId", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_NationalId(), ecorePackage.getEString(), "nationalId", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getEmployee_NhifNumber(), ecorePackage.getEString(), "nhifNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_NssfNumber(), ecorePackage.getEString(), "nssfNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1707,7 +1687,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_CollectionJournals(), this.getCollectionJournal(), null, "collectionJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_AnimalHealthRequests(), theRequestsPackage.getAnimalHealthRequest(), null, "animalHealthRequests", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDairy_DairyId(), theModelPackage.getUniqueID(), "dairyId", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_DairyBins(), this.getDairyContainer(), null, "dairyBins", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(dairyEClass, null, "getMemberFarms", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -1717,19 +1696,19 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEOperation(op, g1);
 
 		initEClass(membershipEClass, Membership.class, "Membership", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMembership_MemberId(), ecorePackage.getEString(), "memberId", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMembership_MemberId(), ecorePackage.getEString(), "memberId", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_ApplicationDate(), ecorePackage.getEDate(), "applicationDate", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_EffectiveDate(), ecorePackage.getEDate(), "effectiveDate", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_Status(), this.getMembershipStatus(), "status", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMembership_DefaultRoute(), this.getRoute(), null, "defaultRoute", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMembership_Member(), theTrackingPackage.getFarmer(), null, "member", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getMembership_Member().getEKeys().add(theModelPackage.getPerson_PersonId());
 		initEReference(getMembership_Account(), theAccountPackage.getAccount(), theAccountPackage.getAccount_Member(), "account", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assetEClass, Asset.class, "Asset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAsset_AssetId(), theModelPackage.getUniqueID(), "assetId", null, 1, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsset_TagType(), ecorePackage.getEString(), "tagType", null, 1, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsset_TagValue(), ecorePackage.getEString(), "tagValue", null, 1, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAsset_DateAcquired(), ecorePackage.getEDate(), "dateAcquired", null, 1, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsset_TagType(), ecorePackage.getEString(), "tagType", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsset_TagValue(), ecorePackage.getEString(), "tagValue", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAsset_DateAcquired(), ecorePackage.getEDate(), "dateAcquired", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsset_DamageDate(), ecorePackage.getEDate(), "damageDate", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsset_DamageDescription(), ecorePackage.getEString(), "damageDescription", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAsset_DateDisposed(), ecorePackage.getEDate(), "dateDisposed", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1738,7 +1717,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(dairyContainerEClass, DairyContainer.class, "DairyContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDairyContainer_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getDairyContainer_AssetInfo().getEKeys().add(this.getAsset_AssetId());
 		getDairyContainer_AssetInfo().getEKeys().add(this.getAsset_TagValue());
 
 		initEClass(supplierEClass, Supplier.class, "Supplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1801,6 +1779,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
+		  (getVehicle_AssetInfo(), 
+		   source, 
+		   new String[] {
+			 "name", "assetInfo",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getVehicle_VehicleId(), 
 		   source, 
 		   new String[] {
@@ -1843,13 +1828,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
-		  (getDairy_DairyId(), 
-		   source, 
-		   new String[] {
-			 "name", "dairyId",
-			 "kind", "elementOnly"
-		   });		
-		addAnnotation
 		  (getMembership_MemberId(), 
 		   source, 
 		   new String[] {
@@ -1864,10 +1842,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
-		  (getAsset_AssetId(), 
+		  (getDairyContainer_AssetInfo(), 
 		   source, 
 		   new String[] {
-			 "name", "assetId",
+			 "name", "assetInfo",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
@@ -1894,6 +1872,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	protected void createTeneoAnnotations() {
 		String source = "teneo.jpa";			
+		addAnnotation
+		  (getVehicle_AssetInfo(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Embedded"
+		   });			
 		addAnnotation
 		  (getVehicle_VehicleId(), 
 		   source, 
@@ -1923,18 +1907,18 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Id\n@GeneratedValue"
-		   });					
+		   });				
 		addAnnotation
 		  (assetEClass, 
 		   source, 
 		   new String[] {
-			 "appinfo", "@Inheritance(strategy=JOINED)"
+			 "appinfo", "@Embeddable"
 		   });			
 		addAnnotation
-		  (getAsset_AssetId(), 
+		  (getDairyContainer_AssetInfo(), 
 		   source, 
 		   new String[] {
-			 "appinfo", "@Id\n@GeneratedValue"
+			 "appinfo", "@Embedded"
 		   });		
 	}
 

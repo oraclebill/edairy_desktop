@@ -464,6 +464,15 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
 
 	/**
+	 * The feature id for the '<em><b>Person Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__PERSON_ID = ModelPackage.PERSON__PERSON_ID;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -974,6 +983,15 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
 
 	/**
+	 * The feature id for the '<em><b>Company Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__COMPANY_ID = ModelPackage.COMPANY__COMPANY_ID;
+
+	/**
 	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1100,22 +1118,13 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 13;
 
 	/**
-	 * The feature id for the '<em><b>Dairy Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__DAIRY_ID = ModelPackage.COMPANY_FEATURE_COUNT + 14;
-
-	/**
 	 * The feature id for the '<em><b>Dairy Bins</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
@@ -1124,7 +1133,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 16;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -1219,22 +1228,13 @@ public interface DairyPackage extends EPackage {
 	int ASSET = 10;
 
 	/**
-	 * The feature id for the '<em><b>Asset Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSET__ASSET_ID = 0;
-
-	/**
 	 * The feature id for the '<em><b>Tag Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__TAG_TYPE = 1;
+	int ASSET__TAG_TYPE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Tag Value</b></em>' attribute.
@@ -1243,7 +1243,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__TAG_VALUE = 2;
+	int ASSET__TAG_VALUE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Date Acquired</b></em>' attribute.
@@ -1252,7 +1252,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__DATE_ACQUIRED = 3;
+	int ASSET__DATE_ACQUIRED = 2;
 
 	/**
 	 * The feature id for the '<em><b>Damage Date</b></em>' attribute.
@@ -1261,7 +1261,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__DAMAGE_DATE = 4;
+	int ASSET__DAMAGE_DATE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Damage Description</b></em>' attribute.
@@ -1270,7 +1270,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__DAMAGE_DESCRIPTION = 5;
+	int ASSET__DAMAGE_DESCRIPTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Date Disposed</b></em>' attribute.
@@ -1279,7 +1279,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__DATE_DISPOSED = 6;
+	int ASSET__DATE_DISPOSED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Disposal Reason</b></em>' attribute.
@@ -1288,7 +1288,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__DISPOSAL_REASON = 7;
+	int ASSET__DISPOSAL_REASON = 6;
 
 	/**
 	 * The feature id for the '<em><b>Disposal Witness</b></em>' attribute.
@@ -1297,7 +1297,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET__DISPOSAL_WITNESS = 8;
+	int ASSET__DISPOSAL_WITNESS = 7;
 
 	/**
 	 * The number of structural features of the '<em>Asset</em>' class.
@@ -1306,7 +1306,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSET_FEATURE_COUNT = 9;
+	int ASSET_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl <em>Container</em>}' class.
@@ -1444,6 +1444,15 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUPPLIER__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Company Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__COMPANY_ID = ModelPackage.COMPANY__COMPANY_ID;
 
 	/**
 	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.
@@ -1589,6 +1598,15 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int CUSTOMER__PHONE_NUMBER = ModelPackage.COMPANY__PHONE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Company Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__COMPANY_ID = ModelPackage.COMPANY__COMPANY_ID;
 
 	/**
 	 * The feature id for the '<em><b>Customer Id</b></em>' attribute.
@@ -2620,17 +2638,6 @@ public interface DairyPackage extends EPackage {
 	EReference getDairy_AnimalHealthRequests();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyId <em>Dairy Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Dairy Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyId()
-	 * @see #getDairy()
-	 * @generated
-	 */
-	EAttribute getDairy_DairyId();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2737,17 +2744,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAsset();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getAssetId <em>Asset Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Asset Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Asset#getAssetId()
-	 * @see #getAsset()
-	 * @generated
-	 */
-	EAttribute getAsset_AssetId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getTagType <em>Tag Type</em>}'.
@@ -3770,14 +3766,6 @@ public interface DairyPackage extends EPackage {
 		EReference DAIRY__ANIMAL_HEALTH_REQUESTS = eINSTANCE.getDairy_AnimalHealthRequests();
 
 		/**
-		 * The meta object literal for the '<em><b>Dairy Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DAIRY__DAIRY_ID = eINSTANCE.getDairy_DairyId();
-
-		/**
 		 * The meta object literal for the '<em><b>Dairy Bins</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3860,14 +3848,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ASSET = eINSTANCE.getAsset();
-
-		/**
-		 * The meta object literal for the '<em><b>Asset Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSET__ASSET_ID = eINSTANCE.getAsset_AssetId();
 
 		/**
 		 * The meta object literal for the '<em><b>Tag Type</b></em>' attribute feature.

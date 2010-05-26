@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getCompanyId <em>Company Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -167,5 +168,31 @@ public interface Company extends EObject {
 	 * @generated
 	 */
 	void setPhoneNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Company Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Company Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Company Id</em>' attribute.
+	 * @see #setCompanyId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_CompanyId()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @generated
+	 */
+	Long getCompanyId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Company#getCompanyId <em>Company Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Company Id</em>' attribute.
+	 * @see #getCompanyId()
+	 * @generated
+	 */
+	void setCompanyId(Long value);
 
 } // Company

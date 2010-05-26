@@ -41,12 +41,12 @@ public interface Container extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Container Id</em>' attribute.
-	 * @see #setContainerId(String)
+	 * @see #setContainerId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_ContainerId()
-	 * @model
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
 	 * @generated
 	 */
-	String getContainerId();
+	Long getContainerId();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getContainerId <em>Container Id</em>}' attribute.
@@ -56,7 +56,7 @@ public interface Container extends EObject {
 	 * @see #getContainerId()
 	 * @generated
 	 */
-	void setContainerId(String value);
+	void setContainerId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Owner</b></em>' reference.

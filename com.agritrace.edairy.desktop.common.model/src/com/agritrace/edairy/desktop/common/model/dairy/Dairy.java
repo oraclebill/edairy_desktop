@@ -38,7 +38,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionJournals <em>Collection Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyId <em>Dairy Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
  * </ul>
  * </p>
@@ -331,33 +330,6 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	EList<AnimalHealthRequest> getAnimalHealthRequests();
-
-	/**
-	 * Returns the value of the '<em><b>Dairy Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dairy Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dairy Id</em>' attribute.
-	 * @see #setDairyId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DairyId()
-	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
-	 *        extendedMetaData="name='dairyId' kind='elementOnly'"
-	 * @generated
-	 */
-	Long getDairyId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyId <em>Dairy Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dairy Id</em>' attribute.
-	 * @see #getDairyId()
-	 * @generated
-	 */
-	void setDairyId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Dairy Bins</b></em>' containment reference list.

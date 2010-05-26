@@ -134,7 +134,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	protected Gender gender = GENDER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAnimalType() <em>Animal Type</em>}' containment reference.
+	 * The cached value of the '{@link #getAnimalType() <em>Animal Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAnimalType()
@@ -439,6 +439,14 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public ReferenceAnimalType getAnimalType() {
+		if (animalType != null && animalType.eIsProxy()) {
+			InternalEObject oldAnimalType = (InternalEObject)animalType;
+			animalType = (ReferenceAnimalType)eResolveProxy(oldAnimalType);
+			if (animalType != oldAnimalType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
+			}
+		}
 		return animalType;
 	}
 
@@ -447,14 +455,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAnimalType(ReferenceAnimalType newAnimalType, NotificationChain msgs) {
-		ReferenceAnimalType oldAnimalType = animalType;
-		animalType = newAnimalType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, newAnimalType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public ReferenceAnimalType basicGetAnimalType() {
+		return animalType;
 	}
 
 	/**
@@ -463,17 +465,10 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public void setAnimalType(ReferenceAnimalType newAnimalType) {
-		if (newAnimalType != animalType) {
-			NotificationChain msgs = null;
-			if (animalType != null)
-				msgs = ((InternalEObject)animalType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, null, msgs);
-			if (newAnimalType != null)
-				msgs = ((InternalEObject)newAnimalType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, null, msgs);
-			msgs = basicSetAnimalType(newAnimalType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, newAnimalType, newAnimalType));
+		ReferenceAnimalType oldAnimalType = animalType;
+		animalType = newAnimalType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
 	}
 
 	/**
@@ -698,8 +693,6 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE:
-				return basicSetAnimalType(null, msgs);
 			case TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE:
 				return basicSetSireType(null, msgs);
 			case TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS:
@@ -726,7 +719,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__GENDER:
 				return getGender();
 			case TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE:
-				return getAnimalType();
+				if (resolve) return getAnimalType();
+				return basicGetAnimalType();
 			case TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE:
 				return getSireType();
 			case TrackingPackage.REGISTERED_ANIMAL__PURPOSE:

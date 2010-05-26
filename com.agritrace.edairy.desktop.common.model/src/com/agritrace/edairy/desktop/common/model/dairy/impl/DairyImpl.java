@@ -61,7 +61,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCollectionJournals <em>Collection Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyId <em>Dairy Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
  * </ul>
  * </p>
@@ -268,26 +267,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected EList<AnimalHealthRequest> animalHealthRequests;
-
-	/**
-	 * The default value of the '{@link #getDairyId() <em>Dairy Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDairyId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long DAIRY_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDairyId() <em>Dairy Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDairyId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long dairyId = DAIRY_ID_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDairyBins() <em>Dairy Bins</em>}' containment reference list.
@@ -545,27 +524,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getDairyId() {
-		return dairyId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDairyId(Long newDairyId) {
-		Long oldDairyId = dairyId;
-		dairyId = newDairyId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__DAIRY_ID, oldDairyId, dairyId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<DairyContainer> getDairyBins() {
 		if (dairyBins == null) {
 			dairyBins = new EObjectContainmentEList<DairyContainer>(DairyContainer.class, this, DairyPackage.DAIRY__DAIRY_BINS);
@@ -648,8 +606,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getSuppliers();
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return getAnimalHealthRequests();
-			case DairyPackage.DAIRY__DAIRY_ID:
-				return getDairyId();
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return getDairyBins();
 		}
@@ -715,9 +671,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				getAnimalHealthRequests().clear();
 				getAnimalHealthRequests().addAll((Collection<? extends AnimalHealthRequest>)newValue);
 				return;
-			case DairyPackage.DAIRY__DAIRY_ID:
-				setDairyId((Long)newValue);
-				return;
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				getDairyBins().clear();
 				getDairyBins().addAll((Collection<? extends DairyContainer>)newValue);
@@ -776,9 +729,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				getAnimalHealthRequests().clear();
 				return;
-			case DairyPackage.DAIRY__DAIRY_ID:
-				setDairyId(DAIRY_ID_EDEFAULT);
-				return;
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				getDairyBins().clear();
 				return;
@@ -822,8 +772,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return suppliers != null && !suppliers.isEmpty();
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return animalHealthRequests != null && !animalHealthRequests.isEmpty();
-			case DairyPackage.DAIRY__DAIRY_ID:
-				return DAIRY_ID_EDEFAULT == null ? dairyId != null : !DAIRY_ID_EDEFAULT.equals(dairyId);
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return dairyBins != null && !dairyBins.isEmpty();
 		}
@@ -852,8 +800,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		result.append(licenseEffectiveDate);
 		result.append(", licenseExpirationDate: ");
 		result.append(licenseExpirationDate);
-		result.append(", dairyId: ");
-		result.append(dairyId);
 		result.append(')');
 		return result.toString();
 	}

@@ -48,7 +48,7 @@ public interface Membership extends EObject {
 	 * @return the value of the '<em>Member Id</em>' attribute.
 	 * @see #setMemberId(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MemberId()
-	 * @model required="true"
+	 * @model id="true" required="true"
 	 *        extendedMetaData="name='memberId' kind='elementOnly'"
 	 * @generated
 	 */
@@ -182,7 +182,7 @@ public interface Membership extends EObject {
 	 * @return the value of the '<em>Member</em>' containment reference.
 	 * @see #setMember(Farmer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Member()
-	 * @model containment="true" required="true"
+	 * @model containment="true" keys="personId" required="true"
 	 * @generated
 	 */
 	Farmer getMember();

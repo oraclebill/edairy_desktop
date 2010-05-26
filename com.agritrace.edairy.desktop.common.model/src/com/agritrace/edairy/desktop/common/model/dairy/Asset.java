@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getAssetId <em>Asset Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getTagType <em>Tag Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getTagValue <em>Tag Value</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getDateAcquired <em>Date Acquired</em>}</li>
@@ -32,38 +31,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset()
  * @model extendedMetaData="name='Asset' kind='elementOnly'"
- *        annotation="teneo.jpa appinfo='@Inheritance(strategy=JOINED)'"
+ *        annotation="teneo.jpa appinfo='@Embeddable'"
  * @generated
  */
 public interface Asset extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Asset Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Asset Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Asset Id</em>' attribute.
-	 * @see #setAssetId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset_AssetId()
-	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
-	 *        extendedMetaData="name='assetId' kind='elementOnly'"
-	 *        annotation="teneo.jpa appinfo='@Id\n@GeneratedValue'"
-	 * @generated
-	 */
-	Long getAssetId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Asset#getAssetId <em>Asset Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Asset Id</em>' attribute.
-	 * @see #getAssetId()
-	 * @generated
-	 */
-	void setAssetId(Long value);
-
 	/**
 	 * Returns the value of the '<em><b>Tag Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -75,7 +46,7 @@ public interface Asset extends EObject {
 	 * @return the value of the '<em>Tag Type</em>' attribute.
 	 * @see #setTagType(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset_TagType()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getTagType();
@@ -101,7 +72,7 @@ public interface Asset extends EObject {
 	 * @return the value of the '<em>Tag Value</em>' attribute.
 	 * @see #setTagValue(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset_TagValue()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getTagValue();
@@ -127,7 +98,7 @@ public interface Asset extends EObject {
 	 * @return the value of the '<em>Date Acquired</em>' attribute.
 	 * @see #setDateAcquired(Date)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getAsset_DateAcquired()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Date getDateAcquired();

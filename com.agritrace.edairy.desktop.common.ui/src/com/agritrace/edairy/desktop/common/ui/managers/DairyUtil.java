@@ -12,6 +12,7 @@ import java.util.Date;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
@@ -30,8 +31,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
+import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
+import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
+import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
+import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
@@ -329,7 +335,39 @@ public class DairyUtil {
 			loc = farm.getLocation();
 		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, Arrays.asList(farm));
 	}	
+	
+	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name,
+			Gender gender, ReferenceAnimalType breed, Purpose purpose, 
+			RearingMode rearingMode, ReferenceAnimalType sireBreed, String features, String insuranceNo,  
+			Collection<AnimalIdentifier> identifierList, Collection<String> pastOwnerList, AcquisitionType acquisitionType, Date acquisitionDate  ) {
+		RegisteredAnimal animal = TrackingFactory.eINSTANCE.createRegisteredAnimal();
+		
+		if (null == identifierList) identifierList = Collections.EMPTY_LIST;
+		if (null == pastOwnerList) pastOwnerList = Collections.EMPTY_LIST;
+		
+		animal.setLocation(farm);
+		animal.setDateOfBirth(birthDate);		
+		animal.setGivenName(name);
+		animal.setGender(gender);
+		animal.setAnimalType(breed);
+		animal.setSireType(sireBreed);
+		animal.setAcquisitionType(acquisitionType);
+		animal.setDateOfAcquisition(acquisitionDate);
+		animal.setIdentifyingFeatures(features);
+		animal.setInsuranceNumber(insuranceNo);
+		animal.setPurpose(purpose);
+		animal.setRearingMode(rearingMode);
+		animal.getIdentifiers().addAll(identifierList);
+		animal.getPastOwners().addAll(pastOwnerList);
+		
+		return animal;		
+	}
 
+	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name,
+			Gender gender, ReferenceAnimalType breed, Purpose purpose, RearingMode rearingMode ) {
+		return createAnimal(farm, birthDate, name, gender, breed, purpose, rearingMode, null, null, null, null, null, null, null);
+	}
+	
 	/**
 	 * Create a new membership.
 	 * 

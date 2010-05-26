@@ -159,7 +159,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		final Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("Demo Dairy");
-		dairy.setDairyId(1l);
 		dairy.setFederalPin("");
 		dairy.setLicenseEffectiveDate(new Date());
 		dairy.setLicenseExpirationDate(new Date());
@@ -566,43 +565,35 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 			throws ParseException {
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
+		
 		for (int i = 0; i < containerNumber; i++) {
 			final Container container = TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.CAN);
 			final int id = containerId + i;
-			container.setContainerId("" + id);
+//			container.setContainerId("" + id);
 			container.setOwner(farm);
 			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setCapacity(50);
 			farm.getCans().add(container);
 		}
 
+		final ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
+		animal1_type.setSpecies("Cow");
+		animal1_type.setBreed("Guersney");
+		
 		for (int i = 0; i < animalNumber; i++) {
-			final RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
-			animal1.setRegistrationId(10000 + i);
-			animal1.setGivenName("animal_" + i);
-			animal1.setLocation(farm);
 			final int n = (int) (10.0 * Math.random());
 			final int m = n < 3 ? 10 + n : n + 3;
 			final String date = m > 9 ? "0" + n + "/" + m + "/200" + n : "0" + n + "/0" + m + "/200" + n;
 			final Date effectedDate = sdf.parse(date);
-			animal1.setDateOfAcquisition(effectedDate);
-			animal1.setPurpose(Purpose.DAIRY);
-			if (i % 2 == 0) {
-				animal1.setGender(Gender.FEMALE);
-			} else {
-				animal1.setGender(Gender.MALE);
-			}
-			final int rearingModelValue = i % 7;
-			animal1.setRearingMode(RearingMode.get(rearingModelValue));
-			final int acquisionType = i % 5;
-			animal1.setAcquisitionType(AcquisitionType.get(acquisionType));
-
-			final ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
-			animal1_type.setAnimalTypeId(animalId + i);
-			animal1_type.setSpecies("Cow");
-			animal1_type.setBreed("Western");
-			animal1.setAnimalType(animal1_type);
+			final Gender gender = i%20 ==0 ? Gender.MALE : Gender.FEMALE;
+			final String name = "animal_" + i;
+			final RearingMode rearingMode = RearingMode.get(i % 7);
+			
+			
+			final RegisteredAnimal animal1 = 
+				createAnimal(farm, effectedDate, name, gender, animal1_type, Purpose.DAIRY, rearingMode);
+					
 			farm.getAnimals().add(animal1);
 		}
 	}
@@ -612,8 +603,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		for (int i = 0; i < binNumber; i++) {
 			final DairyContainer bin = DairyFactory.eINSTANCE.createDairyContainer();
 			bin.setType(ContainerType.BIN);
-			final int id = binId + i;
-			bin.setContainerId("" + id);
 			// bin.setAssetId(new Long(id).longValue());
 			// bin.setTagType("BARCODE");
 			// bin.setTagValue("1100100100100111");

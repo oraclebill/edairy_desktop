@@ -312,7 +312,7 @@ public class ServiceRequestResourceManager {
 	    animal1.setAcquisitionType(AcquisitionType.get(acquisionType));
 
 	    final ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
-	    animal1_type.setAnimalTypeId(animalId + i);
+//	    animal1_type.setAnimalTypeId(animalId + i);
 	    animal1_type.setSpecies("Cow");
 	    animal1_type.setSpecies("jersey");
 	    animal1.setAnimalType(animal1_type);

@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyId <em>Company Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,6 +137,26 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @ordered
 	 */
 	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCompanyId() <em>Company Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompanyId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long COMPANY_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCompanyId() <em>Company Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompanyId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long companyId = COMPANY_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -291,6 +312,27 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompanyId(Long newCompanyId) {
+		Long oldCompanyId = companyId;
+		companyId = newCompanyId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_ID, oldCompanyId, companyId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -324,6 +366,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return getLocation();
 			case ModelPackage.COMPANY__PHONE_NUMBER:
 				return getPhoneNumber();
+			case ModelPackage.COMPANY__COMPANY_ID:
+				return getCompanyId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -357,6 +401,9 @@ public class CompanyImpl extends EObjectImpl implements Company {
 			case ModelPackage.COMPANY__PHONE_NUMBER:
 				setPhoneNumber((String)newValue);
 				return;
+			case ModelPackage.COMPANY__COMPANY_ID:
+				setCompanyId((Long)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -387,6 +434,9 @@ public class CompanyImpl extends EObjectImpl implements Company {
 			case ModelPackage.COMPANY__PHONE_NUMBER:
 				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
 				return;
+			case ModelPackage.COMPANY__COMPANY_ID:
+				setCompanyId(COMPANY_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -411,6 +461,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return location != null;
 			case ModelPackage.COMPANY__PHONE_NUMBER:
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
+			case ModelPackage.COMPANY__COMPANY_ID:
+				return COMPANY_ID_EDEFAULT == null ? companyId != null : !COMPANY_ID_EDEFAULT.equals(companyId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -431,6 +483,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		result.append(companyName);
 		result.append(", phoneNumber: ");
 		result.append(phoneNumber);
+		result.append(", companyId: ");
+		result.append(companyId);
 		result.append(')');
 		return result.toString();
 	}

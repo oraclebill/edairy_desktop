@@ -122,7 +122,7 @@ public interface Employee extends Person {
 	 * @return the value of the '<em>National Id</em>' attribute.
 	 * @see #setNationalId(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_NationalId()
-	 * @model id="true"
+	 * @model ordered="false"
 	 * @generated
 	 */
 	String getNationalId();

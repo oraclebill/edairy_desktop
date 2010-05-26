@@ -382,13 +382,22 @@ public interface ModelPackage extends EPackage {
 	int PERSON__CONTACT_METHODS = 10;
 
 	/**
+	 * The feature id for the '<em><b>Person Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PERSON_ID = 11;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 11;
+	int PERSON_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.
@@ -455,13 +464,22 @@ public interface ModelPackage extends EPackage {
 	int COMPANY__PHONE_NUMBER = 5;
 
 	/**
+	 * The feature id for the '<em><b>Company Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPANY__COMPANY_ID = 6;
+
+	/**
 	 * The number of structural features of the '<em>Company</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY_FEATURE_COUNT = 6;
+	int COMPANY_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
@@ -547,13 +565,22 @@ public interface ModelPackage extends EPackage {
 	int LOCATION__DESCRIPTIVE_LOCATION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Location Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LOCATION_ID = 4;
+
+	/**
 	 * The number of structural features of the '<em>Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION_FEATURE_COUNT = 4;
+	int LOCATION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ContactMethodImpl <em>Contact Method</em>}' class.
@@ -1000,6 +1027,17 @@ public interface ModelPackage extends EPackage {
 	EReference getPerson_ContactMethods();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Person#getPersonId <em>Person Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Person Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getPersonId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_PersonId();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Company <em>Company</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1074,6 +1112,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCompany_PhoneNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getCompanyId <em>Company Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Company Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getCompanyId()
+	 * @see #getCompany()
+	 * @generated
+	 */
+	EAttribute getCompany_CompanyId();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation <em>Descriptive Location</em>}'.
@@ -1160,6 +1209,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLocation_DescriptiveLocation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Location#getLocationId <em>Location Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Location#getLocationId()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_LocationId();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.ContactMethod <em>Contact Method</em>}'.
@@ -1547,6 +1607,14 @@ public interface ModelPackage extends EPackage {
 		EReference PERSON__CONTACT_METHODS = eINSTANCE.getPerson_ContactMethods();
 
 		/**
+		 * The meta object literal for the '<em><b>Person Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PERSON_ID = eINSTANCE.getPerson_PersonId();
+
+		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1603,6 +1671,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COMPANY__PHONE_NUMBER = eINSTANCE.getCompany_PhoneNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Company Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPANY__COMPANY_ID = eINSTANCE.getCompany_CompanyId();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
@@ -1671,6 +1747,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOCATION__DESCRIPTIVE_LOCATION = eINSTANCE.getLocation_DescriptiveLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Location Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LOCATION_ID = eINSTANCE.getLocation_LocationId();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ContactMethodImpl <em>Contact Method</em>}' class.

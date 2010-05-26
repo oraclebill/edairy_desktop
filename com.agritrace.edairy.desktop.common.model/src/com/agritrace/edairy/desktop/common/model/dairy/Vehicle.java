@@ -391,6 +391,8 @@ public interface Vehicle extends EObject {
 	 * @see #setAssetInfo(Asset)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_AssetInfo()
 	 * @model containment="true"
+	 *        extendedMetaData="name='assetInfo' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	Asset getAssetInfo();

@@ -56,7 +56,7 @@ public interface RegisteredAnimal extends EObject {
 	 * @return the value of the '<em>Registration Id</em>' attribute.
 	 * @see #setRegistrationId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_RegistrationId()
-	 * @model required="true"
+	 * @model id="true" required="true"
 	 * @generated
 	 */
 	long getRegistrationId();
@@ -155,26 +155,28 @@ public interface RegisteredAnimal extends EObject {
 	void setGender(Gender value);
 
 	/**
-	 * Returns the value of the '<em><b>Animal Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Animal Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Animal Type</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Animal Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Animal Type</em>' containment reference.
+	 * @return the value of the '<em>Animal Type</em>' reference.
 	 * @see #setAnimalType(ReferenceAnimalType)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_AnimalType()
-	 * @model containment="true" required="true"
+	 * @model required="true"
+	 *        extendedMetaData="name='animalType' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@ManyToOne(cascade=PERSIST)'"
 	 * @generated
 	 */
 	ReferenceAnimalType getAnimalType();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimalType <em>Animal Type</em>}' containment reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimalType <em>Animal Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Animal Type</em>' containment reference.
+	 * @param value the new value of the '<em>Animal Type</em>' reference.
 	 * @see #getAnimalType()
 	 * @generated
 	 */
@@ -247,7 +249,7 @@ public interface RegisteredAnimal extends EObject {
 	 * @return the value of the '<em>Date Of Acquisition</em>' attribute.
 	 * @see #setDateOfAcquisition(Date)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_DateOfAcquisition()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Date getDateOfAcquisition();
@@ -276,7 +278,7 @@ public interface RegisteredAnimal extends EObject {
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType
 	 * @see #setAcquisitionType(AcquisitionType)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_AcquisitionType()
-	 * @model default="" required="true"
+	 * @model default=""
 	 * @generated
 	 */
 	AcquisitionType getAcquisitionType();

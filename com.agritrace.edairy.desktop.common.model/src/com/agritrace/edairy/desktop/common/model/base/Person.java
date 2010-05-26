@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getContactMethods <em>Contact Methods</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getPersonId <em>Person Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -275,14 +276,15 @@ public interface Person extends EObject {
 	 * Returns the value of the '<em><b>Location</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Location</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Location</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Location</em>' reference.
 	 * @see #setLocation(Location)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_Location()
-	 * @model
+	 * @model extendedMetaData="name='location' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@OneToOne'"
 	 * @generated
 	 */
 	Location getLocation();
@@ -312,5 +314,31 @@ public interface Person extends EObject {
 	 * @generated
 	 */
 	EList<ContactMethod> getContactMethods();
+
+	/**
+	 * Returns the value of the '<em><b>Person Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Person Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Person Id</em>' attribute.
+	 * @see #setPersonId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_PersonId()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @generated
+	 */
+	Long getPersonId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Person#getPersonId <em>Person Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Person Id</em>' attribute.
+	 * @see #getPersonId()
+	 * @generated
+	 */
+	void setPersonId(Long value);
 
 } // Person

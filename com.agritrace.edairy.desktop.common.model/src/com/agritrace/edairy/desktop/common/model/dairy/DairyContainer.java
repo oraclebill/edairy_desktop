@@ -36,7 +36,9 @@ public interface DairyContainer extends Container {
 	 * @return the value of the '<em>Asset Info</em>' containment reference.
 	 * @see #setAssetInfo(Asset)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyContainer_AssetInfo()
-	 * @model containment="true" keys="assetId tagValue"
+	 * @model containment="true" keys="tagValue"
+	 *        extendedMetaData="name='assetInfo' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	Asset getAssetInfo();
