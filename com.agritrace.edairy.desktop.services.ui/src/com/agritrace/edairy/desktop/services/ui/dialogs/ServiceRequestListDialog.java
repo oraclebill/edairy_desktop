@@ -593,6 +593,11 @@ public class ServiceRequestListDialog extends RecordDialog {
 				return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
 			}
 
+			@Override
+			protected EObject createWorkingCopy() {
+				return EMFUtil.createWorkingCopy(this.getEClass(), 2);
+			}
+
 		};
 		controller.addListener(new IActionListener() {
 

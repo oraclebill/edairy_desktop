@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
@@ -68,16 +69,17 @@ public class EMFUtil {
 				{
 					List sourceList = (List) source.eGet(feature);
 					List targetList = (List) target.eGet(feature);
+					targetList.clear();
 
 					for (int j = 0; j < sourceList.size(); j++) {
-						Object sourceObj = sourceList.get(j);
-						if (targetList.size() > j) {
-							Object targetObj = targetList.get(j);
-							if (sourceObj instanceof EObject
-									&& targetObj instanceof EObject) {
-								copy((EObject) sourceObj, (EObject) targetObj);
-							}
-						}
+						EObject sourceObj = (EObject)sourceList.get(j);
+						EObject targetObj = createObject(sourceObj.eClass());
+						// if (sourceObj instanceof EObject
+						// && targetObj instanceof EObject) {
+						copy((EObject) sourceObj, (EObject) targetObj);
+						// //}
+						targetList.add(targetObj);
+						
 
 					}
 				}
@@ -85,22 +87,25 @@ public class EMFUtil {
 		}
 
 	}
-	
+
 	/**
 	 * Create working copy
 	 * 
 	 * @param className
 	 * @return
 	 */
-	public static EObject createWorkingCopy(EClass cls) {
+	public static EObject createWorkingCopy(EClass cls, int level) {
 
 		EObject object = createObject(cls);
-		if (object != null) {
-			for (EReference reference : cls.getEAllReferences()) {
-				if (!reference.isMany()) {
-					object.eSet(reference,
-							createWorkingCopy(reference.getEReferenceType()));
+		if (level > -1) {
+			if (object != null) {
+				for (EReference reference : cls.getEAllReferences()) {
+					if (!reference.isMany()) {
 
+						object.eSet(reference, createWorkingCopy(reference
+								.getEReferenceType(), level - 1));
+
+					}
 				}
 			}
 		}

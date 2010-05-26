@@ -1,7 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -33,6 +33,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
@@ -187,9 +188,10 @@ public class SupplierListDialog extends RecordDialog {
 				// statusCombo.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
 				statusCombo.bindToModel(Observables
 						.staticObservableList(VendorStatus.VALUES),
-						VendorStatus.class, "toString", new WritableValue(
-								supplier,
-								DairyPackage.Literals.SUPPLIER__STATUS));
+						VendorStatus.class, "toString", PojoObservables
+								.observeValue(supplier,
+										DairyPackage.Literals.SUPPLIER__STATUS
+												.getName()));
 
 				statusCombo.updateFromModel();
 
@@ -245,9 +247,7 @@ public class SupplierListDialog extends RecordDialog {
 				// Configure Communication Group
 				CommunicationGroupController commController = new CommunicationGroupController(
 						getController());
-				commController.setInputModel(supplier.getContactMethods()
-						.size() > 0 ? supplier.getContactMethods().get(0)
-						: ModelFactory.eINSTANCE.createPerson());
+				commController.setInputModel(supplier.getContactMethods());
 				commController.updateBinding();
 
 			}
@@ -255,7 +255,9 @@ public class SupplierListDialog extends RecordDialog {
 			@Override
 			protected void doCreation() {
 				Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-				dairy.getSuppliers().add((Supplier) this.getWorkingCopy());
+				Supplier newSupplier = (Supplier) this.getWorkingCopy();
+				dairy.getSuppliers().add(newSupplier);
+				DairyDemoResourceManager.INSTANCE.getDairyResoure().getContents().add(newSupplier);
 				doSave();
 
 			}
@@ -268,6 +270,11 @@ public class SupplierListDialog extends RecordDialog {
 			@Override
 			protected EClass getEClass() {
 				return DairyPackage.eINSTANCE.getSupplier();
+			}
+
+			@Override
+			protected EObject createWorkingCopy() {
+				return EMFUtil.createWorkingCopy(this.getEClass(), 2);
 			}
 
 		};

@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 

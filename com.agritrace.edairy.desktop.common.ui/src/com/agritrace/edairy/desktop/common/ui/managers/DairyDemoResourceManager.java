@@ -16,6 +16,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
@@ -593,6 +595,18 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		location.setDescriptiveLocation(desLocation);		
 		supplier.setPublicDescription("Description 1");
 		supplier.setLocation(location);
+		
+		// Phone
+		ContactMethod contactMethod = ModelFactory.eINSTANCE.createContactMethod();
+		contactMethod.setCmType(ContactMethodType.PHONE);
+		contactMethod.setCmValue("3222323");
+		supplier.getContactMethods().add(contactMethod);
+		// Email
+		ContactMethod email = ModelFactory.eINSTANCE.createContactMethod();
+		email.setCmType(ContactMethodType.EMAIL);
+		email.setCmValue("test@hotmail.com");		
+		supplier.getContactMethods().add(email);
+		
 		dairyResource.getContents().add(supplier);
 	}
     
@@ -638,6 +652,18 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		location.setDescriptiveLocation(desLocation);		
 		supplier.setPublicDescription("Description 2");
 		supplier.setLocation(location);
+		
+		// Phone
+		ContactMethod contactMethod = ModelFactory.eINSTANCE.createContactMethod();
+		contactMethod.setCmType(ContactMethodType.PHONE);
+		contactMethod.setCmValue("23232323");
+		supplier.getContactMethods().add(contactMethod);
+		// Email
+		ContactMethod email = ModelFactory.eINSTANCE.createContactMethod();
+		email.setCmType(ContactMethodType.EMAIL);
+		email.setCmValue("test@gmail.com");		
+		supplier.getContactMethods().add(email);
+		
 		dairyResource.getContents().add(supplier);
 		
 	}
@@ -695,6 +721,17 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		supplier.setPublicDescription("Description 3");
 		supplier.getContacts().add(person2);
 		
+		// Phone
+		ContactMethod contactMethod = ModelFactory.eINSTANCE.createContactMethod();
+		contactMethod.setCmType(ContactMethodType.PHONE);
+		contactMethod.setCmValue("13816442241");
+		supplier.getContactMethods().add(contactMethod);
+		// Email
+		ContactMethod email = ModelFactory.eINSTANCE.createContactMethod();
+		email.setCmType(ContactMethodType.EMAIL);
+		email.setCmValue("sparkwan@gmail.com");		
+		supplier.getContactMethods().add(email);
+			
 		dairyResource.getContents().add(supplier);
 	}
 
@@ -1092,5 +1129,10 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 //	dairy.getMemberFarms().add(farm);
 	farmResource.getContents().add(farm);
 
+    }
+    
+    public Resource getDairyResoure()
+    {
+    	return this.dairyResource;
     }
 }
