@@ -1,3 +1,4 @@
+package com.agritrace.edairy.desktop.common.model.persistence.test;
 ///**
 // * <copyright>
 // *
@@ -14,7 +15,7 @@
 // * $Id: Tutorial1.java,v 1.10 2009/05/08 04:01:01 mtaal Exp $
 // */
 //
-//package hbtutorial;
+//package com.agritrace.edairy.desktop.common.model.persistence.test.test;
 //
 //import java.io.IOException;
 //import java.util.Collections;
