@@ -9,7 +9,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 
 public class SupplierListView extends AbstractRecordListView {
@@ -30,7 +29,6 @@ public class SupplierListView extends AbstractRecordListView {
 		UIControlsFactory.createLabel(parent, "Categories");
 
 		List categoriesList = UIControlsFactory.createList(parent, false, true);
-		categoriesList.setItems(SupplierCategory.CATEGORIES);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(categoriesList);
 		addUIControl(categoriesList, BIND_ID_FILTER_CATEGORIES);
 
