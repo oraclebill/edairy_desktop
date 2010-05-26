@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+
 public class MemberAccountWidget {
 	
 	private Composite composite;

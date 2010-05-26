@@ -30,7 +30,7 @@ public class ViewFarmDialog extends AbstractDialogView {
 	private Button deleteButton;
 
 	
-	protected ViewFarmDialog(Shell parentShell) {
+	public ViewFarmDialog(Shell parentShell) {
 		super(parentShell);
 		// TODO Auto-generated constructor stub
 	}
@@ -53,7 +53,7 @@ public class ViewFarmDialog extends AbstractDialogView {
 	@Override
 	protected AbstractWindowController createController() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ViewFarmDialogController();
 	}
 	
 	private void createHeader(Composite parent){
