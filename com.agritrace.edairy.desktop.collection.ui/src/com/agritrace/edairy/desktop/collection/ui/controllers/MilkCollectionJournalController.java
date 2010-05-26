@@ -207,7 +207,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	    public String getText(Object element) {
 		if (element instanceof CollectionJournalLine) {
 		    if (((CollectionJournalLine) element).getFarmContainer() != null) {
-			return ((CollectionJournalLine) element).getFarmContainer().getContainerId();
+			return "" + ((CollectionJournalLine) element).getFarmContainer().getContainerId();
 		    }
 
 		}

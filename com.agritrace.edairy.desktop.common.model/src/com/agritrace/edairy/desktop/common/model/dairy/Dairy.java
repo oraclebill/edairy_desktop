@@ -300,7 +300,7 @@ public interface Dairy extends Company {
 	EList<CollectionJournal> getCollectionJournals();
 
 	/**
-	 * Returns the value of the '<em><b>Suppliers</b></em>' reference list.
+	 * Returns the value of the '<em><b>Suppliers</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Supplier}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -308,9 +308,9 @@ public interface Dairy extends Company {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Suppliers</em>' reference list.
+	 * @return the value of the '<em>Suppliers</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Suppliers()
-	 * @model
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Supplier> getSuppliers();

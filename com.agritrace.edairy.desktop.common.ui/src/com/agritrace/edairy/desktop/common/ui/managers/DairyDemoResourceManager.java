@@ -324,7 +324,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 				// farmResource.getContents().add(f);
 			}
 			final Membership member1 = DairyFactory.eINSTANCE.createMembership();
-			member1.setMemberId("" + 1000 + i);
 			member1.setMember(createFarmer(
 					"Joseph - " + i,
 					"X",
@@ -347,8 +346,8 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 			dairy.getMemberships().add(member1);
 		}
 
-		// addRequests(dairy);
-		// addSuppliers(dairy);
+		addRequests(dairy);
+		addSuppliers(dairy);
 
 		return dairy;
 	}
@@ -406,10 +405,11 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createSupplier1(Dairy dairy) throws ParseException {
 		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10001l);
+//		supplier.setSupplierId(10001l);
 		supplier.setCompanyName("John Inventory Ltd ");
 		supplier.setLegalName("JHVEN");
 		supplier.setStatus(VendorStatus.VALID);
+		supplier.setLocation(createLocation(null, null, null)); 
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
 		supplier.setExpirationDate(sdf.parse("01/01/2011"));
@@ -427,10 +427,11 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createSupplier2(Dairy dairy) throws ParseException {
 		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10002l);
+//		supplier.setSupplierId(10002l);
 		supplier.setCompanyName("Tom  Amusement Ltd ");
 		supplier.setLegalName("TAL");
 		supplier.setStatus(VendorStatus.VALID);
+		supplier.setLocation(createLocation(null, null, null)); 
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
 		supplier.setExpirationDate(sdf.parse("02/01/2011"));
@@ -449,7 +450,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	private void createSupplier3(Dairy dairy) throws ParseException {
 
 		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10003l);
+//		supplier.setSupplierId(10003l);
 		supplier.setCompanyName("Gold Store Ltd ");
 		supplier.setLegalName("GSLD");
 		supplier.setStatus(VendorStatus.INVALID);
@@ -459,7 +460,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		dairy.getSuppliers().add(supplier);
 		supplier.getCategories().add("Category 6");
 		supplier.getCategories().add("Category 7");
-
+		supplier.setLocation(createLocation(null, null, null)); 
 		supplier.getContacts().add(createPerson("Tommy", "B", "Chong", "212-555-1212"));
 		supplier.getContacts().add(createPerson("Bruce", "B", "Willis", "408-555-1212"));
 
@@ -777,7 +778,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		
 
 		ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
-		ship.setMemberId("1002");
 		req.setRequestingMember(ship);
 
 		req.setType(RequestType.INSEMINATION);
@@ -814,7 +814,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createReq3(Dairy dairy) throws ParseException {
 		final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-		req.setRequestId(1003l);
+//		req.setRequestId(1003l);
 		req.setDate(Calendar.getInstance().getTime());
 
 		dairy.getAnimalHealthRequests().add(req);
@@ -829,7 +829,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		// dairy.getAnimalHealthRequests().add(person);
 
 		ship.setMember(createFarmer("John", "", "Locke", "123", (Farm)null));
-		ship.setMemberId("1003");
 		req.setRequestingMember(ship);
 
 		req.setType(RequestType.VETERINARY);

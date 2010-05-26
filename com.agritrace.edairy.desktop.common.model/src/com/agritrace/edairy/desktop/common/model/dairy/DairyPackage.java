@@ -1100,7 +1100,7 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Suppliers</b></em>' reference list.
+	 * The feature id for the '<em><b>Suppliers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2616,10 +2616,10 @@ public interface DairyPackage extends EPackage {
 	EReference getDairy_CollectionJournals();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Suppliers</em>'.
+	 * @return the meta object for the containment reference list '<em>Suppliers</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers()
 	 * @see #getDairy()
 	 * @generated
@@ -3750,7 +3750,7 @@ public interface DairyPackage extends EPackage {
 		EReference DAIRY__COLLECTION_JOURNALS = eINSTANCE.getDairy_CollectionJournals();
 
 		/**
-		 * The meta object literal for the '<em><b>Suppliers</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Suppliers</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

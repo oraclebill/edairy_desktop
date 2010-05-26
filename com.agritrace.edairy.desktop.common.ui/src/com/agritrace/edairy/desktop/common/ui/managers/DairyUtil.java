@@ -294,7 +294,7 @@ public class DairyUtil {
 		Farmer toBe = TrackingFactory.eINSTANCE.createFarmer();
 
 		initPersonInfo(toBe, givenName, middleName, familyName, phoneNumber, location, contactMethods);
-		toBe.getFarms().addAll(farms);
+		if (null != farms) toBe.getFarms().addAll(farms);
 		
 		return toBe;
 	}
@@ -333,7 +333,8 @@ public class DairyUtil {
 		Location loc = null;
 		if (null != farm )
 			loc = farm.getLocation();
-		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, Arrays.asList(farm));
+			
+		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, null != farm ? Arrays.asList(farm) : null);
 	}	
 	
 	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name,

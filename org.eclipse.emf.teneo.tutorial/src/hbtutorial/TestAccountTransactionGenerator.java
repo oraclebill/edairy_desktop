@@ -81,7 +81,7 @@ public class TestAccountTransactionGenerator {
 	Membership randomMember() {
 		Membership member = DairyFactory.eINSTANCE.createMembership();
 		member.setMember(randomPerson());
-		member.setMemberId(Long.toString(rand.nextLong()));
+//		member.setMemberId(Long.toString(rand.nextLong()));
 		member.setApplicationDate(randomDate());
 		// member.setDefaultRoute(value);
 		return member;

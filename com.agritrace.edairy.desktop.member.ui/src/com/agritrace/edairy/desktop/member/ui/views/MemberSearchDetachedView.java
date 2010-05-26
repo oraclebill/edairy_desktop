@@ -193,7 +193,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	    if (element instanceof Membership) {
 		switch (columnIndex) {
 		case 0:
-		    return ((Membership) element).getMemberId();
+		    return "" + ((Membership) element).getMemberId();
 		case 1:
 			Person member = ((Membership) element).getMember();
 		    return member.getFamilyName() + ", " + member.getGivenName();
@@ -554,7 +554,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	final Object selectedObject = selection.getFirstElement();
 	String memberId = null;
 	if (selectedObject != null && selectedObject instanceof Membership) {
-	    memberId = ((Membership) selectedObject).getMemberId();
+	    memberId = "" + ((Membership) selectedObject).getMemberId();
 	}
 	DairyDemoResourceManager.INSTANCE.reLoadDairyResource();
 	init();

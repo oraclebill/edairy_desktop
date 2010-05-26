@@ -100,7 +100,7 @@ public class ServiceRequestResourceManager {
 	serviceRequestResource.getContents().add(person);
 
 	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
-	ship.setMemberId("1001");
+//	ship.setMemberId("1001");
 	req.setRequestingMember(ship);
 
 	req.setType(RequestType.VETERINARY);
@@ -152,7 +152,7 @@ public class ServiceRequestResourceManager {
 	serviceRequestResource.getContents().add(person);
 
 	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
-	ship.setMemberId("1002");
+//	ship.setMemberId("1002");
 	req.setRequestingMember(ship);
 
 	req.setType(RequestType.INSEMINATION);
@@ -204,7 +204,7 @@ public class ServiceRequestResourceManager {
 	serviceRequestResource.getContents().add(person);
 
 	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
-	ship.setMemberId("1003");
+//	ship.setMemberId("1003");
 	req.setRequestingMember(ship);
 
 	req.setType(RequestType.VETERINARY);
@@ -282,8 +282,8 @@ public class ServiceRequestResourceManager {
 	for (int i = 0; i < containerNumber; i++) {
 	    final Container container = TrackingFactory.eINSTANCE.createContainer();
 	    container.setType(ContainerType.BIN);
-	    final int id = containerId + i;
-	    container.setContainerId("" + id);
+//	    final int id = containerId + i;
+//	    container.setContainerId(id);
 	    container.setOwner(farm);
 	    container.setMeasureType(UnitOfMeasure.LITRE);
 	    container.setCapacity(50);

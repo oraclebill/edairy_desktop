@@ -46,13 +46,13 @@ public interface Membership extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Member Id</em>' attribute.
-	 * @see #setMemberId(String)
+	 * @see #setMemberId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MemberId()
-	 * @model id="true" required="true"
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 *        extendedMetaData="name='memberId' kind='elementOnly'"
 	 * @generated
 	 */
-	String getMemberId();
+	Long getMemberId();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMemberId <em>Member Id</em>}' attribute.
@@ -62,7 +62,7 @@ public interface Membership extends EObject {
 	 * @see #getMemberId()
 	 * @generated
 	 */
-	void setMemberId(String value);
+	void setMemberId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Application Date</b></em>' attribute.

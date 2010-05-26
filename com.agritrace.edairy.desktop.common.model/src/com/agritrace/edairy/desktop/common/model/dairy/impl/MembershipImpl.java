@@ -55,7 +55,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String MEMBER_ID_EDEFAULT = null;
+	protected static final Long MEMBER_ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMemberId() <em>Member Id</em>}' attribute.
@@ -65,7 +65,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected String memberId = MEMBER_ID_EDEFAULT;
+	protected Long memberId = MEMBER_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getApplicationDate() <em>Application Date</em>}' attribute.
@@ -181,7 +181,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMemberId() {
+	public Long getMemberId() {
 		return memberId;
 	}
 
@@ -190,8 +190,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMemberId(String newMemberId) {
-		String oldMemberId = memberId;
+	public void setMemberId(Long newMemberId) {
+		Long oldMemberId = memberId;
 		memberId = newMemberId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_ID, oldMemberId, memberId));
@@ -470,7 +470,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
-				setMemberId((String)newValue);
+				setMemberId((Long)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				setApplicationDate((Date)newValue);

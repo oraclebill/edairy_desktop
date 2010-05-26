@@ -122,7 +122,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	    @Override
 	    public void selectionChanged(SelectionChangedEvent event) {
 		final String value = (String) ((IStructuredSelection) event.getSelection()).getFirstElement();
-		newContainer.setContainerId(value);
+		newContainer.setContainerId(Long.decode(value));
 
 	    }
 	});
@@ -217,7 +217,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
     @Override
     public void modifyText(ModifyEvent e) {
 	if (e.getSource() == idText) {
-	    newContainer.setContainerId(idText.getText().trim());
+	    newContainer.setContainerId(Long.decode(idText.getText().trim()));
 	} else if (e.getSource() == numberText) {
 	    final String value = numberText.getText();
 	    if (value != null && !value.trim().equals("")) {

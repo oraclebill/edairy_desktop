@@ -249,7 +249,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected EList<CollectionJournal> collectionJournals;
 
 	/**
-	 * The cached value of the '{@link #getSuppliers() <em>Suppliers</em>}' reference list.
+	 * The cached value of the '{@link #getSuppliers() <em>Suppliers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSuppliers()
@@ -502,7 +502,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	public EList<Supplier> getSuppliers() {
 		if (suppliers == null) {
-			suppliers = new EObjectResolvingEList<Supplier>(Supplier.class, this, DairyPackage.DAIRY__SUPPLIERS);
+			suppliers = new EObjectContainmentEList<Supplier>(Supplier.class, this, DairyPackage.DAIRY__SUPPLIERS);
 		}
 		return suppliers;
 	}
@@ -562,6 +562,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return ((InternalEList<?>)getBranchLocations()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				return ((InternalEList<?>)getCollectionJournals()).basicRemove(otherEnd, msgs);
+			case DairyPackage.DAIRY__SUPPLIERS:
+				return ((InternalEList<?>)getSuppliers()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return ((InternalEList<?>)getAnimalHealthRequests()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__DAIRY_BINS:

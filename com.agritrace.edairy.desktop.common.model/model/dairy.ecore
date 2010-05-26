@@ -197,8 +197,8 @@
         eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
         eType="#//CollectionJournal" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" upperBound="-1"
-        eType="#//Supplier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
+        upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
         eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" upperBound="-1"
@@ -206,7 +206,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Membership">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true">
+        eType="ecore:EDataType common.ecore#//UniqueID" iD="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="name" value="memberId"/>
         <details key="kind" value="elementOnly"/>
