@@ -327,7 +327,7 @@ public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListen
 		if (e.getSource() == idText) {
 			final String value = idText.getText();
 			if (value != null && !value.trim().equals("")) {
-				memberShip.setMemberId(value);
+				memberShip.setMemberId(Long.decode(value));
 				if (idError.isVisible()) {
 					setErrorMessage(null);
 					idError.hide();

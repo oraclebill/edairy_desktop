@@ -58,7 +58,7 @@ public interface AnimalHealthRequest extends EObject {
 	 * @return the value of the '<em>Request Id</em>' attribute.
 	 * @see #setRequestId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.requests.RequestsPackage#getAnimalHealthRequest_RequestId()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
 	 * @generated
 	 */
 	Long getRequestId();
@@ -100,26 +100,30 @@ public interface AnimalHealthRequest extends EObject {
 	void setRequestingMember(Membership value);
 
 	/**
-	 * Returns the value of the '<em><b>Dairy</b></em>' reference.
+	 * Returns the value of the '<em><b>Dairy</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dairy</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dairy</em>' reference.
+	 * @return the value of the '<em>Dairy</em>' container reference.
 	 * @see #setDairy(Dairy)
 	 * @see com.agritrace.edairy.desktop.common.model.requests.RequestsPackage#getAnimalHealthRequest_Dairy()
-	 * @model required="true"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests
+	 * @model opposite="animalHealthRequests" keys="companyId" required="true" transient="false"
+	 *        extendedMetaData="name='dairy' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@ManyToOne(cascade=PERSIST)'"
 	 * @generated
 	 */
 	Dairy getDairy();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy <em>Dairy</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy <em>Dairy</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dairy</em>' reference.
+	 * @param value the new value of the '<em>Dairy</em>' container reference.
 	 * @see #getDairy()
 	 * @generated
 	 */

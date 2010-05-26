@@ -359,9 +359,10 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalHealthRequestEClass, AnimalHealthRequest.class, "AnimalHealthRequest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAnimalHealthRequest_RequestId(), theModelPackage.getUniqueID(), "requestId", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimalHealthRequest_RequestId(), theModelPackage.getUniqueID(), "requestId", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimalHealthRequest_RequestingMember(), theDairyPackage.getMembership(), null, "requestingMember", null, 1, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnimalHealthRequest_Dairy(), theDairyPackage.getDairy(), null, "dairy", null, 1, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnimalHealthRequest_Dairy(), theDairyPackage.getDairy(), theDairyPackage.getDairy_AnimalHealthRequests(), "dairy", null, 1, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getAnimalHealthRequest_Dairy().getEKeys().add(theModelPackage.getCompany_CompanyId());
 		initEAttribute(getAnimalHealthRequest_Date(), ecorePackage.getEDate(), "date", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimalHealthRequest_Type(), this.getRequestType(), "type", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimalHealthRequest_ReportedProblem(), ecorePackage.getEString(), "reportedProblem", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -381,6 +382,45 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
+		// teneo.jpa
+		createTeneoAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		addAnnotation
+		  (getAnimalHealthRequest_Dairy(), 
+		   source, 
+		   new String[] {
+			 "name", "dairy",
+			 "kind", "elementOnly"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>teneo.jpa</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createTeneoAnnotations() {
+		String source = "teneo.jpa";			
+		addAnnotation
+		  (getAnimalHealthRequest_Dairy(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@ManyToOne(cascade=PERSIST)"
+		   });
 	}
 
 } //RequestsPackageImpl

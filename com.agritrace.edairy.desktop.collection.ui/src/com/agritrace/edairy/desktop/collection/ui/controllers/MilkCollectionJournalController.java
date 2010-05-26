@@ -207,7 +207,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	    public String getText(Object element) {
 		if (element instanceof CollectionJournalLine) {
 		    if (((CollectionJournalLine) element).getFarmContainer() != null) {
-			return ((CollectionJournalLine) element).getFarmContainer().getContainerId();
+			return "" + ((CollectionJournalLine) element).getFarmContainer().getContainerId();
 		    }
 
 		}
@@ -547,7 +547,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	if (dairy != null) {
 	    final List<Membership> members = dairy.getMemberships();
 	    for (final Membership m : members) {
-		final List<Farm> farms = m.getFarms();
+		final List<Farm> farms = m.getMember().getFarms();
 		for (final Farm f : farms) {
 		    final List<Container> containers = f.getCans();
 		    for (final Container c : containers) {

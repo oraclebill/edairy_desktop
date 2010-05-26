@@ -51,6 +51,8 @@ public interface DairyLocation extends EObject {
 	 * @see #setId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyLocation_Id()
 	 * @model id="true"
+	 *        extendedMetaData="name='Id' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Id\n@GeneratedValue'"
 	 * @generated
 	 */
 	long getId();

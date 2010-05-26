@@ -47,7 +47,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONTAINER_ID_EDEFAULT = null;
+	protected static final Long CONTAINER_ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getContainerId() <em>Container Id</em>}' attribute.
@@ -57,7 +57,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @generated
 	 * @ordered
 	 */
-	protected String containerId = CONTAINER_ID_EDEFAULT;
+	protected Long containerId = CONTAINER_ID_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
@@ -153,7 +153,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getContainerId() {
+	public Long getContainerId() {
 		return containerId;
 	}
 
@@ -162,8 +162,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContainerId(String newContainerId) {
-		String oldContainerId = containerId;
+	public void setContainerId(Long newContainerId) {
+		Long oldContainerId = containerId;
 		containerId = newContainerId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__CONTAINER_ID, oldContainerId, containerId));
@@ -302,7 +302,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
-				setContainerId((String)newValue);
+				setContainerId((Long)newValue);
 				return;
 			case TrackingPackage.CONTAINER__OWNER:
 				setOwner((Farm)newValue);

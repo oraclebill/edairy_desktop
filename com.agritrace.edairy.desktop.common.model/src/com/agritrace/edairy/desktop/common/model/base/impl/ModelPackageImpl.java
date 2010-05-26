@@ -525,8 +525,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCompany() {
-		return companyEClass;
+	public EAttribute getPerson_PersonId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -534,8 +534,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompany_Contacts() {
-		return (EReference)companyEClass.getEStructuralFeatures().get(3);
+	public EClass getCompany() {
+		return companyEClass;
 	}
 
 	/**
@@ -561,8 +561,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCompany_PhoneNumber() {
-		return (EAttribute)companyEClass.getEStructuralFeatures().get(5);
+	public EReference getCompany_ContactMethods() {
+		return (EReference)companyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompany_Contacts() {
+		return (EReference)companyEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -579,8 +588,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompany_ContactMethods() {
-		return (EReference)companyEClass.getEStructuralFeatures().get(2);
+	public EAttribute getCompany_PhoneNumber() {
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCompany_CompanyId() {
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -653,6 +671,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getLocation_DescriptiveLocation() {
 		return (EReference)locationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLocation_LocationId() {
+		return (EAttribute)locationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -808,6 +835,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(personEClass, PERSON__PHONE_NUMBER);
 		createEReference(personEClass, PERSON__LOCATION);
 		createEReference(personEClass, PERSON__CONTACT_METHODS);
+		createEAttribute(personEClass, PERSON__PERSON_ID);
 
 		companyEClass = createEClass(COMPANY);
 		createEAttribute(companyEClass, COMPANY__LEGAL_NAME);
@@ -816,6 +844,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(companyEClass, COMPANY__CONTACTS);
 		createEReference(companyEClass, COMPANY__LOCATION);
 		createEAttribute(companyEClass, COMPANY__PHONE_NUMBER);
+		createEAttribute(companyEClass, COMPANY__COMPANY_ID);
 
 		descriptiveLocationEClass = createEClass(DESCRIPTIVE_LOCATION);
 		createEAttribute(descriptiveLocationEClass, DESCRIPTIVE_LOCATION__DIRECTIONS);
@@ -826,6 +855,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(locationEClass, LOCATION__MAP_LOCATION);
 		createEReference(locationEClass, LOCATION__STATUTORY_LOCATION);
 		createEReference(locationEClass, LOCATION__DESCRIPTIVE_LOCATION);
+		createEAttribute(locationEClass, LOCATION__LOCATION_ID);
 
 		contactMethodEClass = createEClass(CONTACT_METHOD);
 		createEAttribute(contactMethodEClass, CONTACT_METHOD__CM_TYPE);
@@ -906,8 +936,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getPerson_Suffix(), ecorePackage.getEString(), "suffix", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_NickName(), ecorePackage.getEString(), "nickName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_Location(), this.getLocation(), null, "location", null, 1, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_Location(), this.getLocation(), null, "location", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_PersonId(), this.getUniqueID(), "personId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(companyEClass, Company.class, "Company", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCompany_LegalName(), ecorePackage.getEString(), "legalName", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -916,6 +947,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getCompany_Contacts(), this.getPerson(), null, "contacts", null, 1, -1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompany_Location(), this.getLocation(), null, "location", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompany_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCompany_CompanyId(), this.getUniqueID(), "companyId", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(descriptiveLocationEClass, DescriptiveLocation.class, "DescriptiveLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDescriptiveLocation_Directions(), ecorePackage.getEString(), "directions", null, 0, 1, DescriptiveLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -926,6 +958,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getLocation_MapLocation(), this.getMapLocation(), null, "mapLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLocation_StatutoryLocation(), this.getStatutoryLocation(), null, "statutoryLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLocation_DescriptiveLocation(), this.getDescriptiveLocation(), null, "descriptiveLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLocation_LocationId(), this.getUniqueID(), "locationId", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(contactMethodEClass, ContactMethod.class, "ContactMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContactMethod_CmType(), this.getContactMethodType(), "cmType", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1016,6 +1049,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "kind", "element"
 		   });		
 		addAnnotation
+		  (getPerson_Location(), 
+		   source, 
+		   new String[] {
+			 "name", "location",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (descriptiveLocationEClass, 
 		   source, 
 		   new String[] {
@@ -1084,6 +1124,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "appinfo", "@Embeddable"
 		   });				
+		addAnnotation
+		  (getPerson_Location(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@OneToOne"
+		   });			
 		addAnnotation
 		  (descriptiveLocationEClass, 
 		   source, 

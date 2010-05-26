@@ -54,6 +54,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getJournalId <em>Journal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -219,6 +220,26 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * @ordered
 	 */
 	protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long JOURNAL_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long journalId = JOURNAL_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -551,6 +572,27 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Long getJournalId() {
+		return journalId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJournalId(Long newJournalId) {
+		Long oldJournalId = journalId;
+		journalId = newJournalId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID, oldJournalId, journalId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -595,6 +637,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 				return getDriverTotal();
 			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
 				return getRecordTotal();
+			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+				return getJournalId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -642,6 +686,9 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
 				setRecordTotal((BigDecimal)newValue);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+				setJournalId((Long)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -687,6 +734,9 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
 				setRecordTotal(RECORD_TOTAL_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+				setJournalId(JOURNAL_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -721,6 +771,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 				return DRIVER_TOTAL_EDEFAULT == null ? driverTotal != null : !DRIVER_TOTAL_EDEFAULT.equals(driverTotal);
 			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
 				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
+			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -745,6 +797,8 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		result.append(driverTotal);
 		result.append(", recordTotal: ");
 		result.append(recordTotal);
+		result.append(", journalId: ");
+		result.append(journalId);
 		result.append(')');
 		return result.toString();
 	}

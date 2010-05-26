@@ -8,6 +8,8 @@ package com.agritrace.edairy.desktop.common.model.dairy;
 
 import java.util.Date;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Vehicle</b></em>'.
@@ -29,6 +31,8 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getYear <em>Year</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,7 +40,7 @@ import java.util.Date;
  * @model
  * @generated
  */
-public interface Vehicle extends Asset {
+public interface Vehicle extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -374,5 +378,61 @@ public interface Vehicle extends Asset {
 	 * @generated
 	 */
 	void setDriver(Employee value);
+
+	/**
+	 * Returns the value of the '<em><b>Asset Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Asset Info</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Asset Info</em>' containment reference.
+	 * @see #setAssetInfo(Asset)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_AssetInfo()
+	 * @model containment="true"
+	 *        extendedMetaData="name='assetInfo' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
+	 * @generated
+	 */
+	Asset getAssetInfo();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Asset Info</em>' containment reference.
+	 * @see #getAssetInfo()
+	 * @generated
+	 */
+	void setAssetInfo(Asset value);
+
+	/**
+	 * Returns the value of the '<em><b>Vehicle Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Vehicle Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Vehicle Id</em>' attribute.
+	 * @see #setVehicleId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_VehicleId()
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 *        extendedMetaData="name='vehicleId' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Id'"
+	 * @generated
+	 */
+	Long getVehicleId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Vehicle Id</em>' attribute.
+	 * @see #getVehicleId()
+	 * @generated
+	 */
+	void setVehicleId(Long value);
 
 } // Vehicle

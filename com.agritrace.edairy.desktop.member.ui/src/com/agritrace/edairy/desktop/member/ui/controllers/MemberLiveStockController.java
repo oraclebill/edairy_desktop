@@ -179,7 +179,7 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 	public void updateBinding() {
 		if(member != null){
 			animalInput.clear();
-			final List<Farm> farms = member.getFarms();
+			final List<Farm> farms = member.getMember().getFarms();
 			for (final Farm farm : farms) {
 				animalInput.addAll(farm.getAnimals());
 			}

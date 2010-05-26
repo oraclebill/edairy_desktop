@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl#getAnimalTypeId <em>Animal Type Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl#getBreed <em>Breed</em>}</li>
  * </ul>
@@ -32,26 +31,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAnimalType {
-	/**
-	 * The default value of the '{@link #getAnimalTypeId() <em>Animal Type Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAnimalTypeId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long ANIMAL_TYPE_ID_EDEFAULT = 0L;
-
-	/**
-	 * The cached value of the '{@link #getAnimalTypeId() <em>Animal Type Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAnimalTypeId()
-	 * @generated
-	 * @ordered
-	 */
-	protected long animalTypeId = ANIMAL_TYPE_ID_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getSpecies() <em>Species</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -116,27 +95,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getAnimalTypeId() {
-		return animalTypeId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAnimalTypeId(long newAnimalTypeId) {
-		long oldAnimalTypeId = animalTypeId;
-		animalTypeId = newAnimalTypeId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID, oldAnimalTypeId, animalTypeId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getSpecies() {
 		return species;
 	}
@@ -182,8 +140,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
-				return getAnimalTypeId();
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				return getSpecies();
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__BREED:
@@ -200,9 +156,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
-				setAnimalTypeId((Long)newValue);
-				return;
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				setSpecies((String)newValue);
 				return;
@@ -221,9 +174,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
-				setAnimalTypeId(ANIMAL_TYPE_ID_EDEFAULT);
-				return;
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				setSpecies(SPECIES_EDEFAULT);
 				return;
@@ -242,8 +192,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackingPackage.REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID:
-				return animalTypeId != ANIMAL_TYPE_ID_EDEFAULT;
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				return SPECIES_EDEFAULT == null ? species != null : !SPECIES_EDEFAULT.equals(species);
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__BREED:
@@ -262,9 +210,7 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (animalTypeId: ");
-		result.append(animalTypeId);
-		result.append(", species: ");
+		result.append(" (species: ");
 		result.append(species);
 		result.append(", breed: ");
 		result.append(breed);

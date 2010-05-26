@@ -42,7 +42,7 @@ public class MemberSearchViewFilter extends ViewerFilter {
 		case SHOW_ALL:
 			return true;
 		case FILTER_ID:
-			return member.getMemberId().matches(searchValue);
+			return member.getMemberId() == Long.decode(searchValue);
 
 		case FILTER_NAME:
 			String compareString = member.getMember().getGivenName() + " " + member.getMember().getFamilyName();
