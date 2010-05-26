@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 
 public class SupplierListView extends AbstractRecordListView {
@@ -23,25 +24,26 @@ public class SupplierListView extends AbstractRecordListView {
 	protected void createFilterCondtions(Composite parent) {
 		parent.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
 				.numColumns(2).create());
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(parent);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 
 		// Categories
 		UIControlsFactory.createLabel(parent, "Categories");
 
 		List categoriesList = UIControlsFactory.createList(parent, false, true);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(categoriesList);
+		categoriesList.setItems(SupplierCategory.CATEGORIES);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(categoriesList);
 		addUIControl(categoriesList, BIND_ID_FILTER_CATEGORIES);
 
 		// Contact name
 		UIControlsFactory.createLabel(parent, "Contact Name");
 		Text contactName = UIControlsFactory.createText(parent, SWT.None);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(contactName);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(contactName);
 		addUIControl(contactName, BIND_ID_FILTER_CONTACT);
 
 		// Status
 		UIControlsFactory.createLabel(parent, "Status");
 		Combo status = UIControlsFactory.createCombo(parent);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(status);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(status);
 		addUIControl(status, BIND_ID_FILTER_STATUS);
 
 	}

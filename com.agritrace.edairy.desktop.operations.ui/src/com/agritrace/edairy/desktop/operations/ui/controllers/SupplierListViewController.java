@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
@@ -134,6 +135,7 @@ public class SupplierListViewController extends AbstractRecordListController {
 			statusCombo.updateFromModel();
 			statusCombo.setSelection(0);
 		}
+
 	}
 
 }
