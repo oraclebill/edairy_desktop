@@ -318,6 +318,7 @@ public interface Dairy extends Company {
 	/**
 	 * Returns the value of the '<em><b>Animal Health Requests</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy <em>Dairy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Animal Health Requests</em>' containment reference list isn't clear,
@@ -326,7 +327,8 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Animal Health Requests</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_AnimalHealthRequests()
-	 * @model containment="true"
+	 * @see com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy
+	 * @model opposite="dairy" containment="true" keys="requestId"
 	 * @generated
 	 */
 	EList<AnimalHealthRequest> getAnimalHealthRequests();

@@ -200,7 +200,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
-        eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"/>
+        eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"
+        eOpposite="requests.ecore#//AnimalHealthRequest/dairy" eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" upperBound="-1"
         eType="#//DairyContainer" containment="true"/>
   </eClassifiers>

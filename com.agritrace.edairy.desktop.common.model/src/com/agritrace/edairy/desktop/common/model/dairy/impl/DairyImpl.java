@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 import java.util.Collection;
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -514,7 +516,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	public EList<AnimalHealthRequest> getAnimalHealthRequests() {
 		if (animalHealthRequests == null) {
-			animalHealthRequests = new EObjectContainmentEList<AnimalHealthRequest>(AnimalHealthRequest.class, this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS);
+			animalHealthRequests = new EObjectContainmentWithInverseEList<AnimalHealthRequest>(AnimalHealthRequest.class, this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY);
 		}
 		return animalHealthRequests;
 	}
@@ -540,6 +542,21 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnimalHealthRequests()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

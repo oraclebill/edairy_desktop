@@ -89,7 +89,7 @@ public interface RequestsPackage extends EPackage {
 	int ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER = 1;
 
 	/**
-	 * The feature id for the '<em><b>Dairy</b></em>' reference.
+	 * The feature id for the '<em><b>Dairy</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -249,10 +249,10 @@ public interface RequestsPackage extends EPackage {
 	EReference getAnimalHealthRequest_RequestingMember();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy <em>Dairy</em>}'.
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy <em>Dairy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Dairy</em>'.
+	 * @return the meta object for the container reference '<em>Dairy</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy()
 	 * @see #getAnimalHealthRequest()
 	 * @generated
@@ -439,7 +439,7 @@ public interface RequestsPackage extends EPackage {
 		EReference ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER = eINSTANCE.getAnimalHealthRequest_RequestingMember();
 
 		/**
-		 * The meta object literal for the '<em><b>Dairy</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Dairy</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

@@ -346,7 +346,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 			dairy.getMemberships().add(member1);
 		}
 
-		addRequests(dairy);
+		//addRequests(dairy);
 		addSuppliers(dairy);
 
 		return dairy;
