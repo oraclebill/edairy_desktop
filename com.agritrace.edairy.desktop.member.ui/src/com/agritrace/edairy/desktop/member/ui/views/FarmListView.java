@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.Activator;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class FarmListView extends SubModuleView {
 	

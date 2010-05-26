@@ -13,19 +13,14 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberRegisterDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
 public class MemberRegisterDialog extends AbstractDialogView {
 
 	private Composite main;
-	private Text txtName;
-	//    private Text txtId;
-	private List lstMembers;
 
 	private MembershipTabFolder tabFolder;
 	private MemberInfoGroup infoGroup;
@@ -39,8 +34,6 @@ public class MemberRegisterDialog extends AbstractDialogView {
 		super(null);
 	}
 
-
-
 	@Override
 	protected Control buildView(Composite parent) {
 		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -52,7 +45,7 @@ public class MemberRegisterDialog extends AbstractDialogView {
 
 		createMemberSelectorGroup(main);
 		tabFolder = new MembershipTabFolder(main);
-
+		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));
 		return null;

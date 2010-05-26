@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.member.ui.controllers;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -13,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroupController implements WidgetController, ISelectionListener {
 	

@@ -1,29 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
-import org.eclipse.riena.ui.ridgets.IActionListener;
-import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.ITableRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
-import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
-import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.swt.widgets.Display;
-
-import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.MemberRegisterDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
-import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 
 public class FarmListViewController extends SubModuleController{
 //	private ITableRidget farmListTable;

@@ -21,11 +21,9 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
-import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 
 /**
@@ -34,15 +32,15 @@ import com.agritrace.edairy.desktop.member.ui.Activator;
  *
  */
 public class MemberProfileWidget {
-	
+
 	private Composite composite;
-	
+
 	public static final String INFO_GROUP="Membership Information";
 	public static final String applicationDate = "Application Date:";
 	public static final String effectiveDate = "Effective Date:";
 	public static final String status = "Status:";
 	public static final String phoneNumber = "Phone Number:";
-	
+
 	private Text dateText;
 	private Text effectDateText;
 	private ComboViewer comboStatus;
@@ -53,32 +51,22 @@ public class MemberProfileWidget {
 		composite.setLayout(new GridLayout(1, false));
 		initGUI();
 	}
-	
+
 	public Composite getComposite() {
 		return composite;
 	}
-	
+
 	public void initGUI() {
 		createInfoGroup();
-		Group addressGroup = new AddressGroupWidget(composite).getGroup();
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressGroup);
-		
-		Composite mapPanel = UIControlsFactory.createComposite(composite) ;
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(mapPanel);
-		mapPanel.setLayout(new GridLayout(3,false));
-		
-		Group directionGroup = new DirectionsGroupWidget(mapPanel).getGroup();
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(directionGroup);
-		
-		Group mapGroup = new MapGroupWidget(mapPanel).getGroup();
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(mapGroup);
-		
-		Group communicationGroup =  new CommunicationsGroupWidget(composite).getGroup();
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(communicationGroup);
+
+		LocationProfileWidget addressWidget = new LocationProfileWidget(composite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget.getComposite());
+
+		CommunicationsGroupWidget communication = new CommunicationsGroupWidget(composite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication.getGroup());
 	}
-	
+
 	private void createInfoGroup(){
-		
 		Group infoGroup = UIControlsFactory.createGroup(composite, INFO_GROUP);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoGroup);
 		infoGroup.setLayout(new GridLayout(6, false));
@@ -86,13 +74,11 @@ public class MemberProfileWidget {
 		dateText = UIControlsFactory.createText(infoGroup, SWT.READ_ONLY | SWT.BORDER,
 				ViewWidgetId.memberInfo_applicationDate);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateText);
-		// addUIControl(dateText,ViewWidgetId.calendarDate);
 
 		final Button calendarButton = new Button(infoGroup, SWT.PUSH);
 		final Image calendar = Activator.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON);
 		calendarButton.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
-		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 		calendarButton.addSelectionListener(new SelectionAdapter() {
 			@Override

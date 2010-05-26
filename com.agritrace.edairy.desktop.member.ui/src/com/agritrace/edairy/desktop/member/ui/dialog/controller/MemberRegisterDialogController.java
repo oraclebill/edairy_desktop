@@ -7,10 +7,9 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberCollectionRecrodsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberFarmWidgetController;

@@ -12,8 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
-
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 public class MemberFarmWidget {
 	
 	private Composite composite;

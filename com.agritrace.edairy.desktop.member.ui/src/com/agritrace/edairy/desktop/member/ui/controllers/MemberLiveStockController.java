@@ -20,7 +20,6 @@ import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -34,10 +33,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
@@ -46,8 +42,8 @@ import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.Activator;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddAnimalDialog;
 
 public class MemberLiveStockController implements WidgetController, ISelectionListener, DateRangeFilter {

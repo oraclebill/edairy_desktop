@@ -2,8 +2,6 @@ package com.agritrace.edairy.desktop.member.ui.controllers;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -27,16 +24,13 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.Activator;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidgetController implements WidgetController, DateRangeFilter {
 
