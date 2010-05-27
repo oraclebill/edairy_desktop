@@ -1,16 +1,10 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.MapLocation;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
-import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
-import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 
 public class MemberProfileWidgetController implements WidgetController {
@@ -19,18 +13,14 @@ public class MemberProfileWidgetController implements WidgetController {
 	private Membership member;
 
 	private MemberInfoGroupController infoGroup;
-	private AddressGroupWidgetController addressGroup;
-	private DirectionGroupController directionGroup;
-	private MapGroupController mapGroup;
+	private LocationProfileWidgetController locationController;
 	private CommunicationGroupController communicationGroup;
 
 	public MemberProfileWidgetController(IController controller) {
 		this.controller = controller;
 		infoGroup = new MemberInfoGroupController(controller);
-		addressGroup = new AddressGroupWidgetController(controller);
-		directionGroup = new DirectionGroupController(controller);
-		mapGroup = new MapGroupController(controller);
-		communicationGroup = new CommunicationGroupController(controller);
+		locationController = new LocationProfileWidgetController(controller);
+		communicationGroup =  new CommunicationGroupController(controller);
 		configue();
 	}
 
@@ -40,11 +30,8 @@ public class MemberProfileWidgetController implements WidgetController {
 			return;
 		}
 		infoGroup.configue();
-		addressGroup.configue();
-		directionGroup.configue();
-		mapGroup.configue();
+		locationController.configue();
 		communicationGroup.configue();
-
 	}
 
 	@Override
@@ -62,14 +49,14 @@ public class MemberProfileWidgetController implements WidgetController {
 	}
 
 	@Override
-	public SubModuleController getController() {
+	public IController getController() {
 		// TODO Auto-generated method stub
-		return null;
+		return controller;
 	}
 
 	@Override
 	public void setController(IController controller) {
-		// TODO Auto-generated method stub
+		this.controller = controller;
 
 	}
 
@@ -77,14 +64,7 @@ public class MemberProfileWidgetController implements WidgetController {
 	public void updateBinding() {
 		infoGroup.setInputModel(member);
 		if (member.getMember().getLocation() != null) {
-			PostalLocation location = member.getMember().getLocation().getPostalLocation();
-			addressGroup.setInputModel(location);
-			
-			MapLocation map = member.getMember().getLocation().getMapLocation();
-			mapGroup.setInputModel(map);
-			
-			DescriptiveLocation dLocation =  member.getMember().getLocation().getDescriptiveLocation();
-			directionGroup.setInputModel(dLocation);
+			locationController.setInputModel(member.getMember().getLocation());
 			
 		}
 		communicationGroup.setInputModel(member.getMember());
