@@ -261,7 +261,7 @@ public class SupplierListDialog extends RecordDialog {
 				Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
 				Supplier newSupplier = (Supplier) this.getWorkingCopy();
 				dairy.getSuppliers().add(newSupplier);
-				DairyDemoResourceManager.INSTANCE.getDairyResource().getContents().add(newSupplier);
+//				DairyDemoResourceManager.INSTANCE.getDairyResoure().getContents().add(newSupplier);
 				doSave();
 
 			}
