@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.ui.services.tests;
 
+import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createFarmer;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -97,8 +99,8 @@ public class ServiceRequestResourceManager {
 	person.setFamilyName("Wan");
 	serviceRequestResource.getContents().add(person);
 
-	ship.setMember(person);
-	ship.setMemberId("1001");
+	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
+//	ship.setMemberId("1001");
 	req.setRequestingMember(ship);
 
 	req.setType(RequestType.VETERINARY);
@@ -149,8 +151,8 @@ public class ServiceRequestResourceManager {
 	person.setFamilyName("Copper");
 	serviceRequestResource.getContents().add(person);
 
-	ship.setMember(person);
-	ship.setMemberId("1002");
+	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
+//	ship.setMemberId("1002");
 	req.setRequestingMember(ship);
 
 	req.setType(RequestType.INSEMINATION);
@@ -201,8 +203,8 @@ public class ServiceRequestResourceManager {
 	person.setFamilyName("Smith");
 	serviceRequestResource.getContents().add(person);
 
-	ship.setMember(person);
-	ship.setMemberId("1003");
+	ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
+//	ship.setMemberId("1003");
 	req.setRequestingMember(ship);
 
 	req.setType(RequestType.VETERINARY);
@@ -280,8 +282,8 @@ public class ServiceRequestResourceManager {
 	for (int i = 0; i < containerNumber; i++) {
 	    final Container container = TrackingFactory.eINSTANCE.createContainer();
 	    container.setType(ContainerType.BIN);
-	    final int id = containerId + i;
-	    container.setContainerId("" + id);
+//	    final int id = containerId + i;
+//	    container.setContainerId(id);
 	    container.setOwner(farm);
 	    container.setMeasureType(UnitOfMeasure.LITRE);
 	    container.setCapacity(50);
@@ -290,7 +292,7 @@ public class ServiceRequestResourceManager {
 
 	for (int i = 0; i < animalNumber; i++) {
 	    final RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
-	    animal1.setAnimnalRegistrationId(10001);
+	    animal1.setRegistrationId(10001);
 	    animal1.setGivenName("animal_" + i);
 	    animal1.setLocation(farm);
 	    final int n = (int) (10.0 * Math.random());
@@ -310,7 +312,7 @@ public class ServiceRequestResourceManager {
 	    animal1.setAcquisitionType(AcquisitionType.get(acquisionType));
 
 	    final ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
-	    animal1_type.setAnimalTypeId(animalId + i);
+//	    animal1_type.setAnimalTypeId(animalId + i);
 	    animal1_type.setSpecies("Cow");
 	    animal1_type.setSpecies("jersey");
 	    animal1.setAnimalType(animal1_type);

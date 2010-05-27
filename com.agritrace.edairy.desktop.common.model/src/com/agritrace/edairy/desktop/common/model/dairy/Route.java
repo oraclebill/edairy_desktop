@@ -42,7 +42,8 @@ public interface Route extends EObject {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Id()
-	 * @model
+	 * @model extendedMetaData="name='Id' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Id\n@GeneratedValue'"
 	 * @generated
 	 */
 	long getId();

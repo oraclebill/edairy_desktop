@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.requests.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 
@@ -21,11 +22,13 @@ import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -83,16 +86,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @ordered
 	 */
 	protected Membership requestingMember;
-
-	/**
-	 * The cached value of the '{@link #getDairy() <em>Dairy</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDairy()
-	 * @generated
-	 * @ordered
-	 */
-	protected Dairy dairy;
 
 	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
@@ -358,15 +351,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public Dairy getDairy() {
-		if (dairy != null && dairy.eIsProxy()) {
-			InternalEObject oldDairy = (InternalEObject)dairy;
-			dairy = (Dairy)eResolveProxy(oldDairy);
-			if (dairy != oldDairy) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY, oldDairy, dairy));
-			}
-		}
-		return dairy;
+		if (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY) return null;
+		return (Dairy)eContainer();
 	}
 
 	/**
@@ -374,8 +360,9 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dairy basicGetDairy() {
-		return dairy;
+	public NotificationChain basicSetDairy(Dairy newDairy, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDairy, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY, msgs);
+		return msgs;
 	}
 
 	/**
@@ -384,10 +371,19 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public void setDairy(Dairy newDairy) {
-		Dairy oldDairy = dairy;
-		dairy = newDairy;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY, oldDairy, dairy));
+		if (newDairy != eInternalContainer() || (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY && newDairy != null)) {
+			if (EcoreUtil.isAncestor(this, newDairy))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDairy != null)
+				msgs = ((InternalEObject)newDairy).eInverseAdd(this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, Dairy.class, msgs);
+			msgs = basicSetDairy(newDairy, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY, newDairy, newDairy));
 	}
 
 	/**
@@ -695,6 +691,50 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDairy((Dairy)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
+				return basicSetDairy(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, Dairy.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
@@ -703,8 +743,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 				if (resolve) return getRequestingMember();
 				return basicGetRequestingMember();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
-				if (resolve) return getDairy();
-				return basicGetDairy();
+				return getDairy();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE:
 				return getDate();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__TYPE:
@@ -856,7 +895,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER:
 				return requestingMember != null;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
-				return dairy != null;
+				return getDairy() != null;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE:
 				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__TYPE:

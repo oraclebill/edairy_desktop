@@ -122,7 +122,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	    @Override
 	    public void selectionChanged(SelectionChangedEvent event) {
 		final String value = (String) ((IStructuredSelection) event.getSelection()).getFirstElement();
-		newContainer.setContainerId(value);
+		newContainer.setContainerId(Long.decode(value));
 
 	    }
 	});
@@ -167,7 +167,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
 	farmComboViewer.setContentProvider(new ArrayContentProvider());
 	if (memberShip != null) {
-	    farmComboViewer.setInput(memberShip.getFarms());
+	    farmComboViewer.setInput(memberShip.getMember().getFarms());
 	    farmComboViewer.setLabelProvider(new LabelProvider() {
 		@Override
 		public String getText(Object element) {
@@ -191,8 +191,8 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
 	    }
 	});
 
-	if (memberShip != null && memberShip.getFarms().size() > 0) {
-	    farmComboViewer.setSelection(new StructuredSelection(memberShip.getFarms().get(0)));
+	if (memberShip != null && memberShip.getMember().getFarms().size() > 0) {
+	    farmComboViewer.setSelection(new StructuredSelection(memberShip.getMember().getFarms().get(0)));
 	}
 	containerComboViewer.getCombo().select(0);
 	measureComboViewer.getCombo().select(0);
@@ -217,7 +217,7 @@ public class AddContainerDialog extends TitleAreaDialog implements ModifyListene
     @Override
     public void modifyText(ModifyEvent e) {
 	if (e.getSource() == idText) {
-	    newContainer.setContainerId(idText.getText().trim());
+	    newContainer.setContainerId(Long.decode(idText.getText().trim()));
 	} else if (e.getSource() == numberText) {
 	    final String value = numberText.getText();
 	    if (value != null && !value.trim().equals("")) {

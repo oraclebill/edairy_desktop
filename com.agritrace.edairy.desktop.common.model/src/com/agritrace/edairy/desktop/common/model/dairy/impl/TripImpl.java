@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl#getDeliveries <em>Deliveries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl#getStarted <em>Started</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl#getEnded <em>Ended</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl#getTripId <em>Trip Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +102,26 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * @ordered
 	 */
 	protected Date ended = ENDED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTripId() <em>Trip Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTripId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long TRIP_ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getTripId() <em>Trip Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTripId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long tripId = TRIP_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +213,15 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public long getTripId() {
+		return tripId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -203,6 +233,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 				return getStarted();
 			case DairyPackage.TRIP__ENDED:
 				return getEnded();
+			case DairyPackage.TRIP__TRIP_ID:
+				return getTripId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -274,6 +306,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 				return STARTED_EDEFAULT == null ? started != null : !STARTED_EDEFAULT.equals(started);
 			case DairyPackage.TRIP__ENDED:
 				return ENDED_EDEFAULT == null ? ended != null : !ENDED_EDEFAULT.equals(ended);
+			case DairyPackage.TRIP__TRIP_ID:
+				return tripId != TRIP_ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -292,6 +326,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 		result.append(started);
 		result.append(", ended: ");
 		result.append(ended);
+		result.append(", tripId: ");
+		result.append(tripId);
 		result.append(')');
 		return result.toString();
 	}

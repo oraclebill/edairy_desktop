@@ -66,6 +66,7 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 			case TrackingPackage.REGISTERED_ANIMAL: return createRegisteredAnimal();
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE: return createReferenceAnimalType();
 			case TrackingPackage.ANIMAL_IDENTIFIER: return createAnimalIdentifier();
+			case TrackingPackage.FARMER: return createFarmer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -161,6 +162,16 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	public AnimalIdentifier createAnimalIdentifier() {
 		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
 		return animalIdentifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Farmer createFarmer() {
+		FarmerImpl farmer = new FarmerImpl();
+		return farmer;
 	}
 
 	/**

@@ -6,6 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.util;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
+
 import com.agritrace.edairy.desktop.common.model.tracking.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -90,6 +92,14 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAnimalIdentifier(AnimalIdentifier object) {
 				return createAnimalIdentifierAdapter();
+			}
+			@Override
+			public Adapter caseFarmer(Farmer object) {
+				return createFarmerAdapter();
+			}
+			@Override
+			public Adapter casePerson(Person object) {
+				return createPersonAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -178,6 +188,34 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAnimalIdentifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer <em>Farmer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer
+	 * @generated
+	 */
+	public Adapter createFarmerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Person <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Person
+	 * @generated
+	 */
+	public Adapter createPersonAdapter() {
 		return null;
 	}
 

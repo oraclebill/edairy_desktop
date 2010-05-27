@@ -139,7 +139,7 @@ public class AddAnimalDialog extends TitleAreaDialog implements FocusListener, S
 	final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
 	farmComboViewer.setContentProvider(new ArrayContentProvider());
 	if (memberShip != null) {
-	    farmComboViewer.setInput(memberShip.getFarms());
+	    farmComboViewer.setInput(memberShip.getMember().getFarms());
 	    farmComboViewer.setLabelProvider(new LabelProvider() {
 		@Override
 		public String getText(Object element) {

@@ -289,7 +289,6 @@ public interface AccountPackage extends EPackage {
 	 */
 	int TRANSACTION_TYPE = 3;
 
-
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource <em>Transaction Source</em>}' enum.
 	 * <!-- begin-user-doc -->

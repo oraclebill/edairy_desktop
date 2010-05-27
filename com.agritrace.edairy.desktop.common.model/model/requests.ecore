@@ -4,10 +4,20 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="requests"
     nsURI="http://edairy.agritrace.com/requests/" nsPrefix="requests">
   <eClassifiers xsi:type="ecore:EClass" name="AnimalHealthRequest">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestId" eType="ecore:EDataType common.ecore#//UniqueID"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestId" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requestingMember" lowerBound="1"
         eType="ecore:EClass dairy.ecore#//Membership"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" lowerBound="1" eType="ecore:EClass dairy.ecore#//Dairy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" lowerBound="1" eType="ecore:EClass dairy.ecore#//Dairy"
+        eOpposite="dairy.ecore#//Dairy/animalHealthRequests" eKeys="common.ecore#//Company/companyId">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="dairy"/>
+        <details key="kind" value="elementOnly"/>
+      </eAnnotations>
+      <eAnnotations source="teneo.jpa">
+        <details key="appinfo" value="@ManyToOne(cascade=PERSIST)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//RequestType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reportedProblem" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

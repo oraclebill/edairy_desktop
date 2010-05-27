@@ -129,6 +129,10 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createSupplierAdapter();
 			}
 			@Override
+			public Adapter caseCustomer(Customer object) {
+				return createCustomerAdapter();
+			}
+			@Override
 			public Adapter casePerson(Person object) {
 				return createPersonAdapter();
 			}
@@ -339,6 +343,20 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSupplierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer <em>Customer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Customer
+	 * @generated
+	 */
+	public Adapter createCustomerAdapter() {
 		return null;
 	}
 

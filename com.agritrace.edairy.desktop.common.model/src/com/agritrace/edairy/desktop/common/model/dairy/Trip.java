@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Trip#getDeliveries <em>Deliveries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Trip#getStarted <em>Started</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Trip#getEnded <em>Ended</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Trip#getTripId <em>Trip Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,5 +116,22 @@ public interface Trip extends EObject {
 	 * @generated
 	 */
 	void setEnded(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Trip Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Trip Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Trip Id</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getTrip_TripId()
+	 * @model required="true" changeable="false"
+	 *        extendedMetaData="name='tripId' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Id\n@GeneratedValue'"
+	 * @generated
+	 */
+	long getTripId();
 
 } // Trip

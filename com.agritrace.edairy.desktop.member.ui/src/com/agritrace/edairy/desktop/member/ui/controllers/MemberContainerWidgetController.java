@@ -169,7 +169,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	@Override
 	public void updateBinding() {
 		containerInput.clear();
-		final List<Farm> farms = selectedMember.getFarms();
+		final List<Farm> farms = selectedMember.getMember().getFarms();
 		final List<String> farmFilterList = new ArrayList<String>();
 		farmFilterList.add(ALL_FARM);
 		for (final Farm farm : farms) {

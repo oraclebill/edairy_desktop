@@ -48,6 +48,7 @@ public interface Supplier extends Company {
 	 * @see #setSupplierId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getSupplier_SupplierId()
 	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 *        extendedMetaData="name='supplierId' kind='elementOnly'"
 	 * @generated
 	 */
 	Long getSupplierId();

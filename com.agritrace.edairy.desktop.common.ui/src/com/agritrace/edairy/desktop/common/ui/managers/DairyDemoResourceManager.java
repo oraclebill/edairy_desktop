@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -147,16 +150,15 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		dairyResource.getContents().add(dairy);
 		saveDairyResource();
 	}
-	
+
 	public Dairy createDairyData() throws ParseException {
-	
+
 		// create dairy
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
-		
+
 		final Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("Demo Dairy");
-		dairy.setDairyId(1l);
 		dairy.setFederalPin("");
 		dairy.setLicenseEffectiveDate(new Date());
 		dairy.setLicenseExpirationDate(new Date());
@@ -168,211 +170,126 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		dairy.setNssfNumber("NSSF-12345678");
 		dairy.setPhoneNumber("123456789");
 		dairy.setRegistrationNumber("KDB-123451234");
-		
+
 		// create some locations for later use
 		//
-		final Location location1 = createLocation("1 - Ngeche", "Section A", "Building B", "West Windosr", "Princeton Junction", "Princeton", "Central", "Mercer", "Western", "08550");
-		final Location location2 = createLocation("2 -North Post", "Section A", "Building B", "West Windosr", "Princeton Junction", "Princeton", "Central", "Mercer", "Western", "08550");
-		final Location location3 = createLocation("3 - Arista", "Section A", "Estate 2", "West Windosr Village", "Princeton Junction", "Princeton", "Central", "Mercer", "Western", "08550");
+		final Location location1 = createLocation("1 - Ngeche", "Section A", "Building B", "West Windosr",
+				"Princeton Junction", "Princeton", "Central", "Mercer", "Western", "08550");
+		final Location location2 = createLocation("2 -North Post", "Section A", "Building B", "West Windosr",
+				"Princeton Junction", "Princeton", "Central", "Mercer", "Western", "08550");
+		final Location location3 = createLocation("3 - Arista", "Section A", "Estate 2", "West Windosr Village",
+				"Princeton Junction", "Princeton", "Central", "Mercer", "Western", "08550");
 
 		// create some employees
 		//
-		final Employee driver1 = createEmployee("1", "Driver", sdf.parse("04/18/1998"), "Joseph", "Winston", "Limuru", "123-123-12345", location1, Collections.EMPTY_SET);
-		final Employee driver2 = createEmployee("2", "Driver", sdf.parse("02/03/1994"), "John", "Smith", "Smith", "609-456-7898", location1, Collections.EMPTY_SET);
-		final Employee driver3 = createEmployee("3", "Driver", sdf.parse("07/14/2010"), "Jason", "Winston", "Spencer", "609-478-5565", location1, Collections.EMPTY_SET);
+		final Employee driver1 = createEmployee("1", "Driver", sdf.parse("04/18/1998"), "Joseph", "Winston", "Limuru",
+				"123-123-12345", location1, Collections.EMPTY_SET);
+		final Employee driver2 = createEmployee("2", "Driver", sdf.parse("02/03/1994"), "John", "Smith", "Smith",
+				"609-456-7898", location2, Collections.EMPTY_SET);
+		final Employee driver3 = createEmployee("3", "Driver", sdf.parse("07/14/2010"), "Jason", "Winston", "Spencer",
+				"609-478-5565", location3, Collections.EMPTY_SET);
 
 		// add employees
 		//
-		dairy.getEmployees().add(driver1);		
+		dairy.getEmployees().add(driver1);
 		dairy.getEmployees().add(driver2);
 		dairy.getEmployees().add(driver3);
-		
+
 		// create some vehicles
+
 		final Vehicle v1 = DairyFactory.eINSTANCE.createVehicle();
-		v1.setAssetId(new Long(1001));
 		v1.setCapacityInTonnes(2);
 		v1.setChassisNumber("23489-1");
 		final Date acquiredDate = sdf.parse("02/18/2008");
-		v1.setDateAcquired(acquiredDate);
+		// v1.setDateAcquired(acquiredDate);
 		v1.setDriver(driver1);
 		v1.setEngineNumber("21223-3");
 		v1.setLogBookNumber("23001");
 		v1.setMake("Toyota");
 		v1.setModel("Tacoma");
 		v1.setRegistrationNumber("1001- Toyota Tacoma");
+		// v1.setTagType("");
+		// v1.setTagValue("");
+		v1.setType("v");
+		v1.setVehicleId(1l);
 
 		final Vehicle v2 = DairyFactory.eINSTANCE.createVehicle();
-		v2.setAssetId(new Long(1002));
+		// v2.setAssetId(new Long(1002));
 		v2.setCapacityInTonnes(2);
 		v2.setChassisNumber("45789-1");
 		final Date acquiredDate2 = sdf.parse("07/21/2007");
-		v2.setDateAcquired(acquiredDate2);
+		// v2.setDateAcquired(acquiredDate2);
 		v2.setDriver(driver2);
 		v2.setEngineNumber("45688-3");
 		v2.setLogBookNumber("56558");
 		v2.setMake("Toyota");
 		v2.setModel("Tacoma");
 		v2.setRegistrationNumber("1002- Toyota Tacoma");
+		// v2.setTagType("");
+		// v2.setTagValue("");
+		v2.setType("v");
+		v2.setVehicleId(2l);
 
 		final Vehicle v3 = DairyFactory.eINSTANCE.createVehicle();
-		v3.setAssetId(new Long(1003));
+		// v3.setAssetId(new Long(1003));
 		v3.setCapacityInTonnes(2);
 		v3.setChassisNumber("47878-1");
 		final Date acquiredDate3 = sdf.parse("07/27/2007");
-		v3.setDateAcquired(acquiredDate3);
+		// v3.setDateAcquired(acquiredDate3);
 		v3.setDriver(driver3);
 		v3.setEngineNumber("45689-3");
 		v3.setLogBookNumber("56559");
 		v3.setMake("Toyota");
 		v3.setModel("Tacoma");
 		v3.setRegistrationNumber("1003- Toyota Tacoma");
+		// v3.setTagType("");
+		// v3.setTagValue("");
+		v3.setType("v");
+		v3.setVehicleId(3l);
 
-		// add vehicles 
+		// add vehicles
 		//
 		dairy.getVehicles().add(v1);
 		dairy.getVehicles().add(v2);
 		dairy.getVehicles().add(v3);
-		
+
 		// create some branches
 		//
-		final DairyLocation dLocation = DairyFactory.eINSTANCE.createDairyLocation();
-		dLocation.setName("stop1");
-		final Date openDate = sdf.parse("04/27/2005");
-		dLocation.setDateOpened(openDate);
-		dLocation.setCode("DL001");
-		dLocation.setPhone("609-457-8989");
-		dLocation.getFunctions().add(DairyFunction.MILK_COLLECTION);
-		final Location dairyLocation1 = ModelFactory.eINSTANCE.createLocation();
-		final PostalLocation p1 = ModelFactory.eINSTANCE.createPostalLocation();
-		p1.setAddress("22 - Ngeche");
-		p1.setSection("Section A");
-		p1.setEstate("Building B");
-		p1.setVillage("West Windosr");
-		p1.setSubLocation("Princeton Junction");
-		p1.setLocation("Princeton");
-		p1.setDivision("Mercer");
-		p1.setDistrict("Central");
-		p1.setProvince("Western");
-		p1.setPostalCode("08550");
-		dairyLocation1.setPostalLocation(p1);
-		dLocation.setLocation(dairyLocation1);
-		//
-		final DairyLocation dLocation2 = DairyFactory.eINSTANCE.createDairyLocation();
-		dLocation2.setName("stop2");
-		final Date openDate2 = sdf.parse("04/27/2005");
-		dLocation2.setDateOpened(openDate2);
-		dLocation2.setCode("DL002");
-		dLocation2.setPhone("609-457-1234");
-		dLocation2.getFunctions().add(DairyFunction.MILK_COLLECTION);
-		final Location dairyLocation2 = ModelFactory.eINSTANCE.createLocation();
-		final PostalLocation p2 = ModelFactory.eINSTANCE.createPostalLocation();
-		p2.setAddress("122 - Ngeche");
-		p2.setSection("Section A");
-		p2.setEstate("Building B");
-		p2.setVillage("West Windosr");
-		p2.setSubLocation("Princeton Junction");
-		p2.setLocation("Princeton");
-		p2.setDivision("Mercer");
-		p2.setDistrict("Central");
-		p2.setProvince("Western");
-		p2.setPostalCode("08550");
-		dairyLocation2.setPostalLocation(p2);
-		dLocation2.setLocation(dairyLocation2);
-		//
-		final DairyLocation dLocation3 = DairyFactory.eINSTANCE.createDairyLocation();
-		dLocation3.setName("stop3");
-		final Date openDate3 = sdf.parse("04/27/2005");
-		dLocation3.setDateOpened(openDate3);
-		dLocation3.setCode("DL003");
-		dLocation3.setPhone("609-457-8989");
-		dLocation3.getFunctions().add(DairyFunction.MILK_COLLECTION);
-		//
-		final Location dairyLocation3 = ModelFactory.eINSTANCE.createLocation();
-		final PostalLocation p3 = ModelFactory.eINSTANCE.createPostalLocation();
-		p3.setAddress("566 - Ngeche");
-		p3.setSection("Section A");
-		p3.setEstate("Building B");
-		p3.setVillage("West Windosr");
-		p3.setSubLocation("Princeton Junction");
-		p3.setLocation("Princeton");
-		p3.setDivision("Mercer");
-		p3.setDistrict("Central");
-		p3.setProvince("Western");
-		p3.setPostalCode("08550");
-		dairyLocation3.setPostalLocation(p3);
-		dLocation3.setLocation(dairyLocation3);
-		//
-		//
-		final DairyLocation dLocation2_1 = DairyFactory.eINSTANCE.createDairyLocation();
-		dLocation2_1.setName("route2_stop1");
-		final Date openDate2_1 = sdf.parse("03/26/2008");
-		dLocation2_1.setDateOpened(openDate2_1);
-		dLocation2_1.setCode("DL021");
-		dLocation2_1.setPhone("609-457-8989");
-		dLocation2_1.getFunctions().add(DairyFunction.MILK_COLLECTION);
-		final Location location2_1 = ModelFactory.eINSTANCE.createLocation();
-		final PostalLocation p2_1 = ModelFactory.eINSTANCE.createPostalLocation();
-		p2_1.setAddress("50 - North Post");
-		p2_1.setSection("Section A");
-		p2_1.setEstate("Building B");
-		p2_1.setVillage("West Windosr");
-		p2_1.setSubLocation("Princeton Junction");
-		p2_1.setLocation("Princeton");
-		p2_1.setDivision("Mercer");
-		p2_1.setDistrict("Central");
-		p2_1.setProvince("Western");
-		p2_1.setPostalCode("08550");
-		location2_1.setPostalLocation(p2_1);
-		dLocation2_1.setLocation(location2_1);
-		//
-		final DairyLocation dLocation2_2 = DairyFactory.eINSTANCE.createDairyLocation();
-		dLocation2_2.setName("route2_stop2");
-		final Date openDate2_2 = sdf.parse("03/26/2008");
-		dLocation2_2.setDateOpened(openDate2_2);
-		dLocation2_2.setCode("DL022");
-		dLocation2_2.setPhone("609-457-1234");
-		dLocation2_2.getFunctions().add(DairyFunction.MILK_COLLECTION);
-		final Location location2_2 = ModelFactory.eINSTANCE.createLocation();
-		final PostalLocation p2_2 = ModelFactory.eINSTANCE.createPostalLocation();
-		p2_2.setAddress("750 - North Post");
-		p2_2.setSection("Section A");
-		p2_2.setEstate("Building B");
-		p2_2.setVillage("West Windosr");
-		p2_2.setSubLocation("Princeton Junction");
-		p2_2.setLocation("Princeton");
-		p2_2.setDivision("Mercer");
-		p2_2.setDistrict("Central");
-		p2_2.setProvince("Western");
-		p2_2.setPostalCode("08550");
-		location2_2.setPostalLocation(p2_2);
-		dLocation2_2.setLocation(location2_2);
-		//
-		final DairyLocation dLocation2_3 = DairyFactory.eINSTANCE.createDairyLocation();
-		dLocation2_3.setName("route2_stop3");
-		final Date openDate2_3 = sdf.parse("04/27/2008");
-		dLocation2_3.setDateOpened(openDate2_3);
-		dLocation2_3.setCode("DL023");
-		dLocation2_3.setPhone("609-457-8989");
-		dLocation2_3.getFunctions().add(DairyFunction.MILK_COLLECTION);
-		final Location location2_3 = ModelFactory.eINSTANCE.createLocation();
-		final PostalLocation p2_3 = ModelFactory.eINSTANCE.createPostalLocation();
-		p2_3.setAddress("1250 - North Post");
-		p2_3.setSection("Section A");
-		p2_3.setEstate("Building B");
-		p2_3.setVillage("West Windosr");
-		p2_3.setSubLocation("Princeton Junction");
-		p2_3.setLocation("Princeton");
-		p2_3.setDivision("Mercer");
-		p2_3.setDistrict("Central");
-		p2_3.setProvince("Western");
-		p2_3.setPostalCode("08550");
-		location2_3.setPostalLocation(p2_3);
-		//
-		dLocation2_3.setLocation(location2_3);
-		
+		// final DairyLocation dLocation =
+		// DairyFactory.eINSTANCE.createDairyLocation();
+		final Route route1 = createRoute(1l, "NGE", "Ngeche", "The Ngech branch", Collections.EMPTY_SET);
+		final Route route2 = createRoute(2l, "ORE", "Orengo", "The Orengo branch", Collections.EMPTY_SET);
+		final Route route3 = createRoute(3l, "JDE", "jodongo", "The Jodongo branch", Collections.EMPTY_SET);
+		final List<DairyFunction> functionList = Arrays
+				.asList(DairyFunction.MILK_COLLECTION, DairyFunction.STORE_SALES);
+		final Location loc1 = createLocation(
+				createPostalLocation("ngeche address", "ngeche division", "ngeche province", "080451"),
+				createMapLocation(-123.5d, 125.3d), createDescriptiveLocation("Ngeche location", "landmarks"));
+		final Location loc2 = createLocation(
+				createPostalLocation("Orengo address", "Orengo division", "Orengo province", "080451"),
+				createMapLocation(-123.5d, 125.3d), createDescriptiveLocation("Orengo location", " Orengo landmarks"));
+		final Location loc3 = createLocation(
+				createPostalLocation("jodongo address", "jodongo division", "jodongo province", "080451"),
+				createMapLocation(-123.5d, 125.3d), createDescriptiveLocation("jodongo location", "jodongo landmarks"));
+		final DairyLocation dLocation1 = createDairyLocation(1l, "Ngeche", sdf.parse("4/21/1966"), "856.556.0606",
+				null, "The Ngeche branch is a dairy location", "NGE", loc1, functionList);
+		final DairyLocation dLocation2 = createDairyLocation(2l, "Orengo", sdf.parse("4/21/1966"), "856.556.0606",
+				null, "The Orengo branch is a dairy location", "ORE", loc2, functionList);
+		final DairyLocation dLocation3 = createDairyLocation(3l, "jodongo", sdf.parse("4/21/1966"), "856.556.0606",
+				null, "The jodongo branch is a dairy location", "JDE", loc3, functionList);
+		final DairyLocation dLocation2_1 = createDairyLocation(4l, "DLOC21", sdf.parse("4/21/1966"), "856.556.0606",
+				null, "The DLOC21 branch is a dairy location", "D21",
+				createLocation("DLOC21", "", "", "", "", "", "", "", "some province", ""), functionList);
+		final DairyLocation dLocation2_2 = createDairyLocation(5l, "DLOC22", sdf.parse("4/21/1966"), "856.556.0606",
+				null, "The DLOC22 branch is a dairy location", "D22",
+				createLocation("DLOC22", "", "", "", "", "", "", "", "some province", ""), functionList);
+		final DairyLocation dLocation2_3 = createDairyLocation(6l, "DLOC23", sdf.parse("4/21/1966"), "856.556.0606",
+				null, "The DLOC23 branch is a dairy location", "D23",
+				createLocation("DLOC23", "", "", "", "", "", "", "", "some province", ""), functionList);
+
 		// add the locations to the dairy
-		//		
-		dairy.getBranchLocations().add(dLocation);
+		//
+		dairy.getBranchLocations().add(dLocation1);
 		dairy.getBranchLocations().add(dLocation2);
 		dairy.getBranchLocations().add(dLocation3);
 		dairy.getBranchLocations().add(dLocation2_1);
@@ -381,31 +298,23 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		// create some routes
 		//
-		final Route route1 = DairyFactory.eINSTANCE.createRoute();
-		route1.setCode("R0001");
-		route1.setName("Route 1");
-		route1.getStops().add(dLocation);
+		route1.getStops().add(dLocation1);
 		route1.getStops().add(dLocation2);
 		route1.getStops().add(dLocation3);
 
-		final Route route2 = DairyFactory.eINSTANCE.createRoute();
-		route2.setCode("R0002");
-		route2.setName("Route 2");
 		route2.getStops().add(dLocation2_1);
 		route2.getStops().add(dLocation2_2);
 		route2.getStops().add(dLocation2_3);
-		
-		// add the routes 
+
+		// add the routes
 		//
 		dairy.getRoutes().add(route1);
 		dairy.getRoutes().add(route2);
-		
-		// create some bins
-		// 
-		final List<DairyContainer> bins = createDairyContainer(10, 10000);
-		dairy.getDairyBins().addAll(bins);
-		
 
+		// create some bins
+		//
+		final List<DairyContainer> bins = createDairyContainer(dairy, 10, 10000);
+		dairy.getDairyBins().addAll(bins);
 
 		// create members
 		for (int i = 0; i < 20; i++) {
@@ -415,38 +324,20 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 				// farmResource.getContents().add(f);
 			}
 			final Membership member1 = DairyFactory.eINSTANCE.createMembership();
-			member1.setMemberId("" + 1000 + i);
-			final Person member = ModelFactory.eINSTANCE.createPerson();
-			member.setGivenName("Joseph" + "_" + i);
-			member.setFamilyName("Limuru");
-			member.setPhoneNumber("609-356-3400" + i);
-			member1.setMember(member);
+			member1.setMember(createFarmer(
+					"Joseph - " + i,
+					"X",
+					"Limuru",
+					"609-356-3400" + i,
+					createFarm("Joseph - " + i + "'s farm",null)));
 
-			final Location memberLocation = ModelFactory.eINSTANCE.createLocation();
-
-			final PostalLocation mLocation = ModelFactory.eINSTANCE.createPostalLocation();
-			mLocation.setAddress(i + " - Ngeche");
-			mLocation.setSection("Section A");
-			mLocation.setEstate("Building B");
-			mLocation.setVillage("West Windosr");
-			mLocation.setSubLocation("Princeton Junction");
-			mLocation.setLocation("Princeton");
-			mLocation.setDivision("Mercer");
-			mLocation.setDistrict("Central");
-			mLocation.setProvince("Western");
-			mLocation.setPostalCode("08550");
-			memberLocation.setPostalLocation(mLocation);
-			member.setLocation(memberLocation);
-
-			final String dateString = i < 9 ? "02/0" + i + "/2007" : "02/" + i + "/2007";
-			final Date applicationDate = sdf.parse(dateString);
-			member1.setApplicationDate(applicationDate);
+			member1.setApplicationDate(sdf.parse(i < 9 ? "02/0" + i + "/2007" : "02/" + i + "/2007"));
 
 			final Date effectiveDate = sdf.parse("03/05/2007");
 			member1.setDefaultRoute(route1);
 			member1.setEffectiveDate(effectiveDate);
 			member1.setStatus(MembershipStatus.ACTIVE);
-			member1.getFarms().addAll(farms);
+			member1.getMember().getFarms().addAll(farms);
 			if (i % 2 == 0) {
 				member1.setDefaultRoute(route2);
 			} else {
@@ -455,10 +346,39 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 			dairy.getMemberships().add(member1);
 		}
 
-		addRequests(dairy);
+		//addRequests(dairy);
 		addSuppliers(dairy);
 
 		return dairy;
+	}
+
+	private Route createRoute(long id, String code, String name, String description, Collection<DairyLocation> stops) {
+		Route route = DairyFactory.eINSTANCE.createRoute();
+
+		route.setId(id);
+		route.setName(name);
+		route.setCode(code);
+		route.setDescription(description);
+		route.getStops().addAll(stops);
+
+		return route;
+	}
+
+	private DairyLocation createDairyLocation(long id, String name, Date openDate, String phone, Route route,
+			String description, String code, Location location, List<DairyFunction> functions) {
+		DairyLocation dLoc = DairyFactory.eINSTANCE.createDairyLocation();
+
+		dLoc.setId(id);
+		dLoc.setName(name);
+		dLoc.setDateOpened(openDate);
+		dLoc.setPhone(phone);
+		dLoc.setRoute(route);
+		dLoc.setDescription(description);
+		dLoc.setCode(code);
+		dLoc.setLocation(location);
+		dLoc.getFunctions().addAll(functions);
+
+		return dLoc;
 	}
 
 	private void addRequests(Dairy dairy) {
@@ -485,10 +405,11 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createSupplier1(Dairy dairy) throws ParseException {
 		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10001l);
+//		supplier.setSupplierId(10001l);
 		supplier.setCompanyName("John Inventory Ltd ");
 		supplier.setLegalName("JHVEN");
 		supplier.setStatus(VendorStatus.VALID);
+		supplier.setLocation(createLocation(null, null, null)); 
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
 		supplier.setExpirationDate(sdf.parse("01/01/2011"));
@@ -501,15 +422,16 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Edward");
 		person.setFamilyName("Clinton");
 		supplier.getContacts().add(person);
-//		//dairyResource.getContents().add(supplier);
+		// //dairyResource.getContents().add(supplier);
 	}
 
 	private void createSupplier2(Dairy dairy) throws ParseException {
 		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10002l);
+//		supplier.setSupplierId(10002l);
 		supplier.setCompanyName("Tom  Amusement Ltd ");
 		supplier.setLegalName("TAL");
 		supplier.setStatus(VendorStatus.VALID);
+		supplier.setLocation(createLocation(null, null, null)); 
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
 		supplier.setExpirationDate(sdf.parse("02/01/2011"));
@@ -521,14 +443,14 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Tracy");
 		person.setFamilyName("Bill");
 		supplier.getContacts().add(person);
-		//dairyResource.getContents().add(supplier);
+		// dairyResource.getContents().add(supplier);
 
 	}
 
 	private void createSupplier3(Dairy dairy) throws ParseException {
 
 		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10003l);
+//		supplier.setSupplierId(10003l);
 		supplier.setCompanyName("Gold Store Ltd ");
 		supplier.setLegalName("GSLD");
 		supplier.setStatus(VendorStatus.INVALID);
@@ -538,20 +460,11 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		dairy.getSuppliers().add(supplier);
 		supplier.getCategories().add("Category 6");
 		supplier.getCategories().add("Category 7");
+		supplier.setLocation(createLocation(null, null, null)); 
+		supplier.getContacts().add(createPerson("Tommy", "B", "Chong", "212-555-1212"));
+		supplier.getContacts().add(createPerson("Bruce", "B", "Willis", "408-555-1212"));
 
-		Person person = ModelFactory.eINSTANCE.createPerson();
-		person.setPhoneNumber("13816442241");
-		person.setGivenName("Spark");
-		person.setFamilyName("Wan");
-		supplier.getContacts().add(person);
-
-		Person person2 = ModelFactory.eINSTANCE.createPerson();
-		person2.setPhoneNumber("13816442241");
-		person2.setGivenName("John");
-		person2.setFamilyName("Smith");
-		supplier.getContacts().add(person2);
-
-		//dairyResource.getContents().add(supplier);
+		// dairyResource.getContents().add(supplier);
 	}
 
 	/*
@@ -653,55 +566,47 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 			throws ParseException {
 		final SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("MM/dd/yyyy");
+		
 		for (int i = 0; i < containerNumber; i++) {
 			final Container container = TrackingFactory.eINSTANCE.createContainer();
 			container.setType(ContainerType.CAN);
 			final int id = containerId + i;
-			container.setContainerId("" + id);
+//			container.setContainerId("" + id);
 			container.setOwner(farm);
 			container.setMeasureType(UnitOfMeasure.LITRE);
 			container.setCapacity(50);
 			farm.getCans().add(container);
 		}
 
+		final ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
+		animal1_type.setSpecies("Cow");
+		animal1_type.setBreed("Guersney");
+		
 		for (int i = 0; i < animalNumber; i++) {
-			final RegisteredAnimal animal1 = TrackingFactory.eINSTANCE.createRegisteredAnimal();
-			animal1.setAnimnalRegistrationId(10000 + i);
-			animal1.setGivenName("animal_" + i);
-			animal1.setLocation(farm);
 			final int n = (int) (10.0 * Math.random());
 			final int m = n < 3 ? 10 + n : n + 3;
 			final String date = m > 9 ? "0" + n + "/" + m + "/200" + n : "0" + n + "/0" + m + "/200" + n;
 			final Date effectedDate = sdf.parse(date);
-			animal1.setDateOfAcquisition(effectedDate);
-			animal1.setPurpose(Purpose.DAIRY);
-			if (i % 2 == 0) {
-				animal1.setGender(Gender.FEMALE);
-			} else {
-				animal1.setGender(Gender.MALE);
-			}
-			final int rearingModelValue = i % 7;
-			animal1.setRearingMode(RearingMode.get(rearingModelValue));
-			final int acquisionType = i % 5;
-			animal1.setAcquisitionType(AcquisitionType.get(acquisionType));
-
-			final ReferenceAnimalType animal1_type = TrackingFactory.eINSTANCE.createReferenceAnimalType();
-			animal1_type.setAnimalTypeId(animalId + i);
-			animal1_type.setSpecies("Cow");
-			animal1_type.setBreed("Western");
-			animal1.setAnimalType(animal1_type);
+			final Gender gender = i%20 ==0 ? Gender.MALE : Gender.FEMALE;
+			final String name = "animal_" + i;
+			final RearingMode rearingMode = RearingMode.get(i % 7);
+			
+			
+			final RegisteredAnimal animal1 = 
+				createAnimal(farm, effectedDate, name, gender, animal1_type, Purpose.DAIRY, rearingMode);
+					
 			farm.getAnimals().add(animal1);
 		}
 	}
 
-	private List<DairyContainer> createDairyContainer(int binNumber, int binId) {
+	private List<DairyContainer> createDairyContainer(Dairy dairy, int binNumber, int binId) {
 		final List<DairyContainer> binList = new ArrayList<DairyContainer>();
 		for (int i = 0; i < binNumber; i++) {
 			final DairyContainer bin = DairyFactory.eINSTANCE.createDairyContainer();
 			bin.setType(ContainerType.BIN);
-			final int id = binId + i;
-			bin.setContainerId("" + id);
-			bin.setAssetId(new Long(id).longValue());
+			// bin.setAssetId(new Long(id).longValue());
+			// bin.setTagType("BARCODE");
+			// bin.setTagValue("1100100100100111");
 			bin.setMeasureType(UnitOfMeasure.LITRE);
 			bin.setCapacity(200);
 			binList.add(bin);
@@ -791,26 +696,42 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		return new AccountTransaction[] { tstTransaction };
 	}
 
+	Membership randomOrNewMember(Dairy dairy) {
+		Membership membership;
+		int memberCount = dairy.getMemberships().size();
+		if (memberCount > 2) {
+			membership = dairy.getMemberships().get(new Random().nextInt(memberCount));
+		} else {
+			Location farmLocation = createLocation("generated address", "generated section", "generated estate",
+					"generated village", "generated sublocation", "generated location",
+					"generated district", "generated division", "generated division",
+					"generated postcode");
+			membership = createMembership(
+					new Date(),
+					new Date(),
+					createFarmer(
+							"Barry",
+							"",
+							"White",
+							"1231231233",
+							farmLocation,
+							Collections.EMPTY_SET,
+							Arrays.asList(createFarm("generated farm", farmLocation))));
+			dairy.getMemberships().add(membership);
+		}
+		return membership;
+	}
+
 	private void createReq1(Dairy dairy) throws ParseException {
 		final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 		req.setRequestId(1001l);
 		req.setDate(DateTimeUtils.DATE_FORMAT.parse("05/03/2010"));
+		req.setMember(randomOrNewMember(dairy));
 
 		dairy.getAnimalHealthRequests().add(req);
 
 		// MemberShiip
-		final Membership ship = DairyFactory.eINSTANCE.createMembership();
-		dairy.getMemberships().add(ship);
-
-		final Person person = ModelFactory.eINSTANCE.createPerson();
-		person.setPhoneNumber("13816442241");
-		person.setGivenName("Spark");
-		person.setFamilyName("Wan");
-		// dairy.getAnimalHealthRequests().add(person);
-
-		ship.setMember(person);
-		ship.setMemberId("1001");
-		req.setRequestingMember(ship);
+		req.setRequestingMember(randomOrNewMember(dairy));
 
 		req.setType(RequestType.VETERINARY);
 		req.setDateHeatDetected(Calendar.getInstance().getTime());
@@ -852,17 +773,11 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		dairy.getAnimalHealthRequests().add(req);
 
 		// MemberShiip
-		final Membership ship = DairyFactory.eINSTANCE.createMembership();
-		dairy.getMemberships().add(ship);
+		final Membership ship = randomOrNewMember(dairy);
 
-		final Person person = ModelFactory.eINSTANCE.createPerson();
-		person.setPhoneNumber("13816424140");
-		person.setGivenName("Tracy");
-		person.setFamilyName("Copper");
-		// dairy.getAnimalHealthRequests().add(person);
+		
 
-		ship.setMember(person);
-		ship.setMemberId("1002");
+		ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)null));
 		req.setRequestingMember(ship);
 
 		req.setType(RequestType.INSEMINATION);
@@ -899,14 +814,13 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createReq3(Dairy dairy) throws ParseException {
 		final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-		req.setRequestId(1003l);
+//		req.setRequestId(1003l);
 		req.setDate(Calendar.getInstance().getTime());
 
 		dairy.getAnimalHealthRequests().add(req);
 
 		// MemberShiip
-		final Membership ship = DairyFactory.eINSTANCE.createMembership();
-		dairy.getMemberships().add(ship);
+		final Membership ship = randomOrNewMember(dairy);
 
 		final Person person = ModelFactory.eINSTANCE.createPerson();
 		person.setPhoneNumber("12345678");
@@ -914,8 +828,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setFamilyName("Smith");
 		// dairy.getAnimalHealthRequests().add(person);
 
-		ship.setMember(person);
-		ship.setMemberId("1003");
+		ship.setMember(createFarmer("John", "", "Locke", "123", (Farm)null));
 		req.setRequestingMember(ship);
 
 		req.setType(RequestType.VETERINARY);

@@ -92,7 +92,7 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 				dialog.setMemberShip(selectedMember);
 				if (dialog.open() == Window.OK) {
 					final Farm newFarm = dialog.getNewFarm();
-					selectedMember.getFarms().add(newFarm);
+					selectedMember.getMember().getFarms().add(newFarm);
 					DairyDemoResourceManager.INSTANCE.addFarm(newFarm);
 					farms.add(newFarm);
 					farmTable.updateFromModel();
@@ -111,10 +111,10 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 					final List<Object> selections = farmTable.getSelection();
 					if (selectedMember != null) {
 						for (final Object selObject : selections) {
-							selectedMember.getFarms().remove(selObject);
+							selectedMember.getMember().getFarms().remove(selObject);
 							((Farm) selObject).getAnimals().clear();
 							((Farm) selObject).setLocation(null);
-							selectedMember.getFarms().remove((selObject));
+							selectedMember.getMember().getFarms().remove((selObject));
 							farms.remove(selObject);
 						}
 
@@ -161,7 +161,7 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 	public void updateBinding() {
 		if(selectedMember != null){
 			farms.clear();
-			farms.addAll(selectedMember.getFarms());
+			farms.addAll(selectedMember.getMember().getFarms());
 			farmTable.updateFromModel();
 			farmTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		}

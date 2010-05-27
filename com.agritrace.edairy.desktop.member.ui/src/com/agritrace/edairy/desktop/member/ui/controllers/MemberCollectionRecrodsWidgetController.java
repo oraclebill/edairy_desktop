@@ -144,7 +144,7 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 			public String getText(Object element) {
 				if (element instanceof CollectionJournalLine) {
 					if (((CollectionJournalLine) element).getDairyContainer() != null) {
-						return ((CollectionJournalLine) element).getDairyContainer().getContainerId();
+						return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
 					}
 				}
 				return null;
@@ -161,7 +161,7 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 	private List<CollectionJournalLine> getCollectionJournalLines() {
 		final List<CollectionJournalLine> collectionJournalRecords = new ArrayList<CollectionJournalLine>();
 		if (membership != null) {
-			final String selectedMemberId = membership.getMemberId();
+			final String selectedMemberId = "" +  membership.getMemberId();
 			final EObject container = membership.eContainer();
 			if (container != null && container instanceof Dairy) {
 				final List<CollectionJournal> allRecords = ((Dairy) container).getCollectionJournals();
