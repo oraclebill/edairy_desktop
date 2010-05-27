@@ -3,8 +3,7 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
-
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 
 public class ViewMemberDialogController extends MemberRegisterDialogController {

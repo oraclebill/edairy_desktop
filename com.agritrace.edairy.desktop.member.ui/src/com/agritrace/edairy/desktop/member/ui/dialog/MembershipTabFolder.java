@@ -37,8 +37,6 @@ public class MembershipTabFolder {
 	}
 	
 	private void initGUI(Composite parent){
-
-
 		tabComposite = UIControlsFactory.createComposite(parent);
 		final GridData detailsGD = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		detailsGD.minimumHeight = 200;

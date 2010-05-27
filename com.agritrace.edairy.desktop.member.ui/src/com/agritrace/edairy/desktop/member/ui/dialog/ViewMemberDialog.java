@@ -16,19 +16,14 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewMemberDialogController;
 
 public class ViewMemberDialog extends AbstractDialogView {
 
 	private Composite main;
-	private Text txtName;
-	//    private Text txtId;
-	private List lstMembers;
-
+	
 	private MembershipTabFolder tabFolder;
 
 	private Button saveButton;
@@ -39,8 +34,6 @@ public class ViewMemberDialog extends AbstractDialogView {
 	public ViewMemberDialog() {
 		super(null);
 	}
-
-
 
 	@Override
 	protected Control buildView(Composite parent) {
@@ -53,8 +46,10 @@ public class ViewMemberDialog extends AbstractDialogView {
 
 		createMemberSelectorGroup(main);
 		tabFolder = new MembershipTabFolder(main);
+		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));
-		return null;
+		return main;
 	}
 
 	@Override
