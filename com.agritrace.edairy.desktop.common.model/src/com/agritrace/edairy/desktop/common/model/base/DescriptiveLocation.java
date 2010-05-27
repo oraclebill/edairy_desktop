@@ -22,7 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getDescriptiveLocation()
- * @model
+ * @model extendedMetaData="name='DescriptiveLocation' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@Embeddable'"
  * @generated
  */
 public interface DescriptiveLocation extends EObject {
@@ -37,7 +38,7 @@ public interface DescriptiveLocation extends EObject {
 	 * @return the value of the '<em>Directions</em>' attribute.
 	 * @see #setDirections(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getDescriptiveLocation_Directions()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getDirections();

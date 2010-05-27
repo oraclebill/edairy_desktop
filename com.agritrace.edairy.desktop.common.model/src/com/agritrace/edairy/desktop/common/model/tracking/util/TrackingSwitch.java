@@ -6,6 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.util;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
+
 import com.agritrace.edairy.desktop.common.model.tracking.*;
 
 import java.util.List;
@@ -117,6 +119,13 @@ public class TrackingSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackingPackage.FARMER: {
+				Farmer farmer = (Farmer)theEObject;
+				T result = caseFarmer(farmer);
+				if (result == null) result = casePerson(farmer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -193,6 +202,36 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	public T caseAnimalIdentifier(AnimalIdentifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Farmer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Farmer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFarmer(Farmer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Person</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePerson(Person object) {
 		return null;
 	}
 

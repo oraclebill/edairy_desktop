@@ -6,6 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -199,13 +201,13 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL = 2;
 
 	/**
-	 * The feature id for the '<em><b>Animnal Registration Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Registration Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID = 0;
+	int REGISTERED_ANIMAL__REGISTRATION_ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
@@ -235,7 +237,7 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL__GENDER = 3;
 
 	/**
-	 * The feature id for the '<em><b>Animal Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Animal Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -353,22 +355,13 @@ public interface TrackingPackage extends EPackage {
 	int REFERENCE_ANIMAL_TYPE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Animal Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID = 0;
-
-	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_ANIMAL_TYPE__SPECIES = 1;
+	int REFERENCE_ANIMAL_TYPE__SPECIES = 0;
 
 	/**
 	 * The feature id for the '<em><b>Breed</b></em>' attribute.
@@ -377,7 +370,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_ANIMAL_TYPE__BREED = 2;
+	int REFERENCE_ANIMAL_TYPE__BREED = 1;
 
 	/**
 	 * The number of structural features of the '<em>Reference Animal Type</em>' class.
@@ -386,7 +379,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_ANIMAL_TYPE_FEATURE_COUNT = 3;
+	int REFERENCE_ANIMAL_TYPE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl <em>Animal Identifier</em>}' class.
@@ -426,6 +419,142 @@ public interface TrackingPackage extends EPackage {
 	int ANIMAL_IDENTIFIER_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl <em>Farmer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getFarmer()
+	 * @generated
+	 */
+	int FARMER = 5;
+
+	/**
+	 * The feature id for the '<em><b>Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__PHOTO = ModelPackage.PERSON__PHOTO;
+
+	/**
+	 * The feature id for the '<em><b>Honorific</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__HONORIFIC = ModelPackage.PERSON__HONORIFIC;
+
+	/**
+	 * The feature id for the '<em><b>Family Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__FAMILY_NAME = ModelPackage.PERSON__FAMILY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__GIVEN_NAME = ModelPackage.PERSON__GIVEN_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Middle Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__MIDDLE_NAME = ModelPackage.PERSON__MIDDLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Additional Names</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__ADDITIONAL_NAMES = ModelPackage.PERSON__ADDITIONAL_NAMES;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__SUFFIX = ModelPackage.PERSON__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Nick Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__NICK_NAME = ModelPackage.PERSON__NICK_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__PHONE_NUMBER = ModelPackage.PERSON__PHONE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__LOCATION = ModelPackage.PERSON__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
+
+	/**
+	 * The feature id for the '<em><b>Person Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__PERSON_ID = ModelPackage.PERSON__PERSON_ID;
+
+	/**
+	 * The feature id for the '<em><b>Farms</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__FARMS = ModelPackage.PERSON_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Farmer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType <em>Acquisition Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -433,7 +562,7 @@ public interface TrackingPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getAcquisitionType()
 	 * @generated
 	 */
-	int ACQUISITION_TYPE = 5;
+	int ACQUISITION_TYPE = 6;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.Purpose <em>Purpose</em>}' enum.
@@ -443,7 +572,7 @@ public interface TrackingPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getPurpose()
 	 * @generated
 	 */
-	int PURPOSE = 6;
+	int PURPOSE = 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.RearingMode <em>Rearing Mode</em>}' enum.
@@ -453,7 +582,7 @@ public interface TrackingPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getRearingMode()
 	 * @generated
 	 */
-	int REARING_MODE = 7;
+	int REARING_MODE = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.Mechanism <em>Mechanism</em>}' enum.
@@ -463,7 +592,7 @@ public interface TrackingPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getMechanism()
 	 * @generated
 	 */
-	int MECHANISM = 8;
+	int MECHANISM = 9;
 
 
 	/**
@@ -607,15 +736,15 @@ public interface TrackingPackage extends EPackage {
 	EClass getRegisteredAnimal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimnalRegistrationId <em>Animnal Registration Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId <em>Registration Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Animnal Registration Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimnalRegistrationId()
+	 * @return the meta object for the attribute '<em>Registration Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId()
 	 * @see #getRegisteredAnimal()
 	 * @generated
 	 */
-	EAttribute getRegisteredAnimal_AnimnalRegistrationId();
+	EAttribute getRegisteredAnimal_RegistrationId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getGivenName <em>Given Name</em>}'.
@@ -651,10 +780,10 @@ public interface TrackingPackage extends EPackage {
 	EAttribute getRegisteredAnimal_Gender();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimalType <em>Animal Type</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimalType <em>Animal Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Animal Type</em>'.
+	 * @return the meta object for the reference '<em>Animal Type</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimalType()
 	 * @see #getRegisteredAnimal()
 	 * @generated
@@ -782,17 +911,6 @@ public interface TrackingPackage extends EPackage {
 	EClass getReferenceAnimalType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType#getAnimalTypeId <em>Animal Type Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Animal Type Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType#getAnimalTypeId()
-	 * @see #getReferenceAnimalType()
-	 * @generated
-	 */
-	EAttribute getReferenceAnimalType_AnimalTypeId();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType#getSpecies <em>Species</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -845,6 +963,27 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAnimalIdentifier_Value();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer <em>Farmer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Farmer</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer
+	 * @generated
+	 */
+	EClass getFarmer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer#getFarms <em>Farms</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Farms</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer#getFarms()
+	 * @see #getFarmer()
+	 * @generated
+	 */
+	EReference getFarmer_Farms();
 
 	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType <em>Acquisition Type</em>}'.
@@ -1019,12 +1158,12 @@ public interface TrackingPackage extends EPackage {
 		EClass REGISTERED_ANIMAL = eINSTANCE.getRegisteredAnimal();
 
 		/**
-		 * The meta object literal for the '<em><b>Animnal Registration Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Registration Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID = eINSTANCE.getRegisteredAnimal_AnimnalRegistrationId();
+		EAttribute REGISTERED_ANIMAL__REGISTRATION_ID = eINSTANCE.getRegisteredAnimal_RegistrationId();
 
 		/**
 		 * The meta object literal for the '<em><b>Given Name</b></em>' attribute feature.
@@ -1051,7 +1190,7 @@ public interface TrackingPackage extends EPackage {
 		EAttribute REGISTERED_ANIMAL__GENDER = eINSTANCE.getRegisteredAnimal_Gender();
 
 		/**
-		 * The meta object literal for the '<em><b>Animal Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Animal Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1149,14 +1288,6 @@ public interface TrackingPackage extends EPackage {
 		EClass REFERENCE_ANIMAL_TYPE = eINSTANCE.getReferenceAnimalType();
 
 		/**
-		 * The meta object literal for the '<em><b>Animal Type Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REFERENCE_ANIMAL_TYPE__ANIMAL_TYPE_ID = eINSTANCE.getReferenceAnimalType_AnimalTypeId();
-
-		/**
 		 * The meta object literal for the '<em><b>Species</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1197,6 +1328,24 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL_IDENTIFIER__VALUE = eINSTANCE.getAnimalIdentifier_Value();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl <em>Farmer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl
+		 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getFarmer()
+		 * @generated
+		 */
+		EClass FARMER = eINSTANCE.getFarmer();
+
+		/**
+		 * The meta object literal for the '<em><b>Farms</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FARMER__FARMS = eINSTANCE.getFarmer_Farms();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType <em>Acquisition Type</em>}' enum.

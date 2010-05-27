@@ -35,28 +35,19 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLegalName <em>Legal Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyName <em>Company Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getPhoneNumber <em>Phone Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContactMethods <em>Contact Methods</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyId <em>Company Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class CompanyImpl extends EObjectImpl implements Company {
-	/**
-	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getContacts()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Person> contacts;
-
 	/**
 	 * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -98,6 +89,36 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	protected String companyName = COMPANY_NAME_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContactMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ContactMethod> contactMethods;
+
+	/**
+	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContacts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Person> contacts;
+
+	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Location location;
+
+	/**
 	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,24 +139,24 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * The default value of the '{@link #getCompanyId() <em>Company Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLocation()
+	 * @see #getCompanyId()
 	 * @generated
 	 * @ordered
 	 */
-	protected Location location;
+	protected static final Long COMPANY_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
+	 * The cached value of the '{@link #getCompanyId() <em>Company Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContactMethods()
+	 * @see #getCompanyId()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ContactMethod> contactMethods;
+	protected Long companyId = COMPANY_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,18 +175,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	protected EClass eStaticClass() {
 		return ModelPackage.Literals.COMPANY;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Person> getContacts() {
-		if (contacts == null) {
-			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
-		}
-		return contacts;
 	}
 
 	/**
@@ -215,8 +224,11 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public EList<ContactMethod> getContactMethods() {
+		if (contactMethods == null) {
+			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
+		}
+		return contactMethods;
 	}
 
 	/**
@@ -224,11 +236,11 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPhoneNumber(String newPhoneNumber) {
-		String oldPhoneNumber = phoneNumber;
-		phoneNumber = newPhoneNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	public EList<Person> getContacts() {
+		if (contacts == null) {
+			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
+		}
+		return contacts;
 	}
 
 	/**
@@ -279,11 +291,41 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ContactMethod> getContactMethods() {
-		if (contactMethods == null) {
-			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
-		}
-		return contactMethods;
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPhoneNumber(String newPhoneNumber) {
+		String oldPhoneNumber = phoneNumber;
+		phoneNumber = newPhoneNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompanyId(Long newCompanyId) {
+		Long oldCompanyId = companyId;
+		companyId = newCompanyId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_ID, oldCompanyId, companyId));
 	}
 
 	/**
@@ -294,12 +336,12 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPANY__CONTACTS:
 				return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPANY__LOCATION:
 				return basicSetLocation(null, msgs);
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -312,18 +354,20 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.COMPANY__CONTACTS:
-				return getContacts();
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				return getLegalName();
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				return getCompanyName();
-			case ModelPackage.COMPANY__PHONE_NUMBER:
-				return getPhoneNumber();
-			case ModelPackage.COMPANY__LOCATION:
-				return getLocation();
 			case ModelPackage.COMPANY__CONTACT_METHODS:
 				return getContactMethods();
+			case ModelPackage.COMPANY__CONTACTS:
+				return getContacts();
+			case ModelPackage.COMPANY__LOCATION:
+				return getLocation();
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				return getPhoneNumber();
+			case ModelPackage.COMPANY__COMPANY_ID:
+				return getCompanyId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -337,25 +381,28 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.COMPANY__CONTACTS:
-				getContacts().clear();
-				getContacts().addAll((Collection<? extends Person>)newValue);
-				return;
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				setLegalName((String)newValue);
 				return;
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				setCompanyName((String)newValue);
 				return;
-			case ModelPackage.COMPANY__PHONE_NUMBER:
-				setPhoneNumber((String)newValue);
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				getContactMethods().clear();
+				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
+				return;
+			case ModelPackage.COMPANY__CONTACTS:
+				getContacts().clear();
+				getContacts().addAll((Collection<? extends Person>)newValue);
 				return;
 			case ModelPackage.COMPANY__LOCATION:
 				setLocation((Location)newValue);
 				return;
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				getContactMethods().clear();
-				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				setPhoneNumber((String)newValue);
+				return;
+			case ModelPackage.COMPANY__COMPANY_ID:
+				setCompanyId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -369,23 +416,26 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.COMPANY__CONTACTS:
-				getContacts().clear();
-				return;
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				setLegalName(LEGAL_NAME_EDEFAULT);
 				return;
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				setCompanyName(COMPANY_NAME_EDEFAULT);
 				return;
-			case ModelPackage.COMPANY__PHONE_NUMBER:
-				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
+			case ModelPackage.COMPANY__CONTACT_METHODS:
+				getContactMethods().clear();
+				return;
+			case ModelPackage.COMPANY__CONTACTS:
+				getContacts().clear();
 				return;
 			case ModelPackage.COMPANY__LOCATION:
 				setLocation((Location)null);
 				return;
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				getContactMethods().clear();
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
+				return;
+			case ModelPackage.COMPANY__COMPANY_ID:
+				setCompanyId(COMPANY_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -399,18 +449,20 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.COMPANY__CONTACTS:
-				return contacts != null && !contacts.isEmpty();
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				return COMPANY_NAME_EDEFAULT == null ? companyName != null : !COMPANY_NAME_EDEFAULT.equals(companyName);
-			case ModelPackage.COMPANY__PHONE_NUMBER:
-				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
-			case ModelPackage.COMPANY__LOCATION:
-				return location != null;
 			case ModelPackage.COMPANY__CONTACT_METHODS:
 				return contactMethods != null && !contactMethods.isEmpty();
+			case ModelPackage.COMPANY__CONTACTS:
+				return contacts != null && !contacts.isEmpty();
+			case ModelPackage.COMPANY__LOCATION:
+				return location != null;
+			case ModelPackage.COMPANY__PHONE_NUMBER:
+				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
+			case ModelPackage.COMPANY__COMPANY_ID:
+				return COMPANY_ID_EDEFAULT == null ? companyId != null : !COMPANY_ID_EDEFAULT.equals(companyId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -431,6 +483,8 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		result.append(companyName);
 		result.append(", phoneNumber: ");
 		result.append(phoneNumber);
+		result.append(", companyId: ");
+		result.append(companyId);
 		result.append(')');
 		return result.toString();
 	}

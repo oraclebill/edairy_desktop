@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -13,11 +14,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,12 +42,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getCapacityInTonnes <em>Capacity In Tonnes</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getYear <em>Year</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getAssetInfo <em>Asset Info</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getVehicleId <em>Vehicle Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VehicleImpl extends AssetImpl implements Vehicle {
+public class VehicleImpl extends EObjectImpl implements Vehicle {
 	/**
 	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -253,7 +258,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CAPACITY_IN_TONNES_EDEFAULT = null;
+	protected static final double CAPACITY_IN_TONNES_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getCapacityInTonnes() <em>Capacity In Tonnes</em>}' attribute.
@@ -263,7 +268,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected String capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
+	protected double capacityInTonnes = CAPACITY_IN_TONNES_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
@@ -294,6 +299,36 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * @ordered
 	 */
 	protected Employee driver;
+
+	/**
+	 * The cached value of the '{@link #getAssetInfo() <em>Asset Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAssetInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected Asset assetInfo;
+
+	/**
+	 * The default value of the '{@link #getVehicleId() <em>Vehicle Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVehicleId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long VEHICLE_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVehicleId() <em>Vehicle Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVehicleId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long vehicleId = VEHICLE_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -529,7 +564,7 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCapacityInTonnes() {
+	public double getCapacityInTonnes() {
 		return capacityInTonnes;
 	}
 
@@ -538,8 +573,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCapacityInTonnes(String newCapacityInTonnes) {
-		String oldCapacityInTonnes = capacityInTonnes;
+	public void setCapacityInTonnes(double newCapacityInTonnes) {
+		double oldCapacityInTonnes = capacityInTonnes;
 		capacityInTonnes = newCapacityInTonnes;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CAPACITY_IN_TONNES, oldCapacityInTonnes, capacityInTonnes));
@@ -609,6 +644,84 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Asset getAssetInfo() {
+		return assetInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAssetInfo(Asset newAssetInfo, NotificationChain msgs) {
+		Asset oldAssetInfo = assetInfo;
+		assetInfo = newAssetInfo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, newAssetInfo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAssetInfo(Asset newAssetInfo) {
+		if (newAssetInfo != assetInfo) {
+			NotificationChain msgs = null;
+			if (assetInfo != null)
+				msgs = ((InternalEObject)assetInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.VEHICLE__ASSET_INFO, null, msgs);
+			if (newAssetInfo != null)
+				msgs = ((InternalEObject)newAssetInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.VEHICLE__ASSET_INFO, null, msgs);
+			msgs = basicSetAssetInfo(newAssetInfo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ASSET_INFO, newAssetInfo, newAssetInfo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVehicleId(Long newVehicleId) {
+		Long oldVehicleId = vehicleId;
+		vehicleId = newVehicleId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__VEHICLE_ID, oldVehicleId, vehicleId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.VEHICLE__ASSET_INFO:
+				return basicSetAssetInfo(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -639,6 +752,10 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__DRIVER:
 				if (resolve) return getDriver();
 				return basicGetDriver();
+			case DairyPackage.VEHICLE__ASSET_INFO:
+				return getAssetInfo();
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				return getVehicleId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -682,13 +799,19 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 				setDominantColour((String)newValue);
 				return;
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				setCapacityInTonnes((String)newValue);
+				setCapacityInTonnes((Double)newValue);
 				return;
 			case DairyPackage.VEHICLE__YEAR:
 				setYear((String)newValue);
 				return;
 			case DairyPackage.VEHICLE__DRIVER:
 				setDriver((Employee)newValue);
+				return;
+			case DairyPackage.VEHICLE__ASSET_INFO:
+				setAssetInfo((Asset)newValue);
+				return;
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				setVehicleId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -741,6 +864,12 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__DRIVER:
 				setDriver((Employee)null);
 				return;
+			case DairyPackage.VEHICLE__ASSET_INFO:
+				setAssetInfo((Asset)null);
+				return;
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				setVehicleId(VEHICLE_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -774,11 +903,15 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 			case DairyPackage.VEHICLE__DOMINANT_COLOUR:
 				return DOMINANT_COLOUR_EDEFAULT == null ? dominantColour != null : !DOMINANT_COLOUR_EDEFAULT.equals(dominantColour);
 			case DairyPackage.VEHICLE__CAPACITY_IN_TONNES:
-				return CAPACITY_IN_TONNES_EDEFAULT == null ? capacityInTonnes != null : !CAPACITY_IN_TONNES_EDEFAULT.equals(capacityInTonnes);
+				return capacityInTonnes != CAPACITY_IN_TONNES_EDEFAULT;
 			case DairyPackage.VEHICLE__YEAR:
 				return YEAR_EDEFAULT == null ? year != null : !YEAR_EDEFAULT.equals(year);
 			case DairyPackage.VEHICLE__DRIVER:
 				return driver != null;
+			case DairyPackage.VEHICLE__ASSET_INFO:
+				return assetInfo != null;
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				return VEHICLE_ID_EDEFAULT == null ? vehicleId != null : !VEHICLE_ID_EDEFAULT.equals(vehicleId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -817,6 +950,8 @@ public class VehicleImpl extends AssetImpl implements Vehicle {
 		result.append(capacityInTonnes);
 		result.append(", year: ");
 		result.append(year);
+		result.append(", vehicleId: ");
+		result.append(vehicleId);
 		result.append(')');
 		return result.toString();
 	}

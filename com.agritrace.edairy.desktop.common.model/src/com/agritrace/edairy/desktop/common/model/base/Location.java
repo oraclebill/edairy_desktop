@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Location#getMapLocation <em>Map Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Location#getStatutoryLocation <em>Statutory Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Location#getDescriptiveLocation <em>Descriptive Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Location#getLocationId <em>Location Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,6 +41,8 @@ public interface Location extends EObject {
 	 * @see #setPostalLocation(PostalLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_PostalLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='postalLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	PostalLocation getPostalLocation();
@@ -66,6 +69,8 @@ public interface Location extends EObject {
 	 * @see #setMapLocation(MapLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_MapLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='mapLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	MapLocation getMapLocation();
@@ -92,6 +97,8 @@ public interface Location extends EObject {
 	 * @see #setStatutoryLocation(StatutoryLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_StatutoryLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='statutoryLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	StatutoryLocation getStatutoryLocation();
@@ -118,6 +125,8 @@ public interface Location extends EObject {
 	 * @see #setDescriptiveLocation(DescriptiveLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_DescriptiveLocation()
 	 * @model containment="true"
+	 *        extendedMetaData="name='descriptiveLocation' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	DescriptiveLocation getDescriptiveLocation();
@@ -131,5 +140,31 @@ public interface Location extends EObject {
 	 * @generated
 	 */
 	void setDescriptiveLocation(DescriptiveLocation value);
+
+	/**
+	 * Returns the value of the '<em><b>Location Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location Id</em>' attribute.
+	 * @see #setLocationId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getLocation_LocationId()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @generated
+	 */
+	Long getLocationId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Location#getLocationId <em>Location Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Location Id</em>' attribute.
+	 * @see #getLocationId()
+	 * @generated
+	 */
+	void setLocationId(Long value);
 
 } // Location

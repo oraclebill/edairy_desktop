@@ -74,6 +74,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.ASSET: return createAsset();
 			case DairyPackage.DAIRY_CONTAINER: return createDairyContainer();
 			case DairyPackage.SUPPLIER: return createSupplier();
+			case DairyPackage.CUSTOMER: return createCustomer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -249,6 +250,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public Supplier createSupplier() {
 		SupplierImpl supplier = new SupplierImpl();
 		return supplier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Customer createCustomer() {
+		CustomerImpl customer = new CustomerImpl();
+		return customer;
 	}
 
 	/**

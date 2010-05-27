@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl#getMapLocation <em>Map Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl#getStatutoryLocation <em>Statutory Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl#getDescriptiveLocation <em>Descriptive Location</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl#getLocationId <em>Location Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +79,26 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @ordered
 	 */
 	protected DescriptiveLocation descriptiveLocation;
+
+	/**
+	 * The default value of the '{@link #getLocationId() <em>Location Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocationId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long LOCATION_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLocationId() <em>Location Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocationId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long locationId = LOCATION_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,6 +296,27 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Long getLocationId() {
+		return locationId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocationId(Long newLocationId) {
+		Long oldLocationId = locationId;
+		locationId = newLocationId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__LOCATION_ID, oldLocationId, locationId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -306,6 +348,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 				return getStatutoryLocation();
 			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
 				return getDescriptiveLocation();
+			case ModelPackage.LOCATION__LOCATION_ID:
+				return getLocationId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -329,6 +373,9 @@ public class LocationImpl extends EObjectImpl implements Location {
 				return;
 			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
 				setDescriptiveLocation((DescriptiveLocation)newValue);
+				return;
+			case ModelPackage.LOCATION__LOCATION_ID:
+				setLocationId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -354,6 +401,9 @@ public class LocationImpl extends EObjectImpl implements Location {
 			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
 				setDescriptiveLocation((DescriptiveLocation)null);
 				return;
+			case ModelPackage.LOCATION__LOCATION_ID:
+				setLocationId(LOCATION_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -374,8 +424,26 @@ public class LocationImpl extends EObjectImpl implements Location {
 				return statutoryLocation != null;
 			case ModelPackage.LOCATION__DESCRIPTIVE_LOCATION:
 				return descriptiveLocation != null;
+			case ModelPackage.LOCATION__LOCATION_ID:
+				return LOCATION_ID_EDEFAULT == null ? locationId != null : !LOCATION_ID_EDEFAULT.equals(locationId);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (locationId: ");
+		result.append(locationId);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LocationImpl

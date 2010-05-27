@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl#getAssetId <em>Asset Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl#getTagType <em>Tag Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl#getTagValue <em>Tag Value</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl#getDateAcquired <em>Date Acquired</em>}</li>
@@ -40,26 +39,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class AssetImpl extends EObjectImpl implements Asset {
-	/**
-	 * The default value of the '{@link #getAssetId() <em>Asset Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssetId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long ASSET_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getAssetId() <em>Asset Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssetId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long assetId = ASSET_ID_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getTagType() <em>Tag Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -244,27 +223,6 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getAssetId() {
-		return assetId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAssetId(Long newAssetId) {
-		Long oldAssetId = assetId;
-		assetId = newAssetId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__ASSET_ID, oldAssetId, assetId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getTagType() {
 		return tagType;
 	}
@@ -436,8 +394,6 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.ASSET__ASSET_ID:
-				return getAssetId();
 			case DairyPackage.ASSET__TAG_TYPE:
 				return getTagType();
 			case DairyPackage.ASSET__TAG_VALUE:
@@ -466,9 +422,6 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.ASSET__ASSET_ID:
-				setAssetId((Long)newValue);
-				return;
 			case DairyPackage.ASSET__TAG_TYPE:
 				setTagType((String)newValue);
 				return;
@@ -505,9 +458,6 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.ASSET__ASSET_ID:
-				setAssetId(ASSET_ID_EDEFAULT);
-				return;
 			case DairyPackage.ASSET__TAG_TYPE:
 				setTagType(TAG_TYPE_EDEFAULT);
 				return;
@@ -544,8 +494,6 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.ASSET__ASSET_ID:
-				return ASSET_ID_EDEFAULT == null ? assetId != null : !ASSET_ID_EDEFAULT.equals(assetId);
 			case DairyPackage.ASSET__TAG_TYPE:
 				return TAG_TYPE_EDEFAULT == null ? tagType != null : !TAG_TYPE_EDEFAULT.equals(tagType);
 			case DairyPackage.ASSET__TAG_VALUE:
@@ -576,9 +524,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (assetId: ");
-		result.append(assetId);
-		result.append(", tagType: ");
+		result.append(" (tagType: ");
 		result.append(tagType);
 		result.append(", tagValue: ");
 		result.append(tagValue);

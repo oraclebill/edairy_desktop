@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getAnimnalRegistrationId <em>Animnal Registration Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getRegistrationId <em>Registration Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getGivenName <em>Given Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getGender <em>Gender</em>}</li>
@@ -64,24 +64,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnimal {
 	/**
-	 * The default value of the '{@link #getAnimnalRegistrationId() <em>Animnal Registration Id</em>}' attribute.
+	 * The default value of the '{@link #getRegistrationId() <em>Registration Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAnimnalRegistrationId()
+	 * @see #getRegistrationId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long ANIMNAL_REGISTRATION_ID_EDEFAULT = 0L;
+	protected static final long REGISTRATION_ID_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getAnimnalRegistrationId() <em>Animnal Registration Id</em>}' attribute.
+	 * The cached value of the '{@link #getRegistrationId() <em>Registration Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAnimnalRegistrationId()
+	 * @see #getRegistrationId()
 	 * @generated
 	 * @ordered
 	 */
-	protected long animnalRegistrationId = ANIMNAL_REGISTRATION_ID_EDEFAULT;
+	protected long registrationId = REGISTRATION_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getGivenName() <em>Given Name</em>}' attribute.
@@ -134,7 +134,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	protected Gender gender = GENDER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAnimalType() <em>Animal Type</em>}' containment reference.
+	 * The cached value of the '{@link #getAnimalType() <em>Animal Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAnimalType()
@@ -337,8 +337,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getAnimnalRegistrationId() {
-		return animnalRegistrationId;
+	public long getRegistrationId() {
+		return registrationId;
 	}
 
 	/**
@@ -346,11 +346,11 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAnimnalRegistrationId(long newAnimnalRegistrationId) {
-		long oldAnimnalRegistrationId = animnalRegistrationId;
-		animnalRegistrationId = newAnimnalRegistrationId;
+	public void setRegistrationId(long newRegistrationId) {
+		long oldRegistrationId = registrationId;
+		registrationId = newRegistrationId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID, oldAnimnalRegistrationId, animnalRegistrationId));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID, oldRegistrationId, registrationId));
 	}
 
 	/**
@@ -439,6 +439,14 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public ReferenceAnimalType getAnimalType() {
+		if (animalType != null && animalType.eIsProxy()) {
+			InternalEObject oldAnimalType = (InternalEObject)animalType;
+			animalType = (ReferenceAnimalType)eResolveProxy(oldAnimalType);
+			if (animalType != oldAnimalType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
+			}
+		}
 		return animalType;
 	}
 
@@ -447,14 +455,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAnimalType(ReferenceAnimalType newAnimalType, NotificationChain msgs) {
-		ReferenceAnimalType oldAnimalType = animalType;
-		animalType = newAnimalType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, newAnimalType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public ReferenceAnimalType basicGetAnimalType() {
+		return animalType;
 	}
 
 	/**
@@ -463,17 +465,10 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public void setAnimalType(ReferenceAnimalType newAnimalType) {
-		if (newAnimalType != animalType) {
-			NotificationChain msgs = null;
-			if (animalType != null)
-				msgs = ((InternalEObject)animalType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, null, msgs);
-			if (newAnimalType != null)
-				msgs = ((InternalEObject)newAnimalType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, null, msgs);
-			msgs = basicSetAnimalType(newAnimalType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, newAnimalType, newAnimalType));
+		ReferenceAnimalType oldAnimalType = animalType;
+		animalType = newAnimalType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
 	}
 
 	/**
@@ -698,8 +693,6 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE:
-				return basicSetAnimalType(null, msgs);
 			case TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE:
 				return basicSetSireType(null, msgs);
 			case TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS:
@@ -716,8 +709,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackingPackage.REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID:
-				return getAnimnalRegistrationId();
+			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
+				return getRegistrationId();
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				return getGivenName();
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
@@ -726,7 +719,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__GENDER:
 				return getGender();
 			case TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE:
-				return getAnimalType();
+				if (resolve) return getAnimalType();
+				return basicGetAnimalType();
 			case TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE:
 				return getSireType();
 			case TrackingPackage.REGISTERED_ANIMAL__PURPOSE:
@@ -760,8 +754,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackingPackage.REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID:
-				setAnimnalRegistrationId((Long)newValue);
+			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
+				setRegistrationId((Long)newValue);
 				return;
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				setGivenName((String)newValue);
@@ -819,8 +813,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackingPackage.REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID:
-				setAnimnalRegistrationId(ANIMNAL_REGISTRATION_ID_EDEFAULT);
+			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
+				setRegistrationId(REGISTRATION_ID_EDEFAULT);
 				return;
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				setGivenName(GIVEN_NAME_EDEFAULT);
@@ -876,8 +870,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackingPackage.REGISTERED_ANIMAL__ANIMNAL_REGISTRATION_ID:
-				return animnalRegistrationId != ANIMNAL_REGISTRATION_ID_EDEFAULT;
+			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
+				return registrationId != REGISTRATION_ID_EDEFAULT;
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				return GIVEN_NAME_EDEFAULT == null ? givenName != null : !GIVEN_NAME_EDEFAULT.equals(givenName);
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
@@ -920,8 +914,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (animnalRegistrationId: ");
-		result.append(animnalRegistrationId);
+		result.append(" (registrationId: ");
+		result.append(registrationId);
 		result.append(", givenName: ");
 		result.append(givenName);
 		result.append(", gender: ");

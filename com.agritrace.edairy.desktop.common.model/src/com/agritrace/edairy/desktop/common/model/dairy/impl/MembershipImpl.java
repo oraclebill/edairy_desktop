@@ -6,8 +6,6 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.Person;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
@@ -16,23 +14,18 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
-import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +40,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMember <em>Member</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getFarms <em>Farms</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getAccount <em>Account</em>}</li>
  * </ul>
  * </p>
@@ -63,7 +55,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String MEMBER_ID_EDEFAULT = null;
+	protected static final Long MEMBER_ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMemberId() <em>Member Id</em>}' attribute.
@@ -73,7 +65,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected String memberId = MEMBER_ID_EDEFAULT;
+	protected Long memberId = MEMBER_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getApplicationDate() <em>Application Date</em>}' attribute.
@@ -153,17 +145,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected Person member;
-
-	/**
-	 * The cached value of the '{@link #getFarms() <em>Farms</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFarms()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Farm> farms;
+	protected Farmer member;
 
 	/**
 	 * The cached value of the '{@link #getAccount() <em>Account</em>}' reference.
@@ -199,7 +181,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMemberId() {
+	public Long getMemberId() {
 		return memberId;
 	}
 
@@ -208,8 +190,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMemberId(String newMemberId) {
-		String oldMemberId = memberId;
+	public void setMemberId(Long newMemberId) {
+		Long oldMemberId = memberId;
 		memberId = newMemberId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_ID, oldMemberId, memberId));
@@ -321,7 +303,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Person getMember() {
+	public Farmer getMember() {
 		return member;
 	}
 
@@ -330,8 +312,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMember(Person newMember, NotificationChain msgs) {
-		Person oldMember = member;
+	public NotificationChain basicSetMember(Farmer newMember, NotificationChain msgs) {
+		Farmer oldMember = member;
 		member = newMember;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, oldMember, newMember);
@@ -345,7 +327,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMember(Person newMember) {
+	public void setMember(Farmer newMember) {
 		if (newMember != member) {
 			NotificationChain msgs = null;
 			if (member != null)
@@ -357,18 +339,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, newMember, newMember));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Farm> getFarms() {
-		if (farms == null) {
-			farms = new EObjectResolvingEList<Farm>(Farm.class, this, DairyPackage.MEMBERSHIP__FARMS);
-		}
-		return farms;
 	}
 
 	/**
@@ -484,8 +454,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return basicGetDefaultRoute();
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				return getMember();
-			case DairyPackage.MEMBERSHIP__FARMS:
-				return getFarms();
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				if (resolve) return getAccount();
 				return basicGetAccount();
@@ -498,12 +466,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
-				setMemberId((String)newValue);
+				setMemberId((Long)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				setApplicationDate((Date)newValue);
@@ -518,11 +485,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				setDefaultRoute((Route)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER:
-				setMember((Person)newValue);
-				return;
-			case DairyPackage.MEMBERSHIP__FARMS:
-				getFarms().clear();
-				getFarms().addAll((Collection<? extends Farm>)newValue);
+				setMember((Farmer)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				setAccount((Account)newValue);
@@ -555,10 +518,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				setDefaultRoute((Route)null);
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER:
-				setMember((Person)null);
-				return;
-			case DairyPackage.MEMBERSHIP__FARMS:
-				getFarms().clear();
+				setMember((Farmer)null);
 				return;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				setAccount((Account)null);
@@ -587,8 +547,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return defaultRoute != null;
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				return member != null;
-			case DairyPackage.MEMBERSHIP__FARMS:
-				return farms != null && !farms.isEmpty();
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return account != null;
 		}

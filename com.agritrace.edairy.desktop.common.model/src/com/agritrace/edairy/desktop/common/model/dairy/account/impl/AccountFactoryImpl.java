@@ -79,6 +79,8 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 		switch (eDataType.getClassifierID()) {
 			case AccountPackage.TRANSACTION_TYPE:
 				return createTransactionTypeFromString(eDataType, initialValue);
+			case AccountPackage.TRANSACTION_SOURCE:
+				return createTransactionSourceFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -94,6 +96,8 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 		switch (eDataType.getClassifierID()) {
 			case AccountPackage.TRANSACTION_TYPE:
 				return convertTransactionTypeToString(eDataType, instanceValue);
+			case AccountPackage.TRANSACTION_SOURCE:
+				return convertTransactionSourceToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -146,6 +150,26 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * @generated
 	 */
 	public String convertTransactionTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransactionSource createTransactionSourceFromString(EDataType eDataType, String initialValue) {
+		TransactionSource result = TransactionSource.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTransactionSourceToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
