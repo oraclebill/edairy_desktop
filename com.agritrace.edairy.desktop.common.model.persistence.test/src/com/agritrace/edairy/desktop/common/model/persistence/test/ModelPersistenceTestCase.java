@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Environment;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -30,16 +31,13 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 public class ModelPersistenceTestCase {
+	
+	private SessionFactory sFactory;
 
-	@Test
-	public void testCreateDairyData() throws Exception {
-		//
-		// HIBERNATE SETUP
-		//
+	@Before public void setupSessionFactory() {
+		// create the HbDataStore
 		String hbName = "dairytest";
 		String dbName = "dairytest";
-
-		// create the HbDataStore
 		HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore(hbName);
 
 		// The hibernate properties can be set by having a hibernate.properties file in the root of
@@ -61,35 +59,18 @@ public class ModelPersistenceTestCase {
 //		props.setProperty(Environment.SHOW_SQL, "true");
 		
 		// drop and recreate db on startup
-		props.setProperty(Environment.HBM2DDL_AUTO, "create");
+		props.setProperty(Environment.HBM2DDL_AUTO, "update");
 		
 		hbds.setProperties(props);
 
-		// sets its epackages stored in this datastore
-		// needed for standalone case...
-		hbds.setEPackages(
-			new EPackage[] { 
-				AccountPackage.eINSTANCE, 
-				DairyPackage.eINSTANCE, 
-				ModelPackage.eINSTANCE, 
-				RequestsPackage.eINSTANCE, 
-				TrackingPackage.eINSTANCE 
-				}
-			);
-
-
-		// Register the default resource factory -- only needed for stand-alone!
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-			.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());		
-
-
-		// initialize, also creates the database tables
 		hbds.initialize();
+		sFactory = hbds.getSessionFactory();
+	}
+	
+	@Test
+	public void testCreateDairyData() throws Exception {
+
 		
-		//System.err.println(hbds.getMappingXML());
-		
-		SessionFactory sFactory = hbds.getSessionFactory();
 		Session session = sFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
@@ -122,6 +103,7 @@ public class ModelPersistenceTestCase {
 		
 		session.save(dairy);
 		tx.commit();
+		session.close();
 		
 	}
 }
