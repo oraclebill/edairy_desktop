@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -11,19 +9,16 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MemberInfoGroup {
 
 	public static final String memberId = "Member ID:";
 	public static final String firstName = "Name:";
-	public static final String lastName = "Last Name:";
-	public static final String phoneNumber = "Phone Number:";
+
 
 	private final Composite composite;
-	private Text txtId;
+	private Label txtId;
 	private Text txtFirst;
 	private Label photoLabel;
 
@@ -39,27 +34,29 @@ public class MemberInfoGroup {
 		final Composite upperPanel = UIControlsFactory.createComposite(composite);
 		upperPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		final GridLayout upperPanelLayout = new GridLayout();
-		upperPanelLayout.numColumns = 5;
+		upperPanelLayout.numColumns = 4;
 		upperPanelLayout.makeColumnsEqualWidth = false;
 		upperPanel.setLayout(upperPanelLayout);
 		upperPanel.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		// member Id
 		UIControlsFactory.createLabel(upperPanel, memberId);
 
-		txtId = UIControlsFactory.createText(upperPanel, SWT.BORDER | SWT.READ_ONLY, ViewWidgetId.memberInfo_id);
-		final GridData gd_txtId = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
-		// gd_txtId.minimumWidth = 50;
+		txtId = UIControlsFactory.createLabel(upperPanel, "Member Id : ",ViewWidgetId.memberInfo_id);
+		final GridData gd_txtId = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		 gd_txtId.widthHint = 150;
 		txtId.setLayoutData(gd_txtId);
-
-		UIControlsFactory.createLabel(upperPanel, firstName);
-		txtFirst = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_firstName);
-		final GridData gd_txtFirst = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
-		// gd_txtFirst.minimumWidth = 100;
-		txtFirst.setLayoutData(gd_txtFirst);
 
 		photoLabel = UIControlsFactory.createLabel(upperPanel, ""); //$NON-NLS-1$
 		//	photoLabel.setImage(Activator.getImage(ImageRegistry.sample_memberphoto));
-		photoLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, true, 1, 4));
+		photoLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, true, 2, 4));
+		
+		UIControlsFactory.createLabel(upperPanel, firstName);
+		txtFirst = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_firstName);
+		final GridData gd_txtFirst = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		 gd_txtFirst.widthHint = 150;
+		txtFirst.setLayoutData(gd_txtFirst);
+
+	
 	}
 
 	
