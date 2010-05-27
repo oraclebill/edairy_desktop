@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.List;
 
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
@@ -15,12 +14,13 @@ public class CommunicationGroupController implements WidgetController {
 	
 	private IController controller;
 	private Person person;
+	private List<ContactMethod> contactMethods;
 	
 	private ITextRidget emailTxt;
 	private ITextRidget phoneTxt;
 	private ITextRidget secondPhoneTxt;
 	
-	public CommunicationGroupController(SubModuleController controller){
+	public CommunicationGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}
@@ -43,7 +43,7 @@ public class CommunicationGroupController implements WidgetController {
 
 	@Override
 	public void setInputModel(Object model) {
-		person = (Person)model;
+		contactMethods = (List)model;
 
 	}
 
@@ -60,14 +60,14 @@ public class CommunicationGroupController implements WidgetController {
 	@Override
 	public void updateBinding() {
 	
-		List<ContactMethod> contacts = person.getContactMethods();
+//		List<ContactMethod> contacts = person.getContactMethods();
 		emailTxt.setText("");
 		phoneTxt.setText("");
 		secondPhoneTxt.setText("");
-		if(person == null){
+		if(contactMethods == null || contactMethods.size() == 0){
 			return;
 		}
-		for(ContactMethod contact :contacts){
+		for(ContactMethod contact :contactMethods){
 			if(contact.getCmType()==ContactMethodType.EMAIL){
 				emailTxt.setText(contact.getCmValue());
 			}else if(contact.getCmType() == ContactMethodType.PHONE){

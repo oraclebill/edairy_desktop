@@ -1,12 +1,11 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.ui.converters.NumberToStringConverter;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MapGroupController implements WidgetController {
@@ -18,7 +17,7 @@ public class MapGroupController implements WidgetController {
 	private ITextRidget latituteTxt;
 	private ITextRidget longtituteTxt;
 
-	public MapGroupController(SubModuleController controller){
+	public MapGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}
@@ -57,9 +56,11 @@ public class MapGroupController implements WidgetController {
 	@Override
 	public void updateBinding() {
 		if(map != null){
-			latituteTxt.bindToModel(EMFObservables.observeValue(map, ModelPackage.Literals.MAP_LOCATION__LATITUDE));
+			latituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LATITUDE.getName());
+			latituteTxt.setModelToUIControlConverter(new NumberToStringConverter(Double.class));
 			latituteTxt.updateFromModel();
-			longtituteTxt.bindToModel(EMFObservables.observeValue(map, ModelPackage.Literals.MAP_LOCATION__LONGITUDE));
+			longtituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LONGITUDE.getName());
+			latituteTxt.setModelToUIControlConverter(new NumberToStringConverter(Double.class));
 			longtituteTxt.updateFromModel();
 		}else{
 			latituteTxt.setText("");

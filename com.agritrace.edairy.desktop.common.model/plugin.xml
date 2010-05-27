@@ -39,7 +39,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://com.agritrace.edairy.desktop.common.model.base/"
-            class="com.agritrace.edairy.desktop.common.model.ModelPackage"
+            class="com.agritrace.edairy.desktop.common.model.base.ModelPackage"
             genModel="model/dairy.genmodel"/>
    </extension>
 

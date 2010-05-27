@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
@@ -17,7 +16,7 @@ public class DirectionGroupController implements WidgetController {
 	private ITextRidget landmarkTxt;
 	private ITextRidget directionsTxt;
 	
-	public DirectionGroupController(SubModuleController controller){
+	public DirectionGroupController(IController controller){
 		this.controller = controller;
 		configue();
 	}
