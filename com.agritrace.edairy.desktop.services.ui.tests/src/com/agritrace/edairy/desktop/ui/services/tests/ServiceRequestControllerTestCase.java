@@ -16,7 +16,6 @@ import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
 
