@@ -10,6 +10,7 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -48,6 +49,126 @@ import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
  */
 public class SupplierListDialog extends RecordDialog {
 
+	static class SupplierListDialogController extends RecordDialogController {
+		IController parentController;
+
+		SupplierListDialogController(RecordDialog dialog) {
+			super(dialog);
+		}
+
+		@Override
+		public void configureRidgets() {
+			super.configureRidgets();
+			// configure supplier ID
+			final Supplier supplier = (Supplier) getWorkingCopy();
+			ITextRidget supplierId = getRidget(ITextRidget.class,
+					BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
+			supplierId.setDirectWriting(true);
+			supplierId.setOutputOnly(false);
+			supplierId.bindToModel(supplier,
+					DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName());
+			supplierId.updateFromModel();
+			supplierId.setOutputOnly(true);
+
+			// Status
+			IComboRidget statusCombo = getRidget(IComboRidget.class,
+					BIND_ID_SUPPLIER_STATUS);
+			// statusCombo.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
+			statusCombo.bindToModel(Observables
+					.staticObservableList(VendorStatus.VALUES),
+					VendorStatus.class, "toString", PojoObservables
+							.observeValue(supplier,
+									DairyPackage.Literals.SUPPLIER__STATUS
+											.getName()));
+
+			statusCombo.updateFromModel();
+
+			// Company Name
+			ITextRidget companyName = getRidget(ITextRidget.class,
+					BIND_ID_COMPANY_NAME); //$NON-NLS-1$
+			companyName.bindToModel(supplier,
+					ModelPackage.Literals.COMPANY__COMPANY_NAME.getName());
+			companyName.updateFromModel();
+
+			// Legal Name
+			ITextRidget legalName = getRidget(ITextRidget.class,
+					BIND_ID_LEGAL_NAME); //$NON-NLS-1$
+			legalName.bindToModel(supplier,
+					ModelPackage.Literals.COMPANY__LEGAL_NAME.getName());
+			legalName.updateFromModel();
+
+			// Category
+			IListRidget category = getRidget(IListRidget.class,
+					BIND_ID_CATEGORY); //$NON-NLS-1$
+			category.bindToModel(supplier,
+					DairyPackage.Literals.SUPPLIER__CATEGORIES.getName());
+			category.bindToModel(
+					Observables.staticObservableList(SupplierCategory
+							.getCategoriesList()), SupplierCategory.class,
+					"name");
+			category.updateFromModel();
+
+			// Description
+			ITextRidget desc = getRidget(ITextRidget.class, BIND_ID_DESCRIPTION); //$NON-NLS-1$
+			desc.bindToModel(supplier,
+					DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION
+							.getName());
+			desc.updateFromModel();
+
+			// Configure address group
+			AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(
+					this);
+			addressGroupController.setInputModel(supplier.getLocation()
+					.getPostalLocation());
+			addressGroupController.updateBinding();
+
+			// Configure Direction Group
+			DirectionGroupController directionController = new DirectionGroupController(
+					this);
+			directionController.setInputModel(supplier.getLocation()
+					.getDescriptiveLocation());
+			directionController.updateBinding();
+
+			// Configure Map Group
+			MapGroupController mapController = new MapGroupController(this);
+			mapController
+					.setInputModel(supplier.getLocation().getMapLocation());
+			mapController.updateBinding();
+
+			// Configure Communication Group
+			CommunicationGroupController commController = new CommunicationGroupController(
+					this);
+			commController.setInputModel(supplier.getContactMethods());
+			commController.updateBinding();
+
+		}
+
+		@Override
+		protected void doCreation() {
+			Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
+			Supplier newSupplier = (Supplier) this.getWorkingCopy();
+			dairy.getSuppliers().add(newSupplier);
+			// DairyDemoResourceManager.INSTANCE.getDairyResoure().getContents().add(newSupplier);
+			doSave();
+
+		}
+
+		@Override
+		protected void doUpdate() {
+			doSave();
+		}
+
+		@Override
+		protected EClass getEClass() {
+			return DairyPackage.eINSTANCE.getSupplier();
+		}
+
+		@Override
+		protected EObject createWorkingCopy() {
+			return EMFUtil.createWorkingCopy(this.getEClass(), 2);
+		}
+	}
+
 	private static int WIDTH_HEIGHT = 400;
 	private static int DESC_HEIGHT_HEIGHT = 50;
 
@@ -66,7 +187,7 @@ public class SupplierListDialog extends RecordDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(500, 750);
+		// newShell.setSize(500, 750);
 		if (this.getDialogStyle() == DIALOG_STYLE_NEW) {
 			this.setTitle("Add Supplier");
 		} else if (this.getDialogStyle() == DIALOG_STYLE_VIEW) {
@@ -84,8 +205,8 @@ public class SupplierListDialog extends RecordDialog {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).applyTo(comonComp);
 
-		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL,
-				SWT.FILL).grab(true, true);
+		GridDataFactory factory = GridDataFactory.swtDefaults()
+				.align(SWT.FILL, SWT.FILL).grab(true, true);
 		// Supplier Id
 		UIControlsFactory.createLabel(comonComp, "Supplier ID");
 		Text txtDate = UIControlsFactory.createText(comonComp);
@@ -114,16 +235,16 @@ public class SupplierListDialog extends RecordDialog {
 		// Category
 		UIControlsFactory.createLabel(comonComp, "Category");
 		List categoryList = UIControlsFactory.createList(comonComp, true, true);
-		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL,
-				SWT.BEGINNING).applyTo(categoryList);
+		GridDataFactory.swtDefaults().grab(true, false)
+				.align(SWT.FILL, SWT.BEGINNING).applyTo(categoryList);
 		addUIControl(categoryList, BIND_ID_CATEGORY); //$NON-NLS-1$
 
 		// Description
 		UIControlsFactory.createLabel(comonComp, "Description");
 		Text descText = UIControlsFactory
 				.createTextMulti(comonComp, true, true);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
-				false).hint(-1, 50).applyTo(descText);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, false).hint(-1, 50).applyTo(descText);
 		addUIControl(descText, BIND_ID_DESCRIPTION); //$NON-NLS-1$
 
 		createContactGroup(comonComp);
@@ -135,8 +256,8 @@ public class SupplierListDialog extends RecordDialog {
 				"Company Contact");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).span(2, 1).applyTo(companyContactGroup);
-		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(
-				companyContactGroup);
+		GridLayoutFactory.swtDefaults().numColumns(2)
+				.applyTo(companyContactGroup);
 		AddressGroupWidget addressWidget = new AddressGroupWidget(
 				companyContactGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
@@ -166,122 +287,8 @@ public class SupplierListDialog extends RecordDialog {
 	}
 
 	protected AbstractWindowController createController() {
-		RecordDialogController controller = new RecordDialogController(
-				this) {
-
-			@Override
-			public void configureRidgets() {
-				super.configureRidgets();
-				// configure supplier ID
-				final Supplier supplier = (Supplier) getWorkingCopy();
-				ITextRidget supplierId = getRidget(ITextRidget.class,
-						BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
-				supplierId.setDirectWriting(true);
-				supplierId.setOutputOnly(false);
-				supplierId.bindToModel(supplier,
-						DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName());
-				supplierId.updateFromModel();
-				supplierId.setOutputOnly(true);
-
-				// Status
-				IComboRidget statusCombo = getRidget(IComboRidget.class,
-						BIND_ID_SUPPLIER_STATUS);
-				// statusCombo.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
-				statusCombo.bindToModel(Observables
-						.staticObservableList(VendorStatus.VALUES),
-						VendorStatus.class, "toString", PojoObservables
-								.observeValue(supplier,
-										DairyPackage.Literals.SUPPLIER__STATUS
-												.getName()));
-
-				statusCombo.updateFromModel();
-
-				// Company Name
-				ITextRidget companyName = getRidget(ITextRidget.class,
-						BIND_ID_COMPANY_NAME); //$NON-NLS-1$
-				companyName.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_NAME.getName());
-				companyName.updateFromModel();
-
-				// Legal Name
-				ITextRidget legalName = getRidget(ITextRidget.class,
-						BIND_ID_LEGAL_NAME); //$NON-NLS-1$
-				legalName.bindToModel(supplier,
-						ModelPackage.Literals.COMPANY__LEGAL_NAME.getName());
-				legalName.updateFromModel();
-
-				// Category
-				IListRidget category = getRidget(IListRidget.class,
-						BIND_ID_CATEGORY); //$NON-NLS-1$
-				category.bindToModel(supplier,
-						DairyPackage.Literals.SUPPLIER__CATEGORIES.getName());
-				category.bindToModel(Observables
-						.staticObservableList(SupplierCategory.getCategoriesList()),
-						SupplierCategory.class, "name");			
-				category.updateFromModel();
-
-				// Description
-				ITextRidget desc = getRidget(ITextRidget.class,
-						BIND_ID_DESCRIPTION); //$NON-NLS-1$
-				desc.bindToModel(supplier,
-						DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION
-								.getName());
-				desc.updateFromModel();
-
-				// Configure address group
-				AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(
-						getController());
-				addressGroupController.setInputModel(supplier.getLocation()
-						.getPostalLocation());
-				addressGroupController.updateBinding();
-
-				// Configure Direction Group
-				DirectionGroupController directionController = new DirectionGroupController(
-						getController());
-				directionController.setInputModel(supplier.getLocation()
-						.getDescriptiveLocation());
-				directionController.updateBinding();
-
-				// Configure Map Group
-				MapGroupController mapController = new MapGroupController(
-						getController());
-				mapController.setInputModel(supplier.getLocation()
-						.getMapLocation());
-				mapController.updateBinding();
-
-				// Configure Communication Group
-				CommunicationGroupController commController = new CommunicationGroupController(
-						getController());
-				commController.setInputModel(supplier.getContactMethods());
-				commController.updateBinding();
-
-			}
-
-			@Override
-			protected void doCreation() {
-				Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-				Supplier newSupplier = (Supplier) this.getWorkingCopy();
-				dairy.getSuppliers().add(newSupplier);
-//				DairyDemoResourceManager.INSTANCE.getDairyResoure().getContents().add(newSupplier);
-				doSave();
-
-			}
-
-			@Override
-			protected void doUpdate() {
-				doSave();
-			}
-
-			@Override
-			protected EClass getEClass() {
-				return DairyPackage.eINSTANCE.getSupplier();
-			}
-
-			@Override
-			protected EObject createWorkingCopy() {
-				return EMFUtil.createWorkingCopy(this.getEClass(), 2);
-			}
-
-		};
+		RecordDialogController controller = new SupplierListDialogController(
+				this);
 		return controller;
 	}
 }
