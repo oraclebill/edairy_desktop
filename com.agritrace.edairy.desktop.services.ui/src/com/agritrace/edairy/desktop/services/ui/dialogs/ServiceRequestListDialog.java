@@ -40,7 +40,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.LookupComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.RidgetUtils;
 import com.agritrace.edairy.desktop.services.ui.Activator;
 
 /**
@@ -464,7 +464,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 				// UIChanges
 				updateUI(request);
 				// SwtRidgetFactory.
-				ServiceUtils.injectRidgets(Activator.getDefault().getBundle()
+				RidgetUtils.injectRidgets(Activator.getDefault().getBundle()
 						.getBundleContext(), getController(), injectedControls,
 						SWTBindingPropertyLocator.getInstance());
 				// Updates the bindings

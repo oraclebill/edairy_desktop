@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoMasterDetailComposite;
 
 /**
@@ -130,7 +130,7 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 	public Employee copyBean(final Object source, final Object target) {
 	    final Employee from = source != null ? (Employee) source : createWorkingCopy();
 	    final Employee to = target != null ? (Employee) target : createWorkingCopy();
-	    ServiceUtils.copy(from, to);
+	    EMFUtil.copy(from, to);
 	    return to;
 	}
 

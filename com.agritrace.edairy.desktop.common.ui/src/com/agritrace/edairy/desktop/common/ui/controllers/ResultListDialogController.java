@@ -22,15 +22,25 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
+/**
+ * Abstract result viewing/adding dialog controller
+ * 
+ * @author Hui(Spark) Wan
+ * 
+ */
 public abstract class ResultListDialogController extends
 		AbstractWindowController {
+	private RecordDialog dialog;
+
+	private List<IActionListener> listeners = new ArrayList<IActionListener>();
 	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
 
 	private EObject workingCopy;
-	private List<IActionListener> listeners = new ArrayList<IActionListener>();
 
-	private RecordDialog dialog;
-
+	/**
+	 * @param dialog
+	 *            Adding/Viewing/Editing Dialog
+	 */
 	public ResultListDialogController(RecordDialog dialog) {
 		super();
 		this.dialog = dialog;
@@ -38,28 +48,17 @@ public abstract class ResultListDialogController extends
 	}
 
 	/**
-	 * Gets working copy for editing
+	 * Adds a listener
 	 * 
-	 * @return
+	 * @param listener
 	 */
-	protected abstract EObject createWorkingCopy();
-
-	protected abstract EClass getEClass();
-
-	public EObject getWorkingCopy() {
-		return workingCopy;
-
+	public void addListener(IActionListener listener) {
+		this.listeners.add(listener);
 	}
 
-	public void itemSelected() {
-		// Copy selected object to
-		// Copy selected into working copy
-		if (dialog.getSelectedEObject() != null
-				&& dialog.getDialogStyle() != RecordDialog.DIALOG_STYLE_NEW) {
-			EMFUtil.copy(dialog.getSelectedEObject(), getWorkingCopy());
-		} else if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
-			EMFUtil.copy(createWorkingCopy(), getWorkingCopy());
-		}
+	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
+		Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
+		return map;
 	}
 
 	@Override
@@ -111,6 +110,13 @@ public abstract class ResultListDialogController extends
 		});
 	}
 
+	/**
+	 * Gets working copy for editing
+	 * 
+	 * @return
+	 */
+	protected abstract EObject createWorkingCopy();
+
 	private void doButtonPressed(int ok) {
 		if (Window.OK == ok) {
 			doOKPressed();
@@ -120,6 +126,23 @@ public abstract class ResultListDialogController extends
 
 	}
 
+	/**
+	 * Do something when 'Cancel' button is pressed
+	 */
+	protected void doCancelPressed() {
+		setReturnCode(CANCEL);
+		getWindowRidget().dispose();
+
+	}
+
+	/**
+	 * Create a new record when press 'OK' when adding a new record
+	 */
+	protected abstract void doCreation();
+
+	/**
+	 * Logic when 'OK' button is pressed
+	 */
 	protected void doOKPressed() {
 		setReturnCode(OK);
 		if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
@@ -133,31 +156,9 @@ public abstract class ResultListDialogController extends
 		getWindowRidget().dispose();
 	}
 
-	protected abstract void doCreation();
-
-	protected abstract void doUpdate();
-
-	protected void doCancelPressed() {
-		setReturnCode(CANCEL);
-		getWindowRidget().dispose();
-
-	}
-
-	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
-		Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
-		return map;
-	}
-
-	public void addListener(IActionListener listener) {
-		this.listeners.add(listener);
-	}
-
-	private void notifierListeners() {
-		for (IActionListener listener : this.listeners) {
-			listener.callback();
-		}
-	}
-
+	/**
+	 * Save the file to DB or file
+	 */
 	protected void doSave() {
 		try {
 			DairyDemoResourceManager.INSTANCE.saveFarmResource();
@@ -170,5 +171,47 @@ public abstract class ResultListDialogController extends
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * Update a selected record when press 'Update' when adding a new record
+	 */
+	protected abstract void doUpdate();
+
+	/**
+	 * Gets the row data model in table
+	 * 
+	 * @return Row data model
+	 */
+	protected abstract EClass getEClass();
+
+	/**
+	 * Gets working copy
+	 * 
+	 * @return Working copy
+	 */
+	public EObject getWorkingCopy() {
+		return workingCopy;
+
+	}
+
+	/**
+	 * The hook when one row in table is selected
+	 */
+	public void itemSelected() {
+		// Copy selected object to
+		// Copy selected into working copy
+		if (dialog.getSelectedEObject() != null
+				&& dialog.getDialogStyle() != RecordDialog.DIALOG_STYLE_NEW) {
+			EMFUtil.copy(dialog.getSelectedEObject(), getWorkingCopy());
+		} else if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
+			EMFUtil.copy(createWorkingCopy(), getWorkingCopy());
+		}
+	}
+
+	private void notifierListeners() {
+		for (IActionListener listener : this.listeners) {
+			listener.callback();
+		}
 	}
 }

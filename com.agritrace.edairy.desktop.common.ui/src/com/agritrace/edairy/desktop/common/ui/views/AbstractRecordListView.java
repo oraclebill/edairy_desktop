@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 
 /**
- * Common class for record list view
+ * Common class for directory list view
  * 
  * @author Hui(Spark) Wan
  * 
@@ -58,8 +58,11 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	}
 
 	protected void createControls(Composite parent) {
+		// Create filter
 		createFilter(parent);
+		// Create table list
 		createTable(parent);
+		// Create buttons
 		createButtons(parent);
 	}
 
@@ -73,12 +76,17 @@ public abstract class AbstractRecordListView extends SubModuleView {
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
 				.numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
-		// Date Range
+		// Create filter conditions
 		createFilterCondtions(comp);
-
+		// Create filter buttons
 		createFilterButtons(comp);
 	}
 
+	/**
+	 * Create filter condtions
+	 * 
+	 * @param comp
+	 */
 	protected void createFilterCondtions(Composite comp) {
 		// Subclass should override to create the filter condition
 
@@ -142,6 +150,13 @@ public abstract class AbstractRecordListView extends SubModuleView {
 		return SWT.SINGLE | SWT.FULL_SELECTION;
 	}
 
+	/**
+	 * Creates the buttons for directory view
+	 * By default, 'View' and 'Add new' buttons are created.
+	 * 
+	 * @param parent
+	 * @return
+	 */
 	protected Composite createButtons(Composite parent) {
 		Composite result = UIControlsFactory.createComposite(parent);
 		// result.setBackground(getDisplay().getSystemColor(SWT.COLOR_GREEN));
@@ -157,6 +172,12 @@ public abstract class AbstractRecordListView extends SubModuleView {
 		return result;
 	}
 
+	/**
+	 * Creates the 'Add New' button
+	 * 
+	 * @param compButton
+	 * @return
+	 */
 	protected Control createButtonNew(Composite compButton) {
 		return UIControlsFactory.createButton(compButton, "Add New",
 				BIND_ID_NEW);

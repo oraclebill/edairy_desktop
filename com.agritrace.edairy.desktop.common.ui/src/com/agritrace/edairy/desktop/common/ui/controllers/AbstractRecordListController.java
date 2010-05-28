@@ -36,10 +36,18 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		}
 	};
 
+	/**
+	 * Default controller
+	 */
 	public AbstractRecordListController() {
 		super();
 	}
 
+	/**
+	 * Controller with submodel node
+	 * 
+	 * @param navigationNode
+	 */
 	public AbstractRecordListController(ISubModuleNode navigationNode) {
 		super(navigationNode);
 	}
@@ -49,10 +57,20 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		this.container = container;
 	}
 
+	/**
+	 * Gets the container
+	 * 
+	 * @return
+	 */
 	public EObject getContainer() {
 		return this.container;
 	}
 
+	/**
+	 * Gets the selectedObject
+	 * 
+	 * @return
+	 */
 	public EObject getSelectedEObject() {
 		return this.selectedEObject;
 	}

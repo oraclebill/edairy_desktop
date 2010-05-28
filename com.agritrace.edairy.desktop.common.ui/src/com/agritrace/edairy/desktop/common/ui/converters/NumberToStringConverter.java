@@ -32,6 +32,18 @@ public class NumberToStringConverter extends Converter {
 		{
 			return (((Double)fromObject)).toString();
 		}
+		else if (this.fromClass == Float.class)
+		{
+			return (((Float)fromObject)).toString();
+		}
+		else if (this.fromClass == Integer.class)
+		{
+			return (((Integer)fromObject)).toString();
+		}
+		else if (this.fromClass == Long.class)
+		{
+			return (((Long)fromObject)).toString();
+		}
 		return null;
 	}
 

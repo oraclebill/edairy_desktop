@@ -3,6 +3,12 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 
+/**
+ * Abstract implementation for <code>IControllerDelegate</code>
+ * 
+ * @author Hui(Spark) Wan
+ *
+ */
 public abstract class ControllerDelegate implements IControllerDelegate {
 
 	public ControllerDelegate(IRidgetContainer container) {
