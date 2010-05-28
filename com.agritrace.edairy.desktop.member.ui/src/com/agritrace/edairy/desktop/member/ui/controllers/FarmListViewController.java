@@ -12,9 +12,9 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -24,10 +24,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
-import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 
 public class FarmListViewController extends SubModuleController{
 
@@ -54,7 +55,30 @@ public class FarmListViewController extends SubModuleController{
 	}
 
 	private void configueFilterGroup(){
+		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
+		int index = farmListTableInput.indexOf(selectedNode);
+		final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
+		memberDialog.getController().setContext("selectedFarm", selectedNode);
 
+		int returnCode = memberDialog.open();
+		if (returnCode == AbstractWindowController.OK) {
+			selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+			farmListTableInput.set(index, selectedNode);
+			farmListTable.updateFromModel();
+		} else if (returnCode == 2) {
+			// confirm for delete
+			if (selectedNode != null) {
+				String message = "";
+				if (selectedNode.getFarm() != null) {
+					message = "\""+ selectedNode.getFarm().getName()+"\"";
+				}
+				message = String.format(DELETE_DIALOG_MESSAGE,message);
+				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),DELETE_DIALOG_TITLE, message)) {
+					farmListTableInput.remove(selectedNode);
+					farmListTable.updateFromModel();
+				}
+			}
+		}
 	}
 
 	private void configueMemberTable() {
@@ -87,23 +111,19 @@ public class FarmListViewController extends SubModuleController{
 
 				@Override
 				public void callback() {
-//					Membership selectedMember = EMFObjectUtil.createMembership();
-//					int index = membershipList.indexOf(selectedMember);
-//					final MemberRegisterDialog memberDialog = new MemberRegisterDialog();
-//					memberDialog.getController().setContext(
-//							"selectedMember", selectedMember);
-//
-//					int returnCode = memberDialog.open();
-//					if (returnCode == AbstractWindowController.OK) {
-//						selectedMember = (Membership) memberDialog
-//						.getController().getContext(
-//						"selectedMember");
-//						membershipList.set(index, selectedMember);
-//						memberList.updateFromModel();
-//					} else {
-//						// System.out.println("return code "+returnCode);
-//					}
+					Membership membership = ((FarmListViewTableNode) farmListTable.getSelection().get(0)).getMembership();
+					Farm farm = DairyUtil.createFarm("", DairyUtil.createLocation("","","","", "", "", "", "","", ""));
+					FarmListViewTableNode newNode = new FarmListViewTableNode(membership, farm);
+				
+					final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
+					memberDialog.getController().setContext("selectedFarm", newNode);
 
+					int returnCode = memberDialog.open();
+					if (returnCode == AbstractWindowController.OK) {
+						newNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+						farmListTableInput.add(newNode);
+						farmListTable.updateFromModel();
+					} 
 				}
 			});
 			viewRidget = getRidget(IActionRidget.class,
@@ -121,7 +141,7 @@ public class FarmListViewController extends SubModuleController{
 
 						int returnCode = memberDialog.open();
 						if (returnCode == AbstractWindowController.OK) {
-							selectedNode = (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+							selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
 							farmListTableInput.set(index, selectedNode);
 							farmListTable.updateFromModel();
 						} else if (returnCode == 2) {

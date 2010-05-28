@@ -33,10 +33,10 @@ import com.agritrace.edairy.desktop.member.ui.views.AddAnimalDialog;
 public class MemberLiveStockController implements WidgetController, ISelectionListener, DateRangeFilter {
 
 	private IController controller;
-	private Membership member;
+	private Object inputModel;
 
 	private DateRangeSearchController dateSearchController;
-	
+
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
 	private IActionRidget liveStockRemoveButton;
@@ -114,17 +114,17 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 
 			@Override
 			public void callback() {
-				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
-						| SWT.APPLICATION_MODAL);
-				shell.setSize(550, 450);
-				final AddAnimalDialog dialog = new AddAnimalDialog(shell);
-				dialog.setMemberShip(member);
-				if (dialog.open() == Window.OK) {
-					final RegisteredAnimal newAnimal = dialog.getNewAnimal();
-					newAnimal.getLocation().getAnimals().add(newAnimal);
-					animalInput.add(newAnimal);
-					liveStockTable.updateFromModel();
-				}
+				//				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
+				//						| SWT.APPLICATION_MODAL);
+				//				shell.setSize(550, 450);
+				//				final AddAnimalDialog dialog = new AddAnimalDialog(shell);
+				//				dialog.setMemberShip(member);
+				//				if (dialog.open() == Window.OK) {
+				//					final RegisteredAnimal newAnimal = dialog.getNewAnimal();
+				//					newAnimal.getLocation().getAnimals().add(newAnimal);
+				//					animalInput.add(newAnimal);
+				//					liveStockTable.updateFromModel();
+				//				}
 			}
 		});
 
@@ -137,15 +137,15 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), liveStockRemoveTitle,
 						liveStockRemoveMessage)) {
 					final List<Object> selections = liveStockTable.getSelection();
-					if (member != null) {
-						for (final Object selObject : selections) {
-							((RegisteredAnimal) selObject).getLocation().getAnimals().remove(selObject);
-							animalInput.remove(selObject);
-						}
 
-						liveStockTable.updateFromModel();
+					for (final Object selObject : selections) {
+						((RegisteredAnimal) selObject).getLocation().getAnimals().remove(selObject);
+						animalInput.remove(selObject);
 					}
+
+					liveStockTable.updateFromModel();
 				}
+
 			}
 		});
 
@@ -154,15 +154,13 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 
 	@Override
 	public Object getInputModel() {
-		return member;
+		return inputModel;
 	}
 
 	@Override
 	public void setInputModel(Object model) {
-		this.member = (Membership)model; 
-		if(liveStockTable != null){
-			updateBinding();
-		}
+		this.inputModel = model;
+		updateBinding();
 	}
 
 	@Override
@@ -177,12 +175,19 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 
 	@Override
 	public void updateBinding() {
-		if(member != null){
+		if(inputModel != null){
 			animalInput.clear();
-			final List<Farm> farms = member.getMember().getFarms();
-			for (final Farm farm : farms) {
+			if(inputModel instanceof Membership){
+				Membership member = (Membership) inputModel;
+				final List<Farm> farms = member.getMember().getFarms();
+				for (final Farm farm : farms) {
+					animalInput.addAll(farm.getAnimals());
+				} 
+			}else if(inputModel instanceof Farm){
+				Farm farm  = (Farm) inputModel;
 				animalInput.addAll(farm.getAnimals());
 			}
+
 			liveStockTable.updateFromModel();
 			liveStockTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 			//			liveStockTable.addSelectionListener(this);

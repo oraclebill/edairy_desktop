@@ -187,6 +187,13 @@ public class ViewWidgetId {
 	public static final String FARM_LIST_SEARCH_BUTTON="Farm_list_search_btn";
 	public static final String FARM_LIST_CLEAR_BUTTON="Farm_list_clear_btn";
 	public static final String FARM_LIST_TABLE="Farm_list_table";
+	
+	//View Farm Dialog
+	public static final String VIEW_FARM_NAME="Farm_NAME";
+	public static final String VIEW_FARM_NAME_TXT="Farm_NAME_TXT";
+	public static final String VIEW_FARM_ID="Farm_ID";
+	public static final String VIEW_FARM_MEMBER_NAME="MEMBER_NAME";
+	public static final String VIEW_FARM_MEMBER_ID="MEMBER_ID";
 
 
 

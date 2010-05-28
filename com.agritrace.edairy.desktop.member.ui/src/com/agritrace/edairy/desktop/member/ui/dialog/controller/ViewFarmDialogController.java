@@ -1,45 +1,44 @@
 package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
-import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberCollectionRecrodsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberContainerWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberFarmWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberLiveStockController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberProfileWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberTransactionWidgetController;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 
-public class ViewFarmDialogController extends AbstractWindowController{
+public class ViewFarmDialogController extends AbstractWindowController {
 
-	public static final String DIALOG_TITLE = "Membership";
-	
+	public static final String DIALOG_TITLE = "Farm";
+
 	private String generatedFarmId;
 
-	protected Farm selectedFarm;
-
+	protected FarmListViewTableNode selectedNode;
+	
 	// upper panel fields
+	private ILabelRidget farmNameRidget;
+	private ILabelRidget farmIdRidget;
+	private ILabelRidget memberNameRidget;
 	private ILabelRidget memberIdRidget;
-	private ITextRidget nameRidget;
 
-	private MemberProfileWidgetController memberProfileController;
+	private LocationProfileWidgetController locationProfileController;
 
 	// container tab
 	private MemberContainerWidgetController containerController;
 
 	// live stock tab
 	private MemberLiveStockController liveStockController;
+	
+	public static final String FARM_ID_LABEL_PREFIX= "Farm Id :";
+	public static final String FARM_NAME_LABEL_PREFIX= "Farm Name :";
+	public static final String FARM_MEMBER_ID_LABEL_PREFIX= "Member Id :";
+	public static final String FARM_MEMBER_NAME_LABEL_PREFIX= "Member Name :";
 
 	public ViewFarmDialogController() {
 
@@ -50,32 +49,29 @@ public class ViewFarmDialogController extends AbstractWindowController{
 		super.configureRidgets();
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		selectedFarm = (Farm) getContext("selectedFarm");
+		selectedNode = (FarmListViewTableNode) getContext("selectedFarm");
 
 		configureUpperPanel();
-		
-		memberProfileController = new MemberProfileWidgetController(this);
-	
-	
+
+		locationProfileController = new LocationProfileWidgetController(this);
+
 		liveStockController = new MemberLiveStockController(this);
 		containerController = new MemberContainerWidgetController(this);
-	
 
-	
-		if (selectedFarm != null) {
+		if (selectedNode != null) {
 			updateBindings();
 		}
 		configureButtonsPanel();
-		
+
 	}
-	
-	protected void configureButtonsPanel(){
+
+	protected void configureButtonsPanel() {
 		final IActionRidget okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				setReturnCode(OK);
-				setContext("selectedFarm",selectedFarm);
+				setContext("selectedFarm", selectedNode);
 				getWindowRidget().dispose();
 			}
 		});
@@ -87,9 +83,9 @@ public class ViewFarmDialogController extends AbstractWindowController{
 				getWindowRidget().dispose();
 			}
 		});
-		
+
 		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
-		deleteAction.setVisible(false);
+		deleteAction.setVisible(true);
 		deleteAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -99,32 +95,46 @@ public class ViewFarmDialogController extends AbstractWindowController{
 		});
 	}
 
-	protected  void configureUpperPanel() {
-//		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
-////		generatedMemberId = System.currentTimeMillis()+"";
-////		memberIdRidget.setText(generatedMemberId);
-//		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
+	protected void configureUpperPanel() {
+
+		farmNameRidget = getRidget(ILabelRidget.class,ViewWidgetId.VIEW_FARM_NAME);
+		farmIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_ID);
+		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
+		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_ID);
 
 	}
 
 	private void updateBindings() {
-		updateUpperPanelBinding();
-		memberProfileController.setInputModel(selectedFarm);
-		liveStockController.setInputModel(selectedFarm);		
-		containerController.setInputModel(selectedFarm);
+		if(selectedNode != null){
+			Farm selectedFarm = selectedNode.getFarm();
+			if(selectedFarm != null){
+				updateUpperPanelBinding();
+				locationProfileController.setInputModel(selectedFarm.getLocation());
+				liveStockController.setInputModel(selectedFarm);
+				containerController.setInputModel(selectedFarm);	
+			}
+		}
 		
 	}
 
 	protected void updateUpperPanelBinding() {
-		if(selectedFarm.eContainer() != null){
-			Farmer farmer =(Farmer)selectedFarm.eContainer();
-//			memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,	DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
-//			memberIdRidget.updateFromModel();
-			nameRidget.setText(farmer.getFamilyName()+","+farmer.getGivenName());	
+		if (selectedNode != null && selectedNode.getMembership() != null) {
+			Farmer farmer = (Farmer) selectedNode.getMembership().getMember();
+			Farm selectedFarm = selectedNode.getFarm();
+			if(farmNameRidget != null){
+				farmNameRidget.setText(FARM_NAME_LABEL_PREFIX+selectedFarm.getName());	
+			}
+			if(farmIdRidget != null){
+				farmIdRidget.setText(FARM_ID_LABEL_PREFIX+selectedFarm.getFarmId());	
+			}
+			if(memberIdRidget != null){
+				memberIdRidget.setText(FARM_MEMBER_ID_LABEL_PREFIX+selectedNode.getMembership().getMemberId());	
+			}
+			if(memberNameRidget != null){
+				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX+farmer.getFamilyName()+","+farmer.getGivenName());
+			}
 		}
 	}
-
-
 
 	private void copySelectedMember() {
 		// if(selectedMember != null){
@@ -133,24 +143,24 @@ public class ViewFarmDialogController extends AbstractWindowController{
 	}
 
 	protected void saveMember() {
-		if (selectedFarm != null) {
-			//			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
-			//			try {
-			//				DairyDemoResourceManager.INSTANCE.saveFarmResource();
-			//				DairyDemoResourceManager.INSTANCE.saveDairyResource();
-			//				MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
-			//			} catch (final IllegalArgumentException e) {
-			//				// TODO Auto-generated catch block
-			//				e.printStackTrace();
-			//				Activator.getDefault().logError(e, e.getMessage());
-			//			} catch (final IOException e) {
-			//				// TODO Auto-generated catch block
-			//				e.printStackTrace();
-			//				Activator.getDefault().logError(e, e.getMessage());
+//		if (selectedFarm != null) {
+			// MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this,
+			// selectedMember);
+			// try {
+			// DairyDemoResourceManager.INSTANCE.saveFarmResource();
+			// DairyDemoResourceManager.INSTANCE.saveDairyResource();
+			// MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
+			// } catch (final IllegalArgumentException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// Activator.getDefault().logError(e, e.getMessage());
+			// } catch (final IOException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// Activator.getDefault().logError(e, e.getMessage());
 			//
-			//			}
-		}
+			// }
+//		}
 	}
-
 
 }

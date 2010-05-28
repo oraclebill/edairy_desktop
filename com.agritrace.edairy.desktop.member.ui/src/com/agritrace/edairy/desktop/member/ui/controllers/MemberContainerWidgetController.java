@@ -42,7 +42,7 @@ import com.agritrace.edairy.desktop.member.ui.views.AddContainerDialog;
 public class MemberContainerWidgetController implements WidgetController, ISelectionListener{
 
 	private IController controller;
-	private Membership selectedMember;
+	private Object inputModel;
 
 	private ITableRidget containerTable;
 	private IActionRidget containerAddButton;
@@ -51,7 +51,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	private final String[] containerColumnHeaders = { "ID", "Farm", "Container Type", "Units Of Measure", "Capacity" };
 	private final List<Container> containerInput = new ArrayList<Container>();
 	private IComboRidget farmFilterCombo;
-	
+
 	public static final String containerRemoveTitle = "Remove Containers";
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
@@ -87,24 +87,24 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
 						| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
-				final AddContainerDialog dialog = new AddContainerDialog(shell);
-				dialog.setMemberShip(selectedMember);
-				if (dialog.open() == Window.OK) {
-					final Container newContainer = dialog.getNewContainer();
-					newContainer.getOwner().getCans().add(newContainer);
-					containerInput.add(newContainer);
-					List<Container> containers;
-					try {
-						containers = getContainerFilteredResult();
-						containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
-								containerPropertyNames, containerColumnHeaders);
-						containerTable.updateFromModel();
-					} catch (final ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
+				//				final AddContainerDialog dialog = new AddContainerDialog(shell);
+				//				dialog.setMemberShip(selectedMember);
+				//				if (dialog.open() == Window.OK) {
+				//					final Container newContainer = dialog.getNewContainer();
+				//					newContainer.getOwner().getCans().add(newContainer);
+				//					containerInput.add(newContainer);
+				//					List<Container> containers;
+				//					try {
+				//						containers = getContainerFilteredResult();
+				//						containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
+				//								containerPropertyNames, containerColumnHeaders);
+				//						containerTable.updateFromModel();
+				//					} catch (final ParseException e) {
+				//						// TODO Auto-generated catch block
+				//						e.printStackTrace();
+				//					}
+				//
+				//				}
 			}
 		});
 
@@ -117,22 +117,22 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle,
 						containerRemoveMessage)) {
 					final List<Object> selections = containerTable.getSelection();
-					if (selectedMember != null) {
-						for (final Object selObject : selections) {
-							((Container) selObject).getOwner().getCans().remove(selObject);
-							containerInput.remove(selObject);
-						}
-						List<Container> containers;
-						try {
-							containers = getContainerFilteredResult();
-							containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
-									containerPropertyNames, containerColumnHeaders);
-							containerTable.updateFromModel();
-						} catch (final ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+
+					for (final Object selObject : selections) {
+						((Container) selObject).getOwner().getCans().remove(selObject);
+						containerInput.remove(selObject);
 					}
+					List<Container> containers;
+					try {
+						containers = getContainerFilteredResult();
+						containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
+								containerPropertyNames, containerColumnHeaders);
+						containerTable.updateFromModel();
+					} catch (final ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 
 			}
@@ -143,12 +143,12 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 
 	@Override
 	public Object getInputModel() {
-		return selectedMember;
+		return inputModel;
 	}
 
 	@Override
 	public void setInputModel(Object model) {
-		this.selectedMember = (Membership) model;
+		this.inputModel = model;
 		if(containerTable != null){
 			updateBinding();
 		}
@@ -168,15 +168,26 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	@Override
 	public void updateBinding() {
 		containerInput.clear();
-		final List<Farm> farms = selectedMember.getMember().getFarms();
 		final List<String> farmFilterList = new ArrayList<String>();
-		farmFilterList.add(ALL_FARM);
-		for (final Farm farm : farms) {
-			containerInput.addAll(farm.getCans());
-			if (!farmFilterList.contains(farm.getName())) {
+
+		if(inputModel != null){
+			if(inputModel instanceof Membership){
+				Membership selectedMember = (Membership)inputModel;
+				final List<Farm> farms = selectedMember.getMember().getFarms();
+				farmFilterList.add(ALL_FARM);
+				for (final Farm farm : farms) {
+					containerInput.addAll(farm.getCans());
+					if (!farmFilterList.contains(farm.getName())) {
+						farmFilterList.add(farm.getName());
+					}
+				}
+			}else if(inputModel instanceof Farm){
+				Farm farm = (Farm)inputModel;
+				containerInput.addAll(farm.getCans());
 				farmFilterList.add(farm.getName());
 			}
 		}
+		
 		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class,
 				containerPropertyNames, containerColumnHeaders);
 		containerTable.updateFromModel();
@@ -234,7 +245,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				e.printStackTrace();
 				Activator.getDefault().logError(e, e.getMessage());
 			}
-			
+
 		}
 	}
 }
