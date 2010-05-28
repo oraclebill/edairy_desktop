@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.finance.ui.controls.FormConstants;
 
 /**
@@ -161,7 +161,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		AccountTransaction to = target != null ? (AccountTransaction) target : createWorkingCopy();
 
 		if (source instanceof EObject && target instanceof EObject) {
-			ServiceUtils.copy((EObject) source, (EObject) target);
+			EMFUtil.copy((EObject) source, (EObject) target);
 		} else {
 			throw new IllegalArgumentException("Domain objects must be EObjects!");
 		}
@@ -184,7 +184,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		srcTx = (AccountTransaction) source;
 		targTx = (AccountTransaction) target;
 
-		return ServiceUtils.compare(srcTx, targTx);
+		return EMFUtil.compareAllFeatures(srcTx, targTx);
 
 	}
 

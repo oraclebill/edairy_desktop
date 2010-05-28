@@ -10,7 +10,7 @@ import org.eclipse.riena.ui.ridgets.swt.ImageButtonRidget;
 
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
 public class DateRangeSearchController {
 	
@@ -51,8 +51,8 @@ public class DateRangeSearchController {
 		startDateText= controller.getRidget(ITextRidget.class,startDateTxtId);
 		endDateText = controller.getRidget(ITextRidget.class,endDateTxtId);
 		//default filterStartDate one month before the current date;
-		startDateText.setText(ServiceUtils.getOneMonthBeforeCurrentDateString());
-		endDateText.setText(ServiceUtils.getCurrentDateString());
+		startDateText.setText(DateTimeUtils.getOneMonthBeforeCurrentDateString());
+		endDateText.setText(DateTimeUtils.getCurrentDateString());
 		
 		startDateImageButton =  controller.getRidget(ImageButtonRidget.class,startDateButtonId);
 		startDateImageButton.addListener(new IActionListener(){

@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommonSubModuleViewController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SubModuleControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleMasterDetailComposite;
 
 /**
@@ -231,7 +231,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 	public Vehicle copyBean(final Object source, final Object target) {
 	    final Vehicle from = source != null ? (Vehicle) source : createWorkingCopy();
 	    final Vehicle to = target != null ? (Vehicle) target : createWorkingCopy();
-	    ServiceUtils.copy(from, to);
+	    EMFUtil.copy(from, to);
 	    return to;
 	}
 

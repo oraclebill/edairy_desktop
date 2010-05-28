@@ -6,21 +6,12 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 public class EMFUtil {
 	
-	private static String[] packageNsURIs = new String[] {
-			"http://com.agritrace.edairy.desktop.common.model.base/dairy/",
-			"http://com.agritrace.edairy.desktop.common.model.base/account", "http://com.agritrace.edairy.desktop.common.model.base/",
-			"http://com.agritrace.edairy.desktop.common.model.base/tracking/"
-			,RequestsPackage.eNS_URI};
+	
     public static boolean compare(EObject src, EObject dst) {
 	if (src == null && dst == null) {
 	    return true;
@@ -36,10 +27,10 @@ public class EMFUtil {
     }
     
     /**
-     * Copy EMF objects from sourc to target
+     * Copy EMF objects from source to target
      * 
-     * @param source
-     * @param target
+     * @param source Source EMF Object
+     * @param target Target EMF object
      */
 	public static void copy(EObject source, EObject target) {
 		if (source == null || target == null) {
@@ -123,6 +114,52 @@ public class EMFUtil {
 		EFactory eFactory = cls.getEPackage().getEFactoryInstance();
 		return eFactory.create(cls);
 
+	}
+	
+	/**
+	 * Compares EObject feature by feature
+	 * 
+	 * @param source
+	 * @param target
+	 * @return
+	 */
+	public static boolean compareAllFeatures(EObject source, EObject target) {
+		if (source == null || target == null) {
+			return false;
+		}
+		if (!source.getClass().equals(target.getClass())) {
+			return false;
+		}
+		final EClass eClass = source.eClass();
+		// compare all features - all must match exactly.. do not follow references
+		for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
+			final EStructuralFeature feature = eClass.getEStructuralFeature(i);
+			if (feature instanceof EAttribute) {
+				try {
+					Object srcVal, targVal;
+					srcVal = source.eGet(feature);
+					targVal = target.eGet(feature);
+					if ((srcVal != null) && (targVal != null)) {
+						if ( ! srcVal.equals(targVal)) return false;
+					}
+					else if (srcVal == null || targVal == null ) {
+						return false;
+					}
+				} catch (final Exception e) {
+					e.printStackTrace();					
+					return false;
+				}
+			} 
+			// references should equal each other..
+			// if one is a ref, both must be refs
+			else if (feature instanceof EReference 
+					&& source.eGet(feature) instanceof EObject
+					&& target.eGet(feature) instanceof EObject
+					&& (source.eGet(feature) != target.eGet(feature))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 

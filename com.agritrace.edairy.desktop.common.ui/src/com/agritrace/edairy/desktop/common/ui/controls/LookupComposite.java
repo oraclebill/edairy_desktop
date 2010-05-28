@@ -28,16 +28,11 @@ public class LookupComposite {
 	private String buttonId;
 
 	/**
-	 * @param parent
-	 *            Parent composite
-	 * @param style
-	 *            Style
-	 * @param label
-	 *            Label of lookup
-	 * @param iconImage
-	 *            Icon which will pop up the dialog
+	 * @param label Label of lookup field
+	 * @param icon
+	 * @param textBindId
+	 * @param buttonBindId
 	 */
-
 	public LookupComposite(String label, Image icon, String textBindId,
 			String buttonBindId) {
 

@@ -17,29 +17,57 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 
 /**
- * Record List Dialog
+ * Record adding/editing dialog for directory pattern
  * 
  * @author Hui(Spark) Wan
  *
  */
 public abstract class RecordDialog extends AbstractDialogView {
 
+	/**
+	 * Dialog style which means the dialog is a dialog to create a new record
+	 */
 	public static final int DIALOG_STYLE_NEW = 1;
 
+	/**
+	 * Dialog style which means the dialog is a dialog to view a new record
+	 */
 	public static final int DIALOG_STYLE_VIEW = 2;
 
+	/**
+	 * Dialog style which means the dialog is a dialog to view a new record
+	 * Currently, view/edit are same
+	 */
 	public static final int DIALOG_STYLE_EDIT = 3;
+	/**
+	 * Bind id for OK button, the label maybe change, but the bind id will not change
+	 */
 	public static final String BIND_ID_BUTTON_OK = "bind.id.btn.ok";
+	/**
+	 * Bind id for cancel button
+	 */
 	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
 
 	private int style;
 
 	private EObject selectedEObject;
 
+	/**
+	 * Default constructor
+	 * 
+	 * @param style Dialog style, possible values are <code>RecordDialog.DIALOG_STYLE_NEW</code>
+	 * <code>RecordDialog.DIALOG_STYLE_VIEW</code>,<code>RecordDialog.DIALOG_STYLE_EDIT</code>
+	 * RecordDialog.DIALOG_STYLE_NEW means creating a new record
+	 * RecordDialog.DIALOG_STYLE_VIEW means viewing a new record
+	 * RecordDialog.DIALOG_STYLE_EDIT means editing a new record
+	 * @param parentShell Parent shell
+	 * @param selectedObject Selected object in the table list
+	 */
 	public RecordDialog(int style, Shell parentShell, EObject selectedObject) {
 		super(parentShell);
 		this.style = style;
 		this.selectedEObject = selectedObject;
+		// Notify the controller that the item is selected
 		((ResultListDialogController) this.getController()).itemSelected();
 
 	}
@@ -53,15 +81,31 @@ public abstract class RecordDialog extends AbstractDialogView {
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 	
+	/**
+	 * Gets the selected object in table list. If user doesn't select any row,
+	 * this object will be null
+	 * 
+	 * @return
+	 */
 	public EObject getSelectedEObject() {
 		return this.selectedEObject;
 	}
 
+	/**
+	 * Gets the working copying which is used for data binding
+	 * 
+	 * @return
+	 */
 	public EObject getWorkingCopy() {
 		return ((ResultListDialogController) this.getController())
 				.getWorkingCopy();
 	}
 
+	/**
+	 * Gets dialog style which will indicate the dialog is a  new/view/edit dialog
+	 * 
+	 * @return RecordDialog.DIALOG_STYLE_NEW or RecordDialog.DIALOG_STYLE_VIEW or RecordDialog.DIALOG_STYLE_EDIT
+	 */
 	public int getDialogStyle() {
 		return this.style;
 	}
@@ -82,12 +126,17 @@ public abstract class RecordDialog extends AbstractDialogView {
 	}
 
 	/**
-	 * Create UI components
+	 * Create UI components in this dialog
 	 * 
-	 * @param comp
+	 * @param comp Parent composit
 	 */
 	protected abstract void createUIComponent(Composite comp);
 
+	/**
+	 * Create buttons for dialog
+	 * 
+	 * @param parent
+	 */
 	private void createButtons(Composite parent) {
 		Composite composite = UIControlsFactory.createComposite(parent);
 		composite.setLayout(GridLayoutFactory.swtDefaults().numColumns(2)
