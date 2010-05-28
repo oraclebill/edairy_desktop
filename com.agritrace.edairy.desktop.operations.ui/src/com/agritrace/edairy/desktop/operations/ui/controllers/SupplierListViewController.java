@@ -9,12 +9,14 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.model.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
@@ -42,18 +44,9 @@ public class SupplierListViewController extends AbstractRecordListController {
 
 	@Override
 	protected List<?> getFilteredResult() {
-		try {
-			List<Dairy> dairy = DairyDemoResourceManager.INSTANCE
-					.getObjectsFromDairyModel(Dairy.class);
-			if (dairy.size() == 1) {
-				return dairy.get(0).getSuppliers();
-			}
-
-			return new ArrayList<Supplier>();
-		} catch (Exception e) {
-
-		}
-		return new ArrayList<Supplier>();
+		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
+		List<Supplier> supplierList = session.createQuery("FROM Supplier").list( );
+		return supplierList;
 	}
 
 	@Override

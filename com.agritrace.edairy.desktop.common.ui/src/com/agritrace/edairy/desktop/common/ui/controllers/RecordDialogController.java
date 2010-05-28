@@ -123,19 +123,19 @@ public abstract class RecordDialogController extends
 	protected void doOKPressed() {
 		setReturnCode(OK);
 		if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
-			doCreation();
+			saveNew();
 		} else {
 			// Update all working copy to selected object
 			EMFUtil.copy(this.getWorkingCopy(), dialog.getSelectedEObject());
-			doUpdate();
+			saveUpdated();
 		}
 		notifierListeners();
 		getWindowRidget().dispose();
 	}
 
-	protected abstract void doCreation();
+	protected abstract void saveNew();
 
-	protected abstract void doUpdate();
+	protected abstract void saveUpdated();
 
 	protected void doCancelPressed() {
 		setReturnCode(CANCEL);

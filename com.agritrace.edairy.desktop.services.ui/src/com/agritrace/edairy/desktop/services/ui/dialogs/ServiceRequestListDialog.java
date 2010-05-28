@@ -578,13 +578,13 @@ public class ServiceRequestListDialog extends RecordDialog {
 			}
 
 			@Override
-			protected void doCreation() {
+			protected void saveNew() {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			protected void doUpdate() {
+			protected void saveUpdated() {
 				// TODO Auto-generated method stub
 
 			}

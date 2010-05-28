@@ -20,3 +20,4 @@ Import-Package: com.mysql.jdbc,
  org.dom4j,
  org.hibernate.cfg;version="3.3.2",
  org.hibernate.dialect;version="3.3.2"
+Export-Package: com.agritrace.edairy.desktop.common.model.persistence.services
