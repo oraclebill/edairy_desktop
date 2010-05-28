@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 
 /**
  * Record List Dialog
@@ -40,7 +40,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 		super(parentShell);
 		this.style = style;
 		this.selectedEObject = selectedObject;
-		((ResultListDialogController) this.getController()).itemSelected();
+		((RecordDialogController) this.getController()).itemSelected();
 
 	}
 
@@ -58,7 +58,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 	}
 
 	public EObject getWorkingCopy() {
-		return ((ResultListDialogController) this.getController())
+		return ((RecordDialogController) this.getController())
 				.getWorkingCopy();
 	}
 

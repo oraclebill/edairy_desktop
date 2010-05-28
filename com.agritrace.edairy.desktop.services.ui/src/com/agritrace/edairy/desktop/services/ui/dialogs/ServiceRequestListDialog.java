@@ -36,7 +36,7 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
-import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.LookupComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
@@ -227,7 +227,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 
 	@Override
 	protected AbstractWindowController createController() {
-		ResultListDialogController controller = new ResultListDialogController(
+		RecordDialogController controller = new RecordDialogController(
 				this) {
 
 //			@Override

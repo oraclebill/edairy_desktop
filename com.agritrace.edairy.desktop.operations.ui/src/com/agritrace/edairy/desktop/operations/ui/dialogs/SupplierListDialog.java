@@ -30,7 +30,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetCont
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
-import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
@@ -166,7 +166,7 @@ public class SupplierListDialog extends RecordDialog {
 	}
 
 	protected AbstractWindowController createController() {
-		ResultListDialogController controller = new ResultListDialogController(
+		RecordDialogController controller = new RecordDialogController(
 				this) {
 
 			@Override

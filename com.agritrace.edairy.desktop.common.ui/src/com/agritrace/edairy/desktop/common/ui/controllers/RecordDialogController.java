@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
-public abstract class ResultListDialogController extends
+public abstract class RecordDialogController extends
 		AbstractWindowController {
 	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
 
@@ -31,7 +31,7 @@ public abstract class ResultListDialogController extends
 
 	private RecordDialog dialog;
 
-	public ResultListDialogController(RecordDialog dialog) {
+	public RecordDialogController(RecordDialog dialog) {
 		super();
 		this.dialog = dialog;
 		workingCopy = createWorkingCopy();
