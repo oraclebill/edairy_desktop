@@ -67,7 +67,7 @@ public class MemberProfileWidgetController implements WidgetController {
 			locationController.setInputModel(member.getMember().getLocation());
 			
 		}
-		communicationGroup.setInputModel(member.getMember());
+		communicationGroup.setInputModel(member.getMember().getContactMethods());
 	}
 
 }

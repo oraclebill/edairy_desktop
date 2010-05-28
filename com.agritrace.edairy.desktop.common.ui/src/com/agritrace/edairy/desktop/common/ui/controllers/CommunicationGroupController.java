@@ -49,7 +49,7 @@ public class CommunicationGroupController implements WidgetController {
 		}else if(model instanceof List<?>){
 			contactMethods = (List) model;
 		}
-		
+
 
 	}
 
