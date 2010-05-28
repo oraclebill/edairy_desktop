@@ -4,11 +4,23 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 public class EMFUtil {
+	
+	private static String[] packageNsURIs = new String[] {
+			"http://com.agritrace.edairy.desktop.common.model.base/dairy/",
+			"http://com.agritrace.edairy.desktop.common.model.base/account", "http://com.agritrace.edairy.desktop.common.model.base/",
+			"http://com.agritrace.edairy.desktop.common.model.base/tracking/"
+			,RequestsPackage.eNS_URI};
     public static boolean compare(EObject src, EObject dst) {
 	if (src == null && dst == null) {
 	    return true;
@@ -57,16 +69,17 @@ public class EMFUtil {
 				{
 					List sourceList = (List) source.eGet(feature);
 					List targetList = (List) target.eGet(feature);
+					targetList.clear();
 
 					for (int j = 0; j < sourceList.size(); j++) {
-						Object sourceObj = sourceList.get(j);
-						if (targetList.size() > j) {
-							Object targetObj = targetList.get(j);
-							if (sourceObj instanceof EObject
-									&& targetObj instanceof EObject) {
-								copy((EObject) sourceObj, (EObject) targetObj);
-							}
-						}
+						EObject sourceObj = (EObject)sourceList.get(j);
+						EObject targetObj = createObject(sourceObj.eClass());
+						// if (sourceObj instanceof EObject
+						// && targetObj instanceof EObject) {
+						copy((EObject) sourceObj, (EObject) targetObj);
+						// //}
+						targetList.add(targetObj);
+						
 
 					}
 				}
@@ -74,5 +87,43 @@ public class EMFUtil {
 		}
 
 	}
+
+	/**
+	 * Create working copy
+	 * 
+	 * @param className
+	 * @return
+	 */
+	public static EObject createWorkingCopy(EClass cls, int level) {
+
+		EObject object = createObject(cls);
+		if (level > -1) {
+			if (object != null) {
+				for (EReference reference : cls.getEAllReferences()) {
+					if (!reference.isMany()) {
+
+						object.eSet(reference, createWorkingCopy(reference
+								.getEReferenceType(), level - 1));
+
+					}
+				}
+			}
+		}
+
+		return object;
+	}
+
+	/**
+	 * Creates EObject
+	 * 
+	 * @param className
+	 * @return
+	 */
+	public static EObject createObject(EClass cls) {
+		EFactory eFactory = cls.getEPackage().getEFactoryInstance();
+		return eFactory.create(cls);
+
+	}
+
 
 }

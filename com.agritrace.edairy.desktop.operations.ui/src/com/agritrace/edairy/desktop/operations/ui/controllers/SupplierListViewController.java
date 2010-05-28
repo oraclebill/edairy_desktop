@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
@@ -17,6 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
@@ -134,6 +136,15 @@ public class SupplierListViewController extends AbstractRecordListController {
 			statusCombo.updateFromModel();
 			statusCombo.setSelection(0);
 		}
-	}
 
+		IListRidget categoriesList = getRidget(IListRidget.class,
+				SupplierListView.BIND_ID_FILTER_CATEGORIES);
+		if (categoriesList != null) {
+			categoriesList.bindToModel(Observables
+					.staticObservableList(SupplierCategory.getCategoriesList()),
+					SupplierCategory.class, "name");			
+			categoriesList.updateFromModel();
+		}
+
+	}
 }

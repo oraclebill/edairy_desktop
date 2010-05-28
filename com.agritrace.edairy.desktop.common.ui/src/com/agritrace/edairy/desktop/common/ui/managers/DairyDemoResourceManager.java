@@ -862,4 +862,14 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		// farmResource.getContents().add(farm);
 
 	}
+	
+	/**
+	 * Gets dairy resource
+	 * 
+	 * @return Dairy resource
+	 */
+	public Resource getDairyResource()
+	{
+		return this.dairyResource;
+	}
 }

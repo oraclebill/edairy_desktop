@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.window.Window;
@@ -41,7 +42,9 @@ public abstract class ResultListDialogController extends
 	 * 
 	 * @return
 	 */
-	public abstract EObject createWorkingCopy();
+	protected abstract EObject createWorkingCopy();
+
+	protected abstract EClass getEClass();
 
 	public EObject getWorkingCopy() {
 		return workingCopy;

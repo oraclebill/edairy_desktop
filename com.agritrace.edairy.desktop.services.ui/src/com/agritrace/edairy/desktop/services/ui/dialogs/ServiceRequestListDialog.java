@@ -2,13 +2,12 @@ package com.agritrace.edairy.desktop.services.ui.dialogs;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -31,19 +30,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.LookupComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.util.ServiceUtils;
@@ -63,11 +57,16 @@ public class ServiceRequestListDialog extends RecordDialog {
 	private RequestType previousType;
 	private Composite comp;
 	public static final String SPECIFIC_RPEFIX = "specific.";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = SPECIFIC_RPEFIX + "time.heated.detected";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_FIRST_TRETMENT = SPECIFIC_RPEFIX + "time.first.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_SECOND_TRETMENT = SPECIFIC_RPEFIX + "time.second.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_THIRD_TRETMENT = SPECIFIC_RPEFIX + "time.third.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_VERY_THIRD_COMPLAINT = SPECIFIC_RPEFIX + "complaint";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = SPECIFIC_RPEFIX
+			+ "time.heated.detected";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_FIRST_TRETMENT = SPECIFIC_RPEFIX
+			+ "time.first.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_SECOND_TRETMENT = SPECIFIC_RPEFIX
+			+ "time.second.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_THIRD_TRETMENT = SPECIFIC_RPEFIX
+			+ "time.third.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_VERY_THIRD_COMPLAINT = SPECIFIC_RPEFIX
+			+ "complaint";//$NON-NLS-1$
 	public static final String BIND_ID_REQUEST_DATE_TEXT = "request.date.text";//$NON-NLS-1$
 	public static final String BIND_ID_REQUEST_DATE_BUTTON = "request.date.button";//$NON-NLS-1$
 	public static final String BIND_ID_MEMBER_TEXT = "member.lookup.text";//$NON-NLS-1$
@@ -80,7 +79,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 	public static final String BIND_ID_SPECIFIC_CONTAINER = "specific.container";//$NON-NLS-1$
 	private List<Object> injectedControls = new ArrayList<Object>();
 
-	public ServiceRequestListDialog(int style, Shell parentShell, EObject selectedEObject) {
+	public ServiceRequestListDialog(int style, Shell parentShell,
+			EObject selectedEObject) {
 		super(style, parentShell, selectedEObject);
 
 	}
@@ -97,7 +97,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 		}
 		this.setShellStyle(SWT.RESIZE | SWT.CLOSE | SWT.TITLE);
 		newShell.setSize(340, 380);
-		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		newShell.setBackground(LnfManager.getLnf().getColor(
+				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 
 	@Override
@@ -115,18 +116,21 @@ public class ServiceRequestListDialog extends RecordDialog {
 		// Complaint
 		specialComp = UIControlsFactory.createComposite(comp);
 		specialComp.setLayout(new GridLayout(1, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(specialComp);
-		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); 
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(specialComp);
+		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); //$NON-NLS-1$	
 	}
 
 	private void createCommonControls(Composite parent) {
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(3, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(comonComp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
+				false).applyTo(comonComp);
 
 		// Create Start Date lookup
-		LookupComposite startDateLookup = new LookupComposite("Date", Activator.getDefault().getImageRegistry()
-				.get(DesktopBaseActivator.CALENDAR_ICON), BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
+		LookupComposite startDateLookup = new LookupComposite("Date", Activator
+				.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON),
+				BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
 		startDateLookup.createSection(comonComp);
 
 		// UIControlsFactory.createLabel(comonComp, "Date");
@@ -190,24 +194,31 @@ public class ServiceRequestListDialog extends RecordDialog {
 		// addUIControl(farmCombo, BIND_ID_FARM);
 
 		// Create farm lookup
-		LookupComposite farmLookup = new LookupComposite("Farm", Activator.getDefault().getImageRegistry()
-				.get(DesktopBaseActivator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT, BIND_ID_FARM_BUTTON);
+		LookupComposite farmLookup = new LookupComposite("Farm", Activator
+				.getDefault().getImageRegistry()
+				.get(Activator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT,
+				BIND_ID_FARM_BUTTON);
 		farmLookup.createSection(comonComp);
 		// Create member lookup
-		LookupComposite memberLookup = new LookupComposite("Member", Activator.getDefault().getImageRegistry()
-				.get(DesktopBaseActivator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT, BIND_ID_MEMBER_BUTTON);
+		LookupComposite memberLookup = new LookupComposite("Member", Activator
+				.getDefault().getImageRegistry()
+				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT,
+				BIND_ID_MEMBER_BUTTON);
 		memberLookup.createSection(comonComp);
 
 		UIControlsFactory.createLabel(comonComp, "Request Type"); //$NON-NLS-1$
 		Composite typeComposite = UIControlsFactory.createComposite(comonComp);
-		GridLayoutFactory.swtDefaults().numColumns(2).margins(0, 0).applyTo(typeComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1)
-				.applyTo(typeComposite);
+		GridLayoutFactory.swtDefaults().numColumns(2).margins(0, 0).applyTo(
+				typeComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
+				false).span(2, 1).applyTo(typeComposite);
 
-		Button veterinaryBtn = UIControlsFactory.createButtonRadio(typeComposite);
+		Button veterinaryBtn = UIControlsFactory
+				.createButtonRadio(typeComposite);
 		veterinaryBtn.setText("Veterinary");
 		addUIControl(veterinaryBtn, "veterinary"); //$NON-NLS-1$
-		Button inseminationBtn = UIControlsFactory.createButtonRadio(typeComposite);
+		Button inseminationBtn = UIControlsFactory
+				.createButtonRadio(typeComposite);
 		inseminationBtn.setText("Insemination");
 		addUIControl(inseminationBtn, "insemination"); //$NON-NLS-1$
 
@@ -215,23 +226,31 @@ public class ServiceRequestListDialog extends RecordDialog {
 
 	@Override
 	protected AbstractWindowController createController() {
-		ResultListDialogController controller = new ResultListDialogController(this) {
+		ResultListDialogController controller = new ResultListDialogController(
+				this) {
 
-			@Override
-			public EObject createWorkingCopy() {
-				AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-
-//				 Membership
-
-				Date today = new Date();
-				Farm workingFarm = DairyUtil.createFarm("", null);
-				Membership ship = DairyUtil.createMembership(today, today,
-						DairyUtil.createFarmer("", "", "", "", null, null, Arrays.asList(workingFarm)));
-				req.setFarm(workingFarm);
-
-				return req;
-
-			}
+//			@Override
+//			public EObject createWorkingCopy() {
+//				AnimalHealthRequest req = RequestsFactory.eINSTANCE
+//						.createAnimalHealthRequest();
+//
+//				// MemberShiip
+//				Membership ship = DairyFactory.eINSTANCE.createMembership();
+//				Person person = ModelFactory.eINSTANCE.createPerson();
+//				ship.setMember(person);
+//				req.setRequestingMember(ship);
+//				Location location1 = ModelFactory.eINSTANCE.createLocation();
+//				PostalLocation defaultLocation = ModelFactory.eINSTANCE
+//						.createPostalLocation();
+//
+//				location1.setPostalLocation(defaultLocation);
+//				Farm farm = TrackingFactory.eINSTANCE.createFarm();
+//				farm.setLocation(location1);
+//				req.setFarm(farm);
+//
+//				return req;
+//
+//			}
 
 			@Override
 			public void configureRidgets() {
@@ -257,8 +276,13 @@ public class ServiceRequestListDialog extends RecordDialog {
 				// .getName());
 				// textDate.updateFromModel();
 				// Start date
-				LookupControllerDelegate delegate = new LookupControllerDelegate(this, PojoObservables.observeValue(
-						request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName()),
+				LookupControllerDelegate delegate = new LookupControllerDelegate(
+						this,
+						PojoObservables
+								.observeValue(
+										request,
+										RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
+												.getName()),
 						BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
 				delegate.configureRidgets();
 
@@ -336,30 +360,36 @@ public class ServiceRequestListDialog extends RecordDialog {
 				// farmCombo.updateFromModel();
 				// //
 				// Request Type/Veterinary
-				IToggleButtonRidget veterinaryRadioBtn = getRidget(IToggleButtonRidget.class, "veterinary"); //$NON-NLS-1$
+				IToggleButtonRidget veterinaryRadioBtn = getRidget(
+						IToggleButtonRidget.class, "veterinary"); //$NON-NLS-1$
 				//
-				veterinaryRadioBtn.setModelToUIControlConverter(new IConverter() {
+				veterinaryRadioBtn
+						.setModelToUIControlConverter(new IConverter() {
 
-					@Override
-					public Object getFromType() {
-						return EMFObservables.observeValue(request,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE).getValueType();
-					}
+							@Override
+							public Object getFromType() {
+								return EMFObservables
+										.observeValue(
+												request,
+												RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE)
+										.getValueType();
+							}
 
-					@Override
-					public Object getToType() {
-						return boolean.class;
-					}
+							@Override
+							public Object getToType() {
+								return boolean.class;
+							}
 
-					@Override
-					public Object convert(Object fromObject) {
-						if (fromObject instanceof RequestType) {
-							return RequestType.VETERINARY.equals(fromObject);
+							@Override
+							public Object convert(Object fromObject) {
+								if (fromObject instanceof RequestType) {
+									return RequestType.VETERINARY
+											.equals(fromObject);
 
-						}
-						return null;
-					}
-				});
+								}
+								return null;
+							}
+						});
 				// veterinaryRadioBtn.setOutputOnly(false);
 				veterinaryRadioBtn.addListener(new IActionListener() {
 
@@ -370,39 +400,47 @@ public class ServiceRequestListDialog extends RecordDialog {
 
 					}
 				});
-				veterinaryRadioBtn.bindToModel(EMFObservables.observeValue(request,
+				veterinaryRadioBtn.bindToModel(EMFObservables.observeValue(
+						request,
 						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE));
 				// RequestsPackage.Literals.REQUEST_TYPE));
 				veterinaryRadioBtn.updateFromModel();
 				// veterinaryRadioBtn.setOutputOnly(true);
 
 				// Request Type/Insementation
-				IToggleButtonRidget insementationRadionBtn = getRidget(IToggleButtonRidget.class, "insemination"); //$NON-NLS-1$
+				IToggleButtonRidget insementationRadionBtn = getRidget(
+						IToggleButtonRidget.class, "insemination"); //$NON-NLS-1$
 				//
-				insementationRadionBtn.setModelToUIControlConverter(new IConverter() {
+				insementationRadionBtn
+						.setModelToUIControlConverter(new IConverter() {
 
-					@Override
-					public Object getFromType() {
-						return EMFObservables.observeValue(request,
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE).getValueType();
-					}
+							@Override
+							public Object getFromType() {
+								return EMFObservables
+										.observeValue(
+												request,
+												RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE)
+										.getValueType();
+							}
 
-					@Override
-					public Object getToType() {
-						return boolean.class;
-					}
+							@Override
+							public Object getToType() {
+								return boolean.class;
+							}
 
-					@Override
-					public Object convert(Object fromObject) {
-						if (fromObject instanceof RequestType) {
-							return RequestType.INSEMINATION.equals(fromObject);
+							@Override
+							public Object convert(Object fromObject) {
+								if (fromObject instanceof RequestType) {
+									return RequestType.INSEMINATION
+											.equals(fromObject);
 
-						}
-						return null;
-					}
-				});
+								}
+								return null;
+							}
+						});
 				// insementationRadionBtn.setOutputOnly(false);
-				insementationRadionBtn.bindToModel(EMFObservables.observeValue(request,
+				insementationRadionBtn.bindToModel(EMFObservables.observeValue(
+						request,
 						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE));
 				// RequestsPackage.Literals.REQUEST_TYPE));
 				insementationRadionBtn.addListener(new IActionListener() {
@@ -426,14 +464,16 @@ public class ServiceRequestListDialog extends RecordDialog {
 				// UIChanges
 				updateUI(request);
 				// SwtRidgetFactory.
-				ServiceUtils.injectRidgets(Activator.getDefault().getBundle().getBundleContext(), getController(),
-						injectedControls, SWTBindingPropertyLocator.getInstance());
+				ServiceUtils.injectRidgets(Activator.getDefault().getBundle()
+						.getBundleContext(), getController(), injectedControls,
+						SWTBindingPropertyLocator.getInstance());
 				// Updates the bindings
 				configTypeSpecificRidgets(request);
 
 			}
 
-			private void configTypeSpecificRidgets(final AnimalHealthRequest request) {
+			private void configTypeSpecificRidgets(
+					final AnimalHealthRequest request) {
 
 				// ICompositeRidget container =
 				// getRidget(ICompositeRidget.class,
@@ -441,44 +481,64 @@ public class ServiceRequestListDialog extends RecordDialog {
 				if (RequestType.INSEMINATION == request.getType()) {
 
 					// Heated date
-					ITextRidget heatTimeTextBtn = getRidget(ITextRidget.class, BIND_ID_INSE_TIME_HEATED_DETECTED);
+					ITextRidget heatTimeTextBtn = getRidget(ITextRidget.class,
+							BIND_ID_INSE_TIME_HEATED_DETECTED);
 					heatTimeTextBtn.setDirectWriting(true);
-					heatTimeTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+					heatTimeTextBtn
+							.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 					// heatTimeTextBtn.setOutputOnly(false);
-					heatTimeTextBtn.bindToModel(request,
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED.getName());
+					heatTimeTextBtn
+							.bindToModel(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED
+											.getName());
 					heatTimeTextBtn.updateFromModel();
 					// heatTimeTextBtn.setOutputOnly(true);
 
 					// First
-					ITextRidget firstTextBtn = getRidget(ITextRidget.class, BIND_ID_INSE_FIRST_TRETMENT);
+					ITextRidget firstTextBtn = getRidget(ITextRidget.class,
+							BIND_ID_INSE_FIRST_TRETMENT);
 					firstTextBtn.setDirectWriting(true);
-					firstTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+					firstTextBtn
+							.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 					// firstTextBtn.setOutputOnly(false);
-					firstTextBtn.bindToModel(request,
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT.getName());
+					firstTextBtn
+							.bindToModel(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT
+											.getName());
 
 					firstTextBtn.updateFromModel();
 					// firstTextBtn.setOutputOnly(true);
 
 					// Second
-					ITextRidget secondTextBtn = getRidget(ITextRidget.class, BIND_ID_INSE_SECOND_TRETMENT);
+					ITextRidget secondTextBtn = getRidget(ITextRidget.class,
+							BIND_ID_INSE_SECOND_TRETMENT);
 					secondTextBtn.setDirectWriting(true);
-					secondTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+					secondTextBtn
+							.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 					// secondTextBtn.setOutputOnly(false);
-					secondTextBtn.bindToModel(request,
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT.getName());
+					secondTextBtn
+							.bindToModel(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT
+											.getName());
 
 					secondTextBtn.updateFromModel();
 					// secondTextBtn.setOutputOnly(true);
 
 					// Third
-					ITextRidget thirdTextBtn = getRidget(ITextRidget.class, BIND_ID_INSE_THIRD_TRETMENT);
+					ITextRidget thirdTextBtn = getRidget(ITextRidget.class,
+							BIND_ID_INSE_THIRD_TRETMENT);
 					thirdTextBtn.setDirectWriting(true);
-					thirdTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+					thirdTextBtn
+							.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 					thirdTextBtn.setOutputOnly(false);
-					thirdTextBtn.bindToModel(request,
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT.getName());
+					thirdTextBtn
+							.bindToModel(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT
+											.getName());
 
 					thirdTextBtn.updateFromModel();
 					// thirdTextBtn.setOutputOnly(true);
@@ -486,22 +546,30 @@ public class ServiceRequestListDialog extends RecordDialog {
 				} else {
 					// Complaint
 					// Third
-					ITextRidget complaintTextBtn = getRidget(ITextRidget.class, BIND_ID_VERY_THIRD_COMPLAINT);
-					complaintTextBtn.addPropertyChangeListener(ITextRidget.PROPERTY_TEXT, new PropertyChangeListener() {
+					ITextRidget complaintTextBtn = getRidget(ITextRidget.class,
+							BIND_ID_VERY_THIRD_COMPLAINT);
+					complaintTextBtn.addPropertyChangeListener(
+							ITextRidget.PROPERTY_TEXT,
+							new PropertyChangeListener() {
 
-						@Override
-						public void propertyChange(java.beans.PropertyChangeEvent arg0) {
+								@Override
+								public void propertyChange(
+										java.beans.PropertyChangeEvent arg0) {
 
-							request.setReportedProblem(arg0.getNewValue().toString());
+									request.setReportedProblem(arg0
+											.getNewValue().toString());
 
-						}
+								}
 
-					}
+							}
 
 					);
 					// complaintTextBtn.setOutputOnly(false);
-					complaintTextBtn.bindToModel(request,
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM.getName());
+					complaintTextBtn
+							.bindToModel(
+									request,
+									RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM
+											.getName());
 					complaintTextBtn.updateFromModel();
 					// complaintTextBtn.setOutputOnly(true);
 				}
@@ -518,6 +586,16 @@ public class ServiceRequestListDialog extends RecordDialog {
 			protected void doUpdate() {
 				// TODO Auto-generated method stub
 
+			}
+
+			@Override
+			protected EClass getEClass() {
+				return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
+			}
+
+			@Override
+			protected EObject createWorkingCopy() {
+				return EMFUtil.createWorkingCopy(this.getEClass(), 2);
 			}
 
 		};
@@ -574,15 +652,19 @@ public class ServiceRequestListDialog extends RecordDialog {
 	private void createInseminationControls(Composite parent) {
 
 		inseminationComp = UIControlsFactory.createComposite(parent);
-		inseminationComp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).create());
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationComp);
+		inseminationComp.setLayout(GridLayoutFactory.swtDefaults()
+				.margins(0, 0).create());
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				inseminationComp);
 		this.addUIControl(inseminationComp, "insemination-comp");
 		injectedControls.add(inseminationComp);
 
-		inseminationGroup = UIControlsFactory.createGroup(inseminationComp, "Request Details");
+		inseminationGroup = UIControlsFactory.createGroup(inseminationComp,
+				"Request Details");
 		GridLayout layout = new GridLayout(3, false);
 		inseminationGroup.setLayout(layout);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationGroup);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				inseminationGroup);
 
 		UIControlsFactory.createLabel(inseminationGroup, "Time Heat Detected"); //$NON-NLS-1$
 		Text txtDate = UIControlsFactory.createText(inseminationGroup);
@@ -596,15 +678,20 @@ public class ServiceRequestListDialog extends RecordDialog {
 		Button button = new Button(inseminationGroup, SWT.PUSH);
 		Image calendar = Activator.getImage(ImageRegistry.calendar);
 		button.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(button);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
+				17, 16).applyTo(button);
 		// Insemination
-		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup, "Insemination"); //$NON-NLS-1$
+		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup,
+				"Insemination"); //$NON-NLS-1$
 		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
 
-		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(2, 1);
-		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults().indent(10, 0);
+		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(
+				2, 1);
+		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults()
+				.indent(10, 0);
 		// First
-		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup, "First"); //$NON-NLS-1$
+		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup,
+				"First"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstLabel);
 
 		Text firstText = UIControlsFactory.createText(inseminationGroup);
@@ -614,7 +701,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 		injectedControls.add(firstText);
 
 		// First Repeat
-		Label firstRepeatLabel = UIControlsFactory.createLabel(inseminationGroup, "First Repeat"); //$NON-NLS-1$
+		Label firstRepeatLabel = UIControlsFactory.createLabel(
+				inseminationGroup, "First Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstRepeatLabel);
 
 		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup);
@@ -623,7 +711,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 		injectedControls.add(firstRepeatText);
 
 		// 2nd Repeat
-		Label secondRepeatLabel = UIControlsFactory.createLabel(inseminationGroup, "2nd Repeat"); //$NON-NLS-1$
+		Label secondRepeatLabel = UIControlsFactory.createLabel(
+				inseminationGroup, "2nd Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(secondRepeatLabel);
 
 		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup);

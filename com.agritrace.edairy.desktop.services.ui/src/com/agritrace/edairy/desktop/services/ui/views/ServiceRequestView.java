@@ -61,8 +61,8 @@ public class ServiceRequestView extends AbstractRecordListView {
 		Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
 				.numColumns(3).create());
-		GridDataFactory.swtDefaults().grab(true, true).align(SWT.BEGINNING,
-				SWT.BEGINNING).applyTo(comp);
+		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL,
+				SWT.FILL).applyTo(comp);
 		// Create farm/member lookup
 		LookupComposite farmLookup = new LookupComposite("Farm Lookup",
 				Activator.getDefault().getImageRegistry().get(
@@ -84,7 +84,8 @@ public class ServiceRequestView extends AbstractRecordListView {
 		Composite startDateComp = UIControlsFactory.createComposite(parent);
 		GridLayout layout = new GridLayout(3, false);
 		startDateComp.setLayout(layout);
-		startDateComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL,
+				SWT.FILL).applyTo(startDateComp);
 
 		// Create Start Date lookup
 		LookupComposite startDateLookup = new LookupComposite("Start",
@@ -176,8 +177,11 @@ public class ServiceRequestView extends AbstractRecordListView {
 		// Request Type
 		UIControlsFactory.createLabel(parent, "Request Type");
 		Composite requestTypeComp = UIControlsFactory.createComposite(parent);
-		GridLayout requestTypeLayout = new GridLayout(1, false);
-		requestTypeComp.setLayout(requestTypeLayout);
+		GridLayout requestTypeLayout = new GridLayout(1, false);		
+		requestTypeComp.setLayout(requestTypeLayout);		
+		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL,
+				SWT.FILL).applyTo(requestTypeComp);
+		
 		// Text startText = UIControlsFactory.createText(dateComp);
 		// By default the start text is the beginning of current month
 		UIControlsFactory.createButtonRadio(requestTypeComp, "All",
