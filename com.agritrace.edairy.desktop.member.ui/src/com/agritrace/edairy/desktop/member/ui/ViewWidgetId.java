@@ -194,6 +194,8 @@ public class ViewWidgetId {
 	public static final String VIEW_FARM_ID="Farm_ID";
 	public static final String VIEW_FARM_MEMBER_NAME="MEMBER_NAME";
 	public static final String VIEW_FARM_MEMBER_ID="MEMBER_ID";
+	
+	
 
 
 
