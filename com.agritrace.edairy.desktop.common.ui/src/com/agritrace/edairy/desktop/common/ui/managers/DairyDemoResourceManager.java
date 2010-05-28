@@ -324,12 +324,14 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 				// farmResource.getContents().add(f);
 			}
 			final Membership member1 = DairyFactory.eINSTANCE.createMembership();
+			Location memberLocation = createLocation("Joseph - " + i+"address", " ection"+i, "estate"+i, "village"+i,
+					"subLocation"+i, "location"+i, "district"+i, "division"+i, "Western","78532");
 			member1.setMember(createFarmer(
 					"Joseph - " + i,
 					"X",
 					"Limuru",
 					"609-356-3400" + i,
-					createFarm("Joseph - " + i + "'s farm",null)));
+					createFarm("Joseph - " + i + "'s farm",memberLocation)));
 
 			member1.setApplicationDate(sdf.parse(i < 9 ? "02/0" + i + "/2007" : "02/" + i + "/2007"));
 

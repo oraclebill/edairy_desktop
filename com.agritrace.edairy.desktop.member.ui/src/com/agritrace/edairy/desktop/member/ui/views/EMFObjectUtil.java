@@ -9,6 +9,7 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 public class EMFObjectUtil {
@@ -30,11 +31,11 @@ public class EMFObjectUtil {
 	public static Membership createMembership() {
 		final Membership member1 = DairyFactory.eINSTANCE.createMembership();
 		final long now = System.currentTimeMillis();
-		member1.setMemberId(String.valueOf(now));
+		member1.setMemberId(now);
 		final Date appliedDate = new Date(now);
 		member1.setApplicationDate(appliedDate);
 
-		final Person member = ModelFactory.eINSTANCE.createPerson();
+		final Farmer member = TrackingFactory.eINSTANCE.createFarmer();
 		member1.setMember(member);
 
 		final Location memberLocation = ModelFactory.eINSTANCE.createLocation();

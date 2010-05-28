@@ -27,7 +27,7 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddAnimalDialog;
 
 public class MemberLiveStockController implements WidgetController, ISelectionListener, DateRangeFilter {
@@ -40,7 +40,7 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
 	private IActionRidget liveStockRemoveButton;
-	private final String[] liveStockPropertyNames = { "animnalRegistrationId", "location", "purpose", "givenName",
+	private final String[] liveStockPropertyNames = { "registrationId", "location", "purpose", "givenName",
 			"animalType", "animalType", "dateOfAcquisition", "acquisitionType" };
 	private final String[] liveStockColumnHeaders = { "ID", "Farm", "Purpose", "Name", "Species", "Breed",
 			"Acquisition Date", "Acquisition Type" };
@@ -48,7 +48,7 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	private final List<RegisteredAnimal> animalInput = new ArrayList<RegisteredAnimal>();
 
-	public MemberLiveStockController(SubModuleController controller){
+	public MemberLiveStockController(IController controller){
 		this.controller = controller;
 		configue();
 	}

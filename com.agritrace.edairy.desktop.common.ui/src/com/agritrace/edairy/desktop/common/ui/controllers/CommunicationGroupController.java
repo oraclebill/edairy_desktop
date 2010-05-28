@@ -43,7 +43,13 @@ public class CommunicationGroupController implements WidgetController {
 
 	@Override
 	public void setInputModel(Object model) {
-		contactMethods = (List)model;
+		if(model instanceof Person){
+			person = (Person)model;
+			contactMethods = person.getContactMethods();
+		}else if(model instanceof List<?>){
+			contactMethods = (List) model;
+		}
+		
 
 	}
 

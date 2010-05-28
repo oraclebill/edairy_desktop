@@ -434,9 +434,9 @@ public class DairyUtil {
 
 	public static Farm createFarm(String name, Location farmLocation) {
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
-
 		farm.setName(name);
 		farm.setLocation(farmLocation);
+		
 
 		return farm;
 	}

@@ -9,6 +9,8 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberCollectionRecrodsWidgetController;
@@ -25,7 +27,7 @@ public class ViewFarmDialogController extends AbstractWindowController{
 	
 	private String generatedFarmId;
 
-	protected FarmListViewTableNode selectedNode;
+	protected Farm selectedFarm;
 
 	// upper panel fields
 	private ILabelRidget memberIdRidget;
@@ -39,10 +41,6 @@ public class ViewFarmDialogController extends AbstractWindowController{
 	// live stock tab
 	private MemberLiveStockController liveStockController;
 
-	// farm tab
-	private MemberFarmWidgetController farmController;
-
-
 	public ViewFarmDialogController() {
 
 	}
@@ -52,18 +50,19 @@ public class ViewFarmDialogController extends AbstractWindowController{
 		super.configureRidgets();
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		selectedNode = (FarmListViewTableNode) getContext("selectedFarm");
+		selectedFarm = (Farm) getContext("selectedFarm");
 
 		configureUpperPanel();
 		
 		memberProfileController = new MemberProfileWidgetController(this);
-		farmController = new MemberFarmWidgetController(this);
-		collectionController = new MemberCollectionRecrodsWidgetController(this);
+	
+	
 		liveStockController = new MemberLiveStockController(this);
 		containerController = new MemberContainerWidgetController(this);
-		transactionController = new MemberTransactionWidgetController(this);
+	
 
-		if (selectedNode != null) {
+	
+		if (selectedFarm != null) {
 			updateBindings();
 		}
 		configureButtonsPanel();
@@ -76,7 +75,7 @@ public class ViewFarmDialogController extends AbstractWindowController{
 			@Override
 			public void callback() {
 				setReturnCode(OK);
-				setContext("selectedFarm",selectedNode);
+				setContext("selectedFarm",selectedFarm);
 				getWindowRidget().dispose();
 			}
 		});
@@ -110,19 +109,18 @@ public class ViewFarmDialogController extends AbstractWindowController{
 
 	private void updateBindings() {
 		updateUpperPanelBinding();
-		memberProfileController.setInputModel(selectedMember);
-		farmController.setInputModel(selectedMember);
-		collectionController.setInputModel(selectedMember);
-		liveStockController.setInputModel(selectedMember);		
-		containerController.setInputModel(selectedMember);
-		transactionController.setInputModel(selectedMember);
+		memberProfileController.setInputModel(selectedFarm);
+		liveStockController.setInputModel(selectedFarm);		
+		containerController.setInputModel(selectedFarm);
+		
 	}
 
 	protected void updateUpperPanelBinding() {
-		if(selectedMember.getMember() != null){
-			memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,	DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
-			memberIdRidget.updateFromModel();
-			nameRidget.setText(selectedMember.getMember().getFamilyName()+","+selectedMember.getMember().getGivenName());	
+		if(selectedFarm.eContainer() != null){
+			Farmer farmer =(Farmer)selectedFarm.eContainer();
+//			memberIdRidget.bindToModel(EMFObservables.observeValue(selectedMember,	DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
+//			memberIdRidget.updateFromModel();
+			nameRidget.setText(farmer.getFamilyName()+","+farmer.getGivenName());	
 		}
 	}
 
@@ -135,7 +133,7 @@ public class ViewFarmDialogController extends AbstractWindowController{
 	}
 
 	protected void saveMember() {
-		if (selectedMember != null) {
+		if (selectedFarm != null) {
 			//			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
 			//			try {
 			//				DairyDemoResourceManager.INSTANCE.saveFarmResource();
@@ -153,17 +151,6 @@ public class ViewFarmDialogController extends AbstractWindowController{
 			//			}
 		}
 	}
-
-
-
-	public Membership getSelectedMember() {
-		return selectedMember;
-	}
-
-	public void setSelectedMember(Membership selectedMember) {
-		this.selectedMember = selectedMember;
-	}
-
 
 
 }

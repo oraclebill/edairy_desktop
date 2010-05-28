@@ -55,6 +55,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 	public void configureRidgets() {
 		getNavigationNode().addSimpleListener(new MemberSearchNodeListern());
 		configureUpperPanel();
+		memberProfileController = new MemberProfileWidgetController(this);
 		farmController = new MemberFarmWidgetController(this);
 		collectionController = new MemberCollectionRecrodsWidgetController(this);
 		liveStockController = new MemberLiveStockController(this);
@@ -102,12 +103,12 @@ public class MemberRegisterViewController extends SubModuleController implements
 		generatedMemberId = System.currentTimeMillis()+"";
 		memberIdRidget.setText(generatedMemberId);
 		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
-		memberProfileController = new MemberProfileWidgetController(this);
 
 	}
 
 	private void updateBindings() {
 		updateUpperPanelBinding();
+		memberProfileController.setInputModel(selectedMember);
 		farmController.setInputModel(selectedMember);
 		collectionController.setInputModel(selectedMember);
 		liveStockController.setInputModel(selectedMember);		
@@ -125,7 +126,6 @@ public class MemberRegisterViewController extends SubModuleController implements
 //				ModelPackage.Literals.PERSON__FAMILY_NAME));
 //		nameRidget.updateFromModel();
 
-		memberProfileController.setInputModel(selectedMember);
 	}
 
 	@Override

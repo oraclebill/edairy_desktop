@@ -156,7 +156,7 @@ public class FarmListViewController extends SubModuleController{
 
 		membershipList = dairy.getMemberships();
 		for(Membership membership : membershipList){
-			List<Farm> farms = membership.getFarms();
+			List<Farm> farms = membership.getMember().getFarms();
 			for(Farm farm : farms){
 				farmListTableInput.add(new FarmListViewTableNode(membership, farm));
 			}
@@ -170,7 +170,7 @@ public class FarmListViewController extends SubModuleController{
 				if (element instanceof FarmListViewTableNode) {
 					Membership membership = ((FarmListViewTableNode) element).getMembership();
 					if (membership != null) {
-						return membership.getMemberId();
+						return membership.getMemberId()+"";
 					}
 				}
 				return null;
