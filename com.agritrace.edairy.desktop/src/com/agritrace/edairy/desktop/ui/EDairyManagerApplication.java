@@ -18,6 +18,8 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
@@ -31,6 +33,8 @@ import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubMo
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
+import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
@@ -147,9 +151,9 @@ public class EDairyManagerApplication extends SwtApplication {
 	subAppNode.addChild(moduleGroupNode);
 
 	moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
-	NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, BlankView.ID);
-	// NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
-	//		"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
+//	NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, BlankView.ID);
+//	 NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
+//			"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//
 	// DELIVERY MODULE GROUP
@@ -184,7 +188,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	subAppNode.addChild(moduleGroupNode);
 
 	moduleNode = NodeFactory.createModule("edm.farms", "Farms", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.farms.directory", "Farm Directory", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+	NodeFactory.createSubModule("edm.farms.directory", "Farm Directory", moduleNode, FarmListView.ID,FarmListViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 	//	NodeFactory.createSubModule("edm.farms.edit", "Register Farm", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//

@@ -10,20 +10,22 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberCollectionRecrodsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberFarmWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberLiveStockController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberTransactionWidgetController;
+import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 
-public class MemberRegisterDialogController extends AbstractWindowController{
+public class ViewFarmDialogController extends AbstractWindowController{
 
 	public static final String DIALOG_TITLE = "Membership";
 	
-	private String generatedMemberId;
+	private String generatedFarmId;
 
-	protected Membership selectedMember;
+	protected FarmListViewTableNode selectedNode;
 
 	// upper panel fields
 	private ILabelRidget memberIdRidget;
@@ -40,12 +42,8 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 	// farm tab
 	private MemberFarmWidgetController farmController;
 
-	// collection tab
-	private MemberCollectionRecrodsWidgetController collectionController;
-	// transaction tab
-	private MemberTransactionWidgetController transactionController;
 
-	public MemberRegisterDialogController() {
+	public ViewFarmDialogController() {
 
 	}
 
@@ -54,7 +52,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 		super.configureRidgets();
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		selectedMember = (Membership) getContext("selectedMember");
+		selectedNode = (FarmListViewTableNode) getContext("selectedFarm");
 
 		configureUpperPanel();
 		
@@ -65,7 +63,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
 
-		if (selectedMember != null) {
+		if (selectedNode != null) {
 			updateBindings();
 		}
 		configureButtonsPanel();
@@ -78,7 +76,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 			@Override
 			public void callback() {
 				setReturnCode(OK);
-				setContext("selectedMember",selectedMember);
+				setContext("selectedFarm",selectedNode);
 				getWindowRidget().dispose();
 			}
 		});
@@ -103,10 +101,10 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 	}
 
 	protected  void configureUpperPanel() {
-		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
-//		generatedMemberId = System.currentTimeMillis()+"";
-//		memberIdRidget.setText(generatedMemberId);
-		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
+//		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
+////		generatedMemberId = System.currentTimeMillis()+"";
+////		memberIdRidget.setText(generatedMemberId);
+//		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
 
 	}
 
@@ -165,5 +163,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 	public void setSelectedMember(Membership selectedMember) {
 		this.selectedMember = selectedMember;
 	}
+
+
 
 }
