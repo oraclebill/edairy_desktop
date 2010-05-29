@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Api
+Bundle-SymbolicName: com.agritrace.edairy.desktop.dairy.profile.api
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: AGRITRACE
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0";visibility:=reexport
+Export-Package: com.agritrace.edairy.desktop.dairy.profile.api

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DairyProfileService
+Bundle-SymbolicName: com.agritrace.edairy.desktop.dairy.profile.service
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.agritrace.edairy.desktop.dairy.profile.service.Activator
+Bundle-Vendor: AGRITRACE
+Require-Bundle: org.eclipse.core.runtime,
+ com.agritrace.edairy.desktop.dairy.profile.api;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

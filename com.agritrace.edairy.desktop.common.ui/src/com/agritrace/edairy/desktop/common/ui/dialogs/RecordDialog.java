@@ -14,13 +14,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.ui.controllers.ResultListDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 
 /**
- * Record adding/editing dialog for directory pattern
+ * Record List Dialog
  * 
  * @author Hui(Spark) Wan
- *
+ * 
  */
 public abstract class RecordDialog extends AbstractDialogView {
 
@@ -67,8 +67,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 		super(parentShell);
 		this.style = style;
 		this.selectedEObject = selectedObject;
-		// Notify the controller that the item is selected
-		((ResultListDialogController) this.getController()).itemSelected();
+		((RecordDialogController) this.getController()).itemSelected();
 
 	}
 
@@ -76,11 +75,11 @@ public abstract class RecordDialog extends AbstractDialogView {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		this.setShellStyle(SWT.RESIZE | SWT.CLOSE | SWT.TITLE);
-		newShell.setSize(240, 400);
+		// newShell.setSize(240, 400);
 		newShell.setBackground(LnfManager.getLnf().getColor(
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
-	
+
 	/**
 	 * Gets the selected object in table list. If user doesn't select any row,
 	 * this object will be null
@@ -97,8 +96,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 	 * @return
 	 */
 	public EObject getWorkingCopy() {
-		return ((ResultListDialogController) this.getController())
-				.getWorkingCopy();
+		return ((RecordDialogController) this.getController()).getWorkingCopy();
 	}
 
 	/**
@@ -114,11 +112,13 @@ public abstract class RecordDialog extends AbstractDialogView {
 	protected Control buildView(Composite parent) {
 		Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayout(GridLayoutFactory.swtDefaults().create());
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(comp);
 		comp.setBackground(LnfManager.getLnf().getColor(
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		comp.getParent().setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		comp.getParent().setBackground(
+				LnfManager.getLnf().getColor(
+						LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		createUIComponent(comp);
 		createButtons(comp);
@@ -141,8 +141,8 @@ public abstract class RecordDialog extends AbstractDialogView {
 		Composite composite = UIControlsFactory.createComposite(parent);
 		composite.setLayout(GridLayoutFactory.swtDefaults().numColumns(2)
 				.spacing(20, 20).create());
-		GridDataFactory.swtDefaults().grab(true, true).align(GridData.CENTER,
-				GridData.BEGINNING).applyTo(composite);
+		GridDataFactory.swtDefaults().grab(true, true)
+				.align(GridData.CENTER, GridData.BEGINNING).applyTo(composite);
 
 		Button okButton = UIControlsFactory.createButton(composite);
 		okButton.setText("&Ok"); //$NON-NLS-1$
@@ -151,8 +151,10 @@ public abstract class RecordDialog extends AbstractDialogView {
 		Button cancelButton = UIControlsFactory.createButton(composite);
 		cancelButton.setText("&Cancel"); //$NON-NLS-1$
 		addUIControl(cancelButton, BIND_ID_BUTTON_CANCEL);
-		GridDataFactory.swtDefaults().hint(cancelButton.computeSize(-1, -1).x,
-				cancelButton.computeSize(-1, -1).y).applyTo(okButton);
+		GridDataFactory
+				.swtDefaults()
+				.hint(cancelButton.computeSize(-1, -1).x,
+						cancelButton.computeSize(-1, -1).y).applyTo(okButton);
 		okButton.pack();
 
 	}
