@@ -43,9 +43,9 @@ public class SupplierListControllerTestCase extends
 	public void testFilterSection() {
 
 		// Categories in filter
-		final IListRidget catgories = getController().getRidget(
+		final IListRidget categories = getController().getRidget(
 				IListRidget.class, SupplierListView.BIND_ID_FILTER_CATEGORIES);
-		assertEquals(9, catgories.getObservableList().size());
+		assertEquals(9, categories.getObservableList().size());
 
 		// Contact Name
 		final ITextRidget contactText = getController().getRidget(
@@ -54,7 +54,7 @@ public class SupplierListControllerTestCase extends
 
 		// Status combo
 		final IComboRidget statusCombo = getController().getRidget(
-				IComboRidget.class, SupplierListView.BIND_ID_FILTER_CONTACT);
+				IComboRidget.class, SupplierListView.BIND_ID_FILTER_STATUS);
 		assertEquals(VendorStatus.VALUES.size(), statusCombo
 				.getObservableList().size());
 		assertEquals(1, statusCombo.getSelectionIndex());
@@ -62,7 +62,7 @@ public class SupplierListControllerTestCase extends
 		// Test Apply Button, Change some condition
 		final IActionRidget apply = getController().getRidget(
 				IActionRidget.class, SupplierListView.BIND_ID_FILTER_SEARCH);
-		catgories.setSelection(1);
+		categories.setSelection(1);
 		apply.fireAction();
 
 		// Test Reset Button

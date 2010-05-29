@@ -6,9 +6,9 @@ Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
+Require-Bundle: org.junit,
+ com.agritrace.edairy.desktop.common.model.persistence,
+ org.eclipse.core.runtime,
+ org.eclipse.pde.junit.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit;bundle-version="4.8.1",
- com.agritrace.edairy.desktop.common.model.persistence;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.6.0",
- org.eclipse.pde.junit.runtime;bundle-version="3.4.100"
 Bundle-ActivationPolicy: lazy
