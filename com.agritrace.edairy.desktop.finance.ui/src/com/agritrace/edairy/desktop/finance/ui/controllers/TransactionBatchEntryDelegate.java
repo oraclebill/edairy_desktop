@@ -161,7 +161,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		AccountTransaction to = target != null ? (AccountTransaction) target : createWorkingCopy();
 
 		if (source instanceof EObject && target instanceof EObject) {
-			EMFUtil.copy((EObject) source, (EObject) target);
+			EMFUtil.copy((EObject) source, (EObject) target,1);
 		} else {
 			throw new IllegalArgumentException("Domain objects must be EObjects!");
 		}

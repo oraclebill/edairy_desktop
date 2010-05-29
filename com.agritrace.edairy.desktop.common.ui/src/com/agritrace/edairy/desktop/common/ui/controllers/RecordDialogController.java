@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,33 +9,47 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.core.RienaStatus;
+import org.eclipse.riena.ui.ridgets.ClassRidgetMapper;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
+import org.eclipse.riena.ui.ridgets.IWindowRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
-public abstract class RecordDialogController extends
-		AbstractWindowController {
+public abstract class RecordDialogController extends AbstractWindowController {
 	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
 
 	private EObject workingCopy;
 	private List<IActionListener> listeners = new ArrayList<IActionListener>();
 
-	private RecordDialog dialog;
+	// private RecordDialog dialog;
 
-	public RecordDialogController(RecordDialog dialog) {
+	private EObject selectedObject;
+
+	private int actionType;
+
+	public RecordDialogController() {
 		super();
-		this.dialog = dialog;
 		workingCopy = createWorkingCopy();
+	}
+
+	public void setSelectedObject(EObject selectedObject) {
+		this.selectedObject = selectedObject;
+	}
+
+	public void setActionType(int actionType) {
+		this.actionType = actionType;
 	}
 
 	/**
@@ -51,20 +66,31 @@ public abstract class RecordDialogController extends
 
 	}
 
-	public void itemSelected() {
-		// Copy selected object to
-		// Copy selected into working copy
-		if (dialog.getSelectedEObject() != null
-				&& dialog.getDialogStyle() != RecordDialog.DIALOG_STYLE_NEW) {
-			EMFUtil.copy(dialog.getSelectedEObject(), getWorkingCopy());
-		} else if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
-			EMFUtil.copy(createWorkingCopy(), getWorkingCopy());
-		}
+	/**
+	 * Gets the selected object in table list. If user doesn't select any row,
+	 * this object will be null
+	 * 
+	 * @return
+	 */
+	public EObject getSelectedObject() {
+		return this.selectedObject;
 	}
+
+	// public void itemSelected() {
+	// // Copy selected object to
+	// // Copy selected into working copy
+	// if (getSelectedObject() != null
+	// && getDialogStyle() != RecordDialog.DIALOG_STYLE_NEW) {
+	// EMFUtil.copy(dialog.getSelectedEObject(), getWorkingCopy(), 2);
+	// } else if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
+	// EMFUtil.copy(createWorkingCopy(), getWorkingCopy(), 2);
+	// }
+	// }
 
 	@Override
 	public void configureRidgets() {
-		super.configureRidgets();
+		setWindowRidget((IWindowRidget) getRidget(IWindowRidget.class,
+				RIDGET_ID_WINDOW));
 
 		ridgetPropertyMap.clear();
 		ridgetPropertyMap.putAll(configureRidgetPropertyMap());
@@ -122,15 +148,22 @@ public abstract class RecordDialogController extends
 
 	protected void doOKPressed() {
 		setReturnCode(OK);
-		if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
+		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
 			saveNew();
 		} else {
 			// Update all working copy to selected object
-			EMFUtil.copy(this.getWorkingCopy(), dialog.getSelectedEObject());
+			EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
 			saveUpdated();
 		}
 		notifierListeners();
-		getWindowRidget().dispose();
+		if (!RienaStatus.isTest()) {
+
+			getWindowRidget().dispose();
+		}
+	}
+
+	private int getActionType() {
+		return this.actionType;
 	}
 
 	protected abstract void saveNew();
@@ -139,7 +172,9 @@ public abstract class RecordDialogController extends
 
 	protected void doCancelPressed() {
 		setReturnCode(CANCEL);
-		getWindowRidget().dispose();
+		if (!RienaStatus.isTest()) {
+			getWindowRidget().dispose();
+		}
 
 	}
 
@@ -170,5 +205,53 @@ public abstract class RecordDialogController extends
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * Copy the model from selected object to working copy
+	 */
+	public void copyModel() {
+		// Copy
+		if (getActionType() != AbstractRecordListController.ACTION_NEW) {
+			EMFUtil.copy(this.getSelectedObject(), this.workingCopy, 2);
+		}
+
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	@SuppressWarnings("unchecked")
+	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
+		R ridget = (R) getRidget(id);
+
+		if (ridget != null) {
+			return ridget;
+		}
+		if (RienaStatus.isTest()) {
+			try {
+				if (ridgetClazz.isInterface()
+						|| Modifier.isAbstract(ridgetClazz.getModifiers())) {
+					Class<R> mappedRidgetClazz = (Class<R>) ClassRidgetMapper
+							.getInstance().getRidgetClass(ridgetClazz);
+					if (mappedRidgetClazz != null) {
+						ridget = mappedRidgetClazz.newInstance();
+					}
+					Assert.isNotNull(
+							ridget,
+							"Could not find a corresponding implementation for " + ridgetClazz.getName() + " in " + ClassRidgetMapper.class.getName()); //$NON-NLS-1$ //$NON-NLS-2$
+				} else {
+					ridget = ridgetClazz.newInstance();
+				}
+			} catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+
+			addRidget(id, ridget);
+		}
+
+		return ridget;
 	}
 }

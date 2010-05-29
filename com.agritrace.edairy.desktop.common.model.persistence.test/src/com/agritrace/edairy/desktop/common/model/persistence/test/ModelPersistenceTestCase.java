@@ -1,16 +1,9 @@
 package com.agritrace.edairy.desktop.common.model.persistence.test;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.Properties;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import junit.framework.TestCase;
+
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.Session;
@@ -20,17 +13,12 @@ import org.hibernate.cfg.Environment;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
-public class ModelPersistenceTestCase {
+public class ModelPersistenceTestCase  extends TestCase {
 	
 	private SessionFactory sFactory;
 

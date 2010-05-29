@@ -1,42 +1,35 @@
-package com.agritrace.edairy.desktop.operations.ui.dialogs;
+package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.teneo.hibernate.HbDataStore;
-import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.model.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.common.model.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
-class SupplierListDialogController extends RecordDialogController {
+public class SupplierListDialogController extends RecordDialogController {
 	IController parentController;
 
-	SupplierListDialogController(RecordDialog dialog) {
-		super(dialog);
+	public SupplierListDialogController() {
+		super();
 	}
 
 	@Override
@@ -132,9 +125,19 @@ class SupplierListDialogController extends RecordDialogController {
 		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
 		
 		Supplier supplier = (Supplier)getWorkingCopy();
+		Transaction tx = session.beginTransaction();
+			
 		
+		try
+		{
 		session.persist("Supplier", supplier);
-		
+		}
+		catch (Exception e)
+		{
+			int i=0;
+		}
+		tx.commit();
+	
 		session.close();
 		
 //		Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();

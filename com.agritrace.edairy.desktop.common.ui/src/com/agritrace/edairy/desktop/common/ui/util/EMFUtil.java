@@ -32,7 +32,9 @@ public class EMFUtil {
      * @param source Source EMF Object
      * @param target Target EMF object
      */
-	public static void copy(EObject source, EObject target) {
+	public static void copy(EObject source, EObject target, int depth) {
+		System.out.println("Source:" + source.eClass().getName() + " Target:"
+				+ target.eClass().getName());
 		if (source == null || target == null) {
 			return;
 		}
@@ -40,38 +42,40 @@ public class EMFUtil {
 			return;
 		}
 		final EClass eClass = source.eClass();
-		for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
+		if (depth > -1) {
+			for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
 
-			final EStructuralFeature feature = eClass.getEStructuralFeature(i);
-			if (feature instanceof EAttribute) {
-				try {
-					target.eSet(feature, source.eGet(feature));
-				} catch (final Exception e) {
+				final EStructuralFeature feature = eClass
+						.getEStructuralFeature(i);
+				if (feature instanceof EAttribute) {
+					try {
+						target.eSet(feature, source.eGet(feature));
+					} catch (final Exception e) {
 
-				}
-			} else if (feature instanceof EReference
-					&& source.eGet(feature) instanceof EObject
-					&& target.eGet(feature) instanceof EObject) {
-				copy((EObject) source.eGet(feature), (EObject) target
-						.eGet(feature));
-			} else if (feature instanceof EReference
-					&& source.eGet(feature) instanceof List
-					&& target.eGet(feature) instanceof List) {
-				{
-					List sourceList = (List) source.eGet(feature);
-					List targetList = (List) target.eGet(feature);
-					targetList.clear();
+					}
+				} else if (feature instanceof EReference
+						&& source.eGet(feature) instanceof EObject
+						&& target.eGet(feature) instanceof EObject) {
+					copy((EObject) source.eGet(feature),
+							(EObject) target.eGet(feature), depth - 1);
+				} else if (feature instanceof EReference
+						&& source.eGet(feature) instanceof List
+						&& target.eGet(feature) instanceof List) {
+					{
+						List sourceList = (List) source.eGet(feature);
+						List targetList = (List) target.eGet(feature);
+						targetList.clear();
 
-					for (int j = 0; j < sourceList.size(); j++) {
-						EObject sourceObj = (EObject)sourceList.get(j);
-						EObject targetObj = createObject(sourceObj.eClass());
-						// if (sourceObj instanceof EObject
-						// && targetObj instanceof EObject) {
-						copy((EObject) sourceObj, (EObject) targetObj);
-						// //}
-						targetList.add(targetObj);
-						
+						for (int j = 0; j < sourceList.size(); j++) {
+							EObject sourceObj = (EObject) sourceList.get(j);
+							EObject targetObj = createObject(sourceObj.eClass());
+							// if (sourceObj instanceof EObject
+							// && targetObj instanceof EObject) {
+							copy((EObject) sourceObj, (EObject) targetObj, depth -1);
+							// //}
+							targetList.add(targetObj);
 
+						}
 					}
 				}
 			}
@@ -85,16 +89,16 @@ public class EMFUtil {
 	 * @param className
 	 * @return
 	 */
-	public static EObject createWorkingCopy(EClass cls, int level) {
+	public static EObject createWorkingCopy(EClass cls, int depth) {
 
 		EObject object = createObject(cls);
-		if (level > -1) {
+		if (depth > -1) {
 			if (object != null) {
 				for (EReference reference : cls.getEAllReferences()) {
 					if (!reference.isMany()) {
 
 						object.eSet(reference, createWorkingCopy(reference
-								.getEReferenceType(), level - 1));
+								.getEReferenceType(), depth - 1));
 
 					}
 				}

@@ -1,10 +1,10 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -12,14 +12,12 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.model.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
@@ -112,9 +110,8 @@ public class SupplierListViewController extends AbstractRecordListController {
 	}
 
 	@Override
-	protected RecordDialog getListDialog(int dialogStyle) {
-		return new SupplierListDialog(dialogStyle, null, this
-				.getSelectedEObject());
+	protected RecordDialog getListDialog(int dialogStyle, EObject selectedObj) {
+		return new SupplierListDialog(dialogStyle, null, selectedObj);
 	}
 
 	@Override
@@ -140,4 +137,5 @@ public class SupplierListViewController extends AbstractRecordListController {
 		}
 
 	}
+
 }

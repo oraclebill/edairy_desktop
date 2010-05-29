@@ -14,13 +14,14 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
 
 /**
  * Supplier list dialog to add/view/edit supplier
@@ -49,9 +50,9 @@ public class SupplierListDialog extends RecordDialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		// newShell.setSize(500, 750);
-		if (this.getDialogStyle() == DIALOG_STYLE_NEW) {
+		if (this.getActionType() == AbstractRecordListController.ACTION_NEW) {
 			this.setTitle("Add Supplier");
-		} else if (this.getDialogStyle() == DIALOG_STYLE_VIEW) {
+		} else if (this.getActionType() == AbstractRecordListController.ACTION_VIEW) {
 			this.setTitle("View Supplier");
 		} else {
 			this.setTitle("Edit Supplier");
@@ -148,8 +149,7 @@ public class SupplierListDialog extends RecordDialog {
 	}
 
 	protected AbstractWindowController createController() {
-		RecordDialogController controller = new SupplierListDialogController(
-				this);
+		RecordDialogController controller = new SupplierListDialogController();
 		return controller;
 	}
 }

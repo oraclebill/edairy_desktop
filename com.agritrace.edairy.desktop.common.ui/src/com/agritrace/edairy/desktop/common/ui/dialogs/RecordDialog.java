@@ -24,21 +24,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  */
 public abstract class RecordDialog extends AbstractDialogView {
 
-	/**
-	 * Dialog style which means the dialog is a dialog to create a new record
-	 */
-	public static final int DIALOG_STYLE_NEW = 1;
-
-	/**
-	 * Dialog style which means the dialog is a dialog to view a new record
-	 */
-	public static final int DIALOG_STYLE_VIEW = 2;
-
-	/**
-	 * Dialog style which means the dialog is a dialog to view a new record
-	 * Currently, view/edit are same
-	 */
-	public static final int DIALOG_STYLE_EDIT = 3;
+	
 	/**
 	 * Bind id for OK button, the label maybe change, but the bind id will not change
 	 */
@@ -67,7 +53,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 		super(parentShell);
 		this.style = style;
 		this.selectedEObject = selectedObject;
-		((RecordDialogController) this.getController()).itemSelected();
+//		((RecordDialogController) this.getController()).itemSelected();
 
 	}
 
@@ -89,23 +75,38 @@ public abstract class RecordDialog extends AbstractDialogView {
 	public EObject getSelectedEObject() {
 		return this.selectedEObject;
 	}
+	
+	
 
-	/**
-	 * Gets the working copying which is used for data binding
-	 * 
-	 * @return
-	 */
-	public EObject getWorkingCopy() {
-		return ((RecordDialogController) this.getController()).getWorkingCopy();
-	}
+//	/**
+//	 * Gets the working copying which is used for data binding
+//	 * 
+//	 * @return
+//	 */
+//	public EObject getWorkingCopy() {
+//		return ((RecordDialogController) this.getController()).getWorkingCopy();
+//	}
 
+	
 	/**
 	 * Gets dialog style which will indicate the dialog is a  new/view/edit dialog
 	 * 
 	 * @return RecordDialog.DIALOG_STYLE_NEW or RecordDialog.DIALOG_STYLE_VIEW or RecordDialog.DIALOG_STYLE_EDIT
 	 */
-	public int getDialogStyle() {
+	public int getActionType() {
 		return this.style;
+	}
+
+	@Override
+	public void create() {
+		if (getController() instanceof RecordDialogController)
+		{
+			RecordDialogController dialogController = (RecordDialogController) getController();
+			dialogController.setSelectedObject(this.getSelectedEObject());
+			dialogController.setActionType(this.getActionType());
+			dialogController.copyModel();
+		}
+		super.create();
 	}
 
 	@Override
@@ -128,7 +129,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 	/**
 	 * Create UI components in this dialog
 	 * 
-	 * @param comp Parent composit
+	 * @param comp Parent composite
 	 */
 	protected abstract void createUIComponent(Composite comp);
 

@@ -407,7 +407,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
     private void createSupplier1(Dairy dairy) throws ParseException {
     	Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-//		supplier.setSupplierId(10001l);
+    	supplier.setSupplierId(10001l);
 		supplier.setCompanyName("John Inventory Ltd ");
 		supplier.setLegalName("JHVEN");
 		supplier.setStatus(VendorStatus.VALID);
@@ -424,12 +424,12 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Edward");
 		person.setFamilyName("Clinton");		
 		supplier.getContacts().add(person);
-		// //dairyResource.getContents().add(supplier);
+		dairyResource.getContents().add(supplier);
 	}
     
     private void createSupplier2(Dairy dairy) throws ParseException {
     	Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-//		supplier.setSupplierId(10002l);
+    	supplier.setSupplierId(10002l);
 		supplier.setCompanyName("Tom  Amusement Ltd ");
 		supplier.setLegalName("TAL");
 		supplier.setStatus(VendorStatus.VALID);
@@ -445,14 +445,14 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Tracy");
 		person.setFamilyName("Bill");		
 		supplier.getContacts().add(person);
-		// dairyResource.getContents().add(supplier);
+		dairyResource.getContents().add(supplier);
 		
 	}
     
     private void createSupplier3(Dairy dairy) throws ParseException {
 
     	Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-//		supplier.setSupplierId(10003l);
+    	supplier.setSupplierId(10003l);
 		supplier.setCompanyName("Gold Store Ltd ");
 		supplier.setLegalName("GSLD");
 		supplier.setStatus(VendorStatus.INVALID);
@@ -466,7 +466,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		supplier.getContacts().add(createPerson("Tommy", "B", "Chong", "212-555-1212"));
 		supplier.getContacts().add(createPerson("Bruce", "B", "Willis", "408-555-1212"));
 
-		// dairyResource.getContents().add(supplier);
+		dairyResource.getContents().add(supplier);
 	}
 
 	/*

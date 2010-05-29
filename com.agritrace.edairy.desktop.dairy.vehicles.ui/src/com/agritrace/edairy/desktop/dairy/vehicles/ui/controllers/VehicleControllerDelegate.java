@@ -231,7 +231,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 	public Vehicle copyBean(final Object source, final Object target) {
 	    final Vehicle from = source != null ? (Vehicle) source : createWorkingCopy();
 	    final Vehicle to = target != null ? (Vehicle) target : createWorkingCopy();
-	    EMFUtil.copy(from, to);
+	    EMFUtil.copy(from, to, 2);
 	    return to;
 	}
 

@@ -24,6 +24,21 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
  */
 public abstract class AbstractRecordListController extends SubModuleController {
 
+	/**
+	 * Dialog style which means the dialog is a dialog to create a new record
+	 */
+	public static final int ACTION_NEW = 1;
+
+	/**
+	 * Dialog style which means the dialog is a dialog to view a new record
+	 */
+	public static final int ACTION_VIEW = 2;
+
+	/**
+	 * Dialog style which means the dialog is a dialog to view a new record
+	 * Currently, view/edit are same
+	 */
+	public static final int ACTIOn_EDIT = 3;
 
 	private EObject selectedEObject;
 	private EObject container;
@@ -87,7 +102,7 @@ public abstract class AbstractRecordListController extends SubModuleController {
 
 				@Override
 				public void callback() {
-					popUpDialog(RecordDialog.DIALOG_STYLE_NEW);
+					popUpDialog(ACTION_NEW);
 				}
 			});
 		}
@@ -100,7 +115,7 @@ public abstract class AbstractRecordListController extends SubModuleController {
 				@Override
 				public void callback() {
 
-					popUpDialog(RecordDialog.DIALOG_STYLE_VIEW);
+					popUpDialog(ACTION_VIEW);
 				}
 			});
 		}
@@ -157,7 +172,7 @@ public abstract class AbstractRecordListController extends SubModuleController {
 
 			@Override
 			public void callback() {
-				popUpDialog(RecordDialog.DIALOG_STYLE_VIEW);
+				popUpDialog(ACTION_VIEW);
 
 			}
 		});
@@ -210,9 +225,9 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		}
 	}
 
-
 	private void popUpDialog(int dialogStyle) {
-		RecordDialog dialog = getListDialog(dialogStyle);
+		RecordDialog dialog = getListDialog(dialogStyle,
+				this.getSelectedEObject());
 		int ret = dialog.open();
 		if (ret == Window.OK) {
 			ITableRidget tableRidget = getRidget(ITableRidget.class,
@@ -222,7 +237,8 @@ public abstract class AbstractRecordListController extends SubModuleController {
 
 	}
 
-	protected abstract RecordDialog getListDialog(int dialogStyle);
+	protected abstract RecordDialog getListDialog(int dialogStyle,
+			EObject selectedObj);
 
 	/**
 	 * Reset conditions

@@ -130,7 +130,7 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 	public Employee copyBean(final Object source, final Object target) {
 	    final Employee from = source != null ? (Employee) source : createWorkingCopy();
 	    final Employee to = target != null ? (Employee) target : createWorkingCopy();
-	    EMFUtil.copy(from, to);
+	    EMFUtil.copy(from, to, 1);
 	    return to;
 	}
 
