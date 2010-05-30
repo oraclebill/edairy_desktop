@@ -34,7 +34,6 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.RidgetUtils;
 import com.agritrace.edairy.desktop.services.ui.Activator;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRecordDialogController;
-//import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRecordDialogController;
 
 /**
  * Service request list dialog

@@ -42,7 +42,7 @@
       <plugin id="com.agritrace.edairy.desktop"/>
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
-      <plugin id="com.agritrace.edairy.desktop.common.model.persistence"/>
+      <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.employees.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>

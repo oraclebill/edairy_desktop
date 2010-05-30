@@ -15,6 +15,6 @@ Export-Package: com.agritrace.edairy.desktop.operations.ui,
  com.agritrace.edairy.desktop.operations.ui.controllers,
  com.agritrace.edairy.desktop.operations.ui.dialogs,
  com.agritrace.edairy.desktop.operations.ui.views
-Import-Package: com.agritrace.edairy.desktop.common.model.persistence.services,
+Import-Package: com.agritrace.edairy.desktop.common.persistence.services,
  org.hibernate,
  org.hibernate.cfg
