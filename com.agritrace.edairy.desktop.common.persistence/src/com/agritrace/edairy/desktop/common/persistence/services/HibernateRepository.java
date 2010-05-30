@@ -2,11 +2,8 @@ package com.agritrace.edairy.desktop.common.persistence.services;
 
 import java.util.List;
 
-import org.eclipse.core.internal.runtime.Activator;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.teneo.hibernate.HbDataStore;
-import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,17 +14,12 @@ import org.hibernate.metadata.ClassMetadata;
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
 
-	private final HbDataStore hbds;
-	private final SessionFactory sessionFactory;
 	private final String entityName;
 	private final String identifierName;
 
 	private Session session;
 
 	public HibernateRepository() {
-		hbds = PersistenceManager.INSTANCE.getDataStore();
-		sessionFactory = hbds.getSessionFactory();
-		session = sessionFactory.openSession();
 		
 		// ClassMetadata metaData =
 		// sessionFactory.getClassMetadata(getClassType() + "Impl"); // TODO:
@@ -36,7 +28,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		String className = getClassType().getName();
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
-		ClassMetadata metaData = sessionFactory.getClassMetadata(entityName);
+		ClassMetadata metaData = PersistenceManager.getPersistenceManager().getSession().getSessionFactory().getClassMetadata(entityName);
 		Assert.isNotNull(metaData);
 		identifierName = metaData.getIdentifierPropertyName();
 	}
@@ -70,7 +62,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	 * @return
 	 */
 	protected String getIdentifierName() {
-		return entityName;
+		return identifierName;
 	}
 
 	@Override
@@ -80,6 +72,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	@Override
 	public List<T> find(String rawQuery) {
+		openSession();
 		return runQuery(session.createQuery(rawQuery)); 
 	}
 
@@ -97,7 +90,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		List<T> ret = runQuery(q);
 
 		if (ret != null && ret.size() > 0)
-			return (T) ret.get(0);
+			return ret.get(0);
 		else
 			return null;
 	}
@@ -105,6 +98,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	@Override
 	public void saveNew(final T newEntity) throws AlreadyExistsException {
 		runWithTransaction(new Runnable() {
+			@Override
 			public void run() {
 				session.persist(getEntityName(), newEntity);
 			}
@@ -115,6 +109,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	public void update(final T updateableEntity)
 			throws NonExistingEntityException {
 		runWithTransaction(new Runnable() {
+			@Override
 			public void run() {
 				session.update(getEntityName(), updateableEntity);
 			}
@@ -125,6 +120,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	public void delete(final T deletableEntity)
 			throws NonExistingEntityException {
 		runWithTransaction(new Runnable() {
+			@Override
 			public void run() {
 				session.delete(deletableEntity);
 			}
@@ -156,17 +152,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	private void openSession() {
-		if (null != sessionFactory) {
-			session = sessionFactory.getCurrentSession();
-			if (null == session) {
-				session = sessionFactory.openSession();
-			}
+			session = PersistenceManager.getPersistenceManager().getSession();
 			Assert.isNotNull(session);
-		} else {
-			// TODO: use proper logging and exception code.
-			throw new RuntimeException(
-					"Unable to create session: null session factory.");
-		}
 	}
 
 	private void closeSession() {

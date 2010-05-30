@@ -41,7 +41,7 @@ public class Activator implements BundleActivator {
 		Activator.context = bundleContext;
 		
 		// load the PM at startup instead of first access...
-		PersistenceManager pm = PersistenceManager.INSTANCE;
+//		PersistenceManager pm = PersistenceManager.INSTANCE;
 		
 //		String hbName = "dairytest";
 //		String dbName = "dairytest";

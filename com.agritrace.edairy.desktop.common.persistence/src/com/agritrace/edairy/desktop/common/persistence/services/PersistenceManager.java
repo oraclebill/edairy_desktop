@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
 
@@ -17,18 +18,29 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 public class PersistenceManager {
 	
 	public static final String DB_NAME = "dairytest";
-	public static final PersistenceManager INSTANCE = new PersistenceManager();
 	
 	private final HbDataStore hbds;
 	private final SessionFactory sessionFactory;
+	private Session session;
 	
+	
+	private static PersistenceManager INSTANCE;
+	public static PersistenceManager getPersistenceManager() {
+		if ( INSTANCE == null )
+			INSTANCE = new PersistenceManager();
+		return INSTANCE;
+	}
 	
 	public HbDataStore getDataStore() {
 		return hbds;		
 	}
 	
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;		
+	public Session getSession() {
+		if (null == session) {
+			session = sessionFactory.openSession();
+		}		
+		System.err.println( ">>>>>> PersistenceManager: providing session [" + session + "] on thread:  " + Thread.currentThread());
+		return session;
 	}
 	
 	private PersistenceManager() {
@@ -73,6 +85,7 @@ public class PersistenceManager {
 	
 	
 	protected void postInit() {
-		System.err.println(hbds.getMappingXML()); 
+		System.err.println( ">>>>>> PersistenceManager starting on thread " + Thread.currentThread());
+		//System.err.println(hbds.getMappingXML()); 
 	}
 }

@@ -8,7 +8,7 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
@@ -50,7 +50,7 @@ public class SupplierListDialogControllerTestCase extends
 	protected void prepareDBForTest() {
 		// TODO
 		
-		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
+		Session session = PersistenceManager.getPersistenceManager().getSession();
 		Transaction tx = session.beginTransaction();
 		session.createSQLQuery("Delete from supplier");
 		// delete all records
