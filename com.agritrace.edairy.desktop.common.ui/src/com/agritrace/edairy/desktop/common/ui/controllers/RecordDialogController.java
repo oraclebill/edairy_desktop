@@ -23,13 +23,17 @@ import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
+import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.DairyPersistenceException;
+import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
 public abstract class RecordDialogController<T extends EObject> extends AbstractWindowController {
 	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
-
+	private IRepository<T> myRepo;
 	private T workingCopy;
 	private List<IActionListener> listeners = new ArrayList<IActionListener>();
 
@@ -120,7 +124,12 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 			@Override
 			public void callback() {
 
-				doOKPressed();
+				try {
+					doOKPressed();
+				} catch (DairyPersistenceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 
@@ -131,22 +140,14 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 			@Override
 			public void callback() {
-				doButtonPressed(CANCEL);
+				doCancelPressed();
 
 			}
 		});
 	}
 
-	private void doButtonPressed(int ok) {
-		if (Window.OK == ok) {
-			doOKPressed();
-		} else {
-			doCancelPressed();
-		}
 
-	}
-
-	protected void doOKPressed() {
+	protected void doOKPressed() throws DairyPersistenceException {
 		setReturnCode(OK);
 		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
 			saveNew();
@@ -166,9 +167,14 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		return this.actionType;
 	}
 
-	protected abstract void saveNew();
+	protected void saveNew() throws AlreadyExistsException {
+			myRepo.saveNew(getWorkingCopy());
+	
+	}
 
-	protected abstract void saveUpdated();
+	protected void saveUpdated() throws NonExistingEntityException {
+		myRepo.update(getWorkingCopy());
+	}
 
 	protected void doCancelPressed() {
 		setReturnCode(CANCEL);

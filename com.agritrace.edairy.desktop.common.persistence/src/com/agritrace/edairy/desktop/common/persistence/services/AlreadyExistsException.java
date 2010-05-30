@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
-public class AlreadyExistsException extends Exception {
+public class AlreadyExistsException extends DairyPersistenceException {
 	public AlreadyExistsException() {
 		super();
 	}

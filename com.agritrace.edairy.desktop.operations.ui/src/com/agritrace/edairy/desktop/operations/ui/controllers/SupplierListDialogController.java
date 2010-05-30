@@ -3,19 +3,15 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
@@ -117,50 +113,6 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		commController.setInputModel(supplier.getContactMethods());
 		commController.updateBinding();
 
-	}
-
-	@Override
-	protected void saveNew() {
-		
-		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
-		
-		Supplier supplier = getWorkingCopy();
-		Transaction tx = session.beginTransaction();
-			
-		
-		try
-		{
-		session.persist("Supplier", supplier);
-		}
-		catch (Exception e)
-		{
-			int i=0;
-		}
-		tx.commit();
-	
-		session.close();
-		
-//		Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-//		Supplier newSupplier =  this.getWorkingCopy();
-//		dairy.getSuppliers().add(newSupplier);
-//		// DairyDemoResourceManager.INSTANCE.getDairyResoure().getContents().add(newSupplier);
-//		doSave();
-
-	}
-
-	@Override
-	protected void saveUpdated() {
-		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
-		
-		Supplier supplier = getWorkingCopy();
-		
-		session.update("Supplier", supplier);
-		
-		session.close();
-		
-
-		//		doSave();
-		
 	}
 
 	@Override
