@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ISubModuleNode;
@@ -15,6 +16,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 
 /**
@@ -49,11 +51,18 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	protected abstract Class<?> getEntityClass();
 
 	/**
+	 * Gets entity class
+	 * 
+	 * @return
+	 */
+	protected abstract EClass getEClass();
+
+	/**
 	 * Gets filter class
 	 * 
 	 * @return
 	 */
-	protected abstract List<?> getFilteredResult();
+	protected abstract List<T> getFilteredResult();
 
 	/**
 	 * Gets table column header
@@ -76,6 +85,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	
 	private T selectedEObject;
 //	private T container;
+	private ITableRidget table;
 	private List<T> tableContents = new ArrayList<T>();
 	
 	private ISelectionListener selectionListener = new ISelectionListener() {
@@ -130,6 +140,12 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		this.selectedEObject = selectedEObject;
 	}
 
+	public void refreshTableContents() {
+		tableContents.clear();
+		tableContents.addAll(getFilteredResult());	
+		table.updateFromModel();
+	}
+	
 	private void configureButtonsRidget() {
 		IActionRidget newBtnRidget = getRidget(IActionRidget.class,
 				AbstractRecordListView.BIND_ID_NEW);
@@ -164,11 +180,10 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 				AbstractRecordListView.BIND_ID_FILTER_SEARCH);
 		if (searchBtnRidget != null) {
 			searchBtnRidget.addListener(new IActionListener() {
-
 				@Override
 				public void callback() {
 					// Rebind the updateFromModel to refresh the tables
-					configureTableRidget();
+					refreshTableContents();
 				}
 			});
 		}
@@ -201,22 +216,23 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	protected void configureTableRidget() {
 		// Configure Table Widgets
-		ITableRidget tableRidget = this.getRidget(ITableRidget.class,
+		table = this.getRidget(ITableRidget.class,
 				AbstractRecordListView.BIND_ID_TABLE);
-		tableRidget.addSelectionListener(selectionListener);
-		tableRidget.addDoubleClickListener(new IActionListener() {
+//		table.addSelectionListener(selectionListener);
+		table.bindSingleSelectionToModel(this, "selectedEObject");
+		table.addDoubleClickListener(new IActionListener() {
 			@Override
 			public void callback() {
 				popUpDialog(ACTION_VIEW);
 			}
 		});
-		WritableList input = new WritableList(getFilteredResult(),
-				getEntityClass());
-		tableRidget.bindToModel(input, getEntityClass(),
-				getTableColumnPropertyNames(), getTableColumnHeaders());
+		table.bindToModel(
+				new WritableList(tableContents, getEntityClass()), 
+				getEntityClass(),
+				getTableColumnPropertyNames(), 
+				getTableColumnHeaders());
 
-		tableRidget.updateFromModel();
-
+		table.updateFromModel();
 	}
 
 
@@ -233,14 +249,25 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	}
 
 	private void popUpDialog(int dialogStyle) {
-		RecordDialog dialog = getEditDialog(dialogStyle,
-				this.getSelectedEObject());
-		int ret = dialog.open();
-		if (ret == Window.OK) {
-			ITableRidget tableRidget = getRidget(ITableRidget.class,
-					AbstractRecordListView.BIND_ID_TABLE);
-			tableRidget.updateFromModel();
+		RecordDialog dialog;
+		
+		if (dialogStyle == ACTION_NEW) 
+			dialog = getEditDialog(dialogStyle, (T)EMFUtil.createObject(getEClass()));
+		else {
+			T selectedObj =  getSelectedEObject();
+			if ( selectedObj == null ) 
+				return;
+			else
+				dialog = getEditDialog(dialogStyle, selectedObj);
 		}
+		if (dialogStyle == ACTION_VIEW) {
+//			dialog.setReadOnly(); 	// TODO:
+		}
+		int ret = dialog.open();
+//		if (ret == Window.OK) {
+//			table.updateFromModel();
+//		}
+		refreshTableContents();
 
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
@@ -42,12 +43,17 @@ public class SupplierListViewController extends AbstractRecordListController<Sup
 
 	@Override
 	protected Class<?> getEntityClass() {
-
 		return Supplier.class;
 	}
+	
+	@Override
+	protected EClass getEClass() {
+		return DairyPackage.Literals.SUPPLIER;
+	}
+	
 
 	@Override
-	protected List<?> getFilteredResult() {
+	protected List<Supplier> getFilteredResult() {
 		List<Supplier> supplierList = getRepository().all();
 		// TODO: apply filter here
 		return supplierList;

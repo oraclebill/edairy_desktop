@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.query.conditions.Condition;
 import org.eclipse.emf.query.conditions.booleans.BooleanAdapter;
@@ -57,6 +58,10 @@ import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
  */
 public class ServiceRequestViewController extends AbstractRecordListController {
 
+	protected EClass getEClass() {
+		return RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST;
+	}
+	
 	public static String[] MASTER_PROPTIES = {
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID
 					.getName(),
