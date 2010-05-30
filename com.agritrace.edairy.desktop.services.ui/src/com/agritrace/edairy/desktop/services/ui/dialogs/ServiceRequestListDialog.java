@@ -33,6 +33,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.RidgetUtils;
 import com.agritrace.edairy.desktop.services.ui.Activator;
+import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRecordDialogController;
 //import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRecordDialogController;
 
 /**
@@ -251,8 +252,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 
 	@Override
 	protected AbstractWindowController createController() {
-		RecordDialogController controller = null ; //FIXME
-//		RecordDialogController controller = new ServiceRecordDialogController() ;
+		RecordDialogController controller = new ServiceRecordDialogController() ;
 //		controller.addListener(new IActionListener() {
 //
 //			@Override
