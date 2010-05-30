@@ -53,6 +53,7 @@
       <plugin id="com.agritrace.edairy.desktop.home.ui"/>
       <plugin id="com.agritrace.edairy.desktop.icons"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.operations.services"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui.tests"/>
       <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>

@@ -3,27 +3,41 @@ package com.agritrace.edairy.desktop.common.persistence.services;
 import java.util.List;
 
 import org.eclipse.core.internal.runtime.Activator;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.TransactionException;
 import org.hibernate.metadata.ClassMetadata;
 
-public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
+public abstract class HibernateRepository<T extends EObject> implements
+		IRepository<T> {
 
-	
 	private final HbDataStore hbds;
 	private final SessionFactory sessionFactory;
 	private final String entityName;
 	private final String identifierName;
-	
+
+	private Session session;
+
 	public HibernateRepository() {
-		hbds = HbHelper.INSTANCE.getDataStore(PersistenceManager.DB_NAME);
+		hbds = PersistenceManager.INSTANCE.getDataStore();
 		sessionFactory = hbds.getSessionFactory();
-		ClassMetadata metaData = sessionFactory.getClassMetadata(getClassType());
-		entityName = metaData.getEntityName();
+		session = sessionFactory.openSession();
+		
+		// ClassMetadata metaData =
+		// sessionFactory.getClassMetadata(getClassType() + "Impl"); // TODO:
+		// Hack
+		// entityName = metaData.getEntityName();
+		String className = getClassType().getName();
+		entityName = className.substring(className.lastIndexOf('.') + 1);
+		Assert.isLegal(!entityName.startsWith("."));
+		ClassMetadata metaData = sessionFactory.getClassMetadata(entityName);
+		Assert.isNotNull(metaData);
 		identifierName = metaData.getIdentifierPropertyName();
 	}
 
@@ -38,8 +52,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	 * 
 	 * @return
 	 */
-	protected abstract Class getClassType() ;
-	
+	protected abstract Class getClassType();
+
 	/**
 	 * The hibernate entity name of the parameterized class.
 	 * 
@@ -48,36 +62,25 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	protected String getEntityName() {
 		return entityName;
 	}
-	
+
 	/**
-	 * The name of the identifier property (primary key) of the parameterized class.
+	 * The name of the identifier property (primary key) of the parameterized
+	 * class.
 	 * 
 	 * @return
 	 */
 	protected String getIdentifierName() {
 		return entityName;
 	}
-		
+
 	@Override
 	public List<T> find(String query, Object[] args) {
 		throw new UnsupportedOperationException("not implemented");
 	}
-	
+
 	@Override
 	public List<T> find(String rawQuery) {
-		Session session;
-		List<T> retval;
-		String query = rawQuery;
-		
-		session = sessionFactory.openSession();
-		try {
-			retval = session.createQuery(query).list();
-		}
-		finally {
-			session.close();
-		}
-		
-		return retval;
+		return runQuery(session.createQuery(rawQuery)); 
 	}
 
 	@Override
@@ -87,80 +90,91 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public T findByKey(long key) {
-		Session session;
-		T retval;
-		
-		session = sessionFactory.openSession();
-		try {
-			retval = (T)session
-				.createQuery("FROM " + getEntityName() + " where " + getIdentifierName() + " = ? ")
-				.setLong(0, key)
-				.uniqueResult();
-		}
-		finally {
-			session.close();
-		}
-		
-		return retval;
+		Query q = session.createQuery(
+				"FROM " + getEntityName() + " where " + getIdentifierName()
+						+ " = ? ").setLong(0, key);
+
+		List<T> ret = runQuery(q);
+
+		if (ret != null && ret.size() > 0)
+			return (T) ret.get(0);
+		else
+			return null;
 	}
 
 	@Override
-	public void saveNew(T newEntity) throws AlreadyExistsException {
-		Session session;
-		
-		session = sessionFactory.openSession();
-		try {
-			session.persist(getEntityName(), newEntity);
-		}
-		finally {
-			session.close();
-		}		
+	public void saveNew(final T newEntity) throws AlreadyExistsException {
+		runWithTransaction(new Runnable() {
+			public void run() {
+				session.persist(getEntityName(), newEntity);
+			}
+		});
 	}
 
 	@Override
-	public void update(T updateableEntity) throws NonExistingEntityException {
-		Session session;
-		
-		session = sessionFactory.openSession();
-		try {
-			session.update(getEntityName(), updateableEntity);
-		}
-		finally {
-			session.close();
-		}				
+	public void update(final T updateableEntity)
+			throws NonExistingEntityException {
+		runWithTransaction(new Runnable() {
+			public void run() {
+				session.update(getEntityName(), updateableEntity);
+			}
+		});
 	}
 
 	@Override
-	public void delete(T deletableEntity) throws NonExistingEntityException {
-		Session session;
-		
-		session = sessionFactory.openSession();
-		try {
-			session.delete(getEntityName(), deletableEntity);
-		}
-		finally {
-			session.close();
-		}				
-		
+	public void delete(final T deletableEntity)
+			throws NonExistingEntityException {
+		runWithTransaction(new Runnable() {
+			public void run() {
+				session.delete(deletableEntity);
+			}
+		});
 	}
 
-//	private void openSession() {
-//		if (null != sessionFactory) {
-//			session = sessionFactory.openSession();
-//		}
-//		else {
-//			// TODO: use proper logging and exception code.
-//			throw new RuntimeException("Unable to create session: null session factory.");
-//		}
-//	}
-//	
-//	private void closeSession() {
-//		if (null != session) {
-//			session.close();
-//		}
-//		else {
-//			// TODO: use proper logging and exception code.
-//			throw new IllegalStateException("null session");
-//		}
-//	}
+	private void runWithTransaction(Runnable r) {
+		openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			r.run();
+		} catch (Exception ex) {
+			t.rollback();
+			throw new TransactionException(entityName, ex);
+		} finally {
+			closeSession();
+		}
+	}
+
+	private List<T> runQuery(Query q) {
+		List<T> results = null;
+		openSession();
+		try {
+			results = q.list();
+			return results;
+		} finally {
+			closeSession();
+		}
+	}
+
+	private void openSession() {
+		if (null != sessionFactory) {
+			session = sessionFactory.getCurrentSession();
+			if (null == session) {
+				session = sessionFactory.openSession();
+			}
+			Assert.isNotNull(session);
+		} else {
+			// TODO: use proper logging and exception code.
+			throw new RuntimeException(
+					"Unable to create session: null session factory.");
+		}
+	}
+
+	private void closeSession() {
+		if (null != session) {
+			// session.close();
+		} else {
+			// TODO: use proper logging and exception code.
+			throw new IllegalStateException("null session");
+		}
+	}
 }

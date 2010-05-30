@@ -21,11 +21,14 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListCont
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 
 public class SupplierListViewController extends AbstractRecordListController {
 
+	private SupplierRepository supplierRepo;
+	
 	public static String[] MASTER_PROPTIES = {
 			DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName(),
 			ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(),
@@ -33,6 +36,7 @@ public class SupplierListViewController extends AbstractRecordListController {
 			ModelPackage.Literals.COMPANY__CONTACTS.getName(),
 			ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(),
 			DairyPackage.Literals.SUPPLIER__STATUS.getName() };
+	
 	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category",
 			"Contact", "Contact #", "Status" };
 
@@ -43,8 +47,11 @@ public class SupplierListViewController extends AbstractRecordListController {
 
 	@Override
 	protected List<?> getFilteredResult() {
-		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
-		List<Supplier> supplierList = session.createQuery("FROM Supplier").list( );
+		if (supplierRepo == null ) {
+			supplierRepo = new SupplierRepository();
+		}		
+		List<Supplier> supplierList = supplierRepo.all();
+		// TODO: apply filter here
 		return supplierList;
 	}
 

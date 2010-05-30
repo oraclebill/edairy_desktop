@@ -51,6 +51,9 @@ public class PersistenceManager {
 		//props.setProperty(Environment.PASS, "root");
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 
+		// TODO: test this - perhaps JTA or 'managed' is better...
+		props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+		
 		props.setProperty("teneo.mapping.disable_econtainer", "true");
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 		
@@ -70,6 +73,6 @@ public class PersistenceManager {
 	
 	
 	protected void postInit() {
-		;; 
+		System.err.println(hbds.getMappingXML()); 
 	}
 }

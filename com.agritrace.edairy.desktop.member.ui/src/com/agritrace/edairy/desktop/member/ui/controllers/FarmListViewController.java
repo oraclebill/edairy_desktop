@@ -40,7 +40,7 @@ public class FarmListViewController extends SubModuleController{
 	private final String[] farmColumnHeaders = { "Member ID", "Member Name", "Farm Name",
 			"Location", "Number of LiveStocks", "Number of Container"};
 	private List<Membership> membershipList = new ArrayList<Membership>();
-	private List<FarmListViewTableNode>farmListTableInput = new ArrayList();
+	private List<FarmListViewTableNode>farmListTableInput = new ArrayList<FarmListViewTableNode>();
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
