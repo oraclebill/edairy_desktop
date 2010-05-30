@@ -212,7 +212,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	}
 
 	@Override
-	protected List<?> getFilteredResult() {
+	protected List getFilteredResult() {
 		try {
 			Dairy myDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
 			List<AnimalHealthRequest> requests = myDairy
