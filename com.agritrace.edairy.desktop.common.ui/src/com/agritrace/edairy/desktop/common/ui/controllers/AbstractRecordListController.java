@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -40,9 +41,42 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 */
 	public static final int ACTIOn_EDIT = 3;
 
+	/**
+	 * Gets entity class
+	 * 
+	 * @return
+	 */
+	protected abstract Class<?> getEntityClass();
+
+	/**
+	 * Gets filter class
+	 * 
+	 * @return
+	 */
+	protected abstract List<?> getFilteredResult();
+
+	/**
+	 * Gets table column header
+	 * 
+	 * @return
+	 */
+	protected abstract String[] getTableColumnHeaders();
+
+	
+	/**
+	 * Gets table column property name
+	 * 
+	 * @return
+	 */
+	protected abstract String[] getTableColumnPropertyNames();
+
+
+	protected abstract RecordDialog getEditDialog(int dialogStyle, T selectedObj);
+
+	
 	private T selectedEObject;
 //	private T container;
-	private List<T> tableContents;
+	private List<T> tableContents = new ArrayList<T>();
 	
 	private ISelectionListener selectionListener = new ISelectionListener() {
 
@@ -185,33 +219,6 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	}
 
-	/**
-	 * Gets entity class
-	 * 
-	 * @return
-	 */
-	protected abstract Class<?> getEntityClass();
-
-	/**
-	 * Gets filter class
-	 * 
-	 * @return
-	 */
-	protected abstract List<?> getFilteredResult();
-
-	/**
-	 * Gets table column header
-	 * 
-	 * @return
-	 */
-	protected abstract String[] getTableColumnHeaders();
-
-	/**
-	 * Gets table column property name
-	 * 
-	 * @return
-	 */
-	protected abstract String[] getTableColumnPropertyNames();
 
 	protected void itemSelected(SelectionEvent event) {
 		IActionRidget viewBtnRidget = getRidget(IActionRidget.class,
@@ -226,7 +233,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	}
 
 	private void popUpDialog(int dialogStyle) {
-		RecordDialog dialog = getListDialog(dialogStyle,
+		RecordDialog dialog = getEditDialog(dialogStyle,
 				this.getSelectedEObject());
 		int ret = dialog.open();
 		if (ret == Window.OK) {
@@ -236,9 +243,6 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		}
 
 	}
-
-	protected abstract RecordDialog getListDialog(int dialogStyle,
-			T selectedObj);
 
 	/**
 	 * Reset conditions

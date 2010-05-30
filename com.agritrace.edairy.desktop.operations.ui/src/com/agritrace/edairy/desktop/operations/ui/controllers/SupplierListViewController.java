@@ -108,7 +108,7 @@ public class SupplierListViewController extends AbstractRecordListController<Sup
 	}
 
 	@Override
-	protected RecordDialog getListDialog(int dialogStyle, Supplier selectedObj) {
+	protected RecordDialog getEditDialog(int dialogStyle, Supplier selectedObj) {
 		return new SupplierListDialog(dialogStyle, null, (Supplier) selectedObj, getRepository());
 	}
 

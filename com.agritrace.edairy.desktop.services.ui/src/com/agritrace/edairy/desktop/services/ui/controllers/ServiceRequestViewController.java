@@ -408,7 +408,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	}
 
 	@Override
-	protected RecordDialog getListDialog(int dialogStyle, EObject selectedObject) {
+	protected RecordDialog getEditDialog(int dialogStyle, EObject selectedObject) {
 		return new ServiceRequestListDialog(dialogStyle, new Shell(),
 				selectedObject);
 	}
