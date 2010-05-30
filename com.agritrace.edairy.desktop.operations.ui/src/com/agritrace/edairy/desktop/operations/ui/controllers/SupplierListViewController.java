@@ -22,31 +22,27 @@ import com.agritrace.edairy.desktop.operations.services.supplier.SupplierReposit
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 
-public class SupplierListViewController extends AbstractRecordListController {
+public class SupplierListViewController extends AbstractRecordListController<Supplier> {
 
 	private SupplierRepository supplierRepo;
-	
-	public static String[] MASTER_PROPTIES = {
-			DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName(),
+
+	public static String[] MASTER_PROPTIES = { DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName(),
 			ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(),
-			DairyPackage.Literals.SUPPLIER__CATEGORIES.getName(),
-			ModelPackage.Literals.COMPANY__CONTACTS.getName(),
-			ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(),
-			DairyPackage.Literals.SUPPLIER__STATUS.getName() };
-	
-	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category",
-			"Contact", "Contact #", "Status" };
+			DairyPackage.Literals.SUPPLIER__CATEGORIES.getName(), ModelPackage.Literals.COMPANY__CONTACTS.getName(),
+			ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(), DairyPackage.Literals.SUPPLIER__STATUS.getName() };
+
+	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category", "Contact", "Contact #", "Status" };
 
 	public SupplierRepository getRepository() {
-		if (supplierRepo == null ) {
+		if (supplierRepo == null) {
 			supplierRepo = new SupplierRepository();
-		}		
+		}
 		return supplierRepo;
 	}
-	
-	
+
 	@Override
 	protected Class<?> getEntityClass() {
+
 		return Supplier.class;
 	}
 
@@ -70,25 +66,18 @@ public class SupplierListViewController extends AbstractRecordListController {
 	@Override
 	protected void configureTableRidget() {
 		super.configureTableRidget();
-		ITableRidget tableRidget = this.getRidget(ITableRidget.class,
-				AbstractRecordListView.BIND_ID_TABLE);
+		ITableRidget tableRidget = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		if (tableRidget != null) {
 			// Contact Name, we will get the first contact
 			tableRidget.setColumnFormatter(3, new ColumnFormatter() {
-
 				@Override
 				public String getText(Object element) {
 					if (element instanceof Supplier) {
-
 						Supplier supplier = (Supplier) element;
-
 						if (supplier.getContacts().size() > 0) {
-							return supplier.getContacts().get(0).getGivenName()
-									+ " "
-									+ supplier.getContacts().get(0)
-											.getFamilyName();
+							return supplier.getContacts().get(0).getGivenName() + " "
+									+ supplier.getContacts().get(0).getFamilyName();
 						}
-
 					}
 					return null;
 				}
@@ -106,8 +95,7 @@ public class SupplierListViewController extends AbstractRecordListController {
 						Supplier supplier = (Supplier) element;
 
 						if (supplier.getContacts().size() > 0) {
-							return supplier.getContacts().get(0)
-									.getPhoneNumber();
+							return supplier.getContacts().get(0).getPhoneNumber();
 						}
 
 					}
@@ -120,29 +108,25 @@ public class SupplierListViewController extends AbstractRecordListController {
 	}
 
 	@Override
-	protected RecordDialog getListDialog(int dialogStyle, EObject selectedObj) {
-		return new SupplierListDialog(dialogStyle, null, (Supplier)selectedObj, getRepository());
+	protected RecordDialog getListDialog(int dialogStyle, Supplier selectedObj) {
+		return new SupplierListDialog(dialogStyle, null, (Supplier) selectedObj, getRepository());
 	}
 
 	@Override
 	protected void configureFilterRidgets() {
 		super.configureFilterRidgets();
-		IComboRidget statusCombo = getRidget(IComboRidget.class,
-				SupplierListView.BIND_ID_FILTER_STATUS);
+		IComboRidget statusCombo = getRidget(IComboRidget.class, SupplierListView.BIND_ID_FILTER_STATUS);
 		if (statusCombo != null) {
-			statusCombo.bindToModel(Observables
-					.staticObservableList(VendorStatus.VALUES),
-					VendorStatus.class, "toString", new WritableValue());
+			statusCombo.bindToModel(Observables.staticObservableList(VendorStatus.VALUES), VendorStatus.class,
+					"toString", new WritableValue());
 			statusCombo.updateFromModel();
 			statusCombo.setSelection(0);
 		}
 
-		IListRidget categoriesList = getRidget(IListRidget.class,
-				SupplierListView.BIND_ID_FILTER_CATEGORIES);
+		IListRidget categoriesList = getRidget(IListRidget.class, SupplierListView.BIND_ID_FILTER_CATEGORIES);
 		if (categoriesList != null) {
-			categoriesList.bindToModel(Observables
-					.staticObservableList(SupplierCategory.getCategoriesList()),
-					SupplierCategory.class, "name");			
+			categoriesList.bindToModel(Observables.staticObservableList(SupplierCategory.getCategoriesList()),
+					SupplierCategory.class, "name");
 			categoriesList.updateFromModel();
 		}
 

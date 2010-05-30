@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class AbstractRecordListController extends SubModuleController {
+public abstract class AbstractRecordListController<T extends EObject> extends SubModuleController {
 
 	/**
 	 * Dialog style which means the dialog is a dialog to create a new record
@@ -40,8 +40,10 @@ public abstract class AbstractRecordListController extends SubModuleController {
 	 */
 	public static final int ACTIOn_EDIT = 3;
 
-	private EObject selectedEObject;
-	private EObject container;
+	private T selectedEObject;
+//	private T container;
+	private List<T> tableContents;
+	
 	private ISelectionListener selectionListener = new ISelectionListener() {
 
 		@Override
@@ -67,30 +69,30 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		super(navigationNode);
 	}
 
-	public AbstractRecordListController(EObject container) {
-		super();
-		this.container = container;
-	}
+//	public AbstractRecordListController(T container) {
+//		super();
+////		this.container = container;
+//	}
 
-	/**
-	 * Gets the container
-	 * 
-	 * @return
-	 */
-	public EObject getContainer() {
-		return this.container;
-	}
+//	/**
+//	 * Gets the container
+//	 * 
+//	 * @return
+//	 */
+//	public T getContainer() {
+//		return this.container;
+//	}
 
 	/**
 	 * Gets the selectedObject
 	 * 
 	 * @return
 	 */
-	public EObject getSelectedEObject() {
+	public T getSelectedEObject() {
 		return this.selectedEObject;
 	}
 
-	public void setSelectedEObject(EObject selectedEObject) {
+	public void setSelectedEObject(T selectedEObject) {
 		this.selectedEObject = selectedEObject;
 	}
 
@@ -169,11 +171,9 @@ public abstract class AbstractRecordListController extends SubModuleController {
 				AbstractRecordListView.BIND_ID_TABLE);
 		tableRidget.addSelectionListener(selectionListener);
 		tableRidget.addDoubleClickListener(new IActionListener() {
-
 			@Override
 			public void callback() {
 				popUpDialog(ACTION_VIEW);
-
 			}
 		});
 		WritableList input = new WritableList(getFilteredResult(),
@@ -220,7 +220,7 @@ public abstract class AbstractRecordListController extends SubModuleController {
 		// Update working copy
 		if (event.getNewSelection().size() == 1
 				&& event.getNewSelection().get(0) instanceof EObject) {
-			setSelectedEObject((EObject) event.getNewSelection().get(0));
+			setSelectedEObject((T) event.getNewSelection().get(0));
 
 		}
 	}
@@ -238,7 +238,7 @@ public abstract class AbstractRecordListController extends SubModuleController {
 	}
 
 	protected abstract RecordDialog getListDialog(int dialogStyle,
-			EObject selectedObj);
+			T selectedObj);
 
 	/**
 	 * Reset conditions
