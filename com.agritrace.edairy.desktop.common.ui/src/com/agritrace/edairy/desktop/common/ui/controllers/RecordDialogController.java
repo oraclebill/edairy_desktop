@@ -27,15 +27,15 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
-public abstract class RecordDialogController extends AbstractWindowController {
+public abstract class RecordDialogController<T extends EObject> extends AbstractWindowController {
 	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
 
-	private EObject workingCopy;
+	private T workingCopy;
 	private List<IActionListener> listeners = new ArrayList<IActionListener>();
 
 	// private RecordDialog dialog;
 
-	private EObject selectedObject;
+	private T selectedObject;
 
 	private int actionType;
 
@@ -44,7 +44,7 @@ public abstract class RecordDialogController extends AbstractWindowController {
 		workingCopy = createWorkingCopy();
 	}
 
-	public void setSelectedObject(EObject selectedObject) {
+	public void setSelectedObject(T selectedObject) {
 		this.selectedObject = selectedObject;
 	}
 
@@ -57,11 +57,11 @@ public abstract class RecordDialogController extends AbstractWindowController {
 	 * 
 	 * @return
 	 */
-	protected abstract EObject createWorkingCopy();
+	protected abstract T createWorkingCopy();
 
 	protected abstract EClass getEClass();
 
-	public EObject getWorkingCopy() {
+	public T getWorkingCopy() {
 		return workingCopy;
 
 	}
@@ -72,7 +72,7 @@ public abstract class RecordDialogController extends AbstractWindowController {
 	 * 
 	 * @return
 	 */
-	public EObject getSelectedObject() {
+	public T getSelectedObject() {
 		return this.selectedObject;
 	}
 

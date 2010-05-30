@@ -25,7 +25,7 @@ import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
-public class SupplierListDialogController extends RecordDialogController {
+public class SupplierListDialogController extends RecordDialogController<Supplier> {
 	IController parentController;
 
 	public SupplierListDialogController() {
@@ -36,7 +36,7 @@ public class SupplierListDialogController extends RecordDialogController {
 	public void configureRidgets() {
 		super.configureRidgets();
 		// configure supplier ID
-		final Supplier supplier = (Supplier) getWorkingCopy();
+		final Supplier supplier = getWorkingCopy();
 		ITextRidget supplierId = getRidget(ITextRidget.class,
 				SupplierListDialog.BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
 		supplierId.setDirectWriting(true);
@@ -124,7 +124,7 @@ public class SupplierListDialogController extends RecordDialogController {
 		
 		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
 		
-		Supplier supplier = (Supplier)getWorkingCopy();
+		Supplier supplier = getWorkingCopy();
 		Transaction tx = session.beginTransaction();
 			
 		
@@ -141,7 +141,7 @@ public class SupplierListDialogController extends RecordDialogController {
 		session.close();
 		
 //		Dairy dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-//		Supplier newSupplier = (Supplier) this.getWorkingCopy();
+//		Supplier newSupplier =  this.getWorkingCopy();
 //		dairy.getSuppliers().add(newSupplier);
 //		// DairyDemoResourceManager.INSTANCE.getDairyResoure().getContents().add(newSupplier);
 //		doSave();
@@ -152,7 +152,7 @@ public class SupplierListDialogController extends RecordDialogController {
 	protected void saveUpdated() {
 		Session session = PersistenceManager.INSTANCE.getSessionFactory().openSession();
 		
-		Supplier supplier = (Supplier)getWorkingCopy();
+		Supplier supplier = getWorkingCopy();
 		
 		session.update("Supplier", supplier);
 		
@@ -169,7 +169,7 @@ public class SupplierListDialogController extends RecordDialogController {
 	}
 
 	@Override
-	protected EObject createWorkingCopy() {
-		return EMFUtil.createWorkingCopy(this.getEClass(), 2);
+	protected Supplier createWorkingCopy() {
+		return (Supplier) EMFUtil.createWorkingCopy(this.getEClass(), 2);
 	}
 }

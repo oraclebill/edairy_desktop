@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
 
-public class ServiceRecordDialogController extends RecordDialogController {
+public class ServiceRecordDialogController extends RecordDialogController<AnimalHealthRequest> {
 
 	public ServiceRecordDialogController() {
 		super();
@@ -28,7 +28,7 @@ public class ServiceRecordDialogController extends RecordDialogController {
 
 	public void configureRidgets() {
 		super.configureRidgets();
-		final AnimalHealthRequest request = (AnimalHealthRequest) getWorkingCopy();
+		final AnimalHealthRequest request =  getWorkingCopy();
 		// ITextRidget memberIdText = getRidget(ITextRidget.class,
 		//						ServiceRequestListDialog.BIND_ID_MEMBER_ID); //$NON-NLS-1$
 		// memberIdText.setDirectWriting(true);
@@ -222,7 +222,7 @@ public class ServiceRecordDialogController extends RecordDialogController {
 
 	private void requestTypeChanged() {
 
-		final AnimalHealthRequest request = (AnimalHealthRequest) getWorkingCopy();
+		final AnimalHealthRequest request =  getWorkingCopy();
 		// UIChanges
 
 		// Updates the bindings
@@ -350,8 +350,8 @@ public class ServiceRecordDialogController extends RecordDialogController {
 	}
 
 	@Override
-	protected EObject createWorkingCopy() {
-		return EMFUtil.createWorkingCopy(this.getEClass(), 2);
+	protected AnimalHealthRequest createWorkingCopy() {
+		return (AnimalHealthRequest) EMFUtil.createWorkingCopy(this.getEClass(), 2);
 	}
 
 }
