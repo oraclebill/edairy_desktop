@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -21,6 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
+import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
 
 /**
@@ -29,7 +31,7 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialog
  * @author Hui(Spark) Wan
  * 
  */
-public class SupplierListDialog extends RecordDialog {
+public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialogController> {
 
 	private static int WIDTH_HEIGHT = 400;
 	private static int DESC_HEIGHT_HEIGHT = 50;
@@ -42,8 +44,8 @@ public class SupplierListDialog extends RecordDialog {
 	public static final String BIND_ID_DESCRIPTION = "bind.id.supplier.desc";
 
 	public SupplierListDialog(int style, Shell parentShell,
-			EObject selectedObject) {
-		super(style, parentShell, selectedObject);
+			Supplier selectedObject, SupplierRepository supplierRepository) {
+		super(style, parentShell, selectedObject, supplierRepository);
 	}
 
 	@Override
@@ -148,8 +150,9 @@ public class SupplierListDialog extends RecordDialog {
 		commGroup.getGroup().pack();
 	}
 
-	protected AbstractWindowController createController() {
-		RecordDialogController controller = new SupplierListDialogController();
+	protected SupplierListDialogController createController() {
+		SupplierListDialogController controller = new SupplierListDialogController();
+		controller.setWorkingCopy( null );
 		return controller;
 	}
 }

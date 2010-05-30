@@ -348,11 +348,11 @@ public class ServiceRecordDialogController extends RecordDialogController<Animal
 	protected EClass getEClass() {
 		return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
 	}
-
-	@Override
-	protected AnimalHealthRequest createWorkingCopy() {
-		return (AnimalHealthRequest) EMFUtil.createWorkingCopy(this.getEClass(), 2);
-	}
+//
+//	@Override
+//	protected AnimalHealthRequest createWorkingCopy() {
+//		return (AnimalHealthRequest) EMFUtil.createWorkingCopy(this.getEClass(), 2);
+//	}
 
 }
 // controller.addListener(new IActionListener() {

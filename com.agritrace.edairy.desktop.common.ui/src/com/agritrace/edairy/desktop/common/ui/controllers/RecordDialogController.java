@@ -13,7 +13,6 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.RienaStatus;
 import org.eclipse.riena.ui.ridgets.ClassRidgetMapper;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -27,58 +26,70 @@ import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsExc
 import com.agritrace.edairy.desktop.common.persistence.services.DairyPersistenceException;
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
-import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 
-public abstract class RecordDialogController<T extends EObject> extends AbstractWindowController {
+public abstract class RecordDialogController<T extends EObject> extends
+		AbstractWindowController {
+
+	// TODO: move these constants to a neutral API class... (was in dialog..)
+	public static final String BIND_ID_BUTTON_OK = "bind.id.btn.ok";
+	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
+
 	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
-	private IRepository<T> myRepo;
-	private T workingCopy;
+
 	private List<IActionListener> listeners = new ArrayList<IActionListener>();
 
-	// private RecordDialog dialog;
-
-	private T selectedObject;
-
+	private IRepository<T> myRepo;
+	private T workingCopy;
 	private int actionType;
-
-	public RecordDialogController() {
-		super();
-		workingCopy = createWorkingCopy();
-	}
-
-	public void setSelectedObject(T selectedObject) {
-		this.selectedObject = selectedObject;
-	}
-
-	public void setActionType(int actionType) {
-		this.actionType = actionType;
-	}
 
 	/**
 	 * Gets working copy for editing
 	 * 
 	 * @return
 	 */
-	protected abstract T createWorkingCopy();
+	// protected abstract T createWorkingCopy();
 
 	protected abstract EClass getEClass();
 
+	public RecordDialogController() {
+		super();
+	}
+
+	public RecordDialogController(T workingCopy) {
+		super();
+		this.workingCopy = workingCopy;
+	}
+
+	public IRepository<T> getRepository() {
+		return myRepo;
+	}
+
+	public void setRepository(IRepository<T> myRepo) {
+		this.myRepo = myRepo;
+	}
+
+	public void setActionType(int actionType) {
+		this.actionType = actionType;
+	}
+
 	public T getWorkingCopy() {
 		return workingCopy;
-
+	}
+	
+	public void setWorkingCopy(T obj) {
+		workingCopy = obj;
 	}
 
-	/**
-	 * Gets the selected object in table list. If user doesn't select any row,
-	 * this object will be null
-	 * 
-	 * @return
-	 */
-	public T getSelectedObject() {
-		return this.selectedObject;
-	}
+	// /**
+	// * Gets the selected object in table list. If user doesn't select any row,
+	// * this object will be null
+	// *
+	// * @return
+	// */
+	// public T getSelectedObject() {
+	// return this.selectedObject;
+	// }
 
 	// public void itemSelected() {
 	// // Copy selected object to
@@ -118,7 +129,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		}
 
 		IActionRidget okButton = getRidget(IActionRidget.class,
-				RecordDialog.BIND_ID_BUTTON_OK); //$NON-NLS-1$
+				BIND_ID_BUTTON_OK); //$NON-NLS-1$
 		okButton.addListener(new IActionListener() {
 
 			@Override
@@ -135,7 +146,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 		});
 		IActionRidget cancelBtn = getRidget(IActionRidget.class,
-				RecordDialog.BIND_ID_BUTTON_CANCEL); //$NON-NLS-1$
+				BIND_ID_BUTTON_CANCEL); //$NON-NLS-1$
 		cancelBtn.addListener(new IActionListener() {
 
 			@Override
@@ -146,14 +157,13 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		});
 	}
 
-
 	protected void doOKPressed() throws DairyPersistenceException {
 		setReturnCode(OK);
 		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
 			saveNew();
 		} else {
 			// Update all working copy to selected object
-			EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
+			// EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
 			saveUpdated();
 		}
 		notifierListeners();
@@ -168,8 +178,8 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 	}
 
 	protected void saveNew() throws AlreadyExistsException {
-			myRepo.saveNew(getWorkingCopy());
-	
+		myRepo.saveNew(getWorkingCopy());
+
 	}
 
 	protected void saveUpdated() throws NonExistingEntityException {
@@ -213,16 +223,16 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 	}
 
-	/**
-	 * Copy the model from selected object to working copy
-	 */
-	public void copyModel() {
-		// Copy
-		if (getActionType() != AbstractRecordListController.ACTION_NEW) {
-			EMFUtil.copy(this.getSelectedObject(), this.workingCopy, 2);
-		}
-
-	}
+	// /**
+	// * Copy the model from selected object to working copy
+	// */
+	// public void copyModel() {
+	// // Copy
+	// if (getActionType() != AbstractRecordListController.ACTION_NEW) {
+	// // EMFUtil.copy(this.getSelectedObject(), this.workingCopy, 2);
+	// }
+	//
+	// }
 
 	/**
 	 * @since 2.0

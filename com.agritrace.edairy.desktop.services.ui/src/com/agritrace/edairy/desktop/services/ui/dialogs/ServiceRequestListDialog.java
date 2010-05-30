@@ -73,7 +73,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 
 	public ServiceRequestListDialog(int style, Shell parentShell,
 			EObject selectedEObject) {
-		super(style, parentShell, selectedEObject);
+		super(style, parentShell, selectedEObject, null);
 
 	}
 
@@ -250,7 +250,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 	}
 
 	@Override
-	protected AbstractWindowController createController() {
+	protected RecordDialogController createController() {
 		RecordDialogController controller = new ServiceRecordDialogController() ;
 //		controller.addListener(new IActionListener() {
 //

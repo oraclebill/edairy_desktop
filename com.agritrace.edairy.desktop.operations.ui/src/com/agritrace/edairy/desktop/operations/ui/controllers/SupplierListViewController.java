@@ -9,14 +9,11 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.hibernate.Session;
-//import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
@@ -40,6 +37,14 @@ public class SupplierListViewController extends AbstractRecordListController {
 	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category",
 			"Contact", "Contact #", "Status" };
 
+	public SupplierRepository getRepository() {
+		if (supplierRepo == null ) {
+			supplierRepo = new SupplierRepository();
+		}		
+		return supplierRepo;
+	}
+	
+	
 	@Override
 	protected Class<?> getEntityClass() {
 		return Supplier.class;
@@ -47,10 +52,7 @@ public class SupplierListViewController extends AbstractRecordListController {
 
 	@Override
 	protected List<?> getFilteredResult() {
-		if (supplierRepo == null ) {
-			supplierRepo = new SupplierRepository();
-		}		
-		List<Supplier> supplierList = supplierRepo.all();
+		List<Supplier> supplierList = getRepository().all();
 		// TODO: apply filter here
 		return supplierList;
 	}
@@ -119,7 +121,7 @@ public class SupplierListViewController extends AbstractRecordListController {
 
 	@Override
 	protected RecordDialog getListDialog(int dialogStyle, EObject selectedObj) {
-		return new SupplierListDialog(dialogStyle, null, selectedObj);
+		return new SupplierListDialog(dialogStyle, null, (Supplier)selectedObj, getRepository());
 	}
 
 	@Override

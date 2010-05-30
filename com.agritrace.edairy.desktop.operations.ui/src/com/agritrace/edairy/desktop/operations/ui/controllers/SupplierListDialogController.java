@@ -24,9 +24,9 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 public class SupplierListDialogController extends RecordDialogController<Supplier> {
 	IController parentController;
 
-	public SupplierListDialogController() {
-		super();
-	}
+//	public SupplierListDialogController(Supplier toBeEditedOrViewed) {
+//		super(toBeEditedOrViewed);
+//	}
 
 	@Override
 	public void configureRidgets() {
@@ -120,8 +120,8 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		return DairyPackage.eINSTANCE.getSupplier();
 	}
 
-	@Override
-	protected Supplier createWorkingCopy() {
-		return (Supplier) EMFUtil.createWorkingCopy(this.getEClass(), 2);
-	}
+//	@Override
+//	protected Supplier createWorkingCopy() {
+//		return (Supplier) EMFUtil.createWorkingCopy(this.getEClass(), 2);
+//	}
 }

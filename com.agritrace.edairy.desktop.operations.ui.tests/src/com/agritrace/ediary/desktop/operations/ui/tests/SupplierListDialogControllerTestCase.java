@@ -125,9 +125,9 @@ public class SupplierListDialogControllerTestCase extends
 	public void testViewRecord() {
 
 		SupplierListDialogController controller = this.getController();
-		controller.setSelectedObject(selectedObject);
+//		controller.setSelectedObject(selectedObject);
 		controller.setActionType(AbstractRecordListController.ACTION_VIEW);
-		controller.copyModel();
+//		controller.copyModel();
 
 		// TODO
 	}

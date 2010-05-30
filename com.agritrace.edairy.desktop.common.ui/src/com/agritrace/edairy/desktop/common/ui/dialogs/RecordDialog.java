@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 
 /**
@@ -22,7 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class RecordDialog extends AbstractDialogView {
+public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> extends AbstractDialogView {
 
 	
 	/**
@@ -34,10 +35,20 @@ public abstract class RecordDialog extends AbstractDialogView {
 	 */
 	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
 
+	protected abstract C createController(); 
+
+	/**
+	 * Create UI components in this dialog
+	 * 
+	 * @param comp Parent composite
+	 */
+	protected abstract void createUIComponent(Composite comp);
+
+	
 	private int style;
 
-	private EObject selectedEObject;
-
+	private T selectedEObject;
+	
 	/**
 	 * Default constructor
 	 * 
@@ -48,15 +59,17 @@ public abstract class RecordDialog extends AbstractDialogView {
 	 * RecordDialog.DIALOG_STYLE_EDIT means editing a new record
 	 * @param parentShell Parent shell
 	 * @param selectedObject Selected object in the table list
+	 * @param repo 
 	 */
-	public RecordDialog(int style, Shell parentShell, EObject selectedObject) {
+	@SuppressWarnings("unchecked")
+	public RecordDialog(int style, Shell parentShell, T selectedObject, IRepository<T> repo) {
 		super(parentShell);
 		this.style = style;
-		this.selectedEObject = selectedObject;
-//		((RecordDialogController) this.getController()).itemSelected();
-
+		((C)this.getController()).setWorkingCopy(selectedObject);
+		((C)this.getController()).setRepository(repo);
+		((C)this.getController()).setActionType(style);
 	}
-
+	
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
@@ -72,21 +85,9 @@ public abstract class RecordDialog extends AbstractDialogView {
 	 * 
 	 * @return
 	 */
-	public EObject getSelectedEObject() {
+	public T getSelectedEObject() {
 		return this.selectedEObject;
 	}
-	
-	
-
-//	/**
-//	 * Gets the working copying which is used for data binding
-//	 * 
-//	 * @return
-//	 */
-//	public EObject getWorkingCopy() {
-//		return ((RecordDialogController) this.getController()).getWorkingCopy();
-//	}
-
 	
 	/**
 	 * Gets dialog style which will indicate the dialog is a  new/view/edit dialog
@@ -96,19 +97,7 @@ public abstract class RecordDialog extends AbstractDialogView {
 	public int getActionType() {
 		return this.style;
 	}
-
-	@Override
-	public void create() {
-		if (getController() instanceof RecordDialogController)
-		{
-			RecordDialogController dialogController = (RecordDialogController) getController();
-			dialogController.setSelectedObject(this.getSelectedEObject());
-			dialogController.setActionType(this.getActionType());
-			dialogController.copyModel();
-		}
-		super.create();
-	}
-
+	
 	@Override
 	protected Control buildView(Composite parent) {
 		Composite comp = UIControlsFactory.createComposite(parent);
@@ -125,13 +114,6 @@ public abstract class RecordDialog extends AbstractDialogView {
 		createButtons(comp);
 		return null;
 	}
-
-	/**
-	 * Create UI components in this dialog
-	 * 
-	 * @param comp Parent composite
-	 */
-	protected abstract void createUIComponent(Composite comp);
 
 	/**
 	 * Create buttons for dialog
