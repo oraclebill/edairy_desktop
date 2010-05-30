@@ -1,4 +1,4 @@
-package com.agritrace.edairy.ui.controllers.tests;
+package com.agritrace.edairy.desktop.common.ui.controllers.tests;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

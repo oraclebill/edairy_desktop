@@ -4,19 +4,19 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.ui.controllers.tests;
+package com.agritrace.edairy.desktop.common.ui.controllers.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * <!-- begin-user-doc --> A test suite for the '<em><b>Dairy</b></em>' model.
+ * <!-- begin-user-doc --> A test suite for the '<em><b>dairy</b></em>' package.
  * <!-- end-user-doc -->
  * 
  * @generated
  */
-public class DairyAllTests extends TestSuite {
+public class DairyLocationTests extends TestSuite {
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -33,8 +33,8 @@ public class DairyAllTests extends TestSuite {
      * @generated
      */
     public static Test suite() {
-	final TestSuite suite = new DairyAllTests("Dairy Tests");
-	suite.addTest(DairyLocationTests.suite());
+	final TestSuite suite = new DairyLocationTests("dairy Tests");
+	suite.addTestSuite(DairyLocationControllerTest.class);
 	return suite;
     }
 
@@ -43,8 +43,8 @@ public class DairyAllTests extends TestSuite {
      * 
      * @generated
      */
-    public DairyAllTests(String name) {
+    public DairyLocationTests(String name) {
 	super(name);
     }
 
-} // DairyAllTests
+}
