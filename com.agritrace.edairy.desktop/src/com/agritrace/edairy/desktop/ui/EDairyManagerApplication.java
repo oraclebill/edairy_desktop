@@ -3,7 +3,6 @@
  */
 package com.agritrace.edairy.desktop.ui;
 
-import org.eclipse.riena.internal.core.test.ExtensionRegistryAnalyzer;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -19,8 +18,6 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
@@ -33,12 +30,11 @@ import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDS
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView;
 import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberSearchViewController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
-import com.agritrace.edairy.desktop.member.ui.views.MemberListView;
+import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
@@ -183,7 +179,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleNode = NodeFactory.createModule("edm.members", "Members", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory
 				.createSubModule(
-						"edm.member.directory", "Member Directory", moduleNode, MemberListView.ID, MemberSearchViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+						"edm.member.directory", "Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory
 				.createSubModule(
 						"edm.member.edit", "Register Member", moduleNode, MemberSearchView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ //$NON-NLS-2$

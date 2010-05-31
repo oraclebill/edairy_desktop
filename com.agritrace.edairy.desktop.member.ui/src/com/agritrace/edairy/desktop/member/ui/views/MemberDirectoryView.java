@@ -23,9 +23,9 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class MemberListView extends SubModuleView {
+public class MemberDirectoryView extends SubModuleView {
 
-    public static final String ID = MemberListView.class.getName();
+    public static final String ID = MemberDirectoryView.class.getName();
     
     public static final String FILTER_GROUP_TEXT="Search for a Member";
 	@Override
@@ -56,6 +56,7 @@ public class MemberListView extends SubModuleView {
 			Label charLabel = UIControlsFactory.createLabel(charPanel, new String(new char[]{i}));
 			addUIControl(charLabel,charLabel.getText());
 		}
+		
 		//search text
 		Text searchText= UIControlsFactory.createText(filterGroup, SWT.SINGLE|SWT.BORDER, ViewWidgetId.MEMBERLIST_SEARCHTEXT);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(250, -1).grab(false,false).applyTo(searchText);
@@ -104,13 +105,13 @@ public class MemberListView extends SubModuleView {
 		columnCreditBalance.setText("Credit Balance");
 
 		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(columnId, new ColumnWeightData(12));
-		layout.setColumnData(columnName, new ColumnWeightData(12));
+		layout.setColumnData(columnId, new ColumnWeightData(8));
+		layout.setColumnData(columnName, new ColumnWeightData(20));
 		layout.setColumnData(columnStatus, new ColumnWeightData(12));
-		layout.setColumnData(columnPhone, new ColumnWeightData(12));
-		layout.setColumnData(columnCollection, new ColumnWeightData(12));
-		layout.setColumnData(columnCredit, new ColumnWeightData(20));
-		layout.setColumnData(columnCreditBalance, new ColumnWeightData(20));
+		layout.setColumnData(columnPhone, new ColumnWeightData(15));
+		layout.setColumnData(columnCollection, new ColumnWeightData(8));
+		layout.setColumnData(columnCredit, new ColumnWeightData(8));
+		layout.setColumnData(columnCreditBalance, new ColumnWeightData(8));
 		tablePanel.setLayout(layout);
 
 		final Composite buttonsPanel = UIControlsFactory.createComposite(memberListGroup, SWT.NULL);
