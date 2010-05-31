@@ -32,7 +32,7 @@ public class MemberDirectoryController extends SubModuleController {
 
 	private ITableRidget memberListRidget;
 	private IActionRidget viewRidget;
-	private final String[] memberPropertyNames = { "MEMBERID", "member", "status", "member", "account", "account",
+	private final String[] memberPropertyNames = { "memberId", "member", "status", "member", "account", "account",
 			"account" };
 	private final String[] memberColumnHeaders = { "ID", "Name", "Status", "Phone", "Milk Collection",
 			"Monthly Credit Sales", "Credit Balance" };

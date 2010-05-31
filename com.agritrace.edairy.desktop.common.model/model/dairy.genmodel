@@ -131,7 +131,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/collectionJournals"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/suppliers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/animalHealthRequests"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/dairyId"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/dairyBins"/>
       <genOperations ecoreOperation="dairy.ecore#//Dairy/getMemberFarms"/>
     </genClasses>
@@ -142,11 +141,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/status"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/defaultRoute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/member"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/farms"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/account"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Asset">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Asset/assetId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Asset/tagType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Asset/tagValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Asset/dateAcquired"/>
@@ -283,6 +280,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/phoneNumber"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/location"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/contactMethods"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/personId"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//Company">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/legalName"/>
@@ -291,6 +289,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contacts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/phoneNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/companyId"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//DescriptiveLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//DescriptiveLocation/directions"/>
@@ -301,6 +300,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Location/mapLocation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Location/statutoryLocation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Location/descriptiveLocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Location/locationId"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//ContactMethod">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ContactMethod/cmType"/>
@@ -354,7 +354,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/measureType"/>
     </genClasses>
     <genClasses ecoreClass="farm.ecore#//RegisteredAnimal">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/animnalRegistrationId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/registrationId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/givenName"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference farm.ecore#//RegisteredAnimal/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/gender"/>
@@ -371,7 +371,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/dateOfBirth"/>
     </genClasses>
     <genClasses ecoreClass="farm.ecore#//ReferenceAnimalType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//ReferenceAnimalType/animalTypeId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//ReferenceAnimalType/species"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//ReferenceAnimalType/breed"/>
     </genClasses>
