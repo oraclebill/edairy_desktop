@@ -49,6 +49,9 @@ public class DateRangeSearchController {
 			return;
 		}
 		startDateText= controller.getRidget(ITextRidget.class,startDateTxtId);
+		if (null == startDateText) {
+			return;
+		}
 		endDateText = controller.getRidget(ITextRidget.class,endDateTxtId);
 		//default filterStartDate one month before the current date;
 		startDateText.setText(DateTimeUtils.getOneMonthBeforeCurrentDateString());

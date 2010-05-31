@@ -19,10 +19,10 @@ public class MapGroupController implements WidgetController {
 
 	public MapGroupController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 	@Override
-	public void configue() {
+	public void configure() {
 		latituteTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.LATITUDE_TEXT);
 		longtituteTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.LONGTITUDE_TEXT);
 

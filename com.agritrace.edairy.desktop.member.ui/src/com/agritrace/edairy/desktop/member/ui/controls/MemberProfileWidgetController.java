@@ -22,17 +22,17 @@ public class MemberProfileWidgetController implements WidgetController {
 		infoGroup = new MemberInfoGroupController(controller);
 		locationController = new LocationProfileWidgetController(controller);
 		communicationGroup =  new CommunicationGroupController(controller);
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if (controller == null) {
 			return;
 		}
-		infoGroup.configue();
-		locationController.configue();
-		communicationGroup.configue();
+		infoGroup.configure();
+		locationController.configure();
+		communicationGroup.configure();
 	}
 
 	@Override

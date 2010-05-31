@@ -44,7 +44,7 @@ public class CreateMemberDialog extends AbstractDialogView {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
 
 		createMemberSelectorGroup(main);
-		tabFolder = new MembershipTabFolder(main);
+		tabFolder = new MembershipTabFolder(main, MembershipTabFolder.NEW_MEMBER_TABS);
 		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));

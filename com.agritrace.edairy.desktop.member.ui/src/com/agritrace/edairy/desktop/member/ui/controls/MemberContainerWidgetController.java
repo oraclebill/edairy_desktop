@@ -58,11 +58,11 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 
 	public MemberContainerWidgetController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if(controller == null){
 			return;
 		}

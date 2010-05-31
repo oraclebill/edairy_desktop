@@ -156,7 +156,7 @@ public interface Membership extends EObject {
 	 * @return the value of the '<em>Default Route</em>' reference.
 	 * @see #setDefaultRoute(Route)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_DefaultRoute()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Route getDefaultRoute();

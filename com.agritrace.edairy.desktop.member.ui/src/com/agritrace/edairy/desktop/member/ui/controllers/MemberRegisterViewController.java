@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecrodsWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
@@ -49,7 +49,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 	MemberFarmWidgetController farmController;
 
 	// collection tab
-	MemberCollectionRecrodsWidgetController collectionController;
+	MemberCollectionRecordsWidgetController collectionController;
 	// transaction tab
 	MemberTransactionWidgetController transactionController;
 
@@ -63,7 +63,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 		configureUpperPanel();
 		memberProfileController = new MemberProfileWidgetController(this);
 		farmController = new MemberFarmWidgetController(this);
-		collectionController = new MemberCollectionRecrodsWidgetController(this);
+		collectionController = new MemberCollectionRecordsWidgetController(this);
 		liveStockController = new MemberLiveStockWidgetController(this);
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
@@ -74,7 +74,6 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 		// search button
 		((IActionRidget) getRidget(ViewWidgetId.memberInfo_searchButton)).addListener(new IActionListener() {
-
 			@Override
 			public void callback() {
 				// saveMember();

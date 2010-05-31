@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.CreateMemberDialog;
@@ -25,22 +27,99 @@ import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 
 public class MemberDirectoryController extends SubModuleController {
 
-	private MemberRepository repository;
+	private IRepository<Membership> repository;
+	private final List<Membership> membershipList = new ArrayList<Membership>();
+
 	private ITableRidget memberListRidget;
 	private IActionRidget viewRidget;
-	private final String[] memberPropertyNames = { "memberId", "member", "status", "member", "account", "account",
+	private final String[] memberPropertyNames = { "MEMBERID", "member", "status", "member", "account", "account",
 			"account" };
 	private final String[] memberColumnHeaders = { "ID", "Name", "Status", "Phone", "Milk Collection",
 			"Monthly Credit Sales", "Credit Balance" };
-	private List<Membership> membershipList = new ArrayList<Membership>();
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Member";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 
+	class AddActionListener implements IActionListener {
+		@Override
+		public void callback() {
+			Membership selectedMember = DairyUtil.createMembership(null, null, null);
+			int index = membershipList.indexOf(selectedMember);
+			final CreateMemberDialog memberDialog = new CreateMemberDialog();
+			memberDialog.getController().setContext("selectedMember", selectedMember);
+
+			int returnCode = memberDialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+				repository.saveNew(selectedMember);
+				refreshMemberList();
+//				membershipList.set(index, selectedMember);
+//				memberListRidget.updateFromModel();
+			} else {
+				// System.out.println("return code "+returnCode);
+			}
+		}
+	}
+
+	class ViewActionListener implements IActionListener {
+		@Override
+		public void callback() {
+			Membership selectedMember = (Membership) memberListRidget.getSelection().get(0);
+			int index = membershipList.indexOf(selectedMember);
+			final ViewMemberDialog memberDialog = new ViewMemberDialog();
+			memberDialog.getController().setContext("selectedMember", selectedMember);
+
+			int returnCode = memberDialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+				repository.update(selectedMember);
+				refreshMemberList();
+//				// membershipList.set(index, selectedMember);
+//				memberListRidget.updateFromModel();
+			} else if (returnCode == 2) {
+				// confirm for delete
+				if (selectedMember != null) {
+					String message = "";
+					if (selectedMember.getMember() != null) {
+						message = "\"" + selectedMember.getMember().getGivenName() + " "
+								+ selectedMember.getMember().getFamilyName() + "\"";
+					}
+					message = String.format(DELETE_DIALOG_MESSAGE, message);
+					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
+						repository.delete(selectedMember);
+						refreshMemberList();
+//						membershipList.remove(selectedMember);
+//						memberListRidget.updateFromModel();
+					}
+				}
+			}
+		}
+	}
+
+	void initRepository() {
+		if (null == repository)
+			repository = new MemberRepository();
+	}
+
+	void setRepository(IRepository<Membership> repo) {
+		repository = repo;
+	}
+
+	IRepository<Membership> getRepository() {
+		return repository;
+	}
+
 	@Override
 	public void configureRidgets() {
-		loadDairy();
+		initRepository();
 		configureMemberTable();
+		refreshMemberList();
+	}
+
+	public void refreshMemberList() {
+		membershipList.clear();
+		membershipList.addAll(repository.all());
+		memberListRidget.updateFromModel();
 	}
 
 	private void configureMemberTable() {
@@ -48,10 +127,10 @@ public class MemberDirectoryController extends SubModuleController {
 		memberListRidget = getRidget(ITableRidget.class, ViewWidgetId.MEMBERLIST_MEMBERTABLE);
 
 		if (repository == null) {
-			loadDairy();
+			initRepository();
 		}
 		if (repository != null) {
-			membershipList = repository.all();
+
 			memberListRidget.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,
 					memberPropertyNames, memberColumnHeaders);
 			memberListRidget.setColumnFormatter(1, new ColumnFormatter() {
@@ -79,14 +158,12 @@ public class MemberDirectoryController extends SubModuleController {
 				}
 			});
 			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
-
 				@Override
 				public String getText(Object element) {
 					return "N/A";
 				}
 			});
 			memberListRidget.setColumnFormatter(5, new ColumnFormatter() {
-
 				@Override
 				public String getText(Object element) {
 					return "N/A";
@@ -94,7 +171,6 @@ public class MemberDirectoryController extends SubModuleController {
 			});
 
 			memberListRidget.setColumnFormatter(6, new ColumnFormatter() {
-
 				@Override
 				public String getText(Object element) {
 					return "N/A";
@@ -108,68 +184,15 @@ public class MemberDirectoryController extends SubModuleController {
 					}
 				}
 			});
-			memberListRidget.updateFromModel();
-			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new IActionListener() {
-				@Override
-				public void callback() {
-					Membership selectedMember = EMFObjectUtil.createMembership();
-					int index = membershipList.indexOf(selectedMember);
-					final CreateMemberDialog memberDialog = new CreateMemberDialog();
-					memberDialog.getController().setContext("selectedMember", selectedMember);
 
-					int returnCode = memberDialog.open();
-					if (returnCode == AbstractWindowController.OK) {
-						selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-						repository.saveNew(selectedMember);
-						membershipList.set(index, selectedMember);
-						memberListRidget.updateFromModel();
-					} else {
-						// System.out.println("return code "+returnCode);
-					}
-				}
-			});
+//			memberListRidget.updateFromModel();
+			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new AddActionListener());
 			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_VIEW);
 			if (viewRidget != null) {
 				viewRidget.setEnabled(false);
-				viewRidget.addListener(new IActionListener() {
-
-					@Override
-					public void callback() {
-						Membership selectedMember = (Membership) memberListRidget.getSelection().get(0);
-						int index = membershipList.indexOf(selectedMember);
-						final ViewMemberDialog memberDialog = new ViewMemberDialog();
-						memberDialog.getController().setContext("selectedMember", selectedMember);
-
-						int returnCode = memberDialog.open();
-						if (returnCode == AbstractWindowController.OK) {
-							selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-							repository.update(selectedMember);
-							membershipList.set(index, selectedMember);
-							memberListRidget.updateFromModel();
-						} else if (returnCode == 2) {
-							// confirm for delete
-							if (selectedMember != null) {
-								String message = "";
-								if (selectedMember.getMember() != null) {
-									message = "\"" + selectedMember.getMember().getGivenName() + " "
-											+ selectedMember.getMember().getFamilyName() + "\"";
-								}
-								message = String.format(DELETE_DIALOG_MESSAGE, message);
-								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
-										DELETE_DIALOG_TITLE, message)) {
-									membershipList.remove(selectedMember);
-									memberListRidget.updateFromModel();
-								}
-							}
-						}
-					}
-				});
+				viewRidget.addListener(new ViewActionListener());
 			}
 		}
-	}
-
-	private void loadDairy() {
-		repository = new MemberRepository();
 	}
 
 }

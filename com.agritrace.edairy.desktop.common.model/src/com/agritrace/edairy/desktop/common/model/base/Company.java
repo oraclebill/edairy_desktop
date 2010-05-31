@@ -44,7 +44,7 @@ public interface Company extends EObject {
 	 * @return the value of the '<em>Legal Name</em>' attribute.
 	 * @see #setLegalName(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_LegalName()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getLegalName();
@@ -70,7 +70,7 @@ public interface Company extends EObject {
 	 * @return the value of the '<em>Company Name</em>' attribute.
 	 * @see #setCompanyName(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_CompanyName()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getCompanyName();
@@ -154,7 +154,7 @@ public interface Company extends EObject {
 	 * @return the value of the '<em>Phone Number</em>' attribute.
 	 * @see #setPhoneNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_PhoneNumber()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getPhoneNumber();
@@ -180,7 +180,7 @@ public interface Company extends EObject {
 	 * @return the value of the '<em>Company Id</em>' attribute.
 	 * @see #setCompanyId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_CompanyId()
-	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
 	Long getCompanyId();

@@ -4,7 +4,7 @@ import org.eclipse.riena.ui.ridgets.controller.IController;
 
 public interface WidgetController {
 	
-	public void configue();
+	public void configure();
 	
 	public Object getInputModel();
 	

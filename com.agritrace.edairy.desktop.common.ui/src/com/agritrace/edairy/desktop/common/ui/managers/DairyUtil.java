@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Calendar;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
@@ -381,8 +382,19 @@ public class DairyUtil {
 	public static Membership createMembership(Date applicationDate, Date effectiveDate, Farmer farmer) {
 		Membership member = DairyFactory.eINSTANCE.createMembership();
 
+		if (null == farmer) {
+			farmer = createFarmer("", "", "", "", createFarm("", createLocation(null, null, null)));
+		}
 		member.setMember(farmer);
+		
+		if (null == effectiveDate) {
+			effectiveDate = new Date(0);
+		}
 		member.setEffectiveDate(effectiveDate);
+		
+		if (null == applicationDate) {
+			applicationDate = new Date();
+		}
 		member.setApplicationDate(applicationDate);
 		return member;
 	}

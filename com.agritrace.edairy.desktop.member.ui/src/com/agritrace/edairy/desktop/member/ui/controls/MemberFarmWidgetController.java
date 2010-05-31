@@ -48,11 +48,11 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 
 	public MemberFarmWidgetController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 
 		if(controller == null){
 			return;

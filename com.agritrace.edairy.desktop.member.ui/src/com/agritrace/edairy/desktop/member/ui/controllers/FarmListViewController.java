@@ -184,7 +184,7 @@ public class FarmListViewController extends SubModuleController{
 	}
 
 	private void setColumnFormatters(){
-		//memberId
+		//MEMBERID
 		farmListTable.setColumnFormatter(0, new ColumnFormatter() {
 			public String getText(Object element) {
 				if (element instanceof FarmListViewTableNode) {

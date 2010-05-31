@@ -58,16 +58,24 @@ public class ViewWidgetId {
 
     public static final String entryInputClear = "entryInputClear";
 
-    public static final String memberInfo_id = "memberId";
+    public static final String memberInfo_id = "MEMBERID";
 
-    public static final String memberInfo_firstName = "firstName";
+    public static final String memberInfo_firstName = "FIRST_NAME";
 
-    public static final String memberInfo_lastName = "lastName";
+	public static final String memberInfo_middleName = "member.info.name.middle";
+
+	public static final String memberInfo_honorific = "member.info.name.honorific";
+
+	public static final String memberInfo_lastName = "lastName";
 
     public static final String memberInfo_applicationDate = "applicationDate";
 
     public static final String memberInfo_effectiveDate = "effectiveDate";
 
+	public static final String memberInfo_suffix = "member.info.name.suffix";
+
+	public static final String memberInfo_additionalNames = "member.info.name.additional";
+	
     public static final String memberInfo_status = "status";
 
     public static final String memberInfo_phone = "phone";
@@ -194,11 +202,5 @@ public class ViewWidgetId {
 	public static final String VIEW_FARM_ID="Farm_ID";
 	public static final String VIEW_FARM_MEMBER_NAME="MEMBER_NAME";
 	public static final String VIEW_FARM_MEMBER_ID="MEMBER_ID";
-	
-	
-
-
-
-
 
 }

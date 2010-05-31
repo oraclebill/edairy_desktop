@@ -38,7 +38,7 @@ import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 
-public class MemberCollectionRecrodsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
+public class MemberCollectionRecordsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
 
 	private IController controller;
 	private Membership membership;
@@ -55,16 +55,20 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 	private IToggleButtonRidget rejected;
 	private IToggleButtonRidget suspended;
 
-	public MemberCollectionRecrodsWidgetController(IController controller){
+	public MemberCollectionRecordsWidgetController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 	@Override
-	public void configue() {
+	public void configure() {
 		if(controller == null){
 			return;
 		}
 		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
+		if ( null == collectionTable ) {
+			return;
+		}
+		
 		collectionTable.setColumnFormatter(0, new ColumnFormatter(){
 			@Override
 			public String getText(Object element) {
@@ -114,12 +118,15 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 	@Override
 	public void setController(IController controller) {
 		this.controller = controller;
-		configue();
+		configure();
 
 	}
 
 	@Override
 	public void updateBinding() {
+		if ( null == collectionTable ) {
+			return;
+		}
 		records.clear();
 		records.addAll(getCollectionJournalLines());
 		
@@ -335,6 +342,9 @@ public class MemberCollectionRecrodsWidgetController implements WidgetController
 	}
 	@Override
 	public void callback() {
+		if (null == collectionTable) {
+			return;
+		}
 		if(dateSearchController  != null){
 			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());	
 		}

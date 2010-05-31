@@ -22,11 +22,11 @@ public class CommunicationGroupController implements WidgetController {
 	
 	public CommunicationGroupController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if(controller == null){
 			return;
 		}

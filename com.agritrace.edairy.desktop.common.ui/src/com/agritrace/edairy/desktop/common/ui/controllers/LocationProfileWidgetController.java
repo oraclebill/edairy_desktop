@@ -23,17 +23,17 @@ public class LocationProfileWidgetController implements WidgetController {
 		addressGroup = new AddressGroupWidgetController(controller);
 		directionGroup = new DirectionGroupController(controller);
 		mapGroup = new MapGroupController(controller);
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if (controller == null) {
 			return;
 		}
-		addressGroup.configue();
-		directionGroup.configue();
-		mapGroup.configue();
+		addressGroup.configure();
+		directionGroup.configure();
+		mapGroup.configure();
 
 	}
 

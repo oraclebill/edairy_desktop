@@ -47,18 +47,21 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 
 	public MemberTransactionWidgetController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if(controller == null){
 			return;
 		}
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.TRANSACTION_FILTER_STARTDATE, ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON, this);
 		transactionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
+		if(transactionTable == null){
+			return;
+		}		
 		transactionTable.bindToModel(new WritableList(transactionRecords, AccountTransaction.class),
 				AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
+		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.TRANSACTION_FILTER_STARTDATE, ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON, this);
 
 	}
 
@@ -69,6 +72,9 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 
 	@Override
 	public void setInputModel(Object model) {
+		if(transactionTable == null){
+			return;
+		}		
 		this.member =(Membership)model;
 		if(transactionTable != null){
 			updateBinding();
@@ -88,6 +94,9 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 
 	@Override
 	public void updateBinding() {
+		if(transactionTable == null){
+			return;
+		}		
 		transactionRecords.clear();
 		transactionRecords.addAll(getAccountTransactions());
 		transactionTable.setColumnFormatter(1, new ColumnFormatter() {
@@ -113,6 +122,9 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	@Override
 	public List<AccountTransaction> filter(String startDate, String endDate) {
 		List<AccountTransaction> objs = new ArrayList<AccountTransaction>();
+		if(transactionTable == null){
+			return objs;
+		}		
 		if(transactionRecords != null && !transactionRecords.isEmpty()){
 			try {
 				final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {

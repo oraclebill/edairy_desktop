@@ -34,12 +34,12 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 
 	public AddressGroupWidgetController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if(controller == null){
 			return;
 		}

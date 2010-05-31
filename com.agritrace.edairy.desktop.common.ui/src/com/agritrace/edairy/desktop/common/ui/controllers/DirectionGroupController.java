@@ -18,11 +18,11 @@ public class DirectionGroupController implements WidgetController {
 	
 	public DirectionGroupController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		if(controller == null){
 			return;
 		}

@@ -29,11 +29,11 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 	
 	public MemberInfoGroupController(IController controller){
 		this.controller = controller;
-		configue();
+		configure();
 	}
 
 	@Override
-	public void configue() {
+	public void configure() {
 		appliedDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_applicationDate);
 		effectiveDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_effectiveDate);
 		comboStatus = controller.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);

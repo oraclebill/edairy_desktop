@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecrodsWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
@@ -42,7 +42,8 @@ public class CreateMemberDialogController extends AbstractWindowController{
 	private MemberFarmWidgetController farmController;
 
 	// collection tab
-	private MemberCollectionRecrodsWidgetController collectionController;
+	private MemberCollectionRecordsWidgetController collectionController;
+	
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
@@ -70,11 +71,11 @@ public class CreateMemberDialogController extends AbstractWindowController{
 		configureUpperPanel();
 		
 		memberProfileController = new MemberProfileWidgetController(this);
-		farmController = new MemberFarmWidgetController(this);
-		collectionController = new MemberCollectionRecrodsWidgetController(this);
-		liveStockController = new MemberLiveStockWidgetController(this);
-		containerController = new MemberContainerWidgetController(this);
-		transactionController = new MemberTransactionWidgetController(this);
+		farmController 			= new MemberFarmWidgetController(this);
+		collectionController 	= new MemberCollectionRecordsWidgetController(this);
+		liveStockController 	= new MemberLiveStockWidgetController(this);
+		containerController 	= new MemberContainerWidgetController(this);
+		transactionController 	= new MemberTransactionWidgetController(this);
 
 		if (selectedMember != null) {
 			updateBindings();
