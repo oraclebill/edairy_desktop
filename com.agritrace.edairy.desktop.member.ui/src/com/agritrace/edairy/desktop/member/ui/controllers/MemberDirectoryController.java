@@ -19,6 +19,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.MemberRegisterDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
@@ -26,8 +27,8 @@ import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 
 public class MemberDirectoryController extends SubModuleController {
 
-	private ITableRidget memberList;
-	private Dairy dairy;
+	private MemberRepository repository;
+	private ITableRidget memberListRidget;
 	private IActionRidget viewRidget;
 	private final String[] memberPropertyNames = { "memberId", "member", "status", "member", "account", "account",
 			"account" };
@@ -35,27 +36,27 @@ public class MemberDirectoryController extends SubModuleController {
 			"Monthly Credit Sales", "Credit Balance" };
 	private List<Membership> membershipList = new ArrayList<Membership>();
 
-	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
+	public static final String DELETE_DIALOG_TITLE = "Delete Member";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 
 	@Override
 	public void configureRidgets() {
 		loadDairy();
-		configueMemberTable();
+		configureMemberTable();
 	}
 
-	private void configueMemberTable() {
+	private void configureMemberTable() {
 
-		memberList = getRidget(ITableRidget.class, ViewWidgetId.MEMBERLIST_MEMBERTABLE);
+		memberListRidget = getRidget(ITableRidget.class, ViewWidgetId.MEMBERLIST_MEMBERTABLE);
 
-		if (dairy == null) {
+		if (repository == null) {
 			loadDairy();
 		}
-		if (dairy != null) {
-			membershipList = dairy.getMemberships();
-			memberList.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,
+		if (repository != null) {
+			membershipList = repository.all();
+			memberListRidget.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,
 					memberPropertyNames, memberColumnHeaders);
-			memberList.setColumnFormatter(1, new ColumnFormatter() {
+			memberListRidget.setColumnFormatter(1, new ColumnFormatter() {
 				public String getText(Object element) {
 					if (element instanceof Membership) {
 						Person member = ((Membership) element).getMember();
@@ -66,7 +67,7 @@ public class MemberDirectoryController extends SubModuleController {
 					return null;
 				}
 			});
-			memberList.setColumnFormatter(3, new ColumnFormatter() {
+			memberListRidget.setColumnFormatter(3, new ColumnFormatter() {
 				public String getText(Object element) {
 					if (element instanceof Membership) {
 						Person member = ((Membership) element).getMember();
@@ -77,36 +78,36 @@ public class MemberDirectoryController extends SubModuleController {
 					return null;
 				}
 			});
-			memberList.setColumnFormatter(4, new ColumnFormatter() {
+			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
 
 				public String getText(Object element) {
 					return "1000";
 				}
 			});
-			memberList.setColumnFormatter(5, new ColumnFormatter() {
+			memberListRidget.setColumnFormatter(5, new ColumnFormatter() {
 
 				public String getText(Object element) {
 					return "10000";
 				}
 			});
 
-			memberList.setColumnFormatter(6, new ColumnFormatter() {
+			memberListRidget.setColumnFormatter(6, new ColumnFormatter() {
 
 				public String getText(Object element) {
 					return "2000";
 				}
 			});
-			memberList.addSelectionListener(new ISelectionListener() {
+			memberListRidget.addSelectionListener(new ISelectionListener() {
 
 				@Override
 				public void ridgetSelected(SelectionEvent event) {
-					if (event.getSource() == memberList) {
-						viewRidget.setEnabled(memberList.getSelection().size() > 0);
+					if (event.getSource() == memberListRidget) {
+						viewRidget.setEnabled(memberListRidget.getSelection().size() > 0);
 					}
 				}
 
 			});
-			memberList.updateFromModel();
+			memberListRidget.updateFromModel();
 			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new IActionListener() {
 
 				@Override
@@ -120,7 +121,7 @@ public class MemberDirectoryController extends SubModuleController {
 					if (returnCode == AbstractWindowController.OK) {
 						selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
 						membershipList.set(index, selectedMember);
-						memberList.updateFromModel();
+						memberListRidget.updateFromModel();
 					} else {
 						// System.out.println("return code "+returnCode);
 					}
@@ -134,7 +135,7 @@ public class MemberDirectoryController extends SubModuleController {
 
 					@Override
 					public void callback() {
-						Membership selectedMember = (Membership) memberList.getSelection().get(0);
+						Membership selectedMember = (Membership) memberListRidget.getSelection().get(0);
 						int index = membershipList.indexOf(selectedMember);
 						final ViewMemberDialog memberDialog = new ViewMemberDialog();
 						memberDialog.getController().setContext("selectedMember", selectedMember);
@@ -143,7 +144,7 @@ public class MemberDirectoryController extends SubModuleController {
 						if (returnCode == AbstractWindowController.OK) {
 							selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
 							membershipList.set(index, selectedMember);
-							memberList.updateFromModel();
+							memberListRidget.updateFromModel();
 						} else if (returnCode == 2) {
 							// confirm for delete
 							if (selectedMember != null) {
@@ -156,7 +157,7 @@ public class MemberDirectoryController extends SubModuleController {
 								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
 										DELETE_DIALOG_TITLE, message)) {
 									membershipList.remove(selectedMember);
-									memberList.updateFromModel();
+									memberListRidget.updateFromModel();
 								}
 							}
 						}
@@ -167,7 +168,7 @@ public class MemberDirectoryController extends SubModuleController {
 	}
 
 	private void loadDairy() {
-		dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
+		repository = new MemberRepository();
 	}
 
 }
