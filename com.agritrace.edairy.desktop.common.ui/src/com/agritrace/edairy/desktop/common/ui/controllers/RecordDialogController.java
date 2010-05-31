@@ -167,7 +167,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		}
 	}
 
-	private int getActionType() {
+	protected int getActionType() {
 		return this.actionType;
 	}
 

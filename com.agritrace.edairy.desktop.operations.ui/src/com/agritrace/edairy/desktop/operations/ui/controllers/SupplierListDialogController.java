@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
@@ -12,6 +13,7 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
@@ -33,11 +35,15 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		// configure supplier ID
 		final Supplier supplier = getWorkingCopy();
 		ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
+		if (this.getActionType() != AbstractRecordListController.ACTION_NEW) {
+			supplierId.setOutputOnly(false);
+		}
 		supplierId.setDirectWriting(true);
-		supplierId.setOutputOnly(false);
-		supplierId.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__SUPPLIER_ID.getName());
+		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		supplierId.updateFromModel();
-		supplierId.setOutputOnly(true);
+		if (this.getActionType() != AbstractRecordListController.ACTION_NEW) {
+			supplierId.setOutputOnly(true);
+		}
 
 		// Status
 		IComboRidget statusCombo = getRidget(IComboRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_STATUS);
@@ -58,11 +64,14 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		legalName.updateFromModel();
 
 		// Category
-		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$
-		category.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__CATEGORIES.getName());
-		category.bindToModel(Observables.staticObservableList(SupplierCategory.getCategoriesList()),
-				SupplierCategory.class, "name");
-		category.updateFromModel();
+//		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$
+//		Supplier supplierBean = (Supplier) EMFUtil.createObject(this.getEClass());
+//		supplierBean.getCategories().addAll(SupplierCategory.getCategories());
+//		category.bindToModel(EMFObservables.observeList(supplier,
+//				DairyPackage.Literals.SUPPLIER__CATEGORIES), "value");
+//		category.bindMultiSelectionToModel(EMFObservables.observeList(supplier,
+//				DairyPackage.Literals.SUPPLIER__CATEGORIES));
+//		category.updateFromModel();
 
 		// Description
 		ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION); //$NON-NLS-1$

@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.common.ui.util;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -96,6 +97,10 @@ public class EMFUtil {
 
 						object.eSet(reference, createWorkingCopy(reference.getEReferenceType(), depth - 1));
 
+					}
+					else if (reference.isContainment())
+					{
+						object.eSet(reference, new BasicEList());
 					}
 				}
 			}

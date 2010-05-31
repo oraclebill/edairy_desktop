@@ -79,10 +79,10 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	protected abstract RecordDialog<T,?> getEditDialog(int dialogStyle, T selectedObj);
 
 	private T selectedEObject;
-	// private T container;
+//	private T container;
 	private ITableRidget table;
 	private final List<T> tableContents = new ArrayList<T>();
-
+	
 //	private final ISelectionListener selectionListener = new ISelectionListener() {
 //
 //		@Override
@@ -108,19 +108,19 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		super(navigationNode);
 	}
 
-	// public AbstractRecordListController(T container) {
-	// super();
-	// // this.container = container;
-	// }
+//	public AbstractRecordListController(T container) {
+//		super();
+////		this.container = container;
+//	}
 
-	// /**
-	// * Gets the container
-	// *
-	// * @return
-	// */
-	// public T getContainer() {
-	// return this.container;
-	// }
+//	/**
+//	 * Gets the container
+//	 * 
+//	 * @return
+//	 */
+//	public T getContainer() {
+//		return this.container;
+//	}
 
 	/**
 	 * Gets the selectedObject
@@ -137,10 +137,10 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	public void refreshTableContents() {
 		tableContents.clear();
-		tableContents.addAll(getFilteredResult());
-		table.updateFromModel();
+		tableContents.addAll(getFilteredResult());	
+		
 	}
-
+	
 	private void configureButtonsRidget() {
 		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
 		if (newBtnRidget != null) {
@@ -177,6 +177,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 				public void callback() {
 					// Rebind the updateFromModel to refresh the tables
 					refreshTableContents();
+					table.updateFromModel();
 				}
 			});
 		}
@@ -200,6 +201,8 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		super.configureRidgets();
 		// Configure filter ridgets
 		configureFilterRidgets();
+		// Use default conditions to filter
+		refreshTableContents();
 		// Configured Table ridgets
 		configureTableRidget();
 		configureButtonsRidget();
@@ -209,7 +212,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	protected void configureTableRidget() {
 		// Configure Table Widgets
 		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
-		// table.addSelectionListener(selectionListener);
+//		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
 		table.addDoubleClickListener(new IActionListener() {
 			@Override
@@ -237,25 +240,30 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	@SuppressWarnings("unchecked")
 	private void popUpDialog(int dialogStyle) {
 		RecordDialog<T,?> dialog;
-
-		if (dialogStyle == ACTION_NEW)
-			dialog = getEditDialog(dialogStyle, (T) EMFUtil.createObject(getEClass()));
+		
+		if (dialogStyle == ACTION_NEW) 
+			dialog = getEditDialog(dialogStyle, createNewModle());
 		else {
 			final T selectedObj = getSelectedEObject();
-			if (selectedObj == null)
+			if ( selectedObj == null ) 
 				return;
 			else
 				dialog = getEditDialog(dialogStyle, selectedObj);
 		}
 		if (dialogStyle == ACTION_VIEW) {
-			// dialog.setReadOnly(); // TODO:
+//			dialog.setReadOnly(); 	// TODO:
 		}
-		dialog.open();
-		// if (ret == Window.OK) {
-		// table.updateFromModel();
-		// }
+		int ret = dialog.open();
 		refreshTableContents();
-
+		table.updateFromModel();
+	}
+	
+	/**
+	 * Create new model while createing a new record
+	 * @return
+	 */
+	protected T createNewModle() {
+		return (T) EMFUtil.createObject(getEClass());
 	}
 
 	/**
