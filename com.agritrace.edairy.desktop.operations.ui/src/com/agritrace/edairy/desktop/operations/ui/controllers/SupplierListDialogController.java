@@ -9,6 +9,7 @@ import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -109,6 +110,17 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			category.bindMultiSelectionToModel(selection, "values");
 			category.updateMultiSelectionFromModel();
 		}
+//=======
+//		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$
+//		Supplier supplierBean = (Supplier) EMFUtil.createObject(this.getEClass());
+//		supplierBean.getCategories().addAll(SupplierCategory.getCategories());
+//		category.bindToModel(EMFObservables.observeList(supplier,
+//				DairyPackage.Literals.SUPPLIER__CATEGORIES), "value");
+//		category.bindMultiSelectionToModel(EMFObservables.observeList(supplier,
+//				DairyPackage.Literals.SUPPLIER__CATEGORIES));
+//		category.updateFromModel();
+//>>>>>>> 1) Fixed the issue to create a new model 
+		
 		// Description
 		ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION); //$NON-NLS-1$
 		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());
