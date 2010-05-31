@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.ui;
+package com.agritrace.edairy.desktop;
 
 import java.io.IOException;
 import java.text.ParseException;

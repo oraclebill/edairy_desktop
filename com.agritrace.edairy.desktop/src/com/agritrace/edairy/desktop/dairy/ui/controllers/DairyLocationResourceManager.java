@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
+import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
@@ -29,7 +30,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
-import com.agritrace.edairy.desktop.ui.EDairyActivator;
 
 public class DairyLocationResourceManager {
     public static final String DAIRY_LOCATIONS_RESOURCE = IDairyResourceManager.XMLDB_BASE + "/dairyLocations.xml";

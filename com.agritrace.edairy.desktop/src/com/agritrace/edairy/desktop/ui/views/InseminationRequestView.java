@@ -19,8 +19,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
-import com.agritrace.edairy.desktop.ui.EDairyActivator;
 
 public class InseminationRequestView extends VeterinaryRequestView {
 

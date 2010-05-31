@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eDairy
 Bundle-SymbolicName: com.agritrace.edairy.desktop;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.edairy.desktop.ui.EDairyActivator
+Bundle-Activator: com.agritrace.edairy.desktop.EDairyActivator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
