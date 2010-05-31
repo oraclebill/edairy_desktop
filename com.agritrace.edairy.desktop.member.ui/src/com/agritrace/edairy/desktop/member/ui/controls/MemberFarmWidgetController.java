@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.member.ui.controls;
 
 import java.util.ArrayList;
 import java.util.List;

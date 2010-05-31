@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.member.ui.controls;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +30,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddAnimalDialog;
 
-public class MemberLiveStockController implements WidgetController, ISelectionListener, DateRangeFilter {
+public class MemberLiveStockWidgetController implements WidgetController, ISelectionListener, DateRangeFilter {
 
 	private IController controller;
 	private Object inputModel;
@@ -48,7 +48,7 @@ public class MemberLiveStockController implements WidgetController, ISelectionLi
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	private final List<RegisteredAnimal> animalInput = new ArrayList<RegisteredAnimal>();
 
-	public MemberLiveStockController(IController controller){
+	public MemberLiveStockWidgetController(IController controller){
 		this.controller = controller;
 		configue();
 	}

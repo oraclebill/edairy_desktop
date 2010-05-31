@@ -6,7 +6,7 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 
-public class ViewMemberDialogController extends MemberRegisterDialogController {
+public class ViewMemberDialogController extends CreateMemberDialogController {
 	
 	private ILabelRidget memberName;
 	private ILabelRidget memberId;

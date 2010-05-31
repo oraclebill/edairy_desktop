@@ -15,10 +15,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberRegisterDialogController;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.CreateMemberDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
-public class MemberRegisterDialog extends AbstractDialogView {
+public class CreateMemberDialog extends AbstractDialogView {
 
 	private Composite main;
 
@@ -30,7 +30,7 @@ public class MemberRegisterDialog extends AbstractDialogView {
 	private Button deleteButton;
 
 
-	public MemberRegisterDialog() {
+	public CreateMemberDialog() {
 		super(null);
 	}
 
@@ -53,7 +53,7 @@ public class MemberRegisterDialog extends AbstractDialogView {
 
 	@Override
 	protected AbstractWindowController createController() {
-		return new MemberRegisterDialogController();
+		return new CreateMemberDialogController();
 	}
 
 	private void createMemberSelectorGroup(Composite composite) {

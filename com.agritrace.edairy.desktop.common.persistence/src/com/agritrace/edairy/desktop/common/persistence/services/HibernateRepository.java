@@ -132,6 +132,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		Transaction t = session.beginTransaction();
 		try {
 			r.run();
+			t.commit();
 		} catch (Exception ex) {
 			t.rollback();
 			throw new TransactionException(entityName, ex);

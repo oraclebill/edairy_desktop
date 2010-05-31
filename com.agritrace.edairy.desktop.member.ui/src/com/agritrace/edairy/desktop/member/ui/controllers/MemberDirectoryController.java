@@ -16,12 +16,10 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.MemberRegisterDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.CreateMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 
@@ -57,6 +55,7 @@ public class MemberDirectoryController extends SubModuleController {
 			memberListRidget.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,
 					memberPropertyNames, memberColumnHeaders);
 			memberListRidget.setColumnFormatter(1, new ColumnFormatter() {
+				@Override
 				public String getText(Object element) {
 					if (element instanceof Membership) {
 						Person member = ((Membership) element).getMember();
@@ -68,6 +67,7 @@ public class MemberDirectoryController extends SubModuleController {
 				}
 			});
 			memberListRidget.setColumnFormatter(3, new ColumnFormatter() {
+				@Override
 				public String getText(Object element) {
 					if (element instanceof Membership) {
 						Person member = ((Membership) element).getMember();
@@ -80,52 +80,52 @@ public class MemberDirectoryController extends SubModuleController {
 			});
 			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
 
+				@Override
 				public String getText(Object element) {
-					return "1000";
+					return "N/A";
 				}
 			});
 			memberListRidget.setColumnFormatter(5, new ColumnFormatter() {
 
+				@Override
 				public String getText(Object element) {
-					return "10000";
+					return "N/A";
 				}
 			});
 
 			memberListRidget.setColumnFormatter(6, new ColumnFormatter() {
 
+				@Override
 				public String getText(Object element) {
-					return "2000";
+					return "N/A";
 				}
 			});
 			memberListRidget.addSelectionListener(new ISelectionListener() {
-
 				@Override
 				public void ridgetSelected(SelectionEvent event) {
 					if (event.getSource() == memberListRidget) {
 						viewRidget.setEnabled(memberListRidget.getSelection().size() > 0);
 					}
 				}
-
 			});
 			memberListRidget.updateFromModel();
 			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new IActionListener() {
-
 				@Override
 				public void callback() {
 					Membership selectedMember = EMFObjectUtil.createMembership();
 					int index = membershipList.indexOf(selectedMember);
-					final MemberRegisterDialog memberDialog = new MemberRegisterDialog();
+					final CreateMemberDialog memberDialog = new CreateMemberDialog();
 					memberDialog.getController().setContext("selectedMember", selectedMember);
 
 					int returnCode = memberDialog.open();
 					if (returnCode == AbstractWindowController.OK) {
 						selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+						repository.saveNew(selectedMember);
 						membershipList.set(index, selectedMember);
 						memberListRidget.updateFromModel();
 					} else {
 						// System.out.println("return code "+returnCode);
 					}
-
 				}
 			});
 			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_VIEW);
@@ -143,6 +143,7 @@ public class MemberDirectoryController extends SubModuleController {
 						int returnCode = memberDialog.open();
 						if (returnCode == AbstractWindowController.OK) {
 							selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+							repository.update(selectedMember);
 							membershipList.set(index, selectedMember);
 							memberListRidget.updateFromModel();
 						} else if (returnCode == 2) {

@@ -15,13 +15,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.member.ui.views.MemberAccountWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberCollectionRecordsWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberContainerWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberFarmWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberLiveStockWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberProfileWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberTransactionWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidget;
 
 
 

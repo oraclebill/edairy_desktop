@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
 import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberContainerWidget;
-import com.agritrace.edairy.desktop.member.ui.views.MemberLiveStockWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 
 public class FarmTabFolder {
 

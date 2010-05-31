@@ -9,8 +9,8 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberContainerWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberLiveStockController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 
 public class ViewFarmDialogController extends AbstractWindowController {
@@ -33,7 +33,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 	private MemberContainerWidgetController containerController;
 
 	// live stock tab
-	private MemberLiveStockController liveStockController;
+	private MemberLiveStockWidgetController liveStockController;
 	
 	public static final String FARM_ID_LABEL_PREFIX= "Farm Id :";
 	public static final String FARM_NAME_LABEL_PREFIX= "Farm Name :";
@@ -55,7 +55,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 
 		locationProfileController = new LocationProfileWidgetController(this);
 
-		liveStockController = new MemberLiveStockController(this);
+		liveStockController = new MemberLiveStockWidgetController(this);
 		containerController = new MemberContainerWidgetController(this);
 
 		if (selectedNode != null) {

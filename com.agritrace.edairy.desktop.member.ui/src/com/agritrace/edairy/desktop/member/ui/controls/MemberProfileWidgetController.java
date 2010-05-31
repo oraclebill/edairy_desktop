@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
@@ -6,6 +6,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberInfoGroupController;
 
 public class MemberProfileWidgetController implements WidgetController {
 

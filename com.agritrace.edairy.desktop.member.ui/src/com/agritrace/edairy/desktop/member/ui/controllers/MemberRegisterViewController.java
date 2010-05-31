@@ -16,6 +16,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecrodsWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
@@ -37,7 +43,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 	MemberContainerWidgetController containerController;
 
 	// live stock tab
-	MemberLiveStockController liveStockController;
+	MemberLiveStockWidgetController liveStockController;
 
 	// farm tab
 	MemberFarmWidgetController farmController;
@@ -58,7 +64,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 		memberProfileController = new MemberProfileWidgetController(this);
 		farmController = new MemberFarmWidgetController(this);
 		collectionController = new MemberCollectionRecrodsWidgetController(this);
-		liveStockController = new MemberLiveStockController(this);
+		liveStockController = new MemberLiveStockWidgetController(this);
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
 		

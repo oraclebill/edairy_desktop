@@ -9,15 +9,16 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberCollectionRecrodsWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberContainerWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberFarmWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberLiveStockController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberProfileWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberTransactionWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecrodsWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 
-public class MemberRegisterDialogController extends AbstractWindowController{
+public class CreateMemberDialogController extends AbstractWindowController{
 
 	public static final String DIALOG_TITLE = "Membership";
 	
@@ -35,7 +36,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 	private MemberContainerWidgetController containerController;
 
 	// live stock tab
-	private MemberLiveStockController liveStockController;
+	private MemberLiveStockWidgetController liveStockController;
 
 	// farm tab
 	private MemberFarmWidgetController farmController;
@@ -45,8 +46,18 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
-	public MemberRegisterDialogController() {
+	private MemberRepository repository;
 
+	public CreateMemberDialogController() {
+
+	}
+	
+	public MemberRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(MemberRepository repository) {
+		this.repository = repository;
 	}
 
 	@Override
@@ -61,7 +72,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 		memberProfileController = new MemberProfileWidgetController(this);
 		farmController = new MemberFarmWidgetController(this);
 		collectionController = new MemberCollectionRecrodsWidgetController(this);
-		liveStockController = new MemberLiveStockController(this);
+		liveStockController = new MemberLiveStockWidgetController(this);
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
 
@@ -82,6 +93,7 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 				getWindowRidget().dispose();
 			}
 		});
+		
 		final IActionRidget cancelAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_cacelButton);
 		cancelAction.addListener(new IActionListener() {
 			@Override
@@ -138,6 +150,8 @@ public class MemberRegisterDialogController extends AbstractWindowController{
 
 	protected void saveMember() {
 		if (selectedMember != null) {
+			repository.update(selectedMember);
+
 			//			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
 			//			try {
 			//				DairyDemoResourceManager.INSTANCE.saveFarmResource();

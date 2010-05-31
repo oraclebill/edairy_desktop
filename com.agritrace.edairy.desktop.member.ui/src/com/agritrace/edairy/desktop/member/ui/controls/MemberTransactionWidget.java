@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.views;
+package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;

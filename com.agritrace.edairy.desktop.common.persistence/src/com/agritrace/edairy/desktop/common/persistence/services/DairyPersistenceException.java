@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
-public class DairyPersistenceException extends Exception {
+public class DairyPersistenceException extends RuntimeException {
 
 	public DairyPersistenceException() {
 		super();

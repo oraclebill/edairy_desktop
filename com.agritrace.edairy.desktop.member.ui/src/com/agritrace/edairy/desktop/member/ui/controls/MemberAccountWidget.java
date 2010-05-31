@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.views;
+package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;

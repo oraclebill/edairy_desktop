@@ -28,6 +28,13 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidget;
 
 public class MemberSearchView extends SubModuleView implements SelectionListener {
 
