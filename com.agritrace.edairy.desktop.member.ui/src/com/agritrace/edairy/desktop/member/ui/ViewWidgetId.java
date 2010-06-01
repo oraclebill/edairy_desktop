@@ -214,5 +214,5 @@ public class ViewWidgetId {
 	public static final String VIEW_CONTAINER_COMPACITY="CONTAINER_COMPACITY";
 	
 	public static final String memberInfo_formattedName = "member.info.name.formattedText";
-public static final String memberPhotoEditLink = "member.info.photo.editlink;
+public static final String memberPhotoEditLink = "member.info.photo.editlink";
 }
