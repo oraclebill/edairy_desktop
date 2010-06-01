@@ -9,7 +9,10 @@ import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+<<<<<<< HEAD
 import org.eclipse.emf.databinding.EMFObservables;
+=======
+>>>>>>> Category Multi Selection binding in Supplier List dialog can work
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -97,7 +100,11 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			selection.addPropertyChangeListener(new PropertyChangeListener() {
 				public void propertyChange(PropertyChangeEvent evt) {
 					// Get current selections
+<<<<<<< HEAD
 					List<?> values = selection.getValues();
+=======
+					List values = selection.getValues();
+>>>>>>> Category Multi Selection binding in Supplier List dialog can work
 					supplier.getCategories().clear();
 					// Update the working copy
 					for (Object category : values) {
@@ -110,6 +117,7 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			category.bindMultiSelectionToModel(selection, "values");
 			category.updateMultiSelectionFromModel();
 		}
+<<<<<<< HEAD
 //=======
 //		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$
 //		Supplier supplierBean = (Supplier) EMFUtil.createObject(this.getEClass());
@@ -121,6 +129,8 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 //		category.updateFromModel();
 //>>>>>>> 1) Fixed the issue to create a new model 
 		
+=======
+>>>>>>> Category Multi Selection binding in Supplier List dialog can work
 		// Description
 		ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION); //$NON-NLS-1$
 		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());

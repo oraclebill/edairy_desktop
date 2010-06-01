@@ -85,7 +85,6 @@ public class SupplierListViewController extends
 		IListRidget categorieList = getRidget(IListRidget.class,
 				SupplierListView.BIND_ID_FILTER_CATEGORIES);
 
-//<<<<<<< HEAD
 
 		if (categorieList != null && categorieList.getSelection().size() > 0) {
 			categorieList.setSelectionType(SelectionType.SINGLE);
@@ -99,19 +98,6 @@ public class SupplierListViewController extends
 //			criteria =criteria.createCriteria("categories");
 //			criteria.add(Restrictions.eq("elt", ((SupplierCategory) categorieList.getSelection().get(0)).getName()));
 		}
-//=======
-//		// if (categorieList != null && categorieList.getSelection().size()>0) {
-//		// List<String> categories = new ArrayList<String>();
-//		// for (Object category:categorieList.getSelection())
-//		// {
-//		// if (category instanceof SupplierCategory)
-//		// {
-//		// categories.add(((SupplierCategory)category).getName());
-//		// }
-//		// }
-//		// criteria.add(Restrictions.in("categories", categories));
-//		// }
-//>>>>>>> 1) Fixed the issue to create a new model 
 
 		// Status
 		IComboRidget statusCombo = getRidget(IComboRidget.class,
