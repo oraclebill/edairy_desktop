@@ -28,16 +28,15 @@ import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
-public abstract class RecordDialogController<T extends EObject> extends
-		AbstractWindowController {
+public abstract class RecordDialogController<T extends EObject> extends AbstractWindowController {
 
 	// TODO: move these constants to a neutral API class... (was in dialog..)
 	public static final String BIND_ID_BUTTON_OK = "bind.id.btn.ok";
 	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
 
-	private Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
+	private final Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
 
-	private List<IActionListener> listeners = new ArrayList<IActionListener>();
+	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
 
 	private IRepository<T> myRepo;
 	private T workingCopy;
@@ -76,7 +75,7 @@ public abstract class RecordDialogController<T extends EObject> extends
 	public T getWorkingCopy() {
 		return workingCopy;
 	}
-	
+
 	public void setWorkingCopy(T obj) {
 		workingCopy = obj;
 	}
@@ -104,32 +103,28 @@ public abstract class RecordDialogController<T extends EObject> extends
 
 	@Override
 	public void configureRidgets() {
-		setWindowRidget((IWindowRidget) getRidget(IWindowRidget.class,
-				RIDGET_ID_WINDOW));
+		setWindowRidget(getRidget(IWindowRidget.class, RIDGET_ID_WINDOW));
 
 		ridgetPropertyMap.clear();
 		ridgetPropertyMap.putAll(configureRidgetPropertyMap());
 
-		for (Entry<String, EStructuralFeature> entry : ridgetPropertyMap
-				.entrySet()) {
+		for (final Entry<String, EStructuralFeature> entry : ridgetPropertyMap.entrySet()) {
 
-			IRidget ridget = getRidget(entry.getKey());
+			final IRidget ridget = getRidget(entry.getKey());
 			if (ridget instanceof IValueRidget) {
-				IValueRidget valueRidget = (IValueRidget) ridget;
-				IConverter converter = RidgetsConfigFactory.getInstance()
-						.getModel2UIConverter(entry.getValue(), valueRidget);
+				final IValueRidget valueRidget = (IValueRidget) ridget;
+				final IConverter converter = RidgetsConfigFactory.getInstance().getModel2UIConverter(entry.getValue(),
+						valueRidget);
 				if (converter != null) {
 					valueRidget.setModelToUIControlConverter(converter);
 				}
-				valueRidget.bindToModel(this.getWorkingCopy(), entry.getValue()
-						.getName());
+				valueRidget.bindToModel(this.getWorkingCopy(), entry.getValue().getName());
 				valueRidget.updateFromModel();
 			}
 
 		}
 
-		IActionRidget okButton = getRidget(IActionRidget.class,
-				BIND_ID_BUTTON_OK); //$NON-NLS-1$
+		final IActionRidget okButton = getRidget(IActionRidget.class, BIND_ID_BUTTON_OK);
 		okButton.addListener(new IActionListener() {
 
 			@Override
@@ -137,7 +132,7 @@ public abstract class RecordDialogController<T extends EObject> extends
 
 				try {
 					doOKPressed();
-				} catch (DairyPersistenceException e) {
+				} catch (final DairyPersistenceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -145,8 +140,7 @@ public abstract class RecordDialogController<T extends EObject> extends
 			}
 
 		});
-		IActionRidget cancelBtn = getRidget(IActionRidget.class,
-				BIND_ID_BUTTON_CANCEL); //$NON-NLS-1$
+		final IActionRidget cancelBtn = getRidget(IActionRidget.class, BIND_ID_BUTTON_CANCEL);
 		cancelBtn.addListener(new IActionListener() {
 
 			@Override
@@ -195,7 +189,7 @@ public abstract class RecordDialogController<T extends EObject> extends
 	}
 
 	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
-		Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
+		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
 		return map;
 	}
 
@@ -204,7 +198,7 @@ public abstract class RecordDialogController<T extends EObject> extends
 	}
 
 	private void notifierListeners() {
-		for (IActionListener listener : this.listeners) {
+		for (final IActionListener listener : this.listeners) {
 			listener.callback();
 		}
 	}
@@ -213,10 +207,10 @@ public abstract class RecordDialogController<T extends EObject> extends
 		try {
 			DairyDemoResourceManager.INSTANCE.saveFarmResource();
 			DairyDemoResourceManager.INSTANCE.saveDairyResource();
-		} catch (IllegalArgumentException e) {
+		} catch (final IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -237,6 +231,7 @@ public abstract class RecordDialogController<T extends EObject> extends
 	/**
 	 * @since 2.0
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
 		R ridget = (R) getRidget(id);
@@ -246,10 +241,9 @@ public abstract class RecordDialogController<T extends EObject> extends
 		}
 		if (RienaStatus.isTest()) {
 			try {
-				if (ridgetClazz.isInterface()
-						|| Modifier.isAbstract(ridgetClazz.getModifiers())) {
-					Class<R> mappedRidgetClazz = (Class<R>) ClassRidgetMapper
-							.getInstance().getRidgetClass(ridgetClazz);
+				if (ridgetClazz.isInterface() || Modifier.isAbstract(ridgetClazz.getModifiers())) {
+					final Class<R> mappedRidgetClazz = (Class<R>) ClassRidgetMapper.getInstance().getRidgetClass(
+							ridgetClazz);
 					if (mappedRidgetClazz != null) {
 						ridget = mappedRidgetClazz.newInstance();
 					}
@@ -259,9 +253,9 @@ public abstract class RecordDialogController<T extends EObject> extends
 				} else {
 					ridget = ridgetClazz.newInstance();
 				}
-			} catch (InstantiationException e) {
+			} catch (final InstantiationException e) {
 				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
 			}
 

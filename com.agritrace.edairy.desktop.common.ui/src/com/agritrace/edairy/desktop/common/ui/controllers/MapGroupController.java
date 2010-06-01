@@ -17,14 +17,15 @@ public class MapGroupController implements WidgetController {
 	private ITextRidget latituteTxt;
 	private ITextRidget longtituteTxt;
 
-	public MapGroupController(IController controller){
+	public MapGroupController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
+
 	@Override
 	public void configure() {
-		latituteTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.LATITUDE_TEXT);
-		longtituteTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.LONGTITUDE_TEXT);
+		latituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LATITUDE_TEXT);
+		longtituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
 
 	}
 
@@ -35,8 +36,8 @@ public class MapGroupController implements WidgetController {
 
 	@Override
 	public void setInputModel(Object model) {
-		map =(MapLocation)model;
-		if(controller != null){
+		map = (MapLocation) model;
+		if (controller != null) {
 			updateBinding();
 		}
 
@@ -55,14 +56,14 @@ public class MapGroupController implements WidgetController {
 
 	@Override
 	public void updateBinding() {
-		if(map != null){
+		if (map != null) {
 			latituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LATITUDE.getName());
 			latituteTxt.setModelToUIControlConverter(new NumberToStringConverter(Double.class));
 			latituteTxt.updateFromModel();
 			longtituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LONGITUDE.getName());
 			latituteTxt.setModelToUIControlConverter(new NumberToStringConverter(Double.class));
 			longtituteTxt.updateFromModel();
-		}else{
+		} else {
 			latituteTxt.setText("");
 			longtituteTxt.setText("");
 		}

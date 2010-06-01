@@ -21,20 +21,20 @@ import org.eclipse.swt.widgets.Text;
  */
 public class LookupComposite {
 
-	private List<Object> controls = new ArrayList<Object>();
-	private String label;
-	private Image icon;
-	private String textBindId;
-	private String buttonId;
+	private final List<Object> controls = new ArrayList<Object>();
+	private final String label;
+	private final Image icon;
+	private final String textBindId;
+	private final String buttonId;
 
 	/**
-	 * @param label Label of lookup field
+	 * @param label
+	 *            Label of lookup field
 	 * @param icon
 	 * @param textBindId
 	 * @param buttonBindId
 	 */
-	public LookupComposite(String label, Image icon, String textBindId,
-			String buttonBindId) {
+	public LookupComposite(String label, Image icon, String textBindId, String buttonBindId) {
 
 		this.label = label;
 		this.icon = icon;
@@ -49,16 +49,14 @@ public class LookupComposite {
 
 	}
 
-	private void createControl(Composite parent, String label, Image icon,
-			String textBindId, String buttonBindId) {
+	private void createControl(Composite parent, String label, Image icon, String textBindId, String buttonBindId) {
 
 		UIControlsFactory.createLabel(parent, label);
-		Text memberText = UIControlsFactory.createText(parent, SWT.None);
+		final Text memberText = UIControlsFactory.createText(parent, SWT.None);
 		memberText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		this.addUIControl(memberText, textBindId);
 		// Search Button
-		ImageButton memberSearchButton = UIControlsFactory.createImageButton(
-				parent, SWT.None);
+		final ImageButton memberSearchButton = UIControlsFactory.createImageButton(parent, SWT.None);
 		memberSearchButton.setImage(icon);
 		this.addUIControl(memberSearchButton, buttonBindId);
 	}
@@ -78,8 +76,7 @@ public class LookupComposite {
 		Assert.isNotNull(uiControl);
 		Assert.isNotNull(bindingId);
 		controls.add(uiControl);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(uiControl,
-				bindingId);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(uiControl, bindingId);
 	}
 
 }

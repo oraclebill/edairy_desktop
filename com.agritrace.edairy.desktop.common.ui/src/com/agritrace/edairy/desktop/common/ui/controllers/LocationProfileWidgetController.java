@@ -10,13 +10,12 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 
 public class LocationProfileWidgetController implements WidgetController {
 
-	private IController controller;
+	private final IController controller;
 	private Location location;
 
-	
-	private AddressGroupWidgetController addressGroup;
-	private DirectionGroupController directionGroup;
-	private MapGroupController mapGroup;
+	private final AddressGroupWidgetController addressGroup;
+	private final DirectionGroupController directionGroup;
+	private final MapGroupController mapGroup;
 
 	public LocationProfileWidgetController(IController controller) {
 		this.controller = controller;
@@ -44,8 +43,8 @@ public class LocationProfileWidgetController implements WidgetController {
 
 	@Override
 	public void setInputModel(Object model) {
-		this.location = (Location)model;
-		if(controller != null){
+		this.location = (Location) model;
+		if (controller != null) {
 			updateBinding();
 		}
 
@@ -65,16 +64,16 @@ public class LocationProfileWidgetController implements WidgetController {
 
 	@Override
 	public void updateBinding() {
-		if (location!= null) {
-			PostalLocation postalLocation = location.getPostalLocation();
+		if (location != null) {
+			final PostalLocation postalLocation = location.getPostalLocation();
 			addressGroup.setInputModel(postalLocation);
-			
-			MapLocation map = location.getMapLocation();
+
+			final MapLocation map = location.getMapLocation();
 			mapGroup.setInputModel(map);
-			
-			DescriptiveLocation dLocation =  location.getDescriptiveLocation();
+
+			final DescriptiveLocation dLocation = location.getDescriptiveLocation();
 			directionGroup.setInputModel(dLocation);
-			
+
 		}
 	}
 

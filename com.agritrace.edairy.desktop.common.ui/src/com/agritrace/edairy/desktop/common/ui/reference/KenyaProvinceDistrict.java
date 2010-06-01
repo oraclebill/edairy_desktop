@@ -30,7 +30,7 @@ public enum KenyaProvinceDistrict {
 
 	WESTERN("Western", new String[] { "Kakamega District", "Vihiga District", "Bungoma District", "Busia District" }),
 
-	NYANZA("Nyanza", new String[] { "Siaya District", "Kisumu District", "Homa Bay District", "Migori District", 
+	NYANZA("Nyanza", new String[] { "Siaya District", "Kisumu District", "Homa Bay District", "Migori District",
 			"Kisii District", "Nyamira District" });
 
 	private final String displayName;
@@ -44,7 +44,7 @@ public enum KenyaProvinceDistrict {
 	public List<String> getProvinces() {
 		return Arrays.asList(provinces);
 	}
-	
+
 	@Override
 	public String toString() {
 		return displayName;

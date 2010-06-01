@@ -27,6 +27,7 @@ public class DateToStringConverter extends Converter {
 	/**
 	 * @see org.eclipse.core.databinding.conversion.IConverter#convert(java.lang.Object)
 	 */
+	@Override
 	public Object convert(Object fromObject) {
 		if (fromObject == null) {
 			return null;

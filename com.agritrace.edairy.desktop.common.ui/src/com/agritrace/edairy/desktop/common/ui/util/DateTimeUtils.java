@@ -6,13 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.eclipse.core.databinding.conversion.IConverter;
-import org.eclipse.riena.ui.ridgets.IRidget;
-import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
-import org.eclipse.riena.ui.ridgets.uibinding.DefaultBindingManager;
-import org.eclipse.riena.ui.ridgets.uibinding.IBindingPropertyLocator;
-import org.eclipse.riena.ui.ridgets.uibinding.IControlRidgetMapper;
-import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
@@ -33,31 +26,30 @@ public class DateTimeUtils {
 	/**
 	 * Default date format instance
 	 */
-	public static DateFormat DATE_FORMAT = new SimpleDateFormat(
-			DEFAULT_DATE_PATTERN);
+	public static DateFormat DATE_FORMAT = new SimpleDateFormat(DEFAULT_DATE_PATTERN);
 	/**
 	 * Date to String converter using default date pattern
 	 */
 	public static IConverter DEFAULT_DATE_STRING_CONVERTER = new DateToStringConverter(
 			DateTimeUtils.DEFAULT_DATE_PATTERN);
 
-	private static class BindingManager extends DefaultBindingManager {
-		public BindingManager(IBindingPropertyLocator propertyStrategy,
-				IControlRidgetMapper<Object> mapper) {
-			super(propertyStrategy, mapper);
+	// private static class BindingManager extends DefaultBindingManager {
+	// public BindingManager(IBindingPropertyLocator propertyStrategy,
+	// IControlRidgetMapper<Object> mapper) {
+	// super(propertyStrategy, mapper);
+	//
+	// }
+	//
+	// @Override
+	// public void injectRidget(IRidgetContainer ridgetContainer, String
+	// bindingProperty, IRidget ridget) {
+	// super.injectRidget(ridgetContainer, bindingProperty, ridget);
+	// }
+	// }
 
-		}
-
-		@Override
-		public void injectRidget(IRidgetContainer ridgetContainer,
-				String bindingProperty, IRidget ridget) {
-			super.injectRidget(ridgetContainer, bindingProperty, ridget);
-		}
-	}
-
-	private static final BindingManager BINDING_MAN = new BindingManager(
-			SWTBindingPropertyLocator.getInstance(), SwtControlRidgetMapper
-					.getInstance());
+	// private static final BindingManager BINDING_MAN = new
+	// BindingManager(SWTBindingPropertyLocator.getInstance(),
+	// SwtControlRidgetMapper.getInstance());
 
 	/**
 	 * Gets the first day of month of specific date
@@ -131,42 +123,45 @@ public class DateTimeUtils {
 	public static String getLastDayofMonth() {
 		return getLastDayofMonth(Calendar.getInstance().getTime());
 	}
-	
 
 	/**
 	 * Get one month date before the current date
+	 * 
 	 * @return date one month ago, {@link Date}
 	 */
-	public static Date getOneMonthBeforeCurrentDate(){
-		  Calendar now = Calendar.getInstance();
-		  now.add(Calendar.MONDAY,-1);
-		  return now.getTime();
+	public static Date getOneMonthBeforeCurrentDate() {
+		final Calendar now = Calendar.getInstance();
+		now.add(Calendar.MONDAY, -1);
+		return now.getTime();
 	}
-	
+
 	/**
 	 * Get the formatted String of the date one month before the current date.
+	 * 
 	 * @return the formatted String "MM/dd/yyyy"
 	 */
-	public static String getOneMonthBeforeCurrentDateString(){
-		Date date = getOneMonthBeforeCurrentDate();
+	public static String getOneMonthBeforeCurrentDateString() {
+		final Date date = getOneMonthBeforeCurrentDate();
 		return DateTimeUtils.DATE_FORMAT.format(date);
 	}
-	
+
 	/**
 	 * Get the current date
+	 * 
 	 * @return date one month ago, {@link Date}
 	 */
-	public static Date getCurrentDate(){
-		  Calendar now = Calendar.getInstance();
-		  return now.getTime();
+	public static Date getCurrentDate() {
+		final Calendar now = Calendar.getInstance();
+		return now.getTime();
 	}
-	
+
 	/**
 	 * Get the formatted String of the current date.
+	 * 
 	 * @return the formatted String "MM/dd/yyyy"
 	 */
-	public static String getCurrentDateString(){
-		Date date = getCurrentDate();
+	public static String getCurrentDateString() {
+		final Date date = getCurrentDate();
 		return DateTimeUtils.DATE_FORMAT.format(date);
 	}
 

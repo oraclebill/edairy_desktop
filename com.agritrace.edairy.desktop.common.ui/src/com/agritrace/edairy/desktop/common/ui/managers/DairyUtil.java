@@ -1,17 +1,12 @@
 package com.agritrace.edairy.desktop.common.ui.managers;
 
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createVehicle;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Calendar;
-
-import org.eclipse.swt.internal.win32.MEASUREITEMSTRUCT;
+import java.util.Set;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
@@ -49,6 +44,10 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 public class DairyUtil {
 
+	public static final Set<ContactMethod> NO_CONTACTS = Collections.emptySet();
+	public static final Set<Person> NO_PERSONS = Collections.emptySet();
+	public static final Set<String> NO_CATEGORIES = Collections.emptySet();
+	
 	public static PostalLocation createPostalLocation(String address, String division, String province, String postCode) {
 		return createPostalLocation(address, division, null, province, postCode);
 	}
@@ -65,7 +64,7 @@ public class DairyUtil {
 
 	public static PostalLocation createPostalLocation(String address, String section, String estate, String village,
 			String subLocation, String location, String district, String division, String province, String postCode) {
-		PostalLocation loc = ModelFactory.eINSTANCE.createPostalLocation();
+		final PostalLocation loc = ModelFactory.eINSTANCE.createPostalLocation();
 		loc.setAddress(address);
 		loc.setSection(section);
 		loc.setEstate(estate);
@@ -80,14 +79,14 @@ public class DairyUtil {
 	}
 
 	public static DescriptiveLocation createDescriptiveLocation(String directions, String landmarks) {
-		DescriptiveLocation dLoc = ModelFactory.eINSTANCE.createDescriptiveLocation();
+		final DescriptiveLocation dLoc = ModelFactory.eINSTANCE.createDescriptiveLocation();
 		dLoc.setDirections(directions);
 		dLoc.setLandmarks(landmarks);
 		return dLoc;
 	}
 
 	public static MapLocation createMapLocation(double lattitude, double longitude) {
-		MapLocation mLoc = ModelFactory.eINSTANCE.createMapLocation();
+		final MapLocation mLoc = ModelFactory.eINSTANCE.createMapLocation();
 		mLoc.setLatitude(lattitude);
 		mLoc.setLongitude(longitude);
 		return mLoc;
@@ -102,8 +101,8 @@ public class DairyUtil {
 	}
 
 	public static Location createLocation(PostalLocation pLoc, MapLocation mLoc, DescriptiveLocation dLoc) {
-		Location loc = ModelFactory.eINSTANCE.createLocation();
-		if (pLoc == null && mLoc == null && dLoc == null)
+		final Location loc = ModelFactory.eINSTANCE.createLocation();
+		if ((pLoc == null) && (mLoc == null) && (dLoc == null))
 			dLoc = createDescriptiveLocation("", "");
 		if (null != pLoc)
 			loc.setPostalLocation(pLoc);
@@ -116,12 +115,12 @@ public class DairyUtil {
 
 	public static Person createPerson(String givenName, String middleName, String familyName, String phoneNumber,
 			Location location) {
-		return createPerson(givenName, middleName, familyName, phoneNumber, location, Collections.EMPTY_SET);
+		return createPerson(givenName, middleName, familyName, phoneNumber, location, NO_CONTACTS);
 	}
 
 	public static Person createPerson(String givenName, String middleName, String familyName, String phoneNumber) {
 		return createPerson(givenName, middleName, familyName, phoneNumber, ModelFactory.eINSTANCE.createLocation(),
-				Collections.EMPTY_SET);
+				NO_CONTACTS);
 	}
 
 	/**
@@ -138,7 +137,7 @@ public class DairyUtil {
 	public static Person createPerson(String givenName, String middleName, String familyName, String phoneNumber,
 			Location location, Collection<ContactMethod> contactMethods) {
 
-		Person p = ModelFactory.eINSTANCE.createPerson();
+		final Person p = ModelFactory.eINSTANCE.createPerson();
 		initPersonInfo(p, givenName, middleName, familyName, phoneNumber, location, contactMethods);
 		return p;
 	}
@@ -159,25 +158,25 @@ public class DairyUtil {
 	public static Supplier createSupplier(long id, String companyName, String legalName, VendorStatus status,
 			Date expirationDate, Collection<String> categories, Collection<Person> contacts) throws ParseException {
 		return createSupplier(id, companyName, legalName, status, expirationDate, categories, contacts,
-				Collections.EMPTY_SET);
+				NO_CONTACTS);
 	}
 
 	public static Supplier createSupplier(long id, String companyName, String legalName, VendorStatus status,
 			Date expirationDate, Collection<String> categories) throws ParseException {
-		return createSupplier(id, companyName, legalName, status, expirationDate, categories, Collections.EMPTY_SET,
-				Collections.EMPTY_SET);
+		return createSupplier(id, companyName, legalName, status, expirationDate, categories, NO_PERSONS,
+				NO_CONTACTS);
 	}
 
 	public static Supplier createSupplier(long id, String companyName, String legalName, VendorStatus status,
 			Date expirationDate) throws ParseException {
-		return createSupplier(id, companyName, legalName, status, expirationDate, Collections.EMPTY_SET,
-				Collections.EMPTY_SET, Collections.EMPTY_SET);
+		return createSupplier(id, companyName, legalName, status, expirationDate, NO_CATEGORIES,
+				NO_PERSONS, NO_CONTACTS);
 	}
 
 	public static Supplier createSupplier(long id, String companyName, String legalName, VendorStatus status,
 			Date expirationDate, Collection<String> categories, Collection<Person> contacts,
 			Collection<ContactMethod> contactMethods) throws ParseException {
-		Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
+		final Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
 		supplier.setSupplierId(id);
 		supplier.setCompanyName(companyName);
 		supplier.setLegalName(legalName);
@@ -194,7 +193,7 @@ public class DairyUtil {
 	}
 
 	public static Route createRoute(long id, String name, String code, String description) {
-		Route route = DairyFactory.eINSTANCE.createRoute();
+		final Route route = DairyFactory.eINSTANCE.createRoute();
 
 		route.setId(id);
 		route.setName(name);
@@ -206,7 +205,7 @@ public class DairyUtil {
 
 	public static DairyLocation createDairyLocation(String name, String code, String phone, String description,
 			Date dateOpened, Location location, Route route) {
-		DairyLocation branch = DairyFactory.eINSTANCE.createDairyLocation();
+		final DairyLocation branch = DairyFactory.eINSTANCE.createDairyLocation();
 
 		branch.setName(name);
 		branch.setCode(code);
@@ -232,8 +231,8 @@ public class DairyUtil {
 
 	public static Employee createEmployee(Person p, String id, Date startDate, String jobFunction, String nssfNumber,
 			String nationalId) {
-		Employee emp = DairyFactory.eINSTANCE.createEmployee();
-		
+		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
+
 		// copy person fields
 		emp.setHonorific(p.getHonorific());
 		emp.setGivenName(p.getGivenName());
@@ -297,17 +296,18 @@ public class DairyUtil {
 	 */
 	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
 			Location location, Collection<ContactMethod> contactMethods, Collection<Farm> farms) {
-		Farmer toBe = TrackingFactory.eINSTANCE.createFarmer();
+		final Farmer toBe = TrackingFactory.eINSTANCE.createFarmer();
 
 		initPersonInfo(toBe, givenName, middleName, familyName, phoneNumber, location, contactMethods);
-		if (null != farms) toBe.getFarms().addAll(farms);
-		
+		if (null != farms)
+			toBe.getFarms().addAll(farms);
+
 		return toBe;
 	}
-	
+
 	/**
-	 * Create a farmer using the location of his first farm as the farmers location. If there are no farms, 
-	 * use a 'blank' location.
+	 * Create a farmer using the location of his first farm as the farmers
+	 * location. If there are no farms, use a 'blank' location.
 	 * 
 	 * @param givenName
 	 * @param middleName
@@ -319,13 +319,14 @@ public class DairyUtil {
 	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
 			Collection<Farm> farms) {
 		Location loc = null;
-		if (null != farms && farms.size() > 0)
+		if ((null != farms) && (farms.size() > 0))
 			loc = farms.iterator().next().getLocation();
 		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, farms);
-	}	
+	}
 
 	/**
-	 * Create a farmer who resides at the location of their one and only farm - probably the most common case.
+	 * Create a farmer who resides at the location of their one and only farm -
+	 * probably the most common case.
 	 * 
 	 * @param givenName
 	 * @param middleName
@@ -337,23 +338,26 @@ public class DairyUtil {
 	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
 			Farm farm) {
 		Location loc = null;
-		if (null != farm )
+		if (null != farm)
 			loc = farm.getLocation();
-			
-		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, null != farm ? Arrays.asList(farm) : null);
-	}	
-	
-	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name,
-			Gender gender, ReferenceAnimalType breed, Purpose purpose, 
-			RearingMode rearingMode, ReferenceAnimalType sireBreed, String features, String insuranceNo,  
-			Collection<AnimalIdentifier> identifierList, Collection<String> pastOwnerList, AcquisitionType acquisitionType, Date acquisitionDate  ) {
-		RegisteredAnimal animal = TrackingFactory.eINSTANCE.createRegisteredAnimal();
-		
-		if (null == identifierList) identifierList = Collections.EMPTY_LIST;
-		if (null == pastOwnerList) pastOwnerList = Collections.EMPTY_LIST;
-		
+
+		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null,
+				null != farm ? Arrays.asList(farm) : null);
+	}
+
+	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name, Gender gender,
+			ReferenceAnimalType breed, Purpose purpose, RearingMode rearingMode, ReferenceAnimalType sireBreed,
+			String features, String insuranceNo, Collection<AnimalIdentifier> identifierList,
+			Collection<String> pastOwnerList, AcquisitionType acquisitionType, Date acquisitionDate) {
+		final RegisteredAnimal animal = TrackingFactory.eINSTANCE.createRegisteredAnimal();
+
+		if (null == identifierList)
+			identifierList = Collections.emptyList();
+		if (null == pastOwnerList)
+			pastOwnerList = Collections.emptyList();
+
 		animal.setLocation(farm);
-		animal.setDateOfBirth(birthDate);		
+		animal.setDateOfBirth(birthDate);
 		animal.setGivenName(name);
 		animal.setGender(gender);
 		animal.setAnimalType(breed);
@@ -366,15 +370,16 @@ public class DairyUtil {
 		animal.setRearingMode(rearingMode);
 		animal.getIdentifiers().addAll(identifierList);
 		animal.getPastOwners().addAll(pastOwnerList);
-		
-		return animal;		
+
+		return animal;
 	}
 
-	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name,
-			Gender gender, ReferenceAnimalType breed, Purpose purpose, RearingMode rearingMode ) {
-		return createAnimal(farm, birthDate, name, gender, breed, purpose, rearingMode, null, null, null, null, null, null, null);
+	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name, Gender gender,
+			ReferenceAnimalType breed, Purpose purpose, RearingMode rearingMode) {
+		return createAnimal(farm, birthDate, name, gender, breed, purpose, rearingMode, null, null, null, null, null,
+				null, null);
 	}
-	
+
 	/**
 	 * Create a new membership.
 	 * 
@@ -385,18 +390,18 @@ public class DairyUtil {
 	 * @return
 	 */
 	public static Membership createMembership(Date applicationDate, Date effectiveDate, Farmer farmer) {
-		Membership member = DairyFactory.eINSTANCE.createMembership();
+		final Membership member = DairyFactory.eINSTANCE.createMembership();
 
 		if (null == farmer) {
 			farmer = createFarmer("", "", "", "", createFarm("", createLocation(null, null, null)));
 		}
 		member.setMember(farmer);
-		
+
 		if (null == effectiveDate) {
 			effectiveDate = new Date(0);
 		}
 		member.setEffectiveDate(effectiveDate);
-		
+
 		if (null == applicationDate) {
 			applicationDate = new Date();
 		}
@@ -450,14 +455,14 @@ public class DairyUtil {
 	}
 
 	public static Farm createFarm(String name, Location farmLocation) {
-		Farm farm = TrackingFactory.eINSTANCE.createFarm();
+		final Farm farm = TrackingFactory.eINSTANCE.createFarm();
 		farm.setName(name);
 		farm.setLocation(farmLocation);
 		return farm;
 	}
-	
-	public static Container createContainer(ContainerType type, UnitOfMeasure unit, Farm farm, double campacity){
-		Container  container = TrackingFactory.eINSTANCE.createContainer();
+
+	public static Container createContainer(ContainerType type, UnitOfMeasure unit, Farm farm, double campacity) {
+		final Container container = TrackingFactory.eINSTANCE.createContainer();
 		container.setType(type);
 		container.setMeasureType(unit);
 		container.setOwner(farm);

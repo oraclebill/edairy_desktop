@@ -7,7 +7,7 @@ import org.eclipse.core.databinding.conversion.Converter;
  */
 public class NumberToStringConverter extends Converter {
 
-	private Object fromClass;
+	private final Object fromClass;
 
 	/**
 	 * Creates a DateToStringConverter.
@@ -24,25 +24,19 @@ public class NumberToStringConverter extends Converter {
 	/**
 	 * @see org.eclipse.core.databinding.conversion.IConverter#convert(java.lang.Object)
 	 */
+	@Override
 	public Object convert(Object fromObject) {
 		if (fromObject == null) {
 			return null;
 		}
-		if (this.fromClass == Double.class)
-		{
-			return (((Double)fromObject)).toString();
-		}
-		else if (this.fromClass == Float.class)
-		{
-			return (((Float)fromObject)).toString();
-		}
-		else if (this.fromClass == Integer.class)
-		{
-			return (((Integer)fromObject)).toString();
-		}
-		else if (this.fromClass == Long.class)
-		{
-			return (((Long)fromObject)).toString();
+		if (this.fromClass == Double.class) {
+			return (((Double) fromObject)).toString();
+		} else if (this.fromClass == Float.class) {
+			return (((Float) fromObject)).toString();
+		} else if (this.fromClass == Integer.class) {
+			return (((Integer) fromObject)).toString();
+		} else if (this.fromClass == Long.class) {
+			return (((Long) fromObject)).toString();
 		}
 		return null;
 	}

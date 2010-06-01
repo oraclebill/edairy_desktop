@@ -8,6 +8,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
 public interface IAccountTransactionSearch {
 
-    AccountTransaction[] findAccountTransaction(Date start, Date end, Long memberId,  Set<TransactionType> typeCodes );
+	AccountTransaction[] findAccountTransaction(Date start, Date end, Long memberId, Set<TransactionType> typeCodes);
 
 }

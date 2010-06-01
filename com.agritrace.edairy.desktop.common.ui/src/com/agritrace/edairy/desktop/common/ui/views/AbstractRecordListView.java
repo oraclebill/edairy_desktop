@@ -28,7 +28,7 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * Binding id of the table control {@value} .
 	 */
 	public static final String BIND_ID_TABLE = "list.table"; //$NON-NLS-1$
-	
+
 	public static final String BIND_ID_TABLE_GROUP = "list.button.table.group"; //$NON-NLS-1$
 	/**
 	 * Binding id of the new button {@value} .
@@ -44,16 +44,14 @@ public abstract class AbstractRecordListView extends SubModuleView {
 
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
-		parent.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		parent.setLayout(new GridLayout(1, false));
 
-		Composite panel = new Composite(parent, SWT.None);
+		final Composite panel = new Composite(parent, SWT.None);
 		panel.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).create());
 		panel.setLayoutData(new GridData(GridData.FILL_BOTH));
-		panel.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		panel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		createControls(panel);
 	}
 
@@ -72,9 +70,8 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * @param parent
 	 */
 	private void createFilter(Composite parent) {
-		Composite comp = UIControlsFactory.createComposite(parent);
-		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
-				.numColumns(3).create());
+		final Composite comp = UIControlsFactory.createComposite(parent);
+		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
 		// Create filter conditions
 		createFilterCondtions(comp);
@@ -94,22 +91,22 @@ public abstract class AbstractRecordListView extends SubModuleView {
 
 	private void createFilterButtons(Composite parent) {
 		// Reset Apply buttons
-		Composite comp = UIControlsFactory.createComposite(parent);
-		GridLayout layout = new GridLayout(2, false);
+		final Composite comp = UIControlsFactory.createComposite(parent);
+		final GridLayout layout = new GridLayout(2, false);
 		layout.horizontalSpacing = 40;
 		comp.setLayout(layout);
-		GridData data = new GridData(GridData.FILL_HORIZONTAL);
+		final GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalAlignment = GridData.CENTER;
 		data.horizontalSpan = 3;
 
 		comp.setLayoutData(data);
 
 		// Search Button
-		Button searchBtn = UIControlsFactory.createButton(comp, "Search");
+		final Button searchBtn = UIControlsFactory.createButton(comp, "Search");
 		addUIControl(searchBtn, BIND_ID_FILTER_SEARCH);
 
 		// ResetButton
-		Button resetBtn = UIControlsFactory.createButton(comp, "Reset");
+		final Button resetBtn = UIControlsFactory.createButton(comp, "Reset");
 		addUIControl(resetBtn, BIND_ID_FILTER_RESET);
 	}
 
@@ -118,16 +115,16 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 */
 	private void createTable(Composite parent) {
 		// Group
-		Group group = UIControlsFactory.createGroup(parent,"");
+		final Group group = UIControlsFactory.createGroup(parent, "");
 		group.setLayout(new GridLayout());
 		group.setLayoutData(new GridData(GridData.FILL_BOTH));
 		addUIControl(group, BIND_ID_TABLE_GROUP);
-		
+
 		// Tables
-		Composite result = UIControlsFactory.createComposite(group);
-		TableColumnLayout layout = new TableColumnLayout();
+		final Composite result = UIControlsFactory.createComposite(group);
+		final TableColumnLayout layout = new TableColumnLayout();
 		// We will first create a empty table here
-		Table table = new Table(result, getTableStyle());
+		final Table table = new Table(result, getTableStyle());
 		result.setLayout(layout);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(result);
 		table.setHeaderVisible(true);
@@ -151,19 +148,18 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	}
 
 	/**
-	 * Creates the buttons for directory view
-	 * By default, 'View' and 'Add new' buttons are created.
+	 * Creates the buttons for directory view By default, 'View' and 'Add new'
+	 * buttons are created.
 	 * 
 	 * @param parent
 	 * @return
 	 */
 	protected Composite createButtons(Composite parent) {
-		Composite result = UIControlsFactory.createComposite(parent);
+		final Composite result = UIControlsFactory.createComposite(parent);
 		// result.setBackground(getDisplay().getSystemColor(SWT.COLOR_GREEN));
 
 		result.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-		GridDataFactory.swtDefaults().grab(true, false).align(GridData.END,
-				GridData.BEGINNING).applyTo(result);
+		GridDataFactory.swtDefaults().grab(true, false).align(GridData.END, GridData.BEGINNING).applyTo(result);
 
 		createButtonView(result);
 
@@ -179,8 +175,7 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * @return
 	 */
 	protected Control createButtonNew(Composite compButton) {
-		return UIControlsFactory.createButton(compButton, "Add New",
-				BIND_ID_NEW);
+		return UIControlsFactory.createButton(compButton, "Add New", BIND_ID_NEW);
 	}
 
 	/**

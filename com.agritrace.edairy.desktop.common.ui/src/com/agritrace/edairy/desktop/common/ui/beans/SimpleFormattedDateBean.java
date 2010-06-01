@@ -13,57 +13,57 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
 public class SimpleFormattedDateBean extends AbstractBean {
 
-    private Date date;
+	private Date date;
 
-    private String formattedDate;
+	private String formattedDate;
 
-    private SimpleDateFormat dateFormat;
+	private SimpleDateFormat dateFormat;
 
 	public static String FORMATTED_DATE_VALUE_PROP = "formattedDate";
 
-    public static String DATE_PROR = "date";
-    
-    private static final String STD_DATE_FORMAT = DateTimeUtils.DEFAULT_DATE_PATTERN; 
+	public static String DATE_PROR = "date";
 
-    public SimpleFormattedDateBean() {
-	this(null);
-    }
+	private static final String STD_DATE_FORMAT = DateTimeUtils.DEFAULT_DATE_PATTERN;
 
-    public SimpleFormattedDateBean(String dateValue) {
-	dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
-	setFormattedDate(dateValue);
-
-    }
-
-    public Date getDate() {
-	return date;
-    }
-
-    public void setDate(Date date) {
-	this.date = date;
-	if ( null != date )
-	    formattedDate = dateFormat.format(date);
-    }
-
-    public String getFormattedDate() {
-	return formattedDate;
-    }
-
-    public void setFormattedDate(String formattedDate) {
-	this.formattedDate = formattedDate;
-	if (dateFormat == null) {
-	    dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
+	public SimpleFormattedDateBean() {
+		this(null);
 	}
-	try {
-	    if (formattedDate == null || formattedDate.trim().equals("")) {
-		this.formattedDate = dateFormat.format(new Date());
-	    } else {
-		date = dateFormat.parse(formattedDate);
-	    }
-	} catch (final ParseException e) {
-	    final Status error = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
-	    Activator.getDefault().getLog().log(error);
+
+	public SimpleFormattedDateBean(String dateValue) {
+		dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
+		setFormattedDate(dateValue);
+
 	}
-    }
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+		if (null != date)
+			formattedDate = dateFormat.format(date);
+	}
+
+	public String getFormattedDate() {
+		return formattedDate;
+	}
+
+	public void setFormattedDate(String formattedDate) {
+		this.formattedDate = formattedDate;
+		if (dateFormat == null) {
+			dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
+		}
+		try {
+			if ((formattedDate == null) || formattedDate.trim().equals("")) {
+				this.formattedDate = dateFormat.format(new Date());
+			} else {
+				date = dateFormat.parse(formattedDate);
+			}
+		} catch (final ParseException e) {
+			final Status error = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
+			Activator.getDefault().getLog().log(error);
+		}
+	}
 
 }

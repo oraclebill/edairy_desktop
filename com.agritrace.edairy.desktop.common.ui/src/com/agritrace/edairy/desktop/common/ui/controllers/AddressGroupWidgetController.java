@@ -15,7 +15,7 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
-public class AddressGroupWidgetController implements WidgetController, ISelectionListener{
+public class AddressGroupWidgetController implements WidgetController, ISelectionListener {
 
 	private IController controller;
 	private PostalLocation location;
@@ -31,25 +31,23 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	private IComboRidget provinceComo;
 	private ITextRidget postalCodeTxt;
 
-
-	public AddressGroupWidgetController(IController controller){
+	public AddressGroupWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
 
-
 	@Override
 	public void configure() {
-		if(controller == null){
+		if (controller == null) {
 			return;
 		}
-		addressTxt =controller.getRidget(ITextRidget.class, ViewWidgetId.ADDRESS_TXT);
+		addressTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.ADDRESS_TXT);
 		sectionTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.SECTION_TXT);
 		estateTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.ESTATE_TXT);
-		locationTxt =controller.getRidget(ITextRidget.class, ViewWidgetId.LOCATION_TXT);
+		locationTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LOCATION_TXT);
 		subLocationTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.SUBLOCATION_TXT);
 		villageTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.VILLAGE_TXT);
-		divisionTxt =controller. getRidget(ITextRidget.class, ViewWidgetId.DIVISION_TXT);
+		divisionTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.DIVISION_TXT);
 		districtTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.DISTRICT_TXT);
 		// provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 		postalCodeTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.POSTAL_CODE_TXT);
@@ -69,7 +67,7 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	@Override
 	public void setInputModel(Object model) {
 		location = (PostalLocation) model;
-		if(controller != null){
+		if (controller != null) {
 			updateBinding();
 		}
 
@@ -88,7 +86,7 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 
 	@Override
 	public void updateBinding() {
-		if(location == null){
+		if (location == null) {
 			addressTxt.setText("");
 			sectionTxt.setText("");
 			estateTxt.setText("");
@@ -101,37 +99,29 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 			postalCodeTxt.setText("");
 			return;
 		}
-		addressTxt.bindToModel(EMFObservables
-				.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
+		addressTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
 		addressTxt.updateFromModel();
-		sectionTxt.bindToModel(EMFObservables
-				.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__SECTION));
+		sectionTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__SECTION));
 		sectionTxt.updateFromModel();
 		estateTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__ESTATE));
 		estateTxt.updateFromModel();
-		locationTxt.bindToModel(EMFObservables.observeValue(location,
-				ModelPackage.Literals.POSTAL_LOCATION__LOCATION));
+		locationTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__LOCATION));
 		locationTxt.updateFromModel();
 		subLocationTxt.bindToModel(EMFObservables.observeValue(location,
 				ModelPackage.Literals.POSTAL_LOCATION__SUB_LOCATION));
 		subLocationTxt.updateFromModel();
-		villageTxt.bindToModel(EMFObservables
-				.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__VILLAGE));
+		villageTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__VILLAGE));
 		villageTxt.updateFromModel();
-		divisionTxt.bindToModel(EMFObservables.observeValue(location,
-				ModelPackage.Literals.POSTAL_LOCATION__DIVISION));
+		divisionTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__DIVISION));
 		divisionTxt.updateFromModel();
-		districtTxt.bindToModel(EMFObservables.observeValue(location,
-				ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
+		districtTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
 		districtTxt.updateFromModel();
 		provinceComo.setSelection(location.getProvince());
 		postalCodeTxt.bindToModel(EMFObservables.observeValue(location,
 				ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 		postalCodeTxt.updateFromModel();
 
-
 	}
-
 
 	@Override
 	public void ridgetSelected(SelectionEvent event) {

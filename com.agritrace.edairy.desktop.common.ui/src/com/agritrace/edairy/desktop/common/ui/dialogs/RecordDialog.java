@@ -25,9 +25,9 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  */
 public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> extends AbstractDialogView {
 
-	
 	/**
-	 * Bind id for OK button, the label maybe change, but the bind id will not change
+	 * Bind id for OK button, the label maybe change, but the bind id will not
+	 * change
 	 */
 	public static final String BIND_ID_BUTTON_OK = "bind.id.btn.ok";
 	/**
@@ -35,48 +35,53 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 	 */
 	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
 
-	protected abstract C createController(); 
+	@Override
+	protected abstract C createController();
 
 	/**
 	 * Create UI components in this dialog
 	 * 
-	 * @param comp Parent composite
+	 * @param comp
+	 *            Parent composite
 	 */
 	protected abstract void createUIComponent(Composite comp);
 
-	
-	private int style;
+	private final int style;
 
 	private T selectedEObject;
-	
+
 	/**
 	 * Default constructor
 	 * 
-	 * @param style Dialog style, possible values are <code>RecordDialog.DIALOG_STYLE_NEW</code>
-	 * <code>RecordDialog.DIALOG_STYLE_VIEW</code>,<code>RecordDialog.DIALOG_STYLE_EDIT</code>
-	 * RecordDialog.DIALOG_STYLE_NEW means creating a new record
-	 * RecordDialog.DIALOG_STYLE_VIEW means viewing a new record
-	 * RecordDialog.DIALOG_STYLE_EDIT means editing a new record
-	 * @param parentShell Parent shell
-	 * @param selectedObject Selected object in the table list
-	 * @param repo 
+	 * @param style
+	 *            Dialog style, possible values are
+	 *            <code>RecordDialog.DIALOG_STYLE_NEW</code>
+	 *            <code>RecordDialog.DIALOG_STYLE_VIEW</code>,
+	 *            <code>RecordDialog.DIALOG_STYLE_EDIT</code>
+	 *            RecordDialog.DIALOG_STYLE_NEW means creating a new record
+	 *            RecordDialog.DIALOG_STYLE_VIEW means viewing a new record
+	 *            RecordDialog.DIALOG_STYLE_EDIT means editing a new record
+	 * @param parentShell
+	 *            Parent shell
+	 * @param selectedObject
+	 *            Selected object in the table list
+	 * @param repo
 	 */
 	@SuppressWarnings("unchecked")
 	public RecordDialog(int style, Shell parentShell, T selectedObject, IRepository<T> repo) {
 		super(parentShell);
 		this.style = style;
-		((C)this.getController()).setWorkingCopy(selectedObject);
-		((C)this.getController()).setRepository(repo);
-		((C)this.getController()).setActionType(style);
+		((C) this.getController()).setWorkingCopy(selectedObject);
+		((C) this.getController()).setRepository(repo);
+		((C) this.getController()).setActionType(style);
 	}
-	
+
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		this.setShellStyle(SWT.RESIZE | SWT.CLOSE | SWT.TITLE);
 		// newShell.setSize(240, 400);
-		newShell.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 
 	/**
@@ -88,27 +93,25 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 	public T getSelectedEObject() {
 		return this.selectedEObject;
 	}
-	
+
 	/**
-	 * Gets dialog style which will indicate the dialog is a  new/view/edit dialog
+	 * Gets dialog style which will indicate the dialog is a new/view/edit
+	 * dialog
 	 * 
-	 * @return RecordDialog.DIALOG_STYLE_NEW or RecordDialog.DIALOG_STYLE_VIEW or RecordDialog.DIALOG_STYLE_EDIT
+	 * @return RecordDialog.DIALOG_STYLE_NEW or RecordDialog.DIALOG_STYLE_VIEW
+	 *         or RecordDialog.DIALOG_STYLE_EDIT
 	 */
 	public int getActionType() {
 		return this.style;
 	}
-	
+
 	@Override
 	protected Control buildView(Composite parent) {
-		Composite comp = UIControlsFactory.createComposite(parent);
+		final Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayout(GridLayoutFactory.swtDefaults().create());
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(comp);
-		comp.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		comp.getParent().setBackground(
-				LnfManager.getLnf().getColor(
-						LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comp);
+		comp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		comp.getParent().setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		createUIComponent(comp);
 		createButtons(comp);
@@ -121,23 +124,19 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 	 * @param parent
 	 */
 	private void createButtons(Composite parent) {
-		Composite composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(GridLayoutFactory.swtDefaults().numColumns(2)
-				.spacing(20, 20).create());
-		GridDataFactory.swtDefaults().grab(true, true)
-				.align(GridData.CENTER, GridData.BEGINNING).applyTo(composite);
+		final Composite composite = UIControlsFactory.createComposite(parent);
+		composite.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).spacing(20, 20).create());
+		GridDataFactory.swtDefaults().grab(true, true).align(GridData.CENTER, GridData.BEGINNING).applyTo(composite);
 
-		Button okButton = UIControlsFactory.createButton(composite);
+		final Button okButton = UIControlsFactory.createButton(composite);
 		okButton.setText("&Ok"); //$NON-NLS-1$
 		addUIControl(okButton, BIND_ID_BUTTON_OK);
 
-		Button cancelButton = UIControlsFactory.createButton(composite);
+		final Button cancelButton = UIControlsFactory.createButton(composite);
 		cancelButton.setText("&Cancel"); //$NON-NLS-1$
 		addUIControl(cancelButton, BIND_ID_BUTTON_CANCEL);
-		GridDataFactory
-				.swtDefaults()
-				.hint(cancelButton.computeSize(-1, -1).x,
-						cancelButton.computeSize(-1, -1).y).applyTo(okButton);
+		GridDataFactory.swtDefaults().hint(cancelButton.computeSize(-1, -1).x, cancelButton.computeSize(-1, -1).y)
+				.applyTo(okButton);
 		okButton.pack();
 
 	}

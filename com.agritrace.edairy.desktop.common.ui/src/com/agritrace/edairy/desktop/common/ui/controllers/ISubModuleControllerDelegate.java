@@ -10,27 +10,27 @@ import org.eclipse.riena.ui.ridgets.IRidget;
  */
 public interface ISubModuleControllerDelegate {
 
-    /**
-     * Configure reidgets
-     */
-    public void configureRidgets();
+	/**
+	 * Configure reidgets
+	 */
+	public void configureRidgets();
 
-    /**
-     * Gets Ridget
-     * 
-     * @param <R>
-     * @param ridgetClazz
-     * @param id
-     * @return
-     */
-    public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id);
+	/**
+	 * Gets Ridget
+	 * 
+	 * @param <R>
+	 * @param ridgetClazz
+	 * @param id
+	 * @return
+	 */
+	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id);
 
-    /**
-     * Fire the listener
-     * 
-     * @param eventType
-     *            Event type
-     */
-    public void fireListener(int eventType);
+	/**
+	 * Fire the listener
+	 * 
+	 * @param eventType
+	 *            Event type
+	 */
+	public void fireListener(int eventType);
 
 }

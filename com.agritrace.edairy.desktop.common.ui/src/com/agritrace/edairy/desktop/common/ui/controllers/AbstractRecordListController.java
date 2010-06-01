@@ -6,13 +6,12 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+//import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -71,7 +70,6 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 */
 	protected abstract String[] getTableColumnHeaders();
 
-	
 	/**
 	 * Gets table column property name
 	 * 
@@ -79,23 +77,21 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 */
 	protected abstract String[] getTableColumnPropertyNames();
 
+	protected abstract RecordDialog<T,?> getEditDialog(int dialogStyle, T selectedObj);
 
-	protected abstract RecordDialog getEditDialog(int dialogStyle, T selectedObj);
-
-	
 	private T selectedEObject;
-//	private T container;
+	// private T container;
 	private ITableRidget table;
-	private List<T> tableContents = new ArrayList<T>();
-	
-	private ISelectionListener selectionListener = new ISelectionListener() {
+	private final List<T> tableContents = new ArrayList<T>();
 
-		@Override
-		public void ridgetSelected(SelectionEvent event) {
-
-			itemSelected(event);
-		}
-	};
+//	private final ISelectionListener selectionListener = new ISelectionListener() {
+//
+//		@Override
+//		public void ridgetSelected(SelectionEvent event) {
+//
+//			itemSelected(event);
+//		}
+//	};
 
 	/**
 	 * Default controller
@@ -113,19 +109,19 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		super(navigationNode);
 	}
 
-//	public AbstractRecordListController(T container) {
-//		super();
-////		this.container = container;
-//	}
+	// public AbstractRecordListController(T container) {
+	// super();
+	// // this.container = container;
+	// }
 
-//	/**
-//	 * Gets the container
-//	 * 
-//	 * @return
-//	 */
-//	public T getContainer() {
-//		return this.container;
-//	}
+	// /**
+	// * Gets the container
+	// *
+	// * @return
+	// */
+	// public T getContainer() {
+	// return this.container;
+	// }
 
 	/**
 	 * Gets the selectedObject
@@ -142,13 +138,12 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	public void refreshTableContents() {
 		tableContents.clear();
-		tableContents.addAll(getFilteredResult());	
+		tableContents.addAll(getFilteredResult());
 		table.updateFromModel();
 	}
-	
+
 	private void configureButtonsRidget() {
-		IActionRidget newBtnRidget = getRidget(IActionRidget.class,
-				AbstractRecordListView.BIND_ID_NEW);
+		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
 		if (newBtnRidget != null) {
 			newBtnRidget.addListener(new IActionListener() {
 
@@ -158,8 +153,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 				}
 			});
 		}
-		IActionRidget viewBtnRidget = getRidget(IActionRidget.class,
-				AbstractRecordListView.BIND_ID_VIEW);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(false);
 		if (viewBtnRidget != null) {
 			viewBtnRidget.addListener(new IActionListener() {
@@ -176,7 +170,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	protected void configureFilterRidgets() {
 		// Search Button
-		IActionRidget searchBtnRidget = getRidget(IActionRidget.class,
+		final IActionRidget searchBtnRidget = getRidget(IActionRidget.class,
 				AbstractRecordListView.BIND_ID_FILTER_SEARCH);
 		if (searchBtnRidget != null) {
 			searchBtnRidget.addListener(new IActionListener() {
@@ -187,8 +181,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 				}
 			});
 		}
-		IActionRidget resetBtnRidget = getRidget(IActionRidget.class,
-				AbstractRecordListView.BIND_ID_FILTER_RESET);
+		final IActionRidget resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
 		if (resetBtnRidget != null) {
 			resetBtnRidget.addListener(new IActionListener() {
 
@@ -216,9 +209,8 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	protected void configureTableRidget() {
 		// Configure Table Widgets
-		table = this.getRidget(ITableRidget.class,
-				AbstractRecordListView.BIND_ID_TABLE);
-//		table.addSelectionListener(selectionListener);
+		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
+		// table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
 		table.addDoubleClickListener(new IActionListener() {
 			@Override
@@ -226,47 +218,43 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 				popUpDialog(ACTION_VIEW);
 			}
 		});
-		table.bindToModel(
-				new WritableList(tableContents, getEntityClass()), 
-				getEntityClass(),
-				getTableColumnPropertyNames(), 
-				getTableColumnHeaders());
+		table.bindToModel(new WritableList(tableContents, getEntityClass()), getEntityClass(),
+				getTableColumnPropertyNames(), getTableColumnHeaders());
 
 		table.updateFromModel();
 	}
 
-
+	@SuppressWarnings("unchecked")
 	protected void itemSelected(SelectionEvent event) {
-		IActionRidget viewBtnRidget = getRidget(IActionRidget.class,
-				AbstractRecordListView.BIND_ID_VIEW);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(true);
 		// Update working copy
-		if (event.getNewSelection().size() == 1
-				&& event.getNewSelection().get(0) instanceof EObject) {
+		if ((event.getNewSelection().size() == 1) && (event.getNewSelection().get(0) instanceof EObject)) {
 			setSelectedEObject((T) event.getNewSelection().get(0));
 
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void popUpDialog(int dialogStyle) {
-		RecordDialog dialog;
-		
-		if (dialogStyle == ACTION_NEW) 
-			dialog = getEditDialog(dialogStyle, (T)EMFUtil.createObject(getEClass()));
+		RecordDialog<T,?> dialog;
+
+		if (dialogStyle == ACTION_NEW)
+			dialog = getEditDialog(dialogStyle, (T) EMFUtil.createObject(getEClass()));
 		else {
-			T selectedObj =  getSelectedEObject();
-			if ( selectedObj == null ) 
+			final T selectedObj = getSelectedEObject();
+			if (selectedObj == null)
 				return;
 			else
 				dialog = getEditDialog(dialogStyle, selectedObj);
 		}
 		if (dialogStyle == ACTION_VIEW) {
-//			dialog.setReadOnly(); 	// TODO:
+			// dialog.setReadOnly(); // TODO:
 		}
-		int ret = dialog.open();
-//		if (ret == Window.OK) {
-//			table.updateFromModel();
-//		}
+		dialog.open();
+		// if (ret == Window.OK) {
+		// table.updateFromModel();
+		// }
 		refreshTableContents();
 
 	}

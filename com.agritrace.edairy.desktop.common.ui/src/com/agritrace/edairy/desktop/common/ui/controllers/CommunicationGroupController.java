@@ -11,28 +11,28 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class CommunicationGroupController implements WidgetController {
-	
+
 	private IController controller;
 	private Person person;
 	private List<ContactMethod> contactMethods;
-	
+
 	private ITextRidget emailTxt;
 	private ITextRidget phoneTxt;
 	private ITextRidget secondPhoneTxt;
-	
-	public CommunicationGroupController(IController controller){
+
+	public CommunicationGroupController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if(controller == null){
+		if (controller == null) {
 			return;
 		}
-		emailTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.EMAIL_TEXT);
-		phoneTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.PHONE_TEXT);
-		secondPhoneTxt = controller.getRidget(ITextRidget.class,ViewWidgetId.SECOND_PHONE_TEXT);
+		emailTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.EMAIL_TEXT);
+		phoneTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.PHONE_TEXT);
+		secondPhoneTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.SECOND_PHONE_TEXT);
 
 	}
 
@@ -41,15 +41,15 @@ public class CommunicationGroupController implements WidgetController {
 		return person;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setInputModel(Object model) {
-		if(model instanceof Person){
-			person = (Person)model;
+		if (model instanceof Person) {
+			person = (Person) model;
 			contactMethods = person.getContactMethods();
-		}else if(model instanceof List<?>){
-			contactMethods = (List) model;
+		} else if (model instanceof List<?>) {
+			contactMethods = (List<ContactMethod>) model;
 		}
-
 
 	}
 
@@ -65,27 +65,27 @@ public class CommunicationGroupController implements WidgetController {
 
 	@Override
 	public void updateBinding() {
-	
-//		List<ContactMethod> contacts = person.getContactMethods();
+
+		// List<ContactMethod> contacts = person.getContactMethods();
 		emailTxt.setText("");
 		phoneTxt.setText("");
 		secondPhoneTxt.setText("");
-		if(contactMethods == null || contactMethods.size() == 0){
+		if ((contactMethods == null) || (contactMethods.size() == 0)) {
 			return;
 		}
-		for(ContactMethod contact :contactMethods){
-			if(contact.getCmType()==ContactMethodType.EMAIL){
+		for (final ContactMethod contact : contactMethods) {
+			if (contact.getCmType() == ContactMethodType.EMAIL) {
 				emailTxt.setText(contact.getCmValue());
-			}else if(contact.getCmType() == ContactMethodType.PHONE){
-				if(phoneTxt.getText().isEmpty()){
+			} else if (contact.getCmType() == ContactMethodType.PHONE) {
+				if (phoneTxt.getText().isEmpty()) {
 					phoneTxt.setText(contact.getCmValue());
-				}else if(secondPhoneTxt.getText().isEmpty()){
+				} else if (secondPhoneTxt.getText().isEmpty()) {
 					secondPhoneTxt.setText(contact.getCmValue());
 					return;
 				}
 			}
 		}
-	 
+
 	}
 
 }

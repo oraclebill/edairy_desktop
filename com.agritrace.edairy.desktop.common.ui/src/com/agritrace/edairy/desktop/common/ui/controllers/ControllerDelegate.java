@@ -7,7 +7,7 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
  * Abstract implementation for <code>IControllerDelegate</code>
  * 
  * @author Hui(Spark) Wan
- *
+ * 
  */
 public abstract class ControllerDelegate implements IControllerDelegate {
 
@@ -15,7 +15,7 @@ public abstract class ControllerDelegate implements IControllerDelegate {
 		this.ridgetContainer = container;
 	}
 
-	private IRidgetContainer ridgetContainer;
+	private final IRidgetContainer ridgetContainer;
 
 	@Override
 	public IRidgetContainer getRidgetContainer() {

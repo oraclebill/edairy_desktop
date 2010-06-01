@@ -5,16 +5,11 @@ import java.util.List;
 
 public class SupplierCategory {
 
-	public static final SupplierCategory[] CATEGORIES = {
-			new SupplierCategory("Feed"),
-			new SupplierCategory("Office Supplies"),
-			new SupplierCategory("Office Equipment"),
-			new SupplierCategory("Milk Processing Equipment"),
-			new SupplierCategory("Veterinary Services"),
-			new SupplierCategory("Transportation Services"),
-			new SupplierCategory("Vehicle Repair"),
-			new SupplierCategory("Vehicle Sales"),
-			new SupplierCategory("Other") };
+	public static final SupplierCategory[] CATEGORIES = { new SupplierCategory("Feed"),
+			new SupplierCategory("Office Supplies"), new SupplierCategory("Office Equipment"),
+			new SupplierCategory("Milk Processing Equipment"), new SupplierCategory("Veterinary Services"),
+			new SupplierCategory("Transportation Services"), new SupplierCategory("Vehicle Repair"),
+			new SupplierCategory("Vehicle Sales"), new SupplierCategory("Other") };
 
 	public static List<SupplierCategory> getCategoriesList() {
 		return Arrays.asList(CATEGORIES);

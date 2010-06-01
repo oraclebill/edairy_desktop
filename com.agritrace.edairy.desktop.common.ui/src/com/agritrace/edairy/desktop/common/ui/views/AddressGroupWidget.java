@@ -13,10 +13,10 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class AddressGroupWidget {
-	
+
 	private Group addressGroup;
 	private Composite addressPanel;
-	
+
 	public static final String ADDRESS_LABEL = "Address:";
 	public static final String SECTION_LABEL = "Section/Homestead:";
 	public static final String ESTATE_LABEL = "Estate/Nearest Center:";
@@ -27,16 +27,16 @@ public class AddressGroupWidget {
 	public static final String DISTRICT_LABEL = "District:";
 	public static final String PROVINCE_LABEL = "Province:";
 	public static final String POSTAL_CODE_LABEL = "Postal Code:";
-	
-	public AddressGroupWidget(Composite parent){
-		if(parent != null){
+
+	public AddressGroupWidget(Composite parent) {
+		if (parent != null) {
 			addressGroup = UIControlsFactory.createGroup(parent, "Address Information");
 			addressGroup.setLayout(new GridLayout(1, false));
 			createAddresscontrol();
 		}
-		
+
 	}
-	
+
 	private void createAddresscontrol() {
 		// address composite
 		addressPanel = UIControlsFactory.createComposite(addressGroup);
@@ -68,7 +68,7 @@ public class AddressGroupWidget {
 		// sublocation
 		UIControlsFactory.createLabel(addressPanel, SUBLOCATION_LABEL);
 		final Text txtSubLocation = UIControlsFactory
-		.createText(addressPanel, SWT.BORDER, ViewWidgetId.SUBLOCATION_TXT);
+				.createText(addressPanel, SWT.BORDER, ViewWidgetId.SUBLOCATION_TXT);
 		txtSubLocation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 
 		// location

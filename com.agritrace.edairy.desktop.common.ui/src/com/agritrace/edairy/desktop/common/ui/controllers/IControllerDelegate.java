@@ -26,9 +26,12 @@ public interface IControllerDelegate {
 	/**
 	 * Gets Ridget
 	 * 
-	 * @param <R> Type
-	 * @param ridgetClazz Ridget class
-	 * @param id Bind id
+	 * @param <R>
+	 *            Type
+	 * @param ridgetClazz
+	 *            Ridget class
+	 * @param id
+	 *            Bind id
 	 * @return Ridget instance
 	 */
 	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id);
