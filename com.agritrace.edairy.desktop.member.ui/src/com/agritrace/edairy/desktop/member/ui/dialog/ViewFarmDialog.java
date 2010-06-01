@@ -39,7 +39,7 @@ public class ViewFarmDialog extends AbstractDialogView {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setSize(550, 450);
+//		newShell.setSize(550, 450);
 	}
 
 	@Override

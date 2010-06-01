@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.dialog.CreateMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
@@ -66,7 +67,7 @@ public class MemberDirectoryController extends SubModuleController {
 		public void callback() {
 			Membership selectedMember = (Membership) memberListRidget.getSelection().get(0);
 			int index = membershipList.indexOf(selectedMember);
-			final ViewMemberDialog memberDialog = new ViewMemberDialog();
+			final BaseDialogView memberDialog = new ViewMemberDialog();
 			memberDialog.getController().setContext("selectedMember", selectedMember);
 
 			int returnCode = memberDialog.open();
