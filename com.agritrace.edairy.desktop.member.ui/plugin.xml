@@ -6,38 +6,29 @@
       <view
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.member.ui.views.CreateMemberView"
-            id="com.agritrace.edairy.desktop.member.ui.views.MemberSearchView"
-            name="Member List"
+            id="com.agritrace.edairy.desktop.member.ui.views.CreateMemberView"
+            name="Create New Member"
             restorable="true">
       </view>
-   </extension>
-     <extension
-         point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView"
             id="com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView"
-            name="Member List"
+            name="Member Directory"
             restorable="true">
       </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.member.ui.views.FarmListView"
             id="com.agritrace.edairy.desktop.member.ui.views.FarmListView"
-            name="Farm List"
+            name="Member Farm Registry"
             restorable="true">
       </view>
-   </extension>
-     <extension
-         point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.member.ui.views.ContainerListView"
             id="com.agritrace.edairy.desktop.member.ui.views.ContainerListView"
-            name="Container List"
+            name="Member Container Registry"
             restorable="true">
       </view>
    </extension>

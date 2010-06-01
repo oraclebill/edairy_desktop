@@ -13,10 +13,12 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewMemberDialogController;
+import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
 public class ViewMemberDialog extends BaseDialogView {
 
 	MembershipTabFolder tabFolder;
+	private MemberInfoGroup infoGroup;
 
 	public ViewMemberDialog() {
 		super(null);
@@ -29,13 +31,15 @@ public class ViewMemberDialog extends BaseDialogView {
 	
 	@Override
 	protected void buildWorkArea(Composite parent) {
-		createMemberSelectorGroup(parent);
-		tabFolder = new MembershipTabFolder(parent);
-		tabFolder.getTabComposite().setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, true, true));
-	}
+		
+		createMemberHeadlineGroup(parent);
 
-	void createMemberSelectorGroup(Composite composite) {
+		createMemberInfoGroup(parent);
+		
+		createMemberTabFolderGroup(parent);
+	}
+	
+	protected void createMemberHeadlineGroup(Composite composite) {
 		Composite infoPanel = UIControlsFactory.createComposite(composite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(infoPanel);
@@ -65,7 +69,18 @@ public class ViewMemberDialog extends BaseDialogView {
 		addUIControl(balanceLabel, ViewWidgetId.VIEW_MEMBER_BALANCE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(balanceLabel);
+	}
 
+
+	protected void createMemberTabFolderGroup(Composite parent) {
+		tabFolder = new MembershipTabFolder(parent);
+		tabFolder.getTabComposite().setLayoutData(
+				new GridData(SWT.FILL, SWT.FILL, true, true));
+	}
+
+	protected void createMemberInfoGroup(Composite parent) {
+		infoGroup = new MemberInfoGroup(parent);
+		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	}
 
 }
