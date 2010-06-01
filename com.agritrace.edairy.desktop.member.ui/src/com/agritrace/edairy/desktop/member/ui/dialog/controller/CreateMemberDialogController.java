@@ -2,19 +2,15 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.conversion.IConverter;
-import org.eclipse.core.databinding.observable.IObservable;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.emf.databinding.internal.EMFObservableValueDecorator;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
@@ -30,8 +26,6 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
@@ -45,7 +39,8 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 	private final class UpdateMemberPhotoAction implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
-			// TODO - open file selection dialog, get the bits, and stuff them into the model...
+			// TODO - open file selection dialog, get the bits, and stuff them
+			// into the model...
 			throw new UnsupportedOperationException("unimplemented");
 		}
 	}
@@ -53,16 +48,15 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 	public static final String DIALOG_TITLE = "Membership";
 
 	// reference data
-	public static final Collection<String> VALID_TITLES = Arrays.asList("Mr.",
-			"Mrs.", "Miss", "Dr.", "Prof.", "Ms.", "Hon.", "Lt.", "Maj.",
-			"Col.", "Gen.");
-	public static final Collection<String> VALID_NAME_SUFFIXES = Arrays.asList(
-			"Jr.", "Sr.", "Esq.", "II", "III", "IV", "V");
+	public static final Collection<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.",
+			"Hon.", "Lt.", "Maj.", "Col.", "Gen.");
+	public static final Collection<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV",
+			"V");
+
+	private Map<IRidget, FeaturePath> memberBindings;
 
 	// field to model mappings
 	// public static final
-
-	private String generatedMemberId;
 
 	protected Farmer selectedMembershipOwner;
 
@@ -114,7 +108,6 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 	public void configureRidgets() {
 		super.configureRidgets();
 
-		
 		getWindowRidget().setTitle(DIALOG_TITLE);
 		setSelected((Membership) getContext("selectedMember"));
 
@@ -128,6 +121,7 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 		transactionController = new MemberTransactionWidgetController(this);
 
 		if (getSelected() != null) {
+			memberBindings = initMemberBindings();
 			updateBindings();
 		}
 		configureButtonsPanel();
@@ -136,12 +130,12 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 
 	// TODO: make this generic, move to util calss.
 	private static boolean check(String s) {
-		return null != s && s.length() > 0;
+		return (null != s) && (s.length() > 0);
 	}
 
 	private static String formattedMemberName(Person member) {
 		String ret = "";
-		Person person = (Person) member;
+		final Person person = member;
 		if (check(person.getHonorific()))
 			ret += person.getHonorific() + " ";
 
@@ -163,27 +157,18 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 	}
 
 	protected void configureUpperPanel() {
-		formattedMemberNameRidget = getRidget(ILabelRidget.class,
-				ViewWidgetId.memberInfo_formattedName);
-		memberIdRidget = getRidget(ILabelRidget.class,
-				ViewWidgetId.memberInfo_id);
+		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
+		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
 		// generatedMemberId = System.currentTimeMillis()+"";
 		// memberIdRidget.setText(generatedMemberId);
-		givenNameRidget = getRidget(ITextRidget.class,
-				ViewWidgetId.memberInfo_firstName);
-		middleNameRidget = getRidget(ITextRidget.class,
-				ViewWidgetId.memberInfo_middleName);
-		familyNameRidget = getRidget(ITextRidget.class,
-				ViewWidgetId.memberInfo_lastName);
-		addtlNameRidget = getRidget(ITextRidget.class,
-				ViewWidgetId.memberInfo_additionalNames);
-		titleRidget = getRidget(IComboRidget.class,
-				ViewWidgetId.memberInfo_honorific);
-		suffixRidget = getRidget(IComboRidget.class,
-				ViewWidgetId.memberInfo_suffix);
+		givenNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
+		middleNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_middleName);
+		familyNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_lastName);
+		addtlNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames);
+		titleRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_honorific);
+		suffixRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_suffix);
 		photoRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberPhoto);
-		updatePhotoActionRidget = getRidget(ILinkRidget.class,
-				ViewWidgetId.memberPhotoEditLink);
+		updatePhotoActionRidget = getRidget(ILinkRidget.class, ViewWidgetId.memberPhotoEditLink);
 
 		// extended setup
 		titleRidget.setOutputOnly(true);
@@ -194,18 +179,17 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 
 		givenNameRidget.setMandatory(true);
 		familyNameRidget.setMandatory(true);
-		
-		Assert.isLegal(formattedMemberNameRidget != null );		
+
 		formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
-		
-		updatePhotoActionRidget.setText("(click to update photo)");		
+
+		updatePhotoActionRidget.setText("(click to update photo)");
 		updatePhotoActionRidget.addSelectionListener(updateMemberPhotoAction);
-		
+
 	}
 
 	private void updateBindings() {
 		updateUpperPanelBinding();
-		
+
 		final Membership selectedMember = getSelected();
 		memberProfileController.setInputModel(selectedMember);
 		farmController.setInputModel(selectedMember);
@@ -215,116 +199,85 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 		transactionController.setInputModel(selectedMember);
 	}
 
+	private final UpdateMemberPhotoAction updateMemberPhotoAction = new UpdateMemberPhotoAction();
 
-	private final Map<IRidget, FeaturePath> memberBindings = initMemberBindings();
-
-	private UpdateMemberPhotoAction updateMemberPhotoAction = new UpdateMemberPhotoAction();
 	private Map<IRidget, FeaturePath> initMemberBindings() {
-		Map<IRidget, FeaturePath> aMap = new HashMap<IRidget, FeaturePath>();
-		
+		final Map<IRidget, FeaturePath> aMap = new HashMap<IRidget, FeaturePath>();
+
 		// formatted name
-		aMap.put(formattedMemberNameRidget,
-				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)); // uses
-																					// converter
+		aMap.put(formattedMemberNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)); // uses
+																												// converter
 		// member id
-		aMap.put(memberIdRidget, FeaturePath
-				.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
-		
+		aMap.put(memberIdRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
+
 		// member first name
-		aMap.put(givenNameRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		aMap.put(givenNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__GIVEN_NAME));
 
 		// member middle name
-		aMap.put(middleNameRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		aMap.put(middleNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__MIDDLE_NAME));
-		
+
 		// member family name
-		aMap.put(familyNameRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		aMap.put(familyNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__FAMILY_NAME));
-		
+
 		// member additional names
-		aMap.put(addtlNameRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		aMap.put(addtlNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__ADDITIONAL_NAMES));
-		
+
 		// member title (prefix)
-		aMap.put(titleRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__HONORIFIC));
-		
+		aMap.put(titleRidget,
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__HONORIFIC));
+
 		// member suffix
-		aMap.put(suffixRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__SUFFIX));
+		aMap.put(suffixRidget,
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX));
 
 		// member photo
-		aMap.put(photoRidget, FeaturePath.fromList(
-				DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__PHOTO));
+		aMap.put(photoRidget,
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__PHOTO));
 
 		// member photo update button
-//		aMap.put(updatePhotoActionRidget, FeaturePath.fromList(
-//				DairyPackage.Literals.MEMBERSHIP__MEMBER,
-//				ModelPackage.Literals.PERSON__SUFFIX));
+		// aMap.put(updatePhotoActionRidget, FeaturePath.fromList(
+		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		// ModelPackage.Literals.PERSON__SUFFIX));
 
-		return Collections.unmodifiableMap(aMap); 
+		return (aMap);
 	}
 
 	protected void updateUpperPanelBinding() {
 		final Membership selectedMember = getSelected();
-		
+		Assert.isLegal((null != selectedMember) && (null != selectedMember.getMember()));
 		if (selectedMember.getMember() != null) {
 			// loop through the text ridgets
-			for (IRidget r : memberBindings.keySet() ) {
-				if ( r instanceof IValueRidget )
-					((IValueRidget) r).bindToModel(EMFProperties.value(memberBindings.get(r)).observe(selectedMember) );					
+			for (final IRidget r : memberBindings.keySet()) {
+				if (r instanceof IValueRidget) {
+					((IValueRidget) r).bindToModel(EMFProperties.value(memberBindings.get(r)).observe(selectedMember));
+				}
 			}
 
 			// manually bind the combos (for now)..
-			titleRidget.bindToModel(
-					new WritableList(VALID_TITLES, String.class), String.class,
-					null, EMFObservables.observeValue(selectedMember,
-							ModelPackage.Literals.PERSON__HONORIFIC));
-			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES,
-					String.class), String.class, null, EMFObservables
-					.observeValue(selectedMember,
-							ModelPackage.Literals.PERSON__SUFFIX));
+			titleRidget.bindToModel(new WritableList(VALID_TITLES, String.class), String.class, null,
+					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__HONORIFIC));
+			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES, String.class), String.class, null,
+					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__SUFFIX));
 
 			// tap, tap..
 			memberIdRidget.updateFromModel();
+			for (final IRidget r : memberBindings.keySet()) {
+				if (r instanceof IValueRidget)
+					((IValueRidget) r).updateFromModel();
+			}
+			titleRidget.updateFromModel();
+			suffixRidget.updateFromModel();
 		}
-	}
-
-	private void copySelectedMember() {
-		// if(selectedMember != null){
-		// workingCopy = EcoreUtil.copy(selectedMember);
-		// }
 	}
 
 	protected void saveMember() {
 		final Membership selectedMember = getSelected();
 		if (selectedMember != null) {
 			repository.saveNew(selectedMember);
-
-			// MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this,
-			// selectedMember);
-			// try {
-			// DairyDemoResourceManager.INSTANCE.saveFarmResource();
-			// DairyDemoResourceManager.INSTANCE.saveDairyResource();
-			// MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
-			// } catch (final IllegalArgumentException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// Activator.getDefault().logError(e, e.getMessage());
-			// } catch (final IOException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// Activator.getDefault().logError(e, e.getMessage());
-			//
-			// }
 		}
 	}
 

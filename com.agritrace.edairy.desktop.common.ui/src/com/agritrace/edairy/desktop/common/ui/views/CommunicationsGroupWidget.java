@@ -42,6 +42,7 @@ public class CommunicationsGroupWidget {
 		secondPhoneText = UIControlsFactory.createText(communicationGroup, SWT.SINGLE|SWT.BORDER, ViewWidgetId.SECOND_PHONE_TEXT);
 		GridDataFactory.swtDefaults().align(SWT.FILL,SWT.FILL).grab(true,false).applyTo(secondPhoneText);
 	}
+	
 	public Group getGroup() {
 		return communicationGroup;
 	}
