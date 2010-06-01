@@ -26,13 +26,13 @@ public class MemberRepository implements IRepository<Membership> {
 	}
 	
 	public List<Membership> getMembers() {
-		return null;
+		return driver.all();
 	}
 
 	@Override
 	public List<Membership> find(String rawQuery) {
 		// TODO Auto-generated method stub
-		return null;
+		return driver.find(rawQuery);
 	}
 
 	@Override
