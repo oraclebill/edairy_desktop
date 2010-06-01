@@ -18,7 +18,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupControll
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
-import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 public class SupplierListDialogController extends RecordDialogController<Supplier> {

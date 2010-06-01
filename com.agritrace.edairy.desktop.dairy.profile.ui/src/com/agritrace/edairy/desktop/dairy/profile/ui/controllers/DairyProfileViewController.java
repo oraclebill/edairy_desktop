@@ -1,26 +1,17 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.riena.core.injector.Inject;
 import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.ModuleController;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
-import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
-import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
-import com.agritrace.edairy.desktop.dairy.profile.ui.Activator;
-import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 
 /**
  * Dairy Profile view controller

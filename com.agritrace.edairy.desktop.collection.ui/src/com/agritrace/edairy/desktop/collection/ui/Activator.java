@@ -2,7 +2,8 @@ package com.agritrace.edairy.desktop.collection.ui;
 
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
-import com.agritrace.edairy.desktop.common.ui.*;
+
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 
 /**
  * The activator class controls the plug-in life cycle

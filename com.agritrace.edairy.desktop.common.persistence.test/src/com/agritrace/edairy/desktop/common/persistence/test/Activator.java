@@ -2,9 +2,7 @@ package com.agritrace.edairy.desktop.common.persistence.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.hibernate.SessionFactory;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceFactory;
 import org.osgi.framework.ServiceReference;
 
 public class Activator extends Plugin {

@@ -1,24 +1,9 @@
 package com.agritrace.edairy.desktop.common.persistence;
 
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Properties;
-
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
-import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Environment;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 
 public class Activator implements BundleActivator {
 

@@ -31,11 +31,11 @@ import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySub
 import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
+import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
-import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;

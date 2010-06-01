@@ -24,7 +24,6 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.dialog.CreateMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
-import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 
 public class MemberDirectoryController extends SubModuleController {
 

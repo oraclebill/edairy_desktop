@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.dairy.locations.ui.controllers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
-import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.*;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
@@ -40,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.RouteListDialog;
 
 public class DairyLocationController extends SubModuleController {
     public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";

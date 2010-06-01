@@ -10,7 +10,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.*;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.finance.ui.beans.TestAccountTransactionGenerator;
 
 public class TransactionBatchEntrySubModuleController extends

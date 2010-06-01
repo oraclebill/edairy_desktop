@@ -6,11 +6,11 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import com.agritrace.edairy.desktop.common.model.base.Company;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
+
+import com.agritrace.edairy.desktop.common.model.base.Company;
 
 /**
  * <!-- begin-user-doc -->

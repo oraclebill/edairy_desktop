@@ -18,8 +18,8 @@ import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.ui.views.data.LocalDairy;
 import com.agritrace.edairy.desktop.ui.views.data.NetworkDairy;
-import com.agritrace.edairy.desktop.ui.views.data.NetworkDairyFactory;
 import com.agritrace.edairy.desktop.ui.views.data.NetworkDairy.ORGANIZATIONTYPE;
+import com.agritrace.edairy.desktop.ui.views.data.NetworkDairyFactory;
 
 public class NetworklDairyViewController extends SubModuleController {
 

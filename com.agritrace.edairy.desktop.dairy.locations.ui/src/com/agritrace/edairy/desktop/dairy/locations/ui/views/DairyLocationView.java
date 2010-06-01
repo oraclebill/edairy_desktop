@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.dairy.locations.ui.views;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
@@ -23,7 +22,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.*;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 
 public class DairyLocationView extends SubModuleView {
 	public final static String ID = "dairy.locations.editor";

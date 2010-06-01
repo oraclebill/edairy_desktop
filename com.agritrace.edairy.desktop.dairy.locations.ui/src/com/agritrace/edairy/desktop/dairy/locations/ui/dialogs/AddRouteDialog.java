@@ -15,8 +15,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.*;
-
 @SuppressWarnings("unused")
 public class AddRouteDialog extends AbstractDialogView {
     private final static int WIDTH_UNIT = 100;

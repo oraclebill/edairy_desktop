@@ -34,12 +34,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import com.agritrace.edairy.desktop.deliveries.ui.dialogs.AddItemDialog;
 import com.agritrace.edairy.desktop.deliveries.ui.beans.Item;
 import com.agritrace.edairy.desktop.deliveries.ui.beans.ItemsFactory;
+import com.agritrace.edairy.desktop.deliveries.ui.dialogs.AddItemDialog;
 
 public class DeliveryView extends SubModuleView {
 

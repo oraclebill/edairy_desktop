@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
