@@ -34,263 +34,263 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 
 public class AddContainerDialog extends TitleAreaDialog implements ModifyListener {
 
-    private Container newContainer = TrackingFactory.eINSTANCE.createContainer();
+	private Container newContainer = TrackingFactory.eINSTANCE.createContainer();
 
-    private Text idText;
-    private Text numberText;
-    private Text capacityText;
-    private ControlDecoration unitsDecorator;
-    private ControlDecoration capacityDecorator;
-    private Membership memberShip;
+	private Text idText;
+	private Text numberText;
+	private Text capacityText;
+	private ControlDecoration unitsDecorator;
+	private ControlDecoration capacityDecorator;
+	private Membership memberShip;
 
-    /**
-     * MyTitleAreaDialog constructor
-     * 
-     * @param shell
-     *            the parent shell
-     */
-    public AddContainerDialog(Shell shell) {
-	super(shell);
+	/**
+	 * MyTitleAreaDialog constructor
+	 * 
+	 * @param shell
+	 *            the parent shell
+	 */
+	public AddContainerDialog(Shell shell) {
+		super(shell);
 
-    }
+	}
 
-    public AddContainerDialog(Shell shell, Membership selectedMembership) {
-	super(shell);
-	this.memberShip = selectedMembership;
+	public AddContainerDialog(Shell shell, Membership selectedMembership) {
+		super(shell);
+		this.memberShip = selectedMembership;
 
-    }
+	}
 
-    /**
-     * Closes the dialog box Override so we can dispose the image we created
-     */
-    @Override
-    public boolean close() {
+	/**
+	 * Closes the dialog box Override so we can dispose the image we created
+	 */
+	@Override
+	public boolean close() {
 
-	return super.close();
-    }
+		return super.close();
+	}
 
-    /**
-     * Creates the dialog's contents
-     * 
-     * @param parent
-     *            the parent composite
-     * @return Control
-     */
-    @Override
-    protected Control createContents(Composite parent) {
-	final Control contents = super.createContents(parent);
-	setTitle("Add Container Record");
-	setMessage("Please input container details");
-	return contents;
-    }
+	/**
+	 * Creates the dialog's contents
+	 * 
+	 * @param parent
+	 *            the parent composite
+	 * @return Control
+	 */
+	@Override
+	protected Control createContents(Composite parent) {
+		final Control contents = super.createContents(parent);
+		setTitle("Add Container Record");
+		setMessage("Please input container details");
+		return contents;
+	}
 
-    @Override
-    protected void configureShell(Shell newShell) {
-	super.configureShell(newShell);
-	newShell.setSize(550, 450);
-    }
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setSize(550, 450);
+	}
 
-    /**
-     * Creates the gray area
-     * 
-     * @param parent
-     *            the parent composite
-     * @return Control
-     */
-    @Override
-    protected Control createDialogArea(Composite parent) {
-	final Composite composite = (Composite) super.createDialogArea(parent);
-	final Composite dialogArea = UIControlsFactory.createComposite(composite);
-	dialogArea.setLayout(new GridLayout(2, false));
-	dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	/**
+	 * Creates the gray area
+	 * 
+	 * @param parent
+	 *            the parent composite
+	 * @return Control
+	 */
+	@Override
+	protected Control createDialogArea(Composite parent) {
+		final Composite composite = (Composite) super.createDialogArea(parent);
+		final Composite dialogArea = UIControlsFactory.createComposite(composite);
+		dialogArea.setLayout(new GridLayout(2, false));
+		dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-	UIControlsFactory.createLabel(dialogArea, "ID:");
+		UIControlsFactory.createLabel(dialogArea, "ID:");
 
-	idText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
-	idText.setTextLimit(10);
-	idText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-	idText.addModifyListener(this);
+		idText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE);
+		idText.setTextLimit(10);
+		idText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		idText.addModifyListener(this);
 
-	UIControlsFactory.createLabel(dialogArea, "Container Type:");
-	final Combo containerCombo = UIControlsFactory.createCombo(dialogArea);
-	final ComboViewer containerComboViewer = new ComboViewer(containerCombo);
-	containerComboViewer.setContentProvider(new ArrayContentProvider());
-	containerComboViewer.setInput(ContainerType.values());
-	containerComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		UIControlsFactory.createLabel(dialogArea, "Container Type:");
+		final Combo containerCombo = UIControlsFactory.createCombo(dialogArea);
+		final ComboViewer containerComboViewer = new ComboViewer(containerCombo);
+		containerComboViewer.setContentProvider(new ArrayContentProvider());
+		containerComboViewer.setInput(ContainerType.values());
+		containerComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-	    @Override
-	    public void selectionChanged(SelectionChangedEvent event) {
-		final String value = (String) ((IStructuredSelection) event.getSelection()).getFirstElement();
-		newContainer.setContainerId(Long.decode(value));
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				final String value = (String) ((IStructuredSelection) event.getSelection()).getFirstElement();
+				newContainer.setContainerId(Long.decode(value));
 
-	    }
-	});
-	containerComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+			}
+		});
+		containerComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
-	// Label unitsLabel = UIControlsFactory.createLabel(dialogArea,
-	// "Units:");
-	// numberText = new Text(dialogArea, SWT.BORDER|SWT.SINGLE);
-	// numberText.setTextLimit(10);
-	// numberText.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
-	// numberText.addModifyListener(this);
-	// unitsDecorator = createDecorator(numberText, "");
-	// unitsDecorator.hide();
+		// Label unitsLabel = UIControlsFactory.createLabel(dialogArea,
+		// "Units:");
+		// numberText = new Text(dialogArea, SWT.BORDER|SWT.SINGLE);
+		// numberText.setTextLimit(10);
+		// numberText.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+		// numberText.addModifyListener(this);
+		// unitsDecorator = createDecorator(numberText, "");
+		// unitsDecorator.hide();
 
-	UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
-	final Combo measureCombo = UIControlsFactory.createCombo(dialogArea);
-	final ComboViewer measureComboViewer = new ComboViewer(measureCombo);
-	measureComboViewer.setContentProvider(new ArrayContentProvider());
-	measureComboViewer.setInput(UnitOfMeasure.values());
-	measureComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-	measureComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
+		final Combo measureCombo = UIControlsFactory.createCombo(dialogArea);
+		final ComboViewer measureComboViewer = new ComboViewer(measureCombo);
+		measureComboViewer.setContentProvider(new ArrayContentProvider());
+		measureComboViewer.setInput(UnitOfMeasure.values());
+		measureComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		measureComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-	    @Override
-	    public void selectionChanged(SelectionChangedEvent event) {
-		final UnitOfMeasure value = (UnitOfMeasure) ((IStructuredSelection) event.getSelection())
-			.getFirstElement();
-		newContainer.setMeasureType(value);
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				final UnitOfMeasure value = (UnitOfMeasure) ((IStructuredSelection) event.getSelection())
+						.getFirstElement();
+				newContainer.setMeasureType(value);
 
-	    }
-	});
+			}
+		});
 
-	UIControlsFactory.createLabel(dialogArea, "Capacity:");
+		UIControlsFactory.createLabel(dialogArea, "Capacity:");
 
-	capacityText = new Text(dialogArea, SWT.BORDER | SWT.SINGLE);
-	capacityText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-	capacityText.addModifyListener(this);
-	capacityDecorator = createDecorator(capacityText, "");
-	capacityDecorator.hide();
+		capacityText = new Text(dialogArea, SWT.BORDER | SWT.SINGLE);
+		capacityText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		capacityText.addModifyListener(this);
+		capacityDecorator = createDecorator(capacityText, "");
+		capacityDecorator.hide();
 
-	UIControlsFactory.createLabel(dialogArea, "Farm:");
-	final Combo farmCombo = UIControlsFactory.createCombo(dialogArea);
-	final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
-	farmComboViewer.setContentProvider(new ArrayContentProvider());
-	if (memberShip != null) {
-	    farmComboViewer.setInput(memberShip.getMember().getFarms());
-	    farmComboViewer.setLabelProvider(new LabelProvider() {
-		@Override
-		public String getText(Object element) {
-		    if (element instanceof Farm) {
-			return ((Farm) element).getName();
-		    }
-		    return super.getText(element);
+		UIControlsFactory.createLabel(dialogArea, "Farm:");
+		final Combo farmCombo = UIControlsFactory.createCombo(dialogArea);
+		final ComboViewer farmComboViewer = new ComboViewer(farmCombo);
+		farmComboViewer.setContentProvider(new ArrayContentProvider());
+		if (memberShip != null) {
+			farmComboViewer.setInput(memberShip.getMember().getFarms());
+			farmComboViewer.setLabelProvider(new LabelProvider() {
+				@Override
+				public String getText(Object element) {
+					if (element instanceof Farm) {
+						return ((Farm) element).getName();
+					}
+					return super.getText(element);
+				}
+			});
+
 		}
-	    });
+
+		farmComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		farmComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				final Farm value = (Farm) ((IStructuredSelection) event.getSelection()).getFirstElement();
+				newContainer.setOwner(value);
+
+			}
+		});
+
+		if (memberShip != null && memberShip.getMember().getFarms().size() > 0) {
+			farmComboViewer.setSelection(new StructuredSelection(memberShip.getMember().getFarms().get(0)));
+		}
+		containerComboViewer.getCombo().select(0);
+		measureComboViewer.getCombo().select(0);
+		return composite;
+	}
+
+	/**
+	 * Creates the buttons for the button bar
+	 * 
+	 * @param parent
+	 *            the parent composite
+	 */
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		final Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		okButton.setEnabled(false);
+		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, true);
 
 	}
 
-	farmComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-	farmComboViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+	// @Override
+	@Override
+	public void modifyText(ModifyEvent e) {
+		if (e.getSource() == idText) {
+			newContainer.setContainerId(Long.decode(idText.getText().trim()));
+		} else if (e.getSource() == numberText) {
+			final String value = numberText.getText();
+			if (value != null && !value.trim().equals("")) {
+				try {
+					final double unitsValue = new Double(value).doubleValue();
+					// newContainer.setUnits(unitsValue);
+					if (unitsDecorator.isVisible()) {
+						setErrorMessage(null);
+						unitsDecorator.hide();
+					}
 
-	    @Override
-	    public void selectionChanged(SelectionChangedEvent event) {
-		final Farm value = (Farm) ((IStructuredSelection) event.getSelection()).getFirstElement();
-		newContainer.setOwner(value);
+				} catch (final NumberFormatException ex) {
+					// newContainer.setUnits(0);
+					unitsDecorator.show();
+					setErrorMessage("Invalid number format");
+				}
 
-	    }
-	});
+			}
+		} else if (e.getSource() == capacityText) {
+			final String value = capacityText.getText();
+			if (value != null && !value.trim().equals("")) {
+				try {
+					final double unitsValue = new Double(value).doubleValue();
+					newContainer.setCapacity(unitsValue);
+					capacityDecorator.hide();
+				} catch (final NumberFormatException ex) {
+					newContainer.setCapacity(0);
+					capacityDecorator.show();
+					setErrorMessage("Invalid number format");
+				}
 
-	if (memberShip != null && memberShip.getMember().getFarms().size() > 0) {
-	    farmComboViewer.setSelection(new StructuredSelection(memberShip.getMember().getFarms().get(0)));
-	}
-	containerComboViewer.getCombo().select(0);
-	measureComboViewer.getCombo().select(0);
-	return composite;
-    }
-
-    /**
-     * Creates the buttons for the button bar
-     * 
-     * @param parent
-     *            the parent composite
-     */
-    @Override
-    protected void createButtonsForButtonBar(Composite parent) {
-	final Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
-	okButton.setEnabled(false);
-	createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, true);
-
-    }
-
-    // @Override
-    @Override
-    public void modifyText(ModifyEvent e) {
-	if (e.getSource() == idText) {
-	    newContainer.setContainerId(Long.decode(idText.getText().trim()));
-	} else if (e.getSource() == numberText) {
-	    final String value = numberText.getText();
-	    if (value != null && !value.trim().equals("")) {
-		try {
-		    final double unitsValue = new Double(value).doubleValue();
-		    // newContainer.setUnits(unitsValue);
-		    if (unitsDecorator.isVisible()) {
+			}
+		}
+		if (validate()) {
 			setErrorMessage(null);
-			unitsDecorator.hide();
-		    }
-
-		} catch (final NumberFormatException ex) {
-		    // newContainer.setUnits(0);
-		    unitsDecorator.show();
-		    setErrorMessage("Invalid number format");
+			getButton(IDialogConstants.OK_ID).setEnabled(true);
+		} else {
+			getButton(IDialogConstants.OK_ID).setEnabled(false);
 		}
 
-	    }
-	} else if (e.getSource() == capacityText) {
-	    final String value = capacityText.getText();
-	    if (value != null && !value.trim().equals("")) {
-		try {
-		    final double unitsValue = new Double(value).doubleValue();
-		    newContainer.setCapacity(unitsValue);
-		    capacityDecorator.hide();
-		} catch (final NumberFormatException ex) {
-		    newContainer.setCapacity(0);
-		    capacityDecorator.show();
-		    setErrorMessage("Invalid number format");
-		}
-
-	    }
-	}
-	if (validate()) {
-	    setErrorMessage(null);
-	    getButton(IDialogConstants.OK_ID).setEnabled(true);
-	} else {
-	    getButton(IDialogConstants.OK_ID).setEnabled(false);
 	}
 
-    }
+	private boolean validate() {
+		return newContainer.getContainerId() != null && newContainer.getType() != null
+				&& newContainer.getMeasureType() != null && newContainer.getCapacity() != 0;
+	}
 
-    private boolean validate() {
-	return newContainer.getContainerId() != null && newContainer.getType() != null
-		&& newContainer.getMeasureType() != null && newContainer.getCapacity() != 0;
-    }
+	private ControlDecoration createDecorator(Text text, String message) {
+		final ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
+		controlDecoration.setDescriptionText(message);
+		final FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
+				FieldDecorationRegistry.DEC_ERROR);
+		controlDecoration.setImage(fieldDecoration.getImage());
+		return controlDecoration;
+	}
 
-    private ControlDecoration createDecorator(Text text, String message) {
-	final ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-	controlDecoration.setDescriptionText(message);
-	final FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
-		FieldDecorationRegistry.DEC_ERROR);
-	controlDecoration.setImage(fieldDecoration.getImage());
-	return controlDecoration;
-    }
+	public Container getNewContainer() {
+		return newContainer;
+	}
 
-    public Container getNewContainer() {
-	return newContainer;
-    }
+	public void setNewContainer(Container newContainer) {
+		this.newContainer = newContainer;
+	}
 
-    public void setNewContainer(Container newContainer) {
-	this.newContainer = newContainer;
-    }
+	public Membership getMemberShip() {
+		return memberShip;
+	}
 
-    public Membership getMemberShip() {
-	return memberShip;
-    }
+	public void setMemberShip(Membership memberShip) {
+		this.memberShip = memberShip;
+	}
 
-    public void setMemberShip(Membership memberShip) {
-	this.memberShip = memberShip;
-    }
-
-    @Override
-    protected boolean isResizable() {
-	return true;
-    }
+	@Override
+	protected boolean isResizable() {
+		return true;
+	}
 }

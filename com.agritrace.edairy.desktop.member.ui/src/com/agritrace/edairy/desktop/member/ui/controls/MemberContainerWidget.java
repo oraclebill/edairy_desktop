@@ -13,21 +13,22 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+
 public class MemberContainerWidget {
-	
+
 	private Composite composite;
-	
+
 	public static final String ADD_BUTTON = "Add &Container";
 	public static final String REMOVE_BUTTON = "&Remove";
-	
-	public MemberContainerWidget(Composite parent){
+
+	public MemberContainerWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(1,true));
+		composite.setLayout(new GridLayout(1, true));
 		initGUI();
 	}
-	
-	public void initGUI(){
-		
+
+	public void initGUI() {
+
 		final Combo farmCombo = UIControlsFactory.createCombo(composite, ViewWidgetId.CONTAINER_FarmCombo);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(farmCombo);
 
@@ -68,12 +69,10 @@ public class MemberContainerWidget {
 				ViewWidgetId.CONTAINER_Remove);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
 
-	
 	}
 
 	public Composite getComposite() {
 		return composite;
 	}
-	
 
 }

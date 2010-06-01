@@ -8,62 +8,62 @@ import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView.MemberSearc
 
 public class MemberSearchSelectionManager {
 
-    public static MemberSearchSelectionManager INSTANCE = new MemberSearchSelectionManager();
+	public static MemberSearchSelectionManager INSTANCE = new MemberSearchSelectionManager();
 
-    private final List<MemberSearchSelectionListener> listeners;
+	private final List<MemberSearchSelectionListener> listeners;
 
-    private MemberSearchNodeListener searchNode;
+	private MemberSearchNodeListener searchNode;
 
-    private MemberSearchSelectionManager() {
-	listeners = new ArrayList<MemberSearchSelectionListener>();
-    }
-
-    public synchronized void addSearchSelectionListener(MemberSearchSelectionListener listener) {
-	if (!listeners.contains(listener)) {
-	    listeners.add(listener);
-	}
-    }
-
-    public synchronized void removeSearchSelectionListener(MemberSearchSelectionListener listener) {
-	if (!listeners.contains(listener)) {
-	    listeners.remove(listener);
-	}
-    }
-
-    public void notifySelectionChanged(MemberSearchSelectionListener source, Membership member) {
-	for (final MemberSearchSelectionListener listener : listeners) {
-	    if (listener != source) {
-		listener.memberSelectionChanged(member);
-	    }
+	private MemberSearchSelectionManager() {
+		listeners = new ArrayList<MemberSearchSelectionListener>();
 	}
 
-    }
-
-    public void notifySelectionModified(MemberSearchSelectionListener source, Membership member) {
-	for (final MemberSearchSelectionListener listener : listeners) {
-	    if (listener != source) {
-		listener.memberModified(member);
-	    }
+	public synchronized void addSearchSelectionListener(MemberSearchSelectionListener listener) {
+		if (!listeners.contains(listener)) {
+			listeners.add(listener);
+		}
 	}
 
-    }
-
-    public void refreshView(String viewId) {
-	for (final MemberSearchSelectionListener listener : listeners) {
-	    listener.refreshView(viewId);
+	public synchronized void removeSearchSelectionListener(MemberSearchSelectionListener listener) {
+		if (!listeners.contains(listener)) {
+			listeners.remove(listener);
+		}
 	}
-    }
 
-    public void clearListeners() {
-	listeners.clear();
-    }
+	public void notifySelectionChanged(MemberSearchSelectionListener source, Membership member) {
+		for (final MemberSearchSelectionListener listener : listeners) {
+			if (listener != source) {
+				listener.memberSelectionChanged(member);
+			}
+		}
 
-    public MemberSearchNodeListener getSearchNode() {
-	return searchNode;
-    }
+	}
 
-    public void setSearchNode(MemberSearchNodeListener searchNode) {
-	this.searchNode = searchNode;
-    }
+	public void notifySelectionModified(MemberSearchSelectionListener source, Membership member) {
+		for (final MemberSearchSelectionListener listener : listeners) {
+			if (listener != source) {
+				listener.memberModified(member);
+			}
+		}
+
+	}
+
+	public void refreshView(String viewId) {
+		for (final MemberSearchSelectionListener listener : listeners) {
+			listener.refreshView(viewId);
+		}
+	}
+
+	public void clearListeners() {
+		listeners.clear();
+	}
+
+	public MemberSearchNodeListener getSearchNode() {
+		return searchNode;
+	}
+
+	public void setSearchNode(MemberSearchNodeListener searchNode) {
+		this.searchNode = searchNode;
+	}
 
 }

@@ -27,7 +27,7 @@ import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
 
-public class MemberFarmWidgetController implements WidgetController,ISelectionListener{
+public class MemberFarmWidgetController implements WidgetController, ISelectionListener {
 
 	private IController controller;
 
@@ -46,7 +46,7 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 
 	private final List<Farm> farms = new ArrayList<Farm>();
 
-	public MemberFarmWidgetController(IController controller){
+	public MemberFarmWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
@@ -54,13 +54,13 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 	@Override
 	public void configure() {
 
-		if(controller == null){
+		if (controller == null) {
 			return;
 
 		}
 		farmTable = controller.getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
 
-		farmAddButton =controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
+		farmAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
 
 		farmTable.setColumnFormatter(2, new ColumnFormatter() {
 
@@ -72,7 +72,7 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 						final PostalLocation postalLocation = location.getPostalLocation();
 						if (postalLocation != null) {
 							return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
-							+ postalLocation.getPostalCode();
+									+ postalLocation.getPostalCode();
 						}
 					}
 				}
@@ -127,7 +127,6 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 		farmTable.addSelectionListener(this);
 	}
 
-
 	@Override
 	public Object getInputModel() {
 		// TODO Auto-generated method stub
@@ -136,8 +135,8 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 
 	@Override
 	public void setInputModel(Object model) {
-		selectedMember = (Membership)model;
-		if(farmTable != null){
+		selectedMember = (Membership) model;
+		if (farmTable != null) {
 			updateBinding();
 		}
 
@@ -145,19 +144,17 @@ public class MemberFarmWidgetController implements WidgetController,ISelectionLi
 
 	@Override
 	public IController getController() {
-		return controller ;
+		return controller;
 	}
-
 
 	@Override
 	public void setController(IController controller) {
 		this.controller = controller;
 	}
 
-
 	@Override
 	public void updateBinding() {
-		if(selectedMember != null){
+		if (selectedMember != null) {
 			farms.clear();
 			farms.addAll(selectedMember.getMember().getFarms());
 			farmTable.updateFromModel();

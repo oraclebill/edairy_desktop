@@ -16,28 +16,30 @@ import com.agritrace.edairy.desktop.common.ui.views.DateRangeSearchWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidget {
-	
+
 	private Composite composite;
-	
-	public MemberCollectionRecordsWidget(Composite parent){
+
+	public MemberCollectionRecordsWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(1,false));
+		composite.setLayout(new GridLayout(1, false));
 		initGUI();
 	}
-	
-	public void initGUI(){
+
+	public void initGUI() {
 
 		// fitler panel
 		final Composite filterPanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(2, false));
-		
-		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ", ViewWidgetId.COLLECTION_FILTER_STARTDATE,
-				ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(dateRangeWidget.getComposite());
+
+		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
+				ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE,
+				ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
+				.applyTo(dateRangeWidget.getComposite());
 
 		Composite filterButtonPanel = UIControlsFactory.createComposite(filterPanel);
-		filterButtonPanel.setLayout(new GridLayout(3,false));
+		filterButtonPanel.setLayout(new GridLayout(3, false));
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(filterButtonPanel);
 
 		final Button nprMissing = UIControlsFactory.createButtonCheck(filterButtonPanel, "NPR Missing",
@@ -51,7 +53,6 @@ public class MemberCollectionRecordsWidget {
 		final Button flaged = UIControlsFactory.createButtonCheck(filterButtonPanel, "Suspended",
 				ViewWidgetId.COLLECTION_FILTER_FLAG);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(flaged);
-	
 
 		final Composite tablePanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -80,8 +81,6 @@ public class MemberCollectionRecordsWidget {
 
 		tablePanel.setLayout(layout);
 
-	
-		
 	}
 
 	public Composite getComposite() {

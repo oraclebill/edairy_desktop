@@ -90,14 +90,14 @@ public class Activator extends DesktopBaseActivator {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	public void log(String message){
+	public void log(String message) {
 		Status newLog = new Status(IStatus.INFO, PLUGIN_ID, message);
 		getLog().log(newLog);
 
 	}
-	
-	public void logError(Throwable e,String message){
-		Status newLog = new Status(IStatus.ERROR, PLUGIN_ID, message,e);
+
+	public void logError(Throwable e, String message) {
+		Status newLog = new Status(IStatus.ERROR, PLUGIN_ID, message, e);
 		getLog().log(newLog);
 
 	}

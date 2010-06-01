@@ -28,54 +28,44 @@ public class ViewMemberDialog extends BaseDialogView {
 	protected AbstractWindowController createController() {
 		return new ViewMemberDialogController();
 	}
-	
+
 	@Override
 	protected void buildWorkArea(Composite parent) {
-		
+
 		createMemberHeadlineGroup(parent);
 
 		createMemberInfoGroup(parent);
-		
+
 		createMemberTabFolderGroup(parent);
 	}
-	
+
 	protected void createMemberHeadlineGroup(Composite composite) {
 		Composite infoPanel = UIControlsFactory.createComposite(composite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(infoPanel);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false)
-				.applyTo(infoPanel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoPanel);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(infoPanel);
 
-		Label titleLabel = UIControlsFactory.createLabel(infoPanel,
-				"Member Name :");
+		Label titleLabel = UIControlsFactory.createLabel(infoPanel, "Member Name :");
 		addUIControl(titleLabel, ViewWidgetId.VIEW_MEMBER_NAME_HEADER);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(titleLabel);
-		Font labelFont = JFaceResources.getFontRegistry().getBold(
-				JFaceResources.HEADER_FONT);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(titleLabel);
+		Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
 		titleLabel.setFont(labelFont);
 
 		Label photoLabel = UIControlsFactory.createLabel(infoPanel, "");
 		addUIControl(photoLabel, ViewWidgetId.VIEW_MEMBER_NAME_PHOTO);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(1, 3)
-				.grab(false, false).applyTo(photoLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(1, 3).grab(false, false).applyTo(photoLabel);
 
 		Label idLabel = UIControlsFactory.createLabel(infoPanel, "");
 		addUIControl(idLabel, ViewWidgetId.VIEW_MEMBER_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(idLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(idLabel);
 
 		Label balanceLabel = UIControlsFactory.createLabel(infoPanel, "");
 		addUIControl(balanceLabel, ViewWidgetId.VIEW_MEMBER_BALANCE);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(balanceLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(balanceLabel);
 	}
-
 
 	protected void createMemberTabFolderGroup(Composite parent) {
 		tabFolder = new MembershipTabFolder(parent);
-		tabFolder.getTabComposite().setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, true, true));
+		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 
 	protected void createMemberInfoGroup(Composite parent) {

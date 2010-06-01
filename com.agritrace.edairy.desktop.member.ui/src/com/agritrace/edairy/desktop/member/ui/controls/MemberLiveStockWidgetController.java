@@ -43,17 +43,19 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	private final List<RegisteredAnimal> animalInput = new ArrayList<RegisteredAnimal>();
 
-	public MemberLiveStockWidgetController(IController controller){
+	public MemberLiveStockWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if(controller == null){
+		if (controller == null) {
 			return;
 		}
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
+		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
+				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON,
+				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
 		liveStockTable = controller.getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
 		liveStockTable.setColumnFormatter(1, new ColumnFormatter() {
 
@@ -109,17 +111,18 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 			@Override
 			public void callback() {
-				//				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
-				//						| SWT.APPLICATION_MODAL);
-				//				shell.setSize(550, 450);
-				//				final AddAnimalDialog dialog = new AddAnimalDialog(shell);
-				//				dialog.setMemberShip(member);
-				//				if (dialog.open() == Window.OK) {
-				//					final RegisteredAnimal newAnimal = dialog.getNewAnimal();
-				//					newAnimal.getLocation().getAnimals().add(newAnimal);
-				//					animalInput.add(newAnimal);
-				//					liveStockTable.updateFromModel();
-				//				}
+				// final Shell shell = new Shell(Display.getDefault(),
+				// SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
+				// | SWT.APPLICATION_MODAL);
+				// shell.setSize(550, 450);
+				// final AddAnimalDialog dialog = new AddAnimalDialog(shell);
+				// dialog.setMemberShip(member);
+				// if (dialog.open() == Window.OK) {
+				// final RegisteredAnimal newAnimal = dialog.getNewAnimal();
+				// newAnimal.getLocation().getAnimals().add(newAnimal);
+				// animalInput.add(newAnimal);
+				// liveStockTable.updateFromModel();
+				// }
 			}
 		});
 
@@ -143,7 +146,6 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 			}
 		});
-
 
 	}
 
@@ -170,22 +172,22 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 	@Override
 	public void updateBinding() {
-		if(inputModel != null){
+		if (inputModel != null) {
 			animalInput.clear();
-			if(inputModel instanceof Membership){
+			if (inputModel instanceof Membership) {
 				Membership member = (Membership) inputModel;
 				final List<Farm> farms = member.getMember().getFarms();
 				for (final Farm farm : farms) {
 					animalInput.addAll(farm.getAnimals());
-				} 
-			}else if(inputModel instanceof Farm){
-				Farm farm  = (Farm) inputModel;
+				}
+			} else if (inputModel instanceof Farm) {
+				Farm farm = (Farm) inputModel;
 				animalInput.addAll(farm.getAnimals());
 			}
 
 			liveStockTable.updateFromModel();
 			liveStockTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
-			//			liveStockTable.addSelectionListener(this);
+			// liveStockTable.addSelectionListener(this);
 		}
 
 	}

@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
-
-
 import java.util.Date;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -28,14 +26,15 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 /**
  * MemberProfile Tab widget
+ * 
  * @author CJ
- *
+ * 
  */
 public class MemberProfileWidget {
 
 	private Composite composite;
 
-	public static final String INFO_GROUP="Membership Information";
+	public static final String INFO_GROUP = "Membership Information";
 	public static final String applicationDate = "Application Date:";
 	public static final String effectiveDate = "Effective Date:";
 	public static final String status = "Status:";
@@ -46,7 +45,7 @@ public class MemberProfileWidget {
 	private ComboViewer comboStatus;
 	private Text txtPhone;
 
-	public MemberProfileWidget(Composite parent){
+	public MemberProfileWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
 		composite.setLayout(new GridLayout(1, false));
 		initGUI();
@@ -66,7 +65,7 @@ public class MemberProfileWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication.getGroup());
 	}
 
-	private void createInfoGroup(){
+	private void createInfoGroup() {
 		Group infoGroup = UIControlsFactory.createGroup(composite, INFO_GROUP);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoGroup);
 		infoGroup.setLayout(new GridLayout(6, false));

@@ -17,22 +17,23 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidget {
 	private Composite composite;
-	
-	public static final String ADD_BUTTON="&Add Transaction";
-	public static final String View_BUTTON="&View";
-	
-	public MemberTransactionWidget(Composite parent){
+
+	public static final String ADD_BUTTON = "&Add Transaction";
+	public static final String View_BUTTON = "&View";
+
+	public MemberTransactionWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(1,false));
+		composite.setLayout(new GridLayout(1, false));
 		initGUI();
 	}
-	
-	public void initGUI(){
-		// fitler panel
-		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Transaction Date Range: ", ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
-				ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(dateRangeWidget.getComposite());
 
+	public void initGUI() {
+		// fitler panel
+		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Transaction Date Range: ",
+				ViewWidgetId.TRANSACTION_FILTER_STARTDATE, ViewWidgetId.TRANSACTION_FILTER_ENDDATE,
+				ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
+				.applyTo(dateRangeWidget.getComposite());
 
 		final Composite tablePanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -59,17 +60,17 @@ public class MemberTransactionWidget {
 		layout.setColumnData(columnAmount, new ColumnWeightData(20));
 		layout.setColumnData(columnDescription, new ColumnWeightData(40));
 		tablePanel.setLayout(layout);
-		
+
 		final Composite buttonPanel = UIControlsFactory.createComposite(composite, SWT.NULL);
-		buttonPanel.setLayout(new GridLayout(2,false));
+		buttonPanel.setLayout(new GridLayout(2, false));
 		buttonPanel.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
-		
+
 		Button addButton = UIControlsFactory.createButton(buttonPanel, ADD_BUTTON, ViewWidgetId.TRANSACTION_ADD_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
-		
+
 		Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON, ViewWidgetId.TRANSACTION_VIEW_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(vButton);
-		
+
 	}
 
 	public Composite getComposite() {

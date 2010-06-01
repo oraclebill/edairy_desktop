@@ -41,7 +41,6 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 	public static final String ID = CreateMemberView.class.getName();
 
 	public static final String MEMBER_INFO_GROUP = "Members Information";
-	
 
 	// container button
 	public static final String ADD_BUTTON = "Add";
@@ -49,7 +48,7 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 
 	private Composite main;
 	private Text txtName;
-	//    private Text txtId;
+	// private Text txtId;
 	private List lstMembers;
 
 	private MemberInfoGroup infoGroup;
@@ -130,7 +129,7 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		tabfolder.setSelectionBackground(new Color[] { startColor, endColor }, new int[] { 50 }, true);
 		// tabfolder.setSimple(false);
 
-		//profile tab
+		// profile tab
 		final CTabItem profileTab = new CTabItem(tabfolder, SWT.NULL);
 		profileTab.setText("Profile");
 		final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
@@ -139,19 +138,19 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(profileWidget.getComposite());
 		profileTab.setControl(profileComposite);
 
-
 		// account summary
 		final CTabItem accountTab = new CTabItem(tabfolder, SWT.NULL);
 		accountTab.setText("Account Summary");
 		final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		accountComposite.setLayout(new GridLayout(1, true));
 		MemberAccountWidget accountWidget = new MemberAccountWidget(accountComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(accountWidget.getComposite());		accountTab.setControl(accountComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(accountWidget.getComposite());
+		accountTab.setControl(accountComposite);
 		accountTab.setControl(accountComposite);
 
 		final CTabItem transactionTab = new CTabItem(tabfolder, SWT.NULL);
 		transactionTab.setText("Transactions");
-		Composite transComposite =  UIControlsFactory.createComposite(tabfolder,SWT.NONE);
+		Composite transComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		transComposite.setLayout(new GridLayout(1, true));
 		MemberTransactionWidget transWidget = new MemberTransactionWidget(transComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(transWidget.getComposite());
@@ -162,7 +161,8 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		final Composite collectionComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		collectionComposite.setLayout(new GridLayout(1, true));
 		MemberCollectionRecordsWidget collectionWidget = new MemberCollectionRecordsWidget(collectionComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(collectionWidget.getComposite());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+				.applyTo(collectionWidget.getComposite());
 		collectionTab.setControl(collectionComposite);
 
 		final CTabItem farmTab = new CTabItem(tabfolder, SWT.NULL);
@@ -178,7 +178,8 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		livestockComposite.setLayout(new GridLayout(1, true));
 		MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(liveStockWidget.getComposite());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+				.applyTo(liveStockWidget.getComposite());
 		livestockTab.setControl(livestockComposite);
 
 		final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
@@ -186,7 +187,8 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		containerComposite.setLayout(new GridLayout(1, false));
 		MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerWidget.getComposite());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+				.applyTo(containerWidget.getComposite());
 		containerTab.setControl(containerComposite);
 
 		tabfolder.setSelection(accountTab);
@@ -267,6 +269,5 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

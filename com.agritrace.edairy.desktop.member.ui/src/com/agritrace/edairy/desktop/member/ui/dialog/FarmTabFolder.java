@@ -20,15 +20,14 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 
 public class FarmTabFolder {
 
-	
 	private Composite tabComposite;
 	public static final String MEMBER_INFO_GROUP = "Farm Information";
 
-	public FarmTabFolder(Composite parent){
+	public FarmTabFolder(Composite parent) {
 		initGUI(parent);
 	}
-	
-	private void initGUI(Composite parent){
+
+	private void initGUI(Composite parent) {
 		tabComposite = UIControlsFactory.createComposite(parent);
 		final GridData detailsGD = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		detailsGD.minimumHeight = 200;
@@ -46,16 +45,15 @@ public class FarmTabFolder {
 
 		final CTabFolder tabfolder = new CTabFolder(detailGroup, SWT.NULL);
 		tabfolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		final Color startColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_START_COLOR);
 		final Color endColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_END_COLOR);
 		tabfolder.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		tabfolder.setSelectionBackground(new Color[] { startColor, endColor }, new int[] { 50 }, true);
-		
 
-		//profile tab
+		// profile tab
 		final CTabItem profileTab = new CTabItem(tabfolder, SWT.NULL);
 		profileTab.setText("Address");
 		final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
@@ -69,7 +67,8 @@ public class FarmTabFolder {
 		final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		livestockComposite.setLayout(new GridLayout(1, true));
 		MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(liveStockWidget.getComposite());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+				.applyTo(liveStockWidget.getComposite());
 		livestockTab.setControl(livestockComposite);
 
 		final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
@@ -77,7 +76,8 @@ public class FarmTabFolder {
 		final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		containerComposite.setLayout(new GridLayout(1, false));
 		MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerWidget.getComposite());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+				.applyTo(containerWidget.getComposite());
 		containerTab.setControl(containerComposite);
 
 	}
@@ -85,6 +85,5 @@ public class FarmTabFolder {
 	public Composite getTabComposite() {
 		return tabComposite;
 	}
-
 
 }

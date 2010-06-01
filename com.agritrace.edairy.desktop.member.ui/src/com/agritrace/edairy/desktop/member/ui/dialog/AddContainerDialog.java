@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddContainerDialogController;
 
-public class AddContainerDialog extends AbstractDialogView  {
+public class AddContainerDialog extends AbstractDialogView {
 
 	private Composite main;
 
@@ -46,7 +46,8 @@ public class AddContainerDialog extends AbstractDialogView  {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
 
 		createMainArea(main);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false).applyTo(createOkCancelButtons(parent));
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false)
+				.applyTo(createOkCancelButtons(parent));
 
 		return null;
 	}
@@ -63,7 +64,6 @@ public class AddContainerDialog extends AbstractDialogView  {
 	public boolean close() {
 		return super.close();
 	}
-
 
 	@Override
 	protected void configureShell(Shell newShell) {
@@ -89,19 +89,18 @@ public class AddContainerDialog extends AbstractDialogView  {
 		idLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Container Type:");
-		final Combo containerCombo = UIControlsFactory.createCombo(dialogArea,ViewWidgetId.VIEW_CONTAINER_TYPE);
+		final Combo containerCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_TYPE);
 		containerCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
-		final Combo measureCombo = UIControlsFactory.createCombo(dialogArea,ViewWidgetId.VIEW_CONTAINER_UNIT);
+		final Combo measureCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_UNIT);
 		measureCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-
 
 		UIControlsFactory.createLabel(dialogArea, "Capacity:");
 
-		Text capacityText = UIControlsFactory.createText(dialogArea,SWT.BORDER|SWT.SINGLE,ViewWidgetId.VIEW_CONTAINER_COMPACITY);
+		Text capacityText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE,
+				ViewWidgetId.VIEW_CONTAINER_COMPACITY);
 		capacityText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-
 
 		UIControlsFactory.createLabel(dialogArea, "Farm:");
 		final Combo farmCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_FARM);
@@ -128,8 +127,6 @@ public class AddContainerDialog extends AbstractDialogView  {
 		addUIControl(cancelButton, ViewWidgetId.memberInfo_cacelButton);
 		return buttonComposite;
 	}
-
-
 
 	@Override
 	protected boolean isResizable() {

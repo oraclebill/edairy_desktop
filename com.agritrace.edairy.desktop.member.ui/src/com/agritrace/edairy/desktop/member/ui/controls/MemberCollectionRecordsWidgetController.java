@@ -37,17 +37,16 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-
 public class MemberCollectionRecordsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
 
 	private IController controller;
 	private Membership membership;
-	
+
 	private DateRangeSearchController dateSearchController;
 
 	private ITableRidget collectionTable;
-	private final String[] collectionPropertyNames = { "collectionJournal", "collectionJournal", "dairyContainer", "quantity",
-			"notRecorded", "rejected", "flagged" };
+	private final String[] collectionPropertyNames = { "collectionJournal", "collectionJournal", "dairyContainer",
+			"quantity", "notRecorded", "rejected", "flagged" };
 	private final String[] collectionColumnHeaders = { "Session", "Date", "Container", "Quantity", "NPR Missing",
 			"Rejected", "Suspended" };
 	private final List<CollectionJournalLine> records = new ArrayList<CollectionJournalLine>();
@@ -55,26 +54,27 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	private IToggleButtonRidget rejected;
 	private IToggleButtonRidget suspended;
 
-	public MemberCollectionRecordsWidgetController(IController controller){
+	public MemberCollectionRecordsWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
+
 	@Override
 	public void configure() {
-		if(controller == null){
+		if (controller == null) {
 			return;
 		}
 		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
-		if ( null == collectionTable ) {
+		if (null == collectionTable) {
 			return;
 		}
-		
-		collectionTable.setColumnFormatter(0, new ColumnFormatter(){
+
+		collectionTable.setColumnFormatter(0, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof CollectionJournalLine) {
-					CollectionJournal journal = ((CollectionJournalLine)element).getCollectionJournal();
-					if(journal != null){
+					CollectionJournal journal = ((CollectionJournalLine) element).getCollectionJournal();
+					if (journal != null) {
 						return journal.getSession().toString();
 					}
 				}
@@ -87,11 +87,12 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		nprMissing = controller.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
 		rejected = controller.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_REJECTED);
 		suspended = controller.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_FLAG);
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON, this);
+		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.COLLECTION_FILTER_STARTDATE,
+				ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON,
+				ViewWidgetId.COLLECTION_FILTER_ENDBUTTON, this);
 		nprMissing.addListener(this);
 		rejected.addListener(this);
 		suspended.addListener(this);
-
 
 	}
 
@@ -103,8 +104,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	@Override
 	public void setInputModel(Object model) {
-		this.membership = (Membership)model;
-		if(collectionTable != null){
+		this.membership = (Membership) model;
+		if (collectionTable != null) {
 			updateBinding();
 		}
 
@@ -124,12 +125,12 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	@Override
 	public void updateBinding() {
-		if ( null == collectionTable ) {
+		if (null == collectionTable) {
 			return;
 		}
 		records.clear();
 		records.addAll(getCollectionJournalLines());
-		
+
 		collectionTable.setColumnFormatter(1, new ColumnFormatter() {
 
 			@Override
@@ -156,7 +157,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			}
 		});
 		collectionTable.updateFromModel();
-		if(dateSearchController != null){
+		if (dateSearchController != null) {
 			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
 		}
 
@@ -166,7 +167,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	private List<CollectionJournalLine> getCollectionJournalLines() {
 		final List<CollectionJournalLine> collectionJournalRecords = new ArrayList<CollectionJournalLine>();
 		if (membership != null) {
-			final String selectedMemberId = "" +  membership.getMemberId();
+			final String selectedMemberId = "" + membership.getMemberId();
 			final EObject container = membership.eContainer();
 			if (container != null && container instanceof Dairy) {
 				final List<CollectionJournal> allRecords = ((Dairy) container).getCollectionJournals();
@@ -182,18 +183,21 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		}
 		return collectionJournalRecords;
 	}
+
 	@Override
 	public List<CollectionJournalLine> filter(String startDate, String endDate) {
 		List<CollectionJournalLine> objs = filterNPR();
-		objs =  filterDate(objs, startDate, endDate);
-		collectionTable.bindToModel(new WritableList(objs, CollectionJournalLine.class),
-				CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
+		objs = filterDate(objs, startDate, endDate);
+		collectionTable.bindToModel(new WritableList(objs, CollectionJournalLine.class), CollectionJournalLine.class,
+				collectionPropertyNames, collectionColumnHeaders);
 		collectionTable.updateFromModel();
 		return objs;
 	}
-	private List<CollectionJournalLine> filterDate(List<CollectionJournalLine> inputRecrods,String startDate, String endDate){
+
+	private List<CollectionJournalLine> filterDate(List<CollectionJournalLine> inputRecrods, String startDate,
+			String endDate) {
 		List<CollectionJournalLine> objs = new ArrayList<CollectionJournalLine>();
-		if(inputRecrods == null || inputRecrods.isEmpty()){
+		if (inputRecrods == null || inputRecrods.isEmpty()) {
 			return objs;
 		}
 		try {
@@ -209,21 +213,17 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 				}
 			};
 
-
 			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
 			SELECT select = null;
 			if (startDate != null) {
 				// StartDate
 				if (!"".equals(startDate)) {
-					final Condition startDateCondition = new NumberCondition<Long>(
-							DateTimeUtils.DATE_FORMAT.parse(startDate).getTime(),
-							RelationalOperator.GREATER_THAN_OR_EQUAL_TO,
-							dateAdapter);
+					final Condition startDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
+							startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
 
 					final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
-							DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE,
-							startDateCondition);
+							DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE, startDateCondition);
 					condtions.add(startDateAttributeCondition);
 				}
 
@@ -231,19 +231,15 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			// End Date
 			if (endDate != null) {
 				if (!"".equals(endDate)) {
-					final Condition endDateCondition = new NumberCondition<Long>(
-							DateTimeUtils.DATE_FORMAT.parse(endDate)
-							.getTime() + 86400000l,
-							RelationalOperator.LESS_THAN_OR_EQUAL_TO,
-							dateAdapter);
+					final Condition endDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
+							endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
 
 					final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
-							DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE,
-							endDateCondition);
+							DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE, endDateCondition);
 					condtions.add(endDateAttributeCondition);
 				}
 			}
-			
+
 			// AND all conditions
 			if (condtions.size() > 0) {
 				final EObjectCondition first = condtions.get(0);
@@ -251,10 +247,10 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 				for (int i = 1; i < condtions.size(); i++) {
 					ret = ret.AND(condtions.get(i));
 				}
-				for(CollectionJournalLine record : inputRecrods){
+				for (CollectionJournalLine record : inputRecrods) {
 					select = new SELECT(new FROM(record.getCollectionJournal()), new WHERE(ret));
 					final IQueryResult result = select.execute();
-					if(!result.isEmpty()){
+					if (!result.isEmpty()) {
 						objs.add(record);
 					}
 
@@ -263,34 +259,31 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			} else {
 				objs.addAll(inputRecrods);
 			}
-			
-			
-		
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Activator.getDefault().logError(e,e.getMessage());
+			Activator.getDefault().logError(e, e.getMessage());
 		}
 		return objs;
 	}
-	private List<CollectionJournalLine> filterNPR(){
+
+	private List<CollectionJournalLine> filterNPR() {
 		List<CollectionJournalLine> filteredRecords = new ArrayList<CollectionJournalLine>();
-		if(records == null || records.isEmpty()){
+		if (records == null || records.isEmpty()) {
 			return filteredRecords;
 		}
 		final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
 		SELECT select = null;
-		//nprmissing
-		if ( nprMissing!= null) {
+		// nprmissing
+		if (nprMissing != null) {
 			final boolean isNPRmissing = nprMissing.isSelected();
 			if (isNPRmissing) {
-				final Condition nprMissingCondition = new BooleanCondition(
-						isNPRmissing);
+				final Condition nprMissingCondition = new BooleanCondition(isNPRmissing);
 
 				final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED,
-						nprMissingCondition);
+						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED, nprMissingCondition);
 				condtions.add(startDateCondition);
 			}
 		}
@@ -298,11 +291,9 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (rejected != null) {
 			final boolean isRejected = rejected.isSelected();
 			if (isRejected) {
-				final Condition rejectedCondition = new BooleanCondition(
-						isRejected);
+				final Condition rejectedCondition = new BooleanCondition(isRejected);
 				final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED,
-						rejectedCondition);
+						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED, rejectedCondition);
 				condtions.add(startDateCondition);
 			}
 		}
@@ -311,11 +302,9 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (suspended != null) {
 			final boolean isSuspended = suspended.isSelected();
 			if (isSuspended) {
-				final Condition suspendedCondition = new BooleanCondition(
-						isSuspended);
+				final Condition suspendedCondition = new BooleanCondition(isSuspended);
 				final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FLAGGED,
-						suspendedCondition);
+						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FLAGGED, suspendedCondition);
 				condtions.add(startDateCondition);
 			}
 		}
@@ -329,24 +318,24 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			select = new SELECT(new FROM(records), new WHERE(ret));
 
 		} else {
-			select = new SELECT(new FROM(records), new WHERE(
-					EObjectCondition.E_TRUE));
+			select = new SELECT(new FROM(records), new WHERE(EObjectCondition.E_TRUE));
 		}
 		final IQueryResult result = select.execute();
 		for (final EObject object : result.getEObjects()) {
 			filteredRecords.add((CollectionJournalLine) object);
 		}
-		
+
 		return filteredRecords;
 
 	}
+
 	@Override
 	public void callback() {
 		if (null == collectionTable) {
 			return;
 		}
-		if(dateSearchController  != null){
-			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());	
+		if (dateSearchController != null) {
+			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
 		}
 	}
 }

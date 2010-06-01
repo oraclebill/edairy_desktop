@@ -45,23 +45,25 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	private final String[] transactionColumnHeaders = { "ID", "Date", "Type", "Description", "Amount" };
 	private final List<AccountTransaction> transactionRecords = new ArrayList<AccountTransaction>();
 
-	public MemberTransactionWidgetController(IController controller){
+	public MemberTransactionWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if(controller == null){
+		if (controller == null) {
 			return;
 		}
 		transactionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
-		if(transactionTable == null){
+		if (transactionTable == null) {
 			return;
-		}		
+		}
 		transactionTable.bindToModel(new WritableList(transactionRecords, AccountTransaction.class),
 				AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.TRANSACTION_FILTER_STARTDATE, ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON, this);
+		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
+				ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON,
+				ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON, this);
 
 	}
 
@@ -72,11 +74,11 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 
 	@Override
 	public void setInputModel(Object model) {
-		if(transactionTable == null){
+		if (transactionTable == null) {
 			return;
-		}		
-		this.member =(Membership)model;
-		if(transactionTable != null){
+		}
+		this.member = (Membership) model;
+		if (transactionTable != null) {
 			updateBinding();
 		}
 
@@ -94,9 +96,9 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 
 	@Override
 	public void updateBinding() {
-		if(transactionTable == null){
+		if (transactionTable == null) {
 			return;
-		}		
+		}
 		transactionRecords.clear();
 		transactionRecords.addAll(getAccountTransactions());
 		transactionTable.setColumnFormatter(1, new ColumnFormatter() {
@@ -122,10 +124,10 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	@Override
 	public List<AccountTransaction> filter(String startDate, String endDate) {
 		List<AccountTransaction> objs = new ArrayList<AccountTransaction>();
-		if(transactionTable == null){
+		if (transactionTable == null) {
 			return objs;
-		}		
-		if(transactionRecords != null && !transactionRecords.isEmpty()){
+		}
+		if (transactionRecords != null && !transactionRecords.isEmpty()) {
 			try {
 				final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 					@Override
@@ -139,37 +141,29 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 					}
 				};
 
-
 				final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
 				SELECT select = null;
 				if (startDate != null) {
 					// StartDate
 					if (!"".equals(startDate)) {
-						final Condition startDateCondition = new NumberCondition<Long>(
-								DateTimeUtils.DATE_FORMAT.parse(startDate).getTime(),
-								RelationalOperator.GREATER_THAN_OR_EQUAL_TO,
-								dateAdapter);
+						final Condition startDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
+								startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
 
 						final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
-								AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE,
-								startDateCondition);
+								AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE, startDateCondition);
 						condtions.add(startDateAttributeCondition);
 					}
 				}
-				
+
 				// End Date
 				if (endDate != null) {
 					if (!"".equals(endDate)) {
-						final Condition endDateCondition = new NumberCondition<Long>(
-								DateTimeUtils.DATE_FORMAT.parse(endDate)
-								.getTime() + 86400000l,
-								RelationalOperator.LESS_THAN_OR_EQUAL_TO,
-								dateAdapter);
+						final Condition endDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
+								endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
 
 						final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
-								AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE,
-								endDateCondition);
+								AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE, endDateCondition);
 						condtions.add(endDateAttributeCondition);
 					}
 				}
@@ -183,8 +177,7 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 					select = new SELECT(new FROM(transactionRecords), new WHERE(ret));
 
 				} else {
-					select = new SELECT(new FROM(transactionRecords), new WHERE(
-							EObjectCondition.E_TRUE));
+					select = new SELECT(new FROM(transactionRecords), new WHERE(EObjectCondition.E_TRUE));
 				}
 				final IQueryResult result = select.execute();
 				for (final EObject object : result.getEObjects()) {
@@ -194,8 +187,8 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Activator.getDefault().logError(e,e.getMessage());
-			}finally{
+				Activator.getDefault().logError(e, e.getMessage());
+			} finally {
 				transactionTable.bindToModel(new WritableList(objs, AccountTransaction.class),
 						AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
 				transactionTable.updateFromModel();

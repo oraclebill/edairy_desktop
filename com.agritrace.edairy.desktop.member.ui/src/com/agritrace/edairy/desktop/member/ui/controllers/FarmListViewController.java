@@ -31,17 +31,16 @@ import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 
-public class FarmListViewController extends SubModuleController{
+public class FarmListViewController extends SubModuleController {
 
 	private ITableRidget farmListTable;
 	private Dairy dairy;
 	private IActionRidget viewRidget;
-	private final String[] farmPropertyNames = { "membership", "membership",
-			"farm", "farm", "farm", "farm"};
-	private final String[] farmColumnHeaders = { "Member ID", "Member Name", "Farm Name",
-			"Location", "Number of LiveStocks", "Number of Container"};
+	private final String[] farmPropertyNames = { "membership", "membership", "farm", "farm", "farm", "farm" };
+	private final String[] farmColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Location",
+			"Number of LiveStocks", "Number of Container" };
 	private List<Membership> membershipList = new ArrayList<Membership>();
-	private List<FarmListViewTableNode>farmListTableInput = new ArrayList<FarmListViewTableNode>();
+	private List<FarmListViewTableNode> farmListTableInput = new ArrayList<FarmListViewTableNode>();
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
@@ -55,15 +54,17 @@ public class FarmListViewController extends SubModuleController{
 
 	}
 
-	private void configueFilterGroup(){
+	private void configueFilterGroup() {
 		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
 		int index = farmListTableInput.indexOf(selectedNode);
 		final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+				selectedNode);
 
 		int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+			selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext(
+					"selectedFarm");
 			farmListTableInput.set(index, selectedNode);
 			farmListTable.updateFromModel();
 		} else if (returnCode == 2) {
@@ -71,10 +72,10 @@ public class FarmListViewController extends SubModuleController{
 			if (selectedNode != null) {
 				String message = "";
 				if (selectedNode.getFarm() != null) {
-					message = "\""+ selectedNode.getFarm().getName()+"\"";
+					message = "\"" + selectedNode.getFarm().getName() + "\"";
 				}
-				message = String.format(DELETE_DIALOG_MESSAGE,message);
-				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),DELETE_DIALOG_TITLE, message)) {
+				message = String.format(DELETE_DIALOG_MESSAGE, message);
+				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
 					farmListTableInput.remove(selectedNode);
 					farmListTable.updateFromModel();
 				}
@@ -84,18 +85,17 @@ public class FarmListViewController extends SubModuleController{
 
 	private void configueMemberTable() {
 
-		farmListTable = getRidget(ITableRidget.class,ViewWidgetId.FARM_LIST_TABLE);
+		farmListTable = getRidget(ITableRidget.class, ViewWidgetId.FARM_LIST_TABLE);
 
 		if (dairy == null) {
 			loadDairy();
 		}
 		if (dairy != null) {
 			buildFarmInputList();
-			farmListTable.bindToModel(new WritableList(farmListTableInput,
-					FarmListViewTableNode.class), FarmListViewTableNode.class, farmPropertyNames,
-					farmColumnHeaders);
+			farmListTable.bindToModel(new WritableList(farmListTableInput, FarmListViewTableNode.class),
+					FarmListViewTableNode.class, farmPropertyNames, farmColumnHeaders);
 			setColumnFormatters();
-			
+
 			farmListTable.addSelectionListener(new ISelectionListener() {
 
 				@Override
@@ -107,42 +107,47 @@ public class FarmListViewController extends SubModuleController{
 
 			});
 			farmListTable.updateFromModel();
-			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD)
-			.addListener(new IActionListener() {
+			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new IActionListener() {
 
 				@Override
 				public void callback() {
-					Membership membership = ((FarmListViewTableNode) farmListTable.getSelection().get(0)).getMembership();
-					Farm farm = DairyUtil.createFarm("", DairyUtil.createLocation("","","","", "", "", "", "","", ""));
+					Membership membership = ((FarmListViewTableNode) farmListTable.getSelection().get(0))
+							.getMembership();
+					Farm farm = DairyUtil.createFarm("",
+							DairyUtil.createLocation("", "", "", "", "", "", "", "", "", ""));
 					FarmListViewTableNode newNode = new FarmListViewTableNode(membership, farm);
-				
+
 					final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
-					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, newNode);
+					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+							newNode);
 
 					int returnCode = memberDialog.open();
 					if (returnCode == AbstractWindowController.OK) {
-						newNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+						newNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController()
+								.getContext("selectedFarm");
 						farmListTableInput.add(newNode);
 						farmListTable.updateFromModel();
-					} 
+					}
 				}
 			});
-			viewRidget = getRidget(IActionRidget.class,
-					ViewWidgetId.MEMBERLIST_VIEW);
+			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_VIEW);
 			if (viewRidget != null) {
 				viewRidget.setEnabled(false);
 				viewRidget.addListener(new IActionListener() {
 
 					@Override
 					public void callback() {
-						FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
+						FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection()
+								.get(0);
 						int index = farmListTableInput.indexOf(selectedNode);
 						final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-						memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+						memberDialog.getController().setContext(
+								ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
 
 						int returnCode = memberDialog.open();
 						if (returnCode == AbstractWindowController.OK) {
-							selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+							selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController()
+									.getContext("selectedFarm");
 							farmListTableInput.set(index, selectedNode);
 							farmListTable.updateFromModel();
 						} else if (returnCode == 2) {
@@ -150,10 +155,11 @@ public class FarmListViewController extends SubModuleController{
 							if (selectedNode != null) {
 								String message = "";
 								if (selectedNode.getFarm() != null) {
-									message = "\""+ selectedNode.getFarm().getName()+"\"";
+									message = "\"" + selectedNode.getFarm().getName() + "\"";
 								}
-								message = String.format(DELETE_DIALOG_MESSAGE,message);
-								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),DELETE_DIALOG_TITLE, message)) {
+								message = String.format(DELETE_DIALOG_MESSAGE, message);
+								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
+										DELETE_DIALOG_TITLE, message)) {
 									farmListTableInput.remove(selectedNode);
 									farmListTable.updateFromModel();
 								}
@@ -170,34 +176,34 @@ public class FarmListViewController extends SubModuleController{
 
 	}
 
-	private void buildFarmInputList(){
+	private void buildFarmInputList() {
 		farmToMembershipMap.clear();
 		farmListTableInput.clear();
 		membershipList.clear();
 
 		membershipList = dairy.getMemberships();
-		for(Membership membership : membershipList){
+		for (Membership membership : membershipList) {
 			List<Farm> farms = membership.getMember().getFarms();
-			for(Farm farm : farms){
+			for (Farm farm : farms) {
 				farmListTableInput.add(new FarmListViewTableNode(membership, farm));
 			}
 		}
 	}
 
-	private void setColumnFormatters(){
-		//MEMBERID
+	private void setColumnFormatters() {
+		// MEMBERID
 		farmListTable.setColumnFormatter(0, new ColumnFormatter() {
 			public String getText(Object element) {
 				if (element instanceof FarmListViewTableNode) {
 					Membership membership = ((FarmListViewTableNode) element).getMembership();
 					if (membership != null) {
-						return membership.getMemberId()+"";
+						return membership.getMemberId() + "";
 					}
 				}
 				return null;
 			}
 		});
-		//memberName
+		// memberName
 		farmListTable.setColumnFormatter(1, new ColumnFormatter() {
 			public String getText(Object element) {
 				if (element instanceof FarmListViewTableNode) {
@@ -205,9 +211,8 @@ public class FarmListViewController extends SubModuleController{
 					if (membership != null) {
 						Person member = ((Membership) membership).getMember();
 						if (member != null) {
-							return member.getFamilyName() + ","
-							+ member.getGivenName();
-						}					
+							return member.getFamilyName() + "," + member.getGivenName();
+						}
 					}
 				}
 				return null;
@@ -218,7 +223,7 @@ public class FarmListViewController extends SubModuleController{
 				if (element instanceof FarmListViewTableNode) {
 					Farm farm = ((FarmListViewTableNode) element).getFarm();
 					if (farm != null) {
-						return farm.getName();				
+						return farm.getName();
 					}
 				}
 				return null;
@@ -234,9 +239,9 @@ public class FarmListViewController extends SubModuleController{
 							final PostalLocation postalLocation = location.getPostalLocation();
 							if (postalLocation != null) {
 								return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
-								+ postalLocation.getPostalCode();
+										+ postalLocation.getPostalCode();
 							}
-						}			
+						}
 					}
 				}
 				return null;
@@ -247,7 +252,7 @@ public class FarmListViewController extends SubModuleController{
 				if (element instanceof FarmListViewTableNode) {
 					Farm farm = ((FarmListViewTableNode) element).getFarm();
 					if (farm != null) {
-						return String.valueOf(farm.getNumberOfAnimals());				
+						return String.valueOf(farm.getNumberOfAnimals());
 					}
 				}
 				return null;
@@ -258,13 +263,12 @@ public class FarmListViewController extends SubModuleController{
 				if (element instanceof FarmListViewTableNode) {
 					Farm farm = ((FarmListViewTableNode) element).getFarm();
 					if (farm != null) {
-						return String.valueOf(farm.getNumberOfContainers());				
+						return String.valueOf(farm.getNumberOfContainers());
 					}
 				}
 				return null;
 			}
 		});
 	}
-
 
 }

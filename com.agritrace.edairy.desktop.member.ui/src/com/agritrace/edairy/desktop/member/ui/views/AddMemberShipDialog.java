@@ -336,8 +336,8 @@ public class AddMemberShipDialog extends TitleAreaDialog implements ModifyListen
 			}
 		} else if (e.getSource() == nameText) {
 			final String value = nameText.getText();
-//			memberShip.getMember().setName(value);
-			
+			// memberShip.getMember().setName(value);
+
 		} else if (e.getSource() == txtAddress) {
 			final String value = txtAddress.getText();
 			memberShip.getMember().getLocation().getPostalLocation().setAddress(value);

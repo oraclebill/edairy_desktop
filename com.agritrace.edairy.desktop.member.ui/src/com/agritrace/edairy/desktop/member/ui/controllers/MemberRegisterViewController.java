@@ -26,17 +26,17 @@ import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
 
-public class MemberRegisterViewController extends SubModuleController implements MemberSearchSelectionListener{
+public class MemberRegisterViewController extends SubModuleController implements MemberSearchSelectionListener {
 
 	// private Membership workingCopy;
 	private Membership selectedMember;
-	
+
 	private String generatedMemberId;
 
 	// upper panel fields
 	private ILabelRidget memberIdRidget;
 	private ITextRidget nameRidget;
-	
+
 	MemberProfileWidgetController memberProfileController;
 
 	// container tab
@@ -67,7 +67,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 		liveStockController = new MemberLiveStockWidgetController(this);
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
-		
+
 		if (selectedMember != null) {
 			updateBindings();
 		}
@@ -105,7 +105,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	private void configureUpperPanel() {
 		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
-		generatedMemberId = System.currentTimeMillis()+"";
+		generatedMemberId = System.currentTimeMillis() + "";
 		memberIdRidget.setText(generatedMemberId);
 		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
 
@@ -116,20 +116,21 @@ public class MemberRegisterViewController extends SubModuleController implements
 		memberProfileController.setInputModel(selectedMember);
 		farmController.setInputModel(selectedMember);
 		collectionController.setInputModel(selectedMember);
-		liveStockController.setInputModel(selectedMember);		
+		liveStockController.setInputModel(selectedMember);
 		containerController.setInputModel(selectedMember);
 		transactionController.setInputModel(selectedMember);
 	}
 
 	private void updateUpperPanelBinding() {
-		
-		if(selectedMember.getMember() != null){
-			nameRidget.setText(selectedMember.getMember().getFamilyName()+","+selectedMember.getMember().getGivenName());	
+
+		if (selectedMember.getMember() != null) {
+			nameRidget.setText(selectedMember.getMember().getFamilyName() + ","
+					+ selectedMember.getMember().getGivenName());
 		}
-		
-//		nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),
-//				ModelPackage.Literals.PERSON__FAMILY_NAME));
-//		nameRidget.updateFromModel();
+
+		// nameRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),
+		// ModelPackage.Literals.PERSON__FAMILY_NAME));
+		// nameRidget.updateFromModel();
 
 	}
 
@@ -174,7 +175,6 @@ public class MemberRegisterViewController extends SubModuleController implements
 		}
 	}
 
-
 	@Override
 	public void refreshView(String viewId) {
 		// empty;
@@ -201,7 +201,6 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 		}
 	}
-	
 
 	public Membership getSelectedMember() {
 		return selectedMember;
@@ -210,5 +209,5 @@ public class MemberRegisterViewController extends SubModuleController implements
 	public void setSelectedMember(Membership selectedMember) {
 		this.selectedMember = selectedMember;
 	}
-	
+
 }

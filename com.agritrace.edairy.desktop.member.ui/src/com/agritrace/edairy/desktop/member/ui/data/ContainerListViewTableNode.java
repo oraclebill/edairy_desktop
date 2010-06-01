@@ -5,13 +5,13 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
 public class ContainerListViewTableNode {
 	private Membership membership;
-	
+
 	private Container container;
-	
-	public ContainerListViewTableNode(Membership membership, Container container){
+
+	public ContainerListViewTableNode(Membership membership, Container container) {
 		this.membership = membership;
 		this.container = container;
-		
+
 	}
 
 	public Membership getMembership() {

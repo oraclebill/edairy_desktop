@@ -21,7 +21,7 @@ public class MemberProfileWidgetController implements WidgetController {
 		this.controller = controller;
 		infoGroup = new MemberInfoGroupController(controller);
 		locationController = new LocationProfileWidgetController(controller);
-		communicationGroup =  new CommunicationGroupController(controller);
+		communicationGroup = new CommunicationGroupController(controller);
 		configure();
 	}
 
@@ -42,8 +42,8 @@ public class MemberProfileWidgetController implements WidgetController {
 
 	@Override
 	public void setInputModel(Object model) {
-		this.member = (Membership)model;
-		if(controller != null){
+		this.member = (Membership) model;
+		if (controller != null) {
 			updateBinding();
 		}
 
@@ -66,7 +66,7 @@ public class MemberProfileWidgetController implements WidgetController {
 		infoGroup.setInputModel(member);
 		if (member.getMember().getLocation() != null) {
 			locationController.setInputModel(member.getMember().getLocation());
-			
+
 		}
 		communicationGroup.setInputModel(member.getMember().getContactMethods());
 	}

@@ -37,7 +37,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class MemberContainerWidgetController implements WidgetController, ISelectionListener{
+public class MemberContainerWidgetController implements WidgetController, ISelectionListener {
 
 	private IController controller;
 	private Object inputModel;
@@ -54,14 +54,14 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
 
-	public MemberContainerWidgetController(IController controller){
+	public MemberContainerWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if(controller == null){
+		if (controller == null) {
 			return;
 		}
 		containerTable = controller.getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
@@ -85,24 +85,26 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
 						| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
-				//				final AddContainerDialog dialog = new AddContainerDialog(shell);
-				//				dialog.setMemberShip(selectedMember);
-				//				if (dialog.open() == Window.OK) {
-				//					final Container newContainer = dialog.getNewContainer();
-				//					newContainer.getOwner().getCans().add(newContainer);
-				//					containerInput.add(newContainer);
-				//					List<Container> containers;
-				//					try {
-				//						containers = getContainerFilteredResult();
-				//						containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
-				//								containerPropertyNames, containerColumnHeaders);
-				//						containerTable.updateFromModel();
-				//					} catch (final ParseException e) {
-				//						// TODO Auto-generated catch block
-				//						e.printStackTrace();
-				//					}
+				// final AddContainerDialog dialog = new
+				// AddContainerDialog(shell);
+				// dialog.setMemberShip(selectedMember);
+				// if (dialog.open() == Window.OK) {
+				// final Container newContainer = dialog.getNewContainer();
+				// newContainer.getOwner().getCans().add(newContainer);
+				// containerInput.add(newContainer);
+				// List<Container> containers;
+				// try {
+				// containers = getContainerFilteredResult();
+				// containerTable.bindToModel(new WritableList(containers,
+				// Container.class), Container.class,
+				// containerPropertyNames, containerColumnHeaders);
+				// containerTable.updateFromModel();
+				// } catch (final ParseException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
 				//
-				//				}
+				// }
 			}
 		});
 
@@ -147,7 +149,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	@Override
 	public void setInputModel(Object model) {
 		this.inputModel = model;
-		if(containerTable != null){
+		if (containerTable != null) {
 			updateBinding();
 		}
 
@@ -168,9 +170,9 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 		containerInput.clear();
 		final List<String> farmFilterList = new ArrayList<String>();
 
-		if(inputModel != null){
-			if(inputModel instanceof Membership){
-				Membership selectedMember = (Membership)inputModel;
+		if (inputModel != null) {
+			if (inputModel instanceof Membership) {
+				Membership selectedMember = (Membership) inputModel;
 				final List<Farm> farms = selectedMember.getMember().getFarms();
 				farmFilterList.add(ALL_FARM);
 				for (final Farm farm : farms) {
@@ -179,13 +181,13 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 						farmFilterList.add(farm.getName());
 					}
 				}
-			}else if(inputModel instanceof Farm){
-				Farm farm = (Farm)inputModel;
+			} else if (inputModel instanceof Farm) {
+				Farm farm = (Farm) inputModel;
 				containerInput.addAll(farm.getCans());
 				farmFilterList.add(farm.getName());
 			}
 		}
-		
+
 		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class,
 				containerPropertyNames, containerColumnHeaders);
 		containerTable.updateFromModel();
@@ -232,7 +234,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 			} else {
 				containerRemoveButton.setEnabled(false);
 			}
-		}else if(event.getSource() == farmFilterCombo){
+		} else if (event.getSource() == farmFilterCombo) {
 			List<Container> filterResults;
 			try {
 				filterResults = getContainerFilteredResult();

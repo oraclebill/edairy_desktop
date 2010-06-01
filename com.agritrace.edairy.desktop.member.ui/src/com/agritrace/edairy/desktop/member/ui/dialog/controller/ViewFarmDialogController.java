@@ -21,7 +21,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 	private String generatedFarmId;
 
 	protected FarmListViewTableNode selectedNode;
-	
+
 	// upper panel fields
 	private ILabelRidget farmNameRidget;
 	private ILabelRidget farmIdRidget;
@@ -35,11 +35,11 @@ public class ViewFarmDialogController extends AbstractWindowController {
 
 	// live stock tab
 	private MemberLiveStockWidgetController liveStockController;
-	
-	public static final String FARM_ID_LABEL_PREFIX= "Farm Id :";
-	public static final String FARM_NAME_LABEL_PREFIX= "Farm Name :";
-	public static final String FARM_MEMBER_ID_LABEL_PREFIX= "Member Id :";
-	public static final String FARM_MEMBER_NAME_LABEL_PREFIX= "Member Name :";
+
+	public static final String FARM_ID_LABEL_PREFIX = "Farm Id :";
+	public static final String FARM_NAME_LABEL_PREFIX = "Farm Name :";
+	public static final String FARM_MEMBER_ID_LABEL_PREFIX = "Member Id :";
+	public static final String FARM_MEMBER_NAME_LABEL_PREFIX = "Member Name :";
 
 	public ViewFarmDialogController() {
 
@@ -98,7 +98,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 
 	protected void configureUpperPanel() {
 
-		farmNameRidget = getRidget(ILabelRidget.class,ViewWidgetId.VIEW_FARM_NAME);
+		farmNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_NAME);
 		farmIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_ID);
 		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
 		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_ID);
@@ -106,33 +106,34 @@ public class ViewFarmDialogController extends AbstractWindowController {
 	}
 
 	private void updateBindings() {
-		if(selectedNode != null){
+		if (selectedNode != null) {
 			Farm selectedFarm = selectedNode.getFarm();
-			if(selectedFarm != null){
+			if (selectedFarm != null) {
 				updateUpperPanelBinding();
 				locationProfileController.setInputModel(selectedFarm.getLocation());
 				liveStockController.setInputModel(selectedFarm);
-				containerController.setInputModel(selectedFarm);	
+				containerController.setInputModel(selectedFarm);
 			}
 		}
-		
+
 	}
 
 	protected void updateUpperPanelBinding() {
 		if (selectedNode != null && selectedNode.getMembership() != null) {
 			Farmer farmer = (Farmer) selectedNode.getMembership().getMember();
 			Farm selectedFarm = selectedNode.getFarm();
-			if(farmNameRidget != null){
-				farmNameRidget.setText(FARM_NAME_LABEL_PREFIX+selectedFarm.getName());	
+			if (farmNameRidget != null) {
+				farmNameRidget.setText(FARM_NAME_LABEL_PREFIX + selectedFarm.getName());
 			}
-			if(farmIdRidget != null){
-				farmIdRidget.setText(FARM_ID_LABEL_PREFIX+selectedFarm.getFarmId());	
+			if (farmIdRidget != null) {
+				farmIdRidget.setText(FARM_ID_LABEL_PREFIX + selectedFarm.getFarmId());
 			}
-			if(memberIdRidget != null){
-				memberIdRidget.setText(FARM_MEMBER_ID_LABEL_PREFIX+selectedNode.getMembership().getMemberId());	
+			if (memberIdRidget != null) {
+				memberIdRidget.setText(FARM_MEMBER_ID_LABEL_PREFIX + selectedNode.getMembership().getMemberId());
 			}
-			if(memberNameRidget != null){
-				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX+farmer.getFamilyName()+","+farmer.getGivenName());
+			if (memberNameRidget != null) {
+				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX + farmer.getFamilyName() + ","
+						+ farmer.getGivenName());
 			}
 		}
 	}
@@ -144,24 +145,24 @@ public class ViewFarmDialogController extends AbstractWindowController {
 	}
 
 	protected void saveMember() {
-//		if (selectedFarm != null) {
-			// MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this,
-			// selectedMember);
-			// try {
-			// DairyDemoResourceManager.INSTANCE.saveFarmResource();
-			// DairyDemoResourceManager.INSTANCE.saveDairyResource();
-			// MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
-			// } catch (final IllegalArgumentException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// Activator.getDefault().logError(e, e.getMessage());
-			// } catch (final IOException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// Activator.getDefault().logError(e, e.getMessage());
-			//
-			// }
-//		}
+		// if (selectedFarm != null) {
+		// MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this,
+		// selectedMember);
+		// try {
+		// DairyDemoResourceManager.INSTANCE.saveFarmResource();
+		// DairyDemoResourceManager.INSTANCE.saveDairyResource();
+		// MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
+		// } catch (final IllegalArgumentException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// Activator.getDefault().logError(e, e.getMessage());
+		// } catch (final IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// Activator.getDefault().logError(e, e.getMessage());
+		//
+		// }
+		// }
 	}
 
 }

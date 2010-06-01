@@ -13,24 +13,25 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+
 public class MemberFarmWidget {
-	
+
 	private Composite composite;
-	
-	public static String ADD_BUTTON="Add &Farm";
-	public static String REMOVE_BUTTON="Remo&ve";
-	
-	public MemberFarmWidget(Composite parent){
+
+	public static String ADD_BUTTON = "Add &Farm";
+	public static String REMOVE_BUTTON = "Remo&ve";
+
+	public MemberFarmWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(1,true));
+		composite.setLayout(new GridLayout(1, true));
 		initGUI();
 	}
 
 	public Composite getComposite() {
 		return composite;
 	}
-	
-	public void initGUI(){
+
+	public void initGUI() {
 		final Composite tablePanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
@@ -69,7 +70,6 @@ public class MemberFarmWidget {
 				ViewWidgetId.FARM_Remove);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(removeButton);
 
-		
 	}
 
 }

@@ -15,19 +15,17 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroupController implements WidgetController, ISelectionListener {
-	
-	private IController controller; 
-	
+
+	private IController controller;
+
 	private Membership selectedMember;
-	
+
 	private ITextRidget appliedDate;
 	private ITextRidget effectiveDate;
 	private IComboRidget comboStatus;
 	private ITextRidget phoneRidget;
 
-	
-	
-	public MemberInfoGroupController(IController controller){
+	public MemberInfoGroupController(IController controller) {
 		this.controller = controller;
 		configure();
 	}
@@ -38,7 +36,7 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 		effectiveDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_effectiveDate);
 		comboStatus = controller.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
 		phoneRidget = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
-		
+
 		comboStatus.bindToModel(Observables.staticObservableList(MembershipStatus.VALUES), MembershipStatus.class,
 				null, new WritableValue());
 		comboStatus.updateFromModel();
@@ -52,8 +50,8 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 
 	@Override
 	public void setInputModel(Object model) {
-		this.selectedMember =(Membership)model;
-		if(appliedDate != null){
+		this.selectedMember = (Membership) model;
+		if (appliedDate != null) {
 			updateBinding();
 		}
 	}
@@ -71,15 +69,15 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 
 	@Override
 	public void updateBinding() {
-		if(selectedMember == null){
+		if (selectedMember == null) {
 			phoneRidget.setText("");
 			appliedDate.setText("");
 			effectiveDate.setText("");
 			return;
 		}
-		if(selectedMember.getMember() != null){
+		if (selectedMember.getMember() != null) {
 			phoneRidget.setText(selectedMember.getMember().getPhoneNumber());
-		}else{
+		} else {
 			phoneRidget.setText("");
 		}
 		comboStatus.setSelection(selectedMember.getStatus().getValue());
@@ -105,6 +103,6 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 			if (selectedMember != null) {
 				selectedMember.setStatus((MembershipStatus) event.getNewSelection().get(0));
 			}
-		} 
+		}
 	}
 }

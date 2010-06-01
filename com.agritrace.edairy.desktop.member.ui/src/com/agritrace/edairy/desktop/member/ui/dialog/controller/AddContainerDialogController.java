@@ -48,46 +48,46 @@ public class AddContainerDialogController extends AbstractWindowController imple
 
 	IActionRidget okAction;
 
-	Double capacityValue ;
+	Double capacityValue;
 
 	ErrorMessageMarker capactiyError = new ErrorMessageMarker("Invalid number");
-
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
 
-		idLabel = getRidget(ILabelRidget.class,ViewWidgetId.VIEW_CONTAINER_ID);
-		typeCombo = getRidget(IComboRidget.class,ViewWidgetId.VIEW_CONTAINER_TYPE);
-		farmCombo = getRidget(IComboRidget.class,ViewWidgetId.VIEW_CONTAINER_FARM);
-		unitCombo = getRidget(IComboRidget.class,ViewWidgetId.VIEW_CONTAINER_UNIT);
-		capacity = getRidget(ITextRidget.class,ViewWidgetId.VIEW_CONTAINER_COMPACITY);
+		idLabel = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_CONTAINER_ID);
+		typeCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_TYPE);
+		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_FARM);
+		unitCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_UNIT);
+		capacity = getRidget(ITextRidget.class, ViewWidgetId.VIEW_CONTAINER_COMPACITY);
 
-		selectedContainer = (Container)getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-		farmList=(List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
+		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
 
 		okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
 		okAction.setEnabled(true);
 
-		if(selectedContainer != null){
-			idLabel.bindToModel(EMFObservables.observeValue(selectedContainer, TrackingPackage.Literals.CONTAINER__CONTAINER_ID));
+		if (selectedContainer != null) {
+			idLabel.bindToModel(EMFObservables.observeValue(selectedContainer,
+					TrackingPackage.Literals.CONTAINER__CONTAINER_ID));
 			idLabel.updateFromModel();
 
 			capacity.setText(String.valueOf(selectedContainer.getCapacity()));
-			capacity.addValidationRule(new IValidator(){
+			capacity.addValidationRule(new IValidator() {
 
 				@Override
 				public IStatus validate(Object arg0) {
-					String value  =(String)arg0;
-					try{
+					String value = (String) arg0;
+					try {
 						capacityValue = Double.valueOf(value);
 						capacity.removeAllMarkers();
 						okAction.setEnabled(true);
-					}catch(NumberFormatException ex){
+					} catch (NumberFormatException ex) {
 						capacity.addMarker(capactiyError);
 						okAction.setEnabled(false);
-						return new Status(Status.ERROR,Activator.PLUGIN_ID,ex.getMessage(),ex);
+						return new Status(Status.ERROR, Activator.PLUGIN_ID, ex.getMessage(), ex);
 
 					}
 					return Status.OK_STATUS;
@@ -95,30 +95,30 @@ public class AddContainerDialogController extends AbstractWindowController imple
 
 			}, ValidationTime.ON_UI_CONTROL_EDIT);
 
-			if(farmList == null && selectedContainer.getOwner() != null){
+			if (farmList == null && selectedContainer.getOwner() != null) {
 				farmList = new ArrayList<Farm>();
 				farmList.add(selectedContainer.getOwner());
 			}
-			if(farmList != null){
+			if (farmList != null) {
 				farmCombo.bindToModel(new WritableList(farmList, Farm.class), Farm.class, "getName",
 						new WritableValue());
 				farmCombo.updateFromModel();
 				farmCombo.addSelectionListener(this);
-				if(selectedContainer.getOwner() != null){
+				if (selectedContainer.getOwner() != null) {
 					farmCombo.setSelection(selectedContainer.getOwner());
-				}else{
+				} else {
 					farmCombo.setSelection(0);
 				}
 			}
 
-			unitCombo.bindToModel(Observables.staticObservableList(UnitOfMeasure.VALUES), UnitOfMeasure.class,
-					null, new WritableValue());
+			unitCombo.bindToModel(Observables.staticObservableList(UnitOfMeasure.VALUES), UnitOfMeasure.class, null,
+					new WritableValue());
 			unitCombo.updateFromModel();
 			unitCombo.addSelectionListener(this);
 			unitCombo.setSelection(selectedContainer.getMeasureType());
 
-			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class,
-					null, new WritableValue());
+			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
+					new WritableValue());
 			typeCombo.updateFromModel();
 			typeCombo.addSelectionListener(this);
 			typeCombo.setSelection(selectedContainer.getType());
@@ -129,16 +129,16 @@ public class AddContainerDialogController extends AbstractWindowController imple
 
 	@Override
 	public void ridgetSelected(SelectionEvent event) {
-		if(event.getSource() == unitCombo){
-			if(selectedContainer != null){
+		if (event.getSource() == unitCombo) {
+			if (selectedContainer != null) {
 				selectedContainer.setMeasureType((UnitOfMeasure) unitCombo.getSelection());
 			}
-		}else if(event.getSource() == typeCombo){
-			if(selectedContainer != null){
+		} else if (event.getSource() == typeCombo) {
+			if (selectedContainer != null) {
 				selectedContainer.setType((ContainerType) typeCombo.getSelection());
 			}
-		}else if(event.getSource() == farmCombo){
-			if(selectedContainer != null){
+		} else if (event.getSource() == farmCombo) {
+			if (selectedContainer != null) {
 				selectedContainer.setOwner((Farm) farmCombo.getSelection());
 			}
 		}

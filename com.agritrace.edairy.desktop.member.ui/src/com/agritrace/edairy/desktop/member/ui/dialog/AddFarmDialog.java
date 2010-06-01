@@ -27,34 +27,34 @@ public class AddFarmDialog extends ViewFarmDialog {
 		return new AddFarmDialogController();
 	}
 
-	protected void createHeader(Composite parent){
+	protected void createHeader(Composite parent) {
 
 		Composite headerPanel = UIControlsFactory.createComposite(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(headerPanel);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(headerPanel);
 
-
-		Label titleLabel =UIControlsFactory.createLabel(headerPanel,"Farm Name :");
+		Label titleLabel = UIControlsFactory.createLabel(headerPanel, "Farm Name :");
 		addUIControl(titleLabel, ViewWidgetId.VIEW_FARM_NAME);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,false).span(1, 1).applyTo(titleLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(1, 1).applyTo(titleLabel);
 		Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
 		titleLabel.setFont(labelFont);
 
-		Text farmText =UIControlsFactory.createText(headerPanel, SWT.SINGLE|SWT.BORDER, ViewWidgetId.VIEW_FARM_NAME_TXT);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,false).span(2, 1).applyTo(farmText);
+		Text farmText = UIControlsFactory.createText(headerPanel, SWT.SINGLE | SWT.BORDER,
+				ViewWidgetId.VIEW_FARM_NAME_TXT);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(farmText);
 
 		Label farmIdLabel = UIControlsFactory.createLabel(headerPanel, "Farm Id :");
 		addUIControl(farmIdLabel, ViewWidgetId.VIEW_FARM_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,false).applyTo(farmIdLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmIdLabel);
 
 		Label memberIdLabel = UIControlsFactory.createLabel(headerPanel, "Member Id :");
 		addUIControl(memberIdLabel, ViewWidgetId.VIEW_FARM_MEMBER_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,false).applyTo(memberIdLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberIdLabel);
 
-		Label memberNameLabel = UIControlsFactory.createLabel(headerPanel,"Member Name :");
+		Label memberNameLabel = UIControlsFactory.createLabel(headerPanel, "Member Name :");
 		addUIControl(memberNameLabel, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,false).applyTo(memberNameLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberNameLabel);
 
 	}
-	
+
 }

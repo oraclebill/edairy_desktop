@@ -53,8 +53,8 @@ public class MemberDirectoryController extends SubModuleController {
 				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
 				repository.saveNew(selectedMember);
 				refreshMemberList();
-//				membershipList.set(index, selectedMember);
-//				memberListRidget.updateFromModel();
+				// membershipList.set(index, selectedMember);
+				// memberListRidget.updateFromModel();
 			} else {
 				// System.out.println("return code "+returnCode);
 			}
@@ -74,8 +74,8 @@ public class MemberDirectoryController extends SubModuleController {
 				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
 				repository.update(selectedMember);
 				refreshMemberList();
-//				// membershipList.set(index, selectedMember);
-//				memberListRidget.updateFromModel();
+				// // membershipList.set(index, selectedMember);
+				// memberListRidget.updateFromModel();
 			} else if (returnCode == 2) {
 				// confirm for delete
 				if (selectedMember != null) {
@@ -88,8 +88,8 @@ public class MemberDirectoryController extends SubModuleController {
 					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
 						repository.delete(selectedMember);
 						refreshMemberList();
-//						membershipList.remove(selectedMember);
-//						memberListRidget.updateFromModel();
+						// membershipList.remove(selectedMember);
+						// memberListRidget.updateFromModel();
 					}
 				}
 			}
@@ -185,7 +185,7 @@ public class MemberDirectoryController extends SubModuleController {
 				}
 			});
 
-//			memberListRidget.updateFromModel();
+			// memberListRidget.updateFromModel();
 			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new AddActionListener());
 			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_VIEW);
 			if (viewRidget != null) {

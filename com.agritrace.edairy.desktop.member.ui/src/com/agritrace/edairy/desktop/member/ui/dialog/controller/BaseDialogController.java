@@ -8,8 +8,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public abstract class BaseDialogController<T extends EObject> extends
-		AbstractWindowController {
+public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController {
 
 	protected T selected;
 	protected IRepository<T> repository;
