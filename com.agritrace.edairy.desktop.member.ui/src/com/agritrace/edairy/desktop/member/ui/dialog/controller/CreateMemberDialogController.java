@@ -16,15 +16,12 @@ import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.databinding.internal.EMFObservableValueDecorator;
 import org.eclipse.jface.util.Assert;
-import org.eclipse.riena.ui.ridgets.IActionListener;
-import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
@@ -43,7 +40,7 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetCont
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 
-public class CreateMemberDialogController extends AbstractWindowController {
+public class CreateMemberDialogController extends BaseDialogController<Membership> {
 
 	private final class UpdateMemberPhotoAction implements ISelectionListener {
 		@Override
@@ -67,14 +64,12 @@ public class CreateMemberDialogController extends AbstractWindowController {
 
 	private String generatedMemberId;
 
-	protected Membership selectedMember;
 	protected Farmer selectedMembershipOwner;
 
 	// upper panel fields
 	private ILabelRidget formattedMemberNameRidget;
 	private ILabelRidget memberIdRidget;
 	private ITextRidget givenNameRidget;
-	private MemberRepository repository;
 	private ITextRidget middleNameRidget;
 	private ITextRidget familyNameRidget;
 	private ITextRidget addtlNameRidget;
@@ -115,21 +110,13 @@ public class CreateMemberDialogController extends AbstractWindowController {
 
 	}
 
-	public MemberRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(MemberRepository repository) {
-		this.repository = repository;
-	}
-
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
 
 		
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		selectedMember = (Membership) getContext("selectedMember");
+		setSelected((Membership) getContext("selectedMember"));
 
 		configureUpperPanel();
 
@@ -140,42 +127,11 @@ public class CreateMemberDialogController extends AbstractWindowController {
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
 
-		if (selectedMember != null) {
+		if (getSelected() != null) {
 			updateBindings();
 		}
 		configureButtonsPanel();
 
-	}
-
-	protected void configureButtonsPanel() {
-		final IActionRidget okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
-		okAction.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				setReturnCode(OK);
-				setContext("selectedMember", selectedMember);
-				getWindowRidget().dispose();
-			}
-		});
-
-		final IActionRidget cancelAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_cacelButton);
-		cancelAction.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				setReturnCode(CANCEL);
-				getWindowRidget().dispose();
-			}
-		});
-
-		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
-		deleteAction.setVisible(false);
-		deleteAction.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				setReturnCode(2);
-				getWindowRidget().dispose();
-			}
-		});
 	}
 
 	// TODO: make this generic, move to util calss.
@@ -249,6 +205,8 @@ public class CreateMemberDialogController extends AbstractWindowController {
 
 	private void updateBindings() {
 		updateUpperPanelBinding();
+		
+		final Membership selectedMember = getSelected();
 		memberProfileController.setInputModel(selectedMember);
 		farmController.setInputModel(selectedMember);
 		collectionController.setInputModel(selectedMember);
@@ -316,6 +274,8 @@ public class CreateMemberDialogController extends AbstractWindowController {
 	}
 
 	protected void updateUpperPanelBinding() {
+		final Membership selectedMember = getSelected();
+		
 		if (selectedMember.getMember() != null) {
 			// loop through the text ridgets
 			for (IRidget r : memberBindings.keySet() ) {
@@ -345,6 +305,7 @@ public class CreateMemberDialogController extends AbstractWindowController {
 	}
 
 	protected void saveMember() {
+		final Membership selectedMember = getSelected();
 		if (selectedMember != null) {
 			repository.saveNew(selectedMember);
 
@@ -365,14 +326,6 @@ public class CreateMemberDialogController extends AbstractWindowController {
 			//
 			// }
 		}
-	}
-
-	public Membership getSelectedMember() {
-		return selectedMember;
-	}
-
-	public void setSelectedMember(Membership selectedMember) {
-		this.selectedMember = selectedMember;
 	}
 
 }

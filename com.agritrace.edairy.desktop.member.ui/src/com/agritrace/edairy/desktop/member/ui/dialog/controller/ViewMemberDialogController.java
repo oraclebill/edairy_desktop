@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 
@@ -22,6 +23,7 @@ public class ViewMemberDialogController extends CreateMemberDialogController {
 	}
 	
 	protected void updateUpperPanelBinding() {
+		final Membership selectedMember = getSelected();		
 		if( selectedMember != null){
 			memberName.setText("Member Name : "+selectedMember.getMember().getFamilyName()+","+selectedMember.getMember().getGivenName());
 			memberId.setText("Member ID : "+selectedMember.getMemberId());
