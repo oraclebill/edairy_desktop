@@ -8,6 +8,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
@@ -49,7 +50,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 		super.configureRidgets();
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		selectedNode = (FarmListViewTableNode) getContext("selectedFarm");
+		selectedNode = (FarmListViewTableNode) getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
 
 		configureUpperPanel();
 
@@ -71,7 +72,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 			@Override
 			public void callback() {
 				setReturnCode(OK);
-				setContext("selectedFarm", selectedNode);
+				setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
 				getWindowRidget().dispose();
 			}
 		});

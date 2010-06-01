@@ -25,6 +25,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
@@ -58,7 +59,7 @@ public class FarmListViewController extends SubModuleController{
 		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
 		int index = farmListTableInput.indexOf(selectedNode);
 		final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-		memberDialog.getController().setContext("selectedFarm", selectedNode);
+		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
 
 		int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
@@ -116,7 +117,7 @@ public class FarmListViewController extends SubModuleController{
 					FarmListViewTableNode newNode = new FarmListViewTableNode(membership, farm);
 				
 					final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
-					memberDialog.getController().setContext("selectedFarm", newNode);
+					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, newNode);
 
 					int returnCode = memberDialog.open();
 					if (returnCode == AbstractWindowController.OK) {
@@ -137,7 +138,7 @@ public class FarmListViewController extends SubModuleController{
 						FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
 						int index = farmListTableInput.indexOf(selectedNode);
 						final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-						memberDialog.getController().setContext("selectedFarm", selectedNode);
+						memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
 
 						int returnCode = memberDialog.open();
 						if (returnCode == AbstractWindowController.OK) {

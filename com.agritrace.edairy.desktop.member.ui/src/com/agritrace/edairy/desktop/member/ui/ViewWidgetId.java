@@ -58,15 +58,15 @@ public class ViewWidgetId {
 
     public static final String entryInputClear = "entryInputClear";
 
-    public static final String memberInfo_id = "MEMBERID";
+    public static final String memberInfo_id = "memberId";
 
-    public static final String memberInfo_firstName = "FIRST_NAME";
+    public static final String memberInfo_firstName = "firstName";
 
 	public static final String memberInfo_middleName = "member.info.name.middle";
 
 	public static final String memberInfo_honorific = "member.info.name.honorific";
 
-	public static final String memberInfo_lastName = "lastName";
+    public static final String memberInfo_lastName = "lastName";
 
     public static final String memberInfo_applicationDate = "applicationDate";
 
@@ -111,6 +111,7 @@ public class ViewWidgetId {
     public static final String CONTAINER_UnitOfMeasureCombo = "unitFilter";
     public static final String CONTAINER_FilterButton = "filter";
     public static final String CONTAINER_ShowAllButton = "container_show_all";
+    public static final String CONTAINER_VIEW = "ContainerView";
 
     public static final String LIVESTOCK_TABLE = "LiveStock";
     public static final String LIVESTOCK_ADD = "LiveStockAdd";
@@ -202,11 +203,16 @@ public class ViewWidgetId {
 	public static final String VIEW_FARM_ID="Farm_ID";
 	public static final String VIEW_FARM_MEMBER_NAME="MEMBER_NAME";
 	public static final String VIEW_FARM_MEMBER_ID="MEMBER_ID";
-
+	
 	public static final String memberPhoto = "member.info.photo";
-
-	public static final String memberPhotoEditLink = "member.info.photo.editlink";
-
+	
+	//View Container Dialog
+	public static final String VIEW_CONTAINER_ID="CONTAINER_ID";
+	public static final String VIEW_CONTAINER_FARM="CONTAINER_FARM_COMBO";
+	public static final String VIEW_CONTAINER_TYPE="CONTAINER_TYPE";
+	public static final String VIEW_CONTAINER_UNIT="CONTAINER_UNIT";
+	public static final String VIEW_CONTAINER_COMPACITY="CONTAINER_COMPACITY";
+	
 	public static final String memberInfo_formattedName = "member.info.name.formattedText";
-
+public static final String memberPhotoEditLink = "member.info.photo.editlink;
 }

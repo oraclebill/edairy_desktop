@@ -11,7 +11,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Calendar;
 
+import org.eclipse.swt.internal.win32.MEASUREITEMSTRUCT;
+
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -19,6 +22,7 @@ import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -34,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
@@ -448,8 +453,15 @@ public class DairyUtil {
 		Farm farm = TrackingFactory.eINSTANCE.createFarm();
 		farm.setName(name);
 		farm.setLocation(farmLocation);
-		
-
 		return farm;
+	}
+	
+	public static Container createContainer(ContainerType type, UnitOfMeasure unit, Farm farm, double campacity){
+		Container  container = TrackingFactory.eINSTANCE.createContainer();
+		container.setType(type);
+		container.setMeasureType(unit);
+		container.setOwner(farm);
+		container.setCapacity(campacity);
+		return container;
 	}
 }

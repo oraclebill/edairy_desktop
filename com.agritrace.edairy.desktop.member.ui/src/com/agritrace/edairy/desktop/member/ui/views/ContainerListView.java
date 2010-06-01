@@ -124,11 +124,11 @@ public class ContainerListView extends SubModuleView {
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
 		buttonsPanel.setLayout(new GridLayout(2, false));
 
-		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, "View", ViewWidgetId.MEMBERLIST_VIEW);
+		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, "View", ViewWidgetId.CONTAINER_VIEW);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);
 
 		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "Add",
-			ViewWidgetId.MEMBERLIST_ADD);
+			ViewWidgetId.CONTAINER_ADD);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 	}
 
