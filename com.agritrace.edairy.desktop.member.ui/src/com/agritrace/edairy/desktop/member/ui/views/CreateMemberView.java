@@ -36,9 +36,9 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidget;
 
-public class MemberSearchView extends SubModuleView implements SelectionListener {
+public class CreateMemberView extends SubModuleView implements SelectionListener {
 
-	public static final String ID = MemberSearchView.class.getName();
+	public static final String ID = CreateMemberView.class.getName();
 
 	public static final String MEMBER_INFO_GROUP = "Members Information";
 	
@@ -57,7 +57,7 @@ public class MemberSearchView extends SubModuleView implements SelectionListener
 	private Button saveButton;
 	private Button cancelButton;
 
-	public MemberSearchView() {
+	public CreateMemberView() {
 	}
 
 	@Override
