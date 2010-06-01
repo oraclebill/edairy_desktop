@@ -3,6 +3,8 @@ package com.agritrace.edairy.desktop.common.ui.reference;
 import java.util.Arrays;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+
 public class SupplierCategory {
 
 	public static final SupplierCategory[] CATEGORIES = { new SupplierCategory("Feed"),
@@ -28,6 +30,18 @@ public class SupplierCategory {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public static SupplierCategory getByName(String name) {
+		
+		for (SupplierCategory cate:CATEGORIES)
+		{
+			if (cate!=null && cate.getName()!=null && cate.getName().equals(name))
+			{
+				return cate;
+			}
+		}
+		return null;
 	}
 
 }

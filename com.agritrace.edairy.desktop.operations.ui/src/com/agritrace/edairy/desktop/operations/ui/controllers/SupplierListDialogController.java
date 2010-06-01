@@ -1,11 +1,19 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
+import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
@@ -64,15 +72,43 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		legalName.updateFromModel();
 
 		// Category
-//		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$
-//		Supplier supplierBean = (Supplier) EMFUtil.createObject(this.getEClass());
-//		supplierBean.getCategories().addAll(SupplierCategory.getCategories());
-//		category.bindToModel(EMFObservables.observeList(supplier,
-//				DairyPackage.Literals.SUPPLIER__CATEGORIES), "value");
-//		category.bindMultiSelectionToModel(EMFObservables.observeList(supplier,
-//				DairyPackage.Literals.SUPPLIER__CATEGORIES));
-//		category.updateFromModel();
+		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$		
+		if (category != null) {
+			category.setSelectionType(SelectionType.MULTI);
 
+			// Create a supplier to hold all categories
+			IObservableValue selectedValue = new WritableValue();
+
+			category.bindToModel(
+					Observables.staticObservableList(SupplierCategory
+							.getCategoriesList()), SupplierCategory.class,
+					"name");
+			category.updateFromModel();
+			// categoriesList.bindToModel(EMFObservables.observeList(supplier,
+			// DairyPackage.Literals.SUPPLIER__CATEGORIES), "value");
+			List<SupplierCategory> selectedCategoriesList = new ArrayList<SupplierCategory>();
+			for (String categor: supplier.getCategories())
+			{
+				selectedCategoriesList.add(SupplierCategory.getByName(categor));
+			}
+			final ListBean selection = new ListBean();
+			selection.setValues(selectedCategoriesList);
+			selection.addPropertyChangeListener(new PropertyChangeListener() {
+				public void propertyChange(PropertyChangeEvent evt) {
+					// Get current selections
+					List values = selection.getValues();
+					supplier.getCategories().clear();
+					// Update the working copy
+					for (Object category : values) {
+						supplier.getCategories().add(
+								((SupplierCategory) category).getName());
+					}
+					
+				}
+			});
+			category.bindMultiSelectionToModel(selection, "values");
+			category.updateMultiSelectionFromModel();
+		}
 		// Description
 		ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION); //$NON-NLS-1$
 		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());

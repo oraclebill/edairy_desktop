@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.beans.common.TypedBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
+import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -80,17 +81,19 @@ public class SupplierListViewController extends
 		IListRidget categorieList = getRidget(IListRidget.class,
 				SupplierListView.BIND_ID_FILTER_CATEGORIES);
 
-		// if (categorieList != null && categorieList.getSelection().size()>0) {
-		// List<String> categories = new ArrayList<String>();
-		// for (Object category:categorieList.getSelection())
-		// {
-		// if (category instanceof SupplierCategory)
-		// {
-		// categories.add(((SupplierCategory)category).getName());
-		// }
-		// }
-		// criteria.add(Restrictions.in("categories", categories));
-		// }
+
+		if (categorieList != null && categorieList.getSelection().size() > 0) {
+			categorieList.setSelectionType(SelectionType.SINGLE);
+//			List<String> categories = new ArrayList<String>();
+//			for (Object category : categorieList.getSelection()) {
+//				if (category instanceof SupplierCategory) {
+//					categories.add(((SupplierCategory) category).getName());
+//				}
+//			}
+//			Critiera critia = session.createCriteria(persistentClass)
+//			criteria =criteria.createCriteria("categories");
+//			criteria.add(Restrictions.eq("elt", ((SupplierCategory) categorieList.getSelection().get(0)).getName()));
+		}
 
 		// Status
 		IComboRidget statusCombo = getRidget(IComboRidget.class,
