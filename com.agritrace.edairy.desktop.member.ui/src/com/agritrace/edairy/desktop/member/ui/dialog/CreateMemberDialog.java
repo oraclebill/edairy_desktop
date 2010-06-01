@@ -13,6 +13,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.CreateMemberDialogController;
@@ -32,6 +33,13 @@ public class CreateMemberDialog extends AbstractDialogView {
 
 	public CreateMemberDialog() {
 		super(null);
+	}
+
+	/**
+	 * @wbp.parser.constructor
+	 */
+	public CreateMemberDialog(Shell parent) {
+		super(parent);
 	}
 
 	@Override

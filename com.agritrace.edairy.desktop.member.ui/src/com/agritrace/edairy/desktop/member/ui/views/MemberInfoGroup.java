@@ -1,18 +1,26 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroup {
+
+	public static final int DEFAULT_LABEL_WIDTH = 90;
+	public static final int DEFAULT_FIELD_WIDTH = 150;
 
 	public static final String MEMBERID = "Member ID:";
 	public static final String HONORIFIC = "Hon.";
@@ -21,7 +29,6 @@ public class MemberInfoGroup {
 	public static final String ADDITIONAL_NAMES = "Additional";
 	public static final String LAST_NAME = "Family:";
 	public static final String SUFFIX = "Suffix";
-
 
 	private Label photoLabel;
 	private final Composite composite;
@@ -32,78 +39,118 @@ public class MemberInfoGroup {
 	private Text txtLast;
 	private CCombo cmbSuffix;
 	private Text txtAdditional;
-	private Text txtSuffix;
-
+	private Link imageEditLink;
 
 	public MemberInfoGroup(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(1, false));
+		composite.setLayout(new GridLayout(2, false));
 		initGUI();
 	}
 
+	private Font bigAndBold(Font currentFont, boolean bold) {		
+		FontData[] fontData = currentFont.getFontData();
+		for (int i = 0; i < fontData.length; i++) {
+			fontData[i].setHeight(22);
+			if (bold) fontData[i].setStyle(SWT.BOLD);
+		}
+		return new Font(Display.getCurrent(), fontData);
+	}
+	
 	public void initGUI() {
 
-		final Composite upperPanel = UIControlsFactory.createComposite(composite);
-		upperPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		final GridLayout upperPanelLayout = new GridLayout();
-		upperPanelLayout.numColumns = 4;
-		upperPanelLayout.makeColumnsEqualWidth = false;
-		upperPanel.setLayout(upperPanelLayout);
-		upperPanel.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		// member Id
-		UIControlsFactory.createLabel(upperPanel, MEMBERID);
-
-		txtId = UIControlsFactory.createLabel(upperPanel, "Member Id : ",ViewWidgetId.memberInfo_id);
-		final GridData gd_txtId = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		 gd_txtId.widthHint = 150;
-		txtId.setLayoutData(gd_txtId);
-
-		photoLabel = UIControlsFactory.createLabel(upperPanel, ""); //$NON-NLS-1$
-		//	photoLabel.setImage(Activator.getImage(ImageRegistry.sample_memberphoto));
-		photoLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, true, 2, 4));
+		final Composite leftColumn = UIControlsFactory.createComposite(composite);
+		leftColumn.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		final GridLayout leftColumnLayout = new GridLayout();
+		leftColumnLayout.numColumns = 2;
+		leftColumnLayout.makeColumnsEqualWidth = false;
+		leftColumnLayout.marginTop = 8;
+		leftColumnLayout.marginLeft = 8;
+		leftColumnLayout.marginRight = 8;
+		leftColumnLayout.marginBottom = 8;
+//		leftColumnLayout.horizontalSpacing = 8;	// default 5
+//		leftColumnLayout.verticalSpacing = 8; 	// default 5
 		
-		UIControlsFactory.createLabel(upperPanel, HONORIFIC);
-		cmbHonorable = UIControlsFactory.createCCombo(upperPanel, ViewWidgetId.memberInfo_honorific); // (upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_honorific);
-		final GridData gd_txtHonor = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_txtHonor.widthHint = 150;
-		 cmbHonorable.setLayoutData(gd_txtHonor);
+		leftColumn.setLayout(leftColumnLayout);
+		leftColumn.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 
-		UIControlsFactory.createLabel(upperPanel, FIRST_NAME);
-		txtFirst = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_firstName);
-		final GridData gd_txtFirst = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		 gd_txtFirst.widthHint = 150;
-		txtFirst.setLayoutData(gd_txtFirst);
+		GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, SWT.DEFAULT).indent(5,0);
+		GridDataFactory fieldFactory = GridDataFactory.fillDefaults().hint(DEFAULT_FIELD_WIDTH, SWT.DEFAULT);
 
-		UIControlsFactory.createLabel(upperPanel, MIDDLE_NAME);
-		txtMiddle = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_middleName);
-		final GridData gd_txtMiddle = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_txtMiddle.widthHint = 150;
-		txtMiddle.setLayoutData(gd_txtMiddle);
+		// row 0: formatted member name 
+		Label memberNameLabel = UIControlsFactory.createLabel(leftColumn, "(none)", ViewWidgetId.memberInfo_formattedName);
+		memberNameLabel.setFont(bigAndBold(memberNameLabel.getFont(), true));
+		labelFactory.copy().span(2,1).applyTo( memberNameLabel );
+				
+		// member Id 
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MEMBERID));
+		// member Id Text (Label)
+		txtId = UIControlsFactory.createLabel(leftColumn, "<auto>", ViewWidgetId.memberInfo_id);
+		fieldFactory.applyTo(txtId);
 
-		UIControlsFactory.createLabel(upperPanel, LAST_NAME);
-		txtLast = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_lastName);
-		final GridData gd_txtLast = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_txtLast.widthHint = 150;
-		txtLast.setLayoutData(gd_txtLast);
+		// row 2: title label + id
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Title"));
+		cmbHonorable = UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_honorific);
+		fieldFactory.applyTo(cmbHonorable);
 
-	
-		UIControlsFactory.createLabel(upperPanel, ADDITIONAL_NAMES);
-		txtAdditional = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_additionalNames);
-		final GridData gd_txtAddtl = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_txtAddtl.widthHint = 150;
-		txtAdditional.setLayoutData(gd_txtAddtl);
+		// row 3: given name
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, FIRST_NAME));
+		txtFirst = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_firstName);
+		fieldFactory.applyTo(txtFirst);
 
-		UIControlsFactory.createCCombo(upperPanel, SUFFIX);
-		txtSuffix = UIControlsFactory.createText(upperPanel, SWT.BORDER, ViewWidgetId.memberInfo_suffix);
-		final GridData gd_txtSuffix = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_txtSuffix.widthHint = 150;
-		txtSuffix.setLayoutData(gd_txtSuffix);
+		// row 4: middle name
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MIDDLE_NAME));
+		txtMiddle = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_middleName);
+		fieldFactory.applyTo(txtMiddle);
 
-	
+		// row 5: last name 
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, LAST_NAME));
+		txtLast = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_lastName);
+		fieldFactory.applyTo(txtLast);
+
+		// row 6: extra names
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, ADDITIONAL_NAMES));
+		txtAdditional = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_additionalNames);
+		fieldFactory.applyTo(txtAdditional);
+
+		//row 7: suffix
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, SUFFIX));
+		cmbSuffix = UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_suffix);
+		fieldFactory.applyTo(cmbSuffix);
+		
+		// filler
+		fieldFactory.grab(true, true).applyTo(UIControlsFactory.createLabel(leftColumn, "", SWT.NONE));
+
+		
+		// right column
+		//		
+		final Composite rightColumn = UIControlsFactory.createComposite(composite);
+		rightColumn.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		final GridLayout rightColumnLayout = new GridLayout();
+		rightColumnLayout.numColumns = 1;
+		rightColumnLayout.makeColumnsEqualWidth = false;
+		rightColumnLayout.marginTop = 8;
+		rightColumnLayout.marginLeft = 8;
+		rightColumnLayout.marginRight = 8;
+		rightColumnLayout.marginBottom = 8;
+//		rightColumnLayout.horizontalSpacing = 8;	// default 5
+//		rightColumnLayout.verticalSpacing = 8; 	// default 5
+		
+		rightColumn.setLayout(rightColumnLayout);
+		rightColumn.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		
+		// row1-right: photo Label 
+		photoLabel = UIControlsFactory.createLabel(rightColumn, "", SWT.SHADOW_IN, ViewWidgetId.memberPhoto); //$NON-NLS-1$
+		fieldFactory.copy().applyTo(photoLabel);
+
+		//row 2r:  
+		imageEditLink = UIControlsFactory.createLink(rightColumn, SWT.CENTER, ViewWidgetId.memberPhotoEditLink);
+		imageEditLink.setText("Click here to change member photo");
+		fieldFactory.copy().grab(false, true).applyTo(imageEditLink);
+
+		// filler
+		//fieldFactory.grab(true, true).applyTo(UIControlsFactory.createLabel(rightColumn, "", SWT.NONE));
+
 	}
-
-	
-
 
 	public Composite getComposite() {
 		return composite;

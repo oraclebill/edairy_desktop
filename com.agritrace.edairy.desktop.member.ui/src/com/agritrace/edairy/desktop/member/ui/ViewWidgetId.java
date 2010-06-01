@@ -203,4 +203,10 @@ public class ViewWidgetId {
 	public static final String VIEW_FARM_MEMBER_NAME="MEMBER_NAME";
 	public static final String VIEW_FARM_MEMBER_ID="MEMBER_ID";
 
+	public static final String memberPhoto = "member.info.photo";
+
+	public static final String memberPhotoEditLink = "member.info.photo.editlink";
+
+	public static final String memberInfo_formattedName = "member.info.name.formattedText";
+
 }

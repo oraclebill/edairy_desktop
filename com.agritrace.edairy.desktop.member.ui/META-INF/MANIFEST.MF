@@ -16,3 +16,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.member.ui,
  com.agritrace.edairy.desktop.member.ui.controllers,
  com.agritrace.edairy.desktop.member.ui.views
+Import-Package: org.apache.oro.util;version="2.0.8"
