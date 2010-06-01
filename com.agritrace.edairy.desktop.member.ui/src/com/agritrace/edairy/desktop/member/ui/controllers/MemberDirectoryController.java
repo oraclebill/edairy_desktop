@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.BaseDialogView;
-import com.agritrace.edairy.desktop.member.ui.dialog.CreateMemberDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 
 public class MemberDirectoryController extends SubModuleController {
@@ -45,7 +45,7 @@ public class MemberDirectoryController extends SubModuleController {
 		public void callback() {
 			Membership selectedMember = DairyUtil.createMembership(null, null, null);
 			int index = membershipList.indexOf(selectedMember);
-			final CreateMemberDialog memberDialog = new CreateMemberDialog();
+			final AddMemberDialog memberDialog = new AddMemberDialog();
 			memberDialog.getController().setContext("selectedMember", selectedMember);
 
 			int returnCode = memberDialog.open();
