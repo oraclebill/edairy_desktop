@@ -107,7 +107,7 @@ public class FarmListViewController extends SubModuleController {
 
 			});
 			farmListTable.updateFromModel();
-			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new IActionListener() {
+			getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD).addListener(new IActionListener() {
 
 				@Override
 				public void callback() {
@@ -130,7 +130,7 @@ public class FarmListViewController extends SubModuleController {
 					}
 				}
 			});
-			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_VIEW);
+			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
 			if (viewRidget != null) {
 				viewRidget.setEnabled(false);
 				viewRidget.addListener(new IActionListener() {

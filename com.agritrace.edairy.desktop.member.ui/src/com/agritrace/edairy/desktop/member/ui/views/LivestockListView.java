@@ -24,18 +24,18 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidget;
 
-public class ContainerListView extends BaseListView {
-	public static final String ID = ContainerListView.class.getName();
+public class LivestockListView extends BaseListView {
+	public static final String ID = LivestockListView.class.getName();
 
-	public static final String FILTER_GROUP_TEXT = "Search for a container";
+	public static final String FILTER_GROUP_TEXT = "Search for a Livestock";
 	public static final String FILTER_GROUP_MEMBER_LOOKUP = "Member Lookup :";
 	public static final String FILTER_GROUP_FARM_LOOKUP = "Show conatiners :";
 
 	public static final String CONTAINER_GROUP = "Containers";
 
 	
-
 	protected void createFilterGroup(Composite parent) {
 		// group
 		Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
@@ -54,12 +54,11 @@ public class ContainerListView extends BaseListView {
 		lookupButton.setImage(lookupIcon);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).grab(false, false).applyTo(lookupButton);
 
-		Label farmLabel = UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_FARM_LOOKUP);
-		// search text
-		Combo farmCombo = UIControlsFactory.createCombo(filterGroup, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
-		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(235, -1).span(2, 1).grab(false, false)
-				.applyTo(farmCombo);
-
+		Composite filterPanel = UIControlsFactory.createComposite(filterGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(filterPanel);
+		
+		LiveStockFilterWidget filter =  new LiveStockFilterWidget(filterPanel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filter.getComposite());
 		// search cancel button
 		Composite searchPanel = UIControlsFactory.createComposite(filterGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(searchPanel);
@@ -113,9 +112,10 @@ public class ContainerListView extends BaseListView {
 		layout.setColumnData(column7, new ColumnWeightData(15));
 
 		tablePanel.setLayout(layout);
-
-		createButtonPanel(listGroup, ViewWidgetId.CONTAINER_VIEW, ViewWidgetId.CONTAINER_ADD);
 		
+		createButtonPanel(listGroup, ViewWidgetId.CONTAINER_VIEW, ViewWidgetId.CONTAINER_ADD);
+	
 	}
 
 }
+

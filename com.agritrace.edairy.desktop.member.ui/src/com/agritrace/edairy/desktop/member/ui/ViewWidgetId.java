@@ -113,6 +113,7 @@ public class ViewWidgetId {
 	public static final String CONTAINER_ShowAllButton = "container_show_all";
 	public static final String CONTAINER_VIEW = "ContainerView";
 
+	//Live Stock
 	public static final String LIVESTOCK_TABLE = "LiveStock";
 	public static final String LIVESTOCK_ADD = "LiveStockAdd";
 	public static final String LIVESTOCK_VIEW = "LiveStockView";
@@ -126,10 +127,13 @@ public class ViewWidgetId {
 	public static final String LIVESTOCK_ContainerStatusFilter = "liveStock_Status";
 	public static final String LIVESTOCK_ContainerFilterButton = "LiveStock_Filter";
 	public static final String LIVESTOCK_ContainerShowAllButton = "LiveStock_Showall";
+	public static final String LIVESTOCK_FarmFilterCombo = "liveStock_farm_filter";
 
 	public static final String FARM_TABLE = "FarmTable";
 	public static final String FARM_ADD = "FarmAdd";
 	public static final String FARM_Remove = "FarmRemove";
+	public static final String FARM_View = "FarmView";
+
 	// membership_collection tab
 	public static final String COLLECTION_TABLE = "CollectionTable";
 	public static final String COLLECTION_FILTER_STARTDATE = "Collection_Start_Date";
