@@ -44,9 +44,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+//import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+//import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener,
 		ISelectionChangedListener, SelectionListener {
@@ -70,7 +71,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 
 	private MemberSearchViewFilter filter;
 
-	private Dairy dairy;
+	private IMemberRepository membershipRepository;
 
 	public MemberSearchDetachedView() {
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
@@ -238,28 +239,10 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		lookupButton.setEnabled(enabled);
 	}
 
-	private void loadDairy() {
-		DairyDemoResourceManager.INSTANCE.reLoadDairyResource();
-		List<Dairy> dairys;
-		try {
-			dairys = DairyDemoResourceManager.INSTANCE.getObjectsFromDairyModel(Dairy.class);
-			if (dairys.size() != 0) {
-				dairy = dairys.get(0);
-			}
-		} catch (final CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			dairy = null;
-		}
-
-	}
 
 	public List<Membership> createMemberShip() {
-		loadDairy();
-		if (dairy != null) {
-			return dairy.getMemberships();
-		}
-		return new ArrayList<Membership>();
+		return membershipRepository.getMemberships();
+		
 		// List<Membership> members = new ArrayList<Membership>();
 		// Membership member1 = DairyFactory.eINSTANCE.createMembership();
 		// member1.setMemberId("1001");
@@ -557,7 +540,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		if (selectedObject != null && selectedObject instanceof Membership) {
 			memberId = "" + ((Membership) selectedObject).getMemberId();
 		}
-		DairyDemoResourceManager.INSTANCE.reLoadDairyResource();
+		// TODO: whj - revisit..
 		init();
 		if (memberId != null) {
 			final List<Membership> inputs = createMemberShip();

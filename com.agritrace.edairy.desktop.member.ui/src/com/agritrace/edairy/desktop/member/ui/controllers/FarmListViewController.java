@@ -19,8 +19,6 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
@@ -71,17 +69,9 @@ public class FarmListViewController extends BaseListViewController {
 			"Number of LiveStocks", "Number of Container" };
 	private List<FarmListViewTableNode> farmListTableInput = new ArrayList<FarmListViewTableNode>();
 	private List<Membership> membershipList = new ArrayList<Membership>();
-	private final IMemberRepository membershipRepository;
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
-	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
-
-
-	public FarmListViewController() {
-		super();
-		membershipRepository = new MemberRepository();
-	}
-	
+	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";	
 	
 	protected void configueFilterGroup() {
 //		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
@@ -163,7 +153,7 @@ public class FarmListViewController extends BaseListViewController {
 		farmListTableInput.clear();
 		membershipList.clear();
 
-		membershipList = membershipRepository.getMemberships();
+		membershipList = getMemberships();
 		for (Membership membership : membershipList) {
 			List<Farm> farms = membership.getMember().getFarms();
 			for (Farm farm : farms) {

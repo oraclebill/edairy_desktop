@@ -24,6 +24,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
 
@@ -45,8 +47,11 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 	public static final String farmRemoveMessage = "Do you want to remove selected farms?";
 
 	private final List<Farm> farms = new ArrayList<Farm>();
-
+	private final IMemberRepository memberRepository;
+	
+	
 	public MemberFarmWidgetController(IController controller) {
+		memberRepository = new MemberRepository();
 		this.controller = controller;
 		configure();
 	}
@@ -91,7 +96,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 				if (dialog.open() == Window.OK) {
 					final Farm newFarm = dialog.getNewFarm();
 					selectedMember.getMember().getFarms().add(newFarm);
-					DairyDemoResourceManager.INSTANCE.addFarm(newFarm);
+					memberRepository.update(selectedMember);
 					farms.add(newFarm);
 					farmTable.updateFromModel();
 				}

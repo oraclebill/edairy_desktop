@@ -25,7 +25,6 @@ import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
 public class LiveStockListController extends BaseListViewController{
 
 	private ITableRidget liveStockListTable;
-	private Dairy dairy;
 	private IActionRidget viewRidget;
 	private final String[] propertyNames = { "membership", "membership", "animal", "animal", "animal", "animal","animal", "animal", "animal" };
 	private final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose","LiveStock Name", "Species", "Breed","Acquisition Date", "Status" };
@@ -34,13 +33,6 @@ public class LiveStockListController extends BaseListViewController{
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
-
-	@Override
-	public void configureRidgets() {
-		loadDairy();
-		super.configureRidgets();
-
-	}
 
 	private void configueFilterGroup() {
 		//		LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) farmListTable.getSelection().get(0);
@@ -72,16 +64,11 @@ public class LiveStockListController extends BaseListViewController{
 	}
 
 
-	private void loadDairy() {
-		dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-
-	}
-
 	private void buildInputList() {
 		listTableInput.clear();
 		membershipList.clear();
-
-		membershipList.addAll(dairy.getMemberships());
+		membershipList.addAll(getMemberships());
+		
 		for (Membership membership : membershipList) {
 			List<Farm> farms = membership.getMember().getFarms();
 			for (Farm farm : farms) {
@@ -226,10 +213,7 @@ public class LiveStockListController extends BaseListViewController{
 	protected void configureListGroup() {
 
 		liveStockListTable = getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
-		if (dairy == null) {
-			loadDairy();
-		}
-		if (dairy != null) {
+		if (true) {
 			buildInputList();
 			liveStockListTable.bindToModel(new WritableList(listTableInput, LiveStockListViewTableNode.class),
 					LiveStockListViewTableNode.class, propertyNames, columnHeaders);

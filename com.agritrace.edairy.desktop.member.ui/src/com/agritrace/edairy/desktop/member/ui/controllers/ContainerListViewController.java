@@ -48,12 +48,6 @@ public class ContainerListViewController extends BaseListViewController {
 		memberRepository = new MemberRepository();
 	}
 
-	@Override
-	public void configureRidgets() {
-		super.configureRidgets();
-	}
-
-
 	protected void configureListGroup() {
 		containerListTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 
@@ -70,7 +64,6 @@ public class ContainerListViewController extends BaseListViewController {
 					viewRidget.setEnabled(containerListTable.getSelection().size() > 0);
 				}
 			}
-
 		});
 		containerListTable.updateFromModel();
 		getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD).addListener(new IActionListener() {
