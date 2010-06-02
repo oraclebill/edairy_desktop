@@ -13,3 +13,5 @@ Require-Bundle: org.junit,
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: com.agritrace.edairy.desktop.common.persistence.services,
+ com.agritrace.edairy.desktop.common.persistence.test

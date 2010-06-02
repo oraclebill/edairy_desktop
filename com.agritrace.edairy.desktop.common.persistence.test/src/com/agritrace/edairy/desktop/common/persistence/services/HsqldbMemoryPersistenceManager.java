@@ -6,9 +6,9 @@ import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 
-public class TestPersistenceManager extends PersistenceManager {
+public class HsqldbMemoryPersistenceManager extends PersistenceManager {
 
-	TestPersistenceManager() {
+	public HsqldbMemoryPersistenceManager() {
 		super();
 	}
 

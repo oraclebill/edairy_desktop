@@ -39,6 +39,8 @@ public class PersistenceManager {
 	}
 	
 	protected PersistenceManager() {
+		System.err.println(" ** Creating PersistenceManager [" + getClass().getName() + ":" + hashCode() + "]" );
+
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(DB_NAME);
 		hbds.setProperties( getDatastoreProperties() );
 		hbds.setEPackages( getEPackages() );		
@@ -55,7 +57,7 @@ public class PersistenceManager {
 		if (null == session) {
 			session = sessionFactory.openSession();
 		}		
-		System.err.println( ">>>>>> PersistenceManager(" + this.hashCode() + "): providing session [" + session + "] on thread:  " + Thread.currentThread());
+		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "]: providing session [" + session.hashCode() + "] on thread:  " + Thread.currentThread());
 		return session;
 	}
 	
@@ -92,7 +94,14 @@ public class PersistenceManager {
 	
 	
 	protected void postInit() {
-		System.err.println( ">>>>>> PersistenceManager starting on thread " + Thread.currentThread());
+		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "] started on thread " + Thread.currentThread());
 		//System.err.println(hbds.getMappingXML()); 
+	}
+
+	/**
+	 * test only.
+	 */
+	void resetDefault() {
+		INSTANCE = null;
 	}
 }

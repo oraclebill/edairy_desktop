@@ -23,7 +23,7 @@ public class PersistenceManagerTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		testPM = new TestPersistenceManager();
+		testPM = new HsqldbMemoryPersistenceManager();
 		testSession = testPM.getSession();
 	}
 
@@ -80,11 +80,39 @@ public class PersistenceManagerTest {
 	}
 	
 	@Test
+	public void testMultipleManagers() throws Exception {
+		PersistenceManager pm, anotherPM, theLastPM;
+		
+		// pm obtained from default constructor is system default
+		pm = new PersistenceManager();
+		assertTrue(pm instanceof com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager);
+		
+		testPM.resetDefault();
+				
+		// pm obtained from getDefault() is system default
+		pm = PersistenceManager.getDefault();
+		assertTrue(pm instanceof com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager);
+		
+		testPM.resetDefault();
+		
+		// pm, once set, is the only one you get
+		pm = new HsqldbMemoryPersistenceManager();
+		PersistenceManager.setDefault(pm);		
+		assertSame(pm, PersistenceManager.getDefault());
+		assertNotSame(pm, new PersistenceManager());
+		
+		// and once set, default won't change
+		assertSame(pm, PersistenceManager.getDefault());
+
+	}
+	
+	@Test
 	public void testSetDetaultPM() {
-		testPM.setDefault(testPM);
+		testPM.resetDefault();
+		PersistenceManager.setDefault(testPM);
 		assertEquals(testPM, PersistenceManager.getDefault());
 		
-		testPM = new TestPersistenceManager();
+		testPM = new HsqldbMemoryPersistenceManager();
 		assertNotSame(testPM, PersistenceManager.getDefault());
 		
 		try {
@@ -94,6 +122,10 @@ public class PersistenceManagerTest {
 		catch(Throwable t) {
 			;
 		}
+		
+		testPM.resetDefault();
+		PersistenceManager.setDefault(testPM);
+
 	}
 
 }
