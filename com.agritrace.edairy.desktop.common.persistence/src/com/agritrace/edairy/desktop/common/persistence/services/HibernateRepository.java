@@ -13,25 +13,36 @@ import org.hibernate.metadata.ClassMetadata;
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
 
+	private final PersistenceManager persistenceManager;
 	private final String entityName;
 	private final String identifierName;
 
 	private Session session;
 
-	public HibernateRepository() {
-		
-		// ClassMetadata metaData =
-		// sessionFactory.getClassMetadata(getClassType() + "Impl"); // TODO:
-		// Hack
-		// entityName = metaData.getEntityName();
-		String className = getClassType().getName();
-		entityName = className.substring(className.lastIndexOf('.') + 1);
-		Assert.isLegal(!entityName.startsWith("."));
-		ClassMetadata metaData = PersistenceManager.getPersistenceManager().getSession().getSessionFactory().getClassMetadata(entityName);
-		Assert.isNotNull(metaData);
-		identifierName = metaData.getIdentifierPropertyName();
+	protected HibernateRepository() {		
+		this(PersistenceManager.getDefault());
 	}
 
+	protected HibernateRepository(PersistenceManager pm) {
+		String className;
+		ClassMetadata metaData;
+
+		// set the persistence manager
+		persistenceManager = pm;
+
+		// get metadata about the class we will be persisting..
+		className = getClassType().getName();
+		// entity name
+		entityName = className.substring(className.lastIndexOf('.') + 1);
+		Assert.isLegal(!entityName.startsWith("."));
+
+		metaData = persistenceManager.getSession().getSessionFactory().getClassMetadata(entityName);
+		Assert.isNotNull(metaData);
+		// identifier (pk) name
+		identifierName = metaData.getIdentifierPropertyName();
+		Assert.isNotNull(identifierName);
+	}
+	
 	/**
 	 * Subclasses must implement this as follows:
 	 * 
@@ -53,7 +64,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	protected String getEntityName() {
 		return entityName;
 	}
-
+	
 	/**
 	 * The name of the identifier property (primary key) of the parameterized
 	 * class.
@@ -152,7 +163,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	private void openSession() {
-			session = PersistenceManager.getPersistenceManager().getSession();
+			session = PersistenceManager.getDefault().getSession();
 			Assert.isNotNull(session);
 	}
 
@@ -163,5 +174,5 @@ public abstract class HibernateRepository<T extends EObject> implements
 			// TODO: use proper logging and exception code.
 			throw new IllegalStateException("null session");
 		}
-	}
+	}	
 }

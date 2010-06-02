@@ -18,5 +18,7 @@ Import-Package: com.mysql.jdbc,
  org.apache.commons.logging,
  org.dom4j,
  org.hibernate.cfg;version="3.3.2",
- org.hibernate.dialect;version="3.3.2"
+ org.hibernate.dialect;version="3.3.2",
+ org.hsqldb;version="1.8.1",
+ org.hsqldb.jdbc;version="1.8.1"
 Export-Package: com.agritrace.edairy.desktop.common.persistence.services
