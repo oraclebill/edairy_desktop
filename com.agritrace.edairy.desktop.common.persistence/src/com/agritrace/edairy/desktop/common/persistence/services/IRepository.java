@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.common.persistence.services;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.hibernate.Session;
 
 /**
  * Core repository interface which encapsulates a concrete persistence
@@ -21,7 +22,7 @@ public interface IRepository<T extends EObject> {
 	 * @param rawQuery
 	 * @return a possibly empty list.
 	 */
-	List<T> find(String rawQuery);
+	List<?> find(String rawQuery);
 
 	/**
 	 * Find objects that match the query after parameter substitution.
@@ -30,7 +31,7 @@ public interface IRepository<T extends EObject> {
 	 * @param params
 	 * @return List of matches or empty list.
 	 */
-	List<T> find(String query, Object[] params);
+	List<?> find(String query, Object[] params);
 
 	/**
 	 * Find objects that match the query.
@@ -74,5 +75,12 @@ public interface IRepository<T extends EObject> {
 	 */
 	void delete(T deletableEntity) throws NonExistingEntityException ;
 
+	/**
+	 * Raw save.
+	 * 
+	 * 
+	 */
+	void save(EObject obj);
+	
 
 }

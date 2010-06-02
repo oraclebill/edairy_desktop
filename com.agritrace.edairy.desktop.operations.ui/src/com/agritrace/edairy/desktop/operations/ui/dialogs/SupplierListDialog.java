@@ -30,8 +30,8 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialog
  */
 public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialogController> {
 
-	private static int WIDTH_HEIGHT = 400;
-	private static int DESC_HEIGHT_HEIGHT = 50;
+//	private static int WIDTH_HEIGHT = 400;
+//	private static int DESC_HEIGHT_HEIGHT = 50;
 
 	public static final String BIND_ID_SUPPLIER_ID = "bind.id.supplier.id";
 	public static final String BIND_ID_SUPPLIER_STATUS = "bind.id.supplier.status";

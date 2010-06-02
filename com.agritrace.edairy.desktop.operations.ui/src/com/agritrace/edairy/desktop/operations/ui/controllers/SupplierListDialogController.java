@@ -96,7 +96,7 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			selection.addPropertyChangeListener(new PropertyChangeListener() {
 				public void propertyChange(PropertyChangeEvent evt) {
 					// Get current selections
-					List values = selection.getValues();
+					List<?> values = selection.getValues();
 					supplier.getCategories().clear();
 					// Update the working copy
 					for (Object category : values) {

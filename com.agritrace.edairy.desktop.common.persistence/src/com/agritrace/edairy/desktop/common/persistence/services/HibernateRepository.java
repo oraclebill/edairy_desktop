@@ -117,6 +117,16 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	}
 
 	@Override
+	public void save(final EObject newEntity) throws AlreadyExistsException {
+		runWithTransaction(new Runnable() {
+			@Override
+			public void run() {
+				session.persist(getEntityName(), newEntity);
+			}
+		});
+	}
+
+	@Override
 	public void update(final T updateableEntity) throws NonExistingEntityException {
 		runWithTransaction(new Runnable() {
 			@Override

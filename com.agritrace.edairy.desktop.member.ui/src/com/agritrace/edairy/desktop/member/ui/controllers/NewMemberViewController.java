@@ -6,16 +6,13 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
 
 public class NewMemberViewController extends MemberRegisterViewController {
-
-	public NewMemberViewController() {
-		// this.setSelectedMember(EMFObjectUtil.createMembership());
-	}
-
+	
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
@@ -25,21 +22,7 @@ public class NewMemberViewController extends MemberRegisterViewController {
 
 	@Override
 	protected void saveMember() {
-		final Membership newMembership = getSelectedMember();
-		if (newMembership != null) {
-			try {
-				DairyDemoResourceManager.INSTANCE.getLocalDairy().getMemberships().add(newMembership);
-				DairyDemoResourceManager.INSTANCE.saveFarmResource();
-				DairyDemoResourceManager.INSTANCE.saveDairyResource();
-				MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
-			} catch (final IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		super.getMemberRepository().saveNew(getSelectedMember());
 	}
 
 }

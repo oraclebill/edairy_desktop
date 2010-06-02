@@ -19,6 +19,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.BaseDialogView;
@@ -27,7 +28,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 
 public class MemberDirectoryController extends SubModuleController {
 
-	private IRepository<Membership> repository;
+	private final IMemberRepository repository;
 	private final List<Membership> membershipList = new ArrayList<Membership>();
 
 	private ITableRidget memberListRidget;
@@ -40,6 +41,10 @@ public class MemberDirectoryController extends SubModuleController {
 	public static final String DELETE_DIALOG_TITLE = "Delete Member";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 
+	public MemberDirectoryController() {
+		repository = new MemberRepository();
+	}
+	
 	class AddActionListener implements IActionListener {
 		@Override
 		public void callback() {
@@ -96,22 +101,18 @@ public class MemberDirectoryController extends SubModuleController {
 		}
 	}
 
-	void initRepository() {
-		if (null == repository)
-			repository = new MemberRepository();
-	}
+//	void initRepository() {
+//		if (null == repository)
+//			repository = new MemberRepository();
+//	}
 
-	void setRepository(IRepository<Membership> repo) {
-		repository = repo;
-	}
-
-	IRepository<Membership> getRepository() {
-		return repository;
-	}
+//	IRepository<Membership> getRepository() {
+//		return repository;
+//	}
 
 	@Override
 	public void configureRidgets() {
-		initRepository();
+//		initRepository();
 		configureMemberTable();
 		refreshMemberList();
 	}
@@ -126,9 +127,9 @@ public class MemberDirectoryController extends SubModuleController {
 
 		memberListRidget = getRidget(ITableRidget.class, ViewWidgetId.MEMBERLIST_MEMBERTABLE);
 
-		if (repository == null) {
-			initRepository();
-		}
+//		if (repository == null) {
+//			initRepository();
+//		}
 		if (repository != null) {
 
 			memberListRidget.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,

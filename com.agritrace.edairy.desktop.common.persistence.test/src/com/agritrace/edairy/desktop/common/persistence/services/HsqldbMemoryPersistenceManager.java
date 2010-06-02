@@ -1,7 +1,9 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
 import java.util.Properties;
+import java.util.UUID;
 
+import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
@@ -28,7 +30,7 @@ public class HsqldbMemoryPersistenceManager extends PersistenceManager {
 		// in memory hsqldb
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "SA");
-		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:" + DB_NAME);
+		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:test" + System.currentTimeMillis());
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
 
