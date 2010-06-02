@@ -7,12 +7,10 @@ import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.agritrace.edairy.desktop.common.ui.views.DateRangeSearchWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberLiveStockWidget {

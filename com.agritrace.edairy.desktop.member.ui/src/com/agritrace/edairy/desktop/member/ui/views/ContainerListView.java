@@ -4,20 +4,15 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
-import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.ImageButton;
-import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
-import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
@@ -42,7 +37,7 @@ public class ContainerListView extends BaseListView {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(filterGroup);
 
-		Label memberLabel = UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_MEMBER_LOOKUP);
+	    UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_MEMBER_LOOKUP);
 		// search text
 		Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
@@ -54,8 +49,8 @@ public class ContainerListView extends BaseListView {
 		lookupButton.setImage(lookupIcon);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).grab(false, false).applyTo(lookupButton);
 
-		Label farmLabel = UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_FARM_LOOKUP);
-		// search text
+		UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_FARM_LOOKUP);
+		// farm combo
 		Combo farmCombo = UIControlsFactory.createCombo(filterGroup, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(235, -1).span(2, 1).grab(false, false)
 				.applyTo(farmCombo);

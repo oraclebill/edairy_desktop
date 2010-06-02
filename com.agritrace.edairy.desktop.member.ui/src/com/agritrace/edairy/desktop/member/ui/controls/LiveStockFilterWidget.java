@@ -16,7 +16,8 @@ public class LiveStockFilterWidget {
 	
 	public LiveStockFilterWidget(Composite parent){
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(2, false));
+		GridLayout layout = new GridLayout(2, false);
+		composite.setLayout(layout);
 		initGUI();
 	}
 	

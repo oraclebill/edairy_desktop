@@ -60,7 +60,6 @@ public class ViewFarmDialog extends AbstractDialogView {
 
 	@Override
 	protected AbstractWindowController createController() {
-		// TODO Auto-generated method stub
 		return new ViewFarmDialogController();
 	}
 

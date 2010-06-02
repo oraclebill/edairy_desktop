@@ -1,13 +1,10 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -31,7 +28,7 @@ import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 
-public class FarmListViewController extends SubModuleController {
+public class FarmListViewController extends BaseListViewController {
 
 	private ITableRidget farmListTable;
 	private Dairy dairy;
@@ -45,48 +42,44 @@ public class FarmListViewController extends SubModuleController {
 	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 
-	private Map<Farm, Membership> farmToMembershipMap = new HashMap<Farm, Membership>();
-
 	@Override
 	public void configureRidgets() {
 		loadDairy();
-		configueMemberTable();
+		super.configureRidgets();
 
 	}
 
-	private void configueFilterGroup() {
-		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
-		int index = farmListTableInput.indexOf(selectedNode);
-		final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-				selectedNode);
-
-		int returnCode = memberDialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext(
-					"selectedFarm");
-			farmListTableInput.set(index, selectedNode);
-			farmListTable.updateFromModel();
-		} else if (returnCode == 2) {
-			// confirm for delete
-			if (selectedNode != null) {
-				String message = "";
-				if (selectedNode.getFarm() != null) {
-					message = "\"" + selectedNode.getFarm().getName() + "\"";
-				}
-				message = String.format(DELETE_DIALOG_MESSAGE, message);
-				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
-					farmListTableInput.remove(selectedNode);
-					farmListTable.updateFromModel();
-				}
-			}
-		}
+	protected void configueFilterGroup() {
+//		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
+//		int index = farmListTableInput.indexOf(selectedNode);
+//		final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
+//		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+//				selectedNode);
+//
+//		int returnCode = memberDialog.open();
+//		if (returnCode == AbstractWindowController.OK) {
+//			selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext(
+//					"selectedFarm");
+//			farmListTableInput.set(index, selectedNode);
+//			farmListTable.updateFromModel();
+//		} else if (returnCode == 2) {
+//			// confirm for delete
+//			if (selectedNode != null) {
+//				String message = "";
+//				if (selectedNode.getFarm() != null) {
+//					message = "\"" + selectedNode.getFarm().getName() + "\"";
+//				}
+//				message = String.format(DELETE_DIALOG_MESSAGE, message);
+//				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
+//					farmListTableInput.remove(selectedNode);
+//					farmListTable.updateFromModel();
+//				}
+//			}
+//		}
 	}
 
-	private void configueMemberTable() {
-
+	protected void configureListGroup() {
 		farmListTable = getRidget(ITableRidget.class, ViewWidgetId.FARM_LIST_TABLE);
-
 		if (dairy == null) {
 			loadDairy();
 		}
@@ -177,7 +170,6 @@ public class FarmListViewController extends SubModuleController {
 	}
 
 	private void buildFarmInputList() {
-		farmToMembershipMap.clear();
 		farmListTableInput.clear();
 		membershipList.clear();
 
@@ -269,6 +261,12 @@ public class FarmListViewController extends SubModuleController {
 				return null;
 			}
 		});
+	}
+
+	@Override
+	protected void configureFilterGroup() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

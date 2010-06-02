@@ -38,6 +38,12 @@ public abstract class BaseListView extends SubModuleView {
 	 */
 	protected abstract void createListGroup(Composite parent);
 	
+	/**
+	 * Create button panel, it contains two buttons,View Button and Add Button
+	 * @param parent the parent composite
+	 * @param viewButtonId the view button id
+	 * @param addButtonId the add button id
+	 */
 	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId){
 		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);

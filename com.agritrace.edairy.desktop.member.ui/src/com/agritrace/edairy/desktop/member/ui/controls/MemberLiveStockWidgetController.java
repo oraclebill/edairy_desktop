@@ -57,6 +57,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON,
 				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
 		liveStockTable = controller.getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
+		//farm name
 		liveStockTable.setColumnFormatter(1, new ColumnFormatter() {
 
 			@Override
@@ -68,6 +69,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 			}
 		});
 
+		//species
 		liveStockTable.setColumnFormatter(4, new ColumnFormatter() {
 
 			@Override
@@ -79,6 +81,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 			}
 		});
 
+		//breed
 		liveStockTable.setColumnFormatter(5, new ColumnFormatter() {
 
 			@Override
@@ -90,6 +93,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 			}
 		});
 
+		//acquisition
 		liveStockTable.setColumnFormatter(6, new ColumnFormatter() {
 
 			@Override

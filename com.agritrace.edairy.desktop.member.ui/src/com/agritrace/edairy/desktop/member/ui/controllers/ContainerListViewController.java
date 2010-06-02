@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -29,7 +28,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 
-public class ContainerListViewController extends SubModuleController {
+public class ContainerListViewController extends BaseListViewController {
 
 	private ITableRidget containerListTable;
 	private Dairy dairy;
@@ -39,7 +38,7 @@ public class ContainerListViewController extends SubModuleController {
 	private final String[] containerColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Container ID", "Type",
 			"Unit of Measure", "Capacity" };
 	private List<Membership> membershipList = new ArrayList<Membership>();
-	private List<ContainerListViewTableNode> tableInput = new ArrayList();
+	private List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Container";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected container?";
@@ -47,44 +46,12 @@ public class ContainerListViewController extends SubModuleController {
 	@Override
 	public void configureRidgets() {
 		loadDairy();
-		configueMemberTable();
+		super.configureRidgets();
 
 	}
 
-	private void configueFilterGroup() {
-		// FarmListViewTableNode selectedNode = (FarmListViewTableNode)
-		// farmListTable.getSelection().get(0);
-		// int index = farmListTableInput.indexOf(selectedNode);
-		// final ViewFarmDialog memberDialog = new
-		// ViewFarmDialog(Display.getDefault().getActiveShell());
-		// memberDialog.getController().setContext("selectedFarm",
-		// selectedNode);
-		//
-		// int returnCode = memberDialog.open();
-		// if (returnCode == AbstractWindowController.OK) {
-		// selectedNode = (FarmListViewTableNode) (FarmListViewTableNode)
-		// memberDialog.getController().getContext("selectedFarm");
-		// farmListTableInput.set(index, selectedNode);
-		// farmListTable.updateFromModel();
-		// } else if (returnCode == 2) {
-		// // confirm for delete
-		// if (selectedNode != null) {
-		// String message = "";
-		// if (selectedNode.getFarm() != null) {
-		// message = "\""+ selectedNode.getFarm().getName()+"\"";
-		// }
-		// message = String.format(DELETE_DIALOG_MESSAGE,message);
-		// if
-		// (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),DELETE_DIALOG_TITLE,
-		// message)) {
-		// farmListTableInput.remove(selectedNode);
-		// farmListTable.updateFromModel();
-		// }
-		// }
-		// }
-	}
 
-	private void configueMemberTable() {
+	protected void configureListGroup() {
 
 		containerListTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 
@@ -267,6 +234,12 @@ public class ContainerListViewController extends SubModuleController {
 				return null;
 			}
 		});
+	}
+
+	@Override
+	protected void configureFilterGroup() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
