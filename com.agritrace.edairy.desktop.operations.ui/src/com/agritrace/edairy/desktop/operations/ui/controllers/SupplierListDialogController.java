@@ -140,9 +140,4 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	protected EClass getEClass() {
 		return DairyPackage.eINSTANCE.getSupplier();
 	}
-
-	// @Override
-	// protected Supplier createWorkingCopy() {
-	// return (Supplier) EMFUtil.createWorkingCopy(this.getEClass(), 2);
-	// }
 }

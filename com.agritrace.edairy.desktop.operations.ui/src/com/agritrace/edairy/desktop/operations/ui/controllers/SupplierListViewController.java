@@ -68,7 +68,11 @@ public class SupplierListViewController extends
 	@Override
 	protected List<Supplier> getFilteredResult() {
 
+//<<<<<<< HEAD
 		org.hibernate.Session session = PersistenceManager.getDefault()
+//=======
+//		org.hibernate.Session session = PersistenceManager.getPersistenceManager()
+//>>>>>>> 1) Fixed the issue to create a new model 
 				.getSession();
 		Criteria criteria = session.createCriteria(this.getEntityClass());
 		// Company Name
