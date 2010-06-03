@@ -144,6 +144,7 @@
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.hibernate"/>
+      <plugin id="org.hsqldb"/>
       <plugin id="org.pushingpixels.trident"/>
    </plugins>
 

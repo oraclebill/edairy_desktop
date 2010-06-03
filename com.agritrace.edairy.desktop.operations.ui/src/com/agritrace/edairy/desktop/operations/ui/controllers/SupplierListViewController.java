@@ -68,7 +68,7 @@ public class SupplierListViewController extends
 	@Override
 	protected List<Supplier> getFilteredResult() {
 
-		org.hibernate.Session session = PersistenceManager.getPersistenceManager()
+		org.hibernate.Session session = PersistenceManager.getDefault()
 				.getSession();
 		Criteria criteria = session.createCriteria(this.getEntityClass());
 		// Company Name

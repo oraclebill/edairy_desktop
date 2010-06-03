@@ -7,13 +7,16 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.Activator;
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 
 public class DateRangeSearchWidget {
-
+	
+	public static final int DEFAULT_LABEL_WIDTH = 110;
+	
 	private final Composite composite;
 
 	private final String labelText;
@@ -40,8 +43,11 @@ public class DateRangeSearchWidget {
 
 	private void createDataRangeSearch() {
 
-		UIControlsFactory.createLabel(composite, labelText);
+		Label label = UIControlsFactory.createLabel(composite, labelText);
 
+		GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, -1);
+		labelFactory.applyTo(label);
+		
 		final Text startDateText = UIControlsFactory.createText(composite, SWT.READ_ONLY | SWT.BORDER, startId);
 		startDateText.setText("Start");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(startDateText);

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -18,161 +17,113 @@ import org.eclipse.swt.widgets.Display;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 
-public class ContainerListViewController extends SubModuleController {
+public class ContainerListViewController extends BaseListViewController {
+
+	private final IMemberRepository memberRepository;
 
 	private ITableRidget containerListTable;
-	private Dairy dairy;
 	private IActionRidget viewRidget;
 	private final String[] containerPropertyNames = { "membership", "membership", "container", "container",
 			"container", "container", "container" };
 	private final String[] containerColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Container ID", "Type",
 			"Unit of Measure", "Capacity" };
 	private List<Membership> membershipList = new ArrayList<Membership>();
-	private List<ContainerListViewTableNode> tableInput = new ArrayList();
+	private List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
 
 	public static final String DELETE_DIALOG_TITLE = "Delete Container";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected container?";
 
-	@Override
-	public void configureRidgets() {
-		loadDairy();
-		configueMemberTable();
-
+	public ContainerListViewController() {
+		memberRepository = new MemberRepository();
 	}
 
-	private void configueFilterGroup() {
-		// FarmListViewTableNode selectedNode = (FarmListViewTableNode)
-		// farmListTable.getSelection().get(0);
-		// int index = farmListTableInput.indexOf(selectedNode);
-		// final ViewFarmDialog memberDialog = new
-		// ViewFarmDialog(Display.getDefault().getActiveShell());
-		// memberDialog.getController().setContext("selectedFarm",
-		// selectedNode);
-		//
-		// int returnCode = memberDialog.open();
-		// if (returnCode == AbstractWindowController.OK) {
-		// selectedNode = (FarmListViewTableNode) (FarmListViewTableNode)
-		// memberDialog.getController().getContext("selectedFarm");
-		// farmListTableInput.set(index, selectedNode);
-		// farmListTable.updateFromModel();
-		// } else if (returnCode == 2) {
-		// // confirm for delete
-		// if (selectedNode != null) {
-		// String message = "";
-		// if (selectedNode.getFarm() != null) {
-		// message = "\""+ selectedNode.getFarm().getName()+"\"";
-		// }
-		// message = String.format(DELETE_DIALOG_MESSAGE,message);
-		// if
-		// (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),DELETE_DIALOG_TITLE,
-		// message)) {
-		// farmListTableInput.remove(selectedNode);
-		// farmListTable.updateFromModel();
-		// }
-		// }
-		// }
-	}
-
-	private void configueMemberTable() {
-
+	protected void configureListGroup() {
 		containerListTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 
-		if (dairy == null) {
-			loadDairy();
-		}
-		if (dairy != null) {
-			buildInputList();
-			containerListTable.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class),
-					ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
-			setColumnFormatters();
+		buildInputList();
+		containerListTable.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class),
+				ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
+		setColumnFormatters();
 
-			containerListTable.addSelectionListener(new ISelectionListener() {
+		containerListTable.addSelectionListener(new ISelectionListener() {
 
-				@Override
-				public void ridgetSelected(SelectionEvent event) {
-					if (event.getSource() == containerListTable) {
-						viewRidget.setEnabled(containerListTable.getSelection().size() > 0);
-					}
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				if (event.getSource() == containerListTable) {
+					viewRidget.setEnabled(containerListTable.getSelection().size() > 0);
 				}
+			}
+		});
+		containerListTable.updateFromModel();
+		getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD).addListener(new IActionListener() {
 
-			});
-			containerListTable.updateFromModel();
-			getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD).addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
+				final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+				memberDialog.getController().setContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
+
+				int returnCode = memberDialog.open();
+				if (returnCode == AbstractWindowController.OK) {
+					// container = (Container)
+					// memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+					// farmListTableInput.add(newNode);
+					// farmListTable.updateFromModel();
+				}
+			}
+		});
+		viewRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_VIEW);
+		if (viewRidget != null) {
+			viewRidget.setEnabled(false);
+			viewRidget.addListener(new IActionListener() {
 
 				@Override
 				public void callback() {
-					Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-					final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault()
-							.getActiveShell());
-					memberDialog.getController().setContext(
-							ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
+					ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) containerListTable
+							.getSelection().get(0);
+					final AddContainerDialog dialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+					dialog.getController().setContext(
+							ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
+							selectedNode.getContainer());
 
-					int returnCode = memberDialog.open();
+					int returnCode = dialog.open();
 					if (returnCode == AbstractWindowController.OK) {
-						// container = (Container)
-						// memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-						// farmListTableInput.add(newNode);
-						// farmListTable.updateFromModel();
-					}
-				}
-			});
-			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_VIEW);
-			if (viewRidget != null) {
-				viewRidget.setEnabled(false);
-				viewRidget.addListener(new IActionListener() {
-
-					@Override
-					public void callback() {
-						ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) containerListTable
-								.getSelection().get(0);
-						final AddContainerDialog dialog = new AddContainerDialog(Display.getDefault().getActiveShell());
-						dialog.getController().setContext(
-								ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
-								selectedNode.getContainer());
-
-						int returnCode = dialog.open();
-						if (returnCode == AbstractWindowController.OK) {
-							Container container = (Container) dialog.getController().getContext(
-									ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-							selectedNode.setContainer(container);
-							containerListTable.updateFromModel();
-						} else if (returnCode == 2) {
-							// confirm for delete
-							if (selectedNode != null) {
-								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
-										DELETE_DIALOG_TITLE, DELETE_DIALOG_MESSAGE)) {
-									tableInput.remove(selectedNode);
-									containerListTable.updateFromModel();
-								}
+						Container container = (Container) dialog.getController().getContext(
+								ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+						selectedNode.setContainer(container);
+						containerListTable.updateFromModel();
+					} else if (returnCode == 2) {
+						// confirm for delete
+						if (selectedNode != null) {
+							if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE,
+									DELETE_DIALOG_MESSAGE)) {
+								tableInput.remove(selectedNode);
+								containerListTable.updateFromModel();
 							}
 						}
 					}
-				});
-			}
+				}
+			});
 		}
-	}
-
-	private void loadDairy() {
-		dairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-
 	}
 
 	private void buildInputList() {
 		tableInput.clear();
 		membershipList.clear();
 
-		membershipList = dairy.getMemberships();
+		membershipList = memberRepository.getMemberships();
 		for (Membership membership : membershipList) {
 			List<Farm> farms = membership.getMember().getFarms();
 			for (Farm farm : farms) {
@@ -187,6 +138,7 @@ public class ContainerListViewController extends SubModuleController {
 	private void setColumnFormatters() {
 		// memberId
 		containerListTable.setColumnFormatter(0, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Membership membership = ((ContainerListViewTableNode) element).getMembership();
@@ -199,11 +151,12 @@ public class ContainerListViewController extends SubModuleController {
 		});
 		// memberName
 		containerListTable.setColumnFormatter(1, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Membership membership = ((ContainerListViewTableNode) element).getMembership();
 					if (membership != null) {
-						Person member = ((Membership) membership).getMember();
+						Person member = (membership).getMember();
 						if (member != null) {
 							return member.getFamilyName() + "," + member.getGivenName();
 						}
@@ -213,6 +166,7 @@ public class ContainerListViewController extends SubModuleController {
 			}
 		});
 		containerListTable.setColumnFormatter(2, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Container container = ((ContainerListViewTableNode) element).getContainer();
@@ -224,6 +178,7 @@ public class ContainerListViewController extends SubModuleController {
 			}
 		});
 		containerListTable.setColumnFormatter(3, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Container container = ((ContainerListViewTableNode) element).getContainer();
@@ -235,6 +190,7 @@ public class ContainerListViewController extends SubModuleController {
 			}
 		});
 		containerListTable.setColumnFormatter(4, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Container container = ((ContainerListViewTableNode) element).getContainer();
@@ -246,6 +202,7 @@ public class ContainerListViewController extends SubModuleController {
 			}
 		});
 		containerListTable.setColumnFormatter(5, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Container container = ((ContainerListViewTableNode) element).getContainer();
@@ -257,6 +214,7 @@ public class ContainerListViewController extends SubModuleController {
 			}
 		});
 		containerListTable.setColumnFormatter(6, new ColumnFormatter() {
+			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
 					Container container = ((ContainerListViewTableNode) element).getContainer();
@@ -267,6 +225,12 @@ public class ContainerListViewController extends SubModuleController {
 				return null;
 			}
 		});
+	}
+
+	@Override
+	protected void configureFilterGroup() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

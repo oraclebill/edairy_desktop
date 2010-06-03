@@ -34,7 +34,7 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetCont
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 
-public class CreateMemberDialogController extends BaseDialogController<Membership> {
+public class AddMemberDialogController extends BaseDialogController<Membership> {
 
 	private final class UpdateMemberPhotoAction implements ISelectionListener {
 		@Override
@@ -100,7 +100,7 @@ public class CreateMemberDialogController extends BaseDialogController<Membershi
 		}
 	};
 
-	public CreateMemberDialogController() {
+	public AddMemberDialogController() {
 
 	}
 

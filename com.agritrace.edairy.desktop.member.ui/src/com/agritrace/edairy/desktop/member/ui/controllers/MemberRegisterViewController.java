@@ -13,7 +13,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+//import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
@@ -28,6 +30,8 @@ import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager
 
 public class MemberRegisterViewController extends SubModuleController implements MemberSearchSelectionListener {
 
+	private final IMemberRepository memberRepository;
+	
 	// private Membership workingCopy;
 	private Membership selectedMember;
 
@@ -55,6 +59,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	public MemberRegisterViewController() {
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
+		memberRepository = new MemberRepository();
 	}
 
 	@Override
@@ -159,17 +164,18 @@ public class MemberRegisterViewController extends SubModuleController implements
 		if (selectedMember != null) {
 			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
 			try {
-				DairyDemoResourceManager.INSTANCE.saveFarmResource();
-				DairyDemoResourceManager.INSTANCE.saveDairyResource();
+//				DairyDemoResourceManager.INSTANCE.saveFarmResource();
+//				DairyDemoResourceManager.INSTANCE.saveDairyResource();
+				memberRepository.update(selectedMember);
 				MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
 			} catch (final IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Activator.getDefault().logError(e, e.getMessage());
-			} catch (final IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Activator.getDefault().logError(e, e.getMessage());
+//			} catch (final IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				Activator.getDefault().logError(e, e.getMessage());
 
 			}
 		}
@@ -208,6 +214,10 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	public void setSelectedMember(Membership selectedMember) {
 		this.selectedMember = selectedMember;
+	}
+
+	protected IMemberRepository getMemberRepository() {
+		return memberRepository;
 	}
 
 }

@@ -31,6 +31,13 @@
             name="Member Container Registry"
             restorable="true">
       </view>
+       <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.member.ui.views.LivestockListView"
+            id="com.agritrace.edairy.desktop.member.ui.views.LivestockListView"
+            name="LiveStock Registry"
+            restorable="true">
+      </view>
    </extension>
    
 

@@ -50,7 +50,7 @@ public class SupplierListDialogControllerTestCase extends
 	protected void prepareDBForTest() {
 		// TODO
 		
-		Session session = PersistenceManager.getPersistenceManager().getSession();
+		Session session = PersistenceManager.getDefault().getSession();
 		Transaction tx = session.beginTransaction();
 		session.createSQLQuery("Delete from supplier");
 		// delete all records

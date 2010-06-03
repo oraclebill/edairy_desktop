@@ -19,31 +19,28 @@ public class PersistenceManager {
 	
 	public static final String DB_NAME = "dairytest";
 	
+	private static PersistenceManager INSTANCE;
+	
 	private final HbDataStore hbds;
 	private final SessionFactory sessionFactory;
 	private Session session;
-	
-	
-	private static PersistenceManager INSTANCE;
-	public static PersistenceManager getPersistenceManager() {
+		
+	public static PersistenceManager getDefault() {
 		if ( INSTANCE == null )
 			INSTANCE = new PersistenceManager();
 		return INSTANCE;
 	}
 	
-	public HbDataStore getDataStore() {
-		return hbds;		
+	public static void setDefault(PersistenceManager pm) {
+		if (INSTANCE == null )
+			INSTANCE = pm;
+		else
+			throw new IllegalStateException("default instance already set");
 	}
 	
-	public Session getSession() {
-		if (null == session) {
-			session = sessionFactory.openSession();
-		}		
-		System.err.println( ">>>>>> PersistenceManager: providing session [" + session + "] on thread:  " + Thread.currentThread());
-		return session;
-	}
-	
-	private PersistenceManager() {
+	protected PersistenceManager() {
+		System.err.println(" ** Creating PersistenceManager [" + getClass().getName() + ":" + hashCode() + "]" );
+
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(DB_NAME);
 		hbds.setProperties( getDatastoreProperties() );
 		hbds.setEPackages( getEPackages() );		
@@ -52,6 +49,18 @@ public class PersistenceManager {
 		sessionFactory = hbds.getSessionFactory();
 	}
 
+	public HbDataStore getDataStore() {
+		return hbds;		
+	}
+	
+	public Session getSession() {
+		if (null == session) {
+			session = sessionFactory.openSession();
+		}		
+		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "]: providing session [" + session.hashCode() + "] on thread:  " + Thread.currentThread());
+		return session;
+	}
+	
 	protected Properties getDatastoreProperties() {
 		// TODO: hibernate properties can be set by having a hibernate.properties file in the root of
 		// the classpath.
@@ -85,7 +94,14 @@ public class PersistenceManager {
 	
 	
 	protected void postInit() {
-		System.err.println( ">>>>>> PersistenceManager starting on thread " + Thread.currentThread());
+		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "] started on thread " + Thread.currentThread());
 		//System.err.println(hbds.getMappingXML()); 
+	}
+
+	/**
+	 * test only.
+	 */
+	void resetDefault() {
+		INSTANCE = null;
 	}
 }

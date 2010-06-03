@@ -18,6 +18,8 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
+import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
@@ -109,6 +111,10 @@ public class EDairyManagerApplication extends SwtApplication {
 	@Override
 	protected IApplicationNode createModel() {
 
+		// FIXME: remove !!!
+		// setup memory based PM for development
+		PersistenceManager.setDefault( new HsqldbMemoryPersistenceManager() );
+		
 //		ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 
 		final ApplicationNode app = new ApplicationNode("eDairy Manager"); //$NON-NLS-1$

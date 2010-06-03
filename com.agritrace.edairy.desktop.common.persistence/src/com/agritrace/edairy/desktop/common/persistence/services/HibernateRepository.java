@@ -10,26 +10,39 @@ import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 import org.hibernate.metadata.ClassMetadata;
 
-public abstract class HibernateRepository<T extends EObject> implements
-		IRepository<T> {
+public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
 
+	private final PersistenceManager persistenceManager;
 	private final String entityName;
 	private final String identifierName;
 
 	private Session session;
 
-	public HibernateRepository() {
-		
-		// ClassMetadata metaData =
-		// sessionFactory.getClassMetadata(getClassType() + "Impl"); // TODO:
-		// Hack
-		// entityName = metaData.getEntityName();
-		String className = getClassType().getName();
+	protected HibernateRepository() {
+		this(PersistenceManager.getDefault());
+	}
+
+	protected HibernateRepository(PersistenceManager pm) {
+		String className;
+		ClassMetadata metaData;
+
+		System.err.println("Creating HibernateRepository [" + getClass().getName() + ":" + hashCode() + "]");
+
+		// set the persistence manager
+		persistenceManager = pm;
+
+		// get metadata about the class we will be persisting..
+		className = getClassType().getName();
+		// entity name
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
-		ClassMetadata metaData = PersistenceManager.getPersistenceManager().getSession().getSessionFactory().getClassMetadata(entityName);
+
+		metaData = persistenceManager.getSession().getSessionFactory().getClassMetadata(entityName);
 		Assert.isNotNull(metaData);
+		// identifier (pk) name
 		identifierName = metaData.getIdentifierPropertyName();
+		Assert.isNotNull(identifierName);
+
 	}
 
 	/**
@@ -43,7 +56,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	 * 
 	 * @return
 	 */
-	protected abstract Class getClassType();
+	protected abstract Class<?> getClassType();
 
 	/**
 	 * The hibernate entity name of the parameterized class.
@@ -72,7 +85,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	@Override
 	public List<T> find(String rawQuery) {
 		openSession();
-		return runQuery(session.createQuery(rawQuery)); 
+		return runQuery(session.createQuery(rawQuery));
 	}
 
 	@Override
@@ -82,13 +95,12 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	@Override
 	public T findByKey(long key) {
-		Query q = session.createQuery(
-				"FROM " + getEntityName() + " where " + getIdentifierName()
-						+ " = ? ").setLong(0, key);
+		final Query q = session.createQuery("FROM " + getEntityName() + " where " + getIdentifierName() + " = ? ")
+				.setLong(0, key);
 
-		List<T> ret = runQuery(q);
+		final List<T> ret = runQuery(q);
 
-		if (ret != null && ret.size() > 0)
+		if ((ret != null) && (ret.size() > 0))
 			return ret.get(0);
 		else
 			return null;
@@ -105,8 +117,17 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	@Override
-	public void update(final T updateableEntity)
-			throws NonExistingEntityException {
+	public void save(final EObject newEntity) throws AlreadyExistsException {
+		runWithTransaction(new Runnable() {
+			@Override
+			public void run() {
+				session.persist(getEntityName(), newEntity);
+			}
+		});
+	}
+
+	@Override
+	public void update(final T updateableEntity) throws NonExistingEntityException {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
@@ -116,8 +137,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	@Override
-	public void delete(final T deletableEntity)
-			throws NonExistingEntityException {
+	public void delete(final T deletableEntity) throws NonExistingEntityException {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
@@ -128,11 +148,11 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	private void runWithTransaction(Runnable r) {
 		openSession();
-		Transaction t = session.beginTransaction();
+		final Transaction t = session.beginTransaction();
 		try {
 			r.run();
 			t.commit();
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			t.rollback();
 			throw new TransactionException(entityName, ex);
 		} finally {
@@ -152,8 +172,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	private void openSession() {
-			session = PersistenceManager.getPersistenceManager().getSession();
-			Assert.isNotNull(session);
+		session = persistenceManager.getSession();
+		Assert.isNotNull(session);
 	}
 
 	private void closeSession() {

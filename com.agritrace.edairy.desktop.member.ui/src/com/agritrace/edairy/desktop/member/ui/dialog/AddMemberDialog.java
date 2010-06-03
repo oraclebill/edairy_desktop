@@ -5,13 +5,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.CreateMemberDialogController;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddMemberDialogController;
 
-public class CreateMemberDialog extends ViewMemberDialog {
+public class AddMemberDialog extends ViewMemberDialog {
 
 	@Override
 	protected AbstractWindowController createController() {
-		return new CreateMemberDialogController();
+		return new AddMemberDialogController();
 	}
 
 	@Override
