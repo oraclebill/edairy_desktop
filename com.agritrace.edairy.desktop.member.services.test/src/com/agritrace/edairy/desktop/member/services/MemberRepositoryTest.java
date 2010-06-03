@@ -129,7 +129,7 @@ public class MemberRepositoryTest {
 		
 		assertNotNull(farm.getFarmId());
 		
-		Farm copyOfFarm = repo.find();
+//		Farm copyOfFarm = repo.find();
 		
 	}
 }

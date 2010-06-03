@@ -14,11 +14,11 @@
 <unit id="org.hibernate.feature.group" version="3.3.2.201005082216"/>
 <repository location="http://www.elver.org/eclipse/update"/>
 </location>
-<location path="/Users/oraclebill/Development/Projects/eclipse-lib/eclipse-3.6M7-delta-pack/eclipse/plugins" type="Directory"/>
-<location path="/Users/oraclebill/Development/Projects/eclipse-lib/riena-m7-windows-all-in-one/eclipse/plugins" type="Directory"/>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
 <unit id="org.eclipse.emf.teneo.hibernate.sdk.feature.group" version="1.1.2.v201005192216"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
+<location path="${workspace_loc}/../eclipse-lib/eclipse-3.6M7-delta-pack/eclipse/plugins" type="Directory"/>
+<location path="${workspace_loc}/../eclipse-lib/riena-m7-windows-all-in-one/eclipse/plugins" type="Directory"/>
 </locations>
 </target>
