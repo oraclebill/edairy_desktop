@@ -81,7 +81,7 @@ public class MemberInfoGroup {
 		Label memberNameLabel = UIControlsFactory.createLabel(leftColumn, "(none)",
 				ViewWidgetId.memberInfo_formattedName);
 		memberNameLabel.setFont(bigAndBold(memberNameLabel.getFont(), true));
-		labelFactory.copy().span(2, 1).applyTo(memberNameLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(memberNameLabel);
 
 		// member Id
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MEMBERID));

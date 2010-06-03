@@ -47,7 +47,7 @@ public class DairyUtil {
 	public static final Set<ContactMethod> NO_CONTACTS = Collections.emptySet();
 	public static final Set<Person> NO_PERSONS = Collections.emptySet();
 	public static final Set<String> NO_CATEGORIES = Collections.emptySet();
-	
+
 	public static PostalLocation createPostalLocation(String address, String division, String province, String postCode) {
 		return createPostalLocation(address, division, null, province, postCode);
 	}
@@ -102,14 +102,18 @@ public class DairyUtil {
 
 	public static Location createLocation(PostalLocation pLoc, MapLocation mLoc, DescriptiveLocation dLoc) {
 		final Location loc = ModelFactory.eINSTANCE.createLocation();
-		if ((pLoc == null) && (mLoc == null) && (dLoc == null))
-			dLoc = createDescriptiveLocation("", "");
-		if (null != pLoc)
-			loc.setPostalLocation(pLoc);
-		if (null != mLoc)
-			loc.setMapLocation(mLoc);
-		if (null != dLoc)
-			loc.setDescriptiveLocation(dLoc);
+		if(pLoc == null){
+			pLoc = createPostalLocation("","", "", "", "", "", "", "", "", "");
+		}
+		if (mLoc == null) {
+			mLoc = createMapLocation(0.0, 0.0);
+		}
+		if(dLoc == null){
+			createDescriptiveLocation("", "");
+		}
+		loc.setPostalLocation(pLoc);
+		loc.setMapLocation(mLoc);
+		loc.setDescriptiveLocation(dLoc);
 		return loc;
 	}
 

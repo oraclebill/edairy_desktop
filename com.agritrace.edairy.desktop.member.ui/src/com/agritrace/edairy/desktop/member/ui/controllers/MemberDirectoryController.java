@@ -17,13 +17,12 @@ import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 
 public class MemberDirectoryController extends SubModuleController {
@@ -49,7 +48,6 @@ public class MemberDirectoryController extends SubModuleController {
 		@Override
 		public void callback() {
 			Membership selectedMember = DairyUtil.createMembership(null, null, null);
-			int index = membershipList.indexOf(selectedMember);
 			final AddMemberDialog memberDialog = new AddMemberDialog();
 			memberDialog.getController().setContext("selectedMember", selectedMember);
 
@@ -70,7 +68,6 @@ public class MemberDirectoryController extends SubModuleController {
 		@Override
 		public void callback() {
 			Membership selectedMember = (Membership) memberListRidget.getSelection().get(0);
-			int index = membershipList.indexOf(selectedMember);
 			final BaseDialogView memberDialog = new ViewMemberDialog();
 			memberDialog.getController().setContext("selectedMember", selectedMember);
 
