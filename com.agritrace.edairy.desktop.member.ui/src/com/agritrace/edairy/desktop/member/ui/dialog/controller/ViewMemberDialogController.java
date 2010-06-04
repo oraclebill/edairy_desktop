@@ -18,7 +18,6 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 		memberId = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_MEMBER_ID);
 		memberbalance = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_MEMBER_BALANCE);
 		memberPhoto = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_MEMBER_NAME_PHOTO);
-
 	}
 
 	protected void updateUpperPanelBinding() {

@@ -85,8 +85,8 @@ public class MemberProfileWidget {
 				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
 				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
 						dateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
+				int returncode = calDialog.open();
+				if (returncode == AbstractWindowController.OK) {
 					final Date selectedDate = (Date) calDialog.getController().getContext(
 							SimpleFormattedDateBean.DATE_PROR);
 					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();

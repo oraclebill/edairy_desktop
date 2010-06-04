@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
-import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.util.Assert;
+import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
@@ -89,16 +93,26 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
-	//
-	protected IConverter formattedNameConverter = new Converter(Person.class, String.class) {
+	private IValidator updateValidator = new IValidator() {
+		
 		@Override
-		public Object convert(Object from) {
-			if (from instanceof Person) {
-				return formattedMemberName((Person) from);
+		public IStatus validate(Object arg0) {
+			if(formattedMemberNameRidget  != null){
+				formattedMemberNameRidget.updateFromModel();
 			}
-			return "";
+			return Status.OK_STATUS;
 		}
 	};
+	//
+//	protected IConverter formattedNameConverter = new Converter(Person.class, String.class) {
+//		@Override
+//		public Object convert(Object from) {
+//			if (from instanceof Person) {
+//				return formattedMemberName((Person) from);
+//			}
+//			return "";
+//		}
+//	};
 
 	public AddMemberDialogController() {
 
@@ -127,6 +141,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		configureButtonsPanel();
 
 	}
+	
 
 	// TODO: make this generic, move to util calss.
 	private static boolean check(String s) {
@@ -162,6 +177,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		// generatedMemberId = System.currentTimeMillis()+"";
 		// memberIdRidget.setText(generatedMemberId);
 		givenNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
+
 		middleNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_middleName);
 		familyNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_lastName);
 		addtlNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames);
@@ -171,19 +187,26 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		updatePhotoActionRidget = getRidget(ILinkRidget.class, ViewWidgetId.memberPhotoEditLink);
 
 		// extended setup
-		titleRidget.setOutputOnly(true);
+//		titleRidget.setOutputOnly(true);
 		titleRidget.setEmptySelectionItem("(None)");
 
-		suffixRidget.setOutputOnly(true);
+//		suffixRidget.setOutputOnly(true);
 		suffixRidget.setEmptySelectionItem("(None)");
 
 		givenNameRidget.setMandatory(true);
 		familyNameRidget.setMandatory(true);
 
-		formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
+//		formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
 
 		updatePhotoActionRidget.setText("(click to update photo)");
 		updatePhotoActionRidget.addSelectionListener(updateMemberPhotoAction);
+		
+		//add validator to update the header
+		givenNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+		middleNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+		familyNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+		addtlNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+	
 
 	}
 
@@ -253,7 +276,21 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			// loop through the text ridgets
 			for (final IRidget r : memberBindings.keySet()) {
 				if (r instanceof IValueRidget) {
-					((IValueRidget) r).bindToModel(EMFProperties.value(memberBindings.get(r)).observe(selectedMember));
+					
+					IObservableValue oberservModel = EMFProperties.value(memberBindings.get(r)).observe(selectedMember);
+					//need to bind model to UI control converter again, because the fromType instance changes every time
+					if(r == formattedMemberNameRidget){
+						formattedMemberNameRidget.setModelToUIControlConverter( new Converter(oberservModel.getValueType(), String.class) {
+							@Override
+							public Object convert(Object from) {
+								if (from instanceof Person) {
+									return formattedMemberName((Person) from);
+								}
+								return "";
+							}
+						});
+					}
+					((IValueRidget) r).bindToModel(oberservModel);
 				}
 			}
 
@@ -266,8 +303,9 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			// tap, tap..
 			memberIdRidget.updateFromModel();
 			for (final IRidget r : memberBindings.keySet()) {
-				if (r instanceof IValueRidget)
+				if (r instanceof IValueRidget){
 					((IValueRidget) r).updateFromModel();
+				}
 			}
 			titleRidget.updateFromModel();
 			suffixRidget.updateFromModel();
@@ -280,5 +318,11 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			repository.saveNew(selectedMember);
 		}
 	}
-
+	
+	@Override
+	public void afterBind() {
+		super.afterBind();
+		//we should set return code to cancel as default, because if user close the window, it returns OK now.
+		setReturnCode(CANCEL);
+	}
 }

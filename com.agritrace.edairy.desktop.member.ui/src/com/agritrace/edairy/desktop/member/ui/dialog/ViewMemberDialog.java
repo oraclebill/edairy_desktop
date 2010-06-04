@@ -69,8 +69,8 @@ public class ViewMemberDialog extends BaseDialogView {
 	}
 
 	protected void createMemberInfoGroup(Composite parent) {
-		infoGroup = new MemberInfoGroup(parent);
-		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+//		infoGroup = new MemberInfoGroup(parent);
+//		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	}
 
 }

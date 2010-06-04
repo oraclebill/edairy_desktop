@@ -4,11 +4,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.ridgets.listener.IWindowRidgetListener;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController {
+public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController{
 
 	protected T selected;
 	protected IRepository<T> repository;
@@ -32,6 +33,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 			public void callback() {
 				setReturnCode(OK);
 				setContext("selected", selected);
+				System.out.println("OK calling dispose");
 				getWindowRidget().dispose();
 			}
 		});
@@ -63,5 +65,5 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	public void setSelected(T selected) {
 		this.selected = selected;
 	}
-
+		
 }

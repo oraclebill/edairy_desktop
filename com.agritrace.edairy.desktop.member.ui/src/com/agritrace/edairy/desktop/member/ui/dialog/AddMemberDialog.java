@@ -6,6 +6,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddMemberDialogController;
+import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
 public class AddMemberDialog extends ViewMemberDialog {
 
@@ -22,7 +23,13 @@ public class AddMemberDialog extends ViewMemberDialog {
 
 	@Override
 	protected void createMemberHeadlineGroup(Composite composite) {
+		//empty
 
+	}
+	
+	protected void createMemberInfoGroup(Composite parent) {
+		MemberInfoGroup infoGroup = new MemberInfoGroup(parent);
+		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	}
 
 }

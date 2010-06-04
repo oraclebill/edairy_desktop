@@ -60,12 +60,12 @@ public class CalendarSelectionDialog extends AbstractDialogView {
 
 		return buttonComposite;
 	}
-
-	@Override
-	public boolean close() {
-		final boolean isClose = super.close();
-		this.setReturnCode(CANCEL);
-		return isClose;
-	}
+//
+//	@Override
+//	public boolean close() {
+//		final boolean isClose = super.close();
+//		this.setReturnCode(CANCEL);
+//		return isClose;
+//	}
 
 }
