@@ -141,6 +141,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		configureButtonsPanel();
 
 	}
+	
 
 	// TODO: make this generic, move to util calss.
 	private static boolean check(String s) {
@@ -317,5 +318,11 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			repository.saveNew(selectedMember);
 		}
 	}
-
+	
+	@Override
+	public void afterBind() {
+		super.afterBind();
+		//we should set return code to cancel as default, because if user close the window, it returns OK now.
+		setReturnCode(CANCEL);
+	}
 }

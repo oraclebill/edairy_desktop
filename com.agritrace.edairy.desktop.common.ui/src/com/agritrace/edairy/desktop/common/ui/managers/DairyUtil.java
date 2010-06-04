@@ -402,7 +402,9 @@ public class DairyUtil {
 		member.setMember(farmer);
 
 		if (null == effectiveDate) {
-			effectiveDate = new Date(0);
+			//effectiveDate = new Date(0);
+			//change to current date, new Date(0) is 1970/01/01
+			effectiveDate = new Date();
 		}
 		member.setEffectiveDate(effectiveDate);
 
