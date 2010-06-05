@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.riena.core.injector.Inject;
 import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.ModuleController;
@@ -8,10 +10,12 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.dairy.profile.ui.Activator;
 
 /**
  * Dairy Profile view controller
@@ -52,17 +56,19 @@ public class DairyProfileViewController extends SubModuleController {
 	public void configureRidgets() {
 		System.err.println(">>>>>>>>>>>>>>>>>> in configureRidgets: " );
 
-//		Inject.service(SessionFactory.class.getName()).useRanking().into(this).andStart(Activator.getDefault().getBundle().getBundleContext());
-//
-//		Session session = sessionFactory.openSession();
-//		Transaction tx = session.beginTransaction();
-//		
-//		Dairy dairy = (Dairy) session.createQuery("FROM Dairy").uniqueResult();
-//		
-//		Assert.isLegal(dairy != null);
+		Inject.service(SessionFactory.class.getName())
+				.useRanking()
+				.into(this)
+				.andStart(Activator.getDefault().getBundle().getBundleContext());
+
+		final DairyRepository dailyRepo = new DairyRepository();
 		
-		localDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-		final Dairy workingDairyCopy = shallowCopy(localDairy);
+		Dairy dairy = dailyRepo.all().get(0);
+		
+		Assert.isLegal(dairy != null);
+		
+		//localDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
+		final Dairy workingDairyCopy = shallowCopy(dairy);
 
 		getWindowRidget().setTitle("Dairy Profile");
 
