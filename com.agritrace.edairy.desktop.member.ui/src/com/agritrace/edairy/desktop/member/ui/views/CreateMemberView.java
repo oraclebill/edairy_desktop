@@ -90,15 +90,15 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	}
 
-	protected DataBindingContext initDataBindings() {
-		final DataBindingContext bindingContext = new DataBindingContext();
-		//
-		final IObservableValue lstMembersObserveSelectionObserveWidget = SWTObservables.observeSelection(lstMembers);
-		final IObservableValue txtNameTextObserveValue = PojoObservables.observeValue(txtName, "text");
-		bindingContext.bindValue(lstMembersObserveSelectionObserveWidget, txtNameTextObserveValue, null, null);
-		//
-		return bindingContext;
-	}
+//	protected DataBindingContext initDataBindings() {
+//		final DataBindingContext bindingContext = new DataBindingContext();
+//		//
+//		final IObservableValue lstMembersObserveSelectionObserveWidget = SWTObservables.observeSelection(lstMembers);
+//		final IObservableValue txtNameTextObserveValue = PojoObservables.observeValue(txtName, "text");
+//		bindingContext.bindValue(lstMembersObserveSelectionObserveWidget, txtNameTextObserveValue, null, null);
+//		//
+//		return bindingContext;
+//	}
 
 	private Composite createMasterDetails(Composite parent) {
 

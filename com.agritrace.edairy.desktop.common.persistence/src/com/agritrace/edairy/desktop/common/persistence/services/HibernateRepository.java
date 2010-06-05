@@ -111,6 +111,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public T findByKey(long key) {
+		openSession();
 		final Query q = session.createQuery("FROM " + getEntityName() + " where " + getIdentifierName() + " = ? ")
 				.setLong(0, key);
 

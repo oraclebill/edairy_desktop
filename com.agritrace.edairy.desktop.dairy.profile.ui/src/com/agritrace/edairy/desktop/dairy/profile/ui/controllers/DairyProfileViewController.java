@@ -15,6 +15,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.dairy.profile.ui.Activator;
 
 /**
@@ -25,58 +27,51 @@ import com.agritrace.edairy.desktop.dairy.profile.ui.Activator;
  */
 public class DairyProfileViewController extends SubModuleController {
 
+	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
+
 	public static final String ID = DairyProfileViewController.class.getName();
 
-	private SessionFactory sessionFactory;
+	private final DairyRepository dairyRepository;
 	private Dairy localDairy;
 
-	@InjectService()
-	public void bind(SessionFactory service) {
-		System.err.println(">>>>>>>>>>>>>>>>>> Service BIND: " + service);
-		sessionFactory = service;
-	}
- 
-	public void unbind(SessionFactory service) {
-		System.err.println(">>>>>>>>>>>>>>>>>> Service UNBIND: " + service);
-		sessionFactory = service = null;
-	}
-
 	public DairyProfileViewController() {
-		super();
+		super();	
+		dairyRepository = new DairyRepository();
+		long dairyId = getDairyId();
+		localDairy = dairyRepository.findByKey(dairyId);
+		if (localDairy == null) {
+			initLocalDairy();
+		}
+	}
+
+	private long getDairyId() {
+		long id = -1;
 		
-		System.err.println(">>>>>>>>>>>>>>>>>> DairyProfileViewController: " );
-
+		String dairyId;
+		try {
+			dairyId = System.getProperty(EDAIRY_SITE_DAIRYID);
+			if (dairyId != null) {
+				id = new Long(dairyId).longValue();
+			}
+		}
+		catch (Exception e) {
+		}
+		return id;
 	}
-
-	private Dairy shallowCopy(Dairy d) {
-		return d;
+	
+	private void initLocalDairy() {
+		localDairy = DairyFactory.eINSTANCE.createDairy();
+		localDairy.setLocation(
+				DairyUtil.createLocation(null, null, null));
+		
 	}
-
+	
+	
 	@Override
 	public void configureRidgets() {
-		System.err.println(">>>>>>>>>>>>>>>>>> in configureRidgets: " );
-
-		Inject.service(SessionFactory.class.getName())
-				.useRanking()
-				.into(this)
-				.andStart(Activator.getDefault().getBundle().getBundleContext());
-
-		final DairyRepository dailyRepo = new DairyRepository();
-		
-		Dairy dairy = dailyRepo.all().get(0);
-		
-		Assert.isLegal(dairy != null);
-		
-		//localDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-		final Dairy workingDairyCopy = shallowCopy(dairy);
+		System.err.println(">>>>>>>>>>>>>>>>>> in configureRidgets: " );		
 
 		getWindowRidget().setTitle("Dairy Profile");
-
-		/*
-		 * final ITextRidget routeId = getRidget(ITextRidget.class,
-		 * RIDGET_ID_ROUTE_ID); routeId.setOutputOnly(true);
-		 * routeId.bindToModel(route, "routeId"); routeId.updateFromModel();
-		 */
 
 //		final ITextRidget txtNAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NAME);
 //		txtNAME.bindToModel(workingDairyCopy, "NAME");
@@ -110,51 +105,6 @@ public class DairyProfileViewController extends SubModuleController {
 //		final ITextRidget txtMAP_IMAGE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_MAP_IMAGE);
 //		txtMAP_IMAGE.bindToModel(workingDairyCopy, "MAP_IMAGE");
 //		txtMAP_IMAGE.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_ADDRESS = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_ADDRESS);
-//		txtLOCATION_ADDRESS.bindToModel(workingDairyCopy, "LOCATION_ADDRESS");
-//		txtLOCATION_ADDRESS.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_SECTION = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_SECTION);
-//		txtLOCATION_SECTION.bindToModel(workingDairyCopy, "LOCATION_SECTION");
-//		txtLOCATION_SECTION.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_ESTATE = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_ESTATE);
-//		txtLOCATION_ESTATE.bindToModel(workingDairyCopy, "LOCATION_ESTATE");
-//		txtLOCATION_ESTATE.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_LOCATION = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_LOCATION);
-//		txtLOCATION_LOCATION.bindToModel(workingDairyCopy, "LOCATION_LOCATION");
-//		txtLOCATION_LOCATION.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_SUBLOCATION = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_SUBLOCATION);
-//		txtLOCATION_SUBLOCATION.bindToModel(workingDairyCopy, "LOCATION_SUBLOCATION");
-//		txtLOCATION_SUBLOCATION.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_DIVISION = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_DIVISION);
-//		txtLOCATION_DIVISION.bindToModel(workingDairyCopy, "LOCATION_DIVISION");
-//		txtLOCATION_DIVISION.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_DISTRICT = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_DISTRICT);
-//		txtLOCATION_DISTRICT.bindToModel(workingDairyCopy, "LOCATION_DISTRICT");
-//		txtLOCATION_DISTRICT.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_PROVINCE = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_PROVINCE);
-//		txtLOCATION_PROVINCE.bindToModel(workingDairyCopy, "LOCATION_PROVINCE");
-//		txtLOCATION_PROVINCE.updateFromModel();
-//
-//		final ITextRidget txtLOCATION_POSTALCODE = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_LOCATION_POSTALCODE);
-//		txtLOCATION_POSTALCODE.bindToModel(workingDairyCopy, "LOCATION_POSTALCODE");
-//		txtLOCATION_POSTALCODE.updateFromModel();
 //
 //		final ITextRidget txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class,
 //				DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
