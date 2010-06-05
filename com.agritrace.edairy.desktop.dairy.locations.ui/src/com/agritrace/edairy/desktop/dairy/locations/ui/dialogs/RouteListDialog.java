@@ -14,67 +14,70 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 
-
 public class RouteListDialog extends AbstractDialogView {
-    private final static int WIDTH_UNIT = 100;
+	private final static int WIDTH_UNIT = 100;
 
-    private Composite contentArea;
+	private Composite contentArea;
 
-    public RouteListDialog() {
-	super(null);
-    }
+	public RouteListDialog() {
+		super(null);
+	}
 
-    @Override
-    protected Control buildView(Composite parent) {
-	parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-	contentArea = new Composite(parent, SWT.NONE);
-	contentArea.setLayout(new GridLayout(2, false));
+	@Override
+	protected Control buildView(Composite parent) {
+		parent.setBackground(LnfManager.getLnf().getColor(
+				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		contentArea = new Composite(parent, SWT.NONE);
+		contentArea.setLayout(new GridLayout(2, false));
 
-	final Table routeTable = UIControlsFactory.createTable(contentArea, SWT.SINGLE | SWT.BORDER
-		| SWT.FULL_SELECTION, RouteListDialogController.RIDGET_ID_ROUTE_TABLE);
-	GridData gd = new GridData();
-	gd.grabExcessHorizontalSpace = true;
-	gd.horizontalAlignment = SWT.FILL;
-	gd.grabExcessVerticalSpace = true;
-	gd.verticalAlignment = SWT.FILL;
-	gd.verticalSpan = 3;
-	gd.widthHint = WIDTH_UNIT * 3;
-	gd.heightHint = WIDTH_UNIT * 3;
-	routeTable.setLayoutData(gd);
+		final Table routeTable = UIControlsFactory.createTable(contentArea,
+				SWT.SINGLE | SWT.BORDER | SWT.FULL_SELECTION,
+				RouteListDialogController.RIDGET_ID_ROUTE_TABLE);
+		GridData gd = new GridData();
+		gd.grabExcessHorizontalSpace = true;
+		gd.horizontalAlignment = SWT.FILL;
+		gd.grabExcessVerticalSpace = true;
+		gd.verticalAlignment = SWT.FILL;
+		gd.verticalSpan = 3;
+		gd.widthHint = WIDTH_UNIT * 3;
+		gd.heightHint = WIDTH_UNIT * 3;
+		routeTable.setLayoutData(gd);
 
-	final Button addButton = UIControlsFactory.createButton(contentArea, "Add",
-		RouteListDialogController.RIDGET_ID_ADD);
-	gd = new GridData();
-	gd.widthHint = WIDTH_UNIT;
-	addButton.setLayoutData(gd);
+		final Button addButton = UIControlsFactory.createButton(contentArea,
+				"Add", RouteListDialogController.RIDGET_ID_ADD);
+		gd = new GridData();
+		gd.widthHint = WIDTH_UNIT;
+		addButton.setLayoutData(gd);
 
-	final Button deleteButton = UIControlsFactory.createButton(contentArea, "Delete",
-		RouteListDialogController.RIDGET_ID_DELETE);
-	gd = new GridData();
-	gd.widthHint = WIDTH_UNIT;
-	deleteButton.setLayoutData(gd);
+		final Button deleteButton = UIControlsFactory.createButton(contentArea,
+				"Delete", RouteListDialogController.RIDGET_ID_DELETE);
+		gd = new GridData();
+		gd.widthHint = WIDTH_UNIT;
+		deleteButton.setLayoutData(gd);
 
-	final Button closeButton = UIControlsFactory.createButton(contentArea, "Close",
-		RouteListDialogController.RIDGET_ID_CLOSE);
-	gd = new GridData();
-	gd.horizontalAlignment = SWT.CENTER;
-	gd.widthHint = WIDTH_UNIT;
-	gd.horizontalSpan = 2;
-	closeButton.setLayoutData(gd);
+		final Button closeButton = UIControlsFactory.createButton(contentArea,
+				"Close", RouteListDialogController.RIDGET_ID_CLOSE);
+		gd = new GridData();
+		gd.horizontalAlignment = SWT.CENTER;
+		gd.widthHint = WIDTH_UNIT;
+		gd.horizontalSpan = 2;
+		closeButton.setLayoutData(gd);
 
-	createMessageBoxes();
-	return contentArea;
+		createMessageBoxes();
+		return contentArea;
 
-    }
+	}
 
-    private void createMessageBoxes() {
-	final MessageBox deleteConfirmMessage = UIControlsFactory.createMessageBox(contentArea);
-	this.addUIControl(deleteConfirmMessage, RouteListDialogController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
-    }
+	private void createMessageBoxes() {
+		final MessageBox deleteConfirmMessage = UIControlsFactory
+				.createMessageBox(contentArea);
+		this.addUIControl(deleteConfirmMessage,
+				RouteListDialogController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
+	}
 
-    @Override
-    protected AbstractWindowController createController() {
-	return new RouteListDialogController();
-    }
+	@Override
+	protected AbstractWindowController createController() {
+		return new RouteListDialogController();
+	}
 
 }
