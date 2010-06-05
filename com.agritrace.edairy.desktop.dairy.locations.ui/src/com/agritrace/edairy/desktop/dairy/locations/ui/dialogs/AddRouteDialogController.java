@@ -10,7 +10,6 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
@@ -20,7 +19,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 	private IMessageBoxRidget duplicateNameDialog;
 	private Route newRoute;
 	DairyLocationRepository repo;
-	
+
 	public AddRouteDialogController(DairyLocationRepository dairy) {
 		super();
 		repo = dairy;

@@ -6,7 +6,6 @@ import org.eclipse.riena.ui.ridgets.IMessageBoxRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
@@ -22,7 +21,7 @@ public class RouteListDialogController extends AbstractWindowController {
 	private ITableRidget routeTable;
 
 	private IMessageBoxRidget deleteConfirmDialog;
-	private DairyLocationRepository repo = new DairyLocationRepository();
+	private final DairyLocationRepository repo = new DairyLocationRepository();
 
 	public RouteListDialogController() {
 		super();
@@ -67,7 +66,8 @@ public class RouteListDialogController extends AbstractWindowController {
 			public void callback() {
 				if (routeTable.getSelectionIndex() >= 0) {
 					if (deleteConfirmDialog.show().getLabel().equals("Yes")) {
-						repo.deleteRoute((Route)routeTable.getSelection().get(0));
+						repo.deleteRoute((Route) routeTable.getSelection().get(
+								0));
 						routeTable.updateFromModel();
 					}
 				}
