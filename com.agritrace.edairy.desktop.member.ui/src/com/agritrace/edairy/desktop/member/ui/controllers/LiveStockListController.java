@@ -8,9 +8,11 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -21,6 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
+import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 
 public class LiveStockListController extends BaseListViewController{
 
@@ -234,23 +237,19 @@ public class LiveStockListController extends BaseListViewController{
 
 				@Override
 				public void callback() {
-					//					Membership membership = ((LiveStockListViewTableNode) farmListTable.getSelection().get(0))
-					//							.getMembership();
-					//					Farm farm = DairyUtil.createFarm("",
-					//							DairyUtil.createLocation("", "", "", "", "", "", "", "", "", ""));
-					//					LiveStockListViewTableNode newNode = new LiveStockListViewTableNode(membership, farm);
-					//
-					//					final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
-					//					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-					//							newNode);
-					//
-					//					int returnCode = memberDialog.open();
-					//					if (returnCode == AbstractWindowController.OK) {
-					//						newNode = (LiveStockListViewTableNode) (LiveStockListViewTableNode) memberDialog.getController()
-					//								.getContext("selectedFarm");
-					//						farmListTableInput.add(newNode);
-					//						farmListTable.updateFromModel();
-					//					}
+										
+					
+										final ViewLiveStockDialog memberDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
+//										memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+//												newNode);
+					
+										int returnCode = memberDialog.open();
+										if (returnCode == AbstractWindowController.OK) {
+//											newNode = (LiveStockListViewTableNode) (LiveStockListViewTableNode) memberDialog.getController()
+//													.getContext("selectedFarm");
+//											farmListTableInput.add(newNode);
+//											farmListTable.updateFromModel();
+										}
 				}
 			});
 			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
@@ -260,34 +259,34 @@ public class LiveStockListController extends BaseListViewController{
 
 					@Override
 					public void callback() {
-						//						LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) farmListTable.getSelection()
-						//								.get(0);
-						//						int index = farmListTableInput.indexOf(selectedNode);
-						//						final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-						//						memberDialog.getController().setContext(
-						//								ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
-						//
-						//						int returnCode = memberDialog.open();
-						//						if (returnCode == AbstractWindowController.OK) {
-						//							selectedNode = (LiveStockListViewTableNode) (LiveStockListViewTableNode) memberDialog.getController()
-						//									.getContext("selectedFarm");
-						//							farmListTableInput.set(index, selectedNode);
-						//							farmListTable.updateFromModel();
-						//						} else if (returnCode == 2) {
-						//							// confirm for delete
-						//							if (selectedNode != null) {
-						//								String message = "";
-						//								if (selectedNode.getFarm() != null) {
-						//									message = "\"" + selectedNode.getFarm().getName() + "\"";
-						//								}
-						//								message = String.format(DELETE_DIALOG_MESSAGE, message);
-						//								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
-						//										DELETE_DIALOG_TITLE, message)) {
-						//									farmListTableInput.remove(selectedNode);
-						//									farmListTable.updateFromModel();
-						//								}
-						//							}
-						//						}
+						LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) liveStockListTable.getSelection()
+						.get(0);
+						
+						final ViewLiveStockDialog memberDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
+//						memberDialog.getController().setContext(
+//								ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+
+						int returnCode = memberDialog.open();
+						if (returnCode == AbstractWindowController.OK) {
+//							selectedNode = (LiveStockListViewTableNode) (LiveStockListViewTableNode) memberDialog.getController()
+//							.getContext("selectedFarm");
+//							farmListTableInput.set(index, selectedNode);
+//							farmListTable.updateFromModel();
+						} else if (returnCode == 2) {
+//							// confirm for delete
+//							if (selectedNode != null) {
+//								String message = "";
+//								if (selectedNode.getFarm() != null) {
+//									message = "\"" + selectedNode.getFarm().getName() + "\"";
+//								}
+//								message = String.format(DELETE_DIALOG_MESSAGE, message);
+//								if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
+//										DELETE_DIALOG_TITLE, message)) {
+//									farmListTableInput.remove(selectedNode);
+//									farmListTable.updateFromModel();
+//								}
+//							}
+						}
 					}
 				});
 			}

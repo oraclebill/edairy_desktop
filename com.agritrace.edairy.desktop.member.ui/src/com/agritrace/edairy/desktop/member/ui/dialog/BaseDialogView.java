@@ -17,6 +17,9 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public abstract class BaseDialogView extends AbstractDialogView {
+	
+	public static final int DEFAULT_LABEL_WIDTH = 90;
+	public static final int DEFAULT_FIELD_WIDTH = 150;
 
 	private Composite main;
 
