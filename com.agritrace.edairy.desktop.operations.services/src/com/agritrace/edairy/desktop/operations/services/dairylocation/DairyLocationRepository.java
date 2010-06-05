@@ -109,7 +109,12 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	public DairyLocation getByName(String name) {
-		return find("FROM DairyLocation where name='" + name + "'").get(0);
+		List<DairyLocation> list = find("FROM DairyLocation where name='" + name + "'");
+		if (list.size()>0)
+		{
+			return list.get(0);
+		}
+		return null;
 	}
 
 }
