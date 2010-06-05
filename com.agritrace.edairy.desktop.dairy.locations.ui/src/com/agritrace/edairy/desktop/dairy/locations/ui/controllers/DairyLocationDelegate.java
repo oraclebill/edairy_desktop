@@ -16,11 +16,11 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-import org.eclipse.riena.ui.ridgets.ITableRidget;
+//import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
-import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
+//import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -33,29 +33,31 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.RouteListDialog;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	/**
 	 * 
 	 */
-	private final DairyLocationController dairyLocationController;
+	private final DairyLocationRepository locationRepository;
 
 	private Route workingRoute;
 	private ITextRidget textName;
 	private ITextRidget textAddress;
 	private IComboRidget routeCombo;
-	private ITableRidget table;
+//	private ITableRidget table;
 	private IRidgetContainer detailsContainer;
 
 	private final WritableValue selectedRoute = new WritableValue(null,
 			Route.class);
 	private DairyLocation workingCopy = createWorkingCopy();
+	private final IObservableList routes = new WritableList();
 
 	/**
 	 * @param dairyLocationController
 	 */
-	DairyLocationDelegate(DairyLocationController dairyLocationController) {
-		this.dairyLocationController = dairyLocationController;
+	DairyLocationDelegate(DairyLocationRepository dairyLocationController) {
+		this.locationRepository = dairyLocationController;
 	}
 
 	@Override
@@ -67,8 +69,8 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void bindRidgets(IRidgetContainer container) {
-		table = container.getRidget(ITableRidget.class,
-				AbstractMasterDetailsComposite.BIND_ID_TABLE);
+//		table = container.getRidget(ITableRidget.class,
+//				AbstractMasterDetailsComposite.BIND_ID_TABLE);
 
 		final ITextRidget textId = container.getRidget(ITextRidget.class,
 				DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
@@ -142,8 +144,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void bindRouteCombo() {
-		routeCombo.bindToModel(this.dairyLocationController.routes,
-				Route.class, "name", selectedRoute);
+		routeCombo.bindToModel(routes, Route.class, "name", selectedRoute);
 		routeCombo.updateFromModel();
 	}
 
@@ -153,12 +154,10 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 			final DairyLocation changedDairyLocation = (DairyLocation) changedItem;
 			if (changedDairyLocation.getId() == 0) {
 				// perform create action to SQL
-				this.dairyLocationController.locationRepository
-						.saveNew(changedDairyLocation);
+				locationRepository.saveNew(changedDairyLocation);
 			} else {
 				// perform update action to SQL
-				this.dairyLocationController.locationRepository
-						.update(changedDairyLocation);
+				locationRepository.update(changedDairyLocation);
 			}
 		}
 		super.itemApplied(changedItem);
@@ -166,8 +165,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 	@Override
 	public void itemRemoved(Object oldItem) {
-		this.dairyLocationController.locationRepository
-				.delete((DairyLocation) oldItem);
+		locationRepository.delete((DairyLocation) oldItem);
 	}
 
 	@Override
@@ -443,8 +441,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 				final String selectedName = (String) event.getNewSelection()
 						.get(0);
 				Route selectedRoute = null;
-				for (final Route test : DairyLocationDelegate.this.dairyLocationController.locationRepository
-						.getRoutes()) {
+				for (final Route test : locationRepository.getRoutes()) {
 					final String testName = test.getName();
 					if ((null != testName) && testName.equals(selectedName)) {
 						selectedRoute = test;
@@ -482,21 +479,12 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	private class DairyLocationNameValidator implements IValidator {
 		@Override
 		public IStatus validate(Object value) {
-			if ("".equals(textName.getText())) {
+			String name = textName.getText().trim();
+			if ("".equals(name)) {
 				return Status.CANCEL_STATUS;
 			}
-
-			for (int i = 0; i < DairyLocationDelegate.this.dairyLocationController.locations
-					.size(); i++) {
-				if (textName
-						.getText()
-						.equals(((DairyLocation) DairyLocationDelegate.this.dairyLocationController.locations
-								.get(i)).getName())
-						&& (i != table.getSelectionIndex())) {
-
-					return Status.CANCEL_STATUS;
-				}
-			}
+			if (locationRepository.getByName(name) != null)
+				return Status.CANCEL_STATUS;
 			return Status.OK_STATUS;
 		}
 	}

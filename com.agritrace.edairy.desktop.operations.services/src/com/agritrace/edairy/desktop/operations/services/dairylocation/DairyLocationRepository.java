@@ -6,15 +6,14 @@ import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
 public class DairyLocationRepository extends HibernateRepository<DairyLocation> {
 
 	@Override
-	protected Class getClassType() {
-		// due to type erasure, cannot get this from the generic type argument...
+	protected Class<?> getClassType() {
+		// due to type erasure, cannot get this from the generic type
+		// argument...
 		return DairyLocation.class;
 	}
 
@@ -43,10 +42,10 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	@Override
-	public void saveNew(DairyLocation newEntity)  {
-		Route route = newEntity.getRoute();
-		if ( route != null ) {
-			newEntity.setRoute( (Route) get("Route", new Long(route.getId()) ));
+	public void saveNew(DairyLocation newEntity) {
+		final Route route = newEntity.getRoute();
+		if (route != null) {
+			newEntity.setRoute((Route) get("Route", new Long(route.getId())));
 		}
 		super.saveNew(newEntity);
 	}
@@ -58,25 +57,26 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	@Override
-	public void delete(DairyLocation deletableEntity)  {
+	public void delete(DairyLocation deletableEntity) {
 		// TODO Auto-generated method stub
 		super.delete(deletableEntity);
 	}
 
 	class RoutesQuery extends SessionRunnable {
 		List<Route> routes;
+
 		public List<Route> getResults() {
 			return routes;
 		}
-		
+
 		@Override
 		public void run(Session session) {
-			routes = session.createQuery("FROM Route").list();				
-		}					
+			routes = session.createQuery("FROM Route").list();
+		}
 	}
-	
+
 	public List<Route> getRoutes() {
-		RoutesQuery routesQuery = new RoutesQuery();
+		final RoutesQuery routesQuery = new RoutesQuery();
 		runWithTransaction(routesQuery);
 		return routesQuery.getResults();
 	}
@@ -107,5 +107,9 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 			}
 		});
 	}
-	
+
+	public DairyLocation getByName(String name) {
+		return find("FROM DairyLocation where name='" + name + "'").get(0);
+	}
+
 }

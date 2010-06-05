@@ -55,7 +55,6 @@ public class DairyLocationController extends SubModuleController {
 	final DairyLocationRepository locationRepository = new DairyLocationRepository();
 
 	final IObservableList locations = new WritableList();
-	final IObservableList routes = new WritableList();
 
 	public DairyLocationController() {
 	}
@@ -76,11 +75,12 @@ public class DairyLocationController extends SubModuleController {
 
 		final IMasterDetailsRidget master = (IMasterDetailsRidget) getRidget("master");
 		if (master != null) {
-			master.setDelegate(new DairyLocationDelegate(this));
+			master.setDelegate(new DairyLocationDelegate(locationRepository));
 			master.bindToModel(locations, DairyLocation.class, properties,
 					headers);
 			master.updateFromModel();
 
+			
 			final IActionRidget actionApply = master.getRidget(
 					IActionRidget.class,
 					AbstractMasterDetailsComposite.BIND_ID_APPLY);
