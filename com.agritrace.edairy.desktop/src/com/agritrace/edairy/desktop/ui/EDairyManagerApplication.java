@@ -18,6 +18,8 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
@@ -157,8 +159,8 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, BlankView.ID);
-		// NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
-		//		"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		 NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
+				"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
 		// DELIVERY MODULE GROUP
