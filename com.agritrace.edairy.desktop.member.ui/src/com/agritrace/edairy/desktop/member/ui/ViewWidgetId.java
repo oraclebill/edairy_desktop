@@ -128,7 +128,32 @@ public class ViewWidgetId {
 	public static final String LIVESTOCK_ContainerFilterButton = "LiveStock_Filter";
 	public static final String LIVESTOCK_ContainerShowAllButton = "LiveStock_Showall";
 	public static final String LIVESTOCK_FarmFilterCombo = "liveStock_farm_filter";
+	//liveStock general
+	public static final String LIVESTOCK_GENERAL_TYPE_COBMO = "liveStock_General_Type";
+	public static final String LIVESTOCK_GENERAL_BREED_COBMO = "liveStock_General_Breed";
+	public static final String LIVESTOCK_GENERAL_MALE = "liveStock_General_Male";
+	public static final String LIVESTOCK_GENERAL_FEMALE = "liveStock_General_female";
+	public static final String LIVESTOCK_GENERAL_BIRTHDAY = "LIVESTOCK_GENERAL_BIRTHDAY";
+	public static final String LIVESTOCK_GENERAL_BIRTHDAY_BUTTON = "LIVESTOCK_GENERAL_BIRTHDAY_BUTTON";
+	public static final String LIVESTOCK_GENERAL_BIRTH_CERTIFICATE= "LIVESTOCK_GENERAL_BIRTH_CERTIFICATE";
+	public static final String LIVESTOCK_GENERAL_VERTERINARY= "LIVESTOCK_GENERAL_VERTERINARY";
+	public static final String LIVESTOCK_GENERAL_SIRE_SPECIES= "LIVESTOCK_GENERAL_SIRE_SPECIES";
+	public static final String LIVESTOCK_GENERAL_SIRE_BREED= "LIVESTOCK_GENERAL_SIRE_BREED";
 
+	//liveStock rearing
+	public static final String LIVESTOCK_REARING_HABITS= "LIVESTOCK_REARING_HABITS";
+	public static final String LIVESTOCK_REARING_FAMILY= "LIVESTOCK_REARING_FAMILY";
+	public static final String LIVESTOCK_REARING_FEED= "LIVESTOCK_REARING_FEED";
+	public static final String LIVESTOCK_REARING_FEED_BRAND= "LIVESTOCK_REARING_FEED_BRAND";
+	public static final String LIVESTOCK_REARING_SUPPLIERS= "LIVESTOCK_REARING_SUPPLIERS";
+	public static final String LIVESTOCK_REARING_ANTIBIOTICS= "LIVESTOCK_REARING_ANTIBIOTICS";
+	
+	//liveStock other
+	public static final String LIVESTOCK_OTHER_VERTERINARY= "LIVESTOCK_OTHER_VERTERINARY";
+	public static final String LIVESTOCK_OTHER_AWARDS= "LIVESTOCK_OTHER_AWARDS";
+	public static final String LIVESTOCK_OTHER_NOTES= "LIVESTOCK_OTHER_NOTES";
+	
+	//Farm
 	public static final String FARM_TABLE = "FarmTable";
 	public static final String FARM_ADD = "FarmAdd";
 	public static final String FARM_Remove = "FarmRemove";
@@ -162,7 +187,7 @@ public class ViewWidgetId {
 	public static final String memberInfo_searchButton = "memberInfo_searchButton";
 
 	public static final String[] PROVINCES_LIST = new String[] { "Central", "Coast", "Eastern", "Nairobi",
-			"North Eastern", "Nyanza", "Rift Valley", "Western" };
+		"North Eastern", "Nyanza", "Rift Valley", "Western" };
 
 	// member list view
 	public static final String MEMBERLIST_SEARCHTEXT = "memberList_searchText";
@@ -219,4 +244,11 @@ public class ViewWidgetId {
 
 	public static final String memberInfo_formattedName = "member.info.name.formattedText";
 	public static final String memberPhotoEditLink = "member.info.photo.editlink";
+
+	//live stock dialog
+	public static final String LIVE_STOCK_NAME="liveStock_name";
+	public static final String LIVE_STOCK_ID="liveStock_id";
+	public static final String LIVE_STOCK_FARM_COMBO="liveStock_farm_combo";
+	public static final String LIVE_STOCK_PURPOSE_COMBO="liveStock_farm_purpose";
+	public static final String LIVE_STOCK_STATUS_COMBO="liveStock_status";
 }
