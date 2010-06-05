@@ -38,7 +38,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		String className;
 		ClassMetadata metaData;
 
-		System.err.println("Creating HibernateRepository [" + getClass().getName() + ":" + hashCode() + "]");
+		System.err.println( "Creating HibernateRepository [" + getClass().getName() + ":" + hashCode() + "]" );
 
 		// set the persistence manager
 		persistenceManager = pm;
