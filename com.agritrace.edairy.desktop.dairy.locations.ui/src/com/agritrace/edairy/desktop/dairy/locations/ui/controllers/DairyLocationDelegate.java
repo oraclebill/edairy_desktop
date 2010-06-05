@@ -8,6 +8,7 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -16,11 +17,9 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-//import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
-//import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -179,7 +178,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 				// object;
 				return true;
 			}
-			if (EMFUtil.compare(src, dst)
+			if (!(EMFUtil.compare(src, dst)
 					&& EMFUtil.compare(src.getRoute(), dst.getRoute())
 					&& EMFUtil.compare(src.getLocation().getPostalLocation(),
 							dst.getLocation().getPostalLocation())
@@ -187,12 +186,12 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 							.getDescriptiveLocation(), dst.getLocation()
 							.getDescriptiveLocation())
 					&& EMFUtil.compare(src.getLocation().getMapLocation(), dst
-							.getLocation().getMapLocation())) {
-				return false;
+							.getLocation().getMapLocation()))) {
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	@Override
@@ -233,85 +232,86 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 	@Override
 	public Object copyBean(Object source, Object target) {
-		if (source.equals(target)) {
-			return source;
-		}
-		final DairyLocation from = source != null ? (DairyLocation) source
-				: createWorkingCopy();
-		final DairyLocation to = target != null ? (DairyLocation) target
-				: createWorkingCopy();
-		to.setId(from.getId());
-		to.setName(from.getName());
-		to.setDateOpened(from.getDateOpened());
-		to.setDescription(from.getDescription());
-		to.setPhone(from.getPhone());
-		to.setCode(from.getCode());
-		if (from.getRoute() == null) {
-			to.setRoute(null);
-		} else {
-			if (to.getRoute() == null) {
-				to.setRoute(DairyFactory.eINSTANCE.createRoute());
-			}
-			to.getRoute().setId(from.getRoute().getId());
-			to.getRoute().setName(from.getRoute().getName());
-			to.getRoute().setDescription(from.getRoute().getDescription());
-			to.getRoute().setCode(from.getRoute().getCode());
-			// ECoreUtil.co
-		}
-		// to.setLocation(from.getLocation());
-		to.getFunctions().clear();
-		to.getFunctions().addAll(from.getFunctions());
-		to.getLocation()
-				.getPostalLocation()
-				.setAddress(from.getLocation().getPostalLocation().getAddress());
-		to.getLocation().getPostalLocation()
-				.setEstate(from.getLocation().getPostalLocation().getEstate());
-		to.getLocation()
-				.getPostalLocation()
-				.setVillage(from.getLocation().getPostalLocation().getVillage());
-		to.getLocation()
-				.getPostalLocation()
-				.setPostalCode(
-						from.getLocation().getPostalLocation().getPostalCode());
-		to.getLocation()
-				.getPostalLocation()
-				.setProvince(
-						from.getLocation().getPostalLocation().getProvince());
-		to.getLocation()
-				.getPostalLocation()
-				.setSection(from.getLocation().getPostalLocation().getSection());
-		to.getLocation()
-				.getPostalLocation()
-				.setDivision(
-						from.getLocation().getPostalLocation().getDivision());
-		to.getLocation()
-				.getPostalLocation()
-				.setLocation(
-						from.getLocation().getPostalLocation().getLocation());
-		to.getLocation()
-				.getPostalLocation()
-				.setSubLocation(
-						from.getLocation().getPostalLocation().getSubLocation());
-		to.getLocation()
-				.getPostalLocation()
-				.setDistrict(
-						from.getLocation().getPostalLocation().getDistrict());
-		to.getLocation()
-				.getDescriptiveLocation()
-				.setDirections(
-						from.getLocation().getDescriptiveLocation()
-								.getDirections());
-		to.getLocation()
-				.getDescriptiveLocation()
-				.setLandmarks(
-						from.getLocation().getDescriptiveLocation()
-								.getLandmarks());
-		to.getLocation().getMapLocation()
-				.setLatitude(from.getLocation().getMapLocation().getLatitude());
-		to.getLocation()
-				.getMapLocation()
-				.setLongitude(
-						from.getLocation().getMapLocation().getLongitude());
+//		if (source.equals(target)) {
+//			return source;
+//		}
+//		final DairyLocation from = source != null ? (DairyLocation) source
+//				: createWorkingCopy();
+//		final DairyLocation to = target != null ? (DairyLocation) target
+//				: createWorkingCopy();
+//		to.setId(from.getId());
+//		to.setName(from.getName());
+//		to.setDateOpened(from.getDateOpened());
+//		to.setDescription(from.getDescription());
+//		to.setPhone(from.getPhone());
+//		to.setCode(from.getCode());
+//		if (from.getRoute() == null) {
+//			to.setRoute(null);
+//		} else {
+//			if (to.getRoute() == null) {
+//				to.setRoute(DairyFactory.eINSTANCE.createRoute());
+//			}
+//			to.getRoute().setId(from.getRoute().getId());
+//			to.getRoute().setName(from.getRoute().getName());
+//			to.getRoute().setDescription(from.getRoute().getDescription());
+//			to.getRoute().setCode(from.getRoute().getCode());
+//			// ECoreUtil.co
+//		}
+//		// to.setLocation(from.getLocation());
+//		to.getFunctions().clear();
+//		to.getFunctions().addAll(from.getFunctions());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setAddress(from.getLocation().getPostalLocation().getAddress());
+//		to.getLocation().getPostalLocation()
+//				.setEstate(from.getLocation().getPostalLocation().getEstate());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setVillage(from.getLocation().getPostalLocation().getVillage());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setPostalCode(
+//						from.getLocation().getPostalLocation().getPostalCode());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setProvince(
+//						from.getLocation().getPostalLocation().getProvince());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setSection(from.getLocation().getPostalLocation().getSection());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setDivision(
+//						from.getLocation().getPostalLocation().getDivision());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setLocation(
+//						from.getLocation().getPostalLocation().getLocation());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setSubLocation(
+//						from.getLocation().getPostalLocation().getSubLocation());
+//		to.getLocation()
+//				.getPostalLocation()
+//				.setDistrict(
+//						from.getLocation().getPostalLocation().getDistrict());
+//		to.getLocation()
+//				.getDescriptiveLocation()
+//				.setDirections(
+//						from.getLocation().getDescriptiveLocation()
+//								.getDirections());
+//		to.getLocation()
+//				.getDescriptiveLocation()
+//				.setLandmarks(
+//						from.getLocation().getDescriptiveLocation()
+//								.getLandmarks());
+//		to.getLocation().getMapLocation()
+//				.setLatitude(from.getLocation().getMapLocation().getLatitude());
+//		to.getLocation()
+//				.getMapLocation()
+//				.setLongitude(
+//						from.getLocation().getMapLocation().getLongitude());
+		EMFUtil.copy((EObject) source, (EObject) target, 4);
 		return target;
 	}
 
