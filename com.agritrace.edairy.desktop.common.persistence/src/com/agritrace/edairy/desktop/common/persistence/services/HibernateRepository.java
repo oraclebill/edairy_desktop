@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -17,6 +18,17 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	private final String identifierName;
 
 	private Session session;
+	
+	protected abstract class SessionRunnable implements Runnable {
+		
+		abstract public void run(Session session);
+		
+		@Override
+		public void run() {
+			run(session);			
+		}
+		
+	}
 
 	protected HibernateRepository() {
 		this(PersistenceManager.getDefault());
@@ -77,6 +89,10 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		return identifierName;
 	}
 
+	protected Object get(String eName, Serializable key) {
+		return session.get(eName, key);
+	}
+	
 	@Override
 	public List<T> find(String query, Object[] args) {
 		throw new UnsupportedOperationException("not implemented");
@@ -146,7 +162,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		});
 	}
 
-	private void runWithTransaction(Runnable r) {
+	protected void runWithTransaction(Runnable r) {
 		openSession();
 		final Transaction t = session.beginTransaction();
 		try {
