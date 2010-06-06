@@ -29,9 +29,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
-import com.agritrace.edairy.desktop.dairy.profile.service.DairyRepository;
-import com.agritrace.edairy.desktop.dairy.profile.service.IDairyRepository;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 /**
  * Dairy Profile view controller

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.profile.service;
+package com.agritrace.edairy.desktop.operations.services;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 
