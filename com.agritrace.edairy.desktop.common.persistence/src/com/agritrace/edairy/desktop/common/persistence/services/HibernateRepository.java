@@ -172,7 +172,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 			t.commit();
 		} catch (final Exception ex) {
 			t.rollback();
-			session.close();
+			session.clear();
 			throw new TransactionException(entityName, ex);
 		} finally {
 			closeSession();

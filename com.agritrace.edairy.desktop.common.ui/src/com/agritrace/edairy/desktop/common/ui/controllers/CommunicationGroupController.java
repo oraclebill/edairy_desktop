@@ -181,7 +181,7 @@ public class CommunicationGroupController implements WidgetController {
 
 	@Override
 	public void updateBinding() {
-
+		
 		if (getInputModel() instanceof Person) {
 			contactMethods = ((Person) getInputModel()).getContactMethods();
 		} 
@@ -191,6 +191,9 @@ public class CommunicationGroupController implements WidgetController {
 		else if (getInputModel() instanceof List<?>) {
 			contactMethods = (List<ContactMethod>) getInputModel();
 		}
+		
+		// whj: null CM will fail..		
+		if (null == contactMethods) return;
 		
 		editTable.bindToModel(new WritableList(this.contactMethods,
 				ContactMethod.class), ContactMethod.class, columnPropertys,

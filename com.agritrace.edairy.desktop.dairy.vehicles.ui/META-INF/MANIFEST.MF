@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DairyVehicles
-Bundle-SymbolicName: com.agritrace.edairy.desktop.dairy.vehicles.ui
+Bundle-SymbolicName: com.agritrace.edairy.desktop.dairy.vehicles.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.dairy.vehicles.ui.Activator
 Bundle-Vendor: AGRITRACE
@@ -13,5 +13,5 @@ Require-Bundle: org.eclipse.ui,
  com.agritrace.edairy.desktop.icons;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers,
- com.agritrace.edairy.desktop.dairy.vehicles.ui.views
+Export-Package: com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;uses:="com.agritrace.edairy.desktop.common.ui.controllers,org.eclipse.riena.navigation.ui.controllers",
+ com.agritrace.edairy.desktop.dairy.vehicles.ui.views;uses:="org.eclipse.riena.navigation.ui.swt.views,org.eclipse.swt.widgets"
