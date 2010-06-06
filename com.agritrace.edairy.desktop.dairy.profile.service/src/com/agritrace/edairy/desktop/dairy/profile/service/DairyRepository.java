@@ -8,102 +8,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 
-public class DairyRepository extends HibernateRepository<Dairy> {
+public class DairyRepository  implements IDairyRepository {
 
-	@Override
-	protected Class<?> getClassType() {
-		// due to type erasure, cannot get this from the generic type
-		// argument...
-		return Dairy.class;
-	}
-
-	@Override
-	public List<Dairy> find(String query, Object[] args) {
-		// TODO Auto-generated method stub
-		return super.find(query, args);
-	}
-
-	@Override
-	public List<Dairy> find(String rawQuery) {
-		// TODO Auto-generated method stub
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<Dairy> all() {
-		// TODO Auto-generated method stub
-		return super.all();
-	}
-
-	@Override
-	public Dairy findByKey(long key) {
-		// TODO Auto-generated method stub
-		return super.findByKey(key);
-	}
-
-	@Override
-	public void saveNew(Dairy newEntity) {
-		newEntity.setCompanyId(null);
-		super.saveNew(newEntity);
-	}
-
-	@Override
-	public void update(Dairy updateableEntity) {
-		// TODO Auto-generated method stub
-		super.update(updateableEntity);
-	}
-
-	@Override
-	public void delete(Dairy deletableEntity) {
-		// TODO Auto-generated method stub
-		super.delete(deletableEntity);
-	}
-
-	class RoutesQuery extends SessionRunnable {
-		List<Route> routes;
-
-		public List<Route> getResults() {
-			return routes;
-		}
-
-		@Override
-		public void run(Session session) {
-			routes = session.createQuery("FROM Route").list();
-		}
-	}
-
-	public List<Route> getRoutes() {
-		final RoutesQuery routesQuery = new RoutesQuery();
-		runWithTransaction(routesQuery);
-		return routesQuery.getResults();
-	}
-
-	public void saveNewRoute(final Route newRoute) {
-		runWithTransaction(new SessionRunnable() {
-			@Override
-			public void run(Session session) {
-				session.persist("Route", newRoute);
-			}
-		});
-	}
-
-	public void updateRoute(final Route changedRoute) {
-		runWithTransaction(new SessionRunnable() {
-			@Override
-			public void run(Session session) {
-				session.update("Route", changedRoute);
-			}
-		});
-	}
-
-	public void deleteRoute(final Route object) {
-		runWithTransaction(new SessionRunnable() {
-			@Override
-			public void run(Session session) {
-				session.delete("Route", object);
-			}
-		});
-	}
+	private static final HibernateRepository<Dairy> dairyRepository = new HibernateRepository<Dairy>() {
+		protected Class<Dairy> getClassType() { return Dairy.class; }
+	};	
+	private static final HibernateRepository<Route> routeRepository = new HibernateRepository<Route>() {
+		protected Class<Route> getClassType() { return Route.class; }
+	};
 
 	public Dairy getByName(String name) {
 		List<Dairy> list = find("FROM Dairy where name='" + name + "'");
@@ -112,5 +24,63 @@ public class DairyRepository extends HibernateRepository<Dairy> {
 		}
 		return null;
 	}
+	
+	public List<Dairy> find(String query, Object[] args) {
+		// TODO Auto-generated method stub
+		return dairyRepository.find(query, args);
+	}
+
+	
+	public List<Dairy> find(String rawQuery) {
+		// TODO Auto-generated method stub
+		return dairyRepository.find(rawQuery);
+	}
+
+	
+	public List<Dairy> all() {
+		// TODO Auto-generated method stub
+		return dairyRepository.all();
+	}
+
+	
+	public Dairy findByKey(Long key) {
+		// TODO Auto-generated method stub
+		return dairyRepository.findByKey(key);
+	}
+
+	
+	public void saveNew(Dairy newEntity) {
+		newEntity.setCompanyId(null);
+		dairyRepository.saveNew(newEntity);
+	}
+
+	
+	public void update(Dairy updateableEntity) {
+		// TODO Auto-generated method stub
+		dairyRepository.update(updateableEntity);
+	}
+
+	
+	public void delete(Dairy deletableEntity) {
+		// TODO Auto-generated method stub
+		dairyRepository.delete(deletableEntity);
+	}
+
+	public List<Route> getRoutes() {
+		return routeRepository.all();
+	}
+
+	public void saveNewRoute(final Route newRoute) {
+		routeRepository.saveNew(newRoute);
+	}
+
+	public void updateRoute(final Route changedRoute) {
+		routeRepository.update(changedRoute);
+	}
+
+	public void deleteRoute(final Route object) {
+		routeRepository.delete(object);
+	}
+
 
 }
