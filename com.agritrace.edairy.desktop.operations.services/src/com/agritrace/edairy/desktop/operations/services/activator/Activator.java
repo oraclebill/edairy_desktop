@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.services;
+package com.agritrace.edairy.desktop.operations.services.activator;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

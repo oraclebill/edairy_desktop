@@ -203,30 +203,6 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		}
 	}
 
-	protected void doSave() {
-		try {
-			DairyDemoResourceManager.INSTANCE.saveFarmResource();
-			DairyDemoResourceManager.INSTANCE.saveDairyResource();
-		} catch (final IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	// /**
-	// * Copy the model from selected object to working copy
-	// */
-	// public void copyModel() {
-	// // Copy
-	// if (getActionType() != AbstractRecordListController.ACTION_NEW) {
-	// // EMFUtil.copy(this.getSelectedObject(), this.workingCopy, 2);
-	// }
-	//
-	// }
 
 	/**
 	 * @since 2.0

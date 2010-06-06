@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -78,17 +79,25 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
 
+			bindVehicleInfo(container);
+
+			bindAssetInfo(container, workingCopy.getAssetInfo());
+
+		}
+
+		protected void bindVehicleInfo(IRidgetContainer container) {
+			
 			// Log Book Number
-			final ITextRidget firstName = container.getRidget(ITextRidget.class,
+			final ITextRidget logNumber = container.getRidget(ITextRidget.class,
 					VehicleMasterDetailComposite.BIND_ID_LOG_NUM);
 			for (final IRidget ridget : container.getRidgets()) {
 				if (ridget.getID() != null) {
 					System.out.println(ridget.getID());
 				}
 			}
-			firstName.setDirectWriting(true);
-			firstName.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER.getName());
-			firstName.updateFromModel();
+			logNumber.setDirectWriting(true);
+			logNumber.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER.getName());
+			logNumber.updateFromModel();
 
 			// Driver Name Name
 			final ITextRidget lastNameText = container.getRidget(ITextRidget.class,
@@ -155,52 +164,6 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 			capacityText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName());
 			capacityText.updateFromModel();
 
-			// Asset Info
-			// Date Acquired
-			final ITextRidget dateAcquiredText = container.getRidget(ITextRidget.class,
-					VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_ACQUIRED);
-			dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			dateAcquiredText.setDirectWriting(true);
-			dateAcquiredText.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName());
-			dateAcquiredText.updateFromModel();
-
-			// Date Damaged
-			final ITextRidget damangeDateText = container.getRidget(ITextRidget.class,
-					VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_DAMAGE);
-			damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			damangeDateText.setDirectWriting(true);
-			damangeDateText.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName());
-			damangeDateText.updateFromModel();
-
-			// Damage Description
-			final ITextRidget damageDesText = container.getRidget(ITextRidget.class,
-					VehicleMasterDetailComposite.BIND_ID_ASSET_DESC_DAMAGE);
-			damageDesText.setDirectWriting(true);
-			damageDesText.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION.getName());
-			damageDesText.updateFromModel();
-
-			// Disposal Date
-			final ITextRidget disposalDate = container.getRidget(ITextRidget.class,
-					VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_DISPOSAL);
-			disposalDate.setDirectWriting(true);
-			disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			disposalDate.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName());
-			disposalDate.updateFromModel();
-
-			// Disposal Reason
-			final ITextRidget disposalReason = container.getRidget(ITextRidget.class,
-					VehicleMasterDetailComposite.BIND_ID_ASSET_REASON_DISPOSAL);
-			disposalReason.setDirectWriting(true);
-			disposalReason.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DISPOSAL_REASON.getName());
-			disposalReason.updateFromModel();
-
-			// Disposal Witness
-			final ITextRidget disposalWitness = container.getRidget(ITextRidget.class,
-					VehicleMasterDetailComposite.BIND_ID_ASSET_WITNESS_DISPOSAL);
-			disposalWitness.setDirectWriting(true);
-			disposalWitness.bindToModel(workingCopy, DairyPackage.Literals.ASSET__DISPOSAL_WITNESS.getName());
-			disposalWitness.updateFromModel();
-
 			// Insurance Info
 			// Insurance Number
 			final ITextRidget insuranceNumberText = container.getRidget(ITextRidget.class,
@@ -217,6 +180,54 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 			expDateText.setDirectWriting(true);
 			expDateText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE.getName());
 			expDateText.updateFromModel();
+		}
+
+		protected void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
+			// Asset Info
+			// Date Acquired
+			final ITextRidget dateAcquiredText = container.getRidget(ITextRidget.class,
+					VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_ACQUIRED);
+			dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+			dateAcquiredText.setDirectWriting(true);
+			dateAcquiredText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName());
+			dateAcquiredText.updateFromModel();
+
+			// Date Damaged
+			final ITextRidget damangeDateText = container.getRidget(ITextRidget.class,
+					VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_DAMAGE);
+			damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+			damangeDateText.setDirectWriting(true);
+			damangeDateText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName());
+			damangeDateText.updateFromModel();
+
+			// Damage Description
+			final ITextRidget damageDesText = container.getRidget(ITextRidget.class,
+					VehicleMasterDetailComposite.BIND_ID_ASSET_DESC_DAMAGE);
+			damageDesText.setDirectWriting(true);
+			damageDesText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION.getName());
+			damageDesText.updateFromModel();
+
+			// Disposal Date
+			final ITextRidget disposalDate = container.getRidget(ITextRidget.class,
+					VehicleMasterDetailComposite.BIND_ID_ASSET_DATE_DISPOSAL);
+			disposalDate.setDirectWriting(true);
+			disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+			disposalDate.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName());
+			disposalDate.updateFromModel();
+
+			// Disposal Reason
+			final ITextRidget disposalReason = container.getRidget(ITextRidget.class,
+					VehicleMasterDetailComposite.BIND_ID_ASSET_REASON_DISPOSAL);
+			disposalReason.setDirectWriting(true);
+			disposalReason.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DISPOSAL_REASON.getName());
+			disposalReason.updateFromModel();
+
+			// Disposal Witness
+			final ITextRidget disposalWitness = container.getRidget(ITextRidget.class,
+					VehicleMasterDetailComposite.BIND_ID_ASSET_WITNESS_DISPOSAL);
+			disposalWitness.setDirectWriting(true);
+			disposalWitness.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DISPOSAL_WITNESS.getName());
+			disposalWitness.updateFromModel();
 
 		}
 
@@ -225,6 +236,7 @@ public class VehicleControllerDelegate extends SubModuleControllerDelegate {
 			final Vehicle vehicle = DairyFactory.eINSTANCE.createVehicle();
 			final Employee driver1 = DairyFactory.eINSTANCE.createEmployee();
 			vehicle.setDriver(driver1);
+			vehicle.setAssetInfo(DairyFactory.eINSTANCE.createAsset());
 			return vehicle;
 		}
 

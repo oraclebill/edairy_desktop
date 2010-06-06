@@ -9,6 +9,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 /**
@@ -39,9 +40,8 @@ public class EDairyActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		// SwtControlRidgetMapper.getInstance().addMapping(CommonMasterDetailsComposite.class,
-		// StatuslineUIProcessRidget.class);
-		setupDairyResource();
+		
+		initDatabase();
 
 	}
 
@@ -96,21 +96,8 @@ public class EDairyActivator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	private void setupDairyResource() {
-		try {
-			// String baseDir =
-			// RienaLocations.getDataArea(plugin.getBundle()).getAbsolutePath();
-			final String baseDir = System.getProperty("edairy.db.root", "/tmp");
-			DairyDemoResourceManager.INSTANCE.createDairyResource(baseDir);
-		} catch (final ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void initDatabase() {
+		// FIXME: get config from filesystem
+		PersistenceManager.getDefault().getSession();
 	}
 }

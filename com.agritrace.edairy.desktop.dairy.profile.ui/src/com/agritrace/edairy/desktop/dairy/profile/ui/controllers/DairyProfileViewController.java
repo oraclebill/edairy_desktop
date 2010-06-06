@@ -1,5 +1,8 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
+
+import java.util.List;
+
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.ModuleController;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -26,8 +29,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
-import com.agritrace.edairy.desktop.dairy.profile.service.DairyRepository;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 /**
  * Dairy Profile view controller
@@ -40,6 +44,7 @@ public class DairyProfileViewController extends SubModuleController {
 	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
 
 	public static final String ID = DairyProfileViewController.class.getName();
+	private final IDairyRepository dairyRepository = new DairyRepository();
 
 	// main page
 	private ITextRidget txtID;
@@ -66,7 +71,7 @@ public class DairyProfileViewController extends SubModuleController {
 	private LocationProfileWidgetController locationController;
 	private CommunicationGroupController communicationGroup;
 
-	private final DairyRepository dairyRepository;
+
 	private Dairy localDairy;
 	private int memberCount;
 	private boolean newDairy = false;
@@ -106,23 +111,26 @@ public class DairyProfileViewController extends SubModuleController {
 		@Override
 		public void focusGained(FocusEvent event) {
 			IRidget focused = event.getNewFocusOwner();
+			System.err.println( "Focused on >> " + focused);
 			// Link link = (Link)focused.getUIControl();
 		}
 
 		@Override
 		public void focusLost(FocusEvent event) {
-			// TODO Auto-generated method stub
+			IRidget focused = event.getNewFocusOwner();
+			System.err.println( "Focused lost on >> " + focused);
+			// Link link = (Link)focused.getUIControl();
 		}
 	}
 
 	class LinkSelectionListener implements ISelectionListener {
-
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
-			// TODO Auto-generated method stub
-
+			IRidget focused = event.getSource();
+			List<Object> selected = event.getNewSelection();
+			System.err.println( "Selected "+ selected +" on " + focused);
+			// Link link = (Link)focused.getUIControl();
 		}
-
 	}
 
 	/**
@@ -131,7 +139,6 @@ public class DairyProfileViewController extends SubModuleController {
 	 */
 	public DairyProfileViewController() {
 		super();
-		dairyRepository = new DairyRepository();
 		long dairyId = getDairyId();
 		Dairy myDairy = dairyRepository.findByKey(dairyId);
 		if (myDairy == null) {
