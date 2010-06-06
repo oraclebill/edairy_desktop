@@ -1,30 +1,33 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui;
 
 public interface DairyProfileViewWidgetID {
-    public static final String ID = "com.agritrace.edairy.desktop.ui.dairyprofile";
+	public static final String ID = "com.agritrace.edairy.desktop.ui.dairyprofile";
 
-    public static final String DAIRY_NAME = "DAIRY_NAME";
-    public static final String DAIRY_ID = "DAIRY_ID";
-    public static final String DAIRY_LICENSE = "DAIRY_LICENSE";
-    public static final String DAIRY_ESTABLISHED_DATE = "DAIRY_ESTABLISHED_DATE";
-    public static final String DAIRY_MANAGER_NAME = "DAIRY_MANAGER_NAME";
-    public static final String DAIRY_MEMBER_COUNT = "DAIRY_MEMBER_COUNT";
-    public static final String DAIRY_PROFILE_IMAGE = "DAIRY_PROFILE_IMAGE";
-    public static final String DAIRY_MAP_IMAGE = "DAIRY_MAP_IMAGE";
+	public static final String DAIRY_NAME = "DAIRY_NAME";
+	public static final String DAIRY_ID = "DAIRY_ID";
+	public static final String DAIRY_LICENSE = "DAIRY_LICENSE";
+	public static final String DAIRY_ESTABLISHED_DATE = "DAIRY_ESTABLISHED_DATE";
+	public static final String DAIRY_MANAGER_NAME = "DAIRY_MANAGER_NAME";
+	public static final String DAIRY_MEMBER_COUNT = "DAIRY_MEMBER_COUNT";
+	public static final String DAIRY_PROFILE_IMAGE = "DAIRY_PROFILE_IMAGE";
+	public static final String DAIRY_PROFILE_IMAGE_LINK = "dairy.profile.image.link";
 
-    public static final String DAIRY_LOCATION_ADDRESS = "DAIRY_LOCATION_ADDRESS";
-    public static final String DAIRY_LOCATION_SECTION = "DAIRYSECTION";
-    public static final String DAIRY_LOCATION_VILLAGE="DAIRYVILLAGE";
+	public static final String DAIRY_PUBLIC_DESCRIPTION = "DAIRY_PUBLIC_DESCRIPTION";
 
-    public static final String DAIRY_LOCATION_ESTATE = "DAIRY_LOCATION_ESTATE";
-    public static final String DAIRY_LOCATION_LOCATION = "DAIRY_LOCATION_LOCATION";
-    public static final String DAIRY_LOCATION_SUBLOCATION = "DAIRY_LOCATION_SUBLOCATION";
-    public static final String DAIRY_LOCATION_DIVISION = "DAIRY_LOCATION_DIVISION";
-    public static final String DAIRY_LOCATION_DISTRICT = "DAIRY_LOCATION_DISTRICT";
-    public static final String DAIRY_LOCATION_PROVINCE = "DAIRY_LOCATION_PROVINCE";
-    public static final String DAIRY_LOCATION_POSTALCODE = "DAIRY_LOCATION_POSTALCODE";
-    public static final String DAIRY_PUBLIC_DESCRIPTION = "DAIRY_PUBLIC_DESCRIPTION";
+	public static final String DAIRY_SAVE = "DAIRY_BUTTON_SAVE";
+	public static final String DAIRY_CANCEL = "DAIRY_BUTTON_CANCEL";
 
-    public static final String DAIRY_SAVE = "DAIRY_BUTTON_SAVE";
-    public static final String DAIRY_CANCEL = "DAIRY_BUTTON_CANCEL";
+	public static final String DAIRY_REGISTRATION_NUMBER = "dairy.profile.registration_no";
+
+	public static final String DAIRY_NSSF_NUMBER = "dairy.profile.nssf_no";
+
+	public static final String DAIRY_NHIF_NUMBER = "dairy.profile.nhif_no";
+
+	public static final String DAIRY_FEDERAL_PIN = "dairy.profile.federal_pin";
+
+	public static final String DAIRY_LIC_EFFECTIVE_DATE = "dairy.profile.effective_date";
+
+	public static final String DAIRY_LIC_EXPIRATION_DATE = "dairy.profile.expiration_date";
+
+	public static final String DAIRY_PHONE_NUMBER = "dairy.profile.phone";
 }

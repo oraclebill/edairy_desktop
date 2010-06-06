@@ -6,14 +6,6 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.Audited;
 import com.agritrace.edairy.desktop.common.model.base.Company;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
@@ -29,14 +21,31 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
+
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+
 import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -597,6 +606,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCompany_Description() {
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCompany_ProfilePhoto() {
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDescriptiveLocation() {
 		return descriptiveLocationEClass;
 	}
@@ -836,6 +863,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(companyEClass, COMPANY__LOCATION);
 		createEAttribute(companyEClass, COMPANY__PHONE_NUMBER);
 		createEAttribute(companyEClass, COMPANY__COMPANY_ID);
+		createEAttribute(companyEClass, COMPANY__DESCRIPTION);
+		createEAttribute(companyEClass, COMPANY__PROFILE_PHOTO);
 
 		descriptiveLocationEClass = createEClass(DESCRIPTIVE_LOCATION);
 		createEAttribute(descriptiveLocationEClass, DESCRIPTIVE_LOCATION__DIRECTIONS);
@@ -939,6 +968,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getCompany_Location(), this.getLocation(), null, "location", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompany_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompany_CompanyId(), this.getUniqueID(), "companyId", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCompany_Description(), ecorePackage.getEString(), "description", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCompany_ProfilePhoto(), this.getImageReference(), "profilePhoto", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(descriptiveLocationEClass, DescriptiveLocation.class, "DescriptiveLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDescriptiveLocation_Directions(), ecorePackage.getEString(), "directions", null, 0, 1, DescriptiveLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

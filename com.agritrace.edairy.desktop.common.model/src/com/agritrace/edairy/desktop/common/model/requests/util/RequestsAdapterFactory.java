@@ -6,13 +6,14 @@
  */
 package com.agritrace.edairy.desktop.common.model.requests.util;
 
+import com.agritrace.edairy.desktop.common.model.requests.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

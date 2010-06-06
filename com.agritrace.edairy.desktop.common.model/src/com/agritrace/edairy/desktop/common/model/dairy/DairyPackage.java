@@ -6,14 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -991,6 +992,24 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__COMPANY_ID = ModelPackage.COMPANY__COMPANY_ID;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__DESCRIPTION = ModelPackage.COMPANY__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__PROFILE_PHOTO = ModelPackage.COMPANY__PROFILE_PHOTO;
+
+	/**
 	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1126,13 +1145,31 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Manager Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__MANAGER_NAME = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Established Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__ESTABLISHED_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 16;
+
+	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 17;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -1454,6 +1491,24 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER__COMPANY_ID = ModelPackage.COMPANY__COMPANY_ID;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__DESCRIPTION = ModelPackage.COMPANY__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__PROFILE_PHOTO = ModelPackage.COMPANY__PROFILE_PHOTO;
+
+	/**
 	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1606,6 +1661,24 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int CUSTOMER__COMPANY_ID = ModelPackage.COMPANY__COMPANY_ID;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__DESCRIPTION = ModelPackage.COMPANY__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__PROFILE_PHOTO = ModelPackage.COMPANY__PROFILE_PHOTO;
 
 	/**
 	 * The feature id for the '<em><b>Customer Id</b></em>' attribute.
@@ -2646,6 +2719,28 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDairy_DairyBins();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Manager Name</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_ManagerName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Established Date</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_EstablishedDate();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership <em>Membership</em>}'.
@@ -3771,6 +3866,22 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DAIRY__DAIRY_BINS = eINSTANCE.getDairy_DairyBins();
+
+		/**
+		 * The meta object literal for the '<em><b>Manager Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__MANAGER_NAME = eINSTANCE.getDairy_ManagerName();
+
+		/**
+		 * The meta object literal for the '<em><b>Established Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__ESTABLISHED_DATE = eINSTANCE.getDairy_EstablishedDate();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.

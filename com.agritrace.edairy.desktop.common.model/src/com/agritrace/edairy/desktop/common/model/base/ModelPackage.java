@@ -473,13 +473,31 @@ public interface ModelPackage extends EPackage {
 	int COMPANY__COMPANY_ID = 6;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPANY__DESCRIPTION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPANY__PROFILE_PHOTO = 8;
+
+	/**
 	 * The number of structural features of the '<em>Company</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPANY_FEATURE_COUNT = 7;
+	int COMPANY_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.
@@ -1125,6 +1143,28 @@ public interface ModelPackage extends EPackage {
 	EAttribute getCompany_CompanyId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getDescription()
+	 * @see #getCompany()
+	 * @generated
+	 */
+	EAttribute getCompany_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Company#getProfilePhoto <em>Profile Photo</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Profile Photo</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Company#getProfilePhoto()
+	 * @see #getCompany()
+	 * @generated
+	 */
+	EAttribute getCompany_ProfilePhoto();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation <em>Descriptive Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1679,6 +1719,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COMPANY__COMPANY_ID = eINSTANCE.getCompany_CompanyId();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPANY__DESCRIPTION = eINSTANCE.getCompany_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Profile Photo</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPANY__PROFILE_PHOTO = eINSTANCE.getCompany_ProfilePhoto();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl <em>Descriptive Location</em>}' class.

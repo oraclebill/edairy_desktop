@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.base;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,6 +25,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getCompanyId <em>Company Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getProfilePhoto <em>Profile Photo</em>}</li>
  * </ul>
  * </p>
  *
@@ -193,5 +196,57 @@ public interface Company extends EObject {
 	 * @generated
 	 */
 	void setCompanyId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_Description()
+	 * @model
+	 * @generated
+	 */
+	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Company#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Profile Photo</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Profile Photo</em>' attribute.
+	 * @see #setProfilePhoto(String)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_ProfilePhoto()
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.ImageReference"
+	 * @generated
+	 */
+	String getProfilePhoto();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Company#getProfilePhoto <em>Profile Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Profile Photo</em>' attribute.
+	 * @see #getProfilePhoto()
+	 * @generated
+	 */
+	void setProfilePhoto(String value);
 
 } // Company

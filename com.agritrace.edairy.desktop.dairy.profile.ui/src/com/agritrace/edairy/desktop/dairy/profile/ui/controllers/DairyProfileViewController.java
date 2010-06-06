@@ -1,23 +1,31 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.riena.core.injector.Inject;
-import org.eclipse.riena.core.wire.InjectService;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.ModuleController;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.core.marker.ValidationTime;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
+import org.eclipse.riena.ui.ridgets.ILabelRidget;
+import org.eclipse.riena.ui.ridgets.ILinkRidget;
+import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
+import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
+import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
-import com.agritrace.edairy.desktop.dairy.profile.ui.Activator;
+import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 
 /**
  * Dairy Profile view controller
@@ -31,125 +39,231 @@ public class DairyProfileViewController extends SubModuleController {
 
 	public static final String ID = DairyProfileViewController.class.getName();
 
+	// main page
+	private ITextRidget txtID;
+	private ITextRidget txtNAME;
+	private ITextRidget txtPHONE;
+	private ITextRidget txtMEMBER_COUNT;
+	private ITextRidget txtMANAGER_NAME;
+	private ITextRidget txtESTABLISHED_DATE;
+	private ITextRidget txtPUBLIC_DESCRIPTION;
+	private ILabelRidget txtPROFILE_IMAGE;
+
+	private ITextRidget txtNSSF_NUMBER;
+	private ITextRidget txtNHIF_NUMBER;
+	private ITextRidget txtFEDERAL_PIN;
+	private ITextRidget txtREGISTRATION_NBR;
+	private ITextRidget txtLIC_EFFECTIVE_DATE;
+	private ITextRidget txtLIC_EXPIRATION_DATE;
+	private ILinkRidget txtPROFILE_IMAGE_LINK;
+
+	private IActionRidget saveAction;
+	private IActionRidget cancelAction;
+
+	private LocationProfileWidgetController locationController;
+	private CommunicationGroupController communicationGroup;
+
 	private final DairyRepository dairyRepository;
 	private Dairy localDairy;
+	private int memberCount;
+
+	class DairyProfileSaveAction implements IActionListener {
+		@Override
+		public void callback() {
+			dairyRepository.update(localDairy);
+			updateBindings();
+		}
+	}
+
+	class DairyProfileCancelAction implements IActionListener {
+		@Override
+		public void callback() {
+			localDairy = dairyRepository.findByKey(localDairy.getCompanyId());
+			initBindings();
+			updateBindings();
+		}
+	}
+
+	class LinkFocusListener implements IFocusListener {
+		@Override
+		public void focusGained(FocusEvent event) {
+			IRidget focused = event.getNewFocusOwner();
+			// Link link = (Link)focused.getUIControl();
+		}
+
+		@Override
+		public void focusLost(FocusEvent event) {
+			// TODO Auto-generated method stub
+		}
+	}
+
+	class LinkSelectionListener implements ISelectionListener {
+
+		@Override
+		public void ridgetSelected(SelectionEvent event) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
 
 	public DairyProfileViewController() {
-		super();	
+		super();
 		dairyRepository = new DairyRepository();
 		long dairyId = getDairyId();
-		localDairy = dairyRepository.findByKey(dairyId);
-		if (localDairy == null) {
-			initLocalDairy();
+		Dairy myDairy = dairyRepository.findByKey(dairyId);
+		if (myDairy == null) {
+			myDairy = DairyFactory.eINSTANCE.createDairy();
+			myDairy.setLocation(DairyUtil.createLocation(null, null, null));
+			myDairy.setCompanyId(dairyId);
 		}
+		localDairy = myDairy;
 	}
 
 	private long getDairyId() {
 		long id = -1;
-		
+
 		String dairyId;
 		try {
 			dairyId = System.getProperty(EDAIRY_SITE_DAIRYID);
 			if (dairyId != null) {
 				id = new Long(dairyId).longValue();
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return id;
 	}
-	
-	private void initLocalDairy() {
-		localDairy = DairyFactory.eINSTANCE.createDairy();
-		localDairy.setLocation(
-				DairyUtil.createLocation(null, null, null));
-		
+
+	public int getMemberCount() {
+		return memberCount;
 	}
 	
+	public void setMemberCount(int val) {
+		memberCount = val;		
+	}
 	
 	@Override
 	public void configureRidgets() {
-		System.err.println(">>>>>>>>>>>>>>>>>> in configureRidgets: " );		
+		super.configureRidgets();
+		System.err.println(">>>>>>>>>>>>>>>>>> in configureRidgets: ");
 
 		getWindowRidget().setTitle("Dairy Profile");
 
-//		final ITextRidget txtNAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NAME);
-//		txtNAME.bindToModel(workingDairyCopy, "NAME");
-//		txtNAME.updateFromModel();
-//
-//		final ITextRidget txtID = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ID);
-//		txtID.bindToModel(workingDairyCopy, "ID");
-//		txtID.updateFromModel();
-//
-//		final ITextRidget txtLICENSE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_LICENSE);
-//		txtLICENSE.bindToModel(workingDairyCopy, "LICENSE");
-//		txtLICENSE.updateFromModel();
-//
-//		final ITextRidget txtESTABLISHED_DATE = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
-//		txtESTABLISHED_DATE.bindToModel(workingDairyCopy, "ESTABLISHED_DATE");
-//		txtESTABLISHED_DATE.updateFromModel();
-//
-//		final ITextRidget txtMANAGER_NAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_MANAGER_NAME);
-//		txtMANAGER_NAME.bindToModel(workingDairyCopy, "MANAGER_NAME");
-//		txtMANAGER_NAME.updateFromModel();
-//
-//		final ITextRidget txtMEMBER_COUNT = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
-//		txtMEMBER_COUNT.bindToModel(workingDairyCopy, "MEMBER_COUNT");
-//		txtMEMBER_COUNT.updateFromModel();
-//
-//		final ITextRidget txtPROFILE_IMAGE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
-//		txtPROFILE_IMAGE.bindToModel(workingDairyCopy, "PROFILE_IMAGE");
-//		txtPROFILE_IMAGE.updateFromModel();
-//
-//		final ITextRidget txtMAP_IMAGE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_MAP_IMAGE);
-//		txtMAP_IMAGE.bindToModel(workingDairyCopy, "MAP_IMAGE");
-//		txtMAP_IMAGE.updateFromModel();
-//
-//		final ITextRidget txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class,
-//				DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
-//		txtPUBLIC_DESCRIPTION.bindToModel(workingDairyCopy, "PUBLIC_DESCRIPTION");
-//		txtPUBLIC_DESCRIPTION.updateFromModel();
-//
-//		final IActionRidget saveAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_SAVE);
-//		saveAction.addListener(new IActionListener() {
-//			@Override
-//			public void callback() {
-//				DairyDemoResourceManager.INSTANCE.getLocalDairy(); // TODO
-//			}
-//		});
-//
-//		final IActionRidget cencelAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_CANCEL);
-//		cencelAction.addListener(new IActionListener() {
-//			@Override
-//			public void callback() {
-//				DairyDemoResourceManager.INSTANCE.getLocalDairy(); // TODO
-//			}
-//		});
+		configureInfoPanelRidgets();
+		locationController = new LocationProfileWidgetController(this);
+		communicationGroup = new CommunicationGroupController(this);
+
+		configureButtonsPanel();
+	}
+
+	private void configureInfoPanelRidgets() {
+
+		// top panel
+		txtID = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ID);
+		txtID.setOutputOnly(true);
+		txtNAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NAME);
+		txtNAME.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+		txtPHONE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PHONE_NUMBER);
+		txtPHONE.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+		txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
+		txtPUBLIC_DESCRIPTION.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+
+		txtESTABLISHED_DATE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
+
+		txtPROFILE_IMAGE = getRidget(ILabelRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
+		txtPROFILE_IMAGE_LINK = getRidget(ILinkRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
+
+		txtPROFILE_IMAGE_LINK.addFocusListener(new LinkFocusListener());
+		txtPROFILE_IMAGE_LINK.addSelectionListener(new LinkSelectionListener());
+
+		txtMEMBER_COUNT = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
+		txtMEMBER_COUNT.setOutputOnly(true);
+
+		// registration tab
+		txtREGISTRATION_NBR = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER);
+		txtREGISTRATION_NBR.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+
+		txtNSSF_NUMBER = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_NSSF_NUMBER);
+		txtNHIF_NUMBER = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_NHIF_NUMBER);
+		txtFEDERAL_PIN = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_FEDERAL_PIN);
+		txtLIC_EFFECTIVE_DATE = getRidget(IDateTextRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE);
+		txtLIC_EXPIRATION_DATE = getRidget(IDateTextRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE);
 
 	}
 
-	
+	private void configureButtonsPanel() {
+		saveAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_SAVE);
+		saveAction.addListener(new DairyProfileSaveAction());
+		cancelAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_CANCEL);
+		cancelAction.addListener(new DairyProfileCancelAction());
+	}
+
+	private void initBindings() {
+		// info panel
+		txtID.bindToModel(localDairy, "companyId");
+		txtNAME.bindToModel(localDairy, "companyName");
+		txtPHONE.bindToModel(localDairy, "phoneNumber");
+		txtPUBLIC_DESCRIPTION.bindToModel(localDairy, "description");
+		txtPROFILE_IMAGE.bindToModel(localDairy, "profilePhoto");
+
+		txtNSSF_NUMBER.bindToModel(localDairy, "managerName");
+		txtESTABLISHED_DATE.bindToModel(localDairy, "establishedDate");
+		txtMEMBER_COUNT.bindToModel(this, "memberCount");
+
+		// registration panel
+		txtREGISTRATION_NBR.bindToModel(localDairy, "registrationNumber");
+		txtNSSF_NUMBER.bindToModel(localDairy, "nssfNumber");
+		txtNHIF_NUMBER.bindToModel(localDairy, "nhifNumber");
+		txtFEDERAL_PIN.bindToModel(localDairy, "federalPin");
+		txtLIC_EFFECTIVE_DATE.bindToModel(localDairy, "licenseEffectiveDate");
+		txtLIC_EXPIRATION_DATE.bindToModel(localDairy, "licenseExpirationDate");
+		
+		locationController.setInputModel(localDairy.getLocation());
+		communicationGroup.setInputModel(localDairy.getLocation());
+	}
+
+	private void updateBindings() {
+		// info panel
+		txtNAME.updateFromModel();
+		txtID.updateFromModel();
+		txtPHONE.updateFromModel();
+		txtESTABLISHED_DATE.updateFromModel();
+		txtNSSF_NUMBER.updateFromModel();
+		txtMEMBER_COUNT.updateFromModel();
+		txtPROFILE_IMAGE.updateFromModel();
+		txtPUBLIC_DESCRIPTION.updateFromModel();
+
+		// registration panel
+		txtREGISTRATION_NBR.updateFromModel();
+		txtNSSF_NUMBER.updateFromModel();
+		txtNHIF_NUMBER.updateFromModel();
+		txtFEDERAL_PIN.updateFromModel();
+		txtLIC_EFFECTIVE_DATE.updateFromModel();
+		txtLIC_EXPIRATION_DATE.updateFromModel();
+
+		locationController.updateBinding();
+		communicationGroup.updateBinding();
+	}
+
 	@Override
 	public void afterBind() {
-		// TODO Auto-generated method stub
 		super.afterBind();
-		System.err.println(">>>>>>>>>>>>>>>>>> afterBind: " );
-		
+		initBindings();
+		updateBindings();
 	}
 
 	@Override
 	public IRidget getInitialFocus() {
 		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: " );
-		
+		System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: ");
+
 		return super.getInitialFocus();
 	}
 
 	@Override
 	public ModuleController getModuleController() {
 		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getModuleController: " );
+		System.err.println(">>>>>>>>>>>>>>>>>> getModuleController: ");
 
 		return super.getModuleController();
 	}
@@ -157,7 +271,7 @@ public class DairyProfileViewController extends SubModuleController {
 	@Override
 	public IWindowRidget getWindowRidget() {
 		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getWindowRidget: " );
+		System.err.println(">>>>>>>>>>>>>>>>>> getWindowRidget: ");
 
 		return super.getWindowRidget();
 	}
@@ -165,7 +279,7 @@ public class DairyProfileViewController extends SubModuleController {
 	@Override
 	public IInfoFlyoutRidget getInfoFlyout() {
 		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getInfoFlyout: " );
+		System.err.println(">>>>>>>>>>>>>>>>>> getInfoFlyout: ");
 
 		return super.getInfoFlyout();
 	}
@@ -174,7 +288,7 @@ public class DairyProfileViewController extends SubModuleController {
 	public void setInitialFocus(IRidget ridget) {
 		// TODO Auto-generated method stub
 		super.setInitialFocus(ridget);
-		System.err.println(">>>>>>>>>>>>>>>>>> setInitialFocus: " + ridget );
+		System.err.println(">>>>>>>>>>>>>>>>>> setInitialFocus: " + ridget);
 
 	}
 
@@ -182,7 +296,7 @@ public class DairyProfileViewController extends SubModuleController {
 	public void setNavigationNode(ISubModuleNode navigationNode) {
 		// TODO Auto-generated method stub
 		super.setNavigationNode(navigationNode);
-		System.err.println(">>>>>>>>>>>>>>>>>> setNavigationNode: " + navigationNode );
+		System.err.println(">>>>>>>>>>>>>>>>>> setNavigationNode: " + navigationNode);
 
 	}
 
@@ -198,23 +312,22 @@ public class DairyProfileViewController extends SubModuleController {
 	public void updateAllRidgetsFromModel() {
 		// TODO Auto-generated method stub
 		super.updateAllRidgetsFromModel();
-		System.err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: " );
+		System.err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: ");
 
 	}
 
 	@Override
 	protected void updateIcon(IWindowRidget windowRidget) {
 		// TODO Auto-generated method stub
-		super.updateIcon(windowRidget);		
-		System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " + windowRidget );
+		super.updateIcon(windowRidget);
+		System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " + windowRidget);
 
-		
 	}
 
 	@Override
 	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
 		// TODO Auto-generated method stub
 		super.addDefaultAction(focusRidget, action);
-		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action );
+		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action);
 	}
 }

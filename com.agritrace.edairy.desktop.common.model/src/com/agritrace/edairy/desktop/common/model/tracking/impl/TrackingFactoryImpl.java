@@ -6,24 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
+import com.agritrace.edairy.desktop.common.model.tracking.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
-import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.model.tracking.Mechanism;
-import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
-import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
-import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
-import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->

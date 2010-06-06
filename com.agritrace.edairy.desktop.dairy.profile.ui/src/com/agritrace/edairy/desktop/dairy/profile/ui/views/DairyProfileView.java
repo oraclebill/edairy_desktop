@@ -22,15 +22,11 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -47,6 +43,7 @@ public class DairyProfileView extends SubModuleView {
 
 	public static final String ID = "dairy.profile.editor";
 
+	// info panel
 	private Text txtName;
 	private Text txtId;
 	private Text txtLicense;
@@ -55,6 +52,20 @@ public class DairyProfileView extends SubModuleView {
 	private Text txtMemberCount;
 	private Label lblDairyImage;
 	private Link linkDairyImage;
+
+	// license panel
+	private DateTime dateEstablished;
+	private Text txtRegistrationNum;
+	private DateTime dateLicEffective;
+	private DateTime dateLicExpiration;
+	private Text txtNssfNum;
+	private Text txtNhifNum;
+	private Text txtFederalPIN;
+	private Text txtPhone;
+
+	private Button saveButton;
+	private Button cancelButton;
+
 
 	public static final String ADDRESS_LABEL = "Address:";
 	public static final String SECTION_LABEL = "Section/Homestead:";
@@ -68,36 +79,63 @@ public class DairyProfileView extends SubModuleView {
 	public static final String POSTAL_CODE_LABEL = "Postal Code:";
 
 	private static final String DAIRY_IMAGE_GROUP_HEADER = "Dairy Image";
-
-	private static final String DAIRY_IMAGE_LINK_ID = "dairy.profile.image.link";
-
 	private static final String DAIRY_IMAGE_LINK_TEXT = "<click here to update>";
 
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
-		// Composite top = new Composite(parent, SWT.NONE);
-		Composite row1 = UIControlsFactory.createComposite(parent);
-		Composite top = createDairyInfoPanel(row1);
-		Composite image = createDairyImagePanel(row1);
+		
+		// create top row containing dairy info and dairy image
+		final Composite row1 = UIControlsFactory.createComposite(parent);
+		createDairyInfoPanel(row1);
+		createDairyImagePanel(row1);
 		GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(row1);
-		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.FILL).minSize(-1, 400).applyTo(row1);
+		// GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL,
+		// SWT.FILL).minSize(-1, 400).applyTo(row1);
 
-		Composite row2 = UIControlsFactory.createComposite(parent);
-		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.FILL).minSize(-1, 400).applyTo(row2);
+		// second row containing tabbed panel
+		final Composite row2 = UIControlsFactory.createComposite(parent);
+		createDairyTabPanel(row2);
+		GridLayoutFactory.swtDefaults().numColumns(1).generateLayout(row2);
 
-		Composite tabs = createDairyTabPanel(row2);
+		// third row contains save and cancel buttons
+		final Composite row3 = UIControlsFactory.createComposite(parent);
+		createDairyButtonPanel(row3);
+		GridLayoutFactory.swtDefaults().numColumns(1).generateLayout(row3);
 
-		GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(row2);
-
+		// layout the panel
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+
+		//
+		// test data
+		//
+		final Image dairyImage = ImageStore.getInstance().getImage("map.jpg");
+		if (dairyImage != null) {
+			if (lblDairyImage != null) {
+				lblDairyImage.setImage(dairyImage);
+			}
+		}
+		txtDairyDescription.setText("Established 1976 as Limuru Community Processing Play");
+		txtMemberCount.setText("134");
+		txtName.setText("Limuru Dairy");
+		txtManagerName.setText("John Jones");
+		txtId.setText("# 33422314");
+//		txtLicense.setText("AD-123445-112");
+
 	}
 
 	private Composite createDairyImagePanel(Composite parent) {
-		Group imageGroup = UIControlsFactory.createGroup(parent, DAIRY_IMAGE_GROUP_HEADER);
+		final Group imageGroup = UIControlsFactory.createGroup(parent, DAIRY_IMAGE_GROUP_HEADER);
 		lblDairyImage = UIControlsFactory.createLabel(imageGroup, "", DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
-		linkDairyImage = UIControlsFactory.createLink(imageGroup, SWT.NONE, DAIRY_IMAGE_LINK_ID);
+		GridDataFactory.fillDefaults()
+			.hint(200, 200)
+			.grab(false, true)
+			.align(SWT.FILL, SWT.FILL)
+			.applyTo(lblDairyImage);
+		linkDairyImage = UIControlsFactory.createLink(imageGroup, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
 		linkDairyImage.setText(DAIRY_IMAGE_LINK_TEXT);
-		GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(imageGroup);
+		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.BOTTOM).applyTo(linkDairyImage);
+		GridLayoutFactory.swtDefaults().numColumns(1).generateLayout(imageGroup);
 		return imageGroup;
 	}
 
@@ -113,63 +151,58 @@ public class DairyProfileView extends SubModuleView {
 		gl_nameArea.marginLeft = 5;
 		nameArea.setLayout(gl_nameArea);
 
-		final GridDataFactory labelGridDataFactory = GridDataFactory.createFrom(new GridData(SWT.RIGHT, SWT.CENTER,
+		final GridDataFactory labelGridDataFactory = GridDataFactory.createFrom(new GridData(SWT.LEFT, SWT.CENTER,
 				false, false, 1, 1));
 		final GridDataFactory fieldGridDataFactory = GridDataFactory.createFrom(new GridData(SWT.FILL, SWT.CENTER,
 				true, false, 1, 1));
 
-		// name field
-		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Name"));
-		fieldGridDataFactory.applyTo(txtName = UIControlsFactory.createText(nameArea, SWT.NONE,
-				DairyProfileViewWidgetID.DAIRY_NAME));
 		// id field
-		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "ID"));
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "ID:"));
 		fieldGridDataFactory.applyTo(txtId = UIControlsFactory.createText(nameArea, SWT.NONE,
 				DairyProfileViewWidgetID.DAIRY_ID));
-		// license field
-		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "License #"));
-		fieldGridDataFactory.applyTo(txtLicense = UIControlsFactory.createText(nameArea, SWT.NONE,
-				DairyProfileViewWidgetID.DAIRY_LICENSE));
+		
+		// name field
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Name:"));
+		fieldGridDataFactory.applyTo(txtName = UIControlsFactory.createText(nameArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_NAME));
+		
+		// phone field
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Phone #:"));
+		fieldGridDataFactory.applyTo(txtPhone = UIControlsFactory.createText(nameArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_PHONE_NUMBER));
+
+		// established date
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Date Established:"));
+		fieldGridDataFactory.applyTo(dateEstablished = UIControlsFactory.createDate(nameArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE));
 
 		// manager field
-		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Dairy Manager"));
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Dairy Manager:"));
 		fieldGridDataFactory.applyTo(txtManagerName = UIControlsFactory.createText(nameArea, SWT.NONE,
 				DairyProfileViewWidgetID.DAIRY_MANAGER_NAME));
 
-		// member count field
-		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Membership"));
-		fieldGridDataFactory.applyTo(txtMemberCount = UIControlsFactory.createText(nameArea, SWT.NONE,
-				DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT));
-
 		// description field
-		labelGridDataFactory.align(SWT.RIGHT, SWT.TOP).applyTo(UIControlsFactory.createLabel(nameArea, "Description"));
-		fieldGridDataFactory
-				.align(SWT.FILL, SWT.FILL)
+		labelGridDataFactory.copy().align(SWT.RIGHT, SWT.TOP).applyTo(UIControlsFactory.createLabel(nameArea, "Description:"));
+		fieldGridDataFactory.copy()
+				.align(SWT.LEFT, SWT.FILL)
 				.grab(true, true)
 				.hint(-1, 40)
 				.applyTo(
-						txtDairyDescription = UIControlsFactory.createText(nameArea, SWT.BORDER | SWT.WRAP | SWT.SCROLL_LINE
-								| SWT.V_SCROLL | SWT.MULTI, DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION));
+						txtDairyDescription = UIControlsFactory.createText(nameArea, SWT.BORDER | SWT.WRAP
+								| SWT.SCROLL_LINE | SWT.V_SCROLL | SWT.MULTI,
+								DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION));
 
-		// test data
-		//
-		Image dairyImage = ImageStore.getInstance().getImage("map.jpg");
-		if (dairyImage != null)
-			if (lblDairyImage != null) 
-				lblDairyImage.setImage(dairyImage);
-		txtDairyDescription.setText("Established 1976 as Limuru Community Processing Play");
-		txtMemberCount.setText("134");
-		txtName.setText("Limuru Dairy");
-		txtManagerName.setText("John Jones");
-		txtId.setText("# 33422314");
-		txtLicense.setText("AD-123445-112");
+		// member count field
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Member Count:"));
+		fieldGridDataFactory.applyTo(txtMemberCount = UIControlsFactory.createText(nameArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT));
 
 		return nameArea;
 	}
 
 	private Composite createDairyTabPanel(Composite parent) {
 
-		Composite tabComposite = UIControlsFactory.createComposite(parent);
+		final Composite tabComposite = UIControlsFactory.createComposite(parent);
 		final GridData detailsGD = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		detailsGD.minimumHeight = 200;
 		tabComposite.setLayoutData(detailsGD);
@@ -195,7 +228,7 @@ public class DairyProfileView extends SubModuleView {
 		profileTab.setText("Profile");
 		final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		profileComposite.setLayout(new GridLayout(1, true));
-		Composite profileWidget = createAddressArea(profileComposite);
+		final Composite profileWidget = createAddressArea(profileComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(profileWidget);
 		profileTab.setControl(profileComposite);
 
@@ -204,29 +237,88 @@ public class DairyProfileView extends SubModuleView {
 		accountTab.setText("License Info");
 		final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		accountComposite.setLayout(new GridLayout(1, true));
-		Composite managementArea = createManagementArea(accountComposite);
+		final Composite managementArea = createLicenseInfoPanel(accountComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(managementArea);
 		accountTab.setControl(accountComposite);
 
 		tabfolder.setSelection(0);
-		
+
 		return tabComposite;
 	}
 
-	private Composite createManagementArea(Composite accountComposite) {
-		// TODO Auto-generated method stub
-		return UIControlsFactory.createComposite(accountComposite);
+	private Composite createLicenseInfoPanel(Composite parent) {
+
+		// Construct Dairy Name/ID Area
+		final Group licenseArea = UIControlsFactory.createGroup(parent, "License Information");
+
+		// Layout Dairy Name/ID Area
+		final GridLayout gl_nameArea = new GridLayout(2, false);
+		gl_nameArea.marginTop = 5;
+		gl_nameArea.marginRight = 5;
+		gl_nameArea.marginLeft = 5;
+		licenseArea.setLayout(gl_nameArea);
+
+		final GridDataFactory labelGridDataFactory = GridDataFactory.createFrom(new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1));
+		final GridDataFactory fieldGridDataFactory = GridDataFactory.createFrom(new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 1, 1));
+
+		// Registration Number
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "Registration Number"));
+		fieldGridDataFactory.applyTo(txtRegistrationNum = UIControlsFactory.createText(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER));
+		
+		// license effective date
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "Lic. Effective Date"));
+		fieldGridDataFactory.applyTo(dateLicEffective = UIControlsFactory.createDate(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE));
+
+		// license expiration date
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "Lic. Expiration Date"));
+		fieldGridDataFactory.applyTo(dateLicExpiration = UIControlsFactory.createDate(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE));
+
+		// NSSF Number
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "NSSF Number"));
+		fieldGridDataFactory.applyTo(txtNssfNum = UIControlsFactory.createText(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_NSSF_NUMBER));
+		
+		// NHIF Number
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "NHIF Number"));
+		fieldGridDataFactory.applyTo(txtNhifNum = UIControlsFactory.createText(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_NHIF_NUMBER));
+
+		// Federal PIN
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "Federal PIN"));
+		fieldGridDataFactory.applyTo(txtFederalPIN = UIControlsFactory.createText(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_FEDERAL_PIN));
+
+		return licenseArea;
+	}
+
+	private Composite createDairyButtonPanel(Composite parent) {
+		final Composite buttonComposite = UIControlsFactory.createComposite(parent);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(buttonComposite);
+
+		saveButton = UIControlsFactory.createButton(buttonComposite, "Save");
+		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
+		addUIControl(saveButton, DairyProfileViewWidgetID.DAIRY_SAVE);
+
+		cancelButton = UIControlsFactory.createButton(buttonComposite, "Cancel");
+		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
+		addUIControl(cancelButton, DairyProfileViewWidgetID.DAIRY_CANCEL);
+		return buttonComposite;
 	}
 
 	private Composite createAddressArea(Composite parent) {
 
-		Composite addressGroup = UIControlsFactory.createComposite(parent);
+		final Composite addressGroup = UIControlsFactory.createComposite(parent);
 		GridLayoutFactory.fillDefaults().applyTo(addressGroup);
-		
-		LocationProfileWidget addressWidget = new LocationProfileWidget(addressGroup);
+
+		final LocationProfileWidget addressWidget = new LocationProfileWidget(addressGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget.getComposite());
 
-		CommunicationsGroupWidget communication = new CommunicationsGroupWidget(addressGroup);
+		final CommunicationsGroupWidget communication = new CommunicationsGroupWidget(addressGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication.getGroup());
 
 		return addressGroup;

@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
+import com.agritrace.edairy.desktop.common.model.base.Company;
+
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +39,8 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}</li>
  * </ul>
  * </p>
  *
@@ -302,7 +306,7 @@ public interface Dairy extends Company {
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Supplier}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Suppliers</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Suppliers</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -346,6 +350,58 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	EList<DairyContainer> getDairyBins();
+
+	/**
+	 * Returns the value of the '<em><b>Manager Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Manager Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Manager Name</em>' attribute.
+	 * @see #setManagerName(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_ManagerName()
+	 * @model
+	 * @generated
+	 */
+	String getManagerName();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Manager Name</em>' attribute.
+	 * @see #getManagerName()
+	 * @generated
+	 */
+	void setManagerName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Established Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Established Date</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Established Date</em>' attribute.
+	 * @see #setEstablishedDate(Date)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_EstablishedDate()
+	 * @model
+	 * @generated
+	 */
+	Date getEstablishedDate();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Established Date</em>' attribute.
+	 * @see #getEstablishedDate()
+	 * @generated
+	 */
+	void setEstablishedDate(Date value);
 
 	/**
 	 * <!-- begin-user-doc -->

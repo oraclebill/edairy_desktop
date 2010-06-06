@@ -204,6 +204,8 @@
         eOpposite="requests.ecore#//AnimalHealthRequest/dairy" eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" upperBound="-1"
         eType="#//DairyContainer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="managerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="establishedDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Membership">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" lowerBound="1"

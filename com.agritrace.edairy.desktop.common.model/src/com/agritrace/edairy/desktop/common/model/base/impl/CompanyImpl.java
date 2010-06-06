@@ -6,23 +6,27 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.desktop.common.model.base.Company;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,6 +42,8 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyId <em>Company Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getProfilePhoto <em>Profile Photo</em>}</li>
  * </ul>
  * </p>
  *
@@ -153,6 +159,46 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @ordered
 	 */
 	protected Long companyId = COMPANY_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProfilePhoto() <em>Profile Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProfilePhoto()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROFILE_PHOTO_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProfilePhoto() <em>Profile Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProfilePhoto()
+	 * @generated
+	 * @ordered
+	 */
+	protected String profilePhoto = PROFILE_PHOTO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -329,6 +375,48 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProfilePhoto(String newProfilePhoto) {
+		String oldProfilePhoto = profilePhoto;
+		profilePhoto = newProfilePhoto;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PROFILE_PHOTO, oldProfilePhoto, profilePhoto));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -364,6 +452,10 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return getPhoneNumber();
 			case ModelPackage.COMPANY__COMPANY_ID:
 				return getCompanyId();
+			case ModelPackage.COMPANY__DESCRIPTION:
+				return getDescription();
+			case ModelPackage.COMPANY__PROFILE_PHOTO:
+				return getProfilePhoto();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -400,6 +492,12 @@ public class CompanyImpl extends EObjectImpl implements Company {
 			case ModelPackage.COMPANY__COMPANY_ID:
 				setCompanyId((Long)newValue);
 				return;
+			case ModelPackage.COMPANY__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
+			case ModelPackage.COMPANY__PROFILE_PHOTO:
+				setProfilePhoto((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -433,6 +531,12 @@ public class CompanyImpl extends EObjectImpl implements Company {
 			case ModelPackage.COMPANY__COMPANY_ID:
 				setCompanyId(COMPANY_ID_EDEFAULT);
 				return;
+			case ModelPackage.COMPANY__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case ModelPackage.COMPANY__PROFILE_PHOTO:
+				setProfilePhoto(PROFILE_PHOTO_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -459,6 +563,10 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
 			case ModelPackage.COMPANY__COMPANY_ID:
 				return COMPANY_ID_EDEFAULT == null ? companyId != null : !COMPANY_ID_EDEFAULT.equals(companyId);
+			case ModelPackage.COMPANY__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case ModelPackage.COMPANY__PROFILE_PHOTO:
+				return PROFILE_PHOTO_EDEFAULT == null ? profilePhoto != null : !PROFILE_PHOTO_EDEFAULT.equals(profilePhoto);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -481,6 +589,10 @@ public class CompanyImpl extends EObjectImpl implements Company {
 		result.append(phoneNumber);
 		result.append(", companyId: ");
 		result.append(companyId);
+		result.append(", description: ");
+		result.append(description);
+		result.append(", profilePhoto: ");
+		result.append(profilePhoto);
 		result.append(')');
 		return result.toString();
 	}

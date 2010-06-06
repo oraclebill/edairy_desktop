@@ -6,20 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -30,9 +18,28 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,6 +63,8 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getManagerName <em>Manager Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getEstablishedDate <em>Established Date</em>}</li>
  * </ul>
  * </p>
  *
@@ -271,6 +280,46 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected EList<DairyContainer> dairyBins;
+
+	/**
+	 * The default value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getManagerName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MANAGER_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getManagerName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String managerName = MANAGER_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEstablishedDate() <em>Established Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstablishedDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date ESTABLISHED_DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEstablishedDate() <em>Established Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstablishedDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date establishedDate = ESTABLISHED_DATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -530,6 +579,48 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getManagerName() {
+		return managerName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setManagerName(String newManagerName) {
+		String oldManagerName = managerName;
+		managerName = newManagerName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__MANAGER_NAME, oldManagerName, managerName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Date getEstablishedDate() {
+		return establishedDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEstablishedDate(Date newEstablishedDate) {
+		Date oldEstablishedDate = establishedDate;
+		establishedDate = newEstablishedDate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__ESTABLISHED_DATE, oldEstablishedDate, establishedDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Farm> getMemberFarms() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -619,6 +710,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getAnimalHealthRequests();
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return getDairyBins();
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				return getManagerName();
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				return getEstablishedDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -686,6 +781,12 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				getDairyBins().clear();
 				getDairyBins().addAll((Collection<? extends DairyContainer>)newValue);
 				return;
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				setManagerName((String)newValue);
+				return;
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				setEstablishedDate((Date)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -743,6 +844,12 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				getDairyBins().clear();
 				return;
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				setManagerName(MANAGER_NAME_EDEFAULT);
+				return;
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				setEstablishedDate(ESTABLISHED_DATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -785,6 +892,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return animalHealthRequests != null && !animalHealthRequests.isEmpty();
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return dairyBins != null && !dairyBins.isEmpty();
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				return MANAGER_NAME_EDEFAULT == null ? managerName != null : !MANAGER_NAME_EDEFAULT.equals(managerName);
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				return ESTABLISHED_DATE_EDEFAULT == null ? establishedDate != null : !ESTABLISHED_DATE_EDEFAULT.equals(establishedDate);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -811,6 +922,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		result.append(licenseEffectiveDate);
 		result.append(", licenseExpirationDate: ");
 		result.append(licenseExpirationDate);
+		result.append(", managerName: ");
+		result.append(managerName);
+		result.append(", establishedDate: ");
+		result.append(establishedDate);
 		result.append(')');
 		return result.toString();
 	}

@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.util;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+
+import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents
