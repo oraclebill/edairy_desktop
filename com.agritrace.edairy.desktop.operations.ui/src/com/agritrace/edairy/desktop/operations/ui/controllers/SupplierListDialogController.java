@@ -11,11 +11,13 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.beans.common.ListBean;
+import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
+import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -65,11 +67,17 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		ITextRidget companyName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_COMPANY_NAME); //$NON-NLS-1$
 		companyName.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_NAME.getName());
 		companyName.updateFromModel();
+		companyName.addValidationRule(new NotEmpty(),
+				ValidationTime.ON_UI_CONTROL_EDIT);
+		companyName.setMandatory(true);
 
 		// Legal Name
 		ITextRidget legalName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_LEGAL_NAME); //$NON-NLS-1$
 		legalName.bindToModel(supplier, ModelPackage.Literals.COMPANY__LEGAL_NAME.getName());
 		legalName.updateFromModel();
+		legalName.addValidationRule(new NotEmpty(),
+				ValidationTime.ON_UI_CONTROL_EDIT);
+		legalName.setMandatory(true);
 
 		// Category
 		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$		
