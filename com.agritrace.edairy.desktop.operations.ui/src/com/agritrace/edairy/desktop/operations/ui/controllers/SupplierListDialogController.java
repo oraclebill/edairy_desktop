@@ -43,15 +43,15 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		// configure supplier ID
 		final Supplier supplier = getWorkingCopy();
 		ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
-		if (this.getActionType() != AbstractRecordListController.ACTION_NEW) {
-			supplierId.setOutputOnly(false);
-		}
+		supplierId.setOutputOnly(false);
 		supplierId.setDirectWriting(true);
 		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		supplierId.updateFromModel();
-		if (this.getActionType() != AbstractRecordListController.ACTION_NEW) {
-			supplierId.setOutputOnly(true);
+		if (this.getActionType() == AbstractRecordListController.ACTION_NEW) {
+			supplierId.setText("Auto Generated");
 		}
+		supplierId.setOutputOnly(true);
+		
 
 		// Status
 		IComboRidget statusCombo = getRidget(IComboRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_STATUS);
@@ -131,7 +131,11 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 
 		// Configure Communication Group
 		CommunicationGroupController commController = new CommunicationGroupController(this);
-		commController.setInputModel(supplier.getContactMethods());
+//		ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
+//		method.setCmType(ContactMethodType.EMAIL);
+//		method.setCmValue("sparkwan@gmail.com");
+//		supplier.getContactMethods().add(method);
+		commController.setInputModel(supplier);
 		commController.updateBinding();
 
 	}

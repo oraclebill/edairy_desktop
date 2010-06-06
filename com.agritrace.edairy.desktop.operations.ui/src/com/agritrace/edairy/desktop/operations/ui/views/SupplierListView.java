@@ -33,7 +33,7 @@ public class SupplierListView extends AbstractRecordListView {
 		addUIControl(categoriesList, BIND_ID_FILTER_CATEGORIES);
 
 		// Contact name
-		UIControlsFactory.createLabel(parent, "Contact Name");
+		UIControlsFactory.createLabel(parent, "Company Name");
 		Text contactName = UIControlsFactory.createText(parent, SWT.None);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(contactName);
 		addUIControl(contactName, BIND_ID_FILTER_CONTACT);
