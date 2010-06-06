@@ -1,6 +1,10 @@
 package com.agritrace.edairy.desktop.common.ui;
 
+import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.osgi.framework.BundleContext;
+
+import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTable;
+import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTableRidget;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -30,6 +34,8 @@ public class Activator extends DesktopBaseActivator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		SwtControlRidgetMapper.getInstance().addMapping(EditableTable.class,
+				EditableTableRidget.class);
 	}
 
 	/*

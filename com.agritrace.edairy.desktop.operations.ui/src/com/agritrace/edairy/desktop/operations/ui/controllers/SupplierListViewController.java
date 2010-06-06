@@ -79,7 +79,9 @@ public class SupplierListViewController extends
 		ITextRidget companyText = getRidget(ITextRidget.class,
 				SupplierListView.BIND_ID_FILTER_CONTACT);
 		if (companyText != null && !"".equals(companyText.getText().trim())) {
-			criteria.add(Restrictions.like("companyName", companyText.getText()));
+			criteria.add(Restrictions.like(
+					ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(),
+					companyText.getText()+"%"));
 		}
 		// Category
 		IListRidget categorieList = getRidget(IListRidget.class,

@@ -1,29 +1,11 @@
 package com.agritrace.edairy.desktop.services.ui.controllers;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.query.conditions.Condition;
-import org.eclipse.emf.query.conditions.booleans.BooleanAdapter;
-import org.eclipse.emf.query.conditions.booleans.BooleanCondition;
-import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectReferenceValueCondition;
-import org.eclipse.emf.query.conditions.numbers.NumberAdapter;
-import org.eclipse.emf.query.conditions.numbers.NumberCondition;
-import org.eclipse.emf.query.conditions.numbers.NumberCondition.RelationalOperator;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -32,21 +14,23 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.services.ui.AnimalHealthRequestRepository;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
 
@@ -56,7 +40,9 @@ import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestViewController extends AbstractRecordListController {
+public class ServiceRequestViewController extends AbstractRecordListController<AnimalHealthRequest> {
+
+	private AnimalHealthRequestRepository reqRepo;
 
 	protected EClass getEClass() {
 		return RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST;
@@ -218,67 +204,31 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 	@Override
 	protected List getFilteredResult() {
+
 		try {
-			Dairy myDairy = DairyDemoResourceManager.INSTANCE.getLocalDairy();
-			List<AnimalHealthRequest> requests = myDairy
-					.getAnimalHealthRequests();
-
-			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
-			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
-				@Override
-				public long longValue(Object object) {
-					return ((Date) object).getTime();
-				}
-
-				@Override
-				public Long adapt(Object value) {
-					return longValue(value);
-				}
-			};
+			org.hibernate.Session session = PersistenceManager.getDefault()
+					.getSession();
+			Criteria criteria = session.createCriteria(this.getEntityClass());
 
 			// Start Date
 			final ITextRidget memberIdText = getRidget(ITextRidget.class,
 					ServiceRequestView.START_DATE_TEXT);
-			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
-			SELECT select = null;
-			if (memberIdText != null) {
+			if (memberIdText != null && !"".equals(memberIdText.getText())) {
 				// StartDate
-				// memberIdText.updateFromModel();
-				final String startDate = memberIdText.getText();
-
-				if (!"".equals(startDate)) {
-					final Condition startDateCondtion = new NumberCondition<Long>(
-							DateTimeUtils.DATE_FORMAT.parse(startDate)
-									.getTime(),
-							RelationalOperator.GREATER_THAN_OR_EQUAL_TO,
-							dateAdapter);
-
-					final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE,
-							startDateCondtion);
-					condtions.add(startDateCondition);
-				}
-
+				criteria.add(Restrictions.ge(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
+								.getName(), DateTimeUtils.DATE_FORMAT
+								.parse(memberIdText.getText())));
 			}
 			// End Date
 			final ITextRidget endDateText = getRidget(ITextRidget.class,
 					ServiceRequestView.END_DATE_TEXT);
-			if (endDateText != null) {
+			if (endDateText != null && !"".equals(endDateText.getText())) {
 				final String endDateStr = endDateText.getText();
-
-				if (!"".equals(endDateStr)) {
-					final Condition startDateCondtion = new NumberCondition<Long>(
-							DateTimeUtils.DATE_FORMAT.parse(endDateStr)
-									.getTime() + 86400000l,
-							RelationalOperator.LESS_THAN_OR_EQUAL_TO,
-							dateAdapter);
-
-					final EObjectAttributeValueCondition endDateCondtion = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE,
-							startDateCondtion);
-					condtions.add(endDateCondtion);
-				}
+				criteria.add(Restrictions.lt(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
+								.getName(), DateTimeUtils.getNextDate(DateTimeUtils.DATE_FORMAT.parse(endDateStr))));
 			}
 
 			// Request Type
@@ -289,21 +239,9 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			if (veterinaryRidget != null) {
 				final boolean isVerterinaryType = veterinaryRidget.isSelected();
 				if (isVerterinaryType) {
-					final BooleanAdapter booleanAdapter = new BooleanAdapter() {
-
-						@Override
-						public Boolean getBoolean(Object object) {
-							return object.equals(RequestType.VETERINARY);
-						}
-
-					};
-					final Condition verterinaryCondition = new BooleanCondition(
-							isVerterinaryType, booleanAdapter);
-
-					final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE,
-							verterinaryCondition);
-					condtions.add(startDateCondition);
+					criteria.add(Restrictions
+							.eq(RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE
+									.getName(), RequestType.VETERINARY));
 				}
 			}
 			// Insemination conditions
@@ -313,28 +251,16 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			if (inseminationRidget != null) {
 				final boolean isInsemination = inseminationRidget.isSelected();
 				if (isInsemination) {
-					final BooleanAdapter booleanAdapter = new BooleanAdapter() {
-
-						@Override
-						public Boolean getBoolean(Object object) {
-							return object.equals(RequestType.INSEMINATION);
-						}
-
-					};
-					final Condition verterinaryCondition = new BooleanCondition(
-							isInsemination, booleanAdapter);
-
-					final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE,
-							verterinaryCondition);
-					condtions.add(startDateCondition);
+					criteria.add(Restrictions
+							.eq(RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE
+									.getName(), RequestType.INSEMINATION));
 				}
 			}
 
 			// Member name field
 			final ITextRidget memberText = getRidget(ITextRidget.class,
 					ServiceRequestView.MEMBER_LOOKUP_TEXT);
-			if (memberText != null) {
+			if (memberText != null && memberText.getText() != null) {
 				// String memberName = memberText.getText();
 				// if (!"".equals(memberName)) {
 				// Condition name = new
@@ -353,6 +279,11 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 				//
 				// condtions.add(requestingMember);
 				// }
+				//
+				// criteria.add(Restrictions
+				// .eq(DairyPackage.Literals.MEMBERSHIP__MEMBER
+				// .getName(), RequestType.INSEMINATION));
+
 			}
 
 			// Member name field
@@ -361,61 +292,33 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			if (farmText != null) {
 				final String farmName = farmText.getText();
 				if (!"".equals(farmName)) {
-					final Condition name = new org.eclipse.emf.query.conditions.strings.StringValue(
-							farmName);
-					final EObjectCondition farmNameCond = new EObjectAttributeValueCondition(
-							TrackingPackage.Literals.FARM__NAME, name);
-					final EObjectCondition farmCond = new EObjectReferenceValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM,
-							farmNameCond);
-
-					condtions.add(farmCond);
+					// final Condition name = new
+					// org.eclipse.emf.query.conditions.strings.StringValue(
+					// farmName);
+					// final EObjectCondition farmNameCond = new
+					// EObjectAttributeValueCondition(
+					// TrackingPackage.Literals.FARM__NAME, name);
+					// final EObjectCondition farmCond = new
+					// EObjectReferenceValueCondition(
+					// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM,
+					// farmNameCond);
+					//
+					// condtions.add(farmCond);
 				}
 			}
 
-			// AND all conditions
-			if (condtions.size() > 0) {
-				final EObjectCondition first = condtions.get(0);
-				EObjectCondition ret = first;
-				for (int i = 1; i < condtions.size(); i++) {
-					ret = ret.AND(condtions.get(i));
-				}
-				select = new SELECT(new FROM(requests), new WHERE(ret));
+			return criteria.list();
+		} catch (Exception e) {
 
-			} else {
-				select = new SELECT(new FROM(requests), new WHERE(
-						EObjectCondition.E_TRUE));
-			}
-			final IQueryResult result = select.execute();
-			for (final EObject object : result.getEObjects()) {
-				objs.add((AnimalHealthRequest) object);
-			}
-			Collections.sort(objs, new Comparator<Object>() {
-
-				@Override
-				public int compare(Object arg0, Object arg1) {
-					if (arg0 instanceof AnimalHealthRequest
-							&& arg1 instanceof AnimalHealthRequest) {
-						return (int) (((AnimalHealthRequest) arg0)
-								.getRequestId().longValue() - ((AnimalHealthRequest) arg1)
-								.getRequestId().longValue());
-					}
-					return 0;
-				}
-			});
-
-			return objs;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return new ArrayList<AnimalHealthRequest>();
+
 	}
 
 	@Override
-	protected RecordDialog getEditDialog(int dialogStyle, EObject selectedObject) {
+	protected RecordDialog getEditDialog(int dialogStyle, AnimalHealthRequest selectedObject) {
 		return new ServiceRequestListDialog(dialogStyle, new Shell(),
-				selectedObject);
+				selectedObject, this.getRepository());
 	}
 
 	@Override
@@ -482,5 +385,23 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		});
 
 	}
+	
+	/**
+	 * Create new model while createing a new record
+	 * 
+	 * @return
+	 */
+	protected AnimalHealthRequest createNewModle() {
+		AnimalHealthRequest request = (AnimalHealthRequest) EMFUtil.createWorkingCopy(
+				this.getEClass(), 3);
+		request.setReportedProblem("");
+		return request;
+	}
 
+	public AnimalHealthRequestRepository getRepository() {
+		if (reqRepo == null) {
+			reqRepo = new AnimalHealthRequestRepository();
+		}
+		return reqRepo;
+	}
 }
