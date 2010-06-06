@@ -102,18 +102,17 @@ public class DairyUtil {
 
 	public static Location createLocation(PostalLocation pLoc, MapLocation mLoc, DescriptiveLocation dLoc) {
 		final Location loc = ModelFactory.eINSTANCE.createLocation();
-		if(pLoc == null){
-			pLoc = createPostalLocation("","", "", "", "", "", "", "", "", "");
+		if ((pLoc == null) && (mLoc == null) && (dLoc == null)) {
+			dLoc = createDescriptiveLocation("", "");
+			mLoc = createMapLocation(0,0);
+			pLoc = createPostalLocation("", "", "", "");
 		}
-		if (mLoc == null) {
-			mLoc = createMapLocation(0.0, 0.0);
-		}
-		if(dLoc == null){
-			createDescriptiveLocation("", "");
-		}
-		loc.setPostalLocation(pLoc);
-		loc.setMapLocation(mLoc);
-		loc.setDescriptiveLocation(dLoc);
+		if (null != pLoc)
+			loc.setPostalLocation(pLoc);
+		if (null != mLoc)
+			loc.setMapLocation(mLoc);
+		if (null != dLoc)
+			loc.setDescriptiveLocation(dLoc);
 		return loc;
 	}
 

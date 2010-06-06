@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.common.ui.views;
 
+import java.beans.Beans;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -53,8 +55,11 @@ public class DateRangeSearchWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(startDateText);
 
 		final ImageButton calendarButton = UIControlsFactory.createImageButton(composite, SWT.NONE, startCalendarId);
-		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
-		calendarButton.setImage(calendar);
+		Image calendar = null;
+		if (! Beans.isDesignTime() ) {
+			calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
+			calendarButton.setImage(calendar);
+		}
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 
 		// calendarButton.addSelectionListener(new SelectionAdapter() {
