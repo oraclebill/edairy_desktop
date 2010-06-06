@@ -330,17 +330,6 @@ public class ServiceRecordDialogController extends RecordDialogController<Animal
 
 	}
 
-	@Override
-	protected void saveNew() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void saveUpdated() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	protected EClass getEClass() {

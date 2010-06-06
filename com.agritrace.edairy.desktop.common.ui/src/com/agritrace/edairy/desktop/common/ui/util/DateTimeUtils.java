@@ -184,5 +184,19 @@ public class DateTimeUtils {
 			}
 		}
 	}
+	
+	/**
+	 * Add one day to specific date
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static Date getNextDate(Date date)
+	{
+		final Calendar now = Calendar.getInstance();
+		now.setTime(date);
+		now.add(Calendar.DAY_OF_MONTH, 1);
+		return now.getTime();
+	}
 
 }

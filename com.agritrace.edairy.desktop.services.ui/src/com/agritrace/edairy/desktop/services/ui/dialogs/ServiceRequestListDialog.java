@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
@@ -71,8 +72,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 	private List<Object> injectedControls = new ArrayList<Object>();
 
 	public ServiceRequestListDialog(int style, Shell parentShell,
-			EObject selectedEObject) {
-		super(style, parentShell, selectedEObject, null);
+			EObject selectedEObject, IRepository repo) {
+		super(style, parentShell, selectedEObject, repo);
 
 	}
 
@@ -109,7 +110,8 @@ public class ServiceRequestListDialog extends RecordDialog {
 		specialComp.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).applyTo(specialComp);
-		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); //$NON-NLS-1$	
+		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); //$NON-NLS-1$
+		updateTypeSpecificControlls(RequestType.VETERINARY);
 	}
 
 	private void createCommonControls(Composite parent) {
@@ -236,6 +238,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 				updateTypeSpecificControlls(RequestType.INSEMINATION);
 				
 			}});
+
 
 	}
 	
