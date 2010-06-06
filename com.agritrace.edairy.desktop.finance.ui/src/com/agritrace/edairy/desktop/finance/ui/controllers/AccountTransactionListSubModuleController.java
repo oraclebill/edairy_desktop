@@ -88,7 +88,8 @@ public class AccountTransactionListSubModuleController extends
 
 	@Override
 	public void configureRidgets() {
-		service = DairyDemoResourceManager.INSTANCE;
+//		service = DairyDemoResourceManager.INSTANCE;
+		service = null;
 		resultTable = getRidget(ITableRidget.class, "tableRidget");
 		searchAction = getRidget(IActionRidget.class, "searchAction");
 		clearAction = getRidget(IActionRidget.class, "clearAction");
