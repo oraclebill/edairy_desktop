@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;
+package com.agritrace.edairy.desktop.operations.services.vehicles;
 
 import java.util.Collection;
 
