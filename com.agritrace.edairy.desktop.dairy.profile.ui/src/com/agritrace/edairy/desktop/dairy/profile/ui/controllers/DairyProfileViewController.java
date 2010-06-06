@@ -6,7 +6,8 @@ import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IDateTextRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
@@ -25,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.dairy.profile.service.DairyRepository;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 
 /**
@@ -43,18 +45,19 @@ public class DairyProfileViewController extends SubModuleController {
 	private ITextRidget txtID;
 	private ITextRidget txtNAME;
 	private ITextRidget txtPHONE;
-	private ITextRidget txtMEMBER_COUNT;
+	private INumericTextRidget txtMEMBER_COUNT;
 	private ITextRidget txtMANAGER_NAME;
-	private ITextRidget txtESTABLISHED_DATE;
+	private IDateTimeRidget txtESTABLISHED_DATE;
 	private ITextRidget txtPUBLIC_DESCRIPTION;
 	private ILabelRidget txtPROFILE_IMAGE;
 
+	private ITextRidget txtLEGAL_NAME;
 	private ITextRidget txtNSSF_NUMBER;
 	private ITextRidget txtNHIF_NUMBER;
 	private ITextRidget txtFEDERAL_PIN;
 	private ITextRidget txtREGISTRATION_NBR;
-	private ITextRidget txtLIC_EFFECTIVE_DATE;
-	private ITextRidget txtLIC_EXPIRATION_DATE;
+	private IDateTimeRidget txtLIC_EFFECTIVE_DATE;
+	private IDateTimeRidget txtLIC_EXPIRATION_DATE;
 	private ILinkRidget txtPROFILE_IMAGE_LINK;
 
 	private IActionRidget saveAction;
@@ -66,11 +69,19 @@ public class DairyProfileViewController extends SubModuleController {
 	private final DairyRepository dairyRepository;
 	private Dairy localDairy;
 	private int memberCount;
+	private boolean newDairy = false;
+
 
 	class DairyProfileSaveAction implements IActionListener {
 		@Override
 		public void callback() {
-			dairyRepository.update(localDairy);
+			if (newDairy) {
+				dairyRepository.saveNew(localDairy);
+				newDairy = false;
+			}
+			else {
+				dairyRepository.update(localDairy);
+			}
 			updateBindings();
 		}
 	}
@@ -78,7 +89,14 @@ public class DairyProfileViewController extends SubModuleController {
 	class DairyProfileCancelAction implements IActionListener {
 		@Override
 		public void callback() {
-			localDairy = dairyRepository.findByKey(localDairy.getCompanyId());
+			if ( !newDairy ) {
+				localDairy = dairyRepository.findByKey(localDairy.getCompanyId());
+			}
+			else {
+				localDairy = DairyFactory.eINSTANCE.createDairy();
+				localDairy.setLocation(DairyUtil.createLocation(null, null, null));
+				localDairy.setCompanyId(getDairyId());
+			}
 			initBindings();
 			updateBindings();
 		}
@@ -107,6 +125,10 @@ public class DairyProfileViewController extends SubModuleController {
 
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 */
 	public DairyProfileViewController() {
 		super();
 		dairyRepository = new DairyRepository();
@@ -116,10 +138,16 @@ public class DairyProfileViewController extends SubModuleController {
 			myDairy = DairyFactory.eINSTANCE.createDairy();
 			myDairy.setLocation(DairyUtil.createLocation(null, null, null));
 			myDairy.setCompanyId(dairyId);
+			newDairy = true;
 		}
 		localDairy = myDairy;
 	}
 
+	/**
+	 * Get the dairy id from system property, or default to -1.
+	 * 
+	 * @return
+	 */
 	private long getDairyId() {
 		long id = -1;
 
@@ -134,6 +162,13 @@ public class DairyProfileViewController extends SubModuleController {
 		return id;
 	}
 
+	/**
+	 * Get member count for UI.
+	 *  
+	 * TODO: for now, we fake it..
+	 * 
+	 * @return
+	 */
 	public int getMemberCount() {
 		return memberCount;
 	}
@@ -156,19 +191,25 @@ public class DairyProfileViewController extends SubModuleController {
 		configureButtonsPanel();
 	}
 
+	/**
+	 * Configures the ridgets in teh upper panel.
+	 * 
+	 */
 	private void configureInfoPanelRidgets() {
 
 		// top panel
 		txtID = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ID);
 		txtID.setOutputOnly(true);
 		txtNAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NAME);
-		txtNAME.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+		txtNAME.addValidationRule(new RequiredField(), ValidationTime.ON_UI_CONTROL_EDIT);
+		
 		txtPHONE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PHONE_NUMBER);
 		txtPHONE.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+		
 		txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
 		txtPUBLIC_DESCRIPTION.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
-		txtESTABLISHED_DATE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
+		txtESTABLISHED_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
 
 		txtPROFILE_IMAGE = getRidget(ILabelRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 		txtPROFILE_IMAGE_LINK = getRidget(ILinkRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
@@ -180,17 +221,24 @@ public class DairyProfileViewController extends SubModuleController {
 		txtMEMBER_COUNT.setOutputOnly(true);
 
 		// registration tab
-		txtREGISTRATION_NBR = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER);
+		txtLEGAL_NAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_LEGAL_NAME);
+		txtLEGAL_NAME.addValidationRule(new RequiredField(), ValidationTime.ON_UI_CONTROL_EDIT);
+		
+		txtREGISTRATION_NBR = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER);
 		txtREGISTRATION_NBR.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
-		txtNSSF_NUMBER = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_NSSF_NUMBER);
-		txtNHIF_NUMBER = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_NHIF_NUMBER);
+		txtNSSF_NUMBER = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NSSF_NUMBER);
+		txtNHIF_NUMBER = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NHIF_NUMBER);
 		txtFEDERAL_PIN = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_FEDERAL_PIN);
-		txtLIC_EFFECTIVE_DATE = getRidget(IDateTextRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE);
-		txtLIC_EXPIRATION_DATE = getRidget(IDateTextRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE);
+		txtLIC_EFFECTIVE_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE);
+		txtLIC_EXPIRATION_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE);
 
 	}
 
+	/**
+	 * Configure teh button panel.
+	 * 
+	 */
 	private void configureButtonsPanel() {
 		saveAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_SAVE);
 		saveAction.addListener(new DairyProfileSaveAction());
@@ -198,6 +246,10 @@ public class DairyProfileViewController extends SubModuleController {
 		cancelAction.addListener(new DairyProfileCancelAction());
 	}
 
+	/**
+	 * Initialize bindings (bind to model).
+	 * 
+	 */
 	private void initBindings() {
 		// info panel
 		txtID.bindToModel(localDairy, "companyId");
@@ -211,6 +263,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtMEMBER_COUNT.bindToModel(this, "memberCount");
 
 		// registration panel
+		txtLEGAL_NAME.bindToModel(localDairy, "legalName");
 		txtREGISTRATION_NBR.bindToModel(localDairy, "registrationNumber");
 		txtNSSF_NUMBER.bindToModel(localDairy, "nssfNumber");
 		txtNHIF_NUMBER.bindToModel(localDairy, "nhifNumber");
@@ -222,6 +275,10 @@ public class DairyProfileViewController extends SubModuleController {
 		communicationGroup.setInputModel(localDairy.getLocation());
 	}
 
+	/**
+	 * Update the info displayed from the model.
+	 * 
+	 */
 	private void updateBindings() {
 		// info panel
 		txtNAME.updateFromModel();
@@ -234,6 +291,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtPUBLIC_DESCRIPTION.updateFromModel();
 
 		// registration panel
+		txtLEGAL_NAME.updateFromModel();
 		txtREGISTRATION_NBR.updateFromModel();
 		txtNSSF_NUMBER.updateFromModel();
 		txtNHIF_NUMBER.updateFromModel();

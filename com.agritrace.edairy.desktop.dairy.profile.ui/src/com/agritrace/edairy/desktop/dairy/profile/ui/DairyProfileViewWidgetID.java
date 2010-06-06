@@ -30,4 +30,6 @@ public interface DairyProfileViewWidgetID {
 	public static final String DAIRY_LIC_EXPIRATION_DATE = "dairy.profile.expiration_date";
 
 	public static final String DAIRY_PHONE_NUMBER = "dairy.profile.phone";
+
+	public static final String DAIRY_LEGAL_NAME = "dairy.profile.legal_name";
 }

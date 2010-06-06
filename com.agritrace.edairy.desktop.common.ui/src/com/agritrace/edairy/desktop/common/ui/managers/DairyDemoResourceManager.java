@@ -428,7 +428,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Edward");
 		person.setFamilyName("Clinton");
 		supplier.getContacts().add(person);
-		dairyResource.getContents().add(supplier);
+//		dairyResource.getContents().add(supplier);
 	}
 
 	private void createSupplier2(Dairy dairy) throws ParseException {
@@ -449,7 +449,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		person.setGivenName("Tracy");
 		person.setFamilyName("Bill");
 		supplier.getContacts().add(person);
-		dairyResource.getContents().add(supplier);
+//		dairyResource.getContents().add(supplier);
 
 	}
 
@@ -470,7 +470,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		supplier.getContacts().add(createPerson("Tommy", "B", "Chong", "212-555-1212"));
 		supplier.getContacts().add(createPerson("Bruce", "B", "Willis", "408-555-1212"));
 
-		dairyResource.getContents().add(supplier);
+//		dairyResource.getContents().add(supplier);
 	}
 
 	/*
@@ -721,151 +721,6 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		return membership;
 	}
 
-	// private void createReq1(Dairy dairy) throws ParseException {
-	// final AnimalHealthRequest req =
-	// RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-	// req.setRequestId(1001l);
-	// req.setDate(DateTimeUtils.DATE_FORMAT.parse("05/03/2010"));
-	// req.setMember(randomOrNewMember(dairy));
-	//
-	// dairy.getAnimalHealthRequests().add(req);
-	//
-	// // MemberShiip
-	// req.setRequestingMember(randomOrNewMember(dairy));
-	//
-	// req.setType(RequestType.VETERINARY);
-	// req.setDateHeatDetected(Calendar.getInstance().getTime());
-	// req.setFirstTreatment(Calendar.getInstance().getTime());
-	// req.setSecondTreatment(Calendar.getInstance().getTime());
-	// req.setThirdTreatment(Calendar.getInstance().getTime());
-	// req.setReportedProblem("problem 1");
-	//
-	// final Farm farm = TrackingFactory.eINSTANCE.createFarm();
-	// farm.setFarmId(new Long(106001).longValue());
-	// farm.setName("Green Farm");
-	// final Location location1 = ModelFactory.eINSTANCE.createLocation();
-	// final PostalLocation defaultLocation =
-	// ModelFactory.eINSTANCE.createPostalLocation();
-	// defaultLocation.setAddress("2 - Ngeche");
-	// defaultLocation.setSection("Section A");
-	// defaultLocation.setEstate("Building B");
-	// defaultLocation.setVillage("West Windosr");
-	// defaultLocation.setSubLocation("Princeton Junction");
-	// defaultLocation.setLocation("Princeton");
-	// defaultLocation.setDivision("Mercer");
-	// defaultLocation.setDistrict("Central");
-	// defaultLocation.setProvince("Jersey");
-	// defaultLocation.setPostalCode("08550");
-	// location1.setPostalLocation(defaultLocation);
-	// farm.setLocation(location1);
-	// createFarmProperties(farm, 20, 20, 8000, 9000);
-	//
-	// req.setFarm(farm);
-	// // dairy.getMemberFarms().add(farm);
-	// // farmResource.getContents().add(farm);
-	//
-	// }
-	//
-	// private void createReq2(Dairy dairy) throws ParseException {
-	// final AnimalHealthRequest req =
-	// RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-	// req.setRequestId(1002l);
-	// req.setDate(DateTimeUtils.DATE_FORMAT.parse("04/01/2010"));
-	//
-	// dairy.getAnimalHealthRequests().add(req);
-	//
-	// // MemberShiip
-	// final Membership ship = randomOrNewMember(dairy);
-	//
-	// ship.setMember(createFarmer("Benjamin", "", "Linus", "123", (Farm)
-	// null));
-	// req.setRequestingMember(ship);
-	//
-	// req.setType(RequestType.INSEMINATION);
-	// req.setDateHeatDetected(Calendar.getInstance().getTime());
-	// req.setFirstTreatment(Calendar.getInstance().getTime());
-	// req.setSecondTreatment(Calendar.getInstance().getTime());
-	// req.setThirdTreatment(Calendar.getInstance().getTime());
-	// req.setReportedProblem("problem 2");
-	//
-	// final Farm farm = TrackingFactory.eINSTANCE.createFarm();
-	// farm.setFarmId(new Long(106002).longValue());
-	// farm.setName("Blue Farm");
-	// final Location location1 = ModelFactory.eINSTANCE.createLocation();
-	// final PostalLocation defaultLocation =
-	// ModelFactory.eINSTANCE.createPostalLocation();
-	// defaultLocation.setAddress("2 - Ngeche");
-	// defaultLocation.setSection("Section A");
-	// defaultLocation.setEstate("Building B");
-	// defaultLocation.setVillage("West Windosr");
-	// defaultLocation.setSubLocation("Princeton Junction");
-	// defaultLocation.setLocation("Princeton");
-	// defaultLocation.setDivision("Mercer");
-	// defaultLocation.setDistrict("Central");
-	// defaultLocation.setProvince("Jersey");
-	// defaultLocation.setPostalCode("08550");
-	// location1.setPostalLocation(defaultLocation);
-	// farm.setLocation(location1);
-	// createFarmProperties(farm, 20, 20, 8000, 9000);
-	//
-	// req.setFarm(farm);
-	// // dairy.getMemberFarms().add(farm);
-	// // farmResource.getContents().add(farm);
-	//
-	// }
-	//
-	// private void createReq3(Dairy dairy) throws ParseException {
-	// final AnimalHealthRequest req =
-	// RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-	// // req.setRequestId(1003l);
-	// req.setDate(Calendar.getInstance().getTime());
-	//
-	// dairy.getAnimalHealthRequests().add(req);
-	//
-	// // MemberShiip
-	// final Membership ship = randomOrNewMember(dairy);
-	//
-	// final Person person = ModelFactory.eINSTANCE.createPerson();
-	// person.setPhoneNumber("12345678");
-	// person.setGivenName("John");
-	// person.setFamilyName("Smith");
-	// // dairy.getAnimalHealthRequests().add(person);
-	//
-	// ship.setMember(createFarmer("John", "", "Locke", "123", (Farm) null));
-	// req.setRequestingMember(ship);
-	//
-	// req.setType(RequestType.VETERINARY);
-	// req.setDateHeatDetected(Calendar.getInstance().getTime());
-	// req.setFirstTreatment(Calendar.getInstance().getTime());
-	// req.setSecondTreatment(Calendar.getInstance().getTime());
-	// req.setThirdTreatment(Calendar.getInstance().getTime());
-	// req.setReportedProblem("problem 3");
-	//
-	// final Farm farm = TrackingFactory.eINSTANCE.createFarm();
-	// farm.setFarmId(new Long(106003).longValue());
-	// farm.setName("Yellow Farm");
-	// final Location location1 = ModelFactory.eINSTANCE.createLocation();
-	// final PostalLocation defaultLocation =
-	// ModelFactory.eINSTANCE.createPostalLocation();
-	// defaultLocation.setAddress("2 - Ngeche");
-	// defaultLocation.setSection("Section A");
-	// defaultLocation.setEstate("Building B");
-	// defaultLocation.setVillage("West Windosr");
-	// defaultLocation.setSubLocation("Princeton Junction");
-	// defaultLocation.setLocation("Princeton");
-	// defaultLocation.setDivision("Mercer");
-	// defaultLocation.setDistrict("Central");
-	// defaultLocation.setProvince("Jersey");
-	// defaultLocation.setPostalCode("08550");
-	// location1.setPostalLocation(defaultLocation);
-	// farm.setLocation(location1);
-	// createFarmProperties(farm, 20, 20, 8000, 9000);
-	//
-	// req.setFarm(farm);
-	// // dairy.getMemberFarms().add(farm);
-	// // farmResource.getContents().add(farm);
-	//
-	// }
 
 	/**
 	 * Gets dairy resource

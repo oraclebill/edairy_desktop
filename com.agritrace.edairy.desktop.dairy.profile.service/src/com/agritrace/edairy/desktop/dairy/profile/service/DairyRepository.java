@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
+package com.agritrace.edairy.desktop.dairy.profile.service;
 
 import java.util.List;
 
@@ -43,6 +43,7 @@ public class DairyRepository extends HibernateRepository<Dairy> {
 
 	@Override
 	public void saveNew(Dairy newEntity) {
+		newEntity.setCompanyId(null);
 		super.saveNew(newEntity);
 	}
 

@@ -43,9 +43,12 @@
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
       <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
+      <plugin id="com.agritrace.edairy.desktop.common.persistence.test.test"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.employees.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.profile.api"/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.profile.service"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.vehicles.ui"/>
       <plugin id="com.agritrace.edairy.desktop.deliveries.ui"/>
@@ -98,10 +101,12 @@
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.jdt.junit.runtime"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.pde.junit.runtime"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.rcp"/>
       <plugin id="org.eclipse.riena.beans.common"/>
@@ -143,8 +148,10 @@
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.hamcrest.core"/>
       <plugin id="org.hibernate"/>
       <plugin id="org.hsqldb"/>
+      <plugin id="org.junit"/>
       <plugin id="org.pushingpixels.trident"/>
    </plugins>
 

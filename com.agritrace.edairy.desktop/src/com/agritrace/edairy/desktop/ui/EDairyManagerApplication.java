@@ -115,7 +115,8 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		// FIXME: remove !!!
 		// setup memory based PM for development
-		PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
+//		PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
+//		PersistenceManager.setDefault(new PersistenceManager() );
 		
 //		ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 

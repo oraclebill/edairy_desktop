@@ -56,7 +56,9 @@ public class PersistenceManager {
 	public Session getSession() {
 		if (null == session) {
 			session = sessionFactory.openSession();
-		}		
+		} else if ( ! session.isConnected() ) {
+			session = sessionFactory.openSession();
+		}
 		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "]: providing session [" + session.hashCode() + "] on thread:  " + Thread.currentThread());
 		return session;
 	}

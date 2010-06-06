@@ -66,6 +66,8 @@ public class DairyProfileView extends SubModuleView {
 	private Button saveButton;
 	private Button cancelButton;
 
+	private Text txtLegalName;
+
 
 	public static final String ADDRESS_LABEL = "Address:";
 	public static final String SECTION_LABEL = "Section/Homestead:";
@@ -194,8 +196,7 @@ public class DairyProfileView extends SubModuleView {
 
 		// member count field
 		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Member Count:"));
-		fieldGridDataFactory.applyTo(txtMemberCount = UIControlsFactory.createText(nameArea, SWT.NONE,
-				DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT));
+		fieldGridDataFactory.applyTo(txtMemberCount = UIControlsFactory.createTextNumeric(nameArea, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT));
 
 		return nameArea;
 	}
@@ -263,6 +264,11 @@ public class DairyProfileView extends SubModuleView {
 		final GridDataFactory fieldGridDataFactory = GridDataFactory.createFrom(new GridData(SWT.FILL, SWT.CENTER,
 				true, false, 1, 1));
 
+		// Legal Name
+		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "Legal Name"));
+		fieldGridDataFactory.applyTo(txtLegalName = UIControlsFactory.createText(licenseArea, SWT.NONE,
+				DairyProfileViewWidgetID.DAIRY_LEGAL_NAME));
+		
 		// Registration Number
 		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(licenseArea, "Registration Number"));
 		fieldGridDataFactory.applyTo(txtRegistrationNum = UIControlsFactory.createText(licenseArea, SWT.NONE,

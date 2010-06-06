@@ -1,9 +1,14 @@
 package com.agritrace.edairy.desktop.common.persistence.test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.*;
+import org.eclipse.emf.common.*;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.Session;
@@ -13,16 +18,30 @@ import org.hibernate.cfg.Environment;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
-public class ModelPersistenceTestCase  extends TestCase {
+import static junit.framework.Assert.*;
+
+public class ModelPersistenceTestCase   {
 	
 	private SessionFactory sFactory;
 
-	@Before public void setupSessionFactory() {
+//	public void setUp() {
+//		// junit 3 adapter.
+//		setupSessionFactory();
+//	}
+	
+	@Before 
+	public void setupSessionFactory() {
 		// create the HbDataStore
 		String hbName = "dairytest";
 		String dbName = "dairytest";
@@ -51,11 +70,49 @@ public class ModelPersistenceTestCase  extends TestCase {
 		
 		hbds.setProperties(props);
 
+		EPackage pkg[] = { DairyPackage.eINSTANCE, TrackingPackage.eINSTANCE, ModelPackage.eINSTANCE, RequestsPackage.eINSTANCE, AccountPackage.eINSTANCE };  
+		
+		hbds.setEPackages((pkg));
 		hbds.initialize();
 		sFactory = hbds.getSessionFactory();
 	}
 	
-	@Test
+	@Test public void testSessionFailureBehaviour() throws Exception {
+		Session session = sFactory.openSession();
+		// do something that will fail, then try to do something else..
+
+		Dairy invalidDairy = DairyFactory.eINSTANCE.createDairy();
+		
+		Transaction tx = session.beginTransaction();
+		boolean rolledBack = false;
+		try {
+			invalidDairy.setLegalName("only valid property");
+			session.save(invalidDairy);
+			tx.commit();
+			fail("no exception");
+		}
+		catch(org.hibernate.PropertyValueException e) {
+			tx.rollback();
+			//session.clear();
+			rolledBack = true;
+		}
+		finally {
+		}
+		
+		assertEquals(true, rolledBack);
+//		assertEquals(false, session.isDirty());
+		
+		session = sFactory.openSession();
+		tx = session.beginTransaction();
+		// test starts here...
+		List<Dairy> dairyList = session.createQuery("FROM Dairy").list();
+		assertEquals(0, dairyList.size());
+		tx.commit();
+		
+		
+	}
+	
+//	@Test
 	public void testCreateDairyData() throws Exception {
 
 		
@@ -88,7 +145,7 @@ public class ModelPersistenceTestCase  extends TestCase {
 		
 		dairy = DairyDemoResourceManager.INSTANCE.createDairyData();
 		
-		
+		dairy.setLegalName("test");
 		session.save(dairy);
 		tx.commit();
 		session.close();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -128,7 +129,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.persist(getEntityName(), newEntity);
+				session.save(getEntityName(), newEntity);
 			}
 		});
 	}
@@ -138,7 +139,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.persist(getEntityName(), newEntity);
+				session.save(getEntityName(), newEntity);
 			}
 		});
 	}
@@ -171,6 +172,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 			t.commit();
 		} catch (final Exception ex) {
 			t.rollback();
+			session.close();
 			throw new TransactionException(entityName, ex);
 		} finally {
 			closeSession();
@@ -182,10 +184,13 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		openSession();
 		try {
 			results = q.list();
-			return results;
+		} catch( HibernateException hbe ) {
+			session.clear();
+			throw hbe;
 		} finally {
 			closeSession();
 		}
+		return results;
 	}
 
 	private void openSession() {

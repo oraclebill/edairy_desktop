@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.profile.service;
+package com.agritrace.edairy.desktop.dairy.profile.service.activator;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
