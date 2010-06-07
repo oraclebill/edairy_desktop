@@ -27,26 +27,7 @@ public class ServiceRecordDialogController extends RecordDialogController<Animal
 	public void configureRidgets() {
 		super.configureRidgets();
 		final AnimalHealthRequest request =  getWorkingCopy();
-		// ITextRidget memberIdText = getRidget(ITextRidget.class,
-		//						ServiceRequestListDialog.BIND_ID_MEMBER_ID); //$NON-NLS-1$
-		// memberIdText.setDirectWriting(true);
-		// memberIdText.setOutputOnly(false);
-		// memberIdText.bindToModel(request.getRequestingMember(),
-		// DairyPackage.Literals.MEMBERSHIP__MEMBER_ID.getName());
-		// memberIdText.updateFromModel();
-		//
-		// memberIdText.setOutputOnly(true);
 
-		//
-		// ITextRidget textDate = getRidget(ITextRidget.class,
-		// ServiceRequestListDialog.BIND_ID_REQUEST_DATE_TEXT);
-		// textDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-		// // /textDate.setOutputOnly(false);
-		// textDate.bindToModel(request,
-		// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
-		// .getName());
-		// textDate.updateFromModel();
-		// Start date
 		LookupControllerDelegate delegate = new LookupControllerDelegate(this,
 				PojoObservables.observeValue(request,
 						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
@@ -55,79 +36,7 @@ public class ServiceRecordDialogController extends RecordDialogController<Animal
 				ServiceRequestListDialog.BIND_ID_REQUEST_DATE_BUTTON);
 		delegate.configureRidgets();
 
-		// // Configure Member name
-		// ITextRidget txtMemberName = getRidget(ITextRidget.class,
-		// ServiceRequestListDialog.BIND_ID_MEMBER_NAME);
-		// txtMemberName.setDirectWriting(true);
-		// txtMemberName.setOutputOnly(false);
-		// txtMemberName.setModelToUIControlConverter(new IConverter() {
-		//
-		// @Override
-		// public Object getFromType() {
-		// return EMFObservables.observeValue(
-		// request.getRequestingMember(),
-		// DairyPackage.Literals.MEMBERSHIP__MEMBER)
-		// .getValueType();
-		// }
-		//
-		// @Override
-		// public Object getToType() {
-		// return String.class;
-		// }
-		//
-		// @Override
-		// public Object convert(Object fromObject) {
-		// if (fromObject instanceof Person) {
-		// return ((Person) fromObject).getGivenName() + " "
-		// + ((Person) fromObject).getFamilyName();
-		// }
-		// return null;
-		// }
-		// });
-		// txtMemberName.bindToModel(EMFObservables.observeValue(request
-		// .getRequestingMember(),
-		// DairyPackage.Literals.MEMBERSHIP__MEMBER));
-		//
-		// txtMemberName.updateFromModel();
-		// txtMemberName.setOutputOnly(true);
-		// // Farm Location
-		// IComboRidget farmCombo = getRidget(IComboRidget.class,
-		// ServiceRequestListDialog.BIND_ID_FARM);
-		// farmCombo.setOutputOnly(false);
-		// farmCombo.setModelToUIControlConverter(new IConverter() {
-		//
-		// @Override
-		// public Object getFromType() {
-		// return EMFObservables
-		// .observeValue(
-		// request,
-		// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM)
-		// .getValueType();
-		// }
-		//
-		// @Override
-		// public Object getToType() {
-		// return String.class;
-		// }
-		//
-		// @Override
-		// public Object convert(Object fromObject) {
-		// if (fromObject instanceof Farm) {
-		// Farm farm = (Farm) fromObject;
-		// return farm.getName();
-		//
-		// }
-		// return null;
-		// }
-		// });
-		// if (request.getRequestingMember() != null) {
-		// farmCombo.bindToModel(new WritableList(request
-		// .getRequestingMember().getFarms(), Farm.class),
-		// Farm.class, "name", new WritableValue(request
-		// .getFarm(), Farm.class));
-		// }
-		// farmCombo.updateFromModel();
-		// //
+
 		// Request Type/Veterinary
 		IToggleButtonRidget veterinaryRadioBtn = getRidget(
 				IToggleButtonRidget.class, "veterinary"); //$NON-NLS-1$

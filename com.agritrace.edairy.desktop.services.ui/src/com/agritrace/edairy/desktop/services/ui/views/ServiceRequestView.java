@@ -94,42 +94,6 @@ public class ServiceRequestView extends AbstractRecordListView {
 				START_DATE_BUTTON);
 		startDateLookup.createSection(startDateComp);
 
-		// UIControlsFactory.createLabel(startDateComp, "Start");
-		// final Text startDateText =
-		// UIControlsFactory.createText(startDateComp,
-		// SWT.BORDER, STARTE_DATE);
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
-		// false).applyTo(startDateText);
-		// // Default start time is the first day of this month
-		// startDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
-		// .getFirstDayOfMonth(Calendar.getInstance().getTime())));
-		//
-		// Button calendarButton = new Button(startDateComp, SWT.PUSH);
-		// Image calendar = Activator.getImage(ImageRegistry.calendar);
-		// calendarButton.setImage(calendar);
-		// GridDataFactory.swtDefaults().align(SWT.BEGINNING,
-		// SWT.BEGINNING).hint(
-		// 17, 16).applyTo(calendarButton);
-		// // addUIControl(calendarButton,ViewWidgetId.calendarButton);
-		//
-		// calendarButton.addSelectionListener(new SelectionAdapter() {
-		// @Override
-		// public void widgetSelected(SelectionEvent e) {
-		// CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-		// calDialog.getController().setContext(
-		// SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-		// startDateText.getText());
-		//
-		// if (calDialog.open() == AbstractWindowController.OK) {
-		// Date selectedDate = (Date) calDialog.getController()
-		// .getContext(SimpleFormattedDateBean.DATE_PROR);
-		// SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-		// bean.setDate(selectedDate);
-		// startDateText.setText(bean.getFormattedDate());
-		// }
-		// }
-		// });
-
 		Composite endDateComp = UIControlsFactory.createComposite(parent);
 		endDateComp.setLayout(GridLayoutFactory.swtDefaults().numColumns(3)
 				.margins(0, 0).create());
@@ -138,39 +102,6 @@ public class ServiceRequestView extends AbstractRecordListView {
 				.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON),
 				END_DATE_TEXT, END_DATE_BUTTON);
 		endDateLookup.createSection(endDateComp);
-		// UIControlsFactory.createLabel(endDateComp, "End");
-		// final Text endDateText = UIControlsFactory.createText(endDateComp,
-		// SWT.READ_ONLY | SWT.BORDER, END_DATE);
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
-		// false).applyTo(endDateText);
-		// endDateText.setText(ServiceUtils.DATE_FORMAT.format(ServiceUtils
-		// .getLastDayOfMonth(Calendar.getInstance().getTime())));
-		//
-		// Button calendarButton2 = new Button(endDateComp, SWT.PUSH);
-		// calendarButton2.setImage(calendar);
-		// GridDataFactory.swtDefaults().align(SWT.BEGINNING,
-		// SWT.BEGINNING).hint(
-		// 17, 16).applyTo(calendarButton2);
-		// // addUIControl(calendarButton,ViewWidgetId.calendarButton);
-		//
-		// calendarButton2.addSelectionListener(new SelectionAdapter() {
-		// @Override
-		// public void widgetSelected(SelectionEvent e) {
-		// CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-		// calDialog.getController().setContext(
-		// SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-		// endDateText.getText());
-		//
-		// if (calDialog.open() == AbstractWindowController.OK) {
-		// Date selectedDate = (Date) calDialog.getController()
-		// .getContext(SimpleFormattedDateBean.DATE_PROR);
-		// SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-		// bean.setDate(selectedDate);
-		// endDateText.setText(bean.getFormattedDate());
-		// }
-		// }
-		// });
-
 	}
 
 	private void createRequestType(Composite parent) {

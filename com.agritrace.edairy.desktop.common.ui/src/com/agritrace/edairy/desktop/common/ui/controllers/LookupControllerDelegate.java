@@ -22,6 +22,44 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
  */
 public class LookupControllerDelegate extends ControllerDelegate {
 
+	/**
+	 * When user clicks on calendar button, we present a calendar dialog. 
+	 * This class copies current date into dialog context, displays the dialog, 
+	 * and then copies the new value into the model object (also updating the display).
+	 * 
+	 * @author Hui
+	 *
+	 */
+	private final class CalendarSelectAction implements IActionListener {
+		private final IRidgetContainer container;
+
+		private CalendarSelectAction(IRidgetContainer container) {
+			this.container = container;
+		}
+
+		@Override
+		public void callback() {
+			final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
+
+			final ITextRidget textRidget = container.getRidget(ITextRidget.class, textId);
+			if (value.getValue() != null) {
+				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+						DateTimeUtils.DATE_FORMAT.format(value.getValue()));
+			} else {
+				// By default it will be today
+				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+						DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
+			}
+			final int ret = calDialog.open();
+			if (ret == AbstractWindowController.OK) {
+				final Date selectedDate = (Date) calDialog.getController().getContext(
+						SimpleFormattedDateBean.DATE_PROR);
+				value.setValue(selectedDate);
+				textRidget.updateFromModel();
+			}
+		}
+	}
+
 	private final IObservableValue value;
 	private final String textId;
 	private final String buttonId;
@@ -56,31 +94,7 @@ public class LookupControllerDelegate extends ControllerDelegate {
 			textRidget.updateFromModel();
 
 			final IActionRidget actionRidget = container.getRidget(IActionRidget.class, buttonId);
-			actionRidget.addListener(new IActionListener() {
-
-				@Override
-				public void callback() {
-					final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-
-					final ITextRidget textRidget = container.getRidget(ITextRidget.class, textId);
-					if (value.getValue() != null) {
-						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-								DateTimeUtils.DATE_FORMAT.format(value.getValue()));
-					} else {
-						// By default it will be today
-						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-								DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
-					}
-					final int ret = calDialog.open();
-					if (ret == AbstractWindowController.OK) {
-						final Date selectedDate = (Date) calDialog.getController().getContext(
-								SimpleFormattedDateBean.DATE_PROR);
-						value.setValue(selectedDate);
-						textRidget.updateFromModel();
-					}
-				}
-			});
+			actionRidget.addListener(new CalendarSelectAction(container));
 		}
-
 	}
 }

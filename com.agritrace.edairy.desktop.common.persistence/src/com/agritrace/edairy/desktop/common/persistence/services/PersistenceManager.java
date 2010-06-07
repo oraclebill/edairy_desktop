@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
+import org.eclipse.riena.core.RienaStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
@@ -36,6 +37,13 @@ public class PersistenceManager {
 			INSTANCE = pm;
 		else
 			throw new IllegalStateException("default instance already set");
+	}
+	
+	public static void reset(PersistenceManager pm) {
+		if (! "true".equals(System.getProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY))) {
+			throw new IllegalStateException("This method is for testing only!!");
+		}
+		INSTANCE = pm;
 	}
 	
 	protected PersistenceManager() {

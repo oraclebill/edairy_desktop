@@ -9,6 +9,24 @@ Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
  org.eclipse.emf.ecore;bundle-version="2.6.0",
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.services.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Import-Package: com.ibm.icu.impl,
+ com.ibm.icu.impl.data,
+ com.ibm.icu.impl.data.icudt42b,
+ com.ibm.icu.impl.data.icudt42b.brkitr,
+ com.ibm.icu.impl.data.icudt42b.coll,
+ com.ibm.icu.impl.data.icudt42b.rbnf,
+ com.ibm.icu.impl.data.icudt42b.translit,
+ com.ibm.icu.lang;version="4.2.1.1",
+ com.ibm.icu.math;version="4.2.1.1",
+ com.ibm.icu.text;version="4.2.1.1",
+ com.ibm.icu.util;version="4.2.1.1",
+ org.apache.oro.io;version="2.0.8",
+ org.apache.oro.text;version="2.0.8",
+ org.apache.oro.text.awk;version="2.0.8",
+ org.apache.oro.text.perl;version="2.0.8",
+ org.apache.oro.text.regex;version="2.0.8",
+ org.apache.oro.util;version="2.0.8"

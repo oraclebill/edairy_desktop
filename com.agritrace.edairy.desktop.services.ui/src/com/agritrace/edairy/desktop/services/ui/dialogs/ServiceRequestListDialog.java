@@ -49,16 +49,11 @@ public class ServiceRequestListDialog extends RecordDialog {
 	private RequestType previousType;
 	private Composite comp;
 	public static final String SPECIFIC_RPEFIX = "specific.";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = SPECIFIC_RPEFIX
-			+ "time.heated.detected";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_FIRST_TRETMENT = SPECIFIC_RPEFIX
-			+ "time.first.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_SECOND_TRETMENT = SPECIFIC_RPEFIX
-			+ "time.second.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_INSE_THIRD_TRETMENT = SPECIFIC_RPEFIX
-			+ "time.third.repeat";//$NON-NLS-1$
-	public static final String BIND_ID_VERY_THIRD_COMPLAINT = SPECIFIC_RPEFIX
-			+ "complaint";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_TIME_HEATED_DETECTED = SPECIFIC_RPEFIX + "time.heated.detected";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_FIRST_TRETMENT = SPECIFIC_RPEFIX + "time.first.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_SECOND_TRETMENT = SPECIFIC_RPEFIX + "time.second.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_INSE_THIRD_TRETMENT = SPECIFIC_RPEFIX + "time.third.repeat";//$NON-NLS-1$
+	public static final String BIND_ID_VERY_THIRD_COMPLAINT = SPECIFIC_RPEFIX + "complaint";//$NON-NLS-1$
 	public static final String BIND_ID_REQUEST_DATE_TEXT = "request.date.text";//$NON-NLS-1$
 	public static final String BIND_ID_REQUEST_DATE_BUTTON = "request.date.button";//$NON-NLS-1$
 	public static final String BIND_ID_MEMBER_TEXT = "member.lookup.text";//$NON-NLS-1$
@@ -71,8 +66,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 	public static final String BIND_ID_SPECIFIC_CONTAINER = "specific.container";//$NON-NLS-1$
 	private List<Object> injectedControls = new ArrayList<Object>();
 
-	public ServiceRequestListDialog(int style, Shell parentShell,
-			EObject selectedEObject, IRepository repo) {
+	public ServiceRequestListDialog(int style, Shell parentShell, EObject selectedEObject, IRepository repo) {
 		super(style, parentShell, selectedEObject, repo);
 
 	}
@@ -89,8 +83,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 		}
 		this.setShellStyle(SWT.RESIZE | SWT.CLOSE | SWT.TITLE);
 		newShell.setSize(340, 380);
-		newShell.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 
 	@Override
@@ -108,8 +101,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 		// Complaint
 		specialComp = UIControlsFactory.createComposite(comp);
 		specialComp.setLayout(new GridLayout(1, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(specialComp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(specialComp);
 		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); //$NON-NLS-1$
 		updateTypeSpecificControlls(RequestType.VETERINARY);
 	}
@@ -117,100 +109,33 @@ public class ServiceRequestListDialog extends RecordDialog {
 	private void createCommonControls(Composite parent) {
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(3, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
-				false).applyTo(comonComp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(comonComp);
 
 		// Create Start Date lookup
-		LookupComposite startDateLookup = new LookupComposite("Date", Activator
-				.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON),
-				BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
+		LookupComposite startDateLookup = new LookupComposite("Date", Activator.getDefault().getImageRegistry()
+				.get(Activator.CALENDAR_ICON), BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
 		startDateLookup.createSection(comonComp);
 
-		// UIControlsFactory.createLabel(comonComp, "Date");
-		// Composite dateComposte =
-		// UIControlsFactory.createComposite(comonComp);
-		// dateComposte.setLayout(GridLayoutFactory.swtDefaults().numColumns(2)
-		// .margins(0, 0).create());
-		//
-		// GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(
-		// true, false).span(2, 1).applyTo(dateComposte);
-		//
-		// Text txtDate = UIControlsFactory.createText(dateComposte);
-		// GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
-		// dateData.horizontalSpan = 1;
-		// dateData.grabExcessHorizontalSpace = true;
-		// txtDate.setLayoutData(dateData);
-		//		addUIControl(txtDate, BIND_ID_REQUEST_DATE); //$NON-NLS-1$
-
-		// Button button = new Button(dateComposte, SWT.PUSH);
-		// Image calendar = Activator.getImage(ImageRegistry.calendar);
-		// button.setImage(calendar);
-		// GridDataFactory.swtDefaults().align(SWT.BEGINNING,
-		// SWT.BEGINNING).hint(
-		// 17, 16).applyTo(button);
-
-		//		UIControlsFactory.createLabel(comonComp, "Member Lookup"); //$NON-NLS-1$
-		// Text memberLookupText = UIControlsFactory.createText(comonComp);
-		// GridData memberLookupData = new GridData(GridData.FILL_HORIZONTAL);
-		// memberLookupData.horizontalSpan = 2;
-		// memberLookupText.setLayoutData(memberLookupData);
-		//		addUIControl(memberLookupText, BIND_ID_MEMBER_LOOKUP); //$NON-NLS-1$
-		//
-		//		UIControlsFactory.createLabel(comonComp, "Member ID"); //$NON-NLS-1$
-		// Text txtID = UIControlsFactory.createText(comonComp);
-		// GridData textData = new GridData(GridData.FILL_HORIZONTAL);
-		// textData.horizontalSpan = 2;
-		// txtID.setLayoutData(textData);
-		//		addUIControl(txtID, BIND_ID_MEMBER_ID); //$NON-NLS-1$
-		//
-		//		UIControlsFactory.createLabel(comonComp, "Member Name"); //$NON-NLS-1$
-		// Text txtName = UIControlsFactory.createText(comonComp);
-		// txtName.setLayoutData(GridDataFactory.copyData(textData));
-		//		addUIControl(txtName, BIND_ID_MEMBER_NAME); //$NON-NLS-1$
-		//
-		//		UIControlsFactory.createLabel(comonComp, "Farm"); //$NON-NLS-1$
-		// // Text txtFarm = UIControlsFactory.createText(comonComp, SWT.MULTI);
-		// // GridData data = new GridData(GridData.FILL_HORIZONTAL);
-		// // data.heightHint = 50;
-		// // data.horizontalSpan = 2;
-		// // txtFarm.setLayoutData(data);
-		//		//		addUIControl(txtFarm, BIND_ID_FARM_NAME); //$NON-NLS-1$
-		//
-		// Combo farmCombo = UIControlsFactory.createCombo(comonComp);
-		// // //GridDataFactory.swtDefaults().grab(true,
-		// false).span(2,1).applyTo(farmCombo);
-		// // GridData data = new GridData(GridData.FILL_HORIZONTAL);
-		// // data.horizontalSpan =2;
-		// // farmCombo.setLayoutData(data);
-		// GridDataFactory.swtDefaults().align(SWT.FILL,
-		// SWT.BEGINNING).grab(true, false).span(2,1).applyTo(farmCombo);
-		// addUIControl(farmCombo, BIND_ID_FARM);
-
 		// Create farm lookup
-		LookupComposite farmLookup = new LookupComposite("Farm", Activator
-				.getDefault().getImageRegistry()
-				.get(Activator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT,
-				BIND_ID_FARM_BUTTON);
+		LookupComposite farmLookup = new LookupComposite("Farm", Activator.getDefault().getImageRegistry()
+				.get(Activator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT, BIND_ID_FARM_BUTTON);
 		farmLookup.createSection(comonComp);
+
 		// Create member lookup
-		LookupComposite memberLookup = new LookupComposite("Member", Activator
-				.getDefault().getImageRegistry()
-				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT,
-				BIND_ID_MEMBER_BUTTON);
+		LookupComposite memberLookup = new LookupComposite("Member", Activator.getDefault().getImageRegistry()
+				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT, BIND_ID_MEMBER_BUTTON);
 		memberLookup.createSection(comonComp);
 
 		UIControlsFactory.createLabel(comonComp, "Request Type"); //$NON-NLS-1$
 		Composite typeComposite = UIControlsFactory.createComposite(comonComp);
-		GridLayoutFactory.swtDefaults().numColumns(2).margins(0, 0).applyTo(
-				typeComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true,
-				false).span(2, 1).applyTo(typeComposite);
+		GridLayoutFactory.swtDefaults().numColumns(2).margins(0, 0).applyTo(typeComposite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1)
+				.applyTo(typeComposite);
 
-		Button veterinaryBtn = UIControlsFactory
-				.createButtonRadio(typeComposite);
+		Button veterinaryBtn = UIControlsFactory.createButtonRadio(typeComposite);
 		veterinaryBtn.setText("Veterinary");
 		addUIControl(veterinaryBtn, "veterinary"); //$NON-NLS-1$
-		veterinaryBtn.addSelectionListener(new SelectionListener(){
+		veterinaryBtn.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -220,13 +145,13 @@ public class ServiceRequestListDialog extends RecordDialog {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				updateTypeSpecificControlls(RequestType.VETERINARY);
-				
-			}});
-		Button inseminationBtn = UIControlsFactory
-				.createButtonRadio(typeComposite);
+
+			}
+		});
+		Button inseminationBtn = UIControlsFactory.createButtonRadio(typeComposite);
 		inseminationBtn.setText("Insemination");
 		addUIControl(inseminationBtn, "insemination"); //$NON-NLS-1$
-		inseminationBtn.addSelectionListener(new SelectionListener(){
+		inseminationBtn.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -236,35 +161,33 @@ public class ServiceRequestListDialog extends RecordDialog {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				updateTypeSpecificControlls(RequestType.INSEMINATION);
-				
-			}});
 
+			}
+		});
 
 	}
-	
-	protected  void updateTypeSpecificControlls(RequestType type)
-	{
+
+	protected void updateTypeSpecificControlls(RequestType type) {
 		updateUI(type);
 		// SwtRidgetFactory.
-		RidgetUtils.injectRidgets(Activator.getDefault().getBundle()
-				.getBundleContext(), getController(), injectedControls,
-				SWTBindingPropertyLocator.getInstance());
+		RidgetUtils.injectRidgets(Activator.getDefault().getBundle().getBundleContext(), getController(),
+				injectedControls, SWTBindingPropertyLocator.getInstance());
 	}
 
 	@Override
 	protected RecordDialogController createController() {
-		RecordDialogController controller = new ServiceRecordDialogController() ;
-//		controller.addListener(new IActionListener() {
-//
-//			@Override
-//			public void callback() {
-//				if (getSelectedEObject()!=null)
-// {
-//					EMFUtil.copy(getWorkingCopy(), getSelectedEObject(), 3);
-//				}
-//
-//			}
-//		});
+		RecordDialogController controller = new ServiceRecordDialogController();
+		// controller.addListener(new IActionListener() {
+		//
+		// @Override
+		// public void callback() {
+		// if (getSelectedEObject()!=null)
+		// {
+		// EMFUtil.copy(getWorkingCopy(), getSelectedEObject(), 3);
+		// }
+		//
+		// }
+		// });
 		return controller;
 	}
 
@@ -310,19 +233,15 @@ public class ServiceRequestListDialog extends RecordDialog {
 	private void createInseminationControls(Composite parent) {
 
 		inseminationComp = UIControlsFactory.createComposite(parent);
-		inseminationComp.setLayout(GridLayoutFactory.swtDefaults()
-				.margins(0, 0).create());
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(
-				inseminationComp);
+		inseminationComp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).create());
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationComp);
 		this.addUIControl(inseminationComp, "insemination-comp");
 		injectedControls.add(inseminationComp);
 
-		inseminationGroup = UIControlsFactory.createGroup(inseminationComp,
-				"Request Details");
+		inseminationGroup = UIControlsFactory.createGroup(inseminationComp, "Request Details");
 		GridLayout layout = new GridLayout(3, false);
 		inseminationGroup.setLayout(layout);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(
-				inseminationGroup);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationGroup);
 
 		UIControlsFactory.createLabel(inseminationGroup, "Time Heat Detected"); //$NON-NLS-1$
 		Text txtDate = UIControlsFactory.createText(inseminationGroup);
@@ -336,20 +255,15 @@ public class ServiceRequestListDialog extends RecordDialog {
 		Button button = new Button(inseminationGroup, SWT.PUSH);
 		Image calendar = Activator.getImage(ImageRegistry.calendar);
 		button.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(
-				17, 16).applyTo(button);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(button);
 		// Insemination
-		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup,
-				"Insemination"); //$NON-NLS-1$
+		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup, "Insemination"); //$NON-NLS-1$
 		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
 
-		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(
-				2, 1);
-		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults()
-				.indent(10, 0);
+		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(2, 1);
+		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults().indent(10, 0);
 		// First
-		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup,
-				"First"); //$NON-NLS-1$
+		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup, "First"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstLabel);
 
 		Text firstText = UIControlsFactory.createText(inseminationGroup);
@@ -359,8 +273,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 		injectedControls.add(firstText);
 
 		// First Repeat
-		Label firstRepeatLabel = UIControlsFactory.createLabel(
-				inseminationGroup, "First Repeat"); //$NON-NLS-1$
+		Label firstRepeatLabel = UIControlsFactory.createLabel(inseminationGroup, "First Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstRepeatLabel);
 
 		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup);
@@ -369,8 +282,7 @@ public class ServiceRequestListDialog extends RecordDialog {
 		injectedControls.add(firstRepeatText);
 
 		// 2nd Repeat
-		Label secondRepeatLabel = UIControlsFactory.createLabel(
-				inseminationGroup, "2nd Repeat"); //$NON-NLS-1$
+		Label secondRepeatLabel = UIControlsFactory.createLabel(inseminationGroup, "2nd Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(secondRepeatLabel);
 
 		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup);

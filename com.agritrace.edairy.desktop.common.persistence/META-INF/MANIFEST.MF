@@ -17,6 +17,7 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.mysql.jdbc,
  org.apache.commons.logging,
  org.dom4j,
+ org.eclipse.riena.core,
  org.hibernate.cfg;version="3.3.2",
  org.hibernate.dialect;version="3.3.2",
  org.hsqldb;version="1.8.1",

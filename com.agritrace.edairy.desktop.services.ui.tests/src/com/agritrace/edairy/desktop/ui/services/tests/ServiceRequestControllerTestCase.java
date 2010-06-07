@@ -2,6 +2,8 @@ package com.agritrace.edairy.desktop.ui.services.tests;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -12,9 +14,18 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
@@ -25,29 +36,21 @@ import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestControllerTestCase extends
-		AbstractSubModuleControllerTest<ServiceRequestViewController> {
+public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<ServiceRequestViewController> {
+
+	static HsqldbMemoryPersistenceManager testPersistenceManager;
+	static {
+		PersistenceManager.setDefault(testPersistenceManager = new HsqldbMemoryPersistenceManager());
+	}
 
 	List<AnimalHealthRequest> requests = new ArrayList<AnimalHealthRequest>();
-	private ServiceRequestViewController newInst;
 
 	@Override
 	protected ServiceRequestViewController createController(ISubModuleNode node) {
-		try {
-			initModel();
-		} catch (final ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (final CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		newInst = new ServiceRequestViewController();
+		ServiceRequestViewController newInst = new ServiceRequestViewController();
 		node.setNodeId(new NavigationNodeId("edm.services.log"));
 		newInst.setNavigationNode(node);
-		// newInst.setEMFModels(requests);
 		return newInst;
-
 	}
 
 	/**
@@ -56,62 +59,79 @@ public class ServiceRequestControllerTestCase extends
 	 * @throws ParseException
 	 * @throws CoreException
 	 */
-	private void initModel() throws ParseException, CoreException {
-		ServiceRequestResourceManager.INSTANCE.loadResources();
-		requests = ServiceRequestResourceManager.INSTANCE
-				.getObjectsFromDairyModel(AnimalHealthRequest.class);
+	private void initModel() {
+		PersistenceManager.reset(new HsqldbMemoryPersistenceManager());
+
+		Farm farm = DairyUtil.createFarm("daisy dukes", DairyUtil.createLocation(null, null, null));
+
+		Farmer farmer = DairyUtil.createFarmer("Joe", "", "Gibbs", "1234567", Arrays.asList(farm));
+
+		Date now = new Date();
+
+		Membership membership = DairyUtil.createMembership(now, now, farmer);
+
+		Dairy testDairy = DairyFactory.eINSTANCE.createDairy();
+		testDairy.setLegalName("test");
+		testDairy.setCompanyName("test co");
+		testDairy.setPhoneNumber("12345678");
+		testDairy.getMemberships().add(membership);
+		testDairy.setLocation(DairyUtil.createLocation(null, null, null));
+
+		PersistenceManager.getDefault().getSession().save(testDairy);
 
 	}
 
 	/**
 	 * Test the filter section and buttons
 	 */
-	public void testFilterSection() {
+	public void testWidgetsBound() {
+
+		initModel();
+
+		IController controller = getController();
 
 		// Default value of Start Date
-		final ITextRidget startDate = getController().getRidget(
-				ITextRidget.class, ServiceRequestView.START_DATE_TEXT);
+		final ITextRidget startDate = controller.getRidget(ITextRidget.class, ServiceRequestView.START_DATE_TEXT);
 		assertEquals(startDate.getText(), DateTimeUtils.getFirstDayofMonth());
 
 		// Default value of End date
-		final ITextRidget endDate = getController().getRidget(
-				ITextRidget.class, ServiceRequestView.END_DATE_TEXT);
+		final ITextRidget endDate = controller.getRidget(ITextRidget.class, ServiceRequestView.END_DATE_TEXT);
 		assertEquals(endDate.getText(), DateTimeUtils.getLastDayofMonth());
 
 		// All type button
-		final IToggleButtonRidget allTypeBtn = getController().getRidget(
-				IToggleButtonRidget.class,
+		final IToggleButtonRidget allTypeBtn = controller.getRidget(IToggleButtonRidget.class,
 				ServiceRequestView.REQUEST_TYPE_ALL);
 		assertTrue(allTypeBtn.isSelected());
 
 		// Verternary (Request type), By defalut verternary button is unchecked
-		final IToggleButtonRidget verterTypeBtn = getController().getRidget(
-				IToggleButtonRidget.class,
+		final IToggleButtonRidget verterTypeBtn = controller.getRidget(IToggleButtonRidget.class,
 				ServiceRequestView.REQUEST_TYPE_VERTERNARY);
 		assertFalse(verterTypeBtn.isSelected());
 
 		// By default insemeniation button is unchecked
-		final IToggleButtonRidget insemenitationTypeBtn = getController()
-				.getRidget(IToggleButtonRidget.class,
-						ServiceRequestView.REQUEST_TYPE_INSEMINATION);
+		final IToggleButtonRidget insemenitationTypeBtn = getController().getRidget(IToggleButtonRidget.class,
+				ServiceRequestView.REQUEST_TYPE_INSEMINATION);
 		assertFalse(insemenitationTypeBtn.isSelected());
 
-		// Verfiy
+		// farm lookup
+
+		// member lookup
+
+		// search button
+
 		// Configure column formatter for table ridget
-		final ITableRidget masterTable = getController().getRidget(
-				ITableRidget.class,
+		final ITableRidget masterTable = controller.getRidget(ITableRidget.class,
 				AbstractMasterDetailsComposite.BIND_ID_TABLE);
-		assertEquals(masterTable.getObservableList().size(), 3);
+		assertNotNull(masterTable);
+		assertNotNull(masterTable.getObservableList());
 
 		// Test Apply Button, Change some condition
-		final IActionRidget apply = getController().getRidget(
-				IActionRidget.class, ServiceRequestView.BIND_ID_FILTER_SEARCH);
+		final IActionRidget apply = controller.getRidget(IActionRidget.class, ServiceRequestView.BIND_ID_FILTER_SEARCH);
 
 		// Test Reset Button
-		// final IActionRidget reset = (IActionRidget)
-		// getController().getRidget(
-		// IActionRidget.class, ServiceRequestFilterSection.BIND_ID_RESET);
-		// reset.fireAction();
+		final IActionRidget reset = controller.getRidget(IActionRidget.class, ServiceRequestView.BIND_ID_FILTER_RESET);
+		reset.fireAction();
+
 
 		// TODO More items
 
