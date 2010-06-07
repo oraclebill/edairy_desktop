@@ -41,7 +41,6 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
  */
 public class DairyProfileViewController extends SubModuleController {
 
-	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
 
 	public static final String ID = DairyProfileViewController.class.getName();
 	private final IDairyRepository dairyRepository = new DairyRepository();
@@ -98,9 +97,7 @@ public class DairyProfileViewController extends SubModuleController {
 				localDairy = dairyRepository.findByKey(localDairy.getCompanyId());
 			}
 			else {
-				localDairy = DairyFactory.eINSTANCE.createDairy();
-				localDairy.setLocation(DairyUtil.createLocation(null, null, null));
-				localDairy.setCompanyId(getDairyId());
+				localDairy = dairyRepository.reloadLocalDairy();
 			}
 			initBindings();
 			updateBindings();
@@ -139,34 +136,7 @@ public class DairyProfileViewController extends SubModuleController {
 	 */
 	public DairyProfileViewController() {
 		super();
-		long dairyId = getDairyId();
-		Dairy myDairy = dairyRepository.findByKey(dairyId);
-		if (myDairy == null) {
-			myDairy = DairyFactory.eINSTANCE.createDairy();
-			myDairy.setLocation(DairyUtil.createLocation(null, null, null));
-			myDairy.setCompanyId(dairyId);
-			newDairy = true;
-		}
-		localDairy = myDairy;
-	}
-
-	/**
-	 * Get the dairy id from system property, or default to -1.
-	 * 
-	 * @return
-	 */
-	private long getDairyId() {
-		long id = -1;
-
-		String dairyId;
-		try {
-			dairyId = System.getProperty(EDAIRY_SITE_DAIRYID);
-			if (dairyId != null) {
-				id = new Long(dairyId).longValue();
-			}
-		} catch (Exception e) {
-		}
-		return id;
+		localDairy = dairyRepository.getLocalDairy();
 	}
 
 	/**
