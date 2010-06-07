@@ -27,6 +27,7 @@ import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
@@ -40,7 +41,7 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
-import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
+//import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -58,6 +59,34 @@ import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
  */
 public class ServiceRequestViewController extends AbstractRecordListController {
 
+	private final class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final MemberSearchDialog dialog = new MemberSearchDialog(new Shell());
+			final int ret = dialog.open();
+			if (Window.OK == ret) {
+				// Demo code
+				// farmText.setText("Farm1");
+
+			}
+
+		}
+	}
+
+	private final class FarmLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final FarmSearchDialog dialog = new FarmSearchDialog(new Shell());
+			final int ret = dialog.open();
+			if (Window.OK == ret) {
+				// Demo code
+				// farmText.setText("Farm1");
+
+			}
+
+		}
+	}
+
 	private IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
 
 	protected EClass getEClass() {
@@ -70,15 +99,27 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
 	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm", "Type" };
+	private IActionRidget farmLookupButton;
+	private IActionRidget memberLookupButton;
+	private IDateTextRidget startDateText;
+	private IDateTextRidget endDateText;
+	private SimpleFormattedDateBean startBean;
+	private SimpleFormattedDateBean endDateBean;
+	private ITableRidget masterTable;
+	private IToggleButtonRidget inseminationRidget;
+	private IToggleButtonRidget vertRidget;
+	private IToggleButtonRidget allRidget;
+	private ITextRidget farmText;
+	private ITextRidget memberText;
 	
-	
+	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
+	private final FarmLookupAction 	farmLookupAction = new FarmLookupAction();
 
 	@Override
 	public void configureTableRidget() {
-		ITableRidget masterTable = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
+		masterTable = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		// Configure column formatter
 		if (masterTable != null) {
-
 			// Date column
 			masterTable.setColumnFormatter(1, new ColumnFormatter() {
 
@@ -155,41 +196,32 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		super.resetFilterCondtions();
 		// for date range
 		// Start Date Default value
-		final ITextRidget startText = getRidget(ITextRidget.class, ServiceRequestView.START_DATE_TEXT);
-		if (startText != null) {
-			startText.setDirectWriting(true);
-			startText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance()
-					.getTime())));
+		if (startDateText != null) {
+			startDateText.setDirectWriting(true);
+			startDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar
+					.getInstance().getTime())));
 		}
+
 		// End date default value
-		final ITextRidget endDateText = getRidget(ITextRidget.class, ServiceRequestView.END_DATE_TEXT);
 		if (endDateText != null) {
 			endDateText.setDirectWriting(true);
 			endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance()
 					.getTime())));
-
 		}
+
 		// Request Type
-		final IToggleButtonRidget inseminationRidget = getRidget(IToggleButtonRidget.class,
-				ServiceRequestView.REQUEST_TYPE_INSEMINATION);
 		if (inseminationRidget != null) {
 			inseminationRidget.setSelected(false);
-			final IToggleButtonRidget vertRidget = getRidget(IToggleButtonRidget.class,
-					ServiceRequestView.REQUEST_TYPE_VERTERNARY);
 			vertRidget.setSelected(false);
-			final IToggleButtonRidget allRidget = getRidget(IToggleButtonRidget.class,
-					ServiceRequestView.REQUEST_TYPE_ALL);
 			allRidget.setSelected(true);
 		}
 
 		// Member Look
-		final ITextRidget memberText = getRidget(ITextRidget.class, ServiceRequestView.MEMBER_LOOKUP_TEXT);
 		if (memberText != null) {
 			memberText.setDirectWriting(true);
 			memberText.setText("");
 		}
 		// Farm Look
-		final ITextRidget farmText = getRidget(ITextRidget.class, ServiceRequestView.FARM_LOOKUP_TEXT);
 		if (farmText != null) {
 			farmText.setDirectWriting(true);
 			farmText.setText("");
@@ -205,7 +237,11 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	protected List getFilteredResult() {
 		try {
 			List<AnimalHealthRequest> requests = myDairy.allRequests();
-
+			
+			// shortcut if no requests to filter.
+			if ( requests.size() == 0 )
+				return requests;
+			
 			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
 			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 				@Override
@@ -220,14 +256,13 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			};
 
 			// Start Date
-			final ITextRidget memberIdText = getRidget(ITextRidget.class, ServiceRequestView.START_DATE_TEXT);
 			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
 
 			SELECT select = null;
-			if (memberIdText != null) {
+			if (startDateText != null) {
 				// StartDate
 				// memberIdText.updateFromModel();
-				final String startDate = memberIdText.getText();
+				final String startDate = startDateText.getText(); 
 
 				if (!"".equals(startDate)) {
 					final Condition startDateCondtion = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
@@ -240,7 +275,6 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 			}
 			// End Date
-			final ITextRidget endDateText = getRidget(ITextRidget.class, ServiceRequestView.END_DATE_TEXT);
 			if (endDateText != null) {
 				final String endDateStr = endDateText.getText();
 
@@ -256,10 +290,8 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 			// Request Type
 			// Verterinary
-			final IToggleButtonRidget veterinaryRidget = getRidget(IToggleButtonRidget.class,
-					ServiceRequestView.REQUEST_TYPE_VERTERNARY);
-			if (veterinaryRidget != null) {
-				final boolean isVerterinaryType = veterinaryRidget.isSelected();
+			if (vertRidget != null) {
+				final boolean isVerterinaryType = vertRidget.isSelected();
 				if (isVerterinaryType) {
 					final BooleanAdapter booleanAdapter = new BooleanAdapter() {
 
@@ -277,8 +309,6 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 				}
 			}
 			// Insemination conditions
-			final IToggleButtonRidget inseminationRidget = getRidget(IToggleButtonRidget.class,
-					ServiceRequestView.REQUEST_TYPE_INSEMINATION);
 			if (inseminationRidget != null) {
 				final boolean isInsemination = inseminationRidget.isSelected();
 				if (isInsemination) {
@@ -299,7 +329,6 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			}
 
 			// Member name field
-			final ITextRidget memberText = getRidget(ITextRidget.class, ServiceRequestView.MEMBER_LOOKUP_TEXT);
 			if (memberText != null) {
 				// String memberName = memberText.getText();
 				// if (!"".equals(memberName)) {
@@ -322,7 +351,6 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			}
 
 			// Member name field
-			final ITextRidget farmText = getRidget(ITextRidget.class, ServiceRequestView.FARM_LOOKUP_TEXT);
 			if (farmText != null) {
 				final String farmName = farmText.getText();
 				if (!"".equals(farmName)) {
@@ -379,56 +407,51 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 	@Override
 	protected void configureFilterRidgets() {
-		super.configureFilterRidgets();
-		SimpleFormattedDateBean startBean = new SimpleFormattedDateBean();
+		// super.configureFilterRidgets();
+		startBean = new SimpleFormattedDateBean();
 		// By default, it is the first day of this month
 		startBean.setDate(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance().getTime()));
+
 		// Start date
-		LookupControllerDelegate delegate = new LookupControllerDelegate(this, PojoObservables.observeValue(startBean,
-				"date"), ServiceRequestView.START_DATE_TEXT, ServiceRequestView.START_DATE_BUTTON);
-		delegate.configureRidgets();
-		// End date
-		SimpleFormattedDateBean endDateBean = new SimpleFormattedDateBean();
+		// LookupControllerDelegate delegate = new
+		// LookupControllerDelegate(this,
+		// PojoObservables.observeValue(startBean,
+		// "date"), ServiceRequestView.START_DATE_TEXT,
+		// ServiceRequestView.START_DATE_BUTTON);
+		// delegate.configureRidgets();
+
+		startDateText = getRidget(IDateTextRidget.class, ServiceRequestView.START_DATE_TEXT);
+		startDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		startDateText.bindToModel(PojoObservables.observeValue(startBean, "date"));
+		startDateText.updateFromModel();
+
+		endDateBean = new SimpleFormattedDateBean();
 		// By default, it is the first day of this month
 		endDateBean.setDate(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance().getTime()));
+
 		// Start date
-		LookupControllerDelegate endDelegate = new LookupControllerDelegate(this, PojoObservables.observeValue(
-				endDateBean, "date"), ServiceRequestView.END_DATE_TEXT, ServiceRequestView.END_DATE_BUTTON);
-		endDelegate.configureRidgets();
+		// LookupControllerDelegate endDelegate = new
+		// LookupControllerDelegate(this, PojoObservables.observeValue(
+		// endDateBean, "date"), ServiceRequestView.END_DATE_TEXT,
+		// ServiceRequestView.END_DATE_BUTTON);
+		// endDelegate.configureRidgets();
 
-		// Farm lookup
-		IActionRidget farmLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.FARM_LOOKUP_BUTTON);
-		farmLookupButton.addListener(new IActionListener() {
+		inseminationRidget = getRidget(IToggleButtonRidget.class, ServiceRequestView.REQUEST_TYPE_INSEMINATION);
+		vertRidget = getRidget(IToggleButtonRidget.class, ServiceRequestView.REQUEST_TYPE_VERTERNARY);
+		allRidget = getRidget(IToggleButtonRidget.class, ServiceRequestView.REQUEST_TYPE_ALL);
 
-			@Override
-			public void callback() {
-				final FarmSearchDialog dialog = new FarmSearchDialog(new Shell());
-				final int ret = dialog.open();
-				if (Window.OK == ret) {
-					// Demo code
-					// farmText.setText("Farm1");
+		endDateText = getRidget(IDateTextRidget.class, ServiceRequestView.END_DATE_TEXT);
+		endDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		endDateText.bindToModel(PojoObservables.observeValue(endDateBean, "date"));
+		endDateText.updateFromModel();
 
-				}
+		farmText = getRidget(ITextRidget.class, ServiceRequestView.FARM_LOOKUP_TEXT);
+		farmLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.FARM_LOOKUP_BUTTON);
+		farmLookupButton.addListener(farmLookupAction);
 
-			}
-		});
-
-		// Farm lookup
-		IActionRidget memberLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.MEMBER_LOOKUP_BUTTON);
-		memberLookupButton.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				final MemberSearchDialog dialog = new MemberSearchDialog(new Shell());
-				final int ret = dialog.open();
-				if (Window.OK == ret) {
-					// Demo code
-					// farmText.setText("Farm1");
-
-				}
-
-			}
-		});
+		memberText = getRidget(ITextRidget.class, ServiceRequestView.MEMBER_LOOKUP_TEXT);
+		memberLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.MEMBER_LOOKUP_BUTTON);
+		memberLookupButton.addListener(memberLookupAction);
 
 	}
 

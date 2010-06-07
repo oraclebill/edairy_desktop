@@ -6,6 +6,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.ui.swt.DatePickerComposite;
+import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
@@ -28,7 +30,6 @@ import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.common.ui.controls.LookupComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.RidgetUtils;
@@ -107,27 +108,31 @@ public class ServiceRequestListDialog extends RecordDialog {
 	}
 
 	private void createCommonControls(Composite parent) {
-		Composite comonComp = UIControlsFactory.createComposite(parent);
-		comonComp.setLayout(new GridLayout(3, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(comonComp);
+		Composite commonComp = UIControlsFactory.createComposite(parent);
+		commonComp.setLayout(new GridLayout(3, false));
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(commonComp);
 
 		// Create Start Date lookup
-		LookupComposite startDateLookup = new LookupComposite("Date", Activator.getDefault().getImageRegistry()
-				.get(Activator.CALENDAR_ICON), BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
-		startDateLookup.createSection(comonComp);
-
+//		LookupComposite startDateLookup = new LookupComposite("Date", Activator.getDefault().getImageRegistry()
+//				.get(Activator.CALENDAR_ICON), BIND_ID_REQUEST_DATE_TEXT, BIND_ID_REQUEST_DATE_BUTTON);
+//		startDateLookup.createSection(comonComp);
+		
+		UIControlsFactory.createLabel(commonComp, "Date");
+		final DatePickerComposite startDateLookup = UIControlsFactory.createDatePickerComposite(commonComp);
+		startDateLookup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		addUIControl(startDateLookup, BIND_ID_REQUEST_DATE_TEXT);
+		UIControlsFactory.createLabel(commonComp, ""); // filler
+		
 		// Create farm lookup
-		LookupComposite farmLookup = new LookupComposite("Farm", Activator.getDefault().getImageRegistry()
+		configureLookupFields(commonComp, "Farm", Activator.getDefault().getImageRegistry()
 				.get(Activator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT, BIND_ID_FARM_BUTTON);
-		farmLookup.createSection(comonComp);
 
 		// Create member lookup
-		LookupComposite memberLookup = new LookupComposite("Member", Activator.getDefault().getImageRegistry()
+		configureLookupFields(commonComp, "Member", Activator.getDefault().getImageRegistry()
 				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT, BIND_ID_MEMBER_BUTTON);
-		memberLookup.createSection(comonComp);
 
-		UIControlsFactory.createLabel(comonComp, "Request Type"); //$NON-NLS-1$
-		Composite typeComposite = UIControlsFactory.createComposite(comonComp);
+		UIControlsFactory.createLabel(commonComp, "Request Type"); //$NON-NLS-1$
+		Composite typeComposite = UIControlsFactory.createComposite(commonComp);
 		GridLayoutFactory.swtDefaults().numColumns(2).margins(0, 0).applyTo(typeComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).span(2, 1)
 				.applyTo(typeComposite);
@@ -291,4 +296,20 @@ public class ServiceRequestListDialog extends RecordDialog {
 		addUIControl(secondRepeatText, BIND_ID_INSE_THIRD_TRETMENT);
 		injectedControls.add(secondRepeatText);
 	}
+	
+	private void configureLookupFields(Composite parent, String label, Image icon, String textBindId, String buttonBindId) {
+		UIControlsFactory.createLabel(parent, label);
+		
+		// date text
+		final Text textWidget = UIControlsFactory.createText(parent);
+		textWidget.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		addUIControl(textWidget, textBindId);
+		
+		// Search Button
+		final ImageButton buttonWidget = UIControlsFactory.createImageButton(parent, SWT.None);
+		buttonWidget.setImage(icon);
+		addUIControl(buttonWidget, buttonBindId);
+		
+	}
+
 }

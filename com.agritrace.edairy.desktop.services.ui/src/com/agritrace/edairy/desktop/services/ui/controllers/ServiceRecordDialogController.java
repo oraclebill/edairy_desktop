@@ -7,19 +7,21 @@ import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
 
 public class ServiceRecordDialogController extends RecordDialogController<AnimalHealthRequest> {
 
+	IDateTextRidget textRidget;
+	
 	public ServiceRecordDialogController() {
 		super();
 	}
@@ -28,15 +30,22 @@ public class ServiceRecordDialogController extends RecordDialogController<Animal
 		super.configureRidgets();
 		final AnimalHealthRequest request =  getWorkingCopy();
 
-		LookupControllerDelegate delegate = new LookupControllerDelegate(this,
-				PojoObservables.observeValue(request,
-						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
-								.getName()),
-				ServiceRequestListDialog.BIND_ID_REQUEST_DATE_TEXT,
-				ServiceRequestListDialog.BIND_ID_REQUEST_DATE_BUTTON);
-		delegate.configureRidgets();
+//		LookupControllerDelegate delegate = new LookupControllerDelegate(this,
+//				PojoObservables.observeValue(request,
+//						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
+//								.getName()),
+//				ServiceRequestListDialog.BIND_ID_REQUEST_DATE_TEXT,
+//				ServiceRequestListDialog.BIND_ID_REQUEST_DATE_BUTTON);
+//		delegate.configureRidgets();
 
-
+		textRidget = getRidget(IDateTextRidget.class, ServiceRequestListDialog.BIND_ID_REQUEST_DATE_TEXT);
+		textRidget.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		textRidget.bindToModel(PojoObservables.observeValue(request,
+				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE
+				.getName()));
+		textRidget.updateFromModel();
+		
+		
 		// Request Type/Veterinary
 		IToggleButtonRidget veterinaryRadioBtn = getRidget(
 				IToggleButtonRidget.class, "veterinary"); //$NON-NLS-1$

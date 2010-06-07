@@ -71,7 +71,7 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 */
 	private void createFilter(Composite parent) {
 		final Composite comp = UIControlsFactory.createComposite(parent);
-		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(3).create());
+		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).equalWidth(true).numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
 		// Create filter conditions
 		createFilterCondtions(comp);
