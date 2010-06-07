@@ -5,7 +5,12 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 
 public class DairyRepository  implements IDairyRepository {
@@ -16,6 +21,46 @@ public class DairyRepository  implements IDairyRepository {
 	private static final HibernateRepository<Route> routeRepository = new HibernateRepository<Route>() {
 		protected Class<Route> getClassType() { return Route.class; }
 	};
+	private static final HibernateRepository<DairyContainer> binRepository = new HibernateRepository<DairyContainer>() {
+		protected Class<DairyContainer> getClassType() { return DairyContainer.class; }
+	};
+	private static final HibernateRepository<Vehicle> vehicleRepository = new HibernateRepository<Vehicle>() {
+		protected Class<Vehicle> getClassType() { return Vehicle.class; }
+	};
+	
+	private static final HibernateRepository<Employee> employeeRepository = new HibernateRepository<Employee>() {
+		protected Class<Employee> getClassType() { return Employee.class; }
+	};
+	
+	private static final HibernateRepository<Membership> memberRepository = new HibernateRepository<Membership>() {
+		protected Class<Membership> getClassType() { return Membership.class; }
+	};
+	
+	public List<DairyContainer> getDairyBins() {
+		// TODO Auto-generated method stub
+		return binRepository.all();
+	}
+
+	public List<Vehicle> getVehicles() {
+		// TODO Auto-generated method stub
+		return vehicleRepository.all();
+	}
+
+	public List<Employee> getEmployees(String string) {
+		// TODO Auto-generated method stub
+		return employeeRepository.find("From employee where jobfunction='" + string + "'");
+	}
+
+	public Membership getMembershipById(String memberId) {
+		// TODO Auto-generated method stub
+		return memberRepository.findByKey(Long.parseLong(memberId));
+	}
+
+	public Container getContainerById(String canId) {
+		// TODO Auto-generated method stub
+		return binRepository.findByKey(Long.parseLong(canId));
+	}
+	
 
 	public Dairy getByName(String name) {
 		List<Dairy> list = find("FROM Dairy where name='" + name + "'");
