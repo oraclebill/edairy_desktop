@@ -32,7 +32,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 			@Override
 			public void callback() {
 				setReturnCode(OK);
-				setContext("selected", selected);
+				setContext("selected", getSelected());
 				System.out.println("OK calling dispose");
 				getWindowRidget().dispose();
 			}

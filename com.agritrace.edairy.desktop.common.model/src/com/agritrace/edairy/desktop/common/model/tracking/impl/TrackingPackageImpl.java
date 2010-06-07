@@ -444,6 +444,114 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRegisteredAnimal_BirthCertificateNumber() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_VeterinaryCertificateNumber() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_MinistryId() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_InsuranceCompany() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_FeedingHabit() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_FeedType() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_FeedBrand() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(21);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Supplements() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(22);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Antibiotics() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(23);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Veterinary() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(24);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Awards() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(25);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Notes() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(26);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReferenceAnimalType() {
 		return referenceAnimalTypeEClass;
 	}
@@ -605,6 +713,18 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__PAST_OWNERS);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__INSURANCE_NUMBER);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__DATE_OF_BIRTH);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__MINISTRY_ID);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__INSURANCE_COMPANY);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__FEEDING_HABIT);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__FEED_TYPE);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__FEED_BRAND);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__SUPPLEMENTS);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__ANTIBIOTICS);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__VETERINARY);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__AWARDS);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__NOTES);
 
 		referenceAnimalTypeEClass = createEClass(REFERENCE_ANIMAL_TYPE);
 		createEAttribute(referenceAnimalTypeEClass, REFERENCE_ANIMAL_TYPE__SPECIES);
@@ -692,6 +812,18 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEAttribute(getRegisteredAnimal_PastOwners(), ecorePackage.getEString(), "pastOwners", null, 0, -1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegisteredAnimal_InsuranceNumber(), ecorePackage.getEString(), "insuranceNumber", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegisteredAnimal_DateOfBirth(), ecorePackage.getEDate(), "dateOfBirth", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_BirthCertificateNumber(), ecorePackage.getEString(), "birthCertificateNumber", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_VeterinaryCertificateNumber(), ecorePackage.getEString(), "veterinaryCertificateNumber", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_MinistryId(), ecorePackage.getEString(), "ministryId", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_InsuranceCompany(), ecorePackage.getEString(), "insuranceCompany", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_FeedingHabit(), ecorePackage.getEString(), "feedingHabit", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_FeedType(), ecorePackage.getEString(), "feedType", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_FeedBrand(), ecorePackage.getEString(), "feedBrand", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Supplements(), ecorePackage.getEString(), "supplements", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Antibiotics(), ecorePackage.getEString(), "antibiotics", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Veterinary(), ecorePackage.getEString(), "veterinary", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Awards(), ecorePackage.getEString(), "awards", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Notes(), ecorePackage.getEString(), "notes", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceAnimalTypeEClass, ReferenceAnimalType.class, "ReferenceAnimalType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getReferenceAnimalType_Species(), ecorePackage.getEString(), "species", null, 0, 1, ReferenceAnimalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -52,6 +52,18 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getPastOwners <em>Past Owners</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getInsuranceNumber <em>Insurance Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getDateOfBirth <em>Date Of Birth</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getBirthCertificateNumber <em>Birth Certificate Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getVeterinaryCertificateNumber <em>Veterinary Certificate Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getMinistryId <em>Ministry Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getInsuranceCompany <em>Insurance Company</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getFeedingHabit <em>Feeding Habit</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getFeedType <em>Feed Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getFeedBrand <em>Feed Brand</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getSupplements <em>Supplements</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getAntibiotics <em>Antibiotics</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getVeterinary <em>Veterinary</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getAwards <em>Awards</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getNotes <em>Notes</em>}</li>
  * </ul>
  * </p>
  *
@@ -307,6 +319,246 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @ordered
 	 */
 	protected Date dateOfBirth = DATE_OF_BIRTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getBirthCertificateNumber() <em>Birth Certificate Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBirthCertificateNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BIRTH_CERTIFICATE_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBirthCertificateNumber() <em>Birth Certificate Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBirthCertificateNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String birthCertificateNumber = BIRTH_CERTIFICATE_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVeterinaryCertificateNumber() <em>Veterinary Certificate Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVeterinaryCertificateNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VETERINARY_CERTIFICATE_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVeterinaryCertificateNumber() <em>Veterinary Certificate Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVeterinaryCertificateNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String veterinaryCertificateNumber = VETERINARY_CERTIFICATE_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMinistryId() <em>Ministry Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinistryId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MINISTRY_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMinistryId() <em>Ministry Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinistryId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String ministryId = MINISTRY_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getInsuranceCompany() <em>Insurance Company</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInsuranceCompany()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String INSURANCE_COMPANY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getInsuranceCompany() <em>Insurance Company</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInsuranceCompany()
+	 * @generated
+	 * @ordered
+	 */
+	protected String insuranceCompany = INSURANCE_COMPANY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFeedingHabit() <em>Feeding Habit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeedingHabit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FEEDING_HABIT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFeedingHabit() <em>Feeding Habit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeedingHabit()
+	 * @generated
+	 * @ordered
+	 */
+	protected String feedingHabit = FEEDING_HABIT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFeedType() <em>Feed Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FEED_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFeedType() <em>Feed Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String feedType = FEED_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getFeedBrand() <em>Feed Brand</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeedBrand()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FEED_BRAND_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFeedBrand() <em>Feed Brand</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeedBrand()
+	 * @generated
+	 * @ordered
+	 */
+	protected String feedBrand = FEED_BRAND_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSupplements() <em>Supplements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSupplements()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUPPLEMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSupplements() <em>Supplements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSupplements()
+	 * @generated
+	 * @ordered
+	 */
+	protected String supplements = SUPPLEMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAntibiotics() <em>Antibiotics</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAntibiotics()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ANTIBIOTICS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAntibiotics() <em>Antibiotics</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAntibiotics()
+	 * @generated
+	 * @ordered
+	 */
+	protected String antibiotics = ANTIBIOTICS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVeterinary() <em>Veterinary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVeterinary()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VETERINARY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVeterinary() <em>Veterinary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVeterinary()
+	 * @generated
+	 * @ordered
+	 */
+	protected String veterinary = VETERINARY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAwards() <em>Awards</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAwards()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String AWARDS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAwards() <em>Awards</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAwards()
+	 * @generated
+	 * @ordered
+	 */
+	protected String awards = AWARDS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNotes() <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNotes()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NOTES_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNotes() <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNotes()
+	 * @generated
+	 * @ordered
+	 */
+	protected String notes = NOTES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -685,6 +937,258 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getBirthCertificateNumber() {
+		return birthCertificateNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBirthCertificateNumber(String newBirthCertificateNumber) {
+		String oldBirthCertificateNumber = birthCertificateNumber;
+		birthCertificateNumber = newBirthCertificateNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER, oldBirthCertificateNumber, birthCertificateNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getVeterinaryCertificateNumber() {
+		return veterinaryCertificateNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVeterinaryCertificateNumber(String newVeterinaryCertificateNumber) {
+		String oldVeterinaryCertificateNumber = veterinaryCertificateNumber;
+		veterinaryCertificateNumber = newVeterinaryCertificateNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER, oldVeterinaryCertificateNumber, veterinaryCertificateNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMinistryId() {
+		return ministryId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMinistryId(String newMinistryId) {
+		String oldMinistryId = ministryId;
+		ministryId = newMinistryId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__MINISTRY_ID, oldMinistryId, ministryId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getInsuranceCompany() {
+		return insuranceCompany;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInsuranceCompany(String newInsuranceCompany) {
+		String oldInsuranceCompany = insuranceCompany;
+		insuranceCompany = newInsuranceCompany;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__INSURANCE_COMPANY, oldInsuranceCompany, insuranceCompany));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFeedingHabit() {
+		return feedingHabit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFeedingHabit(String newFeedingHabit) {
+		String oldFeedingHabit = feedingHabit;
+		feedingHabit = newFeedingHabit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__FEEDING_HABIT, oldFeedingHabit, feedingHabit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFeedType() {
+		return feedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFeedType(String newFeedType) {
+		String oldFeedType = feedType;
+		feedType = newFeedType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__FEED_TYPE, oldFeedType, feedType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFeedBrand() {
+		return feedBrand;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFeedBrand(String newFeedBrand) {
+		String oldFeedBrand = feedBrand;
+		feedBrand = newFeedBrand;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__FEED_BRAND, oldFeedBrand, feedBrand));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSupplements() {
+		return supplements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSupplements(String newSupplements) {
+		String oldSupplements = supplements;
+		supplements = newSupplements;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__SUPPLEMENTS, oldSupplements, supplements));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAntibiotics() {
+		return antibiotics;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAntibiotics(String newAntibiotics) {
+		String oldAntibiotics = antibiotics;
+		antibiotics = newAntibiotics;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANTIBIOTICS, oldAntibiotics, antibiotics));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getVeterinary() {
+		return veterinary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVeterinary(String newVeterinary) {
+		String oldVeterinary = veterinary;
+		veterinary = newVeterinary;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__VETERINARY, oldVeterinary, veterinary));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAwards() {
+		return awards;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAwards(String newAwards) {
+		String oldAwards = awards;
+		awards = newAwards;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__AWARDS, oldAwards, awards));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNotes() {
+		return notes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNotes(String newNotes) {
+		String oldNotes = notes;
+		notes = newNotes;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__NOTES, oldNotes, notes));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -736,6 +1240,30 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return getInsuranceNumber();
 			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
 				return getDateOfBirth();
+			case TrackingPackage.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER:
+				return getBirthCertificateNumber();
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER:
+				return getVeterinaryCertificateNumber();
+			case TrackingPackage.REGISTERED_ANIMAL__MINISTRY_ID:
+				return getMinistryId();
+			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_COMPANY:
+				return getInsuranceCompany();
+			case TrackingPackage.REGISTERED_ANIMAL__FEEDING_HABIT:
+				return getFeedingHabit();
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_TYPE:
+				return getFeedType();
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_BRAND:
+				return getFeedBrand();
+			case TrackingPackage.REGISTERED_ANIMAL__SUPPLEMENTS:
+				return getSupplements();
+			case TrackingPackage.REGISTERED_ANIMAL__ANTIBIOTICS:
+				return getAntibiotics();
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY:
+				return getVeterinary();
+			case TrackingPackage.REGISTERED_ANIMAL__AWARDS:
+				return getAwards();
+			case TrackingPackage.REGISTERED_ANIMAL__NOTES:
+				return getNotes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -796,6 +1324,42 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
 				setDateOfBirth((Date)newValue);
 				return;
+			case TrackingPackage.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER:
+				setBirthCertificateNumber((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER:
+				setVeterinaryCertificateNumber((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__MINISTRY_ID:
+				setMinistryId((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_COMPANY:
+				setInsuranceCompany((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__FEEDING_HABIT:
+				setFeedingHabit((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_TYPE:
+				setFeedType((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_BRAND:
+				setFeedBrand((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__SUPPLEMENTS:
+				setSupplements((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__ANTIBIOTICS:
+				setAntibiotics((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY:
+				setVeterinary((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__AWARDS:
+				setAwards((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__NOTES:
+				setNotes((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -853,6 +1417,42 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
 				setDateOfBirth(DATE_OF_BIRTH_EDEFAULT);
 				return;
+			case TrackingPackage.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER:
+				setBirthCertificateNumber(BIRTH_CERTIFICATE_NUMBER_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER:
+				setVeterinaryCertificateNumber(VETERINARY_CERTIFICATE_NUMBER_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__MINISTRY_ID:
+				setMinistryId(MINISTRY_ID_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_COMPANY:
+				setInsuranceCompany(INSURANCE_COMPANY_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__FEEDING_HABIT:
+				setFeedingHabit(FEEDING_HABIT_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_TYPE:
+				setFeedType(FEED_TYPE_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_BRAND:
+				setFeedBrand(FEED_BRAND_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__SUPPLEMENTS:
+				setSupplements(SUPPLEMENTS_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__ANTIBIOTICS:
+				setAntibiotics(ANTIBIOTICS_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY:
+				setVeterinary(VETERINARY_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__AWARDS:
+				setAwards(AWARDS_EDEFAULT);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__NOTES:
+				setNotes(NOTES_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -895,6 +1495,30 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return INSURANCE_NUMBER_EDEFAULT == null ? insuranceNumber != null : !INSURANCE_NUMBER_EDEFAULT.equals(insuranceNumber);
 			case TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH:
 				return DATE_OF_BIRTH_EDEFAULT == null ? dateOfBirth != null : !DATE_OF_BIRTH_EDEFAULT.equals(dateOfBirth);
+			case TrackingPackage.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER:
+				return BIRTH_CERTIFICATE_NUMBER_EDEFAULT == null ? birthCertificateNumber != null : !BIRTH_CERTIFICATE_NUMBER_EDEFAULT.equals(birthCertificateNumber);
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER:
+				return VETERINARY_CERTIFICATE_NUMBER_EDEFAULT == null ? veterinaryCertificateNumber != null : !VETERINARY_CERTIFICATE_NUMBER_EDEFAULT.equals(veterinaryCertificateNumber);
+			case TrackingPackage.REGISTERED_ANIMAL__MINISTRY_ID:
+				return MINISTRY_ID_EDEFAULT == null ? ministryId != null : !MINISTRY_ID_EDEFAULT.equals(ministryId);
+			case TrackingPackage.REGISTERED_ANIMAL__INSURANCE_COMPANY:
+				return INSURANCE_COMPANY_EDEFAULT == null ? insuranceCompany != null : !INSURANCE_COMPANY_EDEFAULT.equals(insuranceCompany);
+			case TrackingPackage.REGISTERED_ANIMAL__FEEDING_HABIT:
+				return FEEDING_HABIT_EDEFAULT == null ? feedingHabit != null : !FEEDING_HABIT_EDEFAULT.equals(feedingHabit);
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_TYPE:
+				return FEED_TYPE_EDEFAULT == null ? feedType != null : !FEED_TYPE_EDEFAULT.equals(feedType);
+			case TrackingPackage.REGISTERED_ANIMAL__FEED_BRAND:
+				return FEED_BRAND_EDEFAULT == null ? feedBrand != null : !FEED_BRAND_EDEFAULT.equals(feedBrand);
+			case TrackingPackage.REGISTERED_ANIMAL__SUPPLEMENTS:
+				return SUPPLEMENTS_EDEFAULT == null ? supplements != null : !SUPPLEMENTS_EDEFAULT.equals(supplements);
+			case TrackingPackage.REGISTERED_ANIMAL__ANTIBIOTICS:
+				return ANTIBIOTICS_EDEFAULT == null ? antibiotics != null : !ANTIBIOTICS_EDEFAULT.equals(antibiotics);
+			case TrackingPackage.REGISTERED_ANIMAL__VETERINARY:
+				return VETERINARY_EDEFAULT == null ? veterinary != null : !VETERINARY_EDEFAULT.equals(veterinary);
+			case TrackingPackage.REGISTERED_ANIMAL__AWARDS:
+				return AWARDS_EDEFAULT == null ? awards != null : !AWARDS_EDEFAULT.equals(awards);
+			case TrackingPackage.REGISTERED_ANIMAL__NOTES:
+				return NOTES_EDEFAULT == null ? notes != null : !NOTES_EDEFAULT.equals(notes);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -931,6 +1555,30 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 		result.append(insuranceNumber);
 		result.append(", dateOfBirth: ");
 		result.append(dateOfBirth);
+		result.append(", birthCertificateNumber: ");
+		result.append(birthCertificateNumber);
+		result.append(", veterinaryCertificateNumber: ");
+		result.append(veterinaryCertificateNumber);
+		result.append(", ministryId: ");
+		result.append(ministryId);
+		result.append(", insuranceCompany: ");
+		result.append(insuranceCompany);
+		result.append(", feedingHabit: ");
+		result.append(feedingHabit);
+		result.append(", feedType: ");
+		result.append(feedType);
+		result.append(", feedBrand: ");
+		result.append(feedBrand);
+		result.append(", supplements: ");
+		result.append(supplements);
+		result.append(", antibiotics: ");
+		result.append(antibiotics);
+		result.append(", veterinary: ");
+		result.append(veterinary);
+		result.append(", awards: ");
+		result.append(awards);
+		result.append(", notes: ");
+		result.append(notes);
 		result.append(')');
 		return result.toString();
 	}

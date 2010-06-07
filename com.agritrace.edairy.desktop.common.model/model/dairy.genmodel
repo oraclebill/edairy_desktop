@@ -369,6 +369,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/pastOwners"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/insuranceNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/dateOfBirth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/birthCertificateNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/veterinaryCertificateNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/ministryId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/insuranceCompany"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/feedingHabit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/feedType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/feedBrand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/supplements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/antibiotics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/veterinary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/awards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//RegisteredAnimal/notes"/>
     </genClasses>
     <genClasses ecoreClass="farm.ecore#//ReferenceAnimalType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//ReferenceAnimalType/species"/>

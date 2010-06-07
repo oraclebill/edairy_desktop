@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.util;
 
+import com.agritrace.edairy.desktop.common.model.dairy.account.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

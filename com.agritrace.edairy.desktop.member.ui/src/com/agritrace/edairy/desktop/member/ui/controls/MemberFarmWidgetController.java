@@ -10,6 +10,7 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
@@ -24,10 +25,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
+import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.views.AddFarmDialog;
+import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 
 public class MemberFarmWidgetController implements WidgetController, ISelectionListener {
 
@@ -91,15 +96,31 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
 						| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
-				final AddFarmDialog dialog = new AddFarmDialog(shell);
-				dialog.setMemberShip(selectedMember);
-				if (dialog.open() == Window.OK) {
-					final Farm newFarm = dialog.getNewFarm();
+				Location newFarmLocation = DairyUtil.createLocation("", "", "", "", "", "", "", "", "", "");
+				Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
+				FarmListViewTableNode newNode =new FarmListViewTableNode(selectedMember, newFarm);
+				final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
+				memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+						newNode);
+
+				int returnCode = memberDialog.open();
+				if (returnCode == AbstractWindowController.OK) {
+					newNode = (FarmListViewTableNode) memberDialog.getController()
+							.getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
 					selectedMember.getMember().getFarms().add(newFarm);
 					memberRepository.update(selectedMember);
 					farms.add(newFarm);
 					farmTable.updateFromModel();
 				}
+//				final AddFarmDialog dialog = new AddFarmDialog(shell);
+//				dialog.setMemberShip(selectedMember);
+//				if (dialog.open() == Window.OK) {
+//					final Farm newFarm = dialog.getNewFarm();
+//					selectedMember.getMember().getFarms().add(newFarm);
+//					memberRepository.update(selectedMember);
+//					farms.add(newFarm);
+//					farmTable.updateFromModel();
+//				}
 			}
 		});
 
