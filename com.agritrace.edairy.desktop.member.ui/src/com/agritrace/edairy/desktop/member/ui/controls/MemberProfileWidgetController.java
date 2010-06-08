@@ -30,9 +30,9 @@ public class MemberProfileWidgetController implements WidgetController {
 		if (controller == null) {
 			return;
 		}
-		infoGroup.configure();
-		locationController.configure();
-		communicationGroup.configure();
+//		infoGroup.configure();
+//		locationController.configure();
+//		communicationGroup.configure();
 	}
 
 	@Override

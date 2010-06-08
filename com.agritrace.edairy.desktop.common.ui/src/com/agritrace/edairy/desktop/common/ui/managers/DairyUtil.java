@@ -109,7 +109,7 @@ public class DairyUtil {
 			mLoc = createMapLocation(0.0, 0.0);
 		}
 		if(dLoc == null){
-			createDescriptiveLocation("", "");
+			dLoc = createDescriptiveLocation("", "");
 		}
 		loc.setPostalLocation(pLoc);
 		loc.setMapLocation(mLoc);

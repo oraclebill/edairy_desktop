@@ -350,9 +350,11 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			//farmingTypeCombo (RearingMode)
 			farmingTypeCombo.bindToModel(Observables.staticObservableList(RearingMode.VALUES), RearingMode.class, null, PojoObservables.observeValue(selectedNode,
 					TrackingPackage.Literals.REGISTERED_ANIMAL__REARING_MODE.getName()));
+			farmingTypeCombo.updateFromModel();
+
 			//feedCombo
 			feedCombo.bindToModel(Observables.staticObservableList(LivestockValues.getFeedTypes()), String.class, null,new WritableValue());
-			farmingTypeCombo.updateFromModel();
+			feedCombo.updateFromModel();
 			feedCombo.setSelection(selectedNode.getFeedType());
 			feedCombo.addSelectionListener(this);
 

@@ -69,8 +69,13 @@ public class ViewWidgetId {
 	public static final String memberInfo_lastName = "lastName";
 
 	public static final String memberInfo_applicationDate = "applicationDate";
+	
+	public static final String memberInfo_applicationDate_btn = "memberInfo_applicationDate_btn";
 
 	public static final String memberInfo_effectiveDate = "effectiveDate";
+	
+	public static final String memberInfo_effectiveDate_btn = "effectiveDate_btn";
+
 
 	public static final String memberInfo_suffix = "member.info.name.suffix";
 
@@ -195,6 +200,8 @@ public class ViewWidgetId {
 	public static final String MEMBERSHIP_CANCEL = "membership_cancel";
 
 	public static final String memberInfo_searchButton = "memberInfo_searchButton";
+	public static final String memberInfo_clearButton = "memberInfo_clearButton";
+
 
 	public static final String[] PROVINCES_LIST = new String[] { "Central", "Coast", "Eastern", "Nairobi",
 		"North Eastern", "Nyanza", "Rift Valley", "Western" };

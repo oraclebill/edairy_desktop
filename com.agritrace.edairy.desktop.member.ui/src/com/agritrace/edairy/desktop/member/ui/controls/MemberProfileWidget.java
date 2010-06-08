@@ -5,6 +5,7 @@ import java.util.Date;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -74,27 +75,10 @@ public class MemberProfileWidget {
 				ViewWidgetId.memberInfo_applicationDate);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateText);
 
-		final Button calendarButton = new Button(infoGroup, SWT.PUSH);
+		ImageButton calendarButton = UIControlsFactory.createImageButton(infoGroup, SWT.NONE,ViewWidgetId.memberInfo_applicationDate_btn);
 		final Image calendar = Activator.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON);
 		calendarButton.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
-
-		calendarButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						dateText.getText());
-				int returncode = calDialog.open();
-				if (returncode == AbstractWindowController.OK) {
-					final Date selectedDate = (Date) calDialog.getController().getContext(
-							SimpleFormattedDateBean.DATE_PROR);
-					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					dateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
 
 		// effective date
 		UIControlsFactory.createLabel(infoGroup, effectiveDate);
@@ -103,27 +87,27 @@ public class MemberProfileWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(effectDateText);
 		// addUIControl(dateText,ViewWidgetId.calendarDate);
 
-		final Button calendarButton2 = new Button(infoGroup, SWT.PUSH);
+		ImageButton calendarButton2 = UIControlsFactory.createImageButton(infoGroup,SWT.NONE, ViewWidgetId.memberInfo_effectiveDate_btn);
 		calendarButton2.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton2);
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
-		calendarButton2.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						dateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
-					final Date selectedDate = (Date) calDialog.getController().getContext(
-							SimpleFormattedDateBean.DATE_PROR);
-					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					effectDateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
+//		calendarButton2.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
+//				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+//						dateText.getText());
+//
+//				if (calDialog.open() == AbstractWindowController.OK) {
+//					final Date selectedDate = (Date) calDialog.getController().getContext(
+//							SimpleFormattedDateBean.DATE_PROR);
+//					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+//					bean.setDate(selectedDate);
+//					effectDateText.setText(bean.getFormattedDate());
+//				}
+//			}
+//		});
 
 		// status
 		UIControlsFactory.createLabel(infoGroup, status);

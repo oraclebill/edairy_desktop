@@ -72,7 +72,7 @@ public class MemberDirectoryView extends SubModuleView {
 				ViewWidgetId.memberInfo_searchButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
 
-		Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.cancelButton);
+		Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.memberInfo_clearButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
 
 	}

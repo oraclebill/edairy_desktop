@@ -30,9 +30,9 @@ public class LocationProfileWidgetController implements WidgetController {
 		if (controller == null) {
 			return;
 		}
-		addressGroup.configure();
-		directionGroup.configure();
-		mapGroup.configure();
+//		addressGroup.configure();
+//		directionGroup.configure();
+//		mapGroup.configure();
 
 	}
 
