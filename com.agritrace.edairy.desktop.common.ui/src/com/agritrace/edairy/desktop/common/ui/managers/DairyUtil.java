@@ -108,11 +108,11 @@ public class DairyUtil {
 			pLoc = createPostalLocation("", "", "", "");
 		}
 		if (null != pLoc)
-			loc.setPostalLocation(pLoc);
+		loc.setPostalLocation(pLoc);
 		if (null != mLoc)
-			loc.setMapLocation(mLoc);
+		loc.setMapLocation(mLoc);
 		if (null != dLoc)
-			loc.setDescriptiveLocation(dLoc);
+		loc.setDescriptiveLocation(dLoc);
 		return loc;
 	}
 
@@ -381,6 +381,19 @@ public class DairyUtil {
 			ReferenceAnimalType breed, Purpose purpose, RearingMode rearingMode) {
 		return createAnimal(farm, birthDate, name, gender, breed, purpose, rearingMode, null, null, null, null, null,
 				null, null);
+	}
+	
+	/**
+	 * Create a new ReferenceAnimalType
+	 * @param species
+	 * @param breed
+	 * @return
+	 */
+	public static ReferenceAnimalType createReferenceAnimal(String species, String breed){
+		ReferenceAnimalType referenceAnimalTYpe = TrackingFactory.eINSTANCE.createReferenceAnimalType();
+		referenceAnimalTYpe.setSpecies(species);
+		referenceAnimalTYpe.setBreed(breed);
+		return referenceAnimalTYpe;
 	}
 
 	/**

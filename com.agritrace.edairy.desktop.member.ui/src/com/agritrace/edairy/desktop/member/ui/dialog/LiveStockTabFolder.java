@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockGeneralWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.LiveStockIdentificationWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockOtherWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockRearingWidget;
 
@@ -88,19 +89,18 @@ public class LiveStockTabFolder {
 			profileTab.setControl(profileComposite);
 		}
 
-		// account summary
-		//		if (enabledTabs.contains(TabItem.AccountSummary)) {
-		//			final CTabItem accountTab = new CTabItem(tabfolder, SWT.NULL);
-		//			accountTab.setText("Account Summary");
-		//			final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		//			accountComposite.setLayout(new GridLayout(1, true));
-		//			MemberAccountWidget accountWidget = new MemberAccountWidget(accountComposite);
-		//			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-		//					.applyTo(accountWidget.getComposite());
-		//			accountTab.setControl(accountComposite);
-		//			accountTab.setControl(accountComposite);
-		//		}
-		//
+		//identification
+		if (enabledTabs.contains(TabItem.Identification)) {
+			final CTabItem identificationTab = new CTabItem(tabfolder, SWT.NULL);
+			identificationTab.setText("Identification");
+			final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+			accountComposite.setLayout(new GridLayout(1, true));
+			LiveStockIdentificationWidget identificationWidget = new LiveStockIdentificationWidget(accountComposite);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(identificationWidget.getComposite());
+			identificationTab.setControl(accountComposite);
+			identificationTab.setControl(accountComposite);
+		}
+		//Rearing
 		if (enabledTabs.contains(TabItem.Rearing)) {
 			final CTabItem rearingTab = new CTabItem(tabfolder, SWT.NULL);
 			rearingTab.setText("Rearing Habits");
@@ -110,6 +110,7 @@ public class LiveStockTabFolder {
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(rearingWidget.getComposite());
 			rearingTab.setControl(rearingComposite);
 		}
+		//other
 		if (enabledTabs.contains(TabItem.Other)) {
 			final CTabItem collectionTab = new CTabItem(tabfolder, SWT.NULL);
 			collectionTab.setText("Other");

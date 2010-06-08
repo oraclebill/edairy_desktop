@@ -9,5 +9,10 @@ public class ControllerContextConstant {
 	public static String CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER = "selectedContainer";
 
 	public static String CONTAINER_DIALOG_CONTXT_FARM_LIST = "farmList";
+	
+	public static String DIALOG_CONTXT_SELECTED= "selected";
+	
+	public static String LIVESTOCK_DIALOG_CONTXT_FARM_LIST="farmList";
+
 
 }

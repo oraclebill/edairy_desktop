@@ -69,8 +69,13 @@ public class ViewWidgetId {
 	public static final String memberInfo_lastName = "lastName";
 
 	public static final String memberInfo_applicationDate = "applicationDate";
+	
+	public static final String memberInfo_applicationDate_btn = "memberInfo_applicationDate_btn";
 
 	public static final String memberInfo_effectiveDate = "effectiveDate";
+	
+	public static final String memberInfo_effectiveDate_btn = "effectiveDate_btn";
+
 
 	public static final String memberInfo_suffix = "member.info.name.suffix";
 
@@ -139,7 +144,17 @@ public class ViewWidgetId {
 	public static final String LIVESTOCK_GENERAL_VERTERINARY= "LIVESTOCK_GENERAL_VERTERINARY";
 	public static final String LIVESTOCK_GENERAL_SIRE_SPECIES= "LIVESTOCK_GENERAL_SIRE_SPECIES";
 	public static final String LIVESTOCK_GENERAL_SIRE_BREED= "LIVESTOCK_GENERAL_SIRE_BREED";
-
+	//liveStock identification
+	public static final String LIVESTOCK_IDENTIFICATION_ACQUISION_DATE= "LIVESTOCK_IDENTIFICATION_ACQUISION_DATE";
+	public static final String LIVESTOCK_IDENTIFICATION_ACQUISION_DATE_BTN= "LIVESTOCK_IDENTIFICATION_ACQUISION_DATE_BTN";
+	public static final String LIVESTOCK_IDENTIFICATION_ACQUISION_TYPE= "LIVESTOCK_IDENTIFICATION_ACQUISION_TYPE";
+	public static final String LIVESTOCK_IDENTIFICATION_ID_TYPE= "LIVESTOCK_IDENTIFICATION_ID_TYPE";
+	public static final String LIVESTOCK_IDENTIFICATION_ID_NUMBER= "LIVESTOCK_IDENTIFICATION_ID_NUMBER";
+	public static final String LIVESTOCK_IDENTIFICATION_MINISTRY_ID= "LIVESTOCK_IDENTIFICATION_MINISTRY_ID";
+	public static final String LIVESTOCK_IDENTIFICATION_INSURANCE_COMPANY= "LIVESTOCK_IDENTIFICATION_INSURANCE_COMPANY";
+	public static final String LIVESTOCK_IDENTIFICATION_INSURANCE_NUMBER= "LIVESTOCK_IDENTIFICATION_INSURANCE_NUMBER";
+	public static final String LIVESTOCK_IDENTIFICATION_UNIQUE_FEATURE= "LIVESTOCK_IDENTIFICATION_UNIQUE_FEATURE";
+	public static final String LIVESTOCK_IDENTIFICATION_OWNERSHIPS= "LIVESTOCK_IDENTIFICATION_OWNERSHIPS";
 	//liveStock rearing
 	public static final String LIVESTOCK_REARING_HABITS= "LIVESTOCK_REARING_HABITS";
 	public static final String LIVESTOCK_REARING_FAMILY= "LIVESTOCK_REARING_FAMILY";
@@ -185,6 +200,8 @@ public class ViewWidgetId {
 	public static final String MEMBERSHIP_CANCEL = "membership_cancel";
 
 	public static final String memberInfo_searchButton = "memberInfo_searchButton";
+	public static final String memberInfo_clearButton = "memberInfo_clearButton";
+
 
 	public static final String[] PROVINCES_LIST = new String[] { "Central", "Coast", "Eastern", "Nairobi",
 		"North Eastern", "Nyanza", "Rift Valley", "Western" };

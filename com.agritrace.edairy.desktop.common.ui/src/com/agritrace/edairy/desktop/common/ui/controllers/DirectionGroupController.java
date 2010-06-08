@@ -39,6 +39,9 @@ public class DirectionGroupController implements WidgetController {
 	@Override
 	public void setInputModel(Object model) {
 		this.location = (DescriptiveLocation) model;
+		if (controller != null) {
+			updateBinding();
+		}
 
 	}
 
@@ -50,7 +53,6 @@ public class DirectionGroupController implements WidgetController {
 	@Override
 	public void setController(IController controller) {
 		this.controller = controller;
-
 	}
 
 	@Override

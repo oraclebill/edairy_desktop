@@ -10,20 +10,30 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Display;
 
+import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
+import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
+
 
 public class MemberLiveStockWidgetController implements WidgetController, ISelectionListener, DateRangeFilter {
 
@@ -115,18 +125,29 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 			@Override
 			public void callback() {
-				// final Shell shell = new Shell(Display.getDefault(),
-				// SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
-				// | SWT.APPLICATION_MODAL);
-				// shell.setSize(550, 450);
-				// final AddAnimalDialog dialog = new AddAnimalDialog(shell);
-				// dialog.setMemberShip(member);
-				// if (dialog.open() == Window.OK) {
-				// final RegisteredAnimal newAnimal = dialog.getNewAnimal();
-				// newAnimal.getLocation().getAnimals().add(newAnimal);
-				// animalInput.add(newAnimal);
-				// liveStockTable.updateFromModel();
-				// }
+				//tesing for now, use ViewLiveStockDialog for adding
+				RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.MALE, DairyUtil.createReferenceAnimal("",""), Purpose.get(0), RearingMode.get(0), DairyUtil.createReferenceAnimal("",""), "", "", null, null, AcquisitionType.get(0), null);
+				final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
+				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
+				List<Farm> farmList = new ArrayList<Farm>();
+				if(inputModel instanceof Membership){
+					farmList.addAll(((Membership)inputModel).getMember().getFarms());
+				}else if(inputModel instanceof Farm){
+					farmList.add((Farm)inputModel);
+				}
+				aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,farmList);
+
+				int returnCode = aniamlDialog.open();
+				if (returnCode == AbstractWindowController.OK) {
+					newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED);
+					newAnimal.getLocation().getAnimals().add(newAnimal);
+					animalInput.add(newAnimal);
+					liveStockTable.updateFromModel();
+					// membershipList.set(index, selectedMember);
+					// memberListRidget.updateFromModel();
+				} else {
+					// System.out.println("return code "+returnCode);
+				}
 			}
 		});
 

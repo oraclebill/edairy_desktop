@@ -37,6 +37,18 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getPastOwners <em>Past Owners</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getInsuranceNumber <em>Insurance Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getDateOfBirth <em>Date Of Birth</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getBirthCertificateNumber <em>Birth Certificate Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinaryCertificateNumber <em>Veterinary Certificate Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getMinistryId <em>Ministry Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getInsuranceCompany <em>Insurance Company</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedingHabit <em>Feeding Habit</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedType <em>Feed Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedBrand <em>Feed Brand</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getSupplements <em>Supplements</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAntibiotics <em>Antibiotics</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinary <em>Veterinary</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAwards <em>Awards</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getNotes <em>Notes</em>}</li>
  * </ul>
  * </p>
  *
@@ -433,5 +445,317 @@ public interface RegisteredAnimal extends EObject {
 	 * @generated
 	 */
 	void setDateOfBirth(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Birth Certificate Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Birth Certificate Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Birth Certificate Number</em>' attribute.
+	 * @see #setBirthCertificateNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_BirthCertificateNumber()
+	 * @model
+	 * @generated
+	 */
+	String getBirthCertificateNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getBirthCertificateNumber <em>Birth Certificate Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Birth Certificate Number</em>' attribute.
+	 * @see #getBirthCertificateNumber()
+	 * @generated
+	 */
+	void setBirthCertificateNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Veterinary Certificate Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Veterinary Certificate Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Veterinary Certificate Number</em>' attribute.
+	 * @see #setVeterinaryCertificateNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_VeterinaryCertificateNumber()
+	 * @model
+	 * @generated
+	 */
+	String getVeterinaryCertificateNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinaryCertificateNumber <em>Veterinary Certificate Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Veterinary Certificate Number</em>' attribute.
+	 * @see #getVeterinaryCertificateNumber()
+	 * @generated
+	 */
+	void setVeterinaryCertificateNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Ministry Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ministry Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ministry Id</em>' attribute.
+	 * @see #setMinistryId(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_MinistryId()
+	 * @model
+	 * @generated
+	 */
+	String getMinistryId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getMinistryId <em>Ministry Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ministry Id</em>' attribute.
+	 * @see #getMinistryId()
+	 * @generated
+	 */
+	void setMinistryId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Insurance Company</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Insurance Company</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Insurance Company</em>' attribute.
+	 * @see #setInsuranceCompany(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_InsuranceCompany()
+	 * @model
+	 * @generated
+	 */
+	String getInsuranceCompany();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getInsuranceCompany <em>Insurance Company</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Insurance Company</em>' attribute.
+	 * @see #getInsuranceCompany()
+	 * @generated
+	 */
+	void setInsuranceCompany(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Feeding Habit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Feeding Habit</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Feeding Habit</em>' attribute.
+	 * @see #setFeedingHabit(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_FeedingHabit()
+	 * @model
+	 * @generated
+	 */
+	String getFeedingHabit();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedingHabit <em>Feeding Habit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Feeding Habit</em>' attribute.
+	 * @see #getFeedingHabit()
+	 * @generated
+	 */
+	void setFeedingHabit(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Feed Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Feed Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Feed Type</em>' attribute.
+	 * @see #setFeedType(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_FeedType()
+	 * @model
+	 * @generated
+	 */
+	String getFeedType();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedType <em>Feed Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Feed Type</em>' attribute.
+	 * @see #getFeedType()
+	 * @generated
+	 */
+	void setFeedType(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Feed Brand</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Feed Brand</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Feed Brand</em>' attribute.
+	 * @see #setFeedBrand(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_FeedBrand()
+	 * @model
+	 * @generated
+	 */
+	String getFeedBrand();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedBrand <em>Feed Brand</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Feed Brand</em>' attribute.
+	 * @see #getFeedBrand()
+	 * @generated
+	 */
+	void setFeedBrand(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Supplements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Supplements</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Supplements</em>' attribute.
+	 * @see #setSupplements(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_Supplements()
+	 * @model
+	 * @generated
+	 */
+	String getSupplements();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getSupplements <em>Supplements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Supplements</em>' attribute.
+	 * @see #getSupplements()
+	 * @generated
+	 */
+	void setSupplements(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Antibiotics</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Antibiotics</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Antibiotics</em>' attribute.
+	 * @see #setAntibiotics(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_Antibiotics()
+	 * @model
+	 * @generated
+	 */
+	String getAntibiotics();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAntibiotics <em>Antibiotics</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Antibiotics</em>' attribute.
+	 * @see #getAntibiotics()
+	 * @generated
+	 */
+	void setAntibiotics(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Veterinary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Veterinary</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Veterinary</em>' attribute.
+	 * @see #setVeterinary(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_Veterinary()
+	 * @model
+	 * @generated
+	 */
+	String getVeterinary();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinary <em>Veterinary</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Veterinary</em>' attribute.
+	 * @see #getVeterinary()
+	 * @generated
+	 */
+	void setVeterinary(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Awards</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Awards</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Awards</em>' attribute.
+	 * @see #setAwards(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_Awards()
+	 * @model
+	 * @generated
+	 */
+	String getAwards();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAwards <em>Awards</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Awards</em>' attribute.
+	 * @see #getAwards()
+	 * @generated
+	 */
+	void setAwards(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Notes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Notes</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Notes</em>' attribute.
+	 * @see #setNotes(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_Notes()
+	 * @model
+	 * @generated
+	 */
+	String getNotes();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getNotes <em>Notes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Notes</em>' attribute.
+	 * @see #getNotes()
+	 * @generated
+	 */
+	void setNotes(String value);
 
 } // RegisteredAnimal

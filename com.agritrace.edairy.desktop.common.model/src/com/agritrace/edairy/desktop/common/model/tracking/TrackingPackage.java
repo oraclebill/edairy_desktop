@@ -336,13 +336,121 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL__DATE_OF_BIRTH = 14;
 
 	/**
+	 * The feature id for the '<em><b>Birth Certificate Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER = 15;
+
+	/**
+	 * The feature id for the '<em><b>Veterinary Certificate Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER = 16;
+
+	/**
+	 * The feature id for the '<em><b>Ministry Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__MINISTRY_ID = 17;
+
+	/**
+	 * The feature id for the '<em><b>Insurance Company</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__INSURANCE_COMPANY = 18;
+
+	/**
+	 * The feature id for the '<em><b>Feeding Habit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__FEEDING_HABIT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Feed Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__FEED_TYPE = 20;
+
+	/**
+	 * The feature id for the '<em><b>Feed Brand</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__FEED_BRAND = 21;
+
+	/**
+	 * The feature id for the '<em><b>Supplements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__SUPPLEMENTS = 22;
+
+	/**
+	 * The feature id for the '<em><b>Antibiotics</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__ANTIBIOTICS = 23;
+
+	/**
+	 * The feature id for the '<em><b>Veterinary</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__VETERINARY = 24;
+
+	/**
+	 * The feature id for the '<em><b>Awards</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__AWARDS = 25;
+
+	/**
+	 * The feature id for the '<em><b>Notes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__NOTES = 26;
+
+	/**
 	 * The number of structural features of the '<em>Registered Animal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL_FEATURE_COUNT = 15;
+	int REGISTERED_ANIMAL_FEATURE_COUNT = 27;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl <em>Reference Animal Type</em>}' class.
@@ -901,6 +1009,138 @@ public interface TrackingPackage extends EPackage {
 	EAttribute getRegisteredAnimal_DateOfBirth();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getBirthCertificateNumber <em>Birth Certificate Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Birth Certificate Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getBirthCertificateNumber()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_BirthCertificateNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinaryCertificateNumber <em>Veterinary Certificate Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Veterinary Certificate Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinaryCertificateNumber()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_VeterinaryCertificateNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getMinistryId <em>Ministry Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ministry Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getMinistryId()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_MinistryId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getInsuranceCompany <em>Insurance Company</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Insurance Company</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getInsuranceCompany()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_InsuranceCompany();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedingHabit <em>Feeding Habit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Feeding Habit</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedingHabit()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_FeedingHabit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedType <em>Feed Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Feed Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedType()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_FeedType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedBrand <em>Feed Brand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Feed Brand</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getFeedBrand()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_FeedBrand();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getSupplements <em>Supplements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Supplements</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getSupplements()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_Supplements();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAntibiotics <em>Antibiotics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Antibiotics</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAntibiotics()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_Antibiotics();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinary <em>Veterinary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Veterinary</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getVeterinary()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_Veterinary();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAwards <em>Awards</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Awards</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAwards()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_Awards();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getNotes <em>Notes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Notes</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getNotes()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_Notes();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType <em>Reference Animal Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1276,6 +1516,102 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REGISTERED_ANIMAL__DATE_OF_BIRTH = eINSTANCE.getRegisteredAnimal_DateOfBirth();
+
+		/**
+		 * The meta object literal for the '<em><b>Birth Certificate Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER = eINSTANCE.getRegisteredAnimal_BirthCertificateNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Veterinary Certificate Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER = eINSTANCE.getRegisteredAnimal_VeterinaryCertificateNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Ministry Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__MINISTRY_ID = eINSTANCE.getRegisteredAnimal_MinistryId();
+
+		/**
+		 * The meta object literal for the '<em><b>Insurance Company</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__INSURANCE_COMPANY = eINSTANCE.getRegisteredAnimal_InsuranceCompany();
+
+		/**
+		 * The meta object literal for the '<em><b>Feeding Habit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__FEEDING_HABIT = eINSTANCE.getRegisteredAnimal_FeedingHabit();
+
+		/**
+		 * The meta object literal for the '<em><b>Feed Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__FEED_TYPE = eINSTANCE.getRegisteredAnimal_FeedType();
+
+		/**
+		 * The meta object literal for the '<em><b>Feed Brand</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__FEED_BRAND = eINSTANCE.getRegisteredAnimal_FeedBrand();
+
+		/**
+		 * The meta object literal for the '<em><b>Supplements</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__SUPPLEMENTS = eINSTANCE.getRegisteredAnimal_Supplements();
+
+		/**
+		 * The meta object literal for the '<em><b>Antibiotics</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__ANTIBIOTICS = eINSTANCE.getRegisteredAnimal_Antibiotics();
+
+		/**
+		 * The meta object literal for the '<em><b>Veterinary</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__VETERINARY = eINSTANCE.getRegisteredAnimal_Veterinary();
+
+		/**
+		 * The meta object literal for the '<em><b>Awards</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__AWARDS = eINSTANCE.getRegisteredAnimal_Awards();
+
+		/**
+		 * The meta object literal for the '<em><b>Notes</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__NOTES = eINSTANCE.getRegisteredAnimal_Notes();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl <em>Reference Animal Type</em>}' class.
