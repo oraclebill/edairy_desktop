@@ -37,16 +37,13 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
-//import com.agritrace.edairy.desktop.common.ui.controllers.LookupControllerDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -82,11 +79,11 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	private IToggleButtonRidget allRidget;
 	private ITextRidget farmText;
 	private ITextRidget memberText;
-
+	
 	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
 	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
 	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
-
+	
 	private final class ViewItemAction implements IActionListener {
 		@Override
 		public void callback() {
@@ -101,7 +98,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	}
 
 	private final class NewItemAction implements IActionListener {
-		@Override
+	@Override
 		public void callback() {
 			ServiceRequestListDialog dialog = new ServiceRequestListDialog(null);		
 			AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
@@ -273,12 +270,12 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 		// Member Look
 		if (memberText != null) {
-			memberText.setDirectWriting(true);
+//			memberText.setDirectWriting(true);
 			memberText.setText("");
 		}
 		// Farm Look
 		if (farmText != null) {
-			farmText.setDirectWriting(true);
+//			farmText.setDirectWriting(true);
 			farmText.setText("");
 		}
 	}
@@ -518,6 +515,6 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		memberLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.MEMBER_LOOKUP_BUTTON);
 		memberLookupButton.addListener(memberLookupAction);
 
-	}
+				}
 
-}
+			}

@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.common.ui.dialogs;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -23,14 +25,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 public class MemberSearchDialog extends TitleAreaDialog {
 
 	String dlgTitle = "Member Lookup";
 	String dlgPrompt = "Please input member search criterias";
-
+	List<Membership> memberList;
+	IMemberRepository memberRepo;
+	
 	/**
 	 * MyTitleAreaDialog constructor
 	 * 
@@ -39,7 +46,8 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	 */
 	public MemberSearchDialog(Shell shell) {
 		super(shell);
-
+		memberRepo = new MemberRepository();
+		memberList = memberRepo.all();
 	}
 
 	/**
@@ -148,7 +156,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 		tableView.setContentProvider(new ArrayContentProvider());
 		tableView.setLabelProvider(new MemberLabelProvider());
-		tableView.setInput(null); // TODO: FIX TEST - inject member list into
+		tableView.setInput(memberList); // TODO: FIX TEST - inject member list into
 									// dialog
 
 		panel.setLayout(layout);
@@ -201,16 +209,17 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof Membership) {
-				final Membership member = (Membership) element;
-				assert (member.getMember() != null);
+				final Membership membership = (Membership) element;
+				final Person member = membership.getMember();
+				assert (member != null);
 				switch (columnIndex) {
 				case 0:
-					return member.getMemberId().toString();
+					return membership.getMemberId().toString();
 				case 1:
-					return member.getMember().getGivenName() + member.getMember().getFamilyName();
+					return member.getGivenName() +" "+ member.getFamilyName();
 				case 2:
 					try {
-						return member.getMember().getLocation().getPostalLocation().getAddress();
+						return member.getLocation().getPostalLocation().getAddress();
 					} catch (final Exception e) {
 						return "<location not found>";
 					}
