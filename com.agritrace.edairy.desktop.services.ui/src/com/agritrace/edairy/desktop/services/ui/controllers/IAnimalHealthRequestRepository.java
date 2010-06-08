@@ -8,4 +8,10 @@ public interface IAnimalHealthRequestRepository {
 
 	List<AnimalHealthRequest> allRequests();
 
+	void update(AnimalHealthRequest context);
+
+	void saveNew(AnimalHealthRequest context);
+
+	void merge(AnimalHealthRequest context);
+
 }

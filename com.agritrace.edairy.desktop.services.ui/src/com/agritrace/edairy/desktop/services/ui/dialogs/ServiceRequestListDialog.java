@@ -67,6 +67,14 @@ public class ServiceRequestListDialog extends RecordDialog {
 	public static final String BIND_ID_SPECIFIC_CONTAINER = "specific.container";//$NON-NLS-1$
 	private List<Object> injectedControls = new ArrayList<Object>();
 
+	
+	
+	
+	public ServiceRequestListDialog(Shell parentShell) {
+		super(parentShell);
+	}
+
+
 	public ServiceRequestListDialog(int style, Shell parentShell, EObject selectedEObject, IRepository repo) {
 		super(style, parentShell, selectedEObject, repo);
 
@@ -182,17 +190,6 @@ public class ServiceRequestListDialog extends RecordDialog {
 	@Override
 	protected RecordDialogController createController() {
 		RecordDialogController controller = new ServiceRecordDialogController();
-		// controller.addListener(new IActionListener() {
-		//
-		// @Override
-		// public void callback() {
-		// if (getSelectedEObject()!=null)
-		// {
-		// EMFUtil.copy(getWorkingCopy(), getSelectedEObject(), 3);
-		// }
-		//
-		// }
-		// });
 		return controller;
 	}
 
