@@ -5,6 +5,8 @@ import java.beans.PropertyChangeListener;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -12,11 +14,14 @@ import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
@@ -28,32 +33,29 @@ import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialo
 public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
 	public class FarmLookupAction implements IActionListener {
-
-		public FarmLookupAction(ITextRidget farmLookupText) {
-			memberLookupText.bindToModel(AnimalHealthRequestDialogController.this, "selectedMember");
-			farmLookupText.bindToModel(AnimalHealthRequestDialogController.this, "selectedFarm");
-		}
-
 		@Override
 		public void callback() {
 			FarmSearchDialog farmDialog = new FarmSearchDialog(null);
+			farmDialog.setSelectedMember(request.getRequestingMember());
 			int retVal = farmDialog.open();
-			
-
+			if (retVal == FarmSearchDialog.OK) {
+				request.setFarm(farmDialog.getSelectedFarm());
+				farmLookupText.updateFromModel();
+			}
 		}
-
 	}
 
 	public class MemberLookupAction implements IActionListener {
-
-		public MemberLookupAction(ITextRidget memberLookupText) {
-			// TODO Auto-generated constructor stub
-		}
-
 		@Override
 		public void callback() {
 			MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			memberDialog.setSelectedFarm(request.getFarm());
 			int retVal = memberDialog.open();
+			if (retVal == MemberSearchDialog.OK) {
+				request.setRequestingMember(memberDialog.getSelectedMember());
+				request.setMember(memberDialog.getSelectedMember());
+				memberLookupText.updateFromModel();
+			}
 		}
 
 	}
@@ -144,10 +146,9 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	IDateTextRidget textRidget;
 	private IActionRidget memberLookupButton;
 	private IActionRidget farmLookupButton;
-	private Membership selectedMember;
-	private Farm selectedFarm;
 	private ITextRidget memberLookupText;
 	private ITextRidget farmLookupText;
+	private AnimalHealthRequest request;
 	
 	public AnimalHealthRequestDialogController() {
 		super();
@@ -157,16 +158,16 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public AnimalHealthRequest getWorkingCopy() {
 		return (AnimalHealthRequest) getContext("editObject");
 	}
-
+	
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
-		final AnimalHealthRequest request = getWorkingCopy();
+		request = getWorkingCopy();
 
 		textRidget = getRidget(IDateTextRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
 		textRidget.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-		textRidget.bindToModel(PojoObservables.observeValue(request,
-				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName()));
+		textRidget.bindToModel(EMFObservables.observeValue(request,
+				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));
 		textRidget.updateFromModel();
 
 		// Request Type/Veterinary
@@ -195,12 +196,28 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		// insementationRadionBtn.setOutputOnly(true);
 		
 		memberLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_TEXT );
+		memberLookupText.bindToModel(
+				EMFProperties.value(
+						FeaturePath.fromList(
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER,
+								DairyPackage.Literals.MEMBERSHIP__MEMBER,
+								ModelPackage.Literals.PERSON__FAMILY_NAME)).observe(request));
+		memberLookupText.setOutputOnly(true);
+		
+
 		memberLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_BUTTON );
-		memberLookupButton.addListener( new MemberLookupAction(memberLookupText) );
+		memberLookupButton.addListener( new MemberLookupAction() );
 
 		farmLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_TEXT );
+		farmLookupText.bindToModel(
+				EMFProperties.value(
+						FeaturePath.fromList(
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM,
+								TrackingPackage.Literals.FARM__NAME)).observe(request));
+		farmLookupText.setOutputOnly(true);
+
 		farmLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_BUTTON );
-		farmLookupButton.addListener( new FarmLookupAction(farmLookupText) );
+		farmLookupButton.addListener( new FarmLookupAction() );
 
 	}
 
