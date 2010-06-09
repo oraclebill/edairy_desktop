@@ -6,10 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.riena.ui.ridgets.databinding.DateToStringConverter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
-import com.agritrace.edairy.desktop.common.ui.converters.DateToStringConverter;
+//import com.agritrace.edairy.desktop.common.ui.converters.DateToStringConverter;
 
 /**
  * Utilities class for Date Time

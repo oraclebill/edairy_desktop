@@ -141,7 +141,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		
 	}
 	
-	private void configureButtonsRidget() {
+	protected void configureButtonsRidget() {
 		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
 		if (newBtnRidget != null) {
 			newBtnRidget.addListener(new IActionListener() {

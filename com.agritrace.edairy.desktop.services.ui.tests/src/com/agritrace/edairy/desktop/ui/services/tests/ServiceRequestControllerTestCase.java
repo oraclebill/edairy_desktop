@@ -27,8 +27,8 @@ import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPers
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.services.ui.controllers.ServiceRequestViewController;
-import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
+import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
+import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 
 /**
  * Test case for service request controller
@@ -36,7 +36,7 @@ import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<ServiceRequestViewController> {
+public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<AnimalHealthRequestViewController> {
 
 	static HsqldbMemoryPersistenceManager testPersistenceManager;
 	static {
@@ -46,8 +46,8 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 	List<AnimalHealthRequest> requests = new ArrayList<AnimalHealthRequest>();
 
 	@Override
-	protected ServiceRequestViewController createController(ISubModuleNode node) {
-		ServiceRequestViewController newInst = new ServiceRequestViewController();
+	protected AnimalHealthRequestViewController createController(ISubModuleNode node) {
+		AnimalHealthRequestViewController newInst = new AnimalHealthRequestViewController();
 		node.setNodeId(new NavigationNodeId("edm.services.log"));
 		newInst.setNavigationNode(node);
 		return newInst;
@@ -91,26 +91,26 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 		IController controller = getController();
 
 		// Default value of Start Date
-		final ITextRidget startDate = controller.getRidget(ITextRidget.class, ServiceRequestView.START_DATE_TEXT);
+		final ITextRidget startDate = controller.getRidget(ITextRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
 		assertEquals(startDate.getText(), DateTimeUtils.getFirstDayofMonth());
 
 		// Default value of End date
-		final ITextRidget endDate = controller.getRidget(ITextRidget.class, ServiceRequestView.END_DATE_TEXT);
+		final ITextRidget endDate = controller.getRidget(ITextRidget.class, AnimalHealthRequestView.END_DATE_TEXT);
 		assertEquals(endDate.getText(), DateTimeUtils.getLastDayofMonth());
 
 		// All type button
 		final IToggleButtonRidget allTypeBtn = controller.getRidget(IToggleButtonRidget.class,
-				ServiceRequestView.REQUEST_TYPE_ALL);
+				AnimalHealthRequestView.REQUEST_TYPE_ALL);
 		assertTrue(allTypeBtn.isSelected());
 
 		// Verternary (Request type), By defalut verternary button is unchecked
 		final IToggleButtonRidget verterTypeBtn = controller.getRidget(IToggleButtonRidget.class,
-				ServiceRequestView.REQUEST_TYPE_VERTERNARY);
+				AnimalHealthRequestView.REQUEST_TYPE_VERTERNARY);
 		assertFalse(verterTypeBtn.isSelected());
 
 		// By default insemeniation button is unchecked
 		final IToggleButtonRidget insemenitationTypeBtn = getController().getRidget(IToggleButtonRidget.class,
-				ServiceRequestView.REQUEST_TYPE_INSEMINATION);
+				AnimalHealthRequestView.REQUEST_TYPE_INSEMINATION);
 		assertFalse(insemenitationTypeBtn.isSelected());
 
 		// farm lookup
@@ -126,10 +126,10 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 		assertNotNull(masterTable.getObservableList());
 
 		// Test Apply Button, Change some condition
-		final IActionRidget apply = controller.getRidget(IActionRidget.class, ServiceRequestView.BIND_ID_FILTER_SEARCH);
+		final IActionRidget apply = controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_SEARCH);
 
 		// Test Reset Button
-		final IActionRidget reset = controller.getRidget(IActionRidget.class, ServiceRequestView.BIND_ID_FILTER_RESET);
+		final IActionRidget reset = controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_RESET);
 		reset.fireAction();
 
 

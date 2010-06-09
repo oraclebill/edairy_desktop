@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.services.ui.controllers.IAnimalHealthRequest
 public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHealthRequest> implements IAnimalHealthRequestRepository {
 
 	@Override
-	protected Class getClassType() {
+	protected Class<AnimalHealthRequest> getClassType() {
 		return AnimalHealthRequest.class;
 	}
 
@@ -53,6 +53,11 @@ public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHea
 	@Override
 	public List<AnimalHealthRequest> allRequests() {
 		return all();
+	}
+
+	@Override
+	public void merge(AnimalHealthRequest context) {
+		super.save(context);
 	}
 	
 	

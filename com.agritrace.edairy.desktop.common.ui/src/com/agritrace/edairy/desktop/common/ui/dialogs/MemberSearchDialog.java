@@ -1,12 +1,19 @@
 package com.agritrace.edairy.desktop.common.ui.dialogs;
 
+import java.lang.reflect.Member;
+import java.util.List;
+
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -23,13 +30,21 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 public class MemberSearchDialog extends TitleAreaDialog {
 
 	String dlgTitle = "Member Lookup";
 	String dlgPrompt = "Please input member search criterias";
+	List<Membership> memberList;
+	IMemberRepository memberRepo;
+	Membership selectedMember;
+	Farm selectedFarm;
 
 	/**
 	 * MyTitleAreaDialog constructor
@@ -39,7 +54,8 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	 */
 	public MemberSearchDialog(Shell shell) {
 		super(shell);
-
+		memberRepo = new MemberRepository();
+		memberList = memberRepo.all();
 	}
 
 	/**
@@ -148,11 +164,40 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 		tableView.setContentProvider(new ArrayContentProvider());
 		tableView.setLabelProvider(new MemberLabelProvider());
-		tableView.setInput(null); // TODO: FIX TEST - inject member list into
-									// dialog
+		tableView.setInput(memberList);
+		tableView.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				ISelection sel = event.getSelection();
+				if (sel instanceof IStructuredSelection) {
+					IStructuredSelection selected = (IStructuredSelection) sel;
+					Object selectedObj = selected.getFirstElement();
+					if (selectedObj instanceof Membership) {
+						setSelectedMember((Membership) selectedObj);
+					}
+				}
+			}
+		});
 
 		panel.setLayout(layout);
 		return composite;
+	}
+
+	public void setSelectedMember(Membership selectedObj) {
+		selectedMember = selectedObj;
+	}
+
+	public Membership getSelectedMember() {
+		return selectedMember;
+	}
+
+	public Farm getSelectedFarm() {
+		return selectedFarm;
+	}
+
+	public void setSelectedFarm(Farm selectedFarm) {
+		this.selectedFarm = selectedFarm;
 	}
 
 	/**
@@ -201,16 +246,17 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof Membership) {
-				final Membership member = (Membership) element;
-				assert (member.getMember() != null);
+				final Membership membership = (Membership) element;
+				final Person member = membership.getMember();
+				assert (member != null);
 				switch (columnIndex) {
 				case 0:
-					return member.getMemberId().toString();
+					return membership.getMemberId().toString();
 				case 1:
-					return member.getMember().getGivenName() + member.getMember().getFamilyName();
+					return member.getGivenName() + " " + member.getFamilyName();
 				case 2:
 					try {
-						return member.getMember().getLocation().getPostalLocation().getAddress();
+						return member.getLocation().getPostalLocation().getAddress();
 					} catch (final Exception e) {
 						return "<location not found>";
 					}

@@ -33,20 +33,30 @@ public abstract class BaseDialogView extends AbstractDialogView {
 
 	@Override
 	protected Control buildView(Composite parent) {
+		// configure my parent
 		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		parent.setLayout(new GridLayout(1, false));
 
+		// create a composite child for the work area.
 		main = UIControlsFactory.createComposite(parent);
 		main.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
 
+		// delegate to subclasses to build workarea
 		buildWorkArea(main);
 
+		// create button panel below work area.
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false)
 				.applyTo(createOkCancelButtons(parent));
 		return main;
 	}
 
+	/**
+	 * Subclasses can control these via ridget bindings.
+	 * 
+	 * @param parent
+	 * @return
+	 */
 	private Composite createOkCancelButtons(Composite parent) {
 
 		final Composite buttonComposite = UIControlsFactory.createComposite(parent);
