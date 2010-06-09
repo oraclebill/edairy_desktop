@@ -55,8 +55,8 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.AnimalHealthRequestRepository;
-import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
-import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
+import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
+import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 
 /**
  * Service Requests view controller
@@ -64,7 +64,7 @@ import com.agritrace.edairy.desktop.services.ui.views.ServiceRequestView;
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestViewController extends AbstractRecordListController {
+public class AnimalHealthRequestViewController extends AbstractRecordListController {
 
 	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
@@ -96,7 +96,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	private final class ViewItemAction implements IActionListener {
 		@Override
 		public void callback() {
-			ServiceRequestListDialog dialog = new ServiceRequestListDialog(null);
+			AnimalHealthRequestDialog dialog = new AnimalHealthRequestDialog(null);
 			dialog.getController().setContext("editObject", EcoreUtil.copy(getSelectedEObject()));
 
 			int returnCode = dialog.open();
@@ -109,7 +109,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	private final class NewItemAction implements IActionListener {
 		@Override
 		public void callback() {
-			ServiceRequestListDialog dialog = new ServiceRequestListDialog(null);
+			AnimalHealthRequestDialog dialog = new AnimalHealthRequestDialog(null);
 			AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 			EMFUtil.populate(req);
 			dialog.getController().setContext("editObject", req);
@@ -474,7 +474,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		// ServiceRequestView.START_DATE_BUTTON);
 		// delegate.configureRidgets();
 
-		startDateText = getRidget(IDateTextRidget.class, ServiceRequestView.START_DATE_TEXT);
+		startDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
 		startDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		startDateText.bindToModel(PojoObservables.observeValue(startBean, "date"));
 		startDateText.updateFromModel();
@@ -490,27 +490,27 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		// ServiceRequestView.END_DATE_BUTTON);
 		// endDelegate.configureRidgets();
 
-		inseminationRidget = getRidget(IToggleButtonRidget.class, ServiceRequestView.REQUEST_TYPE_INSEMINATION);
-		vertRidget = getRidget(IToggleButtonRidget.class, ServiceRequestView.REQUEST_TYPE_VERTERNARY);
-		allRidget = getRidget(IToggleButtonRidget.class, ServiceRequestView.REQUEST_TYPE_ALL);
+		inseminationRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_INSEMINATION);
+		vertRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_VERTERNARY);
+		allRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_ALL);
 
-		endDateText = getRidget(IDateTextRidget.class, ServiceRequestView.END_DATE_TEXT);
+		endDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.END_DATE_TEXT);
 		endDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		endDateText.bindToModel(PojoObservables.observeValue(endDateBean, "date"));
 		endDateText.updateFromModel();
 
-		farmText = getRidget(ITextRidget.class, ServiceRequestView.FARM_LOOKUP_TEXT);
+		farmText = getRidget(ITextRidget.class, AnimalHealthRequestView.FARM_LOOKUP_TEXT);
 		farmText.bindToModel(selectedFarm);
 		farmText.setOutputOnly(true);
 		
-		farmLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.FARM_LOOKUP_BUTTON);
+		farmLookupButton = this.getRidget(IActionRidget.class, AnimalHealthRequestView.FARM_LOOKUP_BUTTON);
 		farmLookupButton.addListener(farmLookupAction);
 
-		memberText = getRidget(ITextRidget.class, ServiceRequestView.MEMBER_LOOKUP_TEXT);
+		memberText = getRidget(ITextRidget.class, AnimalHealthRequestView.MEMBER_LOOKUP_TEXT);
 		memberText.bindToModel(selectedMember);
 		memberText.setOutputOnly(true);
 		
-		memberLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.MEMBER_LOOKUP_BUTTON);
+		memberLookupButton = this.getRidget(IActionRidget.class, AnimalHealthRequestView.MEMBER_LOOKUP_BUTTON);
 		memberLookupButton.addListener(memberLookupAction);
 
 	}

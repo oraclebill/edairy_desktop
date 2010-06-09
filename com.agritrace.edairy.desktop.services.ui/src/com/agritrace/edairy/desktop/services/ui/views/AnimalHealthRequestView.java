@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.services.ui.Activator;
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestView extends AbstractRecordListView {
+public class AnimalHealthRequestView extends AbstractRecordListView {
 
 	public static final String ID = "animalhealth.services.edit.view";
 

@@ -42,7 +42,7 @@ import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestD
  * @author Hui(Spark) Wan
  * 
  */
-public class ServiceRequestListDialog extends RecordDialog {
+public class AnimalHealthRequestDialog extends RecordDialog {
 	private Composite specialComp;
 	private Group inseminationGroup;
 	private Composite verternaryComp;
@@ -70,12 +70,12 @@ public class ServiceRequestListDialog extends RecordDialog {
 	
 	
 	
-	public ServiceRequestListDialog(Shell parentShell) {
+	public AnimalHealthRequestDialog(Shell parentShell) {
 		super(parentShell);
 	}
 
 
-	public ServiceRequestListDialog(int style, Shell parentShell, EObject selectedEObject, IRepository repo) {
+	public AnimalHealthRequestDialog(int style, Shell parentShell, EObject selectedEObject, IRepository repo) {
 		super(style, parentShell, selectedEObject, repo);
 
 	}

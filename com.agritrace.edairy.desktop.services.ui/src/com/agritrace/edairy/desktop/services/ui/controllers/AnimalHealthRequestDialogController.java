@@ -23,7 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
+import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 
 public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
@@ -163,7 +163,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		super.configureRidgets();
 		final AnimalHealthRequest request = getWorkingCopy();
 
-		textRidget = getRidget(IDateTextRidget.class, ServiceRequestListDialog.BIND_ID_REQUEST_DATE_TEXT);
+		textRidget = getRidget(IDateTextRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
 		textRidget.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		textRidget.bindToModel(PojoObservables.observeValue(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName()));
@@ -194,12 +194,12 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		insementationRadionBtn.updateFromModel();
 		// insementationRadionBtn.setOutputOnly(true);
 		
-		memberLookupText = getRidget(ITextRidget.class, ServiceRequestListDialog.BIND_ID_MEMBER_TEXT );
-		memberLookupButton = getRidget(IActionRidget.class, ServiceRequestListDialog.BIND_ID_MEMBER_BUTTON );
+		memberLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_TEXT );
+		memberLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_BUTTON );
 		memberLookupButton.addListener( new MemberLookupAction(memberLookupText) );
 
-		farmLookupText = getRidget(ITextRidget.class, ServiceRequestListDialog.BIND_ID_FARM_TEXT );
-		farmLookupButton = getRidget(IActionRidget.class, ServiceRequestListDialog.BIND_ID_FARM_BUTTON );
+		farmLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_TEXT );
+		farmLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_BUTTON );
 		farmLookupButton.addListener( new FarmLookupAction(farmLookupText) );
 
 	}
@@ -223,7 +223,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 			// Heated date
 			final ITextRidget heatTimeTextBtn = getRidget(ITextRidget.class,
-					ServiceRequestListDialog.BIND_ID_INSE_TIME_HEATED_DETECTED);
+					AnimalHealthRequestDialog.BIND_ID_INSE_TIME_HEATED_DETECTED);
 			heatTimeTextBtn.setDirectWriting(true);
 			heatTimeTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			// heatTimeTextBtn.setOutputOnly(false);
@@ -234,7 +234,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 			// First
 			final ITextRidget firstTextBtn = getRidget(ITextRidget.class,
-					ServiceRequestListDialog.BIND_ID_INSE_FIRST_TRETMENT);
+					AnimalHealthRequestDialog.BIND_ID_INSE_FIRST_TRETMENT);
 			firstTextBtn.setDirectWriting(true);
 			firstTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			// firstTextBtn.setOutputOnly(false);
@@ -246,7 +246,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 			// Second
 			final ITextRidget secondTextBtn = getRidget(ITextRidget.class,
-					ServiceRequestListDialog.BIND_ID_INSE_SECOND_TRETMENT);
+					AnimalHealthRequestDialog.BIND_ID_INSE_SECOND_TRETMENT);
 			secondTextBtn.setDirectWriting(true);
 			secondTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			// secondTextBtn.setOutputOnly(false);
@@ -258,7 +258,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 			// Third
 			final ITextRidget thirdTextBtn = getRidget(ITextRidget.class,
-					ServiceRequestListDialog.BIND_ID_INSE_THIRD_TRETMENT);
+					AnimalHealthRequestDialog.BIND_ID_INSE_THIRD_TRETMENT);
 			thirdTextBtn.setDirectWriting(true);
 			thirdTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			thirdTextBtn.setOutputOnly(false);
@@ -272,7 +272,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			// Complaint
 			// Third
 			final ITextRidget complaintTextBtn = getRidget(ITextRidget.class,
-					ServiceRequestListDialog.BIND_ID_VERY_THIRD_COMPLAINT);
+					AnimalHealthRequestDialog.BIND_ID_VERY_THIRD_COMPLAINT);
 			complaintTextBtn.addPropertyChangeListener(ITextRidget.PROPERTY_TEXT, new PropertyChangeListener() {
 
 				@Override
