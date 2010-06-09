@@ -25,13 +25,13 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
 
-public class ServiceRecordDialogController extends RecordDialogController<AnimalHealthRequest> {
+public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
 	public class FarmLookupAction implements IActionListener {
 
 		public FarmLookupAction(ITextRidget farmLookupText) {
-			memberLookupText.bindToModel(ServiceRecordDialogController.this, "selectedMember");
-			farmLookupText.bindToModel(ServiceRecordDialogController.this, "selectedFarm");
+			memberLookupText.bindToModel(AnimalHealthRequestDialogController.this, "selectedMember");
+			farmLookupText.bindToModel(AnimalHealthRequestDialogController.this, "selectedFarm");
 		}
 
 		@Override
@@ -149,7 +149,7 @@ public class ServiceRecordDialogController extends RecordDialogController<Animal
 	private ITextRidget memberLookupText;
 	private ITextRidget farmLookupText;
 	
-	public ServiceRecordDialogController() {
+	public AnimalHealthRequestDialogController() {
 		super();
 	}
 

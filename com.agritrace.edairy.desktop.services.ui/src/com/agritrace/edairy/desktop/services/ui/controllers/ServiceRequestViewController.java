@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -37,10 +39,12 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
@@ -48,6 +52,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.AnimalHealthRequestRepository;
 import com.agritrace.edairy.desktop.services.ui.dialogs.ServiceRequestListDialog;
@@ -67,6 +72,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
 	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm", "Type" };
+
 	private IActionRidget farmLookupButton;
 	private IActionRidget memberLookupButton;
 	private IDateTextRidget startDateText;
@@ -79,11 +85,14 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 	private IToggleButtonRidget allRidget;
 	private ITextRidget farmText;
 	private ITextRidget memberText;
-	
+
+	private WritableValue selectedFarm = new WritableValue(null, Farm.class);
+	private WritableValue selectedMember = new WritableValue(null, Membership.class);
+
 	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
 	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
 	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
-	
+
 	private final class ViewItemAction implements IActionListener {
 		@Override
 		public void callback() {
@@ -92,44 +101,22 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 			int returnCode = dialog.open();
 			if (Window.OK == returnCode) {
-				myDairy.merge((AnimalHealthRequest)dialog.getController().getContext("editObject"));				
-			}			
+				myDairy.merge((AnimalHealthRequest) dialog.getController().getContext("editObject"));
+			}
 		}
 	}
 
 	private final class NewItemAction implements IActionListener {
-	@Override
+		@Override
 		public void callback() {
-			ServiceRequestListDialog dialog = new ServiceRequestListDialog(null);		
+			ServiceRequestListDialog dialog = new ServiceRequestListDialog(null);
 			AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-			populate(req);
+			EMFUtil.populate(req);
 			dialog.getController().setContext("editObject", req);
 
 			int returnCode = dialog.open();
 			if (Window.OK == returnCode) {
-				myDairy.saveNew((AnimalHealthRequest)dialog.getController().getContext("editObject"));				
-			}			
-		}
-		private void populate(EObject parent) {
-			for (EReference containedIn : parent.eClass().getEAllContainments()) {
-				if (containedIn.isTransient() || containedIn.isVolatile() || containedIn.isDerived()) {
-					;;
-				}
-//				else if ( containedIn.isRequired() ) {
-				else {
-					EObject child = EcoreUtil.create(containedIn.getEReferenceType());
-					if (containedIn.isMany()) {
-						if (containedIn.getLowerBound() > 0) {
-							EList<EObject> theList = (EList<EObject>) parent.eGet(containedIn);
-							theList.add(child);
-							populate(child);
-						}
-					} 
-					else {
-						parent.eSet(containedIn, child); // does not work for many-valued
-						populate(child);
-					}
-				}
+				myDairy.saveNew((AnimalHealthRequest) dialog.getController().getContext("editObject"));
 			}
 		}
 	}
@@ -138,11 +125,13 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		@Override
 		public void callback() {
 			final MemberSearchDialog dialog = new MemberSearchDialog(new Shell());
+			dialog.setSelectedFarm((Farm) selectedFarm.getValue());
 			final int ret = dialog.open();
 			if (Window.OK == ret) {
-				// Demo code
-				// farmText.setText("Farm1");
-
+				selectedMember.setValue(dialog.getSelectedMember());
+//				memberText.updateFromModel();
+				memberText.setText(dialog.getSelectedMember().getMember().getFamilyName() +
+						", " + dialog.getSelectedMember().getMember().getGivenName());
 			}
 
 		}
@@ -152,21 +141,21 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		@Override
 		public void callback() {
 			final FarmSearchDialog dialog = new FarmSearchDialog(new Shell());
+			dialog.setSelectedMember((Membership) selectedMember.getValue());
 			final int ret = dialog.open();
 			if (Window.OK == ret) {
-				// Demo code
-				// farmText.setText("Farm1");
-
+				selectedFarm.setValue(dialog.getSelectedFarm());
+//				farmText.updateFromModel();
+				farmText.setText(dialog.getSelectedFarm().getName());
 			}
 
 		}
 	}
 
-
 	protected EClass getEClass() {
 		return RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST;
 	}
-	
+
 	@Override
 	public void configureTableRidget() {
 		masterTable = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
@@ -249,14 +238,14 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		// for date range
 		// Start Date Default value
 		if (startDateText != null) {
-			startDateText.setDirectWriting(true);
+			// startDateText.setDirectWriting(true);
 			startDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar
 					.getInstance().getTime())));
 		}
 
 		// End date default value
 		if (endDateText != null) {
-			endDateText.setDirectWriting(true);
+			// endDateText.setDirectWriting(true);
 			endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance()
 					.getTime())));
 		}
@@ -270,13 +259,15 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 
 		// Member Look
 		if (memberText != null) {
-//			memberText.setDirectWriting(true);
-			memberText.setText("");
+			// memberText.setDirectWriting(true);
+			// / memberText.setText("");
+			selectedMember.setValue(null);
 		}
 		// Farm Look
 		if (farmText != null) {
-//			farmText.setDirectWriting(true);
-			farmText.setText("");
+			// farmText.setDirectWriting(true);
+			// farmText.setText("");
+			selectedFarm.setValue(null);
 		}
 	}
 
@@ -402,7 +393,7 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 				// }
 			}
 
-			// Member name field
+			// Farm name field
 			if (farmText != null) {
 				final String farmName = farmText.getText();
 				if (!"".equals(farmName)) {
@@ -457,14 +448,15 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
 		newBtnRidget.addListener(new NewItemAction());
 		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
-//		viewBtnRidget.setEnabled(false);
+		// viewBtnRidget.setEnabled(false);
 		viewBtnRidget.addListener(new ViewItemAction());
 	}
 
 	@Override
 	protected RecordDialog getEditDialog(int dialogStyle, EObject selectedObject) {
 		throw new UnsupportedOperationException("we shoudn't be here...");
-//		return new ServiceRequestListDialog(dialogStyle, new Shell(), selectedObject, null);
+		// return new ServiceRequestListDialog(dialogStyle, new Shell(),
+		// selectedObject, null);
 	}
 
 	@Override
@@ -508,13 +500,19 @@ public class ServiceRequestViewController extends AbstractRecordListController {
 		endDateText.updateFromModel();
 
 		farmText = getRidget(ITextRidget.class, ServiceRequestView.FARM_LOOKUP_TEXT);
+		farmText.bindToModel(selectedFarm);
+		farmText.setOutputOnly(true);
+		
 		farmLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.FARM_LOOKUP_BUTTON);
 		farmLookupButton.addListener(farmLookupAction);
 
 		memberText = getRidget(ITextRidget.class, ServiceRequestView.MEMBER_LOOKUP_TEXT);
+		memberText.bindToModel(selectedMember);
+		memberText.setOutputOnly(true);
+		
 		memberLookupButton = this.getRidget(IActionRidget.class, ServiceRequestView.MEMBER_LOOKUP_BUTTON);
 		memberLookupButton.addListener(memberLookupAction);
 
-				}
+	}
 
-			}
+}
