@@ -4,23 +4,45 @@
 <target name="edairy">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.0.v201003151457-8BA7-FXz1WHLEfz0L0HkGBYl9350"/>
+<unit id="org.hsqldb.feature.group" version="1.8.1.201005082216"/>
+<unit id="org.apache.log4j.feature.group" version="1.2.16.201005082216"/>
+<unit id="org.dom4j.feature.group" version="1.6.1.201005082216"/>
+<unit id="com.mysql.jdbc.feature.group" version="5.1.11.201005082216"/>
+<unit id="org.apache.commons.logging.feature.group" version="1.1.1.201005082216"/>
+<unit id="javax.persistence.feature.group" version="1.99.0.201005082216"/>
+<unit id="org.hibernate.feature.group" version="3.3.2.201005082216"/>
+<repository location="http://www.elver.org/eclipse/update"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.riena.build.feature.core.sdk.feature.group" version="2.0.0.v20100601_2_0_0_RC3"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
-<unit id="org.eclipse.tptp.test.tools.junit.feature.group" version="4.6.2.v200912101900-7H7L4AkF7AG7LAIBGHB"/>
+<unit id="org.eclipse.emf.query.sdk.feature.group" version="1.4.0.v20100428-2315-67J-95GFz01DOIuNNRTWK_NPj507"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
-<unit id="org.eclipse.persistence.jpa.feature.group" version="2.1.0.v20100316-r6816"/>
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.6.0.v20090923-7G7R-7lz-qoAbhH4v9RpUbdn-4qz"/>
-<unit id="org.eclipse.riena.build.feature.core.sdk.feature.group" version="2.0.0.v20100316_2_0_0_M6"/>
+<unit id="org.eclipse.persistence.jpa.feature.group" version="2.1.0.v20100529-r7411"/>
+<unit id="org.eclipse.persistence.jpa.source.feature.group" version="2.1.0.v20100529-r7411"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
-<unit id="org.eclipse.emf.query.sdk.feature.group" version="1.4.0.v20091215-1624-67DBg95GFyJEJHqPQVWPNZUpIt95"/>
-<unit id="org.eclipse.emf.teneo.eclipselink.sdk.feature.group" version="1.1.0.v201003162147"/>
-<unit id="org.eclipse.emf.teneo.hibernate.sdk.feature.group" version="1.1.2.v201003162147"/>
+<unit id="org.eclipse.tptp.test.tools.junit.feature.group" version="4.7.0.v201005032111-7H7P-AkF7B77RGHDRIP"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.0.v20100528-0146"/>
+<unit id="org.eclipse.emf.query.sdk.feature.group" version="1.4.0.v20100428-2315-67J-95GFz01DOIuNNRTWK_NPj507"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.4.0.v20100428-2315-777N-9AZP-D1aQtjUklrYl0eU20D"/>
+<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.4.0.v20100428-2315-67J-96SGR35WNqZRZfmQnghI6uFA"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.platform.sdk" version="3.6.0.I20100527-1700"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.teneo.hibernate.sdk.feature.group" version="1.1.2.v201006021208"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
 </locations>
