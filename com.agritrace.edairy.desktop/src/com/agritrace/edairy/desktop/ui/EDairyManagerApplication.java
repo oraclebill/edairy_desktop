@@ -42,7 +42,9 @@ import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
+import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -117,10 +119,10 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		// FIXME: remove !!!
 		// setup memory based PM for development
-//		PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
-//		PersistenceManager.setDefault(new PersistenceManager() );
-		
-//		ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
+		// PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
+		// PersistenceManager.setDefault(new PersistenceManager() );
+
+		// ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 
 		final ApplicationNode app = new ApplicationNode("eDairy Manager"); //$NON-NLS-1$
 		final WorkareaManager workarea = WorkareaManager.getInstance();
@@ -162,7 +164,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, BlankView.ID);
-		 NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
+		NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
 				"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
@@ -202,7 +204,8 @@ public class EDairyManagerApplication extends SwtApplication {
 		subAppNode.addChild(moduleGroupNode);
 
 		moduleNode = NodeFactory.createModule("edm.farms", "Farms", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-	NodeFactory.createSubModule("edm.farms.directory", "Farm Directory", moduleNode, FarmListView.ID,FarmListViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubModule(
+				"edm.farms.directory", "Farm Directory", moduleNode, FarmListView.ID, FarmListViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		//	NodeFactory.createSubModule("edm.farms.edit", "Register Farm", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
@@ -213,7 +216,9 @@ public class EDairyManagerApplication extends SwtApplication {
 		subAppNode.addChild(moduleGroupNode);
 
 		moduleNode = NodeFactory.createModule("edm.livestock", "Livestock", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule("edm.livestock.directory", "Livestock Directory", moduleNode, LivestockListView.ID,LiveStockListController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory
+				.createSubModule(
+						"edm.livestock.directory", "Livestock Directory", moduleNode, LivestockListView.ID, LiveStockListController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		//	NodeFactory.createSubModule("edm.livestock.edit", "Register Animal", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
@@ -275,19 +280,21 @@ public class EDairyManagerApplication extends SwtApplication {
 		// DAIRY GRP
 		//
 
-		final IModuleNode moduleSystem = NodeFactory.createModule("edm.sysadmin", "Dairy", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule("edm.dairy.info", "Profile", moduleSystem, DairyProfileView.ID, DairyProfileViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory
-				.createSubModule(
-						"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule(
-				"edm.dairy.staff", "Employees", moduleSystem, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule(
-				"edm.dairy.vehicles", "Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule("edm.dairy.bins", "Containers (Bins)", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule("edm.dairy.routes", "Routes", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//		NodeFactory.createSubMobule("edm.dairy.roles", "Roles", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-
+		{
+			final IModuleNode moduleSystem = NodeFactory.createModule("edm.sysadmin", "Dairy", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule(
+					"edm.dairy.info", "Profile", moduleSystem, DairyProfileView.ID, DairyProfileViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory
+					.createSubModule(
+							"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule(
+					"edm.dairy.staff", "Employees", moduleSystem, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule(
+					"edm.dairy.vehicles", "Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule("edm.dairy.bins", "Containers (Bins)", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule("edm.dairy.routes", "Routes", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			//		NodeFactory.createSubMobule("edm.dairy.roles", "Roles", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 		//
 		// EVENTS GRP
 		//
@@ -297,15 +304,25 @@ public class EDairyManagerApplication extends SwtApplication {
 		//	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
+		// CUSTOMERS GRP
+		//
+		{
+			final IModuleNode moduleDirectory = NodeFactory.createModule("edm.customer.directory", "Customers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory
+					.createSubModule(
+							"edm.services.customer.directory", "Customer Directory", moduleDirectory, CustomerDirectoryView.ID, CustomerDirectoryController.class); 
+		}
+		
+		//
 		// SUPPLIERS GRP
 		//
-
-		final IModuleNode moduleDirectory = NodeFactory.createModule("edm.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory
-				.createSubModule(
-						"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierListViewController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-		//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-
+		{
+			final IModuleNode moduleDirectory = NodeFactory.createModule("edm.supplier.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory
+					.createSubModule(
+							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierListViewController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 		//
 		// REPORTS TAB
 		//

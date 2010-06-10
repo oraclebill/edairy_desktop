@@ -22,9 +22,22 @@ public class AddRouteDialog extends AbstractDialogView {
 	private Composite contentArea;
 	private final AbstractWindowController myController;
 
+	/**
+	 * @wbp.parser.constructor
+	 */
+	public AddRouteDialog() {
+		super(null);
+		myController = new AddRouteDialogController(null);
+	}
+	
 	public AddRouteDialog(AbstractWindowController controller) {
 		super(null);
-		myController = controller;
+		if (controller == null) {
+			myController = new AddRouteDialogController(null);
+		} 
+		else {
+			myController = controller;
+		}
 	}
 
 	@Override
@@ -32,6 +45,9 @@ public class AddRouteDialog extends AbstractDialogView {
 		parent.setBackground(LnfManager.getLnf().getColor(
 				LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		contentArea = new Composite(parent, SWT.NONE);
+		GridData gd_contentArea = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		gd_contentArea.heightHint = 216;
+		contentArea.setLayoutData(gd_contentArea);
 		contentArea.setLayout(new GridLayout(2, false));
 
 		/*

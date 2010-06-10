@@ -1364,6 +1364,24 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCustomer_CustomerType() {
+		return (EAttribute)customerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomer_Status() {
+		return (EAttribute)customerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getMembershipStatus() {
 		return membershipStatusEEnum;
 	}
@@ -1558,6 +1576,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		customerEClass = createEClass(CUSTOMER);
 		createEAttribute(customerEClass, CUSTOMER__CUSTOMER_ID);
+		createEAttribute(customerEClass, CUSTOMER__CUSTOMER_TYPE);
+		createEAttribute(customerEClass, CUSTOMER__STATUS);
 
 		// Create enums
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
@@ -1754,6 +1774,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(customerEClass, Customer.class, "Customer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCustomer_CustomerId(), theModelPackage.getUniqueID(), "customerId", null, 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomer_CustomerType(), ecorePackage.getEString(), "customerType", "Milk Processor", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomer_Status(), ecorePackage.getEString(), "status", "Active", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(membershipStatusEEnum, MembershipStatus.class, "MembershipStatus");

@@ -5,6 +5,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.agritrace.edairy.desktop.common.ui.activator.Activator;
+
+
 public class DesktopBaseActivator extends AbstractUIPlugin {
 
 	public static final String RESOURCE_PLUGIN = "com.agritrace.edairy.desktop.icons";

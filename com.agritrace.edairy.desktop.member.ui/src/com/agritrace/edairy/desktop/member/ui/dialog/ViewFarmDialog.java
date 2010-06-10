@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogController;
 
@@ -96,15 +97,15 @@ public class ViewFarmDialog extends AbstractDialogView {
 
 		deleteButton = UIControlsFactory.createButton(buttonComposite, "Delete");
 		deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(deleteButton, ViewWidgetId.deleteButton);
+		addUIControl(deleteButton, DialogConstants.deleteButton);
 
 		saveButton = UIControlsFactory.createButton(buttonComposite, "Save");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(saveButton, ViewWidgetId.memberInfo_saveButton);
+		addUIControl(saveButton, DialogConstants.memberInfo_saveButton);
 
 		cancelButton = UIControlsFactory.createButton(buttonComposite, "Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(cancelButton, ViewWidgetId.memberInfo_cacelButton);
+		addUIControl(cancelButton, DialogConstants.memberInfo_cacelButton);
 		return buttonComposite;
 	}
 

@@ -12,6 +12,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.operations.services,
  com.agritrace.edairy.desktop.operations.services.collections,
+ com.agritrace.edairy.desktop.operations.services.customer,
  com.agritrace.edairy.desktop.operations.services.dairylocation,
  com.agritrace.edairy.desktop.operations.services.employee,
  com.agritrace.edairy.desktop.operations.services.supplier,

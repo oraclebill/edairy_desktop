@@ -47,8 +47,8 @@ public class AnimalHealthRequestView extends AbstractRecordListView {
 //	public static final String END_DATE_BUTTON = "end.date.button";
 
 	@Override
-	protected void createFilterCondtions(Composite comp) {
-		super.createFilterCondtions(comp);
+	protected void createFilterConditions(Composite comp) {
+		super.createFilterConditions(comp);
 
 		// Date Range
 		createDateRange(comp);
