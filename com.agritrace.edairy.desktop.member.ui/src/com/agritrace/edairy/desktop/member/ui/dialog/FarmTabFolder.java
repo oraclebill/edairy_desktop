@@ -81,7 +81,8 @@ public class FarmTabFolder {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 				.applyTo(containerWidget.getComposite());
 		containerTab.setControl(containerComposite);
-
+		//by default select the profile tab
+		tabfolder.setSelection(profileTab);
 	}
 
 	public Composite getTabComposite() {

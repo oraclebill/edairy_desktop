@@ -38,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -61,9 +62,12 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	public static final String containerRemoveTitle = "Remove Containers";
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
+	private MemberRepository memberRepository;
 	
 	public MemberContainerWidgetController(IController controller) {
 		this.controller = controller;
+		memberRepository = new MemberRepository();
+
 		configure();
 	}
 
@@ -103,12 +107,18 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				if (returnCode == AbstractWindowController.OK) {
 					 container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 					 containerInput.add(container);
+					 container.getOwner().getCans().add(container);
 					 List<Container> containers;
 						try {
 							containers = getContainerFilteredResult();
 							containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
 									containerPropertyNames, containerColumnHeaders);
 							containerTable.updateFromModel();
+							if(inputModel instanceof Membership){
+								memberRepository.update((Membership)inputModel);	
+							}
+							
+
 						} catch (final ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
