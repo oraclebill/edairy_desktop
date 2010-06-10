@@ -26,7 +26,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	}
 
 	protected void configureButtonsPanel() {
-		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.memberInfo_saveButton);
+		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -37,7 +37,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 			}
 		});
 
-		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.memberInfo_cacelButton);
+		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_CANCEL);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -46,7 +46,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 			}
 		});
 
-		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		deleteAction.setVisible(false);
 		deleteAction.addListener(new IActionListener() {
 			@Override

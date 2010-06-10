@@ -4,6 +4,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
+            allowMultiple="true"
             class="com.agritrace.edairy.desktop.operations.ui.views.SupplierListView"
             id="edairy.supplier.list.view"
             name="Supplier List"

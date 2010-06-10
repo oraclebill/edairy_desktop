@@ -33,7 +33,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
-		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		deleteAction.setVisible(true);
 	}
 }

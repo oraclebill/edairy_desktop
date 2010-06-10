@@ -88,7 +88,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 		});
 
 		// save button
-		((IActionRidget) getRidget(DialogConstants.memberInfo_saveButton)).addListener(new IActionListener() {
+		((IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE)).addListener(new IActionListener() {
 
 			@Override
 			public void callback() {
@@ -97,7 +97,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 			}
 		});
 		// cancel button
-		((IActionRidget) getRidget(DialogConstants.memberInfo_cacelButton)).addListener(new IActionListener() {
+		((IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_CANCEL)).addListener(new IActionListener() {
 
 			@Override
 			public void callback() {

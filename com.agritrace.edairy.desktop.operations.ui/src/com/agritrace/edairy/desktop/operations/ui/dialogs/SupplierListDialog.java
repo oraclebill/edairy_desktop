@@ -59,7 +59,7 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 	}
 
 	@Override
-	protected void createUIComponent(Composite parent) {
+	protected void buildWorkArea(Composite parent) {
 
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(2, false));

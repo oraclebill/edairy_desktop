@@ -96,7 +96,7 @@ public class AnimalHealthRequestDialog extends RecordDialog {
 	}
 
 	@Override
-	protected void createUIComponent(Composite comp) {
+	protected void buildWorkArea(Composite comp) {
 
 		// Create common controls
 		createCommonControls(comp);

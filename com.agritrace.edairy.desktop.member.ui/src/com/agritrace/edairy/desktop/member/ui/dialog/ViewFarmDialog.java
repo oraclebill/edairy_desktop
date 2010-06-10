@@ -97,15 +97,15 @@ public class ViewFarmDialog extends AbstractDialogView {
 
 		deleteButton = UIControlsFactory.createButton(buttonComposite, "Delete");
 		deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(deleteButton, DialogConstants.deleteButton);
+		addUIControl(deleteButton, DialogConstants.BIND_ID_BUTTON_DELETE);
 
 		saveButton = UIControlsFactory.createButton(buttonComposite, "Save");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(saveButton, DialogConstants.memberInfo_saveButton);
+		addUIControl(saveButton, DialogConstants.BIND_ID_BUTTON_SAVE);
 
 		cancelButton = UIControlsFactory.createButton(buttonComposite, "Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(cancelButton, DialogConstants.memberInfo_cacelButton);
+		addUIControl(cancelButton, DialogConstants.BIND_ID_BUTTON_CANCEL);
 		return buttonComposite;
 	}
 
