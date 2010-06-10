@@ -41,8 +41,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 	ITextRidget customerDescription;
 
 	@Override
-	public void configureRidgets() {
-		super.configureRidgets();
+	public void configureUserRidgets() {
 		
 		// ensure model available
 		editCustomer = getWorkingCopy();
@@ -119,25 +118,6 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		commController.updateBinding();		
 	}
 
-	@Override
-	protected boolean isPageValid() {
-		boolean valid = true;
-//		Collection<? extends IRidget> allRidgets =  getRidgets();
-		for (IRidget test :  getRidgets()) {
-			IMarkableRidget markable;
-			if (test instanceof IMarkableRidget) {
-				markable = (IMarkableRidget) test;
-				Collection<IMessageMarker> widgetMarkers = markable.getMarkersOfType(IMessageMarker.class);
-				for ( IMessageMarker marker : widgetMarkers ) {
-					valid = false;
-					// TODO: Display error messages in message area.
-					System.err.println( ">>>>>>>> ERROR: " + marker.getMessage());
-				}
-			}			
-		}		
-		return valid;
-	}
-	
 	
 	@Override
 	protected EClass getEClass() {

@@ -40,8 +40,7 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	// }
 
 	@Override
-	public void configureRidgets() {
-		super.configureRidgets();
+	public void configureUserRidgets() {
 		// configure supplier ID
 		final Supplier supplier = getWorkingCopy();
 		ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
@@ -151,12 +150,6 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	@Override
 	protected EClass getEClass() {
 		return DairyPackage.eINSTANCE.getSupplier();
-	}
-
-	@Override
-	protected boolean isPageValid() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 }

@@ -143,9 +143,11 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 	public boolean isChanged(Object source, Object target) {
 	    final Employee p1 = (Employee) source;
 	    final Employee p2 = (Employee) target;
-	    final boolean equals = p1.getGivenName().equals(p2.getGivenName())
-		    && p1.getFamilyName().equals(p2.getFamilyName()) && p1.getId().equals(p2.getId())
-		    && p1.getJobFunction().equals(p2.getJobFunction());
+	    final boolean equals = (p1 == p2) || (p1 == null && p2 != null) || (p2 == null && p1 != null) ||  
+	    	(p1.getGivenName().equals(p2.getGivenName()) 
+	    			&& p1.getFamilyName().equals(p2.getFamilyName()) 
+	    			&& p1.getId().equals(p2.getId()) 
+	    			&& p1.getJobFunction().equals(p2.getJobFunction()));
 	    return !equals;
 	}
 

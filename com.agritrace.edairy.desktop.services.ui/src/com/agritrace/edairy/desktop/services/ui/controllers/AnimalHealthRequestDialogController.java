@@ -160,8 +160,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	}
 	
 	@Override
-	public void configureRidgets() {
-		super.configureRidgets();
+	public void configureUserRidgets() {
 		request = getWorkingCopy();
 
 		textRidget = getRidget(IDateTextRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
@@ -324,12 +323,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 	@Override
 	protected void saveUpdated() throws NonExistingEntityException {
-	}
-
-	@Override
-	protected boolean isPageValid() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 }
