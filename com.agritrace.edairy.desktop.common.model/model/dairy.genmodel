@@ -132,6 +132,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/suppliers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/animalHealthRequests"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/dairyBins"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/managerName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/establishedDate"/>
       <genOperations ecoreOperation="dairy.ecore#//Dairy/getMemberFarms"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Membership">
@@ -168,6 +170,8 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Customer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/customerId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/customerType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/status"/>
     </genClasses>
     <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.desktop.common.model.dairy"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
@@ -290,6 +294,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/phoneNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/companyId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/profilePhoto"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//DescriptiveLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//DescriptiveLocation/directions"/>

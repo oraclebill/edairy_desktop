@@ -38,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
@@ -63,11 +64,12 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
 	private MemberRepository memberRepository;
+	private FarmRepository farmRepository;
 	
 	public MemberContainerWidgetController(IController controller) {
 		this.controller = controller;
 		memberRepository = new MemberRepository();
-
+		farmRepository = new FarmRepository();
 		configure();
 	}
 
@@ -108,17 +110,13 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 					 container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 					 containerInput.add(container);
 					 container.getOwner().getCans().add(container);
+					 farmRepository.update(container.getOwner());
 					 List<Container> containers;
 						try {
 							containers = getContainerFilteredResult();
 							containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
 									containerPropertyNames, containerColumnHeaders);
 							containerTable.updateFromModel();
-							if(inputModel instanceof Membership){
-								memberRepository.update((Membership)inputModel);	
-							}
-							
-
 						} catch (final ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
