@@ -29,6 +29,8 @@ import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
@@ -52,9 +54,12 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	private final List<RegisteredAnimal> animalInput = new ArrayList<RegisteredAnimal>();
+	private final IFarmRepository farmRepository;
+
 
 	public MemberLiveStockWidgetController(IController controller) {
 		this.controller = controller;
+		farmRepository = new FarmRepository();
 		configure();
 	}
 
@@ -142,6 +147,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 					newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED);
 					newAnimal.getLocation().getAnimals().add(newAnimal);
 					animalInput.add(newAnimal);
+					farmRepository.save(newAnimal.getLocation());
 					liveStockTable.updateFromModel();
 					// membershipList.set(index, selectedMember);
 					// memberListRidget.updateFromModel();
@@ -203,11 +209,16 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 				Membership member = (Membership) inputModel;
 				final List<Farm> farms = member.getMember().getFarms();
 				for (final Farm farm : farms) {
-					animalInput.addAll(farm.getAnimals());
+					if(farm != null){
+						animalInput.addAll(farm.getAnimals());	
+					}
+
 				}
 			} else if (inputModel instanceof Farm) {
 				Farm farm = (Farm) inputModel;
-				animalInput.addAll(farm.getAnimals());
+				if(farm != null){
+					animalInput.addAll(farm.getAnimals());
+				}
 			}
 
 			liveStockTable.updateFromModel();

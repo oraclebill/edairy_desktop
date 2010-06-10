@@ -9,6 +9,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
@@ -98,6 +99,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	private void initDatabase() {
 		// FIXME: get config from filesystem
+		 PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
 		PersistenceManager.getDefault().getSession();
 	}
 }

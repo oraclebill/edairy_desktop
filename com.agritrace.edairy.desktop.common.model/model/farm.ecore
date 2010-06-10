@@ -21,7 +21,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="ecore:EClass common.ecore#//Location"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType common.ecore#//UniqueID"

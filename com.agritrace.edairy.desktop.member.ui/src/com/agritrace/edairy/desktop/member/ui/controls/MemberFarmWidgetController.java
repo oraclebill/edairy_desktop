@@ -26,6 +26,8 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
@@ -41,7 +43,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 	private ITableRidget farmTable;
 
 	private IActionRidget farmAddButton;
-
+	private IActionRidget farmViewButton;
 	private IActionRidget farmRemoveButton;
 
 	private Membership selectedMember;
@@ -53,10 +55,12 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 
 	private final List<Farm> farms = new ArrayList<Farm>();
 	private final IMemberRepository memberRepository;
-	
-	
+	private final IFarmRepository farmRepository;
+
+
 	public MemberFarmWidgetController(IController controller) {
 		memberRepository = new MemberRepository();
+		farmRepository = new FarmRepository();
 		this.controller = controller;
 		configure();
 	}
@@ -68,10 +72,8 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 			return;
 
 		}
+		//farm table
 		farmTable = controller.getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
-
-		farmAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
-
 		farmTable.setColumnFormatter(2, new ColumnFormatter() {
 
 			@Override
@@ -82,13 +84,15 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 						final PostalLocation postalLocation = location.getPostalLocation();
 						if (postalLocation != null) {
 							return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
-									+ postalLocation.getPostalCode();
+							+ postalLocation.getPostalCode();
 						}
 					}
 				}
 				return null;
 			}
 		});
+		//add button
+		farmAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
 		farmAddButton.addListener(new IActionListener() {
 
 			@Override
@@ -106,45 +110,58 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 				int returnCode = memberDialog.open();
 				if (returnCode == AbstractWindowController.OK) {
 					newNode = (FarmListViewTableNode) memberDialog.getController()
-							.getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+					.getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+					farmRepository.saveNew(newFarm);
 					selectedMember.getMember().getFarms().add(newFarm);
 					memberRepository.update(selectedMember);
 					farms.add(newFarm);
 					farmTable.updateFromModel();
 				}
-//				final AddFarmDialog dialog = new AddFarmDialog(shell);
-//				dialog.setMemberShip(selectedMember);
-//				if (dialog.open() == Window.OK) {
-//					final Farm newFarm = dialog.getNewFarm();
-//					selectedMember.getMember().getFarms().add(newFarm);
-//					memberRepository.update(selectedMember);
-//					farms.add(newFarm);
-//					farmTable.updateFromModel();
-//				}
 			}
 		});
+		//viewButton
+		farmViewButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
+		//by default disable view button
+		farmViewButton.setEnabled(false);
+		farmViewButton.addListener(new IActionListener() {
 
+			@Override
+			public void callback() {
+				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
+						| SWT.APPLICATION_MODAL);
+				shell.setSize(550, 450);
+				
+				final List<Object> selections = farmTable.getSelection();
+				if(selections.size()>0){
+					Farm selectedFarm = (Farm)selections.get(0);
+					FarmListViewTableNode newNode =new FarmListViewTableNode(selectedMember, selectedFarm);
+					final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
+					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+							newNode);
+
+					int returnCode = memberDialog.open();
+					if (returnCode == AbstractWindowController.OK) {
+						newNode = (FarmListViewTableNode) memberDialog.getController()
+						.getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+						farmRepository.update(selectedFarm);
+						memberRepository.update(selectedMember);
+						farmTable.updateFromModel();
+					}else if(returnCode == 2){
+						deleteFarm();
+
+					}
+				}
+
+				
+			}
+		});
 		farmRemoveButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_Remove);
 		farmRemoveButton.setEnabled(false);
 		farmRemoveButton.addListener(new IActionListener() {
 
 			@Override
 			public void callback() {
-				if (MessageDialog
-						.openConfirm(Display.getDefault().getActiveShell(), farmRemoveTitle, farmRemoveMessage)) {
-					final List<Object> selections = farmTable.getSelection();
-					if (selectedMember != null) {
-						for (final Object selObject : selections) {
-							selectedMember.getMember().getFarms().remove(selObject);
-							((Farm) selObject).getAnimals().clear();
-							((Farm) selObject).setLocation(null);
-							selectedMember.getMember().getFarms().remove((selObject));
-							farms.remove(selObject);
-						}
-
-						farmTable.updateFromModel();
-					}
-				}
+				deleteFarm();
 
 			}
 
@@ -193,9 +210,31 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 		if (event.getSource() == farmTable) {
 			final List<Object> selection = event.getNewSelection();
 			if (selection.size() > 0) {
+				farmViewButton.setEnabled(true);
 				farmRemoveButton.setEnabled(true);
 			} else {
+				farmViewButton.setEnabled(false);
 				farmRemoveButton.setEnabled(false);
+			}
+		}
+	}
+	
+	private void deleteFarm(){
+		if (MessageDialog
+				.openConfirm(Display.getDefault().getActiveShell(), farmRemoveTitle, farmRemoveMessage)) {
+			final List<Object> selections = farmTable.getSelection();
+			if (selectedMember != null) {
+				for (final Object selObject : selections) {
+					selectedMember.getMember().getFarms().remove(selObject);
+					((Farm) selObject).getAnimals().clear();
+					((Farm) selObject).setLocation(null);
+					selectedMember.getMember().getFarms().remove((selObject));
+					farms.remove(selObject);
+					farmRepository.delete((Farm) selObject);
+					memberRepository.update(selectedMember);
+				}
+
+				farmTable.updateFromModel();
 			}
 		}
 	}

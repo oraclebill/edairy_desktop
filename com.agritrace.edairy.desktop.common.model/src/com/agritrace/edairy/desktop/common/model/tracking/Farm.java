@@ -128,7 +128,7 @@ public interface Farm extends EObject {
 	 * @return the value of the '<em>Farm Id</em>' attribute.
 	 * @see #setFarmId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarm_FarmId()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
 	 * @generated
 	 */
 	Long getFarmId();

@@ -52,11 +52,8 @@ public class ViewFarmDialogController extends AbstractWindowController {
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
 		selectedNode = (FarmListViewTableNode) getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
-
 		configureUpperPanel();
-
 		locationProfileController = new LocationProfileWidgetController(this);
-
 		liveStockController = new MemberLiveStockWidgetController(this);
 		containerController = new MemberContainerWidgetController(this);
 

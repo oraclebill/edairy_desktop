@@ -19,6 +19,7 @@ public class MemberFarmWidget {
 	private Composite composite;
 
 	public static String ADD_BUTTON = "Add &Farm";
+	public static String VIEW_BUTTON = "&View";
 	public static String REMOVE_BUTTON = "Remo&ve";
 
 	public MemberFarmWidget(Composite parent) {
@@ -35,8 +36,7 @@ public class MemberFarmWidget {
 		final Composite tablePanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		final Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
-				ViewWidgetId.FARM_TABLE);
+		final Table table = UIControlsFactory.createTable(tablePanel, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION, ViewWidgetId.FARM_TABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 
@@ -61,13 +61,13 @@ public class MemberFarmWidget {
 
 		final Composite buttonsPanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
-		buttonsPanel.setLayout(new GridLayout(2, false));
+		buttonsPanel.setLayout(new GridLayout(3, false));
 
 		final Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.FARM_ADD);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
-
-		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON,
-				ViewWidgetId.FARM_Remove);
+		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, VIEW_BUTTON, ViewWidgetId.FARM_View);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);
+		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON, ViewWidgetId.FARM_Remove);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(removeButton);
 
 	}

@@ -5,12 +5,14 @@ Bundle-SymbolicName: com.agritrace.edairy.desktop.finance.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.finance.ui.Activator
 Bundle-Vendor: AGRITRACE
-Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
+Require-Bundle: org.eclipse.swt;bundle-version="3.6.0",
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.icons;bundle-version="1.0.0",
- org.eclipse.emf.databinding;bundle-version="1.2.0"
+ org.eclipse.emf.databinding;bundle-version="1.2.0",
+ org.eclipse.riena.client;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.finance.ui.controls,
  com.agritrace.edairy.desktop.finance.ui.views
+Import-Package: org.eclipse.swt.widgets

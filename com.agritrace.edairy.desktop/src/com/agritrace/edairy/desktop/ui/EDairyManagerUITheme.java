@@ -1,10 +1,8 @@
 package com.agritrace.edairy.desktop.ui;
 
-import java.util.Map;
-
 import org.eclipse.riena.ui.swt.lnf.ColorLnfResource;
 import org.eclipse.riena.ui.swt.lnf.FontLnfResource;
-import org.eclipse.riena.ui.swt.lnf.ILnfResource;
+import org.eclipse.riena.ui.swt.lnf.ILnfCustomizer;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme;
 import org.eclipse.swt.graphics.FontData;
@@ -18,40 +16,21 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
      * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomColors
      * (java.util.Map)
      */
-    @Override
-    public void addCustomColors(Map<String, ILnfResource> table) {
-	// TODO Auto-generated method stub
-	super.addCustomColors(table);
-	table.put(LnfKeyConstants.NAVIGATION_BACKGROUND, new ColorLnfResource(231, 244, 211));
-	table.put(LnfKeyConstants.SUB_MODULE_BACKGROUND, new ColorLnfResource(255, 255, 255));
+  
+	public void customizeLnf(ILnfCustomizer lnf){
+		super.customizeLnf(lnf);
+		addCustomColors(lnf);
+		addCustomSettings(lnf);
+		
+	}
+    public void addCustomColors(ILnfCustomizer lnf) {
+	
+	lnf.putLnfSetting(LnfKeyConstants.NAVIGATION_BACKGROUND, new ColorLnfResource(231, 244, 211));
+	lnf.putLnfSetting(LnfKeyConstants.SUB_MODULE_BACKGROUND, new ColorLnfResource(255, 255, 255));
 
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomFonts
-     * (java.util.Map)
-     */
-    @Override
-    public void addCustomFonts(Map<String, ILnfResource> table) {
-	// TODO Auto-generated method stub
-	super.addCustomFonts(table);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomImages
-     * (java.util.Map)
-     */
-    @Override
-    public void addCustomImages(Map<String, ILnfResource> table) {
-	// TODO Auto-generated method stub
-	super.addCustomImages(table);
-    }
+    
 
     /*
      * (non-Javadoc)
@@ -60,12 +39,10 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
      * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomSettings
      * (java.util.Map)
      */
-    @Override
-    public void addCustomSettings(Map<String, Object> table) {
-	// TODO Auto-generated method stub
-	super.addCustomSettings(table);
+   
+    public void addCustomSettings(ILnfCustomizer lnf) {
 
-	table.put(LnfKeyConstants.NAVIGATION_WIDTH, 180);
+	lnf.putLnfSetting(LnfKeyConstants.NAVIGATION_WIDTH, 180);
 
 	// table.put(LnfKeyConstants.STATUSLINE_HEIGHT, 20);
 	//

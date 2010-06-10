@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.ui.converters.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
@@ -63,6 +64,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_FARM);
 		unitCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_UNIT);
 		capacity = getRidget(ITextRidget.class, ViewWidgetId.VIEW_CONTAINER_COMPACITY);
+		capacity.setModelToUIControlConverter(new NumberToStringConverter(Double.class));
 
 		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
@@ -75,7 +77,8 @@ public class AddContainerDialogController extends AbstractWindowController imple
 					TrackingPackage.Literals.CONTAINER__CONTAINER_ID));
 			idLabel.updateFromModel();
 
-			capacity.setText(String.valueOf(selectedContainer.getCapacity()));
+			capacity.bindToModel(selectedContainer,	TrackingPackage.Literals.CONTAINER__CAPACITY.getName());
+			capacity.updateFromModel();
 			capacity.addValidationRule(new IValidator() {
 
 				@Override
