@@ -7,6 +7,7 @@ Bundle-Vendor: AGRITRACE
 Require-Bundle: com.agritrace.edairy.desktop.common.model,
  com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0",
  org.eclipse.riena.client;bundle-version="2.0.0",
- org.junit
+ org.junit,
+ com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

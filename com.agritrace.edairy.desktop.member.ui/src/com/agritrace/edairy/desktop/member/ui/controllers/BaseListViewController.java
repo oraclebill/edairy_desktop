@@ -23,7 +23,6 @@ public abstract class BaseListViewController extends SubModuleController{
 	public void configureRidgets() {
 		configureFilterGroup();
 		configureListGroup();
-
 	}
 	
 	protected abstract void configureFilterGroup();

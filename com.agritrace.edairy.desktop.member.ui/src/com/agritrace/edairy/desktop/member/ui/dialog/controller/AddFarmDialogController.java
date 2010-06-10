@@ -8,6 +8,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class AddFarmDialogController extends ViewFarmDialogController {
@@ -46,7 +47,7 @@ public class AddFarmDialogController extends ViewFarmDialogController {
 
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
-		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		deleteAction.setVisible(false);
 	}
 }

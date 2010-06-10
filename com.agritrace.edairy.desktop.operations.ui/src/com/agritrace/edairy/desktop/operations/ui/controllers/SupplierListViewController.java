@@ -181,7 +181,7 @@ public class SupplierListViewController extends
 	 * 
 	 * @return
 	 */
-	protected Supplier createNewModle() {
+	protected Supplier createNewModel() {
 		Supplier supplier = (Supplier) EMFUtil.createWorkingCopy(
 				this.getEClass(), 3);
 		supplier.setPhoneNumber("");

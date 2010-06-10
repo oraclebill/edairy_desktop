@@ -12,8 +12,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.Activator;
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
+import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 
 public class DateRangeSearchWidget {
 	

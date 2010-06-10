@@ -1,8 +1,9 @@
-package com.agritrace.edairy.desktop.common.ui;
+package com.agritrace.edairy.desktop.common.ui.activator;
 
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTable;
 import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTableRidget;
 

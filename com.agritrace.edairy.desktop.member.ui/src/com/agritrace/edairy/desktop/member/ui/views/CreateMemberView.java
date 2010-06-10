@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
@@ -203,11 +204,11 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 
 		saveButton = UIControlsFactory.createButton(buttonPanel, "Save");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(saveButton, ViewWidgetId.memberInfo_saveButton);
+		addUIControl(saveButton, DialogConstants.BIND_ID_BUTTON_SAVE);
 
 		cancelButton = UIControlsFactory.createButton(buttonPanel, "Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		addUIControl(cancelButton, ViewWidgetId.memberInfo_cacelButton);
+		addUIControl(cancelButton, DialogConstants.BIND_ID_BUTTON_CANCEL);
 
 		return details;
 	}

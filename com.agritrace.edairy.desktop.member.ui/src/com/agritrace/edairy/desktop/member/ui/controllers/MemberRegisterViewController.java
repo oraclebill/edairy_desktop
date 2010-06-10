@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 //import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
@@ -87,7 +88,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 		});
 
 		// save button
-		((IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton)).addListener(new IActionListener() {
+		((IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE)).addListener(new IActionListener() {
 
 			@Override
 			public void callback() {
@@ -96,7 +97,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 			}
 		});
 		// cancel button
-		((IActionRidget) getRidget(ViewWidgetId.memberInfo_cacelButton)).addListener(new IActionListener() {
+		((IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_CANCEL)).addListener(new IActionListener() {
 
 			@Override
 			public void callback() {

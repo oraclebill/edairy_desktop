@@ -10,13 +10,11 @@
             name="Supplier List"
             restorable="true">
       </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
       <view
-            class="com.agritrace.edairy.desktop.operations.ui.views.SupplierListView"
-            id="edairy.supplier.list.view"
-            name="Supplier List"
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView"
+            id="edairy.operations.customer.directory"
+            name="Customer Directory"
             restorable="true">
       </view>
    </extension>

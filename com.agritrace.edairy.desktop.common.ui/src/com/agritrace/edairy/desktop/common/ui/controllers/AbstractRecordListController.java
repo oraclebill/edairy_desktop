@@ -141,7 +141,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		
 	}
 	
-	private void configureButtonsRidget() {
+	protected void configureButtonsRidget() {
 		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
 		if (newBtnRidget != null) {
 			newBtnRidget.addListener(new IActionListener() {
@@ -242,7 +242,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		RecordDialog<T,?> dialog;
 		
 		if (dialogStyle == ACTION_NEW) 
-			dialog = getEditDialog(dialogStyle, createNewModle());
+			dialog = getEditDialog(dialogStyle, createNewModel());
 		else {
 			final T selectedObj = getSelectedEObject();
 			if ( selectedObj == null ) 
@@ -262,7 +262,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 * Create new model while createing a new record
 	 * @return
 	 */
-	protected T createNewModle() {
+	protected T createNewModel() {
 		return (T) EMFUtil.createObject(getEClass());
 	}
 

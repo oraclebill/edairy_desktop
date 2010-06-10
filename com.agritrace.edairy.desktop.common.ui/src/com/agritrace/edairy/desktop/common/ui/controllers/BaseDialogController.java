@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.member.ui.dialog.controller;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -6,7 +6,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
-import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController{
 
@@ -26,7 +26,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	}
 
 	protected void configureButtonsPanel() {
-		final IActionRidget okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
+		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -37,7 +37,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 			}
 		});
 
-		final IActionRidget cancelAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_cacelButton);
+		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_CANCEL);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -46,7 +46,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 			}
 		});
 
-		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		deleteAction.setVisible(false);
 		deleteAction.addListener(new IActionListener() {
 			@Override

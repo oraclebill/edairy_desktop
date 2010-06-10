@@ -1,7 +1,8 @@
 package com.agritrace.edairy.desktop.member.ui;
 
-public class ViewWidgetId {
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
+public class ViewWidgetId implements DialogConstants {
 	public static final String milkJournalGroup = "milkJournalGroup";
 
 	public static final String milkJournalGroup_dateText = "milkJournalGroup_dateText";
@@ -20,7 +21,6 @@ public class ViewWidgetId {
 
 	public static final String modifyButton = "modifyButton";
 
-	public static final String deleteButton = "deleteButton";
 
 	public static final String clearButton = "clearButton";
 
@@ -88,10 +88,6 @@ public class ViewWidgetId {
 	public static final String memberInfo_route = "route";
 
 	public static final String memberInfo_stops = "stops";
-
-	public static final String memberInfo_cacelButton = "Cancel";
-
-	public static final String memberInfo_saveButton = "Save";
 
 	public static final String ADDRESS_TXT = "Address";
 	public static final String SECTION_TXT = "Section";

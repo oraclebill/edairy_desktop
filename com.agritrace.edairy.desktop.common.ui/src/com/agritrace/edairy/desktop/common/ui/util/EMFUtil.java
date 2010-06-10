@@ -1,16 +1,20 @@
 package com.agritrace.edairy.desktop.common.ui.util;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class EMFUtil {
+	private final static String spaces = "                                                               ";
 
 	public static boolean compare(EObject src, EObject dst) {
 		if ((src == null) && (dst == null)) {
@@ -19,11 +23,58 @@ public class EMFUtil {
 		if ((src == null) || (dst == null)) {
 			return false;
 		}
-
 		final String str1 = src.toString();
 		final String str2 = dst.toString();
 		return str1.substring(str1.indexOf('('), str1.indexOf(')')).equals(
 				str2.substring(str2.indexOf('('), str2.indexOf(')')));
+	}
+
+	public static int populate(EObject parent) {
+		return new EMFUtil().populate(parent, false, 0);
+	}
+	
+	public static int populateMinimal(EObject parent) {
+		return new EMFUtil().populate(parent, true, 0);
+	}
+
+	int level = 0;
+	HashSet<EClass> visitedClasses = new HashSet<EClass>();
+	private int populate(EObject parent, boolean onlyRequired, int count) {
+		visitedClasses.add(parent.eClass());
+		level++;
+//		System.out.println(spaces.substring(0,level*2) + "> [" + level + "] populating "
+//				+ (parent.eContainingFeature() != null ? parent.eContainingFeature().getName() : "(null)") + " - "
+//				+ parent.eClass().getName());
+		
+		for (EReference containedIn : parent.eClass().getEAllContainments()) {
+			if (containedIn.isTransient() || containedIn.isVolatile() || containedIn.isDerived()) {
+				continue;
+			}
+			if (onlyRequired && containedIn.getLowerBound() < 1) {
+				continue;
+			}
+			if (onlyRequired && !containedIn.isRequired()) {
+				continue;
+			}
+			
+			EObject child = EcoreUtil.create(containedIn.getEReferenceType());
+			if (containedIn.isMany()) {
+				int upper = containedIn.getUpperBound();
+				int lower = containedIn.getLowerBound();
+				assert(lower >= 0);
+				assert(upper < 0 || upper >= lower);				
+				EList<EObject> theList = (EList<EObject>) parent.eGet(containedIn);
+				theList.add(child);
+				if (upper - lower > 1 || upper < 0) 
+					theList.add(child);
+			} else {
+				parent.eSet(containedIn, child); // does not work for
+			} 
+			populate(child, onlyRequired, ++count);
+		}
+
+		level--;
+		return count;
 	}
 
 	/**
