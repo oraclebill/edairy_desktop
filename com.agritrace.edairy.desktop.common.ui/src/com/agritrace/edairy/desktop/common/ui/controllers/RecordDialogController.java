@@ -26,13 +26,9 @@ import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsExc
 import com.agritrace.edairy.desktop.common.persistence.services.DairyPersistenceException;
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 public abstract class RecordDialogController<T extends EObject> extends AbstractWindowController {
-
-	// TODO: move these constants to a neutral API class... (was in dialog..)
-	public static final String BIND_ID_BUTTON_OK = "bind.id.btn.ok";
-	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
 
 	private final Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
 
@@ -104,7 +100,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 		}
 
-		final IActionRidget okButton = getRidget(IActionRidget.class, BIND_ID_BUTTON_OK);
+		final IActionRidget okButton = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
 		okButton.addListener(new IActionListener() {
 
 			@Override
@@ -120,7 +116,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 			}
 
 		});
-		final IActionRidget cancelBtn = getRidget(IActionRidget.class, BIND_ID_BUTTON_CANCEL);
+		final IActionRidget cancelBtn = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_CANCEL);
 		cancelBtn.addListener(new IActionListener() {
 
 			@Override
@@ -188,39 +184,39 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 	/**
 	 * @since 2.0
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
-		R ridget = (R) getRidget(id);
-
-		if (ridget != null) {
-			return ridget;
-		}
-		if (RienaStatus.isTest()) {
-			try {
-				if (ridgetClazz.isInterface() || Modifier.isAbstract(ridgetClazz.getModifiers())) {
-					final Class<R> mappedRidgetClazz = (Class<R>) ClassRidgetMapper.getInstance().getRidgetClass(
-							ridgetClazz);
-					if (mappedRidgetClazz != null) {
-						ridget = mappedRidgetClazz.newInstance();
-					}
-					Assert.isNotNull(
-							ridget,
-							"Could not find a corresponding implementation for " + ridgetClazz.getName() + " in " + ClassRidgetMapper.class.getName()); //$NON-NLS-1$ //$NON-NLS-2$
-				} else {
-					ridget = ridgetClazz.newInstance();
-				}
-			} catch (final InstantiationException e) {
-				throw new RuntimeException(e);
-			} catch (final IllegalAccessException e) {
-				throw new RuntimeException(e);
-			}
-
-			addRidget(id, ridget);
-		}
-
-		return ridget;
-	}
+//	@Override
+//	@SuppressWarnings("unchecked")
+//	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
+//		R ridget = (R) getRidget(id);
+//
+//		if (ridget != null) {
+//			return ridget;
+//		}
+//		if (RienaStatus.isTest()) {
+//			try {
+//				if (ridgetClazz.isInterface() || Modifier.isAbstract(ridgetClazz.getModifiers())) {
+//					final Class<R> mappedRidgetClazz = (Class<R>) ClassRidgetMapper.getInstance().getRidgetClass(
+//							ridgetClazz);
+//					if (mappedRidgetClazz != null) {
+//						ridget = mappedRidgetClazz.newInstance();
+//					}
+//					Assert.isNotNull(
+//							ridget,
+//							"Could not find a corresponding implementation for " + ridgetClazz.getName() + " in " + ClassRidgetMapper.class.getName()); //$NON-NLS-1$ //$NON-NLS-2$
+//				} else {
+//					ridget = ridgetClazz.newInstance();
+//				}
+//			} catch (final InstantiationException e) {
+//				throw new RuntimeException(e);
+//			} catch (final IllegalAccessException e) {
+//				throw new RuntimeException(e);
+//			}
+//
+//			addRidget(id, ridget);
+//		}
+//
+//		return ridget;
+//	}
 
 	protected abstract boolean isPageValid();
 }

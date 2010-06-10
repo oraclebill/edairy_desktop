@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.finance.ui.controls.FormConstants;
 
@@ -86,7 +87,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 		
 		// Bind Date
 		IDateTextRidget ridgetDate = container.getRidget(IDateTextRidget.class, FormConstants.DATE_PICKER_RIDGET);
-		ridgetDate.setFormat(IDateTextRidget.FORMAT_DDMMYYYY);
+		ridgetDate.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		ridgetDate.bindToModel(obDate);
 		ridgetDate.updateFromModel();
 		

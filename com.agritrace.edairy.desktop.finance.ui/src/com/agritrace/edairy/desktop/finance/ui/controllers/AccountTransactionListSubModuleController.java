@@ -26,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.IAccountTransactionSearch;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionDetailsSubModuleView;
 
 public class AccountTransactionListSubModuleController extends
@@ -96,7 +97,10 @@ public class AccountTransactionListSubModuleController extends
 		openAction = getRidget(IActionRidget.class, "openAction");
 
 		startDateRidget = getRidget(IDateTextRidget.class, "startDateRidget");
+		startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		endDateRidget = getRidget(IDateTextRidget.class, "endDateRidget");
+		endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+
 		memberIdRidget = getRidget(ITextRidget.class, "memberIdRidget");
 		typeSetRidget = getRidget(IMultipleChoiceRidget.class, "typeSetRidget");
 	}

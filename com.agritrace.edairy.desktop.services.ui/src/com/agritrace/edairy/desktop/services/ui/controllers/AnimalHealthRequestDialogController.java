@@ -165,6 +165,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		request = getWorkingCopy();
 
 		textRidget = getRidget(IDateTextRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
+		textRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		textRidget.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		textRidget.bindToModel(EMFObservables.observeValue(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));

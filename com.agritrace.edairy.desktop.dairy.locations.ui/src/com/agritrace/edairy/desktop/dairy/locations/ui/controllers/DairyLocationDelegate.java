@@ -30,6 +30,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.RouteListDialog;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
@@ -96,7 +97,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 		final IDateTextRidget dateOpened = container.getRidget(
 				IDateTextRidget.class,
 				DairyLocationController.RIDGET_ID_DATEOPENED);
-		dateOpened.setFormat(DairyLocationController.DATE_FORMATE);
+		dateOpened.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		dateOpened.bindToModel(workingCopy, "dateOpened");
 		dateOpened.updateFromModel();
 

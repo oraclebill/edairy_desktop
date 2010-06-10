@@ -475,6 +475,7 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 		// delegate.configureRidgets();
 
 		startDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
+		startDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		startDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		startDateText.bindToModel(PojoObservables.observeValue(startBean, "date"));
 		startDateText.updateFromModel();
@@ -495,6 +496,7 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 		allRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_ALL);
 
 		endDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.END_DATE_TEXT);
+		endDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		endDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		endDateText.bindToModel(PojoObservables.observeValue(endDateBean, "date"));
 		endDateText.updateFromModel();
