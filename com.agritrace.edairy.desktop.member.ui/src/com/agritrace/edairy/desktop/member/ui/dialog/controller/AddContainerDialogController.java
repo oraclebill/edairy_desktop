@@ -67,7 +67,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
 
-		okAction = (IActionRidget) getRidget(DialogConstants.memberInfo_saveButton);
+		okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.setEnabled(true);
 
 		if (selectedContainer != null) {
@@ -157,7 +157,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 				getWindowRidget().dispose();
 			}
 		});
-		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.memberInfo_cacelButton);
+		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_CANCEL);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -166,7 +166,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 			}
 		});
 
-		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		deleteAction.setVisible(true);
 		deleteAction.addListener(new IActionListener() {
 			@Override

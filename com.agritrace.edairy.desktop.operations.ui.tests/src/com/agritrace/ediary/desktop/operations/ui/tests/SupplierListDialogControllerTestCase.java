@@ -112,7 +112,7 @@ public class SupplierListDialogControllerTestCase extends
 
 		// Test OK Button
 		final IActionRidget apply = getController().getRidget(
-				IActionRidget.class, SupplierListDialog.BIND_ID_BUTTON_OK);
+				IActionRidget.class, SupplierListDialog.BIND_ID_BUTTON_SAVE);
 		apply.fireAction();
 
 		// TODO Verify DB the last result is 'My company'

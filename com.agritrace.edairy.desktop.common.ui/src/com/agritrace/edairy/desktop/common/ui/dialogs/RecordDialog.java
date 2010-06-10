@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 /**
  * Record List Dialog
@@ -24,21 +25,8 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> extends AbstractDialogView {
+public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> extends AbstractDialogView implements DialogConstants {
 
-	/**
-	 * Bind id for OK button, the label maybe change, but the bind id will not
-	 * change
-	 */
-	public static final String BIND_ID_BUTTON_OK = "bind.id.btn.ok";
-	/**
-	 * Bind id for cancel button
-	 */
-	public static final String BIND_ID_BUTTON_CANCEL = "bind.id.btn.cancel";
-	/**
-	 * Bind id for cancel button
-	 */
-	public static final String BIND_ID_BUTTON_DELETE = "bind.id.btn.delete";
 
 	@Override
 	protected abstract C createController();
@@ -158,7 +146,7 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 		} else {
 			okButton.setText("&Update"); //$NON-NLS-1$
 		}
-		addUIControl(okButton, BIND_ID_BUTTON_OK);
+		addUIControl(okButton, BIND_ID_BUTTON_SAVE);
 
 		final Button cancelButton = UIControlsFactory.createButton(composite);
 		cancelButton.setText("&Cancel"); //$NON-NLS-1$

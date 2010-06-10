@@ -68,7 +68,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 	}
 
 	protected void configureButtonsPanel() {
-		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.memberInfo_saveButton);
+		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -77,7 +77,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 				getWindowRidget().dispose();
 			}
 		});
-		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.memberInfo_cacelButton);
+		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_CANCEL);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -86,7 +86,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 			}
 		});
 
-		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		deleteAction.setVisible(true);
 		deleteAction.addListener(new IActionListener() {
 			@Override
