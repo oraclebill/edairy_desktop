@@ -233,7 +233,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		customerTypeSearchCombo.bindToModel(Observables.staticObservableList(CustomerType.getCustomerTypeList()),
 				CustomerType.class, null, BeansObservables.observeValue(this, "typeSearchValue"));
 		customerTypeSearchCombo.updateFromModel();
-		customerTypeSearchCombo.setSelection(0);
+//		customerTypeSearchCombo.setSelection(0);
 
 		// final TypedBean<CustomerType> selection = new
 		// TypedBean<CustomerType>(null);

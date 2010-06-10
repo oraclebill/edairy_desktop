@@ -34,46 +34,29 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
 
-	private IRepository<T> myRepo;
-	private T workingCopy;
 	private int actionType;
 
-	/**
-	 * Gets working copy for editing
-	 * 
-	 * @return
-	 */
-	// protected abstract T createWorkingCopy();
 
 	protected abstract EClass getEClass();
-
+	protected abstract IRepository<T> getRepository();
+	protected abstract T getWorkingCopy();
+	protected abstract void setWorkingCopy(T t);
+	
+	/** 
+	 * Null constructor 
+	 */
 	public RecordDialogController() {
 		super();
 	}
 
 	public RecordDialogController(T workingCopy) {
 		super();
-		this.workingCopy = workingCopy;
+		setWorkingCopy(workingCopy);
 	}
 
-	public IRepository<T> getRepository() {
-		return myRepo;
-	}
-
-	public void setRepository(IRepository<T> myRepo) {
-		this.myRepo = myRepo;
-	}
 
 	public void setActionType(int actionType) {
 		this.actionType = actionType;
-	}
-
-	public T getWorkingCopy() {
-		return workingCopy;
-	}
-
-	public void setWorkingCopy(T obj) {
-		workingCopy = obj;
 	}
 
 
@@ -84,17 +67,17 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		ridgetPropertyMap.clear();
 		ridgetPropertyMap.putAll(configureRidgetPropertyMap());
 
-		for (final Entry<String, EStructuralFeature> entry : ridgetPropertyMap.entrySet()) {
+		for (final Entry<String, EStructuralFeature> binding : ridgetPropertyMap.entrySet()) {
 
-			final IRidget ridget = getRidget(entry.getKey());
+			final IRidget ridget = getRidget(binding.getKey());
 			if (ridget instanceof IValueRidget) {
 				final IValueRidget valueRidget = (IValueRidget) ridget;
-				final IConverter converter = RidgetsConfigFactory.getInstance().getModel2UIConverter(entry.getValue(),
+				final IConverter converter = RidgetsConfigFactory.getInstance().getModel2UIConverter(binding.getValue(),
 						valueRidget);
 				if (converter != null) {
 					valueRidget.setModelToUIControlConverter(converter);
 				}
-				valueRidget.bindToModel(this.getWorkingCopy(), entry.getValue().getName());
+				valueRidget.bindToModel(this.getWorkingCopy(), binding.getValue().getName());
 				valueRidget.updateFromModel();
 			}
 
@@ -107,7 +90,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 			public void callback() {
 
 				try {
-					doOKPressed();
+					handleSaveAction();
 				} catch (final DairyPersistenceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -121,14 +104,13 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 			@Override
 			public void callback() {
-				doCancelPressed();
+				handleCancelAction();
 
 			}
 		});
 	}
 
-	protected void doOKPressed() throws DairyPersistenceException {
-		if (!isPageValid()) return;
+	protected void handleSaveAction()  {
 		setReturnCode(OK);
 		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
 			saveNew();
@@ -143,26 +125,27 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 			getWindowRidget().dispose();
 		}
 	}
+	
+	protected void handleCancelAction() {
+		setReturnCode(CANCEL);
+		if (!RienaStatus.isTest()) {
+			getWindowRidget().dispose();
+		}
+	}
+
+
 
 	protected int getActionType() {
 		return this.actionType;
 	}
 
 	protected void saveNew() throws AlreadyExistsException {
-		myRepo.saveNew(getWorkingCopy());
+		getRepository().saveNew(getWorkingCopy());
 
 	}
 
 	protected void saveUpdated() throws NonExistingEntityException {
-		myRepo.update(getWorkingCopy());
-	}
-
-	protected void doCancelPressed() {
-		setReturnCode(CANCEL);
-		if (!RienaStatus.isTest()) {
-			getWindowRidget().dispose();
-		}
-
+		getRepository().update(getWorkingCopy());
 	}
 
 	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
@@ -218,5 +201,4 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 //		return ridget;
 //	}
 
-	protected abstract boolean isPageValid();
 }

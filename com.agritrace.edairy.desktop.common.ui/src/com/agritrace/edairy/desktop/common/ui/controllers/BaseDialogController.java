@@ -25,15 +25,53 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		this.repository = repository;
 	}
 
+	public T getWorkingCopy() {
+		return selected;
+	}
+
+	public void setWorkingCopy(T selected) {
+		this.selected = selected;
+	}
+		
+	private boolean validateInternal() {
+		boolean retVal = validate();  // user validation first...
+		if (! retVal ) {
+			return false;
+		}
+		
+		return retVal;
+	}
+	
+	protected boolean validate() {
+		return true;
+	}
+	
+	protected void handleSaveAction() {
+		setReturnCode(DialogConstants.ACTION_SAVE);
+		setContext("selected", getWorkingCopy());
+		System.out.println("OK calling dispose");
+		getWindowRidget().dispose();
+	}
+	
+	protected void handleCancelAction() {
+		setReturnCode(DialogConstants.ACTION_CANCEL);
+		getWindowRidget().dispose();
+	}
+	
+	protected void handleDeleteAction() {
+		setReturnCode(DialogConstants.ACTION_DELETE);
+		getWindowRidget().dispose();		
+	}
+	
 	protected void configureButtonsPanel() {
 		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				setReturnCode(OK);
-				setContext("selected", getSelected());
-				System.out.println("OK calling dispose");
-				getWindowRidget().dispose();
+				if ( ! validateInternal() ) {
+					return;
+				}
+				handleSaveAction();
 			}
 		});
 
@@ -41,8 +79,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				setReturnCode(CANCEL);
-				getWindowRidget().dispose();
+				handleCancelAction();
 			}
 		});
 
@@ -51,18 +88,9 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		deleteAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				setReturnCode(2);
-				getWindowRidget().dispose();
+				handleDeleteAction();
 			}
 		});
 	}
 
-	public T getSelected() {
-		return selected;
-	}
-
-	public void setSelected(T selected) {
-		this.selected = selected;
-	}
-		
 }

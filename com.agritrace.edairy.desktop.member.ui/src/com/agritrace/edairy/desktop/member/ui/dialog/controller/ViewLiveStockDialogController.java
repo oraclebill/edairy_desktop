@@ -103,7 +103,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		super.configureRidgets();
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		setSelected((RegisteredAnimal) getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED));
+		setWorkingCopy((RegisteredAnimal) getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED));
 		if(getContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST) != null){
 			farmList = (List<Farm>)getContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST);	
 		}else{
@@ -115,7 +115,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		configureIdentificationTab();
 		configureRearingTab();
 		configureOtherTab();
-		if (getSelected() != null) {
+		if (getWorkingCopy() != null) {
 			initBindings();
 			updateBindings();
 		}
@@ -401,11 +401,11 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		return aMap;
 	}
 
-	public void setSelected(RegisteredAnimal liveStock) {
+	public void setWorkingCopy(RegisteredAnimal liveStock) {
 		selectedNode = liveStock;
 	}
 
-	public RegisteredAnimal getSelected() {
+	public RegisteredAnimal getWorkingCopy() {
 		return selectedNode;
 	}
 
