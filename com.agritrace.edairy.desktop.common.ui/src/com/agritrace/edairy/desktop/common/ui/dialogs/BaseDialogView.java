@@ -77,4 +77,12 @@ public abstract class BaseDialogView extends AbstractDialogView {
 	}
 
 	protected abstract void buildWorkArea(Composite parent);
+	
+//	protected abstract void onSave();
+//	
+//	protected abstract void onCancel();
+//	
+//	protected abstract void onDelete();
+	
+	
 }
