@@ -80,26 +80,6 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		workingCopy = obj;
 	}
 
-	// /**
-	// * Gets the selected object in table list. If user doesn't select any row,
-	// * this object will be null
-	// *
-	// * @return
-	// */
-	// public T getSelectedObject() {
-	// return this.selectedObject;
-	// }
-
-	// public void itemSelected() {
-	// // Copy selected object to
-	// // Copy selected into working copy
-	// if (getSelectedObject() != null
-	// && getDialogStyle() != RecordDialog.DIALOG_STYLE_NEW) {
-	// EMFUtil.copy(dialog.getSelectedEObject(), getWorkingCopy(), 2);
-	// } else if (dialog.getDialogStyle() == RecordDialog.DIALOG_STYLE_NEW) {
-	// EMFUtil.copy(createWorkingCopy(), getWorkingCopy(), 2);
-	// }
-	// }
 
 	@Override
 	public void configureRidgets() {
@@ -152,6 +132,7 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 	}
 
 	protected void doOKPressed() throws DairyPersistenceException {
+		if (!isPageValid()) return;
 		setReturnCode(OK);
 		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
 			saveNew();
@@ -240,4 +221,6 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 		return ridget;
 	}
+
+	protected abstract boolean isPageValid();
 }

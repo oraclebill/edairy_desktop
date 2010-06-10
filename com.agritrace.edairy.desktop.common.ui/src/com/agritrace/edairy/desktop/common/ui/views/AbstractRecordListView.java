@@ -74,7 +74,7 @@ public abstract class AbstractRecordListView extends SubModuleView {
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).equalWidth(true).numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
 		// Create filter conditions
-		createFilterCondtions(comp);
+		createFilterConditions(comp);
 		// Create filter buttons
 		createFilterButtons(comp);
 	}
@@ -84,7 +84,7 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * 
 	 * @param comp
 	 */
-	protected void createFilterCondtions(Composite comp) {
+	protected void createFilterConditions(Composite comp) {
 		// Subclass should override to create the filter condition
 
 	}

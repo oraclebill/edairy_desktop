@@ -1690,13 +1690,31 @@ public interface DairyPackage extends EPackage {
 	int CUSTOMER__CUSTOMER_ID = ModelPackage.COMPANY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Customer Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__CUSTOMER_TYPE = ModelPackage.COMPANY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__STATUS = ModelPackage.COMPANY_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Customer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 1;
+	int CUSTOMER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
@@ -3068,6 +3086,28 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCustomer_CustomerId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerType <em>Customer Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Customer Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerType()
+	 * @see #getCustomer()
+	 * @generated
+	 */
+	EAttribute getCustomer_CustomerType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Customer#getStatus()
+	 * @see #getCustomer()
+	 * @generated
+	 */
+	EAttribute getCustomer_Status();
+
+	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4132,6 +4172,22 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMER__CUSTOMER_ID = eINSTANCE.getCustomer_CustomerId();
+
+		/**
+		 * The meta object literal for the '<em><b>Customer Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER__CUSTOMER_TYPE = eINSTANCE.getCustomer_CustomerType();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER__STATUS = eINSTANCE.getCustomer_Status();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.

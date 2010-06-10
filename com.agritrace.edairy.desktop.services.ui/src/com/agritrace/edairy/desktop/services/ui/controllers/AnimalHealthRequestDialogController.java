@@ -325,4 +325,10 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	protected void saveUpdated() throws NonExistingEntityException {
 	}
 
+	@Override
+	protected boolean isPageValid() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

@@ -152,4 +152,11 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	protected EClass getEClass() {
 		return DairyPackage.eINSTANCE.getSupplier();
 	}
+
+	@Override
+	protected boolean isPageValid() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

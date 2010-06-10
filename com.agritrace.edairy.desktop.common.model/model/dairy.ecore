@@ -308,6 +308,10 @@
         <details key="kind" value="elementOnly"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customerType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Milk Processor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Active"/>
   </eClassifiers>
   <eSubpackages name="account" nsURI="http://com.agritrace.edairy.desktop.common.model/account"
       nsPrefix="account">
