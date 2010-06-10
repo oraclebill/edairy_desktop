@@ -21,6 +21,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
@@ -29,13 +30,18 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.base.ContainerType;
+import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.ui.Activator;
+import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 
 public class MemberContainerWidgetController implements WidgetController, ISelectionListener {
 
@@ -49,11 +55,13 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	private final String[] containerColumnHeaders = { "ID", "Farm", "Container Type", "Units Of Measure", "Capacity" };
 	private final List<Container> containerInput = new ArrayList<Container>();
 	private IComboRidget farmFilterCombo;
-
+	
+	private List<Farm> farms = new ArrayList<Farm>();
+	private List<String> farmFilterList = new ArrayList<String>();
 	public static final String containerRemoveTitle = "Remove Containers";
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String ALL_FARM = "All Farms";
-
+	
 	public MemberContainerWidgetController(IController controller) {
 		this.controller = controller;
 		configure();
@@ -85,26 +93,27 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
 						| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
-				// final AddContainerDialog dialog = new
-				// AddContainerDialog(shell);
-				// dialog.setMemberShip(selectedMember);
-				// if (dialog.open() == Window.OK) {
-				// final Container newContainer = dialog.getNewContainer();
-				// newContainer.getOwner().getCans().add(newContainer);
-				// containerInput.add(newContainer);
-				// List<Container> containers;
-				// try {
-				// containers = getContainerFilteredResult();
-				// containerTable.bindToModel(new WritableList(containers,
-				// Container.class), Container.class,
-				// containerPropertyNames, containerColumnHeaders);
-				// containerTable.updateFromModel();
-				// } catch (final ParseException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				//
-				// }
+				Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
+				final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+				memberDialog.getController().setContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
+				memberDialog.getController().setContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, farms);
+				int returnCode = memberDialog.open();
+				if (returnCode == AbstractWindowController.OK) {
+					 container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+					 containerInput.add(container);
+					 List<Container> containers;
+						try {
+							containers = getContainerFilteredResult();
+							containerTable.bindToModel(new WritableList(containers, Container.class), Container.class,
+									containerPropertyNames, containerColumnHeaders);
+							containerTable.updateFromModel();
+						} catch (final ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				}
 			}
 		});
 
@@ -167,27 +176,8 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 
 	@Override
 	public void updateBinding() {
-		containerInput.clear();
-		final List<String> farmFilterList = new ArrayList<String>();
-
-		if (inputModel != null) {
-			if (inputModel instanceof Membership) {
-				Membership selectedMember = (Membership) inputModel;
-				final List<Farm> farms = selectedMember.getMember().getFarms();
-				farmFilterList.add(ALL_FARM);
-				for (final Farm farm : farms) {
-					containerInput.addAll(farm.getCans());
-					if (!farmFilterList.contains(farm.getName())) {
-						farmFilterList.add(farm.getName());
-					}
-				}
-			} else if (inputModel instanceof Farm) {
-				Farm farm = (Farm) inputModel;
-				containerInput.addAll(farm.getCans());
-				farmFilterList.add(farm.getName());
-			}
-		}
-
+		
+		refresh();
 		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class,
 				containerPropertyNames, containerColumnHeaders);
 		containerTable.updateFromModel();
@@ -199,6 +189,31 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 		farmFilterCombo.updateFromModel();
 		farmFilterCombo.setSelection(0);
 		farmFilterCombo.addSelectionListener(this);
+	}
+	
+	private void refresh(){
+		containerInput.clear();
+		farms.clear();
+		farmFilterList.clear();
+		if (inputModel != null) {
+			if (inputModel instanceof Membership) {
+				Membership selectedMember = (Membership) inputModel;
+				farms.addAll( selectedMember.getMember().getFarms());
+				farmFilterList.add(ALL_FARM);
+				for (final Farm farm : farms) {
+					containerInput.addAll(farm.getCans());
+					if (!farmFilterList.contains(farm.getName())) {
+						farmFilterList.add(farm.getName());
+					}
+				}
+			} else if (inputModel instanceof Farm) {
+				Farm farm = (Farm) inputModel;
+				farms.add(farm);
+				containerInput.addAll(farm.getCans());
+				farmFilterList.add(farm.getName());
+			}
+		}
+		
 	}
 
 	private List<Container> getContainerFilteredResult() throws ParseException {
