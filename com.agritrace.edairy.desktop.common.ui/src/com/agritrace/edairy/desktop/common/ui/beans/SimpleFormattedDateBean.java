@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.riena.beans.common.AbstractBean;
 
-import com.agritrace.edairy.desktop.common.ui.Activator;
+import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
 public class SimpleFormattedDateBean extends AbstractBean {

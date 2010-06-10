@@ -26,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -66,7 +67,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
 
-		okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
+		okAction = (IActionRidget) getRidget(DialogConstants.memberInfo_saveButton);
 		okAction.setEnabled(true);
 
 		if (selectedContainer != null) {
@@ -156,7 +157,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 				getWindowRidget().dispose();
 			}
 		});
-		final IActionRidget cancelAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_cacelButton);
+		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.memberInfo_cacelButton);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -165,7 +166,7 @@ public class AddContainerDialogController extends AbstractWindowController imple
 			}
 		});
 
-		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
 		deleteAction.setVisible(true);
 		deleteAction.addListener(new IActionListener() {
 			@Override

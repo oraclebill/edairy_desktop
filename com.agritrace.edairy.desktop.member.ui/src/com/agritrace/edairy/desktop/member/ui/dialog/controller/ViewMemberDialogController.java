@@ -4,6 +4,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class ViewMemberDialogController extends AddMemberDialogController {
@@ -32,7 +33,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
-		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
 		deleteAction.setVisible(true);
 	}
 }

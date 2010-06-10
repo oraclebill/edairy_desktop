@@ -7,6 +7,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -67,7 +68,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 	}
 
 	protected void configureButtonsPanel() {
-		final IActionRidget okAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_saveButton);
+		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.memberInfo_saveButton);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -76,7 +77,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 				getWindowRidget().dispose();
 			}
 		});
-		final IActionRidget cancelAction = (IActionRidget) getRidget(ViewWidgetId.memberInfo_cacelButton);
+		final IActionRidget cancelAction = (IActionRidget) getRidget(DialogConstants.memberInfo_cacelButton);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -85,7 +86,7 @@ public class ViewFarmDialogController extends AbstractWindowController {
 			}
 		});
 
-		final IActionRidget deleteAction = (IActionRidget) getRidget(ViewWidgetId.deleteButton);
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.deleteButton);
 		deleteAction.setVisible(true);
 		deleteAction.addListener(new IActionListener() {
 			@Override
