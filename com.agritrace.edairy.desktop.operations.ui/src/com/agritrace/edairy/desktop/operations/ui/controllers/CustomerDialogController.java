@@ -40,6 +40,8 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 	IComboRidget customerType;
 	ITextRidget customerDescription;
 
+	private ITextRidget companyPhone;
+
 	@Override
 	public void configureUserRidgets() {
 		
@@ -70,11 +72,11 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		companyName.updateFromModel();
 		
 		// company phone
-		companyName = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_COMPANY_NAME);
-		companyName.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__COMPANY_NAME));
-		companyName.setMandatory(true);
-		companyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		companyName.updateFromModel();
+		companyPhone = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
+		companyPhone.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__PHONE_NUMBER));
+		companyPhone.setMandatory(true);
+		companyPhone.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+		companyPhone.updateFromModel();
 		
 		// company legal name
 		legalName = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_LEGAL_NAME);
@@ -96,6 +98,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		// description
 		customerDescription = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_DESCRIPTION);
 		customerDescription.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__DESCRIPTION));
+		customerDescription.setDirectWriting(true);			// otherwise validation doesn't work well..		
 		customerDescription.setMandatory(true);
 		customerDescription.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		customerDescription.updateFromModel();

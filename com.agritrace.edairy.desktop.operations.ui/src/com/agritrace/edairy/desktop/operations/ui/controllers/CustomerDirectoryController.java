@@ -34,12 +34,12 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 
 	private static String[] PROPERTIES = { 
 		ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),
+		DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE.getName(),
 		ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(), 
 		ModelPackage.Literals.COMPANY__CONTACTS.getName(),
-		ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(),
-		DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE.getName() };
+		ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName() };
 
-	private static String[] MASTER_HEADERS = { "ID", "Company Name", "Contact", "Contact #", "Type" };
+	private static String[] MASTER_HEADERS = { "ID", "Type", "Company Name", "Contact", "Contact #" };
 
 	private ITextRidget companyNameSearchText;
 	private IComboRidget customerTypeSearchCombo;
@@ -106,7 +106,8 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		super.configureTableRidget();
 		tableRidget = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		// For contact Name, we will get the first contact
-		tableRidget.setColumnFormatter(3, new ColumnFormatter() {
+		tableRidget.setColumnWidths(null);
+		tableRidget.setColumnFormatter(3, new ColumnFormatter() {			
 			@Override
 			public String getText(Object element) {
 				if (element instanceof Customer) {

@@ -254,8 +254,8 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 //			dialog.setReadOnly(); 	// TODO:
 		}
 		int ret = dialog.open();
-		refreshTableContents();
 		table.updateFromModel();
+		refreshTableContents();
 	}
 	
 	/**
