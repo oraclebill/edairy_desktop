@@ -129,14 +129,14 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		return (Customer) getContext("editObject");
 	}
 
-	@Override
-	protected void saveNew() throws AlreadyExistsException {
-		// prevent saving in dialog
-	}
-
-	@Override
-	protected void saveUpdated() throws NonExistingEntityException {
-		// prevent saving in dialog
-	}
+//	@Override
+//	protected void saveNew() throws AlreadyExistsException {
+//		// prevent saving in dialog
+//	}
+//
+//	@Override
+//	protected void saveUpdated() throws NonExistingEntityException {
+//		// prevent saving in dialog
+//	}
 
 }

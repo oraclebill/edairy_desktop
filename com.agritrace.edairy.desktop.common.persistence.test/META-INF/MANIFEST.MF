@@ -9,7 +9,6 @@ Bundle-Localization: plugin
 Require-Bundle: org.junit,
  com.agritrace.edairy.desktop.common.persistence,
  org.eclipse.core.runtime,
- org.eclipse.pde.junit.runtime,
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

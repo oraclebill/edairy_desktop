@@ -174,7 +174,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		public void callback() {
 			RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
 			dialog.getController().setContext(EDITED_OBJECT_ID,
-					createNewModle());
+					createNewModel());
 			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 
 			int returnCode = dialog.open();
@@ -210,16 +210,16 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 			});
 		}
 		final IActionRidget resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
-		if (resetBtnRidget != null) {
-			resetBtnRidget.addListener(new IActionListener() {
-
-				@Override
-				public void callback() {
-					// Rebind the updateFromModel to refresh the tables
-					resetFilterCondtions();
-				}
-			});
-		}
+//		if (resetBtnRidget != null) {
+//			resetBtnRidget.addListener(new IActionListener() {
+//
+//				@Override
+//				public void callback() {
+//					// Rebind the updateFromModel to refresh the tables
+//					resetFilterCondtions();
+//				}
+//			});
+//		}
 		// Set the initial conditions
 		resetFilterCondtions();
 	}
@@ -253,45 +253,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(true);
 	}
-
-//	@SuppressWarnings("unchecked")
-//	private void popUpDialog(int dialogStyle) {
-//		RecordDialog<T,?> dialog;
-//		
-//		if (dialogStyle == ACTION_NEW) 
-//			dialog = getEditDialog(dialogStyle, createNewModle());
-//		else {
-//			final T selectedObj = getSelectedEObject();
-//			if ( selectedObj == null ) 
-//				return;
-//			else
-//				dialog = getEditDialog(dialogStyle, selectedObj);
-//		}
-//		if (dialogStyle == ACTION_VIEW) {
-////			dialog.setReadOnly(); 	// TODO:
-//		}
-//		int ret = dialog.open();
-//		refreshTableContents();
-//		table.updateFromModel();
-//	}
-	
-		if (dialogStyle == ACTION_NEW) 
-			dialog = getEditDialog(dialogStyle, createNewModel());
-		else {
-			final T selectedObj = getSelectedEObject();
-			if ( selectedObj == null ) 
-				return;
-			else
-				dialog = getEditDialog(dialogStyle, selectedObj);
-		}
-		if (dialogStyle == ACTION_VIEW) {
-//			dialog.setReadOnly(); 	// TODO:
-		}
-		int ret = dialog.open();
-		refreshTableContents();
-		table.updateFromModel();
-	}
-	
+		
 	/**
 	 * Create new model while createing a new record
 	 * @return
