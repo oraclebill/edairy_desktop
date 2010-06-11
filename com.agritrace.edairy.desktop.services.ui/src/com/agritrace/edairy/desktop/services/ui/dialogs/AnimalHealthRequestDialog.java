@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.services.ui.dialogs;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
@@ -25,11 +24,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
-import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.RidgetUtils;
@@ -42,7 +40,8 @@ import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestD
  * @author Hui(Spark) Wan
  * 
  */
-public class AnimalHealthRequestDialog extends RecordDialog {
+public class AnimalHealthRequestDialog extends
+		RecordDialog<AnimalHealthRequest, AnimalHealthRequestDialogController> {
 	private Composite specialComp;
 	private Group inseminationGroup;
 	private Composite verternaryComp;
@@ -72,12 +71,6 @@ public class AnimalHealthRequestDialog extends RecordDialog {
 	
 	public AnimalHealthRequestDialog(Shell parentShell) {
 		super(parentShell);
-	}
-
-
-	public AnimalHealthRequestDialog(int style, Shell parentShell, EObject selectedEObject, IRepository repo) {
-		super(style, parentShell, selectedEObject, repo);
-
 	}
 
 	@Override
@@ -188,8 +181,8 @@ public class AnimalHealthRequestDialog extends RecordDialog {
 	}
 
 	@Override
-	protected RecordDialogController createController() {
-		RecordDialogController controller = new AnimalHealthRequestDialogController();
+	protected AnimalHealthRequestDialogController createController() {
+		AnimalHealthRequestDialogController controller = new AnimalHealthRequestDialogController();
 		return controller;
 	}
 

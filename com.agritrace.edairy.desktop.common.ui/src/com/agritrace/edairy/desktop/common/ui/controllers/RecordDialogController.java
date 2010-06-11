@@ -29,12 +29,15 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	private final Map<String, FeaturePath> ridgetPropertyMap = new HashMap<String, FeaturePath>();
 
 	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
-
-	private int actionType;
-
+	/**
+	 * Gets working copy for editing
+	 * 
+	 * @return
+	 */
+	// protected abstract T createWorkingCopy();
 
 	protected abstract EClass getEClass();
-	
+
 	/** 
 	 * Null constructor 
 	 */
@@ -42,46 +45,19 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		super();
 	}
 
-	/**
-	 * Create a new RecordDialogController, passing it's working object as an initial parameter.
-	 * 
-	 * @param workingCopy
-	 */
-	public RecordDialogController(T workingCopy) {
-		super();
-		setWorkingCopy(workingCopy);
+	public Object  getWorkingCopy() {
+		return this.getContext(AbstractRecordListController.EDITED_OBJECT_ID);
 	}
 
-
-	/**
-	 * Set the 'action type' associated with this controller.
-	 * 
-	 * Action types include 'New', 'Update', and 'View'.
-	 * 
-	 * @param actionType
-	 */
-	public void setActionType(int actionType) {
-		this.actionType = actionType;
-	}
-
-	/**
-	 * Get the repository associated with this controller.
-	 * 
-	 * @return
-	 */
-	public IRepository<T> getRepository() {
-		return repository;
-	}
-
-	/**
-	 * Set a typed repository for this dialog to use. 
-	 * 
-	 * @return
-	 */
-	public void setRepository(IRepository<T> repository) {
-		this.repository = repository;
-	}
-
+	// /**
+	// * Gets the selected object in table list. If user doesn't select any row,
+	// * this object will be null
+	// *
+	// * @return
+	// */
+	// public T getSelectedObject() {
+	// return this.selectedObject;
+	// }
 
 	/**
 	 * Template method for configuring the dialog widgets. 
@@ -101,7 +77,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		configureMappedRidgets();
 		configureButtonsPanel();
 	}
-		
+
 	/**
 	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped ridgets are bound automatically 
 	 * during the configuration process. 
@@ -113,7 +89,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		FeaturePath path = FeaturePath.fromList(featurePath);
 		ridgetPropertyMap.put(ridgetId, path);
 	}
-	
+
 	/**
 	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry. Combo mappings include domain lists. 
 	 * 
@@ -151,17 +127,17 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			}
 		}
 	}
-	
+
 	/**
 	 * Subclasses should override to perform mappings and configure any unmappable ridgets..
 	 * The default implementation does nothing.
 	 * 
 	 */
 	protected void configureUserRidgets() {
-		
-	}
 
-	@Override
+				}
+
+			@Override
 	protected void handleSaveAction()  {
 		setReturnCode(DialogConstants.ACTION_SAVE);
 		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
@@ -177,7 +153,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			getWindowRidget().dispose();
 		}
 	}
-	
+
 	@Override
 	protected void handleCancelAction() {
 		setReturnCode(DialogConstants.ACTION_CANCEL);
@@ -187,16 +163,21 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	}
 
 	protected int getActionType() {
-		return this.actionType;
+		return (Integer) getContext(AbstractRecordListController.EDITED_ACTION_TYPE);
+	}
+	
+
+	protected void doCancelPressed() {
+		setReturnCode(CANCEL);
+		if (!RienaStatus.isTest()) {
+			getWindowRidget().dispose();
+		}
+
 	}
 
-	protected void saveNew() throws AlreadyExistsException {
-		getRepository().saveNew(getWorkingCopy());
-
-	}
-
-	protected void saveUpdated() throws NonExistingEntityException {
-		getRepository().update(getWorkingCopy());
+	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
+		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
+		return map;
 	}
 
 	public void addListener(IActionListener listener) {
@@ -208,7 +189,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			listener.callback();
 		}
 	}
-	
+
 	private Map<String, EStructuralFeature> getRidgetFeatureMap() {
 		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
 		return map;
@@ -253,4 +234,4 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 //		return ridget;
 //	}
 
-}
+	}

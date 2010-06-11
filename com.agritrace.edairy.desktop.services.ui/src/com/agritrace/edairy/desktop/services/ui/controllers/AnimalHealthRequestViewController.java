@@ -9,12 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.query.conditions.Condition;
 import org.eclipse.emf.query.conditions.booleans.BooleanAdapter;
@@ -92,35 +89,7 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
 	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
 	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
-
-	private final class ViewItemAction implements IActionListener {
-		@Override
-		public void callback() {
-			AnimalHealthRequestDialog dialog = new AnimalHealthRequestDialog(null);
-			dialog.getController().setContext("editObject", EcoreUtil.copy(getSelectedEObject()));
-
-			int returnCode = dialog.open();
-			if (Window.OK == returnCode) {
-				myDairy.merge((AnimalHealthRequest) dialog.getController().getContext("editObject"));
-			}
-		}
-	}
-
-	private final class NewItemAction implements IActionListener {
-		@Override
-		public void callback() {
-			AnimalHealthRequestDialog dialog = new AnimalHealthRequestDialog(null);
-			AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
-			EMFUtil.populate(req);
-			dialog.getController().setContext("editObject", req);
-
-			int returnCode = dialog.open();
-			if (Window.OK == returnCode) {
-				myDairy.saveNew((AnimalHealthRequest) dialog.getController().getContext("editObject"));
-			}
-		}
-	}
-
+	
 	private final class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
@@ -444,19 +413,8 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 	}
 
 	@Override
-	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
-		newBtnRidget.addListener(new NewItemAction());
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
-		// viewBtnRidget.setEnabled(false);
-		viewBtnRidget.addListener(new ViewItemAction());
-	}
-
-	@Override
-	protected RecordDialog getEditDialog(int dialogStyle, EObject selectedObject) {
-		throw new UnsupportedOperationException("we shoudn't be here...");
-		// return new ServiceRequestListDialog(dialogStyle, new Shell(),
-		// selectedObject, null);
+	protected RecordDialog<AnimalHealthRequest, AnimalHealthRequestDialogController> getRecordDialog(Shell shell) {
+		return new AnimalHealthRequestDialog(shell);
 	}
 
 	@Override

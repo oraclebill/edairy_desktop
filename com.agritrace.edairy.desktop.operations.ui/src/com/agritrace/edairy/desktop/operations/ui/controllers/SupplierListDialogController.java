@@ -42,10 +42,9 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	@Override
 	public void configureUserRidgets() {
 		// configure supplier ID
-		final Supplier supplier = getWorkingCopy();
+		final Supplier supplier = (Supplier)getWorkingCopy();
 		ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
 		supplierId.setOutputOnly(false);
-		supplierId.setDirectWriting(true);
 		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		supplierId.updateFromModel();
 		if (this.getActionType() == AbstractRecordListController.ACTION_NEW) {

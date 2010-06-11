@@ -8,8 +8,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
-import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 
 /**
@@ -32,39 +31,10 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 	 */
 	protected abstract void buildWorkArea(Composite comp);
 
-	private final int style;
-
 	private T selectedEObject;
-
-	/**
-	 * Default constructor
-	 * 
-	 * @param style
-	 *            Dialog style, possible values are
-	 *            <code>RecordDialog.DIALOG_STYLE_NEW</code>
-	 *            <code>RecordDialog.DIALOG_STYLE_VIEW</code>,
-	 *            <code>RecordDialog.DIALOG_STYLE_EDIT</code>
-	 *            RecordDialog.DIALOG_STYLE_NEW means creating a new record
-	 *            RecordDialog.DIALOG_STYLE_VIEW means viewing a new record
-	 *            RecordDialog.DIALOG_STYLE_EDIT means editing a new record
-	 * @param parentShell
-	 *            Parent shell
-	 * @param selectedObject
-	 *            Selected object in the table list
-	 * @param repo
-	 */
-	@SuppressWarnings("unchecked")
-	public RecordDialog(int style, Shell parentShell, T selectedObject, IRepository<T> repo) {
-		super(parentShell);
-		this.style = style;
-		((C) this.getController()).setWorkingCopy(selectedObject);
-		((C) this.getController()).setRepository(repo);
-		((C) this.getController()).setActionType(style);
-	}
 
 	public RecordDialog(Shell parentShell) {
 		super(parentShell);
-		style = -1;
 	}
 
 	@Override
@@ -93,7 +63,8 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 	 *         or RecordDialog.DIALOG_STYLE_EDIT
 	 */
 	public int getActionType() {
-		return this.style;
+		return (Integer) this.getController().getContext(
+				AbstractRecordListController.EDITED_ACTION_TYPE);
 	}
 
 //	@Override
@@ -151,4 +122,4 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 //		okButton.pack();
 //	}
 
-}
+	}

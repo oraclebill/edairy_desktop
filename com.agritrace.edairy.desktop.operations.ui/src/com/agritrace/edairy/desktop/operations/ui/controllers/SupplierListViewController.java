@@ -15,6 +15,7 @@ import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.eclipse.swt.widgets.Shell;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -171,13 +172,12 @@ public class SupplierListViewController extends
 	}
 
 	@Override
-	protected RecordDialog getEditDialog(int dialogStyle, Supplier selectedObj) {
-		return new SupplierListDialog(dialogStyle, null,
-				(Supplier) selectedObj, getRepository());
+	protected RecordDialog<Supplier,SupplierListDialogController> getRecordDialog(Shell shell) {
+		return new SupplierListDialog(shell);
 	}
 
 	/**
-	 * Create new model while createing a new record
+	 * Create new model while creating a new record
 	 * 
 	 * @return
 	 */
