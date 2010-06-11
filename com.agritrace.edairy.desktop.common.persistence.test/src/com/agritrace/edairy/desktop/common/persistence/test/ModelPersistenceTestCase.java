@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import junit.framework.TestCase;
 
 import org.eclipse.emf.*;
 import org.eclipse.emf.common.*;

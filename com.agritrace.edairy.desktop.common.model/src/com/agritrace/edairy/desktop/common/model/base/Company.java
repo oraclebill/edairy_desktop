@@ -46,7 +46,7 @@ public interface Company extends EObject {
 	 * @return the value of the '<em>Legal Name</em>' attribute.
 	 * @see #setLegalName(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_LegalName()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getLegalName();

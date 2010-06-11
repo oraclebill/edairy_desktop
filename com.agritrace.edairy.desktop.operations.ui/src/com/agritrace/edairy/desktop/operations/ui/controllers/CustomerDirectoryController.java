@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -34,12 +35,12 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 
 	private static String[] PROPERTIES = { 
 		ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),
+		DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE.getName(),
 		ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(), 
 		ModelPackage.Literals.COMPANY__CONTACTS.getName(),
-		ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(),
-		DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE.getName() };
+		ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName() };
 
-	private static String[] MASTER_HEADERS = { "ID", "Company Name", "Contact", "Contact #", "Type" };
+	private static String[] MASTER_HEADERS = { "ID", "Type", "Company Name", "Contact", "Contact #" };
 
 	private ITextRidget companyNameSearchText;
 	private IComboRidget customerTypeSearchCombo;
@@ -106,7 +107,8 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		super.configureTableRidget();
 		tableRidget = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		// For contact Name, we will get the first contact
-		tableRidget.setColumnFormatter(3, new ColumnFormatter() {
+		tableRidget.setColumnWidths(null);
+		tableRidget.setColumnFormatter(3, new ColumnFormatter() {			
 			@Override
 			public String getText(Object element) {
 				if (element instanceof Customer) {
@@ -144,10 +146,8 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 	}
 
 	@Override
-	protected RecordDialog getEditDialog(int dialogStyle, Customer selectedObj) {
-		// return new CustomerDialog(dialogStyle, null, (Customer) selectedObj,
-		// getRepository());
-		return null;
+	protected RecordDialog getRecordDialog(Shell shell) {
+		return new CustomerDialog() ;
 	}
 
 	@Override
@@ -233,7 +233,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		customerTypeSearchCombo.bindToModel(Observables.staticObservableList(CustomerType.getCustomerTypeList()),
 				CustomerType.class, null, BeansObservables.observeValue(this, "typeSearchValue"));
 		customerTypeSearchCombo.updateFromModel();
-		customerTypeSearchCombo.setSelection(0);
+//		customerTypeSearchCombo.setSelection(0);
 
 		// final TypedBean<CustomerType> selection = new
 		// TypedBean<CustomerType>(null);

@@ -43,6 +43,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.services.DairyRepository;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.validators.StringNumberValidator;
+import com.agritrace.edairy.desktop.operations.services.collections.CollectionRepository;
 import com.agritrace.edairy.desktop.operations.services.collections.ICollectionRepository;
 
 public class MilkCollectionJournalController extends SubModuleController {
@@ -86,7 +87,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	private final TotalRecordsValue totalValue = new TotalRecordsValue();
 
-	ICollectionRepository dairyRepo;// = new CollectionRepository();
+	ICollectionRepository dairyRepo = new CollectionRepository();
 
 	public MilkCollectionJournalController() {
 		super();

@@ -22,7 +22,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	}
 
 	protected void updateUpperPanelBinding() {
-		final Membership selectedMember = getSelected();
+		final Membership selectedMember = getWorkingCopy();
 		if (selectedMember != null) {
 			memberName.setText("Member Name : " + selectedMember.getMember().getFamilyName() + ","
 					+ selectedMember.getMember().getGivenName());

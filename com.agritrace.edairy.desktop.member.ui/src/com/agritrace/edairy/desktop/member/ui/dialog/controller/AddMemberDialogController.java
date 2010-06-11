@@ -124,7 +124,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		super.configureRidgets();
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		setSelected((Membership) getContext("selectedMember"));
+		setWorkingCopy((Membership) getContext("selectedMember"));
 
 		configureUpperPanel();
 
@@ -135,7 +135,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		containerController = new MemberContainerWidgetController(this);
 		transactionController = new MemberTransactionWidgetController(this);
 
-		if (getSelected() != null) {
+		if (getWorkingCopy() != null) {
 			memberBindings = initMemberBindings();
 			updateBindings();
 		}
@@ -214,7 +214,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	private void updateBindings() {
 		updateUpperPanelBinding();
 
-		final Membership selectedMember = getSelected();
+		final Membership selectedMember = getWorkingCopy();
 		memberProfileController.setInputModel(selectedMember);
 		farmController.setInputModel(selectedMember);
 		collectionController.setInputModel(selectedMember);
@@ -271,7 +271,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	}
 
 	protected void updateUpperPanelBinding() {
-		final Membership selectedMember = getSelected();
+		final Membership selectedMember = getWorkingCopy();
 		Assert.isLegal((null != selectedMember) && (null != selectedMember.getMember()));
 		if (selectedMember.getMember() != null) {
 			// loop through the text ridgets
@@ -314,7 +314,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	}
 
 	protected void saveMember() {
-		final Membership selectedMember = getSelected();
+		final Membership selectedMember = getWorkingCopy();
 		if (selectedMember != null) {
 			repository.saveNew(selectedMember);
 		}

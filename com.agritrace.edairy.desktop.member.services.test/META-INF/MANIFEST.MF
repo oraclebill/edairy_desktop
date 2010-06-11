@@ -5,7 +5,7 @@ Bundle-SymbolicName: com.agritrace.edairy.desktop.member.services.test
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: AGRITRACE
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit,
+Require-Bundle: org.junit;bundle-version="4.8.1",
  com.agritrace.edairy.desktop.member.services;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence.test.test;bundle-version="1.0.0"

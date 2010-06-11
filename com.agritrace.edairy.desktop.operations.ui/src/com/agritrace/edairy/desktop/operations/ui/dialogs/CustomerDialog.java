@@ -26,17 +26,10 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDialogCont
  * @author Hui(Spark) Wan
  * 
  */
-public class CustomerDialog extends RecordDialog<Customer, CustomerDialogController> {
+public class CustomerDialog extends RecordDialog<Customer, CustomerDialogController>  {
 
 	// private static int WIDTH_HEIGHT = 400;
 	// private static int DESC_HEIGHT_HEIGHT = 50;
-
-	public static final String BIND_ID_CUSTOMER_ID = "bind.id.customer.id";
-	public static final String BIND_ID_CUSTOMER_STATUS = "bind.id.customer.status";
-	public static final String BIND_ID_COMPANY_NAME = "bind.id.customer.companyname";
-	public static final String BIND_ID_LEGAL_NAME = "bind.id.customer.legalname";
-	public static final String BIND_ID_CUSTOMERTYPE = "bind.id.customer.customertype";
-	public static final String BIND_ID_DESCRIPTION = "bind.id.customer.desc";
 
 	public CustomerDialog() {
 		super(null);
@@ -55,37 +48,43 @@ public class CustomerDialog extends RecordDialog<Customer, CustomerDialogControl
 		Text txtDate = UIControlsFactory.createText(comonComp);
 		factory.applyTo(txtDate);
 
-		addUIControl(txtDate, BIND_ID_CUSTOMER_ID); //$NON-NLS-1$
-
-		// Status
-		UIControlsFactory.createLabel(comonComp, "Status");
-		Combo statusCombo = UIControlsFactory.createCombo(comonComp);
-		factory.copy().applyTo(statusCombo);
-		addUIControl(statusCombo, BIND_ID_CUSTOMER_STATUS); //$NON-NLS-1$
+		addUIControl(txtDate, CustomerBindingConstants.BIND_ID_CUSTOMER_ID); //$NON-NLS-1$
 
 		// Company Name
 		UIControlsFactory.createLabel(comonComp, "Company Name");
 		Text companyNameText = UIControlsFactory.createText(comonComp);
 		factory.copy().applyTo(companyNameText);
-		addUIControl(companyNameText, BIND_ID_COMPANY_NAME); //$NON-NLS-1$
+		addUIControl(companyNameText, CustomerBindingConstants.BIND_ID_COMPANY_NAME); //$NON-NLS-1$
+
+		// Status
+		UIControlsFactory.createLabel(comonComp, "Status");
+		Combo statusCombo = UIControlsFactory.createCombo(comonComp);
+		factory.copy().applyTo(statusCombo);
+		addUIControl(statusCombo, CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS); //$NON-NLS-1$
 
 		// Legal Name
 		UIControlsFactory.createLabel(comonComp, "Legal Name");
 		Text legalNameText = UIControlsFactory.createText(comonComp);
 		factory.copy().applyTo(legalNameText);
-		addUIControl(legalNameText, BIND_ID_LEGAL_NAME); //$NON-NLS-1$
+		addUIControl(legalNameText, CustomerBindingConstants.BIND_ID_LEGAL_NAME); //$NON-NLS-1$
+
+		// Phone Number
+		UIControlsFactory.createLabel(comonComp, "Phone Number");
+		Text phoneText = UIControlsFactory.createText(comonComp);
+		factory.copy().applyTo(phoneText);
+		addUIControl(phoneText, CustomerBindingConstants.BIND_ID_PHONE_NUMBER); //$NON-NLS-1$
 
 		// Category
 		UIControlsFactory.createLabel(comonComp, "Category");
 		CCombo typeCombo = UIControlsFactory.createCCombo(comonComp);
 		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.BEGINNING).applyTo(typeCombo);
-		addUIControl(typeCombo, BIND_ID_CUSTOMERTYPE); //$NON-NLS-1$
+		addUIControl(typeCombo, CustomerBindingConstants.BIND_ID_CUSTOMERTYPE); //$NON-NLS-1$
 
 		// Description
 		UIControlsFactory.createLabel(comonComp, "Description");
 		Text descText = UIControlsFactory.createTextMulti(comonComp, true, true);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).hint(-1, 50).applyTo(descText);
-		addUIControl(descText, BIND_ID_DESCRIPTION); //$NON-NLS-1$
+		addUIControl(descText, CustomerBindingConstants.BIND_ID_DESCRIPTION); //$NON-NLS-1$
 
 		createContactGroup(comonComp);
 

@@ -35,6 +35,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView implements TraverseListener {
+	public MilkCollectionJournalView() {
+	}
 
     public static final String ID = "edairy.collection.entry.view";
 

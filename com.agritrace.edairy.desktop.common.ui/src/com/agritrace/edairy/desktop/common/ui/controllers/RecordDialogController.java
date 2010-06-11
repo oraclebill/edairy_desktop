@@ -1,43 +1,34 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import java.io.IOException;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.core.databinding.conversion.IConverter;
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.RienaStatus;
-import org.eclipse.riena.ui.ridgets.ClassRidgetMapper;
 import org.eclipse.riena.ui.ridgets.IActionListener;
-import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.DairyPersistenceException;
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
-public abstract class RecordDialogController<T extends EObject> extends AbstractWindowController {
+public abstract class RecordDialogController<T extends EObject> extends BaseDialogController<T> {
 
-	private final Map<String, EStructuralFeature> ridgetPropertyMap = new HashMap<String, EStructuralFeature>();
+	private final Map<String, FeaturePath> ridgetPropertyMap = new HashMap<String, FeaturePath>();
 
 	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
-
-	private IRepository<T> myRepo;
-	private T workingCopy;
-	private int actionType;
-
 	/**
 	 * Gets working copy for editing
 	 * 
@@ -47,115 +38,133 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 
 	protected abstract EClass getEClass();
 
+	/** 
+	 * Null constructor 
+	 */
 	public RecordDialogController() {
 		super();
 	}
 
-	public RecordDialogController(T workingCopy) {
-		super();
-		this.workingCopy = workingCopy;
+	public T  getWorkingCopy() {
+		return (T)this.getContext(AbstractRecordListController.EDITED_OBJECT_ID);
 	}
 
-	public IRepository<T> getRepository() {
-		return myRepo;
-	}
+	// /**
+	// * Gets the selected object in table list. If user doesn't select any row,
+	// * this object will be null
+	// *
+	// * @return
+	// */
+	// public T getSelectedObject() {
+	// return this.selectedObject;
+	// }
 
-	public void setRepository(IRepository<T> myRepo) {
-		this.myRepo = myRepo;
-	}
-
-	public void setActionType(int actionType) {
-		this.actionType = actionType;
-	}
-
-	public T getWorkingCopy() {
-		return workingCopy;
-	}
-
-	public void setWorkingCopy(T obj) {
-		workingCopy = obj;
-	}
-
-
+	/**
+	 * Template method for configuring the dialog widgets. 
+	 * 
+	 * Will call subclass implemented 'configureUserRidgets', then configure
+	 * any mapped ridgets and finally upate the button panel. 
+	 * 
+	 * Subclasses should implement 'afterBind' to manipulate any mapped bindings or 
+	 * modify buttons based on context.
+	 * 
+	 * @return
+	 */
 	@Override
-	public void configureRidgets() {
+	final public void configureRidgets() {
 		setWindowRidget(getRidget(IWindowRidget.class, RIDGET_ID_WINDOW));
+		configureUserRidgets();
+		configureMappedRidgets();
+		configureButtonsPanel();
+	}
 
-		ridgetPropertyMap.clear();
-		ridgetPropertyMap.putAll(configureRidgetPropertyMap());
+	/**
+	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped ridgets are bound automatically 
+	 * during the configuration process. 
+	 * 
+	 * @param ridgetId
+	 * @param featurePath
+	 */
+	protected void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
+		FeaturePath path = FeaturePath.fromList(featurePath);
+		ridgetPropertyMap.put(ridgetId, path);
+	}
 
-		for (final Entry<String, EStructuralFeature> entry : ridgetPropertyMap.entrySet()) {
+	/**
+	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry. Combo mappings include domain lists. 
+	 * 
+	 * @param ridgetId
+	 * @param featurePath
+	 */
+	protected void addRidgetFeatureMap(String ridgetId, Collection<T> domainList, EStructuralFeature... featurePath) {
+		FeaturePath path = FeaturePath.fromList(featurePath);
+		ridgetPropertyMap.put(ridgetId, path);
+		throw new UnsupportedOperationException("Not implemented...");
+	}
 
-			final IRidget ridget = getRidget(entry.getKey());
+	protected void configureMappedRidgets() {
+		
+		for (final Entry<String, FeaturePath> binding : ridgetPropertyMap.entrySet()) {
+			final IRidget ridget = getRidget(binding.getKey());
 			if (ridget instanceof IValueRidget) {
 				final IValueRidget valueRidget = (IValueRidget) ridget;
-				final IConverter converter = RidgetsConfigFactory.getInstance().getModel2UIConverter(entry.getValue(),
-						valueRidget);
+				final EStructuralFeature features[] = binding.getValue().getFeaturePath();				
+				final EStructuralFeature tailFeature = features[features.length - 1];				
+				final IConverter converter = 
+					RidgetsConfigFactory.getInstance().getModel2UIConverter(
+							tailFeature, valueRidget);
 				if (converter != null) {
 					valueRidget.setModelToUIControlConverter(converter);
 				}
-				valueRidget.bindToModel(this.getWorkingCopy(), entry.getValue().getName());
+				valueRidget.bindToModel(
+						EMFProperties.value(
+								binding.getValue()).observe(getWorkingCopy()));
+				if (tailFeature.isRequired() && valueRidget instanceof IMarkableRidget) {
+					IMarkableRidget markableValue = (IMarkableRidget) valueRidget;
+					markableValue.setMandatory(true);
+				}				
 				valueRidget.updateFromModel();
 			}
-
 		}
-
-		final IActionRidget okButton = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
-		okButton.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-
-				try {
-					doOKPressed();
-				} catch (final DairyPersistenceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-
-		});
-		final IActionRidget cancelBtn = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_CANCEL);
-		cancelBtn.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				doCancelPressed();
-
-			}
-		});
 	}
 
-	protected void doOKPressed() throws DairyPersistenceException {
-		if (!isPageValid()) return;
-		setReturnCode(OK);
-		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
-			saveNew();
-		} else {
-			// Update all working copy to selected object
-			// EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
-			saveUpdated();
-		}
-		notifierListeners();
-		if (!RienaStatus.isTest()) {
+	/**
+	 * Subclasses should override to perform mappings and configure any unmappable ridgets..
+	 * The default implementation does nothing.
+	 * 
+	 */
+	protected void configureUserRidgets() {
 
+				}
+
+			@Override
+	protected void handleSaveAction()  {
+		setReturnCode(DialogConstants.ACTION_SAVE);
+//		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
+//			saveNew();
+//		} else {
+//			// Update all working copy to selected object
+//			// EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
+//			saveUpdated();
+//		}
+		notifyListeners();
+		if (!RienaStatus.isTest()) {
+			getWindowRidget().dispose();
+		}
+	}
+
+	@Override
+	protected void handleCancelAction() {
+		setReturnCode(DialogConstants.ACTION_CANCEL);
+		if (!RienaStatus.isTest()) {
 			getWindowRidget().dispose();
 		}
 	}
 
 	protected int getActionType() {
-		return this.actionType;
+		return (Integer) getContext(AbstractRecordListController.EDITED_ACTION_TYPE);
 	}
-
-	protected void saveNew() throws AlreadyExistsException {
-		myRepo.saveNew(getWorkingCopy());
-
-	}
-
-	protected void saveUpdated() throws NonExistingEntityException {
-		myRepo.update(getWorkingCopy());
-	}
+	
 
 	protected void doCancelPressed() {
 		setReturnCode(CANCEL);
@@ -174,16 +183,22 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 		this.listeners.add(listener);
 	}
 
-	private void notifierListeners() {
+	private void notifyListeners() {
 		for (final IActionListener listener : this.listeners) {
 			listener.callback();
 		}
 	}
 
+	private Map<String, EStructuralFeature> getRidgetFeatureMap() {
+		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
+		return map;
+	}
 
-	/**
-	 * @since 2.0
-	 */
+
+
+//	/**
+//	 * test support code copied from the submoduleviewcontroller..
+//	 */
 //	@Override
 //	@SuppressWarnings("unchecked")
 //	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
@@ -218,5 +233,4 @@ public abstract class RecordDialogController<T extends EObject> extends Abstract
 //		return ridget;
 //	}
 
-	protected abstract boolean isPageValid();
-}
+	}

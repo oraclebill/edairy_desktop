@@ -1,8 +1,13 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.riena.ui.core.marker.IMessageMarker;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
+import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
@@ -17,23 +22,73 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		super();
 	}
 
-	public IRepository<T> getRepository() {
-		return repository;
+	public T getWorkingCopy() {
+		return selected;
 	}
 
-	public void setRepository(IRepository<T> repository) {
-		this.repository = repository;
+	public void setWorkingCopy(T selected) {
+		this.selected = selected;
 	}
-
+		
+	/**
+	 * Validate is called before the standard page validation processs.
+	 * 
+	 * Subclasses should override to provide additional page level validation. 
+	 * The default implementation returns 'true'.
+	 * @return
+	 */
+	protected boolean validate() {
+		boolean valid = true;
+		return valid;
+	}
+	
+	/**
+	 * Called after validation is successful, when 'Save' or 'Update' action is 
+	 * triggered.
+	 * 
+	 * 
+	 */
+	protected void handleSaveAction() {
+		setReturnCode(DialogConstants.ACTION_SAVE);
+		setContext("selected", getWorkingCopy());
+		System.out.println("OK calling dispose");
+		getWindowRidget().dispose();
+	}
+	
+	/**
+	 * Called when 'Cancel' action is 
+	 * triggered.
+	 * 
+	 */
+	protected void handleCancelAction() {
+		setReturnCode(DialogConstants.ACTION_CANCEL);
+		getWindowRidget().dispose();
+	}
+	
+	/**
+	 * Called when 'Delete' action is 
+	 * triggered.
+	 * 
+	 */
+	protected void handleDeleteAction() {
+		setReturnCode(DialogConstants.ACTION_DELETE);
+		getWindowRidget().dispose();		
+	}
+	
+	/**
+	 * Configures the 'Save', 'Cancel' and 'Delete' buttons. Subclasses can override 
+	 * the defaults by manipulating the ridget bindings.
+	 * 
+	 */
 	protected void configureButtonsPanel() {
 		final IActionRidget okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				setReturnCode(OK);
-				setContext("selected", getSelected());
-				System.out.println("OK calling dispose");
-				getWindowRidget().dispose();
+				if ( ! validateInternal() ) {
+					return;
+				}
+				handleSaveAction();
 			}
 		});
 
@@ -41,8 +96,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				setReturnCode(CANCEL);
-				getWindowRidget().dispose();
+				handleCancelAction();
 			}
 		});
 
@@ -51,18 +105,30 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		deleteAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				setReturnCode(2);
-				getWindowRidget().dispose();
+				handleDeleteAction();
 			}
 		});
 	}
 
-	public T getSelected() {
-		return selected;
+	private boolean validateInternal() {
+		boolean retVal = validate();  // user validation first...
+		if (! retVal ) {
+			return false;
+		}
+		for (IRidget test :  getRidgets()) {
+			IMarkableRidget markable;
+			if (test instanceof IMarkableRidget) {
+				markable = (IMarkableRidget) test;
+				Collection<IMessageMarker> widgetMarkers = markable.getMarkersOfType(IMessageMarker.class);
+				for ( IMessageMarker marker : widgetMarkers ) {
+					retVal = false;
+					// FIXME: Display error messages in message area.
+					System.err.println( ">>>>>>>> ERROR: " + marker.getMessage());
+				}
+			}			
+		}				
+		return retVal;
 	}
+	
 
-	public void setSelected(T selected) {
-		this.selected = selected;
-	}
-		
 }

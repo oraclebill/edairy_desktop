@@ -40,9 +40,9 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 	public static final String BIND_ID_CATEGORY = "bind.id.supplier.category";
 	public static final String BIND_ID_DESCRIPTION = "bind.id.supplier.desc";
 
-	public SupplierListDialog(int style, Shell parentShell,
-			Supplier selectedObject, SupplierRepository supplierRepository) {
-		super(style, parentShell, selectedObject, supplierRepository);
+	public SupplierListDialog(Shell parentShell)
+	{
+		super(parentShell);
 	}
 
 	@Override
@@ -149,7 +149,6 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 
 	protected SupplierListDialogController createController() {
 		SupplierListDialogController controller = new SupplierListDialogController();
-		controller.setWorkingCopy( null );
 		return controller;
 	}
 }

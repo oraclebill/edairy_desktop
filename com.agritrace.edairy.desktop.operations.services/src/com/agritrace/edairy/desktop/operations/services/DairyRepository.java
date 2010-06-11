@@ -61,7 +61,7 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	public List<Employee> getEmployees(String string) {
-		return employeeRepository.find("From employee where jobfunction='" + string + "'");
+		return employeeRepository.find("FROM Employee where jobfunction='" + string + "'");
 	}
 
 	public Membership getMembershipById(String memberId) {

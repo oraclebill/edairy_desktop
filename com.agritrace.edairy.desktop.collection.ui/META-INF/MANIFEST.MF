@@ -13,4 +13,3 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.collection.ui.controllers,
  com.agritrace.edairy.desktop.collection.ui.views
-Import-Package: com.agritrace.edairy.desktop.common.persistence.services

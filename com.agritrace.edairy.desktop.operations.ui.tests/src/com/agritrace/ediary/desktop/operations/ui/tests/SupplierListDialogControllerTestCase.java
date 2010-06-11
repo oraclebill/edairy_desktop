@@ -67,7 +67,6 @@ public class SupplierListDialogControllerTestCase extends
 
 		// Set action type
 		SupplierListDialogController controller = this.getController();
-		controller.setActionType(AbstractRecordListController.ACTION_NEW);
 		// Update from model
 		controller.afterBind();
 
@@ -127,7 +126,7 @@ public class SupplierListDialogControllerTestCase extends
 
 		SupplierListDialogController controller = this.getController();
 //		controller.setSelectedObject(selectedObject);
-		controller.setActionType(AbstractRecordListController.ACTION_VIEW);
+		//controller.setActionType(AbstractRecordListController.ACTION_VIEW);
 //		controller.copyModel();
 
 		// TODO
