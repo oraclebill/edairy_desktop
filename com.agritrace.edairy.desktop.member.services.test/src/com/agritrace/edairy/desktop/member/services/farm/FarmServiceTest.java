@@ -12,10 +12,12 @@ import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
 public class FarmServiceTest {
 
-	@BeforeClass
-	public static void setupClass() throws Exception {
+	@Before
+	public void setup() throws Exception {
 		// setup a test persistence manager..
-		PersistenceManager.setDefault(new HsqldbMemoryPersistenceManager());
+		//     need to set this first in order to use the 'reset' method.
+		System.setProperty("riena.test", "true");  // RIENA_TEST_SYSTEM_PROPERTY == "riena.test"
+		PersistenceManager.reset(new HsqldbMemoryPersistenceManager());
 	}
 	
 	@Test
@@ -30,7 +32,7 @@ public class FarmServiceTest {
 		myFarms = farmRepo.all();
 		String farmName = myFarms.get(0).getName();
 		Assert.assertEquals("Test Farm", farmName);
-		
+	
 	}
 	
 }
