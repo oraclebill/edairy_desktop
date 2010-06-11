@@ -7,13 +7,16 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.internal.ui.ridgets.swt.ShellRidget;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.IWindowRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
@@ -156,6 +159,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	private final class ViewItemAction implements IActionListener {
 		@Override
 		public void callback() {
+			ShellRidget shell = getRidget(ShellRidget.class, AbstractRecordListView.BIND_ID_SHELL);
 			RecordDialog<T,?> dialog = getRecordDialog(new Shell());
 			dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
 			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
@@ -172,7 +176,8 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	private final class NewItemAction implements IActionListener {
 		@Override
 		public void callback() {
-			RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+			//ShellRidget shell = getRidget(ShellRidget.class, AbstractRecordListView.BIND_ID_SHELL);
+			RecordDialog<T, ?> dialog = getRecordDialog(Display.getCurrent().getActiveShell());
 			dialog.getController().setContext(EDITED_OBJECT_ID,
 					createNewModel());
 			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
