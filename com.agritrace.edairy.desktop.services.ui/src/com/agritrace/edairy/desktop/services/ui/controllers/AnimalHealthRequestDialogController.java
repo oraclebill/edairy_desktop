@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import java.beans.PropertyChangeListener;
 
-import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
@@ -16,14 +15,10 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -241,7 +236,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			// Heated date
 			final ITextRidget heatTimeTextBtn = getRidget(ITextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_TIME_HEATED_DETECTED);
-			heatTimeTextBtn.setDirectWriting(true);
 			heatTimeTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			// heatTimeTextBtn.setOutputOnly(false);
 			heatTimeTextBtn.bindToModel(request,
@@ -252,7 +246,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			// First
 			final ITextRidget firstTextBtn = getRidget(ITextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_FIRST_TRETMENT);
-			firstTextBtn.setDirectWriting(true);
 			firstTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			// firstTextBtn.setOutputOnly(false);
 			firstTextBtn
@@ -264,7 +257,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			// Second
 			final ITextRidget secondTextBtn = getRidget(ITextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_SECOND_TRETMENT);
-			secondTextBtn.setDirectWriting(true);
 			secondTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			// secondTextBtn.setOutputOnly(false);
 			secondTextBtn.bindToModel(request,
@@ -276,7 +268,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			// Third
 			final ITextRidget thirdTextBtn = getRidget(ITextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_THIRD_TRETMENT);
-			thirdTextBtn.setDirectWriting(true);
 			thirdTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			thirdTextBtn.setOutputOnly(false);
 			thirdTextBtn
@@ -316,13 +307,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
 	}
 
-	@Override
-	protected void saveNew() throws AlreadyExistsException {
-
-	}
-
-	@Override
-	protected void saveUpdated() throws NonExistingEntityException {
-	}
+	
 
 }

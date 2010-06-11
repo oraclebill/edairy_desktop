@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -145,10 +146,8 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 	}
 
 	@Override
-	protected RecordDialog getEditDialog(int dialogStyle, Customer selectedObj) {
-		// return new CustomerDialog(dialogStyle, null, (Customer) selectedObj,
-		// getRepository());
-		return null;
+	protected RecordDialog getRecordDialog(Shell shell) {
+		return new CustomerDialog() ;
 	}
 
 	@Override

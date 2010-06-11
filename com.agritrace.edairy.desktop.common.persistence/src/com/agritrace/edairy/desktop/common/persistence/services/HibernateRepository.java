@@ -163,6 +163,16 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 			}
 		});
 	}
+	
+	/**
+	 * Merge
+	 * 
+	 * 
+	 */
+	public void merge(T obj)
+	{
+		update(obj);
+	}
 
 	protected void runWithTransaction(Runnable r) {
 		openSession();
