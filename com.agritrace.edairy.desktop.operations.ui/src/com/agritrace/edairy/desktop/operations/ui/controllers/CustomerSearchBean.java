@@ -2,19 +2,19 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.riena.beans.common.AbstractBean;
 
-import com.agritrace.edairy.desktop.common.ui.reference.CustomerStatus;
+import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 
-public class SearchBean extends AbstractBean {
+public class CustomerSearchBean extends AbstractBean {
 	private static final String PROP_NAME = "name";
 	private static final String PROP_TYPE = "type";
 	private static final String PROP_STATUS = "status";
 	
 	private String 			nameSearchValue;
 	private CustomerType 	typeSearchValue;
-	private CustomerStatus 	statusSearchValue;
+	private CompanyStatus 	statusSearchValue;
 
-	public SearchBean() {
+	public CustomerSearchBean() {
 		nameSearchValue = "";
 		typeSearchValue = null;
 		statusSearchValue = null;
@@ -40,11 +40,11 @@ public class SearchBean extends AbstractBean {
 		firePropertyChanged(PROP_TYPE, oldValue, typeSearchValue);
 	}
 
-	public CustomerStatus getStatusSearchValue() {
+	public CompanyStatus getStatusSearchValue() {
 		return statusSearchValue;
 	}
 
-	public void setStatusSearchValue(CustomerStatus statusSearchValue) {
+	public void setStatusSearchValue(CompanyStatus statusSearchValue) {
 		Object oldValue = this.statusSearchValue;
 		this.statusSearchValue = statusSearchValue;
 		firePropertyChanged(PROP_STATUS, oldValue, statusSearchValue);

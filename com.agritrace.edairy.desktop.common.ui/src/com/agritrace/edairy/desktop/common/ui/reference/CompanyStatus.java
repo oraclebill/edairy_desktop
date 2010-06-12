@@ -4,18 +4,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomerStatus {
-	public static final CustomerStatus[] CUST_STATUS = { new CustomerStatus("Active"),
-			new CustomerStatus("Inactive"), new CustomerStatus("Flagged") };
+public class CompanyStatus {
+	public static final CompanyStatus[] CUST_STATUS = { new CompanyStatus("Active"),
+			new CompanyStatus("Inactive"), new CompanyStatus("Flagged") };
 	
-	public static final List<CustomerStatus> CUST_STATUS_LIST = 
+	public static final List<CompanyStatus> CUST_STATUS_LIST = 
 		Collections.unmodifiableList(Arrays.asList(CUST_STATUS));
 	
-	public static List<CustomerStatus> getCustomerStatusList() {
+	public static List<CompanyStatus> getCustomerStatusList() {
 		return CUST_STATUS_LIST;
 	}
 
-	CustomerStatus(String name) {
+	CompanyStatus(String name) {
 		super();
 		this.name = name;
 	}
@@ -31,9 +31,9 @@ public class CustomerStatus {
 		return getName();
 	}
 
-	public static CustomerStatus getByName(String name) {
+	public static CompanyStatus getByName(String name) {
 
-		for (CustomerStatus cType : CUST_STATUS) {
+		for (CompanyStatus cType : CUST_STATUS) {
 			if (cType != null && cType.getName() != null && cType.getName().equals(name)) {
 				return cType;
 			}

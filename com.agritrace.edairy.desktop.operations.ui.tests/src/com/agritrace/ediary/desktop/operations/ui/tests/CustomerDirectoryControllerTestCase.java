@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
-import com.agritrace.edairy.desktop.common.ui.reference.CustomerStatus;
+import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
@@ -76,7 +76,7 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 		// Status combo
 		final IComboRidget statusCombo = getController().getRidget(IComboRidget.class,
 				CustomerDirectoryView.BIND_ID_FILTER_STATUS);
-		assertEquals(CustomerStatus.getCustomerStatusList().size(), statusCombo.getObservableList().size());
+		assertEquals(CompanyStatus.getCustomerStatusList().size(), statusCombo.getObservableList().size());
 		assertEquals(statusCombo.getSelection(), null);
 
 	}
@@ -116,7 +116,7 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 		Customer cust = DairyFactory.eINSTANCE.createCustomer();
 		cust.setCompanyName(name != null ? name : "Test Company #" + sequence);
 		cust.setCustomerType(type != null ? type : CustomerType.getCustomerTypeList().get(0).getName());
-		cust.setStatus(status != null ? status : CustomerStatus.getCustomerStatusList().get(0).getName());
+		cust.setStatus(status != null ? status : CompanyStatus.getCustomerStatusList().get(0).getName());
 		cust.setPhoneNumber("" + sequence);
 		cust.setDescription("Test Company");
 		cust.setLocation(DairyUtil.createLocation(null, null, null));

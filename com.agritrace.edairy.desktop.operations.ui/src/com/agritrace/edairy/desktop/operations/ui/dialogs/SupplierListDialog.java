@@ -30,8 +30,8 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialog
  */
 public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialogController> {
 
-//	private static int WIDTH_HEIGHT = 400;
-//	private static int DESC_HEIGHT_HEIGHT = 50;
+	// private static int WIDTH_HEIGHT = 400;
+	// private static int DESC_HEIGHT_HEIGHT = 50;
 
 	public static final String BIND_ID_SUPPLIER_ID = "bind.id.supplier.id";
 	public static final String BIND_ID_SUPPLIER_STATUS = "bind.id.supplier.status";
@@ -40,8 +40,7 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 	public static final String BIND_ID_CATEGORY = "bind.id.supplier.category";
 	public static final String BIND_ID_DESCRIPTION = "bind.id.supplier.desc";
 
-	public SupplierListDialog(Shell parentShell)
-	{
+	public SupplierListDialog(Shell parentShell) {
 		super(parentShell);
 	}
 
@@ -63,11 +62,9 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 
 		Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(2, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(comonComp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
 
-		GridDataFactory factory = GridDataFactory.swtDefaults()
-				.align(SWT.FILL, SWT.FILL).grab(true, true);
+		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
 		// Supplier Id
 		UIControlsFactory.createLabel(comonComp, "Supplier ID");
 		Text txtDate = UIControlsFactory.createText(comonComp);
@@ -96,16 +93,13 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 		// Category
 		UIControlsFactory.createLabel(comonComp, "Category");
 		List categoryList = UIControlsFactory.createList(comonComp, true, true);
-		GridDataFactory.swtDefaults().grab(true, false)
-				.align(SWT.FILL, SWT.BEGINNING).applyTo(categoryList);
+		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.BEGINNING).applyTo(categoryList);
 		addUIControl(categoryList, BIND_ID_CATEGORY); //$NON-NLS-1$
 
 		// Description
 		UIControlsFactory.createLabel(comonComp, "Description");
-		Text descText = UIControlsFactory
-				.createTextMulti(comonComp, true, true);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.grab(true, false).hint(-1, 50).applyTo(descText);
+		Text descText = UIControlsFactory.createTextMulti(comonComp, true, true);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).hint(-1, 50).applyTo(descText);
 		addUIControl(descText, BIND_ID_DESCRIPTION); //$NON-NLS-1$
 
 		createContactGroup(comonComp);
@@ -113,37 +107,29 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 	}
 
 	private void createContactGroup(Composite parent) {
-		Group companyContactGroup = UIControlsFactory.createGroup(parent,
-				"Company Contact");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).span(2, 1).applyTo(companyContactGroup);
-		GridLayoutFactory.swtDefaults().numColumns(2)
+		Group companyContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
 				.applyTo(companyContactGroup);
-		AddressGroupWidget addressWidget = new AddressGroupWidget(
-				companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).span(2, 1).applyTo(addressWidget.getGroup());
+		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(companyContactGroup);
+		AddressGroupWidget addressWidget = new AddressGroupWidget(companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
+				.applyTo(addressWidget.getGroup());
 		addressWidget.getGroup().pack();
 
-		DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(
-				companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(directionWidget.getGroup());
+		DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(companyContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
 		directionWidget.getGroup().pack();
 
 		MapGroupWidget mapWidget = new MapGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(mapWidget.getGroup());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
 		mapWidget.getGroup().pack();
 
-		CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(
-				companyContactGroup);
+		CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(companyContactGroup);
 		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
 		// commGroup.getGroup());
 		// commGroup.getGroup().pack();
 		//
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1)
-				.applyTo(commGroup.getGroup());
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup.getGroup());
 		commGroup.getGroup().pack();
 	}
 

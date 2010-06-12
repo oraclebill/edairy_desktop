@@ -25,7 +25,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupCont
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.common.ui.reference.CustomerStatus;
+import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 
@@ -57,8 +57,8 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		// customer status
 		customerStatus = getRidget(IComboRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS);
 		customerStatus.bindToModel(
-				Observables.staticObservableList(CustomerStatus.getCustomerStatusList()), 
-				CustomerStatus.class, 
+				Observables.staticObservableList(CompanyStatus.getCustomerStatusList()), 
+				CompanyStatus.class, 
 				null, 
 				EMFObservables.observeValue(editCustomer, DairyPackage.Literals.CUSTOMER__STATUS));
 		customerStatus.updateFromModel();

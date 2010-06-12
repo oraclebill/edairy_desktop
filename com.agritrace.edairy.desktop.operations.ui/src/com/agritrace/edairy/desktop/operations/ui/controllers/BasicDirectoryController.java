@@ -20,26 +20,17 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView.ContactNameColumnFormatter;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView.ContactPhoneColumnFormatter;
 
 public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
-
-//	public static String[] MASTER_PROPTIES = { ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),
-//				ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(),
-//				DairyPackage.Literals.SUPPLIER__CATEGORIES.getName(), ModelPackage.Literals.COMPANY__CONTACTS.getName(),
-//				ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(), DairyPackage.Literals.SUPPLIER__STATUS.getName() };
-//	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category", "Contact", "Contact #", "Status" };
-
 	
+	public static final String EMPTY_SELECTION_TEXT = "ANY";
+
 	final private List<String> columnHeaders = new ArrayList<String>();
 	final private List<String> columnProperties = new ArrayList<String>();
 	final private List<ColumnFormatter> columnFormatters = new ArrayList<ColumnFormatter>();
 
 	private EClass eClass;
-	private Class<?> entityClass;
-//	private String[] cachedColumnHeaders;
-	
+	private Class<?> entityClass;	
 
 	public BasicDirectoryController() {
 		super();
@@ -52,7 +43,8 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	protected void setEntityClass(Class<?> entityClass) {
 		this.entityClass = entityClass;
 	}
-	protected Class<?> getEntityClass() {
+	
+	final protected Class<?> getEntityClass() {
 		return entityClass;
 	}
 
@@ -60,7 +52,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		this.eClass = eClass;
 	}
 	
-	protected EClass getEClass() {
+	final protected EClass getEClass() {
 		return eClass;
 	}
 
@@ -74,18 +66,8 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		columnFormatters.add(formatter);
 	}
 
-//	protected void addTableColumn(String colHeader, FeaturePath modelProperty) { 
-//		addTableColumn(colHeader, modelProperty, null);
-//	}
-
-//	protected void addTableColumn(String colHeader, FeaturePath modelPath, ColumnFormatter formatter) {
-//		columnHeaders.add(colHeader);
-//		columnProperties.add(modelPath);
-//		columnFormatters.add(formatter);
-//	}
-
 	@Override
-	protected String[] getTableColumnHeaders() {
+	final protected String[] getTableColumnHeaders() {
 		int numCols = columnHeaders.size();
 		String[] colHeaders = new String[numCols];
 		for (int i = 0; i < numCols; i++) {
@@ -94,16 +76,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		return colHeaders;
 	}
 
-//	protected IEMFProperty[] getTableColumnProperties() {
-//		int numCols = columnProperties.size();
-//		IEMFProperty colProps[] = new IEMFProperty[numCols];
-//		for (int i = 0; i < numCols; i++) {
-//			colProps[i] = columnProperties.get(i);			
-//		}
-//		return colProps;
-//	}
-//	
-	protected ColumnFormatter[] getTableColumnFormatters() {
+	final protected ColumnFormatter[] getTableColumnFormatters() {
 		int numCols = columnFormatters.size();
 		ColumnFormatter colFormatter[] = new ColumnFormatter[numCols];
 		for (int i = 0; i < numCols; i++) {
@@ -124,18 +97,17 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 
 	@Override
 	protected void configureTableRidget() {
-		// fallback if using older api
-		if (getTableColumnPropertyNames() != null) {
-			super.configureTableRidget();
-			return;
-		}
 		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
 		table.addDoubleClickListener(viewAction);
-		
-//		IEMFListProperty obList = EMFProperties.list(DairyPackage.Literals.DAIRY__EMPLOYEES);
-//		table.bindToModel(rowObservables, rowClass, columnPropertyNames, columnHeaders);
+				
+		ColumnFormatter[] formatters = getTableColumnFormatters();
+		for ( int i = 0; i < formatters.length; i++ ) {
+			if (formatters[i] != null ) {
+				table.setColumnFormatter(i, formatters[i]);
+			}
+		}
 		
 		table.bindToModel(new WritableList(tableContents, getEntityClass()), getEntityClass(),
 				getTableColumnPropertyNames(), getTableColumnHeaders());

@@ -71,6 +71,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 			int returnCode = dialog.open();
 			if (Window.OK == returnCode) {
+				System.err.println("return code : " + returnCode);
 				getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 			}
 			refreshTableContents();
