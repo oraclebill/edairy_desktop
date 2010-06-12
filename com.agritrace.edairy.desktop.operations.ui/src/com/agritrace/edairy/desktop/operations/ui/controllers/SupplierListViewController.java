@@ -49,6 +49,10 @@ public class SupplierListViewController extends
 	public static String[] MASTER_HEADERS = { "ID", "Company Name", "Category",
 			"Contact", "Contact #", "Status" };
 
+	private IComboRidget statusCombo;
+
+	private IListRidget categoriesList;
+
 	public SupplierRepository getRepository() {
 		if (supplierRepo == null) {
 			supplierRepo = new SupplierRepository();
@@ -191,7 +195,7 @@ public class SupplierListViewController extends
 	@Override
 	protected void configureFilterRidgets() {
 		super.configureFilterRidgets();
-		IComboRidget statusCombo = getRidget(IComboRidget.class,
+		statusCombo = getRidget(IComboRidget.class,
 				SupplierListView.BIND_ID_FILTER_STATUS);
 		if (statusCombo != null) {
 			statusCombo.bindToModel(
@@ -201,7 +205,7 @@ public class SupplierListViewController extends
 			statusCombo.setSelection(0);
 		}
 
-		IListRidget categoriesList = getRidget(IListRidget.class,
+		categoriesList = getRidget(IListRidget.class,
 				SupplierListView.BIND_ID_FILTER_CATEGORIES);
 		if (categoriesList != null) {
 
@@ -245,5 +249,13 @@ public class SupplierListViewController extends
 
 		}
 	}
+	
+	@Override
+	protected void resetFilterConditions() {
+		categoriesList.setSelection(-1);
+		statusCombo.setSelection(statusCombo.getEmptySelectionItem());
+	}
+
+
 
 }

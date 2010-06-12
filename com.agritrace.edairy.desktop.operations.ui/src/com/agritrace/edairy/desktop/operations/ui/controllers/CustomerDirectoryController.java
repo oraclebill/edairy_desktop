@@ -97,6 +97,13 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		customerStatusCombo.setSelection(EMPTY_SELECTION_TEXT);
 
 	}
+	
+	@Override
+	protected void resetFilterConditions() {
+		companyNameSearchText.setText("");
+		customerTypeSearchCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
+		customerStatusCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
+	}
 
 	@Override
 	protected List<Customer> getFilteredResult() {

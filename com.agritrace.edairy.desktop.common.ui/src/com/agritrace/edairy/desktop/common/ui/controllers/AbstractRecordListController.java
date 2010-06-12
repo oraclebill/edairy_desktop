@@ -43,7 +43,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		@Override
 		public void callback() {
 			// Rebind the updateFromModel to refresh the tables
-			resetFilterCondtions();
+			resetFilterConditions();
 		}
 	}
 
@@ -209,9 +209,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	/**
 	 * Reset conditions
 	 */
-	protected void resetFilterCondtions() {
-		// Subclass should override this to reset the filter conditions
-	}
+	abstract protected void resetFilterConditions() ;
 
 
 	public void refreshTableContents() {
@@ -245,7 +243,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		resetBtnRidget.addListener(resetFilterAction);
 
 		// Set the initial conditions
-		resetFilterCondtions();
+		resetFilterConditions();
 	}
 
 	protected void configureButtonsRidget() {

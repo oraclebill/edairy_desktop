@@ -204,8 +204,7 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 	}
 
 	@Override
-	protected void resetFilterCondtions() {
-		super.resetFilterCondtions();
+	protected void resetFilterConditions() {
 		// for date range
 		// Start Date Default value
 		if (startDateText != null) {
