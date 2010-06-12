@@ -232,16 +232,23 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
-		// Configure filter ridgets
-		configureFilterRidgets();
-		// Use default conditions to filter
-		refreshTableContents();
+		
 		// Configured Table ridgets
 		configureTableRidget();
+		
+		// Configure filter ridgets
+		configureFilterRidgets();
+		
+		// Use default conditions to filter
+		refreshTableContents();
+		
+		// buttons
 		configureButtonsRidget();
 
 	}
 
+	//abstract protected void configureTableRidget();
+	
 	protected void configureTableRidget() {
 		// Configure Table Widgets
 		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);

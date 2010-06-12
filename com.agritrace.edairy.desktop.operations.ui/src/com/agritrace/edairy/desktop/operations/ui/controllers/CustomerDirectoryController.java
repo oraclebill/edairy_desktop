@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -21,6 +22,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.common.ui.reference.CustomerStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
@@ -31,30 +34,34 @@ import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 
 public class CustomerDirectoryController extends AbstractRecordListController<Customer> {
 
-	private final ICustomerRepository customerRepo;
+	private static final String EMPTY_SELECTION_TEXT = "ANY";
+	private static String[] PROPERTIES = { ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),
+			DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE.getName(),
+			ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(), ModelPackage.Literals.COMPANY__CONTACTS.getName(),
+			ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(), DairyPackage.Literals.CUSTOMER__STATUS.getName(), };
+	private static String[] MASTER_HEADERS = { "ID", "Type", "Company Name", "Contact", "Contact #", "Status" };
+	
+	private static final IObservableList CUSTOMER_TYPES = Observables.staticObservableList(CustomerType
+			.getCustomerTypeList());
+	private static final IObservableList CUSTOMER_STATUSES = Observables.staticObservableList(CustomerStatus
+			.getCustomerStatusList());
 
-	private static String[] PROPERTIES = { 
-		ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),
-		DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE.getName(),
-		ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(), 
-		ModelPackage.Literals.COMPANY__CONTACTS.getName(),
-		ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName() };
-
-	private static String[] MASTER_HEADERS = { "ID", "Type", "Company Name", "Contact", "Contact #" };
+	private final ICustomerRepository customerRepo = new CustomerRepository();
 
 	private ITextRidget companyNameSearchText;
 	private IComboRidget customerTypeSearchCombo;
+	private IComboRidget customerStatusCombo;
+
 	private ITableRidget tableRidget;
 
-	private String nameSearchValue;
-	private String typeSearchValue;
+	private SearchBean searchBean = new SearchBean();
 
 	private List<Customer> customers;
 
 	public CustomerDirectoryController() {
 		super();
-		customerRepo = new CustomerRepository();
 		customers = customerRepo.all();
+		System.err.println(" ++++++++ customer list size == " + customers.size());
 	}
 
 	public ICustomerRepository getRepository() {
@@ -68,30 +75,9 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 
 	@Override
 	protected EClass getEClass() {
-		return DairyPackage.Literals.SUPPLIER;
+		return DairyPackage.Literals.CUSTOMER;
 	}
-
-	@Override
-	protected List<Customer> getFilteredResult() {
-		List<Customer> filtered = new ArrayList<Customer>();
-		if (nameSearchValue != null && nameSearchValue.length() > 0) {
-
-		}
-		for (Customer c : customers) {
-			boolean include = true;
-			if (nameSearchValue != null && !c.getCompanyName().contains(nameSearchValue)) {
-				include = false;
-			}
-			if (include && typeSearchValue != null && !c.getCustomerType().contains(typeSearchValue)) {
-				include = false;
-			}
-			if (include) {
-				filtered.add(c);
-			}
-		}
-		return filtered;
-	}
-
+	
 	@Override
 	protected String[] getTableColumnHeaders() {
 		return MASTER_HEADERS;
@@ -102,13 +88,59 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		return PROPERTIES;
 	}
 
+
+	@Override
+	protected void configureFilterRidgets() {
+		super.configureFilterRidgets();
+		companyNameSearchText = getRidget(ITextRidget.class, CustomerDirectoryView.BIND_ID_FILTER_COMPANYNAME);
+		companyNameSearchText.bindToModel(searchBean, "nameSearchValue");
+
+		// 
+		customerTypeSearchCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_CUSTOMERTYPE);
+		customerTypeSearchCombo.bindToModel(CUSTOMER_TYPES, CustomerType.class, null,
+				BeansObservables.observeValue(searchBean, "typeSearchValue"));
+		customerTypeSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
+		customerTypeSearchCombo.updateFromModel();
+		customerTypeSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
+
+		// 
+		customerStatusCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_STATUS);
+		customerStatusCombo.bindToModel(CUSTOMER_STATUSES, CustomerStatus.class, null,
+				BeansObservables.observeValue(searchBean, "typeSearchValue"));
+		customerTypeSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
+		customerStatusCombo.updateFromModel();
+		customerStatusCombo.setSelection(EMPTY_SELECTION_TEXT);
+
+	}
+
+	@Override
+	protected List<Customer> getFilteredResult() {
+		List<Customer> filtered = new ArrayList<Customer>();
+		for (Customer c : customers) {
+			boolean include = true;
+			if (!c.getCompanyName().contains(check(searchBean.getNameSearchValue()))) {
+				include = false;
+			}
+			if (!c.getCustomerType().equals(check(searchBean.getTypeSearchValue()))) {
+				include = false;
+			}
+			if (!c.getStatus().equals(check(searchBean.getStatusSearchValue()))) {
+				include = false;
+			}
+			if (include) {
+				filtered.add(c);
+			}
+		}
+		return filtered;
+	}
+
 	@Override
 	protected void configureTableRidget() {
 		super.configureTableRidget();
 		tableRidget = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		// For contact Name, we will get the first contact
 		tableRidget.setColumnWidths(null);
-		tableRidget.setColumnFormatter(3, new ColumnFormatter() {			
+		tableRidget.setColumnFormatter(3, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof Customer) {
@@ -147,7 +179,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 
 	@Override
 	protected RecordDialog getRecordDialog(Shell shell) {
-		return new CustomerDialog() ;
+		return new CustomerDialog();
 	}
 
 	@Override
@@ -163,7 +195,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 					EMFUtil.populate(newCustomer);
 					customerDialog.getController().setContext("editObject", newCustomer);
 					int retVal = customerDialog.open();
-					if (retVal == Dialog.OK) {					
+					if (retVal == Dialog.OK) {
 						customerRepo.saveNew(newCustomer);
 					}
 				}
@@ -175,7 +207,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 			viewBtnRidget.addListener(new IActionListener() {
 				private Customer getCheckedSelection() {
 					List<Object> selection = tableRidget.getSelection();
-					if (selection == null || selection.size() == 0) 
+					if (selection == null || selection.size() == 0)
 						return null;
 					if (selection.size() > 1) {
 						// TODO: log warning
@@ -192,7 +224,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 					}
 					return customer;
 				}
-				
+
 				@Override
 				public void callback() {
 					Customer customer = getCheckedSelection();
@@ -200,10 +232,9 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 					customerDialog.setTitle("View/Edit Customer");
 					customerDialog.getController().setContext("editObject", customer);
 					int retVal = customerDialog.open();
-					if (retVal == Dialog.OK) {					
+					if (retVal == Dialog.OK) {
 						customerRepo.merge(customer);
-					}
-					else {
+					} else {
 						customerRepo.restore(customer);
 					}
 					refreshTableContents();
@@ -223,48 +254,32 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		return customer;
 	}
 
-	@Override
-	protected void configureFilterRidgets() {
-		super.configureFilterRidgets();
-		companyNameSearchText = getRidget(ITextRidget.class, CustomerDirectoryView.BIND_ID_FILTER_COMPANYNAME);
-		companyNameSearchText.bindToModel(this, "nameSearchValue");
-
-		customerTypeSearchCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_CUSTOMERTYPE);
-		customerTypeSearchCombo.bindToModel(Observables.staticObservableList(CustomerType.getCustomerTypeList()),
-				CustomerType.class, null, BeansObservables.observeValue(this, "typeSearchValue"));
-		customerTypeSearchCombo.updateFromModel();
-//		customerTypeSearchCombo.setSelection(0);
-
-		// final TypedBean<CustomerType> selection = new
-		// TypedBean<CustomerType>(null);
-		// selection.addPropertyChangeListener(new PropertyChangeListener() {
-		// public void propertyChange(PropertyChangeEvent evt) {
-		// CustomerType node = selection.getValue();
-		// if (getSelectedEObject() != null) {
-		// Customer customer = (Customer) getSelectedEObject();
-		// customer.getCategories().add(node.getName());
-		// }
-		// }
-		// });
-		//		customerType.bindSingleSelectionToModel(selection, "value"); //$NON-NLS-1$
-		// customerType.updateFromModel();
-
+	private static String check(String actual) {
+		return actual != null && actual.trim().length() > 0 ? actual : "";
 	}
 
-	public String getNameSearchValue() {
-		return nameSearchValue;
+	static {
+		for (int i = 0; i < 10; i++ ) {
+			createTestCustomer();
+		}
 	}
-
-	public void setNameSearchValue(String nameSearchValue) {
-		this.nameSearchValue = nameSearchValue;
+	
+	private static Customer createTestCustomer() {
+		return createTestCustomer(null, null, null); 	
 	}
-
-	public String getTypeSearchValue() {
-		return typeSearchValue;
+	
+	private static int sequence = 0;
+	private static Customer createTestCustomer(String name, String type, String status) {
+		Customer cust = DairyFactory.eINSTANCE.createCustomer();
+		cust.setCompanyName(name != null ? name : "Test Company #" + sequence);
+		cust.setCustomerType(type != null ? type : CustomerType.getCustomerTypeList().get(0).getName());
+		cust.setStatus(status != null ? status : CustomerStatus.getCustomerStatusList().get(0).getName());
+		cust.setPhoneNumber("" + sequence);
+		cust.setDescription("Test Company");
+		cust.setLocation(DairyUtil.createLocation(null, null, null));
+		sequence++;
+		return cust;
 	}
-
-	public void setTypeSearchValue(String typeSearchValue) {
-		this.typeSearchValue = typeSearchValue;
-	}
+	
 
 }
