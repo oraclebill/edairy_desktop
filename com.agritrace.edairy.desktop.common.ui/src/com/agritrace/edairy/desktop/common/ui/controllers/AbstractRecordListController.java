@@ -7,16 +7,14 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.window.Window;
-import org.eclipse.riena.internal.ui.ridgets.swt.ShellRidget;
+import org.eclipse.riena.internal.ui.ridgets.swt.TableRidget;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
-import org.eclipse.riena.ui.ridgets.IWindowRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
@@ -32,6 +30,53 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
  */
 public abstract class AbstractRecordListController<T extends EObject> extends SubModuleController {
 
+	private final class ApplyFilterAction implements IActionListener {
+		@Override
+		public void callback() {
+			// Rebind the updateFromModel to refresh the tables
+			refreshTableContents();
+			table.updateFromModel();
+		}
+	}
+
+	private final class ResetFilterAction implements IActionListener {
+		@Override
+		public void callback() {
+			// Rebind the updateFromModel to refresh the tables
+			resetFilterCondtions();
+		}
+	}
+
+	private final class ViewItemAction implements IActionListener {
+		@Override
+		public void callback() {
+			RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+			dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
+			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
+
+			int returnCode = dialog.open();
+			if (Window.OK == returnCode) {
+				getRepository().update((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			}
+			refreshTableContents();
+		}
+	}
+
+	private final class NewItemAction implements IActionListener {
+		@Override
+		public void callback() {
+			RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+			dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
+			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
+
+			int returnCode = dialog.open();
+			if (Window.OK == returnCode) {
+				getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			}
+			refreshTableContents();
+		}
+	}
+	
 	/**
 	 * Dialog style which means the dialog is a dialog to create a new record
 	 */
@@ -47,13 +92,12 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 * Currently, view/edit are same
 	 */
 	public static final int ACTION_EDIT = 3;
-	
-	
+
 	/**
 	 * Context id for selected object
 	 */
 	public static final String EDITED_OBJECT_ID = "editObject";
-	
+
 	/**
 	 * Context id for Action Type
 	 */
@@ -94,14 +138,27 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 */
 	protected abstract String[] getTableColumnPropertyNames();
 
-	protected abstract RecordDialog<T,?> getRecordDialog(Shell shell);
-
+	/**
+	 * 
+	 * @param shell
+	 * @return
+	 */
+	protected abstract RecordDialog<T, ?> getRecordDialog(Shell shell);
+	
+	private IRepository<T> myRepo;
 	private T selectedEObject;
 	private ITableRidget table;
+	private IActionRidget searchBtnRidget;
+	private IActionRidget resetBtnRidget;
+	
+	private ViewItemAction viewAction = new ViewItemAction();
+	private NewItemAction newAction = new NewItemAction();
+	private ApplyFilterAction applyFilterAction = new ApplyFilterAction();
+	private ResetFilterAction resetFilterAction = new ResetFilterAction();
+	
 	private final List<T> tableContents = new ArrayList<T>();
 
-	private IRepository<T> myRepo;
-	
+
 	private final ISelectionListener selectionListener = new ISelectionListener() {
 
 		@Override
@@ -110,8 +167,6 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 			itemSelected(event);
 		}
 	};
-	
-	private ViewItemAction viewAction = new ViewItemAction();
 
 	/**
 	 * Default controller
@@ -142,113 +197,66 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		this.selectedEObject = selectedEObject;
 	}
 
-	public void refreshTableContents() {
-		tableContents.clear();
-		tableContents.addAll(getFilteredResult());	
-		
-	}
-	
-	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
-		newBtnRidget.addListener(new NewItemAction());
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
-		viewBtnRidget.setEnabled(false);
-		viewBtnRidget.addListener(viewAction);
-	}
-	
-	private final class ViewItemAction implements IActionListener {
-		@Override
-		public void callback() {
-			ShellRidget shell = getRidget(ShellRidget.class, AbstractRecordListView.BIND_ID_SHELL);
-			RecordDialog<T,?> dialog = getRecordDialog(new Shell());
-			dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
-			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
-
-			int returnCode = dialog.open();
-			if (Window.OK == returnCode) {
-				getRepository().update((T)dialog.getController().getContext(EDITED_OBJECT_ID));
-			}
-			refreshTableContents();
-			table.updateFromModel();
-		}
-	}
-
-	private final class NewItemAction implements IActionListener {
-		@Override
-		public void callback() {
-			//ShellRidget shell = getRidget(ShellRidget.class, AbstractRecordListView.BIND_ID_SHELL);
-			RecordDialog<T, ?> dialog = getRecordDialog(Display.getCurrent().getActiveShell());
-			dialog.getController().setContext(EDITED_OBJECT_ID,
-					createNewModel());
-			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
-
-			int returnCode = dialog.open();
-			if (Window.OK == returnCode) {
-				getRepository().saveNew((T)dialog.getController().getContext(EDITED_OBJECT_ID));
-			}
-			refreshTableContents();
-			table.updateFromModel();
-		}
-	}
-
 	public IRepository<T> getRepository() {
 		return myRepo;
 	}
-	
+
 	public void setRepository(IRepository<T> myRepo) {
 		this.myRepo = myRepo;
 	}
+	
 
+	/**
+	 * Reset conditions
+	 */
+	protected void resetFilterCondtions() {
+		// Subclass should override this to reset the filter conditions
+	}
+
+
+	public void refreshTableContents() {
+		tableContents.clear();
+		tableContents.addAll(getFilteredResult());
+		table.updateFromModel();
+	}
+
+	@Override
+	final public void configureRidgets() {
+		super.configureRidgets();
+
+		// Configure filter ridgets
+		configureFilterRidgets();
+
+		// Configured Table ridgets
+		configureTableRidget();
+
+		// buttons
+		configureButtonsRidget();
+
+		// Use default conditions to filter
+		refreshTableContents();
+
+	}
 
 	protected void configureFilterRidgets() {
-		// Search Button
-		final IActionRidget searchBtnRidget = getRidget(IActionRidget.class,
-				AbstractRecordListView.BIND_ID_FILTER_SEARCH);
-		if (searchBtnRidget != null) {
-			searchBtnRidget.addListener(new IActionListener() {
-				@Override
-				public void callback() {
-					// Rebind the updateFromModel to refresh the tables
-					refreshTableContents();
-					table.updateFromModel();
-				}
-			});
-		}
-		final IActionRidget resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
-//		if (resetBtnRidget != null) {
-//			resetBtnRidget.addListener(new IActionListener() {
-//
-//				@Override
-//				public void callback() {
-//					// Rebind the updateFromModel to refresh the tables
-//					resetFilterCondtions();
-//				}
-//			});
-//		}
+		searchBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_SEARCH);
+		searchBtnRidget.addListener(applyFilterAction);
+		resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
+		resetBtnRidget.addListener(resetFilterAction);
+
 		// Set the initial conditions
 		resetFilterCondtions();
 	}
 
-	@Override
-	public void configureRidgets() {
-		super.configureRidgets();
-		
-		// Configured Table ridgets
-		configureTableRidget();
-		
-		// Configure filter ridgets
-		configureFilterRidgets();
-		
-		// Use default conditions to filter
-		refreshTableContents();
-		
-		// buttons
-		configureButtonsRidget();
-
+	protected void configureButtonsRidget() {
+		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
+		newBtnRidget.addListener(newAction);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
+		viewBtnRidget.setEnabled(false);
+		viewBtnRidget.addListener(viewAction);
 	}
 
-	//abstract protected void configureTableRidget();
-	
+
 	protected void configureTableRidget() {
 		// Configure Table Widgets
 		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
@@ -265,19 +273,14 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(true);
 	}
-		
+
 	/**
 	 * Create new model while createing a new record
+	 * 
 	 * @return
 	 */
 	protected T createNewModel() {
 		return (T) EMFUtil.createObject(getEClass());
 	}
 
-	/**
-	 * Reset conditions
-	 */
-	protected void resetFilterCondtions() {
-		// Subclass should override this to reset the filter conditions
-	}
 }

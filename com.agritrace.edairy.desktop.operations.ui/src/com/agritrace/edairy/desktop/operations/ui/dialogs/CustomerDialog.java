@@ -11,6 +11,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -37,8 +38,8 @@ public class CustomerDialog extends RecordDialog<Customer, CustomerDialogControl
 	// private static int WIDTH_HEIGHT = 400;
 	// private static int DESC_HEIGHT_HEIGHT = 50;
 
-	public CustomerDialog() {
-		super(null);
+	public CustomerDialog(Shell shell) {
+		super(shell);
 	}
 
 	@Override

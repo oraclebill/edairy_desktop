@@ -7,9 +7,6 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.riena.ui.ridgets.IActionListener;
-import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
@@ -18,17 +15,14 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.operations.services.customer.CustomerRepository;
-import com.agritrace.edairy.desktop.operations.services.customer.ICustomerRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 
@@ -40,13 +34,11 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 			ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(), ModelPackage.Literals.COMPANY__CONTACTS.getName(),
 			ModelPackage.Literals.COMPANY__PHONE_NUMBER.getName(), DairyPackage.Literals.CUSTOMER__STATUS.getName(), };
 	private static String[] MASTER_HEADERS = { "ID", "Type", "Company Name", "Contact", "Contact #", "Status" };
-	
+
 	private static final IObservableList CUSTOMER_TYPES = Observables.staticObservableList(CustomerType
 			.getCustomerTypeList());
 	private static final IObservableList CUSTOMER_STATUSES = Observables.staticObservableList(CustomerStatus
 			.getCustomerStatusList());
-
-	private final ICustomerRepository customerRepo = new CustomerRepository();
 
 	private ITextRidget companyNameSearchText;
 	private IComboRidget customerTypeSearchCombo;
@@ -56,16 +48,9 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 
 	private SearchBean searchBean = new SearchBean();
 
-	private List<Customer> customers;
-
 	public CustomerDirectoryController() {
 		super();
-		customers = customerRepo.all();
-		System.err.println(" ++++++++ customer list size == " + customers.size());
-	}
-
-	public ICustomerRepository getRepository() {
-		return customerRepo;
+		setRepository(new CustomerRepository());
 	}
 
 	@Override
@@ -77,7 +62,7 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 	protected EClass getEClass() {
 		return DairyPackage.Literals.CUSTOMER;
 	}
-	
+
 	@Override
 	protected String[] getTableColumnHeaders() {
 		return MASTER_HEADERS;
@@ -88,25 +73,25 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		return PROPERTIES;
 	}
 
-
 	@Override
 	protected void configureFilterRidgets() {
 		super.configureFilterRidgets();
 		companyNameSearchText = getRidget(ITextRidget.class, CustomerDirectoryView.BIND_ID_FILTER_COMPANYNAME);
+		companyNameSearchText.setDirectWriting(true);
 		companyNameSearchText.bindToModel(searchBean, "nameSearchValue");
 
-		// 
+		//
 		customerTypeSearchCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_CUSTOMERTYPE);
-		customerTypeSearchCombo.bindToModel(CUSTOMER_TYPES, CustomerType.class, null,
+		customerTypeSearchCombo.bindToModel(CUSTOMER_TYPES, CustomerType.class, "getName",
 				BeansObservables.observeValue(searchBean, "typeSearchValue"));
 		customerTypeSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
 		customerTypeSearchCombo.updateFromModel();
 		customerTypeSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
 
-		// 
+		//
 		customerStatusCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_STATUS);
-		customerStatusCombo.bindToModel(CUSTOMER_STATUSES, CustomerStatus.class, null,
-				BeansObservables.observeValue(searchBean, "typeSearchValue"));
+		customerStatusCombo.bindToModel(CUSTOMER_STATUSES, CustomerStatus.class, "getName",
+				BeansObservables.observeValue(searchBean, "statusSearchValue"));
 		customerTypeSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
 		customerStatusCombo.updateFromModel();
 		customerStatusCombo.setSelection(EMPTY_SELECTION_TEXT);
@@ -116,21 +101,16 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 	@Override
 	protected List<Customer> getFilteredResult() {
 		List<Customer> filtered = new ArrayList<Customer>();
-		for (Customer c : customers) {
-			boolean include = true;
-			if (!c.getCompanyName().contains(check(searchBean.getNameSearchValue()))) {
-				include = false;
-			}
-			if (!c.getCustomerType().equals(check(searchBean.getTypeSearchValue()))) {
-				include = false;
-			}
-			if (!c.getStatus().equals(check(searchBean.getStatusSearchValue()))) {
-				include = false;
-			}
-			if (include) {
+		List<Customer> allCustomers = getRepository().all();
+		System.err.println("allCustomers: " + allCustomers);
+		for (final Customer c : allCustomers) {
+			if (matchContains(searchBean.getNameSearchValue(), c.getCompanyName())
+					&& matchEquals(searchBean.getTypeSearchValue(), c.getCustomerType())
+					&& matchEquals(searchBean.getStatusSearchValue(), c.getStatus())) {
 				filtered.add(c);
 			}
 		}
+		System.err.println("Filtered: " + filtered);
 		return filtered;
 	}
 
@@ -178,69 +158,8 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 	}
 
 	@Override
-	protected RecordDialog getRecordDialog(Shell shell) {
-		return new CustomerDialog();
-	}
-
-	@Override
-	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
-		if (newBtnRidget != null) {
-			newBtnRidget.addListener(new IActionListener() {
-				@Override
-				public void callback() {
-					CustomerDialog customerDialog = new CustomerDialog();
-					customerDialog.setTitle("New Customer");
-					Customer newCustomer = DairyFactory.eINSTANCE.createCustomer();
-					EMFUtil.populate(newCustomer);
-					customerDialog.getController().setContext("editObject", newCustomer);
-					int retVal = customerDialog.open();
-					if (retVal == Dialog.OK) {
-						customerRepo.saveNew(newCustomer);
-					}
-				}
-			});
-		}
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
-		viewBtnRidget.setEnabled(false);
-		if (viewBtnRidget != null) {
-			viewBtnRidget.addListener(new IActionListener() {
-				private Customer getCheckedSelection() {
-					List<Object> selection = tableRidget.getSelection();
-					if (selection == null || selection.size() == 0)
-						return null;
-					if (selection.size() > 1) {
-						// TODO: log warning
-						System.err.println("Warning: multiple selections present during 'View' action.");
-					}
-					Customer customer = null;
-					if (selection.get(0) instanceof Customer) {
-						customer = (Customer) selection.get(0);
-					}
-					if (customer == null) {
-						// TODO: log warning
-						System.err.println("Warning: null or empty selection during 'View' action.");
-						return null;
-					}
-					return customer;
-				}
-
-				@Override
-				public void callback() {
-					Customer customer = getCheckedSelection();
-					CustomerDialog customerDialog = new CustomerDialog();
-					customerDialog.setTitle("View/Edit Customer");
-					customerDialog.getController().setContext("editObject", customer);
-					int retVal = customerDialog.open();
-					if (retVal == Dialog.OK) {
-						customerRepo.merge(customer);
-					} else {
-						customerRepo.restore(customer);
-					}
-					refreshTableContents();
-				}
-			});
-		}
+	protected RecordDialog<Customer, ?> getRecordDialog(Shell shell) {
+		return new CustomerDialog(shell);
 	}
 
 	/**
@@ -254,32 +173,23 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 		return customer;
 	}
 
-	private static String check(String actual) {
-		return actual != null && actual.trim().length() > 0 ? actual : "";
+	private static boolean matchContains(String userValue, String entityValue) {
+		System.err.println("mc: " + userValue + ", " + entityValue);
+		if (userValue == null || userValue.trim().length() == 0)
+			return true;
+		if (entityValue.contains(userValue))
+			return true;
+		System.err.println("false: " + userValue + ", " + entityValue);
+		return false;
 	}
 
-	static {
-		for (int i = 0; i < 10; i++ ) {
-			createTestCustomer();
-		}
+	private static boolean matchEquals(Object userValue, String entityValue) {
+		System.err.println("me: " + userValue + ", " + entityValue);
+		if (userValue == null || userValue.toString().trim().length() == 0)
+			return true;
+		if (entityValue.equals(userValue))
+			return true;
+		System.err.println("false: " + userValue + ", " + entityValue);
+		return false;
 	}
-	
-	private static Customer createTestCustomer() {
-		return createTestCustomer(null, null, null); 	
-	}
-	
-	private static int sequence = 0;
-	private static Customer createTestCustomer(String name, String type, String status) {
-		Customer cust = DairyFactory.eINSTANCE.createCustomer();
-		cust.setCompanyName(name != null ? name : "Test Company #" + sequence);
-		cust.setCustomerType(type != null ? type : CustomerType.getCustomerTypeList().get(0).getName());
-		cust.setStatus(status != null ? status : CustomerStatus.getCustomerStatusList().get(0).getName());
-		cust.setPhoneNumber("" + sequence);
-		cust.setDescription("Test Company");
-		cust.setLocation(DairyUtil.createLocation(null, null, null));
-		sequence++;
-		return cust;
-	}
-	
-
 }
