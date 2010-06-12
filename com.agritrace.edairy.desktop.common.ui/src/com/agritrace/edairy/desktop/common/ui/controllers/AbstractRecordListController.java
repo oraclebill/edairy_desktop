@@ -223,7 +223,11 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 		super.configureRidgets();
 
 		// Configure filter ridgets
+		configureFilterRidgetsInternal();
 		configureFilterRidgets();
+
+		// Set the initial conditions
+		resetFilterConditions();
 
 		// Configured Table ridgets
 		configureTableRidget();
@@ -236,15 +240,14 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	}
 
-	protected void configureFilterRidgets() {
+	
+	private void configureFilterRidgetsInternal() {
 		searchBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_SEARCH);
 		searchBtnRidget.addListener(applyFilterAction);
 		resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
 		resetBtnRidget.addListener(resetFilterAction);
-
-		// Set the initial conditions
-		resetFilterConditions();
 	}
+	abstract protected void configureFilterRidgets();
 
 	protected void configureButtonsRidget() {
 		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);

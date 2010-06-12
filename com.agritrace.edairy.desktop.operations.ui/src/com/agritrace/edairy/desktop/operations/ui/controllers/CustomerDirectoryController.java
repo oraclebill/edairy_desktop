@@ -75,7 +75,6 @@ public class CustomerDirectoryController extends AbstractRecordListController<Cu
 
 	@Override
 	protected void configureFilterRidgets() {
-		super.configureFilterRidgets();
 		companyNameSearchText = getRidget(ITextRidget.class, CustomerDirectoryView.BIND_ID_FILTER_COMPANYNAME);
 		companyNameSearchText.setDirectWriting(true);
 		companyNameSearchText.bindToModel(searchBean, "nameSearchValue");

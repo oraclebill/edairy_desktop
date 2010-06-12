@@ -194,7 +194,6 @@ public class SupplierListViewController extends
 
 	@Override
 	protected void configureFilterRidgets() {
-		super.configureFilterRidgets();
 		statusCombo = getRidget(IComboRidget.class,
 				SupplierListView.BIND_ID_FILTER_STATUS);
 		if (statusCombo != null) {
@@ -252,7 +251,7 @@ public class SupplierListViewController extends
 	
 	@Override
 	protected void resetFilterConditions() {
-		categoriesList.setSelection(-1);
+		categoriesList.setSelection((Object)null);	
 		statusCombo.setSelection(statusCombo.getEmptySelectionItem());
 	}
 
