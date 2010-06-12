@@ -13,7 +13,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 
 /**
@@ -23,14 +23,14 @@ import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
  * 
  */
 public class SupplierListControllerTestCase extends
-		AbstractSubModuleControllerTest<SupplierListViewController> {
+		AbstractSubModuleControllerTest<SupplierDirectoryView> {
 
 	List<Supplier> supplier = new ArrayList<Supplier>();
-	private SupplierListViewController newInst;
+	private SupplierDirectoryView newInst;
 
 	@Override
-	protected SupplierListViewController createController(ISubModuleNode node) {
-		newInst = new SupplierListViewController();
+	protected SupplierDirectoryView createController(ISubModuleNode node) {
+		newInst = new SupplierDirectoryView();
 		node.setNodeId(new NavigationNodeId("edm.services.supplier.directory"));
 		newInst.setNavigationNode(node);
 		return newInst;
