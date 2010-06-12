@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
@@ -19,87 +22,48 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
+import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
+import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
+import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 
 public class FarmListViewController extends BaseListViewController {
-	
-
-	private final class AddFarmAction implements IActionListener {
-		@Override
-		public void callback() {
-			FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection()
-					.get(0);
-			int index = farmListTableInput.indexOf(selectedNode);
-			final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-			memberDialog.getController().setContext(
-					ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
-
-			int returnCode = memberDialog.open();
-			if (returnCode == AbstractWindowController.OK) {
-				selectedNode = (FarmListViewTableNode) memberDialog.getController()
-						.getContext("selectedFarm");
-				farmListTableInput.set(index, selectedNode);
-				farmListTable.updateFromModel();
-			} else if (returnCode == 2) {
-				// confirm for delete
-				if (selectedNode != null) {
-					String message = "";
-					if (selectedNode.getFarm() != null) {
-						message = "\"" + selectedNode.getFarm().getName() + "\"";
-					}
-					message = String.format(DELETE_DIALOG_MESSAGE, message);
-					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
-							DELETE_DIALOG_TITLE, message)) {
-						farmListTableInput.remove(selectedNode);
-						farmListTable.updateFromModel();
-					}
-				}
-			}
-		}
-	}
-
+	private final IMemberRepository memberRepository;
+	private final IFarmRepository farmRepository;
+	private Membership selectedMember;
 
 	private ITableRidget farmListTable;
 	private IActionRidget viewRidget;
 	private final String[] farmPropertyNames = { "membership", "membership", "farm", "farm", "farm", "farm" };
-	private final String[] farmColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Location",
-			"Number of LiveStocks", "Number of Container" };
+	private final String[] farmColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Location", "Number of LiveStocks", "Number of Container" };
 	private List<FarmListViewTableNode> farmListTableInput = new ArrayList<FarmListViewTableNode>();
 	private List<Membership> membershipList = new ArrayList<Membership>();
 
-	public static final String DELETE_DIALOG_TITLE = "Delete Membership";
-	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";	
-	
-	protected void configueFilterGroup() {
-//		FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
-//		int index = farmListTableInput.indexOf(selectedNode);
-//		final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-//		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-//				selectedNode);
-//
-//		int returnCode = memberDialog.open();
-//		if (returnCode == AbstractWindowController.OK) {
-//			selectedNode = (FarmListViewTableNode) (FarmListViewTableNode) memberDialog.getController().getContext(
-//					"selectedFarm");
-//			farmListTableInput.set(index, selectedNode);
-//			farmListTable.updateFromModel();
-//		} else if (returnCode == 2) {
-//			// confirm for delete
-//			if (selectedNode != null) {
-//				String message = "";
-//				if (selectedNode.getFarm() != null) {
-//					message = "\"" + selectedNode.getFarm().getName() + "\"";
-//				}
-//				message = String.format(DELETE_DIALOG_MESSAGE, message);
-//				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
-//					farmListTableInput.remove(selectedNode);
-//					farmListTable.updateFromModel();
-//				}
-//			}
-//		}
+
+	public static final String DELETE_DIALOG_TITLE = "Remove Farm";
+	public static final String DELETE_DIALOG_MESSAGE = "Do you want to remove selected farms?";
+
+	// filter group ridgets
+	private ITextRidget memberNameFilter;
+	private IActionRidget memberLookupBtn;
+	private IComboRidget farmCombo;
+	private List<String> farmNames;
+	public static final String ALL_FARM = "All Farms";
+
+
+	public FarmListViewController() {
+		memberRepository = new MemberRepository();
+		farmRepository = new FarmRepository();
+		farmNames = new ArrayList<String>();
+
 	}
 
 	@Override
@@ -107,44 +71,25 @@ public class FarmListViewController extends BaseListViewController {
 		farmListTable = getRidget(ITableRidget.class, ViewWidgetId.FARM_LIST_TABLE);
 		if (true) {
 			buildFarmInputList();
-			farmListTable.bindToModel(new WritableList(farmListTableInput, FarmListViewTableNode.class),
-					FarmListViewTableNode.class, farmPropertyNames, farmColumnHeaders);
+			farmListTable.bindToModel(new WritableList(farmListTableInput, FarmListViewTableNode.class), FarmListViewTableNode.class, farmPropertyNames, farmColumnHeaders);
 			setColumnFormatters();
 
 			farmListTable.addSelectionListener(new ISelectionListener() {
 
-			@Override
-			public void ridgetSelected(SelectionEvent event) {
-				if (event.getSource() == farmListTable) {
-					viewRidget.setEnabled(farmListTable.getSelection().size() > 0);
+				@Override
+				public void ridgetSelected(SelectionEvent event) {
+					if (event.getSource() == farmListTable) {
+						viewRidget.setEnabled(farmListTable.getSelection().size() > 0);
+					}
 				}
-			}
 
 			});
 			farmListTable.updateFromModel();
-			getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD).addListener(new IActionListener() {
-
-				@Override
-				public void callback() {
-					FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
-					int index = farmListTableInput.indexOf(selectedNode);
-					final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-							selectedNode);
-
-					int returnCode = memberDialog.open();
-					if (returnCode == AbstractWindowController.OK) {
-						selectedNode = (FarmListViewTableNode) memberDialog.getController()
-								.getContext("selectedFarm");
-						farmListTableInput.set(index, selectedNode);
-						farmListTable.updateFromModel();
-					}
-				}
-			});
+			getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD).addListener(new AddFarmAction());
 			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
 			if (viewRidget != null) {
 				viewRidget.setEnabled(false);
-				viewRidget.addListener(new AddFarmAction());
+				viewRidget.addListener(new ViewAction());
 			}
 		}
 	}
@@ -214,8 +159,7 @@ public class FarmListViewController extends BaseListViewController {
 						if (location != null) {
 							final PostalLocation postalLocation = location.getPostalLocation();
 							if (postalLocation != null) {
-								return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
-										+ postalLocation.getPostalCode();
+								return postalLocation.getAddress() + "," + postalLocation.getVillage() + "," + postalLocation.getPostalCode();
 							}
 						}
 					}
@@ -251,8 +195,119 @@ public class FarmListViewController extends BaseListViewController {
 
 	@Override
 	protected void configureFilterGroup() {
-		// TODO Auto-generated method stub
-		
+
+		// search text
+		memberNameFilter = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
+		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
+		memberLookupBtn.addListener(new MemberLookupAction());
+		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
+		farmCombo.bindToModel(new WritableList(farmNames, String.class), String.class, null,
+				new WritableValue());
+
 	}
 
+	private void updateFarmCombo() {
+		if(selectedMember != null){
+			if(farmCombo != null){
+				String currentSelection = farmCombo.getText();
+				farmNames.clear();
+				farmNames.add(ALL_FARM);
+				List<Farm> farms = selectedMember.getMember().getFarms();
+				for(Farm farm:farms){
+					farmNames.add(farm.getName());
+				}
+				farmCombo.updateFromModel();
+				if(MemberUtil.check(currentSelection)){
+					int index = farmNames.indexOf(currentSelection);
+					if(index != -1){
+						farmCombo.setSelection(index);
+						return;
+					}
+
+				}
+				//select the "All Farm" by default
+				farmCombo.setSelection(0);
+
+			}
+		}
+
+	}
+
+	private final class AddFarmAction implements IActionListener {
+		@Override
+		public void callback() {
+			Location newFarmLocation = DairyUtil.createLocation("", "", "", "", "", "", "", "", "", "");
+			Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
+			FarmListViewTableNode selectedNode = new FarmListViewTableNode(selectedMember, newFarm);
+			final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
+			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+
+			int returnCode = memberDialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				selectedNode = (FarmListViewTableNode) memberDialog.getController().getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+				selectedMember.getMember().getFarms().add(newFarm);
+				if (selectedMember.getMemberId() != 0) {
+					farmRepository.saveNew(newFarm);
+					memberRepository.update(selectedMember);
+				}
+
+				farmListTableInput.add(selectedNode);
+				farmListTable.updateFromModel();
+			} 
+		}
+	}
+
+	private class ViewAction implements IActionListener {
+
+		@Override
+		public void callback() {
+			if (!farmListTable.getSelection().isEmpty()) {
+				FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
+				int index = farmListTableInput.indexOf(selectedNode);
+				final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
+				memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+
+				int returnCode = memberDialog.open();
+				if (returnCode == AbstractWindowController.OK) {
+					selectedNode = (FarmListViewTableNode) memberDialog.getController().getContext("selectedFarm");
+					farmListTableInput.set(index, selectedNode);
+					farmListTable.updateFromModel();
+					memberRepository.update(selectedMember);
+
+				}else if (returnCode == 2) {
+					// confirm for delete
+					if (selectedNode != null) {
+						String message = "";
+						if (selectedNode.getFarm() != null) {
+							message = "\"" + selectedNode.getFarm().getName() + "\"";
+						}
+						message = String.format(DELETE_DIALOG_MESSAGE, message);
+						if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
+							farmListTableInput.remove(selectedNode);
+							farmListTable.updateFromModel();
+							memberRepository.update(selectedMember);
+
+						}
+					}
+				}
+			}
+
+		}
+
+	}
+
+	public class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			int retVal = memberDialog.open();
+			if (retVal == MemberSearchDialog.OK) {
+				selectedMember = memberDialog.getSelectedMember();
+				String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
+				memberNameFilter.setText(memberName);
+				updateFarmCombo();
+			}
+		}
+
+	}
 }

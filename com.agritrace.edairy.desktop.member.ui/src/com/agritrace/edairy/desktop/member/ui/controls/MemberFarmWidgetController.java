@@ -111,9 +111,12 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 				if (returnCode == AbstractWindowController.OK) {
 					newNode = (FarmListViewTableNode) memberDialog.getController()
 					.getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
-					farmRepository.saveNew(newFarm);
 					selectedMember.getMember().getFarms().add(newFarm);
-					memberRepository.update(selectedMember);
+					if(selectedMember.getMemberId() != 0){
+						farmRepository.saveNew(newFarm);
+						memberRepository.update(selectedMember);
+					}
+					
 					farms.add(newFarm);
 					farmTable.updateFromModel();
 				}

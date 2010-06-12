@@ -36,6 +36,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
@@ -151,32 +152,9 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	}
 
 	// TODO: make this generic, move to util calss.
-	private static boolean check(String s) {
-		return (null != s) && (s.length() > 0);
-	}
 
-	private static String formattedMemberName(Person member) {
-		String ret = "";
-		final Person person = member;
-		if (check(person.getHonorific()))
-			ret += person.getHonorific() + " ";
 
-		if (check(person.getFamilyName()))
-			ret += person.getFamilyName() + ", ";
 
-		if (check(person.getGivenName()))
-			ret += person.getGivenName() + " ";
-
-		if (check(person.getMiddleName()))
-			ret += person.getMiddleName() + " ";
-
-		if (check(person.getAdditionalNames()))
-			ret += "(" + person.getAdditionalNames() + ") ";
-
-		if (check(person.getSuffix()))
-			ret += person.getSuffix() + " ";
-		return ret;
-	}
 
 	protected void configureUpperPanel() {
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
@@ -284,7 +262,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 							@Override
 							public Object convert(Object from) {
 								if (from instanceof Person) {
-									return formattedMemberName((Person) from);
+									return MemberUtil.formattedMemberName((Person) from);
 								}
 								return "";
 							}

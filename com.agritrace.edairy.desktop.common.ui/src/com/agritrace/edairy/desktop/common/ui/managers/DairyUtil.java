@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.common.ui.managers;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -409,7 +410,8 @@ public class DairyUtil {
 		final Membership member = DairyFactory.eINSTANCE.createMembership();
 
 		if (null == farmer) {
-			farmer = createFarmer("", "", "", "", createFarm("", createLocation(null, null, null)));
+//			farmer = createFarmer("", "", "", "", createFarm("", createLocation(null, null, null)));
+			farmer = createFarmer("", "", "", "", new ArrayList<Farm>());
 		}
 		member.setMember(farmer);
 
