@@ -16,7 +16,6 @@ import com.agritrace.edairy.desktop.common.model.base.Company;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerId <em>Customer Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerType <em>Customer Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getStatus <em>Status</em>}</li>
  * </ul>
@@ -27,33 +26,6 @@ import com.agritrace.edairy.desktop.common.model.base.Company;
  * @generated
  */
 public interface Customer extends Company {
-	/**
-	 * Returns the value of the '<em><b>Customer Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Customer Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Customer Id</em>' attribute.
-	 * @see #setCustomerId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCustomer_CustomerId()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
-	 *        extendedMetaData="name='customerId' kind='elementOnly'"
-	 * @generated
-	 */
-	Long getCustomerId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerId <em>Customer Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Customer Id</em>' attribute.
-	 * @see #getCustomerId()
-	 * @generated
-	 */
-	void setCustomerId(Long value);
-
 	/**
 	 * Returns the value of the '<em><b>Customer Type</b></em>' attribute.
 	 * The default value is <code>"Milk Processor"</code>.

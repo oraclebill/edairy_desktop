@@ -269,12 +269,6 @@
     <eLiterals name="Evening2" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="common.ecore#//Company">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="supplierId" eType="ecore:EDataType common.ecore#//UniqueID">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="supplierId"/>
-        <details key="kind" value="elementOnly"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="categories" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicDescription" lowerBound="1"
@@ -302,12 +296,6 @@
     <eLiterals name="MilkProcessing" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Customer" eSuperTypes="common.ecore#//Company">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customerId" eType="ecore:EDataType common.ecore#//UniqueID">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="customerId"/>
-        <details key="kind" value="elementOnly"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="customerType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="Milk Processor"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"

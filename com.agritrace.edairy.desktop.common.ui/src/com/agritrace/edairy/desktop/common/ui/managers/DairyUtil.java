@@ -181,7 +181,7 @@ public class DairyUtil {
 			Date expirationDate, Collection<String> categories, Collection<Person> contacts,
 			Collection<ContactMethod> contactMethods) throws ParseException {
 		final Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(id);
+//		supplier.setSupplierId(id);
 		supplier.setCompanyName(companyName);
 		supplier.setLegalName(legalName);
 		supplier.setStatus(status);

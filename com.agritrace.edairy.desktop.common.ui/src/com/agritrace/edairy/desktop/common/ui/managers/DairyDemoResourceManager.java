@@ -411,7 +411,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createSupplier1(Dairy dairy) throws ParseException {
 		final Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10001l);
+//		supplier.setSupplierId(10001l);
 		supplier.setCompanyName("John Inventory Ltd ");
 		supplier.setLegalName("JHVEN");
 		supplier.setStatus(VendorStatus.VALID);
@@ -433,7 +433,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	private void createSupplier2(Dairy dairy) throws ParseException {
 		final Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10002l);
+//		supplier.setSupplierId(10002l);
 		supplier.setCompanyName("Tom  Amusement Ltd ");
 		supplier.setLegalName("TAL");
 		supplier.setStatus(VendorStatus.VALID);
@@ -456,7 +456,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 	private void createSupplier3(Dairy dairy) throws ParseException {
 
 		final Supplier supplier = DairyFactory.eINSTANCE.createSupplier();
-		supplier.setSupplierId(10003l);
+//		supplier.setSupplierId(10003l);
 		supplier.setCompanyName("Gold Store Ltd ");
 		supplier.setLegalName("GSLD");
 		supplier.setStatus(VendorStatus.INVALID);
