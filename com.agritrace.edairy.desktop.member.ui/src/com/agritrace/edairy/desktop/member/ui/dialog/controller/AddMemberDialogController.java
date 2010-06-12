@@ -1,8 +1,11 @@
 package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
@@ -15,10 +18,12 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.util.Assert;
+import org.eclipse.riena.core.marker.IMarkable;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
@@ -53,10 +58,8 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	public static final String DIALOG_TITLE = "Membership";
 
 	// reference data
-	public static final Collection<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.",
-			"Hon.", "Lt.", "Maj.", "Col.", "Gen.");
-	public static final Collection<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV",
-			"V");
+	public static final Collection<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.", "Hon.", "Lt.", "Maj.", "Col.", "Gen.");
+	public static final Collection<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV", "V");
 
 	private Map<IRidget, FeaturePath> memberBindings;
 
@@ -95,25 +98,27 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	private MemberTransactionWidgetController transactionController;
 
 	private IValidator updateValidator = new IValidator() {
-		
+
 		@Override
 		public IStatus validate(Object arg0) {
-			if(formattedMemberNameRidget  != null){
+			if (formattedMemberNameRidget != null) {
 				formattedMemberNameRidget.updateFromModel();
 			}
 			return Status.OK_STATUS;
 		}
 	};
+
 	//
-//	protected IConverter formattedNameConverter = new Converter(Person.class, String.class) {
-//		@Override
-//		public Object convert(Object from) {
-//			if (from instanceof Person) {
-//				return formattedMemberName((Person) from);
-//			}
-//			return "";
-//		}
-//	};
+	// protected IConverter formattedNameConverter = new Converter(Person.class,
+	// String.class) {
+	// @Override
+	// public Object convert(Object from) {
+	// if (from instanceof Person) {
+	// return formattedMemberName((Person) from);
+	// }
+	// return "";
+	// }
+	// };
 
 	public AddMemberDialogController() {
 
@@ -140,9 +145,10 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			updateBindings();
 		}
 		configureButtonsPanel();
+		addPropertyChangedListener();
+		enableSaveButton(validate());
 
 	}
-	
 
 	// TODO: make this generic, move to util calss.
 	private static boolean check(String s) {
@@ -188,26 +194,25 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		updatePhotoActionRidget = getRidget(ILinkRidget.class, ViewWidgetId.memberPhotoEditLink);
 
 		// extended setup
-//		titleRidget.setOutputOnly(true);
+		// titleRidget.setOutputOnly(true);
 		titleRidget.setEmptySelectionItem("(None)");
 
-//		suffixRidget.setOutputOnly(true);
+		// suffixRidget.setOutputOnly(true);
 		suffixRidget.setEmptySelectionItem("(None)");
 
 		givenNameRidget.setMandatory(true);
 		familyNameRidget.setMandatory(true);
 
-//		formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
+		// formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
 
 		updatePhotoActionRidget.setText("(click to update photo)");
 		updatePhotoActionRidget.addSelectionListener(updateMemberPhotoAction);
-		
-		//add validator to update the header
+
+		// add validator to update the header
 		givenNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
 		middleNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
 		familyNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
 		addtlNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-	
 
 	}
 
@@ -230,37 +235,30 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 		// formatted name
 		aMap.put(formattedMemberNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)); // uses
-																												// converter
+		// converter
 		// member id
 		aMap.put(memberIdRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 
 		// member first name
-		aMap.put(givenNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__GIVEN_NAME));
+		aMap.put(givenNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__GIVEN_NAME));
 
 		// member middle name
-		aMap.put(middleNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__MIDDLE_NAME));
+		aMap.put(middleNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__MIDDLE_NAME));
 
 		// member family name
-		aMap.put(familyNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__FAMILY_NAME));
+		aMap.put(familyNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__FAMILY_NAME));
 
 		// member additional names
-		aMap.put(addtlNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__ADDITIONAL_NAMES));
+		aMap.put(addtlNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__ADDITIONAL_NAMES));
 
 		// member title (prefix)
-		aMap.put(titleRidget,
-				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__HONORIFIC));
+		aMap.put(titleRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__HONORIFIC));
 
 		// member suffix
-		aMap.put(suffixRidget,
-				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX));
+		aMap.put(suffixRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX));
 
 		// member photo
-		aMap.put(photoRidget,
-				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__PHOTO));
+		aMap.put(photoRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__PHOTO));
 
 		// member photo update button
 		// aMap.put(updatePhotoActionRidget, FeaturePath.fromList(
@@ -277,11 +275,12 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			// loop through the text ridgets
 			for (final IRidget r : memberBindings.keySet()) {
 				if (r instanceof IValueRidget) {
-					
+
 					IObservableValue oberservModel = EMFProperties.value(memberBindings.get(r)).observe(selectedMember);
-					//need to bind model to UI control converter again, because the fromType instance changes every time
-					if(r == formattedMemberNameRidget){
-						formattedMemberNameRidget.setModelToUIControlConverter( new Converter(oberservModel.getValueType(), String.class) {
+					// need to bind model to UI control converter again, because
+					// the fromType instance changes every time
+					if (r == formattedMemberNameRidget) {
+						formattedMemberNameRidget.setModelToUIControlConverter(new Converter(oberservModel.getValueType(), String.class) {
 							@Override
 							public Object convert(Object from) {
 								if (from instanceof Person) {
@@ -296,15 +295,13 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			}
 
 			// manually bind the combos (for now)..
-			titleRidget.bindToModel(new WritableList(VALID_TITLES, String.class), String.class, null,
-					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__HONORIFIC));
-			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES, String.class), String.class, null,
-					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__SUFFIX));
+			titleRidget.bindToModel(new WritableList(VALID_TITLES, String.class), String.class, null, EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__HONORIFIC));
+			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES, String.class), String.class, null, EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__SUFFIX));
 
 			// tap, tap..
 			memberIdRidget.updateFromModel();
 			for (final IRidget r : memberBindings.keySet()) {
-				if (r instanceof IValueRidget){
+				if (r instanceof IValueRidget) {
 					((IValueRidget) r).updateFromModel();
 				}
 			}
@@ -319,11 +316,61 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			repository.saveNew(selectedMember);
 		}
 	}
-	
+
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		//we should set return code to cancel as default, because if user close the window, it returns OK now.
+		// we should set return code to cancel as default, because if user close
+		// the window, it returns OK now.
 		setReturnCode(CANCEL);
+	}
+
+	protected void addPropertyChangedListener(){
+		AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
+		Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
+		while(ridgetIterator.hasNext()){
+			IRidget ridget = ridgetIterator.next();
+			if(ridget instanceof ITextRidget){
+				ridget.addPropertyChangeListener("text",propertyChangedListener);
+			}else if(ridget instanceof IComboRidget){
+				ridget.addPropertyChangeListener("selection",propertyChangedListener);
+			}else if(ridget instanceof IMarkable){
+				ridget.addPropertyChangeListener("marker",propertyChangedListener);
+			}
+		}
+	}
+
+	protected boolean validate() {
+		for (IRidget ridget :  getRidgets()) {
+			IMarkableRidget markable;
+			if (ridget instanceof IMarkableRidget) {
+				markable = (IMarkableRidget) ridget;
+				if(markable.isErrorMarked()){
+					return false;
+				}
+				if(markable.isMandatory()){
+					if(ridget instanceof ITextRidget){
+						if(((ITextRidget)ridget).getText().isEmpty()){
+							return false;
+						}
+					}else if(ridget instanceof IComboRidget){
+						if (((IComboRidget)ridget).getSelection()== null){
+							return false;
+						}
+					}
+				}
+			}			
+		}	
+		return true;
+
+	}
+
+	private class AddMemberPropertyChangedListener implements PropertyChangeListener {
+
+		@Override
+		public void propertyChange(PropertyChangeEvent arg0) {
+			enableSaveButton(validate());
+		}
+
 	}
 }
