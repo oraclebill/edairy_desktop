@@ -19,7 +19,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
@@ -29,7 +31,9 @@ import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupCont
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 public class SupplierListDialogController extends RecordDialogController<Supplier> {
@@ -120,6 +124,13 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());
 		desc.updateFromModel();
 
+		Location supplierLocation = supplier.getLocation();
+		if  (supplierLocation == null) {
+			supplierLocation = DairyUtil.createLocation(null, null, null);
+			supplier.setLocation(supplierLocation);
+		}
+		EMFUtil.populate(supplierLocation);
+		
 		// Configure address group
 		AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		addressGroupController.setInputModel(supplier.getLocation().getPostalLocation());

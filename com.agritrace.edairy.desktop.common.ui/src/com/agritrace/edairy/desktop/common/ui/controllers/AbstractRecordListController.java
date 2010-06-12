@@ -147,19 +147,19 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	
 	private IRepository<T> myRepo;
 	private T selectedEObject;
-	private ITableRidget table;
+	protected ITableRidget table;
 	private IActionRidget searchBtnRidget;
 	private IActionRidget resetBtnRidget;
 	
-	private ViewItemAction viewAction = new ViewItemAction();
+	protected ViewItemAction viewAction = new ViewItemAction();
 	private NewItemAction newAction = new NewItemAction();
 	private ApplyFilterAction applyFilterAction = new ApplyFilterAction();
 	private ResetFilterAction resetFilterAction = new ResetFilterAction();
 	
-	private final List<T> tableContents = new ArrayList<T>();
+	protected final List<T> tableContents = new ArrayList<T>();
 
 
-	private final ISelectionListener selectionListener = new ISelectionListener() {
+	protected final ISelectionListener selectionListener = new ISelectionListener() {
 
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
@@ -220,7 +220,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 
 	@Override
 	final public void configureRidgets() {
-		super.configureRidgets();
+//		super.configureRidgets();
 
 		// Configure filter ridgets
 		configureFilterRidgetsInternal();
