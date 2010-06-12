@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
@@ -26,7 +26,7 @@ import com.agritrace.edairy.desktop.operations.services.customer.CustomerReposit
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 
-public class CustomerDirectoryController extends AbstractRecordListController<Customer> {
+public class CustomerDirectoryController extends AbstractDirectoryController<Customer> {
 
 	private static final String EMPTY_SELECTION_TEXT = "ANY";
 	private static String[] PROPERTIES = { ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),

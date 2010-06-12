@@ -25,7 +25,7 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
@@ -51,7 +51,7 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		supplierId.setOutputOnly(false);
 		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		supplierId.updateFromModel();
-		if (this.getActionType() == AbstractRecordListController.ACTION_NEW) {
+		if (this.getActionType() == AbstractDirectoryController.ACTION_NEW) {
 			supplierId.setText("Auto Generated");
 		}
 		supplierId.setOutputOnly(true);

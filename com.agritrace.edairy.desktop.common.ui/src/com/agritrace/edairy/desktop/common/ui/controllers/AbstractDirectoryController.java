@@ -28,7 +28,7 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class AbstractRecordListController<T extends EObject> extends SubModuleController {
+public abstract class AbstractDirectoryController<T extends EObject> extends SubModuleController {
 
 	private final class ApplyFilterAction implements IActionListener {
 		@Override
@@ -171,7 +171,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	/**
 	 * Default controller
 	 */
-	public AbstractRecordListController() {
+	public AbstractDirectoryController() {
 		super();
 	}
 
@@ -180,7 +180,7 @@ public abstract class AbstractRecordListController<T extends EObject> extends Su
 	 * 
 	 * @param navigationNode
 	 */
-	public AbstractRecordListController(ISubModuleNode navigationNode) {
+	public AbstractDirectoryController(ISubModuleNode navigationNode) {
 		super(navigationNode);
 	}
 

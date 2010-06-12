@@ -44,7 +44,7 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.LookupDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -61,7 +61,7 @@ import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
  * @author Hui(Spark) Wan
  * 
  */
-public class AnimalHealthRequestViewController extends AbstractRecordListController<AnimalHealthRequest> {
+public class AnimalHealthRequestViewController extends AbstractDirectoryController<AnimalHealthRequest> {
 
 	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),

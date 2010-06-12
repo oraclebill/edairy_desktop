@@ -18,12 +18,12 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView.ContactNameColumnFormatter;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView.ContactPhoneColumnFormatter;
 
-public abstract class BasicDirectoryController<T extends EObject> extends AbstractRecordListController<T> {
+public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
 
 //	public static String[] MASTER_PROPTIES = { ModelPackage.Literals.COMPANY__COMPANY_ID.getName(),
 //				ModelPackage.Literals.COMPANY__COMPANY_NAME.getName(),

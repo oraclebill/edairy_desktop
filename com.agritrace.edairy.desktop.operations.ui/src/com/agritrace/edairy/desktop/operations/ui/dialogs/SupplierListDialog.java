@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
@@ -49,9 +49,9 @@ public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialo
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		// newShell.setSize(500, 750);
-		if (this.getActionType() == AbstractRecordListController.ACTION_NEW) {
+		if (this.getActionType() == AbstractDirectoryController.ACTION_NEW) {
 			this.setTitle("Add Supplier");
-		} else if (this.getActionType() == AbstractRecordListController.ACTION_VIEW) {
+		} else if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
 			this.setTitle("View Supplier");
 		} else {
 			this.setTitle("Edit Supplier");
