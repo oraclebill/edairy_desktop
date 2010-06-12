@@ -8,6 +8,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -15,7 +16,7 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetCont
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 
-public class ViewFarmDialogController extends AbstractWindowController {
+public class ViewFarmDialogController extends BaseDialogController<Farm> {
 
 	public static final String DIALOG_TITLE = "Farm";
 

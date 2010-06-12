@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
+import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
@@ -7,6 +8,7 @@ import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.converters.NumberToStringConverter;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.validators.DoubleNumberValidator;
 
 public class MapGroupController implements WidgetController {
 
@@ -26,6 +28,9 @@ public class MapGroupController implements WidgetController {
 	public void configure() {
 		latituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LATITUDE_TEXT);
 		longtituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
+		DoubleNumberValidator validator =  new DoubleNumberValidator();
+		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
+		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 
 	}
 

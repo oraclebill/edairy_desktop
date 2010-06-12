@@ -34,8 +34,11 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -45,6 +48,8 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 public class MemberDirectoryController extends SubModuleController {
 
 	private final IMemberRepository repository;
+	private final IFarmRepository farmRepository;
+
 	private final List<Membership> membershipList = new ArrayList<Membership>();
 
 	private ITableRidget memberListRidget;
@@ -61,6 +66,7 @@ public class MemberDirectoryController extends SubModuleController {
 
 	public MemberDirectoryController() {
 		repository = new MemberRepository();
+		farmRepository = new FarmRepository();
 		searchLabels = new ILabelRidget[27];
 	}
 
@@ -74,7 +80,15 @@ public class MemberDirectoryController extends SubModuleController {
 			int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+				List<Farm> newFarms = new ArrayList<Farm>();
+				 newFarms.addAll(selectedMember.getMember().getFarms());
+				selectedMember.getMember().getFarms().clear();
 				repository.saveNew(selectedMember);
+				for(Farm newFarm : newFarms){
+					farmRepository.saveNew(newFarm);
+					selectedMember.getMember().getFarms().add(newFarm);
+				}
+				repository.save(selectedMember);
 				refreshMemberList();
 				// membershipList.set(index, selectedMember);
 				// memberListRidget.updateFromModel();

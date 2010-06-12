@@ -147,12 +147,12 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 					newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED);
 					newAnimal.getLocation().getAnimals().add(newAnimal);
 					animalInput.add(newAnimal);
-					farmRepository.save(newAnimal.getLocation());
+					Farm farmLocation = newAnimal.getLocation();
+					if(farmLocation != null && farmLocation.getFarmId() != 0){
+						farmRepository.save(newAnimal.getLocation());
+					}
 					liveStockTable.updateFromModel();
-					// membershipList.set(index, selectedMember);
-					// memberListRidget.updateFromModel();
-				} else {
-					// System.out.println("return code "+returnCode);
+				
 				}
 			}
 		});
