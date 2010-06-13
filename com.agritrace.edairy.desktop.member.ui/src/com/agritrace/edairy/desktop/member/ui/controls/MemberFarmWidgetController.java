@@ -100,7 +100,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
 						| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
-				Location newFarmLocation = DairyUtil.createLocation("", "", "", "", "", "", "", "", "", "");
+				Location newFarmLocation = DairyUtil.createLocation(null,null,null);
 				Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
 				FarmListViewTableNode newNode =new FarmListViewTableNode(selectedMember, newFarm);
 				final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());

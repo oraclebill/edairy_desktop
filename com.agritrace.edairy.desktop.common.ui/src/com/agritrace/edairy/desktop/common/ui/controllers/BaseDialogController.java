@@ -147,5 +147,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		}
 		okAction.setEnabled(enable);
 	}
+	
+	
 
 }

@@ -1,15 +1,25 @@
 package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Iterator;
+
+import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.core.marker.IMarkable;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
+import org.eclipse.riena.ui.ridgets.IRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
@@ -20,8 +30,6 @@ public class ViewFarmDialogController extends BaseDialogController<Farm> {
 
 	public static final String DIALOG_TITLE = "Farm";
 
-	private String generatedFarmId;
-
 	protected FarmListViewTableNode selectedNode;
 
 	// upper panel fields
@@ -29,6 +37,7 @@ public class ViewFarmDialogController extends BaseDialogController<Farm> {
 	private ILabelRidget farmIdRidget;
 	private ILabelRidget memberNameRidget;
 	private ILabelRidget memberIdRidget;
+	private ITextRidget farmNameTextRidget;
 
 	private LocationProfileWidgetController locationProfileController;
 
@@ -62,7 +71,8 @@ public class ViewFarmDialogController extends BaseDialogController<Farm> {
 			updateBindings();
 		}
 		configureButtonsPanel();
-
+		addPropertyChangedListener();
+		enableSaveButton(validate());
 	}
 
 	protected void configureButtonsPanel() {
@@ -96,8 +106,9 @@ public class ViewFarmDialogController extends BaseDialogController<Farm> {
 	}
 
 	protected void configureUpperPanel() {
-
 		farmNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_NAME);
+		farmNameTextRidget = getRidget(ITextRidget.class, ViewWidgetId.VIEW_FARM_NAME_TXT);
+		farmNameTextRidget.setMandatory(true);
 		farmIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_ID);
 		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
 		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_ID);
@@ -119,49 +130,80 @@ public class ViewFarmDialogController extends BaseDialogController<Farm> {
 
 	protected void updateUpperPanelBinding() {
 		if (selectedNode != null && selectedNode.getMembership() != null) {
-			Farmer farmer = (Farmer) selectedNode.getMembership().getMember();
 			Farm selectedFarm = selectedNode.getFarm();
-			if (farmNameRidget != null) {
-				farmNameRidget.setText(FARM_NAME_LABEL_PREFIX + selectedFarm.getName());
+			farmNameTextRidget.bindToModel(EMFObservables.observeValue(selectedNode.getFarm(), TrackingPackage.Literals.FARM__NAME));
+			farmNameTextRidget.updateFromModel();
+			if(farmNameRidget != null && selectedFarm.getFarmId() != null){
+				farmNameRidget.setText("Farm " + farmNameTextRidget.getText());
 			}
+
 			if (farmIdRidget != null) {
-				farmIdRidget.setText(FARM_ID_LABEL_PREFIX + selectedFarm.getFarmId());
+				if (selectedFarm.getFarmId() != null) {
+					farmIdRidget.setText(FARM_ID_LABEL_PREFIX + selectedFarm.getFarmId());
+				} else {
+					farmIdRidget.setText(FARM_ID_LABEL_PREFIX + "<auto>");
+				}
+
 			}
 			if (memberIdRidget != null) {
 				memberIdRidget.setText(FARM_MEMBER_ID_LABEL_PREFIX + selectedNode.getMembership().getMemberId());
 			}
 			if (memberNameRidget != null) {
-				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX + farmer.getFamilyName() + ","
-						+ farmer.getGivenName());
+				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX + MemberUtil.formattedMemberName(selectedNode.getMembership().getMember()));
+			}
+		}
+	}
+	
+	protected boolean validate() {
+		for (IRidget ridget : getRidgets()) {
+			IMarkableRidget markable;
+			if (ridget instanceof IMarkableRidget) {
+				markable = (IMarkableRidget) ridget;
+				if (markable.isErrorMarked()) {
+					return false;
+				}
+				if (markable.isMandatory()) {
+					if (ridget instanceof ITextRidget) {
+						if (((ITextRidget) ridget).getText().isEmpty()) {
+							return false;
+						}
+					} else if (ridget instanceof IComboRidget) {
+						if (((IComboRidget) ridget).getSelection() == null) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+
+	}
+
+	protected void addPropertyChangedListener() {
+		AddPropertyChangedListener propertyChangedListener = new AddPropertyChangedListener();
+		Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
+		while (ridgetIterator.hasNext()) {
+			IRidget ridget = ridgetIterator.next();
+			if (ridget instanceof ITextRidget) {
+				ridget.addPropertyChangeListener("text", propertyChangedListener);
+			} else if (ridget instanceof IComboRidget) {
+				ridget.addPropertyChangeListener("selection", propertyChangedListener);
+			} else if (ridget instanceof IMarkable) {
+				ridget.addPropertyChangeListener("marker", propertyChangedListener);
 			}
 		}
 	}
 
-	private void copySelectedMember() {
-		// if(selectedMember != null){
-		// workingCopy = EcoreUtil.copy(selectedMember);
-		// }
-	}
+	private class AddPropertyChangedListener implements PropertyChangeListener {
 
-	protected void saveMember() {
-		// if (selectedFarm != null) {
-		// MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this,
-		// selectedMember);
-		// try {
-		// DairyDemoResourceManager.INSTANCE.saveFarmResource();
-		// DairyDemoResourceManager.INSTANCE.saveDairyResource();
-		// MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
-		// } catch (final IllegalArgumentException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// Activator.getDefault().logError(e, e.getMessage());
-		// } catch (final IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// Activator.getDefault().logError(e, e.getMessage());
-		//
-		// }
-		// }
+		@Override
+		public void propertyChange(PropertyChangeEvent arg0) {
+			if (arg0.getSource() == farmNameTextRidget) {
+				farmNameRidget.setText("Farm " + farmNameTextRidget.getText());
+			}
+			enableSaveButton(validate());
+		}
+
 	}
 
 }
