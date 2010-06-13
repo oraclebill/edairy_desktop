@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;

@@ -1,9 +1,11 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
@@ -44,6 +46,18 @@ public class LiveStockFilterWidget {
 		final Combo statusText = UIControlsFactory.createCombo(filterPanel2,
 				ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(statusText);
+		
+		// search cancel button
+		Composite searchPanel = UIControlsFactory.createComposite(composite);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(searchPanel);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
+
+		Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
+				ViewWidgetId.memberInfo_searchButton);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
+
+		Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.cancelButton);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
 
 	}
 

@@ -1,10 +1,21 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.query.conditions.Condition;
+import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
+import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
+import org.eclipse.emf.query.conditions.numbers.NumberAdapter;
+import org.eclipse.emf.query.conditions.numbers.NumberCondition;
+import org.eclipse.emf.query.conditions.numbers.NumberCondition.RelationalOperator;
+import org.eclipse.emf.query.statements.FROM;
+import org.eclipse.emf.query.statements.IQueryResult;
+import org.eclipse.emf.query.statements.SELECT;
+import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -18,31 +29,37 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
 import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
+import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 
 
-public class MemberLiveStockWidgetController implements WidgetController, ISelectionListener, DateRangeFilter {
+public class MemberLiveStockWidgetController implements WidgetController, ISelectionListener {
 
 	private IController controller;
 	private Object inputModel;
 
 	private DateRangeSearchController dateSearchController;
+	private LiveStockFilterWidgetController filterController;
 
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
@@ -68,9 +85,8 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 		if (controller == null) {
 			return;
 		}
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
-				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON,
-				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
+
+		filterController = new LiveStockFilterWidgetController(controller);
 		liveStockTable = controller.getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
 		//farm name
 		liveStockTable.setColumnFormatter(1, new ColumnFormatter() {
@@ -146,13 +162,11 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 				if (returnCode == AbstractWindowController.OK) {
 					newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED);
 					newAnimal.getLocation().getAnimals().add(newAnimal);
-					animalInput.add(newAnimal);
 					Farm farmLocation = newAnimal.getLocation();
-					if(farmLocation != null && farmLocation.getFarmId() != 0){
+					if(farmLocation != null && farmLocation.getFarmId() != null){
 						farmRepository.save(newAnimal.getLocation());
 					}
-					liveStockTable.updateFromModel();
-				
+					refreshList();
 				}
 			}
 		});
@@ -169,14 +183,16 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 					for (final Object selObject : selections) {
 						((RegisteredAnimal) selObject).getLocation().getAnimals().remove(selObject);
-						animalInput.remove(selObject);
+						farmRepository.save(((RegisteredAnimal) selObject).getLocation());
 					}
 
-					liveStockTable.updateFromModel();
+					refreshList();
 				}
 
 			}
 		});
+
+		filterController.getSearch().addListener(new FilterAction());
 
 	}
 
@@ -188,6 +204,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	@Override
 	public void setInputModel(Object model) {
 		this.inputModel = model;
+		filterController.setInputModel(model);
 		updateBinding();
 	}
 
@@ -204,26 +221,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	@Override
 	public void updateBinding() {
 		if (inputModel != null) {
-			animalInput.clear();
-			if (inputModel instanceof Membership) {
-				Membership member = (Membership) inputModel;
-				final List<Farm> farms = member.getMember().getFarms();
-				for (final Farm farm : farms) {
-					if(farm != null){
-						animalInput.addAll(farm.getAnimals());	
-					}
-
-				}
-			} else if (inputModel instanceof Farm) {
-				Farm farm = (Farm) inputModel;
-				if(farm != null){
-					animalInput.addAll(farm.getAnimals());
-				}
-			}
-
-			liveStockTable.updateFromModel();
-			liveStockTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
-			// liveStockTable.addSelectionListener(this);
+			refreshList();	
 		}
 
 	}
@@ -240,10 +238,125 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 		}
 	}
 
-	@Override
-	public List<Object> filter(String startDate, String endDate) {
-		// TODO Auto-generated method stub
-		return null;
+	private List<RegisteredAnimal> getFilteredResult(){
+		List<RegisteredAnimal> resutls = new ArrayList<RegisteredAnimal>();
+		List<RegisteredAnimal> animals =  new ArrayList<RegisteredAnimal>();
+		String farmName = filterController.getFarmCombo().getText();
+		String speciesName = filterController.getSpeciesCombo().getText();
+		String statusName = filterController.getStatusCombo().getText();
+		List<Farm> farms = new ArrayList<Farm>();
+		if(inputModel instanceof Membership){
+			farms.addAll(((Membership)inputModel).getMember().getFarms());
+			for(Farm farm : farms){
+				if(farmName.equals("All Farms")|| farmName.equals(farm.getName())){
+					animals.addAll(farm.getAnimals());
+				}
+			}
+		}else if(inputModel instanceof Farm){
+			Farm farm = (Farm)inputModel;
+			if(farmName.equals("All Farms")|| farmName.equals(farm.getName())){
+				animals.addAll(farm.getAnimals());
+
+			}
+		}
+		if(!speciesName.equals("All Species" )){
+			for(RegisteredAnimal animal: animals){
+				if(animal.getAnimalType().getSpecies().equals(speciesName)){
+					resutls.add(animal);
+				}
+			}	
+		}
+		resutls = filterDate(animals, filterController.getDateSearchController().getStartDate(), filterController.getDateSearchController().getEndDate());
+		return resutls;
 	}
 
+	private List<RegisteredAnimal> filterDate(List<RegisteredAnimal> inputRecrods, String startDate,
+			String endDate) {
+		List<RegisteredAnimal> objs = new ArrayList<RegisteredAnimal>();
+		if (inputRecrods == null || inputRecrods.isEmpty()) {
+			return objs;
+		}
+		try {
+			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
+				@Override
+				public long longValue(Object object) {
+					return ((Date) object).getTime();
+				}
+
+				@Override
+				public Long adapt(Object value) {
+					return longValue(value);
+				}
+			};
+
+			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
+
+			SELECT select = null;
+			if (startDate != null) {
+				// StartDate
+				if (!"".equals(startDate)) {
+					final Condition startDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
+							startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
+
+					final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
+							TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION, startDateCondition);
+					condtions.add(startDateAttributeCondition);
+				}
+
+			}
+			// End Date
+			if (endDate != null) {
+				if (!"".equals(endDate)) {
+					final Condition endDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
+							endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
+
+					final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
+							TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION, endDateCondition);
+					condtions.add(endDateAttributeCondition);
+				}
+			}
+
+			// AND all conditions
+			if (condtions.size() > 0) {
+				final EObjectCondition first = condtions.get(0);
+				EObjectCondition ret = first;
+				for (int i = 1; i < condtions.size(); i++) {
+					ret = ret.AND(condtions.get(i));
+				}
+				for (RegisteredAnimal record : inputRecrods) {
+					select = new SELECT(new FROM(record), new WHERE(ret));
+					final IQueryResult result = select.execute();
+					if (!result.isEmpty()) {
+						objs.add(record);
+					}
+
+				}
+
+			} else {
+				objs.addAll(inputRecrods);
+			}
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Activator.getDefault().logError(e, e.getMessage());
+		}
+		return objs;
+	}
+
+
+	public void refreshList() {
+		animalInput.clear();
+		animalInput.addAll(getFilteredResult());
+		liveStockTable.updateFromModel();
+	}
+
+	private class FilterAction implements IActionListener{
+
+		@Override
+		public void callback() {
+			refreshList();
+		}
+
+	}
 }
