@@ -6,14 +6,16 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.operations.ui.Activator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
+ org.eclipse.emf.databinding;bundle-version="1.2.0",
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.operations.services;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
- org.eclipse.emf.databinding;bundle-version="1.2.0"
+ com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.operations.ui,
  com.agritrace.edairy.desktop.operations.ui.controllers,
  com.agritrace.edairy.desktop.operations.ui.dialogs,
  com.agritrace.edairy.desktop.operations.ui.views
+Bundle-ClassPath: .,
+ swt-grouplayout.jar

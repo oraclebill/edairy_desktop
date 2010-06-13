@@ -18,7 +18,8 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> extends BaseDialogView implements DialogConstants {
+public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> 
+	extends BaseDialogView implements DialogConstants {
 
 
 	@Override

@@ -17,6 +17,13 @@
             name="Customer Directory"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.operations.ui.views.RouteListView"
+            id="route-list-view"
+            name="Route List"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>
