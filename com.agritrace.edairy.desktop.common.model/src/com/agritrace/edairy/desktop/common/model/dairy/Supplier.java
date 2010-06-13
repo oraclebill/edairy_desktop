@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getSupplierId <em>Supplier Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getCategories <em>Categories</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getPublicDescription <em>Public Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getStatus <em>Status</em>}</li>
@@ -36,33 +35,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Supplier extends Company {
-	/**
-	 * Returns the value of the '<em><b>Supplier Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Supplier Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Supplier Id</em>' attribute.
-	 * @see #setSupplierId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getSupplier_SupplierId()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
-	 *        extendedMetaData="name='supplierId' kind='elementOnly'"
-	 * @generated
-	 */
-	Long getSupplierId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getSupplierId <em>Supplier Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Supplier Id</em>' attribute.
-	 * @see #getSupplierId()
-	 * @generated
-	 */
-	void setSupplierId(Long value);
-
 	/**
 	 * Returns the value of the '<em><b>Categories</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.

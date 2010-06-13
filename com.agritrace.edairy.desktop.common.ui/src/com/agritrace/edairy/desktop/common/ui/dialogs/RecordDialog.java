@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 
 /**
@@ -18,7 +18,8 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> extends BaseDialogView implements DialogConstants {
+public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> 
+	extends BaseDialogView implements DialogConstants {
 
 
 	@Override
@@ -65,7 +66,7 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 	 */
 	public int getActionType() {
 		return (Integer) this.getController().getContext(
-				AbstractRecordListController.EDITED_ACTION_TYPE);
+				AbstractDirectoryController.EDITED_ACTION_TYPE);
 	}
 
 //	@Override

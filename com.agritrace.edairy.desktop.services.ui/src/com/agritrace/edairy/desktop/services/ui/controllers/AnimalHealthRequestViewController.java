@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.query.conditions.Condition;
 import org.eclipse.emf.query.conditions.booleans.BooleanAdapter;
 import org.eclipse.emf.query.conditions.booleans.BooleanCondition;
@@ -34,22 +34,22 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.LookupDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.services.ui.AnimalHealthRequestRepository;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
@@ -61,7 +61,7 @@ import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
  * @author Hui(Spark) Wan
  * 
  */
-public class AnimalHealthRequestViewController extends AbstractRecordListController {
+public class AnimalHealthRequestViewController extends AbstractDirectoryController<AnimalHealthRequest> {
 
 	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
@@ -89,6 +89,7 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
 	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
 	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
+	private final AnimalHealthRequestCondtionsBean condtionsBean = new AnimalHealthRequestCondtionsBean();
 	
 	private final class MemberLookupAction implements IActionListener {
 		@Override
@@ -109,13 +110,14 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 	private final class FarmLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final FarmSearchDialog dialog = new FarmSearchDialog(new Shell());
-			dialog.setSelectedMember((Membership) selectedMember.getValue());
-			final int ret = dialog.open();
-			if (Window.OK == ret) {
-				selectedFarm.setValue(dialog.getSelectedFarm());
-//				farmText.updateFromModel();
-				farmText.setText(dialog.getSelectedFarm().getName());
+			FarmSearchDialog farmDialog = new FarmSearchDialog(Display.getCurrent().getActiveShell());
+			LookupDialogController<Farm> controller = ((LookupDialogController<Farm>) farmDialog.getController());
+			controller.setSelectedObject(condtionsBean.getSelectedFarm());
+			
+			int retVal = farmDialog.open();
+			if (retVal == FarmSearchDialog.OK) {
+				condtionsBean.setSelectedFarm(controller.getSelectedObject());
+				farmText.updateFromModel();
 			}
 
 		}
@@ -202,8 +204,7 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 	}
 
 	@Override
-	protected void resetFilterCondtions() {
-		super.resetFilterCondtions();
+	protected void resetFilterConditions() {
 		// for date range
 		// Start Date Default value
 		if (startDateText != null) {
@@ -460,8 +461,30 @@ public class AnimalHealthRequestViewController extends AbstractRecordListControl
 		endDateText.updateFromModel();
 
 		farmText = getRidget(ITextRidget.class, AnimalHealthRequestView.FARM_LOOKUP_TEXT);
-		farmText.bindToModel(selectedFarm);
-		farmText.setOutputOnly(true);
+		farmText.bindToModel(new WritableValue(this.condtionsBean,
+				AnimalHealthRequestCondtionsBean.class));
+		farmText.setModelToUIControlConverter(new IConverter(){
+
+			@Override
+			public Object getFromType() {
+				return AnimalHealthRequestCondtionsBean.class;
+			}
+
+			@Override
+			public Object getToType() {
+				return String.class;
+			}
+
+			@Override
+			public Object convert(Object fromObject) {
+				if (fromObject instanceof AnimalHealthRequestCondtionsBean)
+				{
+					return ((AnimalHealthRequestCondtionsBean)fromObject).getSelectedFarm().getName();
+				}
+				return null;
+			}});
+		farmText.updateFromModel();
+		//farmText.setOutputOnly(true);
 		
 		farmLookupButton = this.getRidget(IActionRidget.class, AnimalHealthRequestView.FARM_LOOKUP_BUTTON);
 		farmLookupButton.addListener(farmLookupAction);

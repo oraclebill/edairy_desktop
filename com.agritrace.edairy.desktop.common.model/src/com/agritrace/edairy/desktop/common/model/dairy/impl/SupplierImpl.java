@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getSupplierId <em>Supplier Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getCategories <em>Categories</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getPublicDescription <em>Public Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getStatus <em>Status</em>}</li>
@@ -46,26 +45,6 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * @generated
  */
 public class SupplierImpl extends CompanyImpl implements Supplier {
-	/**
-	 * The default value of the '{@link #getSupplierId() <em>Supplier Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSupplierId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long SUPPLIER_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSupplierId() <em>Supplier Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSupplierId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long supplierId = SUPPLIER_ID_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getCategories() <em>Categories</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -220,27 +199,6 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getSupplierId() {
-		return supplierId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSupplierId(Long newSupplierId) {
-		Long oldSupplierId = supplierId;
-		supplierId = newSupplierId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__SUPPLIER_ID, oldSupplierId, supplierId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<String> getCategories() {
 		if (categories == null) {
 			categories = new EDataTypeUniqueEList<String>(String.class, this, DairyPackage.SUPPLIER__CATEGORIES);
@@ -382,8 +340,6 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.SUPPLIER__SUPPLIER_ID:
-				return getSupplierId();
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				return getCategories();
 			case DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION:
@@ -411,9 +367,6 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.SUPPLIER__SUPPLIER_ID:
-				setSupplierId((Long)newValue);
-				return;
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				getCategories().clear();
 				getCategories().addAll((Collection<? extends String>)newValue);
@@ -448,9 +401,6 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.SUPPLIER__SUPPLIER_ID:
-				setSupplierId(SUPPLIER_ID_EDEFAULT);
-				return;
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				getCategories().clear();
 				return;
@@ -484,8 +434,6 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.SUPPLIER__SUPPLIER_ID:
-				return SUPPLIER_ID_EDEFAULT == null ? supplierId != null : !SUPPLIER_ID_EDEFAULT.equals(supplierId);
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				return categories != null && !categories.isEmpty();
 			case DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION:
@@ -514,9 +462,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (supplierId: ");
-		result.append(supplierId);
-		result.append(", categories: ");
+		result.append(" (categories: ");
 		result.append(categories);
 		result.append(", publicDescription: ");
 		result.append(publicDescription);

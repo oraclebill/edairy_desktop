@@ -45,8 +45,10 @@ import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListViewController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -303,35 +305,44 @@ public class EDairyManagerApplication extends SwtApplication {
 			NodeFactory.createSubModule(
 					"edm.dairy.vehicles", "Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule("edm.dairy.bins", "Containers (Bins)", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubModule("edm.dairy.routes", "Routes", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			//		NodeFactory.createSubMobule("edm.dairy.roles", "Roles", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+
+		
+		{
+			final IModuleNode moduleRoutes = NodeFactory.createModule("edm.routes", "Routes", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory
+					.createSubModule(
+							"edm.dairy.routes", "Routes", moduleRoutes, RouteListView.ID, RouteListController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
 		//
 		// EVENTS GRP
 		//
-
-		final IModuleNode moduleEvents = NodeFactory.createModule("edm.events", "Events", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		{
+			final IModuleNode moduleEvents = NodeFactory.createModule("edm.events", "Events", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			//	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
 		//
 		// CUSTOMERS GRP
 		//
 		{
-			final IModuleNode moduleDirectory = NodeFactory.createModule("edm.customer.directory", "Customers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory
-					.createSubModule(
-							"edm.services.customer.directory", "Customer Directory", moduleDirectory, CustomerDirectoryView.ID, CustomerDirectoryController.class); 
+			final IModuleNode moduleDirectory = NodeFactory.createModule(
+					"edm.customer.directory", "Customers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory.createSubModule("edm.services.customer.directory", "Customer Directory", moduleDirectory,
+					CustomerDirectoryView.ID, CustomerDirectoryController.class);
 		}
-		
+
 		//
 		// SUPPLIERS GRP
 		//
 		{
-			final IModuleNode moduleDirectory = NodeFactory.createModule("edm.supplier.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			final IModuleNode moduleDirectory = NodeFactory.createModule(
+					"edm.supplier.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory
 					.createSubModule(
-							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierListViewController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierDirectoryView.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		//

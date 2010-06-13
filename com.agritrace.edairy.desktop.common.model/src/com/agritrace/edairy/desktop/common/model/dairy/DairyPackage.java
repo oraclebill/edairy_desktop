@@ -1509,22 +1509,13 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER__PROFILE_PHOTO = ModelPackage.COMPANY__PROFILE_PHOTO;
 
 	/**
-	 * The feature id for the '<em><b>Supplier Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__SUPPLIER_ID = ModelPackage.COMPANY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__CATEGORIES = ModelPackage.COMPANY_FEATURE_COUNT + 1;
+	int SUPPLIER__CATEGORIES = ModelPackage.COMPANY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Public Description</b></em>' attribute.
@@ -1533,7 +1524,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__PUBLIC_DESCRIPTION = ModelPackage.COMPANY_FEATURE_COUNT + 2;
+	int SUPPLIER__PUBLIC_DESCRIPTION = ModelPackage.COMPANY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1542,7 +1533,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__STATUS = ModelPackage.COMPANY_FEATURE_COUNT + 3;
+	int SUPPLIER__STATUS = ModelPackage.COMPANY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Registration Date</b></em>' attribute.
@@ -1551,7 +1542,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__REGISTRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 4;
+	int SUPPLIER__REGISTRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Expiration Date</b></em>' attribute.
@@ -1560,7 +1551,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__EXPIRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 5;
+	int SUPPLIER__EXPIRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Notes</b></em>' attribute.
@@ -1569,7 +1560,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__NOTES = ModelPackage.COMPANY_FEATURE_COUNT + 6;
+	int SUPPLIER__NOTES = ModelPackage.COMPANY_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Rating</b></em>' attribute.
@@ -1578,7 +1569,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__RATING = ModelPackage.COMPANY_FEATURE_COUNT + 7;
+	int SUPPLIER__RATING = ModelPackage.COMPANY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Supplier</em>' class.
@@ -1587,7 +1578,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 8;
+	int SUPPLIER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl <em>Customer</em>}' class.
@@ -1681,22 +1672,13 @@ public interface DairyPackage extends EPackage {
 	int CUSTOMER__PROFILE_PHOTO = ModelPackage.COMPANY__PROFILE_PHOTO;
 
 	/**
-	 * The feature id for the '<em><b>Customer Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER__CUSTOMER_ID = ModelPackage.COMPANY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Customer Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER__CUSTOMER_TYPE = ModelPackage.COMPANY_FEATURE_COUNT + 1;
+	int CUSTOMER__CUSTOMER_TYPE = ModelPackage.COMPANY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1705,7 +1687,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER__STATUS = ModelPackage.COMPANY_FEATURE_COUNT + 2;
+	int CUSTOMER__STATUS = ModelPackage.COMPANY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Customer</em>' class.
@@ -1714,7 +1696,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 3;
+	int CUSTOMER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
@@ -2977,17 +2959,6 @@ public interface DairyPackage extends EPackage {
 	EClass getSupplier();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getSupplierId <em>Supplier Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Supplier Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Supplier#getSupplierId()
-	 * @see #getSupplier()
-	 * @generated
-	 */
-	EAttribute getSupplier_SupplierId();
-
-	/**
 	 * Returns the meta object for the attribute list '{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier#getCategories <em>Categories</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3073,17 +3044,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCustomer();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerId <em>Customer Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Customer Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerId()
-	 * @see #getCustomer()
-	 * @generated
-	 */
-	EAttribute getCustomer_CustomerId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerType <em>Customer Type</em>}'.
@@ -4092,14 +4052,6 @@ public interface DairyPackage extends EPackage {
 		EClass SUPPLIER = eINSTANCE.getSupplier();
 
 		/**
-		 * The meta object literal for the '<em><b>Supplier Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SUPPLIER__SUPPLIER_ID = eINSTANCE.getSupplier_SupplierId();
-
-		/**
 		 * The meta object literal for the '<em><b>Categories</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4164,14 +4116,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CUSTOMER = eINSTANCE.getCustomer();
-
-		/**
-		 * The meta object literal for the '<em><b>Customer Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CUSTOMER__CUSTOMER_ID = eINSTANCE.getCustomer_CustomerId();
 
 		/**
 		 * The meta object literal for the '<em><b>Customer Type</b></em>' attribute feature.

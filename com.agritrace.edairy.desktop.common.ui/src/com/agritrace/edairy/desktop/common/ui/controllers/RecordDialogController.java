@@ -36,7 +36,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 */
 	// protected abstract T createWorkingCopy();
 
-	protected abstract EClass getEClass();
+	private EClass eClass;
 
 	/** 
 	 * Null constructor 
@@ -46,7 +46,15 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	}
 
 	public T  getWorkingCopy() {
-		return (T)this.getContext(AbstractRecordListController.EDITED_OBJECT_ID);
+		return (T)this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+	}
+
+	protected void setEClass(EClass eClass) {
+		this.eClass = eClass;
+	}
+
+	protected EClass getEClass() {
+		return this.eClass;
 	}
 
 	// /**
@@ -162,7 +170,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	}
 
 	protected int getActionType() {
-		return (Integer) getContext(AbstractRecordListController.EDITED_ACTION_TYPE);
+		return (Integer) getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
 	}
 	
 

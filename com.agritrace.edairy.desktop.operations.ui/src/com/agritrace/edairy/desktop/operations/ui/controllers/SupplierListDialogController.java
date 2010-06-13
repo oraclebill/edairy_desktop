@@ -19,17 +19,21 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractRecordListController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 public class SupplierListDialogController extends RecordDialogController<Supplier> {
@@ -47,7 +51,7 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		supplierId.setOutputOnly(false);
 		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		supplierId.updateFromModel();
-		if (this.getActionType() == AbstractRecordListController.ACTION_NEW) {
+		if (this.getActionType() == AbstractDirectoryController.ACTION_NEW) {
 			supplierId.setText("Auto Generated");
 		}
 		supplierId.setOutputOnly(true);
@@ -120,6 +124,13 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());
 		desc.updateFromModel();
 
+		Location supplierLocation = supplier.getLocation();
+		if  (supplierLocation == null) {
+			supplierLocation = DairyUtil.createLocation(null, null, null);
+			supplier.setLocation(supplierLocation);
+		}
+		EMFUtil.populate(supplierLocation);
+		
 		// Configure address group
 		AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		addressGroupController.setInputModel(supplier.getLocation().getPostalLocation());

@@ -1078,6 +1078,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
+		  (companyEClass, 
+		   source, 
+		   new String[] {
+			 "name", "Company",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (descriptiveLocationEClass, 
 		   source, 
 		   new String[] {
@@ -1151,6 +1158,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@OneToOne"
+		   });			
+		addAnnotation
+		  (companyEClass, 
+		   source, 
+		   new String[] {
+			 "appinfo", "@MappedSuperclass"
 		   });			
 		addAnnotation
 		  (descriptiveLocationEClass, 

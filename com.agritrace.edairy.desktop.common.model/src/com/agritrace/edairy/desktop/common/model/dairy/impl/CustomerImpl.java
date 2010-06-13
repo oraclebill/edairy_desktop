@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getCustomerId <em>Customer Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getCustomerType <em>Customer Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getStatus <em>Status</em>}</li>
  * </ul>
@@ -33,26 +32,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class CustomerImpl extends CompanyImpl implements Customer {
-	/**
-	 * The default value of the '{@link #getCustomerId() <em>Customer Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomerId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long CUSTOMER_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getCustomerId() <em>Customer Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCustomerId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long customerId = CUSTOMER_ID_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getCustomerType() <em>Customer Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -117,27 +96,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCustomerId(Long newCustomerId) {
-		Long oldCustomerId = customerId;
-		customerId = newCustomerId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.CUSTOMER__CUSTOMER_ID, oldCustomerId, customerId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getCustomerType() {
 		return customerType;
 	}
@@ -183,8 +141,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.CUSTOMER__CUSTOMER_ID:
-				return getCustomerId();
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				return getCustomerType();
 			case DairyPackage.CUSTOMER__STATUS:
@@ -201,9 +157,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.CUSTOMER__CUSTOMER_ID:
-				setCustomerId((Long)newValue);
-				return;
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				setCustomerType((String)newValue);
 				return;
@@ -222,9 +175,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.CUSTOMER__CUSTOMER_ID:
-				setCustomerId(CUSTOMER_ID_EDEFAULT);
-				return;
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				setCustomerType(CUSTOMER_TYPE_EDEFAULT);
 				return;
@@ -243,8 +193,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.CUSTOMER__CUSTOMER_ID:
-				return CUSTOMER_ID_EDEFAULT == null ? customerId != null : !CUSTOMER_ID_EDEFAULT.equals(customerId);
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				return CUSTOMER_TYPE_EDEFAULT == null ? customerType != null : !CUSTOMER_TYPE_EDEFAULT.equals(customerType);
 			case DairyPackage.CUSTOMER__STATUS:
@@ -263,9 +211,7 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (customerId: ");
-		result.append(customerId);
-		result.append(", customerType: ");
+		result.append(" (customerType: ");
 		result.append(customerType);
 		result.append(", status: ");
 		result.append(status);

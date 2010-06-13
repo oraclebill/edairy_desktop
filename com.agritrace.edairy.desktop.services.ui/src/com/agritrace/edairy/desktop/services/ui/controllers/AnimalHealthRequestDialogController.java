@@ -12,15 +12,18 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.LookupDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
@@ -30,11 +33,13 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public class FarmLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			FarmSearchDialog farmDialog = new FarmSearchDialog(null);
-			farmDialog.setSelectedMember(request.getRequestingMember());
+			FarmSearchDialog farmDialog = new FarmSearchDialog(Display.getCurrent().getActiveShell());
+			LookupDialogController<Farm> controller = ((LookupDialogController<Farm>) farmDialog.getController());
+			controller.setSelectedObject(request.getFarm());
+			
 			int retVal = farmDialog.open();
 			if (retVal == FarmSearchDialog.OK) {
-				request.setFarm(farmDialog.getSelectedFarm());
+				request.setFarm(controller.getSelectedObject());
 				farmLookupText.updateFromModel();
 			}
 		}

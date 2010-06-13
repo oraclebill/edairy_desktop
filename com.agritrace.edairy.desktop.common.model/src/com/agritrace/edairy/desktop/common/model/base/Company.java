@@ -31,7 +31,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany()
- * @model
+ * @model extendedMetaData="name='Company' kind='elementOnly'"
+ *        annotation="teneo.jpa appinfo='@MappedSuperclass'"
  * @generated
  */
 public interface Company extends EObject {

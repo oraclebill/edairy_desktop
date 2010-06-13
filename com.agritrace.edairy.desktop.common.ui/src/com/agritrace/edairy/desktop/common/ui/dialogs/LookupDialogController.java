@@ -1,34 +1,29 @@
 package com.agritrace.edairy.desktop.common.ui.dialogs;
 
-import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.emf.ecore.EAttribute;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
+public abstract class LookupDialogController<T extends EObject> extends
+		AbstractWindowController {
 
-public abstract class LookupDialogController extends AbstractWindowController {
-
+	private final List<T> tableContents = new ArrayList<T>();
 	private ITableRidget listTable;
-	private IRepository repo;
+	private T selectedObject;
 
 	public LookupDialogController() {
 		super();
-		repo = createRepository();
 	}
-
-	protected abstract IRepository createRepository();
 
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
-		// Set window riget
-		this.getWindowRidget().setTitle(getEntityName() + " Lookup");
 		// Search Button
 		IActionRidget searchAction = getRidget(IActionRidget.class,
 				FarmSearchDialog.SEARCH_BUTTON);
@@ -36,23 +31,22 @@ public abstract class LookupDialogController extends AbstractWindowController {
 
 			@Override
 			public void callback() {
+				refreshTableContents();
 				listTable.updateFromModel();
 			}
 		});
 
 		//
-		listTable = getRidget(ITableRidget.class, FarmSearchDialog.RESULT_LIST);
+		listTable = getRidget(ITableRidget.class,
+				CommonLookupDialog.RESULT_LIST);
 
-		//listTable.bindToModel(rowObservables, rowClass, columnPropertyNames, columnHeaders)
 	}
 
-	/**
-	 * Gets entity name
-	 * 
-	 * @return
-	 */
-	protected abstract String getEntityName();
+	public void refreshTableContents() {
+		tableContents.clear();
+		tableContents.addAll(getFilteredResult());
 
+	}
 
 	/**
 	 * Gets Eclass of row
@@ -61,6 +55,18 @@ public abstract class LookupDialogController extends AbstractWindowController {
 	 */
 	protected abstract EClass getEClass();
 
-	protected abstract String[] getColumnProperties();
+	protected abstract List<T> getFilteredResult();
+
+	public List<T> getTableContents() {
+		return tableContents;
+	}
+
+	public void setSelectedObject(T selectedObject) {
+		this.selectedObject = selectedObject;
+	}
+
+	public T getSelectedObject() {
+		return selectedObject;
+	}
 
 }
