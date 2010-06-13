@@ -90,10 +90,6 @@ public class MemberDirectoryController extends SubModuleController {
 				}
 				repository.save(selectedMember);
 				refreshMemberList();
-				// membershipList.set(index, selectedMember);
-				// memberListRidget.updateFromModel();
-			} else {
-				// System.out.println("return code "+returnCode);
 			}
 		}
 	}
@@ -108,10 +104,8 @@ public class MemberDirectoryController extends SubModuleController {
 			int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-				repository.update(selectedMember);
+				repository.update(selectedMember); 
 				refreshMemberList();
-				// // membershipList.set(index, selectedMember);
-				// memberListRidget.updateFromModel();
 			} else if (returnCode == 2) {
 				// confirm for delete
 				if (selectedMember != null) {
@@ -123,8 +117,6 @@ public class MemberDirectoryController extends SubModuleController {
 					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
 						repository.delete(selectedMember);
 						refreshMemberList();
-						// membershipList.remove(selectedMember);
-						// memberListRidget.updateFromModel();
 					}
 				}
 			}

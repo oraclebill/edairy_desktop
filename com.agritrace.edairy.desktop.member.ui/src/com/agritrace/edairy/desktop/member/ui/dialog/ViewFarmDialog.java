@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -70,11 +71,18 @@ public class ViewFarmDialog extends AbstractDialogView {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(headerPanel);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(headerPanel);
 
-		Label titleLabel = UIControlsFactory.createLabel(headerPanel, "Farm Name :");
+		Label titleLabel = UIControlsFactory.createLabel(headerPanel, "Farm");
 		addUIControl(titleLabel, ViewWidgetId.VIEW_FARM_NAME);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(titleLabel);
 		Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
 		titleLabel.setFont(labelFont);
+
+		Label NameLabel = UIControlsFactory.createLabel(headerPanel, "Name :");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(1, 1).applyTo(NameLabel);
+		
+		Text farmText = UIControlsFactory.createText(headerPanel, SWT.SINGLE | SWT.BORDER,
+				ViewWidgetId.VIEW_FARM_NAME_TXT);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(farmText);
 
 		Label farmIdLabel = UIControlsFactory.createLabel(headerPanel, "Farm Id :");
 		addUIControl(farmIdLabel, ViewWidgetId.VIEW_FARM_ID);

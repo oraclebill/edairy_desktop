@@ -34,10 +34,12 @@ import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDS
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView;
 import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
+import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
+import com.agritrace.edairy.desktop.member.ui.views.ContainerListView;
 import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
@@ -222,6 +224,15 @@ public class EDairyManagerApplication extends SwtApplication {
 				.createSubModule(
 						"edm.livestock.directory", "Livestock Directory", moduleNode, LivestockListView.ID, LiveStockListController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		//	NodeFactory.createSubModule("edm.livestock.edit", "Register Animal", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		//Container
+		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("container.navgroup"));
+		subAppNode.addChild(moduleGroupNode);
+
+		moduleNode = NodeFactory.createModule("edm.container", "Container", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory
+				.createSubModule(
+						"edm.container.directory", "Container Directory", moduleNode, ContainerListView.ID, ContainerListViewController.class); 
 
 		//
 		// FINANCE TAB
