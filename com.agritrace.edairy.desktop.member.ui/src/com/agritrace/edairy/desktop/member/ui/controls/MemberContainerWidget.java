@@ -65,7 +65,7 @@ public class MemberContainerWidget {
 		final Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.CONTAINER_ADD);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(addButton);
 
-		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON,
+		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, "View",
 				ViewWidgetId.CONTAINER_Remove);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
 
