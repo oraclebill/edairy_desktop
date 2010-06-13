@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 
 public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {

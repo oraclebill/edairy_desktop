@@ -20,6 +20,7 @@ import org.osgi.framework.Bundle;
 import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
@@ -57,6 +58,8 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
+
 
 /**
  * @author oraclebill
@@ -167,7 +170,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		subAppNode.addChild(moduleGroupNode);
 
 		moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, BlankView.ID);
+		NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class);
 		NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
 				"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 

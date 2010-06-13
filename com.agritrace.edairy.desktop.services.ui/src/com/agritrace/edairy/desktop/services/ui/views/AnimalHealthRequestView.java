@@ -48,7 +48,6 @@ public class AnimalHealthRequestView extends AbstractRecordListView {
 
 	@Override
 	protected void createFilterConditions(Composite comp) {
-		super.createFilterConditions(comp);
 
 		// Date Range
 		createDateRange(comp);

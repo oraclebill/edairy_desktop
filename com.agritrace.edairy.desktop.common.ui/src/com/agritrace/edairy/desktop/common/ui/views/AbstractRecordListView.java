@@ -86,12 +86,10 @@ public abstract class AbstractRecordListView extends SubModuleView {
 	 * 
 	 * @param comp
 	 */
-	protected void createFilterConditions(Composite comp) {
-		// Subclass should override to create the filter condition
+	abstract protected void createFilterConditions(Composite comp) ;
+	
 
-	}
-
-	private void createFilterButtons(Composite parent) {
+	protected void createFilterButtons(Composite parent) {
 		// Reset Apply buttons
 		final Composite comp = UIControlsFactory.createComposite(parent);
 		final GridLayout layout = new GridLayout(2, false);
