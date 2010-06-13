@@ -110,7 +110,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 				farmCombo.addSelectionListener(this);
 				if (selectedContainer.getOwner() != null) {
 					farmCombo.setSelection(selectedContainer.getOwner());
-				} else {
+				} else if(farmList.size()>0){
 					farmCombo.setSelection(0);
 				}
 			}

@@ -63,11 +63,11 @@ public class ViewLiveStockDialog extends BaseDialogView {
 		Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
 		titleLabel.setFont(labelFont);
 		
-		Label farmIdLabel = UIControlsFactory.createLabel(headerPanel, "ID:");
+		Label farmIdLabel = UIControlsFactory.createLabel(headerPanel, "Name:");
 		labelFactory.applyTo(farmIdLabel);
 		
 		
-		Text idText = UIControlsFactory.createText(headerPanel,SWT.BORDER|SWT.READ_ONLY,ViewWidgetId.LIVE_STOCK_ID);
+		Text idText = UIControlsFactory.createText(headerPanel,SWT.BORDER|SWT.READ_ONLY,ViewWidgetId.LIVE_STOCK_NameText);
 		fieldFactory.applyTo(idText);
 
 		Label memberIdLabel = UIControlsFactory.createLabel(headerPanel, "Farm:");

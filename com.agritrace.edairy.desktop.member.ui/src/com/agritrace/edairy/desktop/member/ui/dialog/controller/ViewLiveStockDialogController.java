@@ -125,8 +125,8 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	protected void configureUpperPanel() {
 		titleLabel = getRidget(ILabelRidget.class, ViewWidgetId.LIVE_STOCK_NAME);
-		idText = getRidget(ITextRidget.class, ViewWidgetId.LIVE_STOCK_ID);
-		idText.setOutputOnly(true);
+		idText = getRidget(ITextRidget.class, ViewWidgetId.LIVE_STOCK_NameText);
+		idText.setMandatory(true);
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_FARM_COMBO);
 		purposeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_PURPOSE_COMBO);
 		statusCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
@@ -383,7 +383,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		final Map<IRidget, FeaturePath> aMap = new HashMap<IRidget, FeaturePath>();
 
 		aMap.put(titleLabel, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__GIVEN_NAME)); // uses
-		aMap.put(idText, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__REGISTRATION_ID)); // uses
+		aMap.put(idText, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__GIVEN_NAME)); // uses
 		aMap.put(insuranceNumberTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__INSURANCE_NUMBER)); // uses
 		aMap.put(featureTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__IDENTIFYING_FEATURES)); // uses
 		aMap.put(certificateTxt,FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER));

@@ -261,6 +261,7 @@ public class ViewWidgetId implements DialogConstants {
 	//live stock dialog
 	public static final String LIVE_STOCK_NAME="liveStock_name";
 	public static final String LIVE_STOCK_ID="liveStock_id";
+	public static final String LIVE_STOCK_NameText="name";
 	public static final String LIVE_STOCK_FARM_COMBO="liveStock_farm_combo";
 	public static final String LIVE_STOCK_PURPOSE_COMBO="liveStock_farm_purpose";
 	public static final String LIVE_STOCK_STATUS_COMBO="liveStock_status";

@@ -62,17 +62,7 @@ public class LivestockListView extends BaseListView {
 		
 		LiveStockFilterWidget filter =  new LiveStockFilterWidget(filterPanel);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filter.getComposite());
-		// search cancel button
-		Composite searchPanel = UIControlsFactory.createComposite(filterGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(searchPanel);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
-
-		Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
-				ViewWidgetId.memberInfo_searchButton);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
-
-		Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.cancelButton);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
+		
 
 	}
 
