@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;

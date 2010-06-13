@@ -7,6 +7,7 @@ import org.eclipse.riena.beans.common.AbstractBean;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.*;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
