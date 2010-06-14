@@ -1,9 +1,12 @@
 package com.agritrace.edairy.desktop.dairy.locations.ui.controllers;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.databinding.*;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
@@ -29,6 +32,7 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -51,13 +55,13 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	private final WritableValue selectedRoute = new WritableValue(null,
 			Route.class);
 	private DairyLocation workingCopy = createWorkingCopy();
-	private final IObservableList routes = new WritableList();
+	private final IObservableList routes = new WritableList(null, Route.class);
 
 	/**
 	 * @param dairyLocationController
 	 */
-	DairyLocationDelegate(DairyLocationRepository dairyLocationController) {
-		this.locationRepository = dairyLocationController;
+	DairyLocationDelegate(DairyLocationRepository locationRepository) {
+		this.locationRepository = locationRepository;
 	}
 
 	@Override
@@ -135,16 +139,21 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void configureActionListeners(IRidgetContainer container) {
-		routeCombo.addSelectionListener(new RouteSelectCallback());
-
-		final IActionRidget configureRouteAction = container.getRidget(
-				IActionRidget.class,
-				DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
-		configureRouteAction.addListener(new ConfigureRouteCallback());
+//		routeCombo.addSelectionListener(new RouteSelectCallback());
+//
+//		final IActionRidget configureRouteAction = container.getRidget(
+//				IActionRidget.class,
+//				DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
+//		configureRouteAction.addListener(new ConfigureRouteCallback());
 	}
 
-	private void bindRouteCombo() {
-		routeCombo.bindToModel(routes, Route.class, "name", selectedRoute);
+	private void bindRouteCombo() {		
+//		routeCombo.bindToModel(locationRepository, "routes", Route.class, "name", workingCopy, "route");
+		routeCombo.bindToModel(
+				new WritableList(locationRepository.getRoutes(), Route.class), 
+				Route.class, "getName", 
+				EMFObservables.observeValue(workingCopy, DairyPackage.Literals.DAIRY_LOCATION__ROUTE));
+//		EMFObservables.listFactory(Realm.getDefault(), DairyPackage.Literals.DAIRY__ROUTES).createObservable(target)
 		routeCombo.updateFromModel();
 	}
 

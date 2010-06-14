@@ -301,12 +301,12 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		{
-			final IModuleNode moduleSystem = NodeFactory.createModule("edm.sysadmin", "Dairy", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			final IModuleNode moduleSystem = NodeFactory.createModule("edm.dairy", "Dairy", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule(
 					"edm.dairy.info", "Profile", moduleSystem, DairyProfileView.ID, DairyProfileViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory
-					.createSubModule(
-							"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
+//			NodeFactory
+//					.createSubModule(
+//							"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule(
 					"edm.dairy.staff", "Employees", moduleSystem, EmployeeDirectoryView.ID, EmployeeDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule(
@@ -314,7 +314,13 @@ public class EDairyManagerApplication extends SwtApplication {
 			NodeFactory.createSubModule("edm.dairy.bins", "Containers (Bins)", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		
+		{
+			final IModuleNode moduleSystem = NodeFactory.createModule("edm.dairy-locations", "Dairy Locations", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory
+			.createSubModule(
+					"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
+
+		}		
 		{
 			final IModuleNode moduleRoutes = NodeFactory.createModule("edm.routes", "Routes", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory
