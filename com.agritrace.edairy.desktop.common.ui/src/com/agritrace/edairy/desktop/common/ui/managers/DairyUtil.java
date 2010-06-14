@@ -377,6 +377,20 @@ public class DairyUtil {
 
 		return animal;
 	}
+	
+	public static AnimalIdentifier createAnimalIdentifier(String issue, String value){
+		AnimalIdentifier identifier = TrackingFactory.eINSTANCE.createAnimalIdentifier();
+		if(issue == null){
+			issue = "";
+		}
+		if(value == null){
+			value ="";
+		}
+		identifier.setIssuer(issue);
+		identifier.setValue(value);
+		return identifier;
+		
+	}
 
 	public static RegisteredAnimal createAnimal(Farm farm, Date birthDate, String name, Gender gender,
 			ReferenceAnimalType breed, Purpose purpose, RearingMode rearingMode) {
