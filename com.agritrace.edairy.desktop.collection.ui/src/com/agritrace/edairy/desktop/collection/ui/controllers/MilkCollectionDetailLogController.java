@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -139,11 +140,14 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	
 	@Override
 	protected void resetFilterConditions() {
-		currentPage.setValue(1);
+		if (currentPage != null)
+			currentPage.setValue(1);
 	}
 	
 	@Override
 	protected List<CollectionJournalLine> getFilteredResult() {
+		if (currentJournalPage == null )
+			return Collections.EMPTY_LIST;
 		List<CollectionJournalLine> allJournalLines = currentJournalPage.getJournalEntries();
 		List<CollectionJournalLine> filteredJournals = new ArrayList<CollectionJournalLine>();
 		
