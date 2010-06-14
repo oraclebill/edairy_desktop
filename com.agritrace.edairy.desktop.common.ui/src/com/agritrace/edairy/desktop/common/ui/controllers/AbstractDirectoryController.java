@@ -244,9 +244,12 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	
 	private void configureFilterRidgetsInternal() {
 		searchBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_SEARCH);
-		searchBtnRidget.addListener(applyFilterAction);
+		if (searchBtnRidget != null )
+			searchBtnRidget.addListener(applyFilterAction);
+		
 		resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
-		resetBtnRidget.addListener(resetFilterAction);
+		if (resetBtnRidget != null )
+			resetBtnRidget.addListener(resetFilterAction);
 	}
 	abstract protected void configureFilterRidgets();
 
