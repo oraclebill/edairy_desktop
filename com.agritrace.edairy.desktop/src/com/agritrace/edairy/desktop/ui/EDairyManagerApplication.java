@@ -19,11 +19,10 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
 import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
@@ -59,7 +58,6 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
 
 
 /**

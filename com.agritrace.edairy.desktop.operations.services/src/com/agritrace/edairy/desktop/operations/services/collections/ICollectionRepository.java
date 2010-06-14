@@ -20,10 +20,12 @@ public interface ICollectionRepository {
 
 	List<Employee> getEmployees(String string);
 
-	void addCollectionJournal(CollectionJournalPage newJournal);
+	void addJournalPage(CollectionJournalPage newJournal);
 
 	Membership getMembershipById(String memberId);
 
 	Container getContainerById(String canId);
+
+	CollectionJournalPage getJournalPage(String pageId);
 
 }

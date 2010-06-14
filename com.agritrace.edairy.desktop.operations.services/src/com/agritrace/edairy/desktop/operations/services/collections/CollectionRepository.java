@@ -21,8 +21,13 @@ public class CollectionRepository extends DairyRepository implements ICollection
 	EmployeeRepository empRepo = new EmployeeRepository();
 
 	@Override
-	public void addCollectionJournal(CollectionJournalPage newJournal) {
-		collectionRepository.saveNew(newJournal);
+	public void addJournalPage(CollectionJournalPage newPage) {
+		collectionRepository.saveNew(newPage);
+	}
+
+	@Override
+	public CollectionJournalPage getJournalPage(String pageId) {
+		return collectionRepository.findByKey(Long.parseLong(pageId));
 	}
 
 }

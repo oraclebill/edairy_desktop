@@ -2,17 +2,10 @@ package com.agritrace.edairy.desktop.collection.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
-import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
 
 public class MilkCollectionDetailLog extends AbstractRecordListView {
 	
