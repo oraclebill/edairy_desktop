@@ -99,7 +99,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	private MemberTransactionWidgetController transactionController;
 
 	private IValidator updateValidator = new IValidator() {
-
 		@Override
 		public IStatus validate(Object arg0) {
 			if (formattedMemberNameRidget != null) {

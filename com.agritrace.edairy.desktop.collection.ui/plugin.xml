@@ -14,7 +14,14 @@
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog"
             id="milk-collection-log"
-            name="Milk Collection Log"
+            name="Milk Collection Jounal View"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog"
+            id="milk-collection-detail-log"
+            name="Milk Collection Journal Detail View"
             restorable="true">
       </view>
    </extension>

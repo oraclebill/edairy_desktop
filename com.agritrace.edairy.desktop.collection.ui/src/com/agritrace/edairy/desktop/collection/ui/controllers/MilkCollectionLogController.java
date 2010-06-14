@@ -52,12 +52,12 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	
 	@Override
 	protected void configureFilterRidgets() {
-		startDate = getRidget(IDateTimeRidget.class, ViewConstants.START_DATE_TEXT);
-		endDate = getRidget(IDateTimeRidget.class, ViewConstants.END_DATE_TEXT);
-		route = getRidget(IComboRidget.class, ViewConstants.ROUTE_COMBO);
-		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.MPR_MISSING_CHK);
-		suspended = getRidget(IToggleButtonRidget.class, ViewConstants.SUSPENDED_CHK);
-		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.REJECTED_CHK);
+		startDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
+		endDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
+		route = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
+		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
+		suspended = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_SUSPENDED_CHK);
+		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
 		
 		startDate.bindToModel(filterBean, "startDate");
 		endDate.bindToModel(filterBean, "endDate" );
