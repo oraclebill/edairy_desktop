@@ -112,7 +112,10 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				if (returnCode == AbstractWindowController.OK) {
 					container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 					container.getOwner().getCans().add(container);
-					farmRepository.update(container.getOwner());
+					Farm farm = container.getOwner();
+					if(farm.getFarmId() != null){
+						farmRepository.update(farm);	
+					}
 					refreshInputList();
 				}
 			}
@@ -167,11 +170,12 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	}
 
 	private void createFarmFilterList(){
+		farmFilterList.clear();
+		farmFilterList.add(ALL_FARM);
 		if (inputModel != null) {
 			if (inputModel instanceof Membership) {
 				Membership selectedMember = (Membership) inputModel;
 				farms.addAll( selectedMember.getMember().getFarms());
-				farmFilterList.add(ALL_FARM);
 				for (final Farm farm : farms) {
 					if (!farmFilterList.contains(farm.getName())) {
 						farmFilterList.add(farm.getName());

@@ -44,6 +44,7 @@ import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 
 
@@ -55,7 +56,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 	private ITableRidget liveStockTable;
 	private IActionRidget liveStockAddButton;
-	private IActionRidget liveStockRemoveButton;
+	private IActionRidget liveStockViewButton;
 	private final String[] liveStockPropertyNames = { "registrationId", "location", "purpose", "givenName",
 			"animalType", "animalType", "dateOfAcquisition", "acquisitionType" };
 	private final String[] liveStockColumnHeaders = { "ID", "Farm", "Purpose", "Name", "Species", "Breed",
@@ -132,58 +133,14 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 		});
 		liveStockTable.bindToModel(new WritableList(animalInput, RegisteredAnimal.class), RegisteredAnimal.class,
 				liveStockPropertyNames, liveStockColumnHeaders);
+		liveStockTable.addSelectionListener(this);
 
 		liveStockAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
-		liveStockAddButton.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				//tesing for now, use ViewLiveStockDialog for adding
-				RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.MALE, DairyUtil.createReferenceAnimal("",""), Purpose.get(0), RearingMode.get(0), DairyUtil.createReferenceAnimal("",""), "", "", null, null, AcquisitionType.get(0), null);
-				final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
-				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
-				List<Farm> farmList = new ArrayList<Farm>();
-				if(inputModel instanceof Membership){
-					farmList.addAll(((Membership)inputModel).getMember().getFarms());
-				}else if(inputModel instanceof Farm){
-					farmList.add((Farm)inputModel);
-				}
-				aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,farmList);
-
-				int returnCode = aniamlDialog.open();
-				if (returnCode == AbstractWindowController.OK) {
-					newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED);
-					newAnimal.getLocation().getAnimals().add(newAnimal);
-					Farm farmLocation = newAnimal.getLocation();
-					if(farmLocation != null && farmLocation.getFarmId() != null){
-						farmRepository.save(newAnimal.getLocation());
-					}
-					refreshList();
-				}
-			}
-		});
-
-		liveStockRemoveButton = controller.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_Remove);
-		liveStockRemoveButton.setEnabled(false);
-		liveStockRemoveButton.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), liveStockRemoveTitle,
-						liveStockRemoveMessage)) {
-					final List<Object> selections = liveStockTable.getSelection();
-
-					for (final Object selObject : selections) {
-						((RegisteredAnimal) selObject).getLocation().getAnimals().remove(selObject);
-						farmRepository.save(((RegisteredAnimal) selObject).getLocation());
-					}
-
-					refreshList();
-				}
-
-			}
-		});
-
+		liveStockAddButton.addListener(new AddAction());
+		
+		liveStockViewButton = controller.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
+		liveStockViewButton.addListener(new ViewAction());
+		liveStockViewButton.setEnabled(false);
 		filterController.getSearch().addListener(new FilterAction());
 
 	}
@@ -221,11 +178,11 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	@Override
 	public void ridgetSelected(SelectionEvent event) {
 		if (event.getSource() == liveStockTable) {
-			final List<Object> selection = event.getNewSelection();
+			final List<Object> selection = liveStockTable.getSelection();
 			if (selection.size() > 0) {
-				liveStockRemoveButton.setEnabled(true);
+				liveStockViewButton.setEnabled(true);
 			} else {
-				liveStockRemoveButton.setEnabled(false);
+				liveStockViewButton.setEnabled(false);
 			}
 		}
 	}
@@ -350,5 +307,69 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 			refreshList();
 		}
 
+	}
+	
+	private class AddAction implements IActionListener{
+
+		@Override
+		public void callback() {
+			RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.MALE, DairyUtil.createReferenceAnimal("",""), Purpose.get(0), RearingMode.get(0), DairyUtil.createReferenceAnimal("",""), "", "", null, null, AcquisitionType.get(0), null);
+			final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(Display.getDefault().getActiveShell());
+			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
+			List<Farm> farmList = new ArrayList<Farm>();
+			if(inputModel instanceof Membership){
+				farmList.addAll(((Membership)inputModel).getMember().getFarms());
+			}else if(inputModel instanceof Farm){
+				farmList.add((Farm)inputModel);
+			}
+			aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,farmList);
+
+			int returnCode = aniamlDialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED);
+				newAnimal.getLocation().getAnimals().add(newAnimal);
+				Farm farmLocation = newAnimal.getLocation();
+				if(farmLocation != null && farmLocation.getFarmId() != null){
+					farmRepository.save(newAnimal.getLocation());
+				}
+				refreshList();
+			}
+		}
+		
+	}
+	
+	private class ViewAction implements IActionListener{
+
+		@Override
+		public void callback() {
+			if(!liveStockTable.getSelection().isEmpty()){
+				RegisteredAnimal selectedAnimal = (RegisteredAnimal) liveStockTable.getSelection().get(0);
+				final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
+				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, selectedAnimal);
+				List<Farm> farmList = new ArrayList<Farm>();
+				farmList.add((Farm)selectedAnimal.getLocation());
+				aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,farmList);
+
+				int returnCode = aniamlDialog.open();
+				Farm farmLocation = selectedAnimal.getLocation();
+
+				if (returnCode == AbstractWindowController.OK) {
+					if(farmLocation != null && farmLocation.getFarmId() != null){
+						farmRepository.update(farmLocation);
+					}
+					refreshList();
+				}else if(returnCode == 2){
+					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), liveStockRemoveTitle,liveStockRemoveMessage)) {
+						farmLocation.getAnimals().remove(selectedAnimal);
+						if(farmLocation.getFarmId() != null){
+							farmRepository.update(farmLocation);		
+						}
+						refreshList();
+					}
+				}
+			}
+			
+		}
+		
 	}
 }

@@ -90,9 +90,9 @@ public class MemberLiveStockWidget {
 				ViewWidgetId.LIVESTOCK_VIEW);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(true, false).applyTo(viewButton);
 
-		final Button removeButton = UIControlsFactory.createButton(addbuttonsPanel, REMOVE_BUTTON,
-				ViewWidgetId.LIVESTOCK_Remove);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
+//		final Button removeButton = UIControlsFactory.createButton(addbuttonsPanel, REMOVE_BUTTON,
+//				ViewWidgetId.LIVESTOCK_Remove);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
 
 	}
 

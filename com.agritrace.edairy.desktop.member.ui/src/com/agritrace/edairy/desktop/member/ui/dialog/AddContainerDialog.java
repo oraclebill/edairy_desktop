@@ -10,7 +10,6 @@ public class AddContainerDialog extends ViewContainerDialog {
 
 	public AddContainerDialog(Shell shell) {
 		super(shell);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
