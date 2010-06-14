@@ -84,5 +84,11 @@ public abstract class BaseDialogView extends AbstractDialogView {
 //	
 //	protected abstract void onDelete();
 	
+	@Override
+	public boolean close() {
+		getController().setReturnCode(DialogConstants.ACTION_CANCEL);
+		return super.close();
+	}
+
 	
 }
