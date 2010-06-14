@@ -1,11 +1,14 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
@@ -24,11 +27,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.collections.CollectionRepository;
+import com.agritrace.edairy.desktop.operations.services.collections.ICollectionRepository;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
 	
-	private final MilkCollectionDetailLogFilterBean filterBean = new MilkCollectionDetailLogFilterBean();
+//	private final MilkCollectionDetailLogFilterBean filterBean = new MilkCollectionDetailLogFilterBean();
 	
 	private ITextRidget book;
 	private ITextRidget date;
@@ -42,6 +48,11 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private IActionRidget  editButton;
 	private IActionRidget  setPageButton;
 	private IActionRidget  addPageButton;
+	
+	private CollectionJournal currentCollectionJournal;
+	private WritableValue pageValue = new WritableValue(null, Integer.class);
+	private ICollectionRepository journalRepository = new CollectionRepository();
+	
 	
 	public MilkCollectionDetailLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_LINE);
@@ -84,6 +95,42 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		INavigationNode<?> node = getNavigationNode();
 		Set<?> set = node.getActions();
 		Object valu = getContext(null);
+
+		assert(currentCollectionJournal != null);
+		
+		book.setText(currentCollectionJournal.getReferenceNumber());
+		date.setText(DateTimeUtils.DATE_FORMAT.format(currentCollectionJournal.getJournalDate()));
+		session.setText(currentCollectionJournal.getSession().getName());
+		route.setText(currentCollectionJournal.getRoute().getName());
+		driver.setText(currentCollectionJournal.getDriver().getFamilyName());
+		vehicle.setText(currentCollectionJournal.getVehicle().getLogBookNumber());
+		
+		currentPage.bindToModel(pageValue);
+//		currentPage.getValue()
+		setPageButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				refreshTableContents();
+			}			
+		});
+		backButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				throw new UnsupportedOperationException("Unimplemnented.");
+			}
+		});
+		editButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				throw new UnsupportedOperationException("Unimplemnented.");
+			}
+		});
+		addPageButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				throw new UnsupportedOperationException("Unimplemnented.");
+			}
+		});
 	}
 
 	
@@ -94,7 +141,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	
 	@Override
 	protected List<CollectionJournalLine> getFilteredResult() {
-		List<CollectionJournalLine> allJournalLines = getRepository().find("FROM CollectionJournalLine WHERE ");
+		List<CollectionJournalLine> allJournalLines = currentCollectionJournal.getJournalEntries();
 		List<CollectionJournalLine> filteredJournals = new ArrayList<CollectionJournalLine>();
 		
 		for ( CollectionJournalLine cj : allJournalLines ) {
