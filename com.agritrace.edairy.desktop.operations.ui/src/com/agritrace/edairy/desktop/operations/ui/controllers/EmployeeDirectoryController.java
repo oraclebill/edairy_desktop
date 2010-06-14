@@ -8,7 +8,6 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -16,13 +15,13 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
-import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog2;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
 
 	private ITextRidget nameSearchText;
 	private IComboRidget positionSearchCombo;
+	private IComboRidget departmentSearchCombo;
 
 	private EmployeeSearchBean searchBean = new EmployeeSearchBean();
 
@@ -52,12 +51,19 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		positionSearchCombo.updateFromModel();
 		positionSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
 
+		// 
+		departmentSearchCombo = getRidget(IComboRidget.class, EmployeeDirectoryView.BIND_ID_FILTER_DEPT);
+		departmentSearchCombo.bindToModel(searchBean, "departments", String.class, null, searchBean, "department");
+		departmentSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
+		departmentSearchCombo.updateFromModel();
+		departmentSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
 	}
 
 	@Override
 	protected void resetFilterConditions() {
 		nameSearchText.setText("");
 		positionSearchCombo.setSelection(positionSearchCombo.getEmptySelectionItem());
+		departmentSearchCombo.setSelection(departmentSearchCombo.getEmptySelectionItem());
 	}
 
 	@Override
@@ -75,8 +81,8 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	}
 
 	@Override
-	protected RecordDialog<Employee, EmployeeEditDialogController2> getRecordDialog(Shell shell) {
-		return new EmployeeEditDialog2(shell);
+	protected RecordDialog<Employee, EmployeeEditDialogController> getRecordDialog(Shell shell) {
+		return new EmployeeEditDialog(shell);
 	}
 
 	/**
