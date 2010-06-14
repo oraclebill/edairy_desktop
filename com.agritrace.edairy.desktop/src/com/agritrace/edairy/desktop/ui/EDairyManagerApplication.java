@@ -59,6 +59,8 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
+import com.agritrace.edairy.desktop.operations.ui.views.*;
+import com.agritrace.edairy.desktop.operations.ui.controllers.*;
 
 
 /**
@@ -306,7 +308,7 @@ public class EDairyManagerApplication extends SwtApplication {
 					.createSubModule(
 							"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule(
-					"edm.dairy.staff", "Employees", moduleSystem, StaffInfoView.ID, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+					"edm.dairy.staff", "Employees", moduleSystem, EmployeeDirectoryView.ID, EmployeeDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule(
 					"edm.dairy.vehicles", "Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory.createSubModule("edm.dairy.bins", "Containers (Bins)", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$

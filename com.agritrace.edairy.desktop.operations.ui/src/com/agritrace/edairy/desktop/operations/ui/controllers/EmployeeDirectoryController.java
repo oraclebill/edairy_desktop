@@ -8,7 +8,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Customer;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -16,7 +16,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
-import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog2;
+import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
 
@@ -28,8 +29,8 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	public EmployeeDirectoryController() {
 		super();
 		setRepository(new EmployeeRepository());
-		setEClass(DairyPackage.Literals.CUSTOMER);
-		setEntityClass(Customer.class);
+		setEClass(DairyPackage.Literals.EMPLOYEE);
+		setEntityClass(Employee.class);
 
 		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__ID);
 		addTableColumn("Last Name", ModelPackage.Literals.PERSON__FAMILY_NAME);
@@ -40,12 +41,12 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 
 	@Override
 	protected void configureFilterRidgets() {
-		nameSearchText = getRidget(ITextRidget.class, CustomerDirectoryView.BIND_ID_FILTER_COMPANYNAME);
+		nameSearchText = getRidget(ITextRidget.class, EmployeeDirectoryView.BIND_ID_FILTER_NAME);
 		nameSearchText.setDirectWriting(true);
 		nameSearchText.bindToModel(searchBean, "name");
 
 		//
-		positionSearchCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_CUSTOMERTYPE);
+		positionSearchCombo = getRidget(IComboRidget.class, EmployeeDirectoryView.BIND_ID_FILTER_JOBFUNC);
 		positionSearchCombo.bindToModel(searchBean, "positions", String.class, null, searchBean, "position");
 		positionSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
 		positionSearchCombo.updateFromModel();
@@ -62,8 +63,8 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected List<Employee> getFilteredResult() {
 		List<Employee> filtered = new ArrayList<Employee>();
-		List<Employee> allCustomers = getRepository().all();
-		for (final Employee e : allCustomers) {
+		List<Employee> allEmployees = getRepository().all();
+		for (final Employee e : allEmployees) {
 			if ((MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) 
 					|| MatchUtil.matchContains(searchBean.getName(), e.getGivenName()))
 					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction())) {
@@ -74,8 +75,8 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	}
 
 	@Override
-	protected RecordDialog<Employee, EmployeeEditDialogController> getRecordDialog(Shell shell) {
-		return new EmployeeEditDialog(shell);
+	protected RecordDialog<Employee, EmployeeEditDialogController2> getRecordDialog(Shell shell) {
+		return new EmployeeEditDialog2(shell);
 	}
 
 	/**
