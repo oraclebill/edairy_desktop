@@ -3,9 +3,6 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
@@ -16,12 +13,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
-import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.operations.services.customer.CustomerRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
-import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerDialog;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 

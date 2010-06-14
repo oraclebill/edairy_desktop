@@ -19,7 +19,7 @@ import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.customer.CustomerRepository;
-import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerDialog;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 
 public class CustomerDirectoryController extends BasicDirectoryController<Customer> {
@@ -98,7 +98,7 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 
 	@Override
 	protected RecordDialog<Customer, ?> getRecordDialog(Shell shell) {
-		return new CustomerDialog(shell);
+		return new CustomerEditDialog(shell);
 	}
 
 	/**
