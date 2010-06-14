@@ -61,10 +61,12 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		idLabel = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_CONTAINER_ID);
 		typeCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_TYPE);
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_FARM);
+		farmCombo.setMandatory(true);
 		unitCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_UNIT);
 		capacity = getRidget(ITextRidget.class, ViewWidgetId.VIEW_CONTAINER_COMPACITY);
 		capacity.setModelToUIControlConverter(new NumberToStringConverter(Double.class));
 		capacity.setMandatory(true);
+		capacity.setDirectWriting(true);
 		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
 		okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);

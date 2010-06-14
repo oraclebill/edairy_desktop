@@ -260,7 +260,9 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 			containers.clear();
 			containerInput.clear();
 			for(Farm farm : farms){
-				farm = farmRepository.findByKey(farm.getFarmId());
+				if(farm.getFarmId() != null){
+					farm = farmRepository.findByKey(farm.getFarmId());		
+				}
 				containers.addAll(farm.getCans());
 			}
 			containerInput.addAll(getContainerFilteredResult());
