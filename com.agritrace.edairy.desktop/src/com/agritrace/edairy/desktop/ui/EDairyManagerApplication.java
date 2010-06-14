@@ -19,6 +19,7 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
@@ -70,6 +71,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String MILK_MODULEGRP = "milk.navgroup";
 	private static final String MILK_COLLECTION_ENTRY_SUBMODULE = "edm.milk.collection.entry";
 	private static final String MILK_COLLECTION_LOG_SUBMODULE = "edm.milk.collection.log";
+	private static final String MILK_COLLECTION_DETAIL_LOG_SUBMODULE = "edm.milkcollection.detail.log";
 	private static final String MILK_COLLECTION_MODULE = "edm.milk.collection";
 	public static final String BG_DARK = "edm_dark_background";
 	public static final String BG_LIGHT = "edm_light_background";
@@ -171,6 +173,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule(MILK_COLLECTION_MODULE, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(MILK_COLLECTION_LOG_SUBMODULE, "Collection Log", moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class);
+		NodeFactory.createSubModule(MILK_COLLECTION_DETAIL_LOG_SUBMODULE, "Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID);
 		NodeFactory.createSubModule(MILK_COLLECTION_ENTRY_SUBMODULE,
 				"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
 

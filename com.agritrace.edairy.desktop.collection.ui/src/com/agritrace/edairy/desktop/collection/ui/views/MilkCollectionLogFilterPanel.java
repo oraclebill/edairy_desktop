@@ -37,15 +37,15 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		Label lblStartDate = UIControlsFactory.createLabel(grpSearch, "Start Date", SWT.NONE);
 		
 		DateTime startDate = UIControlsFactory.createDate(grpSearch, SWT.MEDIUM);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(startDate, ViewConstants.START_DATE_TEXT);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(startDate, ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
 		
 		Label lblEndDate = UIControlsFactory.createLabel(grpSearch, "End Date");
 		
 		DateTime endDate = UIControlsFactory.createDate(grpSearch, SWT.MEDIUM);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(endDate, ViewConstants.END_DATE_TEXT);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(endDate, ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
 		
 		Combo routeCombo = UIControlsFactory.createCombo(grpSearch);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(routeCombo, ViewConstants.ROUTE_COMBO);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(routeCombo, ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
 		
 		Label lblRoute = UIControlsFactory.createLabel(grpSearch, "Route");
 		
@@ -66,17 +66,17 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		lblMprMissing.setText("MPR Missing");
 		
 		Button button = UIControlsFactory.createButtonCheck(grpSearch);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(button, ViewConstants.MPR_MISSING_CHK);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(button, ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
 		
 		Label lblMprMissing_1 = UIControlsFactory.createLabel(grpSearch, "Suspended");
 		
 		Button button_1 = UIControlsFactory.createButtonCheck(grpSearch);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(button_1, ViewConstants.SUSPENDED_CHK);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(button_1, ViewConstants.COLLECTION_FILTER_SUSPENDED_CHK);
 		
 		Label lblRejected = UIControlsFactory.createLabel(grpSearch, "Rejected");
 		
 		Button button_2 = UIControlsFactory.createButtonCheck(grpSearch);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(button_2, ViewConstants.REJECTED_CHK);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(button_2, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
 
 		GroupLayout gl_grpSearch = new GroupLayout(grpSearch);
 		gl_grpSearch.setHorizontalGroup(

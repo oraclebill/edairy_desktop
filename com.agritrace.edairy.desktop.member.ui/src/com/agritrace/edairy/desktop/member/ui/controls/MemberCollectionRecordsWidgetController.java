@@ -39,6 +39,44 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
 
+	public final static class JournalSessionColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				CollectionJournal journal = ((CollectionJournalLine) element).getCollectionJournal();
+				if (journal != null) {
+					return journal.getSession().toString();
+				}
+			}
+			return null;
+		}
+	}
+
+	public final static class DairyContainerIdColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				if (((CollectionJournalLine) element).getDairyContainer() != null) {
+					return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
+				}
+			}
+			return null;
+		}
+	}
+
+	private final class EntryDateColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				final Date entryDate = ((CollectionJournalLine) element).getCollectionJournal().getJournalDate();
+				final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
+				dateFormatter.setDate(entryDate);
+				return dateFormatter.getFormattedDate();
+			}
+			return null;
+		}
+	}
+
 	private IController controller;
 	private Membership membership;
 
@@ -64,23 +102,13 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (controller == null) {
 			return;
 		}
+		
 		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
 		if (null == collectionTable) {
 			return;
 		}
 
-		collectionTable.setColumnFormatter(0, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof CollectionJournalLine) {
-					CollectionJournal journal = ((CollectionJournalLine) element).getCollectionJournal();
-					if (journal != null) {
-						return journal.getSession().toString();
-					}
-				}
-				return null;
-			}
-		});
+		collectionTable.setColumnFormatter(0, new JournalSessionColumnFormatter());
 		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class),
 				CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
 
@@ -108,7 +136,6 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (collectionTable != null) {
 			updateBinding();
 		}
-
 	}
 
 	@Override
@@ -131,31 +158,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		records.clear();
 		records.addAll(getCollectionJournalLines());
 
-		collectionTable.setColumnFormatter(1, new ColumnFormatter() {
-
-			@Override
-			public String getText(Object element) {
-				if (element instanceof CollectionJournalLine) {
-					final Date entryDate = ((CollectionJournalLine) element).getCollectionJournal().getJournalDate();
-					final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
-					dateFormatter.setDate(entryDate);
-					return dateFormatter.getFormattedDate();
-				}
-				return null;
-			}
-		});
-		collectionTable.setColumnFormatter(2, new ColumnFormatter() {
-
-			@Override
-			public String getText(Object element) {
-				if (element instanceof CollectionJournalLine) {
-					if (((CollectionJournalLine) element).getDairyContainer() != null) {
-						return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
-					}
-				}
-				return null;
-			}
-		});
+		collectionTable.setColumnFormatter(1, new EntryDateColumnFormatter());
+		collectionTable.setColumnFormatter(2, new DairyContainerIdColumnFormatter());
 		collectionTable.updateFromModel();
 		if (dateSearchController != null) {
 			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
