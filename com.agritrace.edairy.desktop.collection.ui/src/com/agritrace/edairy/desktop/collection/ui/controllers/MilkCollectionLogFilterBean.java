@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.views;
+package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.util.Date;
 import java.util.List;

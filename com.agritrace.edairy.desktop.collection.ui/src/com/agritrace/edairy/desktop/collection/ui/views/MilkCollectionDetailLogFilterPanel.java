@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 
-public class MilkCollectionDetailFilterPanel extends Composite {
+public class MilkCollectionDetailLogFilterPanel extends Composite {
 
 	public static final String FILTER_VEHICLE_TXT 		= "FILTER_VEHICLE_TXT";
 	public static final String FILTER_DRIVER_TXT 		= "FILTER_DRIVER_TXT";
@@ -38,7 +38,7 @@ public class MilkCollectionDetailFilterPanel extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public MilkCollectionDetailFilterPanel(Composite parent, int style) {
+	public MilkCollectionDetailLogFilterPanel(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new GridLayout(1, false));
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));

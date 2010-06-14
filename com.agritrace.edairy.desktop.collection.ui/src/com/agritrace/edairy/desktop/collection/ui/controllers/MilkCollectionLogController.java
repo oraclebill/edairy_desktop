@@ -9,7 +9,6 @@ import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;

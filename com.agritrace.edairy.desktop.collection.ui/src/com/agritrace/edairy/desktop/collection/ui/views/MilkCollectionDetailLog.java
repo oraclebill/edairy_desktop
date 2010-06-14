@@ -19,7 +19,7 @@ public class MilkCollectionDetailLog extends AbstractRecordListView {
 	@Override
 	protected void createFilterConditions(Composite comp) {
 		comp.setLayout(GridLayoutFactory.fillDefaults().create());
-		new MilkCollectionDetailFilterPanel(comp, SWT.NONE);
+		new MilkCollectionDetailLogFilterPanel(comp, SWT.NONE);
 		comp.pack();
 	}
 
