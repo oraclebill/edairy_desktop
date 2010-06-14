@@ -170,22 +170,13 @@ public interface RequestsPackage extends EPackage {
 	int ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT = 10;
 
 	/**
-	 * The feature id for the '<em><b>Member</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANIMAL_HEALTH_REQUEST__MEMBER = 11;
-
-	/**
 	 * The feature id for the '<em><b>Farm</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_HEALTH_REQUEST__FARM = 12;
+	int ANIMAL_HEALTH_REQUEST__FARM = 11;
 
 	/**
 	 * The feature id for the '<em><b>Referred To</b></em>' reference.
@@ -194,7 +185,7 @@ public interface RequestsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_HEALTH_REQUEST__REFERRED_TO = 13;
+	int ANIMAL_HEALTH_REQUEST__REFERRED_TO = 12;
 
 	/**
 	 * The number of structural features of the '<em>Animal Health Request</em>' class.
@@ -203,7 +194,7 @@ public interface RequestsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_HEALTH_REQUEST_FEATURE_COUNT = 14;
+	int ANIMAL_HEALTH_REQUEST_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.requests.RequestType <em>Request Type</em>}' enum.
@@ -346,17 +337,6 @@ public interface RequestsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAnimalHealthRequest_ThirdTreatment();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getMember <em>Member</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Member</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getMember()
-	 * @see #getAnimalHealthRequest()
-	 * @generated
-	 */
-	EReference getAnimalHealthRequest_Member();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getFarm <em>Farm</em>}'.
@@ -509,14 +489,6 @@ public interface RequestsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT = eINSTANCE.getAnimalHealthRequest_ThirdTreatment();
-
-		/**
-		 * The meta object literal for the '<em><b>Member</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ANIMAL_HEALTH_REQUEST__MEMBER = eINSTANCE.getAnimalHealthRequest_Member();
 
 		/**
 		 * The meta object literal for the '<em><b>Farm</b></em>' reference feature.

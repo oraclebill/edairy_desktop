@@ -1,19 +1,26 @@
 package com.agritrace.edairy.desktop.member.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
@@ -39,7 +46,7 @@ public class MemberRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		pm = new HsqldbMemoryPersistenceManager();		
+		pm = new HsqlDbPersistenceManager();		
 		repo = new MemberRepository( new TestHibernateRepository(pm) );
 	}
 	

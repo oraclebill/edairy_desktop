@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
@@ -19,6 +20,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -26,7 +28,6 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
@@ -105,7 +106,7 @@ public class AnimalHealthRequestDialog extends
 		specialComp.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(specialComp);
 		this.addUIControl(specialComp, BIND_ID_SPECIFIC_CONTAINER); //$NON-NLS-1$
-		updateTypeSpecificControlls(RequestType.VETERINARY);
+		//updateTypeSpecificControlls(RequestType.VETERINARY);
 	}
 
 	private void createCommonControls(Composite parent) {
@@ -124,13 +125,14 @@ public class AnimalHealthRequestDialog extends
 		addUIControl(startDateLookup, BIND_ID_REQUEST_DATE_TEXT);
 		UIControlsFactory.createLabel(commonComp, ""); // filler
 		
+		// Create member lookup
+		configureLookupFields(commonComp, "Member", Activator.getDefault().getImageRegistry()
+				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT, BIND_ID_MEMBER_BUTTON);
+		
 		// Create farm lookup
 		configureLookupFields(commonComp, "Farm", Activator.getDefault().getImageRegistry()
 				.get(Activator.FARM_SEARCH_ICON), BIND_ID_FARM_TEXT, BIND_ID_FARM_BUTTON);
 
-		// Create member lookup
-		configureLookupFields(commonComp, "Member", Activator.getDefault().getImageRegistry()
-				.get(Activator.MEMBER_SEARCH_ICON), BIND_ID_MEMBER_TEXT, BIND_ID_MEMBER_BUTTON);
 
 		UIControlsFactory.createLabel(commonComp, "Request Type"); //$NON-NLS-1$
 		Composite typeComposite = UIControlsFactory.createComposite(commonComp);
@@ -182,7 +184,21 @@ public class AnimalHealthRequestDialog extends
 
 	@Override
 	protected AnimalHealthRequestDialogController createController() {
-		AnimalHealthRequestDialogController controller = new AnimalHealthRequestDialogController();
+		final AnimalHealthRequestDialogController controller = new AnimalHealthRequestDialogController();
+		controller.addListener(new IActionListener() {
+
+			@Override
+			public void callback() {
+				Display.getDefault().syncExec(new Runnable(){
+
+					@Override
+					public void run() {
+					
+						updateTypeSpecificControlls(controller.getWorkingCopy().getType());
+					}});
+
+			}
+		});
 		return controller;
 	}
 
@@ -234,45 +250,38 @@ public class AnimalHealthRequestDialog extends
 		injectedControls.add(inseminationComp);
 
 		inseminationGroup = UIControlsFactory.createGroup(inseminationComp, "Request Details");
-		GridLayout layout = new GridLayout(3, false);
+		GridLayout layout = new GridLayout(2, false);
 		inseminationGroup.setLayout(layout);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(inseminationGroup);
 
 		UIControlsFactory.createLabel(inseminationGroup, "Time Heat Detected"); //$NON-NLS-1$
-		Text txtDate = UIControlsFactory.createText(inseminationGroup);
-		GridData dateData = new GridData(GridData.FILL_HORIZONTAL);
-		dateData.horizontalSpan = 1;
-		txtDate.setLayoutData(dateData);
+		DatePickerComposite txtDate = UIControlsFactory.createDatePickerComposite(inseminationGroup);
+		txtDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addUIControl(txtDate, BIND_ID_INSE_TIME_HEATED_DETECTED);
 		injectedControls.add(txtDate);
 
-		// Calendar Button
-		Button button = new Button(inseminationGroup, SWT.PUSH);
-		Image calendar = Activator.getImage(ImageRegistry.calendar);
-		button.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(button);
 		// Insemination
 		Label insemLabel = UIControlsFactory.createLabel(inseminationGroup, "Insemination"); //$NON-NLS-1$
-		GridDataFactory.fillDefaults().span(3, 1).applyTo(insemLabel);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(insemLabel);
 
-		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(2, 1);
+		GridDataFactory textGridFactory = GridDataFactory.fillDefaults().span(1, 1);
 		GridDataFactory indentGridFactory = GridDataFactory.fillDefaults().indent(10, 0);
 		// First
 		Label firstLabel = UIControlsFactory.createLabel(inseminationGroup, "First"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstLabel);
 
-		Text firstText = UIControlsFactory.createText(inseminationGroup);
-
-		textGridFactory.applyTo(firstText);
-		addUIControl(firstText, BIND_ID_INSE_FIRST_TRETMENT);
-		injectedControls.add(firstText);
+		// First Date
+		DatePickerComposite firstTextDate = UIControlsFactory.createDatePickerComposite(inseminationGroup);
+		firstTextDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		addUIControl(firstTextDate, BIND_ID_INSE_FIRST_TRETMENT);
+		injectedControls.add(firstTextDate);
 
 		// First Repeat
 		Label firstRepeatLabel = UIControlsFactory.createLabel(inseminationGroup, "First Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(firstRepeatLabel);
-
-		Text firstRepeatText = UIControlsFactory.createText(inseminationGroup);
-		textGridFactory.applyTo(firstRepeatText);
+		// First repeat Date
+		DatePickerComposite firstRepeatText = UIControlsFactory.createDatePickerComposite(inseminationGroup);
+		firstRepeatText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addUIControl(firstRepeatText, BIND_ID_INSE_SECOND_TRETMENT);
 		injectedControls.add(firstRepeatText);
 
@@ -280,8 +289,8 @@ public class AnimalHealthRequestDialog extends
 		Label secondRepeatLabel = UIControlsFactory.createLabel(inseminationGroup, "2nd Repeat"); //$NON-NLS-1$
 		indentGridFactory.applyTo(secondRepeatLabel);
 
-		Text secondRepeatText = UIControlsFactory.createText(inseminationGroup);
-		textGridFactory.applyTo(secondRepeatText);
+		DatePickerComposite secondRepeatText = UIControlsFactory.createDatePickerComposite(inseminationGroup);
+		secondRepeatText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		addUIControl(secondRepeatText, BIND_ID_INSE_THIRD_TRETMENT);
 		injectedControls.add(secondRepeatText);

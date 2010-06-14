@@ -445,7 +445,6 @@ public class DairyUtil {
 		// req.setRequestId(id);
 		req.setDate(reqDate);
 		req.setFarm(farm);
-		req.setMember(member);
 		req.setRequestingMember(member);
 		return req;
 	}

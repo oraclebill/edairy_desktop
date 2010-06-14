@@ -244,7 +244,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnimalHealthRequest_Member() {
+	public EReference getAnimalHealthRequest_Farm() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -253,17 +253,8 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnimalHealthRequest_Farm() {
-		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAnimalHealthRequest_ReferredTo() {
-		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(13);
+		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -315,7 +306,6 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		createEAttribute(animalHealthRequestEClass, ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT);
 		createEAttribute(animalHealthRequestEClass, ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT);
 		createEAttribute(animalHealthRequestEClass, ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT);
-		createEReference(animalHealthRequestEClass, ANIMAL_HEALTH_REQUEST__MEMBER);
 		createEReference(animalHealthRequestEClass, ANIMAL_HEALTH_REQUEST__FARM);
 		createEReference(animalHealthRequestEClass, ANIMAL_HEALTH_REQUEST__REFERRED_TO);
 
@@ -371,7 +361,6 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		initEAttribute(getAnimalHealthRequest_FirstTreatment(), ecorePackage.getEDate(), "firstTreatment", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimalHealthRequest_SecondTreatment(), ecorePackage.getEDate(), "secondTreatment", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimalHealthRequest_ThirdTreatment(), ecorePackage.getEDate(), "thirdTreatment", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnimalHealthRequest_Member(), theDairyPackage.getMembership(), null, "member", null, 1, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimalHealthRequest_Farm(), theTrackingPackage.getFarm(), null, "farm", null, 1, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimalHealthRequest_ReferredTo(), theDairyPackage.getSupplier(), null, "referredTo", null, 0, 1, AnimalHealthRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

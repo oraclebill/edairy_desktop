@@ -1,31 +1,24 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.riena.beans.common.TypedBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
-import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
@@ -102,6 +95,18 @@ public class SupplierDirectoryView extends BasicDirectoryController {
 	@Override
 	protected RecordDialog<Supplier, SupplierListDialogController> getRecordDialog(Shell shell) {
 		return new SupplierListDialog(shell);
+	}
+	
+	/**
+	 * Create new model while createing a new record
+	 * 
+	 * @return
+	 */
+	protected Supplier createNewModel() {
+		Supplier supplier = (Supplier) super.createNewModel();
+		supplier.setPhoneNumber("");
+		supplier.setRegistrationDate(Calendar.getInstance().getTime());
+		return supplier;
 	}
 
 }

@@ -49,7 +49,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl#getFirstTreatment <em>First Treatment</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl#getSecondTreatment <em>Second Treatment</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl#getThirdTreatment <em>Third Treatment</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl#getFarm <em>Farm</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl#getReferredTo <em>Referred To</em>}</li>
  * </ul>
@@ -237,16 +236,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @ordered
 	 */
 	protected Date thirdTreatment = THIRD_TREATMENT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getMember() <em>Member</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMember()
-	 * @generated
-	 * @ordered
-	 */
-	protected Membership member;
 
 	/**
 	 * The cached value of the '{@link #getFarm() <em>Farm</em>}' reference.
@@ -577,44 +566,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Membership getMember() {
-		if (member != null && member.eIsProxy()) {
-			InternalEObject oldMember = (InternalEObject)member;
-			member = (Membership)eResolveProxy(oldMember);
-			if (member != oldMember) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER, oldMember, member));
-			}
-		}
-		return member;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Membership basicGetMember() {
-		return member;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMember(Membership newMember) {
-		Membership oldMember = member;
-		member = newMember;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER, oldMember, member));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Farm getFarm() {
 		if (farm != null && farm.eIsProxy()) {
 			InternalEObject oldFarm = (InternalEObject)farm;
@@ -762,9 +713,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 				return getSecondTreatment();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT:
 				return getThirdTreatment();
-			case RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER:
-				if (resolve) return getMember();
-				return basicGetMember();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM:
 				if (resolve) return getFarm();
 				return basicGetFarm();
@@ -815,9 +763,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 				return;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT:
 				setThirdTreatment((Date)newValue);
-				return;
-			case RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER:
-				setMember((Membership)newValue);
 				return;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM:
 				setFarm((Farm)newValue);
@@ -870,9 +815,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT:
 				setThirdTreatment(THIRD_TREATMENT_EDEFAULT);
 				return;
-			case RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER:
-				setMember((Membership)null);
-				return;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM:
 				setFarm((Farm)null);
 				return;
@@ -913,8 +855,6 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 				return SECOND_TREATMENT_EDEFAULT == null ? secondTreatment != null : !SECOND_TREATMENT_EDEFAULT.equals(secondTreatment);
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT:
 				return THIRD_TREATMENT_EDEFAULT == null ? thirdTreatment != null : !THIRD_TREATMENT_EDEFAULT.equals(thirdTreatment);
-			case RequestsPackage.ANIMAL_HEALTH_REQUEST__MEMBER:
-				return member != null;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM:
 				return farm != null;
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REFERRED_TO:

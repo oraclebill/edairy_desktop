@@ -25,8 +25,9 @@ public abstract class LookupDialogController<T extends EObject> extends
 	public void configureRidgets() {
 		super.configureRidgets();
 		// Search Button
-		IActionRidget searchAction = getRidget(IActionRidget.class,
-				FarmSearchDialog.SEARCH_BUTTON);
+		IActionRidget searchAction = null;
+//			getRidget(IActionRidget.class,
+//				FarmSearchDialog.SEARCH_BUTTON);
 		searchAction.addListener(new IActionListener() {
 
 			@Override

@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getFirstTreatment <em>First Treatment</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getSecondTreatment <em>Second Treatment</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getThirdTreatment <em>Third Treatment</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getFarm <em>Farm</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getReferredTo <em>Referred To</em>}</li>
  * </ul>
@@ -339,32 +338,6 @@ public interface AnimalHealthRequest extends EObject {
 	 * @generated
 	 */
 	void setThirdTreatment(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Member</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Member</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Member</em>' reference.
-	 * @see #setMember(Membership)
-	 * @see com.agritrace.edairy.desktop.common.model.requests.RequestsPackage#getAnimalHealthRequest_Member()
-	 * @model required="true"
-	 * @generated
-	 */
-	Membership getMember();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getMember <em>Member</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Member</em>' reference.
-	 * @see #getMember()
-	 * @generated
-	 */
-	void setMember(Membership value);
 
 	/**
 	 * Returns the value of the '<em><b>Farm</b></em>' reference.

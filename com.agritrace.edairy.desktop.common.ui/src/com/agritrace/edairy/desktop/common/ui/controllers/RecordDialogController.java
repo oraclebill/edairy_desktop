@@ -191,7 +191,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		this.listeners.add(listener);
 	}
 
-	private void notifyListeners() {
+	protected void notifyListeners() {
 		for (final IActionListener listener : this.listeners) {
 			listener.callback();
 		}

@@ -40,8 +40,9 @@ public class FarmLookupDialogController extends LookupDialogController<Farm> {
 		super.configureRidgets();
 
 		// Column comobo
-		IComboRidget columns = getRidget(IComboRidget.class,
-				FarmSearchDialog.SEARCH_COLUMN_COMBO);
+		IComboRidget columns = null; 
+//			getRidget(IComboRidget.class,
+//				FarmSearchDialog.SEARCH_COLUMN_COMBO);
 		List<String> columnOptions = new ArrayList<String>();
 		columnOptions.add("ID");
 		columnOptions.add("Name");
@@ -51,8 +52,8 @@ public class FarmLookupDialogController extends LookupDialogController<Farm> {
 		columns.updateFromModel();
 		columns.setSelection(0);
 
-		ITableRidget listTable = getRidget(ITableRidget.class,
-				FarmSearchDialog.RESULT_LIST);
+		ITableRidget listTable = null;
+			//getRidget(ITableRidget.class,		FarmSearchDialog.RESULT_LIST);
 		listTable.setColumnWidths(new Object[] { new ColumnWeightData(10),
 				new ColumnWeightData(40), new ColumnWeightData(40) });
 		this.refreshTableContents();

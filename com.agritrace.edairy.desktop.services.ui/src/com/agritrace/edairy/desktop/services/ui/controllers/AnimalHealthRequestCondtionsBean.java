@@ -8,7 +8,10 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 public class AnimalHealthRequestCondtionsBean {
 	
+	public static final String PROPERTY_STARTDATE = "startDate";
+	public static final String PROPERTY_ENDDATE = "endDate";
 	public static final String PROPERTY_FARM ="selectedFarm";
+	public static final String PROPERTY_MEMBERSHIP = "selectedMember";
 
 	private Date startDate;
 	private Date endDate;

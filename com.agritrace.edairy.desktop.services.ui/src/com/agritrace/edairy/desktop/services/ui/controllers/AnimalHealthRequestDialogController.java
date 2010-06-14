@@ -4,9 +4,8 @@ import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
@@ -14,32 +13,32 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.swt.widgets.Display;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
-import com.agritrace.edairy.desktop.common.ui.dialogs.LookupDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 
+/**
+ * Dialog controller for Animal Health Request
+ * 
+ * @author Hui(Spark) Wan
+ *
+ */
 public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
 	public class FarmLookupAction implements IActionListener {
 		@Override
 		public void callback() {
 			FarmSearchDialog farmDialog = new FarmSearchDialog(Display.getCurrent().getActiveShell());
-			LookupDialogController<Farm> controller = ((LookupDialogController<Farm>) farmDialog.getController());
-			controller.setSelectedObject(request.getFarm());
+			farmDialog.setSelectedMember(request.getRequestingMember());
 			
 			int retVal = farmDialog.open();
-			if (retVal == FarmSearchDialog.OK) {
-				request.setFarm(controller.getSelectedObject());
+			if (retVal == Window.OK) {
+				request.setFarm(farmDialog.getSelectedFarm());
 				farmLookupText.updateFromModel();
 			}
 		}
@@ -48,12 +47,12 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			MemberSearchDialog memberDialog = new MemberSearchDialog(Display.getCurrent().getActiveShell());
+			memberDialog.setSelectedMember(request.getRequestingMember());
 			memberDialog.setSelectedFarm(request.getFarm());
 			int retVal = memberDialog.open();
-			if (retVal == MemberSearchDialog.OK) {
+			if (retVal == Window.OK) {
 				request.setRequestingMember(memberDialog.getSelectedMember());
-				request.setMember(memberDialog.getSelectedMember());
 				memberLookupText.updateFromModel();
 			}
 		}
@@ -166,8 +165,8 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		textRidget = getRidget(IDateTextRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
 		textRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		textRidget.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-		textRidget.bindToModel(EMFObservables.observeValue(request,
-				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE));
+		textRidget.bindToModel(request,
+				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName());
 		textRidget.updateFromModel();
 
 		// Request Type/Veterinary
@@ -196,28 +195,31 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		// insementationRadionBtn.setOutputOnly(true);
 		
 		memberLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_TEXT );
-		memberLookupText.bindToModel(
-				EMFProperties.value(
-						FeaturePath.fromList(
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER,
-								DairyPackage.Literals.MEMBERSHIP__MEMBER,
-								ModelPackage.Literals.PERSON__FAMILY_NAME)).observe(request));
+		memberLookupText.setModelToUIControlConverter(new Member2StringConverter());;
+		memberLookupText
+				.bindToModel(
+						request,
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER
+								.getName());
 		memberLookupText.setOutputOnly(true);
+		memberLookupText.updateFromModel();
 		
 
 		memberLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_BUTTON );
 		memberLookupButton.addListener( new MemberLookupAction() );
 
 		farmLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_TEXT );
-		farmLookupText.bindToModel(
-				EMFProperties.value(
-						FeaturePath.fromList(
-								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM,
-								TrackingPackage.Literals.FARM__NAME)).observe(request));
+		farmLookupText.setModelToUIControlConverter(new Farm2StringConverter());;
+		farmLookupText.bindToModel(request, 
+								RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName());
+		farmLookupText.updateFromModel();
 		farmLookupText.setOutputOnly(true);
 
 		farmLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_BUTTON );
 		farmLookupButton.addListener( new FarmLookupAction() );
+
+		// Type changed
+		requestTypeChanged();
 
 	}
 
@@ -225,7 +227,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		final AnimalHealthRequest request = getWorkingCopy();
 		// UIChanges
-
+		notifyListeners();
 		// Updates the bindings
 		configTypeSpecificRidgets(request);
 
@@ -233,15 +235,17 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 	private void configTypeSpecificRidgets(final AnimalHealthRequest request) {
 
-		// ICompositeRidget container =
-		// getRidget(ICompositeRidget.class,
-		// ServiceRequestListDialog.BIND_ID_SPECIFIC_CONTAINER);
 		if (RequestType.INSEMINATION == request.getType()) {
 
 			// Heated date
-			final ITextRidget heatTimeTextBtn = getRidget(ITextRidget.class,
+			final IDateTextRidget heatTimeTextBtn = getRidget(IDateTextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_TIME_HEATED_DETECTED);
+			if (heatTimeTextBtn == null)
+			{
+				return;
+			}
 			heatTimeTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+			heatTimeTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 			// heatTimeTextBtn.setOutputOnly(false);
 			heatTimeTextBtn.bindToModel(request,
 					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED.getName());
@@ -249,43 +253,45 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			// heatTimeTextBtn.setOutputOnly(true);
 
 			// First
-			final ITextRidget firstTextBtn = getRidget(ITextRidget.class,
+			final IDateTextRidget firstTextBtn = getRidget(IDateTextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_FIRST_TRETMENT);
+			firstTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 			firstTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			// firstTextBtn.setOutputOnly(false);
 			firstTextBtn
 					.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT.getName());
 
 			firstTextBtn.updateFromModel();
-			// firstTextBtn.setOutputOnly(true);
 
 			// Second
-			final ITextRidget secondTextBtn = getRidget(ITextRidget.class,
+			final IDateTextRidget secondTextBtn = getRidget(IDateTextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_SECOND_TRETMENT);
 			secondTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+			secondTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 			// secondTextBtn.setOutputOnly(false);
 			secondTextBtn.bindToModel(request,
 					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT.getName());
 
 			secondTextBtn.updateFromModel();
-			// secondTextBtn.setOutputOnly(true);
 
 			// Third
-			final ITextRidget thirdTextBtn = getRidget(ITextRidget.class,
+			final IDateTextRidget thirdTextBtn = getRidget(IDateTextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_INSE_THIRD_TRETMENT);
 			thirdTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			thirdTextBtn.setOutputOnly(false);
+			thirdTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 			thirdTextBtn
 					.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT.getName());
 
 			thirdTextBtn.updateFromModel();
-			// thirdTextBtn.setOutputOnly(true);
 
 		} else {
 			// Complaint
 			// Third
 			final ITextRidget complaintTextBtn = getRidget(ITextRidget.class,
 					AnimalHealthRequestDialog.BIND_ID_VERY_THIRD_COMPLAINT);
+			if (complaintTextBtn == null)
+			{
+				return;
+			}
 			complaintTextBtn.addPropertyChangeListener(ITextRidget.PROPERTY_TEXT, new PropertyChangeListener() {
 
 				@Override
@@ -298,11 +304,9 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			}
 
 			);
-			// complaintTextBtn.setOutputOnly(false);
 			complaintTextBtn.bindToModel(request,
 					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM.getName());
 			complaintTextBtn.updateFromModel();
-			// complaintTextBtn.setOutputOnly(true);
 		}
 
 	}
@@ -311,7 +315,5 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	protected EClass getEClass() {
 		return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
 	}
-
-	
 
 }

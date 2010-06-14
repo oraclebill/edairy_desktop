@@ -79,12 +79,15 @@ public class AnimalHealthRequestView extends AbstractRecordListView {
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(comp);
 		
-		// Create farm/member lookup
+		// Configure member lookup
+		configureLookupFields(comp, "Member Lookup", Activator.getDefault().getImageRegistry()
+				.get(Activator.MEMBER_SEARCH_ICON), MEMBER_LOOKUP_TEXT, MEMBER_LOOKUP_BUTTON);
+		
+		// Create farm lookup
 		configureLookupFields(comp, "Farm Lookup", Activator.getDefault().getImageRegistry()
 				.get(Activator.FARM_SEARCH_ICON), FARM_LOOKUP_TEXT, FARM_LOOKUP_BUTTON);
 
-		configureLookupFields(comp, "Member Lookup", Activator.getDefault().getImageRegistry()
-				.get(Activator.MEMBER_SEARCH_ICON), MEMBER_LOOKUP_TEXT, MEMBER_LOOKUP_BUTTON);
+
 	}
 
 	private void createDateRange(Composite parent) {
@@ -95,11 +98,6 @@ public class AnimalHealthRequestView extends AbstractRecordListView {
 		startDateComp.setLayout(layout);
 		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(startDateComp);
 
-		// Create Start Date lookup
-//		LookupComposite startDateLookup = new LookupComposite("Start", Activator.getDefault().getImageRegistry()
-//				.get(Activator.CALENDAR_ICON), START_DATE_TEXT, START_DATE_BUTTON);
-//		startDateLookup.createSection(startDateComp);
-
 		UIControlsFactory.createLabel(startDateComp, "Start");
 		final DatePickerComposite startDateLookup = UIControlsFactory.createDatePickerComposite(startDateComp);
 		startDateLookup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -108,9 +106,6 @@ public class AnimalHealthRequestView extends AbstractRecordListView {
 		Composite endDateComp = UIControlsFactory.createComposite(parent);
 		endDateComp.setLayout(GridLayoutFactory.swtDefaults().numColumns(3).margins(0, 0).create());
 		endDateComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-//		LookupComposite endDateLookup = new LookupComposite("End", Activator.getDefault().getImageRegistry()
-//				.get(Activator.CALENDAR_ICON), END_DATE_TEXT, END_DATE_BUTTON);
-//		endDateLookup.createSection(endDateComp);
 
 		UIControlsFactory.createLabel(endDateComp, "End");
 		final DatePickerComposite endDateLookup = UIControlsFactory.createDatePickerComposite(endDateComp);
