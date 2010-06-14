@@ -171,7 +171,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 		final Label sectionLabel = UIControlsFactory.createLabel(group, SECTION_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
-				.applyTo(sectionLabel);
+		.applyTo(sectionLabel);
 
 		final Combo combo2 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo2);
@@ -186,7 +186,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 		final Label vehicleLabel = UIControlsFactory.createLabel(group, VEHICLE_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
-				.applyTo(vehicleLabel);
+		.applyTo(vehicleLabel);
 
 		final Combo combo3 = UIControlsFactory.createCombo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo3);
@@ -211,7 +211,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 		final Label journalLabel = UIControlsFactory.createLabel(group, JOURNAL_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
-				.applyTo(journalLabel);
+		.applyTo(journalLabel);
 
 		final Text journalText = UIControlsFactory.createText(group, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalText);
@@ -220,7 +220,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 		final Label journalTotalLabel = UIControlsFactory.createLabel(group, JOURNAL_TOTAL_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
-				.applyTo(journalTotalLabel);
+		.applyTo(journalTotalLabel);
 
 		final Text journalTotalText = UIControlsFactory.createTextDecimal(group);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalTotalText);
@@ -240,7 +240,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 		final Label binLabel = UIControlsFactory.createLabel(panel, BIN_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
-				.applyTo(binLabel);
+		.applyTo(binLabel);
 
 		final Combo binList = UIControlsFactory.createCombo(panel, ViewWidgetId.binCombo);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(binList);
@@ -347,7 +347,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		final Label imageLabel = UIControlsFactory.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.TOP).applyTo(imageLabel);
 		imageLabel.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena",
-				"resources/farmerheadshot.png"));
+		"resources/farmerheadshot.png"));
 		addUIControl(imageLabel, ViewWidgetId.photoLabel);
 
 		return group;
@@ -358,11 +358,11 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(buttonComposite);
 
 		final Button modifyButton = UIControlsFactory
-				.createButton(buttonComposite, "Modify", ViewWidgetId.modifyButton);
+		.createButton(buttonComposite, "Modify", ViewWidgetId.modifyButton);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(modifyButton);
 
 		final Button deleteButton = UIControlsFactory
-				.createButton(buttonComposite, "Delete", ViewWidgetId.deleteButton);
+		.createButton(buttonComposite, "Delete", ViewWidgetId.deleteButton);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(deleteButton);
 
 		final Button clearButton = UIControlsFactory.createButton(buttonComposite, "Clear", ViewWidgetId.clearButton);

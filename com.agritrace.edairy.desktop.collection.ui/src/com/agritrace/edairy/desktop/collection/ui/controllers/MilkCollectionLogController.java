@@ -5,10 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
-import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.swt.widgets.Shell;
 
@@ -22,34 +19,34 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
-	
+
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	
+
 	private IDateTimeRidget startDate;
 	private IDateTimeRidget endDate;
 	private IComboRidget route;
 	private IToggleButtonRidget mprMissing;
 	private IToggleButtonRidget suspended;
 	private IToggleButtonRidget rejected;
-	
-	
+
+
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
 		setEntityClass(CollectionJournalPage.class);
 		setRepository(new MilkCollectionJournalRepository());
-		
+
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
-//		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new RouteNameFormatter() );
+		//		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new RouteNameFormatter() );
 		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE );
 		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
 		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
-		
+
 		filterBean.setRoutes(new DairyRepository().getRoutes());
 	}
-	
+
 	@Override
 	protected void configureFilterRidgets() {
 		startDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
@@ -58,7 +55,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
 		suspended = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_SUSPENDED_CHK);
 		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
-		
+
 		startDate.bindToModel(filterBean, "startDate");
 		endDate.bindToModel(filterBean, "endDate" );
 		route.bindToModel(filterBean, "routes", Route.class, null, filterBean, "route" );
@@ -76,14 +73,14 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		suspended.setSelected(false);
 		rejected.setSelected(false);
 	}
-	
+
 	@Override
 	protected List<CollectionJournalPage> getFilteredResult() {
-		List<CollectionJournalPage> allJournals = getRepository().all();
-		List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
-		
-		for ( CollectionJournalPage cj : allJournals ) {
-			boolean condition = true;
+		final List<CollectionJournalPage> allJournals = getRepository().all();
+		final List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
+
+		for ( final CollectionJournalPage cj : allJournals ) {
+			final boolean condition = true;
 			// filter logic goes here...
 			if (condition) {
 				filteredJournals.add(cj);

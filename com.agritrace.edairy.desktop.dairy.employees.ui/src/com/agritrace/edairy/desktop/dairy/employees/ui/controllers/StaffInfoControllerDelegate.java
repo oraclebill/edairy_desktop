@@ -48,7 +48,7 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 
 		final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 		final List<EObject> employees = ((CommonSubModuleViewController) this.getSubModuleController())
-				.getModelObjects();
+		.getModelObjects();
 		if (master != null) {
 			master.setDelegate(new StaffDelegation());
 			master.bindToModel(new WritableList(employees, Employee.class), Employee.class, properties, headers);
@@ -108,7 +108,7 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 			final ITextRidget addressText = container.getRidget(ITextRidget.class,
 					StaffInfoMasterDetailComposite.BIND_ID_DEPARTMENT);
 			addressText.setDirectWriting(true);
-			if (workingCopy.getLocation() != null && workingCopy.getLocation().getPostalLocation() != null) {
+			if ((workingCopy.getLocation() != null) && (workingCopy.getLocation().getPostalLocation() != null)) {
 				addressText.bindToModel(workingCopy.getLocation().getPostalLocation(),
 						ModelPackage.Literals.POSTAL_LOCATION__ADDRESS.getName());
 
@@ -144,10 +144,10 @@ public class StaffInfoControllerDelegate extends SubModuleControllerDelegate {
 			final Employee p1 = (Employee) source;
 			final Employee p2 = (Employee) target;
 			final boolean equals = (p1 == p2)
-					|| (p1 == null && p2 != null)
-					|| (p2 == null && p1 != null)
-					|| (p1.getGivenName().equals(p2.getGivenName()) && p1.getFamilyName().equals(p2.getFamilyName())
-							&& p1.getId().equals(p2.getId()) && p1.getJobFunction().equals(p2.getJobFunction()));
+			|| ((p1 == null) && (p2 != null))
+			|| ((p2 == null) && (p1 != null))
+			|| (p1.getGivenName().equals(p2.getGivenName()) && p1.getFamilyName().equals(p2.getFamilyName())
+					&& p1.getId().equals(p2.getId()) && p1.getJobFunction().equals(p2.getJobFunction()));
 			return !equals;
 		}
 

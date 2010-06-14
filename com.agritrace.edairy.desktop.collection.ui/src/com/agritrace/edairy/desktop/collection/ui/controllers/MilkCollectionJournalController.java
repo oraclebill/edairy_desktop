@@ -30,8 +30,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -40,7 +40,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.persistence.services.DairyRepository;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.validators.StringNumberValidator;
 import com.agritrace.edairy.desktop.operations.services.collections.CollectionRepository;
@@ -220,8 +219,8 @@ public class MilkCollectionJournalController extends SubModuleController {
 				if (element instanceof CollectionJournalLine) {
 					if (((CollectionJournalLine) element).getFarmContainer() != null) {
 						return ""
-								+ ((CollectionJournalLine) element)
-										.getFarmContainer().getContainerId();
+						+ ((CollectionJournalLine) element)
+						.getFarmContainer().getContainerId();
 					}
 
 				}
@@ -247,70 +246,70 @@ public class MilkCollectionJournalController extends SubModuleController {
 		});
 		// buttons
 		((IActionRidget) getRidget(ViewWidgetId.addButton))
-				.addListener(new IActionListener() {
+		.addListener(new IActionListener() {
 
-					@Override
-					public void callback() {
-						addButtonClicked();
-					}
+			@Override
+			public void callback() {
+				addButtonClicked();
+			}
 
-				});
+		});
 
 		((IActionRidget) getRidget(ViewWidgetId.entryInputClear))
-				.addListener(new IActionListener() {
+		.addListener(new IActionListener() {
 
-					@Override
-					public void callback() {
-						clearMilkJournalGroupButtonClicked();
-					}
+			@Override
+			public void callback() {
+				clearMilkJournalGroupButtonClicked();
+			}
 
-				});
+		});
 
 		((IActionRidget) getRidget(ViewWidgetId.modifyButton))
-				.addListener(new IActionListener() {
+		.addListener(new IActionListener() {
 
-					@Override
-					public void callback() {
-						// MilkCollectionRecord aRecord = (MilkCollectionRecord)
-						// table.getSelection().get(0);
-						// ModifyMilkRecordDialog modifyDialog = new
-						// ModifyMilkRecordDialog(Display.getDefault().getActiveShell());
-						// aRecord.setLine("");
-						// modifyDialog.setRecord(aRecord);
-						// if(modifyDialog.open() == Window.OK){
-						// table.updateFromModel();
-						// totalLabelRidget.updateFromModel();
-						// }
-					}
+			@Override
+			public void callback() {
+				// MilkCollectionRecord aRecord = (MilkCollectionRecord)
+				// table.getSelection().get(0);
+				// ModifyMilkRecordDialog modifyDialog = new
+				// ModifyMilkRecordDialog(Display.getDefault().getActiveShell());
+				// aRecord.setLine("");
+				// modifyDialog.setRecord(aRecord);
+				// if(modifyDialog.open() == Window.OK){
+				// table.updateFromModel();
+				// totalLabelRidget.updateFromModel();
+				// }
+			}
 
-				});
+		});
 
 		((IActionRidget) getRidget(ViewWidgetId.deleteButton))
-				.addListener(new IActionListener() {
+		.addListener(new IActionListener() {
 
-					@Override
-					public void callback() {
-						deleteJournalEntryButtonClicked();
-					}
-				});
+			@Override
+			public void callback() {
+				deleteJournalEntryButtonClicked();
+			}
+		});
 
 		((IActionRidget) getRidget(ViewWidgetId.clearButton))
-				.addListener(new IActionListener() {
+		.addListener(new IActionListener() {
 
-					@Override
-					public void callback() {
-						clearAllJournalEntiresButtonClicked();
-					}
-				});
+			@Override
+			public void callback() {
+				clearAllJournalEntiresButtonClicked();
+			}
+		});
 
 		((IActionRidget) getRidget(ViewWidgetId.saveButton))
-				.addListener(new IActionListener() {
+		.addListener(new IActionListener() {
 
-					@Override
-					public void callback() {
-						createAndSaveCollectionJournalPage();
-					}
-				});
+			@Override
+			public void callback() {
+				createAndSaveCollectionJournalPage();
+			}
+		});
 
 		updateBottomButtons(false);
 		totalLabelRidget = getRidget(ILabelRidget.class,
@@ -334,11 +333,11 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 		if (memberText != null) {
 			((Control) memberText.getUIControl()).getParent().getParent()
-					.setVisible(visble);
+			.setVisible(visble);
 		}
 		if (table != null) {
 			((Control) table.getUIControl()).getParent().getParent()
-					.getParent().setVisible(visble);
+			.getParent().setVisible(visble);
 		}
 	}
 
@@ -359,9 +358,9 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	private void updateBottomButtons(boolean enable) {
 		((IActionRidget) getRidget(ViewWidgetId.modifyButton))
-				.setEnabled(enable);
+		.setEnabled(enable);
 		((IActionRidget) getRidget(ViewWidgetId.deleteButton))
-				.setEnabled(enable);
+		.setEnabled(enable);
 	}
 
 	private List<Route> getRoutesList() {
@@ -408,25 +407,25 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	private void createAndSaveCollectionJournalPage() {
 		final CollectionJournalPage newJournal = DairyFactory.eINSTANCE
-				.createCollectionJournalPage();
+		.createCollectionJournalPage();
 		newJournal.setDriver((Employee) driverRidget.getSelection());
 		newJournal.setSession((Session) sessionRidget.getSelection());
 		newJournal.setRoute((Route) routeRidget.getSelection());
 		newJournal.setVehicle((Vehicle) vehicleRidget.getSelection());
 		final Date date = new SimpleFormattedDateBean(dateRidget.getText())
-				.getDate();
+		.getDate();
 		newJournal.setJournalDate(date);
 
 		final double driverTotal = new Double(
 				NumericTextRidget.ungroup(journalTotlal.getText()))
-				.doubleValue();
+		.doubleValue();
 
 		final double recordTotal = totalValue.getTotal();
 		if (driverTotal != recordTotal) {
 			MessageDialog
-					.openError(Display.getDefault().getActiveShell(),
-							"Error Save Collection Journal",
-							"Journal Total value doesn't match collection journal records total.");
+			.openError(Display.getDefault().getActiveShell(),
+					"Error Save Collection Journal",
+			"Journal Total value doesn't match collection journal records total.");
 			return;
 		}
 		newJournal.setDriverTotal(new BigDecimal(driverTotal));
@@ -457,7 +456,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	private void addButtonClicked() {
 
 		final CollectionJournalLine aRecord = DairyFactory.eINSTANCE
-				.createCollectionJournalLine();
+		.createCollectionJournalLine();
 		/**
 		 * todo should get container based on the CAN ID, now I created manually
 		 */
@@ -473,8 +472,8 @@ public class MilkCollectionJournalController extends SubModuleController {
 								Display.getDefault().getActiveShell(),
 								"Error Create Collection Journal Record",
 								"Can't find valid membership for "
-										+ memberId
-										+ ". The record will be marked as Flagged. Do you want to continue create a new record? ")) {
+								+ memberId
+								+ ". The record will be marked as Flagged. Do you want to continue create a new record? ")) {
 					return;
 				}
 			}
@@ -488,8 +487,8 @@ public class MilkCollectionJournalController extends SubModuleController {
 							Display.getDefault().getActiveShell(),
 							"Error Create Collection Journal Record",
 							"Can't find container for "
-									+ canId
-									+ ". Do you want to continue create a new record? ")) {
+							+ canId
+							+ ". Do you want to continue create a new record? ")) {
 				return;
 			}
 		}
@@ -520,7 +519,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	private void deleteJournalEntryButtonClicked() {
 		if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
 				"Delete Milk Collection Records",
-				"Do you want to delete the selected milk collection records?")) {
+		"Do you want to delete the selected milk collection records?")) {
 			final List<Object> selectedRecords = table.getSelection();
 			if (selectedRecords != null) {
 				records.removeAll(selectedRecords);
@@ -534,7 +533,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	private void clearAllJournalEntiresButtonClicked() {
 		if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
 				"Delete Milk Collection Records",
-				"Do you want to delete all milk collection records?")) {
+		"Do you want to delete all milk collection records?")) {
 			records.clear();
 			updateRecordLineNumbers();
 			table.updateFromModel();
