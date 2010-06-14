@@ -109,6 +109,7 @@ public class ViewFarmDialogController extends BaseDialogController<Farm> {
 		farmNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_NAME);
 		farmNameTextRidget = getRidget(ITextRidget.class, ViewWidgetId.VIEW_FARM_NAME_TXT);
 		farmNameTextRidget.setMandatory(true);
+		farmNameTextRidget.setDirectWriting(true);
 		farmIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_ID);
 		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
 		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_ID);

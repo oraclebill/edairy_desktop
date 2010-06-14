@@ -56,10 +56,15 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 				String.class, null, new WritableValue());
 		provinceComo.updateFromModel();
 		provinceComo.addSelectionListener(this);
+		
 		addressTxt.setMandatory(true);
+		addressTxt.setDirectWriting(true);
 		sectionTxt.setMandatory(true);
+		sectionTxt.setDirectWriting(true);
 		villageTxt.setMandatory(true);
+		villageTxt.setDirectWriting(true);
 		postalCodeTxt.setMandatory(true);
+		postalCodeTxt.setDirectWriting(true);
 		provinceComo.setMandatory(true);
 
 	}
