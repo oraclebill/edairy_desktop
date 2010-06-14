@@ -60,7 +60,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournalPage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="common.ecore#//Person">
@@ -100,7 +100,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="functions" upperBound="-1"
         eType="#//DairyFunction"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CollectionJournal">
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalPage">
     <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
         eType="#//CollectionJournalLine" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
@@ -151,7 +151,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trip">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collections" lowerBound="1"
-        upperBound="-1" eType="#//CollectionJournal"/>
+        upperBound="-1" eType="#//CollectionJournalPage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveries" lowerBound="1"
         upperBound="-1" eType="#//DeliveryJournal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="started" lowerBound="1"
@@ -196,7 +196,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" upperBound="-1"
         eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
-        eType="#//CollectionJournal" containment="true"/>
+        eType="#//CollectionJournalPage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"

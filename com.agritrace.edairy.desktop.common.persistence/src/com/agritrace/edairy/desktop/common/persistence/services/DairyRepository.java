@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -52,7 +52,7 @@ public class DairyRepository {
 		return (List<Employee>) runQuery("FROM Employee where jobfunc16_6_='" + type +  "'");
 	}
 
-	public void addCollectionJournal(CollectionJournal newJournal) {
+	public void addCollectionJournal(CollectionJournalPage newJournal) {
 		setupSession();
 		Transaction tx = session.beginTransaction();
 		try {

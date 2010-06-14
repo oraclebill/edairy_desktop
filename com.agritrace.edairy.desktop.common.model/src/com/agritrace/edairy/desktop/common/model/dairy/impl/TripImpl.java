@@ -6,7 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Trip;
@@ -51,7 +51,7 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CollectionJournal> collections;
+	protected EList<CollectionJournalPage> collections;
 
 	/**
 	 * The cached value of the '{@link #getDeliveries() <em>Deliveries</em>}' reference list.
@@ -147,9 +147,9 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionJournal> getCollections() {
+	public EList<CollectionJournalPage> getCollections() {
 		if (collections == null) {
-			collections = new EObjectResolvingEList<CollectionJournal>(CollectionJournal.class, this, DairyPackage.TRIP__COLLECTIONS);
+			collections = new EObjectResolvingEList<CollectionJournalPage>(CollectionJournalPage.class, this, DairyPackage.TRIP__COLLECTIONS);
 		}
 		return collections;
 	}
@@ -250,7 +250,7 @@ public class TripImpl extends EObjectImpl implements Trip {
 		switch (featureID) {
 			case DairyPackage.TRIP__COLLECTIONS:
 				getCollections().clear();
-				getCollections().addAll((Collection<? extends CollectionJournal>)newValue);
+				getCollections().addAll((Collection<? extends CollectionJournalPage>)newValue);
 				return;
 			case DairyPackage.TRIP__DELIVERIES:
 				getDeliveries().clear();

@@ -8,8 +8,8 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
@@ -238,7 +238,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 * @ordered
 	 */
-	protected CollectionJournal collectionJournal;
+	protected CollectionJournalPage collectionJournal;
 
 	/**
 	 * The default value of the '{@link #isRejected() <em>Rejected</em>}' attribute.
@@ -583,10 +583,10 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionJournal getCollectionJournal() {
+	public CollectionJournalPage getCollectionJournal() {
 		if (collectionJournal != null && collectionJournal.eIsProxy()) {
 			InternalEObject oldCollectionJournal = (InternalEObject)collectionJournal;
-			collectionJournal = (CollectionJournal)eResolveProxy(oldCollectionJournal);
+			collectionJournal = (CollectionJournalPage)eResolveProxy(oldCollectionJournal);
 			if (collectionJournal != oldCollectionJournal) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL, oldCollectionJournal, collectionJournal));
@@ -600,7 +600,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionJournal basicGetCollectionJournal() {
+	public CollectionJournalPage basicGetCollectionJournal() {
 		return collectionJournal;
 	}
 
@@ -609,8 +609,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCollectionJournal(CollectionJournal newCollectionJournal) {
-		CollectionJournal oldCollectionJournal = collectionJournal;
+	public void setCollectionJournal(CollectionJournalPage newCollectionJournal) {
+		CollectionJournalPage oldCollectionJournal = collectionJournal;
 		collectionJournal = newCollectionJournal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL, oldCollectionJournal, collectionJournal));
@@ -722,7 +722,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				setDairyContainer((Container)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				setCollectionJournal((CollectionJournal)newValue);
+				setCollectionJournal((CollectionJournalPage)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				setRejected((Boolean)newValue);
@@ -773,7 +773,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				setDairyContainer((Container)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				setCollectionJournal((CollectionJournal)null);
+				setCollectionJournal((CollectionJournalPage)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				setRejected(REJECTED_EDEFAULT);
