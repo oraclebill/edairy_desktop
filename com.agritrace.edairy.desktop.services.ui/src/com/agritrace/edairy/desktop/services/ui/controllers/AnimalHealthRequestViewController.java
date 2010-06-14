@@ -478,6 +478,12 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		return myRepo;
 	}
 	
+	@Override
+	protected AnimalHealthRequest createNewModel() {
+		AnimalHealthRequest request = (AnimalHealthRequest)super.createNewModel();
+		request.setDate(Calendar.getInstance().getTime());
+		return super.createNewModel();
+	}
 	
 
 }
