@@ -152,10 +152,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	private IActionRidget searchBtnRidget;
 	private IActionRidget resetBtnRidget;
 	
-	protected ViewItemAction viewAction = new ViewItemAction();
-	private NewItemAction newAction = new NewItemAction();
-	private ApplyFilterAction applyFilterAction = new ApplyFilterAction();
-	private ResetFilterAction resetFilterAction = new ResetFilterAction();
+	protected final ViewItemAction viewAction = new ViewItemAction();
+	protected final NewItemAction newAction = new NewItemAction();
+	protected final ApplyFilterAction applyFilterAction = new ApplyFilterAction();
+	protected final ResetFilterAction resetFilterAction = new ResetFilterAction();
 	
 	protected final List<T> tableContents = new ArrayList<T>();
 
