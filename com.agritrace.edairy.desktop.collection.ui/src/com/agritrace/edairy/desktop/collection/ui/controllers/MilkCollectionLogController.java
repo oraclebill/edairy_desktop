@@ -14,14 +14,14 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
-public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournal> {
+public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 	
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
 	
@@ -34,18 +34,18 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	
 	
 	public MilkCollectionLogController() {
-		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL);
-		setEntityClass(CollectionJournal.class);
+		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
+		setEntityClass(CollectionJournalPage.class);
 		setRepository(new MilkCollectionJournalRepository());
 		
-		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE);
-//		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL__ROUTE, new RouteNameFormatter() );
-		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL__ROUTE );
-		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL__SESSION);
-		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
+		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
+//		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new RouteNameFormatter() );
+		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE );
+		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
+		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		
 		filterBean.setRoutes(new DairyRepository().getRoutes());
 	}
@@ -78,11 +78,11 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 	
 	@Override
-	protected List<CollectionJournal> getFilteredResult() {
-		List<CollectionJournal> allJournals = getRepository().all();
-		List<CollectionJournal> filteredJournals = new ArrayList<CollectionJournal>();
+	protected List<CollectionJournalPage> getFilteredResult() {
+		List<CollectionJournalPage> allJournals = getRepository().all();
+		List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
 		
-		for ( CollectionJournal cj : allJournals ) {
+		for ( CollectionJournalPage cj : allJournals ) {
 			boolean condition = true;
 			// filter logic goes here...
 			if (condition) {
@@ -93,7 +93,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	protected RecordDialog<CollectionJournal, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<CollectionJournalPage, ?> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
 	}

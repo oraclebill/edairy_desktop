@@ -93,8 +93,8 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createDairyLocationAdapter();
 			}
 			@Override
-			public Adapter caseCollectionJournal(CollectionJournal object) {
-				return createCollectionJournalAdapter();
+			public Adapter caseCollectionJournalPage(CollectionJournalPage object) {
+				return createCollectionJournalPageAdapter();
 			}
 			@Override
 			public Adapter caseRoute(Route object) {
@@ -221,16 +221,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal <em>Collection Journal</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage <em>Collection Journal Page</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage
 	 * @generated
 	 */
-	public Adapter createCollectionJournalAdapter() {
+	public Adapter createCollectionJournalPageAdapter() {
 		return null;
 	}
 

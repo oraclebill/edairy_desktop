@@ -6,8 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -38,29 +38,29 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Collection Journal</b></em>'.
+ * An implementation of the model object '<em><b>Collection Journal Page</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getJournalEntries <em>Journal Entries</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getReferenceNumber <em>Reference Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getJournalDate <em>Journal Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getSession <em>Session</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getDriver <em>Driver</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getFarmContainer <em>Farm Container</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getBin <em>Bin</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getVehicle <em>Vehicle</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getDriverTotal <em>Driver Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getRecordTotal <em>Record Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalImpl#getJournalId <em>Journal Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalEntries <em>Journal Entries</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getReferenceNumber <em>Reference Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRoute <em>Route</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getFarmContainer <em>Farm Container</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getBin <em>Bin</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriverTotal <em>Driver Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalId <em>Journal Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CollectionJournalImpl extends EObjectImpl implements CollectionJournal {
+public class CollectionJournalPageImpl extends EObjectImpl implements CollectionJournalPage {
 	/**
 	 * The cached value of the '{@link #getJournalEntries() <em>Journal Entries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -246,7 +246,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CollectionJournalImpl() {
+	protected CollectionJournalPageImpl() {
 		super();
 	}
 
@@ -257,7 +257,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.COLLECTION_JOURNAL;
+		return DairyPackage.Literals.COLLECTION_JOURNAL_PAGE;
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	 */
 	public EList<CollectionJournalLine> getJournalEntries() {
 		if (journalEntries == null) {
-			journalEntries = new EObjectContainmentEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
+			journalEntries = new EObjectContainmentEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		}
 		return journalEntries;
 	}
@@ -290,7 +290,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		String oldReferenceNumber = referenceNumber;
 		referenceNumber = newReferenceNumber;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Date oldJournalDate = journalDate;
 		journalDate = newJournalDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE, oldJournalDate, journalDate));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE, oldJournalDate, journalDate));
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Session oldSession = session;
 		session = newSession == null ? SESSION_EDEFAULT : newSession;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__SESSION, oldSession, session));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION, oldSession, session));
 	}
 
 	/**
@@ -346,7 +346,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			driver = (Employee)eResolveProxy(oldDriver);
 			if (driver != oldDriver) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__DRIVER, oldDriver, driver));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER, oldDriver, driver));
 			}
 		}
 		return driver;
@@ -370,7 +370,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Employee oldDriver = driver;
 		driver = newDriver;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__DRIVER, oldDriver, driver));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER, oldDriver, driver));
 	}
 
 	/**
@@ -384,7 +384,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			route = (Route)eResolveProxy(oldRoute);
 			if (route != oldRoute) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__ROUTE, oldRoute, route));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE, oldRoute, route));
 			}
 		}
 		return route;
@@ -408,7 +408,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Route oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__ROUTE, oldRoute, route));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE, oldRoute, route));
 	}
 
 	/**
@@ -422,7 +422,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			farmContainer = (Container)eResolveProxy(oldFarmContainer);
 			if (farmContainer != oldFarmContainer) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER, oldFarmContainer, farmContainer));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER, oldFarmContainer, farmContainer));
 			}
 		}
 		return farmContainer;
@@ -446,7 +446,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Container oldFarmContainer = farmContainer;
 		farmContainer = newFarmContainer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER, oldFarmContainer, farmContainer));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER, oldFarmContainer, farmContainer));
 	}
 
 	/**
@@ -460,7 +460,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			bin = (DairyContainer)eResolveProxy(oldBin);
 			if (bin != oldBin) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__BIN, oldBin, bin));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__BIN, oldBin, bin));
 			}
 		}
 		return bin;
@@ -484,7 +484,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		DairyContainer oldBin = bin;
 		bin = newBin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__BIN, oldBin, bin));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__BIN, oldBin, bin));
 	}
 
 	/**
@@ -498,7 +498,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
 			if (vehicle != oldVehicle) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL__VEHICLE, oldVehicle, vehicle));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE, oldVehicle, vehicle));
 			}
 		}
 		return vehicle;
@@ -522,7 +522,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Vehicle oldVehicle = vehicle;
 		vehicle = newVehicle;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__VEHICLE, oldVehicle, vehicle));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE, oldVehicle, vehicle));
 	}
 
 	/**
@@ -543,7 +543,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		BigDecimal oldDriverTotal = driverTotal;
 		driverTotal = newDriverTotal;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL, oldDriverTotal, driverTotal));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL, oldDriverTotal, driverTotal));
 	}
 
 	/**
@@ -564,7 +564,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		BigDecimal oldRecordTotal = recordTotal;
 		recordTotal = newRecordTotal;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL, oldRecordTotal, recordTotal));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, oldRecordTotal, recordTotal));
 	}
 
 	/**
@@ -585,7 +585,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		Long oldJournalId = journalId;
 		journalId = newJournalId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID, oldJournalId, journalId));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID, oldJournalId, journalId));
 	}
 
 	/**
@@ -596,7 +596,7 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				return ((InternalEList<?>)getJournalEntries()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -610,34 +610,34 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				return getJournalEntries();
-			case DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				return getReferenceNumber();
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				return getJournalDate();
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				return getSession();
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				if (resolve) return getDriver();
 				return basicGetDriver();
-			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				if (resolve) return getRoute();
 				return basicGetRoute();
-			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
 				if (resolve) return getFarmContainer();
 				return basicGetFarmContainer();
-			case DairyPackage.COLLECTION_JOURNAL__BIN:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
 				if (resolve) return getBin();
 				return basicGetBin();
-			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				if (resolve) return getVehicle();
 				return basicGetVehicle();
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL:
 				return getDriverTotal();
-			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				return getRecordTotal();
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				return getJournalId();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -652,41 +652,41 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
 				getJournalEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				setJournalDate((Date)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				setSession((Session)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				setDriver((Employee)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				setRoute((Route)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
 				setFarmContainer((Container)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__BIN:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
 				setBin((DairyContainer)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				setVehicle((Vehicle)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL:
 				setDriverTotal((BigDecimal)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				setRecordTotal((BigDecimal)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				setJournalId((Long)newValue);
 				return;
 		}
@@ -701,40 +701,40 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				setJournalDate(JOURNAL_DATE_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				setSession(SESSION_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				setDriver((Employee)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				setRoute((Route)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
 				setFarmContainer((Container)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__BIN:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
 				setBin((DairyContainer)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				setVehicle((Vehicle)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL:
 				setDriverTotal(DRIVER_TOTAL_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				setRecordTotal(RECORD_TOTAL_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				setJournalId(JOURNAL_ID_EDEFAULT);
 				return;
 		}
@@ -749,29 +749,29 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ENTRIES:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				return journalEntries != null && !journalEntries.isEmpty();
-			case DairyPackage.COLLECTION_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_DATE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				return JOURNAL_DATE_EDEFAULT == null ? journalDate != null : !JOURNAL_DATE_EDEFAULT.equals(journalDate);
-			case DairyPackage.COLLECTION_JOURNAL__SESSION:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				return session != SESSION_EDEFAULT;
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				return driver != null;
-			case DairyPackage.COLLECTION_JOURNAL__ROUTE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				return route != null;
-			case DairyPackage.COLLECTION_JOURNAL__FARM_CONTAINER:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
 				return farmContainer != null;
-			case DairyPackage.COLLECTION_JOURNAL__BIN:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
 				return bin != null;
-			case DairyPackage.COLLECTION_JOURNAL__VEHICLE:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				return vehicle != null;
-			case DairyPackage.COLLECTION_JOURNAL__DRIVER_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL:
 				return DRIVER_TOTAL_EDEFAULT == null ? driverTotal != null : !DRIVER_TOTAL_EDEFAULT.equals(driverTotal);
-			case DairyPackage.COLLECTION_JOURNAL__RECORD_TOTAL:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
-			case DairyPackage.COLLECTION_JOURNAL__JOURNAL_ID:
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
 		}
 		return super.eIsSet(featureID);
@@ -803,4 +803,4 @@ public class CollectionJournalImpl extends EObjectImpl implements CollectionJour
 		return result.toString();
 	}
 
-} //CollectionJournalImpl
+} //CollectionJournalPageImpl

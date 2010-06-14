@@ -2,7 +2,7 @@ package com.agritrace.edairy.desktop.operations.services.collections;
 
 import java.util.List;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -15,13 +15,13 @@ import com.agritrace.edairy.desktop.operations.services.employee.EmployeeReposit
 
 public class CollectionRepository extends DairyRepository implements ICollectionRepository {
 
-	HibernateRepository<CollectionJournal> collectionRepository = new HibernateRepository<CollectionJournal>() {
-		@Override protected Class<CollectionJournal> getClassType() { return CollectionJournal.class; } 
+	HibernateRepository<CollectionJournalPage> collectionRepository = new HibernateRepository<CollectionJournalPage>() {
+		@Override protected Class<CollectionJournalPage> getClassType() { return CollectionJournalPage.class; } 
 		};
 	EmployeeRepository empRepo = new EmployeeRepository();
 
 	@Override
-	public void addCollectionJournal(CollectionJournal newJournal) {
+	public void addCollectionJournal(CollectionJournalPage newJournal) {
 		collectionRepository.saveNew(newJournal);
 	}
 

@@ -341,12 +341,12 @@ public interface CollectionJournalLine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Collection Journal</em>' reference.
-	 * @see #setCollectionJournal(CollectionJournal)
+	 * @see #setCollectionJournal(CollectionJournalPage)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_CollectionJournal()
 	 * @model
 	 * @generated
 	 */
-	CollectionJournal getCollectionJournal();
+	CollectionJournalPage getCollectionJournal();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}' reference.
@@ -356,7 +356,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @see #getCollectionJournal()
 	 * @generated
 	 */
-	void setCollectionJournal(CollectionJournal value);
+	void setCollectionJournal(CollectionJournalPage value);
 
 	/**
 	 * Returns the value of the '<em><b>Rejected</b></em>' attribute.

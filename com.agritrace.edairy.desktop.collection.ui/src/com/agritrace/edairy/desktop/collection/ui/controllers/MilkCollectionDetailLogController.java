@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
@@ -49,7 +49,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private IActionRidget  setPageButton;
 	private IActionRidget  addPageButton;
 	
-	private CollectionJournal currentCollectionJournal;
+	private CollectionJournalPage currentCollectionJournal;
 	private WritableValue pageValue = new WritableValue(null, Integer.class);
 	private ICollectionRepository journalRepository = new CollectionRepository();
 	

@@ -2,7 +2,7 @@ package com.agritrace.edairy.desktop.operations.services.collections;
 
 import java.util.List;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -20,7 +20,7 @@ public interface ICollectionRepository {
 
 	List<Employee> getEmployees(String string);
 
-	void addCollectionJournal(CollectionJournal newJournal);
+	void addCollectionJournal(CollectionJournalPage newJournal);
 
 	Membership getMembershipById(String memberId);
 

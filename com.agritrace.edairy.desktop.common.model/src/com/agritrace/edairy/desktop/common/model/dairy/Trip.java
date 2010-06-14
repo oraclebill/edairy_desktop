@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface Trip extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Collections</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Collections</em>' reference list isn't clear,
@@ -47,7 +47,7 @@ public interface Trip extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<CollectionJournal> getCollections();
+	EList<CollectionJournalPage> getCollections();
 
 	/**
 	 * Returns the value of the '<em><b>Deliveries</b></em>' reference list.

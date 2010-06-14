@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -308,7 +308,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 					@Override
 					public void callback() {
-						createAndSaveCollectionJournal();
+						createAndSaveCollectionJournalPage();
 					}
 				});
 
@@ -406,9 +406,9 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 	}
 
-	private void createAndSaveCollectionJournal() {
-		final CollectionJournal newJournal = DairyFactory.eINSTANCE
-				.createCollectionJournal();
+	private void createAndSaveCollectionJournalPage() {
+		final CollectionJournalPage newJournal = DairyFactory.eINSTANCE
+				.createCollectionJournalPage();
 		newJournal.setDriver((Employee) driverRidget.getSelection());
 		newJournal.setSession((Session) sessionRidget.getSelection());
 		newJournal.setRoute((Route) routeRidget.getSelection());
