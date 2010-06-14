@@ -436,7 +436,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 		newJournal.getJournalEntries().addAll(records);
 
-		dairyRepo.addCollectionJournal(newJournal);
+		dairyRepo.addJournalPage(newJournal);
 		setSubGroupsVisible(false);
 	}
 

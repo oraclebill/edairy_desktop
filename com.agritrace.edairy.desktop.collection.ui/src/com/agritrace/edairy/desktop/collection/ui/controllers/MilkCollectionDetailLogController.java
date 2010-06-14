@@ -49,7 +49,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private IActionRidget  setPageButton;
 	private IActionRidget  addPageButton;
 	
-	private CollectionJournalPage currentCollectionJournal;
+	private CollectionJournalPage currentJournalPage;
 	private WritableValue pageValue = new WritableValue(null, Integer.class);
 	private ICollectionRepository journalRepository = new CollectionRepository();
 	
@@ -93,17 +93,20 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	@Override
 	public void afterBind() {
 		INavigationNode<?> node = getNavigationNode();
-		Set<?> set = node.getActions();
-		Object valu = getContext(null);
+		Object journalPage = node.getContext("JOURNAL_PAGE_ID");
+		if (journalPage != null && journalPage instanceof String ) {
+			String pageId = (String) journalPage;
+			currentJournalPage = journalRepository.getJournalPage(pageId);			
+		}
 
-		assert(currentCollectionJournal != null);
+		assert(currentJournalPage != null);
 		
-		book.setText(currentCollectionJournal.getReferenceNumber());
-		date.setText(DateTimeUtils.DATE_FORMAT.format(currentCollectionJournal.getJournalDate()));
-		session.setText(currentCollectionJournal.getSession().getName());
-		route.setText(currentCollectionJournal.getRoute().getName());
-		driver.setText(currentCollectionJournal.getDriver().getFamilyName());
-		vehicle.setText(currentCollectionJournal.getVehicle().getLogBookNumber());
+		book.setText(currentJournalPage.getRoute().getName());
+		date.setText(DateTimeUtils.DATE_FORMAT.format(currentJournalPage.getJournalDate()));
+		session.setText(currentJournalPage.getSession().getName());
+		route.setText(currentJournalPage.getRoute().getName());
+		driver.setText(currentJournalPage.getDriver().getFamilyName());
+		vehicle.setText(currentJournalPage.getVehicle().getLogBookNumber());
 		
 		currentPage.bindToModel(pageValue);
 //		currentPage.getValue()
@@ -141,7 +144,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	
 	@Override
 	protected List<CollectionJournalLine> getFilteredResult() {
-		List<CollectionJournalLine> allJournalLines = currentCollectionJournal.getJournalEntries();
+		List<CollectionJournalLine> allJournalLines = currentJournalPage.getJournalEntries();
 		List<CollectionJournalLine> filteredJournals = new ArrayList<CollectionJournalLine>();
 		
 		for ( CollectionJournalLine cj : allJournalLines ) {
