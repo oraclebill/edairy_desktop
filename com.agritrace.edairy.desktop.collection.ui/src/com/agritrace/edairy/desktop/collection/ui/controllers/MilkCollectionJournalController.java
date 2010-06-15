@@ -315,7 +315,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		totalLabelRidget = getRidget(ILabelRidget.class,
 				ViewWidgetId.totalLabel);
 		totalLabelRidget.bindToModel(PojoObservables.observeValue(totalValue,
-				"total"));
+		"total"));
 		totalLabelRidget.updateFromModel();
 
 	}

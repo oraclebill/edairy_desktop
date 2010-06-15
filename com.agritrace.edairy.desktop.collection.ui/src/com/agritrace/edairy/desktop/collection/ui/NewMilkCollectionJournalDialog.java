@@ -31,7 +31,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.member.ui.views.EMFObjectUtil;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
@@ -41,12 +40,16 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo vehicleCombo;
 	private CCombo sessionCombo;
 	private CCombo driverCombo;
-	
-	private final DairyRepository dairyRepository = new DairyRepository(); 
+
+	private final DairyRepository dairyRepository = new DairyRepository();
 	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
 
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
+	}
+
+	public CollectionJournalPage getNewJournalPage() {
+		return newJournalPage;
 	}
 
 	@Override
@@ -59,41 +62,40 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		Composite buffer = (Composite) super.createDialogArea(parent);
-		Composite workArea = UIControlsFactory.createComposite(buffer);
+		final Composite buffer = (Composite) super.createDialogArea(parent);
+		final Composite workArea = UIControlsFactory.createComposite(buffer);
 		workArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		// workArea.setLayout(new GridLayout(3, true));
 		{
-			Label label = UIControlsFactory.createLabel(workArea, "Date");
+			final Label label = UIControlsFactory.createLabel(workArea, "Date");
 			datePicker = UIControlsFactory.createDatePickerComposite(workArea, "date-picker");
 			((GridData) datePicker.getTextfield().getLayoutData()).grabExcessVerticalSpace = false;
-			Label filler = UIControlsFactory.createLabel(workArea, "");
+			final Label filler = UIControlsFactory.createLabel(workArea, "");
 		}
 		{
-			Label label = UIControlsFactory.createLabel(workArea, "Route");
+			final Label label = UIControlsFactory.createLabel(workArea, "Route");
 			routeCombo = UIControlsFactory.createCCombo(workArea, "route");
-			Label filler = UIControlsFactory.createLabel(workArea, "");
+			final Label filler = UIControlsFactory.createLabel(workArea, "");
 		}
 		{
-			Label label = UIControlsFactory.createLabel(workArea, "Vehicle");
+			final Label label = UIControlsFactory.createLabel(workArea, "Vehicle");
 			vehicleCombo = UIControlsFactory.createCCombo(workArea, "vehicle");
-			Label filler = UIControlsFactory.createLabel(workArea, "");
+			final Label filler = UIControlsFactory.createLabel(workArea, "");
 		}
 		{
-			Label label = UIControlsFactory.createLabel(workArea, "Session");
+			final Label label = UIControlsFactory.createLabel(workArea, "Session");
 			sessionCombo = UIControlsFactory.createCCombo(workArea, "sesison");
-			Label filler = UIControlsFactory.createLabel(workArea, "");
+			final Label filler = UIControlsFactory.createLabel(workArea, "");
 		}
 		{
-			Label label = UIControlsFactory.createLabel(workArea, "Driver");
+			final Label label = UIControlsFactory.createLabel(workArea, "Driver");
 			driverCombo = UIControlsFactory.createCCombo(workArea, "driver");
-			Label filler = UIControlsFactory.createLabel(workArea, "");
+			final Label filler = UIControlsFactory.createLabel(workArea, "");
 		}
 		GridLayoutFactory.swtDefaults().numColumns(3).equalWidth(true).generateLayout(workArea);
 		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL);
 
 		configureRidgets();
-		bindRidgets();
 
 		return buffer;
 	}
@@ -120,45 +122,39 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	private void configureRidgets() {
 		// crate ridgets
-		IDateTimeRidget dateTime = (IDateTimeRidget)SwtRidgetFactory.createRidget(datePicker);
-		IComboRidget route = (IComboRidget)SwtRidgetFactory.createRidget(routeCombo);
-		IComboRidget vehicle = (IComboRidget)SwtRidgetFactory.createRidget(vehicleCombo);
-		IComboRidget session = (IComboRidget)SwtRidgetFactory.createRidget(sessionCombo);
-		IComboRidget driver = (IComboRidget)SwtRidgetFactory.createRidget(driverCombo);
-		
+		final IDateTimeRidget dateTime = (IDateTimeRidget)SwtRidgetFactory.createRidget(datePicker);
+		final IComboRidget route = (IComboRidget)SwtRidgetFactory.createRidget(routeCombo);
+		final IComboRidget vehicle = (IComboRidget)SwtRidgetFactory.createRidget(vehicleCombo);
+		final IComboRidget session = (IComboRidget)SwtRidgetFactory.createRidget(sessionCombo);
+		final IComboRidget driver = (IComboRidget)SwtRidgetFactory.createRidget(driverCombo);
+
 		// bind date
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
 		dateTime.setDate(new Date());
-		
+
 		// bind route
-		route.bindToModel(new WritableList(dairyRepository.getRoutes(), Route.class), 
-				Route.class, "getName", 
+		route.bindToModel(new WritableList(dairyRepository.getRoutes(), Route.class),
+				Route.class, "getName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
 		route.setMandatory(true);
-		
+
 		// bind vehicle
-		vehicle.bindToModel(new WritableList(dairyRepository.getVehicles(), Vehicle.class), 
-				Vehicle.class, "getLogBookNumber", 
+		vehicle.bindToModel(new WritableList(dairyRepository.getVehicles(), Vehicle.class),
+				Vehicle.class, "getLogBookNumber",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
 		vehicle.setMandatory(true);
-		
+
 		// bind session
-		session.bindToModel(Observables.staticObservableList(Arrays.asList(Session.values(), Session.class)), 
-				Session.class, "getName", 
+		session.bindToModel(Observables.staticObservableList(Arrays.asList(Session.values(), Session.class)),
+				Session.class, "getName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
 		session.setMandatory(true);
-		
+
 		// bind driver
-		driver.bindToModel(new WritableList(dairyRepository.getEmployees("Driver"), Employee.class), 
-				Employee.class, "getFamilyName", 
+		driver.bindToModel(new WritableList(dairyRepository.getEmployees("Driver"), Employee.class),
+				Employee.class, "getFamilyName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
 		driver.setMandatory(true);
-		
-		
-	}
-	
-	private void bindRidgets() {
-		
 	}
 
 }
