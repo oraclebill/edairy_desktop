@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.*;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.RouteEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
 
@@ -51,6 +52,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	private final SearchBean searchBean = new SearchBean();
 	private ITextRidget name;
 	private ITextRidget description;
+	private DairyRepository dairyRepo = new DairyRepository();
 
 	public RouteListController() {
 		setRepository(new RouteRepository());

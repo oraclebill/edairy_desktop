@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
 public interface ICollectionRepository {
 
-	List<Route> getRoutes();
+	List<Route> allRoutes();
 
 	List<DairyContainer> getDairyBins();
 

@@ -73,7 +73,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 	private Dairy localDairy;
 	private int memberCount;
-	private boolean newDairy = false;
+	private boolean newDairy = true;
 
 
 	class DairyProfileSaveAction implements IActionListener {

@@ -364,7 +364,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	}
 
 	private List<Route> getRoutesList() {
-		return dairyRepo.getRoutes();
+		return dairyRepo.allRoutes();
 	}
 
 	private List<DairyContainer> getBins() {

@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jface.window.Window;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.*;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -27,7 +31,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IToggleButtonRidget mprMissing;
 	private IToggleButtonRidget suspended;
 	private IToggleButtonRidget rejected;
-
+	
+	private DairyRepository dairyRepository = new DairyRepository();
 
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
@@ -43,7 +48,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 
-		filterBean.setRoutes(new DairyRepository().getRoutes());
+		filterBean.setRoutes(new DairyRepository().allRoutes());
 	}
 
 	@Override
@@ -88,6 +93,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		return filteredJournals;
 	}
 
+	
 	@Override
 	protected RecordDialog<CollectionJournalPage, ?> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
@@ -95,4 +101,23 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 
+	@Override
+	protected void handleNewItemAction() {
+		NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
+//		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
+//		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
+
+		int returnCode = dialog.open();
+		System.err.println("return code : " + returnCode);
+		if (Window.OK == returnCode) {	
+			CollectionJournalPage newPage = dialog.getNewJournalPage();
+			getRepository().saveNew(newPage);
+			// TODO: attach page to dairy.
+//			Dairy dairy = dairyRepository.getLocalDairy();
+//			dairy.getCollectionJournals().add(newPage);
+//			dairyRepository.update( dairy );
+			getNavigationNode().addChild(null);
+		}
+		refreshTableContents();		
+	}
 }

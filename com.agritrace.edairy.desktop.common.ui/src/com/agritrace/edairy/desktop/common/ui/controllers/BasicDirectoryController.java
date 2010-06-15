@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
@@ -99,7 +100,12 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
-		table.addDoubleClickListener(viewAction);
+		table.addDoubleClickListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleViewItemAction();
+			}			
+		});
 				
 		ColumnFormatter[] formatters = getTableColumnFormatters();
 		for ( int i = 0; i < formatters.length; i++ ) {

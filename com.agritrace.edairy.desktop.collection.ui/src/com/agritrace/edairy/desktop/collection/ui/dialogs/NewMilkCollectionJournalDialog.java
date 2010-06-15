@@ -1,7 +1,9 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -10,7 +12,9 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.beans.common.TypedBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
@@ -25,12 +29,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
@@ -42,8 +48,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo driverCombo;
 
 	private final DairyRepository dairyRepository = new DairyRepository();
-	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
-
+	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();	
+	
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
 	}
@@ -121,40 +127,47 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	private void configureRidgets() {
-		// crate ridgets
-		final IDateTimeRidget dateTime = (IDateTimeRidget)SwtRidgetFactory.createRidget(datePicker);
+		// create/configure ridgets
+		final IDateTextRidget dateTime = (IDateTextRidget)SwtRidgetFactory.createRidget(datePicker);
 		final IComboRidget route = (IComboRidget)SwtRidgetFactory.createRidget(routeCombo);
 		final IComboRidget vehicle = (IComboRidget)SwtRidgetFactory.createRidget(vehicleCombo);
 		final IComboRidget session = (IComboRidget)SwtRidgetFactory.createRidget(sessionCombo);
 		final IComboRidget driver = (IComboRidget)SwtRidgetFactory.createRidget(driverCombo);
 
+		// configure ridgets
+		dateTime.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		dateTime.setMandatory(true);
+		route.setMandatory(true);
+//		route.setOutputOnly(true);
+		vehicle.setMandatory(true);
+		session.setMandatory(true);
+		driver.setMandatory(true);
+
+		// bind ridgets
 		// bind date
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
-		dateTime.setDate(new Date());
+		dateTime.setText(DateTimeUtils.DATE_FORMAT.format(new Date()));
 
-		// bind route
-		route.bindToModel(new WritableList(dairyRepository.getRoutes(), Route.class),
+		route.bindToModel(new WritableList(dairyRepository.allRoutes(), Route.class),
 				Route.class, "getName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
-		route.setMandatory(true);
-
-		// bind vehicle
 		vehicle.bindToModel(new WritableList(dairyRepository.getVehicles(), Vehicle.class),
 				Vehicle.class, "getLogBookNumber",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
-		vehicle.setMandatory(true);
-
-		// bind session
 		session.bindToModel(Observables.staticObservableList(Arrays.asList(Session.values(), Session.class)),
 				Session.class, "getName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
-		session.setMandatory(true);
-
-		// bind driver
 		driver.bindToModel(new WritableList(dairyRepository.getEmployees("Driver"), Employee.class),
 				Employee.class, "getFamilyName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
-		driver.setMandatory(true);
+		
+		
+		//dateTime.updateFromModel();
+		route.updateFromModel();
+		vehicle.updateFromModel();
+		session.updateFromModel();
+		driver.updateFromModel();
+		
 	}
 
 }

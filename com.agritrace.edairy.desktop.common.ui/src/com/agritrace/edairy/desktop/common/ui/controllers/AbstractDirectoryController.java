@@ -29,59 +29,6 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
  */
 public abstract class AbstractDirectoryController<T extends EObject> extends SubModuleController {
 
-	private final class ApplyFilterAction implements IActionListener {
-		@Override
-		public void callback() {
-			// Rebind the updateFromModel to refresh the tables
-			refreshTableContents();
-			table.updateFromModel();
-		}
-	}
-
-	private final class NewItemAction implements IActionListener {
-		@Override
-		public void callback() {
-			final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
-			dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
-			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
-
-			final int returnCode = dialog.open();
-			System.err.println("return code : " + returnCode);
-			if (Window.OK == returnCode) {
-				getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
-			}
-			refreshTableContents();
-		}
-	}
-
-	private final class ResetFilterAction implements IActionListener {
-		@Override
-		public void callback() {
-			// Rebind the updateFromModel to refresh the tables
-			resetFilterConditions();
-		}
-	}
-
-	private final class ViewItemAction implements IActionListener {
-		@Override
-		public void callback() {
-			final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
-			dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
-			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
-
-			final int returnCode = dialog.open();
-			if (Window.OK == returnCode) {
-				getRepository().update((T) dialog.getController().getContext(EDITED_OBJECT_ID));
-			}
-			refreshTableContents();
-		}
-	}
-
-	/**
-	 * Dialog style which means the dialog is a dialog to view a new record
-	 * Currently, view/edit are same
-	 */
-	public static final int ACTION_EDIT = 3;
 
 	/**
 	 * Dialog style which means the dialog is a dialog to create a new record
@@ -111,11 +58,6 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	private T selectedEObject;
 
-	protected final IActionListener applyFilterAction = new ApplyFilterAction();
-
-	protected IActionListener newAction = new NewItemAction();
-
-	protected final IActionListener resetFilterAction = new ResetFilterAction();
 	protected final ISelectionListener selectionListener = new ISelectionListener() {
 
 		@Override
@@ -126,7 +68,6 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	};
 	protected ITableRidget table;
 	protected final List<T> tableContents = new ArrayList<T>();
-	protected IActionListener viewAction = new ViewItemAction();
 
 	/**
 	 * Default controller
@@ -196,21 +137,41 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	private void configureFilterRidgetsInternal() {
 		searchBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_SEARCH);
 		if (searchBtnRidget != null) {
-			searchBtnRidget.addListener(applyFilterAction);
+			searchBtnRidget.addListener(new IActionListener() {
+				@Override
+				public void callback() {
+					handleApplyFilterAction();					
+				}
+			});
 		}
 
 		resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
 		if (resetBtnRidget != null) {
-			resetBtnRidget.addListener(resetFilterAction);
+			resetBtnRidget.addListener(new IActionListener() {
+				@Override
+				public void callback() {
+					handleResetFilterAction();					
+				}
+			});
 		}
 	}
 
 	protected void configureButtonsRidget() {
 		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
-		newBtnRidget.addListener(newAction);
+		newBtnRidget.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleNewItemAction();					
+			}
+		});
 		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(false);
-		viewBtnRidget.addListener(viewAction);
+		viewBtnRidget.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleViewItemAction();					
+			}
+		});
 	}
 
 	abstract protected void configureFilterRidgets();
@@ -220,7 +181,12 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
-		table.addDoubleClickListener(viewAction);
+		table.addDoubleClickListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleViewItemAction();					
+			}
+		});
 		table.bindToModel(new WritableList(tableContents, getEntityClass()), getEntityClass(),
 				getTableColumnPropertyNames(), getTableColumnHeaders());
 
@@ -287,5 +253,42 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	 * Reset conditions
 	 */
 	abstract protected void resetFilterConditions();
+
+	protected void handleApplyFilterAction() {
+		// Rebind the updateFromModel to refresh the tables
+		refreshTableContents();
+		table.updateFromModel();
+	}
+	
+	protected void handleResetFilterAction() {
+		// Rebind the updateFromModel to refresh the tables
+		resetFilterConditions();
+	}
+
+
+
+	protected void handleNewItemAction() {
+		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
+		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
+
+		final int returnCode = dialog.open();
+		if (Window.OK == returnCode) {
+			getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+		}
+		refreshTableContents();
+	}
+
+	protected void handleViewItemAction() {
+		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+		dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
+		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
+
+		final int returnCode = dialog.open();
+		if (Window.OK == returnCode) {
+			getRepository().update((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+		}
+		refreshTableContents();
+	}
 
 }
