@@ -20,8 +20,8 @@ import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailC
  */
 public class VehicleLogView extends SubModuleView {
 
-	public static final String ID = "dairy.vehicle.masterdetail.view";
 	public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
+	public static final String ID = "dairy.vehicle.masterdetail.view";
 
 	@Override
 	protected void basicCreatePartControl(Composite panel) {
@@ -32,8 +32,7 @@ public class VehicleLogView extends SubModuleView {
 			@Override
 			protected void createDetails(Composite parent) {
 				GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL)
-						.applyTo(
-								new VehicleLogDetailComposite(parent));
+						.applyTo(new VehicleLogDetailComposite(parent));
 				GridLayoutFactory.fillDefaults().generateLayout(parent);
 			}
 		};
