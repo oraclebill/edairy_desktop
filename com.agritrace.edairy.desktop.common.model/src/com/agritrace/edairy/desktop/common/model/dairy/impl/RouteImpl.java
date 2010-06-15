@@ -13,15 +13,18 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -199,7 +202,7 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 */
 	public EList<DairyLocation> getStops() {
 		if (stops == null) {
-			stops = new EObjectResolvingEList<DairyLocation>(DairyLocation.class, this, DairyPackage.ROUTE__STOPS);
+			stops = new EObjectWithInverseResolvingEList<DairyLocation>(DairyLocation.class, this, DairyPackage.ROUTE__STOPS, DairyPackage.DAIRY_LOCATION__ROUTE);
 		}
 		return stops;
 	}
@@ -244,6 +247,35 @@ public class RouteImpl extends EObjectImpl implements Route {
 		description = newDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.ROUTE__STOPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getStops()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.ROUTE__STOPS:
+				return ((InternalEList<?>)getStops()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
