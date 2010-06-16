@@ -19,8 +19,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.operations.services.collections.CollectionRepository;
-import com.agritrace.edairy.desktop.operations.services.collections.ICollectionRepository;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
 
@@ -41,7 +41,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 
 	private CollectionJournalPage currentJournalPage;
 	private final WritableValue pageValue = new WritableValue(null, Integer.class);
-	private final ICollectionRepository journalRepository = new CollectionRepository();
+	private final IDairyRepository journalRepository = new DairyRepository();
 
 
 	public MilkCollectionDetailLogController() {
@@ -86,7 +86,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		final Object journalPage = node.getContext("JOURNAL_PAGE_ID");
 		if ((journalPage != null) && (journalPage instanceof String) ) {
 			final String pageId = (String) journalPage;
-			currentJournalPage = journalRepository.getJournalPage(pageId);
+			currentJournalPage = journalRepository.getJournalPageById(pageId);
 		}
 
 		assert(currentJournalPage != null);

@@ -42,8 +42,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.validators.StringNumberValidator;
-import com.agritrace.edairy.desktop.operations.services.collections.CollectionRepository;
-import com.agritrace.edairy.desktop.operations.services.collections.ICollectionRepository;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MilkCollectionJournalController extends SubModuleController {
 
@@ -86,7 +86,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	private final TotalRecordsValue totalValue = new TotalRecordsValue();
 
-	ICollectionRepository dairyRepo = new CollectionRepository();
+	IDairyRepository dairyRepo = new DairyRepository();
 
 	public MilkCollectionJournalController() {
 		super();
@@ -368,15 +368,15 @@ public class MilkCollectionJournalController extends SubModuleController {
 	}
 
 	private List<DairyContainer> getBins() {
-		return dairyRepo.getDairyBins();
+		return dairyRepo.allDairyContainers();
 	}
 
 	private List<Vehicle> getVehiclesList() {
-		return dairyRepo.getVehicles();
+		return dairyRepo.allVehicles();
 	}
 
 	private List<Employee> getDriverList() {
-		return dairyRepo.getEmployees("Driver");
+		return dairyRepo.employeesByPosition("Driver");
 	}
 
 	private void updateRecordLineNumbers() {
@@ -435,7 +435,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 		newJournal.getJournalEntries().addAll(records);
 
-		dairyRepo.addJournalPage(newJournal);
+		dairyRepo.saveNewJournalPage(newJournal);
 		setSubGroupsVisible(false);
 	}
 
@@ -480,7 +480,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 
 		final String canId = canText.getText();
-		final Container can = dairyRepo.getContainerById(canId);
+		final Container can = dairyRepo.getFarmContainerById(canId);
 		if (can == null) {
 			if (!MessageDialog
 					.openConfirm(

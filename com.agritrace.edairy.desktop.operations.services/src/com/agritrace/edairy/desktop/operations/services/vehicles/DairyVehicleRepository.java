@@ -19,4 +19,8 @@ public class DairyVehicleRepository implements IVehicleRepository {
 		return hbRepository.all();
 	}
 
+	@Override
+	public void saveNew(Vehicle newItem) {
+		hbRepository.saveNew(newItem);
+	}
 }

@@ -8,4 +8,6 @@ public interface IVehicleRepository {
 
 	Collection<Vehicle> all();
 
+	void saveNew(Vehicle newItem);
+
 }

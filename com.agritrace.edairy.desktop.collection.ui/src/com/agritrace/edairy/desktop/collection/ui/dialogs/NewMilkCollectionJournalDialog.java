@@ -1,21 +1,16 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
-import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.beans.common.TypedBean;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
-import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -29,7 +24,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -38,6 +32,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
@@ -47,7 +42,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo sessionCombo;
 	private CCombo driverCombo;
 
-	private final DairyRepository dairyRepository = new DairyRepository();
+	private final IDairyRepository dairyRepository = new DairyRepository();
 	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();	
 	
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
@@ -151,13 +146,13 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		route.bindToModel(new WritableList(dairyRepository.allRoutes(), Route.class),
 				Route.class, "getName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
-		vehicle.bindToModel(new WritableList(dairyRepository.getVehicles(), Vehicle.class),
+		vehicle.bindToModel(new WritableList(dairyRepository.allVehicles(), Vehicle.class),
 				Vehicle.class, "getLogBookNumber",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
 		session.bindToModel(new WritableList(Arrays.asList(Session.values()), Session.class),
 				Session.class, null,
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
-		driver.bindToModel(new WritableList(dairyRepository.getEmployees("Driver"), Employee.class),
+		driver.bindToModel(new WritableList(dairyRepository.employeesByPosition("Driver"), Employee.class),
 				Employee.class, "getFamilyName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
 		

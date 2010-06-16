@@ -39,6 +39,11 @@ public class VehicleLogViewController extends SubModuleController {
 		private final Vehicle workingCopy = createWorkingCopy();
 
 		@Override
+		public void itemCreated(Object newItem) {
+			vehicleRepository.saveNew((Vehicle)newItem);
+		}
+
+		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			bindVehicleInfo(container);
 			bindAssetInfo(container, workingCopy.getAssetInfo());

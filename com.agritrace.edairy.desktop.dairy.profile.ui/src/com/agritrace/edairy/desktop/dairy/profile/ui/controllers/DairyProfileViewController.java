@@ -80,11 +80,11 @@ public class DairyProfileViewController extends SubModuleController {
 		@Override
 		public void callback() {
 			if (newDairy) {
-				dairyRepository.saveNew(localDairy);
+				dairyRepository.saveNewDairy(localDairy);
 				newDairy = false;
 			}
 			else {
-				dairyRepository.update(localDairy);
+				dairyRepository.updateDairy(localDairy);
 			}
 			updateBindings();
 		}
@@ -94,7 +94,7 @@ public class DairyProfileViewController extends SubModuleController {
 		@Override
 		public void callback() {
 			if ( !newDairy ) {
-				localDairy = dairyRepository.findByKey(localDairy.getCompanyId());
+				localDairy = dairyRepository.getDairyById(localDairy.getCompanyId());
 			}
 			else {
 				localDairy = dairyRepository.reloadLocalDairy();
