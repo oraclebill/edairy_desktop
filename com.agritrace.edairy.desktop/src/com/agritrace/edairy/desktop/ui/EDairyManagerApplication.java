@@ -21,11 +21,12 @@ import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionDetailLogController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkSubAppConstants;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
-import com.agritrace.edairy.desktop.dairy.employees.ui.controllers.StaffInfoViewController;
-import com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView;
+import com.agritrace.edairy.desktop.dairy.containers.ui.controllers.ContainerLogViewController;
+import com.agritrace.edairy.desktop.dairy.containers.ui.views.ContainerLogView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
@@ -47,9 +48,11 @@ import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
@@ -59,14 +62,12 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
-import com.agritrace.edairy.desktop.operations.ui.views.*;
-import com.agritrace.edairy.desktop.operations.ui.controllers.*;
 
 /**
  * @author oraclebill
  * 
  */
-public class EDairyManagerApplication extends SwtApplication {
+public class EDairyManagerApplication extends SwtApplication  {
 
 	// labels (translatable)
 	private static final String LABEL_SYSTEM = "System";
@@ -85,16 +86,6 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String MODULE_GROUP_HOME = "home.navgroup";//$NON-NLS-1$
 	private static final String MODULE_HOME = "desktop.home.module";//$NON-NLS-1$
 	private static final String SUBMODULE_APPLICATION_HOME = "desktop.home.view";//$NON-NLS-1$
-
-	// MILK
-	private static final String SUBAPP_MILK = "com.agritrace.edairy.desktop.milk";//$NON-NLS-1$
-	private static final String MODULE_GROUP_MILK = "milk.navgroup";//$NON-NLS-1$
-	private static final String MODULE_MILK_COLLECTIONS = "edm.milk.collection";//$NON-NLS-1$
-	private static final String MODULE_MILK_DELIVERY = "edm.milk.delivery";//$NON-NLS-1$
-	private static final String SUBMODULE_MILK_DELIVERY_REGISTER = "edm.milk.delivery.log";//$NON-NLS-1$
-	private static final String SUBMODULE_MILK_COLLECTIONS_REGISTER = "edm.milk.collection.log";//$NON-NLS-1$
-	private static final String SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER = "edm.milkcollection.detail.log";//$NON-NLS-1$
-	private static final String SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY = "edm.milk.collection.entry";//$NON-NLS-1$
 
 	// MEMBERSHIP
 	private static final String SUBAPP_MEMBERS = "com.agritrace.edairy.desktop.members";//$NON-NLS-1$
@@ -132,29 +123,26 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String MODULE_OPERATIONS = "edm.dairy";
 	private static final String MODULE_OPERATIONS_ROUTES = "edm.routes";
 	private static final String MODULE_OPERATIONS_BRANCH_LOCATIONS = "edm.dairy-locations";
+	private static final String MODULE_OPERATIONS_DAIRY_CONTAINERS = "MODULE_OPERATIONS_DAIRY_CONTAINERS";
 	private static final String SUBMODULE_OPERATIONS_ROUTES = "edm.dairy.routes";
 	private static final String SUBMODULE_OPERATIONS_BRANCH_LOCATIONS = "edm.dairy.branches";
 	private static final String SUBMODULE_OPERATIONS_VEHICLES = "edm.dairy.vehicles";
 	private static final String SUBMODULE_OPERATIONS_EMPLOYEES = "edm.dairy.staff";
 	private static final String SUBMODULE_OPERATIONS_DAIRY_PROFILE = "edm.dairy.info";
+	private static final String SUBMODULE_OPERATIONS_DAIRY_CONTAINERS = "SUBMODULE_OPERATIONS_DAIRY_CONTAINERS"; 
 
 	// SYSTEM ADMIN
 	private static final String SUBAPP_SYSTEM = "com.agritrace.edairy.desktop.system";//$NON-NLS-1$
 	private static final String MODULE_GROUP_SYSTEM = "system.navgroup"; //$NON-NLS-1$
 	private static final String MODULE_SYSTEM = "edm.system";
 
-	// modules
 
-	// submodules
-	
-
-	private static final String TAB_MILK = SUBAPP_MILK; //$NON-NLS-1$
-	private static final String SUBAPP_MEMBERS_VIEWID = SUBAPP_MEMBERS; //$NON-NLS-1$
-	private static final String TAB_FINANCE = SUBAPP_FINANCE; //$NON-NLS-1$
-	private static final String SUBAPP_VETERINARY_VIEWID = SUBAPP_VETERINARY; //$NON-NLS-1$
-	private static final String TAB_OPERATIONS = SUBAPP_OPERATIONS; //$NON-NLS-1$
-	private static final String TAB_REPORTS = SUBAPP_REPORTS; //$NON-NLS-1$
-	private static final String TAB_SYSTEM = SUBAPP_SYSTEM; //$NON-NLS-1$
+	private static final String SUBAPP_MEMBERS_VIEWID = SUBAPP_MEMBERS; 
+	private static final String TAB_FINANCE = SUBAPP_FINANCE; 
+	private static final String SUBAPP_VETERINARY_VIEWID = SUBAPP_VETERINARY; 
+	private static final String TAB_OPERATIONS = SUBAPP_OPERATIONS; 
+	private static final String TAB_REPORTS = SUBAPP_REPORTS; 
+	private static final String TAB_SYSTEM = SUBAPP_SYSTEM;
 
 	public EDairyManagerApplication() {
 		super();
@@ -177,7 +165,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		// ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 
-		final ApplicationNode app = new ApplicationNode(LABEL_APPLICATION); //$NON-NLS-1$
+		final ApplicationNode app = new ApplicationNode(LABEL_APPLICATION); 
 		final WorkareaManager workarea = WorkareaManager.getInstance();
 
 		ISubApplicationNode subAppNode;
@@ -188,7 +176,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// HOME TAB
 		//
 
-		subAppNode = new SubApplicationNode(LABEL_HOME); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(LABEL_HOME); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, SUBAPP_HOME);
 
@@ -198,43 +186,65 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_HOME));
 		subAppNode.addChild(moduleGroupNode);
 
-		moduleNode = NodeFactory.createModule(MODULE_HOME, LABEL_HOME, moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule(SUBMODULE_APPLICATION_HOME, LABEL_HOME, moduleNode, DairyHomeView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleNode = NodeFactory.createModule(MODULE_HOME, LABEL_HOME, moduleGroupNode); 
+		NodeFactory.createSubModule(SUBMODULE_APPLICATION_HOME, LABEL_HOME, moduleNode, DairyHomeView.ID); 
 
 		//
 		// MILK TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_MILK), LABEL_MILK); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(
+				new NavigationNodeId(
+						MilkSubAppConstants.SUBAPP_MILK), LABEL_MILK); 
 		app.addChild(subAppNode);
-		workarea.registerDefinition(subAppNode, TAB_MILK);
+		workarea.registerDefinition(subAppNode, MilkSubAppConstants.SUBAPP_MILK_VIEWID);
 
 		//
 		// COLLECTION MODULE GROUP
 		//
-		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_MILK));
+		moduleGroupNode = new ModuleGroupNode(
+				new NavigationNodeId(
+						MilkSubAppConstants.MODULE_GROUP_MILK));
 		subAppNode.addChild(moduleGroupNode);
 
-		moduleNode = NodeFactory.createModule(MODULE_MILK_COLLECTIONS, "Milk Collection", moduleGroupNode); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(SUBMODULE_MILK_COLLECTIONS_REGISTER, "Collection Log", moduleNode,
-				MilkCollectionLog.ID, MilkCollectionLogController.class);
-		NodeFactory.createSubModule(SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER, "Collection Detail Log", moduleNode,
-				MilkCollectionDetailLog.ID, MilkCollectionDetailLogController.class);
-		NodeFactory.createSubModule(SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY,
-				"Log New Collections", moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleNode = NodeFactory.createModule(
+				MilkSubAppConstants.MODULE_MILK_COLLECTIONS, 
+				"Milk Collection", 
+				moduleGroupNode); 
+		
+		NodeFactory.createSubModule(
+				MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_REGISTER, 
+				"Collection Log", 
+				moduleNode,
+				MilkCollectionLog.ID, 
+				MilkCollectionLogController.class); //$NON-NLS-1$ 
+		
+		NodeFactory.createSubModule(
+				MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER, 
+				"Collection Detail Log", 
+				moduleNode,
+				MilkCollectionDetailLog.ID, 
+				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
+		
+		NodeFactory.createSubModule(
+				MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY,
+				"Log New Collections", 
+				moduleNode, 
+				MilkCollectionJournalView.ID, 
+				MilkCollectionJournalController.class); //$NON-NLS-1$ 
 
 		//
 		// DELIVERY MODULE GROUP
 		//
-		moduleNode = NodeFactory.createModule(MODULE_MILK_DELIVERY, "Milk Deliveries", moduleGroupNode);
-		NodeFactory.createSubModule(SUBMODULE_MILK_DELIVERY_REGISTER, "Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries", moduleGroupNode);
+		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER, "Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ 
 		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
 		// MEMBER TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_MEMBERS), LABEL_MEMBERS); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_MEMBERS), LABEL_MEMBERS); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, SUBAPP_MEMBERS_VIEWID);
 
@@ -245,11 +255,11 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_MEMBERS));
 		subAppNode.addChild(moduleGroupNode);
 
-		moduleNode = NodeFactory.createModule(MODULE_MEMBERS, LABEL_MEMBERS, moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleNode = NodeFactory.createModule(MODULE_MEMBERS, LABEL_MEMBERS, moduleGroupNode); 
 		NodeFactory.createSubModule(SUBMODULE_MEMBER_DIRECTORY,
-				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
+				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController.class); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
-				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
 
 		//
 		// FARM MODULE GROUP
@@ -257,9 +267,9 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId("farms.navgroup"));
 		subAppNode.addChild(moduleGroupNode);
 
-		moduleNode = NodeFactory.createModule(MODULE_FARMS, LABEL_FARMS, moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleNode = NodeFactory.createModule(MODULE_FARMS, LABEL_FARMS, moduleGroupNode); 
 		NodeFactory.createSubModule(SUBMODULE_FARM_DIRECTORY,
-				"Farm Directory", moduleNode, FarmListView.ID, FarmListViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+				"Farm Directory", moduleNode, FarmListView.ID, FarmListViewController.class); //$NON-NLS-1$ 
 		//	NodeFactory.createSubModule("edm.farms.edit", "Register Farm", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
@@ -271,7 +281,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule("edm.livestock", "Livestock", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubModule(SUBMODULE_LIVESTOCK_DIRECTORY,
-				"Livestock Directory", moduleNode, LivestockListView.ID, LiveStockListController.class); //$NON-NLS-1$ //$NON-NLS-2$
+				"Livestock Directory", moduleNode, LivestockListView.ID, LiveStockListController.class); //$NON-NLS-1$ 
 		//	NodeFactory.createSubModule("edm.livestock.edit", "Register Animal", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// Container
@@ -286,7 +296,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// FINANCE TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_FINANCE), LABEL_FINANCE); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_FINANCE), LABEL_FINANCE); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, TAB_FINANCE);
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_FINANCE));
@@ -296,23 +306,23 @@ public class EDairyManagerApplication extends SwtApplication {
 		// FINANCE GROUP
 		//
 
-		final IModuleNode financeMembers = NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		final IModuleNode financeMembers = NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_REGISTER,
-				"Transaction Journal", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+				"Transaction Journal", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY,
-				"Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+				"Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(
 				"edm.finances.mdlog", "Transaction Journal 9", financeMembers, TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory
-				.createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER, "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+				.createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER, "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
-				"Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+				"Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ 
 
 		//
 		// VETERINARY TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_VETERINARY), LABEL_VETERINARY); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_VETERINARY), LABEL_VETERINARY); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, SUBAPP_VETERINARY_VIEWID);
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_VETERINARY));
@@ -322,15 +332,15 @@ public class EDairyManagerApplication extends SwtApplication {
 		// SERVICE REQUESTS GROUP
 		//
 
-		final IModuleNode moduleServices = NodeFactory.createModule(MODULE_VETERINARY, "Requests", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		final IModuleNode moduleServices = NodeFactory.createModule(MODULE_VETERINARY, "Requests", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_VETERINARY_REQUESTS,
-				"Request Log", moduleServices, AnimalHealthRequestView.ID, AnimalHealthRequestViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+				"Request Log", moduleServices, AnimalHealthRequestView.ID, AnimalHealthRequestViewController.class); //$NON-NLS-1$ 
 
 		//
 		// OPERATIONS TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_OPERATIONS), LABEL_OPERATIONS); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_OPERATIONS), LABEL_OPERATIONS); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, TAB_OPERATIONS);
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_OPERATIONS));
@@ -341,32 +351,40 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		{
-			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS, "Dairy", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS, "Dairy", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(
-					SUBMODULE_OPERATIONS_DAIRY_PROFILE, "Profile", moduleSystem, DairyProfileView.ID, DairyProfileViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+					SUBMODULE_OPERATIONS_DAIRY_PROFILE, "Profile", moduleSystem, DairyProfileView.ID, DairyProfileViewController.class); //$NON-NLS-1$ 
 			// NodeFactory
 			// .createSubModule(
 			//							"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory
 					.createSubModule(
-							SUBMODULE_OPERATIONS_EMPLOYEES, "Employees", moduleSystem, EmployeeDirectoryView.ID, EmployeeDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
+							SUBMODULE_OPERATIONS_EMPLOYEES, "Employees", moduleSystem, EmployeeDirectoryView.ID, EmployeeDirectoryController.class); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(
-					SUBMODULE_OPERATIONS_VEHICLES, "Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+					SUBMODULE_OPERATIONS_VEHICLES, "Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ 
 			NodeFactory.createSubModule("edm.dairy.bins", "Containers (Bins)", moduleSystem, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		{
 			final IModuleNode moduleSystem = NodeFactory.createModule(
-					MODULE_OPERATIONS_BRANCH_LOCATIONS, "Dairy Locations", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+					MODULE_OPERATIONS_DAIRY_CONTAINERS, "Dairy Bins", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory
 					.createSubModule(
-							SUBMODULE_OPERATIONS_BRANCH_LOCATIONS, "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
+							SUBMODULE_OPERATIONS_DAIRY_CONTAINERS, "Dairy Bins", moduleSystem, ContainerLogView.ID, ContainerLogViewController.class); //$NON-NLS-1$ 
 
 		}
 		{
-			final IModuleNode moduleRoutes = NodeFactory.createModule(MODULE_OPERATIONS_ROUTES, "Routes", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			final IModuleNode moduleSystem = NodeFactory.createModule(
+					MODULE_OPERATIONS_BRANCH_LOCATIONS, "Dairy Locations", moduleGroupNode); //$NON-NLS-1$ 
+			NodeFactory
+					.createSubModule(
+							SUBMODULE_OPERATIONS_BRANCH_LOCATIONS, "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ 
+
+		}
+		{
+			final IModuleNode moduleRoutes = NodeFactory.createModule(MODULE_OPERATIONS_ROUTES, "Routes", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(
-					SUBMODULE_OPERATIONS_ROUTES, "Routes", moduleRoutes, RouteListView.ID, RouteListController.class); //$NON-NLS-1$ //$NON-NLS-2$
+					SUBMODULE_OPERATIONS_ROUTES, "Routes", moduleRoutes, RouteListView.ID, RouteListController.class); //$NON-NLS-1$ 
 		}
 
 		//
@@ -403,7 +421,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// REPORTS TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_REPORTS), LABEL_REPORTS); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_REPORTS), LABEL_REPORTS); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, TAB_REPORTS);
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_REPORTS));
@@ -413,7 +431,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// REPORTS GRP
 		//
 
-		final IModuleNode moduleReports = NodeFactory.createModule(MODULE_REPORTS, "Reports", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		final IModuleNode moduleReports = NodeFactory.createModule(MODULE_REPORTS, "Reports", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory
 				.createSubModule("edm.reports.intake", "Milk Collection", moduleReports, MilkProductionReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubModule(
@@ -435,13 +453,13 @@ public class EDairyManagerApplication extends SwtApplication {
 		// SYSTEM TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_SYSTEM), LABEL_SYSTEM); //$NON-NLS-1$
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_SYSTEM), LABEL_SYSTEM); 
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, TAB_SYSTEM);
 		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_SYSTEM));
 		subAppNode.addChild(moduleGroupNode);
 
-		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubModule("edm.system.permissions", "Permissions", moduleNode, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 

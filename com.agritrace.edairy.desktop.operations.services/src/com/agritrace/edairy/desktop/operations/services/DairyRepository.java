@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -171,6 +172,11 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public Dairy reloadLocalDairy() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Collection<DairyContainer> allDairyContainers() {
+		return binRepository.all();
 	}
 
 }

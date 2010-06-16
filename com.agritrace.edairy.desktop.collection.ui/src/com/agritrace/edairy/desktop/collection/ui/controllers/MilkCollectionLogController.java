@@ -5,10 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.riena.ui.workarea.IWorkareaDefinition;
+import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
@@ -31,7 +36,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IToggleButtonRidget mprMissing;
 	private IToggleButtonRidget suspended;
 	private IToggleButtonRidget rejected;
-	
+
 	private DairyRepository dairyRepository = new DairyRepository();
 
 	public MilkCollectionLogController() {
@@ -40,8 +45,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		setRepository(new MilkCollectionJournalRepository());
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
-		//		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new RouteNameFormatter() );
-		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE );
+		// addTableColumn("Route",
+		// DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new
+		// RouteNameFormatter() );
+		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE);
 		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
 		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
 		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
@@ -61,11 +68,11 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
 
 		startDate.bindToModel(filterBean, "startDate");
-		endDate.bindToModel(filterBean, "endDate" );
-		route.bindToModel(filterBean, "routes", Route.class, null, filterBean, "route" );
-		mprMissing.bindToModel(filterBean, "mprMissing" );
-		suspended.bindToModel(filterBean, "suspended" );
-		rejected.bindToModel(filterBean, "rejected" );
+		endDate.bindToModel(filterBean, "endDate");
+		route.bindToModel(filterBean, "routes", Route.class, null, filterBean, "route");
+		mprMissing.bindToModel(filterBean, "mprMissing");
+		suspended.bindToModel(filterBean, "suspended");
+		rejected.bindToModel(filterBean, "rejected");
 	}
 
 	@Override
@@ -83,7 +90,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		final List<CollectionJournalPage> allJournals = getRepository().all();
 		final List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
 
-		for ( final CollectionJournalPage cj : allJournals ) {
+		for (final CollectionJournalPage cj : allJournals) {
 			final boolean condition = true;
 			// filter logic goes here...
 			if (condition) {
@@ -93,31 +100,38 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		return filteredJournals;
 	}
 
-	
 	@Override
 	protected RecordDialog<CollectionJournalPage, ?> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
 	protected void handleNewItemAction() {
 		NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
-//		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
-//		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
+		// dialog.getController().setContext(EDITED_OBJECT_ID,
+		// createNewModel());
+		// dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 
 		int returnCode = dialog.open();
 		System.err.println("return code : " + returnCode);
-		if (Window.OK == returnCode) {	
+		if (Window.OK == returnCode) {
 			CollectionJournalPage newPage = dialog.getNewJournalPage();
 			getRepository().saveNew(newPage);
 			// TODO: attach page to dairy.
-//			Dairy dairy = dairyRepository.getLocalDairy();
-//			dairy.getCollectionJournals().add(newPage);
-//			dairyRepository.update( dairy );
-			getNavigationNode().addChild(null);
+			// Dairy dairy = dairyRepository.getLocalDairy();
+			// dairy.getCollectionJournals().add(newPage);
+			// dairyRepository.update( dairy );
+			ISubModuleNode myNode = getNavigationNode();
+			System.err.println("Node:    " + myNode);
+			System.err.println("Actions: " + myNode.getActions());
+			ISubModuleNode childNode = (ISubModuleNode) myNode.getNavigationProcessor().create(myNode,
+					new NavigationNodeId(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER));
+			System.err.println("Child Node: " + childNode);
+			myNode.addChild(childNode);
+			childNode.activate();
+
 		}
-		refreshTableContents();		
+		refreshTableContents();
 	}
 }

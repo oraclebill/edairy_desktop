@@ -66,11 +66,5 @@ public class CommonSubModuleViewController extends SubModuleController {
 		return _eobjs;
 	}
 
-	public void fireListeners(int eventType) {
-		for (final ISubModuleControllerDelegate delegate : this.getSubModuleControllerDelegates()) {
-			delegate.fireListener(eventType);
-		}
-
-	}
 
 }

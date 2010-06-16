@@ -1,8 +1,10 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 
 public interface IDairyRepository {
 
@@ -17,5 +19,7 @@ public interface IDairyRepository {
 	List<Dairy> getAllDairies();
 
 	Dairy reloadLocalDairy();
+
+	Collection<DairyContainer> allDairyContainers();
 
 }

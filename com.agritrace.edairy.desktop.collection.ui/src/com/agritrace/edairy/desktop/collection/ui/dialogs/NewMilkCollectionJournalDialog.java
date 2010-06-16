@@ -154,8 +154,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		vehicle.bindToModel(new WritableList(dairyRepository.getVehicles(), Vehicle.class),
 				Vehicle.class, "getLogBookNumber",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
-		session.bindToModel(Observables.staticObservableList(Arrays.asList(Session.values(), Session.class)),
-				Session.class, "getName",
+		session.bindToModel(new WritableList(Arrays.asList(Session.values()), Session.class),
+				Session.class, null,
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
 		driver.bindToModel(new WritableList(dairyRepository.getEmployees("Driver"), Employee.class),
 				Employee.class, "getFamilyName",
