@@ -31,8 +31,8 @@ public class ContainerLogView extends SubModuleView {
 		final Composite mdComposite = new MasterDetailsComposite(panel, SWT.NONE) {
 			@Override
 			protected void createDetails(Composite parent) {
-				GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL)
-						.applyTo(new ContainerLogDetailComposite(parent));
+				Composite comp = new ContainerLogDetailComposite(parent);
+				GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(comp);
 				GridLayoutFactory.fillDefaults().generateLayout(parent);
 			}
 		};

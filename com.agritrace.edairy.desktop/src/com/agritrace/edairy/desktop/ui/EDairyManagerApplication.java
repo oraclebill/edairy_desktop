@@ -337,12 +337,10 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		{
-			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS, "Dairy Profile", moduleGroupNode); //$NON-NLS-1$ 
+			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS,
+					"Dairy Profile", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_DAIRY_PROFILE,
 					"Dairy Profile", moduleSystem, DairyProfileView.ID, DairyProfileViewController.class); //$NON-NLS-1$ 
-			// NodeFactory
-			// .createSubModule(
-			//							"edm.dairy.branches", "Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		{
@@ -385,7 +383,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 		{
 			final IModuleNode moduleEvents = NodeFactory.createModule("edm.events", "Events", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-			NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//			NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
