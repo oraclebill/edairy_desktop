@@ -75,13 +75,22 @@ public interface DairyPackage extends EPackage {
 	int VEHICLE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Vehicle Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__VEHICLE_ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__REGISTRATION_NUMBER = 0;
+	int VEHICLE__REGISTRATION_NUMBER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -90,7 +99,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__TYPE = 1;
+	int VEHICLE__TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Make</b></em>' attribute.
@@ -99,7 +108,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__MAKE = 2;
+	int VEHICLE__MAKE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Model</b></em>' attribute.
@@ -108,7 +117,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__MODEL = 3;
+	int VEHICLE__MODEL = 4;
 
 	/**
 	 * The feature id for the '<em><b>Engine Number</b></em>' attribute.
@@ -117,7 +126,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__ENGINE_NUMBER = 4;
+	int VEHICLE__ENGINE_NUMBER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Chassis Number</b></em>' attribute.
@@ -126,7 +135,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__CHASSIS_NUMBER = 5;
+	int VEHICLE__CHASSIS_NUMBER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Log Book Number</b></em>' attribute.
@@ -135,7 +144,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__LOG_BOOK_NUMBER = 6;
+	int VEHICLE__LOG_BOOK_NUMBER = 7;
 
 	/**
 	 * The feature id for the '<em><b>Insurance Policy Number</b></em>' attribute.
@@ -144,7 +153,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__INSURANCE_POLICY_NUMBER = 7;
+	int VEHICLE__INSURANCE_POLICY_NUMBER = 8;
 
 	/**
 	 * The feature id for the '<em><b>Insurance Expiration Date</b></em>' attribute.
@@ -153,7 +162,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__INSURANCE_EXPIRATION_DATE = 8;
+	int VEHICLE__INSURANCE_EXPIRATION_DATE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Dominant Colour</b></em>' attribute.
@@ -162,7 +171,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__DOMINANT_COLOUR = 9;
+	int VEHICLE__DOMINANT_COLOUR = 10;
 
 	/**
 	 * The feature id for the '<em><b>Capacity In Tonnes</b></em>' attribute.
@@ -171,7 +180,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__CAPACITY_IN_TONNES = 10;
+	int VEHICLE__CAPACITY_IN_TONNES = 11;
 
 	/**
 	 * The feature id for the '<em><b>Year</b></em>' attribute.
@@ -180,7 +189,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__YEAR = 11;
+	int VEHICLE__YEAR = 12;
 
 	/**
 	 * The feature id for the '<em><b>Driver</b></em>' reference.
@@ -189,7 +198,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__DRIVER = 12;
+	int VEHICLE__DRIVER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Asset Info</b></em>' containment reference.
@@ -198,16 +207,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__ASSET_INFO = 13;
-
-	/**
-	 * The feature id for the '<em><b>Vehicle Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VEHICLE__VEHICLE_ID = 14;
+	int VEHICLE__ASSET_INFO = 14;
 
 	/**
 	 * The number of structural features of the '<em>Vehicle</em>' class.
@@ -1750,6 +1750,17 @@ public interface DairyPackage extends EPackage {
 	EClass getVehicle();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Vehicle Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId()
+	 * @see #getVehicle()
+	 * @generated
+	 */
+	EAttribute getVehicle_VehicleId();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getRegistrationNumber <em>Registration Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1902,17 +1913,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVehicle_AssetInfo();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Vehicle Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId()
-	 * @see #getVehicle()
-	 * @generated
-	 */
-	EAttribute getVehicle_VehicleId();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine <em>Collection Journal Line</em>}'.
@@ -3140,6 +3140,14 @@ public interface DairyPackage extends EPackage {
 		EClass VEHICLE = eINSTANCE.getVehicle();
 
 		/**
+		 * The meta object literal for the '<em><b>Vehicle Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VEHICLE__VEHICLE_ID = eINSTANCE.getVehicle_VehicleId();
+
+		/**
 		 * The meta object literal for the '<em><b>Registration Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3250,14 +3258,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VEHICLE__ASSET_INFO = eINSTANCE.getVehicle_AssetInfo();
-
-		/**
-		 * The meta object literal for the '<em><b>Vehicle Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VEHICLE__VEHICLE_ID = eINSTANCE.getVehicle_VehicleId();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl <em>Collection Journal Line</em>}' class.

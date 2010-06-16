@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getVehicleId <em>Vehicle Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getRegistrationNumber <em>Registration Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getMake <em>Make</em>}</li>
@@ -43,13 +44,32 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getYear <em>Year</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getAssetInfo <em>Asset Info</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl#getVehicleId <em>Vehicle Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class VehicleImpl extends EObjectImpl implements Vehicle {
+	/**
+	 * The default value of the '{@link #getVehicleId() <em>Vehicle Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVehicleId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long VEHICLE_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVehicleId() <em>Vehicle Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVehicleId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long vehicleId = VEHICLE_ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -311,26 +331,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	protected Asset assetInfo;
 
 	/**
-	 * The default value of the '{@link #getVehicleId() <em>Vehicle Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVehicleId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long VEHICLE_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVehicleId() <em>Vehicle Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVehicleId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long vehicleId = VEHICLE_ID_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -347,6 +347,27 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.VEHICLE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVehicleId(Long newVehicleId) {
+		Long oldVehicleId = vehicleId;
+		vehicleId = newVehicleId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__VEHICLE_ID, oldVehicleId, vehicleId));
 	}
 
 	/**
@@ -687,27 +708,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getVehicleId() {
-		return vehicleId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVehicleId(Long newVehicleId) {
-		Long oldVehicleId = vehicleId;
-		vehicleId = newVehicleId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__VEHICLE_ID, oldVehicleId, vehicleId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -725,6 +725,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				return getVehicleId();
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				return getRegistrationNumber();
 			case DairyPackage.VEHICLE__TYPE:
@@ -754,8 +756,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 				return basicGetDriver();
 			case DairyPackage.VEHICLE__ASSET_INFO:
 				return getAssetInfo();
-			case DairyPackage.VEHICLE__VEHICLE_ID:
-				return getVehicleId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -768,6 +768,9 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				setVehicleId((Long)newValue);
+				return;
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				setRegistrationNumber((String)newValue);
 				return;
@@ -810,9 +813,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 			case DairyPackage.VEHICLE__ASSET_INFO:
 				setAssetInfo((Asset)newValue);
 				return;
-			case DairyPackage.VEHICLE__VEHICLE_ID:
-				setVehicleId((Long)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -825,6 +825,9 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				setVehicleId(VEHICLE_ID_EDEFAULT);
+				return;
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
 				return;
@@ -867,9 +870,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 			case DairyPackage.VEHICLE__ASSET_INFO:
 				setAssetInfo((Asset)null);
 				return;
-			case DairyPackage.VEHICLE__VEHICLE_ID:
-				setVehicleId(VEHICLE_ID_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -882,6 +882,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.VEHICLE__VEHICLE_ID:
+				return VEHICLE_ID_EDEFAULT == null ? vehicleId != null : !VEHICLE_ID_EDEFAULT.equals(vehicleId);
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
 				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
 			case DairyPackage.VEHICLE__TYPE:
@@ -910,8 +912,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 				return driver != null;
 			case DairyPackage.VEHICLE__ASSET_INFO:
 				return assetInfo != null;
-			case DairyPackage.VEHICLE__VEHICLE_ID:
-				return VEHICLE_ID_EDEFAULT == null ? vehicleId != null : !VEHICLE_ID_EDEFAULT.equals(vehicleId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -926,7 +926,9 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (registrationNumber: ");
+		result.append(" (vehicleId: ");
+		result.append(vehicleId);
+		result.append(", registrationNumber: ");
 		result.append(registrationNumber);
 		result.append(", type: ");
 		result.append(type);
@@ -950,8 +952,6 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 		result.append(capacityInTonnes);
 		result.append(", year: ");
 		result.append(year);
-		result.append(", vehicleId: ");
-		result.append(vehicleId);
 		result.append(')');
 		return result.toString();
 	}

@@ -80,7 +80,7 @@ public interface IRepository<T extends EObject> {
 	 * 
 	 * 
 	 */
-	void save(EObject obj);
+	void save(Object obj);
 	
 
 }

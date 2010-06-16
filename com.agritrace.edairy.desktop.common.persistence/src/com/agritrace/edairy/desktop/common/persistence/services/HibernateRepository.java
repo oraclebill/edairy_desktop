@@ -135,11 +135,11 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	}
 
 	@Override
-	public void save(final EObject newEntity) throws AlreadyExistsException {
+	public void save(final Object changedItem) throws AlreadyExistsException {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.save(getEntityName(), newEntity);
+				session.save(changedItem);
 			}
 		});
 	}
@@ -216,4 +216,5 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 			throw new IllegalStateException("null session");
 		}
 	}
+
 }

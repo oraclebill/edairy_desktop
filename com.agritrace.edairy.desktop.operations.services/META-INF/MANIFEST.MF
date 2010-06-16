@@ -14,5 +14,5 @@ Export-Package: com.agritrace.edairy.desktop.operations.services,
  com.agritrace.edairy.desktop.operations.services.customer,
  com.agritrace.edairy.desktop.operations.services.dairylocation,
  com.agritrace.edairy.desktop.operations.services.employee,
- com.agritrace.edairy.desktop.operations.services.supplier,
- com.agritrace.edairy.desktop.operations.services.vehicles
+ com.agritrace.edairy.desktop.operations.services.supplier
+ 

@@ -18,8 +18,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
-import com.agritrace.edairy.desktop.operations.services.vehicles.DairyVehicleRepository;
-import com.agritrace.edairy.desktop.operations.services.vehicles.IVehicleRepository;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 /**
  * Vehicle log view controller
@@ -38,15 +38,32 @@ public class VehicleLogViewController extends SubModuleController {
 
 		private final Vehicle workingCopy = createWorkingCopy();
 
-		@Override
-		public void itemCreated(Object newItem) {
-			vehicleRepository.saveNew((Vehicle)newItem);
-		}
+//		@Override
+//		public void itemCreated(Object newItem) {
+//			vehicleRepository.saveNew((Vehicle)newItem);
+//		}
 
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
 			bindVehicleInfo(container);
 			bindAssetInfo(container, workingCopy.getAssetInfo());
+		}
+
+		@Override
+		public void itemCreated(Object newItem) {
+			// TODO Auto-generated method stub
+			super.itemCreated(newItem);
+		}
+
+		@Override
+		public void itemApplied(Object changedItem) {
+			vehicleRepository.save(changedItem);
+		}
+
+		@Override
+		public void itemRemoved(Object oldItem) {
+			// TODO Auto-generated method stub
+			super.itemRemoved(oldItem);
 		}
 
 		@Override
@@ -219,11 +236,11 @@ public class VehicleLogViewController extends SubModuleController {
 
 	public static final String ID = VehicleLogViewController.class.getName();
 
-	protected final IVehicleRepository vehicleRepository;
+	protected final IDairyRepository vehicleRepository;
 
 	public VehicleLogViewController() {
 		super();
-		vehicleRepository = new DairyVehicleRepository();
+		vehicleRepository = new DairyRepository();
 	}
 
 	@Override
@@ -237,7 +254,7 @@ public class VehicleLogViewController extends SubModuleController {
 				DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR.getName(),
 				DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName() };
 
-		final Collection<Vehicle> vehicles = vehicleRepository.all();
+		final Collection<Vehicle> vehicles = vehicleRepository.allVehicles();
 
 		final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 		if (master != null) {

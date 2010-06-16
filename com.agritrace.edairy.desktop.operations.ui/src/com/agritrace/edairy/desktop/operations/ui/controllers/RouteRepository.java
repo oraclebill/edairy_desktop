@@ -60,7 +60,7 @@ public class RouteRepository implements IRepository<Route> {
 	}
 
 	@Override
-	public void save(EObject obj) {
+	public void save(Object obj) {
 		routeRepo.save(obj);
 	}
 

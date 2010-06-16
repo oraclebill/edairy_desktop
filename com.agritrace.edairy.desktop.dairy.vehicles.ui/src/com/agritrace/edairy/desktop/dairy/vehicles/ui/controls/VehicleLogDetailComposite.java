@@ -11,6 +11,12 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Spinner;
 
 public class VehicleLogDetailComposite extends Composite {
 
@@ -37,15 +43,13 @@ public class VehicleLogDetailComposite extends Composite {
 
 		// Date Acquired
 		UIControlsFactory.createLabel(detailGroup, "Date Acquired");
-		final Text dateAcqText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_ACQUIRED);
+		final DateTime dateAcqText = UIControlsFactory.createDate(detailGroup, SWT.MEDIUM, "asset.date.acquired");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(dateAcqText);
 		// addUIControl(dateAcqText, BIND_ID_ASSET_DATE_ACQUIRED);
 
 		// Damage Date
 		UIControlsFactory.createLabel(detailGroup, "Damage Date");
-		final Text damageDateText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DAMAGE);
+		final DateTime damageDateText = UIControlsFactory.createDate(detailGroup, SWT.MEDIUM, "asset.date.damage");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(damageDateText);
 		// addUIControl(damageDateText, BIND_ID_ASSET_DATE_DAMAGE);
 
@@ -58,8 +62,7 @@ public class VehicleLogDetailComposite extends Composite {
 
 		// Disposal Date
 		UIControlsFactory.createLabel(detailGroup, "Disposal Date"); //$NON-NLS-1$
-		final Text disposalDateText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DISPOSAL);
+		final DateTime disposalDateText = UIControlsFactory.createDate(detailGroup, SWT.MEDIUM, "asset.date.disposal");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(disposalDateText);
 		// addUIControl(disposalDateText, BIND_ID_ASSET_DATE_DISPOSAL);
 
@@ -107,8 +110,9 @@ public class VehicleLogDetailComposite extends Composite {
 
 		// Year
 		UIControlsFactory.createLabel(detailGroup, "Year");
-		final Text yearText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_DESC_YEAR);
+		final Spinner yearText = new Spinner(detailGroup, SWT.BORDER);
+		yearText.setMaximum(3000);
+		yearText.setMinimum(1900);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(yearText);
 		// addUIControl(yearText, BIND_ID_DESC_YEAR);
 
@@ -130,11 +134,16 @@ public class VehicleLogDetailComposite extends Composite {
 		final Text logNumber = UIControlsFactory.createText(comonComp, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_LOG_NUM);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(logNumber);
+		
+		Label lblVehicleType = new Label(comonComp, SWT.NONE);
+		lblVehicleType.setText("Vehicle Type");
+		
+		CCombo combo = UIControlsFactory.createCCombo(comonComp, "vehicleTypeCombo");
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		// addUIControl(logNumber, BIND_ID_LOG_NUM);
 
 		UIControlsFactory.createLabel(comonComp, "Driver");
-		final Text driverText = UIControlsFactory.createText(comonComp, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
+		final CCombo driverText = UIControlsFactory.createCCombo(comonComp, "driverCombo");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(driverText);
 		// addUIControl(driverText, BIND_ID_DRIVER_NAME);
 
@@ -154,8 +163,7 @@ public class VehicleLogDetailComposite extends Composite {
 
 		// Expiration Date
 		UIControlsFactory.createLabel(detailGroup, "Expiration Date"); //$NON-NLS-1$
-		final Text damageDateText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_INSURANCE_EXP_DATE);
+		final DateTime damageDateText = new DateTime(detailGroup, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(damageDateText);
 		// addUIControl(damageDateText, BIND_ID_INSURANCE_EXP_DATE);
 

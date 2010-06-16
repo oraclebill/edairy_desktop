@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getRegistrationNumber <em>Registration Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getMake <em>Make</em>}</li>
@@ -32,7 +33,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getYear <em>Year</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +41,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Vehicle extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Vehicle Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Vehicle Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Vehicle Id</em>' attribute.
+	 * @see #setVehicleId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_VehicleId()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
+	 * @generated
+	 */
+	Long getVehicleId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Vehicle Id</em>' attribute.
+	 * @see #getVehicleId()
+	 * @generated
+	 */
+	void setVehicleId(Long value);
+
 	/**
 	 * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -406,33 +432,5 @@ public interface Vehicle extends EObject {
 	 * @generated
 	 */
 	void setAssetInfo(Asset value);
-
-	/**
-	 * Returns the value of the '<em><b>Vehicle Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Vehicle Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vehicle Id</em>' attribute.
-	 * @see #setVehicleId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_VehicleId()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
-	 *        extendedMetaData="name='vehicleId' kind='elementOnly'"
-	 *        annotation="teneo.jpa appinfo='@Id'"
-	 * @generated
-	 */
-	Long getVehicleId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getVehicleId <em>Vehicle Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Vehicle Id</em>' attribute.
-	 * @see #getVehicleId()
-	 * @generated
-	 */
-	void setVehicleId(Long value);
 
 } // Vehicle

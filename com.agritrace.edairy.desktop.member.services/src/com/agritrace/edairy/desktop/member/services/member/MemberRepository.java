@@ -27,7 +27,7 @@ public class MemberRepository implements IMemberRepository {
 		};
 	}
 	
-	public void save(EObject obj) {
+	public void save(Object obj) {
 		driver.save(obj);
 	}
 

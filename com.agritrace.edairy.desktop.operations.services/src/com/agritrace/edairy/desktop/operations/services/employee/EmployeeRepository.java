@@ -27,7 +27,7 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	}
 
 	@Override
-	public void save(EObject obj) {
+	public void save(Object obj) {
 		employeeRepo.save(obj);
 	}
 

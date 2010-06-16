@@ -2,6 +2,8 @@ package com.agritrace.edairy.desktop.operations.services;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -40,5 +42,7 @@ public interface IDairyRepository {
 	void saveNewJournalPage(CollectionJournalPage newJournal);
 
 	void updateDairy(Dairy localDairy);
+
+	void save(Object changedItem);
 
 }

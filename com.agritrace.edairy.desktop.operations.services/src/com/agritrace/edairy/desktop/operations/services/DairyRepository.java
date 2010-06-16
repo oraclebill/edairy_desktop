@@ -2,6 +2,8 @@ package com.agritrace.edairy.desktop.operations.services;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -196,6 +198,11 @@ public class DairyRepository implements IDairyRepository {
 
 	public void updateRoute(final Route changedRoute) {
 		routeRepository.update(changedRoute);
+	}
+
+	@Override
+	public void save(Object changedItem) {
+		dairyRepository.save(changedItem);		
 	}
 
 }

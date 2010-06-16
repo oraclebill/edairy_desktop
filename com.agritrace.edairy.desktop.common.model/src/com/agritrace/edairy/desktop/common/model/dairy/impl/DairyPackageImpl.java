@@ -275,7 +275,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_RegistrationNumber() {
+	public EAttribute getVehicle_VehicleId() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -284,7 +284,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_Type() {
+	public EAttribute getVehicle_RegistrationNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -293,7 +293,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_Make() {
+	public EAttribute getVehicle_Type() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -302,7 +302,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_Model() {
+	public EAttribute getVehicle_Make() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -311,7 +311,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_EngineNumber() {
+	public EAttribute getVehicle_Model() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -320,7 +320,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_ChassisNumber() {
+	public EAttribute getVehicle_EngineNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -329,7 +329,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_LogBookNumber() {
+	public EAttribute getVehicle_ChassisNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -338,7 +338,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_InsurancePolicyNumber() {
+	public EAttribute getVehicle_LogBookNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -347,7 +347,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_InsuranceExpirationDate() {
+	public EAttribute getVehicle_InsurancePolicyNumber() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -356,7 +356,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_DominantColour() {
+	public EAttribute getVehicle_InsuranceExpirationDate() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -365,7 +365,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_CapacityInTonnes() {
+	public EAttribute getVehicle_DominantColour() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -374,7 +374,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_Year() {
+	public EAttribute getVehicle_CapacityInTonnes() {
 		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -383,8 +383,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVehicle_Driver() {
-		return (EReference)vehicleEClass.getEStructuralFeatures().get(12);
+	public EAttribute getVehicle_Year() {
+		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -392,7 +392,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVehicle_AssetInfo() {
+	public EReference getVehicle_Driver() {
 		return (EReference)vehicleEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -401,8 +401,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVehicle_VehicleId() {
-		return (EAttribute)vehicleEClass.getEStructuralFeatures().get(14);
+	public EReference getVehicle_AssetInfo() {
+		return (EReference)vehicleEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1424,6 +1424,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		// Create classes and their features
 		vehicleEClass = createEClass(VEHICLE);
+		createEAttribute(vehicleEClass, VEHICLE__VEHICLE_ID);
 		createEAttribute(vehicleEClass, VEHICLE__REGISTRATION_NUMBER);
 		createEAttribute(vehicleEClass, VEHICLE__TYPE);
 		createEAttribute(vehicleEClass, VEHICLE__MAKE);
@@ -1438,7 +1439,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(vehicleEClass, VEHICLE__YEAR);
 		createEReference(vehicleEClass, VEHICLE__DRIVER);
 		createEReference(vehicleEClass, VEHICLE__ASSET_INFO);
-		createEAttribute(vehicleEClass, VEHICLE__VEHICLE_ID);
 
 		collectionJournalLineEClass = createEClass(COLLECTION_JOURNAL_LINE);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__LINE_NUMBER);
@@ -1611,6 +1611,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(vehicleEClass, Vehicle.class, "Vehicle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVehicle_VehicleId(), theModelPackage.getUniqueID(), "vehicleId", null, 1, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_RegistrationNumber(), ecorePackage.getEString(), "registrationNumber", null, 1, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_Type(), ecorePackage.getEString(), "type", null, 1, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_Make(), ecorePackage.getEString(), "make", null, 1, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1625,7 +1626,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getVehicle_Year(), ecorePackage.getEString(), "year", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVehicle_Driver(), this.getEmployee(), null, "driver", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVehicle_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVehicle_VehicleId(), theModelPackage.getUniqueID(), "vehicleId", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collectionJournalLineEClass, CollectionJournalLine.class, "CollectionJournalLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollectionJournalLine_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1809,13 +1809,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
-		  (getVehicle_VehicleId(), 
-		   source, 
-		   new String[] {
-			 "name", "vehicleId",
-			 "kind", "elementOnly"
-		   });			
-		addAnnotation
 		  (getEmployee_Id(), 
 		   source, 
 		   new String[] {
@@ -1886,12 +1879,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });			
-		addAnnotation
-		  (getVehicle_VehicleId(), 
-		   source, 
-		   new String[] {
-			 "appinfo", "@Id"
 		   });				
 		addAnnotation
 		  (getDairyLocation_Id(), 
