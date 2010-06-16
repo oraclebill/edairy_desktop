@@ -1,5 +1,9 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.ui.ridgets.IListRidget;
+
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
@@ -17,8 +21,21 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 		addRidgetFeatureMap("route-code", DairyPackage.Literals.ROUTE__CODE );
 		addRidgetFeatureMap("route-name", DairyPackage.Literals.ROUTE__NAME);
 		addRidgetFeatureMap("route-description", DairyPackage.Literals.ROUTE__DESCRIPTION);
-		addRidgetFeatureMap("route-stops-list", DairyPackage.Literals.ROUTE__STOPS );
+//		addRidgetFeatureMap("route-stops-list", DairyPackage.Literals.ROUTE__STOPS );
 		
 	}
+
+	@Override
+	protected void configureUserRidgets() {
+		IListRidget stopsList = getRidget(IListRidget.class, "route-stops-list");
+		stopsList.setOutputOnly(true);
+		stopsList.bindToModel(
+				EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.ROUTE__STOPS), 
+				DairyLocation.class, 
+				"name");
+		System.err.println("STOPS: " + this.getWorkingCopy().getStops());
+		stopsList.updateFromModel();
+	}
+	
 	
 }

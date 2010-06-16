@@ -1,47 +1,44 @@
 package com.agritrace.edairy.desktop.dairy.vehicles.ui.views;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
+import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleMasterDetailComposite;
-
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailComposite;
 
 /**
  * Vehicle log view
  * 
- * @author Spark Wan
+ * @author Bill Jones
  * 
  */
 public class VehicleLogView extends SubModuleView {
 
-    public static final String ID = "dairy.vehicle.masterdetail.view";
-    public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
+	public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
+	public static final String ID = "dairy.vehicle.masterdetail.view";
 
-    @Override
-    protected void basicCreatePartControl(Composite parent) {
+	@Override
+	protected void basicCreatePartControl(Composite panel) {
+		panel.setLayout(new GridLayout(2, false));
+		panel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
-	parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-
-	parent.setLayout(new GridLayout(1, false));
-
-	final Composite panel = new Composite(parent, SWT.NULL);
-	panel.setLayout(new GridLayout(2, false));
-	panel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	panel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-
-	// Creates filter section
-	final VehicleFilterSection filterSection = new VehicleFilterSection();
-	filterSection.createSection(panel);
-	// Since Master/Detail are in different composite, we need to pass the
-	// panel as detail composite
-	final VehicleMasterDetailComposite mdComposite = new VehicleMasterDetailComposite(panel, SWT.NONE);
-	addUIControl(mdComposite, BIND_ID_MASTER);
-
-    }
+		final Composite mdComposite = new MasterDetailsComposite(panel, SWT.NONE) {
+			@Override
+			protected void createDetails(Composite parent) {
+				GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL)
+						.applyTo(new VehicleLogDetailComposite(parent));
+				GridLayoutFactory.fillDefaults().generateLayout(parent);
+			}
+		};
+		addUIControl(mdComposite, BIND_ID_MASTER);
+		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(mdComposite);
+		panel.pack();
+	}
 
 }

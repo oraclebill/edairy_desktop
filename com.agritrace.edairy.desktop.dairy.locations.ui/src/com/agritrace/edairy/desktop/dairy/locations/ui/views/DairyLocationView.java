@@ -9,6 +9,7 @@ import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -25,6 +26,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 
 public class DairyLocationView extends SubModuleView {
+	public DairyLocationView() {
+	}
 	public final static String ID = "dairy.locations.editor";
 	private final static int WIDTH_UNIT = 60;
 	private final static int COLUMN_MARGIN = 20;
@@ -115,7 +118,7 @@ public class DairyLocationView extends SubModuleView {
 				SWT.BORDER | SWT.SINGLE,
 				DairyLocationController.RIDGET_ID_PHONE);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
 		phoneText.setLayoutData(gd);
 
@@ -140,11 +143,17 @@ public class DairyLocationView extends SubModuleView {
 
 		UIControlsFactory.createLabel(detailGroup, "Route", SWT.LEFT);
 
-		UIControlsFactory.createCombo(detailGroup,
+		CCombo combo = UIControlsFactory.createCCombo(detailGroup,
 				DairyLocationController.RIDGET_ID_ROUTE);
+		gd = new GridData();
+		gd.widthHint = WIDTH_UNIT * 3;
+		gd.verticalAlignment = SWT.FILL;
+		gd.grabExcessVerticalSpace = true;
+		gd.horizontalSpan = 2;
+		combo.setLayoutData(gd);
 
-		UIControlsFactory.createButton(detailGroup, "?",
-				DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
+//		UIControlsFactory.createButton(detailGroup, "?",
+//				DairyLocationController.RIDGET_ID_CONFIGURE_ROUTE_ACTION);
 
 		final TabFolder tabs = new TabFolder(detailGroup, SWT.None);
 		gd = new GridData();

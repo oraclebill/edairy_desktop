@@ -87,6 +87,7 @@ public interface Route extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Stops</b></em>' reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getRoute <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Stops</em>' reference list isn't clear,
@@ -95,7 +96,8 @@ public interface Route extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Stops</em>' reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Stops()
-	 * @model
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getRoute
+	 * @model opposite="route"
 	 * @generated
 	 */
 	EList<DairyLocation> getStops();

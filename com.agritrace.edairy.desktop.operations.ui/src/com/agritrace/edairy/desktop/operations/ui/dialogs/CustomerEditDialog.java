@@ -32,13 +32,13 @@ import com.swtdesigner.SWTResourceManager;
  * @author Hui(Spark) Wan
  * 
  */
-public class CustomerDialog extends RecordDialog<Customer, CustomerDialogController> {
+public class CustomerEditDialog extends RecordDialog<Customer, CustomerDialogController> {
 	private Composite comonComp;
 
 	// private static int WIDTH_HEIGHT = 400;
 	// private static int DESC_HEIGHT_HEIGHT = 50;
 
-	public CustomerDialog(Shell shell) {
+	public CustomerEditDialog(Shell shell) {
 		super(shell);
 	}
 

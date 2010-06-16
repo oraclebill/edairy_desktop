@@ -1,9 +1,11 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Session;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -51,26 +53,12 @@ public class DairyRepository implements IDairyRepository {
 			return Membership.class;
 		}
 	};
-
-	public List<DairyContainer> getDairyBins() {
-		return binRepository.all();
-	}
-
-	public List<Vehicle> getVehicles() {
-		return vehicleRepository.all();
-	}
-
-	public List<Employee> getEmployees(String string) {
-		return employeeRepository.find("FROM Employee where jobfunction='" + string + "'");
-	}
-
-	public Membership getMembershipById(String memberId) {
-		return memberRepository.findByKey(Long.parseLong(memberId));
-	}
-
-	public Container getContainerById(String canId) {
-		return binRepository.findByKey(Long.parseLong(canId));
-	}
+	
+	private static final HibernateRepository<CollectionJournalPage> collectionsRepository = new HibernateRepository<CollectionJournalPage>() {
+		protected Class<CollectionJournalPage> getClassType() {
+			return CollectionJournalPage.class;
+		}
+	};
 
 	public Dairy getByName(String name) {
 		List<Dairy> list = find("FROM Dairy where name='" + name + "'");
@@ -109,7 +97,31 @@ public class DairyRepository implements IDairyRepository {
 		dairyRepository.delete(deletableEntity);
 	}
 
-	public List<Route> getRoutes() {
+	public List<DairyContainer> getDairyBins() {
+		return binRepository.all();
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicleRepository.all();
+	}
+
+	public List<Employee> getEmployees(String string) {
+		return employeeRepository.find("FROM Employee where jobfunction='" + string + "'");
+	}
+
+	public Membership getMembershipById(String memberId) {
+		return memberRepository.findByKey(Long.parseLong(memberId));
+	}
+
+	public Container getContainerById(String canId) {
+		return binRepository.findByKey(Long.parseLong(canId));
+	}
+
+	public List<CollectionJournalPage> getCollectionJournalPages() {
+		return collectionsRepository.all();
+	}
+
+	public List<Route> allRoutes() {
 		return routeRepository.all();
 	}
 
@@ -160,6 +172,11 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public Dairy reloadLocalDairy() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Collection<DairyContainer> allDairyContainers() {
+		return binRepository.all();
 	}
 
 }

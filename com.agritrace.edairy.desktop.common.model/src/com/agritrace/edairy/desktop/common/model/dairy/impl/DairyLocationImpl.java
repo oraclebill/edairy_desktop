@@ -335,11 +335,33 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoute(Route newRoute) {
+	public NotificationChain basicSetRoute(Route newRoute, NotificationChain msgs) {
 		Route oldRoute = route;
 		route = newRoute;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, route));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, newRoute);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRoute(Route newRoute) {
+		if (newRoute != route) {
+			NotificationChain msgs = null;
+			if (route != null)
+				msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
+			if (newRoute != null)
+				msgs = ((InternalEObject)newRoute).eInverseAdd(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
+			msgs = basicSetRoute(newRoute, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, newRoute, newRoute));
 	}
 
 	/**
@@ -445,8 +467,26 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.DAIRY_LOCATION__ROUTE:
+				if (route != null)
+					msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
+				return basicSetRoute((Route)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_LOCATION__ROUTE:
+				return basicSetRoute(null, msgs);
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
 				return basicSetLocation(null, msgs);
 		}

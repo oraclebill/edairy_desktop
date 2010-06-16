@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.ui.controllers;
+package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.operations.ui.controllers.RouteEditDialogController;
 
 public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogController> {
 

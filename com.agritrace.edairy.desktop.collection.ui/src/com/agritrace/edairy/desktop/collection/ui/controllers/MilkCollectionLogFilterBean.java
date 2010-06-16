@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.views;
+package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.util.Date;
 import java.util.List;
@@ -29,7 +29,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	}
 
 	public void setStartDate(Date startDate) {
-		Object oldVal = this.startDate;
+		final Object oldVal = this.startDate;
 		this.startDate = startDate;
 		firePropertyChanged(START_DATE, oldVal, startDate);
 	}
@@ -39,9 +39,9 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	}
 
 	public void setEndDate(Date endDate) {
-		Object oldVal = this.endDate;
+		final Object oldVal = this.endDate;
 		this.endDate = endDate;
-		firePropertyChanged(START_DATE, oldVal, endDate);
+		firePropertyChanged(END_DATE, oldVal, endDate);
 	}
 
 	public Route getRoute() {
@@ -49,9 +49,9 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	}
 
 	public void setRoute(Route route) {
-		Object oldVal = this.route;
+		final Object oldVal = this.route;
 		this.route = route;
-		firePropertyChanged(START_DATE, oldVal, route);
+		firePropertyChanged(ROUTE, oldVal, route);
 	}
 
 	public boolean isMprMissing() {
@@ -59,9 +59,9 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	}
 
 	public void setMprMissing(boolean mprMissing) {
-		Object oldVal = this.mprMissing;
+		final Object oldVal = this.mprMissing;
 		this.mprMissing = mprMissing;
-		firePropertyChanged(START_DATE, oldVal, mprMissing);
+		firePropertyChanged(MPR_MISSING, oldVal, mprMissing);
 	}
 
 	public boolean isSuspended() {
@@ -69,9 +69,9 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	}
 
 	public void setSuspended(boolean suspended) {
-		Object oldVal = this.suspended;
+		final Object oldVal = this.suspended;
 		this.suspended = suspended;
-		firePropertyChanged(START_DATE, oldVal, suspended);
+		firePropertyChanged(SUSPENDED, oldVal, suspended);
 	}
 
 	public boolean isRejected() {
@@ -79,17 +79,17 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	}
 
 	public void setRejected(boolean rejected) {
-		Object oldVal = this.rejected;
+		final Object oldVal = this.rejected;
 		this.rejected = rejected;
-		firePropertyChanged(START_DATE, oldVal, rejected);
+		firePropertyChanged(REJECTED, oldVal, rejected);
 	}
 
 	public List<Route> getRoutes() {
 		return this.routes;
 	}
-	
+
 	public void setRoutes(List<Route> routes) {
-		Object oldVal = this.routes;
+		final Object oldVal = this.routes;
 		this.routes = routes;
 		firePropertyChanged(ROUTES, oldVal, rejected);
 	}

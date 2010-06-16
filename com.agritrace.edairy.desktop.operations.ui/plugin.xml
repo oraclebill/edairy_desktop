@@ -24,6 +24,13 @@
             name="Route List"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView"
+            id="edairy.operations.employee.directory"
+            name="Employee Directory"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>

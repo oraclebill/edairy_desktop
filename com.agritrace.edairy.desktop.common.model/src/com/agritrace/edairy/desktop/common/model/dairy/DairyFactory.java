@@ -62,13 +62,13 @@ public interface DairyFactory extends EFactory {
 	DairyLocation createDairyLocation();
 
 	/**
-	 * Returns a new object of class '<em>Collection Journal</em>'.
+	 * Returns a new object of class '<em>Collection Journal Page</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection Journal</em>'.
+	 * @return a new object of class '<em>Collection Journal Page</em>'.
 	 * @generated
 	 */
-	CollectionJournal createCollectionJournal();
+	CollectionJournalPage createCollectionJournalPage();
 
 	/**
 	 * Returns a new object of class '<em>Route</em>'.

@@ -45,10 +45,8 @@
       <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
       <plugin id="com.agritrace.edairy.desktop.common.persistence.test.test"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.dairy.employees.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.containers.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.dairy.profile.api"/>
-      <plugin id="com.agritrace.edairy.desktop.dairy.profile.service"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.vehicles.ui"/>
       <plugin id="com.agritrace.edairy.desktop.deliveries.ui"/>
@@ -101,13 +99,11 @@
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
-      <plugin id="org.eclipse.jdt.junit.runtime"/>
+      <plugin id="org.eclipse.jdt.junit.runtime" fragment=""/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.pde.junit.runtime"/>
-      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.rcp"/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
@@ -127,25 +123,8 @@
       <plugin id="org.eclipse.riena.ui.swt.rcp"/>
       <plugin id="org.eclipse.riena.ui.workarea"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.photon.qnx.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
-      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.hamcrest.core"/>

@@ -24,7 +24,7 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -38,6 +38,44 @@ import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
+
+	public final static class JournalSessionColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				CollectionJournalPage journal = ((CollectionJournalLine) element).getCollectionJournal();
+				if (journal != null) {
+					return journal.getSession().toString();
+				}
+			}
+			return null;
+		}
+	}
+
+	public final static class DairyContainerIdColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				if (((CollectionJournalLine) element).getDairyContainer() != null) {
+					return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
+				}
+			}
+			return null;
+		}
+	}
+
+	private final class EntryDateColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				final Date entryDate = ((CollectionJournalLine) element).getCollectionJournal().getJournalDate();
+				final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
+				dateFormatter.setDate(entryDate);
+				return dateFormatter.getFormattedDate();
+			}
+			return null;
+		}
+	}
 
 	private IController controller;
 	private Membership membership;
@@ -64,23 +102,13 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (controller == null) {
 			return;
 		}
+		
 		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
 		if (null == collectionTable) {
 			return;
 		}
 
-		collectionTable.setColumnFormatter(0, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof CollectionJournalLine) {
-					CollectionJournal journal = ((CollectionJournalLine) element).getCollectionJournal();
-					if (journal != null) {
-						return journal.getSession().toString();
-					}
-				}
-				return null;
-			}
-		});
+		collectionTable.setColumnFormatter(0, new JournalSessionColumnFormatter());
 		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class),
 				CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
 
@@ -108,7 +136,6 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (collectionTable != null) {
 			updateBinding();
 		}
-
 	}
 
 	@Override
@@ -131,31 +158,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		records.clear();
 		records.addAll(getCollectionJournalLines());
 
-		collectionTable.setColumnFormatter(1, new ColumnFormatter() {
-
-			@Override
-			public String getText(Object element) {
-				if (element instanceof CollectionJournalLine) {
-					final Date entryDate = ((CollectionJournalLine) element).getCollectionJournal().getJournalDate();
-					final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
-					dateFormatter.setDate(entryDate);
-					return dateFormatter.getFormattedDate();
-				}
-				return null;
-			}
-		});
-		collectionTable.setColumnFormatter(2, new ColumnFormatter() {
-
-			@Override
-			public String getText(Object element) {
-				if (element instanceof CollectionJournalLine) {
-					if (((CollectionJournalLine) element).getDairyContainer() != null) {
-						return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
-					}
-				}
-				return null;
-			}
-		});
+		collectionTable.setColumnFormatter(1, new EntryDateColumnFormatter());
+		collectionTable.setColumnFormatter(2, new DairyContainerIdColumnFormatter());
 		collectionTable.updateFromModel();
 		if (dateSearchController != null) {
 			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
@@ -170,8 +174,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			final String selectedMemberId = "" + membership.getMemberId();
 			final EObject container = membership.eContainer();
 			if (container != null && container instanceof Dairy) {
-				final List<CollectionJournal> allRecords = ((Dairy) container).getCollectionJournals();
-				for (final CollectionJournal j : allRecords) {
+				final List<CollectionJournalPage> allRecords = ((Dairy) container).getCollectionJournals();
+				for (final CollectionJournalPage j : allRecords) {
 					final List<CollectionJournalLine> jEntries = j.getJournalEntries();
 					for (final CollectionJournalLine e : jEntries) {
 						if (selectedMemberId.equals(e.getRecordedMember())) {
@@ -223,7 +227,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 							startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
 
 					final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
-							DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE, startDateCondition);
+							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE, startDateCondition);
 					condtions.add(startDateAttributeCondition);
 				}
 
@@ -235,7 +239,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 							endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
 
 					final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
-							DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE, endDateCondition);
+							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE, endDateCondition);
 					condtions.add(endDateAttributeCondition);
 				}
 			}

@@ -24,28 +24,28 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
  */
 public final class NodeFactory {
 
-    private NodeFactory() {
-	// prevent instantiation
-    }
+	private NodeFactory() {
+		// prevent instantiation
+	}
 
-    public static IModuleNode createModule(String nodeId, String caption, IModuleGroupNode parent) {
-	final IModuleNode result = new ModuleNode(new NavigationNodeId(nodeId), caption);
-	parent.addChild(result);
-	result.setClosable(false);
-	return result;
-    }
+	public static IModuleNode createModule(String nodeId, String caption, IModuleGroupNode parent) {
+		final IModuleNode result = new ModuleNode(new NavigationNodeId(nodeId), caption);
+		parent.addChild(result);
+		result.setClosable(false);
+		return result;
+	}
 
-    public static ISubModuleNode createSubModule(String nodeId, String caption, IModuleNode parent, String viewId) {
-	return createSubModule(nodeId, caption, parent, viewId, null);
-    }
+	public static ISubModuleNode createSubModule(String nodeId, String caption, IModuleNode parent, String viewId) {
+		return createSubModule(nodeId, caption, parent, viewId, null);
+	}
 
-    public static ISubModuleNode createSubModule(String nodeId, String caption, IModuleNode parent,
-	    String viewId, Class<? extends IController> controllerClass) {
-	final ISubModuleNode result = new SubModuleNode(new NavigationNodeId(nodeId), caption);
-	// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
-	result.setIcon("arrow_right.png"); //$NON-NLS-1$
-	parent.addChild(result);
-	WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
-	return result;
-    }
+	public static ISubModuleNode createSubModule(String nodeId, String caption, IModuleNode parent, String viewId,
+			Class<? extends IController> controllerClass) {
+		final ISubModuleNode result = new SubModuleNode(new NavigationNodeId(nodeId), caption);
+		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
+		result.setIcon("arrow_right.png"); //$NON-NLS-1$
+		parent.addChild(result);
+		WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
+		return result;
+	}
 }

@@ -4,67 +4,75 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jface.window.Window;
+import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.navigation.NavigationNodeId;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
-import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.riena.ui.workarea.IWorkareaDefinition;
+import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournal;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.*;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
-public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournal> {
-	
+public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
+
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	
+
 	private IDateTimeRidget startDate;
 	private IDateTimeRidget endDate;
 	private IComboRidget route;
 	private IToggleButtonRidget mprMissing;
 	private IToggleButtonRidget suspended;
 	private IToggleButtonRidget rejected;
-	
-	
+
+	private DairyRepository dairyRepository = new DairyRepository();
+
 	public MilkCollectionLogController() {
-		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL);
-		setEntityClass(CollectionJournal.class);
+		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
+		setEntityClass(CollectionJournalPage.class);
 		setRepository(new MilkCollectionJournalRepository());
-		
-		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_DATE);
-//		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL__ROUTE, new RouteNameFormatter() );
-		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL__ROUTE );
-		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL__SESSION);
-		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL__JOURNAL_ENTRIES);
-		
-		filterBean.setRoutes(new DairyRepository().getRoutes());
+
+		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
+		// addTableColumn("Route",
+		// DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new
+		// RouteNameFormatter() );
+		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE);
+		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
+		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+
+		filterBean.setRoutes(new DairyRepository().allRoutes());
 	}
-	
+
 	@Override
 	protected void configureFilterRidgets() {
-		startDate = getRidget(IDateTimeRidget.class, ViewConstants.START_DATE_TEXT);
-		endDate = getRidget(IDateTimeRidget.class, ViewConstants.END_DATE_TEXT);
-		route = getRidget(IComboRidget.class, ViewConstants.ROUTE_COMBO);
-		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.MPR_MISSING_CHK);
-		suspended = getRidget(IToggleButtonRidget.class, ViewConstants.SUSPENDED_CHK);
-		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.REJECTED_CHK);
-		
+		startDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
+		endDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
+		route = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
+		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
+		suspended = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_SUSPENDED_CHK);
+		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
+
 		startDate.bindToModel(filterBean, "startDate");
-		endDate.bindToModel(filterBean, "endDate" );
-		route.bindToModel(filterBean, "routes", Route.class, null, filterBean, "route" );
-		mprMissing.bindToModel(filterBean, "mprMissing" );
-		suspended.bindToModel(filterBean, "suspended" );
-		rejected.bindToModel(filterBean, "rejected" );
+		endDate.bindToModel(filterBean, "endDate");
+		route.bindToModel(filterBean, "routes", Route.class, null, filterBean, "route");
+		mprMissing.bindToModel(filterBean, "mprMissing");
+		suspended.bindToModel(filterBean, "suspended");
+		rejected.bindToModel(filterBean, "rejected");
 	}
 
 	@Override
@@ -76,14 +84,14 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		suspended.setSelected(false);
 		rejected.setSelected(false);
 	}
-	
+
 	@Override
-	protected List<CollectionJournal> getFilteredResult() {
-		List<CollectionJournal> allJournals = getRepository().all();
-		List<CollectionJournal> filteredJournals = new ArrayList<CollectionJournal>();
-		
-		for ( CollectionJournal cj : allJournals ) {
-			boolean condition = true;
+	protected List<CollectionJournalPage> getFilteredResult() {
+		final List<CollectionJournalPage> allJournals = getRepository().all();
+		final List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
+
+		for (final CollectionJournalPage cj : allJournals) {
+			final boolean condition = true;
 			// filter logic goes here...
 			if (condition) {
 				filteredJournals.add(cj);
@@ -93,10 +101,37 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	protected RecordDialog<CollectionJournal, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<CollectionJournalPage, ?> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	protected void handleNewItemAction() {
+		NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
+		// dialog.getController().setContext(EDITED_OBJECT_ID,
+		// createNewModel());
+		// dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 
+		int returnCode = dialog.open();
+		System.err.println("return code : " + returnCode);
+		if (Window.OK == returnCode) {
+			CollectionJournalPage newPage = dialog.getNewJournalPage();
+			getRepository().saveNew(newPage);
+			// TODO: attach page to dairy.
+			// Dairy dairy = dairyRepository.getLocalDairy();
+			// dairy.getCollectionJournals().add(newPage);
+			// dairyRepository.update( dairy );
+			ISubModuleNode myNode = getNavigationNode();
+			System.err.println("Node:    " + myNode);
+			System.err.println("Actions: " + myNode.getActions());
+			ISubModuleNode childNode = (ISubModuleNode) myNode.getNavigationProcessor().create(myNode,
+					new NavigationNodeId(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER));
+			System.err.println("Child Node: " + childNode);
+			myNode.addChild(childNode);
+			childNode.activate();
+
+		}
+		refreshTableContents();
+	}
 }

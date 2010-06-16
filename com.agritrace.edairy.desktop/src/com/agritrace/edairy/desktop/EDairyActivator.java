@@ -1,17 +1,12 @@
 package com.agritrace.edairy.desktop;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 /**
  * The activator class controls the plug-in life cycle
