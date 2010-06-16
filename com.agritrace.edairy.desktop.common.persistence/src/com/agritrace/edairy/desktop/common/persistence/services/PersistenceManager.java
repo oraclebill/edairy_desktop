@@ -67,7 +67,6 @@ public class PersistenceManager {
 		} else if ( ! session.isConnected() ) {
 			session = sessionFactory.openSession();
 		}
-		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "]: providing session [" + session.hashCode() + "] on thread:  " + Thread.currentThread());
 		return session;
 	}
 	
@@ -89,10 +88,10 @@ public class PersistenceManager {
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 		
 		// show all sql 
-//		props.setProperty(Environment.SHOW_SQL, "true");
+		props.setProperty(Environment.SHOW_SQL, "true");
 		
 		// drop and recreate db on startup
-		props.setProperty(Environment.HBM2DDL_AUTO, "update");	
+		props.setProperty(Environment.HBM2DDL_AUTO, "update");
 		return props;
 		
 	}
@@ -105,7 +104,7 @@ public class PersistenceManager {
 	
 	protected void postInit() {
 		System.err.println( ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode() + "] started on thread " + Thread.currentThread());
-		//System.err.println(hbds.getMappingXML()); 
+		System.err.println(hbds.getMappingXML()); 
 	}
 
 	/**

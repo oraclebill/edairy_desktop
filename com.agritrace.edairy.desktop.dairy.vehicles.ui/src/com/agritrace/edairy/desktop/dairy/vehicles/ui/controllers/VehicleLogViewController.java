@@ -1,20 +1,28 @@
 package com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;
 
-import java.util.Collection;
+import java.util.List;
 
+import org.eclipse.core.databinding.conversion.StringToNumberConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
+import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
+import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
@@ -38,10 +46,10 @@ public class VehicleLogViewController extends SubModuleController {
 
 		private final Vehicle workingCopy = createWorkingCopy();
 
-//		@Override
-//		public void itemCreated(Object newItem) {
-//			vehicleRepository.saveNew((Vehicle)newItem);
-//		}
+		// @Override
+		// public void itemCreated(Object newItem) {
+		// vehicleRepository.saveNew((Vehicle)newItem);
+		// }
 
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
@@ -95,18 +103,18 @@ public class VehicleLogViewController extends SubModuleController {
 		protected void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
 			// Asset Info
 			// Date Acquired
-			final ITextRidget dateAcquiredText = container.getRidget(ITextRidget.class,
+			final IDateTimeRidget dateAcquiredText = container.getRidget(IDateTimeRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_ACQUIRED);
 			dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			dateAcquiredText.setDirectWriting(true);
+			// dateAcquiredText.setDirectWriting(true);
 			dateAcquiredText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName());
 			dateAcquiredText.updateFromModel();
 
 			// Date Damaged
-			final ITextRidget damangeDateText = container.getRidget(ITextRidget.class,
+			final IDateTimeRidget damangeDateText = container.getRidget(IDateTimeRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DAMAGE);
 			damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			damangeDateText.setDirectWriting(true);
+			// damangeDateText.setDirectWriting(true);
 			damangeDateText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName());
 			damangeDateText.updateFromModel();
 
@@ -118,9 +126,9 @@ public class VehicleLogViewController extends SubModuleController {
 			damageDesText.updateFromModel();
 
 			// Disposal Date
-			final ITextRidget disposalDate = container.getRidget(ITextRidget.class,
+			final IDateTimeRidget disposalDate = container.getRidget(IDateTimeRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DISPOSAL);
-			disposalDate.setDirectWriting(true);
+			// disposalDate.setDirectWriting(true);
 			disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 			disposalDate.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName());
 			disposalDate.updateFromModel();
@@ -151,12 +159,20 @@ public class VehicleLogViewController extends SubModuleController {
 			logNumber.updateFromModel();
 
 			// Driver Name Name
-			final ITextRidget lastNameText = container.getRidget(ITextRidget.class,
+			final IComboRidget lastNameText = container.getRidget(IComboRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
-			lastNameText.setDirectWriting(true);
-			// lastNameText.bindToModel(workingCopy.getDriver(),
-			// ModelPackage.Literals.PARTY__NAME.getName());
+			lastNameText.bindToModel(new WritableList(vehicleRepository.employeesByPosition("Driver"), Employee.class),
+					Employee.class, "getFamilyName",
+					EMFObservables.observeValue(workingCopy, DairyPackage.Literals.VEHICLE__DRIVER));
 			lastNameText.updateFromModel();
+
+			// Vehicle Type
+			final IComboRidget vehicleTypeCombo = container.getRidget(IComboRidget.class,
+					VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
+			vehicleTypeCombo.bindToModel(new WritableList(VehicleType.getValues(), String.class),
+					String.class, null,
+					EMFObservables.observeValue(workingCopy, DairyPackage.Literals.VEHICLE__TYPE));
+			vehicleTypeCombo.updateFromModel();
 
 			// Registration Number
 			final ITextRidget regText = container.getRidget(ITextRidget.class,
@@ -202,14 +218,22 @@ public class VehicleLogViewController extends SubModuleController {
 			colorText.updateFromModel();
 
 			// Year
-			final ITextRidget yearText = container.getRidget(ITextRidget.class,
+			final ISpinnerRidget yearText = container.getRidget(ISpinnerRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_DESC_YEAR);
-			yearText.setDirectWriting(true);
-			yearText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__YEAR.getName());
+			// yearText.setDirectWriting(true);
+			yearText.setMaximum(2100);
+			yearText.setMinimum(1900);
+			yearText.setModelToUIControlConverter(StringToNumberConverter.toBigInteger());
+			yearText.bindToModel(EMFObservables.observeValue(workingCopy, DairyPackage.Literals.VEHICLE__YEAR)); // resolves
+																													// strange
+																													// cce
+																													// in
+																													// binding
+																													// code...
 			yearText.updateFromModel();
 
 			// Capacity
-			final ITextRidget capacityText = container.getRidget(ITextRidget.class,
+			final INumericTextRidget capacityText = container.getRidget(INumericTextRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_DESC_CAPACITY);
 			capacityText.setDirectWriting(true);
 			capacityText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName());
@@ -225,10 +249,10 @@ public class VehicleLogViewController extends SubModuleController {
 			insuranceNumberText.updateFromModel();
 
 			// Expiration Date
-			final ITextRidget expDateText = container.getRidget(ITextRidget.class,
+			final IDateTimeRidget expDateText = container.getRidget(IDateTimeRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_INSURANCE_EXP_DATE);
 			expDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			expDateText.setDirectWriting(true);
+			// expDateText.setDirectWriting(true);
 			expDateText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE.getName());
 			expDateText.updateFromModel();
 		}
@@ -236,11 +260,10 @@ public class VehicleLogViewController extends SubModuleController {
 
 	public static final String ID = VehicleLogViewController.class.getName();
 
-	protected final IDairyRepository vehicleRepository;
+	protected final IDairyRepository vehicleRepository = new DairyRepository();
 
 	public VehicleLogViewController() {
 		super();
-		vehicleRepository = new DairyRepository();
 	}
 
 	@Override
@@ -254,8 +277,7 @@ public class VehicleLogViewController extends SubModuleController {
 				DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR.getName(),
 				DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName() };
 
-		final Collection<Vehicle> vehicles = vehicleRepository.allVehicles();
-
+		List<Vehicle> vehicles = vehicleRepository.allVehicles();
 		final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 		if (master != null) {
 			master.setDelegate(new VehicleLogMasterDetailDelegate());

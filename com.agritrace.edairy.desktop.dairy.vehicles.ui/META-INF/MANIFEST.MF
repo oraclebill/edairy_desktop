@@ -11,7 +11,9 @@ Require-Bundle: org.eclipse.ui,
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.icons;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.operations.services;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.operations.services;bundle-version="1.0.0",
+ com.ibm.icu;bundle-version="4.2.1",
+ org.eclipse.emf.databinding;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;uses:="com.agritrace.edairy.desktop.common.ui.controllers,org.eclipse.riena.navigation.ui.controllers",

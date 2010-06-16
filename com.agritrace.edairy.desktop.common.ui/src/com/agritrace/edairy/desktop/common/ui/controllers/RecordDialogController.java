@@ -28,7 +28,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	private final Map<String, FeaturePath> ridgetPropertyMap = new HashMap<String, FeaturePath>();
 
-	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
 	/**
 	 * Gets working copy for editing
 	 * 
@@ -155,7 +154,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 //			// EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
 //			saveUpdated();
 //		}
-		notifyListeners();
 		if (!RienaStatus.isTest()) {
 			getWindowRidget().dispose();
 		}
@@ -174,28 +172,11 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	}
 	
 
-	protected void doCancelPressed() {
-		setReturnCode(CANCEL);
-		if (!RienaStatus.isTest()) {
-			getWindowRidget().dispose();
-		}
-
-	}
-
 	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
 		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
 		return map;
 	}
 
-	public void addListener(IActionListener listener) {
-		this.listeners.add(listener);
-	}
-
-	protected void notifyListeners() {
-		for (final IActionListener listener : this.listeners) {
-			listener.callback();
-		}
-	}
 
 	private Map<String, EStructuralFeature> getRidgetFeatureMap() {
 		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();

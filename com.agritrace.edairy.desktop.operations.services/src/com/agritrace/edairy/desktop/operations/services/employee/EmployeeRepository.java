@@ -17,7 +17,6 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		protected Class<Employee> getClassType() {
 			return Employee.class;
 		}
-
 	};
 
 	@Override

@@ -20,5 +20,6 @@ public interface VehicleLogDetailBindConstants {
 	public static final String BIND_ID_INSURANCE_NUMBER = "insurance.num";
 	public static final String BIND_ID_LOG_NUM = "log.num";
 	public static final String BIND_ID_REG_NUM = "reg.num";
+	public static final String BIND_ID_VEHICLE_TYPE = "vehicle.type";
 
 }

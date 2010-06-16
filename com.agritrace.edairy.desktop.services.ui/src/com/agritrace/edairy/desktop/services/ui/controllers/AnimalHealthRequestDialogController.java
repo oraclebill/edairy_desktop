@@ -1,6 +1,8 @@
 package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
@@ -227,7 +229,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		final AnimalHealthRequest request = getWorkingCopy();
 		// UIChanges
-		notifyListeners();
+		notifySaveListeners();
 		// Updates the bindings
 		configTypeSpecificRidgets(request);
 
@@ -314,6 +316,18 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	@Override
 	protected EClass getEClass() {
 		return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
+	}
+	
+	
+	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
+	public void addListener(IActionListener listener) {
+		this.listeners.add(listener);
+	}
+
+	protected void notifySaveListeners() {
+		for (final IActionListener listener : this.listeners) {
+			listener.callback();
+		}
 	}
 
 }

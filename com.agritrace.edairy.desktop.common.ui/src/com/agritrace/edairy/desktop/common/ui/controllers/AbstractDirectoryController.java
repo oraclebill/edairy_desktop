@@ -271,9 +271,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
-
+System.err.println( "opening new item: ");
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
+			System.err.println( "------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
 			getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 		}
 		refreshTableContents();
@@ -283,9 +284,11 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
+System.err.println( "opening view item: " + getSelectedEObject());
 
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
+			System.err.println( "------ updating item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
 			getRepository().update((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 		}
 		refreshTableContents();
