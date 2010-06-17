@@ -147,13 +147,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			@Override
 	protected void handleSaveAction()  {
 		setReturnCode(DialogConstants.ACTION_SAVE);
-//		if (getActionType() == AbstractRecordListController.ACTION_NEW) {
-//			saveNew();
-//		} else {
-//			// Update all working copy to selected object
-//			// EMFUtil.copy(this.getWorkingCopy(), getSelectedObject(), 2);
-//			saveUpdated();
-//		}
 		if (!RienaStatus.isTest()) {
 			getWindowRidget().dispose();
 		}

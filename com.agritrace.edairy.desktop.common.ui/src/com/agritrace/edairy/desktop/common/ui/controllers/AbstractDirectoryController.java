@@ -17,6 +17,7 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
@@ -273,9 +274,15 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 System.err.println( "opening new item: ");
 		final int returnCode = dialog.open();
-		if (Window.OK == returnCode) {
+		if (DialogConstants.ACTION_SAVE == returnCode) {
 			System.err.println( "------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
 			getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+		}
+		else if (DialogConstants.ACTION_CANCEL == returnCode ) {
+			;;
+		}
+		else {
+			throw new IllegalStateException("Invalid response from dialog: " + returnCode );
 		}
 		refreshTableContents();
 	}
@@ -287,9 +294,16 @@ System.err.println( "opening new item: ");
 System.err.println( "opening view item: " + getSelectedEObject());
 
 		final int returnCode = dialog.open();
-		if (Window.OK == returnCode) {
+		if (DialogConstants.ACTION_SAVE == returnCode) {
 			System.err.println( "------ updating item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
 			getRepository().update((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+		}
+		else if (DialogConstants.ACTION_CANCEL == returnCode ) {
+			// todo: ensure data sent to dialog is not modified...
+			//getRepository().load((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+		}
+		else {
+			throw new IllegalStateException("Invalid response from dialog: " + returnCode );
 		}
 		refreshTableContents();
 	}

@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalId <em>Journal Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalDate <em>Journal Date</em>}</li>
@@ -54,13 +55,32 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRecordTotal <em>Record Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalId <em>Journal Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class CollectionJournalPageImpl extends EObjectImpl implements CollectionJournalPage {
+	/**
+	 * The default value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long JOURNAL_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long journalId = JOURNAL_ID_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getJournalEntries() <em>Journal Entries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -222,26 +242,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getJournalId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long JOURNAL_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getJournalId()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long journalId = JOURNAL_ID_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -258,6 +258,27 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.COLLECTION_JOURNAL_PAGE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getJournalId() {
+		return journalId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJournalId(Long newJournalId) {
+		Long oldJournalId = journalId;
+		journalId = newJournalId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID, oldJournalId, journalId));
 	}
 
 	/**
@@ -572,27 +593,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getJournalId() {
-		return journalId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setJournalId(Long newJournalId) {
-		Long oldJournalId = journalId;
-		journalId = newJournalId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID, oldJournalId, journalId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -610,6 +610,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
+				return getJournalId();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				return getJournalEntries();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
@@ -637,8 +639,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return getDriverTotal();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				return getRecordTotal();
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
-				return getJournalId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -652,6 +652,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
+				setJournalId((Long)newValue);
+				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
 				getJournalEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
@@ -686,9 +689,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				setRecordTotal((BigDecimal)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
-				setJournalId((Long)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -701,6 +701,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
+				setJournalId(JOURNAL_ID_EDEFAULT);
+				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				getJournalEntries().clear();
 				return;
@@ -734,9 +737,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				setRecordTotal(RECORD_TOTAL_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
-				setJournalId(JOURNAL_ID_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -749,6 +749,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
+				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
 				return journalEntries != null && !journalEntries.isEmpty();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
@@ -771,8 +773,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return DRIVER_TOTAL_EDEFAULT == null ? driverTotal != null : !DRIVER_TOTAL_EDEFAULT.equals(driverTotal);
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
-				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -787,7 +787,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (referenceNumber: ");
+		result.append(" (journalId: ");
+		result.append(journalId);
+		result.append(", referenceNumber: ");
 		result.append(referenceNumber);
 		result.append(", journalDate: ");
 		result.append(journalDate);
@@ -797,8 +799,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		result.append(driverTotal);
 		result.append(", recordTotal: ");
 		result.append(recordTotal);
-		result.append(", journalId: ");
-		result.append(journalId);
 		result.append(')');
 		return result.toString();
 	}

@@ -95,6 +95,8 @@
         eType="#//DairyFunction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalPage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
+        eType="ecore:EDataType common.ecore#//UniqueID" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
         eType="#//CollectionJournalLine" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
@@ -106,26 +108,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"
         eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" lowerBound="1"
-        eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" lowerBound="1" eType="#//DairyContainer"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" lowerBound="1"
-        eType="#//Vehicle"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverTotal" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordTotal" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//DairyContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         defaultValueLiteral="0" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
-        eType="ecore:EDataType common.ecore#//UniqueID">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="journalId"/>
-        <details key="kind" value="elementOnly"/>
-      </eAnnotations>
-      <eAnnotations source="teneo.jpa">
-        <details key="appinfo" value="@Id"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Route">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">

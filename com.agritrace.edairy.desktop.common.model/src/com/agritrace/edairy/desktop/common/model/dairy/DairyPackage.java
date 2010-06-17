@@ -646,13 +646,22 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE = 4;
 
 	/**
+	 * The feature id for the '<em><b>Journal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Journal Entries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 0;
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
@@ -661,7 +670,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER = 1;
+	int COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER = 2;
 
 	/**
 	 * The feature id for the '<em><b>Journal Date</b></em>' attribute.
@@ -670,7 +679,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = 2;
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Session</b></em>' attribute.
@@ -679,7 +688,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SESSION = 3;
+	int COLLECTION_JOURNAL_PAGE__SESSION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Driver</b></em>' reference.
@@ -688,7 +697,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__DRIVER = 4;
+	int COLLECTION_JOURNAL_PAGE__DRIVER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Route</b></em>' reference.
@@ -697,7 +706,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__ROUTE = 5;
+	int COLLECTION_JOURNAL_PAGE__ROUTE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Farm Container</b></em>' reference.
@@ -706,7 +715,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__FARM_CONTAINER = 6;
+	int COLLECTION_JOURNAL_PAGE__FARM_CONTAINER = 7;
 
 	/**
 	 * The feature id for the '<em><b>Bin</b></em>' reference.
@@ -715,7 +724,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__BIN = 7;
+	int COLLECTION_JOURNAL_PAGE__BIN = 8;
 
 	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
@@ -724,7 +733,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__VEHICLE = 8;
+	int COLLECTION_JOURNAL_PAGE__VEHICLE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Driver Total</b></em>' attribute.
@@ -733,7 +742,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 9;
+	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Record Total</b></em>' attribute.
@@ -742,16 +751,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 10;
-
-	/**
-	 * The feature id for the '<em><b>Journal Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_ID = 11;
+	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 11;
 
 	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
@@ -2263,6 +2263,17 @@ public interface DairyPackage extends EPackage {
 	EClass getCollectionJournalPage();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Journal Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_JournalId();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2382,17 +2393,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCollectionJournalPage_RecordTotal();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Journal Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId()
-	 * @see #getCollectionJournalPage()
-	 * @generated
-	 */
-	EAttribute getCollectionJournalPage_JournalId();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Route <em>Route</em>}'.
@@ -3524,6 +3524,14 @@ public interface DairyPackage extends EPackage {
 		EClass COLLECTION_JOURNAL_PAGE = eINSTANCE.getCollectionJournalPage();
 
 		/**
+		 * The meta object literal for the '<em><b>Journal Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_ID = eINSTANCE.getCollectionJournalPage_JournalId();
+
+		/**
 		 * The meta object literal for the '<em><b>Journal Entries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3610,14 +3618,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = eINSTANCE.getCollectionJournalPage_RecordTotal();
-
-		/**
-		 * The meta object literal for the '<em><b>Journal Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_ID = eINSTANCE.getCollectionJournalPage_JournalId();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.

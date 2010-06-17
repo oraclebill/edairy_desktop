@@ -5,9 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.core.marker.IMarker;
 import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.INavigationNode.State;
+import org.eclipse.riena.navigation.ISimpleNavigationNodeListener;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
+import org.eclipse.riena.ui.filter.IUIFilter;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -57,6 +61,87 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		filterBean.setRoutes(new DairyRepository().allRoutes());
 	}
+
+	
+	@Override
+	public void afterBind() {
+		super.afterBind();
+		ISubModuleNode myNode = getNavigationNode();
+		if (myNode != null) {
+			myNode.addSimpleListener(new org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter() {
+
+				@Override
+				public void prepared(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void selectedChanged(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void childAdded(INavigationNode<?> source, INavigationNode<?> childAdded) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void childRemoved(INavigationNode<?> source, INavigationNode<?> childRemoved) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void activated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void beforeActivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void afterActivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void deactivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void beforeDeactivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void afterDeactivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void disposed(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+					
+				}
+
+
+				
+			});
+		}
+	}
+
 
 	@Override
 	protected void configureFilterRidgets() {
@@ -117,21 +202,21 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		System.err.println("return code : " + returnCode);
 		if (Window.OK == returnCode) {
 			CollectionJournalPage newPage = dialog.getNewJournalPage();
-			getRepository().saveNew(newPage);
-			// TODO: attach page to dairy.
-			// Dairy dairy = dairyRepository.getLocalDairy();
-			// dairy.getCollectionJournals().add(newPage);
-			// dairyRepository.update( dairy );
-			ISubModuleNode myNode = getNavigationNode();
-			System.err.println("Node:    " + myNode);
-			System.err.println("Actions: " + myNode.getActions());
-			ISubModuleNode childNode = (ISubModuleNode) myNode.getNavigationProcessor().create(myNode,
-					new NavigationNodeId(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER));
-			System.err.println("Child Node: " + childNode);
-			myNode.addChild(childNode);
-			childNode.activate();
-
+			activateDetailView(dialog.getNewJournalPage());
 		}
 		refreshTableContents();
+	}
+	
+	private void activateDetailView( CollectionJournalPage journalPage ) {
+		ISubModuleNode myNode = getNavigationNode();
+		System.err.println("Node:    " + myNode);
+		System.err.println("Actions: " + myNode.getActions());
+		ISubModuleNode childNode = (ISubModuleNode) myNode.getNavigationProcessor().create(myNode,
+				new NavigationNodeId(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER));
+		System.err.println("Child Node: " + childNode);
+		myNode.addChild(childNode);
+		childNode.setContext("workingPage", journalPage);
+		childNode.activate();
+
 	}
 }

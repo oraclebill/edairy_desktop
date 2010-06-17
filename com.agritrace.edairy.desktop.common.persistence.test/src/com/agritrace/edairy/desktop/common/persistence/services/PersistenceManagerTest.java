@@ -1,5 +1,12 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,16 +21,14 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
-import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.*;
-
 public class PersistenceManagerTest {
 	PersistenceManager testPM;
 	Session testSession;
 	
 	@Before
 	public void setUp() throws Exception {
-		testPM = new HsqldbMemoryPersistenceManager();
+		testPM = new SybaseASAPersistenceManager();
+//		testPM = new HsqldbMemoryPersistenceManager();
 		testSession = testPM.getSession();
 	}
 

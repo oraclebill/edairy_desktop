@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}</li>
@@ -35,7 +36,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +44,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface CollectionJournalPage extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Journal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Journal Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Journal Id</em>' attribute.
+	 * @see #setJournalId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalId()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
+	 * @generated
+	 */
+	Long getJournalId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Journal Id</em>' attribute.
+	 * @see #getJournalId()
+	 * @generated
+	 */
+	void setJournalId(Long value);
+
 	/**
 	 * Returns the value of the '<em><b>Journal Entries</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
@@ -205,7 +231,7 @@ public interface CollectionJournalPage extends EObject {
 	 * @return the value of the '<em>Farm Container</em>' reference.
 	 * @see #setFarmContainer(Container)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_FarmContainer()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Container getFarmContainer();
@@ -231,7 +257,7 @@ public interface CollectionJournalPage extends EObject {
 	 * @return the value of the '<em>Bin</em>' reference.
 	 * @see #setBin(DairyContainer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Bin()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	DairyContainer getBin();
@@ -257,7 +283,7 @@ public interface CollectionJournalPage extends EObject {
 	 * @return the value of the '<em>Vehicle</em>' reference.
 	 * @see #setVehicle(Vehicle)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Vehicle()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Vehicle getVehicle();
@@ -283,7 +309,7 @@ public interface CollectionJournalPage extends EObject {
 	 * @return the value of the '<em>Driver Total</em>' attribute.
 	 * @see #setDriverTotal(BigDecimal)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_DriverTotal()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	BigDecimal getDriverTotal();
@@ -310,7 +336,7 @@ public interface CollectionJournalPage extends EObject {
 	 * @return the value of the '<em>Record Total</em>' attribute.
 	 * @see #setRecordTotal(BigDecimal)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_RecordTotal()
-	 * @model default="0" required="true" derived="true"
+	 * @model default="0" derived="true"
 	 * @generated
 	 */
 	BigDecimal getRecordTotal();
@@ -324,33 +350,5 @@ public interface CollectionJournalPage extends EObject {
 	 * @generated
 	 */
 	void setRecordTotal(BigDecimal value);
-
-	/**
-	 * Returns the value of the '<em><b>Journal Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Journal Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Journal Id</em>' attribute.
-	 * @see #setJournalId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalId()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
-	 *        extendedMetaData="name='journalId' kind='elementOnly'"
-	 *        annotation="teneo.jpa appinfo='@Id'"
-	 * @generated
-	 */
-	Long getJournalId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Journal Id</em>' attribute.
-	 * @see #getJournalId()
-	 * @generated
-	 */
-	void setJournalId(Long value);
 
 } // CollectionJournalPage

@@ -1,25 +1,40 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
+import java.text.DateFormat;
+import java.util.Formatter;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
+import java.util.List;
+import java.util.Locale;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
@@ -33,18 +48,21 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Text;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
-	private DatePickerComposite datePicker;
+	private DateTime datePicker;
 	private CCombo routeCombo;
 	private CCombo vehicleCombo;
 	private CCombo sessionCombo;
 	private CCombo driverCombo;
 
 	private final IDairyRepository dairyRepository = new DairyRepository();
-	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();	
-	
+	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
+	private Text fileNumber;
+
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
 	}
@@ -56,8 +74,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	@Override
 	protected Control createContents(Composite parent) {
 		final Control contents = super.createContents(parent);
-		setTitle("Create New Journal Book");
-		setMessage("Please enter the details for the new Journal Book.");
+		setTitle("Create New Collections Journal File");
+		setMessage("Please enter the date, session, route and file number for this set of collections records.");
 		return contents;
 	}
 
@@ -65,36 +83,49 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		final Composite buffer = (Composite) super.createDialogArea(parent);
 		final Composite workArea = UIControlsFactory.createComposite(buffer);
+		workArea.setLayout(new GridLayout(3, false));
 		workArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		// workArea.setLayout(new GridLayout(3, true));
 		{
-			final Label label = UIControlsFactory.createLabel(workArea, "Date");
-			datePicker = UIControlsFactory.createDatePickerComposite(workArea, "date-picker");
-			((GridData) datePicker.getTextfield().getLayoutData()).grabExcessVerticalSpace = false;
-			final Label filler = UIControlsFactory.createLabel(workArea, "");
+			Composite panel = UIControlsFactory.createComposite(workArea);
+			{
+				final Label label = UIControlsFactory.createLabel(panel, "Date");
+				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
+				datePicker = UIControlsFactory.createDate(panel, 0, "date-picker");
+				GridDataFactory.swtDefaults().hint(100, -1).applyTo(datePicker);
+			}
+			{
+				final Label label = UIControlsFactory.createLabel(panel, "Session");
+				sessionCombo = UIControlsFactory.createCCombo(panel, "sesison");
+				GridDataFactory.swtDefaults().hint(100, -1).applyTo(sessionCombo);
+			}
+			{
+				final Label label = UIControlsFactory.createLabel(panel, "Route");
+				routeCombo = UIControlsFactory.createCCombo(panel, "route");
+				GridDataFactory.swtDefaults().hint(100, -1).applyTo(routeCombo);
+			}
+			{
+				Label lblFileNumber = UIControlsFactory.createLabel(panel, "File Number");
+				fileNumber = UIControlsFactory.createText(panel, SWT.BORDER, "fileNumber");
+				GridDataFactory.swtDefaults().hint(100, -1).applyTo(fileNumber);
+			}
+			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
 		{
-			final Label label = UIControlsFactory.createLabel(workArea, "Route");
-			routeCombo = UIControlsFactory.createCCombo(workArea, "route");
-			final Label filler = UIControlsFactory.createLabel(workArea, "");
+			Composite panel = UIControlsFactory.createComposite(workArea);
+			{
+				final Label label = UIControlsFactory.createLabel(panel, "Vehicle");
+				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
+				vehicleCombo = UIControlsFactory.createCCombo(panel, "vehicle");
+				GridDataFactory.swtDefaults().hint(100, -1).applyTo(vehicleCombo);
+			}
+			{
+				final Label label = UIControlsFactory.createLabel(panel, "Driver");
+				driverCombo = UIControlsFactory.createCCombo(panel, "driver");
+			}
+			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
-		{
-			final Label label = UIControlsFactory.createLabel(workArea, "Vehicle");
-			vehicleCombo = UIControlsFactory.createCCombo(workArea, "vehicle");
-			final Label filler = UIControlsFactory.createLabel(workArea, "");
-		}
-		{
-			final Label label = UIControlsFactory.createLabel(workArea, "Session");
-			sessionCombo = UIControlsFactory.createCCombo(workArea, "sesison");
-			final Label filler = UIControlsFactory.createLabel(workArea, "");
-		}
-		{
-			final Label label = UIControlsFactory.createLabel(workArea, "Driver");
-			driverCombo = UIControlsFactory.createCCombo(workArea, "driver");
-			final Label filler = UIControlsFactory.createLabel(workArea, "");
-		}
-		GridLayoutFactory.swtDefaults().numColumns(3).equalWidth(true).generateLayout(workArea);
-		GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL);
+		GridLayoutFactory.swtDefaults().numColumns(1).spacing(8, 8).generateLayout(workArea);
 
 		configureRidgets();
 
@@ -109,9 +140,9 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, true);
 		final Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		okButton.setEnabled(false);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, true);
 
 	}
 
@@ -123,46 +154,153 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	private void configureRidgets() {
 		// create/configure ridgets
-		final IDateTextRidget dateTime = (IDateTextRidget)SwtRidgetFactory.createRidget(datePicker);
-		final IComboRidget route = (IComboRidget)SwtRidgetFactory.createRidget(routeCombo);
-		final IComboRidget vehicle = (IComboRidget)SwtRidgetFactory.createRidget(vehicleCombo);
-		final IComboRidget session = (IComboRidget)SwtRidgetFactory.createRidget(sessionCombo);
-		final IComboRidget driver = (IComboRidget)SwtRidgetFactory.createRidget(driverCombo);
+		final IDateTimeRidget dateTime = (IDateTimeRidget) SwtRidgetFactory.createRidget(datePicker);
+		final IComboRidget route = (IComboRidget) SwtRidgetFactory.createRidget(routeCombo);
+		final IComboRidget vehicle = (IComboRidget) SwtRidgetFactory.createRidget(vehicleCombo);
+		final IComboRidget session = (IComboRidget) SwtRidgetFactory.createRidget(sessionCombo);
+		final IComboRidget driver = (IComboRidget) SwtRidgetFactory.createRidget(driverCombo);
+		final ITextRidget file = (ITextRidget) SwtRidgetFactory.createRidget(fileNumber);
+
+		final PropertyChangeListener validationListener = new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				boolean isValid = true;
+
+				// broken
+				// isValid = isValid && route.isErrorMarked() ||
+				// route.isMandatory() && route.getText().isEmpty();
+				// isValid = isValid && vehicle.isErrorMarked() ||
+				// vehicle.isMandatory() && vehicle.getText().isEmpty();
+				// isValid = isValid && session.isErrorMarked() ||
+				// session.isMandatory() && session.getText().isEmpty();
+				// isValid = isValid && driver.isErrorMarked() ||
+				// driver.isMandatory() && driver.getText().isEmpty();
+				// isValid = isValid && file.isErrorMarked() ||
+				// file.isMandatory() && file.getText().isEmpty();
+
+				getButton(IDialogConstants.OK_ID).setEnabled(isValid);
+			}
+		};
+		class UpdateListener implements PropertyChangeListener, FocusListener {
+
+			private boolean auto = true;
+			private boolean focus = false;
+			private String oldTxt = null;
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				// todo: remove
+				debugPrintEvent(evt);
+
+				if (auto) {
+					if (!focus) {
+						assert(evt.getSource() != file);
+						updateFileNumber();
+					} else {
+						assert(evt.getSource() == file);
+						if (evt.getPropertyName().equals("text")) {
+							oldTxt = (String) evt.getNewValue();
+						} else if (evt.getPropertyName().equals("textAfter")) {
+							String newTxt = (String) evt.getNewValue();
+							if (null != oldTxt && null != newTxt && !oldTxt.equals(newTxt)) {
+								auto = false;
+							}
+						}
+					}
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				focus = true;
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				focus = false;
+			}
+
+			private void updateFileNumber() {
+				StringBuilder sb = new StringBuilder();
+				Formatter f = new Formatter(sb, Locale.getDefault());
+				file.setText(f.format("%s[%s]-%s", route.getText(), session.getText(),
+						dateTime.getText().replaceAll(" ", "_")).toString());
+			}
+
+			private void debugPrintEvent(PropertyChangeEvent evt) {
+				StringBuilder sb = new StringBuilder();
+				Formatter f = new Formatter(sb, Locale.getDefault());
+				System.err.println(f.format("[%s] %s: %s (%s)", evt.getSource(), evt.getPropertyName(),
+						evt.getNewValue(), evt.getOldValue()));
+
+			}
+		}
+		;
+		final UpdateListener fileNumberUpdateListener = new UpdateListener();
 
 		// configure ridgets
-		dateTime.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		dateTime.setMandatory(true);
+		// dateTime.setMandatory(true);
+		// dateTime.setDirectWriting(true);
+		dateTime.addPropertyChangeListener(fileNumberUpdateListener);
+		dateTime.addPropertyChangeListener(validationListener);
+
 		route.setMandatory(true);
-//		route.setOutputOnly(true);
+		route.addPropertyChangeListener(fileNumberUpdateListener);
+		route.addPropertyChangeListener(validationListener);
+		// route.setOutputOnly(true);
+
+		file.setMandatory(true);
+		file.setDirectWriting(true);
+		file.addPropertyChangeListener(fileNumberUpdateListener);
+		file.addPropertyChangeListener(validationListener);
+
 		vehicle.setMandatory(true);
+		vehicle.addPropertyChangeListener(validationListener);
+
 		session.setMandatory(true);
+		session.addPropertyChangeListener(validationListener);
+
 		driver.setMandatory(true);
+		driver.addPropertyChangeListener(validationListener);
 
 		// bind ridgets
-		// bind date
-		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
-		dateTime.setText(DateTimeUtils.DATE_FORMAT.format(new Date()));
 
-		route.bindToModel(new WritableList(dairyRepository.allRoutes(), Route.class),
-				Route.class, "getName",
+		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
+
+		final List<Route> routes = dairyRepository.allRoutes();
+		route.bindToModel(new WritableList(routes, Route.class), Route.class, "getName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
-		vehicle.bindToModel(new WritableList(dairyRepository.allVehicles(), Vehicle.class),
-				Vehicle.class, "getLogBookNumber",
+//		if (routes.size() > 0) route.setSelection(0);
+		
+		file.bindToModel(EMFObservables.observeValue(newJournalPage,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER));
+
+		final List<Vehicle> vehicles =dairyRepository.allVehicles(); 
+		vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class,
+				"getLogBookNumber",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
-		session.bindToModel(new WritableList(Arrays.asList(Session.values()), Session.class),
-				Session.class, null,
+//		if (vehicles.size() > 0) vehicle.setSelection(0);
+
+		final List<Session> sessions = Arrays.asList(Session.values());
+		session.bindToModel(new WritableList(sessions, Session.class), Session.class, null,
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
-		driver.bindToModel(new WritableList(dairyRepository.employeesByPosition("Driver"), Employee.class),
+//		if (sessions.size() > 0) session.setSelection(0);
+		
+		List<Employee> employees = dairyRepository.employeesByPosition("Driver");
+		driver.bindToModel(new WritableList(employees, Employee.class),
 				Employee.class, "getFamilyName",
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
+//		if (employees.size() > 0) driver.setSelection(0);
 		
-		
-		//dateTime.updateFromModel();
+		// update initial values
+
+		newJournalPage.setJournalDate(new Date());
+		dateTime.updateFromModel();
 		route.updateFromModel();
 		vehicle.updateFromModel();
 		session.updateFromModel();
 		driver.updateFromModel();
-		
-	}
 
+	}
 }

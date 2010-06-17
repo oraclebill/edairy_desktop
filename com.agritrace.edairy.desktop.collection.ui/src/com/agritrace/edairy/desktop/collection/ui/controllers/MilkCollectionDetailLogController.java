@@ -82,14 +82,18 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 
 	@Override
 	public void afterBind() {
+		// important?
+		super.afterBind();
+		// 
+		CollectionJournalPage currentJournalPage;
 		final INavigationNode<?> node = getNavigationNode();
-		final Object journalPage = node.getContext("JOURNAL_PAGE_ID");
-		if ((journalPage != null) && (journalPage instanceof String) ) {
-			final String pageId = (String) journalPage;
-			currentJournalPage = journalRepository.getJournalPageById(pageId);
+		final Object journalPage = node.getContext("JOURNAL_PAGE");
+		if ((journalPage != null) && (journalPage instanceof CollectionJournalPage) ) {
+			currentJournalPage = (CollectionJournalPage) journalPage;			
+		} 
+		else {
+			throw new IllegalStateException("Journal editor requires context setting 'JOURNAL_PAGE' with current page");
 		}
-
-		assert(currentJournalPage != null);
 
 		book.setText(currentJournalPage.getRoute().getName());
 		date.setText(DateTimeUtils.DATE_FORMAT.format(currentJournalPage.getJournalDate()));

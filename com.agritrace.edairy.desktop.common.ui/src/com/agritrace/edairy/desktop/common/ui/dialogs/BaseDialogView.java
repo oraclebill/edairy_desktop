@@ -77,18 +77,5 @@ public abstract class BaseDialogView extends AbstractDialogView {
 	}
 
 	protected abstract void buildWorkArea(Composite parent);
-	
-//	protected abstract void onSave();
-//	
-//	protected abstract void onCancel();
-//	
-//	protected abstract void onDelete();
-	
-	@Override
-	public boolean close() {
-		getController().setReturnCode(DialogConstants.ACTION_CANCEL);
-		return super.close();
-	}
-
-	
+		
 }

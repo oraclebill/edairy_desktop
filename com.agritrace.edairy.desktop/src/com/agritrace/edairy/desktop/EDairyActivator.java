@@ -7,6 +7,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.SybaseASAPersistenceManager;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -95,6 +96,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 	private void initDatabase() {
 		// FIXME: get config from filesystem
 //		 PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
-		PersistenceManager.getDefault().getSession();
+		 PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
+//		PersistenceManager.getDefault().getSession();
 	}
 }
