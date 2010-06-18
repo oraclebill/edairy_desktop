@@ -43,11 +43,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.views">
 		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.dairy.employees.ui.views.StaffInfoView" id="dairy.employee.masterdetail.view"
-			name="StaffInfoView">
-		</view>
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.BlankView" id="default.blank.view"
+			class="com.agritrace.edairy.desktop.common.ui.views.BlankView" id="default.blank.view"
 			name="Blank" restorable="true">
 		</view>
 		<view allowMultiple="true"
@@ -68,7 +64,170 @@
 		</view>
 	</extension>
 
-
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.riena.demo.client.exitCommand"
+            name="Exit">
+      </command>
+      <command
+            id="org.eclipse.riena.demo.client.zoomInCommand"
+            name="In">
+      </command>
+      <command
+            id="org.eclipse.riena.demo.client.certainViewCommand"
+            name="Certain View (Combo)">
+      </command>
+      <command
+            id="org.eclipse.riena.demo.client.zoomOutCommand"
+            name="Out">
+      </command>
+      <command
+            id="org.eclipse.riena.demo.client.certainPerspectiveCommand"
+            name="Certain Perspective (Playground)">
+      </command>
+            <command
+            id="org.eclipse.riena.demo.client.histBackCommand"
+            name="History Backward">
+      </command>
+      <command
+            id="org.eclipse.riena.demo.client.histForCommand"
+            name="History Forward">
+      </command>
+    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="fileMenu"
+               label="File"
+               mnemonic="F">
+            <menu
+                  id="org.eclipse.riena.demo.client.zoomMenu"
+                  label="Zoom"
+                  mnemonic="Z">
+               <command
+                     commandId="org.eclipse.riena.demo.client.zoomInCommand"
+                     id="org.eclipse.riena.demo.client.zoomInMenuItem"
+                     mnemonic="I"
+                     style="push">
+               </command>
+               <command
+                     commandId="org.eclipse.riena.demo.client.zoomOutCommand"
+                     id="org.eclipse.riena.demo.client.zoomOutMenuItem"
+                     mnemonic="O"
+                     style="push">
+               </command>
+            </menu>
+            <command
+                  commandId="org.eclipse.riena.demo.client.exitCommand"
+                  id="org.eclipse.riena.demo.client.exitMenuItem"
+                  mnemonic="x">
+            </command>
+         </menu>
+         <!--
+         <menu
+               label="Preferences"
+               mnemonic="P">
+            <menu
+                  label="Look &apos;n&apos; Feel"
+                  mnemonic="L">
+               <command
+                     commandId="org.eclipse.riena.example.client.rienaDefaultLnfCommand"
+                     id="org.eclipse.riena.example.client.rienaDefaultLnfMenuItem"
+                     mnemonic="D">
+               </command>
+               <command
+                     commandId="org.eclipse.riena.example.client.exampleLnfCommand"
+                     id="org.eclipse.riena.example.client.exampleLnfMenuItem"
+                     mnemonic="x">
+               </command>
+            </menu>
+         </menu>
+         -->
+         <menu
+               id="contextMenu"
+               label="Context menu"
+               mnemonic="x">
+            <command
+                  commandId="org.eclipse.riena.demo.client.certainViewCommand"
+                  icon="icons/ledred.png"
+                  id="org.eclipse.riena.demo.client.certainViewMenuItem"
+                  mnemonic="V"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.riena.demo.client.certainPerspectiveCommand"
+                  icon="icons/ledlightgreen.png"
+                  id="org.eclipse.riena.demo.client.certainPerspectiveMenuItem"
+                  mnemonic="P"
+                  style="push">
+            </command>
+         </menu>
+         <menu
+               id="navigationMenu"
+               label="Navigation menu"
+               mnemonic="N">
+            <command
+                  commandId="org.eclipse.riena.demo.client.histBackCommand"
+                  icon="icons/backward.gif"
+                  id="org.eclipse.riena.demo.client.histBackMenuItem"
+                  mnemonic="B"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.riena.demo.client.histForCommand"
+                  icon="icons/forward.gif"
+                  id="org.eclipse.riena.demo.client.histForMenuItem"
+                  mnemonic="F"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="org.eclipse.riena.demo.client.toolbar">
+            <command
+                  commandId="org.eclipse.riena.demo.client.exitCommand"
+                  id="org.eclipse.riena.demo.client.exitToolBarItem"
+                  label="Exit"
+                  mnemonic="x"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.riena.demo.client.certainViewCommand"
+                  icon="icons/ledred.png"
+                  id="org.eclipse.riena.demo.client.certainViewToolBarItem"
+                  label="View"
+                  mnemonic="V"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.riena.demo.client.certainPerspectiveCommand"
+                  icon="icons/ledlightgreen.png"
+                  label="Perspective"
+                  mnemonic="P"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.riena.demo.client.histBackCommand"
+                  icon="icons/backward.gif"
+                  label="History Back"
+                  mnemonic="B"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.riena.demo.client.histForCommand"
+                  icon="icons/forward.gif"
+                  label="History Forward"
+                  mnemonic="F"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
 
 	<extension point="org.eclipse.riena.ui.swt.imagePaths">
 		<path path="resources" />
@@ -111,4 +270,40 @@
        </run>
     </application>
  </extension>
+ <extension
+       point="org.eclipse.riena.navigation.assemblies2">
+      <assembly2
+            id="com.agritrace.edairy.desktop.milk"
+            assembler="com.agritrace.edairy.desktop.collection.ui.navigation.MilkNavigationNodeAssembler"
+            parentNodeId="application">
+      </assembly2>
+      <!--
+    <assembly2
+          id="com.agritrace.edairy.desktop.assembly"
+          name="eDairy Manager Application"
+          parentNodeId="application"
+          startOrder="100">
+       <subApplication
+             name="Home (2)"
+             perspectiveId="com.agritrace.edairy.desktop.home"
+             nodeId="home"
+             >
+             <moduleGroup
+             	nodeId="home-group"
+             	name="Home">
+             	<module 
+             		nodeId="home-module" name="Home Module" closable="false"> 
+             		<subModule 
+             			name="Home View"
+             			nodeId="home-submodule"
+             			viewId="default.blank.view" 
+             			visible="true">
+             		</subModule>
+             	</module>
+             </moduleGroup>
+       </subApplication>
+    </assembly2>
+    -->
+ </extension>
+ 
 </plugin>

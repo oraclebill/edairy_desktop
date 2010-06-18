@@ -5,25 +5,21 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.window.Window;
-import org.eclipse.riena.core.marker.IMarker;
 import org.eclipse.riena.navigation.INavigationNode;
-import org.eclipse.riena.navigation.INavigationNode.State;
-import org.eclipse.riena.navigation.ISimpleNavigationNodeListener;
 import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.NavigationNodeId;
-import org.eclipse.riena.ui.filter.IUIFilter;
-import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.navigation.model.SubModuleNode;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
-import org.eclipse.riena.ui.workarea.IWorkareaDefinition;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog;
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.*;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -207,14 +203,29 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		refreshTableContents();
 	}
 	
+	private ISubModuleNode createCollectionDetailNode( CollectionJournalPage journalPage ) {
+		getNavigationNode().navigate(
+				new NavigationNodeId("riena.demo.client.customermailfolders.module", journalPage.getReferenceNumber()), //$NON-NLS-1$
+				new NavigationArgument(journalPage));
+		
+		ISubModuleNode detailViewNode = new SubModuleNode(
+				new NavigationNodeId("milk-collection-detail-node", journalPage.getReferenceNumber()), 
+				"Collections Detail for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
+		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
+		detailViewNode.setContext("JOURNAL_PAGE", journalPage);
+		WorkareaManager.getInstance().registerDefinition(
+				detailViewNode, 
+				MilkCollectionDetailLogController.class,
+				MilkCollectionDetailLog.ID).setRequiredPreparation(true); //$NON-NLS-1$
+		return detailViewNode;
+	}
+		
 	private void activateDetailView( CollectionJournalPage journalPage ) {
 		ISubModuleNode myNode = getNavigationNode();
 		System.err.println("Node:    " + myNode);
 		System.err.println("Actions: " + myNode.getActions());
-		ISubModuleNode childNode = (ISubModuleNode) myNode.getNavigationProcessor().create(myNode,
-				new NavigationNodeId(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER));
+		ISubModuleNode childNode = createCollectionDetailNode(journalPage);
 		System.err.println("Child Node: " + childNode);
-		childNode.setContext("JOURNAL_PAGE", journalPage);
 		myNode.addChild(childNode);
 		try {
 			childNode.activate();

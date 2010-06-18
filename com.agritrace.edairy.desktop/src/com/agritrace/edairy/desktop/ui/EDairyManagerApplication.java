@@ -12,19 +12,16 @@ import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ApplicationNode;
 import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
+import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionDetailLogController;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkSubAppConstants;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
+import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
+import com.agritrace.edairy.desktop.common.ui.views.BlankView;
 import com.agritrace.edairy.desktop.dairy.containers.ui.controllers.ContainerLogViewController;
 import com.agritrace.edairy.desktop.dairy.containers.ui.views.ContainerLogView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
@@ -57,7 +54,6 @@ import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
-import com.agritrace.edairy.desktop.ui.views.BlankView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
@@ -160,13 +156,21 @@ public class EDairyManagerApplication extends SwtApplication {
 		// TODO Auto-generated method stub
 		super.initializeNodeDefaultIcon(node);
 	}
+	
+	@Override
+	protected ApplicationController createApplicationController(IApplicationNode node) {
+		ApplicationController controller = super.createApplicationController(node);
+		controller.setMenubarVisible(true);
+		return controller;
+	}
+
 
 	@Override
 	protected IApplicationNode createModel() {
 
 		// ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 
-		final ApplicationNode app = new ApplicationNode(LABEL_APPLICATION);
+		final ApplicationNode app = new ApplicationNode( new NavigationNodeId("application"), LABEL_APPLICATION);
 		final WorkareaManager workarea = WorkareaManager.getInstance();
 
 		ISubApplicationNode subAppNode;
@@ -177,7 +181,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// HOME TAB
 		//
 
-		subAppNode = new SubApplicationNode(LABEL_HOME);
+		subAppNode = new SubApplicationNode(new NavigationNodeId("home"), LABEL_HOME);
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, SUBAPP_HOME);
 
@@ -194,37 +198,37 @@ public class EDairyManagerApplication extends SwtApplication {
 		// MILK TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(MilkSubAppConstants.SUBAPP_MILK), LABEL_MILK);
-		app.addChild(subAppNode);
-		workarea.registerDefinition(subAppNode, MilkSubAppConstants.SUBAPP_MILK_VIEWID);
-
-		//
-		// COLLECTION MODULE GROUP
-		//
-		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MilkSubAppConstants.MODULE_GROUP_MILK));
-		subAppNode.addChild(moduleGroupNode);
-
-		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_COLLECTIONS, "Milk Collection",
-				moduleGroupNode);
-
-		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_REGISTER, "Collection Log",
-				moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class); //$NON-NLS-1$ 
-
-		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
-				"Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
-				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
-
-		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY, "Log New Collections",
-				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
-
-		//
-		// DELIVERY MODULE GROUP
-		//
-		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
-				moduleGroupNode);
-		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
-				"Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ 
-		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		app.create(new NavigationNodeId(MilkSubAppConstants.SUBAPP_MILK));
+//		app.addChild(subAppNode);
+//		workarea.registerDefinition(subAppNode, MilkSubAppConstants.SUBAPP_MILK_VIEWID);
+//
+//		//
+//		// COLLECTION MODULE GROUP
+//		//
+//		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MilkSubAppConstants.MODULE_GROUP_MILK));
+//		subAppNode.addChild(moduleGroupNode);
+//
+//		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_COLLECTIONS, "Milk Collection",
+//				moduleGroupNode);
+//
+//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_REGISTER, "Collection Log",
+//				moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class); //$NON-NLS-1$ 
+//
+//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
+//				"Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
+//				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
+//
+//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY, "Log New Collections",
+//				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
+//
+//		//
+//		// DELIVERY MODULE GROUP
+//		//
+//		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
+//				moduleGroupNode);
+//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
+//				"Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ 
+//		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
 		// MEMBER TAB
