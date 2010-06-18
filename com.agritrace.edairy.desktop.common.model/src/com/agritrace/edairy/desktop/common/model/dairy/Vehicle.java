@@ -362,12 +362,12 @@ public interface Vehicle extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Year</em>' attribute.
-	 * @see #setYear(String)
+	 * @see #setYear(Integer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_Year()
 	 * @model
 	 * @generated
 	 */
-	String getYear();
+	Integer getYear();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getYear <em>Year</em>}' attribute.
@@ -377,7 +377,7 @@ public interface Vehicle extends EObject {
 	 * @see #getYear()
 	 * @generated
 	 */
-	void setYear(String value);
+	void setYear(Integer value);
 
 	/**
 	 * Returns the value of the '<em><b>Driver</b></em>' reference.

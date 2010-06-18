@@ -298,7 +298,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String YEAR_EDEFAULT = null;
+	protected static final Integer YEAR_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
@@ -308,7 +308,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected String year = YEAR_EDEFAULT;
+	protected Integer year = YEAR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
@@ -606,7 +606,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
@@ -615,8 +615,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setYear(String newYear) {
-		String oldYear = year;
+	public void setYear(Integer newYear) {
+		Integer oldYear = year;
 		year = newYear;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
@@ -805,7 +805,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 				setCapacityInTonnes((Double)newValue);
 				return;
 			case DairyPackage.VEHICLE__YEAR:
-				setYear((String)newValue);
+				setYear((Integer)newValue);
 				return;
 			case DairyPackage.VEHICLE__DRIVER:
 				setDriver((Employee)newValue);

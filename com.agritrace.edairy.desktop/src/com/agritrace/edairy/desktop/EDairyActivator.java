@@ -96,7 +96,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 	private void initDatabase() {
 		// FIXME: get config from filesystem
 //		 PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
-		 PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
-//		PersistenceManager.getDefault().getSession();
+//		 PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
+		PersistenceManager.getDefault().getSession();
 	}
 }
