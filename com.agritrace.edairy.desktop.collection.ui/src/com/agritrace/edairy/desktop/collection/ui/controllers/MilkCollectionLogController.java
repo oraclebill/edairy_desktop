@@ -214,9 +214,14 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		ISubModuleNode childNode = (ISubModuleNode) myNode.getNavigationProcessor().create(myNode,
 				new NavigationNodeId(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER));
 		System.err.println("Child Node: " + childNode);
+		childNode.setContext("JOURNAL_PAGE", journalPage);
 		myNode.addChild(childNode);
-		childNode.setContext("workingPage", journalPage);
-		childNode.activate();
-
+		try {
+			childNode.activate();
+		}
+		catch(Exception e) {
+			myNode.removeChild(childNode);
+			e.printStackTrace();
+		}
 	}
 }

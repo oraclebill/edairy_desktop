@@ -8,6 +8,7 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
@@ -27,7 +28,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	//	private final MilkCollectionDetailLogFilterBean filterBean = new MilkCollectionDetailLogFilterBean();
 
 	private ITextRidget book;
-	private ITextRidget date;
+	private IDateTimeRidget date;
 	private ITextRidget session;
 	private ITextRidget route;
 	private ITextRidget driver;
@@ -40,7 +41,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private IActionRidget  addPageButton;
 
 	private CollectionJournalPage currentJournalPage;
-	private final WritableValue pageValue = new WritableValue(null, Integer.class);
+	private final WritableValue pageValue = new WritableValue(1, Integer.class);
 	private final IDairyRepository journalRepository = new DairyRepository();
 
 
@@ -64,7 +65,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 
 		// header text fields
 		book = getRidget(ITextRidget.class, ViewConstants.COLLECTION_DETAIL_HEADER_BOOK_TXT);
-		date = getRidget(ITextRidget.class, ViewConstants.COLLECTION_DETAIL_HEADER_DATE_TXT);
+		date = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_DETAIL_HEADER_DATE_TXT);
 		session = getRidget(ITextRidget.class, ViewConstants.COLLECTION_DETAIL_HEADER_SESSION_TXT);
 		route = getRidget(ITextRidget.class, ViewConstants.COLLECTION_DETAIL_HEADER_ROUTE_TXT);
 		driver = getRidget(ITextRidget.class, ViewConstants.COLLECTION_DETAIL_HEADER_DRIVER_TXT);
@@ -96,7 +97,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		}
 
 		book.setText(currentJournalPage.getRoute().getName());
-		date.setText(DateTimeUtils.DATE_FORMAT.format(currentJournalPage.getJournalDate()));
+		date.setDate(currentJournalPage.getJournalDate());
 		session.setText(currentJournalPage.getSession().getName());
 		route.setText(currentJournalPage.getRoute().getName());
 		driver.setText(currentJournalPage.getDriver().getFamilyName());
