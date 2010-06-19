@@ -806,6 +806,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCollectionJournalPage_Suspended() {
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRoute() {
 		return routeEClass;
 	}
@@ -1487,6 +1496,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__VEHICLE);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__RECORD_TOTAL);
+		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__SUSPENDED);
 
 		routeEClass = createEClass(ROUTE);
 		createEAttribute(routeEClass, ROUTE__ID);
@@ -1630,7 +1640,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEClass(collectionJournalLineEClass, CollectionJournalLine.class, "CollectionJournalLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollectionJournalLine_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_RecordedMember(), ecorePackage.getEString(), "recordedMember", null, 1, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalLine_Quantity(), ecorePackage.getEDouble(), "quantity", null, 1, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionJournalLine_Quantity(), ecorePackage.getEBigDecimal(), "quantity", null, 1, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_Flagged(), ecorePackage.getEBoolean(), "flagged", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_UnitOfMeasure(), theModelPackage.getUnitOfMeasure(), "unitOfMeasure", "KILOGRAMS", 1, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_NotRecorded(), ecorePackage.getEBoolean(), "notRecorded", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1674,6 +1684,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getCollectionJournalPage_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_DriverTotal(), ecorePackage.getEBigDecimal(), "driverTotal", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionJournalPage_Suspended(), ecorePackage.getEBoolean(), "suspended", "false", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoute_Id(), ecorePackage.getELong(), "Id", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

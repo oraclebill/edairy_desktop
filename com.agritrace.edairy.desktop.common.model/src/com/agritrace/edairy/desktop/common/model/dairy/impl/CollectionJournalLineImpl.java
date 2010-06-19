@@ -16,6 +16,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
+import java.math.BigDecimal;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -98,7 +99,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double QUANTITY_EDEFAULT = 0.0;
+	protected static final BigDecimal QUANTITY_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
@@ -108,7 +109,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 * @ordered
 	 */
-	protected double quantity = QUANTITY_EDEFAULT;
+	protected BigDecimal quantity = QUANTITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isFlagged() <em>Flagged</em>}' attribute.
@@ -326,7 +327,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getQuantity() {
+	public BigDecimal getQuantity() {
 		return quantity;
 	}
 
@@ -335,8 +336,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setQuantity(double newQuantity) {
-		double oldQuantity = quantity;
+	public void setQuantity(BigDecimal newQuantity) {
+		BigDecimal oldQuantity = quantity;
 		quantity = newQuantity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__QUANTITY, oldQuantity, quantity));
@@ -695,7 +696,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				setRecordedMember((String)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__QUANTITY:
-				setQuantity((Double)newValue);
+				setQuantity((BigDecimal)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__FLAGGED:
 				setFlagged((Boolean)newValue);
@@ -795,7 +796,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER:
 				return RECORDED_MEMBER_EDEFAULT == null ? recordedMember != null : !RECORDED_MEMBER_EDEFAULT.equals(recordedMember);
 			case DairyPackage.COLLECTION_JOURNAL_LINE__QUANTITY:
-				return quantity != QUANTITY_EDEFAULT;
+				return QUANTITY_EDEFAULT == null ? quantity != null : !QUANTITY_EDEFAULT.equals(quantity);
 			case DairyPackage.COLLECTION_JOURNAL_LINE__FLAGGED:
 				return flagged != FLAGGED_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__UNIT_OF_MEASURE:

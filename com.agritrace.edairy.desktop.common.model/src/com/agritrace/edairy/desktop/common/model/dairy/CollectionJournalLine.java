@@ -11,6 +11,7 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
+import java.math.BigDecimal;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -103,12 +104,12 @@ public interface CollectionJournalLine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Quantity</em>' attribute.
-	 * @see #setQuantity(double)
+	 * @see #setQuantity(BigDecimal)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_Quantity()
 	 * @model required="true"
 	 * @generated
 	 */
-	double getQuantity();
+	BigDecimal getQuantity();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getQuantity <em>Quantity</em>}' attribute.
@@ -118,7 +119,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @see #getQuantity()
 	 * @generated
 	 */
-	void setQuantity(double value);
+	void setQuantity(BigDecimal value);
 
 	/**
 	 * Returns the value of the '<em><b>Flagged</b></em>' attribute.

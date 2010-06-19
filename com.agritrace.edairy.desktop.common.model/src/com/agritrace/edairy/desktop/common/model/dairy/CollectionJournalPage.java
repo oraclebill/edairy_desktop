@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}</li>
  * </ul>
  * </p>
  *
@@ -350,5 +351,32 @@ public interface CollectionJournalPage extends EObject {
 	 * @generated
 	 */
 	void setRecordTotal(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Suspended</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Suspended</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Suspended</em>' attribute.
+	 * @see #setSuspended(boolean)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Suspended()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isSuspended();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Suspended</em>' attribute.
+	 * @see #isSuspended()
+	 * @generated
+	 */
+	void setSuspended(boolean value);
 
 } // CollectionJournalPage

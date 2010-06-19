@@ -754,13 +754,22 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 11;
 
 	/**
+	 * The feature id for the '<em><b>Suspended</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 12;
+
+	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 12;
+	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -2395,6 +2404,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCollectionJournalPage_RecordTotal();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Suspended</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_Suspended();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Route <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3618,6 +3638,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = eINSTANCE.getCollectionJournalPage_RecordTotal();
+
+		/**
+		 * The meta object literal for the '<em><b>Suspended</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__SUSPENDED = eINSTANCE.getCollectionJournalPage_Suspended();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
