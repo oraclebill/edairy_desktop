@@ -17,7 +17,7 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -183,8 +183,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected RecordDialog<CollectionJournalPage, ?> getRecordDialog(Shell shell) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("unsupported");
 	}
 
 	@Override
@@ -209,14 +208,14 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				new NavigationArgument(journalPage));
 		
 		ISubModuleNode detailViewNode = new SubModuleNode(
-				new NavigationNodeId("milk-collection-detail-node", journalPage.getReferenceNumber()), 
-				"Collections Detail for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
+				new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), 
+				"Collections Entry for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
 		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
 		detailViewNode.setContext("JOURNAL_PAGE", journalPage);
 		WorkareaManager.getInstance().registerDefinition(
 				detailViewNode, 
-				MilkCollectionDetailLogController.class,
-				MilkCollectionDetailLog.ID).setRequiredPreparation(true); //$NON-NLS-1$
+				MilkCollectionJournalController.class,
+				MilkCollectionJournalView.ID).setRequiredPreparation(true); //$NON-NLS-1$
 		return detailViewNode;
 	}
 		
@@ -227,6 +226,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		ISubModuleNode childNode = createCollectionDetailNode(journalPage);
 		System.err.println("Child Node: " + childNode);
 		myNode.addChild(childNode);
+//		myNode.getNavigationProcessor().navigate(myNode, childNode.getNodeId(), new NavigationArgument(journalPage));
 		try {
 			childNode.activate();
 		}

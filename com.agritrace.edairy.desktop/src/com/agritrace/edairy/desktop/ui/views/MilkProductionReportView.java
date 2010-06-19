@@ -10,8 +10,10 @@
  *******************************************************************************/
 package com.agritrace.edairy.desktop.ui.views;
 
+import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -24,32 +26,33 @@ import com.swtdesigner.SWTResourceManager;
 
 public class MilkProductionReportView extends ViewPart {
 
-    public static final String ID = "reports.milk.production";
+	public static final String ID = "reports.milk.production";
 
-    public MilkProductionReportView() {
-    }
+	public MilkProductionReportView() {
+	}
 
-    @Override
-    public void createPartControl(Composite parent) {
-	final Composite top = new Composite(parent, SWT.NONE);
-	top.setSize(new Point(800, 800));
-	top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-	top.setLayout(new GridLayout(1, false));
+	@Override
+	public void createPartControl(Composite parent) {
+		final Composite top = new Composite(parent, SWT.NONE);
+		top.setSize(new Point(800, 800));
+		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		top.setLayout(new GridLayout(1, false));
 
-	final ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-	scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-	scrolledComposite.setExpandHorizontal(true);
-	scrolledComposite.setExpandVertical(true);
+		final ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
 
-	final Label label = new Label(scrolledComposite, SWT.NONE);
-	label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-	label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.desktop.demo.riena",
-		"resources/eDairyReportTemplate-milkproduction.jpg"));
-	scrolledComposite.setContent(label);
-	scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-    }
+		final Label label = new Label(scrolledComposite, SWT.NONE);
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		Image img = ImageStore.getInstance().getImage("eDairyReportTemplate-milkproduction.jpg");
+		System.err.println("Image: " + img);
+		label.setImage(img);
+		scrolledComposite.setContent(label);
+		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
 
-    @Override
-    public void setFocus() {
-    }
+	@Override
+	public void setFocus() {
+	}
 }

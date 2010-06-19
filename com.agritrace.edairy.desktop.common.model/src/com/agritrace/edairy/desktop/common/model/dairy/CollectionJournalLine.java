@@ -265,7 +265,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @return the value of the '<em>From</em>' reference.
 	 * @see #setFrom(Farm)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_From()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Farm getFrom();
@@ -291,7 +291,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @return the value of the '<em>Farm Container</em>' reference.
 	 * @see #setFarmContainer(Container)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_FarmContainer()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Container getFarmContainer();

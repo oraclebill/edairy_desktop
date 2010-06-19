@@ -45,4 +45,6 @@ public interface IDairyRepository {
 
 	void save(Object changedItem);
 
+	CollectionJournalPage getJournalPageById(Long pageId);
+
 }

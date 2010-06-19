@@ -48,12 +48,12 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_REGISTER, "Collection Log",
 				moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class); //$NON-NLS-1$ 
 
-		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
-				"Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
-				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
-
-		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY, "Log New Collections",
-				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
+//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
+//				"Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
+//				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
+//
+//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY, "Log New Collections",
+//				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
 
 		//
 		// DELIVERY MODULE GROUP

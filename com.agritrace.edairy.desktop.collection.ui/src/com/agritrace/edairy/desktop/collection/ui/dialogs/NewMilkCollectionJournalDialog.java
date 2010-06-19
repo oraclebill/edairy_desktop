@@ -74,6 +74,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	@Override
 	protected Control createContents(Composite parent) {
 		final Control contents = super.createContents(parent);
+		configureRidgets();
 		setTitle("Create New Collections Journal File");
 		setMessage("Please enter the date, session, route and file number for this set of collections records.");
 		return contents;
@@ -127,8 +128,6 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		}
 		GridLayoutFactory.swtDefaults().numColumns(1).spacing(8, 8).generateLayout(workArea);
 
-		configureRidgets();
-
 		return buffer;
 	}
 
@@ -177,8 +176,9 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				// driver.isMandatory() && driver.getText().isEmpty();
 				// isValid = isValid && file.isErrorMarked() ||
 				// file.isMandatory() && file.getText().isEmpty();
-
-				getButton(IDialogConstants.OK_ID).setEnabled(isValid);
+				Button okButton = getButton(IDialogConstants.OK_ID);
+				if (null != okButton)
+					okButton.setEnabled(isValid); // TODO: npe
 			}
 		};
 		class UpdateListener implements PropertyChangeListener, FocusListener {
@@ -223,8 +223,13 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			private void updateFileNumber() {
 				StringBuilder sb = new StringBuilder();
 				Formatter f = new Formatter(sb, Locale.getDefault());
-				file.setText(f.format("%s[%s]-%s", route.getText(), session.getText(),
-						dateTime.getText().replaceAll(" ", "_")).toString());
+				Date date = dateTime.getDate();
+				file.setText(f.format("%4s[%4s]-%04d%02d%02d", route.getText(), session.getText(),
+						date.getYear(), date.getMonth(), date.getDate()).toString());
+//				file.setText(f.format("%s[%s]-%s", 
+//						newJournalPage.getRoute().getCode(),
+//						newJournalPage.getSession().getLiteral(), 
+//						newJournalPage.getJournalDate()).toString());
 			}
 
 			private void debugPrintEvent(PropertyChangeEvent evt) {
@@ -235,12 +240,12 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 			}
 		}
-		;
+		
 		final UpdateListener fileNumberUpdateListener = new UpdateListener();
 
 		// configure ridgets
 		// dateTime.setMandatory(true);
-		// dateTime.setDirectWriting(true);
+		// dateTime.setDirectWriting(true);  // not supported by datetime
 		dateTime.addPropertyChangeListener(fileNumberUpdateListener);
 		dateTime.addPropertyChangeListener(validationListener);
 

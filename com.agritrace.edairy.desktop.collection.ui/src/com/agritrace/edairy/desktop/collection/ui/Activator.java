@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.collection.ui;
 
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
 
@@ -52,7 +53,6 @@ public class Activator extends DesktopBaseActivator {
 	}
 
 	public static Image getImage(String calendar) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

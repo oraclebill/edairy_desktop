@@ -49,9 +49,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="validatedMember" eType="#//Membership"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="offRoute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="ecore:EClass farm.ecore#//Farm"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" lowerBound="1"
-        eType="ecore:EClass farm.ecore#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournalPage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

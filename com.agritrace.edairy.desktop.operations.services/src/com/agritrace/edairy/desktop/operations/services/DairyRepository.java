@@ -131,7 +131,17 @@ public class DairyRepository implements IDairyRepository {
 
 	@Override
 	public CollectionJournalPage getJournalPageById(String pageId) {
-		return collectionsRepository.findByKey(Long.parseLong(pageId));
+		try {
+			return getJournalPageById(Long.parseLong(pageId));
+		}
+		catch (NumberFormatException nfe) {
+			return null;
+		}
+	}
+
+	@Override
+	public CollectionJournalPage getJournalPageById(Long pageId) {
+		return collectionsRepository.findByKey(pageId);
 	}
 
 	@Override

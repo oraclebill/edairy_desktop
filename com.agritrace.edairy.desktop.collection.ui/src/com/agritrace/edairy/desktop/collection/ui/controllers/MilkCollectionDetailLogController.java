@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.equinox.log.Logger;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -25,24 +28,35 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
 
+	private final Logger LOG = Log4r.getLogger(MilkCollectionDetailLogController.class);
+	
 	//	private final MilkCollectionDetailLogFilterBean filterBean = new MilkCollectionDetailLogFilterBean();
 
+	// header group ridgets
 	private ITextRidget book;
 	private IDateTimeRidget date;
-	private ITextRidget session;
 	private ITextRidget route;
-	private ITextRidget driver;
+	private ITextRidget session;
 	private ITextRidget vehicle;
+	private ITextRidget driver;
 
+	// journal page
 	private ISpinnerRidget currentPage;
+	
+	// navigation & control
 	private IActionRidget  backButton;
 	private IActionRidget  editButton;
 	private IActionRidget  setPageButton;
 	private IActionRidget  addPageButton;
 
-	private CollectionJournalPage currentJournalPage;
+	// UI infrastructure
 	private final WritableValue pageValue = new WritableValue(1, Integer.class);
+
+	// database connector
 	private final IDairyRepository journalRepository = new DairyRepository();
+
+	// working journal page
+	private CollectionJournalPage currentJournalPage;
 
 
 	public MilkCollectionDetailLogController() {
@@ -78,7 +92,6 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		backButton = getRidget(IActionRidget.class, ViewConstants.COLLECTION_DETAIL_BACK_BTN);
 		editButton = getRidget(IActionRidget.class, ViewConstants.COLLECTION_DETAIL_EDIT_BTN);
 		setPageButton = getRidget(IActionRidget.class, ViewConstants.COLLECTION_DETAIL_FILTER_BTN);
-		addPageButton = getRidget(IActionRidget.class, ViewConstants.COLLECTION_DETAIL_NEW_BTN);
 	}
 
 	@Override
@@ -88,7 +101,12 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		// 
 		CollectionJournalPage currentJournalPage;
 		final INavigationNode<?> node = getNavigationNode();
-		final Object journalPage = node.getContext("JOURNAL_PAGE");
+		final NavigationArgument argument = node.getNavigationArgument();
+		Object journalPage = argument.getParameter();
+		if (journalPage == null) {
+			
+			journalPage = node.getContext("JOURNAL_PAGE");
+		}
 		if ((journalPage != null) && (journalPage instanceof CollectionJournalPage) ) {
 			currentJournalPage = (CollectionJournalPage) journalPage;			
 		} 
@@ -97,13 +115,27 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		}
 
 		book.setText(currentJournalPage.getRoute().getName());
+		book.setOutputOnly(true);
+		
 		date.setDate(currentJournalPage.getJournalDate());
+		date.setOutputOnly(true);
+		
 		session.setText(currentJournalPage.getSession().getName());
+		session.setOutputOnly(true);
+		
 		route.setText(currentJournalPage.getRoute().getName());
+		route.setOutputOnly(true);
+		
 		driver.setText(currentJournalPage.getDriver().getFamilyName());
+		driver.setOutputOnly(true);
+		
 		vehicle.setText(currentJournalPage.getVehicle().getLogBookNumber());
-
+		vehicle.setOutputOnly(true);
+		
 		currentPage.bindToModel(pageValue);
+
+//		updateAllRidgetsFromModel();
+		
 		//		currentPage.getValue()
 		setPageButton.addListener(new IActionListener() {
 			@Override
@@ -114,16 +146,10 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		backButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				throw new UnsupportedOperationException("Unimplemnented.");
+				getNavigationNode().getParent().activate();
 			}
 		});
 		editButton.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				throw new UnsupportedOperationException("Unimplemnented.");
-			}
-		});
-		addPageButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				throw new UnsupportedOperationException("Unimplemnented.");
