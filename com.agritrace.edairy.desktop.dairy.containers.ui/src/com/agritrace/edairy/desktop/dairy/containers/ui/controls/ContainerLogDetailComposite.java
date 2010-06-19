@@ -24,12 +24,12 @@ public class ContainerLogDetailComposite extends Composite {
 		setLayout(new FillLayout());
 
 		Composite detailGroup_1 = UIControlsFactory.createGroup(this, "Container Detail");
+		detailGroup_1.setLayout(new GridLayout());
 
 		addDescriptionGroup(detailGroup_1);
+
 		addAssetInfoGroup(detailGroup_1);
-		
-		GridLayoutFactory.fillDefaults().generateLayout(detailGroup_1);
-		pack();
+
 	}
 
 	private void addAssetInfoGroup(Composite parent) {
@@ -85,32 +85,44 @@ public class ContainerLogDetailComposite extends Composite {
 	}
 
 	private void addDescriptionGroup(Composite parent) {
-		final Group detailGroup = UIControlsFactory.createGroup(parent, "Description");
-		detailGroup.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
-		detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
+
+		final Group comp = UIControlsFactory.createGroup(parent, "Description");
+		comp.setLayout(GridLayoutFactory.fillDefaults().numColumns(2).create());
+		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		{
-			UIControlsFactory.createLabel(detailGroup, "Container ID");
-			final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
-					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
-			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+			Composite detailGroup = new Composite(comp, SWT.NONE);
+			detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
+			GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
+
+			{
+				UIControlsFactory.createLabel(detailGroup, "Container ID");
+				final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
+						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
+				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+			}
+			{
+				UIControlsFactory.createLabel(detailGroup, "Type");
+				final CCombo text = UIControlsFactory.createCCombo(detailGroup,
+						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
+				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+			}
+			{
+				UIControlsFactory.createLabel(detailGroup, "Capacity");
+				final Text text = UIControlsFactory.createTextDecimal(detailGroup,
+						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
+				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+			}
+			{
+				UIControlsFactory.createLabel(detailGroup, "UOM");
+				final CCombo text = UIControlsFactory.createCCombo(detailGroup,
+						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
+				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+			}
 		}
 		{
-			UIControlsFactory.createLabel(detailGroup, "Type");
-			final CCombo text = UIControlsFactory.createCCombo(detailGroup, ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
-			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
-		}
-		{
-			UIControlsFactory.createLabel(detailGroup, "Capacity");
-			final Text text = UIControlsFactory.createTextDecimal(detailGroup,
-					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
-			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
-		}
-		{
-			UIControlsFactory.createLabel(detailGroup, "UOM");
-			final CCombo text = UIControlsFactory.createCCombo(detailGroup, ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
-			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+			final Composite filler = new Composite(comp, SWT.NONE);
+			GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(filler);
 		}
 
 	}
