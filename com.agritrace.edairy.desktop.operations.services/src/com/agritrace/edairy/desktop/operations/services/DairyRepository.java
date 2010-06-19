@@ -177,8 +177,15 @@ public class DairyRepository implements IDairyRepository {
 		return getMembershipById((String)memberId);
 	}
 
-	public Membership getMembershipById(String memberId) {
-		return memberRepository.findByKey(Long.parseLong(memberId));
+	public Membership getMembershipById(String memberIdString) {
+		Long memberId = new Long(-1);
+		try {
+			memberId = Long.parseLong(memberIdString);
+		}
+		catch( NumberFormatException nfe) {
+			;;
+		}
+		return memberRepository.findByKey(memberId);
 	}
 
 	@Override

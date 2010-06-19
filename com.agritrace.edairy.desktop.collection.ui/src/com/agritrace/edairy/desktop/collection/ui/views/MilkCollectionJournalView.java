@@ -21,6 +21,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
@@ -96,16 +97,17 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 		final GridDataFactory gdf = GridDataFactory.fillDefaults().grab(true, false);
 
-		final Group groupOne = createJournalBookGroup(parent);
+		final Control groupOne = createJournalBookGroup(parent);
 		gdf.applyTo(groupOne);
 
-		final Group groupTwo = createMilkBookGroup(parent);
+		final Control groupTwo = createMilkBookGroup(parent);
 		gdf.applyTo(groupTwo);
 
-		final Group groupThree = createMilkEntryInputGroup(parent);
+//		final Control groupThree = createMilkEntryInputGroup(parent);
+		final Control groupThree = new CollectionsEntryWidget(parent, SWT.NONE);		
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupThree);
 
-		final Group groupFour = createMilkEntryGroup(parent);
+		final Control groupFour = createMilkEntryGroup(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupFour);
 
 		final Button saveButton = UIControlsFactory.createButton(parent, SAVE_LABEL, ViewWidgetId.saveButton);
@@ -230,76 +232,78 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		return group;
 	}
 
-	private Group createMilkEntryInputGroup(Composite parent) {
-		final Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
-
-		final Group panel = UIControlsFactory.createGroup(group, "");
-		GridDataFactory.fillDefaults().grab(true, true).span(1, 2).applyTo(panel);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(panel);
-
-		final Label binLabel = UIControlsFactory.createLabel(panel, BIN_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
-		.applyTo(binLabel);
-
-		final Combo binList = UIControlsFactory.createCombo(panel, ViewWidgetId.binCombo);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(binList);
-		binList.addTraverseListener(this);
-
-		final Label memberLabel = UIControlsFactory.createLabel(panel, MEMBER_ID_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(memberLabel);
-
-		final Text memberText = UIControlsFactory.createText(panel, SWT.BORDER);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(memberText);
-		addUIControl(memberText, ViewWidgetId.memberIdText);
-		memberText.addTraverseListener(this);
-
-		final Label canLabel = UIControlsFactory.createLabel(panel, CAN_ID_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(canLabel);
-
-		final Text canText = UIControlsFactory.createText(panel, SWT.BORDER);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(canText);
-		addUIControl(canText, ViewWidgetId.canIdText);
-		canText.addTraverseListener(this);
-
-		final Label quantityLabel = UIControlsFactory.createLabel(panel, QUANTITY_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(quantityLabel);
-
-		final Text quantityText = UIControlsFactory.createTextDecimal(panel);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(quantityText);
-		addUIControl(quantityText, ViewWidgetId.quantityText);
-		quantityText.addTraverseListener(this);
-
-		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(4, 1).applyTo(buttonComposite);
-		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(buttonComposite);
-
-		final Button nprMissingButton = UIControlsFactory.createButtonCheck(buttonComposite, NPR_COLUMN_HEADER,
-				ViewWidgetId.nprMissingCombo);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(nprMissingButton);
-		nprMissingButton.addTraverseListener(this);
-
-		final Button rejectedButton = UIControlsFactory.createButtonCheck(buttonComposite, REJECTED_COLUMN_HEADER,
-				ViewWidgetId.rejectedCombo);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(rejectedButton);
-		rejectedButton.addTraverseListener(this);
-
-		final Button addButton = UIControlsFactory.createButton(group, "Add", ViewWidgetId.addButton);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(addButton);
-
-		final Button clearButton = UIControlsFactory.createButton(group, "Clear", ViewWidgetId.entryInputClear);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(clearButton);
-
-		return group;
-
-	}
+//	private Composite createMilkEntryInputGroup(Composite parent) {
+//
+//		final Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE);
+//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
+//
+//		final Group panel = UIControlsFactory.createGroup(group, "");
+//		GridDataFactory.fillDefaults().grab(true, true).span(1, 2).applyTo(panel);
+//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(panel);
+//
+//		final Label binLabel = UIControlsFactory.createLabel(panel, BIN_LABEL);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
+//		.applyTo(binLabel);
+//
+//		final Combo binList = UIControlsFactory.createCombo(panel, ViewWidgetId.binCombo);
+//		GridDataFactory.fillDefaults().grab(true, false).applyTo(binList);
+//		binList.addTraverseListener(this);
+//
+//		final Label memberLabel = UIControlsFactory.createLabel(panel, MEMBER_ID_LABEL);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(memberLabel);
+//
+//		final Text memberText = UIControlsFactory.createText(panel, SWT.BORDER);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(memberText);
+//		addUIControl(memberText, ViewWidgetId.memberIdText);
+//		memberText.addTraverseListener(this);
+//
+//		final Label canLabel = UIControlsFactory.createLabel(panel, CAN_ID_LABEL);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(canLabel);
+//
+//		final Text canText = UIControlsFactory.createText(panel, SWT.BORDER);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(canText);
+//		addUIControl(canText, ViewWidgetId.canIdText);
+//		canText.addTraverseListener(this);
+//
+//		final Label quantityLabel = UIControlsFactory.createLabel(panel, QUANTITY_LABEL);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(quantityLabel);
+//
+//		final Text quantityText = UIControlsFactory.createTextDecimal(panel);
+//		GridDataFactory.fillDefaults().grab(true, false).applyTo(quantityText);
+//		addUIControl(quantityText, ViewWidgetId.quantityText);
+//		quantityText.addTraverseListener(this);
+//
+//		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
+//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(4, 1).applyTo(buttonComposite);
+//		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(buttonComposite);
+//
+//		final Button nprMissingButton = UIControlsFactory.createButtonCheck(buttonComposite, NPR_COLUMN_HEADER,
+//				ViewWidgetId.nprMissingCombo);
+//		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(nprMissingButton);
+//		nprMissingButton.addTraverseListener(this);
+//
+//		final Button rejectedButton = UIControlsFactory.createButtonCheck(buttonComposite, REJECTED_COLUMN_HEADER,
+//				ViewWidgetId.rejectedCombo);
+//		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(rejectedButton);
+//		rejectedButton.addTraverseListener(this);
+//
+//		final Button addButton = UIControlsFactory.createButton(group, "Add", ViewWidgetId.addButton);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(addButton);
+//
+//		final Button clearButton = UIControlsFactory.createButton(group, "Clear", ViewWidgetId.entryInputClear);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(clearButton);
+//
+//		return group;
+//
+//	}
 
 	//
 	// private Group createMilkEntryGroup(Composite parent){
 	//
 	// }
 
-	private Group createMilkEntryGroup(Composite parent) {
+	private Composite createMilkEntryGroup(Composite parent) {
+		
 		final Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_LIST_GROUP_TITLE);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 

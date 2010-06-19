@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.grouplayout.GroupLayout;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.custom.CCombo;
 
 public class ContainerLogDetailComposite extends Composite {
 
@@ -96,20 +98,18 @@ public class ContainerLogDetailComposite extends Composite {
 		}
 		{
 			UIControlsFactory.createLabel(detailGroup, "Type");
-			final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
-					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
+			final CCombo text = UIControlsFactory.createCCombo(detailGroup, ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
 		}
 		{
 			UIControlsFactory.createLabel(detailGroup, "Capacity");
-			final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
+			final Text text = UIControlsFactory.createTextDecimal(detailGroup,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
 		}
 		{
 			UIControlsFactory.createLabel(detailGroup, "UOM");
-			final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
-					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
+			final CCombo text = UIControlsFactory.createCCombo(detailGroup, ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
 		}
 

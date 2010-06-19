@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -38,8 +39,9 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 	public CollectionsEntryWidget(Composite parent, int style) {
 		
 		super(parent, style);
+		setLayout(new FillLayout());
 		
-		final Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_GROUP_TITLE);
+		final Group group = UIControlsFactory.createGroup(this, MILK_ENTRY_GROUP_TITLE);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 		
 		addPrimaryGroup(group);
@@ -51,6 +53,8 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 				control.addTraverseListener(this);
 			}
 		}
+		
+		pack();
 	}
 	
 	private void addPrimaryGroup(Composite group) {
@@ -64,7 +68,7 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 		addLabeledComboField(panel, BIN_LABEL, ViewWidgetId.binCombo).addTraverseListener(this);
 		addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText).addTraverseListener(this);
 		addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText).addTraverseListener(this);
-		addLabeledTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText).addTraverseListener(this);
+		addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText).addTraverseListener(this);
 		
 		Label filler = UIControlsFactory.createLabel(panel, "");
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(2, 1).applyTo(filler);
@@ -89,16 +93,23 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 
 	private void addQualityGroup(Composite group) {
 
-		final Group qualityPanel = UIControlsFactory.createGroup(group, "Quality");
+		final Composite checkPanel = UIControlsFactory.createComposite(group);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(checkPanel);
+		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(3).applyTo(checkPanel);
+
+		Label label = UIControlsFactory.createLabel(checkPanel, "Collect Milk Quality Data? ");
+		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.TOP).applyTo(label);
+		
+		Button control = UIControlsFactory.createButtonCheck(checkPanel, "", "display-quality-controls-button");
+		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.TOP).applyTo(control);
+
+		final Group qualityPanel = UIControlsFactory.createGroup(checkPanel, "", "quality-group");
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(1, 1).applyTo(qualityPanel);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(8).applyTo(qualityPanel);
-		
-		final Label filler = UIControlsFactory.createLabel(qualityPanel, "");
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(2, 1).applyTo(filler);
-		
-		addLabeledTextField(qualityPanel, "Milk Fat % : ", "milk-fat-percent");
-		addLabeledTextField(qualityPanel, "Alcohol % : ", "alcohol-percent");
-		addLabeledBooleanField(qualityPanel, "Water Added? : ", "added-water");
+		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(6).applyTo(qualityPanel);
+				
+		addLabeledTextField(qualityPanel, "Milk Fat % : ", "milk-fat-percent-text");
+		addLabeledTextField(qualityPanel, "Alcohol % : ", "alcohol-percent-text");
+		addLabeledBooleanField(qualityPanel, "Water Added? : ", "added-water-checkbox");
 	}
 	
 	private void addButtons(Composite parent) {
@@ -107,10 +118,13 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 		GridDataFactory.fillDefaults().span(1,2).applyTo(group);
 		
 		final Button addButton = UIControlsFactory.createButton(group, "Add", ViewWidgetId.addButton);
+		addButton.setToolTipText("Click here to add a new collection line.");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(addButton);
 
 		final Button clearButton = UIControlsFactory.createButton(group, "Clear", ViewWidgetId.entryInputClear);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(clearButton);
+		group.setTabList(new Control[]{addButton});
+		
 	}
 	
 	/**
@@ -121,6 +135,19 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createText(parent, SWT.BORDER, widgetID);
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(text);
+		
+		return text;
+	}
+	
+	/**
+	 * @wbp.factory
+	 */
+	private static Control addLabeledDecimalTextField(Composite parent, String labelTxt, String widgetID) {
+		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+		labelGDF.applyTo(label);
+
+		final Text text = UIControlsFactory.createTextDecimal(parent, widgetID);
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(text);
 		
 		return text;
@@ -145,13 +172,13 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 	 * @wbp.factory
 	 */
 	private static Control addLabeledBooleanField(Composite parent, String labelTxt, String widgetID) {
-//		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
-//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(label);
+		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+		labelGDF.applyTo(label);
 
-		Button text = UIControlsFactory.createButtonCheck(parent, labelTxt, widgetID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(text);
+		Button control = UIControlsFactory.createButtonCheck(parent, "", widgetID);
+		GridDataFactory.swtDefaults().align(SWT.CENTER, SWT.BEGINNING).applyTo(control);
 
-		return text;
+		return control;
 	}
 
 	@Override
