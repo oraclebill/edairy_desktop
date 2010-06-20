@@ -15,11 +15,13 @@
 
    <launcherArgs>
       <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
-      <vmArgs>-Dedairy.db.root=/tmp/x2db</vmArgs>
+      <vmArgs>-Dedairy.db.root=/tmp/x2db
+
+-Driena.application.width=1200
+
+-Driena.application.height=1000</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
-      <vmArgsWin>-Driena.application.width=1120
--Driena.application.height=850</vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="/com.agritrace.edairy.desktop.ui/icons/cow16.png" i32="/com.agritrace.edairy.desktop.ui/icons/cow32.png" i48="/com.agritrace.edairy.desktop.ui/icons/cow48.png" i64="/com.agritrace.edairy.desktop.ui/icons/cow64.png" i128="/com.agritrace.edairy.desktop.ui/icons/cow128.png"/>
@@ -30,6 +32,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>

@@ -10,52 +10,35 @@
  *******************************************************************************/
 package com.agritrace.edairy.desktop.home.views;
 
-import org.eclipse.jface.resource.JFaceResources;
+
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
 
 public class DairyHomeView extends ViewPart {
+	public DairyHomeView() {
+	}
 
-    public static final String ID = "desktop.home.view";
+	public static final String ID = "desktop.home.view";
 
-    @Override
-    public void createPartControl(Composite parent) {
-	final Composite top = new Composite(parent, SWT.NONE);
-	GridLayout layout = new GridLayout();
-	layout.marginHeight = 0;
-	layout.marginWidth = 0;
-	top.setLayout(layout);
-	// top banner
-	final Composite banner = new Composite(top, SWT.NONE);
-	banner.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL, GridData.VERTICAL_ALIGN_BEGINNING, true,
-		false));
-	layout = new GridLayout();
-	layout.marginHeight = 5;
-	layout.marginWidth = 10;
-	layout.numColumns = 2;
-	banner.setLayout(layout);
+	@Override
+	public void createPartControl(Composite parent) {
+		Label l = new Label(parent, SWT.CENTER);
+		l.setImage(
+				ImageStore.getInstance().getImage("edairydashboard.jpg"));
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(l);
+		GridLayoutFactory.fillDefaults().generateLayout(parent);
+		parent.setBackground( Display.getCurrent().getSystemColor(SWT.COLOR_WHITE) );
+		l.setBackground( Display.getCurrent().getSystemColor(SWT.COLOR_WHITE) );
+	}
 
-	final Font boldFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
-
-	Label l = new Label(banner, SWT.WRAP);
-	l.setText("Welcome to eDairy Manager"); //$NON-NLS-1$
-	l.setFont(boldFont);
-
-	l = new Label(top, SWT.NONE);
-	final Image backImage = ImageStore.getInstance().getImage("dairy_staff_photo.jpg");
-	l.setImage(backImage);
-	l.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-    }
-
-    @Override
-    public void setFocus() {
-    }
+	@Override
+	public void setFocus() {
+	}
 
 }
