@@ -2,13 +2,16 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Formatter;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
+import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -16,13 +19,15 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.internal.ui.ridgets.swt.NumericTextRidget;
 import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.core.marker.ErrorMessageMarker;
+import org.eclipse.riena.ui.core.marker.IMessageMarker;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
@@ -33,11 +38,11 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.collection.ui.Activator;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -48,9 +53,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.validators.StringNumberValidator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -65,42 +67,46 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 	}
 
+	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");	
+	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
+	
 	public class MemberNumberExistsValidator implements IValidator {
 		@Override
 		public IStatus validate(Object value) {
-			IStatus ret = Status.CANCEL_STATUS;
-			if ( value instanceof String ) {
+			String memberName = null;
+			if (value instanceof String) {
 				String memberID = (String) value;
-				Membership member = dairyRepo.getMembershipById(memberID);
-				if ( null != member) {
-					workingJournalLine.setValidatedMember(member);
-					Farmer farmer = member.getMember();
-					memberNameRidget.setText(farmer.getFamilyName() + ", " + farmer.getGivenName());
-					return Status.OK_STATUS;
-				}
-				else {
-					ret = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number" ); 
+				memberName = validatedMemberNames.get(memberID);
+				if (memberName == null) {
+					Membership member = dairyRepo.getMembershipById(memberID);
+					if (member != null) {
+						memberName = formatPersonName(member.getMember());
+						validatedMemberNames.put(memberID, memberName);
+					}
 				}
 			}
-			return ret;
+			if (memberName != null) {
+				memberNameRidget.setText(memberName);
+				return Status.OK_STATUS;
+			}			
+			return ERROR_STATUS;
 		}
-
 	}
 
 	private static Logger LOG = Log4r.getLogger(Activator.getDefault(), MilkCollectionJournalController.class);
 
-	private class GroupOneSelectionListener implements ISelectionListener {
-
-		@Override
-		public void ridgetSelected(SelectionEvent event) {
-			if ((routeRidget.getSelection() != null) && (vehicleRidget.getSelection() != null)
-					&& (vehicleRidget.getSelection() != null) && (driverRidget.getSelection() != null)) {
-				setSubGroupsVisible(true);
-			} else {
-				setSubGroupsVisible(false);
-			}
-		}
-	}
+//	private class GroupOneSelectionListener implements ISelectionListener {
+//
+//		@Override
+//		public void ridgetSelected(SelectionEvent event) {
+//			if ((routeRidget.getSelection() != null) && (vehicleRidget.getSelection() != null)
+//					&& (vehicleRidget.getSelection() != null) && (driverRidget.getSelection() != null)) {
+//				setSubGroupsVisible(true);
+//			} else {
+//				setSubGroupsVisible(false);
+//			}
+//		}
+//	}
 
 	public static final String CAN_COLUMN_HEADER = "CAN Number";
 	public static final String LINE_COLUMN_HEADER = "Line";
@@ -117,7 +123,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 			"lineNumber", "recordedMember", "farmContainer", "quantity", "notRecorded", "rejected" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
 	// journal book group ridgets
-	private ITextRidget dateRidget;
+	private IDateTimeRidget dateRidget;
 	private IComboRidget driverRidget;
 
 	// journal group ridgets
@@ -154,117 +160,102 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	private boolean errorDialogsEnabled = true; // todo: get from preferences
 
+	/**
+	 * 
+	 */
 	public MilkCollectionJournalController() {
 		super();
 	}
 
+	/**
+	 * 
+	 */
+	@Override
+	public void configureRidgets() {
+
+		configureHeaderRidgets();
+
+		configureDataEntryRidgets();
+
+		updateBottomButtons(false);
+	}
+
+	/**
+	 * 
+	 */
 	@Override
 	public void afterBind() {
 		super.afterBind();
 
-		setSubGroupsVisible(false);
+//		setSubGroupsVisible(false);
 
-		workingJournalPage = getWorkingJournalPage();
-		;
+		workingJournalPage = getJournalPageFromContext();
 
 		bindHeaderRidgets();
 
-		populateLookupLists();
-
-		// conditionally editable
-		journalNumber.bindToModel(EMFObservables.observeValue(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER));
-		driverTotalText.bindToModel(BeansObservables.observeValue(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL.getName())); // fallback
-																							// to
-																							// bean
-																							// properties
-																							// because
-																							// Riena
-																							// databinding
-																							// doesn't
-																							// grok
-																							// emf
-
-		if (workingJournalPage.getReferenceNumber() != null && workingJournalPage.getDriverTotal() != null) {
-			journalNumber.setOutputOnly(true);
-			driverTotalText.setOutputOnly(true);
-		}
-
-		// editable widgets
-		binCombo.bindToModel(new WritableList(bins, DairyContainer.class), DairyContainer.class, "getContainerId",
-				new WritableValue());
-		binCombo.updateFromModel();
-
-		table.bindToModel(EMFObservables.observeList(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES), CollectionJournalLine.class,
-				propertyNames, columnNames);
-
-		totalLabelRidget.bindToModel(EMFObservables.observeValue(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL));
-		// totalLabelRidget.updateFromModel();
+		bindDataEntryRidgets();
 
 		updateAllRidgetsFromModel();
 	}
 
-	private void populateLookupLists() {
-	}
-	
+	/**
+	 * 
+	 */
+	protected void configureHeaderRidgets() {
+		// journal book group
+		dateRidget = getRidget(IDateTimeRidget.class, ViewWidgetId.calendarDate);
+//		dateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		dateRidget.setMandatory(true);
 
-	protected CollectionJournalPage getWorkingJournalPage() {
-		CollectionJournalPage workingJournalPage = null;
-		Object contextObj = null;
-		NavigationArgument navArg = getNavigationNode().getNavigationArgument();
-		if (navArg != null) {
-			contextObj = navArg.getParameter();
-		}
-		if (contextObj == null) {
-			LOG.log(0, "failed to get page from navigation - falling back to context");
-			contextObj = getNavigationNode().getContext("JOURNAL_PAGE");
-		}
-		if (contextObj instanceof CollectionJournalPage) {
-			workingJournalPage = (CollectionJournalPage) contextObj;
-		} else {
-			LOG.log(0, "ERROR: unable to get journal page from context.");
-			throw new IllegalStateException("ERROR: unable to get journal page from context.");
-		}
-		assert (workingJournalPage != null);
-		return workingJournalPage;
-	}
+		routeRidget = getRidget(IComboRidget.class, ViewWidgetId.routeCombo);
+		routeRidget.setMandatory(true);
 
-	protected void bindHeaderRidgets() {
-		dateRidget.bindToModel(EMFObservables.observeValue(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
-		routeRidget.bindToModel(new WritableList(routes, Route.class), Route.class, "getName",
-				EMFObservables.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
-		sessionRidget
-				.bindToModel(Observables.staticObservableList(Session.VALUES), Session.class, null, EMFObservables
-						.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
-		vehicleRidget
-				.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber",
-						EMFObservables.observeValue(workingJournalPage,
-								DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
-		driverRidget.bindToModel(new WritableList(driverList, Employee.class), Employee.class, "getFamilyName",
-				EMFObservables.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
+		sessionRidget = getRidget(IComboRidget.class, ViewWidgetId.sessionCombo);
+		sessionRidget.setMandatory(true);
 
+		vehicleRidget = getRidget(IComboRidget.class, ViewWidgetId.vehicleCombo);
+		vehicleRidget.setMandatory(true);
+
+		driverRidget = getRidget(IComboRidget.class, ViewWidgetId.driverCombo);
+		driverRidget.setMandatory(true);
+
+//		final GroupOneSelectionListener selectionListener = new GroupOneSelectionListener();
+//		routeRidget.addSelectionListener(selectionListener);
+//		sessionRidget.addSelectionListener(selectionListener);
+//		vehicleRidget.addSelectionListener(selectionListener);
+//		driverRidget.addSelectionListener(selectionListener);
+
+		// make'em all read/only
 		for (IMarkableRidget ridget : Arrays.asList(new IMarkableRidget[] { dateRidget, routeRidget, sessionRidget,
 				vehicleRidget, driverRidget })) {
 			ridget.setOutputOnly(true);
 		}
+		
+		// journal group
+		journalNumber = getRidget(ITextRidget.class, ViewWidgetId.journalText);
+		journalNumber.setMandatory(true);
+		journalNumber.addValidationRule(new StringNumberValidator(), ValidationTime.ON_UI_CONTROL_EDIT);
+
+		driverTotalText = getRidget(IDecimalTextRidget.class, ViewWidgetId.journalTotalText);
+		driverTotalText.setSigned(false);
+		driverTotalText.setGrouping(true);
+		driverTotalText.setMandatory(true);
+
+		binCombo = getRidget(IComboRidget.class, ViewWidgetId.binCombo);
+		binCombo.setMandatory(true);
+		// binCombo.addValidationRule(new StringNumberValidator(),
+		// ValidationTime.ON_UI_CONTROL_EDIT);
+
 	}
 
-	@Override
-	public void configureRidgets() {
-
-		// records.clear();
-		// add a node listener to load dairy whenever it is active.
-		addSimpleListener();
-
-		configureHeaderRidgets();
-
+	/**
+	 * 
+	 */
+	protected void configureDataEntryRidgets() {
 		// milk entry group
 		memberIDRidget = getRidget(ITextRidget.class, ViewWidgetId.memberIdText);
 		memberIDRidget.setMandatory(true);
+		memberIDRidget.setDirectWriting(true);
 		memberIDRidget.setInputToUIControlConverter(new Converter(String.class, String.class) {
 			@Override
 			public Object convert(Object fromObject) {
@@ -284,13 +275,31 @@ public class MilkCollectionJournalController extends SubModuleController {
 				return fromObject;
 			}
 		});
-
 		memberIDRidget.addValidationRule(new StringNumberValidator(), ValidationTime.ON_UI_CONTROL_EDIT);
-		memberIDRidget.addValidationRule(new MemberNumberExistsValidator(), ValidationTime.ON_UPDATE_TO_MODEL); // todo:
-		memberIDRidget.addValidationRule(new MemberDeliversOncePerSessionValidator(), ValidationTime.ON_UPDATE_TO_MODEL); // todo:
-
-		memberNameRidget = getRidget(ILabelRidget.class, "member-name");
+		IValidator memberExistsRule = new MemberNumberExistsValidator();
+		IMessageMarker memberExistsMarker = new ErrorMessageMarker("Member does not exist.");
+		memberIDRidget.addValidationRule(memberExistsRule, ValidationTime.ON_UI_CONTROL_EDIT); // todo:
+		memberIDRidget.addValidationMessage(memberExistsMarker, memberExistsRule);
+		memberIDRidget
+				.addValidationRule(new MemberDeliversOncePerSessionValidator(), ValidationTime.ON_UPDATE_TO_MODEL); // todo:
+//		memberIDRidget.addPropertyChangeListener(new PropertyChangeListener() {
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//				if (evt.getPropertyName().equals("textAfter")) {
+//					Object value = evt.getNewValue();
+//					if (value instanceof String) {
+//						String memberID = (String)value;
+//						Membership membership = dairyRepo.getMembershipById(memberID);
+//						workingJournalLine.setValidatedMember(membership);
+//						System.err.println(" ----------updating from model-------- " + evt);
+//						memberNameRidget.updateFromModel();
+//					}
+//				}
+//			}
+//		});
 		
+		memberNameRidget = getRidget(ILabelRidget.class, "member-name");
+
 		canText = getRidget(ITextRidget.class, ViewWidgetId.canIdText);
 		canText.addValidationRule(new StringNumberValidator(), ValidationTime.ON_UI_CONTROL_EDIT);
 		// canText.addValidationRule(new MemberOwnsCanValidator(),
@@ -300,7 +309,11 @@ public class MilkCollectionJournalController extends SubModuleController {
 		quantityText.setMandatory(true);
 
 		nprMissingButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.nprMissingCombo);
+		
 		rejectedButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.rejectedCombo);
+
+		totalLabelRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
+		
 
 		table = getRidget(ITableRidget.class, ViewWidgetId.milkEntryTable);
 		table.setColumnFormatter(2, new ColumnFormatter() {
@@ -384,59 +397,143 @@ public class MilkCollectionJournalController extends SubModuleController {
 				createAndSaveCollectionJournalPage();
 			}
 		});
+	}
 
-		updateBottomButtons(false);
+	/**
+	 * 
+	 */
+	protected void bindHeaderRidgets() {
+		dateRidget.bindToModel(EMFObservables.observeValue(workingJournalPage,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
+		routeRidget.bindToModel(new WritableList(routes, Route.class), Route.class, "getName",
+				EMFObservables.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
+		sessionRidget
+				.bindToModel(Observables.staticObservableList(Session.VALUES), Session.class, null, EMFObservables
+						.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
+		vehicleRidget
+				.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber",
+						EMFObservables.observeValue(workingJournalPage,
+								DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
+		driverRidget.bindToModel(new WritableList(driverList, Employee.class), Employee.class, "getFamilyName",
+				EMFObservables.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
 
-		totalLabelRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
+		// conditionally editable
+		journalNumber.bindToModel(EMFObservables.observeValue(workingJournalPage,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER));
+
+		// fallback to bean properties because Riena databinding doesn't
+		// understand EMF
+		driverTotalText.bindToModel(BeansObservables.observeValue(workingJournalPage,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL.getName()));
+
+		if (workingJournalPage.getReferenceNumber() != null && workingJournalPage.getDriverTotal() != null) {
+			journalNumber.setOutputOnly(true);
+			driverTotalText.setOutputOnly(true);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	protected void bindDataEntryRidgets() {
+		workingJournalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
+		
+		// editable widgets
+		// todo: should bind to bins for this route only..
+		binCombo.bindToModel(new WritableList(bins, DairyContainer.class), DairyContainer.class, "getContainerId", 
+				EMFObservables.observeValue(workingJournalLine, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER));
+		
+		canText.bindToModel(EMFObservables.observeValue(workingJournalLine, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FARM_CONTAINER));
+
+		memberIDRidget.bindToModel(EMFObservables.observeValue(workingJournalLine, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER));
+		
+		
+		nprMissingButton.bindToModel(EMFObservables.observeValue(workingJournalLine, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED));
+		rejectedButton.bindToModel(EMFObservables.observeValue(workingJournalLine, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED));
+		
+		table.bindToModel(EMFObservables.observeList(workingJournalPage,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES), CollectionJournalLine.class,
+				propertyNames, columnNames);
+
+		// problem children
+		memberNameRidget.setText("");
+		
+		quantityText.bindToModel(PojoObservables.observeValue(workingJournalLine, 
+				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__QUANTITY.getName()));
+		
+		totalLabelRidget.bindToModel(PojoObservables.observeValue(
+				workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL.getName()));
+		totalLabelRidget.setModelToUIControlConverter(NumberToStringConverter.fromBigDecimal());
 
 	}
 
-	protected void configureHeaderRidgets() {
-		// journal book group
-		dateRidget = getRidget(ITextRidget.class, ViewWidgetId.calendarDate);
-		dateRidget.setText(new SimpleFormattedDateBean().getFormattedDate());
-		dateRidget.setMandatory(true);
-
-		routeRidget = getRidget(IComboRidget.class, ViewWidgetId.routeCombo);
-		routeRidget.setMandatory(true);
-
-		sessionRidget = getRidget(IComboRidget.class, ViewWidgetId.sessionCombo);
-		sessionRidget.setMandatory(true);
-
-		vehicleRidget = getRidget(IComboRidget.class, ViewWidgetId.vehicleCombo);
-		vehicleRidget.setMandatory(true);
-
-		driverRidget = getRidget(IComboRidget.class, ViewWidgetId.driverCombo);
-		driverRidget.setMandatory(true);
-
-		final GroupOneSelectionListener selectionListener = new GroupOneSelectionListener();
-		routeRidget.addSelectionListener(selectionListener);
-		sessionRidget.addSelectionListener(selectionListener);
-		vehicleRidget.addSelectionListener(selectionListener);
-		driverRidget.addSelectionListener(selectionListener);
-
-		// journal group
-		journalNumber = getRidget(ITextRidget.class, ViewWidgetId.journalText);
-		journalNumber.setMandatory(true);
-		journalNumber.addValidationRule(new StringNumberValidator(), ValidationTime.ON_UI_CONTROL_EDIT);
-
-		driverTotalText = getRidget(IDecimalTextRidget.class, ViewWidgetId.journalTotalText);
-		driverTotalText.setSigned(false);
-		driverTotalText.setGrouping(true);
-		driverTotalText.setMandatory(true);
-
-		binCombo = getRidget(IComboRidget.class, ViewWidgetId.binCombo);
-		binCombo.setMandatory(true);
-		// binCombo.addValidationRule(new StringNumberValidator(),
-		// ValidationTime.ON_UI_CONTROL_EDIT);
+	/**
+	 * 
+	 */
+	protected CollectionJournalPage getJournalPageFromContext() {
+		CollectionJournalPage workingJournalPage = null;
+		Object contextObj = null;
+		NavigationArgument navArg = getNavigationNode().getNavigationArgument();
+		if (navArg != null) {
+			contextObj = navArg.getParameter();
+		}
+		if (contextObj == null) {
+			LOG.log(0, "failed to get page from navigation - falling back to context");
+			contextObj = getNavigationNode().getContext("JOURNAL_PAGE");
+		}
+		if (contextObj instanceof CollectionJournalPage) {
+			workingJournalPage = (CollectionJournalPage) contextObj;
+		} else {
+			LOG.log(0, "ERROR: unable to get journal page from context.");
+			throw new IllegalStateException("ERROR: unable to get journal page from context.");
+		}
+		assert (workingJournalPage != null);
+		return workingJournalPage;
 	}
 
 	private void addButtonClicked() {
+		try {
+			validate(workingJournalLine);
+			
+			workingJournalPage.getJournalEntries().add(workingJournalLine);
+			workingJournalPage.setRecordTotal(
+					workingJournalPage.getRecordTotal().add(workingJournalLine.getQuantity()));
+			
+			resetJournalEntryInputs();
+			
+		}
+		catch (ValidationError invalid) {
+			MessageDialog.openError(null, "Validation Error", invalid.getMessage());
+		}		
+	}
+	
+	public static class ValidationError extends Error {
+		public ValidationError() { super(); }
+		public ValidationError(String s) { 
+			super(s);
+		}
+	}
+	
+	private void validate(CollectionJournalLine line) {
+		if (line == null) {
+			throw new IllegalStateException();
+		}
+		if (line.getDairyContainer() == null) {
+			throw new ValidationError("BIN number is required!");
+		}
+		if (line.getQuantity() == null || line.getQuantity().equals(BigDecimal.ZERO)) {
+			throw new ValidationError("Quantity must be greater than zero!");
+		}
+		if (line.getRecordedMember() == null || line.getRecordedMember().length() <= 0) {
+			throw new ValidationError("Invalid member number!");
+		}
+	}
+
+	/**
+	 * 
+	private void addButtonClicked2() {
 
 		final CollectionJournalLine journalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
-		/**
-		 * todo should get container based on the CAN ID, now I created manually
-		 */
 		final String quantityTextString = NumericTextRidget.ungroup(quantityText.getText());
 
 		final String memberId = memberIDRidget.getText();
@@ -445,9 +542,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 			if (!handleInvalidMemberID(journalLine, memberId)) {
 				return;
 			}
-		}
-		else if (mship.getDefaultRoute() != null 
-				&& !mship.getDefaultRoute().equals(workingJournalPage.getRoute()) ) {
+		} else if (mship.getDefaultRoute() != null && !mship.getDefaultRoute().equals(workingJournalPage.getRoute())) {
 			if (!handleMemberDefaultRouteMismatch(journalLine, memberId)) {
 				return;
 			}
@@ -472,6 +567,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 				}
 			}
 		}
+
 		// can.setContainerId(canText.getText());
 		journalLine.setFarmContainer(can);
 		journalLine.setRecordedMember(memberIDRidget.getText());
@@ -489,12 +585,15 @@ public class MilkCollectionJournalController extends SubModuleController {
 		table.updateFromModel();
 		totalLabelRidget.updateFromModel();
 	}
+	 */
 
+	/**
+	 * 
+	 */
 	private boolean handleMemberDefaultRouteMismatch(CollectionJournalLine journalLine, String memberId) {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
 
 	/**
 	 * Called when there is no can id specified.
@@ -545,6 +644,9 @@ public class MilkCollectionJournalController extends SubModuleController {
 		return ret;
 	}
 
+	/**
+	 * 
+	 */
 	protected boolean handleInvalidMemberID(final CollectionJournalLine journalLine, final String memberId) {
 		boolean ret = true;
 		if (errorDialogsEnabled) {
@@ -559,11 +661,9 @@ public class MilkCollectionJournalController extends SubModuleController {
 		return ret;
 	}
 
-	private void addSimpleListener() {
-		// getNavigationNode().addSimpleListener(new
-		// MilkCollectionNodeListener());
-	}
-
+	/**
+	 * 
+	 */
 	private void clearAllJournalEntiresButtonClicked() {
 		if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Milk Collection Records",
 				"Do you want to delete all milk collection records?")) {
@@ -575,59 +675,77 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void clearMilkJournalGroupButtonClicked() {
 		if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Clear Input",
 				"Do you want to clear input fields?")) {
-			clearMilkJournalInputs();
+			resetJournalEntryInputs();
 		}
 	}
 
-	private void clearMilkJournalInputs() {
-		memberIDRidget.setText("");
-		canText.setText("");
-		quantityText.setText("");
-		nprMissingButton.setSelected(false);
-		rejectedButton.setSelected(false);
-		memberIDRidget.setFocusable(true);
+	/**
+	 * Reset the working memory used by the journal line widgets.
+	 * Also saves the avlue of the old dairy container (bin), so it can be reused. 
+	 */
+	private void resetJournalEntryInputs() {
+		// stash or reset the working bin
+		if (null != workingJournalLine) {
+			workingBin = workingJournalLine.getDairyContainer();
+		}			
+		else {
+			workingBin = null;
+		}
+		
+		// reset the working journal line.
+		workingJournalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
+		
+		// rebind all widgets to new working line
+		bindDataEntryRidgets();
+		
+		// restore stashed bin
+		if (workingBin != null) {
+			workingJournalLine.setDairyContainer(workingBin);
+			canText.requestFocus();
+		}
+		
+		// update ui with new model
+		updateAllRidgetsFromModel();
+		
 	}
 
+	/**
+	 * Called when 'Save Page' is clicked.
+	 */
 	private void createAndSaveCollectionJournalPage() {
-		// we can assume these were already set.
-		// workingJournalPage.setDriver((Employee) driverRidget.getSelection());
-		// workingJournalPage.setSession((Session)
-		// sessionRidget.getSelection());
-		// workingJournalPage.setRoute((Route) routeRidget.getSelection());
-		// workingJournalPage.setVehicle((Vehicle)
-		// vehicleRidget.getSelection());
-		// final Date date = new
-		// SimpleFormattedDateBean(dateRidget.getText()).getDate();
-		// workingJournalPage.setJournalDate(date);
-		//
-		// final double driverTotal = new
-		// Double(NumericTextRidget.ungroup(driverTotalText.getText())).doubleValue();
 
-		if (workingJournalPage.getDriverTotal() != workingJournalPage.getRecordTotal()) {
+		if (!workingJournalPage.getDriverTotal().equals(workingJournalPage.getRecordTotal())) {
 			if (!handleTotalsNotEqualOnSave())
 				return;
 		}
-		// workingJournalPage.setDriverTotal(new BigDecimal(driverTotal));
-		// workingJournalPage.setRecordTotal(new BigDecimal(recordTotal));
-		// for (final CollectionJournalLine record : records) {
-		// record.setCollectionJournal(workingJournalPage);
-		// }
-		// workingJournalPage.getJournalEntries().addAll(records);
 
-		dairyRepo.saveNewJournalPage(workingJournalPage); // should save all
-															// lines as well..
-		setSubGroupsVisible(false);
+		dairyRepo.saveNewJournalPage(workingJournalPage);
+		
+//todo://		resetPageData(workingJournalPage);
+		resetJournalEntryInputs();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private boolean handleTotalsNotEqualOnSave() {
 		MessageDialog.openError(Display.getDefault().getActiveShell(), "Error Save Collection Journal",
-				"Journal Total value doesn't match collection journal records total.");
+				"Journal Total value (" + workingJournalPage.getRecordTotal()
+						+ ") doesn't match collection journal records total (" + workingJournalPage.getDriverTotal()
+						+ ").");
 		return false;
 	}
 
+	/**
+	 * 
+	 */
 	private void deleteJournalEntryButtonClicked() {
 		if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Milk Collection Records",
 				"Do you want to delete the selected milk collection records?")) {
@@ -642,39 +760,66 @@ public class MilkCollectionJournalController extends SubModuleController {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private List<DairyContainer> getBins() {
 		return dairyRepo.allDairyContainers();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private List<Employee> getDriverList() {
 		return dairyRepo.employeesByPosition("Driver");
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private List<Route> getRoutesList() {
 		return dairyRepo.allRoutes();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private List<Vehicle> getVehiclesList() {
 		return dairyRepo.allVehicles();
 	}
 
-	private void setSubGroupsVisible(boolean visble) {
-		if (journalNumber != null) {
-			((Control) journalNumber.getUIControl()).getParent().setVisible(visble);
-		}
-		if (memberIDRidget != null) {
-			((Control) memberIDRidget.getUIControl()).getParent().getParent().setVisible(visble);
-		}
-		if (table != null) {
-			((Control) table.getUIControl()).getParent().getParent().getParent().setVisible(visble);
-		}
-	}
+	/**
+	 * 
+	 * @param visble
+	 */
+//	private void setSubGroupsVisible(boolean visble) {
+//		if (journalNumber != null) {
+//			((Control) journalNumber.getUIControl()).getParent().setVisible(visble);
+//		}
+//		if (memberIDRidget != null) {
+//			((Control) memberIDRidget.getUIControl()).getParent().getParent().setVisible(visble);
+//		}
+//		if (table != null) {
+//			((Control) table.getUIControl()).getParent().getParent().getParent().setVisible(visble);
+//		}
+//	}
 
+	/**
+	 * 
+	 * @param enable
+	 */
 	private void updateBottomButtons(boolean enable) {
 		((IActionRidget) getRidget(ViewWidgetId.modifyButton)).setEnabled(enable);
 		((IActionRidget) getRidget(ViewWidgetId.deleteButton)).setEnabled(enable);
 	}
 
+	/**
+	 * 
+	 */
 	private void updateJournalTotals() {
 		int counter = 0;
 		BigDecimal total = new BigDecimal(0);
@@ -686,22 +831,16 @@ public class MilkCollectionJournalController extends SubModuleController {
 		workingJournalPage.setRecordTotal(total);
 	}
 
-	// private class MilkCollectionNodeListener extends
-	// SimpleNavigationNodeAdapter {
-	//
-	// @Override
-	// public void activated(INavigationNode<?> source) {
-	// System.out.println("load dairy ............!");
-	// }
-	//
-	// @Override
-	// public void deactivated(INavigationNode<?> source) {
-	//
-	// }
-	//
-	// @Override
-	// public void disposed(INavigationNode<?> source) {
-	//
-	// }
-	// }
+	/**
+	 * 
+	 * @param person
+	 * @return
+	 */
+	String formatPersonName(Person person) {
+		StringBuffer sb = new StringBuffer();
+		if (person != null) {
+			new Formatter(sb).format("%s, %s", person.getFamilyName(), person.getGivenName());
+		}
+		return sb.toString();
+	}
 }

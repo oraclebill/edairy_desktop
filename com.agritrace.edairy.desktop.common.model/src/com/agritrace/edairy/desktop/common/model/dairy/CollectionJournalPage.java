@@ -74,6 +74,7 @@ public interface CollectionJournalPage extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Journal Entries</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Journal Entries</em>' containment reference list isn't clear,
@@ -82,7 +83,8 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Journal Entries</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalEntries()
-	 * @model containment="true"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal
+	 * @model opposite="collectionJournal" containment="true"
 	 * @generated
 	 */
 	EList<CollectionJournalLine> getJournalEntries();

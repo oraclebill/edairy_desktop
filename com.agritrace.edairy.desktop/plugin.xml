@@ -305,5 +305,12 @@
     </assembly2>
     -->
  </extension>
+ <extension
+       point="org.eclipse.riena.ui.swt.lnfMarkerSupport">
+    <markerSupport
+          class="org.eclipse.riena.ui.ridgets.swt.BorderMarkerSupport"
+          id="com.agritrace.edairy.desktop.markerSupport">
+    </markerSupport>
+ </extension>
  
 </plugin>

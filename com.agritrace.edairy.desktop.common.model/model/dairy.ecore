@@ -51,8 +51,9 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournalPage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="#//DairyContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournalPage"
+        eOpposite="#//CollectionJournalPage/journalEntries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="common.ecore#//Person">
@@ -97,7 +98,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
         eType="ecore:EDataType common.ecore#//UniqueID" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
-        eType="#//CollectionJournalLine" containment="true"/>
+        eType="#//CollectionJournalLine" containment="true" eOpposite="#//CollectionJournalLine/collectionJournal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalDate" lowerBound="1"

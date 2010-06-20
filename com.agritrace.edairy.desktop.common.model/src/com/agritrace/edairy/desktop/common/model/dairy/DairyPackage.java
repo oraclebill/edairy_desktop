@@ -328,7 +328,7 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER = 10;
 
 	/**
-	 * The feature id for the '<em><b>Collection Journal</b></em>' reference.
+	 * The feature id for the '<em><b>Collection Journal</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2055,10 +2055,10 @@ public interface DairyPackage extends EPackage {
 	EReference getCollectionJournalLine_DairyContainer();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Collection Journal</em>'.
+	 * @return the meta object for the container reference '<em>Collection Journal</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal()
 	 * @see #getCollectionJournalLine()
 	 * @generated
@@ -3378,7 +3378,7 @@ public interface DairyPackage extends EPackage {
 		EReference COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER = eINSTANCE.getCollectionJournalLine_DairyContainer();
 
 		/**
-		 * The meta object literal for the '<em><b>Collection Journal</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Collection Journal</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

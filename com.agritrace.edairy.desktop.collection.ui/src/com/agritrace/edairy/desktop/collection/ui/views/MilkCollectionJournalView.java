@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
@@ -85,7 +86,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 	public static final String SAVE_LABEL = "Save and Create New Journal";
 
-	private Text dateText;
+	private DateTime dateText;
 	private Button calendarButton;
 
 	public static final int MINIMUM_LABEL_WIDTH = 70;
@@ -127,7 +128,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateComposite);
 		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(dateComposite);
 
-		dateText = UIControlsFactory.createText(dateComposite, SWT.READ_ONLY | SWT.BORDER);
+		dateText = UIControlsFactory.createDate(dateComposite,SWT.DATE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 		addUIControl(dateText, ViewWidgetId.calendarDate);
 		dateText.addTraverseListener(this);
@@ -142,22 +143,22 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
-		calendarButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-						dateText.getText());
-
-				if (calDialog.open() == AbstractWindowController.OK) {
-					final Date selectedDate = (Date) calDialog.getController().getContext(
-							SimpleFormattedDateBean.DATE_PROR);
-					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-					bean.setDate(selectedDate);
-					dateText.setText(bean.getFormattedDate());
-				}
-			}
-		});
+//		calendarButton.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
+//				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+//						dateText.getText());
+//
+//				if (calDialog.open() == AbstractWindowController.OK) {
+//					final Date selectedDate = (Date) calDialog.getController().getContext(
+//							SimpleFormattedDateBean.DATE_PROR);
+//					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+//					bean.setDate(selectedDate);
+//					dateText.setText(bean.getFormattedDate());
+//				}
+//			}
+//		});
 
 		final Label padComposite = UIControlsFactory.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1).applyTo(padComposite);

@@ -66,8 +66,8 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(8).applyTo(panel);
 		
 		addLabeledComboField(panel, BIN_LABEL, ViewWidgetId.binCombo).addTraverseListener(this);
-		addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText).addTraverseListener(this);
 		addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText).addTraverseListener(this);
+		addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText).addTraverseListener(this);
 		addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText).addTraverseListener(this);
 		
 		Label filler = UIControlsFactory.createLabel(panel, "");
@@ -135,7 +135,7 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createText(parent, SWT.BORDER, widgetID);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(text);
+		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
 		
 		return text;
 	}
@@ -148,7 +148,7 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createTextDecimal(parent, widgetID);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).applyTo(text);
+		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
 		
 		return text;
 	}

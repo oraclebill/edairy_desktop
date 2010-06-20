@@ -12,6 +12,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 import java.math.BigDecimal;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -316,12 +317,12 @@ public interface CollectionJournalLine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dairy Container</em>' reference.
-	 * @see #setDairyContainer(Container)
+	 * @see #setDairyContainer(DairyContainer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_DairyContainer()
 	 * @model
 	 * @generated
 	 */
-	Container getDairyContainer();
+	DairyContainer getDairyContainer();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}' reference.
@@ -331,29 +332,31 @@ public interface CollectionJournalLine extends EObject {
 	 * @see #getDairyContainer()
 	 * @generated
 	 */
-	void setDairyContainer(Container value);
+	void setDairyContainer(DairyContainer value);
 
 	/**
-	 * Returns the value of the '<em><b>Collection Journal</b></em>' reference.
+	 * Returns the value of the '<em><b>Collection Journal</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Collection Journal</em>' reference isn't clear,
+	 * If the meaning of the '<em>Collection Journal</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Collection Journal</em>' reference.
+	 * @return the value of the '<em>Collection Journal</em>' container reference.
 	 * @see #setCollectionJournal(CollectionJournalPage)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_CollectionJournal()
-	 * @model
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries
+	 * @model opposite="journalEntries" transient="false"
 	 * @generated
 	 */
 	CollectionJournalPage getCollectionJournal();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Collection Journal</em>' reference.
+	 * @param value the new value of the '<em>Collection Journal</em>' container reference.
 	 * @see #getCollectionJournal()
 	 * @generated
 	 */

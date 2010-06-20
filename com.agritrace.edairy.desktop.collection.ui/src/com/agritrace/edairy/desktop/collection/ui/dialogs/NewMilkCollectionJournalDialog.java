@@ -221,21 +221,23 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			}
 
 			private void updateFileNumber() {
-				StringBuilder sb = new StringBuilder();
-				Formatter f = new Formatter(sb, Locale.getDefault());
-				Date date = dateTime.getDate();
-				file.setText(f.format("%4s[%4s]-%04d%02d%02d", route.getText(), session.getText(),
-						date.getYear(), date.getMonth(), date.getDate()).toString());
+//				StringBuilder sb = new StringBuilder();
+//				Formatter f = new Formatter(sb, Locale.getDefault());
+//				Date date = dateTime.getDate();
+//				file.setText(f.format("%4s[%4s]-%04d%02d%02d", route.getText(), session.getText(),
+//						date.getYear(), date.getMonth(), date.getDate()).toString());
 //				file.setText(f.format("%s[%s]-%s", 
 //						newJournalPage.getRoute().getCode(),
 //						newJournalPage.getSession().getLiteral(), 
 //						newJournalPage.getJournalDate()).toString());
+				// TODO:
+				file.setText("1");
 			}
 
 			private void debugPrintEvent(PropertyChangeEvent evt) {
 				StringBuilder sb = new StringBuilder();
 				Formatter f = new Formatter(sb, Locale.getDefault());
-				System.err.println(f.format("[%s] %s: %s (%s)", evt.getSource(), evt.getPropertyName(),
+				System.err.println(f.format("[%s] %s: new=(%s) old=(%s)", evt.getSource(), evt.getPropertyName(),
 						evt.getNewValue(), evt.getOldValue()));
 
 			}
