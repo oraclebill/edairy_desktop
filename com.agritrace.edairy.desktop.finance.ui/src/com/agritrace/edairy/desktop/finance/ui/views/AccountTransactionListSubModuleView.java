@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.navigation.ui.swt.presentation.SwtViewProvider;
@@ -28,6 +29,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionListSubModuleController;
+import com.swtdesigner.SWTResourceManager;
 
 public class AccountTransactionListSubModuleView extends SubModuleView
 		implements ViewConstants {
@@ -49,6 +51,7 @@ public class AccountTransactionListSubModuleView extends SubModuleView
 
 	private Composite filterButtonsPanel;
 	private Composite row_1;
+	private Composite buttonPanel;
 	
 	@Override
 	public void basicCreatePartControl(Composite parent) {
@@ -71,8 +74,8 @@ public class AccountTransactionListSubModuleView extends SubModuleView
 		filterButtonsPanel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		Composite gridPanel = UIControlsFactory.createComposite(parent);
 		gridPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		Composite buttonPanel = UIControlsFactory.createComposite(parent);
-
+		buttonPanel = UIControlsFactory.createComposite(parent);
+		buttonPanel.setLayout(GridLayoutFactory.swtDefaults().create());
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(filterPanel);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
@@ -217,8 +220,7 @@ public class AccountTransactionListSubModuleView extends SubModuleView
 
 	protected void setupFilterButtonsPanel(Composite parent) {
 		FormData fd;
-		parent.setBackground(Display.getDefault()
-				.getSystemColor(SWT.COLOR_CYAN));
+		parent.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		filterButtonsPanel.setLayout(new GridLayout(1, false));
 		
 				searchButton = new Button(parent, 0);
@@ -259,12 +261,12 @@ public class AccountTransactionListSubModuleView extends SubModuleView
 
 	protected void setupButtonPanel(Composite parent) {
 		FormData fd;
-		parent.setBackground(Display.getDefault()
-				.getSystemColor(SWT.COLOR_CYAN));
-		parent.setLayout(new RowLayout());
+		parent.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		buttonPanel.setLayout(new GridLayout(1, false));
 
 		// open button
 		Button openButton = new Button(parent, 0);
+		openButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		openButton.setText("View");
 		addUIControl(openButton, "openAction");
 

@@ -248,8 +248,8 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleNode = NodeFactory.createModule(MODULE_MEMBERS, LABEL_MEMBERS, moduleGroupNode);
 		NodeFactory.createSubModule(SUBMODULE_MEMBER_DIRECTORY,
 				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController.class); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
-				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
+//		NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
+//				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
 
 		//
 		// FARM MODULE GROUP
@@ -299,14 +299,14 @@ public class EDairyManagerApplication extends SwtApplication {
 		final IModuleNode financeMembers = NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_REGISTER,
 				"Transaction Journal", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY,
-				"Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(
-				"edm.finances.mdlog", "Transaction Journal 9", financeMembers, TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory
-				.createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER, "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
-				"Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ 
+//		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY,
+//				"Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ 
+//		NodeFactory.createSubModule(
+//				"edm.finances.mdlog", "Transaction Journal 9", financeMembers, TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		NodeFactory
+//				.createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER, "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ 
+//		NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
+//				"Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ 
 
 		//
 		// VETERINARY TAB
