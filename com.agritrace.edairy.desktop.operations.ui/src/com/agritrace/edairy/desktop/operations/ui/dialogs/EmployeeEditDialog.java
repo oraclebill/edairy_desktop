@@ -103,21 +103,22 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 
 		Composite photoPanel = new Composite(comonComp, SWT.NONE);
 		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		photoPanel.setLayout(new GridLayout(2, false));
+		photoPanel.setLayout(new GridLayout(1, false));
 		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
 		Label label = new Label(photoPanel, SWT.BORDER | SWT.WRAP | SWT.CENTER);
 		label.setBackground(SWTResourceManager.getColor(255, 255, 255));
 		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-		Composite composite = new Composite(photoPanel, SWT.NONE);
+		Label composite = UIControlsFactory.createLabel(photoPanel,  "", "contact-photo-label");
 		composite.setBackground(SWTResourceManager.getColor(255, 255, 255));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
 
-		Link link = new Link(photoPanel, SWT.NONE);
+		Link link = UIControlsFactory.createLink(photoPanel, SWT.NONE, "update-photo-action");
 		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		link.setText("<a>update photo</a>");
-		new Label(photoPanel, SWT.NONE);
+		
+//		UIControlsFactory.createLabel(photoPanel, );
 		Group ContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
 				.applyTo(ContactGroup);

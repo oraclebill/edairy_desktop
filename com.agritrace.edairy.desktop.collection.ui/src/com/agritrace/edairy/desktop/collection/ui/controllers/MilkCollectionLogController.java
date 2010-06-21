@@ -10,10 +10,16 @@ import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.SubModuleNode;
+import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
@@ -24,6 +30,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
@@ -62,6 +69,18 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	public void afterBind() {
 		super.afterBind();
+		getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW).setText("Enter Collection Journals");
+		
+		getRidget(IActionRidget.class, "import-file-button").addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
+				String retVal = fileDialog.open();
+				System.err.println("File " + retVal + " opened.");
+			}
+			
+		});
+		
 		ISubModuleNode myNode = getNavigationNode();
 		if (myNode != null) {
 			myNode.addSimpleListener(new org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter() {
@@ -202,6 +221,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		refreshTableContents();
 	}
 	
+	
+	
+	@Override
+	protected void handleViewItemAction() {
+		// FIXME: demo only!!! - use view page!!
+		CollectionJournalPage newPage = (CollectionJournalPage)table.getSelection().get(0);
+		activateDetailView(newPage);
+	}
+
+
 	private ISubModuleNode createCollectionDetailNode( CollectionJournalPage journalPage ) {
 		getNavigationNode().navigate(
 				new NavigationNodeId("riena.demo.client.customermailfolders.module", journalPage.getReferenceNumber()), //$NON-NLS-1$

@@ -18,6 +18,8 @@ import org.eclipse.swt.widgets.Display;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -40,7 +42,15 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			
 			int retVal = farmDialog.open();
 			if (retVal == Window.OK) {
-				request.setFarm(farmDialog.getSelectedFarm());
+				Farm farm = farmDialog.getSelectedFarm();
+				request.setFarm(farm);
+//				// FIXME: fix.
+//				try {
+//					Farmer farmer= (Farmer)farm.eContainer();
+//				}
+//				catch(Exception e) {
+//					e.printStackTrace();
+//				}
 				farmLookupText.updateFromModel();
 			}
 		}
