@@ -105,7 +105,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		gdf.applyTo(groupTwo);
 
 //		final Control groupThree = createMilkEntryInputGroup(parent);
-		final Control groupThree = new CollectionsEntryWidget(parent, SWT.NONE);		
+		final Control groupThree = new CollectionsEntryPanel(parent, SWT.NONE);		
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupThree);
 
 		final Control groupFour = createMilkEntryGroup(parent);

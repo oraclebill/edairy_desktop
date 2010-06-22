@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 
-public class CollectionsEntryWidget extends Composite implements TraverseListener {
+public class CollectionsEntryPanel extends Composite implements TraverseListener {
 
 	private static final String MILK_ENTRY_GROUP_TITLE = "Add New Entry";
 	private static final String BIN_LABEL = "Bin :";
@@ -36,7 +36,7 @@ public class CollectionsEntryWidget extends Composite implements TraverseListene
 	private static final GridDataFactory labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1);
 
 	
-	public CollectionsEntryWidget(Composite parent, int style) {
+	public CollectionsEntryPanel(Composite parent, int style) {
 		
 		super(parent, style);
 		setLayout(new FillLayout());
