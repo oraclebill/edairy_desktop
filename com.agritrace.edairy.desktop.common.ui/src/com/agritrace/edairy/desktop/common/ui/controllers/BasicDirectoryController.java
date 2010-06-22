@@ -19,7 +19,7 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
 	
@@ -97,7 +97,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 
 	@Override
 	protected void configureTableRidget() {
-		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
+		table = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
 		table.addDoubleClickListener(new IActionListener() {

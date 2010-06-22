@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public class MilkCollectionLogFilterPanel extends Composite {
 
@@ -54,11 +54,11 @@ public class MilkCollectionLogFilterPanel extends Composite {
 			}
 		});
 		btnSearch.setText("Search");
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(btnSearch, AbstractRecordListView.BIND_ID_FILTER_SEARCH);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(btnSearch, AbstractDirectoryView.BIND_ID_FILTER_SEARCH);
 
 		final Button btnReset = UIControlsFactory.createButton(grpSearch);
 		btnReset.setText("Reset");
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(btnReset, AbstractRecordListView.BIND_ID_FILTER_RESET);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(btnReset, AbstractDirectoryView.BIND_ID_FILTER_RESET);
 
 		final Label lblMprMissing = new Label(grpSearch, SWT.NONE);
 		lblMprMissing.setText("MPR Missing");

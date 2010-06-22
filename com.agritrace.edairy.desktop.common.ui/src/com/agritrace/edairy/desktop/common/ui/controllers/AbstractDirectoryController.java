@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 /**
  * Abstract class of RecordList controller
@@ -136,7 +136,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	private void configureFilterRidgetsInternal() {
-		searchBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_SEARCH);
+		searchBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_FILTER_SEARCH);
 		if (searchBtnRidget != null) {
 			searchBtnRidget.addListener(new IActionListener() {
 				@Override
@@ -146,7 +146,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			});
 		}
 
-		resetBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_FILTER_RESET);
+		resetBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_FILTER_RESET);
 		if (resetBtnRidget != null) {
 			resetBtnRidget.addListener(new IActionListener() {
 				@Override
@@ -158,14 +158,14 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW);
+		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW);
 		newBtnRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handleNewItemAction();					
 			}
 		});
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(false);
 		viewBtnRidget.addListener(new IActionListener() {
 			@Override
@@ -179,7 +179,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	protected void configureTableRidget() {
 		// Configure Table Widgets
-		table = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
+		table = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
 		table.addDoubleClickListener(new IActionListener() {
@@ -246,7 +246,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	protected abstract String[] getTableColumnPropertyNames();
 
 	protected void itemSelected(SelectionEvent event) {
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_VIEW);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW);
 		viewBtnRidget.setEnabled(true);
 	}
 

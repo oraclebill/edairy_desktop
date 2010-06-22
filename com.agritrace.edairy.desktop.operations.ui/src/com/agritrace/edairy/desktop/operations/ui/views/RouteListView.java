@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class RouteListView extends AbstractRecordListView {
+public class RouteListView extends AbstractDirectoryView {
 
 	public static final String ID = "route-list-view";
 

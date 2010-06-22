@@ -24,6 +24,12 @@
             name="Milk Collection Journal Detail View"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"
+            id="com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"
+            name="Milk Delivery Log">
+      </view>
    </extension>
 
 </plugin>

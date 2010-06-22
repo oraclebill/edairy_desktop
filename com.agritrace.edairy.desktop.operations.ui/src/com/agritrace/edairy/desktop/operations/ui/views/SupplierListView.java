@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class SupplierListView extends AbstractRecordListView {
+public class SupplierListView extends AbstractDirectoryView {
 
 	public static final String ID = "edairy.supplier.list.view";
 

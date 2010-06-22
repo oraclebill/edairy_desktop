@@ -41,6 +41,8 @@ import com.agritrace.edairy.desktop.deliveries.ui.beans.ItemsFactory;
 import com.agritrace.edairy.desktop.deliveries.ui.dialogs.AddItemDialog;
 
 public class DeliveryView extends SubModuleView {
+	public DeliveryView() {
+	}
 
     public static final String ID = "milk.delivery.entry";
 

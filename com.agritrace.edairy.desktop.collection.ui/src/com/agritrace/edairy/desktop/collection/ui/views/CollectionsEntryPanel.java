@@ -1,10 +1,15 @@
 package com.agritrace.edairy.desktop.collection.ui.views;
 
+import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.MINIMUM_LABEL_WIDTH;
+import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledBooleanField;
+import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledComboField;
+import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledDecimalTextField;
+import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledTextField;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -13,7 +18,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 
@@ -29,11 +33,6 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 
 	private static final String REJECTED_COLUMN_HEADER = "Rejected";
 
-	private static final int MINIMUM_LABEL_WIDTH = 70;
-	private static final int STD_FIELD_WIDTH = 70;
-
-	private static final GridDataFactory gdf = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false);
-	private static final GridDataFactory labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1);
 
 	
 	public CollectionsEntryPanel(Composite parent, int style) {
@@ -126,60 +125,7 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 		group.setTabList(new Control[]{addButton});
 		
 	}
-	
-	/**
-	 * @wbp.factory
-	 */
-	private static Control addLabeledTextField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
-		labelGDF.applyTo(label);
 
-		final Text text = UIControlsFactory.createText(parent, SWT.BORDER, widgetID);
-		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
-		
-		return text;
-	}
-	
-	/**
-	 * @wbp.factory
-	 */
-	private static Control addLabeledDecimalTextField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
-		labelGDF.applyTo(label);
-
-		final Text text = UIControlsFactory.createTextDecimal(parent, widgetID);
-		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
-		
-		return text;
-	}
-	
-	/**
-	 * @wbp.factory
-	 */
-	private static Control addLabeledComboField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
-		labelGDF.applyTo(label);
-
-		final CCombo field = UIControlsFactory.createCCombo(parent, ViewWidgetId.binCombo);
-		GridDataFactory.fillDefaults().minSize(60, -1).grab(true, false).applyTo(field);
-		
-		return field;
-		
-	}
-
-	
-	/**
-	 * @wbp.factory
-	 */
-	private static Control addLabeledBooleanField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
-		labelGDF.applyTo(label);
-
-		Button control = UIControlsFactory.createButtonCheck(parent, "", widgetID);
-		GridDataFactory.swtDefaults().align(SWT.CENTER, SWT.BEGINNING).applyTo(control);
-
-		return control;
-	}
 
 	@Override
 	public void keyTraversed(TraverseEvent e) {

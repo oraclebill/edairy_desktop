@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Table;
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class AbstractRecordListView extends SubModuleView {
+public abstract class AbstractDirectoryView extends SubModuleView {
 //	public static final String BIND_ID_LIST = "list";
 	/**
 	 * Binding id of the table control {@value} .

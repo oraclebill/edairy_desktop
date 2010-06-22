@@ -12,7 +12,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.Activator;
 
 /**
@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.services.ui.Activator;
  * @author Hui(Spark) Wan
  * 
  */
-public class AnimalHealthRequestView extends AbstractRecordListView {
+public class AnimalHealthRequestView extends AbstractDirectoryView {
 
 	public static final String ID = "animalhealth.services.edit.view";
 

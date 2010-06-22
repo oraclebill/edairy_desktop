@@ -14,9 +14,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class CustomerDirectoryView extends AbstractRecordListView {
+public class CustomerDirectoryView extends AbstractDirectoryView {
 	public CustomerDirectoryView() {
 	}
 

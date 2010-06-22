@@ -45,7 +45,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.AnimalHealthRequestRepository;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -120,7 +120,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 	@Override
 	public void configureTableRidget() {
-		masterTable = this.getRidget(ITableRidget.class, AbstractRecordListView.BIND_ID_TABLE);
+		masterTable = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
 		// Configure column formatter
 		if (masterTable != null) {
 			// Date column

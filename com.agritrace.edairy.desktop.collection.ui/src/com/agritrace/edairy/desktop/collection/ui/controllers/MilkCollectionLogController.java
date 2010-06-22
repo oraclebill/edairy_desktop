@@ -31,7 +31,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
@@ -91,7 +91,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		getRidget(IActionRidget.class, AbstractRecordListView.BIND_ID_NEW).setText("Enter Collection Journals");
+		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW).setText("Enter Collection Journals");
 		
 		getRidget(IActionRidget.class, "import-file-button").addListener(new IActionListener() {
 			@Override

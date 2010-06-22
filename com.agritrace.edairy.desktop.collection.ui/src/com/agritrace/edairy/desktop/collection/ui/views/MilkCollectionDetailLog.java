@@ -4,9 +4,9 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
-import com.agritrace.edairy.desktop.common.ui.views.AbstractRecordListView;
+import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class MilkCollectionDetailLog extends AbstractRecordListView {
+public class MilkCollectionDetailLog extends AbstractDirectoryView {
 
 	public static final String ID = "milk-collection-detail-log";
 	public static final int STD_LABEL_WIDTH = 120;

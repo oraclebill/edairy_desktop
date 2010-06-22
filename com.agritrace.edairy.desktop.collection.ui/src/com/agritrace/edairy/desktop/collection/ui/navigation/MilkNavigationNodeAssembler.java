@@ -61,7 +61,7 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
 				moduleGroupNode);
 		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
-				"Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ 
+				"Delivery Log", moduleNode, "com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"); //$NON-NLS-1$ 
 		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		return new INavigationNode<?>[] { subAppNode };
