@@ -262,11 +262,11 @@ public class AccountTransactionListSubModuleView extends SubModuleView
 	protected void setupButtonPanel(Composite parent) {
 		FormData fd;
 		parent.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		buttonPanel.setLayout(new GridLayout(1, false));
+//		buttonPanel.setLayout(new GridLayout(1, false));
 
 		// open button
 		Button openButton = new Button(parent, 0);
-		openButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		openButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 		openButton.setText("View");
 		addUIControl(openButton, "openAction");
 

@@ -15,6 +15,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Dialog;
@@ -55,12 +56,33 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		// addTableColumn("Route",
 		// DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new
 		// RouteNameFormatter() );
-		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE);
+		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new ColumnFormatter() {
+			@Override
+			public String getText(Object element) {
+				Route route = null;
+				if ( element instanceof Route  ) {
+					route = (Route)element;
+					return route.getName();
+				}
+				else if (element instanceof CollectionJournalPage) {
+					Route r = ((CollectionJournalPage)element).getRoute();
+					if (route != null) {
+						return r.getName();
+					}
+					else {
+						return "(empty)";
+					}
+				}
+				System.err.println("element->class: "+ element.getClass());
+				return super.getText(element);
+			}			
+		});
 		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
-		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
-		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
-		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
-		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
+		addTableColumn("Driver Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL);
+		addTableColumn("Entry Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
+		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT);
+		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
+		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
 
 		filterBean.setRoutes(new DairyRepository().allRoutes());
 	}

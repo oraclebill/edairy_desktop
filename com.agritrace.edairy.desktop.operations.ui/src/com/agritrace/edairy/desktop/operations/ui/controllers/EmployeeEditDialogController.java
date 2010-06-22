@@ -117,13 +117,13 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		
 		Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), fName);
 		ILabelRidget photoLabel = getRidget(ILabelRidget.class, "contact-photo-label");
-		try {
-			photoLabel.setText("");
-			photoLabel.setIcon(photo);
-			photoLabel.getParent().pack();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			photoLabel.setText("");
+//			photoLabel.setIcon(photo);
+//			photoLabel.getParent().pack();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override

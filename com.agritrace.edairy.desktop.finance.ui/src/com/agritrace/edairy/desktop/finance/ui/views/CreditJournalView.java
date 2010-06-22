@@ -39,6 +39,8 @@ import com.agritrace.edairy.desktop.finance.ui.beans.CreditRecord;
 import com.agritrace.edairy.desktop.finance.ui.beans.CreditRecordFactory;
 
 public class CreditJournalView extends ViewPart {
+	public CreditJournalView() {
+	}
 
     public static final String ID = "edairy.desktop.credit-journal-entry";
 

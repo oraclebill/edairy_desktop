@@ -763,13 +763,40 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 12;
 
 	/**
+	 * The feature id for the '<em><b>Entry Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Suspended Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Rejected Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 15;
+
+	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 13;
+	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 16;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -2415,6 +2442,39 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCollectionJournalPage_Suspended();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount <em>Entry Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Entry Count</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_EntryCount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Suspended Count</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_SuspendedCount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rejected Count</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_RejectedCount();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Route <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3646,6 +3706,30 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_JOURNAL_PAGE__SUSPENDED = eINSTANCE.getCollectionJournalPage_Suspended();
+
+		/**
+		 * The meta object literal for the '<em><b>Entry Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = eINSTANCE.getCollectionJournalPage_EntryCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Suspended Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = eINSTANCE.getCollectionJournalPage_SuspendedCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Rejected Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = eINSTANCE.getCollectionJournalPage_RejectedCount();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.

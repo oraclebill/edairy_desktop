@@ -56,6 +56,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRecordTotal <em>Record Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#isSuspended <em>Suspended</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getEntryCount <em>Entry Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSuspendedCount <em>Suspended Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRejectedCount <em>Rejected Count</em>}</li>
  * </ul>
  * </p>
  *
@@ -261,6 +264,66 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected boolean suspended = SUSPENDED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEntryCount() <em>Entry Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntryCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int ENTRY_COUNT_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getEntryCount() <em>Entry Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntryCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected int entryCount = ENTRY_COUNT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSuspendedCount() <em>Suspended Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuspendedCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SUSPENDED_COUNT_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSuspendedCount() <em>Suspended Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuspendedCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected int suspendedCount = SUSPENDED_COUNT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRejectedCount() <em>Rejected Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRejectedCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int REJECTED_COUNT_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getRejectedCount() <em>Rejected Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRejectedCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected int rejectedCount = REJECTED_COUNT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -635,6 +698,69 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getEntryCount() {
+		return entryCount;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEntryCount(int newEntryCount) {
+		int oldEntryCount = entryCount;
+		entryCount = newEntryCount;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT, oldEntryCount, entryCount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getSuspendedCount() {
+		return suspendedCount;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuspendedCount(int newSuspendedCount) {
+		int oldSuspendedCount = suspendedCount;
+		suspendedCount = newSuspendedCount;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT, oldSuspendedCount, suspendedCount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getRejectedCount() {
+		return rejectedCount;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRejectedCount(int newRejectedCount) {
+		int oldRejectedCount = rejectedCount;
+		rejectedCount = newRejectedCount;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT, oldRejectedCount, rejectedCount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -698,6 +824,12 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return getRecordTotal();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				return isSuspended();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT:
+				return getEntryCount();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT:
+				return getSuspendedCount();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
+				return getRejectedCount();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -751,6 +883,15 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				setSuspended((Boolean)newValue);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT:
+				setEntryCount((Integer)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT:
+				setSuspendedCount((Integer)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
+				setRejectedCount((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -802,6 +943,15 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				setSuspended(SUSPENDED_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT:
+				setEntryCount(ENTRY_COUNT_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT:
+				setSuspendedCount(SUSPENDED_COUNT_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
+				setRejectedCount(REJECTED_COUNT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -840,6 +990,12 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				return suspended != SUSPENDED_EDEFAULT;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT:
+				return entryCount != ENTRY_COUNT_EDEFAULT;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT:
+				return suspendedCount != SUSPENDED_COUNT_EDEFAULT;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
+				return rejectedCount != REJECTED_COUNT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -868,6 +1024,12 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		result.append(recordTotal);
 		result.append(", suspended: ");
 		result.append(suspended);
+		result.append(", entryCount: ");
+		result.append(entryCount);
+		result.append(", suspendedCount: ");
+		result.append(suspendedCount);
+		result.append(", rejectedCount: ");
+		result.append(rejectedCount);
 		result.append(')');
 		return result.toString();
 	}
