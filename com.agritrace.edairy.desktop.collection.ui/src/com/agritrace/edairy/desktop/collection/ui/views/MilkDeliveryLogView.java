@@ -7,10 +7,12 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+import org.eclipse.jface.action.Action;
 
 public class MilkDeliveryLogView extends AbstractDirectoryView {
 
 	public static final String ID = "com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"; //$NON-NLS-1$
+	private Action action;
 
 	public MilkDeliveryLogView() {
 		
@@ -34,6 +36,17 @@ public class MilkDeliveryLogView extends AbstractDirectoryView {
 	 */
 	private void createActions() {
 		// Create the actions
+		{
+			action = new Action("New Action") {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					super.run();
+				}
+				
+			};
+		}
 	}
 
 	/**
@@ -41,6 +54,8 @@ public class MilkDeliveryLogView extends AbstractDirectoryView {
 	 */
 	private void initializeToolBar() {
 		IToolBarManager toolbarManager = getViewSite().getActionBars().getToolBarManager();
+		toolbarManager.add(action);
+//		toolbarManager.
 	}
 
 	/**
@@ -57,7 +72,6 @@ public class MilkDeliveryLogView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterConditions(Composite comp) {
-		MilkDeliveryFilterPanel filterPanel = new MilkDeliveryFilterPanel(comp, SWT.NONE);
-		
+		MilkDeliveryFilterPanel filterPanel = new MilkDeliveryFilterPanel(comp, SWT.NONE);		
 	}
 }

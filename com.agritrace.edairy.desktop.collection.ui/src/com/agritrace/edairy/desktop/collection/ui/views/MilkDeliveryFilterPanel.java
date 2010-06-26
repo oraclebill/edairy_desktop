@@ -4,9 +4,10 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.PlatformUI;
 
 public class MilkDeliveryFilterPanel extends Composite {
@@ -16,21 +17,25 @@ public class MilkDeliveryFilterPanel extends Composite {
 	 * @param parent
 	 * @param style
 	 */
-	public MilkDeliveryFilterPanel(Composite parent, int style) {
-		super(parent, style);
-//		setBackground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE));
-
-		FieldUtil.addLabeledDateField(this, "Start Date", "filter-start-date");
-		FieldUtil.addLabeledDateField(this, "End Date", "filter-end-date");
-		FieldUtil.addLabeledComboField(this, "Route", "filter-route");
-		FieldUtil.addLabeledComboField(this, "Customer", "filter-customer");
+	public MilkDeliveryFilterPanel(Composite origParent, int style) {
+		super(origParent, style);
+		setBackground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		setLayout(new FillLayout());
 		
-		Control filler = UIControlsFactory.createLabel(this, "");
-		GridDataFactory.swtDefaults().grab(true, false).span(5,1).applyTo(filler);
-		Control searchButton = UIControlsFactory.createButton(this, "Search", "filter-search-button");		
+		Group group = UIControlsFactory.createGroup(this, "Delivery Log Filter");
+
+		FieldUtil.addLabeledDateField(group, "Start Date", "filter-start-date");
+		FieldUtil.addLabeledDateField(group, "End Date", "filter-end-date");
+		FieldUtil.addLabeledComboField(group, "Route", "filter-route");
+		FieldUtil.addLabeledComboField(group, "Customer", "filter-customer");
+		
+		Control filler = UIControlsFactory.createLabel(group, "");
+		GridDataFactory.swtDefaults().grab(true, false).span(7,1).applyTo(filler);
+		
+		Control searchButton = UIControlsFactory.createButton(group, "Search", "filter-search-button");		
 		GridDataFactory.swtDefaults().align(SWT.RIGHT,SWT.CENTER).applyTo(searchButton);
 		
-		GridLayoutFactory.swtDefaults().numColumns(8).margins(8, 8).spacing(5, 5).generateLayout(this);
+		GridLayoutFactory.swtDefaults().numColumns(8).margins(8, 8).spacing(5, 5).generateLayout(group);
 		
 		this.pack();
 		

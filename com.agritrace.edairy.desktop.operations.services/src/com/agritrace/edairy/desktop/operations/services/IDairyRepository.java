@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
@@ -46,5 +47,7 @@ public interface IDairyRepository {
 	void save(Object changedItem);
 
 	CollectionJournalPage getJournalPageById(Long pageId);
+
+	List<DeliveryJournal> allDeliveries();
 
 }

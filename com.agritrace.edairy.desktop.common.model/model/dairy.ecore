@@ -160,6 +160,26 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" lowerBound="1"
+        eType="#//Session"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
+        eType="#//Customer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lines" lowerBound="1" upperBound="-1"
+        eType="#//CollectionJournalLine"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournalLine">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//DairyContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quanity" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="common.ecore#//Company">
     <eOperations name="getMemberFarms" lowerBound="1">
@@ -189,6 +209,8 @@
         eType="#//CollectionJournalPage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customers" upperBound="-1"
+        eType="#//Customer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
         eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"
         eOpposite="requests.ecore#//AnimalHealthRequest/dairy" eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>

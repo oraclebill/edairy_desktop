@@ -69,6 +69,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.ROUTE: return createRoute();
 			case DairyPackage.TRIP: return createTrip();
 			case DairyPackage.DELIVERY_JOURNAL: return createDeliveryJournal();
+			case DairyPackage.DELIVERY_JOURNAL_LINE: return createDeliveryJournalLine();
 			case DairyPackage.DAIRY: return createDairy();
 			case DairyPackage.MEMBERSHIP: return createMembership();
 			case DairyPackage.ASSET: return createAsset();
@@ -200,6 +201,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public DeliveryJournal createDeliveryJournal() {
 		DeliveryJournalImpl deliveryJournal = new DeliveryJournalImpl();
 		return deliveryJournal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeliveryJournalLine createDeliveryJournalLine() {
+		DeliveryJournalLineImpl deliveryJournalLine = new DeliveryJournalLineImpl();
+		return deliveryJournalLine;
 	}
 
 	/**

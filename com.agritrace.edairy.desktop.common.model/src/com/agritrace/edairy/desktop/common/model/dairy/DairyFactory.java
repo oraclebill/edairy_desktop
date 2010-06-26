@@ -98,6 +98,15 @@ public interface DairyFactory extends EFactory {
 	DeliveryJournal createDeliveryJournal();
 
 	/**
+	 * Returns a new object of class '<em>Delivery Journal Line</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delivery Journal Line</em>'.
+	 * @generated
+	 */
+	DeliveryJournalLine createDeliveryJournalLine();
+
+	/**
 	 * Returns a new object of class '<em>Dairy</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

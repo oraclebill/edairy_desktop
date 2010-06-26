@@ -37,6 +37,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getBranchLocations <em>Branch Locations</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionJournals <em>Collection Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCustomers <em>Customers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}</li>
@@ -316,6 +317,22 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	EList<Supplier> getSuppliers();
+
+	/**
+	 * Returns the value of the '<em><b>Customers</b></em>' reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Customer}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Customers</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Customers</em>' reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Customers()
+	 * @model
+	 * @generated
+	 */
+	EList<Customer> getCustomers();
 
 	/**
 	 * Returns the value of the '<em><b>Animal Health Requests</b></em>' containment reference list.

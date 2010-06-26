@@ -8,6 +8,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
@@ -63,6 +64,13 @@ public class DairyRepository implements IDairyRepository {
 		@Override
 		protected Class<CollectionJournalPage> getClassType() {
 			return CollectionJournalPage.class;
+		}
+	};
+
+	private static final HibernateRepository<DeliveryJournal> deliveryRepository = new HibernateRepository<DeliveryJournal>() {
+		@Override
+		protected Class<DeliveryJournal> getClassType() {
+			return DeliveryJournal.class;
 		}
 	};
 
@@ -220,6 +228,11 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public void save(Object changedItem) {
 		dairyRepository.save(changedItem);		
+	}
+
+	@Override
+	public List<DeliveryJournal> allDeliveries() {
+		return deliveryRepository.all();
 	}
 
 

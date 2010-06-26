@@ -17,9 +17,23 @@ public class FieldUtil {
 	
 	public static final int MINIMUM_LABEL_WIDTH = 70;
 	public static final int STD_FIELD_WIDTH = 70;
+	
+	//
+	public static final int STD_TOP_MARGIN = 12;
+	public static final int STD_BOTTOM_MARGIN = 8;
+	public static final int STD_RIGHT_MARGIN = 12;
+	public static final int STD_LEFT_MARGIN = 12;
 
-	public static final GridDataFactory gdf = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false);
-	public static final GridDataFactory labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1);
+	// 
+	public static final int STD_TOP_PADDING = 5;
+	public static final int STD_BOTTOM_PADDING = 5;
+	public static final int STD_RIGHT_PADDING = 5;
+	public static final int STD_LEFT_PADDING = 5;
+
+	// 
+	private static final GridDataFactory labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1);
+	private static final GridDataFactory fieldGDF = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL);
+	private static final GridDataFactory comboGDF = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false);
 
 	/**
 	 * @wbp.factory
@@ -29,7 +43,7 @@ public class FieldUtil {
 		labelGDF.applyTo(label);
 
 		final DateTime text = UIControlsFactory.createDate(parent, SWT.BORDER, widgetID);
-		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
+		comboGDF.applyTo(text);
 //		GridDataFactory.fillDefaults().minSize(60, -1).grab(true, false).applyTo(field);
 
 		return text;
@@ -43,7 +57,7 @@ public class FieldUtil {
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createText(parent, SWT.BORDER, widgetID);
-		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
+		fieldGDF.applyTo(text);
 		
 		return text;
 	}
@@ -56,7 +70,7 @@ public class FieldUtil {
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createTextDecimal(parent, widgetID);
-		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).align(SWT.END, SWT.FILL).applyTo(text);
+		fieldGDF.applyTo(text);
 		
 		return text;
 	}
@@ -69,7 +83,7 @@ public class FieldUtil {
 		labelGDF.applyTo(label);
 
 		final CCombo field = UIControlsFactory.createCCombo(parent, ViewWidgetId.binCombo);
-		GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1).grab(true, false).applyTo(field);
+		comboGDF.applyTo(field);
 		
 		return field;
 		

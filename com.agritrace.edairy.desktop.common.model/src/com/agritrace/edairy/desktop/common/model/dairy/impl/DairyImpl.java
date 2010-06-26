@@ -9,6 +9,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -61,6 +63,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getBranchLocations <em>Branch Locations</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCollectionJournals <em>Collection Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getSuppliers <em>Suppliers</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCustomers <em>Customers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getManagerName <em>Manager Name</em>}</li>
@@ -260,6 +263,16 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected EList<Supplier> suppliers;
+
+	/**
+	 * The cached value of the '{@link #getCustomers() <em>Customers</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCustomers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Customer> customers;
 
 	/**
 	 * The cached value of the '{@link #getAnimalHealthRequests() <em>Animal Health Requests</em>}' containment reference list.
@@ -555,6 +568,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Customer> getCustomers() {
+		if (customers == null) {
+			customers = new EObjectResolvingEList<Customer>(Customer.class, this, DairyPackage.DAIRY__CUSTOMERS);
+		}
+		return customers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<AnimalHealthRequest> getAnimalHealthRequests() {
 		if (animalHealthRequests == null) {
 			animalHealthRequests = new EObjectContainmentWithInverseEList<AnimalHealthRequest>(AnimalHealthRequest.class, this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY);
@@ -706,6 +731,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getCollectionJournals();
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return getSuppliers();
+			case DairyPackage.DAIRY__CUSTOMERS:
+				return getCustomers();
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return getAnimalHealthRequests();
 			case DairyPackage.DAIRY__DAIRY_BINS:
@@ -773,6 +800,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				getSuppliers().clear();
 				getSuppliers().addAll((Collection<? extends Supplier>)newValue);
 				return;
+			case DairyPackage.DAIRY__CUSTOMERS:
+				getCustomers().clear();
+				getCustomers().addAll((Collection<? extends Customer>)newValue);
+				return;
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				getAnimalHealthRequests().clear();
 				getAnimalHealthRequests().addAll((Collection<? extends AnimalHealthRequest>)newValue);
@@ -838,6 +869,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__SUPPLIERS:
 				getSuppliers().clear();
 				return;
+			case DairyPackage.DAIRY__CUSTOMERS:
+				getCustomers().clear();
+				return;
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				getAnimalHealthRequests().clear();
 				return;
@@ -888,6 +922,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return collectionJournals != null && !collectionJournals.isEmpty();
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return suppliers != null && !suppliers.isEmpty();
+			case DairyPackage.DAIRY__CUSTOMERS:
+				return customers != null && !customers.isEmpty();
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return animalHealthRequests != null && !animalHealthRequests.isEmpty();
 			case DairyPackage.DAIRY__DAIRY_BINS:
