@@ -30,17 +30,13 @@ import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileVie
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView;
 import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.member.ui.views.ContainerListView;
-import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;

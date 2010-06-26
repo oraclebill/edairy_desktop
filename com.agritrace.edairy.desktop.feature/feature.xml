@@ -23,32 +23,230 @@
    </url>
 
    <includes
-         id="org.eclipse.rcp"
+         id="com.agritrace.edairy.desktop.site"
          version="0.0.0"/>
 
    <requires>
+      <import plugin="com.agritrace.edairy.desktop.common.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.common.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.riena.client" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.finance.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.member.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.services.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.collection.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.suppliers.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.dairy.profile.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.dairy.locations.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.home.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.deliveries.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.dairy.vehicles.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.common.persistence" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.dairy.containers.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.operations.services" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.databinding" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="javax.persistence" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.persistence.jpa" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.junit"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.junit" version="4.8.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding" version="1.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.databinding.edit" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.databinding" version="1.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.teneo.hibernate" version="1.1.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.change" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.hibernate" version="3.3.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.log" version="1.2.100" match="greaterOrEqual"/>
+      <import plugin="com.mysql.jdbc"/>
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.riena.client" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.model" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.databinding" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.common" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.dom4j"/>
+      <import plugin="org.eclipse.riena.core"/>
+      <import plugin="org.hsqldb"/>
+      <import plugin="com.agritrace.edairy.desktop.icons" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.member.services" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.query" version="1.2.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.common.persistence.test.test" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.6.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="com.agritrace.edairy.model"
+         id="com.agritrace.edairy.desktop"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.agritrace.edairy.riena.ui"
+         id="com.agritrace.edairy.desktop.collection.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.common.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.common.model.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.common.persistence"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.common.persistence.test.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.common.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.common.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.dairy.containers.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.dairy.employees.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.dairy.locations.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.dairy.profile.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.dairy.vehicles.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.deliveries.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.finance.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.finance.ui.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.home.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.icons"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.member.services"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.member.services.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.member.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.operations.services"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.operations.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.services.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.services.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.suppliers.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

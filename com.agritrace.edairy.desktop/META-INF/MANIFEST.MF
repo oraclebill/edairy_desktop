@@ -1,13 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: eDairy
+Bundle-Name: eDairyManagerDesktop
 Bundle-SymbolicName: com.agritrace.edairy.desktop;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.EDairyActivator
 Bundle-Vendor: AGRITRACE
-Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
- org.eclipse.riena.client;bundle-version="2.0.0",
+Require-Bundle: com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
+ org.eclipse.riena.client.ridgets;bundle-version="2.0.0",
+ org.eclipse.riena.navigation.ui.swt;bundle-version="2.0.0",
+ org.eclipse.riena.ui.workarea;bundle-version="2.0.0",
  com.agritrace.edairy.desktop.finance.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.member.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.services.ui;bundle-version="1.0.0",
@@ -16,10 +17,13 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  com.agritrace.edairy.desktop.dairy.profile.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.home.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.deliveries.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.vehicles.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.containers.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: com.agritrace.edairy.desktop,
+ com.agritrace.edairy.desktop.ui,
+ com.agritrace.edairy.desktop.ui.splashHandlers,
+ com.agritrace.edairy.desktop.ui.views
 
