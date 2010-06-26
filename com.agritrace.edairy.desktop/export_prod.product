@@ -14,11 +14,11 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages i16="/com.agritrace.edairy.desktop.ui/icons/cow16.png" i32="/com.agritrace.edairy.desktop.ui/icons/cow32.png" i48="/com.agritrace.edairy.desktop.ui/icons/cow48.png" i64="/com.agritrace.edairy.desktop.ui/icons/cow64.png" i128="/com.agritrace.edairy.desktop.ui/icons/cow128.png"/>
+
 
    <launcher>
       <solaris/>
@@ -27,8 +27,10 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.agritrace.edairy.desktop"/>
