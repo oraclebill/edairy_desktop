@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getLineNumber <em>Line Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getBin <em>Bin</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getQuanity <em>Quanity</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getQuantity <em>Quantity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
@@ -68,24 +68,24 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	protected DairyContainer bin;
 
 	/**
-	 * The default value of the '{@link #getQuanity() <em>Quanity</em>}' attribute.
+	 * The default value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQuanity()
+	 * @see #getQuantity()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal QUANITY_EDEFAULT = null;
+	protected static final BigDecimal QUANTITY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getQuanity() <em>Quanity</em>}' attribute.
+	 * The cached value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQuanity()
+	 * @see #getQuantity()
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal quanity = QUANITY_EDEFAULT;
+	protected BigDecimal quantity = QUANTITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -211,8 +211,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigDecimal getQuanity() {
-		return quanity;
+	public BigDecimal getQuantity() {
+		return quantity;
 	}
 
 	/**
@@ -220,11 +220,11 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setQuanity(BigDecimal newQuanity) {
-		BigDecimal oldQuanity = quanity;
-		quanity = newQuanity;
+	public void setQuantity(BigDecimal newQuantity) {
+		BigDecimal oldQuantity = quantity;
+		quantity = newQuantity;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__QUANITY, oldQuanity, quanity));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY, oldQuantity, quantity));
 	}
 
 	/**
@@ -240,8 +240,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 			case DairyPackage.DELIVERY_JOURNAL_LINE__BIN:
 				if (resolve) return getBin();
 				return basicGetBin();
-			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANITY:
-				return getQuanity();
+			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY:
+				return getQuantity();
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				return getDescription();
 		}
@@ -262,8 +262,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 			case DairyPackage.DELIVERY_JOURNAL_LINE__BIN:
 				setBin((DairyContainer)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANITY:
-				setQuanity((BigDecimal)newValue);
+			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY:
+				setQuantity((BigDecimal)newValue);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				setDescription((String)newValue);
@@ -286,8 +286,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 			case DairyPackage.DELIVERY_JOURNAL_LINE__BIN:
 				setBin((DairyContainer)null);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANITY:
-				setQuanity(QUANITY_EDEFAULT);
+			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY:
+				setQuantity(QUANTITY_EDEFAULT);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
@@ -308,8 +308,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 				return lineNumber != LINE_NUMBER_EDEFAULT;
 			case DairyPackage.DELIVERY_JOURNAL_LINE__BIN:
 				return bin != null;
-			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANITY:
-				return QUANITY_EDEFAULT == null ? quanity != null : !QUANITY_EDEFAULT.equals(quanity);
+			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY:
+				return QUANTITY_EDEFAULT == null ? quantity != null : !QUANTITY_EDEFAULT.equals(quantity);
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
@@ -328,8 +328,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (lineNumber: ");
 		result.append(lineNumber);
-		result.append(", quanity: ");
-		result.append(quanity);
+		result.append(", quantity: ");
+		result.append(quantity);
 		result.append(", description: ");
 		result.append(description);
 		result.append(')');

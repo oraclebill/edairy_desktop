@@ -1055,13 +1055,13 @@ public interface DairyPackage extends EPackage {
 	int DELIVERY_JOURNAL_LINE__BIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Quanity</b></em>' attribute.
+	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_LINE__QUANITY = 2;
+	int DELIVERY_JOURNAL_LINE__QUANTITY = 2;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -2893,15 +2893,15 @@ public interface DairyPackage extends EPackage {
 	EReference getDeliveryJournalLine_Bin();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuanity <em>Quanity</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity <em>Quantity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Quanity</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuanity()
+	 * @return the meta object for the attribute '<em>Quantity</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity()
 	 * @see #getDeliveryJournalLine()
 	 * @generated
 	 */
-	EAttribute getDeliveryJournalLine_Quanity();
+	EAttribute getDeliveryJournalLine_Quantity();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy <em>Dairy</em>}'.
@@ -4237,12 +4237,12 @@ public interface DairyPackage extends EPackage {
 		EReference DELIVERY_JOURNAL_LINE__BIN = eINSTANCE.getDeliveryJournalLine_Bin();
 
 		/**
-		 * The meta object literal for the '<em><b>Quanity</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Quantity</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DELIVERY_JOURNAL_LINE__QUANITY = eINSTANCE.getDeliveryJournalLine_Quanity();
+		EAttribute DELIVERY_JOURNAL_LINE__QUANTITY = eINSTANCE.getDeliveryJournalLine_Quantity();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl <em>Dairy</em>}' class.

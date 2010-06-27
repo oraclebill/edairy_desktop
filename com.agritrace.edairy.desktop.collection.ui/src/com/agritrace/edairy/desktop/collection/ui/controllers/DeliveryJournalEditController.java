@@ -79,7 +79,11 @@ public class DeliveryJournalEditController extends RecordDialogController<Delive
 //		journalTotalRidget.setOutputOnly(true);
 //		
 		lineItemsRidget = getRidget(ITableRidget.class, DeliveryJournalEditBindContants.LINE_ITEM_TABLE);
-		lineItemsRidget.bindToModel(new WritableList(), DeliveryJournalLine.class, new String[] { "canId", "quantity", "description" }, new String[] { "Can ID", "Quantity", "Description" });
+		lineItemsRidget.bindToModel(
+				new WritableList(), 
+				DeliveryJournalLine.class, 
+				new String[] { "lineNumber", "bin", "quantity", "description" }, 
+				new String[] { "#", "Can ID", "Quantity", "Description" });
 		lineItemsRidget.updateFromModel();		
 	}
 

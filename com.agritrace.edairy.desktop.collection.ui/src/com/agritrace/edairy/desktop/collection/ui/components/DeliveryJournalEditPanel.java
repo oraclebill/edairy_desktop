@@ -57,7 +57,7 @@ public class DeliveryJournalEditPanel extends Composite {
 		
 		Label lblTotal = UIControlsFactory.createLabel(this, "Total: ");
 		
-		totalOutputText = UIControlsFactory.createTextDecimal(this, DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT);
+		totalOutputText = UIControlsFactory.createText(this, SWT.NONE, DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT);
 		
 		tableGroup = UIControlsFactory.createGroup(this, "Item Details");
 		GroupLayout groupLayout = new GroupLayout(this);

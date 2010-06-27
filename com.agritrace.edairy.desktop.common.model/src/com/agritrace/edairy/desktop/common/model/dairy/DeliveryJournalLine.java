@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getLineNumber <em>Line Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getBin <em>Bin</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuanity <em>Quanity</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity <em>Quantity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
@@ -109,29 +109,29 @@ public interface DeliveryJournalLine extends EObject {
 	void setBin(DairyContainer value);
 
 	/**
-	 * Returns the value of the '<em><b>Quanity</b></em>' attribute.
+	 * Returns the value of the '<em><b>Quantity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Quanity</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Quanity</em>' attribute.
-	 * @see #setQuanity(BigDecimal)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournalLine_Quanity()
+	 * @return the value of the '<em>Quantity</em>' attribute.
+	 * @see #setQuantity(BigDecimal)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournalLine_Quantity()
 	 * @model required="true"
 	 * @generated
 	 */
-	BigDecimal getQuanity();
+	BigDecimal getQuantity();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuanity <em>Quanity</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity <em>Quantity</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Quanity</em>' attribute.
-	 * @see #getQuanity()
+	 * @param value the new value of the '<em>Quantity</em>' attribute.
+	 * @see #getQuantity()
 	 * @generated
 	 */
-	void setQuanity(BigDecimal value);
+	void setQuantity(BigDecimal value);
 
 } // DeliveryJournalLine
