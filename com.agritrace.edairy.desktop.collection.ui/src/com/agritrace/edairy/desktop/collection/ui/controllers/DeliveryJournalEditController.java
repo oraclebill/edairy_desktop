@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
+import java.util.Arrays;
+
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -7,13 +9,19 @@ import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class DeliveryJournalEditController extends RecordDialogController<DeliveryJournal> {
 
+	private IDairyRepository dairyRepo = new DairyRepository();
+	
 	private IDateTimeRidget dateRidget;
 	private IComboRidget sessionRidget;
 	private IComboRidget routeRidget;
@@ -25,11 +33,25 @@ public class DeliveryJournalEditController extends RecordDialogController<Delive
 	
 	public DeliveryJournalEditController() {
 		addRidgetFeatureMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.SESSION_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.ROUTE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.DRIVER_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT, DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
+		addRidgetFeatureMap(
+				DeliveryJournalEditBindContants.SESSION_COMBO,
+				Arrays.asList(Session.values()),
+				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
+		addRidgetFeatureMap(
+				DeliveryJournalEditBindContants.ROUTE_COMBO,
+				dairyRepo.allRoutes(),
+				DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
+		addRidgetFeatureMap(
+				DeliveryJournalEditBindContants.DRIVER_COMBO,
+				dairyRepo.employeesByPosition("Driver"),
+				DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
+		addRidgetFeatureMap(
+				DeliveryJournalEditBindContants.VEHICLE_COMBO, 
+				dairyRepo.allVehicles(),
+				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
+		addRidgetFeatureMap(
+				DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
+				DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
 		//addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TABLE, DairyPackage.Literals.DELIVERY_JOURNAL__LINES);
 	}
 	

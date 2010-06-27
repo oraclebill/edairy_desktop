@@ -1,10 +1,10 @@
-package com.agritrace.edairy.desktop.collection.ui.views;
+package com.agritrace.edairy.desktop.collection.ui.components;
 
-import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.MINIMUM_LABEL_WIDTH;
-import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledBooleanField;
-import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledComboField;
-import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledDecimalTextField;
-import static com.agritrace.edairy.desktop.collection.ui.views.FieldUtil.addLabeledTextField;
+import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.MINIMUM_LABEL_WIDTH;
+import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledBooleanField;
+import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledComboField;
+import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledDecimalTextField;
+import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledTextField;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;

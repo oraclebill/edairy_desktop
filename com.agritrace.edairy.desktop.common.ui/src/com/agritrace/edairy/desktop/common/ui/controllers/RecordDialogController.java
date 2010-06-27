@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.Observables;
@@ -31,33 +30,28 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		private String bindingId;
 		private FeaturePath featurePath;
 		private IObservableList domainList;
-		private Class entityClass;
+		private Class<?> entityClass;
 
 		public FeatureProperties(String bindingId, EStructuralFeature... featureList) {
-			this(bindingId, FeaturePath.fromList(featureList));
-			initClassFromFeatures();
+			this(bindingId, null, FeaturePath.fromList(featureList));
 		}
 
-		public FeatureProperties(String bindingId, FeaturePath featurePath) {
+		public FeatureProperties(String bindingId, List<?> domainList, EStructuralFeature... featureList) {
+			this(bindingId, domainList, FeaturePath.fromList(featureList));
+		}
+
+		public FeatureProperties(String bindingId, List<?> domainObjects, FeaturePath featurePath) {
 			this.bindingId = bindingId;
 			this.featurePath = featurePath;
+			this.domainList = Observables.staticObservableList(domainObjects);
 		}
 
 		public String getBindingId() {
 			return bindingId;
 		}
 
-		public void setBindingId(String bindingId) {
-			this.bindingId = bindingId;
-		}
-
 		public FeaturePath getFeaturePath() {
 			return featurePath;
-		}
-
-		public void setFeaturePath(FeaturePath featurePath) {
-			this.featurePath = featurePath;
-			initClassFromFeatures();
 		}
 
 		public IObservableList getDomainList() {
@@ -70,18 +64,13 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			this.domainList = domainList;
 		}
 
-		public Class getEntityClass() {
+		public Class<?> getEntityClass() {
 			if (entityClass == null) {
 				entityClass = getTailFeature().eClass().getInstanceClass();
 			}
 			return entityClass;
 		}
 
-		/**
-		 * Returns null if
-		 * 
-		 * @return
-		 */
 		public EStructuralFeature getTailFeature() {
 			EStructuralFeature tailFeature = null;
 
@@ -93,10 +82,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			}
 
 			return tailFeature;
-		}
-
-		private void initClassFromFeatures() {
-
 		}
 
 	}
@@ -168,8 +153,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 * @param featurePath
 	 */
 	protected void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
-		FeaturePath path = FeaturePath.fromList(featurePath);
-		FeatureProperties props = new FeatureProperties(ridgetId, path);
+		FeatureProperties props = new FeatureProperties(ridgetId, featurePath);
 		ridgetPropertyMap.put(ridgetId, props);
 	}
 
@@ -180,11 +164,9 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 * @param ridgetId
 	 * @param featurePath
 	 */
-	protected void addRidgetFeatureMap(String ridgetId, List<T> domainList, EStructuralFeature... featurePath) {
-		FeatureProperties props = new FeatureProperties(ridgetId, FeaturePath.fromList(featurePath));
-		props.setDomainList(Observables.staticObservableList(domainList));
+	protected void addRidgetFeatureMap(String ridgetId, List<?> domainList, EStructuralFeature... featurePath) {
+		FeatureProperties props = new FeatureProperties(ridgetId, domainList, featurePath);
 		ridgetPropertyMap.put(ridgetId, props);
-		throw new UnsupportedOperationException("Not implemented...");
 	}
 
 	protected void configureMappedRidgets() {
@@ -208,8 +190,10 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 				final IObservableList 	optionValues = binding.getDomainList();
 				final Class<?>			rowClass = binding.getEntityClass();
 				final IObservableValue 	selectionValue =  EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy());
+				
 				if (optionValues == null || rowClass == null || selectionValue == null) {
-					throw new IllegalStateException();
+					throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" +
+							optionValues + ", " + rowClass + ", " + selectionValue + ")" );
 				}
 				comboRidget.bindToModel(optionValues, rowClass, "toString()", selectionValue);
 			} else if (ridget instanceof ITableRidget) {

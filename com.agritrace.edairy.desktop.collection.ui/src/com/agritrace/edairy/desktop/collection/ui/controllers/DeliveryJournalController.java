@@ -14,6 +14,8 @@ import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.collection.ui.beans.DeliveryJournalFilterBean;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.DeliveryJournalEditDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -37,7 +39,7 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 
 	public DeliveryJournalController() {
 		setEClass(DairyPackage.Literals.DELIVERY_JOURNAL);
-		setEntityClass(DeliveryJournal.class);
+//		setEntityClass(DeliveryJournal.class);
 		
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);

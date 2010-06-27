@@ -44,8 +44,11 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		this.entityClass = entityClass;
 	}
 	
-	final protected Class<? extends EObject> getEntityClass() {
-		return entityClass;
+	final protected Class<?> getEntityClass() {
+		if (eClass != null) 
+			return eClass.getInstanceClass();
+		else 
+			return null;
 	}
 
 	protected void setEClass(EClass eClass) { 

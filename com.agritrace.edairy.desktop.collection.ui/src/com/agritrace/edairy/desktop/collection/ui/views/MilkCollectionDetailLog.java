@@ -4,6 +4,7 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
+import com.agritrace.edairy.desktop.collection.ui.components.MilkCollectionDetailLogFilterPanel;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public class MilkCollectionDetailLog extends AbstractDirectoryView {

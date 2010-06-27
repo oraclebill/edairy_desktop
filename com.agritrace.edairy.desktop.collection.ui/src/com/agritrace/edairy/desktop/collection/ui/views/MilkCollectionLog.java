@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
+import com.agritrace.edairy.desktop.collection.ui.components.MilkCollectionLogFilterPanel;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public class MilkCollectionLog extends AbstractDirectoryView {

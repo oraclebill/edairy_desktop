@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.views;
+package com.agritrace.edairy.desktop.collection.ui.components;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.PlatformUI;
+
+import com.agritrace.edairy.desktop.collection.ui.util.FieldUtil;
 
 public class DeliveryJournalFilterPanel extends Composite {
 

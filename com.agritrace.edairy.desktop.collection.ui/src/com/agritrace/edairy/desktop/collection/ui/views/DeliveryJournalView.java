@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import com.agritrace.edairy.desktop.collection.ui.components.DeliveryJournalFilterPanel;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import org.eclipse.jface.action.Action;
 

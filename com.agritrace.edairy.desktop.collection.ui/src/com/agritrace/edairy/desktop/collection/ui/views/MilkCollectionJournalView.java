@@ -29,11 +29,12 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.collection.ui.Activator;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.collection.ui.components.CollectionsEntryPanel;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CalendarSelectionDialog;
+import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView implements TraverseListener {

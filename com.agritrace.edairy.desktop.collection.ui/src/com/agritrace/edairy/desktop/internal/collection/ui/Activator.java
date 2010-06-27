@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui;
+package com.agritrace.edairy.desktop.internal.collection.ui;
 
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
