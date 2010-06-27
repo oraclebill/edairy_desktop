@@ -36,6 +36,9 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 	private IComboRidget customerRidget;
 
 	public DeliveryJournalController() {
+		setEClass(DairyPackage.Literals.DELIVERY_JOURNAL);
+		setEntityClass(DeliveryJournal.class);
+		
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
 		addTableColumn("Session", DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
@@ -45,10 +48,17 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 
 	@Override
 	protected void configureFilterRidgets() {
+		filterBean = new DeliveryJournalFilterBean();	
 		startDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.START_DATE);
+		startDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "minDate"));
 		endDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.END_DATE);
+		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "maxDate"));
 		routeRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.ROUTE);
+		final IObservableList routeList = Observables.staticObservableList(dairyRepo.allRoutes());
+		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, "route"));
 		customerRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.CUSTOMER);
+		final IObservableList customerList = Observables.staticObservableList(dairyRepo.allCustomers());
+		customerRidget.bindToModel(customerList, Customer.class, "getCompanyName", BeansObservables.observeValue(filterBean, "customer"));	
 	}
 
 	@Override
@@ -59,17 +69,17 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 	}
 
 	private void bindFilterRidgets() {
-		filterBean = new DeliveryJournalFilterBean();	
-		
-		startDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "minDate"));
-		
-		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "maxDate"));
-		
-		final IObservableList routeList = Observables.staticObservableList(dairyRepo.allRoutes());
-		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, "route"));
-		
-		final IObservableList customerList = Observables.staticObservableList(dairyRepo.allCustomers());
-		customerRidget.bindToModel(customerList, Customer.class, "getCompanyName", BeansObservables.observeValue(filterBean, "customer"));	
+//		filterBean = new DeliveryJournalFilterBean();	
+//		
+//		startDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "minDate"));
+//		
+//		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "maxDate"));
+//		
+//		final IObservableList routeList = Observables.staticObservableList(dairyRepo.allRoutes());
+//		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, "route"));
+//		
+//		final IObservableList customerList = Observables.staticObservableList(dairyRepo.allCustomers());
+//		customerRidget.bindToModel(customerList, Customer.class, "getCompanyName", BeansObservables.observeValue(filterBean, "customer"));	
 
 		startDateRidget.updateFromModel();
 		endDateRidget.updateFromModel();
@@ -98,7 +108,7 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 	@Override
 	protected void resetFilterConditions() {
 		bindFilterRidgets();
-		table.updateFromModel();
+//		table.updateFromModel();
 	}
 
 }

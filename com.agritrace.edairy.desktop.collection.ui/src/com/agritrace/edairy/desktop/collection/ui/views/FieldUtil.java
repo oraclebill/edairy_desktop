@@ -82,7 +82,7 @@ public class FieldUtil {
 		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
-		final CCombo field = UIControlsFactory.createCCombo(parent, ViewWidgetId.binCombo);
+		final CCombo field = UIControlsFactory.createCCombo(parent, widgetID);
 		comboGDF.applyTo(field);
 		
 		return field;

@@ -30,7 +30,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	final private List<ColumnFormatter> columnFormatters = new ArrayList<ColumnFormatter>();
 
 	private EClass eClass;
-	private Class<?> entityClass;	
+	private Class<? extends EObject> entityClass;	
 
 	public BasicDirectoryController() {
 		super();
@@ -40,11 +40,11 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		super(navigationNode);
 	}
 
-	protected void setEntityClass(Class<?> entityClass) {
+	protected void setEntityClass(Class<? extends EObject> entityClass) {
 		this.entityClass = entityClass;
 	}
 	
-	final protected Class<?> getEntityClass() {
+	final protected Class<? extends EObject> getEntityClass() {
 		return entityClass;
 	}
 
@@ -97,6 +97,12 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 
 	@Override
 	protected void configureTableRidget() {
+		if (getEClass() == null) {
+			throw new IllegalStateException("EClass must be set in constructor");
+		}
+		if (getEntityClass() == null) {
+			throw new IllegalStateException("Entity class must be set in constructor");
+		}
 		table = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
@@ -114,7 +120,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 			}
 		}
 		
-		table.bindToModel(new WritableList(tableContents, getEntityClass()), getEntityClass(),
+		table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
 				getTableColumnPropertyNames(), getTableColumnHeaders());
 
 		table.updateFromModel();

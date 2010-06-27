@@ -68,7 +68,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		}
 	};
 	protected ITableRidget table;
-	protected final List<T> tableContents = new ArrayList<T>();
+	private final List<T> tableContents = new ArrayList<T>();
 
 	/**
 	 * Default controller
@@ -112,6 +112,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		return myRepo;
 	}
 
+	protected List<T> getTableContents() {
+		return tableContents;
+	}
+	
 	/**
 	 * Gets the selectedObject
 	 * 
