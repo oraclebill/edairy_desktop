@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2007, 2009 compeople AG and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    compeople AG - initial API and implementation
+ *******************************************************************************/
 package com.agritrace.edairy.desktop.common.ui.ridgets;
 
 import java.beans.PropertyChangeEvent;
@@ -143,6 +153,7 @@ public class EditableTableRidget extends AbstractSelectableIndexedRidget
 		formatterMap = new HashMap<Integer, IColumnFormatter>();
 		columnEditors = new HashMap<Integer, IColumnEditingSupport>();
 		addPropertyChangeListener(IMarkableRidget.PROPERTY_OUTPUT_ONLY, new PropertyChangeListener() {
+			
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (isOutputOnly()) {
 					disposeMultipleSelectionBinding();
@@ -476,21 +487,9 @@ public class EditableTableRidget extends AbstractSelectableIndexedRidget
 			for (TableColumn column : control.getColumns()) {
 				column.dispose();
 			}
-//			for (int i = 0; i < expectedCols; i++) {
-//				new TableColumn(control, SWT.NONE);
-//			}
-			
 			for (int i = 0; i < expectedCols; i++) {
 				TableViewerColumn column = new TableViewerColumn(viewer,
 						SWT.NONE);
-				// column.getColumn().setText(titles[i]);
-				// column.getColumn().setWidth(bounds[i]);
-				// column.getColumn().setResizable(true);
-				// column.getColumn().setMoveable(true);
-				// enable editing support
-				// column.setEditingSupport(new PersonEditingSupport(viewer,
-				// i));
-				// Editing Support
 				if (this.columnEditors.get(i) != null) {
 					column.setEditingSupport(new RidgetEditingSupport(this.viewer, this.columnEditors.get(i),
 							renderingMethods[i], this.rowClass, i));

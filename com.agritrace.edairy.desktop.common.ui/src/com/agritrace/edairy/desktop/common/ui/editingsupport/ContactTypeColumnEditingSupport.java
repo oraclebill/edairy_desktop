@@ -5,6 +5,7 @@ import org.eclipse.core.databinding.conversion.IConverter;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 
 public class ContactTypeColumnEditingSupport extends ColumnEditingSupport {
+	
 
 	@Override
 	public IConverter getModelToUIControlConverter() {

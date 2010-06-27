@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="lnfrenderer" name="Look and Feel renderer" schema="schema/lnfrenderer-deprecated.exsd"/>
+   <extension-point id="lnfRenderers" name="Look and Feel renderer" schema="schema/lnfRenderers.exsd"/>
+   <extension-point id="imagepath" name="Image Path" schema="schema/imagepath-deprecated.exsd"/>
+   <extension-point id="imagePaths" name="Image Path" schema="schema/imagePaths.exsd"/>
+   <extension-point id="lnfMarkerSupport" name="Marker Support" schema="schema/lnfMarkerSupport.exsd"/>
+   <extension
+         point="org.eclipse.riena.ui.core.uiSynchronizer">
+		<uiSynchronizer class="org.eclipse.riena.ui.swt.uiprocess.SwtUISynchronizer"/>         
+   </extension>
+   <extension
+         point="org.eclipse.riena.ui.swt.lnfRenderers">
+      <renderer
+            class="org.eclipse.riena.ui.swt.lnf.renderer.DialogBorderRenderer"
+            lnfkey="Dialog.borderRenderer">
+      </renderer>
+      <renderer
+            class="org.eclipse.riena.ui.swt.lnf.renderer.DialogTitleBarRenderer"
+            lnfkey="Dialog.renderer">
+      </renderer>
+   </extension>
+   <extension
+         point="org.eclipse.riena.ui.swt.imagePaths">
+      <path
+            path="icons">
+      </path>
+   </extension>
+</plugin>

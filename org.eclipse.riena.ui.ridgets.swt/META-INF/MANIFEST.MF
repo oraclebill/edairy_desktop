@@ -1,0 +1,920 @@
+Manifest-Version: 1.0
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Name: Ridgets Swt Plug-in 
+Bundle-SymbolicName: org.eclipse.riena.ui.ridgets.swt;singleton:=true
+Require-Bundle: org.eclipse.core.databinding;visibility:=reexport,org.
+ eclipse.core.databinding.beans;visibility:=reexport,org.eclipse.core.
+ databinding.property;visibility:=reexport,org.eclipse.jface.databindi
+ ng;resolution:=optional;visibility:=reexport,org.eclipse.rap.jface.da
+ tabinding;resolution:=optional;visibility:=reexport,org.eclipse.riena
+ .beans.common,org.eclipse.riena.core,org.eclipse.riena.ui.core;visibi
+ lity:=reexport,org.eclipse.riena.ui.common;visibility:=reexport,org.e
+ clipse.riena.ui.ridgets;visibility:=reexport,org.eclipse.riena.ui.swt
+ ;visibility:=reexport
+Bundle-Activator: org.eclipse.riena.internal.ui.ridgets.swt.Activator
+Bundle-Version: 2.0.0.v20100615_2_0_0
+Export-Package: org.eclipse.riena.internal.ui.ridgets.swt;x-friends:="
+ org.eclipse.riena.tests,org.eclipse.riena.navigation.ui.swt,org.eclip
+ se.riena.ui.ridgets.swt.optional",org.eclipse.riena.internal.ui.ridge
+ ts.swt.uiprocess;x-friends:="org.eclipse.riena.tests",org.eclipse.rie
+ na.ui.ridgets.swt,org.eclipse.riena.ui.ridgets.swt.uibinding,org.ecli
+ pse.riena.ui.ridgets.swt.views
+Bundle-ManifestVersion: 2
+Import-Package: com.ibm.icu.text,org.osgi.service.log;version="1.3.0"
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DecimalTextRidget.clas
+ s
+SHA1-Digest: h/IkcnMxaHvyVRtF75KGRAXiZDY=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$5.c
+ lass
+SHA1-Digest: B8Zki9hhXyaaqNKBuQnvddxW47U=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTextRidget$RidgetA
+ wareDateConverterStrategy.class
+SHA1-Digest: ueTfu3/t2ZOjy+x+/EIL68Qw4QQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get.class
+SHA1-Digest: qgSQOMndGDzo1MYgfjf+3sa91W8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget$ClickForwa
+ rder.class
+SHA1-Digest: 1NqcYNmMQnnK4Ly3fh3ZlEAMUc8=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget$ObjectToStr
+ ingConverter.class
+SHA1-Digest: rxgkmJC4qo/ukHKOflWGo+k9Ztc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget$StringToObj
+ ectConverter.class
+SHA1-Digest: sq9IDyiZgIQcMkGhcq17V8X9X80=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/CompositeWithBindingI
+ dCondition.class
+SHA1-Digest: ry92l5v5Domf2Z2zx6mCYrrkcfc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get$ProcessInfoListener.class
+SHA1-Digest: R4HxVCu9l8F1ztrOeVwnqgHAkGM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MenuItemProperties.cla
+ ss
+SHA1-Digest: TTn70yLR2ARjV6RDuMRTFNkMKi4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/node_expanded.gif
+SHA1-Digest: +qtPrDKpe6LoIvP44rxgsSmCEJ4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MultipleChoiceRidget$1
+ .class
+SHA1-Digest: 0hWRhMHdKaD2Yksnwcb/PknCE0g=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ListRidget.class
+SHA1-Digest: iWxuCYH92He3y/sJ/yS8AViHgXw=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget$2.class
+SHA1-Digest: 2OPEliBkplgsVM5Ryku1Ml/G/TI=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractEditableRidget$1.class
+SHA1-Digest: GnUMTKLLmcCn/YzrDTI4wAIMYjQ=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSelectableRidget$MultiS
+ electionObservable.class
+SHA1-Digest: YhUXcSp+Yi7sFypJ6zi7NJS5Rhk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/DefaultSwtBindingDele
+ gate.class
+SHA1-Digest: 1LLULai9eCNo6h88YQ9RRE1j1pM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTimeRidget$2.class
+SHA1-Digest: 9aiR8rpidRL4c3mPpiC+tooKiYU=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$ExpansionSt
+ ate.class
+SHA1-Digest: AC5bCpV386O6rYRc4TtSfZyN6cg=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSelectableIndexedRidget
+ .class
+SHA1-Digest: sPHF5Djl9iySTEKE1IaP+EQhvXc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget.class
+SHA1-Digest: PPNt3BOM0jiX3R/NNF0PYr5VWMU=
+
+Name: org/eclipse/riena/ui/ridgets/swt/MarkerSupport$MarkerControlDeco
+ ration.class
+SHA1-Digest: EWrtIt/2xuGQQfzseYmi9obkpTM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeTableRidget.class
+SHA1-Digest: 7BWMwxlLzQi+J2j7YKow852v9xM=
+
+Name: org/eclipse/riena/ui/ridgets/swt/DefaultRealm.class
+SHA1-Digest: z9EWiwZ5ytB3//vhvQzPZy2y6k4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ActionRidget.class
+SHA1-Digest: B06Ck0v4FF83udOpNn251Ip5kaE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget$ValidationL
+ istener.class
+SHA1-Digest: zSdux1C0Qxv3H7BbFuieEpSqjYk=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get$ContextDataComparator.class
+SHA1-Digest: jpDJuv7FktSATij+xohEakOp9/k=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidgetLabelProvide
+ r.class
+SHA1-Digest: oNUfs/K0VeIsb0COBxDsOz+8Cos=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/AbstractControlledView.cl
+ ass
+SHA1-Digest: 8t275TCqfAP+ghTNOPza/F6Brrw=
+
+Name: org/eclipse/riena/ui/ridgets/swt/ToStringConverterFactory.class
+SHA1-Digest: roRXJfvvYxp89wCRPJJcVT6hkjU=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$2.c
+ lass
+SHA1-Digest: I04bqN7vRnKZ0M8XCGnlHR78Exk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSWTWidgetRidget$Visibil
+ ityListener$1.class
+SHA1-Digest: v+1H0TouOpydiJO8Wqx0hEwSPmE=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget$ValueChange
+ Notifier.class
+SHA1-Digest: 3YgujuOZ5oijbOXxrTj0gDWyYsc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MessageBoxRidget.class
+SHA1-Digest: Ps4Qi8YkPXWJCm48Cw8qbKoFj80=
+
+Name: schema/processDetailComparator.exsd
+SHA1-Digest: KoHn7H5egjTFkSuDsweHkyCp+Hg=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get$ContextChangeHandler.class
+SHA1-Digest: h3yYkZFOut2cG8t80isAtQfFtBM=
+
+Name: org/eclipse/riena/ui/ridgets/swt/SwtRidgetFactory$DummyBindingPr
+ opertyLocator.class
+SHA1-Digest: 14ZAHFePKsSx3kfqLOQYIsbWUwg=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SingleChoiceRidget$3.c
+ lass
+SHA1-Digest: 3fyOv1o9FAUtqoZfK77kPGGweO8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get$1.class
+SHA1-Digest: ugFlkUAlrjF1JrvLmgo4NLrwj2s=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericString.class
+SHA1-Digest: /tN9g4hp+IMsPbNDJMObYjunbHk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/BasicMarkerSupport$1.class
+SHA1-Digest: vYNAuLau8tiK3nWw7JHiNxKR650=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SegmentedString.class
+SHA1-Digest: uDZyA/Ma76SG7NBiruDw9TUlqZQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractItemProperties
+ .class
+SHA1-Digest: D+BA2msU4RpWJmkJOHnB49JW6lg=
+
+Name: org/eclipse/riena/ui/ridgets/swt/MarkerSupport.class
+SHA1-Digest: XGgyot4S2GP7BT3tTIa0/VeILuc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/ImageButtonRidget.class
+SHA1-Digest: kWmtk7zP+avSAaAf3+lF082dNmU=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SliderRidget.class
+SHA1-Digest: i3LG+2xwG00x8+o3eevbu/rjLPk=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MasterDetailsRidget$Di
+ rtyDetailsChecker.class
+SHA1-Digest: gqvSfa6yITk3NlmP5Cq2TV8tl0E=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSWTRidget$FocusManager.
+ class
+SHA1-Digest: mNUMVrihfjEgPhX7WE3O+EHnR5U=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$4.class
+SHA1-Digest: kXVbEQUT/Ou5Swlb9dYm4COzBDM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$FakeRoot.cl
+ ass
+SHA1-Digest: AS3GJjuOeT9/fCcVIO7maVu1lKI=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractEditableRidget$1$1.clas
+ s
+SHA1-Digest: JKdN6DkWYnysbA9wunAn7jJ/0KU=
+
+Name: org/eclipse/riena/ui/ridgets/swt/DateColumnFormatter.class
+SHA1-Digest: mHl+L4VO7Eh5n7djr1vWQxBHa9Y=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget.cla
+ ss
+SHA1-Digest: I5gKTxfip4TUfftVb24UGcFhJeg=
+
+Name: schema/org.eclipse.riena.ui.ridgets.swt.exsd
+SHA1-Digest: Mk+EkN6Ip2T+NZ109JlYUsIbDXs=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericTextRidget$Nume
+ ricVerifyListener.class
+SHA1-Digest: mI9fpmRPyvWSbQJFE3A2QjgCapA=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$Det
+ ailRidgetContainer.class
+SHA1-Digest: Z31wsV5qR5fotF4jihakDY6mv68=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get.class
+SHA1-Digest: 0tMbEiA9FmQtiQsNEpyVhdyKO5s=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/IProcessDeta
+ ilComparatorExtension.class
+SHA1-Digest: Q4W2wImur7L5iYFYV0WX7WBqAzw=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeTableRidget$Groupe
+ dTableEraseListener.class
+SHA1-Digest: rksxqwjQ24BSDhTyYqZj19MtCC4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SpinnerRidget.class
+SHA1-Digest: Z7P+8sFYhJS/w/bd5M7BpRlVo1M=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/node_collapsed.gif
+SHA1-Digest: 84S90OyYP+taEx+lrerai2tTd10=
+
+Name: org/eclipse/riena/ui/ridgets/swt/ColumnFormatter.class
+SHA1-Digest: QfWHVVYRd1vqoSeJfUeV9ODPeLg=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/DialogView$1.class
+SHA1-Digest: iSf+fsqHya5mRjpGB7FRMsdFRuE=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/AbstractDialogView$2.clas
+ s
+SHA1-Digest: +0HYadojkrwdyzX1b+Aifz1oR+Y=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$7.c
+ lass
+SHA1-Digest: 4yMw9ZrJ39Wlev1Xpk93mvC+88g=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget$TableToolt
+ ipManager.class
+SHA1-Digest: Qc7ehQNkALwnyv3lnxmbe3Wnsdc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/MenuManagerHelper.class
+SHA1-Digest: jFAiozI3Ln6KyhHfAQmZ/IULW8k=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get$2.class
+SHA1-Digest: piuY4TfQ5uwCtu7VaHTVG58MfEQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ProgressBarRidget.clas
+ s
+SHA1-Digest: 3NhxIXwcrUlllXkeD+0VIIJuM3o=
+
+Name: META-INF/p2.inf
+SHA1-Digest: E7NPo6nW5gAhNjP90+pxH/o9LOQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/InfoFlyoutRidget$Worke
+ r.class
+SHA1-Digest: 4q5x7A5cjt9bLeQ0hixHec9Kljk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget$1.class
+SHA1-Digest: ug81Ya6Mzg4j7bhhONAy8O9dTgM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractObserver.class
+SHA1-Digest: dO94z/hG1BDn1zKcnSsgpdUw+3g=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ShellRidget.class
+SHA1-Digest: o19YBvk+1tgX75zcbNl4lVB5Qxs=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSelectableRidget$1.clas
+ s
+SHA1-Digest: sNM2/wdSxbbDyRZ8QTJT3Hicj64=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/checkbox_unchecked.gif
+SHA1-Digest: XFl3vQy5lNNp/VLOTMgkpG9kyqQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ColumnUtils.class
+SHA1-Digest: 78J9McfKnNzsBiwzEmA8k1g/pZ8=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractEditableRidget.class
+SHA1-Digest: kMbmChvIfKI7F7BFSr4DKHTIM9I=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTimeRidget.class
+SHA1-Digest: R0srVc3jBfMX65ovYLQvdCi9TD0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get$TimedTrigger.class
+SHA1-Digest: /2m4/fooSA9yN4jtjbrPXRF5fiw=
+
+Name: org/eclipse/riena/ui/ridgets/swt/MenuManagerHelper$TopItemListen
+ er.class
+SHA1-Digest: y9asx4+4MnA6IzceRPGLwXhQ9ec=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MultipleChoiceRidget$3
+ .class
+SHA1-Digest: uD9RJ8/Kro+6aWv0bSIG1QLr1pE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/VisualizerCo
+ ntainer$VisualizerComparator.class
+SHA1-Digest: c5SAO8Q7for5NsZkSlWgyQK0ixk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget$4.class
+SHA1-Digest: Nv1iwNdb0wK2di6exDeM8i6KB+0=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: 09gN05tobgS/MdtqyTNQhOhB73M=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidgetLabelProvid
+ er.class
+SHA1-Digest: VYTgL980FSSY/ut98fDBYV1EDjc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/VisualizerCo
+ ntainer.class
+SHA1-Digest: HQRrAHl+3mn2pOUYzFiDYmm9yVg=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$1.class
+SHA1-Digest: 16N7rn1SXzLXQ8jjdqDzL4uUhzE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/OutputAwareValidator.c
+ lass
+SHA1-Digest: dcjxG+B24Fbak23+Re9DKMp77oI=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ScaleRidget.class
+SHA1-Digest: zgJqVsaJRTDNoDOdkCw9tO3rvk0=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/DialogView.class
+SHA1-Digest: 59AYd8xedNOpkaSW7ox1SLkn7+c=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSWTWidgetRidget$Visibil
+ ityListener.class
+SHA1-Digest: es/KSRfKH99cGkftdDUGj34A9wM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/EmbeddedTitleBarRidget
+ $TitleBarListener.class
+SHA1-Digest: QX+mRuJROrlmswVvCV6233Y+GCA=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$4.c
+ lass
+SHA1-Digest: nGtWUtMqAV+CaRz4Gx3ozU2yxvE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CompletionComboRidget$
+ 2.class
+SHA1-Digest: WSKwdfXKUim6FMTvdS3c22mRWHc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CompletionComboSelecti
+ onProperty.class
+SHA1-Digest: tDB5To+GzraxF8ler1CCCGDH+eY=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/InfoFlyoutRidget.class
+SHA1-Digest: J1hUhVbNk+HjS3FSPXv8IeqkSZ8=
+
+Name: org/eclipse/riena/ui/ridgets/swt/BasicMarkerSupport.class
+SHA1-Digest: ajxqNP9tKx0wkarIyfZnylpwVrc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/TimerUtil.cl
+ ass
+SHA1-Digest: vR7dDYGHVlR8DeJnMQVJlSqpu5M=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineNumberRidget
+ .class
+SHA1-Digest: cJ6sHH32F6H+CA6MypiEPo5BGFQ=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/AbstractViewBindingDe
+ legate.class
+SHA1-Digest: wFJn5pgob40I//7wFIo/Z/rqmHw=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$DoubleClick
+ Forwarder.class
+SHA1-Digest: V5kS0JB+7hZJWOomvLMiiFmjGv4=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractToggleButtonRidget.clas
+ s
+SHA1-Digest: 5SUR6PlH4GTDgMbNiAnI8GTxeV8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/InfoFlyoutRidget$Worke
+ r$1.class
+SHA1-Digest: agtqNaPuzbKnt7FDJRKKECo6qyc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get$CancelListener.class
+SHA1-Digest: Mk8TAGuJZF+Rep0DrsRrkwXCB7Y=
+
+Name: plugin.xml
+SHA1-Digest: RkWE2sBUPhQAH5NRezxKA5N8KfA=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget$1.class
+SHA1-Digest: b+GzBZjx+jDDZlx0xuQ/01KO/wE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericTextRidget$Nume
+ ricKeyListener.class
+SHA1-Digest: incPyDH6pPLB6YGIcdDLUIzU5UM=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractValueRidget.class
+SHA1-Digest: pVSzCNDHURxfOdzTQmplX1Er+aE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MessageBoxRidget$Focus
+ Manager.class
+SHA1-Digest: 8J4vaYLUzBr/2uB4oUASXc9McHo=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTimeRidget$1.class
+SHA1-Digest: kFSBa1ZBcFZjLMXFC69+rtTBBzk=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SharedColors.class
+SHA1-Digest: 9lt78TF1c+beIcIOyXBfEfxrwcA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ListRidget$SelectionTy
+ peEnforcer.class
+SHA1-Digest: rv+0xddkD001LErqBgtRp2pXM3o=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$6.class
+SHA1-Digest: nTr+lZ3x1AoF/dbtrc/lSEwEsuI=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ComboRidget.class
+SHA1-Digest: PEDX5MJhu/POidUo0fT+yJY25RA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericTextRidget$Nume
+ ricModifyListener.class
+SHA1-Digest: HT+zpZqtm3fY1l0JgCyeQGnoR3Q=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CComboRidget$2.class
+SHA1-Digest: kjYIOmxpQUyCusBg9k1uKDCWJSo=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTextRidget.class
+SHA1-Digest: tL4RP3b1JY6hqHn0aS0vgh4d5iE=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$1.c
+ lass
+SHA1-Digest: LWSIvfe27C0AOX6DOi/yBKekv/4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/DefaultProce
+ ssDetailComparator.class
+SHA1-Digest: UyPALeyRF1VU+h6L/aTezyE2J58=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/leaf.gif
+SHA1-Digest: D1Two7+cqaE5fE6IYbmwqF42fbQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericString$Digit.cl
+ ass
+SHA1-Digest: speSowoNEHsgzjQEJzsjwCoHCsI=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/DialogView$3.class
+SHA1-Digest: QoV/wCMnq4LTQ8I5Cumg9AzaVPs=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget$SelectionT
+ ypeEnforcer.class
+SHA1-Digest: RPXJLETIb251AnE02POMcpmX094=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ToolItemMarkerSupport.
+ class
+SHA1-Digest: 12VlRcjIoIWuFobDEj63oYstv/w=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SingleChoiceRidget.cla
+ ss
+SHA1-Digest: g9Ck8FAV5Xlwmjt8yfXFE4m7168=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get$ProcessDetailManager.class
+SHA1-Digest: 71kbZYItGKronzCEeBFoUjnmw3Y=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/BrowserRidget.class
+SHA1-Digest: OPOPi6Hr9oOqflMAFuZIrUWEOYM=
+
+Name: org/eclipse/riena/ui/ridgets/swt/nls/Messages.class
+SHA1-Digest: mfg5Ak1dITWTO9mWW+XDgZ7yUhI=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/errorMarker.png
+SHA1-Digest: eQRFOOSeg0BYDlcrTPNpT+Fi2Tg=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget$ListLabelPro
+ vider.class
+SHA1-Digest: u0PTRnyvHDHBCbffot6X/NSYLw4=
+
+Name: org/eclipse/riena/ui/ridgets/swt/BorderMarkerSupport.class
+SHA1-Digest: 8cQn/Pz8n6fUb0YvVNFvMxRLXJg=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SingleChoiceRidget$2.c
+ lass
+SHA1-Digest: ZGiX1khRPesHZefra50ZVmejF4c=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericTextRidget$Nume
+ ricFocusListener.class
+SHA1-Digest: GaZksgdUciPQwIw8e4bkX5KEE7Y=
+
+Name: org/eclipse/riena/ui/ridgets/swt/SwtRidgetFactory.class
+SHA1-Digest: GWmnQcDl5iOfy3yrrT3FxLrk6QM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidgetLabelProvide
+ r$UpdateIconsTreeListener.class
+SHA1-Digest: yxfnggdPXUJlzH6NjdwuSLE+lts=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTextRidget$DateKey
+ Listener.class
+SHA1-Digest: N3/ENHRh1DTYzREBNBn8YhVATwI=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget.class
+SHA1-Digest: bBakahNitrkfhrMq9MmxZUh3KCs=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableComparator.class
+SHA1-Digest: 2qYLRf7SjbgDLgyxgbstdhwzwFw=
+
+Name: org/eclipse/riena/ui/ridgets/swt/BorderMarkerSupport$1.class
+SHA1-Digest: 8jc1Ndm03NLJ/kgTQhxnxbRVE3k=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ActionObserver.class
+SHA1-Digest: kH0veC54uUV6MmLwiLTrvcg9dj8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/BrowserRidget$BrowserU
+ rlListener.class
+SHA1-Digest: yiYUv6JuSb7q6cvMbdx7IhuBePQ=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/SwtControlRidgetMappe
+ r$Mapping.class
+SHA1-Digest: MaxisRUcLiz37Xf5REo3bwQV38g=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ToggleButtonRidget.cla
+ ss
+SHA1-Digest: lI9ICrBExpLEscENO5mRnCm8WI8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeTableRidget$Column
+ SortListener.class
+SHA1-Digest: BA8D58WX3toMoC/zm8HKgOXWmWA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$3.class
+SHA1-Digest: VPoQVuSziZGXn0e8htC7P1RmOWk=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget.class
+SHA1-Digest: 4MILwFn6iofeew36tIYB7xbtJ7M=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractTraverseRidget
+ .class
+SHA1-Digest: 5+TZJfMlG4fsM8RebdtNMzsTxIs=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget$SelectionBi
+ ndingValidator.class
+SHA1-Digest: 5A3QpRqY6k5hECv0ZY+9j4Aj9pU=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/MenuItemCondition.cla
+ ss
+SHA1-Digest: HFumCIexPNT9goS7+R5ZDzMfz10=
+
+Name: org/eclipse/riena/ui/ridgets/swt/NumberColumnFormatter.class
+SHA1-Digest: lqGvrtayEuoGY2HcUvt1M3aSyGI=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractTraverseRidget
+ $Message.class
+SHA1-Digest: nQvC5lMdqxk7MUm8cGj1TFIxn08=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$TreeContent
+ ChangeListener.class
+SHA1-Digest: 6vNFgWULkrEPYeKVZLUiFO5IjCc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget$2.class
+SHA1-Digest: OlJQ8/hiBxkWaTZNXdOgrsmHZTU=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/AbstractDialogView$1.clas
+ s
+SHA1-Digest: mDDpC6ghBXxxzQWY2EsHP1+JT0s=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$6.c
+ lass
+SHA1-Digest: 06TRyaztUquPZpAVzL68cgiybVU=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/TypedTextWidgetCondit
+ ion.class
+SHA1-Digest: Txyfgv3UrYy/JdKJKSFBoXfe+68=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/EmbeddedTitleBarRidget
+ .class
+SHA1-Digest: vPH98Mc6hDUuLeGjQ8YyLZEHD9g=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get$1.class
+SHA1-Digest: iA5vMfhTTtDau1HJ196n0p+2+jQ=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/MenuCondition.class
+SHA1-Digest: FLFSCthZRCQLTLjfo2nNOkdWHTg=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSelectableRidget$Single
+ SelectionObservable.class
+SHA1-Digest: lyJFd2Et9hNA8lT5159uFVHu+fQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericTextRidget$1.cl
+ ass
+SHA1-Digest: 2tXR+HIZvcbcntpWAkxFh4Z2x4I=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractTraverseRidget
+ $ActionListener.class
+SHA1-Digest: svXCLR5M2aJbS8Kot3tWoQ6F1CE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/checkbox_checked.gif
+SHA1-Digest: CxF0h4PFloosLFMUDM3uQ9QvRUQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MultipleChoiceRidget.c
+ lass
+SHA1-Digest: ylkzce/8d6uRgjl1qN4q4g1OjdY=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractItemRidget.cla
+ ss
+SHA1-Digest: gtVi6KGPPOkKI61O7JRYug7Lhgs=
+
+Name: org/eclipse/riena/ui/ridgets/swt/SwtRidgetFactory$DummyContainer
+ .class
+SHA1-Digest: K7oKmzbbaSLBpVbJ08FviwaE5R4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/LabelRidget.class
+SHA1-Digest: 5Iyw4WCx6NerUny6G4FkNNvNY7U=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$GenericTree
+ StructureAdvisor.class
+SHA1-Digest: C1UPhjZ35qeSKzxsZikd/CF2Qls=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MenuItemMarkerSupport.
+ class
+SHA1-Digest: 41OQZ9OveF5nSiqdJosYvt5hvrw=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/SingleChoiceCondition
+ .class
+SHA1-Digest: VJpGEMtH+KK2Jg3HWqN5j3iWPl4=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MultipleChoiceRidget$2
+ .class
+SHA1-Digest: r7hvxHhCkU1DplFejBb7wuvDYSY=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MenuRidget.class
+SHA1-Digest: ocORRn97w+eHi7S4fCAVe5iDlgk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget$3.class
+SHA1-Digest: v7/wuzfpmnKgcymvEJB+NaCUdPE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SliderRidget$Message.c
+ lass
+SHA1-Digest: vxwbKYE/RDwM51KLfLsrRWYk7B0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$ExpansionCo
+ mmand.class
+SHA1-Digest: JJGiIEEKKCSWm0pK6TIrNAp7rzE=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractActionRidget.class
+SHA1-Digest: 2lxncjio8tRSeNV6H287aNouCKY=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MenuProperties.class
+SHA1-Digest: r6MFgzNfrZ6oiRUNJCsUl95dIsg=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTimeRidget$3.class
+SHA1-Digest: ihB0SHvxNNS0cbPVDzB5uAdO+io=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ShellRidget$RidgetShel
+ lListener.class
+SHA1-Digest: dBUidbowXHWOgm+FQtplTAsCPm0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CComboRidget.class
+SHA1-Digest: 4gzQsLQGL0J0ilFCLRUDmMVEdO4=
+
+Name: about.html
+SHA1-Digest: zOJDEhCbGI76ILlEM1ZDOfR6hO0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CompositeRidget.class
+SHA1-Digest: 89L8kHemEShmjC0la68CvHKm6LA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget$ColumnSort
+ Listener.class
+SHA1-Digest: sLBXSwb1af0q/5IMy4ed9PmT0pc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/MarkerSupport$1.class
+SHA1-Digest: gnPDhGD/tBpSpkpW+8V7I1+EDQE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTextRidget$DateVer
+ ifyListener.class
+SHA1-Digest: yfO5pb96/k0eCYp82u5e1q+E2AE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/LinkRidget.class
+SHA1-Digest: 4d1XlcfgqfKpKFrYrj73yKULGL0=
+
+Name: org/eclipse/riena/ui/ridgets/swt/nls/messages.properties
+SHA1-Digest: o7brR6BtHtd5kAkX7Uc+LkSMCPQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ComboRidget$1.class
+SHA1-Digest: n9/TU0A5DOxZcQSfYVPz1GrddhI=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SpinnerRidget$Message.
+ class
+SHA1-Digest: ldLZOP0pESe1yY5FcS0NHadF9iA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTimeRidget$EditRul
+ esValidator.class
+SHA1-Digest: S8N3XaEJWJckUZPnwN2v8l/SgY4=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget.class
+SHA1-Digest: LhmYQhKf9RFrJu3QsjDqWQR4snI=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$3.c
+ lass
+SHA1-Digest: w7wG6MjbX1nx9QxdkpuVjjUfVfM=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSWTRidget.class
+SHA1-Digest: rJhmYjrTVrpvjnr36mC8zV3cgaM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CompletionComboRidget$
+ 1.class
+SHA1-Digest: 1jFtsWcH+vYxdKMQrKAzR5iQWnc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSelectableRidget.class
+SHA1-Digest: DXhNAdFUceGyZEKMRM6eymmWwXE=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractRidgetController.class
+SHA1-Digest: SRK9qwuS8ICbWbbwiSXsREZpKa0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MenuItemRidget.class
+SHA1-Digest: /u5t4sjV6gV5bXU9KxCc6Yngsgc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/MultipleChoiceConditi
+ on.class
+SHA1-Digest: CArLR0XyHSxwq8GqJF91TW9huV0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SingleChoiceRidget$4.c
+ lass
+SHA1-Digest: V0hAW3OLhhjrJ6BE5ZeVrcNiLIo=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget$TableItemE
+ raser.class
+SHA1-Digest: ZuQQQVwitjrjxPbyI5VLxGgpGVc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/SwtControlRidgetMappe
+ r.class
+SHA1-Digest: hxATwzHGAu+YQivHnmYMfSoJ5m0=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/LinkRidget$LinkSelecti
+ onObserver.class
+SHA1-Digest: SNq5kgQWYj5MDhUf8xCtUQkfdsY=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget$FocusManage
+ r.class
+SHA1-Digest: J6nvBJJSiseIS57PpRrrflvd4VY=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/TreeWithColumnsCondit
+ ion.class
+SHA1-Digest: JBuBQ20nxoy3s8/aUNAxRafbkpk=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ModuleTitleBarRidget.c
+ lass
+SHA1-Digest: nyr+wvTplBI6MW+CtDk4JZKTt40=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get$IProcessDetailFilter.class
+SHA1-Digest: dsKB6SyiBFSCZFgytH/T9uX0SDE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MenuRidget$ChildDispos
+ eListener.class
+SHA1-Digest: C1ymqdmDCEl44skVx/azuV41PhA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$5.class
+SHA1-Digest: +Gr7f1B7sTaP4K0PDxsmJjdAxrM=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/Activator.class
+SHA1-Digest: TvjpTvb3jK9iu5Abv+cxaOnDarQ=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget$ClickForward
+ er.class
+SHA1-Digest: DCKygjLW1jl+3mUkmb4TGxCll+I=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/AbstractDialogView$Contro
+ lledView.class
+SHA1-Digest: fmsp1q2mDZgQD7NYbBWO/Hzc97o=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTimeRidget$DateAnd
+ TimeObservableWithNullConversion.class
+SHA1-Digest: hc0PJdwIXzkvwAd6iqWoNIvhkz8=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractToggleButtonRidget$Canc
+ elControlUpdateWhenDisabled.class
+SHA1-Digest: tbLwSivBkShHt7GC7miKx7kSxck=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CComboRidget$1.class
+SHA1-Digest: RUyAEmNE1+LvF6e2/UJ5cWr57x8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/NumericTextRidget.clas
+ s
+SHA1-Digest: pQ0a1cr52gxq3i5J7iPtYHUEZCU=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TableRidget$1.class
+SHA1-Digest: fZSIemEOrqBphyofT62SV8n5cPk=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/DialogView$2.class
+SHA1-Digest: LqhMvKz8gR1oamu9tUsIE1hsg2Q=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractMasterDetailsRidget$8.c
+ lass
+SHA1-Digest: 3Mhz1U1kNhjGyqk8eFLrzWZhSGE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/ProcessDetai
+ l.class
+SHA1-Digest: SYT6PHEZyv+j1sC3D+pjKjUtxqc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineUIProcessRid
+ get$3.class
+SHA1-Digest: y+eK5BMeydmCk1qrpkZN/qjiozc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DisabledMarkerVisualiz
+ er.class
+SHA1-Digest: 3iR+HVUJQ4u1Jvf+/aaHBZYWS+8=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ToolItemRidget.class
+SHA1-Digest: OLAHMneCG2+xl7kWH3tQoQB9jWQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DefaultActionManager.c
+ lass
+SHA1-Digest: kPI75qrDGlg7UHAT4GSoVR/nQpg=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget$CRKeyListen
+ er.class
+SHA1-Digest: IuT7XxCOBHARHqkTzzcRDCyFoho=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractComboRidget$2.class
+SHA1-Digest: NArXwDMcgmfjU0gn2jr5kn/nps0=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractListRidget.class
+SHA1-Digest: xiWRR9UxebYMg7ZB964gGST+fyQ=
+
+Name: org/eclipse/riena/ui/ridgets/swt/SortableComparator.class
+SHA1-Digest: tt2TjHmNNQBFjkGAZbtKL80kk48=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/DateTextRidget$DateFoc
+ usListener.class
+SHA1-Digest: 9IzCe51Usmmmx4NFNS5sUGvm7hE=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/ToolItemProperties.cla
+ ss
+SHA1-Digest: KY+igSC/Vi5+FDwEHJw8taJ6dsw=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SingleChoiceRidget$1.c
+ lass
+SHA1-Digest: laM224eVIuotL81bQjq4q94eQ0U=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MultipleChoiceRidget$4
+ .class
+SHA1-Digest: V00imFhk8smO08zihJBEa4dpZgA=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/MasterDetailsRidget.cl
+ ass
+SHA1-Digest: LUxdVCBYoM45kAr1CIcl8f2UHck=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractToggleButtonRidget$1.cl
+ ass
+SHA1-Digest: VaaCjc9iuqPomk0iru/Jdlfwejs=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractSWTWidgetRidget.class
+SHA1-Digest: x5SSGqrBXcdHaF8vhrrTYg8sg0o=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/StatuslineRidget.class
+SHA1-Digest: s7ReT1SCoKJO6WPJa0zyd3+h7Ag=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractLabelRidget.class
+SHA1-Digest: 13D/2XV9r0Ouna7JZkPuIk1Z8rA=
+
+Name: org/eclipse/riena/ui/ridgets/swt/MenuManagerHelper$TopMenuListen
+ er.class
+SHA1-Digest: 9nTS/YxeF47x8Jw8T5DLfK8b0os=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$2.class
+SHA1-Digest: kpds928UoSFc/SOLzh20T32rT/c=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TreeRidget$SelectionTy
+ peEnforcer.class
+SHA1-Digest: eNDaAiaU48r0OW1TIn9GNAxov+o=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget$SyncModifyL
+ istener.class
+SHA1-Digest: igB5YbsW06Gd0z+uKoEf4comAqQ=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/SharedImages.class
+SHA1-Digest: JRaqwboKAEo9eoTuQgaW22O2PRA=
+
+Name: org/eclipse/riena/ui/ridgets/swt/uibinding/TreeWithoutColumnsCon
+ dition.class
+SHA1-Digest: HPRAbt1RqpruV/seNa0dLEJ2xYc=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/CompletionComboRidget.
+ class
+SHA1-Digest: DEmleDxLvcR62Ok5/spJCEU0BOc=
+
+Name: org/eclipse/riena/ui/ridgets/swt/views/AbstractDialogView.class
+SHA1-Digest: RFZCnRaJ9tSdYYzf9W2zS58Cwrw=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/uiprocess/UIProcessRid
+ get$Progress.class
+SHA1-Digest: oXQSnAa7986rcNh/nzeKkc7IN3w=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/AbstractTraverseRidget
+ $TooltipChangeHandler.class
+SHA1-Digest: +4HdSf+FfZ3q/kA9jg/CxS+iHPk=
+
+Name: org/eclipse/riena/internal/ui/ridgets/swt/TextRidget$1.class
+SHA1-Digest: +GWUZXXzoNBK30gDH4AHdnHqRyg=
+
+Name: org/eclipse/riena/ui/ridgets/swt/AbstractEditableRidget$Validati
+ onCallback.class
+SHA1-Digest: KrdYbFMfhBU9e57n5tI+PcsuFaI=
+

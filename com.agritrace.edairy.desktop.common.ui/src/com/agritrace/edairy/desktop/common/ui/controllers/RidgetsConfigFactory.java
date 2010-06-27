@@ -34,6 +34,7 @@ public class RidgetsConfigFactory {
 	 */
 	public IConverter getModel2UIConverter(EStructuralFeature feature, IRidget ridget) {
 		return null;
+		
 
 	}
 }

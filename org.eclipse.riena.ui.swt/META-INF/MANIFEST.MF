@@ -1,0 +1,707 @@
+Manifest-Version: 1.0
+Eclipse-BuddyPolicy: registered
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Name: Riena SWT Plug-in
+Bundle-SymbolicName: org.eclipse.riena.ui.swt;singleton:=true
+Require-Bundle: org.eclipse.jface;resolution:=optional;visibility:=ree
+ xport,org.eclipse.rap.jface;resolution:=optional;visibility:=reexport
+ ,org.eclipse.riena.core,org.eclipse.riena.ui.core,org.eclipse.riena.u
+ i.common,org.eclipse.riena.ui.ridgets,org.eclipse.swt;resolution:=opt
+ ional;visibility:=reexport,org.eclipse.rap.rwt;resolution:=optional;v
+ isibility:=reexport,org.eclipse.ui.workbench;resolution:=optional;vis
+ ibility:=reexport,org.eclipse.rap.ui.workbench;resolution:=optional;v
+ isibility:=reexport,org.pushingpixels.trident;resolution:=optional
+Bundle-Activator: org.eclipse.riena.internal.ui.swt.Activator
+Bundle-Version: 2.0.0.v20100615_2_0_0
+Export-Package: org.eclipse.riena.internal.ui.swt;x-internal:=true,org
+ .eclipse.riena.internal.ui.swt.test;x-friends:="org.eclipse.riena.tes
+ ts",org.eclipse.riena.internal.ui.swt.utils;x-friends:="org.eclipse.r
+ iena.ui.ridgets.swt,org.eclipse.riena.navigation.ui.swt",org.eclipse.
+ riena.ui.swt,org.eclipse.riena.ui.swt.facades,org.eclipse.riena.ui.sw
+ t.lnf,org.eclipse.riena.ui.swt.lnf.renderer,org.eclipse.riena.ui.swt.
+ lnf.rienadefault,org.eclipse.riena.ui.swt.uiprocess,org.eclipse.riena
+ .ui.swt.utils
+Bundle-ManifestVersion: 2
+Import-Package: org.osgi.service.log;version="1.3.0"
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$AutoCompletionMode.clas
+ s
+SHA1-Digest: K3fRdNle8+EXA4v+BmbapEmKgLw=
+
+Name: org/eclipse/riena/ui/swt/lnf/rienadefault/RienaDefaultLnf.class
+SHA1-Digest: SSbg5D7TuBE50FOx49RCJsBCfAk=
+
+Name: icons/mb_max_hover_selected.gif
+SHA1-Digest: RQ2SzOafJCNftZTttY/0F9rYDYc=
+
+Name: org/eclipse/riena/ui/swt/facades/ActionFactoryFacade.class
+SHA1-Digest: jXYTx7vo4j8BrFxYLrkAZw+z640=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$2.class
+SHA1-Digest: fw1Jp2/N89luIMFQYrmAeMnpFxw=
+
+Name: icons/grabCorner.png
+SHA1-Digest: ujU6P+VcEp7yyLGx9D8vqX5/7hg=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/DialogTitleBarRenderer.cla
+ ss
+SHA1-Digest: wwDuuZPCpr7vIsXmGJ3mp2H4+6A=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/UIProcessControl.class
+SHA1-Digest: HMkdZT9Z7Q1C/xE7lrmT6X4Qa2Y=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/IUIProcessWindow.class
+SHA1-Digest: LjHEBzRO9Zym/nSnWH6Nxl7utR8=
+
+Name: icons/mb_restore_hover_selected.gif
+SHA1-Digest: WbC5G2koDLJtnZvyt8ullan1gmo=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$ButtonKeyListener.class
+SHA1-Digest: yGCWy6hgf1eAVgzD0uBy8AOTBno=
+
+Name: icons/mb_max_hover.gif
+SHA1-Digest: Kz9Spsv0HciCrdFXT8ZMwSCSbF0=
+
+Name: org/eclipse/riena/ui/swt/StatuslineTime$StatuslineUpdateTask$1.c
+ lass
+SHA1-Digest: LIrwKjWnIS0cGfVbzyKbCNsJ3kk=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite$DatePicker$1.class
+SHA1-Digest: l4nG7eDevUQ/WWzL4Grih9A4b3k=
+
+Name: org/eclipse/riena/ui/swt/MessageBox.class
+SHA1-Digest: KvxV4pzcEYn+271TnpCbzQnm7Fs=
+
+Name: org/eclipse/riena/ui/swt/AbstractTitleBarMouseListener.class
+SHA1-Digest: j8zGbbUUhhDoh7nEAllBUxzn4HQ=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$2.class
+SHA1-Digest: 4i2CGWsnrgF/pFiNZzOKa9eAq8c=
+
+Name: org/eclipse/riena/ui/swt/utils/DetachedViewsManager.class
+SHA1-Digest: cHYvZVZLs5ma43O3mx7WW7OImDw=
+
+Name: org/eclipse/riena/ui/swt/BorderControlDecoration.class
+SHA1-Digest: vcXdmiRU+2WfUzXnOC+5OcAito8=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$4.class
+SHA1-Digest: RevpsXs3bLpMwLF1LQMZbb329eo=
+
+Name: org/eclipse/riena/ui/swt/ChoiceComposite.class
+SHA1-Digest: PYBANBWvDaEbVLR5jVi5K8SBlSw=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite$IDateConverterStrat
+ egy.class
+SHA1-Digest: SOC1ggbbkpLsa01DYddNgLpZPiU=
+
+Name: org/eclipse/riena/ui/swt/facades/DialogConstantsFacade.class
+SHA1-Digest: t2zbT0aQHFFdOu0qIo/pkSRRwoE=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$1$1.class
+SHA1-Digest: 3w7IDmtqZV0n0Svr9SyLMVTBfJU=
+
+Name: org/eclipse/riena/ui/swt/utils/DetachedViewsManager$2.class
+SHA1-Digest: 63H8O/RrZ8/CHAJJqTPJUxI/34k=
+
+Name: org/eclipse/riena/ui/swt/BorderControlDecoration$2.class
+SHA1-Digest: E7bk3HzDyu28iI24rbt1aB3Ne1k=
+
+Name: org/eclipse/riena/ui/swt/lnf/IgnoreLnFUpdater.class
+SHA1-Digest: j4uE1PVwh6nfX6sdMp2oM2rB41w=
+
+Name: icons/mb_restore_inactive.gif
+SHA1-Digest: kb7HWMft0OnUvMKRr5J4AZShBYM=
+
+Name: org/eclipse/riena/ui/swt/ModuleTitleBar.class
+SHA1-Digest: ieUzCjhGupXwhG0y9cgObD34e0g=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$PopupController.cla
+ ss
+SHA1-Digest: p/zkhq7w6PcQKodWGaPoeZ0c8kQ=
+
+Name: schema/lnfrenderer-deprecated.exsd
+SHA1-Digest: OrPu+dHl9kw+bRc+uWrzhpW34wM=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfRenderer.class
+SHA1-Digest: MEgb9mG7Gcgujuhf2CI7WO+BD5w=
+
+Name: icons/mb_restore.gif
+SHA1-Digest: +Hhj9ldqV8gHNhATGFWAm1cguNM=
+
+Name: icons/mb_min_hover_selected.gif
+SHA1-Digest: T2XJjFbvJGuEWxYKRbJfogzZByQ=
+
+Name: icons/no_format.gif
+SHA1-Digest: zC6A9PgJrOH4teHZ2QQMDl6wAr0=
+
+Name: org/eclipse/riena/ui/swt/StatuslineTime$StatuslineUpdateTask.cla
+ ss
+SHA1-Digest: mA46vd3LYoJ+wsBIPesWfcFIcDk=
+
+Name: icons/mb_close_inactive.gif
+SHA1-Digest: KIOwWbFyIv6DH57BwmZQRp+A+bA=
+
+Name: org/eclipse/riena/ui/swt/AbstractTitleBarMouseListener$BtnState.
+ class
+SHA1-Digest: BP7o2Ydc9gpFEPag/6RVCYQ970A=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$ButtonMouseListener.class
+SHA1-Digest: Sg6O8pA9wFITGL+1YLO5z/pDOFA=
+
+Name: org/eclipse/riena/ui/swt/IRienaDialog.class
+SHA1-Digest: OcwBlnY6co7xvkx3DS6NKW+gu3M=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo.class
+SHA1-Digest: bpbC47zlwdiRdLjbXLZmpBJHHs8=
+
+Name: org/eclipse/riena/ui/swt/utils/BundleUtil.class
+SHA1-Digest: +KyO9EkdUsqaPpGixDNB0tWpfsE=
+
+Name: org/eclipse/riena/ui/swt/RienaDialogDelegate$DialogPaintListener
+ .class
+SHA1-Digest: hy+xmdfE3Juh0xhNDMwG6s7/mwc=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/UIProcessControl$2.class
+SHA1-Digest: LSmF97Thi/PAek12vyWyQmwu/zc=
+
+Name: icons/RIENA_Logo_RGB.png
+SHA1-Digest: rh3egiIuv1f7ugryCw+iAxSX0lU=
+
+Name: org/eclipse/riena/ui/swt/utils/SWTBindingPropertyLocator$1.class
+SHA1-Digest: s8fjpFRt+80gdidkxJ+Gd+WRylA=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout.class
+SHA1-Digest: LCV14y5RpfWtiWT2H6J0SLNob6M=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$1.class
+SHA1-Digest: uk9SLELp6GdtTXXgcNqqeCteCyg=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$7.class
+SHA1-Digest: E4bTWGWmI9P7T9rdTjmkGyajbl8=
+
+Name: org/eclipse/riena/ui/swt/lnf/AbstractLnfResource.class
+SHA1-Digest: OizjNjYTfM99VjJ5fT6JSKov9ps=
+
+Name: icons/grab.gif
+SHA1-Digest: kcP32ALtRYl1WHb2K9JKSaoae7M=
+
+Name: icons/node_expanded.gif
+SHA1-Digest: +qtPrDKpe6LoIvP44rxgsSmCEJ4=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/ProcessState.class
+SHA1-Digest: hdokr+gWKnvD5167YAKJf0a2pfg=
+
+Name: org/eclipse/riena/ui/swt/utils/IImagePathExtension.class
+SHA1-Digest: Uy68ccGbaUlAhF0IgBdenUSOm1g=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout$4.class
+SHA1-Digest: IbWWRW8PcdzrH07Cm1D0acZaYcw=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/SwtUISynchronizer$SyncExecuto
+ r.class
+SHA1-Digest: 1CW4aXLfAZlnzWR/oyzkusTOAGQ=
+
+Name: org/eclipse/riena/ui/swt/ModuleTitleBar$TitlebarMouseListener.cl
+ ass
+SHA1-Digest: JdBCF94S1UqQgk1kezPErmyShXk=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/SwtUISynchronizer$Executor.cl
+ ass
+SHA1-Digest: 0z+OuwpZGx5dRQDqMq+wTOWOBvU=
+
+Name: META-INF/p2.inf
+SHA1-Digest: E7NPo6nW5gAhNjP90+pxH/o9LOQ=
+
+Name: org/eclipse/riena/ui/swt/lnf/FontDescriptor.class
+SHA1-Digest: KCpvYaa9SFX42yThPtbjgGM5ICM=
+
+Name: org/eclipse/riena/ui/swt/utils/IPropertyNameProvider.class
+SHA1-Digest: AIxGGegw2jC+5dC3EMW8XbCo6Ik=
+
+Name: org/eclipse/riena/ui/swt/IStatusLineContentFactory.class
+SHA1-Digest: dx4UZu0rym7ah0h+U5fynPWgYug=
+
+Name: schema/imagePaths.exsd
+SHA1-Digest: uErXnTLdB4g9Mhamsie8LT2aOQw=
+
+Name: org/eclipse/riena/ui/swt/StatuslineMessage.class
+SHA1-Digest: WobZmfkeMsVUw1Oz5+uD/kAuz2A=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/UIProcessWindow$1.class
+SHA1-Digest: 9MMmU5FYw8C/bl/TP212RDxzbuU=
+
+Name: org/eclipse/riena/ui/swt/RienaWindowRenderer$DialogTitlePaintLis
+ tener.class
+SHA1-Digest: wUeClJV7AO2y5Abv7L/zLOuKJvg=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite$RegexDateConverterS
+ trategy.class
+SHA1-Digest: CcH+0jA8nqK7f0XzGwR/e865mmA=
+
+Name: icons/statusline_error.gif
+SHA1-Digest: J8GwoP/Od825KxLSOi9D+JtwICc=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout$CloseOnParentMove.class
+SHA1-Digest: o8Hu4a9vS76xRnZAKAPs/uJ0LLo=
+
+Name: org/eclipse/riena/ui/swt/lnf/LnfKeyConstants.class
+SHA1-Digest: Zja6MISvX6gQ+qEOsI9dM1dzWWg=
+
+Name: org/eclipse/riena/ui/swt/utils/TestingSupport.class
+SHA1-Digest: Y0OJD3If69C3PLHfC2s4PdezsbM=
+
+Name: icons/processFinishedMarker.png
+SHA1-Digest: v33cMpRqfBiMQ8ooPQHddGUL44g=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$ILabelFormatter.cla
+ ss
+SHA1-Digest: HvjVaZRm5m83XeUoEzSfZ4Oz5Pw=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: 09gN05tobgS/MdtqyTNQhOhB73M=
+
+Name: org/eclipse/riena/ui/swt/lnf/ImageLnfResource.class
+SHA1-Digest: jS7i9fyem5CqyRVrJAWR46lNBgU=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess.class
+SHA1-Digest: 4/q3jxpiQKgTEFMONTuOtSLMdPw=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout$BorderPainter.class
+SHA1-Digest: h8WGEL0OP0JvW7BMQJatBk/j2ec=
+
+Name: icons/defaultNode.png
+SHA1-Digest: gQv2V254Z5APkbZPW9f8YjfhYkM=
+
+Name: org/eclipse/riena/ui/swt/facades/FacadeFactory.class
+SHA1-Digest: 2RtvWPyt1XhnqCHb0XM2UVcV+0U=
+
+Name: org/eclipse/riena/ui/swt/StatuslineNumber.class
+SHA1-Digest: JVa/RGghdGoyVhoFEp4t0/VxfqQ=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$4.class
+SHA1-Digest: ZJnZP9gN4Az4DnzHKKUSTS88QEI=
+
+Name: schema/lnfMarkerSupport.exsd
+SHA1-Digest: 1MsdeXMVU6oxrkJRTEavAW0ceM0=
+
+Name: schema/lnfRenderers.exsd
+SHA1-Digest: dmxlvIc8amDlmv89ml9nXncHf4c=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$6.class
+SHA1-Digest: 5YgbxKyPwglOK3uPNnhrnnWkKRw=
+
+Name: icons/mandatoryMarker.png
+SHA1-Digest: 3weh5g7truoWUs13T9BQvQbo0k4=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout$1.class
+SHA1-Digest: gFKCWgIVaQlkbaTO8EDFtpUFrGM=
+
+Name: icons/logo.png
+SHA1-Digest: mr/mWSOcSqIzWtiYYDPXJHvf+54=
+
+Name: icons/uiProcess.png
+SHA1-Digest: NiSd0kO9OLo0lzM/Ekr9+MN9XJ4=
+
+Name: org/eclipse/riena/ui/swt/RienaWindowRenderer.class
+SHA1-Digest: ixyKM0Jwn8RUWe8OyFDvMK3c93g=
+
+Name: icons/closeModule.png
+SHA1-Digest: wtiams0wyTbmsXu4JK8c9LNvTuU=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$1.class
+SHA1-Digest: og1ot55qp56qaYkZqoQ+DJANrb4=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$PopupList.class
+SHA1-Digest: XBgnfEAKY+aD8da0ePuQrS94/WU=
+
+Name: org/eclipse/riena/ui/swt/RienaDialogDelegate$DialogTitleBarMouse
+ Listener.class
+SHA1-Digest: O5B4aAy4YZSXnXhh5vkfVu/xc9s=
+
+Name: org/eclipse/riena/internal/ui/swt/test/UITestHelper.class
+SHA1-Digest: YdaoEvtXeXIPFUNxG6ju5q7lG1w=
+
+Name: org/eclipse/riena/ui/swt/utils/UIControlsFactory.class
+SHA1-Digest: P1uoOFQ25LcSFSqAAmUESsk37/I=
+
+Name: org/eclipse/riena/internal/ui/swt/Activator.class
+SHA1-Digest: QoJipym0strdCX25UUDH9zONbbE=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite$DatePicker.class
+SHA1-Digest: y6USx8fgOUnBcb6bLTKXcQwtdao=
+
+Name: org/eclipse/riena/ui/swt/utils/SwtUtilities.class
+SHA1-Digest: 7H6mtNWvtiknnVQYcQ3y3DYftlE=
+
+Name: plugin.xml
+SHA1-Digest: RvtTgn8U2U3MJVxCCOVHYz5IyAg=
+
+Name: org/eclipse/riena/ui/swt/utils/SWTBindingPropertyLocator.class
+SHA1-Digest: o4HnOAISQP3pfxiamHBcFTLtL6w=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$PaintDelegation.class
+SHA1-Digest: +URh9GF+srC4dRFHW8I66gtZYY8=
+
+Name: schema/imagepath-deprecated.exsd
+SHA1-Digest: 8MYWmBbkGAaolt68zE71JnC1Ofo=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfRendererExtension.class
+SHA1-Digest: TdhMrh7he9HkrZFh3dQeG/3lW0M=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$1.class
+SHA1-Digest: LGAKfMwuZVWfvjNbevg9sxYdYPQ=
+
+Name: org/eclipse/riena/ui/swt/EmbeddedTitleBar$1.class
+SHA1-Digest: P/7F49ngAYqxuE/JIce7tx4/RPI=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$3.class
+SHA1-Digest: WI6wmKqpq4tTC1I0/LuZLbM8ei4=
+
+Name: icons/mb_close_hover.gif
+SHA1-Digest: KUIGowU1fldR1vDLvlvbEpbpH+M=
+
+Name: org/eclipse/riena/ui/swt/StatuslineTime.class
+SHA1-Digest: //vYBigbmXgbrtmjJ8fwv4pjM5I=
+
+Name: icons/folder_closed.gif
+SHA1-Digest: qPXEOt7QeufR5PxSeaNT6BIDmKQ=
+
+Name: icons/background.png
+SHA1-Digest: EEN87P/5VZyLm1P16638hwB+TLw=
+
+Name: org/eclipse/riena/ui/swt/ImageButton.class
+SHA1-Digest: sObrqVmEAzP772BfzYRq3k92WwA=
+
+Name: org/eclipse/riena/ui/swt/utils/DetachedViewsManager$1.class
+SHA1-Digest: La57yOWeH3RvmDvkNPnZKUf9b/Y=
+
+Name: org/eclipse/riena/ui/swt/BorderControlDecoration$1.class
+SHA1-Digest: yWbWOLTE3SzAYKbU7X6PaoDt+PA=
+
+Name: org/eclipse/riena/ui/swt/lnf/FlasherSupportForRenderer.class
+SHA1-Digest: hqb+P6LRXV6CzRgiRsoZ+JF2jIs=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/IProcessWindowListener.class
+SHA1-Digest: Djk7aW0qhBXlln94Rc8N5He/Ixk=
+
+Name: org/eclipse/riena/ui/swt/facades/BindingServiceFacade.class
+SHA1-Digest: M2QDXpF+eTKNM7Qc2xmTjCVb5xY=
+
+Name: org/eclipse/riena/ui/swt/DefaultStatuslineContentFactory.class
+SHA1-Digest: DLEJfzLPX91kuZkNmB+4+tQZLd0=
+
+Name: org/eclipse/riena/ui/swt/MasterDetailsComposite.class
+SHA1-Digest: qjawRPBJYUmi0E76RBzWMj8q2Mg=
+
+Name: org/eclipse/riena/ui/swt/utils/WidgetIdentificationSupport.class
+SHA1-Digest: bNarko68lAj6zlrjkT/g5fvVm/A=
+
+Name: org/eclipse/riena/ui/swt/StatuslineDate.class
+SHA1-Digest: PTg5sq8wyJ86uJYNDOv3Keq3bNE=
+
+Name: org/eclipse/riena/ui/swt/lnf/LnfManager.class
+SHA1-Digest: 4M5cuhGM0A48nfeAPM5QQUKLZPM=
+
+Name: icons/hand.gif
+SHA1-Digest: nN+N5sqTbdMoqPz1bdkYjf68ZUA=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite.class
+SHA1-Digest: uAGTwzmsK9opVVUU1y3CspP8lUs=
+
+Name: icons/OLD_RIENA_Logo_RGB.png
+SHA1-Digest: 9hj+mmBAQXxRVYEWkTkanNpDD88=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/EmbeddedTitlebarRenderer$M
+ arkerUpdater.class
+SHA1-Digest: OC+Vpa63k7ccIUfZPxwMyWJ5nuU=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/SwtUISynchronizer$FutureSyncL
+ atch.class
+SHA1-Digest: ig8STYM8SVLbhXyN1dHvoNtxwZE=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/UIProcessControl$1.class
+SHA1-Digest: TD0JNY84alzHQGTdN5WKqN53ViQ=
+
+Name: org/eclipse/riena/ui/swt/AbstractMasterDetailsComposite$LinePain
+ tListener.class
+SHA1-Digest: GdzyFRr6LVNDfue3SAacjlgQuWs=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfFontDescriptor.class
+SHA1-Digest: pC2TjKZr0BkDeaXoM9k0ypDTVSE=
+
+Name: icons/statusline_warning.gif
+SHA1-Digest: fDwtYUWjteP13A0FZiIdDO7wEmU=
+
+Name: org/eclipse/riena/ui/swt/IEmbeddedTitleBarListener.class
+SHA1-Digest: aD0P8/vxHGNLgfgcQHPce3VjLEQ=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/ICancelListener.class
+SHA1-Digest: SB5u2DULHCK2q4dHEO69APoDUuk=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$6.class
+SHA1-Digest: PtyJDv/bTdHrv96dyKigRXiwEK0=
+
+Name: org/eclipse/riena/internal/ui/swt/test/TestUtils.class
+SHA1-Digest: zCsmIo6CVu+bXibxa34omNCoLEs=
+
+Name: org/eclipse/riena/ui/swt/AbstractRienaUIPlugin.class
+SHA1-Digest: hnOxklsq80gswN/M/BufGRlluNo=
+
+Name: org/eclipse/riena/ui/swt/RienaWindowRenderer$DialogTitleBarMouse
+ Listener.class
+SHA1-Digest: 7wtb0EIxo7ylulqA+hxjSekhO0w=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout$3.class
+SHA1-Digest: s6ameQoPzedMkORVZxrWD26HG3k=
+
+Name: org/eclipse/riena/ui/swt/NumberLabel.class
+SHA1-Digest: 2u0pkF9wkDpggeaKJrg1I7E96VI=
+
+Name: org/eclipse/riena/internal/ui/swt/test/UITestHelper$EventSender.
+ class
+SHA1-Digest: mE3c746DAsyM96RflcsDq7uPWS8=
+
+Name: icons/node_collapsed.gif
+SHA1-Digest: 84S90OyYP+taEx+lrerai2tTd10=
+
+Name: icons/closeModule_hover.png
+SHA1-Digest: XrPvHlllCVJ4RG0GwKnZTLljsd0=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/UIProcessWindow.class
+SHA1-Digest: Cg2fqRUTyjnkL3njDSEQyERJsdE=
+
+Name: icons/statusline_info.gif
+SHA1-Digest: Jp6jc3eHNNEwzbCLjn7smofN+VY=
+
+Name: org/eclipse/riena/ui/swt/utils/ImageFileExtension.class
+SHA1-Digest: QanXKmSuj87hfNMtQnZd8D4crI0=
+
+Name: org/eclipse/riena/ui/swt/Statusline.class
+SHA1-Digest: BrmHzihcev9QV6CMuVZeFzXf+Ts=
+
+Name: org/eclipse/riena/ui/swt/AbstractMasterDetailsComposite.class
+SHA1-Digest: PR91J9CdNwoa4vNWUFOJbeOuMzo=
+
+Name: icons/mb_restore_hover.gif
+SHA1-Digest: R+tBMQjssSSlyxpH2ksqe33OFFU=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$3.class
+SHA1-Digest: vhByrfLapIAIXfm+8DHWYBvGVoM=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/SwtUISynchronizer$ASyncExecut
+ or.class
+SHA1-Digest: xXAzM4OzvSTrQ8JTYG/mWzcy6FU=
+
+Name: icons/thin_close_view.gif
+SHA1-Digest: ZZ1g576zl6/4wBLDcbiqBCLRXiA=
+
+Name: org/eclipse/riena/ui/swt/lnf/LnFUpdater.class
+SHA1-Digest: 9iiPa83fr0sUj6mz4u0AMBz5VW4=
+
+Name: org/eclipse/riena/ui/swt/ImageButton$ButtonFocusListener.class
+SHA1-Digest: 63Y/rsSHTwra22ONPmQSIOYVvSs=
+
+Name: org/eclipse/riena/ui/swt/StatuslineSpacer.class
+SHA1-Digest: ZO74T3hioIxo6HE3OBnlSpWYWCQ=
+
+Name: icons/closeModule_inactive.png
+SHA1-Digest: DwrDx/z0uP3gPFFxlB654XksaR0=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfResource.class
+SHA1-Digest: q3C1p5SFURSLOwyUZkf1YkbypwU=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfCustomizer.class
+SHA1-Digest: PStJHzmInlOdL8XZrQ/ESvf+xzI=
+
+Name: org/eclipse/riena/ui/swt/RienaDialogDelegate.class
+SHA1-Digest: OYnMWUvK/MBQQafY0cOkLJEBt2k=
+
+Name: org/eclipse/riena/internal/ui/swt/test/StopWatch.class
+SHA1-Digest: 4lnvcA8V5LAbZ2Cf/k/IJT3Vdi4=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite$DatePicker$2.class
+SHA1-Digest: vUZTXiXEBPqElWIyecos9fnxH4s=
+
+Name: org/eclipse/riena/ui/swt/DatePickerComposite$1.class
+SHA1-Digest: cqEejB0tMvzAyKVKhcLz3zshUV0=
+
+Name: org/eclipse/riena/ui/swt/lnf/AbstractLnfRenderer.class
+SHA1-Digest: YP7m0BrXnB2AgD1MskvK+z+sB5o=
+
+Name: about.html
+SHA1-Digest: zOJDEhCbGI76ILlEM1ZDOfR6hO0=
+
+Name: icons/arrowDown.gif
+SHA1-Digest: e76JTdCtSHJn5DcAPZTbunI22r8=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$3.class
+SHA1-Digest: t2jDLyql8iUpb4oWOdrJh70A2UI=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/AbstractTitleBarRenderer.c
+ lass
+SHA1-Digest: /dfFi2b8fZoI3gCzmd4fWcnQE/U=
+
+Name: org/eclipse/riena/ui/swt/utils/SWTControlFinder.class
+SHA1-Digest: hDvhZWs2c/TJPUvY0LVVnaUYLfM=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$5.class
+SHA1-Digest: /SiDP1zlBuf5wXpVg35e57n6Pao=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/SwtUISynchronizer$DisplayObse
+ rver.class
+SHA1-Digest: jRjAsRVYZuSEHcPlYr9UCimiGxM=
+
+Name: icons/mb_close.gif
+SHA1-Digest: BMLl2zO63+3YxJgwTXVQ9/xF+GM=
+
+Name: org/eclipse/riena/ui/swt/RienaDialog.class
+SHA1-Digest: NT7TyKRZbrKznNrh+vsLQp4JDbE=
+
+Name: icons/spacer.png
+SHA1-Digest: aTgbt2ifnfF0l7Yza5ClU2+fMRE=
+
+Name: org/eclipse/riena/ui/swt/BorderControlDecoration$3.class
+SHA1-Digest: nY7UtStwceRApaU/GcEAycpWUcc=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/SwtUISynchronizer.class
+SHA1-Digest: zyAxu/UNMPn4wIzgJwXAKXxrX1s=
+
+Name: icons/mb_min_inactive.gif
+SHA1-Digest: P0kXDU4t11Zr+VmKwaBW2STuIx8=
+
+Name: org/eclipse/riena/ui/swt/utils/ImageStore.class
+SHA1-Digest: B/2OMSfzdZ7YMldn7QnqzmkTFPo=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$ControlHolder.class
+SHA1-Digest: EMLpjsv9FgC5Nef04KJLKPZ5UUQ=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/HoverBorderRenderer.class
+SHA1-Digest: WTBgdL2N2K7EkcIA6c6KWtJrguc=
+
+Name: icons/mb_min_hover.gif
+SHA1-Digest: 3oTyy3oyn+OdE2O3k4sn2Dyca+Y=
+
+Name: icons/mb_min.gif
+SHA1-Digest: 6bsZOJkP/sNL7pAofOyPrLNRdC8=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfMarkerSupportExtension.class
+SHA1-Digest: yppUK+4K3Mumnkhd00rIJZbBvv8=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/UIProcessControl$ProcessUpdat
+ eThread.class
+SHA1-Digest: cML6aL+//Bb4dGsYj6xmd2IOZyU=
+
+Name: org/eclipse/riena/ui/swt/AbstractMasterDetailsComposite$1.class
+SHA1-Digest: VC1FeoKQdHTKRgkVWCCp/NNAf1Y=
+
+Name: org/eclipse/riena/ui/swt/LnfRendererExtension.class
+SHA1-Digest: 4khwFdaXHasXZ8hX2fiaweSxvf4=
+
+Name: org/eclipse/riena/ui/swt/lnf/ColorLnfResource.class
+SHA1-Digest: lVuL4SyQKco4zMNLPRHoMJ53gWU=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/IProgressControl.class
+SHA1-Digest: laEkIJw6bg8ECSxk4/VRrCisFrc=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/UIProcessFinishedFlasher.c
+ lass
+SHA1-Digest: gEAPPO2cNhQBZ0zYhW0WtoAJzHs=
+
+Name: org/eclipse/riena/ui/swt/nls/messages.properties
+SHA1-Digest: 01Z6RMZ92gKjlceL3uo30x8BaKE=
+
+Name: icons/mb_max.gif
+SHA1-Digest: KSYTMshNhal6WtLgbS2DJqDWVGw=
+
+Name: org/eclipse/riena/ui/swt/EmbeddedTitleBar.class
+SHA1-Digest: HlFv+CpmXtNCfkYA3rom54VnwBo=
+
+Name: icons/errorMarker.png
+SHA1-Digest: eQRFOOSeg0BYDlcrTPNpT+Fi2Tg=
+
+Name: org/eclipse/riena/ui/swt/lnf/rienadefault/RienaDefaultTheme.clas
+ s
+SHA1-Digest: T1U+Q9g3uR3GCnyBcEZuOejMa38=
+
+Name: icons/closeModule_hover_selected.png
+SHA1-Digest: x12KHl0jYYEApDx8zj2oarUGuMI=
+
+Name: icons/mb_close_hover_selected.gif
+SHA1-Digest: ZZJ4r44AFd/RgKmpxB6Qt+EsOWU=
+
+Name: icons/mb_max_inactive.gif
+SHA1-Digest: PCgW/IMQSPYK4tTca/SnscC8HbM=
+
+Name: org/eclipse/riena/ui/swt/MessageBox$1.class
+SHA1-Digest: Kk1KpH25vnVT7TfXCMh98X6KveI=
+
+Name: org/eclipse/riena/ui/swt/StatuslineUIProcess$2.class
+SHA1-Digest: y41MNLEHyq7eSmzI0qboH4FYUDk=
+
+Name: org/eclipse/riena/ui/swt/lnf/ILnfTheme.class
+SHA1-Digest: +A+JIyghLPYlMR1ubrQcDeanyOY=
+
+Name: org/eclipse/riena/ui/swt/lnf/LnfManager$LnfManagerFailure.class
+SHA1-Digest: fXeK6IqVEzu5BEP1HiLZfV4d2Xo=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$8.class
+SHA1-Digest: tHiPWdR94vJlB4fEOxwtfhjL9lE=
+
+Name: icons/fldr_obj.gif
+SHA1-Digest: 5TF7ftfUsp4Z3KdTaSlgyQoFpuk=
+
+Name: org/eclipse/riena/ui/swt/uiprocess/ProgressInfoDataObject.class
+SHA1-Digest: pA40eP/gssMwV8NN0vK4mgoAiMY=
+
+Name: org/eclipse/riena/internal/ui/swt/utils/RcpUtilities.class
+SHA1-Digest: R2dws05glUQZ3roPmgfW9hdh3fE=
+
+Name: icons/attentionMarker.png
+SHA1-Digest: vXsnTWwnIG1a6DRJ2Si7D+IYPE0=
+
+Name: org/eclipse/riena/ui/swt/RienaWindowRenderer$DialogBorderPaintLi
+ stener.class
+SHA1-Digest: 5gEzfSNMFj2+GEbMy88lJ9rVlA4=
+
+Name: org/eclipse/riena/ui/swt/nls/Messages.class
+SHA1-Digest: 4Zqwl55GVn+oAk9TkQX6URqDVyc=
+
+Name: org/eclipse/riena/ui/swt/utils/SwtUtilities$GCString.class
+SHA1-Digest: JtefE5N8TqqH5lVAnOsP7j7SK+o=
+
+Name: org/eclipse/riena/ui/swt/facades/GCFacade.class
+SHA1-Digest: D/ejbx9Rn+yV51rxaqboRG4QJ64=
+
+Name: org/eclipse/riena/ui/swt/AbstractStatuslineComposite.class
+SHA1-Digest: r816yQNriG4aWyFy2oOosEI+nfg=
+
+Name: org/eclipse/riena/ui/swt/RienaMessageDialog.class
+SHA1-Digest: XX1stdjH49epl0bmhldG43Va9fo=
+
+Name: org/eclipse/riena/ui/swt/RienaDialogDelegate$DialogBorderPaintLi
+ stener.class
+SHA1-Digest: 7ROzXVzde2KCx5It2KsjkMWDSt0=
+
+Name: icons/arrowUp.gif
+SHA1-Digest: Vz+CwjSCqP+zV1y7ssfLHJW69uY=
+
+Name: org/eclipse/riena/ui/swt/facades/SWTFacade.class
+SHA1-Digest: Bu4w0EeVoc/AuoxyF7ABQ/OlgwA=
+
+Name: org/eclipse/riena/ui/swt/lnf/FontLnfResource.class
+SHA1-Digest: c0Bnr8lg2L6LWhY37eqnP+juJ1k=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/DialogBorderRenderer.class
+SHA1-Digest: SokgnzgTG6adu/vGwWOwKiyMD80=
+
+Name: org/eclipse/riena/ui/swt/CompletionCombo$5.class
+SHA1-Digest: D3Gk+PeRTz28u1FhWGqMksbzDM8=
+
+Name: org/eclipse/riena/ui/swt/InfoFlyout$2.class
+SHA1-Digest: I+hXJqkSTCorp/y5rlOA+eEy3Qg=
+
+Name: org/eclipse/riena/ui/swt/lnf/renderer/EmbeddedTitlebarRenderer.c
+ lass
+SHA1-Digest: 5DnI5sc33dy4Zfpcow5aRjFG28g=
+
