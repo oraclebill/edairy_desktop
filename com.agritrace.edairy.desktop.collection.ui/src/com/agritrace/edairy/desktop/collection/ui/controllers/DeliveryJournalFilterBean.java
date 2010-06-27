@@ -8,10 +8,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
 public class DeliveryJournalFilterBean extends AbstractBean {
-	public static final String START_DATE = "filter-min-date";
-	public static final String END_DATE = "filter-max-date";
-	public static final String ROUTE = "filter-route";
-	public static final String CUSTOMER = "filter-customer";
+	public static final String START_DATE 	= "filter-min-date";
+	public static final String END_DATE 	= "filter-max-date";
+	public static final String ROUTE 		= "filter-route";
+	public static final String CUSTOMER 	= "filter-customer";
 
 	private Date minDate;
 	private Date maxDate;

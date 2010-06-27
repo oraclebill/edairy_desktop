@@ -2,9 +2,8 @@ package com.agritrace.edairy.desktop.operations.services;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -71,6 +70,13 @@ public class DairyRepository implements IDairyRepository {
 		@Override
 		protected Class<DeliveryJournal> getClassType() {
 			return DeliveryJournal.class;
+		}
+	};
+	
+	private static final HibernateRepository<Customer> customerRepository = new HibernateRepository<Customer>() {
+		@Override
+		protected Class<Customer> getClassType() {
+			return Customer.class;
 		}
 	};
 
@@ -233,6 +239,11 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public List<DeliveryJournal> allDeliveries() {
 		return deliveryRepository.all();
+	}
+
+	@Override
+	public List<Customer> allCustomers() {
+		return customerRepository.all();
 	}
 
 

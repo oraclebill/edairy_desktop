@@ -9,12 +9,12 @@ import org.eclipse.swt.widgets.Composite;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import org.eclipse.jface.action.Action;
 
-public class MilkDeliveryLogView extends AbstractDirectoryView {
+public class DeliveryJournalView extends AbstractDirectoryView {
 
 	public static final String ID = "com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"; //$NON-NLS-1$
 	private Action action;
 
-	public MilkDeliveryLogView() {
+	public DeliveryJournalView() {
 		
 	}
 
@@ -72,6 +72,6 @@ public class MilkDeliveryLogView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterConditions(Composite comp) {
-		MilkDeliveryFilterPanel filterPanel = new MilkDeliveryFilterPanel(comp, SWT.NONE);		
+		DeliveryJournalFilterPanel filterPanel = new DeliveryJournalFilterPanel(comp, SWT.NONE);		
 	}
 }

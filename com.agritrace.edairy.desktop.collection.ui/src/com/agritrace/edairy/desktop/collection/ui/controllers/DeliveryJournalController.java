@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class DeliveryJournalRegisterView extends BasicDirectoryController<DeliveryJournal> {
+public class DeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
 
 	private final IDairyRepository dairyRepo = new DairyRepository();
 	private List<DeliveryJournal> deliveries = null;
@@ -35,7 +35,7 @@ public class DeliveryJournalRegisterView extends BasicDirectoryController<Delive
 	private IComboRidget routeRidget;
 	private IComboRidget customerRidget;
 
-	public DeliveryJournalRegisterView() {
+	public DeliveryJournalController() {
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
 		addTableColumn("Session", DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);

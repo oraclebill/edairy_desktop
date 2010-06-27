@@ -206,19 +206,22 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			} else if (ridget instanceof IComboRidget) {
 				final IComboRidget 		comboRidget = (IComboRidget) ridget;
 				final IObservableList 	optionValues = binding.getDomainList();
-				final Class 			rowClass = binding.getEntityClass();
+				final Class<?>			rowClass = binding.getEntityClass();
 				final IObservableValue 	selectionValue =  EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy());
-				
+				if (optionValues == null || rowClass == null || selectionValue == null) {
+					throw new IllegalStateException();
+				}
 				comboRidget.bindToModel(optionValues, rowClass, "toString()", selectionValue);
 			} else if (ridget instanceof ITableRidget) {
-				final ITableRidget tableRidget = (ITableRidget) ridget;
+				final ITableRidget 		tableRidget = (ITableRidget) ridget;
 				
 				final IObservableList 	rowObservables = binding.getDomainList();;
 				final String[] 			columnPropertyNames = new String[] {};
 				final String[] 			columnHeaders = new String[] {};
-				final Class 			rowClass = binding.getEntityClass();
-				tableRidget.bindToModel(rowObservables, rowClass, columnPropertyNames, columnHeaders);
-
+				final Class<?> 			rowClass = binding.getEntityClass();
+				
+				throw new UnsupportedOperationException();
+//				tableRidget.bindToModel(rowObservables, rowClass, columnPropertyNames, columnHeaders);
 			} else {
 				throw new UnsupportedOperationException("Ridget classs '" + ridget.getClass().getName()
 						+ "' is not supported.");

@@ -10,22 +10,22 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.PlatformUI;
 
-public class MilkDeliveryFilterPanel extends Composite {
+public class DeliveryJournalFilterPanel extends Composite {
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
-	public MilkDeliveryFilterPanel(Composite origParent, int style) {
+	public DeliveryJournalFilterPanel(Composite origParent, int style) {
 		super(origParent, style);
 		setBackground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		setLayout(new FillLayout());
 		
 		Group group = UIControlsFactory.createGroup(this, "Delivery Log Filter");
 
-		FieldUtil.addLabeledDateField(group, "Start Date", "filter-start-date");
-		FieldUtil.addLabeledDateField(group, "End Date", "filter-end-date");
+		FieldUtil.addLabeledDateField(group, "Start Date", "filter-min-date");
+		FieldUtil.addLabeledDateField(group, "End Date", "filter-max-date");
 		FieldUtil.addLabeledComboField(group, "Route", "filter-route");
 		FieldUtil.addLabeledComboField(group, "Customer", "filter-customer");
 		

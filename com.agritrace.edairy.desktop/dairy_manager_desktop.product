@@ -33,7 +33,6 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -67,6 +66,7 @@
       <plugin id="com.mysql.jdbc"/>
       <plugin id="javax.persistence"/>
       <plugin id="javax.servlet"/>
+      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.beanutils"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.oro"/>
@@ -101,12 +101,14 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
-      <plugin id="org.eclipse.jdt.junit.runtime" fragment=""/>
+      <plugin id="org.eclipse.jdt.junit.runtime"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.rcp"/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.client"/>
