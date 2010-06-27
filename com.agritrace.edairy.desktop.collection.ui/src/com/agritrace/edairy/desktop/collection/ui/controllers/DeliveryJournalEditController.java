@@ -32,6 +32,7 @@ public class DeliveryJournalEditController extends RecordDialogController<Delive
 	private ITextRidget journalTotalRidget;
 	
 	public DeliveryJournalEditController() {
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.REFERENCE_NUM, DairyPackage.Literals.DELIVERY_JOURNAL__REFERENCE_NUMBER);
 		addRidgetFeatureMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 		addRidgetFeatureMap(
 				DeliveryJournalEditBindContants.SESSION_COMBO,

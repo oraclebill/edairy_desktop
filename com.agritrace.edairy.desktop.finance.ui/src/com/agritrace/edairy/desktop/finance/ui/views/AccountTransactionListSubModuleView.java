@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionListSubModuleController;
 import com.swtdesigner.SWTResourceManager;
 

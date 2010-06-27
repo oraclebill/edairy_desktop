@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui;
+package com.agritrace.edairy.desktop.internal.finance.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

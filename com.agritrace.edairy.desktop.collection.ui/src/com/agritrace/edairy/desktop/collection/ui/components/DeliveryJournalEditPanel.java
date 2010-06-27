@@ -21,6 +21,7 @@ public class DeliveryJournalEditPanel extends Composite {
 	private Text totalOutputText;
 	private Group tableGroup;
 	private Table lineItemTable;
+	private Text text;
 
 	/**
 	 * Create the composite.
@@ -60,37 +61,45 @@ public class DeliveryJournalEditPanel extends Composite {
 		totalOutputText = UIControlsFactory.createText(this, SWT.NONE, DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT);
 		
 		tableGroup = UIControlsFactory.createGroup(this, "Item Details");
+		
+		text = new Text(this, SWT.BORDER);
+		
+		Label lblReferenceNumber = new Label(this, SWT.NONE);
+		lblReferenceNumber.setText("Reference Number");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(GroupLayout.LEADING)
 				.add(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.add(groupLayout.createParallelGroup(GroupLayout.TRAILING)
-						.add(GroupLayout.LEADING, tableGroup, GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-						.add(GroupLayout.LEADING, groupLayout.createSequentialGroup()
-							.add(groupLayout.createParallelGroup(GroupLayout.TRAILING)
+					.add(groupLayout.createParallelGroup(GroupLayout.LEADING)
+						.add(tableGroup, GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+						.add(GroupLayout.TRAILING, groupLayout.createSequentialGroup()
+							.add(groupLayout.createParallelGroup(GroupLayout.LEADING)
+								.add(lblCustomer)
+								.add(lblSession)
+								.add(lblDate)
+								.add(lblRoute)
+								.add(lblDriver)
+								.add(lblVehicle))
+							.addPreferredGap(LayoutStyle.UNRELATED)
+							.add(groupLayout.createParallelGroup(GroupLayout.LEADING)
+								.add(vehicleCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.add(driverCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.add(sessionCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.add(routeCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.add(customerCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.add(groupLayout.createSequentialGroup()
+									.add(groupLayout.createParallelGroup(GroupLayout.TRAILING)
+										.add(lblTotal)
+										.add(groupLayout.createSequentialGroup()
+											.add(dateCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.add(101)
+											.add(lblReferenceNumber)))
+									.add(18)
 									.add(groupLayout.createParallelGroup(GroupLayout.LEADING)
-										.add(lblCustomer)
-										.add(lblSession)
-										.add(lblDate)
-										.add(lblRoute)
-										.add(lblDriver)
-										.add(lblVehicle))
-									.addPreferredGap(LayoutStyle.UNRELATED)
-									.add(groupLayout.createParallelGroup(GroupLayout.LEADING)
-										.add(vehicleCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.add(driverCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.add(groupLayout.createParallelGroup(GroupLayout.LEADING, false)
-											.add(sessionCombo)
-											.add(dateCombo))
-										.add(routeCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.add(customerCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.add(206))
-								.add(groupLayout.createSequentialGroup()
-									.add(lblTotal)
-									.addPreferredGap(LayoutStyle.RELATED)))
-							.add(totalOutputText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.add(totalOutputText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.add(text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+							.add(1)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -101,7 +110,9 @@ public class DeliveryJournalEditPanel extends Composite {
 						.add(groupLayout.createSequentialGroup()
 							.add(groupLayout.createParallelGroup(GroupLayout.BASELINE)
 								.add(lblDate)
-								.add(dateCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.add(dateCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.add(lblReferenceNumber)
+								.add(text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(LayoutStyle.RELATED)
 							.add(groupLayout.createParallelGroup(GroupLayout.BASELINE)
 								.add(lblSession)
@@ -124,10 +135,10 @@ public class DeliveryJournalEditPanel extends Composite {
 								.add(vehicleCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.add(32))
 						.add(groupLayout.createParallelGroup(GroupLayout.BASELINE)
-							.add(totalOutputText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.add(lblTotal)))
+							.add(lblTotal)
+							.add(totalOutputText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.add(18)
-					.add(tableGroup, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+					.add(tableGroup, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		tableGroup.setLayout(new FillLayout(SWT.HORIZONTAL));

@@ -10,5 +10,6 @@ public interface DeliveryJournalEditBindContants {
 	public static final String ROUTE_COMBO = "route-combo";
 	public static final String SESSION_COMBO = "session-combo";
 	public static final String DATE_COMBO = "date-combo";
+	public static final String REFERENCE_NUM = "reference-number";
 
 }
