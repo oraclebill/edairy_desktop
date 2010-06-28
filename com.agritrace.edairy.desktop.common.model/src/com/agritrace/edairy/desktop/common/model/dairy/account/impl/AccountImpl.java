@@ -29,6 +29,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -72,16 +75,6 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @ordered
 	 */
 	protected long accountId = ACCOUNT_ID_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getMember() <em>Member</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMember()
-	 * @generated
-	 * @ordered
-	 */
-	protected Membership member;
 
 	/**
 	 * The default value of the '{@link #getEstablished() <em>Established</em>}' attribute.
@@ -144,7 +137,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	protected String type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTransactions() <em>Transactions</em>}' reference list.
+	 * The cached value of the '{@link #getTransactions() <em>Transactions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTransactions()
@@ -154,7 +147,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	protected EList<AccountTransaction> transactions;
 
 	/**
-	 * The cached value of the '{@link #getBalances() <em>Balances</em>}' reference list.
+	 * The cached value of the '{@link #getBalances() <em>Balances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getBalances()
@@ -209,24 +202,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public Membership getMember() {
-		if (member != null && member.eIsProxy()) {
-			InternalEObject oldMember = (InternalEObject)member;
-			member = (Membership)eResolveProxy(oldMember);
-			if (member != oldMember) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ACCOUNT__MEMBER, oldMember, member));
-			}
-		}
-		return member;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Membership basicGetMember() {
-		return member;
+		if (eContainerFeatureID() != AccountPackage.ACCOUNT__MEMBER) return null;
+		return (Membership)eContainer();
 	}
 
 	/**
@@ -235,12 +212,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public NotificationChain basicSetMember(Membership newMember, NotificationChain msgs) {
-		Membership oldMember = member;
-		member = newMember;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT__MEMBER, oldMember, newMember);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newMember, AccountPackage.ACCOUNT__MEMBER, msgs);
 		return msgs;
 	}
 
@@ -250,10 +222,12 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public void setMember(Membership newMember) {
-		if (newMember != member) {
+		if (newMember != eInternalContainer() || (eContainerFeatureID() != AccountPackage.ACCOUNT__MEMBER && newMember != null)) {
+			if (EcoreUtil.isAncestor(this, newMember))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (member != null)
-				msgs = ((InternalEObject)member).eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newMember != null)
 				msgs = ((InternalEObject)newMember).eInverseAdd(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
 			msgs = basicSetMember(newMember, msgs);
@@ -333,7 +307,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	public EList<AccountTransaction> getTransactions() {
 		if (transactions == null) {
-			transactions = new EObjectWithInverseResolvingEList<AccountTransaction>(AccountTransaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT);
+			transactions = new EObjectContainmentWithInverseEList<AccountTransaction>(AccountTransaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT);
 		}
 		return transactions;
 	}
@@ -345,7 +319,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	public EList<BalancePoint> getBalances() {
 		if (balances == null) {
-			balances = new EObjectResolvingEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES);
+			balances = new EObjectContainmentEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES);
 		}
 		return balances;
 	}
@@ -360,8 +334,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__MEMBER:
-				if (member != null)
-					msgs = ((InternalEObject)member).eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetMember((Membership)otherEnd, msgs);
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransactions()).basicAdd(otherEnd, msgs);
@@ -381,8 +355,24 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return basicSetMember(null, msgs);
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
 				return ((InternalEList<?>)getTransactions()).basicRemove(otherEnd, msgs);
+			case AccountPackage.ACCOUNT__BALANCES:
+				return ((InternalEList<?>)getBalances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case AccountPackage.ACCOUNT__MEMBER:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -396,8 +386,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return getAccountId();
 			case AccountPackage.ACCOUNT__MEMBER:
-				if (resolve) return getMember();
-				return basicGetMember();
+				return getMember();
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				return getEstablished();
 			case AccountPackage.ACCOUNT__STATUS:
@@ -492,7 +481,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return accountId != ACCOUNT_ID_EDEFAULT;
 			case AccountPackage.ACCOUNT__MEMBER:
-				return member != null;
+				return getMember() != null;
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				return ESTABLISHED_EDEFAULT == null ? established != null : !ESTABLISHED_EDEFAULT.equals(established);
 			case AccountPackage.ACCOUNT__STATUS:

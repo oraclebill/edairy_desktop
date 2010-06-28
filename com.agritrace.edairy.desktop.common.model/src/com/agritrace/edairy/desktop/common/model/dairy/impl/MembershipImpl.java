@@ -148,7 +148,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	protected Farmer member;
 
 	/**
-	 * The cached value of the '{@link #getAccount() <em>Account</em>}' reference.
+	 * The cached value of the '{@link #getAccount() <em>Account</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAccount()
@@ -347,23 +347,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public Account getAccount() {
-		if (account != null && account.eIsProxy()) {
-			InternalEObject oldAccount = (InternalEObject)account;
-			account = (Account)eResolveProxy(oldAccount);
-			if (account != oldAccount) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBERSHIP__ACCOUNT, oldAccount, account));
-			}
-		}
-		return account;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Account basicGetAccount() {
 		return account;
 	}
 
@@ -411,7 +394,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				if (account != null)
-					msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__MEMBER, Account.class, msgs);
+					msgs = ((InternalEObject)account).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__ACCOUNT, null, msgs);
 				return basicSetAccount((Account)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -455,8 +438,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				return getMember();
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
-				if (resolve) return getAccount();
-				return basicGetAccount();
+				return getAccount();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

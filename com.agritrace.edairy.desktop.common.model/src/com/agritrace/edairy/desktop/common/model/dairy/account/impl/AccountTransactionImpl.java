@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,9 +37,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getTransactionType <em>Transaction Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getRelatedLocation <em>Related Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getAmount <em>Amount</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getTransactionDate <em>Transaction Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getCheckNumber <em>Check Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getSignedBy <em>Signed By</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,16 +90,6 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	protected String referenceNumber = REFERENCE_NUMBER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAccount() <em>Account</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAccount()
-	 * @generated
-	 * @ordered
-	 */
-	protected Account account;
-
-	/**
 	 * The default value of the '{@link #getTransactionType() <em>Transaction Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,6 +128,16 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @ordered
 	 */
 	protected TransactionSource source = SOURCE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRelatedLocation() <em>Related Location</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelatedLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected DairyLocation relatedLocation;
 
 	/**
 	 * The default value of the '{@link #getAmount() <em>Amount</em>}' attribute.
@@ -193,6 +198,46 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @ordered
 	 */
 	protected Date transactionDate = TRANSACTION_DATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCheckNumber() <em>Check Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCheckNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CHECK_NUMBER_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getCheckNumber() <em>Check Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCheckNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String checkNumber = CHECK_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSignedBy() <em>Signed By</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSignedBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SIGNED_BY_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getSignedBy() <em>Signed By</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSignedBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected String signedBy = SIGNED_BY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,24 +306,8 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 */
 	public Account getAccount() {
-		if (account != null && account.eIsProxy()) {
-			InternalEObject oldAccount = (InternalEObject)account;
-			account = (Account)eResolveProxy(oldAccount);
-			if (account != oldAccount) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT, oldAccount, account));
-			}
-		}
-		return account;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Account basicGetAccount() {
-		return account;
+		if (eContainerFeatureID() != AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT) return null;
+		return (Account)eContainer();
 	}
 
 	/**
@@ -287,12 +316,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 */
 	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
-		Account oldAccount = account;
-		account = newAccount;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT, oldAccount, newAccount);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newAccount, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT, msgs);
 		return msgs;
 	}
 
@@ -302,10 +326,12 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 */
 	public void setAccount(Account newAccount) {
-		if (newAccount != account) {
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT && newAccount != null)) {
+			if (EcoreUtil.isAncestor(this, newAccount))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (account != null)
-				msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newAccount != null)
 				msgs = ((InternalEObject)newAccount).eInverseAdd(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
 			msgs = basicSetAccount(newAccount, msgs);
@@ -355,6 +381,44 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 		source = newSource == null ? SOURCE_EDEFAULT : newSource;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__SOURCE, oldSource, source));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyLocation getRelatedLocation() {
+		if (relatedLocation != null && relatedLocation.eIsProxy()) {
+			InternalEObject oldRelatedLocation = (InternalEObject)relatedLocation;
+			relatedLocation = (DairyLocation)eResolveProxy(oldRelatedLocation);
+			if (relatedLocation != oldRelatedLocation) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION, oldRelatedLocation, relatedLocation));
+			}
+		}
+		return relatedLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyLocation basicGetRelatedLocation() {
+		return relatedLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRelatedLocation(DairyLocation newRelatedLocation) {
+		DairyLocation oldRelatedLocation = relatedLocation;
+		relatedLocation = newRelatedLocation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION, oldRelatedLocation, relatedLocation));
 	}
 
 	/**
@@ -425,12 +489,54 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCheckNumber() {
+		return checkNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCheckNumber(String newCheckNumber) {
+		String oldCheckNumber = checkNumber;
+		checkNumber = newCheckNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER, oldCheckNumber, checkNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSignedBy() {
+		return signedBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSignedBy(String newSignedBy) {
+		String oldSignedBy = signedBy;
+		signedBy = newSignedBy;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__SIGNED_BY, oldSignedBy, signedBy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
-				if (account != null)
-					msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetAccount((Account)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -456,6 +562,20 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
+				return eInternalContainer().eInverseRemove(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_ID:
@@ -463,18 +583,24 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
 				return getReferenceNumber();
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
-				if (resolve) return getAccount();
-				return basicGetAccount();
+				return getAccount();
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_TYPE:
 				return getTransactionType();
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
 				return getSource();
+			case AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION:
+				if (resolve) return getRelatedLocation();
+				return basicGetRelatedLocation();
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
 				return getAmount();
 			case AccountPackage.ACCOUNT_TRANSACTION__DESCRIPTION:
 				return getDescription();
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_DATE:
 				return getTransactionDate();
+			case AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER:
+				return getCheckNumber();
+			case AccountPackage.ACCOUNT_TRANSACTION__SIGNED_BY:
+				return getSignedBy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -502,6 +628,9 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
 				setSource((TransactionSource)newValue);
 				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION:
+				setRelatedLocation((DairyLocation)newValue);
+				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
 				setAmount((Double)newValue);
 				return;
@@ -510,6 +639,12 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_DATE:
 				setTransactionDate((Date)newValue);
+				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER:
+				setCheckNumber((String)newValue);
+				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__SIGNED_BY:
+				setSignedBy((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -538,6 +673,9 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
 				setSource(SOURCE_EDEFAULT);
 				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION:
+				setRelatedLocation((DairyLocation)null);
+				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
 				setAmount(AMOUNT_EDEFAULT);
 				return;
@@ -546,6 +684,12 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_DATE:
 				setTransactionDate(TRANSACTION_DATE_EDEFAULT);
+				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER:
+				setCheckNumber(CHECK_NUMBER_EDEFAULT);
+				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__SIGNED_BY:
+				setSignedBy(SIGNED_BY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -564,17 +708,23 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
-				return account != null;
+				return getAccount() != null;
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_TYPE:
 				return transactionType != TRANSACTION_TYPE_EDEFAULT;
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
 				return source != SOURCE_EDEFAULT;
+			case AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION:
+				return relatedLocation != null;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
 				return amount != AMOUNT_EDEFAULT;
 			case AccountPackage.ACCOUNT_TRANSACTION__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_DATE:
 				return TRANSACTION_DATE_EDEFAULT == null ? transactionDate != null : !TRANSACTION_DATE_EDEFAULT.equals(transactionDate);
+			case AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER:
+				return CHECK_NUMBER_EDEFAULT == null ? checkNumber != null : !CHECK_NUMBER_EDEFAULT.equals(checkNumber);
+			case AccountPackage.ACCOUNT_TRANSACTION__SIGNED_BY:
+				return SIGNED_BY_EDEFAULT == null ? signedBy != null : !SIGNED_BY_EDEFAULT.equals(signedBy);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -603,6 +753,10 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 		result.append(description);
 		result.append(", transactionDate: ");
 		result.append(transactionDate);
+		result.append(", checkNumber: ");
+		result.append(checkNumber);
+		result.append(", signedBy: ");
+		result.append(signedBy);
 		result.append(')');
 		return result.toString();
 	}

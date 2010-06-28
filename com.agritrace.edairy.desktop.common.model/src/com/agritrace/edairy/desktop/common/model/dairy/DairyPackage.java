@@ -1408,7 +1408,7 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP__MEMBER = 5;
 
 	/**
-	 * The feature id for the '<em><b>Account</b></em>' reference.
+	 * The feature id for the '<em><b>Account</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3188,10 +3188,10 @@ public interface DairyPackage extends EPackage {
 	EReference getMembership_Member();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Account</em>'.
+	 * @return the meta object for the containment reference '<em>Account</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount()
 	 * @see #getMembership()
 	 * @generated
@@ -4457,7 +4457,7 @@ public interface DairyPackage extends EPackage {
 		EReference MEMBERSHIP__MEMBER = eINSTANCE.getMembership_Member();
 
 		/**
-		 * The meta object literal for the '<em><b>Account</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Account</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

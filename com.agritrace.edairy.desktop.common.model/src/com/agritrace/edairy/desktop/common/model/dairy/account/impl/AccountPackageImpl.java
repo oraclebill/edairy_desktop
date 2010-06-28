@@ -294,8 +294,8 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAccountTransaction_Amount() {
-		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(5);
+	public EReference getAccountTransaction_RelatedLocation() {
+		return (EReference)accountTransactionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -303,7 +303,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAccountTransaction_Description() {
+	public EAttribute getAccountTransaction_Amount() {
 		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -312,8 +312,35 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAccountTransaction_TransactionDate() {
+	public EAttribute getAccountTransaction_Description() {
 		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAccountTransaction_TransactionDate() {
+		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAccountTransaction_CheckNumber() {
+		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAccountTransaction_SignedBy() {
+		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -440,9 +467,12 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		createEReference(accountTransactionEClass, ACCOUNT_TRANSACTION__ACCOUNT);
 		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__TRANSACTION_TYPE);
 		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__SOURCE);
+		createEReference(accountTransactionEClass, ACCOUNT_TRANSACTION__RELATED_LOCATION);
 		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__AMOUNT);
 		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__DESCRIPTION);
 		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__TRANSACTION_DATE);
+		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__CHECK_NUMBER);
+		createEAttribute(accountTransactionEClass, ACCOUNT_TRANSACTION__SIGNED_BY);
 
 		balancePointEClass = createEClass(BALANCE_POINT);
 		createEAttribute(balancePointEClass, BALANCE_POINT__ACCOUNT_BALANCE_ID);
@@ -492,23 +522,26 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(accountEClass, Account.class, "Account", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAccount_AccountId(), ecorePackage.getELong(), "accountId", null, 1, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAccount_Member(), theDairyPackage.getMembership(), theDairyPackage.getMembership_Account(), "member", null, 1, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccount_Member(), theDairyPackage.getMembership(), theDairyPackage.getMembership_Account(), "member", null, 1, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccount_Established(), ecorePackage.getEDate(), "established", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccount_Status(), this.getAccountStatus(), "status", "0", 1, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccount_Type(), ecorePackage.getEString(), "type", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAccount_Transactions(), this.getAccountTransaction(), this.getAccountTransaction_Account(), "transactions", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAccount_Balances(), this.getBalancePoint(), null, "balances", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccount_Transactions(), this.getAccountTransaction(), this.getAccountTransaction_Account(), "transactions", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccount_Balances(), this.getBalancePoint(), null, "balances", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accountTransactionEClass, AccountTransaction.class, "AccountTransaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAccountTransaction_TransactionId(), ecorePackage.getELong(), "transactionId", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccountTransaction_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAccountTransaction_Account(), this.getAccount(), this.getAccount_Transactions(), "account", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccountTransaction_Account(), this.getAccount(), this.getAccount_Transactions(), "account", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getAccountTransaction_Account().getEKeys().add(this.getAccount_AccountId());
 		initEAttribute(getAccountTransaction_TransactionType(), this.getTransactionType(), "transactionType", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccountTransaction_Source(), this.getTransactionSource(), "source", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccountTransaction_RelatedLocation(), theDairyPackage.getDairyLocation(), null, "relatedLocation", null, 0, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccountTransaction_Amount(), ecorePackage.getEDouble(), "amount", null, 0, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccountTransaction_Description(), ecorePackage.getEString(), "description", null, 0, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccountTransaction_TransactionDate(), ecorePackage.getEDate(), "transactionDate", null, 1, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAccountTransaction_CheckNumber(), ecorePackage.getEString(), "checkNumber", "", 0, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAccountTransaction_SignedBy(), ecorePackage.getEString(), "signedBy", "", 0, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(balancePointEClass, BalancePoint.class, "BalancePoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBalancePoint_AccountBalanceId(), ecorePackage.getELong(), "accountBalanceId", null, 1, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

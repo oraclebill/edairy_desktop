@@ -236,7 +236,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Farmer" containment="true" eKeys="common.ecore#//Person/personId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//account/Account"
-        eOpposite="#//account/Account/member"/>
+        containment="true" eOpposite="#//account/Account/member"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Asset">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -325,9 +325,9 @@
           eType="#//account/AccountStatus" defaultValueLiteral="0"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="transactions" upperBound="-1"
-          eType="#//account/AccountTransaction" eOpposite="#//account/AccountTransaction/account"/>
+          eType="#//account/AccountTransaction" containment="true" eOpposite="#//account/AccountTransaction/account"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="balances" upperBound="-1"
-          eType="#//account/BalancePoint"/>
+          eType="#//account/BalancePoint" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AccountTransaction">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionId" lowerBound="1"
@@ -340,10 +340,15 @@
           eType="#//account/TransactionType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" lowerBound="1"
           eType="#//account/TransactionSource"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relatedLocation" eType="#//DairyLocation"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionDate" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="checkNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="signedBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="TransactionType">
       <eLiterals name="CREDIT"/>
