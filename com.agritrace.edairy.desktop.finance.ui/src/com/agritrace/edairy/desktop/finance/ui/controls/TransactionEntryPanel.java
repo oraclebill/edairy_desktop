@@ -37,32 +37,32 @@ public class TransactionEntryPanel extends Composite {
 		final Label lblTransactionType = UIControlsFactory.createLabel(middlePanel, "Transaction Type");
 
 		final ChoiceComposite transactionTypeBox = UIControlsFactory.createChoiceComposite(middlePanel, SWT.NONE,
-				false, FinanceBindingConstants.TRANSACTION_CHOICE);
+				false, FinanceBindingConstants.ID_TRANSACTION_CHOICE);
 		transactionTypeBox.setLayout(new RowLayout(SWT.HORIZONTAL));
 
 		final Button btnStoreSale = UIControlsFactory.createButtonRadio(transactionTypeBox, "Store Sale",
-				FinanceBindingConstants.STORE_SALE_BTN);
+				FinanceBindingConstants.ID_STORE_SALE_CHOICEBTN);
 
 		final Button btnPayment = UIControlsFactory.createButtonRadio(transactionTypeBox, "Payment",
-				FinanceBindingConstants.PAYMENT_BTN);
+				FinanceBindingConstants.ID_PAYMENT_CHOICEBTN);
 
 		final Button btnVeterinary = UIControlsFactory.createButtonRadio(transactionTypeBox, "Veterinary",
-				FinanceBindingConstants.VETERINARY_BTN);
+				FinanceBindingConstants.ID_VETERINARY_CHOICEBTN);
 
 		final Button btnShareDeduction = UIControlsFactory.createButtonRadio(transactionTypeBox, "Share Deduction",
-				FinanceBindingConstants.SHARE_DEDUCTION_BTN);
+				FinanceBindingConstants.ID_SHARE_DEDUCTION_CHOICEBTN);
 
 		final Label dateLabel = UIControlsFactory.createLabel(middlePanel, "Date");
 
 		final DateTime transactionDate = UIControlsFactory.createDate(middlePanel, SWT.MEDIUM,
-				FinanceBindingConstants.TRANSACTION_DATE);
+				FinanceBindingConstants.ID_TRANSACTION_DATE);
 		Label label = UIControlsFactory.createLabel(middlePanel, "");
 		Label label_1 = UIControlsFactory.createLabel(middlePanel, "");
 
 		final Label lblStore = UIControlsFactory.createLabel(middlePanel, "Store");
 
 		final CCombo locationCombo = UIControlsFactory.createCCombo(middlePanel,
-				FinanceBindingConstants.DAIRY_LOCATION_COMBO);
+				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
 		locationCombo.setItems(new String[] { "Route 2 - Ngecha", "Route 3 - Kelly" });
 		locationCombo.select(0);
 		Label label_2 = UIControlsFactory.createLabel(middlePanel, "");
@@ -71,7 +71,7 @@ public class TransactionEntryPanel extends Composite {
 		final Label lblRefNumber = UIControlsFactory.createLabel(middlePanel, "Reference #");
 
 		final Text refNumberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.REF_NUMBER_TEXT);
+				FinanceBindingConstants.ID_REF_NUMBER_TEXT);
 		refNumberText.setTextLimit(20);
 		refNumberText.setText("V-4599887");
 		Label label_4 = UIControlsFactory.createLabel(middlePanel, "");
@@ -81,7 +81,7 @@ public class TransactionEntryPanel extends Composite {
 		final Label lblRecordId = UIControlsFactory.createLabel(middlePanel, "Record ID");
 
 		final Text recordIDText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.RECORD_ID_TEXT);
+				FinanceBindingConstants.ID_RECORD_ID_TEXT);
 		recordIDText.setTextLimit(5);
 		recordIDText.setText("2");
 		Label label_7 = UIControlsFactory.createLabel(middlePanel, "");
@@ -91,12 +91,12 @@ public class TransactionEntryPanel extends Composite {
 		final Label lblMember = UIControlsFactory.createLabel(middlePanel, "Member");
 
 		final Text memberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.MEMBER_NAME_TEXT);
+				FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberText.setTextLimit(20);
 		memberText.setText("#45678");
 
 		ImageButton btnMemberLookup = UIControlsFactory.createImageButton(middlePanel, SWT.NULL,
-				FinanceBindingConstants.MEMBER_LOOKUP_BTN);
+				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
 		final Image lookupIcon = Activator.getDefault().getImageRegistry().get(Activator.MEMBER_SEARCH_ICON);
 		btnMemberLookup.setImage(lookupIcon);
 		Label label_10 = UIControlsFactory.createLabel(middlePanel, "");
@@ -105,7 +105,7 @@ public class TransactionEntryPanel extends Composite {
 		final Label lblAmount = UIControlsFactory.createLabel(middlePanel, "Amount");
 
 		final Text amountText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.TRANSACTION_AMOUNT_TEXT);
+				FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
 		amountText.setTextLimit(20);
 		amountText.setText("90");
 		Label label_12 = UIControlsFactory.createLabel(middlePanel, "");
@@ -114,20 +114,20 @@ public class TransactionEntryPanel extends Composite {
 		Label lblDescription = UIControlsFactory.createLabel(middlePanel, "Description");
 
 		descriptionText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.TRANSACTION_DESCRIPTION_TEXT);
+				FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT);
 		Label label_14 = UIControlsFactory.createLabel(middlePanel, "");
 		Label label_15 = UIControlsFactory.createLabel(middlePanel, "");
 
 		final Label lblCheckNumber = UIControlsFactory.createLabel(middlePanel, "Check Number");
 
 		checkNumberText = UIControlsFactory
-				.createText(middlePanel, SWT.NONE, FinanceBindingConstants.CHECK_NUMBER_TEXT);
+				.createText(middlePanel, SWT.NONE, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT);
 		Label label_16 = UIControlsFactory.createLabel(middlePanel, "");
 		Label label_17 = UIControlsFactory.createLabel(middlePanel, "");
 
 		final Label lblSignedBy = UIControlsFactory.createLabel(middlePanel, "Signed By");
 
-		signedByText = UIControlsFactory.createText(middlePanel, SWT.NONE, FinanceBindingConstants.SIGNED_BY_TEXT);
+		signedByText = UIControlsFactory.createText(middlePanel, SWT.NONE, FinanceBindingConstants.ID_SIGNED_BY_TEXT);
 		Label label_18 = UIControlsFactory.createLabel(middlePanel, "");
 		Label label_19 = UIControlsFactory.createLabel(middlePanel, "");
 

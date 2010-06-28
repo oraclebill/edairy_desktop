@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
+import com.agritrace.edairy.desktop.finance.ui.FormConstants;
+
 public abstract class LabeledRow<T extends Control> extends Composite {
 
 	private Label label;

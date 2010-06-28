@@ -68,7 +68,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 
 	protected void createControls(Composite parent) {
 		// Create filter
-		createFilter(parent);
+		createFilterArea(parent);
 		// Create table list
 		createTable(parent);
 		// Create buttons
@@ -80,7 +80,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	 * 
 	 * @param parent
 	 */
-	private void createFilter(Composite parent) {
+	private void createFilterArea(Composite parent) {
 		final Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).equalWidth(true).numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
@@ -157,7 +157,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	}
 
 	/**
-	 * Creates the buttons for directory view By default, 'View' and 'Add new'
+	 * Creates a composite and the buttons for directory view By default, 'View' and 'Add new'
 	 * buttons are created.
 	 * 
 	 * @param parent

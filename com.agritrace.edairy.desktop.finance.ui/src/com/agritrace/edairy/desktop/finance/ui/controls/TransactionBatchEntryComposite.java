@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.finance.ui.FormConstants;
+
 /**
  * A master details widget with a text fields for renaming a person.
  */

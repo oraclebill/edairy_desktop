@@ -23,7 +23,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.finance.ui.controls.FormConstants;
+import com.agritrace.edairy.desktop.finance.ui.FormConstants;
 
 /**
  * A IMasterDetailsDelegate that edit an AccountTransaction.

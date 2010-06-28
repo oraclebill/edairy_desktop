@@ -23,7 +23,8 @@ import com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterVi
 
 public class TransactionSourceComposite extends Composite {
 
-	private final static LnFUpdater LNF_UPDATER = new LnFUpdater();
+	public static final LnFUpdater LNF_UPDATER = new LnFUpdater();
+	
 	public static final Color CYAN = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_CYAN);
 
 	public static final String LABEL = "transaction-type-compsite.label";
@@ -34,7 +35,7 @@ public class TransactionSourceComposite extends Composite {
 	public static final String CHOICE_SHARE_DEDUCTION = "CHOICE_COMPOSITE-CHOICE_SHARE_DEDUCTION";
 
 	private final Label label;
-//	private final ChoiceComposite txypeCodeChoice;
+	// private final ChoiceComposite txypeCodeChoice;
 	private final boolean isMultipleChoice;
 
 	private Button btnStoreCredit;
@@ -66,8 +67,8 @@ public class TransactionSourceComposite extends Composite {
 
 		super(parent, SWT.NONE);
 		isMultipleChoice = multipleChoice;
-		
-		//setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+
+		// setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		FormLayout rowLayout = new FormLayout();
 		rowLayout.marginWidth = rowLayout.marginHeight = 10;
@@ -80,8 +81,8 @@ public class TransactionSourceComposite extends Composite {
 		labelLayoutData.left = new FormAttachment(0, 0);
 		label.setLayoutData(labelLayoutData);
 
-		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, MemberTransactionRegisterView.LEFT,
-				isMultipleChoice, "typeSetRidget");
+		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, SWT.HORIZONTAL, isMultipleChoice,
+				"typeSetRidget");
 
 		FormData fieldLayoutData = new FormData();
 		fieldLayoutData.top = new FormAttachment(0, 5);
@@ -94,7 +95,6 @@ public class TransactionSourceComposite extends Composite {
 		btnStoreCredit.setText("Store Credits");
 		btnStoreCredit.setToolTipText("Account deductions for store purchases using account credit.");
 
-
 		btnClinicalServices = UIControlsFactory.createButtonRadio(typeCodeChoice);
 		btnClinicalServices.setText("Veterinary Services ");
 		btnClinicalServices
@@ -106,16 +106,16 @@ public class TransactionSourceComposite extends Composite {
 
 		btnShareDeductions = UIControlsFactory.createButtonRadio(typeCodeChoice);
 		btnShareDeductions.setText("Share Deductions");
-		btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");	
+		btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");
 	}
-	
+
 	private Button createButton(Composite parent, String text, String toolTipText) {
 		final int buttonStyle = isMultipleChoice ? SWT.CHECK : SWT.RADIO;
 		final Button button = new Button(parent, buttonStyle);
-		
+
 		button.setToolTipText(toolTipText);
 		button.setText(text);
-		
+
 		return button;
 	}
 

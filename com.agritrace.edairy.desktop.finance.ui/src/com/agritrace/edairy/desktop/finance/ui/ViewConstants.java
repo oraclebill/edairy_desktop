@@ -8,4 +8,5 @@ public interface ViewConstants {
 	int LABEL_WIDTH = 90;
 	int LINE_GAP = 12;
 	int COLUMN_GAP = 30;
+	String ID_BTN_BATCH_ENTRY = "ID_BTN_BATCH_ENTRY";
 }

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.controls;
+package com.agritrace.edairy.desktop.finance.ui;
 
 public interface FormConstants {
 

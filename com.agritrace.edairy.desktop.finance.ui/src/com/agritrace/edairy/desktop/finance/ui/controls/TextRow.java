@@ -5,6 +5,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.finance.ui.FormConstants;
+
 public class TextRow extends LabeledRow<Text> {
 	
 	public TextRow(Composite parent, String labelText) {

@@ -8,6 +8,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import com.agritrace.edairy.desktop.finance.ui.FormConstants;
+
 public class SourceButtonRow extends Composite {
 
 		Label lblTransactionSource;

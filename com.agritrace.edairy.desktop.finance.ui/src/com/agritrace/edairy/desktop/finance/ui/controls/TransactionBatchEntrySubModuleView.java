@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.finance.ui.FormConstants;
+
 
 public class TransactionBatchEntrySubModuleView extends SubModuleView implements
 		FormConstants {
