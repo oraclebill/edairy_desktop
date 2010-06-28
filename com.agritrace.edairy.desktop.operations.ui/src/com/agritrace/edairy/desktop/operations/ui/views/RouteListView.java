@@ -19,7 +19,7 @@ public class RouteListView extends AbstractDirectoryView {
 	public static final String BIND_ID_FILTER_DESC = "description-filter-txt";
 
 	@Override
-	protected void createFilterConditions(Composite parent) {
+	protected void createFilterPanel(Composite parent) {
 		parent.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
 				.numColumns(2).create());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);

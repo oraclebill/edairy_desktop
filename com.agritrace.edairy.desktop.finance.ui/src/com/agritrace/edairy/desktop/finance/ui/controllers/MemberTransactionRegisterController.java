@@ -107,7 +107,7 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 	public MemberTransactionRegisterController(ISubModuleNode node) {
 		super(node);
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
-		setEntityClass(AccountTransaction.class);
+//		setEntityClass(AccountTransaction.class);
 		setRepository(memberRepo.getTransactionRepository());
 
 		this.addTableColumn("ID", AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_ID);

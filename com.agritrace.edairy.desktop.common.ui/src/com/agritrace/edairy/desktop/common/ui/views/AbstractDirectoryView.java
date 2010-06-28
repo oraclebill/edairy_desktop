@@ -18,7 +18,16 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 
 /**
- * Common class for directory list view
+ * Base class for standard 'directory' type views. These views contain a filter area, a table area, and a button area.
+ * This class overrides createBasicPartControl and manages the creation of these components and provides standard naming for the widgets involved.
+ * 
+ * BIND_ID_TABLE = table widget (w/o view)
+ * 
+ * BIND_ID_NEW_BUTTON = table widget (w/o view)
+ * BIND_ID_VIEW_BUTTON = table widget (w/o view)
+ * 
+ * BIND_ID_FILTER_SEARCH = table widget (w/o view)
+ * BIND_ID_FILTER_RESET = table widget (w/o view)
  * 
  * @author Hui(Spark) Wan
  * 
@@ -34,11 +43,11 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	/**
 	 * Binding id of the new button {@value} .
 	 */
-	public static final String BIND_ID_NEW = "list.button.new"; //$NON-NLS-1$
+	public static final String BIND_ID_NEW_BUTTON = "list.button.new"; //$NON-NLS-1$
 	/**
 	 * Binding id of the view button {@value} .
 	 */
-	public static final String BIND_ID_VIEW = "list.button.view"; //$NON-NLS-1$
+	public static final String BIND_ID_VIEW_BUTTON = "list.button.view"; //$NON-NLS-1$
 
 	public static final String BIND_ID_FILTER_SEARCH = "filter.button.search";
 	public static final String BIND_ID_FILTER_RESET = "filter.button.resets";
@@ -76,7 +85,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).equalWidth(true).numColumns(3).create());
 		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
 		// Create filter conditions
-		createFilterConditions(comp);
+		createFilterPanel(comp);
 		// Create filter buttons
 		createFilterButtons(comp);
 	}
@@ -86,7 +95,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	 * 
 	 * @param comp
 	 */
-	abstract protected void createFilterConditions(Composite comp) ;
+	abstract protected void createFilterPanel(Composite comp) ;
 	
 
 	protected void createFilterButtons(Composite parent) {
@@ -175,7 +184,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	 * @return
 	 */
 	protected Control createButtonNew(Composite compButton) {
-		return UIControlsFactory.createButton(compButton, "Add New", BIND_ID_NEW);
+		return UIControlsFactory.createButton(compButton, "Add New", BIND_ID_NEW_BUTTON);
 	}
 
 	/**
@@ -185,12 +194,12 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	 *            the parent composite; never null
 	 * 
 	 * @return a Control or null. If this returns null you are responsible for
-	 *         adding a button with the binding id {@link #BIND_ID_NEW} to this
+	 *         adding a button with the binding id {@link #BIND_ID_NEW_BUTTON} to this
 	 *         composite elsewhere &ndash; otherwise 'New' will not be
 	 *         available.
 	 */
 	protected Control createButtonView(Composite compButton) {
-		return UIControlsFactory.createButton(compButton, "View", BIND_ID_VIEW);
+		return UIControlsFactory.createButton(compButton, "View", BIND_ID_VIEW_BUTTON);
 	}
 
 }

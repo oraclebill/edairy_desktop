@@ -12,7 +12,7 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView"
+            class="com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView"
             id="dairy.transactions.register"
             name="Transaction Register"
             restorable="true">

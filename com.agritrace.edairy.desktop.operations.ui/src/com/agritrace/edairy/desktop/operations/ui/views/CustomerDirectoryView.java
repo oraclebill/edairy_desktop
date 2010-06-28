@@ -27,7 +27,7 @@ public class CustomerDirectoryView extends AbstractDirectoryView {
 	public static final String BIND_ID_FILTER_STATUS = "bind.id.filter.status";
 
 	@Override
-	protected void createFilterConditions(Composite parent) {
+	protected void createFilterPanel(Composite parent) {
 		GridLayout gridLayout = (GridLayout) parent.getLayout();
 		gridLayout.marginLeft = 2;
 		gridLayout.marginLeft = 3;

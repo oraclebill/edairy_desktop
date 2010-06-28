@@ -57,7 +57,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	public RouteListController() {
 		setRepository(new RouteRepository());
 		setEClass(DairyPackage.Literals.ROUTE);
-		setEntityClass(Route.class);
+//		setEntityClass(Route.class);
 		
 //		addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
 		addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);

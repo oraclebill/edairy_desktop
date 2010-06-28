@@ -23,9 +23,13 @@ import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 /**
- * Abstract class of RecordList controller
+ * Extension of SubModuleController which provides some utility methods for standard EDairyDesktop views.  
+ * The controller expects it will be used with the AbstractDirectoryView component.
  * 
- * @author Hui(Spark) Wan
+ *  
+ * 
+ * 
+ * @author 
  * 
  */
 public abstract class AbstractDirectoryController<T extends EObject> extends SubModuleController {
@@ -162,14 +166,14 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW);
+		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON);
 		newBtnRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handleNewItemAction();					
 			}
 		});
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
 		viewBtnRidget.setEnabled(false);
 		viewBtnRidget.addListener(new IActionListener() {
 			@Override
@@ -256,7 +260,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	protected abstract String[] getTableColumnPropertyNames();
 
 	protected void itemSelected(SelectionEvent event) {
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW);
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
 		viewBtnRidget.setEnabled(true);
 	}
 

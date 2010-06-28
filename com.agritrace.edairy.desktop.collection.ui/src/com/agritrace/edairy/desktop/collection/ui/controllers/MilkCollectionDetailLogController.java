@@ -61,7 +61,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 
 	public MilkCollectionDetailLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_LINE);
-		setEntityClass(CollectionJournalLine.class);
+//		setEntityClass(CollectionJournalLine.class);
 		setRepository(new MilkCollectionJournalLineRepository());
 
 		addTableColumn("Page", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL); //, new CJLPageFormatter() );

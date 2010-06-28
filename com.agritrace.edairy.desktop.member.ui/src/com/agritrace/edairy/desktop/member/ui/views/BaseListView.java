@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.Composite;
  *
  */
 public abstract class BaseListView extends SubModuleView {
+	public BaseListView() {
+	}
 
 	@Override
 	protected void basicCreatePartControl(Composite parent) {

@@ -32,7 +32,7 @@ import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogView
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView;
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView;
-import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
+import com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
@@ -298,7 +298,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		final IModuleNode financeMembers = NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_REGISTER,
-				"Transaction Journal", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ 
+				"Transaction Journal", financeMembers, MemberTransactionRegisterView.ID); //$NON-NLS-1$ 
 //		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY,
 //				"Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ 
 //		NodeFactory.createSubModule(

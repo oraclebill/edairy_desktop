@@ -49,7 +49,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
-		setEntityClass(CollectionJournalPage.class);
+//		setEntityClass(CollectionJournalPage.class);
 		setRepository(new MilkCollectionJournalRepository());
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
@@ -91,7 +91,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW).setText("Enter Collection Journals");
+		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
 		
 		getRidget(IActionRidget.class, "import-file-button").addListener(new IActionListener() {
 			@Override

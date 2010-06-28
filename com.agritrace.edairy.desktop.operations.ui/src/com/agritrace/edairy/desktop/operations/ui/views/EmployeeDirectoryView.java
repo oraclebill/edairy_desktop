@@ -27,7 +27,7 @@ public class EmployeeDirectoryView extends AbstractDirectoryView {
 	public static final String BIND_ID_FILTER_JOBFUNC = "bind.id.filter.position";
 
 	@Override
-	protected void createFilterConditions(Composite parent) {
+	protected void createFilterPanel(Composite parent) {
 		GridLayout gridLayout = (GridLayout) parent.getLayout();
 		gridLayout.marginLeft = 2;
 		gridLayout.marginLeft = 3;

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.views;
+package com.agritrace.edairy.desktop.finance.ui.controls;
 
 import java.util.HashMap;
 
@@ -19,7 +19,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 
-public class TransactionTypeComposite extends Composite {
+import com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView;
+
+public class TransactionSourceComposite extends Composite {
 
 	private final static LnFUpdater LNF_UPDATER = new LnFUpdater();
 	public static final Color CYAN = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_CYAN);
@@ -48,19 +50,19 @@ public class TransactionTypeComposite extends Composite {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public TransactionTypeComposite(Composite parent) {
+	public TransactionSourceComposite(Composite parent) {
 		this(parent, false, "");
 	}
 
-	public TransactionTypeComposite(Composite parent, boolean multipleChoice) {
+	public TransactionSourceComposite(Composite parent, boolean multipleChoice) {
 		this(parent, multipleChoice, "");
 	}
 
-	public TransactionTypeComposite(Composite parent, String labelString) {
+	public TransactionSourceComposite(Composite parent, String labelString) {
 		this(parent, false, labelString);
 	}
 
-	public TransactionTypeComposite(Composite parent, boolean multipleChoice, String labelString) {
+	public TransactionSourceComposite(Composite parent, boolean multipleChoice, String labelString) {
 
 		super(parent, SWT.NONE);
 		isMultipleChoice = multipleChoice;
@@ -78,7 +80,7 @@ public class TransactionTypeComposite extends Composite {
 		labelLayoutData.left = new FormAttachment(0, 0);
 		label.setLayoutData(labelLayoutData);
 
-		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, AccountTransactionListSubModuleView.LEFT,
+		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, MemberTransactionRegisterView.LEFT,
 				isMultipleChoice, "typeSetRidget");
 
 		FormData fieldLayoutData = new FormData();

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.views;
+package com.agritrace.edairy.desktop.finance.ui.controls;
 
 import org.eclipse.riena.ui.swt.ChoiceComposite;
 import org.eclipse.riena.ui.swt.ImageButton;

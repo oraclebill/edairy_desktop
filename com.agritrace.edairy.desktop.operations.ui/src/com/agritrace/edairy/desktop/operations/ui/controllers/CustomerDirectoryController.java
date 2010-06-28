@@ -39,7 +39,7 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 		super();
 		setRepository(new CustomerRepository());
 		setEClass(DairyPackage.Literals.CUSTOMER);
-		setEntityClass(Customer.class);
+//		setEntityClass(Customer.class);
 		
 		addTableColumn("ID", ModelPackage.Literals.COMPANY__COMPANY_ID );
 		addTableColumn("Type", DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE );

@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanel;
+
 public class CreditJournalView extends ViewPart {
 	public CreditJournalView() {
 		setPartName("Transaction Batch Entry");
