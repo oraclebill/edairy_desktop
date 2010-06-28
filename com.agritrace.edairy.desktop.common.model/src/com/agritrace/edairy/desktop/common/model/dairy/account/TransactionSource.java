@@ -33,16 +33,14 @@ public enum TransactionSource implements Enumerator {
 	STORE_CREDIT(0, "StoreCredit", "STORE_CREDIT"),
 
 	/**
-	 * The '<em><b>Animal Health Services</b></em>' literal object.
+	 * The '<em><b>Clinical Services</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ANIMAL_HEALTH_SERVICES_VALUE
+	 * @see #CLINICAL_SERVICES_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ANIMAL_HEALTH_SERVICES(1, "AnimalHealthServices", "HEALTH_SVCS"),
-
-	/**
+	CLINICAL_SERVICES(1, "ClinicalServices", "CLINICAL_SERVICES"), /**
 	 * The '<em><b>Share Recovery</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -50,7 +48,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SHARE_RECOVERY(2, "ShareRecovery", "SHARE RECOVERY"),
+	SHARE_RECOVERY(2, "ShareRecovery", "SHARE_RECOVERY"),
 
 	/**
 	 * The '<em><b>Cash Payment</b></em>' literal object.
@@ -60,7 +58,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CASH_PAYMENT(3, "CashPayment", "CASH PAYMENT"),
+	CASH_PAYMENT(3, "CashPayment", "CASH_PAYMENT"),
 
 	/**
 	 * The '<em><b>Other</b></em>' literal object.
@@ -88,19 +86,19 @@ public enum TransactionSource implements Enumerator {
 	public static final int STORE_CREDIT_VALUE = 0;
 
 	/**
-	 * The '<em><b>Animal Health Services</b></em>' literal value.
+	 * The '<em><b>Clinical Services</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Animal Health Services</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Clinical Services</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ANIMAL_HEALTH_SERVICES
-	 * @model name="AnimalHealthServices" literal="HEALTH_SVCS"
+	 * @see #CLINICAL_SERVICES
+	 * @model name="ClinicalServices" literal="CLINICAL_SERVICES"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ANIMAL_HEALTH_SERVICES_VALUE = 1;
+	public static final int CLINICAL_SERVICES_VALUE = 1;
 
 	/**
 	 * The '<em><b>Share Recovery</b></em>' literal value.
@@ -111,7 +109,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SHARE_RECOVERY
-	 * @model name="ShareRecovery" literal="SHARE RECOVERY"
+	 * @model name="ShareRecovery" literal="SHARE_RECOVERY"
 	 * @generated
 	 * @ordered
 	 */
@@ -126,7 +124,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CASH_PAYMENT
-	 * @model name="CashPayment" literal="CASH PAYMENT"
+	 * @model name="CashPayment" literal="CASH_PAYMENT"
 	 * @generated
 	 * @ordered
 	 */
@@ -156,7 +154,7 @@ public enum TransactionSource implements Enumerator {
 	private static final TransactionSource[] VALUES_ARRAY =
 		new TransactionSource[] {
 			STORE_CREDIT,
-			ANIMAL_HEALTH_SERVICES,
+			CLINICAL_SERVICES,
 			SHARE_RECOVERY,
 			CASH_PAYMENT,
 			OTHER,
@@ -211,7 +209,7 @@ public enum TransactionSource implements Enumerator {
 	public static TransactionSource get(int value) {
 		switch (value) {
 			case STORE_CREDIT_VALUE: return STORE_CREDIT;
-			case ANIMAL_HEALTH_SERVICES_VALUE: return ANIMAL_HEALTH_SERVICES;
+			case CLINICAL_SERVICES_VALUE: return CLINICAL_SERVICES;
 			case SHARE_RECOVERY_VALUE: return SHARE_RECOVERY;
 			case CASH_PAYMENT_VALUE: return CASH_PAYMENT;
 			case OTHER_VALUE: return OTHER;

@@ -7,7 +7,7 @@
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView"
             id="edairy.desktop.credit-journal-entry"
-            name="Credit Journal Entry"
+            name="Transaction Batch Entry"
             restorable="true">
       </view>
       <view

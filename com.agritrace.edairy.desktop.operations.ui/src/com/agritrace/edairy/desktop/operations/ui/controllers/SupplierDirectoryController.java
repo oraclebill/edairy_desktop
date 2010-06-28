@@ -23,7 +23,7 @@ import com.agritrace.edairy.desktop.operations.services.supplier.SupplierReposit
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 
-public class SupplierDirectoryView extends BasicDirectoryController {
+public class SupplierDirectoryController extends BasicDirectoryController {
 
 	// filter ridgets
 	private IComboRidget statusCombo;
@@ -33,7 +33,7 @@ public class SupplierDirectoryView extends BasicDirectoryController {
 	// filter bean
 	private final SupplierSearchBean searchBean = new SupplierSearchBean();
 
-	public SupplierDirectoryView() {
+	public SupplierDirectoryController() {
 		super();
 
 		setRepository(new SupplierRepository());

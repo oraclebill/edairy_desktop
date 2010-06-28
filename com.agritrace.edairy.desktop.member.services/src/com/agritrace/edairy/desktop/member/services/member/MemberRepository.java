@@ -2,9 +2,8 @@ package com.agritrace.edairy.desktop.member.services.member;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
@@ -12,6 +11,15 @@ import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
 public class MemberRepository implements IMemberRepository {
+	
+	private IRepository<AccountTransaction> transactionRepository = new HibernateRepository<AccountTransaction>() {
+
+		@Override
+		protected Class<?> getClassType() {
+			return AccountTransaction.class;
+		}
+		
+	};
 	
 	private final IRepository<Membership> driver;
 
@@ -83,6 +91,11 @@ public class MemberRepository implements IMemberRepository {
 	@Override
 	public List<Farm> getMemberFarms() {
 		return (List<Farm>) driver.find("FROM Farm");
+	}
+
+	@Override
+	public IRepository<AccountTransaction> getTransactionRepository() {
+		return transactionRepository;
 	}
 	
 }

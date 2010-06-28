@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="radiogroup-0.1.0.jar" sourcepath="radiogroup-0.1.0-src.zip"/>
 	<classpathentry kind="lib" path="formattedtext-1.0.0.jar" sourcepath="formattedtext-1.0.0-src.zip"/>
 	<classpathentry kind="lib" path="datechooser-1.0.0.jar" sourcepath="datechooser-1.0.0-src.zip"/>
+	<classpathentry kind="lib" path="swing2swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

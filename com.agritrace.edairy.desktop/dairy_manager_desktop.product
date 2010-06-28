@@ -68,6 +68,7 @@
       <plugin id="javax.servlet"/>
       <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.beanutils"/>
+      <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.oro"/>
       <plugin id="org.dom4j"/>

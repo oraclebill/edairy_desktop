@@ -11,6 +11,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 
@@ -29,6 +30,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,6 +43,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getAccountId <em>Account Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getEstablished <em>Established</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getTransactions <em>Transactions</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getBalances <em>Balances</em>}</li>
@@ -98,6 +102,26 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @ordered
 	 */
 	protected Date established = ESTABLISHED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final AccountStatus STATUS_EDEFAULT = AccountStatus.ACTIVE;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected AccountStatus status = STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -265,6 +289,27 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public AccountStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(AccountStatus newStatus) {
+		AccountStatus oldStatus = status;
+		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getType() {
 		return type;
 	}
@@ -288,7 +333,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	public EList<AccountTransaction> getTransactions() {
 		if (transactions == null) {
-			transactions = new EObjectResolvingEList<AccountTransaction>(AccountTransaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS);
+			transactions = new EObjectWithInverseResolvingEList<AccountTransaction>(AccountTransaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT);
 		}
 		return transactions;
 	}
@@ -310,6 +355,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -317,6 +363,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				if (member != null)
 					msgs = ((InternalEObject)member).eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
 				return basicSetMember((Membership)otherEnd, msgs);
+			case AccountPackage.ACCOUNT__TRANSACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransactions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -331,6 +379,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__MEMBER:
 				return basicSetMember(null, msgs);
+			case AccountPackage.ACCOUNT__TRANSACTIONS:
+				return ((InternalEList<?>)getTransactions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -350,6 +400,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return basicGetMember();
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				return getEstablished();
+			case AccountPackage.ACCOUNT__STATUS:
+				return getStatus();
 			case AccountPackage.ACCOUNT__TYPE:
 				return getType();
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
@@ -377,6 +429,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return;
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				setEstablished((Date)newValue);
+				return;
+			case AccountPackage.ACCOUNT__STATUS:
+				setStatus((AccountStatus)newValue);
 				return;
 			case AccountPackage.ACCOUNT__TYPE:
 				setType((String)newValue);
@@ -410,6 +465,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				setEstablished(ESTABLISHED_EDEFAULT);
 				return;
+			case AccountPackage.ACCOUNT__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case AccountPackage.ACCOUNT__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -437,6 +495,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return member != null;
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				return ESTABLISHED_EDEFAULT == null ? established != null : !ESTABLISHED_EDEFAULT.equals(established);
+			case AccountPackage.ACCOUNT__STATUS:
+				return status != STATUS_EDEFAULT;
 			case AccountPackage.ACCOUNT__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
@@ -461,6 +521,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		result.append(accountId);
 		result.append(", established: ");
 		result.append(established);
+		result.append(", status: ");
+		result.append(status);
 		result.append(", type: ");
 		result.append(type);
 		result.append(')');

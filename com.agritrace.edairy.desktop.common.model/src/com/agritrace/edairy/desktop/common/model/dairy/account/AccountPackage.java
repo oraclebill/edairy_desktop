@@ -98,13 +98,22 @@ public interface AccountPackage extends EPackage {
 	int ACCOUNT__ESTABLISHED = 2;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT__STATUS = 3;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__TYPE = 3;
+	int ACCOUNT__TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Transactions</b></em>' reference list.
@@ -113,7 +122,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__TRANSACTIONS = 4;
+	int ACCOUNT__TRANSACTIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Balances</b></em>' reference list.
@@ -122,7 +131,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__BALANCES = 5;
+	int ACCOUNT__BALANCES = 6;
 
 	/**
 	 * The number of structural features of the '<em>Account</em>' class.
@@ -131,7 +140,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_FEATURE_COUNT = 6;
+	int ACCOUNT_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl <em>Transaction</em>}' class.
@@ -153,13 +162,22 @@ public interface AccountPackage extends EPackage {
 	int ACCOUNT_TRANSACTION__TRANSACTION_ID = 0;
 
 	/**
+	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__REFERENCE_NUMBER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Account</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__ACCOUNT = 1;
+	int ACCOUNT_TRANSACTION__ACCOUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Transaction Type</b></em>' attribute.
@@ -168,7 +186,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__TRANSACTION_TYPE = 2;
+	int ACCOUNT_TRANSACTION__TRANSACTION_TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' attribute.
@@ -177,7 +195,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__SOURCE = 3;
+	int ACCOUNT_TRANSACTION__SOURCE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Amount</b></em>' attribute.
@@ -186,7 +204,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__AMOUNT = 4;
+	int ACCOUNT_TRANSACTION__AMOUNT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -195,7 +213,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__DESCRIPTION = 5;
+	int ACCOUNT_TRANSACTION__DESCRIPTION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Transaction Date</b></em>' attribute.
@@ -204,7 +222,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__TRANSACTION_DATE = 6;
+	int ACCOUNT_TRANSACTION__TRANSACTION_DATE = 7;
 
 	/**
 	 * The number of structural features of the '<em>Transaction</em>' class.
@@ -213,7 +231,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION_FEATURE_COUNT = 7;
+	int ACCOUNT_TRANSACTION_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl <em>Balance Point</em>}' class.
@@ -301,6 +319,17 @@ public interface AccountPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus <em>Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAccountStatus()
+	 * @generated
+	 */
+	int ACCOUNT_STATUS = 5;
+
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -342,6 +371,17 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAccount_Established();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus()
+	 * @see #getAccount()
+	 * @generated
+	 */
+	EAttribute getAccount_Status();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getType <em>Type</em>}'.
@@ -396,6 +436,17 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAccountTransaction_TransactionId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getReferenceNumber <em>Reference Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getReferenceNumber()
+	 * @see #getAccountTransaction()
+	 * @generated
+	 */
+	EAttribute getAccountTransaction_ReferenceNumber();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}'.
@@ -549,6 +600,16 @@ public interface AccountPackage extends EPackage {
 	EEnum getTransactionSource();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Status</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+	 * @generated
+	 */
+	EEnum getAccountStatus();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,6 +666,14 @@ public interface AccountPackage extends EPackage {
 		EAttribute ACCOUNT__ESTABLISHED = eINSTANCE.getAccount_Established();
 
 		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACCOUNT__STATUS = eINSTANCE.getAccount_Status();
+
+		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -645,6 +714,14 @@ public interface AccountPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACCOUNT_TRANSACTION__TRANSACTION_ID = eINSTANCE.getAccountTransaction_TransactionId();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACCOUNT_TRANSACTION__REFERENCE_NUMBER = eINSTANCE.getAccountTransaction_ReferenceNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Account</b></em>' reference feature.
@@ -763,6 +840,16 @@ public interface AccountPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TRANSACTION_SOURCE = eINSTANCE.getTransactionSource();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus <em>Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAccountStatus()
+		 * @generated
+		 */
+		EEnum ACCOUNT_STATUS = eINSTANCE.getAccountStatus();
 
 	}
 

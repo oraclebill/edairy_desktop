@@ -219,7 +219,13 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	 * 
 	 * @return
 	 */
-	protected abstract Class<?> getEntityClass();
+	final protected Class<?> getEntityClass() {
+		EClass eClass = getEClass();
+		if (eClass != null) 
+			return eClass.getInstanceClass();
+		else 
+			return null;
+	}
 
 	/**
 	 * Gets filter class

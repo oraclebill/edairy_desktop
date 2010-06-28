@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui.beans;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +11,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
@@ -21,7 +23,7 @@ public class TestAccountTransactionGenerator {
 
 	Random rand = new Random();
 
-	static final String[] SOURCE_OPTIONS = { "Credit Sale", "Veterinary Services", "Cash Payment", "Share Deduction" };
+//	static final TransactionSource[] SOURCE_OPTIONS = { "Credit Sale", "Veterinary Services", "Cash Payment", "Share Deduction" };
 	static final String[] NAMES = { "Bill", "Walt", "Ginger", "Rodgers", "Antonia", "Lilly", "Sam", "Dave", "Cross",
 			"Creed" };
 	static final TransactionType[] TRANSACTION_TYPES = TransactionType.values();
@@ -30,13 +32,17 @@ public class TestAccountTransactionGenerator {
 
 	}
 
-	String randomSelect(String[] options) {
-		int selection = Math.abs(rand.nextInt()) % options.length;
-		return options[selection];
+	<X> X randomSelect(X[] options) {
+		return randomSelect(Arrays.asList(options));
 	}
 
-	String randomSource() {
-		return randomSelect(SOURCE_OPTIONS);
+	 <X> X randomSelect(List<X> options) {
+		int selection = Math.abs(rand.nextInt()) % options.size();
+		return options.get(selection);
+	}
+
+	TransactionSource randomSource() {
+		return randomSelect(TransactionSource.VALUES);
 	}
 
 	@SuppressWarnings("deprecation")

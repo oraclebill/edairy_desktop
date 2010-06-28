@@ -40,17 +40,10 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		super(navigationNode);
 	}
 
-	protected void setEntityClass(Class<? extends EObject> entityClass) {
-		this.entityClass = entityClass;
+	final protected void setEntityClass(Class<? extends EObject> entityClass) {
+		throw new UnsupportedOperationException();
 	}
 	
-	final protected Class<?> getEntityClass() {
-		if (eClass != null) 
-			return eClass.getInstanceClass();
-		else 
-			return null;
-	}
-
 	protected void setEClass(EClass eClass) { 
 		this.eClass = eClass;
 	}

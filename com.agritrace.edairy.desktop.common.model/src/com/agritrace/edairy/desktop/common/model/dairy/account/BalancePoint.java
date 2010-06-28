@@ -44,7 +44,7 @@ public interface BalancePoint extends EObject {
 	 * @return the value of the '<em>Account Balance Id</em>' attribute.
 	 * @see #setAccountBalanceId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getBalancePoint_AccountBalanceId()
-	 * @model
+	 * @model id="true" required="true"
 	 * @generated
 	 */
 	long getAccountBalanceId();

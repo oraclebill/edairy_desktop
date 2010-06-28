@@ -231,11 +231,6 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	}
 
 	@Override
-	protected Class<?> getEntityClass() {
-		return AnimalHealthRequest.class;
-	}
-
-	@Override
 	protected List getFilteredResult() {
 		try {
 			List<AnimalHealthRequest> requests = myDairy.allRequests();

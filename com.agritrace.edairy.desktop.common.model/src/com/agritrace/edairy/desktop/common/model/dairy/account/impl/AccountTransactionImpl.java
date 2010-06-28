@@ -9,12 +9,14 @@ package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -29,6 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getTransactionId <em>Transaction Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getTransactionType <em>Transaction Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl#getSource <em>Source</em>}</li>
@@ -60,6 +63,26 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @ordered
 	 */
 	protected long transactionId = TRANSACTION_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferenceNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REFERENCE_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferenceNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String referenceNumber = REFERENCE_NUMBER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAccount() <em>Account</em>}' reference.
@@ -99,7 +122,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SOURCE_EDEFAULT = null;
+	protected static final TransactionSource SOURCE_EDEFAULT = TransactionSource.STORE_CREDIT;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' attribute.
@@ -109,7 +132,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 * @ordered
 	 */
-	protected String source = SOURCE_EDEFAULT;
+	protected TransactionSource source = SOURCE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getAmount() <em>Amount</em>}' attribute.
@@ -216,6 +239,27 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getReferenceNumber() {
+		return referenceNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferenceNumber(String newReferenceNumber) {
+		String oldReferenceNumber = referenceNumber;
+		referenceNumber = newReferenceNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Account getAccount() {
 		if (account != null && account.eIsProxy()) {
 			InternalEObject oldAccount = (InternalEObject)account;
@@ -242,11 +286,33 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAccount(Account newAccount) {
+	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
 		Account oldAccount = account;
 		account = newAccount;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT, oldAccount, account));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT, oldAccount, newAccount);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAccount(Account newAccount) {
+		if (newAccount != account) {
+			NotificationChain msgs = null;
+			if (account != null)
+				msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+			if (newAccount != null)
+				msgs = ((InternalEObject)newAccount).eInverseAdd(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+			msgs = basicSetAccount(newAccount, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT, newAccount, newAccount));
 	}
 
 	/**
@@ -275,7 +341,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSource() {
+	public TransactionSource getSource() {
 		return source;
 	}
 
@@ -284,9 +350,9 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(String newSource) {
-		String oldSource = source;
-		source = newSource;
+	public void setSource(TransactionSource newSource) {
+		TransactionSource oldSource = source;
+		source = newSource == null ? SOURCE_EDEFAULT : newSource;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__SOURCE, oldSource, source));
 	}
@@ -360,10 +426,42 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
+				if (account != null)
+					msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+				return basicSetAccount((Account)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
+				return basicSetAccount(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_ID:
 				return getTransactionId();
+			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
+				return getReferenceNumber();
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
 				if (resolve) return getAccount();
 				return basicGetAccount();
@@ -392,6 +490,9 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_ID:
 				setTransactionId((Long)newValue);
 				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
+				setReferenceNumber((String)newValue);
+				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
 				setAccount((Account)newValue);
 				return;
@@ -399,7 +500,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 				setTransactionType((TransactionType)newValue);
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
-				setSource((String)newValue);
+				setSource((TransactionSource)newValue);
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
 				setAmount((Double)newValue);
@@ -424,6 +525,9 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 		switch (featureID) {
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_ID:
 				setTransactionId(TRANSACTION_ID_EDEFAULT);
+				return;
+			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
+				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
 				setAccount((Account)null);
@@ -457,12 +561,14 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 		switch (featureID) {
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_ID:
 				return transactionId != TRANSACTION_ID_EDEFAULT;
+			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
+				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT:
 				return account != null;
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_TYPE:
 				return transactionType != TRANSACTION_TYPE_EDEFAULT;
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
-				return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT.equals(source);
+				return source != SOURCE_EDEFAULT;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
 				return amount != AMOUNT_EDEFAULT;
 			case AccountPackage.ACCOUNT_TRANSACTION__DESCRIPTION:
@@ -485,6 +591,8 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (transactionId: ");
 		result.append(transactionId);
+		result.append(", referenceNumber: ");
+		result.append(referenceNumber);
 		result.append(", transactionType: ");
 		result.append(transactionType);
 		result.append(", source: ");

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountId <em>Account Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getEstablished <em>Established</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getTransactions <em>Transactions</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getBalances <em>Balances</em>}</li>
@@ -47,7 +48,7 @@ public interface Account extends EObject {
 	 * @return the value of the '<em>Account Id</em>' attribute.
 	 * @see #setAccountId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_AccountId()
-	 * @model
+	 * @model id="true" required="true"
 	 * @generated
 	 */
 	long getAccountId();
@@ -75,7 +76,7 @@ public interface Account extends EObject {
 	 * @see #setMember(Membership)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Member()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount
-	 * @model opposite="account"
+	 * @model opposite="account" required="true"
 	 * @generated
 	 */
 	Membership getMember();
@@ -117,6 +118,36 @@ public interface Account extends EObject {
 	void setEstablished(Date value);
 
 	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+	 * @see #setStatus(AccountStatus)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Status()
+	 * @model default="0" required="true"
+	 * @generated
+	 */
+	AccountStatus getStatus();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(AccountStatus value);
+
+	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -145,6 +176,7 @@ public interface Account extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Transactions</b></em>' reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transactions</em>' reference list isn't clear,
@@ -153,7 +185,8 @@ public interface Account extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transactions</em>' reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Transactions()
-	 * @model
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount
+	 * @model opposite="account"
 	 * @generated
 	 */
 	EList<AccountTransaction> getTransactions();

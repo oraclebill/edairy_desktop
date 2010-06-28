@@ -53,6 +53,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -694,7 +695,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		tstTransaction.setTransactionId(789123l);
 		tstTransaction.setTransactionType(TransactionType.CREDIT);
 		tstTransaction.setTransactionDate(new Date());
-		tstTransaction.setSource("test source");
+		tstTransaction.setSource(TransactionSource.CASH_PAYMENT);
 		tstTransaction.setDescription("test transaction description");
 		tstTransaction.setAmount(200d);
 		tstTransaction.setAccount(tstAccount);

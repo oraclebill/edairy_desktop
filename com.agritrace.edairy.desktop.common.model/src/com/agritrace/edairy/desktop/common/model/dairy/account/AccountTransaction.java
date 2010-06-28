@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionId <em>Transaction Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionType <em>Transaction Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getSource <em>Source</em>}</li>
@@ -44,7 +45,7 @@ public interface AccountTransaction extends EObject {
 	 * @return the value of the '<em>Transaction Id</em>' attribute.
 	 * @see #setTransactionId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccountTransaction_TransactionId()
-	 * @model required="true"
+	 * @model id="true" required="true"
 	 * @generated
 	 */
 	long getTransactionId();
@@ -60,7 +61,34 @@ public interface AccountTransaction extends EObject {
 	void setTransactionId(long value);
 
 	/**
+	 * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reference Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reference Number</em>' attribute.
+	 * @see #setReferenceNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccountTransaction_ReferenceNumber()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getReferenceNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getReferenceNumber <em>Reference Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reference Number</em>' attribute.
+	 * @see #getReferenceNumber()
+	 * @generated
+	 */
+	void setReferenceNumber(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Account</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getTransactions <em>Transactions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Account</em>' reference isn't clear,
@@ -70,7 +98,8 @@ public interface AccountTransaction extends EObject {
 	 * @return the value of the '<em>Account</em>' reference.
 	 * @see #setAccount(Account)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccountTransaction_Account()
-	 * @model required="true"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Account#getTransactions
+	 * @model opposite="transactions" keys="accountId" required="true"
 	 * @generated
 	 */
 	Account getAccount();
@@ -116,6 +145,7 @@ public interface AccountTransaction extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' attribute isn't clear,
@@ -123,22 +153,24 @@ public interface AccountTransaction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' attribute.
-	 * @see #setSource(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
+	 * @see #setSource(TransactionSource)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccountTransaction_Source()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
-	String getSource();
+	TransactionSource getSource();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getSource <em>Source</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(String value);
+	void setSource(TransactionSource value);
 
 	/**
 	 * Returns the value of the '<em><b>Amount</b></em>' attribute.
