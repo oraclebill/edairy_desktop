@@ -199,36 +199,6 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		app.create(new NavigationNodeId(MilkSubAppConstants.SUBAPP_MILK));
-//		app.addChild(subAppNode);
-//		workarea.registerDefinition(subAppNode, MilkSubAppConstants.SUBAPP_MILK_VIEWID);
-//
-//		//
-//		// COLLECTION MODULE GROUP
-//		//
-//		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MilkSubAppConstants.MODULE_GROUP_MILK));
-//		subAppNode.addChild(moduleGroupNode);
-//
-//		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_COLLECTIONS, "Milk Collection",
-//				moduleGroupNode);
-//
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_REGISTER, "Collection Log",
-//				moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class); //$NON-NLS-1$ 
-//
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
-//				"Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
-//				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
-//
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY, "Log New Collections",
-//				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
-//
-//		//
-//		// DELIVERY MODULE GROUP
-//		//
-//		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
-//				moduleGroupNode);
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
-//				"Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ 
-//		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
 		// MEMBER TAB
@@ -286,6 +256,9 @@ public class EDairyManagerApplication extends SwtApplication {
 		// FINANCE TAB
 		//
 
+		app.create(new NavigationNodeId(SUBAPP_FINANCE));
+
+		/************
 		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_FINANCE), LABEL_FINANCE);
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, TAB_FINANCE);
@@ -307,7 +280,8 @@ public class EDairyManagerApplication extends SwtApplication {
 //				.createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER, "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ 
 //		NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
 //				"Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ 
-
+		 ************/
+		
 		//
 		// VETERINARY TAB
 		//

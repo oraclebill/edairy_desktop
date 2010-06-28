@@ -18,6 +18,7 @@ import org.eclipse.riena.core.RienaStatus;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
+import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
@@ -206,7 +207,21 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 				
 				throw new UnsupportedOperationException();
 //				tableRidget.bindToModel(rowObservables, rowClass, columnPropertyNames, columnHeaders);
-			} else {
+			}
+			else if (ridget instanceof ISingleChoiceRidget) {
+				final ISingleChoiceRidget singleChoice = (ISingleChoiceRidget) ridget;
+				//final IComboRidget 		comboRidget = (IComboRidget) ridget;
+				final IObservableList 	optionValues = binding.getDomainList();
+				final Class<?>			rowClass = binding.getEntityClass();
+				final IObservableValue 	selectionValue =  EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy());
+				
+				if (optionValues == null || rowClass == null || selectionValue == null) {
+					throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" +
+							optionValues + ", " + rowClass + ", " + selectionValue + ")" );
+				}
+				singleChoice.bindToModel(optionValues, selectionValue);
+			}
+			else {
 				throw new UnsupportedOperationException("Ridget classs '" + ridget.getClass().getName()
 						+ "' is not supported.");
 			}

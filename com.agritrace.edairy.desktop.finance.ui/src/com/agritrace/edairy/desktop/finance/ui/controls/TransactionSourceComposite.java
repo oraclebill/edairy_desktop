@@ -1,31 +1,23 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
-import java.util.HashMap;
-
 import org.eclipse.riena.ui.swt.ChoiceComposite;
 import org.eclipse.riena.ui.swt.lnf.LnFUpdater;
+import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
+import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseTrackAdapter;
-import org.eclipse.swt.events.MouseTrackListener;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.PlatformUI;
 
-import com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView;
+import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionSourceComposite extends Composite {
 
 	public static final LnFUpdater LNF_UPDATER = new LnFUpdater();
-	
-	public static final Color CYAN = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_CYAN);
 
 	public static final String LABEL = "transaction-type-compsite.label";
 	public static final String CHOICE_COMPOSITE = "CHOICE_COMPOSITE";
@@ -64,12 +56,11 @@ public class TransactionSourceComposite extends Composite {
 	}
 
 	public TransactionSourceComposite(Composite parent, boolean multipleChoice, String labelString) {
-
 		super(parent, SWT.NONE);
 		isMultipleChoice = multipleChoice;
 
-		// setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-
+		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+	
 		FormLayout rowLayout = new FormLayout();
 		rowLayout.marginWidth = rowLayout.marginHeight = 10;
 		setLayout(rowLayout);
@@ -81,8 +72,8 @@ public class TransactionSourceComposite extends Composite {
 		labelLayoutData.left = new FormAttachment(0, 0);
 		label.setLayoutData(labelLayoutData);
 
-		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, SWT.HORIZONTAL, isMultipleChoice,
-				"typeSetRidget");
+		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, SWT.BORDER, isMultipleChoice,
+				FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 
 		FormData fieldLayoutData = new FormData();
 		fieldLayoutData.top = new FormAttachment(0, 5);
@@ -90,23 +81,24 @@ public class TransactionSourceComposite extends Composite {
 		fieldLayoutData.right = new FormAttachment(100, 100, 8);
 		fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
 		typeCodeChoice.setLayoutData(fieldLayoutData);
-
-		btnStoreCredit = UIControlsFactory.createButtonRadio(typeCodeChoice);
-		btnStoreCredit.setText("Store Credits");
-		btnStoreCredit.setToolTipText("Account deductions for store purchases using account credit.");
-
-		btnClinicalServices = UIControlsFactory.createButtonRadio(typeCodeChoice);
-		btnClinicalServices.setText("Veterinary Services ");
-		btnClinicalServices
-				.setToolTipText("Account deductions for vet and animal services purchased with account credit.");
-
-		btnPayments = UIControlsFactory.createButtonRadio(typeCodeChoice);
-		btnPayments.setText("Cash Payments");
-		btnPayments.setToolTipText("Account deductions for cash payments to member from members' account.");
-
-		btnShareDeductions = UIControlsFactory.createButtonRadio(typeCodeChoice);
-		btnShareDeductions.setText("Share Deductions");
-		btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");
+//		typeCodeChoice.setOrientation(SWT.HORIZONTAL);
+		
+//		btnStoreCredit = UIControlsFactory.createButtonRadio(typeCodeChoice);
+//		btnStoreCredit.setText("Store Credits");
+//		btnStoreCredit.setToolTipText("Account deductions for store purchases using account credit.");
+//
+//		btnClinicalServices = UIControlsFactory.createButtonRadio(typeCodeChoice);
+//		btnClinicalServices.setText("Veterinary Services ");
+//		btnClinicalServices
+//				.setToolTipText("Account deductions for vet and animal services purchased with account credit.");
+//
+//		btnPayments = UIControlsFactory.createButtonRadio(typeCodeChoice);
+//		btnPayments.setText("Cash Payments");
+//		btnPayments.setToolTipText("Account deductions for cash payments to member from members' account.");
+//
+//		btnShareDeductions = UIControlsFactory.createButtonRadio(typeCodeChoice);
+//		btnShareDeductions.setText("Share Deductions");
+//		btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");
 	}
 
 	private Button createButton(Composite parent, String text, String toolTipText) {

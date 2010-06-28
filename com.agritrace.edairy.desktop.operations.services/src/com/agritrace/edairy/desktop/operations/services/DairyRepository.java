@@ -7,6 +7,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -244,6 +245,11 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public List<Customer> allCustomers() {
 		return customerRepository.all();
+	}
+
+	@Override
+	public List<DairyLocation> getLocalDairyLocations() {
+		return getLocalDairy().getBranchLocations();
 	}
 
 

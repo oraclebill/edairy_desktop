@@ -2,13 +2,19 @@ package com.agritrace.edairy.desktop.finance.ui;
 
 public interface FinanceBindingConstants {
 
-	
 	// from ViewConstants
 	String ID_BTN_BATCH_ENTRY = "ID_BTN_BATCH_ENTRY";
 
-	// member transaction filter panel
+	String FILTER_TXT_MEMBER_LOOKUP = "FILTER_TXT_MEMBER_LOOKUP";
+	String FILTER_TXT_REF_NO = "FILTER_TXT_REF_NO";
+	String FILTER_COMBO_STORE = "FILTER_COMBO_STORE";
+	String FILTER_DATE_START_DATE = "FILTER_COMBO_START_DATE";
+	String FILTER_DATE_END_DATE = "FILTER_COMBO_END_DATE";
+	String FILTER_CHOICE_TX_SOURCE = "FILTER_CHOICE_TX_SOURCE";
+
+	// member transaction edit panel
 	String ID_TRANSACTION_CHOICE = "TRANSACTION_CHOICE";
-	
+
 	String ID_STORE_SALE_CHOICEBTN = "STORE_SALE_BTN";
 	String ID_VETERINARY_CHOICEBTN = "VETERINARY_BTN";
 	String ID_SHARE_DEDUCTION_CHOICEBTN = "SHARE_DEDUCTION_BTN";
@@ -24,27 +30,22 @@ public interface FinanceBindingConstants {
 	String ID_TRANSACTION_DESCRIPTION_TEXT = "TRANSACTION_DESCRIPTION_TEXT";
 	String ID_CHECK_NUMBER_TEXT = "CHECK_NUMBER_TEXT";
 	String ID_SIGNED_BY_TEXT = "SIGNED_BY_TEXT";
-	
 
 	// from Form
-	public static final String BTN_SAVE_ALL_RECORDS = "btnSaveAllRecords";
-	public static final String BTN_CANCEL_ALL = "btnCancelAll";
-	public static final String BTN_VIEW = "btnView";
-	public static final String BTN_DELETE = "btnDelete";
-	public static final String DETAIL_TABLE_RIDGET = "detailTable";
-	public static final String BTN_ADD_TRANSACTION = "btnAddTransaction";
-	public static final String BTN_CLEAR_CURRENT = "btnClearCurrent";
-	public static final String LBL_MEMBER_NAME_RIDGET = "lblMemberName";
-	public static final String SIGNED_BY_TEXT_RIDGET = "signedByText";
-	public static final String CHK_NO_TEXT_RIDGET = "chkNoText";
-	public static final String AMT_TEXT_RIDGET = "amtText";
-	public static final String MEMBER_ID_TEXT_RIDGET = "memberIdText";
-	public static final String REF_NO_TEXT_RIDGET = "refNoText";
-	public static final String STORE_COMBO_RIDGET = "storeText";
-	public static final String DATE_PICKER_RIDGET = "datePicker";
-	public static final String GRP_TRANSACTIONS_TBLLABEL = "grpTransactions";
-	 static final String RECORD_ID_TEXT = "recordIdText";
-	 static final String DESC_TEXT = "descText";
+	String BTN_SAVE_ALL_RECORDS = "btnSaveAllRecords";
+	String BTN_CANCEL_ALL = "btnCancelAll";
+	String BTN_VIEW = "btnView";
+	String BTN_DELETE = "btnDelete";
+	String DETAIL_TABLE_RIDGET = "detailTable";
+	String BTN_ADD_TRANSACTION = "btnAddTransaction";
+	String BTN_CLEAR_CURRENT = "btnClearCurrent";
+	String LBL_MEMBER_NAME_RIDGET = "lblMemberName";
+	String SIGNED_BY_TEXT_RIDGET = "signedByText";
+	String CHK_NO_TEXT_RIDGET = "chkNoText";
+	String AMT_TEXT_RIDGET = "amtText";
+	String GRP_TRANSACTIONS_TBLLABEL = "grpTransactions";
 
+	static final String RECORD_ID_TEXT = "recordIdText";
+	static final String DESC_TEXT = "descText";
 
 }

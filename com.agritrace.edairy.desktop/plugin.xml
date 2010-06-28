@@ -277,6 +277,11 @@
             assembler="com.agritrace.edairy.desktop.collection.ui.navigation.MilkNavigationNodeAssembler"
             parentNodeId="application">
       </assembly2>
+      <assembly2
+            id="com.agritrace.edairy.desktop.finance"
+            assembler="com.agritrace.edairy.desktop.finance.ui.navigation.FinanceNavigationNodeAssembler"
+            parentNodeId="application">
+      </assembly2>
       <!--
     <assembly2
           id="com.agritrace.edairy.desktop.assembly"

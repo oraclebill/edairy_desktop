@@ -10,14 +10,15 @@ import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
-import org.apache.commons.collections.functors.TruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -25,9 +26,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
+import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
+import com.agritrace.edairy.desktop.finance.ui.beans.TestAccountTransactionGenerator;
+import com.agritrace.edairy.desktop.finance.ui.dialogs.MemberTransactionEditDialog;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
@@ -98,6 +105,7 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 
 	private IDateTimeRidget startDateRidget, endDateRidget;
 	private ITextRidget memberNameRidget;
+	IComboRidget referenceNumRidget; 
 	private IMultipleChoiceRidget typeSetRidget;
 
 	public MemberTransactionRegisterController() {
@@ -108,26 +116,98 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 		super(node);
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 //		setEntityClass(AccountTransaction.class);
-		setRepository(memberRepo.getTransactionRepository());
+		// TEST
+		//		setRepository(memberRepo.getTransactionRepository());
 
+		setRepository( new IRepository<AccountTransaction>() {
+
+			@Override
+			public List<?> find(String rawQuery) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public List<?> find(String query, Object[] params) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public List<AccountTransaction> all() {
+				// TODO Auto-generated method stub
+				
+				TestAccountTransactionGenerator ret = new TestAccountTransactionGenerator();
+				return ret.createTransactions(30);
+			}
+
+			@Override
+			public AccountTransaction findByKey(long key) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void saveNew(AccountTransaction newEntity) throws AlreadyExistsException {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void update(AccountTransaction updateableEntity) throws NonExistingEntityException {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void delete(AccountTransaction deletableEntity) throws NonExistingEntityException {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void save(Object obj) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		this.addTableColumn("ID", AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE);
 		this.addTableColumn("Source", AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 		this.addTableColumn("Ref. Num.", AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
-		this.addTableColumn("Account ID", AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT);
+		this.addTableColumn("Account ID", AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT, new ColumnFormatter() {
+
+			@Override
+			public String getText(Object element) {
+				String ret = "n/a";
+				if (element instanceof Account) {
+					Account acct = (Account)element;
+					try {
+						ret = acct.getMember().getMember().getFamilyName();
+					}
+					catch(Exception e) {
+						ret = "account # " + acct.getAccountId();
+					}
+				}
+				return ret;
+			}
+			
+		});
 		this.addTableColumn("Amount", AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
 	}
 
 	@Override
 	public void configureFilterRidgets() {
 
-		startDateRidget = getRidget(IDateTimeRidget.class, "startDateRidget");
+		startDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_START_DATE);
 		// startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		endDateRidget = getRidget(IDateTimeRidget.class, "endDateRidget");
+		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
 		// endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 
-		memberNameRidget = getRidget(ITextRidget.class, "memberIdRidget");
-		typeSetRidget = getRidget(IMultipleChoiceRidget.class, "typeSetRidget");
+		referenceNumRidget = getRidget(IComboRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
+		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
+		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 	}
 
 	@Override
@@ -139,8 +219,11 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 		endDateRidget.bindToModel(filterBean, "endDate");
 
 		memberNameRidget.bindToModel(PojoObservables.observeDetailValue(
-				PojoObservables.observeValue(filterBean, "member"), "familyName", String.class));
-
+				PojoObservables.observeValue(filterBean, "member"), "memberId", String.class));
+		
+		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.all(), Membership.class), 
+				Membership.class, "getMemberId", PojoObservables.observeValue(filterBean, "member"));
+		
 		typeSetRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
 				BeansObservables.observeList(filterBean, "sourceOptions"));
 	}
@@ -154,10 +237,10 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 	protected List<AccountTransaction> getFilteredResult() {
 		List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
 		Predicate filterPredicate = buildFilterPredicate();
-		for (AccountTransaction tx : memberRepo.getTransactionRepository().all()) {
-			if (filterPredicate.evaluate(tx)) {
+		for (AccountTransaction tx : getRepository().all()) {
+//			if (filterPredicate.evaluate(tx)) {
 				filtered.add(tx);
-			}
+//			}
 		}
 		return filtered;
 	}
@@ -195,12 +278,12 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 
 	@Override
 	protected RecordDialog<AccountTransaction, ?> getRecordDialog(Shell shell) {
-		// TODO Auto-generated method stub
-		return null;
+		return new MemberTransactionEditDialog(shell);
 	}
 
 	@Override
-	protected void resetFilterConditions() {
+	protected void resetFilterConditions() {		
 		filterBean.clear();
+		updateAllRidgetsFromModel();
 	}
 }
