@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.common.ui.dialogs;
 
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.swt.SWT;
@@ -10,7 +11,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 
 /**
  * Record List Dialog
@@ -18,12 +19,12 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class RecordDialog<T extends EObject, C extends RecordDialogController<T>> 
+public abstract class RecordDialog<T extends EObject, C extends BaseDialogController<T>> 
 	extends BaseDialogView implements DialogConstants {
 
 
 	@Override
-	protected abstract C createController();
+	protected abstract AbstractWindowController createController();
 
 	/**
 	 * Create UI components in this dialog

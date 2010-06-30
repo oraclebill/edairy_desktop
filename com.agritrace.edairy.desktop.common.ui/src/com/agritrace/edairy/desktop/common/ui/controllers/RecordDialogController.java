@@ -1,104 +1,17 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.databinding.UpdateValueStrategy;
-import org.eclipse.core.databinding.conversion.IConverter;
-import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.list.IObservableList;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.core.RienaStatus;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IEditableRidget;
-import org.eclipse.riena.ui.ridgets.IMarkableRidget;
-import org.eclipse.riena.ui.ridgets.IRidget;
-import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
-import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 
 public abstract class RecordDialogController<T extends EObject> extends BaseDialogController<T> {
-
-	private static class FeatureProperties {
-		private String bindingId;
-		private FeaturePath featurePath;
-		private IObservableList domainList;
-		private Class<?> entityClass;
-
-		public FeatureProperties(String bindingId, EStructuralFeature... featureList) {
-			this(bindingId, null, FeaturePath.fromList(featureList));
-		}
-
-		public FeatureProperties(String bindingId, List<?> domainList, EStructuralFeature... featureList) {
-			this(bindingId, domainList, FeaturePath.fromList(featureList));
-		}
-
-		public FeatureProperties(String bindingId, List<?> domainObjects, FeaturePath featurePath) {
-			this.bindingId = bindingId;
-			this.featurePath = featurePath;
-			this.domainList = Observables.staticObservableList(domainObjects);
-		}
-
-		public String getBindingId() {
-			return bindingId;
-		}
-
-		public FeaturePath getFeaturePath() {
-			return featurePath;
-		}
-
-		public IObservableList getDomainList() {
-			return domainList;
-		}
-
-		public void setDomainList(IObservableList domainList) {
-			Assert.isLegal(domainList.getElementType() == getEntityClass(), "Entity class  " + getEntityClass()
-					+ "' and list type '" + domainList.getElementType() + "' not equal");
-			this.domainList = domainList;
-		}
-
-		public Class<?> getEntityClass() {
-			if (entityClass == null) {
-				entityClass = getTailFeature().eClass().getInstanceClass();
-			}
-			return entityClass;
-		}
-
-		public EStructuralFeature getTailFeature() {
-			EStructuralFeature tailFeature = null;
-
-			if (featurePath != null) {
-				EStructuralFeature[] features = featurePath.getFeaturePath();
-				if (features.length > 0) {
-					tailFeature = features[features.length - 1];
-				}
-			}
-
-			return tailFeature;
-		}
-
-	}
-
-	private static class ConverterFactory extends UpdateValueStrategy {
-		@Override
-		public IConverter createConverter(Object fromType, Object toType) {
-			return super.createConverter(fromType, toType);
-		}
-	}
-
-	private static final ConverterFactory converterFactory = new ConverterFactory();
-
-	private final Map<String, FeatureProperties> ridgetPropertyMap = new HashMap<String, FeatureProperties>();
 
 	/**
 	 * Gets working copy for editing
@@ -108,6 +21,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	// protected abstract T createWorkingCopy();
 
 	private EClass eClass;
+	private BindingHelper<T> mapper;
 
 	/**
 	 * Null constructor
@@ -126,6 +40,25 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	protected EClass getEClass() {
 		return this.eClass;
+	}
+
+	public void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
+		getOrCreateMapper().addMapping(ridgetId, featurePath);
+	}
+
+	public void addRidgetFeatureMap(String ridgetId, List<?> domainList, EStructuralFeature... featurePath) {
+		getOrCreateMapper().addMapping(ridgetId, domainList, featurePath);
+	}
+
+	private final BindingHelper<T> getMapper() {
+		return mapper;
+	}
+
+	private final BindingHelper<T> getOrCreateMapper() {
+		if (mapper == null) {
+			mapper = new BindingHelper<T>(this, getWorkingCopy());
+		}
+		return mapper;
 	}
 
 	// /**
@@ -158,141 +91,17 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	}
 
 	/**
-	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped
-	 * ridgets are bound automatically during the configuration process.
-	 * 
-	 * @param ridgetId
-	 * @param featurePath
-	 */
-	protected void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
-		// TODO: automatically create domain list for features that are
-		// instances of an enum type.
-		FeatureProperties props = new FeatureProperties(ridgetId, featurePath);
-		ridgetPropertyMap.put(ridgetId, props);
-	}
-
-	/**
-	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry.
-	 * Combo mappings include domain lists.
-	 * 
-	 * @param ridgetId
-	 * @param featurePath
-	 */
-	protected void addRidgetFeatureMap(String ridgetId, List<?> domainList, EStructuralFeature... featurePath) {
-		FeatureProperties props = new FeatureProperties(ridgetId, domainList, featurePath);
-		ridgetPropertyMap.put(ridgetId, props);
-	}
-
-	private void checkMandatory(FeatureProperties binding, IRidget ridget) {
-		FeaturePath path = binding.getFeaturePath();
-		final EStructuralFeature testFeature = path.getFeaturePath()[0];
-		if (testFeature.isRequired() && ridget instanceof IMarkableRidget) {
-			IMarkableRidget markableValue = (IMarkableRidget) ridget;
-			markableValue.setMandatory(true);
-		}
-	}
-
-	protected void configureMappedRidgets() {
-
-		for (final FeatureProperties binding : ridgetPropertyMap.values()) {
-			final IRidget ridget = getRidget(binding.getBindingId());
-			checkMandatory(binding, ridget);
-
-			if (ridget instanceof IEditableRidget) {
-				final IEditableRidget valueRidget = (IEditableRidget) ridget;
-				valueRidget.bindToModel(EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy()));
-				final IConverter converter = createUI2ModelConverter(valueRidget, binding.getTailFeature());
-				if (converter != null) {
-					valueRidget.setUIControlToModelConverter(converter); // has no effect..
-				}		
-				valueRidget.updateFromModel();
-			} else if (ridget instanceof IComboRidget) {
-				final IComboRidget comboRidget = (IComboRidget) ridget;
-				final IObservableList optionValues = binding.getDomainList();
-				final Class<?> rowClass = binding.getEntityClass();
-				final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(
-						getWorkingCopy());
-
-				checkParameters(optionValues, rowClass, selectionValue);
-				checkMandatory(binding, ridget);
-				comboRidget.bindToModel(optionValues, rowClass, "toString()", selectionValue);
-			} else if (ridget instanceof ITableRidget) {
-				final ITableRidget tableRidget = (ITableRidget) ridget;
-
-				final IObservableList rowObservables = binding.getDomainList();
-				;
-				final String[] columnPropertyNames = new String[] {};
-				final String[] columnHeaders = new String[] {};
-				final Class<?> rowClass = binding.getEntityClass();
-
-				throw new UnsupportedOperationException();
-				// tableRidget.bindToModel(rowObservables, rowClass,
-				// columnPropertyNames, columnHeaders);
-			} else if (ridget instanceof ISingleChoiceRidget) {
-				final ISingleChoiceRidget singleChoice = (ISingleChoiceRidget) ridget;
-				// final IComboRidget comboRidget = (IComboRidget) ridget;
-				final IObservableList optionValues = binding.getDomainList();
-				final Class<?> rowClass = binding.getEntityClass();
-				final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(
-						getWorkingCopy());
-
-				checkParameters(optionValues, rowClass, selectionValue);
-				checkMandatory(binding, ridget);
-				singleChoice.bindToModel(optionValues, selectionValue);
-			} else {
-				throw new UnsupportedOperationException("Ridget classs '" + ridget.getClass().getName()
-						+ "' is not supported.");
-			}					
-		}
-	}
-
-
-	private void checkDefaults(FeatureProperties binding, IRidget ridget) {
-		EStructuralFeature feature = binding.getTailFeature();
-		if (feature.getDefaultValue() != null) {
-			EObject workingCopy = getWorkingCopy();
-			if (workingCopy != null) {
-				Object defaultValue = workingCopy.eGet(feature);
-				// debug code
-				Object currentValue = defaultValue;
-				if (currentValue != defaultValue)
-					workingCopy.eSet(feature, defaultValue);
-				else
-					System.err.println("WARN: default already set in checkDefaults!");
-			} else {
-				// todo: log
-				System.err.println("WARN: null working copy in checkDefaults!");
-			}
-		}
-
-	}
-
-	private void checkParameters(IObservableList optionValues, Class<?> rowClass, IObservableValue selectionValue) {
-		if (optionValues == null || rowClass == null || selectionValue == null) {
-			throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" + optionValues
-					+ ", " + rowClass + ", " + selectionValue + ")");
-		}
-	}
-
-	private IConverter createUI2ModelConverter(IEditableRidget ridget, EStructuralFeature feature) {
-		try {
-			final EClassifier featureType = feature.getEType();
-			final Class featureClass = featureType.getInstanceClass();		
-			return converterFactory.createConverter(String.class, featureClass);
-		}
-		catch(Exception e) {
-			System.err.println("WARN: converter factory failed for feature: " + feature);
-			return null;
-		}
-	}
-
-	/**
 	 * Subclasses should override to perform mappings and configure any
 	 * unmappable ridgets.. The default implementation does nothing.
 	 * 
 	 */
 	protected void configureUserRidgets() {
 
+	}
+
+	private void configureMappedRidgets() {
+		if (getMapper() != null)
+			getMapper().configureRidgets();
 	}
 
 	@Override
@@ -313,16 +122,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	protected int getActionType() {
 		return (Integer) getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
-	}
-
-	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
-		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
-		return map;
-	}
-
-	private Map<String, EStructuralFeature> getRidgetFeatureMap() {
-		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
-		return map;
 	}
 
 	// /**

@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteEditDialogController;
 
 public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogController> {
@@ -31,22 +32,22 @@ public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogControll
 		Label lblRouteCode = UIControlsFactory.createLabel(comp, "Route Code", SWT.NONE);
 		
 		routeCodeTxt = UIControlsFactory.createText(comp);
-		addUIControl(routeCodeTxt, "route-code");
+		addUIControl(routeCodeTxt, ViewConstants.ID_TXT_ROUTE_CODE);
 		
 		Label lblRouteName = UIControlsFactory.createLabel(comp, "Route Name");
 		
 		routeNameTxt = UIControlsFactory.createText(comp);
-		addUIControl(routeNameTxt, "route-name");
+		addUIControl(routeNameTxt, ViewConstants.ID_TXT_ROUTE_NAME);
 		
 		Label lblDescription = UIControlsFactory.createLabel(comp, "Description");
 		
 		routeDescriptionTxt = UIControlsFactory.createText(comp);
-		addUIControl(routeDescriptionTxt, "route-description");
+		addUIControl(routeDescriptionTxt, ViewConstants.ID_TXT_ROUTE_DESCRIPTION);
 		
 		Label lblStops = UIControlsFactory.createLabel(comp, "Stops");
 		
 		List stopsList = UIControlsFactory.createList(comp, false, false);
-		addUIControl(stopsList, "route-stops-list");
+		addUIControl(stopsList, ViewConstants.ID_LST_ROUTE_STOPS);
 
 		GroupLayout gl_comp = new GroupLayout(comp);
 		gl_comp.setHorizontalGroup(
