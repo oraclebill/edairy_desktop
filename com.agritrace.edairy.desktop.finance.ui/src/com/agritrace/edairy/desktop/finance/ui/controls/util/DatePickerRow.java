@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.controls;
+package com.agritrace.edairy.desktop.finance.ui.controls.util;
 
 import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;

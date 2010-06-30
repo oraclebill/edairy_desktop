@@ -13,6 +13,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -147,7 +148,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double AMOUNT_EDEFAULT = 0.0;
+	protected static final BigDecimal AMOUNT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getAmount() <em>Amount</em>}' attribute.
@@ -157,7 +158,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * @generated
 	 * @ordered
 	 */
-	protected double amount = AMOUNT_EDEFAULT;
+	protected BigDecimal amount = AMOUNT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -426,7 +427,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
@@ -435,8 +436,8 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAmount(double newAmount) {
-		double oldAmount = amount;
+	public void setAmount(BigDecimal newAmount) {
+		BigDecimal oldAmount = amount;
 		amount = newAmount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__AMOUNT, oldAmount, amount));
@@ -632,7 +633,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 				setRelatedLocation((DairyLocation)newValue);
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
-				setAmount((Double)newValue);
+				setAmount((BigDecimal)newValue);
 				return;
 			case AccountPackage.ACCOUNT_TRANSACTION__DESCRIPTION:
 				setDescription((String)newValue);
@@ -716,7 +717,7 @@ public class AccountTransactionImpl extends EObjectImpl implements AccountTransa
 			case AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION:
 				return relatedLocation != null;
 			case AccountPackage.ACCOUNT_TRANSACTION__AMOUNT:
-				return amount != AMOUNT_EDEFAULT;
+				return AMOUNT_EDEFAULT == null ? amount != null : !AMOUNT_EDEFAULT.equals(amount);
 			case AccountPackage.ACCOUNT_TRANSACTION__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case AccountPackage.ACCOUNT_TRANSACTION__TRANSACTION_DATE:

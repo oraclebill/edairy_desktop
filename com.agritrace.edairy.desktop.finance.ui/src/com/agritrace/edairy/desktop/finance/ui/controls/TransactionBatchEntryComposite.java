@@ -5,22 +5,26 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.finance.ui.FormConstants;
+import com.agritrace.edairy.desktop.finance.ui.controls.util.ComboRow;
+import com.agritrace.edairy.desktop.finance.ui.controls.util.DatePickerRow;
+import com.agritrace.edairy.desktop.finance.ui.controls.util.SourceButtonRow;
+import com.agritrace.edairy.desktop.finance.ui.controls.util.TextRow;
 
 /**
  * A master details widget with a text fields for renaming a person.
  */
-final class TransactionBatchEntryComposite extends MasterDetailsComposite {
+public final class TransactionBatchEntryComposite extends MasterDetailsComposite {
 
-	TransactionBatchEntryComposite(Composite parent, int style) {
+	public TransactionBatchEntryComposite(Composite parent, int style) {
 		super(parent, style, SWT.TOP);
 		setMargins(5, 5);
 	}
@@ -29,7 +33,7 @@ final class TransactionBatchEntryComposite extends MasterDetailsComposite {
 	protected void createDetails(Composite parent) {
 		Composite sourceSelectorPanel;
 		DatePickerComposite datePicker;
-		Combo storeText;
+		CCombo storeText;
 		Text refNoText;
 		Text recordIdText;
 		Text memberIdText;

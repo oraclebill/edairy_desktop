@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.beans;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -94,7 +95,7 @@ public class TestAccountTransactionGenerator {
 	AccountTransaction createTestAccountTransaction(Account acct, int seq) {
 		AccountTransaction temp = AccountFactory.eINSTANCE.createAccountTransaction();
 		temp.setAccount(acct);
-		temp.setAmount(rand.nextLong());
+		temp.setAmount(new BigDecimal(rand.nextLong()));
 		temp.setDescription("test account transaction # " + seq);
 		temp.setSource(randomSource());
 		temp.setTransactionId(rand.nextLong());

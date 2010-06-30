@@ -17,11 +17,11 @@ public class TransactionBatchEntrySubModuleController extends
 		SubModuleController {
 
 	private static final String[] columnPropertyNames = {
-		"id", "store", "date", "referenceNumber", "memberId", "amount"
+		"id", "date", "source", "referenceNumber", "member", "amount"
 	};
 	
 	private static final String[] columnHeaders = {
-		"ID", "Source", "Date", "Reference Number", "Member Id", "Amount"
+		"ID",  "Date", "Type", "Reference Number", "Member", "Amount"
 	};
 	
 	List<AccountTransaction> testTransactions = TestAccountTransactionGenerator.INSTANCE.createTransactions(30);

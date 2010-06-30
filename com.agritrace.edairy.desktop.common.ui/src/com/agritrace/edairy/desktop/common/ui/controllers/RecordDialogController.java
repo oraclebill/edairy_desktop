@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
@@ -11,16 +12,17 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.core.RienaStatus;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IEditableRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
-import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
@@ -86,6 +88,15 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		}
 
 	}
+
+	private static class ConverterFactory extends UpdateValueStrategy {
+		@Override
+		public IConverter createConverter(Object fromType, Object toType) {
+			return super.createConverter(fromType, toType);
+		}
+	}
+
+	private static final ConverterFactory converterFactory = new ConverterFactory();
 
 	private final Map<String, FeatureProperties> ridgetPropertyMap = new HashMap<String, FeatureProperties>();
 
@@ -154,6 +165,8 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 * @param featurePath
 	 */
 	protected void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
+		// TODO: automatically create domain list for features that are
+		// instances of an enum type.
 		FeatureProperties props = new FeatureProperties(ridgetId, featurePath);
 		ridgetPropertyMap.put(ridgetId, props);
 	}
@@ -170,66 +183,107 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		ridgetPropertyMap.put(ridgetId, props);
 	}
 
+	private void checkMandatory(FeatureProperties binding, IRidget ridget) {
+		FeaturePath path = binding.getFeaturePath();
+		final EStructuralFeature testFeature = path.getFeaturePath()[0];
+		if (testFeature.isRequired() && ridget instanceof IMarkableRidget) {
+			IMarkableRidget markableValue = (IMarkableRidget) ridget;
+			markableValue.setMandatory(true);
+		}
+	}
+
 	protected void configureMappedRidgets() {
 
 		for (final FeatureProperties binding : ridgetPropertyMap.values()) {
 			final IRidget ridget = getRidget(binding.getBindingId());
-			if (ridget instanceof IValueRidget) {
-				final IValueRidget valueRidget = (IValueRidget) ridget;
-				final IConverter converter = createConverter(binding.getTailFeature(), valueRidget);
-				if (converter != null) {
-					valueRidget.setModelToUIControlConverter(converter);
-				}
+			checkMandatory(binding, ridget);
+
+			if (ridget instanceof IEditableRidget) {
+				final IEditableRidget valueRidget = (IEditableRidget) ridget;
 				valueRidget.bindToModel(EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy()));
-				if (binding.getTailFeature().isRequired() && valueRidget instanceof IMarkableRidget) {
-					IMarkableRidget markableValue = (IMarkableRidget) valueRidget;
-					markableValue.setMandatory(true);
-				}
+				final IConverter converter = createUI2ModelConverter(valueRidget, binding.getTailFeature());
+				if (converter != null) {
+					valueRidget.setUIControlToModelConverter(converter); // has no effect..
+				}		
 				valueRidget.updateFromModel();
 			} else if (ridget instanceof IComboRidget) {
-				final IComboRidget 		comboRidget = (IComboRidget) ridget;
-				final IObservableList 	optionValues = binding.getDomainList();
-				final Class<?>			rowClass = binding.getEntityClass();
-				final IObservableValue 	selectionValue =  EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy());
-				
-				if (optionValues == null || rowClass == null || selectionValue == null) {
-					throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" +
-							optionValues + ", " + rowClass + ", " + selectionValue + ")" );
-				}
+				final IComboRidget comboRidget = (IComboRidget) ridget;
+				final IObservableList optionValues = binding.getDomainList();
+				final Class<?> rowClass = binding.getEntityClass();
+				final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(
+						getWorkingCopy());
+
+				checkParameters(optionValues, rowClass, selectionValue);
+				checkMandatory(binding, ridget);
 				comboRidget.bindToModel(optionValues, rowClass, "toString()", selectionValue);
 			} else if (ridget instanceof ITableRidget) {
-				final ITableRidget 		tableRidget = (ITableRidget) ridget;
-				
-				final IObservableList 	rowObservables = binding.getDomainList();;
-				final String[] 			columnPropertyNames = new String[] {};
-				final String[] 			columnHeaders = new String[] {};
-				final Class<?> 			rowClass = binding.getEntityClass();
-				
+				final ITableRidget tableRidget = (ITableRidget) ridget;
+
+				final IObservableList rowObservables = binding.getDomainList();
+				;
+				final String[] columnPropertyNames = new String[] {};
+				final String[] columnHeaders = new String[] {};
+				final Class<?> rowClass = binding.getEntityClass();
+
 				throw new UnsupportedOperationException();
-//				tableRidget.bindToModel(rowObservables, rowClass, columnPropertyNames, columnHeaders);
-			}
-			else if (ridget instanceof ISingleChoiceRidget) {
+				// tableRidget.bindToModel(rowObservables, rowClass,
+				// columnPropertyNames, columnHeaders);
+			} else if (ridget instanceof ISingleChoiceRidget) {
 				final ISingleChoiceRidget singleChoice = (ISingleChoiceRidget) ridget;
-				//final IComboRidget 		comboRidget = (IComboRidget) ridget;
-				final IObservableList 	optionValues = binding.getDomainList();
-				final Class<?>			rowClass = binding.getEntityClass();
-				final IObservableValue 	selectionValue =  EMFProperties.value(binding.getFeaturePath()).observe(getWorkingCopy());
-				
-				if (optionValues == null || rowClass == null || selectionValue == null) {
-					throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" +
-							optionValues + ", " + rowClass + ", " + selectionValue + ")" );
-				}
+				// final IComboRidget comboRidget = (IComboRidget) ridget;
+				final IObservableList optionValues = binding.getDomainList();
+				final Class<?> rowClass = binding.getEntityClass();
+				final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(
+						getWorkingCopy());
+
+				checkParameters(optionValues, rowClass, selectionValue);
+				checkMandatory(binding, ridget);
 				singleChoice.bindToModel(optionValues, selectionValue);
-			}
-			else {
+			} else {
 				throw new UnsupportedOperationException("Ridget classs '" + ridget.getClass().getName()
 						+ "' is not supported.");
-			}
+			}					
 		}
 	}
 
-	protected IConverter createConverter(EStructuralFeature feature, IValueRidget ridget) {
-		return RidgetsConfigFactory.getInstance().getModel2UIConverter(feature, ridget);
+
+	private void checkDefaults(FeatureProperties binding, IRidget ridget) {
+		EStructuralFeature feature = binding.getTailFeature();
+		if (feature.getDefaultValue() != null) {
+			EObject workingCopy = getWorkingCopy();
+			if (workingCopy != null) {
+				Object defaultValue = workingCopy.eGet(feature);
+				// debug code
+				Object currentValue = defaultValue;
+				if (currentValue != defaultValue)
+					workingCopy.eSet(feature, defaultValue);
+				else
+					System.err.println("WARN: default already set in checkDefaults!");
+			} else {
+				// todo: log
+				System.err.println("WARN: null working copy in checkDefaults!");
+			}
+		}
+
+	}
+
+	private void checkParameters(IObservableList optionValues, Class<?> rowClass, IObservableValue selectionValue) {
+		if (optionValues == null || rowClass == null || selectionValue == null) {
+			throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" + optionValues
+					+ ", " + rowClass + ", " + selectionValue + ")");
+		}
+	}
+
+	private IConverter createUI2ModelConverter(IEditableRidget ridget, EStructuralFeature feature) {
+		try {
+			final EClassifier featureType = feature.getEType();
+			final Class featureClass = featureType.getInstanceClass();		
+			return converterFactory.createConverter(String.class, featureClass);
+		}
+		catch(Exception e) {
+			System.err.println("WARN: converter factory failed for feature: " + feature);
+			return null;
+		}
 	}
 
 	/**

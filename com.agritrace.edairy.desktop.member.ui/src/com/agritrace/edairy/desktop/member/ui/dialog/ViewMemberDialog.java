@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.member.ui.dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -11,6 +10,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -21,9 +21,12 @@ public class ViewMemberDialog extends BaseDialogView {
 
 	MembershipTabFolder tabFolder;
 	private MemberInfoGroup infoGroup;
-
+	
 	public ViewMemberDialog() {
-		super(null);
+		this(null);
+	}
+	public ViewMemberDialog(Shell shell) {
+		super(shell);
 	}
 
 	@Override

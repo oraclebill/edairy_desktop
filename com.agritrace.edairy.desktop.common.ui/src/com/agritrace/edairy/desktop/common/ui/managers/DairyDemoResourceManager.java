@@ -12,6 +12,7 @@ import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createPe
 import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createPostalLocation;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -697,7 +698,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		tstTransaction.setTransactionDate(new Date());
 		tstTransaction.setSource(TransactionSource.CASH_PAYMENT);
 		tstTransaction.setDescription("test transaction description");
-		tstTransaction.setAmount(200d);
+		tstTransaction.setAmount(new BigDecimal(330));
 		tstTransaction.setAccount(tstAccount);
 
 		return new AccountTransaction[] { tstTransaction };

@@ -37,6 +37,7 @@ public abstract class RecordDialog<T extends EObject, C extends RecordDialogCont
 
 	public RecordDialog(Shell parentShell) {
 		super(parentShell);
+//		setReturnCode(CANCEL);	// default to cancel, 
 	}
 
 	@Override

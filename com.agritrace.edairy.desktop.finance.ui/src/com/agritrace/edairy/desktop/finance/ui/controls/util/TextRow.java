@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.controls;
+package com.agritrace.edairy.desktop.finance.ui.controls.util;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

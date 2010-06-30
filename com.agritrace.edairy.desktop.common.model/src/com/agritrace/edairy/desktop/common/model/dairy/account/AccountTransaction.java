@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.dairy.account;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
@@ -149,6 +150,7 @@ public interface AccountTransaction extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' attribute.
+	 * The default value is <code>"StoreCredit"</code>.
 	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -160,7 +162,7 @@ public interface AccountTransaction extends EObject {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 	 * @see #setSource(TransactionSource)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccountTransaction_Source()
-	 * @model required="true"
+	 * @model default="StoreCredit" required="true"
 	 * @generated
 	 */
 	TransactionSource getSource();
@@ -211,12 +213,12 @@ public interface AccountTransaction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Amount</em>' attribute.
-	 * @see #setAmount(double)
+	 * @see #setAmount(BigDecimal)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccountTransaction_Amount()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
-	double getAmount();
+	BigDecimal getAmount();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAmount <em>Amount</em>}' attribute.
@@ -226,7 +228,7 @@ public interface AccountTransaction extends EObject {
 	 * @see #getAmount()
 	 * @generated
 	 */
-	void setAmount(double value);
+	void setAmount(BigDecimal value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.

@@ -286,7 +286,6 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
-System.err.println( "opening new item: ");
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
 			System.err.println( "------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
@@ -320,6 +319,5 @@ System.err.println( "opening view item: " + getSelectedEObject());
 			throw new IllegalStateException("Invalid response from dialog: " + returnCode );
 		}
 		refreshTableContents();
-	}
-
+	}	
 }

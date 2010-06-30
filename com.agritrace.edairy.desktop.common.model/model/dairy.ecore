@@ -235,8 +235,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Farmer" containment="true" eKeys="common.ecore#//Person/personId"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//account/Account"
-        containment="true" eOpposite="#//account/Account/member"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
+        eType="#//account/Account" containment="true" eOpposite="#//account/Account/member"
+        eKeys="#//account/Account/accountId"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Asset">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -339,9 +340,10 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionType" lowerBound="1"
           eType="#//account/TransactionType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" lowerBound="1"
-          eType="#//account/TransactionSource"/>
+          eType="#//account/TransactionSource" defaultValueLiteral="StoreCredit"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="relatedLocation" eType="#//DairyLocation"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="transactionDate" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>

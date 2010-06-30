@@ -23,7 +23,7 @@
             name="Transaction Batch Entry">
       </view>
       <view allowMultiple="true"
-            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView"
+            class="com.agritrace.edairy.desktop.finance.ui.dialogs.TransactionBatchEntryDialog"
             id="transaction.batch-entry.mdview"
             name="Transaction Batch Entry">
       </view>

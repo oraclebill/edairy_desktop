@@ -294,14 +294,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		}
 	}
 
-	@Override
-	public void afterBind() {
-		super.afterBind();
-		// we should set return code to cancel as default, because if user close
-		// the window, it returns OK now.
-		setReturnCode(CANCEL);
-	}
-
 	protected void addPropertyChangedListener(){
 		AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
 		Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();

@@ -17,8 +17,7 @@ public class MemberRepository implements IMemberRepository {
 		@Override
 		protected Class<?> getClassType() {
 			return AccountTransaction.class;
-		}
-		
+		}		
 	};
 	
 	private final IRepository<Membership> driver;

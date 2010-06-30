@@ -210,7 +210,7 @@ public interface Membership extends EObject {
 	 * @see #setAccount(Account)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Account()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember
-	 * @model opposite="member" containment="true"
+	 * @model opposite="member" containment="true" keys="accountId" required="true"
 	 * @generated
 	 */
 	Account getAccount();
