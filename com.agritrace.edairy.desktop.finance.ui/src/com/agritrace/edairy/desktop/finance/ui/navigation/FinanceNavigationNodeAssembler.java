@@ -18,7 +18,6 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MemberTransactionRegisterController;
-import com.agritrace.edairy.desktop.finance.ui.dialogs.MemberTransactionEditController;
 import com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView;
 
 public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler {

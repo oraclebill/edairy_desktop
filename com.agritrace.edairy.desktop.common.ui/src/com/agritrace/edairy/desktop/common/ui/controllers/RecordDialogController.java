@@ -33,14 +33,14 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	public T getWorkingCopy() {
 		return (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
 	}
-
-	protected void setEClass(EClass eClass) {
-		this.eClass = eClass;
-	}
-
-	protected EClass getEClass() {
-		return this.eClass;
-	}
+//
+//	protected void setEClass(EClass eClass) {
+//		this.eClass = eClass;
+//	}
+//
+//	protected EClass getEClass() {
+//		return this.eClass;
+//	}
 
 	public void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addMapping(ridgetId, featurePath);

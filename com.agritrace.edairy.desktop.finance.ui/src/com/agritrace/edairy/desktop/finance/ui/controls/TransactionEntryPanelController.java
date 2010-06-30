@@ -1,13 +1,16 @@
-package com.agritrace.edairy.desktop.finance.ui.dialogs;
+package com.agritrace.edairy.desktop.finance.ui.controls;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
@@ -17,15 +20,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class MemberTransactionEditController extends RecordDialogController<AccountTransaction> {
-
+public class TransactionEntryPanelController {
 	public class MemberLookupAction implements IActionListener {
 		private ITextRidget nameRidget;
 
@@ -49,96 +51,126 @@ public class MemberTransactionEditController extends RecordDialogController<Acco
 				Account memberAccount = selectedMember.getAccount();
 				if (memberAccount == null) {
 					memberAccount = AccountFactory.eINSTANCE.createAccount();
-//					memberAccount.setMember(selectedMember);
+					// memberAccount.setMember(selectedMember);
 					selectedMember.setAccount(memberAccount);
 					Assert.isTrue(selectedMember.getAccount() == memberAccount);
 				}
-				getWorkingCopy().setAccount(memberAccount);
+				TransactionEntryPanelController.this.model.setAccount(memberAccount);
 				nameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
-
 			}
-
 		}
 	}
 
 	private final IDairyRepository dairyRepo = new DairyRepository();
+	private AccountTransaction model;
+	private IRidgetContainer container;
+	private BindingHelper<AccountTransaction> mapper;
 
-	public MemberTransactionEditController() {
-		super();
+	public TransactionEntryPanelController() {
+		;;
+	}
 
-		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
+	public void setModel(AccountTransaction tx) {
+		this.model = tx;
+	}
 
-		// addRidgetFeatureMap(FinanceBindingConstants.ID_TRANSACTION_CHOICE,
+	public void setRidgetContainer(IRidgetContainer container) {
+		this.container = container;
+	}
+
+	private AccountTransaction getModel() {
+		return model;
+	}
+
+	public void configureAndBind() {
+		if (container == null) {
+			throw new IllegalStateException("RidgetContainer must be set before configureAndBind");
+		}
+		if (model == null) {
+			throw new IllegalStateException("Model must be set before configureAndBind");
+		}
+		createMapper();
+		mapFieldsToModel();
+		bindMappedRidgets();
+		bindConfiguredRidgets();
+	}
+
+	private void createMapper() {
+		mapper = new BindingHelper<AccountTransaction>(container, model);
+	}
+
+	private void mapFieldsToModel() {
+
+		// addMapping(FinanceBindingConstants.ID_TRANSACTION_CHOICE,
 		// AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 
-		addRidgetFeatureMap(FinanceBindingConstants.ID_TRANSACTION_DATE,
+		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DATE,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE);
 
-		addRidgetFeatureMap(FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO,
+		mapper.addMapping(FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO,
 				Observables.staticObservableList(dairyRepo.getLocalDairyLocations()),
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__RELATED_LOCATION);
 
-		addRidgetFeatureMap(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
+		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
 
-//		addRidgetFeatureMap(FinanceBindingConstants.ID_MEMBER_NAME_TEXT,
-//				AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT, AccountPackage.Literals.ACCOUNT__MEMBER,
-//				DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__FAMILY_NAME);
+		// addMapping(FinanceBindingConstants.ID_MEMBER_NAME_TEXT,
+		// AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT,
+		// AccountPackage.Literals.ACCOUNT__MEMBER,
+		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		// ModelPackage.Literals.PERSON__FAMILY_NAME);
 
-//		addRidgetFeatureMap(FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT,
-//				AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
+		// addMapping(FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT,
+		// AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
 
-		addRidgetFeatureMap(FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT,
+		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__DESCRIPTION);
 
-		addRidgetFeatureMap(FinanceBindingConstants.ID_CHECK_NUMBER_TEXT,
+		mapper.addMapping(FinanceBindingConstants.ID_CHECK_NUMBER_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__CHECK_NUMBER);
 
-		addRidgetFeatureMap(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
+		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
 	}
 
-	@Override
-	protected void configureUserRidgets() {
+	private void bindMappedRidgets() {
+		mapper.configureRidgets();
+	}
+
+	private void bindConfiguredRidgets() {
+
 		// configure and bind transaction source
-		ISingleChoiceRidget sourceRidget = getRidget(ISingleChoiceRidget.class,
+		ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
 				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
 		IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
 				TransactionSource.class);
-		IObservableValue selectionValue = PojoObservables.observeValue(getWorkingCopy(), "source");
+		IObservableValue selectionValue = PojoObservables.observeValue(model, "source");
 		sourceRidget.bindToModel(optionValues, selectionValue);
 		sourceRidget.setMandatory(true);
 		sourceRidget.updateFromModel();
 
-		// 
-		IDecimalTextRidget transactionText = getRidget(IDecimalTextRidget.class, FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
+		//
+		IDecimalTextRidget transactionText = container.getRidget(IDecimalTextRidget.class,
+				FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
 		transactionText.setGrouping(true);
 		transactionText.setPrecision(2);
 		transactionText.setSigned(false);
 		transactionText.setMandatory(true);
-		transactionText.bindToModel(PojoObservables.observeValue(getWorkingCopy(), "amount"));
+		transactionText.bindToModel(PojoObservables.observeValue(model, "amount"));
 		transactionText.updateFromModel();
-		
+
 		// configure member name ridget
-		ITextRidget memberName = getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
+		ITextRidget memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberName.setOutputOnly(true);
 
 		// configure member lookup action
-		IActionRidget memberLookup = getRidget(IActionRidget.class, FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
+		IActionRidget memberLookup = container.getRidget(IActionRidget.class,
+				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
 		memberLookup.addListener(new MemberLookupAction(memberName));
 
 	}
 
-	@Override
-	protected void handleSaveAction() {
-		checkValid();
-		super.handleSaveAction();
+	public void checkValid() {
+				
 	}
-
-	private void checkValid() {
-		
-		
-	}
-
-	
 }

@@ -156,10 +156,10 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		commController.updateBinding();
 
 	}
-
-	@Override
-	protected EClass getEClass() {
-		return DairyPackage.eINSTANCE.getSupplier();
-	}
+//
+//	@Override
+//	protected EClass getEClass() {
+//		return DairyPackage.eINSTANCE.getSupplier();
+//	}
 
 }

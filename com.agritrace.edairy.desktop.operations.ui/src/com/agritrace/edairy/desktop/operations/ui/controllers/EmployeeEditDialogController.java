@@ -125,11 +125,11 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 //			e.printStackTrace();
 //		}
 	}
-
-	@Override
-	protected EClass getEClass() {
-		return DairyPackage.Literals.EMPLOYEE;
-	}
+//
+//	@Override
+//	protected EClass getEClass() {
+//		return DairyPackage.Literals.EMPLOYEE;
+//	}
 
 	@Override
 	public Employee getWorkingCopy() {

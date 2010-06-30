@@ -322,11 +322,11 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		}
 
 	}
-
-	@Override
-	protected EClass getEClass() {
-		return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
-	}
+//
+//	@Override
+//	protected EClass getEClass() {
+//		return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
+//	}
 	
 	
 	private final List<IActionListener> listeners = new ArrayList<IActionListener>();

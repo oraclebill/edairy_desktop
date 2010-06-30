@@ -88,11 +88,11 @@ public class DeliveryJournalEditController extends RecordDialogController<Delive
 		lineItemsRidget.updateFromModel();		
 	}
 
-	
-	@Override
-	protected EClass getEClass() {
-		return DairyPackage.Literals.DELIVERY_JOURNAL;
-	}
+//	
+//	@Override
+//	protected EClass getEClass() {
+//		return DairyPackage.Literals.DELIVERY_JOURNAL;
+//	}
 
 	@Override
 	public DeliveryJournal getWorkingCopy() {

@@ -16,7 +16,7 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 
 	public RouteEditDialogController() {
 		
-		setEClass(DairyPackage.Literals.ROUTE);		
+//		setEClass(DairyPackage.Literals.ROUTE);		
 		
 		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE );
 		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME);

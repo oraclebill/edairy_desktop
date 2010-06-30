@@ -9,6 +9,7 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -161,6 +162,7 @@ public class BindingHelper<T extends EObject>  {
 			return null;
 		}
 	}
+
 
 //	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
 //		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();

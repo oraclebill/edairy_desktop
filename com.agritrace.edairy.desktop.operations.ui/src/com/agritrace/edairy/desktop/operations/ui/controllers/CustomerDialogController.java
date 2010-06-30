@@ -128,11 +128,11 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		commController.updateBinding();		
 	}
 
-	
-	@Override
-	protected EClass getEClass() {
-		return DairyPackage.Literals.CUSTOMER;
-	}
+//	
+//	@Override
+//	protected EClass getEClass() {
+//		return DairyPackage.Literals.CUSTOMER;
+//	}
 
 	@Override
 	public Customer getWorkingCopy() {
