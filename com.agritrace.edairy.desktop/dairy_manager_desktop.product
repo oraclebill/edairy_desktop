@@ -11,7 +11,6 @@
    </aboutInfo>
 
    <configIni use="default">
-      <linux></linux>
       <macosx>/com.agritrace.edairy.desktop/config.ini</macosx>
       <win32>/com.agritrace.edairy.desktop/config.ini</win32>
    </configIni>
@@ -56,11 +55,9 @@
       <plugin id="com.agritrace.edairy.desktop.operations.services"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>
-      <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.mysql.jdbc"/>
       <plugin id="javax.persistence"/>
-      <plugin id="javax.servlet"/>
       <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.beanutils"/>
       <plugin id="org.apache.commons.collections"/>
@@ -104,10 +101,6 @@
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.riena.beans.common"/>
-      <plugin id="org.eclipse.riena.client"/>
-      <plugin id="org.eclipse.riena.communication.console"/>
-      <plugin id="org.eclipse.riena.communication.core"/>
-      <plugin id="org.eclipse.riena.communication.factory.hessian"/>
       <plugin id="org.eclipse.riena.core"/>
       <plugin id="org.eclipse.riena.navigation"/>
       <plugin id="org.eclipse.riena.navigation.ui"/>
@@ -128,11 +121,8 @@
       <plugin id="org.hibernate"/>
       <plugin id="org.hsqldb"/>
       <plugin id="org.pushingpixels.trident"/>
+      <plugin id="swt-grouplayout"/>
    </plugins>
 
-   <configurations>
-      <plugin id="com.agritrace.edairy.desktop" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="1" />
-   </configurations>
 
 </product>
