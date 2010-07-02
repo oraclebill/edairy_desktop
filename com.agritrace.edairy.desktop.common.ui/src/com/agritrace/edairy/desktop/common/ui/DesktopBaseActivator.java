@@ -2,10 +2,8 @@ package com.agritrace.edairy.desktop.common.ui;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.riena.ui.swt.AbstractRienaUIPlugin;
-import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 

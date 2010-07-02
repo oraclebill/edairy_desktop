@@ -3,8 +3,6 @@ package com.agritrace.edairy.desktop.common.ui.reference;
 import java.util.Arrays;
 import java.util.List;
 
-import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-
 public class SupplierCategory {
 
 	public static final SupplierCategory[] CATEGORIES = { new SupplierCategory("Feed"),

@@ -4,7 +4,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
@@ -19,9 +18,15 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite parent) {
-		final Composite comp = new MilkCollectionLogFilterPanel(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(3,-1).applyTo(comp);
+	protected Composite createButtons(Composite parent) {
+		final Composite container = super.createButtons(parent);
+		final Layout containerLayout = container.getLayout();
+		if (containerLayout instanceof GridLayout) {
+			final GridLayout gl = (GridLayout) containerLayout;
+			gl.numColumns = gl.numColumns + 1;
+		}
+		UIControlsFactory.createButton(container, "Import Scale Data", "import-file-button");
+		return container;
 	}
 
 	@Override
@@ -30,17 +35,9 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected Composite createButtons(Composite parent) {
-		Composite container = super.createButtons(parent);
-		Layout containerLayout = container.getLayout();
-		if (containerLayout instanceof GridLayout) {
-			GridLayout gl = (GridLayout)containerLayout;
-			gl.numColumns = gl.numColumns + 1;
-		}
-		Button fileButton = UIControlsFactory.createButton(container, "Import Scale Data", "import-file-button");
-		return container;
+	protected void createFilterPanel(Composite parent) {
+		final Composite comp = new MilkCollectionLogFilterPanel(parent, SWT.NONE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(3, -1).applyTo(comp);
 	}
 
-
-	
 }

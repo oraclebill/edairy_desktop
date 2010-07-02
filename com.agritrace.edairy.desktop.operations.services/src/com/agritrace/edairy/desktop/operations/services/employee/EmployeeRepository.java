@@ -2,8 +2,6 @@ package com.agritrace.edairy.desktop.operations.services.employee;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;

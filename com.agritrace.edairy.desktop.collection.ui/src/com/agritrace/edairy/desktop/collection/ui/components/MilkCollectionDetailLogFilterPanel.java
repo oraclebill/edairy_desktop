@@ -15,24 +15,21 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
 public class MilkCollectionDetailLogFilterPanel extends Composite {
 
-	public static final String FILTER_VEHICLE_TXT 		= ViewConstants.COLLECTION_DETAIL_HEADER_VEHICLE_TXT;
-	public static final String FILTER_DRIVER_TXT 		= ViewConstants.COLLECTION_DETAIL_HEADER_DRIVER_TXT;
-	public static final String FILTER_ROUTE_TXT 		= ViewConstants.COLLECTION_DETAIL_HEADER_ROUTE_TXT;
-	public static final String FILTER_SESSION_TXT 		= ViewConstants.COLLECTION_DETAIL_HEADER_SESSION_TXT;
-	public static final String FILTER_JRNLBOOK_DATE		= ViewConstants.COLLECTION_DETAIL_HEADER_DATE_TXT;
-	public static final String FILTER_BACK_TO_LOG_BTN 	= ViewConstants.COLLECTION_DETAIL_BACK_BTN;
-	public static final String FILTER_JRNLBOOK_ID_TXT 	= ViewConstants.COLLECTION_DETAIL_HEADER_BOOK_TXT;
+	public static final String FILTER_BACK_TO_LOG_BTN = ViewConstants.COLLECTION_DETAIL_BACK_BTN;
+	public static final String FILTER_DRIVER_TXT = ViewConstants.COLLECTION_DETAIL_HEADER_DRIVER_TXT;
+	public static final String FILTER_JRNLBOOK_DATE = ViewConstants.COLLECTION_DETAIL_HEADER_DATE_TXT;
+	public static final String FILTER_JRNLBOOK_ID_TXT = ViewConstants.COLLECTION_DETAIL_HEADER_BOOK_TXT;
+	public static final String FILTER_ROUTE_TXT = ViewConstants.COLLECTION_DETAIL_HEADER_ROUTE_TXT;
+	public static final String FILTER_SESSION_TXT = ViewConstants.COLLECTION_DETAIL_HEADER_SESSION_TXT;
+	public static final String FILTER_VEHICLE_TXT = ViewConstants.COLLECTION_DETAIL_HEADER_VEHICLE_TXT;
 
+	private final Text textDriver;
 	private final Text textJrnlBook;
 	private final Text textRoute;
 	private final Text textSession;
-	private final Text textDriver;
 	private final Text textVehicle;
 
 	/**
@@ -64,7 +61,7 @@ public class MilkCollectionDetailLogFilterPanel extends Composite {
 		UIControlsFactory.createLabel(composite, "", SWT.NONE);
 		UIControlsFactory.createLabel(composite, "", SWT.NONE);
 
-		final Button btnBackToLog = UIControlsFactory.createButton(composite,"Back to Log", FILTER_BACK_TO_LOG_BTN);
+		final Button btnBackToLog = UIControlsFactory.createButton(composite, "Back to Log", FILTER_BACK_TO_LOG_BTN);
 		btnBackToLog.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 
 		final Label lblDate = UIControlsFactory.createLabel(composite, "Date:");
@@ -78,7 +75,8 @@ public class MilkCollectionDetailLogFilterPanel extends Composite {
 		UIControlsFactory.createLabel(composite, "", SWT.NONE);
 		UIControlsFactory.createLabel(composite, "", SWT.NONE);
 
-		final Button btnEdit = UIControlsFactory.createButton(composite, "Edit", ViewConstants.COLLECTION_DETAIL_EDIT_BTN);
+		final Button btnEdit = UIControlsFactory.createButton(composite, "Edit",
+				ViewConstants.COLLECTION_DETAIL_EDIT_BTN);
 		btnEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 
 		final Label lblRoute = UIControlsFactory.createLabel(composite, "Route:");
@@ -97,7 +95,7 @@ public class MilkCollectionDetailLogFilterPanel extends Composite {
 
 		textVehicle = UIControlsFactory.createText(composite, SWT.READ_ONLY, FILTER_VEHICLE_TXT);
 		textVehicle.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		UIControlsFactory.createLabel(composite, "",SWT.NONE);
+		UIControlsFactory.createLabel(composite, "", SWT.NONE);
 
 		final Group group = UIControlsFactory.createGroup(this, "");
 		group.setLayout(new GridLayout(6, false));
@@ -105,15 +103,18 @@ public class MilkCollectionDetailLogFilterPanel extends Composite {
 
 		final Label lblViewPage = new Label(group, SWT.NONE);
 		lblViewPage.setText("View Page");
-		final Spinner pageSpinner = UIControlsFactory.createSpinner(group, SWT.BORDER, ViewConstants.COLLECTION_DETAIL_FILTER_PAGE_SPIN);
+		final Spinner pageSpinner = UIControlsFactory.createSpinner(group, SWT.BORDER,
+				ViewConstants.COLLECTION_DETAIL_FILTER_PAGE_SPIN);
 
-		final Button btnViewPage = UIControlsFactory.createButton(group, "Go To Page", ViewConstants.COLLECTION_DETAIL_FILTER_BTN);
+		final Button btnViewPage = UIControlsFactory.createButton(group, "Go To Page",
+				ViewConstants.COLLECTION_DETAIL_FILTER_BTN);
 
 		final Composite filler = UIControlsFactory.createComposite(group);
 		filler.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		UIControlsFactory.createLabel(group, "",SWT.NONE);
+		UIControlsFactory.createLabel(group, "", SWT.NONE);
 
-		final Button btnAddNewPage = UIControlsFactory.createButton(group, "Add New Page", ViewConstants.COLLECTION_DETAIL_NEW_BTN);
+		final Button btnAddNewPage = UIControlsFactory.createButton(group, "Add New Page",
+				ViewConstants.COLLECTION_DETAIL_NEW_BTN);
 
 	}
 

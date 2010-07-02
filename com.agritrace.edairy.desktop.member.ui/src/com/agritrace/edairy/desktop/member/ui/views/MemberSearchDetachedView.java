@@ -1,9 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -44,10 +42,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
-//import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-//import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener,
 		ISelectionChangedListener, SelectionListener {

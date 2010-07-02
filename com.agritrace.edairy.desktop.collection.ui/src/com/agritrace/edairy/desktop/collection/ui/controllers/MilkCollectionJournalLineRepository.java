@@ -5,13 +5,11 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 
 public class MilkCollectionJournalLineRepository extends HibernateRepository<CollectionJournalLine> implements
-IRepository<CollectionJournalLine> {
+		IRepository<CollectionJournalLine> {
 
 	@Override
 	protected Class<CollectionJournalLine> getClassType() {
 		return CollectionJournalLine.class;
 	}
-
-
 
 }

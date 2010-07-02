@@ -19,7 +19,6 @@ import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
-import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
 
 /**

@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.member.services.member;
 
 import java.util.List;
 
-//import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;

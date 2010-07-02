@@ -189,6 +189,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<T> runQuery(Query q) {
 		List<T> results = null;
 		openSession();

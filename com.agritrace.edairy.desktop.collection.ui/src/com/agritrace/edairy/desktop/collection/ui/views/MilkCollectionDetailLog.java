@@ -15,6 +15,11 @@ public class MilkCollectionDetailLog extends AbstractDirectoryView {
 	public MilkCollectionDetailLog() {
 	}
 
+	@Override
+	protected void createFilterButtons(Composite parent) {
+
+		// prevent superclass from updating buttons.
+	}
 
 	@Override
 	protected void createFilterPanel(Composite comp) {
@@ -22,13 +27,5 @@ public class MilkCollectionDetailLog extends AbstractDirectoryView {
 		new MilkCollectionDetailLogFilterPanel(comp, SWT.NONE);
 		comp.pack();
 	}
-
-	@Override
-	protected void createFilterButtons(Composite parent) {
-
-		// prevent superclass from updating buttons.
-	}
-
-
 
 }

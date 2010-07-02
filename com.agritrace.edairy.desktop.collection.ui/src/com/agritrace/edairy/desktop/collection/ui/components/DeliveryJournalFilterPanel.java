@@ -16,6 +16,7 @@ public class DeliveryJournalFilterPanel extends Composite {
 
 	/**
 	 * Create the composite.
+	 * 
 	 * @param parent
 	 * @param style
 	 */
@@ -23,25 +24,24 @@ public class DeliveryJournalFilterPanel extends Composite {
 		super(origParent, style);
 		setBackground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		setLayout(new FillLayout());
-		
-		Group group = UIControlsFactory.createGroup(this, "Delivery Log Filter");
+
+		final Group group = UIControlsFactory.createGroup(this, "Delivery Log Filter");
 
 		FieldUtil.addLabeledDateField(group, "Start Date", "filter-min-date");
 		FieldUtil.addLabeledDateField(group, "End Date", "filter-max-date");
 		FieldUtil.addLabeledComboField(group, "Route", "filter-route");
 		FieldUtil.addLabeledComboField(group, "Customer", "filter-customer");
-		
-		Control filler = UIControlsFactory.createLabel(group, "");
-		GridDataFactory.swtDefaults().grab(true, false).span(7,1).applyTo(filler);
-		
-		Control searchButton = UIControlsFactory.createButton(group, "Search", "filter-search-button");		
-		GridDataFactory.swtDefaults().align(SWT.RIGHT,SWT.CENTER).applyTo(searchButton);
-		
+
+		final Control filler = UIControlsFactory.createLabel(group, "");
+		GridDataFactory.swtDefaults().grab(true, false).span(7, 1).applyTo(filler);
+
+		final Control searchButton = UIControlsFactory.createButton(group, "Search", "filter-search-button");
+		GridDataFactory.swtDefaults().align(SWT.RIGHT, SWT.CENTER).applyTo(searchButton);
+
 		GridLayoutFactory.swtDefaults().numColumns(8).margins(8, 8).spacing(5, 5).generateLayout(group);
-		
+
 		this.pack();
-		
+
 	}
 
-	
 }

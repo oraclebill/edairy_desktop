@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 /**
  * <!-- begin-user-doc -->

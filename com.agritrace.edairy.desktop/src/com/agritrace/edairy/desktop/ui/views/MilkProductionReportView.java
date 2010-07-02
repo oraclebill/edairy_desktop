@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
 
-import com.swtdesigner.ResourceManager;
 import com.swtdesigner.SWTResourceManager;
 
 public class MilkProductionReportView extends ViewPart {

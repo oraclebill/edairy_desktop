@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.services.ui.controllers;
 import org.eclipse.core.databinding.conversion.IConverter;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 /**

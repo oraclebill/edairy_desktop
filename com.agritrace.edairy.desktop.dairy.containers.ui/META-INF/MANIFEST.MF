@@ -17,4 +17,3 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.dairy.containers.ui.controllers;uses:="com.agritrace.edairy.desktop.common.ui.controllers,org.eclipse.riena.navigation.ui.controllers",
  com.agritrace.edairy.desktop.dairy.containers.ui.views;uses:="org.eclipse.riena.navigation.ui.swt.views,org.eclipse.swt.widgets"
-Import-Package: org.eclipse.emf.ecore.change.util

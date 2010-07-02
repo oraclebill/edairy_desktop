@@ -1,16 +1,11 @@
 package com.agritrace.edairy.desktop.common.persistence;
 
-import org.eclipse.emf.teneo.hibernate.HbDataStore;
-import org.hibernate.SessionFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
-	private SessionFactory sFactory;
-	private HbDataStore hbds;
-
 	static BundleContext getContext() {
 		return context;
 	}

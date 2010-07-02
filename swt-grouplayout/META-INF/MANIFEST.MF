@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Swt-grouplayout
+Bundle-SymbolicName: swt-grouplayout
+Bundle-Version: 1.0.0
+Bundle-Vendor: Instantiations
+Export-Package: org.eclipse.swt.layout.grouplayout;
+  uses:="org.eclipse.ui.plugin,
+   org.eclipse.swt.graphics,
+   org.osgi.framework,
+   org.eclipse.swt.widgets",
+ org.eclipse.swt.widgets.baseline;uses:="org.eclipse.ui.plugin,org.osgi.framework,org.eclipse.swt.widgets",
+ swing2swt.layout;uses:="org.eclipse.swt.graphics,org.eclipse.swt.widgets"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

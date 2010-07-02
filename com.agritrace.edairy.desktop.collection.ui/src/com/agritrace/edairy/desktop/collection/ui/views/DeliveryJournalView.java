@@ -1,14 +1,13 @@
 package com.agritrace.edairy.desktop.collection.ui.views;
 
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.collection.ui.components.DeliveryJournalFilterPanel;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import org.eclipse.jface.action.Action;
 
 public class DeliveryJournalView extends AbstractDirectoryView {
 
@@ -16,20 +15,26 @@ public class DeliveryJournalView extends AbstractDirectoryView {
 	private Action action;
 
 	public DeliveryJournalView() {
-		
+
 	}
 
 	/**
 	 * Create contents of the view part.
+	 * 
 	 * @param parent
 	 */
 	@Override
 	public void basicCreatePartControl(Composite parent) {
 		super.basicCreatePartControl(parent);
-		
+
 		createActions();
 		initializeToolBar();
 		initializeMenu();
+	}
+
+	@Override
+	public void setFocus() {
+		// Set the focus
 	}
 
 	/**
@@ -45,34 +50,29 @@ public class DeliveryJournalView extends AbstractDirectoryView {
 					// TODO Auto-generated method stub
 					super.run();
 				}
-				
+
 			};
 		}
-	}
-
-	/**
-	 * Initialize the toolbar.
-	 */
-	private void initializeToolBar() {
-		IToolBarManager toolbarManager = getViewSite().getActionBars().getToolBarManager();
-		toolbarManager.add(action);
-//		toolbarManager.
 	}
 
 	/**
 	 * Initialize the menu.
 	 */
 	private void initializeMenu() {
-		IMenuManager menuManager = getViewSite().getActionBars().getMenuManager();
+		final IMenuManager menuManager = getViewSite().getActionBars().getMenuManager();
 	}
 
-	@Override
-	public void setFocus() {
-		// Set the focus
+	/**
+	 * Initialize the toolbar.
+	 */
+	private void initializeToolBar() {
+		final IToolBarManager toolbarManager = getViewSite().getActionBars().getToolBarManager();
+		toolbarManager.add(action);
+		// toolbarManager.
 	}
 
 	@Override
 	protected void createFilterPanel(Composite comp) {
-		DeliveryJournalFilterPanel filterPanel = new DeliveryJournalFilterPanel(comp, SWT.NONE);		
+		final DeliveryJournalFilterPanel filterPanel = new DeliveryJournalFilterPanel(comp, SWT.NONE);
 	}
 }

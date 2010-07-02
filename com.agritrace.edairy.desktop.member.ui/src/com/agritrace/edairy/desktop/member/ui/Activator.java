@@ -66,7 +66,6 @@ public class Activator extends DesktopBaseActivator {
 	 * are managed automatically and must not be disposed by client code.
 	 * 
 	 * @param imageKey
-	 *            a non-null String; see {@link SharedImages} for valid keys
 	 * @return a non-null Image instance
 	 */
 	public static synchronized Image getImage(final String path) {

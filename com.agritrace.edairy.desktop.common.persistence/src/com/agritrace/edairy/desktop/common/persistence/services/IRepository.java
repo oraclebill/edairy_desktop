@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.common.persistence.services;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.hibernate.Session;
 
 /**
  * Core repository interface which encapsulates a concrete persistence

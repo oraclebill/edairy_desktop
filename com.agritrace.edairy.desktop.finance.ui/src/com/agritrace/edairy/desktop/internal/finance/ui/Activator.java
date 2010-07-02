@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.internal.finance.ui;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;

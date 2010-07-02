@@ -5,7 +5,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 
 public class MilkCollectionJournalRepository extends HibernateRepository<CollectionJournalPage> implements
-IRepository<CollectionJournalPage> {
+		IRepository<CollectionJournalPage> {
 	@Override
 	protected Class<CollectionJournalPage> getClassType() {
 		return CollectionJournalPage.class;

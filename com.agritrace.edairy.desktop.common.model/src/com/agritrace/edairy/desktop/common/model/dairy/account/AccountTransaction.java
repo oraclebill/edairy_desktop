@@ -6,11 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 
 /**
  * <!-- begin-user-doc -->

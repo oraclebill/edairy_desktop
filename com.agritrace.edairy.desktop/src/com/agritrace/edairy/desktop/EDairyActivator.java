@@ -7,7 +7,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
-import com.agritrace.edairy.desktop.common.persistence.services.SybaseASAPersistenceManager;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -69,7 +68,6 @@ public class EDairyActivator extends AbstractUIPlugin {
 	 * are managed automatically and must not be disposed by client code.
 	 * 
 	 * @param imageKey
-	 *            a non-null String; see {@link SharedImages} for valid keys
 	 * @return a non-null Image instance
 	 */
 	public static synchronized Image getImage(final String path) {
