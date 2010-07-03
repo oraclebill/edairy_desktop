@@ -57,7 +57,6 @@
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.persistence.oracle" fragment="true"/>
       <plugin id="org.eclipse.riena.beans.common"/>
-      <plugin id="org.eclipse.riena.client"/>
       <plugin id="org.eclipse.riena.communication.console"/>
       <plugin id="org.eclipse.riena.communication.core"/>
       <plugin id="org.eclipse.riena.communication.factory.hessian"/>

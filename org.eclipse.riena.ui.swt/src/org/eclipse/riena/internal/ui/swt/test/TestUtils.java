@@ -15,20 +15,18 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
 
-import junit.framework.Assert;
-
+import org.eclipse.riena.core.marker.IMarkable;
+import org.eclipse.riena.core.marker.IMarker;
+import org.eclipse.riena.ui.core.marker.IMessageMarker;
+import org.eclipse.riena.ui.core.marker.MandatoryMarker;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
-
-import org.eclipse.riena.core.marker.IMarkable;
-import org.eclipse.riena.core.marker.IMarker;
-import org.eclipse.riena.ui.core.marker.IMessageMarker;
-import org.eclipse.riena.ui.core.marker.MandatoryMarker;
-import org.eclipse.riena.ui.ridgets.IMarkableRidget;
+import org.junit.Assert;
 
 /**
  * Utility class for tests.
