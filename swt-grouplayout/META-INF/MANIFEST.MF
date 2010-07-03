@@ -12,3 +12,4 @@ Export-Package: org.eclipse.swt.layout.grouplayout;
  org.eclipse.swt.widgets.baseline;uses:="org.eclipse.ui.plugin,org.osgi.framework,org.eclipse.swt.widgets",
  swing2swt.layout;uses:="org.eclipse.swt.graphics,org.eclipse.swt.widgets"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.swt;bundle-version="3.6.0";visibility:=reexport
