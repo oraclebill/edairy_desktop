@@ -4,12 +4,12 @@ public class AlreadyExistsException extends DairyPersistenceException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -178793147741752677L;
+	private static final long serialVersionUID = 1L;
 
 	public AlreadyExistsException() {
 		super();
 	}
-
+	
 	public AlreadyExistsException(String reason) {
 		super(reason);
 	}

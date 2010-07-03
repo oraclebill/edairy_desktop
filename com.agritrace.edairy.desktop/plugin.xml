@@ -244,17 +244,11 @@
 
 	<extension id="dairy_manager_prod" point="org.eclipse.core.runtime.products">
 		<product application="com.agritrace.edairy.desktop.dairy_manager_app"
-			name="eDairy Manager Destop">
-			<property name="appName" value="eDairy Manager Destop">
-			</property>
-			<property name="aboutImage"
-				value="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png">
-			</property>
-			<property name="aboutText" value="eDairy Manager v0.1a">
-			</property>
-			<property name="windowImages"
-				value="/com.agritrace.edairy.desktop.ui/icons/cow16.png,/com.agritrace.edairy.desktop.ui/icons/cow32.png,/com.agritrace.edairy.desktop.ui/icons/cow48.png,/com.agritrace.edairy.desktop.ui/icons/cow64.png,/com.agritrace.edairy.desktop.ui/icons/cow128.png">
-			</property>
+				 name="beta-plugin">
+     <property
+           name="appName"
+           value="beta-plugin">
+     </property>
 		</product>
 	</extension>
  <extension

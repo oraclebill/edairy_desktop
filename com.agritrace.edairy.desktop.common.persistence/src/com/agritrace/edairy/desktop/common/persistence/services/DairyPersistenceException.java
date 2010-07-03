@@ -5,7 +5,7 @@ public class DairyPersistenceException extends RuntimeException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3279270649397159960L;
+	private static final long serialVersionUID = 1L;
 
 	public DairyPersistenceException() {
 		super();
@@ -22,4 +22,4 @@ public class DairyPersistenceException extends RuntimeException {
 	public DairyPersistenceException(Throwable e) {
 		super(e);
 	}
-}
+	}

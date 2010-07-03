@@ -5,6 +5,6 @@ public class NonExistingEntityException extends DairyPersistenceException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7058375541993051927L;
+	private static final long serialVersionUID = 1L;
 
 }

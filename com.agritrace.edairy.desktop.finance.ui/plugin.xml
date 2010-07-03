@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="com.agritrace.edairy.desktop.finance.ui"
+            class="com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView"
+            icon="icons/transactions.gif"
+            id="dairy.transactions.register"
+            allowMultiple="true"
+            name="Member Transaction Register">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+</plugin>
