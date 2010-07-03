@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.views;
+package com.agritrace.edairy.desktop.finance.ui.controls.util;
 
 import java.util.HashMap;
 

@@ -74,7 +74,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 
-		initDatabase();
+		//initDatabase();
 
 	}
 
@@ -91,10 +91,4 @@ public class EDairyActivator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
-	private void initDatabase() {
-		// FIXME: get config from filesystem
-		// PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
-		// PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
-		PersistenceManager.getDefault().getSession();
-	}
 }
