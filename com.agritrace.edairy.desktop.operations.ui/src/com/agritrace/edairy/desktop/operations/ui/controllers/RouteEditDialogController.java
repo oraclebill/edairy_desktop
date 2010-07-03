@@ -11,32 +11,28 @@ import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 
 public class RouteEditDialogController extends RecordDialogController<Route> {
 
-	
-	
-
 	public RouteEditDialogController() {
-		
-//		setEClass(DairyPackage.Literals.ROUTE);		
-		
-		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE );
+
+		// setEClass(DairyPackage.Literals.ROUTE);
+
+		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE);
 		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME);
 		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_DESCRIPTION, DairyPackage.Literals.ROUTE__DESCRIPTION);
-		// TODO: 
-//		addRidgetFeatureMap(ViewConstants.ID_LST_ROUTE_STOPS, DairyPackage.Literals.ROUTE__STOPS, DairyPackage.Literals.DAIRY_LOCATION__NAME);
-		
+		// TODO:
+		// addRidgetFeatureMap(ViewConstants.ID_LST_ROUTE_STOPS,
+		// DairyPackage.Literals.ROUTE__STOPS,
+		// DairyPackage.Literals.DAIRY_LOCATION__NAME);
+
 	}
 
 	@Override
 	protected void configureUserRidgets() {
-		IListRidget stopsList = getRidget(IListRidget.class, ViewConstants.ID_LST_ROUTE_STOPS);
+		final IListRidget stopsList = getRidget(IListRidget.class, ViewConstants.ID_LST_ROUTE_STOPS);
 		stopsList.setOutputOnly(true);
-		stopsList.bindToModel(
-				EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.ROUTE__STOPS), 
-				DairyLocation.class, 
-				"name");
+		stopsList.bindToModel(EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.ROUTE__STOPS),
+				DairyLocation.class, "name");
 		System.err.println("STOPS: " + this.getWorkingCopy().getStops());
 		stopsList.updateFromModel();
 	}
-	
-	
+
 }

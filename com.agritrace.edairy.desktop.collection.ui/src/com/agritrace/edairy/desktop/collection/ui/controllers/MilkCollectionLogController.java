@@ -35,8 +35,6 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 
-	private final DairyRepository dairyRepository = new DairyRepository();
-
 	private IDateTimeRidget endDate;
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
 	private IToggleButtonRidget mprMissing;
@@ -65,8 +63,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 					final Route route = ((CollectionJournalPage) element).getRoute();
 					if (route != null) {
 						return route.getName();
-					} 
-					else {
+					} else {
 						return "(empty)";
 					}
 				}

@@ -22,8 +22,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
 
@@ -43,10 +41,9 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private ITextRidget driver;
 	private IActionRidget editButton;
 
-	// database connector
-	private final IDairyRepository journalRepository = new DairyRepository();
 
 	private final Logger LOG = Log4r.getLogger(MilkCollectionDetailLogController.class);
+	
 	// UI infrastructure
 	private final WritableValue pageValue = new WritableValue(1, Integer.class);
 	private ITextRidget route;
@@ -156,6 +153,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		setPageButton = getRidget(IActionRidget.class, ViewConstants.COLLECTION_DETAIL_FILTER_BTN);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected List<CollectionJournalLine> getFilteredResult() {
 		if (currentJournalPage == null) {

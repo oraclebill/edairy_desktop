@@ -36,14 +36,14 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 
 	private IController controller;
 
-	private Membership member;
 	private DateRangeSearchController dateSearchController;
+	private Membership member;
 
-	private ITableRidget transactionTable;
+	private final String[] transactionColumnHeaders = { "ID", "Date", "Type", "Description", "Amount" };
 	private final String[] transactionPropertyNames = { "transactionId", "transactionDate", "transactionType",
 			"description", "amount" };
-	private final String[] transactionColumnHeaders = { "ID", "Date", "Type", "Description", "Amount" };
 	private final List<AccountTransaction> transactionRecords = new ArrayList<AccountTransaction>();
+	private ITableRidget transactionTable;
 
 	public MemberTransactionWidgetController(IController controller) {
 		this.controller = controller;
@@ -68,76 +68,22 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	}
 
 	@Override
-	public Object getInputModel() {
-		return member;
-	}
-
-	@Override
-	public void setInputModel(Object model) {
-		if (transactionTable == null) {
-			return;
-		}
-		this.member = (Membership) model;
-		if (transactionTable != null) {
-			updateBinding();
-		}
-
-	}
-
-	@Override
-	public IController getController() {
-		return controller;
-	}
-
-	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
-	}
-
-	@Override
-	public void updateBinding() {
-		if (transactionTable == null) {
-			return;
-		}
-		transactionRecords.clear();
-		transactionRecords.addAll(getAccountTransactions());
-		transactionTable.setColumnFormatter(1, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof AccountTransaction) {
-					final Date entryDate = ((AccountTransaction) element).getTransactionDate();
-					final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
-					dateFormatter.setDate(entryDate);
-					return dateFormatter.getFormattedDate();
-				}
-				return null;
-			}
-		});
-		// transactionTable.updateFromModel();
-	}
-
-	private List<AccountTransaction> getAccountTransactions() {
-		final List<AccountTransaction> transactions = new ArrayList<AccountTransaction>();
-		return transactions;
-	}
-
-	@Override
 	public List<AccountTransaction> filter(String startDate, String endDate) {
-		List<AccountTransaction> objs = new ArrayList<AccountTransaction>();
+		final List<AccountTransaction> objs = new ArrayList<AccountTransaction>();
 		if (transactionTable == null) {
 			return objs;
 		}
-		if (transactionRecords != null && !transactionRecords.isEmpty()) {
+		if ((transactionRecords != null) && !transactionRecords.isEmpty()) {
 			try {
 				final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 					@Override
-					public long longValue(Object object) {
-						return ((Date) object).getTime();
+					public Long adapt(Object value) {
+						return longValue(value);
 					}
 
 					@Override
-					public Long adapt(Object value) {
-						return longValue(value);
+					public long longValue(Object object) {
+						return ((Date) object).getTime();
 					}
 				};
 
@@ -184,7 +130,7 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 					objs.add((AccountTransaction) object);
 				}
 
-			} catch (ParseException e) {
+			} catch (final ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Activator.getDefault().logError(e, e.getMessage());
@@ -196,6 +142,60 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 		}
 		return objs;
 
+	}
+
+	@Override
+	public IController getController() {
+		return controller;
+	}
+
+	@Override
+	public Object getInputModel() {
+		return member;
+	}
+
+	@Override
+	public void setController(IController controller) {
+		this.controller = controller;
+	}
+
+	@Override
+	public void setInputModel(Object model) {
+		if (transactionTable == null) {
+			return;
+		}
+		this.member = (Membership) model;
+		if (transactionTable != null) {
+			updateBinding();
+		}
+
+	}
+
+	@Override
+	public void updateBinding() {
+		if (transactionTable == null) {
+			return;
+		}
+		transactionRecords.clear();
+		transactionRecords.addAll(getAccountTransactions());
+		transactionTable.setColumnFormatter(1, new ColumnFormatter() {
+			@Override
+			public String getText(Object element) {
+				if (element instanceof AccountTransaction) {
+					final Date entryDate = ((AccountTransaction) element).getTransactionDate();
+					final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
+					dateFormatter.setDate(entryDate);
+					return dateFormatter.getFormattedDate();
+				}
+				return null;
+			}
+		});
+		// transactionTable.updateFromModel();
+	}
+
+	private List<AccountTransaction> getAccountTransactions() {
+		final List<AccountTransaction> transactions = new ArrayList<AccountTransaction>();
+		return transactions;
 	}
 
 }

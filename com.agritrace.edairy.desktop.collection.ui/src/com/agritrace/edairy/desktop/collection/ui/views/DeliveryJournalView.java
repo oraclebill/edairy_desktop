@@ -73,6 +73,6 @@ public class DeliveryJournalView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterPanel(Composite comp) {
-		final DeliveryJournalFilterPanel filterPanel = new DeliveryJournalFilterPanel(comp, SWT.NONE);
+		 new DeliveryJournalFilterPanel(comp, SWT.NONE);
 	}
 }

@@ -24,19 +24,19 @@ import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 
 public class SupplierDirectoryController extends BasicDirectoryController {
 
-	// filter ridgets
-	private IComboRidget statusCombo;
 	private IListRidget categoryList;
 	private ITextRidget companyText;
-
 	// filter bean
 	private final SupplierSearchBean searchBean = new SupplierSearchBean();
+
+	// filter ridgets
+	private IComboRidget statusCombo;
 
 	public SupplierDirectoryController() {
 		super();
 
 		setRepository(new SupplierRepository());
-//		setEntityClass(Supplier.class);
+		// setEntityClass(Supplier.class);
 		setEClass(DairyPackage.Literals.SUPPLIER);
 
 		addTableColumn("ID", ModelPackage.Literals.COMPANY__COMPANY_ID);
@@ -62,28 +62,33 @@ public class SupplierDirectoryController extends BasicDirectoryController {
 				SupplierCategory.class, "name");
 		categoryList.updateFromModel();
 
-		statusCombo.bindToModel(Observables.staticObservableList(VendorStatus.VALUES), 
-				VendorStatus.class, "toString",
+		statusCombo.bindToModel(Observables.staticObservableList(VendorStatus.VALUES), VendorStatus.class, "toString",
 				BeansObservables.observeValue(searchBean, "status"));
 		statusCombo.updateFromModel();
 		statusCombo.setSelection(0);
 	}
 
+	/**
+	 * Create new model while createing a new record
+	 * 
+	 * @return
+	 */
 	@Override
-	protected void resetFilterConditions() {
-		companyText.setText("");
-		categoryList.setSelection((Object) null);
-		statusCombo.setSelection(statusCombo.getEmptySelectionItem());
+	protected Supplier createNewModel() {
+		final Supplier supplier = (Supplier) super.createNewModel();
+		supplier.setPhoneNumber("");
+		supplier.setRegistrationDate(Calendar.getInstance().getTime());
+		return supplier;
 	}
 
 	@Override
 	protected List<Supplier> getFilteredResult() {
-		List<Supplier> allSuppliers = getRepository().all();
-		List<Supplier> filteredSuppliers = new ArrayList<Supplier>();
-		
-		for (final Supplier s : allSuppliers ) {
+		final List<Supplier> allSuppliers = getRepository().all();
+		final List<Supplier> filteredSuppliers = new ArrayList<Supplier>();
+
+		for (final Supplier s : allSuppliers) {
 			if (MatchUtil.matchContains(searchBean.getName(), s.getCompanyName())
-					&& MatchUtil.matchContains(searchBean.getCategory(), s.getCategories() )
+					&& MatchUtil.matchContains(searchBean.getCategory(), s.getCategories())
 					&& MatchUtil.matchEquals(searchBean.getStatus(), s.getStatus())) {
 				filteredSuppliers.add(s);
 			}
@@ -95,17 +100,12 @@ public class SupplierDirectoryController extends BasicDirectoryController {
 	protected RecordDialog<Supplier, SupplierListDialogController> getRecordDialog(Shell shell) {
 		return new SupplierListDialog(shell);
 	}
-	
-	/**
-	 * Create new model while createing a new record
-	 * 
-	 * @return
-	 */
-	protected Supplier createNewModel() {
-		Supplier supplier = (Supplier) super.createNewModel();
-		supplier.setPhoneNumber("");
-		supplier.setRegistrationDate(Calendar.getInstance().getTime());
-		return supplier;
+
+	@Override
+	protected void resetFilterConditions() {
+		companyText.setText("");
+		categoryList.setSelection((Object) null);
+		statusCombo.setSelection(statusCombo.getEmptySelectionItem());
 	}
 
 }

@@ -14,7 +14,7 @@ import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -52,17 +52,18 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 		public boolean evaluate(Object obj) {
 			boolean ret = false;
 			if (obj instanceof AccountTransaction) {
-				AccountTransaction tx = (AccountTransaction) obj;
-				Account acct = tx.getAccount();
+				final AccountTransaction tx = (AccountTransaction) obj;
+				final Account acct = tx.getAccount();
 				if (acct != null) {
 					ret = acct.getMember() == testMember;
 				}
 			} else {
-				if (null != obj)
+				if (null != obj) {
 					throw new IllegalArgumentException("Objects of type: '" + obj.getClass()
 							+ "' are not valid for this operation.");
-				else
+				} else {
 					throw new IllegalArgumentException("Invalid predicate parameter - (null).");
+				}
 			}
 			return ret;
 		}
@@ -71,43 +72,44 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 	static class TransactionSourceMatchPredicate implements Predicate {
 		final private Set<TransactionSource> testSources = new HashSet<TransactionSource>();
 
-		TransactionSourceMatchPredicate(TransactionSource... sources) {
-			this(Arrays.asList(sources));
-		}
-
 		TransactionSourceMatchPredicate(List<TransactionSource> sources) {
 			this.testSources.addAll(sources);
+		}
+
+		TransactionSourceMatchPredicate(TransactionSource... sources) {
+			this(Arrays.asList(sources));
 		}
 
 		@Override
 		public boolean evaluate(Object obj) {
 			boolean ret = false;
 			if (obj instanceof AccountTransaction) {
-				AccountTransaction tx = (AccountTransaction) obj;
-				TransactionSource src = tx.getSource();
+				final AccountTransaction tx = (AccountTransaction) obj;
+				final TransactionSource src = tx.getSource();
 				if (src != null) {
 					ret = testSources.contains(src);
 				}
 			} else {
-				if (null != obj)
+				if (null != obj) {
 					throw new IllegalArgumentException("Objects of type: '" + obj.getClass()
 							+ "' are not valid for this operation.");
-				else
+				} else {
 					throw new IllegalArgumentException("Invalid predicate parameter - (null).");
+				}
 			}
 			return ret;
 		}
 	}
 
-	private final IMemberRepository memberRepo = new MemberRepository();
-	private List<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
-	private final MemberTransactionFilterBean filterBean = new MemberTransactionFilterBean();
-
-	private IDateTimeRidget startDateRidget, endDateRidget;
-	private ITextRidget memberNameRidget;
-	IComboRidget referenceNumRidget;
-	private IMultipleChoiceRidget typeSetRidget;
 	private IActionRidget batchEditRidget;
+	private final MemberTransactionFilterBean filterBean = new MemberTransactionFilterBean();
+	private ITextRidget memberNameRidget;
+
+	private final IMemberRepository memberRepo = new MemberRepository();
+	private IDateTimeRidget startDateRidget, endDateRidget;
+	private final List<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
+	private IMultipleChoiceRidget typeSetRidget;
+	IComboRidget referenceNumRidget;
 
 	public MemberTransactionRegisterController() {
 		this(null);
@@ -128,10 +130,10 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 			public String getText(Object element) {
 				String ret = "n/a";
 				if (element instanceof Account) {
-					Account acct = (Account) element;
+					final Account acct = (Account) element;
 					try {
 						ret = acct.getMember().getMember().getFamilyName();
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						ret = "account # " + acct.getAccountId();
 					}
 				}
@@ -140,20 +142,6 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 
 		});
 		this.addTableColumn("Amount", AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
-	}
-
-	@Override
-	public void configureFilterRidgets() {
-
-		startDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_START_DATE);
-		// startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
-		// endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-
-		referenceNumRidget = getRidget(IComboRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
-		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
-		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
-		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
 	}
 
 	@Override
@@ -181,44 +169,22 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 		});
 	}
 
-	private void handleBatchEntryAction() {
-		TransactionBatchEntryDialog dialog = new TransactionBatchEntryDialog();
-		ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
-		dialog.getController().setContext("tranaction-list", transactionList);
-		int returnCode = dialog.open();
-		if (returnCode == Dialog.OK) {
-			for (AccountTransaction tx : transactionList) {
-				getRepository().saveNew(tx);
-			}
-		} else {
-			for (AccountTransaction tx : transactionList) {
-				if (tx != null) {
-					tx.setAccount(null);
-					tx.setRelatedLocation(null);
-				}
-			}
-		}
-	}
-
-	/**
-	 * todo: this will not work for long...
-	 * 
-	 * @return
-	 */
 	@Override
-	protected List<AccountTransaction> getFilteredResult() {
-		List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
-		Predicate filterPredicate = buildFilterPredicate();
-		for (AccountTransaction tx : getRepository().all()) {
-			if (filterPredicate.evaluate(tx)) {
-				filtered.add(tx);
-			}
-		}
-		return filtered;
+	public void configureFilterRidgets() {
+
+		startDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_START_DATE);
+		// startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
+		// endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+
+		referenceNumRidget = getRidget(IComboRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
+		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
+		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
+		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
 	}
 
 	private Predicate buildFilterPredicate() {
-		List<Predicate> predicateList = new ArrayList<Predicate>();
+		final List<Predicate> predicateList = new ArrayList<Predicate>();
 
 		predicateList
 				.add(NullIsTruePredicate.getInstance(FilterUtil.createDateAfterPredicate(filterBean.getStartDate())));
@@ -233,18 +199,54 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 		predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(filterBean
 				.getSourceOptions())));
 
-		Predicate[] predicates = new Predicate[predicateList.size()];
+		final Predicate[] predicates = new Predicate[predicateList.size()];
 		for (int i = 0; i < predicates.length; i++) {
 			predicates[i] = predicateList.get(i);
 		}
 		return new AllPredicate(predicates);
 	}
 
+	private void handleBatchEntryAction() {
+		final TransactionBatchEntryDialog dialog = new TransactionBatchEntryDialog();
+		final ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
+		dialog.getController().setContext("tranaction-list", transactionList);
+		final int returnCode = dialog.open();
+		if (returnCode == Window.OK) {
+			for (final AccountTransaction tx : transactionList) {
+				getRepository().saveNew(tx);
+			}
+		} else {
+			for (final AccountTransaction tx : transactionList) {
+				if (tx != null) {
+					tx.setAccount(null);
+					tx.setRelatedLocation(null);
+				}
+			}
+		}
+	}
+
 	@Override
 	protected AccountTransaction createNewModel() {
-		AccountTransaction transaction = super.createNewModel();
+		final AccountTransaction transaction = super.createNewModel();
 		transaction.setTransactionDate(new Date());
 		return transaction;
+	}
+
+	/**
+	 * todo: this will not work for long...
+	 * 
+	 * @return
+	 */
+	@Override
+	protected List<AccountTransaction> getFilteredResult() {
+		final List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
+		final Predicate filterPredicate = buildFilterPredicate();
+		for (final AccountTransaction tx : getRepository().all()) {
+			if (filterPredicate.evaluate(tx)) {
+				filtered.add(tx);
+			}
+		}
+		return filtered;
 	}
 
 	@Override

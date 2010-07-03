@@ -25,77 +25,17 @@ import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogCo
 
 public class ViewFarmDialog extends AbstractDialogView {
 
-	private Composite main;
-
-	private FarmTabFolder tabFolder;
-
-	private Button saveButton;
 	private Button cancelButton;
+
 	private Button deleteButton;
+
+	private Composite main;
+	private Button saveButton;
+	private FarmTabFolder tabFolder;
 
 	public ViewFarmDialog(Shell parentShell) {
 		super(parentShell);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	protected void configureShell(Shell newShell) {
-		super.configureShell(newShell);
-		// newShell.setSize(550, 450);
-	}
-
-	@Override
-	protected Control buildView(Composite parent) {
-		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		parent.setLayout(new GridLayout(1, false));
-
-		main = UIControlsFactory.createComposite(parent);
-		main.setLayout(new GridLayout(1, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
-
-		createHeader(main);
-		tabFolder = new FarmTabFolder(main);
-		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false)
-				.applyTo(createOkCancelButtons(parent));
-		return null;
-	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new ViewFarmDialogController();
-	}
-
-	protected void createHeader(Composite parent) {
-
-		Composite headerPanel = UIControlsFactory.createComposite(parent);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(headerPanel);
-		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(headerPanel);
-
-		Label titleLabel = UIControlsFactory.createLabel(headerPanel, "Farm");
-		addUIControl(titleLabel, ViewWidgetId.VIEW_FARM_NAME);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(titleLabel);
-		Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
-		titleLabel.setFont(labelFont);
-
-		Label NameLabel = UIControlsFactory.createLabel(headerPanel, "Name :");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(1, 1).applyTo(NameLabel);
-		
-		Text farmText = UIControlsFactory.createText(headerPanel, SWT.SINGLE | SWT.BORDER,
-				ViewWidgetId.VIEW_FARM_NAME_TXT);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(farmText);
-
-		Label farmIdLabel = UIControlsFactory.createLabel(headerPanel, "Farm Id :");
-		addUIControl(farmIdLabel, ViewWidgetId.VIEW_FARM_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmIdLabel);
-
-		Label memberIdLabel = UIControlsFactory.createLabel(headerPanel, "Member Id :");
-		addUIControl(memberIdLabel, ViewWidgetId.VIEW_FARM_MEMBER_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberIdLabel);
-
-		Label memberNameLabel = UIControlsFactory.createLabel(headerPanel, "Member Name :");
-		addUIControl(memberNameLabel, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberNameLabel);
-
 	}
 
 	private Composite createOkCancelButtons(Composite parent) {
@@ -115,6 +55,66 @@ public class ViewFarmDialog extends AbstractDialogView {
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		addUIControl(cancelButton, DialogConstants.BIND_ID_BUTTON_CANCEL);
 		return buttonComposite;
+	}
+
+	@Override
+	protected Control buildView(Composite parent) {
+		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		parent.setLayout(new GridLayout(1, false));
+
+		main = UIControlsFactory.createComposite(parent);
+		main.setLayout(new GridLayout(1, false));
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
+
+		createHeader(main);
+		tabFolder = new FarmTabFolder(main);
+		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false)
+				.applyTo(createOkCancelButtons(parent));
+		return null;
+	}
+
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		// newShell.setSize(550, 450);
+	}
+
+	@Override
+	protected AbstractWindowController createController() {
+		return new ViewFarmDialogController();
+	}
+
+	protected void createHeader(Composite parent) {
+
+		final Composite headerPanel = UIControlsFactory.createComposite(parent);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(headerPanel);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(headerPanel);
+
+		final Label titleLabel = UIControlsFactory.createLabel(headerPanel, "Farm");
+		addUIControl(titleLabel, ViewWidgetId.VIEW_FARM_NAME);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(titleLabel);
+		final Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
+		titleLabel.setFont(labelFont);
+
+		final Label NameLabel = UIControlsFactory.createLabel(headerPanel, "Name :");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(1, 1).applyTo(NameLabel);
+
+		final Text farmText = UIControlsFactory.createText(headerPanel, SWT.SINGLE | SWT.BORDER,
+				ViewWidgetId.VIEW_FARM_NAME_TXT);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(farmText);
+
+		final Label farmIdLabel = UIControlsFactory.createLabel(headerPanel, "Farm Id :");
+		addUIControl(farmIdLabel, ViewWidgetId.VIEW_FARM_ID);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmIdLabel);
+
+		final Label memberIdLabel = UIControlsFactory.createLabel(headerPanel, "Member Id :");
+		addUIControl(memberIdLabel, ViewWidgetId.VIEW_FARM_MEMBER_ID);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberIdLabel);
+
+		final Label memberNameLabel = UIControlsFactory.createLabel(headerPanel, "Member Name :");
+		addUIControl(memberNameLabel, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberNameLabel);
+
 	}
 
 }

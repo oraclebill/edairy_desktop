@@ -15,16 +15,15 @@ public class MemberTransactionEditDialog extends RecordDialog<AccountTransaction
 	}
 
 	@Override
-	protected MemberTransactionEditController2 createController() {
-		MemberTransactionEditController2 controller = new MemberTransactionEditController2();
-		return controller;
+	protected void buildWorkArea(Composite comp) {
+		new TransactionEntryPanel(comp, SWT.NONE);
+
 	}
 
 	@Override
-	protected void buildWorkArea(Composite comp) {
-		new TransactionEntryPanel(comp, SWT.NONE);
-		
+	protected MemberTransactionEditController2 createController() {
+		final MemberTransactionEditController2 controller = new MemberTransactionEditController2();
+		return controller;
 	}
 
-	
 }

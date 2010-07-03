@@ -11,18 +11,22 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MapGroupWidget {
-	private final Group mapGroup;
-
-	public static final String MAP_GROUP_TXT = "Map";
 	public static final String LATITUDE_LABEL_TXT = "Latitude:";
+
 	public static final String LONGTITUDE_LABEL_TXT = "Longtitue:";
+	public static final String MAP_GROUP_TXT = "Map";
+	private Text directionsText;
 
 	private Text landMarkText;
-	private Text directionsText;
+	private final Group mapGroup;
 
 	public MapGroupWidget(Composite parent) {
 		mapGroup = UIControlsFactory.createGroup(parent, MAP_GROUP_TXT);
 		creatDirectonsGroup();
+	}
+
+	public Group getGroup() {
+		return mapGroup;
 	}
 
 	private void creatDirectonsGroup() {
@@ -34,9 +38,5 @@ public class MapGroupWidget {
 		UIControlsFactory.createLabel(mapGroup, LONGTITUDE_LABEL_TXT);
 		directionsText = UIControlsFactory.createText(mapGroup, SWT.SINGLE | SWT.BORDER, ViewWidgetId.LONGTITUDE_TEXT);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(directionsText);
-	}
-
-	public Group getGroup() {
-		return mapGroup;
 	}
 }

@@ -29,23 +29,26 @@ public class AddRouteDialog extends AbstractDialogView {
 		super(null);
 		myController = new AddRouteDialogController(null);
 	}
-	
+
 	public AddRouteDialog(AbstractWindowController controller) {
 		super(null);
 		if (controller == null) {
 			myController = new AddRouteDialogController(null);
-		} 
-		else {
+		} else {
 			myController = controller;
 		}
 	}
 
+	private void createMessageBoxes() {
+		final MessageBox nameErrorMessage = UIControlsFactory.createMessageBox(contentArea);
+		this.addUIControl(nameErrorMessage, AddRouteDialogIDs.RIDGET_ID_DUPLICATE_NAME_DIALOG);
+	}
+
 	@Override
 	protected Control buildView(Composite parent) {
-		parent.setBackground(LnfManager.getLnf().getColor(
-				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		contentArea = new Composite(parent, SWT.NONE);
-		GridData gd_contentArea = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		final GridData gd_contentArea = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_contentArea.heightHint = 216;
 		contentArea.setLayoutData(gd_contentArea);
 		contentArea.setLayout(new GridLayout(2, false));
@@ -58,61 +61,49 @@ public class AddRouteDialog extends AbstractDialogView {
 		 * idText.setEditable(false); idText.setLayoutData(gd);
 		 */
 
-		final Label nameLabel = UIControlsFactory.createLabel(contentArea,
-				"Name", SWT.LEFT);
-		final Text nameText = UIControlsFactory.createText(contentArea,
-				SWT.BORDER | SWT.SINGLE, AddRouteDialogIDs.RIDGET_ID_NAME);
+		final Label nameLabel = UIControlsFactory.createLabel(contentArea, "Name", SWT.LEFT);
+		final Text nameText = UIControlsFactory.createText(contentArea, SWT.BORDER | SWT.SINGLE,
+				AddRouteDialogIDs.RIDGET_ID_NAME);
 		GridData gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 3;
 		nameText.setLayoutData(gd);
 
-		final Label descriptionLabel = UIControlsFactory.createLabel(
-				contentArea, "Description", SWT.LEFT | SWT.TOP);
+		final Label descriptionLabel = UIControlsFactory.createLabel(contentArea, "Description", SWT.LEFT | SWT.TOP);
 		gd = new GridData();
 		gd.verticalAlignment = GridData.FILL_VERTICAL;
 		descriptionLabel.setLayoutData(gd);
 
-		final Text descriptionText = UIControlsFactory.createTextMulti(
-				contentArea, false, false,
+		final Text descriptionText = UIControlsFactory.createTextMulti(contentArea, false, false,
 				AddRouteDialogIDs.RIDGET_ID_DESCRIPTION);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT * 3;
 		gd.heightHint = 60;
 		descriptionText.setLayoutData(gd);
 
-		final Label codeLabel = UIControlsFactory.createLabel(contentArea,
-				"Code", SWT.LEFT | SWT.TOP);
+		final Label codeLabel = UIControlsFactory.createLabel(contentArea, "Code", SWT.LEFT | SWT.TOP);
 		gd = new GridData();
 		gd.verticalAlignment = GridData.FILL_VERTICAL;
 		codeLabel.setLayoutData(gd);
 
-		final Text codeText = UIControlsFactory.createTextMulti(contentArea,
-				false, false, AddRouteDialogIDs.RIDGET_ID_CODE);
+		final Text codeText = UIControlsFactory.createTextMulti(contentArea, false, false,
+				AddRouteDialogIDs.RIDGET_ID_CODE);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		codeText.setLayoutData(gd);
 
-		final Button saveButton = UIControlsFactory.createButton(contentArea,
-				"Save", AddRouteDialogIDs.RIDGET_ID_SAVE);
+		final Button saveButton = UIControlsFactory.createButton(contentArea, "Save", AddRouteDialogIDs.RIDGET_ID_SAVE);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		saveButton.setLayoutData(gd);
 
-		final Button cancelButton = UIControlsFactory.createButton(contentArea,
-				"Cancel", AddRouteDialogIDs.RIDGET_ID_CANCEL);
+		final Button cancelButton = UIControlsFactory.createButton(contentArea, "Cancel",
+				AddRouteDialogIDs.RIDGET_ID_CANCEL);
 		gd = new GridData();
 		gd.widthHint = WIDTH_UNIT;
 		cancelButton.setLayoutData(gd);
 
 		createMessageBoxes();
 		return contentArea;
-	}
-
-	private void createMessageBoxes() {
-		final MessageBox nameErrorMessage = UIControlsFactory
-				.createMessageBox(contentArea);
-		this.addUIControl(nameErrorMessage,
-				AddRouteDialogIDs.RIDGET_ID_DUPLICATE_NAME_DIALOG);
 	}
 
 	@Override

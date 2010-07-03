@@ -9,11 +9,19 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class ViewMemberDialogController extends AddMemberDialogController {
 
-	private ILabelRidget memberName;
-	private ILabelRidget memberId;
 	private ILabelRidget memberbalance;
+	private ILabelRidget memberId;
+	private ILabelRidget memberName;
 	private ILabelRidget memberPhoto;
 
+	@Override
+	protected void configureButtonsPanel() {
+		super.configureButtonsPanel();
+		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
+		deleteAction.setVisible(true);
+	}
+
+	@Override
 	protected void configureUpperPanel() {
 		memberName = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_MEMBER_NAME_HEADER);
 		memberId = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_MEMBER_ID);
@@ -21,6 +29,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 		memberPhoto = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_MEMBER_NAME_PHOTO);
 	}
 
+	@Override
 	protected void updateUpperPanelBinding() {
 		final Membership selectedMember = getWorkingCopy();
 		if (selectedMember != null) {
@@ -29,11 +38,5 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 			memberId.setText("Member ID : " + selectedMember.getMemberId());
 			memberbalance.setText("Current Balance : ");
 		}
-	}
-
-	protected void configureButtonsPanel() {
-		super.configureButtonsPanel();
-		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
-		deleteAction.setVisible(true);
 	}
 }

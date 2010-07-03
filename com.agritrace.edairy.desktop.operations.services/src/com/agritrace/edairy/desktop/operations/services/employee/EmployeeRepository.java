@@ -8,7 +8,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
-public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee>{
+public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee> {
 
 	private final HibernateRepository<Employee> employeeRepo = new HibernateRepository<Employee>() {
 		@Override
@@ -24,13 +24,8 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	}
 
 	@Override
-	public void save(Object obj) {
-		employeeRepo.save(obj);
-	}
-
-	@Override
-	public List<Employee> find(String query, Object[] args) {
-		return employeeRepo.find(query, args);
+	public void delete(Employee deletableEntity) throws NonExistingEntityException {
+		employeeRepo.delete(deletableEntity);
 	}
 
 	@Override
@@ -39,8 +34,22 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	}
 
 	@Override
+	public List<Employee> find(String query, Object[] args) {
+		return employeeRepo.find(query, args);
+	}
+
+	@Override
 	public Employee findByKey(long key) {
 		return employeeRepo.findByKey(key);
+	}
+
+	public void merge(Employee obj) {
+		employeeRepo.merge(obj);
+	}
+
+	@Override
+	public void save(Object obj) {
+		employeeRepo.save(obj);
 	}
 
 	@Override
@@ -51,15 +60,6 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	@Override
 	public void update(Employee updateableEntity) throws NonExistingEntityException {
 		employeeRepo.update(updateableEntity);
-	}
-
-	@Override
-	public void delete(Employee deletableEntity) throws NonExistingEntityException {
-		employeeRepo.delete(deletableEntity);
-	}
-
-	public void merge(Employee obj) {
-		employeeRepo.merge(obj);
 	}
 
 }

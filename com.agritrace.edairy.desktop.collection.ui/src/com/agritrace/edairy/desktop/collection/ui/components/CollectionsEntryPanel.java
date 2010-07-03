@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.collection.ui.components;
 
-import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.MINIMUM_LABEL_WIDTH;
 import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledBooleanField;
 import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledComboField;
 import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledDecimalTextField;
@@ -78,10 +77,6 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 	}
 
 	private void addPrimaryGroup(Composite group) {
-		final GridDataFactory gdf = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false);
-		final GridDataFactory labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.hint(MINIMUM_LABEL_WIDTH, -1);
-
 		final Group panel = UIControlsFactory.createGroup(group, "Milk");
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(1, 1).applyTo(panel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(8).applyTo(panel);

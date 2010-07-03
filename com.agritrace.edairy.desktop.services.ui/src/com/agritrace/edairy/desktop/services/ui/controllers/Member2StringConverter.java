@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.services.ui.controllers;
 
-import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.core.databinding.conversion.Converter;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
@@ -9,23 +9,17 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
  * @author wanhui
  * 
  */
-public class Member2StringConverter implements IConverter {
+public class Member2StringConverter extends Converter {
 
-	@Override
-	public Object getFromType() {
-		return Membership.class;
-	}
-
-	@Override
-	public Object getToType() {
-		return String.class;
+	public Member2StringConverter() {
+		super(Membership.class, String.class);
 	}
 
 	@Override
 	public Object convert(Object fromObject) {
 		if (fromObject instanceof Membership) {
-			Membership ship = (Membership) fromObject;
-			Farmer farmer = ship.getMember();
+			final Membership ship = (Membership) fromObject;
+			final Farmer farmer = ship.getMember();
 			return farmer.getGivenName() + " " + farmer.getFamilyName();
 		}
 		return null;

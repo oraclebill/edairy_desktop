@@ -7,11 +7,11 @@ import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanelCon
 public class MemberTransactionEditController2 extends RecordDialogController<AccountTransaction> {
 
 	private TransactionEntryPanelController panelController;
+
 	public MemberTransactionEditController2() {
 		super();
 	}
 
-	
 	@Override
 	protected void configureUserRidgets() {
 		panelController = new TransactionEntryPanelController();
@@ -20,17 +20,10 @@ public class MemberTransactionEditController2 extends RecordDialogController<Acc
 		panelController.configureAndBind();
 	}
 
-
 	@Override
 	protected void handleSaveAction() {
 		panelController.checkValid();
 		super.handleSaveAction();
 	}
 
-	private void checkValid() {
-		
-		
-	}
-
-	
 }

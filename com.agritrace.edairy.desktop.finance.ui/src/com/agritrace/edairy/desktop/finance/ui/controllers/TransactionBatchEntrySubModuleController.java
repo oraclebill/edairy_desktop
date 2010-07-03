@@ -13,47 +13,22 @@ import org.eclipse.riena.ui.ridgets.IRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.finance.ui.beans.TestAccountTransactionGenerator;
 
-public class TransactionBatchEntrySubModuleController extends
-		SubModuleController {
+public class TransactionBatchEntrySubModuleController extends SubModuleController {
 
-	private static final String[] columnPropertyNames = {
-		"id", "date", "source", "referenceNumber", "member", "amount"
-	};
-	
-	private static final String[] columnHeaders = {
-		"ID",  "Date", "Type", "Reference Number", "Member", "Amount"
-	};
-	
+	private static final String[] columnHeaders = { "ID", "Date", "Type", "Reference Number", "Member", "Amount" };
+
+	private static final String[] columnPropertyNames = { "id", "date", "source", "referenceNumber", "member", "amount" };
+
 	List<AccountTransaction> testTransactions = TestAccountTransactionGenerator.INSTANCE.createTransactions(30);
-	
+
 	public TransactionBatchEntrySubModuleController(ISubModuleNode node) {
 		super(node);
 	}
-	
+
 	@Override
 	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
 		// TODO Auto-generated method stub
 		super.addDefaultAction(focusRidget, action);
-	}
-
-	@Override
-	public void configureRidgets() {
-		// TODO Auto-generated method stub
-		IMasterDetailsRidget ridgetMaster = getRidget(IMasterDetailsRidget.class, "master");
-		ridgetMaster.setDelegate(new TransactionBatchEntryDelegate());
-		ridgetMaster.bindToModel(
-				getModel(), 
-				AccountTransaction.class,
-				columnPropertyNames,
-				columnHeaders
-				);
-		ridgetMaster.updateFromModel();
-	}
-	
-	private IObservableList getModel() {
-		IObservableList oList = null;
-		oList = new WritableList(testTransactions, AccountTransaction.class);
-		return oList;
 	}
 
 	@Override
@@ -62,5 +37,19 @@ public class TransactionBatchEntrySubModuleController extends
 		super.afterBind();
 	}
 
+	@Override
+	public void configureRidgets() {
+		// TODO Auto-generated method stub
+		final IMasterDetailsRidget ridgetMaster = getRidget(IMasterDetailsRidget.class, "master");
+		ridgetMaster.setDelegate(new TransactionBatchEntryDelegate());
+		ridgetMaster.bindToModel(getModel(), AccountTransaction.class, columnPropertyNames, columnHeaders);
+		ridgetMaster.updateFromModel();
+	}
+
+	private IObservableList getModel() {
+		IObservableList oList = null;
+		oList = new WritableList(testTransactions, AccountTransaction.class);
+		return oList;
+	}
 
 }

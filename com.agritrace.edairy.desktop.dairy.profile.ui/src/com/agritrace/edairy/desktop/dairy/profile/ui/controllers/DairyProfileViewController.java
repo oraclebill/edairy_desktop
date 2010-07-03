@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
-
 import java.util.List;
 
 import org.eclipse.riena.navigation.ISubModuleNode;
@@ -38,62 +37,12 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
  */
 public class DairyProfileViewController extends SubModuleController {
 
-
-	public static final String ID = DairyProfileViewController.class.getName();
-	private final IDairyRepository dairyRepository = new DairyRepository();
-
-	// main page
-	private ITextRidget txtID;
-	private ITextRidget txtNAME;
-	private ITextRidget txtPHONE;
-	private INumericTextRidget txtMEMBER_COUNT;
-	private ITextRidget txtMANAGER_NAME;
-	private IDateTimeRidget txtESTABLISHED_DATE;
-	private ITextRidget txtPUBLIC_DESCRIPTION;
-	private ILabelRidget txtPROFILE_IMAGE;
-
-	private ITextRidget txtLEGAL_NAME;
-	private ITextRidget txtNSSF_NUMBER;
-	private ITextRidget txtNHIF_NUMBER;
-	private ITextRidget txtFEDERAL_PIN;
-	private ITextRidget txtREGISTRATION_NBR;
-	private IDateTimeRidget txtLIC_EFFECTIVE_DATE;
-	private IDateTimeRidget txtLIC_EXPIRATION_DATE;
-	private ILinkRidget txtPROFILE_IMAGE_LINK;
-
-	private IActionRidget saveAction;
-	private IActionRidget cancelAction;
-
-	private LocationProfileWidgetController locationController;
-	private CommunicationGroupController communicationGroup;
-
-
-	private Dairy localDairy;
-	private int memberCount;
-	private boolean newDairy = true;
-
-
-	class DairyProfileSaveAction implements IActionListener {
-		@Override
-		public void callback() {
-			if (newDairy) {
-				dairyRepository.saveNewDairy(localDairy);
-				newDairy = false;
-			}
-			else {
-				dairyRepository.updateDairy(localDairy);
-			}
-			updateBindings();
-		}
-	}
-
 	class DairyProfileCancelAction implements IActionListener {
 		@Override
 		public void callback() {
-			if ( !newDairy ) {
+			if (!newDairy) {
 				localDairy = dairyRepository.getDairyById(localDairy.getCompanyId());
-			}
-			else {
+			} else {
 				localDairy = dairyRepository.reloadLocalDairy();
 			}
 			initBindings();
@@ -101,18 +50,31 @@ public class DairyProfileViewController extends SubModuleController {
 		}
 	}
 
+	class DairyProfileSaveAction implements IActionListener {
+		@Override
+		public void callback() {
+			if (newDairy) {
+				dairyRepository.saveNewDairy(localDairy);
+				newDairy = false;
+			} else {
+				dairyRepository.updateDairy(localDairy);
+			}
+			updateBindings();
+		}
+	}
+
 	class LinkFocusListener implements IFocusListener {
 		@Override
 		public void focusGained(FocusEvent event) {
-			IRidget focused = event.getNewFocusOwner();
-			System.err.println( "Focused on >> " + focused);
+			final IRidget focused = event.getNewFocusOwner();
+			System.err.println("Focused on >> " + focused);
 			// Link link = (Link)focused.getUIControl();
 		}
 
 		@Override
 		public void focusLost(FocusEvent event) {
-			IRidget focused = event.getNewFocusOwner();
-			System.err.println( "Focused lost on >> " + focused);
+			final IRidget focused = event.getNewFocusOwner();
+			System.err.println("Focused lost on >> " + focused);
 			// Link link = (Link)focused.getUIControl();
 		}
 	}
@@ -120,12 +82,46 @@ public class DairyProfileViewController extends SubModuleController {
 	class LinkSelectionListener implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
-			IRidget focused = event.getSource();
-			List<Object> selected = event.getNewSelection();
-			System.err.println( "Selected "+ selected +" on " + focused);
+			final IRidget focused = event.getSource();
+			final List<Object> selected = event.getNewSelection();
+			System.err.println("Selected " + selected + " on " + focused);
 			// Link link = (Link)focused.getUIControl();
 		}
 	}
+
+	public static final String ID = DairyProfileViewController.class.getName();
+	private IActionRidget cancelAction;
+	private CommunicationGroupController communicationGroup;
+	private final IDairyRepository dairyRepository = new DairyRepository();
+	private Dairy localDairy;
+
+	private LocationProfileWidgetController locationController;
+	private int memberCount;
+	private boolean newDairy = true;
+	private IActionRidget saveAction;
+	private IDateTimeRidget txtESTABLISHED_DATE;
+	private ITextRidget txtFEDERAL_PIN;
+	// main page
+	private ITextRidget txtID;
+	private ITextRidget txtLEGAL_NAME;
+
+	private IDateTimeRidget txtLIC_EFFECTIVE_DATE;
+	private IDateTimeRidget txtLIC_EXPIRATION_DATE;
+
+	private INumericTextRidget txtMEMBER_COUNT;
+	private ITextRidget txtNAME;
+
+	private ITextRidget txtNHIF_NUMBER;
+	private ITextRidget txtNSSF_NUMBER;
+	private ITextRidget txtPHONE;
+
+	private ILabelRidget txtPROFILE_IMAGE;
+
+	private ILinkRidget txtPROFILE_IMAGE_LINK;
+
+	private ITextRidget txtPUBLIC_DESCRIPTION;
+
+	private ITextRidget txtREGISTRATION_NBR;
 
 	/**
 	 * Constructor
@@ -136,21 +132,20 @@ public class DairyProfileViewController extends SubModuleController {
 		localDairy = dairyRepository.getLocalDairy();
 	}
 
-	/**
-	 * Get member count for UI.
-	 *  
-	 * TODO: for now, we fake it..
-	 * 
-	 * @return
-	 */
-	public int getMemberCount() {
-		return memberCount;
+	@Override
+	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
+		// TODO Auto-generated method stub
+		super.addDefaultAction(focusRidget, action);
+		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action);
 	}
-	
-	public void setMemberCount(int val) {
-		memberCount = val;		
+
+	@Override
+	public void afterBind() {
+		super.afterBind();
+		initBindings();
+		updateBindings();
 	}
-	
+
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
@@ -165,6 +160,96 @@ public class DairyProfileViewController extends SubModuleController {
 		configureButtonsPanel();
 	}
 
+	@Override
+	public IInfoFlyoutRidget getInfoFlyout() {
+		// TODO Auto-generated method stub
+		System.err.println(">>>>>>>>>>>>>>>>>> getInfoFlyout: ");
+
+		return super.getInfoFlyout();
+	}
+
+	@Override
+	public IRidget getInitialFocus() {
+		// TODO Auto-generated method stub
+		System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: ");
+
+		return super.getInitialFocus();
+	}
+
+	/**
+	 * Get member count for UI.
+	 * 
+	 * TODO: for now, we fake it..
+	 * 
+	 * @return
+	 */
+	public int getMemberCount() {
+		return memberCount;
+	}
+
+	@Override
+	public ModuleController getModuleController() {
+		// TODO Auto-generated method stub
+		System.err.println(">>>>>>>>>>>>>>>>>> getModuleController: ");
+
+		return super.getModuleController();
+	}
+
+	@Override
+	public IWindowRidget getWindowRidget() {
+		// TODO Auto-generated method stub
+		System.err.println(">>>>>>>>>>>>>>>>>> getWindowRidget: ");
+
+		return super.getWindowRidget();
+	}
+
+	@Override
+	public void setInitialFocus(IRidget ridget) {
+		// TODO Auto-generated method stub
+		super.setInitialFocus(ridget);
+		System.err.println(">>>>>>>>>>>>>>>>>> setInitialFocus: " + ridget);
+
+	}
+
+	public void setMemberCount(int val) {
+		memberCount = val;
+	}
+
+	@Override
+	public void setNavigationNode(ISubModuleNode navigationNode) {
+		// TODO Auto-generated method stub
+		super.setNavigationNode(navigationNode);
+		System.err.println(">>>>>>>>>>>>>>>>>> setNavigationNode: " + navigationNode);
+
+	}
+
+	@Override
+	public void setWindowRidget(IWindowRidget windowRidget) {
+		// TODO Auto-generated method stub
+		super.setWindowRidget(windowRidget);
+		System.err.println(">>>>>>>>>>>>>>>>>> setWindowRidget: " + windowRidget);
+
+	}
+
+	@Override
+	public void updateAllRidgetsFromModel() {
+		// TODO Auto-generated method stub
+		super.updateAllRidgetsFromModel();
+		System.err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: ");
+
+	}
+
+	/**
+	 * Configure teh button panel.
+	 * 
+	 */
+	private void configureButtonsPanel() {
+		saveAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_SAVE);
+		saveAction.addListener(new DairyProfileSaveAction());
+		cancelAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_CANCEL);
+		cancelAction.addListener(new DairyProfileCancelAction());
+	}
+
 	/**
 	 * Configures the ridgets in teh upper panel.
 	 * 
@@ -176,10 +261,10 @@ public class DairyProfileViewController extends SubModuleController {
 		txtID.setOutputOnly(true);
 		txtNAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NAME);
 		txtNAME.addValidationRule(new RequiredField(), ValidationTime.ON_UI_CONTROL_EDIT);
-		
+
 		txtPHONE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PHONE_NUMBER);
 		txtPHONE.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		
+
 		txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
 		txtPUBLIC_DESCRIPTION.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
@@ -197,7 +282,7 @@ public class DairyProfileViewController extends SubModuleController {
 		// registration tab
 		txtLEGAL_NAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_LEGAL_NAME);
 		txtLEGAL_NAME.addValidationRule(new RequiredField(), ValidationTime.ON_UI_CONTROL_EDIT);
-		
+
 		txtREGISTRATION_NBR = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER);
 		txtREGISTRATION_NBR.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
@@ -207,17 +292,6 @@ public class DairyProfileViewController extends SubModuleController {
 		txtLIC_EFFECTIVE_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE);
 		txtLIC_EXPIRATION_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE);
 
-	}
-
-	/**
-	 * Configure teh button panel.
-	 * 
-	 */
-	private void configureButtonsPanel() {
-		saveAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_SAVE);
-		saveAction.addListener(new DairyProfileSaveAction());
-		cancelAction = (IActionRidget) getRidget(DairyProfileViewWidgetID.DAIRY_CANCEL);
-		cancelAction.addListener(new DairyProfileCancelAction());
 	}
 
 	/**
@@ -244,7 +318,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtFEDERAL_PIN.bindToModel(localDairy, "federalPin");
 		txtLIC_EFFECTIVE_DATE.bindToModel(localDairy, "licenseEffectiveDate");
 		txtLIC_EXPIRATION_DATE.bindToModel(localDairy, "licenseExpirationDate");
-		
+
 		locationController.setInputModel(localDairy.getLocation());
 		communicationGroup.setInputModel(localDairy.getContactMethods());
 	}
@@ -278,88 +352,10 @@ public class DairyProfileViewController extends SubModuleController {
 	}
 
 	@Override
-	public void afterBind() {
-		super.afterBind();
-		initBindings();
-		updateBindings();
-	}
-
-	@Override
-	public IRidget getInitialFocus() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: ");
-
-		return super.getInitialFocus();
-	}
-
-	@Override
-	public ModuleController getModuleController() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getModuleController: ");
-
-		return super.getModuleController();
-	}
-
-	@Override
-	public IWindowRidget getWindowRidget() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getWindowRidget: ");
-
-		return super.getWindowRidget();
-	}
-
-	@Override
-	public IInfoFlyoutRidget getInfoFlyout() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getInfoFlyout: ");
-
-		return super.getInfoFlyout();
-	}
-
-	@Override
-	public void setInitialFocus(IRidget ridget) {
-		// TODO Auto-generated method stub
-		super.setInitialFocus(ridget);
-		System.err.println(">>>>>>>>>>>>>>>>>> setInitialFocus: " + ridget);
-
-	}
-
-	@Override
-	public void setNavigationNode(ISubModuleNode navigationNode) {
-		// TODO Auto-generated method stub
-		super.setNavigationNode(navigationNode);
-		System.err.println(">>>>>>>>>>>>>>>>>> setNavigationNode: " + navigationNode);
-
-	}
-
-	@Override
-	public void setWindowRidget(IWindowRidget windowRidget) {
-		// TODO Auto-generated method stub
-		super.setWindowRidget(windowRidget);
-		System.err.println(">>>>>>>>>>>>>>>>>> setWindowRidget: " + windowRidget);
-
-	}
-
-	@Override
-	public void updateAllRidgetsFromModel() {
-		// TODO Auto-generated method stub
-		super.updateAllRidgetsFromModel();
-		System.err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: ");
-
-	}
-
-	@Override
 	protected void updateIcon(IWindowRidget windowRidget) {
 		// TODO Auto-generated method stub
 		super.updateIcon(windowRidget);
 		System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " + windowRidget);
 
-	}
-
-	@Override
-	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
-		// TODO Auto-generated method stub
-		super.addDefaultAction(focusRidget, action);
-		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action);
 	}
 }

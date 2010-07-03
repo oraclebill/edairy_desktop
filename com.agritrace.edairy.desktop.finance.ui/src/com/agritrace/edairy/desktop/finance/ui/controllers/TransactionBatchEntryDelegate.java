@@ -37,94 +37,96 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 
 		// setup observables first..
 		// transaction type
-		IObservableValue obTransactionType = // TODO: rename to disambiguate
-												// source (store, vet, share,
-												// etc) and type (db, cr)
+		final IObservableValue obTransactionType = // TODO: rename to
+													// disambiguate
+													// source (store, vet,
+													// share,
+													// etc) and type (db, cr)
 		EMFObservables.observeValue(workingCopy, AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 		// Date
-		IObservableValue obDate = EMFObservables.observeValue(workingCopy,
+		final IObservableValue obDate = EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_TYPE);
 		// Store
-		IObservableValue obStore = EMFObservables.observeValue(workingCopy,
+		final IObservableValue obStore = EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_TYPE);
-		// Reference Number
-		IObservableValue obReferenceNo = EMFObservables.observeValue(workingCopy,
+		EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_TYPE);
 		// Record Id
 		// TODO: no record id in model !!
 		// Member Id
-		IObservableValue obMemberId = EMFProperties.value(
+		final IObservableValue obMemberId = EMFProperties.value(
 				FeaturePath.fromList(AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT,
 						AccountPackage.Literals.ACCOUNT__MEMBER, DairyPackage.Literals.MEMBERSHIP__MEMBER_ID)).observe(
 				workingCopy);
 		// Member Name
-		IObservableValue obMemberName = EMFProperties.value(
-				FeaturePath.fromList(
-						AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT,
-						AccountPackage.Literals.ACCOUNT__MEMBER, 
-						DairyPackage.Literals.MEMBERSHIP__MEMBER,
-						ModelPackage.Literals.PERSON__FAMILY_NAME)).
-					observe(workingCopy); // TODO: Use the 'name' property to get a display name for member
+		final IObservableValue obMemberName = EMFProperties.value(
+				FeaturePath.fromList(AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT,
+						AccountPackage.Literals.ACCOUNT__MEMBER, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+						ModelPackage.Literals.PERSON__FAMILY_NAME)).observe(workingCopy); // TODO:
+																							// Use
+																							// the
+																							// 'name'
+																							// property
+																							// to
+																							// get
+																							// a
+																							// display
+																							// name
+																							// for
+																							// member
 		// Amount
-		IObservableValue obAmt = EMFObservables.observeValue(workingCopy,
+		final IObservableValue obAmt = EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
-		// Description
-		IObservableValue obDesc = EMFObservables.observeValue(workingCopy,
+		EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__DESCRIPTION);
-		// Signed By
-		IObservableValue obSignedBy = EMFObservables.observeValue(workingCopy,
+		EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 
 		//
 		// Bind stuff
 		//
 
-		
 		// Bind Transaction Type Combo
-		ISingleChoiceRidget ridgetTransactionType = container.getRidget(ISingleChoiceRidget.class, "sourceSelectorPanel");
+		final ISingleChoiceRidget ridgetTransactionType = container.getRidget(ISingleChoiceRidget.class,
+				"sourceSelectorPanel");
 		ridgetTransactionType.bindToModel(ridgetTransactionType.getObservableList(), obTransactionType);
 		ridgetTransactionType.updateFromModel();
-		
+
 		// Bind Date
-		IDateTextRidget ridgetDate = container.getRidget(IDateTextRidget.class, FormConstants.DATE_PICKER_RIDGET);
+		final IDateTextRidget ridgetDate = container.getRidget(IDateTextRidget.class, FormConstants.DATE_PICKER_RIDGET);
 		ridgetDate.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		ridgetDate.bindToModel(obDate);
 		ridgetDate.updateFromModel();
-		
+
 		// Bind Store
-		IComboRidget ridgetStore = container.getRidget(IComboRidget.class, FormConstants.STORE_COMBO_RIDGET);
+		final IComboRidget ridgetStore = container.getRidget(IComboRidget.class, FormConstants.STORE_COMBO_RIDGET);
 		ridgetStore.bindToModel(new WritableList(), String.class, "name", obStore);
 		ridgetStore.updateFromModel();
-		
+
 		// Reference Number
-		ITextRidget ridgetRefNo = container.getRidget(ITextRidget.class, FormConstants.REF_NO_TEXT_RIDGET); 
+		final ITextRidget ridgetRefNo = container.getRidget(ITextRidget.class, FormConstants.REF_NO_TEXT_RIDGET);
 		ridgetRefNo.bindToModel(EMFObservables.observeValue(workingCopy,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_ID));
 		ridgetRefNo.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		ridgetRefNo.updateFromModel();
 
-		// Record Id // TODO: fix model - no record id
-		ITextRidget ridgetRecId = container.getRidget(ITextRidget.class, FormConstants.RECORD_ID_TEXT); 
-		// txtRecordId.bindToModel(workingCopy,
-		// AccountPackage.Literals.ACCOUNT_TRANSACTION__);
-		// txtRecordId.addValidationRule(new NotEmpty(),
-		// ValidationTime.ON_UI_CONTROL_EDIT);
-		// txtRecordId.updateFromModel();
+		container.getRidget(ITextRidget.class, FormConstants.RECORD_ID_TEXT);
 
 		// Member Id
-		ITextRidget ridgetMemberId = container.getRidget(ITextRidget.class, FormConstants.MEMBER_ID_TEXT_RIDGET); 
+		final ITextRidget ridgetMemberId = container.getRidget(ITextRidget.class, FormConstants.MEMBER_ID_TEXT_RIDGET);
 		ridgetMemberId.bindToModel(obMemberId);
 		ridgetMemberId.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		ridgetMemberId.updateFromModel();
 
 		// Member Id
-		ILabelRidget ridgetMemberName = container.getRidget(ILabelRidget.class, FormConstants.LBL_MEMBER_NAME_RIDGET); 
+		final ILabelRidget ridgetMemberName = container.getRidget(ILabelRidget.class,
+				FormConstants.LBL_MEMBER_NAME_RIDGET);
 		ridgetMemberName.bindToModel(obMemberName);
 		ridgetMemberName.updateFromModel();
 
 		// Amount
-//		INumericTextRidget ridgetAmt = container.getRidget(INumericTextRidget.class, FormConstants.AMT_TEXT_RIDGET); //$NON-NLS-1$
-		ITextRidget ridgetAmt = container.getRidget(ITextRidget.class, FormConstants.AMT_TEXT_RIDGET); 
+		//		INumericTextRidget ridgetAmt = container.getRidget(INumericTextRidget.class, FormConstants.AMT_TEXT_RIDGET); //$NON-NLS-1$
+		final ITextRidget ridgetAmt = container.getRidget(ITextRidget.class, FormConstants.AMT_TEXT_RIDGET);
 		ridgetAmt.bindToModel(obAmt);
 		ridgetAmt.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		ridgetAmt.updateFromModel();
@@ -158,11 +160,10 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 
 	@Override
 	public AccountTransaction copyBean(Object source, Object target) {
-		AccountTransaction from = source != null ? (AccountTransaction) source : createWorkingCopy();
-		AccountTransaction to = target != null ? (AccountTransaction) target : createWorkingCopy();
+		final AccountTransaction to = target != null ? (AccountTransaction) target : createWorkingCopy();
 
-		if (source instanceof EObject && target instanceof EObject) {
-			EMFUtil.copy((EObject) source, (EObject) target,1);
+		if ((source instanceof EObject) && (target instanceof EObject)) {
+			EMFUtil.copy((EObject) source, (EObject) target, 1);
 		} else {
 			throw new IllegalArgumentException("Domain objects must be EObjects!");
 		}
@@ -191,7 +192,7 @@ public class TransactionBatchEntryDelegate extends AbstractMasterDetailsDelegate
 
 	@Override
 	public String isValid(IRidgetContainer container) {
-		ITextRidget txtLast = (ITextRidget) container.getRidget("txtLast"); //$NON-NLS-1$
+		final ITextRidget txtLast = (ITextRidget) container.getRidget("txtLast"); //$NON-NLS-1$
 		if (txtLast.isErrorMarked()) {
 			return "'Last Name' is not valid."; //$NON-NLS-1$
 		}

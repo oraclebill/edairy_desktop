@@ -8,16 +8,22 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.services.ui.controllers.IAnimalHealthRequestRepository;
 
-public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHealthRequest> implements IAnimalHealthRequestRepository {
+public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHealthRequest> implements
+		IAnimalHealthRequestRepository {
 
 	@Override
-	protected Class<AnimalHealthRequest> getClassType() {
-		return AnimalHealthRequest.class;
+	public List<AnimalHealthRequest> all() {
+		return super.all();
 	}
 
 	@Override
-	public List<AnimalHealthRequest> find(String query, Object[] args) {
-		return super.find(query, args);
+	public List<AnimalHealthRequest> allRequests() {
+		return all();
+	}
+
+	@Override
+	public void delete(AnimalHealthRequest deletableEntity) throws NonExistingEntityException {
+		super.delete(deletableEntity);
 	}
 
 	@Override
@@ -26,13 +32,18 @@ public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHea
 	}
 
 	@Override
-	public List<AnimalHealthRequest> all() {
-		return super.all();
+	public List<AnimalHealthRequest> find(String query, Object[] args) {
+		return super.find(query, args);
 	}
 
 	@Override
 	public AnimalHealthRequest findByKey(long key) {
 		return super.findByKey(key);
+	}
+
+	@Override
+	public void merge(AnimalHealthRequest context) {
+		super.save(context);
 	}
 
 	@Override
@@ -46,19 +57,8 @@ public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHea
 	}
 
 	@Override
-	public void delete(AnimalHealthRequest deletableEntity) throws NonExistingEntityException {
-		super.delete(deletableEntity);
+	protected Class<AnimalHealthRequest> getClassType() {
+		return AnimalHealthRequest.class;
 	}
 
-	@Override
-	public List<AnimalHealthRequest> allRequests() {
-		return all();
-	}
-
-	@Override
-	public void merge(AnimalHealthRequest context) {
-		super.save(context);
-	}
-	
-	
 }

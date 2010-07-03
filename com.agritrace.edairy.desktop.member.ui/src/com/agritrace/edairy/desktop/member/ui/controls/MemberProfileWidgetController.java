@@ -10,12 +10,12 @@ import com.agritrace.edairy.desktop.member.ui.controllers.MemberInfoGroupControl
 
 public class MemberProfileWidgetController implements WidgetController {
 
+	private final CommunicationGroupController communicationGroup;
 	private IController controller;
-	private Membership member;
 
-	private MemberInfoGroupController infoGroup;
-	private LocationProfileWidgetController locationController;
-	private CommunicationGroupController communicationGroup;
+	private final MemberInfoGroupController infoGroup;
+	private final LocationProfileWidgetController locationController;
+	private Membership member;
 
 	public MemberProfileWidgetController(IController controller) {
 		this.controller = controller;
@@ -30,23 +30,9 @@ public class MemberProfileWidgetController implements WidgetController {
 		if (controller == null) {
 			return;
 		}
-//		infoGroup.configure();
-//		locationController.configure();
-//		communicationGroup.configure();
-	}
-
-	@Override
-	public Object getInputModel() {
-		return member;
-	}
-
-	@Override
-	public void setInputModel(Object model) {
-		this.member = (Membership) model;
-		if (controller != null) {
-			updateBinding();
-		}
-
+		// infoGroup.configure();
+		// locationController.configure();
+		// communicationGroup.configure();
 	}
 
 	@Override
@@ -56,8 +42,22 @@ public class MemberProfileWidgetController implements WidgetController {
 	}
 
 	@Override
+	public Object getInputModel() {
+		return member;
+	}
+
+	@Override
 	public void setController(IController controller) {
 		this.controller = controller;
+
+	}
+
+	@Override
+	public void setInputModel(Object model) {
+		this.member = (Membership) model;
+		if (controller != null) {
+			updateBinding();
+		}
 
 	}
 

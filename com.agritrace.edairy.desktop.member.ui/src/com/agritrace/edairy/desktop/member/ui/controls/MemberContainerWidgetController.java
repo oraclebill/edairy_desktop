@@ -39,7 +39,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
@@ -47,29 +46,61 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 
 public class MemberContainerWidgetController implements WidgetController, ISelectionListener {
 
-	private IController controller;
-	private Object inputModel;
+	private final class ViewContainerAction implements IActionListener {
 
-	private ITableRidget containerTable;
-	private IActionRidget containerAddButton;
-	private IActionRidget containerViewButton;
-	private final String[] containerPropertyNames = { "containerId", "owner", "type", "measureType", "capacity" };
-	private final String[] containerColumnHeaders = { "ID", "Farm", "Container Type", "Units Of Measure", "Capacity" };
-	private final List<Container> containers = new ArrayList<Container>();
-	private final List<Container> containerInput = new ArrayList<Container>();
-	private IComboRidget farmFilterCombo;
+		@Override
+		public void callback() {
+			Container selectedNode = (Container) containerTable.getSelection().get(0);
+			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
+			final List<Farm> inputFarms = new ArrayList<Farm>();
+			inputFarms.add(selectedNode.getOwner());
 
-	private List<Farm> farms = new ArrayList<Farm>();
-	private List<String> farmFilterList = new ArrayList<String>();
-	public static final String containerRemoveTitle = "Remove Containers";
-	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
+			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
+					selectedNode);
+			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
+
+			final int returnCode = dialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				selectedNode = (Container) dialog.getController().getContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+				farmRepository.update(selectedNode.getOwner());
+				refreshInputList();
+			} else if (returnCode == 2) {
+				// confirm for delete
+				if (selectedNode != null) {
+					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle,
+							containerRemoveMessage)) {
+						final Farm farm = selectedNode.getOwner();
+						farm.getCans().remove(selectedNode);
+						farmRepository.update(farm);
+						refreshInputList();
+					}
+				}
+			}
+		}
+	}
+
 	public static final String ALL_FARM = "All Farms";
-	private MemberRepository memberRepository;
-	private FarmRepository farmRepository;
+
+	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
+	public static final String containerRemoveTitle = "Remove Containers";
+	private IActionRidget containerAddButton;
+	private final String[] containerColumnHeaders = { "ID", "Farm", "Container Type", "Units Of Measure", "Capacity" };
+	private final List<Container> containerInput = new ArrayList<Container>();
+	private final String[] containerPropertyNames = { "containerId", "owner", "type", "measureType", "capacity" };
+	private final List<Container> containers = new ArrayList<Container>();
+	private ITableRidget containerTable;
+
+	private IActionRidget containerViewButton;
+	private IController controller;
+	private IComboRidget farmFilterCombo;
+	private final List<String> farmFilterList = new ArrayList<String>();
+	private final FarmRepository farmRepository;
+	private final List<Farm> farms = new ArrayList<Farm>();
+	private Object inputModel;
 
 	public MemberContainerWidgetController(IController controller) {
 		this.controller = controller;
-		memberRepository = new MemberRepository();
 		farmRepository = new FarmRepository();
 		configure();
 	}
@@ -104,15 +135,16 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 				final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
 				memberDialog.getController().setContext(
 						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
-				memberDialog.getController().setContext(
-						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, farms);
-				int returnCode = memberDialog.open();
+				memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST,
+						farms);
+				final int returnCode = memberDialog.open();
 				if (returnCode == AbstractWindowController.OK) {
-					container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+					container = (Container) memberDialog.getController().getContext(
+							ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 					container.getOwner().getCans().add(container);
-					Farm farm = container.getOwner();
-					if(farm.getFarmId() != null){
-						farmRepository.update(farm);	
+					final Farm farm = container.getOwner();
+					if (farm.getFarmId() != null) {
+						farmRepository.update(farm);
 					}
 					refreshInputList();
 				}
@@ -126,8 +158,49 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	}
 
 	@Override
+	public IController getController() {
+		return controller;
+	}
+
+	@Override
 	public Object getInputModel() {
 		return inputModel;
+	}
+
+	public void refreshInputList() {
+		try {
+			containers.clear();
+			containerInput.clear();
+			for (Farm farm : farms) {
+				if (farm.getFarmId() != null) {
+					farm = farmRepository.findByKey(farm.getFarmId());
+				}
+				containers.addAll(farm.getCans());
+			}
+			containerInput.addAll(getContainerFilteredResult());
+			containerTable.updateFromModel();
+		} catch (final Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@Override
+	public void ridgetSelected(SelectionEvent event) {
+		if (event.getSource() == containerTable) {
+			final List<Object> selection = event.getNewSelection();
+			if (selection.size() > 0) {
+				containerViewButton.setEnabled(true);
+			} else {
+				containerViewButton.setEnabled(false);
+			}
+		} else if (event.getSource() == farmFilterCombo) {
+			refreshInputList();
+		}
+	}
+
+	@Override
+	public void setController(IController controller) {
+		this.controller = controller;
 	}
 
 	@Override
@@ -137,16 +210,6 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 			updateBinding();
 		}
 
-	}
-
-	@Override
-	public IController getController() {
-		return controller;
-	}
-
-	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
 	}
 
 	@Override
@@ -167,33 +230,32 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 		farmFilterCombo.addSelectionListener(this);
 	}
 
-	private void createFarmFilterList(){
+	private void createFarmFilterList() {
 		farmFilterList.clear();
 		farmFilterList.add(ALL_FARM);
 		if (inputModel != null) {
 			if (inputModel instanceof Membership) {
-				Membership selectedMember = (Membership) inputModel;
-				farms.addAll( selectedMember.getMember().getFarms());
+				final Membership selectedMember = (Membership) inputModel;
+				farms.addAll(selectedMember.getMember().getFarms());
 				for (final Farm farm : farms) {
 					if (!farmFilterList.contains(farm.getName())) {
 						farmFilterList.add(farm.getName());
 					}
 				}
 			} else if (inputModel instanceof Farm) {
-				Farm farm = (Farm) inputModel;
+				final Farm farm = (Farm) inputModel;
 				farms.add(farm);
 				farmFilterList.add(farm.getName());
 			}
 		}
 	}
-	
 
 	private List<Container> getContainerFilteredResult() throws ParseException {
 		final List<Container> objs = new ArrayList<Container>();
 		SELECT select = null;
 
 		final String selectedValue = (String) farmFilterCombo.getSelection();
-		if (selectedValue == null || selectedValue.equals(ALL_FARM)) {
+		if ((selectedValue == null) || selectedValue.equals(ALL_FARM)) {
 			return containers;
 		}
 		final Condition farmName = new org.eclipse.emf.query.conditions.strings.StringValue(selectedValue);
@@ -210,67 +272,5 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 		}
 
 		return objs;
-	}
-
-	@Override
-	public void ridgetSelected(SelectionEvent event) {
-		if (event.getSource() == containerTable) {
-			final List<Object> selection = event.getNewSelection();
-			if (selection.size() > 0) {
-				containerViewButton.setEnabled(true);
-			} else {
-				containerViewButton.setEnabled(false);
-			}
-		} else if (event.getSource() == farmFilterCombo) {
-			refreshInputList();
-		}
-	}
-
-	private final class ViewContainerAction implements IActionListener{
-
-		@Override
-		public void callback() {
-			Container selectedNode = (Container) containerTable.getSelection().get(0);
-			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
-			List <Farm> inputFarms =  new ArrayList<Farm>();
-			inputFarms.add(selectedNode.getOwner());
-
-			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, selectedNode);
-			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-
-			int returnCode = dialog.open();
-			if (returnCode == AbstractWindowController.OK) {
-				selectedNode = (Container) dialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-				farmRepository.update(selectedNode.getOwner());
-				refreshInputList();
-			} else if (returnCode == 2) {
-				// confirm for delete
-				if (selectedNode != null) {
-					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle, containerRemoveMessage)) {
-						Farm farm = selectedNode.getOwner();
-						farm.getCans().remove(selectedNode);
-						farmRepository.update(farm);
-						refreshInputList();
-					}
-				}
-			}
-		}
-	}
-
-	public void refreshInputList() {
-		try{
-			containers.clear();
-			containerInput.clear();
-			for(Farm farm : farms){
-				if(farm.getFarmId() != null){
-					farm = farmRepository.findByKey(farm.getFarmId());		
-				}
-				containers.addAll(farm.getCans());
-			}
-			containerInput.addAll(getContainerFilteredResult());
-			containerTable.updateFromModel();
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
 	}
 }

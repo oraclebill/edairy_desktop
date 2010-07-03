@@ -17,19 +17,19 @@ import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class AddressGroupWidgetController implements WidgetController, ISelectionListener {
 
-	private IController controller;
-	private PostalLocation location;
-
 	private ITextRidget addressTxt;
-	private ITextRidget sectionTxt;
+	private IController controller;
+
+	private ITextRidget districtTxt;
+	private ITextRidget divisionTxt;
 	private ITextRidget estateTxt;
+	private PostalLocation location;
 	private ITextRidget locationTxt;
+	private ITextRidget postalCodeTxt;
+	private IComboRidget provinceComo;
+	private ITextRidget sectionTxt;
 	private ITextRidget subLocationTxt;
 	private ITextRidget villageTxt;
-	private ITextRidget divisionTxt;
-	private ITextRidget districtTxt;
-	private IComboRidget provinceComo;
-	private ITextRidget postalCodeTxt;
 
 	public AddressGroupWidgetController(IController controller) {
 		this.controller = controller;
@@ -56,7 +56,7 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 				String.class, null, new WritableValue());
 		provinceComo.updateFromModel();
 		provinceComo.addSelectionListener(this);
-		
+
 		addressTxt.setMandatory(true);
 		addressTxt.setDirectWriting(true);
 		sectionTxt.setMandatory(true);
@@ -70,8 +70,28 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	}
 
 	@Override
+	public IController getController() {
+		return controller;
+	}
+
+	@Override
 	public Object getInputModel() {
 		return location;
+	}
+
+	@Override
+	public void ridgetSelected(SelectionEvent event) {
+		if (event.getSource() == provinceComo) {
+			if (location != null) {
+				location.setProvince((String) event.getNewSelection().get(0));
+			}
+		}
+	}
+
+	@Override
+	public void setController(IController controller) {
+		this.controller = controller;
+
 	}
 
 	@Override
@@ -80,17 +100,6 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 		if (controller != null) {
 			updateBinding();
 		}
-
-	}
-
-	@Override
-	public IController getController() {
-		return controller;
-	}
-
-	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
 
 	}
 
@@ -131,15 +140,6 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 				ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 		postalCodeTxt.updateFromModel();
 
-	}
-
-	@Override
-	public void ridgetSelected(SelectionEvent event) {
-		if (event.getSource() == provinceComo) {
-			if (location != null) {
-				location.setProvince((String) event.getNewSelection().get(0));
-			}
-		}
 	}
 
 }

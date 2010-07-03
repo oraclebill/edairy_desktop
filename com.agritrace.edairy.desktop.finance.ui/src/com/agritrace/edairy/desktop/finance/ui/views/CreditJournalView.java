@@ -29,14 +29,62 @@ import org.eclipse.ui.part.ViewPart;
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanel;
 
 public class CreditJournalView extends ViewPart {
-	public CreditJournalView() {
-		setPartName("Transaction Batch Entry");
+	private class CreditRecordLabelProivder implements ITableLabelProvider {
+
+		@Override
+		public void addListener(ILabelProviderListener listener) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void dispose() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public Image getColumnImage(Object element, int columnIndex) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getColumnText(Object element, int columnIndex) {
+			// if (element instanceof CreditRecord) {
+			// switch (columnIndex) {
+			// case 0:
+			// return ((CreditRecord) element).getStore();
+			// case 1:
+			// return ((CreditRecord) element).getDate();
+			// case 2:
+			// return ((CreditRecord) element).getReference();
+			// case 3:
+			// return ((CreditRecord) element).getRecord();
+			// case 4:
+			// return ((CreditRecord) element).getMember();
+			// case 5:
+			// return ((CreditRecord) element).getAmount() + "";
+			// }
+			// }
+			return null;
+		}
+
+		@Override
+		public boolean isLabelProperty(Object element, String property) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void removeListener(ILabelProviderListener listener) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 	public static final String ID = "edairy.desktop.credit-journal-entry";
-
-	private Text dateField;
-	private Button calendarButton;
 
 	private TableViewer tableViewer;
 	Text text;
@@ -45,6 +93,10 @@ public class CreditJournalView extends ViewPart {
 
 	// private final List<CreditRecord> input =
 	// CreditRecordFactory.createCreditRecords();
+
+	public CreditJournalView() {
+		setPartName("Transaction Batch Entry");
+	}
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -60,15 +112,27 @@ public class CreditJournalView extends ViewPart {
 		createTablePanel(parent);
 	}
 
+	@Override
+	public void setFocus() {
+		// TODO Auto-generated method stub
+
+	}
+
 	private void createButtonPanel(Composite myParent) {
 
-		Composite parent = new Composite(myParent, SWT.NONE);
+		final Composite parent = new Composite(myParent, SWT.NONE);
 		parent.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 
 		final Button addButton = new Button(parent, SWT.PUSH);
 		addButton.setText("Add Record");
 		addButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		addButton.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+
+			}
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -89,12 +153,6 @@ public class CreditJournalView extends ViewPart {
 				// tableViewer.setInput(input);
 
 			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-
-			}
 		});
 
 		final Button clearButton = new Button(parent, SWT.PUSH);
@@ -103,6 +161,12 @@ public class CreditJournalView extends ViewPart {
 		new Label(parent, SWT.NONE);
 		new Label(parent, SWT.NONE);
 		clearButton.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+
+			}
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -114,12 +178,6 @@ public class CreditJournalView extends ViewPart {
 					// amountText.setText("");
 					// recordLabelText.setText("");
 				}
-
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
 
 			}
 		});
@@ -179,6 +237,12 @@ public class CreditJournalView extends ViewPart {
 		removeButton.addSelectionListener(new SelectionListener() {
 
 			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+
+			}
+
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				final IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
 				if (!selection.isEmpty()) {
@@ -195,12 +259,6 @@ public class CreditJournalView extends ViewPart {
 				}
 
 			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-
-			}
 		});
 		removeButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false));
 
@@ -215,67 +273,6 @@ public class CreditJournalView extends ViewPart {
 		final Button cancelButton = new Button(savePanel, SWT.PUSH);
 		cancelButton.setText("Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-	}
-
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private class CreditRecordLabelProivder implements ITableLabelProvider {
-
-		@Override
-		public void addListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void dispose() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public Image getColumnImage(Object element, int columnIndex) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getColumnText(Object element, int columnIndex) {
-			// if (element instanceof CreditRecord) {
-			// switch (columnIndex) {
-			// case 0:
-			// return ((CreditRecord) element).getStore();
-			// case 1:
-			// return ((CreditRecord) element).getDate();
-			// case 2:
-			// return ((CreditRecord) element).getReference();
-			// case 3:
-			// return ((CreditRecord) element).getRecord();
-			// case 4:
-			// return ((CreditRecord) element).getMember();
-			// case 5:
-			// return ((CreditRecord) element).getAmount() + "";
-			// }
-			// }
-			return null;
-		}
-
 	}
 
 }

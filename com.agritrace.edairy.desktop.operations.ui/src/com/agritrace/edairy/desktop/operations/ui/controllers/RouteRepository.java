@@ -17,7 +17,18 @@ public class RouteRepository implements IRepository<Route> {
 			return Route.class;
 		}
 	};
-	
+
+	@Override
+	public List<Route> all() {
+		// TODO Auto-generated method stub
+		return routeRepo.all();
+	}
+
+	@Override
+	public void delete(Route deletableEntity) throws NonExistingEntityException {
+		routeRepo.delete(deletableEntity);
+	}
+
 	@Override
 	public List<?> find(String rawQuery) {
 		// TODO Auto-generated method stub
@@ -31,15 +42,14 @@ public class RouteRepository implements IRepository<Route> {
 	}
 
 	@Override
-	public List<Route> all() {
-		// TODO Auto-generated method stub
-		return routeRepo.all();
-	}
-
-	@Override
 	public Route findByKey(long key) {
 		// TODO Auto-generated method stub
 		return routeRepo.findByKey(key);
+	}
+
+	@Override
+	public void save(Object obj) {
+		routeRepo.save(obj);
 	}
 
 	@Override
@@ -50,16 +60,6 @@ public class RouteRepository implements IRepository<Route> {
 	@Override
 	public void update(Route updateableEntity) throws NonExistingEntityException {
 		routeRepo.update(updateableEntity);
-	}
-
-	@Override
-	public void delete(Route deletableEntity) throws NonExistingEntityException {
-		routeRepo.delete(deletableEntity);		
-	}
-
-	@Override
-	public void save(Object obj) {
-		routeRepo.save(obj);
 	}
 
 }

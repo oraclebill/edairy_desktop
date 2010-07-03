@@ -18,54 +18,54 @@ import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
 public class RouteListController extends BasicDirectoryController<Route> {
 
 	public static class SearchBean extends AbstractBean {
-		public static final String NAME_PROP = "name";
 		public static final String DESCRIPTION_PROP = "description";
+		public static final String NAME_PROP = "name";
 
-		private String name;
 		private String description;
+		private String name;
 
 		public SearchBean() {
 			name = "";
 			description = "";
 		}
 
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			Object old = this.name;
-			this.name = name;
-			this.firePropertyChanged(NAME_PROP, old, this.name);
-		}
-
 		public String getDescription() {
 			return description;
 		}
 
+		public String getName() {
+			return name;
+		}
+
 		public void setDescription(String description) {
-			Object old = this.description;
+			final Object old = this.description;
 			this.description = description;
 			this.firePropertyChanged(DESCRIPTION_PROP, old, this.description);
 		}
+
+		public void setName(String name) {
+			final Object old = this.name;
+			this.name = name;
+			this.firePropertyChanged(NAME_PROP, old, this.name);
+		}
 	}
 
-	private final SearchBean searchBean = new SearchBean();
-	private ITextRidget name;
+	private final DairyRepository dairyRepo = new DairyRepository();
 	private ITextRidget description;
-	private DairyRepository dairyRepo = new DairyRepository();
+	private ITextRidget name;
+	private final SearchBean searchBean = new SearchBean();
 
 	public RouteListController() {
 		setRepository(new RouteRepository());
 		setEClass(DairyPackage.Literals.ROUTE);
-//		setEntityClass(Route.class);
-		
-//		addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
+		// setEntityClass(Route.class);
+
+		// addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
 		addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);
 		addTableColumn("Name", DairyPackage.Literals.ROUTE__NAME);
 		addTableColumn("Description", DairyPackage.Literals.ROUTE__DESCRIPTION);
-//		addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
-		
+		// addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
+
 	}
 
 	@Override
@@ -82,10 +82,10 @@ public class RouteListController extends BasicDirectoryController<Route> {
 
 	@Override
 	protected List<Route> getFilteredResult() {
-		List<Route> allRoutes = getRepository().all();
-		List<Route> filteredRoutes = new ArrayList<Route>();
+		final List<Route> allRoutes = getRepository().all();
+		final List<Route> filteredRoutes = new ArrayList<Route>();
 
-		for (Route r : allRoutes) {
+		for (final Route r : allRoutes) {
 			if (MatchUtil.matchContains(searchBean.getName(), r.getName())
 					&& MatchUtil.matchContains(searchBean.getDescription(), r.getDescription())) {
 				filteredRoutes.add(r);

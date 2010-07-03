@@ -23,9 +23,9 @@ import com.swtdesigner.ResourceManager;
 
 public class TransactionEntryPanel extends Composite {
 
-	private Text descriptionText;
-	private Text checkNumberText;
-	private Text signedByText;
+	private final Text checkNumberText;
+	private final Text descriptionText;
+	private final Text signedByText;
 
 	public TransactionEntryPanel(Composite parent, int style) {
 		super(parent, style);
@@ -46,10 +46,10 @@ public class TransactionEntryPanel extends Composite {
 		final Button btnPayment = UIControlsFactory.createButtonRadio(transactionTypeBox, "Payment",
 				FinanceBindingConstants.ID_PAYMENT_CHOICEBTN);
 
-		final Button btnVeterinary = UIControlsFactory.createButtonRadio(transactionTypeBox, "Veterinary",
+		UIControlsFactory.createButtonRadio(transactionTypeBox, "Veterinary",
 				FinanceBindingConstants.ID_VETERINARY_CHOICEBTN);
 
-		final Button btnShareDeduction = UIControlsFactory.createButtonRadio(transactionTypeBox, "Share Deduction",
+		UIControlsFactory.createButtonRadio(transactionTypeBox, "Share Deduction",
 				FinanceBindingConstants.ID_SHARE_DEDUCTION_CHOICEBTN);
 
 		final Label dateLabel = UIControlsFactory.createLabel(middlePanel, "Date");
@@ -84,121 +84,137 @@ public class TransactionEntryPanel extends Composite {
 		amountText.setTextLimit(20);
 		amountText.setText("90");
 
-		Label lblDescription = UIControlsFactory.createLabel(middlePanel, "Description");
+		final Label lblDescription = UIControlsFactory.createLabel(middlePanel, "Description");
 
 		descriptionText = UIControlsFactory.createTextMulti(middlePanel, false, false,
 				FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT);
 
 		final Label lblCheckNumber = UIControlsFactory.createLabel(middlePanel, "Check Number");
 
-		checkNumberText = UIControlsFactory
-				.createText(middlePanel, SWT.NONE, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT);
+		checkNumberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
+				FinanceBindingConstants.ID_CHECK_NUMBER_TEXT);
 
 		final Label lblSignedBy = UIControlsFactory.createLabel(middlePanel, "Signed By");
 
 		signedByText = UIControlsFactory.createText(middlePanel, SWT.NONE, FinanceBindingConstants.ID_SIGNED_BY_TEXT);
-		
-		Button memberLookupButton = new Button(middlePanel, SWT.FLAT);
-		memberLookupButton.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.desktop.icons", "icons/find.png"));
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(memberLookupButton, FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
-		GroupLayout gl_middlePanel = new GroupLayout(middlePanel);
-		gl_middlePanel.setHorizontalGroup(
-			gl_middlePanel.createParallelGroup(GroupLayout.LEADING)
-				.add(gl_middlePanel.createSequentialGroup()
-					.add(5)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.LEADING)
-						.add(gl_middlePanel.createSequentialGroup()
-							.add(gl_middlePanel.createParallelGroup(GroupLayout.LEADING)
-								.add(lblSignedBy)
-								.add(lblCheckNumber)
-								.add(lblDescription)
-								.add(lblAmount)
-								.add(lblMember))
-							.addPreferredGap(LayoutStyle.RELATED)
-							.add(gl_middlePanel.createParallelGroup(GroupLayout.LEADING)
-								.add(signedByText, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-								.add(checkNumberText, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-								.add(descriptionText, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-								.add(amountText, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-								.add(memberText, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-								.add(locationCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.add(gl_middlePanel.createSequentialGroup()
-									.add(refNumberText, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(LayoutStyle.RELATED)
-									.add(memberLookupButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-								.add(transactionDate, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-								.add(transactionTypeBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.add(lblTransactionType)
-						.add(dateLabel)
-						.add(lblStore)
-						.add(lblRefNumber))
-					.addContainerGap(123, Short.MAX_VALUE))
-		);
-		gl_middlePanel.setVerticalGroup(
-			gl_middlePanel.createParallelGroup(GroupLayout.LEADING)
-				.add(gl_middlePanel.createSequentialGroup()
-					.add(10)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(lblTransactionType)
-						.add(transactionTypeBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(LayoutStyle.RELATED)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(transactionDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(dateLabel))
-					.addPreferredGap(LayoutStyle.RELATED)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(refNumberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(lblRefNumber)
-						.add(memberLookupButton, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(LayoutStyle.RELATED)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(locationCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(lblStore))
-					.add(40)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(memberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(lblMember))
-					.add(9)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(amountText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(lblAmount))
-					.add(5)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(descriptionText, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-						.add(lblDescription))
-					.addPreferredGap(LayoutStyle.RELATED)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(checkNumberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(lblCheckNumber))
-					.add(5)
-					.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
-						.add(signedByText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.add(lblSignedBy))
-					.add(71))
-		);
-		gl_middlePanel.linkSize(new Control[] {locationCombo, refNumberText, memberLookupButton, memberText, amountText, checkNumberText, signedByText}, GroupLayout.VERTICAL);
+
+		final Button memberLookupButton = new Button(middlePanel, SWT.FLAT);
+		memberLookupButton.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.desktop.icons",
+				"icons/find.png"));
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(memberLookupButton,
+				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
+		final GroupLayout gl_middlePanel = new GroupLayout(middlePanel);
+		gl_middlePanel.setHorizontalGroup(gl_middlePanel.createParallelGroup(GroupLayout.LEADING).add(
+				gl_middlePanel
+						.createSequentialGroup()
+						.add(5)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.LEADING)
+								.add(gl_middlePanel
+										.createSequentialGroup()
+										.add(gl_middlePanel.createParallelGroup(GroupLayout.LEADING).add(lblSignedBy)
+												.add(lblCheckNumber).add(lblDescription).add(lblAmount).add(lblMember))
+										.addPreferredGap(LayoutStyle.RELATED)
+										.add(gl_middlePanel
+												.createParallelGroup(GroupLayout.LEADING)
+												.add(signedByText, GroupLayout.PREFERRED_SIZE, 225,
+														GroupLayout.PREFERRED_SIZE)
+												.add(checkNumberText, GroupLayout.PREFERRED_SIZE, 225,
+														GroupLayout.PREFERRED_SIZE)
+												.add(descriptionText, GroupLayout.PREFERRED_SIZE, 225,
+														GroupLayout.PREFERRED_SIZE)
+												.add(amountText, GroupLayout.PREFERRED_SIZE, 111,
+														GroupLayout.PREFERRED_SIZE)
+												.add(memberText, GroupLayout.PREFERRED_SIZE, 225,
+														GroupLayout.PREFERRED_SIZE)
+												.add(locationCombo, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.add(gl_middlePanel
+														.createSequentialGroup()
+														.add(refNumberText, GroupLayout.PREFERRED_SIZE, 196,
+																GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(LayoutStyle.RELATED)
+														.add(memberLookupButton, GroupLayout.PREFERRED_SIZE, 35,
+																GroupLayout.PREFERRED_SIZE))
+												.add(transactionDate, GroupLayout.PREFERRED_SIZE, 150,
+														GroupLayout.PREFERRED_SIZE)
+												.add(transactionTypeBox, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.add(lblTransactionType).add(dateLabel).add(lblStore).add(lblRefNumber))
+						.addContainerGap(123, Short.MAX_VALUE)));
+		gl_middlePanel.setVerticalGroup(gl_middlePanel.createParallelGroup(GroupLayout.LEADING).add(
+				gl_middlePanel
+						.createSequentialGroup()
+						.add(10)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(lblTransactionType)
+								.add(transactionTypeBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(LayoutStyle.RELATED)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(transactionDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(dateLabel))
+						.addPreferredGap(LayoutStyle.RELATED)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(refNumberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblRefNumber)
+								.add(memberLookupButton, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(LayoutStyle.RELATED)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(locationCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblStore))
+						.add(40)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(memberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblMember))
+						.add(9)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(amountText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblAmount))
+						.add(5)
+						.add(gl_middlePanel.createParallelGroup(GroupLayout.BASELINE)
+								.add(descriptionText, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+								.add(lblDescription))
+						.addPreferredGap(LayoutStyle.RELATED)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(checkNumberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblCheckNumber))
+						.add(5)
+						.add(gl_middlePanel
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(signedByText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblSignedBy)).add(71)));
+		gl_middlePanel.linkSize(new Control[] { locationCombo, refNumberText, memberLookupButton, memberText,
+				amountText, checkNumberText, signedByText }, GroupLayout.VERTICAL);
 		middlePanel.setLayout(gl_middlePanel);
 
 		btnStoreSale.addSelectionListener(new SelectionAdapter() {
 			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				System.err.println(">>>>> default selection on " + e.getSource());
+			}
+
+			@Override
 			public void widgetSelected(SelectionEvent e) {
-				boolean enabled = btnStoreSale.getSelection();
+				final boolean enabled = btnStoreSale.getSelection();
 				lblStore.setVisible(enabled);
 				locationCombo.setVisible(enabled);
 				locationCombo.setEnabled(enabled);
 				locationCombo.setText("");
 			}
 
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				System.err.println(">>>>> default selection on " + e.getSource());
-			}
-
 		});
 		btnPayment.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				boolean enabled = btnPayment.getSelection();
+				final boolean enabled = btnPayment.getSelection();
 
 				lblCheckNumber.setVisible(enabled);
 				checkNumberText.setVisible(enabled);

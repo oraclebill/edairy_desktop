@@ -53,97 +53,23 @@ public class DateTimeUtils {
 	// SwtControlRidgetMapper.getInstance());
 
 	/**
-	 * Gets the first day of month of specific date
+	 * Dispose composite's children recursively
 	 * 
-	 * @param date
-	 *            Specific date
-	 * @return First Day String
+	 * @param comp
 	 */
-	public static String getFirstDayofMonth(Date date) {
-		final Date firstDate = getFirstDayOfMonth(date);
-		return DATE_FORMAT.format(firstDate);
-	}
+	public static void disposeAllChildrens(Composite comp) {
+		if (comp == null) {
+			return;
+		}
+		for (final Control control : comp.getChildren()) {
+			if (control instanceof Composite) {
+				disposeAllChildrens((Composite) control);
 
-	/**
-	 * Gets the first day of month of current time
-	 * 
-	 * @return
-	 */
-	public static String getFirstDayofMonth() {
-		return getFirstDayofMonth(Calendar.getInstance().getTime());
-	}
-
-	/**
-	 * Gets the first day of a month
-	 * 
-	 * @param date
-	 *            One day in a month
-	 * @return
-	 */
-	public static Date getFirstDayOfMonth(Date date) {
-		final Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.DAY_OF_MONTH, 1);
-		return cal.getTime();
-	}
-
-	/**
-	 * Gets the last day of a month
-	 * 
-	 * @param date
-	 *            One day in a month
-	 * @return
-	 */
-	public static Date getLastDayOfMonth(Date date) {
-
-		final Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		final int lastDate = calendar.getActualMaximum(Calendar.DATE);
-		calendar.set(Calendar.DATE, lastDate);
-		return calendar.getTime();
-
-	}
-
-	/**
-	 * Gets the first day of month of specific date
-	 * 
-	 * @param date
-	 *            Specific date
-	 * @return First Day String
-	 */
-	public static String getLastDayofMonth(Date date) {
-		final Date firstDate = getLastDayOfMonth(date);
-		return DATE_FORMAT.format(firstDate);
-	}
-
-	/**
-	 * Gets the first day of month of current time
-	 * 
-	 * @return
-	 */
-	public static String getLastDayofMonth() {
-		return getLastDayofMonth(Calendar.getInstance().getTime());
-	}
-
-	/**
-	 * Get one month date before the current date
-	 * 
-	 * @return date one month ago, {@link Date}
-	 */
-	public static Date getOneMonthBeforeCurrentDate() {
-		final Calendar now = Calendar.getInstance();
-		now.add(Calendar.MONDAY, -1);
-		return now.getTime();
-	}
-
-	/**
-	 * Get the formatted String of the date one month before the current date.
-	 * 
-	 * @return the formatted String "MM/dd/yyyy"
-	 */
-	public static String getOneMonthBeforeCurrentDateString() {
-		final Date date = getOneMonthBeforeCurrentDate();
-		return DateTimeUtils.DATE_FORMAT.format(date);
+			}
+			if (!control.isDisposed()) {
+				control.dispose();
+			}
+		}
 	}
 
 	/**
@@ -167,37 +93,110 @@ public class DateTimeUtils {
 	}
 
 	/**
-	 * Dispose composite's children recursively
+	 * Gets the first day of month of current time
 	 * 
-	 * @param comp
+	 * @return
 	 */
-	public static void disposeAllChildrens(Composite comp) {
-		if (comp == null) {
-			return;
-		}
-		for (final Control control : comp.getChildren()) {
-			if (control instanceof Composite) {
-				disposeAllChildrens((Composite) control);
-
-			}
-			if (!control.isDisposed()) {
-				control.dispose();
-			}
-		}
+	public static String getFirstDayofMonth() {
+		return getFirstDayofMonth(Calendar.getInstance().getTime());
 	}
-	
+
+	/**
+	 * Gets the first day of month of specific date
+	 * 
+	 * @param date
+	 *            Specific date
+	 * @return First Day String
+	 */
+	public static String getFirstDayofMonth(Date date) {
+		final Date firstDate = getFirstDayOfMonth(date);
+		return DATE_FORMAT.format(firstDate);
+	}
+
+	/**
+	 * Gets the first day of a month
+	 * 
+	 * @param date
+	 *            One day in a month
+	 * @return
+	 */
+	public static Date getFirstDayOfMonth(Date date) {
+		final Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		return cal.getTime();
+	}
+
+	/**
+	 * Gets the first day of month of current time
+	 * 
+	 * @return
+	 */
+	public static String getLastDayofMonth() {
+		return getLastDayofMonth(Calendar.getInstance().getTime());
+	}
+
+	/**
+	 * Gets the first day of month of specific date
+	 * 
+	 * @param date
+	 *            Specific date
+	 * @return First Day String
+	 */
+	public static String getLastDayofMonth(Date date) {
+		final Date firstDate = getLastDayOfMonth(date);
+		return DATE_FORMAT.format(firstDate);
+	}
+
+	/**
+	 * Gets the last day of a month
+	 * 
+	 * @param date
+	 *            One day in a month
+	 * @return
+	 */
+	public static Date getLastDayOfMonth(Date date) {
+
+		final Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		final int lastDate = calendar.getActualMaximum(Calendar.DATE);
+		calendar.set(Calendar.DATE, lastDate);
+		return calendar.getTime();
+
+	}
+
 	/**
 	 * Add one day to specific date
 	 * 
 	 * @param date
 	 * @return
 	 */
-	public static Date getNextDate(Date date)
-	{
+	public static Date getNextDate(Date date) {
 		final Calendar now = Calendar.getInstance();
 		now.setTime(date);
 		now.add(Calendar.DAY_OF_MONTH, 1);
 		return now.getTime();
+	}
+
+	/**
+	 * Get one month date before the current date
+	 * 
+	 * @return date one month ago, {@link Date}
+	 */
+	public static Date getOneMonthBeforeCurrentDate() {
+		final Calendar now = Calendar.getInstance();
+		now.add(Calendar.MONDAY, -1);
+		return now.getTime();
+	}
+
+	/**
+	 * Get the formatted String of the date one month before the current date.
+	 * 
+	 * @return the formatted String "MM/dd/yyyy"
+	 */
+	public static String getOneMonthBeforeCurrentDateString() {
+		final Date date = getOneMonthBeforeCurrentDate();
+		return DateTimeUtils.DATE_FORMAT.format(date);
 	}
 
 }

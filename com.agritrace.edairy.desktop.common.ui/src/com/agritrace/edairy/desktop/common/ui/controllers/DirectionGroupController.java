@@ -11,10 +11,10 @@ import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 public class DirectionGroupController implements WidgetController {
 
 	private IController controller;
-	private DescriptiveLocation location;
+	private ITextRidget directionsTxt;
 
 	private ITextRidget landmarkTxt;
-	private ITextRidget directionsTxt;
+	private DescriptiveLocation location;
 
 	public DirectionGroupController(IController controller) {
 		this.controller = controller;
@@ -32,8 +32,18 @@ public class DirectionGroupController implements WidgetController {
 	}
 
 	@Override
+	public IController getController() {
+		return controller;
+	}
+
+	@Override
 	public Object getInputModel() {
 		return location;
+	}
+
+	@Override
+	public void setController(IController controller) {
+		this.controller = controller;
 	}
 
 	@Override
@@ -43,16 +53,6 @@ public class DirectionGroupController implements WidgetController {
 			updateBinding();
 		}
 
-	}
-
-	@Override
-	public IController getController() {
-		return controller;
-	}
-
-	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
 	}
 
 	@Override

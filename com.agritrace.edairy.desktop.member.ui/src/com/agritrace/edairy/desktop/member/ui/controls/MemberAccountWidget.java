@@ -12,15 +12,15 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberAccountWidget {
 
-	private Composite composite;
-
 	public static final String DELIVERIES_GROUP = "Deliveries";
-
-	public static final String DELIVERIES_GROUP_TOTOAL_DELIVERIES = "Total Deliveries:";
 
 	public static final String DELIVERIES_GROUP_TOTOAL_ACCEPTED = "Total Accepted:";
 
+	public static final String DELIVERIES_GROUP_TOTOAL_DELIVERIES = "Total Deliveries:";
+
 	public static final String DELIVERIES_GROUP_TOTOAL_REJECTED = "Total Rejected:";
+
+	private Composite composite;
 
 	public MemberAccountWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
@@ -33,15 +33,44 @@ public class MemberAccountWidget {
 		return composite;
 	}
 
-	public void setComposite(Composite composite) {
-		this.composite = composite;
-	}
-
 	public void initGUI() {
 		createDeliveriesGroup();
 		createShareGroup();
 		createCreditsGroup();
 
+	}
+
+	public void setComposite(Composite composite) {
+		this.composite = composite;
+	}
+
+	private void createCreditsGroup() {
+		final Group creditsGroup = UIControlsFactory.createGroup(composite, "Credits");
+		creditsGroup.setLayout(new GridLayout(2, false));
+		creditsGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+		UIControlsFactory.createLabel(creditsGroup, "Credit Score :");
+
+		final Text creditScoreTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
+		creditScoreTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+
+		UIControlsFactory.createLabel(creditsGroup, "Credit Limit:");
+
+		final Text creditLimitTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
+		creditLimitTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+
+		UIControlsFactory.createLabel(creditsGroup, "Credit Avalable:");
+		final Text creditAvalableTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
+		creditAvalableTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+
+		UIControlsFactory.createLabel(creditsGroup, "Credit Balance :");
+
+		final Text creditBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
+		creditBalanceTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+
+		UIControlsFactory.createLabel(creditsGroup, "Cash Balance :");
+		final Text cashBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
+		cashBalanceTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 	}
 
 	private void createDeliveriesGroup() {
@@ -90,35 +119,6 @@ public class MemberAccountWidget {
 		recoveredTxt1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
 		// recCobTxt2.setText("1250");
 
-	}
-
-	private void createCreditsGroup() {
-		final Group creditsGroup = UIControlsFactory.createGroup(composite, "Credits");
-		creditsGroup.setLayout(new GridLayout(2, false));
-		creditsGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Score :");
-
-		final Text creditScoreTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditScoreTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Limit:");
-
-		final Text creditLimitTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditLimitTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Avalable:");
-		final Text creditAvalableTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditAvalableTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-
-		UIControlsFactory.createLabel(creditsGroup, "Credit Balance :");
-
-		final Text creditBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		creditBalanceTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-
-		UIControlsFactory.createLabel(creditsGroup, "Cash Balance :");
-		final Text cashBalanceTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
-		cashBalanceTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 	}
 
 }

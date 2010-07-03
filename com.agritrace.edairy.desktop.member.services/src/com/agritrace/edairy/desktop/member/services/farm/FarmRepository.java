@@ -9,6 +9,5 @@ public class FarmRepository extends HibernateRepository<Farm> implements IFarmRe
 	protected Class<?> getClassType() {
 		return Farm.class;
 	}
-	
 
 }

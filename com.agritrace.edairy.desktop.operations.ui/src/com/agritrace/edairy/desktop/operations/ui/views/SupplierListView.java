@@ -13,34 +13,33 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public class SupplierListView extends AbstractDirectoryView {
 
-	public static final String ID = "edairy.supplier.list.view";
-
 	public static final String BIND_ID_FILTER_CATEGORIES = "bind.id.fitler.categories";
+
 	public static final String BIND_ID_FILTER_CONTACT = "bind.id.fitler.contact";
 	public static final String BIND_ID_FILTER_STATUS = "bind.id.fitler.status";
+	public static final String ID = "edairy.supplier.list.view";
 
 	@Override
 	protected void createFilterPanel(Composite parent) {
-		parent.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0)
-				.numColumns(2).create());
+		parent.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(2).create());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 
 		// Categories
 		UIControlsFactory.createLabel(parent, "Categories");
 
-		List categoriesList = UIControlsFactory.createList(parent, false, true);
+		final List categoriesList = UIControlsFactory.createList(parent, false, true);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(categoriesList);
 		addUIControl(categoriesList, BIND_ID_FILTER_CATEGORIES);
 
 		// Contact name
 		UIControlsFactory.createLabel(parent, "Company Name");
-		Text contactName = UIControlsFactory.createText(parent, SWT.None);
+		final Text contactName = UIControlsFactory.createText(parent, SWT.None);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(contactName);
 		addUIControl(contactName, BIND_ID_FILTER_CONTACT);
 
 		// Status
 		UIControlsFactory.createLabel(parent, "Status");
-		Combo status = UIControlsFactory.createCombo(parent);
+		final Combo status = UIControlsFactory.createCombo(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(status);
 		addUIControl(status, BIND_ID_FILTER_STATUS);
 

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.agritrace.edairy.desktop.home.views;
 
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
@@ -21,20 +20,19 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
 
 public class DairyHomeView extends ViewPart {
+	public static final String ID = "desktop.home.view";
+
 	public DairyHomeView() {
 	}
 
-	public static final String ID = "desktop.home.view";
-
 	@Override
 	public void createPartControl(Composite parent) {
-		Label l = new Label(parent, SWT.CENTER);
-		l.setImage(
-				ImageStore.getInstance().getImage("edairydashboard.jpg"));
+		final Label l = new Label(parent, SWT.CENTER);
+		l.setImage(ImageStore.getInstance().getImage("edairydashboard.jpg"));
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(l);
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
-		parent.setBackground( Display.getCurrent().getSystemColor(SWT.COLOR_WHITE) );
-		l.setBackground( Display.getCurrent().getSystemColor(SWT.COLOR_WHITE) );
+		parent.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		l.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 	}
 
 	@Override

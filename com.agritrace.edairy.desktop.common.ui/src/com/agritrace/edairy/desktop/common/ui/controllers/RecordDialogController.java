@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.RienaStatus;
@@ -13,14 +12,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 
 public abstract class RecordDialogController<T extends EObject> extends BaseDialogController<T> {
 
-	/**
-	 * Gets working copy for editing
-	 * 
-	 * @return
-	 */
-	// protected abstract T createWorkingCopy();
-
-	private EClass eClass;
 	private BindingHelper<T> mapper;
 
 	/**
@@ -30,18 +21,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		super();
 	}
 
-	public T getWorkingCopy() {
-		return (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
-	}
-//
-//	protected void setEClass(EClass eClass) {
-//		this.eClass = eClass;
-//	}
-//
-//	protected EClass getEClass() {
-//		return this.eClass;
-//	}
-
 	public void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addMapping(ridgetId, featurePath);
 	}
@@ -49,27 +28,6 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	public void addRidgetFeatureMap(String ridgetId, List<?> domainList, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addMapping(ridgetId, domainList, featurePath);
 	}
-
-	private final BindingHelper<T> getMapper() {
-		return mapper;
-	}
-
-	private final BindingHelper<T> getOrCreateMapper() {
-		if (mapper == null) {
-			mapper = new BindingHelper<T>(this, getWorkingCopy());
-		}
-		return mapper;
-	}
-
-	// /**
-	// * Gets the selected object in table list. If user doesn't select any row,
-	// * this object will be null
-	// *
-	// * @return
-	// */
-	// public T getSelectedObject() {
-	// return this.selectedObject;
-	// }
 
 	/**
 	 * Template method for configuring the dialog widgets.
@@ -90,6 +48,47 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		configureButtonsPanel();
 	}
 
+	@Override
+	public T getWorkingCopy() {
+		return (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+	}
+
+	//
+	// protected void setEClass(EClass eClass) {
+	// this.eClass = eClass;
+	// }
+	//
+	// protected EClass getEClass() {
+	// return this.eClass;
+	// }
+
+	private void configureMappedRidgets() {
+		if (getMapper() != null) {
+			getMapper().configureRidgets();
+		}
+	}
+
+	// /**
+	// * Gets the selected object in table list. If user doesn't select any row,
+	// * this object will be null
+	// *
+	// * @return
+	// */
+	// public T getSelectedObject() {
+	// return this.selectedObject;
+	// }
+
+	private final BindingHelper<T> getMapper() {
+		return mapper;
+	}
+
+	private final BindingHelper<T> getOrCreateMapper() {
+		if (mapper == null) {
+			mapper = new BindingHelper<T>(this, getWorkingCopy());
+		}
+		return mapper;
+	}
+
 	/**
 	 * Subclasses should override to perform mappings and configure any
 	 * unmappable ridgets.. The default implementation does nothing.
@@ -99,17 +98,8 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	}
 
-	private void configureMappedRidgets() {
-		if (getMapper() != null)
-			getMapper().configureRidgets();
-	}
-
-	@Override
-	protected void handleSaveAction() {
-		setReturnCode(DialogConstants.ACTION_SAVE);
-		if (!RienaStatus.isTest()) {
-			getWindowRidget().dispose();
-		}
+	protected int getActionType() {
+		return (Integer) getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
 	}
 
 	@Override
@@ -120,8 +110,12 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		}
 	}
 
-	protected int getActionType() {
-		return (Integer) getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
+	@Override
+	protected void handleSaveAction() {
+		setReturnCode(DialogConstants.ACTION_SAVE);
+		if (!RienaStatus.isTest()) {
+			getWindowRidget().dispose();
+		}
 	}
 
 	// /**

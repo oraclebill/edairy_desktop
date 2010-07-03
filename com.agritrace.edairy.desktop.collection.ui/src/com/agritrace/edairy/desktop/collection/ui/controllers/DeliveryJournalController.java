@@ -97,11 +97,8 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 
 	@Override
 	protected List<DeliveryJournal> getFilteredResult() {
-		final List<DeliveryJournal> allJournals = dairyRepo.allDeliveries();
-		final List<DeliveryJournal> filteredList = new ArrayList<DeliveryJournal>();
-
-		return new ArrayList<DeliveryJournal>(); // TODO: fix
-		// return filteredList;
+		// FIXME: implemnent filter
+		return new ArrayList<DeliveryJournal>(); 
 	}
 
 	@Override

@@ -14,10 +14,10 @@ public class MapGroupController implements WidgetController {
 
 	private IController controller;
 
-	private MapLocation map;
-
 	private ITextRidget latituteTxt;
+
 	private ITextRidget longtituteTxt;
+	private MapLocation map;
 
 	public MapGroupController(IController controller) {
 		this.controller = controller;
@@ -28,23 +28,9 @@ public class MapGroupController implements WidgetController {
 	public void configure() {
 		latituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LATITUDE_TEXT);
 		longtituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
-		DoubleNumberValidator validator =  new DoubleNumberValidator();
+		final DoubleNumberValidator validator = new DoubleNumberValidator();
 		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
-
-	}
-
-	@Override
-	public Object getInputModel() {
-		return map;
-	}
-
-	@Override
-	public void setInputModel(Object model) {
-		map = (MapLocation) model;
-		if (controller != null) {
-			updateBinding();
-		}
 
 	}
 
@@ -54,8 +40,22 @@ public class MapGroupController implements WidgetController {
 	}
 
 	@Override
+	public Object getInputModel() {
+		return map;
+	}
+
+	@Override
 	public void setController(IController controller) {
 		this.controller = controller;
+
+	}
+
+	@Override
+	public void setInputModel(Object model) {
+		map = (MapLocation) model;
+		if (controller != null) {
+			updateBinding();
+		}
 
 	}
 

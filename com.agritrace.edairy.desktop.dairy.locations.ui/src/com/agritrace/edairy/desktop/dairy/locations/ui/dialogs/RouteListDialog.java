@@ -23,6 +23,11 @@ public class RouteListDialog extends AbstractDialogView {
 		super(null);
 	}
 
+	private void createMessageBoxes() {
+		final MessageBox deleteConfirmMessage = UIControlsFactory.createMessageBox(contentArea);
+		this.addUIControl(deleteConfirmMessage, RouteListDialogController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
+	}
+
 	@Override
 	protected Control buildView(Composite parent) {
 		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -64,11 +69,6 @@ public class RouteListDialog extends AbstractDialogView {
 		createMessageBoxes();
 		return contentArea;
 
-	}
-
-	private void createMessageBoxes() {
-		final MessageBox deleteConfirmMessage = UIControlsFactory.createMessageBox(contentArea);
-		this.addUIControl(deleteConfirmMessage, RouteListDialogController.RIDGET_ID_DELETE_CONFIRM_DIALOG);
 	}
 
 	@Override

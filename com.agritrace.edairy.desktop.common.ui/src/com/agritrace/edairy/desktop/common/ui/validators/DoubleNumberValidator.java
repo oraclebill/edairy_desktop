@@ -9,12 +9,12 @@ public class DoubleNumberValidator implements IValidator {
 
 	@Override
 	public IStatus validate(Object value) {
-		String inputValue = (String) value;
+		final String inputValue = (String) value;
 		try {
-			double capacityValue = Double.valueOf(inputValue);
+			Double.valueOf(inputValue);
 			return Status.OK_STATUS;
 
-		} catch (NumberFormatException ex) {
+		} catch (final NumberFormatException ex) {
 			return ValidationStatus.error(ex.getMessage());
 		}
 	}

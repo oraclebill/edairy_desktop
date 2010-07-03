@@ -17,19 +17,19 @@ public class ContactMethodTypeEditingSupport extends EditingSupport {
 	}
 
 	@Override
+	protected boolean canEdit(Object element) {
+		return true;
+	}
+
+	@Override
 	protected CellEditor getCellEditor(Object element) {
-		ComboBoxCellEditor editor = new ComboBoxCellEditor();
-		List<String> items = new ArrayList<String>();
-		for (ContactMethodType type : ContactMethodType.VALUES) {
+		final ComboBoxCellEditor editor = new ComboBoxCellEditor();
+		final List<String> items = new ArrayList<String>();
+		for (final ContactMethodType type : ContactMethodType.VALUES) {
 			items.add(type.toString());
 		}
 		editor.setItems((String[]) items.toArray());
 		return editor;
-	}
-
-	@Override
-	protected boolean canEdit(Object element) {
-		return true;
 	}
 
 	@Override

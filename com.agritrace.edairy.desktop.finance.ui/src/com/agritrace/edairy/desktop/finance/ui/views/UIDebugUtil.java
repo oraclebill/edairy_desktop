@@ -12,18 +12,18 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.PlatformUI;
 
 public class UIDebugUtil {
-	
+
 	public static final Color CYAN = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_CYAN);
-	
+
 	public MouseTrackListener mt = new MouseTrackAdapter() {
 		HashMap<Object, Color> oldColors = new HashMap<Object, Color>();
 
 		@Override
 		public void mouseEnter(MouseEvent e) {
 			System.err.println(">> mouseEnter" + e);
-			Object o = e.getSource();
+			final Object o = e.getSource();
 			if (o instanceof Control) {
-				Control c = (Control) o;
+				final Control c = (Control) o;
 				oldColors.put(c, c.getBackground());
 				c.setBackground(CYAN);
 			}
@@ -33,10 +33,10 @@ public class UIDebugUtil {
 		@Override
 		public void mouseExit(MouseEvent e) {
 			System.err.println(">> mouseExit" + e);
-			Object o = e.getSource();
+			final Object o = e.getSource();
 			if (o instanceof Control) {
-				Control c = (Control) o;
-				Color color = oldColors.get(c);
+				final Control c = (Control) o;
+				final Color color = oldColors.get(c);
 				if (color != null) {
 					c.setBackground(color);
 					oldColors.remove(c);
@@ -54,34 +54,29 @@ public class UIDebugUtil {
 
 	};
 
-	public void rpc(Control control) {
-		rpc(control, 0);
-	}
-	
-	public void rpc(Control control, int level) {
-		pc(level, control);
-		if (control instanceof Composite) {
-			for (Control c : ((Composite) control).getChildren()) {
-				rpc(c, level + 1);
-			}
-		}
-	}
-	
-	public void pc(int level, Control c) {
-		System.err.println("[" + level + "]"
-				+ " found child: " + c 
-				+ ", bounds=" + c.getBounds() 
-				+ ", location=" + c.getLocation() 
-				+ ", background=" + c.getBackground()
-				+ ", foreground=" + c.getForeground()
-			);
-	}
-
 	public void addListener(Control control) {
 		control.addMouseTrackListener(mt);
 		if (control instanceof Composite) {
-			for (Control c : ((Composite) control).getChildren()) {
+			for (final Control c : ((Composite) control).getChildren()) {
 				addListener(c);
+			}
+		}
+	}
+
+	public void pc(int level, Control c) {
+		System.err.println("[" + level + "]" + " found child: " + c + ", bounds=" + c.getBounds() + ", location="
+				+ c.getLocation() + ", background=" + c.getBackground() + ", foreground=" + c.getForeground());
+	}
+
+	public void rpc(Control control) {
+		rpc(control, 0);
+	}
+
+	public void rpc(Control control, int level) {
+		pc(level, control);
+		if (control instanceof Composite) {
+			for (final Control c : ((Composite) control).getChildren()) {
+				rpc(c, level + 1);
 			}
 		}
 	}

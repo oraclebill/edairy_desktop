@@ -58,35 +58,25 @@ import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
  */
 public class AnimalHealthRequestViewController extends AbstractDirectoryController<AnimalHealthRequest> {
 
-	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
-			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
-			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER.getName(),
-			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName(),
-			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
-	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm", "Type" };
+	private final class FarmLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final FarmSearchDialog farmDialog = new FarmSearchDialog(Display.getCurrent().getActiveShell());
+			farmDialog.setSelectedMember(condtionsBean.getSelectedMember());
 
-	private IActionRidget farmLookupButton;
-	private IActionRidget memberLookupButton;
-	private IDateTextRidget startDateText;
-	private IDateTextRidget endDateText;
-	private ITableRidget masterTable;
-	private IToggleButtonRidget inseminationRidget;
-	private IToggleButtonRidget vertRidget;
-	private IToggleButtonRidget allRidget;
-	private ITextRidget farmText;
-	private ITextRidget memberText;
+			final int retVal = farmDialog.open();
+			if (retVal == Window.OK) {
+				condtionsBean.setSelectedFarm(farmDialog.getSelectedFarm());
+				farmText.updateFromModel();
+			}
 
-	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
-	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
-	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
-	private final AnimalHealthRequestCondtionsBean condtionsBean = new AnimalHealthRequestCondtionsBean();
-	private AnimalHealthRequestRepository myRepo;
-	
+		}
+	}
+
 	private final class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog dialog = new MemberSearchDialog(Display
-					.getCurrent().getActiveShell());
+			final MemberSearchDialog dialog = new MemberSearchDialog(Display.getCurrent().getActiveShell());
 			dialog.setSelectedMember(condtionsBean.getSelectedMember());
 			dialog.setSelectedFarm(condtionsBean.getSelectedFarm());
 			final int ret = dialog.open();
@@ -98,25 +88,30 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		}
 	}
 
-	private final class FarmLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			FarmSearchDialog farmDialog = new FarmSearchDialog(Display
-					.getCurrent().getActiveShell());
-			farmDialog.setSelectedMember(condtionsBean.getSelectedMember());
-			
-			int retVal = farmDialog.open();
-			if (retVal == Window.OK) {
-				condtionsBean.setSelectedFarm(farmDialog.getSelectedFarm());
-				farmText.updateFromModel();
-			}
+	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm", "Type" };
+	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
+			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
+			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER.getName(),
+			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName(),
+			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
+	private IToggleButtonRidget allRidget;
+	private final AnimalHealthRequestCondtionsBean condtionsBean = new AnimalHealthRequestCondtionsBean();
+	private IDateTextRidget endDateText;
+	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
+	private IActionRidget farmLookupButton;
+	private ITextRidget farmText;
+	private IToggleButtonRidget inseminationRidget;
+	private ITableRidget masterTable;
 
-		}
-	}
+	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
+	private IActionRidget memberLookupButton;
+	private ITextRidget memberText;
+	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
+	private AnimalHealthRequestRepository myRepo;
 
-	protected EClass getEClass() {
-		return RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST;
-	}
+	private IDateTextRidget startDateText;
+
+	private IToggleButtonRidget vertRidget;
 
 	@Override
 	public void configureTableRidget() {
@@ -185,70 +180,93 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	}
 
 	@Override
-	protected String[] getTableColumnHeaders() {
-		return MASTER_HEADERS;
+	public IRepository<AnimalHealthRequest> getRepository() {
+		if (this.myRepo == null) {
+			myRepo = new AnimalHealthRequestRepository();
+			return new AnimalHealthRequestRepository();
+		}
+		return myRepo;
 	}
 
 	@Override
-	protected String[] getTableColumnPropertyNames() {
-		return MASTER_PROPTIES;
+	protected void configureFilterRidgets() {
+
+		this.condtionsBean.setStartDate(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance().getTime()));
+
+		startDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
+		startDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		startDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		startDateText.bindToModel(PojoObservables.observeValue(condtionsBean,
+				AnimalHealthRequestCondtionsBean.PROPERTY_STARTDATE));
+		startDateText.updateFromModel();
+
+		// By default, it is the first day of this month
+		this.condtionsBean.setEndDate(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance().getTime()));
+
+		inseminationRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_INSEMINATION);
+		vertRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_VERTERNARY);
+		allRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_ALL);
+		allRidget.setSelected(true);
+
+		endDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.END_DATE_TEXT);
+		endDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		endDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		endDateText.bindToModel(PojoObservables.observeValue(condtionsBean,
+				AnimalHealthRequestCondtionsBean.PROPERTY_ENDDATE));
+		endDateText.updateFromModel();
+
+		farmText = getRidget(ITextRidget.class, AnimalHealthRequestView.FARM_LOOKUP_TEXT);
+		farmText.setModelToUIControlConverter(new Farm2StringConverter());
+		farmText.bindToModel(condtionsBean, AnimalHealthRequestCondtionsBean.PROPERTY_FARM);
+		farmText.updateFromModel();
+		farmText.setOutputOnly(true);
+
+		farmLookupButton = this.getRidget(IActionRidget.class, AnimalHealthRequestView.FARM_LOOKUP_BUTTON);
+		farmLookupButton.addListener(farmLookupAction);
+
+		memberText = getRidget(ITextRidget.class, AnimalHealthRequestView.MEMBER_LOOKUP_TEXT);
+		memberText.setModelToUIControlConverter(new Member2StringConverter());
+		memberText.bindToModel(condtionsBean, AnimalHealthRequestCondtionsBean.PROPERTY_MEMBERSHIP);
+		memberText.updateFromModel();
+		memberText.setOutputOnly(true);
+
+		memberLookupButton = this.getRidget(IActionRidget.class, AnimalHealthRequestView.MEMBER_LOOKUP_BUTTON);
+		memberLookupButton.addListener(memberLookupAction);
+
 	}
 
 	@Override
-	protected void resetFilterConditions() {
-		// for date range
-		// Start Date Default value
-		if (startDateText != null) {
-			// startDateText.setDirectWriting(true);
-			startDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar
-					.getInstance().getTime())));
-		}
+	protected AnimalHealthRequest createNewModel() {
+		final AnimalHealthRequest request = super.createNewModel();
+		request.setDate(Calendar.getInstance().getTime());
+		return super.createNewModel();
+	}
 
-		// End date default value
-		if (endDateText != null) {
-			// endDateText.setDirectWriting(true);
-			endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance()
-					.getTime())));
-		}
-
-		// Request Type
-		if (inseminationRidget != null) {
-			inseminationRidget.setSelected(false);
-			vertRidget.setSelected(false);
-			allRidget.setSelected(true);
-		}
-
-		// Member Look
-		if (memberText != null) {
-			this.condtionsBean.setSelectedMember(null);
-			farmText.updateFromModel();
-		}
-		// Farm Look
-		if (farmText != null) {
-			this.condtionsBean.setSelectedFarm(null);
-			farmText.updateFromModel();
-		}
+	@Override
+	protected EClass getEClass() {
+		return RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST;
 	}
 
 	@Override
 	protected List getFilteredResult() {
 		try {
-			List<AnimalHealthRequest> requests = myDairy.allRequests();
+			final List<AnimalHealthRequest> requests = myDairy.allRequests();
 
 			// shortcut if no requests to filter.
-			if (requests.size() == 0)
+			if (requests.size() == 0) {
 				return requests;
+			}
 
 			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
 			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 				@Override
-				public long longValue(Object object) {
-					return ((Date) object).getTime();
+				public Long adapt(Object value) {
+					return longValue(value);
 				}
 
 				@Override
-				public Long adapt(Object value) {
-					return longValue(value);
+				public long longValue(Object object) {
+					return ((Date) object).getTime();
 				}
 			};
 
@@ -381,7 +399,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 				@Override
 				public int compare(Object arg0, Object arg1) {
-					if (arg0 instanceof AnimalHealthRequest && arg1 instanceof AnimalHealthRequest) {
+					if ((arg0 instanceof AnimalHealthRequest) && (arg1 instanceof AnimalHealthRequest)) {
 						return (int) (((AnimalHealthRequest) arg0).getRequestId().longValue() - ((AnimalHealthRequest) arg1)
 								.getRequestId().longValue());
 					}
@@ -390,7 +408,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 			});
 
 			return objs;
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -403,82 +421,49 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	}
 
 	@Override
-	protected void configureFilterRidgets() {
-
-		this.condtionsBean.setStartDate(DateTimeUtils
-				.getFirstDayOfMonth(Calendar.getInstance().getTime()));
-
-		startDateText = getRidget(IDateTextRidget.class,
-				AnimalHealthRequestView.START_DATE_TEXT);
-		startDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		startDateText
-				.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-		startDateText.bindToModel(PojoObservables.observeValue(condtionsBean,
-				AnimalHealthRequestCondtionsBean.PROPERTY_STARTDATE));
-		startDateText.updateFromModel();
-
-		// By default, it is the first day of this month
-		this.condtionsBean.setEndDate(DateTimeUtils.getLastDayOfMonth(Calendar
-				.getInstance().getTime()));
-
-		inseminationRidget = getRidget(IToggleButtonRidget.class,
-				AnimalHealthRequestView.REQUEST_TYPE_INSEMINATION);
-		vertRidget = getRidget(IToggleButtonRidget.class,
-				AnimalHealthRequestView.REQUEST_TYPE_VERTERNARY);
-		allRidget = getRidget(IToggleButtonRidget.class,
-				AnimalHealthRequestView.REQUEST_TYPE_ALL);
-		allRidget.setSelected(true);
-
-		endDateText = getRidget(IDateTextRidget.class,
-				AnimalHealthRequestView.END_DATE_TEXT);
-		endDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		endDateText
-				.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-		endDateText.bindToModel(PojoObservables.observeValue(condtionsBean,
-				AnimalHealthRequestCondtionsBean.PROPERTY_ENDDATE));
-		endDateText.updateFromModel();
-
-		farmText = getRidget(ITextRidget.class,
-				AnimalHealthRequestView.FARM_LOOKUP_TEXT);
-		farmText.setModelToUIControlConverter(new Farm2StringConverter());
-		farmText.bindToModel(condtionsBean,
-				AnimalHealthRequestCondtionsBean.PROPERTY_FARM);
-		farmText.updateFromModel();
-		farmText.setOutputOnly(true);
-		
-		farmLookupButton = this.getRidget(IActionRidget.class,
-				AnimalHealthRequestView.FARM_LOOKUP_BUTTON);
-		farmLookupButton.addListener(farmLookupAction);
-
-		memberText = getRidget(ITextRidget.class,
-				AnimalHealthRequestView.MEMBER_LOOKUP_TEXT);
-		memberText.setModelToUIControlConverter(new Member2StringConverter());
-		memberText.bindToModel(condtionsBean,
-				AnimalHealthRequestCondtionsBean.PROPERTY_MEMBERSHIP);
-		memberText.updateFromModel();
-		memberText.setOutputOnly(true);
-		
-		memberLookupButton = this.getRidget(IActionRidget.class,
-				AnimalHealthRequestView.MEMBER_LOOKUP_BUTTON);
-		memberLookupButton.addListener(memberLookupAction);
-
+	protected String[] getTableColumnHeaders() {
+		return MASTER_HEADERS;
 	}
 
 	@Override
-	public IRepository<AnimalHealthRequest> getRepository() {
-		if (this.myRepo == null) {
-			myRepo = new AnimalHealthRequestRepository();
-			return new AnimalHealthRequestRepository();
+	protected String[] getTableColumnPropertyNames() {
+		return MASTER_PROPTIES;
+	}
+
+	@Override
+	protected void resetFilterConditions() {
+		// for date range
+		// Start Date Default value
+		if (startDateText != null) {
+			// startDateText.setDirectWriting(true);
+			startDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar
+					.getInstance().getTime())));
 		}
-		return myRepo;
+
+		// End date default value
+		if (endDateText != null) {
+			// endDateText.setDirectWriting(true);
+			endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance()
+					.getTime())));
+		}
+
+		// Request Type
+		if (inseminationRidget != null) {
+			inseminationRidget.setSelected(false);
+			vertRidget.setSelected(false);
+			allRidget.setSelected(true);
+		}
+
+		// Member Look
+		if (memberText != null) {
+			this.condtionsBean.setSelectedMember(null);
+			farmText.updateFromModel();
+		}
+		// Farm Look
+		if (farmText != null) {
+			this.condtionsBean.setSelectedFarm(null);
+			farmText.updateFromModel();
+		}
 	}
-	
-	@Override
-	protected AnimalHealthRequest createNewModel() {
-		AnimalHealthRequest request = (AnimalHealthRequest)super.createNewModel();
-		request.setDate(Calendar.getInstance().getTime());
-		return super.createNewModel();
-	}
-	
 
 }

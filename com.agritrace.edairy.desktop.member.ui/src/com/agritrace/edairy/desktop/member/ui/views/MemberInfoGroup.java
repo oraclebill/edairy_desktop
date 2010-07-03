@@ -18,27 +18,27 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroup {
 
-	public static final int DEFAULT_LABEL_WIDTH = 90;
+	public static final String ADDITIONAL_NAMES = "Additional";
 	public static final int DEFAULT_FIELD_WIDTH = 150;
 
-	public static final String MEMBERID = "Member ID:";
-	public static final String HONORIFIC = "Hon.";
+	public static final int DEFAULT_LABEL_WIDTH = 90;
 	public static final String FIRST_NAME = "Given";
-	public static final String MIDDLE_NAME = "Middle :";
-	public static final String ADDITIONAL_NAMES = "Additional";
+	public static final String HONORIFIC = "Hon.";
 	public static final String LAST_NAME = "Family:";
+	public static final String MEMBERID = "Member ID:";
+	public static final String MIDDLE_NAME = "Middle :";
 	public static final String SUFFIX = "Suffix";
 
-	private Label photoLabel;
-	private final Composite composite;
-	private Label txtId;
 	private CCombo cmbHonorable;
-	private Text txtFirst;
-	private Text txtMiddle;
-	private Text txtLast;
 	private CCombo cmbSuffix;
-	private Text txtAdditional;
+	private final Composite composite;
 	private Link imageEditLink;
+	private Label photoLabel;
+	private Text txtAdditional;
+	private Text txtFirst;
+	private Label txtId;
+	private Text txtLast;
+	private Text txtMiddle;
 
 	public MemberInfoGroup(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
@@ -46,14 +46,8 @@ public class MemberInfoGroup {
 		initGUI();
 	}
 
-	private Font bigAndBold(Font currentFont, boolean bold) {
-		FontData[] fontData = currentFont.getFontData();
-		for (int i = 0; i < fontData.length; i++) {
-			fontData[i].setHeight(22);
-			if (bold)
-				fontData[i].setStyle(SWT.BOLD);
-		}
-		return new Font(Display.getCurrent(), fontData);
+	public Composite getComposite() {
+		return composite;
 	}
 
 	public void initGUI() {
@@ -73,12 +67,12 @@ public class MemberInfoGroup {
 		leftColumn.setLayout(leftColumnLayout);
 		leftColumn.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 
-		GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, SWT.DEFAULT)
+		final GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, SWT.DEFAULT)
 				.indent(5, 0);
-		GridDataFactory fieldFactory = GridDataFactory.fillDefaults().hint(DEFAULT_FIELD_WIDTH, SWT.DEFAULT);
+		final GridDataFactory fieldFactory = GridDataFactory.fillDefaults().hint(DEFAULT_FIELD_WIDTH, SWT.DEFAULT);
 
 		// row 0: formatted member name
-		Label memberNameLabel = UIControlsFactory.createLabel(leftColumn, "(none)",
+		final Label memberNameLabel = UIControlsFactory.createLabel(leftColumn, "(none)",
 				ViewWidgetId.memberInfo_formattedName);
 		memberNameLabel.setFont(bigAndBold(memberNameLabel.getFont(), true));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(memberNameLabel);
@@ -155,7 +149,14 @@ public class MemberInfoGroup {
 
 	}
 
-	public Composite getComposite() {
-		return composite;
+	private Font bigAndBold(Font currentFont, boolean bold) {
+		final FontData[] fontData = currentFont.getFontData();
+		for (final FontData element : fontData) {
+			element.setHeight(22);
+			if (bold) {
+				element.setStyle(SWT.BOLD);
+			}
+		}
+		return new Font(Display.getCurrent(), fontData);
 	}
 }

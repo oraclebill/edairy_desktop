@@ -12,13 +12,6 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 public interface IControllerDelegate {
 
 	/**
-	 * Gets ridget container
-	 * 
-	 * @return
-	 */
-	public IRidgetContainer getRidgetContainer();
-
-	/**
 	 * Configure ridgets
 	 */
 	public void configureRidgets();
@@ -35,5 +28,12 @@ public interface IControllerDelegate {
 	 * @return Ridget instance
 	 */
 	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id);
+
+	/**
+	 * Gets ridget container
+	 * 
+	 * @return
+	 */
+	public IRidgetContainer getRidgetContainer();
 
 }

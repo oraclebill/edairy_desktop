@@ -7,10 +7,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 public class MemberSearchViewFilter extends ViewerFilter {
 
-	public final static int SHOW_ALL = -1;
+	public final static int FILTER_ADDRESS = 2;
 	public final static int FILTER_ID = 0;
 	public final static int FILTER_NAME = 1;
-	public final static int FILTER_ADDRESS = 2;
+	public final static int SHOW_ALL = -1;
 
 	private int searchColumn;
 
@@ -28,9 +28,17 @@ public class MemberSearchViewFilter extends ViewerFilter {
 		this.searchValue = filterString;
 	}
 
+	public int getSearchColumn() {
+		return searchColumn;
+	}
+
+	public String getSearchValue() {
+		return searchValue;
+	}
+
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		if (searchValue == null || searchValue.length() == 0) {
+		if ((searchValue == null) || (searchValue.length() == 0)) {
 			return true;
 		}
 		if (element == null) {
@@ -45,22 +53,14 @@ public class MemberSearchViewFilter extends ViewerFilter {
 			return member.getMemberId() == Long.decode(searchValue);
 
 		case FILTER_NAME:
-			String compareString = member.getMember().getGivenName() + " " + member.getMember().getFamilyName();
+			final String compareString = member.getMember().getGivenName() + " " + member.getMember().getFamilyName();
 			return compareString.matches(searchValue);
 		}
 		return false;
 	}
 
-	public int getSearchColumn() {
-		return searchColumn;
-	}
-
 	public void setSearchColumn(int searchColumn) {
 		this.searchColumn = searchColumn;
-	}
-
-	public String getSearchValue() {
-		return searchValue;
 	}
 
 	public void setSearchValue(String searchValue) {

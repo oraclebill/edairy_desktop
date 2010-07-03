@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.Activator;
@@ -25,17 +26,17 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
  */
 public class MemberProfileWidget {
 
-	private Composite composite;
-
-	public static final String INFO_GROUP = "Membership Information";
 	public static final String applicationDate = "Application Date:";
-	public static final String effectiveDate = "Effective Date:";
-	public static final String status = "Status:";
-	public static final String phoneNumber = "Phone Number:";
 
+	public static final String effectiveDate = "Effective Date:";
+	public static final String INFO_GROUP = "Membership Information";
+	public static final String phoneNumber = "Phone Number:";
+	public static final String status = "Status:";
+	private ComboViewer comboStatus;
+
+	private final Composite composite;
 	private Text dateText;
 	private Text effectDateText;
-	private ComboViewer comboStatus;
 	private Text txtPhone;
 
 	public MemberProfileWidget(Composite parent) {
@@ -51,15 +52,15 @@ public class MemberProfileWidget {
 	public void initGUI() {
 		createInfoGroup();
 
-		LocationProfileWidget addressWidget = new LocationProfileWidget(composite);
+		final LocationProfileWidget addressWidget = new LocationProfileWidget(composite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget.getComposite());
 
-		CommunicationsGroupWidget communication = new CommunicationsGroupWidget(composite);
+		final CommunicationsGroupWidget communication = new CommunicationsGroupWidget(composite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication.getGroup());
 	}
 
 	private void createInfoGroup() {
-		Group infoGroup = UIControlsFactory.createGroup(composite, INFO_GROUP);
+		final Group infoGroup = UIControlsFactory.createGroup(composite, INFO_GROUP);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoGroup);
 		infoGroup.setLayout(new GridLayout(6, false));
 		UIControlsFactory.createLabel(infoGroup, applicationDate);
@@ -67,8 +68,9 @@ public class MemberProfileWidget {
 				ViewWidgetId.memberInfo_applicationDate);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateText);
 
-		ImageButton calendarButton = UIControlsFactory.createImageButton(infoGroup, SWT.NONE,ViewWidgetId.memberInfo_applicationDate_btn);
-		final Image calendar = Activator.getDefault().getImageRegistry().get(Activator.CALENDAR_ICON);
+		final ImageButton calendarButton = UIControlsFactory.createImageButton(infoGroup, SWT.NONE,
+				ViewWidgetId.memberInfo_applicationDate_btn);
+		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
 		calendarButton.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
 
@@ -79,27 +81,30 @@ public class MemberProfileWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(effectDateText);
 		// addUIControl(dateText,ViewWidgetId.calendarDate);
 
-		ImageButton calendarButton2 = UIControlsFactory.createImageButton(infoGroup,SWT.NONE, ViewWidgetId.memberInfo_effectiveDate_btn);
+		final ImageButton calendarButton2 = UIControlsFactory.createImageButton(infoGroup, SWT.NONE,
+				ViewWidgetId.memberInfo_effectiveDate_btn);
 		calendarButton2.setImage(calendar);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton2);
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
-//		calendarButton2.addSelectionListener(new SelectionAdapter() {
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-//				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-//						dateText.getText());
-//
-//				if (calDialog.open() == AbstractWindowController.OK) {
-//					final Date selectedDate = (Date) calDialog.getController().getContext(
-//							SimpleFormattedDateBean.DATE_PROR);
-//					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-//					bean.setDate(selectedDate);
-//					effectDateText.setText(bean.getFormattedDate());
-//				}
-//			}
-//		});
+		// calendarButton2.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// final CalendarSelectionDialog calDialog = new
+		// CalendarSelectionDialog();
+		// calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+		// dateText.getText());
+		//
+		// if (calDialog.open() == AbstractWindowController.OK) {
+		// final Date selectedDate = (Date)
+		// calDialog.getController().getContext(
+		// SimpleFormattedDateBean.DATE_PROR);
+		// final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+		// bean.setDate(selectedDate);
+		// effectDateText.setText(bean.getFormattedDate());
+		// }
+		// }
+		// });
 
 		// status
 		UIControlsFactory.createLabel(infoGroup, status);

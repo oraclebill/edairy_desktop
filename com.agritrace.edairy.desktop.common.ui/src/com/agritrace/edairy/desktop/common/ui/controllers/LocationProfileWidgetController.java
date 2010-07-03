@@ -10,11 +10,11 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 
 public class LocationProfileWidgetController implements WidgetController {
 
-	private final IController controller;
-	private Location location;
-
 	private final AddressGroupWidgetController addressGroup;
+	private final IController controller;
+
 	private final DirectionGroupController directionGroup;
+	private Location location;
 	private final MapGroupController mapGroup;
 
 	public LocationProfileWidgetController(IController controller) {
@@ -30,23 +30,9 @@ public class LocationProfileWidgetController implements WidgetController {
 		if (controller == null) {
 			return;
 		}
-//		addressGroup.configure();
-//		directionGroup.configure();
-//		mapGroup.configure();
-
-	}
-
-	@Override
-	public Object getInputModel() {
-		return location;
-	}
-
-	@Override
-	public void setInputModel(Object model) {
-		this.location = (Location) model;
-		if (controller != null) {
-			updateBinding();
-		}
+		// addressGroup.configure();
+		// directionGroup.configure();
+		// mapGroup.configure();
 
 	}
 
@@ -57,8 +43,22 @@ public class LocationProfileWidgetController implements WidgetController {
 	}
 
 	@Override
+	public Object getInputModel() {
+		return location;
+	}
+
+	@Override
 	public void setController(IController controller) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setInputModel(Object model) {
+		this.location = (Location) model;
+		if (controller != null) {
+			updateBinding();
+		}
 
 	}
 

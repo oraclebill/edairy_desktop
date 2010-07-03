@@ -24,10 +24,12 @@ public class MemberSearchSelectionManager {
 		}
 	}
 
-	public synchronized void removeSearchSelectionListener(MemberSearchSelectionListener listener) {
-		if (!listeners.contains(listener)) {
-			listeners.remove(listener);
-		}
+	public void clearListeners() {
+		listeners.clear();
+	}
+
+	public MemberSearchNodeListener getSearchNode() {
+		return searchNode;
 	}
 
 	public void notifySelectionChanged(MemberSearchSelectionListener source, Membership member) {
@@ -54,12 +56,10 @@ public class MemberSearchSelectionManager {
 		}
 	}
 
-	public void clearListeners() {
-		listeners.clear();
-	}
-
-	public MemberSearchNodeListener getSearchNode() {
-		return searchNode;
+	public synchronized void removeSearchSelectionListener(MemberSearchSelectionListener listener) {
+		if (!listeners.contains(listener)) {
+			listeners.remove(listener);
+		}
 	}
 
 	public void setSearchNode(MemberSearchNodeListener searchNode) {

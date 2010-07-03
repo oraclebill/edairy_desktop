@@ -9,40 +9,40 @@ import org.eclipse.swt.widgets.Shell;
 
 public class SplashLoginDialogView extends AbstractDialogView {
 
-    protected SplashLoginDialogView(Shell parentShell) {
-	super(parentShell);
-	// TODO Auto-generated constructor stub
-    }
+	public static void main(String[] args) {
+		final Shell shell = new Shell();
+		final SplashLoginDialogView dlg = new SplashLoginDialogView(shell);
+		dlg.create();
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView#buildView(org
-     * .eclipse.swt.widgets.Composite)
-     */
-    @Override
-    protected Control buildView(Composite parent) {
-	// TODO Auto-generated method stub
-	return new Composite(parent, SWT.NONE);
-    }
+	protected SplashLoginDialogView(Shell parentShell) {
+		super(parentShell);
+		// TODO Auto-generated constructor stub
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView#createController
-     * ()
-     */
-    @Override
-    protected AbstractWindowController createController() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView#buildView(org
+	 * .eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	protected Control buildView(Composite parent) {
+		// TODO Auto-generated method stub
+		return new Composite(parent, SWT.NONE);
+	}
 
-    public static void main(String[] args) {
-	final Shell shell = new Shell();
-	final SplashLoginDialogView dlg = new SplashLoginDialogView(shell);
-	dlg.create();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView#createController
+	 * ()
+	 */
+	@Override
+	protected AbstractWindowController createController() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

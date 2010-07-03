@@ -10,12 +10,11 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
-public abstract class LookupDialogController<T extends EObject> extends
-		AbstractWindowController {
+public abstract class LookupDialogController<T extends EObject> extends AbstractWindowController {
 
-	private final List<T> tableContents = new ArrayList<T>();
 	private ITableRidget listTable;
 	private T selectedObject;
+	private final List<T> tableContents = new ArrayList<T>();
 
 	public LookupDialogController() {
 		super();
@@ -25,9 +24,9 @@ public abstract class LookupDialogController<T extends EObject> extends
 	public void configureRidgets() {
 		super.configureRidgets();
 		// Search Button
-		IActionRidget searchAction = null;
-//			getRidget(IActionRidget.class,
-//				FarmSearchDialog.SEARCH_BUTTON);
+		final IActionRidget searchAction = null;
+		// getRidget(IActionRidget.class,
+		// FarmSearchDialog.SEARCH_BUTTON);
 		searchAction.addListener(new IActionListener() {
 
 			@Override
@@ -38,15 +37,26 @@ public abstract class LookupDialogController<T extends EObject> extends
 		});
 
 		//
-		listTable = getRidget(ITableRidget.class,
-				CommonLookupDialog.RESULT_LIST);
+		listTable = getRidget(ITableRidget.class, CommonLookupDialog.RESULT_LIST);
 
+	}
+
+	public T getSelectedObject() {
+		return selectedObject;
+	}
+
+	public List<T> getTableContents() {
+		return tableContents;
 	}
 
 	public void refreshTableContents() {
 		tableContents.clear();
 		tableContents.addAll(getFilteredResult());
 
+	}
+
+	public void setSelectedObject(T selectedObject) {
+		this.selectedObject = selectedObject;
 	}
 
 	/**
@@ -57,17 +67,5 @@ public abstract class LookupDialogController<T extends EObject> extends
 	protected abstract EClass getEClass();
 
 	protected abstract List<T> getFilteredResult();
-
-	public List<T> getTableContents() {
-		return tableContents;
-	}
-
-	public void setSelectedObject(T selectedObject) {
-		this.selectedObject = selectedObject;
-	}
-
-	public T getSelectedObject() {
-		return selectedObject;
-	}
 
 }

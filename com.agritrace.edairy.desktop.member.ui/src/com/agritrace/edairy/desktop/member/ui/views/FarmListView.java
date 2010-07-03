@@ -17,61 +17,63 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class FarmListView extends BaseListView {
 
-	public static final String ID = FarmListView.class.getName();
-
-	public static final String FILTER_GROUP_TEXT = "Search for a farm";
-	public static final String FILTER_GROUP_MEMBER_LOOKUP = "Member Lookup";
-	public static final String FILTER_GROUP_FARM_LOOKUP = "Show all farms";
-
 	public static final String FARM_GROUP = "Farms";
 
-	
+	public static final String FILTER_GROUP_FARM_LOOKUP = "Show all farms";
+	public static final String FILTER_GROUP_MEMBER_LOOKUP = "Member Lookup";
+	public static final String FILTER_GROUP_TEXT = "Search for a farm";
+
+	public static final String ID = FarmListView.class.getName();
+
+	@Override
 	protected void createFilterGroup(Composite parent) {
 		// group
-		Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
+		final Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(filterGroup);
 
 		UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_MEMBER_LOOKUP);
 		// search text
-		Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
+		final Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(250, -1).grab(false, false).applyTo(searchText);
 
-		ImageButton lookupButton = UIControlsFactory.createImageButton(filterGroup, SWT.NULL,
+		final ImageButton lookupButton = UIControlsFactory.createImageButton(filterGroup, SWT.NULL,
 				ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
-		final Image lookupIcon = Activator.getDefault().getImageRegistry().get(Activator.MEMBER_SEARCH_ICON);
+		final Image lookupIcon = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.MEMBER_SEARCH_ICON);
 		lookupButton.setImage(lookupIcon);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).grab(false, false).applyTo(lookupButton);
 
 		UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_FARM_LOOKUP);
 		// farm combo
-		Combo farmCombo = UIControlsFactory.createCombo(filterGroup, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
+		final Combo farmCombo = UIControlsFactory.createCombo(filterGroup, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(235, -1).span(2, 1).grab(false, false)
 				.applyTo(farmCombo);
 
 		// search cancel button
-		Composite searchPanel = UIControlsFactory.createComposite(filterGroup);
+		final Composite searchPanel = UIControlsFactory.createComposite(filterGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(searchPanel);
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
 
-		Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
+		final Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
 				ViewWidgetId.memberInfo_searchButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
 
-		Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.cancelButton);
+		final Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.cancelButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
 
 	}
 
+	@Override
 	protected void createListGroup(Composite parent) {
 
-		Group memberListGroup = UIControlsFactory.createGroup(parent, FARM_GROUP);
+		final Group memberListGroup = UIControlsFactory.createGroup(parent, FARM_GROUP);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(memberListGroup);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(memberListGroup);
 
@@ -106,6 +108,6 @@ public class FarmListView extends BaseListView {
 
 		tablePanel.setLayout(layout);
 
-		createButtonPanel(memberListGroup, ViewWidgetId.FARM_View,ViewWidgetId.FARM_ADD);
+		createButtonPanel(memberListGroup, ViewWidgetId.FARM_View, ViewWidgetId.FARM_ADD);
 	}
 }

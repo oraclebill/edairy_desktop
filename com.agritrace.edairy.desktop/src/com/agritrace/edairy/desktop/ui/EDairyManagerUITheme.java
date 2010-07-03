@@ -17,27 +17,12 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 	 * (java.util.Map)
 	 */
 
-	public void customizeLnf(ILnfCustomizer lnf) {
-		super.customizeLnf(lnf);
-		addCustomColors(lnf);
-		addCustomSettings(lnf);
-
-	}
-
 	public void addCustomColors(ILnfCustomizer lnf) {
 
 		lnf.putLnfSetting(LnfKeyConstants.NAVIGATION_BACKGROUND, new ColorLnfResource(231, 244, 211));
 		lnf.putLnfSetting(LnfKeyConstants.SUB_MODULE_BACKGROUND, new ColorLnfResource(255, 255, 255));
 
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomSettings
-	 * (java.util.Map)
-	 */
 
 	public void addCustomSettings(ILnfCustomizer lnf) {
 
@@ -60,25 +45,16 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#getSystemFont
-	 * ()
+	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomSettings
+	 * (java.util.Map)
 	 */
-	@Override
-	protected FontData getSystemFont() {
-		// TODO Auto-generated method stub
-		return super.getSystemFont();
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#
-	 * getPrimaryForeground()
-	 */
 	@Override
-	protected ColorLnfResource getPrimaryForeground() {
-		// TODO Auto-generated method stub
-		return super.getPrimaryForeground();
+	public void customizeLnf(ILnfCustomizer lnf) {
+		super.customizeLnf(lnf);
+		addCustomColors(lnf);
+		addCustomSettings(lnf);
+
 	}
 
 	/*
@@ -104,6 +80,31 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 	protected FontLnfResource getPrimaryFont() {
 		// TODO Auto-generated method stub
 		return super.getPrimaryFont();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#
+	 * getPrimaryForeground()
+	 */
+	@Override
+	protected ColorLnfResource getPrimaryForeground() {
+		// TODO Auto-generated method stub
+		return super.getPrimaryForeground();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#getSystemFont
+	 * ()
+	 */
+	@Override
+	protected FontData getSystemFont() {
+		// TODO Auto-generated method stub
+		return super.getSystemFont();
 	}
 
 	/*

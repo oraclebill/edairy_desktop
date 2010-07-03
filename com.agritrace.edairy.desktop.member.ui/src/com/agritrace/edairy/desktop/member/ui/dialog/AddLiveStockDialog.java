@@ -11,6 +11,7 @@ public class AddLiveStockDialog extends ViewLiveStockDialog {
 		super(parentShell);
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	protected AbstractWindowController createController() {
 		// TODO Auto-generated method stub

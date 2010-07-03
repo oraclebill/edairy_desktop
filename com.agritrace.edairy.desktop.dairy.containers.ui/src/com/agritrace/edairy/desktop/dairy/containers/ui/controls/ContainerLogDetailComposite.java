@@ -21,7 +21,7 @@ public class ContainerLogDetailComposite extends Composite {
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		setLayout(new FillLayout());
 
-		Composite detailGroup_1 = UIControlsFactory.createGroup(this, "Container Detail");
+		final Composite detailGroup_1 = UIControlsFactory.createGroup(this, "Container Detail");
 		detailGroup_1.setLayout(new GridLayout());
 
 		addDescriptionGroup(detailGroup_1);
@@ -89,7 +89,7 @@ public class ContainerLogDetailComposite extends Composite {
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		{
-			Composite detailGroup = new Composite(comp, SWT.NONE);
+			final Composite detailGroup = new Composite(comp, SWT.NONE);
 			detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 

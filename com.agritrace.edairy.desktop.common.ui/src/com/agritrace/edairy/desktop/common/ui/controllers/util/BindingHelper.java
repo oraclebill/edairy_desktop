@@ -20,15 +20,14 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 
-
-public class BindingHelper<T extends EObject>  {
+public class BindingHelper<T extends EObject> {
 
 	private static final ConverterFactory converterFactory = new ConverterFactory();
-	private final Map<String, FeatureProperties> ridgetPropertyMap = new HashMap<String, FeatureProperties>();
+	private final T modelObject;
 
 	private final IRidgetContainer ridgetContainer;
-	private final T modelObject;
-	
+	private final Map<String, FeatureProperties> ridgetPropertyMap = new HashMap<String, FeatureProperties>();
+
 	/**
 	 * Create a new EMFBindingHelper.
 	 * 
@@ -39,16 +38,7 @@ public class BindingHelper<T extends EObject>  {
 		this.ridgetContainer = ridgetContainer;
 		this.modelObject = modelObject;
 	}
-	
-	/**
-	 * Get the model object this binding helper was instantiated with.
-	 * 
-	 * @return
-	 */
-	public T getModelObject() {
-		return modelObject;
-	}
-	
+
 	/**
 	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped
 	 * ridgets are bound automatically during the configuration process.
@@ -59,7 +49,7 @@ public class BindingHelper<T extends EObject>  {
 	public void addMapping(String ridgetId, EStructuralFeature... featurePath) {
 		// TODO: automatically create domain list for features that are
 		// instances of an enum type.
-		FeatureProperties props = new FeatureProperties(ridgetId, featurePath);
+		final FeatureProperties props = new FeatureProperties(ridgetId, featurePath);
 		ridgetPropertyMap.put(ridgetId, props);
 	}
 
@@ -71,7 +61,7 @@ public class BindingHelper<T extends EObject>  {
 	 * @param featurePath
 	 */
 	public void addMapping(String ridgetId, List<?> domainList, EStructuralFeature... featurePath) {
-		FeatureProperties props = new FeatureProperties(ridgetId, domainList, featurePath);
+		final FeatureProperties props = new FeatureProperties(ridgetId, domainList, featurePath);
 		ridgetPropertyMap.put(ridgetId, props);
 	}
 
@@ -79,18 +69,20 @@ public class BindingHelper<T extends EObject>  {
 	 * 
 	 */
 	public void configureRidgets() {
-	
+
 		for (final FeatureProperties binding : ridgetPropertyMap.values()) {
 			final IRidget ridget = ridgetContainer.getRidget(binding.getBindingId());
 			checkMandatory(binding, ridget);
-	
+
 			if (ridget instanceof IEditableRidget) {
 				final IEditableRidget valueRidget = (IEditableRidget) ridget;
 				valueRidget.bindToModel(EMFProperties.value(binding.getFeaturePath()).observe(getModelObject()));
 				final IConverter converter = createUI2ModelConverter(valueRidget, binding.getTailFeature());
 				if (converter != null) {
-					valueRidget.setUIControlToModelConverter(converter); // has no effect..
-				}		
+					valueRidget.setUIControlToModelConverter(converter); // has
+																			// no
+																			// effect..
+				}
 				valueRidget.updateFromModel();
 			} else if (ridget instanceof IComboRidget) {
 				final IComboRidget comboRidget = (IComboRidget) ridget;
@@ -98,22 +90,22 @@ public class BindingHelper<T extends EObject>  {
 				final Class<?> rowClass = binding.getEntityClass();
 				final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(
 						getModelObject());
-	
+
 				checkParameters(optionValues, rowClass, selectionValue);
 				checkMandatory(binding, ridget);
 				comboRidget.bindToModel(optionValues, rowClass, "toString()", selectionValue);
 			} else if (ridget instanceof ITableRidget) {
-				final ITableRidget tableRidget = (ITableRidget) ridget;
-	
-				final IObservableList rowObservables = binding.getDomainList();
-				;
-				final String[] columnPropertyNames = new String[] {};
-				final String[] columnHeaders = new String[] {};
-				final Class<?> rowClass = binding.getEntityClass();
-	
-				throw new UnsupportedOperationException();
+//				final ITableRidget tableRidget = (ITableRidget) ridget;
+//
+//				final IObservableList rowObservables = binding.getDomainList();
+//				;
+//				final String[] columnPropertyNames = new String[] {};
+//				final String[] columnHeaders = new String[] {};
+//				final Class<?> rowClass = binding.getEntityClass();
 				// tableRidget.bindToModel(rowObservables, rowClass,
 				// columnPropertyNames, columnHeaders);
+
+				throw new UnsupportedOperationException();
 			} else if (ridget instanceof ISingleChoiceRidget) {
 				final ISingleChoiceRidget singleChoice = (ISingleChoiceRidget) ridget;
 				// final IComboRidget comboRidget = (IComboRidget) ridget;
@@ -121,7 +113,7 @@ public class BindingHelper<T extends EObject>  {
 				final Class<?> rowClass = binding.getEntityClass();
 				final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(
 						getModelObject());
-	
+
 				checkParameters(optionValues, rowClass, selectionValue);
 				checkMandatory(binding, ridget);
 				singleChoice.bindToModel(optionValues, selectionValue);
@@ -130,42 +122,50 @@ public class BindingHelper<T extends EObject>  {
 			} else {
 				throw new UnsupportedOperationException("Ridget classs '" + ridget.getClass().getName()
 						+ "' is not supported.");
-			}					
+			}
+		}
+	}
+
+	/**
+	 * Get the model object this binding helper was instantiated with.
+	 * 
+	 * @return
+	 */
+	public T getModelObject() {
+		return modelObject;
+	}
+
+	private void checkMandatory(FeatureProperties binding, IRidget ridget) {
+		final FeaturePath path = binding.getFeaturePath();
+		final EStructuralFeature testFeature = path.getFeaturePath()[0];
+		if (testFeature.isRequired() && (ridget instanceof IMarkableRidget)) {
+			final IMarkableRidget markableValue = (IMarkableRidget) ridget;
+			markableValue.setMandatory(true);
 		}
 	}
 
 	private void checkParameters(IObservableList optionValues, Class<?> rowClass, IObservableValue selectionValue) {
-		if (optionValues == null || rowClass == null || selectionValue == null) {
+		if ((optionValues == null) || (rowClass == null) || (selectionValue == null)) {
 			throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" + optionValues
 					+ ", " + rowClass + ", " + selectionValue + ")");
-		}
-	}
-
-	private void checkMandatory(FeatureProperties binding, IRidget ridget) {
-		FeaturePath path = binding.getFeaturePath();
-		final EStructuralFeature testFeature = path.getFeaturePath()[0];
-		if (testFeature.isRequired() && ridget instanceof IMarkableRidget) {
-			IMarkableRidget markableValue = (IMarkableRidget) ridget;
-			markableValue.setMandatory(true);
 		}
 	}
 
 	private IConverter createUI2ModelConverter(IEditableRidget ridget, EStructuralFeature feature) {
 		try {
 			final EClassifier featureType = feature.getEType();
-			final Class<?> featureClass = featureType.getInstanceClass();		
+			final Class<?> featureClass = featureType.getInstanceClass();
 			return converterFactory.createConverter(String.class, featureClass);
-		}
-		catch(Exception e) {
+		} catch (final Exception e) {
 			System.err.println("WARN: converter factory failed for feature: " + feature);
 			return null;
 		}
 	}
 
-
-//	protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
-//		final Map<String, EStructuralFeature> map = new HashMap<String, EStructuralFeature>();
-//		return map;
-//	}
+	// protected Map<String, EStructuralFeature> configureRidgetPropertyMap() {
+	// final Map<String, EStructuralFeature> map = new HashMap<String,
+	// EStructuralFeature>();
+	// return map;
+	// }
 
 }

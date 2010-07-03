@@ -15,15 +15,14 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
-	
+
 	public static final String EMPTY_SELECTION_TEXT = "ANY";
 
+	final private List<ColumnFormatter> columnFormatters = new ArrayList<ColumnFormatter>();
 	final private List<String> columnHeaders = new ArrayList<String>();
 	final private List<String> columnProperties = new ArrayList<String>();
-	final private List<ColumnFormatter> columnFormatters = new ArrayList<ColumnFormatter>();
 
 	private EClass eClass;
-	private Class<? extends EObject> entityClass;	
 
 	public BasicDirectoryController() {
 		super();
@@ -33,51 +32,14 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		super(navigationNode);
 	}
 
-	protected void setEClass(EClass eClass) { 
-		this.eClass = eClass;
-	}
-	
-	final protected EClass getEClass() {
-		return eClass;
-	}
-
-	protected void addTableColumn(String colHeader, EStructuralFeature feature) { 
+	protected void addTableColumn(String colHeader, EStructuralFeature feature) {
 		addTableColumn(colHeader, feature, null);
 	}
 
-	protected void addTableColumn(String colHeader, EStructuralFeature feature, ColumnFormatter formatter) { 
+	protected void addTableColumn(String colHeader, EStructuralFeature feature, ColumnFormatter formatter) {
 		columnHeaders.add(colHeader);
 		columnProperties.add(feature.getName());
 		columnFormatters.add(formatter);
-	}
-
-	@Override
-	final protected String[] getTableColumnHeaders() {
-		int numCols = columnHeaders.size();
-		String[] colHeaders = new String[numCols];
-		for (int i = 0; i < numCols; i++) {
-			colHeaders[i] = columnHeaders.get(i);			
-		}
-		return colHeaders;
-	}
-
-	final protected ColumnFormatter[] getTableColumnFormatters() {
-		int numCols = columnFormatters.size();
-		ColumnFormatter colFormatter[] = new ColumnFormatter[numCols];
-		for (int i = 0; i < numCols; i++) {
-			colFormatter[i] = columnFormatters.get(i);			
-		}
-		return colFormatter;
-	}
-
-	@Override
-	final protected String[] getTableColumnPropertyNames() {
-		int numCols = columnProperties.size();
-		String colProps[] = new String[numCols];
-		for (int i = 0; i < numCols; i++) {
-			colProps[i] = columnProperties.get(i);			
-		}
-		return colProps;
 	}
 
 	@Override
@@ -95,22 +57,59 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 			@Override
 			public void callback() {
 				handleViewItemAction();
-			}			
+			}
 		});
-				
-		ColumnFormatter[] formatters = getTableColumnFormatters();
-		for ( int i = 0; i < formatters.length; i++ ) {
-			if (formatters[i] != null ) {
+
+		final ColumnFormatter[] formatters = getTableColumnFormatters();
+		for (int i = 0; i < formatters.length; i++) {
+			if (formatters[i] != null) {
 				table.setColumnFormatter(i, formatters[i]);
 			}
 		}
-		
+
 		table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
 				getTableColumnPropertyNames(), getTableColumnHeaders());
 
 		table.updateFromModel();
 
-		
+	}
+
+	@Override
+	final protected EClass getEClass() {
+		return eClass;
+	}
+
+	final protected ColumnFormatter[] getTableColumnFormatters() {
+		final int numCols = columnFormatters.size();
+		final ColumnFormatter colFormatter[] = new ColumnFormatter[numCols];
+		for (int i = 0; i < numCols; i++) {
+			colFormatter[i] = columnFormatters.get(i);
+		}
+		return colFormatter;
+	}
+
+	@Override
+	final protected String[] getTableColumnHeaders() {
+		final int numCols = columnHeaders.size();
+		final String[] colHeaders = new String[numCols];
+		for (int i = 0; i < numCols; i++) {
+			colHeaders[i] = columnHeaders.get(i);
+		}
+		return colHeaders;
+	}
+
+	@Override
+	final protected String[] getTableColumnPropertyNames() {
+		final int numCols = columnProperties.size();
+		final String colProps[] = new String[numCols];
+		for (int i = 0; i < numCols; i++) {
+			colProps[i] = columnProperties.get(i);
+		}
+		return colProps;
+	}
+
+	protected void setEClass(EClass eClass) {
+		this.eClass = eClass;
 	}
 
 }

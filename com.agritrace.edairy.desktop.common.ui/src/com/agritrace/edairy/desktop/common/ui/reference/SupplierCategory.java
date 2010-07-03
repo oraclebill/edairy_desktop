@@ -11,16 +11,26 @@ public class SupplierCategory {
 			new SupplierCategory("Transportation Services"), new SupplierCategory("Vehicle Repair"),
 			new SupplierCategory("Vehicle Sales"), new SupplierCategory("Other") };
 
+	public static SupplierCategory getByName(String name) {
+
+		for (final SupplierCategory cate : CATEGORIES) {
+			if ((cate != null) && (cate.getName() != null) && cate.getName().equals(name)) {
+				return cate;
+			}
+		}
+		return null;
+	}
+
 	public static List<SupplierCategory> getCategoriesList() {
 		return Arrays.asList(CATEGORIES);
 	}
+
+	private String name;
 
 	public SupplierCategory(String name) {
 		super();
 		this.name = name;
 	}
-
-	private String name;
 
 	public String getName() {
 		return this.name;
@@ -28,18 +38,6 @@ public class SupplierCategory {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public static SupplierCategory getByName(String name) {
-		
-		for (SupplierCategory cate:CATEGORIES)
-		{
-			if (cate!=null && cate.getName()!=null && cate.getName().equals(name))
-			{
-				return cate;
-			}
-		}
-		return null;
 	}
 
 }

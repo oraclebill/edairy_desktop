@@ -19,32 +19,39 @@ import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
 public class DairyRepository implements IDairyRepository {
 
-	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
-
-	private static final HibernateRepository<Dairy> dairyRepository = new HibernateRepository<Dairy>() {
-		@Override
-		protected Class<Dairy> getClassType() {
-			return Dairy.class;
-		}
-	};
-	private static final HibernateRepository<Route> routeRepository = new HibernateRepository<Route>() {
-		@Override
-		protected Class<Route> getClassType() {
-			return Route.class;
-		}
-	};
 	private static final HibernateRepository<DairyContainer> binRepository = new HibernateRepository<DairyContainer>() {
 		@Override
 		protected Class<DairyContainer> getClassType() {
 			return DairyContainer.class;
 		}
 	};
-	private static final HibernateRepository<Vehicle> vehicleRepository = new HibernateRepository<Vehicle>() {
+
+	private static final HibernateRepository<CollectionJournalPage> collectionsRepository = new HibernateRepository<CollectionJournalPage>() {
 		@Override
-		protected Class<Vehicle> getClassType() {
-			return Vehicle.class;
+		protected Class<CollectionJournalPage> getClassType() {
+			return CollectionJournalPage.class;
 		}
 	};
+	private static final HibernateRepository<Customer> customerRepository = new HibernateRepository<Customer>() {
+		@Override
+		protected Class<Customer> getClassType() {
+			return Customer.class;
+		}
+	};
+	private static final HibernateRepository<Dairy> dairyRepository = new HibernateRepository<Dairy>() {
+		@Override
+		protected Class<Dairy> getClassType() {
+			return Dairy.class;
+		}
+	};
+	private static final HibernateRepository<DeliveryJournal> deliveryRepository = new HibernateRepository<DeliveryJournal>() {
+		@Override
+		protected Class<DeliveryJournal> getClassType() {
+			return DeliveryJournal.class;
+		}
+	};
+
+	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
 
 	private static final HibernateRepository<Employee> employeeRepository = new HibernateRepository<Employee>() {
 		@Override
@@ -59,27 +66,29 @@ public class DairyRepository implements IDairyRepository {
 			return Membership.class;
 		}
 	};
-	
-	private static final HibernateRepository<CollectionJournalPage> collectionsRepository = new HibernateRepository<CollectionJournalPage>() {
+
+	private static final HibernateRepository<Route> routeRepository = new HibernateRepository<Route>() {
 		@Override
-		protected Class<CollectionJournalPage> getClassType() {
-			return CollectionJournalPage.class;
+		protected Class<Route> getClassType() {
+			return Route.class;
 		}
 	};
 
-	private static final HibernateRepository<DeliveryJournal> deliveryRepository = new HibernateRepository<DeliveryJournal>() {
+	private static final HibernateRepository<Vehicle> vehicleRepository = new HibernateRepository<Vehicle>() {
 		@Override
-		protected Class<DeliveryJournal> getClassType() {
-			return DeliveryJournal.class;
+		protected Class<Vehicle> getClassType() {
+			return Vehicle.class;
 		}
 	};
-	
-	private static final HibernateRepository<Customer> customerRepository = new HibernateRepository<Customer>() {
-		@Override
-		protected Class<Customer> getClassType() {
-			return Customer.class;
-		}
-	};
+
+	public List<CollectionJournalPage> allCollectionJournalPages() {
+		return collectionsRepository.all();
+	}
+
+	@Override
+	public List<Customer> allCustomers() {
+		return customerRepository.all();
+	}
 
 	@Override
 	public List<Dairy> allDairies() {
@@ -89,6 +98,11 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public List<DairyContainer> allDairyContainers() {
 		return binRepository.all();
+	}
+
+	@Override
+	public List<DeliveryJournal> allDeliveries() {
+		return deliveryRepository.all();
 	}
 
 	@Override
@@ -128,15 +142,11 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	public Dairy getDairyByName(String name) {
-		List<Dairy> list = find("FROM Dairy where name='" + name + "'");
+		final List<Dairy> list = find("FROM Dairy where name='" + name + "'");
 		if (list.size() > 0) {
 			return list.get(0);
 		}
 		return null;
-	}
-
-	public List<CollectionJournalPage> allCollectionJournalPages() {
-		return collectionsRepository.all();
 	}
 
 	@Override
@@ -145,29 +155,29 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public CollectionJournalPage getJournalPageById(String pageId) {
-		try {
-			return getJournalPageById(Long.parseLong(pageId));
-		}
-		catch (NumberFormatException nfe) {
-			return null;
-		}
-	}
-
-	@Override
 	public CollectionJournalPage getJournalPageById(Long pageId) {
 		return collectionsRepository.findByKey(pageId);
 	}
 
 	@Override
+	public CollectionJournalPage getJournalPageById(String pageId) {
+		try {
+			return getJournalPageById(Long.parseLong(pageId));
+		} catch (final NumberFormatException nfe) {
+			return null;
+		}
+	}
+
+	@Override
 	public Dairy getLocalDairy() {
 		Dairy local = null;
-		
+
 		// find local
-		List<Dairy> dairies = dairyRepository.all();
+		final List<Dairy> dairies = dairyRepository.all();
 		if (dairies.size() > 0) {
-			if (dairies.size() > 1)
+			if (dairies.size() > 1) {
 				throw new IllegalStateException("multiple dairies unsupported.");
+			}
 			return dairies.get(0);
 		}
 
@@ -176,29 +186,34 @@ public class DairyRepository implements IDairyRepository {
 		local.setLocation(DairyUtil.createLocation(null, null, null));
 		long id = 0;
 		try {
-			String dairyId = System.getProperty(EDAIRY_SITE_DAIRYID);
+			final String dairyId = System.getProperty(EDAIRY_SITE_DAIRYID);
 			if (dairyId != null) {
 				id = new Long(dairyId).longValue();
 				local.setCompanyId(id);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 		return local;
 	}
 
 	@Override
+	public List<DairyLocation> getLocalDairyLocations() {
+		return getLocalDairy().getBranchLocations();
+	}
+
+	@Override
 	public Membership getMembershipById(Object memberId) {
 		// TODO Auto-generated method stub
-		return getMembershipById((String)memberId);
+		return getMembershipById((String) memberId);
 	}
 
 	public Membership getMembershipById(String memberIdString) {
 		Long memberId = new Long(-1);
 		try {
 			memberId = Long.parseLong(memberIdString);
-		}
-		catch( NumberFormatException nfe) {
-			;;
+		} catch (final NumberFormatException nfe) {
+			;
+			;
 		}
 		return memberRepository.findByKey(memberId);
 	}
@@ -209,13 +224,18 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
+	public void save(Object changedItem) {
+		dairyRepository.save(changedItem);
+	}
+
+	@Override
 	public void saveNewDairy(Dairy newEntity) {
 		newEntity.setCompanyId(null);
 		dairyRepository.saveNew(newEntity);
 	}
 
 	@Override
-	public void saveNewJournalPage(CollectionJournalPage newJournal) {		
+	public void saveNewJournalPage(CollectionJournalPage newJournal) {
 		collectionsRepository.saveNew(newJournal);
 	}
 
@@ -231,26 +251,5 @@ public class DairyRepository implements IDairyRepository {
 	public void updateRoute(final Route changedRoute) {
 		routeRepository.update(changedRoute);
 	}
-
-	@Override
-	public void save(Object changedItem) {
-		dairyRepository.save(changedItem);		
-	}
-
-	@Override
-	public List<DeliveryJournal> allDeliveries() {
-		return deliveryRepository.all();
-	}
-
-	@Override
-	public List<Customer> allCustomers() {
-		return customerRepository.all();
-	}
-
-	@Override
-	public List<DairyLocation> getLocalDairyLocations() {
-		return getLocalDairy().getBranchLocations();
-	}
-
 
 }

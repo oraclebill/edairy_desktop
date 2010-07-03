@@ -15,9 +15,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 public class AddRouteDialogController extends AbstractWindowController {
-	private ITextRidget textName;
 	private IMessageBoxRidget duplicateNameDialog;
 	private Route newRoute;
+	private ITextRidget textName;
 	DairyLocationRepository repo;
 
 	public AddRouteDialogController(DairyLocationRepository dairy) {
@@ -39,8 +39,7 @@ public class AddRouteDialogController extends AbstractWindowController {
 		 * routeId.bindToModel(route, "routeId"); routeId.updateFromModel();
 		 */
 
-		textName = getRidget(ITextRidget.class,
-				AddRouteDialogIDs.RIDGET_ID_NAME);
+		textName = getRidget(ITextRidget.class, AddRouteDialogIDs.RIDGET_ID_NAME);
 		textName.bindToModel(newRoute, "name");
 		textName.updateFromModel();
 		textName.addValidationMessage("Invalid route name!");
@@ -63,23 +62,19 @@ public class AddRouteDialogController extends AbstractWindowController {
 
 		}, ValidationTime.ON_UPDATE_TO_MODEL);
 
-		final ITextRidget routeDescription = getRidget(ITextRidget.class,
-				AddRouteDialogIDs.RIDGET_ID_DESCRIPTION);
+		final ITextRidget routeDescription = getRidget(ITextRidget.class, AddRouteDialogIDs.RIDGET_ID_DESCRIPTION);
 		routeDescription.bindToModel(newRoute, "description");
 		routeDescription.updateFromModel();
 
-		final ITextRidget routeCode = getRidget(ITextRidget.class,
-				AddRouteDialogIDs.RIDGET_ID_CODE);
+		final ITextRidget routeCode = getRidget(ITextRidget.class, AddRouteDialogIDs.RIDGET_ID_CODE);
 		routeCode.bindToModel(newRoute, "code");
 		routeCode.updateFromModel();
 
 		duplicateNameDialog = (IMessageBoxRidget) getRidget(AddRouteDialogIDs.RIDGET_ID_DUPLICATE_NAME_DIALOG);
 		duplicateNameDialog.setType(IMessageBoxRidget.Type.ERROR);
 		duplicateNameDialog.setTitle("Duplicate Name");
-		duplicateNameDialog
-				.setText("The name '"
-						+ textName.getText()
-						+ "' is already in use.\r\n\rPlease select a unique name for this new location.");
+		duplicateNameDialog.setText("The name '" + textName.getText()
+				+ "' is already in use.\r\n\rPlease select a unique name for this new location.");
 
 		final IActionRidget saveAction = (IActionRidget) getRidget(AddRouteDialogIDs.RIDGET_ID_SAVE);
 		saveAction.addListener(new IActionListener() {

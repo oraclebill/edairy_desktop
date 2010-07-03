@@ -46,7 +46,7 @@
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser
             type="model"
-            class="com.agritrace.edairy.desktop.common.model.util.ModelResourceFactoryImpl"/>
+            class="com.agritrace.edairy.desktop.common.model.base.util.ModelResourceFactoryImpl"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">

@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -44,8 +42,8 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	@Override
 	public void configureUserRidgets() {
 		// configure supplier ID
-		final Supplier supplier = (Supplier)getWorkingCopy();
-		ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID); //$NON-NLS-1$
+		final Supplier supplier = getWorkingCopy();
+		final ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID);
 		supplierId.setOutputOnly(false);
 		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		supplierId.updateFromModel();
@@ -53,10 +51,9 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			supplierId.setText("Auto Generated");
 		}
 		supplierId.setOutputOnly(true);
-		
 
 		// Status
-		IComboRidget statusCombo = getRidget(IComboRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_STATUS);
+		final IComboRidget statusCombo = getRidget(IComboRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_STATUS);
 		// statusCombo.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
 		statusCombo.bindToModel(Observables.staticObservableList(VendorStatus.VALUES), VendorStatus.class, "toString",
 				PojoObservables.observeValue(supplier, DairyPackage.Literals.SUPPLIER__STATUS.getName()));
@@ -64,100 +61,92 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		statusCombo.updateFromModel();
 
 		// Company Name
-		ITextRidget companyName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_COMPANY_NAME); //$NON-NLS-1$
+		final ITextRidget companyName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_COMPANY_NAME);
 		companyName.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_NAME.getName());
 		companyName.updateFromModel();
-		companyName.addValidationRule(new NotEmpty(),
-				ValidationTime.ON_UI_CONTROL_EDIT);
+		companyName.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		companyName.setMandatory(true);
 
 		// Legal Name
-		ITextRidget legalName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_LEGAL_NAME); //$NON-NLS-1$
+		final ITextRidget legalName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_LEGAL_NAME);
 		legalName.bindToModel(supplier, ModelPackage.Literals.COMPANY__LEGAL_NAME.getName());
 		legalName.updateFromModel();
-		legalName.addValidationRule(new NotEmpty(),
-				ValidationTime.ON_UI_CONTROL_EDIT);
+		legalName.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
 		legalName.setMandatory(true);
 
 		// Category
-		IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY); //$NON-NLS-1$		
+		final IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY);
 		if (category != null) {
 			category.setSelectionType(SelectionType.MULTI);
 
-			// Create a supplier to hold all categories
-			IObservableValue selectedValue = new WritableValue();
-
-			category.bindToModel(
-					Observables.staticObservableList(SupplierCategory
-							.getCategoriesList()), SupplierCategory.class,
-					"name");
+			category.bindToModel(Observables.staticObservableList(SupplierCategory.getCategoriesList()),
+					SupplierCategory.class, "name");
 			category.updateFromModel();
 			// categoriesList.bindToModel(EMFObservables.observeList(supplier,
 			// DairyPackage.Literals.SUPPLIER__CATEGORIES), "value");
-			List<SupplierCategory> selectedCategoriesList = new ArrayList<SupplierCategory>();
-			for (String categor: supplier.getCategories())
-			{
+			final List<SupplierCategory> selectedCategoriesList = new ArrayList<SupplierCategory>();
+			for (final String categor : supplier.getCategories()) {
 				selectedCategoriesList.add(SupplierCategory.getByName(categor));
 			}
 			final ListBean selection = new ListBean();
 			selection.setValues(selectedCategoriesList);
 			selection.addPropertyChangeListener(new PropertyChangeListener() {
+				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					// Get current selections
-					List<?> values = selection.getValues();
+					final List<?> values = selection.getValues();
 					supplier.getCategories().clear();
 					// Update the working copy
-					for (Object category : values) {
-						supplier.getCategories().add(
-								((SupplierCategory) category).getName());
+					for (final Object category : values) {
+						supplier.getCategories().add(((SupplierCategory) category).getName());
 					}
-					
+
 				}
 			});
 			category.bindMultiSelectionToModel(selection, "values");
 			category.updateMultiSelectionFromModel();
 		}
 		// Description
-		ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION); //$NON-NLS-1$
+		final ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION);
 		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());
 		desc.updateFromModel();
 
 		Location supplierLocation = supplier.getLocation();
-		if  (supplierLocation == null) {
+		if (supplierLocation == null) {
 			supplierLocation = DairyUtil.createLocation(null, null, null);
 			supplier.setLocation(supplierLocation);
 		}
 		EMFUtil.populate(supplierLocation);
-		
+
 		// Configure address group
-		AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
+		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		addressGroupController.setInputModel(supplier.getLocation().getPostalLocation());
 		addressGroupController.updateBinding();
 
 		// Configure Direction Group
-		DirectionGroupController directionController = new DirectionGroupController(this);
+		final DirectionGroupController directionController = new DirectionGroupController(this);
 		directionController.setInputModel(supplier.getLocation().getDescriptiveLocation());
 		directionController.updateBinding();
 
 		// Configure Map Group
-		MapGroupController mapController = new MapGroupController(this);
+		final MapGroupController mapController = new MapGroupController(this);
 		mapController.setInputModel(supplier.getLocation().getMapLocation());
 		mapController.updateBinding();
 
 		// Configure Communication Group
-		CommunicationGroupController commController = new CommunicationGroupController(this);
-//		ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
-//		method.setCmType(ContactMethodType.EMAIL);
-//		method.setCmValue("sparkwan@gmail.com");
-//		supplier.getContactMethods().add(method);
+		final CommunicationGroupController commController = new CommunicationGroupController(this);
+		// ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
+		// method.setCmType(ContactMethodType.EMAIL);
+		// method.setCmValue("sparkwan@gmail.com");
+		// supplier.getContactMethods().add(method);
 		commController.setInputModel(supplier);
 		commController.updateBinding();
 
 	}
-//
-//	@Override
-//	protected EClass getEClass() {
-//		return DairyPackage.eINSTANCE.getSupplier();
-//	}
+	//
+	// @Override
+	// protected EClass getEClass() {
+	// return DairyPackage.eINSTANCE.getSupplier();
+	// }
 
 }

@@ -16,9 +16,13 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
 public interface IDairyRepository {
 
+	List<Customer> allCustomers();
+
 	List<Dairy> allDairies();
 
 	List<DairyContainer> allDairyContainers();
+
+	List<DeliveryJournal> allDeliveries();
 
 	List<Route> allRoutes();
 
@@ -30,28 +34,24 @@ public interface IDairyRepository {
 
 	Container getFarmContainerById(String canId);
 
+	CollectionJournalPage getJournalPageById(Long pageId);
+
 	CollectionJournalPage getJournalPageById(String pageId);
 
 	Dairy getLocalDairy();
 
+	List<DairyLocation> getLocalDairyLocations();
+
 	Membership getMembershipById(Object memberId);
 
 	Dairy reloadLocalDairy();
+
+	void save(Object changedItem);
 
 	void saveNewDairy(Dairy localDairy);
 
 	void saveNewJournalPage(CollectionJournalPage newJournal);
 
 	void updateDairy(Dairy localDairy);
-
-	void save(Object changedItem);
-
-	CollectionJournalPage getJournalPageById(Long pageId);
-
-	List<DeliveryJournal> allDeliveries();
-
-	List<Customer> allCustomers();
-
-	List<DairyLocation> getLocalDairyLocations();
 
 }

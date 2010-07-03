@@ -11,18 +11,22 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class DirectionsGroupWidget {
-	private final Group directonsGroup;
-
 	public static final String DIRECTIONS_GROUP_TXT = "Directions";
-	public static final String LANDMARK_LABEL_TXT = "Landmark:";
-	public static final String DIRECTIONS_LABEL_TXT = "Directions:";
 
-	private Text landMarkText;
+	public static final String DIRECTIONS_LABEL_TXT = "Directions:";
+	public static final String LANDMARK_LABEL_TXT = "Landmark:";
 	private Text directionsText;
+
+	private final Group directonsGroup;
+	private Text landMarkText;
 
 	public DirectionsGroupWidget(Composite parent) {
 		directonsGroup = UIControlsFactory.createGroup(parent, DIRECTIONS_GROUP_TXT);
 		creatDirectonsGroup();
+	}
+
+	public Group getGroup() {
+		return directonsGroup;
 	}
 
 	private void creatDirectonsGroup() {
@@ -36,9 +40,5 @@ public class DirectionsGroupWidget {
 		directionsText = UIControlsFactory.createText(directonsGroup, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.DIRECTIONS_TEXT);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(directionsText);
-	}
-
-	public Group getGroup() {
-		return directonsGroup;
 	}
 }

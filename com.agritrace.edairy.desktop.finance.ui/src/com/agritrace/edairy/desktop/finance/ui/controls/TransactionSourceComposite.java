@@ -9,7 +9,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
@@ -17,28 +16,20 @@ import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionSourceComposite extends Composite {
 
+	public static final String CHOICE_CASH_PAYMENT = "CHOICE_COMPOSITE-CHOICE_CASH_PAYMENT";
+
+	public static final String CHOICE_CLINICAL_SVC = "CHOICE_COMPOSITE-CHOICE_CLINICAL_SVC";
+	public static final String CHOICE_COMPOSITE = "CHOICE_COMPOSITE";
+	public static final String CHOICE_SHARE_DEDUCTION = "CHOICE_COMPOSITE-CHOICE_SHARE_DEDUCTION";
+	public static final String CHOICE_STORE_CREDIT = "CHOICE_COMPOSITE-CHOICE_STORE_CREDIT";
+	public static final String LABEL = "transaction-type-compsite.label";
 	public static final LnFUpdater LNF_UPDATER = new LnFUpdater();
 
-	public static final String LABEL = "transaction-type-compsite.label";
-	public static final String CHOICE_COMPOSITE = "CHOICE_COMPOSITE";
-	public static final String CHOICE_STORE_CREDIT = "CHOICE_COMPOSITE-CHOICE_STORE_CREDIT";
-	public static final String CHOICE_CLINICAL_SVC = "CHOICE_COMPOSITE-CHOICE_CLINICAL_SVC";
-	public static final String CHOICE_CASH_PAYMENT = "CHOICE_COMPOSITE-CHOICE_CASH_PAYMENT";
-	public static final String CHOICE_SHARE_DEDUCTION = "CHOICE_COMPOSITE-CHOICE_SHARE_DEDUCTION";
-
-	private final Label label;
 	// private final ChoiceComposite txypeCodeChoice;
 	private final boolean isMultipleChoice;
+	private final Label label;
 
-	private Button btnStoreCredit;
-
-	private Button btnClinicalServices;
-
-	private Button btnPayments;
-
-	private Button btnShareDeductions;
-
-	private ChoiceComposite typeCodeChoice;
+	private final ChoiceComposite typeCodeChoice;
 
 	/**
 	 * @wbp.parser.constructor
@@ -51,22 +42,18 @@ public class TransactionSourceComposite extends Composite {
 		this(parent, multipleChoice, "");
 	}
 
-	public TransactionSourceComposite(Composite parent, String labelString) {
-		this(parent, false, labelString);
-	}
-
 	public TransactionSourceComposite(Composite parent, boolean multipleChoice, String labelString) {
 		super(parent, SWT.NONE);
 		isMultipleChoice = multipleChoice;
 
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-	
-		FormLayout rowLayout = new FormLayout();
+
+		final FormLayout rowLayout = new FormLayout();
 		rowLayout.marginWidth = rowLayout.marginHeight = 10;
 		setLayout(rowLayout);
 
 		label = UIControlsFactory.createLabel(this, labelString);
-		FormData labelLayoutData = new FormData();
+		final FormData labelLayoutData = new FormData();
 		labelLayoutData.width = labelString.trim().length() > 0 ? 140 : 0;
 		labelLayoutData.top = new FormAttachment(0, 0);
 		labelLayoutData.left = new FormAttachment(0, 0);
@@ -75,40 +62,36 @@ public class TransactionSourceComposite extends Composite {
 		typeCodeChoice = UIControlsFactory.createChoiceComposite(this, SWT.BORDER, isMultipleChoice,
 				FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 
-		FormData fieldLayoutData = new FormData();
+		final FormData fieldLayoutData = new FormData();
 		fieldLayoutData.top = new FormAttachment(0, 5);
 		fieldLayoutData.left = new FormAttachment(label, 5, SWT.RIGHT);
 		fieldLayoutData.right = new FormAttachment(100, 100, 8);
 		fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
 		typeCodeChoice.setLayoutData(fieldLayoutData);
-//		typeCodeChoice.setOrientation(SWT.HORIZONTAL);
-		
-//		btnStoreCredit = UIControlsFactory.createButtonRadio(typeCodeChoice);
-//		btnStoreCredit.setText("Store Credits");
-//		btnStoreCredit.setToolTipText("Account deductions for store purchases using account credit.");
-//
-//		btnClinicalServices = UIControlsFactory.createButtonRadio(typeCodeChoice);
-//		btnClinicalServices.setText("Veterinary Services ");
-//		btnClinicalServices
-//				.setToolTipText("Account deductions for vet and animal services purchased with account credit.");
-//
-//		btnPayments = UIControlsFactory.createButtonRadio(typeCodeChoice);
-//		btnPayments.setText("Cash Payments");
-//		btnPayments.setToolTipText("Account deductions for cash payments to member from members' account.");
-//
-//		btnShareDeductions = UIControlsFactory.createButtonRadio(typeCodeChoice);
-//		btnShareDeductions.setText("Share Deductions");
-//		btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");
+		// typeCodeChoice.setOrientation(SWT.HORIZONTAL);
+
+		// btnStoreCredit = UIControlsFactory.createButtonRadio(typeCodeChoice);
+		// btnStoreCredit.setText("Store Credits");
+		// btnStoreCredit.setToolTipText("Account deductions for store purchases using account credit.");
+		//
+		// btnClinicalServices =
+		// UIControlsFactory.createButtonRadio(typeCodeChoice);
+		// btnClinicalServices.setText("Veterinary Services ");
+		// btnClinicalServices
+		// .setToolTipText("Account deductions for vet and animal services purchased with account credit.");
+		//
+		// btnPayments = UIControlsFactory.createButtonRadio(typeCodeChoice);
+		// btnPayments.setText("Cash Payments");
+		// btnPayments.setToolTipText("Account deductions for cash payments to member from members' account.");
+		//
+		// btnShareDeductions =
+		// UIControlsFactory.createButtonRadio(typeCodeChoice);
+		// btnShareDeductions.setText("Share Deductions");
+		// btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");
 	}
 
-	private Button createButton(Composite parent, String text, String toolTipText) {
-		final int buttonStyle = isMultipleChoice ? SWT.CHECK : SWT.RADIO;
-		final Button button = new Button(parent, buttonStyle);
-
-		button.setToolTipText(toolTipText);
-		button.setText(text);
-
-		return button;
+	public TransactionSourceComposite(Composite parent, String labelString) {
+		this(parent, false, labelString);
 	}
 
 	public String getLabelText() {

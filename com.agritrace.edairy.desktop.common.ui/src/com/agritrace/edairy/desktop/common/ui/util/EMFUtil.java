@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class EMFUtil {
-	private final static String spaces = "                                                               ";
-
 	public static boolean compare(EObject src, EObject dst) {
 		if ((src == null) && (dst == null)) {
 			return true;
@@ -29,52 +27,50 @@ public class EMFUtil {
 				str2.substring(str2.indexOf('('), str2.indexOf(')')));
 	}
 
-	public static int populate(EObject parent) {
-		return new EMFUtil().populate(parent, false, 0);
-	}
-	
-	public static int populateMinimal(EObject parent) {
-		return new EMFUtil().populate(parent, true, 0);
-	}
-
-	int level = 0;
-	HashSet<EClass> visitedClasses = new HashSet<EClass>();
-	private int populate(EObject parent, boolean onlyRequired, int count) {
-		visitedClasses.add(parent.eClass());
-		level++;
-//		System.out.println(spaces.substring(0,level*2) + "> [" + level + "] populating "
-//				+ (parent.eContainingFeature() != null ? parent.eContainingFeature().getName() : "(null)") + " - "
-//				+ parent.eClass().getName());
-		
-		for (EReference containedIn : parent.eClass().getEAllContainments()) {
-			if (containedIn.isTransient() || containedIn.isVolatile() || containedIn.isDerived()) {
-				continue;
-			}
-			if (onlyRequired && containedIn.getLowerBound() < 1) {
-				continue;
-			}
-			if (onlyRequired && !containedIn.isRequired()) {
-				continue;
-			}
-			
-			EObject child = EcoreUtil.create(containedIn.getEReferenceType());
-			if (containedIn.isMany()) {
-				int upper = containedIn.getUpperBound();
-				int lower = containedIn.getLowerBound();
-				assert(lower >= 0);
-				assert(upper < 0 || upper >= lower);				
-				EList<EObject> theList = (EList<EObject>) parent.eGet(containedIn);
-				theList.add(child);
-				if (upper - lower > 1 || upper < 0) 
-					theList.add(child);
-			} else {
-				parent.eSet(containedIn, child); // does not work for
-			} 
-			populate(child, onlyRequired, ++count);
+	/**
+	 * Compares EObject feature by feature
+	 * 
+	 * @param source
+	 * @param target
+	 * @return
+	 */
+	public static boolean compareAllFeatures(EObject source, EObject target) {
+		if ((source == null) || (target == null)) {
+			return false;
 		}
-
-		level--;
-		return count;
+		if (!source.getClass().equals(target.getClass())) {
+			return false;
+		}
+		final EClass eClass = source.eClass();
+		// compare all features - all must match exactly.. do not follow
+		// references
+		for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
+			final EStructuralFeature feature = eClass.getEStructuralFeature(i);
+			if (feature instanceof EAttribute) {
+				try {
+					Object srcVal, targVal;
+					srcVal = source.eGet(feature);
+					targVal = target.eGet(feature);
+					if ((srcVal != null) && (targVal != null)) {
+						if (!srcVal.equals(targVal)) {
+							return false;
+						}
+					} else if ((srcVal == null) || (targVal == null)) {
+						return false;
+					}
+				} catch (final Exception e) {
+					e.printStackTrace();
+					return false;
+				}
+			}
+			// references should equal each other..
+			// if one is a ref, both must be refs
+			else if ((feature instanceof EReference) && (source.eGet(feature) instanceof EObject)
+					&& (target.eGet(feature) instanceof EObject) && (source.eGet(feature) != target.eGet(feature))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -116,7 +112,7 @@ public class EMFUtil {
 						targetList.clear();
 
 						for (int j = 0; j < sourceList.size(); j++) {
-							final EObject sourceObj = (EObject) sourceList.get(j);
+							final EObject sourceObj = sourceList.get(j);
 							final EObject targetObj = createObject(sourceObj.eClass());
 							// if (sourceObj instanceof EObject
 							// && targetObj instanceof EObject) {
@@ -129,6 +125,18 @@ public class EMFUtil {
 				}
 			}
 		}
+
+	}
+
+	/**
+	 * Creates EObject
+	 * 
+	 * @param className
+	 * @return
+	 */
+	public static EObject createObject(EClass cls) {
+		final EFactory eFactory = cls.getEPackage().getEFactoryInstance();
+		return eFactory.create(cls);
 
 	}
 
@@ -148,9 +156,7 @@ public class EMFUtil {
 
 						object.eSet(reference, createWorkingCopy(reference.getEReferenceType(), depth - 1));
 
-					}
-					else if (reference.isContainment())
-					{
+					} else if (reference.isContainment()) {
 						object.eSet(reference, new BasicEList());
 					}
 				}
@@ -160,61 +166,57 @@ public class EMFUtil {
 		return object;
 	}
 
-	/**
-	 * Creates EObject
-	 * 
-	 * @param className
-	 * @return
-	 */
-	public static EObject createObject(EClass cls) {
-		final EFactory eFactory = cls.getEPackage().getEFactoryInstance();
-		return eFactory.create(cls);
-
+	public static int populate(EObject parent) {
+		return new EMFUtil().populate(parent, false, 0);
 	}
 
-	/**
-	 * Compares EObject feature by feature
-	 * 
-	 * @param source
-	 * @param target
-	 * @return
-	 */
-	public static boolean compareAllFeatures(EObject source, EObject target) {
-		if ((source == null) || (target == null)) {
-			return false;
-		}
-		if (!source.getClass().equals(target.getClass())) {
-			return false;
-		}
-		final EClass eClass = source.eClass();
-		// compare all features - all must match exactly.. do not follow
-		// references
-		for (int i = 0, size = eClass.getFeatureCount(); i < size; ++i) {
-			final EStructuralFeature feature = eClass.getEStructuralFeature(i);
-			if (feature instanceof EAttribute) {
-				try {
-					Object srcVal, targVal;
-					srcVal = source.eGet(feature);
-					targVal = target.eGet(feature);
-					if ((srcVal != null) && (targVal != null)) {
-						if (!srcVal.equals(targVal))
-							return false;
-					} else if ((srcVal == null) || (targVal == null)) {
-						return false;
-					}
-				} catch (final Exception e) {
-					e.printStackTrace();
-					return false;
+	public static int populateMinimal(EObject parent) {
+		return new EMFUtil().populate(parent, true, 0);
+	}
+
+	int level = 0;
+
+	HashSet<EClass> visitedClasses = new HashSet<EClass>();
+
+	private int populate(EObject parent, boolean onlyRequired, int count) {
+		visitedClasses.add(parent.eClass());
+		level++;
+		// System.out.println(spaces.substring(0,level*2) + "> [" + level +
+		// "] populating "
+		// + (parent.eContainingFeature() != null ?
+		// parent.eContainingFeature().getName() : "(null)") + " - "
+		// + parent.eClass().getName());
+
+		for (final EReference containedIn : parent.eClass().getEAllContainments()) {
+			if (containedIn.isTransient() || containedIn.isVolatile() || containedIn.isDerived()) {
+				continue;
+			}
+			if (onlyRequired && (containedIn.getLowerBound() < 1)) {
+				continue;
+			}
+			if (onlyRequired && !containedIn.isRequired()) {
+				continue;
+			}
+
+			final EObject child = EcoreUtil.create(containedIn.getEReferenceType());
+			if (containedIn.isMany()) {
+				final int upper = containedIn.getUpperBound();
+				final int lower = containedIn.getLowerBound();
+				assert (lower >= 0);
+				assert ((upper < 0) || (upper >= lower));
+				final EList<EObject> theList = (EList<EObject>) parent.eGet(containedIn);
+				theList.add(child);
+				if ((upper - lower > 1) || (upper < 0)) {
+					theList.add(child);
 				}
+			} else {
+				parent.eSet(containedIn, child); // does not work for
 			}
-			// references should equal each other..
-			// if one is a ref, both must be refs
-			else if ((feature instanceof EReference) && (source.eGet(feature) instanceof EObject)
-					&& (target.eGet(feature) instanceof EObject) && (source.eGet(feature) != target.eGet(feature))) {
-				return false;
-			}
+			populate(child, onlyRequired, ++count);
 		}
-		return true;
+
+		level--;
+		return count;
 	}
 
 }

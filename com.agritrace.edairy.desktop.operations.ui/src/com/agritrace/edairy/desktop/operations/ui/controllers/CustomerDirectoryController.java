@@ -24,31 +24,30 @@ import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 
 public class CustomerDirectoryController extends BasicDirectoryController<Customer> {
 
-	private static final IObservableList CUSTOMER_TYPES = Observables.staticObservableList(CustomerType
-			.getCustomerTypeList());
 	private static final IObservableList CUSTOMER_STATUSES = Observables.staticObservableList(CompanyStatus
 			.getCustomerStatusList());
+	private static final IObservableList CUSTOMER_TYPES = Observables.staticObservableList(CustomerType
+			.getCustomerTypeList());
 
 	private ITextRidget companyNameSearchText;
-	private IComboRidget customerTypeSearchCombo;
 	private IComboRidget customerStatusCombo;
+	private IComboRidget customerTypeSearchCombo;
 
-	private CustomerSearchBean searchBean = new CustomerSearchBean();
+	private final CustomerSearchBean searchBean = new CustomerSearchBean();
 
 	public CustomerDirectoryController() {
 		super();
 		setRepository(new CustomerRepository());
 		setEClass(DairyPackage.Literals.CUSTOMER);
-//		setEntityClass(Customer.class);
-		
-		addTableColumn("ID", ModelPackage.Literals.COMPANY__COMPANY_ID );
-		addTableColumn("Type", DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE );
-		addTableColumn("Company Name",  ModelPackage.Literals.COMPANY__COMPANY_NAME );
-		addTableColumn("Contact",  ModelPackage.Literals.COMPANY__CONTACTS, new ContactNameColumnFormatter());
-		addTableColumn("Contact #", ModelPackage.Literals.COMPANY__PHONE_NUMBER, new ContactPhoneColumnFormatter());
-		addTableColumn("Status", DairyPackage.Literals.CUSTOMER__STATUS );
-	}
+		// setEntityClass(Customer.class);
 
+		addTableColumn("ID", ModelPackage.Literals.COMPANY__COMPANY_ID);
+		addTableColumn("Type", DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
+		addTableColumn("Company Name", ModelPackage.Literals.COMPANY__COMPANY_NAME);
+		addTableColumn("Contact", ModelPackage.Literals.COMPANY__CONTACTS, new ContactNameColumnFormatter());
+		addTableColumn("Contact #", ModelPackage.Literals.COMPANY__PHONE_NUMBER, new ContactPhoneColumnFormatter());
+		addTableColumn("Status", DairyPackage.Literals.CUSTOMER__STATUS);
+	}
 
 	@Override
 	protected void configureFilterRidgets() {
@@ -72,18 +71,23 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 		customerStatusCombo.updateFromModel();
 		customerStatusCombo.setSelection(EMPTY_SELECTION_TEXT);
 	}
-	
+
+	/**
+	 * Create new model while createing a new record
+	 * 
+	 * @return
+	 */
 	@Override
-	protected void resetFilterConditions() {
-		companyNameSearchText.setText("");
-		customerTypeSearchCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
-		customerStatusCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
+	protected Customer createNewModel() {
+		final Customer customer = (Customer) EMFUtil.createWorkingCopy(this.getEClass(), 3);
+		customer.setPhoneNumber("");
+		return customer;
 	}
 
 	@Override
 	protected List<Customer> getFilteredResult() {
-		List<Customer> filtered = new ArrayList<Customer>();
-		List<Customer> allCustomers = getRepository().all();
+		final List<Customer> filtered = new ArrayList<Customer>();
+		final List<Customer> allCustomers = getRepository().all();
 		System.err.println("allCustomers: " + allCustomers);
 		for (final Customer c : allCustomers) {
 			if (MatchUtil.matchContains(searchBean.getNameSearchValue(), c.getCompanyName())
@@ -101,14 +105,10 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 		return new CustomerEditDialog(shell);
 	}
 
-	/**
-	 * Create new model while createing a new record
-	 * 
-	 * @return
-	 */
-	protected Customer createNewModel() {
-		Customer customer = (Customer) EMFUtil.createWorkingCopy(this.getEClass(), 3);
-		customer.setPhoneNumber("");
-		return customer;
+	@Override
+	protected void resetFilterConditions() {
+		companyNameSearchText.setText("");
+		customerTypeSearchCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
+		customerStatusCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
 	}
 }

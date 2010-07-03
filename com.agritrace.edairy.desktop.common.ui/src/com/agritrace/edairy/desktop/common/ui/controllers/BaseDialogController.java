@@ -12,13 +12,21 @@ import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController {
 
-	protected T selected;
+	private IActionRidget okAction;
 	protected IRepository<T> repository;
 
-	private IActionRidget okAction;
+	protected T selected;
 
 	public BaseDialogController() {
 		super();
+	}
+
+	@Override
+	public void afterBind() {
+		super.afterBind();
+		// we set return code to cancel as default, because if user close
+		// the window via ESCAPE (shell close), it returns OK now.
+		setReturnCode(CANCEL);
 	}
 
 	public T getWorkingCopy() {
@@ -29,48 +37,29 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		this.selected = selected;
 	}
 
-	/**
-	 * Validate is called before the standard page validation processs.
-	 * 
-	 * Subclasses should override to provide additional page level validation.
-	 * The default implementation returns 'true'.
-	 * 
-	 * @return
-	 */
-	protected boolean validate() {
-		boolean valid = true;
-		return valid;
-	}
+	private boolean validateInternal() {
+		boolean retVal = validate(); // user validation first...
+		if (!retVal) {
+			return false;
+		}
+		for (final IRidget test : getRidgets()) {
+			IMarkableRidget markable;
+			if (test instanceof IMarkableRidget) {
+				markable = (IMarkableRidget) test;
+				if (markable.isMandatory() && !markable.isDisableMandatoryMarker()) {
+					System.err.println(">>>>>>>> mandatory widget " + markable);
+					retVal = false;
+				}
+				if (markable.isErrorMarked()) {
+					System.err.println(">>>>>>>> error widget " + markable);
 
-	/**
-	 * Called after validation is successful, when 'Save' or 'Update' action is
-	 * triggered.
-	 * 
-	 * 
-	 */
-	protected void handleSaveAction() {
-		setReturnCode(DialogConstants.ACTION_SAVE);
-		setContext("selected", getWorkingCopy());
-		System.out.println("OK calling dispose");
-		getWindowRidget().dispose();
-	}
+					retVal = false;
+					// FIXME: Display error messages in message area.
+				}
 
-	/**
-	 * Called when 'Cancel' action is triggered.
-	 * 
-	 */
-	protected void handleCancelAction() {
-		setReturnCode(DialogConstants.ACTION_CANCEL);
-		getWindowRidget().dispose();
-	}
-
-	/**
-	 * Called when 'Delete' action is triggered.
-	 * 
-	 */
-	protected void handleDeleteAction() {
-		setReturnCode(DialogConstants.ACTION_DELETE);
-		getWindowRidget().dispose();
+			}
+		}
+		return retVal;
 	}
 
 	/**
@@ -111,31 +100,6 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		});
 	}
 
-	private boolean validateInternal() {
-		boolean retVal = validate(); // user validation first...
-		if (!retVal) {
-			return false;
-		}
-		for (IRidget test : getRidgets()) {
-			IMarkableRidget markable;
-			if (test instanceof IMarkableRidget) {
-				markable = (IMarkableRidget) test;
-				if (markable.isMandatory() && !markable.isDisableMandatoryMarker()) {
-					System.err.println(">>>>>>>> mandatory widget " + markable);
-					retVal = false;
-				}
-				if (markable.isErrorMarked()) {
-					System.err.println(">>>>>>>> error widget " + markable);
-
-					retVal = false;
-					// FIXME: Display error messages in message area.
-				}
-
-			}
-		}
-		return retVal;
-	}
-
 	/**
 	 * Enable /disable the save button.
 	 * 
@@ -148,11 +112,47 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		okAction.setEnabled(enable);
 	}
 
-	@Override
-	public void afterBind() {
-		super.afterBind();
-		// we set return code to cancel as default, because if user close
-		// the window via ESCAPE (shell close), it returns OK now.
-		setReturnCode(CANCEL);
+	/**
+	 * Called when 'Cancel' action is triggered.
+	 * 
+	 */
+	protected void handleCancelAction() {
+		setReturnCode(DialogConstants.ACTION_CANCEL);
+		getWindowRidget().dispose();
+	}
+
+	/**
+	 * Called when 'Delete' action is triggered.
+	 * 
+	 */
+	protected void handleDeleteAction() {
+		setReturnCode(DialogConstants.ACTION_DELETE);
+		getWindowRidget().dispose();
+	}
+
+	/**
+	 * Called after validation is successful, when 'Save' or 'Update' action is
+	 * triggered.
+	 * 
+	 * 
+	 */
+	protected void handleSaveAction() {
+		setReturnCode(DialogConstants.ACTION_SAVE);
+		setContext("selected", getWorkingCopy());
+		System.out.println("OK calling dispose");
+		getWindowRidget().dispose();
+	}
+
+	/**
+	 * Validate is called before the standard page validation processs.
+	 * 
+	 * Subclasses should override to provide additional page level validation.
+	 * The default implementation returns 'true'.
+	 * 
+	 * @return
+	 */
+	protected boolean validate() {
+		final boolean valid = true;
+		return valid;
 	}
 }

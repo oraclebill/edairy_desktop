@@ -16,20 +16,21 @@ public class AddMemberDialog extends ViewMemberDialog {
 	}
 
 	@Override
-	protected void createMemberTabFolderGroup(Composite parent) {
-		final MembershipTabFolder tabFolder = new MembershipTabFolder(parent, MembershipTabFolder.NEW_MEMBER_TABS);
-		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	protected void createMemberHeadlineGroup(Composite composite) {
+		// empty
+
 	}
 
 	@Override
-	protected void createMemberHeadlineGroup(Composite composite) {
-		//empty
-
-	}
-	
 	protected void createMemberInfoGroup(Composite parent) {
-		MemberInfoGroup infoGroup = new MemberInfoGroup(parent);
+		final MemberInfoGroup infoGroup = new MemberInfoGroup(parent);
 		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+	}
+
+	@Override
+	protected void createMemberTabFolderGroup(Composite parent) {
+		final MembershipTabFolder tabFolder = new MembershipTabFolder(parent, MembershipTabFolder.NEW_MEMBER_TABS);
+		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 
 }

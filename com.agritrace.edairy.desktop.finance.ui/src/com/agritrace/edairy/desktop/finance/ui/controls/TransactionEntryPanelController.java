@@ -5,6 +5,7 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.jface.util.Assert;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
@@ -27,7 +28,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class TransactionEntryPanelController {
 	public class MemberLookupAction implements IActionListener {
-		private ITextRidget nameRidget;
+		private final ITextRidget nameRidget;
 
 		public MemberLookupAction(ITextRidget nameRidget) {
 			this.nameRidget = nameRidget;
@@ -35,10 +36,10 @@ public class TransactionEntryPanelController {
 
 		@Override
 		public void callback() {
-			MemberSearchDialog memberDialog = new MemberSearchDialog(null);
-			int retVal = memberDialog.open();
-			if (retVal == MemberSearchDialog.OK) {
-				Membership selectedMember = memberDialog.getSelectedMember();
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final int retVal = memberDialog.open();
+			if (retVal == Window.OK) {
+				final Membership selectedMember = memberDialog.getSelectedMember();
 				// String memberName =
 				// MemberUtil.formattedMemberName(selectedMember.getMember());
 				// memberNameFilter.setText(memberName);
@@ -59,25 +60,18 @@ public class TransactionEntryPanelController {
 		}
 	}
 
-	private final IDairyRepository dairyRepo = new DairyRepository();
-	private AccountTransaction model;
 	private IRidgetContainer container;
+	private final IDairyRepository dairyRepo = new DairyRepository();
 	private BindingHelper<AccountTransaction> mapper;
+	private AccountTransaction model;
 
 	public TransactionEntryPanelController() {
-		;;
+		;
+		;
 	}
 
-	public void setModel(AccountTransaction tx) {
-		this.model = tx;
-	}
+	public void checkValid() {
 
-	public void setRidgetContainer(IRidgetContainer container) {
-		this.container = container;
-	}
-
-	private AccountTransaction getModel() {
-		return model;
 	}
 
 	public void configureAndBind() {
@@ -91,6 +85,52 @@ public class TransactionEntryPanelController {
 		mapFieldsToModel();
 		bindMappedRidgets();
 		bindConfiguredRidgets();
+	}
+
+	public void setModel(AccountTransaction tx) {
+		this.model = tx;
+	}
+
+	public void setRidgetContainer(IRidgetContainer container) {
+		this.container = container;
+	}
+
+	private void bindConfiguredRidgets() {
+
+		// configure and bind transaction source
+		final ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
+				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
+		final IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
+				TransactionSource.class);
+		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source");
+		sourceRidget.bindToModel(optionValues, selectionValue);
+		sourceRidget.setMandatory(true);
+		sourceRidget.updateFromModel();
+
+		//
+		final IDecimalTextRidget transactionText = container.getRidget(IDecimalTextRidget.class,
+				FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
+		transactionText.setGrouping(true);
+		transactionText.setPrecision(2);
+		transactionText.setSigned(false);
+		transactionText.setMandatory(true);
+		transactionText.bindToModel(PojoObservables.observeValue(model, "amount"));
+		transactionText.updateFromModel();
+
+		// configure member name ridget
+		final ITextRidget memberName = container.getRidget(ITextRidget.class,
+				FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
+		memberName.setOutputOnly(true);
+
+		// configure member lookup action
+		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,
+				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
+		memberLookup.addListener(new MemberLookupAction(memberName));
+
+	}
+
+	private void bindMappedRidgets() {
+		mapper.configureRidgets();
 	}
 
 	private void createMapper() {
@@ -129,46 +169,5 @@ public class TransactionEntryPanelController {
 
 		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
-	}
-
-	private void bindMappedRidgets() {
-		mapper.configureRidgets();
-	}
-
-	private void bindConfiguredRidgets() {
-
-		// configure and bind transaction source
-		ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
-				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
-		IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
-				TransactionSource.class);
-		IObservableValue selectionValue = PojoObservables.observeValue(model, "source");
-		sourceRidget.bindToModel(optionValues, selectionValue);
-		sourceRidget.setMandatory(true);
-		sourceRidget.updateFromModel();
-
-		//
-		IDecimalTextRidget transactionText = container.getRidget(IDecimalTextRidget.class,
-				FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
-		transactionText.setGrouping(true);
-		transactionText.setPrecision(2);
-		transactionText.setSigned(false);
-		transactionText.setMandatory(true);
-		transactionText.bindToModel(PojoObservables.observeValue(model, "amount"));
-		transactionText.updateFromModel();
-
-		// configure member name ridget
-		ITextRidget memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
-		memberName.setOutputOnly(true);
-
-		// configure member lookup action
-		IActionRidget memberLookup = container.getRidget(IActionRidget.class,
-				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
-		memberLookup.addListener(new MemberLookupAction(memberName));
-
-	}
-
-	public void checkValid() {
-				
 	}
 }

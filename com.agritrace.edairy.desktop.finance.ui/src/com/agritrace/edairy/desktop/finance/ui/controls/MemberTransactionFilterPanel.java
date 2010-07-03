@@ -20,13 +20,13 @@ import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
 
 public class MemberTransactionFilterPanel extends Composite {
-	
+
 	public MemberTransactionFilterPanel(Composite parent) {
 		this(parent, SWT.NONE);
 	}
-	
+
 	public MemberTransactionFilterPanel(Composite parent, int style) {
-		super(parent, style);		
+		super(parent, style);
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		// filter is a stack of composite rows.. each row uses formlayout..
@@ -53,13 +53,15 @@ public class MemberTransactionFilterPanel extends Composite {
 
 			// startDatePicker = new DatePickerComposite(row, SWT.BORDER |
 			// SWT.SINGLE);
-			DateTime startDatePicker = UIControlsFactory.createDate(row, SWT.NONE, FinanceBindingConstants.FILTER_DATE_START_DATE);
+			final DateTime startDatePicker = UIControlsFactory.createDate(row, SWT.NONE,
+					FinanceBindingConstants.FILTER_DATE_START_DATE);
 			fd = new FormData();
 			fd.top = new FormAttachment(startDateLabel, 0, SWT.CENTER);
 			fd.left = new FormAttachment(startDateLabel, 5, SWT.RIGHT);
 			fd.width = ViewConstants.FIELD_WIDTH;
 			startDatePicker.setLayoutData(fd);
-//			SWTBindingPropertyLocator.getInstance().setBindingProperty(startDatePicker, "startDateRidget");
+			// SWTBindingPropertyLocator.getInstance().setBindingProperty(startDatePicker,
+			// "startDateRidget");
 
 			final Label endDateLabel = new Label(row, SWT.LEFT);
 			endDateLabel.setText("End: ");
@@ -71,15 +73,17 @@ public class MemberTransactionFilterPanel extends Composite {
 
 			// endDatePicker = new DatePickerComposite(row, SWT.BORDER |
 			// SWT.SINGLE);
-			DateTime endDatePicker = UIControlsFactory.createDate(row, SWT.NONE, FinanceBindingConstants.FILTER_DATE_END_DATE);
+			final DateTime endDatePicker = UIControlsFactory.createDate(row, SWT.NONE,
+					FinanceBindingConstants.FILTER_DATE_END_DATE);
 			fd = new FormData();
 			fd.top = new FormAttachment(endDateLabel, 0, SWT.CENTER);
 			fd.left = new FormAttachment(endDateLabel, 5, SWT.RIGHT);
 			fd.width = ViewConstants.FIELD_WIDTH;
 			endDatePicker.setLayoutData(fd);
-//			SWTBindingPropertyLocator.getInstance().setBindingProperty(endDatePicker, "endDateRidget");
+			// SWTBindingPropertyLocator.getInstance().setBindingProperty(endDatePicker,
+			// "endDateRidget");
 		}
-		
+
 		// second row: member lookup
 		//
 		{
@@ -90,14 +94,15 @@ public class MemberTransactionFilterPanel extends Composite {
 			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(row);
 
 			final Label memberLookupLabel = UIControlsFactory.createLabel(row, "Member Lookup");
-			FormData fd_1 = new FormData();
+			final FormData fd_1 = new FormData();
 			fd_1.width = 140;
 			fd_1.top = new FormAttachment(0, 0);
 			fd_1.left = new FormAttachment(0, 0);
 			memberLookupLabel.setLayoutData(fd_1);
 
-			Text memberIdText = UIControlsFactory.createText(row, SWT.SEARCH, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
-			FormData fd_3 = new FormData();
+			final Text memberIdText = UIControlsFactory.createText(row, SWT.SEARCH,
+					FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
+			final FormData fd_3 = new FormData();
 			fd_3.width = 300;
 			fd_3.top = new FormAttachment(memberLookupLabel, 0, SWT.CENTER);
 			fd_3.left = new FormAttachment(memberLookupLabel, 5, SWT.RIGHT);
@@ -120,7 +125,7 @@ public class MemberTransactionFilterPanel extends Composite {
 			labelFormData.left = new FormAttachment(0, 0);
 			label.setLayoutData(labelFormData);
 
-			CompletionCombo refNumberLookup = UIControlsFactory.createCompletionCombo(rowComposite, 
+			final CompletionCombo refNumberLookup = UIControlsFactory.createCompletionCombo(rowComposite,
 					FinanceBindingConstants.FILTER_TXT_REF_NO);
 			final FormData fieldFormData = new FormData();
 			fieldFormData.left = new FormAttachment(label);

@@ -7,12 +7,6 @@ package com.agritrace.edairy.desktop.common.ui.reference;
  */
 
 public class KenyaLocation {
-	public static final String[] TOWN_VILLAGE = { "Bomet", "Bungoma", "Chuka", "Elburgon", "Eldama Ravine", "Eldoret",
-			"Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kapenguria", "Kericho", "Kilgoris",
-			"Kilifi", "Kisii", "Kisumu", "Kitale", "Kitui", "Kwale", "Lamu", "Lodwar", "Lokitaung", "Londiani",
-			"Machakos", "Malindi", "Mandera", "Maralal", "Marsabit", "Meru", "Mombasa", "Moyale", "Muranga", "Mwingi",
-			"NAIROBI", "Naivasha", "Nakuru", "Namanga", "Nanyuki", "Narok", "Ngong", "Njoro", "Nyahururu", "Nyamira",
-			"Nyeri", "Rumuruti", "TOWN_NAME,C,20", "Taveta", "Thika", "Usenge", "Voi", "Wajir", "Wote", };
 	public static final String[] LOCATIONS = { "ABERDARE F.& NATIONAL P.", "ABERDARE FOREST/N.PARK", "ABOGETA",
 			"ABOSI", "ABOTHUGUCHI", "ADU", "AGUTHI", "AINABKOI", "AINAMOI", "AJAWA", "AKACHIU", "AKITHI", "AKORET",
 			"ALALE", "AMALO", "AMU", "ANGATA NANYUKIE", "ANTUBETWE/KIONGO", "ARBAJAHAN", "ARROR", "ARSIM", "AS-HABITO",
@@ -144,7 +138,6 @@ public class KenyaLocation {
 			"WEST KANYADA", "WEST KARACHUONYO", "WEST KASIPUL", "WEST KISA", "WEST KISUMU", "WEST MARACH",
 			"WEST MARAGOLI", "WEST MUGIRANGO", "WEST NYAKACH", "WEST SAKWA", "WEST SEME", "WEST TESO", "WEST UGENYA",
 			"WEST UYOMA", "WEST YIMBO", "WITU", "WUMINGU", "WUNDANYI", "YAPAKUNO", "YATTA", "ZOMBE", "ZUBAKI" };
-
 	public static final String[] SUBLOCATIONS = { "", " MUHAKA", "ABAKOLE", "ABERDARE F. & N. PARK",
 			"ABERDARE FOREST/N.PARK", "ABOLOI", "ABOM", "ABOSI", "ABOSSI/OLOLMASANI", "ADU", "AGORITIANG",
 			"AGORO EAST", "AGORO WEST", "AHERO IRR.SCHEME", "AINAMOI", "AITONG", "AJAWA", "AJIGO", "AKAIGA",
@@ -556,4 +549,11 @@ public class KenyaLocation {
 			"WITIMA", "WITU", "WIYUMIRIRIE", "WONGONYI", "WOODLEY", "WOTE", "WUMARI/SECHU", "WUNDANYI", "WUSI",
 			"YAGANEK", "YAMICHA", "YANDUE", "YENGA", "YIRO", "ZAINA", "ZIANI/NG'OMBENI", "ZIWA",
 			"ZIWANI/STAREHE/KARI'R" };
+
+	public static final String[] TOWN_VILLAGE = { "Bomet", "Bungoma", "Chuka", "Elburgon", "Eldama Ravine", "Eldoret",
+			"Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kapenguria", "Kericho", "Kilgoris",
+			"Kilifi", "Kisii", "Kisumu", "Kitale", "Kitui", "Kwale", "Lamu", "Lodwar", "Lokitaung", "Londiani",
+			"Machakos", "Malindi", "Mandera", "Maralal", "Marsabit", "Meru", "Mombasa", "Moyale", "Muranga", "Mwingi",
+			"NAIROBI", "Naivasha", "Nakuru", "Namanga", "Nanyuki", "Narok", "Ngong", "Njoro", "Nyahururu", "Nyamira",
+			"Nyeri", "Rumuruti", "TOWN_NAME,C,20", "Taveta", "Thika", "Usenge", "Voi", "Wajir", "Wote", };
 }

@@ -15,11 +15,11 @@ public class DairyPersistenceException extends RuntimeException {
 		super(reason);
 	}
 
-	public DairyPersistenceException(Throwable e) {
-		super(e);
-	}
-	
 	public DairyPersistenceException(String reason, Throwable cause) {
 		super(reason, cause);
+	}
+
+	public DairyPersistenceException(Throwable e) {
+		super(e);
 	}
 }

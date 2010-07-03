@@ -17,8 +17,8 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.RouteEditDialogCon
 public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogController> {
 
 	private Text routeCodeTxt;
-	private Text routeNameTxt;
 	private Text routeDescriptionTxt;
+	private Text routeNameTxt;
 
 	public RouteEditDialog(Shell parentShell) {
 		super(parentShell);
@@ -28,72 +28,69 @@ public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogControll
 
 	@Override
 	protected void buildWorkArea(Composite comp) {
-		
-		Label lblRouteCode = UIControlsFactory.createLabel(comp, "Route Code", SWT.NONE);
-		
+
+		final Label lblRouteCode = UIControlsFactory.createLabel(comp, "Route Code", SWT.NONE);
+
 		routeCodeTxt = UIControlsFactory.createText(comp);
 		addUIControl(routeCodeTxt, ViewConstants.ID_TXT_ROUTE_CODE);
-		
-		Label lblRouteName = UIControlsFactory.createLabel(comp, "Route Name");
-		
+
+		final Label lblRouteName = UIControlsFactory.createLabel(comp, "Route Name");
+
 		routeNameTxt = UIControlsFactory.createText(comp);
 		addUIControl(routeNameTxt, ViewConstants.ID_TXT_ROUTE_NAME);
-		
-		Label lblDescription = UIControlsFactory.createLabel(comp, "Description");
-		
+
+		final Label lblDescription = UIControlsFactory.createLabel(comp, "Description");
+
 		routeDescriptionTxt = UIControlsFactory.createText(comp);
 		addUIControl(routeDescriptionTxt, ViewConstants.ID_TXT_ROUTE_DESCRIPTION);
-		
-		Label lblStops = UIControlsFactory.createLabel(comp, "Stops");
-		
-		List stopsList = UIControlsFactory.createList(comp, false, false);
+
+		final Label lblStops = UIControlsFactory.createLabel(comp, "Stops");
+
+		final List stopsList = UIControlsFactory.createList(comp, false, false);
 		addUIControl(stopsList, ViewConstants.ID_LST_ROUTE_STOPS);
 
-		GroupLayout gl_comp = new GroupLayout(comp);
-		gl_comp.setHorizontalGroup(
-			gl_comp.createParallelGroup(GroupLayout.LEADING)
-				.add(gl_comp.createSequentialGroup()
-					.addContainerGap()
-					.add(gl_comp.createParallelGroup(GroupLayout.LEADING)
-						.add(lblRouteCode)
-						.add(lblRouteName)
-						.add(lblDescription)
-						.add(lblStops))
-					.add(32)
-					.add(gl_comp.createParallelGroup(GroupLayout.LEADING)
-						.add(stopsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.add(gl_comp.createParallelGroup(GroupLayout.LEADING, false)
-							.add(routeCodeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.add(routeNameTxt, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-							.add(routeDescriptionTxt, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
-					.addContainerGap(38, Short.MAX_VALUE))
-		);
-		gl_comp.setVerticalGroup(
-			gl_comp.createParallelGroup(GroupLayout.LEADING)
-				.add(gl_comp.createSequentialGroup()
-					.addContainerGap()
-					.add(gl_comp.createParallelGroup(GroupLayout.BASELINE)
-						.add(lblRouteCode)
-						.add(routeCodeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.add(18)
-					.add(gl_comp.createParallelGroup(GroupLayout.BASELINE)
-						.add(lblRouteName)
-						.add(routeNameTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.add(18)
-					.add(gl_comp.createParallelGroup(GroupLayout.BASELINE)
-						.add(lblDescription)
-						.add(routeDescriptionTxt, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
-					.add(18)
-					.add(gl_comp.createParallelGroup(GroupLayout.LEADING)
-						.add(lblStops)
-						.add(stopsList, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(28, Short.MAX_VALUE))
-		);
+		final GroupLayout gl_comp = new GroupLayout(comp);
+		gl_comp.setHorizontalGroup(gl_comp.createParallelGroup(GroupLayout.LEADING).add(
+				gl_comp.createSequentialGroup()
+						.addContainerGap()
+						.add(gl_comp.createParallelGroup(GroupLayout.LEADING).add(lblRouteCode).add(lblRouteName)
+								.add(lblDescription).add(lblStops))
+						.add(32)
+						.add(gl_comp
+								.createParallelGroup(GroupLayout.LEADING)
+								.add(stopsList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.add(gl_comp
+										.createParallelGroup(GroupLayout.LEADING, false)
+										.add(routeCodeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.add(routeNameTxt, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+										.add(routeDescriptionTxt, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
+						.addContainerGap(38, Short.MAX_VALUE)));
+		gl_comp.setVerticalGroup(gl_comp.createParallelGroup(GroupLayout.LEADING).add(
+				gl_comp.createSequentialGroup()
+						.addContainerGap()
+						.add(gl_comp
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(lblRouteCode)
+								.add(routeCodeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.add(18)
+						.add(gl_comp
+								.createParallelGroup(GroupLayout.BASELINE)
+								.add(lblRouteName)
+								.add(routeNameTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.add(18)
+						.add(gl_comp.createParallelGroup(GroupLayout.BASELINE).add(lblDescription)
+								.add(routeDescriptionTxt, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+						.add(18)
+						.add(gl_comp.createParallelGroup(GroupLayout.LEADING).add(lblStops)
+								.add(stopsList, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(28, Short.MAX_VALUE)));
 		comp.setLayout(gl_comp);
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	protected RouteEditDialogController createController() {

@@ -20,41 +20,6 @@ public class EDairyActivator extends AbstractUIPlugin {
 	private static EDairyActivator plugin;
 
 	/**
-	 * The constructor
-	 */
-	public EDairyActivator() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-	 * )
-	 */
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-		
-		initDatabase();
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
-	 */
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
-
-	/**
 	 * Returns the shared instance
 	 * 
 	 * @return the shared instance
@@ -91,10 +56,45 @@ public class EDairyActivator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
+	/**
+	 * The constructor
+	 */
+	public EDairyActivator() {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+
+		initDatabase();
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
+
 	private void initDatabase() {
 		// FIXME: get config from filesystem
-//		 PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
-//		 PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
+		// PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
+		// PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
 		PersistenceManager.getDefault().getSession();
 	}
 }

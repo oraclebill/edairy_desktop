@@ -16,23 +16,23 @@ public class DateRangeSearchController {
 
 	private final IController controller;
 
-	private final String startDateTxtId;
-
-	private final String endDateTxtId;
-
-	private final String startDateButtonId;
-
 	private final String endDateButtonId;
-
-	private ITextRidget startDateText;
-
-	private ITextRidget endDateText;
-
-	private ImageButtonRidget startDateImageButton;
 
 	private ImageButtonRidget endDateImageButton;
 
+	private ITextRidget endDateText;
+
+	private final String endDateTxtId;
+
 	private DateRangeFilter filter;
+
+	private final String startDateButtonId;
+
+	private ImageButtonRidget startDateImageButton;
+
+	private ITextRidget startDateText;
+
+	private final String startDateTxtId;
 
 	public DateRangeSearchController(IController controller, String startDateTxtId, String endDateTxtId,
 			String startDateButtonId, String endDateButtonId, DateRangeFilter dateFilter) {
@@ -110,12 +110,15 @@ public class DateRangeSearchController {
 
 	}
 
-	public DateRangeFilter getFilter() {
-		return filter;
+	public String getEndDate() {
+		if (endDateText != null) {
+			return endDateText.getText();
+		}
+		return "";
 	}
 
-	public void setFilter(DateRangeFilter filter) {
-		this.filter = filter;
+	public DateRangeFilter getFilter() {
+		return filter;
 	}
 
 	public String getStartDate() {
@@ -126,11 +129,8 @@ public class DateRangeSearchController {
 
 	}
 
-	public String getEndDate() {
-		if (endDateText != null) {
-			return endDateText.getText();
-		}
-		return "";
+	public void setFilter(DateRangeFilter filter) {
+		this.filter = filter;
 	}
 
 }

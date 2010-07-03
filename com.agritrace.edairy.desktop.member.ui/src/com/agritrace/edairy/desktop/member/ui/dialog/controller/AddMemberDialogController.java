@@ -47,6 +47,15 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetCo
 
 public class AddMemberDialogController extends BaseDialogController<Membership> {
 
+	private class AddMemberPropertyChangedListener implements PropertyChangeListener {
+
+		@Override
+		public void propertyChange(PropertyChangeEvent arg0) {
+			enableSaveButton(validate());
+		}
+
+	}
+
 	private final class UpdateMemberPhotoAction implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
@@ -57,56 +66,48 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	}
 
 	public static final String DIALOG_TITLE = "Membership";
+	public static final Collection<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV",
+			"V");
 
 	// reference data
-	public static final Collection<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.", "Hon.", "Lt.", "Maj.", "Col.", "Gen.");
-	public static final Collection<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV", "V");
-
-	private Map<IRidget, FeaturePath> memberBindings;
+	public static final Collection<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.",
+			"Hon.", "Lt.", "Maj.", "Col.", "Gen.");
 
 	// field to model mappings
 	// public static final
 
-	protected Farmer selectedMembershipOwner;
-
-	// upper panel fields
-	private ILabelRidget formattedMemberNameRidget;
-	private ILabelRidget memberIdRidget;
-	private ITextRidget givenNameRidget;
-	private ITextRidget middleNameRidget;
-	private ITextRidget familyNameRidget;
 	private ITextRidget addtlNameRidget;
-	private IComboRidget titleRidget;
-	private IComboRidget suffixRidget;
-	private ILabelRidget photoRidget;
-	private ILinkRidget updatePhotoActionRidget;
-
-	private MemberProfileWidgetController memberProfileController;
-
-	// container tab
-	private MemberContainerWidgetController containerController;
-
-	// live stock tab
-	private MemberLiveStockWidgetController liveStockController;
-
-	// farm tab
-	private MemberFarmWidgetController farmController;
 
 	// collection tab
 	private MemberCollectionRecordsWidgetController collectionController;
+	// container tab
+	private MemberContainerWidgetController containerController;
+	private ITextRidget familyNameRidget;
+	// farm tab
+	private MemberFarmWidgetController farmController;
+	// upper panel fields
+	private ILabelRidget formattedMemberNameRidget;
+	private ITextRidget givenNameRidget;
+	// live stock tab
+	private MemberLiveStockWidgetController liveStockController;
+	private Map<IRidget, FeaturePath> memberBindings;
+	private ILabelRidget memberIdRidget;
+	private MemberProfileWidgetController memberProfileController;
+
+	private ITextRidget middleNameRidget;
+
+	private ILabelRidget photoRidget;
+
+	private IComboRidget suffixRidget;
+
+	private IComboRidget titleRidget;
 
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
-	private IValidator updateValidator = new IValidator() {
-		@Override
-		public IStatus validate(Object arg0) {
-			if (formattedMemberNameRidget != null) {
-				formattedMemberNameRidget.updateFromModel();
-			}
-			return Status.OK_STATUS;
-		}
-	};
+	private final UpdateMemberPhotoAction updateMemberPhotoAction = new UpdateMemberPhotoAction();
+
+	private ILinkRidget updatePhotoActionRidget;
 
 	//
 	// protected IConverter formattedNameConverter = new Converter(Person.class,
@@ -119,6 +120,20 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// return "";
 	// }
 	// };
+
+	private final IValidator updateValidator = new IValidator() {
+		@Override
+		public IStatus validate(Object arg0) {
+			if (formattedMemberNameRidget != null) {
+				formattedMemberNameRidget.updateFromModel();
+			}
+			return Status.OK_STATUS;
+		}
+	};
+
+	protected Farmer selectedMembershipOwner;
+
+	// TODO: make this generic, move to util calss.
 
 	public AddMemberDialogController() {
 
@@ -150,10 +165,77 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	}
 
-	// TODO: make this generic, move to util calss.
+	private Map<IRidget, FeaturePath> initMemberBindings() {
+		final Map<IRidget, FeaturePath> aMap = new HashMap<IRidget, FeaturePath>();
 
+		// formatted name
+		aMap.put(formattedMemberNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)); // uses
+		// converter
+		// member id
+		aMap.put(memberIdRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
 
+		// member first name
+		aMap.put(givenNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
+				ModelPackage.Literals.PERSON__GIVEN_NAME));
 
+		// member middle name
+		aMap.put(middleNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
+				ModelPackage.Literals.PERSON__MIDDLE_NAME));
+
+		// member family name
+		aMap.put(familyNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
+				ModelPackage.Literals.PERSON__FAMILY_NAME));
+
+		// member additional names
+		aMap.put(addtlNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
+				ModelPackage.Literals.PERSON__ADDITIONAL_NAMES));
+
+		// member title (prefix)
+		aMap.put(titleRidget,
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__HONORIFIC));
+
+		// member suffix
+		aMap.put(suffixRidget,
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX));
+
+		// member photo
+		aMap.put(photoRidget,
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__PHOTO));
+
+		// member photo update button
+		// aMap.put(updatePhotoActionRidget, FeaturePath.fromList(
+		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		// ModelPackage.Literals.PERSON__SUFFIX));
+
+		return (aMap);
+	}
+
+	private void updateBindings() {
+		updateUpperPanelBinding();
+
+		final Membership selectedMember = getWorkingCopy();
+		memberProfileController.setInputModel(selectedMember);
+		farmController.setInputModel(selectedMember);
+		collectionController.setInputModel(selectedMember);
+		liveStockController.setInputModel(selectedMember);
+		containerController.setInputModel(selectedMember);
+		transactionController.setInputModel(selectedMember);
+	}
+
+	protected void addPropertyChangedListener() {
+		final AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
+		final Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
+		while (ridgetIterator.hasNext()) {
+			final IRidget ridget = ridgetIterator.next();
+			if (ridget instanceof ITextRidget) {
+				ridget.addPropertyChangeListener("text", propertyChangedListener);
+			} else if (ridget instanceof IComboRidget) {
+				ridget.addPropertyChangeListener("selection", propertyChangedListener);
+			} else if (ridget instanceof IMarkable) {
+				ridget.addPropertyChangeListener("marker", propertyChangedListener);
+			}
+		}
+	}
 
 	protected void configureUpperPanel() {
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
@@ -193,56 +275,11 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	}
 
-	private void updateBindings() {
-		updateUpperPanelBinding();
-
+	protected void saveMember() {
 		final Membership selectedMember = getWorkingCopy();
-		memberProfileController.setInputModel(selectedMember);
-		farmController.setInputModel(selectedMember);
-		collectionController.setInputModel(selectedMember);
-		liveStockController.setInputModel(selectedMember);
-		containerController.setInputModel(selectedMember);
-		transactionController.setInputModel(selectedMember);
-	}
-
-	private final UpdateMemberPhotoAction updateMemberPhotoAction = new UpdateMemberPhotoAction();
-
-	private Map<IRidget, FeaturePath> initMemberBindings() {
-		final Map<IRidget, FeaturePath> aMap = new HashMap<IRidget, FeaturePath>();
-
-		// formatted name
-		aMap.put(formattedMemberNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)); // uses
-		// converter
-		// member id
-		aMap.put(memberIdRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
-
-		// member first name
-		aMap.put(givenNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__GIVEN_NAME));
-
-		// member middle name
-		aMap.put(middleNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__MIDDLE_NAME));
-
-		// member family name
-		aMap.put(familyNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__FAMILY_NAME));
-
-		// member additional names
-		aMap.put(addtlNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__ADDITIONAL_NAMES));
-
-		// member title (prefix)
-		aMap.put(titleRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__HONORIFIC));
-
-		// member suffix
-		aMap.put(suffixRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX));
-
-		// member photo
-		aMap.put(photoRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__PHOTO));
-
-		// member photo update button
-		// aMap.put(updatePhotoActionRidget, FeaturePath.fromList(
-		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
-		// ModelPackage.Literals.PERSON__SUFFIX));
-
-		return (aMap);
+		if (selectedMember != null) {
+			repository.saveNew(selectedMember);
+		}
 	}
 
 	protected void updateUpperPanelBinding() {
@@ -253,11 +290,13 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			for (final IRidget r : memberBindings.keySet()) {
 				if (r instanceof IValueRidget) {
 
-					IObservableValue oberservModel = EMFProperties.value(memberBindings.get(r)).observe(selectedMember);
+					final IObservableValue oberservModel = EMFProperties.value(memberBindings.get(r)).observe(
+							selectedMember);
 					// need to bind model to UI control converter again, because
 					// the fromType instance changes every time
 					if (r == formattedMemberNameRidget) {
-						formattedMemberNameRidget.setModelToUIControlConverter(new Converter(oberservModel.getValueType(), String.class) {
+						formattedMemberNameRidget.setModelToUIControlConverter(new Converter(oberservModel
+								.getValueType(), String.class) {
 							@Override
 							public Object convert(Object from) {
 								if (from instanceof Person) {
@@ -272,8 +311,10 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			}
 
 			// manually bind the combos (for now)..
-			titleRidget.bindToModel(new WritableList(VALID_TITLES, String.class), String.class, null, EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__HONORIFIC));
-			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES, String.class), String.class, null, EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__SUFFIX));
+			titleRidget.bindToModel(new WritableList(VALID_TITLES, String.class), String.class, null,
+					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__HONORIFIC));
+			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES, String.class), String.class, null,
+					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__SUFFIX));
 
 			// tap, tap..
 			memberIdRidget.updateFromModel();
@@ -287,59 +328,29 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		}
 	}
 
-	protected void saveMember() {
-		final Membership selectedMember = getWorkingCopy();
-		if (selectedMember != null) {
-			repository.saveNew(selectedMember);
-		}
-	}
-
-	protected void addPropertyChangedListener(){
-		AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
-		Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
-		while(ridgetIterator.hasNext()){
-			IRidget ridget = ridgetIterator.next();
-			if(ridget instanceof ITextRidget){
-				ridget.addPropertyChangeListener("text",propertyChangedListener);
-			}else if(ridget instanceof IComboRidget){
-				ridget.addPropertyChangeListener("selection",propertyChangedListener);
-			}else if(ridget instanceof IMarkable){
-				ridget.addPropertyChangeListener("marker",propertyChangedListener);
-			}
-		}
-	}
-
+	@Override
 	protected boolean validate() {
-		for (IRidget ridget :  getRidgets()) {
+		for (final IRidget ridget : getRidgets()) {
 			IMarkableRidget markable;
 			if (ridget instanceof IMarkableRidget) {
 				markable = (IMarkableRidget) ridget;
-				if(markable.isErrorMarked()){
+				if (markable.isErrorMarked()) {
 					return false;
 				}
-				if(markable.isMandatory()){
-					if(ridget instanceof ITextRidget){
-						if(((ITextRidget)ridget).getText().isEmpty()){
+				if (markable.isMandatory()) {
+					if (ridget instanceof ITextRidget) {
+						if (((ITextRidget) ridget).getText().isEmpty()) {
 							return false;
 						}
-					}else if(ridget instanceof IComboRidget){
-						if (((IComboRidget)ridget).getSelection()== null){
+					} else if (ridget instanceof IComboRidget) {
+						if (((IComboRidget) ridget).getSelection() == null) {
 							return false;
 						}
 					}
 				}
-			}			
-		}	
-		return true;
-
-	}
-
-	private class AddMemberPropertyChangedListener implements PropertyChangeListener {
-
-		@Override
-		public void propertyChange(PropertyChangeEvent arg0) {
-			enableSaveButton(validate());
+			}
 		}
+		return true;
 
 	}
 }
