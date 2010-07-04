@@ -21,21 +21,6 @@ public class DeliveryJournalEditController extends RecordDialogController<Delive
 	private ITableRidget lineItemsRidget;
 
 	public DeliveryJournalEditController() {
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.REFERENCE_NUM,
-				DairyPackage.Literals.DELIVERY_JOURNAL__REFERENCE_NUMBER);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.SESSION_COMBO, Arrays.asList(Session.values()),
-				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(),
-				DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
-				DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(),
-				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
-				DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
-		// addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TABLE,
-		// DairyPackage.Literals.DELIVERY_JOURNAL__LINES);
 	}
 
 	@Override
@@ -51,34 +36,22 @@ public class DeliveryJournalEditController extends RecordDialogController<Delive
 
 	@Override
 	protected void configureUserRidgets() {
-		// dateRidget = getRidget(IDateTimeRidget.class,
-		// DeliveryJournalEditBindContants.DATE_COMBO);
-		// dateRidget.setMandatory(true);
-		//
-		// sessionRidget = getRidget(IComboRidget.class,
-		// DeliveryJournalEditBindContants.SESSION_COMBO);
-		// sessionRidget.setMandatory(true);
-		//
-		// routeRidget = getRidget(IComboRidget.class,
-		// DeliveryJournalEditBindContants.ROUTE_COMBO);
-		// routeRidget.setMandatory(true);
-		//
-		// customerRidget = getRidget(IComboRidget.class,
-		// DeliveryJournalEditBindContants.CUSTOMER_COMBO);
-		// customerRidget.setMandatory(true);
-		//
-		// driverRidget = getRidget(IComboRidget.class,
-		// DeliveryJournalEditBindContants.DRIVER_COMBO);
-		// driverRidget.setMandatory(true);
-		//
-		// vehicleRidget = getRidget(IComboRidget.class,
-		// DeliveryJournalEditBindContants.VEHICLE_COMBO);
-		// vehicleRidget.setMandatory(true);
-		//
-		// journalTotalRidget = getRidget(ITextRidget.class,
-		// DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT);
-		// journalTotalRidget.setOutputOnly(true);
-		//
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.REFERENCE_NUM,
+				DairyPackage.Literals.DELIVERY_JOURNAL__REFERENCE_NUMBER);
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.SESSION_COMBO, Arrays.asList(Session.values()),
+				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(),
+				DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
+				DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(),
+				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
+				DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
+		// addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TABLE,
+		// DairyPackage.Literals.DELIVERY_JOURNAL__LINES);
+
 		lineItemsRidget = getRidget(ITableRidget.class, DeliveryJournalEditBindContants.LINE_ITEM_TABLE);
 		lineItemsRidget.bindToModel(new WritableList(), DeliveryJournalLine.class, new String[] { "lineNumber", "bin",
 				"quantity", "description" }, new String[] { "#", "Can ID", "Quantity", "Description" });

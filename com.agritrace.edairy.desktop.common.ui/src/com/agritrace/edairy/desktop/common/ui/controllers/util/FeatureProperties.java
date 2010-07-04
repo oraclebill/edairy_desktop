@@ -25,7 +25,7 @@ class FeatureProperties {
 	public FeatureProperties(String bindingId, List<?> domainObjects, FeaturePath featurePath) {
 		this.bindingId = bindingId;
 		this.featurePath = featurePath;
-		this.domainList = Observables.staticObservableList(domainObjects);
+		this.domainList = domainObjects == null ? null : Observables.staticObservableList(domainObjects);
 	}
 
 	public String getBindingId() {
@@ -49,21 +49,12 @@ class FeatureProperties {
 
 	public EStructuralFeature getTailFeature() {
 		EStructuralFeature tailFeature = null;
-
 		if (featurePath != null) {
 			final EStructuralFeature[] features = featurePath.getFeaturePath();
 			if (features.length > 0) {
 				tailFeature = features[features.length - 1];
 			}
 		}
-
 		return tailFeature;
 	}
-
-	public void setDomainList(IObservableList domainList) {
-		Assert.isLegal(domainList.getElementType() == getEntityClass(), "Entity class  " + getEntityClass()
-				+ "' and list type '" + domainList.getElementType() + "' not equal");
-		this.domainList = domainList;
-	}
-
 }

@@ -43,7 +43,7 @@ public class TransactionBatchEntryDialog extends BaseDialogView {
 			final List<AccountTransaction> transactions = (List<AccountTransaction>) getContext("tranaction-list");
 			final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 			if (master != null) {
-				master.setDelegate(new TransactionBatchEntryDialogController2());
+				master.setDelegate(new TransactionBatchEntryDialogController());
 				master.bindToModel(new WritableList(transactions, AccountTransaction.class), AccountTransaction.class,
 						properties, headers);
 				master.updateFromModel();
@@ -56,11 +56,11 @@ public class TransactionBatchEntryDialog extends BaseDialogView {
 		}
 	}
 
-	private final class TransactionBatchEntryDialogController2 extends AbstractMasterDetailsDelegate {
+	private final class TransactionBatchEntryDialogController extends AbstractMasterDetailsDelegate {
 		private final TransactionEntryPanelController detailController;
 		private final AccountTransaction workingCopy = createWorkingCopy();
 
-		public TransactionBatchEntryDialogController2() {
+		public TransactionBatchEntryDialogController() {
 			detailController = new TransactionEntryPanelController();
 		}
 

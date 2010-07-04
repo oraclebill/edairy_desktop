@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.RienaStatus;
+import org.eclipse.riena.internal.navigation.ui.filter.RidgetMatcher;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
@@ -63,8 +64,8 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	// }
 
 	private void configureMappedRidgets() {
-		if (getMapper() != null) {
-			getMapper().configureRidgets();
+		if (mapper != null) {
+			mapper.configureRidgets();
 		}
 	}
 

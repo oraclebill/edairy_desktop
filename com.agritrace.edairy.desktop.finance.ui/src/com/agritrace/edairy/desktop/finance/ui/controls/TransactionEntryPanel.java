@@ -61,7 +61,7 @@ public class TransactionEntryPanel extends Composite {
 
 		final CCombo locationCombo = UIControlsFactory.createCCombo(middlePanel,
 				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
-		locationCombo.setItems(new String[] { "Route 2 - Ngecha", "Route 3 - Kelly" });
+		locationCombo.setItems(new String[] { "Sample Route" });
 		locationCombo.select(0);
 
 		final Label lblRefNumber = UIControlsFactory.createLabel(middlePanel, "Member");

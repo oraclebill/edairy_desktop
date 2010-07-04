@@ -8,7 +8,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanel;
 
-public class MemberTransactionEditDialog extends RecordDialog<AccountTransaction, MemberTransactionEditController2> {
+public class MemberTransactionEditDialog extends RecordDialog<AccountTransaction, MemberTransactionEditController> {
 
 	public MemberTransactionEditDialog(Shell parentShell) {
 		super(parentShell);
@@ -21,8 +21,8 @@ public class MemberTransactionEditDialog extends RecordDialog<AccountTransaction
 	}
 
 	@Override
-	protected MemberTransactionEditController2 createController() {
-		final MemberTransactionEditController2 controller = new MemberTransactionEditController2();
+	protected MemberTransactionEditController createController() {
+		final MemberTransactionEditController controller = new MemberTransactionEditController();
 		return controller;
 	}
 

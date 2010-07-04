@@ -7,6 +7,7 @@ import java.util.Map;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.property.value.IValueProperty;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClassifier;
@@ -35,6 +36,12 @@ public class BindingHelper<T extends EObject> {
 	 * @param modelObject
 	 */
 	public BindingHelper(IRidgetContainer ridgetContainer, T modelObject) {
+		if (modelObject == null) 
+			throw new IllegalArgumentException("Model object must not be null");
+		
+		if (ridgetContainer == null) 
+			throw new IllegalArgumentException("RidgetContainer must not be null");
+		
 		this.ridgetContainer = ridgetContainer;
 		this.modelObject = modelObject;
 	}
@@ -76,12 +83,11 @@ public class BindingHelper<T extends EObject> {
 
 			if (ridget instanceof IEditableRidget) {
 				final IEditableRidget valueRidget = (IEditableRidget) ridget;
-				valueRidget.bindToModel(EMFProperties.value(binding.getFeaturePath()).observe(getModelObject()));
+				final IValueProperty modelValue = EMFProperties.value(binding.getFeaturePath());
+				valueRidget.bindToModel(modelValue.observe(getModelObject()));
 				final IConverter converter = createUI2ModelConverter(valueRidget, binding.getTailFeature());
 				if (converter != null) {
-					valueRidget.setUIControlToModelConverter(converter); // has
-																			// no
-																			// effect..
+//					valueRidget.setUIControlToModelxConverter(converter); // has no effect..
 				}
 				valueRidget.updateFromModel();
 			} else if (ridget instanceof IComboRidget) {

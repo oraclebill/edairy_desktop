@@ -4,11 +4,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanelController;
 
-public class MemberTransactionEditController2 extends RecordDialogController<AccountTransaction> {
+public class MemberTransactionEditController extends RecordDialogController<AccountTransaction> {
 
 	private TransactionEntryPanelController panelController;
 
-	public MemberTransactionEditController2() {
+	public MemberTransactionEditController() {
 		super();
 	}
 
