@@ -20,7 +20,6 @@ public class RouteRepository implements IRepository<Route> {
 
 	@Override
 	public List<Route> all() {
-		// TODO Auto-generated method stub
 		return routeRepo.all();
 	}
 
@@ -31,19 +30,16 @@ public class RouteRepository implements IRepository<Route> {
 
 	@Override
 	public List<?> find(String rawQuery) {
-		// TODO Auto-generated method stub
 		return routeRepo.find(rawQuery);
 	}
 
 	@Override
 	public List<?> find(String query, Object[] params) {
-		// TODO Auto-generated method stub
 		return routeRepo.find(query, params);
 	}
 
 	@Override
 	public Route findByKey(long key) {
-		// TODO Auto-generated method stub
 		return routeRepo.findByKey(key);
 	}
 

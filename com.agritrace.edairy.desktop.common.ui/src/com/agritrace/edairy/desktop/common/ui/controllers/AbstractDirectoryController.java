@@ -274,7 +274,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
 			System.err.println("------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
-			getRepository().saveNew((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			createEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			;
 			;
@@ -282,6 +282,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			throw new IllegalStateException("Invalid response from dialog: " + returnCode);
 		}
 		refreshTableContents();
+	}
+
+	protected void createEntity(T newEntity) {
+		getRepository().saveNew(newEntity);
 	}
 
 	protected void handleResetFilterAction() {
@@ -299,7 +303,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
 			System.err.println("------ updating item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
-			getRepository().update((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			updateEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			// todo: ensure data sent to dialog is not modified...
 			// getRepository().load((T)
@@ -308,6 +312,11 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			throw new IllegalStateException("Invalid response from dialog: " + returnCode);
 		}
 		refreshTableContents();
+	}
+
+	
+	protected void updateEntity(T updateableEntity) {
+		getRepository().update(updateableEntity);		
 	}
 
 	protected void itemSelected(SelectionEvent event) {

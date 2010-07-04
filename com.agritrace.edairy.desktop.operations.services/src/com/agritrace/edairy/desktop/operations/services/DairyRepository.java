@@ -18,7 +18,29 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
 public class DairyRepository implements IDairyRepository {
+	
+	/**
+	 * 
+	 */
+	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
+	
+	/**
+	 * 
+	 */
+	private static class DairyRepositoryHolder {
+		private static final DairyRepository INSTANCE = new DairyRepository();
+	}
 
+	/**
+	 * 
+	 */
+	public static DairyRepository getInstance() {
+		return DairyRepositoryHolder.INSTANCE;
+	}
+
+	/**
+	 * 
+	 */
 	private static final HibernateRepository<DairyContainer> binRepository = new HibernateRepository<DairyContainer>() {
 		@Override
 		protected Class<DairyContainer> getClassType() {
@@ -26,6 +48,9 @@ public class DairyRepository implements IDairyRepository {
 		}
 	};
 
+	/**
+	 * 
+	 */
 	private static final HibernateRepository<CollectionJournalPage> collectionsRepository = new HibernateRepository<CollectionJournalPage>() {
 		@Override
 		protected Class<CollectionJournalPage> getClassType() {
@@ -51,7 +76,6 @@ public class DairyRepository implements IDairyRepository {
 		}
 	};
 
-	private static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
 
 	private static final HibernateRepository<Employee> employeeRepository = new HibernateRepository<Employee>() {
 		@Override
@@ -81,6 +105,49 @@ public class DairyRepository implements IDairyRepository {
 		}
 	};
 
+	private final Dairy localDairy;
+
+	private DairyRepository() {
+		Dairy myDairy = dairyRepository.findByKey(1L);
+		if (myDairy == null) {
+			myDairy = createLocalDairy();
+			dairyRepository.saveNew(myDairy);
+		}
+		localDairy = myDairy;
+	}
+
+	@Override
+	public Dairy getLocalDairy() {
+		return localDairy;
+	}
+
+	@Override
+	public void updateDairy() {
+		dairyRepository.update(localDairy);
+	}
+
+	public void updateRoute(final Route changedRoute) {
+		routeRepository.update(changedRoute);
+	}
+
+	public void addRoute(final Route newRoute) {
+		localDairy.getRoutes().add(newRoute);
+		routeRepository.saveNew(newRoute);
+	}
+
+	protected Dairy createLocalDairy() {
+		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
+		dairy.setLocation(DairyUtil.createLocation(null, null, null));
+		// dairy.setCompanyId(Long.decode(System.getProperty(EDAIRY_SITE_DAIRYID,
+		// "0")));
+		dairy.setCompanyId(1l);
+		dairy.setCompanyName("");
+		dairy.setDescription("");
+		dairy.setPhoneNumber("");
+		dairy.setRegistrationNumber("");
+		return dairy;
+	}
+
 	public List<CollectionJournalPage> allCollectionJournalPages() {
 		return collectionsRepository.all();
 	}
@@ -91,13 +158,8 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public List<Dairy> allDairies() {
-		return dairyRepository.all();
-	}
-
-	@Override
 	public List<DairyContainer> allDairyContainers() {
-		return binRepository.all();
+		return localDairy.getDairyBins();
 	}
 
 	@Override
@@ -107,12 +169,12 @@ public class DairyRepository implements IDairyRepository {
 
 	@Override
 	public List<Route> allRoutes() {
-		return routeRepository.all();
+		return localDairy.getRoutes();
 	}
 
 	@Override
 	public List<Vehicle> allVehicles() {
-		return vehicleRepository.all();
+		return localDairy.getVehicles();
 	}
 
 	public void delete(Dairy deletableEntity) {
@@ -141,14 +203,6 @@ public class DairyRepository implements IDairyRepository {
 		return dairyRepository.findByKey(key);
 	}
 
-	public Dairy getDairyByName(String name) {
-		final List<Dairy> list = find("FROM Dairy where name='" + name + "'");
-		if (list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
-	}
-
 	@Override
 	public Container getFarmContainerById(String canId) {
 		return binRepository.findByKey(Long.parseLong(canId));
@@ -169,41 +223,12 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public Dairy getLocalDairy() {
-		Dairy local = null;
-
-		// find local
-		final List<Dairy> dairies = dairyRepository.all();
-		if (dairies.size() > 0) {
-			if (dairies.size() > 1) {
-				throw new IllegalStateException("multiple dairies unsupported.");
-			}
-			return dairies.get(0);
-		}
-
-		// create local
-		local = DairyFactory.eINSTANCE.createDairy();
-		local.setLocation(DairyUtil.createLocation(null, null, null));
-		long id = 0;
-		try {
-			final String dairyId = System.getProperty(EDAIRY_SITE_DAIRYID);
-			if (dairyId != null) {
-				id = new Long(dairyId).longValue();
-				local.setCompanyId(id);
-			}
-		} catch (final Exception e) {
-		}
-		return local;
-	}
-
-	@Override
 	public List<DairyLocation> getLocalDairyLocations() {
 		return getLocalDairy().getBranchLocations();
 	}
 
 	@Override
 	public Membership getMembershipById(Object memberId) {
-		// TODO Auto-generated method stub
 		return getMembershipById((String) memberId);
 	}
 
@@ -229,27 +254,8 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public void saveNewDairy(Dairy newEntity) {
-		newEntity.setCompanyId(null);
-		dairyRepository.saveNew(newEntity);
-	}
-
-	@Override
 	public void saveNewJournalPage(CollectionJournalPage newJournal) {
 		collectionsRepository.saveNew(newJournal);
-	}
-
-	public void saveNewRoute(final Route newRoute) {
-		routeRepository.saveNew(newRoute);
-	}
-
-	@Override
-	public void updateDairy(Dairy updateableEntity) {
-		dairyRepository.update(updateableEntity);
-	}
-
-	public void updateRoute(final Route changedRoute) {
-		routeRepository.update(changedRoute);
 	}
 
 }

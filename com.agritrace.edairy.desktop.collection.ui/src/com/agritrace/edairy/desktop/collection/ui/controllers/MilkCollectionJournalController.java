@@ -143,7 +143,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	private final List<DairyContainer> bins = getBins();
 	private ITextRidget canText;
-	private final IDairyRepository dairyRepo = new DairyRepository();
+	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	// journal book group ridgets
 	private IDateTimeRidget dateRidget;
 	// private final List<CollectionJournalLine> records = new

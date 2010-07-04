@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class DeliveryJournalEditController extends RecordDialogController<DeliveryJournal> {
 
-	private final IDairyRepository dairyRepo = new DairyRepository();
+	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 
 	private ITableRidget lineItemsRidget;
 

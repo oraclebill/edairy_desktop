@@ -178,7 +178,7 @@ public class ContainerLogViewController extends SubModuleController {
 
 	private final String[] containerColumnHeaders = { "ID", "Container Type", "Units Of Measure", "Capacity" };
 	private final String[] containerPropertyNames = { "containerId", "type", "measureType", "capacity" };
-	protected final IDairyRepository dairyRepository = new DairyRepository();
+	protected final IDairyRepository dairyRepository = DairyRepository.getInstance();
 
 	@Override
 	public void configureRidgets() {

@@ -45,7 +45,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
-	private final IDairyRepository dairyRepository = new DairyRepository();
+	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
 	private DateTime datePicker;
 	private CCombo driverCombo;
 	private Text fileNumber;

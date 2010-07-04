@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 public class DeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
 
 	private IComboRidget customerRidget;
-	private final IDairyRepository dairyRepo = new DairyRepository();
+	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 
 	private IDateTimeRidget endDateRidget;
 	private DeliveryJournalFilterBean filterBean = null;

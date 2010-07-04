@@ -40,11 +40,12 @@ public class DairyProfileViewController extends SubModuleController {
 	class DairyProfileCancelAction implements IActionListener {
 		@Override
 		public void callback() {
-			if (!newDairy) {
-				localDairy = dairyRepository.getDairyById(localDairy.getCompanyId());
-			} else {
-				localDairy = dairyRepository.reloadLocalDairy();
-			}
+//			if (!newDairy) {
+//				localDairy = dairyRepository.getDairyById(localDairy.getCompanyId());
+//			} else {
+//				localDairy = dairyRepository.reloadLocalDairy();
+//			}
+			localDairy = dairyRepository.getLocalDairy();
 			initBindings();
 			updateBindings();
 		}
@@ -53,12 +54,7 @@ public class DairyProfileViewController extends SubModuleController {
 	class DairyProfileSaveAction implements IActionListener {
 		@Override
 		public void callback() {
-			if (newDairy) {
-				dairyRepository.saveNewDairy(localDairy);
-				newDairy = false;
-			} else {
-				dairyRepository.updateDairy(localDairy);
-			}
+			dairyRepository.updateDairy();
 			updateBindings();
 		}
 	}
@@ -92,12 +88,11 @@ public class DairyProfileViewController extends SubModuleController {
 	public static final String ID = DairyProfileViewController.class.getName();
 	private IActionRidget cancelAction;
 	private CommunicationGroupController communicationGroup;
-	private final IDairyRepository dairyRepository = new DairyRepository();
+	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
 	private Dairy localDairy;
 
 	private LocationProfileWidgetController locationController;
 	private int memberCount;
-	private boolean newDairy = true;
 	private IActionRidget saveAction;
 	private IDateTimeRidget txtESTABLISHED_DATE;
 	private ITextRidget txtFEDERAL_PIN;

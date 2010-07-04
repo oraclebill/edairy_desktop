@@ -12,6 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.RouteEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
 
@@ -50,7 +51,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		}
 	}
 
-	private final DairyRepository dairyRepo = new DairyRepository();
+	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	private ITextRidget description;
 	private ITextRidget name;
 	private final SearchBean searchBean = new SearchBean();
@@ -74,9 +75,9 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		description = getRidget(ITextRidget.class, RouteListView.BIND_ID_FILTER_DESC);
 
 		name.bindToModel(searchBean, "name");
-		description.bindToModel(searchBean, "description");
-
 		name.updateFromModel();
+		
+		description.bindToModel(searchBean, "description");
 		description.updateFromModel();
 	}
 
@@ -106,4 +107,8 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		description.setText("");
 	}
 
+	@Override protected void createEntity(Route newRoute) {
+		dairyRepo.addRoute(newRoute);
+	}
+	
 }

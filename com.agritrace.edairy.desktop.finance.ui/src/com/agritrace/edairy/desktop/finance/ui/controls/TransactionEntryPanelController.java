@@ -61,7 +61,7 @@ public class TransactionEntryPanelController {
 	}
 
 	private IRidgetContainer container;
-	private final IDairyRepository dairyRepo = new DairyRepository();
+	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	private BindingHelper<AccountTransaction> mapper;
 	private AccountTransaction model;
 

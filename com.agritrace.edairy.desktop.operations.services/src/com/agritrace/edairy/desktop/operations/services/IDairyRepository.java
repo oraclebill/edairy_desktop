@@ -18,13 +18,11 @@ public interface IDairyRepository {
 
 	List<Customer> allCustomers();
 
-	List<Dairy> allDairies();
+	//List<Dairy> allDairies();
 
 	List<DairyContainer> allDairyContainers();
 
 	List<DeliveryJournal> allDeliveries();
-
-	List<Route> allRoutes();
 
 	List<Vehicle> allVehicles();
 
@@ -48,10 +46,12 @@ public interface IDairyRepository {
 
 	void save(Object changedItem);
 
-	void saveNewDairy(Dairy localDairy);
-
 	void saveNewJournalPage(CollectionJournalPage newJournal);
 
-	void updateDairy(Dairy localDairy);
+	void updateDairy();
+
+	List<Route> allRoutes();
+
+	void addRoute(Route newRoute);
 
 }

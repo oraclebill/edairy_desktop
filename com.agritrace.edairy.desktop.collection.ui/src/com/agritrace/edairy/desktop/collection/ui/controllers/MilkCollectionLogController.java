@@ -78,7 +78,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
 
-		filterBean.setRoutes(new DairyRepository().allRoutes());
+		filterBean.setRoutes( DairyRepository.getInstance().allRoutes() );
 	}
 
 	@Override

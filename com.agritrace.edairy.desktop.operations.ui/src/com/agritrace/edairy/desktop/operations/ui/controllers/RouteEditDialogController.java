@@ -28,14 +28,5 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 				DairyLocation.class, "name");
 		System.err.println("STOPS: " + this.getWorkingCopy().getStops());
 		stopsList.updateFromModel();
-	}
-
-	@Override
-	protected boolean validate() {
-		// TODO Auto-generated method stub
-		return super.validate();
-	}
-	
-	
-
+	}	
 }

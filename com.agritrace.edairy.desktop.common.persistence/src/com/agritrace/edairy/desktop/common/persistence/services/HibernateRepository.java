@@ -87,6 +87,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public T findByKey(long key) {
+		return (T) findByKey(getClassType(), key);
+		/*
 		openSession();
 		final Query q = session.createQuery("FROM " + getEntityName() + " where " + getIdentifierName() + " = ? ")
 				.setLong(0, key);
@@ -98,7 +100,53 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		} else {
 			return null;
 		}
+		*/
+	}	
+	
+	/**
+	 * 
+	 * @param <X>
+	 * @param entityClass
+	 * @param entityKey
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public <X> X findByKey(Class<X> entityClass, long entityKey) {
+		openSession();
+		String entityName = getEntityName(entityClass);
+		String identifierName = getIdentifierName(entityClass, entityName);
+		final Query q = session.createQuery("FROM " + 
+				entityName + " where " + 
+				identifierName + " = ? ").setLong(0, entityKey);
+		Object obj = null;
+		final List<?> results = runQuery(q);
+		if ((results != null) && (results.size() > 0)) {
+			obj = results.get(0);
+		} 
+		return (X) obj;
 	}
+	
+	/**
+	 * 
+	 * @param eClass
+	 * @return
+	 */
+	private String getEntityName(Class<?> eClass) {
+		String className = eClass.getName();
+		return className.substring(className.lastIndexOf('.') + 1);	
+	}
+	
+	/**
+	 * 
+	 * @param eClass
+	 * @param eName
+	 * @return
+	 */
+	private String getIdentifierName(Class<?> eClass, String eName) {
+		ClassMetadata metaData = persistenceManager.getSession().getSessionFactory().getClassMetadata(eName);
+		return metaData.getIdentifierPropertyName();
+	}
+	
 
 	/**
 	 * Merge

@@ -259,7 +259,7 @@ public class VehicleLogViewController extends SubModuleController {
 
 	public static final String ID = VehicleLogViewController.class.getName();
 
-	protected final IDairyRepository vehicleRepository = new DairyRepository();
+	protected final IDairyRepository vehicleRepository = DairyRepository.getInstance();
 
 	public VehicleLogViewController() {
 		super();
