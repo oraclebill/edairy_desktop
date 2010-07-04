@@ -1,6 +1,11 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.util.Arrays;
 import java.util.List;
+
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.hibernate.Hibernate;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -8,6 +13,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -15,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
 public class DairyRepository implements IDairyRepository {
@@ -114,6 +121,26 @@ public class DairyRepository implements IDairyRepository {
 			dairyRepository.saveNew(myDairy);
 		}
 		localDairy = myDairy;
+		initLocalDairy();
+	}
+	
+	/**
+	 * Initialize local dairy collections - 
+	 */
+	private void initLocalDairy() {
+		Hibernate.initialize(localDairy);
+		final List<EReference> persistentCollections = Arrays.asList(
+				DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
+				DairyPackage.Literals.DAIRY__CUSTOMERS,
+				DairyPackage.Literals.DAIRY__DAIRY_BINS,
+				DairyPackage.Literals.DAIRY__EMPLOYEES,
+				DairyPackage.Literals.DAIRY__ROUTES,
+				DairyPackage.Literals.DAIRY__VEHICLES,
+				DairyPackage.Literals.DAIRY__SUPPLIERS				
+			);
+		for (EStructuralFeature feature : persistentCollections) {
+			Hibernate.initialize(localDairy.eGet(feature));
+		}		
 	}
 
 	@Override
@@ -224,7 +251,7 @@ public class DairyRepository implements IDairyRepository {
 
 	@Override
 	public List<DairyLocation> getLocalDairyLocations() {
-		return getLocalDairy().getBranchLocations();
+		return localDairy.getBranchLocations();
 	}
 
 	@Override
@@ -256,6 +283,32 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public void saveNewJournalPage(CollectionJournalPage newJournal) {
 		collectionsRepository.saveNew(newJournal);
+	}
+
+	@Override
+	public void updateBranchLocation(DairyLocation changedDairyLocation) {
+		if(localDairy.getBranchLocations().contains(changedDairyLocation)) {
+			;
+		}
+		else {
+			localDairy.getBranchLocations().add(changedDairyLocation);
+		}
+		PersistenceManager.getDefault().getSession().flush();
+	}
+
+	@Override
+	public void addBranchLocation(DairyLocation changedDairyLocation) {
+		localDairy.getBranchLocations().add(changedDairyLocation);	
+		PersistenceManager.getDefault().getSession().persist(changedDairyLocation);
+		PersistenceManager.getDefault().getSession().flush();
+	}
+
+	@Override
+	public void deleteBranchLocation(DairyLocation oldItem) {
+		localDairy.getBranchLocations().remove(oldItem);
+		PersistenceManager.getDefault().getSession().delete(oldItem);
+		PersistenceManager.getDefault().getSession().flush();
+
 	}
 
 }

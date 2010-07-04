@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.dairy.locations.ui.controllers;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -29,7 +30,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	private class AddressValidator implements IValidator {
@@ -50,8 +51,11 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 			if ("".equals(name)) {
 				return Status.CANCEL_STATUS;
 			}
-			if (locationRepository.getByName(name) != null) {
-				return Status.CANCEL_STATUS;
+			List<DairyLocation> locations = locationRepository.getLocalDairyLocations();
+			for (DairyLocation testLocation : locations) {
+				if (testLocation.getName().equals(name)) {
+					return Status.CANCEL_STATUS;
+				}
 			}
 			return Status.OK_STATUS;
 		}
@@ -62,17 +66,18 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	/**
 	 * 
 	 */
-	private final DairyLocationRepository locationRepository;
+	// private final DairyLocationRepository locationRepository;
 	private IComboRidget routeCombo;
 	private ITextRidget textAddress;
 	private ITextRidget textName;
 
 	private DairyLocation workingCopy = createWorkingCopy();
+	private IDairyRepository locationRepository;
 
 	/**
 	 * @param dairyLocationController
 	 */
-	DairyLocationDelegate(DairyLocationRepository locationRepository) {
+	DairyLocationDelegate(IDairyRepository locationRepository) {
 		this.locationRepository = locationRepository;
 	}
 
@@ -166,11 +171,10 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 		if (changedItem instanceof DairyLocation) {
 			final DairyLocation changedDairyLocation = (DairyLocation) changedItem;
 			if (changedDairyLocation.getId() == 0) {
-				// perform create action to SQL
-				locationRepository.saveNew(changedDairyLocation);
+				locationRepository.addBranchLocation(changedDairyLocation);
 			} else {
 				// perform update action to SQL
-				locationRepository.update(changedDairyLocation);
+				locationRepository.updateBranchLocation(changedDairyLocation);
 			}
 		}
 		super.itemApplied(changedItem);
@@ -184,7 +188,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 	@Override
 	public void itemRemoved(Object oldItem) {
-		locationRepository.delete((DairyLocation) oldItem);
+		locationRepository.deleteBranchLocation((DairyLocation) oldItem);
 	}
 
 	private void bindRidgets(IRidgetContainer container) {
@@ -234,12 +238,8 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void bindRouteCombo() {
-		// routeCombo.bindToModel(locationRepository, "routes", Route.class,
-		// "name", workingCopy, "route");
-		routeCombo.bindToModel(new WritableList(locationRepository.getRoutes(), Route.class), Route.class, "getName",
+		routeCombo.bindToModel(new WritableList(locationRepository.allRoutes(), Route.class), Route.class, "getName",
 				EMFObservables.observeValue(workingCopy, DairyPackage.Literals.DAIRY_LOCATION__ROUTE));
-		// EMFObservables.listFactory(Realm.getDefault(),
-		// DairyPackage.Literals.DAIRY__ROUTES).createObservable(target)
 		routeCombo.updateFromModel();
 	}
 

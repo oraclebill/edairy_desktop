@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.observable.IObservable;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -8,11 +9,13 @@ import org.eclipse.jface.util.Assert;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
@@ -127,6 +130,16 @@ public class TransactionEntryPanelController {
 				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
 		memberLookup.addListener(new MemberLookupAction(memberName));
 
+		// configure route combo
+		final IComboRidget combo = container.getRidget(IComboRidget.class,
+				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
+		IObservableList optionList = Observables.staticObservableList(dairyRepo.getLocalDairyLocations());
+		IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
+		combo.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
+			System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
+			System.err.println(" to Model: >>>> " + model);
+		combo.updateFromModel();
+
 	}
 
 	private void bindMappedRidgets() {
@@ -145,9 +158,9 @@ public class TransactionEntryPanelController {
 		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DATE,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE);
 
-		mapper.addMapping(FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO,
-				Observables.staticObservableList(dairyRepo.getLocalDairyLocations()),
-				AccountPackage.Literals.ACCOUNT_TRANSACTION__RELATED_LOCATION);
+		// mapper.addMapping(FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO,
+		// Observables.staticObservableList(dairyRepo.getLocalDairyLocations()),
+		// AccountPackage.Literals.ACCOUNT_TRANSACTION__RELATED_LOCATION);
 
 		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);

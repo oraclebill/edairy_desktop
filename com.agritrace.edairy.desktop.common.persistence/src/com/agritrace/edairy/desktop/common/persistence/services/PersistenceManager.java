@@ -85,8 +85,10 @@ public class PersistenceManager {
 	public Session getSession() {
 		if (null == session) {
 			session = sessionFactory.openSession();
+			System.err.println("--> created session: " + session);
 		} else if (!session.isConnected()) {
 			session = sessionFactory.openSession();
+			System.err.println("--> creatied session: " + session);
 		}
 		return session;
 	}

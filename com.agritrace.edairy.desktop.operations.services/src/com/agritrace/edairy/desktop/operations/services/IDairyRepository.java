@@ -54,4 +54,10 @@ public interface IDairyRepository {
 
 	void addRoute(Route newRoute);
 
+	void updateBranchLocation(DairyLocation changedDairyLocation);
+
+	void addBranchLocation(DairyLocation changedDairyLocation);
+
+	void deleteBranchLocation(DairyLocation oldItem);
+
 }

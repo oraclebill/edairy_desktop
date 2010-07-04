@@ -9,6 +9,8 @@ import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 ;
@@ -52,7 +54,7 @@ public class DairyLocationController extends SubModuleController {
 	public static final String RIDGET_ID_ROUTE = "route";
 	public static final String RIDGET_ID_SAVE_ACTION = "saveAction";
 
-	final DairyLocationRepository locationRepository = new DairyLocationRepository();
+	final IDairyRepository locationRepository = DairyRepository.getInstance();
 
 	final IObservableList locations = new WritableList();
 
@@ -76,7 +78,7 @@ public class DairyLocationController extends SubModuleController {
 		final String[] headers = new String[] { "Name", "Description" };
 
 		locations.clear();
-		locations.addAll(locationRepository.all());
+		locations.addAll(locationRepository.getLocalDairyLocations());
 
 		final IMasterDetailsRidget master = (IMasterDetailsRidget) getRidget("master");
 		if (master != null) {
