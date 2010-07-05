@@ -9,7 +9,9 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -17,6 +19,7 @@ import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.validation.MinLength;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -28,45 +31,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
-	private class AddressValidator implements IValidator {
-		@Override
-		public IStatus validate(Object value) {
-			if ("".equals(textAddress.getText())) {
-				return Status.CANCEL_STATUS;
-			}
 
-			return Status.OK_STATUS;
-		}
-	}
-
-	private class DairyLocationNameValidator implements IValidator {
-		@Override
-		public IStatus validate(Object value) {
-			final String name = textName.getText().trim();
-			if ("".equals(name)) {
-				return Status.CANCEL_STATUS;
-			}
-			List<DairyLocation> locations = locationRepository.getLocalDairyLocations();
-			for (DairyLocation testLocation : locations) {
-				if (testLocation.getName().equals(name)) {
-					return Status.CANCEL_STATUS;
-				}
-			}
-			return Status.OK_STATUS;
-		}
-	}
-
-	// private ITableRidget table;
 	private IRidgetContainer detailsContainer;
-	/**
-	 * 
-	 */
-	// private final DairyLocationRepository locationRepository;
 	private IComboRidget routeCombo;
 	private ITextRidget textAddress;
 	private ITextRidget textName;
@@ -98,25 +70,8 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	@Override
 	public DairyLocation createWorkingCopy() {
 		final DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
+		EMFUtil.populate(dairyLocation);
 		workingCopy = dairyLocation;
-
-		final Route route = DairyFactory.eINSTANCE.createRoute();
-		dairyLocation.setRoute(route);
-		dairyLocation.getRoute().setName("");
-		dairyLocation.getFunctions();
-
-		final Location location = ModelFactory.eINSTANCE.createLocation();
-
-		final PostalLocation postalLocation = ModelFactory.eINSTANCE.createPostalLocation();
-
-		final DescriptiveLocation descriptiveLocation = ModelFactory.eINSTANCE.createDescriptiveLocation();
-
-		final MapLocation mapLocation = ModelFactory.eINSTANCE.createMapLocation();
-
-		location.setPostalLocation(postalLocation);
-		location.setDescriptiveLocation(descriptiveLocation);
-		location.setMapLocation(mapLocation);
-		dairyLocation.setLocation(location);
 		return workingCopy;
 	}
 
@@ -129,7 +84,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	@Override
 	public boolean isChanged(Object source, Object target) {
 		if ((source != null) && (target != null)) {
-
+			
 			final DairyLocation src = (DairyLocation) source;
 			final DairyLocation dst = (DairyLocation) target;
 			if (src.getId() == 0) {
@@ -137,14 +92,25 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 				// object;
 				return true;
 			}
-			if (!(EMFUtil.compare(src, dst)
-					&& EMFUtil.compare(src.getRoute(), dst.getRoute())
-					&& EMFUtil.compare(src.getLocation().getPostalLocation(), dst.getLocation().getPostalLocation())
-					&& EMFUtil.compare(src.getLocation().getDescriptiveLocation(), dst.getLocation()
-							.getDescriptiveLocation()) && EMFUtil.compare(src.getLocation().getMapLocation(), dst
-					.getLocation().getMapLocation()))) {
-				return true;
-			}
+			return !new EcoreUtil.EqualityHelper().equals(src, dst);
+//			// compare all attributes
+//			for (EAttribute attr : DairyPackage.Literals.DAIRY_LOCATION.getEAllAttributes()) {
+//				Object srcAttr = src.eGet(attr);				
+//				if (srcAttr != null && !srcAttr.equals(dst.eGet(attr)))
+//					return true;
+//				else if (srcAttr == null && dst.eGet(attr) != null)
+//					return true;
+//			}
+//			return false;
+
+//			if (!(EMFUtil.compare(src, dst)
+//					&& EMFUtil.compare(src.getRoute(), dst.getRoute())
+//					&& EMFUtil.compare(src.getLocation().getPostalLocation(), dst.getLocation().getPostalLocation())
+//					&& EMFUtil.compare(src.getLocation().getDescriptiveLocation(), dst.getLocation()
+//							.getDescriptiveLocation()) && EMFUtil.compare(src.getLocation().getMapLocation(), dst
+//					.getLocation().getMapLocation()))) {
+//				return true;
+//			}
 		}
 
 		return false;
@@ -157,8 +123,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 				return "The name can't be empty!";
 			}
 			textName.requestFocus();
-			return "The name '" + textName.getText()
-					+ "' is already in use.\r\n\rPlease select a unique name for this new location.";
+			return "Error.";
 		} else if (!textAddress.revalidate()) {
 			textAddress.requestFocus();
 			return "You must specify an address for this location.";
@@ -327,14 +292,16 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void configureValidators(IRidgetContainer container) {
-		final DairyLocationNameValidator nameValidator = new DairyLocationNameValidator();
 		if (textName.getValidationRules().size() <= 0) {
-			textName.addValidationRule(nameValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+			final IValidator validator = new MinLength(5);
+			textName.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
+			textName.addValidationMessage("Location name must be 5 characters or more.", validator);
 		}
-		final AddressValidator addressValidator = new AddressValidator();
+		
 		if (textAddress.getValidationRules().size() <= 0) {
+			final IValidator addressValidator = new MinLength(5);
 			textAddress.addValidationRule(addressValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-			textAddress.addValidationMessage("required", addressValidator);
+			textAddress.addValidationMessage("Address must be 5 characters or more.", addressValidator);
 		}
 	}
 }

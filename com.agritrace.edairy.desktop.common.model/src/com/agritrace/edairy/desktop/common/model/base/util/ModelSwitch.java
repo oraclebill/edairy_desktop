@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.util;
 
+import com.agritrace.edairy.desktop.common.model.base.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

@@ -155,7 +155,8 @@ public class MasterDetailsRidget extends AbstractMasterDetailsRidget implements 
 				}
 			}
 			oldIndex = table.getSelectionIndex();
-			handleSelectionChange(e.item.getData());
+			handleSelectionChange(e.item != null ? e.item.getData() : null);
+//			handleSelectionChange(e.item.getData());
 		}
 
 		void clearSavedSelection() {

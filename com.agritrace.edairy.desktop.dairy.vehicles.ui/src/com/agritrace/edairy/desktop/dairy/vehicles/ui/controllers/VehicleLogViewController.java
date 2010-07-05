@@ -5,6 +5,8 @@ import java.util.List;
 import org.eclipse.core.databinding.conversion.StringToNumberConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -79,8 +81,8 @@ public class VehicleLogViewController extends SubModuleController {
 		}
 
 		@Override
-		public boolean isChanged(Object source, Object target) {
-			return true;
+		public boolean isChanged(Object source, Object target) {			
+			return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
 		}
 
 		@Override
@@ -88,17 +90,6 @@ public class VehicleLogViewController extends SubModuleController {
 			vehicleRepository.save(changedItem);
 		}
 
-		@Override
-		public void itemCreated(Object newItem) {
-			// TODO Auto-generated method stub
-			super.itemCreated(newItem);
-		}
-
-		@Override
-		public void itemRemoved(Object oldItem) {
-			// TODO Auto-generated method stub
-			super.itemRemoved(oldItem);
-		}
 
 		protected void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
 			// Asset Info

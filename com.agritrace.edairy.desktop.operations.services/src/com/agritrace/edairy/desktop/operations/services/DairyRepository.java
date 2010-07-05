@@ -299,8 +299,9 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public void addBranchLocation(DairyLocation changedDairyLocation) {
 		localDairy.getBranchLocations().add(changedDairyLocation);	
-		PersistenceManager.getDefault().getSession().persist(changedDairyLocation);
-		PersistenceManager.getDefault().getSession().flush();
+		dairyRepository.update(localDairy);
+//		PersistenceManager.getDefault().getSession().persist(changedDairyLocation);
+//		PersistenceManager.getDefault().getSession().flush();
 	}
 
 	@Override

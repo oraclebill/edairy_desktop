@@ -341,7 +341,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtESTABLISHED_DATE.updateFromModel();
 		txtNSSF_NUMBER.updateFromModel();
 		txtMEMBER_COUNT.updateFromModel();
-		txtPROFILE_IMAGE.updateFromModel();
+//		txtPROFILE_IMAGE.updateFromModel();
 		txtPUBLIC_DESCRIPTION.updateFromModel();
 
 		// registration panel

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="edairy_desktop_lib">
+<locations>
+<location path="/Users/oraclebill/Development/Projects/edairy_desktop_lib" type="Directory"/>
+<location path="/Users/oraclebill/Development/Applications/eclipse/SDKs/eclipse-3.6-delta-pack/eclipse" type="Directory"/>
+</locations>
+</target>

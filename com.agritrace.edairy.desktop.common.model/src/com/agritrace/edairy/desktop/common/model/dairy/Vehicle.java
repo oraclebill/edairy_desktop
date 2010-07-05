@@ -69,6 +69,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Registration Number</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Registration Number</em>' attribute isn't clear,
@@ -78,7 +79,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Registration Number</em>' attribute.
 	 * @see #setRegistrationNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_RegistrationNumber()
-	 * @model required="true"
+	 * @model default=" " required="true"
 	 * @generated
 	 */
 	String getRegistrationNumber();
@@ -95,6 +96,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
@@ -104,7 +106,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_Type()
-	 * @model required="true"
+	 * @model default=" " required="true"
 	 * @generated
 	 */
 	String getType();
@@ -121,6 +123,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Make</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Make</em>' attribute isn't clear,
@@ -130,7 +133,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Make</em>' attribute.
 	 * @see #setMake(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_Make()
-	 * @model required="true"
+	 * @model default=" " required="true"
 	 * @generated
 	 */
 	String getMake();
@@ -147,6 +150,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Model</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model</em>' attribute isn't clear,
@@ -156,7 +160,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Model</em>' attribute.
 	 * @see #setModel(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_Model()
-	 * @model
+	 * @model default=" "
 	 * @generated
 	 */
 	String getModel();
@@ -173,6 +177,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Engine Number</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Engine Number</em>' attribute isn't clear,
@@ -182,7 +187,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Engine Number</em>' attribute.
 	 * @see #setEngineNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_EngineNumber()
-	 * @model required="true"
+	 * @model default=" " required="true"
 	 * @generated
 	 */
 	String getEngineNumber();
@@ -199,6 +204,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Chassis Number</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Chassis Number</em>' attribute isn't clear,
@@ -208,7 +214,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Chassis Number</em>' attribute.
 	 * @see #setChassisNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_ChassisNumber()
-	 * @model required="true"
+	 * @model default=" " required="true"
 	 * @generated
 	 */
 	String getChassisNumber();
@@ -225,6 +231,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Log Book Number</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Log Book Number</em>' attribute isn't clear,
@@ -234,7 +241,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Log Book Number</em>' attribute.
 	 * @see #setLogBookNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_LogBookNumber()
-	 * @model required="true"
+	 * @model default=" " required="true"
 	 * @generated
 	 */
 	String getLogBookNumber();
@@ -251,6 +258,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Insurance Policy Number</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Insurance Policy Number</em>' attribute isn't clear,
@@ -260,7 +268,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Insurance Policy Number</em>' attribute.
 	 * @see #setInsurancePolicyNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_InsurancePolicyNumber()
-	 * @model
+	 * @model default=" "
 	 * @generated
 	 */
 	String getInsurancePolicyNumber();
@@ -303,6 +311,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Dominant Colour</b></em>' attribute.
+	 * The default value is <code>" "</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dominant Colour</em>' attribute isn't clear,
@@ -312,7 +321,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Dominant Colour</em>' attribute.
 	 * @see #setDominantColour(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_DominantColour()
-	 * @model
+	 * @model default=" "
 	 * @generated
 	 */
 	String getDominantColour();
@@ -329,6 +338,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Capacity In Tonnes</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Capacity In Tonnes</em>' attribute isn't clear,
@@ -338,7 +348,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Capacity In Tonnes</em>' attribute.
 	 * @see #setCapacityInTonnes(double)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_CapacityInTonnes()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	double getCapacityInTonnes();
@@ -355,6 +365,7 @@ public interface Vehicle extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Year</b></em>' attribute.
+	 * The default value is <code>"2005"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Year</em>' attribute isn't clear,
@@ -364,7 +375,7 @@ public interface Vehicle extends EObject {
 	 * @return the value of the '<em>Year</em>' attribute.
 	 * @see #setYear(Integer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_Year()
-	 * @model
+	 * @model default="2005"
 	 * @generated
 	 */
 	Integer getYear();
