@@ -3,6 +3,8 @@ package com.agritrace.edairy.desktop.member.services.member;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
@@ -21,6 +23,7 @@ public class MemberRepository implements IMemberRepository {
 			return AccountTransaction.class;
 		}
 	};
+
 
 	/**
 	 * No arg constructor for normal case will initialize using static
@@ -92,6 +95,8 @@ public class MemberRepository implements IMemberRepository {
 
 	@Override
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
+		Account memberAccount = AccountFactory.eINSTANCE.createAccount();
+		memberAccount.setMember(newEntity);
 		driver.saveNew(newEntity);
 	}
 

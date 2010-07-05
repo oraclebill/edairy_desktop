@@ -128,13 +128,6 @@ public class DairyProfileViewController extends SubModuleController {
 	}
 
 	@Override
-	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
-		// TODO Auto-generated method stub
-		super.addDefaultAction(focusRidget, action);
-		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action);
-	}
-
-	@Override
 	public void afterBind() {
 		super.afterBind();
 		initBindings();
@@ -144,7 +137,6 @@ public class DairyProfileViewController extends SubModuleController {
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
-		System.err.println(">>>>>>>>>>>>>>>>>> in configureRidgets: ");
 
 		getWindowRidget().setTitle("Dairy Profile");
 
@@ -153,6 +145,30 @@ public class DairyProfileViewController extends SubModuleController {
 		communicationGroup = new CommunicationGroupController(this);
 
 		configureButtonsPanel();
+	}
+
+	/**
+	 * Get member count for UI.
+	 * 
+	 * TODO: for now, we fake it..
+	 * 
+	 * @return
+	 */
+	public int getMemberCount() {
+		return memberCount;
+	}
+	
+	public void setMemberCount(int val) {
+		memberCount = val;
+	}
+
+
+/**
+	@Override
+	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
+		// TODO Auto-generated method stub
+		super.addDefaultAction(focusRidget, action);
+		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action);
 	}
 
 	@Override
@@ -169,17 +185,6 @@ public class DairyProfileViewController extends SubModuleController {
 		System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: ");
 
 		return super.getInitialFocus();
-	}
-
-	/**
-	 * Get member count for UI.
-	 * 
-	 * TODO: for now, we fake it..
-	 * 
-	 * @return
-	 */
-	public int getMemberCount() {
-		return memberCount;
 	}
 
 	@Override
@@ -206,10 +211,6 @@ public class DairyProfileViewController extends SubModuleController {
 
 	}
 
-	public void setMemberCount(int val) {
-		memberCount = val;
-	}
-
 	@Override
 	public void setNavigationNode(ISubModuleNode navigationNode) {
 		// TODO Auto-generated method stub
@@ -233,7 +234,17 @@ public class DairyProfileViewController extends SubModuleController {
 		System.err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: ");
 
 	}
+	
+	
+	@Override
+	protected void updateIcon(IWindowRidget windowRidget) {
+		// TODO Auto-generated method stub
+		super.updateIcon(windowRidget);
+		System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " + windowRidget);
 
+	}
+
+*/
 	/**
 	 * Configure teh button panel.
 	 * 
@@ -344,13 +355,5 @@ public class DairyProfileViewController extends SubModuleController {
 
 		locationController.updateBinding();
 		communicationGroup.updateBinding();
-	}
-
-	@Override
-	protected void updateIcon(IWindowRidget windowRidget) {
-		// TODO Auto-generated method stub
-		super.updateIcon(windowRidget);
-		System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " + windowRidget);
-
 	}
 }

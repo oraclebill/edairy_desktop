@@ -83,7 +83,7 @@ public class EMFUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void copy(EObject source, EObject target, int depth) {
-		System.out.println("Source:" + source.eClass().getName() + " Target:" + target.eClass().getName());
+//		System.out.println("Source:" + source.eClass().getName() + " Target:" + target.eClass().getName());
 		if ((source == null) || (target == null)) {
 			return;
 		}

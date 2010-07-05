@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -14,9 +15,11 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -273,7 +276,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
-			System.err.println("------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
+			log(LogService.LOG_INFO, "------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
 			createEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			;
@@ -328,4 +331,9 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	 * Reset conditions
 	 */
 	abstract protected void resetFilterConditions();
+	
+	private void log(int level, String message) {
+		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
+		logger.log(level, message);
+	}
 }
