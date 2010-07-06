@@ -68,7 +68,9 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case AccountPackage.ACCOUNT: return createAccount();
+			case AccountPackage.TRANSACTION: return createTransaction();
 			case AccountPackage.ACCOUNT_TRANSACTION: return createAccountTransaction();
+			case AccountPackage.ADJUSTMENT_TRANSACTION: return createAdjustmentTransaction();
 			case AccountPackage.BALANCE_POINT: return createBalancePoint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -128,9 +130,29 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Transaction createTransaction() {
+		TransactionImpl transaction = new TransactionImpl();
+		return transaction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AccountTransaction createAccountTransaction() {
 		AccountTransactionImpl accountTransaction = new AccountTransactionImpl();
 		return accountTransaction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdjustmentTransaction createAdjustmentTransaction() {
+		AdjustmentTransactionImpl adjustmentTransaction = new AdjustmentTransactionImpl();
+		return adjustmentTransaction;
 	}
 
 	/**

@@ -105,7 +105,7 @@ public class TransactionEntryPanelController {
 				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
 		final IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
 				TransactionSource.class);
-		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source");
+		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source"); 
 		sourceRidget.bindToModel(optionValues, selectionValue);
 		sourceRidget.setMandatory(true);
 		sourceRidget.updateFromModel();
@@ -156,26 +156,26 @@ public class TransactionEntryPanelController {
 		// AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 
 		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DATE,
-				AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE);
+				AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 
 		// mapper.addMapping(FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO,
 		// Observables.staticObservableList(dairyRepo.getLocalDairyLocations()),
-		// AccountPackage.Literals.ACCOUNT_TRANSACTION__RELATED_LOCATION);
+		// AccountPackage.Literals.TRANSACTION__RELATED_LOCATION);
 
 		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
 
 		// addMapping(FinanceBindingConstants.ID_MEMBER_NAME_TEXT,
-		// AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT,
+		// AccountPackage.Literals.TRANSACTION__ACCOUNT,
 		// AccountPackage.Literals.ACCOUNT__MEMBER,
 		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
 		// ModelPackage.Literals.PERSON__FAMILY_NAME);
 
 		// addMapping(FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT,
-		// AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
+		// AccountPackage.Literals.TRANSACTION__AMOUNT);
 
 		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT,
-				AccountPackage.Literals.ACCOUNT_TRANSACTION__DESCRIPTION);
+				AccountPackage.Literals.TRANSACTION__DESCRIPTION);
 
 		mapper.addMapping(FinanceBindingConstants.ID_CHECK_NUMBER_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__CHECK_NUMBER);

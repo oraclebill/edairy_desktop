@@ -97,7 +97,7 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 								startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
 
 						final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
-								AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE, startDateCondition);
+								AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE, startDateCondition);
 						condtions.add(startDateAttributeCondition);
 					}
 				}
@@ -109,7 +109,7 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 								endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
 
 						final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
-								AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE, endDateCondition);
+								AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE, endDateCondition);
 						condtions.add(endDateAttributeCondition);
 					}
 				}

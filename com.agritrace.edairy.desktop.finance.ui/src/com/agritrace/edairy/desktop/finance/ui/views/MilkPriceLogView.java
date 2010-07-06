@@ -10,7 +10,7 @@ import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceLogFilterPanel;
 
 public class MilkPriceLogView extends AbstractDirectoryView {
 
-	public static final String ID = "milk.price.log"; //$NON-NLS-1$
+	public static final String ID = "milk.price.journal"; //$NON-NLS-1$
 
 	public MilkPriceLogView() {
 	}

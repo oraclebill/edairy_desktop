@@ -174,8 +174,8 @@ public interface Account extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Transactions</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction}.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}'.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transactions</em>' reference list isn't clear,
@@ -184,11 +184,11 @@ public interface Account extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transactions</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Transactions()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount
 	 * @model opposite="account" containment="true"
 	 * @generated
 	 */
-	EList<AccountTransaction> getTransactions();
+	EList<Transaction> getTransactions();
 
 	/**
 	 * Returns the value of the '<em><b>Balances</b></em>' containment reference list.

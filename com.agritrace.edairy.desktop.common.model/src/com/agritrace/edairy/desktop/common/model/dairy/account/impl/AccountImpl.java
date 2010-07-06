@@ -28,6 +28,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 
 /**
  * <!-- begin-user-doc -->
@@ -137,7 +138,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AccountTransaction> transactions;
+	protected EList<Transaction> transactions;
 
 	/**
 	 * The cached value of the '{@link #getBalances() <em>Balances</em>}' containment reference list.
@@ -298,9 +299,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AccountTransaction> getTransactions() {
+	public EList<Transaction> getTransactions() {
 		if (transactions == null) {
-			transactions = new EObjectContainmentWithInverseEList<AccountTransaction>(AccountTransaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.ACCOUNT_TRANSACTION__ACCOUNT);
+			transactions = new EObjectContainmentWithInverseEList<Transaction>(Transaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.TRANSACTION__ACCOUNT);
 		}
 		return transactions;
 	}
@@ -420,7 +421,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return;
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
 				getTransactions().clear();
-				getTransactions().addAll((Collection<? extends AccountTransaction>)newValue);
+				getTransactions().addAll((Collection<? extends Transaction>)newValue);
 				return;
 			case AccountPackage.ACCOUNT__BALANCES:
 				getBalances().clear();

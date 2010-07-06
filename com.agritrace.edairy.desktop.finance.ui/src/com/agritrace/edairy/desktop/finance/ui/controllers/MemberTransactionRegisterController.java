@@ -120,11 +120,11 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 		setRepository(memberRepo.getTransactionRepository());
 
-		this.addTableColumn("ID", AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_ID);
-		this.addTableColumn("Date", AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE);
+		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
+		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		this.addTableColumn("Source", AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 		this.addTableColumn("Ref. Num.", AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
-		this.addTableColumn("Account ID", AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT, new ColumnFormatter() {
+		this.addTableColumn("Account ID", AccountPackage.Literals.TRANSACTION__ACCOUNT, new ColumnFormatter() {
 
 			@Override
 			public String getText(Object element) {
@@ -141,7 +141,7 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 			}
 
 		});
-		this.addTableColumn("Amount", AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT);
+		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
 	}
 
 	@Override

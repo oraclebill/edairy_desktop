@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.finance.ui.controls.MemberTransactionFilterP
 
 public class MemberTransactionRegisterView extends AbstractDirectoryView {
 
-	public final static String ID = "dairy.transactions.register";
+	public final static String ID = "member.account.transaction.journal";
 
 	public MemberTransactionRegisterView() {
 	}

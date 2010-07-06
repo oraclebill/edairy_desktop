@@ -143,32 +143,14 @@ public interface AccountPackage extends EPackage {
 	int ACCOUNT_FEATURE_COUNT = 7;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl <em>Transaction</em>}' class.
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.TransactionImpl <em>Transaction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAccountTransaction()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.TransactionImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getTransaction()
 	 * @generated
 	 */
-	int ACCOUNT_TRANSACTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Transaction Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_TRANSACTION__TRANSACTION_ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_TRANSACTION__REFERENCE_NUMBER = 1;
+	int TRANSACTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' container reference.
@@ -177,52 +159,16 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__ACCOUNT = 2;
+	int TRANSACTION__ACCOUNT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Transaction Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Transaction Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__TRANSACTION_TYPE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_TRANSACTION__SOURCE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Related Location</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_TRANSACTION__RELATED_LOCATION = 5;
-
-	/**
-	 * The feature id for the '<em><b>Amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_TRANSACTION__AMOUNT = 6;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCOUNT_TRANSACTION__DESCRIPTION = 7;
+	int TRANSACTION__TRANSACTION_ID = 1;
 
 	/**
 	 * The feature id for the '<em><b>Transaction Date</b></em>' attribute.
@@ -231,25 +177,34 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__TRANSACTION_DATE = 8;
+	int TRANSACTION__TRANSACTION_DATE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Check Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Transaction Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__CHECK_NUMBER = 9;
+	int TRANSACTION__TRANSACTION_TYPE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Signed By</b></em>' attribute.
+	 * The feature id for the '<em><b>Amount</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION__SIGNED_BY = 10;
+	int TRANSACTION__AMOUNT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION__DESCRIPTION = 5;
 
 	/**
 	 * The number of structural features of the '<em>Transaction</em>' class.
@@ -258,7 +213,207 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_TRANSACTION_FEATURE_COUNT = 11;
+	int TRANSACTION_FEATURE_COUNT = 6;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl <em>Transaction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAccountTransaction()
+	 * @generated
+	 */
+	int ACCOUNT_TRANSACTION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__ACCOUNT = TRANSACTION__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__TRANSACTION_ID = TRANSACTION__TRANSACTION_ID;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__TRANSACTION_DATE = TRANSACTION__TRANSACTION_DATE;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__TRANSACTION_TYPE = TRANSACTION__TRANSACTION_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Amount</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__AMOUNT = TRANSACTION__AMOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__DESCRIPTION = TRANSACTION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__REFERENCE_NUMBER = TRANSACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__SOURCE = TRANSACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Related Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__RELATED_LOCATION = TRANSACTION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Check Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__CHECK_NUMBER = TRANSACTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Signed By</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION__SIGNED_BY = TRANSACTION_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Transaction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT_TRANSACTION_FEATURE_COUNT = TRANSACTION_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AdjustmentTransactionImpl <em>Adjustment Transaction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AdjustmentTransactionImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAdjustmentTransaction()
+	 * @generated
+	 */
+	int ADJUSTMENT_TRANSACTION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__ACCOUNT = TRANSACTION__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__TRANSACTION_ID = TRANSACTION__TRANSACTION_ID;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__TRANSACTION_DATE = TRANSACTION__TRANSACTION_DATE;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__TRANSACTION_TYPE = TRANSACTION__TRANSACTION_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Amount</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__AMOUNT = TRANSACTION__AMOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__DESCRIPTION = TRANSACTION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Signed Off By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY = TRANSACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Adjustment Transaction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADJUSTMENT_TRANSACTION_FEATURE_COUNT = TRANSACTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl <em>Balance Point</em>}' class.
@@ -268,7 +423,7 @@ public interface AccountPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getBalancePoint()
 	 * @generated
 	 */
-	int BALANCE_POINT = 2;
+	int BALANCE_POINT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Account Balance Id</b></em>' attribute.
@@ -332,7 +487,7 @@ public interface AccountPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getTransactionType()
 	 * @generated
 	 */
-	int TRANSACTION_TYPE = 3;
+	int TRANSACTION_TYPE = 5;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource <em>Transaction Source</em>}' enum.
@@ -342,7 +497,7 @@ public interface AccountPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getTransactionSource()
 	 * @generated
 	 */
-	int TRANSACTION_SOURCE = 4;
+	int TRANSACTION_SOURCE = 6;
 
 
 	/**
@@ -353,7 +508,7 @@ public interface AccountPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAccountStatus()
 	 * @generated
 	 */
-	int ACCOUNT_STATUS = 5;
+	int ACCOUNT_STATUS = 7;
 
 
 	/**
@@ -444,6 +599,82 @@ public interface AccountPackage extends EPackage {
 	EReference getAccount_Balances();
 
 	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction <em>Transaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Transaction</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction
+	 * @generated
+	 */
+	EClass getTransaction();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Account</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount()
+	 * @see #getTransaction()
+	 * @generated
+	 */
+	EReference getTransaction_Account();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getTransactionId <em>Transaction Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transaction Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getTransactionId()
+	 * @see #getTransaction()
+	 * @generated
+	 */
+	EAttribute getTransaction_TransactionId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getTransactionDate <em>Transaction Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transaction Date</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getTransactionDate()
+	 * @see #getTransaction()
+	 * @generated
+	 */
+	EAttribute getTransaction_TransactionDate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getTransactionType <em>Transaction Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transaction Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getTransactionType()
+	 * @see #getTransaction()
+	 * @generated
+	 */
+	EAttribute getTransaction_TransactionType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAmount <em>Amount</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Amount</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAmount()
+	 * @see #getTransaction()
+	 * @generated
+	 */
+	EAttribute getTransaction_Amount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getDescription()
+	 * @see #getTransaction()
+	 * @generated
+	 */
+	EAttribute getTransaction_Description();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction <em>Transaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -452,17 +683,6 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAccountTransaction();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionId <em>Transaction Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Transaction Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionId()
-	 * @see #getAccountTransaction()
-	 * @generated
-	 */
-	EAttribute getAccountTransaction_TransactionId();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getReferenceNumber <em>Reference Number</em>}'.
@@ -474,28 +694,6 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAccountTransaction_ReferenceNumber();
-
-	/**
-	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount <em>Account</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Account</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAccount()
-	 * @see #getAccountTransaction()
-	 * @generated
-	 */
-	EReference getAccountTransaction_Account();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionType <em>Transaction Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Transaction Type</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionType()
-	 * @see #getAccountTransaction()
-	 * @generated
-	 */
-	EAttribute getAccountTransaction_TransactionType();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getSource <em>Source</em>}'.
@@ -520,39 +718,6 @@ public interface AccountPackage extends EPackage {
 	EReference getAccountTransaction_RelatedLocation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAmount <em>Amount</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Amount</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getAmount()
-	 * @see #getAccountTransaction()
-	 * @generated
-	 */
-	EAttribute getAccountTransaction_Amount();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getDescription()
-	 * @see #getAccountTransaction()
-	 * @generated
-	 */
-	EAttribute getAccountTransaction_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionDate <em>Transaction Date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Transaction Date</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getTransactionDate()
-	 * @see #getAccountTransaction()
-	 * @generated
-	 */
-	EAttribute getAccountTransaction_TransactionDate();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction#getCheckNumber <em>Check Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -573,6 +738,27 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAccountTransaction_SignedBy();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction <em>Adjustment Transaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Adjustment Transaction</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction
+	 * @generated
+	 */
+	EClass getAdjustmentTransaction();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction#getSignedOffBy <em>Signed Off By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Signed Off By</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction#getSignedOffBy()
+	 * @see #getAdjustmentTransaction()
+	 * @generated
+	 */
+	EReference getAdjustmentTransaction_SignedOffBy();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint <em>Balance Point</em>}'.
@@ -758,6 +944,64 @@ public interface AccountPackage extends EPackage {
 		EReference ACCOUNT__BALANCES = eINSTANCE.getAccount_Balances();
 
 		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.TransactionImpl <em>Transaction</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.TransactionImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getTransaction()
+		 * @generated
+		 */
+		EClass TRANSACTION = eINSTANCE.getTransaction();
+
+		/**
+		 * The meta object literal for the '<em><b>Account</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSACTION__ACCOUNT = eINSTANCE.getTransaction_Account();
+
+		/**
+		 * The meta object literal for the '<em><b>Transaction Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION__TRANSACTION_ID = eINSTANCE.getTransaction_TransactionId();
+
+		/**
+		 * The meta object literal for the '<em><b>Transaction Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION__TRANSACTION_DATE = eINSTANCE.getTransaction_TransactionDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Transaction Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION__TRANSACTION_TYPE = eINSTANCE.getTransaction_TransactionType();
+
+		/**
+		 * The meta object literal for the '<em><b>Amount</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION__AMOUNT = eINSTANCE.getTransaction_Amount();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSACTION__DESCRIPTION = eINSTANCE.getTransaction_Description();
+
+		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl <em>Transaction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -768,36 +1012,12 @@ public interface AccountPackage extends EPackage {
 		EClass ACCOUNT_TRANSACTION = eINSTANCE.getAccountTransaction();
 
 		/**
-		 * The meta object literal for the '<em><b>Transaction Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACCOUNT_TRANSACTION__TRANSACTION_ID = eINSTANCE.getAccountTransaction_TransactionId();
-
-		/**
 		 * The meta object literal for the '<em><b>Reference Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute ACCOUNT_TRANSACTION__REFERENCE_NUMBER = eINSTANCE.getAccountTransaction_ReferenceNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Account</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACCOUNT_TRANSACTION__ACCOUNT = eINSTANCE.getAccountTransaction_Account();
-
-		/**
-		 * The meta object literal for the '<em><b>Transaction Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACCOUNT_TRANSACTION__TRANSACTION_TYPE = eINSTANCE.getAccountTransaction_TransactionType();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
@@ -816,30 +1036,6 @@ public interface AccountPackage extends EPackage {
 		EReference ACCOUNT_TRANSACTION__RELATED_LOCATION = eINSTANCE.getAccountTransaction_RelatedLocation();
 
 		/**
-		 * The meta object literal for the '<em><b>Amount</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACCOUNT_TRANSACTION__AMOUNT = eINSTANCE.getAccountTransaction_Amount();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACCOUNT_TRANSACTION__DESCRIPTION = eINSTANCE.getAccountTransaction_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Transaction Date</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACCOUNT_TRANSACTION__TRANSACTION_DATE = eINSTANCE.getAccountTransaction_TransactionDate();
-
-		/**
 		 * The meta object literal for the '<em><b>Check Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -854,6 +1050,24 @@ public interface AccountPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACCOUNT_TRANSACTION__SIGNED_BY = eINSTANCE.getAccountTransaction_SignedBy();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AdjustmentTransactionImpl <em>Adjustment Transaction</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AdjustmentTransactionImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl#getAdjustmentTransaction()
+		 * @generated
+		 */
+		EClass ADJUSTMENT_TRANSACTION = eINSTANCE.getAdjustmentTransaction();
+
+		/**
+		 * The meta object literal for the '<em><b>Signed Off By</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY = eINSTANCE.getAdjustmentTransaction_SignedOffBy();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl <em>Balance Point</em>}' class.

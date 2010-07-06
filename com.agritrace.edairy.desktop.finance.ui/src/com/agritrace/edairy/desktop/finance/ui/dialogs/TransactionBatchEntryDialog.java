@@ -33,12 +33,12 @@ public class TransactionBatchEntryDialog extends BaseDialogView {
 
 			final String[] headers = new String[] { "ID", "Source", "Date", "Reference #", "Member ", "Amount" };
 			final String[] properties = new String[] {
-					AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_ID.getName(),
+					AccountPackage.Literals.TRANSACTION__TRANSACTION_ID.getName(),
 					AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE.getName(),
-					AccountPackage.Literals.ACCOUNT_TRANSACTION__TRANSACTION_DATE.getName(),
+					AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName(),
 					AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER.getName(),
-					AccountPackage.Literals.ACCOUNT_TRANSACTION__ACCOUNT.getName(),
-					AccountPackage.Literals.ACCOUNT_TRANSACTION__AMOUNT.getName() };
+					AccountPackage.Literals.TRANSACTION__ACCOUNT.getName(),
+					AccountPackage.Literals.TRANSACTION__AMOUNT.getName() };
 
 			final List<AccountTransaction> transactions = (List<AccountTransaction>) getContext("tranaction-list");
 			final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
