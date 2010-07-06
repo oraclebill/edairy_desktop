@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
@@ -59,5 +60,7 @@ public interface IDairyRepository {
 	void addBranchLocation(DairyLocation changedDairyLocation);
 
 	void deleteBranchLocation(DairyLocation oldItem);
+
+	MilkPrice getCurrentMilkPrice();
 
 }

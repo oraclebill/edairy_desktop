@@ -45,14 +45,6 @@ public class CalendarSelectionDialog extends AbstractDialogView {
 		return buttonComposite;
 	}
 
-	//
-	// @Override
-	// public boolean close() {
-	// final boolean isClose = super.close();
-	// this.setReturnCode(CANCEL);
-	// return isClose;
-	// }
-
 	@Override
 	protected Control buildView(Composite parent) {
 		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -65,7 +57,6 @@ public class CalendarSelectionDialog extends AbstractDialogView {
 
 	@Override
 	protected AbstractWindowController createController() {
-		// TODO Auto-generated method stub
 		return new CalendarSelectionDialogController();
 	}
 

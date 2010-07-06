@@ -95,6 +95,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.DAIRY_CONTAINER: return createDairyContainer();
 			case DairyPackage.SUPPLIER: return createSupplier();
 			case DairyPackage.CUSTOMER: return createCustomer();
+			case DairyPackage.MILK_PRICE: return createMilkPrice();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -116,6 +117,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createVendorStatusFromString(eDataType, initialValue);
 			case DairyPackage.DAIRY_FUNCTION:
 				return createDairyFunctionFromString(eDataType, initialValue);
+			case DairyPackage.MILK_PRICE_PERIOD:
+				return createMilkPricePeriodFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -137,6 +140,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertVendorStatusToString(eDataType, instanceValue);
 			case DairyPackage.DAIRY_FUNCTION:
 				return convertDairyFunctionToString(eDataType, instanceValue);
+			case DairyPackage.MILK_PRICE_PERIOD:
+				return convertMilkPricePeriodToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -297,6 +302,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public MilkPrice createMilkPrice() {
+		MilkPriceImpl milkPrice = new MilkPriceImpl();
+		return milkPrice;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MembershipStatus createMembershipStatusFromString(EDataType eDataType, String initialValue) {
 		MembershipStatus result = MembershipStatus.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -369,6 +384,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertDairyFunctionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MilkPricePeriod createMilkPricePeriodFromString(EDataType eDataType, String initialValue) {
+		MilkPricePeriod result = MilkPricePeriod.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMilkPricePeriodToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

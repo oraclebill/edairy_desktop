@@ -38,3 +38,4 @@ Export-Package: com.agritrace.edairy.desktop.common.ui,
  com.agritrace.edairy.desktop.common.ui.validators,
  com.agritrace.edairy.desktop.common.ui.views,
  com.swtdesigner;uses:="org.eclipse.jface.resource,org.eclipse.swt.graphics"
+

@@ -1,11 +1,13 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.hibernate.Hibernate;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -17,6 +19,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
@@ -113,6 +116,7 @@ public class DairyRepository implements IDairyRepository {
 	};
 
 	private final Dairy localDairy;
+
 
 	private DairyRepository() {
 		Dairy myDairy = dairyRepository.findByKey(1L);
@@ -310,6 +314,20 @@ public class DairyRepository implements IDairyRepository {
 		PersistenceManager.getDefault().getSession().delete(oldItem);
 		PersistenceManager.getDefault().getSession().flush();
 
+	}
+
+	@Override
+	public MilkPrice getCurrentMilkPrice() {
+		MilkPrice currentPrice;
+		Session session = PersistenceManager.getDefault().getSession();
+		Date maxDate = (Date)session.createQuery("select max(priceDate) from MilkPrice").uniqueResult();
+		if (maxDate != null) {
+			currentPrice = (MilkPrice)session.createQuery("select from MilkPrice where priceDate = ?").setDate(0, maxDate).uniqueResult();
+		}
+		else {
+			currentPrice = null;
+		}
+		return currentPrice;
 	}
 
 }

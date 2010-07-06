@@ -161,6 +161,15 @@ public interface DairyFactory extends EFactory {
 	Customer createCustomer();
 
 	/**
+	 * Returns a new object of class '<em>Milk Price</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Milk Price</em>'.
+	 * @generated
+	 */
+	MilkPrice createMilkPrice();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

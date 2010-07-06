@@ -29,6 +29,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -59,6 +60,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCustomers <em>Customers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getPriceHistory <em>Price History</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getManagerName <em>Manager Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getEstablishedDate <em>Established Date</em>}</li>
  * </ul>
@@ -286,6 +288,16 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected EList<DairyContainer> dairyBins;
+
+	/**
+	 * The cached value of the '{@link #getPriceHistory() <em>Price History</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriceHistory()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MilkPrice> priceHistory;
 
 	/**
 	 * The default value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
@@ -597,6 +609,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<MilkPrice> getPriceHistory() {
+		if (priceHistory == null) {
+			priceHistory = new EObjectContainmentEList<MilkPrice>(MilkPrice.class, this, DairyPackage.DAIRY__PRICE_HISTORY);
+		}
+		return priceHistory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getManagerName() {
 		return managerName;
 	}
@@ -686,6 +710,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return ((InternalEList<?>)getAnimalHealthRequests()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return ((InternalEList<?>)getDairyBins()).basicRemove(otherEnd, msgs);
+			case DairyPackage.DAIRY__PRICE_HISTORY:
+				return ((InternalEList<?>)getPriceHistory()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -730,6 +756,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getAnimalHealthRequests();
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return getDairyBins();
+			case DairyPackage.DAIRY__PRICE_HISTORY:
+				return getPriceHistory();
 			case DairyPackage.DAIRY__MANAGER_NAME:
 				return getManagerName();
 			case DairyPackage.DAIRY__ESTABLISHED_DATE:
@@ -805,6 +833,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				getDairyBins().clear();
 				getDairyBins().addAll((Collection<? extends DairyContainer>)newValue);
 				return;
+			case DairyPackage.DAIRY__PRICE_HISTORY:
+				getPriceHistory().clear();
+				getPriceHistory().addAll((Collection<? extends MilkPrice>)newValue);
+				return;
 			case DairyPackage.DAIRY__MANAGER_NAME:
 				setManagerName((String)newValue);
 				return;
@@ -871,6 +903,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				getDairyBins().clear();
 				return;
+			case DairyPackage.DAIRY__PRICE_HISTORY:
+				getPriceHistory().clear();
+				return;
 			case DairyPackage.DAIRY__MANAGER_NAME:
 				setManagerName(MANAGER_NAME_EDEFAULT);
 				return;
@@ -921,6 +956,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return animalHealthRequests != null && !animalHealthRequests.isEmpty();
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				return dairyBins != null && !dairyBins.isEmpty();
+			case DairyPackage.DAIRY__PRICE_HISTORY:
+				return priceHistory != null && !priceHistory.isEmpty();
 			case DairyPackage.DAIRY__MANAGER_NAME:
 				return MANAGER_NAME_EDEFAULT == null ? managerName != null : !MANAGER_NAME_EDEFAULT.equals(managerName);
 			case DairyPackage.DAIRY__ESTABLISHED_DATE:

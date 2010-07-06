@@ -11,6 +11,11 @@
             allowMultiple="true"
             name="Member Transaction Register">
       </view>
+      <view
+            class="com.agritrace.edairy.desktop.finance.ui.views.MilkLogView"
+            id="com.agritrace.edairy.desktop.finance.ui.views.MilkLogView"
+            name="New ViewPart">
+      </view>
    </extension>
    <extension
          point="org.eclipse.help.contexts">

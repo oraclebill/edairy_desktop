@@ -38,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCustomers <em>Customers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getPriceHistory <em>Price History</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}</li>
  * </ul>
@@ -365,6 +366,22 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	EList<DairyContainer> getDairyBins();
+
+	/**
+	 * Returns the value of the '<em><b>Price History</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Price History</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Price History</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_PriceHistory()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<MilkPrice> getPriceHistory();
 
 	/**
 	 * Returns the value of the '<em><b>Manager Name</b></em>' attribute.
