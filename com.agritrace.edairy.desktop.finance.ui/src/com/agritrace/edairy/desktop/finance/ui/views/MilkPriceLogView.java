@@ -1,6 +1,8 @@
 package com.agritrace.edairy.desktop.finance.ui.views;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -15,7 +17,9 @@ public class MilkPriceLogView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterPanel(Composite comp) {
-		new MilkPriceLogFilterPanel(comp, SWT.NONE);		
+		Composite control = new MilkPriceLogFilterPanel(comp, SWT.NONE);
+		comp.setLayout(new GridLayout());
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(control);
 	}
 
 }

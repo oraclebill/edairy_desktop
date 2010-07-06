@@ -280,7 +280,6 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			createEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			;
-			;
 		} else {
 			throw new IllegalStateException("Invalid response from dialog: " + returnCode);
 		}

@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.controllers;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,19 +27,23 @@ public class MilkPriceLogController extends BasicDirectoryController<MilkPrice> 
 		private Date startDate;
 		private Date endDate;
 
-		public FilterBean() {}
-		
+		public FilterBean() {
+		}
+
 		public Date getStartDate() {
 			return startDate;
 		}
+
 		public void setStartDate(Date startDate) {
 			Object oldValue = this.startDate;
 			this.startDate = startDate;
 			firePropertyChanged(START_DATE, oldValue, startDate);
 		}
+
 		public Date getEndDate() {
 			return endDate;
 		}
+
 		public void setEndDate(Date endDate) {
 			Object oldValue = this.endDate;
 			this.endDate = endDate;
@@ -49,41 +54,41 @@ public class MilkPriceLogController extends BasicDirectoryController<MilkPrice> 
 
 	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	private final FilterBean filterBean = new FilterBean();
-	private MilkPrice currentMilkPrice;
-	
-	public MilkPriceLogController() {
+	private IDateTimeRidget startDate;
+	private IDateTimeRidget endDate;
+
+	public MilkPriceLogController() {		
+		setEClass(DairyPackage.Literals.MILK_PRICE);
+		
 		addTableColumn("Period", DairyPackage.Literals.MILK_PRICE__PRICE_PERIOD);
 		addTableColumn("Date", DairyPackage.Literals.MILK_PRICE__PRICE_DATE);
 		addTableColumn("Price", DairyPackage.Literals.MILK_PRICE__VALUE);
-		addTableColumn("Entered By",
-				DairyPackage.Literals.MILK_PRICE__ENTERED_BY);
-		addTableColumn("Entry Date",
-				DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
+		addTableColumn("Entered By", DairyPackage.Literals.MILK_PRICE__ENTERED_BY);
+		addTableColumn("Entry Date", DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
 		// addTableColumn("Locked",
 		// DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
 	}
 
 	@Override
 	protected void configureFilterRidgets() {
-		
-		// configure 
-		ILabelRidget currentPriceLabel = getRidget(ILabelRidget.class,
-				MilkPriceLogConstants.ID_LBL_CURRENT_MILK_PRICE);
-		IDateTimeRidget startDate = getRidget(IDateTimeRidget.class,
-				MilkPriceLogConstants.ID_DATE_START);
-		IDateTimeRidget endDate = getRidget(IDateTimeRidget.class,
-				MilkPriceLogConstants.ID_DATE_END);
+
+		// configure
+		ILabelRidget currentPriceLabel = getRidget(ILabelRidget.class, MilkPriceLogConstants.ID_LBL_CURRENT_MILK_PRICE);
+		startDate = getRidget(IDateTimeRidget.class, MilkPriceLogConstants.ID_DATE_START);
+		endDate = getRidget(IDateTimeRidget.class, MilkPriceLogConstants.ID_DATE_END);
 
 		MilkPrice currentPrice = getCurrentPrice();
-		currentPriceLabel.setText(String.format(
-				MilkPriceLogConstants.CURRENT_PRICE_LABEL_FMT, currentPrice
-						.getPricePeriod().getName(), currentPrice
-						.getPriceDate(), currentPrice.getPriceDate()));
+		if (currentPrice != null) {
+			currentPriceLabel.setText(String.format(MilkPriceLogConstants.CURRENT_PRICE_LABEL_FMT, currentPrice
+					.getPricePeriod().getName(), currentPrice.getPriceDate(), currentPrice.getPriceDate()));
+		} else {
+			currentPriceLabel.setText(MilkPriceLogConstants.CURRENT_PRICE_DEFAULT);
+		}
 
 		// bind
 		startDate.bindToModel(BeansObservables.observeValue(filterBean, "startDate"));
 		endDate.bindToModel(BeansObservables.observeValue(filterBean, "endDate"));
-		
+
 		// update
 		updateAllRidgetsFromModel();
 	}
@@ -92,27 +97,35 @@ public class MilkPriceLogController extends BasicDirectoryController<MilkPrice> 
 	 * Gets the current milk price.
 	 * 
 	 * Note: (TODO) we may want to cache this...
+	 * 
 	 * @return
 	 */
 	private MilkPrice getCurrentPrice() {
-		return currentMilkPrice = dairyRepo.getCurrentMilkPrice();
+		return dairyRepo.getCurrentMilkPrice();
 	}
 
 	@Override
 	protected List<MilkPrice> getFilteredResult() {
-		return null;
+		return dairyRepo.getMilkPrices(filterBean.getStartDate(), filterBean.getEndDate());
 	}
 
 	@Override
 	protected RecordDialog<MilkPrice, ?> getRecordDialog(Shell shell) {
-		// TODO Auto-generated method stub
-		return null;
+		return new MilkPriceEditDialog(shell);
 	}
 
+	/**
+	 * Reset filter dates to show the last year of entries.
+	 */
 	@Override
 	protected void resetFilterConditions() {
-		// TODO Auto-generated method stub
-
+		Calendar now = Calendar.getInstance();
+		now.roll(Calendar.YEAR, false);
+		filterBean.setStartDate( now.getTime() );
+		filterBean.setEndDate( new Date() );
+		
+		startDate.updateFromModel();
+		endDate.updateFromModel();
 	}
 
 }

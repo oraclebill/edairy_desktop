@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -62,5 +63,7 @@ public interface IDairyRepository {
 	void deleteBranchLocation(DairyLocation oldItem);
 
 	MilkPrice getCurrentMilkPrice();
+
+	List<MilkPrice> getMilkPrices(Date startDate, Date endDate);
 
 }

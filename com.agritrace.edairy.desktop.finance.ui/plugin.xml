@@ -12,9 +12,11 @@
             name="Member Transaction Register">
       </view>
       <view
-            class="com.agritrace.edairy.desktop.finance.ui.views.MilkLogView"
-            id="com.agritrace.edairy.desktop.finance.ui.views.MilkLogView"
-            name="New ViewPart">
+            class="com.agritrace.edairy.desktop.finance.ui.views.MilkPriceLogView"
+            id="milk.price.log"
+            icon="icons/millkprice.gif"
+            allowMultiple="true"
+            name="Milk Price Log">
       </view>
    </extension>
    <extension

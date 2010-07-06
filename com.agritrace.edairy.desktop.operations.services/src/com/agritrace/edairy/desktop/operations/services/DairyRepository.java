@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -328,6 +329,13 @@ public class DairyRepository implements IDairyRepository {
 			currentPrice = null;
 		}
 		return currentPrice;
+	}
+
+	@Override
+	public List<MilkPrice> getMilkPrices(java.util.Date startDate, java.util.Date endDate) {
+		Session session = PersistenceManager.getDefault().getSession();
+		return (List<MilkPrice>)session.createCriteria("MilkPrice").add(
+				Restrictions.between("priceDate", startDate, endDate)).list();
 	}
 
 }
