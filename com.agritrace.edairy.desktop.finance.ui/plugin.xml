@@ -5,7 +5,7 @@
          point="org.eclipse.ui.views">
       <view
             category="com.agritrace.edairy.desktop.finance.ui"
-            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionJournalView"
+            class="com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView"
             icon="icons/member-transactions.gif"
             id="member.account.transaction.journal"
             allowMultiple="true"

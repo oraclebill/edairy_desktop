@@ -10,13 +10,13 @@ import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionJournalFilterPanel;
+import com.agritrace.edairy.desktop.finance.ui.controls.TransactionJournalFilterPanel;
 
-public class AccountTransactionJournalView extends AbstractDirectoryView {
+public class TransactionJournalView extends AbstractDirectoryView {
 
 	public final static String ID = "member.account.transaction.journal";
 
-	public AccountTransactionJournalView() {
+	public TransactionJournalView() {
 	}
 
 	@Override
@@ -38,7 +38,8 @@ public class AccountTransactionJournalView extends AbstractDirectoryView {
 	protected void createFilterPanel(Composite comp) {
 		comp.setLayoutDeferred(true);
 		comp.setLayout(new GridLayout(2, false));
-		new AccountTransactionJournalFilterPanel(comp);
+		
+		new TransactionJournalFilterPanel(comp);
 		comp.setLayoutDeferred(false);
 
 		final Composite composite_1 = new Composite(comp, SWT.NONE);

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceJournalConstants;
+import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 
 public class MilkPriceEditDialog extends RecordDialog<MilkPrice, MilkPriceEditController> {
 

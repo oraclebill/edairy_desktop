@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 
+import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.swtdesigner.SWTResourceManager;
 
 public class MilkPriceJournalFilterPanel extends Composite {

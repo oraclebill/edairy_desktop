@@ -3,8 +3,11 @@ package com.agritrace.edairy.desktop.finance.ui;
 public interface FinanceBindingConstants {
 
 	static final String DESC_TEXT = "descText";
-
 	static final String RECORD_ID_TEXT = "recordIdText";
+	static final String FILTER_CHOICE_TX_TYPE = "FILTER_CHOICE_TX_TYPE";
+	static final String FILTER_SOURCE_ROW = "FILTER_SOURCE_ROW";
+	static final String FILTER_TYPE_ROW = "FILTER_TYPE_ROW";
+	
 	String AMT_TEXT_RIDGET = "amtText";
 	String BTN_ADD_TRANSACTION = "btnAddTransaction";
 	String BTN_CANCEL_ALL = "btnCancelAll";

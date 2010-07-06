@@ -19,7 +19,7 @@ import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
+import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -30,44 +30,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.finance.ui.dialogs.MemberTransactionEditDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
+import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
-public class AccountTransactionJournalController extends BasicDirectoryController<AccountTransaction> {
-
-	static class TransactionMemberEqualPredicate implements Predicate {
-		final private Membership testMember;
-
-		TransactionMemberEqualPredicate(Membership testMember) {
-			this.testMember = testMember;
-		}
-
-		@Override
-		public boolean evaluate(Object obj) {
-			boolean ret = false;
-			if (obj instanceof AccountTransaction) {
-				final AccountTransaction tx = (AccountTransaction) obj;
-				final Account acct = tx.getAccount();
-				if (acct != null) {
-					ret = acct.getMember() == testMember;
-				}
-			} else {
-				if (null != obj) {
-					throw new IllegalArgumentException("Objects of type: '" + obj.getClass()
-							+ "' are not valid for this operation.");
-				} else {
-					throw new IllegalArgumentException("Invalid predicate parameter - (null).");
-				}
-			}
-			return ret;
-		}
-	}
+public class AccountTransactionJournalController extends TransactionJournalController {
 
 	static class TransactionSourceMatchPredicate implements Predicate {
 		final private Set<TransactionSource> testSources = new HashSet<TransactionSource>();
@@ -101,15 +71,12 @@ public class AccountTransactionJournalController extends BasicDirectoryControlle
 		}
 	}
 
+	// ridgets specific to an AccountTransaction
 	private IActionRidget batchEditRidget;
-	private final AccountTransactionJournalFilterBean filterBean = new AccountTransactionJournalFilterBean();
-	private ITextRidget memberNameRidget;
 
 	private final IMemberRepository memberRepo = new MemberRepository();
-	private IDateTimeRidget startDateRidget, endDateRidget;
-	private final List<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
-	private IMultipleChoiceRidget typeSetRidget;
-	IComboRidget referenceNumRidget;
+	private IMultipleChoiceRidget sourceListRidget;
+	private IComboRidget referenceNumRidget;
 
 	public AccountTransactionJournalController() {
 		this(null);
@@ -117,6 +84,7 @@ public class AccountTransactionJournalController extends BasicDirectoryControlle
 
 	public AccountTransactionJournalController(ISubModuleNode node) {
 		super(node);
+		
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 		setRepository(memberRepo.getTransactionRepository());
 
@@ -145,20 +113,28 @@ public class AccountTransactionJournalController extends BasicDirectoryControlle
 	}
 
 	@Override
+	public void configureFilterRidgets() {
+		super.configureFilterRidgets();
+		
+		referenceNumRidget = getRidget(IComboRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
+		sourceListRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
+		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
+		
+		ICompositeRidget typeRow = 
+			getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_TYPE_ROW);
+		typeRow.setEnabled(false);
+		typeRow.setVisible(false);
+	}
+
+
+	@Override
 	public void afterBind() {
 		super.afterBind();
-
-		startDateRidget.bindToModel(filterBean, "startDate");
-
-		endDateRidget.bindToModel(filterBean, "endDate");
-
-		memberNameRidget.bindToModel(PojoObservables.observeDetailValue(
-				PojoObservables.observeValue(filterBean, "member"), "memberId", String.class));
 
 		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.all(), Membership.class),
 				Membership.class, "getMemberId", PojoObservables.observeValue(filterBean, "member"));
 
-		typeSetRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
+		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
 				BeansObservables.observeList(filterBean, "sourceOptions"));
 
 		batchEditRidget.addListener(new IActionListener() {
@@ -169,31 +145,14 @@ public class AccountTransactionJournalController extends BasicDirectoryControlle
 		});
 	}
 
-	@Override
-	public void configureFilterRidgets() {
-
-		startDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_START_DATE);
-		// startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
-		// endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-
-		referenceNumRidget = getRidget(IComboRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
-		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
-		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
-		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
-	}
-
-	private Predicate buildFilterPredicate() {
+	
+	protected Predicate buildFilterPredicate() {
+		Predicate superPredicate = super.buildFilterPredicate();
+		
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 
-		predicateList
-				.add(NullIsTruePredicate.getInstance(FilterUtil.createDateAfterPredicate(filterBean.getStartDate())));
-
-		predicateList
-				.add(NullIsTruePredicate.getInstance(FilterUtil.createDateBeforePredicate(filterBean.getEndDate())));
-
-		predicateList.add(NullIsTruePredicate.getInstance(new TransactionMemberEqualPredicate(filterBean.getMember())));
-
+		predicateList.add(superPredicate);
+		
 		predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(filterBean.getReferenceNumber())));
 
 		predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(filterBean
@@ -203,6 +162,7 @@ public class AccountTransactionJournalController extends BasicDirectoryControlle
 		for (int i = 0; i < predicates.length; i++) {
 			predicates[i] = predicateList.get(i);
 		}
+		
 		return new AllPredicate(predicates);
 	}
 
@@ -225,38 +185,10 @@ public class AccountTransactionJournalController extends BasicDirectoryControlle
 		}
 	}
 
-	@Override
-	protected AccountTransaction createNewModel() {
-		final AccountTransaction transaction = super.createNewModel();
-		transaction.setTransactionDate(new Date());
-		return transaction;
-	}
-
-	/**
-	 * todo: this will not work for long...
-	 * 
-	 * @return
-	 */
-	@Override
-	protected List<AccountTransaction> getFilteredResult() {
-		final List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
-		final Predicate filterPredicate = buildFilterPredicate();
-		for (final AccountTransaction tx : getRepository().all()) {
-			if (filterPredicate.evaluate(tx)) {
-				filtered.add(tx);
-			}
-		}
-		return filtered;
-	}
 
 	@Override
 	protected RecordDialog<AccountTransaction, ?> getRecordDialog(Shell shell) {
-		return new MemberTransactionEditDialog(shell);
+		return new AccountTransactionEditDialog(shell);
 	}
 
-	@Override
-	protected void resetFilterConditions() {
-		filterBean.clear();
-		updateAllRidgetsFromModel();
-	}
 }

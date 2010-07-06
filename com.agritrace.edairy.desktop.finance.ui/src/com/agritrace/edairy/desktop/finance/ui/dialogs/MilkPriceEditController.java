@@ -11,7 +11,7 @@ import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceJournalConstants;
+import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 
 public class MilkPriceEditController extends RecordDialogController<MilkPrice> {
 

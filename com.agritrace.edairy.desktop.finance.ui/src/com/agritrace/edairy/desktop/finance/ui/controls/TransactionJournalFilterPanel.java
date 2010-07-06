@@ -1,9 +1,12 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.internal.ui.ridgets.swt.CompositeRidget;
+import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.riena.ui.swt.CompletionCombo;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FormAttachment;
@@ -19,13 +22,16 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
 
-public class AccountTransactionJournalFilterPanel extends Composite {
+public class TransactionJournalFilterPanel extends Composite {
+	static {
+		SwtControlRidgetMapper.getInstance().addMapping(TransactionSourceComposite.class, CompositeRidget.class);
+	}
 
-	public AccountTransactionJournalFilterPanel(Composite parent) {
+	public TransactionJournalFilterPanel(Composite parent) {
 		this(parent, SWT.NONE);
 	}
 
-	public AccountTransactionJournalFilterPanel(Composite parent, int style) {
+	public TransactionJournalFilterPanel(Composite parent, int style) {
 		super(parent, style);
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
@@ -134,12 +140,44 @@ public class AccountTransactionJournalFilterPanel extends Composite {
 			refNumberLookup.setLayoutData(fieldFormData);
 		}
 
-		// fourth row: source choices
+		// alternate fourth row: source choices
 		//
 		{
 			final Composite rowComposite = new TransactionSourceComposite(this, true, "Transaction Source");
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(rowComposite, FinanceBindingConstants.FILTER_SOURCE_ROW);
+			
 			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(rowComposite);
 			rowComposite.pack();
 		}
+		
+		// alternate fourth row: type choices
+		//
+		{
+			final Composite rowComposite = UIControlsFactory.createComposite(this);
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(rowComposite, FinanceBindingConstants.FILTER_TYPE_ROW);
+
+			final FormLayout rowLayout = new FormLayout();
+			rowLayout.marginWidth = rowLayout.marginHeight = 10;
+			rowComposite.setLayout(rowLayout);
+			
+			final String labelString = "Type:";
+			final Label label = UIControlsFactory.createLabel(rowComposite, labelString);
+			final FormData labelLayoutData = new FormData();
+			labelLayoutData.width = labelString.trim().length() > 0 ? 140 : 0;
+			labelLayoutData.top = new FormAttachment(0, 0);
+			labelLayoutData.left = new FormAttachment(0, 0);
+			label.setLayoutData(labelLayoutData);
+
+			Composite typeCodeChoice = UIControlsFactory.createChoiceComposite(rowComposite, SWT.BORDER, true,
+					FinanceBindingConstants.FILTER_CHOICE_TX_TYPE);
+
+			final FormData fieldLayoutData = new FormData();
+			fieldLayoutData.top = new FormAttachment(0, 5);
+			fieldLayoutData.left = new FormAttachment(label, 5, SWT.RIGHT);
+			fieldLayoutData.right = new FormAttachment(100, 100, 8);
+			fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
+			typeCodeChoice.setLayoutData(fieldLayoutData);
+		}
+
 	}
 }

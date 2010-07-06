@@ -3,23 +3,21 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
-class AccountTransactionJournalFilterBean {
+class TransactionJournalFilterBean {
 	public Date endDate = null;
 	public Membership member = null;
 	public String referenceNumber = null;
 	public final List<TransactionSource> sourceOptions = new ArrayList<TransactionSource>();
 	public Date startDate = null;
-	public final Set<TransactionType> typeOptions = new HashSet<TransactionType>();
+	public final List<TransactionType> typeOptions = new ArrayList<TransactionType>();
 
-	public AccountTransactionJournalFilterBean() {
+	public TransactionJournalFilterBean() {
 		clear();
 	}
 
@@ -56,7 +54,7 @@ class AccountTransactionJournalFilterBean {
 		return startDate;
 	}
 
-	public Set<TransactionType> getTypeOptions() {
+	public List<TransactionType> getTypeOptions() {
 		return typeOptions;
 	}
 
@@ -81,7 +79,7 @@ class AccountTransactionJournalFilterBean {
 		this.startDate = startDate;
 	}
 
-	public void setTypeOptions(Set<TransactionType> typeOptions) {
+	public void setTypeOptions(List<TransactionType> typeOptions) {
 		this.typeOptions.clear();
 		this.typeOptions.addAll(typeOptions);
 	}
