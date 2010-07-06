@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class TransactionEntryPanelController {
+public class AccountTransactionEditPanelController {
 	public class MemberLookupAction implements IActionListener {
 		private final ITextRidget nameRidget;
 
@@ -57,7 +57,7 @@ public class TransactionEntryPanelController {
 					selectedMember.setAccount(memberAccount);
 					Assert.isTrue(selectedMember.getAccount() == memberAccount);
 				}
-				TransactionEntryPanelController.this.model.setAccount(memberAccount);
+				AccountTransactionEditPanelController.this.model.setAccount(memberAccount);
 				nameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
 			}
 		}
@@ -68,7 +68,7 @@ public class TransactionEntryPanelController {
 	private BindingHelper<AccountTransaction> mapper;
 	private AccountTransaction model;
 
-	public TransactionEntryPanelController() {
+	public AccountTransactionEditPanelController() {
 		;
 		;
 	}

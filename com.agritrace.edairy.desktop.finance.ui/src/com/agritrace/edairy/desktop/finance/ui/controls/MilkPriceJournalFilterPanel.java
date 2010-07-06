@@ -14,14 +14,14 @@ import org.eclipse.ui.PlatformUI;
 
 import com.swtdesigner.SWTResourceManager;
 
-public class MilkPriceLogFilterPanel extends Composite {
+public class MilkPriceJournalFilterPanel extends Composite {
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
-	public MilkPriceLogFilterPanel(Composite parent, int style) {
+	public MilkPriceJournalFilterPanel(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new GridLayout(2, false));
 		setBackground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE));
@@ -34,7 +34,7 @@ public class MilkPriceLogFilterPanel extends Composite {
 		gl_composite.marginLeft = 8;
 		composite.setLayout(gl_composite);
 		
-		Label lblMilkPriceFor = UIControlsFactory.createLabel(composite, MilkPriceLogConstants.CURRENT_PRICE_LABEL_FMT, SWT.NONE, MilkPriceLogConstants.ID_LBL_CURRENT_MILK_PRICE);
+		Label lblMilkPriceFor = UIControlsFactory.createLabel(composite, MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, SWT.NONE, MilkPriceJournalConstants.ID_LBL_CURRENT_MILK_PRICE);
 		lblMilkPriceFor.setFont(SWTResourceManager.getFont("Lucida Grande", 18, SWT.BOLD));
 		lblMilkPriceFor.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		
@@ -62,7 +62,7 @@ public class MilkPriceLogFilterPanel extends Composite {
 		fd_lblStart.top = new FormAttachment(lblDateRange, 0, SWT.TOP);
 		lblStart.setLayoutData(fd_lblStart);
 		
-		DateTime dateTime = UIControlsFactory.createDate(composite_1, SWT.BORDER, MilkPriceLogConstants.ID_DATE_START);
+		DateTime dateTime = UIControlsFactory.createDate(composite_1, SWT.BORDER, MilkPriceJournalConstants.ID_DATE_START);
 		FormData fd_dateTime = new FormData();
 		fd_dateTime.bottom = new FormAttachment(lblDateRange, 8, SWT.BOTTOM);
 		fd_dateTime.left = new FormAttachment(lblStart, 6);
@@ -75,7 +75,7 @@ public class MilkPriceLogFilterPanel extends Composite {
 		fd_lblEnd.top = new FormAttachment(lblDateRange, 0, SWT.TOP);
 		lblEnd.setLayoutData(fd_lblEnd);
 		
-		DateTime dateTime_1 = UIControlsFactory.createDate(composite_1, SWT.BORDER, MilkPriceLogConstants.ID_DATE_END);
+		DateTime dateTime_1 = UIControlsFactory.createDate(composite_1, SWT.BORDER, MilkPriceJournalConstants.ID_DATE_END);
 		fd_dateTime.top = new FormAttachment(dateTime_1, 0, SWT.TOP);
 		FormData fd_dateTime_1 = new FormData();
 		fd_dateTime_1.top = new FormAttachment(lblDateRange, -4, SWT.TOP);

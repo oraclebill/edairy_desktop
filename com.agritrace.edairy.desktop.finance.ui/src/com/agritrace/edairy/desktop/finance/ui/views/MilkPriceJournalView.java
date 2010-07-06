@@ -6,18 +6,18 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceLogFilterPanel;
+import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceJournalFilterPanel;
 
-public class MilkPriceLogView extends AbstractDirectoryView {
+public class MilkPriceJournalView extends AbstractDirectoryView {
 
 	public static final String ID = "milk.price.journal"; //$NON-NLS-1$
 
-	public MilkPriceLogView() {
+	public MilkPriceJournalView() {
 	}
 
 	@Override
 	protected void createFilterPanel(Composite comp) {
-		Composite control = new MilkPriceLogFilterPanel(comp, SWT.NONE);
+		Composite control = new MilkPriceJournalFilterPanel(comp, SWT.NONE);
 		comp.setLayout(new GridLayout());
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(control);
 	}

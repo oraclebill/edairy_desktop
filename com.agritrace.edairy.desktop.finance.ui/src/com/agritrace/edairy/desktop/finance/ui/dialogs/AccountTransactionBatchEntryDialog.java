@@ -21,10 +21,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanel;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanelController;
+import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanel;
+import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanelController;
 
-public class TransactionBatchEntryDialog extends BaseDialogView {
+public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 
 	private final class TBEC extends AbstractWindowController {
 		@Override
@@ -57,11 +57,11 @@ public class TransactionBatchEntryDialog extends BaseDialogView {
 	}
 
 	private final class TransactionBatchEntryDialogController extends AbstractMasterDetailsDelegate {
-		private final TransactionEntryPanelController detailController;
+		private final AccountTransactionEditPanelController detailController;
 		private final AccountTransaction workingCopy = createWorkingCopy();
 
 		public TransactionBatchEntryDialogController() {
-			detailController = new TransactionEntryPanelController();
+			detailController = new AccountTransactionEditPanelController();
 		}
 
 		@Override
@@ -90,11 +90,11 @@ public class TransactionBatchEntryDialog extends BaseDialogView {
 		}
 	}
 
-	public TransactionBatchEntryDialog() {
+	public AccountTransactionBatchEntryDialog() {
 		this(null);
 	}
 
-	public TransactionBatchEntryDialog(Shell shell) {
+	public AccountTransactionBatchEntryDialog(Shell shell) {
 		super(shell);
 	}
 
@@ -104,7 +104,7 @@ public class TransactionBatchEntryDialog extends BaseDialogView {
 		final Composite master = new MasterDetailsComposite(parent, SWT.TOP) {
 			@Override
 			protected void createDetails(Composite parent) {
-				final Composite detailPanel = new TransactionEntryPanel(parent, SWT.NONE);
+				final Composite detailPanel = new AccountTransactionEditPanel(parent, SWT.NONE);
 				GridDataFactory.swtDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(detailPanel);
 				GridLayoutFactory.fillDefaults().generateLayout(parent);
 			}

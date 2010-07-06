@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
-public interface MilkPriceLogConstants {
+public interface MilkPriceJournalConstants {
 	String ID_DATE_END = "ID_DATE_END";
 	String ID_LBL_CURRENT_MILK_PRICE = "ID_LBL_CURRENT_MILK_PRICE";
 	String ID_DATE_START = "ID_DATE_START";

@@ -2,11 +2,11 @@ package com.agritrace.edairy.desktop.finance.ui.dialogs;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanelController;
+import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanelController;
 
 public class MemberTransactionEditController extends RecordDialogController<AccountTransaction> {
 
-	private TransactionEntryPanelController panelController;
+	private AccountTransactionEditPanelController panelController;
 
 	public MemberTransactionEditController() {
 		super();
@@ -14,7 +14,7 @@ public class MemberTransactionEditController extends RecordDialogController<Acco
 
 	@Override
 	protected void configureUserRidgets() {
-		panelController = new TransactionEntryPanelController();
+		panelController = new AccountTransactionEditPanelController();
 		panelController.setModel(getWorkingCopy());
 		panelController.setRidgetContainer(this);
 		panelController.configureAndBind();

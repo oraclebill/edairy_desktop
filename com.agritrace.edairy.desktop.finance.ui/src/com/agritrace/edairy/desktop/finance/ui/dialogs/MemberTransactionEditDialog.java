@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionEntryPanel;
+import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanel;
 
 public class MemberTransactionEditDialog extends RecordDialog<AccountTransaction, MemberTransactionEditController> {
 
@@ -16,7 +16,7 @@ public class MemberTransactionEditDialog extends RecordDialog<AccountTransaction
 
 	@Override
 	protected void buildWorkArea(Composite comp) {
-		new TransactionEntryPanel(comp, SWT.NONE);
+		new AccountTransactionEditPanel(comp, SWT.NONE);
 
 	}
 

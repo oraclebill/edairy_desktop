@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
-class MemberTransactionFilterBean {
+class AccountTransactionJournalFilterBean {
 	public Date endDate = null;
 	public Membership member = null;
 	public String referenceNumber = null;
@@ -19,7 +19,7 @@ class MemberTransactionFilterBean {
 	public Date startDate = null;
 	public final Set<TransactionType> typeOptions = new HashSet<TransactionType>();
 
-	public MemberTransactionFilterBean() {
+	public AccountTransactionJournalFilterBean() {
 		clear();
 	}
 

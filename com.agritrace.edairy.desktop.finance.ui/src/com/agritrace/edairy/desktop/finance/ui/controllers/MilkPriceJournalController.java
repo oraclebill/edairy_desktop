@@ -14,11 +14,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceLogConstants;
+import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceJournalConstants;
+import com.agritrace.edairy.desktop.finance.ui.dialogs.MilkPriceEditDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class MilkPriceLogController extends BasicDirectoryController<MilkPrice> {
+public class MilkPriceJournalController extends BasicDirectoryController<MilkPrice> {
 
 	static class FilterBean extends AbstractBean {
 		private static final String START_DATE = "start-date";
@@ -57,7 +58,7 @@ public class MilkPriceLogController extends BasicDirectoryController<MilkPrice> 
 	private IDateTimeRidget startDate;
 	private IDateTimeRidget endDate;
 
-	public MilkPriceLogController() {		
+	public MilkPriceJournalController() {		
 		setEClass(DairyPackage.Literals.MILK_PRICE);
 		
 		addTableColumn("Period", DairyPackage.Literals.MILK_PRICE__PRICE_PERIOD);
@@ -73,16 +74,16 @@ public class MilkPriceLogController extends BasicDirectoryController<MilkPrice> 
 	protected void configureFilterRidgets() {
 
 		// configure
-		ILabelRidget currentPriceLabel = getRidget(ILabelRidget.class, MilkPriceLogConstants.ID_LBL_CURRENT_MILK_PRICE);
-		startDate = getRidget(IDateTimeRidget.class, MilkPriceLogConstants.ID_DATE_START);
-		endDate = getRidget(IDateTimeRidget.class, MilkPriceLogConstants.ID_DATE_END);
+		ILabelRidget currentPriceLabel = getRidget(ILabelRidget.class, MilkPriceJournalConstants.ID_LBL_CURRENT_MILK_PRICE);
+		startDate = getRidget(IDateTimeRidget.class, MilkPriceJournalConstants.ID_DATE_START);
+		endDate = getRidget(IDateTimeRidget.class, MilkPriceJournalConstants.ID_DATE_END);
 
 		MilkPrice currentPrice = getCurrentPrice();
 		if (currentPrice != null) {
-			currentPriceLabel.setText(String.format(MilkPriceLogConstants.CURRENT_PRICE_LABEL_FMT, currentPrice
+			currentPriceLabel.setText(String.format(MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, currentPrice
 					.getPricePeriod().getName(), currentPrice.getPriceDate(), currentPrice.getPriceDate()));
 		} else {
-			currentPriceLabel.setText(MilkPriceLogConstants.CURRENT_PRICE_DEFAULT);
+			currentPriceLabel.setText(MilkPriceJournalConstants.CURRENT_PRICE_DEFAULT);
 		}
 
 		// bind

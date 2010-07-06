@@ -5,7 +5,7 @@
          point="org.eclipse.ui.views">
       <view
             category="com.agritrace.edairy.desktop.finance.ui"
-            class="com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView"
+            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionJournalView"
             icon="icons/member-transactions.gif"
             id="member.account.transaction.journal"
             allowMultiple="true"
@@ -21,7 +21,7 @@
       </view>
       <view
             category="com.agritrace.edairy.desktop.finance.ui"
-            class="com.agritrace.edairy.desktop.finance.ui.views.MilkPriceLogView"
+            class="com.agritrace.edairy.desktop.finance.ui.views.MilkPriceJournalView"
             id="milk.price.journal"
             icon="icons/milkprice.gif"
             allowMultiple="true"

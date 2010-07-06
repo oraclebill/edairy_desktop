@@ -17,10 +17,10 @@ import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
-import com.agritrace.edairy.desktop.finance.ui.controllers.MemberTransactionRegisterController;
-import com.agritrace.edairy.desktop.finance.ui.controllers.MilkPriceLogController;
-import com.agritrace.edairy.desktop.finance.ui.views.MemberTransactionRegisterView;
-import com.agritrace.edairy.desktop.finance.ui.views.MilkPriceLogView;
+import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJournalController;
+import com.agritrace.edairy.desktop.finance.ui.controllers.MilkPriceJournalController;
+import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionJournalView;
+import com.agritrace.edairy.desktop.finance.ui.views.MilkPriceJournalView;
 
 public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler {
 	// FINANCE
@@ -72,7 +72,7 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 			NodeFactory
 					.createSubModule(
 							SUBMODULE_FINANCE_TRANSACTION_REGISTER,
-							"Transaction Journal", moduleNode, MemberTransactionRegisterView.ID, MemberTransactionRegisterController.class); //$NON-NLS-1$ 
+							"Transaction Journal", moduleNode, AccountTransactionJournalView.ID, AccountTransactionJournalController.class); //$NON-NLS-1$ 
 		}
 		{
 			final IModuleGroupNode moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_MILK_PRICE));
@@ -82,7 +82,7 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 			NodeFactory
 					.createSubModule(
 							SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
-							"Milk Price Register", moduleNode, MilkPriceLogView.ID, MilkPriceLogController.class); //$NON-NLS-1$
+							"Milk Price Register", moduleNode, MilkPriceJournalView.ID, MilkPriceJournalController.class); //$NON-NLS-1$
 		}
 		// NodeFactory.createSubModule(
 		//				"edm.finances.mdlog", "Transaction Journal 9", financeMembers, TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$

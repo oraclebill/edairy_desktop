@@ -35,11 +35,11 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.MemberTransactionEditDialog;
-import com.agritrace.edairy.desktop.finance.ui.dialogs.TransactionBatchEntryDialog;
+import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
-public class MemberTransactionRegisterController extends BasicDirectoryController<AccountTransaction> {
+public class AccountTransactionJournalController extends BasicDirectoryController<AccountTransaction> {
 
 	static class TransactionMemberEqualPredicate implements Predicate {
 		final private Membership testMember;
@@ -102,7 +102,7 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 	}
 
 	private IActionRidget batchEditRidget;
-	private final MemberTransactionFilterBean filterBean = new MemberTransactionFilterBean();
+	private final AccountTransactionJournalFilterBean filterBean = new AccountTransactionJournalFilterBean();
 	private ITextRidget memberNameRidget;
 
 	private final IMemberRepository memberRepo = new MemberRepository();
@@ -111,11 +111,11 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 	private IMultipleChoiceRidget typeSetRidget;
 	IComboRidget referenceNumRidget;
 
-	public MemberTransactionRegisterController() {
+	public AccountTransactionJournalController() {
 		this(null);
 	}
 
-	public MemberTransactionRegisterController(ISubModuleNode node) {
+	public AccountTransactionJournalController(ISubModuleNode node) {
 		super(node);
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 		setRepository(memberRepo.getTransactionRepository());
@@ -207,7 +207,7 @@ public class MemberTransactionRegisterController extends BasicDirectoryControlle
 	}
 
 	private void handleBatchEntryAction() {
-		final TransactionBatchEntryDialog dialog = new TransactionBatchEntryDialog();
+		final AccountTransactionBatchEntryDialog dialog = new AccountTransactionBatchEntryDialog();
 		final ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 		dialog.getController().setContext("tranaction-list", transactionList);
 		final int returnCode = dialog.open();

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.controllers;
+package com.agritrace.edairy.desktop.finance.ui.dialogs;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,7 +11,7 @@ import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceLogConstants;
+import com.agritrace.edairy.desktop.finance.ui.controls.MilkPriceJournalConstants;
 
 public class MilkPriceEditController extends RecordDialogController<MilkPrice> {
 
@@ -67,9 +67,9 @@ public class MilkPriceEditController extends RecordDialogController<MilkPrice> {
 	@Override
 	protected void configureUserRidgets() {
 		
-		dateRidget = getRidget(IDateTimeRidget.class, MilkPriceLogConstants.ID_DATE_PRICEDATE);
-		priceText1 = getRidget(INumericTextRidget.class, MilkPriceLogConstants.ID_TEXT_PRICE1);
-		priceText2 = getRidget(INumericTextRidget.class, MilkPriceLogConstants.ID_TEXT_PRICE2);
+		dateRidget = getRidget(IDateTimeRidget.class, MilkPriceJournalConstants.ID_DATE_PRICEDATE);
+		priceText1 = getRidget(INumericTextRidget.class, MilkPriceJournalConstants.ID_TEXT_PRICE1);
+		priceText2 = getRidget(INumericTextRidget.class, MilkPriceJournalConstants.ID_TEXT_PRICE2);
 
 		// configure
 		dateRidget.setMandatory(true);		

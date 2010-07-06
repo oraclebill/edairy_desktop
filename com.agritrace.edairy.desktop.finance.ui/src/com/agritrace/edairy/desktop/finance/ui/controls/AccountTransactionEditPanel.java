@@ -21,13 +21,13 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.swtdesigner.ResourceManager;
 
-public class TransactionEntryPanel extends Composite {
+public class AccountTransactionEditPanel extends Composite {
 
 	private final Text checkNumberText;
 	private final Text descriptionText;
 	private final Text signedByText;
 
-	public TransactionEntryPanel(Composite parent, int style) {
+	public AccountTransactionEditPanel(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new FillLayout());
 		final Composite middlePanel = UIControlsFactory.createGroup(this, "Transaction Entry");

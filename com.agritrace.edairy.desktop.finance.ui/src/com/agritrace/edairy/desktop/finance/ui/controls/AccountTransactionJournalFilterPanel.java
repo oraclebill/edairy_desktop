@@ -19,13 +19,13 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
 
-public class MemberTransactionFilterPanel extends Composite {
+public class AccountTransactionJournalFilterPanel extends Composite {
 
-	public MemberTransactionFilterPanel(Composite parent) {
+	public AccountTransactionJournalFilterPanel(Composite parent) {
 		this(parent, SWT.NONE);
 	}
 
-	public MemberTransactionFilterPanel(Composite parent, int style) {
+	public AccountTransactionJournalFilterPanel(Composite parent, int style) {
 		super(parent, style);
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
