@@ -36,6 +36,7 @@ public class TransactionJournalView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterPanel(Composite comp) {
+		comp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		comp.setLayoutDeferred(true);
 		comp.setLayout(new GridLayout(2, false));
 		
