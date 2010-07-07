@@ -6,29 +6,29 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
-
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getAccountId <em>Account Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getEstablished <em>Established</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getTransactions <em>Transactions</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getBalances <em>Balances</em>}</li>
@@ -70,16 +71,6 @@ public class AccountImpl extends EObjectImpl implements Account {
 	protected long accountId = ACCOUNT_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getMember() <em>Member</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMember()
-	 * @generated
-	 * @ordered
-	 */
-	protected Membership member;
-
-	/**
 	 * The default value of the '{@link #getEstablished() <em>Established</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,6 +89,26 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @ordered
 	 */
 	protected Date established = ESTABLISHED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final AccountStatus STATUS_EDEFAULT = AccountStatus.ACTIVE;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected AccountStatus status = STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -120,17 +131,17 @@ public class AccountImpl extends EObjectImpl implements Account {
 	protected String type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTransactions() <em>Transactions</em>}' reference list.
+	 * The cached value of the '{@link #getTransactions() <em>Transactions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTransactions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AccountTransaction> transactions;
+	protected EList<Transaction> transactions;
 
 	/**
-	 * The cached value of the '{@link #getBalances() <em>Balances</em>}' reference list.
+	 * The cached value of the '{@link #getBalances() <em>Balances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getBalances()
@@ -185,24 +196,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public Membership getMember() {
-		if (member != null && member.eIsProxy()) {
-			InternalEObject oldMember = (InternalEObject)member;
-			member = (Membership)eResolveProxy(oldMember);
-			if (member != oldMember) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ACCOUNT__MEMBER, oldMember, member));
-			}
-		}
-		return member;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Membership basicGetMember() {
-		return member;
+		if (eContainerFeatureID() != AccountPackage.ACCOUNT__MEMBER) return null;
+		return (Membership)eContainer();
 	}
 
 	/**
@@ -211,12 +206,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public NotificationChain basicSetMember(Membership newMember, NotificationChain msgs) {
-		Membership oldMember = member;
-		member = newMember;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT__MEMBER, oldMember, newMember);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newMember, AccountPackage.ACCOUNT__MEMBER, msgs);
 		return msgs;
 	}
 
@@ -226,10 +216,12 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public void setMember(Membership newMember) {
-		if (newMember != member) {
+		if (newMember != eInternalContainer() || (eContainerFeatureID() != AccountPackage.ACCOUNT__MEMBER && newMember != null)) {
+			if (EcoreUtil.isAncestor(this, newMember))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (member != null)
-				msgs = ((InternalEObject)member).eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newMember != null)
 				msgs = ((InternalEObject)newMember).eInverseAdd(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
 			msgs = basicSetMember(newMember, msgs);
@@ -265,6 +257,27 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public AccountStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(AccountStatus newStatus) {
+		AccountStatus oldStatus = status;
+		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getType() {
 		return type;
 	}
@@ -286,9 +299,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AccountTransaction> getTransactions() {
+	public EList<Transaction> getTransactions() {
 		if (transactions == null) {
-			transactions = new EObjectResolvingEList<AccountTransaction>(AccountTransaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS);
+			transactions = new EObjectContainmentWithInverseEList<Transaction>(Transaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.TRANSACTION__ACCOUNT);
 		}
 		return transactions;
 	}
@@ -300,7 +313,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	public EList<BalancePoint> getBalances() {
 		if (balances == null) {
-			balances = new EObjectResolvingEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES);
+			balances = new EObjectContainmentEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES);
 		}
 		return balances;
 	}
@@ -310,13 +323,16 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__MEMBER:
-				if (member != null)
-					msgs = ((InternalEObject)member).eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetMember((Membership)otherEnd, msgs);
+			case AccountPackage.ACCOUNT__TRANSACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransactions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -331,8 +347,26 @@ public class AccountImpl extends EObjectImpl implements Account {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__MEMBER:
 				return basicSetMember(null, msgs);
+			case AccountPackage.ACCOUNT__TRANSACTIONS:
+				return ((InternalEList<?>)getTransactions()).basicRemove(otherEnd, msgs);
+			case AccountPackage.ACCOUNT__BALANCES:
+				return ((InternalEList<?>)getBalances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case AccountPackage.ACCOUNT__MEMBER:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -346,10 +380,11 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return getAccountId();
 			case AccountPackage.ACCOUNT__MEMBER:
-				if (resolve) return getMember();
-				return basicGetMember();
+				return getMember();
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				return getEstablished();
+			case AccountPackage.ACCOUNT__STATUS:
+				return getStatus();
 			case AccountPackage.ACCOUNT__TYPE:
 				return getType();
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
@@ -378,12 +413,15 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				setEstablished((Date)newValue);
 				return;
+			case AccountPackage.ACCOUNT__STATUS:
+				setStatus((AccountStatus)newValue);
+				return;
 			case AccountPackage.ACCOUNT__TYPE:
 				setType((String)newValue);
 				return;
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
 				getTransactions().clear();
-				getTransactions().addAll((Collection<? extends AccountTransaction>)newValue);
+				getTransactions().addAll((Collection<? extends Transaction>)newValue);
 				return;
 			case AccountPackage.ACCOUNT__BALANCES:
 				getBalances().clear();
@@ -410,6 +448,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				setEstablished(ESTABLISHED_EDEFAULT);
 				return;
+			case AccountPackage.ACCOUNT__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case AccountPackage.ACCOUNT__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -434,9 +475,11 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return accountId != ACCOUNT_ID_EDEFAULT;
 			case AccountPackage.ACCOUNT__MEMBER:
-				return member != null;
+				return getMember() != null;
 			case AccountPackage.ACCOUNT__ESTABLISHED:
 				return ESTABLISHED_EDEFAULT == null ? established != null : !ESTABLISHED_EDEFAULT.equals(established);
+			case AccountPackage.ACCOUNT__STATUS:
+				return status != STATUS_EDEFAULT;
 			case AccountPackage.ACCOUNT__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
@@ -461,6 +504,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		result.append(accountId);
 		result.append(", established: ");
 		result.append(established);
+		result.append(", status: ");
+		result.append(status);
 		result.append(", type: ");
 		result.append(type);
 		result.append(')');

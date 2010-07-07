@@ -6,17 +6,31 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.util;
 
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-
-import com.agritrace.edairy.desktop.common.model.dairy.*;
-
-import com.agritrace.edairy.desktop.common.model.tracking.Container;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.*;
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.Trip;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,6 +155,12 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DairyPackage.DELIVERY_JOURNAL_LINE: {
+				DeliveryJournalLine deliveryJournalLine = (DeliveryJournalLine)theEObject;
+				T result = caseDeliveryJournalLine(deliveryJournalLine);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DairyPackage.DAIRY: {
 				Dairy dairy = (Dairy)theEObject;
 				T result = caseDairy(dairy);
@@ -178,6 +198,12 @@ public class DairySwitch<T> {
 				Customer customer = (Customer)theEObject;
 				T result = caseCustomer(customer);
 				if (result == null) result = caseCompany(customer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.MILK_PRICE: {
+				MilkPrice milkPrice = (MilkPrice)theEObject;
+				T result = caseMilkPrice(milkPrice);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -306,6 +332,21 @@ public class DairySwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Delivery Journal Line</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Delivery Journal Line</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeliveryJournalLine(DeliveryJournalLine object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Dairy</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -392,6 +433,21 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T caseCustomer(Customer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Milk Price</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Milk Price</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMilkPrice(MilkPrice object) {
 		return null;
 	}
 

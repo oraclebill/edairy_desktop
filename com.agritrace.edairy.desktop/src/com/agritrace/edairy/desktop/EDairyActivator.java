@@ -7,7 +7,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
-import com.agritrace.edairy.desktop.common.persistence.services.SybaseASAPersistenceManager;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -19,41 +18,6 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static EDairyActivator plugin;
-
-	/**
-	 * The constructor
-	 */
-	public EDairyActivator() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-	 * )
-	 */
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-		
-		initDatabase();
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
-	 */
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
 
 	/**
 	 * Returns the shared instance
@@ -69,7 +33,6 @@ public class EDairyActivator extends AbstractUIPlugin {
 	 * are managed automatically and must not be disposed by client code.
 	 * 
 	 * @param imageKey
-	 *            a non-null String; see {@link SharedImages} for valid keys
 	 * @return a non-null Image instance
 	 */
 	public static synchronized Image getImage(final String path) {
@@ -93,10 +56,39 @@ public class EDairyActivator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	private void initDatabase() {
-		// FIXME: get config from filesystem
-//		 PersistenceManager.setDefault(new HsqlDbPersistenceManager() );
-//		 PersistenceManager.setDefault(new SybaseASAPersistenceManager() );
-		PersistenceManager.getDefault().getSession();
+	/**
+	 * The constructor
+	 */
+	public EDairyActivator() {
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+
+		//initDatabase();
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
+
 }

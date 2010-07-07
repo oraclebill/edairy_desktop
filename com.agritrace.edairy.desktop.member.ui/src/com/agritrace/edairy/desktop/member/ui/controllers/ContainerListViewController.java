@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -38,62 +39,126 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 
 public class ContainerListViewController extends BaseListViewController {
 
-	private final IMemberRepository memberRepository;
-	private final IFarmRepository farmRepository;
+	/**
+	 * Open member search dialog, IActionListener for search button
+	 * 
+	 */
+	public class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final int retVal = memberDialog.open();
+			if (retVal == Window.OK) {
+				selectedMember = memberDialog.getSelectedMember();
+				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
+				memberNameFilter.setText(memberName);
+				updateFarmCombo();
+				if (searchButton != null) {
+					searchButton.setEnabled(true);
+				}
+			}
+		}
+	}
 
-	private ITableRidget containerListTable;
-	private IActionRidget viewRidget;
-	private IActionRidget addRidget;
-	private final String[] containerPropertyNames = { "membership", "membership", "container", "container", "container", "container", "container" };
-	private final String[] containerColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Container ID", "Type", "Unit of Measure", "Capacity" };
-	private List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
+	private final class AddContainerAction implements IActionListener {
+		@Override
+		public void callback() {
+			Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
+			final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+			final List<Farm> inputFarms = new ArrayList<Farm>();
+			final int index = farmCombo.getSelectionIndex();
+			if (index != -1) {
+				if (index == 0) {
+					inputFarms.addAll(farmCombofarms);
+				} else {
+					inputFarms.add(farmCombofarms.get(index - 1));
+				}
+				memberDialog.getController().setContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
+				memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST,
+						inputFarms);
 
-	public static final String DELETE_DIALOG_TITLE = "Delete Container";
+				final int returnCode = memberDialog.open();
+				if (returnCode == AbstractWindowController.OK) {
+					container = (Container) memberDialog.getController().getContext(
+							ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+					container.getOwner().getCans().add(container);
+					farmRepository.update(container.getOwner());
+					memberRepository.update(selectedMember);
+					refreshInputList();
+				}
+			}
+		}
+	}
+
+	private final class ViewContainerAction implements IActionListener {
+
+		@Override
+		public void callback() {
+			final ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) containerListTable
+					.getSelection().get(0);
+			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
+			final List<Farm> inputFarms = new ArrayList<Farm>();
+			inputFarms.add(selectedNode.getContainer().getOwner());
+
+			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
+					selectedNode.getContainer());
+			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
+
+			final int returnCode = dialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				final Container container = (Container) dialog.getController().getContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+				farmRepository.update(container.getOwner());
+				memberRepository.update(selectedMember);
+				refreshInputList();
+			} else if (returnCode == 2) {
+				// confirm for delete
+				if (selectedNode != null) {
+					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE,
+							DELETE_DIALOG_MESSAGE)) {
+						final Farm farm = selectedNode.getContainer().getOwner();
+						farm.getCans().remove(selectedNode.getContainer());
+						farmRepository.update(farm);
+						memberRepository.update(selectedNode.getMembership());
+						refreshInputList();
+					}
+				}
+			}
+		}
+	}
+
+	public static final String ALL_FARM = "All Farms";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected container?";
+	public static final String DELETE_DIALOG_TITLE = "Delete Container";
+	private IActionRidget addRidget;
+	private IActionRidget clearButton;
 
+	private final String[] containerColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Container ID", "Type",
+			"Unit of Measure", "Capacity" };
+	private ITableRidget containerListTable;
+
+	private final String[] containerPropertyNames = { "membership", "membership", "container", "container",
+			"container", "container", "container" };
+	private IComboRidget farmCombo;
+	private final List<Farm> farmCombofarms = new ArrayList<Farm>();
+	private final List<String> farmNames = new ArrayList<String>();
+	private final IFarmRepository farmRepository;
+	private IActionRidget memberLookupBtn;
 	// filter
 	private ITextRidget memberNameFilter;
-	private IActionRidget memberLookupBtn;
-	private IComboRidget farmCombo;
-	private List<String> farmNames = new ArrayList<String>();
+	private final IMemberRepository memberRepository;
 	private IActionRidget searchButton;
-	private IActionRidget clearButton;
+
 	private Membership selectedMember;
-	public static final String ALL_FARM = "All Farms";
-	private List<Farm> farmCombofarms = new ArrayList<Farm>();
+
+	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
+
+	private IActionRidget viewRidget;
 
 	public ContainerListViewController() {
 		memberRepository = new MemberRepository();
 		farmRepository = new FarmRepository();
-	}
-
-	protected void configureListGroup() {
-		containerListTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
-
-		refreshInputList();
-		containerListTable.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class), ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
-		setColumnFormatters();
-
-		containerListTable.addSelectionListener(new ISelectionListener() {
-
-			@Override
-			public void ridgetSelected(SelectionEvent event) {
-				if (event.getSource() == containerListTable) {
-					viewRidget.setEnabled(containerListTable.getSelection().size() > 0);
-				}
-			}
-		});
-		containerListTable.updateFromModel();
-		addRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD);
-		if(addRidget != null){
-			addRidget.setEnabled(false);
-			addRidget.addListener(new AddContainerAction());
-		}
-		viewRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_VIEW);
-		if (viewRidget != null) {
-			viewRidget.setEnabled(false);
-			viewRidget.addListener(new ViewContainerAction());
-		}
 	}
 
 	public void refreshInputList() {
@@ -102,28 +167,9 @@ public class ContainerListViewController extends BaseListViewController {
 		containerListTable.updateFromModel();
 	}
 
-	protected List<ContainerListViewTableNode> getFilteredResult() {
-		List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
-		if (selectedMember != null) {
-			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
-			if (farmCombo != null) {
-				String farmName = farmCombo.getText();
-				if (!farmName.isEmpty()) {
-					List<Farm> farms = selectedMember.getMember().getFarms();
-					for (Farm farm : farms) {
-						if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
-							List<Container> containerList = farm.getCans();
-							for (Container container : containerList) {
-								tableInput.add(new ContainerListViewTableNode(selectedMember, container));
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return results;
-
+	private void clearInputs() {
+		tableInput.clear();
+		containerListTable.updateFromModel();
 	}
 
 	private void setColumnFormatters() {
@@ -132,7 +178,7 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Membership membership = ((ContainerListViewTableNode) element).getMembership();
+					final Membership membership = ((ContainerListViewTableNode) element).getMembership();
 					if (membership != null) {
 						return membership.getMemberId() + "";
 					}
@@ -145,9 +191,9 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Membership membership = ((ContainerListViewTableNode) element).getMembership();
+					final Membership membership = ((ContainerListViewTableNode) element).getMembership();
 					if (membership != null) {
-						Person member = (membership).getMember();
+						final Person member = (membership).getMember();
 						if (member != null) {
 							return member.getFamilyName() + "," + member.getGivenName();
 						}
@@ -160,7 +206,7 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Container container = ((ContainerListViewTableNode) element).getContainer();
+					final Container container = ((ContainerListViewTableNode) element).getContainer();
 					if (container != null) {
 						return container.getOwner().getName();
 					}
@@ -172,7 +218,7 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Container container = ((ContainerListViewTableNode) element).getContainer();
+					final Container container = ((ContainerListViewTableNode) element).getContainer();
 					if (container != null) {
 						return String.valueOf(container.getContainerId());
 					}
@@ -184,7 +230,7 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Container container = ((ContainerListViewTableNode) element).getContainer();
+					final Container container = ((ContainerListViewTableNode) element).getContainer();
 					if (container != null) {
 						return container.getType().toString();
 					}
@@ -196,7 +242,7 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Container container = ((ContainerListViewTableNode) element).getContainer();
+					final Container container = ((ContainerListViewTableNode) element).getContainer();
 					if (container != null) {
 						return String.valueOf(container.getMeasureType().toString());
 					}
@@ -208,7 +254,7 @@ public class ContainerListViewController extends BaseListViewController {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
-					Container container = ((ContainerListViewTableNode) element).getContainer();
+					final Container container = ((ContainerListViewTableNode) element).getContainer();
 					if (container != null) {
 						return String.valueOf(container.getCapacity());
 					}
@@ -216,6 +262,35 @@ public class ContainerListViewController extends BaseListViewController {
 				return null;
 			}
 		});
+	}
+
+	private void updateFarmCombo() {
+		if (selectedMember != null) {
+			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
+			farmCombofarms.clear();
+			if (farmCombo != null) {
+				final String currentSelection = farmCombo.getText();
+				farmNames.clear();
+				farmNames.add(ALL_FARM);
+				final List<Farm> farms = selectedMember.getMember().getFarms();
+				for (final Farm farm : farms) {
+					farmNames.add(farm.getName());
+					farmCombofarms.add(farm);
+				}
+				farmCombo.updateFromModel();
+				if (MemberUtil.check(currentSelection)) {
+					final int index = farmNames.indexOf(currentSelection);
+					if (index != -1) {
+						farmCombo.setSelection(index);
+						return;
+					}
+
+				}
+				// select the "All Farm" by default
+				farmCombo.setSelection(0);
+				addRidget.setEnabled(farmNames.size() > 1);
+			}
+		}
 	}
 
 	@Override
@@ -250,120 +325,58 @@ public class ContainerListViewController extends BaseListViewController {
 
 	}
 
-	private void clearInputs() {
-		tableInput.clear();
+	@Override
+	protected void configureListGroup() {
+		containerListTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
+
+		refreshInputList();
+		containerListTable.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class),
+				ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
+		setColumnFormatters();
+
+		containerListTable.addSelectionListener(new ISelectionListener() {
+
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				if (event.getSource() == containerListTable) {
+					viewRidget.setEnabled(containerListTable.getSelection().size() > 0);
+				}
+			}
+		});
 		containerListTable.updateFromModel();
+		addRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD);
+		if (addRidget != null) {
+			addRidget.setEnabled(false);
+			addRidget.addListener(new AddContainerAction());
+		}
+		viewRidget = getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_VIEW);
+		if (viewRidget != null) {
+			viewRidget.setEnabled(false);
+			viewRidget.addListener(new ViewContainerAction());
+		}
 	}
 
-	private void updateFarmCombo() {
+	protected List<ContainerListViewTableNode> getFilteredResult() {
+		final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
 		if (selectedMember != null) {
 			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
-			farmCombofarms.clear();
 			if (farmCombo != null) {
-				String currentSelection = farmCombo.getText();
-				farmNames.clear();
-				farmNames.add(ALL_FARM);
-				List<Farm> farms = selectedMember.getMember().getFarms();
-				for (Farm farm : farms) {
-					farmNames.add(farm.getName());
-					farmCombofarms.add(farm);
-				}
-				farmCombo.updateFromModel();
-				if (MemberUtil.check(currentSelection)) {
-					int index = farmNames.indexOf(currentSelection);
-					if (index != -1) {
-						farmCombo.setSelection(index);
-						return;
-					}
-
-				}
-				// select the "All Farm" by default
-				farmCombo.setSelection(0);
-				addRidget.setEnabled(farmNames.size()>1);
-			}
-		}
-	}
-
-	/**
-	 * Open member search dialog, IActionListener for search button
-	 * 
-	 */
-	public class MemberLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			MemberSearchDialog memberDialog = new MemberSearchDialog(null);
-			int retVal = memberDialog.open();
-			if (retVal == MemberSearchDialog.OK) {
-				selectedMember = memberDialog.getSelectedMember();
-				String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
-				memberNameFilter.setText(memberName);
-				updateFarmCombo();
-				if (searchButton != null) {
-					searchButton.setEnabled(true);
-				}
-			}
-		}
-	}
-
-	private final class AddContainerAction implements IActionListener {
-		@Override
-		public void callback() {
-			Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-			final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
-			List <Farm> inputFarms =  new ArrayList<Farm>();
-			int index = farmCombo.getSelectionIndex();
-			if(index != -1){
-				if(index == 0){
-					inputFarms.addAll(farmCombofarms);					
-				}else{
-					inputFarms.add(farmCombofarms.get(index-1));
-				}
-				memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
-				memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-
-				int returnCode = memberDialog.open();
-				if (returnCode == AbstractWindowController.OK) {
-					container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-					container.getOwner().getCans().add(container);
-					farmRepository.update(container.getOwner());
-					memberRepository.update(selectedMember);
-					refreshInputList();
-				}
-			}
-		}
-	}
-
-	private final class ViewContainerAction implements IActionListener{
-
-		@Override
-		public void callback() {
-			ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) containerListTable.getSelection().get(0);
-			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
-			List <Farm> inputFarms =  new ArrayList<Farm>();
-			inputFarms.add(selectedNode.getContainer().getOwner());
-
-			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, selectedNode.getContainer());
-			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-
-			int returnCode = dialog.open();
-			if (returnCode == AbstractWindowController.OK) {
-				Container container = (Container) dialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-				farmRepository.update(container.getOwner());
-				memberRepository.update(selectedMember);
-				refreshInputList();
-			} else if (returnCode == 2) {
-				// confirm for delete
-				if (selectedNode != null) {
-					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, DELETE_DIALOG_MESSAGE)) {
-						Farm farm = selectedNode.getContainer().getOwner();
-						farm.getCans().remove(selectedNode.getContainer());
-						farmRepository.update(farm);
-						memberRepository.update(selectedNode.getMembership());
-						refreshInputList();
+				final String farmName = farmCombo.getText();
+				if (!farmName.isEmpty()) {
+					final List<Farm> farms = selectedMember.getMember().getFarms();
+					for (final Farm farm : farms) {
+						if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
+							final List<Container> containerList = farm.getCans();
+							for (final Container container : containerList) {
+								tableInput.add(new ContainerListViewTableNode(selectedMember, container));
+							}
+						}
 					}
 				}
 			}
 		}
+
+		return results;
+
 	}
 }
-

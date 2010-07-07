@@ -11,16 +11,31 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 public class LocationInfoGroup extends Group {
+	private Combo districtCombo;
+	private Combo divisionCombo;
+	private Combo provinceCombo;
 	private Text txtAddress;
-	private Text txtSection;
 	private Text txtEstate;
-	private Text txtTown;
-	private Text txtSubLocation;
 	private Combo txtLocation;
 	private Text txtPostalCode;
-	private Combo divisionCombo;
-	private Combo districtCombo;
-	private Combo provinceCombo;
+	private Text txtSection;
+	private Text txtSubLocation;
+	private Text txtTown;
+
+	/**
+	 * Create the composite.
+	 * 
+	 * @param parent
+	 * @param style
+	 */
+	public LocationInfoGroup(Composite parent, int style) {
+		super(parent, style);
+		setText("Location");
+		setLayout(new FillLayout());
+
+		// create address and map areas
+		createAddressArea(this);
+	}
 
 	private Composite createAddressArea(Composite parent) {
 		final Composite addressArea = new Composite(parent, SWT.NO_BACKGROUND);
@@ -121,21 +136,6 @@ public class LocationInfoGroup extends Group {
 		txtPostalCode.setLayoutData(gd_txtPostalCode);
 
 		return addressArea;
-	}
-
-	/**
-	 * Create the composite.
-	 * 
-	 * @param parent
-	 * @param style
-	 */
-	public LocationInfoGroup(Composite parent, int style) {
-		super(parent, style);
-		setText("Location");
-		setLayout(new FillLayout());
-
-		// create address and map areas
-		createAddressArea(this);
 	}
 
 	@Override

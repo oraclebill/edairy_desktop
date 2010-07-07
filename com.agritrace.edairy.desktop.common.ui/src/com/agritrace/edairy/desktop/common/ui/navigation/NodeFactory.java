@@ -24,10 +24,6 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
  */
 public final class NodeFactory {
 
-	private NodeFactory() {
-		// prevent instantiation
-	}
-
 	public static IModuleNode createModule(String nodeId, String caption, IModuleGroupNode parent) {
 		final IModuleNode result = new ModuleNode(new NavigationNodeId(nodeId), caption);
 		parent.addChild(result);
@@ -47,5 +43,9 @@ public final class NodeFactory {
 		parent.addChild(result);
 		WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
 		return result;
+	}
+
+	private NodeFactory() {
+		// prevent instantiation
 	}
 }

@@ -16,10 +16,10 @@ import com.agritrace.edairy.desktop.common.ui.views.DateRangeSearchWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidget {
-	private Composite composite;
-
 	public static final String ADD_BUTTON = "&Add Transaction";
+
 	public static final String View_BUTTON = "&View";
+	private final Composite composite;
 
 	public MemberTransactionWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
@@ -27,9 +27,13 @@ public class MemberTransactionWidget {
 		initGUI();
 	}
 
+	public Composite getComposite() {
+		return composite;
+	}
+
 	public void initGUI() {
 		// fitler panel
-		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Transaction Date Range: ",
+		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Transaction Date Range: ",
 				ViewWidgetId.TRANSACTION_FILTER_STARTDATE, ViewWidgetId.TRANSACTION_FILTER_ENDDATE,
 				ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
@@ -65,16 +69,14 @@ public class MemberTransactionWidget {
 		buttonPanel.setLayout(new GridLayout(2, false));
 		buttonPanel.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
 
-		Button addButton = UIControlsFactory.createButton(buttonPanel, ADD_BUTTON, ViewWidgetId.TRANSACTION_ADD_BUTTON);
+		final Button addButton = UIControlsFactory.createButton(buttonPanel, ADD_BUTTON,
+				ViewWidgetId.TRANSACTION_ADD_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 
-		Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON, ViewWidgetId.TRANSACTION_VIEW_BUTTON);
+		final Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON,
+				ViewWidgetId.TRANSACTION_VIEW_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(vButton);
 
-	}
-
-	public Composite getComposite() {
-		return composite;
 	}
 
 }

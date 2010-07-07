@@ -11,15 +11,10 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
  */
 public abstract class ControllerDelegate implements IControllerDelegate {
 
-	public ControllerDelegate(IRidgetContainer container) {
-		this.ridgetContainer = container;
-	}
-
 	private final IRidgetContainer ridgetContainer;
 
-	@Override
-	public IRidgetContainer getRidgetContainer() {
-		return this.ridgetContainer;
+	public ControllerDelegate(IRidgetContainer container) {
+		this.ridgetContainer = container;
 	}
 
 	@Override
@@ -31,6 +26,11 @@ public abstract class ControllerDelegate implements IControllerDelegate {
 			return this.ridgetContainer.getRidget(ridgetClazz, id);
 		}
 		return null;
+	}
+
+	@Override
+	public IRidgetContainer getRidgetContainer() {
+		return this.ridgetContainer;
 	}
 
 }

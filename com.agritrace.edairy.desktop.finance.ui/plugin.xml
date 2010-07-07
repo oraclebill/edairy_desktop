@@ -4,29 +4,35 @@
    <extension
          point="org.eclipse.ui.views">
       <view
+            category="com.agritrace.edairy.desktop.finance.ui"
+            class="com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView"
+            icon="icons/member-transactions.gif"
+            id="member.account.transaction.journal"
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.finance.ui.views.CreditJournalView"
-            id="edairy.desktop.credit-journal-entry"
-            name="Credit Journal Entry"
-            restorable="true">
+            name="Member Transaction Register">
       </view>
       <view
+            category="com.agritrace.edairy.desktop.finance.ui"
+            class="com.agritrace.edairy.desktop.finance.ui.views.AccountAdjustmentsJournalView"
+            icon="icons/adjustment-transactions.gif"
+            id="member.account.adjustment.journal"
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView"
-            id="dairy.transactions.register"
-            name="Transaction Register"
-            restorable="true">
+            name="Member Transaction Register">
       </view>
-      <view allowMultiple="true"
-            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView"
-            id="transaction.batch-entry.view"
-            name="Transaction Batch Entry">
+      <view
+            category="com.agritrace.edairy.desktop.finance.ui"
+            class="com.agritrace.edairy.desktop.finance.ui.views.MilkPriceJournalView"
+            id="milk.price.journal"
+            icon="icons/milkprice.gif"
+            allowMultiple="true"
+            name="Milk Price Log">
       </view>
-      <view allowMultiple="true"
-            class="com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView"
-            id="transaction.batch-entry.mdview"
-            name="Transaction Batch Entry">
-      </view>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
    </extension>
 
 </plugin>

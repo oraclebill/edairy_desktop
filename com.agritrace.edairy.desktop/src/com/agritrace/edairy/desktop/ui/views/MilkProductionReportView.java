@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
 
-import com.swtdesigner.ResourceManager;
 import com.swtdesigner.SWTResourceManager;
 
 public class MilkProductionReportView extends ViewPart {
@@ -45,7 +44,7 @@ public class MilkProductionReportView extends ViewPart {
 
 		final Label label = new Label(scrolledComposite, SWT.NONE);
 		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		Image img = ImageStore.getInstance().getImage("eDairyReportTemplate-milkproduction.jpg");
+		final Image img = ImageStore.getInstance().getImage("eDairyReportTemplate-milkproduction.jpg");
 		System.err.println("Image: " + img);
 		label.setImage(img);
 		scrolledComposite.setContent(label);

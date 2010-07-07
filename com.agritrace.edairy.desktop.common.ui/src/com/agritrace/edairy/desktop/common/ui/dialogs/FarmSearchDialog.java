@@ -45,18 +45,72 @@ import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
  */
 public class FarmSearchDialog extends TitleAreaDialog {
 
-	IMemberRepository memberRepo;
-	List<Farm> 		  farmList;
-	Membership		  selectedMember;
-	Farm 				selectedFarm;
-    
-	public Farm getSelectedFarm() {
-		return selectedFarm;
+	public class FarmLabelProvider implements ITableLabelProvider {
+
+		@Override
+		public void addListener(ILabelProviderListener listener) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void dispose() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public Image getColumnImage(Object element, int columnIndex) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getColumnText(Object element, int columnIndex) {
+			if (element instanceof Farm) {
+				final Farm farm = (Farm) element;
+				assert (farm != null);
+				switch (columnIndex) {
+				case 0:
+					try {
+						return farm.getFarmId().toString();
+					} catch (final NullPointerException npe) {
+						return "N/A";
+					}
+				case 1:
+					return farm.getName();
+				case 2:
+					try {
+						return farm.getLocation().getPostalLocation().getEstate();
+					} catch (final Exception e) {
+						return "<location not found>";
+					}
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public boolean isLabelProperty(Object element, String property) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void removeListener(ILabelProviderListener listener) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
-	public void setSelectedMember(Membership selectedMember) {
-		this.selectedMember = selectedMember;
-	}
+	public static final String SEARCH_COLUMN_COMBO = "SEARCH_COLUMN_COMBO";
+
+	List<Farm> farmList;
+	IMemberRepository memberRepo;
+	Farm selectedFarm;
+
+	Membership selectedMember;
 
 	/**
 	 * MyTitleAreaDialog constructor
@@ -79,6 +133,31 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		return super.close();
 	}
 
+	public Farm getSelectedFarm() {
+		return selectedFarm;
+	}
+
+	public void setSelectedMember(Membership selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+
+	@Override
+	protected void configureShell(Shell newShell) {
+		newShell.setSize(450, 500);
+		super.configureShell(newShell);
+	}
+
+	/**
+	 * Creates the buttons for the button bar
+	 * 
+	 * @param parent
+	 *            the parent composite
+	 */
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, IDialogConstants.OK_ID, "Select", true);
+	}
+
 	/**
 	 * Creates the dialog's contents
 	 * 
@@ -92,12 +171,6 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		setTitle("Farm Lookup");
 		setMessage("Please input farm search criterias");
 		return contents;
-	}
-
-	@Override
-	protected void configureShell(Shell newShell) {
-		newShell.setSize(450, 500);
-		super.configureShell(newShell);
 	}
 
 	/**
@@ -129,17 +202,6 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		lookupButton.addSelectionListener(new SelectionAdapter() {
 			/**
-			 * Sent when selection occurs in the control. The default behavior
-			 * is to do nothing.
-			 * 
-			 * @param e
-			 *            an event containing information about the selection
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-
-			/**
 			 * Sent when default selection occurs in the control. The default
 			 * behavior is to do nothing.
 			 * 
@@ -149,6 +211,17 @@ public class FarmSearchDialog extends TitleAreaDialog {
 			 */
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+
+			/**
+			 * Sent when selection occurs in the control. The default behavior
+			 * is to do nothing.
+			 * 
+			 * @param e
+			 *            an event containing information about the selection
+			 */
+			@Override
+			public void widgetSelected(SelectionEvent e) {
 			}
 		});
 
@@ -191,95 +264,22 @@ public class FarmSearchDialog extends TitleAreaDialog {
 			}
 		});
 		tableView.addSelectionChangedListener(new ISelectionChangedListener() {
-			
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				ISelection selection = event.getSelectionProvider().getSelection();
-				if (selection != null && selection instanceof IStructuredSelection) {
-					IStructuredSelection sel = (IStructuredSelection) selection;
-					Object obj = sel.getFirstElement();
+				final ISelection selection = event.getSelectionProvider().getSelection();
+				if ((selection != null) && (selection instanceof IStructuredSelection)) {
+					final IStructuredSelection sel = (IStructuredSelection) selection;
+					final Object obj = sel.getFirstElement();
 					if (obj instanceof Farm) {
-						selectedFarm = (Farm)obj;
-					}
-					else {
+						selectedFarm = (Farm) obj;
+					} else {
 						throw new IllegalStateException();
 					}
 				}
-			}			
+			}
 		});
 		panel.setLayout(layout);
 		return composite;
-	}
-
-	/**
-	 * Creates the buttons for the button bar
-	 * 
-	 * @param parent
-	 *            the parent composite
-	 */
-	@Override
-	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Select", true);
-	}
-
-	public class FarmLabelProvider implements ITableLabelProvider {
-
-		@Override
-		public void addListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void dispose() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public Image getColumnImage(Object element, int columnIndex) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getColumnText(Object element, int columnIndex) {
-			if (element instanceof Farm) {
-				final Farm farm = (Farm) element;
-				assert (farm != null);
-				switch (columnIndex) {
-				case 0:
-					try {
-						return farm.getFarmId().toString();
-					}
-					catch( NullPointerException npe ) {
-						return "N/A";
-					}
-				case 1:
-					return farm.getName();
-				case 2:
-					try {
-						return farm.getLocation().getPostalLocation().getEstate();
-					} catch (final Exception e) {
-						return "<location not found>";
-					}
-				}
-			}
-			return null;
-		}
-
 	}
 }

@@ -16,15 +16,19 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberContainerWidget {
 
-	private Composite composite;
-
 	public static final String ADD_BUTTON = "Add &Container";
+
 	public static final String REMOVE_BUTTON = "&Remove";
+	private final Composite composite;
 
 	public MemberContainerWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
 		composite.setLayout(new GridLayout(1, true));
 		initGUI();
+	}
+
+	public Composite getComposite() {
+		return composite;
 	}
 
 	public void initGUI() {
@@ -65,14 +69,9 @@ public class MemberContainerWidget {
 		final Button addButton = UIControlsFactory.createButton(buttonsPanel, ADD_BUTTON, ViewWidgetId.CONTAINER_ADD);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(addButton);
 
-		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, "View",
-				ViewWidgetId.CONTAINER_Remove);
+		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, "View", ViewWidgetId.CONTAINER_Remove);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).grab(false, false).applyTo(removeButton);
 
-	}
-
-	public Composite getComposite() {
-		return composite;
 	}
 
 }

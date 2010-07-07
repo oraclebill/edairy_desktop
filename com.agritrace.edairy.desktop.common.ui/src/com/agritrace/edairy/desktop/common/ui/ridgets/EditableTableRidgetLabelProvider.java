@@ -14,19 +14,19 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 
 /**
- * Table ridget label provider
- * Copied from table Ridget and change the visibility
+ * Table ridget label provider Copied from table Ridget and change the
+ * visibility
  * 
  * @author Hui(Spark) wan
- *
+ * 
  */
-public class EditableTableRidgetLabelProvider extends
-		ObservableMapLabelProvider implements ITableColorProvider,
+@SuppressWarnings("restriction")
+public class EditableTableRidgetLabelProvider extends ObservableMapLabelProvider implements ITableColorProvider,
 		ITableFontProvider {
 
-	private final int numColumns;
 	private final IObservableMap[] attributeMap;
 	private IColumnFormatter[] formatters;
+	private final int numColumns;
 
 	/**
 	 * Create a new instance
@@ -43,43 +43,49 @@ public class EditableTableRidgetLabelProvider extends
 	 *             if attributeMap and labelProviders have not the same number
 	 *             of entries
 	 */
-	public EditableTableRidgetLabelProvider(IObservableMap[] attributeMap,
-			IColumnFormatter[] formatters) {
+	public EditableTableRidgetLabelProvider(IObservableMap[] attributeMap, IColumnFormatter[] formatters) {
 		this(attributeMap, formatters, attributeMap.length);
 	}
 
-	protected EditableTableRidgetLabelProvider(IObservableMap[] attributeMap,
-			IColumnFormatter[] formatters, int numColumns) {
+	protected EditableTableRidgetLabelProvider(IObservableMap[] attributeMap, IColumnFormatter[] formatters,
+			int numColumns) {
 		super(attributeMap);
-		Assert.isLegal(numColumns == formatters.length,
-				String.format("expected %d formatters, got %d", numColumns, //$NON-NLS-1$
-						formatters.length));
+		Assert.isLegal(numColumns == formatters.length, String.format("expected %d formatters, got %d", numColumns, //$NON-NLS-1$
+				formatters.length));
 		this.numColumns = numColumns;
 		this.attributeMap = new IObservableMap[attributeMap.length];
-		System.arraycopy(attributeMap, 0, this.attributeMap, 0,
-				this.attributeMap.length);
+		System.arraycopy(attributeMap, 0, this.attributeMap, 0, this.attributeMap.length);
 		this.formatters = new IColumnFormatter[formatters.length];
-		System.arraycopy(formatters, 0, this.formatters, 0,
-				this.formatters.length);
+		System.arraycopy(formatters, 0, this.formatters, 0, this.formatters.length);
 	}
 
 	@Override
-	public Image getImage(Object element) {
-		return getColumnImage(element, 0);
+	public Color getBackground(Object element, int columnIndex) {
+		if (columnIndex < formatters.length) {
+			final IColumnFormatter formatter = this.formatters[columnIndex];
+			if (formatter != null) {
+				return (Color) formatter.getBackground(element);
+			}
+		}
+		return null;
+	}
+
+	public int getColumnCount() {
+		return this.formatters.length;
 	}
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 		Image result = null;
 		if (columnIndex < attributeMap.length) {
-			IColumnFormatter formatter = this.formatters[columnIndex];
+			final IColumnFormatter formatter = this.formatters[columnIndex];
 			if (formatter != null) {
 				result = (Image) formatter.getImage(element);
 			}
 			if (result == null) {
-				Object value = attributeMap[columnIndex].get(element);
+				final Object value = attributeMap[columnIndex].get(element);
 				if (value instanceof Boolean) {
-					String key = ((Boolean) value).booleanValue() ? SharedImages.IMG_CHECKED
+					final String key = ((Boolean) value).booleanValue() ? SharedImages.IMG_CHECKED
 							: SharedImages.IMG_UNCHECKED;
 					result = Activator.getSharedImage(key);
 				}
@@ -92,7 +98,7 @@ public class EditableTableRidgetLabelProvider extends
 	public String getColumnText(Object element, int columnIndex) {
 		String result = null;
 		if (columnIndex < formatters.length) {
-			IColumnFormatter formatter = this.formatters[columnIndex];
+			final IColumnFormatter formatter = this.formatters[columnIndex];
 			if (formatter != null) {
 				result = formatter.getText(element);
 			}
@@ -101,36 +107,6 @@ public class EditableTableRidgetLabelProvider extends
 			result = super.getColumnText(element, columnIndex);
 		}
 		return result;
-	}
-
-	public Color getForeground(Object element, int columnIndex) {
-		if (columnIndex < formatters.length) {
-			IColumnFormatter formatter = this.formatters[columnIndex];
-			if (formatter != null) {
-				return (Color) formatter.getForeground(element);
-			}
-		}
-		return null;
-	}
-
-	public Color getBackground(Object element, int columnIndex) {
-		if (columnIndex < formatters.length) {
-			IColumnFormatter formatter = this.formatters[columnIndex];
-			if (formatter != null) {
-				return (Color) formatter.getBackground(element);
-			}
-		}
-		return null;
-	}
-
-	public Font getFont(Object element, int columnIndex) {
-		if (columnIndex < formatters.length) {
-			IColumnFormatter formatter = this.formatters[columnIndex];
-			if (formatter != null) {
-				return (Font) formatter.getFont(element);
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -148,26 +124,47 @@ public class EditableTableRidgetLabelProvider extends
 		return null;
 	}
 
+	@Override
+	public Font getFont(Object element, int columnIndex) {
+		if (columnIndex < formatters.length) {
+			final IColumnFormatter formatter = this.formatters[columnIndex];
+			if (formatter != null) {
+				return (Font) formatter.getFont(element);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Color getForeground(Object element, int columnIndex) {
+		if (columnIndex < formatters.length) {
+			final IColumnFormatter formatter = this.formatters[columnIndex];
+			if (formatter != null) {
+				return (Color) formatter.getForeground(element);
+			}
+		}
+		return null;
+	}
+
 	// protected methods
 	// //////////////////
 
-	protected IColumnFormatter getFormatter(int columnIndex) {
-		return columnIndex < formatters.length ? formatters[columnIndex] : null;
+	@Override
+	public Image getImage(Object element) {
+		return getColumnImage(element, 0);
 	}
 
 	// helping methods
 	// ////////////////
 
-	public int getColumnCount() {
-		return this.formatters.length;
+	public void setFormatters(IColumnFormatter[] formatters) {
+		Assert.isLegal(numColumns == formatters.length, String.format("expected %d formatters, got %d", numColumns, //$NON-NLS-1$
+				formatters.length));
+		this.formatters = new IColumnFormatter[formatters.length];
+		System.arraycopy(formatters, 0, this.formatters, 0, this.formatters.length);
 	}
 
-	public void setFormatters(IColumnFormatter[] formatters) {
-		Assert.isLegal(numColumns == formatters.length,
-				String.format("expected %d formatters, got %d", numColumns, //$NON-NLS-1$
-						formatters.length));
-		this.formatters = new IColumnFormatter[formatters.length];
-		System.arraycopy(formatters, 0, this.formatters, 0,
-				this.formatters.length);
+	protected IColumnFormatter getFormatter(int columnIndex) {
+		return columnIndex < formatters.length ? formatters[columnIndex] : null;
 	}
 }

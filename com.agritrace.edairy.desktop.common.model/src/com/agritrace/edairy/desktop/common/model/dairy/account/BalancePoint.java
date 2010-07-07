@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.dairy.account;
 
 import java.math.BigDecimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
@@ -44,7 +43,7 @@ public interface BalancePoint extends EObject {
 	 * @return the value of the '<em>Account Balance Id</em>' attribute.
 	 * @see #setAccountBalanceId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getBalancePoint_AccountBalanceId()
-	 * @model
+	 * @model id="true" required="true"
 	 * @generated
 	 */
 	long getAccountBalanceId();

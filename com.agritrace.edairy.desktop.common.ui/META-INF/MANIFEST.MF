@@ -5,17 +5,28 @@ Bundle-SymbolicName: com.agritrace.edairy.desktop.common.ui
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.common.ui.activator.Activator
 Bundle-Vendor: AGRITRACE
-Require-Bundle: org.eclipse.riena.client;bundle-version="2.0.0",
- com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
- org.eclipse.emf.databinding;bundle-version="1.2.0",
+Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.member.services;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.icons;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.member.services;bundle-version="1.0.0"
+ org.apache.commons.collections;bundle-version="3.2.0",
+ org.eclipse.riena.ui.swt;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.ui.core;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.ui.ridgets;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.ui.ridgets.swt;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.ui.workarea;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.beans.common;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.core;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.riena.navigation.ui.swt;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.emf.databinding;bundle-version="1.2.0",
+ org.eclipse.ui;bundle-version="3.6.0";visibility:=reexport,
+ org.eclipse.osgi.services;bundle-version="3.2.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,
  com.agritrace.edairy.desktop.common.ui.beans,
  com.agritrace.edairy.desktop.common.ui.controllers,
+ com.agritrace.edairy.desktop.common.ui.controllers.util,
  com.agritrace.edairy.desktop.common.ui.controls,
  com.agritrace.edairy.desktop.common.ui.dialogs,
  com.agritrace.edairy.desktop.common.ui.editingsupport,
@@ -27,4 +38,4 @@ Export-Package: com.agritrace.edairy.desktop.common.ui,
  com.agritrace.edairy.desktop.common.ui.validators,
  com.agritrace.edairy.desktop.common.ui.views,
  com.swtdesigner;uses:="org.eclipse.jface.resource,org.eclipse.swt.graphics"
-Import-Package: com.agritrace.edairy.desktop.member.services.member
+

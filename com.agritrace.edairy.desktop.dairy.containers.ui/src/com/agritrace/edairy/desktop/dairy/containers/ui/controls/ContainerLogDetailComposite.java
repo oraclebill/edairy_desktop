@@ -6,15 +6,13 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.grouplayout.GroupLayout;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.custom.CCombo;
 
 public class ContainerLogDetailComposite extends Composite {
 
@@ -23,7 +21,7 @@ public class ContainerLogDetailComposite extends Composite {
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		setLayout(new FillLayout());
 
-		Composite detailGroup_1 = UIControlsFactory.createGroup(this, "Container Detail");
+		final Composite detailGroup_1 = UIControlsFactory.createGroup(this, "Container Detail");
 		detailGroup_1.setLayout(new GridLayout());
 
 		addDescriptionGroup(detailGroup_1);
@@ -91,7 +89,7 @@ public class ContainerLogDetailComposite extends Composite {
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		{
-			Composite detailGroup = new Composite(comp, SWT.NONE);
+			final Composite detailGroup = new Composite(comp, SWT.NONE);
 			detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 

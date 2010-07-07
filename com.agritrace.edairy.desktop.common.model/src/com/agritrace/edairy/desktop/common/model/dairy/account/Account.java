@@ -6,13 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountId <em>Account Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getEstablished <em>Established</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getTransactions <em>Transactions</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getBalances <em>Balances</em>}</li>
@@ -47,7 +47,7 @@ public interface Account extends EObject {
 	 * @return the value of the '<em>Account Id</em>' attribute.
 	 * @see #setAccountId(long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_AccountId()
-	 * @model
+	 * @model id="true" required="true"
 	 * @generated
 	 */
 	long getAccountId();
@@ -63,7 +63,7 @@ public interface Account extends EObject {
 	void setAccountId(long value);
 
 	/**
-	 * Returns the value of the '<em><b>Member</b></em>' reference.
+	 * Returns the value of the '<em><b>Member</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -71,20 +71,20 @@ public interface Account extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Member</em>' reference.
+	 * @return the value of the '<em>Member</em>' container reference.
 	 * @see #setMember(Membership)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Member()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount
-	 * @model opposite="account"
+	 * @model opposite="account" required="true" transient="false"
 	 * @generated
 	 */
 	Membership getMember();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Member</em>' reference.
+	 * @param value the new value of the '<em>Member</em>' container reference.
 	 * @see #getMember()
 	 * @generated
 	 */
@@ -117,6 +117,36 @@ public interface Account extends EObject {
 	void setEstablished(Date value);
 
 	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+	 * @see #setStatus(AccountStatus)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Status()
+	 * @model default="0" required="true"
+	 * @generated
+	 */
+	AccountStatus getStatus();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(AccountStatus value);
+
+	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -143,23 +173,25 @@ public interface Account extends EObject {
 	void setType(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Transactions</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction}.
+	 * Returns the value of the '<em><b>Transactions</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Transactions</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transactions</em>' reference list.
+	 * @return the value of the '<em>Transactions</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Transactions()
-	 * @model
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount
+	 * @model opposite="account" containment="true"
 	 * @generated
 	 */
-	EList<AccountTransaction> getTransactions();
+	EList<Transaction> getTransactions();
 
 	/**
-	 * Returns the value of the '<em><b>Balances</b></em>' reference list.
+	 * Returns the value of the '<em><b>Balances</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -167,9 +199,9 @@ public interface Account extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Balances</em>' reference list.
+	 * @return the value of the '<em>Balances</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Balances()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<BalancePoint> getBalances();

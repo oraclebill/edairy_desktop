@@ -98,6 +98,15 @@ public interface DairyFactory extends EFactory {
 	DeliveryJournal createDeliveryJournal();
 
 	/**
+	 * Returns a new object of class '<em>Delivery Journal Line</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delivery Journal Line</em>'.
+	 * @generated
+	 */
+	DeliveryJournalLine createDeliveryJournalLine();
+
+	/**
 	 * Returns a new object of class '<em>Dairy</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,6 +159,15 @@ public interface DairyFactory extends EFactory {
 	 * @generated
 	 */
 	Customer createCustomer();
+
+	/**
+	 * Returns a new object of class '<em>Milk Price</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Milk Price</em>'.
+	 * @generated
+	 */
+	MilkPrice createMilkPrice();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -7,12 +7,14 @@ import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 
 public interface ICustomerRepository extends IRepository<Customer> {
 
+	@Override
 	List<Customer> all();
-
-	void saveNew(Customer newCustomer);
 
 	void merge(Customer customer);
 
 	void restore(Customer customer);
+
+	@Override
+	void saveNew(Customer newCustomer);
 
 }

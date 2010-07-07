@@ -24,8 +24,8 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -39,25 +39,25 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
 
-	public final static class JournalSessionColumnFormatter extends ColumnFormatter {
-		@Override
-		public String getText(Object element) {
-			if (element instanceof CollectionJournalLine) {
-				CollectionJournalPage journal = ((CollectionJournalLine) element).getCollectionJournal();
-				if (journal != null) {
-					return journal.getSession().toString();
-				}
-			}
-			return null;
-		}
-	}
-
 	public final static class DairyContainerIdColumnFormatter extends ColumnFormatter {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof CollectionJournalLine) {
 				if (((CollectionJournalLine) element).getDairyContainer() != null) {
 					return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
+				}
+			}
+			return null;
+		}
+	}
+
+	public final static class JournalSessionColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof CollectionJournalLine) {
+				final CollectionJournalPage journal = ((CollectionJournalLine) element).getCollectionJournal();
+				if (journal != null) {
+					return journal.getSession().toString();
 				}
 			}
 			return null;
@@ -77,18 +77,18 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		}
 	}
 
-	private IController controller;
-	private Membership membership;
-
-	private DateRangeSearchController dateSearchController;
-
-	private ITableRidget collectionTable;
-	private final String[] collectionPropertyNames = { "collectionJournal", "collectionJournal", "dairyContainer",
-			"quantity", "notRecorded", "rejected", "flagged" };
 	private final String[] collectionColumnHeaders = { "Session", "Date", "Container", "Quantity", "NPR Missing",
 			"Rejected", "Suspended" };
-	private final List<CollectionJournalLine> records = new ArrayList<CollectionJournalLine>();
+	private final String[] collectionPropertyNames = { "collectionJournal", "collectionJournal", "dairyContainer",
+			"quantity", "notRecorded", "rejected", "flagged" };
+
+	private ITableRidget collectionTable;
+
+	private IController controller;
+	private DateRangeSearchController dateSearchController;
+	private Membership membership;
 	private IToggleButtonRidget nprMissing;
+	private final List<CollectionJournalLine> records = new ArrayList<CollectionJournalLine>();
 	private IToggleButtonRidget rejected;
 	private IToggleButtonRidget suspended;
 
@@ -98,11 +98,21 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
+	public void callback() {
+		if (null == collectionTable) {
+			return;
+		}
+		if (dateSearchController != null) {
+			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
+		}
+	}
+
+	@Override
 	public void configure() {
 		if (controller == null) {
 			return;
 		}
-		
+
 		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
 		if (null == collectionTable) {
 			return;
@@ -125,17 +135,13 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
-	public Object getInputModel() {
-		// TODO Auto-generated method stub
-		return membership;
-	}
-
-	@Override
-	public void setInputModel(Object model) {
-		this.membership = (Membership) model;
-		if (collectionTable != null) {
-			updateBinding();
-		}
+	public List<CollectionJournalLine> filter(String startDate, String endDate) {
+		List<CollectionJournalLine> objs = filterNPR();
+		objs = filterDate(objs, startDate, endDate);
+		collectionTable.bindToModel(new WritableList(objs, CollectionJournalLine.class), CollectionJournalLine.class,
+				collectionPropertyNames, collectionColumnHeaders);
+		collectionTable.updateFromModel();
+		return objs;
 	}
 
 	@Override
@@ -144,10 +150,24 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
+	public Object getInputModel() {
+		// TODO Auto-generated method stub
+		return membership;
+	}
+
+	@Override
 	public void setController(IController controller) {
 		this.controller = controller;
 		configure();
 
+	}
+
+	@Override
+	public void setInputModel(Object model) {
+		this.membership = (Membership) model;
+		if (collectionTable != null) {
+			updateBinding();
+		}
 	}
 
 	@Override
@@ -167,53 +187,22 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	}
 
-	// todo: temporary util method, get a list of collection records
-	private List<CollectionJournalLine> getCollectionJournalLines() {
-		final List<CollectionJournalLine> collectionJournalRecords = new ArrayList<CollectionJournalLine>();
-		if (membership != null) {
-			final String selectedMemberId = "" + membership.getMemberId();
-			final EObject container = membership.eContainer();
-			if (container != null && container instanceof Dairy) {
-				final List<CollectionJournalPage> allRecords = ((Dairy) container).getCollectionJournals();
-				for (final CollectionJournalPage j : allRecords) {
-					final List<CollectionJournalLine> jEntries = j.getJournalEntries();
-					for (final CollectionJournalLine e : jEntries) {
-						if (selectedMemberId.equals(e.getRecordedMember())) {
-							collectionJournalRecords.add(e);
-						}
-					}
-				}
-			}
-		}
-		return collectionJournalRecords;
-	}
-
-	@Override
-	public List<CollectionJournalLine> filter(String startDate, String endDate) {
-		List<CollectionJournalLine> objs = filterNPR();
-		objs = filterDate(objs, startDate, endDate);
-		collectionTable.bindToModel(new WritableList(objs, CollectionJournalLine.class), CollectionJournalLine.class,
-				collectionPropertyNames, collectionColumnHeaders);
-		collectionTable.updateFromModel();
-		return objs;
-	}
-
 	private List<CollectionJournalLine> filterDate(List<CollectionJournalLine> inputRecrods, String startDate,
 			String endDate) {
-		List<CollectionJournalLine> objs = new ArrayList<CollectionJournalLine>();
-		if (inputRecrods == null || inputRecrods.isEmpty()) {
+		final List<CollectionJournalLine> objs = new ArrayList<CollectionJournalLine>();
+		if ((inputRecrods == null) || inputRecrods.isEmpty()) {
 			return objs;
 		}
 		try {
 			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
 				@Override
-				public long longValue(Object object) {
-					return ((Date) object).getTime();
+				public Long adapt(Object value) {
+					return longValue(value);
 				}
 
 				@Override
-				public Long adapt(Object value) {
-					return longValue(value);
+				public long longValue(Object object) {
+					return ((Date) object).getTime();
 				}
 			};
 
@@ -251,7 +240,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 				for (int i = 1; i < condtions.size(); i++) {
 					ret = ret.AND(condtions.get(i));
 				}
-				for (CollectionJournalLine record : inputRecrods) {
+				for (final CollectionJournalLine record : inputRecrods) {
 					select = new SELECT(new FROM(record.getCollectionJournal()), new WHERE(ret));
 					final IQueryResult result = select.execute();
 					if (!result.isEmpty()) {
@@ -264,7 +253,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 				objs.addAll(inputRecrods);
 			}
 
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Activator.getDefault().logError(e, e.getMessage());
@@ -273,8 +262,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	private List<CollectionJournalLine> filterNPR() {
-		List<CollectionJournalLine> filteredRecords = new ArrayList<CollectionJournalLine>();
-		if (records == null || records.isEmpty()) {
+		final List<CollectionJournalLine> filteredRecords = new ArrayList<CollectionJournalLine>();
+		if ((records == null) || records.isEmpty()) {
 			return filteredRecords;
 		}
 		final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
@@ -333,13 +322,24 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	}
 
-	@Override
-	public void callback() {
-		if (null == collectionTable) {
-			return;
+	// todo: temporary util method, get a list of collection records
+	private List<CollectionJournalLine> getCollectionJournalLines() {
+		final List<CollectionJournalLine> collectionJournalRecords = new ArrayList<CollectionJournalLine>();
+		if (membership != null) {
+			final String selectedMemberId = "" + membership.getMemberId();
+			final EObject container = membership.eContainer();
+			if ((container != null) && (container instanceof Dairy)) {
+				final List<CollectionJournalPage> allRecords = ((Dairy) container).getCollectionJournals();
+				for (final CollectionJournalPage j : allRecords) {
+					final List<CollectionJournalLine> jEntries = j.getJournalEntries();
+					for (final CollectionJournalLine e : jEntries) {
+						if (selectedMemberId.equals(e.getRecordedMember())) {
+							collectionJournalRecords.add(e);
+						}
+					}
+				}
+			}
 		}
-		if (dateSearchController != null) {
-			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
-		}
+		return collectionJournalRecords;
 	}
 }

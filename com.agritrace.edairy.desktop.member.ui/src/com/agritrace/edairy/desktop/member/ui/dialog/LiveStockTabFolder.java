@@ -26,10 +26,15 @@ import com.agritrace.edairy.desktop.member.ui.controls.LiveStockRearingWidget;
 public class LiveStockTabFolder {
 
 	public static enum TabItem {
-		General, Identification, Rearing, Other
+		General, Identification, Other, Rearing
 	}
 
 	static class TabItemSet extends HashSet<TabItem> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		TabItemSet(TabItem[] tabs) {
 			super();
 			addAll(Arrays.asList(tabs));
@@ -37,7 +42,6 @@ public class LiveStockTabFolder {
 	};
 
 	public static final Set<TabItem> ALL_TABS = new TabItemSet(TabItem.values());
-
 
 	public static final String MEMBER_INFO_GROUP = "Animal Information";
 
@@ -49,6 +53,10 @@ public class LiveStockTabFolder {
 
 	public LiveStockTabFolder(Composite parent, Set<TabItem> enabledTabs) {
 		initGUI(parent, enabledTabs);
+	}
+
+	public Composite getTabComposite() {
+		return tabComposite;
 	}
 
 	private void initGUI(Composite parent, Set<TabItem> enabledTabs) {
@@ -83,50 +91,49 @@ public class LiveStockTabFolder {
 			profileTab.setText("General");
 			final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			profileComposite.setLayout(new GridLayout(1, true));
-			LiveStockGeneralWidget profileWidget = new LiveStockGeneralWidget(profileComposite);
+			final LiveStockGeneralWidget profileWidget = new LiveStockGeneralWidget(profileComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-			.applyTo(profileWidget.getComposite());
+					.applyTo(profileWidget.getComposite());
 			profileTab.setControl(profileComposite);
 		}
 
-		//identification
+		// identification
 		if (enabledTabs.contains(TabItem.Identification)) {
 			final CTabItem identificationTab = new CTabItem(tabfolder, SWT.NULL);
 			identificationTab.setText("Identification");
 			final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			accountComposite.setLayout(new GridLayout(1, true));
-			LiveStockIdentificationWidget identificationWidget = new LiveStockIdentificationWidget(accountComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(identificationWidget.getComposite());
+			final LiveStockIdentificationWidget identificationWidget = new LiveStockIdentificationWidget(
+					accountComposite);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+					.applyTo(identificationWidget.getComposite());
 			identificationTab.setControl(accountComposite);
 			identificationTab.setControl(accountComposite);
 		}
-		//Rearing
+		// Rearing
 		if (enabledTabs.contains(TabItem.Rearing)) {
 			final CTabItem rearingTab = new CTabItem(tabfolder, SWT.NULL);
 			rearingTab.setText("Rearing Habits");
-			Composite rearingComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+			final Composite rearingComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			rearingComposite.setLayout(new GridLayout(1, true));
-			LiveStockRearingWidget rearingWidget = new LiveStockRearingWidget(rearingComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(rearingWidget.getComposite());
+			final LiveStockRearingWidget rearingWidget = new LiveStockRearingWidget(rearingComposite);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+					.applyTo(rearingWidget.getComposite());
 			rearingTab.setControl(rearingComposite);
 		}
-		//other
+		// other
 		if (enabledTabs.contains(TabItem.Other)) {
 			final CTabItem collectionTab = new CTabItem(tabfolder, SWT.NULL);
 			collectionTab.setText("Other");
 			final Composite collectionComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			collectionComposite.setLayout(new GridLayout(1, true));
-			LiveStockOtherWidget otherWidget = new LiveStockOtherWidget(collectionComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(otherWidget.getComposite());
+			final LiveStockOtherWidget otherWidget = new LiveStockOtherWidget(collectionComposite);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+					.applyTo(otherWidget.getComposite());
 			collectionTab.setControl(collectionComposite);
 		}
 
 		tabfolder.setSelection(0);
 	}
-
-	public Composite getTabComposite() {
-		return tabComposite;
-	}
-
 
 }

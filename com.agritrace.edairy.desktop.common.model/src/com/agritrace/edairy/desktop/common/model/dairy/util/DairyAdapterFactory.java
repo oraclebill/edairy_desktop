@@ -6,19 +6,31 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.util;
 
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-
-import com.agritrace.edairy.desktop.common.model.dairy.*;
-
-import com.agritrace.edairy.desktop.common.model.tracking.Container;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.*;
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.Trip;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,6 +121,10 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createDeliveryJournalAdapter();
 			}
 			@Override
+			public Adapter caseDeliveryJournalLine(DeliveryJournalLine object) {
+				return createDeliveryJournalLineAdapter();
+			}
+			@Override
 			public Adapter caseDairy(Dairy object) {
 				return createDairyAdapter();
 			}
@@ -131,6 +147,10 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCustomer(Customer object) {
 				return createCustomerAdapter();
+			}
+			@Override
+			public Adapter caseMilkPrice(MilkPrice object) {
+				return createMilkPriceAdapter();
 			}
 			@Override
 			public Adapter casePerson(Person object) {
@@ -277,6 +297,20 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine <em>Delivery Journal Line</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine
+	 * @generated
+	 */
+	public Adapter createDeliveryJournalLineAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy <em>Dairy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -357,6 +391,20 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCustomerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice <em>Milk Price</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice
+	 * @generated
+	 */
+	public Adapter createMilkPriceAdapter() {
 		return null;
 	}
 

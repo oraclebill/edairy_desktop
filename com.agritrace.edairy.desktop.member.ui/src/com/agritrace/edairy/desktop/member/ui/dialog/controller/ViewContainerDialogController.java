@@ -33,25 +33,25 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class ViewContainerDialogController extends BaseDialogController<Farm> implements ISelectionListener {
 
-	ILabelRidget idLabel;
-
-	IComboRidget typeCombo;
-
-	IComboRidget farmCombo;
-
-	IComboRidget unitCombo;
-
 	ITextRidget capacity;
-
-	Container selectedContainer;
-
-	List<Farm> farmList;
-
-	IActionRidget okAction;
 
 	Double capacityValue;
 
 	ErrorMessageMarker capactiyError = new ErrorMessageMarker("Invalid number");
+
+	IComboRidget farmCombo;
+
+	List<Farm> farmList;
+
+	ILabelRidget idLabel;
+
+	IActionRidget okAction;
+
+	Container selectedContainer;
+
+	IComboRidget typeCombo;
+
+	IComboRidget unitCombo;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -73,27 +73,27 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		okAction.setEnabled(true);
 
 		if (selectedContainer != null) {
-			if(selectedContainer.getContainerId() != null){
+			if (selectedContainer.getContainerId() != null) {
 				idLabel.setText(selectedContainer.getContainerId().toString());
-			}else{
+			} else {
 				idLabel.setText("<auto>");
 			}
-			
-			capacity.bindToModel(selectedContainer,	TrackingPackage.Literals.CONTAINER__CAPACITY.getName());
+
+			capacity.bindToModel(selectedContainer, TrackingPackage.Literals.CONTAINER__CAPACITY.getName());
 			capacity.updateFromModel();
 			capacity.addValidationRule(new IValidator() {
 
 				@Override
 				public IStatus validate(Object arg0) {
-					String value = (String) arg0;
+					final String value = (String) arg0;
 					try {
 						capacityValue = Double.valueOf(value);
 						capacity.removeAllMarkers();
 						okAction.setEnabled(true);
-					} catch (NumberFormatException ex) {
+					} catch (final NumberFormatException ex) {
 						capacity.addMarker(capactiyError);
 						okAction.setEnabled(false);
-						return new Status(Status.ERROR, Activator.PLUGIN_ID, ex.getMessage(), ex);
+						return new Status(IStatus.ERROR, Activator.PLUGIN_ID, ex.getMessage(), ex);
 
 					}
 					return Status.OK_STATUS;
@@ -101,7 +101,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 			}, ValidationTime.ON_UI_CONTROL_EDIT);
 
-			if (farmList == null && selectedContainer.getOwner() != null) {
+			if ((farmList == null) && (selectedContainer.getOwner() != null)) {
 				farmList = new ArrayList<Farm>();
 				farmList.add(selectedContainer.getOwner());
 			}
@@ -112,7 +112,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 				farmCombo.addSelectionListener(this);
 				if (selectedContainer.getOwner() != null) {
 					farmCombo.setSelection(selectedContainer.getOwner());
-				} else if(farmList.size()>0){
+				} else if (farmList.size() > 0) {
 					farmCombo.setSelection(0);
 				}
 			}
@@ -151,6 +151,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 	}
 
+	@Override
 	protected void configureButtonsPanel() {
 
 		okAction.addListener(new IActionListener() {

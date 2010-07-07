@@ -5,6 +5,8 @@ import java.util.List;
 import org.eclipse.core.databinding.conversion.StringToNumberConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -58,23 +60,6 @@ public class VehicleLogViewController extends SubModuleController {
 		}
 
 		@Override
-		public void itemCreated(Object newItem) {
-			// TODO Auto-generated method stub
-			super.itemCreated(newItem);
-		}
-
-		@Override
-		public void itemApplied(Object changedItem) {
-			vehicleRepository.save(changedItem);
-		}
-
-		@Override
-		public void itemRemoved(Object oldItem) {
-			// TODO Auto-generated method stub
-			super.itemRemoved(oldItem);
-		}
-
-		@Override
 		public Vehicle copyBean(final Object source, final Object target) {
 
 			final Vehicle from = source != null ? (Vehicle) source : createWorkingCopy();
@@ -96,9 +81,15 @@ public class VehicleLogViewController extends SubModuleController {
 		}
 
 		@Override
-		public boolean isChanged(Object source, Object target) {
-			return true;
+		public boolean isChanged(Object source, Object target) {			
+			return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
 		}
+
+		@Override
+		public void itemApplied(Object changedItem) {
+			vehicleRepository.save(changedItem);
+		}
+
 
 		protected void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
 			// Asset Info
@@ -169,8 +160,7 @@ public class VehicleLogViewController extends SubModuleController {
 			// Vehicle Type
 			final IComboRidget vehicleTypeCombo = container.getRidget(IComboRidget.class,
 					VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
-			vehicleTypeCombo.bindToModel(new WritableList(VehicleType.getValues(), String.class),
-					String.class, null,
+			vehicleTypeCombo.bindToModel(new WritableList(VehicleType.getValues(), String.class), String.class, null,
 					EMFObservables.observeValue(workingCopy, DairyPackage.Literals.VEHICLE__TYPE));
 			vehicleTypeCombo.updateFromModel();
 
@@ -260,7 +250,7 @@ public class VehicleLogViewController extends SubModuleController {
 
 	public static final String ID = VehicleLogViewController.class.getName();
 
-	protected final IDairyRepository vehicleRepository = new DairyRepository();
+	protected final IDairyRepository vehicleRepository = DairyRepository.getInstance();
 
 	public VehicleLogViewController() {
 		super();
@@ -277,7 +267,7 @@ public class VehicleLogViewController extends SubModuleController {
 				DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR.getName(),
 				DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName() };
 
-		List<Vehicle> vehicles = vehicleRepository.allVehicles();
+		final List<Vehicle> vehicles = vehicleRepository.allVehicles();
 		final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 		if (master != null) {
 			master.setDelegate(new VehicleLogMasterDetailDelegate());

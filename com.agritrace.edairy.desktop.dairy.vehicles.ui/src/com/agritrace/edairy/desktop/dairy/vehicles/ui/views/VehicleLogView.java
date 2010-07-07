@@ -19,6 +19,8 @@ import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailC
  * 
  */
 public class VehicleLogView extends SubModuleView {
+	public VehicleLogView() {
+	}
 
 	public static final String BIND_ID_MASTER = "master"; //$NON-NLS-1$
 	public static final String ID = "dairy.vehicle.masterdetail.view";

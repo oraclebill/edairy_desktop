@@ -28,19 +28,6 @@ public class ViewContainerDialog extends BaseDialogView {
 
 	}
 
-	@Override
-	protected AbstractWindowController createController() {
-		return new ViewContainerDialogController();
-	}
-
-
-
-	@Override
-	protected void configureShell(Shell newShell) {
-		super.configureShell(newShell);
-		newShell.setSize(550, 450);
-	}
-
 	/**
 	 * Creates the gray area
 	 * 
@@ -48,6 +35,7 @@ public class ViewContainerDialog extends BaseDialogView {
 	 *            the parent composite
 	 * @return Control
 	 */
+	@Override
 	protected void buildWorkArea(Composite parent) {
 		final Composite dialogArea = UIControlsFactory.createComposite(parent);
 		dialogArea.setLayout(new GridLayout(2, false));
@@ -55,7 +43,7 @@ public class ViewContainerDialog extends BaseDialogView {
 
 		UIControlsFactory.createLabel(dialogArea, "ID:");
 
-		Label idLabel = UIControlsFactory.createLabel(dialogArea, "", ViewWidgetId.VIEW_CONTAINER_ID);
+		final Label idLabel = UIControlsFactory.createLabel(dialogArea, "", ViewWidgetId.VIEW_CONTAINER_ID);
 		idLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Container Type:");
@@ -68,7 +56,7 @@ public class ViewContainerDialog extends BaseDialogView {
 
 		UIControlsFactory.createLabel(dialogArea, "Capacity:");
 
-		Text capacityText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE,
+		final Text capacityText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE,
 				ViewWidgetId.VIEW_CONTAINER_COMPACITY);
 		capacityText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
@@ -77,7 +65,16 @@ public class ViewContainerDialog extends BaseDialogView {
 		farmCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 	}
 
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setSize(550, 450);
+	}
 
+	@Override
+	protected AbstractWindowController createController() {
+		return new ViewContainerDialogController();
+	}
 
 	@Override
 	protected boolean isResizable() {

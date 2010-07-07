@@ -29,10 +29,15 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidget;
 public class MembershipTabFolder {
 
 	public static enum TabItem {
-		Profile, AccountSummary, Transactions, Collections, Farm, Livestock, Containers
+		AccountSummary, Collections, Containers, Farm, Livestock, Profile, Transactions
 	}
 
 	static class TabItemSet extends HashSet<TabItem> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		TabItemSet(TabItem[] tabs) {
 			super();
 			addAll(Arrays.asList(tabs));
@@ -40,10 +45,10 @@ public class MembershipTabFolder {
 	};
 
 	public static final Set<TabItem> ALL_TABS = new TabItemSet(TabItem.values());
+	public static final String MEMBER_INFO_GROUP = "Members Information";
+
 	public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile, TabItem.Farm,
 			TabItem.Livestock, TabItem.Containers });
-
-	public static final String MEMBER_INFO_GROUP = "Members Information";
 
 	private Composite tabComposite;
 
@@ -53,6 +58,10 @@ public class MembershipTabFolder {
 
 	public MembershipTabFolder(Composite parent, Set<TabItem> enabledTabs) {
 		initGUI(parent, enabledTabs);
+	}
+
+	public Composite getTabComposite() {
+		return tabComposite;
 	}
 
 	private void initGUI(Composite parent, Set<TabItem> enabledTabs) {
@@ -87,7 +96,7 @@ public class MembershipTabFolder {
 			profileTab.setText("Profile");
 			final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			profileComposite.setLayout(new GridLayout(1, true));
-			MemberProfileWidget profileWidget = new MemberProfileWidget(profileComposite);
+			final MemberProfileWidget profileWidget = new MemberProfileWidget(profileComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 					.applyTo(profileWidget.getComposite());
 			profileTab.setControl(profileComposite);
@@ -99,7 +108,7 @@ public class MembershipTabFolder {
 			accountTab.setText("Account Summary");
 			final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			accountComposite.setLayout(new GridLayout(1, true));
-			MemberAccountWidget accountWidget = new MemberAccountWidget(accountComposite);
+			final MemberAccountWidget accountWidget = new MemberAccountWidget(accountComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 					.applyTo(accountWidget.getComposite());
 			accountTab.setControl(accountComposite);
@@ -109,9 +118,9 @@ public class MembershipTabFolder {
 		if (enabledTabs.contains(TabItem.Transactions)) {
 			final CTabItem transactionTab = new CTabItem(tabfolder, SWT.NULL);
 			transactionTab.setText("Transactions");
-			Composite transComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+			final Composite transComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			transComposite.setLayout(new GridLayout(1, true));
-			MemberTransactionWidget transWidget = new MemberTransactionWidget(transComposite);
+			final MemberTransactionWidget transWidget = new MemberTransactionWidget(transComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 					.applyTo(transWidget.getComposite());
 			transactionTab.setControl(transComposite);
@@ -121,7 +130,8 @@ public class MembershipTabFolder {
 			collectionTab.setText("Collection Records");
 			final Composite collectionComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			collectionComposite.setLayout(new GridLayout(1, true));
-			MemberCollectionRecordsWidget collectionWidget = new MemberCollectionRecordsWidget(collectionComposite);
+			final MemberCollectionRecordsWidget collectionWidget = new MemberCollectionRecordsWidget(
+					collectionComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 					.applyTo(collectionWidget.getComposite());
 			collectionTab.setControl(collectionComposite);
@@ -131,7 +141,7 @@ public class MembershipTabFolder {
 			farmTab.setText("Farm");
 			final Composite farmComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			farmComposite.setLayout(new GridLayout(1, true));
-			MemberFarmWidget farmWidget = new MemberFarmWidget(farmComposite);
+			final MemberFarmWidget farmWidget = new MemberFarmWidget(farmComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(farmWidget.getComposite());
 			farmTab.setControl(farmComposite);
 		}
@@ -140,7 +150,7 @@ public class MembershipTabFolder {
 			livestockTab.setText("Livestock");
 			final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			livestockComposite.setLayout(new GridLayout(1, true));
-			MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
+			final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 					.applyTo(liveStockWidget.getComposite());
 			livestockTab.setControl(livestockComposite);
@@ -150,16 +160,12 @@ public class MembershipTabFolder {
 			containerTab.setText("Containers");
 			final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			containerComposite.setLayout(new GridLayout(1, false));
-			MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
+			final MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 					.applyTo(containerWidget.getComposite());
 			containerTab.setControl(containerComposite);
 		}
 		tabfolder.setSelection(0);
-	}
-
-	public Composite getTabComposite() {
-		return tabComposite;
 	}
 
 }

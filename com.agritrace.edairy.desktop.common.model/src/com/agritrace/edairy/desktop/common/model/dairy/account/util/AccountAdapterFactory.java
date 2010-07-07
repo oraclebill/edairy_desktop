@@ -7,13 +7,15 @@
 package com.agritrace.edairy.desktop.common.model.dairy.account.util;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 
 /**
  * <!-- begin-user-doc -->
@@ -76,8 +78,16 @@ public class AccountAdapterFactory extends AdapterFactoryImpl {
 				return createAccountAdapter();
 			}
 			@Override
+			public Adapter caseTransaction(Transaction object) {
+				return createTransactionAdapter();
+			}
+			@Override
 			public Adapter caseAccountTransaction(AccountTransaction object) {
 				return createAccountTransactionAdapter();
+			}
+			@Override
+			public Adapter caseAdjustmentTransaction(AdjustmentTransaction object) {
+				return createAdjustmentTransactionAdapter();
 			}
 			@Override
 			public Adapter caseBalancePoint(BalancePoint object) {
@@ -118,6 +128,20 @@ public class AccountAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction <em>Transaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Transaction
+	 * @generated
+	 */
+	public Adapter createTransactionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction <em>Transaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -128,6 +152,20 @@ public class AccountAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAccountTransactionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction <em>Adjustment Transaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction
+	 * @generated
+	 */
+	public Adapter createAdjustmentTransactionAdapter() {
 		return null;
 	}
 

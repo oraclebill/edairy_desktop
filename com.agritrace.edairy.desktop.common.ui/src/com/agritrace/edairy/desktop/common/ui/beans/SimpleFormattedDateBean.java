@@ -13,17 +13,17 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
 public class SimpleFormattedDateBean extends AbstractBean {
 
-	private Date date;
-
-	private String formattedDate;
-
-	private SimpleDateFormat dateFormat;
+	public static String DATE_PROR = "date";
 
 	public static String FORMATTED_DATE_VALUE_PROP = "formattedDate";
 
-	public static String DATE_PROR = "date";
-
 	private static final String STD_DATE_FORMAT = DateTimeUtils.DEFAULT_DATE_PATTERN;
+
+	private Date date;
+
+	private SimpleDateFormat dateFormat;
+
+	private String formattedDate;
 
 	public SimpleFormattedDateBean() {
 		this(null);
@@ -39,14 +39,15 @@ public class SimpleFormattedDateBean extends AbstractBean {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-		if (null != date)
-			formattedDate = dateFormat.format(date);
-	}
-
 	public String getFormattedDate() {
 		return formattedDate;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+		if (null != date) {
+			formattedDate = dateFormat.format(date);
+		}
 	}
 
 	public void setFormattedDate(String formattedDate) {

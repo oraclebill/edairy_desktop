@@ -27,8 +27,7 @@ public class PersistenceManagerTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		testPM = new SybaseASAPersistenceManager();
-//		testPM = new HsqldbMemoryPersistenceManager();
+		testPM = new HsqldbMemoryPersistenceManager();
 		testSession = testPM.getSession();
 	}
 

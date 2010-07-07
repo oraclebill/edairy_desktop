@@ -12,14 +12,14 @@ public class PhoneNumberValidatiionRule implements IValidator {
 
 	@Override
 	public IStatus validate(Object value) {
-		if(value instanceof String){
-			Pattern pattern = Pattern.compile("[^0-9]");
-			 Matcher m = pattern.matcher((String)value);
-			 if(m.find()){
-				 return ValidationStatus.error("Invaliate number");
-			 }else{
-				 return Status.OK_STATUS;
-			 }
+		if (value instanceof String) {
+			final Pattern pattern = Pattern.compile("[^0-9]");
+			final Matcher m = pattern.matcher((String) value);
+			if (m.find()) {
+				return ValidationStatus.error("Invaliate number");
+			} else {
+				return Status.OK_STATUS;
+			}
 
 		}
 		return null;

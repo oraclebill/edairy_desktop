@@ -2,21 +2,18 @@ package com.agritrace.edairy.desktop.common.ui;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.riena.ui.swt.AbstractRienaUIPlugin;
-import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 
-
-public class DesktopBaseActivator extends AbstractRienaUIPlugin  {
-
-	public static final String RESOURCE_PLUGIN = "com.agritrace.edairy.desktop.icons";
+public class DesktopBaseActivator extends AbstractRienaUIPlugin {
 
 	public static final String CALENDAR_ICON = "icons/date.png";
-	public static final String MEMBER_SEARCH_ICON = "icons/find.png";
+
 	public static final String FARM_SEARCH_ICON = "icons/find.png";
+	public static final String MEMBER_SEARCH_ICON = "icons/find.png";
+	public static final String RESOURCE_PLUGIN = "com.agritrace.edairy.desktop.icons";
 
 	@Override
 	protected void initializeImageRegistry(ImageRegistry reg) {

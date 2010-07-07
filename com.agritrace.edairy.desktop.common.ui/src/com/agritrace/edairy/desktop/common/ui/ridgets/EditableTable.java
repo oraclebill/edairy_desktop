@@ -14,9 +14,14 @@ public class EditableTable extends Table {
 		super(parent, style);
 	}
 
-	@Override
-	protected void checkSubclass() {
-		// do nothing
+	/**
+	 * Gets the cell editor
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public CellEditor getCellEditor(int index) {
+		return cellEditors.get(index);
 	}
 
 	/**
@@ -29,14 +34,9 @@ public class EditableTable extends Table {
 		cellEditors.put(index, editor);
 	}
 
-	/**
-	 * Gets the cell editor
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public CellEditor getCellEditor(int index) {
-		return cellEditors.get(index);
+	@Override
+	protected void checkSubclass() {
+		// do nothing
 	}
 
 }

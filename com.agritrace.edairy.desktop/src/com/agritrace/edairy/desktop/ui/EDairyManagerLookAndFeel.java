@@ -9,16 +9,6 @@ import org.eclipse.swt.graphics.Image;
 public class EDairyManagerLookAndFeel extends RienaDefaultLnf {
 
 	@Override
-	public ILnfTheme getTheme() {
-		return new EDairyManagerUITheme();
-	}
-
-	@Override
-	protected String getLnfId() {
-		return this.getClass().getName();
-	}
-
-	@Override
 	public Image getImage(String key) {
 		// .. also ..
 		// LnfKeyConstants.TITLELESS_SHELL_BACKGROUND;
@@ -36,6 +26,16 @@ public class EDairyManagerLookAndFeel extends RienaDefaultLnf {
 		// }
 
 		return super.getImage(key);
+	}
+
+	@Override
+	public ILnfTheme getTheme() {
+		return new EDairyManagerUITheme();
+	}
+
+	@Override
+	protected String getLnfId() {
+		return this.getClass().getName();
 	}
 
 }

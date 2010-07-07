@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="1.0" useFeatures="false" includeLaunchers="true">
+<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="0.9" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png"/>
@@ -11,15 +11,12 @@
    </aboutInfo>
 
    <configIni use="default">
+      <macosx>/com.agritrace.edairy.desktop/config.ini</macosx>
+      <win32>/com.agritrace.edairy.desktop/config.ini</win32>
    </configIni>
 
    <launcherArgs>
-      <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog</programArgs>
-      <vmArgs>-Dedairy.db.root=/tmp/x2db
-
--Driena.application.width=1200
-
--Driena.application.height=1000</vmArgs>
+      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
    </launcherArgs>
@@ -33,7 +30,6 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -46,7 +42,6 @@
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
       <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
-      <plugin id="com.agritrace.edairy.desktop.common.persistence.test.test"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.containers.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
@@ -60,14 +55,13 @@
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
       <plugin id="com.agritrace.edairy.desktop.operations.services"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.services.ui.tests"/>
       <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>
-      <plugin id="com.caucho.hessian"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.mysql.jdbc"/>
       <plugin id="javax.persistence"/>
-      <plugin id="javax.servlet"/>
+      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.beanutils"/>
+      <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.oro"/>
       <plugin id="org.dom4j"/>
@@ -88,7 +82,6 @@
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.change"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
-      <plugin id="org.eclipse.emf.edit"/>
       <plugin id="org.eclipse.emf.query"/>
       <plugin id="org.eclipse.emf.teneo"/>
       <plugin id="org.eclipse.emf.teneo.annotations"/>
@@ -101,18 +94,14 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
-      <plugin id="org.eclipse.jdt.junit.runtime" fragment=""/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.rcp"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.riena.beans.common"/>
-      <plugin id="org.eclipse.riena.client"/>
-      <plugin id="org.eclipse.riena.communication.console"/>
-      <plugin id="org.eclipse.riena.communication.core"/>
-      <plugin id="org.eclipse.riena.communication.factory.hessian"/>
       <plugin id="org.eclipse.riena.core"/>
       <plugin id="org.eclipse.riena.navigation"/>
       <plugin id="org.eclipse.riena.navigation.ui"/>
@@ -127,18 +116,21 @@
       <plugin id="org.eclipse.riena.ui.workarea"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.layout.grouplayout"/>
+      <plugin id="org.eclipse.swt.widgets.baseline"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
-      <plugin id="org.hamcrest.core"/>
       <plugin id="org.hibernate"/>
       <plugin id="org.hsqldb"/>
-      <plugin id="org.junit"/>
       <plugin id="org.pushingpixels.trident"/>
    </plugins>
 
    <configurations>
-      <plugin id="com.agritrace.edairy.desktop" autoStart="false" startLevel="0" />
+      <plugin id="com.agritrace.edairy.desktop" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.runtime" autoStart="false" startLevel="0" />
    </configurations>
 
 </product>

@@ -25,6 +25,10 @@ public class MemberCollectionRecordsWidget {
 		initGUI();
 	}
 
+	public Composite getComposite() {
+		return composite;
+	}
+
 	public void initGUI() {
 
 		// fitler panel
@@ -32,13 +36,13 @@ public class MemberCollectionRecordsWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(2, false));
 
-		DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
+		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
 				ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE,
 				ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
 				.applyTo(dateRangeWidget.getComposite());
 
-		Composite filterButtonPanel = UIControlsFactory.createComposite(filterPanel);
+		final Composite filterButtonPanel = UIControlsFactory.createComposite(filterPanel);
 		filterButtonPanel.setLayout(new GridLayout(3, false));
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(filterButtonPanel);
 
@@ -81,10 +85,6 @@ public class MemberCollectionRecordsWidget {
 
 		tablePanel.setLayout(layout);
 
-	}
-
-	public Composite getComposite() {
-		return composite;
 	}
 
 	public void setComposite(Composite composite) {

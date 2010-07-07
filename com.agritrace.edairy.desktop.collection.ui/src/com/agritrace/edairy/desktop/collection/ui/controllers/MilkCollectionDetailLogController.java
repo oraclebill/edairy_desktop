@@ -16,55 +16,52 @@ import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
+import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
 
-	private final Logger LOG = Log4r.getLogger(MilkCollectionDetailLogController.class);
-	
-	//	private final MilkCollectionDetailLogFilterBean filterBean = new MilkCollectionDetailLogFilterBean();
+	// navigation & control
+	private IActionRidget backButton;
+
+	// private final MilkCollectionDetailLogFilterBean filterBean = new
+	// MilkCollectionDetailLogFilterBean();
 
 	// header group ridgets
 	private ITextRidget book;
-	private IDateTimeRidget date;
-	private ITextRidget route;
-	private ITextRidget session;
-	private ITextRidget vehicle;
-	private ITextRidget driver;
-
-	// journal page
-	private ISpinnerRidget currentPage;
-	
-	// navigation & control
-	private IActionRidget  backButton;
-	private IActionRidget  editButton;
-	private IActionRidget  setPageButton;
-	private IActionRidget  addPageButton;
-
-	// UI infrastructure
-	private final WritableValue pageValue = new WritableValue(1, Integer.class);
-
-	// database connector
-	private final IDairyRepository journalRepository = new DairyRepository();
-
 	// working journal page
 	private CollectionJournalPage currentJournalPage;
+	// journal page
+	private ISpinnerRidget currentPage;
+	private IDateTimeRidget date;
+	private ITextRidget driver;
+	private IActionRidget editButton;
 
+
+	private final Logger LOG = Log4r.getLogger(MilkCollectionDetailLogController.class);
+	
+	// UI infrastructure
+	private final WritableValue pageValue = new WritableValue(1, Integer.class);
+	private ITextRidget route;
+	private ITextRidget session;
+
+	private IActionRidget setPageButton;
+
+	private ITextRidget vehicle;
 
 	public MilkCollectionDetailLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_LINE);
-		setEntityClass(CollectionJournalLine.class);
+		// setEntityClass(CollectionJournalLine.class);
 		setRepository(new MilkCollectionJournalLineRepository());
 
-		addTableColumn("Page", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL); //, new CJLPageFormatter() );
+		addTableColumn("Page", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL); // ,
+																									// new
+																									// CJLPageFormatter()
+																									// );
 		addTableColumn("Line", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__LINE_NUMBER);
 		addTableColumn("MemberID", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FROM);
 		addTableColumn("CAN", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FARM_CONTAINER);
@@ -72,6 +69,68 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		addTableColumn("Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FLAGGED);
 		addTableColumn("MPR Missing", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED);
 		addTableColumn("Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED);
+	}
+
+	@Override
+	public void afterBind() {
+		// important?
+		super.afterBind();
+		//
+		CollectionJournalPage currentJournalPage;
+		final INavigationNode<?> node = getNavigationNode();
+		final NavigationArgument argument = node.getNavigationArgument();
+		Object journalPage = argument.getParameter();
+		if (journalPage == null) {
+
+			journalPage = node.getContext("JOURNAL_PAGE");
+		}
+		if ((journalPage != null) && (journalPage instanceof CollectionJournalPage)) {
+			currentJournalPage = (CollectionJournalPage) journalPage;
+		} else {
+			throw new IllegalStateException("Journal editor requires context setting 'JOURNAL_PAGE' with current page");
+		}
+
+		book.setText(currentJournalPage.getRoute().getName());
+		book.setOutputOnly(true);
+
+		date.setDate(currentJournalPage.getJournalDate());
+		date.setOutputOnly(true);
+
+		session.setText(currentJournalPage.getSession().getName());
+		session.setOutputOnly(true);
+
+		route.setText(currentJournalPage.getRoute().getName());
+		route.setOutputOnly(true);
+
+		driver.setText(currentJournalPage.getDriver().getFamilyName());
+		driver.setOutputOnly(true);
+
+		vehicle.setText(currentJournalPage.getVehicle().getLogBookNumber());
+		vehicle.setOutputOnly(true);
+
+		currentPage.bindToModel(pageValue);
+
+		// updateAllRidgetsFromModel();
+
+		// currentPage.getValue()
+		setPageButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				refreshTableContents();
+			}
+		});
+		backButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				getNavigationNode().getParent().activate();
+			}
+		});
+		editButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				throw new UnsupportedOperationException("Unimplemnented.");
+			}
+		});
 	}
 
 	@Override
@@ -94,86 +153,16 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		setPageButton = getRidget(IActionRidget.class, ViewConstants.COLLECTION_DETAIL_FILTER_BTN);
 	}
 
-	@Override
-	public void afterBind() {
-		// important?
-		super.afterBind();
-		// 
-		CollectionJournalPage currentJournalPage;
-		final INavigationNode<?> node = getNavigationNode();
-		final NavigationArgument argument = node.getNavigationArgument();
-		Object journalPage = argument.getParameter();
-		if (journalPage == null) {
-			
-			journalPage = node.getContext("JOURNAL_PAGE");
-		}
-		if ((journalPage != null) && (journalPage instanceof CollectionJournalPage) ) {
-			currentJournalPage = (CollectionJournalPage) journalPage;			
-		} 
-		else {
-			throw new IllegalStateException("Journal editor requires context setting 'JOURNAL_PAGE' with current page");
-		}
-
-		book.setText(currentJournalPage.getRoute().getName());
-		book.setOutputOnly(true);
-		
-		date.setDate(currentJournalPage.getJournalDate());
-		date.setOutputOnly(true);
-		
-		session.setText(currentJournalPage.getSession().getName());
-		session.setOutputOnly(true);
-		
-		route.setText(currentJournalPage.getRoute().getName());
-		route.setOutputOnly(true);
-		
-		driver.setText(currentJournalPage.getDriver().getFamilyName());
-		driver.setOutputOnly(true);
-		
-		vehicle.setText(currentJournalPage.getVehicle().getLogBookNumber());
-		vehicle.setOutputOnly(true);
-		
-		currentPage.bindToModel(pageValue);
-
-//		updateAllRidgetsFromModel();
-		
-		//		currentPage.getValue()
-		setPageButton.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				refreshTableContents();
-			}
-		});
-		backButton.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				getNavigationNode().getParent().activate();
-			}
-		});
-		editButton.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				throw new UnsupportedOperationException("Unimplemnented.");
-			}
-		});
-	}
-
-
-	@Override
-	protected void resetFilterConditions() {
-		if (currentPage != null) {
-			currentPage.setValue(1);
-		}
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	protected List<CollectionJournalLine> getFilteredResult() {
-		if (currentJournalPage == null ) {
+		if (currentJournalPage == null) {
 			return Collections.EMPTY_LIST;
 		}
 		final List<CollectionJournalLine> allJournalLines = currentJournalPage.getJournalEntries();
 		final List<CollectionJournalLine> filteredJournals = new ArrayList<CollectionJournalLine>();
 
-		for ( final CollectionJournalLine cj : allJournalLines ) {
+		for (final CollectionJournalLine cj : allJournalLines) {
 			final boolean condition = true;
 			// filter logic goes here...
 			if (condition) {
@@ -189,5 +178,11 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		return null;
 	}
 
+	@Override
+	protected void resetFilterConditions() {
+		if (currentPage != null) {
+			currentPage.setValue(1);
+		}
+	}
 
 }

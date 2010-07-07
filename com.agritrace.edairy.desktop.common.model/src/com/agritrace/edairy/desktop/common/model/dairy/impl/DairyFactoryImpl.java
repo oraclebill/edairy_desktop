@@ -7,15 +7,34 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Session;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.Trip;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,12 +88,14 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.ROUTE: return createRoute();
 			case DairyPackage.TRIP: return createTrip();
 			case DairyPackage.DELIVERY_JOURNAL: return createDeliveryJournal();
+			case DairyPackage.DELIVERY_JOURNAL_LINE: return createDeliveryJournalLine();
 			case DairyPackage.DAIRY: return createDairy();
 			case DairyPackage.MEMBERSHIP: return createMembership();
 			case DairyPackage.ASSET: return createAsset();
 			case DairyPackage.DAIRY_CONTAINER: return createDairyContainer();
 			case DairyPackage.SUPPLIER: return createSupplier();
 			case DairyPackage.CUSTOMER: return createCustomer();
+			case DairyPackage.MILK_PRICE: return createMilkPrice();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -96,6 +117,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createVendorStatusFromString(eDataType, initialValue);
 			case DairyPackage.DAIRY_FUNCTION:
 				return createDairyFunctionFromString(eDataType, initialValue);
+			case DairyPackage.MILK_PRICE_PERIOD:
+				return createMilkPricePeriodFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -117,6 +140,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertVendorStatusToString(eDataType, instanceValue);
 			case DairyPackage.DAIRY_FUNCTION:
 				return convertDairyFunctionToString(eDataType, instanceValue);
+			case DairyPackage.MILK_PRICE_PERIOD:
+				return convertMilkPricePeriodToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -207,6 +232,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DeliveryJournalLine createDeliveryJournalLine() {
+		DeliveryJournalLineImpl deliveryJournalLine = new DeliveryJournalLineImpl();
+		return deliveryJournalLine;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Dairy createDairy() {
 		DairyImpl dairy = new DairyImpl();
 		return dairy;
@@ -260,6 +295,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public Customer createCustomer() {
 		CustomerImpl customer = new CustomerImpl();
 		return customer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MilkPrice createMilkPrice() {
+		MilkPriceImpl milkPrice = new MilkPriceImpl();
+		return milkPrice;
 	}
 
 	/**
@@ -339,6 +384,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertDairyFunctionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MilkPricePeriod createMilkPricePeriodFromString(EDataType eDataType, String initialValue) {
+		MilkPricePeriod result = MilkPricePeriod.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMilkPricePeriodToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

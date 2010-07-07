@@ -10,15 +10,15 @@ import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntit
 public class SupplierRepository extends HibernateRepository<Supplier> {
 
 	@Override
-	protected Class getClassType() {
-		// due to type erasure, cannot get this from the generic type argument...
-		return Supplier.class;
+	public List<Supplier> all() {
+		// TODO Auto-generated method stub
+		return super.all();
 	}
 
 	@Override
-	public List<Supplier> find(String query, Object[] args) {
+	public void delete(Supplier deletableEntity) throws NonExistingEntityException {
 		// TODO Auto-generated method stub
-		return super.find(query, args);
+		super.delete(deletableEntity);
 	}
 
 	@Override
@@ -28,9 +28,9 @@ public class SupplierRepository extends HibernateRepository<Supplier> {
 	}
 
 	@Override
-	public List<Supplier> all() {
+	public List<Supplier> find(String query, Object[] args) {
 		// TODO Auto-generated method stub
-		return super.all();
+		return super.find(query, args);
 	}
 
 	@Override
@@ -52,10 +52,10 @@ public class SupplierRepository extends HibernateRepository<Supplier> {
 	}
 
 	@Override
-	public void delete(Supplier deletableEntity) throws NonExistingEntityException {
-		// TODO Auto-generated method stub
-		super.delete(deletableEntity);
+	protected Class getClassType() {
+		// due to type erasure, cannot get this from the generic type
+		// argument...
+		return Supplier.class;
 	}
-	
-	
+
 }

@@ -7,11 +7,15 @@
 package com.agritrace.edairy.desktop.common.model.dairy.account.util;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,9 +97,23 @@ public class AccountSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AccountPackage.TRANSACTION: {
+				Transaction transaction = (Transaction)theEObject;
+				T result = caseTransaction(transaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AccountPackage.ACCOUNT_TRANSACTION: {
 				AccountTransaction accountTransaction = (AccountTransaction)theEObject;
 				T result = caseAccountTransaction(accountTransaction);
+				if (result == null) result = caseTransaction(accountTransaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AccountPackage.ADJUSTMENT_TRANSACTION: {
+				AdjustmentTransaction adjustmentTransaction = (AdjustmentTransaction)theEObject;
+				T result = caseAdjustmentTransaction(adjustmentTransaction);
+				if (result == null) result = caseTransaction(adjustmentTransaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -135,7 +153,37 @@ public class AccountSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
+	public T caseTransaction(Transaction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transaction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
 	public T caseAccountTransaction(AccountTransaction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Adjustment Transaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Adjustment Transaction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdjustmentTransaction(AdjustmentTransaction object) {
 		return null;
 	}
 

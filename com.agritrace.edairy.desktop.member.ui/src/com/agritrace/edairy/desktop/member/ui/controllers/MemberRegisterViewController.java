@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import java.io.IOException;
-
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
@@ -14,7 +12,6 @@ import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
-//import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
 import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.Activator;
@@ -31,30 +28,51 @@ import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager
 
 public class MemberRegisterViewController extends SubModuleController implements MemberSearchSelectionListener {
 
-	private final IMemberRepository memberRepository;
-	
-	// private Membership workingCopy;
-	private Membership selectedMember;
+	private class MemberSearchNodeListern extends SimpleNavigationNodeAdapter {
+
+		@Override
+		public void activated(INavigationNode<?> source) {
+			if (selectedMember != null) {
+				updateBindings();
+			}
+
+		}
+
+		@Override
+		public void deactivated(INavigationNode<?> source) {
+
+		}
+
+		@Override
+		public void disposed(INavigationNode<?> source) {
+
+		}
+	}
 
 	private String generatedMemberId;
 
 	// upper panel fields
 	private ILabelRidget memberIdRidget;
+
+	private final IMemberRepository memberRepository;
 	private ITextRidget nameRidget;
 
-	MemberProfileWidgetController memberProfileController;
+	// private Membership workingCopy;
+	private Membership selectedMember;
+
+	// collection tab
+	MemberCollectionRecordsWidgetController collectionController;
 
 	// container tab
 	MemberContainerWidgetController containerController;
 
-	// live stock tab
-	MemberLiveStockWidgetController liveStockController;
-
 	// farm tab
 	MemberFarmWidgetController farmController;
 
-	// collection tab
-	MemberCollectionRecordsWidgetController collectionController;
+	// live stock tab
+	MemberLiveStockWidgetController liveStockController;
+	MemberProfileWidgetController memberProfileController;
+
 	// transaction tab
 	MemberTransactionWidgetController transactionController;
 
@@ -109,12 +127,47 @@ public class MemberRegisterViewController extends SubModuleController implements
 		});
 	}
 
+	public Membership getSelectedMember() {
+		return selectedMember;
+	}
+
+	@Override
+	public void memberModified(Membership modifiedMember) {
+		this.selectedMember = modifiedMember;
+		updateBindings();
+	}
+
+	@Override
+	public void memberSelectionChanged(Membership selectedMember) {
+		if (this.selectedMember != selectedMember) {
+			this.selectedMember = selectedMember;
+			copySelectedMember();
+		}
+		updateBindings();
+	}
+
+	@Override
+	public void refreshView(String viewId) {
+		// empty;
+
+	}
+
+	public void setSelectedMember(Membership selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+
 	private void configureUpperPanel() {
 		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
 		generatedMemberId = System.currentTimeMillis() + "";
 		memberIdRidget.setText(generatedMemberId);
 		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
 
+	}
+
+	private void copySelectedMember() {
+		// if(selectedMember != null){
+		// workingCopy = EcoreUtil.copy(selectedMember);
+		// }
 	}
 
 	private void updateBindings() {
@@ -140,85 +193,29 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	}
 
-	@Override
-	public void memberSelectionChanged(Membership selectedMember) {
-		if (this.selectedMember != selectedMember) {
-			this.selectedMember = selectedMember;
-			copySelectedMember();
-		}
-		updateBindings();
-	}
-
-	@Override
-	public void memberModified(Membership modifiedMember) {
-		this.selectedMember = modifiedMember;
-		updateBindings();
-	}
-
-	private void copySelectedMember() {
-		// if(selectedMember != null){
-		// workingCopy = EcoreUtil.copy(selectedMember);
-		// }
+	protected IMemberRepository getMemberRepository() {
+		return memberRepository;
 	}
 
 	protected void saveMember() {
 		if (selectedMember != null) {
 			MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, selectedMember);
 			try {
-//				DairyDemoResourceManager.INSTANCE.saveFarmResource();
-//				DairyDemoResourceManager.INSTANCE.saveDairyResource();
+				// DairyDemoResourceManager.INSTANCE.saveFarmResource();
+				// DairyDemoResourceManager.INSTANCE.saveDairyResource();
 				memberRepository.update(selectedMember);
 				MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
 			} catch (final IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Activator.getDefault().logError(e, e.getMessage());
-//			} catch (final IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				Activator.getDefault().logError(e, e.getMessage());
+				// } catch (final IOException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// Activator.getDefault().logError(e, e.getMessage());
 
 			}
 		}
-	}
-
-	@Override
-	public void refreshView(String viewId) {
-		// empty;
-
-	}
-
-	private class MemberSearchNodeListern extends SimpleNavigationNodeAdapter {
-
-		@Override
-		public void activated(INavigationNode<?> source) {
-			if (selectedMember != null) {
-				updateBindings();
-			}
-
-		}
-
-		@Override
-		public void deactivated(INavigationNode<?> source) {
-
-		}
-
-		@Override
-		public void disposed(INavigationNode<?> source) {
-
-		}
-	}
-
-	public Membership getSelectedMember() {
-		return selectedMember;
-	}
-
-	public void setSelectedMember(Membership selectedMember) {
-		this.selectedMember = selectedMember;
-	}
-
-	protected IMemberRepository getMemberRepository() {
-		return memberRepository;
 	}
 
 }

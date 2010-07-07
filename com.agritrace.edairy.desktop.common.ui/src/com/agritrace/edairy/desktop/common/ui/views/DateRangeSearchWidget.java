@@ -16,20 +16,20 @@ import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 
 public class DateRangeSearchWidget {
-	
+
 	public static final int DEFAULT_LABEL_WIDTH = 110;
-	
+
 	private final Composite composite;
 
-	private final String labelText;
-
-	private final String startId;
+	private final String endCalendarId;
 
 	private final String endId;
 
+	private final String labelText;
+
 	private final String startCalendarId;
 
-	private final String endCalendarId;
+	private final String startId;
 
 	public DateRangeSearchWidget(Composite parent, String rangeLabelTxt, String startTxtId, String endTxtId,
 			String startCalendar, String endCalendar) {
@@ -43,20 +43,24 @@ public class DateRangeSearchWidget {
 		createDataRangeSearch();
 	}
 
+	public Composite getComposite() {
+		return composite;
+	}
+
 	private void createDataRangeSearch() {
 
-		Label label = UIControlsFactory.createLabel(composite, labelText);
+		final Label label = UIControlsFactory.createLabel(composite, labelText);
 
-		GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, -1);
+		final GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, -1);
 		labelFactory.applyTo(label);
-		
+
 		final Text startDateText = UIControlsFactory.createText(composite, SWT.READ_ONLY | SWT.BORDER, startId);
 		startDateText.setText("Start");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(startDateText);
 
 		final ImageButton calendarButton = UIControlsFactory.createImageButton(composite, SWT.NONE, startCalendarId);
 		Image calendar = null;
-		if (! Beans.isDesignTime() ) {
+		if (!Beans.isDesignTime()) {
 			calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
 			calendarButton.setImage(calendar);
 		}
@@ -108,10 +112,6 @@ public class DateRangeSearchWidget {
 		// }
 		// });
 
-	}
-
-	public Composite getComposite() {
-		return composite;
 	}
 
 }

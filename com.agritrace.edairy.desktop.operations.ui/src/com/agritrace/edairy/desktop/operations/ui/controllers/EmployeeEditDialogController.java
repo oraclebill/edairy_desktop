@@ -3,9 +3,7 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
-import org.eclipse.riena.ui.core.resource.IIconManager;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
@@ -34,8 +32,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 	private Employee editEmployee = null;
 
-	ITextRidget employeeId;
 	IComboRidget department;
+	ITextRidget employeeId;
 	ITextRidget familyName;
 	ITextRidget givenName;
 	IComboRidget position;
@@ -82,27 +80,27 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		position.setSelection(0);
 
 		// Configure address group
-		AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
+		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		addressGroupController.setInputModel(editEmployee.getLocation().getPostalLocation());
 		addressGroupController.updateBinding();
 
 		// Configure Direction Group
-		DirectionGroupController directionController = new DirectionGroupController(this);
+		final DirectionGroupController directionController = new DirectionGroupController(this);
 		directionController.setInputModel(editEmployee.getLocation().getDescriptiveLocation());
 		directionController.updateBinding();
 
 		// Configure Map Group
-		MapGroupController mapController = new MapGroupController(this);
+		final MapGroupController mapController = new MapGroupController(this);
 		mapController.setInputModel(editEmployee.getLocation().getMapLocation());
 		mapController.updateBinding();
 
 		// Configure Communication Group
-		CommunicationGroupController commController = new CommunicationGroupController(this);
+		final CommunicationGroupController commController = new CommunicationGroupController(this);
 		commController.setInputModel(editEmployee);
 		commController.updateBinding();
 
 		// action ridget
-		ILinkRidget photoDialog = getRidget(ILinkRidget.class, "update-photo-action");
+		final ILinkRidget photoDialog = getRidget(ILinkRidget.class, "update-photo-action");
 		photoDialog.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
@@ -111,30 +109,30 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		});
 	}
 
-	private void handleUpdatePhotoAction() {
-		FileDialog fDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
-		String fName = fDialog.open();
-		
-		Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), fName);
-		ILabelRidget photoLabel = getRidget(ILabelRidget.class, "contact-photo-label");
-//		try {
-//			photoLabel.setText("");
-//			photoLabel.setIcon(photo);
-//			photoLabel.getParent().pack();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	}
-
-	@Override
-	protected EClass getEClass() {
-		return DairyPackage.Literals.EMPLOYEE;
-	}
-
 	@Override
 	public Employee getWorkingCopy() {
 		return (Employee) getContext("editObject");
 	}
+
+	private void handleUpdatePhotoAction() {
+		final FileDialog fDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
+		final String fName = fDialog.open();
+
+		final Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), fName);
+		final ILabelRidget photoLabel = getRidget(ILabelRidget.class, "contact-photo-label");
+		// try {
+		// photoLabel.setText("");
+		// photoLabel.setIcon(photo);
+		// photoLabel.getParent().pack();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+	}
+	//
+	// @Override
+	// protected EClass getEClass() {
+	// return DairyPackage.Literals.EMPLOYEE;
+	// }
 
 	// @Override
 	// protected void saveNew() throws AlreadyExistsException {

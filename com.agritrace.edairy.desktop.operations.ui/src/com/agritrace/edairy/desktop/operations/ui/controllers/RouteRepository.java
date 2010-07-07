@@ -2,8 +2,6 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
@@ -19,29 +17,35 @@ public class RouteRepository implements IRepository<Route> {
 			return Route.class;
 		}
 	};
-	
+
+	@Override
+	public List<Route> all() {
+		return routeRepo.all();
+	}
+
+	@Override
+	public void delete(Route deletableEntity) throws NonExistingEntityException {
+		routeRepo.delete(deletableEntity);
+	}
+
 	@Override
 	public List<?> find(String rawQuery) {
-		// TODO Auto-generated method stub
 		return routeRepo.find(rawQuery);
 	}
 
 	@Override
 	public List<?> find(String query, Object[] params) {
-		// TODO Auto-generated method stub
 		return routeRepo.find(query, params);
 	}
 
 	@Override
-	public List<Route> all() {
-		// TODO Auto-generated method stub
-		return routeRepo.all();
+	public Route findByKey(long key) {
+		return routeRepo.findByKey(key);
 	}
 
 	@Override
-	public Route findByKey(long key) {
-		// TODO Auto-generated method stub
-		return routeRepo.findByKey(key);
+	public void save(Object obj) {
+		routeRepo.save(obj);
 	}
 
 	@Override
@@ -52,16 +56,6 @@ public class RouteRepository implements IRepository<Route> {
 	@Override
 	public void update(Route updateableEntity) throws NonExistingEntityException {
 		routeRepo.update(updateableEntity);
-	}
-
-	@Override
-	public void delete(Route deletableEntity) throws NonExistingEntityException {
-		routeRepo.delete(deletableEntity);		
-	}
-
-	@Override
-	public void save(Object obj) {
-		routeRepo.save(obj);
 	}
 
 }

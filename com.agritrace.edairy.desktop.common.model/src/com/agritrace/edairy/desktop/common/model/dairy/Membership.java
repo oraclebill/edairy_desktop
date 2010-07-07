@@ -6,13 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 /**
  * <!-- begin-user-doc -->
@@ -198,7 +197,7 @@ public interface Membership extends EObject {
 	void setMember(Farmer value);
 
 	/**
-	 * Returns the value of the '<em><b>Account</b></em>' reference.
+	 * Returns the value of the '<em><b>Account</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -206,20 +205,20 @@ public interface Membership extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Account</em>' reference.
+	 * @return the value of the '<em>Account</em>' containment reference.
 	 * @see #setAccount(Account)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Account()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember
-	 * @model opposite="member"
+	 * @model opposite="member" containment="true" keys="accountId" required="true"
 	 * @generated
 	 */
 	Account getAccount();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Account</em>' reference.
+	 * @param value the new value of the '<em>Account</em>' containment reference.
 	 * @see #getAccount()
 	 * @generated
 	 */

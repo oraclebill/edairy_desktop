@@ -6,7 +6,7 @@ import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 public class AddContainerDialogController extends ViewContainerDialogController {
 
-
+	@Override
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
 		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);

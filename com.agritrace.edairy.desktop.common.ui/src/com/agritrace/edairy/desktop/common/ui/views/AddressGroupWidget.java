@@ -14,19 +14,19 @@ import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class AddressGroupWidget {
 
-	private Group addressGroup;
-	private Composite addressPanel;
-
 	public static final String ADDRESS_LABEL = "Address:";
-	public static final String SECTION_LABEL = "Section/Homestead:";
+	public static final String DISTRICT_LABEL = "District:";
+
+	public static final String DIVISION_LABEL = "Division";
 	public static final String ESTATE_LABEL = "Estate/Nearest Center:";
 	public static final String LOCATION_LABEL = "Location:";
+	public static final String POSTAL_CODE_LABEL = "Postal Code:";
+	public static final String PROVINCE_LABEL = "Province:";
+	public static final String SECTION_LABEL = "Section/Homestead:";
 	public static final String SUBLOCATION_LABEL = "Sublocation";
 	public static final String VILLAGE_LABEL = "Village:";
-	public static final String DIVISION_LABEL = "Division";
-	public static final String DISTRICT_LABEL = "District:";
-	public static final String PROVINCE_LABEL = "Province:";
-	public static final String POSTAL_CODE_LABEL = "Postal Code:";
+	private Group addressGroup;
+	private Composite addressPanel;
 
 	public AddressGroupWidget(Composite parent) {
 		if (parent != null) {
@@ -35,6 +35,10 @@ public class AddressGroupWidget {
 			createAddresscontrol();
 		}
 
+	}
+
+	public Group getGroup() {
+		return addressGroup;
 	}
 
 	private void createAddresscontrol() {
@@ -95,10 +99,6 @@ public class AddressGroupWidget {
 		UIControlsFactory.createLabel(addressPanel, POSTAL_CODE_LABEL);
 		final Text txtPostal = UIControlsFactory.createText(addressPanel, SWT.BORDER, ViewWidgetId.POSTAL_CODE_TXT);
 		txtPostal.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
-	}
-
-	public Group getGroup() {
-		return addressGroup;
 	}
 
 }

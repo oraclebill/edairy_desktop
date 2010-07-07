@@ -16,24 +16,24 @@ public interface IDairyResourceManager extends IAccountTransactionSearch {
 
 	// public static final String XMLDB_BASE = "/tmp";
 
-	public abstract void createFarmResource();
+	public abstract void addFarm(Farm newFarm);
 
 	public abstract void createDairyResource() throws ParseException, IllegalArgumentException, IOException;
 
 	public abstract void createDairyResource(String baseDir) throws ParseException, IllegalArgumentException,
 			IOException;
 
-	public abstract void loadFarmResources();
-
-	public abstract void loadDairyResources();
-
-	public abstract void reLoadDairyResource();
+	public abstract void createFarmResource();
 
 	public abstract Dairy getLocalDairy();
 
 	public abstract <T extends EObject> List<T> getObjectsFromDairyModel(Class<T> type) throws CoreException;
 
-	public abstract void addFarm(Farm newFarm);
+	public abstract void loadDairyResources();
+
+	public abstract void loadFarmResources();
+
+	public abstract void reLoadDairyResource();
 
 	public abstract void saveDairyResource() throws IllegalArgumentException, IOException;
 

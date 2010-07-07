@@ -12,6 +12,13 @@ import org.eclipse.riena.ui.ridgets.IRidget;
  */
 public class RidgetsConfigFactory {
 
+//	private static class ConverterFactory extends UpdateValueStrategy {
+//		@Override
+//		public IConverter createConverter(Object fromType, Object toType) {
+//			return super.createConverter(fromType, toType);
+//		}
+//	}
+
 	private static RidgetsConfigFactory instance = new RidgetsConfigFactory();
 
 	/**
@@ -22,6 +29,8 @@ public class RidgetsConfigFactory {
 	public static RidgetsConfigFactory getInstance() {
 		return instance;
 	}
+
+//	private final ConverterFactory converterFactory = new ConverterFactory();
 
 	/**
 	 * Gets the model2UI converter based on feature and ridget
@@ -34,6 +43,5 @@ public class RidgetsConfigFactory {
 	 */
 	public IConverter getModel2UIConverter(EStructuralFeature feature, IRidget ridget) {
 		return null;
-
 	}
 }

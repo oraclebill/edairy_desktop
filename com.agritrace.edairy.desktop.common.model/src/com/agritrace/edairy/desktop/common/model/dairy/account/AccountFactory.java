@@ -41,7 +41,25 @@ public interface AccountFactory extends EFactory {
 	 * @return a new object of class '<em>Transaction</em>'.
 	 * @generated
 	 */
+	Transaction createTransaction();
+
+	/**
+	 * Returns a new object of class '<em>Transaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Transaction</em>'.
+	 * @generated
+	 */
 	AccountTransaction createAccountTransaction();
+
+	/**
+	 * Returns a new object of class '<em>Adjustment Transaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Adjustment Transaction</em>'.
+	 * @generated
+	 */
+	AdjustmentTransaction createAdjustmentTransaction();
 
 	/**
 	 * Returns a new object of class '<em>Balance Point</em>'.

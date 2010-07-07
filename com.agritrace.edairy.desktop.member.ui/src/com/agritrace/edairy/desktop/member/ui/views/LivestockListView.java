@@ -10,7 +10,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -18,57 +17,58 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidget;
 
 public class LivestockListView extends BaseListView {
-	public static final String ID = LivestockListView.class.getName();
-
-	public static final int DEFAULT_LABEL_WIDTH = 110;
-	public static final String FILTER_GROUP_TEXT = "Search for a Livestock";
-	public static final String FILTER_GROUP_MEMBER_LOOKUP = "Member Lookup :";
-	public static final String FILTER_GROUP_FARM_LOOKUP = "Show conatiners :";
-
 	public static final String CONTAINER_GROUP = "Containers";
 
-	
+	public static final int DEFAULT_LABEL_WIDTH = 110;
+	public static final String FILTER_GROUP_FARM_LOOKUP = "Show conatiners :";
+	public static final String FILTER_GROUP_MEMBER_LOOKUP = "Member Lookup :";
+	public static final String FILTER_GROUP_TEXT = "Search for a Livestock";
+
+	public static final String ID = LivestockListView.class.getName();
+
+	@Override
 	protected void createFilterGroup(Composite parent) {
 		// group
-		Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
+		final Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(filterGroup);
 
-		Label memberLabel = UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_MEMBER_LOOKUP);
-		GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, -1).indent(18, 0);
+		final Label memberLabel = UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_MEMBER_LOOKUP);
+		final GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, -1).indent(18, 0);
 		labelFactory.applyTo(memberLabel);
 		// search text
-		Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
+		final Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(250, -1).grab(false, false).applyTo(searchText);
 
-		ImageButton lookupButton = UIControlsFactory.createImageButton(filterGroup, SWT.NULL,
+		final ImageButton lookupButton = UIControlsFactory.createImageButton(filterGroup, SWT.NULL,
 				ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
-		final Image lookupIcon = Activator.getDefault().getImageRegistry().get(Activator.MEMBER_SEARCH_ICON);
+		final Image lookupIcon = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.MEMBER_SEARCH_ICON);
 		lookupButton.setImage(lookupIcon);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).grab(false, false).applyTo(lookupButton);
 
-		Composite filterPanel = UIControlsFactory.createComposite(filterGroup);
+		final Composite filterPanel = UIControlsFactory.createComposite(filterGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(filterPanel);
-		GridLayout gd = new GridLayout();
-		gd.marginLeft=0;
-		gd.marginRight=0;
+		final GridLayout gd = new GridLayout();
+		gd.marginLeft = 0;
+		gd.marginRight = 0;
 		filterPanel.setLayout(gd);
-		
-		LiveStockFilterWidget filter =  new LiveStockFilterWidget(filterPanel);
+
+		final LiveStockFilterWidget filter = new LiveStockFilterWidget(filterPanel);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filter.getComposite());
-		
 
 	}
 
+	@Override
 	protected void createListGroup(Composite parent) {
 
-		Group listGroup = UIControlsFactory.createGroup(parent, CONTAINER_GROUP);
+		final Group listGroup = UIControlsFactory.createGroup(parent, CONTAINER_GROUP);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(listGroup);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(listGroup);
 
@@ -99,7 +99,6 @@ public class LivestockListView extends BaseListView {
 		final TableColumn column9 = new TableColumn(table, SWT.LEFT);
 		column9.setText("Status");
 
-		
 		final TableColumnLayout layout = new TableColumnLayout();
 		layout.setColumnData(column1, new ColumnWeightData(10));
 		layout.setColumnData(column2, new ColumnWeightData(15));
@@ -112,10 +111,9 @@ public class LivestockListView extends BaseListView {
 		layout.setColumnData(column9, new ColumnWeightData(10));
 
 		tablePanel.setLayout(layout);
-		
+
 		createButtonPanel(listGroup, ViewWidgetId.LIVESTOCK_VIEW, ViewWidgetId.LIVESTOCK_ADD);
-	
+
 	}
 
 }
-

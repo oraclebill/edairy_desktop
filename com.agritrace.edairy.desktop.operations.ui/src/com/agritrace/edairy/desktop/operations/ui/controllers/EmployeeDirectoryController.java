@@ -19,17 +19,17 @@ import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
 
+	private IComboRidget departmentSearchCombo;
 	private ITextRidget nameSearchText;
 	private IComboRidget positionSearchCombo;
-	private IComboRidget departmentSearchCombo;
 
-	private EmployeeSearchBean searchBean = new EmployeeSearchBean();
+	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
 
 	public EmployeeDirectoryController() {
 		super();
 		setRepository(new EmployeeRepository());
 		setEClass(DairyPackage.Literals.EMPLOYEE);
-		setEntityClass(Employee.class);
+		// setEntityClass(Employee.class);
 
 		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__ID);
 		addTableColumn("Last Name", ModelPackage.Literals.PERSON__FAMILY_NAME);
@@ -51,7 +51,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		positionSearchCombo.updateFromModel();
 		positionSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
 
-		// 
+		//
 		departmentSearchCombo = getRidget(IComboRidget.class, EmployeeDirectoryView.BIND_ID_FILTER_DEPT);
 		departmentSearchCombo.bindToModel(searchBean, "departments", String.class, null, searchBean, "department");
 		departmentSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
@@ -59,20 +59,25 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		departmentSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
 	}
 
+	/**
+	 * Create new model while creating a new record
+	 * 
+	 * @return
+	 */
 	@Override
-	protected void resetFilterConditions() {
-		nameSearchText.setText("");
-		positionSearchCombo.setSelection(positionSearchCombo.getEmptySelectionItem());
-		departmentSearchCombo.setSelection(departmentSearchCombo.getEmptySelectionItem());
+	protected Employee createNewModel() {
+		final Employee employee = (Employee) EMFUtil.createWorkingCopy(this.getEClass(), 3);
+		// employee.setPhoneNumber("");
+		return employee;
 	}
 
 	@Override
 	protected List<Employee> getFilteredResult() {
-		List<Employee> filtered = new ArrayList<Employee>();
-		List<Employee> allEmployees = getRepository().all();
+		final List<Employee> filtered = new ArrayList<Employee>();
+		final List<Employee> allEmployees = getRepository().all();
 		for (final Employee e : allEmployees) {
-			if ((MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) 
-					|| MatchUtil.matchContains(searchBean.getName(), e.getGivenName()))
+			if ((MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) || MatchUtil.matchContains(
+					searchBean.getName(), e.getGivenName()))
 					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction())) {
 				filtered.add(e);
 			}
@@ -85,14 +90,10 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		return new EmployeeEditDialog(shell);
 	}
 
-	/**
-	 * Create new model while creating a new record
-	 * 
-	 * @return
-	 */
-	protected Employee createNewModel() {
-		Employee employee = (Employee) EMFUtil.createWorkingCopy(this.getEClass(), 3);
-		//employee.setPhoneNumber("");
-		return employee;
+	@Override
+	protected void resetFilterConditions() {
+		nameSearchText.setText("");
+		positionSearchCombo.setSelection(positionSearchCombo.getEmptySelectionItem());
+		departmentSearchCombo.setSelection(departmentSearchCombo.getEmptySelectionItem());
 	}
 }

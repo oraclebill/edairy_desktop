@@ -8,59 +8,60 @@ import org.eclipse.riena.beans.common.AbstractBean;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 
 public class EmployeeSearchBean extends AbstractBean {
-	public static final String PROP_NAME = "name";
 	public static final String PROP_DEPT = "dept";
+	public static final String PROP_NAME = "name";
 	public static final String PROP_POSITION = "position";
 
-	private String name;
-	private String dept;
-	private String position;
 	private String department;
+	private String dept;
+	private String name;
+	private String position;
 
-	public String getName() {
-		return name;
+	public String getDepartment() {
+		return department;
 	}
 
-	public void setName(String name) {
-		Object oldValue = this.name;
-		this.name = name;
-		firePropertyChanged(PROP_NAME, oldValue, this.name);
+	public List<String> getDepartments() {
+		return Collections.unmodifiableList(EmployeeReference.getDepartments());
 	}
 
 	public String getDept() {
 		return dept;
 	}
 
-	public void setDept(String dept) {
-		Object oldValue = this.dept;
-		this.dept = dept;
-		firePropertyChanged(PROP_DEPT, oldValue, this.dept);
+	public String getName() {
+		return name;
 	}
 
 	public String getPosition() {
 		return position;
 	}
 
-	public void setPosition(String position) {
-		Object oldValue = this.position;
-		this.position = position;
-		firePropertyChanged(PROP_POSITION, oldValue, this.position);
-	}
-	public String getDepartment() {
-		return department;
+	public List<String> getPositions() {
+		return Collections.unmodifiableList(EmployeeReference.getPositions());
 	}
 
 	public void setDepartment(String department) {
-		Object oldValue = this.position;
+		final Object oldValue = this.position;
 		this.department = department;
 		firePropertyChanged(PROP_DEPT, oldValue, this.position);
 	}
 
-	public List<String> getPositions() {
-		return Collections.unmodifiableList(EmployeeReference.getPositions());
+	public void setDept(String dept) {
+		final Object oldValue = this.dept;
+		this.dept = dept;
+		firePropertyChanged(PROP_DEPT, oldValue, this.dept);
 	}
-	
-	public List<String> getDepartments() {
-		return Collections.unmodifiableList(EmployeeReference.getDepartments());
+
+	public void setName(String name) {
+		final Object oldValue = this.name;
+		this.name = name;
+		firePropertyChanged(PROP_NAME, oldValue, this.name);
+	}
+
+	public void setPosition(String position) {
+		final Object oldValue = this.position;
+		this.position = position;
+		firePropertyChanged(PROP_POSITION, oldValue, this.position);
 	}
 }

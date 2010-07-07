@@ -11,24 +11,22 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 
 public class ResourceManager {
 
-	private final Map<String, Object> saveOptions = new HashMap<String, Object>();
+	public static ResourceManager INSTANCE = new ResourceManager();
 
 	private ResourceSetImpl resourceSet = new ResourceSetImpl();
 
-	public static ResourceManager INSTANCE = new ResourceManager();
+	private final Map<String, Object> saveOptions = new HashMap<String, Object>();
 
 	private ResourceManager() {
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 		saveOptions.put(XMLResource.OPTION_DECLARE_XML, Boolean.TRUE);
 	}
 
-	/**
-	 * save options
-	 * 
-	 * @return
-	 */
-	public Map<String, Object> getSaveOptions() {
-		return saveOptions;
+	public Resource createResource(URI uri) throws IllegalArgumentException {
+		if (uri == null) {
+			throw new IllegalArgumentException("uri is null");
+		}
+		return resourceSet.createResource(uri);
 	}
 
 	/**
@@ -40,8 +38,13 @@ public class ResourceManager {
 		return resourceSet;
 	}
 
-	public void setResourceSet(ResourceSetImpl resourceSet) {
-		this.resourceSet = resourceSet;
+	/**
+	 * save options
+	 * 
+	 * @return
+	 */
+	public Map<String, Object> getSaveOptions() {
+		return saveOptions;
 	}
 
 	/**
@@ -92,10 +95,7 @@ public class ResourceManager {
 		resource.save(saveOptions);
 	}
 
-	public Resource createResource(URI uri) throws IllegalArgumentException {
-		if (uri == null) {
-			throw new IllegalArgumentException("uri is null");
-		}
-		return resourceSet.createResource(uri);
+	public void setResourceSet(ResourceSetImpl resourceSet) {
+		this.resourceSet = resourceSet;
 	}
 }

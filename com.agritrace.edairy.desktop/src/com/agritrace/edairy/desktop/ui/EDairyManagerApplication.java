@@ -30,24 +30,19 @@ import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileVie
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntryMDSubModuleView;
-import com.agritrace.edairy.desktop.finance.ui.controls.TransactionBatchEntrySubModuleView;
-import com.agritrace.edairy.desktop.finance.ui.views.AccountTransactionListSubModuleView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.member.ui.views.ContainerListView;
-import com.agritrace.edairy.desktop.member.ui.views.CreateMemberView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
@@ -65,112 +60,100 @@ import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
  */
 public class EDairyManagerApplication extends SwtApplication {
 
+	private static final String LABEL_APPLICATION = "eDairy Manager Desktop";
+	private static final String LABEL_FARMS = "Farms";
+	private static final String LABEL_HOME = "Home";
+	// private static final String LABEL_MILK = "Milk";
+	private static final String LABEL_MEMBERS = "Membership";
+	// private static final String LABEL_FINANCE = "Finance";
+	private static final String LABEL_OPERATIONS = "Operations";
+	private static final String LABEL_REPORTS = "Reports";
 	// labels (translatable)
 	private static final String LABEL_SYSTEM = "System";
-	private static final String LABEL_HOME = "Home";
-	private static final String LABEL_APPLICATION = "eDairy Manager Desktop";
-	private static final String LABEL_MILK = "Milk";
-	private static final String LABEL_MEMBERS = "Membership";
-	private static final String LABEL_FINANCE = "Finance";
-	private static final String LABEL_OPERATIONS = "Operations";
 	private static final String LABEL_VETERINARY = "Veterinary";
-	private static final String LABEL_REPORTS = "Reports";
-	private static final String LABEL_FARMS = "Farms";
+
+	private static final String MODULE_FARMS = "edm.farms";//$NON-NLS-1$
+	private static final String MODULE_GROUP_HOME = "home.navgroup";//$NON-NLS-1$
+	private static final String MODULE_GROUP_MEMBERS = "members.navgroup";//$NON-NLS-1$
+	private static final String MODULE_GROUP_OPERATIONS = "modulegroup.desktop.operations"; //$NON-NLS-1$
+
+	private static final String MODULE_GROUP_REPORTS = "modulegroup.desktop.reports"; //$NON-NLS-1$
+	private static final String MODULE_GROUP_SYSTEM = "system.navgroup"; //$NON-NLS-1$
+	private static final String MODULE_GROUP_VETERINARY = "animalhealth.navgroup"; //$NON-NLS-1$
+	private static final String MODULE_HOME = "desktop.home.module";//$NON-NLS-1$
+	private static final String MODULE_MEMBERS = "edm.members";//$NON-NLS-1$
+	private static final String MODULE_OPERATIONS = "edm.dairy";
+	private static final String MODULE_OPERATIONS_BRANCH_LOCATIONS = "edm.dairy-locations";
+
+	private static final String MODULE_OPERATIONS_DAIRY_CONTAINERS = "MODULE_OPERATIONS_DAIRY_CONTAINERS";
+
+	private static final String MODULE_OPERATIONS_DAIRY_EMPLOYEES = "MODULE_OPERATIONS_DAIRY_EMPLOYEES";
+	private static final String MODULE_OPERATIONS_DAIRY_VEHICLES = "MODULE_OPERATIONS_DAIRY_VEHICLES";
+	private static final String MODULE_OPERATIONS_ROUTES = "edm.routes";
+	private static final String MODULE_REPORTS = "edm.reports";
+
+	private static final String MODULE_SYSTEM = "edm.system";
+	private static final String MODULE_VETERINARY = "edm.services";
+	// FINANCE
+	private static final String SUBAPP_FINANCE = "com.agritrace.edairy.desktop.finance";//$NON-NLS-1$
+	//	private static final String MODULE_GROUP_FINANCE = "modulegroup.desktop.finance"; //$NON-NLS-1$
+	//	private static final String MODULE_FINANCE = "edm.finances";//$NON-NLS-1$
+	//	private static final String SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY = "edm.finances.blog";//$NON-NLS-1$
+	//	private static final String SUBMODULE_FINANCE_MILK_PRICE_REGISTER = "edm.finances.milklog";//$NON-NLS-1$
+	//	private static final String SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER = "edm.finances.credits";//$NON-NLS-1$
+	//	private static final String SUBMODULE_FINANCE_TRANSACTION_REGISTER = "edm.finances.log";//$NON-NLS-1$
 
 	// HOME
 	private static final String SUBAPP_HOME = "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
-	private static final String MODULE_GROUP_HOME = "home.navgroup";//$NON-NLS-1$
-	private static final String MODULE_HOME = "desktop.home.module";//$NON-NLS-1$
-	private static final String SUBMODULE_APPLICATION_HOME = "desktop.home.view";//$NON-NLS-1$
-
 	// MEMBERSHIP
 	private static final String SUBAPP_MEMBERS = "com.agritrace.edairy.desktop.members";//$NON-NLS-1$
-	private static final String MODULE_GROUP_MEMBERS = "members.navgroup";//$NON-NLS-1$
-	private static final String MODULE_MEMBERS = "edm.members";//$NON-NLS-1$
-	private static final String MODULE_FARMS = "edm.farms";//$NON-NLS-1$
-	private static final String SUBMODULE_MEMBER_DIRECTORY = "edm.member.directory";//$NON-NLS-1$
-	private static final String SUBMODULE_MEMBER_EDITOR = "edm.member.edit";//$NON-NLS-1$
-	private static final String SUBMODULE_LIVESTOCK_DIRECTORY = "edm.livestock.directory";//$NON-NLS-1$
-	private static final String SUBMODULE_FARM_DIRECTORY = "edm.farms.directory";//$NON-NLS-1$
-
-	// FINANCE
-	private static final String SUBAPP_FINANCE = "com.agritrace.edairy.desktop.finance";//$NON-NLS-1$
-	private static final String MODULE_GROUP_FINANCE = "modulegroup.desktop.finance"; //$NON-NLS-1$
-	private static final String MODULE_FINANCE = "edm.finances";//$NON-NLS-1$
-	private static final String SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY = "edm.finances.blog";//$NON-NLS-1$
-	private static final String SUBMODULE_FINANCE_MILK_PRICE_REGISTER = "edm.finances.milklog";//$NON-NLS-1$
-	private static final String SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER = "edm.finances.credits";//$NON-NLS-1$
-	private static final String SUBMODULE_FINANCE_TRANSACTION_REGISTER = "edm.finances.log";//$NON-NLS-1$
-
-	// VETERINARY
-	private static final String SUBAPP_VETERINARY = "com.agritrace.edairy.desktop.animalhealth";//$NON-NLS-1$
-	private static final String MODULE_GROUP_VETERINARY = "animalhealth.navgroup"; //$NON-NLS-1$
-	private static final String MODULE_VETERINARY = "edm.services";
-	private static final String SUBMODULE_VETERINARY_REQUESTS = "edm.services.edit";//$NON-NLS-1$
-
-	// REPORTS
-	private static final String SUBAPP_REPORTS = "com.agritrace.edairy.desktop.reports";//$NON-NLS-1$
-	private static final String MODULE_GROUP_REPORTS = "modulegroup.desktop.reports"; //$NON-NLS-1$
-	private static final String MODULE_REPORTS = "edm.reports";
-
+	private static final String SUBAPP_MEMBERS_VIEWID = SUBAPP_MEMBERS;
 	// OPERATIONS
 	private static final String SUBAPP_OPERATIONS = "com.agritrace.edairy.desktop.operations";//$NON-NLS-1$
-	private static final String MODULE_GROUP_OPERATIONS = "modulegroup.desktop.operations"; //$NON-NLS-1$
-	private static final String MODULE_OPERATIONS = "edm.dairy";
-	private static final String MODULE_OPERATIONS_ROUTES = "edm.routes";
-	private static final String MODULE_OPERATIONS_BRANCH_LOCATIONS = "edm.dairy-locations";
-	private static final String MODULE_OPERATIONS_DAIRY_CONTAINERS = "MODULE_OPERATIONS_DAIRY_CONTAINERS";
-	private static final String SUBMODULE_OPERATIONS_ROUTES = "edm.dairy.routes";
-	private static final String SUBMODULE_OPERATIONS_BRANCH_LOCATIONS = "edm.dairy.branches";
-	private static final String SUBMODULE_OPERATIONS_VEHICLE_REGISTER = "edm.dairy.vehicles";
-	private static final String SUBMODULE_OPERATIONS_EMPLOYEE_REGISTER = "edm.dairy.staff";
-	private static final String SUBMODULE_OPERATIONS_DAIRY_PROFILE = "edm.dairy.info";
-	private static final String SUBMODULE_OPERATIONS_DAIRY_CONTAINERS = "SUBMODULE_OPERATIONS_DAIRY_CONTAINERS";
-
+	// REPORTS
+	private static final String SUBAPP_REPORTS = "com.agritrace.edairy.desktop.reports";//$NON-NLS-1$
 	// SYSTEM ADMIN
 	private static final String SUBAPP_SYSTEM = "com.agritrace.edairy.desktop.system";//$NON-NLS-1$
-	private static final String MODULE_GROUP_SYSTEM = "system.navgroup"; //$NON-NLS-1$
-	private static final String MODULE_SYSTEM = "edm.system";
-
-	private static final String SUBAPP_MEMBERS_VIEWID = SUBAPP_MEMBERS;
-	private static final String TAB_FINANCE = SUBAPP_FINANCE;
+	// VETERINARY
+	private static final String SUBAPP_VETERINARY = "com.agritrace.edairy.desktop.animalhealth";//$NON-NLS-1$
+	// private static final String TAB_FINANCE = SUBAPP_FINANCE;
 	private static final String SUBAPP_VETERINARY_VIEWID = SUBAPP_VETERINARY;
+	private static final String SUBMODULE_APPLICATION_HOME = "desktop.home.view";//$NON-NLS-1$
+	private static final String SUBMODULE_FARM_DIRECTORY = "edm.farms.directory";//$NON-NLS-1$
+	//	private static final String SUBMODULE_MEMBER_EDITOR = "edm.member.edit";//$NON-NLS-1$
+	private static final String SUBMODULE_LIVESTOCK_DIRECTORY = "edm.livestock.directory";//$NON-NLS-1$
+	private static final String SUBMODULE_MEMBER_DIRECTORY = "edm.member.directory";//$NON-NLS-1$
+
+	private static final String SUBMODULE_OPERATIONS_BRANCH_LOCATIONS = "edm.dairy.branches";
+	private static final String SUBMODULE_OPERATIONS_DAIRY_CONTAINERS = "SUBMODULE_OPERATIONS_DAIRY_CONTAINERS";
+	private static final String SUBMODULE_OPERATIONS_DAIRY_PROFILE = "edm.dairy.info";
+
+	private static final String SUBMODULE_OPERATIONS_EMPLOYEE_REGISTER = "edm.dairy.staff";
+	private static final String SUBMODULE_OPERATIONS_ROUTES = "edm.dairy.routes";
+	private static final String SUBMODULE_OPERATIONS_VEHICLE_REGISTER = "edm.dairy.vehicles";
+	private static final String SUBMODULE_VETERINARY_REQUESTS = "edm.services.edit";//$NON-NLS-1$
 	private static final String TAB_OPERATIONS = SUBAPP_OPERATIONS;
 	private static final String TAB_REPORTS = SUBAPP_REPORTS;
 	private static final String TAB_SYSTEM = SUBAPP_SYSTEM;
-	private static final String MODULE_OPERATIONS_DAIRY_VEHICLES = "MODULE_OPERATIONS_DAIRY_VEHICLES";
-	private static final String MODULE_OPERATIONS_DAIRY_EMPLOYEES = "MODULE_OPERATIONS_DAIRY_EMPLOYEES";
 
 	public EDairyManagerApplication() {
 		super();
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
 	}
 
-	// @Override
-	protected Bundle getBundle() {
-		return EDairyActivator.getDefault().getBundle();
-	}
-
-	@Override
-	protected void initializeNodeDefaultIcon(INavigationNode<?> node) {
-		// TODO Auto-generated method stub
-		super.initializeNodeDefaultIcon(node);
-	}
-	
 	@Override
 	protected ApplicationController createApplicationController(IApplicationNode node) {
-		ApplicationController controller = super.createApplicationController(node);
+		final ApplicationController controller = super.createApplicationController(node);
 		controller.setMenubarVisible(true);
 		return controller;
 	}
-
 
 	@Override
 	protected IApplicationNode createModel() {
 
 		// ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
 
-		final ApplicationNode app = new ApplicationNode( new NavigationNodeId("application"), LABEL_APPLICATION);
+		final ApplicationNode app = new ApplicationNode(new NavigationNodeId("application"), LABEL_APPLICATION);
 		final WorkareaManager workarea = WorkareaManager.getInstance();
 
 		ISubApplicationNode subAppNode;
@@ -199,36 +182,6 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		app.create(new NavigationNodeId(MilkSubAppConstants.SUBAPP_MILK));
-//		app.addChild(subAppNode);
-//		workarea.registerDefinition(subAppNode, MilkSubAppConstants.SUBAPP_MILK_VIEWID);
-//
-//		//
-//		// COLLECTION MODULE GROUP
-//		//
-//		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MilkSubAppConstants.MODULE_GROUP_MILK));
-//		subAppNode.addChild(moduleGroupNode);
-//
-//		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_COLLECTIONS, "Milk Collection",
-//				moduleGroupNode);
-//
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_REGISTER, "Collection Log",
-//				moduleNode, MilkCollectionLog.ID, MilkCollectionLogController.class); //$NON-NLS-1$ 
-//
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
-//				"Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
-//				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
-//
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY, "Log New Collections",
-//				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
-//
-//		//
-//		// DELIVERY MODULE GROUP
-//		//
-//		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
-//				moduleGroupNode);
-//		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
-//				"Delivery Log", moduleNode, BlankView.ID); //$NON-NLS-1$ 
-//		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
 		// MEMBER TAB
@@ -248,8 +201,8 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleNode = NodeFactory.createModule(MODULE_MEMBERS, LABEL_MEMBERS, moduleGroupNode);
 		NodeFactory.createSubModule(SUBMODULE_MEMBER_DIRECTORY,
 				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController.class); //$NON-NLS-1$ 
-//		NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
-//				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
+		// NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
+		//				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
 
 		//
 		// FARM MODULE GROUP
@@ -286,27 +239,37 @@ public class EDairyManagerApplication extends SwtApplication {
 		// FINANCE TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_FINANCE), LABEL_FINANCE);
-		app.addChild(subAppNode);
-		workarea.registerDefinition(subAppNode, TAB_FINANCE);
-		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_FINANCE));
-		subAppNode.addChild(moduleGroupNode);
+		app.create(new NavigationNodeId(SUBAPP_FINANCE));
 
-		//
-		// FINANCE GROUP
-		//
-
-		final IModuleNode financeMembers = NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode); //$NON-NLS-1$ 
-		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_REGISTER,
-				"Transaction Journal", financeMembers, AccountTransactionListSubModuleView.ID); //$NON-NLS-1$ 
-//		NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY,
-//				"Transaction Journal 8", financeMembers, TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ 
-//		NodeFactory.createSubModule(
-//				"edm.finances.mdlog", "Transaction Journal 9", financeMembers, TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-//		NodeFactory
-//				.createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER, "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ 
-//		NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
-//				"Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$ 
+		/************
+		 * subAppNode = new SubApplicationNode(new
+		 * NavigationNodeId(SUBAPP_FINANCE), LABEL_FINANCE);
+		 * app.addChild(subAppNode); workarea.registerDefinition(subAppNode,
+		 * TAB_FINANCE); moduleGroupNode = new ModuleGroupNode(new
+		 * NavigationNodeId(MODULE_GROUP_FINANCE));
+		 * subAppNode.addChild(moduleGroupNode);
+		 * 
+		 * // // FINANCE GROUP //
+		 * 
+		 * final IModuleNode financeMembers =
+		 * NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode);
+		 * //$NON-NLS-1$
+		 * NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_REGISTER,
+		 * "Transaction Journal", financeMembers,
+		 * MemberTransactionRegisterView.ID); //$NON-NLS-1$ //
+		 * NodeFactory.createSubModule
+		 * (SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY, //
+		 * "Transaction Journal 8", financeMembers,
+		 * TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ //
+		 * NodeFactory.createSubModule( // "edm.finances.mdlog",
+		 * "Transaction Journal 9", financeMembers,
+		 * TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		 * // NodeFactory //
+		 * .createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER,
+		 * "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ //
+		 * NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER, //
+		 * "Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$
+		 ************/
 
 		//
 		// VETERINARY TAB
@@ -386,8 +349,9 @@ public class EDairyManagerApplication extends SwtApplication {
 		// EVENTS GRP
 		//
 		{
-			final IModuleNode moduleEvents = NodeFactory.createModule("edm.events", "Events", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
-//			NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			// final IModuleNode moduleEvents =
+			NodeFactory.createModule("edm.events", "Events", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			//			NodeFactory.createSubModule("edm.services.event.directory", "Event List", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.event.editor", "Create Event", moduleEvents, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
@@ -409,7 +373,7 @@ public class EDairyManagerApplication extends SwtApplication {
 					"edm.supplier.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory
 					.createSubModule(
-							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierDirectoryView.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		//
@@ -460,6 +424,17 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		return app;
 
+	}
+
+	// @Override
+	protected Bundle getBundle() {
+		return EDairyActivator.getDefault().getBundle();
+	}
+
+	@Override
+	protected void initializeNodeDefaultIcon(INavigationNode<?> node) {
+		// TODO Auto-generated method stub
+		super.initializeNodeDefaultIcon(node);
 	}
 
 }

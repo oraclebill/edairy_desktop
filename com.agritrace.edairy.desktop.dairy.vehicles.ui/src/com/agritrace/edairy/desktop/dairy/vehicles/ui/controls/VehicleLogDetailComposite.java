@@ -6,18 +6,17 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.Text;
 
 public class VehicleLogDetailComposite extends Composite {
 
@@ -27,9 +26,9 @@ public class VehicleLogDetailComposite extends Composite {
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		final CTabFolder tabFolder = new CTabFolder(this, 0);
-		CTabItem mainInfoTab = new CTabItem(tabFolder, SWT.None);
+		final CTabItem mainInfoTab = new CTabItem(tabFolder, SWT.None);
 		mainInfoTab.setText("Main Info");
-		Composite detailGroup = UIControlsFactory.createComposite(tabFolder);
+		final Composite detailGroup = UIControlsFactory.createComposite(tabFolder);
 		mainInfoTab.setControl(detailGroup);
 
 		createIdentificationControls(detailGroup);
@@ -38,7 +37,7 @@ public class VehicleLogDetailComposite extends Composite {
 		createInsuranceInfoGroup(detailGroup);
 		GridLayoutFactory.fillDefaults().numColumns(2).generateLayout(detailGroup);
 
-		CTabItem assetInfoTab = new CTabItem(tabFolder, SWT.None);
+		final CTabItem assetInfoTab = new CTabItem(tabFolder, SWT.None);
 		assetInfoTab.setText("Asset Info");
 		assetInfoTab.setControl(createAssetInfoGroup(tabFolder));
 
@@ -149,9 +148,10 @@ public class VehicleLogDetailComposite extends Composite {
 				VehicleLogDetailBindConstants.BIND_ID_LOG_NUM);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(logNumber);
 
-		Label lblVehicleType = UIControlsFactory.createLabel(comonComp, "Vehicle Type" );
+		UIControlsFactory.createLabel(comonComp, "Vehicle Type");
 
-		final CCombo combo = UIControlsFactory.createCCombo(comonComp, VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
+		final CCombo combo = UIControlsFactory.createCCombo(comonComp,
+				VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		// addUIControl(logNumber, BIND_ID_LOG_NUM);
 

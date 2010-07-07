@@ -21,9 +21,58 @@ public class Activator extends DesktopBaseActivator {
 	private static Activator plugin;
 
 	/**
+	 * Returns the shared instance
+	 * 
+	 * @return the shared instance
+	 */
+	public static Activator getDefault() {
+		return plugin;
+	}
+
+	/**
+	 * Return a "shared" image instance using the given colorKey. Shared images
+	 * are managed automatically and must not be disposed by client code.
+	 * 
+	 * @param imageKey
+	 * @return a non-null Image instance
+	 */
+	public static synchronized Image getImage(final String path) {
+		final ImageDescriptor imageDescriptor = getImageDescriptor(path);
+		if (imageDescriptor != null) {
+			return imageDescriptor.createImage();
+		}
+		return ImageStore.getInstance().getImage(path);
+
+	}
+
+	/**
+	 * Returns an image descriptor for the image file at the given plug-in
+	 * relative path
+	 * 
+	 * @param path
+	 *            the path
+	 * @return the image descriptor
+	 */
+	public static ImageDescriptor getImageDescriptor(String path) {
+		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+
+	/**
 	 * The constructor
 	 */
 	public Activator() {
+	}
+
+	public void log(String message) {
+		final Status newLog = new Status(IStatus.INFO, PLUGIN_ID, message);
+		getLog().log(newLog);
+
+	}
+
+	public void logError(Throwable e, String message) {
+		final Status newLog = new Status(IStatus.ERROR, PLUGIN_ID, message, e);
+		getLog().log(newLog);
+
 	}
 
 	/*
@@ -50,56 +99,6 @@ public class Activator extends DesktopBaseActivator {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
-	}
-
-	/**
-	 * Returns the shared instance
-	 * 
-	 * @return the shared instance
-	 */
-	public static Activator getDefault() {
-		return plugin;
-	}
-
-	/**
-	 * Return a "shared" image instance using the given colorKey. Shared images
-	 * are managed automatically and must not be disposed by client code.
-	 * 
-	 * @param imageKey
-	 *            a non-null String; see {@link SharedImages} for valid keys
-	 * @return a non-null Image instance
-	 */
-	public static synchronized Image getImage(final String path) {
-		ImageDescriptor imageDescriptor = getImageDescriptor(path);
-		if (imageDescriptor != null) {
-			return imageDescriptor.createImage();
-		}
-		return ImageStore.getInstance().getImage(path);
-
-	}
-
-	/**
-	 * Returns an image descriptor for the image file at the given plug-in
-	 * relative path
-	 * 
-	 * @param path
-	 *            the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
-
-	public void log(String message) {
-		Status newLog = new Status(IStatus.INFO, PLUGIN_ID, message);
-		getLog().log(newLog);
-
-	}
-
-	public void logError(Throwable e, String message) {
-		Status newLog = new Status(IStatus.ERROR, PLUGIN_ID, message, e);
-		getLog().log(newLog);
-
 	}
 
 }

@@ -7,7 +7,6 @@ import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddContainerDial
 
 public class AddContainerDialog extends ViewContainerDialog {
 
-
 	public AddContainerDialog(Shell shell) {
 		super(shell);
 	}

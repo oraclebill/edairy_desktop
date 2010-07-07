@@ -6,10 +6,11 @@ import org.eclipse.core.databinding.conversion.IConverter;
  * Column editing support
  * 
  * @author Hui(Spark) Wan
- *
+ * 
  */
 public class ColumnEditingSupport implements IColumnEditingSupport {
 
+	@Override
 	public boolean canEdit(Object element) {
 		return true;
 	}

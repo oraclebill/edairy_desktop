@@ -6,13 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import com.agritrace.edairy.desktop.common.model.base.Location;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.base.Location;
 
 /**
  * <!-- begin-user-doc -->

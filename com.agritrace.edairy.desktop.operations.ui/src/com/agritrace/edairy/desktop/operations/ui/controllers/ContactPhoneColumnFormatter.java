@@ -9,7 +9,7 @@ final class ContactPhoneColumnFormatter extends ColumnFormatter {
 	public String getText(Object element) {
 		if (element instanceof Company) {
 
-			Company supplier = (Company) element;
+			final Company supplier = (Company) element;
 
 			if (supplier.getContacts().size() > 0) {
 				return supplier.getContacts().get(0).getPhoneNumber();

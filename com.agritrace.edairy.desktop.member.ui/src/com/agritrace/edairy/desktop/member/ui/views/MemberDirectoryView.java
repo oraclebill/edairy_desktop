@@ -23,62 +23,54 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberDirectoryView extends SubModuleView {
 
-	public static final String ID = MemberDirectoryView.class.getName();
-
 	public static final String FILTER_GROUP_TEXT = "Search for a Member";
 
-	@Override
-	protected void basicCreatePartControl(Composite parent) {
-		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		parent.setLayout(new GridLayout(1, false));
-
-		createFilterGroup(parent);
-		createMembersListGroup(parent);
-	}
+	public static final String ID = MemberDirectoryView.class.getName();
 
 	private void createFilterGroup(Composite parent) {
 		// group
-		Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
+		final Group filterGroup = UIControlsFactory.createGroup(parent, FILTER_GROUP_TEXT);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(filterGroup);
 		// character panel
-		Composite charPanel = UIControlsFactory.createComposite(filterGroup);
+		final Composite charPanel = UIControlsFactory.createComposite(filterGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(charPanel);
 		GridLayoutFactory.fillDefaults().numColumns(27).equalWidth(false).applyTo(charPanel);
 
-		Label allLabel = UIControlsFactory.createLabel(charPanel, "All");
+		final Label allLabel = UIControlsFactory.createLabel(charPanel, "All");
 		addUIControl(allLabel, allLabel.getText());
 
-		char AChar = 'A';
-		char ZChar = 'Z';
+		final char AChar = 'A';
+		final char ZChar = 'Z';
 		for (char i = AChar; i < ZChar; i++) {
-			Label charLabel = UIControlsFactory.createLabel(charPanel, new String(new char[] { i }));
+			final Label charLabel = UIControlsFactory.createLabel(charPanel, new String(new char[] { i }));
 			addUIControl(charLabel, charLabel.getText());
 		}
 
 		// search text
-		Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
+		final Text searchText = UIControlsFactory.createText(filterGroup, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.MEMBERLIST_SEARCHTEXT);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(250, -1).grab(false, false).applyTo(searchText);
 		searchText.setText("Type filter text");
 		searchText.setTextLimit(200);
 
 		// search cancel button
-		Composite searchPanel = UIControlsFactory.createComposite(filterGroup);
+		final Composite searchPanel = UIControlsFactory.createComposite(filterGroup);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(searchPanel);
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
 
-		Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
+		final Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
 				ViewWidgetId.memberInfo_searchButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
 
-		Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.memberInfo_clearButton);
+		final Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear",
+				ViewWidgetId.memberInfo_clearButton);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
 
 	}
 
 	private void createMembersListGroup(Composite parent) {
-		Group memberListGroup = UIControlsFactory.createGroup(parent, "Members");
+		final Group memberListGroup = UIControlsFactory.createGroup(parent, "Members");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(memberListGroup);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(memberListGroup);
 
@@ -125,6 +117,15 @@ public class MemberDirectoryView extends SubModuleView {
 		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "Add", ViewWidgetId.MEMBERLIST_ADD);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 
+	}
+
+	@Override
+	protected void basicCreatePartControl(Composite parent) {
+		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		parent.setLayout(new GridLayout(1, false));
+
+		createFilterGroup(parent);
+		createMembersListGroup(parent);
 	}
 
 }

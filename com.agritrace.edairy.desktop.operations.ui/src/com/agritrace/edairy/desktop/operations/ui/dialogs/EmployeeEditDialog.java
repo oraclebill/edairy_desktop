@@ -41,6 +41,51 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 		super(shell);
 	}
 
+	private void createContactGroup(Composite parent) {
+
+		final Composite photoPanel = new Composite(comonComp, SWT.NONE);
+		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		photoPanel.setLayout(new GridLayout(1, false));
+		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+
+		final Label label = new Label(photoPanel, SWT.BORDER | SWT.WRAP | SWT.CENTER);
+		label.setBackground(SWTResourceManager.getColor(255, 255, 255));
+		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+		final Label composite = UIControlsFactory.createLabel(photoPanel, "", "contact-photo-label");
+		composite.setBackground(SWTResourceManager.getColor(255, 255, 255));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
+
+		final Link link = UIControlsFactory.createLink(photoPanel, SWT.NONE, "update-photo-action");
+		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		link.setText("<a>update photo</a>");
+
+		// UIControlsFactory.createLabel(photoPanel, );
+		final Group ContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(ContactGroup);
+		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(ContactGroup);
+		final AddressGroupWidget addressWidget = new AddressGroupWidget(ContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
+				.applyTo(addressWidget.getGroup());
+		addressWidget.getGroup().pack();
+
+		final DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(ContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
+		directionWidget.getGroup().pack();
+
+		final MapGroupWidget mapWidget = new MapGroupWidget(ContactGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
+		mapWidget.getGroup().pack();
+
+		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(ContactGroup);
+		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
+		// commGroup.getGroup());
+		// commGroup.getGroup().pack();
+		//
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup.getGroup());
+		commGroup.getGroup().pack();
+	}
+
 	@Override
 	protected void buildWorkArea(Composite parent) {
 
@@ -49,46 +94,41 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 		comonComp.setLayout(new GridLayout(2, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
 
-		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
+		final GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
 
-		Composite composite = new Composite(comonComp, SWT.NONE);
+		final Composite composite = new Composite(comonComp, SWT.NONE);
 		composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		composite.setLayout(new GridLayout(2, false));
 
-		// Employee Id
-		Label label = UIControlsFactory.createLabel(composite, "Employee ID");
-		
-		Text txtId = UIControlsFactory.createText(composite);
+		UIControlsFactory.createLabel(composite, "Employee ID");
+
+		final Text txtId = UIControlsFactory.createText(composite);
 		txtId.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.applyTo(txtId);
 		addUIControl(txtId, EmployeeBindingConstants.BIND_ID_EMPLOYEE_ID);
 
-		// Company Name
-		Label label_1 = UIControlsFactory.createLabel(composite, "Family Name");
-		Text familyName = UIControlsFactory.createText(composite);
+		UIControlsFactory.createLabel(composite, "Family Name");
+		final Text familyName = UIControlsFactory.createText(composite);
 		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(familyName);
 		addUIControl(familyName, EmployeeBindingConstants.BIND_ID_FAMILY_NAME);
 
-		// Legal Name
-		Label label_3 = UIControlsFactory.createLabel(composite, "Given Name");
-		Text givenName = UIControlsFactory.createText(composite);
+		UIControlsFactory.createLabel(composite, "Given Name");
+		final Text givenName = UIControlsFactory.createText(composite);
 		givenName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(givenName);
 		addUIControl(givenName, EmployeeBindingConstants.BIND_ID_GIVEN_NAME);
 
-		// Department
-		Label label_5 = UIControlsFactory.createLabel(composite, "Department");
-		CCombo deptCCombo = UIControlsFactory.createCCombo(composite);
+		UIControlsFactory.createLabel(composite, "Department");
+		final CCombo deptCCombo = UIControlsFactory.createCCombo(composite);
 		deptCCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.BEGINNING).applyTo(deptCCombo);
 		addUIControl(deptCCombo, EmployeeBindingConstants.BIND_ID_DEPARTMENT);
 
-		// Position
-		Label label_2 = UIControlsFactory.createLabel(composite, "Position");
-		CCombo positionCCombo = UIControlsFactory.createCCombo(composite);
+		UIControlsFactory.createLabel(composite, "Position");
+		final CCombo positionCCombo = UIControlsFactory.createCCombo(composite);
 		positionCCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(positionCCombo);
 		addUIControl(positionCCombo, EmployeeBindingConstants.BIND_ID_POSITION);
@@ -99,54 +139,9 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 
 	}
 
-	private void createContactGroup(Composite parent) {
-
-		Composite photoPanel = new Composite(comonComp, SWT.NONE);
-		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		photoPanel.setLayout(new GridLayout(1, false));
-		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-
-		Label label = new Label(photoPanel, SWT.BORDER | SWT.WRAP | SWT.CENTER);
-		label.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
-		Label composite = UIControlsFactory.createLabel(photoPanel,  "", "contact-photo-label");
-		composite.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
-
-		Link link = UIControlsFactory.createLink(photoPanel, SWT.NONE, "update-photo-action");
-		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		link.setText("<a>update photo</a>");
-		
-//		UIControlsFactory.createLabel(photoPanel, );
-		Group ContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
-				.applyTo(ContactGroup);
-		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(ContactGroup);
-		AddressGroupWidget addressWidget = new AddressGroupWidget(ContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
-				.applyTo(addressWidget.getGroup());
-		addressWidget.getGroup().pack();
-
-		DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(ContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
-		directionWidget.getGroup().pack();
-
-		MapGroupWidget mapWidget = new MapGroupWidget(ContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
-		mapWidget.getGroup().pack();
-
-		CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(ContactGroup);
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
-		// commGroup.getGroup());
-		// commGroup.getGroup().pack();
-		//
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup.getGroup());
-		commGroup.getGroup().pack();
-	}
-
+	@Override
 	protected EmployeeEditDialogController createController() {
-		EmployeeEditDialogController controller = new EmployeeEditDialogController();
+		final EmployeeEditDialogController controller = new EmployeeEditDialogController();
 		// controller.setWorkingCopy( null );
 		return controller;
 	}

@@ -1,12 +1,8 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
 import java.util.Properties;
-import java.util.UUID;
 
-import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.cfg.Environment;
-
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 
 public class HsqldbMemoryPersistenceManager extends PersistenceManager {
 

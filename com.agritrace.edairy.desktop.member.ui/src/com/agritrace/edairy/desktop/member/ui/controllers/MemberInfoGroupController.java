@@ -26,17 +26,16 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroupController implements WidgetController, ISelectionListener {
 
-	private IController controller;
-
-	private Membership selectedMember;
-
 	private ITextRidget appliedDate;
-	private ITextRidget effectiveDate;
-	private IComboRidget comboStatus;
-	private ITextRidget phoneRidget;
+
 	private IActionRidget appliedDateBtn;
+
+	private IComboRidget comboStatus;
+	private IController controller;
+	private ITextRidget effectiveDate;
 	private IActionRidget effectiveDateBtn;
-	
+	private ITextRidget phoneRidget;
+	private Membership selectedMember;
 
 	public MemberInfoGroupController(IController controller) {
 		this.controller = controller;
@@ -46,7 +45,7 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 	@Override
 	public void configure() {
 		appliedDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_applicationDate);
-	
+
 		effectiveDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_effectiveDate);
 		comboStatus = controller.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
 		phoneRidget = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
@@ -71,11 +70,10 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
 					bean.setDate(selectedDate);
 					appliedDate.setText(bean.getFormattedDate());
-					if(selectedMember != null){
+					if (selectedMember != null) {
 						selectedMember.setApplicationDate(selectedDate);
 					}
 				}
-
 
 			}
 		});
@@ -94,13 +92,13 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
 					bean.setDate(selectedDate);
 					effectiveDate.setText(bean.getFormattedDate());
-					if(selectedMember != null){
+					if (selectedMember != null) {
 						selectedMember.setEffectiveDate(selectedDate);
 					}
 				}
 			}
 		});
-		
+
 		appliedDate.setMandatory(true);
 		appliedDate.setOutputOnly(true);
 		effectiveDate.setMandatory(true);
@@ -110,14 +108,32 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 		phoneRidget.setDirectWriting(true);
 		appliedDate.setDirectWriting(true);
 		effectiveDate.setDirectWriting(true);
-		
 
+	}
 
+	@Override
+	public IController getController() {
+		return controller;
 	}
 
 	@Override
 	public Object getInputModel() {
 		return selectedMember;
+	}
+
+	@Override
+	public void ridgetSelected(SelectionEvent event) {
+		if (event.getSource() == comboStatus) {
+			if (selectedMember != null) {
+				selectedMember.setStatus((MembershipStatus) event.getNewSelection().get(0));
+			}
+		}
+	}
+
+	@Override
+	public void setController(IController controller) {
+		this.controller = controller;
+
 	}
 
 	@Override
@@ -129,17 +145,6 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
-	}
-
-	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
-
-	}
-
-	@Override
 	public void updateBinding() {
 		if (selectedMember == null) {
 			phoneRidget.setText("");
@@ -148,7 +153,8 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 			return;
 		}
 		if (selectedMember.getMember() != null) {
-			phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(), ModelPackage.Literals.PERSON__PHONE_NUMBER));
+			phoneRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),
+					ModelPackage.Literals.PERSON__PHONE_NUMBER));
 			phoneRidget.updateFromModel();
 		} else {
 			phoneRidget.setText("");
@@ -161,7 +167,6 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 		}
 		appliedDate.setText(bean.getFormattedDate());
 
-
 		if (selectedMember.getEffectiveDate() != null) {
 			bean.setDate(selectedMember.getEffectiveDate());
 		} else {
@@ -169,14 +174,5 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 		}
 		effectiveDate.setText(bean.getFormattedDate());
 
-	}
-
-	@Override
-	public void ridgetSelected(SelectionEvent event) {
-		if (event.getSource() == comboStatus) {
-			if (selectedMember != null) {
-				selectedMember.setStatus((MembershipStatus) event.getNewSelection().get(0));
-			}
-		}
 	}
 }

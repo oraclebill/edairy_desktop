@@ -17,53 +17,28 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class LiveStockFilterWidgetController  implements WidgetController, DateRangeFilter{
-	
-	private IController controller;
-	
-	private DateRangeSearchController dateSearchController;
-	private IComboRidget farmCombo;
-	public DateRangeSearchController getDateSearchController() {
-		return dateSearchController;
-	}
-
-	public IComboRidget getFarmCombo() {
-		return farmCombo;
-	}
-
-	public IComboRidget getSpeciesCombo() {
-		return speciesCombo;
-	}
-
-	public IComboRidget getStatusCombo() {
-		return statusCombo;
-	}
-
-	public List<String> getSpeciesList() {
-		return speciesList;
-	}
-
-	public List<String> getFarmsList() {
-		return farmsList;
-	}
-
-	public List<String> getStatusList() {
-		return statusList;
-	}
-
-	private IComboRidget speciesCombo;
-	private IComboRidget statusCombo;
-	
-	private List<String> speciesList =  new ArrayList<String>();
-	private List<String> farmsList =  new ArrayList<String>();
-	private List<String> statusList =  new ArrayList<String>();
-	private IActionRidget search;
-	
+public class LiveStockFilterWidgetController implements WidgetController, DateRangeFilter {
 
 	private IActionRidget clear;
-	
+
+	private final IController controller;
+	private final DateRangeSearchController dateSearchController;
+	private IComboRidget farmCombo;
+
+	private final List<String> farmsList = new ArrayList<String>();
+
 	private Object inputModel;
-	
+
+	private IActionRidget search;
+
+	private IComboRidget speciesCombo;
+
+	private final List<String> speciesList = new ArrayList<String>();
+
+	private IComboRidget statusCombo;
+
+	private final List<String> statusList = new ArrayList<String>();
+
 	public LiveStockFilterWidgetController(IController controller) {
 		this.controller = controller;
 		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
@@ -74,25 +49,22 @@ public class LiveStockFilterWidgetController  implements WidgetController, DateR
 
 	@Override
 	public void configure() {
-	
+
 		farmCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
 		speciesCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
-		statusCombo =controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
+		statusCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
 		search = controller.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_searchButton);
-		clear = controller.getRidget(IActionRidget.class,ViewWidgetId.cancelButton);
+		clear = controller.getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
 	}
 
 	@Override
-	public Object getInputModel() {
+	public List<?> filter(String startDate, String endDate) {
 		// TODO Auto-generated method stub
-		return inputModel;
+		return null;
 	}
 
-	@Override
-	public void setInputModel(Object model) {
-		inputModel = model;
-		updateBinding();
-		
+	public IActionRidget getClear() {
+		return clear;
 	}
 
 	@Override
@@ -101,10 +73,55 @@ public class LiveStockFilterWidgetController  implements WidgetController, DateR
 		return controller;
 	}
 
+	public DateRangeSearchController getDateSearchController() {
+		return dateSearchController;
+	}
+
+	public IComboRidget getFarmCombo() {
+		return farmCombo;
+	}
+
+	public List<String> getFarmsList() {
+		return farmsList;
+	}
+
+	@Override
+	public Object getInputModel() {
+		// TODO Auto-generated method stub
+		return inputModel;
+	}
+
+	public IActionRidget getSearch() {
+		return search;
+	}
+
+	public IComboRidget getSpeciesCombo() {
+		return speciesCombo;
+	}
+
+	public List<String> getSpeciesList() {
+		return speciesList;
+	}
+
+	public IComboRidget getStatusCombo() {
+		return statusCombo;
+	}
+
+	public List<String> getStatusList() {
+		return statusList;
+	}
+
 	@Override
 	public void setController(IController controller) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void setInputModel(Object model) {
+		inputModel = model;
+		updateBinding();
+
 	}
 
 	@Override
@@ -112,44 +129,31 @@ public class LiveStockFilterWidgetController  implements WidgetController, DateR
 		speciesList.clear();
 		speciesList.add("All Species");
 		speciesList.addAll(LivestockValues.getSpecies());
-		speciesCombo.bindToModel(Observables.staticObservableList(speciesList), String.class, null,new WritableValue());
+		speciesCombo
+				.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
 		speciesCombo.updateFromModel();
 		speciesCombo.setSelection(0);
-		
+
 		statusList.clear();
 		statusList.add("All Status");
-		statusCombo.bindToModel(Observables.staticObservableList(statusList), String.class, null,new WritableValue());
+		statusCombo.bindToModel(Observables.staticObservableList(statusList), String.class, null, new WritableValue());
 		statusCombo.updateFromModel();
 		statusCombo.setSelection(0);
-		
+
 		farmsList.clear();
 		farmsList.add("All Farms");
-		if(inputModel instanceof Membership){
-			List<Farm> farms = ((Membership)inputModel).getMember().getFarms();
-			for(Farm farm : farms){
+		if (inputModel instanceof Membership) {
+			final List<Farm> farms = ((Membership) inputModel).getMember().getFarms();
+			for (final Farm farm : farms) {
 				farmsList.add(farm.getName());
 			}
-		}else if(inputModel instanceof Farm){
-			farmsList.add(((Farm)inputModel).getName());
+		} else if (inputModel instanceof Farm) {
+			farmsList.add(((Farm) inputModel).getName());
 
 		}
-		farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null,new WritableValue());
+		farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 		farmCombo.updateFromModel();
 		farmCombo.setSelection(0);
 	}
 
-	@Override
-	public List<?> filter(String startDate, String endDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public IActionRidget getSearch() {
-		return search;
-	}
-
-	public IActionRidget getClear() {
-		return clear;
-	}
-	
 }

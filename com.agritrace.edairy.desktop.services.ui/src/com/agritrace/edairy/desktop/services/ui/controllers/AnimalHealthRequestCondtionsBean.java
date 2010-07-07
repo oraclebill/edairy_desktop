@@ -7,56 +7,56 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 public class AnimalHealthRequestCondtionsBean {
-	
-	public static final String PROPERTY_STARTDATE = "startDate";
-	public static final String PROPERTY_ENDDATE = "endDate";
-	public static final String PROPERTY_FARM ="selectedFarm";
-	public static final String PROPERTY_MEMBERSHIP = "selectedMember";
 
-	private Date startDate;
+	public static final String PROPERTY_ENDDATE = "endDate";
+	public static final String PROPERTY_FARM = "selectedFarm";
+	public static final String PROPERTY_MEMBERSHIP = "selectedMember";
+	public static final String PROPERTY_STARTDATE = "startDate";
+
 	private Date endDate;
+	private RequestType requestType;
 	private Farm selectedFarm;
 	private Membership selectedMember;
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+	private Date startDate;
 
 	public Date getEndDate() {
 		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public Farm getSelectedFarm() {
-		return selectedFarm;
-	}
-
-	public void setSelectedFarm(Farm selectedFarm) {
-		this.selectedFarm = selectedFarm;
-	}
-
-	public Membership getSelectedMember() {
-		return selectedMember;
-	}
-
-	public void setSelectedMember(Membership selectedMember) {
-		this.selectedMember = selectedMember;
 	}
 
 	public RequestType getRequestType() {
 		return requestType;
 	}
 
+	public Farm getSelectedFarm() {
+		return selectedFarm;
+	}
+
+	public Membership getSelectedMember() {
+		return selectedMember;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	public void setRequestType(RequestType requestType) {
 		this.requestType = requestType;
 	}
 
-	private RequestType requestType;
+	public void setSelectedFarm(Farm selectedFarm) {
+		this.selectedFarm = selectedFarm;
+	}
+
+	public void setSelectedMember(Membership selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 }

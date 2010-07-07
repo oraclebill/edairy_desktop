@@ -16,6 +16,14 @@ public interface ISubModuleControllerDelegate {
 	public void configureRidgets();
 
 	/**
+	 * Fire the listener
+	 * 
+	 * @param eventType
+	 *            Event type
+	 */
+	public void fireListener(int eventType);
+
+	/**
 	 * Gets Ridget
 	 * 
 	 * @param <R>
@@ -24,13 +32,5 @@ public interface ISubModuleControllerDelegate {
 	 * @return
 	 */
 	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id);
-
-	/**
-	 * Fire the listener
-	 * 
-	 * @param eventType
-	 *            Event type
-	 */
-	public void fireListener(int eventType);
 
 }

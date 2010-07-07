@@ -6,21 +6,19 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Asset;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +76,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REGISTRATION_NUMBER_EDEFAULT = null;
+	protected static final String REGISTRATION_NUMBER_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getRegistrationNumber() <em>Registration Number</em>}' attribute.
@@ -98,7 +96,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TYPE_EDEFAULT = null;
+	protected static final String TYPE_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -118,7 +116,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String MAKE_EDEFAULT = null;
+	protected static final String MAKE_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getMake() <em>Make</em>}' attribute.
@@ -138,7 +136,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String MODEL_EDEFAULT = null;
+	protected static final String MODEL_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getModel() <em>Model</em>}' attribute.
@@ -158,7 +156,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ENGINE_NUMBER_EDEFAULT = null;
+	protected static final String ENGINE_NUMBER_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getEngineNumber() <em>Engine Number</em>}' attribute.
@@ -178,7 +176,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CHASSIS_NUMBER_EDEFAULT = null;
+	protected static final String CHASSIS_NUMBER_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getChassisNumber() <em>Chassis Number</em>}' attribute.
@@ -198,7 +196,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LOG_BOOK_NUMBER_EDEFAULT = null;
+	protected static final String LOG_BOOK_NUMBER_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getLogBookNumber() <em>Log Book Number</em>}' attribute.
@@ -218,7 +216,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INSURANCE_POLICY_NUMBER_EDEFAULT = null;
+	protected static final String INSURANCE_POLICY_NUMBER_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getInsurancePolicyNumber() <em>Insurance Policy Number</em>}' attribute.
@@ -258,7 +256,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DOMINANT_COLOUR_EDEFAULT = null;
+	protected static final String DOMINANT_COLOUR_EDEFAULT = " ";
 
 	/**
 	 * The cached value of the '{@link #getDominantColour() <em>Dominant Colour</em>}' attribute.
@@ -298,7 +296,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer YEAR_EDEFAULT = null;
+	protected static final Integer YEAR_EDEFAULT = new Integer(2005);
 
 	/**
 	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.

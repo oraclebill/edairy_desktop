@@ -1,9 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -44,118 +42,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
-//import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-//import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 public class MemberSearchDetachedView extends SubModuleView implements MemberSearchSelectionListener,
 		ISelectionChangedListener, SelectionListener {
-
-	public static final String LOOKUP_FIELD = "Column";
-	public static final String LOOKUP_BUTTON = "Filter";
-
-	public static final String ID = MemberSearchDetachedView.class.getName();
-
-	private TableViewer tableView;
-
-	// show all checkbox
-	private Button showAllButton;
-	// filter group
-	private Group filterGroup;
-	private Label filterlabel;
-	private Combo columnFilterCombo;
-	private Combo filterCombo;
-	private Text filterText;
-	private Button lookupButton;
-
-	private MemberSearchViewFilter filter;
-
-	private IMemberRepository membershipRepository;
-
-	public MemberSearchDetachedView() {
-		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
-	}
-
-	@Override
-	protected void basicCreatePartControl(Composite parent) {
-		getNavigationNode().addSimpleListener(new MemberSearchDetachedViewNodeListener());
-		setPartName("Search Member");
-
-		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		parent.setLayout(new GridLayout(1, false));
-
-		final Composite dialogArea = UIControlsFactory.createComposite(parent);
-		dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		dialogArea.setLayout(new GridLayout(1, false));
-
-		showAllButton = UIControlsFactory.createButtonCheck(dialogArea);
-		showAllButton.setText("Show All Members");
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.TOP).grab(true, false).applyTo(showAllButton);
-		showAllButton.addSelectionListener(this);
-
-		filterGroup = UIControlsFactory.createGroup(dialogArea, "Filter Expression");
-		filterGroup.setLayout(new GridLayout(5, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
-
-		filterlabel = UIControlsFactory.createLabel(filterGroup, LOOKUP_FIELD);
-		filterlabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false));
-		columnFilterCombo = UIControlsFactory.createCombo(filterGroup);
-		columnFilterCombo.setItems(new String[] { "ID", "Name", "Address" });
-		columnFilterCombo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
-
-		filterCombo = UIControlsFactory.createCombo(filterGroup);
-		filterCombo.setItems(new String[] { "IS", "Starts With", "Contains", "Ends With" });
-		filterCombo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
-
-		filterText = UIControlsFactory.createText(filterGroup);
-		filterText.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-
-		lookupButton = UIControlsFactory.createButton(filterGroup, LOOKUP_BUTTON);
-		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
-		lookupButton.addSelectionListener(this);
-
-		final Composite panel = UIControlsFactory.createComposite(dialogArea, SWT.NULL);
-		panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		final Table table = UIControlsFactory.createTable(panel, SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
-		tableView = new TableViewer(table);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		filter = new MemberSearchViewFilter();
-		tableView.addSelectionChangedListener(this);
-		tableView.addFilter(filter);
-
-		// Create two columns and show
-		final TableColumn id = new TableColumn(table, SWT.LEFT);
-		id.setText("ID");
-
-		final TableColumn name = new TableColumn(table, SWT.LEFT);
-		name.setText("Name");
-
-		final TableColumn location = new TableColumn(table, SWT.LEFT);
-		location.setText("Address");
-
-		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(id, new ColumnWeightData(20));
-		layout.setColumnData(name, new ColumnWeightData(30));
-		layout.setColumnData(location, new ColumnWeightData(50));
-
-		tableView.setContentProvider(new ArrayContentProvider());
-		tableView.setLabelProvider(new MemberLabelProvider());
-
-		panel.setLayout(layout);
-
-		init();
-	}
-
-	private void init() {
-		tableView.setInput(createMemberShip());
-		showAllButton.setSelection(true);
-		enableFilterGroup(false);
-		columnFilterCombo.select(0);
-		filterCombo.select(0);
-
-	}
 
 	public class MemberLabelProvider implements ITableLabelProvider {
 
@@ -167,18 +58,6 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 
 		@Override
 		public void dispose() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
 
 		}
@@ -196,7 +75,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 				case 0:
 					return "" + ((Membership) element).getMemberId();
 				case 1:
-					Person member = ((Membership) element).getMember();
+					final Person member = ((Membership) element).getMember();
 					return member.getFamilyName() + ", " + member.getGivenName();
 				case 2:
 					return "N/A";
@@ -207,42 +86,151 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			return null;
 		}
 
+		@Override
+		public boolean isLabelProperty(Object element, String property) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void removeListener(ILabelProviderListener listener) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
-	@Override
-	public void selectionChanged(SelectionChangedEvent event) {
-		final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-		final Object selectedObject = selection.getFirstElement();
-		if (selectedObject != null && selectedObject instanceof Membership) {
-			MemberSearchSelectionManager.INSTANCE.notifySelectionChanged(this, (Membership) selectedObject);
+	public class MemberSearchDetachedViewNodeListener extends SimpleNavigationNodeAdapter {
+
+		@Override
+		public void activated(INavigationNode<?> source) {
+			// showView(true);
+			System.out.println("MemberSearchDetachedViewNodeListener   active !!!!!!!!!!!!!!!!");
+		}
+
+		@Override
+		public void deactivated(INavigationNode<?> source) {
+			System.out.println("MemberSearchDetachedViewNodeListener    deactive !!!!!!!!!!!!!!!!");
+
+		}
+
+		@Override
+		public void disposed(INavigationNode<?> source) {
+			getNavigationNode().removeSimpleListener(this);
+
 		}
 	}
 
-	@Override
-	public void memberSelectionChanged(Membership selectedMember) {
-		// TODO Auto-generated method stub
+	private class TitlebarMouseListener implements MouseListener, MouseTrackListener, MouseMoveListener {
+
+		EmbeddedTitleBar embededTitleBar;
+
+		TitlebarMouseListener(EmbeddedTitleBar titleBar) {
+			this.embededTitleBar = titleBar;
+		}
+
+		/**
+		 * @see org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt.events.MouseEvent)
+		 */
+		@Override
+		public void mouseDoubleClick(MouseEvent e) {
+			// nothing to do
+		}
+
+		/**
+		 * @see org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events.MouseEvent)
+		 */
+		@Override
+		public void mouseDown(MouseEvent e) {
+
+			if (!shouldIgnore(e)) {
+				embededTitleBar.setPressed(true);
+			}
+
+		}
+
+		@Override
+		public void mouseEnter(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExit(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseHover(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseMove(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		/**
+		 * @see org.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.MouseEvent)
+		 */
+		@Override
+		public void mouseUp(MouseEvent e) {
+
+			if (!shouldIgnore(e)) {
+				final Point point = new Point(e.x, e.y);
+
+				final EmbeddedTitlebarRenderer renderer = (EmbeddedTitlebarRenderer) LnfManager.getLnf().getRenderer(
+						LnfKeyConstants.SUB_MODULE_VIEW_TITLEBAR_RENDERER);
+				if ((renderer != null) && renderer.isInsideCloseButton(point)) {
+					MemberSearchSelectionManager.INSTANCE.getSearchNode().showView(false);
+
+				}
+			}
+
+		}
+
+		/**
+		 * Ignore mouse events if the component is null, not enabled, or the
+		 * event is not associated with the left mouse button.
+		 */
+		protected boolean shouldIgnore(MouseEvent e) {
+			return e.button != 1;
+		}
 
 	}
 
-	@Override
-	public void memberModified(Membership modifiedMember) {
-		tableView.refresh();
+	public static final String ID = MemberSearchDetachedView.class.getName();
 
+	public static final String LOOKUP_BUTTON = "Filter";
+	public static final String LOOKUP_FIELD = "Column";
+	private Combo columnFilterCombo;
+	private MemberSearchViewFilter filter;
+	private Combo filterCombo;
+	// filter group
+	private Group filterGroup;
+	private Label filterlabel;
+
+	private Text filterText;
+
+	private Button lookupButton;
+
+	private IMemberRepository membershipRepository;
+
+	// show all checkbox
+	private Button showAllButton;
+
+	private TableViewer tableView;
+
+	public MemberSearchDetachedView() {
+		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
 	}
-
-	private void enableFilterGroup(boolean enabled) {
-		filterGroup.setEnabled(enabled);
-		filterlabel.setEnabled(enabled);
-		columnFilterCombo.setEnabled(enabled);
-		filterCombo.setEnabled(enabled);
-		filterText.setEnabled(enabled);
-		lookupButton.setEnabled(enabled);
-	}
-
 
 	public List<Membership> createMemberShip() {
 		return membershipRepository.getMemberships();
-		
+
 		// List<Membership> members = new ArrayList<Membership>();
 		// Membership member1 = DairyFactory.eINSTANCE.createMembership();
 		// member1.setMemberId("1001");
@@ -371,6 +359,55 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	}
 
 	@Override
+	public void memberModified(Membership modifiedMember) {
+		tableView.refresh();
+
+	}
+
+	@Override
+	public void memberSelectionChanged(Membership selectedMember) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void refreshView(String viewId) {
+		final IStructuredSelection selection = (IStructuredSelection) tableView.getSelection();
+		final Object selectedObject = selection.getFirstElement();
+		String memberId = null;
+		if ((selectedObject != null) && (selectedObject instanceof Membership)) {
+			memberId = "" + ((Membership) selectedObject).getMemberId();
+		}
+		// TODO: whj - revisit..
+		init();
+		if (memberId != null) {
+			final List<Membership> inputs = createMemberShip();
+			for (final Membership input : inputs) {
+				if (memberId.equals(input.getMemberId())) {
+					tableView.setSelection(new StructuredSelection(input));
+					MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, input);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void selectionChanged(SelectionChangedEvent event) {
+		final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+		final Object selectedObject = selection.getFirstElement();
+		if ((selectedObject != null) && (selectedObject instanceof Membership)) {
+			MemberSearchSelectionManager.INSTANCE.notifySelectionChanged(this, (Membership) selectedObject);
+		}
+	}
+
+	@Override
+	public void widgetDefaultSelected(SelectionEvent e) {
+		widgetSelected(e);
+
+	}
+
+	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == showAllButton) {
 			if (showAllButton.getSelection()) {
@@ -387,7 +424,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 			filter.setSearchColumn(column);
 			final int filterFormat = filterCombo.getSelectionIndex();
 			final String filterStr = filterText.getText();
-			if (filterStr == null || filterStr.isEmpty()) {
+			if ((filterStr == null) || filterStr.isEmpty()) {
 				return;
 			}
 			switch (filterFormat) {
@@ -414,9 +451,21 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 
 	}
 
-	@Override
-	public void widgetDefaultSelected(SelectionEvent e) {
-		widgetSelected(e);
+	private void enableFilterGroup(boolean enabled) {
+		filterGroup.setEnabled(enabled);
+		filterlabel.setEnabled(enabled);
+		columnFilterCombo.setEnabled(enabled);
+		filterCombo.setEnabled(enabled);
+		filterText.setEnabled(enabled);
+		lookupButton.setEnabled(enabled);
+	}
+
+	private void init() {
+		tableView.setInput(createMemberShip());
+		showAllButton.setSelection(true);
+		enableFilterGroup(false);
+		columnFilterCombo.select(0);
+		filterCombo.select(0);
 
 	}
 
@@ -430,128 +479,75 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 		super.addUIControl(uiControl, bindingId);
 	}
 
-	private class TitlebarMouseListener implements MouseListener, MouseTrackListener, MouseMoveListener {
-
-		EmbeddedTitleBar embededTitleBar;
-
-		TitlebarMouseListener(EmbeddedTitleBar titleBar) {
-			this.embededTitleBar = titleBar;
-		}
-
-		/**
-		 * @see org.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.MouseEvent)
-		 */
-		@Override
-		public void mouseUp(MouseEvent e) {
-
-			if (!shouldIgnore(e)) {
-				final Point point = new Point(e.x, e.y);
-
-				final EmbeddedTitlebarRenderer renderer = (EmbeddedTitlebarRenderer) LnfManager.getLnf().getRenderer(
-						LnfKeyConstants.SUB_MODULE_VIEW_TITLEBAR_RENDERER);
-				if (renderer != null && renderer.isInsideCloseButton(point)) {
-					MemberSearchSelectionManager.INSTANCE.getSearchNode().showView(false);
-
-				}
-			}
-
-		}
-
-		/**
-		 * @see org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events.MouseEvent)
-		 */
-		@Override
-		public void mouseDown(MouseEvent e) {
-
-			if (!shouldIgnore(e)) {
-				embededTitleBar.setPressed(true);
-			}
-
-		}
-
-		/**
-		 * @see org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt.events.MouseEvent)
-		 */
-		@Override
-		public void mouseDoubleClick(MouseEvent e) {
-			// nothing to do
-		}
-
-		/**
-		 * Ignore mouse events if the component is null, not enabled, or the
-		 * event is not associated with the left mouse button.
-		 */
-		protected boolean shouldIgnore(MouseEvent e) {
-			return e.button != 1;
-		}
-
-		@Override
-		public void mouseMove(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEnter(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExit(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseHover(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
-
-	public class MemberSearchDetachedViewNodeListener extends SimpleNavigationNodeAdapter {
-
-		@Override
-		public void activated(INavigationNode<?> source) {
-			// showView(true);
-			System.out.println("MemberSearchDetachedViewNodeListener   active !!!!!!!!!!!!!!!!");
-		}
-
-		@Override
-		public void deactivated(INavigationNode<?> source) {
-			System.out.println("MemberSearchDetachedViewNodeListener    deactive !!!!!!!!!!!!!!!!");
-
-		}
-
-		@Override
-		public void disposed(INavigationNode<?> source) {
-			getNavigationNode().removeSimpleListener(this);
-
-		}
-	}
-
 	@Override
-	public void refreshView(String viewId) {
-		final IStructuredSelection selection = (IStructuredSelection) tableView.getSelection();
-		final Object selectedObject = selection.getFirstElement();
-		String memberId = null;
-		if (selectedObject != null && selectedObject instanceof Membership) {
-			memberId = "" + ((Membership) selectedObject).getMemberId();
-		}
-		// TODO: whj - revisit..
-		init();
-		if (memberId != null) {
-			final List<Membership> inputs = createMemberShip();
-			for (final Membership input : inputs) {
-				if (memberId.equals(input.getMemberId())) {
-					tableView.setSelection(new StructuredSelection(input));
-					MemberSearchSelectionManager.INSTANCE.notifySelectionModified(this, input);
-				}
-			}
-		}
+	protected void basicCreatePartControl(Composite parent) {
+		getNavigationNode().addSimpleListener(new MemberSearchDetachedViewNodeListener());
+		setPartName("Search Member");
 
+		parent.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		parent.setLayout(new GridLayout(1, false));
+
+		final Composite dialogArea = UIControlsFactory.createComposite(parent);
+		dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		dialogArea.setLayout(new GridLayout(1, false));
+
+		showAllButton = UIControlsFactory.createButtonCheck(dialogArea);
+		showAllButton.setText("Show All Members");
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.TOP).grab(true, false).applyTo(showAllButton);
+		showAllButton.addSelectionListener(this);
+
+		filterGroup = UIControlsFactory.createGroup(dialogArea, "Filter Expression");
+		filterGroup.setLayout(new GridLayout(5, false));
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
+
+		filterlabel = UIControlsFactory.createLabel(filterGroup, LOOKUP_FIELD);
+		filterlabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false));
+		columnFilterCombo = UIControlsFactory.createCombo(filterGroup);
+		columnFilterCombo.setItems(new String[] { "ID", "Name", "Address" });
+		columnFilterCombo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+
+		filterCombo = UIControlsFactory.createCombo(filterGroup);
+		filterCombo.setItems(new String[] { "IS", "Starts With", "Contains", "Ends With" });
+		filterCombo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+
+		filterText = UIControlsFactory.createText(filterGroup);
+		filterText.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
+
+		lookupButton = UIControlsFactory.createButton(filterGroup, LOOKUP_BUTTON);
+		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+		lookupButton.addSelectionListener(this);
+
+		final Composite panel = UIControlsFactory.createComposite(dialogArea, SWT.NULL);
+		panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		final Table table = UIControlsFactory.createTable(panel, SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
+		tableView = new TableViewer(table);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		filter = new MemberSearchViewFilter();
+		tableView.addSelectionChangedListener(this);
+		tableView.addFilter(filter);
+
+		// Create two columns and show
+		final TableColumn id = new TableColumn(table, SWT.LEFT);
+		id.setText("ID");
+
+		final TableColumn name = new TableColumn(table, SWT.LEFT);
+		name.setText("Name");
+
+		final TableColumn location = new TableColumn(table, SWT.LEFT);
+		location.setText("Address");
+
+		final TableColumnLayout layout = new TableColumnLayout();
+		layout.setColumnData(id, new ColumnWeightData(20));
+		layout.setColumnData(name, new ColumnWeightData(30));
+		layout.setColumnData(location, new ColumnWeightData(50));
+
+		tableView.setContentProvider(new ArrayContentProvider());
+		tableView.setLabelProvider(new MemberLabelProvider());
+
+		panel.setLayout(layout);
+
+		init();
 	}
 
 }

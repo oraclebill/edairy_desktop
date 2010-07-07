@@ -12,26 +12,26 @@ import java.util.List;
  */
 public enum KenyaProvinceDistrict {
 
+	CENTRAL("Central", new String[] { "Nyandarua District", "Nyeri District", "Kirinyaga District",
+			"Murang'a District", "Kiambu District" }),
+
 	COAST("North", new String[] { "Mombasa District", "Kwale District", "Kilifi District", "Tana River District",
 			"Lamu District", "Taita/Taveta District" }),
-
-	NORTH_EASTERN("North Eastern", new String[] { "Garissa District", "Wajir District", "Mandera District" }),
 
 	EASTERN("Eastern", new String[] { "Marsabit District", "Isiolo District", "Meru District",
 			"Tharaka-Nithi District", "Embu District", "Kitui District", "Machakos District", "Makueni District" }),
 
-	CENTRAL("Central", new String[] { "Nyandarua District", "Nyeri District", "Kirinyaga District",
-			"Murang'a District", "Kiambu District" }),
+	NORTH_EASTERN("North Eastern", new String[] { "Garissa District", "Wajir District", "Mandera District" }),
+
+	NYANZA("Nyanza", new String[] { "Siaya District", "Kisumu District", "Homa Bay District", "Migori District",
+			"Kisii District", "Nyamira District" }),
 
 	RIFT_VALLEY("Rift Valley", new String[] { "Turkana District", "West Pokot District", "Samburu District",
 			"Trans Nzoia District", "Uasin Gishu District", "Elgeyo/Marakwet District", "Nandi District",
 			"Baringo District", "Laikipia District", "Nakuru District", "Narok District", "Kajiado District",
 			"Kericho District", "Bomet District" }),
 
-	WESTERN("Western", new String[] { "Kakamega District", "Vihiga District", "Bungoma District", "Busia District" }),
-
-	NYANZA("Nyanza", new String[] { "Siaya District", "Kisumu District", "Homa Bay District", "Migori District",
-			"Kisii District", "Nyamira District" });
+	WESTERN("Western", new String[] { "Kakamega District", "Vihiga District", "Bungoma District", "Busia District" });
 
 	private final String displayName;
 	private final String[] provinces;

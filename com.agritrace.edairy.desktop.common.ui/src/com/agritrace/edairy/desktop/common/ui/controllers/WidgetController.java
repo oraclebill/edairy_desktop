@@ -6,13 +6,13 @@ public interface WidgetController {
 
 	public void configure();
 
-	public Object getInputModel();
-
-	public void setInputModel(Object model);
-
 	public IController getController();
 
+	public Object getInputModel();
+
 	public void setController(IController controller);
+
+	public void setInputModel(Object model);
 
 	public void updateBinding();
 

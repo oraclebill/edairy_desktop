@@ -2,36 +2,36 @@ package com.agritrace.edairy.desktop.deliveries.ui.beans;
 
 public class Item {
 
-    private String id;
-    private int number;
-    private String description;
+	private String description;
+	private String id;
+	private int number;
 
-    public Item() {
+	public Item() {
 
-    }
+	}
 
-    public String getId() {
-	return id;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public int getNumber() {
-	return number;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getDescription() {
-	return description;
-    }
+	public int getNumber() {
+		return number;
+	}
 
-    public void setId(String id) {
-	this.id = id;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setNumber(int number) {
-	this.number = number;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setDescription(String description) {
-	this.description = description;
-    }
+	public void setNumber(int number) {
+		this.number = number;
+	}
 
 }

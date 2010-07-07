@@ -18,14 +18,13 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
-import com.agritrace.edairy.desktop.collection.ui.views.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
@@ -36,20 +35,18 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 
-	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-
-	private IDateTimeRidget startDate;
 	private IDateTimeRidget endDate;
-	private IComboRidget route;
+	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
 	private IToggleButtonRidget mprMissing;
-	private IToggleButtonRidget suspended;
 	private IToggleButtonRidget rejected;
+	private IComboRidget route;
+	private IDateTimeRidget startDate;
 
-	private DairyRepository dairyRepository = new DairyRepository();
+	private IToggleButtonRidget suspended;
 
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
-		setEntityClass(CollectionJournalPage.class);
+		// setEntityClass(CollectionJournalPage.class);
 		setRepository(new MilkCollectionJournalRepository());
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
@@ -59,23 +56,20 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("Route", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
-				Route route = null;
-				if ( element instanceof Route  ) {
-					route = (Route)element;
+				if (element instanceof Route) {
+					final Route route = (Route) element;
 					return route.getName();
-				}
-				else if (element instanceof CollectionJournalPage) {
-					Route r = ((CollectionJournalPage)element).getRoute();
+				} else if (element instanceof CollectionJournalPage) {
+					final Route route = ((CollectionJournalPage) element).getRoute();
 					if (route != null) {
-						return r.getName();
-					}
-					else {
+						return route.getName();
+					} else {
 						return "(empty)";
 					}
 				}
-				System.err.println("element->class: "+ element.getClass());
+				System.err.println("element->class: " + element.getClass());
 				return super.getText(element);
-			}			
+			}
 		});
 		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
 		addTableColumn("Driver Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL);
@@ -84,101 +78,130 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
 
-		filterBean.setRoutes(new DairyRepository().allRoutes());
+		filterBean.setRoutes( DairyRepository.getInstance().allRoutes() );
 	}
 
-	
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW).setText("Enter Collection Journals");
-		
+		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
+
 		getRidget(IActionRidget.class, "import-file-button").addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
-				String retVal = fileDialog.open();
+				final FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
+				final String retVal = fileDialog.open();
 				System.err.println("File " + retVal + " opened.");
 			}
-			
+
 		});
-		
-		ISubModuleNode myNode = getNavigationNode();
+
+		final ISubModuleNode myNode = getNavigationNode();
 		if (myNode != null) {
 			myNode.addSimpleListener(new org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter() {
 
 				@Override
-				public void prepared(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void selectedChanged(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void childAdded(INavigationNode<?> source, INavigationNode<?> childAdded) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void childRemoved(INavigationNode<?> source, INavigationNode<?> childRemoved) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
 				public void activated(INavigationNode<?> source) {
 					// TODO Auto-generated method stub
-					
-				}
 
-				@Override
-				public void beforeActivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-					
 				}
 
 				@Override
 				public void afterActivated(INavigationNode<?> source) {
 					// TODO Auto-generated method stub
-					
-				}
 
-				@Override
-				public void deactivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeDeactivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-					
 				}
 
 				@Override
 				public void afterDeactivated(INavigationNode<?> source) {
 					// TODO Auto-generated method stub
-					
+
+				}
+
+				@Override
+				public void beforeActivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeDeactivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void childAdded(INavigationNode<?> source, INavigationNode<?> childAdded) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void childRemoved(INavigationNode<?> source, INavigationNode<?> childRemoved) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void deactivated(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+
 				}
 
 				@Override
 				public void disposed(INavigationNode<?> source) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
+				@Override
+				public void prepared(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
 
-				
+				}
+
+				@Override
+				public void selectedChanged(INavigationNode<?> source) {
+					// TODO Auto-generated method stub
+
+				}
+
 			});
 		}
 	}
 
+	private void activateDetailView(CollectionJournalPage journalPage) {
+		final ISubModuleNode myNode = getNavigationNode();
+		System.err.println("Node:    " + myNode);
+		System.err.println("Actions: " + myNode.getActions());
+		final ISubModuleNode childNode = createCollectionDetailNode(journalPage);
+		System.err.println("Child Node: " + childNode);
+		myNode.addChild(childNode);
+		// myNode.getNavigationProcessor().navigate(myNode,
+		// childNode.getNodeId(), new NavigationArgument(journalPage));
+		try {
+			childNode.activate();
+		} catch (final Exception e) {
+			myNode.removeChild(childNode);
+			e.printStackTrace();
+		}
+	}
+
+	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
+		getNavigationNode().navigate(
+				new NavigationNodeId("riena.demo.client.customermailfolders.module", journalPage.getReferenceNumber()), //$NON-NLS-1$
+				new NavigationArgument(journalPage));
+
+		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("milk-collection-entry-node",
+				journalPage.getReferenceNumber()), "Collections Entry for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
+		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
+		detailViewNode.setContext("JOURNAL_PAGE", journalPage);
+		WorkareaManager
+				.getInstance()
+				.registerDefinition(detailViewNode, MilkCollectionJournalController.class, MilkCollectionJournalView.ID)
+				.setRequiredPreparation(true);
+		return detailViewNode;
+	}
 
 	@Override
 	protected void configureFilterRidgets() {
@@ -195,16 +218,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		mprMissing.bindToModel(filterBean, "mprMissing");
 		suspended.bindToModel(filterBean, "suspended");
 		rejected.bindToModel(filterBean, "rejected");
-	}
-
-	@Override
-	protected void resetFilterConditions() {
-		startDate.setDate(new Date());
-		endDate.setDate(new Date());
-		route.setSelection(-1);
-		mprMissing.setSelected(false);
-		suspended.setSelected(false);
-		rejected.setSelected(false);
 	}
 
 	@Override
@@ -229,61 +242,34 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected void handleNewItemAction() {
-		NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
+		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
 		// dialog.getController().setContext(EDITED_OBJECT_ID,
 		// createNewModel());
 		// dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 
-		int returnCode = dialog.open();
+		final int returnCode = dialog.open();
 		System.err.println("return code : " + returnCode);
 		if (Window.OK == returnCode) {
-			CollectionJournalPage newPage = dialog.getNewJournalPage();
-			activateDetailView(dialog.getNewJournalPage());
+			final CollectionJournalPage newPage = dialog.getNewJournalPage();
+			activateDetailView(newPage);
 		}
 		refreshTableContents();
 	}
-	
-	
-	
+
 	@Override
 	protected void handleViewItemAction() {
 		// FIXME: demo only!!! - use view page!!
-		CollectionJournalPage newPage = (CollectionJournalPage)table.getSelection().get(0);
+		final CollectionJournalPage newPage = (CollectionJournalPage) table.getSelection().get(0);
 		activateDetailView(newPage);
 	}
 
-
-	private ISubModuleNode createCollectionDetailNode( CollectionJournalPage journalPage ) {
-		getNavigationNode().navigate(
-				new NavigationNodeId("riena.demo.client.customermailfolders.module", journalPage.getReferenceNumber()), //$NON-NLS-1$
-				new NavigationArgument(journalPage));
-		
-		ISubModuleNode detailViewNode = new SubModuleNode(
-				new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), 
-				"Collections Entry for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
-		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
-		detailViewNode.setContext("JOURNAL_PAGE", journalPage);
-		WorkareaManager.getInstance().registerDefinition(
-				detailViewNode, 
-				MilkCollectionJournalController.class,
-				MilkCollectionJournalView.ID).setRequiredPreparation(true); //$NON-NLS-1$
-		return detailViewNode;
-	}
-		
-	private void activateDetailView( CollectionJournalPage journalPage ) {
-		ISubModuleNode myNode = getNavigationNode();
-		System.err.println("Node:    " + myNode);
-		System.err.println("Actions: " + myNode.getActions());
-		ISubModuleNode childNode = createCollectionDetailNode(journalPage);
-		System.err.println("Child Node: " + childNode);
-		myNode.addChild(childNode);
-//		myNode.getNavigationProcessor().navigate(myNode, childNode.getNodeId(), new NavigationArgument(journalPage));
-		try {
-			childNode.activate();
-		}
-		catch(Exception e) {
-			myNode.removeChild(childNode);
-			e.printStackTrace();
-		}
+	@Override
+	protected void resetFilterConditions() {
+		startDate.setDate(new Date());
+		endDate.setDate(new Date());
+		route.setSelection(-1);
+		mprMissing.setSelected(false);
+		suspended.setSelected(false);
+		rejected.setSelected(false);
 	}
 }

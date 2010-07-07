@@ -7,8 +7,6 @@ import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -22,11 +20,15 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 
 public class FarmTabFolder {
 
-	private Composite tabComposite;
 	public static final String MEMBER_INFO_GROUP = "Farm Information";
+	private Composite tabComposite;
 
 	public FarmTabFolder(Composite parent) {
 		initGUI(parent);
+	}
+
+	public Composite getTabComposite() {
+		return tabComposite;
 	}
 
 	private void initGUI(Composite parent) {
@@ -60,7 +62,7 @@ public class FarmTabFolder {
 		profileTab.setText("Address");
 		final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		profileComposite.setLayout(new GridLayout(1, true));
-		LocationProfileWidget addressWidget = new LocationProfileWidget(profileComposite);
+		final LocationProfileWidget addressWidget = new LocationProfileWidget(profileComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(addressWidget.getComposite());
 		profileTab.setControl(profileComposite);
 
@@ -68,7 +70,7 @@ public class FarmTabFolder {
 		livestockTab.setText("Livestock");
 		final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		livestockComposite.setLayout(new GridLayout(1, true));
-		MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
+		final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 				.applyTo(liveStockWidget.getComposite());
 		livestockTab.setControl(livestockComposite);
@@ -77,16 +79,12 @@ public class FarmTabFolder {
 		containerTab.setText("Containers");
 		final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		containerComposite.setLayout(new GridLayout(1, false));
-		MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
+		final MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 				.applyTo(containerWidget.getComposite());
 		containerTab.setControl(containerComposite);
-		//by default select the profile tab
+		// by default select the profile tab
 		tabfolder.setSelection(profileTab);
-	}
-
-	public Composite getTabComposite() {
-		return tabComposite;
 	}
 
 }

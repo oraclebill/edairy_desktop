@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.services.ui.controllers;
 
-import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.core.databinding.conversion.Converter;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
@@ -8,18 +8,14 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  * Converter which convert Farm to String value
  * 
  * @author Hui(Spark) Wan
- *
+ * 
  */
-public class Farm2StringConverter implements IConverter {
+public class Farm2StringConverter extends Converter {
 
-	@Override
-	public Object getFromType() {
-		return Farm.class;
-	}
-
-	@Override
-	public Object getToType() {
-		return String.class;
+	
+	public Farm2StringConverter() {
+		super(Farm.class, String.class);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
