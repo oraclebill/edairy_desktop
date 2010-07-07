@@ -26,7 +26,7 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.collection.ui.views.DeliveryJournalView"
+            class="com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryJournalView"
             id="com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"
             name="Milk Delivery Log">
       </view>

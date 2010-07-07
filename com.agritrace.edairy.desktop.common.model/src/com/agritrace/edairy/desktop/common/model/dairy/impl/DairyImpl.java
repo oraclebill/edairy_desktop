@@ -27,6 +27,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
@@ -56,6 +57,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getMemberships <em>Memberships</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getBranchLocations <em>Branch Locations</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCollectionJournals <em>Collection Journals</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDeliveryJournals <em>Delivery Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCustomers <em>Customers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
@@ -248,6 +250,16 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected EList<CollectionJournalPage> collectionJournals;
+
+	/**
+	 * The cached value of the '{@link #getDeliveryJournals() <em>Delivery Journals</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeliveryJournals()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DeliveryJournal> deliveryJournals;
 
 	/**
 	 * The cached value of the '{@link #getSuppliers() <em>Suppliers</em>}' containment reference list.
@@ -561,6 +573,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DeliveryJournal> getDeliveryJournals() {
+		if (deliveryJournals == null) {
+			deliveryJournals = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.DAIRY__DELIVERY_JOURNALS);
+		}
+		return deliveryJournals;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Supplier> getSuppliers() {
 		if (suppliers == null) {
 			suppliers = new EObjectContainmentEList<Supplier>(Supplier.class, this, DairyPackage.DAIRY__SUPPLIERS);
@@ -748,6 +772,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getBranchLocations();
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				return getCollectionJournals();
+			case DairyPackage.DAIRY__DELIVERY_JOURNALS:
+				return getDeliveryJournals();
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return getSuppliers();
 			case DairyPackage.DAIRY__CUSTOMERS:
@@ -816,6 +842,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				getCollectionJournals().clear();
 				getCollectionJournals().addAll((Collection<? extends CollectionJournalPage>)newValue);
+				return;
+			case DairyPackage.DAIRY__DELIVERY_JOURNALS:
+				getDeliveryJournals().clear();
+				getDeliveryJournals().addAll((Collection<? extends DeliveryJournal>)newValue);
 				return;
 			case DairyPackage.DAIRY__SUPPLIERS:
 				getSuppliers().clear();
@@ -891,6 +921,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				getCollectionJournals().clear();
 				return;
+			case DairyPackage.DAIRY__DELIVERY_JOURNALS:
+				getDeliveryJournals().clear();
+				return;
 			case DairyPackage.DAIRY__SUPPLIERS:
 				getSuppliers().clear();
 				return;
@@ -948,6 +981,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return branchLocations != null && !branchLocations.isEmpty();
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				return collectionJournals != null && !collectionJournals.isEmpty();
+			case DairyPackage.DAIRY__DELIVERY_JOURNALS:
+				return deliveryJournals != null && !deliveryJournals.isEmpty();
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return suppliers != null && !suppliers.isEmpty();
 			case DairyPackage.DAIRY__CUSTOMERS:

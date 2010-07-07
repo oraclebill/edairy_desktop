@@ -213,6 +213,8 @@
         eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
         eType="#//CollectionJournalPage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" upperBound="-1"
+        eType="#//DeliveryJournal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customers" upperBound="-1"

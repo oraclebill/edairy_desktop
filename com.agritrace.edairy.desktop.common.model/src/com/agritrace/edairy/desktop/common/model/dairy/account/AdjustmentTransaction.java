@@ -36,7 +36,7 @@ public interface AdjustmentTransaction extends Transaction {
 	 * @return the value of the '<em>Signed Off By</em>' reference.
 	 * @see #setSignedOffBy(Employee)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAdjustmentTransaction_SignedOffBy()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Employee getSignedOffBy();

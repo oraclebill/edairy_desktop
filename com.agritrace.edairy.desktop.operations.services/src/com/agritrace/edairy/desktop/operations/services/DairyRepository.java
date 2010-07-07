@@ -1,11 +1,12 @@
 package com.agritrace.edairy.desktop.operations.services;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -332,10 +333,30 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public List<MilkPrice> getMilkPrices(java.util.Date startDate, java.util.Date endDate) {
+	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
 		Session session = PersistenceManager.getDefault().getSession();
 		return (List<MilkPrice>)session.createCriteria("MilkPrice").add(
 				Restrictions.between("priceDate", startDate, endDate)).list();
+	}
+
+	@Override
+	public List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route,
+			Customer customer) {
+		Session session = PersistenceManager.getDefault().getSession();
+		Criteria djCriteria = session.createCriteria("DeliveryJournal");
+		if (minDate != null) {
+			djCriteria.add(Restrictions.ge("date", minDate));
+		}
+		if (maxDate != null) {
+			djCriteria.add(Restrictions.le("date", maxDate));
+		}
+		if (route != null) {
+			djCriteria.add(Restrictions.eq("route", route));
+		}
+		if (customer != null) {
+			djCriteria.add(Restrictions.eq("customer", customer));
+		}
+		return djCriteria.list();
 	}
 
 }

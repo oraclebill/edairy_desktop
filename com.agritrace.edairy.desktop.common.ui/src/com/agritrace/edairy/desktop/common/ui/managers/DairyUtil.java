@@ -20,6 +20,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -470,6 +471,27 @@ public class DairyUtil {
 		}
 
 		return supplier;
+	}
+
+	public static Customer createCustomer(String companyName, String legalName, String type, String status) throws ParseException {
+		return createCustomer(companyName, legalName, type, status, NO_PERSONS, NO_CONTACTS);
+	}
+	
+	public static Customer createCustomer(String companyName, String legalName, String type, String status, Collection<Person> contacts,
+			Collection<ContactMethod> contactMethods) throws ParseException {
+		final Customer customer = DairyFactory.eINSTANCE.createCustomer();
+		customer.setCompanyName(companyName);
+		customer.setLegalName(legalName);
+		customer.setCustomerType(type);
+		customer.setStatus(status);
+		if (null != contacts) {
+			customer.getContacts().addAll(contacts);
+		}
+		if (null != contactMethods) {
+			customer.getContactMethods().addAll(contactMethods);
+		}
+
+		return customer;
 	}
 
 	public static Vehicle createVehicle(String logNo, String regNo, int modelYear, String make, String model,

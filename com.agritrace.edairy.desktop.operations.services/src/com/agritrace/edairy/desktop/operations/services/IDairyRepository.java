@@ -66,4 +66,6 @@ public interface IDairyRepository {
 
 	List<MilkPrice> getMilkPrices(Date startDate, Date endDate);
 
+	List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route, Customer customer);
+
 }

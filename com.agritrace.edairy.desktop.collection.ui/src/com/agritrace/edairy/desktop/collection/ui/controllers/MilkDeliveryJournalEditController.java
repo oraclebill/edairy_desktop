@@ -14,13 +14,13 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class DeliveryJournalEditController extends RecordDialogController<DeliveryJournal> {
+public class MilkDeliveryJournalEditController extends RecordDialogController<DeliveryJournal> {
 
 	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 
 	private ITableRidget lineItemsRidget;
 
-	public DeliveryJournalEditController() {
+	public MilkDeliveryJournalEditController() {
 	}
 
 	@Override

@@ -1280,13 +1280,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Delivery Journals</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__DELIVERY_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Suppliers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__SUPPLIERS = ModelPackage.COMPANY_FEATURE_COUNT + 12;
+	int DAIRY__SUPPLIERS = ModelPackage.COMPANY_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Customers</b></em>' reference list.
@@ -1295,7 +1304,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__CUSTOMERS = ModelPackage.COMPANY_FEATURE_COUNT + 13;
+	int DAIRY__CUSTOMERS = ModelPackage.COMPANY_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Animal Health Requests</b></em>' containment reference list.
@@ -1304,7 +1313,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 14;
+	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Bins</b></em>' containment reference list.
@@ -1313,7 +1322,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Price History</b></em>' containment reference list.
@@ -1322,7 +1331,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__PRICE_HISTORY = ModelPackage.COMPANY_FEATURE_COUNT + 16;
+	int DAIRY__PRICE_HISTORY = ModelPackage.COMPANY_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Manager Name</b></em>' attribute.
@@ -1331,7 +1340,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__MANAGER_NAME = ModelPackage.COMPANY_FEATURE_COUNT + 17;
+	int DAIRY__MANAGER_NAME = ModelPackage.COMPANY_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Established Date</b></em>' attribute.
@@ -1340,7 +1349,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__ESTABLISHED_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 18;
+	int DAIRY__ESTABLISHED_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 19;
 
 	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
@@ -1349,7 +1358,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 19;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 20;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -3147,6 +3156,17 @@ public interface DairyPackage extends EPackage {
 	EReference getDairy_CollectionJournals();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDeliveryJournals <em>Delivery Journals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Delivery Journals</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDeliveryJournals()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EReference getDairy_DeliveryJournals();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4558,6 +4578,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DAIRY__COLLECTION_JOURNALS = eINSTANCE.getDairy_CollectionJournals();
+
+		/**
+		 * The meta object literal for the '<em><b>Delivery Journals</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DAIRY__DELIVERY_JOURNALS = eINSTANCE.getDairy_DeliveryJournals();
 
 		/**
 		 * The meta object literal for the '<em><b>Suppliers</b></em>' containment reference list feature.

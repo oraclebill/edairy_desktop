@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class DeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
+public class MilkDeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
 
 	private IComboRidget customerRidget;
 	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
@@ -31,7 +31,7 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 	private IComboRidget routeRidget;
 	private IDateTimeRidget startDateRidget;
 
-	public DeliveryJournalController() {
+	public MilkDeliveryJournalController() {
 		setEClass(DairyPackage.Literals.DELIVERY_JOURNAL);
 		// setEntityClass(DeliveryJournal.class);
 
@@ -43,73 +43,54 @@ public class DeliveryJournalController extends BasicDirectoryController<Delivery
 	}
 
 	@Override
-	public void afterBind() {
-		super.afterBind();
-		bindFilterRidgets();
-		bindFilterActions();
-	}
-
-	private void bindFilterActions() {
-
-	}
-
-	private void bindFilterRidgets() {
-		// filterBean = new DeliveryJournalFilterBean();
-		//
-		// startDateRidget.bindToModel(BeansObservables.observeValue(filterBean,
-		// "minDate"));
-		//
-		// endDateRidget.bindToModel(BeansObservables.observeValue(filterBean,
-		// "maxDate"));
-		//
-		// final IObservableList routeList =
-		// Observables.staticObservableList(dairyRepo.allRoutes());
-		// routeRidget.bindToModel(routeList, Route.class, "getName",
-		// BeansObservables.observeValue(filterBean, "route"));
-		//
-		// final IObservableList customerList =
-		// Observables.staticObservableList(dairyRepo.allCustomers());
-		// customerRidget.bindToModel(customerList, Customer.class,
-		// "getCompanyName", BeansObservables.observeValue(filterBean,
-		// "customer"));
+	protected void configureFilterRidgets() {
+		filterBean = new DeliveryJournalFilterBean();
+		
+		startDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.START_DATE);
+		startDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "minDate"));
+		
+		endDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.END_DATE);
+		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "maxDate"));
+		
+		routeRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.ROUTE);
+		final IObservableList routeList = Observables.staticObservableList(dairyRepo.allRoutes());		
+		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, "route"));
+		
+		customerRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.CUSTOMER);
+		final IObservableList customerList = Observables.staticObservableList(dairyRepo.allCustomers());
+		customerRidget.bindToModel(customerList, Customer.class, "getCompanyName",
+				BeansObservables.observeValue(filterBean, "customer"));
 
 		startDateRidget.updateFromModel();
 		endDateRidget.updateFromModel();
 		routeRidget.updateFromModel();
 		customerRidget.updateFromModel();
+
 	}
 
 	@Override
-	protected void configureFilterRidgets() {
-		filterBean = new DeliveryJournalFilterBean();
-		startDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.START_DATE);
-		startDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "minDate"));
-		endDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.END_DATE);
-		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "maxDate"));
-		routeRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.ROUTE);
-		final IObservableList routeList = Observables.staticObservableList(dairyRepo.allRoutes());
-		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, "route"));
-		customerRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.CUSTOMER);
-		final IObservableList customerList = Observables.staticObservableList(dairyRepo.allCustomers());
-		customerRidget.bindToModel(customerList, Customer.class, "getCompanyName",
-				BeansObservables.observeValue(filterBean, "customer"));
+	protected void resetFilterConditions() {
+		filterBean.setCustomer(null);
+		filterBean.setMaxDate(null);
+		filterBean.setMinDate(null);
+		filterBean.setRoute(null);
+		
+		updateAllRidgetsFromModel();
 	}
+
 
 	@Override
 	protected List<DeliveryJournal> getFilteredResult() {
-		// FIXME: implemnent filter
-		return new ArrayList<DeliveryJournal>(); 
+		return dairyRepo.getDeliveryJournals(
+				filterBean.getMinDate(), 
+				filterBean.getMaxDate(), 
+				filterBean.getRoute(), 
+				filterBean.getCustomer());
 	}
 
 	@Override
 	protected RecordDialog<DeliveryJournal, ?> getRecordDialog(Shell shell) {
 		return new DeliveryJournalEditDialog(shell);
-	}
-
-	@Override
-	protected void resetFilterConditions() {
-		bindFilterRidgets();
-		// table.updateFromModel();
 	}
 
 }

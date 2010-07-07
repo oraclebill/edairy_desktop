@@ -1217,7 +1217,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_Suppliers() {
+	public EReference getDairy_DeliveryJournals() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -1226,7 +1226,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_Customers() {
+	public EReference getDairy_Suppliers() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -1235,7 +1235,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_AnimalHealthRequests() {
+	public EReference getDairy_Customers() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -1244,7 +1244,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_DairyBins() {
+	public EReference getDairy_AnimalHealthRequests() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -1253,7 +1253,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDairy_PriceHistory() {
+	public EReference getDairy_DairyBins() {
 		return (EReference)dairyEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -1262,8 +1262,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDairy_PriceHistory() {
+		return (EReference)dairyEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getDairy_ManagerName() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(17);
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -1272,7 +1281,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getDairy_EstablishedDate() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(18);
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(19);
 	}
 
 	/**
@@ -1803,6 +1812,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(dairyEClass, DAIRY__MEMBERSHIPS);
 		createEReference(dairyEClass, DAIRY__BRANCH_LOCATIONS);
 		createEReference(dairyEClass, DAIRY__COLLECTION_JOURNALS);
+		createEReference(dairyEClass, DAIRY__DELIVERY_JOURNALS);
 		createEReference(dairyEClass, DAIRY__SUPPLIERS);
 		createEReference(dairyEClass, DAIRY__CUSTOMERS);
 		createEReference(dairyEClass, DAIRY__ANIMAL_HEALTH_REQUESTS);
@@ -2020,6 +2030,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_Memberships(), this.getMembership(), null, "memberships", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_BranchLocations(), this.getDairyLocation(), null, "branchLocations", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_CollectionJournals(), this.getCollectionJournalPage(), null, "collectionJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDairy_DeliveryJournals(), this.getDeliveryJournal(), null, "deliveryJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Customers(), this.getCustomer(), null, "customers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairy_AnimalHealthRequests(), theRequestsPackage.getAnimalHealthRequest(), theRequestsPackage.getAnimalHealthRequest_Dairy(), "animalHealthRequests", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

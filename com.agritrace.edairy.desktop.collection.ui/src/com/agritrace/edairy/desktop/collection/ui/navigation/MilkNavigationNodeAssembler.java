@@ -16,10 +16,10 @@ import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
-import com.agritrace.edairy.desktop.collection.ui.controllers.DeliveryJournalController;
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkSubAppConstants;
-import com.agritrace.edairy.desktop.collection.ui.views.DeliveryJournalView;
+import com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryJournalView;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 
@@ -71,7 +71,7 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 		moduleNode = NodeFactory.createModule(MilkSubAppConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
 				moduleGroupNode);
 		NodeFactory.createSubModule(MilkSubAppConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
-				"Delivery Log", moduleNode, DeliveryJournalView.ID, DeliveryJournalController.class); //$NON-NLS-1$ 
+				"Delivery Log", moduleNode, MilkDeliveryJournalView.ID, MilkDeliveryJournalController.class); //$NON-NLS-1$ 
 		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		return new INavigationNode<?>[] { subAppNode };

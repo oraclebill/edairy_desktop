@@ -587,7 +587,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		initEAttribute(getAccountTransaction_SignedBy(), ecorePackage.getEString(), "signedBy", "", 0, 1, AccountTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(adjustmentTransactionEClass, AdjustmentTransaction.class, "AdjustmentTransaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAdjustmentTransaction_SignedOffBy(), theDairyPackage.getEmployee(), null, "signedOffBy", null, 0, 1, AdjustmentTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdjustmentTransaction_SignedOffBy(), theDairyPackage.getEmployee(), null, "signedOffBy", null, 1, 1, AdjustmentTransaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(balancePointEClass, BalancePoint.class, "BalancePoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBalancePoint_AccountBalanceId(), ecorePackage.getELong(), "accountBalanceId", null, 1, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

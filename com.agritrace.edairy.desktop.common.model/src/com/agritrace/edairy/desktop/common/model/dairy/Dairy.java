@@ -34,6 +34,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getMemberships <em>Memberships</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getBranchLocations <em>Branch Locations</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionJournals <em>Collection Journals</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDeliveryJournals <em>Delivery Journals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getSuppliers <em>Suppliers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCustomers <em>Customers</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
@@ -300,6 +301,22 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	EList<CollectionJournalPage> getCollectionJournals();
+
+	/**
+	 * Returns the value of the '<em><b>Delivery Journals</b></em>' reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Delivery Journals</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Delivery Journals</em>' reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DeliveryJournals()
+	 * @model
+	 * @generated
+	 */
+	EList<DeliveryJournal> getDeliveryJournals();
 
 	/**
 	 * Returns the value of the '<em><b>Suppliers</b></em>' containment reference list.
