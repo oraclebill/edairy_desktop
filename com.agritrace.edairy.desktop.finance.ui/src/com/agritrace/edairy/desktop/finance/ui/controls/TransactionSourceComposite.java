@@ -54,7 +54,7 @@ public class TransactionSourceComposite extends Composite {
 
 		label = UIControlsFactory.createLabel(this, labelString);
 		final FormData labelLayoutData = new FormData();
-		labelLayoutData.width = labelString.trim().length() > 0 ? 140 : 0;
+		labelLayoutData.width =  140 ;
 		labelLayoutData.top = new FormAttachment(0, 0);
 		labelLayoutData.left = new FormAttachment(0, 0);
 		label.setLayoutData(labelLayoutData);
@@ -63,10 +63,10 @@ public class TransactionSourceComposite extends Composite {
 				FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 
 		final FormData fieldLayoutData = new FormData();
-		fieldLayoutData.top = new FormAttachment(0, 5);
-		fieldLayoutData.left = new FormAttachment(label, 5, SWT.RIGHT);
-		fieldLayoutData.right = new FormAttachment(100, 100, 8);
-		fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
+		fieldLayoutData.top = new FormAttachment(0, 0);
+		fieldLayoutData.left = new FormAttachment(label, 6, SWT.RIGHT);
+		fieldLayoutData.right = new FormAttachment(100, -8);
+//		fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
 		typeCodeChoice.setLayoutData(fieldLayoutData);
 		// typeCodeChoice.setOrientation(SWT.HORIZONTAL);
 

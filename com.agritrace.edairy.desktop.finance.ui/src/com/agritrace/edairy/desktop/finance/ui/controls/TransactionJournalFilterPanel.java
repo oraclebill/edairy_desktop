@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
+import org.eclipse.swt.layout.FillLayout;
 
 public class TransactionJournalFilterPanel extends Composite {
 	static {
@@ -161,21 +162,23 @@ public class TransactionJournalFilterPanel extends Composite {
 			rowComposite.setLayout(rowLayout);
 			
 			final String labelString = "Type:";
-			final Label label = UIControlsFactory.createLabel(rowComposite, labelString);
-			final FormData labelLayoutData = new FormData();
-			labelLayoutData.width = labelString.trim().length() > 0 ? 140 : 0;
-			labelLayoutData.top = new FormAttachment(0, 0);
-			labelLayoutData.left = new FormAttachment(0, 0);
-			label.setLayoutData(labelLayoutData);
+			final Label lblType = UIControlsFactory.createLabel(rowComposite, "Type");
+			final FormData fd_lblType = new FormData();
+			fd_lblType.width = 140 ;
+			fd_lblType.top = new FormAttachment(0, 0);
+			fd_lblType.left = new FormAttachment(0, 0);
+			lblType.setLayoutData(fd_lblType);
 
 			Composite typeCodeChoice = UIControlsFactory.createChoiceComposite(rowComposite, SWT.BORDER, true,
 					FinanceBindingConstants.FILTER_CHOICE_TX_TYPE);
+			FillLayout fillLayout = (FillLayout) typeCodeChoice.getLayout();
+			fillLayout.type = SWT.HORIZONTAL;
 
 			final FormData fieldLayoutData = new FormData();
-			fieldLayoutData.top = new FormAttachment(0, 5);
-			fieldLayoutData.left = new FormAttachment(label, 5, SWT.RIGHT);
-			fieldLayoutData.right = new FormAttachment(100, 100, 8);
-			fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
+			fieldLayoutData.right = new FormAttachment(100, -8);
+			fieldLayoutData.width = 300;
+			fieldLayoutData.left = new FormAttachment(lblType, 6);
+			fieldLayoutData.top = new FormAttachment(0, 0);
 			typeCodeChoice.setLayoutData(fieldLayoutData);
 		}
 
