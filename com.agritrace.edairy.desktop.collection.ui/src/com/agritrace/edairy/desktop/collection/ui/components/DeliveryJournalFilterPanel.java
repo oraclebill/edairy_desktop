@@ -35,9 +35,6 @@ public class DeliveryJournalFilterPanel extends Composite {
 		final Control filler = UIControlsFactory.createLabel(group, "");
 		GridDataFactory.swtDefaults().grab(true, false).span(7, 1).applyTo(filler);
 
-		final Control searchButton = UIControlsFactory.createButton(group, "Search", "filter-search-button");
-		GridDataFactory.swtDefaults().align(SWT.RIGHT, SWT.CENTER).applyTo(searchButton);
-
 		GridLayoutFactory.swtDefaults().numColumns(8).margins(8, 8).spacing(5, 5).generateLayout(group);
 
 		this.pack();

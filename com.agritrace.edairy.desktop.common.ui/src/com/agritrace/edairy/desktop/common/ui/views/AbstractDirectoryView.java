@@ -34,6 +34,8 @@ import org.eclipse.swt.widgets.Table;
  * 
  */
 public abstract class AbstractDirectoryView extends SubModuleView {
+	public AbstractDirectoryView() {
+	}
 	public static final String BIND_ID_FILTER_RESET = "filter.button.resets";
 
 	public static final String BIND_ID_FILTER_SEARCH = "filter.button.search";
@@ -60,13 +62,13 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	 * @param parent
 	 */
 	private void createFilterArea(Composite parent) {
-		final Composite comp = UIControlsFactory.createComposite(parent);
-		comp.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).equalWidth(true).numColumns(3).create());
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(comp);
+		final Composite filterArea = UIControlsFactory.createComposite(parent);
+		filterArea.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).equalWidth(false).numColumns(3).create());
+		GridDataFactory.swtDefaults().grab(true, false).applyTo(filterArea);
 		// Create filter conditions
-		createFilterPanel(comp);
+		createFilterConditions(filterArea);
 		// Create filter buttons
-		createFilterButtons(comp);
+		createFilterButtons(filterArea);
 	}
 
 	/**
@@ -186,7 +188,7 @@ public abstract class AbstractDirectoryView extends SubModuleView {
 	 * 
 	 * @param comp
 	 */
-	abstract protected void createFilterPanel(Composite comp);
+	abstract protected void createFilterConditions(Composite comp);
 
 	/**
 	 * Returns the style bits for the 'table'. Subclasses may override, but has

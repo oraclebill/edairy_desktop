@@ -16,7 +16,7 @@ public class MilkPriceJournalView extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite comp) {
+	protected void createFilterConditions(Composite comp) {
 		Composite control = new MilkPriceJournalFilterPanel(comp, SWT.NONE);
 		comp.setLayout(new GridLayout());
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(control);

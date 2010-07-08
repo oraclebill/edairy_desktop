@@ -27,7 +27,7 @@ public class EmployeeDirectoryView extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite parent) {
+	protected void createFilterConditions(Composite parent) {
 		final GridLayout gridLayout = (GridLayout) parent.getLayout();
 		gridLayout.marginLeft = 2;
 		gridLayout.marginLeft = 3;

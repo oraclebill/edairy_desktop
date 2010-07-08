@@ -20,7 +20,7 @@ public class SupplierListView extends AbstractDirectoryView {
 	public static final String ID = "edairy.supplier.list.view";
 
 	@Override
-	protected void createFilterPanel(Composite parent) {
+	protected void createFilterConditions(Composite parent) {
 		parent.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(2).create());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 

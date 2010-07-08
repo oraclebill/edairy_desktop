@@ -22,7 +22,7 @@ public class MilkCollectionDetailLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite comp) {
+	protected void createFilterConditions(Composite comp) {
 		comp.setLayout(GridLayoutFactory.fillDefaults().create());
 		new MilkCollectionDetailLogFilterPanel(comp, SWT.NONE);
 		comp.pack();

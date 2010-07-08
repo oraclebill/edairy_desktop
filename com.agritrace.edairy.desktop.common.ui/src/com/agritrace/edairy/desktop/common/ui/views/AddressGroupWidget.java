@@ -34,7 +34,6 @@ public class AddressGroupWidget {
 			addressGroup.setLayout(new GridLayout(1, false));
 			createAddresscontrol();
 		}
-
 	}
 
 	public Group getGroup() {

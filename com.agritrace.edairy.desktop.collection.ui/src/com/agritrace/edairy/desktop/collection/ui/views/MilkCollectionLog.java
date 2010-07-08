@@ -35,7 +35,7 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite parent) {
+	protected void createFilterConditions(Composite parent) {
 		final Composite comp = new MilkCollectionLogFilterPanel(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(3, -1).applyTo(comp);
 	}

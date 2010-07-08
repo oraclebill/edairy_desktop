@@ -120,7 +120,7 @@ public class AnimalHealthRequestView extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite comp) {
+	protected void createFilterConditions(Composite comp) {
 
 		// Date Range
 		createDateRange(comp);

@@ -27,7 +27,7 @@ public class MilkDeliveryJournalView extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterPanel(Composite comp) {
+	protected void createFilterConditions(Composite comp) {
 		new DeliveryJournalFilterPanel(comp, SWT.NONE);
 	}
 
