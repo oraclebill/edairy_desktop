@@ -8,6 +8,7 @@ import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.property.value.IValueProperty;
+import org.eclipse.core.internal.runtime.Log;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EClassifier;
@@ -99,7 +100,7 @@ public class BindingHelper<T extends EObject> {
 
 				checkParameters(optionValues, rowClass, selectionValue);
 				checkMandatory(binding, ridget);
-				comboRidget.bindToModel(optionValues, rowClass, "toString()", selectionValue);
+				comboRidget.bindToModel(optionValues, rowClass, "toString", selectionValue);
 			} else if (ridget instanceof ITableRidget) {
 //				final ITableRidget tableRidget = (ITableRidget) ridget;
 //
@@ -124,7 +125,7 @@ public class BindingHelper<T extends EObject> {
 				checkMandatory(binding, ridget);
 				singleChoice.bindToModel(optionValues, selectionValue);
 			} else if (ridget == null) {
-				throw new IllegalStateException("Ridget '" + binding.getBindingId() + " is null!");
+				throw new IllegalStateException("Ridget '" + binding.getBindingId() + "' is null!");
 			} else {
 				throw new UnsupportedOperationException("Ridget classs '" + ridget.getClass().getName()
 						+ "' is not supported.");
@@ -165,6 +166,19 @@ public class BindingHelper<T extends EObject> {
 		} catch (final Exception e) {
 			System.err.println("WARN: converter factory failed for feature: " + feature);
 			return null;
+		}
+	}
+
+	public void updateAllRidgetsFromModel() {
+		if (modelObject != null) {
+			for (IRidget ridget : ridgetContainer.getRidgets()) {
+				try {
+					ridget.updateFromModel();
+				}
+				catch(org.eclipse.core.databinding.BindingException bindException ) {
+					System.err.println("Error binding ridget - no model binding: " + ridget.getUIControl());
+				}
+			}
 		}
 	}
 

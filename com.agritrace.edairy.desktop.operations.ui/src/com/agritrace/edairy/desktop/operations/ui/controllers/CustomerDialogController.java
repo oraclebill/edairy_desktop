@@ -56,7 +56,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		companyName = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_COMPANY_NAME);
 		companyName.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__COMPANY_NAME));
 		companyName.setMandatory(true);
-		companyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+//		companyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		companyName.updateFromModel();
 
 		// company phone
@@ -64,7 +64,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		companyPhone
 				.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__PHONE_NUMBER));
 		companyPhone.setMandatory(true);
-		companyPhone.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+//		companyPhone.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		companyPhone.updateFromModel();
 
 		// company legal name
@@ -90,7 +90,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		customerDescription.setDirectWriting(true); // otherwise validation
 													// doesn't work well..
 		customerDescription.setMandatory(true);
-		customerDescription.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+//		customerDescription.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		customerDescription.updateFromModel();
 
 		// Configure address group
@@ -114,25 +114,10 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		commController.updateBinding();
 	}
 
-	//
-	// @Override
-	// protected EClass getEClass() {
-	// return DairyPackage.Literals.CUSTOMER;
-	// }
-
 	@Override
 	public Customer getWorkingCopy() {
 		return (Customer) getContext("editObject");
 	}
 
-	// @Override
-	// protected void saveNew() throws AlreadyExistsException {
-	// // prevent saving in dialog
-	// }
-	//
-	// @Override
-	// protected void saveUpdated() throws NonExistingEntityException {
-	// // prevent saving in dialog
-	// }
 
 }

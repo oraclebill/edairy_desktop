@@ -11,5 +11,8 @@ public interface DeliveryJournalEditBindContants {
 	public static final String ROUTE_COMBO = "route-combo";
 	public static final String SESSION_COMBO = "session-combo";
 	public static final String VEHICLE_COMBO = "vehicle-combo";
+	public static final String ROW_TXT_BIN_ID = "ROW_TXT_BIN_ID";
+	public static final String ROW_TXT_AMOUNT = "ROW_TXT_AMOUNT";
+	public static final String ROW_TXT_DESCRIPTION = "ROW_TXT_DESCRIPTION";
 
 }

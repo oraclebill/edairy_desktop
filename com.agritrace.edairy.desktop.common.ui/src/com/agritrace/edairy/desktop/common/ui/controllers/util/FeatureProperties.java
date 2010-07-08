@@ -2,11 +2,10 @@ package com.agritrace.edairy.desktop.common.ui.controllers.util;
 
 import java.util.List;
 
-import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.util.Assert;
 
 class FeatureProperties {
 	private final String bindingId;
@@ -25,7 +24,8 @@ class FeatureProperties {
 	public FeatureProperties(String bindingId, List<?> domainObjects, FeaturePath featurePath) {
 		this.bindingId = bindingId;
 		this.featurePath = featurePath;
-		this.domainList = domainObjects == null ? null : Observables.staticObservableList(domainObjects);
+//		this.domainList = domainObjects == null ? null : Observables.staticObservableList(domainObjects);
+		this.domainList = domainObjects == null ? null : new WritableList(domainObjects, getTailFeature().eClass().getInstanceClass());
 	}
 
 	public String getBindingId() {

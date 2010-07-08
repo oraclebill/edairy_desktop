@@ -139,7 +139,7 @@ public class CustomerEditDialog extends RecordDialog<Customer, CustomerDialogCon
 		addUIControl(typeCombo, CustomerBindingConstants.BIND_ID_CUSTOMERTYPE);
 
 		UIControlsFactory.createLabel(composite, "Description");
-		final Text descText = UIControlsFactory.createTextMulti(composite, true, true);
+		final Text descText = UIControlsFactory.createTextMulti(composite, false, true);
 		descText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).hint(-1, 50).applyTo(descText);
 		addUIControl(descText, CustomerBindingConstants.BIND_ID_DESCRIPTION);

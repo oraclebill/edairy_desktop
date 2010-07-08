@@ -66,6 +66,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	private void configureMappedRidgets() {
 		if (mapper != null) {
 			mapper.configureRidgets();
+			mapper.updateAllRidgetsFromModel();
 		}
 	}
 

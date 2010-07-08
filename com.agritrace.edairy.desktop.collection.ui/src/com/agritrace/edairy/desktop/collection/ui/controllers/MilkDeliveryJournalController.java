@@ -93,4 +93,10 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 		return new DeliveryJournalEditDialog(shell);
 	}
 
+	@Override
+	protected void createEntity(DeliveryJournal newEntity) {
+		dairyRepo.getLocalDairy().getDeliveryJournals().add(newEntity);
+		dairyRepo.save(dairyRepo.getLocalDairy());
+	}
+
 }

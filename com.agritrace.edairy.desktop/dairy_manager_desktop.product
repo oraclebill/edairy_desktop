@@ -98,6 +98,7 @@
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
+      <plugin id="org.eclipse.nebula.widgets.compositetable"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
@@ -111,6 +112,7 @@
       <plugin id="org.eclipse.riena.ui.filter"/>
       <plugin id="org.eclipse.riena.ui.ridgets"/>
       <plugin id="org.eclipse.riena.ui.ridgets.swt"/>
+      <plugin id="org.eclipse.riena.ui.ridgets.swt.optional"/>
       <plugin id="org.eclipse.riena.ui.swt"/>
       <plugin id="org.eclipse.riena.ui.swt.rcp"/>
       <plugin id="org.eclipse.riena.ui.workarea"/>
@@ -131,6 +133,8 @@
    <configurations>
       <plugin id="com.agritrace.edairy.desktop" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.core.runtime" autoStart="false" startLevel="0" />
+      <plugin id="org.eclipse.core.variables" autoStart="false" startLevel="1" />
+      <plugin id="org.eclipse.riena.ui.ridgets.swt.optional" autoStart="true" startLevel="0" />
    </configurations>
 
 </product>
