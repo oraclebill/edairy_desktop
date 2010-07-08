@@ -24,7 +24,7 @@ public class CommunicationsGroupWidget {
 	public static String BIND_ID_BTN_DELETEALL = "cg.btn.deleteall";
 	public static String BIND_ID_TABLE = "cg.edittable";
 
-	public static final String COMMUNICATION_GROUP_TXT = "Communications";
+	public static final String COMMUNICATION_GROUP_TXT = "Contact Methods";
 	public static final String EMAIL_TXT = "Email:";
 	public static final String PHONE_TXT = "Phone:";
 	private final Group communicationGroup;
@@ -48,7 +48,7 @@ public class CommunicationsGroupWidget {
 		// Value
 		final TextCellEditor textEditor = new TextCellEditor(table);
 		table.setCellEditor(1, textEditor);
-
+		
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(table);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(table, BIND_ID_TABLE);
 

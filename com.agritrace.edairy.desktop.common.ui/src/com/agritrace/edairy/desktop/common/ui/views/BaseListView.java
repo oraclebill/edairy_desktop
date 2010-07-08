@@ -1,6 +1,7 @@
-package com.agritrace.edairy.desktop.member.ui.views;
+package com.agritrace.edairy.desktop.common.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
@@ -9,6 +10,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 
 /**
  * This is a base class for List view, which has a filter group at the top and a
@@ -18,8 +20,9 @@ import org.eclipse.swt.widgets.Composite;
  * 
  */
 public abstract class BaseListView extends SubModuleView {
-	public BaseListView() {
-	}
+	
+	public static final String BIND_ID_FILTER_SEARCH = "filter.button.search";
+	public static final String BIND_ID_FILTER_RESET = "filter.button.resets";
 
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
@@ -51,6 +54,7 @@ public abstract class BaseListView extends SubModuleView {
 
 		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "Add", addButtonId);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
+
 	}
 
 	/**
@@ -58,7 +62,37 @@ public abstract class BaseListView extends SubModuleView {
 	 * 
 	 * @param parent
 	 */
-	protected abstract void createFilterGroup(Composite parent);
+	/**
+	 * Creates filter
+	 * 
+	 * @param parent
+	 */
+	protected void createFilterGroup(Composite parent) {
+//		final Group filterArea = UIControlsFactory.createGroup(parent, "Search Conditions");
+//		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(filterArea);
+		Composite filterArea = parent;
+		createFilterConditions(filterArea);
+		createFilterButtonPanel(filterArea);
+	}
+
+	/**
+	 * Create filter conditions
+	 * 
+	 * @param comp
+	 */
+	protected void createFilterConditions(Composite comp) {
+		
+	}
+
+	protected void createFilterButtonPanel(Composite parent) {
+		// Reset Apply buttons
+		final Composite buttonPanel = UIControlsFactory.createComposite(parent);
+		GridLayoutFactory.swtDefaults().spacing(40,-1).numColumns(2).applyTo(buttonPanel);		
+		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.CENTER).span(3, 1).applyTo(buttonPanel);
+
+		UIControlsFactory.createButton(buttonPanel, "Search", BIND_ID_FILTER_SEARCH);
+		UIControlsFactory.createButton(buttonPanel, "Reset", BIND_ID_FILTER_RESET);
+	}
 
 	/**
 	 * Create list table
@@ -66,5 +100,6 @@ public abstract class BaseListView extends SubModuleView {
 	 * @param parent
 	 */
 	protected abstract void createListGroup(Composite parent);
+ 
 
 }

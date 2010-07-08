@@ -141,15 +141,12 @@ public class MilkCollectionJournalController extends SubModuleController {
 	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
 	private IComboRidget binCombo;
 
-	private final List<DairyContainer> bins = getBins();
+	private final IDairyRepository dairyRepo;
+	private final List<DairyContainer> bins;
 	private ITextRidget canText;
-	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	// journal book group ridgets
 	private IDateTimeRidget dateRidget;
-	// private final List<CollectionJournalLine> records = new
-	// ArrayList<CollectionJournalLine>();
-	// todo: all of these are unnecessary..
-	private final List<Employee> driverList = getDriverList();
+	private final List<Employee> drivers;
 
 	private IComboRidget driverRidget;
 	private IDecimalTextRidget driverTotalText;
@@ -165,14 +162,14 @@ public class MilkCollectionJournalController extends SubModuleController {
 	private IToggleButtonRidget rejectedButton;
 
 	private IComboRidget routeRidget;
-	private final List<Route> routes = getRoutesList();
+	private final List<Route> routes ;
 	// private final TotalRecordsValue totalValue = new TotalRecordsValue();
 	private IComboRidget sessionRidget;
 	private ITableRidget table;
 	private ILabelRidget totalLabelRidget;
 
 	private IComboRidget vehicleRidget;
-	private final List<Vehicle> vehicles = getVehiclesList();
+	private final List<Vehicle> vehicles ;
 	private DairyContainer workingBin;
 
 	private CollectionJournalLine workingJournalLine;
@@ -184,6 +181,11 @@ public class MilkCollectionJournalController extends SubModuleController {
 	 */
 	public MilkCollectionJournalController() {
 		super();
+		dairyRepo = DairyRepository.getInstance();
+		bins = dairyRepo.allDairyContainers();
+		drivers = dairyRepo.employeesByPosition("Driver");
+		vehicles = dairyRepo.allVehicles();
+		routes = dairyRepo.allRoutes();		
 	}
 
 	/**
@@ -492,7 +494,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 				.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber",
 						EMFObservables.observeValue(workingJournalPage,
 								DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
-		driverRidget.bindToModel(new WritableList(driverList, Employee.class), Employee.class, "getFamilyName",
+		driverRidget.bindToModel(new WritableList(drivers, Employee.class), Employee.class, "getFamilyName",
 				EMFObservables.observeValue(workingJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
 
 		// conditionally editable

@@ -27,17 +27,9 @@ public class EmployeeDirectoryView extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterConditions(Composite parent) {
-		final GridLayout gridLayout = (GridLayout) parent.getLayout();
-		gridLayout.marginLeft = 2;
-		gridLayout.marginLeft = 3;
-		gridLayout.numColumns = 2;
-		gridLayout.makeColumnsEqualWidth = false;
-		final GridLayout gl_parent = GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(2).create();
-		gl_parent.marginTop = 5;
-		gl_parent.marginRight = 3;
-		gl_parent.marginLeft = 3;
-		parent.setLayout(gl_parent);
+	protected void createFilterConditions(Composite top) {
+		Composite parent = UIControlsFactory.createComposite(top);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 
 		final Group filterGroup = new Group(parent, SWT.NONE);

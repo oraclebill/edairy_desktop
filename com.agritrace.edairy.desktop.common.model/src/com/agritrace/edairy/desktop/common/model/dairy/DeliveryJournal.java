@@ -224,7 +224,7 @@ public interface DeliveryJournal extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Lines</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lines</em>' reference list isn't clear,
@@ -236,7 +236,7 @@ public interface DeliveryJournal extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<CollectionJournalLine> getLines();
+	EList<DeliveryJournalLine> getLines();
 
 	/**
 	 * Returns the value of the '<em><b>Total</b></em>' attribute.

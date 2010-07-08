@@ -28,20 +28,7 @@ public class CustomerDirectoryView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterConditions(Composite parent) {
-		final GridLayout gridLayout = (GridLayout) parent.getLayout();
-		gridLayout.marginLeft = 2;
-		gridLayout.marginLeft = 3;
-		gridLayout.numColumns = 2;
-		gridLayout.makeColumnsEqualWidth = false;
-		final GridLayout gl_parent = GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(2).create();
-		gl_parent.marginTop = 5;
-		gl_parent.marginRight = 3;
-		gl_parent.marginLeft = 3;
-		parent.setLayout(gl_parent);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
-
-		final Group filterGroup = new Group(parent, SWT.NONE);
-		filterGroup.setText("Search Criteria");
+		final Group filterGroup = UIControlsFactory.createGroup(parent, "Search Criteria");
 		filterGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		filterGroup.setLayout(new GridLayout(2, false));
 		filterGroup.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -63,11 +50,6 @@ public class CustomerDirectoryView extends AbstractDirectoryView {
 		status.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(status);
 		addUIControl(status, BIND_ID_FILTER_STATUS);
-
-		final Composite composite_1 = new Composite(parent, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		composite_1.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-
 	}
 
 }

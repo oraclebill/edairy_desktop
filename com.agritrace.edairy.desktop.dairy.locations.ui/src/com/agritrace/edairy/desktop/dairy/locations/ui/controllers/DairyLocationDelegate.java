@@ -83,37 +83,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 	@Override
 	public boolean isChanged(Object source, Object target) {
-		if ((source != null) && (target != null)) {
-			
-			final DairyLocation src = (DairyLocation) source;
-			final DairyLocation dst = (DairyLocation) target;
-			if (src.getId() == 0) {
-				// always return true for id=0 since it's a new created
-				// object;
-				return true;
-			}
-			return !new EcoreUtil.EqualityHelper().equals(src, dst);
-//			// compare all attributes
-//			for (EAttribute attr : DairyPackage.Literals.DAIRY_LOCATION.getEAllAttributes()) {
-//				Object srcAttr = src.eGet(attr);				
-//				if (srcAttr != null && !srcAttr.equals(dst.eGet(attr)))
-//					return true;
-//				else if (srcAttr == null && dst.eGet(attr) != null)
-//					return true;
-//			}
-//			return false;
-
-//			if (!(EMFUtil.compare(src, dst)
-//					&& EMFUtil.compare(src.getRoute(), dst.getRoute())
-//					&& EMFUtil.compare(src.getLocation().getPostalLocation(), dst.getLocation().getPostalLocation())
-//					&& EMFUtil.compare(src.getLocation().getDescriptiveLocation(), dst.getLocation()
-//							.getDescriptiveLocation()) && EMFUtil.compare(src.getLocation().getMapLocation(), dst
-//					.getLocation().getMapLocation()))) {
-//				return true;
-//			}
-		}
-
-		return false;
+		return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
 	}
 
 	@Override

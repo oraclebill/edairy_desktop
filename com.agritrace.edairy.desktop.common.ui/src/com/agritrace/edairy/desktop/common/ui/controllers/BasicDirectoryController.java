@@ -32,9 +32,13 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		super(navigationNode);
 	}
 
-	protected void addTableColumn(String colHeader, EStructuralFeature feature) {
-		addTableColumn(colHeader, feature, null);
+	protected void addTableColumn(String colHeader, EStructuralFeature featurePath) {
+		addTableColumn(colHeader, featurePath, null);
 	}
+//
+//	protected void addTableColumn(String colHeader, FeaturePath feature) {
+//		addTableColumn(colHeader, feature, null);
+//	}
 
 	protected void addTableColumn(String colHeader, EStructuralFeature feature, ColumnFormatter formatter) {
 		columnHeaders.add(colHeader);

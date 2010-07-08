@@ -14,5 +14,6 @@ public interface DeliveryJournalEditBindContants {
 	public static final String ROW_TXT_BIN_ID = "ROW_TXT_BIN_ID";
 	public static final String ROW_TXT_AMOUNT = "ROW_TXT_AMOUNT";
 	public static final String ROW_TXT_DESCRIPTION = "ROW_TXT_DESCRIPTION";
+	public static final String BTN_ADD_ROW = "BTN_ADD_ROW";
 
 }

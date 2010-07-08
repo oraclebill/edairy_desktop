@@ -8,6 +8,7 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.beans.DeliveryJournalFilterBean;
@@ -15,6 +16,7 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.DeliveryJournalEditDia
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -31,14 +33,33 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 	private IComboRidget routeRidget;
 	private IDateTimeRidget startDateRidget;
 
+	private static abstract class DJColumnFormatter extends ColumnFormatter {
+		@Override public final String getText(Object element) {
+			if (element instanceof DeliveryJournal) {
+				DeliveryJournal jrnlLine = (DeliveryJournal)element;
+				return getFormattedText(jrnlLine);
+			}
+			return super.getText(element);
+		}
+		protected abstract String getFormattedText(DeliveryJournal line);
+	}
+
 	public MilkDeliveryJournalController() {
 		setEClass(DairyPackage.Literals.DELIVERY_JOURNAL);
 		// setEntityClass(DeliveryJournal.class);
 
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
-		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
+		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE, new DJColumnFormatter() {
+			@Override public String getFormattedText(DeliveryJournal element) {
+				return element.getRoute().getName();
+			}
+		});
 		addTableColumn("Session", DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
-		addTableColumn("Customer", DairyPackage.Literals.DELIVERY_JOURNAL__CUSTOMER);
+		addTableColumn("Customer", DairyPackage.Literals.DELIVERY_JOURNAL__CUSTOMER, new DJColumnFormatter() {
+			@Override public String getFormattedText(DeliveryJournal element) {
+				return element.getCustomer().getCompanyName();
+			}
+		});
 		addTableColumn("Total", DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
 	}
 

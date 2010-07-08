@@ -3,18 +3,14 @@ package com.agritrace.edairy.desktop.collection.ui.components;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.grouplayout.GroupLayout;
 import org.eclipse.swt.layout.grouplayout.LayoutStyle;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
@@ -30,10 +26,11 @@ public class MilkCollectionLogFilterPanel extends Composite {
 	 */
 	public MilkCollectionLogFilterPanel(Composite parent, int style) {
 		super(parent, style);
-		setLayout(new FillLayout(SWT.HORIZONTAL));
+//		setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		final Group grpSearch = UIControlsFactory.createGroup(this, "Search");
+//		final Group grpSearch = UIControlsFactory.createGroup(this, "Search");
 
+		final Composite grpSearch = this;
 		final Label lblStartDate = UIControlsFactory.createLabel(grpSearch, "Start Date", SWT.NONE);
 
 		final DateTime startDate = UIControlsFactory.createDate(grpSearch, SWT.MEDIUM);
@@ -46,7 +43,7 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(endDate,
 				ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
 
-		final Combo routeCombo = UIControlsFactory.createCombo(grpSearch);
+		final CCombo routeCombo = UIControlsFactory.createCCombo(grpSearch);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(routeCombo,
 				ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
 
@@ -67,9 +64,7 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		SWTBindingPropertyLocator.getInstance()
 				.setBindingProperty(btnReset, AbstractDirectoryView.BIND_ID_FILTER_RESET);
 
-		final Label lblMprMissing = new Label(grpSearch, SWT.NONE);
-		lblMprMissing.setText("MPR Missing");
-
+		final Label lblMprMissing = UIControlsFactory.createLabel(grpSearch, "MPR Missing");
 		final Button button = UIControlsFactory.createButtonCheck(grpSearch);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(button,
 				ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
@@ -164,12 +159,6 @@ public class MilkCollectionLogFilterPanel extends Composite {
 								.add(gl_grpSearch.createSequentialGroup().add(8).add(lblRejected)))
 						.addContainerGap(30, Short.MAX_VALUE)));
 		grpSearch.setLayout(gl_grpSearch);
-		addDisposeListener(new DisposeListener() {
-			@Override
-			public void widgetDisposed(DisposeEvent e) {
-				// toolkit.dispose();
-			}
-		});
 
 	}
 }

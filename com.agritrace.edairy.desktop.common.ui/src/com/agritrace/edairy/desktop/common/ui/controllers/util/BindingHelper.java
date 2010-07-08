@@ -68,8 +68,8 @@ public class BindingHelper<T extends EObject> {
 	 * @param ridgetId
 	 * @param featurePath
 	 */
-	public void addMapping(String ridgetId, List<?> domainList, EStructuralFeature... featurePath) {
-		final FeatureProperties props = new FeatureProperties(ridgetId, domainList, featurePath);
+	public void addComboMapping(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+		final FeatureProperties props = new FeatureProperties(ridgetId, domainList, renderMethod, featurePath);
 		ridgetPropertyMap.put(ridgetId, props);
 	}
 
@@ -100,7 +100,7 @@ public class BindingHelper<T extends EObject> {
 
 				checkParameters(optionValues, rowClass, selectionValue);
 				checkMandatory(binding, ridget);
-				comboRidget.bindToModel(optionValues, rowClass, "toString", selectionValue);
+				comboRidget.bindToModel(optionValues, rowClass, binding.getRenderMethod(), selectionValue);
 			} else if (ridget instanceof ITableRidget) {
 //				final ITableRidget tableRidget = (ITableRidget) ridget;
 //

@@ -12,18 +12,20 @@ class FeatureProperties {
 	private IObservableList domainList;
 	private Class<?> entityClass;
 	private final FeaturePath featurePath;
+	private String renderMethod;
 
 	public FeatureProperties(String bindingId, EStructuralFeature... featureList) {
-		this(bindingId, null, FeaturePath.fromList(featureList));
+		this(bindingId, null, null, FeaturePath.fromList(featureList));
 	}
 
-	public FeatureProperties(String bindingId, List<?> domainList, EStructuralFeature... featureList) {
-		this(bindingId, domainList, FeaturePath.fromList(featureList));
+	public FeatureProperties(String bindingId, List<?> domainList, String renderMethod, EStructuralFeature... featureList) {
+		this(bindingId, domainList, renderMethod, FeaturePath.fromList(featureList));
 	}
 
-	public FeatureProperties(String bindingId, List<?> domainObjects, FeaturePath featurePath) {
+	public FeatureProperties(String bindingId, List<?> domainObjects, String renderMethod, FeaturePath featurePath) {
 		this.bindingId = bindingId;
 		this.featurePath = featurePath;
+		this.renderMethod = renderMethod;
 //		this.domainList = domainObjects == null ? null : Observables.staticObservableList(domainObjects);
 		this.domainList = domainObjects == null ? null : new WritableList(domainObjects, getTailFeature().eClass().getInstanceClass());
 	}
@@ -56,5 +58,10 @@ class FeatureProperties {
 			}
 		}
 		return tailFeature;
+	}
+
+	public String getRenderMethod() {
+		// TODO Auto-generated method stub
+		return renderMethod;
 	}
 }

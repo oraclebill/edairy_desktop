@@ -3,13 +3,14 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeTableRidget;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
 import com.agritrace.edairy.desktop.collection.ui.components.DeliveryJournalEditPanel;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
@@ -49,19 +50,19 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 		
 		addRidgetFeatureMap(
 				DeliveryJournalEditBindContants.SESSION_COMBO, 
-				Arrays.asList(Session.values()),
+				Arrays.asList(Session.values()), "getName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
 		
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(),
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(), "getName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.CUSTOMER_COMBO, dairyRepo.allCustomers(),
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.CUSTOMER_COMBO, dairyRepo.allCustomers(), "getCompanyName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__CUSTOMER);
 		
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"), "getFamilyName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
 		
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(),
+		addRidgetFeatureMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(), "getLogBookNumber", 
 				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
 		
 		addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
@@ -71,9 +72,20 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 		lineItemsRidget = getRidget(ICompositeTableRidget.class, DeliveryJournalEditBindContants.LINE_ITEM_TABLE);
 		lineItemsRidget.bindToModel(
-				EMFObservables.observeList(getWorkingCopy(), DairyPackage.Literals.DELIVERY_JOURNAL__LINES), 
+				BeansObservables.observeList(getWorkingCopy(), DairyPackage.Literals.DELIVERY_JOURNAL__LINES.getName()), 
 				DeliveryJournalLine.class, DeliveryJournalEditPanel.RowRidget.class);
 		lineItemsRidget.updateFromModel();
+		
+		IActionRidget addBttonRidget = getRidget(IActionRidget.class, DeliveryJournalEditBindContants.BTN_ADD_ROW);
+		addBttonRidget.addListener(new IActionListener() {
+			
+			@Override
+			public void callback() {
+				getWorkingCopy().getLines().add(DairyFactory.eINSTANCE.createDeliveryJournalLine());
+				lineItemsRidget.updateFromModel();
+			}
+		});
+		
 	}
 	
 	

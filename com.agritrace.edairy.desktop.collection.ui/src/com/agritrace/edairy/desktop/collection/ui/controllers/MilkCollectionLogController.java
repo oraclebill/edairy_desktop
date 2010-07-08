@@ -1,9 +1,12 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
@@ -214,10 +217,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		startDate.bindToModel(filterBean, "startDate");
 		endDate.bindToModel(filterBean, "endDate");
-		route.bindToModel(filterBean, "routes", Route.class, null, filterBean, "route");
+//		route.bindToModel(filterBean, "routes", Route.class, "getName", filterBean, "route");
+		route.bindToModel(new WritableList(DairyRepository.getInstance().allRoutes(), Route.class), Route.class, "getName", 
+				BeansObservables.observeValue(filterBean, "route"));
+		System.err.printf("%s, %s, %s, %s\n", new WritableList(DairyRepository.getInstance().allRoutes(), Route.class), Route.class, "getName", 
+				BeansObservables.observeValue(filterBean, "route"));
 		mprMissing.bindToModel(filterBean, "mprMissing");
 		suspended.bindToModel(filterBean, "suspended");
 		rejected.bindToModel(filterBean, "rejected");
+
+		updateAllRidgetsFromModel();
 	}
 
 	@Override
@@ -265,11 +274,15 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected void resetFilterConditions() {
-		startDate.setDate(new Date());
+		Calendar cal = Calendar.getInstance();
+		cal.roll(Calendar.MONTH, false);
+		startDate.setDate(cal.getTime());
 		endDate.setDate(new Date());
-		route.setSelection(-1);
+		route.setSelection(null);
 		mprMissing.setSelected(false);
 		suspended.setSelected(false);
 		rejected.setSelected(false);
+		
+		updateAllRidgetsFromModel();
 	}
 }

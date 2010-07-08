@@ -17,7 +17,8 @@ public class RouteListView extends AbstractDirectoryView {
 	public static final String ID = "route-list-view";
 
 	@Override
-	protected void createFilterConditions(Composite parent) {
+	protected void createFilterConditions(Composite top) {
+		Composite parent = UIControlsFactory.createComposite(top);
 		parent.setLayout(GridLayoutFactory.swtDefaults().margins(0, 0).numColumns(2).create());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 

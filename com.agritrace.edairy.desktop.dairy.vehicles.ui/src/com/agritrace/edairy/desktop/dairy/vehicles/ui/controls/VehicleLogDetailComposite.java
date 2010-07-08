@@ -40,6 +40,9 @@ public class VehicleLogDetailComposite extends Composite {
 		final CTabItem assetInfoTab = new CTabItem(tabFolder, SWT.None);
 		assetInfoTab.setText("Asset Info");
 		assetInfoTab.setControl(createAssetInfoGroup(tabFolder));
+		
+		tabFolder.setSelection(mainInfoTab);
+		tabFolder.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
 		this.pack();
 	}

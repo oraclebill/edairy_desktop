@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
@@ -157,7 +158,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CollectionJournalLine> lines;
+	protected EList<DeliveryJournalLine> lines;
 
 	/**
 	 * The default value of the '{@link #getTotal() <em>Total</em>}' attribute.
@@ -418,9 +419,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionJournalLine> getLines() {
+	public EList<DeliveryJournalLine> getLines() {
 		if (lines == null) {
-			lines = new EObjectResolvingEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
+			lines = new EObjectResolvingEList<DeliveryJournalLine>(DeliveryJournalLine.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
 		}
 		return lines;
 	}
@@ -512,7 +513,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__LINES:
 				getLines().clear();
-				getLines().addAll((Collection<? extends CollectionJournalLine>)newValue);
+				getLines().addAll((Collection<? extends DeliveryJournalLine>)newValue);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				setTotal((BigDecimal)newValue);

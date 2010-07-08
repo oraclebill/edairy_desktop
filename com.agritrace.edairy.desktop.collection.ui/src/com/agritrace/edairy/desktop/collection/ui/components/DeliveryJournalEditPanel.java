@@ -18,9 +18,12 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.nebula.widgets.compositetable.AbstractNativeHeader;
 import org.eclipse.swt.nebula.widgets.compositetable.CompositeTable;
 import org.eclipse.swt.nebula.widgets.compositetable.ResizableGridRowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
@@ -31,8 +34,6 @@ import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContant
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.swtdesigner.SWTResourceManager;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.GridData;
 
 public class DeliveryJournalEditPanel extends Composite {
 		
@@ -236,7 +237,7 @@ public class DeliveryJournalEditPanel extends Composite {
 		fd_totalOutputText.top = new FormAttachment(lblVehicle, -3, SWT.TOP);
 		totalOutputText.setLayoutData(fd_totalOutputText);
 
-		text = UIControlsFactory.createText(parent, SWT.BORDER, "reference-number");
+		text = UIControlsFactory.createText(parent, SWT.BORDER, DeliveryJournalEditBindContants.REFERENCE_NUM);
 		fd_totalOutputText.right = new FormAttachment(text, 0, SWT.RIGHT);
 		FormData fd_text = new FormData();
 		fd_text.top = new FormAttachment(lblDate, -2, SWT.TOP);
@@ -257,7 +258,7 @@ public class DeliveryJournalEditPanel extends Composite {
 		tableGroup = UIControlsFactory.createGroup(parent, "Item Details");
 		tableGroup.setLayout(new GridLayout(1, false));
 
-		CompositeTable compositeTable = new CompositeTable(tableGroup, SWT.NONE);
+		final CompositeTable compositeTable = new CompositeTable(tableGroup, SWT.NONE);
 		GridData gd_compositeTable = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_compositeTable.heightHint = 150;
 		compositeTable.setLayoutData(gd_compositeTable);
@@ -266,5 +267,8 @@ public class DeliveryJournalEditPanel extends Composite {
 		new Row(compositeTable, SWT.NONE);
 		compositeTable.setRunTime(true);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(compositeTable, DeliveryJournalEditBindContants.LINE_ITEM_TABLE);
+		
+		Button btnAddRow = UIControlsFactory.createButton(tableGroup, "Add Row", DeliveryJournalEditBindContants.BTN_ADD_ROW);
+		
 	}
 }

@@ -1,11 +1,14 @@
 package com.agritrace.edairy.desktop.collection.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
+import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Layout;
 
 import com.agritrace.edairy.desktop.collection.ui.components.MilkCollectionLogFilterPanel;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -18,26 +21,33 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected Composite createButtons(Composite parent) {
-		final Composite container = super.createButtons(parent);
-		final Layout containerLayout = container.getLayout();
-		if (containerLayout instanceof GridLayout) {
-			final GridLayout gl = (GridLayout) containerLayout;
-			gl.numColumns = gl.numColumns + 1;
-		}
-		UIControlsFactory.createButton(container, "Import Scale Data", "import-file-button");
-		return container;
+	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
+		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
+		buttonsPanel.setLayout(new GridLayout(2, false));
+
+		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, "View", viewButtonId);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);
+
+		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "Add", addButtonId);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
+
+		final Button importButton = UIControlsFactory.createButton(buttonsPanel, "Import",  "import-file-button");
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(importButton);
 	}
 
 	@Override
-	protected void createFilterButtons(Composite parent) {
+	protected void createFilterButtonPanel(Composite parent) {
 		// prevent superclass from adding buttons..
 	}
 
 	@Override
-	protected void createFilterConditions(Composite parent) {
+	protected void createFilterConditions(Composite top) {
+		Composite parent = UIControlsFactory.createComposite(top);
+		parent.setLayout(new FillLayout());
 		final Composite comp = new MilkCollectionLogFilterPanel(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(3, -1).applyTo(comp);
+		comp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(3, -1).applyTo(comp);
 	}
 
 }

@@ -1,10 +1,13 @@
 package com.agritrace.edairy.desktop.dairy.containers.ui.controllers;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -75,13 +78,17 @@ public class ContainerLogViewController extends SubModuleController {
 
 		@Override
 		public boolean isChanged(Object source, Object target) {
-			return true;
+			return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
 		}
 
 		@Override
 		public void itemApplied(Object changedItem) {
 			super.itemApplied(changedItem);
 			dairyRepository.save(changedItem);
+			List<DairyContainer> containers = dairyRepository.getLocalDairy().getDairyBins();
+			if (! containers.contains(changedItem)) {
+				containers.add((DairyContainer)changedItem);
+			}
 		}
 
 		private void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {

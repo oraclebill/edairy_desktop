@@ -16,7 +16,7 @@ public class MilkCollectionDetailLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterButtons(Composite parent) {
+	protected void createFilterButtonPanel(Composite parent) {
 
 		// prevent superclass from updating buttons.
 	}

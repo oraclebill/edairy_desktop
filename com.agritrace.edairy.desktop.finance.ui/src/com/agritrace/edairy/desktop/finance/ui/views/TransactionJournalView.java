@@ -1,11 +1,13 @@
 package com.agritrace.edairy.desktop.finance.ui.views;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -25,17 +27,25 @@ public class TransactionJournalView extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected Composite createButtons(Composite parent) {
-		final Composite buttonPanel = super.createButtons(parent);
-		final GridLayout layout = (GridLayout) buttonPanel.getLayout();
-		layout.numColumns = layout.numColumns + 1;
-		UIControlsFactory.createButton(buttonPanel, "Batch Entry", FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
-		buttonPanel.layout();
-		return buttonPanel;
+	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
+		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
+		buttonsPanel.setLayout(new GridLayout(2, false));
+
+		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, "View", viewButtonId);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);
+
+		final Button addButton = UIControlsFactory.createButton(buttonsPanel, "Add", addButtonId);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
+
+		final Button batchButton = UIControlsFactory.createButton(buttonsPanel, "Batch Entry", FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(batchButton);
 	}
 
+	
 	@Override
-	protected void createFilterConditions(Composite comp) {
+	protected void createFilterConditions(Composite parent) {
+		Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		comp.setLayoutDeferred(true);
 		comp.setLayout(new GridLayout(2, false));

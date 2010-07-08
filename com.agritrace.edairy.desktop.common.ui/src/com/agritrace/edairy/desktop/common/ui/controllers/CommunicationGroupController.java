@@ -3,6 +3,8 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.jface.viewers.ColumnLayoutData;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -47,6 +49,10 @@ public class CommunicationGroupController implements WidgetController {
 		editTable = controller.getRidget(IEditableTableRidget.class, CommunicationsGroupWidget.BIND_ID_TABLE);
 		editTable.setColumnEditingSupport(0, new ContactTypeColumnEditingSupport());
 		editTable.setColumnEditingSupport(1, new ColumnEditingSupport());
+		editTable.setColumnWidths( new ColumnLayoutData[] {
+				new ColumnWeightData(100), 
+				new ColumnWeightData(500), 				
+		} );
 		editTable.addSelectionListener(new ISelectionListener() {
 
 			@Override
