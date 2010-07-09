@@ -78,6 +78,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.POSTAL_LOCATION: return createPostalLocation();
 			case ModelPackage.STATUTORY_LOCATION: return createStatutoryLocation();
 			case ModelPackage.AUDITED: return createAudited();
+			case ModelPackage.CONTACTABLE: return createContactable();
 			case ModelPackage.PERSON: return createPerson();
 			case ModelPackage.COMPANY: return createCompany();
 			case ModelPackage.DESCRIPTIVE_LOCATION: return createDescriptiveLocation();
@@ -181,6 +182,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Audited createAudited() {
 		AuditedImpl audited = new AuditedImpl();
 		return audited;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Contactable createContactable() {
+		ContactableImpl contactable = new ContactableImpl();
+		return contactable;
 	}
 
 	/**

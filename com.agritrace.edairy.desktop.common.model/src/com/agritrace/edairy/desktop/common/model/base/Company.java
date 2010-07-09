@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLegalName <em>Legal Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getCompanyName <em>Company Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContactMethods <em>Contact Methods</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Company#getPhoneNumber <em>Phone Number</em>}</li>
@@ -34,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *        annotation="teneo.jpa appinfo='@MappedSuperclass'"
  * @generated
  */
-public interface Company extends EObject {
+public interface Company extends Contactable {
 	/**
 	 * Returns the value of the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -86,22 +85,6 @@ public interface Company extends EObject {
 	 * @generated
 	 */
 	void setCompanyName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.ContactMethod}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Contact Methods</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contact Methods</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_ContactMethods()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ContactMethod> getContactMethods();
 
 	/**
 	 * Returns the value of the '<em><b>Contacts</b></em>' containment reference list.

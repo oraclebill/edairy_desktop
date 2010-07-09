@@ -58,7 +58,18 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Person">
+  <eClassifiers xsi:type="ecore:EClass" name="Contactable">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="Contactable"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eAnnotations source="teneo.jpa">
+      <details key="appinfo" value="@MappedSuperclass"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
+        eType="#//ContactMethod" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//Contactable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="photo" eType="#//ImageReference"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="honorific" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="familyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -77,12 +88,10 @@
         <details key="appinfo" value="@OneToOne"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
-        eType="#//ContactMethod" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="personId" eType="#//UniqueID"
         iD="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Company">
+  <eClassifiers xsi:type="ecore:EClass" name="Company" eSuperTypes="#//Contactable">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
       <details key="name" value="Company"/>
       <details key="kind" value="elementOnly"/>
@@ -93,8 +102,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="legalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="companyName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
-        eType="#//ContactMethod" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contacts" lowerBound="1"
         upperBound="-1" eType="#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"

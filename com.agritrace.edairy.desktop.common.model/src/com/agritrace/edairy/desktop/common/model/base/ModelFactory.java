@@ -62,6 +62,15 @@ public interface ModelFactory extends EFactory {
 	Audited createAudited();
 
 	/**
+	 * Returns a new object of class '<em>Contactable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Contactable</em>'.
+	 * @generated
+	 */
+	Contactable createContactable();
+
+	/**
 	 * Returns a new object of class '<em>Person</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

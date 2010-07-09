@@ -364,6 +364,15 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
+
+	/**
 	 * The feature id for the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -452,15 +461,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMPLOYEE__LOCATION = ModelPackage.PERSON__LOCATION;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Person Id</b></em>' attribute.
@@ -1100,6 +1100,15 @@ public interface DairyPackage extends EPackage {
 	int DAIRY = 9;
 
 	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+
+	/**
 	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1116,15 +1125,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int DAIRY__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
@@ -1626,6 +1626,15 @@ public interface DairyPackage extends EPackage {
 	int SUPPLIER = 13;
 
 	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+
+	/**
 	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1642,15 +1651,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUPPLIER__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPLIER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.
@@ -1789,6 +1789,15 @@ public interface DairyPackage extends EPackage {
 	int CUSTOMER = 14;
 
 	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
+
+	/**
 	 * The feature id for the '<em><b>Legal Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1805,15 +1814,6 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int CUSTOMER__COMPANY_NAME = ModelPackage.COMPANY__COMPANY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER__CONTACT_METHODS = ModelPackage.COMPANY__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Contacts</b></em>' containment reference list.

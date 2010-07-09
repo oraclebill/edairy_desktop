@@ -71,6 +71,8 @@ public class PersistenceManager {
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(DB_NAME);
 		hbds.setProperties(getDatastoreProperties());
 		hbds.setEPackages(getEPackages());
+		
+		System.err.println(hbds.getMappingXML());
 		hbds.initialize();
 		
 		postInit();
@@ -85,10 +87,10 @@ public class PersistenceManager {
 	public Session getSession() {
 		if (null == session) {
 			session = sessionFactory.openSession();
-			System.err.println("--> created session: " + session);
+			LOG.log(LogService.LOG_DEBUG, "--> created session: " + session);
 		} else if (!session.isConnected()) {
 			session = sessionFactory.openSession();
-			System.err.println("--> creatied session: " + session);
+			LOG.log(LogService.LOG_DEBUG, "--> creatied session: " + session);
 		}
 		return session;
 	}

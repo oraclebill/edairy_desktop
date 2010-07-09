@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.util;
 
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -100,6 +101,10 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFarmer(Farmer object) {
 				return createFarmerAdapter();
+			}
+			@Override
+			public Adapter caseContactable(Contactable object) {
+				return createContactableAdapter();
 			}
 			@Override
 			public Adapter casePerson(Person object) {
@@ -206,6 +211,20 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFarmerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Contactable <em>Contactable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Contactable
+	 * @generated
+	 */
+	public Adapter createContactableAdapter() {
 		return null;
 	}
 

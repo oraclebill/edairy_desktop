@@ -537,6 +537,15 @@ public interface TrackingPackage extends EPackage {
 	int FARMER = 5;
 
 	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
+
+	/**
 	 * The feature id for the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -625,15 +634,6 @@ public interface TrackingPackage extends EPackage {
 	 * @ordered
 	 */
 	int FARMER__LOCATION = ModelPackage.PERSON__LOCATION;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
 
 	/**
 	 * The feature id for the '<em><b>Person Id</b></em>' attribute.

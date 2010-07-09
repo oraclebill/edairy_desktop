@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
@@ -21,20 +22,20 @@ import com.agritrace.edairy.desktop.common.ui.editingsupport.ContactTypeColumnEd
 import com.agritrace.edairy.desktop.common.ui.ridgets.IEditableTableRidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 
-public class CommunicationGroupController implements WidgetController {
+public class CommunicationGroupController implements WidgetController<Contactable> {
 
 	private IActionRidget addBtn;
 	private final String[] columnPropertys = new String[] { ModelPackage.Literals.CONTACT_METHOD__CM_TYPE.getName(),
 			ModelPackage.Literals.CONTACT_METHOD__CM_VALUE.getName() };
-	private List<ContactMethod> contactMethods;
 
 	private IController controller;
 	private IActionRidget deleteAllBtn;
 	private IActionRidget deleteBtn;
 	private IEditableTableRidget editTable;
 	private final String[] headers = new String[] { "Type", "Value" };
+	private final int[] weights = new int[] { 30, 70 };
 
-	private Object inputModel;
+	private Contactable inputModel;
 
 	public CommunicationGroupController(IController controller) {
 		this.controller = controller;
@@ -49,10 +50,7 @@ public class CommunicationGroupController implements WidgetController {
 		editTable = controller.getRidget(IEditableTableRidget.class, CommunicationsGroupWidget.BIND_ID_TABLE);
 		editTable.setColumnEditingSupport(0, new ContactTypeColumnEditingSupport());
 		editTable.setColumnEditingSupport(1, new ColumnEditingSupport());
-		editTable.setColumnWidths( new ColumnLayoutData[] {
-				new ColumnWeightData(100), 
-				new ColumnWeightData(500), 				
-		} );
+		editTable.setColumnWidths(new ColumnLayoutData[] { new ColumnWeightData(100), new ColumnWeightData(500), });
 		editTable.addSelectionListener(new ISelectionListener() {
 
 			@Override
@@ -62,27 +60,16 @@ public class CommunicationGroupController implements WidgetController {
 		});
 		addBtn = controller.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_ADD);
 		addBtn.addListener(new IActionListener() {
-
 			@Override
 			public void callback() {
-
-				if ((getInputModel() instanceof Person) || (getInputModel() instanceof Company)) {
+				Contactable model = getInputModel();
+				if (model != null) {
 					final ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
 					method.setCmValue("");
-					if (getInputModel() instanceof Person) {
-						final Person person = (Person) getInputModel();
-						person.getContactMethods().add(method);
-						editTable.updateFromModel();
-						updateButtonStatus();
-					} else if (getInputModel() instanceof Company) {
-						final Company company = (Company) getInputModel();
-						company.getContactMethods().add(method);
-						editTable.updateFromModel();
-						updateButtonStatus();
-					}
-
+					model.getContactMethods().add(method);
+					editTable.updateFromModel();
+					updateButtonStatus();
 				}
-
 			}
 		});
 		deleteBtn = controller.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETE);
@@ -90,20 +77,11 @@ public class CommunicationGroupController implements WidgetController {
 
 			@Override
 			public void callback() {
-
-				if ((getInputModel() instanceof Person) || (getInputModel() instanceof Company)) {
-					if (getInputModel() instanceof Person) {
-						final Person person = (Person) getInputModel();
-						person.getContactMethods().remove(editTable.getSelectionIndex());
-						editTable.bindToModel(new WritableList(person.getContactMethods(), ContactMethod.class),
-								ContactMethod.class, columnPropertys, headers);
-					} else if (getInputModel() instanceof Company) {
-						final Company company = (Company) getInputModel();
-						company.getContactMethods().remove(editTable.getSelectionIndex());
-						editTable.bindToModel(new WritableList(company.getContactMethods(), ContactMethod.class),
-								ContactMethod.class, columnPropertys, headers);
-					}
-
+				Contactable model = getInputModel();
+				if (model != null) {
+					model.getContactMethods().remove(editTable.getSelectionIndex());
+					editTable.bindToModel(new WritableList(model.getContactMethods(), ContactMethod.class),
+							ContactMethod.class, columnPropertys, headers);
 					editTable.updateFromModel();
 					updateButtonStatus();
 				}
@@ -114,25 +92,14 @@ public class CommunicationGroupController implements WidgetController {
 
 			@Override
 			public void callback() {
-				if ((getInputModel() instanceof Person) || (getInputModel() instanceof Company)) {
-					if (getInputModel() instanceof Person) {
-						final Person person = (Person) getInputModel();
-						person.getContactMethods().clear();
-						editTable.bindToModel(new WritableList(person.getContactMethods(), ContactMethod.class),
-								ContactMethod.class, columnPropertys, headers);
-					} else if (getInputModel() instanceof Company) {
-						final Company company = (Company) getInputModel();
-						company.getContactMethods().clear();
-						editTable.bindToModel(new WritableList(company.getContactMethods(), ContactMethod.class),
-								ContactMethod.class, columnPropertys, headers);
-					}
-
+				Contactable model = getInputModel();
+				if (model != null) {
+					model.getContactMethods().clear();
+					editTable.bindToModel(new WritableList(model.getContactMethods(), ContactMethod.class),
+							ContactMethod.class, columnPropertys, headers);
 					editTable.updateFromModel();
 					updateButtonStatus();
 				}
-				editTable.updateFromModel();
-				updateButtonStatus();
-
 			}
 		});
 		updateButtonStatus();
@@ -145,7 +112,7 @@ public class CommunicationGroupController implements WidgetController {
 	}
 
 	@Override
-	public Object getInputModel() {
+	public Contactable getInputModel() {
 		return inputModel;
 	}
 
@@ -155,30 +122,23 @@ public class CommunicationGroupController implements WidgetController {
 	}
 
 	@Override
-	public void setInputModel(Object model) {
+	public void setInputModel(Contactable model) {
 		inputModel = model;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void updateBinding() {
-
-		if (getInputModel() instanceof Person) {
-			contactMethods = ((Person) getInputModel()).getContactMethods();
-		} else if (getInputModel() instanceof Company) {
-			contactMethods = ((Company) getInputModel()).getContactMethods();
-		} else if (getInputModel() instanceof List<?>) {
-			contactMethods = (List<ContactMethod>) getInputModel();
-		}
-
-		// whj: null CM will fail..
-		if (null == contactMethods) {
+		Contactable contactable = getInputModel();
+		if (null == contactable)
 			return;
-		}
-
-		editTable.bindToModel(new WritableList(this.contactMethods, ContactMethod.class), ContactMethod.class,
+		
+		List<ContactMethod> contactMethods = getInputModel().getContactMethods();
+		if (null == contactMethods)
+			return;
+		
+		editTable.bindToModel(
+				new WritableList(contactMethods, ContactMethod.class), ContactMethod.class,
 				columnPropertys, headers);
-
 		editTable.updateFromModel();
 	}
 

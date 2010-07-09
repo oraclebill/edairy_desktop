@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getNickName <em>Nick Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getLocation <em>Location</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getContactMethods <em>Contact Methods</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Person#getPersonId <em>Person Id</em>}</li>
  * </ul>
  * </p>
@@ -36,7 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Person extends EObject {
+public interface Person extends Contactable {
 	/**
 	 * Returns the value of the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -297,22 +296,6 @@ public interface Person extends EObject {
 	 * @generated
 	 */
 	void setLocation(Location value);
-
-	/**
-	 * Returns the value of the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.base.ContactMethod}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Contact Methods</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contact Methods</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_ContactMethods()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ContactMethod> getContactMethods();
 
 	/**
 	 * Returns the value of the '<em><b>Person Id</b></em>' attribute.

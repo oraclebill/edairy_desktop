@@ -18,6 +18,7 @@ import com.agritrace.edairy.desktop.common.model.base.Audited;
 import com.agritrace.edairy.desktop.common.model.base.Company;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
@@ -73,6 +74,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass auditedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass contactableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -416,6 +424,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getContactable() {
+		return contactableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContactable_ContactMethods() {
+		return (EReference)contactableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPerson() {
 		return personEClass;
 	}
@@ -515,17 +541,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPerson_ContactMethods() {
-		return (EReference)personEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getPerson_PersonId() {
-		return (EAttribute)personEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)personEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -560,7 +577,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompany_ContactMethods() {
+	public EReference getCompany_Contacts() {
 		return (EReference)companyEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -569,7 +586,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompany_Contacts() {
+	public EReference getCompany_Location() {
 		return (EReference)companyEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -578,17 +595,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompany_Location() {
-		return (EReference)companyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getCompany_PhoneNumber() {
-		return (EAttribute)companyEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -597,7 +605,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getCompany_CompanyId() {
-		return (EAttribute)companyEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -606,7 +614,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getCompany_Description() {
-		return (EAttribute)companyEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -615,7 +623,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public EAttribute getCompany_ProfilePhoto() {
-		return (EAttribute)companyEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)companyEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -876,6 +884,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(auditedEClass, AUDITED__LAST_UPDATED);
 		createEAttribute(auditedEClass, AUDITED__VOID_DATE);
 
+		contactableEClass = createEClass(CONTACTABLE);
+		createEReference(contactableEClass, CONTACTABLE__CONTACT_METHODS);
+
 		personEClass = createEClass(PERSON);
 		createEAttribute(personEClass, PERSON__PHOTO);
 		createEAttribute(personEClass, PERSON__HONORIFIC);
@@ -887,13 +898,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(personEClass, PERSON__NICK_NAME);
 		createEAttribute(personEClass, PERSON__PHONE_NUMBER);
 		createEReference(personEClass, PERSON__LOCATION);
-		createEReference(personEClass, PERSON__CONTACT_METHODS);
 		createEAttribute(personEClass, PERSON__PERSON_ID);
 
 		companyEClass = createEClass(COMPANY);
 		createEAttribute(companyEClass, COMPANY__LEGAL_NAME);
 		createEAttribute(companyEClass, COMPANY__COMPANY_NAME);
-		createEReference(companyEClass, COMPANY__CONTACT_METHODS);
 		createEReference(companyEClass, COMPANY__CONTACTS);
 		createEReference(companyEClass, COMPANY__LOCATION);
 		createEAttribute(companyEClass, COMPANY__PHONE_NUMBER);
@@ -961,6 +970,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		personEClass.getESuperTypes().add(this.getContactable());
+		companyEClass.getESuperTypes().add(this.getContactable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mapLocationEClass, MapLocation.class, "MapLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -986,6 +997,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getAudited_LastUpdated(), ecorePackage.getEDate(), "lastUpdated", null, 0, 1, Audited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAudited_VoidDate(), ecorePackage.getEDate(), "voidDate", null, 0, 1, Audited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(contactableEClass, Contactable.class, "Contactable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getContactable_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Contactable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_Photo(), this.getImageReference(), "photo", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Honorific(), ecorePackage.getEString(), "honorific", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -997,13 +1011,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getPerson_NickName(), ecorePackage.getEString(), "nickName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_Location(), this.getLocation(), null, "location", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_PersonId(), this.getUniqueID(), "personId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(companyEClass, Company.class, "Company", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCompany_LegalName(), ecorePackage.getEString(), "legalName", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompany_CompanyName(), ecorePackage.getEString(), "companyName", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompany_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompany_Contacts(), this.getPerson(), null, "contacts", null, 1, -1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompany_Location(), this.getLocation(), null, "location", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompany_PhoneNumber(), ecorePackage.getEString(), "phoneNumber", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1116,6 +1128,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "kind", "element"
 		   });		
 		addAnnotation
+		  (contactableEClass, 
+		   source, 
+		   new String[] {
+			 "name", "Contactable",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getPerson_Location(), 
 		   source, 
 		   new String[] {
@@ -1198,6 +1217,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "appinfo", "@Embeddable"
 		   });				
+		addAnnotation
+		  (contactableEClass, 
+		   source, 
+		   new String[] {
+			 "appinfo", "@MappedSuperclass"
+		   });			
 		addAnnotation
 		  (getPerson_Location(), 
 		   source, 

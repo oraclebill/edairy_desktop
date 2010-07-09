@@ -48,7 +48,7 @@ public class CommunicationsGroupWidget {
 		// Value
 		final TextCellEditor textEditor = new TextCellEditor(table);
 		table.setCellEditor(1, textEditor);
-		
+				
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(table);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(table, BIND_ID_TABLE);
 

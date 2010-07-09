@@ -33,7 +33,6 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLegalName <em>Legal Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getCompanyName <em>Company Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContactMethods <em>Contact Methods</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getContacts <em>Contacts</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl#getPhoneNumber <em>Phone Number</em>}</li>
@@ -45,7 +44,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
  *
  * @generated
  */
-public class CompanyImpl extends EObjectImpl implements Company {
+public class CompanyImpl extends ContactableImpl implements Company {
 	/**
 	 * The default value of the '{@link #getLegalName() <em>Legal Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -85,16 +84,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * @ordered
 	 */
 	protected String companyName = COMPANY_NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getContactMethods()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ContactMethod> contactMethods;
 
 	/**
 	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' containment reference list.
@@ -262,18 +251,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ContactMethod> getContactMethods() {
-		if (contactMethods == null) {
-			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.COMPANY__CONTACT_METHODS);
-		}
-		return contactMethods;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Person> getContacts() {
 		if (contacts == null) {
 			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
@@ -416,8 +393,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPANY__CONTACTS:
 				return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPANY__LOCATION:
@@ -438,8 +413,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return getLegalName();
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				return getCompanyName();
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				return getContactMethods();
 			case ModelPackage.COMPANY__CONTACTS:
 				return getContacts();
 			case ModelPackage.COMPANY__LOCATION:
@@ -470,10 +443,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return;
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				setCompanyName((String)newValue);
-				return;
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				getContactMethods().clear();
-				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
 				return;
 			case ModelPackage.COMPANY__CONTACTS:
 				getContacts().clear();
@@ -512,9 +481,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				setCompanyName(COMPANY_NAME_EDEFAULT);
 				return;
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				getContactMethods().clear();
-				return;
 			case ModelPackage.COMPANY__CONTACTS:
 				getContacts().clear();
 				return;
@@ -549,8 +515,6 @@ public class CompanyImpl extends EObjectImpl implements Company {
 				return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
 			case ModelPackage.COMPANY__COMPANY_NAME:
 				return COMPANY_NAME_EDEFAULT == null ? companyName != null : !COMPANY_NAME_EDEFAULT.equals(companyName);
-			case ModelPackage.COMPANY__CONTACT_METHODS:
-				return contactMethods != null && !contactMethods.isEmpty();
 			case ModelPackage.COMPANY__CONTACTS:
 				return contacts != null && !contacts.isEmpty();
 			case ModelPackage.COMPANY__LOCATION:

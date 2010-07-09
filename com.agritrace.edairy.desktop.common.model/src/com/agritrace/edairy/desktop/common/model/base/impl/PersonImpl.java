@@ -40,14 +40,13 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getNickName <em>Nick Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getLocation <em>Location</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getContactMethods <em>Contact Methods</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getPersonId <em>Person Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PersonImpl extends EObjectImpl implements Person {
+public class PersonImpl extends ContactableImpl implements Person {
 	/**
 	 * The default value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -237,16 +236,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected Location location;
-
-	/**
-	 * The cached value of the '{@link #getContactMethods() <em>Contact Methods</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getContactMethods()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ContactMethod> contactMethods;
 
 	/**
 	 * The default value of the '{@link #getPersonId() <em>Person Id</em>}' attribute.
@@ -519,18 +508,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ContactMethod> getContactMethods() {
-		if (contactMethods == null) {
-			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.PERSON__CONTACT_METHODS);
-		}
-		return contactMethods;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Long getPersonId() {
 		return personId;
 	}
@@ -545,20 +522,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 		personId = newPersonId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PERSON_ID, oldPersonId, personId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.PERSON__CONTACT_METHODS:
-				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -590,8 +553,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case ModelPackage.PERSON__LOCATION:
 				if (resolve) return getLocation();
 				return basicGetLocation();
-			case ModelPackage.PERSON__CONTACT_METHODS:
-				return getContactMethods();
 			case ModelPackage.PERSON__PERSON_ID:
 				return getPersonId();
 		}
@@ -636,10 +597,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case ModelPackage.PERSON__LOCATION:
 				setLocation((Location)newValue);
-				return;
-			case ModelPackage.PERSON__CONTACT_METHODS:
-				getContactMethods().clear();
-				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
 				return;
 			case ModelPackage.PERSON__PERSON_ID:
 				setPersonId((Long)newValue);
@@ -686,9 +643,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case ModelPackage.PERSON__LOCATION:
 				setLocation((Location)null);
 				return;
-			case ModelPackage.PERSON__CONTACT_METHODS:
-				getContactMethods().clear();
-				return;
 			case ModelPackage.PERSON__PERSON_ID:
 				setPersonId(PERSON_ID_EDEFAULT);
 				return;
@@ -724,8 +678,6 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
 			case ModelPackage.PERSON__LOCATION:
 				return location != null;
-			case ModelPackage.PERSON__CONTACT_METHODS:
-				return contactMethods != null && !contactMethods.isEmpty();
 			case ModelPackage.PERSON__PERSON_ID:
 				return PERSON_ID_EDEFAULT == null ? personId != null : !PERSON_ID_EDEFAULT.equals(personId);
 		}

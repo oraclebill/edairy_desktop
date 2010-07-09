@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.*;
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
@@ -151,6 +152,10 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMilkPrice(MilkPrice object) {
 				return createMilkPriceAdapter();
+			}
+			@Override
+			public Adapter caseContactable(Contactable object) {
+				return createContactableAdapter();
 			}
 			@Override
 			public Adapter casePerson(Person object) {
@@ -405,6 +410,20 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMilkPriceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Contactable <em>Contactable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Contactable
+	 * @generated
+	 */
+	public Adapter createContactableAdapter() {
 		return null;
 	}
 

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.*;
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
@@ -122,6 +123,7 @@ public class DairySwitch<T> {
 				Employee employee = (Employee)theEObject;
 				T result = caseEmployee(employee);
 				if (result == null) result = casePerson(employee);
+				if (result == null) result = caseContactable(employee);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -165,6 +167,7 @@ public class DairySwitch<T> {
 				Dairy dairy = (Dairy)theEObject;
 				T result = caseDairy(dairy);
 				if (result == null) result = caseCompany(dairy);
+				if (result == null) result = caseContactable(dairy);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,6 +194,7 @@ public class DairySwitch<T> {
 				Supplier supplier = (Supplier)theEObject;
 				T result = caseSupplier(supplier);
 				if (result == null) result = caseCompany(supplier);
+				if (result == null) result = caseContactable(supplier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -198,6 +202,7 @@ public class DairySwitch<T> {
 				Customer customer = (Customer)theEObject;
 				T result = caseCustomer(customer);
 				if (result == null) result = caseCompany(customer);
+				if (result == null) result = caseContactable(customer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -448,6 +453,21 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T caseMilkPrice(MilkPrice object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contactable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contactable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContactable(Contactable object) {
 		return null;
 	}
 

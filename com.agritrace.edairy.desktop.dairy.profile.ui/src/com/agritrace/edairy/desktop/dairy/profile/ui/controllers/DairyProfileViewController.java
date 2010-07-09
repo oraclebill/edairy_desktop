@@ -320,7 +320,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtLIC_EXPIRATION_DATE.bindToModel(localDairy, "licenseExpirationDate");
 
 		locationController.setInputModel(localDairy.getLocation());
-		communicationGroup.setInputModel(localDairy.getContactMethods());
+		communicationGroup.setInputModel(localDairy);
 	}
 
 	/**
