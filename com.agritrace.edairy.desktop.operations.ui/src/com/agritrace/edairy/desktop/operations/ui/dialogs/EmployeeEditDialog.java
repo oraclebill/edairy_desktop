@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
@@ -12,18 +13,17 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoWidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialogController;
-import com.swtdesigner.SWTResourceManager;
 
 /**
  * Employee list dialog to add/view/edit customer
@@ -32,6 +32,7 @@ import com.swtdesigner.SWTResourceManager;
  * 
  */
 public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialogController> {
+	
 	private Composite comonComp;
 
 	// private static int WIDTH_HEIGHT = 400;
@@ -40,27 +41,15 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 	public EmployeeEditDialog(Shell shell) {
 		super(shell);
 	}
+	
+	
 
 	private void createContactGroup(Composite parent) {
 
-		final Composite photoPanel = new Composite(comonComp, SWT.NONE);
-		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		photoPanel.setLayout(new GridLayout(1, false));
-		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		final ProfilePhotoWidget photoWidget = new ProfilePhotoWidget(comonComp, SWT.NONE);
+		photoWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		addUIControl(photoWidget, "profile-photo-widget");
 
-		final Label label = new Label(photoPanel, SWT.BORDER | SWT.WRAP | SWT.CENTER);
-		label.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
-		final Label composite = UIControlsFactory.createLabel(photoPanel, "", "contact-photo-label");
-		composite.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
-
-		final Link link = UIControlsFactory.createLink(photoPanel, SWT.NONE, "update-photo-action");
-		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		link.setText("<a>update photo</a>");
-
-		// UIControlsFactory.createLabel(photoPanel, );
 		final Group ContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(ContactGroup);
 		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(ContactGroup);
@@ -99,8 +88,15 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 		final Composite composite = new Composite(comonComp, SWT.NONE);
 		composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		composite.setLayout(new GridLayout(2, false));
+		GridData gd_composite = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1);
+		gd_composite.widthHint = 240;
+		composite.setLayoutData(gd_composite);
+		GridLayout gl_composite = new GridLayout(2, false);
+		gl_composite.marginBottom = 5;
+		gl_composite.marginLeft = 5;
+		gl_composite.marginTop = 5;
+		gl_composite.marginRight = 5;
+		composite.setLayout(gl_composite);
 
 		UIControlsFactory.createLabel(composite, "Employee ID");
 

@@ -1,20 +1,21 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.io.FileInputStream;
+
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.ILinkRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
-import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -25,6 +26,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupCont
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeBindingConstants;
 
@@ -45,10 +47,17 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		editEmployee = getWorkingCopy();
 		assert (null != editEmployee);
 
+		// bind profile photo
+		ProfilePhotoRidget photoRidget = getRidget(ProfilePhotoRidget.class, "profile-photo-widget");
+		if (photoRidget != null) {
+			photoRidget.getId();
+		}
+		
 		// customer id
 		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_ID);
 		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__ID));
 		employeeId.setOutputOnly(true);
+		employeeId.setFocusable(false);
 
 		// company name
 		familyName = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_FAMILY_NAME);
@@ -99,14 +108,14 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		commController.setInputModel(editEmployee);
 		commController.updateBinding();
 
-		// action ridget
-		final ILinkRidget photoDialog = getRidget(ILinkRidget.class, "update-photo-action");
-		photoDialog.addSelectionListener(new ISelectionListener() {
-			@Override
-			public void ridgetSelected(SelectionEvent event) {
-				handleUpdatePhotoAction();
-			}
-		});
+//		// action ridget
+//		final ILinkRidget photoDialog = getRidget(ILinkRidget.class, "update-photo-action");
+//		photoDialog.addSelectionListener(new ISelectionListener() {
+//			@Override
+//			public void ridgetSelected(SelectionEvent event) {
+//				handleUpdatePhotoAction();
+//			}
+//		});
 	}
 
 	@Override
@@ -115,11 +124,50 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	}
 
 	private void handleUpdatePhotoAction() {
-		final FileDialog fDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
+		final FileDialog fDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM | SWT.SHEET);
 		final String fName = fDialog.open();
+		if (fName == null) {
+			System.err.println("Null file nam");
+			return;
+		}
+		try {
+			System.err.println("Opening file " + fName);
+			FileInputStream fStream = new FileInputStream(fName);
+			ImageData imgData = new ImageData(fStream);
 
-		final Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), fName);
-		final ILabelRidget photoLabel = getRidget(ILabelRidget.class, "contact-photo-label");
+			final ILabelRidget labelRidget = getRidget(ILabelRidget.class, "contact-photo-label");
+			Object control = labelRidget.getUIControl();
+
+			if (control instanceof Label) {
+				Label label = (Label) control;
+				int displayWidth = label.getSize().x, displayHeight = label.getSize().y;
+
+				float imgAspect = (float) imgData.width / (float) imgData.height;
+				float displayAspect = (float) displayWidth / (float) displayHeight;
+				float scale;
+				if (imgAspect > displayAspect) {
+					// scale width
+					scale = (float) displayWidth / (float) imgData.width;
+				} else {
+					// scale height
+					scale = (float) displayHeight / (float) imgData.height;
+				}
+				ImageData scaledImage = imgData.scaledTo((int) Math.floor(scale * imgData.width),
+						(int) Math.floor(scale * imgData.height));
+
+				final Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), scaledImage);
+				label.setText("");
+				label.setImage(photo);
+				label.redraw();
+				System.err.println("redrew Control - " + control);
+
+			}
+		} catch (Exception ioe) {
+			System.err.println(ioe);
+			ioe.printStackTrace();
+			;
+			;
+		}
 		// try {
 		// photoLabel.setText("");
 		// photoLabel.setIcon(photo);
