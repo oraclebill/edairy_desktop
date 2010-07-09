@@ -11,11 +11,14 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
@@ -151,7 +154,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	protected Vehicle vehicle;
 
 	/**
-	 * The cached value of the '{@link #getLines() <em>Lines</em>}' reference list.
+	 * The cached value of the '{@link #getLines() <em>Lines</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLines()
@@ -168,7 +171,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal TOTAL_EDEFAULT = null;
+	protected static final BigDecimal TOTAL_EDEFAULT = new BigDecimal("0.0");
 
 	/**
 	 * The cached value of the '{@link #getTotal() <em>Total</em>}' attribute.
@@ -421,7 +424,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	public EList<DeliveryJournalLine> getLines() {
 		if (lines == null) {
-			lines = new EObjectResolvingEList<DeliveryJournalLine>(DeliveryJournalLine.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
+			lines = new EObjectContainmentEList<DeliveryJournalLine>(DeliveryJournalLine.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
 		}
 		return lines;
 	}
@@ -445,6 +448,20 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 		total = newTotal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__TOTAL, oldTotal, total));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.DELIVERY_JOURNAL__LINES:
+				return ((InternalEList<?>)getLines()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

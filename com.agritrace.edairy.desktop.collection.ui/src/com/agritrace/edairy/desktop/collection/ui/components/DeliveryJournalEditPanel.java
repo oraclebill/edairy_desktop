@@ -6,14 +6,12 @@ import java.util.List;
 
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.common.IComplexComponent;
-import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
-import org.eclipse.riena.ui.ridgets.ICompositeTableRidget;
-import org.eclipse.riena.ui.ridgets.IRowRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
@@ -31,9 +29,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.swtdesigner.SWTResourceManager;
+import org.eclipse.swt.layout.RowLayout;
 
 public class DeliveryJournalEditPanel extends Composite {
 		
@@ -42,6 +39,7 @@ public class DeliveryJournalEditPanel extends Composite {
 	private Text totalOutputText;
 	private Composite header;
 	private Composite detail;
+	private CompositeTable compositeTable;
 	
 	private static final class Header extends AbstractNativeHeader {
 
@@ -66,10 +64,20 @@ public class DeliveryJournalEditPanel extends Composite {
 		public Row(final Composite parent, final int style) {
 			super(parent, style);
 			this.setLayout(new ResizableGridRowLayout());
-			
-			addUIControl(new Text(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID); 
-			addUIControl(new Text(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); 
-			addUIControl(new Text(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION);
+			Text descriptionTxt;
+			addUIControl(UIControlsFactory.createCCombo(this), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID); 
+//			addUIControl(UIControlsFactory.createText(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID); 
+			addUIControl(UIControlsFactory.createTextNumeric(this), DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); 
+			addUIControl(descriptionTxt = UIControlsFactory.createText(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION);
+			descriptionTxt.addTraverseListener(new TraverseListener() {
+				@Override
+				public void keyTraversed(TraverseEvent e) {
+					System.err.println(e);
+					if (e.detail == SWT.TRAVERSE_TAB_NEXT) {
+						e.detail = SWT.TRAVERSE_RETURN;
+					}
+				}
+			});
 		}
 
 		@Override
@@ -86,34 +94,6 @@ public class DeliveryJournalEditPanel extends Composite {
 
 	}
 
-	/**
-	 * Row for a {@link ICompositeTableRidget}.
-	 * <p>
-	 * Implementation note: class must be public and have a zero-argument public
-	 * constructor. Instances will be created by reflection.
-	 */
-	public static final class RowRidget extends AbstractCompositeRidget implements IRowRidget {
-		private DeliveryJournalLine rowData;
-
-		public void setData(final Object rowData) {
-			this.rowData = (DeliveryJournalLine) rowData;
-		}
-
-		@Override
-		public void configureRidgets() {
-			final ITextRidget binId = (ITextRidget) getRidget("binId"); //$NON-NLS-1$
-			binId.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__BIN.getName());
-			binId.updateFromModel();
-
-			final ITextRidget amount = (ITextRidget) getRidget("amount"); //$NON-NLS-1$
-			amount.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__QUANTITY.getName());
-			amount.updateFromModel();
-			
-			final ITextRidget description = (ITextRidget) getRidget("description"); //$NON-NLS-1$
-			description.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__DESCRIPTION.getName());
-			description.updateFromModel();
-		}
-	}
 
 
 	/**
@@ -137,25 +117,27 @@ public class DeliveryJournalEditPanel extends Composite {
 	}
 	
 	private void createHeaderGroup(Composite parent) {
-		parent.setLayout(new FormLayout());
+		FormLayout fl_header = new FormLayout();
+		fl_header.marginBottom = 8;
+		parent.setLayout(fl_header);
 		
 		final Label lblDate = UIControlsFactory.createLabel(parent, "Date");
 		FormData fd_lblDate = new FormData();
-		fd_lblDate.top = new FormAttachment(0, 15);
-		fd_lblDate.left = new FormAttachment(0, 41);
 		lblDate.setLayoutData(fd_lblDate);
 
 		final DateTime dateCombo = UIControlsFactory.createDate(parent, SWT.MEDIUM,
 				DeliveryJournalEditBindContants.DATE_COMBO);
+		fd_lblDate.top = new FormAttachment(dateCombo, 3, SWT.TOP);
 		FormData fd_dateCombo = new FormData();
-		fd_dateCombo.top = new FormAttachment(lblDate, -4, SWT.TOP);
+		fd_dateCombo.top = new FormAttachment(0, 11);
 		fd_dateCombo.width = 100;
 		fd_dateCombo.left = new FormAttachment(0, 109);
 		dateCombo.setLayoutData(fd_dateCombo);
 
 		final Label lblSession = UIControlsFactory.createLabel(parent, "Session");
+		fd_lblDate.left = new FormAttachment(0, 10);
 		FormData fd_lblSession = new FormData();
-		fd_lblSession.left = new FormAttachment(0, 41);
+		fd_lblSession.left = new FormAttachment(lblDate, 0, SWT.LEFT);
 		lblSession.setLayoutData(fd_lblSession);
 
 		final CCombo sessionCombo = UIControlsFactory.createCCombo(parent, DeliveryJournalEditBindContants.SESSION_COMBO);
@@ -169,7 +151,7 @@ public class DeliveryJournalEditPanel extends Composite {
 
 		final Label lblRoute = UIControlsFactory.createLabel(parent, "Route");
 		FormData fd_lblRoute = new FormData();
-		fd_lblRoute.left = new FormAttachment(0, 41);
+		fd_lblRoute.left = new FormAttachment(lblDate, 0, SWT.LEFT);
 		lblRoute.setLayoutData(fd_lblRoute);
 
 		final CCombo routeCombo = UIControlsFactory.createCCombo(parent, DeliveryJournalEditBindContants.ROUTE_COMBO);
@@ -183,7 +165,7 @@ public class DeliveryJournalEditPanel extends Composite {
 
 		final Label lblCustomer = UIControlsFactory.createLabel(parent, "Customer");
 		FormData fd_lblCustomer = new FormData();
-		fd_lblCustomer.left = new FormAttachment(0, 41);
+		fd_lblCustomer.left = new FormAttachment(lblDate, 0, SWT.LEFT);
 		lblCustomer.setLayoutData(fd_lblCustomer);
 
 		final CCombo customerCombo = UIControlsFactory.createCCombo(parent,
@@ -198,7 +180,7 @@ public class DeliveryJournalEditPanel extends Composite {
 
 		final Label lblDriver = UIControlsFactory.createLabel(parent, "Driver");
 		FormData fd_lblDriver = new FormData();
-		fd_lblDriver.left = new FormAttachment(0, 41);
+		fd_lblDriver.left = new FormAttachment(lblDate, 0, SWT.LEFT);
 		lblDriver.setLayoutData(fd_lblDriver);
 
 		final CCombo driverCombo = UIControlsFactory.createCCombo(parent, DeliveryJournalEditBindContants.DRIVER_COMBO);
@@ -212,14 +194,13 @@ public class DeliveryJournalEditPanel extends Composite {
 
 		final Label lblVehicle = UIControlsFactory.createLabel(parent, "Vehicle");
 		FormData fd_lblVehicle = new FormData();
-		fd_lblVehicle.bottom = new FormAttachment(100, 10);
-		fd_lblVehicle.right = new FormAttachment(lblSession, 0, SWT.RIGHT);
+		fd_lblVehicle.left = new FormAttachment(lblDate, 0, SWT.LEFT);
+		fd_lblVehicle.bottom = new FormAttachment(100, -2);
 		lblVehicle.setLayoutData(fd_lblVehicle);
 
 		final CCombo vehicleCombo = UIControlsFactory.createCCombo(parent, DeliveryJournalEditBindContants.VEHICLE_COMBO);
 		fd_lblVehicle.top = new FormAttachment(vehicleCombo, 5, SWT.TOP);
 		FormData fd_vehicleCombo = new FormData();
-		fd_vehicleCombo.bottom = new FormAttachment(100, 10);
 		fd_vehicleCombo.bottom = new FormAttachment(0, 194);
 		fd_vehicleCombo.right = new FormAttachment(0, 209);
 		fd_vehicleCombo.top = new FormAttachment(0, 172);
@@ -235,20 +216,24 @@ public class DeliveryJournalEditPanel extends Composite {
 				DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT);
 		FormData fd_totalOutputText = new FormData();
 		fd_totalOutputText.top = new FormAttachment(lblVehicle, -3, SWT.TOP);
+		fd_totalOutputText.left = new FormAttachment(lblTotal, 61);
+		fd_totalOutputText.right = new FormAttachment(100, -84);
 		totalOutputText.setLayoutData(fd_totalOutputText);
 
 		text = UIControlsFactory.createText(parent, SWT.BORDER, DeliveryJournalEditBindContants.REFERENCE_NUM);
-		fd_totalOutputText.right = new FormAttachment(text, 0, SWT.RIGHT);
 		FormData fd_text = new FormData();
+		fd_text.right = new FormAttachment(100, -10);
 		fd_text.top = new FormAttachment(lblDate, -2, SWT.TOP);
 		fd_text.left = new FormAttachment(0, 344);
 		text.setLayoutData(fd_text);
 
-		final Label lblReferenceNumber = UIControlsFactory.createLabel(header, "Reference Number");
-		fd_lblTotal.right = new FormAttachment(lblReferenceNumber, 0, SWT.RIGHT);
+		final Label lblReferenceNumber = UIControlsFactory.createLabel(header, "Reference #");
+		fd_lblTotal.left = new FormAttachment(lblReferenceNumber, 0, SWT.LEFT);
+		fd_text.left = new FormAttachment(lblReferenceNumber, 100, SWT.LEFT);
 		FormData fd_lblReferenceNumber = new FormData();
+		fd_lblReferenceNumber.left = new FormAttachment(0, 0);
+		fd_lblReferenceNumber.left = new FormAttachment(dateCombo, 26);
 		fd_lblReferenceNumber.top = new FormAttachment(lblDate, 0, SWT.TOP);
-		fd_lblReferenceNumber.left = new FormAttachment(0, 235);
 		lblReferenceNumber.setLayoutData(fd_lblReferenceNumber);
 	}
 	
@@ -258,17 +243,27 @@ public class DeliveryJournalEditPanel extends Composite {
 		tableGroup = UIControlsFactory.createGroup(parent, "Item Details");
 		tableGroup.setLayout(new GridLayout(1, false));
 
-		final CompositeTable compositeTable = new CompositeTable(tableGroup, SWT.NONE);
+		compositeTable = new CompositeTable(tableGroup, SWT.NONE);
 		GridData gd_compositeTable = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_compositeTable.heightHint = 150;
 		compositeTable.setLayoutData(gd_compositeTable);
-		compositeTable.setNumRowsInCollection(10);
+//		compositeTable.setNumRowsInCollection(10);
+		compositeTable.setTraverseOnTabsEnabled(true);
+		compositeTable.setInsertHint("");
+
 		new Header(compositeTable, SWT.NONE);
 		new Row(compositeTable, SWT.NONE);
 		compositeTable.setRunTime(true);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(compositeTable, DeliveryJournalEditBindContants.LINE_ITEM_TABLE);
 		
-		Button btnAddRow = UIControlsFactory.createButton(tableGroup, "Add Row", DeliveryJournalEditBindContants.BTN_ADD_ROW);
+		Composite composite = UIControlsFactory.createComposite(tableGroup, SWT.RIGHT);
+		RowLayout rl_composite = new RowLayout(SWT.HORIZONTAL);
+		composite.setLayout(rl_composite);
+		composite.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false, 1, 1));
+		
+		Button btnDeleteRow = UIControlsFactory.createButton(composite, "Delete Row", "BTN_DELETE_ROW");
+		
+		Button btnAddRow = UIControlsFactory.createButton(composite, "Add Row", DeliveryJournalEditBindContants.BTN_ADD_ROW);
 		
 	}
 }

@@ -68,4 +68,6 @@ public interface IDairyRepository {
 
 	List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route, Customer customer);
 
+	List<DairyContainer> getBinsByRoute(Route journalRoute);
+
 }

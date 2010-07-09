@@ -626,13 +626,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_LOCATION__FUNCTIONS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Containers</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_LOCATION__CONTAINERS = 9;
+
+	/**
 	 * The number of structural features of the '<em>Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_LOCATION_FEATURE_COUNT = 9;
+	int DAIRY_LOCATION_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl <em>Collection Journal Page</em>}' class.
@@ -999,7 +1008,7 @@ public interface DairyPackage extends EPackage {
 	int DELIVERY_JOURNAL__VEHICLE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Lines</b></em>' reference list.
+	 * The feature id for the '<em><b>Lines</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1280,7 +1289,7 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Delivery Journals</b></em>' reference list.
+	 * The feature id for the '<em><b>Delivery Journals</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2535,6 +2544,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getDairyLocation_Functions();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getContainers <em>Containers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Containers</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getContainers()
+	 * @see #getDairyLocation()
+	 * @generated
+	 */
+	EReference getDairyLocation_Containers();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage <em>Collection Journal Page</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2938,10 +2958,10 @@ public interface DairyPackage extends EPackage {
 	EReference getDeliveryJournal_Vehicle();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getLines <em>Lines</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getLines <em>Lines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Lines</em>'.
+	 * @return the meta object for the containment reference list '<em>Lines</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getLines()
 	 * @see #getDeliveryJournal()
 	 * @generated
@@ -3156,10 +3176,10 @@ public interface DairyPackage extends EPackage {
 	EReference getDairy_CollectionJournals();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDeliveryJournals <em>Delivery Journals</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDeliveryJournals <em>Delivery Journals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Delivery Journals</em>'.
+	 * @return the meta object for the containment reference list '<em>Delivery Journals</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDeliveryJournals()
 	 * @see #getDairy()
 	 * @generated
@@ -4112,6 +4132,14 @@ public interface DairyPackage extends EPackage {
 		EAttribute DAIRY_LOCATION__FUNCTIONS = eINSTANCE.getDairyLocation_Functions();
 
 		/**
+		 * The meta object literal for the '<em><b>Containers</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DAIRY_LOCATION__CONTAINERS = eINSTANCE.getDairyLocation_Containers();
+
+		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl <em>Collection Journal Page</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4416,7 +4444,7 @@ public interface DairyPackage extends EPackage {
 		EReference DELIVERY_JOURNAL__VEHICLE = eINSTANCE.getDeliveryJournal_Vehicle();
 
 		/**
-		 * The meta object literal for the '<em><b>Lines</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Lines</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -4580,7 +4608,7 @@ public interface DairyPackage extends EPackage {
 		EReference DAIRY__COLLECTION_JOURNALS = eINSTANCE.getDairy_CollectionJournals();
 
 		/**
-		 * The meta object literal for the '<em><b>Delivery Journals</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Delivery Journals</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

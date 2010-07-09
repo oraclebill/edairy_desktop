@@ -359,4 +359,14 @@ public class DairyRepository implements IDairyRepository {
 		return djCriteria.list();
 	}
 
+	@Override
+	public List<DairyContainer> getBinsByRoute(Route journalRoute) {
+		Session session = PersistenceManager.getDefault().getSession();
+		Criteria dcCriteria = session.createCriteria("DairyContainer");
+		if (journalRoute != null) {
+			dcCriteria.add(Restrictions.eq("", journalRoute));
+		}
+		return dcCriteria.list();
+	}
+
 }

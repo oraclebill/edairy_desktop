@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -40,6 +41,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl#getContainers <em>Containers</em>}</li>
  * </ul>
  * </p>
  *
@@ -195,6 +197,16 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @ordered
 	 */
 	protected EList<DairyFunction> functions;
+
+	/**
+	 * The cached value of the '{@link #getContainers() <em>Containers</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainers()
+	 * @generated
+	 * @ordered
+	 */
+	protected DairyContainer containers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -461,6 +473,44 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DairyContainer getContainers() {
+		if (containers != null && containers.eIsProxy()) {
+			InternalEObject oldContainers = (InternalEObject)containers;
+			containers = (DairyContainer)eResolveProxy(oldContainers);
+			if (containers != oldContainers) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
+			}
+		}
+		return containers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyContainer basicGetContainers() {
+		return containers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainers(DairyContainer newContainers) {
+		DairyContainer oldContainers = containers;
+		containers = newContainers;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -515,6 +565,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				return getLocation();
 			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
 				return getFunctions();
+			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
+				if (resolve) return getContainers();
+				return basicGetContainers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -556,6 +609,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				getFunctions().clear();
 				getFunctions().addAll((Collection<? extends DairyFunction>)newValue);
 				return;
+			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
+				setContainers((DairyContainer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -595,6 +651,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
 				getFunctions().clear();
 				return;
+			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
+				setContainers((DairyContainer)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -625,6 +684,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				return location != null;
 			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
 				return functions != null && !functions.isEmpty();
+			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
+				return containers != null;
 		}
 		return super.eIsSet(featureID);
 	}

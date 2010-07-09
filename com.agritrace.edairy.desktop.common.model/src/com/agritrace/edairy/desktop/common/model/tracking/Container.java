@@ -112,6 +112,7 @@ public interface Container extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.base.ContainerType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -123,7 +124,7 @@ public interface Container extends EObject {
 	 * @see com.agritrace.edairy.desktop.common.model.base.ContainerType
 	 * @see #setType(ContainerType)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_Type()
-	 * @model
+	 * @model default=""
 	 * @generated
 	 */
 	ContainerType getType();

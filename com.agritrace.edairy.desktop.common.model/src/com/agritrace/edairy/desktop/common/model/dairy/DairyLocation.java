@@ -30,6 +30,7 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getContainers <em>Containers</em>}</li>
  * </ul>
  * </p>
  *
@@ -267,5 +268,31 @@ public interface DairyLocation extends EObject {
 	 * @generated
 	 */
 	EList<DairyFunction> getFunctions();
+
+	/**
+	 * Returns the value of the '<em><b>Containers</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Containers</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Containers</em>' reference.
+	 * @see #setContainers(DairyContainer)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyLocation_Containers()
+	 * @model
+	 * @generated
+	 */
+	DairyContainer getContainers();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getContainers <em>Containers</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Containers</em>' reference.
+	 * @see #getContainers()
+	 * @generated
+	 */
+	void setContainers(DairyContainer value);
 
 } // DairyLocation

@@ -48,7 +48,7 @@ public interface DeliveryJournal extends EObject {
 	 * @return the value of the '<em>Reference Number</em>' attribute.
 	 * @see #setReferenceNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_ReferenceNumber()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getReferenceNumber();
@@ -223,7 +223,7 @@ public interface DeliveryJournal extends EObject {
 	void setVehicle(Vehicle value);
 
 	/**
-	 * Returns the value of the '<em><b>Lines</b></em>' reference list.
+	 * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -231,15 +231,16 @@ public interface DeliveryJournal extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lines</em>' reference list.
+	 * @return the value of the '<em>Lines</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Lines()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<DeliveryJournalLine> getLines();
 
 	/**
 	 * Returns the value of the '<em><b>Total</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Total</em>' attribute isn't clear,
@@ -249,7 +250,7 @@ public interface DeliveryJournal extends EObject {
 	 * @return the value of the '<em>Total</em>' attribute.
 	 * @see #setTotal(BigDecimal)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Total()
-	 * @model
+	 * @model default="0.0" required="true"
 	 * @generated
 	 */
 	BigDecimal getTotal();

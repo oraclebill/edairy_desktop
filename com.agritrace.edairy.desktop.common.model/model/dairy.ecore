@@ -99,6 +99,7 @@
         eType="ecore:EClass common.ecore#//Location" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="functions" upperBound="-1"
         eType="#//DairyFunction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containers" eType="#//DairyContainer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalPage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
@@ -165,7 +166,8 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" lowerBound="1"
@@ -175,8 +177,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="lines" lowerBound="1" upperBound="-1"
-        eType="#//DeliveryJournalLine"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+        eType="#//DeliveryJournalLine" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        defaultValueLiteral="0.0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournalLine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber" lowerBound="1"
@@ -214,7 +217,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
         eType="#//CollectionJournalPage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" upperBound="-1"
-        eType="#//DeliveryJournal"/>
+        eType="#//DeliveryJournal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customers" upperBound="-1"

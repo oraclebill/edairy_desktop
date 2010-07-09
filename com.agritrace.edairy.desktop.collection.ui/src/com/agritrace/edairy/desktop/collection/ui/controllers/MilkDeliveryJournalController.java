@@ -116,9 +116,14 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 
 	@Override
 	protected void createEntity(DeliveryJournal newEntity) {
+		// TODO: save as a batch - currently this will result in 'n + 1' transactions, where n is number of lines
+		// FIXME:      also, if error on one line, entire journal should be rolled back..
 		dairyRepo.getLocalDairy().getDeliveryJournals().add(newEntity);
-		dairyRepo.save(newEntity);
-//		dairyRepo.save(dairyRepo.getLocalDairy());
+		dairyRepo.save(dairyRepo.getLocalDairy());		 // depend on the cascade
+//		for (DeliveryJournalLine line : newEntity.getLines()) {
+//			dairyRepo.save(line);
+//		}
+//		dairyRepo.save(newEntity);
 	}
 
 }
