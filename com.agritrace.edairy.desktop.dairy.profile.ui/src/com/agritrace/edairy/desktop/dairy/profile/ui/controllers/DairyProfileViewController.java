@@ -25,6 +25,7 @@ import org.eclipse.ui.PlatformUI;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -115,9 +116,9 @@ public class DairyProfileViewController extends SubModuleController {
 	private ITextRidget txtNSSF_NUMBER;
 	private ITextRidget txtPHONE;
 
-	private ILabelRidget txtPROFILE_IMAGE;
+	private ProfilePhotoRidget txtPROFILE_IMAGE;
 
-	private ILinkRidget txtPROFILE_IMAGE_LINK;
+//	private ILinkRidget txtPROFILE_IMAGE_LINK;
 
 	private ITextRidget txtPUBLIC_DESCRIPTION;
 
@@ -269,10 +270,10 @@ public class DairyProfileViewController extends SubModuleController {
 
 		txtESTABLISHED_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
 
-		txtPROFILE_IMAGE = getRidget(ILabelRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
-		txtPROFILE_IMAGE_LINK = getRidget(ILinkRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
+		txtPROFILE_IMAGE = getRidget(ProfilePhotoRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
+//		txtPROFILE_IMAGE_LINK = getRidget(ILinkRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
 
-		txtPROFILE_IMAGE_LINK.addSelectionListener(new UpdateImageActionListener());
+//		txtPROFILE_IMAGE_LINK.addSelectionListener(new UpdateImageActionListener());
 
 		txtMEMBER_COUNT = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
 		txtMEMBER_COUNT.setOutputOnly(true);
@@ -304,7 +305,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtNAME.bindToModel(localDairy, "companyName");
 		txtPHONE.bindToModel(localDairy, "phoneNumber");
 		txtPUBLIC_DESCRIPTION.bindToModel(localDairy, "description");
-		txtPROFILE_IMAGE.bindToModel(localDairy, "profilePhoto");
+//		txtPROFILE_IMAGE.bindToModel(localDairy, "profilePhoto");
 
 		txtNSSF_NUMBER.bindToModel(localDairy, "managerName");
 		txtESTABLISHED_DATE.bindToModel(localDairy, "establishedDate");

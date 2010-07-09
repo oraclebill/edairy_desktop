@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
@@ -57,7 +58,7 @@ public class DairyProfileView extends SubModuleView {
 	private static final String DAIRY_IMAGE_GROUP_HEADER = "Dairy Image";
 	private static final String DAIRY_IMAGE_LINK_TEXT = "<a>click here to update</a>";
 	private Button cancelButton;
-	private Label lblDairyImage;
+	private ProfilePhotoWidget lblDairyImage;
 	private Link linkDairyImage;
 
 	private Button saveButton;
@@ -102,13 +103,15 @@ public class DairyProfileView extends SubModuleView {
 
 	private Composite createDairyImagePanel(Composite parent) {
 		final Group imageGroup = UIControlsFactory.createGroup(parent, DAIRY_IMAGE_GROUP_HEADER);
-		lblDairyImage = UIControlsFactory.createLabel(imageGroup, "", DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
+		lblDairyImage = new ProfilePhotoWidget(imageGroup, SWT.BORDER);
+		addUIControl(lblDairyImage, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
+//		lblDairyImage = UIControlsFactory.createLabel(imageGroup, "", DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 		GridDataFactory.fillDefaults().hint(200, 200).grab(false, true).align(SWT.FILL, SWT.FILL)
 				.applyTo(lblDairyImage);
-		linkDairyImage = UIControlsFactory.createLink(imageGroup, SWT.NONE,
-				DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
-		linkDairyImage.setText(DAIRY_IMAGE_LINK_TEXT);
-		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.BOTTOM).applyTo(linkDairyImage);
+//		linkDairyImage = UIControlsFactory.createLink(imageGroup, SWT.NONE,
+//				DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
+//		linkDairyImage.setText(DAIRY_IMAGE_LINK_TEXT);
+//		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.BOTTOM).applyTo(linkDairyImage);
 		GridLayoutFactory.swtDefaults().numColumns(1).generateLayout(imageGroup);
 		return imageGroup;
 	}
