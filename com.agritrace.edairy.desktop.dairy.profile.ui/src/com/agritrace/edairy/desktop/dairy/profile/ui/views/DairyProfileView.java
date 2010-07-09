@@ -55,7 +55,7 @@ public class DairyProfileView extends SubModuleView {
 	public static final String SUBLOCATION_LABEL = "Sublocation";
 	public static final String VILLAGE_LABEL = "Village:";
 	private static final String DAIRY_IMAGE_GROUP_HEADER = "Dairy Image";
-	private static final String DAIRY_IMAGE_LINK_TEXT = "<click here to update>";
+	private static final String DAIRY_IMAGE_LINK_TEXT = "<a>click here to update</a>";
 	private Button cancelButton;
 	private Label lblDairyImage;
 	private Link linkDairyImage;
@@ -155,8 +155,8 @@ public class DairyProfileView extends SubModuleView {
 				DairyProfileViewWidgetID.DAIRY_MANAGER_NAME));
 
 		// description field
-		labelGridDataFactory.copy().align(SWT.RIGHT, SWT.TOP)
-				.applyTo(UIControlsFactory.createLabel(nameArea, "Description:"));
+		Label label = UIControlsFactory.createLabel(nameArea, "Description:");
+		labelGridDataFactory.applyTo(label);
 		fieldGridDataFactory
 				.copy()
 				.align(SWT.LEFT, SWT.FILL)

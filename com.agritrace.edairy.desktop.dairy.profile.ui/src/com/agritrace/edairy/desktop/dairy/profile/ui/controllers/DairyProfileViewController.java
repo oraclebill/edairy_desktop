@@ -1,26 +1,26 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
-import java.util.List;
-
-import org.eclipse.riena.navigation.ISubModuleNode;
-import org.eclipse.riena.navigation.ui.controllers.ModuleController;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
-import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
+import org.eclipse.riena.ui.ridgets.IEditableRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
 import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
-import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
-import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.validation.RequiredField;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
@@ -40,11 +40,12 @@ public class DairyProfileViewController extends SubModuleController {
 	class DairyProfileCancelAction implements IActionListener {
 		@Override
 		public void callback() {
-//			if (!newDairy) {
-//				localDairy = dairyRepository.getDairyById(localDairy.getCompanyId());
-//			} else {
-//				localDairy = dairyRepository.reloadLocalDairy();
-//			}
+			// if (!newDairy) {
+			// localDairy =
+			// dairyRepository.getDairyById(localDairy.getCompanyId());
+			// } else {
+			// localDairy = dairyRepository.reloadLocalDairy();
+			// }
 			localDairy = dairyRepository.getLocalDairy();
 			initBindings();
 			updateBindings();
@@ -54,34 +55,38 @@ public class DairyProfileViewController extends SubModuleController {
 	class DairyProfileSaveAction implements IActionListener {
 		@Override
 		public void callback() {
-			dairyRepository.updateDairy();
-			updateBindings();
+			try {
+				IWindowRidget ri = getRidget(IWindowRidget.class, "Null");
+				
+				validateProfile();
+				dairyRepository.updateDairy();
+				updateBindings();
+				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Dairy profile updated successfully."));
+//			} catch (ValidationException e) {
+			} catch (Exception e) {
+				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
+			}
 		}
 	}
 
-	class LinkFocusListener implements IFocusListener {
-		@Override
-		public void focusGained(FocusEvent event) {
-			final IRidget focused = event.getNewFocusOwner();
-			System.err.println("Focused on >> " + focused);
-			// Link link = (Link)focused.getUIControl();
-		}
-
-		@Override
-		public void focusLost(FocusEvent event) {
-			final IRidget focused = event.getNewFocusOwner();
-			System.err.println("Focused lost on >> " + focused);
-			// Link link = (Link)focused.getUIControl();
-		}
-	}
-
-	class LinkSelectionListener implements ISelectionListener {
+	class UpdateImageActionListener implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
-			final IRidget focused = event.getSource();
-			final List<Object> selected = event.getNewSelection();
-			System.err.println("Selected " + selected + " on " + focused);
-			// Link link = (Link)focused.getUIControl();
+			FileDialog fileDialog = new FileDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), SWT.OPEN
+					| SWT.SHEET);
+			fileDialog.setText("Open Profile Image");
+			String fileName = fileDialog.open();
+			if (fileName != null) {
+				ImageLoader imgLoader = new ImageLoader();
+				ImageData[] imgData = imgLoader.load(fileName);
+				if (imgData != null && imgData.length > 0) {
+					for (ImageData fileData : imgData) {
+						// fileData.
+					}
+				}
+
+			}
+
 		}
 	}
 
@@ -127,6 +132,18 @@ public class DairyProfileViewController extends SubModuleController {
 		localDairy = dairyRepository.getLocalDairy();
 	}
 
+	public void validateProfile() {
+		for (IRidget ridget : getRidgets()) {
+			if (ridget instanceof IEditableRidget) {
+				IEditableRidget editable = (IEditableRidget) ridget;
+				if ( !editable.revalidate() ) { 
+					editable.requestFocus();					
+					throw new RuntimeException();
+				}
+			}
+		}		
+	}
+
 	@Override
 	public void afterBind() {
 		super.afterBind();
@@ -157,94 +174,70 @@ public class DairyProfileViewController extends SubModuleController {
 	public int getMemberCount() {
 		return memberCount;
 	}
-	
+
 	public void setMemberCount(int val) {
 		memberCount = val;
 	}
 
-
-/**
-	@Override
-	public void addDefaultAction(IRidget focusRidget, IActionRidget action) {
-		// TODO Auto-generated method stub
-		super.addDefaultAction(focusRidget, action);
-		System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " + focusRidget + ", " + action);
-	}
-
-	@Override
-	public IInfoFlyoutRidget getInfoFlyout() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getInfoFlyout: ");
-
-		return super.getInfoFlyout();
-	}
-
-	@Override
-	public IRidget getInitialFocus() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: ");
-
-		return super.getInitialFocus();
-	}
-
-	@Override
-	public ModuleController getModuleController() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getModuleController: ");
-
-		return super.getModuleController();
-	}
-
-	@Override
-	public IWindowRidget getWindowRidget() {
-		// TODO Auto-generated method stub
-		System.err.println(">>>>>>>>>>>>>>>>>> getWindowRidget: ");
-
-		return super.getWindowRidget();
-	}
-
-	@Override
-	public void setInitialFocus(IRidget ridget) {
-		// TODO Auto-generated method stub
-		super.setInitialFocus(ridget);
-		System.err.println(">>>>>>>>>>>>>>>>>> setInitialFocus: " + ridget);
-
-	}
-
-	@Override
-	public void setNavigationNode(ISubModuleNode navigationNode) {
-		// TODO Auto-generated method stub
-		super.setNavigationNode(navigationNode);
-		System.err.println(">>>>>>>>>>>>>>>>>> setNavigationNode: " + navigationNode);
-
-	}
-
-	@Override
-	public void setWindowRidget(IWindowRidget windowRidget) {
-		// TODO Auto-generated method stub
-		super.setWindowRidget(windowRidget);
-		System.err.println(">>>>>>>>>>>>>>>>>> setWindowRidget: " + windowRidget);
-
-	}
-
-	@Override
-	public void updateAllRidgetsFromModel() {
-		// TODO Auto-generated method stub
-		super.updateAllRidgetsFromModel();
-		System.err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: ");
-
-	}
-	
-	
-	@Override
-	protected void updateIcon(IWindowRidget windowRidget) {
-		// TODO Auto-generated method stub
-		super.updateIcon(windowRidget);
-		System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " + windowRidget);
-
-	}
-
-*/
+	/**
+	 * @Override public void addDefaultAction(IRidget focusRidget, IActionRidget
+	 *           action) { // TODO Auto-generated method stub
+	 *           super.addDefaultAction(focusRidget, action);
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> addDefaultAction: " +
+	 *           focusRidget + ", " + action); }
+	 * @Override public IInfoFlyoutRidget getInfoFlyout() { // TODO
+	 *           Auto-generated method stub
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> getInfoFlyout: ");
+	 * 
+	 *           return super.getInfoFlyout(); }
+	 * @Override public IRidget getInitialFocus() { // TODO Auto-generated
+	 *           method stub
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> getInitialFocus: ");
+	 * 
+	 *           return super.getInitialFocus(); }
+	 * @Override public ModuleController getModuleController() { // TODO
+	 *           Auto-generated method stub
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> getModuleController: ");
+	 * 
+	 *           return super.getModuleController(); }
+	 * @Override public IWindowRidget getWindowRidget() { // TODO Auto-generated
+	 *           method stub
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> getWindowRidget: ");
+	 * 
+	 *           return super.getWindowRidget(); }
+	 * @Override public void setInitialFocus(IRidget ridget) { // TODO
+	 *           Auto-generated method stub super.setInitialFocus(ridget);
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> setInitialFocus: " +
+	 *           ridget);
+	 * 
+	 *           }
+	 * @Override public void setNavigationNode(ISubModuleNode navigationNode) {
+	 *           // TODO Auto-generated method stub
+	 *           super.setNavigationNode(navigationNode);
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> setNavigationNode: " +
+	 *           navigationNode);
+	 * 
+	 *           }
+	 * @Override public void setWindowRidget(IWindowRidget windowRidget) { //
+	 *           TODO Auto-generated method stub
+	 *           super.setWindowRidget(windowRidget);
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> setWindowRidget: " +
+	 *           windowRidget);
+	 * 
+	 *           }
+	 * @Override public void updateAllRidgetsFromModel() { // TODO
+	 *           Auto-generated method stub super.updateAllRidgetsFromModel();
+	 *           System
+	 *           .err.println(">>>>>>>>>>>>>>>>>> updateAllRidgetsFromModel: ");
+	 * 
+	 *           }
+	 * @Override protected void updateIcon(IWindowRidget windowRidget) { // TODO
+	 *           Auto-generated method stub super.updateIcon(windowRidget);
+	 *           System.err.println(">>>>>>>>>>>>>>>>>> updateIcon: " +
+	 *           windowRidget);
+	 * 
+	 *           }
+	 */
 	/**
 	 * Configure teh button panel.
 	 * 
@@ -279,11 +272,12 @@ public class DairyProfileViewController extends SubModuleController {
 		txtPROFILE_IMAGE = getRidget(ILabelRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 		txtPROFILE_IMAGE_LINK = getRidget(ILinkRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE_LINK);
 
-		txtPROFILE_IMAGE_LINK.addFocusListener(new LinkFocusListener());
-		txtPROFILE_IMAGE_LINK.addSelectionListener(new LinkSelectionListener());
+		txtPROFILE_IMAGE_LINK.addSelectionListener(new UpdateImageActionListener());
 
 		txtMEMBER_COUNT = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
 		txtMEMBER_COUNT.setOutputOnly(true);
+		txtMEMBER_COUNT.setGrouping(true);
+		txtMEMBER_COUNT.setFocusable(false);
 
 		// registration tab
 		txtLEGAL_NAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_LEGAL_NAME);
@@ -315,7 +309,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtNSSF_NUMBER.bindToModel(localDairy, "managerName");
 		txtESTABLISHED_DATE.bindToModel(localDairy, "establishedDate");
 		txtMEMBER_COUNT.bindToModel(this, "memberCount");
-
+		setMemberCount(localDairy.getMemberships().size());
 		// registration panel
 		txtLEGAL_NAME.bindToModel(localDairy, "legalName");
 		txtREGISTRATION_NBR.bindToModel(localDairy, "registrationNumber");
@@ -341,7 +335,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtESTABLISHED_DATE.updateFromModel();
 		txtNSSF_NUMBER.updateFromModel();
 		txtMEMBER_COUNT.updateFromModel();
-//		txtPROFILE_IMAGE.updateFromModel();
+		// txtPROFILE_IMAGE.updateFromModel();
 		txtPUBLIC_DESCRIPTION.updateFromModel();
 
 		// registration panel

@@ -638,6 +638,52 @@ public interface ModelPackage extends EPackage {
 	int CONTACT_METHOD_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ImageEntryImpl <em>Image Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ImageEntryImpl
+	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageEntry()
+	 * @generated
+	 */
+	int IMAGE_ENTRY = 9;
+
+	/**
+	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_ENTRY__IMAGE_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Mime Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_ENTRY__MIME_TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Image Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_ENTRY__IMAGE_DATA = 2;
+
+	/**
+	 * The number of structural features of the '<em>Image Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_ENTRY_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.Gender <em>Gender</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -645,7 +691,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 9;
+	int GENDER = 10;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.ContactMethodType <em>Contact Method Type</em>}' enum.
@@ -655,7 +701,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethodType()
 	 * @generated
 	 */
-	int CONTACT_METHOD_TYPE = 10;
+	int CONTACT_METHOD_TYPE = 11;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
@@ -665,7 +711,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUnitOfMeasure()
 	 * @generated
 	 */
-	int UNIT_OF_MEASURE = 11;
+	int UNIT_OF_MEASURE = 12;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.ContainerType <em>Container Type</em>}' enum.
@@ -675,7 +721,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContainerType()
 	 * @generated
 	 */
-	int CONTAINER_TYPE = 12;
+	int CONTAINER_TYPE = 13;
 
 	/**
 	 * The meta object id for the '<em>Transaction ID</em>' data type.
@@ -685,7 +731,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getTransactionID()
 	 * @generated
 	 */
-	int TRANSACTION_ID = 13;
+	int TRANSACTION_ID = 14;
 
 	/**
 	 * The meta object id for the '<em>Unique ID</em>' data type.
@@ -695,7 +741,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUniqueID()
 	 * @generated
 	 */
-	int UNIQUE_ID = 14;
+	int UNIQUE_ID = 15;
 
 	/**
 	 * The meta object id for the '<em>Image Reference</em>' data type.
@@ -705,7 +751,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageReference()
 	 * @generated
 	 */
-	int IMAGE_REFERENCE = 15;
+	int IMAGE_REFERENCE = 16;
 
 
 	/**
@@ -1294,6 +1340,49 @@ public interface ModelPackage extends EPackage {
 	EAttribute getContactMethod_CmValue();
 
 	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.ImageEntry <em>Image Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Image Entry</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ImageEntry
+	 * @generated
+	 */
+	EClass getImageEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.ImageEntry#getImageId <em>Image Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ImageEntry#getImageId()
+	 * @see #getImageEntry()
+	 * @generated
+	 */
+	EAttribute getImageEntry_ImageId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.ImageEntry#getMimeType <em>Mime Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mime Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ImageEntry#getMimeType()
+	 * @see #getImageEntry()
+	 * @generated
+	 */
+	EAttribute getImageEntry_MimeType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.ImageEntry#getImageData <em>Image Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Data</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ImageEntry#getImageData()
+	 * @see #getImageEntry()
+	 * @generated
+	 */
+	EAttribute getImageEntry_ImageData();
+
+	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.base.Gender <em>Gender</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1837,6 +1926,40 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTACT_METHOD__CM_VALUE = eINSTANCE.getContactMethod_CmValue();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ImageEntryImpl <em>Image Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.base.impl.ImageEntryImpl
+		 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageEntry()
+		 * @generated
+		 */
+		EClass IMAGE_ENTRY = eINSTANCE.getImageEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_ENTRY__IMAGE_ID = eINSTANCE.getImageEntry_ImageId();
+
+		/**
+		 * The meta object literal for the '<em><b>Mime Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_ENTRY__MIME_TYPE = eINSTANCE.getImageEntry_MimeType();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Data</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE_ENTRY__IMAGE_DATA = eINSTANCE.getImageEntry_ImageData();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.Gender <em>Gender</em>}' enum.

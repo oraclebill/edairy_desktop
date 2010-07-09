@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
+import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
@@ -107,6 +108,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass contactMethodEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imageEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -723,6 +731,42 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImageEntry() {
+		return imageEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageEntry_ImageId() {
+		return (EAttribute)imageEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageEntry_MimeType() {
+		return (EAttribute)imageEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImageEntry_ImageData() {
+		return (EAttribute)imageEntryEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getGender() {
 		return genderEEnum;
 	}
@@ -872,6 +916,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(contactMethodEClass, CONTACT_METHOD__CM_TYPE);
 		createEAttribute(contactMethodEClass, CONTACT_METHOD__CM_VALUE);
 
+		imageEntryEClass = createEClass(IMAGE_ENTRY);
+		createEAttribute(imageEntryEClass, IMAGE_ENTRY__IMAGE_ID);
+		createEAttribute(imageEntryEClass, IMAGE_ENTRY__MIME_TYPE);
+		createEAttribute(imageEntryEClass, IMAGE_ENTRY__IMAGE_DATA);
+
 		// Create enums
 		genderEEnum = createEEnum(GENDER);
 		contactMethodTypeEEnum = createEEnum(CONTACT_METHOD_TYPE);
@@ -976,6 +1025,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(contactMethodEClass, ContactMethod.class, "ContactMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContactMethod_CmType(), this.getContactMethodType(), "cmType", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContactMethod_CmValue(), ecorePackage.getEString(), "cmValue", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imageEntryEClass, ImageEntry.class, "ImageEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImageEntry_ImageId(), this.getImageReference(), "imageId", null, 1, 1, ImageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageEntry_MimeType(), ecorePackage.getEString(), "mimeType", null, 1, 1, ImageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImageEntry_ImageData(), ecorePackage.getEByteArray(), "imageData", null, 0, 1, ImageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(genderEEnum, Gender.class, "Gender");

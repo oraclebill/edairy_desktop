@@ -107,6 +107,15 @@ public interface ModelFactory extends EFactory {
 	ContactMethod createContactMethod();
 
 	/**
+	 * Returns a new object of class '<em>Image Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Image Entry</em>'.
+	 * @generated
+	 */
+	ImageEntry createImageEntry();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -83,6 +83,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.DESCRIPTIVE_LOCATION: return createDescriptiveLocation();
 			case ModelPackage.LOCATION: return createLocation();
 			case ModelPackage.CONTACT_METHOD: return createContactMethod();
+			case ModelPackage.IMAGE_ENTRY: return createImageEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -230,6 +231,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ContactMethod createContactMethod() {
 		ContactMethodImpl contactMethod = new ContactMethodImpl();
 		return contactMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImageEntry createImageEntry() {
+		ImageEntryImpl imageEntry = new ImageEntryImpl();
+		return imageEntry;
 	}
 
 	/**

@@ -116,6 +116,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createContactMethodAdapter();
 			}
 			@Override
+			public Adapter caseImageEntry(ImageEntry object) {
+				return createImageEntryAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -258,6 +262,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContactMethodAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.ImageEntry <em>Image Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.base.ImageEntry
+	 * @generated
+	 */
+	public Adapter createImageEntryAdapter() {
 		return null;
 	}
 

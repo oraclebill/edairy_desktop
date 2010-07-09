@@ -194,4 +194,11 @@
   <eClassifiers xsi:type="ecore:EDataType" name="TransactionID" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="UniqueID" instanceClassName="java.lang.Long"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ImageReference" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" lowerBound="1"
+        eType="#//ImageReference" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mimeType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"/>
+  </eClassifiers>
 </ecore:EPackage>
