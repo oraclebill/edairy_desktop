@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.locations.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -9,7 +9,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
+import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 
 public class AddressPanel extends CompositePanel {
 
@@ -17,8 +18,8 @@ public class AddressPanel extends CompositePanel {
 			super(parent, style);
 
 			final GridLayout layout = new GridLayout(4, false);
-			layout.marginWidth = layout.marginHeight = DairyLocationView.FORM_MARGIN;
-			layout.horizontalSpacing = DairyLocationView.COLUMN_MARGIN;
+			layout.marginWidth = layout.marginHeight = FormUtil.FORM_MARGIN;
+			layout.horizontalSpacing = FormUtil.COLUMN_MARGIN;
 			this.setLayout(layout);
 
 			final Label addressLabel = UIControlsFactory.createLabel(this, "Address");
@@ -26,10 +27,10 @@ public class AddressPanel extends CompositePanel {
 			addressLabel.setLayoutData(gd);
 
 			final Text addressText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_ADDRESS);
+					ViewWidgetId.ADDRESS_TXT);
 			gd = new GridData();
 			gd.horizontalSpan = 3;
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 3;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 			addressText.setLayoutData(gd);
 
 			final Label sectionLabel = UIControlsFactory.createLabel(this, "Section/Homestead");
@@ -37,9 +38,9 @@ public class AddressPanel extends CompositePanel {
 			sectionLabel.setLayoutData(gd);
 
 			final Text sectionText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_SECTION);
+					ViewWidgetId.SECTION_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			sectionText.setLayoutData(gd);
 
 			final Label townLabel = UIControlsFactory.createLabel(this, "Town/Village");
@@ -47,22 +48,19 @@ public class AddressPanel extends CompositePanel {
 			townLabel.setLayoutData(gd);
 
 			final Text townText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_TOWN);
+					ViewWidgetId.VILLAGE_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			townText.setLayoutData(gd);
 
-			// #TODO: Should this UI component be removed or update the
-			// dairy.escore
-			// file?
 			final Label estateLabel = UIControlsFactory.createLabel(this, "Estate/Nearest Centre");
 			gd = new GridData();
 			estateLabel.setLayoutData(gd);
 
 			final Text estateText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_ESTATE);
+					ViewWidgetId.ESTATE_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			estateText.setLayoutData(gd);
 
 			final Label locationLabel = UIControlsFactory.createLabel(this, "Location");
@@ -70,9 +68,9 @@ public class AddressPanel extends CompositePanel {
 			locationLabel.setLayoutData(gd);
 
 			final Text locationText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_LOCATION);
+					ViewWidgetId.LOCATION_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			locationText.setLayoutData(gd);
 
 			final Label subLocationLabel = UIControlsFactory.createLabel(this, "Sub");
@@ -80,9 +78,9 @@ public class AddressPanel extends CompositePanel {
 			subLocationLabel.setLayoutData(gd);
 
 			final Text subLocationText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_SUB);
+					ViewWidgetId.SUBLOCATION_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			subLocationText.setLayoutData(gd);
 
 			final Label districtLabel = UIControlsFactory.createLabel(this, "District");
@@ -90,9 +88,9 @@ public class AddressPanel extends CompositePanel {
 			districtLabel.setLayoutData(gd);
 
 			final Text districtText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_DISTRICT);
+					ViewWidgetId.DISTRICT_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			districtText.setLayoutData(gd);
 
 			final Label divisionLabel = UIControlsFactory.createLabel(this, "Division");
@@ -100,9 +98,9 @@ public class AddressPanel extends CompositePanel {
 			divisionLabel.setLayoutData(gd);
 
 			final Text divisionText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_DIVISION);
+					ViewWidgetId.DIVISION_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			divisionText.setLayoutData(gd);
 
 			final Label postalCodeLabel = UIControlsFactory.createLabel(this, "Postal Code");
@@ -110,9 +108,9 @@ public class AddressPanel extends CompositePanel {
 			postalCodeLabel.setLayoutData(gd);
 
 			final Text postalCodeText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
-					DairyLocationController.RIDGET_ID_PL_POSTALCODE);
+					ViewWidgetId.POSTAL_CODE_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			postalCodeText.setLayoutData(gd);
 
 			final Label provinceLabel = UIControlsFactory.createLabel(this, "Province");
@@ -122,9 +120,9 @@ public class AddressPanel extends CompositePanel {
 //			final Text provinceText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 //					DairyLocationController.RIDGET_ID_PL_PROVINCE);
 			final CCombo provinceText = UIControlsFactory.createCCombo(this, 
-					DairyLocationController.RIDGET_ID_PL_PROVINCE);
+					ViewWidgetId.PROVINCE_TXT);
 			gd = new GridData();
-			gd.widthHint = DairyLocationView.WIDTH_UNIT * 2;
+			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
 			provinceText.setLayoutData(gd);
 		}
 	}

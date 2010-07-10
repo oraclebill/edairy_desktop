@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
-import com.agritrace.edairy.desktop.common.ui.views.DateRangeSearchWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class LiveStockFilterWidget {

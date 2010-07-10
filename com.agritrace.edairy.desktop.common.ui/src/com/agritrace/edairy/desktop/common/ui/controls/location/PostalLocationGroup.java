@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -11,6 +11,31 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 public class PostalLocationGroup extends Group {
+	
+	public static final String[] DISTRICTS = new String[] { "Baringo District (Kabarnet)", "Bomet District (Bomet)",
+			"Bondo District (Bondo)", "Bungoma District (Bungoma)", "Buret District (Litein)", "Busia (Busia)",
+			"Butere/Mumias District (Butere)", "Embu District (Embu)", "Garissa District (Garissa)",
+			"Gucha District (Ogembo)", "Homa Bay District (Homa Bay)", "Ijara District (Ijara)",
+			"Isiolo District (Isiolo)", "Kajiado District (Kajiado)", "Kakamega District (Kakamega)",
+			"Keiyo District (Iten/Tambach)", "Kericho District (Kericho)", "Kiambu District (Kiambu)",
+			"Kilifi District (Kilifi)", "Kirinyaga District (Kerugoya/Kutus)", "Kisii Central (Kisii)",
+			"Kisumu District (Kisumu)", "Kitui District (Kitui)", "Koibatek District (Eldama Ravine)",
+			"Kuria District (Kehancha)", "Kwale District (Kwale)", "Laikipia District (Nanyuki)",
+			"Lamu District (Lamu)", "Lugari District (Lugari)", "Machakos District (Machakos)",
+			"Makueni District (Makueni)", "Malindi District (Malindi)", "Mandera District (Mandera)",
+			"Maragua District (Maragua)", "Marakwet District (Kapsowar)", "Marsabit District (Marsabit)",
+			"Mbeere District (Mbeere)", "Meru Central District (Meru)", "Meru North District (Maua)",
+			"Meru South District (Chuka)", "Migori District (Migori)", "Mombasa District (Mombasa)",
+			"Mount Elgon District (Mount Elgon)", "Moyale District (Moyale)", "Murang'a District (Murang'a)",
+			"Mwingi District (Mwingi)", "Nairobi District (Nairobi)", "Nakuru District (Nakuru)", "Nandi (Kapsabet)",
+			"Narok District (Narok)", "Nyamira District (Nyamira)", "Nyandarua District (Ol Kalou)",
+			"Nyando District (Awasi)", "Nyeri District (Nyeri)", "Rachuonyo District (Oyugis)",
+			"Samburu District (Maralal)", "Siaya District (Siaya)", "Suba District (Mbita)",
+			"Taita-Taveta District (Wundanyi)", "Tana River District (Tana River)", "Teso District (Malaba)",
+			"Tharaka District (Tharaka)", "Thika District (Thika)", "Trans Mara District (Kilgoris)",
+			"Trans Nzoia District (Kitale)", "Turkana District (Lodwar)", "Uasin Gishu District (Eldoret)",
+			"Vihiga District (Vihiga)", "Wajir District (Wajir)", "West Pokot District (Kapenguria)" };
+
 	private Combo districtCombo;
 	private Combo divisionCombo;
 	private Combo provinceCombo;
@@ -90,30 +115,7 @@ public class PostalLocationGroup extends Group {
 		final Label label_7 = new Label(addressArea, SWT.NONE);
 		label_7.setText("District");
 		districtCombo = new Combo(addressArea, SWT.READ_ONLY);
-		districtCombo.setItems(new String[] { "Baringo District (Kabarnet)", "Bomet District (Bomet)",
-				"Bondo District (Bondo)", "Bungoma District (Bungoma)", "Buret District (Litein)", "Busia (Busia)",
-				"Butere/Mumias District (Butere)", "Embu District (Embu)", "Garissa District (Garissa)",
-				"Gucha District (Ogembo)", "Homa Bay District (Homa Bay)", "Ijara District (Ijara)",
-				"Isiolo District (Isiolo)", "Kajiado District (Kajiado)", "Kakamega District (Kakamega)",
-				"Keiyo District (Iten/Tambach)", "Kericho District (Kericho)", "Kiambu District (Kiambu)",
-				"Kilifi District (Kilifi)", "Kirinyaga District (Kerugoya/Kutus)", "Kisii Central (Kisii)",
-				"Kisumu District (Kisumu)", "Kitui District (Kitui)", "Koibatek District (Eldama Ravine)",
-				"Kuria District (Kehancha)", "Kwale District (Kwale)", "Laikipia District (Nanyuki)",
-				"Lamu District (Lamu)", "Lugari District (Lugari)", "Machakos District (Machakos)",
-				"Makueni District (Makueni)", "Malindi District (Malindi)", "Mandera District (Mandera)",
-				"Maragua District (Maragua)", "Marakwet District (Kapsowar)", "Marsabit District (Marsabit)",
-				"Mbeere District (Mbeere)", "Meru Central District (Meru)", "Meru North District (Maua)",
-				"Meru South District (Chuka)", "Migori District (Migori)", "Mombasa District (Mombasa)",
-				"Mount Elgon District (Mount Elgon)", "Moyale District (Moyale)", "Murang'a District (Murang'a)",
-				"Mwingi District (Mwingi)", "Nairobi District (Nairobi)", "Nakuru District (Nakuru)",
-				"Nandi (Kapsabet)", "Narok District (Narok)", "Nyamira District (Nyamira)",
-				"Nyandarua District (Ol Kalou)", "Nyando District (Awasi)", "Nyeri District (Nyeri)",
-				"Rachuonyo District (Oyugis)", "Samburu District (Maralal)", "Siaya District (Siaya)",
-				"Suba District (Mbita)", "Taita-Taveta District (Wundanyi)", "Tana River District (Tana River)",
-				"Teso District (Malaba)", "Tharaka District (Tharaka)", "Thika District (Thika)",
-				"Trans Mara District (Kilgoris)", "Trans Nzoia District (Kitale)", "Turkana District (Lodwar)",
-				"Uasin Gishu District (Eldoret)", "Vihiga District (Vihiga)", "Wajir District (Wajir)",
-				"West Pokot District (Kapenguria)" });
+		districtCombo.setItems(DISTRICTS);
 		districtCombo.select(1);
 		// districtCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 		// false, 1, 1));

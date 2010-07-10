@@ -18,10 +18,10 @@ import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.editingsupport.ColumnEditingSupport;
 import com.agritrace.edairy.desktop.common.ui.editingsupport.ContactTypeColumnEditingSupport;
 import com.agritrace.edairy.desktop.common.ui.ridgets.IEditableTableRidget;
-import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 
 public class CommunicationGroupController implements WidgetController<Contactable> {
 

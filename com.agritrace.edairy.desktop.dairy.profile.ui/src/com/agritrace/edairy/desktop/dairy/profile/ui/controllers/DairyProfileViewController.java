@@ -24,7 +24,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
-import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;

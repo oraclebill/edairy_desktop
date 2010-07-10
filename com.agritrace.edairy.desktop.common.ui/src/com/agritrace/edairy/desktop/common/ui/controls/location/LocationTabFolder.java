@@ -1,10 +1,12 @@
-package com.agritrace.edairy.desktop.dairy.locations.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 
 
 public class LocationTabFolder extends CompositePanel {

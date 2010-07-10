@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;

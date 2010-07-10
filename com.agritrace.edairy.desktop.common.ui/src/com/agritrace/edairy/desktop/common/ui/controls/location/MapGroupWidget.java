@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class MapGroupWidget {
 	public static final String LATITUDE_LABEL_TXT = "Latitude:";

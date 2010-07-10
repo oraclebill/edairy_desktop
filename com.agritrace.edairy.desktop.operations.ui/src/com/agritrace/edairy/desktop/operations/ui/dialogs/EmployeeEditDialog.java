@@ -17,12 +17,12 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.DirectionsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.MapGroupWidget;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialogController;
 
 /**

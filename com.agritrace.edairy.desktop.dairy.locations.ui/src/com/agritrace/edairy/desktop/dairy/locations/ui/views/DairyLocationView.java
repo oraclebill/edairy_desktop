@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
+import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 
 public class DairyLocationView extends SubModuleView {
@@ -54,13 +56,13 @@ public class DairyLocationView extends SubModuleView {
 
 	public final static String ID = "dairy.locations.editor";
 
-	final static int COLUMN_MARGIN = 20;
-
-	final static int FORM_MARGIN = 10;
-
-	final static int ROW_MARGIN = 10;
-
-	final static int WIDTH_UNIT = 60;
+//	final static int COLUMN_MARGIN = 20;
+//
+//	final static int FORM_MARGIN = 10;
+//
+//	final static int ROW_MARGIN = 10;
+//
+//	final static int WIDTH_UNIT = 60;
 
 	private Composite contentArea;
 
@@ -98,7 +100,7 @@ public class DairyLocationView extends SubModuleView {
 		final Text idText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE,
 				DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT;
+		gd.widthHint = FormUtil.WIDTH_UNIT;
 		gd.horizontalSpan = 2;
 		idText.setEditable(false);
 		idText.setLayoutData(gd);
@@ -108,7 +110,7 @@ public class DairyLocationView extends SubModuleView {
 		final Text nameText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE,
 				DairyLocationController.RIDGET_ID_NAME);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT * 3;
+		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
 		gd.grabExcessHorizontalSpace = true;
 		gd.horizontalAlignment = SWT.FILL;
@@ -119,7 +121,7 @@ public class DairyLocationView extends SubModuleView {
 		final Text descriptionText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE,
 				DairyLocationController.RIDGET_ID_DESCRIPTION);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT * 3;
+		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
 		gd.grabExcessHorizontalSpace = true;
 		gd.horizontalAlignment = SWT.FILL;
@@ -130,7 +132,7 @@ public class DairyLocationView extends SubModuleView {
 		final Text phoneText = UIControlsFactory.createText(detailGroup, SWT.BORDER | SWT.SINGLE,
 				DairyLocationController.RIDGET_ID_PHONE);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT * 3;
+		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.horizontalSpan = 2;
 		phoneText.setLayoutData(gd);
 
@@ -155,7 +157,7 @@ public class DairyLocationView extends SubModuleView {
 
 		final CCombo combo = UIControlsFactory.createCCombo(detailGroup, DairyLocationController.RIDGET_ID_ROUTE);
 		gd = new GridData();
-		gd.widthHint = WIDTH_UNIT * 3;
+		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
 		gd.grabExcessVerticalSpace = true;
 		gd.horizontalSpan = 2;

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.locations.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;

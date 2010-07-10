@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.controllers.location;
 
 import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
@@ -7,7 +7,8 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
+import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.ui.validators.DoubleNumberValidator;
 
 public class MapGroupController implements WidgetController<MapLocation> {

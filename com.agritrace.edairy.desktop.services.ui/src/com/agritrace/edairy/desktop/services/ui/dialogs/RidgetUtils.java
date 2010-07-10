@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.util;
+package com.agritrace.edairy.desktop.services.ui.dialogs;
 
 import java.util.HashMap;
 import java.util.Iterator;

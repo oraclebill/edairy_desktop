@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -10,7 +10,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
 public class AddressGroupWidget {
 

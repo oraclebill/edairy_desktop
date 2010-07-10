@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.util;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 public class ViewWidgetId {
 	public static final String ADDRESS_TXT = "Address";

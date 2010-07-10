@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.locations.ui.views;
+package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -9,14 +9,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
+import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 
 public class MapPanel extends CompositePanel {
 	public MapPanel(Composite parent, int style) {
 		super(parent, style);
 		final GridLayout layout = new GridLayout(3, false);
-		layout.marginWidth = layout.marginHeight = DairyLocationView.FORM_MARGIN;
-		layout.horizontalSpacing = DairyLocationView.COLUMN_MARGIN;
+		layout.marginWidth = layout.marginHeight = FormUtil.FORM_MARGIN;
+		layout.horizontalSpacing = FormUtil.COLUMN_MARGIN;
 		this.setLayout(layout);
 
 		final Label latitudeLabel = UIControlsFactory.createLabel(this, "Latitude");
@@ -24,9 +25,9 @@ public class MapPanel extends CompositePanel {
 		latitudeLabel.setLayoutData(gd);
 
 		final Text lattitudeText = UIControlsFactory.createTextDecimal(this,
-				DairyLocationController.RIDGET_ID_ML_LATITUDE);
+				ViewWidgetId.LATITUDE_TEXT);
 		gd = new GridData();
-		gd.widthHint = DairyLocationView.WIDTH_UNIT;
+		gd.widthHint = FormUtil.WIDTH_UNIT;
 		lattitudeText.setLayoutData(gd);
 
 		final Browser map = UIControlsFactory.createBrowser(this, SWT.BORDER);
@@ -43,9 +44,9 @@ public class MapPanel extends CompositePanel {
 		longitudeLabel.setLayoutData(gd);
 
 		final Text longitudeText = UIControlsFactory.createTextDecimal(this,
-				DairyLocationController.RIDGET_ID_ML_LONGITUDE);
+				ViewWidgetId.LONGTITUDE_TEXT);
 		gd = new GridData();
-		gd.widthHint = DairyLocationView.WIDTH_UNIT;
+		gd.widthHint = FormUtil.WIDTH_UNIT;
 		longitudeText.setLayoutData(gd);
 	}
 }

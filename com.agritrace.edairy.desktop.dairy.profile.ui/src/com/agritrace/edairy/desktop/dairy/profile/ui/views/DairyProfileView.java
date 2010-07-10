@@ -34,9 +34,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
-import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.swtdesigner.SWTResourceManager;
 

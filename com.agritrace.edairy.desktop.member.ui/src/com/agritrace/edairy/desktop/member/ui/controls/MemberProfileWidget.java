@@ -13,8 +13,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
-import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
