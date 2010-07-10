@@ -19,6 +19,7 @@ import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -132,7 +133,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	private final List<RegisteredAnimal> animalInput = new ArrayList<RegisteredAnimal>();
-	private IController controller;
+	private IRidgetContainer container;
 	private final IFarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;
 	private Object inputModel;
@@ -148,19 +149,19 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	private IActionRidget liveStockViewButton;
 
 	public MemberLiveStockWidgetController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		farmRepository = new FarmRepository();
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
 
-		filterController = new LiveStockFilterWidgetController(controller);
-		liveStockTable = controller.getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
+		filterController = new LiveStockFilterWidgetController(container);
+		liveStockTable = container.getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
 		// farm name
 		liveStockTable.setColumnFormatter(1, new ColumnFormatter() {
 
@@ -215,10 +216,10 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 				liveStockPropertyNames, liveStockColumnHeaders);
 		liveStockTable.addSelectionListener(this);
 
-		liveStockAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
+		liveStockAddButton = container.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
 		liveStockAddButton.addListener(new AddAction());
 
-		liveStockViewButton = controller.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
+		liveStockViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
 		liveStockViewButton.addListener(new ViewAction());
 		liveStockViewButton.setEnabled(false);
 		filterController.getSearch().addListener(new FilterAction());
@@ -226,8 +227,8 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -254,8 +255,8 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 	}
 
 	@Override

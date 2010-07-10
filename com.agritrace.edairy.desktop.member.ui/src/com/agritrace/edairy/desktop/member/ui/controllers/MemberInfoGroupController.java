@@ -9,6 +9,7 @@ import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -31,31 +32,31 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 	private IActionRidget appliedDateBtn;
 
 	private IComboRidget comboStatus;
-	private IController controller;
+	private IRidgetContainer container;
 	private ITextRidget effectiveDate;
 	private IActionRidget effectiveDateBtn;
 	private ITextRidget phoneRidget;
 	private Membership selectedMember;
 
 	public MemberInfoGroupController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		appliedDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_applicationDate);
+		appliedDate = container.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_applicationDate);
 
-		effectiveDate = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_effectiveDate);
-		comboStatus = controller.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
-		phoneRidget = controller.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
+		effectiveDate = container.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_effectiveDate);
+		comboStatus = container.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
+		phoneRidget = container.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
 
 		comboStatus.bindToModel(Observables.staticObservableList(MembershipStatus.VALUES), MembershipStatus.class,
 				null, new WritableValue());
 		comboStatus.updateFromModel();
 		comboStatus.addSelectionListener(this);
 
-		appliedDateBtn = controller.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_applicationDate_btn);
+		appliedDateBtn = container.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_applicationDate_btn);
 		appliedDateBtn.addListener(new IActionListener() {
 
 			@Override
@@ -77,7 +78,7 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 
 			}
 		});
-		effectiveDateBtn = controller.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_effectiveDate_btn);
+		effectiveDateBtn = container.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_effectiveDate_btn);
 		effectiveDateBtn.addListener(new IActionListener() {
 
 			@Override
@@ -112,8 +113,8 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -131,8 +132,8 @@ public class MemberInfoGroupController implements WidgetController, ISelectionLi
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 
 	}
 

@@ -6,8 +6,8 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
@@ -15,10 +15,10 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
-public class AddressGroupWidgetController implements WidgetController, ISelectionListener {
+public class AddressGroupWidgetController implements WidgetController<PostalLocation>, ISelectionListener {
 
 	private ITextRidget addressTxt;
-	private IController controller;
+	private IRidgetContainer container;
 
 	private ITextRidget districtTxt;
 	private ITextRidget divisionTxt;
@@ -31,27 +31,27 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	private ITextRidget subLocationTxt;
 	private ITextRidget villageTxt;
 
-	public AddressGroupWidgetController(IController controller) {
-		this.controller = controller;
+	public AddressGroupWidgetController(IRidgetContainer controller) {
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
-		addressTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.ADDRESS_TXT);
-		sectionTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.SECTION_TXT);
-		estateTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.ESTATE_TXT);
-		locationTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LOCATION_TXT);
-		subLocationTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.SUBLOCATION_TXT);
-		villageTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.VILLAGE_TXT);
-		divisionTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.DIVISION_TXT);
-		districtTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.DISTRICT_TXT);
+		addressTxt = container.getRidget(ITextRidget.class, ViewWidgetId.ADDRESS_TXT);
+		sectionTxt = container.getRidget(ITextRidget.class, ViewWidgetId.SECTION_TXT);
+		estateTxt = container.getRidget(ITextRidget.class, ViewWidgetId.ESTATE_TXT);
+		locationTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LOCATION_TXT);
+		subLocationTxt = container.getRidget(ITextRidget.class, ViewWidgetId.SUBLOCATION_TXT);
+		villageTxt = container.getRidget(ITextRidget.class, ViewWidgetId.VILLAGE_TXT);
+		divisionTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIVISION_TXT);
+		districtTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DISTRICT_TXT);
 		// provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
-		postalCodeTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.POSTAL_CODE_TXT);
-		provinceComo = controller.getRidget(IComboRidget.class, ViewWidgetId.PROVINCE_TXT);
+		postalCodeTxt = container.getRidget(ITextRidget.class, ViewWidgetId.POSTAL_CODE_TXT);
+		provinceComo = container.getRidget(IComboRidget.class, ViewWidgetId.PROVINCE_TXT);
 		provinceComo.bindToModel(Observables.staticObservableList(Arrays.asList(ViewWidgetId.PROVINCES_LIST)),
 				String.class, null, new WritableValue());
 		provinceComo.updateFromModel();
@@ -70,12 +70,12 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
-	public Object getInputModel() {
+	public PostalLocation getInputModel() {
 		return location;
 	}
 
@@ -89,15 +89,15 @@ public class AddressGroupWidgetController implements WidgetController, ISelectio
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 
 	}
 
 	@Override
-	public void setInputModel(Object model) {
+	public void setInputModel(PostalLocation model) {
 		location = (PostalLocation) model;
-		if (controller != null) {
+		if (container != null) {
 			updateBinding();
 		}
 

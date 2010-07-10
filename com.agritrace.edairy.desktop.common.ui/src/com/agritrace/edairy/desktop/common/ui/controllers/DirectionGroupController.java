@@ -1,55 +1,55 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 
-public class DirectionGroupController implements WidgetController {
+public class DirectionGroupController implements WidgetController<DescriptiveLocation> {
 
-	private IController controller;
+	private IRidgetContainer container;
 	private ITextRidget directionsTxt;
 
 	private ITextRidget landmarkTxt;
 	private DescriptiveLocation location;
 
-	public DirectionGroupController(IController controller) {
-		this.controller = controller;
+	public DirectionGroupController(IRidgetContainer controller) {
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
-		landmarkTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LANDMARK_TEXT);
-		directionsTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.DIRECTIONS_TEXT);
+		landmarkTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LANDMARK_TEXT);
+		directionsTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIRECTIONS_TEXT);
 
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
-	public Object getInputModel() {
+	public DescriptiveLocation getInputModel() {
 		return location;
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 	}
 
 	@Override
-	public void setInputModel(Object model) {
+	public void setInputModel(DescriptiveLocation model) {
 		this.location = (DescriptiveLocation) model;
-		if (controller != null) {
+		if (container != null) {
 			updateBinding();
 		}
 

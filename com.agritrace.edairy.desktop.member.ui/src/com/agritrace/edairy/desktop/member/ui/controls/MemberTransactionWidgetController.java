@@ -17,6 +17,7 @@ import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -34,7 +35,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidgetController implements WidgetController, DateRangeFilter {
 
-	private IController controller;
+	private IRidgetContainer container;
 
 	private DateRangeSearchController dateSearchController;
 	private Membership member;
@@ -46,22 +47,22 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	private ITableRidget transactionTable;
 
 	public MemberTransactionWidgetController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
-		transactionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
+		transactionTable = container.getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
 		if (transactionTable == null) {
 			return;
 		}
 		transactionTable.bindToModel(new WritableList(transactionRecords, AccountTransaction.class),
 				AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
+		dateSearchController = new DateRangeSearchController(container, ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
 				ViewWidgetId.TRANSACTION_FILTER_ENDDATE, ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON,
 				ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON, this);
 
@@ -145,8 +146,8 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -155,8 +156,8 @@ public class MemberTransactionWidgetController implements WidgetController, Date
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 	}
 
 	@Override

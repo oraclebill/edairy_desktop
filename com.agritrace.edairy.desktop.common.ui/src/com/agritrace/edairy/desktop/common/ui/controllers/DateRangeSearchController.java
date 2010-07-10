@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 import java.util.Date;
 
 import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -14,7 +15,7 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
 public class DateRangeSearchController {
 
-	private final IController controller;
+	private final IRidgetContainer container;
 
 	private final String endDateButtonId;
 
@@ -34,9 +35,9 @@ public class DateRangeSearchController {
 
 	private final String startDateTxtId;
 
-	public DateRangeSearchController(IController controller, String startDateTxtId, String endDateTxtId,
+	public DateRangeSearchController(IRidgetContainer controller2, String startDateTxtId, String endDateTxtId,
 			String startDateButtonId, String endDateButtonId, DateRangeFilter dateFilter) {
-		this.controller = controller;
+		this.container = controller2;
 		this.startDateTxtId = startDateTxtId;
 		this.endDateTxtId = endDateTxtId;
 		this.startDateButtonId = startDateButtonId;
@@ -46,19 +47,19 @@ public class DateRangeSearchController {
 	}
 
 	public void config() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
-		startDateText = controller.getRidget(ITextRidget.class, startDateTxtId);
+		startDateText = container.getRidget(ITextRidget.class, startDateTxtId);
 		if (null == startDateText) {
 			return;
 		}
-		endDateText = controller.getRidget(ITextRidget.class, endDateTxtId);
+		endDateText = container.getRidget(ITextRidget.class, endDateTxtId);
 		// default filterStartDate one month before the current date;
 		startDateText.setText(DateTimeUtils.getOneMonthBeforeCurrentDateString());
 		endDateText.setText(DateTimeUtils.getCurrentDateString());
 
-		startDateImageButton = controller.getRidget(ImageButtonRidget.class, startDateButtonId);
+		startDateImageButton = container.getRidget(ImageButtonRidget.class, startDateButtonId);
 		startDateImageButton.addListener(new IActionListener() {
 
 			@Override
@@ -83,7 +84,7 @@ public class DateRangeSearchController {
 
 		});
 
-		endDateImageButton = controller.getRidget(ImageButtonRidget.class, endDateButtonId);
+		endDateImageButton = container.getRidget(ImageButtonRidget.class, endDateButtonId);
 		endDateImageButton.addListener(new IActionListener() {
 
 			@Override

@@ -19,6 +19,7 @@ import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
@@ -84,7 +85,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	private ITableRidget collectionTable;
 
-	private IController controller;
+	private IRidgetContainer container;
 	private DateRangeSearchController dateSearchController;
 	private Membership membership;
 	private IToggleButtonRidget nprMissing;
@@ -93,7 +94,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	private IToggleButtonRidget suspended;
 
 	public MemberCollectionRecordsWidgetController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		configure();
 	}
 
@@ -109,11 +110,11 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
 
-		collectionTable = controller.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
+		collectionTable = container.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
 		if (null == collectionTable) {
 			return;
 		}
@@ -122,10 +123,10 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class),
 				CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
 
-		nprMissing = controller.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
-		rejected = controller.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_REJECTED);
-		suspended = controller.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_FLAG);
-		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.COLLECTION_FILTER_STARTDATE,
+		nprMissing = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
+		rejected = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_REJECTED);
+		suspended = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_FLAG);
+		dateSearchController = new DateRangeSearchController(container, ViewWidgetId.COLLECTION_FILTER_STARTDATE,
 				ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON,
 				ViewWidgetId.COLLECTION_FILTER_ENDBUTTON, this);
 		nprMissing.addListener(this);
@@ -145,8 +146,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -156,8 +157,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 		configure();
 
 	}

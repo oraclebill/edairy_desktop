@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
@@ -8,16 +8,16 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 
-public class LocationProfileWidgetController implements WidgetController {
+public class LocationProfileWidgetController implements WidgetController<Location> {
 
 	private final AddressGroupWidgetController addressGroup;
-	private final IController controller;
+	private final IRidgetContainer controller;
 
 	private final DirectionGroupController directionGroup;
 	private Location location;
 	private final MapGroupController mapGroup;
 
-	public LocationProfileWidgetController(IController controller) {
+	public LocationProfileWidgetController(IRidgetContainer controller) {
 		this.controller = controller;
 		addressGroup = new AddressGroupWidgetController(controller);
 		directionGroup = new DirectionGroupController(controller);
@@ -37,24 +37,24 @@ public class LocationProfileWidgetController implements WidgetController {
 	}
 
 	@Override
-	public SubModuleController getController() {
+	public IRidgetContainer getContainer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object getInputModel() {
+	public Location getInputModel() {
 		return location;
 	}
 
 	@Override
-	public void setController(IController controller) {
+	public void setController(IRidgetContainer container) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void setInputModel(Object model) {
+	public void setInputModel(Location model) {
 		this.location = (Location) model;
 		if (controller != null) {
 			updateBinding();

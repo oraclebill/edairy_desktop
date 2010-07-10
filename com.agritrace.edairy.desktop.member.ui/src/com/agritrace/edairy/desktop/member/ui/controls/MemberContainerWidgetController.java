@@ -19,6 +19,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
@@ -92,7 +93,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	private ITableRidget containerTable;
 
 	private IActionRidget containerViewButton;
-	private IController controller;
+	private IRidgetContainer container;
 	private IComboRidget farmFilterCombo;
 	private final List<String> farmFilterList = new ArrayList<String>();
 	private final FarmRepository farmRepository;
@@ -100,17 +101,17 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	private Object inputModel;
 
 	public MemberContainerWidgetController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		farmRepository = new FarmRepository();
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
-		containerTable = controller.getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
+		containerTable = container.getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 		containerTable.setColumnFormatter(1, new ColumnFormatter() {
 
 			@Override
@@ -123,7 +124,7 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 		});
 		containerTable.bindToModel(new WritableList(containerInput, Container.class), Container.class,
 				containerPropertyNames, containerColumnHeaders);
-		containerAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD);
+		containerAddButton = container.getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_ADD);
 		containerAddButton.addListener(new IActionListener() {
 
 			@Override
@@ -151,15 +152,15 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 			}
 		});
 
-		containerViewButton = controller.getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_Remove);
+		containerViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_Remove);
 		containerViewButton.setEnabled(false);
 		containerViewButton.addListener(new ViewContainerAction());
-		farmFilterCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_FarmCombo);
+		farmFilterCombo = container.getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_FarmCombo);
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -199,8 +200,8 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 	}
 
 	@Override

@@ -2,32 +2,32 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.util.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.ui.validators.DoubleNumberValidator;
 
-public class MapGroupController implements WidgetController {
+public class MapGroupController implements WidgetController<MapLocation> {
 
-	private IController controller;
+	private IRidgetContainer container;
 
 	private ITextRidget latituteTxt;
 
 	private ITextRidget longtituteTxt;
 	private MapLocation map;
 
-	public MapGroupController(IController controller) {
-		this.controller = controller;
+	public MapGroupController(IRidgetContainer controller) {
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		latituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LATITUDE_TEXT);
-		longtituteTxt = controller.getRidget(ITextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
+		latituteTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LATITUDE_TEXT);
+		longtituteTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
 		final DoubleNumberValidator validator = new DoubleNumberValidator();
 		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
@@ -35,25 +35,25 @@ public class MapGroupController implements WidgetController {
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
-	public Object getInputModel() {
+	public MapLocation getInputModel() {
 		return map;
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 
 	}
 
 	@Override
-	public void setInputModel(Object model) {
+	public void setInputModel(MapLocation model) {
 		map = (MapLocation) model;
-		if (controller != null) {
+		if (container != null) {
 			updateBinding();
 		}
 

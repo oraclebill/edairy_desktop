@@ -4,26 +4,23 @@ import java.util.Arrays;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.validation.MinLength;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.ui.controllers.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -47,7 +44,6 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 	@Override
 	public void configureRidgets(IRidgetContainer container) {
-		detailsContainer = container;
 		bindRidgets(container);
 		configureValidators(container);
 		configureActionListeners(container);
@@ -182,9 +178,13 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 		routeCombo = container.getRidget(IComboRidget.class, DairyLocationController.RIDGET_ID_ROUTE);
 		bindRouteCombo();
 
-		configureAddressTab(container, workingCopy);
-		configureDirectionsTab(container, workingCopy);
-		configureMapTab(container, workingCopy);
+//		configureAddressTab(container, workingCopy);
+//		configureDirectionsTab(container, workingCopy);
+//		configureMapTab(container, workingCopy);
+
+		LocationProfileWidgetController locationController = new LocationProfileWidgetController(container);
+		locationController.setInputModel(workingCopy.getLocation());
+		
 	}
 
 	private void bindRouteCombo() {

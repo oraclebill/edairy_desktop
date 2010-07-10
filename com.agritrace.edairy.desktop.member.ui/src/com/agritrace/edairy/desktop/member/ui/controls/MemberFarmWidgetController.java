@@ -7,6 +7,7 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
@@ -40,7 +41,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 
 	public static final String farmRemoveTitle = "Remove Farm";
 
-	private IController controller;
+	private IRidgetContainer container;
 	private IActionRidget farmAddButton;
 	private final String[] farmColumnHeaders = { "ID", "Name", "Location", "Number of Animals", "Number of Conatiners" };
 
@@ -58,19 +59,19 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 	public MemberFarmWidgetController(IController controller) {
 		memberRepository = new MemberRepository();
 		farmRepository = new FarmRepository();
-		this.controller = controller;
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
 
-		if (controller == null) {
+		if (container == null) {
 			return;
 
 		}
 		// farm table
-		farmTable = controller.getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
+		farmTable = container.getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
 		farmTable.setColumnFormatter(2, new ColumnFormatter() {
 
 			@Override
@@ -89,7 +90,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 			}
 		});
 		// add button
-		farmAddButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
+		farmAddButton = container.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
 		farmAddButton.addListener(new IActionListener() {
 
 			@Override
@@ -120,7 +121,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 			}
 		});
 		// viewButton
-		farmViewButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
+		farmViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
 		// by default disable view button
 		farmViewButton.setEnabled(false);
 		farmViewButton.addListener(new IActionListener() {
@@ -154,7 +155,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 
 			}
 		});
-		farmRemoveButton = controller.getRidget(IActionRidget.class, ViewWidgetId.FARM_Remove);
+		farmRemoveButton = container.getRidget(IActionRidget.class, ViewWidgetId.FARM_Remove);
 		farmRemoveButton.setEnabled(false);
 		farmRemoveButton.addListener(new IActionListener() {
 
@@ -170,8 +171,8 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -195,8 +196,8 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 	}
 
 	@Override

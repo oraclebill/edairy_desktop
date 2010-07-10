@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class LocationInfoGroup extends Group {
+public class PostalLocationGroup extends Group {
 	private Combo districtCombo;
 	private Combo divisionCombo;
 	private Combo provinceCombo;
@@ -28,7 +28,7 @@ public class LocationInfoGroup extends Group {
 	 * @param parent
 	 * @param style
 	 */
-	public LocationInfoGroup(Composite parent, int style) {
+	public PostalLocationGroup(Composite parent, int style) {
 		super(parent, style);
 		setText("Location");
 		setLayout(new FillLayout());

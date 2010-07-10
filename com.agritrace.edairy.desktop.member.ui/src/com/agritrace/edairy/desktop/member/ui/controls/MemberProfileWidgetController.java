@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -11,14 +12,14 @@ import com.agritrace.edairy.desktop.member.ui.controllers.MemberInfoGroupControl
 public class MemberProfileWidgetController implements WidgetController {
 
 	private final CommunicationGroupController communicationGroup;
-	private IController controller;
+	private IRidgetContainer container;
 
 	private final MemberInfoGroupController infoGroup;
 	private final LocationProfileWidgetController locationController;
 	private Membership member;
 
 	public MemberProfileWidgetController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		infoGroup = new MemberInfoGroupController(controller);
 		locationController = new LocationProfileWidgetController(controller);
 		communicationGroup = new CommunicationGroupController(controller);
@@ -27,7 +28,7 @@ public class MemberProfileWidgetController implements WidgetController {
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
 		// infoGroup.configure();
@@ -36,9 +37,9 @@ public class MemberProfileWidgetController implements WidgetController {
 	}
 
 	@Override
-	public IController getController() {
+	public IRidgetContainer getContainer() {
 		// TODO Auto-generated method stub
-		return controller;
+		return container;
 	}
 
 	@Override
@@ -47,15 +48,15 @@ public class MemberProfileWidgetController implements WidgetController {
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 
 	}
 
 	@Override
 	public void setInputModel(Object model) {
 		this.member = (Membership) model;
-		if (controller != null) {
+		if (container != null) {
 			updateBinding();
 		}
 

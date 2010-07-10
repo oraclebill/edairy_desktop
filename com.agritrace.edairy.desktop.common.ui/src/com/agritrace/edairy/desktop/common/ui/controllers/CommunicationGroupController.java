@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
@@ -28,7 +29,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 	private final String[] columnPropertys = new String[] { ModelPackage.Literals.CONTACT_METHOD__CM_TYPE.getName(),
 			ModelPackage.Literals.CONTACT_METHOD__CM_VALUE.getName() };
 
-	private IController controller;
+	private IRidgetContainer container;
 	private IActionRidget deleteAllBtn;
 	private IActionRidget deleteBtn;
 	private IEditableTableRidget editTable;
@@ -38,16 +39,16 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 	private Contactable inputModel;
 
 	public CommunicationGroupController(IController controller) {
-		this.controller = controller;
+		this.container = controller;
 		configure();
 	}
 
 	@Override
 	public void configure() {
-		if (controller == null) {
+		if (container == null) {
 			return;
 		}
-		editTable = controller.getRidget(IEditableTableRidget.class, CommunicationsGroupWidget.BIND_ID_TABLE);
+		editTable = container.getRidget(IEditableTableRidget.class, CommunicationsGroupWidget.BIND_ID_TABLE);
 		editTable.setColumnEditingSupport(0, new ContactTypeColumnEditingSupport());
 		editTable.setColumnEditingSupport(1, new ColumnEditingSupport());
 		editTable.setColumnWidths(new ColumnLayoutData[] { new ColumnWeightData(100), new ColumnWeightData(500), });
@@ -58,7 +59,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				updateButtonStatus();
 			}
 		});
-		addBtn = controller.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_ADD);
+		addBtn = container.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_ADD);
 		addBtn.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -72,7 +73,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				}
 			}
 		});
-		deleteBtn = controller.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETE);
+		deleteBtn = container.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETE);
 		deleteBtn.addListener(new IActionListener() {
 
 			@Override
@@ -87,7 +88,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				}
 			}
 		});
-		deleteAllBtn = controller.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETEALL);
+		deleteAllBtn = container.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETEALL);
 		deleteAllBtn.addListener(new IActionListener() {
 
 			@Override
@@ -107,8 +108,8 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 	}
 
 	@Override
-	public IController getController() {
-		return controller;
+	public IRidgetContainer getContainer() {
+		return container;
 	}
 
 	@Override
@@ -117,8 +118,8 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 	}
 
 	@Override
-	public void setController(IController controller) {
-		this.controller = controller;
+	public void setController(IRidgetContainer container) {
+		this.container = container;
 	}
 
 	@Override

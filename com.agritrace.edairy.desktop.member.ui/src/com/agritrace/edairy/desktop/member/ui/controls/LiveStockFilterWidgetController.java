@@ -7,6 +7,7 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -21,7 +22,7 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 
 	private IActionRidget clear;
 
-	private final IController controller;
+	private final IRidgetContainer container;
 	private final DateRangeSearchController dateSearchController;
 	private IComboRidget farmCombo;
 
@@ -39,8 +40,8 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 
 	private final List<String> statusList = new ArrayList<String>();
 
-	public LiveStockFilterWidgetController(IController controller) {
-		this.controller = controller;
+	public LiveStockFilterWidgetController(IRidgetContainer controller) {
+		this.container = controller;
 		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
 				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON,
 				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
@@ -50,11 +51,11 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 	@Override
 	public void configure() {
 
-		farmCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
-		speciesCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
-		statusCombo = controller.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
-		search = controller.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_searchButton);
-		clear = controller.getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
+		farmCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
+		speciesCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
+		statusCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
+		search = container.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_searchButton);
+		clear = container.getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
 	}
 
 	@Override
@@ -68,9 +69,9 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 	}
 
 	@Override
-	public IController getController() {
+	public IRidgetContainer getContainer() {
 		// TODO Auto-generated method stub
-		return controller;
+		return container;
 	}
 
 	public DateRangeSearchController getDateSearchController() {
@@ -112,7 +113,7 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 	}
 
 	@Override
-	public void setController(IController controller) {
+	public void setController(IRidgetContainer container) {
 		// TODO Auto-generated method stub
 
 	}

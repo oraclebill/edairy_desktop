@@ -1,16 +1,16 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import org.eclipse.riena.ui.ridgets.controller.IController;
+import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 
 public interface WidgetController<T extends Object> {
 
 	public void configure();
 
-	public IController getController();
+	public IRidgetContainer getContainer();
 
 	public T getInputModel();
 
-	public void setController(IController controller);
+	public void setController(IRidgetContainer container);
 
 	public void setInputModel(T model);
 
