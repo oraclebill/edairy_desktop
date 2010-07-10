@@ -7,7 +7,9 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -111,6 +113,20 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 		// Use default conditions to filter
 		refreshTableContents();
+		
+		getNavigationNode().addSimpleListener(new SimpleNavigationNodeAdapter() {
+			@Override
+			public void deactivated(INavigationNode<?> source) {
+				System.err.println("Simple Listener - deactivated:" + source);				
+			}
+			@Override
+			public void activated(INavigationNode<?> source) {
+				refreshTableContents();				
+			}
+		});
+		
+		addDefaultAction(getWindowRidget(), searchBtnRidget);
+
 
 	}
 
@@ -127,6 +143,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		return this.selectedEObject;
 	}
 
+	
 	public void refreshTableContents() {
 		tableContents.clear();
 		tableContents.addAll(getFilteredResult());

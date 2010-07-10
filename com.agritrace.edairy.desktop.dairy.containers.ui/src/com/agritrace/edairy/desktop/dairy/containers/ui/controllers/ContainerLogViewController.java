@@ -84,11 +84,12 @@ public class ContainerLogViewController extends SubModuleController {
 		@Override
 		public void itemApplied(Object changedItem) {
 			super.itemApplied(changedItem);
-			dairyRepository.save(changedItem);
 			List<DairyContainer> containers = dairyRepository.getLocalDairy().getDairyBins();
 			if (! containers.contains(changedItem)) {
 				containers.add((DairyContainer)changedItem);
 			}
+//			dairyRepository.save(changedItem);
+			dairyRepository.save(dairyRepository.getLocalDairy());
 		}
 
 		private void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {

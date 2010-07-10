@@ -63,14 +63,14 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		familyName = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_FAMILY_NAME);
 		familyName.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__FAMILY_NAME));
 		familyName.setMandatory(true);
-		familyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+//		familyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		familyName.updateFromModel();
 
 		// company legal name
 		givenName = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_GIVEN_NAME);
 		givenName.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__GIVEN_NAME));
 		givenName.setMandatory(true);
-		givenName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
+//		givenName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		givenName.updateFromModel();
 
 		// department
@@ -107,89 +107,10 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		final CommunicationGroupController commController = new CommunicationGroupController(this);
 		commController.setInputModel(editEmployee);
 		commController.updateBinding();
-
-//		// action ridget
-//		final ILinkRidget photoDialog = getRidget(ILinkRidget.class, "update-photo-action");
-//		photoDialog.addSelectionListener(new ISelectionListener() {
-//			@Override
-//			public void ridgetSelected(SelectionEvent event) {
-//				handleUpdatePhotoAction();
-//			}
-//		});
 	}
 
-	@Override
-	public Employee getWorkingCopy() {
-		return (Employee) getContext("editObject");
-	}
-
-	private void handleUpdatePhotoAction() {
-		final FileDialog fDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM | SWT.SHEET);
-		final String fName = fDialog.open();
-		if (fName == null) {
-			System.err.println("Null file nam");
-			return;
-		}
-		try {
-			System.err.println("Opening file " + fName);
-			FileInputStream fStream = new FileInputStream(fName);
-			ImageData imgData = new ImageData(fStream);
-
-			final ILabelRidget labelRidget = getRidget(ILabelRidget.class, "contact-photo-label");
-			Object control = labelRidget.getUIControl();
-
-			if (control instanceof Label) {
-				Label label = (Label) control;
-				int displayWidth = label.getSize().x, displayHeight = label.getSize().y;
-
-				float imgAspect = (float) imgData.width / (float) imgData.height;
-				float displayAspect = (float) displayWidth / (float) displayHeight;
-				float scale;
-				if (imgAspect > displayAspect) {
-					// scale width
-					scale = (float) displayWidth / (float) imgData.width;
-				} else {
-					// scale height
-					scale = (float) displayHeight / (float) imgData.height;
-				}
-				ImageData scaledImage = imgData.scaledTo((int) Math.floor(scale * imgData.width),
-						(int) Math.floor(scale * imgData.height));
-
-				final Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), scaledImage);
-				label.setText("");
-				label.setImage(photo);
-				label.redraw();
-				System.err.println("redrew Control - " + control);
-
-			}
-		} catch (Exception ioe) {
-			System.err.println(ioe);
-			ioe.printStackTrace();
-			;
-			;
-		}
-		// try {
-		// photoLabel.setText("");
-		// photoLabel.setIcon(photo);
-		// photoLabel.getParent().pack();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-	}
-	//
-	// @Override
-	// protected EClass getEClass() {
-	// return DairyPackage.Literals.EMPLOYEE;
-	// }
-
-	// @Override
-	// protected void saveNew() throws AlreadyExistsException {
-	// // prevent saving in dialog
-	// }
-	//
-	// @Override
-	// protected void saveUpdated() throws NonExistingEntityException {
-	// // prevent saving in dialog
-	// }
-
+//	@Override
+//	public Employee getWorkingCopy() {
+//		return (Employee) getContext("editObject");
+//	}
 }

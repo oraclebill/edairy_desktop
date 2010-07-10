@@ -1,6 +1,12 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.riena.core.marker.IMarker;
+import org.eclipse.riena.ui.core.marker.ErrorMarker;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
@@ -37,18 +43,36 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		this.selected = selected;
 	}
 
+	private static class MandatoryErrorMarker extends ErrorMarker {
+		
+	}
+	
 	private boolean validateInternal() {
 		boolean retVal = validate(); // user validation first...
 		if (!retVal) {
 			return false;
 		}
 		for (final IRidget test : getRidgets()) {
-			IMarkableRidget markable;
 			if (test instanceof IMarkableRidget) {
-				markable = (IMarkableRidget) test;
+				final IMarkableRidget markable = (IMarkableRidget) test;
 				if (markable.isMandatory() && !markable.isDisableMandatoryMarker()) {
+					final IMarker errorMarker = new MandatoryErrorMarker();
+					markable.addMarker(errorMarker); 
+					markable.addPropertyChangeListener("text", new PropertyChangeListener() {
+						@Override
+						public void propertyChange(PropertyChangeEvent evt) {
+							markable.removeMarker(errorMarker);
+							markable.removePropertyChangeListener(this);
+						}
+					});
 					System.err.println(">>>>>>>> mandatory widget " + markable);
 					retVal = false;
+				}
+				else {
+					Collection<? extends IMarker> markers = markable.getMarkersOfType(MandatoryErrorMarker.class);
+					for (IMarker marker : markers) {
+						markable.removeMarker(marker);
+					}
 				}
 				if (markable.isErrorMarked()) {
 					System.err.println(">>>>>>>> error widget " + markable);

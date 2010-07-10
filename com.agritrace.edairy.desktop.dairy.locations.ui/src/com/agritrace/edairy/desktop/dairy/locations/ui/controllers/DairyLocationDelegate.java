@@ -1,15 +1,11 @@
 package com.agritrace.edairy.desktop.dairy.locations.ui.controllers;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.validation.IValidator;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
@@ -21,17 +17,11 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.MinLength;
 
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.MapLocation;
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -83,7 +73,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 	@Override
 	public boolean isChanged(Object source, Object target) {
-		return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
+		return !new EcoreUtil.EqualityHelper().equals((EObject) source, (EObject) target);
 	}
 
 	@Override
@@ -105,12 +95,18 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	public void itemApplied(Object changedItem) {
 		if (changedItem instanceof DairyLocation) {
 			final DairyLocation changedDairyLocation = (DairyLocation) changedItem;
-			if (changedDairyLocation.getId() == 0) {
-				locationRepository.addBranchLocation(changedDairyLocation);
-			} else {
-				// perform update action to SQL
-				locationRepository.updateBranchLocation(changedDairyLocation);
+			if (!locationRepository.getLocalDairyLocations().contains(changedDairyLocation)) {
+				locationRepository.getLocalDairyLocations().add(changedDairyLocation);
 			}
+			locationRepository.updateDairy();
+//			if (changedDairyLocation.getId() == 0) {
+//				locationRepository.addBranchLocation(changedDairyLocation);
+//			} else {
+//				// perform update action to SQL
+//				locationRepository.updateBranchLocation(changedDairyLocation);
+//			}
+		} else {
+			System.err.println("What Wha Wah?");
 		}
 		super.itemApplied(changedItem);
 	}
@@ -267,7 +263,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 			textName.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
 			textName.addValidationMessage("Location name must be 5 characters or more.", validator);
 		}
-		
+
 		if (textAddress.getValidationRules().size() <= 0) {
 			final IValidator addressValidator = new MinLength(5);
 			textAddress.addValidationRule(addressValidator, ValidationTime.ON_UPDATE_TO_MODEL);

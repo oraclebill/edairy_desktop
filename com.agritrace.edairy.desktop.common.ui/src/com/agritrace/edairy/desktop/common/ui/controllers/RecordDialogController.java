@@ -5,7 +5,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.RienaStatus;
-import org.eclipse.riena.internal.navigation.ui.filter.RidgetMatcher;
 import org.eclipse.riena.ui.ridgets.IWindowRidget;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
@@ -49,39 +48,17 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		configureButtonsPanel();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T getWorkingCopy() {
 		return (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
 	}
-
-	//
-	// protected void setEClass(EClass eClass) {
-	// this.eClass = eClass;
-	// }
-	//
-	// protected EClass getEClass() {
-	// return this.eClass;
-	// }
 
 	private void configureMappedRidgets() {
 		if (mapper != null) {
 			mapper.configureRidgets();
 			mapper.updateAllRidgetsFromModel();
 		}
-	}
-
-	// /**
-	// * Gets the selected object in table list. If user doesn't select any row,
-	// * this object will be null
-	// *
-	// * @return
-	// */
-	// public T getSelectedObject() {
-	// return this.selectedObject;
-	// }
-
-	private final BindingHelper<T> getMapper() {
-		return mapper;
 	}
 
 	private final BindingHelper<T> getOrCreateMapper() {
@@ -97,7 +74,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 * 
 	 */
 	protected void configureUserRidgets() {
-
+		
 	}
 
 	protected int getActionType() {
@@ -119,44 +96,4 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			getWindowRidget().dispose();
 		}
 	}
-
-	// /**
-	// * test support code copied from the submoduleviewcontroller..
-	// */
-	// @Override
-	// @SuppressWarnings("unchecked")
-	// public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
-	// R ridget = (R) getRidget(id);
-	//
-	// if (ridget != null) {
-	// return ridget;
-	// }
-	// if (RienaStatus.isTest()) {
-	// try {
-	// if (ridgetClazz.isInterface() ||
-	// Modifier.isAbstract(ridgetClazz.getModifiers())) {
-	// final Class<R> mappedRidgetClazz = (Class<R>)
-	// ClassRidgetMapper.getInstance().getRidgetClass(
-	// ridgetClazz);
-	// if (mappedRidgetClazz != null) {
-	// ridget = mappedRidgetClazz.newInstance();
-	// }
-	// Assert.isNotNull(
-	// ridget,
-	//							"Could not find a corresponding implementation for " + ridgetClazz.getName() + " in " + ClassRidgetMapper.class.getName()); //$NON-NLS-1$ //$NON-NLS-2$
-	// } else {
-	// ridget = ridgetClazz.newInstance();
-	// }
-	// } catch (final InstantiationException e) {
-	// throw new RuntimeException(e);
-	// } catch (final IllegalAccessException e) {
-	// throw new RuntimeException(e);
-	// }
-	//
-	// addRidget(id, ridget);
-	// }
-	//
-	// return ridget;
-	// }
-
 }

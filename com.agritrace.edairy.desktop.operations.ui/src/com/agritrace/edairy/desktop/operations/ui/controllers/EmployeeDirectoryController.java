@@ -3,6 +3,12 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.riena.core.marker.IMarker;
+import org.eclipse.riena.navigation.IAction;
+import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.INavigationNode.State;
+import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
+import org.eclipse.riena.ui.filter.IUIFilter;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
@@ -57,6 +63,16 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		departmentSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
 		departmentSearchCombo.updateFromModel();
 		departmentSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
+		
+		
+		getNavigationNode().addAction(new IAction() {
+			
+			@Override
+			public void run() {
+				System.err.println("Action run.");
+				
+			}
+		});
 	}
 
 	/**

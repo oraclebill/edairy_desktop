@@ -17,7 +17,7 @@ public class MatchUtil {
 		if ((userValue == null) || (userValue.trim().length() == 0)) {
 			return true;
 		}
-		if (entityValue.contains(userValue)) {
+		if (entityValue.toLowerCase().contains(userValue.trim().toLowerCase())) {
 			return true;
 		}
 		return false;
@@ -34,7 +34,7 @@ public class MatchUtil {
 		if ((userValue == null) || (userValue.trim().length() == 0)) {
 			return true;
 		}
-		if (entityValue.equals(userValue)) {
+		if (entityValue.toLowerCase().equals(userValue.toLowerCase())) {
 			return true;
 		}
 		return false;
