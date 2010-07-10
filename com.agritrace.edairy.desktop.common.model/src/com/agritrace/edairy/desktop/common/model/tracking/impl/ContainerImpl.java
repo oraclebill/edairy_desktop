@@ -26,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getContainerId <em>Container Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getTrackingNumber <em>Tracking Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getType <em>Type</em>}</li>
@@ -55,6 +56,26 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @ordered
 	 */
 	protected Long containerId = CONTAINER_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTrackingNumber() <em>Tracking Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTrackingNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TRACKING_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTrackingNumber() <em>Tracking Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTrackingNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String trackingNumber = TRACKING_NUMBER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
@@ -171,6 +192,27 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTrackingNumber() {
+		return trackingNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTrackingNumber(String newTrackingNumber) {
+		String oldTrackingNumber = trackingNumber;
+		trackingNumber = newTrackingNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__TRACKING_NUMBER, oldTrackingNumber, trackingNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Farm getOwner() {
 		if (owner != null && owner.eIsProxy()) {
 			InternalEObject oldOwner = (InternalEObject)owner;
@@ -277,6 +319,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return getContainerId();
+			case TrackingPackage.CONTAINER__TRACKING_NUMBER:
+				return getTrackingNumber();
 			case TrackingPackage.CONTAINER__OWNER:
 				if (resolve) return getOwner();
 				return basicGetOwner();
@@ -300,6 +344,9 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId((Long)newValue);
+				return;
+			case TrackingPackage.CONTAINER__TRACKING_NUMBER:
+				setTrackingNumber((String)newValue);
 				return;
 			case TrackingPackage.CONTAINER__OWNER:
 				setOwner((Farm)newValue);
@@ -328,6 +375,9 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId(CONTAINER_ID_EDEFAULT);
 				return;
+			case TrackingPackage.CONTAINER__TRACKING_NUMBER:
+				setTrackingNumber(TRACKING_NUMBER_EDEFAULT);
+				return;
 			case TrackingPackage.CONTAINER__OWNER:
 				setOwner((Farm)null);
 				return;
@@ -354,6 +404,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		switch (featureID) {
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return CONTAINER_ID_EDEFAULT == null ? containerId != null : !CONTAINER_ID_EDEFAULT.equals(containerId);
+			case TrackingPackage.CONTAINER__TRACKING_NUMBER:
+				return TRACKING_NUMBER_EDEFAULT == null ? trackingNumber != null : !TRACKING_NUMBER_EDEFAULT.equals(trackingNumber);
 			case TrackingPackage.CONTAINER__OWNER:
 				return owner != null;
 			case TrackingPackage.CONTAINER__CAPACITY:
@@ -378,6 +430,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (containerId: ");
 		result.append(containerId);
+		result.append(", trackingNumber: ");
+		result.append(trackingNumber);
 		result.append(", capacity: ");
 		result.append(capacity);
 		result.append(", type: ");

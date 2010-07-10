@@ -219,4 +219,21 @@ public class EMFUtil {
 		return count;
 	}
 
+	public static boolean compareFeatures(EObject src, EObject tgt, EStructuralFeature[] featuresToCompare) {
+		boolean same = true;
+		for (EStructuralFeature feature : featuresToCompare) {
+			if (src == null && tgt == null) {
+				return true;
+			} else if (src == null || tgt == null) {
+				return false;
+			}
+			
+			if (src.eGet(feature) != tgt.eGet(feature)) {
+				same = false;
+				break;
+			}
+		}
+		return same;
+	}
+
 }

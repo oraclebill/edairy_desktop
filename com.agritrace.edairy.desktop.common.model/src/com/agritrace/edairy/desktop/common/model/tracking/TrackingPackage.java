@@ -146,13 +146,22 @@ public interface TrackingPackage extends EPackage {
 	int CONTAINER__CONTAINER_ID = 0;
 
 	/**
+	 * The feature id for the '<em><b>Tracking Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__TRACKING_NUMBER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__OWNER = 1;
+	int CONTAINER__OWNER = 2;
 
 	/**
 	 * The feature id for the '<em><b>Capacity</b></em>' attribute.
@@ -161,7 +170,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__CAPACITY = 2;
+	int CONTAINER__CAPACITY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -170,7 +179,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__TYPE = 3;
+	int CONTAINER__TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Measure Type</b></em>' attribute.
@@ -179,7 +188,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__MEASURE_TYPE = 4;
+	int CONTAINER__MEASURE_TYPE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Container</em>' class.
@@ -188,7 +197,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_FEATURE_COUNT = 5;
+	int CONTAINER_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl <em>Registered Animal</em>}' class.
@@ -790,6 +799,17 @@ public interface TrackingPackage extends EPackage {
 	EAttribute getContainer_ContainerId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getTrackingNumber <em>Tracking Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tracking Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Container#getTrackingNumber()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EAttribute getContainer_TrackingNumber();
+
+	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1354,6 +1374,14 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTAINER__CONTAINER_ID = eINSTANCE.getContainer_ContainerId();
+
+		/**
+		 * The meta object literal for the '<em><b>Tracking Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTAINER__TRACKING_NUMBER = eINSTANCE.getContainer_TrackingNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.

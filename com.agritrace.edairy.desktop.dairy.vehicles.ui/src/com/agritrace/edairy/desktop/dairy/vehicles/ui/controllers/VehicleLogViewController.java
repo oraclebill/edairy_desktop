@@ -2,10 +2,12 @@ package com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers;
 
 import java.util.List;
 
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.StringToNumberConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
@@ -24,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -39,6 +42,29 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
  * 
  */
 public class VehicleLogViewController extends SubModuleController {
+	
+	private static EStructuralFeature[] featuresToCompare = new EStructuralFeature[] {
+		DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER,
+		DairyPackage.Literals.VEHICLE__DRIVER,
+		DairyPackage.Literals.VEHICLE__TYPE,
+		DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER,
+		DairyPackage.Literals.VEHICLE__CHASSIS_NUMBER,
+		DairyPackage.Literals.VEHICLE__ENGINE_NUMBER,
+		DairyPackage.Literals.VEHICLE__MAKE,
+		DairyPackage.Literals.VEHICLE__MODEL,
+		DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR,
+	};
+
+	private static EStructuralFeature[] assetFeatures = new EStructuralFeature[] {
+		DairyPackage.Literals.ASSET__DAMAGE_DATE,
+		DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION,
+		DairyPackage.Literals.ASSET__DATE_ACQUIRED,
+		DairyPackage.Literals.ASSET__DATE_DISPOSED,
+		DairyPackage.Literals.ASSET__DISPOSAL_REASON,
+		DairyPackage.Literals.ASSET__DISPOSAL_WITNESS,
+		DairyPackage.Literals.ASSET__TAG_TYPE,
+		DairyPackage.Literals.ASSET__TAG_VALUE,
+	};
 
 	/**
 	 * Setup the ridgets for editing a person (text ridgets for name, single
@@ -46,12 +72,9 @@ public class VehicleLogViewController extends SubModuleController {
 	 */
 	private final class VehicleLogMasterDetailDelegate extends AbstractMasterDetailsDelegate {
 
-		private final Vehicle workingCopy = createWorkingCopy();
+		AssetInfoRidget assetInfo;
 
-		// @Override
-		// public void itemCreated(Object newItem) {
-		// vehicleRepository.saveNew((Vehicle)newItem);
-		// }
+		private final Vehicle workingCopy = createWorkingCopy();
 
 		@Override
 		public void configureRidgets(IRidgetContainer container) {
@@ -81,66 +104,22 @@ public class VehicleLogViewController extends SubModuleController {
 		}
 
 		@Override
-		public boolean isChanged(Object source, Object target) {			
-			return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
+		public boolean isChanged(Object source, Object target) {
+			boolean same = true;
+			EObject src = (EObject)source, tgt = (EObject)target;
+			same = EMFUtil.compareFeatures(src, tgt, featuresToCompare);
+			EStructuralFeature assetFeature = DairyPackage.Literals.VEHICLE__ASSET_INFO;
+			same = same && EMFUtil.compareFeatures(
+					(EObject)src.eGet(assetFeature), (EObject)tgt.eGet(assetFeature), assetFeatures);
+			return !same;
 		}
-
+		
 		@Override
 		public void itemApplied(Object changedItem) {
 			vehicleRepository.save(changedItem);
 		}
 
-
-		protected void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
-			// Asset Info
-			// Date Acquired
-			final IDateTimeRidget dateAcquiredText = container.getRidget(IDateTimeRidget.class,
-					VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_ACQUIRED);
-			dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			// dateAcquiredText.setDirectWriting(true);
-			dateAcquiredText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName());
-			dateAcquiredText.updateFromModel();
-
-			// Date Damaged
-			final IDateTimeRidget damangeDateText = container.getRidget(IDateTimeRidget.class,
-					VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DAMAGE);
-			damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			// damangeDateText.setDirectWriting(true);
-			damangeDateText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName());
-			damangeDateText.updateFromModel();
-
-			// Damage Description
-			final ITextRidget damageDesText = container.getRidget(ITextRidget.class,
-					VehicleLogDetailBindConstants.BIND_ID_ASSET_DESC_DAMAGE);
-			damageDesText.setDirectWriting(true);
-			damageDesText.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION.getName());
-			damageDesText.updateFromModel();
-
-			// Disposal Date
-			final IDateTimeRidget disposalDate = container.getRidget(IDateTimeRidget.class,
-					VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DISPOSAL);
-			// disposalDate.setDirectWriting(true);
-			disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			disposalDate.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName());
-			disposalDate.updateFromModel();
-
-			// Disposal Reason
-			final ITextRidget disposalReason = container.getRidget(ITextRidget.class,
-					VehicleLogDetailBindConstants.BIND_ID_ASSET_REASON_DISPOSAL);
-			disposalReason.setDirectWriting(true);
-			disposalReason.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DISPOSAL_REASON.getName());
-			disposalReason.updateFromModel();
-
-			// Disposal Witness
-			final ITextRidget disposalWitness = container.getRidget(ITextRidget.class,
-					VehicleLogDetailBindConstants.BIND_ID_ASSET_WITNESS_DISPOSAL);
-			disposalWitness.setDirectWriting(true);
-			disposalWitness.bindToModel(assetInfo, DairyPackage.Literals.ASSET__DISPOSAL_WITNESS.getName());
-			disposalWitness.updateFromModel();
-
-		}
-
-		protected void bindVehicleInfo(IRidgetContainer container) {
+		private void bindVehicleInfo(IRidgetContainer container) {
 
 			// Log Book Number
 			final ITextRidget logNumber = container.getRidget(ITextRidget.class,
@@ -246,6 +225,16 @@ public class VehicleLogViewController extends SubModuleController {
 			expDateText.bindToModel(workingCopy, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE.getName());
 			expDateText.updateFromModel();
 		}
+		
+		private void bindAssetInfo(IRidgetContainer container, Asset assetInfo2) {
+			assetInfo = container.getRidget(AssetInfoRidget.class, "asset-info");
+//			assetInfo.setModel(workingCopy.getAssetInfo());
+			assetInfo.configureRidgets();
+			assetInfo.bindToModel(PojoObservables.observeValue(workingCopy, "assetInfo"));
+			assetInfo.updateFromModel();
+		}
+
+
 	}
 
 	public static final String ID = VehicleLogViewController.class.getName();

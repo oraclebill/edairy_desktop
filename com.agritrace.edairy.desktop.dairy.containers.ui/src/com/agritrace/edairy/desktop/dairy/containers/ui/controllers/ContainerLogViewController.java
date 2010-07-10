@@ -3,8 +3,10 @@ package com.agritrace.edairy.desktop.dairy.containers.ui.controllers;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -23,10 +25,9 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoRidget;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.containers.ui.controls.ContainerLogDetailBindConstants;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -78,107 +79,62 @@ public class ContainerLogViewController extends SubModuleController {
 
 		@Override
 		public boolean isChanged(Object source, Object target) {
-			return !new EcoreUtil.EqualityHelper().equals((EObject)source, (EObject)target);
+			return !new EcoreUtil.EqualityHelper().equals((EObject) source, (EObject) target);
 		}
 
 		@Override
 		public void itemApplied(Object changedItem) {
 			super.itemApplied(changedItem);
 			List<DairyContainer> containers = dairyRepository.getLocalDairy().getDairyBins();
-			if (! containers.contains(changedItem)) {
-				containers.add((DairyContainer)changedItem);
+			if (!containers.contains(changedItem)) {
+				containers.add((DairyContainer) changedItem);
 			}
-//			dairyRepository.save(changedItem);
+			// dairyRepository.save(changedItem);
 			dairyRepository.save(dairyRepository.getLocalDairy());
 		}
 
 		private void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
-			// Asset Info
-			// Date Acquired
-			final ITextRidget dateAcquiredText = container.getRidget(ITextRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_DATE_ACQUIRED);
-			dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			dateAcquiredText.setDirectWriting(true);
-			dateAcquiredText.bindToModel(EMFObservables.observeValue(assetInfo,
-					DairyPackage.Literals.ASSET__DATE_ACQUIRED));
-			dateAcquiredText.updateFromModel();
-
-			// Date Damaged
-			final ITextRidget damangeDateText = container.getRidget(ITextRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_DATE_DAMAGE);
-			damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			damangeDateText.setDirectWriting(true);
-			damangeDateText.bindToModel(EMFObservables
-					.observeValue(assetInfo, DairyPackage.Literals.ASSET__DAMAGE_DATE));
-			damangeDateText.updateFromModel();
-
-			// Damage Description
-			final ITextRidget damageDesText = container.getRidget(ITextRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_DESC_DAMAGE);
-			damageDesText.setDirectWriting(true);
-			damageDesText.bindToModel(EMFObservables.observeValue(assetInfo,
-					DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION));
-			damageDesText.updateFromModel();
-
-			// Disposal Date
-			final ITextRidget disposalDate = container.getRidget(ITextRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_DATE_DISPOSAL);
-			disposalDate.setDirectWriting(true);
-			disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			disposalDate
-					.bindToModel(EMFObservables.observeValue(assetInfo, DairyPackage.Literals.ASSET__DATE_DISPOSED));
-			disposalDate.updateFromModel();
-
-			// Disposal Reason
-			final ITextRidget disposalReason = container.getRidget(ITextRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_REASON_DISPOSAL);
-			disposalReason.setDirectWriting(true);
-			disposalReason.bindToModel(EMFObservables.observeValue(assetInfo,
-					DairyPackage.Literals.ASSET__DISPOSAL_REASON));
-			disposalReason.updateFromModel();
-
-			// Disposal Witness
-			final ITextRidget disposalWitness = container.getRidget(ITextRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_WITNESS_DISPOSAL);
-			disposalWitness.setDirectWriting(true);
-			disposalWitness.bindToModel(EMFObservables.observeValue(assetInfo,
-					DairyPackage.Literals.ASSET__DISPOSAL_WITNESS));
-			disposalWitness.updateFromModel();
-
+			final AssetInfoRidget assetInfoRidget = container.getRidget(AssetInfoRidget.class,
+					ContainerLogDetailBindConstants.BIND_ID_ASSET_INFO);
+			assetInfoRidget.bindToModel(PojoObservables.observeValue(getWorkingCopy(), "assetInfo"));
 		}
 
 		private void bindContainerInfo(IRidgetContainer container) {
 
-			// Log Book Number
 			final ITextRidget id = container.getRidget(ITextRidget.class,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
-			id.setDirectWriting(true);
-			id.bindToModel(EMFObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__CONTAINER_ID));
+			id.setFocusable(false);
+//			id.setEnabled(false);
+			id.setOutputOnly(true);
+			id.bindToModel(PojoObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__CONTAINER_ID.getName()));
 			id.updateFromModel();
 
-			// Driver Name Name
+			final ITextRidget trackingNumber = container.getRidget(ITextRidget.class,
+					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
+			trackingNumber.setDirectWriting(true);
+			trackingNumber.bindToModel(EMFObservables.observeValue(workingCopy,
+					TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER));
+			trackingNumber.updateFromModel();
+
 			final IComboRidget type = container.getRidget(IComboRidget.class,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
 			type.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
 					EMFObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__TYPE));
 			type.updateFromModel();
 
-			// Insurance Info
-			// Insurance Number
 			final IDecimalTextRidget capacity = container.getRidget(IDecimalTextRidget.class,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
 			capacity.setDirectWriting(true);
-			// capacity.bindToModel(EMFObservables.observeValue(workingCopy,
-			// TrackingPackage.Literals.CONTAINER__CAPACITY));
+			capacity.setMandatory(true);
 			capacity.bindToModel(workingCopy, TrackingPackage.Literals.CONTAINER__CAPACITY.getName());
 			capacity.updateFromModel();
 
-			// Expiration Date
 			final IComboRidget unitOfMeasure = container.getRidget(IComboRidget.class,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
 			unitOfMeasure.bindToModel(Observables.staticObservableList(UnitOfMeasure.VALUES), UnitOfMeasure.class,
 					null, EMFObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__MEASURE_TYPE));
 			unitOfMeasure.updateFromModel();
+
 		}
 	}
 

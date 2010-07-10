@@ -23,10 +23,11 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 		addRidgetFeatureMap(ViewConstants.ID_TXT_ROUTE_DESCRIPTION, DairyPackage.Literals.ROUTE__DESCRIPTION);
 
 		final IListRidget stopsList = getRidget(IListRidget.class, ViewConstants.ID_LST_ROUTE_STOPS);
-		stopsList.setOutputOnly(true);
 		stopsList.bindToModel(EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.ROUTE__STOPS),
 				DairyLocation.class, "name");
-		System.err.println("STOPS: " + this.getWorkingCopy().getStops());
 		stopsList.updateFromModel();
+		stopsList.setOutputOnly(true);
+		stopsList.setFocusable(false);
+		stopsList.setEnabled(false);
 	}	
 }

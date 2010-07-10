@@ -1,9 +1,11 @@
 package com.agritrace.edairy.desktop.dairy.vehicles.ui.controls;
 
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -13,10 +15,14 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
+
+import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoComposite;
 
 public class VehicleLogDetailComposite extends Composite {
 
@@ -39,89 +45,46 @@ public class VehicleLogDetailComposite extends Composite {
 
 		final CTabItem assetInfoTab = new CTabItem(tabFolder, SWT.None);
 		assetInfoTab.setText("Asset Info");
-		assetInfoTab.setControl(createAssetInfoGroup(tabFolder));
-		
+		Control control = new AssetInfoComposite(tabFolder, SWT.None);
+		assetInfoTab.setControl(control);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, "asset-info");
+
 		tabFolder.setSelection(mainInfoTab);
 		tabFolder.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
-		this.pack();
-	}
-
-	private Composite createAssetInfoGroup(Composite parent) {
-		final Composite detailGroup = UIControlsFactory.createComposite(parent);
-		detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-		GridDataFactory.swtDefaults().span(2, 1).applyTo(detailGroup);
-
-		// Date Acquired
-		UIControlsFactory.createLabel(detailGroup, "Date Acquired");
-		final DateTime dateAcqText = UIControlsFactory.createDate(detailGroup, SWT.MEDIUM,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_ACQUIRED);
-		GridDataFactory.swtDefaults().grab(false, false).applyTo(dateAcqText);
-		// addUIControl(dateAcqText, BIND_ID_ASSET_DATE_ACQUIRED);
-
-		// Damage Date
-		UIControlsFactory.createLabel(detailGroup, "Damage Date");
-		final DateTime damageDateText = UIControlsFactory.createDate(detailGroup, SWT.MEDIUM,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DAMAGE);
-		GridDataFactory.swtDefaults().grab(false, false).applyTo(damageDateText);
-		// addUIControl(damageDateText, BIND_ID_ASSET_DATE_DAMAGE);
-
-		// Damage Description
-		UIControlsFactory.createLabel(detailGroup, "Damage Description"); //$NON-NLS-1$
-		final Text damageDescText = UIControlsFactory.createTextMulti(detailGroup, true, true,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DESC_DAMAGE);
-		GridDataFactory.fillDefaults().grab(true, false).hint(-1, 50).applyTo(damageDescText);
-		// addUIControl(damageDescText, BIND_ID_ASSET_DESC_DAMAGE);
-
-		// Disposal Date
-		UIControlsFactory.createLabel(detailGroup, "Disposal Date"); //$NON-NLS-1$
-		final DateTime disposalDateText = UIControlsFactory.createDate(detailGroup, SWT.MEDIUM,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_DATE_DISPOSAL);
-		GridDataFactory.swtDefaults().grab(false, false).applyTo(disposalDateText);
-		// addUIControl(disposalDateText, BIND_ID_ASSET_DATE_DISPOSAL);
-
-		// Disposal Reason
-		UIControlsFactory.createLabel(detailGroup, "Disposal Reason"); //$NON-NLS-1$
-		final Text disposalReasonText = UIControlsFactory.createTextMulti(detailGroup, true, true,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_REASON_DISPOSAL);
-		GridDataFactory.fillDefaults().grab(true, false).hint(-1, 50).applyTo(disposalReasonText);
-		// addUIControl(disposalReasonText, BIND_ID_ASSET_REASON_DISPOSAL);
-
-		// Disposal Witness
-		UIControlsFactory.createLabel(detailGroup, "Disposal Witness"); //$NON-NLS-1$
-		final Text witnessText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				VehicleLogDetailBindConstants.BIND_ID_ASSET_WITNESS_DISPOSAL);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(witnessText);
-		// addUIControl(witnessText, BIND_ID_ASSET_WITNESS_DISPOSAL);
-		return detailGroup;
-
+		// this.pack();
 	}
 
 	private void createDescriptionGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Description");
-		detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
+		GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
+		// gl_detailGroup.makeColumnsEqualWidth = true;
+		detailGroup.setLayout(gl_detailGroup);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
+		GridDataFactory fieldDataFactory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false)
+				.hint(120, -1);
+
 		// Make
-		UIControlsFactory.createLabel(detailGroup, "Make");
+		Label lblMake = UIControlsFactory.createLabel(detailGroup, "Make");
+		GridData gd_lblMake = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_lblMake.widthHint = 100;
+		lblMake.setLayoutData(gd_lblMake);
 		final Text makeText = UIControlsFactory.createText(detailGroup, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_DESC_MAKE);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(makeText);
-		// addUIControl(makeText, BIND_ID_DESC_MAKE);
+		fieldDataFactory.applyTo(makeText);
 
 		// Model
 		UIControlsFactory.createLabel(detailGroup, "Model");
 		final Text modelText = UIControlsFactory.createText(detailGroup, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_DESC_MODEL);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(modelText);
-		// addUIControl(modelText, BIND_ID_DESC_MODEL);
+		fieldDataFactory.applyTo(modelText);
 
 		// Color
 		UIControlsFactory.createLabel(detailGroup, "Color");
 		final Text colorText = UIControlsFactory.createText(detailGroup, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_DESC_COLOR);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(colorText);
-		// addUIControl(colorText, BIND_ID_DESC_COLOR);
+		fieldDataFactory.applyTo(colorText);
 
 		// Year
 		UIControlsFactory.createLabel(detailGroup, "Year");
@@ -129,26 +92,28 @@ public class VehicleLogDetailComposite extends Composite {
 				VehicleLogDetailBindConstants.BIND_ID_DESC_YEAR);
 		yearText.setMaximum(3000);
 		yearText.setMinimum(1900);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(yearText);
-		// addUIControl(yearText, BIND_ID_DESC_YEAR);
+		fieldDataFactory.copy().align(SWT.LEFT, SWT.CENTER).applyTo(yearText);
 
 		// Compacity
 		UIControlsFactory.createLabel(detailGroup, "Capacity");
 		final Text compacityText = UIControlsFactory.createTextNumeric(detailGroup,
 				VehicleLogDetailBindConstants.BIND_ID_DESC_CAPACITY);
-		GridDataFactory.swtDefaults().grab(true, false).applyTo(compacityText);
-		// addUIControl(compacityText, BIND_ID_DESC_CAPACITY);
+		fieldDataFactory.applyTo(compacityText);
 
 	}
 
 	private void createIdentificationControls(Composite parent) {
 		final Group comonComp = UIControlsFactory.createGroup(parent, "");
-		comonComp.setLayout(new GridLayout(2, false));
+		comonComp.setLayout(new GridLayout(2, true));
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(comonComp);
 
-		UIControlsFactory.createLabel(comonComp, "Log Book Number");
+		Label label = UIControlsFactory.createLabel(comonComp, "Log Book No.");
+		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_label.minimumWidth = 120;
+		label.setLayoutData(gd_label);
 		final Text logNumber = UIControlsFactory.createText(comonComp, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_LOG_NUM);
+		logNumber.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(logNumber);
 
 		UIControlsFactory.createLabel(comonComp, "Vehicle Type");
@@ -168,11 +133,16 @@ public class VehicleLogDetailComposite extends Composite {
 
 	private void createInsuranceInfoGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Insurance Info");
-		detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
+		GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
+		gl_detailGroup.makeColumnsEqualWidth = true;
+		detailGroup.setLayout(gl_detailGroup);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 		// Insurance Number
-		UIControlsFactory.createLabel(detailGroup, "Insurance Number"); //$NON-NLS-1$
+		Label label = UIControlsFactory.createLabel(detailGroup, "Insurance Number"); //$NON-NLS-1$
+		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_label.minimumWidth = 120;
+		label.setLayoutData(gd_label);
 		final Text dateAcqText = UIControlsFactory.createText(detailGroup, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_INSURANCE_NUMBER);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(dateAcqText);
@@ -189,18 +159,26 @@ public class VehicleLogDetailComposite extends Composite {
 
 	private void createRegistrationGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Registration");
-		detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
+		GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
+		gl_detailGroup.makeColumnsEqualWidth = true;
+		detailGroup.setLayout(gl_detailGroup);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 		// Registration Number
-		UIControlsFactory.createLabel(detailGroup, "Registration Number");
+		Label label_1 = UIControlsFactory.createLabel(detailGroup, "Registration No.");
+		GridData gd_label_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_label_1.minimumWidth = 120;
+		label_1.setLayoutData(gd_label_1);
 		final Text regText = UIControlsFactory.createText(detailGroup, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_REG_NUM);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(regText);
 		// addUIControl(regText, BIND_ID_REG_NUM);
 
 		// Chassis Number
-		UIControlsFactory.createLabel(detailGroup, "Chassis Number");
+		Label lblChassisNumber = UIControlsFactory.createLabel(detailGroup, "Chassis Number");
+		GridData gd_lblChassisNumber = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_lblChassisNumber.widthHint = 114;
+		lblChassisNumber.setLayoutData(gd_lblChassisNumber);
 		final Text chassisText = UIControlsFactory.createText(detailGroup, SWT.NONE,
 				VehicleLogDetailBindConstants.BIND_ID_CHASSIS_NUM);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(chassisText);

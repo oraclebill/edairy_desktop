@@ -1562,6 +1562,15 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_CONTAINER__CONTAINER_ID = TrackingPackage.CONTAINER__CONTAINER_ID;
 
 	/**
+	 * The feature id for the '<em><b>Tracking Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_CONTAINER__TRACKING_NUMBER = TrackingPackage.CONTAINER__TRACKING_NUMBER;
+
+	/**
 	 * The feature id for the '<em><b>Owner</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

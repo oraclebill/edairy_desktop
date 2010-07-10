@@ -19,11 +19,11 @@ import org.eclipse.swt.widgets.Link;
 
 import com.swtdesigner.SWTResourceManager;
 
-public class ProfilePhotoWidget extends Composite implements IComplexComponent {
+public class ProfilePhotoComposite extends Composite implements IComplexComponent {
 	
 	static {
 		// TODO: should this be in the activator?
-		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoWidget.class, ProfilePhotoRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoComposite.class, ProfilePhotoRidget.class);
 	}
 
 	public static final String LINK_BIND_ID = "updateImageLink";
@@ -38,7 +38,7 @@ public class ProfilePhotoWidget extends Composite implements IComplexComponent {
 	private Label imageLabel;
 	private Link updateLink;
 	
-	public ProfilePhotoWidget(Composite parent, int style) {
+	public ProfilePhotoComposite(Composite parent, int style) {
 		super(parent, style);
 		
 		this.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));

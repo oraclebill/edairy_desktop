@@ -4,118 +4,82 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
+
+import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoComposite;
+import org.eclipse.swt.layout.GridData;
 
 public class ContainerLogDetailComposite extends Composite {
 
 	public ContainerLogDetailComposite(Composite parent) {
 		super(parent, SWT.NONE);
-		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		setLayout(new FillLayout());
-
-		final Composite detailGroup_1 = UIControlsFactory.createGroup(this, "Container Detail");
-		detailGroup_1.setLayout(new GridLayout());
-
-		addDescriptionGroup(detailGroup_1);
-
-		addAssetInfoGroup(detailGroup_1);
+		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));		
+		addDescriptionGroup(this);
+		addAssetInfoGroup(this);
+		GridLayoutFactory.fillDefaults().generateLayout(this);
+		
 
 	}
 
 	private void addAssetInfoGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Asset Info");
-		detailGroup.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
-		detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-		GridDataFactory.fillDefaults().span(2, 1).applyTo(detailGroup);
-
-		// Date Acquired
-		UIControlsFactory.createLabel(detailGroup, "Date Acquired");
-		final Text dateAcqText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				ContainerLogDetailBindConstants.BIND_ID_ASSET_DATE_ACQUIRED);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(dateAcqText);
-		// addUIControl(dateAcqText, BIND_ID_ASSET_DATE_ACQUIRED);
-
-		// Damage Date
-		UIControlsFactory.createLabel(detailGroup, "Damage Date");
-		final Text damageDateText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				ContainerLogDetailBindConstants.BIND_ID_ASSET_DATE_DAMAGE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(damageDateText);
-		// addUIControl(damageDateText, BIND_ID_ASSET_DATE_DAMAGE);
-
-		// Damage Description
-		UIControlsFactory.createLabel(detailGroup, "Damage Description"); //$NON-NLS-1$
-		final Text damageDescText = UIControlsFactory.createTextMulti(detailGroup, true, true,
-				ContainerLogDetailBindConstants.BIND_ID_ASSET_DESC_DAMAGE);
-		damageDescText.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		GridDataFactory.fillDefaults().grab(true, false).hint(-1, 50).applyTo(damageDescText);
-		// addUIControl(damageDescText, BIND_ID_ASSET_DESC_DAMAGE);
-
-		// Disposal Date
-		UIControlsFactory.createLabel(detailGroup, "Disposal Date"); //$NON-NLS-1$
-		final Text disposalDateText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				ContainerLogDetailBindConstants.BIND_ID_ASSET_DATE_DISPOSAL);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(disposalDateText);
-		// addUIControl(disposalDateText, BIND_ID_ASSET_DATE_DISPOSAL);
-
-		// Disposal Reason
-		UIControlsFactory.createLabel(detailGroup, "Disposal Reason"); //$NON-NLS-1$
-		final Text disposalReasonText = UIControlsFactory.createTextMulti(detailGroup, true, true,
-				ContainerLogDetailBindConstants.BIND_ID_ASSET_REASON_DISPOSAL);
-		disposalReasonText.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		GridDataFactory.fillDefaults().grab(true, false).hint(-1, 50).applyTo(disposalReasonText);
-		// addUIControl(disposalReasonText, BIND_ID_ASSET_REASON_DISPOSAL);
-
-		// Disposal Witness
-		UIControlsFactory.createLabel(detailGroup, "Disposal Witness"); //$NON-NLS-1$
-		final Text witnessText = UIControlsFactory.createText(detailGroup, SWT.NONE,
-				ContainerLogDetailBindConstants.BIND_ID_ASSET_WITNESS_DISPOSAL);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(witnessText);
-		// addUIControl(witnessText, BIND_ID_ASSET_WITNESS_DISPOSAL);
-
+		GridLayoutFactory.fillDefaults().applyTo(detailGroup);
+		
+		Control control = new AssetInfoComposite(detailGroup, SWT.NULL);
+		control.setSize(216, 254);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, 
+				ContainerLogDetailBindConstants.BIND_ID_ASSET_INFO);
+		GridDataFactory.fillDefaults().grab(true,true).applyTo(control);
 	}
-
-	private void addDescriptionGroup(Composite parent) {
-
-		final Group comp = UIControlsFactory.createGroup(parent, "Description");
+	
+	
+	private void addDescriptionGroup(Composite boxyBrown) {
+		final Group comp = UIControlsFactory.createGroup(boxyBrown, "Description");
+		
 		comp.setLayout(GridLayoutFactory.fillDefaults().numColumns(2).create());
-		comp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
+		GridDataFactory fieldDefault = GridDataFactory.swtDefaults().grab(true, false).minSize(140, -1);
 		{
-			final Composite detailGroup = new Composite(comp, SWT.NONE);
+			final Composite detailGroup = new Composite(comp, SWT.NULL);
 			detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 			{
-				UIControlsFactory.createLabel(detailGroup, "Container ID");
+				Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID");
+				GridDataFactory.fillDefaults().hint(120, -1).applyTo(sizingLabel);
 				final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
-				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+				fieldDefault.applyTo(text);
+			}
+			{
+				UIControlsFactory.createLabel(detailGroup, "Tracking No.");
+				final Control text = UIControlsFactory.createText(detailGroup, SWT.NONE,
+						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
+				fieldDefault.applyTo(text);
 			}
 			{
 				UIControlsFactory.createLabel(detailGroup, "Type");
 				final CCombo text = UIControlsFactory.createCCombo(detailGroup,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
-				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+				fieldDefault.applyTo(text);
 			}
 			{
 				UIControlsFactory.createLabel(detailGroup, "Capacity");
 				final Text text = UIControlsFactory.createTextDecimal(detailGroup,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
-				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+				fieldDefault.applyTo(text);
 			}
 			{
 				UIControlsFactory.createLabel(detailGroup, "UOM");
 				final CCombo text = UIControlsFactory.createCCombo(detailGroup,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
-				GridDataFactory.fillDefaults().grab(true, false).applyTo(text);
+				fieldDefault.applyTo(text);
 			}
 		}
 		{

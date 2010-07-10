@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
@@ -46,7 +46,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialo
 
 	private void createContactGroup(Composite parent) {
 
-		final ProfilePhotoWidget photoWidget = new ProfilePhotoWidget(comonComp, SWT.NONE);
+		final ProfilePhotoComposite photoWidget = new ProfilePhotoComposite(comonComp, SWT.NONE);
 		photoWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		addUIControl(photoWidget, "profile-photo-widget");
 

@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.views.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.views.LocationProfileWidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
@@ -58,7 +58,7 @@ public class DairyProfileView extends SubModuleView {
 	private static final String DAIRY_IMAGE_GROUP_HEADER = "Dairy Image";
 	private static final String DAIRY_IMAGE_LINK_TEXT = "<a>click here to update</a>";
 	private Button cancelButton;
-	private ProfilePhotoWidget lblDairyImage;
+	private ProfilePhotoComposite lblDairyImage;
 	private Link linkDairyImage;
 
 	private Button saveButton;
@@ -103,7 +103,7 @@ public class DairyProfileView extends SubModuleView {
 
 	private Composite createDairyImagePanel(Composite parent) {
 		final Group imageGroup = UIControlsFactory.createGroup(parent, DAIRY_IMAGE_GROUP_HEADER);
-		lblDairyImage = new ProfilePhotoWidget(imageGroup, SWT.BORDER);
+		lblDairyImage = new ProfilePhotoComposite(imageGroup, SWT.BORDER);
 		addUIControl(lblDairyImage, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 //		lblDairyImage = UIControlsFactory.createLabel(imageGroup, "", DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 		GridDataFactory.fillDefaults().hint(200, 200).grab(false, true).align(SWT.FILL, SWT.FILL)

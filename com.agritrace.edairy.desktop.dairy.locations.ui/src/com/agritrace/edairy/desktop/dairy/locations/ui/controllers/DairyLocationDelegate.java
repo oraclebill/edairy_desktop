@@ -7,6 +7,7 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
@@ -17,6 +18,7 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.validation.MinLength;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -61,33 +63,51 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	public DairyLocation createWorkingCopy() {
 		final DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
 		EMFUtil.populate(dairyLocation);
-		workingCopy = dairyLocation;
-		return workingCopy;
+		return dairyLocation;
 	}
 
 	@Override
 	public DairyLocation getWorkingCopy() {
-
 		return workingCopy;
 	}
 
+	static EStructuralFeature[] features = new EStructuralFeature[] {
+		DairyPackage.Literals.DAIRY_LOCATION__CODE,
+		DairyPackage.Literals.DAIRY_LOCATION__CONTAINERS,
+		DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED,
+		DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION,
+		DairyPackage.Literals.DAIRY_LOCATION__FUNCTIONS,
+		DairyPackage.Literals.DAIRY_LOCATION__NAME,
+		DairyPackage.Literals.DAIRY_LOCATION__PHONE,
+		DairyPackage.Literals.DAIRY_LOCATION__ROUTE,
+	};
+	
 	@Override
 	public boolean isChanged(Object source, Object target) {
-		return !new EcoreUtil.EqualityHelper().equals((EObject) source, (EObject) target);
+		boolean same = true;
+		EObject src = (EObject)source, tgt = (EObject) target;
+		same = EMFUtil.compareFeatures(src, tgt, features);
+		same = same && EcoreUtil.equals(
+				(EObject) src.eGet(DairyPackage.Literals.DAIRY_LOCATION__LOCATION), 
+				(EObject) tgt.eGet(DairyPackage.Literals.DAIRY_LOCATION__LOCATION));
+//		System.err.println("isChanged returning: " + !same );
+//		System.err.println(" .. source:" + source );
+//		System.err.println(" .. target:" + target );
+		return ! same;
 	}
 
 	@Override
 	public String isValid(IRidgetContainer container) {
-		if (!textName.revalidate()) {
-			if ("".equals(textName.getText())) {
-				return "The name can't be empty!";
-			}
-			textName.requestFocus();
-			return "Error.";
-		} else if (!textAddress.revalidate()) {
-			textAddress.requestFocus();
-			return "You must specify an address for this location.";
-		}
+//		if (!textName.revalidate()) {
+//			if ("".equals(textName.getText())) {
+//				return "The name can't be empty!";
+//			}
+//			textName.requestFocus();
+//			return "Error.";
+//		} else if (!textAddress.revalidate()) {
+//			textAddress.requestFocus();
+//			return "You must specify an address for this location.";
+//		}
 		return super.isValid(container);
 	}
 
@@ -106,16 +126,16 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 //				locationRepository.updateBranchLocation(changedDairyLocation);
 //			}
 		} else {
-			System.err.println("What Wha Wah?");
+			System.err.println("==================>> What Wha Wah?");
 		}
 		super.itemApplied(changedItem);
 	}
 
-	@Override
-	public void itemCreated(Object newItem) {
-		bindRidgets(detailsContainer);
-		super.itemCreated(newItem);
-	}
+//	@Override
+//	public void itemCreated(Object newItem) {
+//		bindRidgets(detailsContainer);
+//		super.itemCreated(newItem);
+//	}
 
 	@Override
 	public void itemRemoved(Object oldItem) {
@@ -123,8 +143,6 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void bindRidgets(IRidgetContainer container) {
-		// table = container.getRidget(ITableRidget.class,
-		// AbstractMasterDetailsComposite.BIND_ID_TABLE);
 
 		final ITextRidget textId = container.getRidget(ITextRidget.class,
 				DairyLocationController.RIDGET_ID_COLLECTION_CENTRE_ID);
@@ -134,6 +152,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
 		textName = container.getRidget(ITextRidget.class, DairyLocationController.RIDGET_ID_NAME);
 		textName.bindToModel(workingCopy, "name");
+		textName.setMandatory(true);
 		textName.updateFromModel();
 
 		final ITextRidget description = container.getRidget(ITextRidget.class,
@@ -258,16 +277,16 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 	}
 
 	private void configureValidators(IRidgetContainer container) {
-		if (textName.getValidationRules().size() <= 0) {
-			final IValidator validator = new MinLength(5);
-			textName.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
-			textName.addValidationMessage("Location name must be 5 characters or more.", validator);
-		}
-
-		if (textAddress.getValidationRules().size() <= 0) {
-			final IValidator addressValidator = new MinLength(5);
-			textAddress.addValidationRule(addressValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-			textAddress.addValidationMessage("Address must be 5 characters or more.", addressValidator);
-		}
+//		if (textName.getValidationRules().size() <= 0) {
+//			final IValidator validator = new MinLength(5);
+//			textName.addValidationRule(validator, ValidationTime.ON_UPDATE_TO_MODEL);
+//			textName.addValidationMessage("Location name must be 5 characters or more.", validator);
+//		}
+//
+//		if (textAddress.getValidationRules().size() <= 0) {
+//			final IValidator addressValidator = new MinLength(5);
+//			textAddress.addValidationRule(addressValidator, ValidationTime.ON_UPDATE_TO_MODEL);
+//			textAddress.addValidationMessage("Address must be 5 characters or more.", addressValidator);
+//		}
 	}
 }

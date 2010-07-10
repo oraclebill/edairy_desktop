@@ -20,6 +20,7 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getContainerId <em>Container Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getTrackingNumber <em>Tracking Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getType <em>Type</em>}</li>
@@ -57,6 +58,32 @@ public interface Container extends EObject {
 	 * @generated
 	 */
 	void setContainerId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Tracking Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tracking Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tracking Number</em>' attribute.
+	 * @see #setTrackingNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_TrackingNumber()
+	 * @model
+	 * @generated
+	 */
+	String getTrackingNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getTrackingNumber <em>Tracking Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tracking Number</em>' attribute.
+	 * @see #getTrackingNumber()
+	 * @generated
+	 */
+	void setTrackingNumber(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Owner</b></em>' reference.

@@ -47,6 +47,7 @@ public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogControll
 		final Label lblStops = UIControlsFactory.createLabel(comp, "Stops");
 
 		final List stopsList = UIControlsFactory.createList(comp, false, false);
+		stopsList.setEnabled(false);
 		addUIControl(stopsList, ViewConstants.ID_LST_ROUTE_STOPS);
 
 		final GroupLayout gl_comp = new GroupLayout(comp);

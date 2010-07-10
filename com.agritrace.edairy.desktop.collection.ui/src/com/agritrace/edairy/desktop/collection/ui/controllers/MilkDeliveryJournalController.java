@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -16,7 +15,6 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.DeliveryJournalEditDia
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
