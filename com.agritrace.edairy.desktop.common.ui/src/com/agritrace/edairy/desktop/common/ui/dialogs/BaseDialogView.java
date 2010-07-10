@@ -64,8 +64,9 @@ public abstract class BaseDialogView extends AbstractDialogView {
 
 		// create a composite child for the work area.
 		main = UIControlsFactory.createComposite(parent);
-		main.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(main);
+
+		main.setLayout(new GridLayout(1, false));
 
 		// delegate to subclasses to build workarea
 		buildWorkArea(main);

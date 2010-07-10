@@ -8,14 +8,15 @@ import org.eclipse.swt.widgets.TabItem;
 
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 
-
 public class LocationTabFolder extends CompositePanel {
+
+	final TabFolder tabs;
 
 	public LocationTabFolder(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new FillLayout());
 
-		final TabFolder tabs = new TabFolder(this, SWT.None);
+		tabs = new TabFolder(this, SWT.None);
 
 		final TabItem addressTab = new TabItem(tabs, SWT.NONE);
 		addressTab.setText("Address");
@@ -31,5 +32,9 @@ public class LocationTabFolder extends CompositePanel {
 		mapTab.setText("Map");
 		final Composite tab3 = new MapPanel(tabs, SWT.NONE);
 		mapTab.setControl(tab3);
+	}
+
+	public TabFolder getTabFolder() {
+		return tabs;
 	}
 }

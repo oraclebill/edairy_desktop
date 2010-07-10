@@ -4,26 +4,26 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDialogController;
-import com.swtdesigner.SWTResourceManager;
 
 /**
  * Customer list dialog to add/view/edit customer
@@ -43,53 +43,65 @@ public class CustomerEditDialog extends RecordDialog<Customer, CustomerDialogCon
 
 	private void createContactGroup(Composite parent) {
 
-		final Composite photoPanel = new Composite(comonComp, SWT.NONE);
-		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		photoPanel.setLayout(new GridLayout(2, false));
-		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-
-		final Label label = new Label(photoPanel, SWT.BORDER | SWT.WRAP | SWT.CENTER);
-		label.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
-		final Composite composite = new Composite(photoPanel, SWT.NONE);
-		composite.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
-
-		final Link link = new Link(photoPanel, SWT.NONE);
-		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		link.setText("<a>update photo</a>");
+		final Composite photoPanel = new ProfilePhotoComposite(comonComp, SWT.NONE);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoPanel, "profile-photo");
+//		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+//		photoPanel.setLayout(new GridLayout(2, false));
+//		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+//
+//		final Label label = new Label(photoPanel, SWT.BORDER | SWT.WRAP | SWT.CENTER);
+//		label.setBackground(SWTResourceManager.getColor(255, 255, 255));
+//		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+//
+//		final Composite composite = new Composite(photoPanel, SWT.NONE);
+//		composite.setBackground(SWTResourceManager.getColor(255, 255, 255));
+//		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
+//
+//		final Link link = new Link(photoPanel, SWT.NONE);
+//		link.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+//		link.setText("<a>update photo</a>");
 		new Label(photoPanel, SWT.NONE);
+		
 		final Group companyContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
 				.applyTo(companyContactGroup);
-		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(companyContactGroup);
-		final AddressGroupWidget addressWidget = new AddressGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
-				.applyTo(addressWidget.getGroup());
-		addressWidget.getGroup().pack();
+//		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(companyContactGroup);
 
-		final DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
-		directionWidget.getGroup().pack();
+		LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,true).span(2, 1).applyTo(locationTabs);
+		
+//		final AddressGroupWidget addressWidget = new AddressGroupWidget(companyContactGroup);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
+//				.applyTo(addressWidget.getGroup());
+//		addressWidget.getGroup().pack();
+//
+//		final DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(companyContactGroup);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
+//		directionWidget.getGroup().pack();
+//
+//		final MapGroupWidget mapWidget = new MapGroupWidget(companyContactGroup);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
+//		mapWidget.getGroup().pack();
+		final TabItem commsTab = new TabItem(locationTabs.getTabFolder(), SWT.NONE);
+		commsTab.setText("Contact Info");
+		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(locationTabs.getTabFolder());
+		commsTab.setControl(commGroup.getGroup());
 
-		final MapGroupWidget mapWidget = new MapGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
-		mapWidget.getGroup().pack();
 
-		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(companyContactGroup);
 		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
 		// commGroup.getGroup());
 		// commGroup.getGroup().pack();
 		//
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup.getGroup());
-		commGroup.getGroup().pack();
+//		GridDataFactory.fillDefaults().grab(true,true).span(2, 1).applyTo(commGroup.getGroup());
+//		commGroup.getGroup().pack();
+		GridLayoutFactory.swtDefaults().generateLayout(companyContactGroup);
+
 	}
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
-
 		comonComp = UIControlsFactory.createComposite(parent);
+		
 		comonComp.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
 		comonComp.setLayout(new GridLayout(2, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
@@ -145,6 +157,7 @@ public class CustomerEditDialog extends RecordDialog<Customer, CustomerDialogCon
 		addUIControl(descText, CustomerBindingConstants.BIND_ID_DESCRIPTION);
 
 		createContactGroup(comonComp);
+		
 		new Label(comonComp, SWT.NONE);
 		parent.pack();
 
