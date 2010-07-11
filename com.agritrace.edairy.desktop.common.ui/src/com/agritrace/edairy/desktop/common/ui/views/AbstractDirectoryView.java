@@ -30,6 +30,8 @@ import org.eclipse.swt.widgets.Table;
  * 
  */
 public abstract class AbstractDirectoryView extends BaseListView {
+	public AbstractDirectoryView() {
+	}
 
 	/**
 	 * Binding id of the new button {@value} .

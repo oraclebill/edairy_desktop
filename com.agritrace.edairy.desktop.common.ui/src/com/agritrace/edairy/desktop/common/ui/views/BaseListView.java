@@ -19,7 +19,9 @@ import org.eclipse.swt.widgets.Group;
  * @author cin
  * 
  */
-public abstract class BaseListView extends SubModuleView {
+public abstract class BaseListView extends ScrolledSubModuleView {
+	public BaseListView() {
+	}
 	
 	public static final String BIND_ID_FILTER_SEARCH = "filter.button.search";
 	public static final String BIND_ID_FILTER_RESET = "filter.button.resets";
