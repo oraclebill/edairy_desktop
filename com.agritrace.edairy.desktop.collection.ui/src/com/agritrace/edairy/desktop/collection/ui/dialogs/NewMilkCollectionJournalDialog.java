@@ -16,7 +16,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -33,6 +32,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -54,7 +54,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo routeCombo;
 	private CCombo sessionCombo;
 	private CCombo vehicleCombo;
-
+	
+	
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
 	}
@@ -70,7 +71,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final IComboRidget vehicle = (IComboRidget) SwtRidgetFactory.createRidget(vehicleCombo);
 		final IComboRidget session = (IComboRidget) SwtRidgetFactory.createRidget(sessionCombo);
 		final IComboRidget driver = (IComboRidget) SwtRidgetFactory.createRidget(driverCombo);
-		final ITextRidget file = (ITextRidget) SwtRidgetFactory.createRidget(fileNumber);
+//		final ITextRidget file = (ITextRidget) SwtRidgetFactory.createRidget(fileNumber);
 
 		final PropertyChangeListener validationListener = new PropertyChangeListener() {
 			@Override
@@ -115,22 +116,22 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				// todo: remove
 				debugPrintEvent(evt);
 
-				if (auto) {
-					if (!focus) {
-						assert (evt.getSource() != file);
-						updateFileNumber();
-					} else {
-						assert (evt.getSource() == file);
-						if (evt.getPropertyName().equals("text")) {
-							oldTxt = (String) evt.getNewValue();
-						} else if (evt.getPropertyName().equals("textAfter")) {
-							final String newTxt = (String) evt.getNewValue();
-							if ((null != oldTxt) && (null != newTxt) && !oldTxt.equals(newTxt)) {
-								auto = false;
-							}
-						}
-					}
-				}
+//				if (auto) {
+//					if (!focus) {
+//						assert (evt.getSource() != file);
+//						updateFileNumber();
+//					} else {
+//						assert (evt.getSource() == file);
+//						if (evt.getPropertyName().equals("text")) {
+//							oldTxt = (String) evt.getNewValue();
+//						} else if (evt.getPropertyName().equals("textAfter")) {
+//							final String newTxt = (String) evt.getNewValue();
+//							if ((null != oldTxt) && (null != newTxt) && !oldTxt.equals(newTxt)) {
+//								auto = false;
+//							}
+//						}
+//					}
+//				}
 			}
 
 			private void debugPrintEvent(PropertyChangeEvent evt) {
@@ -153,7 +154,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				// newJournalPage.getSession().getLiteral(),
 				// newJournalPage.getJournalDate()).toString());
 				// TODO:
-				file.setText("1");
+//				file.setText("1");
 			}
 		}
 
@@ -166,22 +167,26 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.addPropertyChangeListener(validationListener);
 
 		route.setMandatory(true);
+		route.setModelToUIControlConverter(new ComboConverter("getName"));
 		route.addPropertyChangeListener(fileNumberUpdateListener);
 		route.addPropertyChangeListener(validationListener);
 		// route.setOutputOnly(true);
 
-		file.setMandatory(true);
-		file.setDirectWriting(true);
-		file.addPropertyChangeListener(fileNumberUpdateListener);
-		file.addPropertyChangeListener(validationListener);
+//		file.setMandatory(true);
+//		file.setDirectWriting(true);
+//		file.addPropertyChangeListener(fileNumberUpdateListener);
+//		file.addPropertyChangeListener(validationListener);
 
 		vehicle.setMandatory(true);
+		vehicle.setModelToUIControlConverter(new ComboConverter("getLogBookNumber"));
 		vehicle.addPropertyChangeListener(validationListener);
 
 		session.setMandatory(true);
+		session.setModelToUIControlConverter(new ComboConverter("getName"));
 		session.addPropertyChangeListener(validationListener);
 
 		driver.setMandatory(true);
+		driver.setModelToUIControlConverter(new ComboConverter("getFamilyName"));
 		driver.addPropertyChangeListener(validationListener);
 
 		// bind ridgets
@@ -194,8 +199,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
 		// if (routes.size() > 0) route.setSelection(0);
 
-		file.bindToModel(EMFObservables.observeValue(newJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER));
+//		file.bindToModel(EMFObservables.observeValue(newJournalPage,
+//				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER));
 
 		final List<Vehicle> vehicles = dairyRepository.allVehicles();
 		vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getLogBookNumber",
@@ -248,7 +253,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Control contents = super.createContents(parent);
 		configureRidgets();
 		setTitle("Create New Collections Journal File");
-		setMessage("Please enter the date, session, route and file number for this set of collections records.");
+		setMessage("Please enter the date, session, and route for this set of collections records.");
 		return contents;
 	}
 
@@ -264,37 +269,37 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			{
 				final Label label = UIControlsFactory.createLabel(panel, "Date");
 				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
-				datePicker = UIControlsFactory.createDate(panel, 0, "date-picker");
+				datePicker = UIControlsFactory.createDate(panel, 0, ViewConstants.DATE_PICKER);
 				GridDataFactory.swtDefaults().hint(100, -1).applyTo(datePicker);
 			}
 			{
 				UIControlsFactory.createLabel(panel, "Session");
-				sessionCombo = UIControlsFactory.createCCombo(panel, "sesison");
+				sessionCombo = UIControlsFactory.createCCombo(panel, ViewConstants.SESSION);
 				GridDataFactory.swtDefaults().hint(100, -1).applyTo(sessionCombo);
 			}
 			{
 				UIControlsFactory.createLabel(panel, "Route");
-				routeCombo = UIControlsFactory.createCCombo(panel, "route");
+				routeCombo = UIControlsFactory.createCCombo(panel, ViewConstants.ROUTE);
 				GridDataFactory.swtDefaults().hint(100, -1).applyTo(routeCombo);
 			}
-			{
-				UIControlsFactory.createLabel(panel, "File Number");
-				fileNumber = UIControlsFactory.createText(panel, SWT.BORDER, "fileNumber");
-				GridDataFactory.swtDefaults().hint(100, -1).applyTo(fileNumber);
-			}
+//			{
+//				UIControlsFactory.createLabel(panel, "Reference Number");
+//				fileNumber = UIControlsFactory.createText(panel, SWT.BORDER, ViewConstants.REFERENCE_NUMBER);
+//				GridDataFactory.swtDefaults().hint(100, -1).applyTo(fileNumber);
+//			}
 			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
 		{
 			final Composite panel = UIControlsFactory.createComposite(workArea);
 			{
-				final Label label = UIControlsFactory.createLabel(panel, "Vehicle");
-				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
-				vehicleCombo = UIControlsFactory.createCCombo(panel, "vehicle");
-				GridDataFactory.swtDefaults().hint(100, -1).applyTo(vehicleCombo);
+				UIControlsFactory.createLabel(panel, "Driver");
+				driverCombo = UIControlsFactory.createCCombo(panel, ViewConstants.DRIVER);
 			}
 			{
-				UIControlsFactory.createLabel(panel, "Driver");
-				driverCombo = UIControlsFactory.createCCombo(panel, "driver");
+				final Label label = UIControlsFactory.createLabel(panel, "Vehicle");
+				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
+				vehicleCombo = UIControlsFactory.createCCombo(panel, ViewConstants.VEHICLE);
+				GridDataFactory.swtDefaults().hint(100, -1).applyTo(vehicleCombo);
 			}
 			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}

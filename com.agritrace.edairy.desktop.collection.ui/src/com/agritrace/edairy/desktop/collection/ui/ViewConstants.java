@@ -2,6 +2,14 @@ package com.agritrace.edairy.desktop.collection.ui;
 
 public interface ViewConstants {
 
+	// collection dialog
+	String DRIVER = "driver";
+	String VEHICLE = "vehicle";
+	String REFERENCE_NUMBER = "referenceNumber";
+	String ROUTE = "route";
+	String SESSION = "session";
+	String DATE_PICKER = "date-picker";
+
 	String COLLECTION_DETAIL_BACK_BTN = "COLLECTION_DETAIL_BACK_BTN";
 	String COLLECTION_DETAIL_EDIT_BTN = "COLLECTION_DETAIL_EDIT_BTN";
 	String COLLECTION_DETAIL_FILTER_BTN = "COLLECTION_DETAIL_FILTER_BTN";

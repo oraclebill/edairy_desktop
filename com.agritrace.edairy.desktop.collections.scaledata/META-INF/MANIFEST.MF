@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scaledata
+Bundle-SymbolicName: com.agritrace.edairy.desktop.collections.scaledata
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.agritrace.edairy.desktop.internal.collections.scaledata.Activator
+Bundle-Vendor: AGRITRACE
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.csvreader;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
