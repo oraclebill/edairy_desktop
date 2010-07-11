@@ -6,7 +6,7 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
@@ -24,7 +24,7 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
 		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
-		buttonsPanel.setLayout(new GridLayout(2, false));
+		buttonsPanel.setLayout(new RowLayout(SWT.HORIZONTAL));
 
 		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, "View", viewButtonId);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);

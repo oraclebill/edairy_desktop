@@ -49,12 +49,12 @@ public abstract class AbstractDirectoryView extends BaseListView {
 	 */
 	protected void createListGroup(Composite parent) {
 		// Group
-		final Group group = UIControlsFactory.createGroup(parent, "");
-		group.setLayout(new GridLayout());
-		group.setLayoutData(new GridData(GridData.FILL_BOTH));
+//		final Group group = UIControlsFactory.createGroup(parent, "");
+//		group.setLayout(new GridLayout());
+//		group.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		// Tables
-		final Composite result = UIControlsFactory.createComposite(group);
+		// Table
+		final Composite result = UIControlsFactory.createGroup(parent, "");
 		final TableColumnLayout layout = new TableColumnLayout();
 		// We will first create a empty table here
 		final Table table = new Table(result, SWT.SINGLE | SWT.FULL_SELECTION);
