@@ -44,8 +44,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getFarmContainer <em>Farm Container</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRecordTotal <em>Record Total</em>}</li>
@@ -168,26 +166,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected Route route;
-
-	/**
-	 * The cached value of the '{@link #getFarmContainer() <em>Farm Container</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFarmContainer()
-	 * @generated
-	 * @ordered
-	 */
-	protected Container farmContainer;
-
-	/**
-	 * The cached value of the '{@link #getBin() <em>Bin</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBin()
-	 * @generated
-	 * @ordered
-	 */
-	protected DairyContainer bin;
 
 	/**
 	 * The cached value of the '{@link #getVehicle() <em>Vehicle</em>}' reference.
@@ -515,82 +493,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Container getFarmContainer() {
-		if (farmContainer != null && farmContainer.eIsProxy()) {
-			InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
-			farmContainer = (Container)eResolveProxy(oldFarmContainer);
-			if (farmContainer != oldFarmContainer) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER, oldFarmContainer, farmContainer));
-			}
-		}
-		return farmContainer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Container basicGetFarmContainer() {
-		return farmContainer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFarmContainer(Container newFarmContainer) {
-		Container oldFarmContainer = farmContainer;
-		farmContainer = newFarmContainer;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER, oldFarmContainer, farmContainer));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DairyContainer getBin() {
-		if (bin != null && bin.eIsProxy()) {
-			InternalEObject oldBin = (InternalEObject)bin;
-			bin = (DairyContainer)eResolveProxy(oldBin);
-			if (bin != oldBin) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__BIN, oldBin, bin));
-			}
-		}
-		return bin;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DairyContainer basicGetBin() {
-		return bin;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBin(DairyContainer newBin) {
-		DairyContainer oldBin = bin;
-		bin = newBin;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__BIN, oldBin, bin));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Vehicle getVehicle() {
 		if (vehicle != null && vehicle.eIsProxy()) {
 			InternalEObject oldVehicle = (InternalEObject)vehicle;
@@ -803,12 +705,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				if (resolve) return getRoute();
 				return basicGetRoute();
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
-				if (resolve) return getFarmContainer();
-				return basicGetFarmContainer();
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
-				if (resolve) return getBin();
-				return basicGetBin();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				if (resolve) return getVehicle();
 				return basicGetVehicle();
@@ -858,12 +754,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				setRoute((Route)newValue);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
-				setFarmContainer((Container)newValue);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
-				setBin((DairyContainer)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				setVehicle((Vehicle)newValue);
@@ -919,12 +809,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				setRoute((Route)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
-				setFarmContainer((Container)null);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
-				setBin((DairyContainer)null);
-				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				setVehicle((Vehicle)null);
 				return;
@@ -972,10 +856,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return driver != null;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
 				return route != null;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__FARM_CONTAINER:
-				return farmContainer != null;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__BIN:
-				return bin != null;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__VEHICLE:
 				return vehicle != null;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL:

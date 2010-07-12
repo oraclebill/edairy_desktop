@@ -104,6 +104,13 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		return buttonComposite;
 	}
 
+	/**
+	 * Milk collection entry group - defines:
+	 *  - milk collection entry table - list of collection entries.
+	 *  - total label - current total of all entries.
+	 * @param parent
+	 * @return
+	 */
 	private Composite createMilkEntryGroup(Composite parent) {
 
 		final Group group = UIControlsFactory.createGroup(parent, MILK_ENTRY_LIST_GROUP_TITLE);

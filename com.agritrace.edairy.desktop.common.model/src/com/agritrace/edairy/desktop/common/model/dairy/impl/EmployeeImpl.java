@@ -24,6 +24,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getOperatorCode <em>Operator Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getJobFunction <em>Job Function</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNationalId <em>National Id</em>}</li>
@@ -54,6 +55,26 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOperatorCode() <em>Operator Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperatorCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OPERATOR_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOperatorCode() <em>Operator Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperatorCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String operatorCode = OPERATOR_CODE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStartDate() <em>Start Date</em>}' attribute.
@@ -200,6 +221,27 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getOperatorCode() {
+		return operatorCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOperatorCode(String newOperatorCode) {
+		String oldOperatorCode = operatorCode;
+		operatorCode = newOperatorCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__OPERATOR_CODE, oldOperatorCode, operatorCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -310,6 +352,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				return getId();
+			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
+				return getOperatorCode();
 			case DairyPackage.EMPLOYEE__START_DATE:
 				return getStartDate();
 			case DairyPackage.EMPLOYEE__JOB_FUNCTION:
@@ -334,6 +378,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				setId((String)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
+				setOperatorCode((String)newValue);
 				return;
 			case DairyPackage.EMPLOYEE__START_DATE:
 				setStartDate((Date)newValue);
@@ -365,6 +412,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
+				setOperatorCode(OPERATOR_CODE_EDEFAULT);
+				return;
 			case DairyPackage.EMPLOYEE__START_DATE:
 				setStartDate(START_DATE_EDEFAULT);
 				return;
@@ -394,6 +444,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
+				return OPERATOR_CODE_EDEFAULT == null ? operatorCode != null : !OPERATOR_CODE_EDEFAULT.equals(operatorCode);
 			case DairyPackage.EMPLOYEE__START_DATE:
 				return START_DATE_EDEFAULT == null ? startDate != null : !START_DATE_EDEFAULT.equals(startDate);
 			case DairyPackage.EMPLOYEE__JOB_FUNCTION:
@@ -420,6 +472,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", operatorCode: ");
+		result.append(operatorCode);
 		result.append(", startDate: ");
 		result.append(startDate);
 		result.append(", jobFunction: ");

@@ -82,6 +82,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		switch (eClass.getClassifierID()) {
 			case DairyPackage.VEHICLE: return createVehicle();
 			case DairyPackage.COLLECTION_JOURNAL_LINE: return createCollectionJournalLine();
+			case DairyPackage.SCALE_IMPORT_RECORD: return createScaleImportRecord();
 			case DairyPackage.EMPLOYEE: return createEmployee();
 			case DairyPackage.DAIRY_LOCATION: return createDairyLocation();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE: return createCollectionJournalPage();
@@ -165,6 +166,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public CollectionJournalLine createCollectionJournalLine() {
 		CollectionJournalLineImpl collectionJournalLine = new CollectionJournalLineImpl();
 		return collectionJournalLine;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScaleImportRecord createScaleImportRecord() {
+		ScaleImportRecordImpl scaleImportRecord = new ScaleImportRecordImpl();
+		return scaleImportRecord;
 	}
 
 	/**

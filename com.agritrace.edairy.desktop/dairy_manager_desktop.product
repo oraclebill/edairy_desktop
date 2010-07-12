@@ -40,6 +40,7 @@
    <plugins>
       <plugin id="com.agritrace.edairy.desktop"/>
       <plugin id="com.agritrace.edairy.desktop.collection.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.collections.scaledata"/>
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
       <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>

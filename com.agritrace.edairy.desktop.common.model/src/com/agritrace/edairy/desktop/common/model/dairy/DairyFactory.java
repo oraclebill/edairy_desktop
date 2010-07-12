@@ -44,6 +44,15 @@ public interface DairyFactory extends EFactory {
 	CollectionJournalLine createCollectionJournalLine();
 
 	/**
+	 * Returns a new object of class '<em>Scale Import Record</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scale Import Record</em>'.
+	 * @generated
+	 */
+	ScaleImportRecord createScaleImportRecord();
+
+	/**
 	 * Returns a new object of class '<em>Employee</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

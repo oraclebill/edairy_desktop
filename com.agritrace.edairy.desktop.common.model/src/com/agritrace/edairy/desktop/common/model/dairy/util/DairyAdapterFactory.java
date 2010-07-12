@@ -98,6 +98,10 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createCollectionJournalLineAdapter();
 			}
 			@Override
+			public Adapter caseScaleImportRecord(ScaleImportRecord object) {
+				return createScaleImportRecordAdapter();
+			}
+			@Override
 			public Adapter caseEmployee(Employee object) {
 				return createEmployeeAdapter();
 			}
@@ -214,6 +218,20 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionJournalLineAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord <em>Scale Import Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord
+	 * @generated
+	 */
+	public Adapter createScaleImportRecordAdapter() {
 		return null;
 	}
 

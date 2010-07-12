@@ -119,6 +119,13 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DairyPackage.SCALE_IMPORT_RECORD: {
+				ScaleImportRecord scaleImportRecord = (ScaleImportRecord)theEObject;
+				T result = caseScaleImportRecord(scaleImportRecord);
+				if (result == null) result = caseCollectionJournalLine(scaleImportRecord);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DairyPackage.EMPLOYEE: {
 				Employee employee = (Employee)theEObject;
 				T result = caseEmployee(employee);
@@ -243,6 +250,21 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T caseCollectionJournalLine(CollectionJournalLine object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scale Import Record</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scale Import Record</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScaleImportRecord(ScaleImportRecord object) {
 		return null;
 	}
 

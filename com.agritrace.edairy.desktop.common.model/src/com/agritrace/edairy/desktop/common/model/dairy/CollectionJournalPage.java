@@ -29,8 +29,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getFarmContainer <em>Farm Container</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}</li>
@@ -223,58 +221,6 @@ public interface CollectionJournalPage extends EObject {
 	 * @generated
 	 */
 	void setRoute(Route value);
-
-	/**
-	 * Returns the value of the '<em><b>Farm Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Farm Container</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Farm Container</em>' reference.
-	 * @see #setFarmContainer(Container)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_FarmContainer()
-	 * @model
-	 * @generated
-	 */
-	Container getFarmContainer();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getFarmContainer <em>Farm Container</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Farm Container</em>' reference.
-	 * @see #getFarmContainer()
-	 * @generated
-	 */
-	void setFarmContainer(Container value);
-
-	/**
-	 * Returns the value of the '<em><b>Bin</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Bin</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bin</em>' reference.
-	 * @see #setBin(DairyContainer)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Bin()
-	 * @model
-	 * @generated
-	 */
-	DairyContainer getBin();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getBin <em>Bin</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bin</em>' reference.
-	 * @see #getBin()
-	 * @generated
-	 */
-	void setBin(DairyContainer value);
 
 	/**
 	 * Returns the value of the '<em><b>Vehicle</b></em>' reference.

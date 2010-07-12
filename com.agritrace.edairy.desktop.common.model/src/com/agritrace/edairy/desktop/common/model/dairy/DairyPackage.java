@@ -354,6 +354,205 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_LINE_FEATURE_COUNT = 13;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl <em>Scale Import Record</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getScaleImportRecord()
+	 * @generated
+	 */
+	int SCALE_IMPORT_RECORD = 2;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__LINE_NUMBER = COLLECTION_JOURNAL_LINE__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Recorded Member</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__RECORDED_MEMBER = COLLECTION_JOURNAL_LINE__RECORDED_MEMBER;
+
+	/**
+	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__QUANTITY = COLLECTION_JOURNAL_LINE__QUANTITY;
+
+	/**
+	 * The feature id for the '<em><b>Flagged</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__FLAGGED = COLLECTION_JOURNAL_LINE__FLAGGED;
+
+	/**
+	 * The feature id for the '<em><b>Unit Of Measure</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__UNIT_OF_MEASURE = COLLECTION_JOURNAL_LINE__UNIT_OF_MEASURE;
+
+	/**
+	 * The feature id for the '<em><b>Not Recorded</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__NOT_RECORDED = COLLECTION_JOURNAL_LINE__NOT_RECORDED;
+
+	/**
+	 * The feature id for the '<em><b>Validated Member</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__VALIDATED_MEMBER = COLLECTION_JOURNAL_LINE__VALIDATED_MEMBER;
+
+	/**
+	 * The feature id for the '<em><b>Off Route</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__OFF_ROUTE = COLLECTION_JOURNAL_LINE__OFF_ROUTE;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__FROM = COLLECTION_JOURNAL_LINE__FROM;
+
+	/**
+	 * The feature id for the '<em><b>Farm Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__FARM_CONTAINER = COLLECTION_JOURNAL_LINE__FARM_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Dairy Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__DAIRY_CONTAINER = COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Collection Journal</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__COLLECTION_JOURNAL = COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL;
+
+	/**
+	 * The feature id for the '<em><b>Rejected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__REJECTED = COLLECTION_JOURNAL_LINE__REJECTED;
+
+	/**
+	 * The feature id for the '<em><b>Scale Serial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__SCALE_SERIAL = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Collection Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__COLLECTION_TIME = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Center Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__CENTER_NUMBER = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Num Cans</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__NUM_CANS = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Trip Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__TRIP_NUMBER = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Operator Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__OPERATOR_CODE = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Validated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__VALIDATED = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Scale Import Record</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD_FEATURE_COUNT = COLLECTION_JOURNAL_LINE_FEATURE_COUNT + 7;
+
+	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl <em>Employee</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -361,7 +560,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getEmployee()
 	 * @generated
 	 */
-	int EMPLOYEE = 2;
+	int EMPLOYEE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -481,13 +680,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__ID = ModelPackage.PERSON_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Operator Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__OPERATOR_CODE = ModelPackage.PERSON_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Start Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__START_DATE = ModelPackage.PERSON_FEATURE_COUNT + 1;
+	int EMPLOYEE__START_DATE = ModelPackage.PERSON_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Job Function</b></em>' attribute.
@@ -496,7 +704,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__JOB_FUNCTION = ModelPackage.PERSON_FEATURE_COUNT + 2;
+	int EMPLOYEE__JOB_FUNCTION = ModelPackage.PERSON_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>National Id</b></em>' attribute.
@@ -505,7 +713,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 3;
+	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
@@ -514,7 +722,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 4;
+	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
@@ -523,7 +731,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 5;
+	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -532,7 +740,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 6;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -542,7 +750,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyLocation()
 	 * @generated
 	 */
-	int DAIRY_LOCATION = 3;
+	int DAIRY_LOCATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -651,7 +859,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionJournalPage()
 	 * @generated
 	 */
-	int COLLECTION_JOURNAL_PAGE = 4;
+	int COLLECTION_JOURNAL_PAGE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Journal Id</b></em>' attribute.
@@ -717,31 +925,13 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__ROUTE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Farm Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_JOURNAL_PAGE__FARM_CONTAINER = 7;
-
-	/**
-	 * The feature id for the '<em><b>Bin</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_JOURNAL_PAGE__BIN = 8;
-
-	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__VEHICLE = 9;
+	int COLLECTION_JOURNAL_PAGE__VEHICLE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Driver Total</b></em>' attribute.
@@ -750,7 +940,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 10;
+	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 8;
 
 	/**
 	 * The feature id for the '<em><b>Record Total</b></em>' attribute.
@@ -759,7 +949,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 11;
+	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Suspended</b></em>' attribute.
@@ -768,7 +958,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 12;
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 10;
 
 	/**
 	 * The feature id for the '<em><b>Entry Count</b></em>' attribute.
@@ -777,7 +967,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 13;
+	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Count</b></em>' attribute.
@@ -786,7 +976,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 14;
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Rejected Count</b></em>' attribute.
@@ -795,7 +985,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 15;
+	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 13;
 
 	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
@@ -804,7 +994,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 16;
+	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 14;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -814,7 +1004,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getRoute()
 	 * @generated
 	 */
-	int ROUTE = 5;
+	int ROUTE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -878,7 +1068,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getTrip()
 	 * @generated
 	 */
-	int TRIP = 6;
+	int TRIP = 7;
 
 	/**
 	 * The feature id for the '<em><b>Collections</b></em>' reference list.
@@ -942,7 +1132,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDeliveryJournal()
 	 * @generated
 	 */
-	int DELIVERY_JOURNAL = 7;
+	int DELIVERY_JOURNAL = 8;
 
 	/**
 	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
@@ -1042,7 +1232,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDeliveryJournalLine()
 	 * @generated
 	 */
-	int DELIVERY_JOURNAL_LINE = 8;
+	int DELIVERY_JOURNAL_LINE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -1097,7 +1287,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairy()
 	 * @generated
 	 */
-	int DAIRY = 9;
+	int DAIRY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -1377,7 +1567,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembership()
 	 * @generated
 	 */
-	int MEMBERSHIP = 10;
+	int MEMBERSHIP = 11;
 
 	/**
 	 * The feature id for the '<em><b>Member Id</b></em>' attribute.
@@ -1459,7 +1649,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getAsset()
 	 * @generated
 	 */
-	int ASSET = 11;
+	int ASSET = 12;
 
 	/**
 	 * The feature id for the '<em><b>Tag Type</b></em>' attribute.
@@ -1550,7 +1740,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyContainer()
 	 * @generated
 	 */
-	int DAIRY_CONTAINER = 12;
+	int DAIRY_CONTAINER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Container Id</b></em>' attribute.
@@ -1632,7 +1822,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSupplier()
 	 * @generated
 	 */
-	int SUPPLIER = 13;
+	int SUPPLIER = 14;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -1795,7 +1985,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCustomer()
 	 * @generated
 	 */
-	int CUSTOMER = 14;
+	int CUSTOMER = 15;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -1913,7 +2103,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPrice()
 	 * @generated
 	 */
-	int MILK_PRICE = 15;
+	int MILK_PRICE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1995,7 +2185,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 16;
+	int MEMBERSHIP_STATUS = 17;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}' enum.
@@ -2005,7 +2195,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSession()
 	 * @generated
 	 */
-	int SESSION = 17;
+	int SESSION = 18;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
@@ -2015,7 +2205,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 18;
+	int VENDOR_STATUS = 19;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2025,7 +2215,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 19;
+	int DAIRY_FUNCTION = 20;
 
 
 	/**
@@ -2036,7 +2226,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPricePeriod()
 	 * @generated
 	 */
-	int MILK_PRICE_PERIOD = 20;
+	int MILK_PRICE_PERIOD = 21;
 
 
 	/**
@@ -2368,6 +2558,93 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCollectionJournalLine_Rejected();
 
 	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord <em>Scale Import Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scale Import Record</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord
+	 * @generated
+	 */
+	EClass getScaleImportRecord();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getScaleSerial <em>Scale Serial</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Scale Serial</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getScaleSerial()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_ScaleSerial();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getCollectionTime <em>Collection Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Collection Time</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getCollectionTime()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_CollectionTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getCenterNumber <em>Center Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Center Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getCenterNumber()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_CenterNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getNumCans <em>Num Cans</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Num Cans</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getNumCans()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_NumCans();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getTripNumber <em>Trip Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Trip Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getTripNumber()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_TripNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getOperatorCode <em>Operator Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator Code</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getOperatorCode()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_OperatorCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#isValidated <em>Validated</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validated</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#isValidated()
+	 * @see #getScaleImportRecord()
+	 * @generated
+	 */
+	EAttribute getScaleImportRecord_Validated();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee <em>Employee</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2387,6 +2664,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEmployee_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getOperatorCode <em>Operator Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator Code</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getOperatorCode()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_OperatorCode();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getStartDate <em>Start Date</em>}'.
@@ -2649,28 +2937,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCollectionJournalPage_Route();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getFarmContainer <em>Farm Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Farm Container</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getFarmContainer()
-	 * @see #getCollectionJournalPage()
-	 * @generated
-	 */
-	EReference getCollectionJournalPage_FarmContainer();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getBin <em>Bin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Bin</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getBin()
-	 * @see #getCollectionJournalPage()
-	 * @generated
-	 */
-	EReference getCollectionJournalPage_Bin();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}'.
@@ -4001,6 +4267,72 @@ public interface DairyPackage extends EPackage {
 		EAttribute COLLECTION_JOURNAL_LINE__REJECTED = eINSTANCE.getCollectionJournalLine_Rejected();
 
 		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl <em>Scale Import Record</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getScaleImportRecord()
+		 * @generated
+		 */
+		EClass SCALE_IMPORT_RECORD = eINSTANCE.getScaleImportRecord();
+
+		/**
+		 * The meta object literal for the '<em><b>Scale Serial</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__SCALE_SERIAL = eINSTANCE.getScaleImportRecord_ScaleSerial();
+
+		/**
+		 * The meta object literal for the '<em><b>Collection Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__COLLECTION_TIME = eINSTANCE.getScaleImportRecord_CollectionTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Center Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__CENTER_NUMBER = eINSTANCE.getScaleImportRecord_CenterNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Num Cans</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__NUM_CANS = eINSTANCE.getScaleImportRecord_NumCans();
+
+		/**
+		 * The meta object literal for the '<em><b>Trip Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__TRIP_NUMBER = eINSTANCE.getScaleImportRecord_TripNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__OPERATOR_CODE = eINSTANCE.getScaleImportRecord_OperatorCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Validated</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALE_IMPORT_RECORD__VALIDATED = eINSTANCE.getScaleImportRecord_Validated();
+
+		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl <em>Employee</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4017,6 +4349,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__ID = eINSTANCE.getEmployee_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__OPERATOR_CODE = eINSTANCE.getEmployee_OperatorCode();
 
 		/**
 		 * The meta object literal for the '<em><b>Start Date</b></em>' attribute feature.
@@ -4213,22 +4553,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COLLECTION_JOURNAL_PAGE__ROUTE = eINSTANCE.getCollectionJournalPage_Route();
-
-		/**
-		 * The meta object literal for the '<em><b>Farm Container</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COLLECTION_JOURNAL_PAGE__FARM_CONTAINER = eINSTANCE.getCollectionJournalPage_FarmContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Bin</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COLLECTION_JOURNAL_PAGE__BIN = eINSTANCE.getCollectionJournalPage_Bin();
 
 		/**
 		 * The meta object literal for the '<em><b>Vehicle</b></em>' reference feature.
