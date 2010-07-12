@@ -116,14 +116,15 @@ public class MilkCollectionJournalController extends SubModuleController {
 			"Invalid membership number");
 
 	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
-	private IComboRidget binCombo;
 
 	private final IDairyRepository dairyRepo;
 	private final List<DairyContainer> bins;
-	private ITextRidget canText;
 
 	private final boolean errorDialogsEnabled = true; // todo: get from
-														// milk Entry group
+						
+	// milk Entry group
+	private ITextRidget canText;
+	private IComboRidget binCombo;
 	private ITextRidget memberIDRidget;
 	private ILabelRidget memberNameRidget;
 	private IToggleButtonRidget nprMissingButton;

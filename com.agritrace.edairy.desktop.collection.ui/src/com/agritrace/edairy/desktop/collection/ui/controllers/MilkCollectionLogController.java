@@ -39,6 +39,7 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.collection.ui.views.ScaleDataImportView;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -224,13 +225,13 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 //					new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
 //					new NavigationArgument(journalPage));
 
-			final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("milk-collection-entry-node",
-					journalPage.getReferenceNumber()), "Collections Entry for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
-			detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
+			final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
+					journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
+			detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
 			detailViewNode.setContext("IMPORTED_RECORDS", journalPage);  // backup.. 
 			WorkareaManager
 					.getInstance()
-					.registerDefinition(detailViewNode, ScaleDataImportController.class, MilkCollectionJournalView.ID)
+					.registerDefinition(detailViewNode, ScaleDataImportController.class, ScaleDataImportView.ID)
 					.setRequiredPreparation(true);
 			return detailViewNode;
 		}

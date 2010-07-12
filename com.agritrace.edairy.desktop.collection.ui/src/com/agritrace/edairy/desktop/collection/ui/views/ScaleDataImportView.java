@@ -11,8 +11,6 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.TraverseEvent;
-import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -24,9 +22,13 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.CollectionsEntryPanel;
+import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
 import com.swtdesigner.ResourceManager;
 
-public class MilkCollectionJournalView extends SubModuleView implements TraverseListener {
+public class ScaleDataImportView extends SubModuleView  {
+	public static final String ID = "edairy.scale.import.view";
+
+	
 	public static final String BIN_COLUMN_HEADER = "Bin";
 
 	public static final String BIN_LABEL = "Bin :";
@@ -37,7 +39,6 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 	public static final String DRIVER_LABEL = "Driver:";
 
-	public static final String ID = "edairy.collection.entry.view";
 
 	public static final String JOURNAL_LABEL = "Page Number:";
 
@@ -75,34 +76,9 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 
 	public static final String VEHICLE_LABEL = "Truck:";
 
-	public MilkCollectionJournalView() {
+	public ScaleDataImportView() {
 	}
 
-	@Override
-	public void keyTraversed(TraverseEvent e) {
-		if (e.detail == SWT.TRAVERSE_RETURN) {
-			e.doit = true;
-			e.detail = SWT.TRAVERSE_TAB_NEXT;
-		}
-	}
-
-	private Composite createButtonComposite(Composite group) {
-		final Composite buttonComposite = UIControlsFactory.createComposite(group);
-		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(buttonComposite);
-
-		final Button modifyButton = UIControlsFactory
-				.createButton(buttonComposite, "Modify", ViewWidgetId.modifyButton);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(modifyButton);
-
-		final Button deleteButton = UIControlsFactory
-				.createButton(buttonComposite, "Delete", ViewWidgetId.deleteButton);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(deleteButton);
-
-		final Button clearButton = UIControlsFactory.createButton(buttonComposite, "Clear", ViewWidgetId.clearButton);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(clearButton);
-
-		return buttonComposite;
-	}
 
 	/**
 	 * Milk collection entry group - defines:
@@ -154,9 +130,6 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(totalLabel);
 		addUIControl(totalLabel, ViewWidgetId.totalLabel);
 
-		final Composite buttonComposite = createButtonComposite(panel);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(buttonComposite);
-
 		final Label imageLabel = UIControlsFactory.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.TOP).applyTo(imageLabel);
 		if (!Beans.isDesignTime()) {
@@ -184,11 +157,6 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL);
 		addUIControl(headerGroups, "journal-header");
 		gdf.applyTo(headerGroups);
-
-		// final Control groupThree = createMilkEntryInputGroup(parent);
-		final Control groupThree = new CollectionsEntryPanel(parent, SWT.NONE);
-		addUIControl(groupThree, "journal-entry");
-		gdf.applyTo(groupThree);
 
 		final Control groupFour = createMilkEntryGroup(parent);
 		gdf.grab(true, true).applyTo(groupFour);

@@ -5,13 +5,19 @@ import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabel
 import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledDecimalTextField;
 import static com.agritrace.edairy.desktop.collection.ui.util.FieldUtil.addLabeledTextField;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.ui.common.IComplexComponent;
+import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -20,7 +26,12 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 
-public class CollectionsEntryPanel extends Composite implements TraverseListener {
+public class CollectionsEntryPanel extends Composite implements TraverseListener, IComplexComponent {
+
+	static {
+		SwtControlRidgetMapper.getInstance().addMapping(CollectionsEntryPanel.class, CollectionsEntryRidget.class);
+	}
+
 
 	private static final String BIN_LABEL = "Bin :";
 	private static final String CAN_ID_LABEL = "CAN :";
@@ -32,10 +43,14 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 
 	private static final String REJECTED_COLUMN_HEADER = "Rejected";
 
+	private List<Object> uiControls = new LinkedList<Object>();
+	
+	private GridData layoutData;
 	public CollectionsEntryPanel(Composite parent, int style) {
 
 		super(parent, style);
-		setLayout(new FillLayout());
+		setLayout(GridLayoutFactory.fillDefaults().create());
+		
 
 		final Group group = UIControlsFactory.createGroup(this, MILK_ENTRY_GROUP_TITLE);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
@@ -49,8 +64,24 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 				control.addTraverseListener(this);
 			}
 		}
-
+		layoutData = GridDataFactory.fillDefaults().create();
+		group.setLayoutData(layoutData);
 		pack();
+	}
+	
+	boolean cachedHide;
+	public void hide(boolean hide) {
+		if (cachedHide == hide) {
+			return;
+		}
+		cachedHide = hide;
+		if (hide) {
+			setLayoutDeferred(true);
+			setSize(0,0);
+		}
+		else {
+			setLayoutDeferred(true);
+		}
 	}
 
 	@Override
@@ -126,5 +157,11 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 		addLabeledTextField(qualityPanel, "Milk Fat % : ", "milk-fat-percent-text");
 		addLabeledTextField(qualityPanel, "Alcohol % : ", "alcohol-percent-text");
 		addLabeledBooleanField(qualityPanel, "Water Added? : ", "added-water-checkbox");
+	}
+
+	
+	@Override
+	public List<Object> getUIControls() {
+		return SWTBindingPropertyLocator.getControlsWithBindingProperty(this);
 	}
 }
