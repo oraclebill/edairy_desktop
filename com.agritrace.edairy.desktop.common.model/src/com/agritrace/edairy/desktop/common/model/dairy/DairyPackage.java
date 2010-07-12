@@ -1579,13 +1579,22 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP__MEMBER_ID = 0;
 
 	/**
+	 * The feature id for the '<em><b>Member Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBERSHIP__MEMBER_NUMBER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Application Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__APPLICATION_DATE = 1;
+	int MEMBERSHIP__APPLICATION_DATE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Effective Date</b></em>' attribute.
@@ -1594,7 +1603,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__EFFECTIVE_DATE = 2;
+	int MEMBERSHIP__EFFECTIVE_DATE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1603,7 +1612,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__STATUS = 3;
+	int MEMBERSHIP__STATUS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Default Route</b></em>' reference.
@@ -1612,7 +1621,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__DEFAULT_ROUTE = 4;
+	int MEMBERSHIP__DEFAULT_ROUTE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Member</b></em>' containment reference.
@@ -1621,7 +1630,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__MEMBER = 5;
+	int MEMBERSHIP__MEMBER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' containment reference.
@@ -1630,7 +1639,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__ACCOUNT = 6;
+	int MEMBERSHIP__ACCOUNT = 7;
 
 	/**
 	 * The number of structural features of the '<em>Membership</em>' class.
@@ -1639,7 +1648,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP_FEATURE_COUNT = 7;
+	int MEMBERSHIP_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl <em>Asset</em>}' class.
@@ -3560,6 +3569,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getMembership_MemberId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMemberNumber <em>Member Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Member Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getMemberNumber()
+	 * @see #getMembership()
+	 * @generated
+	 */
+	EAttribute getMembership_MemberNumber();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getApplicationDate <em>Application Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5021,6 +5041,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MEMBERSHIP__MEMBER_ID = eINSTANCE.getMembership_MemberId();
+
+		/**
+		 * The meta object literal for the '<em><b>Member Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBERSHIP__MEMBER_NUMBER = eINSTANCE.getMembership_MemberNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Application Date</b></em>' attribute feature.

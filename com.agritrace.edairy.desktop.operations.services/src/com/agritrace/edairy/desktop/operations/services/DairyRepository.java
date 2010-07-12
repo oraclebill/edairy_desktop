@@ -160,12 +160,12 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	public void updateRoute(final Route changedRoute) {
-		routeRepository.update(changedRoute);
+		dairyRepository.save(changedRoute);
 	}
 
 	public void addRoute(final Route newRoute) {
 		localDairy.getRoutes().add(newRoute);
-		routeRepository.saveNew(newRoute);
+		dairyRepository.save(localDairy);
 	}
 
 	protected Dairy createLocalDairy() {
@@ -187,7 +187,7 @@ public class DairyRepository implements IDairyRepository {
 
 	@Override
 	public List<Customer> allCustomers() {
-		return customerRepository.all();
+		return getLocalDairy().getCustomers();
 	}
 
 	@Override

@@ -43,10 +43,12 @@ import com.agritrace.edairy.desktop.collection.ui.views.ScaleDataImportView;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
@@ -60,8 +62,13 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 
 	private final class ScaleImportAction implements IActionListener {
-		private IDairyRepository dairyRepo = DairyRepository.getInstance(); 
+		private IDairyRepository dairyRepo = DairyRepository.getInstance();
 		private Map<String, CollectionJournalPage> pageMap = new HashMap<String, CollectionJournalPage>();
+		Dairy localDairy;
+
+		public ScaleImportAction() {
+
+		}
 
 		@Override
 		public void callback() {
@@ -72,12 +79,13 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				ScaleImporter scaleImporter = new ScaleImporter(importFile);
 				try {
 					List<ScaleRecord> scaleData = scaleImporter.readRecords().getResults();
-					// generate one or more collection groups - one group per scale/date/route/session (driver, vehicle,...)
+					// generate one or more collection groups - one group per
+					// scale/date/route/session (driver, vehicle,...)
 					for (ScaleRecord scaleRecord : scaleData) {
 						ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
 						CollectionJournalPage journalPage = getJournalForScaleRecord(scaleRecord);
 						boolean journalConsistent = validateJournalInfo(journalPage, scaleRecord);
-						
+
 						// primary data
 						importRecord.setCollectionJournal(journalPage);
 						importRecord.setRecordedMember(scaleRecord.getMemberNumber());
@@ -89,31 +97,38 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 						importRecord.setCenterNumber(scaleRecord.getCenterNumber());
 						importRecord.setNumCans(scaleRecord.getNumCans());
-						importRecord.setOffRoute(false);    	// TODO: calculate
-						importRecord.setFrom(null);			// TODO: calculate
-						importRecord.setDairyContainer(null);  	// don't seem to get one fromm the scale ??
-						importRecord.setFarmContainer(null);	// don't seem to get one fromm the scale ??
+						importRecord.setOffRoute(false); // TODO: calculate
+						importRecord.setFrom(null); // TODO: calculate
+						importRecord.setDairyContainer(null); // don't seem to
+																// get one fromm
+																// the scale ??
+						importRecord.setFarmContainer(null); // don't seem to
+																// get one fromm
+																// the scale ??
 						importRecord.setOperatorCode(scaleRecord.getOperatorCode());
-						
+
 						boolean dbConsistent = validateDbLookups(importRecord);
-								
-						importRecord.setFlagged(scaleRecord.isValid() && dbConsistent && journalConsistent );
+
+						importRecord.setFlagged(scaleRecord.isValid() && dbConsistent && journalConsistent);
 					}
+
 					for (CollectionJournalPage page : pageMap.values()) {
-						
+
 						final ISubModuleNode myNode = getNavigationNode();
 						System.err.println("My Node:    " + myNode);
 						final ISubModuleNode childNode = createCollectionDetailNode(page);
 						System.err.println("Created New Child Node: " + childNode);
 						myNode.addChild(childNode);
+
 						// myNode.getNavigationProcessor().navigate(myNode,
-						// childNode.getNodeId(), new NavigationArgument(journalPage));
-//						try {
-//							childNode.activate();
-//						} catch (final Exception e) {
-//							myNode.removeChild(childNode);
-//							e.printStackTrace();
-//						}
+						// childNode.getNodeId(), new
+						// NavigationArgument(journalPage));
+						// try {
+						// childNode.activate();
+						// } catch (final Exception e) {
+						// myNode.removeChild(childNode);
+						// e.printStackTrace();
+						// }
 
 					}
 				} catch (IOException e) {
@@ -123,20 +138,18 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 									"Error importing scale data. Please contact support for assistance."));
 					log(LogService.LOG_ERROR, e.getMessage(), e);
 				}
-			}
-			else {
-				Dialog dlg = new ErrorDialog(null, 
-						"Error reading file", 
-						"The file " + importFile + " can not be read.", 
-						new Status(0, Activator.PLUGIN_ID,  
-								"File Error"), 0);
+			} else {
+				Dialog dlg = new ErrorDialog(null, "Error reading file",
+						"The file " + importFile + " can not be read.",
+						new Status(0, Activator.PLUGIN_ID, "File Error"), 0);
 				dlg.open();
 			}
 		}
-		
+
 		/**
-		 * Validate that lookup fields (memberNumber -> member, routeCode -> route, etc) are not null, 
-		 * and all codes and ids in the record exist in the database.
+		 * Validate that lookup fields (memberNumber -> member, routeCode ->
+		 * route, etc) are not null, and all codes and ids in the record exist
+		 * in the database.
 		 * 
 		 * @param importRecord
 		 * @return
@@ -148,9 +161,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		}
 
 		/**
-		 * Compare the information in a scale record to that of a Collection Journal Page (CollectionGroup). 
-		 * Returns false if any of the redundant fields in the scale record are different than the corresponding fields
-		 * in the journal page (collection group).
+		 * Compare the information in a scale record to that of a Collection
+		 * Journal Page (CollectionGroup). Returns false if any of the redundant
+		 * fields in the scale record are different than the corresponding
+		 * fields in the journal page (collection group).
 		 * 
 		 * @param journalPage
 		 * @param scaleRecord
@@ -172,43 +186,71 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				page.setJournalDate(record.getValidDate());
 				page.setSession(getSessionForCode(record.getSessionCode()));
 				page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
-				if (page.getDriver() == null 
-						|| page.getJournalDate() == null 
-						|| page.getSession() == null 
-						|| page.getRoute() == null ) {
+				if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
+						|| page.getRoute() == null) {
 					// TODO: add suspension reason
-					page.setSuspended(true);		
+					page.setSuspended(true);
 					log(LogService.LOG_INFO, "Suspending " + key + " for validation failure - null key item.");
 				}
 				pageMap.put(key, page);
 			}
 			return page;
 		}
-		
-		
+
 		private Route getRouteForRouteCode(String routeNumber) {
-			// TODO Auto-generated method stub
+			if (routeNumber != null) {
+				if (localDairy == null)
+					localDairy = dairyRepo.getLocalDairy();
+				for (Route route : localDairy.getRoutes()) {
+					if (route.getCode().equalsIgnoreCase(routeNumber.trim()))
+						return route;
+				}
+			}
 			return null;
 		}
 
 		private Session getSessionForCode(String sessionCode) {
-			// TODO Auto-generated method stub
+			if (sessionCode != null) {
+				if (sessionCode.equals("AM")) {
+					return Session.MORNING;
+				} else if (sessionCode.equals("PM")) {
+					return Session.EVENING1;
+				}
+			}
 			return null;
 		}
 
 		private Employee getDriverByCode(String operatorCode) {
-			// TODO Auto-generated method stub
+			if (operatorCode != null) {
+				if (localDairy == null) {
+					localDairy = dairyRepo.getLocalDairy();
+				}
+				for (Employee employee : localDairy.getEmployees()) {
+					String operCode = employee.getOperatorCode();
+					if (operCode != null && operCode.equals(operatorCode)) {
+						return employee;
+					}
+				}
+			}
 			return null;
 		}
 
 		private Membership getMemberById(String memberNumber) {
-			// TODO Auto-generated method stub
-			return null;
+			// TODO: we are creating members for testing 
+			// -- FIXME 
+			Membership member = dairyRepo.getMembershipById(memberNumber);
+			if (member == null) {
+				member = DairyFactory.eINSTANCE.createMembership();
+				member.setMemberNumber(memberNumber);
+//				member.setStatus(MembershipStatus.PROVISIONAL);
+				member.setStatus(MembershipStatus.INACTIVE);
+			}
+			return member;
 		}
 
-
 		/**
-		 * There should be only one date per scale file, but the key generate will accomodate multiples..
+		 * There should be only one date per scale file, but the key generate
+		 * will accomodate multiples..
 		 * 
 		 * @param record
 		 * @return
@@ -216,21 +258,21 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		private String createGroupKey(ScaleRecord record) {
 			StringBuffer buffer = new StringBuffer();
 			Formatter formatter = new Formatter(buffer);
-			formatter.format("%s-%s-%s-%2s", record.getScaleSerial(), record.getRouteNumber(), record.getTransactionDate(), record.getSessionCode());
+			formatter.format("%s-%s-%s-%2s", record.getScaleSerial(), record.getRouteNumber(),
+					record.getTransactionDate(), record.getSessionCode());
 			return buffer.toString();
 		}
-		
+
 		private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
-//			getNavigationNode().navigate(
-//					new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
-//					new NavigationArgument(journalPage));
+			// getNavigationNode().navigate(
+			//					new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
+			// new NavigationArgument(journalPage));
 
 			final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
 					journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
 			detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
-			detailViewNode.setContext("IMPORTED_RECORDS", journalPage);  // backup.. 
-			WorkareaManager
-					.getInstance()
+			detailViewNode.setContext("IMPORTED_RECORDS", journalPage); // backup..
+			WorkareaManager.getInstance()
 					.registerDefinition(detailViewNode, ScaleDataImportController.class, ScaleDataImportView.ID)
 					.setRequiredPreparation(true);
 			return detailViewNode;
@@ -390,7 +432,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("milk-collection-entry-node",
 				journalPage.getReferenceNumber()), "Collections Entry for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
 		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
-		detailViewNode.setContext("JOURNAL_PAGE", journalPage);  // backup.. 
+		detailViewNode.setContext("JOURNAL_PAGE", journalPage); // backup..
 		WorkareaManager
 				.getInstance()
 				.registerDefinition(detailViewNode, MilkCollectionJournalController.class, MilkCollectionJournalView.ID)

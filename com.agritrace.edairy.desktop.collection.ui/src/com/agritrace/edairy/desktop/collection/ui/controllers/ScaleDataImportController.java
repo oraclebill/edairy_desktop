@@ -7,8 +7,6 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.log.Logger;
-import org.eclipse.jface.viewers.ColumnLayoutData;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
@@ -21,6 +19,7 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.CollectionsEntryRidget;
+import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -34,19 +33,16 @@ public class ScaleDataImportController extends SubModuleController {
 	public static final String TIME_COLUMNN_HEADER 		= "Timestamp";
 	public static final String MEMBER_COLUMN_HEADER 	= "Member";
 	public static final String QUANTITY_COLUMN_HEADER 	= "Quantity";
-	public static final String CAN_COLUMN_HEADER 		= "CAN Number";
-	public static final String NPR_COLUMN_HEADER 		= "NPR Missing";
-	public static final String REJECTED_COLUMN_HEADER 	= "Rejected";
+	public static final String CAN_COLUMN_HEADER 		= "Num. Cans";
+	public static final String CENTER_NUMBER_HEADER 	= "Center No.";
+	public static final String SUSPENDED_COLUMN_HEADER 	= "Suspended";
 	public static final String TOTAL_LABEL 				= "Total : ";
 
 	private static Logger LOG = Log4r.getLogger(Activator.getDefault(), ScaleDataImportController.class);
 	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");
 
 	private static final String[] columnHeaders = { 
-		TIME_COLUMNN_HEADER, MEMBER_COLUMN_HEADER, CAN_COLUMN_HEADER, QUANTITY_COLUMN_HEADER, NPR_COLUMN_HEADER, REJECTED_COLUMN_HEADER };
-	
-	private static final ColumnLayoutData[] columnWidths = { 
-		new ColumnWeightData(15), new ColumnWeightData(75), new ColumnWeightData(10), new ColumnWeightData(15), new ColumnWeightData(5), new ColumnWeightData(5) };
+		TIME_COLUMNN_HEADER, MEMBER_COLUMN_HEADER, CAN_COLUMN_HEADER, QUANTITY_COLUMN_HEADER, CENTER_NUMBER_HEADER, SUSPENDED_COLUMN_HEADER };
 	
 	private static final String[] columnPropertyNames = {
 			"collectionTime", "recordedMember", "numCans", "quantity", "centerNumber", "flagged" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
@@ -85,6 +81,7 @@ public class ScaleDataImportController extends SubModuleController {
 		importedData = getContextData();
 
 		journalHeaderRidget = getRidget(JournalHeaderRidget.class, "journal-header");
+		journalHeaderRidget.setControlType(ControlType.TEXT);
 		journalHeaderRidget.setOutputOnly(true);
 		journalHeaderRidget.bindToModel(importedData);
 		journalHeaderRidget.updateFromModel();
@@ -101,7 +98,6 @@ public class ScaleDataImportController extends SubModuleController {
 //				return null;
 //			}
 //		});
-		table.setColumnWidths(columnWidths);
 		table.bindToModel(
 				new WritableList(importedData.getJournalEntries(), ScaleImportRecord.class), 
 				ScaleImportRecord.class, 
@@ -109,9 +105,16 @@ public class ScaleDataImportController extends SubModuleController {
 		
 		calculatedTotalRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
 		calculatedTotalRidget.bindToModel(importedData, "driverTotal");
+		IActionRidget cancelAction = getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
+		cancelAction.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				getNavigationNode().dispose();
+			}
+		});
 
 		IActionRidget saveActionRidget = getRidget(IActionRidget.class, ViewWidgetId.saveButton);
-		saveActionRidget.setText("Save Imported Data");
+//		saveActionRidget.setText("Save Imported Data");
 		saveActionRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -140,8 +143,14 @@ public class ScaleDataImportController extends SubModuleController {
 		
 		getInfoFlyout().addInfo(new InfoFlyoutData("message", "Saving imported scale data..."));
 		localDairy.getCollectionJournals().add(importedData);
-		dairyRepo.save(localDairy);
-		getInfoFlyout().addInfo(new InfoFlyoutData("message", "File saved."));
+		try {
+			dairyRepo.save(localDairy);
+			getInfoFlyout().addInfo(new InfoFlyoutData("message", "File saved."));
+		}
+		catch(Exception e) {
+			getInfoFlyout().addInfo(new InfoFlyoutData("error", "Save failed - " + e.getMessage() + "\nPlease contact support."));
+			e.printStackTrace();
+		}
 
 	}
 

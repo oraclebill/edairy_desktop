@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMemberId <em>Member Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMemberNumber <em>Member Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getApplicationDate <em>Application Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getEffectiveDate <em>Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getStatus <em>Status</em>}</li>
@@ -62,6 +63,32 @@ public interface Membership extends EObject {
 	 * @generated
 	 */
 	void setMemberId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Member Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Member Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Member Number</em>' attribute.
+	 * @see #setMemberNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MemberNumber()
+	 * @model
+	 * @generated
+	 */
+	String getMemberNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMemberNumber <em>Member Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Member Number</em>' attribute.
+	 * @see #getMemberNumber()
+	 * @generated
+	 */
+	void setMemberNumber(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Application Date</b></em>' attribute.

@@ -167,7 +167,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.addPropertyChangeListener(validationListener);
 
 		route.setMandatory(true);
-		route.setModelToUIControlConverter(new ComboConverter("getName"));
+//		route.setModelToUIControlConverter(new ComboConverter("getName"));
 		route.addPropertyChangeListener(fileNumberUpdateListener);
 		route.addPropertyChangeListener(validationListener);
 		// route.setOutputOnly(true);
@@ -178,15 +178,15 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 //		file.addPropertyChangeListener(validationListener);
 
 		vehicle.setMandatory(true);
-		vehicle.setModelToUIControlConverter(new ComboConverter("getLogBookNumber"));
+//		vehicle.setModelToUIControlConverter(new ComboConverter("getLogBookNumber"));
 		vehicle.addPropertyChangeListener(validationListener);
 
 		session.setMandatory(true);
-		session.setModelToUIControlConverter(new ComboConverter("getName"));
+//		session.setModelToUIControlConverter(new ComboConverter("getName"));
 		session.addPropertyChangeListener(validationListener);
 
 		driver.setMandatory(true);
-		driver.setModelToUIControlConverter(new ComboConverter("getFamilyName"));
+//		driver.setModelToUIControlConverter(new ComboConverter("getFamilyName"));
 		driver.addPropertyChangeListener(validationListener);
 
 		// bind ridgets

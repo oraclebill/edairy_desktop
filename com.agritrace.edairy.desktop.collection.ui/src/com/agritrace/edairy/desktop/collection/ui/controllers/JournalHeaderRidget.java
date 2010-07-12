@@ -21,11 +21,14 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Control;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite;
+import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
 
 /**
 	 * 
@@ -43,12 +46,14 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 	// ridgets
 	//
 	private IDateTimeRidget dateRidget;
-	private IComboRidget routeRidget;
-	private IComboRidget sessionRidget;
-	private IComboRidget vehicleRidget;
-	private IComboRidget driverRidget;
+	private IMarkableRidget routeRidget;
+	private IMarkableRidget sessionRidget;
+	private IMarkableRidget vehicleRidget;
+	private IMarkableRidget driverRidget;
 	private ITextRidget journalNumber;
 	private IDecimalTextRidget driverTotalText;
+
+	private ControlType controlType;
 
 	//
 	// model object (CollectionJournal)
@@ -58,10 +63,18 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 	public JournalHeaderRidget() {
 
 	}
+	
+	public void setControlType(ControlType controlType) {
+		this.controlType = controlType;
+	}
+	
+	public ControlType getControlType() {
+		return this.controlType;
+	}
 
 	/**
-		 * 
-		 */
+	 * 
+	 */
 	@Override
 	public void configureRidgets() {
 
@@ -70,6 +83,54 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 		// dateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		dateRidget.setMandatory(true);
 
+		try {
+			routeRidget = getRidget(IComboRidget.class, ViewWidgetId.routeCombo);
+			if (routeRidget != null) 
+				controlType = ControlType.COMBO;
+			else
+				controlType = ControlType.TEXT;
+		}
+		catch(Exception e) {
+			controlType = ControlType.TEXT;
+		}
+		
+		switch (controlType) {
+		case COMBO:
+			configureComboRidgets();
+			break;
+		case TEXT:
+			configureTextRidgets();
+			break;
+		}
+		
+		// final GroupOneSelectionListener selectionListener = new
+		// GroupOneSelectionListener();
+		// routeRidget.addSelectionListener(selectionListener);
+		// sessionRidget.addSelectionListener(selectionListener);
+		// vehicleRidget.addSelectionListener(selectionListener);
+		// driverRidget.addSelectionListener(selectionListener);
+
+		// // make'em all read/only
+		// for (final IMarkableRidget ridget : Arrays.asList(new
+		// IMarkableRidget[] { dateRidget, routeRidget,
+		// sessionRidget, vehicleRidget, driverRidget })) {
+		// ridget.setOutputOnly(true);
+		// }
+		// dateRidget.setEnabled(false);
+
+		// journal group
+		journalNumber = getRidget(ITextRidget.class, ViewWidgetId.journalText);
+		journalNumber.setMandatory(true);
+		// journalNumber.addValidationRule(new StringNumberValidator(),
+		// ValidationTime.ON_UPDATE_TO_MODEL);
+
+		driverTotalText = getRidget(IDecimalTextRidget.class, ViewWidgetId.journalTotalText);
+		driverTotalText.setSigned(false);
+		driverTotalText.setGrouping(true);
+		driverTotalText.setMandatory(true);
+	}
+
+	private void configureComboRidgets() {
 		routeRidget = getRidget(IComboRidget.class, ViewWidgetId.routeCombo);
 		routeRidget.setMandatory(true);
 
@@ -81,39 +142,31 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 
 		driverRidget = getRidget(IComboRidget.class, ViewWidgetId.driverCombo);
 		driverRidget.setMandatory(true);
+	}
 
-		// final GroupOneSelectionListener selectionListener = new
-		// GroupOneSelectionListener();
-		// routeRidget.addSelectionListener(selectionListener);
-		// sessionRidget.addSelectionListener(selectionListener);
-		// vehicleRidget.addSelectionListener(selectionListener);
-		// driverRidget.addSelectionListener(selectionListener);
+	private void configureTextRidgets() {
+		routeRidget = getRidget(ITextRidget.class, ViewWidgetId.routeCombo);
+		routeRidget.setMandatory(true);
 
-//		// make'em all read/only
-//		for (final IMarkableRidget ridget : Arrays.asList(new IMarkableRidget[] { dateRidget, routeRidget,
-//				sessionRidget, vehicleRidget, driverRidget })) {
-//			ridget.setOutputOnly(true);
-//		}
-//		dateRidget.setEnabled(false);
+		sessionRidget = getRidget(ITextRidget.class, ViewWidgetId.sessionCombo);
+		sessionRidget.setMandatory(true);
 
-		// journal group
-		journalNumber = getRidget(ITextRidget.class, ViewWidgetId.journalText);
-		journalNumber.setMandatory(true);
-//			journalNumber.addValidationRule(new StringNumberValidator(), ValidationTime.ON_UPDATE_TO_MODEL);
+		vehicleRidget = getRidget(ITextRidget.class, ViewWidgetId.vehicleCombo);
+		vehicleRidget.setMandatory(true);
 
-		driverTotalText = getRidget(IDecimalTextRidget.class, ViewWidgetId.journalTotalText);
-		driverTotalText.setSigned(false);
-		driverTotalText.setGrouping(true);
-		driverTotalText.setMandatory(true);
+		driverRidget = getRidget(ITextRidget.class, ViewWidgetId.driverCombo);
+		driverRidget.setMandatory(true);
+
 	}
 
 	@Override
 	public void updateFromModel() {
 		//
-//			if ((workingJournalPage.getReferenceNumber() != null) && (workingJournalPage.getDriverTotal() != null)) {
-//				journalNumber.setOutputOnly(true);
-//				driverTotalText.setOutputOnly(true);
-//			}
+		// if ((workingJournalPage.getReferenceNumber() != null) &&
+		// (workingJournalPage.getDriverTotal() != null)) {
+		// journalNumber.setOutputOnly(true);
+		// driverTotalText.setOutputOnly(true);
+		// }
 
 		super.updateFromModel();
 	}
@@ -123,17 +176,14 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 
 		dateRidget.bindToModel(PojoObservables.observeDetailValue(model, "journalDate", Date.class));
 
-		routeRidget.bindToModel(new WritableList(routes, Route.class), Route.class, "getName",
-				PojoObservables.observeDetailValue(model, "route", Route.class));
-
-		sessionRidget.bindToModel(Observables.staticObservableList(Session.VALUES), Session.class, "getLiteral",
-				PojoObservables.observeDetailValue(model, "session", Session.class));
-
-		vehicleRidget.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber",
-				PojoObservables.observeDetailValue(model, "vehicle", Vehicle.class));
-
-		driverRidget.bindToModel(new WritableList(drivers, Employee.class), Employee.class, "getFamilyName",
-				PojoObservables.observeDetailValue(model, "driver", Employee.class));
+		switch (controlType) {
+		case COMBO:
+			bindComboRidgets();
+			break;
+		case TEXT:
+			bindTextRidgets();
+			break;
+		}
 
 		//
 		journalNumber.bindToModel(PojoObservables.observeDetailValue(model, "referenceNumber", String.class));
@@ -142,15 +192,39 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 
 	}
 
-	@Override 
+	private void bindComboRidgets() {
+		((IComboRidget) routeRidget).bindToModel(new WritableList(routes, Route.class), Route.class, "getName",
+				PojoObservables.observeDetailValue(model, "route", Route.class));
+
+		((IComboRidget) sessionRidget).bindToModel(Observables.staticObservableList(Session.VALUES), Session.class,
+				"getLiteral", PojoObservables.observeDetailValue(model, "session", Session.class));
+
+		((IComboRidget) vehicleRidget).bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class,
+				"getRegistrationNumber", PojoObservables.observeDetailValue(model, "vehicle", Vehicle.class));
+
+		((IComboRidget) driverRidget).bindToModel(new WritableList(drivers, Employee.class), Employee.class,
+				"getFamilyName", PojoObservables.observeDetailValue(model, "driver", Employee.class));
+	}
+
+	private void bindTextRidgets() {
+		((ITextRidget) routeRidget).bindToModel(PojoObservables.observeDetailValue(model, "route", Route.class));
+
+		((ITextRidget) sessionRidget).bindToModel(PojoObservables.observeDetailValue(model, "session", Session.class));
+
+		((ITextRidget) vehicleRidget).bindToModel(PojoObservables.observeDetailValue(model, "vehicle", Vehicle.class));
+
+		((ITextRidget) driverRidget).bindToModel(PojoObservables.observeDetailValue(model, "driver", Employee.class));
+	}
+
+	@Override
 	protected void updateVisible() {
 		Object controlObj = getUIControl();
-		if ( controlObj instanceof Control) {
-			Control control = (Control)controlObj;
+		if (controlObj instanceof Control) {
+			Control control = (Control) controlObj;
 			control.setVisible(isVisible());
 		}
 	}
-	
+
 	@Override
 	protected void updateEnabled() {
 		boolean enabled = isEnabled();
@@ -166,6 +240,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 			if (ridget instanceof IMarkableRidget) {
 				IMarkableRidget markable = (IMarkableRidget) ridget;
 				markable.setOutputOnly(outputOnly);
+				markable.setMandatory(!outputOnly);
 			}
 			if (ridget instanceof IDateTimeRidget) {
 				IDateTimeRidget dateTime = (IDateTimeRidget) ridget;

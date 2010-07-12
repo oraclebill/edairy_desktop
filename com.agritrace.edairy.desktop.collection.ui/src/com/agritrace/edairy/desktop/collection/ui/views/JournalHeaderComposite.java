@@ -193,6 +193,10 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		return group;
 	}
 
+	public ControlType getControlType() {
+		return controlType;
+	}
+	
 	/**
 	 * 
 	 * @param parent

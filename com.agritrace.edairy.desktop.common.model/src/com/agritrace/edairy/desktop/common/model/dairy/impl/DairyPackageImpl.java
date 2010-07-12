@@ -1387,7 +1387,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMembership_ApplicationDate() {
+	public EAttribute getMembership_MemberNumber() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1396,7 +1396,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMembership_EffectiveDate() {
+	public EAttribute getMembership_ApplicationDate() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1405,7 +1405,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMembership_Status() {
+	public EAttribute getMembership_EffectiveDate() {
 		return (EAttribute)membershipEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1414,8 +1414,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMembership_DefaultRoute() {
-		return (EReference)membershipEClass.getEStructuralFeatures().get(4);
+	public EAttribute getMembership_Status() {
+		return (EAttribute)membershipEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1423,7 +1423,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMembership_Member() {
+	public EReference getMembership_DefaultRoute() {
 		return (EReference)membershipEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1432,8 +1432,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMembership_Account() {
+	public EReference getMembership_Member() {
 		return (EReference)membershipEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMembership_Account() {
+		return (EReference)membershipEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1912,6 +1921,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		membershipEClass = createEClass(MEMBERSHIP);
 		createEAttribute(membershipEClass, MEMBERSHIP__MEMBER_ID);
+		createEAttribute(membershipEClass, MEMBERSHIP__MEMBER_NUMBER);
 		createEAttribute(membershipEClass, MEMBERSHIP__APPLICATION_DATE);
 		createEAttribute(membershipEClass, MEMBERSHIP__EFFECTIVE_DATE);
 		createEAttribute(membershipEClass, MEMBERSHIP__STATUS);
@@ -2147,6 +2157,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(membershipEClass, Membership.class, "Membership", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMembership_MemberId(), theModelPackage.getUniqueID(), "memberId", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMembership_MemberNumber(), ecorePackage.getEString(), "memberNumber", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_ApplicationDate(), ecorePackage.getEDate(), "applicationDate", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_EffectiveDate(), ecorePackage.getEDate(), "effectiveDate", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMembership_Status(), this.getMembershipStatus(), "status", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

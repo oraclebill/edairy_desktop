@@ -31,6 +31,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMemberId <em>Member Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMemberNumber <em>Member Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getApplicationDate <em>Application Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getEffectiveDate <em>Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getStatus <em>Status</em>}</li>
@@ -62,6 +63,26 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @ordered
 	 */
 	protected Long memberId = MEMBER_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMemberNumber() <em>Member Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemberNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MEMBER_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMemberNumber() <em>Member Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMemberNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String memberNumber = MEMBER_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getApplicationDate() <em>Application Date</em>}' attribute.
@@ -191,6 +212,27 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		memberId = newMemberId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_ID, oldMemberId, memberId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMemberNumber() {
+		return memberNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMemberNumber(String newMemberNumber) {
+		String oldMemberNumber = memberNumber;
+		memberNumber = newMemberNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_NUMBER, oldMemberNumber, memberNumber));
 	}
 
 	/**
@@ -422,6 +464,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				return getMemberId();
+			case DairyPackage.MEMBERSHIP__MEMBER_NUMBER:
+				return getMemberNumber();
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				return getApplicationDate();
 			case DairyPackage.MEMBERSHIP__EFFECTIVE_DATE:
@@ -449,6 +493,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				setMemberId((Long)newValue);
+				return;
+			case DairyPackage.MEMBERSHIP__MEMBER_NUMBER:
+				setMemberNumber((String)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				setApplicationDate((Date)newValue);
@@ -483,6 +530,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				setMemberId(MEMBER_ID_EDEFAULT);
 				return;
+			case DairyPackage.MEMBERSHIP__MEMBER_NUMBER:
+				setMemberNumber(MEMBER_NUMBER_EDEFAULT);
+				return;
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				setApplicationDate(APPLICATION_DATE_EDEFAULT);
 				return;
@@ -515,6 +565,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				return MEMBER_ID_EDEFAULT == null ? memberId != null : !MEMBER_ID_EDEFAULT.equals(memberId);
+			case DairyPackage.MEMBERSHIP__MEMBER_NUMBER:
+				return MEMBER_NUMBER_EDEFAULT == null ? memberNumber != null : !MEMBER_NUMBER_EDEFAULT.equals(memberNumber);
 			case DairyPackage.MEMBERSHIP__APPLICATION_DATE:
 				return APPLICATION_DATE_EDEFAULT == null ? applicationDate != null : !APPLICATION_DATE_EDEFAULT.equals(applicationDate);
 			case DairyPackage.MEMBERSHIP__EFFECTIVE_DATE:
@@ -543,6 +595,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (memberId: ");
 		result.append(memberId);
+		result.append(", memberNumber: ");
+		result.append(memberNumber);
 		result.append(", applicationDate: ");
 		result.append(applicationDate);
 		result.append(", effectiveDate: ");
