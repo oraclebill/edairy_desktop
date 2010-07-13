@@ -6,12 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
-
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 /**
  * <!-- begin-user-doc -->
@@ -228,7 +229,7 @@ public interface Membership extends EObject {
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Account</em>' reference isn't clear,
+	 * If the meaning of the '<em>Account</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

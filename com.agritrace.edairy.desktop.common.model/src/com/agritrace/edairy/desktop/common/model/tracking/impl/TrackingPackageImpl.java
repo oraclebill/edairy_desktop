@@ -6,23 +6,22 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import static com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage.CONTAINER;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
 import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -34,6 +33,14 @@ import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

@@ -7,21 +7,11 @@
 package com.agritrace.edairy.desktop.common.model.base.util;
 
 import com.agritrace.edairy.desktop.common.model.base.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import com.agritrace.edairy.desktop.common.model.base.Audited;
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.MapLocation;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
-import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
 
 /**
  * <!-- begin-user-doc -->

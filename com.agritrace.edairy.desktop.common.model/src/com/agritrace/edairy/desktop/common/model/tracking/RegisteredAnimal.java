@@ -6,12 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking;
 
+import com.agritrace.edairy.desktop.common.model.base.Gender;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.desktop.common.model.base.Gender;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

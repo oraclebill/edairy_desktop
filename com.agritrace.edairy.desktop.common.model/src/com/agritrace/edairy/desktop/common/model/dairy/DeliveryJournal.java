@@ -7,9 +7,11 @@
 package com.agritrace.edairy.desktop.common.model.dairy;
 
 import java.math.BigDecimal;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -227,7 +229,7 @@ public interface DeliveryJournal extends EObject {
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Lines</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Lines</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

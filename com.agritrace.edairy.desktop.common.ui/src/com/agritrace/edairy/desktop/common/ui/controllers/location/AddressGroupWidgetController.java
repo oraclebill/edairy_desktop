@@ -2,7 +2,9 @@ package com.agritrace.edairy.desktop.common.ui.controllers.location;
 
 import java.util.Arrays;
 
+import org.eclipse.core.databinding.observable.IObservable;
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -24,13 +26,15 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 	private ITextRidget districtTxt;
 	private ITextRidget divisionTxt;
 	private ITextRidget estateTxt;
-	private PostalLocation location;
 	private ITextRidget locationTxt;
 	private ITextRidget postalCodeTxt;
 	private IComboRidget provinceComo;
 	private ITextRidget sectionTxt;
 	private ITextRidget subLocationTxt;
 	private ITextRidget villageTxt;
+	
+//	private PostalLocation location;
+	private IObservableValue location;
 
 	public AddressGroupWidgetController(IRidgetContainer controller) {
 		this.container = controller;
@@ -77,15 +81,16 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 
 	@Override
 	public PostalLocation getInputModel() {
-		return location;
+//		return location;
+		return null;
 	}
 
 	@Override
 	public void ridgetSelected(SelectionEvent event) {
 		if (event.getSource() == provinceComo) {
-			if (location != null) {
-				location.setProvince((String) event.getNewSelection().get(0));
-			}
+//			if (location != null) {
+//				location.setProvince((String) event.getNewSelection().get(0));
+//			}
 		}
 	}
 
@@ -97,16 +102,22 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 
 	@Override
 	public void setInputModel(PostalLocation model) {
-		location = (PostalLocation) model;
+		location = new WritableValue(model, PostalLocation.class);
+//		location = (PostalLocation) model;
 		if (container != null) {
 			updateBinding();
 		}
 
 	}
+	
+	public void setInputModel(IObservableValue model) {
+		location = model;
+	}
 
 	@Override
 	public void updateBinding() {
-		if (location == null) {
+		if (location.getValue() == null) {
+//		if (location == null) {
 			addressTxt.setText("");
 			sectionTxt.setText("");
 			estateTxt.setText("");
@@ -119,25 +130,25 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 			postalCodeTxt.setText("");
 			return;
 		}
-		addressTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
+		addressTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__ADDRESS));
 		addressTxt.updateFromModel();
-		sectionTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__SECTION));
+		sectionTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__SECTION));
 		sectionTxt.updateFromModel();
-		estateTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__ESTATE));
+		estateTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__ESTATE));
 		estateTxt.updateFromModel();
-		locationTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__LOCATION));
+		locationTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__LOCATION));
 		locationTxt.updateFromModel();
-		subLocationTxt.bindToModel(EMFObservables.observeValue(location,
+		subLocationTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location,
 				ModelPackage.Literals.POSTAL_LOCATION__SUB_LOCATION));
 		subLocationTxt.updateFromModel();
-		villageTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__VILLAGE));
+		villageTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__VILLAGE));
 		villageTxt.updateFromModel();
-		divisionTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__DIVISION));
+		divisionTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__DIVISION));
 		divisionTxt.updateFromModel();
-		districtTxt.bindToModel(EMFObservables.observeValue(location, ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
+		districtTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
 		districtTxt.updateFromModel();
-		provinceComo.setSelection(location.getProvince());
-		postalCodeTxt.bindToModel(EMFObservables.observeValue(location,
+//		provinceComo.setSelection(location.getProvince());
+		postalCodeTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location,
 				ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 		postalCodeTxt.updateFromModel();
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.agritrace.edairy.desktop.install"
+            name="Sample Category">
+      </category>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.install"
+            class="com.agritrace.edairy.desktop.install.views.SampleView"
+            icon="icons/sample.gif"
+            id="com.agritrace.edairy.desktop.install.views.SampleView"
+            name="Sample View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.agritrace.edairy.desktop.home">
+         <view
+               id="com.agritrace.edairy.desktop.install.views.SampleView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            id="com.agritrace.edairy.desktop.install"
+            name="name">
+      </perspective>
+   </extension>
+
+</plugin>

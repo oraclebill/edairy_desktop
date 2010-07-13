@@ -222,21 +222,21 @@
         eType="#//Employee" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" upperBound="-1"
         eType="#//Membership" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" upperBound="-1"
-        eType="#//DairyLocation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" ordered="false"
+        upperBound="-1" eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
-        eType="#//CollectionJournalPage" containment="true"/>
+        eType="#//CollectionJournalPage" containment="true" eKeys="#//CollectionJournalPage/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" upperBound="-1"
-        eType="#//DeliveryJournal" containment="true"/>
+        eType="#//DeliveryJournal" containment="true" eKeys="#//DeliveryJournal/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="customers" upperBound="-1"
-        eType="#//Customer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customers" ordered="false"
+        upperBound="-1" eType="#//Customer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
         eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"
         eOpposite="requests.ecore#//AnimalHealthRequest/dairy" eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" upperBound="-1"
-        eType="#//DairyContainer" containment="true"/>
+        eType="#//DairyContainer" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="priceHistory" upperBound="-1"
         eType="#//MilkPrice" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="managerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

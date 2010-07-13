@@ -8,7 +8,6 @@ package com.agritrace.edairy.desktop.common.model.dairy;
 
 import java.util.Date;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Scale Import Record</b></em>'.

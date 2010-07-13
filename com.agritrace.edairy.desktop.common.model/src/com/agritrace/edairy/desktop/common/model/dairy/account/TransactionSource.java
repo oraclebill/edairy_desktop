@@ -40,7 +40,9 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CLINICAL_SERVICES(1, "ClinicalServices", "CLINICAL_SERVICES"), /**
+	CLINICAL_SERVICES(1, "ClinicalServices", "CLINICAL_SERVICES"),
+
+	/**
 	 * The '<em><b>Share Recovery</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

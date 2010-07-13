@@ -6,12 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +68,7 @@ public interface Account extends EObject {
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Member</em>' reference isn't clear,
+	 * If the meaning of the '<em>Member</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -178,7 +179,7 @@ public interface Account extends EObject {
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Transaction#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transactions</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Transactions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -195,7 +196,7 @@ public interface Account extends EObject {
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Balances</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Balances</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

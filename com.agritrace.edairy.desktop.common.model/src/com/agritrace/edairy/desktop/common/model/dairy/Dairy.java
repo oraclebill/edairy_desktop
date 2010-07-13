@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
+import com.agritrace.edairy.desktop.common.model.base.Company;
+
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 /**
  * <!-- begin-user-doc -->
@@ -281,7 +283,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Branch Locations</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_BranchLocations()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<DairyLocation> getBranchLocations();
@@ -297,7 +299,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Collection Journals</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_CollectionJournals()
-	 * @model containment="true"
+	 * @model containment="true" keys="referenceNumber"
 	 * @generated
 	 */
 	EList<CollectionJournalPage> getCollectionJournals();
@@ -307,13 +309,13 @@ public interface Dairy extends Company {
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Delivery Journals</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Delivery Journals</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Delivery Journals</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DeliveryJournals()
-	 * @model containment="true"
+	 * @model containment="true" keys="referenceNumber"
 	 * @generated
 	 */
 	EList<DeliveryJournal> getDeliveryJournals();
@@ -335,17 +337,17 @@ public interface Dairy extends Company {
 	EList<Supplier> getSuppliers();
 
 	/**
-	 * Returns the value of the '<em><b>Customers</b></em>' reference list.
+	 * Returns the value of the '<em><b>Customers</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Customer}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Customers</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Customers</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Customers</em>' reference list.
+	 * @return the value of the '<em>Customers</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Customers()
-	 * @model
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Customer> getCustomers();

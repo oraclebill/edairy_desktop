@@ -6,21 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -34,9 +21,28 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -272,7 +278,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected EList<Supplier> suppliers;
 
 	/**
-	 * The cached value of the '{@link #getCustomers() <em>Customers</em>}' reference list.
+	 * The cached value of the '{@link #getCustomers() <em>Customers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCustomers()
@@ -599,7 +605,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	public EList<Customer> getCustomers() {
 		if (customers == null) {
-			customers = new EObjectResolvingEList<Customer>(Customer.class, this, DairyPackage.DAIRY__CUSTOMERS);
+			customers = new EObjectContainmentEList<Customer>(Customer.class, this, DairyPackage.DAIRY__CUSTOMERS);
 		}
 		return customers;
 	}
@@ -732,6 +738,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return ((InternalEList<?>)getDeliveryJournals()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__SUPPLIERS:
 				return ((InternalEList<?>)getSuppliers()).basicRemove(otherEnd, msgs);
+			case DairyPackage.DAIRY__CUSTOMERS:
+				return ((InternalEList<?>)getCustomers()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return ((InternalEList<?>)getAnimalHealthRequests()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__DAIRY_BINS:

@@ -7,28 +7,15 @@
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.desktop.common.model.base.Audited;
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
-import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
-import com.agritrace.edairy.desktop.common.model.base.ContainerType;
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.Gender;
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.MapLocation;
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
-import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
-import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->

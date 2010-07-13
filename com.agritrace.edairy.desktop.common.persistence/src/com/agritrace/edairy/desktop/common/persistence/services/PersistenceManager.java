@@ -1,9 +1,11 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
@@ -72,8 +74,20 @@ public class PersistenceManager {
 		hbds.setProperties(getDatastoreProperties());
 		hbds.setEPackages(getEPackages());
 		
-		System.err.println(hbds.getMappingXML());
 		hbds.initialize();
+		try {
+			File file = new File(RienaLocations.getDataArea(), "hibernate-mapping.xml");
+			FileWriter writer = new FileWriter(file);
+			BufferedWriter buffered = new BufferedWriter(writer);
+			buffered.write(hbds.getMappingXML());
+			buffered.close();
+			writer.close();
+			LOG.log(LogService.LOG_INFO, "Saved mapping file to " + file);
+		}
+		catch(Exception e) {
+			LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
+
+		}
 		
 		postInit();
 		

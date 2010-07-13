@@ -7,34 +7,15 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Asset;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
-import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
-import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.model.dairy.Trip;
-import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
