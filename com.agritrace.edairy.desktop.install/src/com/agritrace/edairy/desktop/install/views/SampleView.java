@@ -34,6 +34,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.install.AbstractImportTool;
 import com.agritrace.edairy.desktop.install.EmployeeImportTool;
 import com.agritrace.edairy.desktop.install.VehicleImportTool;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -210,7 +211,7 @@ public class SampleView extends ViewPart {
 				Dairy dairy = DairyRepository.getInstance().getLocalDairy();
 				File file = new File("/Users/bjones/Development/Projects/edairy_desktop/test-data/employees/Vehicles.csv");
 				try {
-					VehicleImportTool tool = new VehicleImportTool(dairy, file);					
+					AbstractImportTool tool = new VehicleImportTool(dairy, file);					
 					tool.processFile();
 					DairyRepository.getInstance().save(dairy);				
 				} catch (FileNotFoundException e) {

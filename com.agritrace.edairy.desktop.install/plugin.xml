@@ -5,7 +5,7 @@
          point="org.eclipse.ui.views">
       <category
             id="com.agritrace.edairy.desktop.install"
-            name="Sample Category">
+            name="Installation Category">
       </category>
       <view
             allowMultiple="true"
@@ -13,26 +13,8 @@
             class="com.agritrace.edairy.desktop.install.views.SampleView"
             icon="icons/sample.gif"
             id="com.agritrace.edairy.desktop.install.views.SampleView"
-            name="Sample View">
+            name="Import Wizards">
       </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="com.agritrace.edairy.desktop.home">
-         <view
-               id="com.agritrace.edairy.desktop.install.views.SampleView"
-               ratio="0.5"
-               relationship="right"
-               relative="org.eclipse.ui.views.TaskList">
-         </view>
-      </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.help.contexts">
-      <contexts
-            file="contexts.xml">
-      </contexts>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
@@ -41,6 +23,110 @@
             id="com.agritrace.edairy.desktop.install"
             name="name">
       </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="com.agritrace.edairy.desktop.install.commands.category"
+            name="Sample Category">
+      </category>
+      <command
+            categoryId="com.agritrace.edairy.desktop.install.commands.category"
+            id="com.agritrace.edairy.desktop.install.commands.sampleCommand"
+            name="Sample Command">
+      </command>
+      <command
+            categoryId="com.agritrace.edairy.desktop.install.commands.category"
+            id="com.agritrace.edairy.desktop.install.commands.importEmployees"
+            name="Import Employee Data">
+      </command>
+      <command
+            categoryId="com.agritrace.edairy.desktop.install.commands.category"
+            id="com.agritrace.edairy.desktop.install.commands.importVehicles"
+            name="Import Vehicle Data">
+      </command>
+      <command
+            categoryId="com.agritrace.edairy.desktop.install.commands.category"
+            id="com.agritrace.edairy.desktop.install.commands.importRouteData"
+            name="Import Route Data">
+      </command>
+      <command
+            categoryId="com.agritrace.edairy.desktop.install.commands.category"
+            id="com.agritrace.edairy.desktop.install.commands.importMembers"
+            name="Import Member Data">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.agritrace.edairy.desktop.install.handlers.SampleHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.sampleCommand">
+      </handler>
+      <handler
+            class="com.agritrace.edairy.desktop.install.handlers.ImportRoutesHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.importRouteData">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.agritrace.edairy.desktop.install.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="com.agritrace.edairy.desktop.install.menus.installMenu"
+               label="Setup"
+               mnemonic="I">
+            <command
+                  commandId="com.agritrace.edairy.desktop.install.commands.importRouteData"
+                  label="Import Routes"
+                  mnemonic="R"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.agritrace.edairy.desktop.install.commands.importEmployees"
+                  label="Import Employees"
+                  mnemonic="E"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.agritrace.edairy.desktop.install.commands.importVehicles"
+                  label="Import Vehicles"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.agritrace.edairy.desktop.install.commands.importMembers"
+                  label="Import Members"
+                  mnemonic="M"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.agritrace.edairy.desktop.install.toolbars.sampleToolbar">
+            <command
+                  commandId="com.agritrace.edairy.desktop.install.commands.sampleCommand"
+                  icon="icons/sample.gif"
+                  id="com.agritrace.edairy.desktop.install.toolbars.sampleCommand"
+                  tooltip="Say hello world">
+            </command>
+         </toolbar>
+      </menuContribution>
    </extension>
 
 </plugin>

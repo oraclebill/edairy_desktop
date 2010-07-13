@@ -29,40 +29,6 @@ import com.csvreader.CsvReader;
  */
 public class EmployeeImportTool {
 
-	public static class Entry {
-		int field;
-		EStructuralFeature feature;
-
-		Entry(int field, EStructuralFeature feature) {
-			this.field = field;
-			this.feature = feature;
-		}
-	}
-
-	public static class ValidationException extends RuntimeException {
-
-		public ValidationException() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		public ValidationException(String message, Throwable cause) {
-			super(message, cause);
-			// TODO Auto-generated constructor stub
-		}
-
-		public ValidationException(String message) {
-			super(message);
-			// TODO Auto-generated constructor stub
-		}
-
-		public ValidationException(Throwable cause) {
-			super(cause);
-			// TODO Auto-generated constructor stub
-		}
-
-	}
-
 	public static final int BASE = 0;
 	public static final int EMPLOYEE_ID = BASE;
 	public static final int GIVEN_NAME = BASE + 1;
