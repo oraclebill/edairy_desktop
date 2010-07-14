@@ -1,6 +1,11 @@
 package com.agritrace.edairy.desktop.install;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +25,18 @@ public abstract class AbstractImportTool {
 		super();
 	}
 
+	public AbstractImportTool(File f) throws FileNotFoundException {
+		this(new FileReader(f));
+	}
+
+	public AbstractImportTool(InputStream f) {
+		this(new InputStreamReader(f));
+	}
+
+	public AbstractImportTool(Reader reader) {
+		this.reader = reader;
+	}
+
 	public void processFile() throws IOException {
 		CsvReader csvReader = new CsvReader(reader);
 		String[] headers = csvReader.getHeaders();
@@ -27,36 +44,44 @@ public abstract class AbstractImportTool {
 		while (csvReader.readRecord()) {
 			String[] values = csvReader.getValues();
 			try {
-				validateRecord(values);
-				EObject entity = createEntityFromRecord(values);
-				validateEntity(entity);
-				doImportRecord(entity);
+				processRecord(values);
 				count++;
 			} catch (Exception e) {
 				errCount++;
-				doImportRecordFailed(csvReader.getValues(), e);
+				doImportRecordFailed(values, e);
 			}
 		}
 		doImportComplete();
 	}
 
-	abstract protected void doImportRecord(Object entity) ;
+	protected void processRecord(String[] values) {
+		validateRecord(values);
+		EObject entity = createEntityFromRecord(values);
+		validateEntity(entity);
+		doImportRecord(entity);
+	}
+
+	abstract protected void doImportRecord(Object entity);
 
 	protected EObject createEntityFromRecord(String[] values) {
-			EObject entity = createBlankEntity();
-	//		EMFUtil.populate(vehicle);
-			for (Entry entry : getFields()) {
-				String value = values[entry.field];
-				Object converted = convert(entry.feature, value);
-				System.err.printf("Setting %s: '%s'\n", entry.feature.getName(), converted);
-				entity.eSet(entry.feature, converted);
-			}
-			return entity;
+		EObject entity = createBlankEntity();
+		// EMFUtil.populate(vehicle);
+		for (Entry entry : getFields()) {
+			String value = values[entry.field];
+			Object converted = convert(entry.feature, value);
+			System.err.printf("Setting %s: '%s'\n", entry.feature.getName(), converted);
+			entity.eSet(entry.feature, converted);
 		}
+		return entity;
+	}
 
-	abstract protected EObject createBlankEntity();
+	protected EObject createBlankEntity() {
+		throw new UnsupportedOperationException("unimplemented");
+	}
 
-	protected abstract List<Entry> getFields();
+	protected List<Entry> getFields() {
+		throw new UnsupportedOperationException("unimplemented");
+	}
 
 	protected void doImportComplete() {
 		System.out.printf("Processed %d records with %d failures\n", count + errCount, errCount);
@@ -64,12 +89,12 @@ public abstract class AbstractImportTool {
 
 	private void validateHeaders(String[] headers) {
 		// TODO Auto-generated method stub
-	
+
 	}
 
 	protected void validateRecord(String[] values) {
 		String val;
-		for ( int i : getMandatoryFieldIndexes() ) {
+		for (int i : getMandatoryFieldIndexes()) {
 			val = values[i];
 			if (val == null || val.trim().length() == 0) {
 				throw new ValidationException("missing mandatory field " + i);
@@ -77,11 +102,12 @@ public abstract class AbstractImportTool {
 		}
 	}
 
-	abstract protected int[] getMandatoryFieldIndexes();
+	protected int[] getMandatoryFieldIndexes() {
+		throw new UnsupportedOperationException("unimplemented");
+	}
 
 	protected void validateEntity(EObject vehicle) {
 	}
-
 
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		e.printStackTrace();
@@ -96,9 +122,8 @@ public abstract class AbstractImportTool {
 			} catch (Exception e) {
 				retVal = null;
 			}
-		}
-		else if (Integer.class.isAssignableFrom(instanceClass)) {
-			System.err.println(">> Converting from " + value + " ("+ instanceClass + ") to Integer");
+		} else if (Integer.class.isAssignableFrom(instanceClass)) {
+			System.err.println(">> Converting from " + value + " (" + instanceClass + ") to Integer");
 			try {
 				retVal = new Integer(value);
 			} catch (Exception e) {

@@ -65,8 +65,8 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.agritrace.edairy.desktop.install.handlers.SampleHandler"
-            commandId="com.agritrace.edairy.desktop.install.commands.sampleCommand">
+            class="com.agritrace.edairy.desktop.install.handlers.ImportMembersHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.importMembers">
       </handler>
       <handler
             class="com.agritrace.edairy.desktop.install.handlers.ImportRoutesHandler"

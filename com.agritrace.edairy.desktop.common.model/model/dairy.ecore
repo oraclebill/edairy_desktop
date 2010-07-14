@@ -364,6 +364,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="Account">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountId" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" iD="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountNumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
           eType="#//Membership" eOpposite="#//Membership/account"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="established" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
