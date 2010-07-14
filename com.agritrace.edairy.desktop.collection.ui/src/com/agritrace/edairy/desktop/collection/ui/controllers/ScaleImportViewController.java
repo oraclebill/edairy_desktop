@@ -28,7 +28,7 @@ import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class ScaleDataImportController extends SubModuleController {
+public class ScaleImportViewController extends SubModuleController {
 
 	public static final String TIME_COLUMNN_HEADER 		= "Timestamp";
 	public static final String MEMBER_COLUMN_HEADER 	= "Member";
@@ -38,7 +38,7 @@ public class ScaleDataImportController extends SubModuleController {
 	public static final String SUSPENDED_COLUMN_HEADER 	= "Suspended";
 	public static final String TOTAL_LABEL 				= "Total : ";
 
-	private static Logger LOG = Log4r.getLogger(Activator.getDefault(), ScaleDataImportController.class);
+	private static Logger LOG = Log4r.getLogger(Activator.getDefault(), ScaleImportViewController.class);
 	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");
 
 	private static final String[] columnHeaders = { 
@@ -63,7 +63,7 @@ public class ScaleDataImportController extends SubModuleController {
 	/**
 	 * 
 	 */
-	public ScaleDataImportController() {
+	public ScaleImportViewController() {
 		super();
 		dairyRepo = DairyRepository.getInstance();
 //		bins = dairyRepo.allDairyContainers();

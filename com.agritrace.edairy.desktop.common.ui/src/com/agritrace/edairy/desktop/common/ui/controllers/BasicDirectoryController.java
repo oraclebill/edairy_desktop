@@ -1,12 +1,14 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.riena.beans.common.TypedComparator;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -21,6 +23,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	final private List<ColumnFormatter> columnFormatters = new ArrayList<ColumnFormatter>();
 	final private List<String> columnHeaders = new ArrayList<String>();
 	final private List<String> columnProperties = new ArrayList<String>();
+	final private ArrayList<Comparator> columnComparators = new ArrayList<Comparator>();
 
 	private EClass eClass;
 
@@ -35,15 +38,24 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	protected void addTableColumn(String colHeader, EStructuralFeature featurePath) {
 		addTableColumn(colHeader, featurePath, null);
 	}
-//
-//	protected void addTableColumn(String colHeader, FeaturePath feature) {
-//		addTableColumn(colHeader, feature, null);
-//	}
+
+	//
+	// protected void addTableColumn(String colHeader, FeaturePath feature) {
+	// addTableColumn(colHeader, feature, null);
+	// }
 
 	protected void addTableColumn(String colHeader, EStructuralFeature feature, ColumnFormatter formatter) {
 		columnHeaders.add(colHeader);
 		columnProperties.add(feature.getName());
 		columnFormatters.add(formatter);
+		Class<?> colType = feature.getEType().getInstanceClass();
+		if (String.class.isAssignableFrom(colType)) {
+			columnComparators.add(new TypedComparator<String>());
+		} else if (Integer.class.isAssignableFrom(colType)) {
+			columnComparators.add(new TypedComparator<Integer>());
+		} else {
+			columnComparators.add(null);
+		}
 	}
 
 	@Override
@@ -65,17 +77,31 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		});
 
 		final ColumnFormatter[] formatters = getTableColumnFormatters();
+		final Comparator<Object>[] comparators = getTableColumnComparators();
 		for (int i = 0; i < formatters.length; i++) {
 			if (formatters[i] != null) {
 				table.setColumnFormatter(i, formatters[i]);
 			}
+			if (comparators[i] != null) {
+				table.setComparator(i, comparators[i]);
+				table.setColumnSortable(i, true);
+			}
+			else {
+				table.setColumnSortable(i, false);
+			}
 		}
 
+		String[] tableColumnProperties = getTableColumnPropertyNames();
+		String[] tableColumnHeaders = getTableColumnHeaders();
 		table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
-				getTableColumnPropertyNames(), getTableColumnHeaders());
+				tableColumnProperties, tableColumnHeaders);
 
 		table.updateFromModel();
 
+	}
+
+	private Comparator[] getTableColumnComparators() {
+		return columnComparators.toArray(new Comparator[columnComparators.size()] ); 
 	}
 
 	@Override

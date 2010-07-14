@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
@@ -14,14 +13,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
-import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialogController;
 
@@ -32,108 +30,102 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialog
  * 
  */
 public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialogController> {
-	
-	private Composite comonComp;
-
-	// private static int WIDTH_HEIGHT = 400;
-	// private static int DESC_HEIGHT_HEIGHT = 50;
 
 	public EmployeeEditDialog(Shell shell) {
 		super(shell);
-	}
-	
-	
-
-	private void createContactGroup(Composite parent) {
-
-		final ProfilePhotoComposite photoWidget = new ProfilePhotoComposite(comonComp, SWT.NONE);
-		photoWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		addUIControl(photoWidget, "profile-photo-widget");
-
-		final Group ContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(ContactGroup);
-		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(ContactGroup);
-		final AddressGroupWidget addressWidget = new AddressGroupWidget(ContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
-				.applyTo(addressWidget.getGroup());
-		addressWidget.getGroup().pack();
-
-		final DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(ContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
-		directionWidget.getGroup().pack();
-
-		final MapGroupWidget mapWidget = new MapGroupWidget(ContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
-		mapWidget.getGroup().pack();
-
-		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(ContactGroup);
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
-		// commGroup.getGroup());
-		// commGroup.getGroup().pack();
-		//
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup.getGroup());
-		commGroup.getGroup().pack();
 	}
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
 
-		comonComp = UIControlsFactory.createComposite(parent);
-		comonComp.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
+		Composite comonComp = UIControlsFactory.createComposite(parent);
+		comonComp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));		
+		comonComp.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).create());
 		comonComp.setLayout(new GridLayout(2, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
+		
+		createEmployeeInfoPanel(comonComp).setLayoutData(GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP).grab(true, false).create());
+
+		createPhotoPanel(comonComp).setLayoutData(GridDataFactory.fillDefaults().create());
+
+		createContactGroup(comonComp).setLayoutData(GridDataFactory.fillDefaults().grab(true,true).span(2,1).create());
+	}
+
+	protected Composite createPhotoPanel(Composite parent) {
+		final ProfilePhotoComposite photoWidget = new ProfilePhotoComposite(parent, SWT.NONE);
+//		photoWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		addUIControl(photoWidget, "profile-photo-widget");
+		return photoWidget;		
+	}
+
+	protected Composite createEmployeeInfoPanel(final Composite comonComp) {
+		final Composite employeeInfo = UIControlsFactory.createComposite(comonComp);
+//		employeeInfo.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.TOP).grab(true, false).create());
+		employeeInfo.setLayout(GridLayoutFactory.swtDefaults().margins(5, 5).numColumns(2).create());
 
 		final GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
-
-		final Composite composite = new Composite(comonComp, SWT.NONE);
-		composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-
-		GridData gd_composite = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1);
-		gd_composite.widthHint = 240;
-		composite.setLayoutData(gd_composite);
-		GridLayout gl_composite = new GridLayout(2, false);
-		gl_composite.marginBottom = 5;
-		gl_composite.marginLeft = 5;
-		gl_composite.marginTop = 5;
-		gl_composite.marginRight = 5;
-		composite.setLayout(gl_composite);
-
-		UIControlsFactory.createLabel(composite, "Employee ID");
-
-		final Text txtId = UIControlsFactory.createText(composite);
+		
+		UIControlsFactory.createLabel(employeeInfo, "Employee No.");
+		final Text txtId = UIControlsFactory.createText(employeeInfo);
 		txtId.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.applyTo(txtId);
-		addUIControl(txtId, EmployeeBindingConstants.BIND_ID_EMPLOYEE_ID);
+		addUIControl(txtId, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
 
-		UIControlsFactory.createLabel(composite, "Family Name");
-		final Text familyName = UIControlsFactory.createText(composite);
+		UIControlsFactory.createLabel(employeeInfo, "Family Name");
+		final Text familyName = UIControlsFactory.createText(employeeInfo);
 		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(familyName);
 		addUIControl(familyName, EmployeeBindingConstants.BIND_ID_FAMILY_NAME);
 
-		UIControlsFactory.createLabel(composite, "Given Name");
-		final Text givenName = UIControlsFactory.createText(composite);
+		UIControlsFactory.createLabel(employeeInfo, "Given Name");
+		final Text givenName = UIControlsFactory.createText(employeeInfo);
 		givenName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(givenName);
 		addUIControl(givenName, EmployeeBindingConstants.BIND_ID_GIVEN_NAME);
 
-		UIControlsFactory.createLabel(composite, "Department");
-		final CCombo deptCCombo = UIControlsFactory.createCCombo(composite);
+		UIControlsFactory.createLabel(employeeInfo, "Department");
+		final CCombo deptCCombo = UIControlsFactory.createCCombo(employeeInfo);
 		deptCCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.BEGINNING).applyTo(deptCCombo);
 		addUIControl(deptCCombo, EmployeeBindingConstants.BIND_ID_DEPARTMENT);
 
-		UIControlsFactory.createLabel(composite, "Position");
-		final CCombo positionCCombo = UIControlsFactory.createCCombo(composite);
+		UIControlsFactory.createLabel(employeeInfo, "Position");
+		final CCombo positionCCombo = UIControlsFactory.createCCombo(employeeInfo);
 		positionCCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(positionCCombo);
 		addUIControl(positionCCombo, EmployeeBindingConstants.BIND_ID_POSITION);
 
-		createContactGroup(comonComp);
-		new Label(comonComp, SWT.NONE);
-		parent.pack();
+		UIControlsFactory.createLabel(employeeInfo, "Operator Code");
+		final Text operatorCode = UIControlsFactory.createText(employeeInfo);
+		operatorCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		factory.copy().applyTo(operatorCode);
+		addUIControl(operatorCode, EmployeeBindingConstants.BIND_ID_OPR_CODE);
+
+		UIControlsFactory.createLabel(employeeInfo, "Security Role");
+		final Text securityRole = UIControlsFactory.createText(employeeInfo);
+		securityRole.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		factory.copy().applyTo(securityRole);
+		addUIControl(securityRole, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
+
+		return employeeInfo;
+	}
+
+	private Composite createContactGroup(Composite parent) {
+		
+		final Group contactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
+//		contactGroup.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).create());
+		contactGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
+
+		final LocationTabFolder locationGroup = new LocationTabFolder(contactGroup, SWT.None);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(locationGroup);
+
+		final TabItem commsTab = new TabItem(locationGroup.getTabFolder(), SWT.NONE);
+		commsTab.setText("Contact Info");
+		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(locationGroup.getTabFolder());
+		commsTab.setControl(commGroup.getGroup());
+		return contactGroup;
 
 	}
+
 
 	@Override
 	protected EmployeeEditDialogController createController() {

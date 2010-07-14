@@ -712,6 +712,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEmployee_SecurityRole() {
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDairyLocation() {
 		return dairyLocationEClass;
 	}
@@ -1846,6 +1855,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__NATIONAL_ID);
 		createEAttribute(employeeEClass, EMPLOYEE__NHIF_NUMBER);
 		createEAttribute(employeeEClass, EMPLOYEE__NSSF_NUMBER);
+		createEAttribute(employeeEClass, EMPLOYEE__SECURITY_ROLE);
 
 		dairyLocationEClass = createEClass(DAIRY_LOCATION);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__ID);
@@ -2075,6 +2085,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_NationalId(), ecorePackage.getEString(), "nationalId", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getEmployee_NhifNumber(), ecorePackage.getEString(), "nhifNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_NssfNumber(), ecorePackage.getEString(), "nssfNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_SecurityRole(), ecorePackage.getEString(), "securityRole", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyLocationEClass, DairyLocation.class, "DairyLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairyLocation_Id(), ecorePackage.getELong(), "Id", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

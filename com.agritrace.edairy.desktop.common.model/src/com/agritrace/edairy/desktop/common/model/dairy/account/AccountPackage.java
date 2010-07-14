@@ -80,13 +80,22 @@ public interface AccountPackage extends EPackage {
 	int ACCOUNT__ACCOUNT_ID = 0;
 
 	/**
+	 * The feature id for the '<em><b>Account Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT__ACCOUNT_NUMBER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__MEMBER = 1;
+	int ACCOUNT__MEMBER = 2;
 
 	/**
 	 * The feature id for the '<em><b>Established</b></em>' attribute.
@@ -95,7 +104,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__ESTABLISHED = 2;
+	int ACCOUNT__ESTABLISHED = 3;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -104,7 +113,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__STATUS = 3;
+	int ACCOUNT__STATUS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -113,7 +122,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__TYPE = 4;
+	int ACCOUNT__TYPE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Transactions</b></em>' containment reference list.
@@ -122,7 +131,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__TRANSACTIONS = 5;
+	int ACCOUNT__TRANSACTIONS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Balances</b></em>' containment reference list.
@@ -131,7 +140,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__BALANCES = 6;
+	int ACCOUNT__BALANCES = 7;
 
 	/**
 	 * The number of structural features of the '<em>Account</em>' class.
@@ -140,7 +149,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_FEATURE_COUNT = 7;
+	int ACCOUNT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.TransactionImpl <em>Transaction</em>}' class.
@@ -532,6 +541,17 @@ public interface AccountPackage extends EPackage {
 	EAttribute getAccount_AccountId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountNumber <em>Account Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Account Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountNumber()
+	 * @see #getAccount()
+	 * @generated
+	 */
+	EAttribute getAccount_AccountNumber();
+
+	/**
 	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -893,6 +913,14 @@ public interface AccountPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACCOUNT__ACCOUNT_ID = eINSTANCE.getAccount_AccountId();
+
+		/**
+		 * The meta object literal for the '<em><b>Account Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACCOUNT__ACCOUNT_NUMBER = eINSTANCE.getAccount_AccountNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Member</b></em>' container reference feature.

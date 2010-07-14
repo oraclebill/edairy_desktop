@@ -735,13 +735,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Security Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 7;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -2741,6 +2750,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_NssfNumber();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole <em>Security Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Security Role</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_SecurityRole();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4417,6 +4437,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__NSSF_NUMBER = eINSTANCE.getEmployee_NssfNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Security Role</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__SECURITY_ROLE = eINSTANCE.getEmployee_SecurityRole();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.

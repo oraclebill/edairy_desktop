@@ -64,7 +64,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		departmentSearchCombo.updateFromModel();
 		departmentSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
 		
-		
+		//
 		getNavigationNode().addAction(new IAction() {
 			
 			@Override
@@ -87,10 +87,11 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		return employee;
 	}
 
+	final List<Employee> allEmployees = getRepository().getMemberships();
+
 	@Override
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
-		final List<Employee> allEmployees = getRepository().getMemberships();
 		for (final Employee e : allEmployees) {
 			if ((MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) || MatchUtil.matchContains(
 					searchBean.getName(), e.getGivenName()))

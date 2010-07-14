@@ -1,22 +1,12 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
-import java.io.FileInputStream;
-
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.ILabelRidget;
+import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.validation.RequiredField;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.riena.ui.ridgets.IValueRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -34,11 +24,14 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 	private Employee editEmployee = null;
 
-	IComboRidget department;
-	ITextRidget employeeId;
-	ITextRidget familyName;
-	ITextRidget givenName;
-	IComboRidget position;
+	private IComboRidget department;
+	private ITextRidget employeeId;
+	private ITextRidget familyName;
+	private ITextRidget givenName;
+	private IComboRidget position;
+
+	private ITextRidget operatorCode;
+	private ITextRidget securityRole;
 
 	@Override
 	public void configureUserRidgets() {
@@ -53,10 +46,11 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 			photoRidget.getId();
 		}
 		
+		
 		// customer id
-		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_ID);
+		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
 		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__ID));
-		employeeId.setOutputOnly(true);
+		employeeId.setOutputOnly(false);
 		employeeId.setFocusable(false);
 
 		// company name
@@ -64,30 +58,44 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		familyName.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__FAMILY_NAME));
 		familyName.setMandatory(true);
 //		familyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		familyName.updateFromModel();
+//		familyName.updateFromModel();
 
 		// company legal name
 		givenName = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_GIVEN_NAME);
 		givenName.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__GIVEN_NAME));
 		givenName.setMandatory(true);
 //		givenName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		givenName.updateFromModel();
+//		givenName.updateFromModel();
 
 		// department
 		department = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_DEPARTMENT);
 		department.bindToModel(Observables.staticObservableList(EmployeeReference.getDepartments()), String.class,
 				null, new WritableValue());
-		department.updateFromModel();
-		department.setSelection(0);
+//		department.updateFromModel();
+//		department.setSelection(0);
 
 		// job function
 		position = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_POSITION);
 		position.bindToModel(Observables.staticObservableList(EmployeeReference.getPositions()), String.class, null,
 				EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION));
 		position.setMandatory(true);
-		position.updateFromModel();
-		position.setSelection(0);
+//		position.updateFromModel();
+//		position.setSelection(0);
 
+		// operator code
+		operatorCode = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_OPR_CODE);
+		operatorCode.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE));
+		operatorCode.setMandatory(true);
+//		operatorCode.updateFromModel();
+
+		// security role
+		securityRole = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
+		securityRole.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__SECURITY_ROLE));
+		securityRole.setOutputOnly(true);
+//		securityRole.updateFromModel();
+
+
+		
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		addressGroupController.setInputModel(editEmployee.getLocation().getPostalLocation());
@@ -107,10 +115,14 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		final CommunicationGroupController commController = new CommunicationGroupController(this);
 		commController.setInputModel(editEmployee);
 		commController.updateBinding();
+		
+		// bind all
+		for (IRidget ridget : getRidgets()) {
+			if (ridget instanceof IValueRidget) {
+				IValueRidget ivr = (IValueRidget) ridget;
+				ridget.updateFromModel();
+			}
+		}
 	}
 
-//	@Override
-//	public Employee getWorkingCopy() {
-//		return (Employee) getContext("editObject");
-//	}
 }

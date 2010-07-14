@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getAccountId <em>Account Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getAccountNumber <em>Account Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getEstablished <em>Established</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl#getStatus <em>Status</em>}</li>
@@ -73,6 +74,26 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @ordered
 	 */
 	protected long accountId = ACCOUNT_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAccountNumber() <em>Account Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAccountNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ACCOUNT_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAccountNumber() <em>Account Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAccountNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String accountNumber = ACCOUNT_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getEstablished() <em>Established</em>}' attribute.
@@ -192,6 +213,27 @@ public class AccountImpl extends EObjectImpl implements Account {
 		accountId = newAccountId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT__ACCOUNT_ID, oldAccountId, accountId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAccountNumber(String newAccountNumber) {
+		String oldAccountNumber = accountNumber;
+		accountNumber = newAccountNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT__ACCOUNT_NUMBER, oldAccountNumber, accountNumber));
 	}
 
 	/**
@@ -383,6 +425,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return getAccountId();
+			case AccountPackage.ACCOUNT__ACCOUNT_NUMBER:
+				return getAccountNumber();
 			case AccountPackage.ACCOUNT__MEMBER:
 				return getMember();
 			case AccountPackage.ACCOUNT__ESTABLISHED:
@@ -410,6 +454,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				setAccountId((Long)newValue);
+				return;
+			case AccountPackage.ACCOUNT__ACCOUNT_NUMBER:
+				setAccountNumber((String)newValue);
 				return;
 			case AccountPackage.ACCOUNT__MEMBER:
 				setMember((Membership)newValue);
@@ -446,6 +493,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				setAccountId(ACCOUNT_ID_EDEFAULT);
 				return;
+			case AccountPackage.ACCOUNT__ACCOUNT_NUMBER:
+				setAccountNumber(ACCOUNT_NUMBER_EDEFAULT);
+				return;
 			case AccountPackage.ACCOUNT__MEMBER:
 				setMember((Membership)null);
 				return;
@@ -478,6 +528,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		switch (featureID) {
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return accountId != ACCOUNT_ID_EDEFAULT;
+			case AccountPackage.ACCOUNT__ACCOUNT_NUMBER:
+				return ACCOUNT_NUMBER_EDEFAULT == null ? accountNumber != null : !ACCOUNT_NUMBER_EDEFAULT.equals(accountNumber);
 			case AccountPackage.ACCOUNT__MEMBER:
 				return getMember() != null;
 			case AccountPackage.ACCOUNT__ESTABLISHED:
@@ -506,6 +558,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (accountId: ");
 		result.append(accountId);
+		result.append(", accountNumber: ");
+		result.append(accountNumber);
 		result.append(", established: ");
 		result.append(established);
 		result.append(", status: ");

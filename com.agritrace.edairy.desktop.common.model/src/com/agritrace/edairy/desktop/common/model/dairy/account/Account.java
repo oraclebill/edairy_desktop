@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountId <em>Account Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountNumber <em>Account Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getEstablished <em>Established</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getStatus <em>Status</em>}</li>
@@ -62,6 +63,32 @@ public interface Account extends EObject {
 	 * @generated
 	 */
 	void setAccountId(long value);
+
+	/**
+	 * Returns the value of the '<em><b>Account Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Account Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Account Number</em>' attribute.
+	 * @see #setAccountNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_AccountNumber()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getAccountNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.Account#getAccountNumber <em>Account Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Account Number</em>' attribute.
+	 * @see #getAccountNumber()
+	 * @generated
+	 */
+	void setAccountNumber(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' container reference.

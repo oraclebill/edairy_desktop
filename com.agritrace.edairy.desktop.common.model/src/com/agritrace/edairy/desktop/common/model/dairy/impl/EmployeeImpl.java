@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNationalId <em>National Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNssfNumber <em>Nssf Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getSecurityRole <em>Security Role</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,6 +179,26 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected String nssfNumber = NSSF_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSecurityRole() <em>Security Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSecurityRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SECURITY_ROLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSecurityRole() <em>Security Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSecurityRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected String securityRole = SECURITY_ROLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -350,6 +371,27 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSecurityRole() {
+		return securityRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSecurityRole(String newSecurityRole) {
+		String oldSecurityRole = securityRole;
+		securityRole = newSecurityRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__SECURITY_ROLE, oldSecurityRole, securityRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -367,6 +409,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return getNhifNumber();
 			case DairyPackage.EMPLOYEE__NSSF_NUMBER:
 				return getNssfNumber();
+			case DairyPackage.EMPLOYEE__SECURITY_ROLE:
+				return getSecurityRole();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -399,6 +443,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return;
 			case DairyPackage.EMPLOYEE__NSSF_NUMBER:
 				setNssfNumber((String)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__SECURITY_ROLE:
+				setSecurityRole((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -433,6 +480,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__NSSF_NUMBER:
 				setNssfNumber(NSSF_NUMBER_EDEFAULT);
 				return;
+			case DairyPackage.EMPLOYEE__SECURITY_ROLE:
+				setSecurityRole(SECURITY_ROLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -459,6 +509,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return NHIF_NUMBER_EDEFAULT == null ? nhifNumber != null : !NHIF_NUMBER_EDEFAULT.equals(nhifNumber);
 			case DairyPackage.EMPLOYEE__NSSF_NUMBER:
 				return NSSF_NUMBER_EDEFAULT == null ? nssfNumber != null : !NSSF_NUMBER_EDEFAULT.equals(nssfNumber);
+			case DairyPackage.EMPLOYEE__SECURITY_ROLE:
+				return SECURITY_ROLE_EDEFAULT == null ? securityRole != null : !SECURITY_ROLE_EDEFAULT.equals(securityRole);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -487,6 +539,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		result.append(nhifNumber);
 		result.append(", nssfNumber: ");
 		result.append(nssfNumber);
+		result.append(", securityRole: ");
+		result.append(securityRole);
 		result.append(')');
 		return result.toString();
 	}

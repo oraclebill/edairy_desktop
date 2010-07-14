@@ -25,6 +25,7 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNationalId <em>National Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNssfNumber <em>Nssf Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole <em>Security Role</em>}</li>
  * </ul>
  * </p>
  *
@@ -215,5 +216,31 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setNssfNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Security Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Security Role</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Security Role</em>' attribute.
+	 * @see #setSecurityRole(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_SecurityRole()
+	 * @model
+	 * @generated
+	 */
+	String getSecurityRole();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole <em>Security Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Security Role</em>' attribute.
+	 * @see #getSecurityRole()
+	 * @generated
+	 */
+	void setSecurityRole(String value);
 
 } // Employee

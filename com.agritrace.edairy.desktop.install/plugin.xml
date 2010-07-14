@@ -72,6 +72,10 @@
             class="com.agritrace.edairy.desktop.install.handlers.ImportRoutesHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importRouteData">
       </handler>
+      <handler
+            class="com.agritrace.edairy.desktop.install.handlers.ImportEmployeesHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.importEmployees">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
