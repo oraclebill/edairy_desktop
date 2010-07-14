@@ -16,9 +16,9 @@ import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
+import com.agritrace.edairy.desktop.collection.ui.MilkSubAppConstants;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkSubAppConstants;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryJournalView;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;

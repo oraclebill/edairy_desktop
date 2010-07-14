@@ -4,6 +4,7 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
@@ -121,7 +122,11 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 			if (ridget instanceof IValueRidget) {
 				IValueRidget ivr = (IValueRidget) ridget;
 				ridget.updateFromModel();
+			} else if (ridget instanceof IMarkableRidget) {
+				IMarkableRidget imr = (IMarkableRidget) ridget;
+				imr.updateFromModel();
 			}
+				
 		}
 	}
 

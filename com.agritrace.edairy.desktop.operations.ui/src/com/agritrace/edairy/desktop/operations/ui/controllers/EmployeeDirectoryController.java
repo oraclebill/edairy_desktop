@@ -3,32 +3,33 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.riena.core.marker.IMarker;
 import org.eclipse.riena.navigation.IAction;
-import org.eclipse.riena.navigation.INavigationNode;
-import org.eclipse.riena.navigation.INavigationNode.State;
-import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
-import org.eclipse.riena.ui.filter.IUIFilter;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
 
+
 	private IComboRidget departmentSearchCombo;
 	private ITextRidget nameSearchText;
 	private IComboRidget positionSearchCombo;
 
+	private final DairyRepository dairyRepo = DairyRepository.getInstance();
+	private final Dairy localDairy = dairyRepo.getLocalDairy();
+	private final List<Employee> allEmployees = dairyRepo.getLocalDairy().getEmployees();
 	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
 
 	public EmployeeDirectoryController() {
@@ -87,15 +88,15 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		return employee;
 	}
 
-	final List<Employee> allEmployees = getRepository().getMemberships();
 
 	@Override
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
 		for (final Employee e : allEmployees) {
-			if ((MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) || MatchUtil.matchContains(
-					searchBean.getName(), e.getGivenName()))
-					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction())) {
+			if (( MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) 
+					|| MatchUtil.matchContains(searchBean.getName(), e.getGivenName()) )
+					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction() )
+				) {
 				filtered.add(e);
 			}
 		}
@@ -105,6 +106,18 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected RecordDialog<Employee, EmployeeEditDialogController> getRecordDialog(Shell shell) {
 		return new EmployeeEditDialog(shell);
+	}
+
+	
+	@Override
+	protected void createEntity(Employee newEntity) {
+		localDairy.getEmployees().add(newEntity);
+		dairyRepo.save(localDairy);
+	}
+
+	@Override
+	protected void updateEntity(Employee updateableEntity) {
+		dairyRepo.save(updateableEntity);
 	}
 
 	@Override

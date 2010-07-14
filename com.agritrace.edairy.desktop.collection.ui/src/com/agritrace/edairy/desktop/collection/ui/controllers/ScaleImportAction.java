@@ -38,35 +38,35 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 final class ScaleImportAction implements IActionListener {
-		/**
+	/**
 		 * 
 		 */
-		private final MilkCollectionLogController milkCollectionLogController;
-		private IDairyRepository dairyRepo = DairyRepository.getInstance();
-		private Map<String, CollectionJournalPage> pageMap = new HashMap<String, CollectionJournalPage>();
-		Dairy localDairy;
+	private final MilkCollectionLogController milkCollectionLogController;
+	private IDairyRepository dairyRepo = DairyRepository.getInstance();
+	private Map<String, CollectionJournalPage> pageMap = new HashMap<String, CollectionJournalPage>();
+	Dairy localDairy;
 
-		public ScaleImportAction(MilkCollectionLogController milkCollectionLogController) {
-			this.milkCollectionLogController = milkCollectionLogController;
+	public ScaleImportAction(MilkCollectionLogController milkCollectionLogController) {
+		this.milkCollectionLogController = milkCollectionLogController;
 
-		}
+	}
 
-		@Override
-		public void callback() {
-			final FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
-			final String retVal = fileDialog.open();
-			File importFile = new File(retVal);
-			if (importFile.isFile() && importFile.canRead()) {
-				ScaleImporter scaleImporter = new ScaleImporter(importFile);
-				try {
-					List<ScaleRecord> scaleData = scaleImporter.readRecords().getResults();
-					// generate one or more collection groups - one group per
-					// scale/date/route/session (driver, vehicle,...)
-					for (ScaleRecord scaleRecord : scaleData) {
+	@Override
+	public void callback() {
+		final FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.DIALOG_TRIM);
+		final String retVal = fileDialog.open();
+		File importFile = new File(retVal);
+		if (importFile.isFile() && importFile.canRead()) {
+			ScaleImporter scaleImporter = new ScaleImporter(importFile);
+			try {
+				List<ScaleRecord> scaleData = scaleImporter.readRecords().getResults();
+				// generate one or more collection groups - one group per
+				// scale/date/route/session (driver, vehicle,...)
+				for (ScaleRecord scaleRecord : scaleData) {
+					CollectionJournalPage journalPage = getJournalForScaleRecord(scaleRecord);
+					boolean journalConsistent = validateJournalInfo(journalPage, scaleRecord);
+					try {
 						ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
-						CollectionJournalPage journalPage = getJournalForScaleRecord(scaleRecord);
-						boolean journalConsistent = validateJournalInfo(journalPage, scaleRecord);
-
 						// primary data
 						importRecord.setCollectionJournal(journalPage);
 						importRecord.setRecordedMember(scaleRecord.getMemberNumber());
@@ -91,174 +91,174 @@ final class ScaleImportAction implements IActionListener {
 						boolean dbConsistent = validateDbLookups(importRecord);
 
 						importRecord.setFlagged(scaleRecord.isValid() && dbConsistent && journalConsistent);
-					}
-
-					for (CollectionJournalPage page : pageMap.values()) {
-
-						final ISubModuleNode myNode = this.milkCollectionLogController.getNavigationNode();
-						System.err.println("My Node:    " + myNode);
-						final ISubModuleNode childNode = createCollectionDetailNode(page);
-						System.err.println("Created New Child Node: " + childNode);
-						myNode.addChild(childNode);
-
-						// myNode.getNavigationProcessor().navigate(myNode,
-						// childNode.getNodeId(), new
-						// NavigationArgument(journalPage));
-						// try {
-						// childNode.activate();
-						// } catch (final Exception e) {
-						// myNode.removeChild(childNode);
-						// e.printStackTrace();
-						// }
-
-					}
-				} catch (IOException e) {
-					// TODO: error message
-					this.milkCollectionLogController.getInfoFlyout().addInfo(
-							new InfoFlyoutData(null,
-									"Error importing scale data. Please contact support for assistance."));
-					this.milkCollectionLogController.log(LogService.LOG_ERROR, e.getMessage(), e);
-				}
-			} else {
-				Dialog dlg = new ErrorDialog(null, "Error reading file",
-						"The file " + importFile + " can not be read.",
-						new Status(0, Activator.PLUGIN_ID, "File Error"), 0);
-				dlg.open();
-			}
-		}
-
-		/**
-		 * Validate that lookup fields (memberNumber -> member, routeCode ->
-		 * route, etc) are not null, and all codes and ids in the record exist
-		 * in the database.
-		 * 
-		 * @param importRecord
-		 * @return
-		 */
-		private boolean validateDbLookups(ScaleImportRecord importRecord) {
-			boolean isConsistent = true;
-			// TODO: implement
-			return isConsistent;
-		}
-
-		/**
-		 * Compare the information in a scale record to that of a Collection
-		 * Journal Page (CollectionGroup). Returns false if any of the redundant
-		 * fields in the scale record are different than the corresponding
-		 * fields in the journal page (collection group).
-		 * 
-		 * @param journalPage
-		 * @param scaleRecord
-		 * @return
-		 */
-		private boolean validateJournalInfo(CollectionJournalPage journalPage, ScaleRecord scaleRecord) {
-			boolean isConsistent = true;
-			// TODO: implement
-			return isConsistent;
-		}
-
-		private CollectionJournalPage getJournalForScaleRecord(ScaleRecord record) {
-			String key = createGroupKey(record);
-			CollectionJournalPage page = pageMap.get(key);
-			if (page == null) {
-				page = DairyFactory.eINSTANCE.createCollectionJournalPage();
-				page.setReferenceNumber(key);
-				page.setDriver(getDriverByCode(record.getOperatorCode()));
-				page.setJournalDate(record.getValidDate());
-				page.setSession(getSessionForCode(record.getSessionCode()));
-				page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
-				if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
-						|| page.getRoute() == null) {
-					// TODO: add suspension reason
-					page.setSuspended(true);
-					this.milkCollectionLogController.log(LogService.LOG_INFO, "Suspending " + key + " for validation failure - null key item.");
-				}
-				pageMap.put(key, page);
-			}
-			return page;
-		}
-
-		private Route getRouteForRouteCode(String routeNumber) {
-			if (routeNumber != null) {
-				if (localDairy == null)
-					localDairy = dairyRepo.getLocalDairy();
-				for (Route route : localDairy.getRoutes()) {
-					if (route.getCode().equalsIgnoreCase(routeNumber.trim()))
-						return route;
-				}
-			}
-			return null;
-		}
-
-		private Session getSessionForCode(String sessionCode) {
-			if (sessionCode != null) {
-				if (sessionCode.equals("AM")) {
-					return Session.MORNING;
-				} else if (sessionCode.equals("PM")) {
-					return Session.EVENING1;
-				}
-			}
-			return null;
-		}
-
-		private Employee getDriverByCode(String operatorCode) {
-			Employee retval = null;
-			if (operatorCode != null) {
-				if (localDairy == null) {
-					localDairy = dairyRepo.getLocalDairy();
-				}
-				for (Employee employee : localDairy.getEmployees()) {
-					String operCode = employee.getOperatorCode();
-					if (operCode != null && operCode.equals(operatorCode)) {
-						retval = employee;
-						break;
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
 					}
 				}
+
+				for (CollectionJournalPage page : pageMap.values()) {
+
+					final ISubModuleNode myNode = this.milkCollectionLogController.getNavigationNode();
+					System.err.println("My Node:    " + myNode);
+					final ISubModuleNode childNode = createCollectionDetailNode(page);
+					System.err.println("Created New Child Node: " + childNode);
+					myNode.addChild(childNode);
+
+					// myNode.getNavigationProcessor().navigate(myNode,
+					// childNode.getNodeId(), new
+					// NavigationArgument(journalPage));
+					// try {
+					// childNode.activate();
+					// } catch (final Exception e) {
+					// myNode.removeChild(childNode);
+					// e.printStackTrace();
+					// }
+
+				}
+			} catch (IOException e) {
+				// TODO: error message
+				this.milkCollectionLogController.getInfoFlyout().addInfo(
+						new InfoFlyoutData(null, "Error importing scale data. Please contact support for assistance."));
+				this.milkCollectionLogController.log(LogService.LOG_ERROR, e.getMessage(), e);
 			}
-			return retval;
+		} else {
+			Dialog dlg = new ErrorDialog(null, "Error reading file", "The file " + importFile + " can not be read.",
+					new Status(0, Activator.PLUGIN_ID, "File Error"), 0);
+			dlg.open();
 		}
-
-		private Membership getMemberById(String memberNumber) {
-			// TODO: we are creating members for testing 
-			// -- FIXME 
-			Membership member = dairyRepo.getMembershipById(memberNumber);
-			if (member == null) {
-				member = DairyFactory.eINSTANCE.createMembership();
-				member.setMemberNumber(memberNumber);
-//				member.setStatus(MembershipStatus.PROVISIONAL);
-				member.setStatus(MembershipStatus.INACTIVE);
-			}
-			return member;
-		}
-
-		/**
-		 * There should be only one date per scale file, but the key generate
-		 * will accomodate multiples..
-		 * 
-		 * @param record
-		 * @return
-		 */
-		private String createGroupKey(ScaleRecord record) {
-			StringBuffer buffer = new StringBuffer();
-			Formatter formatter = new Formatter(buffer);
-			formatter.format("%s-%s-%s-%2s", record.getScaleSerial(), record.getRouteNumber(),
-					record.getTransactionDate(), record.getSessionCode());
-			return buffer.toString();
-		}
-
-		private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
-			// getNavigationNode().navigate(
-			//					new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
-			// new NavigationArgument(journalPage));
-
-			final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
-					journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
-			detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
-			detailViewNode.setContext("IMPORTED_RECORDS", journalPage); // backup..
-			WorkareaManager.getInstance()
-					.registerDefinition(detailViewNode, ScaleImportViewController.class, ScaleDataImportView.ID)
-					.setRequiredPreparation(true);
-			return detailViewNode;
-		}
-
 	}
+
+	/**
+	 * Validate that lookup fields (memberNumber -> member, routeCode -> route,
+	 * etc) are not null, and all codes and ids in the record exist in the
+	 * database.
+	 * 
+	 * @param importRecord
+	 * @return
+	 */
+	private boolean validateDbLookups(ScaleImportRecord importRecord) {
+		boolean isConsistent = true;
+		// TODO: implement
+		return isConsistent;
+	}
+
+	/**
+	 * Compare the information in a scale record to that of a Collection Journal
+	 * Page (CollectionGroup). Returns false if any of the redundant fields in
+	 * the scale record are different than the corresponding fields in the
+	 * journal page (collection group).
+	 * 
+	 * @param journalPage
+	 * @param scaleRecord
+	 * @return
+	 */
+	private boolean validateJournalInfo(CollectionJournalPage journalPage, ScaleRecord scaleRecord) {
+		boolean isConsistent = true;
+		// TODO: implement
+		return isConsistent;
+	}
+
+	private CollectionJournalPage getJournalForScaleRecord(ScaleRecord record) {
+		String key = createGroupKey(record);
+		CollectionJournalPage page = pageMap.get(key);
+		if (page == null) {
+			page = DairyFactory.eINSTANCE.createCollectionJournalPage();
+			page.setReferenceNumber(key);
+			page.setDriver(getDriverByCode(record.getOperatorCode()));
+			page.setJournalDate(record.getValidDate());
+			page.setSession(getSessionForCode(record.getSessionCode()));
+			page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
+			if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
+					|| page.getRoute() == null) {
+				// TODO: add suspension reason
+				page.setSuspended(true);
+				this.milkCollectionLogController.log(LogService.LOG_INFO, "Suspending " + key
+						+ " for validation failure - null key item.");
+			}
+			pageMap.put(key, page);
+		}
+		return page;
+	}
+
+	private Route getRouteForRouteCode(String routeNumber) {
+		if (routeNumber != null) {
+			if (localDairy == null)
+				localDairy = dairyRepo.getLocalDairy();
+			for (Route route : localDairy.getRoutes()) {
+				if (route.getCode().equalsIgnoreCase(routeNumber.trim()))
+					return route;
+			}
+		}
+		return null;
+	}
+
+	private Session getSessionForCode(String sessionCode) {
+		if (sessionCode != null) {
+			if (sessionCode.equals("AM")) {
+				return Session.MORNING;
+			} else if (sessionCode.equals("PM")) {
+				return Session.EVENING1;
+			}
+		}
+		return null;
+	}
+
+	private Employee getDriverByCode(String operatorCode) {
+		Employee retval = null;
+		if (operatorCode != null) {
+			if (localDairy == null) {
+				localDairy = dairyRepo.getLocalDairy();
+			}
+			for (Employee employee : localDairy.getEmployees()) {
+				String operCode = employee.getOperatorCode();
+				if (operCode != null && operCode.equals(operatorCode)) {
+					retval = employee;
+					break;
+				}
+			}
+		}
+		return retval;
+	}
+
+	private Membership getMemberById(String memberNumber) {
+		// TODO: we are creating members for testing
+		// -- FIXME
+
+		Membership member = dairyRepo.getMemberByMemberId(memberNumber);
+		if (member == null) {
+			throw new RuntimeException("invalid member id " + memberNumber);
+		}
+		return member;
+	}
+
+	/**
+	 * There should be only one date per scale file, but the key generate will
+	 * accomodate multiples..
+	 * 
+	 * @param record
+	 * @return
+	 */
+	private String createGroupKey(ScaleRecord record) {
+		StringBuffer buffer = new StringBuffer();
+		Formatter formatter = new Formatter(buffer);
+		formatter.format("%s-%s-%s-%2s", record.getScaleSerial(), record.getRouteNumber(), record.getTransactionDate(),
+				record.getSessionCode());
+		return buffer.toString();
+	}
+
+	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
+		// getNavigationNode().navigate(
+		//					new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
+		// new NavigationArgument(journalPage));
+
+		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
+				journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
+		detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
+		detailViewNode.setContext("IMPORTED_RECORDS", journalPage); // backup..
+		WorkareaManager.getInstance()
+				.registerDefinition(detailViewNode, ScaleImportViewController.class, ScaleDataImportView.ID)
+				.setRequiredPreparation(true);
+		return detailViewNode;
+	}
+
+}

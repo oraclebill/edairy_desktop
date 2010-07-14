@@ -21,14 +21,13 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Control;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite;
-import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
 
 /**
 	 * 

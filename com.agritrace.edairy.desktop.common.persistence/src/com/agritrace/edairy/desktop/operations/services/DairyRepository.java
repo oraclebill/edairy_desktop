@@ -369,4 +369,31 @@ public class DairyRepository implements IDairyRepository {
 		return dcCriteria.list();
 	}
 
+	@Override
+	public Membership getMemberByMemberId(String searchMemberNumber) {
+		
+		long start = System.currentTimeMillis();
+		
+		String formattedNumber = searchMemberNumber;		
+		try {
+			formattedNumber = String.format("%05d", Integer.parseInt(searchMemberNumber));
+		}
+		catch(NumberFormatException nfe) {
+			;
+		}
+		
+		Membership retval = null;
+		for( Membership membership : localDairy.getMemberships() ) {
+			String memberNumber = membership.getMemberNumber();
+			if (memberNumber != null && memberNumber.equals(formattedNumber)) {
+				retval = membership;
+				break;
+			}
+		}
+		
+		System.err.printf(" > Member search % 8s, time: %s (%s) %d\n", retval == null ? "FAIL" : "SUCCESS",
+				formattedNumber, searchMemberNumber, System.currentTimeMillis() - start);
+		return retval;
+	}
+
 }

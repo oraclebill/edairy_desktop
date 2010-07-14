@@ -70,4 +70,6 @@ public interface IDairyRepository {
 
 	List<DairyContainer> getBinsByRoute(Route journalRoute);
 
+	Membership getMemberByMemberId(String memberNumber);
+
 }

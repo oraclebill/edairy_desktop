@@ -29,6 +29,7 @@ public abstract class BaseDialogView extends AbstractDialogView {
 
 	public BaseDialogView(Shell parentShell) {
 		super(parentShell);
+		setShellStyle(getShellStyle() | SWT.SHEET);
 	}
 
 	/**

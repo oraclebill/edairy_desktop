@@ -19,7 +19,7 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.CollectionsEntryRidget;
-import com.agritrace.edairy.desktop.collection.ui.views.JournalHeaderComposite.ControlType;
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;

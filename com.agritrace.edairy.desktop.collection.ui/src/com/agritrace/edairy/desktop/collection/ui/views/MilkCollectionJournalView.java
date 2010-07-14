@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.CollectionsEntryPanel;
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView implements TraverseListener {

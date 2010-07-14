@@ -23,6 +23,7 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
+import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
