@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.managers;
+package com.agritrace.edairy.desktop.common.persistence;
 
 import java.text.ParseException;
 import java.util.ArrayList;

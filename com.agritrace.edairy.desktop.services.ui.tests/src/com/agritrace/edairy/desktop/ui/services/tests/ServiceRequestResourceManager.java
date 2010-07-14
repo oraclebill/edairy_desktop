@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.ui.services.tests;
 
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createFarmer;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createFarmer;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,8 +1,11 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.common.persistence;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
 /**
  * Core repository interface which encapsulates a concrete persistence
@@ -21,7 +24,7 @@ public interface IRepository<T extends EObject> {
 	 * @param query
 	 * @return List of matches or empty list.
 	 */
-	List<T> all();
+	List<T> getMemberships();
 
 	/**
 	 * 

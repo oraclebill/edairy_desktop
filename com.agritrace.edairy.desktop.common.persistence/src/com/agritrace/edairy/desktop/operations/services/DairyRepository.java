@@ -1,7 +1,7 @@
 package com.agritrace.edairy.desktop.operations.services;
 
-import java.util.Date;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
@@ -25,9 +25,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
+import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 
 public class DairyRepository implements IDairyRepository {
 	
@@ -182,7 +182,7 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	public List<CollectionJournalPage> allCollectionJournalPages() {
-		return collectionsRepository.all();
+		return collectionsRepository.getMemberships();
 	}
 
 	@Override
@@ -197,7 +197,7 @@ public class DairyRepository implements IDairyRepository {
 
 	@Override
 	public List<DeliveryJournal> allDeliveries() {
-		return deliveryRepository.all();
+		return deliveryRepository.getMemberships();
 	}
 
 	@Override

@@ -12,6 +12,8 @@ import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 import org.hibernate.metadata.ClassMetadata;
 
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
+
 public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
 
 	protected abstract class SessionRunnable implements Runnable {
@@ -60,7 +62,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	}
 
 	@Override
-	public List<T> all() {
+	public List<T> getMemberships() {
 		return find("FROM " + getEntityName());
 	}
 

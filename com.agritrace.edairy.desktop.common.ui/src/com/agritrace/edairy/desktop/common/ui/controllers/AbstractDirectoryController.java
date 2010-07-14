@@ -19,7 +19,7 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;

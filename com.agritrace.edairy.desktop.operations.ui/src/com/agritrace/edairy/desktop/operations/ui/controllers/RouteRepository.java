@@ -3,9 +3,9 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
 public class RouteRepository implements IRepository<Route> {
@@ -19,8 +19,8 @@ public class RouteRepository implements IRepository<Route> {
 	};
 
 	@Override
-	public List<Route> all() {
-		return routeRepo.all();
+	public List<Route> getMemberships() {
+		return routeRepo.getMemberships();
 	}
 
 	@Override

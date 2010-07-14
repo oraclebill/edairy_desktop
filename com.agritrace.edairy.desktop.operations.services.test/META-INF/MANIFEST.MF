@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: com.agritrace.edairy.desktop.operations.services.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: AGRITRACE
+Require-Bundle: org.junit,
+ com.agritrace.edairy.desktop.operations.services,
+ com.agritrace.edairy.desktop.common.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

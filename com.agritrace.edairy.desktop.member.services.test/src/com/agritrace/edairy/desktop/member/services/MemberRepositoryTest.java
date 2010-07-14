@@ -19,12 +19,12 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
-import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
 
 public class MemberRepositoryTest {
@@ -87,13 +87,13 @@ public class MemberRepositoryTest {
 		testEntity = DairyUtil.createMembership(null, null, null);
 		
 		// starting off empty
-		memberList = repo.all();
+		memberList = repo.getMemberships();
 		assertNotNull(memberList);
 		assertEquals(0, memberList.size());
 		
 		// addition works
 		repo.saveNew(testEntity);
-		memberList = repo.all();
+		memberList = repo.getMemberships();
 		assertEquals(1, memberList.size());
 		testEntity = memberList.get(0);
 		assertNotNull(testEntity);
@@ -103,14 +103,14 @@ public class MemberRepositoryTest {
 		memberId += 300;
 		testEntity.setMemberId(memberId);
 		repo.update(testEntity);
-		memberList = repo.all();
+		memberList = repo.getMemberships();
 		assertEquals(1, memberList.size());
 		testEntity = memberList.get(0);
 		assertEquals(new Long(memberId), testEntity.getMemberId());
 
 		// delete works
 		repo.delete(testEntity);
-		memberList = repo.all();
+		memberList = repo.getMemberships();
 		assertEquals(0, memberList.size());
 
 	}

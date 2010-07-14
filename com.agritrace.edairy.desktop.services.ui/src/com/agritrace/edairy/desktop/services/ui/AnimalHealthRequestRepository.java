@@ -12,13 +12,13 @@ public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHea
 		IAnimalHealthRequestRepository {
 
 	@Override
-	public List<AnimalHealthRequest> all() {
-		return super.all();
+	public List<AnimalHealthRequest> getMemberships() {
+		return super.getMemberships();
 	}
 
 	@Override
 	public List<AnimalHealthRequest> allRequests() {
-		return all();
+		return getMemberships();
 	}
 
 	@Override

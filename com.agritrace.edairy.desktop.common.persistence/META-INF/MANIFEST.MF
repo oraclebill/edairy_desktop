@@ -21,4 +21,25 @@ Import-Package: com.mysql.jdbc,
  org.hibernate.dialect;version="3.3.2",
  org.hsqldb;version="1.8.1",
  org.hsqldb.jdbc;version="1.8.1"
-Export-Package: com.agritrace.edairy.desktop.common.persistence.services
+Export-Package: com.agritrace.edairy.desktop.common.persistence;
+  uses:="com.agritrace.edairy.desktop.common.model.requests,
+   com.agritrace.edairy.desktop.common.model.tracking,
+   com.agritrace.edairy.desktop.common.model.dairy,
+   com.agritrace.edairy.desktop.common.model.base",
+ com.agritrace.edairy.desktop.common.persistence.services;uses:="com.agritrace.edairy.desktop.common.persistence,org.hibernate,org.eclipse.emf.teneo.hibernate",
+ com.agritrace.edairy.desktop.common.ui.managers;
+  uses:="org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.ecore,
+   org.eclipse.emf.common.util,
+   org.eclipse.emf.ecore.resource.impl,
+   com.agritrace.edairy.desktop.common.model.tracking,
+   com.agritrace.edairy.desktop.common.model.dairy",
+ com.agritrace.edairy.desktop.operations.services;uses:="com.agritrace.edairy.desktop.common.model.tracking,com.agritrace.edairy.desktop.common.model.dairy",
+ com.agritrace.edairy.desktop.operations.services.customer;
+  uses:="com.agritrace.edairy.desktop.common.persistence,
+   org.hibernate,
+   com.agritrace.edairy.desktop.common.model.dairy,
+   com.agritrace.edairy.desktop.common.persistence.services",
+ com.agritrace.edairy.desktop.operations.services.dairylocation;uses:="org.hibernate,com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services",
+ com.agritrace.edairy.desktop.operations.services.employee;uses:="com.agritrace.edairy.desktop.common.persistence,com.agritrace.edairy.desktop.common.model.dairy",
+ com.agritrace.edairy.desktop.operations.services.supplier;uses:="com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services"

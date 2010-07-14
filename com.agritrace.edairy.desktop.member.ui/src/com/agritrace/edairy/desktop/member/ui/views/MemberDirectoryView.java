@@ -22,6 +22,8 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberDirectoryView extends SubModuleView {
+	public MemberDirectoryView() {
+	}
 
 	public static final String FILTER_GROUP_TEXT = "Search for a Member";
 
@@ -83,9 +85,11 @@ public class MemberDirectoryView extends SubModuleView {
 		table.setHeaderVisible(true);
 
 		final TableColumn columnId = new TableColumn(table, SWT.LEFT);
-		columnId.setText("Member Id");
+		columnId.setText("Member No.");
 		final TableColumn columnName = new TableColumn(table, SWT.LEFT);
 		columnName.setText("Name");
+		final TableColumn columnRoute = new TableColumn(table, SWT.LEFT);
+		columnRoute.setText("Route");
 		final TableColumn columnStatus = new TableColumn(table, SWT.LEFT);
 		columnStatus.setText("Status");
 		final TableColumn columnPhone = new TableColumn(table, SWT.LEFT);
@@ -99,7 +103,8 @@ public class MemberDirectoryView extends SubModuleView {
 
 		final TableColumnLayout layout = new TableColumnLayout();
 		layout.setColumnData(columnId, new ColumnWeightData(8));
-		layout.setColumnData(columnName, new ColumnWeightData(20));
+		layout.setColumnData(columnName, new ColumnWeightData(50));
+		layout.setColumnData(columnRoute, new ColumnWeightData(10));
 		layout.setColumnData(columnStatus, new ColumnWeightData(12));
 		layout.setColumnData(columnPhone, new ColumnWeightData(15));
 		layout.setColumnData(columnCollection, new ColumnWeightData(8));

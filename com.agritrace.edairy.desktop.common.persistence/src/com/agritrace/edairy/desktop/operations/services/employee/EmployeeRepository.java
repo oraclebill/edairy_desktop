@@ -3,9 +3,9 @@ package com.agritrace.edairy.desktop.operations.services.employee;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
 public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee> {
@@ -18,8 +18,8 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	};
 
 	@Override
-	public List<Employee> all() {
-		return employeeRepo.all();
+	public List<Employee> getMemberships() {
+		return employeeRepo.getMemberships();
 
 	}
 

@@ -36,7 +36,7 @@ public class MemberInfoGroup {
 	private Label photoLabel;
 	private Text txtAdditional;
 	private Text txtFirst;
-	private Label txtId;
+	private Text txtId;
 	private Text txtLast;
 	private Text txtMiddle;
 
@@ -80,7 +80,7 @@ public class MemberInfoGroup {
 		// member Id
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MEMBERID));
 		// member Id Text (Label)
-		txtId = UIControlsFactory.createLabel(leftColumn, "<auto>", ViewWidgetId.memberInfo_id);
+		txtId = UIControlsFactory.createText(leftColumn, SWT.BORDER, "memberNumber");
 		fieldFactory.applyTo(txtId);
 
 		// row 2: title label + id

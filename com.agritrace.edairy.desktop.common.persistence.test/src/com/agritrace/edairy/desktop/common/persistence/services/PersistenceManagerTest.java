@@ -19,7 +19,7 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 
 public class PersistenceManagerTest {
 	PersistenceManager testPM;

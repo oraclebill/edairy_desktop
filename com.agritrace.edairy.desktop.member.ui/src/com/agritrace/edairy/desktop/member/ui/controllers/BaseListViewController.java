@@ -5,8 +5,8 @@ import java.util.List;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 
 public abstract class BaseListViewController extends SubModuleController {
 

@@ -30,12 +30,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
-import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 
 public class AccountTransactionJournalController extends TransactionJournalController {
 
@@ -131,7 +131,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	public void afterBind() {
 		super.afterBind();
 
-		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.all(), Membership.class),
+		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.getMemberships(), Membership.class),
 				Membership.class, "getMemberId", PojoObservables.observeValue(filterBean, "member"));
 
 		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),

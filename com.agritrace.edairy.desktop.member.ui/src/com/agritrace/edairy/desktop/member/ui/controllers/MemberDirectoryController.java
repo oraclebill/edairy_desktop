@@ -1,19 +1,11 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.query.conditions.Condition;
-import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectReferenceValueCondition;
-import org.eclipse.emf.query.conditions.strings.StringAdapter;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -22,6 +14,8 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
+import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -30,17 +24,16 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
-import com.agritrace.edairy.desktop.member.services.member.IMemberRepository;
-import com.agritrace.edairy.desktop.member.services.member.MemberRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
@@ -106,25 +99,25 @@ public class MemberDirectoryController extends SubModuleController {
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	public static final String DELETE_DIALOG_TITLE = "Delete Member";
 	private final IFarmRepository farmRepository;
-	private final String[] memberColumnHeaders = { "ID", "Name", "Status", "Phone", "Milk Collection",
+	private final String[] memberColumnHeaders = { "ID", "Name", "Route", "Status", "Phone", "Milk Collection",
 			"Monthly Credit Sales", "Credit Balance" };
 
 	private ITableRidget memberListRidget;
-	private final String[] memberPropertyNames = { "memberId", "member", "status", "member", "account", "account",
+	private final String[] memberPropertyNames = { "memberNumber", "member", "defaultRoute", "status", "member", "account", "account",
 			"account" };
-	private final List<Membership> membershipList = new ArrayList<Membership>();
-	private final IMemberRepository repository;
 
 	private final ILabelRidget[] searchLabels;
-
 	private ITextRidget searchText;
-
 	private IActionRidget viewRidget;
 
+	private final IMemberRepository repository = new MemberRepository();
+	private final List<Membership> membershipList = new ArrayList<Membership>();
+	private final List<Membership> allMembers = repository.getMemberships();
+
 	public MemberDirectoryController() {
-		repository = new MemberRepository();
 		farmRepository = new FarmRepository();
 		searchLabels = new ILabelRidget[27];
+
 	}
 
 	// void initRepository() {
@@ -195,13 +188,39 @@ public class MemberDirectoryController extends SubModuleController {
 		memberListRidget.updateFromModel();
 	}
 
-	private void configureMemberTable() {
+	private void configureMemberTable() {		
 		searchLabels[0] = getRidget(ILabelRidget.class, "All");
 		for (char i = 'A'; i < 'Z'; i++) {
 			searchLabels[i - 'A' + 1] = getRidget(ILabelRidget.class, new String(new char[] { i }));
 		}
 		searchText = getRidget(ITextRidget.class, ViewWidgetId.MEMBERLIST_SEARCHTEXT);
 		searchText.setText(DEFAULT_SEARCH_DISPLAY_TXT);
+		searchText.setDirectWriting(true);
+		searchText.addFocusListener(new IFocusListener() {
+			@Override
+			public void focusGained(FocusEvent event) {
+				String text = searchText.getText();
+				if (text != null && text.equals(DEFAULT_SEARCH_DISPLAY_TXT)) {
+					searchText.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent event) {
+				String text = searchText.getText();
+				if (text != null && text.equals("")) {
+					searchText.setText(DEFAULT_SEARCH_DISPLAY_TXT);
+				}
+			}
+			
+		});
+		searchText.addPropertyChangeListener("text", new PropertyChangeListener() {			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				refreshMemberList();
+			}
+		});
+
 
 		memberListRidget = getRidget(ITableRidget.class, ViewWidgetId.MEMBERLIST_MEMBERTABLE);
 		final IActionRidget searchButton = getRidget(IActionRidget.class, ViewWidgetId.memberInfo_searchButton);
@@ -213,6 +232,8 @@ public class MemberDirectoryController extends SubModuleController {
 
 			}
 		});
+
+		addDefaultAction(searchText, searchButton);
 
 		final IActionRidget clearButton = getRidget(IActionRidget.class, ViewWidgetId.memberInfo_clearButton);
 		clearButton.addListener(new IActionListener() {
@@ -240,13 +261,25 @@ public class MemberDirectoryController extends SubModuleController {
 					if (element instanceof Membership) {
 						final Person member = ((Membership) element).getMember();
 						if (member != null) {
-							return member.getFamilyName() + "," + member.getGivenName();
+							return member.getFamilyName() + ", " + member.getGivenName();
 						}
 					}
 					return null;
 				}
 			});
-			memberListRidget.setColumnFormatter(3, new ColumnFormatter() {
+			memberListRidget.setColumnFormatter(2, new ColumnFormatter() {
+				@Override
+				public String getText(Object element) {
+					if (element instanceof Membership) {
+						final Route route = (Route) ((Membership)element).getDefaultRoute();
+						if (route != null) {
+							return route.getCode();
+						}
+					}
+					return "";
+				}
+			});
+			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {
 					if (element instanceof Membership) {
@@ -258,20 +291,20 @@ public class MemberDirectoryController extends SubModuleController {
 					return null;
 				}
 			});
-			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					return "N/A";
-				}
-			});
 			memberListRidget.setColumnFormatter(5, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {
 					return "N/A";
 				}
 			});
-
 			memberListRidget.setColumnFormatter(6, new ColumnFormatter() {
+				@Override
+				public String getText(Object element) {
+					return "N/A";
+				}
+			});
+
+			memberListRidget.setColumnFormatter(7, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {
 					return "N/A";
@@ -285,6 +318,7 @@ public class MemberDirectoryController extends SubModuleController {
 					}
 				}
 			});
+			memberListRidget.addDoubleClickListener(new ViewActionListener());
 
 			// memberListRidget.updateFromModel();
 			getRidget(IActionRidget.class, ViewWidgetId.MEMBERLIST_ADD).addListener(new AddActionListener());
@@ -295,44 +329,31 @@ public class MemberDirectoryController extends SubModuleController {
 			}
 		}
 	}
-
+	
+	
 	protected List<Membership> getFilteredResult() {
-
-		final List<Membership> allMembers = repository.all();
 		final List<Membership> results = new ArrayList<Membership>();
-
-		// Start Date
-		final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
-
-		SELECT select = null;
-
-		if (searchText != null) {
+		long start = System.currentTimeMillis();
+		if (searchText == null) {
+			results.addAll(allMembers);
+		}
+		else {
 			String memberName = searchText.getText();
-			if (!memberName.isEmpty() && !memberName.equals(DEFAULT_SEARCH_DISPLAY_TXT)) {
-				if (!memberName.startsWith("^")) {
-					memberName = "^" + memberName;
-				}
-				final Condition name = new org.eclipse.emf.query.conditions.strings.StringRegularExpressionValue(
-						memberName, false, StringAdapter.DEFAULT);
-				final EObjectCondition farmNameCond = new EObjectAttributeValueCondition(
-						ModelPackage.Literals.PERSON__FAMILY_NAME, name);
-				final EObjectCondition farmCond = new EObjectReferenceValueCondition(
-						DairyPackage.Literals.MEMBERSHIP__MEMBER, farmNameCond);
-
-				condtions.add(farmCond);
-			} else {
-				return allMembers;
+			if (memberName.isEmpty() || memberName.equals(DEFAULT_SEARCH_DISPLAY_TXT)) {
+				results.addAll(allMembers);
 			}
+			else {				
+				for(Membership member : allMembers) {
+					Person person = member.getMember();
+					String matchText = person.getGivenName() + " " + person.getFamilyName() + " " + person.getAdditionalNames();
+					if (matchText.toUpperCase().contains(memberName.toUpperCase())) {
+						results.add(member);
+					}
+				}
+			} 
 		}
-
-		select = new SELECT(new FROM(allMembers), new WHERE(condtions.get(0)));
-
-		final IQueryResult result = select.execute();
-		for (final EObject object : result.getEObjects()) {
-			results.add((Membership) object);
-		}
+		System.err.println("search time: " + (System.currentTimeMillis() - start));
 		return results;
-
 	}
 
 }

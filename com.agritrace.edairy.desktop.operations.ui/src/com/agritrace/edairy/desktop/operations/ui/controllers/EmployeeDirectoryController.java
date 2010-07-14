@@ -90,7 +90,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
-		final List<Employee> allEmployees = getRepository().all();
+		final List<Employee> allEmployees = getRepository().getMemberships();
 		for (final Employee e : allEmployees) {
 			if ((MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) || MatchUtil.matchContains(
 					searchBean.getName(), e.getGivenName()))

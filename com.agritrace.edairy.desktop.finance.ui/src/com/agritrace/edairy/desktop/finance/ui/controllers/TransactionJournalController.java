@@ -120,7 +120,7 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	protected List<T> getFilteredResult() {
 		final List<T> filtered = new ArrayList<T>();
 		final Predicate filterPredicate = buildFilterPredicate();
-		for (final T tx : getRepository().all()) {
+		for (final T tx : getRepository().getMemberships()) {
 			if (filterPredicate.evaluate(tx)) {
 				filtered.add(tx);
 			}

@@ -1,15 +1,15 @@
 package com.agritrace.edairy.desktop.common.ui.managers;
 
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createAnimal;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createDescriptiveLocation;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createEmployee;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createFarm;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createFarmer;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createLocation;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createMapLocation;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createMembership;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createPerson;
-import static com.agritrace.edairy.desktop.common.ui.managers.DairyUtil.createPostalLocation;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createAnimal;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createDescriptiveLocation;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createEmployee;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createFarm;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createFarmer;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createLocation;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createMapLocation;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createMembership;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createPerson;
+import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createPostalLocation;
 
 import java.io.IOException;
 import java.math.BigDecimal;

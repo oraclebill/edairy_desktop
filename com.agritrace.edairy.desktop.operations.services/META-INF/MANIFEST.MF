@@ -10,9 +10,3 @@ Require-Bundle: org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.desktop.operations.services,
- com.agritrace.edairy.desktop.operations.services.customer,
- com.agritrace.edairy.desktop.operations.services.dairylocation,
- com.agritrace.edairy.desktop.operations.services.employee,
- com.agritrace.edairy.desktop.operations.services.supplier
- 

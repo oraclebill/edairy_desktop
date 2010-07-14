@@ -1,0 +1,1430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false">
+	<class name="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl" entity-name="Farm" abstract="false" lazy="false" discriminator-value="Farm" table="`farm`">
+		<meta attribute="eclassName">Farm</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<id name="farmId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`farmid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="farmdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="name" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`name`" length="60"/>
+		</property>
+		<list name="animals" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="farm_animals">
+				<column name="`farm_animals_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`farm_animals_idx`"/>
+			<one-to-many entity-name="RegisteredAnimal"/>
+		</list>
+		<list name="cans" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="farm_cans">
+				<column name="`farm_cans_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`farm_cans_idx`"/>
+			<one-to-many entity-name="Container"/>
+		</list>
+		<many-to-one name="location" entity-name="Location" lazy="false" cascade="all" foreign-key="farm_location" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`location_location_e_id`"/>
+		</many-to-one>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl" entity-name="Container" abstract="false" lazy="false" discriminator-value="Container" table="`container`">
+		<meta attribute="eclassName">Container</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<id name="containerId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`containerid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="containerdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="trackingNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`trackingnumber`" length="60"/>
+		</property>
+		<many-to-one name="owner" entity-name="Farm" lazy="false" foreign-key="container_owner" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`farm_owner_farmid`"/>
+		</many-to-one>
+		<property name="capacity" lazy="false" insert="true" update="true" not-null="false" unique="false" type="double">
+			<column not-null="false" unique="false" name="`capacity`"/>
+		</property>
+		<property name="type" lazy="false" not-null="false" insert="true" update="true" unique="false">
+			<column not-null="false" unique="false" name="`type`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.base.ContainerType</param>
+				<param name="eclassifier">ContainerType</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/base/</param>
+			</type>
+		</property>
+		<property name="measureType" lazy="false" not-null="false" insert="true" update="true" unique="false">
+			<column not-null="false" unique="false" name="`measuretype`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure</param>
+				<param name="eclassifier">UnitOfMeasure</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/base/</param>
+			</type>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl" entity-name="RegisteredAnimal" abstract="false" lazy="false" discriminator-value="RegisteredAnimal" table="`registeredanimal`">
+		<meta attribute="eclassName">RegisteredAnimal</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<id name="registrationId" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`registrationid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="registeredanimaldtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="givenName" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`givenname`" length="60"/>
+		</property>
+		<many-to-one name="location" entity-name="Farm" lazy="false" foreign-key="registeredanimal_location" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`farm_location_farmid`"/>
+		</many-to-one>
+		<property name="gender" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`gender`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.base.Gender</param>
+				<param name="eclassifier">Gender</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/base/</param>
+			</type>
+		</property>
+		<many-to-one name="animalType" entity-name="ReferenceAnimalType" lazy="false" cascade="persist,save-update,lock" foreign-key="registeredanimal_animaltype" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`referenceanimaltype_animaltype_e_id`"/>
+		</many-to-one>
+		<many-to-one name="sireType" entity-name="ReferenceAnimalType" lazy="false" cascade="all" foreign-key="registeredanimal_siretype" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`referenceanimaltype_siretype_e_id`"/>
+		</many-to-one>
+		<property name="purpose" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`purpose`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.tracking.Purpose</param>
+				<param name="eclassifier">Purpose</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</param>
+			</type>
+		</property>
+		<property name="dateOfAcquisition" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`dateofacquisition`"/>
+		</property>
+		<property name="acquisitionType" lazy="false" not-null="false" insert="true" update="true" unique="false">
+			<column not-null="false" unique="false" name="`acquisitiontype`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType</param>
+				<param name="eclassifier">AcquisitionType</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</param>
+			</type>
+		</property>
+		<list name="identifiers" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="registeredanimal_identifiers">
+				<column name="`registeredanimal_identifiers_registrationid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`registeredanimal_identifiers_idx`"/>
+			<one-to-many entity-name="AnimalIdentifier"/>
+		</list>
+		<property name="identifyingFeatures" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`identifyingfeatures`" length="60"/>
+		</property>
+		<property name="rearingMode" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`rearingmode`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.tracking.RearingMode</param>
+				<param name="eclassifier">RearingMode</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</param>
+			</type>
+		</property>
+		<list name="pastOwners" table="`registeredanimal_pastowners`" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`registeredanimal_pastowners_registrationid`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`registeredanimal_pastowners_idx`"/>
+			<element type="java.lang.String"/>
+		</list>
+		<property name="insuranceNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`insurancenumber`" length="60"/>
+		</property>
+		<property name="dateOfBirth" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`dateofbirth`"/>
+		</property>
+		<property name="birthCertificateNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`birthcertificatenumber`" length="60"/>
+		</property>
+		<property name="veterinaryCertificateNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`veterinarycertificatenumber`" length="60"/>
+		</property>
+		<property name="ministryId" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`ministryid`" length="60"/>
+		</property>
+		<property name="insuranceCompany" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`insurancecompany`" length="60"/>
+		</property>
+		<property name="feedingHabit" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`feedinghabit`" length="60"/>
+		</property>
+		<property name="feedType" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`feedtype`" length="60"/>
+		</property>
+		<property name="feedBrand" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`feedbrand`" length="60"/>
+		</property>
+		<property name="supplements" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`supplements`" length="60"/>
+		</property>
+		<property name="antibiotics" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`antibiotics`" length="60"/>
+		</property>
+		<property name="veterinary" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`veterinary`" length="60"/>
+		</property>
+		<property name="awards" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`awards`" length="60"/>
+		</property>
+		<property name="notes" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`notes`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl" entity-name="ReferenceAnimalType" abstract="false" lazy="false" discriminator-value="ReferenceAnimalType" table="`referenceanimaltype`">
+		<meta attribute="eclassName">ReferenceAnimalType</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<id type="long" name="e_id" column="e_id" access="org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierPropertyHandler">
+			<meta attribute="syntheticId">true</meta>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="referenceanimaltypedtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="species" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`species`" length="60"/>
+		</property>
+		<property name="breed" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`breed`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl" entity-name="AnimalIdentifier" abstract="false" lazy="false" discriminator-value="AnimalIdentifier" table="`animalidentifier`">
+		<meta attribute="eclassName">AnimalIdentifier</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<id type="long" name="e_id" column="e_id" access="org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierPropertyHandler">
+			<meta attribute="syntheticId">true</meta>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="animalidentifierdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="issuer" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`issuer`" length="60"/>
+		</property>
+		<property name="value" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`value`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl" entity-name="Person" abstract="false" lazy="false" discriminator-value="Person" table="`person`">
+		<meta attribute="eclassName">Person</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/base/</meta>
+		<id name="personId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`personid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="persondtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="contactable_contactmethods">
+				<column name="`person_contactmethods_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`person_contactmethods_idx`"/>
+			<one-to-many entity-name="ContactMethod"/>
+		</list>
+		<property name="photo" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`photo`" length="60"/>
+		</property>
+		<property name="honorific" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`honorific`" length="60"/>
+		</property>
+		<property name="familyName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`familyname`" length="60"/>
+		</property>
+		<property name="givenName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`givenname`" length="60"/>
+		</property>
+		<property name="middleName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`middlename`" length="60"/>
+		</property>
+		<property name="additionalNames" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`additionalnames`" length="60"/>
+		</property>
+		<property name="suffix" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`suffix`" length="60"/>
+		</property>
+		<property name="nickName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nickname`" length="60"/>
+		</property>
+		<property name="phoneNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`phonenumber`" length="60"/>
+		</property>
+		<many-to-one name="location" entity-name="Location" cascade="merge,persist,save-update,lock,refresh" not-null="false" lazy="false" foreign-key="person_location" insert="true" update="true"/>
+	</class>
+	<subclass name="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl" entity-name="Farmer" abstract="false" lazy="false" extends="Person" discriminator-value="Farmer">
+		<meta attribute="eclassName">Farmer</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<list name="farms" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="farmer_farms">
+				<column name="`farmer_farms_personid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`farmer_farms_idx`"/>
+			<one-to-many entity-name="Farm"/>
+		</list>
+	</subclass>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl" entity-name="Vehicle" abstract="false" lazy="false" discriminator-value="Vehicle" table="`vehicle`">
+		<meta attribute="eclassName">Vehicle</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="vehicleId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`vehicleid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="vehicledtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="registrationNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`registrationnumber`" length="60"/>
+		</property>
+		<property name="type" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`type`" length="60"/>
+		</property>
+		<property name="make" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`make`" length="60"/>
+		</property>
+		<property name="model" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`model`" length="60"/>
+		</property>
+		<property name="engineNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`enginenumber`" length="60"/>
+		</property>
+		<property name="chassisNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`chassisnumber`" length="60"/>
+		</property>
+		<property name="logBookNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`logbooknumber`" length="60"/>
+		</property>
+		<property name="insurancePolicyNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`insurancepolicynumber`" length="60"/>
+		</property>
+		<property name="insuranceExpirationDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`insuranceexpirationdate`"/>
+		</property>
+		<property name="dominantColour" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`dominantcolour`" length="60"/>
+		</property>
+		<property name="capacityInTonnes" lazy="false" insert="true" update="true" not-null="false" unique="false" type="double">
+			<column not-null="false" unique="false" name="`capacityintonnes`"/>
+		</property>
+		<property name="year" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.Integer">
+			<column not-null="false" unique="false" name="`year`"/>
+		</property>
+		<many-to-one name="driver" entity-name="Employee" lazy="false" foreign-key="vehicle_driver" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`employee_driver_personid`"/>
+		</many-to-one>
+		<component name="assetInfo" class="com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl">
+			<property name="tagType" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`tagtype`" length="60"/>
+			</property>
+			<property name="tagValue" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`tagvalue`" length="60"/>
+			</property>
+			<property name="dateAcquired" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+				<column not-null="false" unique="false" name="`dateacquired`"/>
+			</property>
+			<property name="damageDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+				<column not-null="false" unique="false" name="`damagedate`"/>
+			</property>
+			<property name="damageDescription" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`damagedescription`" length="60"/>
+			</property>
+			<property name="dateDisposed" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+				<column not-null="false" unique="false" name="`datedisposed`"/>
+			</property>
+			<property name="disposalReason" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`disposalreason`" length="60"/>
+			</property>
+			<property name="disposalWitness" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`disposalwitness`" length="60"/>
+			</property>
+		</component>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl" entity-name="CollectionJournalLine" abstract="false" lazy="false" discriminator-value="CollectionJournalLine" table="`collectionjournalline`">
+		<meta attribute="eclassName">CollectionJournalLine</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id type="long" name="e_id" column="e_id" access="org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierPropertyHandler">
+			<meta attribute="syntheticId">true</meta>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="collectionjournallinedtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="lineNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="int">
+			<column not-null="false" unique="false" name="`linenumber`"/>
+		</property>
+		<property name="recordedMember" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`recordedmember`" length="60"/>
+		</property>
+		<property name="quantity" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.math.BigDecimal">
+			<column not-null="true" unique="false" name="`quantity`"/>
+		</property>
+		<property name="flagged" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
+			<column not-null="false" unique="false" name="`flagged`"/>
+		</property>
+		<property name="unitOfMeasure" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`unitofmeasure`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure</param>
+				<param name="eclassifier">UnitOfMeasure</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/base/</param>
+			</type>
+		</property>
+		<property name="notRecorded" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
+			<column not-null="false" unique="false" name="`notrecorded`"/>
+		</property>
+		<many-to-one name="validatedMember" entity-name="Membership" lazy="false" foreign-key="collectionjournalline_validatedmember" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`membership_validatedmember_e_id`"/>
+		</many-to-one>
+		<property name="offRoute" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
+			<column not-null="false" unique="false" name="`offroute`"/>
+		</property>
+		<many-to-one name="from" entity-name="Farm" lazy="false" foreign-key="collectionjournalline_from" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`farm_from_farmid`"/>
+		</many-to-one>
+		<many-to-one name="farmContainer" entity-name="Container" lazy="false" foreign-key="collectionjournalline_farmcontainer" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`container_farmcontainer_containerid`"/>
+		</many-to-one>
+		<many-to-one name="dairyContainer" entity-name="DairyContainer" lazy="false" foreign-key="collectionjournalline_dairycontainer" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`dairycontainer_dairycontainer_containerid`"/>
+		</many-to-one>
+		<many-to-one name="collectionJournal" entity-name="CollectionJournalPage" lazy="false" foreign-key="collectionjournalline_collectionjournal" insert="false" update="false" not-null="false">
+			<column not-null="false" unique="false" name="`collectionjournalline_collectionjournal_e_id`"/>
+		</many-to-one>
+		<property name="rejected" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
+			<column not-null="false" unique="false" name="`rejected`"/>
+		</property>
+	</class>
+	<subclass name="com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl" entity-name="ScaleImportRecord" abstract="false" lazy="false" extends="CollectionJournalLine" discriminator-value="ScaleImportRecord">
+		<meta attribute="eclassName">ScaleImportRecord</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<property name="scaleSerial" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`scaleserial`" length="60"/>
+		</property>
+		<property name="collectionTime" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`collectiontime`"/>
+		</property>
+		<property name="centerNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`centernumber`" length="60"/>
+		</property>
+		<property name="numCans" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`numcans`" length="60"/>
+		</property>
+		<property name="tripNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`tripnumber`" length="60"/>
+		</property>
+		<property name="operatorCode" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`operatorcode`" length="60"/>
+		</property>
+		<property name="validated" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
+			<column not-null="false" unique="false" name="`validated`"/>
+		</property>
+	</subclass>
+	<subclass name="com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl" entity-name="Employee" abstract="false" lazy="false" extends="Person" discriminator-value="Employee">
+		<meta attribute="eclassName">Employee</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<property name="id" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`id`" length="60"/>
+		</property>
+		<property name="operatorCode" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`operatorcode`" length="60"/>
+		</property>
+		<property name="startDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`startdate`"/>
+		</property>
+		<property name="jobFunction" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`jobfunction`" length="60"/>
+		</property>
+		<property name="nationalId" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nationalid`" length="60"/>
+		</property>
+		<property name="nhifNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nhifnumber`" length="60"/>
+		</property>
+		<property name="nssfNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nssfnumber`" length="60"/>
+		</property>
+	</subclass>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl" entity-name="DairyLocation" abstract="false" lazy="false" discriminator-value="DairyLocation" table="`dairylocation`">
+		<meta attribute="eclassName">DairyLocation</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="Id" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`id`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="dairylocationdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="name" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`name`" length="60"/>
+		</property>
+		<property name="dateOpened" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`dateopened`"/>
+		</property>
+		<property name="phone" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`phone`" length="60"/>
+		</property>
+		<many-to-one name="route" entity-name="Route" lazy="false" foreign-key="dairylocation_route" insert="true" update="true" not-null="false"/>
+		<property name="description" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`description`" length="60"/>
+		</property>
+		<property name="code" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`code`" length="60"/>
+		</property>
+		<many-to-one name="location" entity-name="Location" lazy="false" cascade="all" foreign-key="dairylocation_location" insert="true" update="true" not-null="true" unique="true">
+			<column not-null="true" unique="false" name="`location_location_e_id`"/>
+		</many-to-one>
+		<list name="functions" table="`dairylocation_functions`" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`dairylocation_functions_id`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`dairylocation_functions_idx`"/>
+			<element>
+				<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+					<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.DairyFunction</param>
+					<param name="eclassifier">DairyFunction</param>
+					<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
+				</type>
+			</element>
+		</list>
+		<many-to-one name="containers" entity-name="DairyContainer" lazy="false" foreign-key="dairylocation_containers" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`dairycontainer_containers_containerid`"/>
+		</many-to-one>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl" entity-name="CollectionJournalPage" abstract="false" lazy="false" discriminator-value="CollectionJournalPage" table="`collectionjournalpage`">
+		<meta attribute="eclassName">CollectionJournalPage</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="journalId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`journalid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="collectionjournalpagedtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<list name="journalEntries" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`collectionjournalline_collectionjournal_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`collectionjournalpage_journalentries_idx`"/>
+			<one-to-many entity-name="CollectionJournalLine"/>
+		</list>
+		<property name="referenceNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`referencenumber`" length="60"/>
+		</property>
+		<property name="journalDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`journaldate`"/>
+		</property>
+		<property name="session" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`session`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.Session</param>
+				<param name="eclassifier">Session</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
+			</type>
+		</property>
+		<many-to-one name="driver" entity-name="Employee" lazy="false" foreign-key="collectionjournalpage_driver" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`employee_driver_personid`"/>
+		</many-to-one>
+		<many-to-one name="route" entity-name="Route" lazy="false" foreign-key="collectionjournalpage_route" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`route_route_id`"/>
+		</many-to-one>
+		<many-to-one name="vehicle" entity-name="Vehicle" lazy="false" foreign-key="collectionjournalpage_vehicle" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`vehicle_vehicle_vehicleid`"/>
+		</many-to-one>
+		<property name="driverTotal" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.math.BigDecimal">
+			<column not-null="false" unique="false" name="`drivertotal`"/>
+		</property>
+		<property name="recordTotal" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.math.BigDecimal">
+			<column not-null="false" unique="false" name="`recordtotal`"/>
+		</property>
+		<property name="suspended" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
+			<column not-null="false" unique="false" name="`suspended`"/>
+		</property>
+		<property name="entryCount" lazy="false" insert="true" update="true" not-null="false" unique="false" type="int">
+			<column not-null="false" unique="false" name="`entrycount`"/>
+		</property>
+		<property name="suspendedCount" lazy="false" insert="true" update="true" not-null="false" unique="false" type="int">
+			<column not-null="false" unique="false" name="`suspendedcount`"/>
+		</property>
+		<property name="rejectedCount" lazy="false" insert="true" update="true" not-null="false" unique="false" type="int">
+			<column not-null="false" unique="false" name="`rejectedcount`"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl" entity-name="Route" abstract="false" lazy="false" discriminator-value="Route" table="`route`">
+		<meta attribute="eclassName">Route</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="Id" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`id`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="routedtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="name" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`name`" length="60"/>
+		</property>
+		<list name="stops" table="`route_stops`" lazy="true">
+			<key update="true">
+				<column name="`route_id`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`route_stops_idx`"/>
+			<many-to-many entity-name="DairyLocation" unique="true">
+				<column name="`dairylocation_id`" not-null="true" unique="false"/>
+			</many-to-many>
+		</list>
+		<property name="code" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`code`" length="60"/>
+		</property>
+		<property name="description" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`description`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl" entity-name="Trip" abstract="false" lazy="false" discriminator-value="Trip" table="`trip`">
+		<meta attribute="eclassName">Trip</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="tripId" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`tripid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="tripdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<list name="collections" table="`trip_collections`" lazy="true">
+			<key update="true">
+				<column name="`trip_tripid`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`trip_collections_idx`"/>
+			<many-to-many entity-name="CollectionJournalPage" unique="true" foreign-key="trip_collections">
+				<column name="`collectionjournalpage_journalid`" not-null="true" unique="false"/>
+			</many-to-many>
+		</list>
+		<list name="deliveries" table="`trip_deliveries`" lazy="true">
+			<key update="true">
+				<column name="`trip_tripid`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`trip_deliveries_idx`"/>
+			<many-to-many entity-name="DeliveryJournal" unique="true" foreign-key="trip_deliveries">
+				<column name="`deliveryjournal_e_id`" not-null="true" unique="false"/>
+			</many-to-many>
+		</list>
+		<property name="started" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`started`"/>
+		</property>
+		<property name="ended" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`ended`"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl" entity-name="DeliveryJournal" abstract="false" lazy="false" discriminator-value="DeliveryJournal" table="`deliveryjournal`">
+		<meta attribute="eclassName">DeliveryJournal</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id type="long" name="e_id" column="e_id" access="org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierPropertyHandler">
+			<meta attribute="syntheticId">true</meta>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="deliveryjournaldtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="referenceNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`referencenumber`" length="60"/>
+		</property>
+		<property name="date" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`date`"/>
+		</property>
+		<many-to-one name="route" entity-name="Route" lazy="false" foreign-key="deliveryjournal_route" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`route_route_id`"/>
+		</many-to-one>
+		<property name="session" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`session`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.Session</param>
+				<param name="eclassifier">Session</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
+			</type>
+		</property>
+		<many-to-one name="customer" entity-name="Customer" lazy="false" foreign-key="deliveryjournal_customer" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`customer_customer_e_id`"/>
+		</many-to-one>
+		<many-to-one name="driver" entity-name="Employee" lazy="false" foreign-key="deliveryjournal_driver" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`employee_driver_personid`"/>
+		</many-to-one>
+		<many-to-one name="vehicle" entity-name="Vehicle" lazy="false" foreign-key="deliveryjournal_vehicle" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`vehicle_vehicle_vehicleid`"/>
+		</many-to-one>
+		<list name="lines" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="deliveryjournal_lines">
+				<column name="`deliveryjournal_lines_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`deliveryjournal_lines_idx`"/>
+			<one-to-many entity-name="DeliveryJournalLine"/>
+		</list>
+		<property name="total" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.math.BigDecimal">
+			<column not-null="true" unique="false" name="`total`"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl" entity-name="DeliveryJournalLine" abstract="false" lazy="false" discriminator-value="DeliveryJournalLine" table="`deliveryjournalline`">
+		<meta attribute="eclassName">DeliveryJournalLine</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id type="long" name="e_id" column="e_id" access="org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierPropertyHandler">
+			<meta attribute="syntheticId">true</meta>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="deliveryjournallinedtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="lineNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="int">
+			<column not-null="true" unique="false" name="`linenumber`"/>
+		</property>
+		<many-to-one name="bin" entity-name="DairyContainer" lazy="false" foreign-key="deliveryjournalline_bin" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`dairycontainer_bin_containerid`"/>
+		</many-to-one>
+		<property name="quantity" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.math.BigDecimal">
+			<column not-null="true" unique="false" name="`quantity`"/>
+		</property>
+		<property name="description" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`description`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl" entity-name="Dairy" abstract="false" lazy="false" discriminator-value="Dairy" table="`dairy`">
+		<meta attribute="eclassName">Dairy</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="companyId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`dairyid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="dairydtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="contactable_contactmethods">
+				<column name="`dairy_contactmethods_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_contactmethods_idx`"/>
+			<one-to-many entity-name="ContactMethod"/>
+		</list>
+		<property name="legalName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`legalname`" length="60"/>
+		</property>
+		<property name="companyName" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`dairyname`" length="60"/>
+		</property>
+		<list name="contacts" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="company_contacts">
+				<column name="`dairy_contacts_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_contacts_idx`"/>
+			<one-to-many entity-name="Person"/>
+		</list>
+		<many-to-one name="location" entity-name="Location" lazy="false" cascade="all" foreign-key="company_location" insert="true" update="true" not-null="true" unique="true">
+			<column not-null="true" unique="false" name="`location_location_e_id`"/>
+		</many-to-one>
+		<property name="phoneNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`phonenumber`" length="60"/>
+		</property>
+		<property name="description" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`description`" length="60"/>
+		</property>
+		<property name="profilePhoto" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`profilephoto`" length="60"/>
+		</property>
+		<property name="registrationNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`registrationnumber`" length="60"/>
+		</property>
+		<property name="nhifNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nhifnumber`" length="60"/>
+		</property>
+		<property name="nssfNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nssfnumber`" length="60"/>
+		</property>
+		<property name="federalPin" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`federalpin`" length="60"/>
+		</property>
+		<property name="licenseEffectiveDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`licenseeffectivedate`"/>
+		</property>
+		<property name="licenseExpirationDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`licenseexpirationdate`"/>
+		</property>
+		<list name="routes" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_routes">
+				<column name="`dairy_routes_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_routes_idx`"/>
+			<one-to-many entity-name="Route"/>
+		</list>
+		<list name="vehicles" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_vehicles">
+				<column name="`dairy_vehicles_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_vehicles_idx`"/>
+			<one-to-many entity-name="Vehicle"/>
+		</list>
+		<list name="employees" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_employees">
+				<column name="`dairy_employees_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_employees_idx`"/>
+			<one-to-many entity-name="Employee"/>
+		</list>
+		<list name="memberships" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_memberships">
+				<column name="`dairy_memberships_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_memberships_idx`"/>
+			<one-to-many entity-name="Membership"/>
+		</list>
+		<bag name="branchLocations" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_branchlocations">
+				<column name="`dairy_branchlocations_companyid`" not-null="false" unique="false"/>
+			</key>
+			<one-to-many entity-name="DairyLocation"/>
+		</bag>
+		<list name="collectionJournals" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_collectionjournals">
+				<column name="`dairy_collectionjournals_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_collectionjournals_idx`"/>
+			<one-to-many entity-name="CollectionJournalPage"/>
+		</list>
+		<list name="deliveryJournals" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_deliveryjournals">
+				<column name="`dairy_deliveryjournals_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_deliveryjournals_idx`"/>
+			<one-to-many entity-name="DeliveryJournal"/>
+		</list>
+		<bag name="suppliers" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_suppliers">
+				<column name="`dairy_suppliers_companyid`" not-null="false" unique="false"/>
+			</key>
+			<one-to-many entity-name="Supplier"/>
+		</bag>
+		<bag name="customers" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_customers">
+				<column name="`dairy_customers_companyid`" not-null="false" unique="false"/>
+			</key>
+			<one-to-many entity-name="Customer"/>
+		</bag>
+		<list name="animalHealthRequests" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`animalhealthrequest_dairy_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_animalhealthrequests_idx`"/>
+			<one-to-many entity-name="AnimalHealthRequest"/>
+		</list>
+		<list name="dairyBins" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_dairybins">
+				<column name="`dairy_dairybins_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_dairybins_idx`"/>
+			<one-to-many entity-name="DairyContainer"/>
+		</list>
+		<list name="priceHistory" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="dairy_pricehistory">
+				<column name="`dairy_pricehistory_companyid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`dairy_pricehistory_idx`"/>
+			<one-to-many entity-name="MilkPrice"/>
+		</list>
+		<property name="managerName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`managername`" length="60"/>
+		</property>
+		<property name="establishedDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`establisheddate`"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl" entity-name="Membership" abstract="false" lazy="false" discriminator-value="Membership" table="`membership`">
+		<meta attribute="eclassName">Membership</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="memberId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`memberid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="membershipdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="memberNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`membernumber`" length="60"/>
+		</property>
+		<property name="applicationDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`applicationdate`"/>
+		</property>
+		<property name="effectiveDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`effectivedate`"/>
+		</property>
+		<property name="status" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`status`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus</param>
+				<param name="eclassifier">MembershipStatus</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
+			</type>
+		</property>
+		<many-to-one name="defaultRoute" entity-name="Route" lazy="false" foreign-key="membership_defaultroute" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`route_defaultroute_id`"/>
+		</many-to-one>
+		<many-to-one name="member" entity-name="Farmer" lazy="false" cascade="all" foreign-key="membership_member" insert="true" update="true" not-null="true" unique="true">
+			<column not-null="true" unique="false" name="`farmer_member_personid`"/>
+		</many-to-one>
+		<many-to-one name="account" entity-name="Account" cascade="all" not-null="true" lazy="false" insert="true" update="true" unique="true"/>
+	</class>
+	<subclass name="com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl" entity-name="DairyContainer" abstract="false" lazy="false" extends="Container" discriminator-value="DairyContainer">
+		<meta attribute="eclassName">DairyContainer</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<component name="assetInfo" class="com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl">
+			<property name="tagType" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`tagtype`" length="60"/>
+			</property>
+			<property name="tagValue" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`tagvalue`" length="60"/>
+			</property>
+			<property name="dateAcquired" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+				<column not-null="false" unique="false" name="`dateacquired`"/>
+			</property>
+			<property name="damageDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+				<column not-null="false" unique="false" name="`damagedate`"/>
+			</property>
+			<property name="damageDescription" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`damagedescription`" length="60"/>
+			</property>
+			<property name="dateDisposed" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+				<column not-null="false" unique="false" name="`datedisposed`"/>
+			</property>
+			<property name="disposalReason" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`disposalreason`" length="60"/>
+			</property>
+			<property name="disposalWitness" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`disposalwitness`" length="60"/>
+			</property>
+		</component>
+	</subclass>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl" entity-name="Supplier" abstract="false" lazy="false" discriminator-value="Supplier" table="`supplier`">
+		<meta attribute="eclassName">Supplier</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="companyId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`supplierid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="supplierdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="contactable_contactmethods">
+				<column name="`supplier_contactmethods_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`supplier_contactmethods_idx`"/>
+			<one-to-many entity-name="ContactMethod"/>
+		</list>
+		<property name="legalName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`legalname`" length="60"/>
+		</property>
+		<property name="companyName" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`suppliername`" length="60"/>
+		</property>
+		<list name="contacts" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="company_contacts">
+				<column name="`supplier_contacts_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`supplier_contacts_idx`"/>
+			<one-to-many entity-name="Person"/>
+		</list>
+		<many-to-one name="location" entity-name="Location" lazy="false" cascade="all" foreign-key="company_location" insert="true" update="true" not-null="true" unique="true">
+			<column not-null="true" unique="false" name="`location_location_e_id`"/>
+		</many-to-one>
+		<property name="phoneNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`phonenumber`" length="60"/>
+		</property>
+		<property name="description" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`description`" length="60"/>
+		</property>
+		<property name="profilePhoto" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`profilephoto`" length="60"/>
+		</property>
+		<list name="categories" table="`supplier_categories`" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`supplier_categories_companyid`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`supplier_categories_idx`"/>
+			<element type="java.lang.String"/>
+		</list>
+		<property name="publicDescription" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`publicdescription`" length="60"/>
+		</property>
+		<property name="status" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`status`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.VendorStatus</param>
+				<param name="eclassifier">VendorStatus</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
+			</type>
+		</property>
+		<property name="registrationDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`registrationdate`"/>
+		</property>
+		<property name="expirationDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`expirationdate`"/>
+		</property>
+		<property name="notes" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`notes`" length="60"/>
+		</property>
+		<property name="rating" lazy="false" insert="true" update="true" not-null="false" unique="false" type="int">
+			<column not-null="false" unique="false" name="`rating`"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl" entity-name="Customer" abstract="false" lazy="false" discriminator-value="Customer" table="`customer`">
+		<meta attribute="eclassName">Customer</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="companyId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`customerid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="customerdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="contactable_contactmethods">
+				<column name="`customer_contactmethods_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`customer_contactmethods_idx`"/>
+			<one-to-many entity-name="ContactMethod"/>
+		</list>
+		<property name="legalName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`legalname`" length="60"/>
+		</property>
+		<property name="companyName" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`customername`" length="60"/>
+		</property>
+		<list name="contacts" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="company_contacts">
+				<column name="`customer_contacts_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`customer_contacts_idx`"/>
+			<one-to-many entity-name="Person"/>
+		</list>
+		<many-to-one name="location" entity-name="Location" lazy="false" cascade="all" foreign-key="company_location" insert="true" update="true" not-null="true" unique="true">
+			<column not-null="true" unique="false" name="`location_location_e_id`"/>
+		</many-to-one>
+		<property name="phoneNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`phonenumber`" length="60"/>
+		</property>
+		<property name="description" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`description`" length="60"/>
+		</property>
+		<property name="profilePhoto" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`profilephoto`" length="60"/>
+		</property>
+		<property name="customerType" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`customertype`" length="60"/>
+		</property>
+		<property name="status" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`status`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl" entity-name="MilkPrice" abstract="false" lazy="false" discriminator-value="MilkPrice" table="`milkprice`">
+		<meta attribute="eclassName">MilkPrice</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
+		<id name="id" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`id`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="milkpricedtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="pricePeriod" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`priceperiod`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod</param>
+				<param name="eclassifier">MilkPricePeriod</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
+			</type>
+		</property>
+		<property name="priceDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`pricedate`"/>
+		</property>
+		<property name="value" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.math.BigDecimal">
+			<column not-null="true" unique="false" name="`value`"/>
+		</property>
+		<many-to-one name="enteredBy" entity-name="Employee" lazy="false" foreign-key="milkprice_enteredby" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`employee_enteredby_personid`"/>
+		</many-to-one>
+		<property name="entryDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`entrydate`"/>
+		</property>
+		<property name="notes" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`notes`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountImpl" entity-name="Account" abstract="false" lazy="false" discriminator-value="Account" table="`account`">
+		<meta attribute="eclassName">Account</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/account</meta>
+		<id name="accountId" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`accountid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="accountdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<one-to-one name="member" entity-name="Membership" cascade="merge,persist,save-update,lock,refresh" lazy="false" property-ref="account" constrained="true"/>
+		<property name="established" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`established`"/>
+		</property>
+		<property name="status" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`status`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus</param>
+				<param name="eclassifier">AccountStatus</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/account</param>
+			</type>
+		</property>
+		<property name="type" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`type`" length="60"/>
+		</property>
+		<list name="transactions" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`transaction_account_accountid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`account_transactions_idx`"/>
+			<one-to-many entity-name="Transaction"/>
+		</list>
+		<list name="balances" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="account_balances">
+				<column name="`account_balances_accountid`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`account_balances_idx`"/>
+			<one-to-many entity-name="BalancePoint"/>
+		</list>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.account.impl.TransactionImpl" entity-name="Transaction" abstract="false" lazy="false" discriminator-value="Transaction" table="`transaction`">
+		<meta attribute="eclassName">Transaction</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/account</meta>
+		<id name="transactionId" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`transactionid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="transactiondtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<many-to-one name="account" entity-name="Account" lazy="false" foreign-key="transaction_account" insert="false" update="false" not-null="false">
+			<column not-null="false" unique="false" name="`transaction_account_accountid`"/>
+		</many-to-one>
+		<property name="transactionDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
+			<column not-null="true" unique="false" name="`transactiondate`"/>
+		</property>
+		<property name="transactionType" lazy="false" not-null="true" insert="true" update="true" unique="false">
+			<column not-null="true" unique="false" name="`transactiontype`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType</param>
+				<param name="eclassifier">TransactionType</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/account</param>
+			</type>
+		</property>
+		<property name="amount" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.math.BigDecimal">
+			<column not-null="true" unique="false" name="`amount`"/>
+		</property>
+		<property name="description" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`description`" length="60"/>
+		</property>
+	</class>
+	<subclass name="com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountTransactionImpl" entity-name="AccountTransaction" abstract="false" lazy="false" extends="Transaction" discriminator-value="AccountTransaction">
+		<meta attribute="eclassName">AccountTransaction</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/account</meta>
+		<property name="referenceNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`referencenumber`" length="60"/>
+		</property>
+		<property name="source" lazy="false" not-null="false" insert="true" update="true" unique="false">
+			<column not-null="false" unique="false" name="`source`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource</param>
+				<param name="eclassifier">TransactionSource</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/account</param>
+			</type>
+		</property>
+		<many-to-one name="relatedLocation" entity-name="DairyLocation" lazy="false" foreign-key="accounttransaction_relatedlocation" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`dairylocation_relatedlocation_id`"/>
+		</many-to-one>
+		<property name="checkNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`checknumber`" length="60"/>
+		</property>
+		<property name="signedBy" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`signedby`" length="60"/>
+		</property>
+	</subclass>
+	<subclass name="com.agritrace.edairy.desktop.common.model.dairy.account.impl.AdjustmentTransactionImpl" entity-name="AdjustmentTransaction" abstract="false" lazy="false" extends="Transaction" discriminator-value="AdjustmentTransaction">
+		<meta attribute="eclassName">AdjustmentTransaction</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/account</meta>
+		<many-to-one name="signedOffBy" entity-name="Employee" lazy="false" foreign-key="adjustmenttransaction_signedoffby" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`employee_signedoffby_personid`"/>
+		</many-to-one>
+	</subclass>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl" entity-name="BalancePoint" abstract="false" lazy="false" discriminator-value="BalancePoint" table="`balancepoint`">
+		<meta attribute="eclassName">BalancePoint</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/account</meta>
+		<id name="accountBalanceId" type="long" unsaved-value="0">
+			<column not-null="true" unique="false" name="`accountbalanceid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="balancepointdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<many-to-one name="account" entity-name="Account" lazy="false" foreign-key="balancepoint_account" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`account_account_accountid`"/>
+		</many-to-one>
+		<many-to-one name="previousBalance" entity-name="BalancePoint" lazy="false" foreign-key="balancepoint_previousbalance" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`balancepoint_previousbalance_accountbalanceid`"/>
+		</many-to-one>
+		<property name="asOf" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`asof`"/>
+		</property>
+		<property name="amount" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.math.BigDecimal">
+			<column not-null="false" unique="false" name="`amount`"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.base.impl.LocationImpl" entity-name="Location" abstract="false" lazy="false" discriminator-value="Location" table="`location`">
+		<meta attribute="eclassName">Location</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/base/</meta>
+		<id name="locationId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`locationid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="locationdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<component name="postalLocation" class="com.agritrace.edairy.desktop.common.model.base.impl.PostalLocationImpl">
+			<property name="address" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`address`" length="60"/>
+			</property>
+			<property name="section" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`section`" length="60"/>
+			</property>
+			<property name="estate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`estate`" length="60"/>
+			</property>
+			<property name="village" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`village`" length="60"/>
+			</property>
+			<property name="subLocation" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`sublocation`" length="60"/>
+			</property>
+			<property name="location" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`location`" length="60"/>
+			</property>
+			<property name="district" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`district`" length="60"/>
+			</property>
+			<property name="division" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`division`" length="60"/>
+			</property>
+			<property name="province" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`province`" length="60"/>
+			</property>
+			<property name="postalCode" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`postalcode`" length="60"/>
+			</property>
+		</component>
+		<component name="mapLocation" class="com.agritrace.edairy.desktop.common.model.base.impl.MapLocationImpl">
+			<property name="longitude" lazy="false" insert="true" update="true" not-null="false" unique="false" type="double">
+				<column not-null="false" unique="false" name="`longitude`"/>
+			</property>
+			<property name="latitude" lazy="false" insert="true" update="true" not-null="false" unique="false" type="double">
+				<column not-null="false" unique="false" name="`latitude`"/>
+			</property>
+		</component>
+		<component name="statutoryLocation" class="com.agritrace.edairy.desktop.common.model.base.impl.StatutoryLocationImpl">
+			<property name="landReferenceNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`landreferencenumber`" length="60"/>
+			</property>
+		</component>
+		<component name="descriptiveLocation" class="com.agritrace.edairy.desktop.common.model.base.impl.DescriptiveLocationImpl">
+			<property name="directions" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`directions`" length="60"/>
+			</property>
+			<property name="landmarks" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+				<column not-null="false" unique="false" name="`landmarks`" length="60"/>
+			</property>
+		</component>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.base.impl.ContactMethodImpl" entity-name="ContactMethod" abstract="false" lazy="false" discriminator-value="ContactMethod" table="`contactmethod`">
+		<meta attribute="eclassName">ContactMethod</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/base/</meta>
+		<id type="long" name="e_id" column="e_id" access="org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierPropertyHandler">
+			<meta attribute="syntheticId">true</meta>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="contactmethoddtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="cmType" lazy="false" not-null="false" insert="true" update="true" unique="false">
+			<column not-null="false" unique="false" name="`cmtype`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.base.ContactMethodType</param>
+				<param name="eclassifier">ContactMethodType</param>
+				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/base/</param>
+			</type>
+		</property>
+		<property name="cmValue" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`cmvalue`" length="60"/>
+		</property>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.base.impl.ImageEntryImpl" entity-name="ImageEntry" abstract="false" lazy="false" discriminator-value="ImageEntry" table="`imageentry`">
+		<meta attribute="eclassName">ImageEntry</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/base/</meta>
+		<id name="imageId" type="java.lang.String">
+			<column not-null="true" unique="false" name="`imageid`" length="60"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="imageentrydtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<property name="mimeType" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`mimetype`" length="60"/>
+		</property>
+		<array name="imageData" table="`imageentry_imagedata`" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`imageentry_imagedata_imageid`" not-null="true" unique="false"/>
+			</key>
+			<list-index column="`imageentry_imagedata_idx`"/>
+			<element type="byte"/>
+		</array>
+	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl" entity-name="AnimalHealthRequest" abstract="false" lazy="false" discriminator-value="AnimalHealthRequest" table="`animalhealthrequest`">
+		<meta attribute="eclassName">AnimalHealthRequest</meta>
+		<meta attribute="epackage">http://edairy.agritrace.com/requests/</meta>
+		<id name="requestId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`requestid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="animalhealthrequestdtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<many-to-one name="requestingMember" entity-name="Membership" lazy="false" foreign-key="animalhealthrequest_requestingmember" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`membership_requestingmember_memberid`"/>
+		</many-to-one>
+		<many-to-one name="dairy" entity-name="Dairy" lazy="false" cascade="persist,save-update,lock" foreign-key="animalhealthrequest_dairy" insert="false" update="false" not-null="false">
+			<column not-null="false" unique="false" name="`animalhealthrequest_dairy_companyid`"/>
+		</many-to-one>
+		<property name="date" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`date`"/>
+		</property>
+		<property name="type" lazy="false" not-null="false" insert="true" update="true" unique="false">
+			<column not-null="false" unique="false" name="`type`"/>
+			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
+				<param name="enumClass">com.agritrace.edairy.desktop.common.model.requests.RequestType</param>
+				<param name="eclassifier">RequestType</param>
+				<param name="epackage">http://edairy.agritrace.com/requests/</param>
+			</type>
+		</property>
+		<property name="reportedProblem" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`reportedproblem`" length="60"/>
+		</property>
+		<many-to-one name="reportedAnimal" entity-name="RegisteredAnimal" lazy="false" foreign-key="animalhealthrequest_reportedanimal" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`registeredanimal_reportedanimal_registrationid`"/>
+		</many-to-one>
+		<property name="dateHeatDetected" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`dateheatdetected`"/>
+		</property>
+		<property name="firstTreatment" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`firsttreatment`"/>
+		</property>
+		<property name="secondTreatment" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`secondtreatment`"/>
+		</property>
+		<property name="thirdTreatment" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`thirdtreatment`"/>
+		</property>
+		<many-to-one name="farm" entity-name="Farm" lazy="false" foreign-key="animalhealthrequest_farm" insert="true" update="true" not-null="true">
+			<column not-null="true" unique="false" name="`farm_farm_farmid`"/>
+		</many-to-one>
+		<many-to-one name="referredTo" entity-name="Supplier" lazy="false" foreign-key="animalhealthrequest_referredto" insert="true" update="true" not-null="false">
+			<column not-null="false" unique="false" name="`supplier_referredto_companyid`"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -466,7 +466,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected List<CollectionJournalPage> getFilteredResult() {
-		final List<CollectionJournalPage> allJournals = getRepository().all();
+		final List<CollectionJournalPage> allJournals = getRepository().getMemberships();
 		final List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
 
 		for (final CollectionJournalPage cj : allJournals) {

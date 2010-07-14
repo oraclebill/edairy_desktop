@@ -6,6 +6,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 
 public interface IEmployeeRepository {
 
-	List<Employee> all();
+	List<Employee> getMemberships();
 
 }

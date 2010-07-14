@@ -1,7 +1,8 @@
-package com.agritrace.edairy.desktop.member.services.member;
+package com.agritrace.edairy.desktop.common.persistence;
 
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
@@ -9,12 +10,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberRepository implements IMemberRepository {
 
 	private final IRepository<Membership> driver;
+	private final DairyRepository dairyRepo;
+	private final Dairy localDairy;
 
 	private final IRepository<AccountTransaction> transactionRepository = new HibernateRepository<AccountTransaction>() {
 
@@ -30,12 +33,12 @@ public class MemberRepository implements IMemberRepository {
 	 * PersistenceManager.
 	 */
 	public MemberRepository() {
-		this.driver = new HibernateRepository<Membership>() {
+		this( new HibernateRepository<Membership>() {
 			@Override
 			protected Class<Membership> getClassType() {
 				return Membership.class;
 			}
-		};
+		});
 	}
 
 	/**
@@ -45,11 +48,14 @@ public class MemberRepository implements IMemberRepository {
 	 */
 	public MemberRepository(IRepository<Membership> driver) {
 		this.driver = driver;
+		dairyRepo = DairyRepository.getInstance();
+		localDairy = dairyRepo.getLocalDairy();
 	}
 
 	@Override
-	public List<Membership> all() {
-		return driver.all();
+	public List<Membership> getMemberships() {
+		return localDairy.getMemberships();
+//		return driver.all();
 	}
 
 	@Override
@@ -76,11 +82,6 @@ public class MemberRepository implements IMemberRepository {
 	@Override
 	public List<Farm> getMemberFarms() {
 		return (List<Farm>) driver.find("FROM Farm");
-	}
-
-	@Override
-	public List<Membership> getMemberships() {
-		return driver.all();
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class PersistenceManager {
 
 	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(Activator.getDefault(),
 			PersistenceManager.class);
-
+	public static final File DATA_AREA = getFileArea();
 	public static final String DB_NAME = "dairytest";
 	public static final String PROPERTIES_FILE_NAME = "edairydb.properties";
 
@@ -60,6 +60,16 @@ public class PersistenceManager {
 		}
 	}
 
+	private static File getFileArea() {
+		File ret = null;
+		try {
+			ret = RienaLocations.getDataArea();
+		} catch (Exception e) {
+			ret = new File(".");
+		}
+		return ret;
+	}
+
 	private final HbDataStore hbds;
 
 	private Session session;
@@ -73,24 +83,23 @@ public class PersistenceManager {
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(DB_NAME);
 		hbds.setProperties(getDatastoreProperties());
 		hbds.setEPackages(getEPackages());
-		
+
 		hbds.initialize();
 		try {
-			File file = new File(RienaLocations.getDataArea(), "hibernate-mapping.xml");
+			File file = new File(DATA_AREA, "hibernate-mapping.xml");
 			FileWriter writer = new FileWriter(file);
 			BufferedWriter buffered = new BufferedWriter(writer);
 			buffered.write(hbds.getMappingXML());
 			buffered.close();
 			writer.close();
 			LOG.log(LogService.LOG_INFO, "Saved mapping file to " + file);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
 
 		}
-		
+
 		postInit();
-		
+
 		sessionFactory = hbds.getSessionFactory();
 	}
 
@@ -111,12 +120,13 @@ public class PersistenceManager {
 
 	protected Properties getDatastoreProperties() {
 		final Properties props = new Properties();
-		final File hibernateProperties = new File(RienaLocations.getDataArea(), PROPERTIES_FILE_NAME);
-		LOG.log(LogService.LOG_INFO, "Hibernate properties file found at: '" + hibernateProperties + "'");
-		if (hibernateProperties.canRead()) {
+		File propFile = new File(DATA_AREA, PROPERTIES_FILE_NAME);
+
+		LOG.log(LogService.LOG_INFO, "Hibernate properties file found at: '" + propFile + "'");
+		if (propFile.canRead()) {
 			LOG.log(LogService.LOG_INFO, "Reading hibernate properties from properties file");
 			try {
-				props.load(new FileInputStream(hibernateProperties));
+				props.load(new FileInputStream(propFile));
 			} catch (Exception e) {
 				e.printStackTrace();
 				LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
@@ -154,7 +164,7 @@ public class PersistenceManager {
 	protected void postInit() {
 		LOG.log(LogService.LOG_DEBUG, ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode()
 				+ "] started on thread " + Thread.currentThread());
-		File propFile = new File(RienaLocations.getDataArea(), PROPERTIES_FILE_NAME);
+		File propFile = new File(DATA_AREA, PROPERTIES_FILE_NAME);
 		if (!propFile.exists()) {
 			LOG.log(LogService.LOG_INFO, "Saving properties to " + propFile);
 			try {

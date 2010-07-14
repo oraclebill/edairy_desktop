@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 
 public class TestAccountTransactionGenerator {
 
