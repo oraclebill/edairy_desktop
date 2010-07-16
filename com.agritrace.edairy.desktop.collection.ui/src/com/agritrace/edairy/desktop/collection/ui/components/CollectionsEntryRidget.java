@@ -5,9 +5,16 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.riena.internal.ui.ridgets.swt.ActionObserver;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -17,166 +24,155 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionJournalController.ValidationError;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
+@SuppressWarnings("restriction")
 public class CollectionsEntryRidget extends AbstractCompositeRidget {
 
-	private  IDairyRepository dairyRepo;
+	private final class InlineInputFlagConverter extends Converter {
+		private InlineInputFlagConverter(Object fromType, Object toType) {
+			super(fromType, toType);
+		}
+
+		@Override
+		public Object convert(Object fromObject) {
+			if ((fromObject instanceof String) && !((String) fromObject).isEmpty()) {
+				String text = (String) fromObject;
+				final String firstChar = text.substring(0, 1);
+				if (firstChar.equalsIgnoreCase("N")) {
+					text = text.substring(1);
+					nprMissingButton.setSelected(true);
+					return text;
+				} else if (firstChar.equalsIgnoreCase("R")) {
+					text = text.substring(1);
+					rejectedButton.setSelected(true);
+					return text;
+				}
+			}
+			return fromObject;
+		}
+	}
+
+//	private  IDairyRepository dairyRepo;
 	private  List<DairyContainer> bins;
 
-	private ITextRidget canText;
 	private IComboRidget binCombo;
+	private ITextRidget canText;
 	private ITextRidget memberIDRidget;
 	private ILabelRidget memberNameRidget;
 	private IToggleButtonRidget nprMissingButton;
 	private IDecimalTextRidget quantityText;
 	private IToggleButtonRidget rejectedButton;
 
-	private  CollectionJournalPage workingJournalPage;
-	private  CollectionJournalLine workingJournalLine;
-	private DairyContainer workingBin;
+	private final ActionObserver addActionObserver, clearActionObserver;
+	private IActionRidget addButton;
+	private IActionRidget clearButton;
+
+	// preferences
+	boolean validateBin = true;
+	boolean validateMember = true;
+	boolean confirmClear = true;
+
+	// working memory
+	private final /* CollectionJournalLine */ IObservableValue workingJournalLine;
+	private IObservableList binList;
+	
 
 	public CollectionsEntryRidget() {
-//		workingJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
 		workingJournalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
-		workingBin = null;
+		addActionObserver = new ActionObserver(this);
+		clearActionObserver = new ActionObserver(this);
 	}
 	
-	public void resetJournalPage() {
-		
+	public void setBinList(List<DairyContainer> binList) {
+		this.binList = new WritableList(binList, DairyContainer.class);
 	}
 	
+	public void setBinList(IObservableList binList) {
+		this.binList = binList; 
+	}
+	
+	public IObservableList getBinList() {
+		return binList;
+	}
+	
+	public void bindToModel(WritableValue writableValue) {
+		workingJournalLine = writableValue;
+	}
+
+	public void bindToModel(CollectionJournalLine workingJournalLine) {
+		workingJournalLine = new WritableValue(workingJournalLine, CollectionJournalLine.class);
+	}
+
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
 
-		String str = "";
-		if (str.length() == 0) return; // avoids the dead code warnings..  // debug
-		
+		// get preferences 
+		IPreferencesService service = Platform.getPreferencesService();
+		confirmClear = service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components", "confirmClearCollectionsEntryAction", true, null);
+		validateBin = service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components", "validateBinOnAddLine", true, null);
+		validateMember = service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components", "validateMemberOnAddLine", true, null);
+				
+		// get ridgets
 		binCombo = getRidget(IComboRidget.class, ViewWidgetId.binCombo);
-		binCombo.setMandatory(true);
-		// binCombo.addValidationRule(new StringNumberValidator(),
-		// ValidationTime.ON_UI_CONTROL_EDIT);
-
-		// milk entry group
 		memberIDRidget = getRidget(ITextRidget.class, ViewWidgetId.memberIdText);
+		memberNameRidget = getRidget(ILabelRidget.class, "member-name");
+		canText = getRidget(ITextRidget.class, ViewWidgetId.canIdText);
+		quantityText = getRidget(IDecimalTextRidget.class, ViewWidgetId.quantityText);
+		addButton = getRidget(IActionRidget.class, ViewWidgetId.addButton);
+		clearButton = getRidget(IActionRidget.class, ViewWidgetId.clearButton);
+
+		// configure ridgets
+		
+		// bin
+		binCombo.setMandatory(true);
+		
+		// member number
 		memberIDRidget.setMandatory(true);
 		memberIDRidget.setDirectWriting(true);
-		memberIDRidget.setInputToUIControlConverter(new Converter(String.class, String.class) {
-			@Override
-			public Object convert(Object fromObject) {
-				if ((fromObject instanceof String) && !((String) fromObject).isEmpty()) {
-					String text = (String) fromObject;
-					final String firstChar = text.substring(0, 1);
-					if (firstChar.equalsIgnoreCase("N")) {
-						text = text.substring(1);
-						nprMissingButton.setSelected(true);
-						return text;
-					} else if (firstChar.equalsIgnoreCase("R")) {
-						text = text.substring(1);
-						rejectedButton.setSelected(true);
-						return text;
-					}
-				}
-				return fromObject;
-			}
-		});
-		// memberIDRidget.addValidationRule(new StringNumberValidator(),
-		// ValidationTime.ON_UI_CONTROL_EDIT);
-		// final IValidator memberExistsRule = new
-		// MemberNumberExistsValidator();
-		// final IMessageMarker memberExistsMarker = new
-		// ErrorMessageMarker("Member does not exist.");
-		// memberIDRidget.addValidationRule(memberExistsRule,
-		// ValidationTime.ON_UI_CONTROL_EDIT); // todo:
-		// memberIDRidget.addValidationMessage(memberExistsMarker,
-		// memberExistsRule);
-		// memberIDRidget
-		// .addValidationRule(new MemberDeliversOncePerSessionValidator(),
-		// ValidationTime.ON_UPDATE_TO_MODEL); // todo:
+		memberIDRidget.setInputToUIControlConverter(new InlineInputFlagConverter(String.class, String.class));
 
-		// memberIDRidget.addPropertyChangeListener(new PropertyChangeListener()
-		// {
-		// @Override
-		// public void propertyChange(PropertyChangeEvent evt) {
-		// if (evt.getPropertyName().equals("textAfter")) {
-		// Object value = evt.getNewValue();
-		// if (value instanceof String) {
-		// String memberID = (String)value;
-		// Membership membership = dairyRepo.getMembershipById(memberID);
-		// workingJournalLine.setValidatedMember(membership);
-		// System.err.println(" ----------updating from model-------- " + evt);
-		// memberNameRidget.updateFromModel();
-		// }
-		// }
-		// }
-		// });
-
-		memberNameRidget = getRidget(ILabelRidget.class, "member-name");
-
-		canText = getRidget(ITextRidget.class, ViewWidgetId.canIdText);
-		// canText.addValidationRule(new StringNumberValidator(),
-		// ValidationTime.ON_UI_CONTROL_EDIT);
-		// canText.addValidationRule(new MemberOwnsCanValidator(),
-		// ValidationTime.ON_UPDATE_TO_MODEL); // todo:
-
-		quantityText = getRidget(IDecimalTextRidget.class, ViewWidgetId.quantityText);
+		// quantity
 		quantityText.setMandatory(true);
 
+		// mpr (member personal record) missing button
 		nprMissingButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.nprMissingCombo);
-
+		
+		// milk rejection button
 		rejectedButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.rejectedCombo);
 
-		// buttons
-		((IActionRidget) getRidget(ViewWidgetId.addButton)).addListener(new IActionListener() {
+		// add line button
+		addButton.addListener(new IActionListener() {			
 			@Override
 			public void callback() {
 				addButtonClicked();
 			}
 		});
-
-		((IActionRidget) getRidget(ViewWidgetId.entryInputClear)).addListener(new IActionListener() {
+		
+		// clear line button
+		clearButton.addListener(new IActionListener() {			
 			@Override
 			public void callback() {
-				clearMilkJournalGroupButtonClicked();
+				clearButtonClicked();
 			}
 		});
+		
+		bindRidgets();
+	}
 
-		((IActionRidget) getRidget(ViewWidgetId.modifyButton)).addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				// MilkCollectionRecord aRecord = (MilkCollectionRecord)
-				// table.getSelection().get(0);
-				// ModifyMilkRecordDialog modifyDialog = new
-				// ModifyMilkRecordDialog(Display.getDefault().getActiveShell());
-				// aRecord.setLine("");
-				// modifyDialog.setRecord(aRecord);
-				// if(modifyDialog.open() == Window.OK){
-				// table.updateFromModel();
-				// totalLabelRidget.updateFromModel();
-				// }
-			}
-
-		});
-
-		// bind
-		workingJournalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
-
+	private void bindRidgets() {
 		// editable widgets
 		// todo: should bind to bins for this route only..
-		binCombo.bindToModel(new WritableList(bins, DairyContainer.class), DairyContainer.class, "getContainerId",
+		binCombo.bindToModel(binList, DairyContainer.class, "getContainerId",
 				EMFObservables.observeValue(workingJournalLine,
 						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER));
 
@@ -188,6 +184,7 @@ public class CollectionsEntryRidget extends AbstractCompositeRidget {
 
 		nprMissingButton.bindToModel(EMFObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED));
+		
 		rejectedButton.bindToModel(EMFObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED));
 
@@ -196,7 +193,6 @@ public class CollectionsEntryRidget extends AbstractCompositeRidget {
 
 		quantityText.bindToModel(PojoObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__QUANTITY.getName()));
-
 	}
 
 	@Override
@@ -214,27 +210,25 @@ public class CollectionsEntryRidget extends AbstractCompositeRidget {
 		}
 	}
 	
-	
 	/**
 	 * 
 	 */
-	private void clearMilkJournalGroupButtonClicked() {
-		if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
+	private void clearButtonClicked() {
+		if (confirmClear || MessageDialog.openConfirm(Display.getDefault().getActiveShell(),
 				"Clear Input", "Do you want to clear input fields?")) {
 			resetJournalEntryInputs();
 		}
+		clearActionObserver.widgetSelected(null);
 	}
 
+	/**
+	 * 
+	 */
 	private void addButtonClicked() {
 		try {
 			validate(workingJournalLine);
-
-			workingJournalPage.getJournalEntries().add(workingJournalLine);
-			workingJournalPage.setRecordTotal(workingJournalPage
-					.getRecordTotal().add(workingJournalLine.getQuantity()));
-
+			addActionObserver.widgetSelected(null);
 			resetJournalEntryInputs();
-
 		} catch (final ValidationError invalid) {
 			MessageDialog.openError(null, "Validation Error",
 					invalid.getMessage());
@@ -242,47 +236,52 @@ public class CollectionsEntryRidget extends AbstractCompositeRidget {
 	}
 	
 	/**
-	 * Reset the working memory used by the journal line widgets. Also saves the
-	 * avlue of the old dairy container (bin), so it can be reused.
+	 * Reset the working memory used by the journal line widgets, saving the bin value 
+	 * if set. 
+	 * 
 	 */
 	private void resetJournalEntryInputs() {
-		// stash or reset the working bin
-		if (null != workingJournalLine) {
-			workingBin = workingJournalLine.getDairyContainer();
-		} else {
-			workingBin = null;
+		resetJournalEntryInputs(true);
+	}
+	
+	/**
+	 * Reset the working memory used by the journal line widgets, saving the bin value 
+	 * 'holdContainer' is 'true'. 
+	 * 
+	 * @param holdContainer true if the value of 'bin' is to be held.
+	 */
+	private void resetJournalEntryInputs(boolean holdContainer) {
+
+		workingJournalLine.eSetDeliver(false);
+		for (EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
+			if (holdContainer && feature.equals(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER))
+				continue;
+			workingJournalLine.eSet(feature, feature.getDefaultValue());
 		}
+		workingJournalLine.eSetDeliver(true);
 
-		// reset the working journal line.
-		workingJournalLine = DairyFactory.eINSTANCE
-				.createCollectionJournalLine();
-
-		// rebind all widgets to new working line
-		configureRidgets();
-
-		// restore stashed bin
-		if (workingBin != null) {
-			workingJournalLine.setDairyContainer(workingBin);
-			canText.requestFocus();
-		}
-
-		// update ui with new model
 		updateAllRidgetsFromModel();
 
+		if (holdContainer && workingJournalLine.getDairyContainer() != null) {
+			canText.requestFocus();
+		}
+		else {
+			binCombo.requestFocus();
+		}
 	}
 
 	private void validate(CollectionJournalLine line) {
 		if (line == null) {
 			throw new IllegalStateException();
 		}
-		if (line.getDairyContainer() == null) {
+		if (validateBin && line.getDairyContainer() == null) {
 			throw new ValidationError("BIN number is required!");
 		}
 		if ((line.getQuantity() == null)
 				|| line.getQuantity().equals(BigDecimal.ZERO)) {
 			throw new ValidationError("Quantity must be greater than zero!");
 		}
-		if ((line.getRecordedMember() == null)
+		if (validateMember && (line.getRecordedMember() == null)
 				|| (line.getRecordedMember().length() <= 0)) {
 			throw new ValidationError("Invalid member number!");
 		}
@@ -312,7 +311,5 @@ public class CollectionsEntryRidget extends AbstractCompositeRidget {
 		super.bindUIControl();
 		hide(cachedHideState);
 	}
-	
-	
 
 }

@@ -99,11 +99,11 @@ public class MemberDirectoryController extends SubModuleController {
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	public static final String DELETE_DIALOG_TITLE = "Delete Member";
 	private final IFarmRepository farmRepository;
-	private final String[] memberColumnHeaders = { "ID", "Name", "Route", "Status", "Phone", "Milk Collection",
+	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Route", "Status", "Phone", "Milk Collection",
 			"Monthly Credit Sales", "Credit Balance" };
 
 	private ITableRidget memberListRidget;
-	private final String[] memberPropertyNames = { "memberNumber", "member", "defaultRoute", "status", "member", "account", "account",
+	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName", "defaultRoute.code", "status", "member.phoneNumber", "account", "account",
 			"account" };
 
 	private final ILabelRidget[] searchLabels;
@@ -255,56 +255,56 @@ public class MemberDirectoryController extends SubModuleController {
 
 			memberListRidget.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,
 					memberPropertyNames, memberColumnHeaders);
-			memberListRidget.setColumnFormatter(1, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					if (element instanceof Membership) {
-						final Person member = ((Membership) element).getMember();
-						if (member != null) {
-							return member.getFamilyName() + ", " + member.getGivenName();
-						}
-					}
-					return null;
-				}
-			});
-			memberListRidget.setColumnFormatter(2, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					if (element instanceof Membership) {
-						final Route route = (Route) ((Membership)element).getDefaultRoute();
-						if (route != null) {
-							return route.getCode();
-						}
-					}
-					return "";
-				}
-			});
-			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					if (element instanceof Membership) {
-						final Person member = ((Membership) element).getMember();
-						if (member != null) {
-							return member.getPhoneNumber();
-						}
-					}
-					return null;
-				}
-			});
-			memberListRidget.setColumnFormatter(5, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					return "N/A";
-				}
-			});
+//			memberListRidget.setColumnFormatter(1, new ColumnFormatter() {
+//				@Override
+//				public String getText(Object element) {
+//					if (element instanceof Membership) {
+//						final Person member = ((Membership) element).getMember();
+//						if (member != null) {
+//							return member.getFamilyName() + ", " + member.getGivenName();
+//						}
+//					}
+//					return null;
+//				}
+//			});
+//			memberListRidget.setColumnFormatter(2, new ColumnFormatter() {
+//				@Override
+//				public String getText(Object element) {
+//					if (element instanceof Membership) {
+//						final Route route = (Route) ((Membership)element).getDefaultRoute();
+//						if (route != null) {
+//							return route.getCode();
+//						}
+//					}
+//					return "";
+//				}
+//			});
+//			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
+//				@Override
+//				public String getText(Object element) {
+//					if (element instanceof Membership) {
+//						final Person member = ((Membership) element).getMember();
+//						if (member != null) {
+//							return member.getPhoneNumber();
+//						}
+//					}
+//					return null;
+//				}
+//			});
 			memberListRidget.setColumnFormatter(6, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {
 					return "N/A";
 				}
 			});
-
 			memberListRidget.setColumnFormatter(7, new ColumnFormatter() {
+				@Override
+				public String getText(Object element) {
+					return "N/A";
+				}
+			});
+
+			memberListRidget.setColumnFormatter(8, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {
 					return "N/A";

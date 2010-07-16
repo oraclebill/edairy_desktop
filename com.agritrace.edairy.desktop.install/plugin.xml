@@ -76,6 +76,10 @@
             class="com.agritrace.edairy.desktop.install.handlers.ImportEmployeesHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importEmployees">
       </handler>
+      <handler
+            class="com.agritrace.edairy.desktop.install.handlers.ImportVehiclesHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.importVehicles">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">

@@ -114,8 +114,10 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 
 		addLabeledComboField(panel, BIN_LABEL, ViewWidgetId.binCombo).addTraverseListener(this);
 		addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText).addTraverseListener(this);
-		addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText).addTraverseListener(this);
 		addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText).addTraverseListener(this);
+		Control control = addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText);
+		control.setSize(70, 19);
+		control.addTraverseListener(this);
 
 		final Label filler = UIControlsFactory.createLabel(panel, "");
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(2, 1).applyTo(filler);

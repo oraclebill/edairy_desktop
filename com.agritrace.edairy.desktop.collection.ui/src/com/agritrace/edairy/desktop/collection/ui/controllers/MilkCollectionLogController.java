@@ -166,10 +166,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	private void activateDetailView(CollectionJournalPage journalPage) {
 		final ISubModuleNode myNode = getNavigationNode();
-		System.err.println("Node:    " + myNode);
-		System.err.println("Actions: " + myNode.getActions());
 		final ISubModuleNode childNode = createCollectionDetailNode(journalPage);
-		System.err.println("Child Node: " + childNode);
 		myNode.addChild(childNode);
 		// myNode.getNavigationProcessor().navigate(myNode,
 		// childNode.getNodeId(), new NavigationArgument(journalPage));
@@ -183,11 +180,12 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
 		getNavigationNode().navigate(
-				new NavigationNodeId("riena.demo.client.customermailfolders.module", journalPage.getReferenceNumber()), //$NON-NLS-1$
+				new NavigationNodeId("com.agrigrace.edairy.desktop.collections.journal-detail", journalPage.getReferenceNumber()), //$NON-NLS-1$
 				new NavigationArgument(journalPage));
 
-		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("milk-collection-entry-node",
-				journalPage.getReferenceNumber()), "Collections Entry for " + journalPage.getReferenceNumber()); //$NON-NLS-1$
+		final ISubModuleNode detailViewNode = new SubModuleNode(
+				new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), 
+				journalPage.getReferenceNumber()); 
 		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
 		detailViewNode.setContext("JOURNAL_PAGE", journalPage); // backup..
 		WorkareaManager
