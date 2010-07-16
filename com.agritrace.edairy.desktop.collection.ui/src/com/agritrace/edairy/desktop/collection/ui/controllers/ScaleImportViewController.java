@@ -18,7 +18,8 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineEditRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -57,7 +58,7 @@ public class ScaleImportViewController extends SubModuleController {
 	private JournalHeaderRidget journalHeaderRidget;
 	private ITableRidget table;
 	private ILabelRidget calculatedTotalRidget;
-	private CollectionLineEditRidget collectionsEntryRidget;
+	private CollectionLineRidget collectionsEntryRidget;
 
 
 	/**

@@ -26,10 +26,10 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 
-public class CollectionsEntryPanel extends Composite implements TraverseListener, IComplexComponent {
+public class CollectionLineComposite extends Composite implements TraverseListener, IComplexComponent {
 
 	static {
-		SwtControlRidgetMapper.getInstance().addMapping(CollectionsEntryPanel.class, CollectionLineEditRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(CollectionLineComposite.class, CollectionLineRidget.class);
 	}
 
 
@@ -46,7 +46,7 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 	private List<Object> uiControls = new LinkedList<Object>();
 	
 	private GridData layoutData;
-	public CollectionsEntryPanel(Composite parent, int style) {
+	public CollectionLineComposite(Composite parent, int style) {
 
 		super(parent, style);
 		setLayout(GridLayoutFactory.fillDefaults().create());

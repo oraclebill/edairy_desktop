@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.CollectionsEntryPanel;
+import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
 import com.swtdesigner.ResourceManager;
 
@@ -187,7 +187,7 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		gdf.applyTo(headerGroups);
 
 		// final Control groupThree = createMilkEntryInputGroup(parent);
-		final Control groupThree = new CollectionsEntryPanel(parent, SWT.NONE);
+		final Control groupThree = new CollectionLineComposite(parent, SWT.NONE);
 		addUIControl(groupThree, "journal-entry");
 		gdf.applyTo(groupThree);
 

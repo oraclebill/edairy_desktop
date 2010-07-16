@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
-import com.agritrace.edairy.desktop.collection.ui.controllers.JournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;

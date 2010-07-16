@@ -5,9 +5,12 @@ import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -34,6 +37,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -54,16 +58,22 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo routeCombo;
 	private CCombo sessionCombo;
 	private CCombo vehicleCombo;
-	
-	
+
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
 	}
 
 	public CollectionJournalPage getNewJournalPage() {
 		final String refNum = newJournalPage.getReferenceNumber();
-		if ( refNum == null  || refNum.trim().length() == 0) {
-			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); // TODO: need something unique, but can do better...
+		if (refNum == null || refNum.trim().length() == 0) {
+			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); // TODO:
+																					// need
+																					// something
+																					// unique,
+																					// but
+																					// can
+																					// do
+																					// better...
 		}
 		return newJournalPage;
 	}
@@ -75,7 +85,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final IComboRidget vehicle = (IComboRidget) SwtRidgetFactory.createRidget(vehicleCombo);
 		final IComboRidget session = (IComboRidget) SwtRidgetFactory.createRidget(sessionCombo);
 		final IComboRidget driver = (IComboRidget) SwtRidgetFactory.createRidget(driverCombo);
-//		final ITextRidget file = (ITextRidget) SwtRidgetFactory.createRidget(fileNumber);
+		// final ITextRidget file = (ITextRidget)
+		// SwtRidgetFactory.createRidget(fileNumber);
 
 		final PropertyChangeListener validationListener = new PropertyChangeListener() {
 			@Override
@@ -120,22 +131,23 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				// todo: remove
 				debugPrintEvent(evt);
 
-//				if (auto) {
-//					if (!focus) {
-//						assert (evt.getSource() != file);
-//						updateFileNumber();
-//					} else {
-//						assert (evt.getSource() == file);
-//						if (evt.getPropertyName().equals("text")) {
-//							oldTxt = (String) evt.getNewValue();
-//						} else if (evt.getPropertyName().equals("textAfter")) {
-//							final String newTxt = (String) evt.getNewValue();
-//							if ((null != oldTxt) && (null != newTxt) && !oldTxt.equals(newTxt)) {
-//								auto = false;
-//							}
-//						}
-//					}
-//				}
+				// if (auto) {
+				// if (!focus) {
+				// assert (evt.getSource() != file);
+				// updateFileNumber();
+				// } else {
+				// assert (evt.getSource() == file);
+				// if (evt.getPropertyName().equals("text")) {
+				// oldTxt = (String) evt.getNewValue();
+				// } else if (evt.getPropertyName().equals("textAfter")) {
+				// final String newTxt = (String) evt.getNewValue();
+				// if ((null != oldTxt) && (null != newTxt) &&
+				// !oldTxt.equals(newTxt)) {
+				// auto = false;
+				// }
+				// }
+				// }
+				// }
 			}
 
 			private void debugPrintEvent(PropertyChangeEvent evt) {
@@ -158,7 +170,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				// newJournalPage.getSession().getLiteral(),
 				// newJournalPage.getJournalDate()).toString());
 				// TODO:
-//				file.setText("1");
+				// file.setText("1");
 			}
 		}
 
@@ -171,26 +183,28 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.addPropertyChangeListener(validationListener);
 
 		route.setMandatory(true);
-//		route.setModelToUIControlConverter(new ComboConverter("getName"));
+		// route.setModelToUIControlConverter(new ComboConverter("getName"));
 		route.addPropertyChangeListener(fileNumberUpdateListener);
 		route.addPropertyChangeListener(validationListener);
 		// route.setOutputOnly(true);
 
-//		file.setMandatory(true);
-//		file.setDirectWriting(true);
-//		file.addPropertyChangeListener(fileNumberUpdateListener);
-//		file.addPropertyChangeListener(validationListener);
+		// file.setMandatory(true);
+		// file.setDirectWriting(true);
+		// file.addPropertyChangeListener(fileNumberUpdateListener);
+		// file.addPropertyChangeListener(validationListener);
 
 		vehicle.setMandatory(true);
-//		vehicle.setModelToUIControlConverter(new ComboConverter("getLogBookNumber"));
+		// vehicle.setModelToUIControlConverter(new
+		// ComboConverter("getLogBookNumber"));
 		vehicle.addPropertyChangeListener(validationListener);
 
 		session.setMandatory(true);
-//		session.setModelToUIControlConverter(new ComboConverter("getName"));
+		// session.setModelToUIControlConverter(new ComboConverter("getName"));
 		session.addPropertyChangeListener(validationListener);
 
 		driver.setMandatory(true);
-//		driver.setModelToUIControlConverter(new ComboConverter("getFamilyName"));
+		// driver.setModelToUIControlConverter(new
+		// ComboConverter("getFamilyName"));
 		driver.addPropertyChangeListener(validationListener);
 
 		// bind ridgets
@@ -198,28 +212,48 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
 
-		final List<Route> routes = dairyRepository.allRoutes();
-		route.bindToModel(new WritableList(routes, Route.class), Route.class, "getName",
-				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE));
-		// if (routes.size() > 0) route.setSelection(0);
+		Dairy localDairy = dairyRepository.getLocalDairy();
 
-//		file.bindToModel(EMFObservables.observeValue(newJournalPage,
-//				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER));
+		try {
+			route.bindToModel(localDairy, "routes", Route.class, "getName", newJournalPage,
+					DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE.getName());
+			route.setSelection(localDairy.getRoutes().get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		final List<Vehicle> vehicles = dairyRepository.allVehicles();
-		vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getLogBookNumber",
-				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE));
-		// if (vehicles.size() > 0) vehicle.setSelection(0);
+		try {
+			vehicle.bindToModel(localDairy, "vehicles", Vehicle.class, "getRegistrationNumber", newJournalPage, 
+					DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE.getName());
+			vehicle.setSelection(localDairy.getVehicles().get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		final List<Session> sessions = Arrays.asList(Session.values());
-		session.bindToModel(new WritableList(sessions, Session.class), Session.class, null,
-				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION));
-		// if (sessions.size() > 0) session.setSelection(0);
+		try {
+			session.bindToModel(
+					Observables.staticObservableList(Session.VALUES),
+					Session.class,
+					"getName",
+					PojoObservables.observeValue(newJournalPage,
+							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION.getName()));
+			session.setSelection(Session.VALUES.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		final List<Employee> employees = dairyRepository.employeesByPosition("Driver");
-		driver.bindToModel(new WritableList(employees, Employee.class), Employee.class, "getFamilyName",
-				EMFObservables.observeValue(newJournalPage, DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER));
-		// if (employees.size() > 0) driver.setSelection(0);
+		try {
+			List<Employee> drivers = createEmployeeList(localDairy);
+			driver.bindToModel(
+					new WritableList(drivers, Employee.class),
+					Employee.class,
+					"getFamilyName",
+					PojoObservables.observeValue(newJournalPage,
+							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER.getName()));
+			driver.setSelection(drivers.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// update initial values
 
@@ -230,6 +264,17 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		session.updateFromModel();
 		driver.updateFromModel();
 
+	}
+
+	private List<Employee> createEmployeeList(Dairy dairy) {
+		List<Employee> driverList = new LinkedList<Employee>();
+		for (Employee emp : dairy.getEmployees()) {
+			final String job = emp.getJobFunction();
+			if (job != null && job.equals("Driver")) {
+				driverList.add(emp);
+			}
+		}
+		return driverList;
 	}
 
 	@Override
@@ -286,11 +331,12 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				routeCombo = UIControlsFactory.createCCombo(panel, ViewConstants.ROUTE);
 				GridDataFactory.swtDefaults().hint(100, -1).applyTo(routeCombo);
 			}
-//			{
-//				UIControlsFactory.createLabel(panel, "Reference Number");
-//				fileNumber = UIControlsFactory.createText(panel, SWT.BORDER, ViewConstants.REFERENCE_NUMBER);
-//				GridDataFactory.swtDefaults().hint(100, -1).applyTo(fileNumber);
-//			}
+			// {
+			// UIControlsFactory.createLabel(panel, "Reference Number");
+			// fileNumber = UIControlsFactory.createText(panel, SWT.BORDER,
+			// ViewConstants.REFERENCE_NUMBER);
+			// GridDataFactory.swtDefaults().hint(100, -1).applyTo(fileNumber);
+			// }
 			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
 		{

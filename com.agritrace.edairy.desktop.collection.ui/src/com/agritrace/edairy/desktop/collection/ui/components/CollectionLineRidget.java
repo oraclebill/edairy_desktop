@@ -36,7 +36,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 @SuppressWarnings("restriction")
-public class CollectionLineEditRidget extends AbstractCompositeRidget implements ICollectionLineEditRidget {
+public class CollectionLineRidget extends AbstractCompositeRidget implements ICollectionLineEditRidget {
 
 	private static class ValidationError extends Error {
 		/**
@@ -125,7 +125,7 @@ public class CollectionLineEditRidget extends AbstractCompositeRidget implements
 	private IObservableList binList;
 	boolean cachedHideState = false;
 
-	public CollectionLineEditRidget() {
+	public CollectionLineRidget() {
 		addActionObserver = new ActionObserver(this);
 		clearActionObserver = new ActionObserver(this);
 	}

@@ -10,18 +10,19 @@ import java.util.Map;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.NavigationNodeId;
+import org.eclipse.riena.navigation.model.NavigationNode;
 import org.eclipse.riena.navigation.model.SubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
-import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.collection.ui.views.ScaleDataImportView;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -29,7 +30,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
@@ -97,24 +97,9 @@ final class ScaleImportAction implements IActionListener {
 				}
 
 				for (CollectionJournalPage page : pageMap.values()) {
-
-					final ISubModuleNode myNode = this.milkCollectionLogController.getNavigationNode();
-					System.err.println("My Node:    " + myNode);
-					final ISubModuleNode childNode = createCollectionDetailNode(page);
-					System.err.println("Created New Child Node: " + childNode);
-					myNode.addChild(childNode);
-
-					// myNode.getNavigationProcessor().navigate(myNode,
-					// childNode.getNodeId(), new
-					// NavigationArgument(journalPage));
-					// try {
-					// childNode.activate();
-					// } catch (final Exception e) {
-					// myNode.removeChild(childNode);
-					// e.printStackTrace();
-					// }
-
+					createCollectionDetailNode(milkCollectionLogController.getNavigationNode(), page);
 				}
+				
 			} catch (IOException e) {
 				// TODO: error message
 				this.milkCollectionLogController.getInfoFlyout().addInfo(
@@ -246,19 +231,19 @@ final class ScaleImportAction implements IActionListener {
 		return buffer.toString();
 	}
 
-	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
-		// getNavigationNode().navigate(
-		//					new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
-		// new NavigationArgument(journalPage));
+	private void createCollectionDetailNode(INavigationNode currentNode, CollectionJournalPage journalPage) {
+		currentNode.navigate(
+							new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
+		 new NavigationArgument(journalPage));
 
-		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
-				journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
-		detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
-		detailViewNode.setContext("IMPORTED_RECORDS", journalPage); // backup..
-		WorkareaManager.getInstance()
-				.registerDefinition(detailViewNode, ScaleImportViewController.class, ScaleDataImportView.ID)
-				.setRequiredPreparation(true);
-		return detailViewNode;
+//		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
+//				journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
+//		detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
+//		detailViewNode.setContext("IMPORTED_RECORDS", journalPage); // backup..
+//		WorkareaManager.getInstance()
+//				.registerDefinition(detailViewNode, ScaleImportViewController.class, ScaleDataImportView.ID)
+//				.setRequiredPreparation(true);
+//		return detailViewNode;
 	}
 
 }

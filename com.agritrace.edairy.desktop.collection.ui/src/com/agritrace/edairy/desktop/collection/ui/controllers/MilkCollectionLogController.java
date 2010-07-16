@@ -22,6 +22,7 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
@@ -167,7 +168,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private void activateDetailView(CollectionJournalPage journalPage) {
 		getNavigationNode().navigate(
 				new NavigationNodeId(
-						ViewConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE, journalPage.getReferenceNumber()), //$NON-NLS-1$
+						NavigationConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE, journalPage.getReferenceNumber()), //$NON-NLS-1$
 				new NavigationArgument(journalPage));
 
 //		final ISubModuleNode myNode = getNavigationNode();
@@ -186,10 +187,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
 		getNavigationNode().navigate(
 				new NavigationNodeId(
-						ViewConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE, journalPage.getReferenceNumber()), //$NON-NLS-1$
+						NavigationConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE, journalPage.getReferenceNumber()), //$NON-NLS-1$
 				new NavigationArgument(journalPage));
 		
-		final NavigationNodeId nodeId = new NavigationNodeId(ViewConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE,
+		final NavigationNodeId nodeId = new NavigationNodeId(NavigationConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE,
 				journalPage.getReferenceNumber());
 		final ISubModuleNode detailViewNode = new SubModuleNode(nodeId, journalPage.getReferenceNumber());
 		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$

@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.ICollectionLineEditRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
