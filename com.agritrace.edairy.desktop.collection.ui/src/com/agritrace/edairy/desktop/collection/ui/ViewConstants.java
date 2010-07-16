@@ -2,6 +2,8 @@ package com.agritrace.edairy.desktop.collection.ui;
 
 public interface ViewConstants {
 
+	public static final String MILK_COLLECTION_JOURNAL_DETAIL_NODE = "milk-collection-entry-node";
+
 	// collection dialog
 	String DRIVER = "driver";
 	String VEHICLE = "vehicle";

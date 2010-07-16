@@ -11,6 +11,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -394,6 +395,13 @@ public class DairyRepository implements IDairyRepository {
 		System.err.printf(" > Member search % 8s, time: %s (%s) %d\n", retval == null ? "FAIL" : "SUCCESS",
 				formattedNumber, searchMemberNumber, System.currentTimeMillis() - start);
 		return retval;
+	}
+
+	@Override
+	public List<CollectionJournalLine> getMemberCollectionsForSession(
+			com.agritrace.edairy.desktop.common.model.dairy.Session session, Membership value) {
+		// TODO: implement
+		return null;
 	}
 
 }

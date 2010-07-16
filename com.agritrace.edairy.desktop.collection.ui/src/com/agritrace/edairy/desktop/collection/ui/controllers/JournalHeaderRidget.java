@@ -21,7 +21,6 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Control;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -32,7 +31,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 /**
 	 * 
 	 */
-public class JournalHeaderRidget extends AbstractCompositeRidget {
+public class JournalHeaderRidget extends AbstractCompositeRidget implements IJournalHeaderRidget {
 
 	//
 	// reference data lists
@@ -170,6 +169,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget {
 		super.updateFromModel();
 	}
 
+	@Override
 	public void bindToModel(CollectionJournalPage newModel) {
 		model = new WritableValue(newModel, CollectionJournalPage.class);
 

@@ -50,6 +50,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getDairyContainer <em>Dairy Container</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getCollectionJournal <em>Collection Journal</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#isRejected <em>Rejected</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getRejectionReason <em>Rejection Reason</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getMilkFatPercentage <em>Milk Fat Percentage</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getAlcoholPercentage <em>Alcohol Percentage</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#isWaterAdded <em>Water Added</em>}</li>
  * </ul>
  * </p>
  *
@@ -255,6 +259,86 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected boolean rejected = REJECTED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRejectionReason() <em>Rejection Reason</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRejectionReason()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REJECTION_REASON_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRejectionReason() <em>Rejection Reason</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRejectionReason()
+	 * @generated
+	 * @ordered
+	 */
+	protected String rejectionReason = REJECTION_REASON_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMilkFatPercentage() <em>Milk Fat Percentage</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMilkFatPercentage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal MILK_FAT_PERCENTAGE_EDEFAULT = new BigDecimal("0.0");
+
+	/**
+	 * The cached value of the '{@link #getMilkFatPercentage() <em>Milk Fat Percentage</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMilkFatPercentage()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal milkFatPercentage = MILK_FAT_PERCENTAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAlcoholPercentage() <em>Alcohol Percentage</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAlcoholPercentage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal ALCOHOL_PERCENTAGE_EDEFAULT = new BigDecimal("0.0");
+
+	/**
+	 * The cached value of the '{@link #getAlcoholPercentage() <em>Alcohol Percentage</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAlcoholPercentage()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal alcoholPercentage = ALCOHOL_PERCENTAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isWaterAdded() <em>Water Added</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWaterAdded()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WATER_ADDED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isWaterAdded() <em>Water Added</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWaterAdded()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean waterAdded = WATER_ADDED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -641,6 +725,90 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRejectionReason(String newRejectionReason) {
+		String oldRejectionReason = rejectionReason;
+		rejectionReason = newRejectionReason;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON, oldRejectionReason, rejectionReason));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BigDecimal getMilkFatPercentage() {
+		return milkFatPercentage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMilkFatPercentage(BigDecimal newMilkFatPercentage) {
+		BigDecimal oldMilkFatPercentage = milkFatPercentage;
+		milkFatPercentage = newMilkFatPercentage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE, oldMilkFatPercentage, milkFatPercentage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BigDecimal getAlcoholPercentage() {
+		return alcoholPercentage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAlcoholPercentage(BigDecimal newAlcoholPercentage) {
+		BigDecimal oldAlcoholPercentage = alcoholPercentage;
+		alcoholPercentage = newAlcoholPercentage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE, oldAlcoholPercentage, alcoholPercentage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isWaterAdded() {
+		return waterAdded;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWaterAdded(boolean newWaterAdded) {
+		boolean oldWaterAdded = waterAdded;
+		waterAdded = newWaterAdded;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__WATER_ADDED, oldWaterAdded, waterAdded));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -718,6 +886,14 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				return getCollectionJournal();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				return isRejected();
+			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON:
+				return getRejectionReason();
+			case DairyPackage.COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE:
+				return getMilkFatPercentage();
+			case DairyPackage.COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE:
+				return getAlcoholPercentage();
+			case DairyPackage.COLLECTION_JOURNAL_LINE__WATER_ADDED:
+				return isWaterAdded();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -768,6 +944,18 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				setRejected((Boolean)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON:
+				setRejectionReason((String)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE:
+				setMilkFatPercentage((BigDecimal)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE:
+				setAlcoholPercentage((BigDecimal)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__WATER_ADDED:
+				setWaterAdded((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -820,6 +1008,18 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				setRejected(REJECTED_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON:
+				setRejectionReason(REJECTION_REASON_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE:
+				setMilkFatPercentage(MILK_FAT_PERCENTAGE_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE:
+				setAlcoholPercentage(ALCOHOL_PERCENTAGE_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__WATER_ADDED:
+				setWaterAdded(WATER_ADDED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -858,6 +1058,14 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				return getCollectionJournal() != null;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				return rejected != REJECTED_EDEFAULT;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON:
+				return REJECTION_REASON_EDEFAULT == null ? rejectionReason != null : !REJECTION_REASON_EDEFAULT.equals(rejectionReason);
+			case DairyPackage.COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE:
+				return MILK_FAT_PERCENTAGE_EDEFAULT == null ? milkFatPercentage != null : !MILK_FAT_PERCENTAGE_EDEFAULT.equals(milkFatPercentage);
+			case DairyPackage.COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE:
+				return ALCOHOL_PERCENTAGE_EDEFAULT == null ? alcoholPercentage != null : !ALCOHOL_PERCENTAGE_EDEFAULT.equals(alcoholPercentage);
+			case DairyPackage.COLLECTION_JOURNAL_LINE__WATER_ADDED:
+				return waterAdded != WATER_ADDED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -888,6 +1096,14 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		result.append(offRoute);
 		result.append(", rejected: ");
 		result.append(rejected);
+		result.append(", rejectionReason: ");
+		result.append(rejectionReason);
+		result.append(", milkFatPercentage: ");
+		result.append(milkFatPercentage);
+		result.append(", alcoholPercentage: ");
+		result.append(alcoholPercentage);
+		result.append(", waterAdded: ");
+		result.append(waterAdded);
 		result.append(')');
 		return result.toString();
 	}

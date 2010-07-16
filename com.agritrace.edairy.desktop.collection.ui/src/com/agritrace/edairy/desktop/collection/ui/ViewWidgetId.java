@@ -94,6 +94,8 @@ public class ViewWidgetId {
 
 	public static final String LOCATION_TXT = "Location";
 	public static final String memberIdText = "memberIdText";
+	public static final String memberNameText = "memberNameText";
+
 	public static final String memberInfo_applicationDate = "applicationDate";
 	public static final String memberInfo_cacelButton = "Cancel";
 	public static final String memberInfo_effectiveDate = "effectiveDate";
@@ -143,5 +145,6 @@ public class ViewWidgetId {
 	public static final String vehicleCombo = "vehicleCombo";
 
 	public static final String VILLAGE_TXT = "Village";
+
 
 }

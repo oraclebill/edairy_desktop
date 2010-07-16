@@ -19,7 +19,7 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
-import com.agritrace.edairy.desktop.collection.ui.MilkSubAppConstants;
+import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.common.ui.views.BlankView;
 import com.agritrace.edairy.desktop.dairy.containers.ui.controllers.ContainerLogViewController;
@@ -182,7 +182,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// MILK TAB
 		//
 
-		app.create(new NavigationNodeId(MilkSubAppConstants.SUBAPP_MILK));
+		app.create(new NavigationNodeId(NavigationConstants.SUBAPP_MILK));
 
 		//
 		// MEMBER TAB

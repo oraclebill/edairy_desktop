@@ -346,13 +346,49 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_LINE__REJECTED = 12;
 
 	/**
+	 * The feature id for the '<em><b>Rejection Reason</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_LINE__REJECTION_REASON = 13;
+
+	/**
+	 * The feature id for the '<em><b>Milk Fat Percentage</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE = 14;
+
+	/**
+	 * The feature id for the '<em><b>Alcohol Percentage</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Water Added</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_LINE__WATER_ADDED = 16;
+
+	/**
 	 * The number of structural features of the '<em>Collection Journal Line</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_LINE_FEATURE_COUNT = 13;
+	int COLLECTION_JOURNAL_LINE_FEATURE_COUNT = 17;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl <em>Scale Import Record</em>}' class.
@@ -480,6 +516,42 @@ public interface DairyPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCALE_IMPORT_RECORD__REJECTED = COLLECTION_JOURNAL_LINE__REJECTED;
+
+	/**
+	 * The feature id for the '<em><b>Rejection Reason</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__REJECTION_REASON = COLLECTION_JOURNAL_LINE__REJECTION_REASON;
+
+	/**
+	 * The feature id for the '<em><b>Milk Fat Percentage</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__MILK_FAT_PERCENTAGE = COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE;
+
+	/**
+	 * The feature id for the '<em><b>Alcohol Percentage</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__ALCOHOL_PERCENTAGE = COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE;
+
+	/**
+	 * The feature id for the '<em><b>Water Added</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALE_IMPORT_RECORD__WATER_ADDED = COLLECTION_JOURNAL_LINE__WATER_ADDED;
 
 	/**
 	 * The feature id for the '<em><b>Scale Serial</b></em>' attribute.
@@ -2576,6 +2648,50 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCollectionJournalLine_Rejected();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getRejectionReason <em>Rejection Reason</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rejection Reason</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getRejectionReason()
+	 * @see #getCollectionJournalLine()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalLine_RejectionReason();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getMilkFatPercentage <em>Milk Fat Percentage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Milk Fat Percentage</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getMilkFatPercentage()
+	 * @see #getCollectionJournalLine()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalLine_MilkFatPercentage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getAlcoholPercentage <em>Alcohol Percentage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Alcohol Percentage</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getAlcoholPercentage()
+	 * @see #getCollectionJournalLine()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalLine_AlcoholPercentage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isWaterAdded <em>Water Added</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Water Added</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isWaterAdded()
+	 * @see #getCollectionJournalLine()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalLine_WaterAdded();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord <em>Scale Import Record</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4305,6 +4421,38 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_JOURNAL_LINE__REJECTED = eINSTANCE.getCollectionJournalLine_Rejected();
+
+		/**
+		 * The meta object literal for the '<em><b>Rejection Reason</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_LINE__REJECTION_REASON = eINSTANCE.getCollectionJournalLine_RejectionReason();
+
+		/**
+		 * The meta object literal for the '<em><b>Milk Fat Percentage</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE = eINSTANCE.getCollectionJournalLine_MilkFatPercentage();
+
+		/**
+		 * The meta object literal for the '<em><b>Alcohol Percentage</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE = eINSTANCE.getCollectionJournalLine_AlcoholPercentage();
+
+		/**
+		 * The meta object literal for the '<em><b>Water Added</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_LINE__WATER_ADDED = eINSTANCE.getCollectionJournalLine_WaterAdded();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.ScaleImportRecordImpl <em>Scale Import Record</em>}' class.

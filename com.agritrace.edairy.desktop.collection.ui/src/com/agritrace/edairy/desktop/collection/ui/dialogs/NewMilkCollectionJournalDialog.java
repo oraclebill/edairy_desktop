@@ -61,6 +61,10 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	public CollectionJournalPage getNewJournalPage() {
+		final String refNum = newJournalPage.getReferenceNumber();
+		if ( refNum == null  || refNum.trim().length() == 0) {
+			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); // TODO: need something unique, but can do better...
+		}
 		return newJournalPage;
 	}
 

@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 public class CollectionsEntryPanel extends Composite implements TraverseListener, IComplexComponent {
 
 	static {
-		SwtControlRidgetMapper.getInstance().addMapping(CollectionsEntryPanel.class, CollectionsEntryRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(CollectionsEntryPanel.class, CollectionLineEditRidget.class);
 	}
 
 
@@ -122,7 +122,7 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 		final Label filler = UIControlsFactory.createLabel(panel, "");
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(2, 1).applyTo(filler);
 
-		final Label memberName = UIControlsFactory.createLabel(panel, "member name", "member-name");
+		final Label memberName = UIControlsFactory.createLabel(panel, "<member name>", ViewWidgetId.memberNameText);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(2, 1).applyTo(memberName);
 
 		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
@@ -156,8 +156,8 @@ public class CollectionsEntryPanel extends Composite implements TraverseListener
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(1, 1).applyTo(qualityPanel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(6).applyTo(qualityPanel);
 
-		addLabeledTextField(qualityPanel, "Milk Fat % : ", "milk-fat-percent-text");
-		addLabeledTextField(qualityPanel, "Alcohol % : ", "alcohol-percent-text");
+		addLabeledDecimalTextField(qualityPanel, "Milk Fat % : ", "milk-fat-percent-text");
+		addLabeledDecimalTextField(qualityPanel, "Alcohol % : ", "alcohol-percent-text");
 		addLabeledBooleanField(qualityPanel, "Water Added? : ", "added-water-checkbox");
 	}
 

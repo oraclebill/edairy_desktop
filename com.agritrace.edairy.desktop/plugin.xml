@@ -38,11 +38,11 @@
    </extension>
    <extension
          point="org.eclipse.riena.navigation.assemblies2">
-      <assembly2
+      <!-- assembly2
             assembler="com.agritrace.edairy.desktop.collection.ui.navigation.MilkNavigationNodeAssembler"
             id="com.agritrace.edairy.desktop.milk"
             parentNodeId="application">
-      </assembly2>
+      </assembly2 -->
       <assembly2
             assembler="com.agritrace.edairy.desktop.finance.ui.navigation.FinanceNavigationNodeAssembler"
             id="com.agritrace.edairy.desktop.finance"

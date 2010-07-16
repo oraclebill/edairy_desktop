@@ -165,27 +165,33 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	private void activateDetailView(CollectionJournalPage journalPage) {
-		final ISubModuleNode myNode = getNavigationNode();
-		final ISubModuleNode childNode = createCollectionDetailNode(journalPage);
-		myNode.addChild(childNode);
-		// myNode.getNavigationProcessor().navigate(myNode,
-		// childNode.getNodeId(), new NavigationArgument(journalPage));
-		try {
-			childNode.activate();
-		} catch (final Exception e) {
-			myNode.removeChild(childNode);
-			e.printStackTrace();
-		}
+		getNavigationNode().navigate(
+				new NavigationNodeId(
+						ViewConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE, journalPage.getReferenceNumber()), //$NON-NLS-1$
+				new NavigationArgument(journalPage));
+
+//		final ISubModuleNode myNode = getNavigationNode();
+//		final ISubModuleNode childNode = createCollectionDetailNode(journalPage);
+//		myNode.addChild(childNode);
+//		// myNode.getNavigationProcessor().navigate(myNode,
+//		// childNode.getNodeId(), new NavigationArgument(journalPage));
+//		try {
+//			childNode.activate();
+//		} catch (final Exception e) {
+//			myNode.removeChild(childNode);
+//			e.printStackTrace();
+//		}
 	}
 
 	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
 		getNavigationNode().navigate(
-				new NavigationNodeId("com.agrigrace.edairy.desktop.collections.journal-detail", journalPage.getReferenceNumber()), //$NON-NLS-1$
+				new NavigationNodeId(
+						ViewConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE, journalPage.getReferenceNumber()), //$NON-NLS-1$
 				new NavigationArgument(journalPage));
-
-		final ISubModuleNode detailViewNode = new SubModuleNode(
-				new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), 
-				journalPage.getReferenceNumber()); 
+		
+		final NavigationNodeId nodeId = new NavigationNodeId(ViewConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE,
+				journalPage.getReferenceNumber());
+		final ISubModuleNode detailViewNode = new SubModuleNode(nodeId, journalPage.getReferenceNumber());
 		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
 		detailViewNode.setContext("JOURNAL_PAGE", journalPage); // backup..
 		WorkareaManager

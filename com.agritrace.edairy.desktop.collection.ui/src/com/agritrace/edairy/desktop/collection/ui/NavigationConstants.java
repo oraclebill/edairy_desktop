@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.collection.ui;
 
-public interface MilkSubAppConstants {
+public interface NavigationConstants {
 
 	public static final String MODULE_GROUP_MILK = "milk.navgroup";//$NON-NLS-1$
 	public static final String MODULE_MILK_COLLECTIONS = "edm.milk.collection";//$NON-NLS-1$

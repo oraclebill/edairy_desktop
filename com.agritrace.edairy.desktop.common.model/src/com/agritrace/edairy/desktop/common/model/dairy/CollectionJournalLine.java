@@ -36,6 +36,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isRejected <em>Rejected</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getRejectionReason <em>Rejection Reason</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getMilkFatPercentage <em>Milk Fat Percentage</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getAlcoholPercentage <em>Alcohol Percentage</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isWaterAdded <em>Water Added</em>}</li>
  * </ul>
  * </p>
  *
@@ -387,5 +391,112 @@ public interface CollectionJournalLine extends EObject {
 	 * @generated
 	 */
 	void setRejected(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Rejection Reason</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rejection Reason</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rejection Reason</em>' attribute.
+	 * @see #setRejectionReason(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_RejectionReason()
+	 * @model
+	 * @generated
+	 */
+	String getRejectionReason();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getRejectionReason <em>Rejection Reason</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rejection Reason</em>' attribute.
+	 * @see #getRejectionReason()
+	 * @generated
+	 */
+	void setRejectionReason(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Milk Fat Percentage</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Milk Fat Percentage</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Milk Fat Percentage</em>' attribute.
+	 * @see #setMilkFatPercentage(BigDecimal)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_MilkFatPercentage()
+	 * @model default="0.0"
+	 * @generated
+	 */
+	BigDecimal getMilkFatPercentage();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getMilkFatPercentage <em>Milk Fat Percentage</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Milk Fat Percentage</em>' attribute.
+	 * @see #getMilkFatPercentage()
+	 * @generated
+	 */
+	void setMilkFatPercentage(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Alcohol Percentage</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Alcohol Percentage</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Alcohol Percentage</em>' attribute.
+	 * @see #setAlcoholPercentage(BigDecimal)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_AlcoholPercentage()
+	 * @model default="0.0"
+	 * @generated
+	 */
+	BigDecimal getAlcoholPercentage();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getAlcoholPercentage <em>Alcohol Percentage</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Alcohol Percentage</em>' attribute.
+	 * @see #getAlcoholPercentage()
+	 * @generated
+	 */
+	void setAlcoholPercentage(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Water Added</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Water Added</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Water Added</em>' attribute.
+	 * @see #setWaterAdded(boolean)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_WaterAdded()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isWaterAdded();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isWaterAdded <em>Water Added</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Water Added</em>' attribute.
+	 * @see #isWaterAdded()
+	 * @generated
+	 */
+	void setWaterAdded(boolean value);
 
 } // CollectionJournalLine

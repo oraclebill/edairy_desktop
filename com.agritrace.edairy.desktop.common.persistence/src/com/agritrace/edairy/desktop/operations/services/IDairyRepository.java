@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.operations.services;
 import java.util.Date;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -13,6 +14,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
@@ -71,5 +73,7 @@ public interface IDairyRepository {
 	List<DairyContainer> getBinsByRoute(Route journalRoute);
 
 	Membership getMemberByMemberId(String memberNumber);
+
+	List<CollectionJournalLine> getMemberCollectionsForSession(Session session, Membership value);
 
 }
