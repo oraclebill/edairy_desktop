@@ -206,7 +206,6 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 			collectionLineRidget.setBinList(dairyRepo.getLocalDairy().getDairyBins());
 		}
 		collectionLineRidget.setCollectionLine(DairyFactory.eINSTANCE.createCollectionJournalLine());
-		collectionLineRidget.
 		journalEntryTable.bindToModel(workingJournalPage, "journalEntries", CollectionJournalLine.class, columnPropertyNames, columnHeaderNames);
 
 		totalLabelRidget.bindToModel(PojoObservables.observeValue(workingJournalPage,

@@ -325,13 +325,11 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	 */
 	private void resetJournalEntryInputs(boolean holdContainer) {
 
-		workingJournalLine.eSetDeliver(false);
 		for (EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
 			if (holdContainer && feature.equals(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER))
 				continue;
 			workingJournalLine.eSet(feature, feature.getDefaultValue());
 		}
-		workingJournalLine.eSetDeliver(true);
 
 		updateAllRidgetsFromModel();
 
