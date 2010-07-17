@@ -82,8 +82,6 @@ public class ScaleImportViewController extends SubModuleController {
 		importedData = getContextData();
 
 		journalHeaderRidget = getRidget(JournalHeaderRidget.class, "journal-header");
-		journalHeaderRidget.setControlType(ControlType.TEXT);
-		journalHeaderRidget.setOutputOnly(true);
 		journalHeaderRidget.bindToModel(importedData);
 		journalHeaderRidget.updateFromModel();
 				

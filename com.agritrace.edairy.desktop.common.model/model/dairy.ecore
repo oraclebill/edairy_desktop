@@ -124,12 +124,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalPage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
         eType="ecore:EDataType common.ecore#//UniqueID" iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
-        eType="#//CollectionJournalLine" containment="true" eOpposite="#//CollectionJournalLine/collectionJournal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
+        eType="#//JournalStatus" defaultValueLiteral="NEW"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" lowerBound="1"
         eType="#//Session" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"
@@ -139,6 +139,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         defaultValueLiteral="0" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
+        eType="#//CollectionJournalLine" containment="true" eOpposite="#//CollectionJournalLine/collectionJournal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="suspended" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entryCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -147,6 +149,13 @@
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejectedCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="JournalStatus">
+    <eLiterals name="NEW"/>
+    <eLiterals name="PENDING" value="1"/>
+    <eLiterals name="COMPLETE" value="2"/>
+    <eLiterals name="SUSPENDED" value="3"/>
+    <eLiterals name="ARCHIVED" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Route">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">

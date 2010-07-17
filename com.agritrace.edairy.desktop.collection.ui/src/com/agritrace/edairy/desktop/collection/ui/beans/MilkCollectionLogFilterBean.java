@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.riena.beans.common.AbstractBean;
 
+import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
 public class MilkCollectionLogFilterBean extends AbstractBean {
@@ -14,7 +15,9 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	public static final String ROUTE = "ROUTE";
 	public static final String START_DATE = "START_DATE";
 	public static final String SUSPENDED = "SUSPENDED";
-	private static final String ROUTES = "ROUTES";
+	public static final String STATUS = "STATUS";
+	
+	public static final String ROUTES = "ROUTES";
 
 	private Date endDate;
 	private boolean mprMissing;
@@ -23,6 +26,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	private List<Route> routes;
 	private Date startDate;
 	private boolean suspended;
+	private JournalStatus status;
 
 	public Date getEndDate() {
 		return endDate;
@@ -52,46 +56,57 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 		return suspended;
 	}
 
+	public JournalStatus getStatus() {
+		return status;
+	}
+
+
 	public void setEndDate(Date endDate) {
-		final Object oldVal = this.endDate;
+		final Object oldVal = getEndDate();
 		this.endDate = endDate;
 		firePropertyChanged(END_DATE, oldVal, endDate);
 	}
 
 	public void setMprMissing(boolean mprMissing) {
-		final Object oldVal = this.mprMissing;
+		final Object oldVal = isMprMissing();
 		this.mprMissing = mprMissing;
 		firePropertyChanged(MPR_MISSING, oldVal, mprMissing);
 	}
 
 	public void setRejected(boolean rejected) {
-		final Object oldVal = this.rejected;
+		final Object oldVal = isRejected();
 		this.rejected = rejected;
 		firePropertyChanged(REJECTED, oldVal, rejected);
 	}
 
 	public void setRoute(Route route) {
-		final Object oldVal = this.route;
+		final Object oldVal = getRoute();
 		this.route = route;
 		firePropertyChanged(ROUTE, oldVal, route);
 	}
 
 	public void setRoutes(List<Route> routes) {
-		final Object oldVal = this.routes;
+		final Object oldVal = getRoutes();
 		this.routes = routes;
 		firePropertyChanged(ROUTES, oldVal, rejected);
 	}
 
 	public void setStartDate(Date startDate) {
-		final Object oldVal = this.startDate;
+		final Object oldVal = getStartDate();
 		this.startDate = startDate;
 		firePropertyChanged(START_DATE, oldVal, startDate);
 	}
 
 	public void setSuspended(boolean suspended) {
-		final Object oldVal = this.suspended;
+		final Object oldVal = isSuspended();
 		this.suspended = suspended;
 		firePropertyChanged(SUSPENDED, oldVal, suspended);
+	}
+
+	public void setStatus(JournalStatus status) {
+		final Object oldVal = getStatus();
+		this.status = status;
+		firePropertyChanged(STATUS, oldVal, status);
 	}
 
 }

@@ -5,6 +5,7 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
+            category="com.agritrace.edairy.desktop.collection.ui.category"
             class="com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView"
             id="edairy.collection.entry.view"
             name="Milk Collection Entry"
@@ -12,6 +13,7 @@
       </view>
       <view
             allowMultiple="true"
+            category="com.agritrace.edairy.desktop.collection.ui.category"
             class="com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionLog"
             id="milk-collection-log"
             name="Milk Collection Jounal View"
@@ -19,6 +21,7 @@
       </view>
       <view
             allowMultiple="true"
+            category="com.agritrace.edairy.desktop.collection.ui.category"
             class="com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionDetailLog"
             id="milk-collection-detail-log"
             name="Milk Collection Journal Detail View"
@@ -26,17 +29,23 @@
       </view>
       <view
             allowMultiple="true"
+            category="com.agritrace.edairy.desktop.collection.ui.category"
             class="com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryJournalView"
             id="com.agritrace.edairy.desktop.collection.ui.views.MilkDeliveryLogView"
             name="Milk Delivery Log">
       </view>
       <view
             allowMultiple="true"
+            category="com.agritrace.edairy.desktop.collection.ui.category"
             class="com.agritrace.edairy.desktop.collection.ui.views.ScaleDataImportView"
             id="edairy.scale.import.view"
             name="Scale Data Import "
             restorable="true">
       </view>
+      <category
+            id="com.agritrace.edairy.desktop.collection.ui.category"
+            name="Milk Operations">
+      </category>
    </extension>
    <extension
          point="org.eclipse.riena.navigation.assemblies2">

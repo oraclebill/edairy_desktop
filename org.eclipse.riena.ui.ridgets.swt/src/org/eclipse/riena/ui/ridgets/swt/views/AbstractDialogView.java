@@ -108,8 +108,10 @@ public abstract class AbstractDialogView extends Dialog {
 		addUIControls(getShell());
 		bindController();
 		LNF_UPDATER.updateUIControls(getShell(), true);
-		// after binding the controller it is necessary to calculate the bounds of the dialog again
-		// because the controller can add some data that influences the size of some widgets (e.g. ChoiceComposite)
+		// after binding the controller it is necessary to calculate the bounds
+		// of the dialog again
+		// because the controller can add some data that influences the size of
+		// some widgets (e.g. ChoiceComposite)
 		initializeBounds();
 
 		centerWindow(getShell());
@@ -128,7 +130,11 @@ public abstract class AbstractDialogView extends Dialog {
 	public boolean close() {
 		isClosing = true;
 		AbstractWindowController controller = getController();
-		setReturnCode(controller.getReturnCode());
+		try {
+			setReturnCode(controller.getReturnCode());
+		} catch (Exception e) {
+
+		}
 		controlledView.unbind(controller);
 		return super.close();
 	}
@@ -165,7 +171,7 @@ public abstract class AbstractDialogView extends Dialog {
 	}
 
 	// protected methods
-	////////////////////
+	// //////////////////
 
 	/**
 	 * Add a control to the list of 'bound' controls. These controls will be
@@ -216,7 +222,7 @@ public abstract class AbstractDialogView extends Dialog {
 	protected abstract AbstractWindowController createController();
 
 	// helping methods
-	//////////////////
+	// ////////////////
 
 	private void applyTitle(Shell shell) {
 		if (shell.getText().length() == 0) {
@@ -250,7 +256,7 @@ public abstract class AbstractDialogView extends Dialog {
 	}
 
 	// helping classes
-	//////////////////
+	// ////////////////
 
 	private static final class ControlledView extends AbstractControlledView<AbstractWindowController> {
 		@Override

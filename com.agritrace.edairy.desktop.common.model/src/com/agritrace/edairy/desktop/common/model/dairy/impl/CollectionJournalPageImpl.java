@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -41,15 +42,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalId <em>Journal Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRoute <em>Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#isSuspended <em>Suspended</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getEntryCount <em>Entry Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSuspendedCount <em>Suspended Count</em>}</li>
@@ -79,16 +81,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected Long journalId = JOURNAL_ID_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getJournalEntries() <em>Journal Entries</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getJournalEntries()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CollectionJournalLine> journalEntries;
 
 	/**
 	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
@@ -129,6 +121,26 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected Date journalDate = JOURNAL_DATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final JournalStatus STATUS_EDEFAULT = JournalStatus.NEW;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected JournalStatus status = STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSession() <em>Session</em>}' attribute.
@@ -219,6 +231,16 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getJournalEntries() <em>Journal Entries</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalEntries()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CollectionJournalLine> journalEntries;
 
 	/**
 	 * The default value of the '{@link #isSuspended() <em>Suspended</em>}' attribute.
@@ -392,6 +414,27 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		journalDate = newJournalDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE, oldJournalDate, journalDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JournalStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(JournalStatus newStatus) {
+		JournalStatus oldStatus = status;
+		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS, oldStatus, status));
 	}
 
 	/**
@@ -694,12 +737,12 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				return getJournalId();
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
-				return getJournalEntries();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				return getReferenceNumber();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				return getJournalDate();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
+				return getStatus();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				return getSession();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
@@ -715,6 +758,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return getDriverTotal();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				return getRecordTotal();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
+				return getJournalEntries();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				return isSuspended();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT:
@@ -739,15 +784,14 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				setJournalId((Long)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
-				getJournalEntries().clear();
-				getJournalEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
-				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				setJournalDate((Date)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
+				setStatus((JournalStatus)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				setSession((Session)newValue);
@@ -766,6 +810,10 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				setRecordTotal((BigDecimal)newValue);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
+				getJournalEntries().clear();
+				getJournalEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				setSuspended((Boolean)newValue);
@@ -794,14 +842,14 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				setJournalId(JOURNAL_ID_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
-				getJournalEntries().clear();
-				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				setJournalDate(JOURNAL_DATE_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
+				setStatus(STATUS_EDEFAULT);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				setSession(SESSION_EDEFAULT);
@@ -820,6 +868,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				setRecordTotal(RECORD_TOTAL_EDEFAULT);
+				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
+				getJournalEntries().clear();
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				setSuspended(SUSPENDED_EDEFAULT);
@@ -847,12 +898,12 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ID:
 				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
-				return journalEntries != null && !journalEntries.isEmpty();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE:
 				return JOURNAL_DATE_EDEFAULT == null ? journalDate != null : !JOURNAL_DATE_EDEFAULT.equals(journalDate);
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
+				return status != STATUS_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
 				return session != SESSION_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
@@ -865,6 +916,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return DRIVER_TOTAL_EDEFAULT == null ? driverTotal != null : !DRIVER_TOTAL_EDEFAULT.equals(driverTotal);
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL:
 				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES:
+				return journalEntries != null && !journalEntries.isEmpty();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__SUSPENDED:
 				return suspended != SUSPENDED_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT:
@@ -893,6 +946,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		result.append(referenceNumber);
 		result.append(", journalDate: ");
 		result.append(journalDate);
+		result.append(", status: ");
+		result.append(status);
 		result.append(", session: ");
 		result.append(session);
 		result.append(", driverTotal: ");

@@ -70,11 +70,8 @@ public abstract class BaseListView extends ScrolledSubModuleView {
 	 * @param parent
 	 */
 	protected void createFilterGroup(Composite parent) {
-//		final Group filterArea = UIControlsFactory.createGroup(parent, "Search Conditions");
-//		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(filterArea);
-		Composite filterArea = parent;
-		createFilterConditions(filterArea);
-		createFilterButtonPanel(filterArea);
+		createFilterConditions(parent);
+		createFilterButtonPanel(parent);
 	}
 
 	/**

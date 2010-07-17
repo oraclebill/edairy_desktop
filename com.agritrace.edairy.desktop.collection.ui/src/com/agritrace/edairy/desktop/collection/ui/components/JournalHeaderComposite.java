@@ -16,16 +16,13 @@ import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
@@ -52,7 +49,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 
 	private List<Object> uiControls = new LinkedList<Object>();
 	private Button calendarButton;
-	private DateTime dateText;
+	private Text dateText;
 	private TraverseListener traverseListener = new JournalHeaderTraverseListener();
 	private final ControlType controlType;
 
@@ -73,7 +70,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		return Collections.unmodifiableList(uiControls);
 	}
 
-	private Group createHeaderGroup(Composite parent) {
+	protected Composite createHeaderGroup(Composite parent) {
 		final Group group = UIControlsFactory.createGroup(parent,
 				MilkCollectionJournalView.MILK_JOURNAL_BOOK_GROUP_TITLE, ViewWidgetId.milkJournalGroup);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);
@@ -86,7 +83,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateComposite);
 		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(dateComposite);
 
-		dateText = UIControlsFactory.createDate(dateComposite, SWT.DATE);
+		dateText = UIControlsFactory.createText(dateComposite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 		addUIControl(dateText, ViewWidgetId.calendarDate);
 		dateText.addTraverseListener(traverseListener);
@@ -166,7 +163,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		return group;
 	}
 
-	private Group createSubHeaderGroup(Composite parent) {
+	protected Composite createSubHeaderGroup(Composite parent) {
 		final Group group = UIControlsFactory.createGroup(parent, MilkCollectionJournalView.MILK_BOOK_GROUP_TITLE,
 				ViewWidgetId.milkGroup);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);

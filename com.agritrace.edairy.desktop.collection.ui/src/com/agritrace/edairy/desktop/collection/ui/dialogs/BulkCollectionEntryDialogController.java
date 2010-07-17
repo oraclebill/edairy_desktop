@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.controllers;
+package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -13,16 +13,15 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.navigation.NavigationArgument;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
+import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Display;
@@ -33,14 +32,17 @@ import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidge
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
-public class MilkCollectionJournalController extends SubModuleController {
+public class BulkCollectionEntryDialogController extends AbstractWindowController {
 
 	private class MemberDeliversOncePerSessionValidator implements IValidator {
 
@@ -91,7 +93,24 @@ public class MilkCollectionJournalController extends SubModuleController {
 	}
 
 
-	private static Logger LOG = Log4r.getLogger(Activator.getDefault(), MilkCollectionJournalController.class);
+	private static class CanValidator implements IValidator {
+		IDairyRepository dairyRepo;
+
+		public CanValidator(IDairyRepository dairyRepo) {
+			this.dairyRepo = dairyRepo;
+		}
+
+		@Override
+		public IStatus validate(Object value) {
+			if (value instanceof String) {
+				final String memberNumber = (String) value;
+				if (dairyRepo.getMembershipById(memberNumber) != null)
+					return ValidationStatus.OK_STATUS;
+			}
+			return ValidationStatus.error("Member number not found.");
+		}
+	}
+
 
 	public static final String TOTAL_LABEL = "Total : ";
 
@@ -112,7 +131,6 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 	// milk Entry group
 	private ITableRidget journalEntryTable;
-
 	private CollectionJournalPage workingJournalPage;
 	private IJournalHeaderRidget journalHeaderRidget;
 	private ICollectionLineEditRidget collectionLineRidget;
@@ -121,7 +139,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	/**
 	 * 
 	 */
-	public MilkCollectionJournalController() {
+	public BulkCollectionEntryDialogController() {
 		super();
 		dairyRepo = DairyRepository.getInstance();
 		// drivers = dairyRepo.employeesByPosition("Driver");
@@ -134,6 +152,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	 */
 	@Override
 	public void configureRidgets() {
+		super.configureRidgets();
 		System.out.println("configureRidgets : " + this);
 
 		journalHeaderRidget = getRidget(IJournalHeaderRidget.class, "journal-header");
@@ -177,18 +196,43 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 		workingJournalPage = getJournalPageFromContext();
 		journalHeaderRidget.bindToModel(workingJournalPage);
-
+		
+		Route currentRoute = workingJournalPage.getRoute();
+		// todo: binList of route
+//		if (currentRoute != null) {
+//			collectionLineRidget.setBinList(currentRoute.getBins());
+//		}
+		if (collectionLineRidget.getBinList() == null) {
+			collectionLineRidget.setBinList(dairyRepo.getLocalDairy().getDairyBins());
+		}
 		collectionLineRidget.setCollectionLine(DairyFactory.eINSTANCE.createCollectionJournalLine());
-
+		collectionLineRidget.
 		journalEntryTable.bindToModel(workingJournalPage, "journalEntries", CollectionJournalLine.class, columnPropertyNames, columnHeaderNames);
 
 		totalLabelRidget.bindToModel(PojoObservables.observeValue(workingJournalPage,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL.getName()));
 		totalLabelRidget.setModelToUIControlConverter(NumberToStringConverter.fromBigDecimal());
 
-		updateAllRidgetsFromModel();
+		for (IRidget ridget : getRidgets()) {
+			try {
+				ridget.updateFromModel();
+			}
+			catch (Exception be) {
+				System.err.println(be.getMessage() + ": " + ridget);
+				be.printStackTrace();
+			}
+		}
 	}
 
+	
+	public void setPersistenceDelegate( JournalPersistenceDelegate persister ) {
+		setContext("persistence-delegate", persister);
+	}
+
+	public JournalPersistenceDelegate getPersistenceDelegate() {
+		return (JournalPersistenceDelegate)getContext("persistence-delegate");
+	}
+	
 	/**
 	 * 
 	 */
@@ -268,7 +312,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 			}
 		}
 
-		dairyRepo.saveNewJournalPage(workingJournalPage);
+		getPersistenceDelegate().saveJournal(workingJournalPage);
 
 		collectionLineRidget.setCollectionLine(DairyFactory.eINSTANCE.createCollectionJournalLine());
 	}
@@ -290,24 +334,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	 * 
 	 */
 	private CollectionJournalPage getJournalPageFromContext() {
-		CollectionJournalPage workingJournalPage = null;
-		Object contextObj = null;
-		final NavigationArgument navArg = getNavigationNode().getNavigationArgument();
-		if (navArg != null) {
-			contextObj = navArg.getParameter();
-		}
-		if (contextObj == null) {
-			LOG.log(0, "failed to get page from navigation - falling back to context");
-			contextObj = getNavigationNode().getContext("JOURNAL_PAGE");
-		}
-		if (contextObj instanceof CollectionJournalPage) {
-			workingJournalPage = (CollectionJournalPage) contextObj;
-		} else {
-			LOG.log(0, "ERROR: unable to get journal page from context.");
-			throw new IllegalStateException("ERROR: unable to get journal page from context.");
-		}
-		assert (workingJournalPage != null);
-		return workingJournalPage;
+		return (CollectionJournalPage) getContext("journal-page");
 	}
 
 	/**
@@ -409,6 +436,10 @@ public class MilkCollectionJournalController extends SubModuleController {
 			total.add(line.getQuantity());
 		}
 		workingJournalPage.setRecordTotal(total);
+	}
+	
+	private void log(int level, String message) {
+		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
 }

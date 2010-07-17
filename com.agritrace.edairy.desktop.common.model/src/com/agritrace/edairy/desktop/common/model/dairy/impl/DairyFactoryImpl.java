@@ -91,6 +91,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case DairyPackage.JOURNAL_STATUS:
+				return createJournalStatusFromString(eDataType, initialValue);
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return createMembershipStatusFromString(eDataType, initialValue);
 			case DairyPackage.SESSION:
@@ -114,6 +116,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case DairyPackage.JOURNAL_STATUS:
+				return convertJournalStatusToString(eDataType, instanceValue);
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return convertMembershipStatusToString(eDataType, instanceValue);
 			case DairyPackage.SESSION:
@@ -297,6 +301,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public MilkPrice createMilkPrice() {
 		MilkPriceImpl milkPrice = new MilkPriceImpl();
 		return milkPrice;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JournalStatus createJournalStatusFromString(EDataType eDataType, String initialValue) {
+		JournalStatus result = JournalStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJournalStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

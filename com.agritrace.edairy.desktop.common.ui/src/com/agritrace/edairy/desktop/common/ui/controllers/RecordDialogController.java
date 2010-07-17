@@ -42,7 +42,8 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 */
 	@Override
 	final public void configureRidgets() {
-		setWindowRidget(getRidget(IWindowRidget.class, RIDGET_ID_WINDOW));
+		super.configureRidgets();
+//		setWindowRidget(getRidget(IWindowRidget.class, RIDGET_ID_WINDOW));
 		configureUserRidgets();
 		configureMappedRidgets();
 		configureButtonsPanel();

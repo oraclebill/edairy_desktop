@@ -1,10 +1,16 @@
 package com.agritrace.edairy.desktop.collection.ui.components;
 
-import org.eclipse.core.databinding.observable.list.IObservableList;
-import org.eclipse.riena.ui.ridgets.IRowRidget;
+import java.util.List;
 
-public interface ICollectionLineEditRidget extends IRowRidget {
+import org.eclipse.riena.ui.ridgets.IComplexRidget;
 
-	void setBinList(IObservableList binList);
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+
+public interface ICollectionLineEditRidget extends IComplexRidget {
+
+	void setBinList(List<DairyContainer> binList);
+	void setCollectionLine(CollectionJournalLine journaLine);
+	List<DairyContainer> getBinList();
 
 }

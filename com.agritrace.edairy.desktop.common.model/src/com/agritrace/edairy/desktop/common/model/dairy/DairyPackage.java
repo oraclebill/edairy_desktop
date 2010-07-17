@@ -953,22 +953,13 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__JOURNAL_ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Journal Entries</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 1;
-
-	/**
 	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER = 2;
+	int COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Journal Date</b></em>' attribute.
@@ -977,7 +968,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = 3;
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__STATUS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Session</b></em>' attribute.
@@ -1034,13 +1034,22 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 9;
 
 	/**
+	 * The feature id for the '<em><b>Journal Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 10;
+
+	/**
 	 * The feature id for the '<em><b>Suspended</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 10;
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 11;
 
 	/**
 	 * The feature id for the '<em><b>Entry Count</b></em>' attribute.
@@ -1049,7 +1058,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 11;
+	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Count</b></em>' attribute.
@@ -1058,7 +1067,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 12;
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Rejected Count</b></em>' attribute.
@@ -1067,7 +1076,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 13;
+	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 14;
 
 	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
@@ -1076,7 +1085,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 14;
+	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 15;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -2269,6 +2278,16 @@ public interface DairyPackage extends EPackage {
 	int MILK_PRICE_FEATURE_COUNT = 7;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.JournalStatus
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getJournalStatus()
+	 * @generated
+	 */
+	int JOURNAL_STATUS = 17;
+
+	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2276,7 +2295,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 17;
+	int MEMBERSHIP_STATUS = 18;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}' enum.
@@ -2286,7 +2305,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSession()
 	 * @generated
 	 */
-	int SESSION = 18;
+	int SESSION = 19;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
@@ -2296,7 +2315,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 19;
+	int VENDOR_STATUS = 20;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2306,7 +2325,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 20;
+	int DAIRY_FUNCTION = 21;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod <em>Milk Price Period</em>}' enum.
@@ -2316,7 +2335,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPricePeriod()
 	 * @generated
 	 */
-	int MILK_PRICE_PERIOD = 21;
+	int MILK_PRICE_PERIOD = 22;
 
 
 	/**
@@ -3049,6 +3068,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCollectionJournalPage_JournalDate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_Status();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}'.
@@ -4107,6 +4137,16 @@ public interface DairyPackage extends EPackage {
 	EAttribute getMilkPrice_Notes();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Journal Status</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.JournalStatus
+	 * @generated
+	 */
+	EEnum getJournalStatus();
+
+	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4725,6 +4765,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = eINSTANCE.getCollectionJournalPage_JournalDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__STATUS = eINSTANCE.getCollectionJournalPage_Status();
 
 		/**
 		 * The meta object literal for the '<em><b>Session</b></em>' attribute feature.
@@ -5523,6 +5571,16 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MILK_PRICE__NOTES = eINSTANCE.getMilkPrice_Notes();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.JournalStatus
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getJournalStatus()
+		 * @generated
+		 */
+		EEnum JOURNAL_STATUS = eINSTANCE.getJournalStatus();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.

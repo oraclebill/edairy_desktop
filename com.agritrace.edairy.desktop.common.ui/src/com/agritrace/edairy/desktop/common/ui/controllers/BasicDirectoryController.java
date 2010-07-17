@@ -45,10 +45,17 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	// }
 
 	protected void addTableColumn(String colHeader, EStructuralFeature feature, ColumnFormatter formatter) {
+		addTableColumn(colHeader, feature.getName(), feature.getEType().getInstanceClass(), formatter);
+	}
+	
+	protected void addTableColumn(String colHeader, String colPropertyName, Class<?> colType) {
+		addTableColumn(colHeader, colPropertyName, colType, null);
+	}
+	
+	protected void addTableColumn(String colHeader, String colPropertyName, Class<?> colType, ColumnFormatter formatter) {
 		columnHeaders.add(colHeader);
-		columnProperties.add(feature.getName());
+		columnProperties.add(colPropertyName);
 		columnFormatters.add(formatter);
-		Class<?> colType = feature.getEType().getInstanceClass();
 		if (String.class.isAssignableFrom(colType)) {
 			columnComparators.add(new TypedComparator<String>());
 		} else if (Integer.class.isAssignableFrom(colType)) {

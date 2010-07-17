@@ -6,7 +6,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 
 public interface IJournalHeaderRidget extends IComplexRidget {
 
-	void setOutputOnly(boolean b);
 	void bindToModel(CollectionJournalPage workingJournalPage);
 
 }

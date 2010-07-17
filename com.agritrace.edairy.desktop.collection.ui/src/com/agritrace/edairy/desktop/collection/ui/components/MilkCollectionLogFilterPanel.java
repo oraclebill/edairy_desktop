@@ -15,6 +15,9 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormAttachment;
 
 public class MilkCollectionLogFilterPanel extends Composite {
 
@@ -31,25 +34,57 @@ public class MilkCollectionLogFilterPanel extends Composite {
 //		final Group grpSearch = UIControlsFactory.createGroup(this, "Search");
 
 		final Composite grpSearch = this;
+		setLayout(new FormLayout());
 		final Label lblStartDate = UIControlsFactory.createLabel(grpSearch, "Start Date", SWT.NONE);
+		FormData fd_lblStartDate = new FormData();
+		fd_lblStartDate.top = new FormAttachment(0, 21);
+		lblStartDate.setLayoutData(fd_lblStartDate);
 
 		final DateTime startDate = UIControlsFactory.createDate(grpSearch, SWT.MEDIUM);
+		fd_lblStartDate.right = new FormAttachment(startDate, -6);
+		FormData fd_startDate = new FormData();
+		fd_startDate.top = new FormAttachment(lblStartDate, -4, SWT.TOP);
+		fd_startDate.left = new FormAttachment(0, 75);
+		startDate.setLayoutData(fd_startDate);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(startDate,
 				ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
 
 		final Label lblEndDate = UIControlsFactory.createLabel(grpSearch, "End Date");
+		FormData fd_lblEndDate = new FormData();
+		fd_lblEndDate.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
+		fd_lblEndDate.left = new FormAttachment(startDate, 6);
+		lblEndDate.setLayoutData(fd_lblEndDate);
 
 		final DateTime endDate = UIControlsFactory.createDate(grpSearch, SWT.MEDIUM);
+		FormData fd_endDate = new FormData();
+		fd_endDate.left = new FormAttachment(lblEndDate, 6);
+		fd_endDate.top = new FormAttachment(lblStartDate, -4, SWT.TOP);
+		endDate.setLayoutData(fd_endDate);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(endDate,
 				ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
 
 		final CCombo routeCombo = UIControlsFactory.createCCombo(grpSearch);
+		FormData fd_routeCombo = new FormData();
+		fd_routeCombo.width = 120;
+		fd_routeCombo.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
+		routeCombo.setLayoutData(fd_routeCombo);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(routeCombo,
 				ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
 
 		final Label lblRoute = UIControlsFactory.createLabel(grpSearch, "Route");
+		fd_routeCombo.right = new FormAttachment(lblRoute, 136, SWT.RIGHT);
+		fd_routeCombo.left = new FormAttachment(lblRoute, 6);
+		FormData fd_lblRoute = new FormData();
+		fd_lblRoute.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
+		fd_lblRoute.left = new FormAttachment(endDate, 6);
+		fd_lblRoute.left = new FormAttachment(endDate, 23);
+		lblRoute.setLayoutData(fd_lblRoute);
 
 		final Button btnSearch = UIControlsFactory.createButton(grpSearch);
+		FormData fd_btnSearch = new FormData();
+		fd_btnSearch.top = new FormAttachment(0, 13);
+		fd_btnSearch.right = new FormAttachment(100, -10);
+		btnSearch.setLayoutData(fd_btnSearch);
 		btnSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -60,105 +95,69 @@ public class MilkCollectionLogFilterPanel extends Composite {
 				AbstractDirectoryView.BIND_ID_FILTER_SEARCH);
 
 		final Button btnReset = UIControlsFactory.createButton(grpSearch);
+		FormData fd_btnReset = new FormData();
+		fd_btnReset.top = new FormAttachment(btnSearch, 6);
+		fd_btnReset.left = new FormAttachment(btnSearch, 0, SWT.LEFT);
+		btnReset.setLayoutData(fd_btnReset);
 		btnReset.setText("Reset");
 		SWTBindingPropertyLocator.getInstance()
 				.setBindingProperty(btnReset, AbstractDirectoryView.BIND_ID_FILTER_RESET);
 
 		final Label lblMprMissing = UIControlsFactory.createLabel(grpSearch, "MPR Missing");
+		FormData fd_lblMprMissing = new FormData();
+		fd_lblMprMissing.top = new FormAttachment(btnReset, 8, SWT.TOP);
+		lblMprMissing.setLayoutData(fd_lblMprMissing);
 		final Button button = UIControlsFactory.createButtonCheck(grpSearch);
+		fd_lblMprMissing.right = new FormAttachment(button, -6);
+		FormData fd_button = new FormData();
+		fd_button.top = new FormAttachment(lblMprMissing, -2, SWT.TOP);
+		fd_button.left = new FormAttachment(0, 89);
+		button.setLayoutData(fd_button);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(button,
 				ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
 
 		final Label lblMprMissing_1 = UIControlsFactory.createLabel(grpSearch, "Suspended");
+		FormData fd_lblMprMissing_1 = new FormData();
+		fd_lblMprMissing_1.top = new FormAttachment(lblMprMissing, 0, SWT.TOP);
+		lblMprMissing_1.setLayoutData(fd_lblMprMissing_1);
 
 		final Button button_1 = UIControlsFactory.createButtonCheck(grpSearch);
+		fd_lblMprMissing_1.right = new FormAttachment(button_1, -6);
+		FormData fd_button_1 = new FormData();
+		fd_button_1.top = new FormAttachment(lblMprMissing, -2, SWT.TOP);
+		fd_button_1.left = new FormAttachment(0, 198);
+		button_1.setLayoutData(fd_button_1);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(button_1,
 				ViewConstants.COLLECTION_FILTER_SUSPENDED_CHK);
 
 		final Label lblRejected = UIControlsFactory.createLabel(grpSearch, "Rejected");
+		FormData fd_lblRejected = new FormData();
+		fd_lblRejected.top = new FormAttachment(lblMprMissing, 0, SWT.TOP);
+		fd_lblRejected.left = new FormAttachment(button_1, 18);
+		lblRejected.setLayoutData(fd_lblRejected);
 
 		final Button button_2 = UIControlsFactory.createButtonCheck(grpSearch);
+		FormData fd_button_2 = new FormData();
+		fd_button_2.top = new FormAttachment(lblMprMissing, -2, SWT.TOP);
+		fd_button_2.left = new FormAttachment(lblRejected, 6);
+		button_2.setLayoutData(fd_button_2);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(button_2,
 				ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
-
-		final GroupLayout gl_grpSearch = new GroupLayout(grpSearch);
-		gl_grpSearch
-				.setHorizontalGroup(gl_grpSearch.createParallelGroup(GroupLayout.LEADING).add(
-						gl_grpSearch
-								.createSequentialGroup()
-								.addContainerGap()
-								.add(gl_grpSearch
-										.createParallelGroup(GroupLayout.LEADING)
-										.add(GroupLayout.TRAILING,
-												gl_grpSearch
-														.createSequentialGroup()
-														.add(lblStartDate)
-														.addPreferredGap(LayoutStyle.RELATED)
-														.add(startDate, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.add(18))
-										.add(gl_grpSearch.createSequentialGroup().add(lblMprMissing).add(12)
-												.add(button).addPreferredGap(LayoutStyle.RELATED)))
-								.add(4)
-								.add(gl_grpSearch
-										.createParallelGroup(GroupLayout.TRAILING)
-										.add(gl_grpSearch
-												.createSequentialGroup()
-												.add(lblEndDate)
-												.addPreferredGap(LayoutStyle.RELATED)
-												.add(endDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.PREFERRED_SIZE).add(18))
-										.add(gl_grpSearch.createSequentialGroup().add(lblMprMissing_1)
-												.addPreferredGap(LayoutStyle.UNRELATED).add(button_1).add(65)))
-								.add(gl_grpSearch
-										.createParallelGroup(GroupLayout.TRAILING, false)
-										.add(gl_grpSearch
-												.createSequentialGroup()
-												.add(lblRoute)
-												.addPreferredGap(LayoutStyle.RELATED)
-												.add(routeCombo, GroupLayout.PREFERRED_SIZE, 136,
-														GroupLayout.PREFERRED_SIZE).add(33).add(btnSearch))
-										.add(gl_grpSearch
-												.createSequentialGroup()
-												.addPreferredGap(LayoutStyle.RELATED)
-												.add(lblRejected)
-												.addPreferredGap(LayoutStyle.RELATED)
-												.add(button_2)
-												.addPreferredGap(LayoutStyle.RELATED, GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE).add(btnReset))).add(24)));
-		gl_grpSearch.setVerticalGroup(gl_grpSearch.createParallelGroup(GroupLayout.LEADING).add(
-				gl_grpSearch
-						.createSequentialGroup()
-						.add(21)
-						.add(gl_grpSearch
-								.createParallelGroup(GroupLayout.LEADING)
-								.add(btnSearch)
-								.add(routeCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.add(gl_grpSearch.createSequentialGroup().add(4).add(lblRoute))
-								.add(gl_grpSearch
-										.createParallelGroup(GroupLayout.BASELINE)
-										.add(lblStartDate)
-										.add(startDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.add(lblEndDate)
-										.add(endDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)))
-						.add(gl_grpSearch
-								.createParallelGroup(GroupLayout.LEADING)
-								.add(gl_grpSearch
-										.createSequentialGroup()
-										.addPreferredGap(LayoutStyle.RELATED)
-										.add(gl_grpSearch
-												.createParallelGroup(GroupLayout.LEADING)
-												.add(button)
-												.add(gl_grpSearch.createParallelGroup(GroupLayout.BASELINE)
-														.add(button_1).add(lblMprMissing_1)).add(button_2)
-												.add(btnReset)))
-								.add(gl_grpSearch.createSequentialGroup().add(8).add(lblMprMissing))
-								.add(gl_grpSearch.createSequentialGroup().add(8).add(lblRejected)))
-						.addContainerGap(30, Short.MAX_VALUE)));
-		grpSearch.setLayout(gl_grpSearch);
+		
+		Label lblStatus = UIControlsFactory.createLabel(this, "Status");
+		fd_button_2.right = new FormAttachment(lblStatus, -23);
+		FormData fd_lblStatus = new FormData();
+		fd_lblStatus.top = new FormAttachment(lblMprMissing, 0, SWT.TOP);
+		fd_lblStatus.left = new FormAttachment(0, 338);
+		lblStatus.setLayoutData(fd_lblStatus);
+		
+		CCombo statusCombo = UIControlsFactory.createCCombo(this, ViewConstants.COLLECTION_FILTER_STATUS_COMBO);
+		FormData fd_statusCombo = new FormData();
+		fd_statusCombo.right = new FormAttachment(routeCombo, 0, SWT.RIGHT);
+		fd_statusCombo.width = 120;
+		fd_statusCombo.top = new FormAttachment(lblMprMissing, 0, SWT.TOP);
+		fd_statusCombo.left = new FormAttachment(lblStatus, 4);
+		statusCombo.setLayoutData(fd_statusCombo);
 
 	}
 }

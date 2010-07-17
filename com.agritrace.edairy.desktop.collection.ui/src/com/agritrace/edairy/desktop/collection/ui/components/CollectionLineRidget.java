@@ -6,10 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.eclipse.core.databinding.conversion.Converter;
-import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.Dialog;
@@ -24,7 +21,6 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
@@ -32,7 +28,6 @@ import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 @SuppressWarnings("restriction")
@@ -122,7 +117,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	// working memory
 	private CollectionJournalLine workingJournalLine;
-	private IObservableList binList;
+	private List<DairyContainer> binList;
 	boolean cachedHideState = false;
 
 	public CollectionLineRidget() {
@@ -130,31 +125,14 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		clearActionObserver = new ActionObserver(this);
 	}
 
-	public void setBinList(List<DairyContainer> binList) {
-		this.binList = new WritableList(binList, DairyContainer.class);
-	}
-
 	@Override
-	public void setBinList(IObservableList binList) {
+	public void setBinList(List<DairyContainer> binList) {
 		this.binList = binList;
 	}
-
-	public IObservableList getBinList() {
-		return binList;
-	}
-
-	public void setData(CollectionJournalLine createCollectionJournalLine) {
-		workingJournalLine = createCollectionJournalLine;
-		bindRidgets();
-	}
-
+	
 	@Override
-	public void setData(Object rowData) {
-		if (rowData instanceof CollectionJournalLine) {
-			setData((CollectionJournalLine) rowData);
-		} else {
-			throw new IllegalArgumentException();
-		}
+	public List<DairyContainer> getBinList() {
+		return binList;
 	}
 
 	@Override
@@ -247,14 +225,17 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		});
 	}
 
-	public void bindRidgets() {
-		
+	@Override
+	public void setCollectionLine(CollectionJournalLine journaLine) {
+		workingJournalLine = journaLine;		
 		if (workingJournalLine == null) {
-			throw new IllegalStateException("No model. Call setData before binding!");
+			return;
 		}
-		// editable widgets
-		// todo: should bind to bins for this route only..
-		binCombo.bindToModel(binList, DairyContainer.class, "getContainerId", EMFObservables.observeValue(
+		if (getBinList() == null) {
+			throw new IllegalArgumentException("No bin list. Call setBinList before binding!");
+//			binList = Collections.EMPTY_LIST;
+		}
+		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId", EMFObservables.observeValue(
 				workingJournalLine, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER));
 
 		canText.bindToModel(EMFObservables.observeValue(workingJournalLine,
@@ -285,15 +266,6 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		addedWaterButton.bindToModel(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__WATER_ADDED.getName());
 
-	}
-
-	@Override
-	protected void updateVisible() {
-		Object controlObj = getUIControl();
-		if (controlObj instanceof Control) {
-			Control control = (Control) controlObj;
-			control.setVisible(isVisible());
-		}
 	}
 
 	/**
@@ -395,24 +367,6 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			ridget.updateFromModel();
 		}
 	}
-
-	// public void hide(boolean dontShow) {
-	// if (dontShow == cachedHideState) {
-	// return;
-	// }
-	// cachedHideState = dontShow;
-	// Object obj = getUIControl();
-	// if (obj instanceof CollectionsEntryPanel) {
-	// CollectionsEntryPanel panel = (CollectionsEntryPanel) obj;
-	// panel.hide(cachedHideState);
-	// }
-	// }
-	//
-	// @Override
-	// protected void bindUIControl() {
-	// super.bindUIControl();
-	// hide(cachedHideState);
-	// }
 
 	private static final Shell activeShell() {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

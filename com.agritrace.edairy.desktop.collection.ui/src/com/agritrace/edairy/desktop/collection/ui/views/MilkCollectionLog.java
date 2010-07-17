@@ -19,6 +19,9 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	public static final String ID = "milk-collection-log";
 
 	public MilkCollectionLog() {
+		setTitleToolTip("A searchable list of all collection records.");
+		setPartName("Milk Collection Journal Register");
+		setContentDescription("Master collection journal list.");
 	}
 
 	@Override
@@ -50,16 +53,12 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	}
 
 	@Override
-	protected void createFilterButtonPanel(Composite parent) {
-		// prevent superclass from adding buttons..
-	}
-
-	@Override
-	protected void createFilterConditions(Composite top) {
-		Composite parent = UIControlsFactory.createComposite(top);
-		parent.setLayout(new FillLayout());
-		final Composite comp = new MilkCollectionLogFilterPanel(parent, SWT.NONE);
-		comp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+	protected void createFilterGroup(Composite parent) {
+//		Composite filterGroup = UIControlsFactory.createComposite(parent, SWT.BORDER);
+//		filterGroup.setLayout(new FillLayout());
+		final Composite panel = new MilkCollectionLogFilterPanel(parent, SWT.BORDER);
+		panel.setLayoutData(GridDataFactory.fillDefaults().grab(true, false).create());
+		panel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 //		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(3, -1).applyTo(comp);
 	}
 

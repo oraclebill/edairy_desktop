@@ -23,15 +23,16 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute <em>Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount <em>Entry Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}</li>
@@ -139,6 +140,36 @@ public interface CollectionJournalPage extends EObject {
 	 * @generated
 	 */
 	void setJournalDate(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * The default value is <code>"NEW"</code>.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.JournalStatus
+	 * @see #setStatus(JournalStatus)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Status()
+	 * @model default="NEW" required="true"
+	 * @generated
+	 */
+	JournalStatus getStatus();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.JournalStatus
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(JournalStatus value);
 
 	/**
 	 * Returns the value of the '<em><b>Session</b></em>' attribute.
