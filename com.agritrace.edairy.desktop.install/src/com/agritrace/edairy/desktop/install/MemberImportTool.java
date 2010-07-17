@@ -86,6 +86,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 		Account account = AccountFactory.eINSTANCE.createAccount();
 		account.setMember(membership);
+		account.setAccountNumber(membership.getMemberNumber());
 		account.setStatus(AccountStatus.ACTIVE);
 		account.setEstablished(DEFAULT_IMPORT_DATE);
 
