@@ -77,6 +77,9 @@ public class AccountTransactionEditPanelController {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void configureAndBind() {
 		if (container == null) {
 			throw new IllegalStateException("RidgetContainer must be set before configureAndBind");
@@ -90,14 +93,25 @@ public class AccountTransactionEditPanelController {
 		bindConfiguredRidgets();
 	}
 
+	/**
+	 * 
+	 * @param tx
+	 */
 	public void setModel(AccountTransaction tx) {
 		this.model = tx;
 	}
 
+	/**
+	 * 
+	 * @param container
+	 */
 	public void setRidgetContainer(IRidgetContainer container) {
 		this.container = container;
 	}
 
+	/**
+	 * 
+	 */
 	private void bindConfiguredRidgets() {
 
 		// configure and bind transaction source

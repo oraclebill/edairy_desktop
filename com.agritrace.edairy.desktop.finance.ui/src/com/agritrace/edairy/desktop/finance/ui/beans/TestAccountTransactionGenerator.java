@@ -57,6 +57,7 @@ public class TestAccountTransactionGenerator {
 		testAccount.setEstablished(randomDate());
 		testAccount.setType("CREDIT");
 		testAccount.setMember(member);
+		testAccount.setAccountNumber("V"+member.getMemberNumber());
 		testAccount.getMember().setAccount(testAccount);
 		return testAccount;
 	}

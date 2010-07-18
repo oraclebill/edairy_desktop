@@ -98,6 +98,7 @@ public class MemberRepository implements IMemberRepository {
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
 		Account memberAccount = AccountFactory.eINSTANCE.createAccount();
 		memberAccount.setMember(newEntity);
+		memberAccount.setAccountNumber("V"+newEntity.getMemberNumber());
 		driver.saveNew(newEntity);
 	}
 

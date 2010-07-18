@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,12 +20,9 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
@@ -37,7 +33,7 @@ import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
 
-public class AccountTransactionJournalController extends TransactionJournalController {
+public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
 
 	static class TransactionSourceMatchPredicate implements Predicate {
 		final private Set<TransactionSource> testSources = new HashSet<TransactionSource>();
@@ -92,23 +88,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		this.addTableColumn("Source", AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 		this.addTableColumn("Ref. Num.", AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
-		this.addTableColumn("Account ID", AccountPackage.Literals.TRANSACTION__ACCOUNT, new ColumnFormatter() {
-
-			@Override
-			public String getText(Object element) {
-				String ret = "n/a";
-				if (element instanceof Account) {
-					final Account acct = (Account) element;
-					try {
-						ret = acct.getMember().getMember().getFamilyName();
-					} catch (final Exception e) {
-						ret = "account # " + acct.getAccountId();
-					}
-				}
-				return ret;
-			}
-
-		});
+		this.addTableColumn("Account ID", "account.member.member.familyName", String.class );
 		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
 	}
 
