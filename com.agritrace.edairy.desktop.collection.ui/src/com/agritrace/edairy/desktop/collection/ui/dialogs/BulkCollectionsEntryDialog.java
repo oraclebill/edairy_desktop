@@ -40,16 +40,41 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.swtdesigner.ResourceManager;
 
+/**
+ * 
+ * @author bill jones
+ * 
+ */
 public class BulkCollectionsEntryDialog extends BaseDialogView {
 
-	private static final class TestJournalPersister implements JournalPersistenceDelegate {
-		@Override
-		public void saveJournal(CollectionJournalPage journal) {
-			System.err.println(">> Saving journal : " + journal);
-		}
-	}
-
+	/**
+	 * 
+	 * @author bill jones
+	 * 
+	 */
 	private static final class JournalEntryTestAction implements IActionListener {
+
+		/**
+		 * 
+		 * @author bill jones
+		 * 
+		 */
+		private final class TestJournalPersister implements JournalPersistenceDelegate {
+			private AbstractWindowController controller;
+
+			public TestJournalPersister(AbstractWindowController controller) {
+				this.controller = controller;
+			}
+
+			@Override
+			public void saveJournal(CollectionJournalPage journal) {
+				System.err.println(">> Saving journal : " + journal);
+				controller.setContext(BulkCollectionEntryDialogController.CONTEXT_JOURNAL_PAGE,
+						createCollectionJournal());
+				controller.afterBind();
+			}
+		}
+
 		private final Shell shell;
 		private CollectionJournalPage page;
 
@@ -82,7 +107,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_JOURNAL_PAGE,
 					createCollectionJournal());
 			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_PERSISTENCE_DELEGATE,
-					new TestJournalPersister());
+					new TestJournalPersister(dialog.getController()));
 
 			if (Window.OK == dialog.open()) {
 				System.out.println("OK pressed"); //$NON-NLS-1$

@@ -38,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -394,30 +395,48 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	 * Called when 'Save and New' is clicked.
 	 */
 	protected void handleSaveAndNewJournalAction() {
-		CollectionJournalPage workingJournal = getContextJournalPage();
-		IStatus validationResult = validateJournal(workingJournal);
-		if (!validationResult.isOK()) {
-			displayMessage(validationResult);
-			return;
-		}
-
-		getPersistenceDelegate().saveJournal(workingJournal);
-		refreshWorkingJournal();
+		if(doSave())
+			refreshWorkingJournal();
 	}
 
 	/**
 	 * Called when 'Save and Close' is clicked.
 	 */
 	protected void handleSaveAndCloseWindowAction() {
+		if(doSave())
+			getWindowRidget().dispose();
+	}
+	
+	/**
+	 * 
+	 */
+	private boolean doSave() {
+		boolean doSave = true;
+		
 		CollectionJournalPage workingJournal = getContextJournalPage();
 		IStatus validationResult = validateJournal(workingJournal);
 		if (!validationResult.isOK()) {
 			displayMessage(validationResult);
-			return;
+			doSave = false;
 		}
-
-		getPersistenceDelegate().saveJournal(workingJournal);
-		getWindowRidget().dispose();
+		if (workingJournal.getEntryCount() > 0) {
+			if (workingJournal.getSuspendedCount() > 0 || workingJournal.isSuspended()) {
+				workingJournal.setStatus(JournalStatus.SUSPENDED);				
+			} else {
+				workingJournal.setStatus(JournalStatus.COMPLETE);
+			}
+		}
+		else if (workingJournal.getDriverTotal().compareTo(BigDecimal.ZERO) > 0) {
+				workingJournal.setStatus(JournalStatus.PENDING);								
+		}
+		else {
+			log(LogService.LOG_WARNING, "doSave: saving questionable journal: " + workingJournal.getReferenceNumber());
+		}
+		
+		if( doSave )
+			getPersistenceDelegate().saveJournal(workingJournal);
+		
+		return doSave;
 	}
 
 	/**
@@ -446,6 +465,8 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	private void refreshWorkingJournal() {
 		CollectionJournalPage oldPage = getContextJournalPage();
 		CollectionJournalPage newPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
+		
+		// copy some of the old stuff to the new guy
 		EStructuralFeature[] transferFeatures = new EStructuralFeature[] {
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE,
@@ -456,8 +477,9 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 			newPage.eSet(feature, oldPage.eGet(feature));
 		}
 
+		// refresh view
 		setContextJournalPage(newPage);
-
+		afterBind();
 	}
 
 	/**

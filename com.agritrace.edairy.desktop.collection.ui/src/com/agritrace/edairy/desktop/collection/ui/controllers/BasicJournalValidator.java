@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
+import java.math.BigDecimal;
+
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
@@ -22,11 +24,10 @@ public class BasicJournalValidator implements IValidator {
 			if (journal.getDriverTotal() == null) {
 				statusList.add(ValidationStatus.cancel("System Error: driver total not set. Please contact support."));
 			}
-			if (!journal.getDriverTotal().equals(journal.getRecordTotal())) {
-				statusList.add(ValidationStatus.error(String.format("The driver total (%s) and calculated total (%s) do not match.", journal.getDriverTotal(), journal.getRecordTotal())));					
-			}
-			if (0 == journal.getJournalEntries().size()) {
-				statusList.add(ValidationStatus.error("This journal has no entries - cannot save."));
+			final BigDecimal record = journal.getRecordTotal(), driver = journal.getDriverTotal();
+			if ((record != null && driver != null && record.compareTo(driver) != 0) 
+					|| record == null || driver == null) {
+				statusList.add(ValidationStatus.error(String.format("The driver total (%s) and calculated total (%s) do not match.", driver, record)));					
 			}
 			if (0 == journal.getJournalEntries().size()) {
 				statusList.add(ValidationStatus.error("This journal has no entries - cannot save."));

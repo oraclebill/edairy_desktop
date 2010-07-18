@@ -289,7 +289,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	 * 
 	 */
 	private void clearButtonClicked() {
-		Dialog dialog = MessageDialogWithToggle.openYesNoQuestion(activeShell(), "Confirm",
+		Dialog dialog = MessageDialogWithToggle.openYesNoQuestion(getShell(), "Confirm",
 				"Are you sure you want to clear the input fields?", null, confirmClear, PlatformUI.getPreferenceStore(),
 				getClass().getName() + ".confirmClear");
 		if (confirmClear || dialog.open() == Dialog.OK) {
@@ -325,7 +325,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
 		}
 		try {
-			MessageDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Validation Error(s)",
+			MessageDialog.openError(getShell(), "Validation Error(s)",
 					message.toString());
 		}
 		catch(Exception e) {			
@@ -436,15 +436,23 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		return sb.toString();
 	}
 
-	private static final Shell activeShell() {
-		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	}
-
 	/**
 	 * 
 	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
+
+	public static Shell getShell() {
+		Shell shell = null;
+		try {
+			PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		}
+		catch(Exception e) {
+			shell = Display.getCurrent().getActiveShell();
+		}
+		return shell;
+	}
+
 
 }
