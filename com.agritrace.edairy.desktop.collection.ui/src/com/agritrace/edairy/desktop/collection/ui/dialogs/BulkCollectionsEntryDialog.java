@@ -121,7 +121,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	@Override
 	protected void buildWorkArea(Composite parent) {
 		final GridDataFactory gdf = GridDataFactory.fillDefaults().grab(true, false);
-		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL, ControlType.TEXT);
+		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL);
 		addUIControl(headerGroups, "journal-header");
 		gdf.applyTo(headerGroups);
 

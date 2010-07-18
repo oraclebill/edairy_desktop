@@ -158,18 +158,23 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		saveAndCloseRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_CANCEL);
 		cancelRidget = getRidget(IActionRidget.class, 		DialogConstants.BIND_ID_BUTTON_DELETE);
 
-		journalHeaderRidget.addPropertyChangeListener("header-valid", new PropertyChangeListener() {			
+		// config stuff..
+
+		PropertyChangeListener headerValidityListener = new PropertyChangeListener() {			
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				boolean isValid = journalHeaderRidget.isHeaderValid();
+				log(LogService.LOG_DEBUG, String.format(" --. got header valid event: %s", evt));
 				collectionLineRidget.setEnabled(isValid);
 				journalHeaderRidget.setEnabled(!isValid);
 				if (isValid) {
 					collectionLineRidget.requestFocus();
 				}
 			}
-		});
-		
+		};
+		journalHeaderRidget.addPropertyChangeListener(IJournalHeaderRidget.HEADER_VALID, headerValidityListener);
+			log(LogService.LOG_DEBUG, String.format("Header validity listener '%s' added to %s.", headerValidityListener, journalHeaderRidget));
+
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(dairyRepo));
 		collectionLineRidget.addPropertyChangeListener(ICollectionLineEditRidget.VALIDATED_VALUE,
 				new PropertyChangeListener() {
@@ -332,13 +337,15 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		CollectionJournalPage workingJournalPage = getContextJournalPage();
 		if (workingJournalPage != null) {
 			final String refNum = workingJournalPage.getReferenceNumber();
-			if (refNum == null || refNum.trim().length() == 0 || workingJournalPage.getDriverTotal() == null) {
+			if (refNum == null 
+					|| refNum.trim().length() == 0 
+					|| !workingJournalPage.eIsSet(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL)) {
 				collectionLineRidget.setEnabled(false);
 				journalHeaderRidget.setEnabled(true);
 				journalHeaderRidget.requestFocus();
 			} else {
 				collectionLineRidget.setEnabled(true);
-				journalHeaderRidget.setEnabled(true);
+				journalHeaderRidget.setEnabled(false);
 				collectionLineRidget.requestFocus();
 			}
 		}
@@ -494,6 +501,13 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 				be.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * 
+	 */
+	private void dbg(String message) {
+		log(LogService.LOG_DEBUG, message);
 	}
 
 	/**

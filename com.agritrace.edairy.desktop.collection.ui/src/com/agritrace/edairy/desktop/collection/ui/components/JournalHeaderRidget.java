@@ -4,22 +4,25 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.databinding.DateToStringConverter;
 import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
 import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 
 /**
 	 * 
 	 */
 public class JournalHeaderRidget extends AbstractCompositeRidget implements IJournalHeaderRidget {
-
+	
 	public class JournalHeaderValidationListener implements PropertyChangeListener {
 		private transient Boolean lastValue = null;
 
@@ -27,7 +30,8 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		public void propertyChange(PropertyChangeEvent evt) {
 			Boolean oldValue = lastValue;
 			lastValue = isHeaderValid();
-			firePropertyChange("header-valid", oldValue, lastValue);
+			firePropertyChange(HEADER_VALID, oldValue, lastValue);
+			log(LogService.LOG_DEBUG, String.format( "propertyChange: %s - %s", oldValue, lastValue) );
 		}
 	}
 
@@ -55,6 +59,13 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 
 	public JournalHeaderRidget() {
 		validationListener = new JournalHeaderValidationListener();
+	}
+
+	/**
+	 * 
+	 */
+	private void log(int level, String message) {
+		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
 	/**
@@ -113,7 +124,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 
 		driverTotalText.addPropertyChangeListener("text", validationListener);
 		
-		statusRidget = getRidget(ITextRidget.class, ViewWidgetId.driverCombo);
+		statusRidget = getRidget(ITextRidget.class, ViewWidgetId.journalStatus);
 		statusRidget.setOutputOnly(true);
 		statusRidget.setFocusable(false);
 	}
@@ -129,6 +140,11 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	protected void updateEnabled() {
 		super.updateEnabled();
 		statusRidget.setOutputOnly(true);
+		boolean enabled = isEnabled();
+		driverTotalText.setOutputOnly(!enabled);
+		journalNumber.setOutputOnly(!enabled);
+		driverTotalText.setFocusable(!enabled);
+		journalNumber.setFocusable(!enabled);
 	}
 
 	@Override

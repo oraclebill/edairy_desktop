@@ -271,8 +271,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	protected void updateEnabled() {
 		super.updateEnabled();
 		boolean enabled = this.isEnabled();
+		log(LogService.LOG_DEBUG, " ** updateEnabled: " + enabled);
 		for (IRidget ridget : getRidgets()) {
-			log(LogService.LOG_DEBUG, " ** Enabling: " + ridget);
 			ridget.setEnabled(enabled);
 		}
 	}

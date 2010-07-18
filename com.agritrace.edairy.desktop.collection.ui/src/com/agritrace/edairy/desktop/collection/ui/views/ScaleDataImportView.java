@@ -107,7 +107,7 @@ public class ScaleDataImportView extends SubModuleView {
 		// final Control groupTwo = createMilkBookGroup(parent);
 		// gdf.applyTo(groupTwo);
 
-		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL, ControlType.TEXT);
+		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL);
 		addUIControl(headerGroups, "journal-header");
 		gdf.applyTo(headerGroups);
 

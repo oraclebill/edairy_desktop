@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.common.IComplexComponent;
+import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
@@ -23,6 +24,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.util.FieldUtil;
@@ -64,15 +66,9 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	private Button calendarButton;
 	private Text dateText;
 	private TraverseListener traverseListener = new JournalHeaderTraverseListener();
-	private final ControlType controlType;
 
 	public JournalHeaderComposite(Composite parent, int style) {
-		this(parent, style, ControlType.COMBO);
-	}
-
-	public JournalHeaderComposite(Composite parent, int style, ControlType controlType) {
 		super(parent, style);
-		this.controlType = controlType;
 		createHeaderGroup(this);
 		createSubHeaderGroup(this);
 		GridLayoutFactory.fillDefaults().generateLayout(this);
@@ -135,7 +131,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(routeLabel);
 
 		// Combo combo = new Combo(group, SWT.BORDER|SWT.DROP_DOWN);
-		final Control combo = createControl(group);
+		final Control combo = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo);
 		addUIControl(combo, ViewWidgetId.routeCombo);
 		combo.addTraverseListener(traverseListener);
@@ -144,7 +140,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
 				.applyTo(sectionLabel);
 
-		final Control combo2 = createControl(group);
+		final Control combo2 = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo2);
 		addUIControl(combo2, ViewWidgetId.sessionCombo);
 		combo2.addTraverseListener(traverseListener);
@@ -157,7 +153,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
 				.applyTo(vehicleLabel);
 
-		final Control combo3 = createControl(group);
+		final Control combo3 = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo3);
 		combo3.addTraverseListener(traverseListener);
 		addUIControl(combo3, ViewWidgetId.vehicleCombo);
@@ -165,7 +161,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		final Label driverLabel = FieldUtil.createLabel(group, DRIVER_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(driverLabel);
 
-		final Control driverCombo = createControl(group);
+		final Control driverCombo = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(driverCombo);
 		addUIControl(driverCombo, ViewWidgetId.driverCombo);
 		driverCombo.addTraverseListener(traverseListener);
@@ -218,26 +214,6 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		return group;
 	}
 
-	public ControlType getControlType() {
-		return controlType;
-	}
-
-	/**
-	 * 
-	 * @param parent
-	 * @return
-	 * @wbp.factory
-	 */
-	private Control createControl(Composite parent) {
-		switch (controlType) {
-		case TEXT:
-			return UIControlsFactory.createText(parent, SWT.NONE);
-		case COMBO:
-			return UIControlsFactory.createCCombo(parent);
-		default:
-			throw new IllegalArgumentException();
-		}
-	}
 
 	private Group createGroup(Composite parent, String title, String bindingId) {
 		Group group = new Group(parent, SWT.BORDER);
