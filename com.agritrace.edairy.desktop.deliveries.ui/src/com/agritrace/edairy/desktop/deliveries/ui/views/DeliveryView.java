@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -36,6 +35,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.deliveries.ui.beans.Item;
 import com.agritrace.edairy.desktop.deliveries.ui.beans.ItemsFactory;
 import com.agritrace.edairy.desktop.deliveries.ui.dialogs.AddItemDialog;
@@ -132,7 +132,7 @@ public class DeliveryView extends SubModuleView {
 		calendarButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				final Shell dialog = new Shell(Display.getDefault().getActiveShell(), SWT.DIALOG_TRIM);
+				final Shell dialog = new Shell(AbstractDirectoryController.getShell(), SWT.DIALOG_TRIM);
 				dialog.setLayout(new GridLayout(3, false));
 
 				final DateTime calendar = new DateTime(dialog, SWT.CALENDAR | SWT.BORDER);

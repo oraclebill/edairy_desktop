@@ -16,6 +16,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
@@ -315,7 +316,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
-		final RecordDialog<T> dialog = getRecordDialog(new Shell());
+		final RecordDialog<T> dialog = getRecordDialog(getShell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 		System.err.println("opening view item: " + getSelectedEObject());
@@ -349,6 +350,39 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	 */
 	abstract protected void resetFilterConditions();
 	
+	/**
+	 * A utility to get the current display. 
+	 * 
+	 * @return the current display, safe for rcp or non-rcp.
+	 */
+	public static final Display getDisplay() {
+		Display display;
+		try {
+			display = PlatformUI.getWorkbench().getDisplay();
+		}
+		catch( Exception e) {
+			display = Display.getCurrent();
+			if (display == null) {
+				display = Display.getDefault();
+			}
+		}
+		return display;
+	}
+	
+	/**
+	 * A utility to get the current active shell. 
+	 * 
+	 * @return the current shell, safe for rcp or non-rcp.
+	 */
+	public static final Shell getShell() {
+		return getDisplay().getActiveShell();
+	}
+	
+	/**
+	 * 
+	 * @param level
+	 * @param message
+	 */
 	private void log(int level, String message) {
 		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
 		logger.log(level, message);

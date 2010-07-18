@@ -1,10 +1,10 @@
 package com.agritrace.edairy.desktop.collection.ui.components.validators;
 
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 
 class JournalLineValidator {
 	
@@ -20,7 +20,7 @@ class JournalLineValidator {
 		boolean ret = true;
 
 		if (errorDialogsEnabled) {
-			ret = MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Error creating journal line",
+			ret = MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Error creating journal line",
 					"Can't find container for " + canId + ". Do you want to continue create a new record? ");
 		}
 
@@ -40,7 +40,7 @@ class JournalLineValidator {
 		if (errorDialogsEnabled) {
 			ret = MessageDialog
 					.openConfirm(
-							Display.getDefault().getActiveShell(),
+							AbstractDirectoryController.getShell(),
 							"Error creating collection journal record!",
 							"Can't find valid membership for "
 									+ memberId

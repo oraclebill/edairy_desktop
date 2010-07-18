@@ -39,6 +39,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -86,7 +87,7 @@ public class LiveStockListController extends BaseListViewController {
 				RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.MALE,
 						DairyUtil.createReferenceAnimal("", ""), Purpose.get(0), RearingMode.get(0),
 						DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
-				final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(Display.getDefault().getActiveShell());
+				final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(AbstractDirectoryController.getShell());
 				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
 				final List<Farm> farmList = new ArrayList<Farm>();
 				farmList.addAll(selectedMember.getMember().getFarms());
@@ -128,7 +129,7 @@ public class LiveStockListController extends BaseListViewController {
 				final LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) liveStockListTable
 						.getSelection().get(0);
 				final RegisteredAnimal selectedAnimal = selectedNode.getAnimal();
-				final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
+				final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(AbstractDirectoryController.getShell());
 				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED,
 						selectedAnimal);
 				final List<Farm> farmList = new ArrayList<Farm>();
@@ -145,7 +146,7 @@ public class LiveStockListController extends BaseListViewController {
 					}
 					refreshList();
 				} else if (returnCode == 2) {
-					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), liveStockRemoveTitle,
+					if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), liveStockRemoveTitle,
 							liveStockRemoveMessage)) {
 						farmLocation.getAnimals().remove(selectedAnimal);
 						if (farmLocation.getFarmId() != null) {

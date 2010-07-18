@@ -42,7 +42,7 @@ public class MilkPriceEditDialog extends RecordDialog<MilkPrice> {
 	
 	@Override
 	protected AbstractWindowController createController() {
-		return new MilkPriceEditController();
+		return new MilkPriceEditController(); 
 	}
 
 }

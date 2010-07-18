@@ -33,10 +33,10 @@ import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICol
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -228,7 +228,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		((IActionRidget) getRidget(ViewWidgetId.deleteButton)).addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Milk Collection Records",
+				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Delete Milk Collection Records",
 						"Do you want to delete the selected milk collection records?")) {
 					final List<Object> selectedRecords = journalEntryTable.getSelection();
 					if (selectedRecords != null) {
@@ -245,7 +245,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		((IActionRidget) getRidget(ViewWidgetId.clearButton)).addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Milk Collection Records",
+				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Delete Milk Collection Records",
 						"Do you want to delete all milk collection records?")) {
 					// records.clear();
 					workingJournalPage.getJournalEntries().clear();
@@ -322,7 +322,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		boolean ret = true;
 
 		if (errorDialogsEnabled) {
-			ret = MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Error creating journal line",
+			ret = MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Error creating journal line",
 					"Can't find container for " + canId + ". Do you want to continue create a new record? ");
 		}
 
@@ -342,7 +342,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		if (errorDialogsEnabled) {
 			ret = MessageDialog
 					.openConfirm(
-							Display.getDefault().getActiveShell(),
+							AbstractDirectoryController.getShell(),
 							"Error creating collection journal record!",
 							"Can't find valid membership for "
 									+ memberId
@@ -369,7 +369,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 	 * @return
 	 */
 	private boolean handleTotalsNotEqualOnSave() {
-		MessageDialog.openError(Display.getDefault().getActiveShell(), "Error Save Collection Journal",
+		MessageDialog.openError(AbstractDirectoryController.getShell(), "Error Save Collection Journal",
 				"Journal Total value (" + workingJournalPage.getRecordTotal()
 						+ ") doesn't match collection journal records total (" + workingJournalPage.getDriverTotal()
 						+ ").");

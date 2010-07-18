@@ -27,6 +27,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
@@ -64,7 +65,7 @@ public class ContainerListViewController extends BaseListViewController {
 		@Override
 		public void callback() {
 			Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-			final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+			final AddContainerDialog memberDialog = new AddContainerDialog(AbstractDirectoryController.getShell());
 			final List<Farm> inputFarms = new ArrayList<Farm>();
 			final int index = farmCombo.getSelectionIndex();
 			if (index != -1) {
@@ -97,7 +98,7 @@ public class ContainerListViewController extends BaseListViewController {
 		public void callback() {
 			final ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) containerListTable
 					.getSelection().get(0);
-			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
+			final ViewContainerDialog dialog = new ViewContainerDialog(AbstractDirectoryController.getShell());
 			final List<Farm> inputFarms = new ArrayList<Farm>();
 			inputFarms.add(selectedNode.getContainer().getOwner());
 
@@ -115,7 +116,7 @@ public class ContainerListViewController extends BaseListViewController {
 			} else if (returnCode == 2) {
 				// confirm for delete
 				if (selectedNode != null) {
-					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE,
+					if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), DELETE_DIALOG_TITLE,
 							DELETE_DIALOG_MESSAGE)) {
 						final Farm farm = selectedNode.getContainer().getOwner();
 						farm.getCans().remove(selectedNode.getContainer());

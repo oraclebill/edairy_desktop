@@ -42,30 +42,18 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 @SuppressWarnings("restriction")
 public class CollectionLineRidget extends AbstractCompositeRidget implements ICollectionLineEditRidget {
-
-	private static  Color SUCCESS_COLOR;
-	private static  Color WARNING_COLOR;
-	private static  Color ERROR_COLOR;
-	private static  Color NORMAL_COLOR;
 	
-	static {
-		Display display;
-		try {
-			display = PlatformUI.getWorkbench().getDisplay();
-		}
-		catch(Exception e ) {
-			display = Display.getCurrent();
-		}
-		SUCCESS_COLOR = display.getSystemColor(SWT.COLOR_GREEN);
-		WARNING_COLOR = display.getSystemColor(SWT.COLOR_YELLOW);
-		ERROR_COLOR = display.getSystemColor(SWT.COLOR_RED);
-		NORMAL_COLOR = display.getSystemColor(SWT.COLOR_BLACK);
-	}
+	private static  Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_GREEN);
+	private static  Color WARNING_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_YELLOW);
+	private static  Color ERROR_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_RED);
+	private static  Color NORMAL_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_BLACK);
+	
 	
 	private IComboRidget binCombo;
 	private ITextRidget canText;
@@ -444,14 +432,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	public static Shell getShell() {
-		Shell shell = null;
-		try {
-			PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		}
-		catch(Exception e) {
-			shell = Display.getCurrent().getActiveShell();
-		}
-		return shell;
+		return AbstractDirectoryController.getShell();
 	}
 
 

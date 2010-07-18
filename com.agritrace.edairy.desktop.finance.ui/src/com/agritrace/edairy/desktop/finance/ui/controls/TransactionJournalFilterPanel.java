@@ -9,19 +9,19 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
-import org.eclipse.swt.layout.FillLayout;
 
 public class TransactionJournalFilterPanel extends Composite {
 	static {
@@ -51,7 +51,7 @@ public class TransactionJournalFilterPanel extends Composite {
 
 			final Label startDateLabel = new Label(row, SWT.LEFT);
 			startDateLabel.setText("Date Range - Start: ");
-			startDateLabel.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			startDateLabel.setBackground(AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 			FormData fd = new FormData();
 			fd.width = 140;
 			fd.top = new FormAttachment(0, 0);
@@ -72,7 +72,7 @@ public class TransactionJournalFilterPanel extends Composite {
 
 			final Label endDateLabel = new Label(row, SWT.LEFT);
 			endDateLabel.setText("End: ");
-			endDateLabel.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			endDateLabel.setBackground(AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 			fd = new FormData();
 			fd.top = new FormAttachment(startDatePicker, 0, SWT.CENTER);
 			fd.left = new FormAttachment(startDatePicker, 20, SWT.RIGHT);

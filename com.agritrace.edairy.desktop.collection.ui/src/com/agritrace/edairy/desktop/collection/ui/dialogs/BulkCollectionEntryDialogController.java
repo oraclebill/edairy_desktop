@@ -24,9 +24,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.validation.ValidatorCollection;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
@@ -40,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -545,14 +544,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	}
 	
 	private Shell getShell() {
-		Shell shell = null;
-		try {
-			PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		}
-		catch(Exception e) {
-			shell = Display.getCurrent().getActiveShell();
-		}
-		return shell;
+		return AbstractDirectoryController.getShell();
 	}
 
 }

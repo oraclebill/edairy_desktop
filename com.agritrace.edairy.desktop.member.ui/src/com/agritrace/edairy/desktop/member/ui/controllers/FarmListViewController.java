@@ -26,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
@@ -64,7 +65,7 @@ public class FarmListViewController extends BaseListViewController {
 			final Location newFarmLocation = DairyUtil.createLocation(null, null, null);
 			final Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
 			FarmListViewTableNode selectedNode = new FarmListViewTableNode(selectedMember, newFarm);
-			final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
+			final AddFarmDialog memberDialog = new AddFarmDialog(AbstractDirectoryController.getShell());
 			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
 					selectedNode);
 
@@ -94,7 +95,7 @@ public class FarmListViewController extends BaseListViewController {
 		public void callback() {
 			if (!farmListTable.getSelection().isEmpty()) {
 				FarmListViewTableNode selectedNode = (FarmListViewTableNode) farmListTable.getSelection().get(0);
-				final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
+				final ViewFarmDialog memberDialog = new ViewFarmDialog(AbstractDirectoryController.getShell());
 				memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
 						selectedNode);
 

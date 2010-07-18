@@ -301,7 +301,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected void handleNewItemAction() {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
+		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(getShell());
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
 			final CollectionJournalPage newPage = dialog.getNewJournalPage();			

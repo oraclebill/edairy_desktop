@@ -13,12 +13,12 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
@@ -179,7 +179,7 @@ public class DairyLocationView extends SubModuleView {
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
 		this.contentArea = parent;
-		contentArea.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		contentArea.setBackground(AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		final GridLayout layout = new GridLayout(1, false);
 		contentArea.setLayout(layout);
 		final DairyLocationMasterDetailsComposite master = new DairyLocationMasterDetailsComposite(contentArea,

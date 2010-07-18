@@ -8,12 +8,12 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
@@ -119,7 +119,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 			@Override
 			public void callback() {
-				if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Cacel modificatin ",
+				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Cacel modificatin ",
 						"Do you want to cacel membership modification?")) {
 					MemberSearchSelectionManager.INSTANCE.refreshView(MemberSearchDetachedView.ID);
 				}
