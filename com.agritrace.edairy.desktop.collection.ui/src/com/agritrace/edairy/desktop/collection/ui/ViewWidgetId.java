@@ -146,5 +146,9 @@ public class ViewWidgetId {
 
 	public static final String VILLAGE_TXT = "Village";
 
+	public static final String closeButton = "closeButton";
+
+	public static final String journalStatus = "journalStatus";
+
 
 }

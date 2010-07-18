@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
 import java.beans.Beans;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -13,12 +14,10 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
-import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -30,48 +29,61 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
+import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.swtdesigner.ResourceManager;
 
-public class BulkCollectionsEntryDialog extends AbstractDialogView {
+public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	private static final class TestJournalPersister implements JournalPersistenceDelegate {
 		@Override
 		public void saveJournal(CollectionJournalPage journal) {
 			System.err.println(">> Saving journal : " + journal);
-		}		
+		}
 	}
-	
+
 	private static final class JournalEntryTestAction implements IActionListener {
 		private final Shell shell;
+		private CollectionJournalPage page;
 
 		private JournalEntryTestAction(Shell shell) {
-			this.shell = shell;
+			this(shell, createCollectionJournal());
 		}
 
-		private CollectionJournalPage createCollectionJournal() {
+		private JournalEntryTestAction(Shell shell, CollectionJournalPage page) {
+			this.shell = shell;
+			this.page = page;
+		}
+
+		private static CollectionJournalPage createCollectionJournal() {
 			Dairy dairy = DairyRepository.getInstance().getLocalDairy();
 			CollectionJournalPage journal = DairyFactory.eINSTANCE.createCollectionJournalPage();
-			
+
 			journal.setJournalDate(new Date());
 			journal.setSession(Session.EARLY_MORNING);
 			journal.setRoute(dairy.getRoutes().get(0));
 			journal.setDriver(dairy.getEmployees().get(0));
 
+			journal.setReferenceNumber("r001");
+			journal.setDriverTotal(new BigDecimal("10"));
 			return journal;
 		}
 
 		public void callback() {
 			BulkCollectionsEntryDialog dialog = new BulkCollectionsEntryDialog(shell);
-			dialog.getController().setContext("journal-page", createCollectionJournal());
-			dialog.getController().setContext("persistence-delegate", new TestJournalPersister());
+
+			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_JOURNAL_PAGE,
+					createCollectionJournal());
+			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_PERSISTENCE_DELEGATE,
+					new TestJournalPersister());
+
 			if (Window.OK == dialog.open()) {
 				System.out.println("OK pressed"); //$NON-NLS-1$
 			} else {
@@ -89,52 +101,72 @@ public class BulkCollectionsEntryDialog extends AbstractDialogView {
 			}
 		}
 	}
-	
+
 	private static final String BIN_COLUMN_HEADER = "Bin";
 	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
 	private static final String SAVE_LABEL = "Save and Create New Journal";
+	private static final String CLOSE_LABEL = "Save and Close";
 
 	/**
 	 * Create the dialog.
+	 * 
 	 * @param parentShell
-	 * @param testJournalPersister 
+	 * @param testJournalPersister
 	 */
 	public BulkCollectionsEntryDialog(Shell parentShell) {
 		super(parentShell);
+//		setShellStyle(SWT.CLOSE|SWT.MIN|SWT.MAX|SWT.RESIZE);
 	}
 
 	@Override
-	protected Control buildView(Composite parent) {
+	protected void buildWorkArea(Composite parent) {
 		final GridDataFactory gdf = GridDataFactory.fillDefaults().grab(true, false);
-
-		Composite composite = UIControlsFactory.createComposite(parent);
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 10;
-		layout.marginWidth = 10;
-		
-		composite.setLayout(layout);
-		
 		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL, ControlType.TEXT);
 		addUIControl(headerGroups, "journal-header");
 		gdf.applyTo(headerGroups);
-		
+
 		final Control groupThree = new CollectionLineComposite(parent, SWT.NONE);
 		addUIControl(groupThree, "journal-entry");
 		gdf.applyTo(groupThree);
 
 		final Control groupFour = createMilkEntryGroup(parent);
 		gdf.grab(true, true).applyTo(groupFour);
-
-		final Button saveButton = UIControlsFactory.createButton(parent, SAVE_LABEL, ViewWidgetId.saveButton);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(saveButton);
-
-		return composite; 
 	}
 
+//	@Override
+//	protected Control buildView(Composite parent) {
+//		final GridDataFactory gdf = GridDataFactory.fillDefaults().grab(true, false);
+//
+//		Composite composite = UIControlsFactory.createComposite(parent);
+//		GridLayout layout = new GridLayout();
+//		layout.marginHeight = 10;
+//		layout.marginWidth = 10;
+//		
+//		composite.setLayout(layout);
+//		
+//		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL, ControlType.TEXT);
+//		addUIControl(headerGroups, "journal-header");
+//		gdf.applyTo(headerGroups);
+//		
+//		final Control groupThree = new CollectionLineComposite(parent, SWT.NONE);
+//		addUIControl(groupThree, "journal-entry");
+//		gdf.applyTo(groupThree);
+//
+//		final Control groupFour = createMilkEntryGroup(parent);
+//		gdf.grab(true, true).applyTo(groupFour);
+//
+//		final Button saveButton = UIControlsFactory.createButton(parent, SAVE_LABEL, ViewWidgetId.saveButton);
+//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(saveButton);
+//
+//		final Button closeButton = UIControlsFactory.createButton(parent, CLOSE_LABEL, ViewWidgetId.closeButton);
+//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(saveButton);
+//
+//		return composite; 
+//	}
 
 	@Override
 	protected AbstractWindowController createController() {
-		return new BulkCollectionEntryDialogController();	
+		return new BulkCollectionEntryDialogController();
 	}
 
 	private Composite createButtonComposite(Composite group) {
@@ -156,9 +188,9 @@ public class BulkCollectionsEntryDialog extends AbstractDialogView {
 	}
 
 	/**
-	 * Milk collection entry group - defines:
-	 *  - milk collection entry table - list of collection entries.
-	 *  - total label - current total of all entries.
+	 * Milk collection entry group - defines: - milk collection entry table - list of collection entries. - total label
+	 * - current total of all entries.
+	 * 
 	 * @param parent
 	 * @return
 	 */
@@ -172,12 +204,33 @@ public class BulkCollectionsEntryDialog extends AbstractDialogView {
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(1).applyTo(panel);
 
 		final Composite tableComposite = new Composite(panel, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tableComposite);
+		GridDataFactory.fillDefaults().grab(true, true).hint(-1, 300).applyTo(tableComposite);
 
 		final Table table = UIControlsFactory.createTable(tableComposite, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION,
 				ViewWidgetId.milkEntryTable);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
+
+		layoutTable(tableComposite, table);
+
+		final Label totalLabel = UIControlsFactory.createLabel(panel, "");
+		totalLabel.setAlignment(SWT.RIGHT);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(totalLabel);
+		addUIControl(totalLabel, ViewWidgetId.totalLabel);
+
+		final Composite buttonComposite = createButtonComposite(panel);
+		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(buttonComposite);
+
+		return group;
+	}
+
+	/**
+	 * Mainly useful for gui-builder support.. overridden at runtime.
+	 * 
+	 * @param tableComposite
+	 * @param table
+	 */
+	private final void layoutTable(final Composite tableComposite, Table table) {
 
 		final TableColumn columnLine = new TableColumn(table, SWT.LEFT);
 		// columnLine.setText(LINE_COLUMN_HEADER);
@@ -201,26 +254,11 @@ public class BulkCollectionsEntryDialog extends AbstractDialogView {
 		layout.setColumnData(columnRejected, new ColumnWeightData(15));
 		tableComposite.setLayout(layout);
 
-		final Label totalLabel = UIControlsFactory.createLabel(panel, "");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(totalLabel);
-		addUIControl(totalLabel, ViewWidgetId.totalLabel);
-
-		final Composite buttonComposite = createButtonComposite(panel);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(buttonComposite);
-
-		final Label imageLabel = UIControlsFactory.createLabel(group, "");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.TOP).applyTo(imageLabel);
-		if (!Beans.isDesignTime()) {
-			imageLabel.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena",
-					"resources/farmerheadshot.png"));
-		}
-		addUIControl(imageLabel, ViewWidgetId.photoLabel);
-
-		return group;
 	}
 
 	/**
 	 * Create contents of the button bar.
+	 * 
 	 * @param parent
 	 */
 	@Override
@@ -243,9 +281,9 @@ public class BulkCollectionsEntryDialog extends AbstractDialogView {
 	 * 
 	 */
 	public static void main(String[] args) {
-		
+
 		Display display = Display.getDefault();
-		
+
 		try {
 			final Shell shell = new Shell();
 			GridLayoutFactory.fillDefaults().applyTo(shell);
@@ -267,4 +305,6 @@ public class BulkCollectionsEntryDialog extends AbstractDialogView {
 		} finally {
 			display.dispose();
 		}
-	}}
+	}
+
+}

@@ -9,6 +9,8 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.common.IComplexComponent;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
+import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
+import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -23,11 +25,22 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.collection.ui.util.FieldUtil;
 import com.agritrace.edairy.desktop.common.ui.ImageRegistry;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 
 public class JournalHeaderComposite extends Composite implements IComplexComponent {
+	private static final int MINIMUM_LABEL_WIDTH = 80;
+
+	private static final String DATE_LABEL = "Date:";
+	private static final String DRIVER_LABEL = "Driver:";
+	private static final String JOURNAL_TOTAL_LABEL = "Driver Total:";
+	private static final String MILK_BOOK_GROUP_TITLE = "Journal Page";
+	private static final String MILK_JOURNAL_BOOK_GROUP_TITLE = "Journal Book / Collection Details";
+	private static final String ROUTE_LABEL = "Route:";
+	private static final String SECTION_LABEL = "Session:";
+
+	private static final String VEHICLE_LABEL = "Truck:";
 
 	static {
 		SwtControlRidgetMapper.getInstance().addMapping(JournalHeaderComposite.class, JournalHeaderRidget.class);
@@ -71,13 +84,12 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	}
 
 	protected Composite createHeaderGroup(Composite parent) {
-		final Group group = UIControlsFactory.createGroup(parent,
-				MilkCollectionJournalView.MILK_JOURNAL_BOOK_GROUP_TITLE, ViewWidgetId.milkJournalGroup);
+		final Group group = createGroup(parent, MILK_JOURNAL_BOOK_GROUP_TITLE,
+				ViewWidgetId.milkJournalGroup);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);
 
-		final Label dateLabel = UIControlsFactory.createLabel(group, MilkCollectionJournalView.DATE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(dateLabel);
+		final Label dateLabel = FieldUtil.createLabel(group, DATE_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(dateLabel);
 
 		final Composite dateComposite = UIControlsFactory.createComposite(group);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateComposite);
@@ -116,12 +128,11 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 //			}
 //		});
 
-		final Label padComposite = UIControlsFactory.createLabel(group, "");
+		final Label padComposite = FieldUtil.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1).applyTo(padComposite);
 
-		final Label routeLabel = UIControlsFactory.createLabel(group, MilkCollectionJournalView.ROUTE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(routeLabel);
+		final Label routeLabel = FieldUtil.createLabel(group, ROUTE_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(routeLabel);
 
 		// Combo combo = new Combo(group, SWT.BORDER|SWT.DROP_DOWN);
 		final Control combo = createControl(group);
@@ -129,9 +140,9 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		addUIControl(combo, ViewWidgetId.routeCombo);
 		combo.addTraverseListener(traverseListener);
 
-		final Label sectionLabel = UIControlsFactory.createLabel(group, MilkCollectionJournalView.SECTION_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(sectionLabel);
+		final Label sectionLabel = FieldUtil.createLabel(group, SECTION_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
+				.applyTo(sectionLabel);
 
 		final Control combo2 = createControl(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo2);
@@ -142,18 +153,17 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 //		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(pane);
 //		GridDataFactory.fillDefaults().grab(true, false).span(7, 1).applyTo(pane);
 
-		final Label vehicleLabel = UIControlsFactory.createLabel(group, MilkCollectionJournalView.VEHICLE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(vehicleLabel);
+		final Label vehicleLabel = FieldUtil.createLabel(group, VEHICLE_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
+				.applyTo(vehicleLabel);
 
 		final Control combo3 = createControl(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo3);
 		combo3.addTraverseListener(traverseListener);
 		addUIControl(combo3, ViewWidgetId.vehicleCombo);
 
-		final Label driverLabel = UIControlsFactory.createLabel(group, MilkCollectionJournalView.DRIVER_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(driverLabel);
+		final Label driverLabel = FieldUtil.createLabel(group, DRIVER_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(driverLabel);
 
 		final Control driverCombo = createControl(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(driverCombo);
@@ -164,36 +174,54 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	}
 
 	protected Composite createSubHeaderGroup(Composite parent) {
-		final Group group = UIControlsFactory.createGroup(parent, MilkCollectionJournalView.MILK_BOOK_GROUP_TITLE,
-				ViewWidgetId.milkGroup);
-		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);
+		final Group group = createGroup(parent, MILK_BOOK_GROUP_TITLE, ViewWidgetId.milkGroup);
+		GridLayoutFactory.fillDefaults().margins(4, 2).numColumns(7).applyTo(group);
+		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.hint(MINIMUM_LABEL_WIDTH, -1).grab(true, false);
 
-		final Label journalLabel = UIControlsFactory.createLabel(group, "Reference No:");
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(journalLabel);
+		{
+			final Label journalLabel = FieldUtil.createLabel(group, "Reference No:");
+			GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
+					.applyTo(journalLabel);
 
-		final Text journalText = UIControlsFactory.createText(group, SWT.BORDER);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalText);
-		addUIControl(journalText, ViewWidgetId.journalText);
-		journalText.addTraverseListener(traverseListener);
+			final Text journalText = UIControlsFactory.createText(group, SWT.BORDER);
+			factory.applyTo(journalText);
+			addUIControl(journalText, ViewWidgetId.journalText);
+			journalText.addTraverseListener(traverseListener);
+		}
+		{
+			final Label journalTotalLabel = FieldUtil.createLabel(group, JOURNAL_TOTAL_LABEL);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
+					.applyTo(journalTotalLabel);
 
-		final Label journalTotalLabel = UIControlsFactory.createLabel(group,
-				MilkCollectionJournalView.JOURNAL_TOTAL_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(journalTotalLabel);
+			final Text journalTotalText = UIControlsFactory.createTextDecimal(group);
+			factory.applyTo(journalTotalText);
+			journalTotalText.addTraverseListener(traverseListener);
+			addUIControl(journalTotalText, ViewWidgetId.journalTotalText);
+		}
+		// filler
+		{
+			final Label label = new Label(group, SWT.NONE);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH * 2, -1)
+					.applyTo(label);
+		}
+		{
+			final Label label = FieldUtil.createLabel(group, "Status: ");
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(label);
 
-		final Text journalTotalText = UIControlsFactory.createTextDecimal(group);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalTotalText);
-		journalTotalText.addTraverseListener(traverseListener);
-		addUIControl(journalTotalText, ViewWidgetId.journalTotalText);
-
+			final Text field = UIControlsFactory.createText(group);
+			field.setEditable(false);
+			factory.applyTo(field);
+			field.addTraverseListener(traverseListener);
+			addUIControl(field, ViewWidgetId.journalStatus);
+		}
 		return group;
 	}
 
 	public ControlType getControlType() {
 		return controlType;
 	}
-	
+
 	/**
 	 * 
 	 * @param parent
@@ -209,6 +237,14 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		default:
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private Group createGroup(Composite parent, String title, String bindingId) {
+		Group group = new Group(parent, SWT.BORDER);
+		group.setText(title);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(group, bindingId);
+		group.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		return group;
 	}
 
 	private void addUIControl(Control control, String bindingId) {

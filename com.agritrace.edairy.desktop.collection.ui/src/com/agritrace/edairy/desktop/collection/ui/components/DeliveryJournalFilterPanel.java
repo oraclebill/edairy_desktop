@@ -26,11 +26,11 @@ public class DeliveryJournalFilterPanel extends Composite {
 		setLayout(new FillLayout());
 
 		final Group group = UIControlsFactory.createGroup(this, "Delivery Log Filter");
-
-		FieldUtil.addLabeledDateField(group, "Start Date", "filter-min-date");
-		FieldUtil.addLabeledDateField(group, "End Date", "filter-max-date");
-		FieldUtil.addLabeledComboField(group, "Route", "filter-route");
-		FieldUtil.addLabeledComboField(group, "Customer", "filter-customer");
+		FieldUtil fieldUtil = new FieldUtil();
+		fieldUtil.addLabeledDateField(group, "Start Date", "filter-min-date");
+		fieldUtil.addLabeledDateField(group, "End Date", "filter-max-date");
+		fieldUtil.addLabeledComboField(group, "Route", "filter-route");
+		fieldUtil.addLabeledComboField(group, "Customer", "filter-customer");
 
 		final Control filler = UIControlsFactory.createLabel(group, "");
 		GridDataFactory.swtDefaults().grab(true, false).span(7, 1).applyTo(filler);

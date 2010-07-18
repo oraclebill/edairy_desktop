@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.databinding.validation.ValidationStatus;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
@@ -19,8 +22,6 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
-import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -30,6 +31,9 @@ import org.eclipse.ui.PlatformUI;
 import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionEntryDialogController;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
 import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -43,6 +47,26 @@ import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
+
+	public class BasicJournalValidator implements IValidator {
+
+		@Override
+		public IStatus validate(Object value) {
+			IStatus status = ValidationStatus.OK_STATUS;
+			if (value instanceof CollectionJournalPage) {
+				CollectionJournalPage journal = (CollectionJournalPage)value;
+				if (journal.getDriverTotal() != journal.getRecordTotal()) {
+					status = ValidationStatus.error("You must reconcile the driver and record totals before saving.");					
+				}
+			}
+			else 
+			{
+				status = ValidationStatus.error("Invalid record type: " + value.getClass());					
+			}
+			return status;
+		}
+
+	}
 
 	private final class TotalColumnFormatter extends ColumnFormatter {
 		@Override
@@ -284,6 +308,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected void handleNewItemAction() {
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
 		// dialog.getController().setContext(EDITED_OBJECT_ID,
 		// createNewModel());
@@ -293,7 +318,22 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		System.err.println("return code : " + returnCode);
 		if (Window.OK == returnCode) {
 			final CollectionJournalPage newPage = dialog.getNewJournalPage();
-			activateDetailView(newPage);
+//			activateDetailView(newPage);
+			BulkCollectionsEntryDialog dialog2 = new BulkCollectionsEntryDialog(shell);
+			final BulkCollectionEntryDialogController controller = ( BulkCollectionEntryDialogController)dialog2.getController(); 
+			controller.addJournalValidator(new BasicJournalValidator());
+			controller.setContextJournalPage(newPage);
+			controller.setPersistenceDelegate(new JournalPersistenceDelegate() {				
+				@Override
+				public void saveJournal(CollectionJournalPage journal) {
+					DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(journal);
+					DairyRepository.getInstance().save(DairyRepository.getInstance().getLocalDairy());
+					refreshTableContents();
+					controller.setContextJournalPage(newPage);
+					controller.afterBind();
+				}
+			});
+			int retval = dialog2.open();
 		}
 		refreshTableContents();
 	}

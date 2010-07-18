@@ -8,4 +8,6 @@ public interface IJournalHeaderRidget extends IComplexRidget {
 
 	void bindToModel(CollectionJournalPage workingJournalPage);
 
+	public abstract boolean isHeaderValid();
+
 }

@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.collection.ui.util;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -28,19 +29,34 @@ public class FieldUtil {
 	//
 	public static final int STD_TOP_PADDING = 5;
 
-	private static final GridDataFactory comboGDF = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
-			.grab(true, false);
-	private static final GridDataFactory fieldGDF = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
-			.grab(true, false).align(SWT.END, SWT.FILL);
+	private final GridDataFactory comboGDF; // = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
+//			.grab(true, false);
+	private final GridDataFactory fieldGDF; // = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
+//			.grab(true, false).align(SWT.END, SWT.FILL);
 	//
-	private static final GridDataFactory labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-			.hint(MINIMUM_LABEL_WIDTH, -1);
+	private final GridDataFactory labelGDF; // = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+//			.hint(MINIMUM_LABEL_WIDTH, -1);
+
+	public FieldUtil() {
+		this(MINIMUM_LABEL_WIDTH, STD_FIELD_WIDTH);
+	}
+
+	public FieldUtil(int labelWidth, int fieldWidth) {
+		// SWT.DEFAULT == -1
+		if (labelWidth<0) labelWidth = MINIMUM_LABEL_WIDTH;
+		if (fieldWidth<0) labelWidth = STD_FIELD_WIDTH;
+		
+		comboGDF = GridDataFactory.fillDefaults().minSize(fieldWidth, -1).grab(true, false);
+		fieldGDF = GridDataFactory.fillDefaults().minSize(fieldWidth, -1).grab(true, false).align(SWT.END, SWT.FILL);
+		labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(labelWidth, -1);
+
+	}
 
 	/**
 	 * @wbp.factory
 	 */
-	public static Control addLabeledBooleanField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+	public Control addLabeledBooleanField(Composite parent, String labelTxt, String widgetID) {
+		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
 		final Button control = UIControlsFactory.createButtonCheck(parent, "", widgetID);
@@ -52,8 +68,8 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public static Control addLabeledComboField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+	public Control addLabeledComboField(Composite parent, String labelTxt, String widgetID) {
+		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
 		final CCombo field = UIControlsFactory.createCCombo(parent, widgetID);
@@ -66,8 +82,8 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public static Control addLabeledDateField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+	public Control addLabeledDateField(Composite parent, String labelTxt, String widgetID) {
+		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
 		final DateTime text = UIControlsFactory.createDate(parent, SWT.BORDER, widgetID);
@@ -81,8 +97,8 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public static Control addLabeledDecimalTextField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+	public Control addLabeledDecimalTextField(Composite parent, String labelTxt, String widgetID) {
+		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createTextDecimal(parent, widgetID);
@@ -94,13 +110,40 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public static Control addLabeledTextField(Composite parent, String labelTxt, String widgetID) {
-		final Label label = UIControlsFactory.createLabel(parent, labelTxt);
+	public Control addLabeledTextField(Composite parent, String labelTxt, String widgetID) {
+		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
 		final Text text = UIControlsFactory.createText(parent, SWT.BORDER, widgetID);
 		fieldGDF.applyTo(text);
 
 		return text;
+	}
+	
+	/**
+	 * 
+	 * @param parent
+	 * @param labelText
+	 * @return
+	 * @wbp.factory
+	 */
+	public static Label createLabel(Composite parent, String labelText) {
+		return createLabel(parent, labelText, null);
+	}
+	
+	/**
+	 * 
+	 * @param parent
+	 * @param labelText
+	 * @return
+	 * @wbp.factory
+	 */
+	private static Label createLabel(Composite parent, String labelText, String bindingId) {
+		Label label = new Label(parent, SWT.NONE);
+		label.setText(labelText);
+		if (bindingId != null) {
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(label, bindingId);
+		}
+		return label;
 	}
 }

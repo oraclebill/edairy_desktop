@@ -13,7 +13,6 @@ import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
@@ -24,6 +23,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.swtdesigner.ResourceManager;
 
 public class ScaleDataImportView extends SubModuleView {
@@ -118,7 +118,7 @@ public class ScaleDataImportView extends SubModuleView {
 		buttonPanel.setLayout(new RowLayout());
 		
 		UIControlsFactory.createButton(buttonPanel, CANCEL_LABEL, ViewWidgetId.cancelButton);
-		UIControlsFactory.createButton(buttonPanel, SAVE_LABEL, ViewWidgetId.saveButton);
+		UIControlsFactory.createButton(buttonPanel, SAVE_LABEL, DialogConstants.BIND_ID_BUTTON_SAVE);
 
 	}
 }

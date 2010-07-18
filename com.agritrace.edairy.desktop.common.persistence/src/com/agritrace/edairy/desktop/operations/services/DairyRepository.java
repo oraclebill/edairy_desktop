@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.riena.core.Log4r;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -29,6 +31,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 
 public class DairyRepository implements IDairyRepository {
 	
@@ -392,8 +395,9 @@ public class DairyRepository implements IDairyRepository {
 			}
 		}
 		
-		System.err.printf(" > Member search % 8s, time: %s (%s) %d\n", retval == null ? "FAIL" : "SUCCESS",
-				formattedNumber, searchMemberNumber, System.currentTimeMillis() - start);
+		log(LogService.LOG_DEBUG, String.format(" > Member search %8s, looking for %s (%s), time: %d\n", (retval == null ? "FAILS" : "SUCCEEDS"),
+				formattedNumber, searchMemberNumber, (System.currentTimeMillis() - start)));
+		
 		return retval;
 	}
 
@@ -402,6 +406,13 @@ public class DairyRepository implements IDairyRepository {
 			com.agritrace.edairy.desktop.common.model.dairy.Session session, Membership value) {
 		// TODO: implement
 		return null;
+	}
+
+	/**
+	 * 
+	 */
+	private void log(int level, String message) {
+		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
 }

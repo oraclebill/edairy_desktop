@@ -18,13 +18,14 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderRidget;
-import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineEditRidget;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -55,10 +56,10 @@ public class ScaleImportViewController extends SubModuleController {
 	private final IDairyRepository dairyRepo;
 
 	private CollectionJournalPage importedData; 
-	private JournalHeaderRidget journalHeaderRidget;
+	private IJournalHeaderRidget journalHeaderRidget;
 	private ITableRidget table;
 	private ILabelRidget calculatedTotalRidget;
-	private CollectionLineRidget collectionsEntryRidget;
+	private ICollectionLineEditRidget collectionsEntryRidget;
 
 
 	/**
@@ -112,7 +113,7 @@ public class ScaleImportViewController extends SubModuleController {
 			}
 		});
 
-		IActionRidget saveActionRidget = getRidget(IActionRidget.class, ViewWidgetId.saveButton);
+		IActionRidget saveActionRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
 //		saveActionRidget.setText("Save Imported Data");
 		saveActionRidget.addListener(new IActionListener() {
 			@Override

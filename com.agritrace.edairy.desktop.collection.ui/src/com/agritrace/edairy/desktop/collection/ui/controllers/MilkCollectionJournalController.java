@@ -28,14 +28,15 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.ICollectionLineEditRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineEditRidget;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -144,7 +145,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 			public void propertyChange(PropertyChangeEvent evt) {
 				workingJournalPage.getJournalEntries().add((CollectionJournalLine) evt.getNewValue());
 				journalEntryTable.updateFromModel();
-				collectionLineRidget.setCollectionLine(DairyFactory.eINSTANCE.createCollectionJournalLine());
+				collectionLineRidget.createCollectionLine();
 			}
 
 		});
@@ -154,7 +155,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 		totalLabelRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
 		
-		((IActionRidget) getRidget(ViewWidgetId.saveButton)).addListener(new IActionListener() {
+		((IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE)).addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handleSaveJournalAction();
@@ -178,7 +179,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 		workingJournalPage = getJournalPageFromContext();
 		journalHeaderRidget.bindToModel(workingJournalPage);
 
-		collectionLineRidget.setCollectionLine(DairyFactory.eINSTANCE.createCollectionJournalLine());
+		collectionLineRidget.createCollectionLine();
 
 		journalEntryTable.bindToModel(workingJournalPage, "journalEntries", CollectionJournalLine.class, columnPropertyNames, columnHeaderNames);
 
@@ -270,7 +271,7 @@ public class MilkCollectionJournalController extends SubModuleController {
 
 		dairyRepo.saveNewJournalPage(workingJournalPage);
 
-		collectionLineRidget.setCollectionLine(DairyFactory.eINSTANCE.createCollectionJournalLine());
+		collectionLineRidget.createCollectionLine();
 	}
 
 	/**

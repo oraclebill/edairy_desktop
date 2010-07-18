@@ -23,58 +23,17 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.swtdesigner.ResourceManager;
 
 public class MilkCollectionJournalView extends SubModuleView implements TraverseListener {
-	public static final String BIN_COLUMN_HEADER = "Bin";
-
-	public static final String BIN_LABEL = "Bin :";
-
-	public static final String CAN_ID_LABEL = "CAN :";
-
-	public static final String DATE_LABEL = "Date:";
-
-	public static final String DRIVER_LABEL = "Driver:";
-
 	public static final String ID = "edairy.collection.entry.view";
 
-	public static final String JOURNAL_LABEL = "Page Number:";
-
-	public static final String JOURNAL_TOTAL_LABEL = "Driver Total:";
-
-	public static final String LINE_COLUMN_HEADER = "Line";
-
-	public static final String MEMBER_COLUMN_HEADER = "Member";
-
-	public static final String MEMBER_ID_LABEL = "Member ID :";
-
-	public static final String MILK_BOOK_GROUP_TITLE = "Journal Page";
-
-	public static final String MILK_ENTRY_GROUP_TITLE = "Add New Entry";
-
-	public static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
-
-	public static final String MILK_JOURNAL_BOOK_GROUP_TITLE = "Journal Book / Collection Details";
-
-	public static final int MINIMUM_LABEL_WIDTH = 80;
-
-	public static final String NPR_COLUMN_HEADER = "NPR Missing";
-
-	public static final String QUANTITY_COLUMN_HEADER = "Quantity";
-
-	public static final String QUANTITY_LABEL = "Quantity :";
-
-	public static final String REJECTED_COLUMN_HEADER = "Rejected";
-
-	public static final String ROUTE_LABEL = "Route:";
-
-	public static final String SAVE_LABEL = "Save and Create New Journal";
-
-	public static final String SECTION_LABEL = "Session:";
-
-	public static final String VEHICLE_LABEL = "Truck:";
+	private static final String BIN_COLUMN_HEADER = "Bin";
+	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
+	private static final String SAVE_LABEL = "Save and Create New Journal";
 
 	public MilkCollectionJournalView() {
 	}
@@ -106,9 +65,9 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 	}
 
 	/**
-	 * Milk collection entry group - defines:
-	 *  - milk collection entry table - list of collection entries.
-	 *  - total label - current total of all entries.
+	 * Milk collection entry group - defines: - milk collection entry table - list of collection entries. - total label
+	 * - current total of all entries.
+	 * 
 	 * @param parent
 	 * @return
 	 */
@@ -194,7 +153,8 @@ public class MilkCollectionJournalView extends SubModuleView implements Traverse
 		final Control groupFour = createMilkEntryGroup(parent);
 		gdf.grab(true, true).applyTo(groupFour);
 
-		final Button saveButton = UIControlsFactory.createButton(parent, SAVE_LABEL, ViewWidgetId.saveButton);
+		final Button saveButton = UIControlsFactory.createButton(parent, SAVE_LABEL,
+				DialogConstants.BIND_ID_BUTTON_SAVE);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(saveButton);
 
 	}

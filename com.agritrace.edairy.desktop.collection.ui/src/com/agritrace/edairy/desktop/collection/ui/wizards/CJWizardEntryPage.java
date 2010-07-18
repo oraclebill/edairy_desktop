@@ -22,11 +22,14 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.CollectionLineComposite;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.swtdesigner.ResourceManager;
 
 public class CJWizardEntryPage extends WizardPage {
+
+	private static final String JOURNAL_TOTAL_LABEL = "Driver Total:";
+	private static final String MILK_BOOK_GROUP_TITLE = "Journal Page";
+	private static final int MINIMUM_LABEL_WIDTH = 80;
 
 	/**
 	 * Create the wizard.
@@ -65,13 +68,13 @@ public class CJWizardEntryPage extends WizardPage {
 	}
 	
 	private Group createSubHeaderGroup(Composite parent) {
-		final Group group = UIControlsFactory.createGroup(parent, MilkCollectionJournalView.MILK_BOOK_GROUP_TITLE,
+		final Group group = UIControlsFactory.createGroup(parent, MILK_BOOK_GROUP_TITLE,
 				ViewWidgetId.milkGroup);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(group);
 
 		final Label journalLabel = UIControlsFactory.createLabel(group, "Reference No:");
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(journalLabel);
+				.hint(MINIMUM_LABEL_WIDTH, -1).applyTo(journalLabel);
 
 		final Text journalText = UIControlsFactory.createText(group, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalText);
@@ -79,9 +82,9 @@ public class CJWizardEntryPage extends WizardPage {
 //		journalText.addTraverseListener(traverseListener);
 
 		final Label journalTotalLabel = UIControlsFactory.createLabel(group,
-				MilkCollectionJournalView.JOURNAL_TOTAL_LABEL);
+				JOURNAL_TOTAL_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.hint(MilkCollectionJournalView.MINIMUM_LABEL_WIDTH, -1).applyTo(journalTotalLabel);
+				.hint(MINIMUM_LABEL_WIDTH, -1).applyTo(journalTotalLabel);
 
 		final Text journalTotalText = UIControlsFactory.createTextDecimal(group);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(journalTotalText);
