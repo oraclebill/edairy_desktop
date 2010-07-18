@@ -148,7 +148,7 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 
 
 	@Override
-	protected RecordDialog<AdjustmentTransaction, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<AdjustmentTransaction> getRecordDialog(Shell shell) {
 		return new AdjustmentTransactionEditDialog(shell);
 	}
 

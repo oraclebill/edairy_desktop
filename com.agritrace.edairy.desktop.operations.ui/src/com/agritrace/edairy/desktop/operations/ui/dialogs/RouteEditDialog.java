@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteEditDialogController;
 
-public class RouteEditDialog extends RecordDialog<Route, RouteEditDialogController> {
+public class RouteEditDialog extends RecordDialog<Route> {
 
 	private Text routeCodeTxt;
 	private Text routeDescriptionTxt;

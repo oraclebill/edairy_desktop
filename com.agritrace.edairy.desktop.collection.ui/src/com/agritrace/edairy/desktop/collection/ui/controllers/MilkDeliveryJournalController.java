@@ -108,7 +108,7 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 	}
 
 	@Override
-	protected RecordDialog<DeliveryJournal, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<DeliveryJournal> getRecordDialog(Shell shell) {
 		return new DeliveryJournalEditDialog(shell);
 	}
 

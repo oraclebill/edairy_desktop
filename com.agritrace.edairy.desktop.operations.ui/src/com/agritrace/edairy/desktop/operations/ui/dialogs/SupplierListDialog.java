@@ -27,7 +27,7 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialog
  * @author Hui(Spark) Wan
  * 
  */
-public class SupplierListDialog extends RecordDialog<Supplier, SupplierListDialogController> {
+public class SupplierListDialog extends RecordDialog<Supplier> {
 
 	// private static int WIDTH_HEIGHT = 400;
 	// private static int DESC_HEIGHT_HEIGHT = 50;

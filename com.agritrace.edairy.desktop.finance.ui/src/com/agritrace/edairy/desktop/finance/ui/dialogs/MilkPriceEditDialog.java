@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 
-public class MilkPriceEditDialog extends RecordDialog<MilkPrice, MilkPriceEditController> {
+public class MilkPriceEditDialog extends RecordDialog<MilkPrice> {
 
 	public MilkPriceEditDialog(Shell parentShell) {
 		super(parentShell);

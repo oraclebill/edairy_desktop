@@ -101,8 +101,8 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 	}
 
 	@Override
-	protected RecordDialog<Customer, ?> getRecordDialog(Shell shell) {
-		RecordDialog<Customer, ?> dialog = new CustomerEditDialog(shell);
+	protected RecordDialog<Customer> getRecordDialog(Shell shell) {
+		CustomerEditDialog dialog = new CustomerEditDialog(shell);
 		dialog.setTitle("Edit Customer");
 		return dialog;
 	}

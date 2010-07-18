@@ -294,7 +294,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	protected RecordDialog<CollectionJournalPage, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<CollectionJournalPage> getRecordDialog(Shell shell) {
 		throw new UnsupportedOperationException("unsupported");
 	}
 

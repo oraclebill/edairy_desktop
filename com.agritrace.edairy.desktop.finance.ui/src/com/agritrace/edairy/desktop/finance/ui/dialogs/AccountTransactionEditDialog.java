@@ -5,10 +5,36 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanel;
+import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanelController;
 
-public class AccountTransactionEditDialog extends RecordDialog<AccountTransaction, AccountTransactionEditController> {
+public class AccountTransactionEditDialog extends RecordDialog<AccountTransaction> {
+
+	public static class AccountTransactionEditController extends RecordDialogController<AccountTransaction> {
+
+		private AccountTransactionEditPanelController panelController;
+
+		public AccountTransactionEditController() {
+			super();
+		}
+
+		@Override
+		protected void configureUserRidgets() {
+			panelController = new AccountTransactionEditPanelController();
+			panelController.setModel(getWorkingCopy());
+			panelController.setRidgetContainer(this);
+			panelController.configureAndBind();
+		}
+
+		@Override
+		protected void handleSaveAction() {
+			panelController.checkValid();
+			super.handleSaveAction();
+		}
+
+	}
 
 	public AccountTransactionEditDialog(Shell parentShell) {
 		super(parentShell);

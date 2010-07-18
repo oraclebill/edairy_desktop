@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialog
  * @author Hui(Spark) Wan
  * 
  */
-public class EmployeeEditDialog extends RecordDialog<Employee, EmployeeEditDialogController> {
+public class EmployeeEditDialog extends RecordDialog<Employee> {
 
 	public EmployeeEditDialog(Shell shell) {
 		super(shell);

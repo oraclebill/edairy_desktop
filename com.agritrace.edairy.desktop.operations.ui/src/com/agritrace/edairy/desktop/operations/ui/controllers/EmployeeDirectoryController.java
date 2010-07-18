@@ -104,7 +104,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	}
 
 	@Override
-	protected RecordDialog<Employee, EmployeeEditDialogController> getRecordDialog(Shell shell) {
+	protected RecordDialog<Employee> getRecordDialog(Shell shell) {
 		return new EmployeeEditDialog(shell);
 	}
 

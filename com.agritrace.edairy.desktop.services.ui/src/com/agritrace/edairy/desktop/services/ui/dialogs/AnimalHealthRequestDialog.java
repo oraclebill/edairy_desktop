@@ -41,7 +41,7 @@ import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestD
  * @author Hui(Spark) Wan
  * 
  */
-public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest, AnimalHealthRequestDialogController> {
+public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest> {
 	public static final String SPECIFIC_RPEFIX = "specific.";//$NON-NLS-1$
 
 	public static final String BIND_ID_FARM = "farm";//$NON-NLS-1$

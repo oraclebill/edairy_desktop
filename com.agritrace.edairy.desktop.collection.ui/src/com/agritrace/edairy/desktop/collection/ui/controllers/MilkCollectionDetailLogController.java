@@ -173,7 +173,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	}
 
 	@Override
-	protected RecordDialog<CollectionJournalLine, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<CollectionJournalLine> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
 	}

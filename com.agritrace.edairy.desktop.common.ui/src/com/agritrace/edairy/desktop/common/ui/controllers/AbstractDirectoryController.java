@@ -17,6 +17,7 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -260,7 +261,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	 * @param shell
 	 * @return
 	 */
-	protected abstract RecordDialog<T, ?> getRecordDialog(Shell shell);
+	protected abstract RecordDialog<T> getRecordDialog(Shell shell);
 
 	/**
 	 * Gets table column header
@@ -288,7 +289,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	@SuppressWarnings("unchecked")
 	protected void handleNewItemAction() {
-		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+		final RecordDialog<T> dialog = getRecordDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		final int returnCode = dialog.open();
@@ -314,7 +315,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
-		final RecordDialog<T, ?> dialog = getRecordDialog(new Shell());
+		final RecordDialog<T> dialog = getRecordDialog(new Shell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 		System.err.println("opening view item: " + getSelectedEObject());

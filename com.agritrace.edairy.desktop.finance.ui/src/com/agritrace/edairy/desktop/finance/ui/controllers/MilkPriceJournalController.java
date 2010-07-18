@@ -111,7 +111,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	}
 
 	@Override
-	protected RecordDialog<MilkPrice, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<MilkPrice> getRecordDialog(Shell shell) {
 		return new MilkPriceEditDialog(shell);
 	}
 

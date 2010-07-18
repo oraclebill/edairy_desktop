@@ -18,7 +18,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
  * @author Hui(Spark) Wan
  * 
  */
-public abstract class RecordDialog<T extends EObject, C extends BaseDialogController<T>> extends BaseDialogView
+public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 		implements DialogConstants {
 
 	private T selectedEObject;

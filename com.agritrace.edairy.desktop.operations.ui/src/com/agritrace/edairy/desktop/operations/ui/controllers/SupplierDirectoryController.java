@@ -97,7 +97,7 @@ public class SupplierDirectoryController extends BasicDirectoryController {
 	}
 
 	@Override
-	protected RecordDialog<Supplier, SupplierListDialogController> getRecordDialog(Shell shell) {
+	protected RecordDialog<Supplier> getRecordDialog(Shell shell) {
 		return new SupplierListDialog(shell);
 	}
 

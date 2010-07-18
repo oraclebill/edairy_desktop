@@ -9,7 +9,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AdjustmentTransactionEditController;
 import com.agritrace.edairy.desktop.finance.ui.controls.AdjustmentTransactionEditPanel;
 
-public class AdjustmentTransactionEditDialog extends RecordDialog<AdjustmentTransaction, AdjustmentTransactionEditController> {
+public class AdjustmentTransactionEditDialog extends RecordDialog<AdjustmentTransaction> {
 
 	public AdjustmentTransactionEditDialog(Shell parentShell) {
 		super(parentShell);

@@ -9,7 +9,7 @@ import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJourna
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 
-public class DeliveryJournalEditDialog extends RecordDialog<DeliveryJournal, MilkDeliveryJournalEditController> {
+public class DeliveryJournalEditDialog extends RecordDialog<DeliveryJournal> {
 
 	public DeliveryJournalEditDialog(Shell parentShell) {
 		super(parentShell);

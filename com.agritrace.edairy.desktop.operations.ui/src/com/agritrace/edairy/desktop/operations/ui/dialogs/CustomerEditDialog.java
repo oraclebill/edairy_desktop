@@ -31,7 +31,7 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDialogCont
  * @author Hui(Spark) Wan
  * 
  */
-public class CustomerEditDialog extends RecordDialog<Customer, CustomerDialogController> {
+public class CustomerEditDialog extends RecordDialog<Customer> {
 	private Composite comonComp;
 
 	// private static int WIDTH_HEIGHT = 400;

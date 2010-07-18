@@ -110,6 +110,19 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		transaction.setTransactionDate(new Date());
 		return transaction;
 	}
+	
+	
+
+	@Override
+	protected void createEntity(T newEntity) {
+		super.createEntity(newEntity);
+	}
+
+	@Override
+	protected void updateEntity(T updateableEntity) {
+		// TODO Auto-generated method stub
+		super.updateEntity(updateableEntity);
+	}
 
 	/**
 	 * todo: this will not work for long...

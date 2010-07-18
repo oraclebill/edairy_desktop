@@ -187,7 +187,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 
 	@Override
-	protected RecordDialog<AccountTransaction, ?> getRecordDialog(Shell shell) {
+	protected RecordDialog<AccountTransaction> getRecordDialog(Shell shell) {
 		return new AccountTransactionEditDialog(shell);
 	}
 

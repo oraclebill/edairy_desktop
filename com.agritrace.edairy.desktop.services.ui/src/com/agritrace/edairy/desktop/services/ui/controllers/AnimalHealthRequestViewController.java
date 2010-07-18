@@ -416,7 +416,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	}
 
 	@Override
-	protected RecordDialog<AnimalHealthRequest, AnimalHealthRequestDialogController> getRecordDialog(Shell shell) {
+	protected RecordDialog<AnimalHealthRequest> getRecordDialog(Shell shell) {
 		return new AnimalHealthRequestDialog(shell);
 	}
 
