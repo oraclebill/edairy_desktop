@@ -417,8 +417,9 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		IStatus validationResult = validateJournal(workingJournal);
 		if (!validationResult.isOK()) {
 			displayMessage(validationResult);
-			doSave = false;
+			return false;
 		}
+		// Todo: set status in response to events during edit.. 
 		if (workingJournal.getEntryCount() > 0) {
 			if (workingJournal.getSuspendedCount() > 0 || workingJournal.isSuspended()) {
 				workingJournal.setStatus(JournalStatus.SUSPENDED);				
@@ -426,7 +427,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 				workingJournal.setStatus(JournalStatus.COMPLETE);
 			}
 		}
-		else if (workingJournal.getDriverTotal().compareTo(BigDecimal.ZERO) > 0) {
+		else if (workingJournal.getDriverTotal() != null && workingJournal.getDriverTotal().compareTo(BigDecimal.ZERO) > 0) {
 				workingJournal.setStatus(JournalStatus.PENDING);								
 		}
 		else {

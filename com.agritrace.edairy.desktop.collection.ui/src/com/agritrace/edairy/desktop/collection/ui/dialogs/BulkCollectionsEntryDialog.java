@@ -59,19 +59,17 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		 * @author bill jones
 		 * 
 		 */
-		private final class TestJournalPersister implements JournalPersistenceDelegate {
+		private final class DummyJournalPersister implements JournalPersistenceDelegate {
 			private AbstractWindowController controller;
 
-			public TestJournalPersister(AbstractWindowController controller) {
+			public DummyJournalPersister(AbstractWindowController controller) {
 				this.controller = controller;
 			}
 
 			@Override
 			public void saveJournal(CollectionJournalPage journal) {
 				System.err.println(">> Saving journal : " + journal);
-				controller.setContext(BulkCollectionEntryDialogController.CONTEXT_JOURNAL_PAGE,
-						createCollectionJournal());
-				controller.afterBind();
+				System.err.println(">>  controller : " + controller);
 			}
 		}
 
@@ -97,7 +95,8 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			journal.setDriver(dairy.getEmployees().get(0));
 
 			journal.setReferenceNumber("r001");
-			journal.setDriverTotal(new BigDecimal("10"));
+//			journal.setDriverTotal(new BigDecimal("10"));
+			
 			return journal;
 		}
 
@@ -107,7 +106,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_JOURNAL_PAGE,
 					createCollectionJournal());
 			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_PERSISTENCE_DELEGATE,
-					new TestJournalPersister(dialog.getController()));
+					new DummyJournalPersister(dialog.getController()));
 
 			if (Window.OK == dialog.open()) {
 				System.out.println("OK pressed"); //$NON-NLS-1$

@@ -45,6 +45,21 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 
+	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
+		private final BulkCollectionEntryDialogController controller;
+
+		private CollectionLogJournalPersister(BulkCollectionEntryDialogController controller) {
+			this.controller = controller;
+		}
+
+		@Override
+		public void saveJournal(CollectionJournalPage journal) {
+			DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(journal);
+			DairyRepository.getInstance().save(DairyRepository.getInstance().getLocalDairy());
+			refreshTableContents();
+		}
+	}
+
 	private final class TotalColumnFormatter extends ColumnFormatter {
 		@Override
 		public String getText(Object element) {
@@ -287,39 +302,29 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	protected void handleNewItemAction() {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(new Shell());
-		// dialog.getController().setContext(EDITED_OBJECT_ID,
-		// createNewModel());
-		// dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
-
 		final int returnCode = dialog.open();
-		System.err.println("return code : " + returnCode);
 		if (Window.OK == returnCode) {
-			final CollectionJournalPage newPage = dialog.getNewJournalPage();
-//			activateDetailView(newPage);
-			BulkCollectionsEntryDialog dialog2 = new BulkCollectionsEntryDialog(shell);
-			final BulkCollectionEntryDialogController controller = ( BulkCollectionEntryDialogController)dialog2.getController(); 
-			controller.addJournalValidator(new BasicJournalValidator());
+			final CollectionJournalPage newPage = dialog.getNewJournalPage();			
+			BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
+			final BulkCollectionEntryDialogController controller = ( BulkCollectionEntryDialogController)journalEntryDialog.getController(); 
+
+			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
 			controller.setContextJournalPage(newPage);
-			controller.setPersistenceDelegate(new JournalPersistenceDelegate() {				
-				@Override
-				public void saveJournal(CollectionJournalPage journal) {
-					DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(journal);
-					DairyRepository.getInstance().save(DairyRepository.getInstance().getLocalDairy());
-					refreshTableContents();
-					controller.setContextJournalPage(newPage);
-					controller.afterBind();
-				}
-			});
-			int retval = dialog2.open();
+			
+			journalEntryDialog.open();
 		}
 		refreshTableContents();
 	}
 
 	@Override
 	protected void handleViewItemAction() {
-		// FIXME: demo only!!! - use view page!!
-		final CollectionJournalPage newPage = (CollectionJournalPage) table.getSelection().get(0);
-		activateDetailView(newPage);
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
+		final BulkCollectionEntryDialogController controller = (BulkCollectionEntryDialogController)journalEntryDialog.getController(); 
+
+		controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
+		controller.setContextJournalPage((CollectionJournalPage) table.getSelection().get(0));		
+		journalEntryDialog.open();
 	}
 
 	@Override
