@@ -24,6 +24,8 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.validation.ValidatorCollection;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
@@ -31,6 +33,7 @@ import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineEditRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.DuplicateDeliveryValidator;
+import com.agritrace.edairy.desktop.collection.ui.controllers.BasicJournalValidator;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -83,6 +86,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		super();
 		dairyRepo = DairyRepository.getInstance();
 		journalPageValidators = new ValidatorCollection();
+		addJournalValidator(new BasicJournalValidator());
 		// drivers = dairyRepo.employeesByPosition("Driver");
 		// vehicles = dairyRepo.allVehicles();
 		// routes = dairyRepo.allRoutes();
@@ -255,7 +259,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 			@Override
 			public void callback() {
 				if (MessageDialog
-						.openConfirm(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
+						.openConfirm(getShell(),
 								"Delete Milk Collection Records",
 								"Do you want to delete the selected milk collection records?")) {
 					final List<Object> selectedRecords = journalEntryTable.getSelection();
@@ -273,7 +277,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		clearButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				if (MessageDialog.openConfirm(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
+				if (MessageDialog.openConfirm(getShell(),
 						"Delete Milk Collection Records", "Do you want to delete all milk collection records?")) {
 					// records.clear();
 					getContextJournalPage().getJournalEntries().clear();
@@ -432,7 +436,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		for (IStatus status : statusList) {
 			formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
 		}
-		MessageDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(), "Validation Error(s)",
+		MessageDialog.openError(getShell(), "Validation Error(s)",
 				message.toString());
 	}
 
@@ -515,6 +519,17 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
+	}
+	
+	private Shell getShell() {
+		Shell shell = null;
+		try {
+			PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		}
+		catch(Exception e) {
+			shell = Display.getCurrent().getActiveShell();
+		}
+		return shell;
 	}
 
 }

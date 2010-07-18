@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.util.FieldUtil;
@@ -62,10 +63,10 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		final Group group = UIControlsFactory.createGroup(this, MILK_ENTRY_GROUP_TITLE);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
-		Control primary = addPrimaryGroup(group);
-		Control buttons = addButtons(group);
-		  addQualityGroup(group);
-		
+		addPrimaryGroup(group);
+		addButtons(group);
+		addQualityGroup(group);
+
 		for (final Control control : this.getChildren()) {
 			if (control.isListening(SWT.TRAVERSE_RETURN)) {
 				control.addTraverseListener(this);
@@ -80,10 +81,13 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 
 	@Override
 	public void keyTraversed(TraverseEvent e) {
+		log(LogService.LOG_DEBUG, "event in : " + e);
 		if (e.detail == SWT.TRAVERSE_RETURN) {
+			if (e.widget == memberIdWidget) return;
 			e.detail = SWT.TRAVERSE_TAB_NEXT;
 			e.doit = true;
 		}
+		log(LogService.LOG_DEBUG, "event out: " + e);
 	}
 
 	private Composite addButtons(Composite parent) {
@@ -104,14 +108,14 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 
 	private Control addPhotoPanel(Composite parent) {
 		final Label imageLabel = UIControlsFactory.createLabel(parent, "", SWT.BORDER, ViewWidgetId.photoLabel);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).hint(60,80).applyTo(imageLabel);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).hint(60, 80).applyTo(imageLabel);
 		if (!Beans.isDesignTime()) {
 			imageLabel.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.demo.riena",
 					"resources/farmerheadshot.png"));
 		}
 		return imageLabel;
 	}
-	
+
 	private Composite addPrimaryGroup(Composite group) {
 		final FieldUtil fu = new FieldUtil();
 		final Group panel = UIControlsFactory.createGroup(group, "Milk");
@@ -151,7 +155,8 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		final Label filler = UIControlsFactory.createLabel(panel, "");
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(1, 1).applyTo(filler);
 
-		final Label memberName = UIControlsFactory.createLabel(panel, "<member name>", SWT.BORDER, ViewWidgetId.memberNameText);
+		final Label memberName = UIControlsFactory.createLabel(panel, "<member name>", SWT.BORDER,
+				ViewWidgetId.memberNameText);
 		memberName.setAlignment(SWT.RIGHT);
 		memberName.setSize(175, 18);
 		memberName.setLocation(427, 28);

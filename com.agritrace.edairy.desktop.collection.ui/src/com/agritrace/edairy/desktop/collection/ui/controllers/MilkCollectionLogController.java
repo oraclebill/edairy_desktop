@@ -7,9 +7,6 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.validation.IValidator;
-import org.eclipse.core.databinding.validation.ValidationStatus;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
@@ -47,26 +44,6 @@ import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
-
-	public class BasicJournalValidator implements IValidator {
-
-		@Override
-		public IStatus validate(Object value) {
-			IStatus status = ValidationStatus.OK_STATUS;
-			if (value instanceof CollectionJournalPage) {
-				CollectionJournalPage journal = (CollectionJournalPage)value;
-				if (journal.getDriverTotal() != journal.getRecordTotal()) {
-					status = ValidationStatus.error("You must reconcile the driver and record totals before saving.");					
-				}
-			}
-			else 
-			{
-				status = ValidationStatus.error("Invalid record type: " + value.getClass());					
-			}
-			return status;
-		}
-
-	}
 
 	private final class TotalColumnFormatter extends ColumnFormatter {
 		@Override
