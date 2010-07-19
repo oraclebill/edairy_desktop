@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install;
+package com.agritrace.edairy.desktop.importers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -112,7 +112,7 @@ public class MemberImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void doImportRecord(Object entity) {
+	protected void saveImportedEntity(Object entity) {
 		// TODO Auto-generated method stub
 		
 	}

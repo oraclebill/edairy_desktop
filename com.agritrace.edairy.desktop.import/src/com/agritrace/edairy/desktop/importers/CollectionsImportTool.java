@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install;
+package com.agritrace.edairy.desktop.importers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -88,7 +88,7 @@ public class CollectionsImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void doImportRecord(Object entity) {
+	protected void saveImportedEntity(Object entity) {
 		if (dairy != null) {
 			dairy.getCollectionJournals().add((CollectionJournalPage) entity);
 		} else {

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.importers.handlers;
 
 import java.io.File;
 
@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.install.VehicleImportTool;
+import com.agritrace.edairy.desktop.importers.RouteImportTool;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
@@ -21,11 +21,11 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class ImportVehiclesHandler extends AbstractHandler {
+public class ImportRoutesHandler extends AbstractHandler {
 	/**
 	 * The constructor.
 	 */
-	public ImportVehiclesHandler() {
+	public ImportRoutesHandler() {
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class ImportVehiclesHandler extends AbstractHandler {
 		DairyRepository dairyRepo = DairyRepository.getInstance();
 		Dairy dairy = dairyRepo.getLocalDairy();
 		try {
-			VehicleImportTool importTool = new VehicleImportTool(dairy, new File(importFileName));
+			RouteImportTool importTool = new RouteImportTool(dairy, new File(importFileName));
 			importTool.processFile();
 			dairyRepo.save(dairy);
 		}

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.importers.handlers;
 
 import java.io.File;
 
@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.install.EmployeeImportTool;
+import com.agritrace.edairy.desktop.importers.EmployeeImportTool;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**

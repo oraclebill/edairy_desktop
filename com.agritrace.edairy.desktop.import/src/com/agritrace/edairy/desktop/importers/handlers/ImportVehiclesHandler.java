@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.importers.handlers;
 
 import java.io.File;
 
@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.install.MemberImportTool;
+import com.agritrace.edairy.desktop.importers.VehicleImportTool;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
@@ -21,11 +21,11 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class ImportMembersHandler extends AbstractHandler {
+public class ImportVehiclesHandler extends AbstractHandler {
 	/**
 	 * The constructor.
 	 */
-	public ImportMembersHandler() {
+	public ImportVehiclesHandler() {
 	}
 
 	/**
@@ -37,13 +37,12 @@ public class ImportMembersHandler extends AbstractHandler {
 		FileDialog fileDialog = new FileDialog(window.getShell(), SWT.OPEN | SWT.SHEET);
 		fileDialog.setFilterExtensions(new String[] { "*.csv", });
 		String importFileName = fileDialog.open();
-		
 		DairyRepository dairyRepo = DairyRepository.getInstance();
-//		Dairy dairy = dairyRepo.getLocalDairy();
+		Dairy dairy = dairyRepo.getLocalDairy();
 		try {
-			MemberImportTool importTool = new MemberImportTool(new File(importFileName));
+			VehicleImportTool importTool = new VehicleImportTool(dairy, new File(importFileName));
 			importTool.processFile();
-//			dairyRepo.save(dairy);
+			dairyRepo.save(dairy);
 		}
 		catch(Exception e) {
 			throw new ExecutionException("Import operation failed.", e);

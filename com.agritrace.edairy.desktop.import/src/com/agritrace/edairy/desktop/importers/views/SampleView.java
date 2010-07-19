@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.views;
+package com.agritrace.edairy.desktop.importers.views;
 
 
 import java.io.File;
@@ -34,9 +34,9 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.install.AbstractImportTool;
-import com.agritrace.edairy.desktop.install.EmployeeImportTool;
-import com.agritrace.edairy.desktop.install.VehicleImportTool;
+import com.agritrace.edairy.desktop.importers.AbstractImportTool;
+import com.agritrace.edairy.desktop.importers.EmployeeImportTool;
+import com.agritrace.edairy.desktop.importers.VehicleImportTool;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 

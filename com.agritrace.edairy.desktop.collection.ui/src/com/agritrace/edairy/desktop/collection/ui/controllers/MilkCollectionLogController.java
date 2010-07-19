@@ -56,7 +56,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		public void saveJournal(CollectionJournalPage journal) {
 			DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(journal);
 			DairyRepository.getInstance().save(DairyRepository.getInstance().getLocalDairy());
-			refreshTableContents();
+			MilkCollectionLogController.this.refreshTableContents();
+//			MilkCollectionLogController.this.table.updateFromModel();			
 		}
 	}
 

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install;
+package com.agritrace.edairy.desktop.importers;
 
 public class ValidationException extends RuntimeException {
 

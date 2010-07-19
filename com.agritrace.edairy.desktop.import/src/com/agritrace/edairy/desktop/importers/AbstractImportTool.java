@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install;
+package com.agritrace.edairy.desktop.importers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -58,10 +58,10 @@ public abstract class AbstractImportTool {
 		validateRecord(values);
 		EObject entity = createEntityFromRecord(values);
 		validateEntity(entity);
-		doImportRecord(entity);
+		saveImportedEntity(entity);
 	}
 
-	abstract protected void doImportRecord(Object entity);
+	abstract protected void saveImportedEntity(Object entity);
 
 	protected EObject createEntityFromRecord(String[] values) {
 		EObject entity = createBlankEntity();
@@ -69,7 +69,7 @@ public abstract class AbstractImportTool {
 		for (Entry entry : getFields()) {
 			String value = values[entry.field];
 			Object converted = convert(entry.feature, value);
-			System.err.printf("Setting %s: '%s'\n", entry.feature.getName(), converted);
+//			System.err.printf("Setting %s: '%s'\n", entry.feature.getName(), converted);
 			entity.eSet(entry.feature, converted);
 		}
 		return entity;

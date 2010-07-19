@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.navigation;
+package com.agritrace.edairy.desktop.importers.navigation;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
-import com.agritrace.edairy.desktop.install.views.SampleView;
+import com.agritrace.edairy.desktop.importers.views.SampleView;
 
 public class InstallNavigationNodeAssembler extends AbstractNavigationAssembler {
 	// FINANCE

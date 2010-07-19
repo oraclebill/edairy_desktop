@@ -105,6 +105,7 @@ public class ScaleImportViewController extends SubModuleController {
 		
 		calculatedTotalRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
 		calculatedTotalRidget.bindToModel(importedData, "driverTotal");
+		
 		IActionRidget cancelAction = getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
 		cancelAction.addListener(new IActionListener() {
 			@Override

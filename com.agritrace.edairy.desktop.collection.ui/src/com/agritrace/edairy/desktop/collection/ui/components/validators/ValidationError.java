@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.components.collectionline;
+package com.agritrace.edairy.desktop.collection.ui.components.validators;
 
 class ValidationError extends Error {
 	/**

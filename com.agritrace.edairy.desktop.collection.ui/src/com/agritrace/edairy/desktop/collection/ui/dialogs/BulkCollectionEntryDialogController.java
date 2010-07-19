@@ -24,6 +24,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.validation.ValidatorCollection;
+import org.eclipse.riena.ui.swt.RienaMessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.log.LogService;
 
@@ -52,18 +53,17 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 			"MPR Missing", "Rejected" };
 
 	private static final String[] columnPropertyNames = { "lineNumber", "recordedMember",
-		 "validatedMember.member.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			"validatedMember.member.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
 	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");
 
 	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
 
-
 	private final IDairyRepository dairyRepo;
 
 	// milk Entry group
 	private ITableRidget journalEntryTable;
-//	private CollectionJournalPage workingJournalPage;
+	// private CollectionJournalPage workingJournalPage;
 	private IJournalHeaderRidget journalHeaderRidget;
 	private ICollectionLineEditRidget collectionLineRidget;
 	private ILabelRidget totalLabelRidget;
@@ -156,15 +156,15 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		deleteButton = getRidget(IActionRidget.class, ViewWidgetId.deleteButton);
 		clearButton = getRidget(IActionRidget.class, ViewWidgetId.clearButton);
 		totalLabelRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
-		
+
 		//
-		saveAndNewRidget = getRidget(IActionRidget.class, 	DialogConstants.BIND_ID_BUTTON_SAVE);
+		saveAndNewRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
 		saveAndCloseRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_CANCEL);
-		cancelRidget = getRidget(IActionRidget.class, 		DialogConstants.BIND_ID_BUTTON_DELETE);
+		cancelRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_DELETE);
 
 		// config stuff..
 
-		PropertyChangeListener headerValidityListener = new PropertyChangeListener() {			
+		PropertyChangeListener headerValidityListener = new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				boolean isValid = journalHeaderRidget.isHeaderValid();
@@ -177,7 +177,8 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 			}
 		};
 		journalHeaderRidget.addPropertyChangeListener(IJournalHeaderRidget.HEADER_VALID, headerValidityListener);
-			log(LogService.LOG_DEBUG, String.format("Header validity listener '%s' added to %s.", headerValidityListener, journalHeaderRidget));
+		log(LogService.LOG_DEBUG, String.format("Header validity listener '%s' added to %s.", headerValidityListener,
+				journalHeaderRidget));
 
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(dairyRepo));
 		collectionLineRidget.addPropertyChangeListener(ICollectionLineEditRidget.VALIDATED_VALUE,
@@ -212,10 +213,17 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		});
 
 		cancelRidget.setText("Cancel");
+		cancelRidget.setEnabled(true);
+		saveAndCloseRidget.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleCancelAction();
+			}
+		});
 
-		initValidators();		
+		initValidators();
 		enableBottomButtons(false);
-		
+
 	}
 
 	/**
@@ -223,7 +231,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	 */
 	protected void configureJournalEntryTable(final ITableRidget table) {
 		table.setFocusable(false);
-//		table.setColumnFormatter(2, new PersonToFormattedName());
+		// table.setColumnFormatter(2, new PersonToFormattedName());
 
 		table.setSelectionType(SelectionType.SINGLE);
 		table.addSelectionListener(new ISelectionListener() {
@@ -258,10 +266,8 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		deleteButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				if (MessageDialog
-						.openConfirm(getShell(),
-								"Delete Milk Collection Records",
-								"Do you want to delete the selected milk collection records?")) {
+				if (MessageDialog.openConfirm(getShell(), "Delete Milk Collection Records",
+						"Do you want to delete the selected milk collection records?")) {
 					final List<Object> selectedRecords = journalEntryTable.getSelection();
 					if (selectedRecords != null) {
 						// records.removeAll(selectedRecords);
@@ -277,8 +283,8 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		clearButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				if (MessageDialog.openConfirm(getShell(),
-						"Delete Milk Collection Records", "Do you want to delete all milk collection records?")) {
+				if (MessageDialog.openConfirm(getShell(), "Delete Milk Collection Records",
+						"Do you want to delete all milk collection records?")) {
 					// records.clear();
 					getContextJournalPage().getJournalEntries().clear();
 					updateJournalTotals();
@@ -289,6 +295,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		});
 
 	}
+
 	/**
 	 * 
 	 */
@@ -324,10 +331,10 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	 */
 	private void resetJournalEntryLine() {
 		// todo: binList of route
-//		Route currentRoute = workingJournalPage.getRoute();
-//		if (currentRoute != null) {
-//			collectionLineRidget.setBinList(currentRoute.getBins());
-//		}		
+		// Route currentRoute = workingJournalPage.getRoute();
+		// if (currentRoute != null) {
+		// collectionLineRidget.setBinList(currentRoute.getBins());
+		// }
 		if (collectionLineRidget.getBinList() == null) {
 			collectionLineRidget.setBinList(dairyRepo.getLocalDairy().getDairyBins());
 		}
@@ -341,8 +348,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		CollectionJournalPage workingJournalPage = getContextJournalPage();
 		if (workingJournalPage != null) {
 			final String refNum = workingJournalPage.getReferenceNumber();
-			if (refNum == null 
-					|| refNum.trim().length() == 0 
+			if (refNum == null || refNum.trim().length() == 0
 					|| !workingJournalPage.eIsSet(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL)) {
 				collectionLineRidget.setEnabled(false);
 				journalHeaderRidget.setEnabled(true);
@@ -355,10 +361,9 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		}
 	}
 
-
-
 	/**
-	 * Updates the journal with a new journal line (and any calculated attributes).
+	 * Updates the journal with a new journal line (and any calculated
+	 * attributes).
 	 * 
 	 * @param journal
 	 * @param line
@@ -370,7 +375,8 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		int hasSuspendedLine = 0, hasRejectedLine = 0, hasMPRLine = 0, hasOffRoute = 0;
 		for (CollectionJournalLine journalLine : journal.getJournalEntries()) {
 			BigDecimal currentTotal = journalLine.getQuantity();
-			if(currentTotal!=null)sum =  sum.add(currentTotal);
+			if (currentTotal != null)
+				sum = sum.add(currentTotal);
 
 			if (journalLine.isFlagged())
 				hasSuspendedLine++;
@@ -394,7 +400,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	 * Called when 'Save and New' is clicked.
 	 */
 	protected void handleSaveAndNewJournalAction() {
-		if(doSave())
+		if (doSave())
 			refreshWorkingJournal();
 	}
 
@@ -402,40 +408,54 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	 * Called when 'Save and Close' is clicked.
 	 */
 	protected void handleSaveAndCloseWindowAction() {
-		if(doSave())
+		if (doSave())
 			getWindowRidget().dispose();
 	}
-	
+
+	/**
+	 * 
+	 */
+	protected void handleCancelAction() {
+		CollectionJournalPage workingJournal = getContextJournalPage();
+		if (workingJournal.getJournalEntries().size() > 0 || workingJournal.getDriverTotal() != null) {
+			boolean ret = RienaMessageDialog.openConfirm(getShell(), "Confirm Cancel",
+					"The current page has unsaved updates. Are you sure you want to cancel?");
+			if (!ret) {
+				return;
+			}
+		}
+		getWindowRidget().dispose();
+	}
+
 	/**
 	 * 
 	 */
 	private boolean doSave() {
 		boolean doSave = true;
-		
+
 		CollectionJournalPage workingJournal = getContextJournalPage();
 		IStatus validationResult = validateJournal(workingJournal);
 		if (!validationResult.isOK()) {
 			displayMessage(validationResult);
 			return false;
 		}
-		// Todo: set status in response to events during edit.. 
+		// Todo: set status in response to events during edit..
 		if (workingJournal.getEntryCount() > 0) {
 			if (workingJournal.getSuspendedCount() > 0 || workingJournal.isSuspended()) {
-				workingJournal.setStatus(JournalStatus.SUSPENDED);				
+				workingJournal.setStatus(JournalStatus.SUSPENDED);
 			} else {
 				workingJournal.setStatus(JournalStatus.COMPLETE);
 			}
-		}
-		else if (workingJournal.getDriverTotal() != null && workingJournal.getDriverTotal().compareTo(BigDecimal.ZERO) > 0) {
-				workingJournal.setStatus(JournalStatus.PENDING);								
-		}
-		else {
+		} else if (workingJournal.getDriverTotal() != null
+				&& workingJournal.getDriverTotal().compareTo(BigDecimal.ZERO) > 0) {
+			workingJournal.setStatus(JournalStatus.PENDING);
+		} else {
 			log(LogService.LOG_WARNING, "doSave: saving questionable journal: " + workingJournal.getReferenceNumber());
 		}
-		
-		if( doSave )
+
+		if (doSave)
 			getPersistenceDelegate().saveJournal(workingJournal);
-		
+
 		return doSave;
 	}
 
@@ -455,8 +475,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 		for (IStatus status : statusList) {
 			formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
 		}
-		MessageDialog.openError(getShell(), "Validation Error(s)",
-				message.toString());
+		MessageDialog.openError(getShell(), "Validation Error(s)", message.toString());
 	}
 
 	/**
@@ -465,7 +484,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	private void refreshWorkingJournal() {
 		CollectionJournalPage oldPage = getContextJournalPage();
 		CollectionJournalPage newPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
-		
+
 		// copy some of the old stuff to the new guy
 		EStructuralFeature[] transferFeatures = new EStructuralFeature[] {
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE,
@@ -488,7 +507,6 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	protected void initValidators() {
 		// todo:
 	}
-
 
 	/**
 	 * 
@@ -542,7 +560,7 @@ public class BulkCollectionEntryDialogController extends AbstractWindowControlle
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
-	
+
 	private Shell getShell() {
 		return AbstractDirectoryController.getShell();
 	}

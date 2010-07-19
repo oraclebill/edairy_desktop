@@ -19,7 +19,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.persistence;bundle-version="
  com.agritrace.edairy.desktop.deliveries.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.vehicles.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.containers.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.install;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.import;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.icons;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

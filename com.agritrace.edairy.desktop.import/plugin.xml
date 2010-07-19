@@ -10,7 +10,7 @@
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.install"
-            class="com.agritrace.edairy.desktop.install.views.SampleView"
+            class="com.agritrace.edairy.desktop.importers.views.SampleView"
             icon="icons/sample.gif"
             id="com.agritrace.edairy.desktop.install.views.SampleView"
             name="Import Wizards">
@@ -65,19 +65,19 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.agritrace.edairy.desktop.install.handlers.ImportMembersHandler"
+            class="com.agritrace.edairy.desktop.importers.handlers.ImportMembersHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importMembers">
       </handler>
       <handler
-            class="com.agritrace.edairy.desktop.install.handlers.ImportRoutesHandler"
+            class="com.agritrace.edairy.desktop.importers.handlers.ImportRoutesHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importRouteData">
       </handler>
       <handler
-            class="com.agritrace.edairy.desktop.install.handlers.ImportEmployeesHandler"
+            class="com.agritrace.edairy.desktop.importers.handlers.ImportEmployeesHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importEmployees">
       </handler>
       <handler
-            class="com.agritrace.edairy.desktop.install.handlers.ImportVehiclesHandler"
+            class="com.agritrace.edairy.desktop.importers.handlers.ImportVehiclesHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importVehicles">
       </handler>
    </extension>

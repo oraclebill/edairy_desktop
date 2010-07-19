@@ -83,9 +83,13 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 	public void keyTraversed(TraverseEvent e) {
 		log(LogService.LOG_DEBUG, "event in : " + e);
 		if (e.detail == SWT.TRAVERSE_RETURN) {
-			if (e.widget == memberIdWidget) return;
-			e.detail = SWT.TRAVERSE_TAB_NEXT;
-			e.doit = true;
+			if (e.widget == memberIdWidget && addButton.setFocus()) {
+				e.detail = SWT.TRAVERSE_NONE;
+				e.doit = true;
+			} else {
+				e.detail = SWT.TRAVERSE_TAB_NEXT;
+				e.doit = true;
+			}
 		}
 		log(LogService.LOG_DEBUG, "event out: " + e);
 	}
@@ -122,7 +126,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(1, 1).applyTo(panel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(8).applyTo(panel);
 
-		binWidget = fu.addLabeledComboField(panel, BIN_LABEL, ViewWidgetId.binCombo);
+		binWidget = fu.addLabeledCompletionComboField(panel, BIN_LABEL, ViewWidgetId.binCombo);
 		binWidget.addTraverseListener(this);
 
 		canWidget = fu.addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText);
@@ -132,13 +136,13 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		qtyWidget.addTraverseListener(this);
 
 		memberIdWidget = fu.addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText);
-//		memberIdWidget.setSize(70, 19);
+		// memberIdWidget.setSize(70, 19);
 		memberIdWidget.addTraverseListener(this);
 
 		panel.setTabList(new Control[] { binWidget, canWidget, qtyWidget, memberIdWidget });
 
 		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
-//		buttonComposite.setSize(162, 18);
+		// buttonComposite.setSize(162, 18);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(4, 1).applyTo(buttonComposite);
 		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(buttonComposite);
 
@@ -170,34 +174,38 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		final Composite checkPanel = UIControlsFactory.createComposite(group);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(checkPanel);
 		checkPanel.setLayout(new FormLayout());
-//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(3).applyTo(checkPanel);
+		// GridLayoutFactory.fillDefaults().margins(2,
+		// 2).numColumns(3).applyTo(checkPanel);
 
 		final Label label = UIControlsFactory.createLabel(checkPanel, "Collect Milk Quality Data? ");
 		FormData fd_label = new FormData();
-//		fd_label.bottom = new FormAttachment(0);
-//		fd_label.right = new FormAttachment(0);
+		// fd_label.bottom = new FormAttachment(0);
+		// fd_label.right = new FormAttachment(0);
 		fd_label.top = new FormAttachment(0, 10);
 		fd_label.left = new FormAttachment(0, 15);
 		label.setLayoutData(fd_label);
-//		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.TOP).applyTo(label);
+		// GridDataFactory.swtDefaults().align(SWT.LEFT,
+		// SWT.TOP).applyTo(label);
 
 		final Button control = UIControlsFactory.createButtonCheck(checkPanel, "", "display-quality-controls-button");
 		FormData fd_control = new FormData();
-//		fd_control.top = new FormAttachment(0);
-//		fd_control.right = new FormAttachment(0);
+		// fd_control.top = new FormAttachment(0);
+		// fd_control.right = new FormAttachment(0);
 		fd_control.bottom = new FormAttachment(label, 2, SWT.BOTTOM);
 		fd_control.left = new FormAttachment(label, 5, SWT.RIGHT);
 		control.setLayoutData(fd_control);
-//		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.TOP).applyTo(control);
+		// GridDataFactory.swtDefaults().align(SWT.LEFT,
+		// SWT.TOP).applyTo(control);
 
 		final Group qualityPanel = UIControlsFactory.createGroup(checkPanel, "", "quality-group");
 		FormData fd_qualityPanel = new FormData();
-//		fd_qualityPanel.bottom = new FormAttachment(0);
-//		fd_qualityPanel.right = new FormAttachment(0);
-//		fd_qualityPanel.top = new FormAttachment(0);
+		// fd_qualityPanel.bottom = new FormAttachment(0);
+		// fd_qualityPanel.right = new FormAttachment(0);
+		// fd_qualityPanel.top = new FormAttachment(0);
 		fd_qualityPanel.left = new FormAttachment(control, 18, SWT.RIGHT);
 		qualityPanel.setLayoutData(fd_qualityPanel);
-//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(1, 1).applyTo(qualityPanel);
+		// GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true,
+		// true).span(1, 1).applyTo(qualityPanel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(6).applyTo(qualityPanel);
 
 		FieldUtil fu = new FieldUtil(10, SWT.DEFAULT);

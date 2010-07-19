@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.collection.ui.util;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.ui.swt.CompletionCombo;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -9,6 +10,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
@@ -82,6 +84,19 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
+	public Control addLabeledCompletionComboField(Group parent, String labelTxt, String widgetID) {
+		final Label label = createLabel(parent, labelTxt);
+		labelGDF.applyTo(label);
+
+		final CompletionCombo field = UIControlsFactory.createCompletionCombo(parent, widgetID);
+		comboGDF.applyTo(field);
+
+		return field;
+	}
+
+	/**
+	 * @wbp.factory
+	 */
 	public Control addLabeledDateField(Composite parent, String labelTxt, String widgetID) {
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
@@ -146,4 +161,5 @@ public class FieldUtil {
 		}
 		return label;
 	}
+
 }
