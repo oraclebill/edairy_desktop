@@ -211,7 +211,7 @@ public class ServiceRequestResourceManager {
 		sdf.applyPattern("MM/dd/yyyy");
 		for (int i = 0; i < containerNumber; i++) {
 			final Container container = TrackingFactory.eINSTANCE.createContainer();
-			container.setType(ContainerType.BIN);
+//			container.setType(ContainerType.BIN);
 			// final int id = containerId + i;
 			// container.setContainerId(id);
 			container.setOwner(farm);

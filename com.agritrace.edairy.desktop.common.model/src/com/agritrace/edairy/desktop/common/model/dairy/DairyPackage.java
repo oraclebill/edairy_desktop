@@ -1879,15 +1879,6 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_CONTAINER__CAPACITY = TrackingPackage.CONTAINER__CAPACITY;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY_CONTAINER__TYPE = TrackingPackage.CONTAINER__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Measure Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

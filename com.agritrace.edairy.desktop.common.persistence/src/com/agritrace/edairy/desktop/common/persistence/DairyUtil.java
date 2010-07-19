@@ -126,8 +126,12 @@ public class DairyUtil {
 	}
 
 	public static Container createContainer(ContainerType type, UnitOfMeasure unit, Farm farm, double campacity) {
-		final Container container = TrackingFactory.eINSTANCE.createContainer();
-		container.setType(type);
+		Container container;
+		if(type == ContainerType.BIN)
+			container = DairyFactory.eINSTANCE.createDairyContainer();
+		else
+			container = TrackingFactory.eINSTANCE.createContainer();
+//		container.setType(type);
 		container.setMeasureType(unit);
 		container.setOwner(farm);
 		container.setCapacity(campacity);

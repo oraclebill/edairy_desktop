@@ -529,7 +529,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 		final List<DairyContainer> binList = new ArrayList<DairyContainer>();
 		for (int i = 0; i < binNumber; i++) {
 			final DairyContainer bin = DairyFactory.eINSTANCE.createDairyContainer();
-			bin.setType(ContainerType.BIN);
+//			bin.setType(ContainerType.BIN);
 			// bin.setAssetId(new Long(id).longValue());
 			// bin.setTagType("BARCODE");
 			// bin.setTagValue("1100100100100111");
@@ -564,7 +564,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		for (int i = 0; i < containerNumber; i++) {
 			final Container container = TrackingFactory.eINSTANCE.createContainer();
-			container.setType(ContainerType.CAN);
+//			container.setType(ContainerType.CAN);
 			// final int id = containerId + i;
 			// container.setContainerId("" + id);
 			container.setOwner(farm);

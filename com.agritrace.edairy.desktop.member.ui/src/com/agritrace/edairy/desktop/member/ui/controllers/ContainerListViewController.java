@@ -135,12 +135,14 @@ public class ContainerListViewController extends BaseListViewController {
 	private IActionRidget addRidget;
 	private IActionRidget clearButton;
 
-	private final String[] containerColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Container ID", "Type",
+	private final String[] containerColumnHeaders = { 
+			"Member ID", "Member Name", "Farm Name", "Container ID", 
 			"Unit of Measure", "Capacity" };
 	private ITableRidget containerListTable;
 
-	private final String[] containerPropertyNames = { "membership", "membership", "container", "container",
-			"container", "container", "container" };
+	private final String[] containerPropertyNames = { 
+			"membership", "membership", "container", "container",
+			 "container", "container" };
 	private IComboRidget farmCombo;
 	private final List<Farm> farmCombofarms = new ArrayList<Farm>();
 	private final List<String> farmNames = new ArrayList<String>();
@@ -174,8 +176,9 @@ public class ContainerListViewController extends BaseListViewController {
 	}
 
 	private void setColumnFormatters() {
+		int idx = 0;
 		// memberId
-		containerListTable.setColumnFormatter(0, new ColumnFormatter() {
+		containerListTable.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
@@ -188,7 +191,7 @@ public class ContainerListViewController extends BaseListViewController {
 			}
 		});
 		// memberName
-		containerListTable.setColumnFormatter(1, new ColumnFormatter() {
+		containerListTable.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
@@ -203,7 +206,7 @@ public class ContainerListViewController extends BaseListViewController {
 				return null;
 			}
 		});
-		containerListTable.setColumnFormatter(2, new ColumnFormatter() {
+		containerListTable.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
@@ -215,7 +218,7 @@ public class ContainerListViewController extends BaseListViewController {
 				return null;
 			}
 		});
-		containerListTable.setColumnFormatter(3, new ColumnFormatter() {
+		containerListTable.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
@@ -227,19 +230,19 @@ public class ContainerListViewController extends BaseListViewController {
 				return null;
 			}
 		});
-		containerListTable.setColumnFormatter(4, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Container container = ((ContainerListViewTableNode) element).getContainer();
-					if (container != null) {
-						return container.getType().toString();
-					}
-				}
-				return null;
-			}
-		});
-		containerListTable.setColumnFormatter(5, new ColumnFormatter() {
+//		containerListTable.setColumnFormatter(4, new ColumnFormatter() {
+//			@Override
+//			public String getText(Object element) {
+//				if (element instanceof ContainerListViewTableNode) {
+//					final Container container = ((ContainerListViewTableNode) element).getContainer();
+//					if (container != null) {
+//						return container.getType().toString();
+//					}
+//				}
+//				return null;
+//			}
+//		});
+		containerListTable.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {
@@ -251,7 +254,7 @@ public class ContainerListViewController extends BaseListViewController {
 				return null;
 			}
 		});
-		containerListTable.setColumnFormatter(6, new ColumnFormatter() {
+		containerListTable.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof ContainerListViewTableNode) {

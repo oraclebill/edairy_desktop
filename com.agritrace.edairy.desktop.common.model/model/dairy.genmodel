@@ -7,6 +7,13 @@
   <foreignModel>dairy.ecore</foreignModel>
   <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.desktop.common.model"
       resource="XMI" disposableProviderFactory="true" ecorePackage="dairy.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//JournalStatus">
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/NEW"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/PENDING"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/COMPLETE"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/SUSPENDED"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/ARCHIVED"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//MembershipStatus">
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Active"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Inactive"/>
@@ -34,7 +41,15 @@
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/Warehouse"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/MilkProcessing"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//MilkPricePeriod">
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Daily"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Weekly"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Monthly"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/AdHoc"/>
+      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Hourly"/>
+    </genEnums>
     <genClasses ecoreClass="dairy.ecore#//Vehicle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/vehicleId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/registrationNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/make"/>
@@ -49,7 +64,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/year"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Vehicle/driver"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Vehicle/assetInfo"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/vehicleId"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//CollectionJournalLine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/lineNumber"/>
@@ -65,14 +79,29 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalLine/dairyContainer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalLine/collectionJournal"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/rejected"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/rejectionReason"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/milkFatPercentage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/alcoholPercentage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalLine/waterAdded"/>
+    </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//ScaleImportRecord">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/scaleSerial"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/collectionTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/centerNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/numCans"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/tripNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/operatorCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//ScaleImportRecord/validated"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Employee">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/operatorCode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/startDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/jobFunction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nationalId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nhifNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nssfNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/securityRole"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//DairyLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/Id"/>
@@ -84,20 +113,24 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/code"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//DairyLocation/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/functions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DairyLocation/containers"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//CollectionJournalPage">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/journalEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/referenceNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/status"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/session"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/driver"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/route"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/farmContainer"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/bin"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/vehicle"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/driverTotal"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/recordTotal"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/journalEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/suspended"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/entryCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/suspendedCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/rejectedCount"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Route">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/Id"/>
@@ -115,6 +148,20 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//DeliveryJournal">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournal/referenceNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournal/date"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DeliveryJournal/route"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournal/session"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DeliveryJournal/customer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DeliveryJournal/driver"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DeliveryJournal/vehicle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//DeliveryJournal/lines"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournal/total"/>
+    </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//DeliveryJournalLine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournalLine/lineNumber"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DeliveryJournalLine/bin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournalLine/quantity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DeliveryJournalLine/description"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Dairy">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/registrationNumber"/>
@@ -129,15 +176,19 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/memberships"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/branchLocations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/collectionJournals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/deliveryJournals"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/suppliers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/customers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/animalHealthRequests"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/dairyBins"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/priceHistory"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/managerName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/establishedDate"/>
       <genOperations ecoreOperation="dairy.ecore#//Dairy/getMemberFarms"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Membership">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/memberId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/memberNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/applicationDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/effectiveDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/status"/>
@@ -171,6 +222,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/customerType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/status"/>
     </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//MilkPrice">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/pricePeriod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/priceDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkPrice/enteredBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/entryDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/notes"/>
+    </genClasses>
     <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.desktop.common.model.dairy"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionType">
@@ -179,31 +239,47 @@
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionSource">
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/StoreCredit"/>
-        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/AnimalHealthServices"/>
+        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/ClinicalServices"/>
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/ShareRecovery"/>
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/CashPayment"/>
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/Other"/>
       </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/AccountStatus">
+        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/AccountStatus/ACTIVE"/>
+        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/AccountStatus/INACTIVE"/>
+      </genEnums>
       <genClasses ecoreClass="dairy.ecore#//account/Account">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Account/accountId"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Account/accountNumber"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference dairy.ecore#//account/Account/member"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Account/established"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Account/status"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Account/type"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference dairy.ecore#//account/Account/transactions"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference dairy.ecore#//account/Account/balances"/>
       </genClasses>
+      <genClasses ecoreClass="dairy.ecore#//account/Transaction">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference dairy.ecore#//account/Transaction/account"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Transaction/transactionId"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Transaction/transactionDate"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Transaction/transactionType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Transaction/amount"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/Transaction/description"/>
+      </genClasses>
       <genClasses ecoreClass="dairy.ecore#//account/AccountTransaction">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/transactionId"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference dairy.ecore#//account/AccountTransaction/account"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/transactionType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/referenceNumber"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/source"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/amount"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/description"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/transactionDate"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference dairy.ecore#//account/AccountTransaction/relatedLocation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/checkNumber"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/AccountTransaction/signedBy"/>
+      </genClasses>
+      <genClasses ecoreClass="dairy.ecore#//account/AdjustmentTransaction">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference dairy.ecore#//account/AdjustmentTransaction/signedOffBy"/>
       </genClasses>
       <genClasses ecoreClass="dairy.ecore#//account/BalancePoint">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/accountBalanceId"/>
@@ -270,6 +346,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Audited/lastUpdated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Audited/voidDate"/>
     </genClasses>
+    <genClasses ecoreClass="common.ecore#//Contactable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Contactable/contactMethods"/>
+    </genClasses>
     <genClasses ecoreClass="common.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/photo"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/honorific"/>
@@ -281,13 +360,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/nickName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/phoneNumber"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/location"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/contactMethods"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/personId"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//Company">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/legalName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/companyName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contactMethods"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/contacts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Company/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/phoneNumber"/>
@@ -309,6 +386,11 @@
     <genClasses ecoreClass="common.ecore#//ContactMethod">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ContactMethod/cmType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ContactMethod/cmValue"/>
+    </genClasses>
+    <genClasses ecoreClass="common.ecore#//ImageEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ImageEntry/imageId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ImageEntry/mimeType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//ImageEntry/imageData"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Tracking" basePackage="com.agritrace.edairy.desktop.common.model"
@@ -352,9 +434,9 @@
     </genClasses>
     <genClasses ecoreClass="farm.ecore#//Container">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/containerId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/trackingNumber"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference farm.ecore#//Container/owner"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/capacity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/measureType"/>
     </genClasses>
     <genClasses ecoreClass="farm.ecore#//RegisteredAnimal">

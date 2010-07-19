@@ -123,11 +123,11 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			unitCombo.addSelectionListener(this);
 			unitCombo.setSelection(selectedContainer.getMeasureType());
 
-			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
-					new WritableValue());
-			typeCombo.updateFromModel();
-			typeCombo.addSelectionListener(this);
-			typeCombo.setSelection(selectedContainer.getType());
+//			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
+//					new WritableValue());
+//			typeCombo.updateFromModel();
+//			typeCombo.addSelectionListener(this);
+//			typeCombo.setSelection(selectedContainer.getType());
 		}
 		configureButtonsPanel();
 
@@ -139,10 +139,10 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			if (selectedContainer != null) {
 				selectedContainer.setMeasureType((UnitOfMeasure) unitCombo.getSelection());
 			}
-		} else if (event.getSource() == typeCombo) {
-			if (selectedContainer != null) {
-				selectedContainer.setType((ContainerType) typeCombo.getSelection());
-			}
+//		} else if (event.getSource() == typeCombo) {
+//			if (selectedContainer != null) {
+//				selectedContainer.setType((ContainerType) typeCombo.getSelection());
+//			}
 		} else if (event.getSource() == farmCombo) {
 			if (selectedContainer != null) {
 				selectedContainer.setOwner((Farm) farmCombo.getSelection());

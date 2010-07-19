@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoComposite;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Label;
 
 public class ContainerLogDetailComposite extends Composite {
 
@@ -55,18 +56,13 @@ public class ContainerLogDetailComposite extends Composite {
 				GridDataFactory.fillDefaults().hint(120, -1).applyTo(sizingLabel);
 				final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
+				text.setText("<generated>");
 				fieldDefault.applyTo(text);
 			}
 			{
 				UIControlsFactory.createLabel(detailGroup, "Tracking No.");
 				final Control text = UIControlsFactory.createText(detailGroup, SWT.NONE,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
-				fieldDefault.applyTo(text);
-			}
-			{
-				UIControlsFactory.createLabel(detailGroup, "Type");
-				final CCombo text = UIControlsFactory.createCCombo(detailGroup,
-						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
 				fieldDefault.applyTo(text);
 			}
 			{

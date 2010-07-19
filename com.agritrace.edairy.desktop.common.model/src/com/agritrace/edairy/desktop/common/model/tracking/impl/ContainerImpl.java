@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getTrackingNumber <em>Tracking Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getCapacity <em>Capacity</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getMeasureType <em>Measure Type</em>}</li>
  * </ul>
  * </p>
@@ -98,7 +97,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double CAPACITY_EDEFAULT = 0.0;
+	protected static final double CAPACITY_EDEFAULT = 25.0;
 
 	/**
 	 * The cached value of the '{@link #getCapacity() <em>Capacity</em>}' attribute.
@@ -111,26 +110,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	protected double capacity = CAPACITY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final ContainerType TYPE_EDEFAULT = ContainerType.BIN;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected ContainerType type = TYPE_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getMeasureType() <em>Measure Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -138,7 +117,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final UnitOfMeasure MEASURE_TYPE_EDEFAULT = UnitOfMeasure.LITRE;
+	protected static final UnitOfMeasure MEASURE_TYPE_EDEFAULT = UnitOfMeasure.KILOGRAM;
 
 	/**
 	 * The cached value of the '{@link #getMeasureType() <em>Measure Type</em>}' attribute.
@@ -275,27 +254,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ContainerType getType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(ContainerType newType) {
-		ContainerType oldType = type;
-		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public UnitOfMeasure getMeasureType() {
 		return measureType;
 	}
@@ -329,8 +287,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return basicGetOwner();
 			case TrackingPackage.CONTAINER__CAPACITY:
 				return getCapacity();
-			case TrackingPackage.CONTAINER__TYPE:
-				return getType();
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				return getMeasureType();
 		}
@@ -356,9 +312,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				setCapacity((Double)newValue);
-				return;
-			case TrackingPackage.CONTAINER__TYPE:
-				setType((ContainerType)newValue);
 				return;
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				setMeasureType((UnitOfMeasure)newValue);
@@ -387,9 +340,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__CAPACITY:
 				setCapacity(CAPACITY_EDEFAULT);
 				return;
-			case TrackingPackage.CONTAINER__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				setMeasureType(MEASURE_TYPE_EDEFAULT);
 				return;
@@ -413,8 +363,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return owner != null;
 			case TrackingPackage.CONTAINER__CAPACITY:
 				return capacity != CAPACITY_EDEFAULT;
-			case TrackingPackage.CONTAINER__TYPE:
-				return type != TYPE_EDEFAULT;
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				return measureType != MEASURE_TYPE_EDEFAULT;
 		}
@@ -437,8 +385,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		result.append(trackingNumber);
 		result.append(", capacity: ");
 		result.append(capacity);
-		result.append(", type: ");
-		result.append(type);
 		result.append(", measureType: ");
 		result.append(measureType);
 		result.append(')');

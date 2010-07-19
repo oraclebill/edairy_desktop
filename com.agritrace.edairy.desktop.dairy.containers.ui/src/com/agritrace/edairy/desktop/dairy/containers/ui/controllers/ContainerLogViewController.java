@@ -85,7 +85,6 @@ public class ContainerLogViewController extends SubModuleController {
 		@Override
 		public void itemApplied(Object changedItem) {
 			super.itemApplied(changedItem);
-			List<DairyContainer> containers = dairyRepository.getLocalDairy().getDairyBins();
 			if (!containers.contains(changedItem)) {
 				containers.add((DairyContainer) changedItem);
 			}
@@ -104,9 +103,10 @@ public class ContainerLogViewController extends SubModuleController {
 			final ITextRidget id = container.getRidget(ITextRidget.class,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
 			id.setFocusable(false);
-//			id.setEnabled(false);
+			// id.setEnabled(false);
 			id.setOutputOnly(true);
-			id.bindToModel(PojoObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__CONTAINER_ID.getName()));
+			id.bindToModel(PojoObservables.observeValue(workingCopy,
+					TrackingPackage.Literals.CONTAINER__CONTAINER_ID.getName()));
 			id.updateFromModel();
 
 			final ITextRidget trackingNumber = container.getRidget(ITextRidget.class,
@@ -116,11 +116,11 @@ public class ContainerLogViewController extends SubModuleController {
 					TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER));
 			trackingNumber.updateFromModel();
 
-			final IComboRidget type = container.getRidget(IComboRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
-			type.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
-					EMFObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__TYPE));
-			type.updateFromModel();
+//			final IComboRidget type = container.getRidget(IComboRidget.class,
+//					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TYPE);
+//			type.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
+//					EMFObservables.observeValue(workingCopy, TrackingPackage.Literals.CONTAINER__TYPE));
+//			type.updateFromModel();
 
 			final IDecimalTextRidget capacity = container.getRidget(IDecimalTextRidget.class,
 					ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
@@ -140,14 +140,13 @@ public class ContainerLogViewController extends SubModuleController {
 
 	public static final String ID = ContainerLogViewController.class.getName();
 
-	private final String[] containerColumnHeaders = { "ID", "Container Type", "Units Of Measure", "Capacity" };
-	private final String[] containerPropertyNames = { "containerId", "type", "measureType", "capacity" };
+	private static final String[] containerColumnHeaders = { "ID", "Tracking Number", "Capacity", "Units Of Measure" };
+	private static final String[] containerPropertyNames = { "containerId", "trackingNumber", "capacity", "measureType" };
 	protected final IDairyRepository dairyRepository = DairyRepository.getInstance();
+	private final Collection<DairyContainer> containers = dairyRepository.getLocalDairy().getDairyBins();
 
 	@Override
 	public void configureRidgets() {
-
-		final Collection<DairyContainer> containers = dairyRepository.allDairyContainers();
 
 		final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 		if (master != null) {

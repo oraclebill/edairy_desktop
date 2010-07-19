@@ -42,7 +42,12 @@ public class ContainerLogView extends ScrolledSubModuleView {
 			}
 		};
 		addUIControl(mdComposite, BIND_ID_MASTER);
-		GridDataFactory.swtDefaults().grab(true, true).minSize(600, -1).align(SWT.FILL, SWT.FILL).applyTo(mdComposite);
+		GridDataFactory
+			.swtDefaults()
+			.grab(true, true)
+			.minSize(600, -1)
+			.align(SWT.FILL, SWT.FILL)
+		  .applyTo(mdComposite);
 		panel.pack();
 	}
 
