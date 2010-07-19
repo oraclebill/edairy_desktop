@@ -1191,6 +1191,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "name", "descriptiveLocation",
 			 "kind", "elementOnly"
+		   });			
+		addAnnotation
+		  (getImageEntry_ImageData(), 
+		   source, 
+		   new String[] {
+			 "name", "ImageEntry",
+			 "kind", "elementOnly"
 		   });	
 	}
 
@@ -1273,6 +1280,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
+		   });			
+		addAnnotation
+		  (getImageEntry_ImageData(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Lob\n@Column(length=1048576)"
 		   });
 	}
 

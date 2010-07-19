@@ -90,7 +90,8 @@ public interface ImageEntry extends EObject {
 	 * @return the value of the '<em>Image Data</em>' attribute.
 	 * @see #setImageData(byte[])
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getImageEntry_ImageData()
-	 * @model
+	 * @model extendedMetaData="name='ImageEntry' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Lob\n@Column(length=1048576)'"
 	 * @generated
 	 */
 	byte[] getImageData();
