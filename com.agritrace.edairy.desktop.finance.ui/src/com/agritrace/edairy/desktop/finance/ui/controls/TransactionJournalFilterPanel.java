@@ -34,7 +34,8 @@ public class TransactionJournalFilterPanel extends Composite {
 
 	public TransactionJournalFilterPanel(Composite parent, int style) {
 		super(parent, style);
-		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		//setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		setBackground(getDisplay().getSystemColor(SWT.COLOR_CYAN));
 
 		// filter is a stack of composite rows.. each row uses formlayout..
 		setLayout(new GridLayout(1, false));
@@ -140,6 +141,7 @@ public class TransactionJournalFilterPanel extends Composite {
 			fieldFormData.top = new FormAttachment(label, 0, SWT.CENTER);
 			refNumberLookup.setLayoutData(fieldFormData);
 		}
+		/**
 
 		// alternate fourth row: source choices
 		//
@@ -148,7 +150,6 @@ public class TransactionJournalFilterPanel extends Composite {
 			SWTBindingPropertyLocator.getInstance().setBindingProperty(rowComposite, FinanceBindingConstants.FILTER_SOURCE_ROW);
 			
 			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(rowComposite);
-			rowComposite.pack();
 		}
 		
 		// alternate fourth row: type choices
@@ -181,6 +182,8 @@ public class TransactionJournalFilterPanel extends Composite {
 			fieldLayoutData.top = new FormAttachment(0, 0);
 			typeCodeChoice.setLayoutData(fieldLayoutData);
 		}
+		**/
+		pack();
 
 	}
 }

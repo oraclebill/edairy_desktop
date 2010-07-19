@@ -43,7 +43,7 @@ public class TransactionSourceComposite extends Composite {
 	}
 
 	public TransactionSourceComposite(Composite parent, boolean multipleChoice, String labelString) {
-		super(parent, SWT.NONE);
+		super(parent, SWT.NULL);
 		isMultipleChoice = multipleChoice;
 
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));

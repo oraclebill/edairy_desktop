@@ -30,7 +30,7 @@ public class TransactionJournalView extends AbstractDirectoryView {
 	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
 		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).applyTo(buttonsPanel);
-		buttonsPanel.setLayout(new GridLayout(2, false));
+		buttonsPanel.setLayout(new GridLayout(3, false));
 
 		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, "View", viewButtonId);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);
@@ -47,14 +47,12 @@ public class TransactionJournalView extends AbstractDirectoryView {
 	protected void createFilterConditions(Composite parent) {
 		Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		comp.setLayoutDeferred(true);
 		comp.setLayout(new GridLayout(2, false));
 		
-		new TransactionJournalFilterPanel(comp);
-		comp.setLayoutDeferred(false);
+		GridDataFactory.fillDefaults().applyTo(new TransactionJournalFilterPanel(comp));
 
 		final Composite composite_1 = new Composite(comp, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		GridDataFactory.fillDefaults().applyTo(composite_1);
 		composite_1.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 

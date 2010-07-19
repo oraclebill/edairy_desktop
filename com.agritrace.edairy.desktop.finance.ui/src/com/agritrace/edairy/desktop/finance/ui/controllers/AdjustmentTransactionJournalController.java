@@ -70,6 +70,8 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 	private final IMemberRepository memberRepo = new MemberRepository();
 	private IMultipleChoiceRidget typeSetRidget;
 
+	private ICompositeRidget sourceRow;
+
 	public AdjustmentTransactionJournalController() {
 		this(null);
 	}
@@ -107,12 +109,8 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 	public void configureFilterRidgets() {
 		super.configureFilterRidgets();
 		
-		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
-		
-		ICompositeRidget sourceRow = 
-			getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_SOURCE_ROW);
-		sourceRow.setEnabled(false);
-		sourceRow.setVisible(false);
+		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);		
+		sourceRow = getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_SOURCE_ROW);
 	}
 
 
@@ -121,8 +119,8 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		super.afterBind();
 
 		typeSetRidget.bindToModel(Observables.staticObservableList(TransactionType.VALUES, TransactionType.class),
-				BeansObservables.observeList(filterBean, "typeOptions")); 
-
+				BeansObservables.observeList(filterBean, "typeOptions"));
+	
 	}
 
 	
