@@ -239,7 +239,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void configureUpperPanel() {
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
-		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
+		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_memberNbr);
 		// generatedMemberId = System.currentTimeMillis()+"";
 		// memberIdRidget.setText(generatedMemberId);
 		givenNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);

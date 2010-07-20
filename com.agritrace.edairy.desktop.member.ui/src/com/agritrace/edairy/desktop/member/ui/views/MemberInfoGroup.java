@@ -80,7 +80,7 @@ public class MemberInfoGroup {
 		// member Id
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MEMBERID));
 		// member Id Text (Label)
-		txtId = UIControlsFactory.createText(leftColumn, SWT.BORDER, "memberNumber");
+		txtId = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_memberNbr);
 		fieldFactory.applyTo(txtId);
 
 		// row 2: title label + id

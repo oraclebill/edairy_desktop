@@ -29,7 +29,8 @@ public abstract class BaseDialogView extends AbstractDialogView {
 
 	public BaseDialogView(Shell parentShell) {
 		super(parentShell);
-		setShellStyle(getShellStyle() | SWT.SHEET);
+		// on windows (xp) this results in an ugly wrapper around the dialog
+		//		setShellStyle(getShellStyle() | SWT.SHEET);  
 	}
 
 	/**

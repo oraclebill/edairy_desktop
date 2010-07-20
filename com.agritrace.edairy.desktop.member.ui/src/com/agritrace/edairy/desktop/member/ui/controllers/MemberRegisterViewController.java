@@ -157,7 +157,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 	}
 
 	private void configureUpperPanel() {
-		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_id);
+		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_memberNbr);
 		generatedMemberId = System.currentTimeMillis() + "";
 		memberIdRidget.setText(generatedMemberId);
 		nameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);

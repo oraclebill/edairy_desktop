@@ -34,6 +34,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	private ITextRidget operatorCode;
 	private ITextRidget securityRole;
 
+	private ProfilePhotoRidget photoRidget;
+
 	@Override
 	public void configureUserRidgets() {
 
@@ -41,8 +43,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		editEmployee = getWorkingCopy();
 		assert (null != editEmployee);
 
-		// bind profile photo
-		ProfilePhotoRidget photoRidget = getRidget(ProfilePhotoRidget.class, "profile-photo-widget");
+		photoRidget = getRidget(ProfilePhotoRidget.class, "profile-photo-widget");
 		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO) );
 		
 		

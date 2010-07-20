@@ -177,7 +177,7 @@ public class ViewWidgetId implements DialogConstants {
 	public static final String memberInfo_firstName = "firstName";
 	public static final String memberInfo_formattedName = "member.info.name.formattedText";
 	public static final String memberInfo_honorific = "member.info.name.honorific";
-	public static final String memberInfo_id = "memberId";
+	public static final String memberInfo_memberNbr = "memberId";
 	public static final String memberInfo_lastName = "lastName";
 	public static final String memberInfo_middleName = "member.info.name.middle";
 	public static final String memberInfo_phone = "phone";
