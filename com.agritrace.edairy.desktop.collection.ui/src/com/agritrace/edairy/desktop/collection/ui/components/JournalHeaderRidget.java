@@ -143,8 +143,8 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		boolean enabled = isEnabled();
 		driverTotalText.setOutputOnly(!enabled);
 		journalNumber.setOutputOnly(!enabled);
-		driverTotalText.setFocusable(!enabled);
-		journalNumber.setFocusable(!enabled);
+//		driverTotalText.setFocusable(!enabled);
+//		journalNumber.setFocusable(!enabled);
 	}
 
 	@Override

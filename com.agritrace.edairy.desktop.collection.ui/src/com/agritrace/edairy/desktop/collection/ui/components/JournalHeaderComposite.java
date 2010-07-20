@@ -63,7 +63,6 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	}
 
 	private List<Object> uiControls = new LinkedList<Object>();
-	private Button calendarButton;
 	private Text dateText;
 	private TraverseListener traverseListener = new JournalHeaderTraverseListener();
 
@@ -95,16 +94,13 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 		addUIControl(dateText, ViewWidgetId.calendarDate);
 		dateText.addTraverseListener(traverseListener);
-
-		calendarButton = new Button(dateComposite, SWT.PUSH);
 // 		calendarButton = UIControlsFactory.createButton(group);
 
 // 		Image calendarButtonImage = new Image(parent.getDisplay(), calendar.getImageData().scaledTo(16, 16));
-		if (!Beans.isDesignTime()) {
-			final Image calendar = Activator.getImage(ImageRegistry.calendar);
-			calendarButton.setImage(calendar);
-		}
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
+//		if (!Beans.isDesignTime()) {
+//			final Image calendar = Activator.getImage(ImageRegistry.calendar);
+//			calendarButton.setImage(calendar);
+//		}
 		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
 
 //		calendarButton.addSelectionListener(new SelectionAdapter() {
