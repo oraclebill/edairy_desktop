@@ -22,6 +22,7 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getOperatorCode <em>Operator Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getJobFunction <em>Job Function</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNationalId <em>National Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNssfNumber <em>Nssf Number</em>}</li>
@@ -138,6 +139,32 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setJobFunction(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Department</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Department</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Department</em>' attribute.
+	 * @see #setDepartment(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Department()
+	 * @model
+	 * @generated
+	 */
+	String getDepartment();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getDepartment <em>Department</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Department</em>' attribute.
+	 * @see #getDepartment()
+	 * @generated
+	 */
+	void setDepartment(String value);
 
 	/**
 	 * Returns the value of the '<em><b>National Id</b></em>' attribute.

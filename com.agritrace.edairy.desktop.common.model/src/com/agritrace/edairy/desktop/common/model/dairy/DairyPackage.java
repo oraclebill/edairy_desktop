@@ -780,13 +780,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__JOB_FUNCTION = ModelPackage.PERSON_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Department</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__DEPARTMENT = ModelPackage.PERSON_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>National Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 4;
+	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
@@ -795,7 +804,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 5;
+	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
@@ -804,7 +813,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 6;
+	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Security Role</b></em>' attribute.
@@ -813,7 +822,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 7;
+	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -822,7 +831,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 8;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -2843,6 +2852,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_JobFunction();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getDepartment <em>Department</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Department</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getDepartment()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_Department();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNationalId <em>National Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4592,6 +4612,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__JOB_FUNCTION = eINSTANCE.getEmployee_JobFunction();
+
+		/**
+		 * The meta object literal for the '<em><b>Department</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__DEPARTMENT = eINSTANCE.getEmployee_Department();
 
 		/**
 		 * The meta object literal for the '<em><b>National Id</b></em>' attribute feature.

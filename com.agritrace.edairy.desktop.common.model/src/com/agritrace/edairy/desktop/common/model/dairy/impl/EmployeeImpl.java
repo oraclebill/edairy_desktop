@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getOperatorCode <em>Operator Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getJobFunction <em>Job Function</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNationalId <em>National Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNssfNumber <em>Nssf Number</em>}</li>
@@ -119,6 +120,26 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected String jobFunction = JOB_FUNCTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDepartment() <em>Department</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDepartment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DEPARTMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDepartment() <em>Department</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDepartment()
+	 * @generated
+	 * @ordered
+	 */
+	protected String department = DEPARTMENT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
@@ -308,6 +329,27 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDepartment() {
+		return department;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDepartment(String newDepartment) {
+		String oldDepartment = department;
+		department = newDepartment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__DEPARTMENT, oldDepartment, department));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getNationalId() {
 		return nationalId;
 	}
@@ -403,6 +445,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return getStartDate();
 			case DairyPackage.EMPLOYEE__JOB_FUNCTION:
 				return getJobFunction();
+			case DairyPackage.EMPLOYEE__DEPARTMENT:
+				return getDepartment();
 			case DairyPackage.EMPLOYEE__NATIONAL_ID:
 				return getNationalId();
 			case DairyPackage.EMPLOYEE__NHIF_NUMBER:
@@ -434,6 +478,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return;
 			case DairyPackage.EMPLOYEE__JOB_FUNCTION:
 				setJobFunction((String)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__DEPARTMENT:
+				setDepartment((String)newValue);
 				return;
 			case DairyPackage.EMPLOYEE__NATIONAL_ID:
 				setNationalId((String)newValue);
@@ -471,6 +518,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__JOB_FUNCTION:
 				setJobFunction(JOB_FUNCTION_EDEFAULT);
 				return;
+			case DairyPackage.EMPLOYEE__DEPARTMENT:
+				setDepartment(DEPARTMENT_EDEFAULT);
+				return;
 			case DairyPackage.EMPLOYEE__NATIONAL_ID:
 				setNationalId(NATIONAL_ID_EDEFAULT);
 				return;
@@ -503,6 +553,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return START_DATE_EDEFAULT == null ? startDate != null : !START_DATE_EDEFAULT.equals(startDate);
 			case DairyPackage.EMPLOYEE__JOB_FUNCTION:
 				return JOB_FUNCTION_EDEFAULT == null ? jobFunction != null : !JOB_FUNCTION_EDEFAULT.equals(jobFunction);
+			case DairyPackage.EMPLOYEE__DEPARTMENT:
+				return DEPARTMENT_EDEFAULT == null ? department != null : !DEPARTMENT_EDEFAULT.equals(department);
 			case DairyPackage.EMPLOYEE__NATIONAL_ID:
 				return NATIONAL_ID_EDEFAULT == null ? nationalId != null : !NATIONAL_ID_EDEFAULT.equals(nationalId);
 			case DairyPackage.EMPLOYEE__NHIF_NUMBER:
@@ -533,6 +585,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		result.append(startDate);
 		result.append(", jobFunction: ");
 		result.append(jobFunction);
+		result.append(", department: ");
+		result.append(department);
 		result.append(", nationalId: ");
 		result.append(nationalId);
 		result.append(", nhifNumber: ");

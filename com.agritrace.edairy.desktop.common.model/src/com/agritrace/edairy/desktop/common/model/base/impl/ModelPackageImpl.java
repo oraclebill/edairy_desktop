@@ -1196,7 +1196,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (getImageEntry_ImageData(), 
 		   source, 
 		   new String[] {
-			 "name", "ImageEntry",
+			 "name", "imageData",
 			 "kind", "elementOnly"
 		   });	
 	}
