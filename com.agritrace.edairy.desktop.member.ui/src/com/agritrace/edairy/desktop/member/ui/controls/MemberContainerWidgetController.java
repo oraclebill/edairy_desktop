@@ -86,9 +86,9 @@ public class MemberContainerWidgetController implements WidgetController, ISelec
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
 	public static final String containerRemoveTitle = "Remove Containers";
 	private IActionRidget containerAddButton;
-	private final String[] containerColumnHeaders = { "ID", "Farm", "Container Type", "Units Of Measure", "Capacity" };
+	private final String[] containerColumnHeaders = { "ID", "Farm",  "Units Of Measure", "Capacity" };
 	private final List<Container> containerInput = new ArrayList<Container>();
-	private final String[] containerPropertyNames = { "containerId", "owner", "type", "measureType", "capacity" };
+	private final String[] containerPropertyNames = { "containerId", "owner", "measureType", "capacity" };
 	private final List<Container> containers = new ArrayList<Container>();
 	private ITableRidget containerTable;
 

@@ -54,13 +54,9 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		villageTxt = container.getRidget(ITextRidget.class, ViewWidgetId.VILLAGE_TXT);
 		divisionTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIVISION_TXT);
 		districtTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DISTRICT_TXT);
-		// provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
+//		provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 		postalCodeTxt = container.getRidget(ITextRidget.class, ViewWidgetId.POSTAL_CODE_TXT);
 		provinceComo = container.getRidget(IComboRidget.class, ViewWidgetId.PROVINCE_TXT);
-		provinceComo.bindToModel(Observables.staticObservableList(Arrays.asList(ViewWidgetId.PROVINCES_LIST)),
-				String.class, null, new WritableValue());
-		provinceComo.updateFromModel();
-		provinceComo.addSelectionListener(this);
 
 		addressTxt.setMandatory(true);
 		addressTxt.setDirectWriting(true);
@@ -147,7 +143,11 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		divisionTxt.updateFromModel();
 		districtTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__DISTRICT));
 		districtTxt.updateFromModel();
-//		provinceComo.setSelection(location.getProvince());
+		provinceComo.bindToModel(Observables.staticObservableList(Arrays.asList(ViewWidgetId.PROVINCES_LIST)),
+				String.class, null, EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__PROVINCE));
+		provinceComo.updateFromModel();
+//		provinceComo.addSelectionListener(this);
+		
 		postalCodeTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location,
 				ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 		postalCodeTxt.updateFromModel();

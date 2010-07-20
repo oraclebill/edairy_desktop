@@ -91,7 +91,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// live stock tab
 	private MemberLiveStockWidgetController liveStockController;
 	private Map<IRidget, FeaturePath> memberBindings;
-	private ILabelRidget memberIdRidget;
+	private ITextRidget memberIdRidget;
 	private MemberProfileWidgetController memberProfileController;
 
 	private ITextRidget middleNameRidget;
@@ -239,7 +239,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void configureUpperPanel() {
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
-		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_memberNbr);
+		memberIdRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_memberNbr);
 		// generatedMemberId = System.currentTimeMillis()+"";
 		// memberIdRidget.setText(generatedMemberId);
 		givenNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
