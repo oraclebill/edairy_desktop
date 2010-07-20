@@ -15,6 +15,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
@@ -29,6 +30,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 	ITextRidget customerId;
 	IComboRidget customerStatus;
 	IComboRidget customerType;
+	ProfilePhotoRidget profilePhoto;
 
 	ITextRidget legalName;
 
@@ -93,6 +95,12 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 //		customerDescription.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 		customerDescription.updateFromModel();
 
+		
+		profilePhoto = getRidget(ProfilePhotoRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
+		profilePhoto.bindToModel(EMFObservables.observeValue(editCustomer,
+				ModelPackage.Literals.COMPANY__PROFILE_PHOTO));
+//		profilePhoto.updateFromModel();
+		
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		addressGroupController.setInputModel(editCustomer.getLocation().getPostalLocation());
@@ -119,5 +127,8 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		return (Customer) getContext("editObject");
 	}
 
-
+	@Override
+	public void afterBind() {
+		profilePhoto.updateFromModel();
+	}
 }

@@ -184,6 +184,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IValu
 	 * @return
 	 */
 	private ImageData readImageData(File imageFile) {
+		log(LogService.LOG_DEBUG, "readImageData: reading file " + imageFile);
 		ImageData imageData = null;
 		if (imageFile != null) {
 			if (imageFile.canRead() && imageFile.isFile()) {
@@ -238,6 +239,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IValu
 	}
 
 	private void updateDisplay() {
+		log(LogService.LOG_DEBUG, "updateDisplay: profileImageLabel: " + profileImageLabel);
 
 		if (profileImageLabel == null) {
 			return;

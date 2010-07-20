@@ -44,7 +44,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 	private void createContactGroup(Composite parent) {
 
 		final Composite photoPanel = new ProfilePhotoComposite(comonComp, SWT.NONE);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoPanel, "profile-photo");
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoPanel, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
 //		photoPanel.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 //		photoPanel.setLayout(new GridLayout(2, false));
 //		photoPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
