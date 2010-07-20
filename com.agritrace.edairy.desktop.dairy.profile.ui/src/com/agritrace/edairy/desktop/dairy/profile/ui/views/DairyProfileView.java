@@ -28,17 +28,14 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
-import com.swtdesigner.SWTResourceManager;
 
 public class DairyProfileView extends SubModuleView {
 	public static final String ADDRESS_LABEL = "Address:";
@@ -56,10 +53,10 @@ public class DairyProfileView extends SubModuleView {
 	public static final String SUBLOCATION_LABEL = "Sublocation";
 	public static final String VILLAGE_LABEL = "Village:";
 	private static final String DAIRY_IMAGE_GROUP_HEADER = "Dairy Image";
-	private static final String DAIRY_IMAGE_LINK_TEXT = "<a>click here to update</a>";
+//	private static final String DAIRY_IMAGE_LINK_TEXT = "<a>click here to update</a>";
 	private Button cancelButton;
 	private ProfilePhotoComposite lblDairyImage;
-	private Link linkDairyImage;
+//	private Link linkDairyImage;
 
 	private Button saveButton;
 

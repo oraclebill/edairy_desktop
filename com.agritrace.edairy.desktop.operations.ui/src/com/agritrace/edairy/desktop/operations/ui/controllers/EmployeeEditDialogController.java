@@ -43,9 +43,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 		// bind profile photo
 		ProfilePhotoRidget photoRidget = getRidget(ProfilePhotoRidget.class, "profile-photo-widget");
-		if (photoRidget != null) {
-			photoRidget.getId();
-		}
+		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO) );
 		
 		
 		// customer id
