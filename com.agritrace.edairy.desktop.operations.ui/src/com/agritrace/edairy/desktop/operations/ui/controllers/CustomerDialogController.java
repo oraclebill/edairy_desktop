@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.util.Arrays;
+
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
@@ -21,7 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 
 public class CustomerDialogController extends RecordDialogController<Customer> {
-
+	public static String[] CUSTOMER_TYPES = { "Milk Processor", "Milk Bar", "Other" };
 	private ITextRidget companyPhone;
 
 	private Customer editCustomer = null;
@@ -79,11 +81,10 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 
 		// customer type
 		customerType = getRidget(IComboRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMERTYPE);
-		customerType.bindToModel(Observables.staticObservableList(CustomerType.getCustomerTypeList()),
-				CustomerType.class, null,
+		customerType.bindToModel(Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)),
+				String.class, null,
 				EMFObservables.observeValue(editCustomer, DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE));
-		customerType.updateFromModel();
-		customerType.setSelection(0);
+//		customerType.setSelection(0);
 
 		// description
 		customerDescription = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_DESCRIPTION);
@@ -129,6 +130,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 
 	@Override
 	public void afterBind() {
+		customerType.updateFromModel();
 		profilePhoto.updateFromModel();
 	}
 }
