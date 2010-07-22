@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -274,77 +276,13 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 
 	}
 
-	private List<RegisteredAnimal> filterDate(List<RegisteredAnimal> inputRecrods, String startDate, String endDate) {
-		final List<RegisteredAnimal> objs = new ArrayList<RegisteredAnimal>();
+	private List<RegisteredAnimal> filterDate(List<RegisteredAnimal> inputRecrods, Date startDate, Date endDate) {
 		if ((inputRecrods == null) || inputRecrods.isEmpty()) {
-			return objs;
+			return Collections.EMPTY_LIST;
 		}
-		try {
-			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
-				@Override
-				public Long adapt(Object value) {
-					return longValue(value);
-				}
-
-				@Override
-				public long longValue(Object object) {
-					return ((Date) object).getTime();
-				}
-			};
-
-			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
-
-			SELECT select = null;
-			if (startDate != null) {
-				// StartDate
-				if (!"".equals(startDate)) {
-					final Condition startDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
-							startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
-
-					final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
-							TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION, startDateCondition);
-					condtions.add(startDateAttributeCondition);
-				}
-
-			}
-			// End Date
-			if (endDate != null) {
-				if (!"".equals(endDate)) {
-					final Condition endDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
-							endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
-
-					final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
-							TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION, endDateCondition);
-					condtions.add(endDateAttributeCondition);
-				}
-			}
-
-			// AND all conditions
-			if (condtions.size() > 0) {
-				final EObjectCondition first = condtions.get(0);
-				EObjectCondition ret = first;
-				for (int i = 1; i < condtions.size(); i++) {
-					ret = ret.AND(condtions.get(i));
-				}
-				for (final RegisteredAnimal record : inputRecrods) {
-					select = new SELECT(new FROM(record), new WHERE(ret));
-					final IQueryResult result = select.execute();
-					if (!result.isEmpty()) {
-						objs.add(record);
-					}
-
-				}
-
-			} else {
-				objs.addAll(inputRecrods);
-			}
-
-		} catch (final ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Activator.getDefault().logError(e, e.getMessage());
-		}
-		return objs;
+		DateFilterUtil<RegisteredAnimal> dateFilter = new DateFilterUtil<RegisteredAnimal>(
+				RegisteredAnimal.class, TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
+		return dateFilter.filterDate(inputRecrods, startDate, endDate);
 	}
 
 	private List<RegisteredAnimal> getFilteredResult() {

@@ -26,7 +26,6 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Person;
@@ -40,6 +39,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -291,8 +291,12 @@ public class LiveStockListController extends BaseListViewController {
 				}
 			}
 		}
-		selectedAnimals = filterDate(animals, filterController.getDateSearchController().getStartDate(),
-				filterController.getDateSearchController().getEndDate());
+//		selectedAnimals = filterDate(animals, filterController.getDateSearchController().getStartDate(),
+//				filterController.getDateSearchController().getEndDate());
+		DateFilterUtil<RegisteredAnimal> filterUtil = new DateFilterUtil<RegisteredAnimal>(RegisteredAnimal.class,
+				TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
+		selectedAnimals = filterUtil.filterDate(animals, filterController.getDateSearchController().getStartDate(), filterController.getDateSearchController().getEndDate());
+
 		for (final RegisteredAnimal animal : selectedAnimals) {
 			results.add(new LiveStockListViewTableNode(selectedMember, animal));
 		}

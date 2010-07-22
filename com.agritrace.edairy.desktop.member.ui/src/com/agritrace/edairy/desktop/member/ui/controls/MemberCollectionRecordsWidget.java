@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -12,6 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
+import com.agritrace.edairy.desktop.common.ui.controls.DateRangeControl;
 import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
@@ -36,11 +38,13 @@ public class MemberCollectionRecordsWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(2, false));
 
-		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
-				ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE,
-				ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
+//		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
+//				ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE,
+//				ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
+		final DateRangeControl dateRangeWidget = new DateRangeControl(filterPanel, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
 				.applyTo(dateRangeWidget.getComposite());
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRangeWidget, ViewWidgetId.COLLECTION_FILTER_DATE_RANGE);
 
 		final Composite filterButtonPanel = UIControlsFactory.createComposite(filterPanel);
 		filterButtonPanel.setLayout(new GridLayout(3, false));

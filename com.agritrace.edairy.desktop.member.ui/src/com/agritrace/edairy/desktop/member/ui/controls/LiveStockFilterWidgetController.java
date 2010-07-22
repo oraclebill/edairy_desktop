@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
@@ -18,7 +19,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class LiveStockFilterWidgetController implements WidgetController, DateRangeFilter {
+public class LiveStockFilterWidgetController implements WidgetController {
 
 	private IActionRidget clear;
 
@@ -44,7 +45,7 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 		this.container = controller;
 		dateSearchController = new DateRangeSearchController(controller, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE,
 				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE, ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON,
-				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, this);
+				ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON, null);
 		configure();
 	}
 
@@ -58,19 +59,12 @@ public class LiveStockFilterWidgetController implements WidgetController, DateRa
 		clear = container.getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
 	}
 
-	@Override
-	public List<?> filter(String startDate, String endDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public IActionRidget getClear() {
 		return clear;
 	}
 
 	@Override
 	public IRidgetContainer getContainer() {
-		// TODO Auto-generated method stub
 		return container;
 	}
 

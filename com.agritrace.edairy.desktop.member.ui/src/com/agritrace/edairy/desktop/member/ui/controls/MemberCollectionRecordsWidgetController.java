@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,9 +10,6 @@ import org.eclipse.emf.query.conditions.Condition;
 import org.eclipse.emf.query.conditions.booleans.BooleanCondition;
 import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
 import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
-import org.eclipse.emf.query.conditions.numbers.NumberAdapter;
-import org.eclipse.emf.query.conditions.numbers.NumberCondition;
-import org.eclipse.emf.query.conditions.numbers.NumberCondition.RelationalOperator;
 import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
@@ -31,14 +27,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
-import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
-import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
-import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
-import com.agritrace.edairy.desktop.member.ui.Activator;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
+import com.agritrace.edairy.desktop.common.ui.controls.DateRangeRidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class MemberCollectionRecordsWidgetController implements WidgetController, DateRangeFilter, IActionListener {
+public class MemberCollectionRecordsWidgetController implements WidgetController<Membership>, IActionListener {
 
 	public final static class DairyContainerIdColumnFormatter extends ColumnFormatter {
 		@Override
@@ -86,7 +80,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	private ITableRidget collectionTable;
 
 	private IRidgetContainer container;
-	private DateRangeSearchController dateSearchController;
+	private DateRangeRidget dateRangeRidget;
 	private Membership membership;
 	private IToggleButtonRidget nprMissing;
 	private final List<CollectionJournalLine> records = new ArrayList<CollectionJournalLine>();
@@ -103,8 +97,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (null == collectionTable) {
 			return;
 		}
-		if (dateSearchController != null) {
-			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
+		if (dateRangeRidget != null) {
+			filter(dateRangeRidget.getStartDate(), dateRangeRidget.getEndDate());
 		}
 	}
 
@@ -126,17 +120,19 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		nprMissing = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
 		rejected = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_REJECTED);
 		suspended = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_FLAG);
-		dateSearchController = new DateRangeSearchController(container, ViewWidgetId.COLLECTION_FILTER_STARTDATE,
-				ViewWidgetId.COLLECTION_FILTER_ENDDATE, ViewWidgetId.COLLECTION_FILTER_STARTBUTTON,
-				ViewWidgetId.COLLECTION_FILTER_ENDBUTTON, this);
+		// dateRangeRidget = new DateRangeSearchController(container,
+		// ViewWidgetId.COLLECTION_FILTER_STARTDATE,
+		// ViewWidgetId.COLLECTION_FILTER_ENDDATE,
+		// ViewWidgetId.COLLECTION_FILTER_STARTBUTTON,
+		// ViewWidgetId.COLLECTION_FILTER_ENDBUTTON, this);
+		dateRangeRidget = container.getRidget(DateRangeRidget.class, ViewWidgetId.COLLECTION_FILTER_DATE_RANGE);
 		nprMissing.addListener(this);
 		rejected.addListener(this);
 		suspended.addListener(this);
 
 	}
 
-	@Override
-	public List<CollectionJournalLine> filter(String startDate, String endDate) {
+	public List<CollectionJournalLine> filter(Date startDate, Date endDate) {
 		List<CollectionJournalLine> objs = filterNPR();
 		objs = filterDate(objs, startDate, endDate);
 		collectionTable.bindToModel(new WritableList(objs, CollectionJournalLine.class), CollectionJournalLine.class,
@@ -151,8 +147,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
-	public Object getInputModel() {
-		// TODO Auto-generated method stub
+	public Membership getInputModel() {
 		return membership;
 	}
 
@@ -164,8 +159,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	}
 
 	@Override
-	public void setInputModel(Object model) {
-		this.membership = (Membership) model;
+	public void setInputModel(Membership model) {
+		this.membership = model;
 		if (collectionTable != null) {
 			updateBinding();
 		}
@@ -182,84 +177,17 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		collectionTable.setColumnFormatter(1, new EntryDateColumnFormatter());
 		collectionTable.setColumnFormatter(2, new DairyContainerIdColumnFormatter());
 		collectionTable.updateFromModel();
-		if (dateSearchController != null) {
-			filter(dateSearchController.getStartDate(), dateSearchController.getEndDate());
+		if (dateRangeRidget != null) {
+			filter(dateRangeRidget.getStartDate(), dateRangeRidget.getEndDate());
 		}
-
 	}
 
-	private List<CollectionJournalLine> filterDate(List<CollectionJournalLine> inputRecrods, String startDate,
-			String endDate) {
-		final List<CollectionJournalLine> objs = new ArrayList<CollectionJournalLine>();
-		if ((inputRecrods == null) || inputRecrods.isEmpty()) {
-			return objs;
-		}
-		try {
-			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
-				@Override
-				public Long adapt(Object value) {
-					return longValue(value);
-				}
-
-				@Override
-				public long longValue(Object object) {
-					return ((Date) object).getTime();
-				}
-			};
-
-			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
-
-			SELECT select = null;
-			if (startDate != null) {
-				// StartDate
-				if (!"".equals(startDate)) {
-					final Condition startDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
-							startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
-
-					final EObjectAttributeValueCondition startDateAttributeCondition = new EObjectAttributeValueCondition(
-							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE, startDateCondition);
-					condtions.add(startDateAttributeCondition);
-				}
-
-			}
-			// End Date
-			if (endDate != null) {
-				if (!"".equals(endDate)) {
-					final Condition endDateCondition = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
-							endDate).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
-
-					final EObjectAttributeValueCondition endDateAttributeCondition = new EObjectAttributeValueCondition(
-							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE, endDateCondition);
-					condtions.add(endDateAttributeCondition);
-				}
-			}
-
-			// AND all conditions
-			if (condtions.size() > 0) {
-				final EObjectCondition first = condtions.get(0);
-				EObjectCondition ret = first;
-				for (int i = 1; i < condtions.size(); i++) {
-					ret = ret.AND(condtions.get(i));
-				}
-				for (final CollectionJournalLine record : inputRecrods) {
-					select = new SELECT(new FROM(record.getCollectionJournal()), new WHERE(ret));
-					final IQueryResult result = select.execute();
-					if (!result.isEmpty()) {
-						objs.add(record);
-					}
-
-				}
-
-			} else {
-				objs.addAll(inputRecrods);
-			}
-
-		} catch (final ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Activator.getDefault().logError(e, e.getMessage());
-		}
-		return objs;
+	private List<CollectionJournalLine> filterDate(List<CollectionJournalLine> inputRecords, Date startDate,
+			Date endDate) {
+		DateFilterUtil<CollectionJournalLine> filterUtil = new DateFilterUtil<CollectionJournalLine>(
+				CollectionJournalLine.class, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
+		return filterUtil.filterDate(inputRecords, startDate, endDate);		
 	}
 
 	private List<CollectionJournalLine> filterNPR() {
