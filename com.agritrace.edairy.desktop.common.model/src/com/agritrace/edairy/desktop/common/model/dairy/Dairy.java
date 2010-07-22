@@ -25,8 +25,10 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getRegistrationNumber <em>Registration Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getNhifNumber <em>Nhif Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getNssfNumber <em>Nssf Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getFederalPin <em>Federal Pin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getLicenseEffectiveDate <em>License Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getLicenseExpirationDate <em>License Expiration Date</em>}</li>
@@ -42,8 +44,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getPriceHistory <em>Price History</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  *
@@ -219,7 +220,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Routes</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Routes()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Route> getRoutes();
@@ -235,7 +236,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vehicles</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Vehicles()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Vehicle> getVehicles();
@@ -251,7 +252,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Employees</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Employees()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Employee> getEmployees();
@@ -267,7 +268,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Memberships</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Memberships()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Membership> getMemberships();
@@ -299,7 +300,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Collection Journals</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_CollectionJournals()
-	 * @model containment="true" keys="referenceNumber"
+	 * @model containment="true" keys="referenceNumber" ordered="false"
 	 * @generated
 	 */
 	EList<CollectionJournalPage> getCollectionJournals();
@@ -315,7 +316,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Delivery Journals</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DeliveryJournals()
-	 * @model containment="true" keys="referenceNumber"
+	 * @model containment="true" keys="referenceNumber" ordered="false"
 	 * @generated
 	 */
 	EList<DeliveryJournal> getDeliveryJournals();
@@ -365,7 +366,7 @@ public interface Dairy extends Company {
 	 * @return the value of the '<em>Animal Health Requests</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_AnimalHealthRequests()
 	 * @see com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest#getDairy
-	 * @model opposite="dairy" containment="true" keys="requestId"
+	 * @model opposite="dairy" containment="true" keys="requestId" ordered="false"
 	 * @generated
 	 */
 	EList<AnimalHealthRequest> getAnimalHealthRequests();
@@ -381,7 +382,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dairy Bins</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DairyBins()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<DairyContainer> getDairyBins();
@@ -397,10 +398,37 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Price History</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_PriceHistory()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<MilkPrice> getPriceHistory();
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Version()
+	 * @model extendedMetaData="name='version' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Version'"
+	 * @generated
+	 */
+	long getVersion();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Manager Name</b></em>' attribute.
@@ -453,13 +481,5 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	void setEstablishedDate(Date value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true" many="false"
-	 * @generated
-	 */
-	EList<Farm> getMemberFarms();
 
 } // Dairy

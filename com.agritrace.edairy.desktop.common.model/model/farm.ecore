@@ -24,6 +24,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Farmer" eSuperTypes="common.ecore#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
+        eType="#//Farm" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>
@@ -120,9 +124,5 @@
     <eLiterals name="RFID" value="4"/>
     <eLiterals name="GSMGPRS" value="5"/>
     <eLiterals name="OTHER" value="6"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Farmer" eSuperTypes="common.ecore#//Person">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
-        eType="#//Farm" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

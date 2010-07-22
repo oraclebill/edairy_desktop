@@ -6,7 +6,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
-public interface IMemberRepository extends IRepository<Membership> {
+public interface IMemberRepository {
 
 	/**
 	 * Return a list of all farms owned by members of the 'local' dairy.
@@ -22,7 +22,11 @@ public interface IMemberRepository extends IRepository<Membership> {
 	 */
 	public List<Membership> getMemberships();
 
-	public IRepository<AccountTransaction> getTransactionRepository();
+	public void update(Membership selectedMember);
+
+	public void delete(Membership selectedMember);
+
+	public void saveNew(Membership selectedMember);
 
 	// /**
 	// * Return a list of all farms owned by members of the specified dairy.

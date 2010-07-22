@@ -50,7 +50,15 @@ public enum MembershipStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DORMANT(2, "Dormant", "Dormant");
+	DORMANT(2, "Dormant", "Dormant"), /**
+	 * The '<em><b>Deleted</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DELETED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DELETED(3, "Deleted", "DELETED");
 
 	/**
 	 * The '<em><b>Active</b></em>' literal value.
@@ -98,6 +106,21 @@ public enum MembershipStatus implements Enumerator {
 	public static final int DORMANT_VALUE = 2;
 
 	/**
+	 * The '<em><b>Deleted</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Deleted</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #DELETED
+	 * @model name="Deleted" literal="DELETED"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DELETED_VALUE = 3;
+
+	/**
 	 * An array of all the '<em><b>Membership Status</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,6 +131,7 @@ public enum MembershipStatus implements Enumerator {
 			ACTIVE,
 			INACTIVE,
 			DORMANT,
+			DELETED,
 		};
 
 	/**
@@ -161,6 +185,7 @@ public enum MembershipStatus implements Enumerator {
 			case ACTIVE_VALUE: return ACTIVE;
 			case INACTIVE_VALUE: return INACTIVE;
 			case DORMANT_VALUE: return DORMANT;
+			case DELETED_VALUE: return DELETED;
 		}
 		return null;
 	}

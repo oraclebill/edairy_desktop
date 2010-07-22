@@ -27,11 +27,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
 
@@ -70,7 +71,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	// ridgets specific to an AccountTransaction
 	private IActionRidget batchEditRidget;
 
-	private final IMemberRepository memberRepo = new MemberRepository();
+	private final IMemberRepository memberRepo = DairyRepository.getInstance();
 	private IMultipleChoiceRidget sourceListRidget;
 	private IComboRidget referenceNumRidget;
 
@@ -82,7 +83,12 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		super(node);
 		
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
-		setRepository(memberRepo.getTransactionRepository());
+		setRepository(new HibernateRepository<AccountTransaction>() {
+			@Override
+			protected Class<?> getClassType() {
+				return AccountTransaction.class;
+			}			
+		});
 
 		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);

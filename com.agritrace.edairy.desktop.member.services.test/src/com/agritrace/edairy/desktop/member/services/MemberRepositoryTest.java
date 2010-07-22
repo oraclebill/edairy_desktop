@@ -21,10 +21,10 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 
 public class MemberRepositoryTest {
@@ -47,7 +47,7 @@ public class MemberRepositoryTest {
 	@Before
 	public void setUp() {
 		pm = new HsqlDbPersistenceManager();		
-		repo = new MemberRepository( new TestHibernateRepository(pm) );
+		repo = new DairyRepository( new TestHibernateRepository(pm) );
 	}
 	
 	@After
@@ -132,7 +132,7 @@ public class MemberRepositoryTest {
 		assertNotNull(farmer.eContainingFeature());
 		assertSame(membership, farmer.eContainer());
 		
-		repo.save(membership);
+		repo.saveNew(membership);
 		
 		assertNotNull(farm.getFarmId());
 		

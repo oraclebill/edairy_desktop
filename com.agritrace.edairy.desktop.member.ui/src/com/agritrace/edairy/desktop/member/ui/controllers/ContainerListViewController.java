@@ -16,7 +16,6 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
@@ -26,7 +25,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -37,6 +35,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class ContainerListViewController extends BaseListViewController {
 
@@ -160,7 +159,7 @@ public class ContainerListViewController extends BaseListViewController {
 	private IActionRidget viewRidget;
 
 	public ContainerListViewController() {
-		memberRepository = new MemberRepository();
+		memberRepository = DairyRepository.getInstance();
 		farmRepository = new FarmRepository();
 	}
 
@@ -270,7 +269,7 @@ public class ContainerListViewController extends BaseListViewController {
 
 	private void updateFarmCombo() {
 		if (selectedMember != null) {
-			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
+//			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
 			farmCombofarms.clear();
 			if (farmCombo != null) {
 				final String currentSelection = farmCombo.getText();
@@ -363,7 +362,7 @@ public class ContainerListViewController extends BaseListViewController {
 	protected List<ContainerListViewTableNode> getFilteredResult() {
 		final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
 		if (selectedMember != null) {
-			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
+//			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
 			if (farmCombo != null) {
 				final String farmName = farmCombo.getText();
 				if (!farmName.isEmpty()) {

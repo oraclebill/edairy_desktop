@@ -25,7 +25,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -36,6 +35,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class FarmListViewController extends BaseListViewController {
 	/**
@@ -157,7 +157,7 @@ public class FarmListViewController extends BaseListViewController {
 	private IActionRidget viewRidget;
 
 	public FarmListViewController() {
-		memberRepository = new MemberRepository();
+		memberRepository = DairyRepository.getInstance();
 		farmRepository = new FarmRepository();
 		farmNames = new ArrayList<String>();
 	}
@@ -262,7 +262,7 @@ public class FarmListViewController extends BaseListViewController {
 
 	private void updateFarmCombo() {
 		if (selectedMember != null) {
-			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
+//			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
 			if (farmCombo != null) {
 				final String currentSelection = farmCombo.getText();
 				farmNames.clear();
@@ -348,7 +348,7 @@ public class FarmListViewController extends BaseListViewController {
 	protected List<FarmListViewTableNode> getFilteredResult() {
 		final List<FarmListViewTableNode> results = new ArrayList<FarmListViewTableNode>();
 		if (selectedMember != null) {
-			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
+//			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
 			if (farmCombo != null) {
 				final String farmName = farmCombo.getText();
 				if (!farmName.isEmpty()) {

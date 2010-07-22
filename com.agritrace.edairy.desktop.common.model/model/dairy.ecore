@@ -219,46 +219,51 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="common.ecore#//Company">
-    <eOperations name="getMemberFarms" lowerBound="1">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-        <eTypeArguments eClassifier="ecore:EClass farm.ecore#//Farm"/>
-      </eGenericType>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nhifNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="establishedDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="managerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nssfNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nhifNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="federalPin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseEffectiveDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseExpirationDate"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
-        eType="#//Route" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" upperBound="-1"
-        eType="#//Vehicle" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="employees" upperBound="-1"
-        eType="#//Employee" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" upperBound="-1"
-        eType="#//Membership" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routes" ordered="false"
+        upperBound="-1" eType="#//Route" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" ordered="false"
+        upperBound="-1" eType="#//Vehicle" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employees" ordered="false"
+        upperBound="-1" eType="#//Employee" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" ordered="false"
+        upperBound="-1" eType="#//Membership" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" ordered="false"
         upperBound="-1" eType="#//DairyLocation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" upperBound="-1"
-        eType="#//CollectionJournalPage" containment="true" eKeys="#//CollectionJournalPage/referenceNumber"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" upperBound="-1"
-        eType="#//DeliveryJournal" containment="true" eKeys="#//DeliveryJournal/referenceNumber"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" ordered="false"
+        upperBound="-1" eType="#//CollectionJournalPage" containment="true" eKeys="#//CollectionJournalPage/referenceNumber"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" ordered="false"
+        upperBound="-1" eType="#//DeliveryJournal" containment="true" eKeys="#//DeliveryJournal/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customers" ordered="false"
         upperBound="-1" eType="#//Customer" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" upperBound="-1"
-        eType="ecore:EClass requests.ecore#//AnimalHealthRequest" containment="true"
-        eOpposite="requests.ecore#//AnimalHealthRequest/dairy" eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" upperBound="-1"
-        eType="#//DairyContainer" containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="priceHistory" upperBound="-1"
-        eType="#//MilkPrice" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="managerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="establishedDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="animalHealthRequests" ordered="false"
+        upperBound="-1" eType="ecore:EClass requests.ecore#//AnimalHealthRequest"
+        containment="true" eOpposite="requests.ecore#//AnimalHealthRequest/dairy"
+        eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" ordered="false"
+        upperBound="-1" eType="#//DairyContainer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="priceHistory" ordered="false"
+        upperBound="-1" eType="#//MilkPrice" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="version"/>
+        <details key="kind" value="elementOnly"/>
+      </eAnnotations>
+      <eAnnotations source="teneo.jpa">
+        <details key="appinfo" value="@Version"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Membership">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" lowerBound="1"
@@ -268,7 +273,8 @@
         <details key="kind" value="elementOnly"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberNumber" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectiveDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
@@ -280,6 +286,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
         eType="#//account/Account" containment="true" eOpposite="#//account/Account/member"
         eKeys="#//account/Account/accountId"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
+    <eLiterals name="Active"/>
+    <eLiterals name="Inactive" value="1"/>
+    <eLiterals name="Dormant" value="2"/>
+    <eLiterals name="Deleted" value="3" literal="DELETED"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Asset">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -309,11 +321,6 @@
         <details key="appinfo" value="@Embedded"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
-    <eLiterals name="Active"/>
-    <eLiterals name="Inactive" value="1"/>
-    <eLiterals name="Dormant" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Session">
     <eLiterals name="EarlyMorning"/>

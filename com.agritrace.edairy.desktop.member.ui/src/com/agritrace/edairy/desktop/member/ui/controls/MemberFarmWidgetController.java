@@ -25,7 +25,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -34,6 +33,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberFarmWidgetController implements WidgetController, ISelectionListener {
 
@@ -57,7 +57,7 @@ public class MemberFarmWidgetController implements WidgetController, ISelectionL
 	private Membership selectedMember;
 
 	public MemberFarmWidgetController(IController controller) {
-		memberRepository = new MemberRepository();
+		memberRepository =DairyRepository.getInstance();
 		farmRepository = new FarmRepository();
 		this.container = controller;
 		configure();

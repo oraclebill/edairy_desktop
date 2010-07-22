@@ -79,6 +79,10 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 				return createFarmAdapter();
 			}
 			@Override
+			public Adapter caseFarmer(Farmer object) {
+				return createFarmerAdapter();
+			}
+			@Override
 			public Adapter caseContainer(Container object) {
 				return createContainerAdapter();
 			}
@@ -93,10 +97,6 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAnimalIdentifier(AnimalIdentifier object) {
 				return createAnimalIdentifierAdapter();
-			}
-			@Override
-			public Adapter caseFarmer(Farmer object) {
-				return createFarmerAdapter();
 			}
 			@Override
 			public Adapter caseContactable(Contactable object) {

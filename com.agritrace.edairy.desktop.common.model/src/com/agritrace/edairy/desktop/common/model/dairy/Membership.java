@@ -76,7 +76,7 @@ public interface Membership extends EObject {
 	 * @return the value of the '<em>Member Number</em>' attribute.
 	 * @see #setMemberNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MemberNumber()
-	 * @model
+	 * @model required="true" ordered="false"
 	 * @generated
 	 */
 	String getMemberNumber();

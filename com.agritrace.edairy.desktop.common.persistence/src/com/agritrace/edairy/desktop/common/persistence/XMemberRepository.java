@@ -13,7 +13,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
-public class MemberRepository implements IMemberRepository {
+public class XMemberRepository implements IMemberRepository, IRepository<Membership> {
 
 	private final IRepository<Membership> driver;
 	private final DairyRepository dairyRepo;
@@ -27,13 +27,12 @@ public class MemberRepository implements IMemberRepository {
 		}
 	};
 
-
 	/**
 	 * No arg constructor for normal case will initialize using static
 	 * PersistenceManager.
 	 */
-	public MemberRepository() {
-		this( new HibernateRepository<Membership>() {
+	public XMemberRepository() {
+		this(new HibernateRepository<Membership>() {
 			@Override
 			protected Class<Membership> getClassType() {
 				return Membership.class;
@@ -46,7 +45,7 @@ public class MemberRepository implements IMemberRepository {
 	 * 
 	 * @param driver
 	 */
-	public MemberRepository(IRepository<Membership> driver) {
+	public XMemberRepository(IRepository<Membership> driver) {
 		this.driver = driver;
 		dairyRepo = DairyRepository.getInstance();
 		localDairy = dairyRepo.getLocalDairy();
@@ -55,7 +54,6 @@ public class MemberRepository implements IMemberRepository {
 	@Override
 	public List<Membership> getMemberships() {
 		return localDairy.getMemberships();
-//		return driver.all();
 	}
 
 	@Override
@@ -85,21 +83,22 @@ public class MemberRepository implements IMemberRepository {
 	}
 
 	@Override
-	public IRepository<AccountTransaction> getTransactionRepository() {
-		return transactionRepository;
-	}
-
-	@Override
 	public void save(Object obj) {
 		driver.save(obj);
 	}
 
 	@Override
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
-		Account memberAccount = AccountFactory.eINSTANCE.createAccount();
-		memberAccount.setMember(newEntity);
-		memberAccount.setAccountNumber("V"+newEntity.getMemberNumber());
-		driver.saveNew(newEntity);
+		if (newEntity.getAccount() == null) {
+			Account memberAccount = AccountFactory.eINSTANCE.createAccount();
+			memberAccount.setMember(newEntity);
+			memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
+		}
+		if (!localDairy.getMemberships().contains(newEntity)) {
+			localDairy.getMemberships().add(newEntity);
+		}
+		driver.save(localDairy);
+//		driver.saveNew(newEntity);
 	}
 
 	@Override

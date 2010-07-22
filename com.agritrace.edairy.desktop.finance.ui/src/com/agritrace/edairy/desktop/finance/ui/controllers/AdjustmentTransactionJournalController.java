@@ -14,21 +14,21 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class AdjustmentTransactionJournalController extends TransactionJournalController {
 
@@ -67,7 +67,7 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 	// ridgets specific to an AdjustmentTransaction
 	private IActionRidget batchEditRidget;
 
-	private final IMemberRepository memberRepo = new MemberRepository();
+	private final IMemberRepository memberRepo = DairyRepository.getInstance();
 	private IMultipleChoiceRidget typeSetRidget;
 
 	private ICompositeRidget sourceRow;
@@ -80,7 +80,12 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		super(node);
 		
 		setEClass(AccountPackage.Literals.ADJUSTMENT_TRANSACTION);
-		setRepository(memberRepo.getTransactionRepository());
+		setRepository(new HibernateRepository<AccountTransaction>() {
+			@Override
+			protected Class<?> getClassType() {
+				return AccountTransaction.class;
+			}			
+		});
 
 		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);

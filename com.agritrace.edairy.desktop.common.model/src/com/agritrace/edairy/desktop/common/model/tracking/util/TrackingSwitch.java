@@ -96,6 +96,14 @@ public class TrackingSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackingPackage.FARMER: {
+				Farmer farmer = (Farmer)theEObject;
+				T result = caseFarmer(farmer);
+				if (result == null) result = casePerson(farmer);
+				if (result == null) result = caseContactable(farmer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TrackingPackage.CONTAINER: {
 				Container container = (Container)theEObject;
 				T result = caseContainer(container);
@@ -117,14 +125,6 @@ public class TrackingSwitch<T> {
 			case TrackingPackage.ANIMAL_IDENTIFIER: {
 				AnimalIdentifier animalIdentifier = (AnimalIdentifier)theEObject;
 				T result = caseAnimalIdentifier(animalIdentifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackingPackage.FARMER: {
-				Farmer farmer = (Farmer)theEObject;
-				T result = caseFarmer(farmer);
-				if (result == null) result = casePerson(farmer);
-				if (result == null) result = caseContactable(farmer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

@@ -11,7 +11,6 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.member.ui.Activator;
@@ -25,6 +24,7 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetCo
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberRegisterViewController extends SubModuleController implements MemberSearchSelectionListener {
 
@@ -78,7 +78,7 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	public MemberRegisterViewController() {
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
-		memberRepository = new MemberRepository();
+		memberRepository = DairyRepository.getInstance();
 	}
 
 	@Override

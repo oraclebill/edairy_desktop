@@ -134,7 +134,173 @@ public interface TrackingPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getContainer()
 	 * @generated
 	 */
-	int CONTAINER = 1;
+	int CONTAINER = 2;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl <em>Registered Animal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getRegisteredAnimal()
+	 * @generated
+	 */
+	int REGISTERED_ANIMAL = 3;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl <em>Reference Animal Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getReferenceAnimalType()
+	 * @generated
+	 */
+	int REFERENCE_ANIMAL_TYPE = 4;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl <em>Animal Identifier</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getAnimalIdentifier()
+	 * @generated
+	 */
+	int ANIMAL_IDENTIFIER = 5;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl <em>Farmer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getFarmer()
+	 * @generated
+	 */
+	int FARMER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
+
+	/**
+	 * The feature id for the '<em><b>Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__PHOTO = ModelPackage.PERSON__PHOTO;
+
+	/**
+	 * The feature id for the '<em><b>Honorific</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__HONORIFIC = ModelPackage.PERSON__HONORIFIC;
+
+	/**
+	 * The feature id for the '<em><b>Family Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__FAMILY_NAME = ModelPackage.PERSON__FAMILY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__GIVEN_NAME = ModelPackage.PERSON__GIVEN_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Middle Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__MIDDLE_NAME = ModelPackage.PERSON__MIDDLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Additional Names</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__ADDITIONAL_NAMES = ModelPackage.PERSON__ADDITIONAL_NAMES;
+
+	/**
+	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__SUFFIX = ModelPackage.PERSON__SUFFIX;
+
+	/**
+	 * The feature id for the '<em><b>Nick Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__NICK_NAME = ModelPackage.PERSON__NICK_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__PHONE_NUMBER = ModelPackage.PERSON__PHONE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__LOCATION = ModelPackage.PERSON__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Person Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__PERSON_ID = ModelPackage.PERSON__PERSON_ID;
+
+	/**
+	 * The feature id for the '<em><b>Farms</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__FARMS = ModelPackage.PERSON_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Farmer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Container Id</b></em>' attribute.
@@ -189,16 +355,6 @@ public interface TrackingPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTAINER_FEATURE_COUNT = 5;
-
-	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl <em>Registered Animal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getRegisteredAnimal()
-	 * @generated
-	 */
-	int REGISTERED_ANIMAL = 2;
 
 	/**
 	 * The feature id for the '<em><b>Registration Id</b></em>' attribute.
@@ -453,16 +609,6 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL_FEATURE_COUNT = 27;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl <em>Reference Animal Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getReferenceAnimalType()
-	 * @generated
-	 */
-	int REFERENCE_ANIMAL_TYPE = 3;
-
-	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -490,16 +636,6 @@ public interface TrackingPackage extends EPackage {
 	int REFERENCE_ANIMAL_TYPE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl <em>Animal Identifier</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.AnimalIdentifierImpl
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getAnimalIdentifier()
-	 * @generated
-	 */
-	int ANIMAL_IDENTIFIER = 4;
-
-	/**
 	 * The feature id for the '<em><b>Issuer</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -525,142 +661,6 @@ public interface TrackingPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANIMAL_IDENTIFIER_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl <em>Farmer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl#getFarmer()
-	 * @generated
-	 */
-	int FARMER = 5;
-
-	/**
-	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__CONTACT_METHODS = ModelPackage.PERSON__CONTACT_METHODS;
-
-	/**
-	 * The feature id for the '<em><b>Photo</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__PHOTO = ModelPackage.PERSON__PHOTO;
-
-	/**
-	 * The feature id for the '<em><b>Honorific</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__HONORIFIC = ModelPackage.PERSON__HONORIFIC;
-
-	/**
-	 * The feature id for the '<em><b>Family Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__FAMILY_NAME = ModelPackage.PERSON__FAMILY_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Given Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__GIVEN_NAME = ModelPackage.PERSON__GIVEN_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Middle Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__MIDDLE_NAME = ModelPackage.PERSON__MIDDLE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Additional Names</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__ADDITIONAL_NAMES = ModelPackage.PERSON__ADDITIONAL_NAMES;
-
-	/**
-	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__SUFFIX = ModelPackage.PERSON__SUFFIX;
-
-	/**
-	 * The feature id for the '<em><b>Nick Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__NICK_NAME = ModelPackage.PERSON__NICK_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__PHONE_NUMBER = ModelPackage.PERSON__PHONE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__LOCATION = ModelPackage.PERSON__LOCATION;
-
-	/**
-	 * The feature id for the '<em><b>Person Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__PERSON_ID = ModelPackage.PERSON__PERSON_ID;
-
-	/**
-	 * The feature id for the '<em><b>Farms</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER__FARMS = ModelPackage.PERSON_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Farmer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FARMER_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType <em>Acquisition Type</em>}' enum.

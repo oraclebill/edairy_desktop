@@ -52,8 +52,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getRegistrationNumber <em>Registration Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getNhifNumber <em>Nhif Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getEstablishedDate <em>Established Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getManagerName <em>Manager Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getNssfNumber <em>Nssf Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getFederalPin <em>Federal Pin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getLicenseEffectiveDate <em>License Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getLicenseExpirationDate <em>License Expiration Date</em>}</li>
@@ -69,8 +71,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getAnimalHealthRequests <em>Animal Health Requests</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getPriceHistory <em>Price History</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getManagerName <em>Manager Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getEstablishedDate <em>Established Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  *
@@ -98,24 +99,44 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected String registrationNumber = REGISTRATION_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
+	 * The default value of the '{@link #getEstablishedDate() <em>Established Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNhifNumber()
+	 * @see #getEstablishedDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NHIF_NUMBER_EDEFAULT = null;
+	protected static final Date ESTABLISHED_DATE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
+	 * The cached value of the '{@link #getEstablishedDate() <em>Established Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNhifNumber()
+	 * @see #getEstablishedDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected String nhifNumber = NHIF_NUMBER_EDEFAULT;
+	protected Date establishedDate = ESTABLISHED_DATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getManagerName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MANAGER_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getManagerName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String managerName = MANAGER_NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
@@ -136,6 +157,26 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected String nssfNumber = NSSF_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNhifNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NHIF_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNhifNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nhifNumber = NHIF_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getFederalPin() <em>Federal Pin</em>}' attribute.
@@ -318,44 +359,24 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	protected EList<MilkPrice> priceHistory;
 
 	/**
-	 * The default value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getManagerName()
+	 * @see #getVersion()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String MANAGER_NAME_EDEFAULT = null;
+	protected static final long VERSION_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getManagerName() <em>Manager Name</em>}' attribute.
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getManagerName()
+	 * @see #getVersion()
 	 * @generated
 	 * @ordered
 	 */
-	protected String managerName = MANAGER_NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEstablishedDate() <em>Established Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEstablishedDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Date ESTABLISHED_DATE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEstablishedDate() <em>Established Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEstablishedDate()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date establishedDate = ESTABLISHED_DATE_EDEFAULT;
+	protected long version = VERSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -651,6 +672,27 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public long getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVersion(long newVersion) {
+		long oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__VERSION, oldVersion, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getManagerName() {
 		return managerName;
 	}
@@ -686,17 +728,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		establishedDate = newEstablishedDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__ESTABLISHED_DATE, oldEstablishedDate, establishedDate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Farm> getMemberFarms() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -760,10 +791,14 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		switch (featureID) {
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				return getRegistrationNumber();
-			case DairyPackage.DAIRY__NHIF_NUMBER:
-				return getNhifNumber();
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				return getEstablishedDate();
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				return getManagerName();
 			case DairyPackage.DAIRY__NSSF_NUMBER:
 				return getNssfNumber();
+			case DairyPackage.DAIRY__NHIF_NUMBER:
+				return getNhifNumber();
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				return getFederalPin();
 			case DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE:
@@ -794,10 +829,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getDairyBins();
 			case DairyPackage.DAIRY__PRICE_HISTORY:
 				return getPriceHistory();
-			case DairyPackage.DAIRY__MANAGER_NAME:
-				return getManagerName();
-			case DairyPackage.DAIRY__ESTABLISHED_DATE:
-				return getEstablishedDate();
+			case DairyPackage.DAIRY__VERSION:
+				return getVersion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -814,11 +847,17 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				setRegistrationNumber((String)newValue);
 				return;
-			case DairyPackage.DAIRY__NHIF_NUMBER:
-				setNhifNumber((String)newValue);
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				setEstablishedDate((Date)newValue);
+				return;
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				setManagerName((String)newValue);
 				return;
 			case DairyPackage.DAIRY__NSSF_NUMBER:
 				setNssfNumber((String)newValue);
+				return;
+			case DairyPackage.DAIRY__NHIF_NUMBER:
+				setNhifNumber((String)newValue);
 				return;
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				setFederalPin((String)newValue);
@@ -877,11 +916,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				getPriceHistory().clear();
 				getPriceHistory().addAll((Collection<? extends MilkPrice>)newValue);
 				return;
-			case DairyPackage.DAIRY__MANAGER_NAME:
-				setManagerName((String)newValue);
-				return;
-			case DairyPackage.DAIRY__ESTABLISHED_DATE:
-				setEstablishedDate((Date)newValue);
+			case DairyPackage.DAIRY__VERSION:
+				setVersion((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -898,11 +934,17 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
 				return;
-			case DairyPackage.DAIRY__NHIF_NUMBER:
-				setNhifNumber(NHIF_NUMBER_EDEFAULT);
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				setEstablishedDate(ESTABLISHED_DATE_EDEFAULT);
+				return;
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				setManagerName(MANAGER_NAME_EDEFAULT);
 				return;
 			case DairyPackage.DAIRY__NSSF_NUMBER:
 				setNssfNumber(NSSF_NUMBER_EDEFAULT);
+				return;
+			case DairyPackage.DAIRY__NHIF_NUMBER:
+				setNhifNumber(NHIF_NUMBER_EDEFAULT);
 				return;
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				setFederalPin(FEDERAL_PIN_EDEFAULT);
@@ -949,11 +991,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__PRICE_HISTORY:
 				getPriceHistory().clear();
 				return;
-			case DairyPackage.DAIRY__MANAGER_NAME:
-				setManagerName(MANAGER_NAME_EDEFAULT);
-				return;
-			case DairyPackage.DAIRY__ESTABLISHED_DATE:
-				setEstablishedDate(ESTABLISHED_DATE_EDEFAULT);
+			case DairyPackage.DAIRY__VERSION:
+				setVersion(VERSION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -969,10 +1008,14 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		switch (featureID) {
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
-			case DairyPackage.DAIRY__NHIF_NUMBER:
-				return NHIF_NUMBER_EDEFAULT == null ? nhifNumber != null : !NHIF_NUMBER_EDEFAULT.equals(nhifNumber);
+			case DairyPackage.DAIRY__ESTABLISHED_DATE:
+				return ESTABLISHED_DATE_EDEFAULT == null ? establishedDate != null : !ESTABLISHED_DATE_EDEFAULT.equals(establishedDate);
+			case DairyPackage.DAIRY__MANAGER_NAME:
+				return MANAGER_NAME_EDEFAULT == null ? managerName != null : !MANAGER_NAME_EDEFAULT.equals(managerName);
 			case DairyPackage.DAIRY__NSSF_NUMBER:
 				return NSSF_NUMBER_EDEFAULT == null ? nssfNumber != null : !NSSF_NUMBER_EDEFAULT.equals(nssfNumber);
+			case DairyPackage.DAIRY__NHIF_NUMBER:
+				return NHIF_NUMBER_EDEFAULT == null ? nhifNumber != null : !NHIF_NUMBER_EDEFAULT.equals(nhifNumber);
 			case DairyPackage.DAIRY__FEDERAL_PIN:
 				return FEDERAL_PIN_EDEFAULT == null ? federalPin != null : !FEDERAL_PIN_EDEFAULT.equals(federalPin);
 			case DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE:
@@ -1003,10 +1046,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return dairyBins != null && !dairyBins.isEmpty();
 			case DairyPackage.DAIRY__PRICE_HISTORY:
 				return priceHistory != null && !priceHistory.isEmpty();
-			case DairyPackage.DAIRY__MANAGER_NAME:
-				return MANAGER_NAME_EDEFAULT == null ? managerName != null : !MANAGER_NAME_EDEFAULT.equals(managerName);
-			case DairyPackage.DAIRY__ESTABLISHED_DATE:
-				return ESTABLISHED_DATE_EDEFAULT == null ? establishedDate != null : !ESTABLISHED_DATE_EDEFAULT.equals(establishedDate);
+			case DairyPackage.DAIRY__VERSION:
+				return version != VERSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1023,20 +1064,22 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (registrationNumber: ");
 		result.append(registrationNumber);
-		result.append(", nhifNumber: ");
-		result.append(nhifNumber);
+		result.append(", establishedDate: ");
+		result.append(establishedDate);
+		result.append(", managerName: ");
+		result.append(managerName);
 		result.append(", nssfNumber: ");
 		result.append(nssfNumber);
+		result.append(", nhifNumber: ");
+		result.append(nhifNumber);
 		result.append(", federalPin: ");
 		result.append(federalPin);
 		result.append(", licenseEffectiveDate: ");
 		result.append(licenseEffectiveDate);
 		result.append(", licenseExpirationDate: ");
 		result.append(licenseExpirationDate);
-		result.append(", managerName: ");
-		result.append(managerName);
-		result.append(", establishedDate: ");
-		result.append(establishedDate);
+		result.append(", version: ");
+		result.append(version);
 		result.append(')');
 		return result.toString();
 	}

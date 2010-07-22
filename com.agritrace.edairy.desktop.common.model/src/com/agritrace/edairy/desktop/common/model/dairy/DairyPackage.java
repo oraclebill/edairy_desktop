@@ -1480,157 +1480,13 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__REGISTRATION_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Established Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__NHIF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__NSSF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Federal Pin</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__FEDERAL_PIN = ModelPackage.COMPANY_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>License Effective Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__LICENSE_EFFECTIVE_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>License Expiration Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__LICENSE_EXPIRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Routes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__ROUTES = ModelPackage.COMPANY_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Vehicles</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__VEHICLES = ModelPackage.COMPANY_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Employees</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__EMPLOYEES = ModelPackage.COMPANY_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Memberships</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__MEMBERSHIPS = ModelPackage.COMPANY_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Branch Locations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__BRANCH_LOCATIONS = ModelPackage.COMPANY_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Collection Journals</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Delivery Journals</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__DELIVERY_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Suppliers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__SUPPLIERS = ModelPackage.COMPANY_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>Customers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__CUSTOMERS = ModelPackage.COMPANY_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>Animal Health Requests</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 15;
-
-	/**
-	 * The feature id for the '<em><b>Dairy Bins</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 16;
-
-	/**
-	 * The feature id for the '<em><b>Price History</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DAIRY__PRICE_HISTORY = ModelPackage.COMPANY_FEATURE_COUNT + 17;
+	int DAIRY__ESTABLISHED_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Manager Name</b></em>' attribute.
@@ -1639,16 +1495,169 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__MANAGER_NAME = ModelPackage.COMPANY_FEATURE_COUNT + 18;
+	int DAIRY__MANAGER_NAME = ModelPackage.COMPANY_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Established Date</b></em>' attribute.
+	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY__ESTABLISHED_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 19;
+	int DAIRY__NSSF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__NHIF_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Federal Pin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__FEDERAL_PIN = ModelPackage.COMPANY_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>License Effective Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__LICENSE_EFFECTIVE_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>License Expiration Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__LICENSE_EXPIRATION_DATE = ModelPackage.COMPANY_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Routes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__ROUTES = ModelPackage.COMPANY_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Vehicles</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__VEHICLES = ModelPackage.COMPANY_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Employees</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__EMPLOYEES = ModelPackage.COMPANY_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Memberships</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__MEMBERSHIPS = ModelPackage.COMPANY_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Branch Locations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__BRANCH_LOCATIONS = ModelPackage.COMPANY_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Collection Journals</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__COLLECTION_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Delivery Journals</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__DELIVERY_JOURNALS = ModelPackage.COMPANY_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Suppliers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__SUPPLIERS = ModelPackage.COMPANY_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Customers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__CUSTOMERS = ModelPackage.COMPANY_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Animal Health Requests</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__ANIMAL_HEALTH_REQUESTS = ModelPackage.COMPANY_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Dairy Bins</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__DAIRY_BINS = ModelPackage.COMPANY_FEATURE_COUNT + 18;
+
+	/**
+	 * The feature id for the '<em><b>Price History</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__PRICE_HISTORY = ModelPackage.COMPANY_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__VERSION = ModelPackage.COMPANY_FEATURE_COUNT + 20;
 
 	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
@@ -1657,7 +1666,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 20;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 21;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -3703,6 +3712,17 @@ public interface DairyPackage extends EPackage {
 	EReference getDairy_PriceHistory();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getVersion()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EAttribute getDairy_Version();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5250,6 +5270,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DAIRY__PRICE_HISTORY = eINSTANCE.getDairy_PriceHistory();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY__VERSION = eINSTANCE.getDairy_Version();
 
 		/**
 		 * The meta object literal for the '<em><b>Manager Name</b></em>' attribute feature.

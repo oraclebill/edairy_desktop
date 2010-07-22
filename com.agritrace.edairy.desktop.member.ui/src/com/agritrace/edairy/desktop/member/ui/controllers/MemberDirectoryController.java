@@ -24,11 +24,10 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
@@ -36,6 +35,7 @@ import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberDirectoryController extends SubModuleController {
 
@@ -49,15 +49,15 @@ public class MemberDirectoryController extends SubModuleController {
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-				final List<Farm> newFarms = new ArrayList<Farm>();
-				newFarms.addAll(selectedMember.getMember().getFarms());
-				selectedMember.getMember().getFarms().clear();
+//				final List<Farm> newFarms = new ArrayList<Farm>();
+//				newFarms.addAll(selectedMember.getMember().getFarms());
+//				selectedMember.getMember().getFarms().clear();
+//				repository.saveNew(selectedMember);
+//				for (final Farm newFarm : newFarms) {
+//					farmRepository.saveNew(newFarm);
+//					selectedMember.getMember().getFarms().add(newFarm);
+//				}
 				repository.saveNew(selectedMember);
-				for (final Farm newFarm : newFarms) {
-					farmRepository.saveNew(newFarm);
-					selectedMember.getMember().getFarms().add(newFarm);
-				}
-				repository.save(selectedMember);
 				refreshMemberList();
 			}
 		}
@@ -97,26 +97,30 @@ public class MemberDirectoryController extends SubModuleController {
 
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	public static final String DELETE_DIALOG_TITLE = "Delete Member";
-	private final IFarmRepository farmRepository;
 	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Route", "Status", "Phone", "Milk Collection",
 			"Monthly Credit Sales", "Credit Balance" };
 
-	private ITableRidget memberListRidget;
 	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName", "defaultRoute.code", "status", "member.phoneNumber", "account", "account",
 			"account" };
 
 	private final ILabelRidget[] searchLabels;
 	private ITextRidget searchText;
 	private IActionRidget viewRidget;
-
-	private final IMemberRepository repository = new MemberRepository();
-	private final List<Membership> membershipList = new ArrayList<Membership>();
-	private final List<Membership> allMembers = repository.getMemberships();
+	private ITableRidget memberListRidget;
+	private final IFarmRepository farmRepository;
+	private final IMemberRepository repository;
+	private final List<Membership> membershipList;
+	private List<Membership> allMembers;
+	private final Dairy localDairy;
+	
 
 	public MemberDirectoryController() {
-		farmRepository = new FarmRepository();
-		searchLabels = new ILabelRidget[27];
-
+		membershipList 	= new ArrayList<Membership>();
+		searchLabels 	= new ILabelRidget[27];
+		repository 		= DairyRepository.getInstance();
+		farmRepository 	= new FarmRepository();
+		localDairy 		= DairyRepository.getInstance().getLocalDairy(); 
+		allMembers 		= localDairy.getMemberships();
 	}
 
 	// void initRepository() {
@@ -247,49 +251,11 @@ public class MemberDirectoryController extends SubModuleController {
 			}
 		});
 
-		// if (repository == null) {
-		// initRepository();
-		// }
 		if (repository != null) {
 
 			memberListRidget.bindToModel(new WritableList(membershipList, Membership.class), Membership.class,
 					memberPropertyNames, memberColumnHeaders);
-//			memberListRidget.setColumnFormatter(1, new ColumnFormatter() {
-//				@Override
-//				public String getText(Object element) {
-//					if (element instanceof Membership) {
-//						final Person member = ((Membership) element).getMember();
-//						if (member != null) {
-//							return member.getFamilyName() + ", " + member.getGivenName();
-//						}
-//					}
-//					return null;
-//				}
-//			});
-//			memberListRidget.setColumnFormatter(2, new ColumnFormatter() {
-//				@Override
-//				public String getText(Object element) {
-//					if (element instanceof Membership) {
-//						final Route route = (Route) ((Membership)element).getDefaultRoute();
-//						if (route != null) {
-//							return route.getCode();
-//						}
-//					}
-//					return "";
-//				}
-//			});
-//			memberListRidget.setColumnFormatter(4, new ColumnFormatter() {
-//				@Override
-//				public String getText(Object element) {
-//					if (element instanceof Membership) {
-//						final Person member = ((Membership) element).getMember();
-//						if (member != null) {
-//							return member.getPhoneNumber();
-//						}
-//					}
-//					return null;
-//				}
-//			});
+
 			memberListRidget.setColumnFormatter(6, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {

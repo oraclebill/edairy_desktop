@@ -36,6 +36,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
@@ -54,15 +55,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			enableSaveButton(validate());
 		}
 
-	}
-
-	private final class UpdateMemberPhotoAction implements ISelectionListener {
-		@Override
-		public void ridgetSelected(SelectionEvent event) {
-			// TODO - open file selection dialog, get the bits, and stuff them
-			// into the model...
-			throw new UnsupportedOperationException("unimplemented");
-		}
 	}
 
 	public static final String DIALOG_TITLE = "Membership";
@@ -96,7 +88,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	private ITextRidget middleNameRidget;
 
-	private ILabelRidget photoRidget;
+	private ProfilePhotoRidget photoRidget;
 
 	private IComboRidget suffixRidget;
 
@@ -104,10 +96,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
-
-	private final UpdateMemberPhotoAction updateMemberPhotoAction = new UpdateMemberPhotoAction();
-
-	private ILinkRidget updatePhotoActionRidget;
 
 	//
 	// protected IConverter formattedNameConverter = new Converter(Person.class,
@@ -202,11 +190,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		aMap.put(photoRidget,
 				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__PHOTO));
 
-		// member photo update button
-		// aMap.put(updatePhotoActionRidget, FeaturePath.fromList(
-		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
-		// ModelPackage.Literals.PERSON__SUFFIX));
-
 		return (aMap);
 	}
 
@@ -249,8 +232,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		addtlNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames);
 		titleRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_honorific);
 		suffixRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_suffix);
-		photoRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberPhoto);
-		updatePhotoActionRidget = getRidget(ILinkRidget.class, ViewWidgetId.memberPhotoEditLink);
+		photoRidget = getRidget(ProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
 
 		// extended setup
 		// titleRidget.setOutputOnly(true);
@@ -263,9 +245,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		familyNameRidget.setMandatory(true);
 
 		// formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
-
-		updatePhotoActionRidget.setText("(click to update photo)");
-		updatePhotoActionRidget.addSelectionListener(updateMemberPhotoAction);
 
 		// add validator to update the header
 		givenNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
@@ -284,10 +263,14 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void updateUpperPanelBinding() {
 		final Membership selectedMember = getWorkingCopy();
-		Assert.isLegal((null != selectedMember) && (null != selectedMember.getMember()));
+		
+		if((null == selectedMember) || (null == selectedMember.getMember())) 
+			throw new IllegalStateException();
+		
 		if (selectedMember.getMember() != null) {
 			// loop through the text ridgets
 			for (final IRidget r : memberBindings.keySet()) {
+				
 				if (r instanceof IValueRidget) {
 
 					final IObservableValue oberservModel = EMFProperties.value(memberBindings.get(r)).observe(

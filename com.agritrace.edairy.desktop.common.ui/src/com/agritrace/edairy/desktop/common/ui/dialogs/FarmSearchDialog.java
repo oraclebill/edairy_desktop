@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.MemberRepository;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * This is a demo dialog copied from MemberSearchDialog
@@ -120,7 +120,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 	 */
 	public FarmSearchDialog(Shell shell) {
 		super(shell);
-		memberRepo = new MemberRepository();
+		memberRepo = DairyRepository.getInstance();
 		farmList = memberRepo.getMemberFarms();
 	}
 

@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -14,6 +15,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroup {
@@ -32,8 +34,7 @@ public class MemberInfoGroup {
 	private CCombo cmbHonorable;
 	private CCombo cmbSuffix;
 	private final Composite composite;
-	private Link imageEditLink;
-	private Label photoLabel;
+	private ProfilePhotoComposite photoLabel;
 	private Text txtAdditional;
 	private Text txtFirst;
 	private Text txtId;
@@ -134,13 +135,13 @@ public class MemberInfoGroup {
 		rightColumn.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 
 		// row1-right: photo Label
-		photoLabel = UIControlsFactory.createLabel(rightColumn, "", SWT.SHADOW_IN, ViewWidgetId.memberPhoto); //$NON-NLS-1$
-		fieldFactory.copy().applyTo(photoLabel);
-
+		photoLabel = new ProfilePhotoComposite(rightColumn, SWT.BORDER);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoLabel, ViewWidgetId.memberPhoto);
+		GridDataFactory.fillDefaults().grab(true, true).span(1, 2).applyTo(photoLabel);
 		// row 2r:
-		imageEditLink = UIControlsFactory.createLink(rightColumn, SWT.CENTER, ViewWidgetId.memberPhotoEditLink);
-		imageEditLink.setText("Click here to change member photo");
-		fieldFactory.copy().grab(false, true).applyTo(imageEditLink);
+//		imageEditLink = UIControlsFactory.createLink(rightColumn, SWT.CENTER, ViewWidgetId.memberPhotoEditLink);
+//		imageEditLink.setText("Click here to change member photo");
+//		fieldFactory.copy().grab(false, true).applyTo(imageEditLink);
 
 		// filler
 		// fieldFactory.grab(true,
