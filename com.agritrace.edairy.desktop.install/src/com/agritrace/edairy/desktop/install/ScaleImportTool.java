@@ -35,7 +35,7 @@ public class ScaleImportTool extends AbstractImportTool {
 		new Entry(OPERATOR_CODE , DairyPackage.Literals.SCALE_IMPORT_RECORD__OPERATOR_CODE ),
 		new Entry(TRIP_NUMBER , DairyPackage.Literals.SCALE_IMPORT_RECORD__TRIP_NUMBER ),				// NO MATCHING ATTRIBUTE IN MODEL
 //		new Entry(SESSION_CODE , DairyPackage.Literals.SCA ), 	// PAGE ATTR
-		new Entry(ROUTE_NUMBER , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__ ),	// PAGE ATTR
+//		new Entry(ROUTE_NUMBER , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__ ),	// PAGE ATTR
 		new Entry(CENTER_NUMBER , DairyPackage.Literals.SCALE_IMPORT_RECORD__CENTER_NUMBER ),		
 		new Entry(MEMBER_NUMBER , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER ),
 		new Entry(QUANTITY , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__QUANTITY ),

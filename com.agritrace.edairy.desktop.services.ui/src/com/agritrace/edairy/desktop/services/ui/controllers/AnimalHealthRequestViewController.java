@@ -28,6 +28,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
@@ -96,7 +97,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
 	private IToggleButtonRidget allRidget;
 	private final AnimalHealthRequestCondtionsBean condtionsBean = new AnimalHealthRequestCondtionsBean();
-	private IDateTextRidget endDateText;
+	private IDateTimeRidget endDateText;
 	private final FarmLookupAction farmLookupAction = new FarmLookupAction();
 	private IActionRidget farmLookupButton;
 	private ITextRidget farmText;
@@ -109,7 +110,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
 	private AnimalHealthRequestRepository myRepo;
 
-	private IDateTextRidget startDateText;
+	private IDateTimeRidget startDateText;
 
 	private IToggleButtonRidget vertRidget;
 
@@ -193,9 +194,9 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 		this.condtionsBean.setStartDate(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance().getTime()));
 
-		startDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
-		startDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		startDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		startDateText = getRidget(IDateTimeRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
+		// startDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		// startDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		startDateText.bindToModel(PojoObservables.observeValue(condtionsBean,
 				AnimalHealthRequestCondtionsBean.PROPERTY_STARTDATE));
 		startDateText.updateFromModel();
@@ -208,9 +209,9 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		allRidget = getRidget(IToggleButtonRidget.class, AnimalHealthRequestView.REQUEST_TYPE_ALL);
 		allRidget.setSelected(true);
 
-		endDateText = getRidget(IDateTextRidget.class, AnimalHealthRequestView.END_DATE_TEXT);
-		endDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		endDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		endDateText = getRidget(IDateTimeRidget.class, AnimalHealthRequestView.END_DATE_TEXT);
+		// endDateText.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		// endDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 		endDateText.bindToModel(PojoObservables.observeValue(condtionsBean,
 				AnimalHealthRequestCondtionsBean.PROPERTY_ENDDATE));
 		endDateText.updateFromModel();
@@ -248,171 +249,163 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	}
 
 	@Override
-	protected List getFilteredResult() {
-		try {
-			final List<AnimalHealthRequest> requests = myDairy.allRequests();
+	protected List<AnimalHealthRequest> getFilteredResult() {
 
-			// shortcut if no requests to filter.
-			if (requests.size() == 0) {
-				return requests;
-			}
+		final List<AnimalHealthRequest> requests = myDairy.allRequests();
 
-			final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
-			final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
-				@Override
-				public Long adapt(Object value) {
-					return longValue(value);
-				}
-
-				@Override
-				public long longValue(Object object) {
-					return ((Date) object).getTime();
-				}
-			};
-
-			// Start Date
-			final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
-
-			SELECT select = null;
-			if (startDateText != null) {
-				// StartDate
-				// memberIdText.updateFromModel();
-				final String startDate = startDateText.getText();
-
-				if (!"".equals(startDate)) {
-					final Condition startDateCondtion = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
-							startDate).getTime(), RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
-
-					final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE, startDateCondtion);
-					condtions.add(startDateCondition);
-				}
-
-			}
-			// End Date
-			if (endDateText != null) {
-				final String endDateStr = endDateText.getText();
-
-				if (!"".equals(endDateStr)) {
-					final Condition startDateCondtion = new NumberCondition<Long>(DateTimeUtils.DATE_FORMAT.parse(
-							endDateStr).getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO, dateAdapter);
-
-					final EObjectAttributeValueCondition endDateCondtion = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE, startDateCondtion);
-					condtions.add(endDateCondtion);
-				}
-			}
-
-			// Request Type
-			// Verterinary
-			if (vertRidget != null) {
-				final boolean isVerterinaryType = vertRidget.isSelected();
-				if (isVerterinaryType) {
-					final BooleanAdapter booleanAdapter = new BooleanAdapter() {
-
-						@Override
-						public Boolean getBoolean(Object object) {
-							return object.equals(RequestType.VETERINARY);
-						}
-
-					};
-					final Condition verterinaryCondition = new BooleanCondition(isVerterinaryType, booleanAdapter);
-
-					final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE, verterinaryCondition);
-					condtions.add(startDateCondition);
-				}
-			}
-			// Insemination conditions
-			if (inseminationRidget != null) {
-				final boolean isInsemination = inseminationRidget.isSelected();
-				if (isInsemination) {
-					final BooleanAdapter booleanAdapter = new BooleanAdapter() {
-
-						@Override
-						public Boolean getBoolean(Object object) {
-							return object.equals(RequestType.INSEMINATION);
-						}
-
-					};
-					final Condition verterinaryCondition = new BooleanCondition(isInsemination, booleanAdapter);
-
-					final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE, verterinaryCondition);
-					condtions.add(startDateCondition);
-				}
-			}
-
-			// Member name field
-			if (memberText != null) {
-				// String memberName = memberText.getText();
-				// if (!"".equals(memberName)) {
-				// Condition name = new
-				// org.eclipse.emf.query.conditions.strings.StringValue(
-				// memberName);
-				// EObjectCondition partyName = new
-				// EObjectAttributeValueCondition(
-				// ModelPackage.Literals.PARTY__NAME, name);
-				// EObjectCondition memberRef = new
-				// EObjectReferenceValueCondition(
-				// DairyPackage.Literals.MEMBERSHIP__MEMBER, partyName);
-				// EObjectCondition requestingMember = new
-				// EObjectReferenceValueCondition(
-				// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER,
-				// memberRef);
-				//
-				// condtions.add(requestingMember);
-				// }
-			}
-
-			// Farm name field
-			if (farmText != null) {
-				final String farmName = farmText.getText();
-				if (!"".equals(farmName)) {
-					final Condition name = new org.eclipse.emf.query.conditions.strings.StringValue(farmName);
-					final EObjectCondition farmNameCond = new EObjectAttributeValueCondition(
-							TrackingPackage.Literals.FARM__NAME, name);
-					final EObjectCondition farmCond = new EObjectReferenceValueCondition(
-							RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM, farmNameCond);
-
-					condtions.add(farmCond);
-				}
-			}
-
-			// AND all conditions
-			if (condtions.size() > 0) {
-				final EObjectCondition first = condtions.get(0);
-				EObjectCondition ret = first;
-				for (int i = 1; i < condtions.size(); i++) {
-					ret = ret.AND(condtions.get(i));
-				}
-				select = new SELECT(new FROM(requests), new WHERE(ret));
-
-			} else {
-				select = new SELECT(new FROM(requests), new WHERE(EObjectCondition.E_TRUE));
-			}
-			final IQueryResult result = select.execute();
-			for (final EObject object : result.getEObjects()) {
-				objs.add((AnimalHealthRequest) object);
-			}
-			Collections.sort(objs, new Comparator<Object>() {
-
-				@Override
-				public int compare(Object arg0, Object arg1) {
-					if ((arg0 instanceof AnimalHealthRequest) && (arg1 instanceof AnimalHealthRequest)) {
-						return (int) (((AnimalHealthRequest) arg0).getRequestId().longValue() - ((AnimalHealthRequest) arg1)
-								.getRequestId().longValue());
-					}
-					return 0;
-				}
-			});
-
-			return objs;
-		} catch (final ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// shortcut if no requests to filter.
+		if (requests.size() == 0) {
+			return requests;
 		}
-		return new ArrayList<AnimalHealthRequest>();
+
+		final List<AnimalHealthRequest> objs = new ArrayList<AnimalHealthRequest>();
+		final NumberAdapter.LongAdapter dateAdapter = new NumberAdapter.LongAdapter() {
+			@Override
+			public Long adapt(Object value) {
+				return longValue(value);
+			}
+
+			@Override
+			public long longValue(Object object) {
+				return ((Date) object).getTime();
+			}
+		};
+
+		// Start Date
+		final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
+
+		SELECT select = null;
+		if (startDateText != null) {
+			// StartDate
+			// memberIdText.updateFromModel();
+			if (null != startDateText.getDate()) {
+				final Condition startDateCondtion = new NumberCondition<Long>(startDateText.getDate().getTime(),
+						RelationalOperator.GREATER_THAN_OR_EQUAL_TO, dateAdapter);
+
+				final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE, startDateCondtion);
+				condtions.add(startDateCondition);
+			}
+
+		}
+		// End Date
+		if (endDateText != null) {
+			if (null != endDateText.getDate()) {
+				final Condition startDateCondtion = new NumberCondition<Long>(
+						endDateText.getDate().getTime() + 86400000l, RelationalOperator.LESS_THAN_OR_EQUAL_TO,
+						dateAdapter);
+
+				final EObjectAttributeValueCondition endDateCondtion = new EObjectAttributeValueCondition(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE, startDateCondtion);
+				condtions.add(endDateCondtion);
+			}
+		}
+
+		// Request Type
+		// Verterinary
+		if (vertRidget != null) {
+			final boolean isVerterinaryType = vertRidget.isSelected();
+			if (isVerterinaryType) {
+				final BooleanAdapter booleanAdapter = new BooleanAdapter() {
+
+					@Override
+					public Boolean getBoolean(Object object) {
+						return object.equals(RequestType.VETERINARY);
+					}
+
+				};
+				final Condition verterinaryCondition = new BooleanCondition(isVerterinaryType, booleanAdapter);
+
+				final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE, verterinaryCondition);
+				condtions.add(startDateCondition);
+			}
+		}
+		// Insemination conditions
+		if (inseminationRidget != null) {
+			final boolean isInsemination = inseminationRidget.isSelected();
+			if (isInsemination) {
+				final BooleanAdapter booleanAdapter = new BooleanAdapter() {
+
+					@Override
+					public Boolean getBoolean(Object object) {
+						return object.equals(RequestType.INSEMINATION);
+					}
+
+				};
+				final Condition verterinaryCondition = new BooleanCondition(isInsemination, booleanAdapter);
+
+				final EObjectAttributeValueCondition startDateCondition = new EObjectAttributeValueCondition(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE, verterinaryCondition);
+				condtions.add(startDateCondition);
+			}
+		}
+
+		// Member name field
+		if (memberText != null) {
+			// String memberName = memberText.getText();
+			// if (!"".equals(memberName)) {
+			// Condition name = new
+			// org.eclipse.emf.query.conditions.strings.StringValue(
+			// memberName);
+			// EObjectCondition partyName = new
+			// EObjectAttributeValueCondition(
+			// ModelPackage.Literals.PARTY__NAME, name);
+			// EObjectCondition memberRef = new
+			// EObjectReferenceValueCondition(
+			// DairyPackage.Literals.MEMBERSHIP__MEMBER, partyName);
+			// EObjectCondition requestingMember = new
+			// EObjectReferenceValueCondition(
+			// RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER,
+			// memberRef);
+			//
+			// condtions.add(requestingMember);
+			// }
+		}
+
+		// Farm name field
+		if (farmText != null) {
+			final String farmName = farmText.getText();
+			if (!"".equals(farmName)) {
+				final Condition name = new org.eclipse.emf.query.conditions.strings.StringValue(farmName);
+				final EObjectCondition farmNameCond = new EObjectAttributeValueCondition(
+						TrackingPackage.Literals.FARM__NAME, name);
+				final EObjectCondition farmCond = new EObjectReferenceValueCondition(
+						RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM, farmNameCond);
+
+				condtions.add(farmCond);
+			}
+		}
+
+		// AND all conditions
+		if (condtions.size() > 0) {
+			final EObjectCondition first = condtions.get(0);
+			EObjectCondition ret = first;
+			for (int i = 1; i < condtions.size(); i++) {
+				ret = ret.AND(condtions.get(i));
+			}
+			select = new SELECT(new FROM(requests), new WHERE(ret));
+
+		} else {
+			select = new SELECT(new FROM(requests), new WHERE(EObjectCondition.E_TRUE));
+		}
+		final IQueryResult result = select.execute();
+		for (final EObject object : result.getEObjects()) {
+			objs.add((AnimalHealthRequest) object);
+		}
+		Collections.sort(objs, new Comparator<Object>() {
+
+			@Override
+			public int compare(Object arg0, Object arg1) {
+				if ((arg0 instanceof AnimalHealthRequest) && (arg1 instanceof AnimalHealthRequest)) {
+					return (int) (((AnimalHealthRequest) arg0).getRequestId().longValue() - ((AnimalHealthRequest) arg1)
+							.getRequestId().longValue());
+				}
+				return 0;
+			}
+		});
+
+		return objs;
 	}
 
 	@Override
@@ -436,15 +429,13 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		// Start Date Default value
 		if (startDateText != null) {
 			// startDateText.setDirectWriting(true);
-			startDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getFirstDayOfMonth(Calendar
-					.getInstance().getTime())));
+			startDateText.setDate(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance().getTime()));
 		}
 
 		// End date default value
 		if (endDateText != null) {
 			// endDateText.setDirectWriting(true);
-			endDateText.setText(DateTimeUtils.DATE_FORMAT.format(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance()
-					.getTime())));
+			endDateText.setDate(DateTimeUtils.getLastDayOfMonth(Calendar.getInstance().getTime()));
 		}
 
 		// Request Type

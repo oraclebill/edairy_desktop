@@ -55,7 +55,6 @@
       <plugin id="com.agritrace.edairy.desktop.install"/>
       <plugin id="com.agritrace.edairy.desktop.member.services"/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.operations.services"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>
       <plugin id="com.csvreader"/>
