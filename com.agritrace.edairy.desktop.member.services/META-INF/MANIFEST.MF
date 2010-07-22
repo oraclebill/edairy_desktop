@@ -7,8 +7,7 @@ Bundle-Activator: com.agritrace.edairy.desktop.member.services.Activator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0";visibility:=reexport,
- com.agritrace.edairy.desktop.operations.services;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.member.services,

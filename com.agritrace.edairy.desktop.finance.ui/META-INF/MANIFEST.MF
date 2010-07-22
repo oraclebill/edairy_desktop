@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.internal.finance.ui.Activator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.operations.services;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.member.services;bundle-version="1.0.0",
  org.apache.commons.collections;bundle-version="3.2.0",
  org.eclipse.swt.layout.grouplayout;bundle-version="1.1.0",

@@ -47,7 +47,7 @@ public class MemberRepositoryTest {
 	@Before
 	public void setUp() {
 		pm = new HsqlDbPersistenceManager();		
-		repo = new DairyRepository( new TestHibernateRepository(pm) );
+		repo =  DairyRepository.getInstance() ;
 	}
 	
 	@After
@@ -68,6 +68,7 @@ public class MemberRepositoryTest {
 						DairyUtil.createFarmer("Farmer "+ i, "", "", "" + i, 
 								DairyUtil.createFarm( uuid.toString(), null)));
 			uuidSet.add(uuid.toString());
+			member.setMemberNumber(uuid.toString());
 			repo.saveNew(member);
 		}
 
@@ -131,7 +132,7 @@ public class MemberRepositoryTest {
 		assertNotNull(farmer.eContainer());
 		assertNotNull(farmer.eContainingFeature());
 		assertSame(membership, farmer.eContainer());
-		
+		membership.setMemberNumber(""+membership.hashCode());
 		repo.saveNew(membership);
 		
 		assertNotNull(farm.getFarmId());
