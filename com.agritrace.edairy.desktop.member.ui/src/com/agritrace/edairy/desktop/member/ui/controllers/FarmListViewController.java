@@ -40,6 +40,23 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class FarmListViewController extends BaseListViewController {
+	private final class LocationFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			if (element instanceof Location) {
+				Location location = (Location) element;
+				final PostalLocation postalLocation = location.getPostalLocation();
+//				StringBuffer sb = new StringBuffer();
+				if (postalLocation != null) {
+					return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
+							+ postalLocation.getPostalCode();
+				}
+			}
+
+			return null;
+		}
+	}
+
 	/**
 	 * Open member search dialog, IActionListener for search button
 	 * 
@@ -141,15 +158,16 @@ public class FarmListViewController extends BaseListViewController {
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to remove selected farms?";
 	public static final String DELETE_DIALOG_TITLE = "Remove Farm";
 	private IActionRidget clearButton;
-	private final String[] farmColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Location",
-			"Number of LiveStocks", "Number of Container" };
+	private final String[] farmColumnHeaders = { "Member ID", "Member Given Name", "Family Name", "Farm Name",
+			"Location", "Number of LiveStocks", "Number of Container" };
 
 	private IComboRidget farmCombo;
 	private ITableRidget farmListTable;
 
 	private final List<FarmListViewTableNode> farmListTableInput = new ArrayList<FarmListViewTableNode>();
 	private final List<String> farmNames;
-	private final String[] farmPropertyNames = { "membership", "membership", "farm", "farm", "farm", "farm" };
+	private final String[] farmPropertyNames = { "membership.memberNumber", "membership.member.givenName",
+			"membership.member.familyName", "farm.name", "farm.location", "farm.numberOfAnimals", "farm.numberOfContainers" };
 	private final IFarmRepository farmRepository;
 	private IActionRidget memberLookupBtn;
 	// filter group ridgets
@@ -174,97 +192,16 @@ public class FarmListViewController extends BaseListViewController {
 		farmListTable.updateFromModel();
 	}
 
-
 	private void setColumnFormatters() {
 		// MEMBERID
-		farmListTable.setColumnFormatter(0, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					final Membership membership = ((FarmListViewTableNode) element).getMembership();
-					if (membership != null) {
-						return membership.getMemberId() + "";
-					}
-				}
-				return null;
-			}
-		});
 		// memberName
-		farmListTable.setColumnFormatter(1, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					final Membership membership = ((FarmListViewTableNode) element).getMembership();
-					if (membership != null) {
-						final Person member = (membership).getMember();
-						if (member != null) {
-							return member.getFamilyName() + "," + member.getGivenName();
-						}
-					}
-				}
-				return null;
-			}
-		});
-		farmListTable.setColumnFormatter(2, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					final Farm farm = ((FarmListViewTableNode) element).getFarm();
-					if (farm != null) {
-						return farm.getName();
-					}
-				}
-				return null;
-			}
-		});
-		farmListTable.setColumnFormatter(3, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					final Farm farm = ((FarmListViewTableNode) element).getFarm();
-					if (farm != null) {
-						final Location location = farm.getLocation();
-						if (location != null) {
-							final PostalLocation postalLocation = location.getPostalLocation();
-							if (postalLocation != null) {
-								return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
-										+ postalLocation.getPostalCode();
-							}
-						}
-					}
-				}
-				return null;
-			}
-		});
-		farmListTable.setColumnFormatter(4, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					final Farm farm = ((FarmListViewTableNode) element).getFarm();
-					if (farm != null) {
-						return String.valueOf(farm.getNumberOfAnimals());
-					}
-				}
-				return null;
-			}
-		});
-		farmListTable.setColumnFormatter(5, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					final Farm farm = ((FarmListViewTableNode) element).getFarm();
-					if (farm != null) {
-						return String.valueOf(farm.getNumberOfContainers());
-					}
-				}
-				return null;
-			}
-		});
+		farmListTable.setColumnFormatter(4, new LocationFormatter());
 	}
 
 	private void updateFarmCombo() {
 		if (selectedMember != null) {
-//			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
+			// selectedMember =
+			// memberRepository.findByKey(selectedMember.getMemberId());
 			if (farmCombo != null) {
 				final String currentSelection = farmCombo.getText();
 				farmNames.clear();
@@ -349,23 +286,25 @@ public class FarmListViewController extends BaseListViewController {
 	}
 
 	protected List<FarmListViewTableNode> getFilteredResult() {
-		List<Farm> allFarms = new ArrayList<Farm>(farmRepository.getMemberships());
-		
+		List<Farm> allFarms = new ArrayList<Farm>(farmRepository.all());
+
 		final List<FarmListViewTableNode> results = new ArrayList<FarmListViewTableNode>();
-//		if (selectedMember != null) {
-//			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
-//			if (farmCombo != null) {
-//				final String farmName = farmCombo.getText();
-//				if (!farmName.isEmpty()) {
-//					final List<Farm> farms = selectedMember.getMember().getFarms();
-					for (final Farm farm : allFarms) {
-//						if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
-							results.add(new FarmListViewTableNode(farm.getOwner().eContainer(), farm));
-//						}
-					}
-//				}
-//			}
-//		}
+		// if (selectedMember != null) {
+		// selectedMember =
+		// memberRepository.findByKey(selectedMember.getMemberId());
+		// if (farmCombo != null) {
+		// final String farmName = farmCombo.getText();
+		// if (!farmName.isEmpty()) {
+		// final List<Farm> farms = selectedMember.getMember().getFarms();
+		for (final Farm farm : allFarms) {
+			// if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName()))
+			// {
+			results.add(new FarmListViewTableNode((Membership) farm.getOwner().eContainer(), farm));
+			// }
+		}
+		// }
+		// }
+		// }
 
 		return results;
 

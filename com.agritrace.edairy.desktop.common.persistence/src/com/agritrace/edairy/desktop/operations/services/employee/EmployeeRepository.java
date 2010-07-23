@@ -18,8 +18,8 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	};
 
 	@Override
-	public List<Employee> getMemberships() {
-		return employeeRepo.getMemberships();
+	public List<Employee> all() {
+		return employeeRepo.all();
 
 	}
 

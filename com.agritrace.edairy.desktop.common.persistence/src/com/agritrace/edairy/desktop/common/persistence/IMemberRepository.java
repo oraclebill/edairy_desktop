@@ -20,7 +20,7 @@ public interface IMemberRepository {
 	 * 
 	 * @return a list, never null.
 	 */
-	public List<Membership> getMemberships();
+	public List<Membership> all();
 
 	public void update(Membership selectedMember);
 

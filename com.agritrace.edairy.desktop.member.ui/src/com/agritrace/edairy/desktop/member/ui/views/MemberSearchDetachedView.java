@@ -229,7 +229,7 @@ public class MemberSearchDetachedView extends SubModuleView implements MemberSea
 	}
 
 	public List<Membership> createMemberShip() {
-		return membershipRepository.getMemberships();
+		return membershipRepository.all();
 
 		// List<Membership> members = new ArrayList<Membership>();
 		// Membership member1 = DairyFactory.eINSTANCE.createMembership();

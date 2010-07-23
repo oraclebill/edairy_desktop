@@ -24,9 +24,9 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	@Override
-	public List<DairyLocation> getMemberships() {
+	public List<DairyLocation> all() {
 		// TODO Auto-generated method stub
-		return super.getMemberships();
+		return super.all();
 	}
 
 	@Override

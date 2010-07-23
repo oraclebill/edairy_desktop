@@ -10,9 +10,9 @@ import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntit
 public class SupplierRepository extends HibernateRepository<Supplier> {
 
 	@Override
-	public List<Supplier> getMemberships() {
+	public List<Supplier> all() {
 		// TODO Auto-generated method stub
-		return super.getMemberships();
+		return super.all();
 	}
 
 	@Override

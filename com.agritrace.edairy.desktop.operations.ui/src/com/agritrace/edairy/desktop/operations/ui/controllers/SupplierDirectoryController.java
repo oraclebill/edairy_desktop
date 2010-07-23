@@ -83,7 +83,7 @@ public class SupplierDirectoryController extends BasicDirectoryController {
 
 	@Override
 	protected List<Supplier> getFilteredResult() {
-		final List<Supplier> allSuppliers = getRepository().getMemberships();
+		final List<Supplier> allSuppliers = getRepository().all();
 		final List<Supplier> filteredSuppliers = new ArrayList<Supplier>();
 
 		for (final Supplier s : allSuppliers) {

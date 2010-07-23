@@ -376,7 +376,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 	
 	@Override 
-	public List<Membership> getMemberships() {
+	public List<Membership> all() {
 		return localDairy.getMemberships();
 	}
 		

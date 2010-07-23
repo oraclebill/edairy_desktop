@@ -27,7 +27,7 @@ public abstract class BaseListViewController extends SubModuleController {
 	protected abstract void configureTableRidgets();
 
 	protected List<Membership> getMemberships() {
-		return membershipRepository.getMemberships();
+		return membershipRepository.all();
 	}
 
 }

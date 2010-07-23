@@ -87,7 +87,7 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 	@Override
 	protected List<Customer> getFilteredResult() {
 		final List<Customer> filtered = new ArrayList<Customer>();
-		final List<Customer> allCustomers = getRepository().getMemberships();
+		final List<Customer> allCustomers = getRepository().all();
 		System.err.println("allCustomers: " + allCustomers);
 		for (final Customer c : allCustomers) {
 			if (MatchUtil.matchContains(searchBean.getNameSearchValue(), c.getCompanyName())

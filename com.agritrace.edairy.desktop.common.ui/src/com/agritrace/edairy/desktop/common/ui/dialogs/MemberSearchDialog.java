@@ -181,7 +181,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	public MemberSearchDialog(Shell shell) {
 		super(shell);
 		memberRepo = DairyRepository.getInstance();
-		memberList = memberRepo.getMemberships();
+		memberList = memberRepo.all();
 	}
 
 	/**

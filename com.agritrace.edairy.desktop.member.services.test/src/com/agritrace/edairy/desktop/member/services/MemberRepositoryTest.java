@@ -88,13 +88,13 @@ public class MemberRepositoryTest {
 		testEntity = DairyUtil.createMembership(null, null, null);
 		
 		// starting off empty
-		memberList = repo.getMemberships();
+		memberList = repo.all();
 		assertNotNull(memberList);
 		assertEquals(0, memberList.size());
 		
 		// addition works
 		repo.saveNew(testEntity);
-		memberList = repo.getMemberships();
+		memberList = repo.all();
 		assertEquals(1, memberList.size());
 		testEntity = memberList.get(0);
 		assertNotNull(testEntity);
@@ -104,14 +104,14 @@ public class MemberRepositoryTest {
 		memberId += 300;
 		testEntity.setMemberId(memberId);
 		repo.update(testEntity);
-		memberList = repo.getMemberships();
+		memberList = repo.all();
 		assertEquals(1, memberList.size());
 		testEntity = memberList.get(0);
 		assertEquals(new Long(memberId), testEntity.getMemberId());
 
 		// delete works
 		repo.delete(testEntity);
-		memberList = repo.getMemberships();
+		memberList = repo.all();
 		assertEquals(0, memberList.size());
 
 	}

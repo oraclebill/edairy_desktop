@@ -19,8 +19,8 @@ public class RouteRepository implements IRepository<Route> {
 	};
 
 	@Override
-	public List<Route> getMemberships() {
-		return routeRepo.getMemberships();
+	public List<Route> all() {
+		return routeRepo.all();
 	}
 
 	@Override

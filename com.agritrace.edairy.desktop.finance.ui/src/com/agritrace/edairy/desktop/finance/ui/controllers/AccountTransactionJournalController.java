@@ -117,7 +117,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	public void afterBind() {
 		super.afterBind();
 
-		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.getMemberships(), Membership.class),
+		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.all(), Membership.class),
 				Membership.class, "getMemberId", PojoObservables.observeValue(filterBean, "member"));
 
 //		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),

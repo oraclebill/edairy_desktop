@@ -27,13 +27,13 @@ public class FarmServiceTest {
 	@Test
 	public void testCreatingAFarm() throws Exception {
 		IFarmRepository farmRepo = new FarmRepository();
-		List<Farm> myFarms = farmRepo.getMemberships();
+		List<Farm> myFarms = farmRepo.all();
 		Assert.assertEquals(0, myFarms.size());
 		farmRepo.saveNew(
 				DairyUtil.createFarm(
 						"Test Farm", 
 						DairyUtil.createLocation(null, null, null)));
-		myFarms = farmRepo.getMemberships();
+		myFarms = farmRepo.all();
 		String farmName = myFarms.get(0).getName();
 		Assert.assertEquals("Test Farm", farmName);
 	
@@ -62,9 +62,9 @@ public class FarmServiceTest {
 		farmRepo.saveNew(farm1);
 		farmRepo.saveNew(farm2);	
 		
-		System.err.println(farmRepo.getMemberships());
-		assertEquals(2, farmRepo.getMemberships().size());
-		assertEquals("Section A", farmRepo.getMemberships().get(0).getLocation().getPostalLocation().getSection());
+		System.err.println(farmRepo.all());
+		assertEquals(2, farmRepo.all().size());
+		assertEquals("Section A", farmRepo.all().get(0).getLocation().getPostalLocation().getSection());
 	}
 	
 }

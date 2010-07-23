@@ -62,7 +62,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	}
 
 	@Override
-	public List<T> getMemberships() {
+	public List<T> all() {
 		return find("FROM " + getEntityName());
 	}
 

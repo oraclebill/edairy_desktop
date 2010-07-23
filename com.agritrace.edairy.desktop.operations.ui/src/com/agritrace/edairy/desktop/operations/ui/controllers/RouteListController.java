@@ -83,7 +83,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 
 	@Override
 	protected List<Route> getFilteredResult() {
-		final List<Route> allRoutes = getRepository().getMemberships();
+		final List<Route> allRoutes = getRepository().all();
 		final List<Route> filteredRoutes = new ArrayList<Route>();
 
 		for (final Route r : allRoutes) {

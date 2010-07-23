@@ -38,9 +38,9 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 	}
 
 	@Override
-	public List<Customer> getMemberships() {
+	public List<Customer> all() {
 		// TODO Auto-generated method stub
-		return super.getMemberships();
+		return super.all();
 	}
 
 	@Override

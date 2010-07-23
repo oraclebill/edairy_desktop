@@ -8,7 +8,7 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 public interface ICustomerRepository extends IRepository<Customer> {
 
 	@Override
-	List<Customer> getMemberships();
+	List<Customer> all();
 
 	void merge(Customer customer);
 

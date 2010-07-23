@@ -52,7 +52,7 @@ public class XMemberRepository implements IMemberRepository, IRepository<Members
 	}
 
 	@Override
-	public List<Membership> getMemberships() {
+	public List<Membership> all() {
 		return localDairy.getMemberships();
 	}
 

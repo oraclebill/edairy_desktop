@@ -24,7 +24,7 @@ public interface IRepository<T extends EObject> {
 	 * @param query
 	 * @return List of matches or empty list.
 	 */
-	List<T> getMemberships();
+	List<T> all();
 
 	/**
 	 * 
