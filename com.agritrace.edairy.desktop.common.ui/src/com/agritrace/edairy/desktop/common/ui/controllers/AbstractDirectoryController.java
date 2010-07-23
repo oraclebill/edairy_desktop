@@ -78,6 +78,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			itemSelected(event);
 		}
 	};
+	
 	protected ITableRidget table;
 
 	/**
@@ -104,14 +105,14 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		configureFilterRidgetsInternal();
 		configureFilterRidgets();
 
-		// Set the initial conditions
-		resetFilterConditions();
-
 		// Configured Table ridgets
 		configureTableRidget();
 
 		// buttons
 		configureButtonsRidget();
+
+		// Set the initial conditions
+		resetFilterConditions();
 
 		// Use default conditions to filter
 		refreshTableContents();

@@ -34,7 +34,7 @@ import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
-import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController2;
 import com.agritrace.edairy.desktop.member.ui.views.ContainerListView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
@@ -201,7 +201,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule(MODULE_MEMBERS, LABEL_MEMBERS, moduleGroupNode);
 		NodeFactory.createSubModule(SUBMODULE_MEMBER_DIRECTORY,
-				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController.class); //$NON-NLS-1$ 
+				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController2.class); //$NON-NLS-1$ 
 		// NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
 		//				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
 

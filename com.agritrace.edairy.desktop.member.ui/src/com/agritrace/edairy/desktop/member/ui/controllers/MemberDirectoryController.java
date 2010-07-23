@@ -39,6 +39,39 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberDirectoryController extends SubModuleController {
 
+	private final class SearchLabelListener implements MouseListener {
+		@Override
+		public void mouseDoubleClick(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseDown(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseUp(MouseEvent arg0) {
+			if (arg0.getSource() instanceof Label) {
+				final String labelText = ((Label) (arg0.getSource())).getText();
+				if (labelText.equals("All")) {
+					if (searchText != null) {
+						searchText.setText(DEFAULT_SEARCH_DISPLAY_TXT);
+					}
+
+				} else {
+					if (searchText != null) {
+						searchText.setText(labelText);
+					}
+				}
+				refreshMemberList();
+			}
+
+		}
+	}
+
 	class AddActionListener implements IActionListener {
 		@Override
 		public void callback() {
@@ -107,7 +140,7 @@ public class MemberDirectoryController extends SubModuleController {
 	private ITextRidget searchText;
 	private IActionRidget viewRidget;
 	private ITableRidget memberListRidget;
-	private final IFarmRepository farmRepository;
+//	private final IFarmRepository farmRepository;
 	private final IMemberRepository repository;
 	private final List<Membership> membershipList;
 	private List<Membership> allMembers;
@@ -118,7 +151,7 @@ public class MemberDirectoryController extends SubModuleController {
 		membershipList 	= new ArrayList<Membership>();
 		searchLabels 	= new ILabelRidget[27];
 		repository 		= DairyRepository.getInstance();
-		farmRepository 	= new FarmRepository();
+//		farmRepository 	= new FarmRepository();
 		localDairy 		= DairyRepository.getInstance().getLocalDairy(); 
 		allMembers 		= localDairy.getMemberships();
 	}
@@ -136,41 +169,10 @@ public class MemberDirectoryController extends SubModuleController {
 	public void afterBind() {
 		super.afterBind();
 		if (searchLabels != null) {
+			MouseListener mouseListener = new SearchLabelListener();
 			for (final ILabelRidget searchLabel : searchLabels) {
 				if ((searchLabel != null) && (searchLabel.getUIControl() != null)) {
-					((Label) (searchLabel.getUIControl())).addMouseListener(new MouseListener() {
-
-						@Override
-						public void mouseDoubleClick(MouseEvent arg0) {
-							// TODO Auto-generated method stub
-
-						}
-
-						@Override
-						public void mouseDown(MouseEvent arg0) {
-							// TODO Auto-generated method stub
-
-						}
-
-						@Override
-						public void mouseUp(MouseEvent arg0) {
-							if (arg0.getSource() instanceof Label) {
-								final String labelText = ((Label) (arg0.getSource())).getText();
-								if (labelText.equals("All")) {
-									if (searchText != null) {
-										searchText.setText(DEFAULT_SEARCH_DISPLAY_TXT);
-									}
-
-								} else {
-									if (searchText != null) {
-										searchText.setText(labelText);
-									}
-								}
-								refreshMemberList();
-							}
-
-						}
-					});
+					((Label) (searchLabel.getUIControl())).addMouseListener(mouseListener);
 				}
 			}
 
@@ -207,7 +209,6 @@ public class MemberDirectoryController extends SubModuleController {
 					searchText.setText("");
 				}
 			}
-
 			@Override
 			public void focusLost(FocusEvent event) {
 				String text = searchText.getText();
@@ -226,6 +227,7 @@ public class MemberDirectoryController extends SubModuleController {
 
 
 		memberListRidget = getRidget(ITableRidget.class, ViewWidgetId.MEMBERLIST_MEMBERTABLE);
+		
 		final IActionRidget searchButton = getRidget(IActionRidget.class, ViewWidgetId.memberInfo_searchButton);
 		searchButton.addListener(new IActionListener() {
 
