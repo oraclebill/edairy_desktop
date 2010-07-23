@@ -380,6 +380,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return localDairy.getMemberships();
 	}
 		
+	@SuppressWarnings("unchecked")
 	@Override 
 	public List<Farm> getMemberFarms() {
 		return (List<Farm>) PersistenceManager.getDefault().getSession().createCriteria(Farm.class).list();
@@ -387,9 +388,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		
 	@Override
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
-//		if (newEntity.getMemberNumber() == null) {
+		if (newEntity.getMemberNumber() == null || newEntity.getMemberNumber().trim().length() == 0) {
+			int size = localDairy.getMemberships().size();
+			long count = localDairy.getVersion();
+			newEntity.setMemberNumber("A" + count + "" + size);
 //			throw new RepositoryException("Member number cannot be null");
-//		}
+		}
 		if (newEntity.getAccount() == null) {
 			Account memberAccount = AccountFactory.eINSTANCE.createAccount();
 			memberAccount.setMember(newEntity);
@@ -467,6 +471,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return currentPrice;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
 		Session session = PersistenceManager.getDefault().getSession();
@@ -474,6 +479,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				.add(Restrictions.between("priceDate", startDate, endDate)).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route, Customer customer) {
 		Session session = PersistenceManager.getDefault().getSession();
@@ -493,6 +499,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return djCriteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<DairyContainer> getBinsByRoute(Route journalRoute) {
 		Session session = PersistenceManager.getDefault().getSession();

@@ -164,7 +164,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.save(changedItem);
+				session.saveOrUpdate(changedItem);
 			}
 		});
 	}
