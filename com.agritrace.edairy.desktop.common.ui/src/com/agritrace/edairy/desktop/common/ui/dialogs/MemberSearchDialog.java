@@ -58,7 +58,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			
-			boolean selection = true;
+			boolean selected = true;
 			
 //			System.err.printf("MemberSearchDialog::select: %s - %s\n", parentElement.getClass(), element.getClass());
 
@@ -69,23 +69,23 @@ public class MemberSearchDialog extends TitleAreaDialog {
 			if (text == null || text.getText().trim().length() == 0) {
 				return true;
 			}
-			String textStr = text.getText().trim();
+			String textStr = text.getText().trim().toLowerCase();
 			String comboStr = combo.getText();
 			
 			if (element instanceof Membership) {
 				Membership membership = (Membership) element;
 				if (comboStr.equals("ID")) {
-					selection = membership.getMemberNumber().contains(textStr);
+					selected = membership.getMemberNumber().toLowerCase().contains(textStr);
 				} else if (comboStr.equals("Name")) {
 					Person member = membership.getMember();
 					if (member != null) {
-						String name = member.getGivenName();
+						String name = member.getGivenName().toLowerCase();
 						if (name != null && name.trim().length() > 0) {
-							selection = name.contains(textStr);
+							selected = name.contains(textStr);
 						}
-						name = member.getFamilyName();
+						name = member.getFamilyName().toLowerCase();
 						if (name != null && name.trim().length() > 0) {
-							selection = selection || name.contains(textStr);
+							selected = selected || name.toLowerCase().contains(textStr);
 						}
 					}
 				} else {
@@ -94,7 +94,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 			} else {
 				throw new IllegalArgumentException(element.getClass().getName());
 			}
-			return selection;
+			return selected;
 		}
 
 	}
@@ -125,7 +125,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		public void widgetSelected(SelectionEvent event) {
 //			System.err.println("widgetSelected: " + e);
 			ViewerFilter filter = new MemberViewerFilter(searchType, filterText);
-			System.err.println("widgetSelected: adding filter " + filter);
+//			System.err.println("widgetSelected: adding filter " + filter);
 			myTable.setFilters(new ViewerFilter[] { filter });
 		}
 
@@ -225,7 +225,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Select", true);
+		createButton(parent, IDialogConstants.OK_ID, "Select", false);
 	}
 
 	/**
@@ -326,8 +326,9 @@ public class MemberSearchDialog extends TitleAreaDialog {
 				handleSelection(sel);
 			}
 		});
-//		tableView.set
 
+		parent.getShell().setDefaultButton(lookupButton);
+		
 		panel.setLayout(layout);
 		return composite;
 	}
