@@ -9,6 +9,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
@@ -63,15 +64,15 @@ public class LiveStockGeneralWidget {
 		GridDataFactory.fillDefaults().applyTo(femaleButton);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Date of Brith :"));
-		final Text birthDayTxt = UIControlsFactory.createText(leftPanel, SWT.SINGLE | SWT.BORDER,
+		final DateTime birthDayTxt = UIControlsFactory.createDate(leftPanel, SWT.BORDER,
 				ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(birthDayTxt);
+		GridDataFactory.fillDefaults().grab(true, false).span(2,1).applyTo(birthDayTxt);
 
-		final ImageButton birthDayBtn = UIControlsFactory.createImageButton(leftPanel, SWT.NONE,
-				ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY_BUTTON);
-		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
-		birthDayBtn.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(birthDayBtn);
+//		final ImageButton birthDayBtn = UIControlsFactory.createImageButton(leftPanel, SWT.NONE,
+//				ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY_BUTTON);
+//		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
+//		birthDayBtn.setImage(calendar);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(birthDayBtn);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Birth Certificate Number :"));
 		final Text certificateTxt = UIControlsFactory.createText(leftPanel, SWT.SINGLE | SWT.BORDER,

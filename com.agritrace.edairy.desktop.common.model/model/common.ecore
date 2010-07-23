@@ -66,8 +66,8 @@
     <eAnnotations source="teneo.jpa">
       <details key="appinfo" value="@MappedSuperclass"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" upperBound="-1"
-        eType="#//ContactMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contactMethods" ordered="false"
+        upperBound="-1" eType="#//ContactMethod" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//Contactable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="photo" eType="#//ImageReference"/>

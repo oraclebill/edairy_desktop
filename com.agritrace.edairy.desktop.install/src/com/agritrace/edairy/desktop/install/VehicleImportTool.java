@@ -118,7 +118,7 @@ public class VehicleImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void doImportComplete() {
+	protected void doImportComplete(int okCount, int failCount) {
 	}
 
 }

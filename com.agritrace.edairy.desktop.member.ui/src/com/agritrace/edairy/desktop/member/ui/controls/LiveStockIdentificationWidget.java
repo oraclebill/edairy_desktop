@@ -8,6 +8,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
@@ -38,15 +39,16 @@ public class LiveStockIdentificationWidget {
 		final GridDataFactory fieldFactory = GridDataFactory.fillDefaults().grab(true, false);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Acquision Date :"));
-		final Text dateTxt = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,
+		final DateTime dateTxt = UIControlsFactory.createDate(composite, SWT.BORDER ,
 				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE);
-		fieldFactory.applyTo(dateTxt);
+		fieldFactory.copy().span(2,1).applyTo(dateTxt);
 
-		final ImageButton birthDayBtn = UIControlsFactory.createImageButton(composite, SWT.NONE,
-				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE_BTN);
-		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
-		birthDayBtn.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(birthDayBtn);
+
+//		final ImageButton birthDayBtn = UIControlsFactory.createImageButton(composite, SWT.NONE,
+//				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE_BTN);
+//		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
+//		birthDayBtn.setImage(calendar);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(birthDayBtn);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Acquision :"));
 		final Combo acquisionTypeCombo = UIControlsFactory.createCombo(composite,

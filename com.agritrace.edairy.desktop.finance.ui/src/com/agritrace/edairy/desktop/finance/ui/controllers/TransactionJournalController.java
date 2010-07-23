@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
+import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -16,6 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controls.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
@@ -51,7 +53,8 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 
 	protected final TransactionJournalFilterBean filterBean = new TransactionJournalFilterBean();
 	protected ITextRidget memberNameRidget;
-	protected IDateTimeRidget startDateRidget, endDateRidget;
+	IDateRangeRidget dateRangeRidget;
+//	protected IDateTimeRidget endDateRidget;
 
 	// abstract class requires subclass to 
 	protected TransactionJournalController() {
@@ -65,9 +68,9 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	@Override
 	public void configureFilterRidgets() {
 
-		startDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_START_DATE);
+		dateRangeRidget = getRidget(IDateRangeRidget.class, FinanceBindingConstants.FILTER_DATE_RANGE);
 		// startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
+//		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
 		// endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
 
 		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
@@ -78,9 +81,11 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	public void afterBind() {
 		super.afterBind();
 
-		startDateRidget.bindToModel(filterBean, "startDate");
+		dateRangeRidget.bindToModel(BeansObservables.observeValue(filterBean, "startDate"), 
+				BeansObservables.observeValue(filterBean, "endDate"));
 
-		endDateRidget.bindToModel(filterBean, "endDate");
+//		startDateRidget.bindToModel(filterBean, "startDate");
+//		endDateRidget.bindToModel(filterBean, "endDate");
 
 		memberNameRidget.bindToModel(PojoObservables.observeDetailValue(
 				PojoObservables.observeValue(filterBean, "member"), "memberId", String.class));

@@ -74,7 +74,7 @@ public class ScaleImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void doImportComplete() {
+	protected void doImportComplete(int okCount, int failCount) {
 		// TODO Auto-generated method stub
 
 	}

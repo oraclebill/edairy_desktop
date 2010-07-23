@@ -39,7 +39,7 @@ public interface Contactable extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Contact Methods</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getContactable_ContactMethods()
-	 * @model containment="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<ContactMethod> getContactMethods();

@@ -8,6 +8,7 @@ public interface FinanceBindingConstants {
 	static final String FILTER_SOURCE_ROW = "FILTER_SOURCE_ROW";
 	static final String FILTER_TYPE_ROW = "FILTER_TYPE_ROW";
 	static final String ID_COMBO_ADJUSTMENT_TYPE = "ID_COMBO_ADJUSTMENT_TYPE";
+	static final String FILTER_DATE_RANGE = "FILTER_DATE_RANGE";
 	
 	String AMT_TEXT_RIDGET = "amtText";
 	String BTN_ADD_TRANSACTION = "btnAddTransaction";

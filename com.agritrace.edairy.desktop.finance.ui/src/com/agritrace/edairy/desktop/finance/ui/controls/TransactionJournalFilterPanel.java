@@ -4,12 +4,9 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.internal.ui.ridgets.swt.CompositeRidget;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.riena.ui.swt.CompletionCombo;
-import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
-import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -20,6 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controls.DateRange;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.ViewConstants;
 
@@ -43,54 +41,9 @@ public class TransactionJournalFilterPanel extends Composite {
 
 		// first row: date range
 		//
-		{
-			final Composite row = UIControlsFactory.createComposite(this);
-			final FormLayout layout = new FormLayout();
-			layout.marginWidth = layout.marginHeight = 10;
-			row.setLayout(layout);
-			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(row);
-
-			final Label startDateLabel = new Label(row, SWT.LEFT);
-			startDateLabel.setText("Date Range - Start: ");
-			startDateLabel.setBackground(AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-			FormData fd = new FormData();
-			fd.width = 140;
-			fd.top = new FormAttachment(0, 0);
-			fd.left = new FormAttachment(0, 0);
-			startDateLabel.setLayoutData(fd);
-
-			// startDatePicker = new DatePickerComposite(row, SWT.BORDER |
-			// SWT.SINGLE);
-			final DateTime startDatePicker = UIControlsFactory.createDate(row, SWT.NONE,
-					FinanceBindingConstants.FILTER_DATE_START_DATE);
-			fd = new FormData();
-			fd.top = new FormAttachment(startDateLabel, 0, SWT.CENTER);
-			fd.left = new FormAttachment(startDateLabel, 5, SWT.RIGHT);
-			fd.width = ViewConstants.FIELD_WIDTH;
-			startDatePicker.setLayoutData(fd);
-			// SWTBindingPropertyLocator.getInstance().setBindingProperty(startDatePicker,
-			// "startDateRidget");
-
-			final Label endDateLabel = new Label(row, SWT.LEFT);
-			endDateLabel.setText("End: ");
-			endDateLabel.setBackground(AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-			fd = new FormData();
-			fd.top = new FormAttachment(startDatePicker, 0, SWT.CENTER);
-			fd.left = new FormAttachment(startDatePicker, 20, SWT.RIGHT);
-			endDateLabel.setLayoutData(fd);
-
-			// endDatePicker = new DatePickerComposite(row, SWT.BORDER |
-			// SWT.SINGLE);
-			final DateTime endDatePicker = UIControlsFactory.createDate(row, SWT.NONE,
-					FinanceBindingConstants.FILTER_DATE_END_DATE);
-			fd = new FormData();
-			fd.top = new FormAttachment(endDateLabel, 0, SWT.CENTER);
-			fd.left = new FormAttachment(endDateLabel, 5, SWT.RIGHT);
-			fd.width = ViewConstants.FIELD_WIDTH;
-			endDatePicker.setLayoutData(fd);
-			// SWTBindingPropertyLocator.getInstance().setBindingProperty(endDatePicker,
-			// "endDateRidget");
-		}
+		final DateRange dateRange = new DateRange(this, SWT.NULL);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateRange);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRange, FinanceBindingConstants.FILTER_DATE_RANGE);
 
 		// second row: member lookup
 		//

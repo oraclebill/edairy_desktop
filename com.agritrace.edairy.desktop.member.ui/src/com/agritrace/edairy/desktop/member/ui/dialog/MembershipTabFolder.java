@@ -52,6 +52,7 @@ public class MembershipTabFolder {
 
 	private Composite tabComposite;
 
+	
 	public MembershipTabFolder(Composite parent) {
 		initGUI(parent, ALL_TABS);
 	}

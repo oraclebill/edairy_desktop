@@ -1,8 +1,13 @@
 package com.agritrace.edairy.desktop.internal.collection.ui;
 
+import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
+import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineRidget;
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 
 /**
@@ -46,6 +51,8 @@ public class Activator extends DesktopBaseActivator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+//		SwtControlRidgetMapper.getInstance().addMapping(JournalHeaderComposite.class, JournalHeaderRidget.class);
+//		SwtControlRidgetMapper.getInstance().addMapping(CollectionLineComposite.class, CollectionLineRidget.class);
 	}
 
 	/*

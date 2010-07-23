@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -81,8 +82,8 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				Contactable model = getInputModel();
 				if (model != null) {
 					model.getContactMethods().remove(editTable.getSelectionIndex());
-					editTable.bindToModel(new WritableList(model.getContactMethods(), ContactMethod.class),
-							ContactMethod.class, columnPropertys, headers);
+//					editTable.bindToModel(new WritableList(model.getContactMethods(), ContactMethod.class),
+//							ContactMethod.class, columnPropertys, headers);
 					editTable.updateFromModel();
 					updateButtonStatus();
 				}
@@ -95,9 +96,9 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 			public void callback() {
 				Contactable model = getInputModel();
 				if (model != null) {
-					model.getContactMethods().clear();
-					editTable.bindToModel(new WritableList(model.getContactMethods(), ContactMethod.class),
-							ContactMethod.class, columnPropertys, headers);
+					model.getContactMethods().clear();				
+//					editTable.bindToModel(new WritableList(model.getContactMethods(), ContactMethod.class),
+//							ContactMethod.class, columnPropertys, headers);
 					editTable.updateFromModel();
 					updateButtonStatus();
 				}
@@ -133,12 +134,13 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 		if (null == contactable)
 			return;
 		
-		List<ContactMethod> contactMethods = getInputModel().getContactMethods();
-		if (null == contactMethods)
-			return;
-		
+//		List<ContactMethod> contactMethods = contactable.getContactMethods();
+//		if (null == contactMethods)
+//			return;
+//		
 		editTable.bindToModel(
-				new WritableList(contactMethods, ContactMethod.class), ContactMethod.class,
+				EMFObservables.observeList(contactable, ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS), 
+				ContactMethod.class,
 				columnPropertys, headers);
 		editTable.updateFromModel();
 	}

@@ -43,7 +43,7 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
  * @author bjones
  * 
  */
-public class ProfilePhotoRidget extends AbstractCompositeRidget implements IValueRidget {
+public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProfilePhotoRidget {
 
 	private final class LinkSelected implements ISelectionListener {
 		@Override

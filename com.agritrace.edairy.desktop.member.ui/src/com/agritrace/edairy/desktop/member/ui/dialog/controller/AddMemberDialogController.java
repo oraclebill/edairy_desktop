@@ -17,18 +17,14 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.core.marker.IMarkable;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.ILinkRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
-import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
@@ -36,7 +32,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
@@ -83,12 +79,12 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// live stock tab
 	private MemberLiveStockWidgetController liveStockController;
 	private Map<IRidget, FeaturePath> memberBindings;
-	private ITextRidget memberIdRidget;
+	private ITextRidget memberNbrRidget;
 	private MemberProfileWidgetController memberProfileController;
 
 	private ITextRidget middleNameRidget;
 
-	private ProfilePhotoRidget photoRidget;
+	private IProfilePhotoRidget photoRidget;
 
 	private IComboRidget suffixRidget;
 
@@ -160,7 +156,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		aMap.put(formattedMemberNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)); // uses
 		// converter
 		// member id
-		aMap.put(memberIdRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_ID));
+		aMap.put(memberNbrRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER));
 
 		// member first name
 		aMap.put(givenNameRidget, FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER,
@@ -222,7 +218,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void configureUpperPanel() {
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
-		memberIdRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_memberNbr);
+		memberNbrRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_memberNbr);
 		// generatedMemberId = System.currentTimeMillis()+"";
 		// memberIdRidget.setText(generatedMemberId);
 		givenNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName);
@@ -232,7 +228,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		addtlNameRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames);
 		titleRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_honorific);
 		suffixRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_suffix);
-		photoRidget = getRidget(ProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
+		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
 
 		// extended setup
 		// titleRidget.setOutputOnly(true);
@@ -300,7 +296,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 					EMFObservables.observeValue(selectedMember, ModelPackage.Literals.PERSON__SUFFIX));
 
 			// tap, tap..
-			memberIdRidget.updateFromModel();
+			memberNbrRidget.updateFromModel();
 			for (final IRidget r : memberBindings.keySet()) {
 				if (r instanceof IValueRidget) {
 					((IValueRidget) r).updateFromModel();

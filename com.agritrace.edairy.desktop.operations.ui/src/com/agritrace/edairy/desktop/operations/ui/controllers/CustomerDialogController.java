@@ -4,10 +4,8 @@ import java.util.Arrays;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -17,9 +15,8 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
-import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 
 public class CustomerDialogController extends RecordDialogController<Customer> {
@@ -32,7 +29,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 	ITextRidget customerId;
 	IComboRidget customerStatus;
 	IComboRidget customerType;
-	ProfilePhotoRidget profilePhoto;
+	IProfilePhotoRidget profilePhoto;
 
 	ITextRidget legalName;
 
@@ -97,7 +94,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		customerDescription.updateFromModel();
 
 		
-		profilePhoto = getRidget(ProfilePhotoRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
+		profilePhoto = getRidget(IProfilePhotoRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
 		profilePhoto.bindToModel(EMFObservables.observeValue(editCustomer,
 				ModelPackage.Literals.COMPANY__PROFILE_PHOTO));
 //		profilePhoto.updateFromModel();

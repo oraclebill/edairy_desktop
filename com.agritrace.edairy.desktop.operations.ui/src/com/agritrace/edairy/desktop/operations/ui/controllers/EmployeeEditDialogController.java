@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeBindingConstants;
 
@@ -34,7 +34,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	private ITextRidget operatorCode;
 	private ITextRidget securityRole;
 
-	private ProfilePhotoRidget photoRidget;
+	private IProfilePhotoRidget photoRidget;
 
 	@Override
 	public void configureUserRidgets() {
@@ -43,7 +43,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		editEmployee = getWorkingCopy();
 		assert (null != editEmployee);
 
-		photoRidget = getRidget(ProfilePhotoRidget.class, "profile-photo-widget");
+		photoRidget = getRidget(IProfilePhotoRidget.class, "profile-photo-widget");
 		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO) );
 		
 		

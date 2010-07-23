@@ -23,6 +23,7 @@ import org.eclipse.riena.core.marker.IMarkable;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
@@ -75,11 +76,11 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	private RegisteredAnimal selectedNode;
 	// identification tab
-	ITextRidget acquisionDate;
+	IDateTimeRidget acquisionDate;
 	IComboRidget acquisionTypeCombo;
 	ITextRidget antibioticsTxt;
 	ITextRidget awardText;
-	ITextRidget birthDayTxt;
+	IDateTimeRidget birthDayDate;
 	IComboRidget breedCombo;
 	ITextRidget certificateTxt;
 	IComboRidget farmCombo;
@@ -293,16 +294,8 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 				}
 			});
 			// birthDayTxt and acquisionDate
-			final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-			if (selectedNode.getDateOfBirth() != null) {
-				bean.setDate(selectedNode.getDateOfBirth());
-				birthDayTxt.setText(bean.getFormattedDate());
-			}
-			if (selectedNode.getDateOfAcquisition() != null) {
-				bean.setDate(selectedNode.getDateOfAcquisition());
-				acquisionDate.setText(bean.getFormattedDate());
-
-			}
+			birthDayDate.setDate(selectedNode.getDateOfBirth());
+			acquisionDate.setDate(selectedNode.getDateOfAcquisition());
 
 			// acquisionTypeCombo
 			acquisionTypeCombo.bindToModel(Observables.staticObservableList(AcquisitionType.VALUES),
@@ -393,40 +386,43 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		maleButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_MALE);
 		femaleButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_FEMALE);
 
-		birthDayTxt = getRidget(ITextRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY);
-		birthDayTxt.setOutputOnly(true);
-		birthDayTxt.setMandatory(true);
+		birthDayDate = getRidget(IDateTimeRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY);
+		birthDayDate.setOutputOnly(true);
+		birthDayDate.setMandatory(true);
 
-		final IActionRidget birthDayBtn = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY_BUTTON);
-		birthDayBtn.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				if (selectedNode != null) {
-					final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-					final Date birthDay = selectedNode.getDateOfBirth();
-					if (birthDay != null) {
-						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-								DateTimeUtils.DATE_FORMAT.format(birthDay));
-					} else {
-						// By default it will be today
-						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-								DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
-					}
-
-					final int ret = calDialog.open();
-					if (ret == AbstractWindowController.OK) {
-						final Date selectedDate = (Date) calDialog.getController().getContext(
-								SimpleFormattedDateBean.DATE_PROR);
-						selectedNode.setDateOfBirth(selectedDate);
-						final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-						bean.setDate(selectedDate);
-						birthDayTxt.setText(bean.getFormattedDate());
-					}
-				}
-
-			}
-		});
+		// final IActionRidget birthDayBtn = getRidget(IActionRidget.class,
+		// ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY_BUTTON);
+		// birthDayBtn.addListener(new IActionListener() {
+		//
+		// @Override
+		// public void callback() {
+		// if (selectedNode != null) {
+		// final CalendarSelectionDialog calDialog = new
+		// CalendarSelectionDialog();
+		// final Date birthDay = selectedNode.getDateOfBirth();
+		// if (birthDay != null) {
+		// calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+		// DateTimeUtils.DATE_FORMAT.format(birthDay));
+		// } else {
+		// // By default it will be today
+		// calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+		// DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
+		// }
+		//
+		// final int ret = calDialog.open();
+		// if (ret == AbstractWindowController.OK) {
+		// final Date selectedDate = (Date)
+		// calDialog.getController().getContext(
+		// SimpleFormattedDateBean.DATE_PROR);
+		// selectedNode.setDateOfBirth(selectedDate);
+		// final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+		// bean.setDate(selectedDate);
+		// birthDayTxt.setText(bean.getFormattedDate());
+		// }
+		// }
+		//
+		// }
+		// });
 
 		certificateTxt = getRidget(ITextRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_BIRTH_CERTIFICATE);
 		veterinaryTxt = getRidget(ITextRidget.class, ViewWidgetId.LIVESTOCK_GENERAL_VERTERINARY);
@@ -436,40 +432,40 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	}
 
 	protected void configureIdentificationTab() {
-		acquisionDate = getRidget(ITextRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE);
+		acquisionDate = getRidget(IDateTimeRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE);
 		acquisionDate.setMandatory(true);
 		acquisionDate.setOutputOnly(true);
-		final IActionRidget acquisionDateButton = getRidget(IActionRidget.class,
-				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE_BTN);
-		acquisionDateButton.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				if (selectedNode != null) {
-					final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-					final Date acqusionDay = selectedNode.getDateOfAcquisition();
-					if (acqusionDay != null) {
-						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-								DateTimeUtils.DATE_FORMAT.format(acqusionDay));
-					} else {
-						// By default it will be today
-						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-								DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
-					}
-
-					final int ret = calDialog.open();
-					if (ret == AbstractWindowController.OK) {
-						final Date selectedDate = (Date) calDialog.getController().getContext(
-								SimpleFormattedDateBean.DATE_PROR);
-						selectedNode.setDateOfAcquisition(selectedDate);
-						final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-						bean.setDate(selectedDate);
-						acquisionDate.setText(bean.getFormattedDate());
-					}
-				}
-
-			}
-		});
+//		final IActionRidget acquisionDateButton = getRidget(IActionRidget.class,
+//				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE_BTN);
+//		acquisionDateButton.addListener(new IActionListener() {
+//
+//			@Override
+//			public void callback() {
+//				if (selectedNode != null) {
+//					final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
+//					final Date acqusionDay = selectedNode.getDateOfAcquisition();
+//					if (acqusionDay != null) {
+//						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+//								DateTimeUtils.DATE_FORMAT.format(acqusionDay));
+//					} else {
+//						// By default it will be today
+//						calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
+//								DateTimeUtils.DATE_FORMAT.format(Calendar.getInstance().getTime()));
+//					}
+//
+//					final int ret = calDialog.open();
+//					if (ret == AbstractWindowController.OK) {
+//						final Date selectedDate = (Date) calDialog.getController().getContext(
+//								SimpleFormattedDateBean.DATE_PROR);
+//						selectedNode.setDateOfAcquisition(selectedDate);
+//						final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
+//						bean.setDate(selectedDate);
+//						acquisionDate.setText(bean.getFormattedDate());
+//					}
+//				}
+//
+//			}
+//		});
 
 		acquisionTypeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_TYPE);
 		idTypeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_TYPE);

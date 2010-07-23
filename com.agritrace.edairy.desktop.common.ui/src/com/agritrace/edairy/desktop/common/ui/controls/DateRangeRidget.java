@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Control;
 
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
-public class DateRangeRidget extends AbstractCompositeRidget {
+public class DateRangeRidget extends AbstractCompositeRidget implements IDateRangeRidget {
 
 	public class ValueChangedListener implements PropertyChangeListener {
 		String propertyName;
@@ -46,8 +46,8 @@ public class DateRangeRidget extends AbstractCompositeRidget {
 
 	@Override
 	public void configureRidgets() {
-		startDateText = getRidget(IDateTimeRidget.class, DateRangeControl.START_DATE_ID);
-		endDateText = getRidget(IDateTimeRidget.class, DateRangeControl.END_DATE_ID);
+		startDateText = getRidget(IDateTimeRidget.class, DateRange.START_DATE_ID);
+		endDateText = getRidget(IDateTimeRidget.class, DateRange.END_DATE_ID);
 
 		startDateText.setDate(DateTimeUtils.getOneMonthBeforeCurrentDate());
 		endDateText.setDate(DateTimeUtils.getCurrentDate());

@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controls;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-public class DateRangeControl extends  Composite implements IComplexComponent {
+public class DateRange extends  Composite implements IComplexComponent {
 
 	public static final int DEFAULT_LABEL_WIDTH = 110;
 	
@@ -31,20 +31,20 @@ public class DateRangeControl extends  Composite implements IComplexComponent {
 	public static final String START_DATE_ID = "start-date";
 	public static final String END_DATE_ID = "end-date";
 	
-	private final List<Control> uiControls = new LinkedList<Control>();
+	private final List<Object> uiControls = new LinkedList<Object>();
 	private final String labelText;
 	private final String startId;
 	private final String endId;
 
-	public DateRangeControl(Composite parent, int style) {
+	public DateRange(Composite parent, int style) {
 		this(parent, style, DEFAULT_RANGE_LABEL, START_DATE_ID, END_DATE_ID);
 	}
 	
-	public DateRangeControl(Composite parent, String rangeLabelTxt, String startTxtId, String endTxtId) {
+	public DateRange(Composite parent, String rangeLabelTxt, String startTxtId, String endTxtId) {
 		this(parent, SWT.NULL, rangeLabelTxt, startTxtId, endTxtId);
 	}
 	
-	public DateRangeControl(Composite parent, int style, String rangeLabelTxt, String startTxtId, String endTxtId) {
+	public DateRange(Composite parent, int style, String rangeLabelTxt, String startTxtId, String endTxtId) {
 		super(parent, style);
 		
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));		
@@ -84,8 +84,7 @@ public class DateRangeControl extends  Composite implements IComplexComponent {
 	
 	@Override
 	public List<Object> getUIControls() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.unmodifiableList(uiControls);
 	}
 	
 	private void addUIControl(Control control, String bindingId) {
@@ -97,7 +96,7 @@ public class DateRangeControl extends  Composite implements IComplexComponent {
 		final Display display = new Display();
 		final Shell shell = new Shell(display);		
 		
-		DateRangeControl control = new DateRangeControl(shell, "Range", "start", "end");
+		DateRange control = new DateRange(shell, "Range", "start", "end");
 		GridLayoutFactory.fillDefaults().generateLayout(shell);
 		
 //		shell.pack();

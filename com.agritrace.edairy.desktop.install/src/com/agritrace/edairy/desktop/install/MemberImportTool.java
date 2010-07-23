@@ -66,7 +66,7 @@ public class MemberImportTool extends AbstractImportTool {
 				String chopped = membershipNumber.substring(0, membershipNumber.length() - 1);
 				key = Long.decode(chopped);
 			} catch (NumberFormatException nfe2) {
-				throw new ValidationException("Unable to create valid key");
+				throw new ValidationException("Unable to create valid key for " + membershipNumber);
 			}
 		}
 
@@ -103,7 +103,7 @@ public class MemberImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void doImportComplete() {
+	protected void doImportComplete(int okCount, int failCount) {
 		dairyRepo.save(dairy);
 	}
 

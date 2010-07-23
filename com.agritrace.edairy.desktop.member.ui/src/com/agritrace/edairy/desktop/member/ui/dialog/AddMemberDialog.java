@@ -9,6 +9,8 @@ import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddMemberDialogC
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
 public class AddMemberDialog extends ViewMemberDialog {
+	public AddMemberDialog() {
+	}
 
 	@Override
 	protected AbstractWindowController createController() {

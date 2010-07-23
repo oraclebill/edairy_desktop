@@ -28,6 +28,7 @@ public class MemberInfoGroup {
 	public static final String HONORIFIC = "Hon.";
 	public static final String LAST_NAME = "Family:";
 	public static final String MEMBERID = "Member ID:";
+	public static final String MEMBERNUMBER = "Member Number:";
 	public static final String MIDDLE_NAME = "Middle :";
 	public static final String SUFFIX = "Suffix";
 
@@ -37,7 +38,7 @@ public class MemberInfoGroup {
 	private ProfilePhotoComposite photoLabel;
 	private Text txtAdditional;
 	private Text txtFirst;
-	private Text txtId;
+	private Text memberNbr;
 	private Text txtLast;
 	private Text txtMiddle;
 
@@ -79,10 +80,10 @@ public class MemberInfoGroup {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(memberNameLabel);
 
 		// member Id
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MEMBERID));
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, MEMBERNUMBER));
 		// member Id Text (Label)
-		txtId = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_memberNbr);
-		fieldFactory.applyTo(txtId);
+		memberNbr = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_memberNbr);
+		fieldFactory.applyTo(memberNbr);
 
 		// row 2: title label + id
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Title"));

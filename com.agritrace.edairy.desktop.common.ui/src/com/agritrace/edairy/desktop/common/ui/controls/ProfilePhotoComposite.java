@@ -21,10 +21,6 @@ import com.swtdesigner.SWTResourceManager;
 
 public class ProfilePhotoComposite extends Composite implements IComplexComponent {
 	
-	static {
-		// TODO: should this be in the activator?
-		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoComposite.class, ProfilePhotoRidget.class);
-	}
 
 	public static final String LINK_BIND_ID = "updateImageLink";
 	public static final String LABEL_BIND_ID = "profileImageLabel";

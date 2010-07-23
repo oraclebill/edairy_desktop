@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.agritrace.edairy.desktop.common.ui.controls.DateRangeControl;
+import com.agritrace.edairy.desktop.common.ui.controls.DateRange;
 import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
@@ -41,7 +41,7 @@ public class MemberCollectionRecordsWidget {
 //		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
 //				ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE,
 //				ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
-		final DateRangeControl dateRangeWidget = new DateRangeControl(filterPanel, SWT.BORDER);
+		final DateRange dateRangeWidget = new DateRange(filterPanel, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
 				.applyTo(dateRangeWidget.getComposite());
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRangeWidget, ViewWidgetId.COLLECTION_FILTER_DATE_RANGE);

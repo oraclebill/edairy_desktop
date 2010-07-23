@@ -5,17 +5,15 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
-import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 /**
@@ -35,8 +33,8 @@ public class MemberProfileWidget {
 	private ComboViewer comboStatus;
 
 	private final Composite composite;
-	private Text dateText;
-	private Text effectDateText;
+	private DateTime dateText;
+	private DateTime effectDateText;
 	private Text txtPhone;
 
 	public MemberProfileWidget(Composite parent) {
@@ -64,47 +62,17 @@ public class MemberProfileWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoGroup);
 		infoGroup.setLayout(new GridLayout(6, false));
 		UIControlsFactory.createLabel(infoGroup, applicationDate);
-		dateText = UIControlsFactory.createText(infoGroup, SWT.READ_ONLY | SWT.BORDER,
-				ViewWidgetId.memberInfo_applicationDate);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateText);
 
-		final ImageButton calendarButton = UIControlsFactory.createImageButton(infoGroup, SWT.NONE,
-				ViewWidgetId.memberInfo_applicationDate_btn);
-		final Image calendar = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.CALENDAR_ICON);
-		calendarButton.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton);
+		// application date
+		dateText = UIControlsFactory.createDate(infoGroup,  SWT.BORDER,
+				ViewWidgetId.memberInfo_applicationDate);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2,1).grab(true, false).applyTo(dateText);
 
 		// effective date
 		UIControlsFactory.createLabel(infoGroup, effectiveDate);
-		effectDateText = UIControlsFactory.createText(infoGroup, SWT.READ_ONLY | SWT.BORDER,
+		effectDateText = UIControlsFactory.createDate(infoGroup, SWT.BORDER,
 				ViewWidgetId.memberInfo_effectiveDate);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(effectDateText);
-		// addUIControl(dateText,ViewWidgetId.calendarDate);
-
-		final ImageButton calendarButton2 = UIControlsFactory.createImageButton(infoGroup, SWT.NONE,
-				ViewWidgetId.memberInfo_effectiveDate_btn);
-		calendarButton2.setImage(calendar);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(calendarButton2);
-		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
-
-		// calendarButton2.addSelectionListener(new SelectionAdapter() {
-		// @Override
-		// public void widgetSelected(SelectionEvent e) {
-		// final CalendarSelectionDialog calDialog = new
-		// CalendarSelectionDialog();
-		// calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-		// dateText.getText());
-		//
-		// if (calDialog.open() == AbstractWindowController.OK) {
-		// final Date selectedDate = (Date)
-		// calDialog.getController().getContext(
-		// SimpleFormattedDateBean.DATE_PROR);
-		// final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-		// bean.setDate(selectedDate);
-		// effectDateText.setText(bean.getFormattedDate());
-		// }
-		// }
-		// });
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2,1).grab(true, false).applyTo(effectDateText);
 
 		// status
 		UIControlsFactory.createLabel(infoGroup, status);
@@ -112,6 +80,7 @@ public class MemberProfileWidget {
 		final GridData gd_comboStatus = new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1);
 		comboStatus.getControl().setLayoutData(gd_comboStatus);
 
+		// phone
 		UIControlsFactory.createLabel(infoGroup, phoneNumber);
 		txtPhone = UIControlsFactory.createText(infoGroup, SWT.BORDER, ViewWidgetId.memberInfo_phone);
 		txtPhone.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));

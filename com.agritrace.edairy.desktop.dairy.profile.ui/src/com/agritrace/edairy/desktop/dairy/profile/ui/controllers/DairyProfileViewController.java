@@ -15,7 +15,7 @@ import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -82,7 +82,7 @@ public class DairyProfileViewController extends SubModuleController {
 	private ITextRidget txtNSSF_NUMBER;
 	private ITextRidget txtPHONE;
 
-	private ProfilePhotoRidget txtPROFILE_IMAGE;
+	private IProfilePhotoRidget txtPROFILE_IMAGE;
 
 //	private ILinkRidget txtPROFILE_IMAGE_LINK;
 
@@ -178,7 +178,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 		txtESTABLISHED_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
 
-		txtPROFILE_IMAGE = getRidget(ProfilePhotoRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
+		txtPROFILE_IMAGE = getRidget(IProfilePhotoRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 
 		txtMEMBER_COUNT = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
 		txtMEMBER_COUNT.setOutputOnly(true);

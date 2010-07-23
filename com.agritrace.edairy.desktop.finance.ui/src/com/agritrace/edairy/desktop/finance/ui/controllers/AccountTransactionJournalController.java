@@ -106,10 +106,10 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		sourceListRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
 		
-		ICompositeRidget typeRow = 
-			getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_TYPE_ROW);
-		typeRow.setEnabled(false);
-		typeRow.setVisible(false);
+//		ICompositeRidget typeRow = 
+//			getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_TYPE_ROW);
+//		typeRow.setEnabled(false);
+//		typeRow.setVisible(false);
 	}
 
 
@@ -120,8 +120,8 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.getMemberships(), Membership.class),
 				Membership.class, "getMemberId", PojoObservables.observeValue(filterBean, "member"));
 
-		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
-				BeansObservables.observeList(filterBean, "sourceOptions"));
+//		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
+//				BeansObservables.observeList(filterBean, "sourceOptions"));
 
 		batchEditRidget.addListener(new IActionListener() {
 			@Override

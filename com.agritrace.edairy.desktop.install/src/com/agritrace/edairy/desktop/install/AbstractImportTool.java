@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import org.eclipse.equinox.log.Logger;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.riena.core.Log4r;
+import org.osgi.service.log.LogService;
 
 import com.csvreader.CsvReader;
 
@@ -49,11 +53,12 @@ public abstract class AbstractImportTool {
 				count++;
 			} catch (Exception e) {
 				errCount++;
+				log(LogService.LOG_WARNING, "%s error importing record: %s", e.getMessage(), Arrays.toString(values));
 				doImportRecordFailed(values, e);
 			}
 		}
 		System.out.printf("Processed %d records with %d failures\n", count + errCount, errCount);
-		doImportComplete();
+		doImportComplete(count, errCount);
 	}
 
 	protected void processRecord(String[] values) {
@@ -93,7 +98,7 @@ public abstract class AbstractImportTool {
 	 */
 	abstract protected List<Entry> getFields();
 
-	abstract protected void doImportComplete(); 
+	abstract protected void doImportComplete(int okCount, int failCount); 
 
 	protected void validateHeaders(String[] actualHeaders) {
 		String errorMessage = null;
@@ -104,7 +109,9 @@ public abstract class AbstractImportTool {
 						+ " expected " + expectedHeaders.length);
 			for (int i = 0; i < expectedHeaders.length; i++) {
 				if (expectedHeaders[i] == null) continue;
-				if (!expectedHeaders[i].equals(actualHeaders[i])) {
+				String expected = expectedHeaders[i].trim();
+				String actual = actualHeaders[i].trim();
+				if (!expected.equals(actual)) {
 					if (errorMessage == null) {
 						errorMessage = "Mismatched headers: \n";
 					}
@@ -159,4 +166,8 @@ public abstract class AbstractImportTool {
 		return retVal;
 	}
 
+	public void log(int level, String message, Object... args) {
+		final Logger logger = Log4r.getLogger(getClass());
+		logger.log(level, String.format(message, args));
+	}
 }
