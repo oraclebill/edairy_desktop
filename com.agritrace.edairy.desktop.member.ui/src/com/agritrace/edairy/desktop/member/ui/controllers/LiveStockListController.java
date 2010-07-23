@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.member.ui.controllers;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -183,6 +184,7 @@ public class LiveStockListController extends BaseListViewController {
 	private Membership selectedMember;
 
 	private IActionRidget viewRidget;
+	private IActionRidget addRidget;
 
 	public LiveStockListController() {
 		farmRepository = new FarmRepository();
@@ -278,11 +280,17 @@ public class LiveStockListController extends BaseListViewController {
 		final List<Farm> farms = new ArrayList<Farm>();
 		if (selectedMember != null) {
 			farms.addAll(selectedMember.getMember().getFarms());
+			if (addRidget != null) {
+				addRidget.setEnabled(farms.size() > 0);
+			}
 			for (final Farm farm : farms) {
 				if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
 					animals.addAll(farm.getAnimals());
 				}
 			}
+		}
+		else {
+			addRidget.setEnabled(false);
 		}
 		if (!speciesName.equals("All Species")) {
 			for (final RegisteredAnimal animal : animals) {
@@ -470,7 +478,9 @@ public class LiveStockListController extends BaseListViewController {
 
 			});
 			liveStockListTable.updateFromModel();
-			getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD).addListener(new AddAction());
+			
+			addRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
+			addRidget.addListener(new AddAction());
 			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
 			if (viewRidget != null) {
 				viewRidget.setEnabled(false);

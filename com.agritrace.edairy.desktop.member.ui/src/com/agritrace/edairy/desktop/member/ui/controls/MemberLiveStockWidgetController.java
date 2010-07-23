@@ -264,6 +264,14 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 	@Override
 	public void setInputModel(Object model) {
 		this.inputModel = model;
+		if (inputModel instanceof Membership) {
+			Membership member = (Membership)inputModel;
+			boolean enableLivestockAdd = member.getMember().getFarms().size() > 0 ;
+			liveStockAddButton.setEnabled(enableLivestockAdd);
+			if (!enableLivestockAdd) {
+				liveStockAddButton.setToolTipText("Livestock addition disabled - member has no farms.");
+			}
+		}
 		filterController.setInputModel(model);
 		updateBinding();
 	}
@@ -303,7 +311,6 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 			final Farm farm = (Farm) inputModel;
 			if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
 				animals.addAll(farm.getAnimals());
-
 			}
 		}
 		if (!speciesName.equals("All Species")) {
