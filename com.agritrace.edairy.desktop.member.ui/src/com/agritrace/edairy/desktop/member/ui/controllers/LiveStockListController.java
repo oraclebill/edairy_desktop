@@ -433,7 +433,7 @@ public class LiveStockListController extends BaseListViewController {
 	}
 
 	@Override
-	protected void configureFilterGroup() {
+	protected void configureFilterRidgets() {
 		memberNameFilter = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
 		memberLookupBtn.addListener(new MemberLookupAction());
@@ -451,7 +451,7 @@ public class LiveStockListController extends BaseListViewController {
 	}
 
 	@Override
-	protected void configureListGroup() {
+	protected void configureTableRidgets() {
 
 		liveStockListTable = getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
 		if (liveStockListTable != null) {

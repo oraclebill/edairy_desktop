@@ -293,7 +293,7 @@ public class FarmListViewController extends BaseListViewController {
 	}
 
 	@Override
-	protected void configureFilterGroup() {
+	protected void configureFilterRidgets() {
 
 		// search text
 		memberNameFilter = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
@@ -326,7 +326,7 @@ public class FarmListViewController extends BaseListViewController {
 	}
 
 	@Override
-	protected void configureListGroup() {
+	protected void configureTableRidgets() {
 		farmListTable = getRidget(ITableRidget.class, ViewWidgetId.FARM_LIST_TABLE);
 		if (true) {
 			farmListTable.bindToModel(new WritableList(farmListTableInput, FarmListViewTableNode.class),

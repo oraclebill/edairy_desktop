@@ -295,7 +295,7 @@ public class ContainerListViewController extends BaseListViewController {
 	}
 
 	@Override
-	protected void configureFilterGroup() {
+	protected void configureFilterRidgets() {
 		// search text
 		memberNameFilter = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
@@ -329,7 +329,7 @@ public class ContainerListViewController extends BaseListViewController {
 	}
 
 	@Override
-	protected void configureListGroup() {
+	protected void configureTableRidgets() {
 		containerListTable = getRidget(ITableRidget.class, ViewWidgetId.CONTAINER_TABLE);
 
 		refreshInputList();

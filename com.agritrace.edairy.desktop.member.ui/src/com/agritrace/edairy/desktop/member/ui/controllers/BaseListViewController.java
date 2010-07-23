@@ -18,13 +18,13 @@ public abstract class BaseListViewController extends SubModuleController {
 
 	@Override
 	public void configureRidgets() {
-		configureFilterGroup();
-		configureListGroup();
+		configureFilterRidgets();
+		configureTableRidgets();
 	}
 
-	protected abstract void configureFilterGroup();
+	protected abstract void configureFilterRidgets();
 
-	protected abstract void configureListGroup();
+	protected abstract void configureTableRidgets();
 
 	protected List<Membership> getMemberships() {
 		return membershipRepository.getMemberships();
