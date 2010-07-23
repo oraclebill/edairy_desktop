@@ -73,13 +73,22 @@ public interface TrackingPackage extends EPackage {
 	int FARM = 0;
 
 	/**
+	 * The feature id for the '<em><b>Farm Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARM__FARM_ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FARM__NAME = 0;
+	int FARM__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Animals</b></em>' containment reference list.
@@ -88,7 +97,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FARM__ANIMALS = 1;
+	int FARM__ANIMALS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Cans</b></em>' containment reference list.
@@ -97,7 +106,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FARM__CANS = 2;
+	int FARM__CANS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -106,16 +115,25 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FARM__LOCATION = 3;
+	int FARM__LOCATION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Farm Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FARM__FARM_ID = 4;
+	int FARM__OWNER = 5;
+
+	/**
+	 * The feature id for the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARM__PROFILE_PHOTO = 6;
 
 	/**
 	 * The number of structural features of the '<em>Farm</em>' class.
@@ -124,7 +142,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FARM_FEATURE_COUNT = 5;
+	int FARM_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl <em>Container</em>}' class.
@@ -758,6 +776,28 @@ public interface TrackingPackage extends EPackage {
 	EReference getFarm_Location();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getOwner <em>Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owner</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farm#getOwner()
+	 * @see #getFarm()
+	 * @generated
+	 */
+	EReference getFarm_Owner();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getProfilePhoto <em>Profile Photo</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Profile Photo</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farm#getProfilePhoto()
+	 * @see #getFarm()
+	 * @generated
+	 */
+	EAttribute getFarm_ProfilePhoto();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getFarmId <em>Farm Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1328,6 +1368,22 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FARM__LOCATION = eINSTANCE.getFarm_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FARM__OWNER = eINSTANCE.getFarm_Owner();
+
+		/**
+		 * The meta object literal for the '<em><b>Profile Photo</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FARM__PROFILE_PHOTO = eINSTANCE.getFarm_ProfilePhoto();
 
 		/**
 		 * The meta object literal for the '<em><b>Farm Id</b></em>' attribute feature.

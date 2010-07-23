@@ -209,7 +209,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EAttribute getFarm_Name() {
-		return (EAttribute)farmEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)farmEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -218,15 +218,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EReference getFarm_Animals() {
-		return (EReference)farmEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFarm_Cans() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -235,7 +226,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFarm_Location() {
+	public EReference getFarm_Cans() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -244,8 +235,35 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFarm_Location() {
+		return (EReference)farmEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFarm_Owner() {
+		return (EReference)farmEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFarm_ProfilePhoto() {
+		return (EAttribute)farmEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getFarm_FarmId() {
-		return (EAttribute)farmEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)farmEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -691,11 +709,13 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		// Create classes and their features
 		farmEClass = createEClass(FARM);
+		createEAttribute(farmEClass, FARM__FARM_ID);
 		createEAttribute(farmEClass, FARM__NAME);
 		createEReference(farmEClass, FARM__ANIMALS);
 		createEReference(farmEClass, FARM__CANS);
 		createEReference(farmEClass, FARM__LOCATION);
-		createEAttribute(farmEClass, FARM__FARM_ID);
+		createEReference(farmEClass, FARM__OWNER);
+		createEAttribute(farmEClass, FARM__PROFILE_PHOTO);
 
 		farmerEClass = createEClass(FARMER);
 		createEReference(farmerEClass, FARMER__FARMS);
@@ -786,18 +806,20 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(farmEClass, Farm.class, "Farm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFarm_FarmId(), theModelPackage.getUniqueID(), "farmId", null, 0, 1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFarm_Name(), ecorePackage.getEString(), "name", null, 0, 1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFarm_Animals(), this.getRegisteredAnimal(), null, "animals", null, 0, -1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFarm_Cans(), this.getContainer(), null, "cans", null, 0, -1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFarm_Location(), theModelPackage.getLocation(), null, "location", null, 0, 1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFarm_FarmId(), theModelPackage.getUniqueID(), "farmId", null, 0, 1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFarm_Owner(), this.getFarmer(), this.getFarmer_Farms(), "owner", null, 1, 1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFarm_ProfilePhoto(), theModelPackage.getImageReference(), "profilePhoto", null, 0, 1, Farm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		addEOperation(farmEClass, ecorePackage.getEInt(), "getNumberOfAnimals", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(farmEClass, ecorePackage.getEInt(), "getNumberOfContainers", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(farmerEClass, Farmer.class, "Farmer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFarmer_Farms(), this.getFarm(), null, "farms", null, 0, -1, Farmer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFarmer_Farms(), this.getFarm(), this.getFarm_Owner(), "farms", null, 0, -1, Farmer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containerEClass, com.agritrace.edairy.desktop.common.model.tracking.Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContainer_ContainerId(), theModelPackage.getUniqueID(), "containerId", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

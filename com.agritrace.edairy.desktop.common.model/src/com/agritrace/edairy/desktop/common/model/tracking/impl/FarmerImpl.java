@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -74,9 +75,24 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 */
 	public EList<Farm> getFarms() {
 		if (farms == null) {
-			farms = new EObjectContainmentEList<Farm>(Farm.class, this, TrackingPackage.FARMER__FARMS);
+			farms = new EObjectContainmentWithInverseEList<Farm>(Farm.class, this, TrackingPackage.FARMER__FARMS, TrackingPackage.FARM__OWNER);
 		}
 		return farms;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackingPackage.FARMER__FARMS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFarms()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

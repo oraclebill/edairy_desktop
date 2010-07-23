@@ -94,7 +94,7 @@ public class MemberImportTool extends AbstractImportTool {
 		account.setStatus(AccountStatus.ACTIVE);
 		account.setEstablished(DEFAULT_IMPORT_DATE);
 
-		System.out.println(membership);
+//		System.out.println(membership);
 		dairy.getMemberships().add(membership);
 	}
 

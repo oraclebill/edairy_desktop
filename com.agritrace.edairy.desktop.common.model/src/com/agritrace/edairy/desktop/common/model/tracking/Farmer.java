@@ -30,6 +30,7 @@ public interface Farmer extends Person {
 	/**
 	 * Returns the value of the '<em><b>Farms</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.tracking.Farm}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Farms</em>' containment reference list isn't clear,
@@ -38,7 +39,8 @@ public interface Farmer extends Person {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Farms</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarmer_Farms()
-	 * @model containment="true"
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farm#getOwner
+	 * @model opposite="owner" containment="true"
 	 * @generated
 	 */
 	EList<Farm> getFarms();

@@ -20,11 +20,13 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getFarmId <em>Farm Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getAnimals <em>Animals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getCans <em>Cans</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getLocation <em>Location</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getFarmId <em>Farm Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getOwner <em>Owner</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getProfilePhoto <em>Profile Photo</em>}</li>
  * </ul>
  * </p>
  *
@@ -116,6 +118,60 @@ public interface Farm extends EObject {
 	 * @generated
 	 */
 	void setLocation(Location value);
+
+	/**
+	 * Returns the value of the '<em><b>Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer#getFarms <em>Farms</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owner</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owner</em>' container reference.
+	 * @see #setOwner(Farmer)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarm_Owner()
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer#getFarms
+	 * @model opposite="farms" required="true" transient="false"
+	 * @generated
+	 */
+	Farmer getOwner();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getOwner <em>Owner</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owner</em>' container reference.
+	 * @see #getOwner()
+	 * @generated
+	 */
+	void setOwner(Farmer value);
+
+	/**
+	 * Returns the value of the '<em><b>Profile Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Profile Photo</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Profile Photo</em>' attribute.
+	 * @see #setProfilePhoto(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarm_ProfilePhoto()
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.ImageReference" ordered="false"
+	 * @generated
+	 */
+	String getProfilePhoto();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getProfilePhoto <em>Profile Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Profile Photo</em>' attribute.
+	 * @see #getProfilePhoto()
+	 * @generated
+	 */
+	void setProfilePhoto(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Farm Id</b></em>' attribute.

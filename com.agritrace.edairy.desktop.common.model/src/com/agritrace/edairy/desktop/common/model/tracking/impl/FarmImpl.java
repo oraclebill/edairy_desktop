@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -36,17 +38,39 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getFarmId <em>Farm Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getAnimals <em>Animals</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getCans <em>Cans</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getLocation <em>Location</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getFarmId <em>Farm Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getOwner <em>Owner</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmImpl#getProfilePhoto <em>Profile Photo</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class FarmImpl extends EObjectImpl implements Farm {
+	/**
+	 * The default value of the '{@link #getFarmId() <em>Farm Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFarmId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long FARM_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFarmId() <em>Farm Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFarmId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long farmId = FARM_ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -98,24 +122,24 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	protected Location location;
 
 	/**
-	 * The default value of the '{@link #getFarmId() <em>Farm Id</em>}' attribute.
+	 * The default value of the '{@link #getProfilePhoto() <em>Profile Photo</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFarmId()
+	 * @see #getProfilePhoto()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long FARM_ID_EDEFAULT = null;
+	protected static final String PROFILE_PHOTO_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getFarmId() <em>Farm Id</em>}' attribute.
+	 * The cached value of the '{@link #getProfilePhoto() <em>Profile Photo</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFarmId()
+	 * @see #getProfilePhoto()
 	 * @generated
 	 * @ordered
 	 */
-	protected Long farmId = FARM_ID_EDEFAULT;
+	protected String profilePhoto = PROFILE_PHOTO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -229,6 +253,68 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Farmer getOwner() {
+		if (eContainerFeatureID() != TrackingPackage.FARM__OWNER) return null;
+		return (Farmer)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwner(Farmer newOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwner, TrackingPackage.FARM__OWNER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwner(Farmer newOwner) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARM__OWNER && newOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwner != null)
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, TrackingPackage.FARMER__FARMS, Farmer.class, msgs);
+			msgs = basicSetOwner(newOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__OWNER, newOwner, newOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProfilePhoto(String newProfilePhoto) {
+		String oldProfilePhoto = profilePhoto;
+		profilePhoto = newProfilePhoto;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__PROFILE_PHOTO, oldProfilePhoto, profilePhoto));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Long getFarmId() {
 		return farmId;
 	}
@@ -269,6 +355,22 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackingPackage.FARM__OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwner((Farmer)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackingPackage.FARM__ANIMALS:
@@ -277,6 +379,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 				return ((InternalEList<?>)getCans()).basicRemove(otherEnd, msgs);
 			case TrackingPackage.FARM__LOCATION:
 				return basicSetLocation(null, msgs);
+			case TrackingPackage.FARM__OWNER:
+				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -287,8 +391,24 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TrackingPackage.FARM__OWNER:
+				return eInternalContainer().eInverseRemove(this, TrackingPackage.FARMER__FARMS, Farmer.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TrackingPackage.FARM__FARM_ID:
+				return getFarmId();
 			case TrackingPackage.FARM__NAME:
 				return getName();
 			case TrackingPackage.FARM__ANIMALS:
@@ -297,8 +417,10 @@ public class FarmImpl extends EObjectImpl implements Farm {
 				return getCans();
 			case TrackingPackage.FARM__LOCATION:
 				return getLocation();
-			case TrackingPackage.FARM__FARM_ID:
-				return getFarmId();
+			case TrackingPackage.FARM__OWNER:
+				return getOwner();
+			case TrackingPackage.FARM__PROFILE_PHOTO:
+				return getProfilePhoto();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -312,6 +434,9 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TrackingPackage.FARM__FARM_ID:
+				setFarmId((Long)newValue);
+				return;
 			case TrackingPackage.FARM__NAME:
 				setName((String)newValue);
 				return;
@@ -326,8 +451,11 @@ public class FarmImpl extends EObjectImpl implements Farm {
 			case TrackingPackage.FARM__LOCATION:
 				setLocation((Location)newValue);
 				return;
-			case TrackingPackage.FARM__FARM_ID:
-				setFarmId((Long)newValue);
+			case TrackingPackage.FARM__OWNER:
+				setOwner((Farmer)newValue);
+				return;
+			case TrackingPackage.FARM__PROFILE_PHOTO:
+				setProfilePhoto((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -341,6 +469,9 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TrackingPackage.FARM__FARM_ID:
+				setFarmId(FARM_ID_EDEFAULT);
+				return;
 			case TrackingPackage.FARM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -353,8 +484,11 @@ public class FarmImpl extends EObjectImpl implements Farm {
 			case TrackingPackage.FARM__LOCATION:
 				setLocation((Location)null);
 				return;
-			case TrackingPackage.FARM__FARM_ID:
-				setFarmId(FARM_ID_EDEFAULT);
+			case TrackingPackage.FARM__OWNER:
+				setOwner((Farmer)null);
+				return;
+			case TrackingPackage.FARM__PROFILE_PHOTO:
+				setProfilePhoto(PROFILE_PHOTO_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -368,6 +502,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TrackingPackage.FARM__FARM_ID:
+				return FARM_ID_EDEFAULT == null ? farmId != null : !FARM_ID_EDEFAULT.equals(farmId);
 			case TrackingPackage.FARM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TrackingPackage.FARM__ANIMALS:
@@ -376,8 +512,10 @@ public class FarmImpl extends EObjectImpl implements Farm {
 				return cans != null && !cans.isEmpty();
 			case TrackingPackage.FARM__LOCATION:
 				return location != null;
-			case TrackingPackage.FARM__FARM_ID:
-				return FARM_ID_EDEFAULT == null ? farmId != null : !FARM_ID_EDEFAULT.equals(farmId);
+			case TrackingPackage.FARM__OWNER:
+				return getOwner() != null;
+			case TrackingPackage.FARM__PROFILE_PHOTO:
+				return PROFILE_PHOTO_EDEFAULT == null ? profilePhoto != null : !PROFILE_PHOTO_EDEFAULT.equals(profilePhoto);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -392,10 +530,12 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", farmId: ");
+		result.append(" (farmId: ");
 		result.append(farmId);
+		result.append(", name: ");
+		result.append(name);
+		result.append(", profilePhoto: ");
+		result.append(profilePhoto);
 		result.append(')');
 		return result.toString();
 	}

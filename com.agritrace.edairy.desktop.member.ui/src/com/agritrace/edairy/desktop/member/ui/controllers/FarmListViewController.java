@@ -174,10 +174,6 @@ public class FarmListViewController extends BaseListViewController {
 		farmListTable.updateFromModel();
 	}
 
-	private void clearInputs() {
-
-	
-	}
 
 	private void setColumnFormatters() {
 		// MEMBERID
@@ -353,21 +349,23 @@ public class FarmListViewController extends BaseListViewController {
 	}
 
 	protected List<FarmListViewTableNode> getFilteredResult() {
+		List<Farm> allFarms = new ArrayList<Farm>(farmRepository.getMemberships());
+		
 		final List<FarmListViewTableNode> results = new ArrayList<FarmListViewTableNode>();
-		if (selectedMember != null) {
+//		if (selectedMember != null) {
 //			selectedMember = memberRepository.findByKey(selectedMember.getMemberId());
-			if (farmCombo != null) {
-				final String farmName = farmCombo.getText();
-				if (!farmName.isEmpty()) {
-					final List<Farm> farms = selectedMember.getMember().getFarms();
-					for (final Farm farm : farms) {
-						if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
-							results.add(new FarmListViewTableNode(selectedMember, farm));
-						}
+//			if (farmCombo != null) {
+//				final String farmName = farmCombo.getText();
+//				if (!farmName.isEmpty()) {
+//					final List<Farm> farms = selectedMember.getMember().getFarms();
+					for (final Farm farm : allFarms) {
+//						if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
+							results.add(new FarmListViewTableNode(farm.getOwner().eContainer(), farm));
+//						}
 					}
-				}
-			}
-		}
+//				}
+//			}
+//		}
 
 		return results;
 

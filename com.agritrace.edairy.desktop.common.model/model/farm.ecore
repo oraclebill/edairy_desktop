@@ -14,6 +14,8 @@
         <details key="body" value="return getCans().size();"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
         eType="#//RegisteredAnimal" containment="true"/>
@@ -21,12 +23,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="ecore:EClass common.ecore#//Location"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="farmId" eType="ecore:EDataType common.ecore#//UniqueID"
-        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Farmer"
+        eOpposite="#//Farmer/farms"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="profilePhoto" ordered="false"
+        eType="ecore:EDataType common.ecore#//ImageReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Farmer" eSuperTypes="common.ecore#//Person">
     <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
-        eType="#//Farm" containment="true"/>
+        eType="#//Farm" containment="true" eOpposite="#//Farm/owner"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType common.ecore#//UniqueID"
