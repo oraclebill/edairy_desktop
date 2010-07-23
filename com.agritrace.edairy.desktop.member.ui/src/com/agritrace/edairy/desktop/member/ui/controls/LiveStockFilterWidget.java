@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
+import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class LiveStockFilterWidget {
@@ -55,10 +56,10 @@ public class LiveStockFilterWidget {
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
 
 		final Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
-				ViewWidgetId.memberInfo_searchButton);
+				BaseListView.BIND_ID_FILTER_SEARCH);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
 
-		final Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", ViewWidgetId.cancelButton);
+		final Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", BaseListView.BIND_ID_FILTER_RESET);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
 
 	}

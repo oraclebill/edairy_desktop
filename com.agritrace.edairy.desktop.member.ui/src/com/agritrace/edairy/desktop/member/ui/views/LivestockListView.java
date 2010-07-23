@@ -24,6 +24,9 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidget;
 
 public class LivestockListView extends BaseListView {
+	public LivestockListView() {
+	}
+	
 	public static final String CONTAINER_GROUP = "Containers";
 
 	public static final int DEFAULT_LABEL_WIDTH = 110;

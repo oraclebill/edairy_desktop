@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
@@ -9,36 +8,32 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeSearchController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
+import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class LiveStockFilterWidgetController implements WidgetController {
 
-	private IActionRidget clear;
-
 	private final IRidgetContainer container;
+	
 	private final DateRangeSearchController dateSearchController;
-	private IComboRidget farmCombo;
-
-	private final List<String> farmsList = new ArrayList<String>();
 
 	private Object inputModel;
 
 	private IActionRidget search;
+	private IActionRidget clear;
 
 	private IComboRidget speciesCombo;
-
-	private final List<String> speciesList = new ArrayList<String>();
-
 	private IComboRidget statusCombo;
+	private IComboRidget farmCombo;
 
+	private final List<String> farmsList = new ArrayList<String>();
+	private final List<String> speciesList = new ArrayList<String>();
 	private final List<String> statusList = new ArrayList<String>();
 
 	public LiveStockFilterWidgetController(IRidgetContainer controller) {
@@ -55,8 +50,9 @@ public class LiveStockFilterWidgetController implements WidgetController {
 		farmCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
 		speciesCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
 		statusCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
-		search = container.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_searchButton);
-		clear = container.getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
+		
+		search = container.getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH);
+		clear = container.getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_RESET);
 	}
 
 	public IActionRidget getClear() {
@@ -145,7 +141,7 @@ public class LiveStockFilterWidgetController implements WidgetController {
 		} else if (inputModel instanceof Farm) {
 			farmsList.add(((Farm) inputModel).getName());
 
-		}
+		}		
 		farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 		farmCombo.updateFromModel();
 		farmCombo.setSelection(0);

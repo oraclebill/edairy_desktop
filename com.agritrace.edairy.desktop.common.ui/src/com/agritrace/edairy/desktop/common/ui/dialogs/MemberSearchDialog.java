@@ -60,8 +60,6 @@ public class MemberSearchDialog extends TitleAreaDialog {
 			
 			boolean selected = true;
 			
-//			System.err.printf("MemberSearchDialog::select: %s - %s\n", parentElement.getClass(), element.getClass());
-
 			if (combo == null || combo.getText().trim().length() == 0) {
 				return true;
 			}

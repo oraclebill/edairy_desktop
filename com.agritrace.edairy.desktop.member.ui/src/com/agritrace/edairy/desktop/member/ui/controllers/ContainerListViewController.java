@@ -170,8 +170,6 @@ public class ContainerListViewController extends BaseListViewController {
 	}
 
 	private void clearInputs() {
-		tableInput.clear();
-		containerListTable.updateFromModel();
 	}
 
 	private void setColumnFormatters() {
@@ -321,7 +319,9 @@ public class ContainerListViewController extends BaseListViewController {
 
 			@Override
 			public void callback() {
-				clearInputs();
+				memberNameFilter.setText("");
+				tableInput.clear();
+				containerListTable.updateFromModel();
 				viewRidget.setEnabled(false);
 			}
 		});

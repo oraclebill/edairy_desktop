@@ -175,8 +175,8 @@ public class FarmListViewController extends BaseListViewController {
 	}
 
 	private void clearInputs() {
-		farmListTableInput.clear();
-		farmListTable.updateFromModel();
+
+	
 	}
 
 	private void setColumnFormatters() {
@@ -315,10 +315,11 @@ public class FarmListViewController extends BaseListViewController {
 
 		clearButton = getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
 		clearButton.addListener(new IActionListener() {
-
 			@Override
 			public void callback() {
-				clearInputs();
+				memberNameFilter.setText("");
+				farmListTableInput.clear();
+				farmListTable.updateFromModel();
 			}
 		});
 

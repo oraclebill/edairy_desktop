@@ -291,11 +291,13 @@ public class LiveStockListController extends BaseListViewController {
 				}
 			}
 		}
-//		selectedAnimals = filterDate(animals, filterController.getDateSearchController().getStartDate(),
-//				filterController.getDateSearchController().getEndDate());
+		// selectedAnimals = filterDate(animals,
+		// filterController.getDateSearchController().getStartDate(),
+		// filterController.getDateSearchController().getEndDate());
 		DateFilterUtil<RegisteredAnimal> filterUtil = new DateFilterUtil<RegisteredAnimal>(RegisteredAnimal.class,
 				TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
-		selectedAnimals = filterUtil.filterDate(animals, filterController.getDateSearchController().getStartDate(), filterController.getDateSearchController().getEndDate());
+		selectedAnimals = filterUtil.filterDate(animals, filterController.getDateSearchController().getStartDate(),
+				filterController.getDateSearchController().getEndDate());
 
 		for (final RegisteredAnimal animal : selectedAnimals) {
 			results.add(new LiveStockListViewTableNode(selectedMember, animal));
@@ -437,15 +439,14 @@ public class LiveStockListController extends BaseListViewController {
 		memberLookupBtn.addListener(new MemberLookupAction());
 		filterController = new LiveStockFilterWidgetController(this);
 		filterController.getSearch().addListener(new FilterAction());
-		// filterController.getClear().addListener(new IActionListener() {
-		//
-		// @Override
-		// public void callback() {
-		// listTableInput.clear();
-		// liveStockListTable.updateFromModel();
-		//
-		// }
-		// });
+		filterController.getClear().addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				memberNameFilter.setText("");
+				listTableInput.clear();
+				liveStockListTable.updateFromModel();
+			}
+		});
 
 	}
 
