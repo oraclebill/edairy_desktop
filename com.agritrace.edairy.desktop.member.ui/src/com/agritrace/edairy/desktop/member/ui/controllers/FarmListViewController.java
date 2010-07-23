@@ -7,6 +7,7 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -17,6 +18,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Display;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.Person;
@@ -45,10 +47,14 @@ public class FarmListViewController extends BaseListViewController {
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(AbstractDirectoryController.getShell());
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
+				if (selectedMember == null) {
+					Log4r.getLogger(getClass()).log(LogService.LOG_WARNING, "Null member selected from dialog");
+					return;
+				}
 				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();

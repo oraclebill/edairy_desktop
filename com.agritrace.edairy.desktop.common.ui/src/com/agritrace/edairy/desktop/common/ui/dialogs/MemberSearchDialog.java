@@ -6,22 +6,29 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
-import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -38,23 +45,96 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberSearchDialog extends TitleAreaDialog {
 
-	public class MemberLabelProvider implements ITableLabelProvider {
+	private final class MemberViewerFilter extends ViewerFilter {
+		private CCombo combo;
+		private Text text;
 
-		@Override
-		public void addListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
+		public MemberViewerFilter(CCombo field, Text text) {
+//			System.err.printf("MemberViewerFilter: %s, %s\n", field, text);
+			this.combo = field;
+			this.text = text;
 		}
 
 		@Override
-		public void dispose() {
-			// TODO Auto-generated method stub
+		public boolean select(Viewer viewer, Object parentElement, Object element) {
+			
+			boolean selection = true;
+			
+//			System.err.printf("MemberSearchDialog::select: %s - %s\n", parentElement.getClass(), element.getClass());
 
+			if (combo == null || combo.getText().trim().length() == 0) {
+				return true;
+			}
+
+			if (text == null || text.getText().trim().length() == 0) {
+				return true;
+			}
+			String textStr = text.getText().trim();
+			String comboStr = combo.getText();
+			
+			if (element instanceof Membership) {
+				Membership membership = (Membership) element;
+				if (comboStr.equals("ID")) {
+					selection = membership.getMemberNumber().contains(textStr);
+				} else if (comboStr.equals("Name")) {
+					Person member = membership.getMember();
+					if (member != null) {
+						String name = member.getGivenName();
+						if (name != null && name.trim().length() > 0) {
+							selection = name.contains(textStr);
+						}
+						name = member.getFamilyName();
+						if (name != null && name.trim().length() > 0) {
+							selection = selection || name.contains(textStr);
+						}
+					}
+				} else {
+					System.err.println("ERR: " + combo);
+				}
+			} else {
+				throw new IllegalArgumentException(element.getClass().getName());
+			}
+			return selection;
 		}
 
+	}
+
+	private final class LookupSelection extends SelectionAdapter implements ModifyListener {
+		TableViewer myTable;
+
+		public LookupSelection(TableViewer tableView) {
+			myTable = tableView;
+		}
+		
+		@Override
+		public void modifyText(ModifyEvent e) {
+			if (e.widget == searchType) {
+				if (filterText != null) {
+					filterText.setText("");
+				}
+			}
+			widgetSelected( null );
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			widgetSelected( null );
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent event) {
+//			System.err.println("widgetSelected: " + e);
+			ViewerFilter filter = new MemberViewerFilter(searchType, filterText);
+			System.err.println("widgetSelected: adding filter " + filter);
+			myTable.setFilters(new ViewerFilter[] { filter });
+		}
+
+	}
+
+	public class MemberLabelProvider extends BaseLabelProvider implements ITableLabelProvider {
+		
 		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
@@ -66,12 +146,14 @@ public class MemberSearchDialog extends TitleAreaDialog {
 				assert (member != null);
 				switch (columnIndex) {
 				case 0:
-					return membership.getMemberId().toString();
+					return membership.getMemberNumber();
 				case 1:
-					return member.getGivenName() + " " + member.getFamilyName();
+					return member.getGivenName();
 				case 2:
+					return member.getFamilyName();
+				case 3:
 					try {
-						return member.getLocation().getPostalLocation().getAddress();
+						return member.getLocation().getPostalLocation().getDistrict();
 					} catch (final Exception e) {
 						return "<location not found>";
 					}
@@ -79,28 +161,18 @@ public class MemberSearchDialog extends TitleAreaDialog {
 			}
 			return null;
 		}
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
 	String dlgPrompt = "Please input member search criterias";
 	String dlgTitle = "Member Lookup";
 	List<Membership> memberList;
 	IMemberRepository memberRepo;
-	Farm selectedFarm;
 
+	Farm selectedFarm;
 	Membership selectedMember;
+
+	private CCombo searchType;
+	private Text filterText;
 
 	/**
 	 * MyTitleAreaDialog constructor
@@ -184,86 +256,89 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		final Composite dialogArea = new Composite(composite, SWT.NULL);
 		dialogArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		dialogArea.setLayout(new GridLayout(4, false));
+
 		final Label label = new Label(dialogArea, SWT.NULL);
 		label.setText("Lookup field:");
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false));
 
-		final Combo combo = new Combo(dialogArea, SWT.BORDER);
-		combo.setItems(new String[] { "ID", "Name", "Location" });
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+		searchType = new CCombo(dialogArea, SWT.BORDER);
+		searchType.setItems(new String[] { "ID", "Name" });
+		searchType.setText("ID");
+		searchType.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
 
-		final Text filterText = new Text(dialogArea, SWT.NULL | SWT.BORDER | SWT.SINGLE);
+		filterText = new Text(dialogArea, SWT.NULL | SWT.BORDER | SWT.SINGLE);
 		filterText.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 
 		final Button lookupButton = new Button(dialogArea, SWT.PUSH);
 		lookupButton.setText("Lookup");
 		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
-		lookupButton.addSelectionListener(new SelectionAdapter() {
-			/**
-			 * Sent when default selection occurs in the control. The default
-			 * behavior is to do nothing.
-			 * 
-			 * @param e
-			 *            an event containing information about the default
-			 *            selection
-			 */
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
 
-			/**
-			 * Sent when selection occurs in the control. The default behavior
-			 * is to do nothing.
-			 * 
-			 * @param e
-			 *            an event containing information about the selection
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-
+//		getShell().setDefaultButton(lookupButton);
+//		
 		final Composite panel = new Composite(dialogArea, SWT.NULL);
 		panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 1));
-		final TableViewer tableView = new TableViewer(panel, SWT.FULL_SELECTION | SWT.BORDER | SWT.MULTI);
+		final TableViewer tableView = new TableViewer(panel, SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
 		final Table table = tableView.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
+		LookupSelection refreshListener = new LookupSelection(tableView);
+		
+		lookupButton.addSelectionListener(refreshListener);
+		filterText.addModifyListener(refreshListener);
+		searchType.addModifyListener(refreshListener);
+		
+		tableView.addDoubleClickListener(new IDoubleClickListener() {			
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				ISelection selection = event.getSelection();
+				handleSelection(selection);
+				close();
+			}
+		});
+		
 		// Create two columns and show
 		final TableColumn id = new TableColumn(table, SWT.LEFT);
 		id.setText("ID");
 
-		final TableColumn name = new TableColumn(table, SWT.LEFT);
-		name.setText("Name");
+		final TableColumn givenName = new TableColumn(table, SWT.LEFT);
+		givenName.setText("Given Name");
+
+		final TableColumn familyName = new TableColumn(table, SWT.LEFT);
+		familyName.setText("Family Name");
 
 		final TableColumn location = new TableColumn(table, SWT.LEFT);
 		location.setText("Location");
 
 		final TableColumnLayout layout = new TableColumnLayout();
-		layout.setColumnData(id, new ColumnWeightData(20));
-		layout.setColumnData(name, new ColumnWeightData(30));
+		layout.setColumnData(id, new ColumnWeightData(15));
+		layout.setColumnData(givenName, new ColumnWeightData(30));
+		layout.setColumnData(familyName, new ColumnWeightData(50));
 		layout.setColumnData(location, new ColumnWeightData(50));
 
 		tableView.setContentProvider(new ArrayContentProvider());
 		tableView.setLabelProvider(new MemberLabelProvider());
 		tableView.setInput(memberList);
 		tableView.addSelectionChangedListener(new ISelectionChangedListener() {
-
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				final ISelection sel = event.getSelection();
-				if (sel instanceof IStructuredSelection) {
-					final IStructuredSelection selected = (IStructuredSelection) sel;
-					final Object selectedObj = selected.getFirstElement();
-					if (selectedObj instanceof Membership) {
-						setSelectedMember((Membership) selectedObj);
-					}
-				}
+				handleSelection(sel);
 			}
 		});
+//		tableView.set
 
 		panel.setLayout(layout);
 		return composite;
+	}
+	
+	void handleSelection(ISelection sel) {
+		if (sel instanceof IStructuredSelection) {
+			final IStructuredSelection selected = (IStructuredSelection) sel;
+			final Object selectedObj = selected.getFirstElement();
+			if (selectedObj instanceof Membership) {
+				setSelectedMember((Membership) selectedObj);
+			}
+		}
 	}
 }
