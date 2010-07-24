@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.common.persistence;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 public interface IMemberRepository {

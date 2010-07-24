@@ -2,8 +2,6 @@ package com.agritrace.edairy.desktop.common.modelhelper;
 
 import org.junit.*;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
-import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 

@@ -3,14 +3,11 @@ package com.agritrace.edairy.desktop.collection.ui.components;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.databinding.DateToStringConverter;
-import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
-import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;

@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
-import java.beans.Beans;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -30,7 +28,6 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
-import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -38,7 +35,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
-import com.swtdesigner.ResourceManager;
 
 /**
  * 

@@ -10,7 +10,6 @@ import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.riena.navigation.ISubModuleNode;
-import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;

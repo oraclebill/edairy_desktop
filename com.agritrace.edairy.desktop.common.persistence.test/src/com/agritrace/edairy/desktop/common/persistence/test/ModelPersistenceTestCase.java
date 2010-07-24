@@ -3,18 +3,14 @@ package com.agritrace.edairy.desktop.common.persistence.test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 
-import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.teneo.hibernate.LazyCollectionUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;

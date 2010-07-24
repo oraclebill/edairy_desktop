@@ -11,7 +11,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 

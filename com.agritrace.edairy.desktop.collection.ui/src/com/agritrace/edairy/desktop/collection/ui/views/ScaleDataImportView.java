@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
-import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite.ControlType;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.swtdesigner.ResourceManager;
 

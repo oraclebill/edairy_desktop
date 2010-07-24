@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
-import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 
 public abstract class BaseDialogView extends AbstractDialogView {
 

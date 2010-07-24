@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.common.ui.controllers.location;
 
 import java.util.Arrays;
 
-import org.eclipse.core.databinding.observable.IObservable;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;

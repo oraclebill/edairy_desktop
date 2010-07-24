@@ -1,16 +1,9 @@
 package com.agritrace.edairy.desktop.common.ui.util;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;

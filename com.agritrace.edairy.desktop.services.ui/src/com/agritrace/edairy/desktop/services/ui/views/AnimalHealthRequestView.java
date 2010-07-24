@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.services.ui.views;
 
-import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
