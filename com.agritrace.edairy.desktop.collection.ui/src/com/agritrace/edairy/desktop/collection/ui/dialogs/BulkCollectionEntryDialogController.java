@@ -576,13 +576,6 @@ public class BulkCollectionEntryDialogController extends BaseDialogController<Co
 	/**
 	 * 
 	 */
-	private void dbg(String message) {
-		log(LogService.LOG_DEBUG, message);
-	}
-
-	/**
-	 * 
-	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}

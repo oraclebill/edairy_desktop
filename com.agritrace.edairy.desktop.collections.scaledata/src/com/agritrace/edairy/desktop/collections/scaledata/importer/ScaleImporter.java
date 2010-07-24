@@ -50,14 +50,6 @@ public class ScaleImporter {
 		this.inputFile = inputFile;
 	}
 
-	private Reader getReader() throws FileNotFoundException {
-		if (inputReader == null) {
-			assert(inputFile != null);
-			inputReader = new BufferedReader(new FileReader(inputFile));
-		}
-		return inputReader;		
-	}
-	
 	public ScaleImporter readRecords() throws IOException {
 		count = 0;
 		invalidCount = 0;

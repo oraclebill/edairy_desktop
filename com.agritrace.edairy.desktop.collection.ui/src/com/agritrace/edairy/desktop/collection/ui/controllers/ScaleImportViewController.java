@@ -175,18 +175,5 @@ public class ScaleImportViewController extends SubModuleController {
 		return scaleRecords;
 	}
 
-	/**
-	 * 
-	 * @param person
-	 * @return
-	 */
-	private String formatPersonName(Person person) {
-		final StringBuffer sb = new StringBuffer();
-		if (person != null) {
-			new Formatter(sb).format("%s, %s", person.getFamilyName(), person.getGivenName());
-		}
-		return sb.toString();
-	}
-
 
 }

@@ -169,9 +169,6 @@ public class ContainerListViewController extends BaseListViewController {
 		containerListTable.updateFromModel();
 	}
 
-	private void clearInputs() {
-	}
-
 	private void setColumnFormatters() {
 		int idx = 0;
 		// memberId

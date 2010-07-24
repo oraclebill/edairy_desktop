@@ -275,13 +275,6 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	/**
 	 * 
 	 */
-	private void log(int level, String message, Throwable exception) {
-		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message, exception);
-	}
-
-	/**
-	 * 
-	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
