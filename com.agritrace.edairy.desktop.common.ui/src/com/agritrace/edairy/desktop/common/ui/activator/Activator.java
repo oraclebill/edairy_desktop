@@ -4,6 +4,8 @@ import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.DateRange;
 import com.agritrace.edairy.desktop.common.ui.controls.DateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
@@ -51,6 +53,7 @@ public class Activator extends DesktopBaseActivator {
 		SwtControlRidgetMapper.getInstance().addMapping(EditableTable.class, EditableTableRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoComposite.class, ProfilePhotoRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(DateRange.class, DateRangeRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(CommunicationsGroup.class, CommunicationsGroupRidget.class);
 	}
 
 	/*

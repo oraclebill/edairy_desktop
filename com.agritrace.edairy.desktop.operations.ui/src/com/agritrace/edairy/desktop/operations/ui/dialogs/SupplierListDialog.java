@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
@@ -61,13 +61,10 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
 		mapWidget.getGroup().pack();
 
-		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(companyContactGroup);
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).applyTo(
-		// commGroup.getGroup());
-		// commGroup.getGroup().pack();
-		//
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup.getGroup());
-		commGroup.getGroup().pack();
+		final CommunicationsGroup commGroup = new CommunicationsGroup(companyContactGroup);
+		addUIControl(commGroup, "contact-methods");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup);
+		commGroup.pack();
 	}
 
 	@Override

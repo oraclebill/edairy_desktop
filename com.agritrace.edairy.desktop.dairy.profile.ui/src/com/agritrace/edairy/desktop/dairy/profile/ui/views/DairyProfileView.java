@@ -16,6 +16,7 @@ import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -32,7 +33,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
@@ -82,8 +83,9 @@ public class DairyProfileView extends SubModuleView {
 		addressWidget.setBackground(stdBackgroundColor);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget);
 
-		final CommunicationsGroupWidget communication = new CommunicationsGroupWidget(addressGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication.getGroup());
+		final CommunicationsGroup communication = new CommunicationsGroup(addressGroup);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(communication, "contact-methods");		
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication);
 
 		return addressGroup;
 	}

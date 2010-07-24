@@ -4,6 +4,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -16,7 +17,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -119,8 +120,9 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 
 		final TabItem commsTab = new TabItem(locationGroup.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
-		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(locationGroup.getTabFolder());
-		commsTab.setControl(commGroup.getGroup());
+		final CommunicationsGroup commGroup = new CommunicationsGroup(locationGroup.getTabFolder());
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		
+		commsTab.setControl(commGroup);
 		return contactGroup;
 
 	}

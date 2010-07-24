@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -138,8 +138,9 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		
 		final TabItem commsTab = new TabItem(locationTabs.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
-		final CommunicationsGroupWidget commGroup = new CommunicationsGroupWidget(locationTabs.getTabFolder());
-		commsTab.setControl(commGroup.getGroup());
+		final CommunicationsGroup commGroup = new CommunicationsGroup(locationTabs.getTabFolder());
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		
+		commsTab.setControl(commGroup);
 
 
 		GridLayoutFactory.swtDefaults().generateLayout(companyContactGroup);

@@ -15,6 +15,7 @@ import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -59,7 +60,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 	public static final String ID = DairyProfileViewController.class.getName();
 	private IActionRidget cancelAction;
-	private CommunicationGroupController communicationGroup;
+	private CommunicationsGroupRidget communicationGroup;
 	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
 	private Dairy localDairy;
 
@@ -112,13 +113,6 @@ public class DairyProfileViewController extends SubModuleController {
 	}
 
 	@Override
-	public void afterBind() {
-		super.afterBind();
-		initBindings();
-		updateBindings();
-	}
-
-	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
 
@@ -126,10 +120,19 @@ public class DairyProfileViewController extends SubModuleController {
 
 		configureInfoPanelRidgets();
 		locationController = new LocationProfileWidgetController(this);
-		communicationGroup = new CommunicationGroupController(this);
+		 communicationGroup = getRidget(CommunicationsGroupRidget.class, "contact-methods");
+		communicationGroup.configureRidgets();
 
 		configureButtonsPanel();
 	}
+
+	@Override
+	public void afterBind() {
+		super.afterBind();
+		initBindings();
+		updateBindings();
+	}
+
 
 	/**
 	 * Get member count for UI.
@@ -226,7 +229,7 @@ public class DairyProfileViewController extends SubModuleController {
 		txtLIC_EXPIRATION_DATE.bindToModel(localDairy, "licenseExpirationDate");
 
 		locationController.setInputModel(localDairy.getLocation());
-		communicationGroup.setInputModel(localDairy);
+		communicationGroup.bindToModel(localDairy, "contact-methods");
 	}
 
 	/**
@@ -253,7 +256,7 @@ public class DairyProfileViewController extends SubModuleController {
 //		txtLIC_EFFECTIVE_DATE.updateFromModel();
 //		txtLIC_EXPIRATION_DATE.updateFromModel();
 
-		communicationGroup.updateBinding();
+//		communicationGroup.updateFromModel();
 
 		updateAllRidgetsFromModel();
 		

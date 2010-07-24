@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
 import com.agritrace.edairy.desktop.common.ui.editingsupport.ColumnEditingSupport;
 import com.agritrace.edairy.desktop.common.ui.editingsupport.ContactTypeColumnEditingSupport;
 import com.agritrace.edairy.desktop.common.ui.ridgets.IEditableTableRidget;
@@ -42,7 +42,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 		if (container == null) {
 			return;
 		}
-		editTable = container.getRidget(IEditableTableRidget.class, CommunicationsGroupWidget.BIND_ID_TABLE);
+		editTable = container.getRidget(IEditableTableRidget.class, CommunicationsGroup.BIND_ID_TABLE);
 		editTable.setColumnEditingSupport(0, new ContactTypeColumnEditingSupport());
 		editTable.setColumnEditingSupport(1, new ColumnEditingSupport());
 		editTable.setColumnWidths(new ColumnLayoutData[] { new ColumnWeightData(100), new ColumnWeightData(500), });
@@ -53,7 +53,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				updateButtonStatus();
 			}
 		});
-		addBtn = container.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_ADD);
+		addBtn = container.getRidget(IActionRidget.class, CommunicationsGroup.BIND_ID_BTN_ADD);
 		addBtn.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -67,7 +67,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				}
 			}
 		});
-		deleteBtn = container.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETE);
+		deleteBtn = container.getRidget(IActionRidget.class, CommunicationsGroup.BIND_ID_BTN_DELETE);
 		deleteBtn.addListener(new IActionListener() {
 
 			@Override
@@ -82,7 +82,7 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 				}
 			}
 		});
-		deleteAllBtn = container.getRidget(IActionRidget.class, CommunicationsGroupWidget.BIND_ID_BTN_DELETEALL);
+		deleteAllBtn = container.getRidget(IActionRidget.class, CommunicationsGroup.BIND_ID_BTN_DELETEALL);
 		deleteAllBtn.addListener(new IActionListener() {
 
 			@Override

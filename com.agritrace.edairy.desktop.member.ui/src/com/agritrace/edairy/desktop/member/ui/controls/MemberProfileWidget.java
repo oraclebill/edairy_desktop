@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -11,7 +12,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
@@ -52,8 +53,9 @@ public class MemberProfileWidget {
 		final LocationProfileWidget addressWidget = new LocationProfileWidget(composite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget.getComposite());
 
-		final CommunicationsGroupWidget communication = new CommunicationsGroupWidget(composite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication.getGroup());
+		final CommunicationsGroup communication = new CommunicationsGroup(composite);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(communication, "contact-methods");		
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication);
 	}
 
 	private void createInfoGroup() {
