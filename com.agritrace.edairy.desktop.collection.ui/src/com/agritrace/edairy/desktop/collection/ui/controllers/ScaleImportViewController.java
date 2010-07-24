@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
-import java.util.Formatter;
 import java.util.HashMap;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -20,7 +19,6 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderRidget;
-import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
