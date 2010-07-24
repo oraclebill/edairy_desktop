@@ -8,7 +8,7 @@ import org.eclipse.riena.ui.ridgets.IComplexRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 
-public interface ICollectionLineEditRidget extends IComplexRidget {
+public interface ICollectionLineRidget extends IComplexRidget {
 
 	String VALIDATED_VALUE = "validatedValue";
 	

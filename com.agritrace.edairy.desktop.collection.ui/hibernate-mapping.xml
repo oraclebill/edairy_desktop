@@ -20,14 +20,14 @@
 		</property>
 		<list name="animals" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="farm_animals">
-				<column name="`farm_animals_e_id`" not-null="false" unique="false"/>
+				<column name="`farm_animals_farmid`" not-null="false" unique="false"/>
 			</key>
 			<list-index column="`farm_animals_idx`"/>
 			<one-to-many entity-name="RegisteredAnimal"/>
 		</list>
 		<list name="cans" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="farm_cans">
-				<column name="`farm_cans_e_id`" not-null="false" unique="false"/>
+				<column name="`farm_cans_farmid`" not-null="false" unique="false"/>
 			</key>
 			<list-index column="`farm_cans_idx`"/>
 			<one-to-many entity-name="Container"/>
@@ -35,7 +35,72 @@
 		<many-to-one name="location" entity-name="Location" lazy="false" cascade="all" foreign-key="farm_location" insert="true" update="true" not-null="false">
 			<column not-null="false" unique="false" name="`location_location_e_id`"/>
 		</many-to-one>
+		<many-to-one name="owner" entity-name="Farmer" lazy="false" foreign-key="farm_owner" insert="false" update="false" not-null="false">
+			<column not-null="false" unique="false" name="`farm_owner_e_id`"/>
+		</many-to-one>
+		<property name="profilePhoto" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`profilephoto`" length="60"/>
+		</property>
 	</class>
+	<class name="com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl" entity-name="Person" abstract="false" lazy="false" discriminator-value="Person" table="`person`">
+		<meta attribute="eclassName">Person</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/base/</meta>
+		<id name="personId" type="java.lang.Long">
+			<column not-null="true" unique="false" name="`personid`"/>
+			<generator class="native"/>
+		</id>
+		<discriminator type="string">
+			<column name="dtype" index="persondtype" length="255" not-null="true"/>
+		</discriminator>
+		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
+			<meta attribute="syntheticVersion">true</meta>
+		</version>
+		<bag name="contactMethods" lazy="true" cascade="all,delete-orphan">
+			<key update="true" foreign-key="contactable_contactmethods">
+				<column name="`person_contactmethods_e_id`" not-null="false" unique="false"/>
+			</key>
+			<one-to-many entity-name="ContactMethod"/>
+		</bag>
+		<property name="photo" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`photo`" length="60"/>
+		</property>
+		<property name="honorific" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`honorific`" length="60"/>
+		</property>
+		<property name="familyName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`familyname`" length="60"/>
+		</property>
+		<property name="givenName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`givenname`" length="60"/>
+		</property>
+		<property name="middleName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`middlename`" length="60"/>
+		</property>
+		<property name="additionalNames" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`additionalnames`" length="60"/>
+		</property>
+		<property name="suffix" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`suffix`" length="60"/>
+		</property>
+		<property name="nickName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nickname`" length="60"/>
+		</property>
+		<property name="phoneNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`phonenumber`" length="60"/>
+		</property>
+		<many-to-one name="location" entity-name="Location" cascade="merge,persist,save-update,lock,refresh" not-null="false" lazy="false" foreign-key="person_location" insert="true" update="true"/>
+	</class>
+	<subclass name="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl" entity-name="Farmer" abstract="false" lazy="false" extends="Person" discriminator-value="Farmer">
+		<meta attribute="eclassName">Farmer</meta>
+		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
+		<list name="farms" lazy="true" cascade="all,delete-orphan">
+			<key update="true">
+				<column name="`farm_owner_e_id`" not-null="false" unique="false"/>
+			</key>
+			<list-index column="`farmer_farms_idx`"/>
+			<one-to-many entity-name="Farm"/>
+		</list>
+	</subclass>
 	<class name="com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl" entity-name="Container" abstract="false" lazy="false" discriminator-value="Container" table="`container`">
 		<meta attribute="eclassName">Container</meta>
 		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
@@ -57,14 +122,6 @@
 		</many-to-one>
 		<property name="capacity" lazy="false" insert="true" update="true" not-null="false" unique="false" type="double">
 			<column not-null="false" unique="false" name="`capacity`"/>
-		</property>
-		<property name="type" lazy="false" not-null="false" insert="true" update="true" unique="false">
-			<column not-null="false" unique="false" name="`type`"/>
-			<type name="org.eclipse.emf.teneo.hibernate.mapping.ENumUserType">
-				<param name="enumClass">com.agritrace.edairy.desktop.common.model.base.ContainerType</param>
-				<param name="eclassifier">ContainerType</param>
-				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/base/</param>
-			</type>
 		</property>
 		<property name="measureType" lazy="false" not-null="false" insert="true" update="true" unique="false">
 			<column not-null="false" unique="false" name="`measuretype`"/>
@@ -235,66 +292,6 @@
 			<column not-null="false" unique="false" name="`value`" length="60"/>
 		</property>
 	</class>
-	<class name="com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl" entity-name="Person" abstract="false" lazy="false" discriminator-value="Person" table="`person`">
-		<meta attribute="eclassName">Person</meta>
-		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/base/</meta>
-		<id name="personId" type="java.lang.Long">
-			<column not-null="true" unique="false" name="`personid`"/>
-			<generator class="native"/>
-		</id>
-		<discriminator type="string">
-			<column name="dtype" index="persondtype" length="255" not-null="true"/>
-		</discriminator>
-		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
-			<meta attribute="syntheticVersion">true</meta>
-		</version>
-		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
-			<key update="true" foreign-key="contactable_contactmethods">
-				<column name="`person_contactmethods_e_id`" not-null="false" unique="false"/>
-			</key>
-			<list-index column="`person_contactmethods_idx`"/>
-			<one-to-many entity-name="ContactMethod"/>
-		</list>
-		<property name="photo" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`photo`" length="60"/>
-		</property>
-		<property name="honorific" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`honorific`" length="60"/>
-		</property>
-		<property name="familyName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`familyname`" length="60"/>
-		</property>
-		<property name="givenName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`givenname`" length="60"/>
-		</property>
-		<property name="middleName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`middlename`" length="60"/>
-		</property>
-		<property name="additionalNames" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`additionalnames`" length="60"/>
-		</property>
-		<property name="suffix" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`suffix`" length="60"/>
-		</property>
-		<property name="nickName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`nickname`" length="60"/>
-		</property>
-		<property name="phoneNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`phonenumber`" length="60"/>
-		</property>
-		<many-to-one name="location" entity-name="Location" cascade="merge,persist,save-update,lock,refresh" not-null="false" lazy="false" foreign-key="person_location" insert="true" update="true"/>
-	</class>
-	<subclass name="com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl" entity-name="Farmer" abstract="false" lazy="false" extends="Person" discriminator-value="Farmer">
-		<meta attribute="eclassName">Farmer</meta>
-		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/tracking/</meta>
-		<list name="farms" lazy="true" cascade="all,delete-orphan">
-			<key update="true" foreign-key="farmer_farms">
-				<column name="`farmer_farms_personid`" not-null="false" unique="false"/>
-			</key>
-			<list-index column="`farmer_farms_idx`"/>
-			<one-to-many entity-name="Farm"/>
-		</list>
-	</subclass>
 	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.VehicleImpl" entity-name="Vehicle" abstract="false" lazy="false" discriminator-value="Vehicle" table="`vehicle`">
 		<meta attribute="eclassName">Vehicle</meta>
 		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
@@ -483,6 +480,9 @@
 		</property>
 		<property name="jobFunction" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`jobfunction`" length="60"/>
+		</property>
+		<property name="department" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`department`" length="60"/>
 		</property>
 		<property name="nationalId" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`nationalid`" length="60"/>
@@ -772,16 +772,15 @@
 		<discriminator type="string">
 			<column name="dtype" index="dairydtype" length="255" not-null="true"/>
 		</discriminator>
-		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
-			<meta attribute="syntheticVersion">true</meta>
+		<version name="version" type="long">
+			<column not-null="true" unique="false" name="`version`"/>
 		</version>
-		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+		<bag name="contactMethods" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="contactable_contactmethods">
 				<column name="`dairy_contactmethods_e_id`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_contactmethods_idx`"/>
 			<one-to-many entity-name="ContactMethod"/>
-		</list>
+		</bag>
 		<property name="legalName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`legalname`" length="60"/>
 		</property>
@@ -810,11 +809,17 @@
 		<property name="registrationNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
 			<column not-null="true" unique="false" name="`registrationnumber`" length="60"/>
 		</property>
-		<property name="nhifNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`nhifnumber`" length="60"/>
+		<property name="establishedDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
+			<column not-null="false" unique="false" name="`establisheddate`"/>
+		</property>
+		<property name="managerName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`managername`" length="60"/>
 		</property>
 		<property name="nssfNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`nssfnumber`" length="60"/>
+		</property>
+		<property name="nhifNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
+			<column not-null="false" unique="false" name="`nhifnumber`" length="60"/>
 		</property>
 		<property name="federalPin" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`federalpin`" length="60"/>
@@ -825,54 +830,48 @@
 		<property name="licenseExpirationDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
 			<column not-null="false" unique="false" name="`licenseexpirationdate`"/>
 		</property>
-		<list name="routes" lazy="true" cascade="all,delete-orphan">
+		<bag name="routes" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_routes">
 				<column name="`dairy_routes_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_routes_idx`"/>
 			<one-to-many entity-name="Route"/>
-		</list>
-		<list name="vehicles" lazy="true" cascade="all,delete-orphan">
+		</bag>
+		<bag name="vehicles" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_vehicles">
 				<column name="`dairy_vehicles_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_vehicles_idx`"/>
 			<one-to-many entity-name="Vehicle"/>
-		</list>
-		<list name="employees" lazy="true" cascade="all,delete-orphan">
+		</bag>
+		<bag name="employees" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_employees">
 				<column name="`dairy_employees_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_employees_idx`"/>
 			<one-to-many entity-name="Employee"/>
-		</list>
-		<list name="memberships" lazy="true" cascade="all,delete-orphan">
+		</bag>
+		<bag name="memberships" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_memberships">
 				<column name="`dairy_memberships_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_memberships_idx`"/>
 			<one-to-many entity-name="Membership"/>
-		</list>
+		</bag>
 		<bag name="branchLocations" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_branchlocations">
 				<column name="`dairy_branchlocations_companyid`" not-null="false" unique="false"/>
 			</key>
 			<one-to-many entity-name="DairyLocation"/>
 		</bag>
-		<list name="collectionJournals" lazy="true" cascade="all,delete-orphan">
+		<bag name="collectionJournals" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_collectionjournals">
 				<column name="`dairy_collectionjournals_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_collectionjournals_idx`"/>
 			<one-to-many entity-name="CollectionJournalPage"/>
-		</list>
-		<list name="deliveryJournals" lazy="true" cascade="all,delete-orphan">
+		</bag>
+		<bag name="deliveryJournals" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_deliveryjournals">
 				<column name="`dairy_deliveryjournals_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_deliveryjournals_idx`"/>
 			<one-to-many entity-name="DeliveryJournal"/>
-		</list>
+		</bag>
 		<bag name="suppliers" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_suppliers">
 				<column name="`dairy_suppliers_companyid`" not-null="false" unique="false"/>
@@ -885,33 +884,24 @@
 			</key>
 			<one-to-many entity-name="Customer"/>
 		</bag>
-		<list name="animalHealthRequests" lazy="true" cascade="all,delete-orphan">
+		<bag name="animalHealthRequests" lazy="true" cascade="all,delete-orphan">
 			<key update="true">
 				<column name="`animalhealthrequest_dairy_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_animalhealthrequests_idx`"/>
 			<one-to-many entity-name="AnimalHealthRequest"/>
-		</list>
-		<list name="dairyBins" lazy="true" cascade="all,delete-orphan">
+		</bag>
+		<bag name="dairyBins" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_dairybins">
 				<column name="`dairy_dairybins_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_dairybins_idx`"/>
 			<one-to-many entity-name="DairyContainer"/>
-		</list>
-		<list name="priceHistory" lazy="true" cascade="all,delete-orphan">
+		</bag>
+		<bag name="priceHistory" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_pricehistory">
 				<column name="`dairy_pricehistory_companyid`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`dairy_pricehistory_idx`"/>
 			<one-to-many entity-name="MilkPrice"/>
-		</list>
-		<property name="managerName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`managername`" length="60"/>
-		</property>
-		<property name="establishedDate" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">
-			<column not-null="false" unique="false" name="`establisheddate`"/>
-		</property>
+		</bag>
 	</class>
 	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl" entity-name="Membership" abstract="false" lazy="false" discriminator-value="Membership" table="`membership`">
 		<meta attribute="eclassName">Membership</meta>
@@ -926,8 +916,8 @@
 		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
 			<meta attribute="syntheticVersion">true</meta>
 		</version>
-		<property name="memberNumber" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
-			<column not-null="false" unique="false" name="`membernumber`" length="60"/>
+		<property name="memberNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
+			<column not-null="true" unique="false" name="`membernumber`" length="60"/>
 		</property>
 		<property name="applicationDate" lazy="false" insert="true" update="true" not-null="true" unique="false" type="timestamp">
 			<column not-null="true" unique="false" name="`applicationdate`"/>
@@ -994,13 +984,12 @@
 		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
 			<meta attribute="syntheticVersion">true</meta>
 		</version>
-		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+		<bag name="contactMethods" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="contactable_contactmethods">
 				<column name="`supplier_contactmethods_e_id`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`supplier_contactmethods_idx`"/>
 			<one-to-many entity-name="ContactMethod"/>
-		</list>
+		</bag>
 		<property name="legalName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`legalname`" length="60"/>
 		</property>
@@ -1070,13 +1059,12 @@
 		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
 			<meta attribute="syntheticVersion">true</meta>
 		</version>
-		<list name="contactMethods" lazy="true" cascade="all,delete-orphan">
+		<bag name="contactMethods" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="contactable_contactmethods">
 				<column name="`customer_contactmethods_e_id`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`customer_contactmethods_idx`"/>
 			<one-to-many entity-name="ContactMethod"/>
-		</list>
+		</bag>
 		<property name="legalName" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.lang.String">
 			<column not-null="false" unique="false" name="`legalname`" length="60"/>
 		</property>
@@ -1390,13 +1378,9 @@
 		<property name="mimeType" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
 			<column not-null="true" unique="false" name="`mimetype`" length="60"/>
 		</property>
-		<array name="imageData" table="`imageentry_imagedata`" cascade="all,delete-orphan">
-			<key update="true">
-				<column name="`imageentry_imagedata_imageid`" not-null="true" unique="false"/>
-			</key>
-			<list-index column="`imageentry_imagedata_idx`"/>
-			<element type="byte"/>
-		</array>
+		<property name="imageData" lazy="false" insert="true" update="true" not-null="false" unique="false" type="binary">
+			<column not-null="false" unique="false" name="`imagedata`" length="1048576"/>
+		</property>
 	</class>
 	<class name="com.agritrace.edairy.desktop.common.model.requests.impl.AnimalHealthRequestImpl" entity-name="AnimalHealthRequest" abstract="false" lazy="false" discriminator-value="AnimalHealthRequest" table="`animalhealthrequest`">
 		<meta attribute="eclassName">AnimalHealthRequest</meta>
@@ -1414,7 +1398,7 @@
 		<many-to-one name="requestingMember" entity-name="Membership" lazy="false" foreign-key="animalhealthrequest_requestingmember" insert="true" update="true" not-null="true">
 			<column not-null="true" unique="false" name="`membership_requestingmember_memberid`"/>
 		</many-to-one>
-		<many-to-one name="dairy" entity-name="Dairy" lazy="false" cascade="persist,save-update,lock" foreign-key="animalhealthrequest_dairy" insert="false" update="false" not-null="false">
+		<many-to-one name="dairy" entity-name="Dairy" lazy="false" cascade="persist,save-update,lock" foreign-key="animalhealthrequest_dairy" insert="true" update="true" not-null="false">
 			<column not-null="false" unique="false" name="`animalhealthrequest_dairy_companyid`"/>
 		</many-to-one>
 		<property name="date" lazy="false" insert="true" update="true" not-null="false" unique="false" type="timestamp">

@@ -1576,7 +1576,7 @@ public class AllTests {
 	@Test
 	public void test88() throws Exception {
 		try {
-			CsvReader reader = new CsvReader((String) null, ',', Charset
+			new CsvReader((String) null, ',', Charset
 					.forName("ISO-8859-1"));
 		} catch (Exception ex) {
 			assertException(new IllegalArgumentException(
@@ -1587,7 +1587,7 @@ public class AllTests {
 	@Test
 	public void test89() throws Exception {
 		try {
-			CsvReader reader = new CsvReader("temp.csv", ',', null);
+			new CsvReader("temp.csv", ',', null);
 		} catch (Exception ex) {
 			assertException(new IllegalArgumentException(
 					"Parameter charset can not be null."), ex);
@@ -1597,7 +1597,7 @@ public class AllTests {
 	@Test
 	public void test90() throws Exception {
 		try {
-			CsvReader reader = new CsvReader((Reader) null, ',');
+			new CsvReader((Reader) null, ',');
 		} catch (Exception ex) {
 			assertException(new IllegalArgumentException(
 					"Parameter inputStream can not be null."), ex);
@@ -1649,7 +1649,7 @@ public class AllTests {
 	@Test
 	public void test112() throws Exception {
 		try {
-			CsvWriter writer = new CsvWriter((String) null, ',', Charset
+			new CsvWriter((String) null, ',', Charset
 					.forName("ISO-8859-1"));
 		} catch (Exception ex) {
 			assertException(new IllegalArgumentException("Parameter fileName can not be null."), ex);
@@ -1659,7 +1659,7 @@ public class AllTests {
 	@Test
 	public void test113() throws Exception {
 		try {
-			CsvWriter writer = new CsvWriter("test.csv", ',', (Charset) null);
+			new CsvWriter("test.csv", ',', (Charset) null);
 		} catch (Exception ex) {
 			assertException(new IllegalArgumentException("Parameter charset can not be null."), ex);
 		}
@@ -1668,7 +1668,7 @@ public class AllTests {
 	@Test
 	public void test114() throws Exception {
 		try {
-			CsvWriter writer = new CsvWriter((Writer) null, ',');
+			new CsvWriter((Writer) null, ',');
 		} catch (Exception ex) {
 			assertException(new IllegalArgumentException("Parameter outputStream can not be null."), ex);
 		}
@@ -2159,7 +2159,7 @@ public class AllTests {
 	public void test149() throws Exception {
 		try
 		{
-			CsvReader reader = new CsvReader("C:\\somefilethatdoesntexist.csv");
+			new CsvReader("C:\\somefilethatdoesntexist.csv");
 		}
 		catch (Exception ex)
 		{

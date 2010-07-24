@@ -29,8 +29,6 @@ import com.swtdesigner.ResourceManager;
 public class ScaleDataImportView extends SubModuleView {
 	public static final String ID = "edairy.scale.import.view";
 
-	private static final String BIN_COLUMN_HEADER = "Bin";
-
 	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
 
 	private static final String CANCEL_LABEL = "Cancel Import";

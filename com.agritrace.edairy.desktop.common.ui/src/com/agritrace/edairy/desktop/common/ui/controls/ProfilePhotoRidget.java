@@ -68,7 +68,6 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	private ImageData imageData;
 	private ILabelRidget profileImageLabel;
 	private IObservableValue modelObj;
-	private EStructuralFeature imageRefAttr;
 	private IConverter converter;
 	private String currentKey;
 	

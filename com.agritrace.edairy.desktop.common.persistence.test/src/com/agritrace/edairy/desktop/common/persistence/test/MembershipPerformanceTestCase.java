@@ -33,7 +33,7 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 	public void testIterateCriteriaQuery() {
 		long start = System.currentTimeMillis();
 		Session session = getSessionFactory().openSession();
-		Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
+		session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time for Criteria Query... ");
 
@@ -53,7 +53,7 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 	public void testIterateHSQLQuery() {
 		long start = System.currentTimeMillis();
 		Session session = getSessionFactory().openSession();
-		Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
+		session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time for HSQL Query... ");
 
@@ -75,7 +75,6 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 		long count = 0;
 		long time0 = System.currentTimeMillis();
-		long sum = 0;
 		Collection<Membership> members = dairy.getMemberships();
 		Object[] memberArray = members.toArray();
 		for (Object obj : memberArray) {

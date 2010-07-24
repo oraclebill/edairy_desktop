@@ -60,7 +60,7 @@ public class AdapterFactoryTests {
 		final TableViewer viewer = new TableViewer(folder, SWT.FULL_SELECTION);
 
 		viewer.getTable().setHeaderVisible(true);
-		ObservableListContentProvider cp = new ObservableListContentProvider();
+		new ObservableListContentProvider();
 
 //		{
 //			IObservableMap[] attributeMap = new IObservableMap[2];

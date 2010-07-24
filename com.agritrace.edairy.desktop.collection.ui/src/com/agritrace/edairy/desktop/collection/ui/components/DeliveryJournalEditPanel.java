@@ -261,9 +261,9 @@ public class DeliveryJournalEditPanel extends Composite {
 		composite.setLayout(rl_composite);
 		composite.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false, 1, 1));
 		
-		Button btnDeleteRow = UIControlsFactory.createButton(composite, "Delete Row", "BTN_DELETE_ROW");
+		UIControlsFactory.createButton(composite, "Delete Row", "BTN_DELETE_ROW");
 		
-		Button btnAddRow = UIControlsFactory.createButton(composite, "Add Row", DeliveryJournalEditBindContants.BTN_ADD_ROW);
+		UIControlsFactory.createButton(composite, "Add Row", DeliveryJournalEditBindContants.BTN_ADD_ROW);
 		
 	}
 }

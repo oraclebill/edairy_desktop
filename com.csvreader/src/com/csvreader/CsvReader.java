@@ -1704,10 +1704,6 @@ public class CsvReader {
 	}
 
 	private class UserSettings {
-		// having these as publicly accessible members will prevent
-		// the overhead of the method call that exists on properties
-		public boolean CaseSensitive;
-
 		public char TextQualifier;
 
 		public boolean TrimWhitespace;
@@ -1731,7 +1727,6 @@ public class CsvReader {
 		public boolean CaptureRawRecord;
 
 		public UserSettings() {
-			CaseSensitive = true;
 			TextQualifier = Letters.QUOTE;
 			TrimWhitespace = true;
 			UseTextQualifier = true;

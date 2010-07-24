@@ -56,12 +56,12 @@
             parentNodeId="application">
       </assembly2>
       
-      <assembly2
+      <!-- assembly2
             assembler="com.agritrace.edairy.desktop.collection.ui.navigation.JournalDetailNavigationNodeAssembler"
             id="milk.collection.working-journals"
             parentNodeId="edm.milk.collection.log"
             name="Edit Collection Journal Journal Node Assembler">
-      </assembly2>
+      </assembly2 -->
    </extension>
 
 </plugin>

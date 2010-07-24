@@ -35,7 +35,7 @@ public class CJWizardStartPage extends WizardPage {
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		composite.setLayout(new GridLayout(3, false));
 		
-		Label label = UIControlsFactory.createLabel(composite, "Date");
+		UIControlsFactory.createLabel(composite, "Date");
 		
 		DateTime dateTime = UIControlsFactory.createDate(composite, 0, "date-picker");
 		GridData gd_dateTime = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -48,7 +48,7 @@ public class CJWizardStartPage extends WizardPage {
 		lblDatePrintedOn.setLayoutData(gd_lblDatePrintedOn);
 		lblDatePrintedOn.setText("The date to enter collection data for");
 		
-		Label lblRoute = UIControlsFactory.createLabel(composite, "Route");
+		UIControlsFactory.createLabel(composite, "Route");
 		
 		CCombo combo = UIControlsFactory.createCCombo(composite, "session");
 		GridData gd_combo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -61,7 +61,7 @@ public class CJWizardStartPage extends WizardPage {
 		lblRoute_1.setLayoutData(gd_lblRoute_1);
 		lblRoute_1.setText("The route");
 		
-		Label lblSession = UIControlsFactory.createLabel(composite, "Session");
+		UIControlsFactory.createLabel(composite, "Session");
 		
 		CCombo combo_1 = UIControlsFactory.createCCombo(composite, "route");
 		GridData gd_combo_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -78,7 +78,7 @@ public class CJWizardStartPage extends WizardPage {
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		composite_1.setLayout(new GridLayout(3, false));
 		
-		Label label_3 = UIControlsFactory.createLabel(composite_1, "Driver");
+		UIControlsFactory.createLabel(composite_1, "Driver");
 		
 		CCombo combo_2 = UIControlsFactory.createCCombo(composite_1, "driver");
 		GridData gd_combo_2 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
@@ -91,7 +91,7 @@ public class CJWizardStartPage extends WizardPage {
 		lblSelectTheDriver.setLayoutData(gd_lblSelectTheDriver);
 		lblSelectTheDriver.setText("Select the driver for this trip");
 		
-		Label label_4 = UIControlsFactory.createLabel(composite_1, "Vehicle");
+		UIControlsFactory.createLabel(composite_1, "Vehicle");
 		
 		CCombo combo_3 = UIControlsFactory.createCCombo(composite_1, "vehicle");
 		GridData gd_combo_3 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);

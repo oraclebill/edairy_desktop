@@ -9,30 +9,22 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.navigation.INavigationNode;
-import org.eclipse.riena.navigation.ISubModuleNode;
-import org.eclipse.riena.navigation.NavigationArgument;
-import org.eclipse.riena.navigation.NavigationNodeId;
-import org.eclipse.riena.navigation.model.SubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.riena.ui.workarea.WorkareaManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionEntryDialogController;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
-import com.agritrace.edairy.desktop.collection.ui.views.MilkCollectionJournalView;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
@@ -46,10 +38,7 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 
 	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
-		private final BulkCollectionEntryDialogController controller;
-
 		private CollectionLogJournalPersister(BulkCollectionEntryDialogController controller) {
-			this.controller = controller;
 		}
 
 		@Override
@@ -111,8 +100,9 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
-		// setEntityClass(CollectionJournalPage.class);
-		setRepository(new MilkCollectionJournalRepository());
+		
+		ICollectionJournalRepository journalRepo = new  MilkCollectionJournalRepository();		
+		setRepository(journalRepo);
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
 		// addTableColumn("Route",
@@ -137,117 +127,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
 
 		getRidget(IActionRidget.class, "import-file-button").addListener(new ScaleImportAction(this));
-
-		final ISubModuleNode myNode = getNavigationNode();
-		if (myNode != null) {
-			myNode.addSimpleListener(new org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter() {
-
-				@Override
-				public void activated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void afterActivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void afterDeactivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void beforeActivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void beforeDeactivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void childAdded(INavigationNode<?> source, INavigationNode<?> childAdded) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void childRemoved(INavigationNode<?> source, INavigationNode<?> childRemoved) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void deactivated(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void disposed(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void prepared(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void selectedChanged(INavigationNode<?> source) {
-					// TODO Auto-generated method stub
-
-				}
-
-			});
-		}
-	}
-
-	private void activateDetailView(CollectionJournalPage journalPage) {
-		getNavigationNode().navigate(
-				new NavigationNodeId(NavigationConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE,
-						journalPage.getReferenceNumber()), //$NON-NLS-1$
-				new NavigationArgument(journalPage));
-
-		// final ISubModuleNode myNode = getNavigationNode();
-		// final ISubModuleNode childNode =
-		// createCollectionDetailNode(journalPage);
-		// myNode.addChild(childNode);
-		// // myNode.getNavigationProcessor().navigate(myNode,
-		// // childNode.getNodeId(), new NavigationArgument(journalPage));
-		// try {
-		// childNode.activate();
-		// } catch (final Exception e) {
-		// myNode.removeChild(childNode);
-		// e.printStackTrace();
-		// }
-	}
-
-	private ISubModuleNode createCollectionDetailNode(CollectionJournalPage journalPage) {
-		getNavigationNode().navigate(
-				new NavigationNodeId(NavigationConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE,
-						journalPage.getReferenceNumber()), //$NON-NLS-1$
-				new NavigationArgument(journalPage));
-
-		final NavigationNodeId nodeId = new NavigationNodeId(NavigationConstants.MILK_COLLECTION_JOURNAL_DETAIL_NODE,
-				journalPage.getReferenceNumber());
-		final ISubModuleNode detailViewNode = new SubModuleNode(nodeId, journalPage.getReferenceNumber());
-		detailViewNode.setIcon("milk_detail.gif"); //$NON-NLS-1$
-		detailViewNode.setContext("JOURNAL_PAGE", journalPage); // backup..
-		WorkareaManager
-				.getInstance()
-				.registerDefinition(detailViewNode, MilkCollectionJournalController.class, MilkCollectionJournalView.ID)
-				.setRequiredPreparation(true);
-		return detailViewNode;
 	}
 
 	@Override

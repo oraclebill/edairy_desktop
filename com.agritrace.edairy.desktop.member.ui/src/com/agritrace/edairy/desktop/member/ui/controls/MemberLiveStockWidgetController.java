@@ -298,7 +298,7 @@ public class MemberLiveStockWidgetController implements WidgetController, ISelec
 		final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
 		final String farmName = filterController.getFarmCombo().getText();
 		final String speciesName = filterController.getSpeciesCombo().getText();
-		final String statusName = filterController.getStatusCombo().getText();
+		filterController.getStatusCombo().getText();
 		final List<Farm> farms = new ArrayList<Farm>();
 		if (inputModel instanceof Membership) {
 			farms.addAll(((Membership) inputModel).getMember().getFarms());

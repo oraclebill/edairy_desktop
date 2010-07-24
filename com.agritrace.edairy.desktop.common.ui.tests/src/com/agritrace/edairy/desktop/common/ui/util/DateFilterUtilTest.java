@@ -98,12 +98,12 @@ public class DateFilterUtilTest {
 				cal.set(2000, 1, 1);
 				Date midWay = cal.getTime();
 				cal.set(2100, 1, 1);
-				Date afterAll = cal.getTime();
+				cal.getTime();
 				DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
 						AccountPackage.Literals.ACCOUNT__ESTABLISHED);
 
 				long start = System.currentTimeMillis();
-				List<Account> result = filterUtil.filterDate(list, beforeAll, midWay);
+				filterUtil.filterDate(list, beforeAll, midWay);
 				long end = System.currentTimeMillis();
 				System.out.println(end - start);
 				Assert.assertTrue(start - end < 1000);

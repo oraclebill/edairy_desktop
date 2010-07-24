@@ -58,7 +58,6 @@ public class MemberRepositoryTest {
 	@Test 
 	public void testGetMemberFarms() {
 		Membership member;
-		Farm farm;
 		UUID uuid;
 		Set<String> uuidSet = new HashSet<String>();
 		

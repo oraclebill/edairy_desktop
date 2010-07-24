@@ -276,7 +276,7 @@ public class LiveStockListController extends BaseListViewController {
 		final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
 		final String farmName = filterController.getFarmCombo().getText();
 		final String speciesName = filterController.getSpeciesCombo().getText();
-		final String statusName = filterController.getStatusCombo().getText();
+		filterController.getStatusCombo().getText();
 		final List<Farm> farms = new ArrayList<Farm>();
 		if (selectedMember != null) {
 			farms.addAll(selectedMember.getMember().getFarms());

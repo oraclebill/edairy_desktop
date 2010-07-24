@@ -35,8 +35,6 @@ public class CommunicationGroupController implements WidgetController<Contactabl
 	private IActionRidget deleteBtn;
 	private IEditableTableRidget editTable;
 	private final String[] headers = new String[] { "Type", "Value" };
-	private final int[] weights = new int[] { 30, 70 };
-
 	private Contactable inputModel;
 
 	public CommunicationGroupController(IController controller) {

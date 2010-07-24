@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 
 public abstract class BaseDialogView extends AbstractDialogView {
 
@@ -79,6 +80,13 @@ public abstract class BaseDialogView extends AbstractDialogView {
 		return main;
 	}
 
+//	protected void handleShellCloseEvent() {
+//		try {
+//			BaseDialogController controller = (BaseDialogController) getController();
+//			controller.handleCancelAction();
+//		}
+//		catch(Exception e) {}
+//	}
 	protected abstract void buildWorkArea(Composite parent);
 
 }

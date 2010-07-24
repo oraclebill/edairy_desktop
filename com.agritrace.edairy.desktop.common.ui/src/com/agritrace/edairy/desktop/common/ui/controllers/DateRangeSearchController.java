@@ -17,19 +17,11 @@ public class DateRangeSearchController {
 
 	private final IRidgetContainer container;
 
-	private final String endDateButtonId;
-
-	private ImageButtonRidget endDateImageButton;
-
 	private IDateTimeRidget endDate;
 
 	private final String endDateTxtId;
 
 	private DateRangeFilter filter;
-
-	private final String startDateButtonId;
-
-	private ImageButtonRidget startDateImageButton;
 
 	private IDateTimeRidget startDate;
 
@@ -40,8 +32,6 @@ public class DateRangeSearchController {
 		this.container = controller2;
 		this.startDateTxtId = startDateTxtId;
 		this.endDateTxtId = endDateTxtId;
-		this.startDateButtonId = startDateButtonId;
-		this.endDateButtonId = endDateButtonId;
 		this.filter = dateFilter;
 		config();
 	}

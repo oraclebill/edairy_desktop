@@ -85,7 +85,7 @@ public class PersistenceManagerTest {
 	
 	@Test
 	public void testMultipleManagers() throws Exception {
-		PersistenceManager pm, anotherPM, theLastPM;
+		PersistenceManager pm;
 		
 		// pm obtained from default constructor is system default
 		pm = new PersistenceManager();

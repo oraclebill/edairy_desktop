@@ -72,9 +72,6 @@ public class EMFXMLSaveLoader {
 	    resource.save(f, options);
 	    f.close();
 	} catch (final Exception e) {
-	    // logger
-
-	    final int i = 0;
 	} finally {
 	    if (f != null) {
 		try {
@@ -112,8 +109,6 @@ public class EMFXMLSaveLoader {
 	    // }
 	    in.close();
 	} catch (final Exception e) {
-	    // do nothing, the file doesn't exist when loading at the first time
-	    final int i = 0;
 	} finally {
 
 	    if (in != null) {

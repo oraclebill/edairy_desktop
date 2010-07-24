@@ -96,7 +96,7 @@ public class DateRange extends  Composite implements IComplexComponent {
 		final Display display = new Display();
 		final Shell shell = new Shell(display);		
 		
-		DateRange control = new DateRange(shell, "Range", "start", "end");
+		new DateRange(shell, "Range", "start", "end");
 		GridLayoutFactory.fillDefaults().generateLayout(shell);
 		
 //		shell.pack();

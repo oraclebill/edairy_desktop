@@ -84,7 +84,7 @@ public class EmployeeTestCase {
 	 */
 	@Test
 	public void testSetName() {
-		Employee emp = DairyFactory.eINSTANCE.createEmployee();
+		DairyFactory.eINSTANCE.createEmployee();
 		try {
 			//emp.setName("test this" );
 		}

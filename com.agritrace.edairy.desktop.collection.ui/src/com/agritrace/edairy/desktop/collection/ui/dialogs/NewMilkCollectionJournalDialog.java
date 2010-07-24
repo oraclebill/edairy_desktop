@@ -52,7 +52,6 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
 	private DateTime datePicker;
 	private CCombo driverCombo;
-	private Text fileNumber;
 	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
 
 	private CCombo routeCombo;
@@ -112,18 +111,12 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		};
 		class UpdateListener implements PropertyChangeListener, FocusListener {
 
-			private boolean auto = true;
-			private boolean focus = false;
-			private String oldTxt = null;
-
 			@Override
 			public void focusGained(FocusEvent e) {
-				focus = true;
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				focus = false;
 			}
 
 			@Override

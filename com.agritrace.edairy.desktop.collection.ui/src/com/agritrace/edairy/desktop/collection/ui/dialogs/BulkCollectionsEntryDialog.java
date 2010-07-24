@@ -74,7 +74,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		}
 
 		private final Shell shell;
-		private CollectionJournalPage page;
+//		private CollectionJournalPage page;
 
 		private JournalEntryTestAction(Shell shell) {
 			this(shell, createCollectionJournal());
@@ -82,7 +82,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 		private JournalEntryTestAction(Shell shell, CollectionJournalPage page) {
 			this.shell = shell;
-			this.page = page;
+//			this.page = page;
 		}
 
 		private static CollectionJournalPage createCollectionJournal() {
@@ -128,9 +128,6 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	private static final String BIN_COLUMN_HEADER = "Bin";
 	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
-	private static final String SAVE_LABEL = "Save and Create New Journal";
-	private static final String CLOSE_LABEL = "Save and Close";
-
 	/**
 	 * Create the dialog.
 	 * 
@@ -205,7 +202,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 				.createButton(buttonComposite, "Delete", ViewWidgetId.deleteButton);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(deleteButton);
 
-		final Button clearButton = UIControlsFactory.createButton(buttonComposite, "Clear", ViewWidgetId.clearButton);
+		final Button clearButton = UIControlsFactory.createButton(buttonComposite, "Delete All", ViewWidgetId.clearButton);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(clearButton);
 
 		return buttonComposite;

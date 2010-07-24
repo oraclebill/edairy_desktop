@@ -25,8 +25,6 @@ public class ScaleImporter {
 	 */
 	private static final int SCALE_DATA = 0;
 	private static final int CSV_DATA_AM = 1;
-	private static final int CSV_DATA_PM = 2;	
-	
 	private static int[][] SCALE_TO_RECORD_MAP = {
 		{ ScaleRecord.MEMBER_NUMBER, 		0, 	0 },
 		{ ScaleRecord.TRANSACTION_DATE, 	1, 	1 },

@@ -22,15 +22,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 
-	private IRidgetContainer detailsContainer;
 	private IComboRidget routeCombo;
 	private ITextRidget textAddress;
 	private ITextRidget textName;
@@ -102,7 +101,7 @@ final class DairyLocationDelegate extends AbstractMasterDetailsDelegate {
 		// textAddress.requestFocus();
 		// return "You must specify an address for this location.";
 		// }
-		Collection<IMarkableRidget> results = BaseDialogController.ContainerValidator.validateContainer(container);
+		Collection<IMarkableRidget> results = ContainerValidator.validateContainer(container);
 		return results.isEmpty() ? super.isValid(container) : results.toString();
 	}
 

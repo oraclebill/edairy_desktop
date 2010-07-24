@@ -38,7 +38,7 @@ public class ImportMembersHandler extends AbstractHandler {
 		fileDialog.setFilterExtensions(new String[] { "*.csv", });
 		String importFileName = fileDialog.open();
 		
-		DairyRepository dairyRepo = DairyRepository.getInstance();
+		DairyRepository.getInstance();
 //		Dairy dairy = dairyRepo.getLocalDairy();
 		try {
 			MemberImportTool importTool = new MemberImportTool(new File(importFileName));

@@ -20,7 +20,7 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderRidget;
-import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineEditRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineRidget;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -59,9 +59,6 @@ public class ScaleImportViewController extends SubModuleController {
 	private IJournalHeaderRidget journalHeaderRidget;
 	private ITableRidget table;
 	private ILabelRidget calculatedTotalRidget;
-	private ICollectionLineEditRidget collectionsEntryRidget;
-
-
 	/**
 	 * 
 	 */

@@ -64,9 +64,6 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		}
 	}
 
-	// ridgets specific to an AdjustmentTransaction
-	private IActionRidget batchEditRidget;
-
 	private final IMemberRepository memberRepo = DairyRepository.getInstance();
 	private IMultipleChoiceRidget typeSetRidget;
 

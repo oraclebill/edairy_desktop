@@ -125,8 +125,7 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 		assertNotNull(masterTable);
 		assertNotNull(masterTable.getObservableList());
 
-		// Test Apply Button, Change some condition
-		final IActionRidget apply = controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_SEARCH);
+		controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_SEARCH);
 
 		// Test Reset Button
 		final IActionRidget reset = controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_RESET);

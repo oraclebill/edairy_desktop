@@ -119,7 +119,6 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		// bind all
 		for (IRidget ridget : getRidgets()) {
 			if (ridget instanceof IValueRidget) {
-				IValueRidget ivr = (IValueRidget) ridget;
 				ridget.updateFromModel();
 			} else if (ridget instanceof IMarkableRidget) {
 				IMarkableRidget imr = (IMarkableRidget) ridget;

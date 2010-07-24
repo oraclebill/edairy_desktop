@@ -29,8 +29,6 @@ public class SupplierListDialogControllerTestCase extends
 
 	List<Supplier> supplier = new ArrayList<Supplier>();
 	private SupplierListDialogController newInst;
-	private Supplier selectedObject;
-
 	protected SupplierListDialogController createController() {
 		newInst = new SupplierListDialogController();
 		return newInst;
@@ -124,10 +122,7 @@ public class SupplierListDialogControllerTestCase extends
 	 */
 	public void testViewRecord() {
 
-		SupplierListDialogController controller = this.getController();
-//		controller.setSelectedObject(selectedObject);
-		//controller.setActionType(AbstractRecordListController.ACTION_VIEW);
-//		controller.copyModel();
+		this.getController();
 
 		// TODO
 	}
