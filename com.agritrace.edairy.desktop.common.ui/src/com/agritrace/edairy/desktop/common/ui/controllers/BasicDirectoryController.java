@@ -23,7 +23,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	final private List<ColumnFormatter> columnFormatters = new ArrayList<ColumnFormatter>();
 	final private List<String> columnHeaders = new ArrayList<String>();
 	final private List<String> columnProperties = new ArrayList<String>();
-	final private ArrayList<Comparator> columnComparators = new ArrayList<Comparator>();
+	final private ArrayList<Comparator<?>> columnComparators = new ArrayList<Comparator<?>>();
 
 	private EClass eClass;
 

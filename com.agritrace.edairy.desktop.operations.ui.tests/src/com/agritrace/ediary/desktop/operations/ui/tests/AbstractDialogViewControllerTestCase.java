@@ -11,6 +11,7 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.swt.widgets.Display;
 
+@SuppressWarnings("restriction")
 public abstract class AbstractDialogViewControllerTestCase<C extends AbstractWindowController>
 		extends RienaTestCase {
 

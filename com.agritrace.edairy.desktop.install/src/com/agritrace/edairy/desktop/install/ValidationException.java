@@ -2,6 +2,11 @@ package com.agritrace.edairy.desktop.install;
 
 public class ValidationException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ValidationException() {
 		super();
 		// TODO Auto-generated constructor stub

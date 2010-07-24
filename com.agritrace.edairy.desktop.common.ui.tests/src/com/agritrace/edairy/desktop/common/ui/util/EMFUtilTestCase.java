@@ -14,9 +14,19 @@ import static org.junit.Assert.*;
 public class EMFUtilTestCase {
 
 	class EArray extends ArrayList<EClass> {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 	};
 
 	class OArray extends ArrayList<EObject> {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 	};
 
 	@Test
