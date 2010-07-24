@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
+   <!--extension
          point="org.eclipse.ui.views">
       <category
             id="com.agritrace.edairy.desktop.install"
@@ -23,7 +23,7 @@
             id="com.agritrace.edairy.desktop.install"
             name="name">
       </perspective>
-   </extension>
+   </extension -->
    <extension
          point="org.eclipse.help.contexts">
       <contexts

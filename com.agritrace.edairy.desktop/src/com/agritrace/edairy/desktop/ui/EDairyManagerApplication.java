@@ -96,7 +96,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String MODULE_VETERINARY = "edm.services";
 	// FINANCE
 	private static final String SUBAPP_FINANCE = "com.agritrace.edairy.desktop.finance";//$NON-NLS-1$
-	private static final String SUBAPP_INSTALL = "com.agritrace.edairy.desktop.install";//$NON-NLS-1$
+//	private static final String SUBAPP_INSTALL = "com.agritrace.edairy.desktop.install";//$NON-NLS-1$
 	//	private static final String MODULE_GROUP_FINANCE = "modulegroup.desktop.finance"; //$NON-NLS-1$
 	//	private static final String MODULE_FINANCE = "edm.finances";//$NON-NLS-1$
 	//	private static final String SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY = "edm.finances.blog";//$NON-NLS-1$
@@ -241,7 +241,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		app.create(new NavigationNodeId(SUBAPP_FINANCE));
-		app.create(new NavigationNodeId(SUBAPP_INSTALL));
+//		app.create(new NavigationNodeId(SUBAPP_INSTALL));
 
 		/************
 		 * subAppNode = new SubApplicationNode(new

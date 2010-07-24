@@ -11,8 +11,12 @@
 package org.eclipse.riena.ui.ridgets.swt.views;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.TrayDialog;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.swt.RienaWindowRenderer;
+import org.eclipse.riena.ui.swt.lnf.LnFUpdater;
+import org.eclipse.riena.ui.swt.utils.SWTControlFinder;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Rectangle;
@@ -21,11 +25,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-import org.eclipse.riena.ui.swt.RienaWindowRenderer;
-import org.eclipse.riena.ui.swt.lnf.LnFUpdater;
-import org.eclipse.riena.ui.swt.utils.SWTControlFinder;
 
 /**
  * Base class for Riena Dialogs. This class enchances JFace dialogs by adding:
@@ -56,7 +55,7 @@ import org.eclipse.riena.ui.swt.utils.SWTControlFinder;
  * <li>build() is deprecated - invoke open() in client code instead</li>
  * </ol>
  */
-public abstract class AbstractDialogView extends Dialog {
+public abstract class AbstractDialogView extends TrayDialog {
 
 	private static final LnFUpdater LNF_UPDATER = new LnFUpdater();
 
