@@ -37,7 +37,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 
-public class MemberLiveStockWidgetController implements WidgetController, ISelectionListener {
+public class MemberLiveStockWidgetController implements WidgetController<Object>, ISelectionListener {
 
 	private class AddAction implements IActionListener {
 

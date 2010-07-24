@@ -45,7 +45,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 
-public class MemberContainerWidgetController implements WidgetController, ISelectionListener {
+public class MemberContainerWidgetController implements WidgetController<Object>, ISelectionListener {
 
 	private final class ViewContainerAction implements IActionListener {
 

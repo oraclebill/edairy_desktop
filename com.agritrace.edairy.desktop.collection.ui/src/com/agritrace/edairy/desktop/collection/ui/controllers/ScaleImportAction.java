@@ -228,7 +228,7 @@ final class ScaleImportAction implements IActionListener {
 		return buffer.toString();
 	}
 
-	private void createCollectionDetailNode(INavigationNode currentNode, CollectionJournalPage journalPage) {
+	private void createCollectionDetailNode(INavigationNode<?> currentNode, CollectionJournalPage journalPage) {
 		currentNode.navigate(
 							new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
 		 new NavigationArgument(journalPage));

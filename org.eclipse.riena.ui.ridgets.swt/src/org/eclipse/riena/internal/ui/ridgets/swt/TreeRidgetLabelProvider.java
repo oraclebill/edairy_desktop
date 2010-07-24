@@ -290,7 +290,7 @@ public final class TreeRidgetLabelProvider extends TableRidgetLabelProvider impl
 			result = isExpanded ? (String) openImageAttribute.get(element) : (String) imageAttribute.get(element);
 		}
 		if ((result == null) && (isSubModuleNode(element.getClass()))) {
-			ILnfResource lnfResource = null;
+			ILnfResource<?> lnfResource = null;
 			if (isExpanded) {
 				lnfResource = LnfManager.getLnf().getLnfResource(LnfKeyConstants.SUB_MODULE_TREE_FOLDER_OPEN_ICON);
 			} else {

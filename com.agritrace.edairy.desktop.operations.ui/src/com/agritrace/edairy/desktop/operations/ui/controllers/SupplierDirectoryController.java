@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.operations.services.supplier.SupplierReposit
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
 
-public class SupplierDirectoryController extends BasicDirectoryController {
+public class SupplierDirectoryController extends BasicDirectoryController<Supplier> {
 
 	private IListRidget categoryList;
 	private ITextRidget companyText;

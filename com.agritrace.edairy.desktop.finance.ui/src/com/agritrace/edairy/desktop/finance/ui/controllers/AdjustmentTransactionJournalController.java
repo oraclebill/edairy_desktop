@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
-public class AdjustmentTransactionJournalController extends TransactionJournalController {
+public class AdjustmentTransactionJournalController extends TransactionJournalController<AdjustmentTransaction> {
 
 	static class TransactionTypeMatchPredicate implements Predicate {
 		final private Set<TransactionType> testSources = new HashSet<TransactionType>();
@@ -76,10 +76,10 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		super(node);
 		
 		setEClass(AccountPackage.Literals.ADJUSTMENT_TRANSACTION);
-		setRepository(new HibernateRepository<AccountTransaction>() {
+		setRepository(new HibernateRepository<AdjustmentTransaction>() {
 			@Override
 			protected Class<?> getClassType() {
-				return AccountTransaction.class;
+				return AdjustmentTransaction.class;
 			}			
 		});
 

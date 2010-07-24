@@ -35,7 +35,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
-public class MemberFarmWidgetController implements WidgetController, ISelectionListener {
+public class MemberFarmWidgetController implements WidgetController<Object>, ISelectionListener {
 
 	public static final String farmRemoveMessage = "Do you want to remove selected farms?";
 

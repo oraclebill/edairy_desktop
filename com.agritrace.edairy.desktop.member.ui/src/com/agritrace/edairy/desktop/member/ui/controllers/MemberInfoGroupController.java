@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class MemberInfoGroupController implements WidgetController {
+public class MemberInfoGroupController implements WidgetController<Object> {
 
 	private IDateTimeRidget appliedDate;
 

@@ -90,7 +90,7 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 	}
 
 	@Override
-	protected Class getClassType() {
+	protected Class<Customer> getClassType() {
 		// due to type erasure, cannot get this from the generic type
 		// argument...
 		return Customer.class;

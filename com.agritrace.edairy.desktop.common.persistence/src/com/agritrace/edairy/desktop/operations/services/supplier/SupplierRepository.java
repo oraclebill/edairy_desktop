@@ -52,7 +52,7 @@ public class SupplierRepository extends HibernateRepository<Supplier> {
 	}
 
 	@Override
-	protected Class getClassType() {
+	protected Class<Supplier> getClassType() {
 		// due to type erasure, cannot get this from the generic type
 		// argument...
 		return Supplier.class;

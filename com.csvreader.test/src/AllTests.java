@@ -28,7 +28,7 @@ import com.csvreader.CsvWriter;
 
 public class AllTests {
 	public static void main(String[] args) throws Exception {
-		Class testClass = AllTests.class;
+		Class<AllTests> testClass = AllTests.class;
 		ArrayList<Method> setups = new ArrayList<Method>();
 		ArrayList<Method> tearDowns = new ArrayList<Method>();
 
@@ -63,7 +63,7 @@ public class AllTests {
 						setup.invoke(instance, (Object[]) null);
 					}
 
-					Class expectedException = testAnnotation.expected();
+					Class<?> expectedException = testAnnotation.expected();
 
 					// can't for the life of me get eclipse to be able to
 					// resolve Test.None directly

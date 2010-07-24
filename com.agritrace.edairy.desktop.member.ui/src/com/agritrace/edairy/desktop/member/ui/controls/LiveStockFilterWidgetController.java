@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class LiveStockFilterWidgetController implements WidgetController {
+public class LiveStockFilterWidgetController implements WidgetController<Object> {
 
 	private final IRidgetContainer container;
 	

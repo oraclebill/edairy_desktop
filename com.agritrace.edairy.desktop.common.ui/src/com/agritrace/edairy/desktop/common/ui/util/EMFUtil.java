@@ -157,7 +157,7 @@ public class EMFUtil {
 						object.eSet(reference, createWorkingCopy(reference.getEReferenceType(), depth - 1));
 
 					} else if (reference.isContainment()) {
-						object.eSet(reference, new BasicEList());
+						object.eSet(reference, new BasicEList<Object>());
 					}
 				}
 			}

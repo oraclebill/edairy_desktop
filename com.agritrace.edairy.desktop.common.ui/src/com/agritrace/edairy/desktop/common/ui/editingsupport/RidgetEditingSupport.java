@@ -23,9 +23,9 @@ public class RidgetEditingSupport extends EditingSupport {
 	private final IColumnEditingSupport editor;
 	private final int index;
 	private final String propertyName;
-	private final Class rowClass;
+	private final Class<?> rowClass;
 
-	public RidgetEditingSupport(ColumnViewer viewer, IColumnEditingSupport editor, String propertyName, Class rowClass,
+	public RidgetEditingSupport(ColumnViewer viewer, IColumnEditingSupport editor, String propertyName, Class<?> rowClass,
 			int index) {
 		super(viewer);
 		this.editor = editor;

@@ -97,7 +97,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	}
 
 	@Override
-	protected RecordDialog getRecordDialog(Shell shell) {
+	protected RecordDialog<Route> getRecordDialog(Shell shell) {
 		return new RouteEditDialog(shell);
 	}
 

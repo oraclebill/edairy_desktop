@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class MemberTransactionWidgetController implements WidgetController, DateRangeFilter {
+public class MemberTransactionWidgetController implements WidgetController<Object>, DateRangeFilter {
 
 	private IRidgetContainer container;
 
