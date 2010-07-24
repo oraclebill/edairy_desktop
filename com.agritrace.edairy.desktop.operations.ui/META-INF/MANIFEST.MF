@@ -16,5 +16,3 @@ Export-Package: com.agritrace.edairy.desktop.operations.ui,
  com.agritrace.edairy.desktop.operations.ui.controllers,
  com.agritrace.edairy.desktop.operations.ui.dialogs,
  com.agritrace.edairy.desktop.operations.ui.views
-Bundle-ClassPath: .,
- swt-grouplayout.jar

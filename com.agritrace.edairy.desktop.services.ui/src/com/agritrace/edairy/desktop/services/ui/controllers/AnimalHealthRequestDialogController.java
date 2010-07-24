@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.conversion.Converter;
-import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -117,31 +116,19 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		}
 	}
 
-	private final class RequestTypeConverter implements IConverter {
-		private final AnimalHealthRequest request;
+	private final class RequestTypeConverter extends Converter {
 
 		private RequestTypeConverter(AnimalHealthRequest request) {
-			this.request = request;
+			super(EMFObservables.observeValue(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE)
+					.getValueType(), boolean.class);
 		}
 
 		@Override
 		public Object convert(Object fromObject) {
 			if (fromObject instanceof RequestType) {
 				return RequestType.VETERINARY.equals(fromObject);
-
 			}
 			return null;
-		}
-
-		@Override
-		public Object getFromType() {
-			return EMFObservables.observeValue(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE)
-					.getValueType();
-		}
-
-		@Override
-		public Object getToType() {
-			return boolean.class;
 		}
 	}
 

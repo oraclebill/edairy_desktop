@@ -93,17 +93,6 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
-	//
-	// protected IConverter formattedNameConverter = new Converter(Person.class,
-	// String.class) {
-	// @Override
-	// public Object convert(Object from) {
-	// if (from instanceof Person) {
-	// return formattedMemberName((Person) from);
-	// }
-	// return "";
-	// }
-	// };
 
 	private final IValidator updateValidator = new IValidator() {
 		@Override

@@ -45,7 +45,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryContr
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
-@SuppressWarnings("restriction")
 public class CollectionLineRidget extends AbstractCompositeRidget implements ICollectionLineRidget {
 	
 	private static  Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_GREEN);

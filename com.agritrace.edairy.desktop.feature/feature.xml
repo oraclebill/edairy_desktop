@@ -35,23 +35,7 @@
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
       <import plugin="org.eclipse.riena.client" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.model" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.databinding" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.common" version="1.0.0" match="greaterOrEqual"/>
    </requires>
-
-   <plugin
-         id="com.agritrace.edairy.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.agritrace.edairy.riena.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>
