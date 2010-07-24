@@ -62,14 +62,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	public CollectionJournalPage getNewJournalPage() {
 		final String refNum = newJournalPage.getReferenceNumber();
 		if (refNum == null || refNum.trim().length() == 0) {
-			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); // TODO:
-																					// need
-																					// something
-																					// unique,
-																					// but
-																					// can
-																					// do
-																					// better...
+			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); 
 		}
 		return newJournalPage;
 	}
@@ -87,19 +80,13 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final PropertyChangeListener validationListener = new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				final boolean isValid = true;
+				final boolean isValid = 
+					newJournalPage.getRoute() != null 
+					&& newJournalPage.getSession() != null
+					&& newJournalPage.getDriver() != null
+					&& newJournalPage.getJournalDate() != null
+					&& newJournalPage.getVehicle() != null;
 
-				// broken
-				// isValid = isValid && route.isErrorMarked() ||
-				// route.isMandatory() && route.getText().isEmpty();
-				// isValid = isValid && vehicle.isErrorMarked() ||
-				// vehicle.isMandatory() && vehicle.getText().isEmpty();
-				// isValid = isValid && session.isErrorMarked() ||
-				// session.isMandatory() && session.getText().isEmpty();
-				// isValid = isValid && driver.isErrorMarked() ||
-				// driver.isMandatory() && driver.getText().isEmpty();
-				// isValid = isValid && file.isErrorMarked() ||
-				// file.isMandatory() && file.getText().isEmpty();
 				final Button okButton = getButton(IDialogConstants.OK_ID);
 				if (null != okButton) {
 					okButton.setEnabled(isValid); // TODO: npe
@@ -121,23 +108,6 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				// todo: remove
 				debugPrintEvent(evt);
 
-				// if (auto) {
-				// if (!focus) {
-				// assert (evt.getSource() != file);
-				// updateFileNumber();
-				// } else {
-				// assert (evt.getSource() == file);
-				// if (evt.getPropertyName().equals("text")) {
-				// oldTxt = (String) evt.getNewValue();
-				// } else if (evt.getPropertyName().equals("textAfter")) {
-				// final String newTxt = (String) evt.getNewValue();
-				// if ((null != oldTxt) && (null != newTxt) &&
-				// !oldTxt.equals(newTxt)) {
-				// auto = false;
-				// }
-				// }
-				// }
-				// }
 			}
 
 			private void debugPrintEvent(PropertyChangeEvent evt) {
@@ -152,34 +122,21 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final UpdateListener fileNumberUpdateListener = new UpdateListener();
 
 		// configure ridgets
-		// dateTime.setMandatory(true);
-		// dateTime.setDirectWriting(true); // not supported by datetime
 		dateTime.addPropertyChangeListener(fileNumberUpdateListener);
 		dateTime.addPropertyChangeListener(validationListener);
 
 		route.setMandatory(true);
-		// route.setModelToUIControlConverter(new ComboConverter("getName"));
 		route.addPropertyChangeListener(fileNumberUpdateListener);
 		route.addPropertyChangeListener(validationListener);
-		// route.setOutputOnly(true);
 
-		// file.setMandatory(true);
-		// file.setDirectWriting(true);
-		// file.addPropertyChangeListener(fileNumberUpdateListener);
-		// file.addPropertyChangeListener(validationListener);
 
 		vehicle.setMandatory(true);
-		// vehicle.setModelToUIControlConverter(new
-		// ComboConverter("getLogBookNumber"));
 		vehicle.addPropertyChangeListener(validationListener);
 
 		session.setMandatory(true);
-		// session.setModelToUIControlConverter(new ComboConverter("getName"));
 		session.addPropertyChangeListener(validationListener);
 
 		driver.setMandatory(true);
-		// driver.setModelToUIControlConverter(new
-		// ComboConverter("getFamilyName"));
 		driver.addPropertyChangeListener(validationListener);
 
 		// bind ridgets
@@ -233,6 +190,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		// update initial values
 
 		newJournalPage.setJournalDate(new Date());
+		
 		dateTime.updateFromModel();
 		route.updateFromModel();
 		vehicle.updateFromModel();

@@ -32,15 +32,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.commands">
-      <category
-            id="com.agritrace.edairy.desktop.install.commands.category"
-            name="Sample Category">
-      </category>
-      <command
-            categoryId="com.agritrace.edairy.desktop.install.commands.category"
-            id="com.agritrace.edairy.desktop.install.commands.sampleCommand"
-            name="Sample Command">
-      </command>
       <command
             categoryId="com.agritrace.edairy.desktop.install.commands.category"
             id="com.agritrace.edairy.desktop.install.commands.importEmployees"
@@ -122,18 +113,6 @@
                   style="push">
             </command>
          </menu>
-      </menuContribution>
-      <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="com.agritrace.edairy.desktop.install.toolbars.sampleToolbar">
-            <command
-                  commandId="com.agritrace.edairy.desktop.install.commands.sampleCommand"
-                  icon="icons/sample.gif"
-                  id="com.agritrace.edairy.desktop.install.toolbars.sampleCommand"
-                  tooltip="Say hello world">
-            </command>
-         </toolbar>
       </menuContribution>
    </extension>
 

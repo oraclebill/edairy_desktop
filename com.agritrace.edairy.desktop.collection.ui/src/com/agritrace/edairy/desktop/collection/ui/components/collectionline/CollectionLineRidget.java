@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -46,13 +47,14 @@ import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class CollectionLineRidget extends AbstractCompositeRidget implements ICollectionLineRidget {
-	
-	private static  Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_GREEN);
-	private static  Color WARNING_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_YELLOW);
-	private static  Color ERROR_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_RED);
-	private static  Color NORMAL_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_BLACK);
-	
-	
+
+	public static final String CONFIRM_CLEAR_COLLECTION_LINE = CollectionLineRidget.class.getName() + ".confirmClear";
+
+	private static Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_GREEN);
+	private static Color WARNING_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_YELLOW);
+	private static Color ERROR_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_RED);
+	private static Color NORMAL_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_BLACK);
+
 	private IComboRidget binCombo;
 	private ITextRidget canText;
 	private ITextRidget memberIDRidget;
@@ -102,7 +104,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	@Override
 	public void removeValidator(IValidator vc) {
-		 validatorCollection.remove(vc);
+		validatorCollection.remove(vc);
 	}
 
 	@Override
@@ -113,13 +115,16 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		// get preferences
 		//
 
-//		IPreferencesService service = Platform.getPreferencesService();
-//		confirmClear = service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components",
-//				"confirmClearCollectionsEntryAction", true, null);
-//		validateBin = service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components",
-//				"validateBinOnAddLine", true, null);
-//		validateMember = service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components",
-//				"validateMemberOnAddLine", true, null);
+		// IPreferencesService service = Platform.getPreferencesService();
+		// confirmClear =
+		// service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components",
+		// "confirmClearCollectionsEntryAction", true, null);
+		// validateBin =
+		// service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components",
+		// "validateBinOnAddLine", true, null);
+		// validateMember =
+		// service.getBoolean("com.agritrace.edairy.desktop.collection.ui.components",
+		// "validateMemberOnAddLine", true, null);
 
 		//
 		// get ridgets
@@ -133,7 +138,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 		nprMissingButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.nprMissingCombo);
 		rejectedButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.rejectedCombo);
-		
+
 		qualityButton = getRidget(IToggleButtonRidget.class, "display-quality-controls-button");
 		qualityGroup = getRidget(ICompositeRidget.class, "quality-group");
 		milkfatTxt = getRidget(IDecimalTextRidget.class, "milk-fat-percent-text");
@@ -152,7 +157,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 		// member number
 		memberIDRidget.setMandatory(true);
-//		memberIDRidget.setDirectWriting(true);
+		// memberIDRidget.setDirectWriting(true);
 		memberIDRidget.setInputToUIControlConverter(new InlineInputFlagConverter(this, String.class, String.class));
 		memberIDRidget.addPropertyChangeListener("text", new PropertyChangeListener() {
 			@Override
@@ -209,7 +214,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		workingJournalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
 		if (getBinList() == null) {
 			throw new IllegalArgumentException("No bin list. Call setBinList before binding!");
-//			binList = Collections.EMPTY_LIST;
+			// binList = Collections.EMPTY_LIST;
 		}
 		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId",
 				PojoObservables.observeValue(workingJournalLine,
@@ -220,8 +225,10 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 		memberIDRidget.bindToModel(EMFObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER));
-//		memberNameRidget.bindToModel(workingJournalLine, "validatedMember.member" );
-//		memberNameRidget.setModelToUIControlConverter(new PersonToFormattedNameConverter("<unknown>"));
+		// memberNameRidget.bindToModel(workingJournalLine,
+		// "validatedMember.member" );
+		// memberNameRidget.setModelToUIControlConverter(new
+		// PersonToFormattedNameConverter("<unknown>"));
 		nprMissingButton.bindToModel(EMFObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED));
 
@@ -238,16 +245,16 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 		addedWaterButton.bindToModel(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__WATER_ADDED.getName());
-		
+
 		if (savedContainer != null && workingJournalLine.getDairyContainer() == null) {
 			workingJournalLine.setDairyContainer(savedContainer);
 		}
 		updateAllRidgetsFromModel();
 		enableQualityWidgets(false);
 		setJournalLineFocus();
-		
+
 	}
-	
+
 	/**
 	 * Updates the enabled state of the complex UI control (and of the UI
 	 * controls it contains). This default implementation does nothing and
@@ -264,8 +271,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	protected void clearJournalLine() {
-		if (workingJournalLine == null ) return;
-		
+		if (workingJournalLine == null)
+			return;
+
 		for (EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
 			workingJournalLine.eSet(feature, feature.getDefaultValue());
 		}
@@ -275,14 +283,17 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	 * 
 	 */
 	private void clearButtonClicked() {
-		Dialog dialog = MessageDialogWithToggle.openYesNoQuestion(getShell(), "Confirm",
-				"Are you sure you want to clear the input fields?", null, confirmClear, PlatformUI.getPreferenceStore(),
-				getClass().getName() + ".confirmClear");
-		if (confirmClear || dialog.open() == Dialog.OK) {
-			clearJournalLine();
+		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
+		boolean confirmClear = prefStore.getBoolean(CONFIRM_CLEAR_COLLECTION_LINE);
+		if (confirmClear) {
+			Dialog dialog = MessageDialogWithToggle.openYesNoQuestion(getShell(), "Confirm",
+					"Are you sure you want to clear the input fields?", null, confirmClear, prefStore,
+					CONFIRM_CLEAR_COLLECTION_LINE);
+			if (dialog.open() == Dialog.OK) {
+				clearJournalLine();
+			}
 		}
 	}
-
 
 	/**
 	 * 
@@ -292,7 +303,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		if (result.isOK()) {
 			savedContainer = workingJournalLine.getDairyContainer();
 			firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
-//			resetJournalEntryInputs();
+			// resetJournalEntryInputs();
 		} else {
 			displayMessage(result);
 		}
@@ -311,10 +322,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
 		}
 		try {
-			MessageDialog.openError(getShell(), "Validation Error(s)",
-					message.toString());
-		}
-		catch(Exception e) {			
+			MessageDialog.openError(getShell(), "Validation Error(s)", message.toString());
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(message.toString());
 		}
@@ -326,9 +335,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	public void enableQualityWidgets(boolean enabled) {
 		qualityGroup.setEnabled(enabled);
 		qualityGroup.setVisible(enabled);
-//		for(IRidget ridget : qualityGroup.getRidgets()) {
-//			ridget.setEnabled(enabled);
-//		}
+		// for(IRidget ridget : qualityGroup.getRidgets()) {
+		// ridget.setEnabled(enabled);
+		// }
 	}
 
 	/**
@@ -344,33 +353,40 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 	}
 
-//	/**
-//	 * Reset the working memory used by the journal line widgets, saving the bin value if set.
-//	 * 
-//	 */
-//	private void resetJournalEntryInputs() {
-//		resetJournalEntryInputs(true);
-//	}
+	// /**
+	// * Reset the working memory used by the journal line widgets, saving the
+	// bin value if set.
+	// *
+	// */
+	// private void resetJournalEntryInputs() {
+	// resetJournalEntryInputs(true);
+	// }
 
-//	/**
-//	 * Reset the working memory used by the journal line widgets, saving the bin value 'holdContainer' is 'true'.
-//	 * 
-//	 * @param holdContainer
-//	 *            true if the value of 'bin' is to be held.
-//	 */
-//	private void resetJournalEntryInputs(boolean holdContainer) {
-//		log(LogService.LOG_DEBUG, "resetJournalEntryInputs: " + workingJournalLine.getDairyContainer());
-//		for (EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
-//			if (holdContainer && feature.equals(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER))
-//				continue;
-//			workingJournalLine.eSet(feature, feature.getDefaultValue());
-//		}
-//		log(LogService.LOG_DEBUG, " (after) resetJournalEntryInputs: " + workingJournalLine.getDairyContainer());
-//
-//		updateAllRidgetsFromModel();
-//		setJournalLineFocus();
-//	}
-//	
+	// /**
+	// * Reset the working memory used by the journal line widgets, saving the
+	// bin value 'holdContainer' is 'true'.
+	// *
+	// * @param holdContainer
+	// * true if the value of 'bin' is to be held.
+	// */
+	// private void resetJournalEntryInputs(boolean holdContainer) {
+	// log(LogService.LOG_DEBUG, "resetJournalEntryInputs: " +
+	// workingJournalLine.getDairyContainer());
+	// for (EStructuralFeature feature :
+	// DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures())
+	// {
+	// if (holdContainer &&
+	// feature.equals(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER))
+	// continue;
+	// workingJournalLine.eSet(feature, feature.getDefaultValue());
+	// }
+	// log(LogService.LOG_DEBUG, " (after) resetJournalEntryInputs: " +
+	// workingJournalLine.getDairyContainer());
+	//
+	// updateAllRidgetsFromModel();
+	// setJournalLineFocus();
+	// }
+	//
 	private void setJournalLineFocus() {
 		if (workingJournalLine.getDairyContainer() != null) {
 			canText.requestFocus();
@@ -388,7 +404,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	private void updateMemberNameText() {
 		String memberNameText = "<unknown>";
-		Label label = (Label)memberNameRidget.getUIControl();
+		Label label = (Label) memberNameRidget.getUIControl();
 		if (label != null) {
 			label.setForeground(NORMAL_COLOR);
 		}
@@ -432,6 +448,5 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	public static Shell getShell() {
 		return AbstractDirectoryController.getShell();
 	}
-
 
 }
