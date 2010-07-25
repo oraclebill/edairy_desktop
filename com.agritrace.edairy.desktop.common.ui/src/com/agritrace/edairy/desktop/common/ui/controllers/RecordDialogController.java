@@ -81,11 +81,12 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	}
 
 	@Override
-	protected void handleCancelAction() {
+	protected boolean handleCancelAction() {
 		setReturnCode(DialogConstants.ACTION_CANCEL);
 		if (!RienaStatus.isTest()) {
 			getWindowRidget().dispose();
 		}
+		return true;
 	}
 
 	@Override

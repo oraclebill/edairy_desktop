@@ -96,11 +96,13 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Called when 'Cancel' action is triggered.
+	 * @return true if cancel should succeed.
 	 * 
 	 */
-	protected void handleCancelAction() {
+	protected boolean handleCancelAction() {
 		setReturnCode(DialogConstants.ACTION_CANCEL);
 		getWindowRidget().dispose();
+		return true;
 	}
 
 	/**

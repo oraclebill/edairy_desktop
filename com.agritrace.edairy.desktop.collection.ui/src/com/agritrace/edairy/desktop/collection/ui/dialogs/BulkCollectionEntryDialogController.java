@@ -27,8 +27,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.journalheader.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.DuplicateDeliveryValidator;
 import com.agritrace.edairy.desktop.collection.ui.controllers.BasicJournalValidator;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
@@ -423,18 +423,20 @@ public class BulkCollectionEntryDialogController extends BaseDialogController<Co
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
-	protected void handleCancelAction() {
+	protected boolean handleCancelAction() {
 		CollectionJournalPage workingJournal = getContextJournalPage();
 		if (workingJournal.getJournalEntries().size() > 0 || workingJournal.getDriverTotal() != null) {
 			boolean ret = RienaMessageDialog.openConfirm(getShell(), "Confirm Cancel",
 					"The current page has unsaved updates. Are you sure you want to cancel?");
 			if (!ret) {
-				return;
+				return false;
 			}
 		}
 		super.handleCancelAction();
+		return true;
 	}
 
 	/**

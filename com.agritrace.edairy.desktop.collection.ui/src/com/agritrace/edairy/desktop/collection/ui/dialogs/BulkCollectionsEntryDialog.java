@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.collection.ui.dialogs;
 import java.util.Date;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -27,8 +28,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.collection.ui.components.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
+import com.agritrace.edairy.desktop.collection.ui.components.journalheader.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -133,6 +134,18 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	public BulkCollectionsEntryDialog(Shell parentShell) {
 		super(parentShell);
 //		setShellStyle(SWT.CLOSE|SWT.MIN|SWT.MAX|SWT.RESIZE);
+	}
+
+	@Override
+	protected boolean canHandleShellCloseEvent() {
+		boolean ret = true;
+		try {
+			ret = MessageDialog.openConfirm(getShell(), "Confirm Cancel", "Are you sure you want to close this window without saving?");
+		}
+		catch(Throwable t) {
+			t.printStackTrace();
+		}					
+		return ret;
 	}
 
 	@Override
@@ -293,6 +306,8 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 //	}
 //
 //	
+
+	
 	/**
 	 * (non-javadoc) For tetsing
 	 * 
@@ -323,5 +338,4 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			display.dispose();
 		}
 	}
-
 }
