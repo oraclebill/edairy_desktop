@@ -27,11 +27,11 @@ public class BasicJournalValidator implements IValidator {
 			final BigDecimal record = journal.getRecordTotal(), driver = journal.getDriverTotal();
 			if ((record != null && driver != null && record.compareTo(driver) != 0) 
 					|| record == null || driver == null) {
-				statusList.add(ValidationStatus.error(String.format("The driver total (%s) and calculated total (%s) do not match.", driver, record)));					
+				statusList.add(ValidationStatus.warning(String.format("The driver total (%s) and calculated total (%s) do not match.", driver, record)));					
 			}
-			if (0 == journal.getJournalEntries().size()) {
-				statusList.add(ValidationStatus.error("This journal has no entries - cannot save."));
-			}
+//			if (0 == journal.getJournalEntries().size()) {
+//				statusList.add(ValidationStatus.warning("This journal has no entries - cannot save."));
+//			}
 			if (statusList.getChildren().length > 0) {
 				status = statusList;
 			}

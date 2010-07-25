@@ -14,9 +14,12 @@ import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 
+/**
+ * 
+ * @author oraclebill
+ *
+ */
 public class MandatoryFieldsCheck implements IValidator {
-	private static class MandatoryErrorMarker extends ErrorMarker {}
-
 	private static class MandatoryErrorMarkerCleaner implements PropertyChangeListener {
 		private ErrorMarker marker;
 		private IMarkableRidget ridget;
@@ -40,11 +43,16 @@ public class MandatoryFieldsCheck implements IValidator {
 
 	final IRidgetContainer container;
 	
+	/**
+	 * 
+	 * @param container
+	 */
 	public MandatoryFieldsCheck(IRidgetContainer container) {
 		this.container = container;
 	}
-	void setErrorMarker(final IMarkableRidget ridget) {
-		final ErrorMarker errorMarker = new MandatoryErrorMarker();
+	
+	void setErrorMarker(final IMarkableRidget ridget, String message) {
+		final ErrorMarker errorMarker = new MandatoryErrorMarker(message);
 		final MandatoryErrorMarkerCleaner markerCleaner = new MandatoryErrorMarkerCleaner(ridget, errorMarker);
 		ridget.addMarker(errorMarker);
 		ridget.addPropertyChangeListener("text", markerCleaner);
@@ -52,18 +60,19 @@ public class MandatoryFieldsCheck implements IValidator {
 	
 	@Override
 	public IStatus validate(Object value) {
+System.err.printf("validate: %s: %s\n", this, value);
 		IStatus status = ValidationStatus.OK_STATUS;
 		for (IRidget ridget : container.getRidgets()) {
 			if (ridget instanceof IMarkable) {
 				boolean result = false;
 				Iterator<MandatoryMarker> iter = ((IMarkable) ridget).getMarkersOfType(MandatoryMarker.class)
 						.iterator();
-				while (!result && iter.hasNext()) {
-					result = !iter.next().isDisabled();
+				while (iter.hasNext()) {
+					result = /*result ||*/ !iter.next().isDisabled();
 				}
 				if (result) {
-					setErrorMarker((IMarkableRidget)ridget);
-					status = ValidationStatus.error("Missing mandatory field(s)");
+					setErrorMarker((IMarkableRidget)ridget, "Required field.");
+					status = ValidationStatus.error("The highlighted fields are required.");
 				}
 			}
 		}

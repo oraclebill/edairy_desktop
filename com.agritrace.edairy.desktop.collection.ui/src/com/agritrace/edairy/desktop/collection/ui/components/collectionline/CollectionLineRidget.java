@@ -2,9 +2,9 @@ package com.agritrace.edairy.desktop.collection.ui.components.collectionline;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Collection;
 import java.util.Formatter;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -83,10 +83,12 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private DairyContainer savedContainer;
 
 	private IMemberInfoProvider memberInfoProvider;
+//	private IMessageMarkerViewer markerViewer;
 
 	public CollectionLineRidget() {
 		validatorCollection = new ValidatorCollection();
-		addValidator(new MandatoryFieldsCheck(this));
+//		markerViewer = new TooltipMessageMarkerViewer();
+		
 	}
 
 	@Override
@@ -110,7 +112,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	@Override
-	public void addValidator(IValidator vc) {
+	synchronized public void addValidator(IValidator vc) {
 		validatorCollection.add(vc);
 	}
 
@@ -118,6 +120,15 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	public void removeValidator(IValidator vc) {
 		validatorCollection.remove(vc);
 	}
+	
+	@Override
+	synchronized public void clearValidators() {
+		Collection<IValidator> toBeRemoved = validatorCollection.getValidators();
+		for (IValidator dumpMe : toBeRemoved) {
+			validatorCollection.remove(dumpMe);
+		}
+	}
+
 
 	@Override
 	public void configureRidgets() {
@@ -164,12 +175,16 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		// configure ridgets
 		//
 
+//		markerViewer.addRidget(memberIDRidget);
+//		markerViewer.addMarkerType(MandatoryErrorMarker.class);
+//		markerViewer.setVisible(true);
+
 		// bin
 		binCombo.setMandatory(true);
 
 		// member number
 		memberIDRidget.setMandatory(true);
-		 memberIDRidget.setDirectWriting(true);
+		memberIDRidget.setDirectWriting(true);
 		memberIDRidget.setInputToUIControlConverter(new InlineInputFlagConverter(this, String.class, String.class));
 		memberIDRidget.addPropertyChangeListener("text", new PropertyChangeListener() {
 			@Override
@@ -204,7 +219,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		addButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				addButtonClicked();
+				handleSaveLine();
 			}
 		});
 
@@ -212,7 +227,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		clearButton.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				clearButtonClicked();
+				handleClearLine();
 			}
 		});
 
@@ -334,46 +349,62 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 	}
 
-	protected void clearJournalLine() {
+	protected void clearJournalLine(boolean saveBin) {
 		if (workingJournalLine == null)
 			return;
-
 		for (EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
-			workingJournalLine.eSet(feature, feature.getDefaultValue());
+			if (saveBin && feature != DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER)
+				workingJournalLine.eSet(feature, feature.getDefaultValue());
 		}
+		updateAllRidgetsFromModel();
 	}
 
 	/**
 	 * 
 	 */
-	private void clearButtonClicked() {
-		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
-		boolean confirmClear = prefStore.getBoolean(CONFIRM_CLEAR_COLLECTION_LINE);
-		if (confirmClear) {
-			Dialog dialog = MessageDialogWithToggle.openYesNoQuestion(getShell(), "Confirm",
-					"Are you sure you want to clear the input fields?", null, confirmClear, prefStore,
-					CONFIRM_CLEAR_COLLECTION_LINE);
-			if (dialog.open() == Dialog.OK) {
-				clearJournalLine();
+	private void handleClearLine() {
+		log(LogService.LOG_DEBUG, "\nhandleClearLine: journal-line: %s\n", workingJournalLine);
+//		IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
+//		boolean confirmClear = prefStore.getBoolean(CONFIRM_CLEAR_COLLECTION_LINE);
+//		if (confirmClear) {
+//			Dialog dialog = MessageDialogWithToggle.openYesNoQuestion(getShell(), "Confirm",
+//					"Are you sure you want to clear the input fields?", null, confirmClear, prefStore,
+//					CONFIRM_CLEAR_COLLECTION_LINE);
+			if (MessageDialog.openQuestion(getShell(), "Confirm",
+					"Are you sure you want to clear the input fields?")) {
+				clearJournalLine(true);
 			}
-		}
+//		}
 	}
 
 	/**
 	 * 
 	 */
-	private void addButtonClicked() {
+	private void handleSaveLine() {
 		IStatus result = validatorCollection.validate(workingJournalLine);
+		log(LogService.LOG_DEBUG, "\nhandleSaveLine: journal-line: %s\n\tvalidation result: %s\n", workingJournalLine, result);
 		if (result.isOK()) {
 			savedContainer = workingJournalLine.getDairyContainer();
 			firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
-			// resetJournalEntryInputs();
-		} else {
-			displayMessage(result);
+		} 
+		else if (result.matches(IStatus.WARNING | IStatus.INFO )) {
+//			markerViewer.setVisible(true);
+			if(displaySuspendMessage(result)) {
+				workingJournalLine.setFlagged(true);
+				savedContainer = workingJournalLine.getDairyContainer();
+				firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
+			}
 		}
+		else if (result.matches(IStatus.ERROR | IStatus.CANCEL )) {
+			displayMessage(result);
+		} 
 	}
 
 	protected void displayMessage(final IStatus validationResult) {
+		displayMessage(validationResult, IStatus.ERROR | IStatus.CANCEL);
+	}
+	
+	protected void displayMessage(final IStatus validationResult, int mask) {
 		StringBuffer message = new StringBuffer();
 		Formatter formatter = new Formatter(message);
 		IStatus[] statusList;
@@ -383,7 +414,14 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			statusList = new IStatus[] { validationResult };
 		}
 		for (IStatus status : statusList) {
-			formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
+			if (status.matches(mask)) {
+//				formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
+				System.err.println("status: " + status.getClass().getName());
+				System.err.println("Severity: " + status.getSeverity());
+				System.err.println("MAsk: " + mask);
+				
+				formatter.format("%s\n", status.getMessage());
+			}
 		}
 		try {
 			MessageDialog.openError(getShell(), "Validation Error(s)", message.toString());
@@ -391,6 +429,32 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			e.printStackTrace();
 			System.err.println(message.toString());
 		}
+	}
+	
+	protected boolean displaySuspendMessage(final IStatus validationResult) {
+		boolean ret = false;
+		StringBuffer message = new StringBuffer();
+		Formatter formatter = new Formatter(message);
+		IStatus[] statusList;
+		if (validationResult.isMultiStatus()) {
+			statusList = validationResult.getChildren();
+		} else {
+			statusList = new IStatus[] { validationResult };
+		}
+		for (IStatus status : statusList) {
+			if (status.matches(IStatus.WARNING | IStatus.INFO)) {
+				System.err.printf("[%s] %s: %s\n", status.getClass().getName(), status.getSeverity(), status.getMessage());
+				formatter.format("%s\n",  status.getMessage());
+			}
+		}
+		try {
+			formatter.format("\n\nSelect 'Yes' to suspend this record, or 'No' to correct the error(s)");
+			ret = MessageDialog.openQuestion(getShell(), "Suspend Confirmation", message.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(message.toString());
+		}
+		return ret;
 	}
 
 	/**
@@ -529,8 +593,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	/**
 	 * 
 	 */
-	private void log(int level, String message) {
-		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
+	private void log(int level, String message, Object... args) {
+		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, String.format(message, args));
 	}
 
 	public static Shell getShell() {

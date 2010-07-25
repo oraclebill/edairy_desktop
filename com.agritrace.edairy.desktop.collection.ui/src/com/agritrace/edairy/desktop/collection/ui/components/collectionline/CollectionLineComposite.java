@@ -81,7 +81,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 
 	@Override
 	public void keyTraversed(TraverseEvent e) {
-		log(LogService.LOG_DEBUG, "event in : " + e);
+//		log(LogService.LOG_DEBUG, "event in : " + e);
 		if (e.detail == SWT.TRAVERSE_RETURN) {
 			if (e.widget == memberIdWidget && addButton.setFocus()) {
 				e.detail = SWT.TRAVERSE_NONE;
@@ -91,7 +91,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 				e.doit = true;
 			}
 		}
-		log(LogService.LOG_DEBUG, "event out: " + e);
+//		log(LogService.LOG_DEBUG, "event out: " + e);
 	}
 
 	private Composite addButtons(Composite parent) {

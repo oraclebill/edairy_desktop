@@ -12,6 +12,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -21,15 +22,22 @@ import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.riena.ui.ridgets.validation.ValidatorCollection;
 import org.eclipse.riena.ui.swt.RienaMessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineRidget;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.DuplicateDeliveryValidator;
+import com.agritrace.edairy.desktop.collection.ui.components.validators.MandatoryFieldsCheck;
+import com.agritrace.edairy.desktop.collection.ui.components.validators.MemberLookupValidator;
 import com.agritrace.edairy.desktop.collection.ui.controllers.BasicJournalValidator;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
@@ -63,7 +71,8 @@ public class BulkCollectionsEntryDialogController extends
 			"Invalid membership number");
 
 	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
-
+	private static final Color RED = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_RED);
+	
 	private final IDairyRepository dairyRepo;
 
 	// milk Entry group
@@ -195,8 +204,6 @@ public class BulkCollectionsEntryDialogController extends
 				"Header validity listener '%s' added to %s.",
 				headerValidityListener, journalHeaderRidget));
 
-		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(
-				dairyRepo));
 		collectionLineRidget.addPropertyChangeListener(
 				ICollectionLineRidget.VALIDATED_VALUE,
 				new PropertyChangeListener() {
@@ -213,18 +220,6 @@ public class BulkCollectionsEntryDialogController extends
 					}
 				});
 
-		CollectionJournalPage workingJournalPage = getContextJournalPage();
-		
-		Route currentRoute = workingJournalPage.getRoute();
-		if (currentRoute != null) {
-//			collectionLineRidget.setBinList(dairyRepo.getBinsForRoute(currentRoute)); // todo;
-			collectionLineRidget.setMemberInfoProvider(new MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)));
-		}
-		else {
-			collectionLineRidget.setMemberInfoProvider(new MemberLookupProvider(dairyRepo));
-		}
-		
-		collectionLineRidget.setBinList(dairyRepo.getLocalDairy().getDairyBins());
 		
 		
 		configureJournalEntryTable(journalEntryTable);
@@ -255,9 +250,7 @@ public class BulkCollectionsEntryDialogController extends
 		// }
 		// });
 
-		initValidators();
 		enableBottomButtons(false);
-
 	}
 
 	/**
@@ -277,6 +270,26 @@ public class BulkCollectionsEntryDialogController extends
 					enableBottomButtons(true);
 				}
 			}
+		});
+		table.setColumnFormatter(2, new ColumnFormatter() {
+			@Override
+			public String getText(Object element) {
+				if (element == null) {
+					return "<missing>";
+				}
+				else 
+					return super.getText(element);
+			}
+
+			@Override
+			public Color getForeground(Object element) {
+				if (element == null) {
+					return RED;
+				}
+				else 
+				return super.getForeground(element);
+			}
+			
 		});
 
 		// buttons
@@ -346,9 +359,36 @@ public class BulkCollectionsEntryDialogController extends
 		System.out.println("afterBind : " + this);
 
 		bindPageRidgets();
+		initValidators();
 		resetJournalEntryLine();
 		updateAllRidgetsFromModel();
 		setInitialFocus();
+	}
+
+	private void initValidators() {
+		// page relative config
+		//
+		collectionLineRidget.clearValidators();
+		collectionLineRidget.addValidator(new MandatoryFieldsCheck(collectionLineRidget));
+
+		IMemberInfoProvider lookupProvider = new MemberLookupProvider(dairyRepo);
+		// too slow??
+		collectionLineRidget.addValidator(new MemberLookupValidator(lookupProvider));
+		
+		CollectionJournalPage workingJournalPage = getContextJournalPage();		
+		Route currentRoute = workingJournalPage.getRoute();
+		if (currentRoute != null) {
+//			collectionLineRidget.setBinList(dairyRepo.getBinsForRoute(currentRoute)); // todo;
+			collectionLineRidget.setMemberInfoProvider(new MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)));
+		}
+		else {
+			collectionLineRidget.setMemberInfoProvider(lookupProvider);
+		}
+		collectionLineRidget.setBinList(dairyRepo.getLocalDairy().getDairyBins());
+		
+		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(
+				workingJournalPage.getJournalEntries(), "Collection Journal"));
+		
 	}
 
 	/**
@@ -476,6 +516,31 @@ public class BulkCollectionsEntryDialogController extends
 		return true;
 	}
 
+	private boolean displaySuspendMessage(final IStatus validationResult) {
+		boolean ret = false;
+		StringBuffer message = new StringBuffer();
+		Formatter formatter = new Formatter(message);
+		IStatus[] statusList;
+		if (validationResult.isMultiStatus()) {
+			statusList = validationResult.getChildren();
+		} else {
+			statusList = new IStatus[] { validationResult };
+		}
+		for (IStatus status : statusList) {
+			if (status.matches(IStatus.WARNING | IStatus.INFO)) {
+				System.err.printf("[%s] %s: %s\n", status.getClass().getName(), status.getSeverity(), status.getMessage());
+				formatter.format("%s\n",  status.getMessage());
+			}
+		}
+		try {
+			formatter.format("\n\nSelect 'Yes' to suspend this record, or 'No' to correct the error(s)");
+			ret = MessageDialog.openQuestion(getShell(), "Suspend Confirmation", message.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(message.toString());
+		}
+		return ret;
+	}
 	/**
 	 * 
 	 */
@@ -484,9 +549,15 @@ public class BulkCollectionsEntryDialogController extends
 
 		CollectionJournalPage workingJournal = getContextJournalPage();
 		IStatus validationResult = validateJournal(workingJournal);
-		if (!validationResult.isOK()) {
+		if (validationResult.matches(IStatus.CANCEL | IStatus.ERROR)) {
 			displayMessage(validationResult);
 			return false;
+		}
+		else if (validationResult.matches(IStatus.WARNING | IStatus.INFO)) {
+			if(!displaySuspendMessage(validationResult)) {
+				return false;
+			}
+			workingJournal.setSuspended(true);
 		}
 		// Todo: set status in response to events during edit..
 		if (workingJournal.getEntryCount() > 0) {
@@ -555,12 +626,6 @@ public class BulkCollectionsEntryDialogController extends
 		afterBind();
 	}
 
-	/**
-	 * 
-	 */
-	protected void initValidators() {
-		// todo:
-	}
 
 	/**
 	 * 

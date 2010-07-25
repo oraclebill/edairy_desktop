@@ -6,7 +6,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 
-class JournalLineValidator {
+public class JournalLineValidator {
 	
 	private boolean errorDialogsEnabled;
 	/**
