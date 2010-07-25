@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.riena.ui.ridgets.IComplexRidget;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 
 public interface ICollectionLineRidget extends IComplexRidget {
@@ -23,6 +24,8 @@ public interface ICollectionLineRidget extends IComplexRidget {
 	public void setMemberInfoProvider(IMemberInfoProvider provider);
 	public IMemberInfoProvider getMemberInfoProvider();
 	public void clearValidators();
+	void setRouteValidator(IValidator routeValidator);
+	public CollectionJournalLine getWorkingCollectionLine();
 
 
 }

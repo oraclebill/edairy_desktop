@@ -10,19 +10,29 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 
 public class DuplicateDeliveryValidator implements IValidator {
 
-	private Collection<?> searchScope;
+	private Collection<CollectionJournalLine> searchScope;
 	private String scopeDescription;
 
 	public DuplicateDeliveryValidator(Collection<?> scope, String scopeDescription) {
-		this.searchScope = scope;
+		this.searchScope = (Collection<CollectionJournalLine>)scope;
 		this.scopeDescription = scopeDescription;
 	}
 
 	@Override
 	public IStatus validate(Object value) {
-		if (searchScope.contains(value)) {
-			return ValidationStatus
-					.warning("Duplicate member delivery found in " + scopeDescription);
+		if (value instanceof CollectionJournalLine) {
+			CollectionJournalLine testVal = (CollectionJournalLine)value;
+			for (CollectionJournalLine line : searchScope) {
+				if (line.getValidatedMember() == testVal 
+						|| line.getRecordedMember() == null 
+								|| line.getRecordedMember().equals(testVal.getRecordedMember())) {
+					return ValidationStatus
+						.warning("Duplicate member delivery found in " + scopeDescription);
+				}
+			}
+		}
+		else {
+			return ValidationStatus.error("illegal state");
 		}
 		return ValidationStatus.ok();
 	}

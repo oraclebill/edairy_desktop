@@ -50,8 +50,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	public static final String CONFIRM_CLEAR_COLLECTION_LINE = CollectionLineRidget.class.getName() + ".confirmClear";
 
-	private static Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_GREEN);
-	private static Color WARNING_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_YELLOW);
+	private static Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN);
+	private static Color WARNING_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_CYAN);
 	private static Color ERROR_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_RED);
 	private static Color NORMAL_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_BLACK);
 
@@ -83,6 +83,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private DairyContainer savedContainer;
 
 	private IMemberInfoProvider memberInfoProvider;
+	private IValidator routeValidator;
+	
 //	private IMessageMarkerViewer markerViewer;
 
 	public CollectionLineRidget() {
@@ -109,6 +111,15 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	@Override
 	public List<DairyContainer> getBinList() {
 		return binList;
+	}
+
+	public IValidator getRouteValidator() {
+		return routeValidator;
+	}
+
+	@Override
+	public void setRouteValidator(IValidator routeValidator) {
+		this.routeValidator = routeValidator;
 	}
 
 	@Override
@@ -382,7 +393,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	 */
 	private void handleSaveLine() {
 		IStatus result = validatorCollection.validate(workingJournalLine);
-		log(LogService.LOG_DEBUG, "\nhandleSaveLine: journal-line: %s\n\tvalidation result: %s\n", workingJournalLine, result);
+		log(LogService.LOG_DEBUG, "handleSaveLine: journal-line: %s, validation result: [%s]\n", workingJournalLine, result);
 		if (result.isOK()) {
 			savedContainer = workingJournalLine.getDairyContainer();
 			firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
@@ -568,10 +579,13 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 		Membership member = workingJournalLine.getValidatedMember();
 		if (member != null) {
-			workingJournalLine.setValidatedMember(member);
+//			workingJournalLine.setValidatedMember(member);
 			memberNameText = formatPersonName(member.getMember());
 			if (label != null) {
-				label.setForeground(SUCCESS_COLOR);
+				if (routeValidator == null || routeValidator.validate(member).isOK())
+					label.setForeground(SUCCESS_COLOR);
+				else 
+					label.setForeground(WARNING_COLOR);
 			}
 		}
 		memberNameRidget.setText(memberNameText);
@@ -599,6 +613,11 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	public static Shell getShell() {
 		return AbstractDirectoryController.getShell();
+	}
+
+	@Override
+	public CollectionJournalLine getWorkingCollectionLine() {
+		return workingJournalLine;
 	}
 
 
