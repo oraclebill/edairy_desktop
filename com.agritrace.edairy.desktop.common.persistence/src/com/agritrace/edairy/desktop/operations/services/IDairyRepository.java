@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.operations.services;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -75,5 +76,7 @@ public interface IDairyRepository {
 	Membership getMemberByMemberId(String memberNumber);
 
 	List<CollectionJournalLine> getMemberCollectionsForSession(Session session, Membership value);
+
+	Collection<Membership> getMembersForRoute(Route currentRoute);
 
 }

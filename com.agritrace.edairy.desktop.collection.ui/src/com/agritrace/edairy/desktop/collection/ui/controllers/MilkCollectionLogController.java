@@ -21,7 +21,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionEntryDialogController;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialogController;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
@@ -38,7 +38,7 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
 
 	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
-		private CollectionLogJournalPersister(BulkCollectionEntryDialogController controller) {
+		private CollectionLogJournalPersister(BulkCollectionsEntryDialogController controller) {
 		}
 
 		@Override
@@ -186,7 +186,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		if (Window.OK == returnCode) {
 			final CollectionJournalPage newPage = dialog.getNewJournalPage();			
 			BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
-			final BulkCollectionEntryDialogController controller = ( BulkCollectionEntryDialogController)journalEntryDialog.getController(); 
+			final BulkCollectionsEntryDialogController controller = ( BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
 			controller.setContextJournalPage(newPage);
@@ -200,7 +200,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	protected void handleViewItemAction() {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
-		final BulkCollectionEntryDialogController controller = (BulkCollectionEntryDialogController)journalEntryDialog.getController(); 
+		final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
 		controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
 		controller.setContextJournalPage((CollectionJournalPage) table.getSelection().get(0));		

@@ -24,6 +24,14 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		}
 
 		abstract public void run(Session session);
+		
+		Object result;
+		protected void setResult(Object o) {
+			result = o;
+		}
+		public Object getResult() {
+			return result;
+		}
 
 	}
 

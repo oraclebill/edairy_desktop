@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Formatter;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -44,7 +45,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class CollectionLineRidget extends AbstractCompositeRidget implements ICollectionLineRidget {
 
@@ -82,6 +82,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private final ValidatorCollection validatorCollection;
 	private DairyContainer savedContainer;
 
+	private IMemberInfoProvider memberInfoProvider;
+
 	public CollectionLineRidget() {
 		validatorCollection = new ValidatorCollection();
 		addValidator(new MandatoryFieldsCheck(this));
@@ -92,6 +94,16 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		this.binList = binList;
 	}
 
+	@Override
+	public void setMemberInfoProvider(IMemberInfoProvider provider) {
+		this.memberInfoProvider = provider;
+	}
+	
+	@Override
+	public IMemberInfoProvider getMemberInfoProvider() {
+		return this.memberInfoProvider;
+	}
+	
 	@Override
 	public List<DairyContainer> getBinList() {
 		return binList;
@@ -157,12 +169,17 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 		// member number
 		memberIDRidget.setMandatory(true);
-		// memberIDRidget.setDirectWriting(true);
+		 memberIDRidget.setDirectWriting(true);
 		memberIDRidget.setInputToUIControlConverter(new InlineInputFlagConverter(this, String.class, String.class));
 		memberIDRidget.addPropertyChangeListener("text", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				updateMemberNameText();
+				final String oldVal = normalizeMemberNumber(evt.getOldValue());
+				final String newVal = normalizeMemberNumber(evt.getNewValue());
+				if (! oldVal.equals(newVal)) {
+					updateValidatedMember(newVal);
+					updateMemberNameText();
+				}
 			}
 		});
 
@@ -207,6 +224,53 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 				enableQualityWidgets(qualityButton.isSelected());
 			}
 		});
+	}
+
+
+
+
+	protected void sillyNormalize(Object memberString) {
+		
+		String rawMemberNum = (String) memberString;
+		String prefix = "";
+		String digits = "";
+		String suffix = "";
+		int state = 0;
+		int i = 0;
+		boolean done = false;
+		while (!done) {
+			char cur = rawMemberNum.charAt(i);
+			switch(state) {
+			case 0: // initial
+				if ( Character.isLetter(cur) ) {
+					prefix = prefix + cur;
+					break;
+				} else if ( Character.isDigit(cur )) {
+					digits = digits + cur;
+					state = 1;
+					break;
+				} else {
+					break;
+				}
+			case 1:
+				if ( Character.isDigit(cur) ) {
+					digits = digits + cur;
+					break;
+				} else {
+					state = 2;
+				} 
+			case 2:
+				if ( Character.isDigit(cur) ) {
+					done = true;
+					break;
+				} else if (Character.isLetter(cur)) {
+					suffix = suffix + cur;
+				} else {
+					break;
+				}
+			}
+			if (++i > 15) done = true;
+		}
 	}
 
 	@Override
@@ -402,6 +466,36 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		updateMemberNameText();
 	}
 
+	private String normalizeMemberNumber(Object memberString) {
+		String normal = "";
+		String prefix = "";
+		if (memberString instanceof String) {			
+			normal = ((String) memberString).trim();
+			while(normal.length() > 0 
+					&& (normal.startsWith("0") 
+							|| !Character.isDigit(normal.charAt(0)))) {
+				if (Character.isLetter(normal.charAt(0))) {
+					prefix += normal.charAt(0);
+				}
+				normal = normal.substring(1);
+			}
+		}
+		if (normal.length()< 5) {
+			normal = "00000".substring(normal.length()) + normal;
+		}
+		if (normal.length() > 5) {
+			normal = "";
+			prefix = "";
+		}
+		return (prefix + normal).toUpperCase();
+	}
+	
+	private void updateValidatedMember(String memberId) {
+		Membership member = memberInfoProvider.getMember(memberId);
+		workingJournalLine.setValidatedMember(member);
+		
+	}
+
 	private void updateMemberNameText() {
 		String memberNameText = "<unknown>";
 		Label label = (Label) memberNameRidget.getUIControl();
@@ -409,12 +503,6 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			label.setForeground(NORMAL_COLOR);
 		}
 		Membership member = workingJournalLine.getValidatedMember();
-		if (member == null) {
-			String memberId = memberIDRidget.getText();
-			if (memberId != null && memberId.trim().length() > 0) {
-				member = DairyRepository.getInstance().getMemberByMemberId(memberId);
-			}
-		}
 		if (member != null) {
 			workingJournalLine.setValidatedMember(member);
 			memberNameText = formatPersonName(member.getMember());
@@ -448,5 +536,6 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	public static Shell getShell() {
 		return AbstractDirectoryController.getShell();
 	}
+
 
 }

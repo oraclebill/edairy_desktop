@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -103,47 +104,77 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	/**
 	 * 
 	 */
-//	private static final HibernateRepository<DairyContainer> binRepository = new HibernateRepository<DairyContainer>() {
-//		@Override
-//		protected Class<DairyContainer> getClassType() {
-//			return DairyContainer.class;
-//		}
-//	};
+	// private static final HibernateRepository<DairyContainer> binRepository =
+	// new HibernateRepository<DairyContainer>() {
+	// @Override
+	// protected Class<DairyContainer> getClassType() {
+	// return DairyContainer.class;
+	// }
+	// };
 
 	/**
 	 * 
 	 */
-//	private static final HibernateRepository<CollectionJournalPage> collectionsRepository = new HibernateRepository<CollectionJournalPage>() {
-//		@Override
-//		protected Class<CollectionJournalPage> getClassType() {
-//			return CollectionJournalPage.class;
-//		}
-//	};
-//	private static final HibernateRepository<Customer> customerRepository = new HibernateRepository<Customer>() {
-//		@Override
-//		protected Class<Customer> getClassType() {
-//			return Customer.class;
-//		}
-//	};
-	private static final HibernateRepository<Dairy> dairyRepository = new HibernateRepository<Dairy>() {
+	// private static final HibernateRepository<CollectionJournalPage>
+	// collectionsRepository = new HibernateRepository<CollectionJournalPage>()
+	// {
+	// @Override
+	// protected Class<CollectionJournalPage> getClassType() {
+	// return CollectionJournalPage.class;
+	// }
+	// };
+	// private static final HibernateRepository<Customer> customerRepository =
+	// new HibernateRepository<Customer>() {
+	// @Override
+	// protected Class<Customer> getClassType() {
+	// return Customer.class;
+	// }
+	// };
+	private final static class DairyRepoInternal extends  HibernateRepository<Dairy> {
 		@Override
 		protected Class<Dairy> getClassType() {
 			return Dairy.class;
 		}
-	};
-//	private static final HibernateRepository<DeliveryJournal> deliveryRepository = new HibernateRepository<DeliveryJournal>() {
-//		@Override
-//		protected Class<DeliveryJournal> getClassType() {
-//			return DeliveryJournal.class;
-//		}
-//	};
 
-//	private static final HibernateRepository<Employee> employeeRepository = new HibernateRepository<Employee>() {
-//		@Override
-//		protected Class<Employee> getClassType() {
-//			return Employee.class;
-//		}
-//	};
+		class MembersForRoute extends SessionRunnable {
+			Route route;
+			public MembersForRoute(Route route) {
+				this.route = route;
+			}
+			@Override
+			public void run(Session session) {
+				@SuppressWarnings("unchecked")
+				List<Membership> result = (List<Membership>) session
+						.createCriteria("Membership")
+						.add(Restrictions.eq("defaultRoute", route)).list();
+				setResult(result);
+			}			
+		}
+
+		public List<Membership> membersForRoute(Route defaultRoute) {
+			MembersForRoute query = new MembersForRoute(defaultRoute);
+			runWithTransaction(query);
+			return  (List<Membership>) query.getResult();
+		}
+	};
+	
+	private static final DairyRepoInternal dairyRepository = new DairyRepoInternal();
+
+	// private static final HibernateRepository<DeliveryJournal>
+	// deliveryRepository = new HibernateRepository<DeliveryJournal>() {
+	// @Override
+	// protected Class<DeliveryJournal> getClassType() {
+	// return DeliveryJournal.class;
+	// }
+	// };
+
+	// private static final HibernateRepository<Employee> employeeRepository =
+	// new HibernateRepository<Employee>() {
+	// @Override
+	// protected Class<Employee> getClassType() {
+	// return Employee.class;
+	// }
+	// };
 
 	// private static final HibernateRepository<Membership> memberRepository =
 	// new HibernateRepository<Membership>() {
@@ -188,9 +219,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		Hibernate.initialize(localDairy);
 		final List<EReference> persistentCollections = Arrays.asList(
 				DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
-				DairyPackage.Literals.DAIRY__CUSTOMERS, DairyPackage.Literals.DAIRY__DAIRY_BINS,
-				DairyPackage.Literals.DAIRY__EMPLOYEES, DairyPackage.Literals.DAIRY__ROUTES,
-				DairyPackage.Literals.DAIRY__VEHICLES, DairyPackage.Literals.DAIRY__SUPPLIERS,
+				DairyPackage.Literals.DAIRY__CUSTOMERS,
+				DairyPackage.Literals.DAIRY__DAIRY_BINS,
+				DairyPackage.Literals.DAIRY__EMPLOYEES,
+				DairyPackage.Literals.DAIRY__ROUTES,
+				DairyPackage.Literals.DAIRY__VEHICLES,
+				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
 		for (EStructuralFeature feature : persistentCollections) {
 			Hibernate.initialize(localDairy.eGet(feature));
@@ -230,7 +264,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	public List<CollectionJournalPage> allCollectionJournalPages() {
-//		return collectionsRepository.getMemberships();
+		// return collectionsRepository.getMemberships();
 		return localDairy.getCollectionJournals();
 	}
 
@@ -246,7 +280,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public List<DeliveryJournal> allDeliveries() {
-//		return deliveryRepository.getMemberships();
+		// return deliveryRepository.getMemberships();
 		return localDairy.getDeliveryJournals();
 	}
 
@@ -274,7 +308,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public List<Employee> employeesByPosition(String string) {
-//		return employeeRepository.find("FROM Employee where jobfunction='" + string + "'");
+		// return employeeRepository.find("FROM Employee where jobfunction='" +
+		// string + "'");
 		List<Employee> found = new LinkedList<Employee>();
 		for (Employee employee : localDairy.getEmployees()) {
 			String job = employee.getJobFunction();
@@ -300,10 +335,11 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public Container getFarmContainerById(String canId) {
-//		return binRepository.findByKey(Long.parseLong(canId));
+		// return binRepository.findByKey(Long.parseLong(canId));
 		Container found = null;
 		for (Container bin : localDairy.getDairyBins()) {
-			if (bin.getTrackingNumber() != null && bin.getTrackingNumber().equals(canId)) {
+			if (bin.getTrackingNumber() != null
+					&& bin.getTrackingNumber().equals(canId)) {
 				found = bin;
 				break;
 			}
@@ -313,7 +349,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public CollectionJournalPage getJournalPageById(Long pageId) {
-		return getJournalPageById(pageId.toString());		
+		return getJournalPageById(pageId.toString());
 	}
 
 	@Override
@@ -358,40 +394,42 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			}
 			return found;
 		} finally {
-			log(LogService.LOG_DEBUG, "getMembershipById: query time: " + (System.currentTimeMillis() - start));
+			log(LogService.LOG_DEBUG, "getMembershipById: query time: "
+					+ (System.currentTimeMillis() - start));
 		}
 	}
 
 	@Override
 	public void delete(Membership member) {
-//		member.setStatus(MembershipStatus.DELETED);
-//		dairyRepository.save(member);
+		// member.setStatus(MembershipStatus.DELETED);
+		// dairyRepository.save(member);
 		if (localDairy.getMemberships().remove(member)) {
 			save();
-		}
-		else {
+		} else {
 			throw new RepositoryException("Member not in memberlist");
 		}
 	}
-	
-	@Override 
+
+	@Override
 	public List<Membership> all() {
 		return localDairy.getMemberships();
 	}
-		
+
 	@SuppressWarnings("unchecked")
-	@Override 
+	@Override
 	public List<Farm> getMemberFarms() {
-		return (List<Farm>) PersistenceManager.getDefault().getSession().createCriteria(Farm.class).list();
+		return (List<Farm>) PersistenceManager.getDefault().getSession()
+				.createCriteria(Farm.class).list();
 	}
-		
+
 	@Override
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
-		if (newEntity.getMemberNumber() == null || newEntity.getMemberNumber().trim().length() == 0) {
+		if (newEntity.getMemberNumber() == null
+				|| newEntity.getMemberNumber().trim().length() == 0) {
 			int size = localDairy.getMemberships().size();
 			long count = localDairy.getVersion();
 			newEntity.setMemberNumber("A" + count + "" + size);
-//			throw new RepositoryException("Member number cannot be null");
+			// throw new RepositoryException("Member number cannot be null");
 		}
 		if (newEntity.getAccount() == null) {
 			Account memberAccount = AccountFactory.eINSTANCE.createAccount();
@@ -405,15 +443,20 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
+	public Collection<Membership> getMembersForRoute(Route theRoute) {
+		return dairyRepository.membersForRoute(theRoute);
+	}
+
+	@Override
 	public void update(Membership member) {
 		save(member);
 	}
-	
+
 	@Override
 	public Dairy reloadLocalDairy() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public void save() {
 		dairyRepository.save(localDairy);
 	}
@@ -425,7 +468,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public void saveNewJournalPage(CollectionJournalPage newJournal) {
-//		collectionsRepository.saveNew(newJournal);
+		// collectionsRepository.saveNew(newJournal);
 		localDairy.getCollectionJournals().add(newJournal);
 		save();
 	}
@@ -460,9 +503,11 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public MilkPrice getCurrentMilkPrice() {
 		MilkPrice currentPrice;
 		Session session = PersistenceManager.getDefault().getSession();
-		Date maxDate = (Date) session.createQuery("select max(priceDate) from MilkPrice").uniqueResult();
+		Date maxDate = (Date) session.createQuery(
+				"select max(priceDate) from MilkPrice").uniqueResult();
 		if (maxDate != null) {
-			currentPrice = (MilkPrice) session.createQuery("select from MilkPrice where priceDate = ?")
+			currentPrice = (MilkPrice) session
+					.createQuery("select from MilkPrice where priceDate = ?")
 					.setDate(0, maxDate).uniqueResult();
 		} else {
 			currentPrice = null;
@@ -475,12 +520,14 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
 		Session session = PersistenceManager.getDefault().getSession();
 		return (List<MilkPrice>) session.createCriteria("MilkPrice")
-				.add(Restrictions.between("priceDate", startDate, endDate)).list();
+				.add(Restrictions.between("priceDate", startDate, endDate))
+				.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route, Customer customer) {
+	public List<DeliveryJournal> getDeliveryJournals(Date minDate,
+			Date maxDate, Route route, Customer customer) {
 		Session session = PersistenceManager.getDefault().getSession();
 		Criteria djCriteria = session.createCriteria("DeliveryJournal");
 		if (minDate != null) {
@@ -516,7 +563,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 		String formattedNumber = searchMemberNumber;
 		try {
-			formattedNumber = String.format("%05d", Integer.parseInt(searchMemberNumber));
+			formattedNumber = String.format("%05d",
+					Integer.parseInt(searchMemberNumber));
 		} catch (NumberFormatException nfe) {
 			;
 		}
@@ -530,16 +578,18 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			}
 		}
 
-		log(LogService.LOG_DEBUG, String.format(" > Member search %8s, looking for %s (%s), time: %d\n",
-				(retval == null ? "FAILS" : "SUCCEEDS"), formattedNumber, searchMemberNumber,
-				(System.currentTimeMillis() - start)));
+		log(LogService.LOG_DEBUG, String.format(
+				" > Member search %8s, looking for %s (%s), time: %d\n",
+				(retval == null ? "FAILS" : "SUCCEEDS"), formattedNumber,
+				searchMemberNumber, (System.currentTimeMillis() - start)));
 
 		return retval;
 	}
 
 	@Override
 	public List<CollectionJournalLine> getMemberCollectionsForSession(
-			com.agritrace.edairy.desktop.common.model.dairy.Session session, Membership value) {
+			com.agritrace.edairy.desktop.common.model.dairy.Session session,
+			Membership value) {
 		// TODO: implement
 		return null;
 	}
@@ -551,10 +601,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		ImageData ret = null;
 		if (key != null) {
 			try {
-				ImageEntry entry = (ImageEntry) PersistenceManager.getDefault().getSession().load("ImageEntry", key);
+				ImageEntry entry = (ImageEntry) PersistenceManager.getDefault()
+						.getSession().load("ImageEntry", key);
 				final byte[] data = entry.getImageData();
 				debug_print(key, data);
-				InputStream stream = new ByteArrayInputStream(entry.getImageData());
+				InputStream stream = new ByteArrayInputStream(
+						entry.getImageData());
 				ret = new ImageData(stream);
 			} catch (HibernateException hbe) {
 				log(LogService.LOG_WARNING, hbe.getMessage(), hbe);
@@ -637,7 +689,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	private void debug_print(String tag, byte[] array) {
 		int COUNT = 64;
-		System.err.println(String.format("First %d bytes of %s\n ", COUNT, tag));
+		System.err
+				.println(String.format("First %d bytes of %s\n ", COUNT, tag));
 		for (int i = 0; i < COUNT; i++) {
 			System.err.print(String.format("%02x ", array[i]));
 			if ((i + 1) % 32 == 0)
@@ -649,7 +702,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	 * 
 	 */
 	private void log(int level, String message, Throwable exception) {
-		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message, exception);
+		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message,
+				exception);
 	}
 
 	/**

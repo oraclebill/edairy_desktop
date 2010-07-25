@@ -100,9 +100,9 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		public void callback() {
 			BulkCollectionsEntryDialog dialog = new BulkCollectionsEntryDialog(shell);
 
-			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_JOURNAL_PAGE,
+			dialog.getController().setContext(BulkCollectionsEntryDialogController.CONTEXT_JOURNAL_PAGE,
 					createCollectionJournal());
-			dialog.getController().setContext(BulkCollectionEntryDialogController.CONTEXT_PERSISTENCE_DELEGATE,
+			dialog.getController().setContext(BulkCollectionsEntryDialogController.CONTEXT_PERSISTENCE_DELEGATE,
 					new DummyJournalPersister(dialog.getController()));
 
 			if (Window.OK == dialog.open()) {
@@ -196,7 +196,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	@Override
 	protected AbstractWindowController createController() {
-		return new BulkCollectionEntryDialogController();
+		return new BulkCollectionsEntryDialogController();
 	}
 
 	private Composite createButtonComposite(Composite group) {
