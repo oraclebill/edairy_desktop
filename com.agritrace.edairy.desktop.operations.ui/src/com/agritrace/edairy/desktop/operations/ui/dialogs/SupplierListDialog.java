@@ -2,6 +2,8 @@ package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
+import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -10,6 +12,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
@@ -18,6 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMet
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
@@ -25,7 +30,6 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialog
 /**
  * Supplier list dialog to add/view/edit supplier
  * 
- * @author Hui(Spark) Wan
  * 
  */
 public class SupplierListDialog extends RecordDialog<Supplier> {
@@ -44,28 +48,32 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 		super(parentShell);
 	}
 
-	private void createContactGroup(Composite parent) {
-		final Group companyContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
-				.applyTo(companyContactGroup);
-		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(companyContactGroup);
-		final AddressGroupWidget addressWidget = new AddressGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
-				.applyTo(addressWidget.getGroup());
-		addressWidget.getGroup().pack();
+	private Composite createAddressArea(Composite parent) {
 
-		final DirectionsGroupWidget directionWidget = new DirectionsGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(directionWidget.getGroup());
-		directionWidget.getGroup().pack();
+		final Composite addressGroup = UIControlsFactory
+				.createComposite(parent);
+		GridLayoutFactory.fillDefaults().applyTo(addressGroup);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).span(2, 1).applyTo(addressGroup);
 
-		final MapGroupWidget mapWidget = new MapGroupWidget(companyContactGroup);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(mapWidget.getGroup());
-		mapWidget.getGroup().pack();
+		final LocationTabFolder addressWidget = new LocationTabFolder(
+				addressGroup, SWT.NONE);
+		addressWidget.setBackground(LnfManager.getLnf().getColor(
+				LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, false).applyTo(addressWidget);
 
-		final ContactMethodsGroup commGroup = new ContactMethodsGroup(companyContactGroup);
-		addUIControl(commGroup, IContactMethodsGroupRidget.WIDGET_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup);
-		commGroup.pack();
+		TabFolder tabs = addressWidget.getTabFolder();
+
+		final TabItem tab = new TabItem(tabs, SWT.NONE);
+		tab.setText("Contacts");
+		final ContactMethodsGroup contacts = new ContactMethodsGroup(tabs,
+				SWT.NONE);
+		tab.setControl(contacts);
+
+		addUIControl(contacts, IContactMethodsGroupRidget.WIDGET_ID);
+
+		return addressGroup;
 	}
 
 	@Override
@@ -73,9 +81,11 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 
 		final Composite comonComp = UIControlsFactory.createComposite(parent);
 		comonComp.setLayout(new GridLayout(2, false));
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(comonComp);
 
-		final GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
+		final GridDataFactory factory = GridDataFactory.swtDefaults()
+				.align(SWT.FILL, SWT.FILL).grab(true, true);
 		// Supplier Id
 		UIControlsFactory.createLabel(comonComp, "Supplier ID");
 		final Text txtDate = UIControlsFactory.createText(comonComp);
@@ -103,17 +113,21 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 
 		// Category
 		UIControlsFactory.createLabel(comonComp, "Category");
-		final List categoryList = UIControlsFactory.createList(comonComp, true, true);
-		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.BEGINNING).applyTo(categoryList);
+		final List categoryList = UIControlsFactory.createList(comonComp, true,
+				true);
+		GridDataFactory.swtDefaults().grab(true, false)
+				.align(SWT.FILL, SWT.BEGINNING).applyTo(categoryList);
 		addUIControl(categoryList, BIND_ID_CATEGORY);
 
 		// Description
 		UIControlsFactory.createLabel(comonComp, "Description");
-		final Text descText = UIControlsFactory.createTextMulti(comonComp, true, true);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).hint(-1, 50).applyTo(descText);
+		final Text descText = UIControlsFactory.createTextMulti(comonComp,
+				true, true);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, false).hint(-1, 50).applyTo(descText);
 		addUIControl(descText, BIND_ID_DESCRIPTION);
 
-		createContactGroup(comonComp);
+		createAddressArea(comonComp);
 
 	}
 

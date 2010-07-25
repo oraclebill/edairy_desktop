@@ -28,6 +28,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
@@ -134,13 +135,16 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		mapController.updateBinding();
 
 		// Configure Communication Group
-		final CommunicationGroupController commController = new CommunicationGroupController(this);
-		// ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
-		// method.setCmType(ContactMethodType.EMAIL);
-		// method.setCmValue("sparkwan@gmail.com");
-		// supplier.getContactMethods().add(method);
-		commController.setInputModel(supplier);
-		commController.updateBinding();
+//		final CommunicationGroupController commController = new CommunicationGroupController(this);
+//		// ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
+//		// method.setCmType(ContactMethodType.EMAIL);
+//		// method.setCmValue("sparkwan@gmail.com");
+//		// supplier.getContactMethods().add(method);
+//		commController.setInputModel(supplier);
+//		commController.updateBinding();
+		final IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
+		contacts.bindToModel(supplier);
+		contacts.updateFromModel();
 
 	}
 	//

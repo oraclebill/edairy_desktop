@@ -95,46 +95,31 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 	public static final String EMAIL_TXT = "Email:";
 	public static final String PHONE_TXT = "Phone:";
 
-	private final Group communicationGroup;
-
-
 	public ContactMethodsGroup(Composite parent) {
 		this(parent, SWT.NULL);
 	}
 	
 	public ContactMethodsGroup(Composite parent, int style) {
 		super(parent, style);
-		setLayout(new GridLayout());
-		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		
-		communicationGroup = UIControlsFactory.createGroup(this, COMMUNICATION_GROUP_TXT);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(communicationGroup);
-		
-		// creatDirectonsGroup();
-		communicationGroup.setLayout(new GridLayout(2, false));
-		final CompositeTable table = new CompositeTable(communicationGroup, SWT.NONE);
+		setLayout(new GridLayout(2, false));
+//		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+//		setBackground(parent.getBackground());
+
+		final CompositeTable table = new CompositeTable(this, SWT.NONE);
 		new Header(table, SWT.NONE);
 		new Row(table, SWT.NONE);
 		table.setInsertHint("");
 		table.setLinesVisible(true);
 		table.setRunTime(true);
 						
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(table);
+		GridDataFactory.defaultsFor(table).align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(table);
 		addUIControl(table, BIND_ID_TABLE);
 		
-		Control control = createButtons(communicationGroup);
+		Control control = createButtons(this);
 		GridDataFactory.defaultsFor(control).align(SWT.BEGINNING, SWT.BEGINNING).applyTo(control);
 	}
 
 
-	public void setText(String s) {
-		communicationGroup.setText(s);
-	}
-	
-	public String getText() {
-		return communicationGroup.getText();
-	}
-	
 	private Control createButtons(Composite parent) {
 		final Composite buttonPanel = new Composite(parent, SWT.NONE);
 		buttonPanel.setLayout(new GridLayout(1, false));		
