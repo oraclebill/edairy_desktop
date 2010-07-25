@@ -16,10 +16,11 @@ import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IComplexRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeTableRidget;
 import org.eclipse.riena.ui.ridgets.IRowRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
@@ -125,9 +126,6 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 	 */
 	@Override
 	public void configureRidgets() {
-
-		System.err.println(" ========= configureRidgets!");
-		new Exception().printStackTrace();
 		contactTable = getRidget(ICompositeTableRidget.class, ContactMethodsGroup.BIND_ID_TABLE);		
 		addBtn = getRidget(IActionRidget.class, ContactMethodsGroup.BIND_ID_BTN_ADD);
 		deleteBtn = getRidget(IActionRidget.class, ContactMethodsGroup.BIND_ID_BTN_DELETE);
@@ -140,8 +138,8 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 //				updateButtonStatus();
 //			}
 //		});
+		
 		addBtn.addListener(addContactAction);
-
 		deleteBtn.addListener(deleteContactAction);
 		deleteAllBtn.addListener(deleteAllAction);
 		updateButtonStatus();
@@ -179,7 +177,6 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 
 	private void updateButtonStatus() {
 //		this.deleteBtn.setEnabled(contactTable.getSelectionIndex() > -1);
-//		this.deleteAllBtn.setEnabled((contactTable.getObservableList() != null)
-//				&& (contactTable.getObservableList().size() > 0));
+//		this.deleteAllBtn.setEnabled(boundContacts != null && boundContacts.size() > 0);
 	}
 }

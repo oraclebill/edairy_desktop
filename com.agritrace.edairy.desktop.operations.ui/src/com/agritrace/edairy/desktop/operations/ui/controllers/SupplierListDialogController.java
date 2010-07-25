@@ -23,7 +23,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;

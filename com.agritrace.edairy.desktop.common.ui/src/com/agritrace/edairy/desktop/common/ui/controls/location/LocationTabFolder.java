@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.common.ui.controls.location;
 
+import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
+import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -15,7 +17,8 @@ public class LocationTabFolder extends CompositePanel {
 	public LocationTabFolder(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new FillLayout());
-
+		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		
 		tabs = new TabFolder(this, SWT.None);
 
 		final TabItem addressTab = new TabItem(tabs, SWT.NONE);

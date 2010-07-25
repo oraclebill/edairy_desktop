@@ -48,19 +48,19 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 	protected void buildWorkArea(Composite parent) {
 		comonComp = UIControlsFactory.createComposite(parent);
 		
-		DialogTray tray = new DialogTray() {
-			
-			@Override
-
-			protected Control createContents(Composite parent) {
-				Label label = new Label(parent, SWT.None);
-				label.setText("Hello, Tray World!");
-//				parent.setLayout(new FillLayout());
-				return label;
-			}
-		} ;
-		
-		this.openTray(tray);
+//		DialogTray tray = new DialogTray() {
+//			
+//			@Override
+//
+//			protected Control createContents(Composite parent) {
+//				Label label = new Label(parent, SWT.None);
+//				label.setText("Hello, Tray World!");
+////				parent.setLayout(new FillLayout());
+//				return label;
+//			}
+//		} ;
+//		
+//		this.openTray(tray);
 		
 		comonComp.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
 		comonComp.setLayout(new GridLayout(2, false));

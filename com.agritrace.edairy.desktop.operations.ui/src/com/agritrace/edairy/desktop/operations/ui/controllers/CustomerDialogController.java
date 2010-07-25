@@ -10,11 +10,11 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
@@ -115,9 +115,12 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		mapController.updateBinding();
 
 		// Configure Communication Group
-		final CommunicationGroupController commController = new CommunicationGroupController(this);
-		commController.setInputModel(editCustomer);
-		commController.updateBinding();
+//		final CommunicationGroupController commController = new CommunicationGroupController(this);
+//		commController.setInputModel(editCustomer);
+//		commController.updateBinding();
+		IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
+		contacts.bindToModel(editCustomer);
+		contacts.updateFromModel();
 	}
 
 	@Override
@@ -127,6 +130,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 
 	@Override
 	public void afterBind() {
+		super.afterBind();
 		customerType.updateFromModel();
 		profilePhoto.updateFromModel();
 	}

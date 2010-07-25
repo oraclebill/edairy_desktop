@@ -12,11 +12,11 @@ import org.eclipse.riena.ui.ridgets.IValueRidget;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeBindingConstants;
@@ -112,9 +112,13 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		mapController.updateBinding();
 
 		// Configure Communication Group
-		final CommunicationGroupController commController = new CommunicationGroupController(this);
-		commController.setInputModel(editEmployee);
-		commController.updateBinding();
+//		final CommunicationGroupController commController = new CommunicationGroupController(this);
+//		commController.setInputModel(editEmployee);
+//		commController.updateBinding();
+		
+		IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
+		contacts.bindToModel(editEmployee);
+		contacts.updateFromModel();
 		
 		// bind all
 		for (IRidget ridget : getRidgets()) {

@@ -4,14 +4,14 @@ import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.controllers.CommunicationGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberInfoGroupController;
 
 public class MemberProfileWidgetController implements WidgetController<Object> {
 
-	private final CommunicationGroupController communicationGroup;
+	private final IContactMethodsGroupRidget contacts;
 	private IRidgetContainer container;
 
 	private final MemberInfoGroupController infoGroup;
@@ -22,7 +22,8 @@ public class MemberProfileWidgetController implements WidgetController<Object> {
 		this.container = controller;
 		infoGroup = new MemberInfoGroupController(controller);
 		locationController = new LocationProfileWidgetController(controller);
-		communicationGroup = new CommunicationGroupController(controller);
+		contacts = controller.getRidget(IContactMethodsGroupRidget.class,
+				IContactMethodsGroupRidget.WIDGET_ID);
 		configure();
 	}
 
@@ -69,8 +70,8 @@ public class MemberProfileWidgetController implements WidgetController<Object> {
 			locationController.setInputModel(member.getMember().getLocation());
 
 		}
-		communicationGroup.setInputModel(member.getMember());
-		communicationGroup.updateBinding();
+		contacts.bindToModel(member.getMember());
+		contacts.updateFromModel();
 	}
 
 }
