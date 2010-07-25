@@ -16,7 +16,6 @@ import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
-import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -31,14 +30,17 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 
 public class DairyProfileView extends SubModuleView {
+
 	public static final String ADDRESS_LABEL = "Address:";
 
 	public static final String DISTRICT_LABEL = "District:";
@@ -83,9 +85,15 @@ public class DairyProfileView extends SubModuleView {
 		addressWidget.setBackground(stdBackgroundColor);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget);
 
-		final CommunicationsGroup communication = new CommunicationsGroup(addressGroup);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(communication, "contact-methods");		
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication);
+		TabFolder tabs = addressWidget.getTabFolder();
+		
+		final TabItem tab = new TabItem(tabs, SWT.NONE);
+		tab.setText("Contacts");
+		final ContactMethodsGroup contacts = new ContactMethodsGroup(tabs, SWT.NONE);
+		tab.setControl(contacts);
+
+		addUIControl(contacts, DairyProfileViewWidgetID.CONTACT_METHODS);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication);
 
 		return addressGroup;
 	}

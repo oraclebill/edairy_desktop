@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -120,7 +120,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 
 		final TabItem commsTab = new TabItem(locationGroup.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
-		final CommunicationsGroup commGroup = new CommunicationsGroup(locationGroup.getTabFolder());
+		final ContactMethodsGroup commGroup = new ContactMethodsGroup(locationGroup.getTabFolder());
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		
 		commsTab.setControl(commGroup);
 		return contactGroup;

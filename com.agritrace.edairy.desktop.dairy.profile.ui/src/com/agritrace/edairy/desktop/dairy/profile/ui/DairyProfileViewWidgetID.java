@@ -30,6 +30,7 @@ public interface DairyProfileViewWidgetID {
 	public static final String DAIRY_REGISTRATION_NUMBER = "dairy.profile.registration_no";
 
 	public static final String DAIRY_SAVE = "DAIRY_BUTTON_SAVE";
+	public static final String CONTACT_METHODS = "contact-methods";
 
 	public static final String ID = "com.agritrace.edairy.desktop.ui.dairyprofile";
 }

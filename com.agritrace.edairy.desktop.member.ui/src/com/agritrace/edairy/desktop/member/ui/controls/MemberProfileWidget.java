@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.CommunicationsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
@@ -53,7 +53,7 @@ public class MemberProfileWidget {
 		final LocationProfileWidget addressWidget = new LocationProfileWidget(composite);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget.getComposite());
 
-		final CommunicationsGroup communication = new CommunicationsGroup(composite);
+		final ContactMethodsGroup communication = new ContactMethodsGroup(composite);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(communication, "contact-methods");		
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(communication);
 	}
