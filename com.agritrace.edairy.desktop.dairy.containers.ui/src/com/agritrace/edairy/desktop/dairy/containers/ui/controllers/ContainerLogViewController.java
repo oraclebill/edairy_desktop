@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.dairy.containers.ui.controllers;
 
 import java.util.Collection;
+
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -23,7 +24,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.containers.ui.controls.ContainerLogDetailBindConstants;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -89,8 +90,8 @@ public class ContainerLogViewController extends SubModuleController {
 		}
 
 		private void bindAssetInfo(IRidgetContainer container, Asset assetInfo) {
-			final AssetInfoRidget assetInfoRidget = container.getRidget(AssetInfoRidget.class,
-					ContainerLogDetailBindConstants.BIND_ID_ASSET_INFO);
+			final IAssetInfoRidget assetInfoRidget = container.getRidget(IAssetInfoRidget.class,
+					IAssetInfoRidget.WIDGET_ID);
 			assetInfoRidget.bindToModel(PojoObservables.observeValue(getWorkingCopy(), "assetInfo"));
 		}
 

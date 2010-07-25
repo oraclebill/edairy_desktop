@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.contactmethods;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,6 +94,7 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 	public static final String COMMUNICATION_GROUP_TXT = "Contact Methods";
 	public static final String EMAIL_TXT = "Email:";
 	public static final String PHONE_TXT = "Phone:";
+
 	private final Group communicationGroup;
 
 

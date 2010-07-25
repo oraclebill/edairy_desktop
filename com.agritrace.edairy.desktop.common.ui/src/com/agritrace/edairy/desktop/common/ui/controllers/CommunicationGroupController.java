@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.editingsupport.ColumnEditingSupport;
 import com.agritrace.edairy.desktop.common.ui.editingsupport.ContactTypeColumnEditingSupport;
 import com.agritrace.edairy.desktop.common.ui.ridgets.IEditableTableRidget;

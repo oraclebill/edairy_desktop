@@ -4,12 +4,12 @@ import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroupRidget;
-import com.agritrace.edairy.desktop.common.ui.controls.DateRange;
-import com.agritrace.edairy.desktop.common.ui.controls.DateRangeRidget;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroupRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRange;
+import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRangeRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTable;
 import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTableRidget;
 

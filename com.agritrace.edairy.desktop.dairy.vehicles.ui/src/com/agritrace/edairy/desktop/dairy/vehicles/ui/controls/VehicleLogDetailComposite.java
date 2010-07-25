@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.AssetInfo;
 
 public class VehicleLogDetailComposite extends Composite {
 
@@ -45,7 +45,7 @@ public class VehicleLogDetailComposite extends Composite {
 
 		final CTabItem assetInfoTab = new CTabItem(tabFolder, SWT.None);
 		assetInfoTab.setText("Asset Info");
-		Control control = new AssetInfoComposite(tabFolder, SWT.None);
+		Control control = new AssetInfo(tabFolder, SWT.None);
 		assetInfoTab.setControl(control);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, "asset-info");
 

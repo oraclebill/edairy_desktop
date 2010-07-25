@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.contactmethods;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +23,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
@@ -31,7 +32,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryContr
  * @author oraclebill
  * 
  */
-public class ContactMethodsGroupRidget extends AbstractCompositeRidget implements IComplexRidget {
+public class ContactMethodsGroupRidget extends AbstractCompositeRidget implements IContactMethodsGroupRidget {
 
 	private final class DeleteAllContactsAction implements IActionListener {
 		@Override
@@ -146,10 +147,18 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 		updateButtonStatus();
 	}
 
-	public boolean confirm(String string) {
-		return MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Confirm", string);
+	/**
+	 * (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget#bindToModel(com.agritrace.edairy.desktop.common.model.base.Contactable)
+	 */
+	public void bindToModel(Contactable contactable) {
+		bindToModel(contactable.getContactMethods());
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	public void bindToModel(List<ContactMethod> contacts) {		
 		this.boundContacts = contacts;
 		if (contacts == null) {
@@ -157,8 +166,17 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 		}
 		contactTable.bindToModel(new WritableList(boundContacts, ContactMethod.class), ContactMethod.class, RowRidget.class);
 	}
-
 	
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	private boolean confirm(String string) {
+		return MessageDialog.openConfirm(AbstractDirectoryController.getShell(), "Confirm", string);
+	}
+
+
 	private void updateButtonStatus() {
 //		this.deleteBtn.setEnabled(contactTable.getSelectionIndex() > -1);
 //		this.deleteAllBtn.setEnabled((contactTable.getObservableList() != null)

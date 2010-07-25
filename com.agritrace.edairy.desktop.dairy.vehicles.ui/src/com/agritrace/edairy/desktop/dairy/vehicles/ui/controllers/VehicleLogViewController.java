@@ -25,7 +25,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -71,7 +71,7 @@ public class VehicleLogViewController extends SubModuleController {
 	 */
 	private final class VehicleLogMasterDetailDelegate extends AbstractMasterDetailsDelegate {
 
-		AssetInfoRidget assetInfo;
+		IAssetInfoRidget assetInfo;
 
 		private final Vehicle workingCopy = createWorkingCopy();
 
@@ -226,9 +226,7 @@ public class VehicleLogViewController extends SubModuleController {
 		}
 		
 		private void bindAssetInfo(IRidgetContainer container, Asset assetInfo2) {
-			assetInfo = container.getRidget(AssetInfoRidget.class, "asset-info");
-//			assetInfo.setModel(workingCopy.getAssetInfo());
-			assetInfo.configureRidgets();
+			assetInfo = container.getRidget(IAssetInfoRidget.class, IAssetInfoRidget.WIDGET_ID);
 			assetInfo.bindToModel(PojoObservables.observeValue(workingCopy, "assetInfo"));
 			assetInfo.updateFromModel();
 		}

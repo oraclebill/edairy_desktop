@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.daterange;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

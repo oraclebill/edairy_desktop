@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.assetinfo;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ import org.eclipse.riena.ui.ridgets.IValueRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
-public class AssetInfoRidget extends AbstractCompositeRidget implements IValueRidget {
+public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetInfoRidget {
 
 	private IObservableValue modelObject;
 	private IDateTimeRidget dateAcquiredText;
@@ -27,26 +27,26 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IValueRi
 	public void configureRidgets() {
 		
 		dateAcquiredText = getRidget(IDateTimeRidget.class,
-				AssetInfoComposite.BIND_ID_ASSET_DATE_ACQUIRED);
+				AssetInfo.BIND_ID_ASSET_DATE_ACQUIRED);
 		dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 
 		damangeDateText = getRidget(IDateTimeRidget.class,
-				AssetInfoComposite.BIND_ID_ASSET_DATE_DAMAGE);
+				AssetInfo.BIND_ID_ASSET_DATE_DAMAGE);
 		damangeDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 
-		damageDesText = getRidget(ITextRidget.class, AssetInfoComposite.BIND_ID_ASSET_DESC_DAMAGE);
+		damageDesText = getRidget(ITextRidget.class, AssetInfo.BIND_ID_ASSET_DESC_DAMAGE);
 		damageDesText.setDirectWriting(true);
 
 		disposalDate = getRidget(IDateTimeRidget.class,
-				AssetInfoComposite.BIND_ID_ASSET_DATE_DISPOSAL);
+				AssetInfo.BIND_ID_ASSET_DATE_DISPOSAL);
 		disposalDate.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
 
 		disposalReason = getRidget(ITextRidget.class,
-				AssetInfoComposite.BIND_ID_ASSET_REASON_DISPOSAL);
+				AssetInfo.BIND_ID_ASSET_REASON_DISPOSAL);
 		disposalReason.setDirectWriting(true);
 
 		disposalWitness = getRidget(ITextRidget.class,
-				AssetInfoComposite.BIND_ID_ASSET_WITNESS_DISPOSAL);
+				AssetInfo.BIND_ID_ASSET_WITNESS_DISPOSAL);
 		disposalWitness.setDirectWriting(true);
 
 		

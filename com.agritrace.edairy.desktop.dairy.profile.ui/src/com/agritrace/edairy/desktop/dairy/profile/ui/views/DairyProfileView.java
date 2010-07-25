@@ -34,9 +34,9 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 
 public class DairyProfileView extends SubModuleView {

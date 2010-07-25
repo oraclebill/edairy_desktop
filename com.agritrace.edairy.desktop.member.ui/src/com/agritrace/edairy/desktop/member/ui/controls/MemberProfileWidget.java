@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 

@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.DateRange;
+import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRange;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionJournalFilterPanel extends Composite {

@@ -14,7 +14,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
@@ -62,7 +63,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 		mapWidget.getGroup().pack();
 
 		final ContactMethodsGroup commGroup = new ContactMethodsGroup(companyContactGroup);
-		addUIControl(commGroup, "contact-methods");
+		addUIControl(commGroup, IContactMethodsGroupRidget.WIDGET_ID);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).span(2, 1).applyTo(commGroup);
 		commGroup.pack();
 	}

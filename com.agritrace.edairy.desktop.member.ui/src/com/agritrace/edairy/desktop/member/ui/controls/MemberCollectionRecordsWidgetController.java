@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
-import com.agritrace.edairy.desktop.common.ui.controls.IDateRangeRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidgetController implements WidgetController<Membership>, IActionListener {

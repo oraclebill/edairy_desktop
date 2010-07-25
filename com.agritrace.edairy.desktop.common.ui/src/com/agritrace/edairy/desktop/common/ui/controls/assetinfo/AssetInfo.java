@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.assetinfo;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -14,11 +14,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 
-public class AssetInfoComposite extends Composite implements IComplexComponent {
+public class AssetInfo extends Composite implements IComplexComponent {
 	
 	static {
 		// TODO: should this be in the activator?
-		SwtControlRidgetMapper.getInstance().addMapping(AssetInfoComposite.class, AssetInfoRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(AssetInfo.class, AssetInfoRidget.class);
 	}
 
 	public static final String BIND_ID_ASSET_DATE_ACQUIRED = "asset.date.acquired";
@@ -30,7 +30,7 @@ public class AssetInfoComposite extends Composite implements IComplexComponent {
 
 	private final List<Object> uiControls = new LinkedList<Object>();
 
-	public AssetInfoComposite(Composite parent, int style) {
+	public AssetInfo(Composite parent, int style) {
 		super(parent, style);
 		setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 //		setBackground(parent.getBackground());

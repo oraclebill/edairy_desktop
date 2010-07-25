@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.controls.profilephoto;
 
 import java.io.BufferedInputStream;
 import java.io.File;

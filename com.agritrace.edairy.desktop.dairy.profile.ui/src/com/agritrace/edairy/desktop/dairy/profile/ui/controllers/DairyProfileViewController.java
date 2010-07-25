@@ -18,8 +18,8 @@ import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroupRidget;
-import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -82,7 +82,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 	public static final String ID = DairyProfileViewController.class.getName();
 	private IActionRidget cancelAction;
-	private ContactMethodsGroupRidget contactsGroup;
+	private IContactMethodsGroupRidget contactsGroup;
 	private final IDairyRepository dairyRepository = DairyRepository
 			.getInstance();
 	private Dairy localDairy;
@@ -143,7 +143,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 		configureInfoPanelRidgets();
 		locationController = new LocationProfileWidgetController(this);
-		contactsGroup = getRidget(ContactMethodsGroupRidget.class,
+		contactsGroup = getRidget(IContactMethodsGroupRidget.class,
 				DairyProfileViewWidgetID.CONTACT_METHODS);
 
 		configureButtonsPanel();

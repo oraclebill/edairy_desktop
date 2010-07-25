@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroup {

@@ -20,9 +20,9 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.ui.controls.ContactMethodsGroup;
-import com.agritrace.edairy.desktop.common.ui.controls.ProfilePhotoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDialogController;
 

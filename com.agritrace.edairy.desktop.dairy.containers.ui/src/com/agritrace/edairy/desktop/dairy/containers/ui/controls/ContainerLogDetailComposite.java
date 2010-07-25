@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.AssetInfoComposite;
+import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.AssetInfo;
 
 public class ContainerLogDetailComposite extends Composite {
 
@@ -31,7 +31,7 @@ public class ContainerLogDetailComposite extends Composite {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Asset Info");
 		GridLayoutFactory.fillDefaults().applyTo(detailGroup);
 		
-		Control control = new AssetInfoComposite(detailGroup, SWT.NULL);
+		Control control = new AssetInfo(detailGroup, SWT.NULL);
 		control.setSize(216, 254);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, 
 				ContainerLogDetailBindConstants.BIND_ID_ASSET_INFO);

@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
-import com.agritrace.edairy.desktop.common.ui.controls.IProfilePhotoRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeBindingConstants;
 
