@@ -1,30 +1,28 @@
 package com.agritrace.edairy.desktop.common.ui.controls.contactmethods;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.common.IComplexComponent;
-import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
-import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.nebula.widgets.compositetable.AbstractNativeHeader;
 import org.eclipse.swt.nebula.widgets.compositetable.CompositeTable;
 import org.eclipse.swt.nebula.widgets.compositetable.ResizableGridRowLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-public class ContactMethodsGroup extends Composite  implements IComplexComponent  {
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
+
+public class ContactMethodsGroup extends CompositePanel  implements IComplexComponent  {
 	
 	final private List<Object> uiControls = new LinkedList<Object>();
 	
@@ -50,7 +48,7 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 	/**
 	 * Row for a {@link CompositeTable} widget.
 	 */
-	private static final class Row extends Composite implements IComplexComponent {
+	private static final class Row extends CompositePanel implements IComplexComponent {
 		private final List<Object> controls = new ArrayList<Object>();
 
 		/**
@@ -65,7 +63,7 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 			super(parent, style);
 			this.setLayout(new ResizableGridRowLayout());
 			
-			final Combo combo = UIControlsFactory.createCombo(this);
+			final CCombo combo = UIControlsFactory.createCCombo(this);
 			addUIControl(combo, "contactType"); //$NON-NLS-1$
 			
 			final Text text = UIControlsFactory.createText(this, SWT.LEFT | SWT.SINGLE);
@@ -105,9 +103,9 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 //		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 //		setBackground(parent.getBackground());
 
-		final CompositeTable table = new CompositeTable(this, SWT.NONE);
-		new Header(table, SWT.NONE);
-		new Row(table, SWT.NONE);
+		final CompositeTable table = new CompositeTable(this, SWT.BORDER);
+		new Header(table, SWT.BORDER);
+		new Row(table, SWT.BORDER);
 		table.setInsertHint("");
 		table.setLinesVisible(true);
 		table.setRunTime(true);
@@ -121,7 +119,7 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 
 
 	private Control createButtons(Composite parent) {
-		final Composite buttonPanel = new Composite(parent, SWT.NONE);
+		final Composite buttonPanel = UIControlsFactory.createComposite(parent, SWT.NONE);
 		buttonPanel.setLayout(new GridLayout(1, false));		
 		
 		final Button addButton = UIControlsFactory.createButton(buttonPanel, "Add");
@@ -133,7 +131,7 @@ public class ContactMethodsGroup extends Composite  implements IComplexComponent
 		addUIControl(deleteButton, BIND_ID_BTN_DELETE);		
 
 		final Button deleteAllButton = UIControlsFactory.createButton(buttonPanel, "Delete All" );
-		GridDataFactory.defaultsFor(deleteAllButton).align(SWT.FILL, SWT.BEGINNING).applyTo(deleteButton);
+		GridDataFactory.defaultsFor(deleteAllButton).align(SWT.FILL, SWT.BEGINNING).applyTo(deleteAllButton);
 		addUIControl(deleteAllButton, BIND_ID_BTN_DELETEALL);		
 
 		return buttonPanel;	

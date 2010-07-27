@@ -2,18 +2,16 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
-import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
@@ -60,9 +58,9 @@ public class MemberProfileWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(addressWidget);
 
-		TabFolder folder = addressWidget.getTabFolder();
+		CTabFolder folder = addressWidget.getTabFolder();
 
-		final TabItem contactsTab = new TabItem(folder, SWT.NONE);
+		final CTabItem contactsTab = new CTabItem(folder, SWT.NONE);
 		contactsTab.setText("Contacts");
 		final ContactMethodsGroup contacts = new ContactMethodsGroup(folder);
 		contactsTab.setControl(contacts);

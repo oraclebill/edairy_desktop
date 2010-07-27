@@ -70,7 +70,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		// department
 		department = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_DEPARTMENT);
 		department.bindToModel(Observables.staticObservableList(EmployeeReference.getDepartments()), String.class,
-				null, new WritableValue());
+				null, EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__DEPARTMENT));
 //		department.updateFromModel();
 //		department.setSelection(0);
 

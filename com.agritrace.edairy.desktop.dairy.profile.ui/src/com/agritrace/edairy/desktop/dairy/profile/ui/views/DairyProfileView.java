@@ -30,8 +30,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
@@ -85,9 +83,9 @@ public class DairyProfileView extends SubModuleView {
 		addressWidget.setBackground(stdBackgroundColor);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget);
 
-		TabFolder tabs = addressWidget.getTabFolder();
+		CTabFolder tabs = addressWidget.getTabFolder();
 		
-		final TabItem tab = new TabItem(tabs, SWT.NONE);
+		final CTabItem tab = new CTabItem(tabs, SWT.NONE);
 		tab.setText("Contacts");
 		final ContactMethodsGroup contacts = new ContactMethodsGroup(tabs, SWT.NONE);
 		tab.setControl(contacts);

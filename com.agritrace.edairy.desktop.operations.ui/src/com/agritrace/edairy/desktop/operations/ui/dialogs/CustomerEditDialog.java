@@ -8,6 +8,7 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -136,7 +137,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true,true).span(2, 1).applyTo(locationTabs);
 		
-		final TabItem commsTab = new TabItem(locationTabs.getTabFolder(), SWT.NONE);
+		final CTabItem commsTab = new CTabItem(locationTabs.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
 		final ContactMethodsGroup commGroup = new ContactMethodsGroup(locationTabs.getTabFolder());
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		

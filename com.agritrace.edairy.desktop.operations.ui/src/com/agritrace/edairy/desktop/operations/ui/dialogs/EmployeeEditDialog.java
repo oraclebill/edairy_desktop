@@ -8,12 +8,12 @@ import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -118,7 +118,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		final LocationTabFolder locationGroup = new LocationTabFolder(contactGroup, SWT.None);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(locationGroup);
 
-		final TabItem commsTab = new TabItem(locationGroup.getTabFolder(), SWT.NONE);
+		final CTabItem commsTab = new CTabItem(locationGroup.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
 		final ContactMethodsGroup commGroup = new ContactMethodsGroup(locationGroup.getTabFolder());
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		

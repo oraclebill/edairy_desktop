@@ -6,24 +6,20 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.AddressGroupWidget;
-import com.agritrace.edairy.desktop.common.ui.controls.location.DirectionsGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
-import com.agritrace.edairy.desktop.common.ui.controls.location.MapGroupWidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
 
@@ -63,9 +59,9 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(addressWidget);
 
-		TabFolder tabs = addressWidget.getTabFolder();
+		CTabFolder tabs = addressWidget.getTabFolder();
 
-		final TabItem tab = new TabItem(tabs, SWT.NONE);
+		final CTabItem tab = new CTabItem(tabs, SWT.NONE);
 		tab.setText("Contacts");
 		final ContactMethodsGroup contacts = new ContactMethodsGroup(tabs,
 				SWT.NONE);

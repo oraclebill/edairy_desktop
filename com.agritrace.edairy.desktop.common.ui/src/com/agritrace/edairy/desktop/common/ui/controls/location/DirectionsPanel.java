@@ -8,9 +8,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 
-public class DirectionsPanel extends Composite {
+public class DirectionsPanel extends CompositePanel {
 
 	public DirectionsPanel(Composite parent, int style) {
 		super(parent, style);
