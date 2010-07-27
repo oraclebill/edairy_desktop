@@ -37,6 +37,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 	private IProfilePhotoRidget photoRidget;
 
+	private IContactMethodsGroupRidget contacts;
+
 	@Override
 	public void configureUserRidgets() {
 
@@ -120,7 +122,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 //		commController.setInputModel(editEmployee);
 //		commController.updateBinding();
 		
-		IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
+		contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
 		contacts.bindToModel(editEmployee);
 		contacts.updateFromModel();
 		

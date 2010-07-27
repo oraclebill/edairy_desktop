@@ -318,7 +318,9 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(getShell());
-		dialog.getController().setContext(EDITED_OBJECT_ID, getSelectedEObject());
+		T selectedObject =  getSelectedEObject();
+		getRepository().load(selectedObject);
+		dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 		System.err.println("opening view item: " + getSelectedEObject());
 

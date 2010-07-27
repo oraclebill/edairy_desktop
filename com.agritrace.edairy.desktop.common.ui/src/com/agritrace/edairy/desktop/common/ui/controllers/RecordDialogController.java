@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.RienaStatus;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public abstract class RecordDialogController<T extends EObject> extends BaseDialogController<T> {
 
@@ -50,7 +51,8 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getWorkingCopy() {
-		return (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+		T workingCopy = (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+		return workingCopy;
 	}
 
 	private void configureMappedRidgets() {
