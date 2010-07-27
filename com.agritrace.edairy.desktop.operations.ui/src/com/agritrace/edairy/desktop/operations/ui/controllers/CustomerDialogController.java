@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import java.util.Arrays;
 
+import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -40,60 +41,32 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		editCustomer = getWorkingCopy();
 		assert (null != editCustomer);
 
-		// customer id
+//		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMER_ID, ModelPackage.Literals.COMPANY__COMPANY_ID);
+		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
+		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_PHONE_NUMBER, ModelPackage.Literals.COMPANY__PHONE_NUMBER);
+		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_LEGAL_NAME, ModelPackage.Literals.COMPANY__LEGAL_NAME);
+		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_DESCRIPTION, ModelPackage.Literals.COMPANY__DESCRIPTION);
+//		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO, ModelPackage.Literals.COMPANY__PROFILE_PHOTO);
+		
+		// combos
+		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS, 
+				Observables.staticObservableList(CompanyStatus.getCustomerStatusList()), 
+				null, 
+				DairyPackage.Literals.CUSTOMER__STATUS);
+		
+		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMERTYPE, 
+				Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)), 
+				null, 
+				DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
+
+
+		// customer id is read-only, so needs manual attention.
 		customerId = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_ID);
+		customerId.setModelToUIControlConverter(NumberToStringConverter.fromLong(false));
 		customerId.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__COMPANY_ID));
 		customerId.setOutputOnly(true);
 
-		// customer status
-		customerStatus = getRidget(IComboRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS);
-		customerStatus.bindToModel(Observables.staticObservableList(CompanyStatus.getCustomerStatusList()),
-				CompanyStatus.class, null,
-				EMFObservables.observeValue(editCustomer, DairyPackage.Literals.CUSTOMER__STATUS));
-		customerStatus.updateFromModel();
-		customerStatus.setSelection(0);
 
-		// company name
-		companyName = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_COMPANY_NAME);
-		companyName.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__COMPANY_NAME));
-		companyName.setMandatory(true);
-//		companyName.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		companyName.updateFromModel();
-
-		// company phone
-		companyPhone = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
-		companyPhone
-				.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__PHONE_NUMBER));
-		companyPhone.setMandatory(true);
-//		companyPhone.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		companyPhone.updateFromModel();
-
-		// company legal name
-		legalName = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_LEGAL_NAME);
-		legalName.bindToModel(EMFObservables.observeValue(editCustomer, ModelPackage.Literals.COMPANY__LEGAL_NAME));
-		// legalName.setMandatory(true);
-		// legalName.addValidationRule(new RequiredField(),
-		// ValidationTime.ON_UPDATE_TO_MODEL);
-		legalName.updateFromModel();
-
-		// customer type
-		customerType = getRidget(IComboRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMERTYPE);
-		customerType.bindToModel(Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)),
-				String.class, null,
-				EMFObservables.observeValue(editCustomer, DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE));
-//		customerType.setSelection(0);
-
-		// description
-		customerDescription = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_DESCRIPTION);
-		customerDescription.bindToModel(EMFObservables.observeValue(editCustomer,
-				ModelPackage.Literals.COMPANY__DESCRIPTION));
-		customerDescription.setDirectWriting(true); // otherwise validation
-													// doesn't work well..
-		customerDescription.setMandatory(true);
-//		customerDescription.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
-		customerDescription.updateFromModel();
-
-		
 		profilePhoto = getRidget(IProfilePhotoRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
 		profilePhoto.bindToModel(EMFObservables.observeValue(editCustomer,
 				ModelPackage.Literals.COMPANY__PROFILE_PHOTO));
@@ -131,7 +104,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		customerType.updateFromModel();
-		profilePhoto.updateFromModel();
+//		customerType.updateFromModel();
+//		profilePhoto.updateFromModel();
 	}
 }

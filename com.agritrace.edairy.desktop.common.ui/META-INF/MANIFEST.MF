@@ -17,13 +17,14 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  org.eclipse.riena.beans.common;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.riena.core;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.riena.navigation.ui.swt;bundle-version="2.0.0";visibility:=reexport,
- org.eclipse.emf.databinding;bundle-version="1.2.0",
+ org.eclipse.emf.databinding;bundle-version="1.2.0";visibility:=reexport,
  org.eclipse.ui;bundle-version="3.6.0";visibility:=reexport,
  org.eclipse.osgi.services;bundle-version="3.2.100";visibility:=reexport,
  org.eclipse.riena.ui.swt.rcp;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.swt.layout.grouplayout;bundle-version="1.1.0";visibility:=reexport,
  org.eclipse.swt.widgets.baseline;bundle-version="1.1.0";visibility:=reexport,
- org.eclipse.nebula.widgets.compositetable;bundle-version="1.0.0";visibility:=reexport
+ org.eclipse.nebula.widgets.compositetable;bundle-version="1.0.0";visibility:=reexport,
+ com.ibm.icu;bundle-version="4.2.1";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,

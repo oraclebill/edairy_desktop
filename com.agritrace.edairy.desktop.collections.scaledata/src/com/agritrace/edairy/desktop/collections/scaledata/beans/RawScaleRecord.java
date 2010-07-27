@@ -2,7 +2,7 @@ package com.agritrace.edairy.desktop.collections.scaledata.beans;
 
 public class RawScaleRecord {
 	private static final boolean DEBUG = true;
-	
+
 	public static class ValidationException extends Exception {
 
 		/**
@@ -25,9 +25,9 @@ public class RawScaleRecord {
 		public ValidationException(Throwable cause) {
 			super(cause);
 		}
-		
+
 	}
-	
+
 	private static final int BASE = 0;
 	public static final int TRANSACTION_DATE = BASE;
 	public static final int TRANSACTION_TIME = BASE + 1;
@@ -40,20 +40,22 @@ public class RawScaleRecord {
 	public static final int CENTER_NUMBER = BASE + 8;
 	public static final int MEMBER_NUMBER = BASE + 9;
 	public static final int QUANTITY = BASE + 10;
-	public static final int NUM_CANS = BASE + 11;  // TODO: confirm.. (was NUM_CANS) 
-	public static final int SCALE_TOTAL = BASE + 12;  // TODO: confirm.. (was NUM_CANS) 
+	public static final int NUM_CANS = BASE + 11; // TODO: confirm.. (was
+													// NUM_CANS)
+	public static final int SCALE_TOTAL = BASE + 12; // TODO: confirm.. (was
+														// NUM_CANS)
 	public static final int ATTR_COUNT = BASE + 13;
 
 	private String[] attributes = new String[ATTR_COUNT];
 	boolean valid;
 
 	protected String getAttr(int attr) {
-		check (attr < ATTR_COUNT);
+		check(attr < ATTR_COUNT);
 		return attributes[attr];
 	}
 
 	public void setAttr(int attr, String s) {
-		check (attr < ATTR_COUNT);
+		check(attr < ATTR_COUNT);
 		attributes[attr] = s;
 	}
 
@@ -66,8 +68,8 @@ public class RawScaleRecord {
 		String params[] = new String[] { transactionDate, transactionTime, dairyCode, scaleSerial, operatorCode,
 				tripNumber, sessionCode, routeNumber, centerNumber, memberNumber, quantity, binNumber, scaleTotal };
 
-		check(params.length == ATTR_COUNT) ;
-		
+		check(params.length == ATTR_COUNT);
+
 		for (int i = 0; i < ATTR_COUNT; i++) {
 			setAttr(i, params[i]);
 		}
@@ -84,19 +86,19 @@ public class RawScaleRecord {
 	}
 
 	/**
-	 * Base simply checks that all attributes have been set. 
+	 * Base simply checks that all attributes have been set.
 	 * 
 	 * Subclasses should override to perform more meaningful validation.
 	 */
-	protected void validate()  {
+	protected void validate() {
 		boolean valid = true;
 		for (int i = 0; i < ATTR_COUNT; i++) {
 			valid = getAttr(i) != null;
 			if (getAttr(i) == null) {
 				setValid(false);
+				break;
 			}
 		}
-		setValid(valid);
 	}
 
 	public String getTransactionDate() {
@@ -197,22 +199,22 @@ public class RawScaleRecord {
 
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
-		buf.append("memberNumber: " ).append( getMemberNumber() ).append(", ");
-		buf.append("transactionDate: " ).append( getTransactionDate() ).append(", ");
-		buf.append("transactionTime: " ).append( getTransactionTime() ).append(", ");
-		buf.append("dairyCode: " ).append( getDairyCode() ).append(", ");
-		buf.append("scaleSerial: " ).append( getScaleSerial() ).append(", ");
-		buf.append("operatorCode: " ).append( getOperatorCode() ).append(", ");
-		buf.append("tripNumber: " ).append( getTripNumber() ).append(", ");
-		buf.append("sessionCode: " ).append( getSessionCode() ).append(", ");
-		buf.append("routeNumber: " ).append( getRouteNumber() ).append(", ");
-		buf.append("centerNumber: " ).append( getCenterNumber() ).append(", ");
-		buf.append("memberNumber: " ).append( getMemberNumber() ).append(", ");
-		buf.append("quantity: " ).append( getQuantity() ).append(", ");
-		buf.append("binNumber: " ).append( getNumCans() ).append(", ");
-		return buf.toString();		
+		buf.append("memberNumber: ").append(getMemberNumber()).append(", ");
+		buf.append("transactionDate: ").append(getTransactionDate()).append(", ");
+		buf.append("transactionTime: ").append(getTransactionTime()).append(", ");
+		buf.append("dairyCode: ").append(getDairyCode()).append(", ");
+		buf.append("scaleSerial: ").append(getScaleSerial()).append(", ");
+		buf.append("operatorCode: ").append(getOperatorCode()).append(", ");
+		buf.append("tripNumber: ").append(getTripNumber()).append(", ");
+		buf.append("sessionCode: ").append(getSessionCode()).append(", ");
+		buf.append("routeNumber: ").append(getRouteNumber()).append(", ");
+		buf.append("centerNumber: ").append(getCenterNumber()).append(", ");
+		buf.append("memberNumber: ").append(getMemberNumber()).append(", ");
+		buf.append("quantity: ").append(getQuantity()).append(", ");
+		buf.append("binNumber: ").append(getNumCans()).append(", ");
+		return buf.toString();
 	}
-	
+
 	private final void check(boolean isTrue) {
 		if (DEBUG && !isTrue) {
 			throw new IllegalStateException("assertion failed!");

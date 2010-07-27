@@ -2,8 +2,12 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +25,12 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
@@ -87,16 +93,35 @@ final class ScaleImportAction implements IActionListener {
 
 						boolean dbConsistent = validateDbLookups(importRecord);
 
-						importRecord.setFlagged(scaleRecord.isValid() && dbConsistent && journalConsistent);
+						if (journalPage.getJournalDate() == null) {
+							System.err.printf("date: %s, truncDate: %s\n", importRecord.getCollectionTime(),
+									truncateTime(importRecord.getCollectionTime()));
+							journalPage.setJournalDate(truncateTime(importRecord.getCollectionTime()));
+						}
+						importRecord.setFlagged(importRecord.getValidatedMember() != null && importRecord.getQuantity() != null );
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
 				}
 
+				System.err.printf("Import completed with %d pages\n", pageMap.size());
+				int i = 0;
 				for (CollectionJournalPage page : pageMap.values()) {
-					createCollectionDetailNode(milkCollectionLogController.getNavigationNode(), page);
+					System.err.printf("  page %d: %s - %d entries\n", ++i, page, page.getJournalEntries().size());
+					page.setStatus(JournalStatus.PENDING);
+					setPageJournalDate(page);
+					setPageTotals(page);
+					setDriver(page);
+					System.err.printf("  page %d: %s\n", i, page);
+					// }
+					try {
+						DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(page);
+						DairyRepository.getInstance().save();
+					} catch (Exception e) {
+						e.getMessage();
+					}
 				}
-				
+				milkCollectionLogController.refreshTableContents();
 			} catch (IOException e) {
 				// TODO: error message
 				this.milkCollectionLogController.getInfoFlyout().addInfo(
@@ -108,6 +133,72 @@ final class ScaleImportAction implements IActionListener {
 					new Status(0, Activator.PLUGIN_ID, "File Error"), 0);
 			dlg.open();
 		}
+
+	}
+
+	private void setPageJournalDate(CollectionJournalPage page) {
+		if (page.getJournalDate() == null) {
+			for (CollectionJournalLine line : page.getJournalEntries()) {
+				ScaleImportRecord importRec = (ScaleImportRecord) line;
+				if (importRec.getCollectionTime() != null) {
+					page.setJournalDate(importRec.getCollectionTime());
+					break;
+				}
+			}
+			if (page.getJournalDate() == null) {
+				System.err.println("------ ERR: no date");
+				page.setJournalDate(new Date());
+			}
+		}
+	}
+
+	private void setPageTotals(CollectionJournalPage page) {
+		BigDecimal quantity = new BigDecimal(0);
+		int numSuspended = 0, numRejected = 0;
+		for (CollectionJournalLine line : page.getJournalEntries()) {
+			quantity = quantity.add(line.getQuantity());
+			if (line.isFlagged()) numSuspended++;
+			if (line.isRejected()) numRejected++;
+		}
+		page.setRecordTotal(quantity);
+		page.setEntryCount(page.getJournalEntries().size());
+		page.setDriverTotal(quantity);
+		page.setRejectedCount(numRejected);
+		page.setSuspendedCount(numSuspended);
+	}
+
+	private void setDriver(CollectionJournalPage page) {
+		if(page.getDriver()== null) {
+			LinkedList<String> codes = new LinkedList<String>();
+			for (CollectionJournalLine line : page.getJournalEntries()) {
+				ScaleImportRecord rec = (ScaleImportRecord) line;
+				String operatorCode = rec.getOperatorCode();
+				if (operatorCode != null) {
+					codes.add(operatorCode);
+				}
+			}
+			for (String code : codes) {
+				for (Employee emp : dairyRepo.getLocalDairy().getEmployees()) {
+					if (code.equals(emp.getOperatorCode())) {
+						page.setDriver(emp);
+						return;
+					}
+				}
+			}
+			// fallback to employee #1
+			System.err.println("WARNING: Unable to assign driver based on codes. Falling back to first Employee");
+			page.setDriver(dairyRepo.getLocalDairy().getEmployees().get(0));
+		}
+	}
+	
+	private Date truncateTime(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal.getTime();
 	}
 
 	/**
@@ -229,18 +320,20 @@ final class ScaleImportAction implements IActionListener {
 	}
 
 	private void createCollectionDetailNode(INavigationNode<?> currentNode, CollectionJournalPage journalPage) {
-		currentNode.navigate(
-							new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
-		 new NavigationArgument(journalPage));
+		currentNode.navigate(new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
+				new NavigationArgument(journalPage));
 
-//		final ISubModuleNode detailViewNode = new SubModuleNode(new NavigationNodeId("scale-data-review-node",
-//				journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
-//		detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
-//		detailViewNode.setContext("IMPORTED_RECORDS", journalPage); // backup..
-//		WorkareaManager.getInstance()
-//				.registerDefinition(detailViewNode, ScaleImportViewController.class, ScaleDataImportView.ID)
-//				.setRequiredPreparation(true);
-//		return detailViewNode;
+		// final ISubModuleNode detailViewNode = new SubModuleNode(new
+		// NavigationNodeId("scale-data-review-node",
+		//				journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
+		//		detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
+		// detailViewNode.setContext("IMPORTED_RECORDS", journalPage); //
+		// backup..
+		// WorkareaManager.getInstance()
+		// .registerDefinition(detailViewNode, ScaleImportViewController.class,
+		// ScaleDataImportView.ID)
+		// .setRequiredPreparation(true);
+		// return detailViewNode;
 	}
 
 }
