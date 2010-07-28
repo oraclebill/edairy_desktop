@@ -12,6 +12,7 @@ import org.eclipse.riena.ui.ridgets.IValueRidget;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
@@ -52,6 +53,9 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__ID));
 		employeeId.setOutputOnly(false);
 		employeeId.setFocusable(false);
+		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
+			employeeId.updateFromModel();
+		}
 
 		// company name
 		familyName = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_FAMILY_NAME);

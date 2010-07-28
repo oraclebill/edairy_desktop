@@ -9,9 +9,8 @@ final class ContactNameColumnFormatter extends ColumnFormatter {
 	public String getText(Object element) {
 		if (element instanceof Company) {
 			final Company supplier = (Company) element;
-			if (supplier.getContacts().size() > 0) {
-				return supplier.getContacts().get(0).getGivenName() + " "
-						+ supplier.getContacts().get(0).getFamilyName();
+			if (supplier.getContactMethods().size() > 0) {
+				return supplier.getContactMethods().get(0).getCmType().toString();
 			}
 		}
 		return null;
