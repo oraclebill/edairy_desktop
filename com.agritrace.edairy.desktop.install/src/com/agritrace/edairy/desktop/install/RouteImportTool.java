@@ -1,22 +1,22 @@
 package com.agritrace.edairy.desktop.install;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
-import com.csvreader.CsvReader;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -24,134 +24,96 @@ import com.csvreader.CsvReader;
  * @author bjones
  * 
  */
-public class RouteImportTool {
-
+public class RouteImportTool extends AbstractImportTool {
 
 	public static final int BASE = 0;
 	public static final int ROUTE_CODE = BASE;
 	public static final int ROUTE_NAME = BASE + 1;
 	public static final int ROUTE_DESCRIPTION = BASE + 2;
 
-	private static final Entry[] fieldMap = { 
-		new Entry(ROUTE_CODE ,  DairyPackage.Literals.ROUTE__CODE ),
-		new Entry(ROUTE_NAME ,  DairyPackage.Literals.ROUTE__NAME ),
-		new Entry(ROUTE_DESCRIPTION ,  DairyPackage.Literals.ROUTE__DESCRIPTION ),
-	};
-	
-	private static final int[] mandatoryFields = { 
-		ROUTE_CODE, ROUTE_NAME
-	};
-	
-	private Reader reader;
-	private Dairy dairy;
+	private static final Entry[] fieldMap = {
+			new Entry(ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE),
+			new Entry(ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME),
+			new Entry(ROUTE_DESCRIPTION,
+					DairyPackage.Literals.ROUTE__DESCRIPTION), };
+
+	private static final int[] mandatoryFields = { ROUTE_CODE, ROUTE_NAME };
+
+	private Collection<Route> routes;
+	private Map<String, List<String[]>> failedRecords;
+	private Map<String, Object> routeCache;
+
 	private int count = 0, errCount = 0;
 
-	public RouteImportTool(Dairy dairy, File f) throws FileNotFoundException {
-		this(dairy, new FileReader(f));
-	}
+	public RouteImportTool(InputStream input, List<Route> routes,
+			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
+		super(new InputStreamReader(input));
+		setMonitor(monitor);
+		
+		this.routes = routes;
+		this.failedRecords = errors;
 
-	public RouteImportTool(Dairy dairy, InputStream f) {
-		this(dairy, new InputStreamReader(f));
-	}
-
-	public RouteImportTool(Dairy dairy, Reader reader) {
-		this.dairy = dairy;
-		this.reader = reader;
-	}
-
-	public void processFile() throws IOException {
-		CsvReader csvReader = new CsvReader(reader);
-		String[] headers = csvReader.getHeaders();
-		validateHeaders(headers);
-		while (csvReader.readRecord()) {
-			String[] values = csvReader.getValues();
-			try {
-				validateRecord(values);
-				Route entity = createEntityFromRecord(values);
-				validateEntity(entity);
-				doImportRecord(entity);
-				count++;
-			} catch (Exception e) {
-				errCount++;
-				doImportRecordFailed(csvReader.getValues(), e);
-			}
+		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		routeCache = new HashMap<String, Object>();
+		for (Route route : dairy.getRoutes()) {
+			routeCache.put(route.getCode(), route);
 		}
-		doImportComplete();
+		
 	}
-
-	protected Route createEntityFromRecord(String[] values) {
-		Route vehicle = DairyFactory.eINSTANCE.createRoute();
-//		EMFUtil.populate(vehicle);
-		for (Entry entry : fieldMap) {
-			String value = values[entry.field];
-			Object converted = convert(entry.feature, value);
-			System.err.printf("Setting %s: '%s'\n", entry.feature.getName(), converted);
-			vehicle.eSet(entry.feature, converted);
-		}
-		return vehicle;
-	}
-
-	protected void doImportComplete() {
-		System.out.printf("Processed %d records with %d failures\n", count + errCount, errCount);
-	}
-
-	private void validateHeaders(String[] headers) {
-		// TODO Auto-generated method stub
-
+	
+	@Override
+	protected String[] getExpectedHeaders() {
+		return new String[] { "code", "name", null, null, "scale", null };
 	}
 
 	protected void validateRecord(String[] values) {
-		String val;
-		for ( int i : mandatoryFields ) {
-			val = values[i];
-			if (val == null || val.trim().length() == 0) {
-				throw new ValidationException("missing mandatory field " + i);
-			}
+		super.validateRecord(values);
+		Object route = routeCache.get(values[ROUTE_CODE]);
+		if (route instanceof Route) {
+			throw new ValidationException("Route exists in database.");
 		}
+		if (route instanceof String[]) {
+			throw new ValidationException("Duplicate route during import.");
+		}
+		routeCache.put(values[ROUTE_CODE], values);
+	}
+	
+	protected int[] getMandatoryFieldIndexes() {
+		return mandatoryFields;
 	}
 
-	protected void validateEntity(Route vehicle) {
-		if (vehicle.getCode() == null || vehicle.getName() == null) { 
-			throw new ValidationException();
-		}
-		System.err.println(vehicle);
-	}
-
-	protected void doImportRecord(Route vehicle) {
-		if (dairy != null) {
-			dairy.getRoutes().add(vehicle);
-		}
-		else {
-			System.out.println(vehicle);
-		}
+	@Override
+	protected void saveImportedEntity(Object entity) {
+		count++;
+		routes.add((Route)entity);
 	}
 
 	protected void doImportRecordFailed(String[] values, Exception e) {
-		e.printStackTrace();
+		errCount++;
+		String message = e.getMessage();
+		List<String[]> records = failedRecords.get(message);
+		if (records == null) {
+			records = new LinkedList<String[]>();
+			failedRecords.put(message, records);
+		}
+		records.add(values);
 	}
 
-	protected Object convert(EStructuralFeature feature, String value) {
-		Class<?> instanceClass = feature.getEType().getInstanceClass();
-		Object retVal = value;
-		if (Date.class.isAssignableFrom(instanceClass)) {
-			try {
-				retVal = new Date(value);
-			} catch (Exception e) {
-				retVal = null;
-			}
-		}
-		else if (Integer.class.isAssignableFrom(instanceClass)) {
-			System.err.println(">> Converting from " + value + " ("+ instanceClass + ") to Integer");
-			try {
-				retVal = new Integer(value);
-			} catch (Exception e) {
-				retVal = null;
-			}
-		}
-		return retVal;
+
+	@Override
+	protected EObject createBlankEntity() {
+		return DairyFactory.eINSTANCE.createRoute();
 	}
 
-	public static void main(String[] args) throws Exception {
-		new RouteImportTool(DairyRepository.getInstance().getLocalDairy(), new File(args[0])).processFile();
+	@Override
+	protected List<Entry> getFields() {
+		return Arrays.asList(fieldMap);
 	}
+
+	@Override
+	protected void doImportComplete(int okCount, int failCount) {
+
+	}
+
+
 }

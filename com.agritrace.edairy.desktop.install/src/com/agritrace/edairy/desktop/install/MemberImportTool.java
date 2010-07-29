@@ -43,7 +43,6 @@ public class MemberImportTool extends AbstractImportTool {
 	private Map<String, Route> routeCache = new HashMap<String, Route>();
 	private Collection<Membership> memberCollection;
 	private Map<String, List<String[]>> failedRecords;
-	private IProgressMonitor monitor;
 	public int count = 0;
 	public int errors = 0;
 
@@ -51,7 +50,7 @@ public class MemberImportTool extends AbstractImportTool {
 			Map<String, List<String[]>> failedRecords, IProgressMonitor monitor) throws FileNotFoundException, IOException {
 
 		super(new InputStreamReader(stream));
-		this.monitor = monitor;
+		setMonitor(monitor);
 		this.memberCollection = memberCollection;
 		this.failedRecords = failedRecords;
 
@@ -64,29 +63,8 @@ public class MemberImportTool extends AbstractImportTool {
 		}
 	}
 
-	private void worked(int i) {
-		if (monitor != null) {
-			if(i % 10 == 0)
-			monitor.worked(10);
-			monitor.setTaskName("Imports: " + count + ", Errors: " + errors);
-		}
-	}
-
-	private void checkCancelled() {
-		if (monitor != null) {
-			if(monitor.isCanceled()) throw new RuntimeException("Cancelled!");
-		}
-	}
-
-	private void done() {
-		if (monitor != null) {
-			monitor.done();
-		}
-	}
-
 	@Override
 	protected void processRecord(String[] values) {
-		checkCancelled();
 		count += 1;
 		// validate
 		Membership membership = memberCache.get(values[MEMBER_NUMBER]);
@@ -101,8 +79,6 @@ public class MemberImportTool extends AbstractImportTool {
 				addFailure(e.getMessage(), values);
 			}
 		}
-
-		worked(count);
 	}
 
 	private void addFailure(String message, String[] values) {
@@ -151,7 +127,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 	@Override
 	protected void doImportComplete(int okCount, int failCount) {
-		done();
+//		done();
 	}
 
 	private static Date getDefaultDate() {
@@ -173,10 +149,6 @@ public class MemberImportTool extends AbstractImportTool {
 				"family-name" };
 	}
 
-	@Override
-	protected void validateEntity(EObject obj) {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	protected EObject createBlankEntity() {

@@ -1,18 +1,26 @@
 package com.agritrace.edairy.desktop.install.handlers;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.install.RouteImportTool;
+import com.agritrace.edairy.desktop.install.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
@@ -21,7 +29,95 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class ImportRoutesHandler extends AbstractHandler {
+public class ImportRoutesHandler extends HandlerBase {
+
+	ExecutionEvent event;
+
+	private class RouteImportProcess extends UIProcess {
+		final File importFile;
+		final int lineCount;
+		private List<String> msgList;
+		private List<Route> routes;
+		private Map<String, List<String[]>> errors;
+
+		public RouteImportProcess(File importFile, int lineCount,
+				Object navigationNode) {
+			super("Import Members", true, navigationNode);
+			this.importFile = importFile;
+			this.lineCount = lineCount;
+			msgList = new LinkedList<String>();
+		}
+
+		@Override
+		public void initialUpdateUI(int totalWork) {
+			super.initialUpdateUI(totalWork);
+		}
+
+		@Override
+		public void finalUpdateUI() {
+			boolean importEnabled = routes.size() > 0;
+			ImportResultsDialog irDialog = new ImportResultsDialog(
+					HandlerUtil.getActiveShell(event), msgList, importEnabled);
+			if (irDialog.open() == Dialog.OK) {
+				saveRoutes(routes);
+			}
+		}
+
+		@Override
+		public boolean runJob(IProgressMonitor monitor) {
+			InputStream input = null;
+			try {
+				monitor.beginTask("Routes Import", lineCount);
+				monitor.subTask("Reading input file...");
+
+				input = new BufferedInputStream(new FileInputStream(importFile));
+
+				monitor.subTask("Importing records...");
+				
+				routes = new LinkedList<Route>();
+				errors = new HashMap<String, List<String[]>>();
+
+				RouteImportTool tool = new RouteImportTool(input, routes, errors, monitor);
+//				tool.setMonitorDelta(lineCount / 2);
+				tool.processFile();
+
+				msgList.add(String.format(
+						"%-4d records imported successfully.", routes.size()));
+				for (String err : errors.keySet()) {
+					msgList.add(String.format(
+							"%-4d records failed with a '%s' error.", errors
+									.get(err).size(), err));
+				}
+				monitor.setTaskName("Saving members...");
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				monitor.done();
+				if (input != null) {
+					try {
+						input.close();
+					} catch (IOException ioe) {
+						;
+					}
+				}
+			}
+
+			return true;
+		}
+
+		private void saveRoutes(List<Route> successes2) {
+			DairyRepository.getInstance().getLocalDairy().getRoutes()
+					.addAll(successes2);
+			DairyRepository.getInstance().save();
+		}
+
+	}
+
 	/**
 	 * The constructor.
 	 */
@@ -33,21 +129,22 @@ public class ImportRoutesHandler extends AbstractHandler {
 	 * from the application context.
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		FileDialog fileDialog = new FileDialog(window.getShell(), SWT.OPEN | SWT.SHEET);
-		fileDialog.setFilterExtensions(new String[] { "*.csv", });
-		String importFileName = fileDialog.open();
-		DairyRepository dairyRepo = DairyRepository.getInstance();
-		Dairy dairy = dairyRepo.getLocalDairy();
+		this.event = event;
+
+		Object navigationContext = getNavigationContext(event);
 		try {
-			RouteImportTool importTool = new RouteImportTool(dairy, new File(importFileName));
-			importTool.processFile();
-			dairyRepo.save(dairy);
-		}
-		catch(Exception e) {
+
+			File importFile = new File(getImportFile(event));
+			int lineCount = countLines(importFile);
+			UIProcess process = new RouteImportProcess(importFile, lineCount,
+					navigationContext);
+
+			process.setTitle("Import Routes");
+			process.setNote("Importing...");
+			process.start();
+		} catch (Exception e) {
 			throw new ExecutionException("Import operation failed.", e);
 		}
-		MessageDialog.openInformation(window.getShell(), "Status", "Import completed successfully");
 		return null;
 	}
 }

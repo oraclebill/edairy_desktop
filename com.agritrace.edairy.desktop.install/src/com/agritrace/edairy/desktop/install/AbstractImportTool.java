@@ -10,6 +10,8 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.equinox.log.Logger;
 
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +26,8 @@ public abstract class AbstractImportTool {
 	protected Reader reader;
 	private int count = 0;
 	private int errCount = 0;
+	private IProgressMonitor monitor;
+
 
 	public AbstractImportTool() {
 		super();
@@ -47,6 +51,7 @@ public abstract class AbstractImportTool {
 		String[] headers = csvReader.getValues();
 		validateHeaders(headers);
 		while (csvReader.readRecord()) {
+			checkCancelled();
 			String[] values = csvReader.getValues();
 			try {
 				processRecord(values);
@@ -56,6 +61,7 @@ public abstract class AbstractImportTool {
 				log(LogService.LOG_WARNING, "%s error importing record: %s", e.getMessage(), Arrays.toString(values));
 				doImportRecordFailed(values, e);
 			}
+			worked(count+errCount);
 		}
 		System.out.printf("Processed %d records with %d failures\n", count + errCount, errCount);
 		doImportComplete(count, errCount);
@@ -64,14 +70,17 @@ public abstract class AbstractImportTool {
 	protected void processRecord(String[] values) {
 		validateRecord(values);
 		EObject entity = createEntityFromRecord(values);
-		validateEntity(entity);
 		saveImportedEntity(entity);
 	}
 
 	abstract protected void saveImportedEntity(Object entity);
 
 	protected EObject createEntityFromRecord(String[] values) {
-		EObject entity = createBlankEntity();
+		EObject entity = createBlankEntity();		
+		return initializeEntityFromRecord( entity,  values);		
+	}
+	
+	protected EObject initializeEntityFromRecord(EObject entity, String[] values) {		
 		// EMFUtil.populate(vehicle);
 		for (Entry entry : getFields()) {
 			String value = values[entry.field];
@@ -140,8 +149,6 @@ public abstract class AbstractImportTool {
 		throw new UnsupportedOperationException("unimplemented");
 	}
 
-	abstract protected void validateEntity(EObject obj);
-
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		e.printStackTrace();
 	}
@@ -165,9 +172,38 @@ public abstract class AbstractImportTool {
 		}
 		return retVal;
 	}
+	
+	protected void setMonitor(IProgressMonitor monitor) {
+		this.monitor = monitor;
+	}
+	
+	protected IProgressMonitor getMonitor() {
+		return this.monitor;
+	}
+	
 
+	
 	public void log(int level, String message, Object... args) {
 		final Logger logger = Log4r.getLogger(getClass());
 		logger.log(level, String.format(message, args));
+	}
+
+	private 	int delta = 1;
+	public void setMonitorDelta(int delta) {
+		this.delta = delta;
+	}
+	
+	protected void worked(int cumulativeWork) {
+		if (monitor != null) {
+			if(cumulativeWork % delta == 0)
+				monitor.worked(delta);
+//			monitor.setTaskName("Imports: " + count + ", Errors: " + errCount);
+		}
+	}
+
+	protected void checkCancelled() {
+		if (monitor != null) {
+			if(monitor.isCanceled()) throw new RuntimeException("Cancelled!");
+		}
 	}
 }

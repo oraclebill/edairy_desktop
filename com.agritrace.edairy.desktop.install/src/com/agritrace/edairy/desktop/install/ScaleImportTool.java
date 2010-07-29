@@ -63,12 +63,6 @@ public class ScaleImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void validateEntity(EObject obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void saveImportedEntity(Object entity) {
 		// TODO Auto-generated method stub
 	}

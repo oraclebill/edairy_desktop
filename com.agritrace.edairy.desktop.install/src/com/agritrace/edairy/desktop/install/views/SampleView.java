@@ -173,21 +173,21 @@ public class SampleView extends ViewPart {
 				Dairy dairy = DairyRepository.getInstance().getLocalDairy();
 				File file = new File("/Users/bjones/Development/Projects/edairy_desktop/test-data/employees/Employees.csv");
 				try {
-					EmployeeImportTool tool = new EmployeeImportTool(dairy, file) {
-
-						@Override
-						protected void validateEmployee(Employee employee) {
-							super.validateEmployee(employee);
-							
-						}
-						@Override
-						protected void doImportRecord(Employee employee) {
-							super.doImportRecord(employee);
-							System.err.println("Employee added - " + employee);
-						}
-							
-					};
-					
+//					EmployeeImportTool tool = new EmployeeImportTool(dairy, file) {
+//
+//						@Override
+//						protected void validateEmployee(Employee employee) {
+//							super.validateEmployee(employee);
+//							
+//						}
+//						@Override
+//						protected void doImportRecord(Employee employee) {
+//							super.doImportRecord(employee);
+//							System.err.println("Employee added - " + employee);
+//						}
+//							
+//					};
+					EmployeeImportTool tool = null;
 					tool.processFile();
 					DairyRepository.getInstance().save(dairy);
 				

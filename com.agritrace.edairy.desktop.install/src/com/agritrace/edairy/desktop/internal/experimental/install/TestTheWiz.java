@@ -43,6 +43,7 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.install.AbstractImportTool;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
 import com.agritrace.edairy.desktop.install.handlers.HandlerBase;
 
@@ -189,7 +190,7 @@ public class TestTheWiz {
 						try {
 							monitor.beginTask("Importing..", max);
 							stream = new FileInputStream(new File(fileName));
-							MemberImportTool importTool = new MemberImportTool(stream, members, map, monitor);
+							AbstractImportTool importTool = new MemberImportTool(stream, members, map, monitor);
 							importTool.processFile();
 						} catch (FileNotFoundException e) {
 							// TODO Auto-generated catch block

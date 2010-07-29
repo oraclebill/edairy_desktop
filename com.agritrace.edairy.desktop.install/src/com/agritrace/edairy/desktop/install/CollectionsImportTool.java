@@ -84,10 +84,6 @@ public class CollectionsImportTool extends AbstractImportTool {
 	}
 
 	@Override
-	protected void validateEntity(EObject object) {
-	}
-
-	@Override
 	protected void saveImportedEntity(Object entity) {
 		if (dairy != null) {
 			dairy.getCollectionJournals().add((CollectionJournalPage) entity);

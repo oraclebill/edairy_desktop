@@ -1,22 +1,23 @@
 package com.agritrace.edairy.desktop.install;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.csvreader.CsvReader;
 
@@ -26,7 +27,7 @@ import com.csvreader.CsvReader;
  * @author bjones
  * 
  */
-public class EmployeeImportTool {
+public class EmployeeImportTool extends AbstractImportTool {
 
 	public static final int BASE = 0;
 	public static final int EMPLOYEE_ID = BASE;
@@ -39,7 +40,8 @@ public class EmployeeImportTool {
 	public static final int NSSF_NUMBER = BASE + 7;
 	public static final int NHIF_NUMBER = BASE + 8;
 
-	private static final Entry[] fieldMap = { new Entry(EMPLOYEE_ID, DairyPackage.Literals.EMPLOYEE__ID),
+	private static final Entry[] fieldMap = {
+			new Entry(EMPLOYEE_ID, DairyPackage.Literals.EMPLOYEE__ID),
 			new Entry(GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME),
 			new Entry(MIDDLE_NAME, ModelPackage.Literals.PERSON__MIDDLE_NAME),
 			new Entry(FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME),
@@ -48,97 +50,111 @@ public class EmployeeImportTool {
 			new Entry(NATIONAL_ID, DairyPackage.Literals.EMPLOYEE__NATIONAL_ID),
 			new Entry(NSSF_NUMBER, DairyPackage.Literals.EMPLOYEE__NSSF_NUMBER),
 			new Entry(NHIF_NUMBER, DairyPackage.Literals.EMPLOYEE__NHIF_NUMBER), };
+	
+	String[] expectedHeaders = { "employee id","given name","middle name","family name","job title","date started","national id","nssf number","nhif number" };
 
+	final private List<Employee> empList;
+	final Map<String, List<String[]>> errors;
+	final private IProgressMonitor monitor;
+	final private Map<String, Object> employeeCache;
+	
 	private Reader reader;
-	private Dairy dairy;
 	private int count = 0, errCount = 0;
 
-	public EmployeeImportTool(Dairy dairy, File f) throws FileNotFoundException {
-		this(dairy, new FileReader(f));
-	}
+	
+	public EmployeeImportTool(InputStream input, List<Employee> successes,
+			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
+		this.empList = successes;
+		this.errors = errors;
+		this.monitor = monitor;
 
-	public EmployeeImportTool(Dairy dairy, InputStream f) {
-		this(dairy, new InputStreamReader(f));
-	}
-
-	public EmployeeImportTool(Dairy dairy, Reader reader) {
-		this.dairy = dairy;
-		this.reader = reader;
+		reader = new BufferedReader(new InputStreamReader(input));
+		
+		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		employeeCache = new HashMap<String, Object>();
+		for (Employee member : dairy.getEmployees()) {
+			employeeCache.put(member.getId(), member);
+		}
 	}
 
 	public void processFile() throws IOException {
 		CsvReader csvReader = new CsvReader(reader);
-		String[] headers = csvReader.getHeaders();
+		csvReader.readRecord();
+		String[] headers = csvReader.getValues();
 		validateHeaders(headers);
 		while (csvReader.readRecord()) {
+			checkCancelled();
 			String[] values = csvReader.getValues();
 			try {
 				validateCurrentRecord(values);
 				Employee employee = DairyFactory.eINSTANCE.createEmployee();
-//				EMFUtil.populate(employee);
+				// EMFUtil.populate(employee);
 				for (Entry entry : fieldMap) {
 					String value = csvReader.get(entry.field);
 					employee.eSet(entry.feature, convert(entry.feature, value));
 				}
 				count++;
-				validateEmployee(employee);
-				doImportRecord(employee);
+				empList.add(employee);
 
 			} catch (Exception e) {
 				errCount++;
 				doImportRecordFailed(csvReader.getValues(), e);
 			}
+			worked(count + errCount);
 		}
-		doImportComplete();
-	}
-
-	protected void doImportComplete() {
-		System.out.printf("Processed %d records with %d failures\n", count + errCount, errCount);
-	}
-
-	private void validateHeaders(String[] headers) {
-		// TODO Auto-generated method stub
-
 	}
 
 	protected void validateCurrentRecord(String[] values) {
 		String val = values[EMPLOYEE_ID];
 		if (val == null || val.trim().length() == 0)
-			throw new ValidationException("null id");
-	}
-
-	protected void validateEmployee(Employee employee) {
-
-	}
-
-	protected void doImportRecord(Employee employee) {
-		if (dairy != null) {
-			employee.setLocation(DairyUtil.createLocation(null, null,null));
-			dairy.getEmployees().add(employee);
+			throw new ValidationException("Record has no ID");
+		Object obj = employeeCache.get(val);
+		if (obj instanceof Employee) {
+			throw new ValidationException("Employee ID already exists in database.");
 		}
-		else {
-			System.out.println(employee);
+		if (obj instanceof String[]) {
+			throw new ValidationException("Duplicate ID in import batch.");
 		}
+		employeeCache.put(val, values);
 	}
 
 	protected void doImportRecordFailed(String[] values, Exception e) {
-		e.printStackTrace();
-	}
-
-	private Object convert(EStructuralFeature feature, String value) {
-		Class<?> instanceClass = feature.getEType().getInstanceClass();
-		Object retVal = value;
-		if (Date.class.isAssignableFrom(instanceClass)) {
-			try {
-				retVal = new Date(value);
-			} catch (Exception e) {
-				retVal = null;
-			}
+		List<String[]> recList = errors.get(e.getMessage());
+		if (recList == null) {
+			recList = new LinkedList<String[]>();
+			errors.put(e.getMessage(), recList);
 		}
-		return retVal;
+		recList.add(values);
 	}
 
-	public static void main(String[] args) throws Exception {
-		new EmployeeImportTool(DairyRepository.getInstance().getLocalDairy(), new File(args[0])).processFile();
+
+	@Override
+	protected void saveImportedEntity(Object entity) {
+		// TODO Auto-generated method stub
+
 	}
+
+	@Override
+	protected EObject createBlankEntity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Entry> getFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void doImportComplete(int okCount, int failCount) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected String[] getExpectedHeaders() {
+		return expectedHeaders;
+	}
+
 }

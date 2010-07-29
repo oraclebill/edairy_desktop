@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.install.dialogs;
 
 import java.util.List;
 

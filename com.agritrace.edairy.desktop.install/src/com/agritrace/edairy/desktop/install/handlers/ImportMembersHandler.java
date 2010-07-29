@@ -16,11 +16,13 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.riena.ui.core.uiprocess.ProcessInfo.ProgresStrategy;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
+import com.agritrace.edairy.desktop.install.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
@@ -64,13 +66,15 @@ public class ImportMembersHandler extends HandlerBase {
 			InputStream input = null;
 			try {
 				monitor.beginTask("Member Import", lineCount);
-				monitor.subTask("Reading input file...");
+				setNote("Reading input file...");
+				
 				
 				input = new BufferedInputStream(new FileInputStream(importFile));
 				
-				monitor.subTask("Importing records...");
-				new MemberImportTool(input, successes, errors, monitor)
-						.processFile();
+				setNote("Importing " + lineCount + " members...");
+				MemberImportTool tool = new MemberImportTool(input, successes, errors, monitor);
+				tool.setMonitorDelta(lineCount / 100);
+				tool.processFile();
 
 				msgList.add(String.format("%-4d records imported successfully.",
 						successes.size()));
@@ -78,8 +82,7 @@ public class ImportMembersHandler extends HandlerBase {
 					msgList.add(String.format("%-4d records failed with a '%s' error.",
 							errors.get(err).size(), err));
 				}
-				monitor.setTaskName("Saving members...");
-
+				setNote("Saving members...");
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
