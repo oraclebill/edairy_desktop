@@ -55,13 +55,9 @@ public class DairyProfileViewController extends SubModuleController {
 				validateProfile();
 				dairyRepository.updateDairy();
 				updateBindings();
-				getInfoFlyout().addInfo(
-						new InfoFlyoutData("message",
-								"Dairy profile updated successfully."));
+				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Dairy profile updated successfully."));
 			} catch (Exception e) {
-				getInfoFlyout().addInfo(
-						new InfoFlyoutData("message",
-								"Error updating dairy profile!"));
+				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
 			}
 		}
 
@@ -70,8 +66,7 @@ public class DairyProfileViewController extends SubModuleController {
 			synchronized (localDairy.getContactMethods()) {
 				List<ContactMethod> emptyMethods = new LinkedList<ContactMethod>();
 				for (ContactMethod method : localDairy.getContactMethods()) {
-					if (method.getCmValue() == null
-							|| method.getCmValue().trim().length() == 0) {
+					if (method.getCmValue() == null || method.getCmValue().trim().length() == 0) {
 						emptyMethods.add(method);
 					}
 				}
@@ -83,8 +78,7 @@ public class DairyProfileViewController extends SubModuleController {
 	public static final String ID = DairyProfileViewController.class.getName();
 	private IActionRidget cancelAction;
 	private IContactMethodsGroupRidget contactsGroup;
-	private final IDairyRepository dairyRepository = DairyRepository
-			.getInstance();
+	private final IDairyRepository dairyRepository;
 	private Dairy localDairy;
 
 	private LocationProfileWidgetController locationController;
@@ -120,6 +114,7 @@ public class DairyProfileViewController extends SubModuleController {
 	 */
 	public DairyProfileViewController() {
 		super();
+		dairyRepository = DairyRepository.getInstance();
 		localDairy = dairyRepository.getLocalDairy();
 	}
 
@@ -143,8 +138,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 		configureInfoPanelRidgets();
 		locationController = new LocationProfileWidgetController(this);
-		contactsGroup = getRidget(IContactMethodsGroupRidget.class,
-				DairyProfileViewWidgetID.CONTACT_METHODS);
+		contactsGroup = getRidget(IContactMethodsGroupRidget.class, DairyProfileViewWidgetID.CONTACT_METHODS);
 
 		configureButtonsPanel();
 	}
@@ -191,54 +185,36 @@ public class DairyProfileViewController extends SubModuleController {
 		// top panel
 		txtID = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ID);
 		txtID.setOutputOnly(true);
-		txtNAME = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_NAME);
-		txtNAME.addValidationRule(new RequiredField(),
-				ValidationTime.ON_UI_CONTROL_EDIT);
+		txtNAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NAME);
+		txtNAME.addValidationRule(new RequiredField(), ValidationTime.ON_UI_CONTROL_EDIT);
 
-		txtPHONE = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_PHONE_NUMBER);
-		txtPHONE.addValidationRule(new RequiredField(),
-				ValidationTime.ON_UPDATE_TO_MODEL);
+		txtPHONE = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PHONE_NUMBER);
+		txtPHONE.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
-		txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
-		txtPUBLIC_DESCRIPTION.addValidationRule(new RequiredField(),
-				ValidationTime.ON_UPDATE_TO_MODEL);
+		txtPUBLIC_DESCRIPTION = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION);
+		txtPUBLIC_DESCRIPTION.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
-		txtESTABLISHED_DATE = getRidget(IDateTimeRidget.class,
-				DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
+		txtESTABLISHED_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE);
 
-		txtPROFILE_IMAGE = getRidget(IProfilePhotoRidget.class,
-				DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
+		txtPROFILE_IMAGE = getRidget(IProfilePhotoRidget.class, DairyProfileViewWidgetID.DAIRY_PROFILE_IMAGE);
 
-		txtMEMBER_COUNT = getRidget(INumericTextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
+		txtMEMBER_COUNT = getRidget(INumericTextRidget.class, DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT);
 		txtMEMBER_COUNT.setOutputOnly(true);
 		txtMEMBER_COUNT.setGrouping(true);
 		txtMEMBER_COUNT.setFocusable(false);
 
 		// registration tab
-		txtLEGAL_NAME = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_LEGAL_NAME);
-		txtLEGAL_NAME.addValidationRule(new RequiredField(),
-				ValidationTime.ON_UI_CONTROL_EDIT);
+		txtLEGAL_NAME = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_LEGAL_NAME);
+		txtLEGAL_NAME.addValidationRule(new RequiredField(), ValidationTime.ON_UI_CONTROL_EDIT);
 
-		txtREGISTRATION_NBR = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER);
-		txtREGISTRATION_NBR.addValidationRule(new RequiredField(),
-				ValidationTime.ON_UPDATE_TO_MODEL);
+		txtREGISTRATION_NBR = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_REGISTRATION_NUMBER);
+		txtREGISTRATION_NBR.addValidationRule(new RequiredField(), ValidationTime.ON_UPDATE_TO_MODEL);
 
-		txtNSSF_NUMBER = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_NSSF_NUMBER);
-		txtNHIF_NUMBER = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_NHIF_NUMBER);
-		txtFEDERAL_PIN = getRidget(ITextRidget.class,
-				DairyProfileViewWidgetID.DAIRY_FEDERAL_PIN);
-		txtLIC_EFFECTIVE_DATE = getRidget(IDateTimeRidget.class,
-				DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE);
-		txtLIC_EXPIRATION_DATE = getRidget(IDateTimeRidget.class,
-				DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE);
+		txtNSSF_NUMBER = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NSSF_NUMBER);
+		txtNHIF_NUMBER = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_NHIF_NUMBER);
+		txtFEDERAL_PIN = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_FEDERAL_PIN);
+		txtLIC_EFFECTIVE_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EFFECTIVE_DATE);
+		txtLIC_EXPIRATION_DATE = getRidget(IDateTimeRidget.class, DairyProfileViewWidgetID.DAIRY_LIC_EXPIRATION_DATE);
 
 	}
 

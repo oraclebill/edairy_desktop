@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,7 +17,7 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 
 public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
 
-	protected abstract class SessionRunnable implements Runnable {
+	protected abstract class SessionRunnable<X> implements Runnable {
 
 		@Override
 		public void run() {
@@ -24,12 +25,14 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		}
 
 		abstract public void run(Session session);
-		
-		Object result;
-		protected void setResult(Object o) {
+
+		X result;
+
+		protected void setResult(X o) {
 			result = o;
 		}
-		public Object getResult() {
+
+		public X getResult() {
 			return result;
 		}
 
@@ -71,24 +74,66 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public List<T> all() {
-		return find("FROM " + getEntityName());
+		SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
+			@Override public void run(Session s) {
+				setResult(
+					s.createCriteria(getClassType()).list());
+			}
+		};
+		runWithTransaction(runner);
+		return runner.getResult();
 	}
 
 	@Override
 	public void delete(final T deletableEntity) throws NonExistingEntityException {
-		runWithTransaction(new Runnable() {
+		runWithTransaction(new SessionRunnable<Object>() {
 			@Override
-			public void run() {
+			public void run(Session session) {
 				session.delete(deletableEntity);
 			}
 		});
 	}
 
 	@Override
-	public List<T> find(String rawQuery) {
-		openSession();
-		return runQuery(session.createQuery(rawQuery));
+	public void load(EObject obj) {
+		Object id;
+		if (obj == null) {
+			throw new IllegalArgumentException("obj cannot be null");
+		}
+//		session.lock(obj, LockMode.NONE);
+		try {
+			load(obj, (Serializable)obj.eGet(obj.eClass().getEIDAttribute()));
+		}
+		// we may fail if object is already associated with this session...
+		catch(Exception e) {
+			load(obj, (Serializable)obj.eGet(obj.eClass().getEIDAttribute()));
+		}		
 	}
+	
+	@Override
+	public void load(final EObject obj, final Serializable key) {
+		if (key == null) {
+			throw new IllegalArgumentException("key cannot be null");
+		}
+		runWithTransaction(new Runnable() {
+			@Override
+			public void run() {				
+				session.load(obj, key);
+			}
+		});
+	}
+	
+	@Override
+	public List<T> find(final String rawQuery) {
+		SessionRunnable<List<T>> query = new SessionRunnable<List<T>>() {
+			@Override
+			public void run(Session s) {				
+				setResult(s.createQuery(rawQuery).list());
+			}
+		};
+		return query.getResult();
+	}
+
 
 	@Override
 	public List<T> find(String query, Object[] args) {
@@ -99,20 +144,17 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	public T findByKey(long key) {
 		return (T) findByKey(getClassType(), key);
 		/*
-		openSession();
-		final Query q = session.createQuery("FROM " + getEntityName() + " where " + getIdentifierName() + " = ? ")
-				.setLong(0, key);
+		 * openSession(); final Query q = session.createQuery("FROM " +
+		 * getEntityName() + " where " + getIdentifierName() + " = ? ")
+		 * .setLong(0, key);
+		 * 
+		 * final List<T> ret = runQuery(q);
+		 * 
+		 * if ((ret != null) && (ret.size() > 0)) { return ret.get(0); } else {
+		 * return null; }
+		 */
+	}
 
-		final List<T> ret = runQuery(q);
-
-		if ((ret != null) && (ret.size() > 0)) {
-			return ret.get(0);
-		} else {
-			return null;
-		}
-		*/
-	}	
-	
 	/**
 	 * 
 	 * @param <X>
@@ -125,17 +167,16 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		openSession();
 		String entityName = getEntityName(entityClass);
 		String identifierName = getIdentifierName(entityClass, entityName);
-		final Query q = session.createQuery("FROM " + 
-				entityName + " where " + 
-				identifierName + " = ? ").setLong(0, entityKey);
+		final Query q = session.createQuery("FROM " + entityName + " where " + identifierName + " = ? ").setLong(0,
+				entityKey);
 		Object obj = null;
 		final List<?> results = runQuery(q);
 		if ((results != null) && (results.size() > 0)) {
 			obj = results.get(0);
-		} 
+		}
 		return (X) obj;
 	}
-	
+
 	/**
 	 * 
 	 * @param eClass
@@ -143,9 +184,9 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	 */
 	private String getEntityName(Class<?> eClass) {
 		String className = eClass.getName();
-		return className.substring(className.lastIndexOf('.') + 1);	
+		return className.substring(className.lastIndexOf('.') + 1);
 	}
-	
+
 	/**
 	 * 
 	 * @param eClass
@@ -156,7 +197,6 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		ClassMetadata metaData = persistenceManager.getSession().getSessionFactory().getClassMetadata(eName);
 		return metaData.getIdentifierPropertyName();
 	}
-	
 
 	/**
 	 * Merge
@@ -199,7 +239,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	private void closeSession() {
 		if (null != session) {
-			// session.close();
+//			 session.close();
+//			 session = null;
 		} else {
 			// TODO: use proper logging and exception code.
 			throw new IllegalStateException("null session");

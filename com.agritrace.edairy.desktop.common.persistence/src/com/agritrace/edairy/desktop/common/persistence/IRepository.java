@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.persistence;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -32,6 +33,14 @@ public interface IRepository<T extends EObject> {
 	 * @throws NonExistingEntityException
 	 */
 	void delete(T deletableEntity) throws NonExistingEntityException;
+	
+	/**
+	 * Load object from db.
+	 * 
+	 * @param object
+	 */
+	void load(EObject object);
+	void load(EObject obj, Serializable key);
 
 	/**
 	 * Find objects matching the query.
@@ -85,5 +94,6 @@ public interface IRepository<T extends EObject> {
 	 *             if entity does not exist.
 	 */
 	void update(T updateableEntity) throws NonExistingEntityException;
+
 
 }

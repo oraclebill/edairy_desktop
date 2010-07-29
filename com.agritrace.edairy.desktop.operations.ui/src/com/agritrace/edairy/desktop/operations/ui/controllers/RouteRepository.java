@@ -1,6 +1,9 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.io.Serializable;
 import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -17,6 +20,16 @@ public class RouteRepository implements IRepository<Route> {
 			return Route.class;
 		}
 	};
+
+	@Override
+	public void load(EObject toLoad) {
+		routeRepo.load(toLoad);
+	}
+	@Override
+	public void load(EObject toLoad, Serializable key) {
+		routeRepo.load(toLoad, key);
+	}
+
 
 	@Override
 	public List<Route> all() {

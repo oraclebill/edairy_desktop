@@ -1,6 +1,9 @@
 package com.agritrace.edairy.desktop.operations.services.employee;
 
+import java.io.Serializable;
 import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -21,6 +24,15 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	public List<Employee> all() {
 		return employeeRepo.all();
 
+	}
+
+	@Override
+	public void load(EObject toLoad) {
+		employeeRepo.load(toLoad);
+	}
+	@Override
+	public void load(EObject toLoad, Serializable key) {
+		employeeRepo.load(toLoad, key);
 	}
 
 	@Override
