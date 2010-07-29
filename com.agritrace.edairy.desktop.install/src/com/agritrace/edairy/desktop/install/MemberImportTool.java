@@ -39,12 +39,13 @@ public class MemberImportTool extends AbstractImportTool {
 
 	// private DairyRepository dairyRepo;
 	// private Dairy dairy;
-	private Map<Long, Membership> memberCache = new HashMap<Long, Membership>();
+	private Map<String, Membership> memberCache = new HashMap<String, Membership>();
 	private Map<String, Route> routeCache = new HashMap<String, Route>();
 	private Collection<Membership> memberCollection;
 	private Map<String, List<String[]>> failedRecords;
 	private IProgressMonitor monitor;
 	public int count = 0;
+	public int errors = 0;
 
 	public MemberImportTool(InputStream stream, List<Membership> memberCollection,
 			Map<String, List<String[]>> failedRecords, IProgressMonitor monitor) throws FileNotFoundException, IOException {
@@ -59,13 +60,21 @@ public class MemberImportTool extends AbstractImportTool {
 			routeCache.put(route.getCode(), route);
 		}
 		for (Membership member : dairy.getMemberships()) {
-			memberCache.put(member.getMemberId(), member);
+			memberCache.put(member.getMemberNumber(), member);
 		}
 	}
 
-	private void worked() {
+	private void worked(int i) {
 		if (monitor != null) {
-			monitor.worked(1);
+			if(i % 10 == 0)
+			monitor.worked(10);
+			monitor.setTaskName("Imports: " + count + ", Errors: " + errors);
+		}
+	}
+
+	private void checkCancelled() {
+		if (monitor != null) {
+			if(monitor.isCanceled()) throw new RuntimeException("Cancelled!");
 		}
 	}
 
@@ -77,6 +86,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 	@Override
 	protected void processRecord(String[] values) {
+		checkCancelled();
 		count += 1;
 		// validate
 		Membership membership = memberCache.get(values[MEMBER_NUMBER]);
@@ -92,10 +102,11 @@ public class MemberImportTool extends AbstractImportTool {
 			}
 		}
 
-		worked();
+		worked(count);
 	}
 
 	private void addFailure(String message, String[] values) {
+		errors += 1;
 		List<String[]> records = failedRecords.get(message);
 		if (records == null) {
 			records = new LinkedList<String[]>();

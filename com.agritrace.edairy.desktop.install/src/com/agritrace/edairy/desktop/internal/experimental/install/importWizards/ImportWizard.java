@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.desktop.install.importWizards;
+package com.agritrace.edairy.desktop.internal.experimental.install.importWizards;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.IStructuredSelection;

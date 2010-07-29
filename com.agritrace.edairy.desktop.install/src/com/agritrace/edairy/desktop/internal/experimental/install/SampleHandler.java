@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.internal.experimental.install;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

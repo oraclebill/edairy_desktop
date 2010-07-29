@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.internal.experimental.install;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +44,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
+import com.agritrace.edairy.desktop.install.handlers.HandlerBase;
 
 /**
  * Example how to load data from a background thread into a TableViewer
@@ -173,7 +174,7 @@ public class TestTheWiz {
 				final IProgressMonitor monitor = progressPart;
 				int chuck = 3000;
 				try {
-					chuck = ImportMembersHandler.countLines(new FileInputStream(new File(fileName)));
+					chuck = HandlerBase.countLines(new FileInputStream(new File(fileName)));
 				} catch (Exception e) {
 				}
 				final int max = chuck;

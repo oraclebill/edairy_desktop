@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package com.agritrace.edairy.desktop.install.handlers;
+package com.agritrace.edairy.desktop.internal.experimental.install;
 
 import java.util.ArrayList;
 

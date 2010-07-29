@@ -51,7 +51,7 @@ public abstract class AbstractImportTool {
 			try {
 				processRecord(values);
 				count++;
-			} catch (Exception e) {
+			}  catch (ValidationException e) {
 				errCount++;
 				log(LogService.LOG_WARNING, "%s error importing record: %s", e.getMessage(), Arrays.toString(values));
 				doImportRecordFailed(values, e);
