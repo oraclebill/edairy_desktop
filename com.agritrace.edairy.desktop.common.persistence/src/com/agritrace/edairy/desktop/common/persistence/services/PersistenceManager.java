@@ -32,9 +32,16 @@ public class PersistenceManager {
 
 	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(Activator.getDefault(),
 			PersistenceManager.class);
-	public static final File DATA_AREA = getFileArea();
-	public static final String DB_NAME = "dairytest";
+	public final File DATA_AREA = getConfigFileArea();
 	public static final String PROPERTIES_FILE_NAME = "edairydb.properties";
+	public static final String DB_TYPE_PROPERTY = "edairy.database.type";
+	public static final String DB_NAME_PROPERTY = "edairy.database.name";
+	public static final String DB_TYPE_MYSQL = "mysql";
+	public static final String DB_TYPE_HSQLDB = "hsqldb";
+	public static final String DB_TYPE_SYBASE_ASA = "sybase-asa";
+	
+	public static final String DEFAULT_DB_NAME = "dairytest";
+	public static final String DEFAULT_DB_TYPE = DB_TYPE_MYSQL;
 
 	private static PersistenceManager INSTANCE;
 
@@ -60,7 +67,7 @@ public class PersistenceManager {
 		}
 	}
 
-	private static File getFileArea() {
+	public static File getConfigFileArea() {
 		File ret = null;
 		try {
 			ret = RienaLocations.getDataArea();
@@ -68,6 +75,21 @@ public class PersistenceManager {
 			ret = new File(".");
 		}
 		return ret;
+	}
+
+	public static File getDatabaseFileArea() {
+		File ret = null;
+		try {
+			ret = RienaLocations.getDataArea(Activator.getDefault().getContext().getBundle());
+
+		} catch (Exception e) {
+			ret = new File("./db/");
+		}
+		return ret;
+	}
+
+	public static String getDatabaseName() {
+		return System.getProperty(PersistenceManager.DB_NAME_PROPERTY, PersistenceManager.DEFAULT_DB_NAME);
 	}
 
 	private final HbDataStore hbds;
@@ -80,7 +102,7 @@ public class PersistenceManager {
 		LOG.log(LogService.LOG_INFO, " ** Creating PersistenceManager [" + getClass().getName() + ":" + hashCode()
 				+ "]");
 
-		hbds = HbHelper.INSTANCE.createRegisterDataStore(DB_NAME);
+		hbds = HbHelper.INSTANCE.createRegisterDataStore(DEFAULT_DB_NAME);
 		hbds.setProperties(getDatastoreProperties());
 		hbds.setEPackages(getEPackages());
 
@@ -136,7 +158,7 @@ public class PersistenceManager {
 
 			props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
 			props.setProperty(Environment.USER, "root");
-			props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" + DB_NAME);
+			props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" + DEFAULT_DB_NAME);
 			// props.setProperty(Environment.PASS, "root");
 			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 

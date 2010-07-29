@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.persistence.services;
 
+import java.io.File;
 import java.util.Properties;
 
 import org.hibernate.cfg.Environment;
@@ -14,19 +15,12 @@ public class HsqlDbPersistenceManager extends PersistenceManager {
 	protected Properties getDatastoreProperties() {
 		final Properties props = new Properties();
 
-		// mysql
-		// props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
-		// props.setProperty(Environment.USER, "root");
-		// props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" +
-		// DB_NAME);
-		// //props.setProperty(Environment.PASS, "root");
-		// props.setProperty(Environment.DIALECT,
-		// "org.hibernate.dialect.MySQLInnoDBDialect");
-
+		File dbFile = new File(getDatabaseFileArea(), getDatabaseName());
+		
 		// in memory hsqldb
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "SA");
-		props.setProperty(Environment.URL, "jdbc:hsqldb:file:devtest.db");
+		props.setProperty(Environment.URL, String.format("jdbc:hsqldb:file:%s.db", dbFile));
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
 

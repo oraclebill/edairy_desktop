@@ -1,14 +1,19 @@
 package com.agritrace.edairy.desktop.install;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -32,17 +37,25 @@ public class MemberImportTool extends AbstractImportTool {
 	public static final int MEMBER_GIVEN_NAME = 6;
 	public static final int MEMBER_FAMILY_NAME = 7;
 
-	private DairyRepository dairyRepo;
-	private Dairy dairy;
+	// private DairyRepository dairyRepo;
+	// private Dairy dairy;
 	private Map<Long, Membership> memberCache = new HashMap<Long, Membership>();
 	private Map<String, Route> routeCache = new HashMap<String, Route>();
+	private Collection<Membership> memberCollection;
+	private Map<String, List<String[]>> failedRecords;
+	private IProgressMonitor monitor;
+	public int count = 0;
 
+	public MemberImportTool(InputStream stream, List<Membership> memberCollection,
+			Map<String, List<String[]>> failedRecords, IProgressMonitor monitor) throws FileNotFoundException, IOException {
 
-	public MemberImportTool(File file) throws FileNotFoundException {
-		super(file);
-		dairyRepo = DairyRepository.getInstance();
-		dairy = dairyRepo.getLocalDairy();
-		for(Route route : dairy.getRoutes()) {
+		super(new InputStreamReader(stream));
+		this.monitor = monitor;
+		this.memberCollection = memberCollection;
+		this.failedRecords = failedRecords;
+
+		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		for (Route route : dairy.getRoutes()) {
 			routeCache.put(route.getCode(), route);
 		}
 		for (Membership member : dairy.getMemberships()) {
@@ -50,52 +63,75 @@ public class MemberImportTool extends AbstractImportTool {
 		}
 	}
 
+	private void worked() {
+		if (monitor != null) {
+			monitor.worked(1);
+		}
+	}
+
+	private void done() {
+		if (monitor != null) {
+			monitor.done();
+		}
+	}
+
 	@Override
 	protected void processRecord(String[] values) {
-		String givenName = values[MEMBER_GIVEN_NAME];
-		String familyNames = values[MEMBER_FAMILY_NAME];
-		String accountNumber = values[MEMBER_ACCOUNT_NUMBER];
-		String membershipNumber = values[MEMBER_NUMBER];
-		String defaultRoute = values[MEMBER_DEFAULT_ROUTE];
-
-		Long key;
-		try {
-			key = Long.decode(membershipNumber);
-		} catch (NumberFormatException nfe) {
+		count += 1;
+		// validate
+		Membership membership = memberCache.get(values[MEMBER_NUMBER]);
+		if (membership != null) {
+			addFailure("Member already exists!", values);
+			return;
+		} else {
 			try {
-				String chopped = membershipNumber.substring(0, membershipNumber.length() - 1);
-				key = Long.decode(chopped);
-			} catch (NumberFormatException nfe2) {
-				throw new ValidationException("Unable to create valid key for " + membershipNumber);
+				membership = createMembership(values);
+				memberCollection.add(membership);
+			} catch (Exception e) {
+				addFailure(e.getMessage(), values);
 			}
 		}
 
-		Membership membership = memberCache.get(key);
-		if (membership != null) {
-			throw new ValidationException("Duplicate Record");
+		worked();
+	}
+
+	private void addFailure(String message, String[] values) {
+		List<String[]> records = failedRecords.get(message);
+		if (records == null) {
+			records = new LinkedList<String[]>();
+			failedRecords.put(message, records);
 		}
-		
+		records.add(values);		
+	}
+
+	public Membership createMembership(String[] values) {
+		Membership membership = null;
+
+		final String givenName = values[MEMBER_GIVEN_NAME];
+		final String familyNames = values[MEMBER_FAMILY_NAME];
+		final String accountNumber = values[MEMBER_ACCOUNT_NUMBER];
+		final String membershipNumber = values[MEMBER_NUMBER];
+		final String defaultRoute = values[MEMBER_DEFAULT_ROUTE];
+
 		Formatter formatter = new Formatter();
 		formatter.format("%s %s (%s) Farm", givenName, familyNames, membershipNumber);
 		Farm farm = DairyUtil.createFarm(formatter.toString(), DairyUtil.createLocation(null, null, null));
 		Farmer farmer = DairyUtil.createFarmer(givenName, "", familyNames, "<missing>", farm);
 		membership = DairyUtil.createMembership(DEFAULT_IMPORT_DATE, DEFAULT_IMPORT_DATE, farmer);
-		membership.setMemberId(key);
+		// membership.setMemberId(key);
 		membership.setMemberNumber(membershipNumber);
 		membership.setStatus(MembershipStatus.ACTIVE);
-		
+
 		membership.setDefaultRoute(getRoute(defaultRoute));
-				
 
 		Account account = AccountFactory.eINSTANCE.createAccount();
 		account.setMember(membership);
-//		account.setAccountNumber("V"+membership.getMemberNumber());
+		// account.setAccountNumber("V"+membership.getMemberNumber());
 		account.setAccountNumber(accountNumber);
 		account.setStatus(AccountStatus.ACTIVE);
 		account.setEstablished(DEFAULT_IMPORT_DATE);
 
-//		System.out.println(membership);
-		dairy.getMemberships().add(membership);
+		return membership;
 	}
 
 	private Route getRoute(String string) {
@@ -104,7 +140,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 	@Override
 	protected void doImportComplete(int okCount, int failCount) {
-		dairyRepo.save(dairy);
+		done();
 	}
 
 	private static Date getDefaultDate() {
@@ -117,17 +153,18 @@ public class MemberImportTool extends AbstractImportTool {
 
 	@Override
 	protected void saveImportedEntity(Object entity) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	protected String[] getExpectedHeaders() {
-		return new String[] { null, "account-id", "membership-id", "default-route", null, null, "given-name", "family-name" };
+		return new String[] { null, "account-id", "membership-id", "default-route", null, null, "given-name",
+				"family-name" };
 	}
 
 	@Override
 	protected void validateEntity(EObject obj) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
