@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getStops <em>Stops</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
@@ -40,13 +40,14 @@ public interface Route extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(long)
+	 * @see #setId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Id()
-	 * @model extendedMetaData="name='Id' kind='elementOnly'"
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
+	 *        extendedMetaData="name='Id' kind='elementOnly'"
 	 *        annotation="teneo.jpa appinfo='@Id\n@GeneratedValue'"
 	 * @generated
 	 */
-	long getId();
+	Long getId();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getId <em>Id</em>}' attribute.
@@ -56,7 +57,7 @@ public interface Route extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(long value);
+	void setId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -113,7 +114,7 @@ public interface Route extends EObject {
 	 * @return the value of the '<em>Code</em>' attribute.
 	 * @see #setCode(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Code()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getCode();

@@ -34,9 +34,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getStops <em>Stops</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
@@ -52,7 +52,7 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long ID_EDEFAULT = 0L;
+	protected static final Long ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -62,7 +62,27 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * @generated
 	 * @ordered
 	 */
-	protected long id = ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCode() <em>Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCode() <em>Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String code = CODE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -93,26 +113,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * @ordered
 	 */
 	protected EList<DairyLocation> stops;
-
-	/**
-	 * The default value of the '{@link #getCode() <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCode()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String CODE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getCode() <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCode()
-	 * @generated
-	 * @ordered
-	 */
-	protected String code = CODE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -158,7 +158,7 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -167,8 +167,8 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(long newId) {
-		long oldId = id;
+	public void setId(Long newId) {
+		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__ID, oldId, id));
@@ -288,12 +288,12 @@ public class RouteImpl extends EObjectImpl implements Route {
 		switch (featureID) {
 			case DairyPackage.ROUTE__ID:
 				return getId();
+			case DairyPackage.ROUTE__CODE:
+				return getCode();
 			case DairyPackage.ROUTE__NAME:
 				return getName();
 			case DairyPackage.ROUTE__STOPS:
 				return getStops();
-			case DairyPackage.ROUTE__CODE:
-				return getCode();
 			case DairyPackage.ROUTE__DESCRIPTION:
 				return getDescription();
 		}
@@ -312,15 +312,15 @@ public class RouteImpl extends EObjectImpl implements Route {
 			case DairyPackage.ROUTE__ID:
 				setId((Long)newValue);
 				return;
+			case DairyPackage.ROUTE__CODE:
+				setCode((String)newValue);
+				return;
 			case DairyPackage.ROUTE__NAME:
 				setName((String)newValue);
 				return;
 			case DairyPackage.ROUTE__STOPS:
 				getStops().clear();
 				getStops().addAll((Collection<? extends DairyLocation>)newValue);
-				return;
-			case DairyPackage.ROUTE__CODE:
-				setCode((String)newValue);
 				return;
 			case DairyPackage.ROUTE__DESCRIPTION:
 				setDescription((String)newValue);
@@ -340,14 +340,14 @@ public class RouteImpl extends EObjectImpl implements Route {
 			case DairyPackage.ROUTE__ID:
 				setId(ID_EDEFAULT);
 				return;
+			case DairyPackage.ROUTE__CODE:
+				setCode(CODE_EDEFAULT);
+				return;
 			case DairyPackage.ROUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 			case DairyPackage.ROUTE__STOPS:
 				getStops().clear();
-				return;
-			case DairyPackage.ROUTE__CODE:
-				setCode(CODE_EDEFAULT);
 				return;
 			case DairyPackage.ROUTE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
@@ -365,13 +365,13 @@ public class RouteImpl extends EObjectImpl implements Route {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DairyPackage.ROUTE__ID:
-				return id != ID_EDEFAULT;
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case DairyPackage.ROUTE__CODE:
+				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case DairyPackage.ROUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DairyPackage.ROUTE__STOPS:
 				return stops != null && !stops.isEmpty();
-			case DairyPackage.ROUTE__CODE:
-				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case DairyPackage.ROUTE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
@@ -390,10 +390,10 @@ public class RouteImpl extends EObjectImpl implements Route {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (Id: ");
 		result.append(id);
-		result.append(", name: ");
-		result.append(name);
 		result.append(", code: ");
 		result.append(code);
+		result.append(", name: ");
+		result.append(name);
 		result.append(", description: ");
 		result.append(description);
 		result.append(')');

@@ -26,9 +26,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.RouteImportTool;
 import com.agritrace.edairy.desktop.install.VehicleImportTool;
-import com.agritrace.edairy.desktop.install.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**

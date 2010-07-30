@@ -1116,13 +1116,22 @@ public interface DairyPackage extends EPackage {
 	int ROUTE__ID = 0;
 
 	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUTE__CODE = 1;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__NAME = 1;
+	int ROUTE__NAME = 2;
 
 	/**
 	 * The feature id for the '<em><b>Stops</b></em>' reference list.
@@ -1131,16 +1140,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__STOPS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROUTE__CODE = 3;
+	int ROUTE__STOPS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.

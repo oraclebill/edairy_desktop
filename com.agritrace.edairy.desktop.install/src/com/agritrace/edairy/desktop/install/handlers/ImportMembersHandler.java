@@ -21,8 +21,8 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
-import com.agritrace.edairy.desktop.install.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
@@ -38,12 +38,19 @@ public class ImportMembersHandler extends HandlerBase {
 		final int lineCount;
 		private List<String> msgList;
 
+		private List<Membership> successes;
+		private Map<String, List<String[]>> errors;
+
+
 		public MemberImportProcess(File importFile, int lineCount,
 				Object navigationNode) {
 			super("Import Members", true, navigationNode);
 			this.importFile = importFile;
 			this.lineCount = lineCount;
+
 			msgList = new LinkedList<String>();
+			successes = new ArrayList<Membership>();
+			errors = new HashMap<String, List<String[]>>();
 		}
 
 		@Override
@@ -103,19 +110,20 @@ public class ImportMembersHandler extends HandlerBase {
 
 			return true;
 		}
-
+		
+		private void saveMembers(List<Membership> successes2) {
+			DairyRepository.getInstance().getLocalDairy().getMemberships()
+					.addAll(successes2);
+			DairyRepository.getInstance().save();
+		}
 	}
-
-	private List<Membership> successes;
-	private Map<String, List<String[]>> errors;
+	
 	private ExecutionEvent event;
 
 	/**
 	 * The constructor.
 	 */
 	public ImportMembersHandler() {
-		successes = new ArrayList<Membership>();
-		errors = new HashMap<String, List<String[]>>();
 	}
 
 	/**
@@ -156,11 +164,5 @@ public class ImportMembersHandler extends HandlerBase {
 	}
 
 
-
-	private void saveMembers(List<Membership> successes2) {
-		DairyRepository.getInstance().getLocalDairy().getMemberships()
-				.addAll(successes2);
-		DairyRepository.getInstance().save();
-	}
 
 }
