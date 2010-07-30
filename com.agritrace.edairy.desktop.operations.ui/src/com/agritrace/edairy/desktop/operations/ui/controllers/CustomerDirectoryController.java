@@ -18,6 +18,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.customer.CustomerRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
@@ -84,6 +85,13 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 		return customer;
 	}
 
+	@Override
+	protected void createEntity(Customer newEntity) {
+		DairyRepository.getInstance().getLocalDairy().getCustomers().add(newEntity);
+		DairyRepository.getInstance().save();
+//		getRepository().saveNew(newEntity);
+	}
+	
 	@Override
 	protected List<Customer> getFilteredResult() {
 		final List<Customer> filtered = new ArrayList<Customer>();
