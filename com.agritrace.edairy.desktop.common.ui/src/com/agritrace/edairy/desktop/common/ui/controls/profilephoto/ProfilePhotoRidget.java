@@ -12,6 +12,7 @@ import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.IValueChangeListener;
 import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
@@ -19,6 +20,7 @@ import org.eclipse.riena.ui.ridgets.ILinkRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
@@ -34,9 +36,9 @@ import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
- * An ImageWidget is a combination of a Label and a Link. The Label is used
- * to display the image while the Link is used to trigger selection of a new
- * image file to display.
+ * An ImageWidget is a combination of a Label and a Link. The Label is used to
+ * display the image while the Link is used to trigger selection of a new image
+ * file to display.
  * 
  * @author bjones
  * 
@@ -53,14 +55,14 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 					updateModel();
 					updateDisplay();
 				} else {
-					throw new IllegalArgumentException("Unable to read file.");
+					log(LogService.LOG_WARNING, "Null returned from readImageData. File not found?");
 				}
 			}
 		}
 	}
 
 	public static final long MAX_IMAGE_SIZE = 128 * 1024;
-	private static final ImageData BLANK_IMAGE_DATA  = new ImageData(150, 200, 8, new PaletteData(0, -1, 255));
+	private static final ImageData BLANK_IMAGE_DATA = new ImageData(150, 200, 8, new PaletteData(0, -1, 255));
 
 	private String id;
 	private ImageData imageData;
@@ -68,18 +70,18 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	private IObservableValue modelObj;
 	private IConverter converter;
 	private String currentKey;
-	
+
 	public ProfilePhotoRidget() {
 	}
 
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -88,19 +90,17 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 		if (modelObj == null) {
 			imageData = null;
 			currentKey = null;
-		}
-		else {
+		} else {
 			String key = (String) modelObj.getValue();
 			if (key == null) {
 				imageData = null;
 				currentKey = null;
-			}
-			else if (!key.equals(currentKey)) {
+			} else if (!key.equals(currentKey)) {
 				currentKey = key;
-				imageData = DairyRepository.getInstance().getImageData(currentKey);				
+				imageData = DairyRepository.getInstance().getImageData(currentKey);
 			}
 		}
-		updateDisplay();			
+		updateDisplay();
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	public void configureRidgets() {
 		profileImageLabel = getRidget(ILabelRidget.class, "profileImageLabel");
 		ILinkRidget updateImageLink = getRidget(ILinkRidget.class, "updateImageLink");
-		
+
 		if (updateImageLink != null) {
 			updateImageLink.addSelectionListener(new LinkSelected());
 		} else {
@@ -120,15 +120,15 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 
 	@Override
 	public void bindToModel(Object valueHolder, String valuePropertyName) {
-		bindToModel(PojoObservables.observeValue(valueHolder, valuePropertyName));	
+		bindToModel(PojoObservables.observeValue(valueHolder, valuePropertyName));
 	}
 
 	@Override
 	public void bindToModel(IObservableValue obj) {
-		modelObj = obj;	
+		modelObj = obj;
 		updateFromModel();
 		updateDisplay();
-		modelObj.addValueChangeListener(new IValueChangeListener() {			
+		modelObj.addValueChangeListener(new IValueChangeListener() {
 			@Override
 			public void handleValueChange(ValueChangeEvent event) {
 				updateDisplay();
@@ -146,8 +146,6 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 		this.converter = converter;
 	}
 
-
-
 	/**
 	 * 
 	 */
@@ -161,7 +159,6 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			}
 		}
 	}
-
 
 	/**
 	 * 
@@ -183,30 +180,40 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	private ImageData readImageData(File imageFile) {
 		log(LogService.LOG_DEBUG, "readImageData: reading file " + imageFile);
 		ImageData imageData = null;
+		InputStream fStream = null;
 		if (imageFile != null) {
-			if (imageFile.canRead() && imageFile.isFile()) {
-				if (imageFile.length() > MAX_IMAGE_SIZE) {
-					throw new IllegalArgumentException(String.format(
-							"Error - file is too large! Maximum size is %,d bytes.", MAX_IMAGE_SIZE).toString());
-				}
-			} else {
+			if (!imageFile.canRead() || !imageFile.isFile()) {
 				throw new IllegalArgumentException(String.format("Error - file '%s' is not a legal file type.",
 						imageFile.getPath()).toString());
 			}
-		}
-		else {
+		} else {
 			throw new IllegalArgumentException("Internal Error - no file.");
 		}
-		
-		try {
-			InputStream fStream = new BufferedInputStream(new FileInputStream(imageFile));
-			imageData = new ImageData(fStream);
-		
-		} catch (FileNotFoundException fnfe) {
-			// TODO: log
-			fnfe.printStackTrace();
-		} 
 
+		try {
+			fStream = new BufferedInputStream(new FileInputStream(imageFile));
+			imageData = new ImageData(fStream);
+			if (imageFile.length() > MAX_IMAGE_SIZE) {
+				double shrinkRatio = (double) MAX_IMAGE_SIZE / (double) imageFile.length();
+				imageData = imageData.scaledTo((int) (shrinkRatio * imageData.width),
+						(int) (shrinkRatio * imageData.height));
+				log(LogService.LOG_INFO, "Scaled original from " + imageFile.length());
+			}
+
+		} catch (FileNotFoundException fnfe) {
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+					"Error opening file", String.format("Error opening file %s: %s", imageFile, fnfe.getMessage()));
+			return null;
+		} catch (SWTException se) {
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+					"Error opening file", String.format("Error opening file %s: %s", imageFile, se.getMessage()));
+			return null;
+		} finally {
+			try {
+				fStream.close();
+			} catch (Exception e) {
+			}
+		}
 		return imageData;
 	}
 
@@ -220,19 +227,25 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			throw new IllegalStateException("Model should not be null - did you forget to call 'setModel'?");
 		}
 		// scale the image
-//		if (imageData.data.length > MAX_IMAGE_SIZE) {
-//			float scale = (float)imageData.data.length / (float)MAX_IMAGE_SIZE;
-//			log(LogService.LOG_DEBUG, String.format("Scaling %d image from  %dx%d using scale %f", imageData.data.length, imageData.width, imageData.height, scale));
-//			imageData = imageData.scaledTo((int)(imageData.width / scale), (int)(imageData.height / scale));
-//			log(LogService.LOG_DEBUG, String.format("Scaled to  %dx%d", imageData.width, imageData.height));
-//			if (imageData.data.length > MAX_IMAGE_SIZE) throw new IllegalStateException("internal error: image scale failed - length = " + imageData.data.length);
-//		}
-		String imageRefKey = (String)modelObj.getValue();
+		// if (imageData.data.length > MAX_IMAGE_SIZE) {
+		// float scale = (float)imageData.data.length / (float)MAX_IMAGE_SIZE;
+		// log(LogService.LOG_DEBUG,
+		// String.format("Scaling %d image from  %dx%d using scale %f",
+		// imageData.data.length, imageData.width, imageData.height, scale));
+		// imageData = imageData.scaledTo((int)(imageData.width / scale),
+		// (int)(imageData.height / scale));
+		// log(LogService.LOG_DEBUG, String.format("Scaled to  %dx%d",
+		// imageData.width, imageData.height));
+		// if (imageData.data.length > MAX_IMAGE_SIZE) throw new
+		// IllegalStateException("internal error: image scale failed - length = "
+		// + imageData.data.length);
+		// }
+		String imageRefKey = (String) modelObj.getValue();
 		if (imageRefKey == null) {
 			imageRefKey = UUID.randomUUID().toString();
-			modelObj.setValue(imageRefKey);	
+			modelObj.setValue(imageRefKey);
 		}
-		DairyRepository.getInstance().saveImageData(imageRefKey, imageData);		
+		DairyRepository.getInstance().saveImageData(imageRefKey, imageData);
 	}
 
 	private void updateDisplay() {
@@ -241,7 +254,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 		if (profileImageLabel == null) {
 			return;
 		}
-		
+
 		final Object control = profileImageLabel.getUIControl();
 		if (control instanceof Label) {
 			Label label = (Label) control;
@@ -249,7 +262,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 				label.setImage(null);
 				return;
 			}
-			
+
 			int displayWidth = label.getSize().x, displayHeight = label.getSize().y;
 
 			float imgAspect = (float) imageData.width / (float) imageData.height;
@@ -278,6 +291,5 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
-
 
 }
