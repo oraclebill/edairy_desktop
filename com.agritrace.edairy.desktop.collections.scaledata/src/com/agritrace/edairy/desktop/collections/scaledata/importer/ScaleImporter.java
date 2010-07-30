@@ -14,35 +14,50 @@ import com.csvreader.CsvReader;
 
 public class ScaleImporter {
 
-	
 	/**
-	 * Map from our field number to the field number in the csv. 
-	 * In CSV one row may have multiple (2) logical records, 
-	 * each number after our record offset is the position of the corresponding
-	 * field in the csv, one per record..
+	 * The tables below map from our field number to the field number in the csv. In CSV one row
+	 * may have multiple (2) logical records, each number after our record
+	 * offset is the position of the corresponding field in the csv, one per
+	 * record..
 	 * 
+	 * Scale records seem to have the following form:
+	 *   header: 
+	 *      { member, date } (2 fields)
+	 *     
+	 *   4 X collection record:
+	 *      { quantity, time, ?, operator code, ?, am/pm, ?, ? } (8 fields) except last one which has 7
+	 * 
+	 * 	 footer:
+	 *      { ?, route code, dairy code, scale code, line total } 5 fields, where the first one varies with session.
+	 * 
+	 * 
+	 * //	private static int[] HEADER_FIELDS = { 
+	 * //		ScaleRecord.MEMBER_NUMBER, 
+	 * //		ScaleRecord.TRANSACTION_DATE };
 	 */
-	private static final int SCALE_DATA = 0;
-	private static final int CSV_DATA_AM = 1;
-	private static int[][] SCALE_TO_RECORD_MAP = {
-		{ ScaleRecord.MEMBER_NUMBER, 		0, 	0 },
-		{ ScaleRecord.TRANSACTION_DATE, 	1, 	1 },
-		{ ScaleRecord.QUANTITY, 			2, 	10 },
-		{ ScaleRecord.TRANSACTION_TIME, 	3, 	11 },
-		{ ScaleRecord.TRIP_NUMBER, 			4, 	4 },
-		{ ScaleRecord.OPERATOR_CODE, 		5, 	5 },
-		{ ScaleRecord.NUM_CANS, 			6, 	6 },		// ??
-		{ ScaleRecord.SESSION_CODE, 		7, 	15 },
-		{ ScaleRecord.CENTER_NUMBER, 		32, 32 },
-		{ ScaleRecord.ROUTE_NUMBER, 		43, 43 },		
-		{ ScaleRecord.DAIRY_CODE, 			44, 44 },		
-		{ ScaleRecord.SCALE_SERIAL, 		45, 45 },		
-		{ ScaleRecord.SCALE_TOTAL, 			46, 46 },		
+
+
+	private static int[] COLLECTION_RECORD_OFFSETS = { 2, 10, 18, 26 };
+	private static int[] COLLECTION_FIELDS = {
+		 ScaleRecord.QUANTITY,
+		 ScaleRecord.TRANSACTION_TIME,
+		 ScaleRecord.TRIP_NUMBER, 
+		 ScaleRecord.OPERATOR_CODE, 
+		 ScaleRecord.NUM_CANS,  
+		 ScaleRecord.SESSION_CODE
+	};
+	
+	private static int FOOTER_OFFSET = 42;
+	private static int[] FOOTER_FIELDS = { 
+		ScaleRecord.CENTER_NUMBER, 
+		ScaleRecord.ROUTE_NUMBER, 
+		ScaleRecord.DAIRY_CODE, 
+		ScaleRecord.SCALE_SERIAL, 
+		ScaleRecord.SCALE_TOTAL 
 	};
 	
 	private List<ScaleRecord> records = new LinkedList<ScaleRecord>();
 	private File inputFile = null;
-	private Reader inputReader = null;
 	private long count = 0, invalidCount = 0;
 
 	public ScaleImporter(File inputFile) {
@@ -57,16 +72,16 @@ public class ScaleImporter {
 		try {
 			reader = new FileReader(inputFile);
 			bufferedReader = new BufferedReader(reader);
-	
-			CsvReader importer = new CsvReader(bufferedReader);
-			while(importer.readRecord()) {
-				String[] csvRecord = importer.getValues();
-				ScaleRecord scaleRecord = createRecord(CSV_DATA_AM, csvRecord);
-				records.add(scaleRecord);
 
-				if (csvRecord[4] != null && csvRecord[4].trim().length() > 0) { // magic number == pm quantity
-					scaleRecord = createRecord(CSV_DATA_AM, csvRecord);
-					records.add(scaleRecord);
+			CsvReader importer = new CsvReader(bufferedReader);
+			while (importer.readRecord()) {
+				String[] csvRecord = importer.getValues();
+				for (int recNum = 0; recNum < COLLECTION_RECORD_OFFSETS.length; recNum++ ) {
+					if (hasValue(csvRecord[COLLECTION_RECORD_OFFSETS[recNum] + 1])) {
+						final ScaleRecord scaleRecord = createRecord(recNum, csvRecord);
+						scaleRecord.convertValues();
+						records.add(scaleRecord);
+					}
 				}
 			}
 			importer.close();
@@ -74,44 +89,54 @@ public class ScaleImporter {
 			if (bufferedReader != null) {
 				try {
 					bufferedReader.close();
+				} catch (Exception e) {
 				}
-				catch(Exception e) {}
 			}
 			if (reader != null) {
 				try {
 					reader.close();
+				} catch (Exception e) {
 				}
-				catch(Exception e) {}
 			}
 		}
 		return this;
 	}
-	
+
+	private boolean hasValue(String s) {
+		return s != null && s.trim().length() > 0;
+	}
+
 	public List<ScaleRecord> getResults() {
 		return Collections.unmodifiableList(records);
 	}
-	
+
 	public long getValidCount() {
 		return count - invalidCount;
 	}
-	
+
 	public long getInvalidCount() {
 		return invalidCount;
 	}
-	
+
 	public long getCount() {
 		return count;
 	}
-	
-	private ScaleRecord createRecord(int timeOfDay, String[] csvRecord) {
-		ScaleRecord scaleRecord = new ScaleRecord();			
-		for (int i = 0; i < SCALE_TO_RECORD_MAP.length; i++) {
-			final int[] fieldMap = SCALE_TO_RECORD_MAP[i];
-			scaleRecord.setAttr(fieldMap[SCALE_DATA], csvRecord[fieldMap[CSV_DATA_AM]]);
+
+	private ScaleRecord createRecord(final int recordNumber, final String[] csvRecord) {
+		ScaleRecord scaleRecord = new ScaleRecord();
+		
+		scaleRecord.setMemberNumber(csvRecord[0]);
+		scaleRecord.setTransactionDate(csvRecord[1]);
+		
+		for (int i = 0; i < COLLECTION_FIELDS.length; i++) {
+			int indexInScaleRecord = COLLECTION_RECORD_OFFSETS[recordNumber] + i;
+			scaleRecord.setAttr(COLLECTION_FIELDS[i], csvRecord[indexInScaleRecord]);
 		}
-		count++;
-		scaleRecord.validate();
-		if (!scaleRecord.isValid()) invalidCount++;
+		for (int i = 0; i < FOOTER_FIELDS.length; i++) {
+			int indexInScaleRecord = FOOTER_OFFSET + i;
+			scaleRecord.setAttr(FOOTER_FIELDS[i], csvRecord[indexInScaleRecord]);
+		}
+				
 		return scaleRecord;
 	}
 

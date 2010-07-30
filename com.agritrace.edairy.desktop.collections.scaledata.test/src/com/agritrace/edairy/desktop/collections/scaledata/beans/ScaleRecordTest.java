@@ -59,7 +59,7 @@ public class ScaleRecordTest {
 		assertEquals("quantity", record.getQuantity(), "12.2");
 		assertEquals("numCans", record.getNumCans(), "1");
 		
-		record.validate();
+		record.convertValues();
 		
 		assertEquals("isValid", true, record.isValid());
 		assertEquals("validMember", "3434", record.getValidMember());
@@ -101,7 +101,7 @@ public class ScaleRecordTest {
 		assertEquals("numCans", record.getNumCans(), "1");
 //		assertEquals("scaleTotal", record.getScaleTotal(), "14.2");
 		
-		record.validate();
+		record.convertValues();
 		
 		assertEquals("isValid", true, record.isValid());
 		assertEquals("validMember", "3434", record.getValidMember());
@@ -146,7 +146,7 @@ public class ScaleRecordTest {
 		assertEquals("quantity", record.getQuantity(), "");
 		assertEquals("numCans", record.getNumCans(), "1");
 		
-		record.validate();
+		record.convertValues();
 		
 		assertEquals("isValid", false, record.isValid());		
 	}
@@ -160,7 +160,7 @@ public class ScaleRecordTest {
 		record.init(transactionDate, transactionTime, dairyCode, scaleSerial,
 				operatorCode, tripNumber, sessionCode, routeNumber,
 				centerNumber, memberNumber, quantity, numCans, scaleTotal);
-		record.validate();
+		record.convertValues();
 		assertEquals(false, record.isValid());
 		
 		Calendar cal = Calendar.getInstance();

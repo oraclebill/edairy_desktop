@@ -19,7 +19,7 @@ public class ScaleImporterTest {
 			List<ScaleRecord> testData = scaleImporter.readRecords().getResults();
 			System.out.println( " records: " + testData.size() );
 			for ( ScaleRecord record : testData ) {
-				record.validate();
+				record.convertValues();
 				if (record.isValid()) 
 					System.out.println( record ) ;
 				else 

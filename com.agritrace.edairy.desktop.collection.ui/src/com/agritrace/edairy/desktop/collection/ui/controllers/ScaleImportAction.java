@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.swt.SWT;
@@ -40,13 +43,13 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 final class ScaleImportAction implements IActionListener {
 
 	private class ScaleImportProcess extends UIProcess {
-		 /**
-		  *  4 hours in milliseconds 
-		  */
+		/**
+		 * 4 hours in milliseconds
+		 */
 		private static final long MAX_COLLECTION_TIME_DIFFERENTIAL = 1000 * 60 * 4;
 
 		File importFile;
-//		int lineCount;
+		// int lineCount;
 
 		private List<String> msgList;
 		private Map<String, List<Object>> errMessages;
@@ -54,7 +57,7 @@ final class ScaleImportAction implements IActionListener {
 		public ScaleImportProcess(File importFile, Object context) {
 			super("Scale Import", true, context);
 			this.importFile = importFile;
-//			this.lineCount = scaleData.size();
+			// this.lineCount = scaleData.size();
 
 			msgList = new LinkedList<String>();
 			errMessages = new HashMap<String, List<Object>>();
@@ -67,44 +70,47 @@ final class ScaleImportAction implements IActionListener {
 
 		@Override
 		public boolean runJob(IProgressMonitor monitor) {
-			int fileSize = (int)importFile.length();
+			int fileSize = (int) importFile.length();
 			double quantum = 1.0d;
 			double multiple = 1.0d;
-			
+
 			monitor.beginTask("Importing...", fileSize * 2);
-			
+
 			setNote("Reading raw data...");
-			
+
 			final ScaleImporter scaleImporter = new ScaleImporter(importFile);
 			final List<ScaleRecord> scaleData = new LinkedList<ScaleRecord>();
 			try {
-				scaleData.addAll( scaleImporter.readRecords().getResults() );
-				quantum = (double)fileSize / (double)scaleData.size();
-				
-				// we don't want to report status more than 100 times, since 
+				scaleData.addAll(scaleImporter.readRecords().getResults());
+				quantum = (double) fileSize / (double) scaleData.size();
+
+				// we don't want to report status more than 100 times, since
 				// synchronization with UI thread is costly..
 				if (scaleData.size() > 100) {
-					multiple =  scaleData.size() / 100;
+					multiple = scaleData.size() / 100;
 					quantum = quantum * multiple;
-				}				
-			}
-			catch(IOException ioe) {
+				}
+			} catch (IOException ioe) {
 				msgList.add("Error reading raw data: " + ioe.getMessage());
 			}
-			
+
 			// account for time reading file into scaleRecords
 			monitor.worked(fileSize);
-			
+			setNote("Processing...");
+
 			// generate one or more collection groups - one group per
 			// scale/date/route/session (driver, vehicle,...)
-			
-			int intQuantum = (int)quantum;
+
+			int intQuantum = (int) quantum;
 			int counter = 0;
 			for (ScaleRecord scaleRecord : scaleData) {
+				if (monitor.isCanceled()) {
+					return false;
+				}
 				CollectionJournalPage journalPage = getJournalForScaleRecord(scaleRecord);
-				/*boolean journalConsistent = */validateJournalInfo(journalPage, scaleRecord);
+				/* boolean journalConsistent = */validateJournalInfo(journalPage, scaleRecord);
 				ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
-				try {					
+				try {
 					// primary data
 					importRecord.setCollectionJournal(journalPage);
 					importRecord.setRecordedMember(scaleRecord.getMemberNumber());
@@ -112,51 +118,47 @@ final class ScaleImportAction implements IActionListener {
 					importRecord.setCollectionTime(scaleRecord.getValidDate());
 					importRecord.setScaleSerial(scaleRecord.getScaleSerial());
 					importRecord.setTripNumber(scaleRecord.getTripNumber());
-					importRecord.setValidatedMember(getMemberById(scaleRecord.getMemberNumber()));
-
 					importRecord.setCenterNumber(scaleRecord.getCenterNumber());
 					importRecord.setNumCans(scaleRecord.getNumCans());
-					importRecord.setOffRoute(false); // TODO: calculate
-					importRecord.setFrom(null); // TODO: calculate
+					importRecord.setOperatorCode(scaleRecord.getOperatorCode());
+
+					Membership memberInfo = getMemberById(scaleRecord.getMemberNumber());
+					if (memberInfo != null) {
+						importRecord.setValidatedMember(memberInfo);
+						importRecord.setOffRoute(memberInfo.getDefaultRoute() != journalPage.getRoute()); // TODO:
+																											// calculate
+						importRecord.setFrom(null); // TODO: calculate (how?)
+						importRecord.setFarmContainer(null); // don't seem to
+						// get one fromm
+						// the scale ??
+					}
 					importRecord.setDairyContainer(null); // don't seem to
 															// get one fromm
 															// the scale ??
-					importRecord.setFarmContainer(null); // don't seem to
-															// get one fromm
-															// the scale ??
-					importRecord.setOperatorCode(scaleRecord.getOperatorCode());
 
-					/*boolean dbConsistent =*/ validateDbLookups(importRecord);
+					/* boolean dbConsistent = */validateDbLookups(importRecord);
 
 					importRecord.setFlagged(importRecord.getValidatedMember() != null
 							&& importRecord.getQuantity() != null);
-					
-					AbstractDirectoryController.getDisplay().syncExec(new Runnable()  {
-						public void run() {
-							try { Thread.sleep(1000);
-							} catch( InterruptedException i) {}
-						}
-					});
+
 				} catch (Exception e) {
 					System.err.println(e.getMessage());
 					addError(e.getMessage(), importRecord);
 				}
-				
 
 				if (++counter % multiple == 0) {
 					monitor.worked(intQuantum);
 				}
 			}
-			
+
 			setNote("Validating raw data...");
-			
-			for (CollectionJournalPage page : pageMap.values()) {				
+
+			for (CollectionJournalPage page : pageMap.values()) {
 				page.setStatus(JournalStatus.PENDING);
 				setPageJournalDate(page);
-				setPageTotals(page);
+				updateRollupValues(page);
 				setDriver(page);
 			}
-			
 
 			return true;
 		}
@@ -164,12 +166,9 @@ final class ScaleImportAction implements IActionListener {
 		@Override
 		public void finalUpdateUI() {
 			setNote("Preparing to save new data...");
-			
-			for (String err : errMessages.keySet()) {
-				msgList.add(String.format("%-4d records failed with a '%s' error.",
-						errMessages.get(err).size(), err));
-			}
 
+			prepareMessageList();
+			
 			boolean importEnabled = pageMap.size() > 0;
 			ImportResultsDialog irDialog = new ImportResultsDialog(AbstractDirectoryController.getShell(), msgList,
 					importEnabled);
@@ -186,10 +185,25 @@ final class ScaleImportAction implements IActionListener {
 					} catch (Exception e) {
 						e.getMessage();
 					}
-				}				
+				}
 			}
 		}
-		
+
+		/**
+		 * 
+		 */
+		protected void prepareMessageList() {
+			for (String err : errMessages.keySet()) {
+				msgList.add(String.format("%-4d records failed with a '%s' error.", errMessages.get(err).size(), err));
+			}
+			int allEntries = 0;
+			for (CollectionJournalPage page : pageMap.values()) {
+				allEntries += page.getEntryCount();
+			}
+			msgList.add(0, String.format("Import completed with %d sessions, %d total collections, and %d messages",
+					pageMap.keySet().size(), allEntries, errMessages.values().size()));
+		}
+
 		protected void addError(String message, Object detail) {
 			List<Object> errList = errMessages.get(message);
 			if (errList == null) {
@@ -199,33 +213,16 @@ final class ScaleImportAction implements IActionListener {
 			errList.add(detail);
 		}
 
-		
 		private void setPageJournalDate(CollectionJournalPage page) {
-//			if (page.getJournalDate() == null) {
-//				for (CollectionJournalLine line : page.getJournalEntries()) {
-//					ScaleImportRecord importRec = (ScaleImportRecord) line;
-//					if (importRec.getCollectionTime() != null) {
-//						page.setJournalDate(importRec.getCollectionTime());
-//						break;
-//					}
-//				}
-//				if (page.getJournalDate() == null) {
-//					System.err.println("------ ERR: no date");
-//					page.setJournalDate(new Date());
-//				}
-//			}
 			if (page.getJournalDate() == null) {
-//				log(LogService.LOG_DEBUG, String.format("date: %s, truncDate: %s\n", importRecord.getCollectionTime(),
-//						truncateTime(importRecord.getCollectionTime())));
 				Date lowest = null, highest = null, journalDate = null;
 				for (CollectionJournalLine line : page.getJournalEntries()) {
 					ScaleImportRecord record = (ScaleImportRecord) line;
 					Date collectionTime = record.getCollectionTime();
 					if (collectionTime == null) {
 						addError("Record is missing collection time.", record);
-					}
-					else {
-						if (lowest == null || collectionTime.compareTo(lowest) < 0) { 
+					} else {
+						if (lowest == null || collectionTime.compareTo(lowest) < 0) {
 							lowest = collectionTime;
 						}
 						if (highest == null || collectionTime.compareTo(highest) > 0) {
@@ -237,35 +234,39 @@ final class ScaleImportAction implements IActionListener {
 					Calendar lowCal = Calendar.getInstance(), highCal = Calendar.getInstance();
 					lowCal.setTime(lowest);
 					highCal.setTime(highest);
-					long milliDiff = (highCal.getTimeInMillis() -  lowCal.getTimeInMillis());
+					long milliDiff = (highCal.getTimeInMillis() - lowCal.getTimeInMillis());
 					if (milliDiff > MAX_COLLECTION_TIME_DIFFERENTIAL) {
 						addError("Difference between collection times exceeds threshold: " + milliDiff, page);
-					}
-					else {
-						lowCal.add(Calendar.MILLISECOND, (int)(milliDiff / 2));
+					} else {
+						lowCal.add(Calendar.MILLISECOND, (int) (milliDiff / 2));
 						journalDate = lowCal.getTime();
 					}
-				}
-				else {
+				} else if (lowest == null && highest == null) {
+					throw new IllegalStateException("Unable to find any dates in imported scale records.");
+				} else {
 					throw new IllegalStateException("Unable to find any dates in imported scale records.");
 				}
-				page.setJournalDate(truncateTime(journalDate));
+				page.setJournalDate(journalDate);
 			}
 		}
 
-		private void setPageTotals(CollectionJournalPage page) {
+		private void updateRollupValues(CollectionJournalPage page) {
 			BigDecimal quantity = new BigDecimal(0);
+
 			int numSuspended = 0, numRejected = 0;
 			for (CollectionJournalLine line : page.getJournalEntries()) {
 				quantity = quantity.add(line.getQuantity());
+
+				line.setFlagged(line.getValidatedMember() == null);
+
 				if (line.isFlagged())
 					numSuspended++;
 				if (line.isRejected())
 					numRejected++;
 			}
+			page.setDriverTotal(quantity);
 			page.setRecordTotal(quantity);
 			page.setEntryCount(page.getJournalEntries().size());
-			page.setDriverTotal(quantity);
 			page.setRejectedCount(numRejected);
 			page.setSuspendedCount(numSuspended);
 		}
@@ -290,19 +291,13 @@ final class ScaleImportAction implements IActionListener {
 				}
 				// fallback to employee #1
 				System.err.println("WARNING: Unable to assign driver based on codes. Falling back to first Employee");
+				Log4r.getLogger(getClass()).log(LogService.LOG_WARNING,
+						"WARNING: Unable to assign driver based on codes. Falling back to first Employee");
+
 				page.setDriver(dairyRepo.getLocalDairy().getEmployees().get(0));
 			}
 		}
 
-		private Date truncateTime(Date date) {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			cal.set(Calendar.MILLISECOND, 0);
-			return cal.getTime();
-		}
 	}
 
 	/**
@@ -321,10 +316,15 @@ final class ScaleImportAction implements IActionListener {
 	@Override
 	public void callback() {
 		Object navigationContext = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
+		SubModuleView rienaView = (SubModuleView) Platform.getAdapterManager().getAdapter(navigationContext,
+				SubModuleView.class);
+		if (rienaView != null) {
+			navigationContext = rienaView.getController().getNavigationNode();
+		}
 		final FileDialog fileDialog = new FileDialog(AbstractDirectoryController.getShell(), SWT.DIALOG_TRIM);
 		final String retVal = fileDialog.open();
 		File importFile = new File(retVal);
-		
+
 		UIProcess process = new ScaleImportProcess(importFile, navigationContext);
 		// job.setProperty(UIProcess.PROPERTY_CONTEXT, navigationContext);
 		// job.setUser(true);// to be visualized the job has to be user
@@ -333,34 +333,6 @@ final class ScaleImportAction implements IActionListener {
 		process.setNote("Importing...");
 		process.start();
 	}
-
-//	private void doScaleImport() {
-//		final FileDialog fileDialog = new FileDialog(AbstractDirectoryController.getShell(), SWT.DIALOG_TRIM);
-//		final String retVal = fileDialog.open();
-//		File importFile = new File(retVal);
-//		if (importFile.isFile() && importFile.canRead()) {
-//			ScaleImporter scaleImporter = new ScaleImporter(importFile);
-//			try {
-//				List<ScaleRecord> scaleData = scaleImporter.readRecords().getResults();
-//
-//				// TODO
-//				milkCollectionLogController.refreshTableContents();
-//			} catch (IOException e) {
-//				// TODO: error message
-//				this.milkCollectionLogController.getInfoFlyout().addInfo(
-//						new InfoFlyoutData(null, "Error importing scale data. Please contact support for assistance."));
-//				this.milkCollectionLogController.log(LogService.LOG_ERROR, e.getMessage(), e);
-//			}
-//		} else {
-//			Dialog dlg = new ErrorDialog(null, "Error reading file", "The file " + importFile + " can not be read.",
-//					new Status(0, Activator.PLUGIN_ID, "File Error"), 0);
-//			dlg.open();
-//		}
-//	}
-
-
-
-
 
 	/**
 	 * Validate that lookup fields (memberNumber -> member, routeCode -> route,
@@ -479,22 +451,5 @@ final class ScaleImportAction implements IActionListener {
 				record.getSessionCode());
 		return buffer.toString();
 	}
-
-//	private void createCollectionDetailNode(INavigationNode<?> currentNode, CollectionJournalPage journalPage) {
-//		currentNode.navigate(new NavigationNodeId("milk-collection-entry-node", journalPage.getReferenceNumber()), //$NON-NLS-1$
-//				new NavigationArgument(journalPage));
-//
-//		// final ISubModuleNode detailViewNode = new SubModuleNode(new
-//		// NavigationNodeId("scale-data-review-node",
-//		//				journalPage.getReferenceNumber()), "Scale -" + journalPage.getReferenceNumber()); //$NON-NLS-1$
-//		//		detailViewNode.setIcon("scale_detail.gif"); //$NON-NLS-1$
-//		// detailViewNode.setContext("IMPORTED_RECORDS", journalPage); //
-//		// backup..
-//		// WorkareaManager.getInstance()
-//		// .registerDefinition(detailViewNode, ScaleImportViewController.class,
-//		// ScaleDataImportView.ID)
-//		// .setRequiredPreparation(true);
-//		// return detailViewNode;
-//	}
 
 }

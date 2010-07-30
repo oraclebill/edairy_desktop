@@ -47,7 +47,7 @@ public class RawScaleRecord {
 	public static final int ATTR_COUNT = BASE + 13;
 
 	private String[] attributes = new String[ATTR_COUNT];
-	boolean valid;
+	boolean valid = true;
 
 	protected String getAttr(int attr) {
 		check(attr < ATTR_COUNT);
@@ -74,7 +74,7 @@ public class RawScaleRecord {
 			setAttr(i, params[i]);
 		}
 
-		validate();
+		convertValues();
 	}
 
 	public boolean isValid() {
@@ -89,16 +89,20 @@ public class RawScaleRecord {
 	 * Base simply checks that all attributes have been set.
 	 * 
 	 * Subclasses should override to perform more meaningful validation.
+	 * @throws ValidationException 
 	 */
-	protected void validate() {
-		boolean valid = true;
-		for (int i = 0; i < ATTR_COUNT; i++) {
-			valid = getAttr(i) != null;
-			if (getAttr(i) == null) {
-				setValid(false);
-				break;
-			}
-		}
+	protected void convertValues()  {
+//		boolean valid = true;
+//		for (int i = 0; i < ATTR_COUNT; i++) {
+//			valid = getAttr(i) != null;
+//			if (getAttr(i) == null) {
+//				setValid(false);
+//				break;
+//			}
+//		}
+//		if (!valid) {
+//			throw new ValidationException();
+//		}
 	}
 
 	public String getTransactionDate() {
