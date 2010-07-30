@@ -1,4 +1,5 @@
 <plugin>
+   <extension-point id="splashExtension" name="Splash Extensions" schema="schema/splashExtension.exsd"/>
    <extension
          id="dairy_manager_prod"
          point="org.eclipse.core.runtime.products">
@@ -179,6 +180,53 @@
           class="org.eclipse.riena.ui.ridgets.swt.BorderMarkerSupport"
           id="com.agritrace.edairy.desktop.markerSupport">
     </markerSupport>
+ </extension>
+ <extension
+       point="org.eclipse.ui.splashHandlers">
+    <splashHandler
+          class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
+          id="com.agritrace.edairy.desktop.splashHandlers.extensible">
+    </splashHandler>
+    <splashHandlerProductBinding
+          productId="com.agritrace.edairy.desktop.dairy_manager_prod"
+          splashId="com.agritrace.edairy.desktop.splashHandlers.interactive">
+    </splashHandlerProductBinding>
+    <splashHandler
+          class="com.agritrace.edairy.desktop.splashHandlers.InteractiveSplashHandler"
+          id="com.agritrace.edairy.desktop.splashHandlers.interactive">
+    </splashHandler>
+    <splashHandler
+          class="com.agritrace.edairy.desktop.splashHandlers.BrowserSplashHandler"
+          id="com.agritrace.edairy.desktop.splashHandlers.browser">
+    </splashHandler>
+ </extension>
+ <extension
+       point="com.agritrace.edairy.desktop.splashExtension">
+    <splashExtension
+          icon="icons/af.png"
+          id="af"
+          tooltip="Application Framework">
+    </splashExtension>
+    <splashExtension
+          icon="icons/embedded.png"
+          id="embedded"
+          tooltip="Embedded">
+    </splashExtension>
+    <splashExtension
+          icon="icons/enterprise.png"
+          id="enterprise"
+          tooltip="Enterprise">
+    </splashExtension>
+    <splashExtension
+          icon="icons/languages.png"
+          id="languages"
+          tooltip="Languages">
+    </splashExtension>
+    <splashExtension
+          icon="icons/rcp.png"
+          id="rcp"
+          tooltip="RCP">
+    </splashExtension>
  </extension>
  
 </plugin>

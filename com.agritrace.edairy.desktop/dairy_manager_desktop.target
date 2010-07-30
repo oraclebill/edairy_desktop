@@ -3,7 +3,7 @@
 
 <target name="edairy_desktop_lib">
 <locations>
-<location path="/Users/oraclebill/Development/Projects/eclipse-3.6-delta-pack/eclipse" type="Directory"/>
-<location path="/Users/oraclebill/Development/Projects/edairy_desktop_lib" type="Directory"/>
+<location path="/Users/bjones/Development/Projects/eclipse-3.6-delta-pack/eclipse" type="Directory"/>
+<location path="/Users/bjones/Development/Projects/edairy_desktop_lib" type="Directory"/>
 </locations>
 </target>

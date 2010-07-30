@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.agritrace.edairy.desktop.internal.experimental.install.importWizards;
 
-import org.eclipse.core.resources.IFile;
+//import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
@@ -28,9 +28,9 @@ public class ImportWizard extends Wizard implements IImportWizard {
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
 	public boolean performFinish() {
-		IFile file = mainPage.createNewFile();
-        if (file == null)
-            return false;
+//		IFile file = mainPage.createNewFile();
+//        if (file == null)
+//            return false;
         return true;
 	}
 	 
