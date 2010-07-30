@@ -25,6 +25,8 @@ import com.agritrace.edairy.desktop.common.ui.views.BlankView;
 import com.agritrace.edairy.desktop.dairy.containers.ui.controllers.ContainerLogViewController;
 import com.agritrace.edairy.desktop.dairy.containers.ui.views.ContainerLogView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationDirectoryView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
@@ -337,7 +339,7 @@ public class EDairyManagerApplication extends SwtApplication {
 			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS_BRANCH_LOCATIONS,
 					"Dairy Locations", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_BRANCH_LOCATIONS,
-					"Branch Locations", moduleSystem, DairyLocationView.ID, DairyLocationController.class); //$NON-NLS-1$ 
+					"Branch Locations", moduleSystem, DairyLocationDirectoryView.ID, DairyLocationDirectoryController.class); //$NON-NLS-1$ 
 
 		}
 		{

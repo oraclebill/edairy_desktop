@@ -10,6 +10,13 @@
             name="Branch Location Editor"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationDirectoryView"
+            id="edairy.locations.dairy.directory"
+            name="Branch Location Directory Editor"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>
