@@ -106,7 +106,7 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	protected RecordDialog<DairyLocation> getRecordDialog(Shell shell) {
 		DairyLocationEditDialog dialog = new DairyLocationEditDialog(shell);
 		dialog.getController().setContext("routes", dairyLocationRepo.getRoutes());
-		dialog.setTitle("Edit Customer");
+		dialog.setTitle("Edit Dairy Location");
 		return dialog;
 	}
 
