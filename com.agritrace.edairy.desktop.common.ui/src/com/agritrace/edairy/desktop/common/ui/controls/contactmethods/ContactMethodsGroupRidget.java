@@ -103,6 +103,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 			contactType.updateFromModel();
 
 			final ITextRidget contactInfo = getRidget(ITextRidget.class, "contactInfo"); //$NON-NLS-1$
+			contactInfo.setDirectWriting(true);
 			contactInfo.bindToModel(rowData, CONTACT_INFO_DETAIL_PROPERTY);
 			contactInfo.updateFromModel();
 		}

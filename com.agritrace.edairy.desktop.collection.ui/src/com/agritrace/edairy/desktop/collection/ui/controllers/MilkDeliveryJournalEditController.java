@@ -8,12 +8,14 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeTableRidget;
+import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRowRidget;
@@ -75,13 +77,16 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 			}
 			binId.updateFromModel();
 
-			final INumericTextRidget amount = getRidget(INumericTextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); //$NON-NLS-1$
+			final IDecimalTextRidget amount = getRidget(IDecimalTextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); //$NON-NLS-1$
 			amount.setSigned(false);
+			amount.setDirectWriting(true);
 			amount.setMandatory(true);
+			amount.setModelToUIControlConverter(NumberToStringConverter.fromBigDecimal());
 			amount.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__QUANTITY.getName());
 			amount.updateFromModel();
 			
-			final  ITextRidget description =  getRidget(ITextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION); //$NON-NLS-1$
+			final  ITextRidget description =  getRidget(ITextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION); //$NON-NLS-1$]
+			description.setDirectWriting(true);
 			description.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__DESCRIPTION.getName());
 			description.updateFromModel();			
 		}		

@@ -66,7 +66,7 @@ public class DeliveryJournalEditPanel extends Composite {
 			Text descriptionTxt;
 			addUIControl(UIControlsFactory.createCCombo(this), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID); 
 //			addUIControl(UIControlsFactory.createText(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID); 
-			addUIControl(UIControlsFactory.createTextNumeric(this), DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); 
+			addUIControl(UIControlsFactory.createTextDecimal(this), DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); 
 			addUIControl(descriptionTxt = UIControlsFactory.createText(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION);
 			descriptionTxt.addTraverseListener(new TraverseListener() {
 				@Override
