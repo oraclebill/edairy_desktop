@@ -1,38 +1,31 @@
 package com.agritrace.edairy.desktop.dairy.locations.ui.dialogs;
 
-import org.eclipse.jface.dialogs.DialogTray;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
+import org.eclipse.riena.ui.swt.ChoiceComposite;
+import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
-import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
-import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyDialogController;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 
 public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 	private Composite comonComp;
-
-	// private static int WIDTH_HEIGHT = 400;
-	// private static int DESC_HEIGHT_HEIGHT = 50;
 
 	public DairyLocationEditDialog(Shell shell) {
 		super(shell);
@@ -40,115 +33,65 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
-		// comonComp = UIControlsFactory.createComposite(parent);
-		//
-		// comonComp.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true,
-		// true, 1, 1));
-		// comonComp.setLayout(new GridLayout(2, false));
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
-		// true).applyTo(comonComp);
-		//
-		// final GridDataFactory factory =
-		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
-		// true);
-		//
-		// final Composite composite = new Composite(comonComp, SWT.NONE);
-		// composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		//
-		// composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
-		// 1, 1));
-		// composite.setLayout(new GridLayout(2, false));
-		// UIControlsFactory.createLabel(composite, "Customer ID");
-		// final Text txtDate = UIControlsFactory.createText(composite);
-		// txtDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
-		// 1, 1));
-		// factory.applyTo(txtDate);
-		//
-		// addUIControl(txtDate, CustomerBindingConstants.BIND_ID_CUSTOMER_ID);
-		//
-		// UIControlsFactory.createLabel(composite, "Company Name");
-		// final Text companyNameText = UIControlsFactory.createText(composite);
-		// companyNameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-		// false, 1, 1));
-		// factory.copy().applyTo(companyNameText);
-		// addUIControl(companyNameText,
-		// CustomerBindingConstants.BIND_ID_COMPANY_NAME);
-		//
-		// UIControlsFactory.createLabel(composite, "Status");
-		// final Combo statusCombo = UIControlsFactory.createCombo(composite);
-		// statusCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-		// false, 1, 1));
-		// factory.copy().applyTo(statusCombo);
-		// addUIControl(statusCombo,
-		// CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS);
-		//
-		// UIControlsFactory.createLabel(composite, "Legal Name");
-		// final Text legalNameText = UIControlsFactory.createText(composite);
-		// legalNameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-		// false, 1, 1));
-		// factory.copy().applyTo(legalNameText);
-		// addUIControl(legalNameText,
-		// CustomerBindingConstants.BIND_ID_LEGAL_NAME);
-		//
-		// UIControlsFactory.createLabel(composite, "Phone Number");
-		// final Text phoneText = UIControlsFactory.createText(composite);
-		// phoneText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-		// false, 1, 1));
-		// factory.copy().applyTo(phoneText);
-		// addUIControl(phoneText,
-		// CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
-		//
-		// UIControlsFactory.createLabel(composite, "Category");
-		// final Combo typeCombo = UIControlsFactory.createCombo(composite);
-		// typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false,
-		// 1, 1));
-		// GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL,
-		// SWT.BEGINNING).applyTo(typeCombo);
-		// addUIControl(typeCombo,
-		// CustomerBindingConstants.BIND_ID_CUSTOMERTYPE);
-		//
-		// UIControlsFactory.createLabel(composite, "Description");
-		// final Text descText = UIControlsFactory.createTextMulti(composite,
-		// false, true);
-		// descText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false,
-		// 1, 1));
-		// GridDataFactory.swtDefaults().align(SWT.FILL,
-		// SWT.BEGINNING).grab(true, false).hint(-1, 50).applyTo(descText);
-		// addUIControl(descText, CustomerBindingConstants.BIND_ID_DESCRIPTION);
-		//
-		// createContactGroup(comonComp);
-		//
-		// new Label(comonComp, SWT.NONE);
-		// parent.pack();
+		comonComp = UIControlsFactory.createComposite(parent);
+		comonComp.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
+		comonComp.setLayout(new GridLayout(1, true));
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
 
+		final Composite composite = new Composite(comonComp, SWT.NONE);
+		composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
+		composite.setLayout(new GridLayout(2, false));
+		
+		UIControlsFactory.createLabel(composite, "Name");
+		final Text txtDate = UIControlsFactory.createText(composite);
+		txtDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
+		addUIControl(txtDate, DairyLocationController.RIDGET_ID_NAME);
+
+		//description
+		UIControlsFactory.createLabel(composite, "Description", SWT.LEFT);
+		final Text descriptionText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,DairyLocationController.RIDGET_ID_DESCRIPTION);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(descriptionText);
+
+		//phone
+		UIControlsFactory.createLabel(composite, "Phone", SWT.LEFT);
+		final Text phoneText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,	DairyLocationController.RIDGET_ID_PHONE);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(phoneText);
+
+		//Date 
+		UIControlsFactory.createLabel(composite, "Date Opened", SWT.LEFT);
+		final DatePickerComposite dateOpenedPicker = UIControlsFactory.createDatePickerComposite(composite,
+				DairyLocationController.RIDGET_ID_DATEOPENED);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateOpenedPicker);
+		
+		//functions
+		UIControlsFactory.createLabel(composite, "Functions", SWT.LEFT);
+		final ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(composite, SWT.None, true,
+				DairyLocationController.RIDGET_ID_FUNCTIONS);
+		functionsChoice.setOrientation(SWT.HORIZONTAL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(functionsChoice);
+		
+		//route
+		UIControlsFactory.createLabel(composite, "Route", SWT.LEFT);
+		final CCombo combo = UIControlsFactory.createCCombo(composite, DairyLocationController.RIDGET_ID_ROUTE);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(combo);
+		createContactGroup(comonComp);
+		parent.pack();
 	}
 
 	private void createContactGroup(Composite parent) {
 
-//		final Composite photoPanel = new ProfilePhotoComposite(comonComp, SWT.NONE);
-//		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoPanel, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
-//		new Label(photoPanel, SWT.NONE);
-//
-//		final Group companyContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
-//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(companyContactGroup);
-//
-//		LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationTabs);
-//
-//		final CTabItem commsTab = new CTabItem(locationTabs.getTabFolder(), SWT.NONE);
-//		commsTab.setText("Contact Info");
-//		final ContactMethodsGroup commGroup = new ContactMethodsGroup(locationTabs.getTabFolder());
-//		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");
-//		commsTab.setControl(commGroup);
-//
-//		GridLayoutFactory.swtDefaults().generateLayout(companyContactGroup);
+		final Group companyContactGroup = UIControlsFactory.createGroup(parent, "Address Information");
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(companyContactGroup);
+
+		LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationTabs);
+		GridLayoutFactory.swtDefaults().generateLayout(companyContactGroup);
 	}
 
 	@Override
 	protected AbstractWindowController createController() {
-		// final CustomerDialogController controller = new
-		// CustomerDialogController();
-		// controller.setWorkingCopy( null );
-		return null;
+		return new DairyDialogController();
 	}
+
 }

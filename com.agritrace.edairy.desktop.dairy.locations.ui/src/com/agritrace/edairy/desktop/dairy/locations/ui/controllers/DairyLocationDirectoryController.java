@@ -11,6 +11,7 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -19,30 +20,31 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.util.MatchUtil;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.DairyLocationEditDialog;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 public class DairyLocationDirectoryController extends BasicDirectoryController<DairyLocation> {
 
-	
+
 	private IMultipleChoiceRidget functions;
 	private IComboRidget routeTypeSearchCombo;
 	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
 
 	private final DairyLocationSearchBean searchBean = new DairyLocationSearchBean();
-	final IDairyRepository locationRepository = DairyRepository.getInstance();
+	private DairyLocationRepository dairyLocationRepo = new DairyLocationRepository();
 
 
 	public DairyLocationDirectoryController() {
 		super();
 		setEClass(DairyPackage.Literals.DAIRY_LOCATION);
+		setRepository(dairyLocationRepo);
 
 		addTableColumn("Name", DairyPackage.Literals.DAIRY_LOCATION__NAME);
 		addTableColumn("Phone", DairyPackage.Literals.DAIRY_LOCATION__PHONE);
 		addTableColumn("Functions", DairyPackage.Literals.DAIRY_LOCATION__FUNCTIONS);
-		addTableColumn("Route", DairyPackage.Literals.DAIRY_LOCATION__ROUTE);
+		addTableColumn("Route", DairyPackage.Literals.DAIRY_LOCATION__ROUTE, new DairyLocationRouteFormatter());
 		addTableColumn("Description", DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
-	
+
 	}
 
 	@Override
@@ -57,10 +59,10 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 
 		//
 		routeTypeSearchCombo = getRidget(IComboRidget.class,DairyLocationController.RIDGET_ID_ROUTE);
-		routeTypeSearchCombo.bindToModel(new WritableList(locationRepository.allRoutes(), Route.class), Route.class, "getName",
+		routeTypeSearchCombo.bindToModel(new WritableList(dairyLocationRepo.getRoutes(), Route.class), Route.class, "getName",
 				BeansObservables.observeValue(searchBean,"routeSearchValue"));
 		routeTypeSearchCombo.updateFromModel();
-	
+
 	}
 
 	/**
@@ -70,19 +72,30 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	 */
 	@Override
 	protected DairyLocation createNewModel() {
-		final DairyLocation customer = (DairyLocation) EMFUtil.createWorkingCopy(this.getEClass(), 3);
-		return customer;
+		final DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
+		EMFUtil.populate(dairyLocation);
+		return dairyLocation;
 	}
 
 	@Override
 	protected List<DairyLocation> getFilteredResult() {
 		final List<DairyLocation> filtered = new ArrayList<DairyLocation>();
-		final List<DairyLocation> allLocations =  locationRepository.getLocalDairyLocations();
-		System.err.println("allCustomers: " + allLocations);
+		final List<DairyLocation> allLocations =  dairyLocationRepo.all();
+		System.err.println("allLocations: " + allLocations);
 		for (final DairyLocation c : allLocations) {
-			if (MatchUtil.matchEquals(searchBean.getFunctionSearchValues(),c.getFunctions())
-					&& MatchUtil.matchEquals(searchBean.getRouteSearchValue(), c.getRoute())){
-				filtered.add(c);
+			if (searchBean.getRouteSearchValue() == null || MatchUtil.matchEquals(searchBean.getRouteSearchValue().getCode(), c.getRoute().getCode())){
+				List<DairyFunction> filterFunctions = searchBean.getFunctionSearchValues();
+				List<DairyFunction> functions = c.getFunctions();
+				boolean found = true;
+				for(DairyFunction f : filterFunctions){
+					if(!functions.contains(f)){
+						found = false;
+						break;
+					}
+				}
+				if(found){
+					filtered.add(c);
+				}
 			}
 		}
 		System.err.println("Filtered: " + filtered);
@@ -91,9 +104,10 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 
 	@Override
 	protected RecordDialog<DairyLocation> getRecordDialog(Shell shell) {
-//		CustomerEditDialog dialog = new CustomerEditDialog(shell);
-//		dialog.setTitle("Edit Customer");
-		return null;
+		DairyLocationEditDialog dialog = new DairyLocationEditDialog(shell);
+		dialog.getController().setContext("routes", dairyLocationRepo.getRoutes());
+		dialog.setTitle("Edit Customer");
+		return dialog;
 	}
 
 	@Override
@@ -101,4 +115,5 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 		functions.setSelection(null);
 		routeTypeSearchCombo.setSelection(routeTypeSearchCombo.getEmptySelectionItem());
 	}
+
 }
