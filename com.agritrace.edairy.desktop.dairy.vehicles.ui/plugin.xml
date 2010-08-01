@@ -10,6 +10,13 @@
             name="Vehicle Log"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView"
+            id="edairy.locations.vehicle.directory"
+            name="Vehicle Log"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>

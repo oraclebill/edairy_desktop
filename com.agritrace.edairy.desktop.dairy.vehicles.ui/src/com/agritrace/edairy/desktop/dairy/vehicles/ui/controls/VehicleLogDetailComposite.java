@@ -22,9 +22,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.AssetInfo;
 
-public class VehicleLogDetailComposite extends Composite {
+public class VehicleLogDetailComposite extends CompositePanel {
 
 	public VehicleLogDetailComposite(Composite parent) {
 		super(parent, SWT.NONE);

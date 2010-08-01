@@ -14,7 +14,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 
-public class AssetInfo extends Composite implements IComplexComponent {
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
+
+public class AssetInfo extends CompositePanel implements IComplexComponent {
 	
 	static {
 		// TODO: should this be in the activator?
@@ -33,18 +35,17 @@ public class AssetInfo extends Composite implements IComplexComponent {
 	public AssetInfo(Composite parent, int style) {
 		super(parent, style);
 		setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-//		setBackground(parent.getBackground());
 		
 		// Date Acquired
 		UIControlsFactory.createLabel(this, "Date Acquired");
-		final DateTime dateAcqText = UIControlsFactory.createDate(this, SWT.MEDIUM,
+		final DateTime dateAcqText = UIControlsFactory.createDate(this, SWT.MEDIUM|SWT.BORDER,
 				BIND_ID_ASSET_DATE_ACQUIRED);
 		GridDataFactory.swtDefaults().grab(false, false).applyTo(dateAcqText);
 		uiControls.add(dateAcqText);
 
 		// Damage Date
 		UIControlsFactory.createLabel(this, "Damage Date");
-		final DateTime damageDateText = UIControlsFactory.createDate(this, SWT.MEDIUM,
+		final DateTime damageDateText = UIControlsFactory.createDate(this, SWT.MEDIUM|SWT.BORDER,
 				BIND_ID_ASSET_DATE_DAMAGE);
 		GridDataFactory.swtDefaults().grab(false, false).applyTo(damageDateText);
 		uiControls.add(damageDateText);
@@ -58,7 +59,7 @@ public class AssetInfo extends Composite implements IComplexComponent {
 
 		// Disposal Date
 		UIControlsFactory.createLabel(this, "Disposal Date"); //$NON-NLS-1$
-		final DateTime disposalDateText = UIControlsFactory.createDate(this, SWT.MEDIUM,
+		final DateTime disposalDateText = UIControlsFactory.createDate(this, SWT.MEDIUM|SWT.BORDER,
 				BIND_ID_ASSET_DATE_DISPOSAL);
 		GridDataFactory.swtDefaults().grab(false, false).applyTo(disposalDateText);
 		uiControls.add(disposalDateText);

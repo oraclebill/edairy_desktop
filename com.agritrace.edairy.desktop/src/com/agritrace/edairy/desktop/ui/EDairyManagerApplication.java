@@ -30,7 +30,9 @@ import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationDirect
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogViewController;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
@@ -325,7 +327,7 @@ public class EDairyManagerApplication extends SwtApplication {
 			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS_DAIRY_VEHICLES,
 					"Vehicles", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_VEHICLE_REGISTER,
-					"Vehicles", moduleSystem, VehicleLogView.ID, VehicleLogViewController.class); //$NON-NLS-1$ 
+					"Vehicles", moduleSystem, VehicleLogDirectoryView.ID, VehicleLogDirectoryViewController.class); //$NON-NLS-1$ 
 
 		}
 		{

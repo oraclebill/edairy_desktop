@@ -55,7 +55,7 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 	@Override
 	public void bindToModel(IObservableValue observableValue) {
 
-		if (modelObject == null) {
+		if (observableValue == null) {
 			// TODO: Log
 			return;
 		}

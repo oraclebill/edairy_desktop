@@ -24,8 +24,6 @@ import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.DairyLocationEdit
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 public class DairyLocationDirectoryController extends BasicDirectoryController<DairyLocation> {
-
-
 	private IMultipleChoiceRidget functions;
 	private IComboRidget routeTypeSearchCombo;
 	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
