@@ -42,4 +42,5 @@ Export-Package: com.agritrace.edairy.desktop.common.persistence;
    com.agritrace.edairy.desktop.common.persistence.services",
  com.agritrace.edairy.desktop.operations.services.dairylocation;uses:="org.hibernate,com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services",
  com.agritrace.edairy.desktop.operations.services.employee;uses:="com.agritrace.edairy.desktop.common.persistence,com.agritrace.edairy.desktop.common.model.dairy",
- com.agritrace.edairy.desktop.operations.services.supplier;uses:="com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services"
+ com.agritrace.edairy.desktop.operations.services.supplier;uses:="com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services",
+ com.agritrace.edairy.desktop.operations.services.vehicle
