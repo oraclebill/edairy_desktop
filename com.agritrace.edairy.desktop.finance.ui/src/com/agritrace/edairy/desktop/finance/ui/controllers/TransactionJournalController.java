@@ -6,10 +6,13 @@ import java.util.List;
 
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
+import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.ui.ridgets.IActionListener;
+import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -17,6 +20,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
@@ -50,14 +54,31 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		}
 	}
 
+	/**
+	 * Open member search dialog, IActionListener for search button
+	 * 
+	 */
+	public class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final int retVal = memberDialog.open();
+			if (retVal == Window.OK) {
+				filterBean.setMember(memberDialog.getSelectedMember());
+			}
+		}
+	}
+
 	protected final TransactionJournalFilterBean filterBean = new TransactionJournalFilterBean();
 	protected ITextRidget memberNameRidget;
-	IDateRangeRidget dateRangeRidget;
-//	protected IDateTimeRidget endDateRidget;
+	protected IDateRangeRidget dateRangeRidget;
+	private IActionRidget memberLookupRidget;
+//	protected ITextRidget referenceNumberRidget;
+//	protected ISingleChoiceRidget transactionSourceRidget;
 
-	// abstract class requires subclass to 
+	// abstract class requires subclass to
 	protected TransactionJournalController() {
-		super();
+		this(null);
 	}
 
 	protected TransactionJournalController(final ISubModuleNode node) {
@@ -68,13 +89,17 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	public void configureFilterRidgets() {
 
 		dateRangeRidget = getRidget(IDateRangeRidget.class, FinanceBindingConstants.FILTER_DATE_RANGE);
-		// startDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-//		endDateRidget = getRidget(IDateTimeRidget.class, FinanceBindingConstants.FILTER_DATE_END_DATE);
-		// endDateRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-
-		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_MEMBER_LOOKUP);
+		
+		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_MEMBER_LOOKUP_TXT);
+		memberNameRidget.setOutputOnly(true);
+		
+		memberLookupRidget = getRidget(IActionRidget.class, FinanceBindingConstants.FILTER_MEMBER_LOOKUP_BTN);
+		memberLookupRidget.addListener(new MemberLookupAction());
+		
+//		referenceNumberRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
+		
+//		transactionSourceRidget = getRidget(ISingleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 	}
-
 
 	@Override
 	public void afterBind() {
@@ -82,24 +107,31 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 
 		dateRangeRidget.bindToModel(BeansObservables.observeValue(filterBean, "startDate"), 
 				BeansObservables.observeValue(filterBean, "endDate"));
-
-//		startDateRidget.bindToModel(filterBean, "startDate");
-//		endDateRidget.bindToModel(filterBean, "endDate");
-
-		memberNameRidget.bindToModel(PojoObservables.observeDetailValue(
-				PojoObservables.observeValue(filterBean, "member"), "memberId", String.class));
+		
+		memberNameRidget.bindToModel(filterBean, "member.memberId" );
+		
+//		referenceNumberRidget.bindToModel(filterBean, "referenceNumber"); 
+		
+//		transactionSourceRidget.bindToModel(filterBean, "sourceOptions", filterBean, "transactionSource");
 	}
 
 	protected Predicate buildFilterPredicate() {
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 
 		predicateList
-				.add(NullIsTruePredicate.getInstance(FilterUtil.createDateAfterPredicate(filterBean.getStartDate())));
+				.add(NullIsTruePredicate.getInstance(
+						FilterUtil.createDateAfterPredicate(filterBean.getStartDate())));
 
 		predicateList
-				.add(NullIsTruePredicate.getInstance(FilterUtil.createDateBeforePredicate(filterBean.getEndDate())));
+				.add(NullIsTruePredicate.getInstance(
+						FilterUtil.createDateBeforePredicate(filterBean.getEndDate())));
 
-		predicateList.add(NullIsTruePredicate.getInstance(new TransactionMemberEqualPredicate(filterBean.getMember())));
+		predicateList.add(
+				NullIsTruePredicate.getInstance(
+						new TransactionMemberEqualPredicate(filterBean.getMember())));
+		predicateList.add(
+				NullIsTruePredicate.getInstance(
+						new EqualPredicate(filterBean.getMember())));
 
 		final Predicate[] predicates = new Predicate[predicateList.size()];
 		for (int i = 0; i < predicates.length; i++) {
@@ -114,8 +146,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		transaction.setTransactionDate(new Date());
 		return transaction;
 	}
-	
-	
 
 	@Override
 	protected void createEntity(T newEntity) {
@@ -124,7 +154,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 
 	@Override
 	protected void updateEntity(T updateableEntity) {
-		// TODO Auto-generated method stub
 		super.updateEntity(updateableEntity);
 	}
 
@@ -144,7 +173,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		}
 		return filtered;
 	}
-
 
 	@Override
 	protected void resetFilterConditions() {

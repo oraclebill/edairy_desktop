@@ -40,43 +40,40 @@ public class AccountTransactionEditPanel extends Composite {
 				false, FinanceBindingConstants.ID_TRANSACTION_CHOICE);
 		transactionTypeBox.setLayout(new RowLayout(SWT.HORIZONTAL));
 
-		final Button btnStoreSale = UIControlsFactory.createButtonRadio(transactionTypeBox, "Store Sale",
-				FinanceBindingConstants.ID_STORE_SALE_CHOICEBTN);
-
-		final Button btnPayment = UIControlsFactory.createButtonRadio(transactionTypeBox, "Payment",
-				FinanceBindingConstants.ID_PAYMENT_CHOICEBTN);
-
-		UIControlsFactory.createButtonRadio(transactionTypeBox, "Veterinary",
-				FinanceBindingConstants.ID_VETERINARY_CHOICEBTN);
-
-		UIControlsFactory.createButtonRadio(transactionTypeBox, "Share Deduction",
-				FinanceBindingConstants.ID_SHARE_DEDUCTION_CHOICEBTN);
+//		final Button btnStoreSale = UIControlsFactory.createButtonRadio(transactionTypeBox, "Store Sale",
+//				FinanceBindingConstants.ID_STORE_SALE_CHOICEBTN);
+//
+//		final Button btnPayment = UIControlsFactory.createButtonRadio(transactionTypeBox, "Payment",
+//				FinanceBindingConstants.ID_PAYMENT_CHOICEBTN);
+//
+//		UIControlsFactory.createButtonRadio(transactionTypeBox, "Veterinary",
+//				FinanceBindingConstants.ID_VETERINARY_CHOICEBTN);
+//
+//		UIControlsFactory.createButtonRadio(transactionTypeBox, "Share Deduction",
+//				FinanceBindingConstants.ID_SHARE_DEDUCTION_CHOICEBTN);
 
 		final Label dateLabel = UIControlsFactory.createLabel(middlePanel, "Date");
 
 		final DateTime transactionDate = UIControlsFactory.createDate(middlePanel, SWT.MEDIUM,
 				FinanceBindingConstants.ID_TRANSACTION_DATE);
 
-		final Label lblStore = UIControlsFactory.createLabel(middlePanel, "Store");
-
-		final CCombo locationCombo = UIControlsFactory.createCCombo(middlePanel,
-				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
+		final Label lblStore = UIControlsFactory.createLabel(middlePanel, "Store", FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL);
+		final CCombo locationCombo = UIControlsFactory.createCCombo(middlePanel, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
 		locationCombo.setItems(new String[] { "Sample Route" });
 		locationCombo.select(0);
 
-		final Label lblRefNumber = UIControlsFactory.createLabel(middlePanel, "Member");
-
-		final Text refNumberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
-		refNumberText.setTextLimit(20);
-		refNumberText.setText("V-4599887");
-
-		final Label lblMember = UIControlsFactory.createLabel(middlePanel, "Reference No.");
-
+		final Label lblMember = UIControlsFactory.createLabel(middlePanel, "Member");
 		final Text memberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
-				FinanceBindingConstants.ID_REF_NUMBER_TEXT);
+				FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberText.setTextLimit(20);
-		memberText.setText("#45678");
+		memberText.setText("V-4599887");
+
+		final Label lblRefNum = UIControlsFactory.createLabel(middlePanel, "Reference No.");
+
+		final Text refNumText = UIControlsFactory.createText(middlePanel, SWT.NONE,
+				FinanceBindingConstants.ID_REF_NUMBER_TEXT);
+		refNumText.setTextLimit(20);
+		refNumText.setText("#45678");
 		final Label lblAmount = UIControlsFactory.createLabel(middlePanel, "Amount");
 
 		final Text amountText = UIControlsFactory.createTextDecimal(middlePanel,
@@ -89,12 +86,12 @@ public class AccountTransactionEditPanel extends Composite {
 		descriptionText = UIControlsFactory.createTextMulti(middlePanel, false, false,
 				FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT);
 
-		final Label lblCheckNumber = UIControlsFactory.createLabel(middlePanel, "Check Number");
+		final Label lblCheckNumber = UIControlsFactory.createLabel(middlePanel, "Check Number", FinanceBindingConstants.ID_CHECK_NUMBER_TEXT_LBL);
 
 		checkNumberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
 				FinanceBindingConstants.ID_CHECK_NUMBER_TEXT);
 
-		final Label lblSignedBy = UIControlsFactory.createLabel(middlePanel, "Signed By");
+		final Label lblSignedBy = UIControlsFactory.createLabel(middlePanel, "Signed By", FinanceBindingConstants.ID_SIGNED_BY_TEXT_LBL);
 
 		signedByText = UIControlsFactory.createText(middlePanel, SWT.NONE, FinanceBindingConstants.ID_SIGNED_BY_TEXT);
 
@@ -113,7 +110,7 @@ public class AccountTransactionEditPanel extends Composite {
 								.add(gl_middlePanel
 										.createSequentialGroup()
 										.add(gl_middlePanel.createParallelGroup(GroupLayout.LEADING).add(lblSignedBy)
-												.add(lblCheckNumber).add(lblDescription).add(lblAmount).add(lblMember))
+												.add(lblCheckNumber).add(lblDescription).add(lblAmount).add(lblRefNum))
 										.addPreferredGap(LayoutStyle.RELATED)
 										.add(gl_middlePanel
 												.createParallelGroup(GroupLayout.LEADING)
@@ -125,13 +122,13 @@ public class AccountTransactionEditPanel extends Composite {
 														GroupLayout.PREFERRED_SIZE)
 												.add(amountText, GroupLayout.PREFERRED_SIZE, 111,
 														GroupLayout.PREFERRED_SIZE)
-												.add(memberText, GroupLayout.PREFERRED_SIZE, 225,
+												.add(refNumText, GroupLayout.PREFERRED_SIZE, 225,
 														GroupLayout.PREFERRED_SIZE)
 												.add(locationCombo, GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 												.add(gl_middlePanel
 														.createSequentialGroup()
-														.add(refNumberText, GroupLayout.PREFERRED_SIZE, 196,
+														.add(memberText, GroupLayout.PREFERRED_SIZE, 196,
 																GroupLayout.PREFERRED_SIZE)
 														.addPreferredGap(LayoutStyle.RELATED)
 														.add(memberLookupButton, GroupLayout.PREFERRED_SIZE, 35,
@@ -140,7 +137,7 @@ public class AccountTransactionEditPanel extends Composite {
 														GroupLayout.PREFERRED_SIZE)
 												.add(transactionTypeBox, GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.add(lblTransactionType).add(dateLabel).add(lblStore).add(lblRefNumber))
+								.add(lblTransactionType).add(dateLabel).add(lblStore).add(lblMember))
 						.addContainerGap(123, Short.MAX_VALUE)));
 		gl_middlePanel.setVerticalGroup(gl_middlePanel.createParallelGroup(GroupLayout.LEADING).add(
 				gl_middlePanel
@@ -159,8 +156,8 @@ public class AccountTransactionEditPanel extends Composite {
 						.addPreferredGap(LayoutStyle.RELATED)
 						.add(gl_middlePanel
 								.createParallelGroup(GroupLayout.BASELINE)
-								.add(refNumberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE).add(lblRefNumber)
+								.add(memberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblMember)
 								.add(memberLookupButton, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
 						.addPreferredGap(LayoutStyle.RELATED)
 						.add(gl_middlePanel
@@ -170,8 +167,8 @@ public class AccountTransactionEditPanel extends Composite {
 						.add(40)
 						.add(gl_middlePanel
 								.createParallelGroup(GroupLayout.BASELINE)
-								.add(memberText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE).add(lblMember))
+								.add(refNumText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE).add(lblRefNum))
 						.add(9)
 						.add(gl_middlePanel
 								.createParallelGroup(GroupLayout.BASELINE)
@@ -191,43 +188,43 @@ public class AccountTransactionEditPanel extends Composite {
 								.createParallelGroup(GroupLayout.BASELINE)
 								.add(signedByText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE).add(lblSignedBy)).add(71)));
-		gl_middlePanel.linkSize(new Control[] { locationCombo, refNumberText, memberLookupButton, memberText,
+		gl_middlePanel.linkSize(new Control[] { locationCombo, memberText, memberLookupButton, refNumText,
 				amountText, checkNumberText, signedByText }, GroupLayout.VERTICAL);
 		middlePanel.setLayout(gl_middlePanel);
 
-		btnStoreSale.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				System.err.println(">>>>> default selection on " + e.getSource());
-			}
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final boolean enabled = btnStoreSale.getSelection();
-				lblStore.setVisible(enabled);
-				locationCombo.setVisible(enabled);
-				locationCombo.setEnabled(enabled);
-				locationCombo.setText("");
-			}
-
-		});
-		btnPayment.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				final boolean enabled = btnPayment.getSelection();
-
-				lblCheckNumber.setVisible(enabled);
-				checkNumberText.setVisible(enabled);
-				checkNumberText.setEnabled(enabled);
-				checkNumberText.setText("");
-
-				lblSignedBy.setVisible(enabled);
-				signedByText.setVisible(enabled);
-				signedByText.setEnabled(enabled);
-				signedByText.setText("");
-			}
-
-		});
+//		btnStoreSale.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent e) {
+//				System.err.println(">>>>> default selection on " + e.getSource());
+//			}
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				final boolean enabled = btnStoreSale.getSelection();
+//				lblStore.setVisible(enabled);
+//				locationCombo.setVisible(enabled);
+//				locationCombo.setEnabled(enabled);
+//				locationCombo.setText("");
+//			}
+//
+//		});
+//		btnPayment.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				final boolean enabled = btnPayment.getSelection();
+//
+//				lblCheckNumber.setVisible(enabled);
+//				checkNumberText.setVisible(enabled);
+//				checkNumberText.setEnabled(enabled);
+//				checkNumberText.setText("");
+//
+//				lblSignedBy.setVisible(enabled);
+//				signedByText.setVisible(enabled);
+//				signedByText.setEnabled(enabled);
+//				signedByText.setText("");
+//			}
+//
+//		});
 
 	}
 }

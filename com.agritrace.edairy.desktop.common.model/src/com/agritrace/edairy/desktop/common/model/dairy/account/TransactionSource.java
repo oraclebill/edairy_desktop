@@ -30,7 +30,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STORE_CREDIT(0, "StoreCredit", "STORE_CREDIT"),
+	STORE_CREDIT(0, "StoreCredit", "Store Credit"),
 
 	/**
 	 * The '<em><b>Clinical Services</b></em>' literal object.
@@ -40,7 +40,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CLINICAL_SERVICES(1, "ClinicalServices", "CLINICAL_SERVICES"),
+	CLINICAL_SERVICES(1, "ClinicalServices", "Clinical Svcs"),
 
 	/**
 	 * The '<em><b>Share Recovery</b></em>' literal object.
@@ -50,7 +50,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SHARE_RECOVERY(2, "ShareRecovery", "SHARE_RECOVERY"),
+	SHARE_RECOVERY(2, "ShareRecovery", "Share Recovery"),
 
 	/**
 	 * The '<em><b>Cash Payment</b></em>' literal object.
@@ -60,7 +60,7 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CASH_PAYMENT(3, "CashPayment", "CASH_PAYMENT"),
+	CASH_PAYMENT(3, "CashPayment", "Cash Payment"),
 
 	/**
 	 * The '<em><b>Other</b></em>' literal object.
@@ -81,7 +81,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #STORE_CREDIT
-	 * @model name="StoreCredit" literal="STORE_CREDIT"
+	 * @model name="StoreCredit" literal="Store Credit"
 	 * @generated
 	 * @ordered
 	 */
@@ -96,7 +96,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CLINICAL_SERVICES
-	 * @model name="ClinicalServices" literal="CLINICAL_SERVICES"
+	 * @model name="ClinicalServices" literal="Clinical Svcs"
 	 * @generated
 	 * @ordered
 	 */
@@ -111,7 +111,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SHARE_RECOVERY
-	 * @model name="ShareRecovery" literal="SHARE_RECOVERY"
+	 * @model name="ShareRecovery" literal="Share Recovery"
 	 * @generated
 	 * @ordered
 	 */
@@ -126,7 +126,7 @@ public enum TransactionSource implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CASH_PAYMENT
-	 * @model name="CashPayment" literal="CASH_PAYMENT"
+	 * @model name="CashPayment" literal="Cash Payment"
 	 * @generated
 	 * @ordered
 	 */

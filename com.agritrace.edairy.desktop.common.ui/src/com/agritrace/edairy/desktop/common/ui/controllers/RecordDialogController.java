@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.RienaStatus;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
@@ -84,7 +85,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	@Override
 	protected boolean handleCancelAction() {
-		setReturnCode(DialogConstants.ACTION_CANCEL);
+		setReturnCode(Window.CANCEL);
 		if (!RienaStatus.isTest()) {
 			getWindowRidget().dispose();
 		}

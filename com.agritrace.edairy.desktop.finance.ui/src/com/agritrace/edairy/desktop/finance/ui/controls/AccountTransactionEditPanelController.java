@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
+import java.util.List;
+
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
@@ -10,9 +12,14 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
+import org.eclipse.riena.ui.ridgets.IEditableRidget;
+import org.eclipse.riena.ui.ridgets.ILabelRidget;
+import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -29,6 +36,21 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class AccountTransactionEditPanelController {
+	
+	public class TransactionSourceSelectionListener implements ISelectionListener {
+		@Override
+		public void ridgetSelected(SelectionEvent event) {
+			List<Object> selected = event.getNewSelection();
+			if (selected != null && selected.size() > 0) {
+				Object obj = selected.get(0);
+				if (obj instanceof TransactionSource) {
+					updateWidgetsForSource((TransactionSource) obj);
+				}
+			}
+		}
+
+	}
+
 	public class MemberLookupAction implements IActionListener {
 		private final ITextRidget nameRidget;
 
@@ -66,6 +88,7 @@ public class AccountTransactionEditPanelController {
 	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	private BindingHelper<AccountTransaction> mapper;
 	private AccountTransaction model;
+	private IComboRidget storeLocation;
 
 	public AccountTransactionEditPanelController() {
 		;
@@ -90,6 +113,7 @@ public class AccountTransactionEditPanelController {
 		mapFieldsToModel();
 		bindMappedRidgets();
 		bindConfiguredRidgets();
+		updateWidgetsForSource(model.getSource());
 	}
 
 	/**
@@ -116,12 +140,17 @@ public class AccountTransactionEditPanelController {
 		// configure and bind transaction source
 		final ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
 				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
-		final IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
-				TransactionSource.class);
-		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source"); 
-		sourceRidget.bindToModel(optionValues, selectionValue);
-		sourceRidget.setMandatory(true);
+//		final IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
+//				TransactionSource.class);
+//		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source"); 
+//		sourceRidget.bindToModel(optionValues, selectionValue);
+//		sourceRidget.setMandatory(true);
+//		sourceRidget.updateFromModel();
+		
+		sourceRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
+				PojoObservables.observeValue(model, "source"));
 		sourceRidget.updateFromModel();
+		sourceRidget.addSelectionListener(new TransactionSourceSelectionListener());
 
 		//
 		final IDecimalTextRidget transactionText = container.getRidget(IDecimalTextRidget.class,
@@ -130,7 +159,7 @@ public class AccountTransactionEditPanelController {
 		transactionText.setPrecision(2);
 		transactionText.setSigned(false);
 		transactionText.setMandatory(true);
-		transactionText.bindToModel(PojoObservables.observeValue(model, "amount"));
+		transactionText.bindToModel(model, "amount");
 		transactionText.updateFromModel();
 
 		// configure member name ridget
@@ -143,15 +172,14 @@ public class AccountTransactionEditPanelController {
 				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
 		memberLookup.addListener(new MemberLookupAction(memberName));
 
-		// configure route combo
-		final IComboRidget combo = container.getRidget(IComboRidget.class,
+		storeLocation = container.getRidget(IComboRidget.class,
 				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
 		IObservableList optionList = Observables.staticObservableList(dairyRepo.getLocalDairyLocations());
 		IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
-		combo.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
+		storeLocation.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
 			System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
 			System.err.println(" to Model: >>>> " + model);
-		combo.updateFromModel();
+		storeLocation.updateFromModel();
 
 	}
 
@@ -196,4 +224,39 @@ public class AccountTransactionEditPanelController {
 		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
 	}
+	
+	private void updateWidgetsForSource(TransactionSource source) {
+		boolean showStoreLocation = false, showCheckNo = false, showSignedBy = false;			
+		if (source == TransactionSource.CASH_PAYMENT) {
+			showCheckNo = true;
+			showSignedBy = true;
+		} else if (source == TransactionSource.STORE_CREDIT) {
+			showStoreLocation = true;
+		} 
+		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT), showCheckNo);
+		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT_LBL), showCheckNo);
+		
+		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT), showSignedBy);
+		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT_LBL), showSignedBy);
+
+		enableMandatoryRidget(container.getRidget(IComboRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO), showStoreLocation);
+		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL), showStoreLocation);
+	}
+
+	private void enableMandatoryRidget(IRidget ridget, boolean enabled) {
+		ridget.setEnabled(enabled);
+		if (ridget instanceof ITextRidget) {
+			ITextRidget editable = (ITextRidget) ridget;
+			editable.setMandatory(enabled);
+		}
+		else if (ridget instanceof IComboRidget) {
+			IComboRidget editable = (IComboRidget) ridget;
+			editable.setMandatory(enabled);
+		}
+//		else if (ridget instanceof ILabelRidget) {
+//			ILabelRidget editable = (ILabelRidget) ridget;
+//		}
+	}
+
+
 }

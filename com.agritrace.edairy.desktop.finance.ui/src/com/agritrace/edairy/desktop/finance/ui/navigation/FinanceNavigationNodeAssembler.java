@@ -19,8 +19,8 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MilkPriceJournalController;
-import com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView;
 import com.agritrace.edairy.desktop.finance.ui.views.MilkPriceJournalView;
+import com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView;
 
 public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler {
 	// FINANCE

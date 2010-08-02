@@ -98,7 +98,6 @@ public class BindingHelper<T extends EObject> {
 						getModelObject());
 
 				checkParameters(optionValues, rowClass, selectionValue);
-				checkMandatory(binding, ridget);
 				comboRidget.bindToModel(optionValues, rowClass, binding.getRenderMethod(), selectionValue);
 			} else if (ridget instanceof ITableRidget) {
 //				final ITableRidget tableRidget = (ITableRidget) ridget;

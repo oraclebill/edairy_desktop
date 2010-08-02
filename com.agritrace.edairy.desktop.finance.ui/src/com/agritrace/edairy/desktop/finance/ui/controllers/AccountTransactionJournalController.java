@@ -10,6 +10,7 @@ import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
+import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.jface.window.Window;
@@ -18,6 +19,7 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -71,7 +73,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 	private final IMemberRepository memberRepo = DairyRepository.getInstance();
 	private IMultipleChoiceRidget sourceListRidget;
-	private IComboRidget referenceNumRidget;
+	private ITextRidget referenceNumRidget;
 
 	public AccountTransactionJournalController() {
 		this(null);
@@ -100,7 +102,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	public void configureFilterRidgets() {
 		super.configureFilterRidgets();
 		
-		referenceNumRidget = getRidget(IComboRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
+		referenceNumRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
 		sourceListRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
 		
@@ -115,11 +117,10 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	public void afterBind() {
 		super.afterBind();
 
-		referenceNumRidget.bindToModel(Observables.staticObservableList(memberRepo.all(), Membership.class),
-				Membership.class, "getMemberId", PojoObservables.observeValue(filterBean, "member"));
+		referenceNumRidget.bindToModel(filterBean, "referenceNumber"); 
 
-//		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
-//				BeansObservables.observeList(filterBean, "sourceOptions"));
+		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
+				BeansObservables.observeList(filterBean, "sourceOptions"));
 
 		batchEditRidget.addListener(new IActionListener() {
 			@Override
@@ -127,6 +128,8 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 				handleBatchEntryAction();
 			}
 		});
+		
+		updateAllRidgetsFromModel();
 	}
 
 	

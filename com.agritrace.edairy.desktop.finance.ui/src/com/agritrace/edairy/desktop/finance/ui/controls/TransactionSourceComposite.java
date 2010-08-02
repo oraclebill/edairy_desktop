@@ -1,7 +1,19 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.beans.common.IntegerBean;
+import org.eclipse.riena.ui.ridgets.ILabelRidget;
+import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
+import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
-import org.eclipse.riena.ui.swt.lnf.LnFUpdater;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -10,20 +22,26 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionSourceComposite extends Composite {
 
-	public static final String CHOICE_CASH_PAYMENT = "CHOICE_COMPOSITE-CHOICE_CASH_PAYMENT";
-
-	public static final String CHOICE_CLINICAL_SVC = "CHOICE_COMPOSITE-CHOICE_CLINICAL_SVC";
-	public static final String CHOICE_COMPOSITE = "CHOICE_COMPOSITE";
-	public static final String CHOICE_SHARE_DEDUCTION = "CHOICE_COMPOSITE-CHOICE_SHARE_DEDUCTION";
-	public static final String CHOICE_STORE_CREDIT = "CHOICE_COMPOSITE-CHOICE_STORE_CREDIT";
-	public static final String LABEL = "transaction-type-compsite.label";
-	public static final LnFUpdater LNF_UPDATER = new LnFUpdater();
+	public static final String CHOICE_COMPOSITE 		= "CHOICE_COMPOSITE";
+	public static final String CHOICE_CASH_PAYMENT 		= "CHOICE_COMPOSITE-CHOICE_CASH_PAYMENT";
+	public static final String CHOICE_CLINICAL_SVC 		= "CHOICE_COMPOSITE-CHOICE_CLINICAL_SVC";
+	public static final String CHOICE_SHARE_DEDUCTION 	= "CHOICE_COMPOSITE-CHOICE_SHARE_DEDUCTION";
+	public static final String CHOICE_STORE_CREDIT 		= "CHOICE_COMPOSITE-CHOICE_STORE_CREDIT";
+	public static final String LABEL 					= "transaction-type-compsite.label";
+	public static final String DEFAULT_LABEL_TEXT 		= "Transaction Source";
+	
+	
+//	public static final LnFUpdater LNF_UPDATER = new LnFUpdater();
 
 	// private final ChoiceComposite txypeCodeChoice;
 	private final boolean isMultipleChoice;
@@ -35,11 +53,11 @@ public class TransactionSourceComposite extends Composite {
 	 * @wbp.parser.constructor
 	 */
 	public TransactionSourceComposite(Composite parent) {
-		this(parent, false, "");
+		this(parent, false, DEFAULT_LABEL_TEXT);
 	}
 
 	public TransactionSourceComposite(Composite parent, boolean multipleChoice) {
-		this(parent, multipleChoice, "");
+		this(parent, multipleChoice, DEFAULT_LABEL_TEXT);
 	}
 
 	public TransactionSourceComposite(Composite parent, boolean multipleChoice, String labelString) {
@@ -101,4 +119,5 @@ public class TransactionSourceComposite extends Composite {
 	public void setLabelText(String string) {
 		label.setText(string);
 	}
+	
 }

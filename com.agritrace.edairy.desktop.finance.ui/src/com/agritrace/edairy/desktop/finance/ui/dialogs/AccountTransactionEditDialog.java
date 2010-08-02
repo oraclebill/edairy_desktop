@@ -18,6 +18,7 @@ public class AccountTransactionEditDialog extends RecordDialog<AccountTransactio
 
 		public AccountTransactionEditController() {
 			super();
+			setReturnCode(ACTION_CANCEL);
 		}
 
 		@Override
@@ -25,13 +26,18 @@ public class AccountTransactionEditDialog extends RecordDialog<AccountTransactio
 			panelController = new AccountTransactionEditPanelController();
 			panelController.setModel(getWorkingCopy());
 			panelController.setRidgetContainer(this);
-			panelController.configureAndBind();
 		}
 
 		@Override
 		protected void handleSaveAction() {
 			panelController.checkValid();
 			super.handleSaveAction();
+		}
+		
+		@Override
+		public void afterBind() {
+			super.afterBind();
+			panelController.configureAndBind();
 		}
 
 	}

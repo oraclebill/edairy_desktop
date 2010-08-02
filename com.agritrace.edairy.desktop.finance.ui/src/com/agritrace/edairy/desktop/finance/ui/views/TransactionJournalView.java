@@ -46,14 +46,19 @@ public class TransactionJournalView extends AbstractDirectoryView {
 	@Override
 	protected void createFilterConditions(Composite parent) {
 		Composite comp = UIControlsFactory.createComposite(parent);
-		comp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		comp.setLayout(new GridLayout(2, false));
+		comp.setLayoutData(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		comp.setLayout(
+				new GridLayout(2, false));
 		
-		GridDataFactory.fillDefaults().applyTo(new TransactionJournalFilterPanel(comp));
+		GridDataFactory.fillDefaults().applyTo(
+				new TransactionJournalFilterPanel(comp));
 
 		final Composite composite_1 = new Composite(comp, SWT.NONE);
 		GridDataFactory.fillDefaults().applyTo(composite_1);
-		composite_1.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		composite_1.setBackground(
+				LnfManager.getLnf().getColor(
+						LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 
 }

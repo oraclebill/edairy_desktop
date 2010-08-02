@@ -36,7 +36,13 @@ public class DateRange extends  Composite implements IComplexComponent {
 	private final String startId;
 	private final String endId;
 
+	private int labelWidth;
+
 	public DateRange(Composite parent, int style) {
+		this(parent, style, DEFAULT_RANGE_LABEL, START_DATE_ID, END_DATE_ID);
+	}
+	
+	public DateRange(Composite parent, int labelWidth, int style) {
 		this(parent, style, DEFAULT_RANGE_LABEL, START_DATE_ID, END_DATE_ID);
 	}
 	
@@ -45,16 +51,27 @@ public class DateRange extends  Composite implements IComplexComponent {
 	}
 	
 	public DateRange(Composite parent, int style, String rangeLabelTxt, String startTxtId, String endTxtId) {
+		this(parent, -1, SWT.NULL, rangeLabelTxt, startTxtId, endTxtId);
+	}	
+	
+	public DateRange(Composite parent, int labelWidth, int style, String rangeLabelTxt, String startTxtId, String endTxtId) {
 		super(parent, style);
 		
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));		
-		setLayout(new GridLayout(7, false));
+//		setLayout(new GridLayout(5, false));
+		GridLayout gl = new GridLayout(5, false);
+		gl.marginWidth = 0;
+		gl.marginHeight = 0;
+		setLayout(gl);
 		
 		labelText = rangeLabelTxt;
 		startId = startTxtId;
 		endId = endTxtId;
+		this.labelWidth = (labelWidth == -1) ?  DEFAULT_LABEL_WIDTH : labelWidth;
 		
 		createDataRangeSearch();
+		
+		pack();
 	}
 
 	public Composite getComposite() {
@@ -64,7 +81,7 @@ public class DateRange extends  Composite implements IComplexComponent {
 	private void createDataRangeSearch() {
 		final Label label = UIControlsFactory.createLabel(this, labelText);
 
-		final GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, -1);
+		final GridDataFactory labelFactory = GridDataFactory.defaultsFor(label).hint(labelWidth, -1).indent(0,SWT.DEFAULT);
 		labelFactory.applyTo(label);
 
 		final Label startLabel = UIControlsFactory.createLabel(this, DEFAULT_START_LABEL);

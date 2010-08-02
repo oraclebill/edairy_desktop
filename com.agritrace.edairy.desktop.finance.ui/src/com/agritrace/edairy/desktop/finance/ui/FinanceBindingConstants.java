@@ -9,6 +9,10 @@ public interface FinanceBindingConstants {
 	static final String FILTER_TYPE_ROW = "FILTER_TYPE_ROW";
 	static final String ID_COMBO_ADJUSTMENT_TYPE = "ID_COMBO_ADJUSTMENT_TYPE";
 	static final String FILTER_DATE_RANGE = "FILTER_DATE_RANGE";
+	static final String FILTER_MEMBER_LOOKUP_BTN = "FILTER_MEMBER_LOOKUP_BTN";
+	static final String ID_SIGNED_BY_TEXT_LBL = "ID_SIGNED_BY_TEXT_LBL";
+	static final String ID_DAIRY_LOCATION_COMBO_LBL = "ID_DAIRY_LOCATION_COMBO_LBL";
+	static final String ID_CHECK_NUMBER_TEXT_LBL = "ID_CHECK_NUMBER_TEXT_LBL";
 	
 	String AMT_TEXT_RIDGET = "amtText";
 	String BTN_ADD_TRANSACTION = "btnAddTransaction";
@@ -27,7 +31,7 @@ public interface FinanceBindingConstants {
 	String FILTER_COMBO_STORE = "FILTER_COMBO_STORE";
 	String FILTER_DATE_END_DATE = "FILTER_COMBO_END_DATE";
 	String FILTER_DATE_START_DATE = "FILTER_COMBO_START_DATE";
-	String FILTER_TXT_MEMBER_LOOKUP = "FILTER_TXT_MEMBER_LOOKUP";
+	String FILTER_MEMBER_LOOKUP_TXT = "FILTER_TXT_MEMBER_LOOKUP";
 	String FILTER_TXT_REF_NO = "FILTER_TXT_REF_NO";
 	String GRP_TRANSACTIONS_TBLLABEL = "grpTransactions";
 	// from ViewConstants
