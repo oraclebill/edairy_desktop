@@ -2,13 +2,12 @@ package com.agritrace.edairy.desktop.common.ui.controls.assetinfo;
 
 import java.util.Date;
 
-import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.IValueRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
@@ -62,22 +61,22 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 
 		modelObject = observableValue;
 		dateAcquiredText.bindToModel(
-				BeansObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName(), Date.class));
+				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName(), Date.class));
 		
 		disposalWitness.bindToModel(
-				BeansObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DISPOSAL_WITNESS.getName(), String.class));
+				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DISPOSAL_WITNESS.getName(), String.class));
 		
 		disposalReason.bindToModel(
-				BeansObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DISPOSAL_REASON.getName(), String.class));
+				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DISPOSAL_REASON.getName(), String.class));
 		
 		disposalDate.bindToModel(
-				BeansObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName(), Date.class));
+				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName(), Date.class));
 		
 		damageDesText.bindToModel(
-				BeansObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION.getName(), String.class));
+				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION.getName(), String.class));
 		
 		damangeDateText.bindToModel(
-				BeansObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName(), Date.class));
+				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName(), Date.class));
 	}
 
 	@Override
