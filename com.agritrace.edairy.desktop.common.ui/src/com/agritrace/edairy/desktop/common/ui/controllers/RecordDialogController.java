@@ -8,7 +8,6 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.RienaStatus;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public abstract class RecordDialogController<T extends EObject> extends BaseDialogController<T> {
 

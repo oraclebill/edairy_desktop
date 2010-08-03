@@ -35,6 +35,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.internal.experimental.install.Snippet047WizardWithLongRunningOperation.MyModel;
+
 /**
  * Example how to load data from a background thread into a TableViewer
  *
@@ -164,7 +166,7 @@ public class Snippet047WizardWithLongRunningOperation {
 					if (loadingType == 1) {
 						try {
 							Thread.sleep(10000);
-							final ArrayList ms = new ArrayList();
+							final ArrayList<MyModel> ms = new ArrayList<MyModel>();
 							for (int i = 0; i < 10; i++) {
 								ms.add(new MyModel(i));
 							}
@@ -188,7 +190,7 @@ public class Snippet047WizardWithLongRunningOperation {
 						}
 					} else {
 						System.err.println("in run: " + this);
-						final ArrayList ms = new ArrayList();
+						final ArrayList<MyModel> ms = new ArrayList<MyModel>();
 						barContainer.getDisplay().syncExec(new Runnable() {
 
 							public void run() {

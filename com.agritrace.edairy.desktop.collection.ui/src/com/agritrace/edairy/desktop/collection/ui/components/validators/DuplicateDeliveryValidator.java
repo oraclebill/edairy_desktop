@@ -13,6 +13,7 @@ public class DuplicateDeliveryValidator implements IValidator {
 	private Collection<CollectionJournalLine> searchScope;
 	private String scopeDescription;
 
+	@SuppressWarnings("unchecked")
 	public DuplicateDeliveryValidator(Collection<?> scope, String scopeDescription) {
 		this.searchScope = (Collection<CollectionJournalLine>)scope;
 		this.scopeDescription = scopeDescription;

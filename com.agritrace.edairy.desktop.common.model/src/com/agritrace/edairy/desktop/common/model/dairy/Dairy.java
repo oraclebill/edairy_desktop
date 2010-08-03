@@ -10,8 +10,6 @@ import com.agritrace.edairy.desktop.common.model.base.Company;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;

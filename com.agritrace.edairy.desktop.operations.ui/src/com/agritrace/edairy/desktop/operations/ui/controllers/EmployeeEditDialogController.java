@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;

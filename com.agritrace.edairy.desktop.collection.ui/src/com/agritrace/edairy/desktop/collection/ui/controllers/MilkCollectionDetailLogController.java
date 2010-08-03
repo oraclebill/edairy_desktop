@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.equinox.log.Logger;
-import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -41,8 +39,6 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private ITextRidget driver;
 	private IActionRidget editButton;
 
-
-	private final Logger LOG = Log4r.getLogger(MilkCollectionDetailLogController.class);
 	
 	// UI infrastructure
 	private final WritableValue pageValue = new WritableValue(1, Integer.class);

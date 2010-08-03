@@ -6,7 +6,6 @@ import org.eclipse.core.runtime.IStatus;
 
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MemberLookupValidator implements IValidator {
 	IMemberInfoProvider memberProvider;

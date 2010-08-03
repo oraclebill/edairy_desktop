@@ -10,8 +10,6 @@ import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRange;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoRidget;
-import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTable;
-import com.agritrace.edairy.desktop.common.ui.ridgets.EditableTableRidget;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -50,7 +48,6 @@ public class Activator extends DesktopBaseActivator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		SwtControlRidgetMapper.getInstance().addMapping(EditableTable.class, EditableTableRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoComposite.class, ProfilePhotoRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(DateRange.class, DateRangeRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(ContactMethodsGroup.class, ContactMethodsGroupRidget.class);

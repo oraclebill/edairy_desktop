@@ -136,7 +136,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			return Dairy.class;
 		}
 
-		class MembersForRoute extends SessionRunnable {
+		class MembersForRoute extends SessionRunnable<Object> {
 			Route route;
 			public MembersForRoute(Route route) {
 				this.route = route;

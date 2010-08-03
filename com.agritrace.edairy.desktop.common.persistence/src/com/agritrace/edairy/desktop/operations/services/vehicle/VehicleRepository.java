@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.operations.services.vehicle;
 
 import java.util.List;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 

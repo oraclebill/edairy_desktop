@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.core.cache.LRUCache;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;

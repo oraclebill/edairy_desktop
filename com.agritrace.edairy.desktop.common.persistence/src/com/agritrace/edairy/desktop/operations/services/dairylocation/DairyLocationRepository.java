@@ -10,7 +10,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.HibernateReposit
 
 public class DairyLocationRepository extends HibernateRepository<DairyLocation> {
 
-	class RoutesQuery extends SessionRunnable {
+	class RoutesQuery extends SessionRunnable<Object> {
 		List<Route> routes;
 
 		public List<Route> getResults() {
@@ -36,7 +36,7 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	public void deleteRoute(final Route object) {
-		runWithTransaction(new SessionRunnable() {
+		runWithTransaction(new SessionRunnable<Object>() {
 			@Override
 			public void run(Session session) {
 				session.delete("Route", object);
@@ -86,7 +86,7 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	public void saveNewRoute(final Route newRoute) {
-		runWithTransaction(new SessionRunnable() {
+		runWithTransaction(new SessionRunnable<Object>() {
 			@Override
 			public void run(Session session) {
 				session.persist("Route", newRoute);
@@ -101,7 +101,7 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	public void updateRoute(final Route changedRoute) {
-		runWithTransaction(new SessionRunnable() {
+		runWithTransaction(new SessionRunnable<Object>() {
 			@Override
 			public void run(Session session) {
 				session.update("Route", changedRoute);
