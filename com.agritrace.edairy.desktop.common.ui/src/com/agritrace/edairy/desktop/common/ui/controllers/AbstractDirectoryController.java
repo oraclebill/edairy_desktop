@@ -78,7 +78,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			itemSelected(event);
 		}
 	};
-	
+
 	protected ITableRidget table;
 
 	/**
@@ -116,7 +116,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 		// Use default conditions to filter
 		refreshTableContents();
-		
+
 		getNavigationNode().addSimpleListener(new SimpleNavigationNodeAdapter() {
 			@Override
 			public void deactivated(INavigationNode<?> source) {
@@ -127,7 +127,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 				refreshTableContents();				
 			}
 		});
-		
+
 		addDefaultAction(getWindowRidget(), searchBtnRidget);
 
 
@@ -146,7 +146,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		return this.selectedEObject;
 	}
 
-	
+
 	public void refreshTableContents() {
 		tableContents.clear();
 		tableContents.addAll(getFilteredResult());
@@ -345,21 +345,26 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		refreshTableContents();
 	}
 
-	
+
 	protected void updateEntity(T updateableEntity) {
 		getRepository().update(updateableEntity);		
 	}
 
 	protected void itemSelected(SelectionEvent event) {
 		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
-		viewBtnRidget.setEnabled(true);
+		if(event.getNewSelection().isEmpty()){
+			viewBtnRidget.setEnabled(false);
+
+		}else{
+			viewBtnRidget.setEnabled(true);
+		}
 	}
 
 	/**
 	 * Reset conditions
 	 */
 	abstract protected void resetFilterConditions();
-	
+
 	/**
 	 * A utility to get the current display. 
 	 * 
@@ -378,7 +383,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		}
 		return display;
 	}
-	
+
 	/**
 	 * A utility to get the current active shell. 
 	 * 
@@ -387,7 +392,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	public static final Shell getShell() {
 		return getDisplay().getActiveShell();
 	}
-	
+
 	/**
 	 * 
 	 * @param level

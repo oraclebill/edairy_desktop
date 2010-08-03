@@ -16,6 +16,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.common.ui.util.MatchUtil;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.dialogs.VehicleEditDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -79,23 +80,12 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 		final List<Vehicle> filtered = new ArrayList<Vehicle>();
 		final List<Vehicle> allVehicles =  vehicleRepository.all();
 		System.err.println("allVehicles: " + allVehicles);
-		filtered.addAll(allVehicles);
-//		for (final DairyLocation c : allLocations) {
-//			if (searchBean.getRouteSearchValue() == null || MatchUtil.matchEquals(searchBean.getRouteSearchValue().getCode(), c.getRoute().getCode())){
-//				List<DairyFunction> filterFunctions = searchBean.getFunctionSearchValues();
-//				List<DairyFunction> functions = c.getFunctions();
-//				boolean found = true;
-//				for(DairyFunction f : filterFunctions){
-//					if(!functions.contains(f)){
-//						found = false;
-//						break;
-//					}
-//				}
-//				if(found){
-//					filtered.add(c);
-//				}
-//			}
-//		}
+		for (final Vehicle v: allVehicles) {
+			if ((searchBean.getDriver() == null || MatchUtil.matchEquals(searchBean.getDriver().getPersonId(),v.getDriver().getPersonId())) 
+				&&(searchBean.getType() == null || MatchUtil.matchContains(searchBean.getType(),v.getType()))	){
+				filtered.add(v);
+			}
+		}
 		System.err.println("Filtered: " + filtered);
 		return filtered;
 	}
