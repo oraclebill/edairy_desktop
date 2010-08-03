@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="edairy_desktop_lib">
+<target name="dairy_manager_desktop">
 <locations>
-<location path="/Users/bjones/Development/Projects/eclipse-3.6-delta-pack/eclipse" type="Directory"/>
-<location path="/Users/bjones/Development/Projects/edairy_desktop_lib" type="Directory"/>
+<location path="${workspace_loc}/../edairy_desktop_lib/grouplayout" type="Directory"/>
+<location path="${workspace_loc}/../edairy_desktop_lib/bundle_pool" type="Profile"/>
 </locations>
 </target>
