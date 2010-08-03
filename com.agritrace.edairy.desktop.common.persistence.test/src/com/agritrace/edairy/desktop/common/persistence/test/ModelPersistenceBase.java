@@ -58,7 +58,7 @@ public class ModelPersistenceBase {
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 
 		// show all sql
-		props.setProperty(Environment.SHOW_SQL, "true");
+		props.setProperty(Environment.SHOW_SQL, "false");
 
 		// drop and recreate db on startup
 		props.setProperty(Environment.HBM2DDL_AUTO, "update");
