@@ -23,6 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidge
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
+import com.agritrace.edairy.desktop.finance.ui.controls.MemberLookupAction;
 
 public abstract class TransactionJournalController<T extends Transaction> extends BasicDirectoryController<T> {
 
@@ -54,20 +55,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		}
 	}
 
-	/**
-	 * Open member search dialog, IActionListener for search button
-	 * 
-	 */
-	public class MemberLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
-			final int retVal = memberDialog.open();
-			if (retVal == Window.OK) {
-				filterBean.setMember(memberDialog.getSelectedMember());
-			}
-		}
-	}
 
 	protected final TransactionJournalFilterBean filterBean = new TransactionJournalFilterBean();
 	protected ITextRidget memberNameRidget;
@@ -94,7 +81,12 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		memberNameRidget.setOutputOnly(true);
 		
 		memberLookupRidget = getRidget(IActionRidget.class, FinanceBindingConstants.FILTER_MEMBER_LOOKUP_BTN);
-		memberLookupRidget.addListener(new MemberLookupAction());
+		memberLookupRidget.addListener(new MemberLookupAction() {
+			@Override
+			protected void callback(Membership selectedMember) {
+				filterBean.setMember(selectedMember);				
+			}			
+		});
 		
 //		referenceNumberRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
 		
@@ -145,16 +137,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		final T transaction = super.createNewModel();
 		transaction.setTransactionDate(new Date());
 		return transaction;
-	}
-
-	@Override
-	protected void createEntity(T newEntity) {
-		super.createEntity(newEntity);
-	}
-
-	@Override
-	protected void updateEntity(T updateableEntity) {
-		super.updateEntity(updateableEntity);
 	}
 
 	/**

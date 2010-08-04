@@ -232,8 +232,8 @@ public class DairyProfileViewController extends SubModuleController {
 
 		txtNSSF_NUMBER.bindToModel(localDairy, "managerName");
 		txtESTABLISHED_DATE.bindToModel(localDairy, "establishedDate");
-		txtMEMBER_COUNT.bindToModel(this, "memberCount");
-		setMemberCount(localDairy.getMemberships().size());
+		txtMEMBER_COUNT.bindToModel(this, "memberCount");		
+		//setMemberCount(localDairy.getMemberships().size());
 		// registration panel
 		txtLEGAL_NAME.bindToModel(localDairy, "legalName");
 		txtREGISTRATION_NBR.bindToModel(localDairy, "registrationNumber");
