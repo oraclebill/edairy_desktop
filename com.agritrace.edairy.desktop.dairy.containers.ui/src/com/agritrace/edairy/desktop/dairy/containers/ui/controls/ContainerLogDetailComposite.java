@@ -13,9 +13,10 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.AssetInfo;
 
-public class ContainerLogDetailComposite extends Composite {
+public class ContainerLogDetailComposite extends CompositePanel {
 
 	public ContainerLogDetailComposite(Composite parent) {
 		super(parent, SWT.NONE);
@@ -32,7 +33,6 @@ public class ContainerLogDetailComposite extends Composite {
 		GridLayoutFactory.fillDefaults().applyTo(detailGroup);
 		
 		Control control = new AssetInfo(detailGroup, SWT.NULL);
-		control.setSize(216, 254);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, 
 				ContainerLogDetailBindConstants.BIND_ID_ASSET_INFO);
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(control);
@@ -45,12 +45,12 @@ public class ContainerLogDetailComposite extends Composite {
 		comp.setLayout(GridLayoutFactory.fillDefaults().numColumns(2).create());
 		GridDataFactory fieldDefault = GridDataFactory.swtDefaults().grab(true, false).minSize(140, -1);
 		{
-			final Composite detailGroup = new Composite(comp, SWT.NULL);
+			final Composite detailGroup = UIControlsFactory.createComposite(comp, SWT.NULL);
 			detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 			{
-				Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID");
+				Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID:");
 				GridDataFactory.fillDefaults().hint(120, -1).applyTo(sizingLabel);
 				final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
@@ -58,29 +58,25 @@ public class ContainerLogDetailComposite extends Composite {
 				fieldDefault.applyTo(text);
 			}
 			{
-				UIControlsFactory.createLabel(detailGroup, "Tracking No.");
+				UIControlsFactory.createLabel(detailGroup, "Tracking Number:");
 				final Control text = UIControlsFactory.createText(detailGroup, SWT.NONE,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
 				fieldDefault.applyTo(text);
 			}
 			{
-				UIControlsFactory.createLabel(detailGroup, "Capacity");
+				UIControlsFactory.createLabel(detailGroup, "Capacity:");
 				final Text text = UIControlsFactory.createTextDecimal(detailGroup,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
 				fieldDefault.applyTo(text);
 			}
 			{
-				UIControlsFactory.createLabel(detailGroup, "UOM");
+				UIControlsFactory.createLabel(detailGroup, "Unit of Measure:");
 				final CCombo text = UIControlsFactory.createCCombo(detailGroup,
 						ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
 				fieldDefault.applyTo(text);
 			}
 		}
-		{
-			final Composite filler = new Composite(comp, SWT.NONE);
-			GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(filler);
-		}
-
+	
 	}
 
 }

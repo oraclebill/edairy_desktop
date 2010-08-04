@@ -11,5 +11,15 @@
             restorable="true">
       </view>
    </extension>
+    <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.dairy.containers.ui.views.ContainerDirectoryView"
+            id="edairy.containers.directory"
+            name="Bin Log"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>

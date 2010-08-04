@@ -93,7 +93,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 	@Override
 	protected RecordDialog<Vehicle> getRecordDialog(Shell shell) {
 		VehicleEditDialog dialog = new VehicleEditDialog(shell);
-		dialog.setTitle("Edit Vehicle Location");
+		dialog.setTitle("Edit Vehicle Information");
 		return dialog;
 	}
 
