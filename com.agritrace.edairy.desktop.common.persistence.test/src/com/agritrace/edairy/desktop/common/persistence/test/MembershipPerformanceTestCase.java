@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.teneo.hibernate.LazyCollectionUtils;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
@@ -34,18 +35,18 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 		Collection<Membership> members = dairy.getMemberships();
 		showCollection("Members", members);
 		session.close();
-		
+
 		Membership member = members.iterator().next();
-		System.out.println("Account Number : " + member.getAccount().getAccountNumber());
+		System.out.println("Account Number : "
+				+ member.getAccount().getAccountNumber());
 		List<Vehicle> vehicles = dairy.getVehicles();
 		Vehicle truck = vehicles.iterator().next();
-		if (truck != null) System.out.println(truck.getAssetInfo().getDamageDescription());
+		if (truck != null)
+			System.out.println(truck.getAssetInfo().getDamageDescription());
 		printSessionStats(session);
-		
+
 		session.flush();
 		printSessionStats(session);
-		
-
 	}
 
 	@Test
@@ -65,26 +66,24 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 			if (++count % 800 == 0)
 				System.out.print('\n');
 		}
-		
+
 		System.out.println("\n time elapsed: "
 				+ (System.currentTimeMillis() - start));
 		printSessionStats(session);
-		
+
 		session.flush();
 		System.out.println("\n time elapsed after flush: "
 				+ (System.currentTimeMillis() - start));
 		printSessionStats(session);
-		
+
 		session.clear();
 		System.out.println("\n time elapsed after clear: "
 				+ (System.currentTimeMillis() - start));
 		printSessionStats(session);
-		
+
 		System.gc();
 		printSessionStats(session);
 
-
-		
 	}
 
 	@Test
@@ -108,12 +107,11 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 		printSessionStats(session);
 		tx.commit();
 		printSessionStats(session);
-		
+
 		session.close();
 		System.out.println("\n time elapsed: "
 				+ (System.currentTimeMillis() - start));
 	}
-
 
 	@Test
 	public void testIterateTouchingAttributesCriteriaQuery() {
@@ -139,7 +137,6 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 		System.out.println("\n time elapsed: "
 				+ (System.currentTimeMillis() - start));
 	}
-
 
 	@Test
 	public void testIterateHSQLQuery() {
@@ -211,16 +208,52 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 	// }
 
 	public void printSessionStats(final Session session) {
-		System.out.printf("Session Collection Count: %s \n", session.getStatistics().getCollectionCount());
-		System.out.printf("Session Entity Count: %s \n", session.getStatistics().getEntityCount());
-		System.out.printf("Session Factory Role Names: %s \n", Arrays.toString(session.getSessionFactory().getStatistics().getCollectionRoleNames()));
-		System.out.printf("Session Factory Close Statement Count: %s \n", session.getSessionFactory().getStatistics().getCloseStatementCount());
-		System.out.printf("Session Factory Collection Fetch Count: %s \n", session.getSessionFactory().getStatistics().getCollectionFetchCount());
-		System.out.printf("Session Factory Collection Load Count: %s \n", session.getSessionFactory().getStatistics().getCollectionLoadCount());
-		System.out.printf("Session Factory Entity Load Count: %s \n", session.getSessionFactory().getStatistics().getEntityLoadCount());
-		System.out.printf("Session Factory Flush Count: %s \n", session.getSessionFactory().getStatistics().getFlushCount());		
-	       System.out.printf("Total Memory : %,10d\n", Runtime.getRuntime().totalMemory());    
-	       System.out.printf("Free Memory  : %,10d\n", Runtime.getRuntime().freeMemory());
+		System.out.printf("Session Collection Count: %s \n", session
+				.getStatistics().getCollectionCount());
+		System.out.printf("Session Entity Count: %s \n", session
+				.getStatistics().getEntityCount());
+		System.out.printf(
+				"Session Factory Role Names: %s \n",
+				Arrays.toString(session.getSessionFactory().getStatistics()
+						.getCollectionRoleNames()));
+		
+		printFactoryStats(session.getSessionFactory());
+		printMemoryStats(false);		
+		printMemoryStats(true);		
+	}
+
+	public void printFactoryStats(final SessionFactory factory) {
+		System.out.printf("Session Factory Close Statement Count: %s \n",
+				factory.getStatistics().getCloseStatementCount());
+		System.out.printf("Session Factory Collection Fetch Count: %s \n",
+				factory.getStatistics().getCollectionFetchCount());
+		System.out.printf("Session Factory Collection Load Count: %s \n",
+				factory.getStatistics().getCollectionLoadCount());
+		System.out.printf("Session Factory Entity Load Count: %s \n", factory
+				.getStatistics().getEntityLoadCount());
+		System.out.printf("Session Factory Flush Count: %s \n", factory
+				.getStatistics().getFlushCount());
+		System.out.printf("Session Factory Collection Recreate Count: %s \n",
+				factory.getStatistics().getCollectionRecreateCount());
+		System.out.printf("Session Factory Remove Count: %s \n", factory
+				.getStatistics().getCollectionRemoveCount());
+		System.out.printf("Second Level Cache Regions: %s \n", Arrays.toString(factory
+				.getStatistics().getSecondLevelCacheRegionNames()));
+
+	}
+
+	public void printMemoryStats(boolean gc) {
+		if (gc) {
+			System.gc();
+			System.out.println("Running garbage collector...");
+		}
+
+		System.out.printf("Max Memory  : %,10d\n", Runtime.getRuntime()
+				.maxMemory());
+		System.out.printf("Total Memory : %,10d\n", Runtime.getRuntime()
+				.totalMemory());
+		System.out.printf("Free Memory  : %,10d\n", Runtime.getRuntime()
+				.freeMemory());
 	}
 
 	private void showCollection(String name, Collection<?> collection) {
@@ -229,20 +262,6 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 		System.out.printf("Is Lazy Loadable? : %s\n",
 				LazyCollectionUtils.isLazyLoadableCollection(collection));
 
-	}
-
-	private void printout(Membership membership, long count) {
-		Account a = membership.getAccount();
-		Farmer f = membership.getMember();
-		Route r = membership.getDefaultRoute();
-		Formatter formatter = new Formatter();
-		formatter.format("Member: %s, Account: %s, Farmer: %s, Route: %s\n",
-				membership.getApplicationDate(), a.getEstablished(),
-				f.getFamilyName(), r.getCode());
-		if (count % 100 == 0)
-			System.out.print('.');
-		if (count % 800 == 0)
-			System.out.print('\n');
 	}
 
 }
