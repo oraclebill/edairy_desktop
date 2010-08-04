@@ -1,44 +1,95 @@
 package com.agritrace.edairy.desktop.common.ui.util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.Predicate;
+import org.eclipse.equinox.log.Logger;
+import org.eclipse.riena.core.Log4r;
+import org.osgi.service.log.LogService;
+
+import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 
 public class FilterUtil {
 
-	public static class DateAfterPredicate implements Predicate {
-		private final Date earlyDate;
+	public static abstract class DateComparisonPredicate implements Predicate {
+		private final Date comparisonPoint;
+		private final String propertyName;
 
-		public DateAfterPredicate(Date earlyDate) {
-			this.earlyDate = earlyDate;
+		public DateComparisonPredicate(Date earlyDate) {
+			this(earlyDate, null);
+		}
+
+		public DateComparisonPredicate(Date earlyDate, String propertyName) {
+			this.comparisonPoint = earlyDate;
+			this.propertyName = propertyName;
 		}
 
 		@Override
 		public boolean evaluate(Object obj) {
-			final boolean ret = false;
-			if (obj instanceof Date) {
-				final Date testDate = (Date) obj;
-				return earlyDate.before(testDate);
+			Date testDate = null;
+
+			if (obj == null) {
+				return true;
+			} else if (propertyName != null) {
+				obj = resolveProperty(obj);
 			}
-			return ret;
+
+			if (obj instanceof Date) {
+				testDate = (Date) obj;
+			} else {
+				throw new IllegalArgumentException(String.format(
+						"Parameter type '%s' found in property '%s' expecting java.util.Date", obj.getClass(),
+						propertyName == null ? "" : propertyName));
+			}
+			return evaluate(comparisonPoint, testDate);
+		}
+
+		private Object resolveProperty(Object obj) {
+			Object propVal = null;
+			try {
+				propVal = PropertyUtils.getNestedProperty(obj, propertyName);
+			} catch (IllegalAccessException e) {
+				LOGGER.log(LogService.LOG_ERROR, "error getting property: programming error.", e);
+			} catch (InvocationTargetException e) {
+				LOGGER.log(LogService.LOG_ERROR, "unexpected error getting property", e);
+			} catch (NoSuchMethodException e) {
+				LOGGER.log(LogService.LOG_ERROR, "error getting property: programming error.", e);
+			}
+			return propVal;
+		}
+
+		protected abstract boolean evaluate(Date earlyDate2, Date testDate);
+	}
+
+	public static class DateAfterPredicate extends DateComparisonPredicate {
+		public DateAfterPredicate(Date earlyDate) {
+			this(earlyDate, null);
+		}
+
+		public DateAfterPredicate(Date earlyDate, String propertyName) {
+			super(earlyDate, propertyName);
+		}
+
+		@Override
+		protected boolean evaluate(Date comparisonPoint, Date testDate) {
+			return testDate.after(comparisonPoint);
 		}
 	}
 
-	public static class DateBeforePredicate implements Predicate {
-		private final Date lateDate;
+	public static class DateBeforePredicate extends DateComparisonPredicate {
+		public DateBeforePredicate(Date earlyDate) {
+			this(earlyDate, null);
+		}
 
-		public DateBeforePredicate(Date lateDate) {
-			this.lateDate = lateDate;
+		public DateBeforePredicate(Date earlyDate, String propertyName) {
+			super(earlyDate, propertyName);
 		}
 
 		@Override
-		public boolean evaluate(Object obj) {
-			final boolean ret = false;
-			if (obj instanceof Date) {
-				final Date testDate = (Date) obj;
-				return lateDate.after(testDate);
-			}
-			return ret;
+		protected boolean evaluate(Date comparisonPoint, Date testDate) {
+			return testDate.before(comparisonPoint);
 		}
 	}
 
@@ -58,15 +109,16 @@ public class FilterUtil {
 
 		@Override
 		public boolean evaluate(Object obj) {
-			final boolean ret = false;
+			boolean ret = false;
 			if (obj instanceof String) {
 				final String testString = (String) obj;
-				return testString.contains(substring);
+				ret = testString.contains(substring);
 			}
 			return ret;
 		}
 	}
 
+	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), FilterUtil.class);
 	public static final String FILTER_EQUALS = null;
 	public static final String FILTER_GREATER_THAN = null;
 	public static final String FILTER_LESS_THAN = null;

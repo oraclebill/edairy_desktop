@@ -28,7 +28,7 @@ public class DateRangeRidget extends AbstractCompositeRidget implements IDateRan
 	}
 
 	public static final String START_DATE = "start-date";
-	public static final String END_DATE = "start-date";
+	public static final String END_DATE = "end-date";
 
 	private IDateTimeRidget startDateText;
 	private IDateTimeRidget endDateText;

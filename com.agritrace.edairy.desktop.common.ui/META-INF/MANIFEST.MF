@@ -24,7 +24,8 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  org.eclipse.swt.layout.grouplayout;bundle-version="1.1.0";visibility:=reexport,
  org.eclipse.swt.widgets.baseline;bundle-version="1.1.0";visibility:=reexport,
  org.eclipse.nebula.widgets.compositetable;bundle-version="1.0.0";visibility:=reexport,
- com.ibm.icu;bundle-version="4.2.1";visibility:=reexport
+ com.ibm.icu;bundle-version="4.2.1";visibility:=reexport,
+ org.apache.commons.beanutils;bundle-version="1.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,

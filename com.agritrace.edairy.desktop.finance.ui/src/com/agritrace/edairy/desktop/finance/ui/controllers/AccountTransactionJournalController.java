@@ -12,7 +12,9 @@ import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -23,13 +25,12 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 
 public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
 
@@ -66,11 +67,11 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	}
 
 	// ridgets specific to an AccountTransaction
-	private IActionRidget batchEditRidget;
-
-	private final IMemberRepository memberRepo = DairyRepository.getInstance();
+	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), AccountTransactionJournalController.class);
+	
 	private IMultipleChoiceRidget sourceListRidget;
 	private ITextRidget referenceNumRidget;
+	private IActionRidget batchEditRidget;
 
 	public AccountTransactionJournalController() {
 		this(null);
@@ -131,16 +132,22 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 	
 	protected Predicate buildFilterPredicate() {
+
 		Predicate superPredicate = super.buildFilterPredicate();
 		
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 
 		predicateList.add(superPredicate);
 		
-		predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(filterBean.getReferenceNumber())));
+		String refNum = filterBean.getReferenceNumber();
+		if (refNum != null && refNum.length() > 0) {
+			predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(refNum)));
+		}
 
-		predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(filterBean
-				.getSourceOptions())));
+		List<TransactionSource> sources = filterBean.getSourceOptions();
+		if (sources != null && sources.size() > 0) {
+			predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(sources)));
+		}
 
 		final Predicate[] predicates = new Predicate[predicateList.size()];
 		for (int i = 0; i < predicates.length; i++) {

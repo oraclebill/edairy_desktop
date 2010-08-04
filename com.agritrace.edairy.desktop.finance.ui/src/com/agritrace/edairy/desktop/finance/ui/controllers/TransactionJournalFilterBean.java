@@ -37,8 +37,8 @@ class TransactionJournalFilterBean {
 		final Calendar nowMinusThirty = Calendar.getInstance();
 		nowMinusThirty.add(Calendar.DAY_OF_YEAR, -30);
 
-		startDate = now.getTime();
-		endDate = nowMinusThirty.getTime();
+		endDate = now.getTime();
+		startDate = nowMinusThirty.getTime();
 
 		member = null;
 		referenceNumber = "";

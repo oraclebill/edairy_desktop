@@ -6,24 +6,27 @@ import java.util.List;
 
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
-import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
+import org.apache.commons.collections.functors.TruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.jface.window.Window;
+import org.eclipse.equinox.log.Logger;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.ISubModuleNode;
-import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.controls.MemberLookupAction;
+import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 
 public abstract class TransactionJournalController<T extends Transaction> extends BasicDirectoryController<T> {
 
@@ -41,7 +44,10 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 				final Transaction tx = (Transaction) obj;
 				final Account acct = tx.getAccount();
 				if (acct != null) {
-					ret = acct.getMember() == testMember;
+					final Membership membership = acct.getMember();
+					ret = membership.equals(testMember);
+					LOGGER.log(LogService.LOG_DEBUG, String.format(
+							"comparing: arg('%s') to member('%s') returns: '%s'", membership, testMember, ret));
 				}
 			} else {
 				if (null != obj) {
@@ -55,13 +61,15 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		}
 	}
 
+	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), TransactionJournalController.class);
 
 	protected final TransactionJournalFilterBean filterBean = new TransactionJournalFilterBean();
 	protected ITextRidget memberNameRidget;
 	protected IDateRangeRidget dateRangeRidget;
 	private IActionRidget memberLookupRidget;
-//	protected ITextRidget referenceNumberRidget;
-//	protected ISingleChoiceRidget transactionSourceRidget;
+
+	// protected ITextRidget referenceNumberRidget;
+	// protected ISingleChoiceRidget transactionSourceRidget;
 
 	// abstract class requires subclass to
 	protected TransactionJournalController() {
@@ -76,60 +84,75 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	public void configureFilterRidgets() {
 
 		dateRangeRidget = getRidget(IDateRangeRidget.class, FinanceBindingConstants.FILTER_DATE_RANGE);
-		
+
 		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_MEMBER_LOOKUP_TXT);
 		memberNameRidget.setOutputOnly(true);
-		
+
 		memberLookupRidget = getRidget(IActionRidget.class, FinanceBindingConstants.FILTER_MEMBER_LOOKUP_BTN);
 		memberLookupRidget.addListener(new MemberLookupAction() {
 			@Override
 			protected void callback(Membership selectedMember) {
-				filterBean.setMember(selectedMember);				
-			}			
+				filterBean.setMember(selectedMember);
+			}
 		});
-		
-//		referenceNumberRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
-		
-//		transactionSourceRidget = getRidget(ISingleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
+
+		// referenceNumberRidget = getRidget(ITextRidget.class,
+		// FinanceBindingConstants.FILTER_TXT_REF_NO);
+
+		// transactionSourceRidget = getRidget(ISingleChoiceRidget.class,
+		// FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 	}
 
 	@Override
 	public void afterBind() {
 		super.afterBind();
 
-		dateRangeRidget.bindToModel(BeansObservables.observeValue(filterBean, "startDate"), 
+		dateRangeRidget.bindToModel(BeansObservables.observeValue(filterBean, "startDate"),
 				BeansObservables.observeValue(filterBean, "endDate"));
-		
-		memberNameRidget.bindToModel(filterBean, "member.memberId" );
-		
-//		referenceNumberRidget.bindToModel(filterBean, "referenceNumber"); 
-		
-//		transactionSourceRidget.bindToModel(filterBean, "sourceOptions", filterBean, "transactionSource");
+
+		memberNameRidget.bindToModel(filterBean, "member.memberId");
+
+		// referenceNumberRidget.bindToModel(filterBean, "referenceNumber");
+
+		// transactionSourceRidget.bindToModel(filterBean, "sourceOptions",
+		// filterBean, "transactionSource");
 	}
 
 	protected Predicate buildFilterPredicate() {
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
+		Predicate returnPredicate;
 
-		predicateList
-				.add(NullIsTruePredicate.getInstance(
-						FilterUtil.createDateAfterPredicate(filterBean.getStartDate())));
+		Date date;
 
-		predicateList
-				.add(NullIsTruePredicate.getInstance(
-						FilterUtil.createDateBeforePredicate(filterBean.getEndDate())));
-
-		predicateList.add(
-				NullIsTruePredicate.getInstance(
-						new TransactionMemberEqualPredicate(filterBean.getMember())));
-		predicateList.add(
-				NullIsTruePredicate.getInstance(
-						new EqualPredicate(filterBean.getMember())));
-
-		final Predicate[] predicates = new Predicate[predicateList.size()];
-		for (int i = 0; i < predicates.length; i++) {
-			predicates[i] = predicateList.get(i);
+		date = filterBean.getStartDate();
+		if (date != null) {
+			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateAfterPredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
 		}
-		return new AllPredicate(predicates);
+
+		date = filterBean.getEndDate();
+		if (date != null) {
+			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateBeforePredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
+		}
+
+		Membership member = filterBean.getMember();
+		if (member != null) {
+			predicateList.add(NullIsTruePredicate.getInstance(new TransactionMemberEqualPredicate(member)));
+		}
+
+		// predicateList.add(NullIsTruePredicate.getInstance(new
+		// EqualPredicate(filterBean.getMember())));
+
+		if (predicateList.size() > 0) {
+			final Predicate[] predicates = new Predicate[predicateList.size()];
+			for (int i = 0; i < predicates.length; i++) {
+				predicates[i] = predicateList.get(i);
+			}
+			returnPredicate = new AllPredicate(predicates);
+		} else {
+			returnPredicate = TruePredicate.getInstance();
+		}
+
+		return returnPredicate;
 	}
 
 	@Override
@@ -148,10 +171,14 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	protected List<T> getFilteredResult() {
 		final List<T> filtered = new ArrayList<T>();
 		final Predicate filterPredicate = buildFilterPredicate();
-		for (final T tx : getRepository().all()) {
-			if (filterPredicate.evaluate(tx)) {
-				filtered.add(tx);
+		try {
+			for (final T tx : getRepository().all()) {
+				if (filterPredicate.evaluate(tx)) {
+					filtered.add(tx);
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return filtered;
 	}
