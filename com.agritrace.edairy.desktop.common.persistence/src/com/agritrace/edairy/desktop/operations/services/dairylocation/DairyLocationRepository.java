@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 
 public class DairyLocationRepository extends HibernateRepository<DairyLocation> {
@@ -25,13 +27,19 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 
 	@Override
 	public List<DairyLocation> all() {
-		// TODO Auto-generated method stub
 		return super.all();
 	}
 
+	
+	@Override
+	public void save(Object changedItem) throws AlreadyExistsException {
+		// TODO Auto-generated method stub
+		super.save(changedItem);
+	}
+
+
 	@Override
 	public void delete(DairyLocation deletableEntity) {
-		// TODO Auto-generated method stub
 		super.delete(deletableEntity);
 	}
 
@@ -46,19 +54,16 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 
 	@Override
 	public List<DairyLocation> find(String rawQuery) {
-		// TODO Auto-generated method stub
 		return super.find(rawQuery);
 	}
 
 	@Override
 	public List<DairyLocation> find(String query, Object[] args) {
-		// TODO Auto-generated method stub
 		return super.find(query, args);
 	}
 
 	@Override
 	public DairyLocation findByKey(long key) {
-		// TODO Auto-generated method stub
 		return super.findByKey(key);
 	}
 
@@ -82,6 +87,8 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		if (route != null) {
 			newEntity.setRoute((Route) get("Route", new Long(route.getId())));
 		}
+		Dairy dairy = (Dairy) get("Dairy", 1l);
+		dairy.getBranchLocations().add(newEntity);
 		super.saveNew(newEntity);
 	}
 
@@ -96,7 +103,6 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 
 	@Override
 	public void update(DairyLocation updateableEntity) {
-		// TODO Auto-generated method stub
 		super.update(updateableEntity);
 	}
 
