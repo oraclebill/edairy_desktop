@@ -7,6 +7,7 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -17,7 +18,6 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.dairy.containers.ui.controls.ContainerLogDetailBindConstants;
 import com.agritrace.edairy.desktop.dairy.containers.ui.dialogs.ContainerEditDialog;
-
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
@@ -67,6 +67,13 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 		final DairyContainer container = DairyFactory.eINSTANCE.createDairyContainer();
 		EMFUtil.populate(container);
 		return container;
+	}
+
+	
+	@Override
+	protected void createEntity(DairyContainer newEntity) {
+		dairyRepository.getLocalDairy().getDairyBins().add(newEntity);
+		super.createEntity(newEntity);
 	}
 
 	@Override
