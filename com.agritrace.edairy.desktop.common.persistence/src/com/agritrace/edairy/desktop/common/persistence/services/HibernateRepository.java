@@ -74,9 +74,9 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	@Override
 	public List<T> all() {
 		SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
-			@Override public void run(Session s) {
-				setResult(
-					s.createCriteria(getClassType()).list());
+			@Override
+			public void run(Session s) {
+				setResult(s.createCriteria(getClassType()).list());
 			}
 		};
 		runWithTransaction(runner);
@@ -99,45 +99,35 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		if (obj == null) {
 			throw new IllegalArgumentException("obj cannot be null");
 		}
-//		session.lock(obj, LockMode.NONE);
-		try {
-			load(obj, (Serializable)obj.eGet(obj.eClass().getEIDAttribute()));
-		}
-		// we may fail if object is already associated with this session...
-		catch(Exception e) {
-			load(obj, (Serializable)obj.eGet(obj.eClass().getEIDAttribute()));
-		}		
+		Serializable key = (Serializable) obj.eGet(obj.eClass().getEIDAttribute());
+		load(obj, key);
 	}
-	
+
 	@Override
 	public void load(final EObject obj, final Serializable key) {
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
 		}
-		runWithTransaction(new Runnable() {
-			@Override
-			public void run() {				
-				session.load(obj, key);
-			}
-		});
-	}
-	
-	@Override
-	public List<T> find(final String rawQuery) {
-		SessionRunnable<List<T>> query = new SessionRunnable<List<T>>() {
-			@Override
-			public void run(Session s) {				
-				setResult(s.createQuery(rawQuery).list());
-			}
-		};
-		return query.getResult();
+		if (!session.contains(obj))
+			session.load(obj, key);
 	}
 
+//	@Override
+//	public List<T> find(final String rawQuery) {
+//		SessionRunnable<List<T>> query = new SessionRunnable<List<T>>() {
+//			@Override
+//			public void run(Session s) {
+//				setResult(s.createQuery(rawQuery).list());
+//			}
+//		};
+//		runWithTransaction(query);
+//		return query.getResult();
+//	}
 
-	@Override
-	public List<T> find(String query, Object[] args) {
-		throw new UnsupportedOperationException("not implemented");
-	}
+//	@Override
+//	public List<T> find(String query, Object[] args) {
+//		throw new UnsupportedOperationException("not implemented");
+//	}
 
 	@Override
 	public T findByKey(long key) {
@@ -238,8 +228,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	private void closeSession() {
 		if (null != session) {
-//			 session.close();
-//			 session = null;
+			// session.close();
+			// session = null;
 		} else {
 			// TODO: use proper logging and exception code.
 			throw new IllegalStateException("null session");

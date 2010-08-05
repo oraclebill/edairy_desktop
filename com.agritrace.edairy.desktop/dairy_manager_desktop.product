@@ -16,7 +16,7 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750</vmArgs>
+      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
    </launcherArgs>

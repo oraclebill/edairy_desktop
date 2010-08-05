@@ -41,15 +41,14 @@ public class RouteRepository implements IRepository<Route> {
 		routeRepo.delete(deletableEntity);
 	}
 
-	@Override
-	public List<?> find(String rawQuery) {
-		return routeRepo.find(rawQuery);
-	}
-
-	@Override
-	public List<?> find(String query, Object[] params) {
-		return routeRepo.find(query, params);
-	}
+//	@Override
+//	public List<?> find(String rawQuery) {
+//		return routeRepo.find(rawQuery);
+//	}
+//
+//	public List<?> find(String query, Object[] params) {
+//		return routeRepo.find(query, params);
+//	}
 
 	@Override
 	public Route findByKey(long key) {

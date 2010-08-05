@@ -21,17 +21,17 @@ public class SupplierRepository extends HibernateRepository<Supplier> {
 		super.delete(deletableEntity);
 	}
 
-	@Override
-	public List<Supplier> find(String rawQuery) {
-		// TODO Auto-generated method stub
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<Supplier> find(String query, Object[] args) {
-		// TODO Auto-generated method stub
-		return super.find(query, args);
-	}
+//	@Override
+//	public List<Supplier> find(String rawQuery) {
+//		// TODO Auto-generated method stub
+//		return super.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<Supplier> find(String query, Object[] args) {
+//		// TODO Auto-generated method stub
+//		return super.find(query, args);
+//	}
 
 	@Override
 	public Supplier findByKey(long key) {

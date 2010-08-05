@@ -130,7 +130,11 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		updateAllRidgetsFromModel();
 	}
 
-	
+	protected void updateEntity(AccountTransaction updateableEntity) {
+		// the 'all' has the side effect of flushing the currnet session.. this is what we want to do, not 'update'...
+		getRepository().all();		
+	}
+
 	protected Predicate buildFilterPredicate() {
 
 		Predicate superPredicate = super.buildFilterPredicate();

@@ -110,7 +110,8 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 		dateRangeRidget.bindToModel(BeansObservables.observeValue(filterBean, "startDate"),
 				BeansObservables.observeValue(filterBean, "endDate"));
 
-		memberNameRidget.bindToModel(filterBean, "member.memberId");
+		memberNameRidget.bindToModel(filterBean, "member");
+		memberNameRidget.updateFromModel();
 
 		// referenceNumberRidget.bindToModel(filterBean, "referenceNumber");
 

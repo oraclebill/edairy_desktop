@@ -42,22 +42,22 @@ public interface IRepository<T extends EObject> {
 	void load(EObject object);
 	void load(EObject obj, Serializable key);
 
-	/**
-	 * Find objects matching the query.
-	 * 
-	 * @param rawQuery
-	 * @return a possibly empty list.
-	 */
-	List<?> find(String rawQuery);
+//	/**
+//	 * Find objects matching the query.
+//	 * 
+//	 * @param rawQuery
+//	 * @return a possibly empty list.
+//	 */
+//	List<?> find(String rawQuery);
 
-	/**
-	 * Find objects that match the query after parameter substitution.
-	 * 
-	 * @param query
-	 * @param params
-	 * @return List of matches or empty list.
-	 */
-	List<?> find(String query, Object[] params);
+//	/**
+//	 * Find objects that match the query after parameter substitution.
+//	 * 
+//	 * @param query
+//	 * @param params
+//	 * @return List of matches or empty list.
+//	 */
+//	List<?> find(String query, Object[] params);
 
 	/**
 	 * Find the object that has key of <key> or null if it does not exist.

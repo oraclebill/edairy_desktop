@@ -49,17 +49,17 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 		super.delete(deletableEntity);
 	}
 
-	@Override
-	public List<Customer> find(String rawQuery) {
-		// TODO Auto-generated method stub
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<Customer> find(String query, Object[] args) {
-		// TODO Auto-generated method stub
-		return super.find(query, args);
-	}
+//	@Override
+//	public List<Customer> find(String rawQuery) {
+//		// TODO Auto-generated method stub
+//		return super.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<Customer> find(String query, Object[] args) {
+//		// TODO Auto-generated method stub
+//		return super.find(query, args);
+//	}
 
 	@Override
 	public Customer findByKey(long key) {

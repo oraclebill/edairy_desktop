@@ -19,25 +19,25 @@ public class VehicleRepository extends HibernateRepository<Vehicle> {
 	}
 
 	
-	@Override
-	public List<Vehicle> find(String rawQuery) {
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<Vehicle> find(String query, Object[] args) {
-		return super.find(query, args);
-	}
+//	@Override
+//	public List<Vehicle> find(String rawQuery) {
+//		return super.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<Vehicle> find(String query, Object[] args) {
+//		return super.find(query, args);
+//	}
 
 	@Override
 	public Vehicle findByKey(long key) {
 		return super.findByKey(key);
 	}
 
-	public List<Vehicle> getByType(String type) {
-		return find("FROM Vehicle where type='" + type + "'");
-		
-	}
+//	public List<Vehicle> getByType(String type) {
+//		return find("FROM Vehicle where type='" + type + "'");
+//		
+//	}
 
 
 	@Override

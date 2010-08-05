@@ -320,13 +320,13 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return found;
 	}
 
-	public List<Dairy> find(String rawQuery) {
-		return dairyRepository.find(rawQuery);
-	}
-
-	public List<Dairy> find(String query, Object[] args) {
-		return dairyRepository.find(query, args);
-	}
+//	public List<Dairy> find(String rawQuery) {
+//		return dairyRepository.find(rawQuery);
+//	}
+//
+//	public List<Dairy> find(String query, Object[] args) {
+//		return dairyRepository.find(query, args);
+//	}
 
 	@Override
 	public Dairy getDairyById(Long key) {

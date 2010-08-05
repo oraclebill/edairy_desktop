@@ -130,6 +130,8 @@ public class AccountTransactionEditPanelController {
 
 		memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberName.setOutputOnly(true);
+		if (model.getAccount() != null)
+			setSelectedMember(model.getAccount().getMember());
 
 		// configure member lookup action
 		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,

@@ -52,28 +52,28 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		});
 	}
 
-	@Override
-	public List<DairyLocation> find(String rawQuery) {
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<DairyLocation> find(String query, Object[] args) {
-		return super.find(query, args);
-	}
+//	@Override
+//	public List<DairyLocation> find(String rawQuery) {
+//		return super.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<DairyLocation> find(String query, Object[] args) {
+//		return super.find(query, args);
+//	}
 
 	@Override
 	public DairyLocation findByKey(long key) {
 		return super.findByKey(key);
 	}
 
-	public DairyLocation getByName(String name) {
-		final List<DairyLocation> list = find("FROM DairyLocation where name='" + name + "'");
-		if (list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
-	}
+//	public DairyLocation getByName(String name) {
+//		final List<DairyLocation> list = find("FROM DairyLocation where name='" + name + "'");
+//		if (list.size() > 0) {
+//			return list.get(0);
+//		}
+//		return null;
+//	}
 
 	public List<Route> getRoutes() {
 		final RoutesQuery routesQuery = new RoutesQuery();

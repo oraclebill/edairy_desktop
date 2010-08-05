@@ -326,8 +326,9 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
-			System.err.println("------ updating item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
-			updateEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			final Object contextObj = dialog.getController().getContext(EDITED_OBJECT_ID);
+			log(LogService.LOG_DEBUG, "------ handleViewItemAction: updating item: " + contextObj);
+			updateEntity((T) contextObj);
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			// todo: ensure data sent to dialog is not modified...
 			// getRepository().load((T)

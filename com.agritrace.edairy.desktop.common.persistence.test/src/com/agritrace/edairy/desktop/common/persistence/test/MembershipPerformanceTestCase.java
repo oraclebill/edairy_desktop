@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
+@SuppressWarnings("unchecked")
 public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 	@Test
 	public void testLazyLoadBehaviour() throws Exception {
