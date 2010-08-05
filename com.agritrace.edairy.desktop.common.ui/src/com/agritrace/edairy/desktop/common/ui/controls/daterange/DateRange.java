@@ -43,7 +43,7 @@ public class DateRange extends  Composite implements IComplexComponent {
 	}
 	
 	public DateRange(Composite parent, int labelWidth, int style) {
-		this(parent, style, DEFAULT_RANGE_LABEL, START_DATE_ID, END_DATE_ID);
+		this(parent, labelWidth, style, DEFAULT_RANGE_LABEL, START_DATE_ID, END_DATE_ID);
 	}
 	
 	public DateRange(Composite parent, String rangeLabelTxt, String startTxtId, String endTxtId) {

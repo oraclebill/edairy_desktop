@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,9 +17,9 @@ class TransactionJournalFilterBean {
 	private Membership member = null;
 	private String referenceNumber = null;
 	private final List<TransactionSource> sourceOptions = TransactionSource.VALUES;
-	private final Set<TransactionSource> sourceSelections = new HashSet<TransactionSource>();
+	private final List<TransactionSource> sourceSelections = new LinkedList<TransactionSource>();
 	private final List<TransactionType> typeOptions = TransactionType.VALUES;
-	private final Set<TransactionType> typeSelections = new HashSet<TransactionType>();
+	private final List<TransactionType> typeSelections = new LinkedList<TransactionType>();
 //	private TransactionSource transactionSource;
 //	private TransactionType transactionType;
 
@@ -44,6 +45,9 @@ class TransactionJournalFilterBean {
 		referenceNumber = "";
 		typeSelections.clear();
 		sourceSelections.clear();
+		
+		typeSelections.addAll(getTypeOptions());
+		sourceSelections.addAll(getSourceOptions());
 	}
 
 	/**
@@ -131,7 +135,7 @@ class TransactionJournalFilterBean {
 	 * 
 	 * @return
 	 */
-	public Set<TransactionType> getTypeSelections() {
+	public List<TransactionType> getTypeSelections() {
 		return typeSelections;
 	}
 	
@@ -139,7 +143,7 @@ class TransactionJournalFilterBean {
 	 * 
 	 * @param typeOptions
 	 */
-	public void setTypeSelections(Set<TransactionType> typeOptions) {
+	public void setTypeSelections(List<TransactionType> typeOptions) {
 		this.typeSelections.clear();
 		this.typeSelections.addAll(typeOptions);
 	}
@@ -148,7 +152,7 @@ class TransactionJournalFilterBean {
 	 * 
 	 * @return
 	 */
-	public Set<TransactionSource> getSourceSelections() {
+	public List<TransactionSource> getSourceSelections() {
 		return sourceSelections;
 	}
 	
@@ -156,7 +160,7 @@ class TransactionJournalFilterBean {
 	 * 
 	 * @param sources
 	 */
-	public void setSourceSelections(Set<TransactionSource> sources) {
+	public void setSourceSelections(List<TransactionSource> sources) {
 		this.sourceSelections.clear();
 		this.sourceSelections.addAll(sources);
 	}

@@ -184,19 +184,25 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON);
-		newBtnRidget.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				handleNewItemAction();
-			}
-		});
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
+		configureNewItemButton(getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON));
+		configureViewItemButton(getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON));
+	}
+
+	protected void configureViewItemButton(final IActionRidget viewBtnRidget) {
 		viewBtnRidget.setEnabled(false);
 		viewBtnRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handleViewItemAction();
+			}
+		});
+	}
+
+	protected void configureNewItemButton(final IActionRidget newBtnRidget) {
+		newBtnRidget.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleNewItemAction();
 			}
 		});
 	}

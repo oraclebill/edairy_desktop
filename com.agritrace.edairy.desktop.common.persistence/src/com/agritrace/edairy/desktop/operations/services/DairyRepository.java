@@ -20,6 +20,9 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.osgi.service.log.LogService;
 
@@ -500,18 +503,10 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public MilkPrice getCurrentMilkPrice() {
-		MilkPrice currentPrice;
-		Session session = PersistenceManager.getDefault().getSession();
-		Date maxDate = (Date) session.createQuery(
-				"select max(priceDate) from MilkPrice").uniqueResult();
-		if (maxDate != null) {
-			currentPrice = (MilkPrice) session
-					.createQuery("select from MilkPrice where priceDate = ?")
-					.setDate(0, maxDate).uniqueResult();
-		} else {
-			currentPrice = null;
-		}
+	public MilkPrice getCurrentMilkPrice() {		
+		Session session = PersistenceManager.getDefault().getSession();		
+		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice").setProjection(Property.forName("priceDate").max());		
+		MilkPrice currentPrice = (MilkPrice) session.createCriteria("MilkPrice").add(Property.forName("priceDate").eq(maxDate)).uniqueResult();		
 		return currentPrice;
 	}
 
