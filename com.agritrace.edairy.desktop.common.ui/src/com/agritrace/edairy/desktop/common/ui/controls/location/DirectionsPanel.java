@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controls.location;
 
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -35,7 +36,8 @@ public class DirectionsPanel extends CompositePanel {
 		gd = new GridData();
 		directionsLabel.setLayoutData(gd);
 
-		final Text directionsText = UIControlsFactory.createTextMulti(this, false, false, ViewWidgetId.DIRECTIONS_TEXT);
+		final Text directionsText = UIControlsFactory.createTextMulti(this, SWT.WRAP, false, true);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(directionsText,  ViewWidgetId.DIRECTIONS_TEXT);
 		gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT * 4;
 		gd.heightHint = FormUtil.ROW_MARGIN * 5;
