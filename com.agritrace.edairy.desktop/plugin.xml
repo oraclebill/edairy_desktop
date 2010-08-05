@@ -187,10 +187,6 @@
           class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
           id="com.agritrace.edairy.desktop.splashHandlers.extensible">
     </splashHandler>
-    <splashHandlerProductBinding
-          productId="com.agritrace.edairy.desktop.dairy_manager_prod"
-          splashId="com.agritrace.edairy.desktop.splashHandlers.interactive">
-    </splashHandlerProductBinding>
     <splashHandler
           class="com.agritrace.edairy.desktop.splashHandlers.InteractiveSplashHandler"
           id="com.agritrace.edairy.desktop.splashHandlers.interactive">
