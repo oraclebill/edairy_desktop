@@ -20,6 +20,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.util.MatchUtil;
+import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.DairyLocationEditDialog;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
@@ -48,7 +49,7 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	@Override
 	protected void configureFilterRidgets() {
 		functions= getRidget(IMultipleChoiceRidget.class,
-				DairyLocationController.RIDGET_ID_FUNCTIONS);
+				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		final IObservableList optionValues = new WritableList(Arrays.asList(DairyFunction.values()),
 				DairyFunction.class);
 		final IObservableList selectionValues = new WritableList(searchBean.getFunctionSearchValues(), DairyFunction.class);
@@ -56,7 +57,7 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 		functions.updateFromModel();
 
 		//
-		routeTypeSearchCombo = getRidget(IComboRidget.class,DairyLocationController.RIDGET_ID_ROUTE);
+		routeTypeSearchCombo = getRidget(IComboRidget.class,DairyLocationUIConstants.RIDGET_ID_ROUTE);
 		routeTypeSearchCombo.bindToModel(new WritableList(dairyLocationRepo.getRoutes(), Route.class), Route.class, "getName",
 				BeansObservables.observeValue(searchBean,"routeSearchValue"));
 		routeTypeSearchCombo.updateFromModel();

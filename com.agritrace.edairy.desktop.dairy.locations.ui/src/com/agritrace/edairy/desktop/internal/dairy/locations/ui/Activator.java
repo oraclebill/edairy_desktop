@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.locations.ui;
+package com.agritrace.edairy.desktop.internal.dairy.locations.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
