@@ -9,6 +9,7 @@ import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
@@ -55,10 +56,12 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 	public void bindToModel(IObservableValue observableValue) {
 
 		if (observableValue == null) {
-			// TODO: Log
+			System.err.println("skipping binding: null model");
 			return;
 		}
-
+		if (observableValue.getValue() == null) {
+			observableValue.setValue(DairyFactory.eINSTANCE.createAsset());
+		}
 		modelObject = observableValue;
 		dateAcquiredText.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName(), Date.class));
