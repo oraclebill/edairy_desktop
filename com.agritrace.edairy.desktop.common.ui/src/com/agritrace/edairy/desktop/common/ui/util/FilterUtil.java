@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.common.ui.util;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -14,30 +15,31 @@ import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 public class FilterUtil {
 
 	public static abstract class DateComparisonPredicate implements Predicate {
-		private final Date comparisonPoint;
+		private final Calendar comparisonPoint;
 		private final String propertyName;
 
-		public DateComparisonPredicate(Date earlyDate) {
-			this(earlyDate, null);
+		public DateComparisonPredicate(Date date) {
+			this(date, null);
 		}
 
-		public DateComparisonPredicate(Date earlyDate, String propertyName) {
-			this.comparisonPoint = earlyDate;
+		public DateComparisonPredicate(Date date, String propertyName) {
+			this.comparisonPoint = getCalendarDate(date);
 			this.propertyName = propertyName;
 		}
 
 		@Override
 		public boolean evaluate(Object obj) {
-			Date testDate = null;
+			Calendar testDate = null;
 
-			if (obj == null) {
+			if (obj == null || comparisonPoint == null) {
 				return true;
-			} else if (propertyName != null) {
+			} 
+			else if (propertyName != null) {			
 				obj = resolveProperty(obj);
 			}
 
 			if (obj instanceof Date) {
-				testDate = (Date) obj;
+				testDate = getCalendarDate((Date) obj);
 			} else {
 				throw new IllegalArgumentException(String.format(
 						"Parameter type '%s' found in property '%s' expecting java.util.Date", obj.getClass(),
@@ -60,7 +62,20 @@ public class FilterUtil {
 			return propVal;
 		}
 
-		protected abstract boolean evaluate(Date earlyDate2, Date testDate);
+		protected abstract boolean evaluate(Calendar firstDate, Calendar secondDate);
+
+		protected Calendar getCalendarDate(Date date) {
+			Calendar cal = null;
+			if (date != null) {
+				cal = Calendar.getInstance();
+				cal.setTime(date);
+				cal.set(Calendar.HOUR_OF_DAY, 0);
+				cal.set(Calendar.MINUTE, 0);
+				cal.set(Calendar.SECOND, 0);
+				cal.set(Calendar.MILLISECOND, 0);
+			}
+			return cal;
+		}
 	}
 
 	public static class DateAfterPredicate extends DateComparisonPredicate {
@@ -73,8 +88,8 @@ public class FilterUtil {
 		}
 
 		@Override
-		protected boolean evaluate(Date comparisonPoint, Date testDate) {
-			return testDate.after(comparisonPoint);
+		protected boolean evaluate(Calendar comparisonPoint, Calendar testDate) {
+			return testDate.after(comparisonPoint) || testDate.equals(comparisonPoint);
 		}
 	}
 
@@ -88,9 +103,31 @@ public class FilterUtil {
 		}
 
 		@Override
-		protected boolean evaluate(Date comparisonPoint, Date testDate) {
-			return testDate.before(comparisonPoint);
+		protected boolean evaluate(Calendar comparisonPoint, Calendar testDate) {
+			boolean ret = testDate.before(comparisonPoint) || testDate.equals(comparisonPoint);
+			System.err.printf("Comparing %s to %s returning %s\n", comparisonPoint.getTime(), testDate.getTime(), ret);
+			return ret;
 		}
+	}
+
+	public static class DateRangePredicate implements Predicate {
+		private final DateBeforePredicate beforePred;
+		private final DateAfterPredicate afterPred;
+
+		public DateRangePredicate(Date lowDate, Date highDate) {
+			this(lowDate, highDate, null);
+		}
+
+		public DateRangePredicate(Date lowDate, Date highDate, String propertyName) {
+			beforePred = new DateBeforePredicate(lowDate, propertyName);
+			afterPred = new DateAfterPredicate(highDate, propertyName);
+		}
+
+		@Override
+		public boolean evaluate(Object obj) {
+			return beforePred.evaluate(obj) && afterPred.evaluate(obj);
+		}
+
 	}
 
 	public static class IsSubStringPredicate implements Predicate {

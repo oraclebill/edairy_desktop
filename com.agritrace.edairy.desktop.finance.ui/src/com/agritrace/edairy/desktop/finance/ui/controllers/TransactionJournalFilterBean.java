@@ -34,12 +34,14 @@ class TransactionJournalFilterBean {
 	 * 
 	 */
 	public void clear() {
-		final Calendar now = Calendar.getInstance();
-		final Calendar nowMinusThirty = Calendar.getInstance();
-		nowMinusThirty.add(Calendar.DAY_OF_YEAR, -30);
+		final Calendar today = Calendar.getInstance();
+				
+		final Calendar todayMinusThirty = Calendar.getInstance();
+		todayMinusThirty.setTime(today.getTime());		
+		todayMinusThirty.add(Calendar.DAY_OF_YEAR, -30);
 
-		endDate = now.getTime();
-		startDate = nowMinusThirty.getTime();
+		startDate = todayMinusThirty.getTime();
+		endDate = today.getTime();
 
 		member = null;
 		referenceNumber = "";
