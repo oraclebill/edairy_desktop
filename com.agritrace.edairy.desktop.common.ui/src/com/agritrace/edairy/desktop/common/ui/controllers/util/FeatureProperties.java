@@ -61,7 +61,21 @@ class FeatureProperties {
 	}
 
 	public String getRenderMethod() {
-		// TODO Auto-generated method stub
 		return renderMethod;
+	}
+
+	/**
+	 * Return the bean property name of the feature associated with this binding.
+	 * 
+	 * @return
+	 */
+	public String getPropertyName() {
+		StringBuffer buf = new StringBuffer();
+		EStructuralFeature[] path = featurePath.getFeaturePath();
+		for (int i = 0; i < path.length; i++) {
+			buf.append(path[i].getName());
+			if (i+1 < path.length) buf.append(".");
+		}
+		return buf.toString();
 	}
 }

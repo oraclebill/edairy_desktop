@@ -10,6 +10,7 @@ import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -37,70 +38,71 @@ public class VehicleEditDialogController  extends RecordDialogController<Vehicle
 	
 	private void bindVehicleInfo() {
 
+		
 		// Log Book Number
-		final ITextRidget logNumber = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_LOG_NUM);
-		logNumber.setDirectWriting(true);
-		logNumber.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER.getName());
-		logNumber.updateFromModel();
+//		final ITextRidget logNumber = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_LOG_NUM);
+//		logNumber.setDirectWriting(true);
+//		logNumber.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER.getName());
+//		logNumber.updateFromModel();
 
 		// Driver Name Name
-		final IComboRidget lastNameText = getRidget(IComboRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
-		lastNameText.bindToModel(new WritableList(DairyRepository.getInstance().employeesByPosition("Driver"), Employee.class),
-				Employee.class, "getFamilyName",
-				EMFObservables.observeValue(editVehicle, DairyPackage.Literals.VEHICLE__DRIVER));
-		lastNameText.updateFromModel();
+//		final IComboRidget lastNameText = getRidget(IComboRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
+//		lastNameText.bindToModel(new WritableList(DairyRepository.getInstance().employeesByPosition("Driver"), Employee.class),
+//				Employee.class, "getFamilyName",
+//				EMFObservables.observeValue(editVehicle, DairyPackage.Literals.VEHICLE__DRIVER));
+//		lastNameText.updateFromModel();
 
-		// Vehicle Type
-		final IComboRidget vehicleTypeCombo = getRidget(IComboRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
-		vehicleTypeCombo.bindToModel(new WritableList(VehicleType.getValues(), String.class), String.class, null,
-				EMFObservables.observeValue(editVehicle, DairyPackage.Literals.VEHICLE__TYPE));
-		vehicleTypeCombo.updateFromModel();
+//		// Vehicle Type
+//		final IComboRidget vehicleTypeCombo = getRidget(IComboRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
+//		vehicleTypeCombo.bindToModel(new WritableList(VehicleType.getValues(), String.class), String.class, null,
+//				EMFObservables.observeValue(editVehicle, DairyPackage.Literals.VEHICLE__TYPE));
+//		vehicleTypeCombo.updateFromModel();
 
-		// Registration Number
-		final ITextRidget regText = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_REG_NUM);
-		regText.setDirectWriting(true);
-		regText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER.getName());
-		regText.updateFromModel();
+//		// Registration Number
+//		final ITextRidget regText = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_REG_NUM);
+//		regText.setDirectWriting(true);
+//		regText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER.getName());
+//		regText.updateFromModel();
 		//
 		// Chassis Number
-		final ITextRidget chasisText = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_CHASSIS_NUM);
-		chasisText.setDirectWriting(true);
-		chasisText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__CHASSIS_NUMBER.getName());
-		chasisText.updateFromModel();
-
-		// Engine Number
-		final ITextRidget engineNumber = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_ENGINE_NUM);
-		engineNumber.setDirectWriting(true);
-		engineNumber.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__ENGINE_NUMBER.getName());
-		engineNumber.updateFromModel();
-
-		// Description Group
-		// Make
-		final ITextRidget makeText = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_DESC_MAKE);
-		makeText.setDirectWriting(true);
-		makeText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__MAKE.getName());
-		makeText.updateFromModel();
-
-		// Model
-		final ITextRidget modelText = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_DESC_MODEL);
-		modelText.setDirectWriting(true);
-		modelText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__MODEL.getName());
-		modelText.updateFromModel();
-
-		// Color
-		final ITextRidget colorText = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_DESC_COLOR);
-		colorText.setDirectWriting(true);
-		colorText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR.getName());
-		colorText.updateFromModel();
+//		final ITextRidget chasisText = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_CHASSIS_NUM);
+//		chasisText.setDirectWriting(true);
+//		chasisText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__CHASSIS_NUMBER.getName());
+//		chasisText.updateFromModel();
+//
+//		// Engine Number
+//		final ITextRidget engineNumber = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_ENGINE_NUM);
+//		engineNumber.setDirectWriting(true);
+//		engineNumber.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__ENGINE_NUMBER.getName());
+//		engineNumber.updateFromModel();
+//
+//		// Description Group
+//		// Make
+//		final ITextRidget makeText = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_DESC_MAKE);
+//		makeText.setDirectWriting(true);
+//		makeText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__MAKE.getName());
+//		makeText.updateFromModel();
+//
+//		// Model
+//		final ITextRidget modelText = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_DESC_MODEL);
+//		modelText.setDirectWriting(true);
+//		modelText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__MODEL.getName());
+//		modelText.updateFromModel();
+//
+//		// Color
+//		final ITextRidget colorText = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_DESC_COLOR);
+//		colorText.setDirectWriting(true);
+//		colorText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR.getName());
+//		colorText.updateFromModel();
 
 		// Year
 		final ISpinnerRidget yearText = getRidget(ISpinnerRidget.class,
@@ -117,29 +119,56 @@ public class VehicleEditDialogController  extends RecordDialogController<Vehicle
 																												// code...
 		yearText.updateFromModel();
 
-		// Capacity
-		final INumericTextRidget capacityText = getRidget(INumericTextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_DESC_CAPACITY);
-		capacityText.setDirectWriting(true);
-		capacityText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName());
-		capacityText.updateFromModel();
-
-		// Insurance Info
-		// Insurance Number
-		final ITextRidget insuranceNumberText = getRidget(ITextRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_INSURANCE_NUMBER);
-		insuranceNumberText.setDirectWriting(true);
-		insuranceNumberText.bindToModel(editVehicle,
-				DairyPackage.Literals.VEHICLE__INSURANCE_POLICY_NUMBER.getName());
-		insuranceNumberText.updateFromModel();
-
-		// Expiration Date
-		final IDateTimeRidget expDateText = getRidget(IDateTimeRidget.class,
-				VehicleLogDetailBindConstants.BIND_ID_INSURANCE_EXP_DATE);
-		expDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-		// expDateText.setDirectWriting(true);
-		expDateText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE.getName());
-		expDateText.updateFromModel();
+		
+		// field mappings
+		
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_LOG_NUM, DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER);
+		
+		addComboMap(VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME, 
+				new WritableList(DairyRepository.getInstance().employeesByPosition("Driver"), Employee.class),
+				"getFamilyName", 
+				DairyPackage.Literals.VEHICLE__DRIVER);
+		
+		addComboMap(VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE, 
+				new WritableList(VehicleType.getValues(), String.class), 
+				null,
+				DairyPackage.Literals.VEHICLE__TYPE);
+		
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_REG_NUM, DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_CHASSIS_NUM, DairyPackage.Literals.VEHICLE__CHASSIS_NUMBER);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_ENGINE_NUM, DairyPackage.Literals.VEHICLE__ENGINE_NUMBER);
+		
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_DESC_MAKE, DairyPackage.Literals.VEHICLE__MAKE);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_DESC_MODEL, DairyPackage.Literals.VEHICLE__MODEL);
+//		addRidgetFeatureMap(VehicleLogDetailBindConstants.BIND_ID_DESC_YEAR, DairyPackage.Literals.VEHICLE__YEAR);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_DESC_COLOR, DairyPackage.Literals.VEHICLE__DOMINANT_COLOUR);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_DESC_CAPACITY, DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_INSURANCE_NUMBER, DairyPackage.Literals.VEHICLE__INSURANCE_POLICY_NUMBER);
+		addTextMap(VehicleLogDetailBindConstants.BIND_ID_INSURANCE_EXP_DATE, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE);
+				
+//		// Capacity
+//		final INumericTextRidget capacityText = getRidget(INumericTextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_DESC_CAPACITY);
+//		capacityText.setDirectWriting(true);
+//		capacityText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__CAPACITY_IN_TONNES.getName());
+//		capacityText.updateFromModel();
+//
+//		// Insurance Info
+//		// Insurance Number
+//		final ITextRidget insuranceNumberText = getRidget(ITextRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_INSURANCE_NUMBER);
+//		insuranceNumberText.setDirectWriting(true);
+//		insuranceNumberText.bindToModel(editVehicle,
+//				DairyPackage.Literals.VEHICLE__INSURANCE_POLICY_NUMBER.getName());
+//		insuranceNumberText.updateFromModel();
+//
+//		// Expiration Date
+//		final IDateTimeRidget expDateText = getRidget(IDateTimeRidget.class,
+//				VehicleLogDetailBindConstants.BIND_ID_INSURANCE_EXP_DATE);
+//		expDateText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+//		// expDateText.setDirectWriting(true);
+//		expDateText.bindToModel(editVehicle, DairyPackage.Literals.VEHICLE__INSURANCE_EXPIRATION_DATE.getName());
+//		expDateText.updateFromModel();
 	}
 	
 	private void bindAssetInfo() {

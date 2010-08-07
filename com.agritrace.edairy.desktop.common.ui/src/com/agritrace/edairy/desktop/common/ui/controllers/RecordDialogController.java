@@ -20,11 +20,11 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		super();
 	}
 
-	public void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
+	public void addTextMap(String ridgetId, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addMapping(ridgetId, featurePath);
 	}
 
-	public void addRidgetFeatureMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+	public void addComboMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addComboMapping(ridgetId, domainList, renderMethod, featurePath);
 	}
 

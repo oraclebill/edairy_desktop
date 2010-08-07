@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.property.Properties;
 import org.eclipse.core.databinding.property.value.IValueProperty;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
@@ -16,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IEditableRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
+import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
@@ -30,7 +34,7 @@ public class BindingHelper<T extends EObject> {
 	private final Map<String, FeatureProperties> ridgetPropertyMap = new HashMap<String, FeatureProperties>();
 
 	/**
-	 * Create a new EMFBindingHelper.
+	 * Create a new BindingHelper.
 	 * 
 	 * @param ridgetContainer
 	 * @param modelObject
@@ -83,13 +87,14 @@ public class BindingHelper<T extends EObject> {
 
 			if (ridget instanceof IEditableRidget) {
 				final IEditableRidget valueRidget = (IEditableRidget) ridget;
-				final IValueProperty modelValue = EMFProperties.value(binding.getFeaturePath());
-				valueRidget.bindToModel(modelValue.observe(getModelObject()));
-				final IConverter converter = createUI2ModelConverter(valueRidget, binding.getTailFeature());
-				if (converter != null) {
-//					valueRidget.setUIControlToModelxConverter(converter); // has no effect..
+				final IObservableValue observable = PojoObservables.observeValue(getModelObject(), binding.getPropertyName());
+				valueRidget.bindToModel(observable);
+				try {
+					valueRidget.updateFromModel();
 				}
-				valueRidget.updateFromModel();
+				catch(Exception e) {
+					System.err.printf("Error mapping ridget %s to feature %s: %s", ridget, binding.getFeaturePath(), e.getMessage());
+				}
 			} else if (ridget instanceof IComboRidget) {
 				final IComboRidget comboRidget = (IComboRidget) ridget;
 				final IObservableList optionValues = binding.getDomainList();
@@ -155,17 +160,26 @@ public class BindingHelper<T extends EObject> {
 					+ ", " + rowClass + ", " + selectionValue + ")");
 		}
 	}
-
-	private IConverter createUI2ModelConverter(IEditableRidget ridget, EStructuralFeature feature) {
-		try {
-			final EClassifier featureType = feature.getEType();
-			final Class<?> featureClass = featureType.getInstanceClass();
-			return converterFactory.createConverter(String.class, featureClass);
-		} catch (final Exception e) {
-			System.err.println("WARN: converter factory failed for feature: " + feature);
-			return null;
-		}
-	}
+//
+//	private IConverter createUI2ModelConverter(IEditableRidget ridget, EStructuralFeature feature) {
+//		try {
+//			final EClassifier featureType = feature.getEType();
+//			final Class<?> featureClass = featureType.getInstanceClass();
+//			return converterFactory.createConverter(String.class, featureClass);
+//		} catch (final Exception e) {
+//			System.err.println("WARN: converter factory failed for feature: " + feature);
+//			return null;
+//		}
+//	}
+//
+//	private IConverter createModel2UIControlConverter(Object obj, IEditableRidget ridget) {
+//		return new Converter(obj, String.class) {
+//			@Override
+//			public Object convert(Object from) {
+//				return from != null ? from.toString() : "";
+//			}
+//		};
+//	}
 
 	public void updateAllRidgetsFromModel() {
 		if (modelObject != null) {

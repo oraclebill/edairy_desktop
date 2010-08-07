@@ -113,27 +113,27 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 	@Override
 	protected void configureUserRidgets() {
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.REFERENCE_NUM,
+		addTextMap(DeliveryJournalEditBindContants.REFERENCE_NUM,
 				DairyPackage.Literals.DELIVERY_JOURNAL__REFERENCE_NUMBER);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
+		addTextMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.SESSION_COMBO, Arrays.asList(Session.values()), "getName",
+		addComboMap(DeliveryJournalEditBindContants.SESSION_COMBO, Arrays.asList(Session.values()), "getName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(), "getName",
+		addComboMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(), "getName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.CUSTOMER_COMBO, dairyRepo.allCustomers(), "getCompanyName",
+		addComboMap(DeliveryJournalEditBindContants.CUSTOMER_COMBO, dairyRepo.allCustomers(), "getCompanyName",
 				DairyPackage.Literals.DELIVERY_JOURNAL__CUSTOMER);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
+		addComboMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
 				"getFamilyName", DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(), "getLogBookNumber",
+		addComboMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(), "getLogBookNumber",
 				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
 
-		addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
+		addTextMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
 				DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
 		// addRidgetFeatureMap(DeliveryJournalEditBindContants.LINE_ITEM_TABLE,
 		// DairyPackage.Literals.DELIVERY_JOURNAL__LINES);

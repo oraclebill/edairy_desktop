@@ -34,9 +34,9 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		assert (null != editLocation);
 
 
-		addRidgetFeatureMap(DairyLocationController.RIDGET_ID_NAME, DairyPackage.Literals.DAIRY_LOCATION__NAME);
-		addRidgetFeatureMap(DairyLocationController.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
-		addRidgetFeatureMap(DairyLocationController.RIDGET_ID_DESCRIPTION,DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
+		addTextMap(DairyLocationController.RIDGET_ID_NAME, DairyPackage.Literals.DAIRY_LOCATION__NAME);
+		addTextMap(DairyLocationController.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
+		addTextMap(DairyLocationController.RIDGET_ID_DESCRIPTION,DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
 		
 		//functions
 		functions = getRidget(IMultipleChoiceRidget.class,DairyLocationController.RIDGET_ID_FUNCTIONS);

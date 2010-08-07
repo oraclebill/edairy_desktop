@@ -43,18 +43,18 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 
 		// addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMER_ID,
 		// ModelPackage.Literals.COMPANY__COMPANY_ID);
-		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
-		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_PHONE_NUMBER, ModelPackage.Literals.COMPANY__PHONE_NUMBER);
-		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_LEGAL_NAME, ModelPackage.Literals.COMPANY__LEGAL_NAME);
-		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_DESCRIPTION, ModelPackage.Literals.COMPANY__DESCRIPTION);
+		addTextMap(CustomerBindingConstants.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
+		addTextMap(CustomerBindingConstants.BIND_ID_PHONE_NUMBER, ModelPackage.Literals.COMPANY__PHONE_NUMBER);
+		addTextMap(CustomerBindingConstants.BIND_ID_LEGAL_NAME, ModelPackage.Literals.COMPANY__LEGAL_NAME);
+		addTextMap(CustomerBindingConstants.BIND_ID_DESCRIPTION, ModelPackage.Literals.COMPANY__DESCRIPTION);
 		// addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO,
 		// ModelPackage.Literals.COMPANY__PROFILE_PHOTO);
 		
 		// combos
-		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS, Observables.staticObservableList(CompanyStatus.getCustomerStatusStringList()), null,
+		addComboMap(CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS, Observables.staticObservableList(CompanyStatus.getCustomerStatusStringList()), null,
 				DairyPackage.Literals.CUSTOMER__STATUS);
 		
-		addRidgetFeatureMap(CustomerBindingConstants.BIND_ID_CUSTOMERTYPE, Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)), null, DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
+		addComboMap(CustomerBindingConstants.BIND_ID_CUSTOMERTYPE, Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)), null, DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
 
 		// customer id is read-only, so needs manual attention.
 		customerId = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_ID);
