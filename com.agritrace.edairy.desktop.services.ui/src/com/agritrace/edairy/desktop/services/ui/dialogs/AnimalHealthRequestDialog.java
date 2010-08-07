@@ -20,6 +20,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -121,7 +122,7 @@ public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest>
 		// startDateLookup.createSection(comonComp);
 
 		UIControlsFactory.createLabel(commonComp, "Date");
-		final DatePickerComposite startDateLookup = UIControlsFactory.createDatePickerComposite(commonComp);
+		final DateTime startDateLookup = UIControlsFactory.createDate(commonComp, SWT.DEFAULT);
 		startDateLookup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addUIControl(startDateLookup, BIND_ID_REQUEST_DATE_TEXT);
 		UIControlsFactory.createLabel(commonComp, ""); // filler

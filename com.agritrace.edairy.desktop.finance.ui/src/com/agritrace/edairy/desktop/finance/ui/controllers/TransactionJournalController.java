@@ -23,9 +23,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.finance.ui.controls.MemberLookupAction;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 
 public abstract class TransactionJournalController<T extends Transaction> extends BasicDirectoryController<T> {

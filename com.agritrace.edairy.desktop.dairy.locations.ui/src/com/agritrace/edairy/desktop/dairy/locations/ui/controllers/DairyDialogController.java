@@ -47,16 +47,6 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		functions.bindToModel(optionValues, selectionValues);
 		functions.updateFromModel();
 		
-//	    dateOpened = getRidget(IDateTimeRidget.class,
-//				DairyLocationUIConstants.RIDGET_ID_DATEOPENED);
-//		dateOpened.bindToModel(editLocation, "dateOpened");
-//		dateOpened.updateFromModel();
-		
-//		routeCombo = getRidget(IComboRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE);
-//		routeCombo.bindToModel(new WritableList(getRoutes(), Route.class), Route.class, "getName",
-//				EMFObservables.observeValue(editLocation, DairyPackage.Literals.DAIRY_LOCATION__ROUTE));
-//		routeCombo.updateFromModel();
-
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DATEOPENED,DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED);
 		addComboMap(DairyLocationUIConstants.RIDGET_ID_ROUTE, getRoutes(), "getName", DairyPackage.Literals.DAIRY_LOCATION__ROUTE);
 

@@ -1,10 +1,10 @@
-package com.agritrace.edairy.desktop.finance.ui.controls;
+package com.agritrace.edairy.desktop.common.ui.dialogs;
 
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+
 
 public abstract class MemberLookupAction implements IActionListener {
 	

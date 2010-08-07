@@ -34,6 +34,8 @@ Export-Package: com.agritrace.edairy.desktop.common.persistence;
    org.eclipse.emf.ecore.resource.impl,
    com.agritrace.edairy.desktop.common.model.tracking,
    com.agritrace.edairy.desktop.common.model.dairy",
+ com.agritrace.edairy.desktop.member.services,
+ com.agritrace.edairy.desktop.member.services.farm,
  com.agritrace.edairy.desktop.operations.services;uses:="com.agritrace.edairy.desktop.common.model.tracking,com.agritrace.edairy.desktop.common.model.dairy",
  com.agritrace.edairy.desktop.operations.services.customer;
   uses:="com.agritrace.edairy.desktop.common.persistence,
