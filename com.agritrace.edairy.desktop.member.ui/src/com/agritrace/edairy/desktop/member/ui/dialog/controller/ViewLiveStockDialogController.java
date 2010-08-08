@@ -111,6 +111,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
@@ -288,8 +289,12 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 				}
 			});
 			// birthDayTxt and acquisionDate
-			birthDayDate.setDate(selectedNode.getDateOfBirth());
-			acquisionDate.setDate(selectedNode.getDateOfAcquisition());
+			birthDayDate.bindToModel(selectedNode,"dateOfBirth");
+			birthDayDate.updateFromModel();
+			
+			acquisionDate.bindToModel(selectedNode,"dateOfAcquisition");
+			acquisionDate.updateFromModel();
+			
 
 			// acquisionTypeCombo
 			acquisionTypeCombo.bindToModel(Observables.staticObservableList(AcquisitionType.VALUES),
@@ -517,6 +522,11 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 					return false;
 				}
 				if (markable.isMandatory()) {
+					if(ridget instanceof IDateTimeRidget){
+						if(((IDateTimeRidget)ridget).getDate() == null){
+							return false;
+						}
+					}
 					if (ridget instanceof ITextRidget) {
 						if (((ITextRidget) ridget).getText().isEmpty()) {
 							return false;

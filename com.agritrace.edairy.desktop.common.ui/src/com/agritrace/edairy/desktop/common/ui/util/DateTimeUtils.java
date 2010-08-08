@@ -23,7 +23,7 @@ public class DateTimeUtils {
 	/**
 	 * Defaults date format pattern
 	 */
-	public static String DEFAULT_DATE_PATTERN = "dd/MM/yyyy";
+	public static String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
 	/**
 	 * Default date format instance
 	 */
