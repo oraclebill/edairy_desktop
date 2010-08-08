@@ -47,8 +47,8 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListControlle
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
-import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
-import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
+import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
@@ -346,7 +346,7 @@ public class EDairyManagerApplication extends SwtApplication {
 			final IModuleNode moduleRoutes = NodeFactory.createModule(MODULE_OPERATIONS_ROUTES,
 					"Routes", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_ROUTES,
-					"Routes", moduleRoutes, RouteListView.ID, RouteListController.class); //$NON-NLS-1$ 
+					"Routes", moduleRoutes, RouteDirectoryView.ID, RouteListController.class); //$NON-NLS-1$ 
 		}
 
 		//
@@ -377,7 +377,7 @@ public class EDairyManagerApplication extends SwtApplication {
 					"edm.supplier.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory
 					.createSubModule(
-							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierDirectoryView.ID, SupplierDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		//

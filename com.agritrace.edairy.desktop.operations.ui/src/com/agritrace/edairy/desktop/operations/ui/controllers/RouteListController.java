@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.RouteEditDialog;
-import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
+import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
 
 public class RouteListController extends BasicDirectoryController<Route> {
 
@@ -71,8 +71,8 @@ public class RouteListController extends BasicDirectoryController<Route> {
 
 	@Override
 	protected void configureFilterRidgets() {
-		name = getRidget(ITextRidget.class, RouteListView.BIND_ID_FILTER_NAME);
-		description = getRidget(ITextRidget.class, RouteListView.BIND_ID_FILTER_DESC);
+		name = getRidget(ITextRidget.class, RouteDirectoryView.BIND_ID_FILTER_NAME);
+		description = getRidget(ITextRidget.class, RouteDirectoryView.BIND_ID_FILTER_DESC);
 
 		name.bindToModel(searchBean, "name");
 		name.updateFromModel();

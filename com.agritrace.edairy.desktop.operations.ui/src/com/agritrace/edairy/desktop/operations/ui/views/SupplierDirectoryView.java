@@ -11,13 +11,13 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class SupplierListView extends AbstractDirectoryView {
+public class SupplierDirectoryView extends AbstractDirectoryView {
 
 	public static final String BIND_ID_FILTER_CATEGORIES = "bind.id.fitler.categories";
 
 	public static final String BIND_ID_FILTER_CONTACT = "bind.id.fitler.contact";
 	public static final String BIND_ID_FILTER_STATUS = "bind.id.fitler.status";
-	public static final String ID = "edairy.supplier.list.view";
+	public static final String ID = "edairy.operations.supplier.directory";
 
 	@Override
 	protected void createFilterConditions(Composite top) {

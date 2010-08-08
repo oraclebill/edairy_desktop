@@ -9,12 +9,12 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class RouteListView extends AbstractDirectoryView {
+public class RouteDirectoryView extends AbstractDirectoryView {
 
 	public static final String BIND_ID_FILTER_DESC = "description-filter-txt";
 
 	public static final String BIND_ID_FILTER_NAME = "name-filter-txt";
-	public static final String ID = "route-list-view";
+	public static final String ID = "edairy.operations.route.directory";
 
 	@Override
 	protected void createFilterConditions(Composite top) {
