@@ -98,13 +98,18 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 			}
 		}
 
-		String[] tableColumnProperties = getTableColumnPropertyNames();
-		String[] tableColumnHeaders = getTableColumnHeaders();
-		table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
-				tableColumnProperties, tableColumnHeaders);
+		tableBindToModel();
+	}
+	
+	protected void tableBindToModel(){
+		if(table != null){
+			String[] tableColumnProperties = getTableColumnPropertyNames();
+			String[] tableColumnHeaders = getTableColumnHeaders();
+			table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
+					tableColumnProperties, tableColumnHeaders);
 
-		table.updateFromModel();
-
+			table.updateFromModel();
+		}
 	}
 
 	protected Comparator[] getTableColumnComparators() {

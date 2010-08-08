@@ -9,12 +9,11 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
-import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Person;
@@ -28,8 +27,10 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -40,132 +41,29 @@ import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 
-public class LiveStockListController extends BaseListViewController {
-
-	/**
-	 * Open member search dialog, IActionListener for search button
-	 * 
-	 */
-	public class MemberLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
-			final int retVal = memberDialog.open();
-			if (retVal == Window.OK) {
-				selectedMember = memberDialog.getSelectedMember();
-				if (selectedMember != null) {
-					final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
-					memberNameFilter.setText(memberName);
-					filterController.setInputModel(selectedMember);
-					if (filterController.getSearch() != null) {
-						filterController.getSearch().setEnabled(true);
-					}
-				}
-
-			}
-		}
-	}
-
-	private class AddAction implements IActionListener {
-
-		@Override
-		public void callback() {
-			if (selectedMember != null) {
-				RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.FEMALE,
-						DairyUtil.createReferenceAnimal("", ""), Purpose.get(0), RearingMode.get(0),
-						DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
-				final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(AbstractDirectoryController.getShell());
-				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
-				final List<Farm> farmList = new ArrayList<Farm>();
-				farmList.addAll(selectedMember.getMember().getFarms());
-
-				aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
-						farmList);
-
-				final int returnCode = aniamlDialog.open();
-				if (returnCode == AbstractWindowController.OK) {
-					newAnimal = (RegisteredAnimal) aniamlDialog.getController().getContext(
-							ControllerContextConstant.DIALOG_CONTXT_SELECTED);
-					newAnimal.getLocation().getAnimals().add(newAnimal);
-					final Farm farmLocation = newAnimal.getLocation();
-					if ((farmLocation != null) && (farmLocation.getFarmId() != null)) {
-						farmRepository.save(newAnimal.getLocation());
-					}
-					refreshList();
-				}
-			}
-
-		}
-
-	}
-
-	private class FilterAction implements IActionListener {
-
-		@Override
-		public void callback() {
-			refreshList();
-		}
-
-	}
-
-	private class ViewAction implements IActionListener {
-
-		@Override
-		public void callback() {
-			if (!liveStockListTable.getSelection().isEmpty()) {
-				final LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) liveStockListTable
-						.getSelection().get(0);
-				final RegisteredAnimal selectedAnimal = selectedNode.getAnimal();
-				final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(AbstractDirectoryController.getShell());
-				aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED,
-						selectedAnimal);
-				final List<Farm> farmList = new ArrayList<Farm>();
-				farmList.add(selectedAnimal.getLocation());
-				aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
-						farmList);
-
-				final int returnCode = aniamlDialog.open();
-				final Farm farmLocation = selectedAnimal.getLocation();
-
-				if (returnCode == AbstractWindowController.OK) {
-					if ((farmLocation != null) && (farmLocation.getFarmId() != null)) {
-						farmRepository.update(farmLocation);
-					}
-					refreshList();
-				} else if (returnCode == 2) {
-					if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), liveStockRemoveTitle,
-							liveStockRemoveMessage)) {
-						farmLocation.getAnimals().remove(selectedAnimal);
-						if (farmLocation.getFarmId() != null) {
-							farmRepository.update(farmLocation);
-						}
-						refreshList();
-					}
-				}
-			}
-
-		}
-
-	}
+public class LiveStockListController extends
+		BasicDirectoryController<RegisteredAnimal> {
 
 	public static final String ALL_FARM = "All Farms";
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
-	private final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose", "LiveStock Name",
-			"Species", "Breed", "Acquisition Date", "Status" };
+	private final String[] columnHeaders = { "Member ID", "Member Name",
+			"Farm Name", "Purpose", "LiveStock Name", "Species", "Breed",
+			"Acquisition Date", "Status" };
 
 	private final IFarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;
 	private final List<LiveStockListViewTableNode> listTableInput = new ArrayList<LiveStockListViewTableNode>();
-	private ITableRidget liveStockListTable;
+
 	private IActionRidget memberLookupBtn;
 
 	// filter group
 	private ITextRidget memberNameFilter;
 
-	private final String[] propertyNames = { "membership", "membership", "animal", "animal", "animal", "animal",
-			"animal", "animal", "animal" };
+	private final String[] propertyNames = { "membership", "membership",
+			"animal", "animal", "animal", "animal", "animal", "animal",
+			"animal" };
 
 	private Membership selectedMember;
 
@@ -174,16 +72,19 @@ public class LiveStockListController extends BaseListViewController {
 
 	public LiveStockListController() {
 		farmRepository = new FarmRepository();
-
+		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
+		for (int i = 0; i < propertyNames.length; i++) {
+			addTableColumn(columnHeaders[i], propertyNames[i], String.class);
+		}
 	}
 
-	public void refreshList() {
+	public void refreshTableContents() {
 		listTableInput.clear();
-		listTableInput.addAll(getFilteredResult());
-		liveStockListTable.updateFromModel();
+		listTableInput.addAll(getFilteredTableResult());
+		table.updateFromModel();
 	}
 
-	private List<LiveStockListViewTableNode> getFilteredResult() {
+	private List<LiveStockListViewTableNode> getFilteredTableResult() {
 		final List<LiveStockListViewTableNode> results = new ArrayList<LiveStockListViewTableNode>();
 		List<RegisteredAnimal> selectedAnimals = new ArrayList<RegisteredAnimal>();
 		final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
@@ -197,14 +98,15 @@ public class LiveStockListController extends BaseListViewController {
 				addRidget.setEnabled(farms.size() > 0);
 			}
 			for (final Farm farm : farms) {
-				if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
+				if (farmName.equals("All Farms")
+						|| farmName.equals(farm.getName())) {
 					animals.addAll(farm.getAnimals());
 				}
 			}
 		}
-		else {
-			addRidget.setEnabled(false);
-		}
+		// else {
+		// addRidget.setEnabled(false);
+		// }
 		if (!speciesName.equals("All Species")) {
 			for (final RegisteredAnimal animal : animals) {
 				if (animal.getAnimalType().getSpecies().equals(speciesName)) {
@@ -215,10 +117,12 @@ public class LiveStockListController extends BaseListViewController {
 		// selectedAnimals = filterDate(animals,
 		// filterController.getDateSearchController().getStartDate(),
 		// filterController.getDateSearchController().getEndDate());
-		DateFilterUtil<RegisteredAnimal> filterUtil = new DateFilterUtil<RegisteredAnimal>(RegisteredAnimal.class,
+		DateFilterUtil<RegisteredAnimal> filterUtil = new DateFilterUtil<RegisteredAnimal>(
+				RegisteredAnimal.class,
 				TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
-		selectedAnimals = filterUtil.filterDate(animals, filterController.getDateSearchController().getStartDate(),
-				filterController.getDateSearchController().getEndDate());
+		selectedAnimals = filterUtil.filterDate(animals, filterController
+				.getDateSearchController().getStartDate(), filterController
+				.getDateSearchController().getEndDate());
 
 		for (final RegisteredAnimal animal : selectedAnimals) {
 			results.add(new LiveStockListViewTableNode(selectedMember, animal));
@@ -228,11 +132,12 @@ public class LiveStockListController extends BaseListViewController {
 
 	private void setColumnFormatters() {
 		// MEMBERID
-		liveStockListTable.setColumnFormatter(0, new ColumnFormatter() {
+		table.setColumnFormatter(0, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final Membership membership = ((LiveStockListViewTableNode) element).getMembership();
+					final Membership membership = ((LiveStockListViewTableNode) element)
+							.getMembership();
 					if (membership != null) {
 						return membership.getMemberId() + "";
 					}
@@ -241,15 +146,17 @@ public class LiveStockListController extends BaseListViewController {
 			}
 		});
 		// memberName
-		liveStockListTable.setColumnFormatter(1, new ColumnFormatter() {
+		table.setColumnFormatter(1, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final Membership membership = ((LiveStockListViewTableNode) element).getMembership();
+					final Membership membership = ((LiveStockListViewTableNode) element)
+							.getMembership();
 					if (membership != null) {
 						final Person member = (membership).getMember();
 						if (member != null) {
-							return member.getFamilyName() + "," + member.getGivenName();
+							return member.getFamilyName() + ","
+									+ member.getGivenName();
 						}
 					}
 				}
@@ -257,11 +164,12 @@ public class LiveStockListController extends BaseListViewController {
 			}
 		});
 		// farm name
-		liveStockListTable.setColumnFormatter(2, new ColumnFormatter() {
+		table.setColumnFormatter(2, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final Farm farm = ((LiveStockListViewTableNode) element).getAnimal().getLocation();
+					final Farm farm = ((LiveStockListViewTableNode) element)
+							.getAnimal().getLocation();
 					if (farm != null) {
 						return farm.getName();
 					}
@@ -270,11 +178,12 @@ public class LiveStockListController extends BaseListViewController {
 			}
 		});
 		// purose
-		liveStockListTable.setColumnFormatter(3, new ColumnFormatter() {
+		table.setColumnFormatter(3, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element).getAnimal();
+					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element)
+							.getAnimal();
 					if (animal != null) {
 						return animal.getPurpose().getLiteral();
 					}
@@ -283,11 +192,12 @@ public class LiveStockListController extends BaseListViewController {
 			}
 		});
 		// live stock name
-		liveStockListTable.setColumnFormatter(4, new ColumnFormatter() {
+		table.setColumnFormatter(4, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element).getAnimal();
+					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element)
+							.getAnimal();
 					if (animal != null) {
 						return animal.getGivenName();
 					}
@@ -296,11 +206,12 @@ public class LiveStockListController extends BaseListViewController {
 			}
 		});
 		// Species
-		liveStockListTable.setColumnFormatter(5, new ColumnFormatter() {
+		table.setColumnFormatter(5, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element).getAnimal();
+					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element)
+							.getAnimal();
 					if (animal != null) {
 						return animal.getAnimalType().getSpecies();
 					}
@@ -310,11 +221,12 @@ public class LiveStockListController extends BaseListViewController {
 		});
 
 		// breed
-		liveStockListTable.setColumnFormatter(6, new ColumnFormatter() {
+		table.setColumnFormatter(6, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element).getAnimal();
+					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element)
+							.getAnimal();
 					if (animal != null) {
 						return animal.getAnimalType().getBreed();
 					}
@@ -324,14 +236,16 @@ public class LiveStockListController extends BaseListViewController {
 		});
 
 		// acquisition
-		liveStockListTable.setColumnFormatter(7, new ColumnFormatter() {
+		table.setColumnFormatter(7, new ColumnFormatter() {
 
 			@Override
 			public String getText(Object element) {
 				if (element instanceof LiveStockListViewTableNode) {
-					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element).getAnimal();
+					final RegisteredAnimal animal = ((LiveStockListViewTableNode) element)
+							.getAnimal();
 					if (animal != null) {
-						final Date acquisitionDate = animal.getDateOfAcquisition();
+						final Date acquisitionDate = animal
+								.getDateOfAcquisition();
 						final SimpleFormattedDateBean formatter = new SimpleFormattedDateBean();
 						formatter.setDate(acquisitionDate);
 						return formatter.getFormattedDate();
@@ -341,7 +255,7 @@ public class LiveStockListController extends BaseListViewController {
 			}
 		});
 		// status
-		liveStockListTable.setColumnFormatter(8, new ColumnFormatter() {
+		table.setColumnFormatter(8, new ColumnFormatter() {
 
 			@Override
 			public String getText(Object element) {
@@ -355,49 +269,242 @@ public class LiveStockListController extends BaseListViewController {
 
 	@Override
 	protected void configureFilterRidgets() {
-		memberNameFilter = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
-		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
+		memberNameFilter = getRidget(ITextRidget.class,
+				ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
+		memberLookupBtn = getRidget(IActionRidget.class,
+				ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
 		memberLookupBtn.addListener(new MemberLookupAction());
 		filterController = new LiveStockFilterWidgetController(this);
-		filterController.getSearch().addListener(new FilterAction());
-		filterController.getClear().addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				memberNameFilter.setText("");
-				listTableInput.clear();
-				liveStockListTable.updateFromModel();
-			}
-		});
+	
 
 	}
 
+	// @Override
+	// protected void configureTableRidget() {
+	// // super.configureTableRidget();
+	// if (getEClass() == null) {
+	// throw new IllegalStateException("EClass must be set in constructor");
+	// }
+	// if (getEntityClass() == null) {
+	// throw new IllegalStateException(
+	// "Entity class must be set in constructor");
+	// }
+	// table = this.getRidget(ITableRidget.class,
+	// AbstractDirectoryView.BIND_ID_TABLE);
+	// table.addSelectionListener(selectionListener);
+	// table.bindSingleSelectionToModel(this, "selectedEObject");
+	// table.addDoubleClickListener(new IActionListener() {
+	// @Override
+	// public void callback() {
+	// handleViewItemAction();
+	// }
+	// });
+	//
+	// final ColumnFormatter[] formatters = getTableColumnFormatters();
+	// final Comparator<Object>[] comparators = getTableColumnComparators();
+	// for (int i = 0; i < formatters.length; i++) {
+	// if (formatters[i] != null) {
+	// table.setColumnFormatter(i, formatters[i]);
+	// }
+	// if (comparators[i] != null) {
+	// table.setComparator(i, comparators[i]);
+	// table.setColumnSortable(i, true);
+	// } else {
+	// table.setColumnSortable(i, false);
+	// }
+	// }
+	// // location formatter
+	// setColumnFormatters();
+	//
+	// table.bindToModel(new WritableList(listTableInput,
+	// LiveStockListViewTableNode.class),
+	// LiveStockListViewTableNode.class, propertyNames, columnHeaders);
+	// table.updateFromModel();
+
+	// liveStockListTable = getRidget(ITableRidget.class,
+	// ViewWidgetId.LIVESTOCK_TABLE);
+	// if (liveStockListTable != null) {
+	// liveStockListTable.bindToModel(new WritableList(listTableInput,
+	// LiveStockListViewTableNode.class),
+	// LiveStockListViewTableNode.class, propertyNames, columnHeaders);
+	//
+	// liveStockListTable.addSelectionListener(new ISelectionListener() {
+	//
+	// @Override
+	// public void ridgetSelected(SelectionEvent event) {
+	// if (event.getSource() == liveStockListTable) {
+	// viewRidget.setEnabled(liveStockListTable.getSelection().size() > 0);
+	// }
+	// }
+	//
+	// });
+	// liveStockListTable.updateFromModel();
+	//
+	// addRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
+	// addRidget.addListener(new AddAction());
+	// viewRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
+	// if (viewRidget != null) {
+	// viewRidget.setEnabled(false);
+	// viewRidget.addListener(new ViewAction());
+	// }
+	// }
+	// }
+
 	@Override
-	protected void configureTableRidgets() {
-
-		liveStockListTable = getRidget(ITableRidget.class, ViewWidgetId.LIVESTOCK_TABLE);
-		if (liveStockListTable != null) {
-			liveStockListTable.bindToModel(new WritableList(listTableInput, LiveStockListViewTableNode.class),
-					LiveStockListViewTableNode.class, propertyNames, columnHeaders);
+	protected void tableBindToModel() {
+		if (table != null) {
 			setColumnFormatters();
+			table.bindToModel(new WritableList(listTableInput,
+					LiveStockListViewTableNode.class),
+					LiveStockListViewTableNode.class, propertyNames,
+					columnHeaders);
+			table.updateFromModel();
+		}
+	}
 
-			liveStockListTable.addSelectionListener(new ISelectionListener() {
+	@Override
+	protected List<RegisteredAnimal> getFilteredResult() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-				@Override
-				public void ridgetSelected(SelectionEvent event) {
-					if (event.getSource() == liveStockListTable) {
-						viewRidget.setEnabled(liveStockListTable.getSelection().size() > 0);
+	@Override
+	protected RecordDialog<RegisteredAnimal> getRecordDialog(Shell shell) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void resetFilterConditions() {
+		selectedMember = null;
+		memberNameFilter.setText("");
+		if(filterController != null){
+			filterController.clearFilters();	
+		}
+		
+	}
+
+	/**
+	 * Open member search dialog, IActionListener for search button
+	 * 
+	 */
+	public class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final int retVal = memberDialog.open();
+			if (retVal == Window.OK) {
+				selectedMember = memberDialog.getSelectedMember();
+				if (selectedMember != null) {
+					final String memberName = MemberUtil
+							.formattedMemberName(selectedMember.getMember());
+					memberNameFilter.setText(memberName);
+					filterController.setInputModel(selectedMember);
+					if (filterController.getSearch() != null) {
+						filterController.getSearch().setEnabled(true);
 					}
 				}
 
-			});
-			liveStockListTable.updateFromModel();
-			
-			addRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
-			addRidget.addListener(new AddAction());
-			viewRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
-			if (viewRidget != null) {
-				viewRidget.setEnabled(false);
-				viewRidget.addListener(new ViewAction());
+			}
+		}
+	}
+
+	@Override
+	protected void handleNewItemAction() {
+		if (selectedMember != null) {
+			if (selectedMember.getMember().getFarms().isEmpty()) {
+				String memberName = MemberUtil
+						.formattedMemberName(selectedMember.getMember());
+				String message = String
+						.format(
+								"%s doesn't has any regeistered farm. Can not add a live stock to it.",
+								memberName);
+				MessageDialog.openInformation(Display.getDefault()
+						.getActiveShell(), "Add LiveStock", message);
+				return;
+			}
+			RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "",
+					Gender.FEMALE, DairyUtil.createReferenceAnimal("", ""),
+					Purpose.get(0), RearingMode.get(0), DairyUtil
+							.createReferenceAnimal("", ""), "", "", null, null,
+					AcquisitionType.get(0), null);
+			final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(
+					AbstractDirectoryController.getShell());
+			aniamlDialog.getController()
+					.setContext(
+							ControllerContextConstant.DIALOG_CONTXT_SELECTED,
+							newAnimal);
+			final List<Farm> farmList = new ArrayList<Farm>();
+			farmList.addAll(selectedMember.getMember().getFarms());
+
+			aniamlDialog
+					.getController()
+					.setContext(
+							ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
+							farmList);
+
+			final int returnCode = aniamlDialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				newAnimal = (RegisteredAnimal) aniamlDialog
+						.getController()
+						.getContext(
+								ControllerContextConstant.DIALOG_CONTXT_SELECTED);
+				newAnimal.getLocation().getAnimals().add(newAnimal);
+				final Farm farmLocation = newAnimal.getLocation();
+				if ((farmLocation != null)
+						&& (farmLocation.getFarmId() != null)) {
+					farmRepository.save(newAnimal.getLocation());
+				}
+				refreshTableContents();
+			}
+		} else {
+			MessageDialog.openInformation(
+					Display.getDefault().getActiveShell(), "Add LiveStock",
+					"Can not add a Live stock. You must select a Member first");
+		}
+
+	}
+
+	
+
+	@Override
+	protected void handleViewItemAction() {
+		if (!table.getSelection().isEmpty()) {
+			final LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) table
+					.getSelection().get(0);
+			final RegisteredAnimal selectedAnimal = selectedNode.getAnimal();
+			final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(
+					AbstractDirectoryController.getShell());
+			aniamlDialog.getController().setContext(
+					ControllerContextConstant.DIALOG_CONTXT_SELECTED,
+					selectedAnimal);
+			final List<Farm> farmList = new ArrayList<Farm>();
+			farmList.add(selectedAnimal.getLocation());
+			aniamlDialog
+					.getController()
+					.setContext(
+							ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
+							farmList);
+
+			final int returnCode = aniamlDialog.open();
+			final Farm farmLocation = selectedAnimal.getLocation();
+
+			if (returnCode == AbstractWindowController.OK) {
+				if ((farmLocation != null)
+						&& (farmLocation.getFarmId() != null)) {
+					farmRepository.update(farmLocation);
+				}
+				refreshTableContents();
+			} else if (returnCode == 2) {
+				if (MessageDialog.openConfirm(AbstractDirectoryController
+						.getShell(), liveStockRemoveTitle,
+						liveStockRemoveMessage)) {
+					farmLocation.getAnimals().remove(selectedAnimal);
+					if (farmLocation.getFarmId() != null) {
+						farmRepository.update(farmLocation);
+					}
+					refreshTableContents();
+				}
 			}
 		}
 	}

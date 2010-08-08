@@ -1,16 +1,13 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
-import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class LiveStockFilterWidget {
@@ -50,17 +47,17 @@ public class LiveStockFilterWidget {
 				ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(statusText);
 
-		// search cancel button
-		final Composite searchPanel = UIControlsFactory.createComposite(composite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(searchPanel);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
-
-		final Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
-				BaseListView.BIND_ID_FILTER_SEARCH);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
-
-		final Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", BaseListView.BIND_ID_FILTER_RESET);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
+//		// search cancel button
+//		final Composite searchPanel = UIControlsFactory.createComposite(composite);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(searchPanel);
+//		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(searchPanel);
+//
+//		final Button searchButton = UIControlsFactory.createButton(searchPanel, "Search",
+//				BaseListView.BIND_ID_FILTER_SEARCH);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(searchButton);
+//
+//		final Button cancelButton = UIControlsFactory.createButton(searchPanel, "Clear", BaseListView.BIND_ID_FILTER_RESET);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(cancelButton);
 
 	}
 

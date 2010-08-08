@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 public class LiveStockFilterWidgetController implements WidgetController<Object> {
 
 	private final IRidgetContainer container;
-	
+
 	private final DateRangeSearchController dateSearchController;
 
 	private Object inputModel;
@@ -50,7 +50,7 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		farmCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
 		speciesCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
 		statusCombo = container.getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
-		
+
 		search = container.getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH);
 		clear = container.getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_RESET);
 	}
@@ -121,7 +121,7 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		speciesList.add("All Species");
 		speciesList.addAll(LivestockValues.getSpecies());
 		speciesCombo
-				.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
+		.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
 		speciesCombo.updateFromModel();
 		speciesCombo.setSelection(0);
 
@@ -145,6 +145,34 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 		farmCombo.updateFromModel();
 		farmCombo.setSelection(0);
+	}
+
+	public void clearFilters(){
+		speciesList.clear();
+		speciesList.add("All Species");
+		if(speciesCombo != null){
+			speciesCombo.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
+			speciesCombo.updateFromModel();
+			speciesCombo.setSelection(0);	
+		}
+
+		statusList.clear();
+		statusList.add("All Status");
+		if(statusCombo != null){
+			statusCombo.bindToModel(Observables.staticObservableList(statusList), String.class, null, new WritableValue());
+			statusCombo.updateFromModel();
+			statusCombo.setSelection(0);
+		}
+
+
+		farmsList.clear();
+		farmsList.add("All Farms");
+		if(farmCombo  != null){
+			farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
+			farmCombo.updateFromModel();
+			farmCombo.setSelection(0);		
+		}
+	
 	}
 
 }

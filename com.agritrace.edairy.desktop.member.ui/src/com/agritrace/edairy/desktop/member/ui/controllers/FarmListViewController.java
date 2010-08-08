@@ -55,7 +55,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	private final String[] farmPropertyNames = { "membership.memberNumber",
 			"membership.member.givenName", "membership.member.familyName",
 			"farm.name", "farm.location", "farm.numberOfAnimals",
-			"farm.numberOfContainers" };
+	"farm.numberOfContainers" };
 
 	private IComboRidget farmCombo;
 
@@ -156,91 +156,98 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	}
 
-	@Override
-	protected void configureTableRidget() {
-		// super.configureTableRidget();
-		if (getEClass() == null) {
-			throw new IllegalStateException("EClass must be set in constructor");
-		}
-		if (getEntityClass() == null) {
-			throw new IllegalStateException(
-					"Entity class must be set in constructor");
-		}
-		table = this.getRidget(ITableRidget.class,
-				AbstractDirectoryView.BIND_ID_TABLE);
-		table.addSelectionListener(selectionListener);
-		table.bindSingleSelectionToModel(this, "selectedEObject");
-		table.addDoubleClickListener(new IActionListener() {
-			@Override
-			public void callback() {
-				handleViewItemAction();
-			}
-		});
+//	@Override
+//	protected void configureTableRidget() {
+//		// super.configureTableRidget();
+//		if (getEClass() == null) {
+//			throw new IllegalStateException("EClass must be set in constructor");
+//		}
+//		if (getEntityClass() == null) {
+//			throw new IllegalStateException(
+//			"Entity class must be set in constructor");
+//		}
+//		table = this.getRidget(ITableRidget.class,
+//				AbstractDirectoryView.BIND_ID_TABLE);
+//		table.addSelectionListener(selectionListener);
+//		table.bindSingleSelectionToModel(this, "selectedEObject");
+//		table.addDoubleClickListener(new IActionListener() {
+//			@Override
+//			public void callback() {
+//				handleViewItemAction();
+//			}
+//		});
+//
+//		final ColumnFormatter[] formatters = getTableColumnFormatters();
+//		final Comparator<Object>[] comparators = getTableColumnComparators();
+//		for (int i = 0; i < formatters.length; i++) {
+//			if (formatters[i] != null) {
+//				table.setColumnFormatter(i, formatters[i]);
+//			}
+//			if (comparators[i] != null) {
+//				table.setComparator(i, comparators[i]);
+//				table.setColumnSortable(i, true);
+//			} else {
+//				table.setColumnSortable(i, false);
+//			}
+//		}
+//		
+//
+//		// if (true) {
+//		//
+//		// setColumnFormatters();
+//		// farmListTable.addSelectionListener(new ISelectionListener() {
+//		//
+//		// @Override
+//		// public void ridgetSelected(SelectionEvent event) {
+//		// if (event.getSource() == farmListTable) {
+//		// viewRidget.setEnabled(farmListTable.getSelection().size() > 0);
+//		// }
+//		// }
+//		//
+//		// });
+//		// farmListTable.updateFromModel();
+//		// getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD).addListener(new
+//		// AddFarmAction());
+//		// viewRidget = getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
+//		// if (viewRidget != null) {
+//		// viewRidget.setEnabled(false);
+//		// viewRidget.addListener(new ViewAction());
+//		// }
+//		// }
+//	}
 
-		final ColumnFormatter[] formatters = getTableColumnFormatters();
-		final Comparator<Object>[] comparators = getTableColumnComparators();
-		for (int i = 0; i < formatters.length; i++) {
-			if (formatters[i] != null) {
-				table.setColumnFormatter(i, formatters[i]);
-			}
-			if (comparators[i] != null) {
-				table.setComparator(i, comparators[i]);
-				table.setColumnSortable(i, true);
-			} else {
-				table.setColumnSortable(i, false);
-			}
-		}
-		// location formatter
-		table.setColumnFormatter(4, new ColumnFormatter() {
-			public String getText(Object element) {
-				if (element instanceof FarmListViewTableNode) {
-					Location location = ((FarmListViewTableNode) element)
-							.getFarm().getLocation();
-					if (location != null) {
-						final PostalLocation postalLocation = location
-								.getPostalLocation();
-						// StringBuffer sb = new StringBuffer();
-						if (postalLocation != null) {
-							return postalLocation.getAddress() + ","
-									+ postalLocation.getVillage() + ","
-									+ postalLocation.getPostalCode();
+	protected void tableBindToModel(){
+		if(table != null){
+			// location formatter
+			table.setColumnFormatter(4, new ColumnFormatter() {
+				public String getText(Object element) {
+					if (element instanceof FarmListViewTableNode) {
+						Location location = ((FarmListViewTableNode) element)
+						.getFarm().getLocation();
+						if (location != null) {
+							final PostalLocation postalLocation = location
+							.getPostalLocation();
+							// StringBuffer sb = new StringBuffer();
+							if (postalLocation != null) {
+								return postalLocation.getAddress() + ","
+								+ postalLocation.getVillage() + ","
+								+ postalLocation.getPostalCode();
+							}
+						} else {
+							return "<Empty>";
 						}
-					} else {
-						return "<Empty>";
+
 					}
 
+					return null;
 				}
+			});
+			table.bindToModel(new WritableList(farmListTableInput,
+					FarmListViewTableNode.class), FarmListViewTableNode.class,
+					farmPropertyNames, farmColumnHeaders);
+			table.updateFromModel();
+		}
 
-				return null;
-			}
-		});
-		table.bindToModel(new WritableList(farmListTableInput,
-				FarmListViewTableNode.class), FarmListViewTableNode.class,
-				farmPropertyNames, farmColumnHeaders);
-		table.updateFromModel();
-
-		// if (true) {
-		//
-		// setColumnFormatters();
-		// farmListTable.addSelectionListener(new ISelectionListener() {
-		//
-		// @Override
-		// public void ridgetSelected(SelectionEvent event) {
-		// if (event.getSource() == farmListTable) {
-		// viewRidget.setEnabled(farmListTable.getSelection().size() > 0);
-		// }
-		// }
-		//
-		// });
-		// farmListTable.updateFromModel();
-		// getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD).addListener(new
-		// AddFarmAction());
-		// viewRidget = getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
-		// if (viewRidget != null) {
-		// viewRidget.setEnabled(false);
-		// viewRidget.addListener(new ViewAction());
-		// }
-		// }
 	}
 
 	protected List<FarmListViewTableNode> getFilteredFarmResult() {
@@ -286,7 +293,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		if (selectedMember == null) {
 			MessageDialog.openInformation(
 					Display.getDefault().getActiveShell(), "Add Farm",
-					"Can not add a farm. You must select a Member first");
+			"Can not add a farm. You must select a Member first");
 		} else {
 			final Location newFarmLocation = DairyUtil.createLocation(null,
 					null, null);
@@ -302,9 +309,9 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedNode = (FarmListViewTableNode) memberDialog
-						.getController()
-						.getContext(
-								ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+				.getController()
+				.getContext(
+						ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
 				selectedMember.getMember().getFarms().add(newFarm);
 				if (selectedMember.getMemberId() != 0) {
 					farmRepository.saveNew(newFarm);
@@ -331,11 +338,11 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 				selectedMember = memberDialog.getSelectedMember();
 				if (selectedMember == null) {
 					Log4r.getLogger(getClass()).log(LogService.LOG_WARNING,
-							"Null member selected from dialog");
+					"Null member selected from dialog");
 					return;
 				}
 				final String memberName = MemberUtil
-						.formattedMemberName(selectedMember.getMember());
+				.formattedMemberName(selectedMember.getMember());
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
 				if (searchButton != null) {
@@ -349,7 +356,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	protected void handleViewItemAction() {
 		if (!table.getSelection().isEmpty()) {
 			FarmListViewTableNode selectedNode = (FarmListViewTableNode) table
-					.getSelection().get(0);
+			.getSelection().get(0);
 			final ViewFarmDialog memberDialog = new ViewFarmDialog(
 					AbstractDirectoryController.getShell());
 			memberDialog.getController().setContext(
@@ -359,7 +366,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedNode = (FarmListViewTableNode) memberDialog
-						.getController().getContext("selectedFarm");
+				.getController().getContext("selectedFarm");
 				farmRepository.update(selectedNode.getFarm());
 				// memberRepository.update(selectedNode.getMembership());
 				refreshTableContents();
@@ -370,13 +377,13 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					String message = "";
 					if (selectedNode.getFarm() != null) {
 						message = "\"" + selectedNode.getFarm().getName()
-								+ "\"";
+						+ "\"";
 					}
 					message = String.format(DELETE_DIALOG_MESSAGE, message);
 					if (MessageDialog.openConfirm(Display.getDefault()
 							.getActiveShell(), DELETE_DIALOG_TITLE, message)) {
 						selectedNode.getMembership().getMember().getFarms()
-								.remove(selectedNode.getFarm());
+						.remove(selectedNode.getFarm());
 						(selectedNode.getFarm()).getAnimals().clear();
 						(selectedNode.getFarm()).setLocation(null);
 						farmRepository.delete(selectedNode.getFarm());
