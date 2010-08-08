@@ -428,6 +428,8 @@ public class LiveStockListController extends
 					Purpose.get(0), RearingMode.get(0), DairyUtil
 							.createReferenceAnimal("", ""), "", "", null, null,
 					AcquisitionType.get(0), null);
+			newAnimal.setDateOfAcquisition(new Date());
+			newAnimal.setDateOfBirth(new Date());
 			final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(
 					AbstractDirectoryController.getShell());
 			aniamlDialog.getController()
