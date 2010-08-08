@@ -35,12 +35,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 
 public class AddMemberDialogController extends BaseDialogController<Membership> {
 
@@ -65,19 +60,13 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// public static final
 
 	private ITextRidget addtlNameRidget;
+    private ITextRidget familyNameRidget;
 
-	// collection tab
-	private MemberCollectionRecordsWidgetController collectionController;
-	// container tab
-	private MemberContainerWidgetController containerController;
-	private ITextRidget familyNameRidget;
-	// farm tab
-	private MemberFarmWidgetController farmController;
 	// upper panel fields
 	private ILabelRidget formattedMemberNameRidget;
 	private ITextRidget givenNameRidget;
 	// live stock tab
-	private MemberLiveStockWidgetController liveStockController;
+//	private MemberLiveStockWidgetController liveStockController;
 	private Map<IRidget, FeaturePath> memberBindings;
 	private ITextRidget memberNbrRidget;
 	private MemberProfileWidgetController memberProfileController;
@@ -90,8 +79,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	private IComboRidget titleRidget;
 
-	// transaction tab
-	private MemberTransactionWidgetController transactionController;
+	
 
 
 	private final IValidator updateValidator = new IValidator() {
@@ -120,13 +108,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		setWorkingCopy((Membership) getContext("selectedMember"));
 
 		configureUpperPanel();
-
-		memberProfileController = new MemberProfileWidgetController(this);
-		farmController = new MemberFarmWidgetController(this);
-		collectionController = new MemberCollectionRecordsWidgetController(this);
-		liveStockController = new MemberLiveStockWidgetController(this);
-		containerController = new MemberContainerWidgetController(this);
-		transactionController = new MemberTransactionWidgetController(this);
+		configureTabs();
 
 		if (getWorkingCopy() != null) {
 			memberBindings = initMemberBindings();
@@ -136,6 +118,16 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		addPropertyChangedListener();
 		enableSaveButton(validate());
 
+	}
+	
+	protected void configureTabs(){
+		memberProfileController = new MemberProfileWidgetController(this);
+
+//		farmController = new MemberFarmWidgetController(this);
+//		collectionController = new MemberCollectionRecordsWidgetController(this);
+//		liveStockController = new MemberLiveStockWidgetController(this);
+//		containerController = new MemberContainerWidgetController(this);
+//		transactionController = new MemberTransactionWidgetController(this);
 	}
 
 	private Map<IRidget, FeaturePath> initMemberBindings() {
@@ -178,16 +170,10 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		return (aMap);
 	}
 
-	private void updateBindings() {
+	protected void updateBindings() {
 		updateUpperPanelBinding();
-
 		final Membership selectedMember = getWorkingCopy();
 		memberProfileController.setInputModel(selectedMember);
-		farmController.setInputModel(selectedMember);
-		collectionController.setInputModel(selectedMember);
-		liveStockController.setInputModel(selectedMember);
-		containerController.setInputModel(selectedMember);
-		transactionController.setInputModel(selectedMember);
 	}
 
 	protected void addPropertyChangedListener() {

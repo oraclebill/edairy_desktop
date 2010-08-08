@@ -20,16 +20,17 @@ import org.eclipse.swt.widgets.Group;
 
 import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidget;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidget;
 
 public class MembershipTabFolder {
 
+//	public static enum TabItem {
+//		AccountSummary, Collections, Containers, Farm, Livestock, Profile, Transactions
+//	}
 	public static enum TabItem {
-		AccountSummary, Collections, Containers, Farm, Livestock, Profile, Transactions
+		AccountSummary, Collections, Farm, Profile, Transactions
 	}
 
 	static class TabItemSet extends HashSet<TabItem> {
@@ -47,8 +48,9 @@ public class MembershipTabFolder {
 	public static final Set<TabItem> ALL_TABS = new TabItemSet(TabItem.values());
 	public static final String MEMBER_INFO_GROUP = "Members Information";
 
-	public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile, TabItem.Farm,
-			TabItem.Livestock, TabItem.Containers });
+//	public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile, TabItem.Farm,
+//			TabItem.Livestock, TabItem.Containers });
+	public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile });
 
 	private Composite tabComposite;
 
@@ -146,26 +148,26 @@ public class MembershipTabFolder {
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(farmWidget.getComposite());
 			farmTab.setControl(farmComposite);
 		}
-		if (enabledTabs.contains(TabItem.Livestock)) {
-			final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
-			livestockTab.setText("Livestock");
-			final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-			livestockComposite.setLayout(new GridLayout(1, true));
-			final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-					.applyTo(liveStockWidget.getComposite());
-			livestockTab.setControl(livestockComposite);
-		}
-		if (enabledTabs.contains(TabItem.Containers)) {
-			final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
-			containerTab.setText("Containers");
-			final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-			containerComposite.setLayout(new GridLayout(1, false));
-			final MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-					.applyTo(containerWidget.getComposite());
-			containerTab.setControl(containerComposite);
-		}
+//		if (enabledTabs.contains(TabItem.Livestock)) {
+//			final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
+//			livestockTab.setText("Livestock");
+//			final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+//			livestockComposite.setLayout(new GridLayout(1, true));
+//			final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
+//			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+//					.applyTo(liveStockWidget.getComposite());
+//			livestockTab.setControl(livestockComposite);
+//		}
+//		if (enabledTabs.contains(TabItem.Containers)) {
+//			final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
+//			containerTab.setText("Containers");
+//			final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+//			containerComposite.setLayout(new GridLayout(1, false));
+//			final MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
+//			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+//					.applyTo(containerWidget.getComposite());
+//			containerTab.setControl(containerComposite);
+//		}
 		tabfolder.setSelection(0);
 	}
 
