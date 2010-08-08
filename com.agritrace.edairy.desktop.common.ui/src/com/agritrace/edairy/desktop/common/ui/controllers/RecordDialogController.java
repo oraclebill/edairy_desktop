@@ -28,6 +28,14 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		getOrCreateMapper().addComboMapping(ridgetId, domainList, renderMethod, featurePath);
 	}
 
+//	public void addChoiceMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+//		getOrCreateMapper().addComboMapping(ridgetId, domainList, renderMethod, featurePath);
+//	}
+
+	public void addMultiChoiceMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+		getOrCreateMapper().addMultipleChoiceMapping(ridgetId, domainList, renderMethod, featurePath);
+	}
+
 	/**
 	 * Template method for configuring the dialog widgets.
 	 * 
@@ -55,13 +63,22 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		return workingCopy;
 	}
 
-	private void configureMappedRidgets() {
+	
+	@Override
+	public void afterBind() {
+		super.afterBind();
 		if (mapper != null) {
-			mapper.configureRidgets();
 			mapper.updateAllRidgetsFromModel();
 		}
 	}
-
+	
+	private void configureMappedRidgets() {
+		if (mapper != null) {
+			mapper.configureRidgets();
+		}
+	}
+	
+	
 	private final BindingHelper<T> getOrCreateMapper() {
 		if (mapper == null) {
 			mapper = new BindingHelper<T>(this, getWorkingCopy());

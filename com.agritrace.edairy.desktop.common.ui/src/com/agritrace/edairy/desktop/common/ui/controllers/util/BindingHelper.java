@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.databinding.EMFProperties;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IEditableRidget;
+import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
@@ -23,12 +25,13 @@ import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
  * A utility class that eases binding of Ridgets to EMF properties.
  * 
  * @author oraclebill
- *
+ * 
  * @param <T>
  */
 public class BindingHelper<T extends EObject> {
 
-//	private static final ConverterFactory converterFactory = new ConverterFactory();
+	// private static final ConverterFactory converterFactory = new
+	// ConverterFactory();
 	private final T modelObject;
 
 	private final IRidgetContainer ridgetContainer;
@@ -88,6 +91,36 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
+	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry.
+	 * Combo mappings include domain lists.
+	 * 
+	 * @param ridgetId
+	 * @param featurePath
+	 */
+	public void addListMapping(String ridgetId, List<?> domainList, String renderMethod,
+			EStructuralFeature... featurePath) {
+		final FeatureProperties props = new FeatureProperties(ridgetId, domainList, renderMethod, featurePath);
+		ridgetPropertyMap.put(ridgetId, props);
+	}
+
+	/**
+	 * 
+	 * @param ridgetId
+	 * @param domainList
+	 * @param renderMethod
+	 * @param featurePath
+	 */
+	public void addMultipleChoiceMapping(String ridgetId, List<?> domainList, String renderMethod,
+			EStructuralFeature[] featurePath) {
+		final FeatureProperties props = new FeatureProperties(ridgetId, domainList, renderMethod, featurePath);
+		EStructuralFeature tail = featurePath[featurePath.length - 1];
+		if (!tail.isMany()) {
+			throw new IllegalArgumentException("Feature is not multi-valued");
+		}
+		ridgetPropertyMap.put(ridgetId, props);
+	}
+
+	/**
 	 * 
 	 */
 	public void configureRidgets() {
@@ -99,20 +132,24 @@ public class BindingHelper<T extends EObject> {
 			if (ridget instanceof IEditableRidget) {
 				bindValueRidget(binding, (IEditableRidget) ridget);
 			} else if (ridget instanceof IComboRidget) {
-				bindComboRidget(binding,  (IComboRidget) ridget);
-			}  else if (ridget instanceof ISingleChoiceRidget) {
+				bindComboRidget(binding, (IComboRidget) ridget);
+			} else if (ridget instanceof ISingleChoiceRidget) {
 				bindSingleChoiceRidget(binding, (ISingleChoiceRidget) ridget);
 			} else if (ridget instanceof IMultipleChoiceRidget) {
 				bindMultiChoiceRidget(binding, (IMultipleChoiceRidget) ridget);
+			} else if (ridget instanceof IListRidget) {
+				bindListRidget(binding, (IListRidget) ridget);
 			} else if (ridget == null) {
 				throw new IllegalStateException("Ridget '" + binding.getBindingId() + "' is null!");
 			} else {
 				throw new UnsupportedOperationException("Ridget class '" + ridget.getClass().getName()
 						+ "' is not supported.");
 			}
+			
+			ridget.updateFromModel();
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -122,23 +159,21 @@ public class BindingHelper<T extends EObject> {
 				try {
 					ridget.updateFromModel();
 				} catch (org.eclipse.core.databinding.BindingException bindException) {
-					System.err.println("Error binding ridget - no model binding: " + ridget.getUIControl());
+					System.err.printf("Error binding ridget %s[%s] - no model binding: ", ridget, ridget.getUIControl());
 				}
 			}
 		}
 	}
-
-
 
 	/**
 	 * @param binding
 	 * @param ridget
 	 * @param valueRidget
 	 */
-	 void bindValueRidget(final FeatureProperties binding, final IEditableRidget valueRidget) {
+	void bindValueRidget(final FeatureProperties binding, final IEditableRidget valueRidget) {
 		final IObservableValue observable = PojoObservables.observeValue(getModelObject(), binding.getPropertyName());
 		valueRidget.bindToModel(observable);
-		
+
 		try {
 			valueRidget.updateFromModel();
 		} catch (Exception e) {
@@ -151,10 +186,10 @@ public class BindingHelper<T extends EObject> {
 	 * @param binding
 	 * @param comboRidget
 	 */
-	 void bindComboRidget(final FeatureProperties binding, final IComboRidget comboRidget) {
+	void bindComboRidget(final FeatureProperties binding, final IComboRidget comboRidget) {
 		final IObservableList optionValues = binding.getDomainList();
 		final Class<?> rowClass = binding.getEntityClass();
-		final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(getModelObject());
+		final IObservableValue selectionValue = PojoProperties.value(binding.getPropertyName()).observe(getModelObject());
 
 		checkParameters(optionValues, rowClass, selectionValue);
 		comboRidget.bindToModel(optionValues, rowClass, binding.getRenderMethod(), selectionValue);
@@ -162,25 +197,22 @@ public class BindingHelper<T extends EObject> {
 
 	/**
 	 * @param binding
-	 * @param ridget
 	 * @param singleChoice
 	 */
-	 void bindSingleChoiceRidget(final FeatureProperties binding, final ISingleChoiceRidget singleChoice) {
+	void bindSingleChoiceRidget(final FeatureProperties binding, final ISingleChoiceRidget singleChoice) {
 		final IObservableList optionValues = binding.getDomainList();
 		final Class<?> rowClass = binding.getEntityClass();
 		final IObservableValue selectionValue = EMFProperties.value(binding.getFeaturePath()).observe(getModelObject());
 
 		checkParameters(optionValues, rowClass, selectionValue);
-		checkMandatory(binding, singleChoice);
 		singleChoice.bindToModel(optionValues, selectionValue);
 	}
 
 	/**
 	 * @param binding
 	 * @param ridget
-	 * @param singleChoice
 	 */
-	 void bindMultiChoiceRidget(final FeatureProperties binding, final IMultipleChoiceRidget ridget) {
+	void bindMultiChoiceRidget(final FeatureProperties binding, final IMultipleChoiceRidget ridget) {
 		final IObservableList optionValues = binding.getDomainList();
 		final Class<?> rowClass = binding.getEntityClass();
 		final IObservableList selectionValues = EMFProperties.list(binding.getFeaturePath()).observe(getModelObject());
@@ -190,7 +222,23 @@ public class BindingHelper<T extends EObject> {
 		ridget.bindToModel(optionValues, selectionValues);
 	}
 
-	 void checkMandatory(FeatureProperties binding, IRidget ridget) {
+	private void bindListRidget(FeatureProperties binding, IListRidget ridget) {
+		final IObservableList optionValues = binding.getDomainList();
+		final Class<?> rowClass = binding.getEntityClass();
+
+		checkParameters(optionValues, rowClass, optionValues);
+		checkMandatory(binding, ridget);
+		ridget.bindToModel(optionValues, rowClass, binding.getRenderMethod());
+		if (binding.getTailFeature().isMany()) {
+			ridget.bindMultiSelectionToModel(
+					EMFProperties.list(binding.getFeaturePath()).observe(getModelObject()));
+		} else {
+			ridget.bindSingleSelectionToModel(
+					EMFProperties.value(binding.getFeaturePath()).observe(getModelObject()));
+		}
+	}
+
+	void checkMandatory(FeatureProperties binding, IRidget ridget) {
 		final FeaturePath path = binding.getFeaturePath();
 		final EStructuralFeature testFeature = path.getFeaturePath()[0];
 		if (testFeature.isRequired() && (ridget instanceof IMarkableRidget)) {
@@ -199,7 +247,7 @@ public class BindingHelper<T extends EObject> {
 		}
 	}
 
-	 void checkParameters(IObservableList optionValues, Class<?> rowClass, Object selectionValue) {
+	void checkParameters(IObservableList optionValues, Class<?> rowClass, Object selectionValue) {
 		if ((optionValues == null) || (rowClass == null) || (selectionValue == null)) {
 			throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" + optionValues
 					+ ", " + rowClass + ", " + selectionValue + ")");

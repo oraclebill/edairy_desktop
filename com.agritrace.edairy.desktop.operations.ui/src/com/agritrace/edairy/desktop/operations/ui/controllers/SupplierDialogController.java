@@ -32,7 +32,7 @@ import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
-public class SupplierListDialogController extends RecordDialogController<Supplier> {
+public class SupplierDialogController extends RecordDialogController<Supplier> {
 	IController parentController;
 
 	// public SupplierListDialogController(Supplier toBeEditedOrViewed) {
@@ -43,6 +43,13 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 	public void configureUserRidgets() {
 		// configure supplier ID
 		final Supplier supplier = getWorkingCopy();
+		
+		addComboMap(SupplierListDialog.BIND_ID_SUPPLIER_STATUS, VendorStatus.VALUES, "name", DairyPackage.Literals.SUPPLIER__STATUS);
+		addTextMap(SupplierListDialog.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
+		addTextMap(SupplierListDialog.BIND_ID_LEGAL_NAME,  ModelPackage.Literals.COMPANY__LEGAL_NAME);
+//		addMultiChoiceMap(SupplierListDialog.BIND_ID_CATEGORY, SupplierCategory.getCategoriesList(), "name", DairyPackage.Literals.SUPPLIER__CATEGORIES);
+		addTextMap(SupplierListDialog.BIND_ID_DESCRIPTION, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION);
+
 		final ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID);
 		supplierId.setOutputOnly(false);
 		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
@@ -51,28 +58,6 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			supplierId.setText("Auto Generated");
 		}
 		supplierId.setOutputOnly(true);
-
-		// Status
-		final IComboRidget statusCombo = getRidget(IComboRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_STATUS);
-		// statusCombo.setModelToUIControlConverter(ServiceUtils.DEFAULT_DATE_STRING_CONVERTER);
-		statusCombo.bindToModel(Observables.staticObservableList(VendorStatus.VALUES), VendorStatus.class, "toString",
-				PojoObservables.observeValue(supplier, DairyPackage.Literals.SUPPLIER__STATUS.getName()));
-
-		statusCombo.updateFromModel();
-
-		// Company Name
-		final ITextRidget companyName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_COMPANY_NAME);
-		companyName.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_NAME.getName());
-		companyName.updateFromModel();
-		companyName.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
-		companyName.setMandatory(true);
-
-		// Legal Name
-		final ITextRidget legalName = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_LEGAL_NAME);
-		legalName.bindToModel(supplier, ModelPackage.Literals.COMPANY__LEGAL_NAME.getName());
-		legalName.updateFromModel();
-		legalName.addValidationRule(new NotEmpty(), ValidationTime.ON_UI_CONTROL_EDIT);
-		legalName.setMandatory(true);
 
 		// Category
 		final IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY);
@@ -106,17 +91,12 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 			category.bindMultiSelectionToModel(selection, "values");
 			category.updateMultiSelectionFromModel();
 		}
-		// Description
-		final ITextRidget desc = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_DESCRIPTION);
-		desc.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION.getName());
-		desc.updateFromModel();
 
 		Location supplierLocation = supplier.getLocation();
 		if (supplierLocation == null) {
 			supplierLocation = DairyUtil.createLocation(null, null, null);
 			supplier.setLocation(supplierLocation);
 		}
-		EMFUtil.populate(supplierLocation);
 
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
@@ -134,22 +114,10 @@ public class SupplierListDialogController extends RecordDialogController<Supplie
 		mapController.updateBinding();
 
 		// Configure Communication Group
-//		final CommunicationGroupController commController = new CommunicationGroupController(this);
-//		// ContactMethod method = ModelFactory.eINSTANCE.createContactMethod();
-//		// method.setCmType(ContactMethodType.EMAIL);
-//		// method.setCmValue("sparkwan@gmail.com");
-//		// supplier.getContactMethods().add(method);
-//		commController.setInputModel(supplier);
-//		commController.updateBinding();
 		final IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
 		contacts.bindToModel(supplier);
 		contacts.updateFromModel();
 
 	}
-	//
-	// @Override
-	// protected EClass getEClass() {
-	// return DairyPackage.eINSTANCE.getSupplier();
-	// }
 
 }

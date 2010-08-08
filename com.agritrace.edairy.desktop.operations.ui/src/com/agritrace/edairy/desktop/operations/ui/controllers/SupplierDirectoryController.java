@@ -18,6 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
@@ -76,6 +77,7 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 	@Override
 	protected Supplier createNewModel() {
 		final Supplier supplier = (Supplier) super.createNewModel();
+		EMFUtil.populate(supplier);
 		supplier.setPhoneNumber("");
 		supplier.setRegistrationDate(Calendar.getInstance().getTime());
 		return supplier;
