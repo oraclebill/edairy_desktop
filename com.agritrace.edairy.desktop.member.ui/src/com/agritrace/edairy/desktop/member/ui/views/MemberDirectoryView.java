@@ -25,8 +25,8 @@ public class MemberDirectoryView extends AbstractDirectoryView {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterGroup);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(filterGroup);
 		// character panel
-//		final Composite charPanel = UIControlsFactory.createComposite(filterGroup);
-		final Composite charPanel = new Composite(filterGroup, SWT.NONE);
+		final Composite charPanel = UIControlsFactory.createComposite(filterGroup);
+//		final Composite charPanel = new Composite(filterGroup, SWT.NONE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(charPanel);
 		GridLayoutFactory.fillDefaults().numColumns(27).equalWidth(false).applyTo(charPanel);
 

@@ -107,7 +107,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 
 	}
 
-	private Comparator[] getTableColumnComparators() {
+	protected Comparator[] getTableColumnComparators() {
 		return columnComparators.toArray(new Comparator[columnComparators.size()] ); 
 	}
 

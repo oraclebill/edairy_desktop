@@ -140,15 +140,12 @@ public class CreateMemberView extends SubModuleView implements SelectionListener
 
 		final CTabFolder tabfolder = new CTabFolder(detailGroup, SWT.NULL);
 		tabfolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		// tabfolder.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		// tabfolder.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		final Color startColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_START_COLOR);
 		final Color endColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_END_COLOR);
 		tabfolder.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		tabfolder.setSelectionBackground(new Color[] { startColor, endColor }, new int[] { 50 }, true);
-		// tabfolder.setSimple(false);
 
 		// profile tab
 		final CTabItem profileTab = new CTabItem(tabfolder, SWT.NULL);

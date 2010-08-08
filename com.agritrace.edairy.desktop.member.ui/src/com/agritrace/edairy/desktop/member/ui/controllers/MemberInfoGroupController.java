@@ -91,6 +91,7 @@ public class MemberInfoGroupController implements WidgetController<Object> {
 		effectiveDate.setMandatory(true);
 		effectiveDate.setOutputOnly(true);
 		phoneRidget.setMandatory(true);
+//		phoneRidget.set
 		phoneRidget.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
 		phoneRidget.setDirectWriting(true);
 
