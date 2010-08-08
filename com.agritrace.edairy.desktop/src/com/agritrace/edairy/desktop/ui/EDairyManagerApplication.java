@@ -22,18 +22,12 @@ import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.common.ui.views.BlankView;
-import com.agritrace.edairy.desktop.dairy.containers.ui.controllers.ContainerLogViewController;
-import com.agritrace.edairy.desktop.dairy.containers.ui.views.ContainerLogView;
-import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationDirectoryView;
-import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
 import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
-import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView;
-import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
@@ -43,14 +37,16 @@ import com.agritrace.edairy.desktop.member.ui.views.ContainerListView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirectoryViewController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
+import com.agritrace.edairy.desktop.operations.ui.views.ContainerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
-import com.agritrace.edairy.desktop.operations.ui.views.RouteListView;
-import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
+import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
@@ -334,7 +330,7 @@ public class EDairyManagerApplication extends SwtApplication {
 			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS_DAIRY_CONTAINERS,
 					"Dairy Bins", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_DAIRY_CONTAINERS,
-					"Dairy Bins", moduleSystem, ContainerLogView.ID, ContainerLogViewController.class); //$NON-NLS-1$ 
+					"Dairy Bins", moduleSystem, ContainerDirectoryView.ID, ContainersDirectoryViewController.class); //$NON-NLS-1$ 
 
 		}
 		{
@@ -348,7 +344,7 @@ public class EDairyManagerApplication extends SwtApplication {
 			final IModuleNode moduleRoutes = NodeFactory.createModule(MODULE_OPERATIONS_ROUTES,
 					"Routes", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_ROUTES,
-					"Routes", moduleRoutes, RouteListView.ID, RouteListController.class); //$NON-NLS-1$ 
+					"Routes", moduleRoutes, RouteDirectoryView.ID, RouteListController.class); //$NON-NLS-1$ 
 		}
 
 		//
@@ -379,7 +375,7 @@ public class EDairyManagerApplication extends SwtApplication {
 					"edm.supplier.directory", "Suppliers", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
 			NodeFactory
 					.createSubModule(
-							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierListView.ID, SupplierDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierDirectoryView.ID, SupplierDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		//

@@ -16,7 +16,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.riena.ui.core.uiprocess.ProcessInfo.ProgresStrategy;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 

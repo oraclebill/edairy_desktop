@@ -33,7 +33,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.install.AbstractImportTool;
 import com.agritrace.edairy.desktop.install.EmployeeImportTool;
 import com.agritrace.edairy.desktop.install.VehicleImportTool;

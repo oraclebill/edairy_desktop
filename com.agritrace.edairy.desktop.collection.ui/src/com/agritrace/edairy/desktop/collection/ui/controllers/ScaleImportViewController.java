@@ -152,7 +152,6 @@ public class ScaleImportViewController extends SubModuleController {
 	/**
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	protected CollectionJournalPage getContextData() {
 		CollectionJournalPage  scaleRecords = null;
 		Object contextObj = null;

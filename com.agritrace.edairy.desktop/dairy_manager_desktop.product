@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="0.97.2" useFeatures="true" includeLaunchers="true">
+<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="0.97.33" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png"/>
@@ -16,7 +16,7 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750</vmArgs>
+      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
    </launcherArgs>
@@ -24,8 +24,7 @@
    <windowImages i16="/com.agritrace.edairy.desktop.ui/icons/cow16.png" i32="/com.agritrace.edairy.desktop.ui/icons/cow32.png" i48="/com.agritrace.edairy.desktop.ui/icons/cow48.png" i64="/com.agritrace.edairy.desktop.ui/icons/cow64.png" i128="/com.agritrace.edairy.desktop.ui/icons/cow128.png"/>
 
    <splash
-      location="com.agritrace.edairy.desktop"
-      handlerType="interactive" />
+      location="com.agritrace.edairy.desktop" />
    <launcher name="edairymgr">
       <solaris/>
       <win useIco="false">

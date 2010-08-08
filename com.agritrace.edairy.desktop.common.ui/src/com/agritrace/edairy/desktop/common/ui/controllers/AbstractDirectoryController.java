@@ -78,7 +78,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			itemSelected(event);
 		}
 	};
-	
+
 	protected ITableRidget table;
 
 	/**
@@ -116,7 +116,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 		// Use default conditions to filter
 		refreshTableContents();
-		
+
 		getNavigationNode().addSimpleListener(new SimpleNavigationNodeAdapter() {
 			@Override
 			public void deactivated(INavigationNode<?> source) {
@@ -127,7 +127,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 				refreshTableContents();				
 			}
 		});
-		
+
 		addDefaultAction(getWindowRidget(), searchBtnRidget);
 
 
@@ -146,7 +146,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		return this.selectedEObject;
 	}
 
-	
+
 	public void refreshTableContents() {
 		tableContents.clear();
 		tableContents.addAll(getFilteredResult());
@@ -184,19 +184,25 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	protected void configureButtonsRidget() {
-		final IActionRidget newBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON);
-		newBtnRidget.addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				handleNewItemAction();
-			}
-		});
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
+		configureNewItemButton(getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON));
+		configureViewItemButton(getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON));
+	}
+
+	protected void configureViewItemButton(final IActionRidget viewBtnRidget) {
 		viewBtnRidget.setEnabled(false);
 		viewBtnRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handleViewItemAction();
+			}
+		});
+	}
+
+	protected void configureNewItemButton(final IActionRidget newBtnRidget) {
+		newBtnRidget.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleNewItemAction();
 			}
 		});
 	}
@@ -326,8 +332,9 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
-			System.err.println("------ updating item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
-			updateEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			final Object contextObj = dialog.getController().getContext(EDITED_OBJECT_ID);
+			log(LogService.LOG_DEBUG, "------ handleViewItemAction: updating item: " + contextObj);
+			updateEntity((T) contextObj);
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			// todo: ensure data sent to dialog is not modified...
 			// getRepository().load((T)
@@ -338,21 +345,26 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		refreshTableContents();
 	}
 
-	
+
 	protected void updateEntity(T updateableEntity) {
 		getRepository().update(updateableEntity);		
 	}
 
 	protected void itemSelected(SelectionEvent event) {
 		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
-		viewBtnRidget.setEnabled(true);
+		if(event.getNewSelection().isEmpty()){
+			viewBtnRidget.setEnabled(false);
+
+		}else{
+			viewBtnRidget.setEnabled(true);
+		}
 	}
 
 	/**
 	 * Reset conditions
 	 */
 	abstract protected void resetFilterConditions();
-	
+
 	/**
 	 * A utility to get the current display. 
 	 * 
@@ -371,7 +383,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		}
 		return display;
 	}
-	
+
 	/**
 	 * A utility to get the current active shell. 
 	 * 
@@ -380,7 +392,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	public static final Shell getShell() {
 		return getDisplay().getActiveShell();
 	}
-	
+
 	/**
 	 * 
 	 * @param level

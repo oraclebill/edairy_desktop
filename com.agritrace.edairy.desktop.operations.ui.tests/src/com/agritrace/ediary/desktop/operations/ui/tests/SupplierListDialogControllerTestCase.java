@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 /**
@@ -24,12 +24,12 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
  * 
  */
 public class SupplierListDialogControllerTestCase extends
-		AbstractDialogViewControllerTestCase<SupplierListDialogController> {
+		AbstractDialogViewControllerTestCase<SupplierDialogController> {
 
 	List<Supplier> supplier = new ArrayList<Supplier>();
-	private SupplierListDialogController newInst;
-	protected SupplierListDialogController createController() {
-		newInst = new SupplierListDialogController();
+	private SupplierDialogController newInst;
+	protected SupplierDialogController createController() {
+		newInst = new SupplierDialogController();
 		return newInst;
 
 	}
@@ -63,7 +63,7 @@ public class SupplierListDialogControllerTestCase extends
 	public void testNewRecord() {
 
 		// Set action type
-		SupplierListDialogController controller = this.getController();
+		SupplierDialogController controller = this.getController();
 		// Update from model
 		controller.afterBind();
 

@@ -26,15 +26,15 @@ public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHea
 		super.delete(deletableEntity);
 	}
 
-	@Override
-	public List<AnimalHealthRequest> find(String rawQuery) {
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<AnimalHealthRequest> find(String query, Object[] args) {
-		return super.find(query, args);
-	}
+//	@Override
+//	public List<AnimalHealthRequest> find(String rawQuery) {
+//		return super.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<AnimalHealthRequest> find(String query, Object[] args) {
+//		return super.find(query, args);
+//	}
 
 	@Override
 	public AnimalHealthRequest findByKey(long key) {

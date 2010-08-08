@@ -10,6 +10,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IDateTextRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.swt.widgets.Display;
@@ -87,8 +88,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	private final class InseminationTypeConverter extends Converter {
 		private InseminationTypeConverter(AnimalHealthRequest request) {
 			super(EMFObservables.observeValue(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE)
-					.getValueType(), 
-				boolean.class);
+					.getValueType(), boolean.class);
 		}
 
 		@Override
@@ -139,7 +139,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	private ITextRidget memberLookupText;
 	private AnimalHealthRequest request;
 
-	IDateTextRidget textRidget;
+	IDateTimeRidget textRidget;
 
 	public AnimalHealthRequestDialogController() {
 		super();
@@ -153,9 +153,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public void configureUserRidgets() {
 		request = getWorkingCopy();
 
-		textRidget = getRidget(IDateTextRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
-		textRidget.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		textRidget.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		textRidget = getRidget(IDateTimeRidget.class, AnimalHealthRequestDialog.BIND_ID_REQUEST_DATE_TEXT);
 		textRidget.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName());
 		textRidget.updateFromModel();
 

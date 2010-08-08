@@ -19,9 +19,8 @@ import org.eclipse.emf.ecore.EObject;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
@@ -159,7 +158,9 @@ public class VehicleImportTool extends AbstractImportTool {
 
 	@Override
 	protected EObject createBlankEntity() {
-		return DairyFactory.eINSTANCE.createVehicle();
+		EObject vehicle = DairyFactory.eINSTANCE.createVehicle();
+		EMFUtil.populate(vehicle);
+		return vehicle;
 	}
 
 	@Override

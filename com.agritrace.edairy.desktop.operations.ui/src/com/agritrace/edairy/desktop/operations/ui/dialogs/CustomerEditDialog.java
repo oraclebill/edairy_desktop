@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
-import org.eclipse.jface.dialogs.DialogTray;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
@@ -13,11 +12,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;

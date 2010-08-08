@@ -7,7 +7,7 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTextRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
@@ -19,10 +19,11 @@ import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupW
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 
 public class DairyDialogController extends RecordDialogController<DairyLocation> {
 	private DairyLocation editLocation = null;
-	private IDateTextRidget dateOpened;
+	private IDateTimeRidget dateOpened;
 	private IMultipleChoiceRidget functions;
 	private IComboRidget routeCombo;
 
@@ -34,29 +35,20 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		assert (null != editLocation);
 
 
-		addRidgetFeatureMap(DairyLocationController.RIDGET_ID_NAME, DairyPackage.Literals.DAIRY_LOCATION__NAME);
-		addRidgetFeatureMap(DairyLocationController.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
-		addRidgetFeatureMap(DairyLocationController.RIDGET_ID_DESCRIPTION,DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
+		addTextMap(DairyLocationUIConstants.RIDGET_ID_NAME, DairyPackage.Literals.DAIRY_LOCATION__NAME);
+		addTextMap(DairyLocationUIConstants.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
+		addTextMap(DairyLocationUIConstants.RIDGET_ID_DESCRIPTION, DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
 		
 		//functions
-		functions = getRidget(IMultipleChoiceRidget.class,DairyLocationController.RIDGET_ID_FUNCTIONS);
+		functions = getRidget(IMultipleChoiceRidget.class,DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		final IObservableList optionValues = new WritableList(Arrays.asList(DairyFunction.values()),
 				DairyFunction.class);
 		final IObservableList selectionValues = new WritableList(editLocation.getFunctions(), DairyFunction.class);
 		functions.bindToModel(optionValues, selectionValues);
 		functions.updateFromModel();
-
- 
-	    dateOpened = getRidget(IDateTextRidget.class,
-				DairyLocationController.RIDGET_ID_DATEOPENED);
-		dateOpened.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-		dateOpened.bindToModel(editLocation, "dateOpened");
-		dateOpened.updateFromModel();
 		
-		routeCombo = getRidget(IComboRidget.class, DairyLocationController.RIDGET_ID_ROUTE);
-		routeCombo.bindToModel(new WritableList(getRoutes(), Route.class), Route.class, "getName",
-				EMFObservables.observeValue(editLocation, DairyPackage.Literals.DAIRY_LOCATION__ROUTE));
-		routeCombo.updateFromModel();
+		addTextMap(DairyLocationUIConstants.RIDGET_ID_DATEOPENED,DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED);
+		addComboMap(DairyLocationUIConstants.RIDGET_ID_ROUTE, getRoutes(), "getName", DairyPackage.Literals.DAIRY_LOCATION__ROUTE);
 
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);

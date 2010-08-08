@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMet
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierListDialogController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 
 /**
  * Supplier list dialog to add/view/edit supplier
@@ -141,8 +141,8 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 	}
 
 	@Override
-	protected SupplierListDialogController createController() {
-		final SupplierListDialogController controller = new SupplierListDialogController();
+	protected SupplierDialogController createController() {
+		final SupplierDialogController controller = new SupplierDialogController();
 		return controller;
 	}
 }

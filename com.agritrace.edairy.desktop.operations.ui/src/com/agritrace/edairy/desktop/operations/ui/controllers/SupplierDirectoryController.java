@@ -18,9 +18,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
+import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
-import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
+import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 
 public class SupplierDirectoryController extends BasicDirectoryController<Supplier> {
 
@@ -49,9 +50,9 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 
 	@Override
 	protected void configureFilterRidgets() {
-		companyText = getRidget(ITextRidget.class, SupplierListView.BIND_ID_FILTER_CONTACT);
-		statusCombo = getRidget(IComboRidget.class, SupplierListView.BIND_ID_FILTER_STATUS);
-		categoryList = getRidget(IListRidget.class, SupplierListView.BIND_ID_FILTER_CATEGORIES);
+		companyText = getRidget(ITextRidget.class, SupplierDirectoryView.BIND_ID_FILTER_CONTACT);
+		statusCombo = getRidget(IComboRidget.class, SupplierDirectoryView.BIND_ID_FILTER_STATUS);
+		categoryList = getRidget(IListRidget.class, SupplierDirectoryView.BIND_ID_FILTER_CATEGORIES);
 
 		companyText.setDirectWriting(true);
 		companyText.bindToModel(searchBean, "name");
@@ -76,6 +77,7 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 	@Override
 	protected Supplier createNewModel() {
 		final Supplier supplier = (Supplier) super.createNewModel();
+		EMFUtil.populate(supplier);
 		supplier.setPhoneNumber("");
 		supplier.setRegistrationDate(Calendar.getInstance().getTime());
 		return supplier;

@@ -5,15 +5,18 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.equinox.log.Logger;
+import org.eclipse.riena.core.Log4r;
 import org.hibernate.HibernateException;
-import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 import org.hibernate.metadata.ClassMetadata;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 
 public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
 
@@ -38,6 +41,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	}
 
+	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), HibernateRepository.class);
 	private final String entityName;
 	private final String identifierName;
 
@@ -53,7 +57,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		String className;
 		ClassMetadata metaData;
 
-		System.err.println("Creating HibernateRepository [" + getClass().getName() + ":" + hashCode() + "]");
+		LOGGER.log(LogService.LOG_INFO,
+				String.format("Creating HibernateRepository [%s:%d]", getClassType().getName(), hashCode()));
 
 		// set the persistence manager
 		persistenceManager = pm;
@@ -75,9 +80,10 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	@Override
 	public List<T> all() {
 		SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
-			@Override public void run(Session s) {
-				setResult(
-					s.createCriteria(getClassType()).list());
+			@SuppressWarnings("unchecked")
+			@Override
+			public void run(Session s) {
+				setResult(s.createCriteria(getClassType()).list());
 			}
 		};
 		runWithTransaction(runner);
@@ -96,50 +102,39 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public void load(EObject obj) {
-		Object id;
-		if (obj == null) {
-			throw new IllegalArgumentException("obj cannot be null");
-		}
-//		session.lock(obj, LockMode.NONE);
-		try {
-			load(obj, (Serializable)obj.eGet(obj.eClass().getEIDAttribute()));
-		}
-		// we may fail if object is already associated with this session...
-		catch(Exception e) {
-			load(obj, (Serializable)obj.eGet(obj.eClass().getEIDAttribute()));
-		}		
+		final Serializable key = (Serializable) obj.eGet(obj.eClass().getEIDAttribute());
+		load(obj, key);
 	}
-	
+
 	@Override
 	public void load(final EObject obj, final Serializable key) {
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
 		}
-		runWithTransaction(new Runnable() {
-			@Override
-			public void run() {				
-				session.load(obj, key);
-			}
-		});
-	}
-	
-	@Override
-	public List<T> find(final String rawQuery) {
-		SessionRunnable<List<T>> query = new SessionRunnable<List<T>>() {
-			@Override
-			public void run(Session s) {				
-				setResult(s.createQuery(rawQuery).list());
-			}
-		};
-		return query.getResult();
+		openSession();
+
+		if (!session.contains(obj))
+			session.load(obj, key);
 	}
 
+	// @Override
+	// public List<T> find(final String rawQuery) {
+	// SessionRunnable<List<T>> query = new SessionRunnable<List<T>>() {
+	// @Override
+	// public void run(Session s) {
+	// setResult(s.createQuery(rawQuery).list());
+	// }
+	// };
+	// runWithTransaction(query);
+	// return query.getResult();
+	// }
 
-	@Override
-	public List<T> find(String query, Object[] args) {
-		throw new UnsupportedOperationException("not implemented");
-	}
+	// @Override
+	// public List<T> find(String query, Object[] args) {
+	// throw new UnsupportedOperationException("not implemented");
+	// }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findByKey(long key) {
 		return (T) findByKey(getClassType(), key);
@@ -239,8 +234,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	private void closeSession() {
 		if (null != session) {
-//			 session.close();
-//			 session = null;
+			// session.close();
+			// session = null;
 		} else {
 			// TODO: use proper logging and exception code.
 			throw new IllegalStateException("null session");

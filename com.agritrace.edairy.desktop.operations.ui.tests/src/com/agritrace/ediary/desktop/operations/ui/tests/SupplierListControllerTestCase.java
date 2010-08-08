@@ -14,7 +14,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
-import com.agritrace.edairy.desktop.operations.ui.views.SupplierListView;
+import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 
 /**
  * Test case for supplier list controller
@@ -44,24 +44,24 @@ public class SupplierListControllerTestCase extends
 
 		// Categories in filter
 		final IListRidget categories = getController().getRidget(
-				IListRidget.class, SupplierListView.BIND_ID_FILTER_CATEGORIES);
+				IListRidget.class, SupplierDirectoryView.BIND_ID_FILTER_CATEGORIES);
 		assertEquals(9, categories.getObservableList().size());
 
 		// Contact Name
 		final ITextRidget contactText = getController().getRidget(
-				ITextRidget.class, SupplierListView.BIND_ID_FILTER_CONTACT);
+				ITextRidget.class, SupplierDirectoryView.BIND_ID_FILTER_CONTACT);
 		assertEquals("", contactText.getText());
 
 		// Status combo
 		final IComboRidget statusCombo = getController().getRidget(
-				IComboRidget.class, SupplierListView.BIND_ID_FILTER_STATUS);
+				IComboRidget.class, SupplierDirectoryView.BIND_ID_FILTER_STATUS);
 		assertEquals(VendorStatus.VALUES.size(), statusCombo
 				.getObservableList().size());
 		assertEquals(1, statusCombo.getSelectionIndex());
 
 		// Test Apply Button, Change some condition
 		final IActionRidget apply = getController().getRidget(
-				IActionRidget.class, SupplierListView.BIND_ID_FILTER_SEARCH);
+				IActionRidget.class, SupplierDirectoryView.BIND_ID_FILTER_SEARCH);
 		categories.setSelection(1);
 		apply.fireAction();
 

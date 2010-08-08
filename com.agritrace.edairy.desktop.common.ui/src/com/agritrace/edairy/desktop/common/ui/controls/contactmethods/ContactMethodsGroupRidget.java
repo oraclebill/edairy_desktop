@@ -19,9 +19,6 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeTableRidget;
 import org.eclipse.riena.ui.ridgets.IRowRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
-import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
-
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 import com.agritrace.edairy.desktop.common.model.base.Contactable;

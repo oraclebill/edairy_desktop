@@ -8,7 +8,6 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.RienaStatus;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public abstract class RecordDialogController<T extends EObject> extends BaseDialogController<T> {
 
@@ -21,12 +20,20 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		super();
 	}
 
-	public void addRidgetFeatureMap(String ridgetId, EStructuralFeature... featurePath) {
+	public void addTextMap(String ridgetId, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addMapping(ridgetId, featurePath);
 	}
 
-	public void addRidgetFeatureMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+	public void addComboMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
 		getOrCreateMapper().addComboMapping(ridgetId, domainList, renderMethod, featurePath);
+	}
+
+//	public void addChoiceMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+//		getOrCreateMapper().addComboMapping(ridgetId, domainList, renderMethod, featurePath);
+//	}
+
+	public void addMultiChoiceMap(String ridgetId, List<?> domainList, String renderMethod, EStructuralFeature... featurePath) {
+		getOrCreateMapper().addMultipleChoiceMapping(ridgetId, domainList, renderMethod, featurePath);
 	}
 
 	/**
@@ -56,13 +63,22 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		return workingCopy;
 	}
 
-	private void configureMappedRidgets() {
+	
+	@Override
+	public void afterBind() {
+		super.afterBind();
 		if (mapper != null) {
-			mapper.configureRidgets();
 			mapper.updateAllRidgetsFromModel();
 		}
 	}
-
+	
+	private void configureMappedRidgets() {
+		if (mapper != null) {
+			mapper.configureRidgets();
+		}
+	}
+	
+	
 	private final BindingHelper<T> getOrCreateMapper() {
 		if (mapper == null) {
 			mapper = new BindingHelper<T>(this, getWorkingCopy());

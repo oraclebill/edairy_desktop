@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
@@ -7,12 +8,9 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.jface.util.Assert;
-import org.eclipse.jface.window.Window;
-import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
-import org.eclipse.riena.ui.ridgets.IEditableRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
@@ -29,14 +27,22 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
+/**
+ * A controller type thing for the account transaction edit panel.
+ * 
+ * Lifecycle is - instantiate -
+ * 
+ * @author oraclebill
+ * 
+ */
 public class AccountTransactionEditPanelController {
-	
+
 	public class TransactionSourceSelectionListener implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
@@ -51,44 +57,12 @@ public class AccountTransactionEditPanelController {
 
 	}
 
-	public class MemberLookupAction implements IActionListener {
-		private final ITextRidget nameRidget;
-
-		public MemberLookupAction(ITextRidget nameRidget) {
-			this.nameRidget = nameRidget;
-		}
-
-		@Override
-		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
-			final int retVal = memberDialog.open();
-			if (retVal == Window.OK) {
-				final Membership selectedMember = memberDialog.getSelectedMember();
-				// String memberName =
-				// MemberUtil.formattedMemberName(selectedMember.getMember());
-				// memberNameFilter.setText(memberName);
-				// updateFarmCombo();
-				// if (searchButton != null) {
-				// searchButton.setEnabled(true);
-				// }
-				Account memberAccount = selectedMember.getAccount();
-				if (memberAccount == null) {
-					memberAccount = AccountFactory.eINSTANCE.createAccount();
-					// memberAccount.setMember(selectedMember);
-					selectedMember.setAccount(memberAccount);
-					Assert.isTrue(selectedMember.getAccount() == memberAccount);
-				}
-				AccountTransactionEditPanelController.this.model.setAccount(memberAccount);
-				nameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
-			}
-		}
-	}
-
 	private IRidgetContainer container;
 	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
 	private BindingHelper<AccountTransaction> mapper;
-	private AccountTransaction model;
+	AccountTransaction model;
 	private IComboRidget storeLocation;
+	private ITextRidget memberName;
 
 	public AccountTransactionEditPanelController() {
 		;
@@ -140,13 +114,6 @@ public class AccountTransactionEditPanelController {
 		// configure and bind transaction source
 		final ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
 				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
-//		final IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
-//				TransactionSource.class);
-//		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source"); 
-//		sourceRidget.bindToModel(optionValues, selectionValue);
-//		sourceRidget.setMandatory(true);
-//		sourceRidget.updateFromModel();
-		
 		sourceRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
 				PojoObservables.observeValue(model, "source"));
 		sourceRidget.updateFromModel();
@@ -162,25 +129,43 @@ public class AccountTransactionEditPanelController {
 		transactionText.bindToModel(model, "amount");
 		transactionText.updateFromModel();
 
-		// configure member name ridget
-		final ITextRidget memberName = container.getRidget(ITextRidget.class,
-				FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
+		memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberName.setOutputOnly(true);
+		if (model.getAccount() != null)
+			setSelectedMember(model.getAccount().getMember());
 
 		// configure member lookup action
 		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,
 				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
-		memberLookup.addListener(new MemberLookupAction(memberName));
+		memberLookup.addListener(new MemberLookupAction() {
+			@Override
+			protected void callback(Membership selectedMember) {
+				setSelectedMember(selectedMember);
+			}
+		});
 
-		storeLocation = container.getRidget(IComboRidget.class,
-				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
-		IObservableList optionList = Observables.staticObservableList(dairyRepo.getLocalDairyLocations());
-		IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
+		storeLocation = container.getRidget(IComboRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
+		List<DairyLocation> locations = dairyRepo.getLocalDairyLocations();
+		if (locations.size() == 0) {
+			locations = Arrays.asList();
+		}
+		IObservableList optionList = Observables.staticObservableList(locations);
+		IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation"); 
 		storeLocation.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
-			System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
-			System.err.println(" to Model: >>>> " + model);
+		System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
+		System.err.println(" to Model: >>>> " + model);
 		storeLocation.updateFromModel();
 
+	}
+
+	private void setSelectedMember(Membership selectedMember) {
+		Account memberAccount = selectedMember.getAccount();
+		if (memberAccount == null) {
+			memberAccount = AccountFactory.eINSTANCE.createAccount();
+			selectedMember.setAccount(memberAccount);
+		}
+		model.setAccount(memberAccount);
+		memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
 	}
 
 	private void bindMappedRidgets() {
@@ -224,23 +209,30 @@ public class AccountTransactionEditPanelController {
 		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
 	}
-	
+
 	private void updateWidgetsForSource(TransactionSource source) {
-		boolean showStoreLocation = false, showCheckNo = false, showSignedBy = false;			
+		boolean showStoreLocation = false, showCheckNo = false, showSignedBy = false;
 		if (source == TransactionSource.CASH_PAYMENT) {
 			showCheckNo = true;
 			showSignedBy = true;
 		} else if (source == TransactionSource.STORE_CREDIT) {
 			showStoreLocation = true;
-		} 
-		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT), showCheckNo);
-		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT_LBL), showCheckNo);
-		
-		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT), showSignedBy);
-		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT_LBL), showSignedBy);
+		}
+		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT),
+				showCheckNo);
+		enableMandatoryRidget(
+				container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT_LBL), showCheckNo);
 
-		enableMandatoryRidget(container.getRidget(IComboRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO), showStoreLocation);
-		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL), showStoreLocation);
+		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT),
+				showSignedBy);
+		enableMandatoryRidget(container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT_LBL),
+				showSignedBy);
+
+		enableMandatoryRidget(container.getRidget(IComboRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO),
+				showStoreLocation);
+		enableMandatoryRidget(
+				container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL),
+				showStoreLocation);
 	}
 
 	private void enableMandatoryRidget(IRidget ridget, boolean enabled) {
@@ -248,15 +240,13 @@ public class AccountTransactionEditPanelController {
 		if (ridget instanceof ITextRidget) {
 			ITextRidget editable = (ITextRidget) ridget;
 			editable.setMandatory(enabled);
-		}
-		else if (ridget instanceof IComboRidget) {
+		} else if (ridget instanceof IComboRidget) {
 			IComboRidget editable = (IComboRidget) ridget;
 			editable.setMandatory(enabled);
 		}
-//		else if (ridget instanceof ILabelRidget) {
-//			ILabelRidget editable = (ILabelRidget) ridget;
-//		}
+		// else if (ridget instanceof ILabelRidget) {
+		// ILabelRidget editable = (ILabelRidget) ridget;
+		// }
 	}
-
 
 }

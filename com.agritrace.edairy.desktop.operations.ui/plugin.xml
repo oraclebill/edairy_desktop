@@ -5,8 +5,8 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.operations.ui.views.SupplierListView"
-            id="edairy.supplier.list.view"
+            class="com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView"
+            id="edairy.operations.supplier.directory"
             name="Supplier List"
             restorable="true">
       </view>
@@ -19,8 +19,8 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.operations.ui.views.RouteListView"
-            id="route-list-view"
+            class="com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView"
+            id="edairy.operations.route.directory"
             name="Route List"
             restorable="true">
       </view>
@@ -29,6 +29,13 @@
             class="com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView"
             id="edairy.operations.employee.directory"
             name="Employee Directory"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.operations.ui.views.ContainerDirectoryView"
+            id="edairy.containers.directory"
+            name="Dairy Container Directory"
             restorable="true">
       </view>
    </extension>

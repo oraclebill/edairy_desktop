@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRange;
-import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 

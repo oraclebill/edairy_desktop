@@ -25,8 +25,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-
 import java.util.Collection;
 import java.util.Date;
 

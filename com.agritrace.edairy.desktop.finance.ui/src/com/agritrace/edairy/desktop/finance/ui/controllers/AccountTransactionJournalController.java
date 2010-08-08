@@ -10,29 +10,29 @@ import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
-import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.window.Window;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 
 public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
 
@@ -69,11 +69,11 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	}
 
 	// ridgets specific to an AccountTransaction
-	private IActionRidget batchEditRidget;
-
-	private final IMemberRepository memberRepo = DairyRepository.getInstance();
+	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), AccountTransactionJournalController.class);
+	
 	private IMultipleChoiceRidget sourceListRidget;
 	private ITextRidget referenceNumRidget;
+	private IActionRidget batchEditRidget;
 
 	public AccountTransactionJournalController() {
 		this(null);
@@ -83,12 +83,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		super(node);
 		
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
-		setRepository(new HibernateRepository<AccountTransaction>() {
-			@Override
-			protected Class<?> getClassType() {
-				return AccountTransaction.class;
-			}			
-		});
+		setRepository(RepositoryFactory.getRepository(AccountTransaction.class));
 
 		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
@@ -118,10 +113,23 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		super.afterBind();
 
 		referenceNumRidget.bindToModel(filterBean, "referenceNumber"); 
-
-		sourceListRidget.bindToModel(Observables.staticObservableList(TransactionSource.VALUES, TransactionSource.class),
-				BeansObservables.observeList(filterBean, "sourceOptions"));
-
+		
+		sourceListRidget.bindToModel(filterBean, "sourceOptions", filterBean, "sourceSelections");
+		sourceListRidget.updateFromModel();
+		
+//		sourceListRidget.addSelectionListener(new ISelectionListener() {			
+//			@Override
+//			public void ridgetSelected(SelectionEvent event) {
+//				List<TransactionSource> selection = (List<TransactionSource>)
+//					sourceListRidget.getSelection();
+//				
+//				filterBean.getSourceSelections().clear();
+//				filterBean.getSourceSelections().addAll(selection);
+//				
+//				System.err.println("Selection: " + selection);
+//			}
+//		});
+		
 		batchEditRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -132,18 +140,29 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		updateAllRidgetsFromModel();
 	}
 
-	
+	protected void updateEntity(AccountTransaction updateableEntity) {
+		// the 'all' has the side effect of flushing the currnet session.. this is what we want to do, not 'update'...
+		getRepository().all();		
+	}
+
 	protected Predicate buildFilterPredicate() {
+
 		Predicate superPredicate = super.buildFilterPredicate();
 		
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 
 		predicateList.add(superPredicate);
 		
-		predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(filterBean.getReferenceNumber())));
+		String refNum = filterBean.getReferenceNumber();
+		if (refNum != null && refNum.length() > 0) {
+			predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(refNum)));
+		}
 
-		predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(filterBean
-				.getSourceOptions())));
+		List<TransactionSource> sources = filterBean.getSourceSelections();
+		System.err.println("Sources: " + sources);
+		if (sources != null && sources.size() > 0) {
+			predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(sources)));
+		}
 
 		final Predicate[] predicates = new Predicate[predicateList.size()];
 		for (int i = 0; i < predicates.length; i++) {

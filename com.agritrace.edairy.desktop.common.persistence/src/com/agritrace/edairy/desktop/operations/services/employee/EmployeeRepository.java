@@ -40,15 +40,15 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		employeeRepo.delete(deletableEntity);
 	}
 
-	@Override
-	public List<Employee> find(String rawQuery) {
-		return employeeRepo.find(rawQuery);
-	}
-
-	@Override
-	public List<Employee> find(String query, Object[] args) {
-		return employeeRepo.find(query, args);
-	}
+//	@Override
+//	public List<Employee> find(String rawQuery) {
+//		return employeeRepo.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<Employee> find(String query, Object[] args) {
+//		return employeeRepo.find(query, args);
+//	}
 
 	@Override
 	public Employee findByKey(long key) {

@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntit
 
 public class CustomerRepository extends HibernateRepository<Customer> implements ICustomerRepository {
 
-	class RunLoad extends SessionRunnable {
+	class RunLoad extends SessionRunnable<Object> {
 		Customer myObj;
 
 		RunLoad(Customer eObject) {
@@ -24,7 +24,7 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 		}
 	}
 
-	class RunMerge extends SessionRunnable {
+	class RunMerge extends SessionRunnable<Object> {
 		Object myObj;
 
 		RunMerge(Object eObject) {
@@ -49,17 +49,17 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 		super.delete(deletableEntity);
 	}
 
-	@Override
-	public List<Customer> find(String rawQuery) {
-		// TODO Auto-generated method stub
-		return super.find(rawQuery);
-	}
-
-	@Override
-	public List<Customer> find(String query, Object[] args) {
-		// TODO Auto-generated method stub
-		return super.find(query, args);
-	}
+//	@Override
+//	public List<Customer> find(String rawQuery) {
+//		// TODO Auto-generated method stub
+//		return super.find(rawQuery);
+//	}
+//
+//	@Override
+//	public List<Customer> find(String query, Object[] args) {
+//		// TODO Auto-generated method stub
+//		return super.find(query, args);
+//	}
 
 	@Override
 	public Customer findByKey(long key) {

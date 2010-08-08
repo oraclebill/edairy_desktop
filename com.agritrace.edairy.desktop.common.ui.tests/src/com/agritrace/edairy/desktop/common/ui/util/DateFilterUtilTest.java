@@ -31,6 +31,59 @@ public class DateFilterUtilTest {
 	}
 
 	@Test
+	public void testDateCompareIgnoresTime() throws Exception {
+		Realm.runWithDefault(new TestRealm(), new Runnable() {
+
+			@Override
+			public void run() {
+				List<Account> list = new LinkedList<Account>();
+				
+				Date beforeAll = new Date();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				Date transactionDate = new Date();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				Date afterAll = new Date();
+
+				Account account = AccountFactory.eINSTANCE.createAccount();
+				account.setAccountNumber("TEST123");
+				account.setEstablished(transactionDate);
+				list.add(account);
+
+
+				DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
+						AccountPackage.Literals.ACCOUNT__ESTABLISHED);
+				
+				List<Account> result = filterUtil.filterDate(list, beforeAll, afterAll);
+				Assert.assertEquals(1, result.size());
+				
+				result = filterUtil.filterDate(list, afterAll, beforeAll);
+				Assert.assertEquals(0, result.size());
+
+				result = filterUtil.filterDate(list,  beforeAll, transactionDate);
+				Assert.assertEquals(1, result.size());
+
+
+			}
+
+		});
+
+
+	}
+	
+	
+	@Test
 	public void testDateFilterUtil() throws Exception {
 
 		Realm.runWithDefault(new TestRealm(), new Runnable() {

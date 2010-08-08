@@ -1,8 +1,5 @@
 package com.agritrace.edairy.desktop.install;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Date;

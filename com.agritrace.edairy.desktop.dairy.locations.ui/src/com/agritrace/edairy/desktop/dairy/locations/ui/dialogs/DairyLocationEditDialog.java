@@ -4,16 +4,15 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
-import org.eclipse.riena.ui.swt.DatePickerComposite;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -21,8 +20,8 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyDialogController;
-import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationController;
 
 public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 	private Composite comonComp;
@@ -46,34 +45,34 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		UIControlsFactory.createLabel(composite, "Name");
 		final Text txtDate = UIControlsFactory.createText(composite);
 		txtDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
-		addUIControl(txtDate, DairyLocationController.RIDGET_ID_NAME);
+		addUIControl(txtDate, DairyLocationUIConstants.RIDGET_ID_NAME);
 
 		//description
 		UIControlsFactory.createLabel(composite, "Description", SWT.LEFT);
-		final Text descriptionText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,DairyLocationController.RIDGET_ID_DESCRIPTION);
+		final Text descriptionText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,DairyLocationUIConstants.RIDGET_ID_DESCRIPTION);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(descriptionText);
 
 		//phone
 		UIControlsFactory.createLabel(composite, "Phone", SWT.LEFT);
-		final Text phoneText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,	DairyLocationController.RIDGET_ID_PHONE);
+		final Text phoneText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,	DairyLocationUIConstants.RIDGET_ID_PHONE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(phoneText);
 
 		//Date 
 		UIControlsFactory.createLabel(composite, "Date Opened", SWT.LEFT);
-		final DatePickerComposite dateOpenedPicker = UIControlsFactory.createDatePickerComposite(composite,
-				DairyLocationController.RIDGET_ID_DATEOPENED);
+		final DateTime dateOpenedPicker = UIControlsFactory.createDate(composite, SWT.DEFAULT,
+				DairyLocationUIConstants.RIDGET_ID_DATEOPENED);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateOpenedPicker);
 		
 		//functions
 		UIControlsFactory.createLabel(composite, "Functions", SWT.LEFT);
 		final ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(composite, SWT.None, true,
-				DairyLocationController.RIDGET_ID_FUNCTIONS);
+				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(functionsChoice);
 		
 		//route
 		UIControlsFactory.createLabel(composite, "Route", SWT.LEFT);
-		final CCombo combo = UIControlsFactory.createCCombo(composite, DairyLocationController.RIDGET_ID_ROUTE);
+		final CCombo combo = UIControlsFactory.createCCombo(composite, DairyLocationUIConstants.RIDGET_ID_ROUTE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(combo);
 		createContactGroup(comonComp);
 		parent.pack();

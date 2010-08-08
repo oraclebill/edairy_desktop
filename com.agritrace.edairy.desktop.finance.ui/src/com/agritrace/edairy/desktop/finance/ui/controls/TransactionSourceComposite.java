@@ -1,18 +1,5 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.UpdateValueStrategy;
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.beans.common.IntegerBean;
-import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
-import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.ChoiceComposite;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
@@ -22,12 +9,7 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
-
-import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionSourceComposite extends Composite {

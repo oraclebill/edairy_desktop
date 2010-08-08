@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class ScaleRecord extends RawScaleRecord {
 //	public static final String  DEFAULT_DATE_PATTERN = "dd/MM/YYYY";

@@ -6,7 +6,6 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Container;

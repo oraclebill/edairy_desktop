@@ -71,7 +71,7 @@ public class LiveStockListController extends BaseListViewController {
 		@Override
 		public void callback() {
 			if (selectedMember != null) {
-				RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.MALE,
+				RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.FEMALE,
 						DairyUtil.createReferenceAnimal("", ""), Purpose.get(0), RearingMode.get(0),
 						DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
 				final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(AbstractDirectoryController.getShell());
