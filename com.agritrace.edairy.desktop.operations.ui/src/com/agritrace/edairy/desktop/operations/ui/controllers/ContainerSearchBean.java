@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.containers.ui.controllers;
+package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.riena.beans.common.AbstractBean;
 

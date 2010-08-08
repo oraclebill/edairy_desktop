@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.containers.ui.controllers;
+package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
-import com.agritrace.edairy.desktop.dairy.containers.ui.controls.ContainerLogDetailBindConstants;
+import com.agritrace.edairy.desktop.operations.ui.controls.ContainerLogDetailBindConstants;
 
 public class ContainerEditDialogController  extends RecordDialogController<DairyContainer> {
 

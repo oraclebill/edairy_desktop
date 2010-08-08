@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.containers.ui.dialogs;
+package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -10,8 +10,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.dairy.containers.ui.controllers.ContainerEditDialogController;
-import com.agritrace.edairy.desktop.dairy.containers.ui.controls.ContainerLogDetailComposite;
+import com.agritrace.edairy.desktop.operations.ui.controllers.ContainerEditDialogController;
+import com.agritrace.edairy.desktop.operations.ui.controls.ContainerLogDetailComposite;
 
 public class ContainerEditDialog extends RecordDialog<DairyContainer> {
 	private Composite comonComp;

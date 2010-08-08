@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.containers.ui.controls;
+package com.agritrace.edairy.desktop.operations.ui.controls;
 
 public interface ContainerLogDetailBindConstants {
 

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.dairy.containers.ui.views;
+package com.agritrace.edairy.desktop.operations.ui.views;
 
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Group;
 
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import com.agritrace.edairy.desktop.dairy.containers.ui.controls.ContainerLogDetailBindConstants;
+import com.agritrace.edairy.desktop.operations.ui.controls.ContainerLogDetailBindConstants;
 
 public class ContainerDirectoryView extends AbstractDirectoryView {
 
