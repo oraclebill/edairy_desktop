@@ -27,7 +27,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.ui.columnformatters.LocationFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -56,7 +55,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	private final String[] farmPropertyNames = { "membership.memberNumber",
 			"membership.member.givenName", "membership.member.familyName",
 			"farm.name", "farm.location", "farm.numberOfAnimals",
-	"farm.numberOfContainers" };
+			"farm.numberOfContainers" };
 
 	private IComboRidget farmCombo;
 
@@ -165,7 +164,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		}
 		if (getEntityClass() == null) {
 			throw new IllegalStateException(
-			"Entity class must be set in constructor");
+					"Entity class must be set in constructor");
 		}
 		table = this.getRidget(ITableRidget.class,
 				AbstractDirectoryView.BIND_ID_TABLE);
@@ -191,26 +190,29 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 				table.setColumnSortable(i, false);
 			}
 		}
-		//location formatter
-		table.setColumnFormatter(4, new ColumnFormatter(){
+		// location formatter
+		table.setColumnFormatter(4, new ColumnFormatter() {
 			public String getText(Object element) {
 				if (element instanceof FarmListViewTableNode) {
-					Location location = ((FarmListViewTableNode) element).getFarm().getLocation();
-					if(location != null){
-						final PostalLocation postalLocation = location.getPostalLocation();
-//						StringBuffer sb = new StringBuffer();
+					Location location = ((FarmListViewTableNode) element)
+							.getFarm().getLocation();
+					if (location != null) {
+						final PostalLocation postalLocation = location
+								.getPostalLocation();
+						// StringBuffer sb = new StringBuffer();
 						if (postalLocation != null) {
-							return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
+							return postalLocation.getAddress() + ","
+									+ postalLocation.getVillage() + ","
 									+ postalLocation.getPostalCode();
 						}
-					}else{
+					} else {
 						return "<Empty>";
 					}
-					
+
 				}
 
 				return null;
-			}	
+			}
 		});
 		table.bindToModel(new WritableList(farmListTableInput,
 				FarmListViewTableNode.class), FarmListViewTableNode.class,
@@ -284,7 +286,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		if (selectedMember == null) {
 			MessageDialog.openInformation(
 					Display.getDefault().getActiveShell(), "Add Farm",
-			"Can not add a farm. You must select a Member first");
+					"Can not add a farm. You must select a Member first");
 		} else {
 			final Location newFarmLocation = DairyUtil.createLocation(null,
 					null, null);
@@ -300,9 +302,9 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedNode = (FarmListViewTableNode) memberDialog
-				.getController()
-				.getContext(
-						ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+						.getController()
+						.getContext(
+								ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
 				selectedMember.getMember().getFarms().add(newFarm);
 				if (selectedMember.getMemberId() != 0) {
 					farmRepository.saveNew(newFarm);
@@ -329,11 +331,11 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 				selectedMember = memberDialog.getSelectedMember();
 				if (selectedMember == null) {
 					Log4r.getLogger(getClass()).log(LogService.LOG_WARNING,
-					"Null member selected from dialog");
+							"Null member selected from dialog");
 					return;
 				}
 				final String memberName = MemberUtil
-				.formattedMemberName(selectedMember.getMember());
+						.formattedMemberName(selectedMember.getMember());
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
 				if (searchButton != null) {
@@ -347,7 +349,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	protected void handleViewItemAction() {
 		if (!table.getSelection().isEmpty()) {
 			FarmListViewTableNode selectedNode = (FarmListViewTableNode) table
-			.getSelection().get(0);
+					.getSelection().get(0);
 			final ViewFarmDialog memberDialog = new ViewFarmDialog(
 					AbstractDirectoryController.getShell());
 			memberDialog.getController().setContext(
@@ -357,9 +359,9 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
 				selectedNode = (FarmListViewTableNode) memberDialog
-				.getController().getContext("selectedFarm");
+						.getController().getContext("selectedFarm");
 				farmRepository.update(selectedNode.getFarm());
-				memberRepository.update(selectedMember);
+				// memberRepository.update(selectedNode.getMembership());
 				refreshTableContents();
 
 			} else if (returnCode == 2) {
@@ -368,17 +370,17 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					String message = "";
 					if (selectedNode.getFarm() != null) {
 						message = "\"" + selectedNode.getFarm().getName()
-						+ "\"";
+								+ "\"";
 					}
 					message = String.format(DELETE_DIALOG_MESSAGE, message);
 					if (MessageDialog.openConfirm(Display.getDefault()
 							.getActiveShell(), DELETE_DIALOG_TITLE, message)) {
-						selectedMember.getMember().getFarms().remove(
-								selectedNode.getFarm());
+						selectedNode.getMembership().getMember().getFarms()
+								.remove(selectedNode.getFarm());
 						(selectedNode.getFarm()).getAnimals().clear();
 						(selectedNode.getFarm()).setLocation(null);
 						farmRepository.delete(selectedNode.getFarm());
-						memberRepository.update(selectedMember);
+						// memberRepository.update(selectedMember);
 						updateFarmCombo();
 						refreshTableContents();
 					}
@@ -398,10 +400,9 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		selectedMember = null;
 		memberNameFilter.setText("");
 		farmNames.clear();
-		if(farmCombo != null){
+		if (farmCombo != null) {
 			farmCombo.setSelection(farmCombo.getEmptySelectionItem());
 		}
-
 
 	}
 
