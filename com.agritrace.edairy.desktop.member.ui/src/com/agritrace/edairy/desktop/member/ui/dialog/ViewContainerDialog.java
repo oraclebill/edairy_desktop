@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -45,10 +46,10 @@ public class ViewContainerDialog extends BaseDialogView {
 
 		final Label idLabel = UIControlsFactory.createLabel(dialogArea, "", ViewWidgetId.VIEW_CONTAINER_ID);
 		idLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-
-		UIControlsFactory.createLabel(dialogArea, "Container Type:");
-		final Combo containerCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_TYPE);
-		containerCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+	
+//		UIControlsFactory.createLabel(dialogArea, "Container Type:");
+//		final Combo containerCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_TYPE);
+//		containerCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
 		final Combo measureCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_UNIT);
@@ -63,6 +64,14 @@ public class ViewContainerDialog extends BaseDialogView {
 		UIControlsFactory.createLabel(dialogArea, "Farm:");
 		final Combo farmCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_FARM);
 		farmCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		
+		final Label memberNameLabel = UIControlsFactory.createLabel(dialogArea, "Member Name :");
+		
+		final Label memberNameValueLabel = UIControlsFactory.createLabel(dialogArea, "");
+		addUIControl(memberNameValueLabel, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(memberNameValueLabel);
+
+
 	}
 
 	@Override

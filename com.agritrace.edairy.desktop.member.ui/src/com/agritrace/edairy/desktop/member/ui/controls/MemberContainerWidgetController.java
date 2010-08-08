@@ -46,41 +46,6 @@ import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 
 public class MemberContainerWidgetController implements WidgetController<Object>, ISelectionListener {
-
-	private final class ViewContainerAction implements IActionListener {
-
-		@Override
-		public void callback() {
-			Container selectedNode = (Container) containerTable.getSelection().get(0);
-			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
-			final List<Farm> inputFarms = new ArrayList<Farm>();
-			inputFarms.add(selectedNode.getOwner());
-
-			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
-					selectedNode);
-			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-
-			final int returnCode = dialog.open();
-			if (returnCode == AbstractWindowController.OK) {
-				selectedNode = (Container) dialog.getController().getContext(
-						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-				farmRepository.update(selectedNode.getOwner());
-				refreshInputList();
-			} else if (returnCode == 2) {
-				// confirm for delete
-				if (selectedNode != null) {
-					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle,
-							containerRemoveMessage)) {
-						final Farm farm = selectedNode.getOwner();
-						farm.getCans().remove(selectedNode);
-						farmRepository.update(farm);
-						refreshInputList();
-					}
-				}
-			}
-		}
-	}
-
 	public static final String ALL_FARM = "All Farms";
 
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";
@@ -129,26 +94,37 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 
 			@Override
 			public void callback() {
+
 				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
 						| SWT.APPLICATION_MODAL);
 				shell.setSize(550, 450);
-				Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-				final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
-				memberDialog.getController().setContext(
-						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
-				memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST,
-						farms);
-				final int returnCode = memberDialog.open();
-				if (returnCode == AbstractWindowController.OK) {
-					container = (Container) memberDialog.getController().getContext(
-							ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-					container.getOwner().getCans().add(container);
-					final Farm farm = container.getOwner();
-					if (farm.getFarmId() != null) {
-						farmRepository.update(farm);
+				if(farms.size() ==0){
+					MessageDialog.openInformation(shell, "Add Containter", "Farms list is empty, can not create a container without a farm.");
+				}else{
+					Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
+					final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+					memberDialog.getController().setContext(
+							ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
+					memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST,
+							farms);
+					if(inputModel instanceof Membership){
+						memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);	
+					}else if(inputModel instanceof Farm){
+						memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, ((Farm)inputModel).getOwner());	
 					}
-					refreshInputList();
+					final int returnCode = memberDialog.open();
+					if (returnCode == AbstractWindowController.OK) {
+						container = (Container) memberDialog.getController().getContext(
+								ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+						container.getOwner().getCans().add(container);
+						final Farm farm = container.getOwner();
+						if (farm.getFarmId() != null) {
+							farmRepository.update(farm);
+						}
+						refreshInputList();
+					}
 				}
+				
 			}
 		});
 
@@ -273,5 +249,46 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 		}
 
 		return objs;
+	}
+	
+	private final class ViewContainerAction implements IActionListener {
+
+		@Override
+		public void callback() {
+			Container selectedNode = (Container) containerTable.getSelection().get(0);
+			final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
+			final List<Farm> inputFarms = new ArrayList<Farm>();
+			inputFarms.add(selectedNode.getOwner());
+
+			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
+					selectedNode);
+			dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
+			if(inputModel instanceof Membership){
+				dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);	
+			}else if(inputModel instanceof Farm){
+				dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, ((Farm)inputModel).getOwner());	
+			}
+			
+
+
+			final int returnCode = dialog.open();
+			if (returnCode == AbstractWindowController.OK) {
+				selectedNode = (Container) dialog.getController().getContext(
+						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+				farmRepository.update(selectedNode.getOwner());
+				refreshInputList();
+			} else if (returnCode == 2) {
+				// confirm for delete
+				if (selectedNode != null) {
+					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), containerRemoveTitle,
+							containerRemoveMessage)) {
+						final Farm farm = selectedNode.getOwner();
+						farm.getCans().remove(selectedNode);
+						farmRepository.update(farm);
+						refreshInputList();
+					}
+				}
+			}
+		}
 	}
 }

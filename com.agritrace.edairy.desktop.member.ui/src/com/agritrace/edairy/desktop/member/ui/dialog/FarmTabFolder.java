@@ -18,9 +18,18 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 public class FarmTabFolder {
 
 	public static final String MEMBER_INFO_GROUP = "Farm Information";
+	
+	private boolean addressTabOnly;
 	private Composite tabComposite;
-
-	public FarmTabFolder(Composite parent) {
+	
+	/**
+	 * Create tabs for Farm dialog. addressTabOnly is true, only create LocationTabFolder,
+	 * @param parent
+	 * @param addressTabOnly true only create LocationTabFolder
+	 *                       false create  LocationTabFolder and LiveStock tab and Containers tab
+	 */
+	public FarmTabFolder(Composite parent, boolean addressTabOnly) {
+		this.addressTabOnly = addressTabOnly;
 		initGUI(parent);
 	}
 
@@ -43,6 +52,8 @@ public class FarmTabFolder {
 		groupLayout.numColumns = 1;
 		detailGroup.setLayout(groupLayout);
 		detailGroup.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		
+		
 
 		// address tab
 		final LocationTabFolder addressWidget = new LocationTabFolder(
@@ -52,26 +63,27 @@ public class FarmTabFolder {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(addressWidget);
 
-		CTabFolder tabfolder = addressWidget.getTabFolder();
+		if(!addressTabOnly){
+			CTabFolder tabfolder = addressWidget.getTabFolder();
 
-		final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
-		livestockTab.setText("Livestock");
-		final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		livestockComposite.setLayout(new GridLayout(1, true));
-		final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).hint(-1, 260).grab(true, true)
-				.applyTo(liveStockWidget.getComposite());
-		livestockTab.setControl(livestockComposite);
+			final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
+			livestockTab.setText("Livestock");
+			final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+			livestockComposite.setLayout(new GridLayout(1, true));
+			final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).hint(-1, 260).grab(true, true)
+					.applyTo(liveStockWidget.getComposite());
+			livestockTab.setControl(livestockComposite);
 
-		final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
-		containerTab.setText("Containers");
-		final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		containerComposite.setLayout(new GridLayout(1, false));
-		final MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-				.applyTo(containerWidget.getComposite());
-		containerTab.setControl(containerComposite);
-	
+			final CTabItem containerTab = new CTabItem(tabfolder, SWT.NULL);
+			containerTab.setText("Containers");
+			final Composite containerComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
+			containerComposite.setLayout(new GridLayout(1, false));
+			final MemberContainerWidget containerWidget = new MemberContainerWidget(containerComposite);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+					.applyTo(containerWidget.getComposite());
+			containerTab.setControl(containerComposite);
+		}
 	}
 
 }

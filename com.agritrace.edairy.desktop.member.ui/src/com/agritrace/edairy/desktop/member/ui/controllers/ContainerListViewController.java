@@ -77,6 +77,11 @@ public class ContainerListViewController extends BaseListViewController {
 						ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
 				memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST,
 						inputFarms);
+				if(selectedMember != null){
+					memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER,
+							selectedMember);
+				}
+			
 
 				final int returnCode = memberDialog.open();
 				if (returnCode == AbstractWindowController.OK) {

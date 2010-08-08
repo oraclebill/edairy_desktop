@@ -21,16 +21,22 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class ViewContainerDialogController extends BaseDialogController<Farm> implements ISelectionListener {
+	
+	public static final String FARM_MEMBER_NAME_LABEL_PREFIX = "Member Name :";
+
 
 	ITextRidget capacity;
 
@@ -47,10 +53,14 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 	IActionRidget okAction;
 
 	Container selectedContainer;
+	
+	Farmer selectedMember;
 
 	IComboRidget typeCombo;
 
 	IComboRidget unitCombo;
+	
+	ILabelRidget memberNameRidget;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -58,6 +68,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		super.configureRidgets();
 
 		idLabel = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_CONTAINER_ID);
+		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
 		typeCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_TYPE);
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_FARM);
 		farmCombo.setMandatory(true);
@@ -66,10 +77,20 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		capacity.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
 		capacity.setMandatory(true);
 		capacity.setDirectWriting(true);
-		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
 		okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.setEnabled(true);
+
+		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
+		Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
+		if(selected instanceof Membership){
+			selectedMember =((Membership) selected).getMember();
+
+		}else if(selected instanceof Farmer){
+			selectedMember =(Farmer) selected;
+
+		}
+	
 
 		if (selectedContainer != null) {
 			if (selectedContainer.getContainerId() != null) {
@@ -121,6 +142,15 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			unitCombo.updateFromModel();
 			unitCombo.addSelectionListener(this);
 			unitCombo.setSelection(selectedContainer.getMeasureType());
+			
+			 if (memberNameRidget != null){
+				 if(selectedMember == null ){
+						memberNameRidget.setText("<New Member>");
+					}else {
+						memberNameRidget.setText(MemberUtil.formattedMemberName(selectedMember));
+					}
+			 }
+			
 
 //			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
 //					new WritableValue());
