@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Group;
 
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import com.agritrace.edairy.desktop.operations.ui.controls.ContainerLogDetailBindConstants;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 
 public class ContainerDirectoryView extends AbstractDirectoryView {
 
@@ -31,7 +31,7 @@ public class ContainerDirectoryView extends AbstractDirectoryView {
 		//Tracking number
 		UIControlsFactory.createLabel(filterGroup, "Tracking Number :");
 		final Control text = UIControlsFactory.createText(filterGroup, SWT.NONE,
-				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
+				ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM);
 		GridData gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
@@ -40,7 +40,7 @@ public class ContainerDirectoryView extends AbstractDirectoryView {
 //		//Capacity
 //		UIControlsFactory.createLabel(parent, "Capacity");
 //		final Text capacityText = UIControlsFactory.createTextDecimal(parent,
-//				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
+//				ContainerBindingConstants.BIND_ID_CONTAINER_CAPACITY);
 //		GridData gd2 = new GridData();
 //		gd2.widthHint = FormUtil.WIDTH_UNIT * 3;
 //		gd2.verticalAlignment = SWT.FILL;

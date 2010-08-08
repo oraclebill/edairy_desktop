@@ -1,6 +1,6 @@
-package com.agritrace.edairy.desktop.operations.ui.controls;
+package com.agritrace.edairy.desktop.operations.ui.dialogs;
 
-public interface ContainerLogDetailBindConstants {
+public interface ContainerBindingConstants {
 
 	public static final String BIND_ID_ASSET_INFO = "asset-info";
 	public static final String BIND_ID_CONTAINER_CAPACITY = "insurance.num";

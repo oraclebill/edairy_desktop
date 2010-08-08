@@ -1,10 +1,6 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
@@ -12,7 +8,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
-import com.agritrace.edairy.desktop.operations.ui.controls.ContainerLogDetailBindConstants;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 
 public class ContainerEditDialogController  extends RecordDialogController<DairyContainer> {
 
@@ -32,7 +28,7 @@ public class ContainerEditDialogController  extends RecordDialogController<Dairy
 	
 	private void bindContainerInfo() {
 		final ITextRidget id = getRidget(ITextRidget.class,
-				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_ID);
+				ContainerBindingConstants.BIND_ID_CONTAINER_ID);
 		id.setFocusable(false);
 		// id.setEnabled(false);
 		id.setOutputOnly(true);
@@ -40,26 +36,9 @@ public class ContainerEditDialogController  extends RecordDialogController<Dairy
 				TrackingPackage.Literals.CONTAINER__CONTAINER_ID.getName()));
 		id.updateFromModel();
 
-		final ITextRidget trackingNumber = getRidget(ITextRidget.class,
-				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
-		trackingNumber.setDirectWriting(true);
-		trackingNumber.bindToModel(EMFObservables.observeValue(editContainer,
-				TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER));
-		trackingNumber.updateFromModel();
-
-		final IDecimalTextRidget capacity = getRidget(IDecimalTextRidget.class,
-				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_CAPACITY);
-		capacity.setDirectWriting(true);
-		capacity.setMandatory(true);
-		capacity.bindToModel(editContainer, TrackingPackage.Literals.CONTAINER__CAPACITY.getName());
-		capacity.updateFromModel();
-
-		final IComboRidget unitOfMeasure = getRidget(IComboRidget.class,
-				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_UOM);
-		unitOfMeasure.bindToModel(Observables.staticObservableList(UnitOfMeasure.VALUES), UnitOfMeasure.class,
-				null, EMFObservables.observeValue(editContainer, TrackingPackage.Literals.CONTAINER__MEASURE_TYPE));
-		unitOfMeasure.updateFromModel();
-		
+		addTextMap(ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM, TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER);
+		addTextMap(ContainerBindingConstants.BIND_ID_CONTAINER_CAPACITY, TrackingPackage.Literals.CONTAINER__CAPACITY);
+		addComboMap(ContainerBindingConstants.BIND_ID_CONTAINER_UOM, UnitOfMeasure.VALUES, "getName", TrackingPackage.Literals.CONTAINER__MEASURE_TYPE);		
 	}
 	
 	private void bindAssetInfo() {

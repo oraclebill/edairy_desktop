@@ -17,8 +17,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.ui.controls.ContainerLogDetailBindConstants;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 
 public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer>{
 
@@ -50,7 +50,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	protected void configureFilterRidgets() {
 		
 		trackingText = getRidget(ITextRidget.class,
-				ContainerLogDetailBindConstants.BIND_ID_CONTAINER_TRACKING_NUM);
+				ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM);
 		trackingText.bindToModel(BeansObservables.observeValue(searchBean,ContainerSearchBean.PROP_TRACKINGNUMBER));
 		trackingText.updateFromModel();
 	
