@@ -1,20 +1,17 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
-import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.common.ui.controls.location.LocationProfileWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 
@@ -47,31 +44,22 @@ public class FarmTabFolder {
 		detailGroup.setLayout(groupLayout);
 		detailGroup.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 
-		final CTabFolder tabfolder = new CTabFolder(detailGroup, SWT.NULL);
-		tabfolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		// address tab
+		final LocationTabFolder addressWidget = new LocationTabFolder(
+				detailGroup, SWT.NONE);
+		addressWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		final Color startColor = LnfManager.getLnf().getColor(
-				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_START_COLOR);
-		final Color endColor = LnfManager.getLnf().getColor(
-				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_END_COLOR);
-		tabfolder.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		tabfolder.setSelectionBackground(new Color[] { startColor, endColor }, new int[] { 50 }, true);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, false).applyTo(addressWidget);
 
-		// profile tab
-		final CTabItem profileTab = new CTabItem(tabfolder, SWT.NULL);
-		profileTab.setText("Address");
-		final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
-		profileComposite.setLayout(new GridLayout(1, true));
-		final LocationProfileWidget addressWidget = new LocationProfileWidget(profileComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(addressWidget.getComposite());
-		profileTab.setControl(profileComposite);
+		CTabFolder tabfolder = addressWidget.getTabFolder();
 
 		final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
 		livestockTab.setText("Livestock");
 		final Composite livestockComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 		livestockComposite.setLayout(new GridLayout(1, true));
 		final MemberLiveStockWidget liveStockWidget = new MemberLiveStockWidget(livestockComposite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).hint(-1, 260).grab(true, true)
 				.applyTo(liveStockWidget.getComposite());
 		livestockTab.setControl(livestockComposite);
 
@@ -83,8 +71,7 @@ public class FarmTabFolder {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
 				.applyTo(containerWidget.getComposite());
 		containerTab.setControl(containerComposite);
-		// by default select the profile tab
-		tabfolder.setSelection(profileTab);
+	
 	}
 
 }
