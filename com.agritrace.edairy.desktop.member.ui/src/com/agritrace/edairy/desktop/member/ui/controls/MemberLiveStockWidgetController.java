@@ -218,7 +218,7 @@ public class MemberLiveStockWidgetController implements WidgetController<Object>
 		liveStockViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
 		liveStockViewButton.addListener(new ViewAction());
 		liveStockViewButton.setEnabled(false);
-		filterController.getSearch().addListener(new FilterAction());
+//		filterController.getSearch().addListener(new FilterAction());
 
 	}
 

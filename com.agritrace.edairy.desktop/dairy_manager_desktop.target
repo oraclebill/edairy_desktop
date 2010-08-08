@@ -4,6 +4,6 @@
 <target name="dairy_manager_desktop">
 <locations>
 <location path="${workspace_loc}/../edairy_desktop_lib/grouplayout" type="Directory"/>
-<location path="/Users/oraclebill/Development/Projects/edairy_desktop_lib/bundle_pool" type="Profile"/>
+<location path="${workspace_loc}/../edairy_desktop_lib/bundle_pool" type="Profile"/>
 </locations>
 </target>

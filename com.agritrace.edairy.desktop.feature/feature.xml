@@ -26,17 +26,13 @@
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="com.agritrace.edairy.desktop.common.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.query" version="1.2.100" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.common.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.desktop.icons" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.common.persistence" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.databinding" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.query" version="1.2.100" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.desktop.member.services" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.collections" version="3.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.swt.layout.grouplayout" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.collections" version="3.2.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.finance.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.member.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.services.ui" version="1.0.0" match="greaterOrEqual"/>
@@ -47,8 +43,10 @@
       <import plugin="com.agritrace.edairy.desktop.home.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.deliveries.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.dairy.vehicles.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.desktop.dairy.containers.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.install" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.icons" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="com.csvreader" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.nebula.widgets.compositetable"/>
       <import plugin="org.eclipse.riena.ui.ridgets.swt.optional" version="2.0.0" match="greaterOrEqual"/>
@@ -93,15 +91,7 @@
       <import plugin="javax.persistence"/>
       <import plugin="org.eclipse.emf.teneo.annotations" version="1.0.0" match="compatible"/>
       <import plugin="org.eclipse.core.runtime" version="3.3.0" match="compatible"/>
-      <import plugin="org.hamcrest.core" version="1.1.0" match="greaterOrEqual"/>
    </requires>
-
-   <plugin
-         id="com.agritrace.edairy.desktop.dairy.containers.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="com.agritrace.edairy.desktop.dairy.locations.ui"
@@ -216,13 +206,6 @@
 
    <plugin
          id="com.agritrace.edairy.desktop.dairy.vehicles.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.agritrace.edairy.desktop.member.services"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -429,12 +412,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.junit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.equinox.log"
          download-size="0"
          install-size="0"
@@ -443,13 +420,6 @@
 
    <plugin
          id="org.apache.oro"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.hamcrest.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
