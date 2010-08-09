@@ -4,7 +4,7 @@
 <product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="0.97.33" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="/com.agritrace.edairy.desktop.ui/resources/edairy_helpabout.png"/>
+      <image path="/com.agritrace.edairy.desktop/resources/edairy_helpabout.png"/>
       <text>
          eDairy Manager v0.1a
       </text>
@@ -21,7 +21,7 @@
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/com.agritrace.edairy.desktop.ui/icons/cow16.png" i32="/com.agritrace.edairy.desktop.ui/icons/cow32.png" i48="/com.agritrace.edairy.desktop.ui/icons/cow48.png" i64="/com.agritrace.edairy.desktop.ui/icons/cow64.png" i128="/com.agritrace.edairy.desktop.ui/icons/cow128.png"/>
+   <windowImages i16="/com.agritrace.edairy.desktop.icons/icons/application.png"/>
 
    <splash
       location="com.agritrace.edairy.desktop" />
@@ -31,6 +31,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
@@ -46,7 +47,7 @@
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
       <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.dairy.containers.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.dairy.containers.ui" fragment=""/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.vehicles.ui"/>
@@ -55,7 +56,7 @@
       <plugin id="com.agritrace.edairy.desktop.home.ui"/>
       <plugin id="com.agritrace.edairy.desktop.icons"/>
       <plugin id="com.agritrace.edairy.desktop.install"/>
-      <plugin id="com.agritrace.edairy.desktop.member.services"/>
+      <plugin id="com.agritrace.edairy.desktop.member.services" fragment=""/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>
