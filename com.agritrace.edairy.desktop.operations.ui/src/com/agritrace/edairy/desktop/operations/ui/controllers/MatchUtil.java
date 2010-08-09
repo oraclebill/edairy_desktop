@@ -34,6 +34,9 @@ public class MatchUtil {
 		if ((userValue == null) || (userValue.trim().length() == 0)) {
 			return true;
 		}
+		if(entityValue == null){
+			return false;
+		}
 		if (entityValue.toLowerCase().equals(userValue.toLowerCase())) {
 			return true;
 		}

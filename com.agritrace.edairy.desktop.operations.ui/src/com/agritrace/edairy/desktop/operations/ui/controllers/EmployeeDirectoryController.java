@@ -95,6 +95,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		for (final Employee e : allEmployees) {
 			if (( MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) 
 					|| MatchUtil.matchContains(searchBean.getName(), e.getGivenName()) )
+					&& MatchUtil.matchEquals(searchBean.getDepartment(),e.getDepartment())
 					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction() )
 				) {
 				filtered.add(e);
