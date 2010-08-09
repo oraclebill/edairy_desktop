@@ -14,7 +14,7 @@ public class LiveStockRearingWidget {
 
 	public static final int DEFAULT_FIELD_WIDTH = 250;
 
-	public static final int DEFAULT_LABEL_WIDTH = 180;
+	public static final int DEFAULT_LABEL_WIDTH = 240;
 	private final Composite composite;
 
 	public LiveStockRearingWidget(Composite parent) {
