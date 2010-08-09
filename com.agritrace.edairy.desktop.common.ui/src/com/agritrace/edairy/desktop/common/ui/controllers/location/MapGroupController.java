@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.common.ui.controllers.location;
 
 import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
+import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
@@ -15,9 +16,10 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 	private IRidgetContainer container;
 
-	private ITextRidget latituteTxt;
+	private IDecimalTextRidget latituteTxt;
+	
 
-	private ITextRidget longtituteTxt;
+	private IDecimalTextRidget longtituteTxt;
 	private MapLocation map;
 
 	public MapGroupController(IRidgetContainer controller) {
@@ -27,8 +29,16 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 	@Override
 	public void configure() {
-		latituteTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LATITUDE_TEXT);
-		longtituteTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
+		latituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LATITUDE_TEXT);
+		latituteTxt.setPrecision(4);
+		latituteTxt.setSigned(true);
+		latituteTxt.setMarkNegative(false);
+
+		longtituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
+		longtituteTxt.setPrecision(4);
+		longtituteTxt.setSigned(true);
+		longtituteTxt.setMarkNegative(false);
+
 		final DoubleNumberValidator validator = new DoubleNumberValidator();
 		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
