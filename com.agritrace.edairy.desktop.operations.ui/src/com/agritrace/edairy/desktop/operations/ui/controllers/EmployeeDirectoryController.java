@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +53,13 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		nameSearchText.setDirectWriting(true);
 		nameSearchText.bindToModel(searchBean, "name");
 
+		nameSearchText.addPropertyChangeListener("text", new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				refreshTableContents();
+			}
+		});
+
 		//
 		positionSearchCombo = getRidget(IComboRidget.class, EmployeeDirectoryView.BIND_ID_FILTER_JOBFUNC);
 		positionSearchCombo.bindToModel(searchBean, "positions", String.class, null, searchBean, "position");
@@ -64,14 +73,14 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		departmentSearchCombo.setEmptySelectionItem(EMPTY_SELECTION_TEXT);
 		departmentSearchCombo.updateFromModel();
 		departmentSearchCombo.setSelection(EMPTY_SELECTION_TEXT);
-		
+
 		//
 		getNavigationNode().addAction(new IAction() {
-			
+
 			@Override
 			public void run() {
 				System.err.println("Action run.");
-				
+
 			}
 		});
 	}
@@ -93,15 +102,21 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
 		for (final Employee e : allEmployees) {
-			if (( MatchUtil.matchContains(searchBean.getName(), e.getFamilyName()) 
-					|| MatchUtil.matchContains(searchBean.getName(), e.getGivenName()) )
+			String memberName = "";
+			if (nameSearchText != null && !(nameSearchText.getText().trim().length() == 0)) {
+				memberName = nameSearchText.getText();
+			}
+			String matchText = e.getGivenName() + " " + e.getFamilyName() + " "	+ e.getAdditionalNames();
+			if (matchText.toUpperCase().contains(memberName.toUpperCase())
 					&& MatchUtil.matchEquals(searchBean.getDepartment(),e.getDepartment())
 					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction() )
-				) {
+			) {
 				filtered.add(e);
 			}
 		}
+
 		return filtered;
+
 	}
 
 	@Override
@@ -109,7 +124,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		return new EmployeeEditDialog(shell);
 	}
 
-	
+
 	@Override
 	protected void createEntity(Employee newEntity) {
 		localDairy.getEmployees().add(newEntity);

@@ -17,7 +17,6 @@ public class MapGroupController implements WidgetController<MapLocation> {
 	private IRidgetContainer container;
 
 	private IDecimalTextRidget latituteTxt;
-	
 
 	private IDecimalTextRidget longtituteTxt;
 	private MapLocation map;
@@ -33,12 +32,12 @@ public class MapGroupController implements WidgetController<MapLocation> {
 		latituteTxt.setPrecision(4);
 		latituteTxt.setSigned(true);
 		latituteTxt.setMarkNegative(false);
-
+		
 		longtituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
 		longtituteTxt.setPrecision(4);
 		longtituteTxt.setSigned(true);
 		longtituteTxt.setMarkNegative(false);
-
+		
 		final DoubleNumberValidator validator = new DoubleNumberValidator();
 		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
