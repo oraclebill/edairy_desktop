@@ -7,7 +7,6 @@ import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -33,8 +32,8 @@ public class MemberContainerWidget {
 
 	public void initGUI() {
 
-		final Combo farmCombo = UIControlsFactory.createCombo(composite, ViewWidgetId.CONTAINER_FarmCombo);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(farmCombo);
+//		final Combo farmCombo = UIControlsFactory.createCombo(composite, ViewWidgetId.CONTAINER_FarmCombo);
+//		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(farmCombo);
 
 		final Composite containerPanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(containerPanel);

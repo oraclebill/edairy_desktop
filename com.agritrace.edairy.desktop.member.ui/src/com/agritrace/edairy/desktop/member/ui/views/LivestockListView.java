@@ -60,7 +60,7 @@ public class LivestockListView extends AbstractDirectoryView {
 		gd.marginRight = 0;
 		filterPanel.setLayout(gd);
 
-		final LiveStockFilterWidget filter = new LiveStockFilterWidget(filterPanel);
+		final LiveStockFilterWidget filter = new LiveStockFilterWidget(filterPanel,true);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filter.getComposite());
 
 	}

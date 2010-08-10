@@ -69,9 +69,9 @@ public class MemberTransactionWidget {
 		buttonPanel.setLayout(new GridLayout(2, false));
 		buttonPanel.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
 
-		final Button addButton = UIControlsFactory.createButton(buttonPanel, ADD_BUTTON,
-				ViewWidgetId.TRANSACTION_ADD_BUTTON);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
+//		final Button addButton = UIControlsFactory.createButton(buttonPanel, ADD_BUTTON,
+//				ViewWidgetId.TRANSACTION_ADD_BUTTON);
+//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 
 		final Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON,
 				ViewWidgetId.TRANSACTION_VIEW_BUTTON);

@@ -43,7 +43,7 @@ public class MemberLiveStockWidgetController implements WidgetController<Object>
 
 		@Override
 		public void callback() {
-			
+
 			RegisteredAnimal newAnimal = DairyUtil.createAnimal(null, null, "", Gender.FEMALE,
 					DairyUtil.createReferenceAnimal("", ""), Purpose.get(0), RearingMode.get(0),
 					DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
@@ -214,7 +214,7 @@ public class MemberLiveStockWidgetController implements WidgetController<Object>
 		liveStockViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
 		liveStockViewButton.addListener(new ViewAction());
 		liveStockViewButton.setEnabled(false);
-//		filterController.getSearch().addListener(new FilterAction());
+		//		filterController.getSearch().addListener(new FilterAction());
 
 	}
 
@@ -286,22 +286,11 @@ public class MemberLiveStockWidgetController implements WidgetController<Object>
 	private List<RegisteredAnimal> getFilteredResult() {
 		List<RegisteredAnimal> resutls = new ArrayList<RegisteredAnimal>();
 		final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
-		final String farmName = filterController.getFarmCombo().getText();
 		final String speciesName = filterController.getSpeciesCombo().getText();
 		filterController.getStatusCombo().getText();
-		final List<Farm> farms = new ArrayList<Farm>();
-		if (inputModel instanceof Membership) {
-			farms.addAll(((Membership) inputModel).getMember().getFarms());
-			for (final Farm farm : farms) {
-				if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
-					animals.addAll(farm.getAnimals());
-				}
-			}
-		} else if (inputModel instanceof Farm) {
+		if (inputModel instanceof Farm) {
 			final Farm farm = (Farm) inputModel;
-			if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
-				animals.addAll(farm.getAnimals());
-			}
+			animals.addAll(farm.getAnimals());
 		}
 		if (!speciesName.equals("All Species")) {
 			for (final RegisteredAnimal animal : animals) {

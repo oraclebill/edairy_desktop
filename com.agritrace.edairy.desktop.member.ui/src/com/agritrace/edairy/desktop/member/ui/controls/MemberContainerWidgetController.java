@@ -1,24 +1,12 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.query.conditions.Condition;
-import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectReferenceValueCondition;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -36,7 +24,6 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
@@ -59,7 +46,7 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 
 	private IActionRidget containerViewButton;
 	private IRidgetContainer container;
-	private IComboRidget farmFilterCombo;
+//	private IComboRidget farmFilterCombo;
 	private final List<String> farmFilterList = new ArrayList<String>();
 	private final FarmRepository farmRepository;
 	private final List<Farm> farms = new ArrayList<Farm>();
@@ -131,7 +118,7 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 		containerViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.CONTAINER_Remove);
 		containerViewButton.setEnabled(false);
 		containerViewButton.addListener(new ViewContainerAction());
-		farmFilterCombo = container.getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_FarmCombo);
+//		farmFilterCombo = container.getRidget(IComboRidget.class, ViewWidgetId.CONTAINER_FarmCombo);
 	}
 
 	@Override
@@ -154,7 +141,7 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 				}
 				containers.addAll(farm.getCans());
 			}
-			containerInput.addAll(getContainerFilteredResult());
+			containerInput.addAll(containers);
 			containerTable.updateFromModel();
 		} catch (final Exception ex) {
 			ex.printStackTrace();
@@ -170,9 +157,7 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 			} else {
 				containerViewButton.setEnabled(false);
 			}
-		} else if (event.getSource() == farmFilterCombo) {
-			refreshInputList();
-		}
+		} 
 	}
 
 	@Override
@@ -200,11 +185,11 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 		containerTable.setSelectionType(ISelectableRidget.SelectionType.MULTI);
 		containerTable.addSelectionListener(this);
 
-		farmFilterCombo.bindToModel(new WritableList(farmFilterList, String.class), String.class, null,
-				new WritableValue());
-		farmFilterCombo.updateFromModel();
-		farmFilterCombo.setSelection(0);
-		farmFilterCombo.addSelectionListener(this);
+//		farmFilterCombo.bindToModel(new WritableList(farmFilterList, String.class), String.class, null,
+//				new WritableValue());
+//		farmFilterCombo.updateFromModel();
+//		farmFilterCombo.setSelection(0);
+//		farmFilterCombo.addSelectionListener(this);
 	}
 
 	private void createFarmFilterList() {
@@ -227,29 +212,29 @@ public class MemberContainerWidgetController implements WidgetController<Object>
 		}
 	}
 
-	private List<Container> getContainerFilteredResult() throws ParseException {
-		final List<Container> objs = new ArrayList<Container>();
-		SELECT select = null;
-
-		final String selectedValue = (String) farmFilterCombo.getSelection();
-		if ((selectedValue == null) || selectedValue.equals(ALL_FARM)) {
-			return containers;
-		}
-		final Condition farmName = new org.eclipse.emf.query.conditions.strings.StringValue(selectedValue);
-		final EObjectCondition farmNameCondition = new EObjectAttributeValueCondition(
-				TrackingPackage.Literals.FARM__NAME, farmName);
-		final EObjectCondition farmCondidtion = new EObjectReferenceValueCondition(
-				TrackingPackage.Literals.CONTAINER__OWNER, farmNameCondition);
-
-		select = new SELECT(new FROM(containers), new WHERE(farmCondidtion));
-
-		final IQueryResult result = select.execute();
-		for (final EObject object : result.getEObjects()) {
-			objs.add((Container) object);
-		}
-
-		return objs;
-	}
+//	private List<Container> getContainerFilteredResult() throws ParseException {
+//		final List<Container> objs = new ArrayList<Container>();
+//		SELECT select = null;
+//
+//		final String selectedValue = (String) farmFilterCombo.getSelection();
+//		if ((selectedValue == null) || selectedValue.equals(ALL_FARM)) {
+//			return containers;
+//		}
+//		final Condition farmName = new org.eclipse.emf.query.conditions.strings.StringValue(selectedValue);
+//		final EObjectCondition farmNameCondition = new EObjectAttributeValueCondition(
+//				TrackingPackage.Literals.FARM__NAME, farmName);
+//		final EObjectCondition farmCondidtion = new EObjectReferenceValueCondition(
+//				TrackingPackage.Literals.CONTAINER__OWNER, farmNameCondition);
+//
+//		select = new SELECT(new FROM(containers), new WHERE(farmCondidtion));
+//
+//		final IQueryResult result = select.execute();
+//		for (final EObject object : result.getEObjects()) {
+//			objs.add((Container) object);
+//		}
+//
+//		return objs;
+//	}
 	
 	private final class ViewContainerAction implements IActionListener {
 

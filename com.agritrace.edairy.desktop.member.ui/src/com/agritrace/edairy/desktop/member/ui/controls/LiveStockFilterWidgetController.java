@@ -142,9 +142,12 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 			farmsList.add(((Farm) inputModel).getName());
 
 		}		
-		farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
-		farmCombo.updateFromModel();
-		farmCombo.setSelection(0);
+		if(farmCombo != null){
+			farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
+			farmCombo.updateFromModel();
+			farmCombo.setSelection(0);		
+		}
+
 	}
 
 	public void clearFilters(){

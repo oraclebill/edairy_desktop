@@ -33,7 +33,7 @@ public class MemberLiveStockWidget {
 
 	public void initGUI() {
 		// filter panel
-		final LiveStockFilterWidget filter = new LiveStockFilterWidget(composite);
+		final LiveStockFilterWidget filter = new LiveStockFilterWidget(composite,false);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filter.getComposite());
 		// final Composite filterPanel =
 		// UIControlsFactory.createComposite(composite, SWT.NULL);
