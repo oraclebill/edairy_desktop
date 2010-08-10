@@ -68,9 +68,9 @@ public class MemberFarmWidget {
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 		final Button viewButton = UIControlsFactory.createButton(buttonsPanel, VIEW_BUTTON, ViewWidgetId.FARM_View);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(viewButton);
-		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON,
-				ViewWidgetId.FARM_Remove);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(removeButton);
+//		final Button removeButton = UIControlsFactory.createButton(buttonsPanel, REMOVE_BUTTON,
+//				ViewWidgetId.FARM_Remove);
+//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(removeButton);
 
 	}
 
