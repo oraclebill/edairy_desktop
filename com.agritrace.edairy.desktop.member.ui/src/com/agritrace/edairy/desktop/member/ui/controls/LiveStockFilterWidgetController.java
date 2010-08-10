@@ -172,6 +172,10 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 			farmCombo.updateFromModel();
 			farmCombo.setSelection(0);		
 		}
+		
+		if(dateSearchController != null){
+			dateSearchController.resetDates();
+		}
 	
 	}
 

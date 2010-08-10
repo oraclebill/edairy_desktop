@@ -66,10 +66,6 @@ public class LiveStockListController extends
 			"animal" };
 
 	private Membership selectedMember;
-
-	private IActionRidget viewRidget;
-	private IActionRidget addRidget;
-
 	public LiveStockListController() {
 		farmRepository = new FarmRepository();
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
@@ -94,9 +90,6 @@ public class LiveStockListController extends
 		final List<Farm> farms = new ArrayList<Farm>();
 		if (selectedMember != null) {
 			farms.addAll(selectedMember.getMember().getFarms());
-			if (addRidget != null) {
-				addRidget.setEnabled(farms.size() > 0);
-			}
 			for (final Farm farm : farms) {
 				if (farmName.equals("All Farms")
 						|| farmName.equals(farm.getName())) {
@@ -383,31 +376,14 @@ public class LiveStockListController extends
 		}
 		
 	}
-
-	/**
-	 * Open member search dialog, IActionListener for search button
-	 * 
-	 */
-	public class MemberLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
-			final int retVal = memberDialog.open();
-			if (retVal == Window.OK) {
-				selectedMember = memberDialog.getSelectedMember();
-				if (selectedMember != null) {
-					final String memberName = MemberUtil
-							.formattedMemberName(selectedMember.getMember());
-					memberNameFilter.setText(memberName);
-					filterController.setInputModel(selectedMember);
-					if (filterController.getSearch() != null) {
-						filterController.getSearch().setEnabled(true);
-					}
-				}
-
-			}
-		}
+	
+	protected void handleApplyFilterAction() {
+		// Rebind the updateFromModel to refresh the tables
+		refreshTableContents();
+		table.updateFromModel();
 	}
+
+	
 
 	@Override
 	protected void handleNewItemAction() {
@@ -511,4 +487,29 @@ public class LiveStockListController extends
 		}
 	}
 
+	
+	/**
+	 * Open member search dialog, IActionListener for search button
+	 * 
+	 */
+	public class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final int retVal = memberDialog.open();
+			if (retVal == Window.OK) {
+				selectedMember = memberDialog.getSelectedMember();
+				if (selectedMember != null) {
+					final String memberName = MemberUtil
+							.formattedMemberName(selectedMember.getMember());
+					memberNameFilter.setText(memberName);
+					filterController.setInputModel(selectedMember);
+					if (filterController.getSearch() != null) {
+						filterController.getSearch().setEnabled(true);
+					}
+				}
+
+			}
+		}
+	}
 }
