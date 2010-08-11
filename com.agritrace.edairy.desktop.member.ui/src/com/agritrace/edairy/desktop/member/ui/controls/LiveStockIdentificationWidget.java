@@ -3,8 +3,8 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.List;
@@ -47,12 +47,12 @@ public class LiveStockIdentificationWidget {
 //		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(birthDayBtn);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Acquision :"));
-		final Combo acquisionTypeCombo = UIControlsFactory.createCombo(composite,
+		final CCombo acquisionTypeCombo = UIControlsFactory.createCCombo(composite,
 				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_TYPE);
 		fieldFactory.span(2, 1).applyTo(acquisionTypeCombo);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "ID Type :"));
-		final Combo idTypeCombo = UIControlsFactory.createCombo(composite,
+		final CCombo idTypeCombo = UIControlsFactory.createCCombo(composite,
 				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_TYPE);
 		fieldFactory.span(2, 1).applyTo(idTypeCombo);
 

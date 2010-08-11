@@ -6,6 +6,7 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -47,7 +48,7 @@ public class EmployeeDirectoryView extends AbstractDirectoryView {
 		}
 		{
 			UIControlsFactory.createLabel(filterGroup, "Department");
-			final Combo dept = UIControlsFactory.createCombo(filterGroup);
+			final CCombo dept = UIControlsFactory.createCCombo(filterGroup);
 			dept.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dept);
 			addUIControl(dept, BIND_ID_FILTER_DEPT);

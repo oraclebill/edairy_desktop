@@ -73,7 +73,11 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		});
 
 		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
-		deleteAction.setVisible(false);
+		Object actionType = getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
+		if(actionType != null && new Integer(actionType.toString()).intValue() == AbstractDirectoryController.ACTION_NEW){
+			deleteAction.setVisible(false);
+
+		}
 		deleteAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {

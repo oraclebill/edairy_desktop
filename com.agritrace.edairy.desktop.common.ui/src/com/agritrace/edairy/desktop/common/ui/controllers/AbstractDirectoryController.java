@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
@@ -339,7 +340,11 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			// todo: ensure data sent to dialog is not modified...
 			// getRepository().load((T)
 			// dialog.getController().getContext(EDITED_OBJECT_ID));
-		} else {
+		} else if (DialogConstants.ACTION_DELETE == returnCode){
+			if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Confirmation" , "Do you want to delete the selected entity ?") ){
+				deleteEntity(selectedObject);
+			}
+		}else {
 			throw new IllegalStateException("Invalid response from dialog: " + returnCode);
 		}
 		refreshTableContents();
@@ -348,6 +353,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	protected void updateEntity(T updateableEntity) {
 		getRepository().update(updateableEntity);		
+	}
+	
+	protected void deleteEntity(T deletableEntity){
+		getRepository().delete(deletableEntity);
 	}
 
 	protected void itemSelected(SelectionEvent event) {

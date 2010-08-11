@@ -3,8 +3,8 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -34,15 +34,15 @@ public class LiveStockRearingWidget {
 				.grab(true, false);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Feeding and Milking Habits (per day) :"));
-		final Combo habitsCombo = UIControlsFactory.createCombo(composite, ViewWidgetId.LIVESTOCK_REARING_HABITS);
+		final CCombo habitsCombo = UIControlsFactory.createCCombo(composite, ViewWidgetId.LIVESTOCK_REARING_HABITS);
 		fieldFactory.applyTo(habitsCombo);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Farming Type :"));
-		final Combo typeCombo = UIControlsFactory.createCombo(composite, ViewWidgetId.LIVESTOCK_REARING_FAMILY);
+		final CCombo typeCombo = UIControlsFactory.createCCombo(composite, ViewWidgetId.LIVESTOCK_REARING_FAMILY);
 		fieldFactory.applyTo(typeCombo);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Feed Type :"));
-		final Combo feedCombo = UIControlsFactory.createCombo(composite, ViewWidgetId.LIVESTOCK_REARING_FEED);
+		final CCombo feedCombo = UIControlsFactory.createCCombo(composite, ViewWidgetId.LIVESTOCK_REARING_FEED);
 		fieldFactory.applyTo(feedCombo);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Feed Brand :"));

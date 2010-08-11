@@ -5,10 +5,10 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -69,19 +69,19 @@ public class ViewLiveStockDialog extends BaseDialogView {
 		final Label memberIdLabel = UIControlsFactory.createLabel(headerPanel, "Farm:");
 		labelFactory.applyTo(memberIdLabel);
 
-		final Combo farmCombo = UIControlsFactory.createCombo(headerPanel, ViewWidgetId.LIVE_STOCK_FARM_COMBO);
+		final CCombo farmCombo = UIControlsFactory.createCCombo(headerPanel, ViewWidgetId.LIVE_STOCK_FARM_COMBO);
 		fieldFactory.applyTo(farmCombo);
 
 		final Label purposeLabel = UIControlsFactory.createLabel(headerPanel, "Purpose:");
 		labelFactory.applyTo(purposeLabel);
 
-		final Combo purposeCombo = UIControlsFactory.createCombo(headerPanel, ViewWidgetId.LIVE_STOCK_PURPOSE_COMBO);
+		final CCombo purposeCombo = UIControlsFactory.createCCombo(headerPanel, ViewWidgetId.LIVE_STOCK_PURPOSE_COMBO);
 		fieldFactory.applyTo(purposeCombo);
 
 		final Label statusLabel = UIControlsFactory.createLabel(headerPanel, "Status:");
 		labelFactory.applyTo(statusLabel);
 
-		final Combo statusCombo = UIControlsFactory.createCombo(headerPanel, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
+		final CCombo statusCombo = UIControlsFactory.createCCombo(headerPanel, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
 		fieldFactory.applyTo(statusCombo);
 
 	}

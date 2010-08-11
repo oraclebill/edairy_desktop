@@ -3,9 +3,9 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
@@ -39,11 +39,11 @@ public class LiveStockGeneralWidget {
 		final GridDataFactory fieldFactory = GridDataFactory.fillDefaults().hint(DEFAULT_FIELD_WIDTH, SWT.DEFAULT);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Type/Species :"));
-		final Combo typeCombo = UIControlsFactory.createCombo(leftPanel, ViewWidgetId.LIVESTOCK_GENERAL_TYPE_COBMO);
+		final CCombo typeCombo = UIControlsFactory.createCCombo(leftPanel, ViewWidgetId.LIVESTOCK_GENERAL_TYPE_COBMO);
 		fieldFactory.span(2, 1).applyTo(typeCombo);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Primary Breed :"));
-		final Combo breedCombo = UIControlsFactory.createCombo(leftPanel, ViewWidgetId.LIVESTOCK_GENERAL_BREED_COBMO);
+		final CCombo breedCombo = UIControlsFactory.createCCombo(leftPanel, ViewWidgetId.LIVESTOCK_GENERAL_BREED_COBMO);
 		fieldFactory.span(2, 1).applyTo(breedCombo);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Gender :"));
@@ -85,12 +85,12 @@ public class LiveStockGeneralWidget {
 		rightPanel.setLayout(new GridLayout(3, false));
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(rightPanel, "Sire Species :"));
-		final Combo sireSpecies = UIControlsFactory
-				.createCombo(rightPanel, ViewWidgetId.LIVESTOCK_GENERAL_SIRE_SPECIES);
+		final CCombo sireSpecies = UIControlsFactory
+				.createCCombo(rightPanel, ViewWidgetId.LIVESTOCK_GENERAL_SIRE_SPECIES);
 		fieldFactory.span(2, 1).applyTo(sireSpecies);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(rightPanel, "Sire Breed :"));
-		final Combo sireBreed = UIControlsFactory.createCombo(rightPanel, ViewWidgetId.LIVESTOCK_GENERAL_SIRE_BREED);
+		final CCombo sireBreed = UIControlsFactory.createCCombo(rightPanel, ViewWidgetId.LIVESTOCK_GENERAL_SIRE_BREED);
 		fieldFactory.span(2, 1).applyTo(sireBreed);
 
 	}

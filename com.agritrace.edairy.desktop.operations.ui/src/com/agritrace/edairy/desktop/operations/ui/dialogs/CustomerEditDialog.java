@@ -7,10 +7,10 @@ import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -85,7 +85,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		addUIControl(companyNameText, CustomerBindingConstants.BIND_ID_COMPANY_NAME);
 
 		UIControlsFactory.createLabel(composite, "Status");
-		final Combo statusCombo = UIControlsFactory.createCombo(composite);
+		final CCombo statusCombo = UIControlsFactory.createCCombo(composite);
 		statusCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(statusCombo);
 		addUIControl(statusCombo, CustomerBindingConstants.BIND_ID_CUSTOMER_STATUS);
@@ -103,7 +103,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		addUIControl(phoneText, CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
 
 		UIControlsFactory.createLabel(composite, "Category");
-		final Combo typeCombo = UIControlsFactory.createCombo(composite);
+		final CCombo typeCombo = UIControlsFactory.createCCombo(composite);
 		typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 		GridDataFactory.swtDefaults().grab(true, false).align(SWT.FILL, SWT.BEGINNING).applyTo(typeCombo);
 		addUIControl(typeCombo, CustomerBindingConstants.BIND_ID_CUSTOMERTYPE);

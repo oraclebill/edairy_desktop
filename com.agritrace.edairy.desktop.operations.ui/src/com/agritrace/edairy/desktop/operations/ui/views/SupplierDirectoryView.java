@@ -4,7 +4,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
@@ -40,7 +40,7 @@ public class SupplierDirectoryView extends AbstractDirectoryView {
 
 		// Status
 		UIControlsFactory.createLabel(parent, "Status");
-		final Combo status = UIControlsFactory.createCombo(parent);
+		final CCombo status = UIControlsFactory.createCCombo(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(status);
 		addUIControl(status, BIND_ID_FILTER_STATUS);
 

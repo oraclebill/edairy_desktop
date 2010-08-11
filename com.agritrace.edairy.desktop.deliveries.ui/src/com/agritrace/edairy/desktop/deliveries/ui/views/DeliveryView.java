@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -24,7 +25,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
@@ -172,7 +172,7 @@ public class DeliveryView extends SubModuleView {
 		final Label driverLabel = new Label(upperPanel, SWT.NULL);
 		driverLabel.setText("Driver:");
 
-		final Combo driverBox = new Combo(upperPanel, SWT.NULL);
+		final CCombo driverBox = new CCombo(upperPanel, SWT.NULL);
 		driverBox.setItems(new String[] { "Doe John", "Jackson Janet" });
 		driverBox.select(0);
 		driverBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -180,7 +180,7 @@ public class DeliveryView extends SubModuleView {
 		final Label vehicle = new Label(upperPanel, SWT.NULL);
 		vehicle.setText("Vehicle:");
 
-		final Combo vehicleBox = new Combo(upperPanel, SWT.NULL);
+		final CCombo vehicleBox = new CCombo(upperPanel, SWT.NULL);
 		vehicleBox.setItems(new String[] { "NH46789", "VI5678" });
 		vehicleBox.select(0);
 		vehicleBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
@@ -188,7 +188,7 @@ public class DeliveryView extends SubModuleView {
 		final Label driveFrom = new Label(upperPanel, SWT.NULL);
 		driveFrom.setText("Drive To:");
 
-		final Combo driveFromBox = new Combo(upperPanel, SWT.NULL);
+		final CCombo driveFromBox = new CCombo(upperPanel, SWT.NULL);
 		driveFromBox.setItems(new String[] { "Green Farm", "Harvest Farm" });
 		driveFromBox.select(0);
 		driveFromBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));

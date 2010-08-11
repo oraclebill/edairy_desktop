@@ -4,9 +4,10 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -52,7 +53,7 @@ public class ViewContainerDialog extends BaseDialogView {
 //		containerCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
-		final Combo measureCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_UNIT);
+		final CCombo measureCombo = UIControlsFactory.createCCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_UNIT);
 		measureCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Capacity:");
@@ -62,7 +63,7 @@ public class ViewContainerDialog extends BaseDialogView {
 		capacityText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
 		UIControlsFactory.createLabel(dialogArea, "Farm:");
-		final Combo farmCombo = UIControlsFactory.createCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_FARM);
+		final CCombo farmCombo = UIControlsFactory.createCCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_FARM);
 		farmCombo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		
 		final Label memberNameLabel = UIControlsFactory.createLabel(dialogArea, "Member Name :");

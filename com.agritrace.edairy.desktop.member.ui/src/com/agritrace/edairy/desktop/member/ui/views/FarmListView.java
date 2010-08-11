@@ -5,8 +5,8 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
@@ -47,7 +47,7 @@ public class FarmListView extends AbstractDirectoryView {
 
 		UIControlsFactory.createLabel(filterGroup, FILTER_GROUP_FARM_LOOKUP);
 		// farm combo
-		final Combo farmCombo = UIControlsFactory.createCombo(filterGroup, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
+		final CCombo farmCombo = UIControlsFactory.createCCombo(filterGroup, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).hint(235, -1).span(2, 1).grab(false, false)
 				.applyTo(farmCombo);
 	}

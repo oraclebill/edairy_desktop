@@ -2,9 +2,9 @@ package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -90,7 +90,7 @@ public class AddressGroupWidget {
 
 		// province
 		UIControlsFactory.createLabel(addressPanel, PROVINCE_LABEL);
-		final Combo comboProvince = UIControlsFactory.createCombo(addressPanel, ViewWidgetId.PROVINCE_TXT);
+		final CCombo comboProvince = UIControlsFactory.createCCombo(addressPanel, ViewWidgetId.PROVINCE_TXT);
 		comboProvince.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 
 		// PostalCode

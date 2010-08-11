@@ -3,8 +3,8 @@ package com.agritrace.edairy.desktop.member.ui.controls;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
@@ -39,16 +39,16 @@ public class LiveStockFilterWidget {
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(filterPanel2);
 
 		if(filterFarm){
-			final Combo farmCombo = UIControlsFactory.createCombo(filterPanel2, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
+			final CCombo farmCombo = UIControlsFactory.createCCombo(filterPanel2, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmCombo);	
 		}
 		
 
-		final Combo speciesText = UIControlsFactory.createCombo(filterPanel2,
+		final CCombo speciesText = UIControlsFactory.createCCombo(filterPanel2,
 				ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(speciesText);
 
-		final Combo statusText = UIControlsFactory.createCombo(filterPanel2,
+		final CCombo statusText = UIControlsFactory.createCCombo(filterPanel2,
 				ViewWidgetId.LIVESTOCK_ContainerStatusFilter);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(statusText);
 

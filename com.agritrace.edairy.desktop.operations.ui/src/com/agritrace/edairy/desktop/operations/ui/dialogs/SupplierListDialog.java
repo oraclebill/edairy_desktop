@@ -6,10 +6,10 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
@@ -91,7 +91,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 
 		// Status
 		UIControlsFactory.createLabel(comonComp, "Status");
-		final Combo statusCombo = UIControlsFactory.createCombo(comonComp);
+		final CCombo statusCombo = UIControlsFactory.createCCombo(comonComp);
 		factory.copy().applyTo(statusCombo);
 		addUIControl(statusCombo, BIND_ID_SUPPLIER_STATUS);
 

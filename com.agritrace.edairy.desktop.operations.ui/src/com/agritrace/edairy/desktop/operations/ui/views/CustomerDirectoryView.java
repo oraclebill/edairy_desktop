@@ -5,9 +5,9 @@ import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
@@ -39,13 +39,13 @@ public class CustomerDirectoryView extends AbstractDirectoryView {
 		addUIControl(companyName, BIND_ID_FILTER_COMPANYNAME);
 
 		UIControlsFactory.createLabel(filterGroup, "Type");
-		final Combo typeCombo = UIControlsFactory.createCombo(filterGroup);
+		final CCombo typeCombo = UIControlsFactory.createCCombo(filterGroup);
 		typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(typeCombo);
 		addUIControl(typeCombo, BIND_ID_FILTER_CUSTOMERTYPE);
 
 		UIControlsFactory.createLabel(filterGroup, "Status");
-		final Combo status = UIControlsFactory.createCombo(filterGroup);
+		final CCombo status = UIControlsFactory.createCCombo(filterGroup);
 		status.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(status);
 		addUIControl(status, BIND_ID_FILTER_STATUS);

@@ -1,10 +1,10 @@
 package com.agritrace.edairy.desktop.common.ui.controls.location;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -36,12 +36,12 @@ public class PostalLocationGroup extends Group {
 			"Trans Nzoia District (Kitale)", "Turkana District (Lodwar)", "Uasin Gishu District (Eldoret)",
 			"Vihiga District (Vihiga)", "Wajir District (Wajir)", "West Pokot District (Kapenguria)" };
 
-	private Combo districtCombo;
-	private Combo divisionCombo;
-	private Combo provinceCombo;
+	private CCombo districtCombo;
+	private CCombo divisionCombo;
+	private CCombo provinceCombo;
 	private Text txtAddress;
 	private Text txtEstate;
-	private Combo txtLocation;
+	private CCombo txtLocation;
 	private Text txtPostalCode;
 	private Text txtSection;
 	private Text txtSubLocation;
@@ -98,7 +98,7 @@ public class PostalLocationGroup extends Group {
 
 		final Label label_5 = new Label(addressArea, SWT.NONE);
 		label_5.setText("Location");
-		txtLocation = new Combo(addressArea, SWT.READ_ONLY);
+		txtLocation = new CCombo(addressArea, SWT.READ_ONLY);
 		txtLocation.setItems(new String[] { "Gatamaiyu\t", "Gitithia\t", "Kamae\t", "Kamburu\t", "Kijabe\t",
 				"Kinale\t", "Kirenga\t", "Lari\t", "Nyanduma\t" });
 		txtLocation.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
@@ -106,7 +106,7 @@ public class PostalLocationGroup extends Group {
 
 		final Label label_6 = new Label(addressArea, SWT.NONE);
 		label_6.setText("Division");
-		divisionCombo = new Combo(addressArea, SWT.READ_ONLY);
+		divisionCombo = new CCombo(addressArea, SWT.READ_ONLY);
 		divisionCombo.setItems(new String[] { "Githunguri", "Kiambaa", "Kikuyu", "Lari\t", "Limuru" });
 		divisionCombo.select(1);
 		// divisionCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
@@ -114,7 +114,7 @@ public class PostalLocationGroup extends Group {
 
 		final Label label_7 = new Label(addressArea, SWT.NONE);
 		label_7.setText("District");
-		districtCombo = new Combo(addressArea, SWT.READ_ONLY);
+		districtCombo = new CCombo(addressArea, SWT.READ_ONLY);
 		districtCombo.setItems(DISTRICTS);
 		districtCombo.select(1);
 		// districtCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
@@ -122,7 +122,7 @@ public class PostalLocationGroup extends Group {
 
 		final Label label_8 = new Label(addressArea, SWT.NONE);
 		label_8.setText("Province");
-		provinceCombo = new Combo(addressArea, SWT.READ_ONLY);
+		provinceCombo = new CCombo(addressArea, SWT.READ_ONLY);
 		provinceCombo.setItems(new String[] { "Central", "Coast", "Eastern", "Nairobi", "North Eastern", "Nyanza",
 				"Rift Valley", "Western" });
 		provinceCombo.select(1);
