@@ -18,7 +18,7 @@ import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 public abstract class BaseDialogView extends AbstractDialogView {
 
-	public static final int DEFAULT_FIELD_WIDTH = 150;
+	public static final int DEFAULT_FIELD_WIDTH = 250;
 	public static final int DEFAULT_LABEL_WIDTH = 90;
 
 	private Button cancelButton;

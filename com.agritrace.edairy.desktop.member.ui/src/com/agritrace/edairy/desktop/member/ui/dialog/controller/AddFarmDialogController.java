@@ -50,7 +50,6 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 
 	// upper panel fields
 	private ILabelRidget farmNameRidget;
-
 	private ITextRidget farmNameTextRidget;
 
 	// live stock tab
@@ -152,7 +151,6 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 		farmIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_ID);
 		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
 		memberIdRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_ID);
-
 	}
 
 	protected void updateUpperPanelBinding() {

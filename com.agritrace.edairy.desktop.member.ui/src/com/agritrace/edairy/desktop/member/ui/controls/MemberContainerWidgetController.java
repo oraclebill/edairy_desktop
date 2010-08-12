@@ -152,6 +152,8 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 			final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
 			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
 			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, farms);
+			memberDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
+
 			if (inputModel instanceof Membership) {
 				memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);
 			} else if (inputModel instanceof Farm) {
@@ -179,6 +181,8 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, selectedNode);
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
+		dialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
+
 		if (inputModel instanceof Membership) {
 			dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);
 		} else if (inputModel instanceof Farm) {

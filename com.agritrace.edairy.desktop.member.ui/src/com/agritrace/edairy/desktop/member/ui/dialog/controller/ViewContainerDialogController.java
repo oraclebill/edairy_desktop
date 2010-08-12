@@ -10,6 +10,7 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.marker.ErrorMessageMarker;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -28,6 +29,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
@@ -60,7 +62,11 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 	IComboRidget unitCombo;
 	
-	ILabelRidget memberNameRidget;
+	ITextRidget memberNameRidget;
+	
+	IActionRidget memberLookupBtn;
+	
+	private boolean enableLookupBtn;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -68,7 +74,6 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		super.configureRidgets();
 
 		idLabel = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_CONTAINER_ID);
-		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.VIEW_FARM_MEMBER_NAME);
 		typeCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_TYPE);
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.VIEW_CONTAINER_FARM);
 		farmCombo.setMandatory(true);
@@ -80,6 +85,19 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		okAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_SAVE);
 		okAction.setEnabled(true);
 
+		memberNameRidget = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
+		memberNameRidget.setOutputOnly(true);
+		memberNameRidget.setMandatory(true);
+		memberNameRidget.setDirectWriting(true);
+		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
+		memberLookupBtn.addListener(new MemberLookupAction());
+		
+		String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
+		if(enableLookup != null && enableLookup.equalsIgnoreCase("false")){
+			enableLookupBtn = false;
+		}
+		memberLookupBtn.setVisible(enableLookupBtn);
+
 		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
 		Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
@@ -90,8 +108,11 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			selectedMember =(Farmer) selected;
 
 		}
+		
+		if(selectedMember != null){
+			memberNameRidget.setText( MemberUtil.formattedMemberName(selectedMember));
+		}
 	
-
 		if (selectedContainer != null) {
 			if (selectedContainer.getContainerId() != null) {
 				idLabel.setText(selectedContainer.getContainerId().toString());
@@ -143,14 +164,6 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			unitCombo.addSelectionListener(this);
 			unitCombo.setSelection(selectedContainer.getMeasureType());
 			
-			 if (memberNameRidget != null){
-				 if(selectedMember == null ){
-						memberNameRidget.setText("<New Member>");
-					}else {
-						memberNameRidget.setText(MemberUtil.formattedMemberName(selectedMember));
-					}
-			 }
-			
 
 //			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
 //					new WritableValue());
@@ -175,6 +188,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		} else if (event.getSource() == farmCombo) {
 			if (selectedContainer != null) {
 				selectedContainer.setOwner((Farm) farmCombo.getSelection());
+				enableSaveButton(validate());
 			}
 		}
 
@@ -209,6 +223,31 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 				getWindowRidget().dispose();
 			}
 		});
+	}
+	
+	/**
+	 * Open member search dialog, IActionListener for search button
+	 * 
+	 */
+	public class MemberLookupAction implements IActionListener {
+		@Override
+		public void callback() {
+			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final int retVal = memberDialog.open();
+			if (retVal == Window.OK) {
+				Membership memberShip = memberDialog.getSelectedMember();
+				if (memberShip != null) {
+					final String memberName = MemberUtil.formattedMemberName(memberShip.getMember());
+					memberNameRidget.setText(memberName);
+					farmList.clear();
+					farmList.addAll(memberShip.getMember().getFarms());
+					farmCombo.updateFromModel();
+					farmCombo.setSelection(farmCombo.getEmptySelectionItem());
+					enableSaveButton(false);
+				}
+
+			}
+		}
 	}
 
 }

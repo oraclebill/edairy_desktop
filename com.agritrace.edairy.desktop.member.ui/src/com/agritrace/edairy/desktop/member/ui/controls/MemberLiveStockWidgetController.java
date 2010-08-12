@@ -146,11 +146,17 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 		newAnimal.setDateOfBirth(new Date());
 		final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(Display.getDefault().getActiveShell());
 		aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
+		aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
+
 		final List<Farm> farmList = new ArrayList<Farm>();
 		if (inputModel instanceof Membership) {
 			farmList.addAll(((Membership) inputModel).getMember().getFarms());
+			aniamlDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);
+
 		} else if (inputModel instanceof Farm) {
 			farmList.add((Farm) inputModel);
+			aniamlDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, ((Farm) inputModel).getOwner());
+
 		}
 		aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
 				farmList);
@@ -175,10 +181,17 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 			final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED,
 					selectedAnimal);
+			aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
+			
 			final List<Farm> farmList = new ArrayList<Farm>();
 			farmList.add(selectedAnimal.getLocation());
 			aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
 					farmList);
+			if (inputModel instanceof Membership) {
+				aniamlDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);
+			} else if (inputModel instanceof Farm) {
+				aniamlDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, ((Farm) inputModel).getOwner());
+			}
 
 			final int returnCode = aniamlDialog.open();
 			final Farm farmLocation = selectedAnimal.getLocation();

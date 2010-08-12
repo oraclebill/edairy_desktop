@@ -57,13 +57,11 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	private IActionRidget searchButton;
 
 	//repository
-	private final IMemberRepository memberRepository;
 	private Membership selectedMember;
 
 	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
 
 	public ContainerListViewController() {
-		memberRepository = DairyRepository.getInstance();
 		farmRepository = new FarmRepository();
 		setEClass(TrackingPackage.Literals.CONTAINER);
 		for (int i = 0; i < containerPropertyNames.length; i++) {
@@ -172,14 +170,14 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	}
 
 	private void updateFarmCombo() {
+		farmNames.clear();
+		farmNames.add(ALL_FARM);
 		if (selectedMember != null) {
 			// selectedMember =
 			// memberRepository.findByKey(selectedMember.getMemberId());
 			farmCombofarms.clear();
 			if (farmCombo != null) {
 				final String currentSelection = farmCombo.getText();
-				farmNames.clear();
-				farmNames.add(ALL_FARM);
 				final List<Farm> farms = selectedMember.getMember().getFarms();
 				for (final Farm farm : farms) {
 					farmNames.add(farm.getName());
@@ -194,9 +192,10 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 					}
 
 				}
-				// select the "All Farm" by default
-				farmCombo.setSelection(0);
+
 			}
+			// select the "All Farm" by default
+			farmCombo.setSelection(0);
 		}
 	}
 
@@ -221,23 +220,29 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	protected List<ContainerListViewTableNode> getFilteredTableResult() {
 		final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
+		final List<Farm> farms = new ArrayList<Farm>();
 		if (selectedMember != null) {
-			// selectedMember =
-			// memberRepository.findByKey(selectedMember.getMemberId());
-			if (farmCombo != null) {
-				final String farmName = farmCombo.getText();
-				if (!farmName.isEmpty()) {
-					final List<Farm> farms = selectedMember.getMember().getFarms();
-					for (final Farm farm : farms) {
-						if (farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
-							final List<Container> containerList = farm.getCans();
-							for (final Container container : containerList) {
-								tableInput.add(new ContainerListViewTableNode(selectedMember, container));
-							}
+			farms .addAll(selectedMember.getMember().getFarms());
+		}else{
+			farms.addAll(farmRepository.all());
+		}
+		if (farmCombo != null) {
+			final String farmName = farmCombo.getText();
+			for (final Farm farm : farms) {
+				if (farmName.isEmpty()||farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
+					final List<Container> containerList = farm.getCans();
+					for (final Container container : containerList) {
+						if(selectedMember != null){
+							results.add(new ContainerListViewTableNode(selectedMember, container));	
+						}else if( container.getOwner().getOwner().eContainer() instanceof Membership){
+							Membership member = (Membership) container.getOwner().getOwner().eContainer();
+							results.add(new ContainerListViewTableNode(member, container));
 						}
+
 					}
 				}
 			}
+
 		}
 
 		return results;
@@ -255,12 +260,15 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
-				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
-				memberNameFilter.setText(memberName);
-				updateFarmCombo();
-				if (searchButton != null) {
-					searchButton.setEnabled(true);
+				if(selectedMember != null){
+					final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
+					memberNameFilter.setText(memberName);
+					updateFarmCombo();
+					if (searchButton != null) {
+						searchButton.setEnabled(true);
+					}
 				}
+				
 			}
 		}
 	}
@@ -271,27 +279,26 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		final AddContainerDialog memberDialog = new AddContainerDialog(AbstractDirectoryController.getShell());
 		final List<Farm> inputFarms = new ArrayList<Farm>();
 		final int index = farmCombo.getSelectionIndex();
-		if (index != -1) {
-			if (index == 0) {
-				inputFarms.addAll(farmCombofarms);
-			} else {
-				inputFarms.add(farmCombofarms.get(index - 1));
-			}
-			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
-			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-			if (selectedMember != null) {
-				memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedMember);
-			}
-
-			final int returnCode = memberDialog.open();
-			if (returnCode == AbstractWindowController.OK) {
-				container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-				container.getOwner().getCans().add(container);
-				farmRepository.update(container.getOwner());
-				memberRepository.update(selectedMember);
-				refreshTableContents();
-			}
+		if (index == 0 || index == -1) {
+			inputFarms.addAll(farmCombofarms);
+		} else {
+			inputFarms.add(farmCombofarms.get(index - 1));
 		}
+		memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
+		memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
+		if (selectedMember != null) {
+			memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedMember);
+		}
+
+		final int returnCode = memberDialog.open();
+		if (returnCode == AbstractWindowController.OK) {
+			container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+			container.getOwner().getCans().add(container);
+			farmRepository.save(container.getOwner());
+			//				memberRepository.update(selectedMember);
+			refreshTableContents();
+		}
+
 
 	}
 
@@ -304,14 +311,12 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, selectedNode.getContainer());
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-		if (selectedMember != null) {
-			dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedMember);
-		}
+		dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedNode.getMembership());
+	
 		final int returnCode = dialog.open();
 		if (returnCode == AbstractWindowController.OK) {
 			final Container container = (Container) dialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 			farmRepository.update(container.getOwner());
-			memberRepository.update(selectedMember);
 			refreshTableContents();
 		} else if (returnCode == 2) {
 			// confirm for delete
@@ -320,7 +325,6 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 					final Farm farm = selectedNode.getContainer().getOwner();
 					farm.getCans().remove(selectedNode.getContainer());
 					farmRepository.update(farm);
-					memberRepository.update(selectedNode.getMembership());
 					refreshTableContents();
 				}
 			}

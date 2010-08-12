@@ -13,5 +13,8 @@ public class ControllerContextConstant {
 	public static String LIVESTOCK_DIALOG_CONTXT_FARM_LIST = "farmList";
 
 	public static String MEMBER_DIALOG_CONTXT_SELECTED_MEMBER = "selectedMember";
+	
+	public static String ENABLE_LOOKUP = "lookup";
+
 
 }
