@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -23,7 +24,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -36,7 +36,6 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class ContainerListViewController extends BasicDirectoryController<Container> {
 
@@ -90,6 +89,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				return null;
 			}
 		});
+		table.setColumnSortable(0,true);
+		table.setComparator(0,new ContainerListTableComparator(0));
 		// memberName
 		table.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
@@ -106,6 +107,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				return null;
 			}
 		});
+		table.setColumnSortable(1,true);
+		table.setComparator(1,new ContainerListTableComparator(1));
 		table.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
@@ -118,6 +121,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				return null;
 			}
 		});
+		table.setColumnSortable(2,true);
+		table.setComparator(2,new ContainerListTableComparator(2));
 		table.setColumnFormatter(idx++, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
@@ -130,6 +135,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				return null;
 			}
 		});
+		table.setColumnSortable(3,true);
+		table.setComparator(3,new ContainerListTableComparator(3));
 		// containerListTable.setColumnFormatter(4, new ColumnFormatter() {
 		// @Override
 		// public String getText(Object element) {
@@ -354,5 +361,57 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	protected List<Container> getFilteredResult() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private class ContainerListTableComparator implements Comparator<Object> {
+		int columnIndex;
+
+		ContainerListTableComparator(int index) {
+			this.columnIndex = index;
+		}
+
+		@Override
+		public int compare(Object o1, Object o2) {
+			if (o1 instanceof Membership && o2 instanceof Membership || o1 instanceof Container && o2 instanceof Container) {
+				switch (columnIndex) {
+				case 0:
+					return ((Membership) o1).getMemberId().compareTo(((Membership) o2).getMemberId());
+				case 1:
+					Membership node1 = (Membership) o1;
+					Membership node2 = (Membership) o2;
+					final Person member1 = node1.getMember();
+					final Person member2 = node2.getMember();
+					if (member1 != null && member2 != null) {
+						String name1 = member1.getFamilyName() + "," + member1.getGivenName();
+						String name2 = member2.getFamilyName() + "," + member2.getGivenName();
+						return name1.compareTo(name2);
+					}
+
+					return 0;
+				case 2:
+					final Farm farm1 = ((Container) o1).getOwner();
+					final Farm farm2 = ((Container) o2).getOwner();
+					if (farm1 != null && farm2 != null) {
+						String name1 = farm1.getName();
+						String name2 = farm2.getName();
+						if (name1 != null && name2 != null) {
+							return name1.compareTo(name2);
+						}
+					}
+
+					return 0;
+				case 3:
+					String number1 = ((Container) o1).getTrackingNumber();
+					String number2 = ((Container) o2).getTrackingNumber();
+					if (number1 != null && number2 != null) {
+						return number1.compareTo(number2);
+					}
+				default:
+					return 0;
+				}
+			}
+			return 0;
+		}
+
 	}
 }
