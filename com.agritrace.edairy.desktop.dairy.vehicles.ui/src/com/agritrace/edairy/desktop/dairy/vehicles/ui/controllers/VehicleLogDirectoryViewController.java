@@ -8,6 +8,7 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -28,7 +29,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 	private final VehicleSearchBean searchBean = new VehicleSearchBean();
 	private VehicleRepository vehicleRepository = new VehicleRepository();
 	private final IDairyRepository dairyRepository =  DairyRepository.getInstance();
-
+	private final Dairy localDairy = dairyRepository.getLocalDairy();
 	private IComboRidget vehicleTypeCombo;
 	private IComboRidget driverCombo;
 
@@ -103,5 +104,10 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 		vehicleTypeCombo.setSelection(vehicleTypeCombo.getEmptySelectionItem());
 	}
 
-
+	@Override
+	protected void deleteEntity(Vehicle deletableEntity) {
+		localDairy.getVehicles().remove(deletableEntity);
+		super.deleteEntity(deletableEntity);
+		dairyRepository.save(localDairy);
+	}
 }

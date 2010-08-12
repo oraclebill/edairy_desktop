@@ -142,4 +142,11 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		positionSearchCombo.setSelection(positionSearchCombo.getEmptySelectionItem());
 		departmentSearchCombo.setSelection(departmentSearchCombo.getEmptySelectionItem());
 	}
+
+	@Override
+	protected void deleteEntity(Employee deletableEntity) {
+		localDairy.getEmployees().remove(deletableEntity);
+		dairyRepo.save(localDairy);
+
+	}
 }

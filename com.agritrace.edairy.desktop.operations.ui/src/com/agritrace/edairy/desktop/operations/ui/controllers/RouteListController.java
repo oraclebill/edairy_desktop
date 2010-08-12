@@ -110,5 +110,13 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	@Override protected void createEntity(Route newRoute) {
 		dairyRepo.addRoute(newRoute);
 	}
+
+	@Override
+	protected void deleteEntity(Route deletableEntity) {
+		if(deletableEntity != null){
+			dairyRepo.deleteRoute(deletableEntity);	
+		}
+		
+	}
 	
 }

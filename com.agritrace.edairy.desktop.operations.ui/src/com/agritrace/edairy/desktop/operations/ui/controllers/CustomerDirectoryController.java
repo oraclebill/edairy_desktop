@@ -89,9 +89,9 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 	protected void createEntity(Customer newEntity) {
 		DairyRepository.getInstance().getLocalDairy().getCustomers().add(newEntity);
 		DairyRepository.getInstance().save();
-//		getRepository().saveNew(newEntity);
+		//		getRepository().saveNew(newEntity);
 	}
-	
+
 	@Override
 	protected List<Customer> getFilteredResult() {
 		final List<Customer> filtered = new ArrayList<Customer>();
@@ -120,5 +120,14 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 		companyNameSearchText.setText("");
 		customerTypeSearchCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
 		customerStatusCombo.setSelection(customerStatusCombo.getEmptySelectionItem());
+	}
+
+	@Override
+	protected void deleteEntity(Customer deletableEntity) {
+		if(deletableEntity != null){
+			DairyRepository.getInstance().getLocalDairy().getCustomers().remove(deletableEntity);
+			super.deleteEntity(deletableEntity);
+			DairyRepository.getInstance().save();
+		}
 	}
 }

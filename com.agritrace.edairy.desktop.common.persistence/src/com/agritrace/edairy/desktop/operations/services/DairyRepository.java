@@ -303,7 +303,10 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	public void deleteRoute(final Route object) {
 		if (localDairy.getRoutes().remove(object)) {
+			PersistenceManager.getDefault().getSession().delete(object);
+			PersistenceManager.getDefault().getSession().flush();
 			save(localDairy);
+			
 		} else {
 			throw new RepositoryException("Route not found!");
 		}

@@ -7,6 +7,7 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -23,6 +24,7 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConsta
 public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer>{
 
 	private final ContainerSearchBean searchBean = new ContainerSearchBean();
+	
 	private final HibernateRepository<DairyContainer> containerRepository = new HibernateRepository<DairyContainer>(){
 
 		@Override
@@ -100,6 +102,14 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	@Override
 	protected void resetFilterConditions() {
 		trackingText.setText("");
+	}
+
+	@Override
+	protected void deleteEntity(DairyContainer deletableEntity) {
+		dairyRepository.getLocalDairy().getDairyBins().remove(deletableEntity);
+		super.deleteEntity(deletableEntity);
+		dairyRepository.save(dairyRepository.getLocalDairy());
+
 	}
 
 

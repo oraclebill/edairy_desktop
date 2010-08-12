@@ -40,7 +40,11 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 
 	@Override
 	public void delete(DairyLocation deletableEntity) {
-		super.delete(deletableEntity);
+		final Route route = deletableEntity.getRoute();
+		if (route != null) {
+			route.getStops().remove(deletableEntity);
+			updateRoute(route);
+		}
 	}
 
 	public void deleteRoute(final Route object) {

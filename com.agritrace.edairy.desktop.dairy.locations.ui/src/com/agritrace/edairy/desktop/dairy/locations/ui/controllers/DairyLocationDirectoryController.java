@@ -11,6 +11,7 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -22,6 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.util.MatchUtil;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.DairyLocationEditDialog;
+import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 public class DairyLocationDirectoryController extends BasicDirectoryController<DairyLocation> {
@@ -32,6 +34,14 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	private final DairyLocationSearchBean searchBean = new DairyLocationSearchBean();
 	private DairyLocationRepository dairyLocationRepo = new DairyLocationRepository();
 
+	private final DairyRepository dairyRepo = DairyRepository.getInstance();
+	private final Dairy localDairy = dairyRepo.getLocalDairy();
+	@Override
+	protected void deleteEntity(DairyLocation deletableEntity) {
+		if(deletableEntity != null){
+			dairyRepo.deleteBranchLocation(deletableEntity);	
+		}
+	}
 
 	public DairyLocationDirectoryController() {
 		super();
