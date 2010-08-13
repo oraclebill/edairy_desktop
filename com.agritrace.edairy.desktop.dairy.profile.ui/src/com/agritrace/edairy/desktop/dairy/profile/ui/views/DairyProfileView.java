@@ -161,7 +161,7 @@ public class DairyProfileView extends SubModuleView {
 
 		// established date
 		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Date Established:"));
-		fieldGridDataFactory.applyTo(UIControlsFactory.createDate(nameArea, SWT.NONE,
+		fieldGridDataFactory.applyTo(UIControlsFactory.createDate(nameArea, SWT.BORDER,
 				DairyProfileViewWidgetID.DAIRY_ESTABLISHED_DATE));
 
 		// manager field

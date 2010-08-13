@@ -1,8 +1,12 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.util.Date;
+
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
@@ -33,7 +37,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	private ITextRidget familyName;
 	private ITextRidget givenName;
 	private IComboRidget position;
-
+	private IDateTimeRidget startDate;
 	private ITextRidget operatorCode;
 	private ITextRidget securityRole;
 
@@ -89,7 +93,10 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		position.setMandatory(true);
 		//		position.updateFromModel();
 		//		position.setSelection(0);
-
+		
+		startDate = getRidget(IDateTimeRidget.class,EmployeeBindingConstants.BIND_ID_SINCE);
+		startDate.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__START_DATE));
+	
 		// operator code
 		operatorCode = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_OPR_CODE);
 		operatorCode.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE));

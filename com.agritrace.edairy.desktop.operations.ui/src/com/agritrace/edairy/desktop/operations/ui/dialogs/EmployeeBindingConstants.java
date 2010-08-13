@@ -10,5 +10,7 @@ public interface EmployeeBindingConstants {
 	String BIND_ID_EMPLOYEE_NUM = "BIND_ID_EMPLOYEE_NUM";
 	String BIND_ID_OPR_CODE = "BIND_ID_OPR_CODE";
 	String BIND_ID_SEC_ROLE = "BIND_ID_SEC_ROLE";
+	String BIND_ID_SINCE = "BIND_ID_SINCE";
+
 
 }

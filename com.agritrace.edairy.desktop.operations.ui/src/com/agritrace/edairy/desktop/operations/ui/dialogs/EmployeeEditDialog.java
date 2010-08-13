@@ -12,6 +12,7 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -99,7 +100,12 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		operatorCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(operatorCode);
 		addUIControl(operatorCode, EmployeeBindingConstants.BIND_ID_OPR_CODE);
-
+		
+		UIControlsFactory.createLabel(employeeInfo, "Start Date");
+		final DateTime startDate = UIControlsFactory.createDate(employeeInfo, SWT.MEDIUM|SWT.BORDER);
+		startDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		factory.copy().applyTo(startDate);
+		addUIControl(startDate, EmployeeBindingConstants.BIND_ID_SINCE);
 		UIControlsFactory.createLabel(employeeInfo, "Security Role");
 		final Text securityRole = UIControlsFactory.createText(employeeInfo);
 		securityRole.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
