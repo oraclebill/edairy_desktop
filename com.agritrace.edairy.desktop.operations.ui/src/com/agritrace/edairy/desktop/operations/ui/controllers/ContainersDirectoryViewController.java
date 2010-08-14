@@ -7,7 +7,6 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -18,8 +17,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
 
 public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer>{
 

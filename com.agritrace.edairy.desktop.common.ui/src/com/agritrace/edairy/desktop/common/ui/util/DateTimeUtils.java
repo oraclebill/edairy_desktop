@@ -15,42 +15,27 @@ import org.eclipse.swt.widgets.Control;
 /**
  * Utilities class for Date Time
  * 
- * @author Hui(Spark) Wan
  * 
  */
 public class DateTimeUtils {
 
 	/**
 	 * Defaults date format pattern
+	 * Uses european format - day/month/year
 	 */
-	public static String DEFAULT_DATE_PATTERN = "MM/dd/yyyy";
+	public static String DEFAULT_DATE_PATTERN = "dd/MM/yyyy";
+	
 	/**
 	 * Default date format instance
 	 */
 	public static DateFormat DATE_FORMAT = new SimpleDateFormat(DEFAULT_DATE_PATTERN);
+	
 	/**
 	 * Date to String converter using default date pattern
 	 */
 	public static IConverter DEFAULT_DATE_STRING_CONVERTER = new DateToStringConverter(
 			DateTimeUtils.DEFAULT_DATE_PATTERN);
 
-	// private static class BindingManager extends DefaultBindingManager {
-	// public BindingManager(IBindingPropertyLocator propertyStrategy,
-	// IControlRidgetMapper<Object> mapper) {
-	// super(propertyStrategy, mapper);
-	//
-	// }
-	//
-	// @Override
-	// public void injectRidget(IRidgetContainer ridgetContainer, String
-	// bindingProperty, IRidget ridget) {
-	// super.injectRidget(ridgetContainer, bindingProperty, ridget);
-	// }
-	// }
-
-	// private static final BindingManager BINDING_MAN = new
-	// BindingManager(SWTBindingPropertyLocator.getInstance(),
-	// SwtControlRidgetMapper.getInstance());
 
 	/**
 	 * Dispose composite's children recursively
@@ -64,7 +49,6 @@ public class DateTimeUtils {
 		for (final Control control : comp.getChildren()) {
 			if (control instanceof Composite) {
 				disposeAllChildrens((Composite) control);
-
 			}
 			if (!control.isDisposed()) {
 				control.dispose();
