@@ -20,27 +20,27 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
 
-public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer>{
+public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer> {
 
 	private final ContainerSearchBean searchBean = new ContainerSearchBean();
-	
-	private final HibernateRepository<DairyContainer> containerRepository = new HibernateRepository<DairyContainer>(){
+
+	private final HibernateRepository<DairyContainer> containerRepository = new HibernateRepository<DairyContainer>() {
 
 		@Override
 		protected Class<?> getClassType() {
 			return DairyContainer.class;
 		}
-		
+
 	};
-	private final IDairyRepository dairyRepository =  DairyRepository.getInstance();
+	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
 
 	private ITextRidget trackingText;
-	
+
 	public ContainersDirectoryViewController() {
 		super();
 		setEClass(DairyPackage.Literals.DAIRY_CONTAINER);
 		setRepository(containerRepository);
-	
+
 		addTableColumn("ID", TrackingPackage.Literals.CONTAINER__CONTAINER_ID);
 		addTableColumn("Tracking Number", TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER);
 		addTableColumn("Capacity", TrackingPackage.Literals.CONTAINER__CAPACITY);
@@ -49,12 +49,11 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 
 	@Override
 	protected void configureFilterRidgets() {
-		
-		trackingText = getRidget(ITextRidget.class,
-				ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM);
-		trackingText.bindToModel(BeansObservables.observeValue(searchBean,ContainerSearchBean.PROP_TRACKINGNUMBER));
+
+		trackingText = getRidget(ITextRidget.class, ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM);
+		trackingText.bindToModel(BeansObservables.observeValue(searchBean, ContainerSearchBean.PROP_TRACKINGNUMBER));
 		trackingText.updateFromModel();
-	
+
 	}
 
 	/**
@@ -69,7 +68,6 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 		return container;
 	}
 
-	
 	@Override
 	protected void createEntity(DairyContainer newEntity) {
 		dairyRepository.getLocalDairy().getDairyBins().add(newEntity);
@@ -79,12 +77,16 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	@Override
 	protected List<DairyContainer> getFilteredResult() {
 		final List<DairyContainer> filtered = new ArrayList<DairyContainer>();
-		final List<DairyContainer> allContainers =  containerRepository.all();
+		final List<DairyContainer> allContainers = containerRepository.all();
 		System.err.println("allContainers: " + allContainers);
-		for (final DairyContainer c: allContainers) {
-			String trackingNumber = searchBean.getTrackingNumber();
-			if (trackingNumber == null || trackingNumber.isEmpty()||c.getTrackingNumber().startsWith(trackingNumber)){
-				filtered.add(c);
+		for (final DairyContainer c : allContainers) {
+			final String searchedForNumber = searchBean.getTrackingNumber();
+			final String currentNumber = c.getTrackingNumber();
+			if (currentNumber != null) {
+				if (searchedForNumber == null || searchedForNumber.isEmpty()
+						|| currentNumber.startsWith(searchedForNumber)) {
+					filtered.add(c);
+				}
 			}
 		}
 		System.err.println("Filtered: " + filtered);
@@ -110,6 +112,5 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 		dairyRepository.save(dairyRepository.getLocalDairy());
 
 	}
-
 
 }
