@@ -59,7 +59,7 @@ public class MemberAccountWidget {
 		final Text creditLimitTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 		creditLimitTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
-		UIControlsFactory.createLabel(creditsGroup, "Credit Avalable:");
+		UIControlsFactory.createLabel(creditsGroup, "Credit Available:");
 		final Text creditAvalableTxt = UIControlsFactory.createText(creditsGroup, SWT.SINGLE | SWT.BORDER);
 		creditAvalableTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
