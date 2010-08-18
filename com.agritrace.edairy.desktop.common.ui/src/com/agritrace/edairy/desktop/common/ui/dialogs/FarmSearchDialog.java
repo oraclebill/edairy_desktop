@@ -155,7 +155,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Select", true);
+		createButton(parent, IDialogConstants.OK_ID, "Select", false);
 	}
 
 	/**
@@ -200,6 +200,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		final Button lookupButton = new Button(dialogArea, SWT.PUSH);
 		lookupButton.setText("Lookup");
 		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
+		getShell().setDefaultButton(lookupButton);
 		lookupButton.addSelectionListener(new SelectionAdapter() {
 			/**
 			 * Sent when default selection occurs in the control. The default
