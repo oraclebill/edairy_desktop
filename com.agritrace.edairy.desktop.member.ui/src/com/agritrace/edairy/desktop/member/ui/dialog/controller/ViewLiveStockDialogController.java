@@ -52,6 +52,7 @@ import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.IOwnershipGroupRidget;
 
 public class ViewLiveStockDialogController extends BaseDialogController<RegisteredAnimal> implements ISelectionListener {
 
@@ -115,6 +116,8 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	ITextRidget veterinaryTxt;
 
 	Membership selectedMember;
+	
+	IOwnershipGroupRidget ownershipRidget;
 	
 	boolean enableLookupBtn = true;
 
@@ -366,6 +369,9 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			feedCombo.updateFromModel();
 			feedCombo.setSelection(selectedNode.getFeedType());
 			feedCombo.addSelectionListener(this);
+			
+			//ownership
+			ownershipRidget.bindToModel(selectedNode.getPastOwners());
 
 		}
 	}
@@ -426,6 +432,8 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		idTypeCombo.setMandatory(true);
 		idNumberTxt.setMandatory(true);
 		idNumberTxt.setDirectWriting(true);
+		
+		ownershipRidget = getRidget(IOwnershipGroupRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_OWNERSHIPS);
 
 	}
 
