@@ -28,7 +28,7 @@ public class LiveStockFilterWidget {
 	}
 
 	public void initGUI() {
-		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Acqusion Date Range: ",
+		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Acquisition Date Range: ",
 				ViewWidgetId.LIVESTOCK_FILTER_STARTDATE, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE,
 				ViewWidgetId.LIVESTOCK_FILTER_STARTDATE_BUTTON, ViewWidgetId.LIVESTOCK_FILTER_ENDDATE_BUTTON);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)

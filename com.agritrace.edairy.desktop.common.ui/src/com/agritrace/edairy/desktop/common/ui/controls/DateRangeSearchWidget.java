@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 
 public class DateRangeSearchWidget {
 
-	public static final int DEFAULT_LABEL_WIDTH = 110;
+	public static final int DEFAULT_LABEL_WIDTH = 130;
 
 	private final Composite composite;
 

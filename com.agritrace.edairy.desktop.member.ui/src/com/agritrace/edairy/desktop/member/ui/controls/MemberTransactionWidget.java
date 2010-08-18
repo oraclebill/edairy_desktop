@@ -46,7 +46,9 @@ public class MemberTransactionWidget {
 				ViewWidgetId.TRANSACTION_TABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-
+		
+		final TableColumn columnID = new TableColumn(table, SWT.LEFT);
+		columnID.setText("ID");
 		final TableColumn columnDate = new TableColumn(table, SWT.LEFT);
 		columnDate.setText("Date");
 		final TableColumn columnType = new TableColumn(table, SWT.LEFT);
@@ -59,10 +61,11 @@ public class MemberTransactionWidget {
 		columnAmount.setText("Amount");
 
 		final TableColumnLayout layout = new TableColumnLayout();
+		layout.setColumnData(columnID, new ColumnWeightData(10));
 		layout.setColumnData(columnDate, new ColumnWeightData(20));
 		layout.setColumnData(columnType, new ColumnWeightData(20));
 		layout.setColumnData(columnAmount, new ColumnWeightData(20));
-		layout.setColumnData(columnDescription, new ColumnWeightData(40));
+		layout.setColumnData(columnDescription, new ColumnWeightData(25));
 		tablePanel.setLayout(layout);
 
 		final Composite buttonPanel = UIControlsFactory.createComposite(composite, SWT.NULL);
@@ -73,9 +76,9 @@ public class MemberTransactionWidget {
 //				ViewWidgetId.TRANSACTION_ADD_BUTTON);
 //		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
 
-		final Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON,
-				ViewWidgetId.TRANSACTION_VIEW_BUTTON);
-		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(vButton);
+//		final Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON,
+//				ViewWidgetId.TRANSACTION_VIEW_BUTTON);
+//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(vButton);
 
 	}
 

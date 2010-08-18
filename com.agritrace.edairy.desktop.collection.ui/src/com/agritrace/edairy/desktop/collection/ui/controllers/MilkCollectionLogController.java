@@ -198,13 +198,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected void handleViewItemAction() {
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
-		final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
+		if(table != null && table.getSelection().size()>0){
+			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+			BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
+			final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
-		controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
-		controller.setContextJournalPage((CollectionJournalPage) table.getSelection().get(0));		
-		journalEntryDialog.open();
+			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
+			controller.setContextJournalPage((CollectionJournalPage) table.getSelection().get(0));		
+			journalEntryDialog.open();
+		}
+	
 	}
 
 	@Override
