@@ -3,11 +3,14 @@ package com.agritrace.edairy.desktop.member.ui;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
+import com.agritrace.edairy.desktop.member.ui.dialog.OwnershipGroup;
+import com.agritrace.edairy.desktop.member.ui.dialog.OwnershipGroupRidget;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -86,6 +89,8 @@ public class Activator extends DesktopBaseActivator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		SwtControlRidgetMapper.getInstance().addMapping(OwnershipGroup.class, OwnershipGroupRidget.class);
+
 	}
 
 	/*
