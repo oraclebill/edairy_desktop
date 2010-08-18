@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -44,6 +45,36 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
  * 
  */
 public class FarmSearchDialog extends TitleAreaDialog {
+	private static enum FilterColumn {
+		ID("ID"),
+		NAME("Name"),
+		LOCATION("Location");
+		
+		static final String[] NAMES = { ID.name, NAME.name, LOCATION.name };
+		private final String name;
+		
+		FilterColumn(String name) {
+			this.name = name;
+		}
+		
+		static FilterColumn valueOf(int index) {
+			switch(index) {
+			case 0:
+				return ID;
+			case 1:
+				return NAME;
+			case 2:
+				return LOCATION;
+			default:
+				throw new AssertionError();
+			}
+		}
+		
+		@Override
+		public String toString() {
+			return name;
+		}
+	}
 
 	public class FarmLabelProvider implements ITableLabelProvider {
 
@@ -70,16 +101,16 @@ public class FarmSearchDialog extends TitleAreaDialog {
 			if (element instanceof Farm) {
 				final Farm farm = (Farm) element;
 				assert (farm != null);
-				switch (columnIndex) {
-				case 0:
+				switch (FilterColumn.valueOf(columnIndex)) {
+				case ID:
 					try {
 						return farm.getFarmId().toString();
 					} catch (final NullPointerException npe) {
 						return "N/A";
 					}
-				case 1:
+				case NAME:
 					return farm.getName();
-				case 2:
+				case LOCATION:
 					try {
 						return farm.getLocation().getPostalLocation().getEstate();
 					} catch (final Exception e) {
@@ -191,8 +222,9 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 
 		final Combo combo = new Combo(dialogArea, SWT.BORDER | SWT.READ_ONLY);
-		combo.setItems(new String[] { "ID", "Name", "Location" });
+		combo.setItems(FilterColumn.NAMES);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+		combo.select(FilterColumn.NAME.ordinal()); // Select "Name" by default
 
 		final Text filterText = new Text(dialogArea, SWT.NULL | SWT.BORDER | SWT.SINGLE);
 		filterText.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
@@ -201,30 +233,6 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		lookupButton.setText("Lookup");
 		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		getShell().setDefaultButton(lookupButton);
-		lookupButton.addSelectionListener(new SelectionAdapter() {
-			/**
-			 * Sent when default selection occurs in the control. The default
-			 * behavior is to do nothing.
-			 * 
-			 * @param e
-			 *            an event containing information about the default
-			 *            selection
-			 */
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-
-			/**
-			 * Sent when selection occurs in the control. The default behavior
-			 * is to do nothing.
-			 * 
-			 * @param e
-			 *            an event containing information about the selection
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
 
 		final Composite panel = new Composite(dialogArea, SWT.NULL);
 		panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 1));
@@ -235,13 +243,13 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 		// Create two columns and show
 		final TableColumn id = new TableColumn(table, SWT.LEFT);
-		id.setText("ID");
+		id.setText(FilterColumn.ID.toString());
 
 		final TableColumn name = new TableColumn(table, SWT.LEFT);
-		name.setText("Name");
+		name.setText(FilterColumn.NAME.toString());
 
 		final TableColumn location = new TableColumn(table, SWT.LEFT);
-		location.setText("Location");
+		location.setText(FilterColumn.LOCATION.toString());
 
 		final TableColumnLayout layout = new TableColumnLayout();
 		layout.setColumnData(id, new ColumnWeightData(20));
@@ -254,16 +262,44 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		tableView.setInput(farmList); // TODO: TEST - setup
 		tableView.addFilter(new ViewerFilter() {
 			@Override
-			public boolean select(Viewer arg0, Object arg1, Object arg2) {
-				if (null == selectedMember) {
-					return true;
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				final Farm farm = (Farm) element;
+				assert (farm != null);
+				
+				if (null != selectedMember && !selectedMember.getMember().getFarms().contains(element)) {
+					return false;
 				}
-				if (selectedMember.getMember().getFarms().contains(arg2)) {
-					return true;
+				
+				String filter = filterText.getText();
+				
+				if (!StringUtils.isEmpty(filter)) {
+					String searchIn;
+					
+					switch (FilterColumn.valueOf(combo.getSelectionIndex())) {
+					case ID:
+						searchIn = farm.getFarmId().toString();
+						break;
+					case NAME:
+						searchIn = farm.getName();
+						break;
+					case LOCATION:
+						try {
+							searchIn = farm.getLocation().getPostalLocation().getEstate();
+						} catch (final Exception e) {
+							searchIn = "";
+						}
+						break;
+					default:
+						throw new AssertionError();
+					}
+					
+					return searchIn.toLowerCase().indexOf(filter.toLowerCase()) != -1;
 				}
-				return false;
+					
+				return true;
 			}
 		});
+		
 		tableView.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
@@ -280,6 +316,14 @@ public class FarmSearchDialog extends TitleAreaDialog {
 				}
 			}
 		});
+
+		lookupButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				tableView.refresh();
+			}
+		});
+
 		panel.setLayout(layout);
 		return composite;
 	}
