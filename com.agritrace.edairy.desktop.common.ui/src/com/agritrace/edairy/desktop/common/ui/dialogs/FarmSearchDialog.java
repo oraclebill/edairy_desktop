@@ -188,9 +188,9 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		dialogArea.setLayout(new GridLayout(4, false));
 		final Label label = new Label(dialogArea, SWT.NULL);
 		label.setText("Lookup field:");
-		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false));
+		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 
-		final Combo combo = new Combo(dialogArea, SWT.BORDER);
+		final Combo combo = new Combo(dialogArea, SWT.BORDER | SWT.READ_ONLY);
 		combo.setItems(new String[] { "ID", "Name", "Location" });
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
 
