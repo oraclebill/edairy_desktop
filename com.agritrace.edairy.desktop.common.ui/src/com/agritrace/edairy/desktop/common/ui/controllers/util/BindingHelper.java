@@ -20,6 +20,7 @@ import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 /**
  * A utility class that eases binding of Ridgets to EMF properties.
@@ -166,6 +167,7 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
+	 * 
 	 * @param binding
 	 * @param ridget
 	 * @param valueRidget
@@ -173,6 +175,16 @@ public class BindingHelper<T extends EObject> {
 	void bindValueRidget(final FeatureProperties binding, final IEditableRidget valueRidget) {
 		final IObservableValue observable = PojoObservables.observeValue(getModelObject(), binding.getPropertyName());
 		valueRidget.bindToModel(observable);
+		
+		// bug-154: set directwriting by default on text ridgets.
+		if (valueRidget instanceof ITextRidget) { 
+			try {
+				((ITextRidget)valueRidget).setDirectWriting(true);
+			}
+			catch (UnsupportedOperationException uoe) {
+				;;
+			}
+		}
 
 		try {
 			valueRidget.updateFromModel();
