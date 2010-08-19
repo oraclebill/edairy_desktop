@@ -61,6 +61,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 			"date started",
 			"national id",
 			"nssf number",
+			"nhif number",
 			"employee number"
 	};
 
