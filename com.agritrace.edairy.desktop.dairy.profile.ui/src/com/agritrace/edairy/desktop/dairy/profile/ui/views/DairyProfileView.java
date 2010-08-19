@@ -303,6 +303,7 @@ public class DairyProfileView extends SubModuleView {
 		ScrolledComposite scrollParent = new ScrolledComposite(mainParent, SWT.V_SCROLL);
 		scrollParent.setBackground(stdBackgroundColor);
 		Composite parent = new Composite(scrollParent, 0);
+		parent.setBackground(stdBackgroundColor);
 
 		// create top row containing dairy info and dairy image
 		final Composite row1 = UIControlsFactory.createComposite(parent);

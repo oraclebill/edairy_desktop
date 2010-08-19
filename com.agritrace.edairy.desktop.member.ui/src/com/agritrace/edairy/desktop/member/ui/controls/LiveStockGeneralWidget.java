@@ -59,7 +59,7 @@ public class LiveStockGeneralWidget {
 				ViewWidgetId.LIVESTOCK_GENERAL_FEMALE);
 		GridDataFactory.fillDefaults().applyTo(femaleButton);
 
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Date of Brith :"));
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Date of Birth :"));
 		final DateTime birthDayTxt = UIControlsFactory.createDate(leftPanel, SWT.BORDER,
 				ViewWidgetId.LIVESTOCK_GENERAL_BIRTHDAY);
 		GridDataFactory.fillDefaults().grab(true, false).span(2,1).applyTo(birthDayTxt);

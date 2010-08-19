@@ -68,6 +68,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	private void configureRidgets() {
+		
 		// create/configure ridgets
 		final IDateTimeRidget dateTime = (IDateTimeRidget) SwtRidgetFactory.createRidget(datePicker);
 		final IComboRidget route = (IComboRidget) SwtRidgetFactory.createRidget(routeCombo);
@@ -251,7 +252,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			{
 				final Label label = UIControlsFactory.createLabel(panel, "Date");
 				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
-				datePicker = UIControlsFactory.createDate(panel, 0, ViewConstants.DATE_PICKER);
+				datePicker = UIControlsFactory.createDate(panel, SWT.BORDER, ViewConstants.DATE_PICKER);
 				GridDataFactory.swtDefaults().hint(100, -1).applyTo(datePicker);
 			}
 			{
@@ -290,4 +291,10 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 		return buffer;
 	}
+	
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setText("Milk Collection Journal");
+	}
+
 }

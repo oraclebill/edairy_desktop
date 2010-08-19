@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -10,7 +11,9 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.OwnershipGroup;
 
 public class LiveStockIdentificationWidget {
 
@@ -82,9 +85,12 @@ public class LiveStockIdentificationWidget {
 		fieldFactory.span(2, 1).applyTo(featureTxt);
 
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Ownership History :"));
-		final List ownerList = UIControlsFactory.createList(composite, true, true,
-				ViewWidgetId.LIVESTOCK_IDENTIFICATION_OWNERSHIPS);
-		fieldFactory.span(2, 1).applyTo(ownerList);
+		final OwnershipGroup owners = new OwnershipGroup(composite, SWT.NONE);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(owners,ViewWidgetId.LIVESTOCK_IDENTIFICATION_OWNERSHIPS);
+
+//		final List ownerList = UIControlsFactory.createList(composite, true, true,
+//				ViewWidgetId.LIVESTOCK_IDENTIFICATION_OWNERSHIPS);
+		fieldFactory.span(2, 1).applyTo(owners);
 
 	}
 

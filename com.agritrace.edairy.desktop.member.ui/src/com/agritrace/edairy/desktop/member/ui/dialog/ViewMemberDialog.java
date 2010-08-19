@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewMemberDialogController;
+import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
 public class ViewMemberDialog extends BaseDialogView {
 
@@ -44,33 +45,32 @@ public class ViewMemberDialog extends BaseDialogView {
 	}
 
 	protected void createMemberHeadlineGroup(Composite composite) {
-		final Composite infoPanel = UIControlsFactory.createComposite(composite);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoPanel);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(infoPanel);
-
-		final Label titleLabel = UIControlsFactory.createLabel(infoPanel, "Member Name :");
-		addUIControl(titleLabel, ViewWidgetId.VIEW_MEMBER_NAME_HEADER);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(titleLabel);
-		final Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
-		titleLabel.setFont(labelFont);
-
-		final Label photoLabel = UIControlsFactory.createLabel(infoPanel, "");
-		addUIControl(photoLabel, ViewWidgetId.VIEW_MEMBER_NAME_PHOTO);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(1, 3).grab(false, false).applyTo(photoLabel);
-
-		final Label idLabel = UIControlsFactory.createLabel(infoPanel, "");
-		addUIControl(idLabel, ViewWidgetId.VIEW_MEMBER_ID);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(idLabel);
-
-		final Label balanceLabel = UIControlsFactory.createLabel(infoPanel, "");
-		addUIControl(balanceLabel, ViewWidgetId.VIEW_MEMBER_BALANCE);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(balanceLabel);
+//		final Composite infoPanel = UIControlsFactory.createComposite(composite);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoPanel);
+//		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(infoPanel);
+//
+//		final Label titleLabel = UIControlsFactory.createLabel(infoPanel, "Member Name :");
+//		addUIControl(titleLabel, ViewWidgetId.VIEW_MEMBER_NAME_HEADER);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(titleLabel);
+//		final Font labelFont = JFaceResources.getFontRegistry().getBold(JFaceResources.HEADER_FONT);
+//		titleLabel.setFont(labelFont);
+//
+//		final Label photoLabel = UIControlsFactory.createLabel(infoPanel, "");
+//		addUIControl(photoLabel, ViewWidgetId.VIEW_MEMBER_NAME_PHOTO);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(1, 3).grab(false, false).applyTo(photoLabel);
+//
+//		final Label idLabel = UIControlsFactory.createLabel(infoPanel, "");
+//		addUIControl(idLabel, ViewWidgetId.VIEW_MEMBER_ID);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(idLabel);
+//
+//		final Label balanceLabel = UIControlsFactory.createLabel(infoPanel, "");
+//		addUIControl(balanceLabel, ViewWidgetId.VIEW_MEMBER_BALANCE);
+//		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(balanceLabel);
 	}
 
 	protected void createMemberInfoGroup(Composite parent) {
-		// infoGroup = new MemberInfoGroup(parent);
-		// infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL,
-		// SWT.FILL, true, false));
+		final MemberInfoGroup infoGroup = new MemberInfoGroup(parent);
+		infoGroup.getComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	}
 
 	protected void createMemberTabFolderGroup(Composite parent) {
