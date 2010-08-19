@@ -106,22 +106,5 @@
          </menu>
       </menuContribution>
    </extension>
-   <extension
-         point="org.eclipse.ui.importWizards">
-      <category
-            id="com.agritrace.edairy.desktop.internal.experimental.install.install.importWizards.sampleCategory"
-            name="Sample File Import">
-      </category>
-      <wizard
-            category="com.agritrace.edairy.desktop.internal.experimental.install.install.importWizards.sampleCategory"
-            class="com.agritrace.edairy.desktop.internal.experimental.install.install.importWizards.ImportWizard"
-            icon="icons/sample.gif"
-            id="com.agritrace.edairy.desktop.internal.experimental.install.install.importWizards.ImportWizard"
-            name="Import File">
-         <description>
-            Import a file from the local file system into the workspace.
-         </description>
-      </wizard>
-   </extension>
 
 </plugin>

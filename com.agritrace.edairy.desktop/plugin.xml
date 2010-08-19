@@ -140,11 +140,6 @@
                   id="org.eclipse.riena.demo.client.exitMenuItem"
                   mnemonic="x">
             </command>
-            <command
-                  commandId="org.eclipse.ui.file.import"
-                  label="Import"
-                  style="push">
-            </command>
          </menu>
          <!--
          <menu
