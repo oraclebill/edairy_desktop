@@ -28,7 +28,6 @@ import com.csvreader.CsvReader;
  * 
  */
 public class EmployeeImportTool extends AbstractImportTool {
-
 	public static final int BASE = 0;
 	public static final int EMPLOYEE_ID = BASE;
 	public static final int GIVEN_NAME = BASE + 1;
@@ -39,7 +38,8 @@ public class EmployeeImportTool extends AbstractImportTool {
 	public static final int NATIONAL_ID = BASE + 6;
 	public static final int NSSF_NUMBER = BASE + 7;
 	public static final int NHIF_NUMBER = BASE + 8;
-
+	public static final int EMPLOYEE_NUMBER = BASE + 9;
+	
 	private static final Entry[] fieldMap = {
 			new Entry(EMPLOYEE_ID, DairyPackage.Literals.EMPLOYEE__ID),
 			new Entry(GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME),
@@ -49,13 +49,23 @@ public class EmployeeImportTool extends AbstractImportTool {
 			new Entry(DATE_STARTED, DairyPackage.Literals.EMPLOYEE__START_DATE),
 			new Entry(NATIONAL_ID, DairyPackage.Literals.EMPLOYEE__NATIONAL_ID),
 			new Entry(NSSF_NUMBER, DairyPackage.Literals.EMPLOYEE__NSSF_NUMBER),
-			new Entry(NHIF_NUMBER, DairyPackage.Literals.EMPLOYEE__NHIF_NUMBER), };
+			new Entry(NHIF_NUMBER, DairyPackage.Literals.EMPLOYEE__NHIF_NUMBER),
+	};
 	
-	String[] expectedHeaders = { "employee id","given name","middle name","family name","job title","date started","national id","nssf number","nhif number" };
+	String[] expectedHeaders = {
+			"employee id",
+			"given name",
+			"middle name",
+			"family name",
+			"job title",
+			"date started",
+			"national id",
+			"nssf number",
+			"employee number"
+	};
 
 	final private List<Employee> empList;
 	final Map<String, List<String[]>> errors;
-	final private IProgressMonitor monitor;
 	final private Map<String, Object> employeeCache;
 	
 	private Reader reader;
@@ -66,7 +76,6 @@ public class EmployeeImportTool extends AbstractImportTool {
 			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
 		this.empList = successes;
 		this.errors = errors;
-		this.monitor = monitor;
 
 		reader = new BufferedReader(new InputStreamReader(input));
 		
@@ -82,17 +91,25 @@ public class EmployeeImportTool extends AbstractImportTool {
 		csvReader.readRecord();
 		String[] headers = csvReader.getValues();
 		validateHeaders(headers);
+		
+		boolean hasNumberField = (headers.length == expectedHeaders.length);
+		
 		while (csvReader.readRecord()) {
 			checkCancelled();
 			String[] values = csvReader.getValues();
+			
 			try {
 				validateCurrentRecord(values);
 				Employee employee = DairyFactory.eINSTANCE.createEmployee();
 				// EMFUtil.populate(employee);
+				
 				for (Entry entry : fieldMap) {
 					String value = csvReader.get(entry.field);
 					employee.eSet(entry.feature, convert(entry.feature, value));
 				}
+				
+				employee.setNumber(csvReader.get(hasNumberField ? EMPLOYEE_NUMBER : EMPLOYEE_ID));
+				
 				count++;
 				empList.add(employee);
 
@@ -106,27 +123,67 @@ public class EmployeeImportTool extends AbstractImportTool {
 
 	protected void validateCurrentRecord(String[] values) {
 		String val = values[EMPLOYEE_ID];
+		
 		if (val == null || val.trim().length() == 0)
 			throw new ValidationException("Record has no ID");
+		
 		Object obj = employeeCache.get(val);
+		
 		if (obj instanceof Employee) {
 			throw new ValidationException("Employee ID already exists in database.");
 		}
+		
 		if (obj instanceof String[]) {
 			throw new ValidationException("Duplicate ID in import batch.");
 		}
+		
 		employeeCache.put(val, values);
 	}
 
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		List<String[]> recList = errors.get(e.getMessage());
+		
 		if (recList == null) {
 			recList = new LinkedList<String[]>();
 			errors.put(e.getMessage(), recList);
 		}
+		
 		recList.add(values);
 	}
 
+	@Override
+	protected void validateHeaders(String[] actualHeaders) {
+		String errorMessage = null;
+		String[] expectedHeaders = getExpectedHeaders();
+		
+		if (expectedHeaders != null) {
+			// Handle the case with no 
+			if (actualHeaders.length != expectedHeaders.length && actualHeaders.length != expectedHeaders.length - 1)
+				throw new ValidationException(String.format("Number of fields does not match - found %d, expected %d or %d",
+						actualHeaders.length, expectedHeaders.length, expectedHeaders.length - 1));
+			
+			for (int i = 0; i < actualHeaders.length; i++) {
+				if (expectedHeaders[i] == null)
+					continue;
+				
+				String expected = expectedHeaders[i].trim();
+				String actual = actualHeaders[i].trim();
+				
+				if (!expected.equals(actual)) {
+					
+					if (errorMessage == null) {
+						errorMessage = "Mismatched headers: \n";
+					}
+					
+					errorMessage += "    " + i + " - was: '" + actualHeaders[i] + "', expected '" + expectedHeaders[i]
+							+ "'\n";
+				}
+			}
+			
+			if (errorMessage != null)
+				throw new ValidationException(errorMessage);
+		}
+	}
 
 	@Override
 	protected void saveImportedEntity(Object entity) {
