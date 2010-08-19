@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -57,6 +59,13 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 		companyText.setDirectWriting(true);
 		companyText.bindToModel(searchBean, "name");
 		companyText.updateFromModel();
+		companyText.addPropertyChangeListener("text", new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				refreshTableContents();
+			}
+		});
+
 
 		categoryList.bindSingleSelectionToModel(searchBean, "category");
 		categoryList.bindToModel(Observables.staticObservableList(SupplierCategory.getCategoriesList()),

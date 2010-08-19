@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,13 +74,24 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	@Override
 	protected void configureFilterRidgets() {
 		name = getRidget(ITextRidget.class, RouteDirectoryView.BIND_ID_FILTER_NAME);
+		name.setDirectWriting(true);
 		description = getRidget(ITextRidget.class, RouteDirectoryView.BIND_ID_FILTER_DESC);
+		description.setDirectWriting(true);
 
 		name.bindToModel(searchBean, "name");
 		name.updateFromModel();
-		
+
 		description.bindToModel(searchBean, "description");
 		description.updateFromModel();
+
+		PropertyChangeListener listener = new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				refreshTableContents();
+			}
+		};
+		name.addPropertyChangeListener("text",listener);
+		description.addPropertyChangeListener("text",listener);
 	}
 
 	@Override
@@ -116,7 +129,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		if(deletableEntity != null){
 			dairyRepo.deleteRoute(deletableEntity);	
 		}
-		
+
 	}
-	
+
 }

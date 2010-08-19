@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,12 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 		companyNameSearchText = getRidget(ITextRidget.class, CustomerDirectoryView.BIND_ID_FILTER_COMPANYNAME);
 		companyNameSearchText.setDirectWriting(true);
 		companyNameSearchText.bindToModel(searchBean, "nameSearchValue");
+		companyNameSearchText.addPropertyChangeListener("text", new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				refreshTableContents();
+			}
+		});
 
 		//
 		customerTypeSearchCombo = getRidget(IComboRidget.class, CustomerDirectoryView.BIND_ID_FILTER_CUSTOMERTYPE);

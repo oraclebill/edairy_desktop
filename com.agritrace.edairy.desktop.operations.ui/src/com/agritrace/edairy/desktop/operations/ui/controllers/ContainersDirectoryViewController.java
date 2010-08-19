@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +53,15 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	protected void configureFilterRidgets() {
 
 		trackingText = getRidget(ITextRidget.class, ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM);
+		trackingText.setDirectWriting(true);
 		trackingText.bindToModel(BeansObservables.observeValue(searchBean, ContainerSearchBean.PROP_TRACKINGNUMBER));
 		trackingText.updateFromModel();
+		trackingText.addPropertyChangeListener("text", new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				refreshTableContents();
+			}
+		});
 
 	}
 
