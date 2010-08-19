@@ -40,7 +40,7 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 		// setEntityClass(Supplier.class);
 		setEClass(DairyPackage.Literals.SUPPLIER);
 
-		addTableColumn("ID", ModelPackage.Literals.COMPANY__COMPANY_ID);
+		addTableColumn("ID", DairyPackage.Literals.SUPPLIER__ID);
 		addTableColumn("Company Name", ModelPackage.Literals.COMPANY__COMPANY_NAME);
 		addTableColumn("Category", DairyPackage.Literals.SUPPLIER__CATEGORIES);
 		addTableColumn("Contact", ModelPackage.Literals.COMPANY__CONTACTS, new ContactNameColumnFormatter());
