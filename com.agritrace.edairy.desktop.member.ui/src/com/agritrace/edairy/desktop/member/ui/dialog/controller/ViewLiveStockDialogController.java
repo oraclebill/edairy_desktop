@@ -63,6 +63,20 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			if (arg0.getSource() == nameText) {
 				titleLabel.setText("Animal " + nameText.getText());
 			}
+			if(arg0.getSource() == acquisionTypeCombo && selectedNode != null && selectedNode.getAcquisitionType() == AcquisitionType.BIRTH){
+				selectedNode.setDateOfAcquisition(selectedNode.getDateOfBirth());
+				if( acquisionDate != null){
+					acquisionDate.updateFromModel();	
+				}
+			}
+			if(arg0.getSource() == birthDayDate || arg0.getSource() == acquisionDate){
+				if(selectedNode != null && selectedNode.getAcquisitionType() == AcquisitionType.BIRTH){
+					selectedNode.setDateOfAcquisition(birthDayDate.getDate());
+					if( acquisionDate != null){
+						acquisionDate.updateFromModel();	
+					}
+				}
+			}
 			enableSaveButton(validate());
 		}
 
@@ -381,7 +395,9 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		final Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
 		while (ridgetIterator.hasNext()) {
 			final IRidget ridget = ridgetIterator.next();
-			if (ridget instanceof ITextRidget) {
+			if(ridget instanceof  IDateTimeRidget){
+				ridget.addPropertyChangeListener("date",propertyChangedListener);
+			}else if (ridget instanceof ITextRidget) {
 				ridget.addPropertyChangeListener("text", propertyChangedListener);
 			} else if (ridget instanceof IComboRidget) {
 				ridget.addPropertyChangeListener("selection", propertyChangedListener);
