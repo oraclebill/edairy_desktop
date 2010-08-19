@@ -53,14 +53,17 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 //		addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__ID);
 		
 		// customer id
-		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
+		/*
+		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_ID);
 		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__ID));
 		employeeId.setOutputOnly(false);
 		employeeId.setFocusable(false);
 		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
 			employeeId.updateFromModel();
 		}
+		*/
 
+		addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__NUMBER);
 		addTextMap(EmployeeBindingConstants.BIND_ID_FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME);
 		addComboMap(EmployeeBindingConstants.BIND_ID_DEPARTMENT, EmployeeReference.getDepartments(), "toString", DairyPackage.Literals.EMPLOYEE__DEPARTMENT);
