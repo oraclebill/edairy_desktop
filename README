@@ -1,0 +1,33 @@
+h2. Development Quickstart
+
+h3. Eclipse workspace setup
+
+First, download the target platform and source code from git:
+
+bc. bash> git clone git@github.com:oraclebill/edairy_desktop_lib.git
+bash> git clone git@github.com:oraclebill/edairy_desktop.git
+
+Then -
+# create an eclipse workspace rooted at 'edairy_desktop'
+# set the target platform to 'com.agritrace.edairy.desktop/edairy_manager_desktop.target
+# open and run 'com.agritrace.edairy.desktop/edairy_manager_desktop.product'
+Application should start and present the static 'home' page.
+Click on the 'Milk' tab and see an error - the database is not setup yet.
+
+h3. Database setup
+
+eDairy Manager Desktop is setup to use MySQL database named 'dairytest', located on localhost:3306 with username 'root' and empty password by default.
+If you create this database and start the application, it will create the necessary tables automatically on first use.
+
+eDairy Manager Desktop can also use an embedded HSQLDB database. This can be configured through the database configuration file. The database configuration file is located in the application's workspace - the workspace directory is located in the same place as the application executable, or in development mode, in the 'runtime-dairy_manager_desktop.product' directory. In either case the database properties are located in 'riena/ediarydb.properties'. To use hsqldb, the contents of edairydb.properties should look like this :
+
+bc. hibernate.connection.driver_class=org.hsqldb.jdbcDriver
+hibernate.connection.password=
+hibernate.connection.url=jdbc\:hsqldb\:file\:devtest.db
+hibernate.connection.username=SA
+hibernate.current_session_context_class=thread
+hibernate.dialect=org.hibernate.dialect.HSQLDialect
+hibernate.hbm2ddl.auto=update
+hibernate.show_sql=true
+
+
