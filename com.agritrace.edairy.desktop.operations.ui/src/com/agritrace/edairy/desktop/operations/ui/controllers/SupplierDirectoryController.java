@@ -89,8 +89,10 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 		final List<Supplier> filteredSuppliers = new ArrayList<Supplier>();
 
 		for (final Supplier s : allSuppliers) {
+			String categoryName = searchBean.getCategory() == null ? null : searchBean.getCategory().getName();
+			
 			if (MatchUtil.matchContains(searchBean.getName(), s.getCompanyName())
-					&& MatchUtil.matchContains(searchBean.getCategory(), s.getCategories())
+					&& MatchUtil.matchContains(categoryName, s.getCategories())
 					&& MatchUtil.matchEquals(searchBean.getStatus(), s.getStatus())) {
 				filteredSuppliers.add(s);
 			}
