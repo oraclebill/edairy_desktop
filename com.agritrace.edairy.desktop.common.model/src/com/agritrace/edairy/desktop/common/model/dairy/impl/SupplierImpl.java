@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getCategories <em>Categories</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getPublicDescription <em>Public Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl#getRegistrationDate <em>Registration Date</em>}</li>
@@ -54,6 +55,26 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * @ordered
 	 */
 	protected EList<String> categories;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPublicDescription() <em>Public Description</em>}' attribute.
@@ -211,6 +232,27 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPublicDescription() {
 		return publicDescription;
 	}
@@ -342,6 +384,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 		switch (featureID) {
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				return getCategories();
+			case DairyPackage.SUPPLIER__ID:
+				return getId();
 			case DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION:
 				return getPublicDescription();
 			case DairyPackage.SUPPLIER__STATUS:
@@ -370,6 +414,9 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				getCategories().clear();
 				getCategories().addAll((Collection<? extends String>)newValue);
+				return;
+			case DairyPackage.SUPPLIER__ID:
+				setId((String)newValue);
 				return;
 			case DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION:
 				setPublicDescription((String)newValue);
@@ -404,6 +451,9 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				getCategories().clear();
 				return;
+			case DairyPackage.SUPPLIER__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION:
 				setPublicDescription(PUBLIC_DESCRIPTION_EDEFAULT);
 				return;
@@ -436,6 +486,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 		switch (featureID) {
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				return categories != null && !categories.isEmpty();
+			case DairyPackage.SUPPLIER__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION:
 				return PUBLIC_DESCRIPTION_EDEFAULT == null ? publicDescription != null : !PUBLIC_DESCRIPTION_EDEFAULT.equals(publicDescription);
 			case DairyPackage.SUPPLIER__STATUS:
@@ -464,6 +516,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (categories: ");
 		result.append(categories);
+		result.append(", id: ");
+		result.append(id);
 		result.append(", publicDescription: ");
 		result.append(publicDescription);
 		result.append(", status: ");

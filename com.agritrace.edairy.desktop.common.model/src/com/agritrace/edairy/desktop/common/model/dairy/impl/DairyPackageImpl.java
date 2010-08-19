@@ -1654,7 +1654,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSupplier_PublicDescription() {
+	public EAttribute getSupplier_Id() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1663,7 +1663,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSupplier_Status() {
+	public EAttribute getSupplier_PublicDescription() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1672,7 +1672,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSupplier_RegistrationDate() {
+	public EAttribute getSupplier_Status() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1681,7 +1681,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSupplier_ExpirationDate() {
+	public EAttribute getSupplier_RegistrationDate() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1690,7 +1690,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSupplier_Notes() {
+	public EAttribute getSupplier_ExpirationDate() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1699,8 +1699,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSupplier_Rating() {
+	public EAttribute getSupplier_Notes() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSupplier_Rating() {
+		return (EAttribute)supplierEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1717,7 +1726,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCustomer_CustomerType() {
+	public EAttribute getCustomer_Id() {
 		return (EAttribute)customerEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1726,8 +1735,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCustomer_Status() {
+	public EAttribute getCustomer_CustomerType() {
 		return (EAttribute)customerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomer_Status() {
+		return (EAttribute)customerEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2048,6 +2066,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		supplierEClass = createEClass(SUPPLIER);
 		createEAttribute(supplierEClass, SUPPLIER__CATEGORIES);
+		createEAttribute(supplierEClass, SUPPLIER__ID);
 		createEAttribute(supplierEClass, SUPPLIER__PUBLIC_DESCRIPTION);
 		createEAttribute(supplierEClass, SUPPLIER__STATUS);
 		createEAttribute(supplierEClass, SUPPLIER__REGISTRATION_DATE);
@@ -2056,6 +2075,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(supplierEClass, SUPPLIER__RATING);
 
 		customerEClass = createEClass(CUSTOMER);
+		createEAttribute(customerEClass, CUSTOMER__ID);
 		createEAttribute(customerEClass, CUSTOMER__CUSTOMER_TYPE);
 		createEAttribute(customerEClass, CUSTOMER__STATUS);
 
@@ -2292,6 +2312,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(supplierEClass, Supplier.class, "Supplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSupplier_Categories(), ecorePackage.getEString(), "categories", null, 0, -1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSupplier_Id(), ecorePackage.getEString(), "id", null, 1, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSupplier_PublicDescription(), ecorePackage.getEString(), "publicDescription", null, 1, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSupplier_Status(), this.getVendorStatus(), "status", null, 1, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSupplier_RegistrationDate(), ecorePackage.getEDate(), "registrationDate", null, 1, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2300,6 +2321,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getSupplier_Rating(), ecorePackage.getEInt(), "rating", null, 0, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerEClass, Customer.class, "Customer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomer_Id(), ecorePackage.getEString(), "id", null, 1, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomer_CustomerType(), ecorePackage.getEString(), "customerType", "Milk Processor", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomer_Status(), ecorePackage.getEString(), "status", "Active", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2435,7 +2457,21 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "name", "assetInfo",
 			 "kind", "elementOnly"
-		   });	
+		   });			
+		addAnnotation
+		  (getSupplier_Id(), 
+		   source, 
+		   new String[] {
+			 "name", "id",
+			 "kind", "elementOnly"
+		   });		
+		addAnnotation
+		  (getCustomer_Id(), 
+		   source, 
+		   new String[] {
+			 "name", "id",
+			 "kind", "elementOnly"
+		   });
 	}
 
 	/**
@@ -2487,7 +2523,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });
+		   });		
 	}
 
 } //DairyPackageImpl

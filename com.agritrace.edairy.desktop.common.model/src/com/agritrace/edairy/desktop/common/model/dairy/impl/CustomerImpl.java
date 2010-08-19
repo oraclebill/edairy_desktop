@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getCustomerType <em>Customer Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CustomerImpl#getStatus <em>Status</em>}</li>
  * </ul>
@@ -32,6 +33,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class CustomerImpl extends CompanyImpl implements Customer {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getCustomerType() <em>Customer Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -96,6 +117,27 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.CUSTOMER__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getCustomerType() {
 		return customerType;
 	}
@@ -141,6 +183,8 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.CUSTOMER__ID:
+				return getId();
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				return getCustomerType();
 			case DairyPackage.CUSTOMER__STATUS:
@@ -157,6 +201,9 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.CUSTOMER__ID:
+				setId((String)newValue);
+				return;
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				setCustomerType((String)newValue);
 				return;
@@ -175,6 +222,9 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.CUSTOMER__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				setCustomerType(CUSTOMER_TYPE_EDEFAULT);
 				return;
@@ -193,6 +243,8 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.CUSTOMER__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
 				return CUSTOMER_TYPE_EDEFAULT == null ? customerType != null : !CUSTOMER_TYPE_EDEFAULT.equals(customerType);
 			case DairyPackage.CUSTOMER__STATUS:
@@ -211,7 +263,9 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (customerType: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", customerType: ");
 		result.append(customerType);
 		result.append(", status: ");
 		result.append(status);
