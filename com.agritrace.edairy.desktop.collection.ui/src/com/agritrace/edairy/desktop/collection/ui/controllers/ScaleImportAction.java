@@ -37,6 +37,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
@@ -196,12 +197,23 @@ final class ScaleImportAction implements IActionListener {
 			for (String err : errMessages.keySet()) {
 				msgList.add(String.format("%-4d records failed with a '%s' error.", errMessages.get(err).size(), err));
 			}
+			
 			int allEntries = 0;
+			
 			for (CollectionJournalPage page : pageMap.values()) {
 				allEntries += page.getEntryCount();
 			}
+			
 			msgList.add(0, String.format("Import completed with %d sessions, %d total collections, and %d messages",
 					pageMap.keySet().size(), allEntries, errMessages.values().size()));
+
+			int i = 0;
+			
+			for (CollectionJournalPage page : pageMap.values()) {
+				allEntries += page.getEntryCount();
+				msgList.add(++i, String.format("- Driver name: %s, route name: %s, journal date: %tF",
+						MemberUtil.formattedMemberName(page.getDriver()), page.getRoute().getName(), page.getJournalDate()));
+			}
 		}
 
 		protected void addError(String message, Object detail) {
