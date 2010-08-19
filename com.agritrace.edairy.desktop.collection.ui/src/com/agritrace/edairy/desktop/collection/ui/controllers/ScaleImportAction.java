@@ -318,12 +318,15 @@ final class ScaleImportAction implements IActionListener {
 		Object navigationContext = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
 		SubModuleView rienaView = (SubModuleView) Platform.getAdapterManager().getAdapter(navigationContext,
 				SubModuleView.class);
+		
 		if (rienaView != null) {
 			navigationContext = rienaView.getController().getNavigationNode();
 		}
+		
 		final FileDialog fileDialog = new FileDialog(AbstractDirectoryController.getShell(), SWT.DIALOG_TRIM);
 		final String retVal = fileDialog.open();
 		File importFile = new File(retVal);
+		pageMap.clear();
 
 		UIProcess process = new ScaleImportProcess(importFile, navigationContext);
 		// job.setProperty(UIProcess.PROPERTY_CONTEXT, navigationContext);
@@ -367,6 +370,7 @@ final class ScaleImportAction implements IActionListener {
 	private CollectionJournalPage getJournalForScaleRecord(ScaleRecord record) {
 		String key = createGroupKey(record);
 		CollectionJournalPage page = pageMap.get(key);
+		
 		if (page == null) {
 			page = DairyFactory.eINSTANCE.createCollectionJournalPage();
 			page.setReferenceNumber(key);
@@ -374,6 +378,7 @@ final class ScaleImportAction implements IActionListener {
 			page.setJournalDate(record.getValidDate());
 			page.setSession(getSessionForCode(record.getSessionCode()));
 			page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
+			
 			if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
 					|| page.getRoute() == null) {
 				// TODO: add suspension reason
@@ -381,8 +386,10 @@ final class ScaleImportAction implements IActionListener {
 				this.milkCollectionLogController.log(LogService.LOG_INFO, "Suspending " + key
 						+ " for validation failure - null key item.");
 			}
+			
 			pageMap.put(key, page);
 		}
+		
 		return page;
 	}
 
