@@ -338,4 +338,9 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			display.dispose();
 		}
 	}
+	
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setText("Milk Collection Journal Detail");
+	}
 }
