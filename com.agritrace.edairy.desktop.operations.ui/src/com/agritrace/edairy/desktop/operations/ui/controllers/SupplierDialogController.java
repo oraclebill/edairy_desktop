@@ -5,16 +5,12 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.riena.beans.common.ListBean;
-import org.eclipse.riena.ui.core.marker.ValidationTime;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
-import org.eclipse.riena.ui.ridgets.validation.NotEmpty;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -29,7 +25,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGrou
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
-import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 public class SupplierDialogController extends RecordDialogController<Supplier> {
