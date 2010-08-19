@@ -39,6 +39,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 	public static final String BIND_ID_LEGAL_NAME = "bind.id.supplier.legalname";
 	public static final String BIND_ID_SUPPLIER_ID = "bind.id.supplier.id";
 	public static final String BIND_ID_SUPPLIER_STATUS = "bind.id.supplier.status";
+	public static final String BIND_ID_SUPPLIER_NUM = "bind.id.supplier.num";
 
 	public SupplierListDialog(Shell parentShell) {
 		super(parentShell);
@@ -87,7 +88,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 		final Text txtDate = UIControlsFactory.createText(comonComp);
 		factory.applyTo(txtDate);
 
-		addUIControl(txtDate, BIND_ID_SUPPLIER_ID);
+		addUIControl(txtDate, BIND_ID_SUPPLIER_NUM);
 
 		// Status
 		UIControlsFactory.createLabel(comonComp, "Status");

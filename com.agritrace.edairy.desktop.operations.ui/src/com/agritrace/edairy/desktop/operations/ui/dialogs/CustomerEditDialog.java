@@ -76,7 +76,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		txtDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.applyTo(txtDate);
 
-		addUIControl(txtDate, CustomerBindingConstants.BIND_ID_CUSTOMER_ID);
+		addUIControl(txtDate, CustomerBindingConstants.BIND_ID_CUSTOMER_NUM);
 
 		UIControlsFactory.createLabel(composite, "Company Name");
 		final Text companyNameText = UIControlsFactory.createText(composite);

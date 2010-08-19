@@ -45,15 +45,11 @@ public class SupplierDialogController extends RecordDialogController<Supplier> {
 //		addMultiChoiceMap(SupplierListDialog.BIND_ID_CATEGORY, SupplierCategory.getCategoriesList(), "name", DairyPackage.Literals.SUPPLIER__CATEGORIES);
 		addTextMap(SupplierListDialog.BIND_ID_DESCRIPTION, DairyPackage.Literals.SUPPLIER__PUBLIC_DESCRIPTION);
 
-		final ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_ID);
+		final ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_NUM);
 		supplierId.setOutputOnly(false);
-		supplierId.bindToModel(supplier, ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
+		supplierId.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__ID.getName());
 		supplierId.updateFromModel();
-		if (this.getActionType() == AbstractDirectoryController.ACTION_NEW) {
-			supplierId.setText("Auto Generated");
-		}
-		supplierId.setOutputOnly(true);
-
+		
 		// Category
 		final IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY);
 		if (category != null) {

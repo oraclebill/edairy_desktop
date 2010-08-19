@@ -10,5 +10,5 @@ public interface CustomerBindingConstants {
 	public static final String BIND_ID_LEGAL_NAME = "bind.id.customer.legalname";
 	public static final String BIND_ID_PHONE_NUMBER = "bind.id.customer.phone_number";
 	public static final String BIND_ID_CUSTOMER_PHOTO = "bind.id.customer.photo";
-
+	public static final String BIND_ID_CUSTOMER_NUM = "bind.id.customer.num";
 }

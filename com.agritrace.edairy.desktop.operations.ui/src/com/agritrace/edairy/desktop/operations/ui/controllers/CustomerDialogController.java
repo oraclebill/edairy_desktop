@@ -46,13 +46,14 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 				Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)), null,
 				DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
 
-		// customer id is read-only, so needs manual attention.
+		/*
 		customerId = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_ID);
 		final IObservableValue oberservModel = PojoObservables.observeValue(editCustomer,
 				ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
 		customerId.setModelToUIControlConverter(NumberToStringConverter.fromLong(false));
 		customerId.bindToModel(oberservModel);
-		customerId.setOutputOnly(true);
+		*/
+		addTextMap(CustomerBindingConstants.BIND_ID_CUSTOMER_NUM, DairyPackage.Literals.CUSTOMER__ID);
 
 		// profile photo also needs manual binding..
 		profilePhoto = getRidget(IProfilePhotoRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
