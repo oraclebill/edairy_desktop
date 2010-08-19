@@ -700,7 +700,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_Number() {
+	public EAttribute getEmployee_OperatorCode() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -709,7 +709,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_OperatorCode() {
+	public EAttribute getEmployee_StartDate() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -718,7 +718,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_StartDate() {
+	public EAttribute getEmployee_JobFunction() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -727,7 +727,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_JobFunction() {
+	public EAttribute getEmployee_Department() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -736,7 +736,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_Department() {
+	public EAttribute getEmployee_NationalId() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -745,7 +745,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_NationalId() {
+	public EAttribute getEmployee_NhifNumber() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -754,7 +754,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_NhifNumber() {
+	public EAttribute getEmployee_NssfNumber() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -763,17 +763,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_NssfNumber() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEmployee_SecurityRole() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1940,7 +1931,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		employeeEClass = createEClass(EMPLOYEE);
 		createEAttribute(employeeEClass, EMPLOYEE__ID);
-		createEAttribute(employeeEClass, EMPLOYEE__NUMBER);
 		createEAttribute(employeeEClass, EMPLOYEE__OPERATOR_CODE);
 		createEAttribute(employeeEClass, EMPLOYEE__START_DATE);
 		createEAttribute(employeeEClass, EMPLOYEE__JOB_FUNCTION);
@@ -2179,7 +2169,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(employeeEClass, Employee.class, "Employee", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEmployee_Id(), ecorePackage.getEString(), "id", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_Number(), ecorePackage.getEString(), "number", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_OperatorCode(), ecorePackage.getEString(), "operatorCode", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_StartDate(), ecorePackage.getEDate(), "startDate", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_JobFunction(), ecorePackage.getEString(), "jobFunction", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

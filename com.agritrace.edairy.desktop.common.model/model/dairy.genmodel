@@ -18,7 +18,6 @@
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Active"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Inactive"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Dormant"/>
-      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MembershipStatus/Deleted"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//Session">
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//Session/EarlyMorning"/>
@@ -96,11 +95,9 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Employee">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/number"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/operatorCode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/startDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/jobFunction"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/department"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nationalId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nhifNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nssfNumber"/>
@@ -137,9 +134,9 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Route">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/Id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/code"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Route/stops"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/code"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/description"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Trip">
@@ -168,10 +165,8 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Dairy">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/registrationNumber"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/establishedDate"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/managerName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/nssfNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/nhifNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/nssfNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/federalPin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/licenseEffectiveDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/licenseExpirationDate"/>
@@ -187,7 +182,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/animalHealthRequests"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/dairyBins"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//Dairy/priceHistory"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/managerName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/establishedDate"/>
+      <genOperations ecoreOperation="dairy.ecore#//Dairy/getMemberFarms"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Membership">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/memberId"/>
@@ -427,18 +424,13 @@
       <genEnumLiterals ecoreEnumLiteral="farm.ecore#//Mechanism/OTHER"/>
     </genEnums>
     <genClasses ecoreClass="farm.ecore#//Farm">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Farm/farmId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Farm/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference farm.ecore#//Farm/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference farm.ecore#//Farm/cans"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference farm.ecore#//Farm/location"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference farm.ecore#//Farm/owner"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Farm/profilePhoto"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Farm/farmId"/>
       <genOperations ecoreOperation="farm.ecore#//Farm/getNumberOfAnimals"/>
       <genOperations ecoreOperation="farm.ecore#//Farm/getNumberOfContainers"/>
-    </genClasses>
-    <genClasses ecoreClass="farm.ecore#//Farmer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference farm.ecore#//Farmer/farms"/>
     </genClasses>
     <genClasses ecoreClass="farm.ecore#//Container">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//Container/containerId"/>
@@ -483,6 +475,9 @@
     <genClasses ecoreClass="farm.ecore#//AnimalIdentifier">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//AnimalIdentifier/issuer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute farm.ecore#//AnimalIdentifier/value"/>
+    </genClasses>
+    <genClasses ecoreClass="farm.ecore#//Farmer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference farm.ecore#//Farmer/farms"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Requests" basePackage="com.agritrace.edairy.desktop.common.model"

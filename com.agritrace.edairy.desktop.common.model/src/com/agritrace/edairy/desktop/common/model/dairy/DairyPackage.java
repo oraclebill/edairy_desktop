@@ -753,22 +753,13 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__ID = ModelPackage.PERSON_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Operator Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__OPERATOR_CODE = ModelPackage.PERSON_FEATURE_COUNT + 2;
+	int EMPLOYEE__OPERATOR_CODE = ModelPackage.PERSON_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Start Date</b></em>' attribute.
@@ -777,7 +768,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__START_DATE = ModelPackage.PERSON_FEATURE_COUNT + 3;
+	int EMPLOYEE__START_DATE = ModelPackage.PERSON_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Job Function</b></em>' attribute.
@@ -786,7 +777,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__JOB_FUNCTION = ModelPackage.PERSON_FEATURE_COUNT + 4;
+	int EMPLOYEE__JOB_FUNCTION = ModelPackage.PERSON_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Department</b></em>' attribute.
@@ -795,7 +786,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__DEPARTMENT = ModelPackage.PERSON_FEATURE_COUNT + 5;
+	int EMPLOYEE__DEPARTMENT = ModelPackage.PERSON_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>National Id</b></em>' attribute.
@@ -804,7 +795,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 6;
+	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
@@ -813,7 +804,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 7;
+	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
@@ -822,7 +813,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 8;
+	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Security Role</b></em>' attribute.
@@ -831,7 +822,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 9;
+	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -840,7 +831,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 10;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -2837,17 +2828,6 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNumber <em>Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getNumber()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_Number();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getOperatorCode <em>Operator Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4628,14 +4608,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__ID = eINSTANCE.getEmployee_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__NUMBER = eINSTANCE.getEmployee_Number();
 
 		/**
 		 * The meta object literal for the '<em><b>Operator Code</b></em>' attribute feature.

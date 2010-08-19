@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getNumber <em>Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getOperatorCode <em>Operator Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getJobFunction <em>Job Function</em>}</li>
@@ -61,26 +60,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NUMBER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected String number = NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOperatorCode() <em>Operator Code</em>}' attribute.
@@ -287,27 +266,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getNumber() {
-		return number;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNumber(String newNumber) {
-		String oldNumber = number;
-		number = newNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__NUMBER, oldNumber, number));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getOperatorCode() {
 		return operatorCode;
 	}
@@ -481,8 +439,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				return getId();
-			case DairyPackage.EMPLOYEE__NUMBER:
-				return getNumber();
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				return getOperatorCode();
 			case DairyPackage.EMPLOYEE__START_DATE:
@@ -513,9 +469,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				setId((String)newValue);
-				return;
-			case DairyPackage.EMPLOYEE__NUMBER:
-				setNumber((String)newValue);
 				return;
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				setOperatorCode((String)newValue);
@@ -556,9 +509,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case DairyPackage.EMPLOYEE__NUMBER:
-				setNumber(NUMBER_EDEFAULT);
-				return;
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				setOperatorCode(OPERATOR_CODE_EDEFAULT);
 				return;
@@ -597,8 +547,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		switch (featureID) {
 			case DairyPackage.EMPLOYEE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case DairyPackage.EMPLOYEE__NUMBER:
-				return NUMBER_EDEFAULT == null ? number != null : !NUMBER_EDEFAULT.equals(number);
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				return OPERATOR_CODE_EDEFAULT == null ? operatorCode != null : !OPERATOR_CODE_EDEFAULT.equals(operatorCode);
 			case DairyPackage.EMPLOYEE__START_DATE:
@@ -631,8 +579,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
-		result.append(", number: ");
-		result.append(number);
 		result.append(", operatorCode: ");
 		result.append(operatorCode);
 		result.append(", startDate: ");
