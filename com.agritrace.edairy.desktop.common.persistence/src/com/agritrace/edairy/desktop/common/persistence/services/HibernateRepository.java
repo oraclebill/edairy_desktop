@@ -7,6 +7,8 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,11 +81,24 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public List<T> all() {
+		return allWithEagerFetch((String[]) null);
+	}
+
+	protected List<T> allWithEagerFetch(final String... paths) {
 		SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void run(Session s) {
-				setResult(s.createCriteria(getClassType()).list());
+				final Criteria crit = s.createCriteria(getClassType());
+				
+				if (paths != null) {
+					for (String path: paths) {
+						crit.setFetchMode(path, FetchMode.JOIN);
+					}
+				}
+				
+				@SuppressWarnings("unchecked")
+				List<T> result = crit.list();
+				setResult(result);
 			}
 		};
 		runWithTransaction(runner);

@@ -50,7 +50,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	private final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose", "LiveStock Name", "Species", "Breed", "Acquisition Date", "Status" };
 
-	private final IFarmRepository farmRepository;
+	private final FarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;
 	private final List<LiveStockListViewTableNode> listTableInput = new ArrayList<LiveStockListViewTableNode>();
 
@@ -66,6 +66,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	public LiveStockListController() {
 		farmRepository = new FarmRepository();
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
+		
 		for (int i = 0; i < propertyNames.length; i++) {
 			addTableColumn(columnHeaders[i], propertyNames[i], LiveStockListViewTableNode.class);
 		}
@@ -85,16 +86,19 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		final String speciesName = filterController.getSpeciesCombo().getText();
 		filterController.getStatusCombo().getText();
 		final List<Farm> farms = new ArrayList<Farm>();
+		
 		if (selectedMember != null) {
 			farms.addAll(selectedMember.getMember().getFarms());
 		} else {
-			farms.addAll(farmRepository.all());
+			farms.addAll(farmRepository.allWithAnimals());
 		}
+		
 		for (final Farm farm : farms) {
 			if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
 				animals.addAll(farm.getAnimals());
 			}
 		}
+		
 		if (!speciesName.equals("All Species")) {
 			for (final RegisteredAnimal animal : animals) {
 				if (animal.getAnimalType().getSpecies().equals(speciesName)) {
@@ -102,6 +106,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 				}
 			}
 		}
+		
 		// selectedAnimals = filterDate(animals,
 		// filterController.getDateSearchController().getStartDate(),
 		// filterController.getDateSearchController().getEndDate());
