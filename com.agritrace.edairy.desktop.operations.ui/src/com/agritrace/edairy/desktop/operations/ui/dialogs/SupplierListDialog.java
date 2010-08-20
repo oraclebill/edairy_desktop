@@ -4,13 +4,16 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -20,6 +23,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryContr
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 
@@ -40,6 +44,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 	public static final String BIND_ID_SUPPLIER_ID = "bind.id.supplier.id";
 	public static final String BIND_ID_SUPPLIER_STATUS = "bind.id.supplier.status";
 	public static final String BIND_ID_SUPPLIER_NUM = "bind.id.supplier.num";
+	public static final String BIND_ID_SUPPLIER_PHOTO = "bind.id.supplier.photo";
 
 	public SupplierListDialog(Shell parentShell) {
 		super(parentShell);
@@ -75,14 +80,24 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
-
-		final Composite comonComp = UIControlsFactory.createComposite(parent);
-		comonComp.setLayout(new GridLayout(2, false));
+		final Composite comonCompWrapper = UIControlsFactory.createComposite(parent);
+		comonCompWrapper.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
+		comonCompWrapper.setLayout(new GridLayout(2, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(comonComp);
+				.grab(true, true).applyTo(comonCompWrapper);
 
 		final GridDataFactory factory = GridDataFactory.swtDefaults()
 				.align(SWT.FILL, SWT.FILL).grab(true, true);
+
+		final Composite comonComp = new Composite(comonCompWrapper, SWT.NONE);
+		comonComp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+		comonComp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		comonComp.setLayout(new GridLayout(2, false));
+
+		final Composite photoPanel = new ProfilePhotoComposite(comonCompWrapper, SWT.NONE);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoPanel, BIND_ID_SUPPLIER_PHOTO);
+		new Label(photoPanel, SWT.NONE);
+
 		// Supplier Id
 		UIControlsFactory.createLabel(comonComp, "Supplier ID");
 		final Text txtDate = UIControlsFactory.createText(comonComp);
@@ -124,7 +139,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 				.grab(true, false).hint(-1, 50).applyTo(descText);
 		addUIControl(descText, BIND_ID_DESCRIPTION);
 
-		createAddressArea(comonComp);
+		createAddressArea(comonCompWrapper);
 
 	}
 

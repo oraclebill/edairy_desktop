@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
@@ -24,7 +25,9 @@ import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupW
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
+import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 public class SupplierDialogController extends RecordDialogController<Supplier> {
@@ -50,6 +53,9 @@ public class SupplierDialogController extends RecordDialogController<Supplier> {
 		supplierId.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__ID.getName());
 		supplierId.updateFromModel();
 		
+		final IProfilePhotoRidget profilePhoto = getRidget(IProfilePhotoRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_PHOTO);
+		profilePhoto.bindToModel(EMFObservables.observeValue(supplier, ModelPackage.Literals.COMPANY__PROFILE_PHOTO));
+
 		// Category
 		final IListRidget category = getRidget(IListRidget.class, SupplierListDialog.BIND_ID_CATEGORY);
 		if (category != null) {
