@@ -177,10 +177,13 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		final ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 		dialog.getController().setContext("tranaction-list", transactionList);
 		final int returnCode = dialog.open();
+		
 		if (returnCode == Window.OK) {
 			for (final AccountTransaction tx : transactionList) {
 				getRepository().saveNew(tx);
 			}
+			
+			refreshTableContents();
 		} else {
 			for (final AccountTransaction tx : transactionList) {
 				if (tx != null) {

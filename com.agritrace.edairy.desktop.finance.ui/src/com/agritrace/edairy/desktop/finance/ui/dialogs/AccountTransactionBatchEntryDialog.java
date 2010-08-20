@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui.dialogs;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -7,6 +9,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.AbstractMasterDetailsDelegate;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
@@ -19,14 +22,18 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanel;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanelController;
 
 public class AccountTransactionBatchEntryDialog extends BaseDialogView {
+	private final class TBEC extends BaseDialogController<AccountTransaction> {
+		private List<AccountTransaction> transactions;
 
-	private final class TBEC extends AbstractWindowController {
 		@Override
 		public void configureRidgets() {
 			super.configureRidgets();
@@ -40,8 +47,12 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 					AccountPackage.Literals.TRANSACTION__ACCOUNT.getName(),
 					AccountPackage.Literals.TRANSACTION__AMOUNT.getName() };
 
-			final List<AccountTransaction> transactions = (List<AccountTransaction>) getContext("tranaction-list");
+			@SuppressWarnings("unchecked")
+			List<AccountTransaction> transactions = (List<AccountTransaction>) getContext("tranaction-list");
+			this.transactions = transactions;
+			
 			final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
+			
 			if (master != null) {
 				master.setDelegate(new TransactionBatchEntryDialogController());
 				master.bindToModel(new WritableList(transactions, AccountTransaction.class), AccountTransaction.class,
@@ -53,6 +64,14 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 				this.addDefaultAction(master, actionApply);
 			}
 
+			super.configureButtonsPanel();
+			// We are inputting new data, no delete
+			getRidget(DialogConstants.BIND_ID_BUTTON_DELETE).setVisible(false);
+		}
+		
+		@Override
+		protected boolean validate() {
+			return super.validate() && !transactions.isEmpty();
 		}
 	}
 
@@ -81,12 +100,21 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 
 		@Override
 		public AccountTransaction createWorkingCopy() {
-			return AccountFactory.eINSTANCE.createAccountTransaction();
+			AccountTransaction transaction = AccountFactory.eINSTANCE.createAccountTransaction();
+			transaction.setTransactionDate(new Date());
+			return transaction;
 		}
 
 		@Override
 		public AccountTransaction getWorkingCopy() {
 			return workingCopy;
+		}
+		
+		@Override
+		public String isValid(IRidgetContainer container) {
+			Collection<IMarkableRidget> errors = ContainerValidator.validateContainer(container);
+			
+			return errors.isEmpty() ? null : "There are errors in the form. Please correct them before pressing Apply.";
 		}
 	}
 
