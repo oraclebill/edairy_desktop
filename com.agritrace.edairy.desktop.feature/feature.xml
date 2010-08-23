@@ -45,6 +45,7 @@
       <import plugin="com.agritrace.edairy.desktop.dairy.vehicles.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.install" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.icons" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.agritrace.edairy.desktop.reporting" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="com.csvreader" version="1.0.0" match="greaterOrEqual"/>
@@ -91,6 +92,17 @@
       <import plugin="javax.persistence"/>
       <import plugin="org.eclipse.emf.teneo.annotations" version="1.0.0" match="compatible"/>
       <import plugin="org.eclipse.core.runtime" version="3.3.0" match="compatible"/>
+      <import plugin="org.eclipse.birt.report.engine" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.birt.core" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.birt.report.data.oda.jdbc"/>
+      <import plugin="org.eclipse.birt.report.data.oda.jdbc.dbprofile"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.config"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.excel.config"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.html.config"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.pdf.config"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.prototype.excel"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.html"/>
+      <import plugin="org.eclipse.birt.report.engine.emitter.postscript"/>
    </requires>
 
    <plugin
@@ -420,6 +432,13 @@
 
    <plugin
          id="org.apache.oro"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.reporting"
          download-size="0"
          install-size="0"
          version="0.0.0"

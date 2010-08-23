@@ -46,7 +46,6 @@
       <plugin id="com.agritrace.edairy.desktop.common.model"/>
       <plugin id="com.agritrace.edairy.desktop.common.persistence"/>
       <plugin id="com.agritrace.edairy.desktop.common.ui"/>
-      <plugin id="com.agritrace.edairy.desktop.dairy.containers.ui" fragment=""/>
       <plugin id="com.agritrace.edairy.desktop.dairy.locations.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.profile.ui"/>
       <plugin id="com.agritrace.edairy.desktop.dairy.vehicles.ui"/>
@@ -55,20 +54,56 @@
       <plugin id="com.agritrace.edairy.desktop.home.ui"/>
       <plugin id="com.agritrace.edairy.desktop.icons"/>
       <plugin id="com.agritrace.edairy.desktop.install"/>
-      <plugin id="com.agritrace.edairy.desktop.member.services" fragment=""/>
       <plugin id="com.agritrace.edairy.desktop.member.ui"/>
+      <plugin id="com.agritrace.edairy.desktop.reporting"/>
       <plugin id="com.agritrace.edairy.desktop.services.ui"/>
       <plugin id="com.agritrace.edairy.desktop.suppliers.ui"/>
       <plugin id="com.csvreader"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="com.lowagie.text"/>
       <plugin id="com.mysql.jdbc"/>
       <plugin id="javax.persistence"/>
-      <plugin id="javax.transaction" fragment="true"/>
+      <plugin id="org.apache.batik.bridge"/>
+      <plugin id="org.apache.batik.css"/>
+      <plugin id="org.apache.batik.dom"/>
+      <plugin id="org.apache.batik.dom.svg"/>
+      <plugin id="org.apache.batik.ext.awt"/>
+      <plugin id="org.apache.batik.parser"/>
+      <plugin id="org.apache.batik.svggen"/>
+      <plugin id="org.apache.batik.transcoder"/>
+      <plugin id="org.apache.batik.util"/>
+      <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.batik.xml"/>
       <plugin id="org.apache.commons.beanutils"/>
+      <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.oro"/>
+      <plugin id="org.apache.xerces"/>
+      <plugin id="org.apache.xml.resolver"/>
+      <plugin id="org.apache.xml.serializer"/>
       <plugin id="org.dom4j"/>
+      <plugin id="org.eclipse.birt.chart.engine"/>
+      <plugin id="org.eclipse.birt.chart.engine.extension"/>
+      <plugin id="org.eclipse.birt.chart.reportitem"/>
+      <plugin id="org.eclipse.birt.core"/>
+      <plugin id="org.eclipse.birt.data"/>
+      <plugin id="org.eclipse.birt.data.aggregation"/>
+      <plugin id="org.eclipse.birt.report.data.adapter"/>
+      <plugin id="org.eclipse.birt.report.data.bidi.utils"/>
+      <plugin id="org.eclipse.birt.report.data.oda.jdbc"/>
+      <plugin id="org.eclipse.birt.report.data.oda.jdbc.dbprofile"/>
+      <plugin id="org.eclipse.birt.report.engine"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.config"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.excel.config"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.html"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.html.config"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.pdf.config"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.postscript"/>
+      <plugin id="org.eclipse.birt.report.engine.emitter.prototype.excel"/>
+      <plugin id="org.eclipse.birt.report.engine.fonts"/>
+      <plugin id="org.eclipse.birt.report.item.crosstab.core"/>
+      <plugin id="org.eclipse.birt.report.model"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
@@ -77,21 +112,24 @@
       <plugin id="org.eclipse.core.databinding.property"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.ecf"/>
       <plugin id="org.eclipse.ecf.filetransfer"/>
       <plugin id="org.eclipse.ecf.identity"/>
       <plugin id="org.eclipse.ecf.provider.filetransfer"/>
-      <plugin id="org.eclipse.ecf.provider.filetransfer.ssl" fragment="true"/>
-      <plugin id="org.eclipse.ecf.ssl" fragment="true"/>
-      <plugin id="org.eclipse.emf" fragment=""/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.databinding"/>
       <plugin id="org.eclipse.emf.ecore"/>
@@ -105,6 +143,21 @@
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.launcher"/>
+      <plugin id="org.eclipse.equinox.launcher.carbon.macosx" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.cocoa.macosx" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.s390" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.s390x" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.gtk.solaris.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.launcher.motif.solaris.sparc" fragment="true"/>
       <plugin id="org.eclipse.equinox.launcher.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.equinox.launcher.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.equinox.log"/>
@@ -116,10 +169,9 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
       <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
-      <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
@@ -127,7 +179,6 @@
       <plugin id="org.eclipse.nebula.widgets.compositetable"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.riena.beans.common"/>
       <plugin id="org.eclipse.riena.core"/>
       <plugin id="org.eclipse.riena.navigation"/>
@@ -143,19 +194,41 @@
       <plugin id="org.eclipse.riena.ui.swt.rcp"/>
       <plugin id="org.eclipse.riena.ui.workarea"/>
       <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.layout.grouplayout"/>
+      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.motif.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.swt.photon.qnx.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.widgets.baseline"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
+      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.ide"/>
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.hibernate"/>
       <plugin id="org.hsqldb"/>
+      <plugin id="org.mozilla.rhino"/>
       <plugin id="org.pushingpixels.trident"/>
+      <plugin id="org.w3c.css.sac"/>
+      <plugin id="org.w3c.dom.smil"/>
+      <plugin id="org.w3c.dom.svg"/>
+      <plugin id="org.w3c.sac"/>
    </plugins>
 
    <features>
