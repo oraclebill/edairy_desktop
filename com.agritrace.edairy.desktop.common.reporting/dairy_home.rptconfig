@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <list-property name="configVars">
+        <structure>
+            <property name="name">__isdisplay__fromDate_26_0</property>
+            <property name="value">Aug 13, 2010 11:58 PM</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__toDate_27_1</property>
+            <property name="value">Aug 13, 2010 11:58 PM</property>
+        </structure>
+        <structure>
+            <property name="name">fromDate_26_2</property>
+            <property name="value">2010-08-13</property>
+        </structure>
+        <structure>
+            <property name="name">fromDate_26_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">fromDate_26_expr_</property>
+            <property name="value">dataSetRow["journaldate"]</property>
+        </structure>
+        <structure>
+            <property name="name">toDate_27_3</property>
+            <property name="value">2010-08-13</property>
+        </structure>
+        <structure>
+            <property name="name">toDate_27_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">toDate_27_expr_</property>
+            <property name="value">dataSetRow["journaldate"]</property>
+        </structure>
+    </list-property>
+</report>
