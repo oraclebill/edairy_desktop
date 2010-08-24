@@ -1,5 +1,8 @@
 package com.agritrace.edairy.desktop.common.ui.dialogs;
 
+import java.io.IOException;
+
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.preference.PreferenceManager;
@@ -9,11 +12,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
+import com.agritrace.edairy.desktop.common.ui.controllers.UserSettingsController;
 
 /**
  * Preferences dialog invoked from the Preference menu, with two pages.
@@ -23,9 +25,12 @@ import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsControll
  */
 public final class PreferencesDialog extends PreferenceDialog {
 	private static final class UserPrefsPage extends PreferencePage {
+		private UserSettingsController controller;
+		
 		public UserPrefsPage() {
 			super("User preferences");
 			setDescription("Settings that affect the client installation.");
+			controller = new UserSettingsController();
 		}
 		
 		@Override
@@ -35,16 +40,8 @@ public final class PreferencesDialog extends PreferenceDialog {
 			area.setLayout(new GridLayout(2, false));
 			factory.applyTo(area);
 			
-			factory = factory.grab(false, false).hint(200, SWT.DEFAULT);
-			
-			new Label(area, SWT.LEFT).setText("Database host");
-			factory.applyTo(new Text(area, SWT.BORDER));
-			new Label(area, SWT.LEFT).setText("Database name");
-			factory.applyTo(new Text(area, SWT.BORDER));
-			new Label(area, SWT.LEFT).setText("Database user");
-			factory.applyTo(new Text(area, SWT.BORDER));
-			new Label(area, SWT.LEFT).setText("Database password");
-			factory.applyTo(new Text(area, SWT.BORDER));
+			controller.addControls(area);
+			controller.loadData();
 			
 			return area;
 		}
@@ -53,6 +50,21 @@ public final class PreferencesDialog extends PreferenceDialog {
 		public void createControl(Composite parent) {
 			super.createControl(parent);
 			getDefaultsButton().dispose();
+		}
+		
+		@Override
+		public boolean performOk() {
+			try {
+				if (controller.saveData()) {
+					MessageDialog.openInformation(this.getControl().getShell(), "Settings saved", 
+							"The user settings have been saved. The new database settings will not be used " +
+							"until the application is restarted.");
+				}
+				
+				return true;
+			} catch (IOException e) {
+				return false;
+			}
 		}
 	}
 	

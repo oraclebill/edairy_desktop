@@ -177,8 +177,19 @@ public class PersistenceManager {
 			// drop and recreate db on startup
 			props.setProperty(Environment.HBM2DDL_AUTO, "update");
 		}
+		
 		return props;
+	}
+	
+	public final Properties getProperties() {
+		return hbds.getProperties();
+	}
+	
+	public final void saveProperties(Properties properties) throws IOException {
+		File propFile = new File(DATA_AREA, PROPERTIES_FILE_NAME);
+		LOG.log(LogService.LOG_INFO, "Saving properties to " + propFile);
 
+		properties.store(new FileOutputStream(propFile), "default properties, written on " + new Date());
 	}
 
 	protected EPackage[] getEPackages() {
@@ -189,12 +200,12 @@ public class PersistenceManager {
 	protected void postInit() {
 		LOG.log(LogService.LOG_DEBUG, ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode()
 				+ "] started on thread " + Thread.currentThread());
+		
 		File propFile = new File(DATA_AREA, PROPERTIES_FILE_NAME);
+		
 		if (!propFile.exists()) {
-			LOG.log(LogService.LOG_INFO, "Saving properties to " + propFile);
 			try {
-				hbds.getProperties().store(new FileOutputStream(propFile),
-						"default properties, written on " + new Date());
+				saveProperties(getProperties());
 			} catch (FileNotFoundException e) {
 				LOG.log(LogService.LOG_WARNING, e.getMessage(), e);
 			} catch (IOException e) {
