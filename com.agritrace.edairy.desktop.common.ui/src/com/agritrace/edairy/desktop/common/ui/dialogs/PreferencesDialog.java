@@ -13,6 +13,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.UserSettingsController;
@@ -56,9 +57,14 @@ public final class PreferencesDialog extends PreferenceDialog {
 		public boolean performOk() {
 			try {
 				if (controller.saveData()) {
-					MessageDialog.openInformation(this.getControl().getShell(), "Settings saved", 
+					MessageDialog dlg = new MessageDialog(this.getControl().getShell(), "Settings saved", null,
 							"The user settings have been saved. The new database settings will not be used " +
-							"until the application is restarted.");
+							"until the application is restarted.", MessageDialog.INFORMATION,
+							new String[] { "Continue", "Restart Application" }, 1);
+					
+					if (dlg.open() == 1) {
+						PlatformUI.getWorkbench().restart();
+					}
 				}
 				
 				return true;
