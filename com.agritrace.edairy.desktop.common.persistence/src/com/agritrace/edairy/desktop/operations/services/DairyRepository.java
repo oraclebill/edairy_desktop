@@ -21,7 +21,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.osgi.service.log.LogService;
@@ -157,7 +156,10 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		public List<Membership> membersForRoute(Route defaultRoute) {
 			MembersForRoute query = new MembersForRoute(defaultRoute);
 			runWithTransaction(query);
-			return  (List<Membership>) query.getResult();
+			
+			@SuppressWarnings("unchecked")
+			List<Membership> result = (List<Membership>) query.getResult();
+			return result;
 		}
 	};
 	
