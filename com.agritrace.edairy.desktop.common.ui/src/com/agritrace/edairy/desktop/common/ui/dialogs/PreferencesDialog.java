@@ -7,12 +7,13 @@ import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 
 /**
  * Preferences dialog invoked from the Preference menu, with two pages.
@@ -56,19 +57,20 @@ public final class PreferencesDialog extends PreferenceDialog {
 	}
 	
 	private static final class SystemPrefsPage extends PreferencePage {
+		private SystemSettingsController controller;
+		
 		public SystemPrefsPage() {
 			super("System preferences");
 			setDescription("Settings that affect the entire application system.");
+			controller = new SystemSettingsController();
 		}
 		
 		@Override
 		protected Control createContents(Composite parent) {
 			final Composite area = new Composite(parent, SWT.NONE);
 			area.setLayout(new GridLayout(2, false));
-			
-			final Button checkbox = new Button(area, SWT.CHECK);
-			checkbox.setText("Encrypt user passwords");
-			GridDataFactory.swtDefaults().span(2, 1).applyTo(checkbox);
+			controller.addControls(area);
+			controller.loadData();
 			return area;
 		}
 		
@@ -76,6 +78,12 @@ public final class PreferencesDialog extends PreferenceDialog {
 		public void createControl(Composite parent) {
 			super.createControl(parent);
 			getDefaultsButton().dispose();
+		}
+		
+		@Override
+		public boolean performOk() {
+			controller.saveData();
+			return true;
 		}
 	}
 	
