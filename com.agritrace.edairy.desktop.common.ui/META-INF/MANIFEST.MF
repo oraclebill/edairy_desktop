@@ -29,6 +29,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,
+ com.agritrace.edairy.desktop.common.ui.activator,
  com.agritrace.edairy.desktop.common.ui.beans,
  com.agritrace.edairy.desktop.common.ui.columnformatters,
  com.agritrace.edairy.desktop.common.ui.controllers,
@@ -41,6 +42,7 @@ Export-Package: com.agritrace.edairy.desktop.common.ui,
  com.agritrace.edairy.desktop.common.ui.controls.location,
  com.agritrace.edairy.desktop.common.ui.controls.profilephoto,
  com.agritrace.edairy.desktop.common.ui.dialogs,
+ com.agritrace.edairy.desktop.common.ui.handlers,
  com.agritrace.edairy.desktop.common.ui.navigation,
  com.agritrace.edairy.desktop.common.ui.reference,
  com.agritrace.edairy.desktop.common.ui.util,
