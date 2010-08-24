@@ -397,6 +397,12 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="notes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GlobalSettings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passwordsEncrypted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        derived="true"/>
+  </eClassifiers>
   <eSubpackages name="account" nsURI="http://com.agritrace.edairy.desktop.common.model/account"
       nsPrefix="account">
     <eClassifiers xsi:type="ecore:EClass" name="Account">

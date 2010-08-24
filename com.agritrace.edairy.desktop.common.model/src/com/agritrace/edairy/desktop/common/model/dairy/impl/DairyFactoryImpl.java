@@ -78,6 +78,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.SUPPLIER: return createSupplier();
 			case DairyPackage.CUSTOMER: return createCustomer();
 			case DairyPackage.MILK_PRICE: return createMilkPrice();
+			case DairyPackage.GLOBAL_SETTINGS: return createGlobalSettings();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -301,6 +302,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public MilkPrice createMilkPrice() {
 		MilkPriceImpl milkPrice = new MilkPriceImpl();
 		return milkPrice;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GlobalSettings createGlobalSettings() {
+		GlobalSettingsImpl globalSettings = new GlobalSettingsImpl();
+		return globalSettings;
 	}
 
 	/**

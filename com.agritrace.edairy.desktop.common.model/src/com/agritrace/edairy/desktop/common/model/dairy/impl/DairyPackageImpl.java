@@ -23,6 +23,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
@@ -181,6 +182,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EClass milkPriceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass globalSettingsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1825,6 +1833,33 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGlobalSettings() {
+		return globalSettingsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGlobalSettings_Id() {
+		return (EAttribute)globalSettingsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGlobalSettings_PasswordsEncrypted() {
+		return (EAttribute)globalSettingsEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getJournalStatus() {
 		return journalStatusEEnum;
 	}
@@ -2088,6 +2123,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(milkPriceEClass, MILK_PRICE__ENTRY_DATE);
 		createEAttribute(milkPriceEClass, MILK_PRICE__NOTES);
 
+		globalSettingsEClass = createEClass(GLOBAL_SETTINGS);
+		createEAttribute(globalSettingsEClass, GLOBAL_SETTINGS__ID);
+		createEAttribute(globalSettingsEClass, GLOBAL_SETTINGS__PASSWORDS_ENCRYPTED);
+
 		// Create enums
 		journalStatusEEnum = createEEnum(JOURNAL_STATUS);
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
@@ -2333,6 +2372,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getMilkPrice_EnteredBy(), this.getEmployee(), null, "enteredBy", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkPrice_EntryDate(), ecorePackage.getEDate(), "entryDate", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkPrice_Notes(), ecorePackage.getEString(), "notes", null, 0, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(globalSettingsEClass, GlobalSettings.class, "GlobalSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGlobalSettings_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, GlobalSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGlobalSettings_PasswordsEncrypted(), ecorePackage.getEBoolean(), "passwordsEncrypted", null, 0, 1, GlobalSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(journalStatusEEnum, JournalStatus.class, "JournalStatus");

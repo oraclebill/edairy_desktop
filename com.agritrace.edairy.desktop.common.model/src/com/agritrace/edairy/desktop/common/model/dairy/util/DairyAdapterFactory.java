@@ -146,6 +146,10 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createMilkPriceAdapter();
 			}
 			@Override
+			public Adapter caseGlobalSettings(GlobalSettings object) {
+				return createGlobalSettingsAdapter();
+			}
+			@Override
 			public Adapter caseContactable(Contactable object) {
 				return createContactableAdapter();
 			}
@@ -416,6 +420,20 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMilkPriceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings <em>Global Settings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings
+	 * @generated
+	 */
+	public Adapter createGlobalSettingsAdapter() {
 		return null;
 	}
 

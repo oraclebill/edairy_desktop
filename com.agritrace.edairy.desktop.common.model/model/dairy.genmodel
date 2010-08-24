@@ -235,6 +235,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/entryDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/notes"/>
     </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//GlobalSettings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//GlobalSettings/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//GlobalSettings/passwordsEncrypted"/>
+    </genClasses>
     <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.desktop.common.model.dairy"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionType">

@@ -2305,6 +2305,43 @@ public interface DairyPackage extends EPackage {
 	int MILK_PRICE_FEATURE_COUNT = 7;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl <em>Global Settings</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getGlobalSettings()
+	 * @generated
+	 */
+	int GLOBAL_SETTINGS = 17;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_SETTINGS__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Passwords Encrypted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_SETTINGS__PASSWORDS_ENCRYPTED = 1;
+
+	/**
+	 * The number of structural features of the '<em>Global Settings</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_SETTINGS_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2312,7 +2349,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getJournalStatus()
 	 * @generated
 	 */
-	int JOURNAL_STATUS = 17;
+	int JOURNAL_STATUS = 18;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
@@ -2322,7 +2359,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 18;
+	int MEMBERSHIP_STATUS = 19;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}' enum.
@@ -2332,7 +2369,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSession()
 	 * @generated
 	 */
-	int SESSION = 19;
+	int SESSION = 20;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
@@ -2342,7 +2379,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 20;
+	int VENDOR_STATUS = 21;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2352,7 +2389,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 21;
+	int DAIRY_FUNCTION = 22;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod <em>Milk Price Period</em>}' enum.
@@ -2362,7 +2399,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPricePeriod()
 	 * @generated
 	 */
-	int MILK_PRICE_PERIOD = 22;
+	int MILK_PRICE_PERIOD = 23;
 
 
 	/**
@@ -4208,6 +4245,38 @@ public interface DairyPackage extends EPackage {
 	EAttribute getMilkPrice_Notes();
 
 	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings <em>Global Settings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Global Settings</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings
+	 * @generated
+	 */
+	EClass getGlobalSettings();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#getId()
+	 * @see #getGlobalSettings()
+	 * @generated
+	 */
+	EAttribute getGlobalSettings_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#isPasswordsEncrypted <em>Passwords Encrypted</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Passwords Encrypted</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#isPasswordsEncrypted()
+	 * @see #getGlobalSettings()
+	 * @generated
+	 */
+	EAttribute getGlobalSettings_PasswordsEncrypted();
+
+	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5674,6 +5743,32 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MILK_PRICE__NOTES = eINSTANCE.getMilkPrice_Notes();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl <em>Global Settings</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getGlobalSettings()
+		 * @generated
+		 */
+		EClass GLOBAL_SETTINGS = eINSTANCE.getGlobalSettings();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GLOBAL_SETTINGS__ID = eINSTANCE.getGlobalSettings_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Passwords Encrypted</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GLOBAL_SETTINGS__PASSWORDS_ENCRYPTED = eINSTANCE.getGlobalSettings_PasswordsEncrypted();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
