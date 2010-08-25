@@ -44,7 +44,6 @@ public class SiteSettingsController {
 		// JDBC URL requires special treatment
 		final String url = String.format("jdbc:mysql://%s/%s", prefs.getString(DB_HOST), prefs.getString(DB_NAME));
 		props.setProperty(Environment.URL, url);
-		System.out.println(String.format("URL: %s, property: %s", url, props.getProperty(Environment.URL)));
 	}
 	
 	private Properties props;
