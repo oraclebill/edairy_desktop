@@ -4,6 +4,7 @@
          id="dairy_manager_prod"
          point="org.eclipse.core.runtime.products">
       <product
+            id="com.agritrace.edairy.desktop.dairy_manager_prod"
             application="com.agritrace.edairy.desktop.dairy_manager_app"
             name="eDairy Manager Destop">
          <property
@@ -22,6 +23,8 @@
                name="windowImages"
                value="platform:/plugin/com.agritrace.edairy.desktop.icons/icons/application.png">
          </property>
+         <property name="startupProgressRect" value="7,300,285,15"/>
+         <property name="startupMessageRect" value="305,300,200,15"/>
       </product>
    </extension>
    <extension
@@ -187,9 +190,17 @@
           id="com.agritrace.edairy.desktop.splashHandlers.interactive">
     </splashHandler>
     <splashHandler
-          class="com.agritrace.edairy.desktop.splashHandlers.BrowserSplashHandler"
+          class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
           id="com.agritrace.edairy.desktop.splashHandlers.browser">
     </splashHandler>
+    <splashHandler
+          class="com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
+          id="com.agritrace.edairy.desktop.splashHandlers.edairy">
+    </splashHandler>
+    <splashHandlerProductBinding
+            productId="com.agritrace.edairy.desktop.dairy_manager_prod"
+            splashId="com.agritrace.edairy.desktop.splashHandlers.edairy">
+      </splashHandlerProductBinding>
  </extension>
  <extension
        point="com.agritrace.edairy.desktop.splashExtension">
