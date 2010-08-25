@@ -2287,32 +2287,23 @@ public interface DairyPackage extends EPackage {
 	int MILK_PRICE__ENTRY_DATE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Notes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MILK_PRICE__NOTES = 6;
-
-	/**
 	 * The number of structural features of the '<em>Milk Price</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE_FEATURE_COUNT = 7;
+	int MILK_PRICE_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl <em>Global Settings</em>}' class.
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceImpl <em>Preference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getGlobalSettings()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreference()
 	 * @generated
 	 */
-	int GLOBAL_SETTINGS = 17;
+	int PREFERENCE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2321,25 +2312,89 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GLOBAL_SETTINGS__ID = 0;
+	int PREFERENCE__ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Passwords Encrypted</b></em>' attribute.
+	 * The feature id for the '<em><b>Key</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GLOBAL_SETTINGS__PASSWORDS_ENCRYPTED = 1;
+	int PREFERENCE__KEY = 1;
 
 	/**
-	 * The number of structural features of the '<em>Global Settings</em>' class.
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GLOBAL_SETTINGS_FEATURE_COUNT = 2;
+	int PREFERENCE__VALUE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Preference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFERENCE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceKeyImpl <em>Preference Key</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceKeyImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceKey()
+	 * @generated
+	 */
+	int PREFERENCE_KEY = 18;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFERENCE_KEY__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFERENCE_KEY__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFERENCE_KEY__DEFAULT_VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFERENCE_KEY__TYPE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Preference Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFERENCE_KEY_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
@@ -2349,7 +2404,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getJournalStatus()
 	 * @generated
 	 */
-	int JOURNAL_STATUS = 18;
+	int JOURNAL_STATUS = 19;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
@@ -2359,7 +2414,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 19;
+	int MEMBERSHIP_STATUS = 20;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}' enum.
@@ -2369,7 +2424,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSession()
 	 * @generated
 	 */
-	int SESSION = 20;
+	int SESSION = 21;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
@@ -2379,7 +2434,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 21;
+	int VENDOR_STATUS = 22;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2389,7 +2444,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 22;
+	int DAIRY_FUNCTION = 23;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod <em>Milk Price Period</em>}' enum.
@@ -2399,7 +2454,18 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPricePeriod()
 	 * @generated
 	 */
-	int MILK_PRICE_PERIOD = 23;
+	int MILK_PRICE_PERIOD = 24;
+
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceType <em>Preference Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceType
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceType()
+	 * @generated
+	 */
+	int PREFERENCE_TYPE = 25;
 
 
 	/**
@@ -4234,47 +4300,101 @@ public interface DairyPackage extends EPackage {
 	EAttribute getMilkPrice_EntryDate();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getNotes <em>Notes</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Preference <em>Preference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Notes</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getNotes()
-	 * @see #getMilkPrice()
+	 * @return the meta object for class '<em>Preference</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Preference
 	 * @generated
 	 */
-	EAttribute getMilkPrice_Notes();
+	EClass getPreference();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings <em>Global Settings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Global Settings</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings
-	 * @generated
-	 */
-	EClass getGlobalSettings();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Preference#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#getId()
-	 * @see #getGlobalSettings()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Preference#getId()
+	 * @see #getPreference()
 	 * @generated
 	 */
-	EAttribute getGlobalSettings_Id();
+	EAttribute getPreference_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#isPasswordsEncrypted <em>Passwords Encrypted</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Preference#getKey <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Passwords Encrypted</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings#isPasswordsEncrypted()
-	 * @see #getGlobalSettings()
+	 * @return the meta object for the reference '<em>Key</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Preference#getKey()
+	 * @see #getPreference()
 	 * @generated
 	 */
-	EAttribute getGlobalSettings_PasswordsEncrypted();
+	EReference getPreference_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Preference#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Preference#getValue()
+	 * @see #getPreference()
+	 * @generated
+	 */
+	EAttribute getPreference_Value();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey <em>Preference Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Preference Key</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey
+	 * @generated
+	 */
+	EClass getPreferenceKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getId()
+	 * @see #getPreferenceKey()
+	 * @generated
+	 */
+	EAttribute getPreferenceKey_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getName()
+	 * @see #getPreferenceKey()
+	 * @generated
+	 */
+	EAttribute getPreferenceKey_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getDefaultValue <em>Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Value</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getDefaultValue()
+	 * @see #getPreferenceKey()
+	 * @generated
+	 */
+	EAttribute getPreferenceKey_DefaultValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey#getType()
+	 * @see #getPreferenceKey()
+	 * @generated
+	 */
+	EAttribute getPreferenceKey_Type();
 
 	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}'.
@@ -4335,6 +4455,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getMilkPricePeriod();
+
+	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceType <em>Preference Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Preference Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceType
+	 * @generated
+	 */
+	EEnum getPreferenceType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -5737,22 +5867,14 @@ public interface DairyPackage extends EPackage {
 		EAttribute MILK_PRICE__ENTRY_DATE = eINSTANCE.getMilkPrice_EntryDate();
 
 		/**
-		 * The meta object literal for the '<em><b>Notes</b></em>' attribute feature.
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceImpl <em>Preference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreference()
 		 * @generated
 		 */
-		EAttribute MILK_PRICE__NOTES = eINSTANCE.getMilkPrice_Notes();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl <em>Global Settings</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.GlobalSettingsImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getGlobalSettings()
-		 * @generated
-		 */
-		EClass GLOBAL_SETTINGS = eINSTANCE.getGlobalSettings();
+		EClass PREFERENCE = eINSTANCE.getPreference();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -5760,15 +5882,65 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GLOBAL_SETTINGS__ID = eINSTANCE.getGlobalSettings_Id();
+		EAttribute PREFERENCE__ID = eINSTANCE.getPreference_Id();
 
 		/**
-		 * The meta object literal for the '<em><b>Passwords Encrypted</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GLOBAL_SETTINGS__PASSWORDS_ENCRYPTED = eINSTANCE.getGlobalSettings_PasswordsEncrypted();
+		EReference PREFERENCE__KEY = eINSTANCE.getPreference_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREFERENCE__VALUE = eINSTANCE.getPreference_Value();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceKeyImpl <em>Preference Key</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceKeyImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceKey()
+		 * @generated
+		 */
+		EClass PREFERENCE_KEY = eINSTANCE.getPreferenceKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREFERENCE_KEY__ID = eINSTANCE.getPreferenceKey_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREFERENCE_KEY__NAME = eINSTANCE.getPreferenceKey_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREFERENCE_KEY__DEFAULT_VALUE = eINSTANCE.getPreferenceKey_DefaultValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREFERENCE_KEY__TYPE = eINSTANCE.getPreferenceKey_Type();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
@@ -5829,6 +6001,16 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MILK_PRICE_PERIOD = eINSTANCE.getMilkPricePeriod();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceType <em>Preference Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceType
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceType()
+		 * @generated
+		 */
+		EEnum PREFERENCE_TYPE = eINSTANCE.getPreferenceType();
 
 	}
 

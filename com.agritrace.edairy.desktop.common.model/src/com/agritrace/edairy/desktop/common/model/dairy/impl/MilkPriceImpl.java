@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getValue <em>Value</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getEnteredBy <em>Entered By</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getEntryDate <em>Entry Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getNotes <em>Notes</em>}</li>
  * </ul>
  * </p>
  *
@@ -152,26 +151,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	 * @ordered
 	 */
 	protected Date entryDate = ENTRY_DATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getNotes() <em>Notes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNotes()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NOTES_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getNotes() <em>Notes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNotes()
-	 * @generated
-	 * @ordered
-	 */
-	protected String notes = NOTES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -340,27 +319,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getNotes() {
-		return notes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNotes(String newNotes) {
-		String oldNotes = notes;
-		notes = newNotes;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_PRICE__NOTES, oldNotes, notes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -377,8 +335,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 				return basicGetEnteredBy();
 			case DairyPackage.MILK_PRICE__ENTRY_DATE:
 				return getEntryDate();
-			case DairyPackage.MILK_PRICE__NOTES:
-				return getNotes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -408,9 +364,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 				return;
 			case DairyPackage.MILK_PRICE__ENTRY_DATE:
 				setEntryDate((Date)newValue);
-				return;
-			case DairyPackage.MILK_PRICE__NOTES:
-				setNotes((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -442,9 +395,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 			case DairyPackage.MILK_PRICE__ENTRY_DATE:
 				setEntryDate(ENTRY_DATE_EDEFAULT);
 				return;
-			case DairyPackage.MILK_PRICE__NOTES:
-				setNotes(NOTES_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -469,8 +419,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 				return enteredBy != null;
 			case DairyPackage.MILK_PRICE__ENTRY_DATE:
 				return ENTRY_DATE_EDEFAULT == null ? entryDate != null : !ENTRY_DATE_EDEFAULT.equals(entryDate);
-			case DairyPackage.MILK_PRICE__NOTES:
-				return NOTES_EDEFAULT == null ? notes != null : !NOTES_EDEFAULT.equals(notes);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -495,8 +443,6 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 		result.append(value);
 		result.append(", entryDate: ");
 		result.append(entryDate);
-		result.append(", notes: ");
-		result.append(notes);
 		result.append(')');
 		return result.toString();
 	}

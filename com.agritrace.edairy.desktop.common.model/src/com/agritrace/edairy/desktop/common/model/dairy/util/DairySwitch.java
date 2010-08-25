@@ -205,9 +205,15 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.GLOBAL_SETTINGS: {
-				GlobalSettings globalSettings = (GlobalSettings)theEObject;
-				T result = caseGlobalSettings(globalSettings);
+			case DairyPackage.PREFERENCE: {
+				Preference preference = (Preference)theEObject;
+				T result = casePreference(preference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.PREFERENCE_KEY: {
+				PreferenceKey preferenceKey = (PreferenceKey)theEObject;
+				T result = casePreferenceKey(preferenceKey);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -471,17 +477,32 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Global Settings</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Preference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Global Settings</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Preference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGlobalSettings(GlobalSettings object) {
+	public T casePreference(Preference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Preference Key</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Preference Key</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePreferenceKey(PreferenceKey object) {
 		return null;
 	}
 

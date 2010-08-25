@@ -1,35 +1,17 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-
-import com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings;
-import com.agritrace.edairy.desktop.operations.services.GlobalSettingsRepository;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceStore;
 
 public final class SystemSettingsController {
-	private Button encryptUserPasswords;
-	private GlobalSettingsRepository repository;
+	public static final String ENCRYPT_PASSWORDS = "edairy.security.encrypt_passwords";
 	
-	public SystemSettingsController() {
-		repository = new GlobalSettingsRepository();
-	}
-	
-	public void addControls(Composite area) {
-		encryptUserPasswords = new Button(area, SWT.CHECK);
-		encryptUserPasswords.setText("Encrypt user passwords");
-		GridDataFactory.swtDefaults().span(2, 1).applyTo(encryptUserPasswords);
-	}
-	
-	public void loadData() {
-		GlobalSettings settings = repository.get();
-		encryptUserPasswords.setSelection(settings.isPasswordsEncrypted());
+	public IPreferenceStore loadData() {
+		// TODO: Stub
+		return new PreferenceStore();
 	}
 	
 	public void saveData() {
-		GlobalSettings settings = repository.get();
-		settings.setPasswordsEncrypted(encryptUserPasswords.getSelection());
-		repository.save(settings);
+		// TODO: Stub
 	}
 }

@@ -179,13 +179,22 @@ public interface DairyFactory extends EFactory {
 	MilkPrice createMilkPrice();
 
 	/**
-	 * Returns a new object of class '<em>Global Settings</em>'.
+	 * Returns a new object of class '<em>Preference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Global Settings</em>'.
+	 * @return a new object of class '<em>Preference</em>'.
 	 * @generated
 	 */
-	GlobalSettings createGlobalSettings();
+	Preference createPreference();
+
+	/**
+	 * Returns a new object of class '<em>Preference Key</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Preference Key</em>'.
+	 * @generated
+	 */
+	PreferenceKey createPreferenceKey();
 
 	/**
 	 * Returns the package supported by this factory.

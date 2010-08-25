@@ -146,8 +146,12 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createMilkPriceAdapter();
 			}
 			@Override
-			public Adapter caseGlobalSettings(GlobalSettings object) {
-				return createGlobalSettingsAdapter();
+			public Adapter casePreference(Preference object) {
+				return createPreferenceAdapter();
+			}
+			@Override
+			public Adapter casePreferenceKey(PreferenceKey object) {
+				return createPreferenceKeyAdapter();
 			}
 			@Override
 			public Adapter caseContactable(Contactable object) {
@@ -424,16 +428,30 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings <em>Global Settings</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.Preference <em>Preference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Preference
 	 * @generated
 	 */
-	public Adapter createGlobalSettingsAdapter() {
+	public Adapter createPreferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey <em>Preference Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey
+	 * @generated
+	 */
+	public Adapter createPreferenceKeyAdapter() {
 		return null;
 	}
 

@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getValue <em>Value</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEnteredBy <em>Entered By</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEntryDate <em>Entry Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getNotes <em>Notes</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,31 +193,5 @@ public interface MilkPrice extends EObject {
 	 * @generated
 	 */
 	void setEntryDate(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Notes</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Notes</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Notes</em>' attribute.
-	 * @see #setNotes(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkPrice_Notes()
-	 * @model
-	 * @generated
-	 */
-	String getNotes();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getNotes <em>Notes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Notes</em>' attribute.
-	 * @see #getNotes()
-	 * @generated
-	 */
-	void setNotes(String value);
 
 } // MilkPrice

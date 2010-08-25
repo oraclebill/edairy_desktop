@@ -78,7 +78,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.SUPPLIER: return createSupplier();
 			case DairyPackage.CUSTOMER: return createCustomer();
 			case DairyPackage.MILK_PRICE: return createMilkPrice();
-			case DairyPackage.GLOBAL_SETTINGS: return createGlobalSettings();
+			case DairyPackage.PREFERENCE: return createPreference();
+			case DairyPackage.PREFERENCE_KEY: return createPreferenceKey();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -104,6 +105,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createDairyFunctionFromString(eDataType, initialValue);
 			case DairyPackage.MILK_PRICE_PERIOD:
 				return createMilkPricePeriodFromString(eDataType, initialValue);
+			case DairyPackage.PREFERENCE_TYPE:
+				return createPreferenceTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +132,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertDairyFunctionToString(eDataType, instanceValue);
 			case DairyPackage.MILK_PRICE_PERIOD:
 				return convertMilkPricePeriodToString(eDataType, instanceValue);
+			case DairyPackage.PREFERENCE_TYPE:
+				return convertPreferenceTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -309,9 +314,19 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GlobalSettings createGlobalSettings() {
-		GlobalSettingsImpl globalSettings = new GlobalSettingsImpl();
-		return globalSettings;
+	public Preference createPreference() {
+		PreferenceImpl preference = new PreferenceImpl();
+		return preference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PreferenceKey createPreferenceKey() {
+		PreferenceKeyImpl preferenceKey = new PreferenceKeyImpl();
+		return preferenceKey;
 	}
 
 	/**
@@ -431,6 +446,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertMilkPricePeriodToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PreferenceType createPreferenceTypeFromString(EDataType eDataType, String initialValue) {
+		PreferenceType result = PreferenceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPreferenceTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

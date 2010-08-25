@@ -29,6 +29,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
+import com.agritrace.edairy.desktop.common.model.dairy.Preference;
+import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
+import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
@@ -188,7 +191,14 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass globalSettingsEClass = null;
+	private EClass preferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass preferenceKeyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -231,6 +241,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum milkPricePeriodEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum preferenceTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1824,8 +1841,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_Notes() {
-		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(6);
+	public EClass getPreference() {
+		return preferenceEClass;
 	}
 
 	/**
@@ -1833,8 +1850,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getGlobalSettings() {
-		return globalSettingsEClass;
+	public EAttribute getPreference_Id() {
+		return (EAttribute)preferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1842,8 +1859,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGlobalSettings_Id() {
-		return (EAttribute)globalSettingsEClass.getEStructuralFeatures().get(0);
+	public EReference getPreference_Key() {
+		return (EReference)preferenceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1851,8 +1868,53 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGlobalSettings_PasswordsEncrypted() {
-		return (EAttribute)globalSettingsEClass.getEStructuralFeatures().get(1);
+	public EAttribute getPreference_Value() {
+		return (EAttribute)preferenceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPreferenceKey() {
+		return preferenceKeyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPreferenceKey_Id() {
+		return (EAttribute)preferenceKeyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPreferenceKey_Name() {
+		return (EAttribute)preferenceKeyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPreferenceKey_DefaultValue() {
+		return (EAttribute)preferenceKeyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPreferenceKey_Type() {
+		return (EAttribute)preferenceKeyEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1907,6 +1969,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EEnum getMilkPricePeriod() {
 		return milkPricePeriodEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getPreferenceType() {
+		return preferenceTypeEEnum;
 	}
 
 	/**
@@ -2121,11 +2192,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(milkPriceEClass, MILK_PRICE__VALUE);
 		createEReference(milkPriceEClass, MILK_PRICE__ENTERED_BY);
 		createEAttribute(milkPriceEClass, MILK_PRICE__ENTRY_DATE);
-		createEAttribute(milkPriceEClass, MILK_PRICE__NOTES);
 
-		globalSettingsEClass = createEClass(GLOBAL_SETTINGS);
-		createEAttribute(globalSettingsEClass, GLOBAL_SETTINGS__ID);
-		createEAttribute(globalSettingsEClass, GLOBAL_SETTINGS__PASSWORDS_ENCRYPTED);
+		preferenceEClass = createEClass(PREFERENCE);
+		createEAttribute(preferenceEClass, PREFERENCE__ID);
+		createEReference(preferenceEClass, PREFERENCE__KEY);
+		createEAttribute(preferenceEClass, PREFERENCE__VALUE);
+
+		preferenceKeyEClass = createEClass(PREFERENCE_KEY);
+		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__ID);
+		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__NAME);
+		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__DEFAULT_VALUE);
+		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__TYPE);
 
 		// Create enums
 		journalStatusEEnum = createEEnum(JOURNAL_STATUS);
@@ -2134,6 +2211,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		vendorStatusEEnum = createEEnum(VENDOR_STATUS);
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 		milkPricePeriodEEnum = createEEnum(MILK_PRICE_PERIOD);
+		preferenceTypeEEnum = createEEnum(PREFERENCE_TYPE);
 	}
 
 	/**
@@ -2371,11 +2449,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getMilkPrice_Value(), ecorePackage.getEBigDecimal(), "value", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMilkPrice_EnteredBy(), this.getEmployee(), null, "enteredBy", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkPrice_EntryDate(), ecorePackage.getEDate(), "entryDate", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_Notes(), ecorePackage.getEString(), "notes", null, 0, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(globalSettingsEClass, GlobalSettings.class, "GlobalSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getGlobalSettings_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, GlobalSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGlobalSettings_PasswordsEncrypted(), ecorePackage.getEBoolean(), "passwordsEncrypted", null, 0, 1, GlobalSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEClass(preferenceEClass, Preference.class, "Preference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPreference_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Preference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPreference_Key(), this.getPreferenceKey(), null, "key", null, 0, 1, Preference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPreference_Value(), ecorePackage.getEString(), "value", null, 0, 1, Preference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(preferenceKeyEClass, PreferenceKey.class, "PreferenceKey", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPreferenceKey_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPreferenceKey_Name(), ecorePackage.getEString(), "name", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPreferenceKey_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPreferenceKey_Type(), this.getPreferenceType(), "type", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(journalStatusEEnum, JournalStatus.class, "JournalStatus");
@@ -2419,6 +2503,14 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.MONTHLY);
 		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.AD_HOC);
 		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.HOURLY);
+
+		initEEnum(preferenceTypeEEnum, PreferenceType.class, "PreferenceType");
+		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.STRING);
+		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.BOOLEAN);
+		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.INT);
+		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.LONG);
+		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.FLOAT);
+		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.DOUBLE);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -3,16 +3,13 @@ package com.agritrace.edairy.desktop.common.ui.dialogs;
 import java.io.IOException;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.preference.PreferenceManager;
 import org.eclipse.jface.preference.PreferenceNode;
-import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.hibernate.cfg.Environment;
@@ -84,22 +81,13 @@ public final class PreferencesDialog extends PreferenceDialog {
 		}
 	}
 	
-	private static final class SystemPrefsPage extends PreferencePage {
+	private static final class SystemPrefsPage extends FieldEditorPreferencePage {
 		private SystemSettingsController controller;
 		
 		public SystemPrefsPage() {
-			super("System preferences");
+			super("System preferences", GRID);
 			setDescription("Settings that affect the entire application system.");
 			controller = new SystemSettingsController();
-		}
-		
-		@Override
-		protected Control createContents(Composite parent) {
-			final Composite area = new Composite(parent, SWT.NONE);
-			area.setLayout(new GridLayout(2, false));
-			controller.addControls(area);
-			controller.loadData();
-			return area;
 		}
 		
 		@Override
@@ -110,8 +98,23 @@ public final class PreferencesDialog extends PreferenceDialog {
 		
 		@Override
 		public boolean performOk() {
+			super.performOk();
 			controller.saveData();
 			return true;
+		}
+
+		@Override
+		public boolean performCancel() {
+			// Suppress default cancel action, do nothing
+			return true;
+		}
+
+		@Override
+		protected void createFieldEditors() {
+			setPreferenceStore(controller.loadData());
+			Composite comp = getFieldEditorParent();
+			
+			addField(new BooleanFieldEditor(SystemSettingsController.ENCRYPT_PASSWORDS, "Encrypt user passwords", comp));
 		}
 	}
 	

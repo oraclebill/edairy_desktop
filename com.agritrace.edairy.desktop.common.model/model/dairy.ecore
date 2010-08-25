@@ -395,13 +395,27 @@
         eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entryDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GlobalSettings">
+  <eClassifiers xsi:type="ecore:EClass" name="Preference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passwordsEncrypted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//PreferenceKey"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PreferenceType">
+    <eLiterals name="String" literal="String"/>
+    <eLiterals name="Boolean" value="1" literal="Boolean"/>
+    <eLiterals name="Int" value="2" literal="Int"/>
+    <eLiterals name="Long" value="3" literal="Long"/>
+    <eLiterals name="Float" value="4"/>
+    <eLiterals name="Double" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PreferenceKey">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PreferenceType"/>
   </eClassifiers>
   <eSubpackages name="account" nsURI="http://com.agritrace.edairy.desktop.common.model/account"
       nsPrefix="account">
