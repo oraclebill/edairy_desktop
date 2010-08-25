@@ -24,18 +24,18 @@ import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
  *
  */
 public final class DBPreferenceStore implements IPersistentPreferenceStore {
-	private Set<IPropertyChangeListener> listeners = new HashSet<IPropertyChangeListener>();
-	private Map<String, Preference> values = new HashMap<String, Preference>();
-	private Map<String, PreferenceKey> keys = new HashMap<String, PreferenceKey>();
+	private final Set<IPropertyChangeListener> listeners = new HashSet<IPropertyChangeListener>();
+	private final Map<String, Preference> values = new HashMap<String, Preference>();
+	private final Map<String, PreferenceKey> keys = new HashMap<String, PreferenceKey>();
 	private boolean needsSaving = false;
 	
 	/* Load and store */
 	public DBPreferenceStore() {
-		for (PreferenceKey key: RepositoryFactory.getRepository(PreferenceKey.class).all()) {
+		for (final PreferenceKey key: RepositoryFactory.getRepository(PreferenceKey.class).all()) {
 			keys.put(key.getName(), key);
 		}
 
-		for (Preference value: RepositoryFactory.getRepository(Preference.class).all()) {
+		for (final Preference value: RepositoryFactory.getRepository(Preference.class).all()) {
 			values.put(value.getKey().getName(), value);
 		}
 	}
@@ -46,19 +46,19 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 			if (!needsSaving())
 				return;
 			
-			IRepository<PreferenceKey> keyRepo = RepositoryFactory.getRepository(PreferenceKey.class);
-			IRepository<Preference> valueRepo = RepositoryFactory.getRepository(Preference.class);
+			final IRepository<PreferenceKey> keyRepo = RepositoryFactory.getRepository(PreferenceKey.class);
+			final IRepository<Preference> valueRepo = RepositoryFactory.getRepository(Preference.class);
 			
 			// First save...
 			
-			for (PreferenceKey key: keys.values()) {
+			for (final PreferenceKey key: keys.values()) {
 				if (key.getId() == null)
 					keyRepo.saveNew(key);
 				else
 					keyRepo.save(key);
 			}
 			
-			for (Preference value: values.values()) {
+			for (final Preference value: values.values()) {
 				if (value.getId() == null)
 					valueRepo.saveNew(value);
 				else
@@ -67,12 +67,12 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 			
 			// Then delete unused objects
 	
-			for (Preference value: valueRepo.all()) {
+			for (final Preference value: valueRepo.all()) {
 				if (!values.containsKey(value.getKey().getName()))
 					valueRepo.delete(value);
 			}
 
-			for (PreferenceKey key: keyRepo.all()) {
+			for (final PreferenceKey key: keyRepo.all()) {
 				if (!keys.containsKey(key.getName()))
 					keyRepo.delete(key);
 			}
@@ -86,7 +86,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	/* Internal helper functions */
 	
 	private String getValue(String key, PreferenceType type) {
-		Preference value = values.get(key);
+		final Preference value = values.get(key);
 		
 		if (value == null)
 			return getDefaultValue(key, type);
@@ -206,7 +206,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	}
 	
 	private void firePropertyChangeEvent(Preference pref, String oldValue) {
-		PreferenceKey key = pref.getKey();
+		final PreferenceKey key = pref.getKey();
 		firePropertyChangeEvent(key.getName(), toType(key.getType(), oldValue), toType(key.getType(), pref.getValue()));
 	}
 	
@@ -224,7 +224,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	
 	@Override
 	public void firePropertyChangeEvent(String property, Object oldValue, Object newValue) {
-		for (IPropertyChangeListener listener: listeners) {
+		for (final IPropertyChangeListener listener: listeners) {
 			listener.propertyChange(new PropertyChangeEvent(this, property, oldValue, newValue));
 		}
 	}
