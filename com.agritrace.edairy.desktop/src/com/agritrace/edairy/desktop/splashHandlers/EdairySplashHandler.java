@@ -8,16 +8,24 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.internal.splash.EclipseSplashHandler;
 import org.eclipse.ui.splash.BasicSplashHandler;
 
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 
 @SuppressWarnings("restriction")
 public class EdairySplashHandler extends EclipseSplashHandler {
-	/*
 	@Override
 	public void init(Shell splash) {
 		super.init(splash);
+
+		getBundleProgressMonitor().beginTask("Initializing database", 1);
+		getSplash().getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				PersistenceManager.getDefault().getSession().close();
+				getBundleProgressMonitor().worked(1);
+			}
+		});
 	}
-	*/
 	
 	@Override
 	protected Composite getContent() {
@@ -31,7 +39,6 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		// parent.setBackground(new Color(parent.getDisplay(), 255, 128, 128));
 		//parent.setBackgroundMode(SWT.INHERIT_FORCE);
 		monitor.setBackgroundImage(Activator.getImage("splash/splash.bmp"));
-		
 		return monitor;
 	}
 }
