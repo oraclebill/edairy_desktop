@@ -8,8 +8,10 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.preference.PreferenceManager;
 import org.eclipse.jface.preference.PreferenceNode;
+import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.hibernate.cfg.Environment;
@@ -64,12 +66,6 @@ public final class PreferencesDialog extends PreferenceDialog {
 		}
 		
 		@Override
-		public boolean performCancel() {
-			// Suppress default cancel action, do nothing
-			return true;
-		}
-
-		@Override
 		protected void createFieldEditors() {
 			setPreferenceStore(controller.loadData());
 			Composite comp = getFieldEditorParent();
@@ -78,6 +74,19 @@ public final class PreferencesDialog extends PreferenceDialog {
 			addField(new StringFieldEditor(SiteSettingsController.DB_NAME, "Database name:", comp));
 			addField(new StringFieldEditor(Environment.USER, "Database user:", comp));
 			addField(new StringFieldEditor(Environment.PASS, "Database password:", comp));
+		}
+	}
+	
+	private static class UserPrefsPage extends PreferencePage {
+		public UserPrefsPage() {
+			super("User preferences");
+			setDescription("Users are not yet implemented.");
+			noDefaultAndApplyButton();
+		}
+		
+		@Override
+		protected Control createContents(Composite parent) {
+			return null;
 		}
 	}
 	
@@ -99,14 +108,13 @@ public final class PreferencesDialog extends PreferenceDialog {
 		@Override
 		public boolean performOk() {
 			super.performOk();
-			controller.saveData();
-			return true;
-		}
-
-		@Override
-		public boolean performCancel() {
-			// Suppress default cancel action, do nothing
-			return true;
+			
+			try {
+				controller.saveData();
+				return true;
+			} catch (IOException e) {
+				return false;
+			}
 		}
 
 		@Override
@@ -122,9 +130,15 @@ public final class PreferencesDialog extends PreferenceDialog {
 		super(parentShell, createPreferenceManager());
 	}
 	
+	@Override
+	protected void handleSave() {
+		// Do nothing, everything is saved in performOk events
+	}
+	
 	private static PreferenceManager createPreferenceManager() {
 		PreferenceManager manager = new PreferenceManager();
-		manager.addToRoot(new PreferenceNode("user", new SitePrefsPage()));
+		manager.addToRoot(new PreferenceNode("site", new SitePrefsPage()));
+		manager.addToRoot(new PreferenceNode("user", new UserPrefsPage()));
 		manager.addToRoot(new PreferenceNode("system", new SystemPrefsPage()));
 		return manager;
 	}

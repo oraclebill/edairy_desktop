@@ -61,7 +61,10 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	private String getDefaultValue(String key, PreferenceType type) {
 		PreferenceKey keyObject = keys.get(key);
 		
-		if (keyObject == null || keyObject.getType() != type || keyObject.getDefaultValue() == null)
+		if (keyObject == null) {
+			// Create setting upon first access
+			keyObject = setDefaultValue(key, type, getDefaultDefaultValue(type));
+		} else if (keyObject.getType() != type || keyObject.getDefaultValue() == null)
 			throw new NumberFormatException("Internal exception to be caught by getXXX");
 		
 		return keyObject.getDefaultValue();
@@ -74,11 +77,8 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 			PreferenceKey keyObject = keys.get(key);
 			
 			if (keyObject == null) {
-				keyObject = DairyFactory.eINSTANCE.createPreferenceKey();
-				keyObject.setName(key);
-				keyObject.setType(type);
-				keyObject.setDefaultValue(getDefaultDefaultValue(type));
-				keys.put(key, keyObject);
+				// Create setting upon first access
+				keyObject = setDefaultValue(key, type, getDefaultDefaultValue(type));
 			} else if (type != keyObject.getType())
 				throw new IllegalArgumentException("Attempting to set property to an invalid type");
 			
@@ -112,7 +112,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 		}
 	}
 	
-	private void setDefaultValue(String key, PreferenceType type, String value) {
+	private PreferenceKey setDefaultValue(String key, PreferenceType type, String value) {
 		PreferenceKey keyObject = keys.get(key);
 		
 		if (keyObject == null) {
@@ -125,6 +125,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 		
 		keyObject.setDefaultValue(value);
 		needsSaving = true;
+		return keyObject;
 	}
 	
 	private static String getDefaultDefaultValue(PreferenceType type) {
