@@ -14,6 +14,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 /**
@@ -41,7 +42,45 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	
 	@Override
 	public void save() throws IOException {
-		needsSaving = false;
+		try {
+			if (!needsSaving())
+				return;
+			
+			IRepository<PreferenceKey> keyRepo = RepositoryFactory.getRepository(PreferenceKey.class);
+			IRepository<Preference> valueRepo = RepositoryFactory.getRepository(Preference.class);
+			
+			// First save...
+			
+			for (PreferenceKey key: keys.values()) {
+				if (key.getId() == null)
+					keyRepo.saveNew(key);
+				else
+					keyRepo.save(key);
+			}
+			
+			for (Preference value: values.values()) {
+				if (value.getId() == null)
+					valueRepo.saveNew(value);
+				else
+					valueRepo.save(value);
+			}
+			
+			// Then delete unused objects
+	
+			for (Preference value: valueRepo.all()) {
+				if (!values.containsKey(value.getKey().getName()))
+					valueRepo.delete(value);
+			}
+
+			for (PreferenceKey key: keyRepo.all()) {
+				if (!keys.containsKey(key.getName()))
+					keyRepo.delete(key);
+			}
+			
+			needsSaving = false;
+		} catch (RuntimeException e) {
+			throw new IOException(e);
+		}
 	}
 	
 	/* Internal helper functions */
