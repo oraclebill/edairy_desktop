@@ -41,6 +41,29 @@
       </application>
    </extension>
    <extension
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
+            id="com.agritrace.edairy.desktop.splashHandlers.extensible">
+      </splashHandler>
+      <splashHandler
+            class="com.agritrace.edairy.desktop.splashHandlers.InteractiveSplashHandler"
+            id="com.agritrace.edairy.desktop.splashHandlers.interactive">
+      </splashHandler>
+      <splashHandler
+            class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
+            id="com.agritrace.edairy.desktop.splashHandlers.browser">
+      </splashHandler>
+      <splashHandler
+            class="com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
+            id="com.agritrace.edairy.desktop.splashHandlers.edairy">
+      </splashHandler>
+      <splashHandlerProductBinding
+            productId="com.agritrace.edairy.desktop.dairy_manager_prod"
+            splashId="com.agritrace.edairy.desktop.splashHandlers.edairy">
+      </splashHandlerProductBinding>
+   </extension>
+   <extension
          point="org.eclipse.riena.navigation.assemblies2">
       <!-- assembly2
             assembler="com.agritrace.edairy.desktop.collection.ui.navigation.MilkNavigationNodeAssembler"
@@ -129,6 +152,10 @@
             id="org.eclipse.riena.demo.client.exitCommand"
             name="Exit">
       </command>
+      <command
+            id="com.agritrace.edairy.desktop.aboutCommand"
+            name="About">
+      </command>
     </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -165,6 +192,19 @@
          </menu>
          -->
       </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=com.agritrace.edairy.desktop.install.menus.installMenu">
+         <menu
+               id="helpMenu"
+               label="Help"
+               mnemonic="H">
+            <command
+                  commandId="com.agritrace.edairy.desktop.aboutCommand"
+                  id="com.agritrace.edairy.desktop.aboutMenuItem"
+                  mnemonic="x">
+            </command>
+         </menu>
+      </menuContribution>
    </extension>
 
 	<extension point="org.eclipse.riena.ui.swt.imagePaths">
@@ -178,57 +218,6 @@
           class="org.eclipse.riena.ui.ridgets.swt.BorderMarkerSupport"
           id="com.agritrace.edairy.desktop.markerSupport">
     </markerSupport>
- </extension>
- <extension
-       point="org.eclipse.ui.splashHandlers">
-    <splashHandler
-          class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
-          id="com.agritrace.edairy.desktop.splashHandlers.extensible">
-    </splashHandler>
-    <splashHandler
-          class="com.agritrace.edairy.desktop.splashHandlers.InteractiveSplashHandler"
-          id="com.agritrace.edairy.desktop.splashHandlers.interactive">
-    </splashHandler>
-    <splashHandler
-          class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
-          id="com.agritrace.edairy.desktop.splashHandlers.browser">
-    </splashHandler>
-    <splashHandler
-          class="com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
-          id="com.agritrace.edairy.desktop.splashHandlers.edairy">
-    </splashHandler>
-    <splashHandlerProductBinding
-            productId="com.agritrace.edairy.desktop.dairy_manager_prod"
-            splashId="com.agritrace.edairy.desktop.splashHandlers.edairy">
-      </splashHandlerProductBinding>
- </extension>
- <extension
-       point="com.agritrace.edairy.desktop.splashExtension">
-    <splashExtension
-          icon="icons/af.png"
-          id="af"
-          tooltip="Application Framework">
-    </splashExtension>
-    <splashExtension
-          icon="icons/embedded.png"
-          id="embedded"
-          tooltip="Embedded">
-    </splashExtension>
-    <splashExtension
-          icon="icons/enterprise.png"
-          id="enterprise"
-          tooltip="Enterprise">
-    </splashExtension>
-    <splashExtension
-          icon="icons/languages.png"
-          id="languages"
-          tooltip="Languages">
-    </splashExtension>
-    <splashExtension
-          icon="icons/rcp.png"
-          id="rcp"
-          tooltip="RCP">
-    </splashExtension>
  </extension>
  
 </plugin>
