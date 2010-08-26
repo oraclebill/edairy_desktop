@@ -20,7 +20,6 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.common.ui.views.BlankView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
