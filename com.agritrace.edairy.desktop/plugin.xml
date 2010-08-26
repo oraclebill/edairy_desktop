@@ -23,8 +23,8 @@
                name="windowImages"
                value="platform:/plugin/com.agritrace.edairy.desktop.icons/icons/application.png">
          </property>
-         <property name="startupProgressRect" value="100,300,320,15"/>
-         <property name="startupMessageRect" value="100,280,320,15"/>
+         <property name="startupProgressRect" value="100,270,320,15"/>
+         <property name="startupMessageRect" value="100,250,320,15"/>
       </product>
    </extension>
    <extension
@@ -153,9 +153,15 @@
             name="Exit">
       </command>
       <command
-            id="com.agritrace.edairy.desktop.aboutCommand"
+            id="org.eclipse.ui.help.aboutAction"
+            name="About eDairy Manager">
+      </command>
+      <!--
+      <command
+            id="org.eclipse.ui.help.about"
             name="About">
       </command>
+      -->
     </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -199,9 +205,8 @@
                label="Help"
                mnemonic="H">
             <command
-                  commandId="com.agritrace.edairy.desktop.aboutCommand"
-                  id="com.agritrace.edairy.desktop.aboutMenuItem"
-                  mnemonic="x">
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  id="com.agritrace.edairy.desktop.aboutMenuItem">
             </command>
          </menu>
       </menuContribution>
