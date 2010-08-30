@@ -23,8 +23,6 @@
                name="windowImages"
                value="platform:/plugin/com.agritrace.edairy.desktop.icons/icons/application.png">
          </property>
-         <property name="startupProgressRect" value="100,270,320,15"/>
-         <property name="startupMessageRect" value="100,250,320,15"/>
       </product>
    </extension>
    <extension
