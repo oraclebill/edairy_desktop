@@ -1,0 +1,34 @@
+trips:
+  - three processes
+	- bin management
+	- milk collections
+	- sales and rejects
+	- piggery
+	
+scale inconsistencies:
+	- no bin indication?
+		- bin count?
+	- session / trip number :
+	 	- need to be correlated
+	- 
+	? scale date is date of download not weightment?
+		
+* driver and truck are automatic
+
+--- milk collection notes ---
+* select route - automatically select vehicle
+* select vehicle - driver is automatically selected
+
+
+ - batching
+   - group journals with batch number
+     * batch # generated from 
+        - date, route, session: 
+   	       (template?)
+
+ - add new entry field order:
+	- bin, member, can, quantity [add]
+	
+ - quanity control process
+	- book journals
+ 
