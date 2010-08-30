@@ -10,33 +10,47 @@
  *******************************************************************************/
 package com.agritrace.edairy.desktop.home.views;
 
-import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.ui.swt.utils.ImageStore;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.part.ViewPart;
+import java.io.IOException;
+import java.net.URL;
 
-public class DairyHomeView extends ViewPart {
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.osgi.framework.Bundle;
+
+import com.agritrace.edairy.desktop.reporting.views.SimpleReportView;
+
+public class DairyHomeView extends SimpleReportView {
+	
 	public static final String ID = "desktop.home.view";
 
 	public DairyHomeView() {
 	}
 
-	@Override
-	public void createPartControl(Composite parent) {
-		final Label l = new Label(parent, SWT.CENTER);
-		l.setImage(ImageStore.getInstance().getImage("edairydashboard.jpg"));
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(l);
-		GridLayoutFactory.fillDefaults().generateLayout(parent);
-		parent.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		l.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-	}
+//	@Override
+//	public void createPartControl(Composite parent) {
+//		final Label l = new Label(parent, SWT.CENTER);
+//		l.setImage(ImageStore.getInstance().getImage("edairydashboard.jpg"));
+//		GridDataFactory.fillDefaults().grab(true, true).applyTo(l);
+//		GridLayoutFactory.fillDefaults().generateLayout(parent);
+//		parent.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+//		l.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+//	}
 
 	@Override
 	public void setFocus() {
+	}
+
+	@Override
+	protected String getReportURL() {
+		 Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("com.agritrace.edairy.desktop.common.reporting");
+		 URL url = FileLocator.find(bundle, new Path("/reports/dairy_home.rptdesign"), null);
+		 try {
+			String rpt = FileLocator.toFileURL(url).getPath();
+			return rpt;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
