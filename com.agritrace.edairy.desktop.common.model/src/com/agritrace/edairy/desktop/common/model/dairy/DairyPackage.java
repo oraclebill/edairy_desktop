@@ -201,7 +201,7 @@ public interface DairyPackage extends EPackage {
 	int VEHICLE__DRIVER = 13;
 
 	/**
-	 * The feature id for the '<em><b>Asset Info</b></em>' containment reference.
+	 * The feature id for the '<em><b>Asset Info</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -825,13 +825,40 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Username</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__USERNAME = ModelPackage.PERSON_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__PASSWORD = ModelPackage.PERSON_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Local Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 9;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -2633,10 +2660,10 @@ public interface DairyPackage extends EPackage {
 	EReference getVehicle_Driver();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Asset Info</em>'.
+	 * @return the meta object for the reference '<em>Asset Info</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo()
 	 * @see #getVehicle()
 	 * @generated
@@ -3035,6 +3062,39 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEmployee_SecurityRole();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Username</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_Username();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword <em>Password</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_Password();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Local Enabled</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_LocalEnabled();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation <em>Location</em>}'.
@@ -4611,7 +4671,7 @@ public interface DairyPackage extends EPackage {
 		EReference VEHICLE__DRIVER = eINSTANCE.getVehicle_Driver();
 
 		/**
-		 * The meta object literal for the '<em><b>Asset Info</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Asset Info</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -4911,6 +4971,30 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__SECURITY_ROLE = eINSTANCE.getEmployee_SecurityRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Username</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__USERNAME = eINSTANCE.getEmployee_Username();
+
+		/**
+		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__PASSWORD = eINSTANCE.getEmployee_Password();
+
+		/**
+		 * The meta object literal for the '<em><b>Local Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__LOCAL_ENABLED = eINSTANCE.getEmployee_LocalEnabled();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.

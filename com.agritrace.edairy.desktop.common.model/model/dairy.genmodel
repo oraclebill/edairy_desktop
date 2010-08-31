@@ -112,6 +112,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nhifNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nssfNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/securityRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/username"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/password"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/localEnabled"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//DairyLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/Id"/>

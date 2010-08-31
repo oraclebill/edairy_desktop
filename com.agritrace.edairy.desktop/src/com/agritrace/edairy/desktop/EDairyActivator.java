@@ -1,10 +1,14 @@
 package com.agritrace.edairy.desktop;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.riena.navigation.ApplicationNodeManager;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.agritrace.edairy.desktop.security.IPrincipal;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -16,6 +20,9 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static EDairyActivator plugin;
+	
+	// The logged in user
+	private IPrincipal principal;
 
 	/**
 	 * Returns the shared instance
@@ -85,6 +92,28 @@ public class EDairyActivator extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
+	}
+
+	/**
+	 * For internal use by AuthController
+	 */
+	public void setPrincipal(IPrincipal principal) {
+		this.principal = principal;
+		
+		try {
+			ApplicationNodeManager.getApplicationNode().setLabel(String.format("Welcome, %s!", principal.getDisplayName()));
+		} catch (NullPointerException e) {
+			// This is normal, we haven't created the window yet
+		}
+	}
+
+	/**
+	 * Get the user logged into the system.
+	 * 
+	 * @return the principal
+	 */
+	public IPrincipal getPrincipal() {
+		return principal;
 	}
 
 }

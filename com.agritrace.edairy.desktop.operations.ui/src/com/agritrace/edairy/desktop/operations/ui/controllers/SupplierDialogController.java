@@ -19,7 +19,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
@@ -27,7 +26,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupContr
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
-import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 
 public class SupplierDialogController extends RecordDialogController<Supplier> {

@@ -5,10 +5,13 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.navigation.IAction;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
+import org.hibernate.TransactionException;
+import org.hibernate.exception.ConstraintViolationException;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -124,16 +127,37 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		return new EmployeeEditDialog(shell);
 	}
 
+	private void handleException(Throwable e) {
+		String message;
+		
+		if (e instanceof ConstraintViolationException) {
+			message = "Could not save the employee record. An employee with this username already exists.";
+		} else {
+			message = "Unhandled exception: " + e.getMessage();
+		}
+		
+		MessageDialog.openError(getShell(), "Error", message);
+	}
 
 	@Override
 	protected void createEntity(Employee newEntity) {
-		localDairy.getEmployees().add(newEntity);
-		dairyRepo.save(localDairy);
+		try {
+			localDairy.getEmployees().add(newEntity);
+			dairyRepo.save(localDairy);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			handleException(e.getCause());
+		}
 	}
 
 	@Override
 	protected void updateEntity(Employee updateableEntity) {
-		dairyRepo.save(updateableEntity);
+		try {
+			dairyRepo.save(updateableEntity);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			handleException(e.getCause());
+		}
 	}
 
 	@Override

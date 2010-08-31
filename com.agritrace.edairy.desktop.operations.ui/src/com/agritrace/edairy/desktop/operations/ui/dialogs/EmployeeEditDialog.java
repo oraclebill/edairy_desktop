@@ -11,6 +11,7 @@ import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
@@ -112,6 +113,24 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		factory.copy().applyTo(securityRole);
 		addUIControl(securityRole, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
 
+		UIControlsFactory.createLabel(employeeInfo, "User Name");
+		final Text username = UIControlsFactory.createText(employeeInfo);
+		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		factory.copy().applyTo(username);
+		addUIControl(username, EmployeeBindingConstants.BIND_ID_USERNAME);
+
+		UIControlsFactory.createLabel(employeeInfo, "Password");
+		final Text password = UIControlsFactory.createText(employeeInfo, SWT.SINGLE | SWT.PASSWORD);
+		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		factory.copy().applyTo(password);
+		addUIControl(password, EmployeeBindingConstants.BIND_ID_PASSWORD);
+
+		final Button localEnabled = UIControlsFactory.createButtonCheck(employeeInfo);
+		localEnabled.setText("Allow local machine authentication");
+		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		factory.copy().applyTo(localEnabled);
+		addUIControl(localEnabled, EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
+		
 		return employeeInfo;
 	}
 

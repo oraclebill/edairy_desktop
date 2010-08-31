@@ -25,6 +25,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.LoginData;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
@@ -790,6 +791,33 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getEmployee_SecurityRole() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmployee_Username() {
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmployee_Password() {
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmployee_LocalEnabled() {
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -2063,6 +2091,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__NHIF_NUMBER);
 		createEAttribute(employeeEClass, EMPLOYEE__NSSF_NUMBER);
 		createEAttribute(employeeEClass, EMPLOYEE__SECURITY_ROLE);
+		createEAttribute(employeeEClass, EMPLOYEE__USERNAME);
+		createEAttribute(employeeEClass, EMPLOYEE__PASSWORD);
+		createEAttribute(employeeEClass, EMPLOYEE__LOCAL_ENABLED);
 
 		dairyLocationEClass = createEClass(DAIRY_LOCATION);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__ID);
@@ -2274,7 +2305,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getVehicle_CapacityInTonnes(), ecorePackage.getEDouble(), "capacityInTonnes", "0", 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVehicle_Year(), ecorePackage.getEIntegerObject(), "year", "2005", 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVehicle_Driver(), this.getEmployee(), null, "driver", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVehicle_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVehicle_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, Vehicle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collectionJournalLineEClass, CollectionJournalLine.class, "CollectionJournalLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollectionJournalLine_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2314,6 +2345,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_NhifNumber(), ecorePackage.getEString(), "nhifNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_NssfNumber(), ecorePackage.getEString(), "nssfNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_SecurityRole(), ecorePackage.getEString(), "securityRole", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_Username(), ecorePackage.getEString(), "username", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_Password(), ecorePackage.getEString(), "password", "", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyLocationEClass, DairyLocation.class, "DairyLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairyLocation_Id(), ecorePackage.getELong(), "Id", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2543,7 +2577,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });		
+		   });			
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
@@ -2622,7 +2656,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });				
+		   });			
+		addAnnotation
+		  (getEmployee_Username(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=\"true\")"
+		   });			
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 

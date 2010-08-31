@@ -417,28 +417,27 @@ public interface Vehicle extends EObject {
 	void setDriver(Employee value);
 
 	/**
-	 * Returns the value of the '<em><b>Asset Info</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Asset Info</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Asset Info</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Asset Info</em>' containment reference.
+	 * @return the value of the '<em>Asset Info</em>' reference.
 	 * @see #setAssetInfo(Asset)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_AssetInfo()
-	 * @model containment="true"
-	 *        extendedMetaData="name='assetInfo' kind='elementOnly'"
+	 * @model extendedMetaData="name='assetInfo' kind='elementOnly'"
 	 *        annotation="teneo.jpa appinfo='@Embedded'"
 	 * @generated
 	 */
 	Asset getAssetInfo();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}' containment reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Vehicle#getAssetInfo <em>Asset Info</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Asset Info</em>' containment reference.
+	 * @param value the new value of the '<em>Asset Info</em>' reference.
 	 * @see #getAssetInfo()
 	 * @generated
 	 */

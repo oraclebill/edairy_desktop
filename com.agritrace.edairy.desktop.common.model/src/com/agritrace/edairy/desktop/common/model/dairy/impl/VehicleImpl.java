@@ -321,7 +321,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	protected Employee driver;
 
 	/**
-	 * The cached value of the '{@link #getAssetInfo() <em>Asset Info</em>}' containment reference.
+	 * The cached value of the '{@link #getAssetInfo() <em>Asset Info</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAssetInfo()
@@ -666,6 +666,14 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 */
 	public Asset getAssetInfo() {
+		if (assetInfo != null && assetInfo.eIsProxy()) {
+			InternalEObject oldAssetInfo = (InternalEObject)assetInfo;
+			assetInfo = (Asset)eResolveProxy(oldAssetInfo);
+			if (assetInfo != oldAssetInfo) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, assetInfo));
+			}
+		}
 		return assetInfo;
 	}
 
@@ -674,14 +682,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAssetInfo(Asset newAssetInfo, NotificationChain msgs) {
-		Asset oldAssetInfo = assetInfo;
-		assetInfo = newAssetInfo;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, newAssetInfo);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Asset basicGetAssetInfo() {
+		return assetInfo;
 	}
 
 	/**
@@ -690,31 +692,10 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 */
 	public void setAssetInfo(Asset newAssetInfo) {
-		if (newAssetInfo != assetInfo) {
-			NotificationChain msgs = null;
-			if (assetInfo != null)
-				msgs = ((InternalEObject)assetInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.VEHICLE__ASSET_INFO, null, msgs);
-			if (newAssetInfo != null)
-				msgs = ((InternalEObject)newAssetInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.VEHICLE__ASSET_INFO, null, msgs);
-			msgs = basicSetAssetInfo(newAssetInfo, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ASSET_INFO, newAssetInfo, newAssetInfo));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case DairyPackage.VEHICLE__ASSET_INFO:
-				return basicSetAssetInfo(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		Asset oldAssetInfo = assetInfo;
+		assetInfo = newAssetInfo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, assetInfo));
 	}
 
 	/**
@@ -755,7 +736,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 				if (resolve) return getDriver();
 				return basicGetDriver();
 			case DairyPackage.VEHICLE__ASSET_INFO:
-				return getAssetInfo();
+				if (resolve) return getAssetInfo();
+				return basicGetAssetInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

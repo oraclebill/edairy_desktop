@@ -1,11 +1,10 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -27,14 +26,16 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 	private Employee editEmployee = null;
 
-	private IComboRidget department;
 	private ITextRidget employeeId;
+	/*
+	private IComboRidget department;
 	private ITextRidget familyName;
 	private ITextRidget givenName;
 	private IComboRidget position;
 	private IDateTimeRidget startDate;
 	private ITextRidget operatorCode;
 	private ITextRidget securityRole;
+	*/
 
 	private IProfilePhotoRidget photoRidget;
 
@@ -68,6 +69,11 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_SEC_ROLE, DairyPackage.Literals.EMPLOYEE__SECURITY_ROLE);
+		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
+		addTextMap(EmployeeBindingConstants.BIND_ID_PASSWORD, DairyPackage.Literals.EMPLOYEE__PASSWORD);
+		
+		IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
+		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
 
 		getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE).setOutputOnly(true);
 		

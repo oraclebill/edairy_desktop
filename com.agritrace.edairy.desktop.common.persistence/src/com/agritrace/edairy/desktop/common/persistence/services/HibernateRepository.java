@@ -21,7 +21,6 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 
 public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
-
 	protected abstract class SessionRunnable<X> implements Runnable {
 
 		@Override
