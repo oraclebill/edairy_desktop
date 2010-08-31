@@ -1,0 +1,6 @@
+#Mon Aug 30 01:21:02 EDT 2010
+#default properties, written on Mon Aug 30 01:21:02 EDT 2010
+hibernate.connection.driver_class=com.mysql.jdbc.Driver
+hibernate.connection.url=jdbc\:mysql\://127.0.0.1\:3306/dairytest
+hibernate.connection.username=root
+hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect

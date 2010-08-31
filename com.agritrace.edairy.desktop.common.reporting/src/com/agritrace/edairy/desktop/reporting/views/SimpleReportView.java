@@ -131,6 +131,8 @@ public abstract class SimpleReportView extends ViewPart {
 		Collection<IParameterDefn> parameters = parameterTask
 				.getParameterDefns(false);
 
+		if (parameters.size() == 0) return;
+		
 		Composite panel = new Composite(null, SWT.NULL);
 		final Map<String, Object> params = new HashMap<String, Object>();
 
