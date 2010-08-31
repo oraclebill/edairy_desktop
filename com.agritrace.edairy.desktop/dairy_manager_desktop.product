@@ -6,31 +6,33 @@
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop/resources/edairy_helpabout.png"/>
       <text>
-         eDairy Manager v0.1a
+         eDairy Manager v0.99
       </text>
    </aboutInfo>
 
    <configIni use="default">
-      <macosx>/com.agritrace.edairy.desktop/config.ini</macosx>
       <win32>/com.agritrace.edairy.desktop/config.ini</win32>
    </configIni>
 
    <launcherArgs>
+      <programArgs>-debug</programArgs>
       <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/com.agritrace.edairy.desktop.icons/icons/application.png"/>
+   <windowImages i32="/com.agritrace.edairy.desktop/resources/edairy_icon.png"/>
 
    <splash
-      location="com.agritrace.edairy.desktop" />
+      location="com.agritrace.edairy.desktop"
+      startupProgressRect="100,270,320,15" />
    <launcher name="edairymgr">
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
