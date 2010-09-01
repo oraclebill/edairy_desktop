@@ -30,9 +30,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
+import com.agritrace.edairy.desktop.common.model.dairy.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
+import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
@@ -200,6 +203,27 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EClass preferenceKeyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass roleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass permissionNamespaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass permissionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1950,6 +1974,123 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRole() {
+		return roleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Id() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Name() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Description() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRole_Permissions() {
+		return (EReference)roleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPermissionNamespace() {
+		return permissionNamespaceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermissionNamespace_Id() {
+		return (EAttribute)permissionNamespaceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermissionNamespace_Name() {
+		return (EAttribute)permissionNamespaceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPermission() {
+		return permissionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermission_Id() {
+		return (EAttribute)permissionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPermission_Namespace() {
+		return (EReference)permissionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermission_Name() {
+		return (EAttribute)permissionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermission_DisplayName() {
+		return (EAttribute)permissionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getJournalStatus() {
 		return journalStatusEEnum;
 	}
@@ -2235,6 +2376,22 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__DEFAULT_VALUE);
 		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__TYPE);
 
+		roleEClass = createEClass(ROLE);
+		createEAttribute(roleEClass, ROLE__ID);
+		createEAttribute(roleEClass, ROLE__NAME);
+		createEAttribute(roleEClass, ROLE__DESCRIPTION);
+		createEReference(roleEClass, ROLE__PERMISSIONS);
+
+		permissionNamespaceEClass = createEClass(PERMISSION_NAMESPACE);
+		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__ID);
+		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__NAME);
+
+		permissionEClass = createEClass(PERMISSION);
+		createEAttribute(permissionEClass, PERMISSION__ID);
+		createEReference(permissionEClass, PERMISSION__NAMESPACE);
+		createEAttribute(permissionEClass, PERMISSION__NAME);
+		createEAttribute(permissionEClass, PERMISSION__DISPLAY_NAME);
+
 		// Create enums
 		journalStatusEEnum = createEEnum(JOURNAL_STATUS);
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
@@ -2495,6 +2652,22 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getPreferenceKey_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPreferenceKey_Type(), this.getPreferenceType(), "type", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRole_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRole_Permissions(), this.getPermission(), null, "permissions", null, 0, -1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(permissionNamespaceEClass, PermissionNamespace.class, "PermissionNamespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPermissionNamespace_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPermissionNamespace_Name(), ecorePackage.getEString(), "name", null, 0, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(permissionEClass, Permission.class, "Permission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPermission_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPermission_Namespace(), this.getPermissionNamespace(), null, "namespace", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPermission_Name(), ecorePackage.getEString(), "name", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPermission_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(journalStatusEEnum, JournalStatus.class, "JournalStatus");
 		addEEnumLiteral(journalStatusEEnum, JournalStatus.NEW);
@@ -2640,7 +2813,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });
+		   });		
 	}
 
 	/**
@@ -2698,7 +2871,19 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
+		   });				
+		addAnnotation
+		  (getRole_Name(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=\"true\")"
 		   });		
+		addAnnotation
+		  (getPermissionNamespace_Name(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=\"true\")"
+		   });
 	}
 
 } //DairyPackageImpl

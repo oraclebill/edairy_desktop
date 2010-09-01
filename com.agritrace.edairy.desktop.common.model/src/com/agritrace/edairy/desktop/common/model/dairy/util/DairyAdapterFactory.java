@@ -154,6 +154,18 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createPreferenceKeyAdapter();
 			}
 			@Override
+			public Adapter caseRole(Role object) {
+				return createRoleAdapter();
+			}
+			@Override
+			public Adapter casePermissionNamespace(PermissionNamespace object) {
+				return createPermissionNamespaceAdapter();
+			}
+			@Override
+			public Adapter casePermission(Permission object) {
+				return createPermissionAdapter();
+			}
+			@Override
 			public Adapter caseContactable(Contactable object) {
 				return createContactableAdapter();
 			}
@@ -452,6 +464,48 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPreferenceKeyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.Role <em>Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role
+	 * @generated
+	 */
+	public Adapter createRoleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace <em>Permission Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace
+	 * @generated
+	 */
+	public Adapter createPermissionNamespaceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission <em>Permission</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Permission
+	 * @generated
+	 */
+	public Adapter createPermissionAdapter() {
 		return null;
 	}
 

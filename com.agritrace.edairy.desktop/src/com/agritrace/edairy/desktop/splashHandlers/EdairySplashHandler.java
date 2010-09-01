@@ -2,10 +2,13 @@ package com.agritrace.edairy.desktop.splashHandlers;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -29,6 +32,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private Text password;
 	private Button buttonOK;
 	private Button buttonCancel;
+	private Font font;
 	
 	@Override
 	public void init(Shell splash) {
@@ -55,7 +59,8 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	}
 	
 	private void doEventLoop() {
-		Shell splash = getSplash();
+		final Shell splash = getSplash();
+		
 		while (!initialized) {
 			if (splash.getDisplay().readAndDispatch() == false) {
 				splash.getDisplay().sleep();
@@ -74,7 +79,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	}
 	
 	private void createLoginControls() {
-		Composite content = getContent();
+		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/loginSplash.bmp"));
 		
 		for (Control child: content.getChildren()) {
@@ -123,10 +128,17 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 			}
 			
 		});
+
+		final FontDescriptor desc = JFaceResources.getDialogFontDescriptor().setHeight(14);
+		font = desc.createFont(content.getDisplay());
+		username.setFont(font);
+		password.setFont(font);
+		buttonOK.setFont(font);
+		buttonCancel.setFont(font);
 	}
 	
 	private void restoreProgressWindow() {
-		Composite content = getContent();
+		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/splash.bmp"));
 		
 		developerLabel.dispose();
@@ -134,6 +146,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		password.dispose();
 		buttonCancel.dispose();
 		buttonOK.dispose();
+		font.dispose();
 		
 		for (Control child: content.getChildren()) {
 			child.setVisible(true);

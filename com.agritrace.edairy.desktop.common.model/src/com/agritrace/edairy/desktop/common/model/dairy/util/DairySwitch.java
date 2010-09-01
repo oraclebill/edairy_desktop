@@ -217,6 +217,24 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DairyPackage.ROLE: {
+				Role role = (Role)theEObject;
+				T result = caseRole(role);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.PERMISSION_NAMESPACE: {
+				PermissionNamespace permissionNamespace = (PermissionNamespace)theEObject;
+				T result = casePermissionNamespace(permissionNamespace);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.PERMISSION: {
+				Permission permission = (Permission)theEObject;
+				T result = casePermission(permission);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -503,6 +521,51 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T casePreferenceKey(PreferenceKey object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Role</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Role</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRole(Role object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Permission Namespace</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Permission Namespace</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePermissionNamespace(PermissionNamespace object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Permission</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Permission</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePermission(Permission object) {
 		return null;
 	}
 

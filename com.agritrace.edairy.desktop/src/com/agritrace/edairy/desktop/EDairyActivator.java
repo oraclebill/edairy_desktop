@@ -4,7 +4,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.riena.navigation.ApplicationNodeManager;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

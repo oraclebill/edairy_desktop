@@ -256,6 +256,22 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//PreferenceKey/defaultValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//PreferenceKey/type"/>
     </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//Role">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Role/permissions"/>
+    </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//PermissionNamespace">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//PermissionNamespace/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//PermissionNamespace/name"/>
+    </genClasses>
+    <genClasses ecoreClass="dairy.ecore#//Permission">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Permission/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Permission/namespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Permission/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Permission/displayName"/>
+    </genClasses>
     <nestedGenPackages prefix="Account" basePackage="com.agritrace.edairy.desktop.common.model.dairy"
         resource="XML" disposableProviderFactory="true" ecorePackage="dairy.ecore#//account">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/TransactionType">

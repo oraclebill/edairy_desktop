@@ -80,6 +80,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.MILK_PRICE: return createMilkPrice();
 			case DairyPackage.PREFERENCE: return createPreference();
 			case DairyPackage.PREFERENCE_KEY: return createPreferenceKey();
+			case DairyPackage.ROLE: return createRole();
+			case DairyPackage.PERMISSION_NAMESPACE: return createPermissionNamespace();
+			case DairyPackage.PERMISSION: return createPermission();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -327,6 +330,36 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public PreferenceKey createPreferenceKey() {
 		PreferenceKeyImpl preferenceKey = new PreferenceKeyImpl();
 		return preferenceKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Role createRole() {
+		RoleImpl role = new RoleImpl();
+		return role;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PermissionNamespace createPermissionNamespace() {
+		PermissionNamespaceImpl permissionNamespace = new PermissionNamespaceImpl();
+		return permissionNamespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Permission createPermission() {
+		PermissionImpl permission = new PermissionImpl();
+		return permission;
 	}
 
 	/**
