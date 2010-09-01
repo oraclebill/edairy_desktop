@@ -28,6 +28,10 @@
                value="100,270,320,15">
          </property>
          <property
+               name="startupMessageRect"
+               value="100,250,320,15">
+         </property>
+         <property
                name="preferenceCustomization"
                value="plugin_customization.ini">
          </property>
@@ -49,18 +53,6 @@
    <extension
          point="org.eclipse.ui.splashHandlers">
       <splashHandler
-            class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
-            id="com.agritrace.edairy.desktop.splashHandlers.extensible">
-      </splashHandler>
-      <splashHandler
-            class="com.agritrace.edairy.desktop.splashHandlers.InteractiveSplashHandler"
-            id="com.agritrace.edairy.desktop.splashHandlers.interactive">
-      </splashHandler>
-      <splashHandler
-            class="com.agritrace.edairy.desktop.splashHandlers.ExtensibleSplashHandler"
-            id="com.agritrace.edairy.desktop.splashHandlers.browser">
-      </splashHandler>
-      <splashHandler
             class="com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
             id="com.agritrace.edairy.desktop.splashHandlers.edairy">
       </splashHandler>
@@ -71,11 +63,6 @@
    </extension>
    <extension
          point="org.eclipse.riena.navigation.assemblies2">
-      <!-- assembly2
-            assembler="com.agritrace.edairy.desktop.collection.ui.navigation.MilkNavigationNodeAssembler"
-            id="com.agritrace.edairy.desktop.milk"
-            parentNodeId="application">
-      </assembly2 -->
       <assembly2
             assembler="com.agritrace.edairy.desktop.finance.ui.navigation.FinanceNavigationNodeAssembler"
             id="com.agritrace.edairy.desktop.finance"
@@ -162,12 +149,6 @@
             id="org.eclipse.ui.help.aboutAction"
             name="About eDairy Manager">
       </command>
-      <!--
-      <command
-            id="org.eclipse.ui.help.about"
-            name="About">
-      </command>
-      -->
     </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -183,26 +164,6 @@
                   mnemonic="x">
             </command>
          </menu>
-         <!--
-         <menu
-               label="Preferences"
-               mnemonic="P">
-            <menu
-                  label="Look &apos;n&apos; Feel"
-                  mnemonic="L">
-               <command
-                     commandId="org.eclipse.riena.example.client.rienaDefaultLnfCommand"
-                     id="org.eclipse.riena.example.client.rienaDefaultLnfMenuItem"
-                     mnemonic="D">
-               </command>
-               <command
-                     commandId="org.eclipse.riena.example.client.exampleLnfCommand"
-                     id="org.eclipse.riena.example.client.exampleLnfMenuItem"
-                     mnemonic="x">
-               </command>
-            </menu>
-         </menu>
-         -->
       </menuContribution>
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu?after=com.agritrace.edairy.desktop.install.menus.installMenu">
