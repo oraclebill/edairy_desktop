@@ -40,7 +40,8 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
  * @author
  * 
  */
-public abstract class AbstractDirectoryController<T extends EObject> extends SubModuleController {
+public abstract class AbstractDirectoryController<T extends EObject> extends
+		SubModuleController {
 
 	/**
 	 * Dialog style which means the dialog is a dialog to create a new record
@@ -118,19 +119,21 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		// Use default conditions to filter
 		refreshTableContents();
 
-		getNavigationNode().addSimpleListener(new SimpleNavigationNodeAdapter() {
-			@Override
-			public void deactivated(INavigationNode<?> source) {
-				System.err.println("Simple Listener - deactivated:" + source);				
-			}
-			@Override
-			public void activated(INavigationNode<?> source) {
-				refreshTableContents();				
-			}
-		});
+		getNavigationNode().addSimpleListener(
+				new SimpleNavigationNodeAdapter() {
+					@Override
+					public void deactivated(INavigationNode<?> source) {
+						System.err.println("Simple Listener - deactivated:"
+								+ source);
+					}
+
+					@Override
+					public void activated(INavigationNode<?> source) {
+						refreshTableContents();
+					}
+				});
 
 		addDefaultAction(getWindowRidget(), searchBtnRidget);
-
 
 	}
 
@@ -147,10 +150,9 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		return this.selectedEObject;
 	}
 
-
 	public void refreshTableContents() {
-		tableContents.clear();
-		tableContents.addAll(getFilteredResult());
+		getTableContents().clear();
+		getTableContents().addAll(getFilteredResult());
 		table.updateFromModel();
 	}
 
@@ -163,7 +165,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	private void configureFilterRidgetsInternal() {
-		searchBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_FILTER_SEARCH);
+		searchBtnRidget = getRidget(IActionRidget.class,
+				AbstractDirectoryView.BIND_ID_FILTER_SEARCH);
 		if (searchBtnRidget != null) {
 			searchBtnRidget.addListener(new IActionListener() {
 				@Override
@@ -173,7 +176,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			});
 		}
 
-		resetBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_FILTER_RESET);
+		resetBtnRidget = getRidget(IActionRidget.class,
+				AbstractDirectoryView.BIND_ID_FILTER_RESET);
 		if (resetBtnRidget != null) {
 			resetBtnRidget.addListener(new IActionListener() {
 				@Override
@@ -185,8 +189,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	protected void configureButtonsRidget() {
-		configureNewItemButton(getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON));
-		configureViewItemButton(getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON));
+		configureNewItemButton(getRidget(IActionRidget.class,
+				AbstractDirectoryView.BIND_ID_NEW_BUTTON));
+		configureViewItemButton(getRidget(IActionRidget.class,
+				AbstractDirectoryView.BIND_ID_VIEW_BUTTON));
 	}
 
 	protected void configureViewItemButton(final IActionRidget viewBtnRidget) {
@@ -212,7 +218,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	protected void configureTableRidget() {
 		// Configure Table Widgets
-		table = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
+		table = this.getRidget(ITableRidget.class,
+				AbstractDirectoryView.BIND_ID_TABLE);
 		table.addSelectionListener(selectionListener);
 		table.bindSingleSelectionToModel(this, "selectedEObject");
 		table.addDoubleClickListener(new IActionListener() {
@@ -221,8 +228,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 				handleViewItemAction();
 			}
 		});
-		table.bindToModel(new WritableList(tableContents, getEntityClass()), getEntityClass(),
-				getTableColumnPropertyNames(), getTableColumnHeaders());
+		table.bindToModel(
+				new WritableList(getTableContents(), getEntityClass()),
+				getEntityClass(), getTableColumnPropertyNames(),
+				getTableColumnHeaders());
 
 		table.updateFromModel();
 	}
@@ -298,17 +307,21 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	@SuppressWarnings("unchecked")
 	protected void handleNewItemAction() {
-		final RecordDialog<T> dialog = getRecordDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell());
+		final RecordDialog<T> dialog = getRecordDialog(PlatformUI
+				.getWorkbench().getDisplay().getActiveShell());
 		dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
-			log(LogService.LOG_INFO, "------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));
-			createEntity((T) dialog.getController().getContext(EDITED_OBJECT_ID));
+			log(LogService.LOG_INFO, "------ saving item: "
+					+ dialog.getController().getContext(EDITED_OBJECT_ID));
+			createEntity((T) dialog.getController()
+					.getContext(EDITED_OBJECT_ID));
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			;
 		} else {
-			throw new IllegalStateException("Invalid response from dialog: " + returnCode);
+			throw new IllegalStateException("Invalid response from dialog: "
+					+ returnCode);
 		}
 		refreshTableContents();
 	}
@@ -325,46 +338,56 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(getShell());
-		T selectedObject =  getSelectedEObject();
-		getRepository().load(selectedObject);
+		T selectedObject = getSelectedEObject();
+		try {
+			getRepository().load(selectedObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 		System.err.println("opening view item: " + getSelectedEObject());
 
 		final int returnCode = dialog.open();
 		if (DialogConstants.ACTION_SAVE == returnCode) {
-			final Object contextObj = dialog.getController().getContext(EDITED_OBJECT_ID);
-			log(LogService.LOG_DEBUG, "------ handleViewItemAction: updating item: " + contextObj);
+			final Object contextObj = dialog.getController().getContext(
+					EDITED_OBJECT_ID);
+			log(LogService.LOG_DEBUG,
+					"------ handleViewItemAction: updating item: " + contextObj);
 			updateEntity((T) contextObj);
 		} else if (DialogConstants.ACTION_CANCEL == returnCode) {
 			// todo: ensure data sent to dialog is not modified...
 			// getRepository().load((T)
 			// dialog.getController().getContext(EDITED_OBJECT_ID));
-		} else if (DialogConstants.ACTION_DELETE == returnCode){
-			if(MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "Delete Confirmation" , "Do you want to delete the selected entity ?") ){
+		} else if (DialogConstants.ACTION_DELETE == returnCode) {
+			if (MessageDialog.openConfirm(
+					Display.getDefault().getActiveShell(),
+					"Delete Confirmation",
+					"Do you want to delete the selected entity ?")) {
 				deleteEntity(selectedObject);
 			}
-		}else {
-			throw new IllegalStateException("Invalid response from dialog: " + returnCode);
+		} else {
+			throw new IllegalStateException("Invalid response from dialog: "
+					+ returnCode);
 		}
 		refreshTableContents();
 	}
 
-
 	protected void updateEntity(T updateableEntity) {
-		getRepository().update(updateableEntity);		
+		getRepository().update(updateableEntity);
 	}
-	
-	protected void deleteEntity(T deletableEntity){
+
+	protected void deleteEntity(T deletableEntity) {
 		getRepository().delete(deletableEntity);
 	}
 
 	protected void itemSelected(SelectionEvent event) {
-		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
-		if(event.getNewSelection().isEmpty()){
+		final IActionRidget viewBtnRidget = getRidget(IActionRidget.class,
+				AbstractDirectoryView.BIND_ID_VIEW_BUTTON);
+		if (event.getNewSelection().isEmpty()) {
 			viewBtnRidget.setEnabled(false);
 
-		}else{
+		} else {
 			viewBtnRidget.setEnabled(true);
 		}
 	}
@@ -375,7 +398,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	abstract protected void resetFilterConditions();
 
 	/**
-	 * A utility to get the current display. 
+	 * A utility to get the current display.
 	 * 
 	 * @return the current display, safe for rcp or non-rcp.
 	 */
@@ -383,8 +406,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		Display display;
 		try {
 			display = PlatformUI.getWorkbench().getDisplay();
-		}
-		catch( Exception e) {
+		} catch (Exception e) {
 			display = Display.getCurrent();
 			if (display == null) {
 				display = Display.getDefault();
@@ -394,7 +416,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	}
 
 	/**
-	 * A utility to get the current active shell. 
+	 * A utility to get the current active shell.
 	 * 
 	 * @return the current shell, safe for rcp or non-rcp.
 	 */
@@ -408,7 +430,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	 * @param message
 	 */
 	private void log(int level, String message) {
-		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
+		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(
+				Activator.getDefault(), this.getClass().getName());
 		logger.log(level, message);
 	}
 }

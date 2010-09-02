@@ -16,6 +16,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
@@ -44,7 +45,7 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 
 	public MilkDeliveryJournalController() {
 		setEClass(DairyPackage.Literals.DELIVERY_JOURNAL);
-		// setEntityClass(DeliveryJournal.class);
+		setRepository(RepositoryFactory.getRepository(DeliveryJournal.class));
 
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE, new DJColumnFormatter() {

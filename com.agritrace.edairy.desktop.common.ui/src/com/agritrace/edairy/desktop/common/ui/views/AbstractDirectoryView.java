@@ -41,6 +41,8 @@ public abstract class AbstractDirectoryView extends BaseListView {
 	public static final String BIND_ID_TABLE = "list.table"; //$NON-NLS-1$
 
 	/**
+	 * Create a list control to be bound to the BIND_ID_TABLE standard binding.
+	 * 
 	 * @param parent
 	 */
 	protected void createListGroup(Composite parent) {
