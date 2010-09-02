@@ -74,13 +74,4 @@ public class VehicleEditDialogController  extends RecordDialogController<Vehicle
 		assetInfo.updateFromModel();
 	}
 
-	@Override
-	public Vehicle getWorkingCopy() {
-		return (Vehicle) getContext("editObject");
-	}
-
-	@Override
-	public void afterBind() {
-		super.afterBind();
-	}
 }
