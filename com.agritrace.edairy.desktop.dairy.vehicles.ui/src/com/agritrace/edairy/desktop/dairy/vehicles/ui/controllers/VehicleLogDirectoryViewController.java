@@ -104,6 +104,13 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 		vehicleTypeCombo.setSelection(vehicleTypeCombo.getEmptySelectionItem());
 	}
 
+	
+	@Override
+	protected void createEntity(Vehicle newEntity) {
+		localDairy.getVehicles().add(newEntity);
+		super.createEntity(newEntity);
+	}
+
 	@Override
 	protected void deleteEntity(Vehicle deletableEntity) {
 		localDairy.getVehicles().remove(deletableEntity);
