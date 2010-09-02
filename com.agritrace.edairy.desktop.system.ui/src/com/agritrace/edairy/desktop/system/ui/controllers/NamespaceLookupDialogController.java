@@ -8,7 +8,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
-public class NamespaceLookupDialogController {
+public final class NamespaceLookupDialogController {
 	private IRepository<PermissionNamespace> repository;
 	
 	public NamespaceLookupDialogController() {

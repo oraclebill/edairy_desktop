@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.dialogs.PermissionEditDialog;
 
-public class PermissionDirectoryController extends BasicDirectoryController<Permission> {
+public final class PermissionDirectoryController extends BasicDirectoryController<Permission> {
 	public PermissionDirectoryController() {
 		super();
 		setEClass(DairyPackage.Literals.PERMISSION);
@@ -30,7 +30,7 @@ public class PermissionDirectoryController extends BasicDirectoryController<Perm
 
 	@Override
 	protected List<Permission> getFilteredResult() {
-		List<Permission> all = getRepository().all();
+		final List<Permission> all = getRepository().all();
 		return all;
 	}
 

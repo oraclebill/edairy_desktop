@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.system.ui.Activator;
 import com.agritrace.edairy.desktop.system.ui.constants.PermissionBinding;
 import com.agritrace.edairy.desktop.system.ui.controllers.PermissionDialogController;
 
-public class PermissionEditDialog extends RecordDialog<Permission> {
+public final class PermissionEditDialog extends RecordDialog<Permission> {
 	public PermissionEditDialog(Shell parentShell) {
 		super(parentShell);
 	}

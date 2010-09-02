@@ -5,7 +5,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
-public class PermissionDirectoryView extends AbstractDirectoryView {
+public final class PermissionDirectoryView extends AbstractDirectoryView {
 	public static final String ID = "edairy.system.permissions.directory";
 	
 	@Override
