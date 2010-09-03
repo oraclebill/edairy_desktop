@@ -94,14 +94,14 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		developerLabel.setAlignment(SWT.CENTER);
 		
 		username = new Text(content, SWT.NONE);
-		username.setBounds(266, 178, 226, 33);
+		username.setBounds(276, 178, 226, 33);
 		
 		password = new Text(content, SWT.PASSWORD);
-		password.setBounds(266, 216, 226, 33);
+		password.setBounds(276, 216, 226, 33);
 		
 		buttonCancel = new Button(content, SWT.PUSH);
 		buttonCancel.setText("Cancel");
-		buttonCancel.setBounds(30, 272, 105, 36);
+		buttonCancel.setBounds(20, 262, 115, 46);
 		
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -113,7 +113,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		
 		buttonOK = new Button(content, SWT.PUSH);
 		buttonOK.setText("Login");
-		buttonOK.setBounds(387, 272, 105, 36);
+		buttonOK.setBounds(387, 262, 115, 46);
 		getSplash().setDefaultButton(buttonOK);
 		
 		buttonOK.addSelectionListener(new SelectionAdapter() {
