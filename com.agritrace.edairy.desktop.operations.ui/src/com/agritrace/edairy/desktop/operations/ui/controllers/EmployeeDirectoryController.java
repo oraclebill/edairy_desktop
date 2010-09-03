@@ -17,6 +17,8 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -25,6 +27,7 @@ import com.agritrace.edairy.desktop.operations.services.employee.EmployeeReposit
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 
+@PermissionRequired(Permission.VIEW_EMPLOYEES)
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
 
 

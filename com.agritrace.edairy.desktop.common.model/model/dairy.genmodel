@@ -57,6 +57,7 @@
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//PreferenceType/Float"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//PreferenceType/Double"/>
     </genEnums>
+    <genDataTypes ecoreDataType="dairy.ecore#//PermissionT"/>
     <genClasses ecoreClass="dairy.ecore#//Vehicle">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/vehicleId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Vehicle/registrationNumber"/>
@@ -115,6 +116,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/username"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/password"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/localEnabled"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Employee/role"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//DairyLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/Id"/>
@@ -260,7 +262,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/description"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Role/permissions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute dairy.ecore#//Role/permissions"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//PermissionNamespace">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//PermissionNamespace/id"/>

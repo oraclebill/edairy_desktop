@@ -15,6 +15,8 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
@@ -23,6 +25,7 @@ import com.agritrace.edairy.desktop.operations.services.supplier.SupplierReposit
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 
+@PermissionRequired(Permission.VIEW_SUPPLIERS)
 public class SupplierDirectoryController extends BasicDirectoryController<Supplier> {
 
 	private IListRidget categoryList;

@@ -24,7 +24,6 @@ Require-Bundle: com.agritrace.edairy.desktop.common.persistence;bundle-version="
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop,
- com.agritrace.edairy.desktop.security,
  com.agritrace.edairy.desktop.splashHandlers,
  com.agritrace.edairy.desktop.ui,
  com.agritrace.edairy.desktop.ui.controllers,

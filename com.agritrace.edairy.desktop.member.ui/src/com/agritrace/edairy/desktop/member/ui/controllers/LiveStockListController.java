@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
@@ -34,7 +36,6 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
-import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidgetController;
@@ -42,6 +43,7 @@ import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 
+@PermissionRequired(Permission.VIEW_LIVESTOCK)
 public class LiveStockListController extends BasicDirectoryController<RegisteredAnimal> {
 
 	public static final String ALL_FARM = "All Farms";

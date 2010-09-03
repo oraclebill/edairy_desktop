@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.util.List;
+
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
@@ -11,7 +13,9 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
@@ -43,7 +47,6 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 	@Override
 	public void configureUserRidgets() {
-
 		// ensure model available
 		editEmployee = getWorkingCopy();
 		assert (null != editEmployee);
@@ -61,6 +64,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
 			employeeId.updateFromModel();
 		}
+		
+		final List<Role> allRoles = RepositoryFactory.getRepository(Role.class).all();
 
 		addTextMap(EmployeeBindingConstants.BIND_ID_FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME);
@@ -68,15 +73,13 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		addComboMap(EmployeeBindingConstants.BIND_ID_POSITION, EmployeeReference.getPositions(), "toString", DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
-		addTextMap(EmployeeBindingConstants.BIND_ID_SEC_ROLE, DairyPackage.Literals.EMPLOYEE__SECURITY_ROLE);
+		addComboMap(EmployeeBindingConstants.BIND_ID_SEC_ROLE, allRoles, "getName", DairyPackage.Literals.EMPLOYEE__ROLE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_PASSWORD, DairyPackage.Literals.EMPLOYEE__PASSWORD);
 		
 		IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
 		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
 
-		getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE).setOutputOnly(true);
-		
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		if(editEmployee.getLocation() == null){

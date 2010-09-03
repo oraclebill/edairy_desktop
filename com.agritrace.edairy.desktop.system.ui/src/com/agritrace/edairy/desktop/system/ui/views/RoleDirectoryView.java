@@ -20,6 +20,8 @@ public final class RoleDirectoryView extends AbstractDirectoryView {
 	
 	@Override
 	protected void createFilterConditions(Composite comp) {
+		setPartName("Security Roles");
+		
 		Composite parent = UIControlsFactory.createComposite(comp);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);

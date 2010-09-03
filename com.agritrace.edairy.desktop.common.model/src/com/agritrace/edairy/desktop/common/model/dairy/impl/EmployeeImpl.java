@@ -11,6 +11,7 @@ import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.LoginData;
 import java.util.Date;
 
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getUsername <em>Username</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#isLocalEnabled <em>Local Enabled</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getRole <em>Role</em>}</li>
  * </ul>
  * </p>
  *
@@ -286,6 +288,16 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected boolean localEnabled = LOCAL_ENABLED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Role role;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -563,6 +575,44 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Role getRole() {
+		if (role != null && role.eIsProxy()) {
+			InternalEObject oldRole = (InternalEObject)role;
+			role = (Role)eResolveProxy(oldRole);
+			if (role != oldRole) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.EMPLOYEE__ROLE, oldRole, role));
+			}
+		}
+		return role;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Role basicGetRole() {
+		return role;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRole(Role newRole) {
+		Role oldRole = role;
+		role = newRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__ROLE, oldRole, role));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -590,6 +640,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return getPassword();
 			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
 				return isLocalEnabled();
+			case DairyPackage.EMPLOYEE__ROLE:
+				if (resolve) return getRole();
+				return basicGetRole();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -637,6 +690,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return;
 			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
 				setLocalEnabled((Boolean)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__ROLE:
+				setRole((Role)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -686,6 +742,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
 				setLocalEnabled(LOCAL_ENABLED_EDEFAULT);
 				return;
+			case DairyPackage.EMPLOYEE__ROLE:
+				setRole((Role)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -722,6 +781,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
 				return localEnabled != LOCAL_ENABLED_EDEFAULT;
+			case DairyPackage.EMPLOYEE__ROLE:
+				return role != null;
 		}
 		return super.eIsSet(featureID);
 	}

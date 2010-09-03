@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.security;
+package com.agritrace.edairy.desktop.common.model.dairy.security;
 
 /**
  * Administrator principal with 
@@ -16,6 +16,11 @@ public final class DefaultPrincipal implements IPrincipal {
 	@Override
 	public String getName() {
 		return "root";
+	}
+
+	@Override
+	public boolean hasPermission(Permission perm) {
+		return true;
 	}
 
 }

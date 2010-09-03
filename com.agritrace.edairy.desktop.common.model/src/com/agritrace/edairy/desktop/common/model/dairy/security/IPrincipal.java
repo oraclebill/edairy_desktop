@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.security;
+package com.agritrace.edairy.desktop.common.model.dairy.security;
 
 /**
  * Represents a logged in entity. For the time being, all it can do is return the
@@ -10,4 +10,5 @@ package com.agritrace.edairy.desktop.security;
 public interface IPrincipal {
 	String getName();
 	String getDisplayName();
+	boolean hasPermission(Permission perm);
 }

@@ -58,6 +58,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageIm
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -273,6 +274,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum preferenceTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType permissionTEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -842,6 +850,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getEmployee_LocalEnabled() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEmployee_Role() {
+		return (EReference)employeeEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -2010,8 +2027,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRole_Permissions() {
-		return (EReference)roleEClass.getEStructuralFeatures().get(3);
+	public EAttribute getRole_Permissions() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2154,6 +2171,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getPermissionT() {
+		return permissionTEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DairyFactory getDairyFactory() {
 		return (DairyFactory)getEFactoryInstance();
 	}
@@ -2235,6 +2261,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__USERNAME);
 		createEAttribute(employeeEClass, EMPLOYEE__PASSWORD);
 		createEAttribute(employeeEClass, EMPLOYEE__LOCAL_ENABLED);
+		createEReference(employeeEClass, EMPLOYEE__ROLE);
 
 		dairyLocationEClass = createEClass(DAIRY_LOCATION);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__ID);
@@ -2380,7 +2407,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(roleEClass, ROLE__ID);
 		createEAttribute(roleEClass, ROLE__NAME);
 		createEAttribute(roleEClass, ROLE__DESCRIPTION);
-		createEReference(roleEClass, ROLE__PERMISSIONS);
+		createEAttribute(roleEClass, ROLE__PERMISSIONS);
 
 		permissionNamespaceEClass = createEClass(PERMISSION_NAMESPACE);
 		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__ID);
@@ -2400,6 +2427,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 		milkPricePeriodEEnum = createEEnum(MILK_PRICE_PERIOD);
 		preferenceTypeEEnum = createEEnum(PREFERENCE_TYPE);
+
+		// Create data types
+		permissionTEDataType = createEDataType(PERMISSION_T);
 	}
 
 	/**
@@ -2505,6 +2535,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_Username(), ecorePackage.getEString(), "username", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_Password(), ecorePackage.getEString(), "password", "", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmployee_Role(), this.getRole(), null, "role", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyLocationEClass, DairyLocation.class, "DairyLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairyLocation_Id(), ecorePackage.getELong(), "Id", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2656,7 +2687,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getRole_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRole_Permissions(), this.getPermission(), null, "permissions", null, 0, -1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_Permissions(), this.getPermissionT(), "permissions", null, 0, -1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(permissionNamespaceEClass, PermissionNamespace.class, "PermissionNamespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPermissionNamespace_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2718,6 +2749,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.LONG);
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.FLOAT);
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.DOUBLE);
+
+		// Initialize data types
+		initEDataType(permissionTEDataType, com.agritrace.edairy.desktop.common.model.dairy.security.Permission.class, "PermissionT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

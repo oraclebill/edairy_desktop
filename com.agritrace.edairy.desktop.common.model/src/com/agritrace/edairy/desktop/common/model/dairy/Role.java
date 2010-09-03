@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -109,17 +110,17 @@ public interface Role extends EObject {
 	void setDescription(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Permissions</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Permission}.
+	 * Returns the value of the '<em><b>Permissions</b></em>' attribute list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.security.Permission}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Permissions</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Permissions</em>' reference list.
+	 * @return the value of the '<em>Permissions</em>' attribute list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRole_Permissions()
-	 * @model
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.dairy.PermissionT"
 	 * @generated
 	 */
 	EList<Permission> getPermissions();

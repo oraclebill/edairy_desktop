@@ -17,6 +17,8 @@ import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
@@ -30,6 +32,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
  * @author Bill Jones
  * 
  */
+@PermissionRequired(Permission.VIEW_DAIRY_PROFILE)
 public class DairyProfileViewController extends SubModuleController {
 
 	private class DairyProfileCancelAction implements IActionListener {

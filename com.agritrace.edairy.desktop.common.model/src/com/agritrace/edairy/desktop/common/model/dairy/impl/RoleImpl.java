@@ -7,9 +7,9 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,7 +101,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPermissions() <em>Permissions</em>}' reference list.
+	 * The cached value of the '{@link #getPermissions() <em>Permissions</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPermissions()
@@ -199,7 +199,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 */
 	public EList<Permission> getPermissions() {
 		if (permissions == null) {
-			permissions = new EObjectResolvingEList<Permission>(Permission.class, this, DairyPackage.ROLE__PERMISSIONS);
+			permissions = new EDataTypeUniqueEList<Permission>(Permission.class, this, DairyPackage.ROLE__PERMISSIONS);
 		}
 		return permissions;
 	}
@@ -310,6 +310,8 @@ public class RoleImpl extends EObjectImpl implements Role {
 		result.append(name);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", permissions: ");
+		result.append(permissions);
 		result.append(')');
 		return result.toString();
 	}

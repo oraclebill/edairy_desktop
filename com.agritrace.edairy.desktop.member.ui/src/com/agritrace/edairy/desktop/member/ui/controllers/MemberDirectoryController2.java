@@ -19,6 +19,8 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
@@ -31,6 +33,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
+@PermissionRequired(Permission.VIEW_MEMBER_LIST)
 public class MemberDirectoryController2 extends BasicDirectoryController<Membership> {
 
 	private final class DefaultTextListener implements IFocusListener {

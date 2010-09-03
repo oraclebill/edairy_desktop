@@ -30,6 +30,7 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword <em>Password</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}</li>
  * </ul>
  * </p>
  *
@@ -352,5 +353,31 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setLocalEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Role</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Role</em>' reference.
+	 * @see #setRole(Role)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Role()
+	 * @model
+	 * @generated
+	 */
+	Role getRole();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Role</em>' reference.
+	 * @see #getRole()
+	 * @generated
+	 */
+	void setRole(Role value);
 
 } // Employee

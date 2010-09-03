@@ -110,6 +110,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createMilkPricePeriodFromString(eDataType, initialValue);
 			case DairyPackage.PREFERENCE_TYPE:
 				return createPreferenceTypeFromString(eDataType, initialValue);
+			case DairyPackage.PERMISSION_T:
+				return createPermissionTFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -137,6 +139,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertMilkPricePeriodToString(eDataType, instanceValue);
 			case DairyPackage.PREFERENCE_TYPE:
 				return convertPreferenceTypeToString(eDataType, instanceValue);
+			case DairyPackage.PERMISSION_T:
+				return convertPermissionTToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -500,6 +504,22 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 */
 	public String convertPreferenceTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public com.agritrace.edairy.desktop.common.model.dairy.security.Permission createPermissionTFromString(EDataType eDataType, String initialValue) {
+		return Enum.valueOf(com.agritrace.edairy.desktop.common.model.dairy.security.Permission.class, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public String convertPermissionTToString(EDataType eDataType, Object instanceValue) {
+		return ((com.agritrace.edairy.desktop.common.model.dairy.security.Permission) instanceValue).name();
 	}
 
 	/**

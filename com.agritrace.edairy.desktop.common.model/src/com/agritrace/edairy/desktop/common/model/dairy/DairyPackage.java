@@ -12,6 +12,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -852,13 +853,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Role</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__ROLE = ModelPackage.PERSON_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 12;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -2461,7 +2471,7 @@ public interface DairyPackage extends EPackage {
 	int ROLE__DESCRIPTION = 2;
 
 	/**
-	 * The feature id for the '<em><b>Permissions</b></em>' reference list.
+	 * The feature id for the '<em><b>Permissions</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2640,6 +2650,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	int PREFERENCE_TYPE = 28;
+
+
+	/**
+	 * The meta object id for the '<em>Permission T</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.Permission
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
+	 * @generated
+	 */
+	int PERMISSION_T = 29;
 
 
 	/**
@@ -3242,6 +3263,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEmployee_LocalEnabled();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Role</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EReference getEmployee_Role();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation <em>Location</em>}'.
@@ -4647,15 +4679,15 @@ public interface DairyPackage extends EPackage {
 	EAttribute getRole_Description();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getPermissions <em>Permissions</em>}'.
+	 * Returns the meta object for the attribute list '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getPermissions <em>Permissions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Permissions</em>'.
+	 * @return the meta object for the attribute list '<em>Permissions</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role#getPermissions()
 	 * @see #getRole()
 	 * @generated
 	 */
-	EReference getRole_Permissions();
+	EAttribute getRole_Permissions();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace <em>Permission Namespace</em>}'.
@@ -4812,6 +4844,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getPreferenceType();
+
+	/**
+	 * Returns the meta object for data type '{@link com.agritrace.edairy.desktop.common.model.dairy.security.Permission <em>Permission T</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Permission T</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.Permission
+	 * @model instanceClass="com.agritrace.edairy.desktop.common.model.dairy.security.Permission"
+	 * @generated
+	 */
+	EDataType getPermissionT();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -5282,6 +5325,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__LOCAL_ENABLED = eINSTANCE.getEmployee_LocalEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Role</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMPLOYEE__ROLE = eINSTANCE.getEmployee_Role();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -6348,12 +6399,12 @@ public interface DairyPackage extends EPackage {
 		EAttribute ROLE__DESCRIPTION = eINSTANCE.getRole_Description();
 
 		/**
-		 * The meta object literal for the '<em><b>Permissions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Permissions</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROLE__PERMISSIONS = eINSTANCE.getRole_Permissions();
+		EAttribute ROLE__PERMISSIONS = eINSTANCE.getRole_Permissions();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl <em>Permission Namespace</em>}' class.
@@ -6492,6 +6543,16 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum PREFERENCE_TYPE = eINSTANCE.getPreferenceType();
+
+		/**
+		 * The meta object literal for the '<em>Permission T</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.security.Permission
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
+		 * @generated
+		 */
+		EDataType PERMISSION_T = eINSTANCE.getPermissionT();
 
 	}
 

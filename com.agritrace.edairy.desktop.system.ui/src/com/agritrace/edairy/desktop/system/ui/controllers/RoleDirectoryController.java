@@ -9,17 +9,24 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleFilterBinding;
 import com.agritrace.edairy.desktop.system.ui.dialogs.RoleEditDialog;
 
+@PermissionRequired(Permission.VIEW_ROLES)
 public final class RoleDirectoryController extends BasicDirectoryController<Role> {
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
+	
+	@Override
+	protected String getFullTitle() {
+		return "Security Roles";
+	}
 	
 	public RoleDirectoryController() {
 		super();
@@ -45,7 +52,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 					if (sb.length() > 0)
 						sb.append(" | ");
 					
-					sb.append(perm.getDisplayName());
+					sb.append(perm.toString());
 				}
 				
 				return sb.toString();
@@ -73,7 +80,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 				}
 				
 				for (Permission perm: role.getPermissions()) {
-					if (perm.getName().indexOf(permText) != -1) {
+					if (perm.toString().indexOf(permText) != -1) {
 						all.add(role);
 						break;
 					}

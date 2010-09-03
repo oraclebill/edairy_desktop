@@ -20,6 +20,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
@@ -32,6 +34,7 @@ import com.agritrace.edairy.desktop.finance.ui.dialogs.MilkPriceEditDialog;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
+@PermissionRequired(Permission.VIEW_MILK_PRICES)
 public class MilkPriceJournalController extends BasicDirectoryController<MilkPrice> {
 
 	static class FilterBean extends AbstractBean {

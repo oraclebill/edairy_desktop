@@ -10,8 +10,6 @@ import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
-import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
@@ -20,13 +18,13 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
-import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
@@ -34,6 +32,7 @@ import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEn
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 
+@PermissionRequired(Permission.VIEW_TRANSACTIONS)
 public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
 
 	static class TransactionSourceMatchPredicate implements Predicate {
