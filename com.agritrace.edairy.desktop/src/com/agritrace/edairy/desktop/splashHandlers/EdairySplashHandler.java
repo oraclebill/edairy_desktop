@@ -1,5 +1,8 @@
 package com.agritrace.edairy.desktop.splashHandlers;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.FontDescriptor;
@@ -25,6 +28,8 @@ import com.agritrace.edairy.desktop.ui.controllers.AuthController;
 
 @SuppressWarnings("restriction")
 public class EdairySplashHandler extends EclipseSplashHandler {
+	private static final int WAIT_MSEC = 5000;
+	
 	private volatile boolean initialized = false;
 	private boolean authenticated = false;
 	private Label developerLabel;
@@ -37,7 +42,17 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	@Override
 	public void init(Shell splash) {
 		super.init(splash);
+		final RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
+		
+		// Wait until the VM has been up for 5 seconds
+		while (mx.getUptime() < WAIT_MSEC) {
+			if (splash.getDisplay().readAndDispatch() == false) {
+				splash.getDisplay().sleep();
+			}
+		}
+
 		getContent().setBackgroundImage(Activator.getImage("splash/splash.bmp"));
+		long endTime = System.currentTimeMillis() + WAIT_MSEC;
 		
 		final IProgressMonitor monitor = getBundleProgressMonitor();
 		monitor.beginTask("Initializing database", 2);
@@ -55,13 +70,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 			}
 		});
 		
-		doEventLoop();
-	}
-	
-	private void doEventLoop() {
-		final Shell splash = getSplash();
-		
-		while (!initialized) {
+		while (!initialized || System.currentTimeMillis() < endTime) {
 			if (splash.getDisplay().readAndDispatch() == false) {
 				splash.getDisplay().sleep();
 			}
