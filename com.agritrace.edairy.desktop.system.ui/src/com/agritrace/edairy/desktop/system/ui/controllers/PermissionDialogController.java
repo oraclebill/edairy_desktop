@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.system.ui.controllers;
 
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -16,7 +14,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.system.ui.constants.PermissionBinding;
 import com.agritrace.edairy.desktop.system.ui.dialogs.NamespaceLookupDialog;
 
-public class PermissionDialogController extends RecordDialogController<Permission> {
+public final class PermissionDialogController extends RecordDialogController<Permission> {
 	private ITextRidget namespaceName;
 
 	@Override
@@ -41,7 +39,7 @@ public class PermissionDialogController extends RecordDialogController<Permissio
 	}
 	
 	private void updateNamespaceName() {
-		PermissionNamespace namespace = getWorkingCopy().getNamespace();
+		final PermissionNamespace namespace = getWorkingCopy().getNamespace();
 		namespaceName.setText(namespace == null ? "" : namespace.getName());
 	}
 

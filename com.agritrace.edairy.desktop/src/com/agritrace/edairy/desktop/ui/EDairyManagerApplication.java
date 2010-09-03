@@ -50,6 +50,7 @@ import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 import com.agritrace.edairy.desktop.system.ui.controllers.PermissionDirectoryController;
+import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
 import com.agritrace.edairy.desktop.system.ui.views.PermissionDirectoryView;
 import com.agritrace.edairy.desktop.system.ui.views.RoleDirectoryView;
 import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
@@ -424,7 +425,8 @@ public class EDairyManagerApplication extends SwtApplication {
 		subAppNode.addChild(moduleGroupNode);
 
 		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$ 
-		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode, RoleDirectoryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode,
+				RoleDirectoryView.ID, RoleDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		NodeFactory.createSubModule("edm.system.permissions", "Permissions", moduleNode,
 				PermissionDirectoryView.ID, PermissionDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 
