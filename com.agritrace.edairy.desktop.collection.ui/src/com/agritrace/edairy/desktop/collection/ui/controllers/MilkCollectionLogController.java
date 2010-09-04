@@ -220,6 +220,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		startDate.setDate(cal.getTime());
 		endDate.setDate(new Date());
 		route.setSelection(null);
+		status.setSelection(null);
 		mprMissing.setSelected(false);
 		suspended.setSelected(false);
 		rejected.setSelected(false);
