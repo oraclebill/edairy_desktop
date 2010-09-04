@@ -130,7 +130,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 		addComboMap(DeliveryJournalEditBindContants.DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
 				"getFamilyName", DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
 
-		addComboMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(), "getLogBookNumber",
+		addComboMap(DeliveryJournalEditBindContants.VEHICLE_COMBO, dairyRepo.allVehicles(), "getRegistrationNumber",
 				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
 
 		addTextMap(DeliveryJournalEditBindContants.LINE_ITEM_TOTAL_TEXT,
