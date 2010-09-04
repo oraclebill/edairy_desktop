@@ -33,12 +33,12 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		SwtControlRidgetMapper.getInstance().addMapping(CollectionLineComposite.class, CollectionLineRidget.class);
 	}
 
-	private static final String BIN_LABEL = "Bin :";
-	private static final String CAN_ID_LABEL = "CAN :";
-	private static final String MEMBER_ID_LABEL = "Member # :";
+	private static final String BIN_LABEL = "Bin No.";
+	private static final String CAN_ID_LABEL = "CAN No.";
+	private static final String MEMBER_ID_LABEL = "Member No.";
 	private static final String MILK_ENTRY_GROUP_TITLE = "Add New Entry";
 	private static final String MPR_COLUMN_HEADER = "MPR Missing";
-	private static final String QUANTITY_LABEL = "Quantity :";
+	private static final String QUANTITY_LABEL = "Quantity";
 
 	private static final String REJECTED_COLUMN_HEADER = "Rejected";
 	private GridData layoutData;

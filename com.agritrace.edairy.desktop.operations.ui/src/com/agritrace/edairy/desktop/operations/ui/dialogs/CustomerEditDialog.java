@@ -69,7 +69,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		final Composite composite = new Composite(comonComp, SWT.NONE);
 		composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		composite.setLayout(new GridLayout(2, false));
 		UIControlsFactory.createLabel(composite, "Customer ID");
 		final Text txtDate = UIControlsFactory.createText(composite);
