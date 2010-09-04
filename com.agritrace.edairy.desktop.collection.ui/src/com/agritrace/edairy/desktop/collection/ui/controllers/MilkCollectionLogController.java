@@ -147,7 +147,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		endDate.bindToModel(filterBean, "endDate");
 
 		route.bindToModel(new WritableList(DairyRepository.getInstance().allRoutes(), Route.class), Route.class,
-				"getName", BeansObservables.observeValue(filterBean, "route"));
+				"getCode", BeansObservables.observeValue(filterBean, "route"));
 
 		status.bindToModel(new WritableList(JournalStatus.VALUES, JournalStatus.class), JournalStatus.class, "getName",
 				BeansObservables.observeValue(filterBean, "status"));
