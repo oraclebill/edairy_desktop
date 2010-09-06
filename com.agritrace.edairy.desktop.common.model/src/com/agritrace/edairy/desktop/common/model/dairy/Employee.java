@@ -26,11 +26,11 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNationalId <em>National Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNhifNumber <em>Nhif Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNssfNumber <em>Nssf Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole <em>Security Role</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword <em>Password</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}</li>
  * </ul>
  * </p>
  *
@@ -249,32 +249,6 @@ public interface Employee extends Person {
 	void setNssfNumber(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Security Role</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Security Role</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Security Role</em>' attribute.
-	 * @see #setSecurityRole(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_SecurityRole()
-	 * @model
-	 * @generated
-	 */
-	String getSecurityRole();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole <em>Security Role</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Security Role</em>' attribute.
-	 * @see #getSecurityRole()
-	 * @generated
-	 */
-	void setSecurityRole(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Username</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -313,6 +287,7 @@ public interface Employee extends Person {
 	 * @see #setPassword(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Password()
 	 * @model default=""
+	 *        annotation="teneo.jpa appinfo='@Column(length=64)'"
 	 * @generated
 	 */
 	String getPassword();
@@ -379,5 +354,32 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setRole(Role value);
+
+	/**
+	 * Returns the value of the '<em><b>Password Hashed</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Password Hashed</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Password Hashed</em>' attribute.
+	 * @see #setPasswordHashed(boolean)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_PasswordHashed()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isPasswordHashed();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Password Hashed</em>' attribute.
+	 * @see #isPasswordHashed()
+	 * @generated
+	 */
+	void setPasswordHashed(boolean value);
 
 } // Employee

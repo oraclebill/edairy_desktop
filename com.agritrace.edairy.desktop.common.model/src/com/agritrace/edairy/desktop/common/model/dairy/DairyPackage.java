@@ -817,22 +817,13 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Security Role</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__SECURITY_ROLE = ModelPackage.PERSON_FEATURE_COUNT + 8;
-
-	/**
 	 * The feature id for the '<em><b>Username</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__USERNAME = ModelPackage.PERSON_FEATURE_COUNT + 9;
+	int EMPLOYEE__USERNAME = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -841,7 +832,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__PASSWORD = ModelPackage.PERSON_FEATURE_COUNT + 10;
+	int EMPLOYEE__PASSWORD = ModelPackage.PERSON_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Local Enabled</b></em>' attribute.
@@ -850,7 +841,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 11;
+	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' reference.
@@ -859,7 +850,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__ROLE = ModelPackage.PERSON_FEATURE_COUNT + 12;
+	int EMPLOYEE__ROLE = ModelPackage.PERSON_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Password Hashed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__PASSWORD_HASHED = ModelPackage.PERSON_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -3221,17 +3221,6 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_NssfNumber();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole <em>Security Role</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Security Role</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getSecurityRole()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_SecurityRole();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3274,6 +3263,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEmployee_Role();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password Hashed</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_PasswordHashed();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation <em>Location</em>}'.
@@ -5295,14 +5295,6 @@ public interface DairyPackage extends EPackage {
 		EAttribute EMPLOYEE__NSSF_NUMBER = eINSTANCE.getEmployee_NssfNumber();
 
 		/**
-		 * The meta object literal for the '<em><b>Security Role</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__SECURITY_ROLE = eINSTANCE.getEmployee_SecurityRole();
-
-		/**
 		 * The meta object literal for the '<em><b>Username</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5333,6 +5325,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMPLOYEE__ROLE = eINSTANCE.getEmployee_Role();
+
+		/**
+		 * The meta object literal for the '<em><b>Password Hashed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__PASSWORD_HASHED = eINSTANCE.getEmployee_PasswordHashed();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.

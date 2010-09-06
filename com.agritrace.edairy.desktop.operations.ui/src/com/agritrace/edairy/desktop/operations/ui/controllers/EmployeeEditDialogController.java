@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import java.util.List;
 
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
@@ -14,10 +15,13 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.ui.DBPreferenceStore;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
@@ -31,6 +35,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	private Employee editEmployee = null;
 
 	private ITextRidget employeeId;
+	private ITextRidget passwordRidget;
 	/*
 	private IComboRidget department;
 	private ITextRidget familyName;
@@ -75,7 +80,10 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
 		addComboMap(EmployeeBindingConstants.BIND_ID_SEC_ROLE, allRoles, "getName", DairyPackage.Literals.EMPLOYEE__ROLE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
-		addTextMap(EmployeeBindingConstants.BIND_ID_PASSWORD, DairyPackage.Literals.EMPLOYEE__PASSWORD);
+		// addTextMap(EmployeeBindingConstants.BIND_ID_PASSWORD, DairyPackage.Literals.EMPLOYEE__PASSWORD);
+		
+		// We pointedly do not display the current password.
+		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);
 		
 		IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
 		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
@@ -100,13 +108,29 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		mapController.updateBinding();
 
 		// Configure Communication Group
-		//		final CommunicationGroupController commController = new CommunicationGroupController(this);
-		//		commController.setInputModel(editEmployee);
-		//		commController.updateBinding();
-
 		contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
 		contacts.bindToModel(editEmployee);
 		contacts.updateFromModel();
+	}
+	
+	@Override
+	protected void handleSaveAction() {
+		// Password requires special care. We'll only update it if something was entered.
+		final String password = passwordRidget.getText();
+		
+		if (!StringUtils.isEmpty(password)) {
+			final Employee employee = getWorkingCopy();
+			
+			if (new DBPreferenceStore().getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
+				employee.setPassword(PrincipalManager.getInstance().hashPassword(password));
+				employee.setPasswordHashed(true);
+			} else {
+				employee.setPassword(password);
+				employee.setPasswordHashed(false);
+			}
+		}
+		
+		super.handleSaveAction();
 	}
 	
 	@Override

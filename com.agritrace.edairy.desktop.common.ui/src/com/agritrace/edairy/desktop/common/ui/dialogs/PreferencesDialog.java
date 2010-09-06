@@ -122,7 +122,8 @@ public final class PreferencesDialog extends PreferenceDialog {
 			setPreferenceStore(controller.loadData());
 			Composite comp = getFieldEditorParent();
 			
-			addField(new BooleanFieldEditor(SystemSettingsController.ENCRYPT_PASSWORDS, "Encrypt user passwords", comp));
+			addField(new BooleanFieldEditor(SystemSettingsController.ENCRYPT_PASSWORDS,
+					"Encrypt passwords for newly edited employees", comp));
 		}
 	}
 	
