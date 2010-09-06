@@ -15,4 +15,9 @@ public class FarmRepository extends HibernateRepository<Farm> implements IFarmRe
 	public List<Farm> allWithAnimals() {
 		return allWithEagerFetch("animals");
 	}
+
+	@Override
+	public List<Farm> allWithAnimalsAndCans() {
+		return allWithEagerFetch("animals", "cans");
+	}
 }

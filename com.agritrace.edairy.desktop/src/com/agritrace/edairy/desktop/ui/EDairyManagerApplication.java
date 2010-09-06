@@ -427,10 +427,14 @@ public class EDairyManagerApplication extends SwtApplication {
 				RoleDirectoryView.ID, RoleDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		/*
-		NodeFactory.createSubModule("edm.system.permissions", "Permissions", moduleNode,
-				PermissionDirectoryView.ID, PermissionDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		app.addSimpleListener(new SimpleNavigationNodeAdapter() {
+			@Override
+			public void afterActivated(INavigationNode<?> source) {
+				app.getNavigationProcessor().activate(app.getChild(1));
+			}
+		});
 		*/
-
+		
 		return app;
 
 	}

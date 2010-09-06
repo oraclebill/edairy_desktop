@@ -156,7 +156,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		if (selectedMember != null) {
 			allFarms.addAll(selectedMember.getMember().getFarms());
 		} else {
-			allFarms.addAll(farmRepository.all());
+			allFarms.addAll(farmRepository.allWithAnimalsAndCans());
 		}
 
 		final List<FarmListViewTableNode> results = new ArrayList<FarmListViewTableNode>();

@@ -13,4 +13,6 @@ public interface IFarmRepository extends IRepository<Farm> {
 	 * @return List of all farms with preloaded animals
 	 */
 	List<Farm> allWithAnimals();
+	
+	List<Farm> allWithAnimalsAndCans();
 }
