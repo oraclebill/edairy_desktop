@@ -78,7 +78,7 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 		factory.applyTo(permRight);
 		
 		UIControlsFactory.createLabel(permRight, "Selected Permissions");
-		final Table permTable = UIControlsFactory.createTable(permRight, SWT.BORDER | SWT.SINGLE,
+		final Table permTable = UIControlsFactory.createTable(permRight, SWT.BORDER | SWT.MULTI,
 				RoleBinding.BIND_ID_ROLE_PERMISSIONS.name());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).minSize(0, 200).applyTo(permTable);
 	}
