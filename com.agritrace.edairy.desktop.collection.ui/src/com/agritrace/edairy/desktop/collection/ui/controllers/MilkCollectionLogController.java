@@ -25,6 +25,7 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDi
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
@@ -49,7 +50,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(journal);
 			DairyRepository.getInstance().save(DairyRepository.getInstance().getLocalDairy());
 			MilkCollectionLogController.this.refreshTableContents();
-//			MilkCollectionLogController.this.table.updateFromModel();			
 		}
 	}
 
@@ -97,7 +97,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IToggleButtonRidget rejected;
 
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	private final List<CollectionJournalPage> allJournals = DairyRepository.getInstance().allCollectionJournalPages();;
+	private final List<CollectionJournalPage> allJournals = DairyRepository.getInstance().allCollectionJournalPages();
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
 
@@ -108,11 +108,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		setRepository(journalRepo);
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
-		// addTableColumn("Route",
-		// DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE, new
-		// RouteNameFormatter() );
-
-		addTableColumn("Route", "route.name", String.class);
+		addTableColumn("Route", "route.code", String.class);
 		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
 		addTableColumn("Status", "status.name", String.class);
 		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());
@@ -121,7 +117,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
 
-		filterBean.setRoutes(DairyRepository.getInstance().allRoutes());
+		List<Route> routes = new ArrayList<Route>();
+		routes.add(null); // First, empty entry - means "show all"
+		routes.addAll(DairyRepository.getInstance().allRoutes());
+		filterBean.setRoutes(routes);
 	}
 
 	@Override
@@ -143,22 +142,66 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
 
 		startDate.bindToModel(filterBean, "startDate");
-
 		endDate.bindToModel(filterBean, "endDate");
 
-		route.bindToModel(new WritableList(DairyRepository.getInstance().allRoutes(), Route.class), Route.class,
+		route.bindToModel(new WritableList(filterBean.getRoutes(), Route.class), Route.class,
 				"getCode", BeansObservables.observeValue(filterBean, "route"));
 
-		status.bindToModel(new WritableList(JournalStatus.VALUES, JournalStatus.class), JournalStatus.class, "getName",
+		List<JournalStatus> statuses = new ArrayList<JournalStatus>();
+		statuses.add(null); // Do not filter by status
+		statuses.addAll(JournalStatus.VALUES);
+		
+		status.bindToModel(new WritableList(statuses, JournalStatus.class), JournalStatus.class, "getName",
 				BeansObservables.observeValue(filterBean, "status"));
 
 		mprMissing.bindToModel(filterBean, "mprMissing");
-
 		suspended.bindToModel(filterBean, "suspended");
-
 		rejected.bindToModel(filterBean, "rejected");
 
 		updateAllRidgetsFromModel();
+	}
+	
+	/**
+	 * Checks whether the given journal page matches the given filter conditions. 
+	 * 
+	 * @param bean Filter conditions
+	 * @param cj Journal page
+	 * @return Whether the page matches the conditions
+	 */
+	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionJournalPage cj) {
+		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0)
+			return false;
+		
+		if (bean.getEndDate() != null && cj.getJournalDate().compareTo(bean.getEndDate()) > 0)
+			return false;
+		
+		if (bean.getRoute() != null && !cj.getRoute().getId().equals(bean.getRoute().getId()))
+			return false;
+		
+		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus())
+			return false;
+		
+		if (bean.isSuspended() && cj.getSuspendedCount() == 0)
+			return false;
+		
+		if (bean.isRejected() && cj.getRejectedCount() == 0)
+			return false;
+		
+		if (bean.isMprMissing()) {
+			boolean found = false;
+			
+			for (CollectionJournalLine line: cj.getJournalEntries()) {
+				if (line.isNotRecorded()) {
+					found = true;
+					break;
+				}
+			}
+			
+			if (!found)
+				return false;
+		}
+		
+		return true;
 	}
 
 	// TODO: make this a query..
@@ -167,12 +210,11 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		final List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
 
 		for (final CollectionJournalPage cj : allJournals) {
-			final boolean condition = true;
-			// filter logic goes here...
-			if (condition) {
+			if (matches(filterBean, cj)) {
 				filteredJournals.add(cj);
 			}
 		}
+		
 		return filteredJournals;
 	}
 
@@ -226,6 +268,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		rejected.setSelected(false);
 
 		updateAllRidgetsFromModel();
+		refreshTableContents();
 	}
 
 	void log(int level, String message, Throwable t) {
