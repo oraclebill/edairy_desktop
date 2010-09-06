@@ -17,7 +17,6 @@ import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
-import com.agritrace.edairy.desktop.install.views.SampleView;
 
 public class InstallNavigationNodeAssembler extends AbstractNavigationAssembler {
 	// FINANCE
@@ -60,11 +59,13 @@ public class InstallNavigationNodeAssembler extends AbstractNavigationAssembler 
 			final IModuleGroupNode moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_INSTALL_IMPORT));
 			subAppNode.addChild(moduleGroupNode);
 
+			/*
 			final IModuleNode moduleNode = NodeFactory.createModule(MODULE_INSTALL_IMPORT, LABEL_IMPORT_WIZARD, moduleGroupNode);
 			NodeFactory
 					.createSubModule(
 							SUBMODULE_INSTALL_IMPORT_EMPLOYEES,
 							LABEL_IMPORT_EMPLOYEES, moduleNode, SampleView.ID); //$NON-NLS-1$ 
+			*/
 		}
 
 		return new INavigationNode<?>[] { subAppNode };
