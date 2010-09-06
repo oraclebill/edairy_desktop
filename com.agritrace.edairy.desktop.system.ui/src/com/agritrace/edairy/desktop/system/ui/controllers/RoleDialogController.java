@@ -63,6 +63,8 @@ public final class RoleDialogController extends RecordDialogController<Role> {
 		permList = ListSelectionHolder.create(null);
 		final Role workingCopy = getWorkingCopy();
 		
+		getWindowRidget().setTitle(workingCopy.getId() == null ? "Add Role" : "Edit Role");
+		
 		addTextMap(RoleBinding.BIND_ID_ROLE_NAME.name(), DairyPackage.Literals.ROLE__NAME);
 		getRidget(ITextRidget.class, RoleBinding.BIND_ID_ROLE_NAME.name()).setMandatory(true);
 		addTextMap(RoleBinding.BIND_ID_ROLE_DESCRIPTION.name(), DairyPackage.Literals.ROLE__DESCRIPTION);

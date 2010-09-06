@@ -5,7 +5,6 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.List;
@@ -82,7 +81,6 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 		final Table permTable = UIControlsFactory.createTable(permRight, SWT.BORDER | SWT.SINGLE,
 				RoleBinding.BIND_ID_ROLE_PERMISSIONS.name());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).minSize(0, 200).applyTo(permTable);
-		// addUIControl(permTable, RoleBinding.BIND_ID_ROLE_PERMISSIONS.name());
 	}
 
 	@Override
