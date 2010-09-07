@@ -139,11 +139,25 @@ public class VehicleImportTool extends AbstractImportTool {
 
 	@Override
 	protected void saveImportedEntity(Object entity) {
+		Vehicle vehicle = (Vehicle)entity;
+		madeConsistent(vehicle);
 		count++;
-		vehicles.add((Vehicle)entity);
+		vehicles.add(vehicle);
 	}
 
 	
+	
+	private void madeConsistent(Vehicle vehicle) {
+		String logBookNumber = vehicle.getLogBookNumber();
+		if(logBookNumber == null 
+				|| logBookNumber.isEmpty()//NOTE! this may clatch with VehicleImpl.LOG_BOOK_NUMBER_EDEFAULT if it will be set to 
+				//something different than just empty string!
+				){
+			vehicle.setLogBookNumber(vehicle.getRegistrationNumber());
+		}			
+		
+	}
+
 	@Override
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		errCount++;
