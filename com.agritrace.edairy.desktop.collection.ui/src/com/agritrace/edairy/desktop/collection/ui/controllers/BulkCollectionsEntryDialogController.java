@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.dialogs;
+package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -39,7 +39,9 @@ import com.agritrace.edairy.desktop.collection.ui.components.journalheader.IJour
 import com.agritrace.edairy.desktop.collection.ui.components.validators.DuplicateDeliveryValidator;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MandatoryFieldsCheck;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MemberLookupValidator;
-import com.agritrace.edairy.desktop.collection.ui.controllers.BasicJournalValidator;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberCacheProvider;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberLookupProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -47,6 +49,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
@@ -58,14 +62,14 @@ public class BulkCollectionsEntryDialogController extends
 		BaseDialogController<CollectionJournalPage> {
 
 	private final class GenericMemberInfo implements IMemberInfoProvider {
-		private final Route currentRoute;
+		// private final Route currentRoute;
 		private final IMemberInfoProvider lookupProvider;
 //		private final LRUCache<String, Integer> failed = new LRUCache<String, Integer>();
 		private final MemberCacheProvider routeCache;
 
 		private GenericMemberInfo(Route currentRoute,
 				IMemberInfoProvider lookupProvider) {
-			this.currentRoute = currentRoute;
+			// this.currentRoute = currentRoute;
 			this.lookupProvider = lookupProvider;
 			routeCache = new MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute));
 //			failed.setMinimumSize(50);
@@ -225,8 +229,7 @@ public class BulkCollectionsEntryDialogController extends
 		super.configureRidgets();
 		System.out.println("configureRidgets : " + this);
 
-		journalHeaderRidget = getRidget(IJournalHeaderRidget.class,
-				"journal-header");
+		journalHeaderRidget = getRidget(IJournalHeaderRidget.class, "journal-header");
 		collectionLineRidget = getRidget(ICollectionLineRidget.class,
 				"journal-entry");
 		journalEntryTable = getRidget(ITableRidget.class,
@@ -300,17 +303,13 @@ public class BulkCollectionsEntryDialogController extends
 			}
 		});
 
-		// cancelRidget.setText("Cancel");
 		tableDeleteAction.setEnabled(true);
-
-		// saveAndCloseRidget.addListener(new IActionListener() {
-		// @Override
-		// public void callback() {
-		// handleCancelAction();
-		// }
-		// });
-
 		enableBottomButtons(false);
+		
+		if (PrincipalManager.getInstance().hasPermission(Permission.EDIT_DRIVER_TOTAL)) {
+			System.out.println("Forcing driver total editable");
+			journalHeaderRidget.forceDriverTotalEditable();
+		}
 	}
 
 	/**
@@ -641,7 +640,10 @@ public class BulkCollectionsEntryDialogController extends
 				return false;
 			}
 			workingJournal.setSuspended(true);
+		} else { // Validation passed
+			workingJournal.setSuspended(false);
 		}
+		
 		// Todo: set status in response to events during edit..
 		if (workingJournal.getEntryCount() > 0) {
 			if (workingJournal.getSuspendedCount() > 0

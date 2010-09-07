@@ -12,7 +12,6 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
@@ -110,7 +109,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		addUIControl(startDate, EmployeeBindingConstants.BIND_ID_SINCE);
 		
 		UIControlsFactory.createLabel(employeeInfo, "Security Role");
-		final Combo securityRole = UIControlsFactory.createCombo(employeeInfo);
+		final CCombo securityRole = UIControlsFactory.createCCombo(employeeInfo);
 		securityRole.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(securityRole);
 		addUIControl(securityRole, EmployeeBindingConstants.BIND_ID_SEC_ROLE);

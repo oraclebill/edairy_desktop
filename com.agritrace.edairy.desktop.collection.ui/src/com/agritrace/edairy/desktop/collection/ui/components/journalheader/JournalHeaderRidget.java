@@ -52,6 +52,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	// model object (CollectionJournal)
 	//
 //	private IObservableValue model;
+	private boolean driverTotalEditable = false;
 	private PropertyChangeListener validationListener;
 
 	public JournalHeaderRidget() {
@@ -138,10 +139,13 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		super.updateEnabled();
 		statusRidget.setOutputOnly(true);
 		boolean enabled = isEnabled();
-		driverTotalText.setOutputOnly(!enabled);
+		driverTotalText.setOutputOnly(!enabled && !driverTotalEditable);
 		journalNumber.setOutputOnly(!enabled);
-//		driverTotalText.setFocusable(!enabled);
-//		journalNumber.setFocusable(!enabled);
+	}
+	
+	public void forceDriverTotalEditable() {
+		driverTotalEditable = true;
+		updateEnabled();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ public enum Permission {
 	// Milk namespace
 	VIEW_MILK_COLLECTIONS(Namespace.MILK, "View Milk Collections"),
 	VIEW_MILK_DELIVERIES(Namespace.MILK, "View Milk Deliveries"),
+	EDIT_DRIVER_TOTAL(Namespace.MILK, "Edit Driver Total"),
 	
 	// Membership namespace
 	VIEW_MEMBER_LIST(Namespace.MEMBERSHIP, "View Member List"),

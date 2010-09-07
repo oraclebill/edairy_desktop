@@ -2,8 +2,10 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import java.util.List;
 
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.core.util.StringUtils;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
@@ -78,9 +80,12 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		addComboMap(EmployeeBindingConstants.BIND_ID_POSITION, EmployeeReference.getPositions(), "toString", DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
-		addComboMap(EmployeeBindingConstants.BIND_ID_SEC_ROLE, allRoles, "getName", DairyPackage.Literals.EMPLOYEE__ROLE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
-		// addTextMap(EmployeeBindingConstants.BIND_ID_PASSWORD, DairyPackage.Literals.EMPLOYEE__PASSWORD);
+		
+		// Role needs special care
+		final IComboRidget roleRidget = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
+		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName",
+				EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__ROLE));
 		
 		// We pointedly do not display the current password.
 		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);

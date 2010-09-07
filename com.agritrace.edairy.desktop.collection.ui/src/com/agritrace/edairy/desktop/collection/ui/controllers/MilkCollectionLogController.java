@@ -21,7 +21,6 @@ import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialogController;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
@@ -258,7 +257,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected void resetFilterConditions() {
 		Calendar cal = Calendar.getInstance();
-		cal.roll(Calendar.MONTH, false);
+		cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
 		startDate.setDate(cal.getTime());
 		endDate.setDate(new Date());
 		route.setSelection(null);
