@@ -21,7 +21,6 @@ import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialogController;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;

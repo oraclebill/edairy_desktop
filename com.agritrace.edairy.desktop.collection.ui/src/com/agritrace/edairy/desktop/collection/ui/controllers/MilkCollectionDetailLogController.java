@@ -54,10 +54,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		// setEntityClass(CollectionJournalLine.class);
 		setRepository(new MilkCollectionJournalLineRepository());
 
-		addTableColumn("Page", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL); // ,
-																									// new
-																									// CJLPageFormatter()
-																									// );
+		addTableColumn("Page", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
 		addTableColumn("Line", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__LINE_NUMBER);
 		addTableColumn("MemberID", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FROM);
 		addTableColumn("CAN", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FARM_CONTAINER);

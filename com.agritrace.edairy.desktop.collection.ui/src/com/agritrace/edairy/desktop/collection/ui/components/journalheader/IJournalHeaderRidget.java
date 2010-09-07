@@ -8,7 +8,6 @@ public interface IJournalHeaderRidget extends IComplexRidget {
 	public static final String HEADER_VALID = "header-valid";
 
 	void bindToModel(CollectionJournalPage workingJournalPage);
-
-	public abstract boolean isHeaderValid();
-
+	boolean isHeaderValid();
+	void forceDriverTotalEditable();
 }

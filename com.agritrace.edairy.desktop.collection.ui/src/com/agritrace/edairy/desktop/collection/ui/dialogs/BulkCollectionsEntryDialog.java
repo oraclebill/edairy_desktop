@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.JournalHeaderComposite;
+import com.agritrace.edairy.desktop.collection.ui.controllers.BulkCollectionsEntryDialogController;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
