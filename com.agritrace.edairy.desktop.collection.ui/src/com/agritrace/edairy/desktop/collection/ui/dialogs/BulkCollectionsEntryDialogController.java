@@ -641,7 +641,10 @@ public class BulkCollectionsEntryDialogController extends
 				return false;
 			}
 			workingJournal.setSuspended(true);
+		} else { // Validation passed
+			workingJournal.setSuspended(false);
 		}
+		
 		// Todo: set status in response to events during edit..
 		if (workingJournal.getEntryCount() > 0) {
 			if (workingJournal.getSuspendedCount() > 0
