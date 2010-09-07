@@ -349,6 +349,11 @@ public class BulkCollectionsEntryDialogController extends
 
 		});
 
+		table.setColumnFormatter(5, new BooleanColumnFormatter());
+		table.setColumnFormatter(6, new BooleanColumnFormatter());
+		table.setColumnFormatter(7, new BooleanColumnFormatter());
+		
+		
 		// buttons
 		modifyButton.setVisible(false); // hack.
 		modifyButton.setEnabled(false);
@@ -406,6 +411,16 @@ public class BulkCollectionsEntryDialogController extends
 
 	}
 
+	class BooleanColumnFormatter extends ColumnFormatter {
+		@Override
+		public String getText(Object element) {
+			
+				return "";
+		}
+
+	}
+
+	
 	/**
 	 * 
 	 */
