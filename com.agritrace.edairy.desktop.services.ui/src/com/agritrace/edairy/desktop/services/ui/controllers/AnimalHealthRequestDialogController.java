@@ -184,10 +184,10 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		memberLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_TEXT);
 		memberLookupText.setModelToUIControlConverter(new Member2StringConverter());
-		;
 		memberLookupText.bindToModel(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER.getName());
 		memberLookupText.setOutputOnly(true);
+		memberLookupText.setMandatory(true);
 		memberLookupText.updateFromModel();
 
 		memberLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_BUTTON);
@@ -195,10 +195,10 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		farmLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_TEXT);
 		farmLookupText.setModelToUIControlConverter(new Farm2StringConverter());
-		;
 		farmLookupText.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName());
-		farmLookupText.updateFromModel();
 		farmLookupText.setOutputOnly(true);
+		farmLookupText.setMandatory(true);
+		farmLookupText.updateFromModel();
 
 		farmLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_BUTTON);
 		farmLookupButton.addListener(new FarmLookupAction());
