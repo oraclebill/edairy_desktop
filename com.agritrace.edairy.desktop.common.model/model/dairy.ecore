@@ -372,11 +372,11 @@
     <eLiterals name="Other" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DairyFunction">
-    <eLiterals name="MilkCollection"/>
-    <eLiterals name="MilkStorage" value="1"/>
-    <eLiterals name="StoreSales" value="2"/>
+    <eLiterals name="MilkCollection" literal="Milk Collection"/>
+    <eLiterals name="MilkStorage" value="1" literal="Milk Storage"/>
+    <eLiterals name="StoreSales" value="2" literal="Store Sales"/>
     <eLiterals name="Warehouse" value="3"/>
-    <eLiterals name="MilkProcessing" value="4"/>
+    <eLiterals name="MilkProcessing" value="4" literal="Milk Processing"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Customer" eSuperTypes="common.ecore#//Company">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

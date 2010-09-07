@@ -30,7 +30,7 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MILK_COLLECTION(0, "MilkCollection", "MilkCollection"),
+	MILK_COLLECTION(0, "MilkCollection", "Milk Collection"),
 
 	/**
 	 * The '<em><b>Milk Storage</b></em>' literal object.
@@ -40,7 +40,7 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MILK_STORAGE(1, "MilkStorage", "MilkStorage"),
+	MILK_STORAGE(1, "MilkStorage", "Milk Storage"),
 
 	/**
 	 * The '<em><b>Store Sales</b></em>' literal object.
@@ -50,7 +50,7 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STORE_SALES(2, "StoreSales", "StoreSales"),
+	STORE_SALES(2, "StoreSales", "Store Sales"),
 
 	/**
 	 * The '<em><b>Warehouse</b></em>' literal object.
@@ -70,7 +70,7 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MILK_PROCESSING(4, "MilkProcessing", "MilkProcessing");
+	MILK_PROCESSING(4, "MilkProcessing", "Milk Processing");
 
 	/**
 	 * The '<em><b>Milk Collection</b></em>' literal value.
@@ -81,7 +81,7 @@ public enum DairyFunction implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MILK_COLLECTION
-	 * @model name="MilkCollection"
+	 * @model name="MilkCollection" literal="Milk Collection"
 	 * @generated
 	 * @ordered
 	 */
@@ -96,7 +96,7 @@ public enum DairyFunction implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MILK_STORAGE
-	 * @model name="MilkStorage"
+	 * @model name="MilkStorage" literal="Milk Storage"
 	 * @generated
 	 * @ordered
 	 */
@@ -111,7 +111,7 @@ public enum DairyFunction implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #STORE_SALES
-	 * @model name="StoreSales"
+	 * @model name="StoreSales" literal="Store Sales"
 	 * @generated
 	 * @ordered
 	 */
@@ -141,7 +141,7 @@ public enum DairyFunction implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MILK_PROCESSING
-	 * @model name="MilkProcessing"
+	 * @model name="MilkProcessing" literal="Milk Processing"
 	 * @generated
 	 * @ordered
 	 */
