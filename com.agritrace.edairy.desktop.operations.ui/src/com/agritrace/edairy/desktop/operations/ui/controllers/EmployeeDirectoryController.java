@@ -99,6 +99,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected Employee createNewModel() {
 		final Employee employee = (Employee) EMFUtil.createWorkingCopy(this.getEClass(), 3);
+		employee.setRole(null);
 		// employee.setPhoneNumber("");
 		return employee;
 	}
@@ -107,6 +108,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
+		
 		for (final Employee e : allEmployees) {
 			String memberName = "";
 			if (nameSearchText != null && !(nameSearchText.getText().trim().length() == 0)) {
