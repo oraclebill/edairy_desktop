@@ -257,7 +257,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected void resetFilterConditions() {
 		Calendar cal = Calendar.getInstance();
-		cal.roll(Calendar.MONTH, false);
+		cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
 		startDate.setDate(cal.getTime());
 		endDate.setDate(new Date());
 		route.setSelection(null);
