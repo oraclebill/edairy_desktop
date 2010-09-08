@@ -73,7 +73,7 @@ public interface IDairyRepository {
 
 	List<DairyContainer> getBinsByRoute(Route journalRoute);
 
-	Membership getMemberByMemberId(String memberNumber);
+	Membership findMemberByMemberNo(String memberNumber);
 
 	List<CollectionJournalLine> getMemberCollectionsForSession(Session session, Membership value);
 

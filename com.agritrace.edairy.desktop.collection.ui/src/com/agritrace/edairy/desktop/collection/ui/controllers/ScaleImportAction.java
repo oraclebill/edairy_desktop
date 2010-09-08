@@ -449,7 +449,7 @@ final class ScaleImportAction implements IActionListener {
 		// TODO: we are creating members for testing
 		// -- FIXME
 
-		Membership member = dairyRepo.getMemberByMemberId(memberNumber);
+		Membership member = dairyRepo.findMemberByMemberNo(memberNumber);
 		if (member == null) {
 			throw new RuntimeException("invalid member id " + memberNumber);
 		}

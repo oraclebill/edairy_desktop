@@ -52,6 +52,11 @@
             id="com.agritrace.edairy.desktop.install.commands.importMembers"
             name="Import Member Data">
       </command>
+      <command
+            categoryId="com.agritrace.edairy.desktop.install.commands.category"
+            id="com.agritrace.edairy.desktop.install.commands.importTransactions"
+            name="Import Member Account Data">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -70,6 +75,10 @@
       <handler
             class="com.agritrace.edairy.desktop.install.handlers.ImportVehiclesHandler"
             commandId="com.agritrace.edairy.desktop.install.commands.importVehicles">
+      </handler>
+      <handler
+            class="com.agritrace.edairy.desktop.install.handlers.ImportMemberTransactionHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.importTransactions">
       </handler>
    </extension>
    <extension
@@ -101,6 +110,12 @@
                   commandId="com.agritrace.edairy.desktop.install.commands.importMembers"
                   label="Import Members"
                   mnemonic="M"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.agritrace.edairy.desktop.install.commands.importTransactions"
+                  label="Import Member Account Data"
+                  mnemonic="T"
                   style="push">
             </command>
          </menu>

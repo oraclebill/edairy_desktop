@@ -14,7 +14,7 @@ public class MemberLookupProvider implements IMemberInfoProvider {
 	
 	@Override
 	public Membership getMember(String memberNumber) {
-		return memberRepo.getMemberByMemberId(memberNumber);
+		return memberRepo.findMemberByMemberNo(memberNumber);
 	}
 
 }

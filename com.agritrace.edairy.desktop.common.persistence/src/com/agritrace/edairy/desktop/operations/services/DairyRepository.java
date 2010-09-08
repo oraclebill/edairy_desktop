@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -105,105 +106,116 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	/**
 	 * 
+	 * @author bjones
+	 *
 	 */
-	// private static final HibernateRepository<DairyContainer> binRepository =
-	// new HibernateRepository<DairyContainer>() {
-	// @Override
-	// protected Class<DairyContainer> getClassType() {
-	// return DairyContainer.class;
-	// }
-	// };
-
-	/**
-	 * 
-	 */
-	// private static final HibernateRepository<CollectionJournalPage>
-	// collectionsRepository = new HibernateRepository<CollectionJournalPage>()
-	// {
-	// @Override
-	// protected Class<CollectionJournalPage> getClassType() {
-	// return CollectionJournalPage.class;
-	// }
-	// };
-	// private static final HibernateRepository<Customer> customerRepository =
-	// new HibernateRepository<Customer>() {
-	// @Override
-	// protected Class<Customer> getClassType() {
-	// return Customer.class;
-	// }
-	// };
-	private final static class DairyRepoInternal extends  HibernateRepository<Dairy> {
+	private final static class DairyRepoInternal extends
+			HibernateRepository<Dairy> {
 		@Override
 		protected Class<Dairy> getClassType() {
 			return Dairy.class;
 		}
 
+		class MemberByNumber extends SessionRunnable<Membership> {
+			String memberNumber;
+
+			public MemberByNumber(String number) {
+				memberNumber = number;
+			}
+
+			@Override
+			public void run(Session session) {
+				System.err.println("finding member: " + memberNumber);
+				setResult((Membership) session
+						.createCriteria("Membership")
+						.add(Restrictions.eq(
+								DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER
+										.getName(), memberNumber))
+						.uniqueResult());
+			}
+		}
+
+		class AccountForMemberNo extends SessionRunnable<Account> {
+			String memberNumber;
+
+			public AccountForMemberNo(String number) {
+				memberNumber = number;
+			}
+
+			@Override
+			public void run(Session session) {
+				System.err.println("AccountForMemberNo: finding member account: " + memberNumber);
+				Criteria query = session.createCriteria("Membership").add(
+						Restrictions.eq(
+								DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER
+										.getName(), memberNumber));
+				final Membership member = (Membership) query.uniqueResult();
+				final Account account = member != null ? member.getAccount() : null;
+				setResult(account);
+				System.err.println("AccountForMemberNo: returning : " + account);
+			}
+		}
+
 		class MembersForRoute extends SessionRunnable<Object> {
 			Route route;
+
 			public MembersForRoute(Route route) {
 				this.route = route;
 			}
+
 			@Override
 			public void run(Session session) {
 				@SuppressWarnings("unchecked")
-				List<Membership> result = (List<Membership>) session
-						.createCriteria("Membership")
+				List<Membership> result = session.createCriteria("Membership")
 						.add(Restrictions.eq("defaultRoute", route)).list();
 				setResult(result);
-			}			
+			}
 		}
+		
+		class SkinnyAccountsQuery extends SessionRunnable<List<Account>> {
+
+			public SkinnyAccountsQuery() {
+			}
+
+			@Override
+			public void run(Session session) {
+				Criteria criteria = session.createCriteria("Account");				
+				criteria.setFetchMode("transactions", FetchMode.SELECT);
+				setResult(criteria.list());
+			}
+		}
+		
+		
 
 		public List<Membership> membersForRoute(Route defaultRoute) {
 			MembersForRoute query = new MembersForRoute(defaultRoute);
 			runWithTransaction(query);
-			
+
 			@SuppressWarnings("unchecked")
 			List<Membership> result = (List<Membership>) query.getResult();
 			return result;
 		}
+
+		public Membership memberByNumber(String memberNumber) {
+			MemberByNumber query = new MemberByNumber(memberNumber);
+			run(query);
+			return query.getResult();
+		}
+
+		public Account primaryAccountForMemberNo(String memberNo) {
+			AccountForMemberNo query = new AccountForMemberNo(memberNo);
+			run(query);
+			return query.getResult();
+		}
+		
+		public List<Account> allAccounts() {
+			SkinnyAccountsQuery query = new SkinnyAccountsQuery();
+			run(query);
+			return query.getResult();
+		}
 	};
-	
+
 	private static final DairyRepoInternal dairyRepository = new DairyRepoInternal();
-
-	// private static final HibernateRepository<DeliveryJournal>
-	// deliveryRepository = new HibernateRepository<DeliveryJournal>() {
-	// @Override
-	// protected Class<DeliveryJournal> getClassType() {
-	// return DeliveryJournal.class;
-	// }
-	// };
-
-	// private static final HibernateRepository<Employee> employeeRepository =
-	// new HibernateRepository<Employee>() {
-	// @Override
-	// protected Class<Employee> getClassType() {
-	// return Employee.class;
-	// }
-	// };
-
-	// private static final HibernateRepository<Membership> memberRepository =
-	// new HibernateRepository<Membership>() {
-	// @Override
-	// protected Class<Membership> getClassType() {
-	// return Membership.class;
-	// }
-	// };
-
-	// private static final HibernateRepository<Route> routeRepository = new
-	// HibernateRepository<Route>() {
-	// @Override
-	// protected Class<Route> getClassType() {
-	// return Route.class;
-	// }
-	// };
-
-	// private static final HibernateRepository<Vehicle> vehicleRepository = new
-	// HibernateRepository<Vehicle>() {
-	// @Override
-	// protected Class<Vehicle> getClassType() {
-	// return Vehicle.class;
-	// }
-	// };
 
 	private final Dairy localDairy;
 
@@ -250,6 +262,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		dairyRepository.save(changedRoute);
 	}
 
+	@Override
 	public void addRoute(final Route newRoute) {
 		localDairy.getRoutes().add(newRoute);
 		dairyRepository.save(localDairy);
@@ -303,12 +316,13 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		dairyRepository.delete(deletableEntity);
 	}
 
+	@Override
 	public void deleteRoute(final Route object) {
 		if (localDairy.getRoutes().remove(object)) {
 			PersistenceManager.getDefault().getSession().delete(object);
 			PersistenceManager.getDefault().getSession().flush();
 			save(localDairy);
-			
+
 		} else {
 			throw new RepositoryException("Route not found!");
 		}
@@ -328,13 +342,13 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return found;
 	}
 
-//	public List<Dairy> find(String rawQuery) {
-//		return dairyRepository.find(rawQuery);
-//	}
-//
-//	public List<Dairy> find(String query, Object[] args) {
-//		return dairyRepository.find(query, args);
-//	}
+	// public List<Dairy> find(String rawQuery) {
+	// return dairyRepository.find(rawQuery);
+	// }
+	//
+	// public List<Dairy> find(String query, Object[] args) {
+	// return dairyRepository.find(query, args);
+	// }
 
 	@Override
 	public Dairy getDairyById(Long key) {
@@ -383,14 +397,6 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	public Membership getMembershipById(String memberIdString) {
-		// Long memberId = new Long(-1);
-		// try {
-		// memberId = Long.parseLong(memberIdString);
-		// } catch (final NumberFormatException nfe) {
-		// ;
-		// ;
-		// }
-		// return memberRepository.findByKey(memberId);
 		long start = System.currentTimeMillis();
 		try {
 			Membership found = null;
@@ -422,11 +428,15 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public List<Membership> all() {
 		return localDairy.getMemberships();
 	}
+	
+	public List<Account> allAccounts() {
+		return dairyRepository.allAccounts();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Farm> getMemberFarms() {
-		return (List<Farm>) PersistenceManager.getDefault().getSession()
+		return PersistenceManager.getDefault().getSession()
 				.createCriteria(Farm.class).list();
 	}
 
@@ -508,10 +518,13 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public MilkPrice getCurrentMilkPrice() {		
-		Session session = PersistenceManager.getDefault().getSession();		
-		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice").setProjection(Property.forName("priceDate").max());		
-		MilkPrice currentPrice = (MilkPrice) session.createCriteria("MilkPrice").add(Property.forName("priceDate").eq(maxDate)).uniqueResult();		
+	public MilkPrice getCurrentMilkPrice() {
+		Session session = PersistenceManager.getDefault().getSession();
+		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice")
+				.setProjection(Property.forName("priceDate").max());
+		MilkPrice currentPrice = (MilkPrice) session
+				.createCriteria("MilkPrice")
+				.add(Property.forName("priceDate").eq(maxDate)).uniqueResult();
 		return currentPrice;
 	}
 
@@ -519,7 +532,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
 		Session session = PersistenceManager.getDefault().getSession();
-		return (List<MilkPrice>) session.createCriteria("MilkPrice")
+		return session.createCriteria("MilkPrice")
 				.add(Restrictions.between("priceDate", startDate, endDate))
 				.list();
 	}
@@ -557,33 +570,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public Membership getMemberByMemberId(String searchMemberNumber) {
+	public Membership findMemberByMemberNo(String searchMemberNumber) {
+		return dairyRepository.memberByNumber(searchMemberNumber);
+	}
 
-		long start = System.currentTimeMillis();
-
-		String formattedNumber = searchMemberNumber;
-		try {
-			formattedNumber = String.format("%05d",
-					Integer.parseInt(searchMemberNumber));
-		} catch (NumberFormatException nfe) {
-			;
-		}
-
-		Membership retval = null;
-		for (Membership membership : localDairy.getMemberships()) {
-			String memberNumber = membership.getMemberNumber();
-			if (memberNumber != null && memberNumber.equals(formattedNumber)) {
-				retval = membership;
-				break;
-			}
-		}
-
-		log(LogService.LOG_DEBUG, String.format(
-				" > Member search %8s, looking for %s (%s), time: %d\n",
-				(retval == null ? "FAILS" : "SUCCEEDS"), formattedNumber,
-				searchMemberNumber, (System.currentTimeMillis() - start)));
-
-		return retval;
+	public Account findAccountByMemberNo(String memberNo) {
+		return dairyRepository.primaryAccountForMemberNo(memberNo);
 	}
 
 	@Override

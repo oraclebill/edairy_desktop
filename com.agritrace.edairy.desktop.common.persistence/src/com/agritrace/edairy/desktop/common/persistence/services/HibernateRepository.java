@@ -20,7 +20,8 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 
-public abstract class HibernateRepository<T extends EObject> implements IRepository<T> {
+public abstract class HibernateRepository<T extends EObject> implements
+		IRepository<T> {
 	protected abstract class SessionRunnable<X> implements Runnable {
 
 		@Override
@@ -42,7 +43,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	}
 
-	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), HibernateRepository.class);
+	private static final Logger LOGGER = Log4r.getLogger(
+			Activator.getDefault(), HibernateRepository.class);
 	private final String entityName;
 	private final String identifierName;
 
@@ -58,8 +60,9 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		String className;
 		ClassMetadata metaData;
 
-		LOGGER.log(LogService.LOG_INFO,
-				String.format("Creating HibernateRepository [%s:%d]", getClassType().getName(), hashCode()));
+		LOGGER.log(LogService.LOG_INFO, String.format(
+				"Creating HibernateRepository [%s:%d]", getClassType()
+						.getName(), hashCode()));
 
 		// set the persistence manager
 		persistenceManager = pm;
@@ -70,7 +73,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
 
-		metaData = persistenceManager.getSession().getSessionFactory().getClassMetadata(entityName);
+		metaData = persistenceManager.getSession().getSessionFactory()
+				.getClassMetadata(entityName);
 		Assert.isNotNull(metaData);
 		// identifier (pk) name
 		identifierName = metaData.getIdentifierPropertyName();
@@ -88,13 +92,13 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 			@Override
 			public void run(Session s) {
 				final Criteria crit = s.createCriteria(getClassType());
-				
+
 				if (paths != null) {
-					for (String path: paths) {
+					for (String path : paths) {
 						crit.setFetchMode(path, FetchMode.JOIN);
 					}
 				}
-				
+
 				@SuppressWarnings("unchecked")
 				List<T> result = crit.list();
 				setResult(result);
@@ -105,7 +109,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	}
 
 	@Override
-	public void delete(final T deletableEntity) throws NonExistingEntityException {
+	public void delete(final T deletableEntity)
+			throws NonExistingEntityException {
 		runWithTransaction(new SessionRunnable<Object>() {
 			@Override
 			public void run(Session session) {
@@ -116,7 +121,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 
 	@Override
 	public void load(EObject obj) {
-		final Serializable key = (Serializable) obj.eGet(obj.eClass().getEIDAttribute());
+		final Serializable key = (Serializable) obj.eGet(obj.eClass()
+				.getEIDAttribute());
 		load(obj, key);
 	}
 
@@ -131,37 +137,10 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 			session.load(obj, key);
 	}
 
-	// @Override
-	// public List<T> find(final String rawQuery) {
-	// SessionRunnable<List<T>> query = new SessionRunnable<List<T>>() {
-	// @Override
-	// public void run(Session s) {
-	// setResult(s.createQuery(rawQuery).list());
-	// }
-	// };
-	// runWithTransaction(query);
-	// return query.getResult();
-	// }
-
-	// @Override
-	// public List<T> find(String query, Object[] args) {
-	// throw new UnsupportedOperationException("not implemented");
-	// }
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public T findByKey(long key) {
 		return (T) findByKey(getClassType(), key);
-		/*
-		 * openSession(); final Query q = session.createQuery("FROM " +
-		 * getEntityName() + " where " + getIdentifierName() + " = ? ")
-		 * .setLong(0, key);
-		 * 
-		 * final List<T> ret = runQuery(q);
-		 * 
-		 * if ((ret != null) && (ret.size() > 0)) { return ret.get(0); } else {
-		 * return null; }
-		 */
 	}
 
 	/**
@@ -174,16 +153,7 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	@SuppressWarnings("unchecked")
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
 		openSession();
-		String entityName = getEntityName(entityClass);
-		String identifierName = getIdentifierName(entityClass, entityName);
-		final Query q = session.createQuery("FROM " + entityName + " where " + identifierName + " = ? ").setLong(0,
-				entityKey);
-		Object obj = null;
-		final List<?> results = runQuery(q);
-		if ((results != null) && (results.size() > 0)) {
-			obj = results.get(0);
-		}
-		return (X) obj;
+		return (X) session.get(getEntityName(entityClass), new Long(entityKey));
 	}
 
 	/**
@@ -194,17 +164,6 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	private String getEntityName(Class<?> eClass) {
 		String className = eClass.getName();
 		return className.substring(className.lastIndexOf('.') + 1);
-	}
-
-	/**
-	 * 
-	 * @param eClass
-	 * @param eName
-	 * @return
-	 */
-	private String getIdentifierName(Class<?> eClass, String eName) {
-		ClassMetadata metaData = persistenceManager.getSession().getSessionFactory().getClassMetadata(eName);
-		return metaData.getIdentifierPropertyName();
 	}
 
 	/**
@@ -237,7 +196,8 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	}
 
 	@Override
-	public void update(final T updateableEntity) throws NonExistingEntityException {
+	public void update(final T updateableEntity)
+			throws NonExistingEntityException {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
@@ -259,21 +219,6 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	private void openSession() {
 		session = persistenceManager.getSession();
 		Assert.isNotNull(session);
-	}
-
-	@SuppressWarnings("unchecked")
-	private List<T> runQuery(Query q) {
-		List<T> results = null;
-		openSession();
-		try {
-			results = q.list();
-		} catch (final HibernateException hbe) {
-			session.clear();
-			throw hbe;
-		} finally {
-			closeSession();
-		}
-		return results;
 	}
 
 	protected Object get(String eName, Serializable key) {
@@ -310,6 +255,15 @@ public abstract class HibernateRepository<T extends EObject> implements IReposit
 	 */
 	protected String getIdentifierName() {
 		return identifierName;
+	}
+
+	protected void run(Runnable r) {
+		openSession();
+		try {
+			r.run();
+		} finally {
+			closeSession();
+		}
 	}
 
 	protected void runWithTransaction(Runnable r) {

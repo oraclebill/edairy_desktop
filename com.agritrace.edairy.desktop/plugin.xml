@@ -28,10 +28,6 @@
                value="100,270,320,15">
          </property>
          <property
-               name="startupMessageRect"
-               value="100,250,320,15">
-         </property>
-         <property
                name="preferenceCustomization"
                value="plugin_customization.ini">
          </property>

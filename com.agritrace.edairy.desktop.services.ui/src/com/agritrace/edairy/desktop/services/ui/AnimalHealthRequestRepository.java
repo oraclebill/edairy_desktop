@@ -36,10 +36,10 @@ public class AnimalHealthRequestRepository extends HibernateRepository<AnimalHea
 //		return super.find(query, args);
 //	}
 
-	@Override
-	public AnimalHealthRequest findByKey(long key) {
-		return super.findByKey(key);
-	}
+//	@Override
+//	public AnimalHealthRequest findByKey(long key) {
+//		return super.findByKey(key);
+//	}
 
 	@Override
 	public void merge(AnimalHealthRequest context) {

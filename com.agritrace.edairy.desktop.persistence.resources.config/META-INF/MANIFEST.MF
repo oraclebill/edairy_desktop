@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Config
+Bundle-SymbolicName: com.agritrace.edairy.desktop.persistence.resources.config
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: AGRITRACE
+Fragment-Host: org.hibernate;bundle-version="3.3.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

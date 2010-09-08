@@ -73,6 +73,7 @@ public class PersistenceManager {
 			ret = RienaLocations.getDataArea();
 		} catch (Exception e) {
 			ret = new File(".");
+			ret = ret.getAbsoluteFile();
 		}
 		return ret;
 	}
@@ -169,10 +170,10 @@ public class PersistenceManager {
 			props.setProperty("teneo.mapping.default_varchar_length", "60");
 
 			// show all sql for debugging
-			props.setProperty(Environment.SHOW_SQL, "true");
-			props.setProperty(Environment.FORMAT_SQL, "true");
-			props.setProperty(Environment.USE_SQL_COMMENTS, "true");
-			props.setProperty(Environment.GENERATE_STATISTICS, "true");
+//			props.setProperty(Environment.SHOW_SQL, "true");
+//			props.setProperty(Environment.FORMAT_SQL, "true");
+//			props.setProperty(Environment.USE_SQL_COMMENTS, "true");
+//			props.setProperty(Environment.GENERATE_STATISTICS, "true");
 
 			// drop and recreate db on startup
 			props.setProperty(Environment.HBM2DDL_AUTO, "update");
