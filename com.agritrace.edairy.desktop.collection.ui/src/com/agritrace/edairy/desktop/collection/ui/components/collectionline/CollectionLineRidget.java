@@ -523,12 +523,12 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	//
 	private void setJournalLineFocus() {
 		if (workingJournalLine.getDairyContainer() != null) {
-			canText.requestFocus();
+			memberIDRidget.requestFocus();
 		} else {
 			binCombo.requestFocus();
 		}
 	}
-
+	
 	private void updateAllRidgetsFromModel() {
 		for (IRidget ridget : getRidgets()) {
 			ridget.updateFromModel();

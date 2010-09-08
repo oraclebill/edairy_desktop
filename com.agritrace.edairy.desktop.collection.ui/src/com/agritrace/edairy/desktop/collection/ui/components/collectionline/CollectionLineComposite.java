@@ -61,9 +61,11 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		final Group group = UIControlsFactory.createGroup(this, MILK_ENTRY_GROUP_TITLE);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
-		addPrimaryGroup(group);
-		addButtons(group);
-		addQualityGroup(group);
+		Composite primaryGroup = addPrimaryGroup(group);
+		Composite buttonsGroup = addButtons(group);				
+		Composite qualityGroup = addQualityGroup(group);
+		
+		group.setTabList(new Control[]{primaryGroup, buttonsGroup, qualityGroup});
 
 		for (final Control control : this.getChildren()) {
 			if (control.isListening(SWT.TRAVERSE_RETURN)) {
@@ -81,7 +83,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 	public void keyTraversed(TraverseEvent e) {
 //		log(LogService.LOG_DEBUG, "event in : " + e);
 		if (e.detail == SWT.TRAVERSE_RETURN) {
-			if (e.widget == memberIdWidget && addButton.setFocus()) {
+			if (e.widget == canWidget && addButton.setFocus()) {
 				e.detail = SWT.TRAVERSE_NONE;
 				e.doit = true;
 			} else {
@@ -126,9 +128,10 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 
 		binWidget = fu.addLabeledCompletionComboField(panel, BIN_LABEL, ViewWidgetId.binCombo);
 		binWidget.addTraverseListener(this);
+		
 
 		canWidget = fu.addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText);
-		canWidget.addTraverseListener(this);
+		canWidget.addTraverseListener(this);		
 
 		qtyWidget = fu.addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText);
 		qtyWidget.addTraverseListener(this);
@@ -137,8 +140,8 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		// memberIdWidget.setSize(70, 19);
 		memberIdWidget.addTraverseListener(this);
 
-		panel.setTabList(new Control[] { binWidget, canWidget, qtyWidget, memberIdWidget });
-
+		panel.setTabList(new Control[] { binWidget, memberIdWidget, qtyWidget, canWidget});
+		
 		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
 		// buttonComposite.setSize(162, 18);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(4, 1).applyTo(buttonComposite);
@@ -164,6 +167,8 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		memberName.setLocation(427, 28);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(memberName);
 
+		
+		
 		return panel;
 	}
 
