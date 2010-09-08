@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
@@ -29,6 +31,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -91,6 +94,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IDateTimeRidget endDate;
 	private IComboRidget route;
 	private IComboRidget status;
+	private IComboRidget session;
 	private IToggleButtonRidget suspended;
 	private IToggleButtonRidget mprMissing;
 	private IToggleButtonRidget rejected;
@@ -136,6 +140,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		endDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
 		route = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
 		status = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_STATUS_COMBO);
+		session = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_SESSION_COMBO);
 		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
 		suspended = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_SUSPENDED_CHK);
 		rejected = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_REJECTED_CHK);
@@ -153,6 +158,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		status.bindToModel(new WritableList(statuses, JournalStatus.class), JournalStatus.class, "getName",
 				BeansObservables.observeValue(filterBean, "status"));
 
+		
+		List<Session> sessions = new ArrayList<Session>();
+		sessions.add(null); // Do not filter by status
+		sessions.addAll(Observables.staticObservableList(Session.VALUES));
+		session.bindToModel(
+				new WritableList(sessions, Session.class),
+				Session.class,
+				"getName",
+				BeansObservables.observeValue(filterBean, "session"));
+		
 		mprMissing.bindToModel(filterBean, "mprMissing");
 		suspended.bindToModel(filterBean, "suspended");
 		rejected.bindToModel(filterBean, "rejected");
@@ -186,6 +201,9 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			return false;
 		
 		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus())
+			return false;
+		
+		if (bean.getSession() != null && cj.getSession() != bean.getSession())
 			return false;
 		
 		if (bean.isSuspended() && cj.getSuspendedCount() == 0)
@@ -270,6 +288,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		endDate.setDate(new Date());
 		route.setSelection(null);
 		status.setSelection(null);
+		session.setSelection(null);
 		mprMissing.setSelected(false);
 		suspended.setSelected(false);
 		rejected.setSelected(false);

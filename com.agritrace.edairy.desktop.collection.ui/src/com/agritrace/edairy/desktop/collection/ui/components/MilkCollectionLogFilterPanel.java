@@ -6,6 +6,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
@@ -13,12 +16,9 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormAttachment;
 
 public class MilkCollectionLogFilterPanel extends Composite {
-
+	
 	/**
 	 * Create the composite.
 	 * 
@@ -157,5 +157,19 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		fd_statusCombo.left = new FormAttachment(lblStatus, 4);
 		statusCombo.setLayoutData(fd_statusCombo);
 
+		Label lblSession = UIControlsFactory.createLabel(this, "Session");		
+		FormData fd_lblSession = new FormData();
+		fd_lblSession.top = new FormAttachment(lblMprMissing, 0, SWT.TOP);
+		fd_lblSession.left = new FormAttachment(statusCombo, 10);
+		lblSession.setLayoutData(fd_lblSession);
+		
+		CCombo sessionCombo = UIControlsFactory.createCCombo(this, ViewConstants.COLLECTION_FILTER_SESSION_COMBO);
+		FormData fd_sessionCombo = new FormData();
+		//fd_sessionCombo.right = new FormAttachment(routeCombo, 0, SWT.RIGHT);
+		fd_sessionCombo.width = 140;
+		fd_sessionCombo.top = new FormAttachment(lblSession, 0, SWT.TOP);
+		fd_sessionCombo.left = new FormAttachment(lblSession, 5);
+		sessionCombo.setLayoutData(fd_sessionCombo);
+		
 	}
 }
