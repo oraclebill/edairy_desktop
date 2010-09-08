@@ -21,6 +21,8 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.listener.ClickEvent;
+import org.eclipse.riena.ui.ridgets.listener.IClickListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -354,6 +356,20 @@ public class BulkCollectionsEntryDialogController extends
 		table.setColumnFormatter(6, new BooleanColumnFormatter());
 		table.setColumnFormatter(7, new BooleanColumnFormatter());
 		
+		table.addClickListener(new IClickListener() {
+			@Override
+			public void callback(ClickEvent event) {
+				if (event.getColumnIndex() == 6) {
+					CollectionJournalLine line = (CollectionJournalLine) event.getRow();
+					
+					if (line != null) {
+						line.setRejected(!line.isRejected());
+						updateJournalTotals();
+						table.updateFromModel();
+					}
+				}
+			}
+		});
 		
 		// buttons
 		modifyButton.setVisible(false); // hack.
@@ -446,7 +462,7 @@ public class BulkCollectionsEntryDialogController extends
 			}
 		}
 		collectionLineRidget.updateFromModel();
-
+		
 		updateAllRidgetsFromModel();
 		setInitialFocus();
 	}
