@@ -171,8 +171,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0)
 			return false;
 		
-		if (bean.getEndDate() != null && cj.getJournalDate().compareTo(bean.getEndDate()) > 0)
-			return false;
+		if (bean.getEndDate() != null) {
+			// We need to compare it with the day after, to get records for today as well
+			Calendar cld = Calendar.getInstance();
+			cld.setTime(bean.getEndDate());
+			cld.set(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+			cld.add(Calendar.DAY_OF_MONTH, 1);
+			
+			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0)
+				return false;
+		}
 		
 		if (bean.getRoute() != null && !cj.getRoute().getId().equals(bean.getRoute().getId()))
 			return false;

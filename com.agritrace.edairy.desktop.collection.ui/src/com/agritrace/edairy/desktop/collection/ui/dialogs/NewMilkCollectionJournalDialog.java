@@ -239,6 +239,12 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		setMessage("Please enter the date, session, and route for this set of collections records.");
 		return contents;
 	}
+	
+	@Override
+	protected void initializeBounds() {
+		super.initializeBounds();
+		getShell().setSize(370, getShell().getSize().y);
+	}
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
@@ -246,24 +252,26 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Composite workArea = UIControlsFactory.createComposite(buffer);
 		workArea.setLayout(new GridLayout(3, false));
 		workArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		// workArea.setLayout(new GridLayout(3, true));
+		
+		final int widgetWidth = 250;
+		
 		{
 			final Composite panel = UIControlsFactory.createComposite(workArea);
 			{
 				final Label label = UIControlsFactory.createLabel(panel, "Date");
 				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
 				datePicker = UIControlsFactory.createDate(panel, SWT.BORDER, ViewConstants.DATE_PICKER);
-				GridDataFactory.swtDefaults().hint(100, -1).applyTo(datePicker);
+				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(datePicker);
 			}
 			{
 				UIControlsFactory.createLabel(panel, "Session");
 				sessionCombo = UIControlsFactory.createCCombo(panel, ViewConstants.SESSION);
-				GridDataFactory.swtDefaults().hint(100, -1).applyTo(sessionCombo);
+				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(sessionCombo);
 			}
 			{
 				UIControlsFactory.createLabel(panel, "Route");
 				routeCombo = UIControlsFactory.createCCombo(panel, ViewConstants.ROUTE);
-				GridDataFactory.swtDefaults().hint(100, -1).applyTo(routeCombo);
+				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(routeCombo);
 			}
 			// {
 			// UIControlsFactory.createLabel(panel, "Reference Number");
@@ -278,12 +286,13 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			{
 				UIControlsFactory.createLabel(panel, "Driver");
 				driverCombo = UIControlsFactory.createCCombo(panel, ViewConstants.DRIVER);
+				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(driverCombo);
 			}
 			{
 				final Label label = UIControlsFactory.createLabel(panel, "Vehicle");
 				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
 				vehicleCombo = UIControlsFactory.createCCombo(panel, ViewConstants.VEHICLE);
-				GridDataFactory.swtDefaults().hint(100, -1).applyTo(vehicleCombo);
+				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(vehicleCombo);
 			}
 			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
