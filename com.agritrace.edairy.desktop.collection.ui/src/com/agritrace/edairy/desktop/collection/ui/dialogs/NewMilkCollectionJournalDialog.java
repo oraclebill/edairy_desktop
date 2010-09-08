@@ -148,7 +148,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		Dairy localDairy = dairyRepository.getLocalDairy();
 
 		try {
-			route.bindToModel(localDairy, "routes", Route.class, "getName", newJournalPage,
+			route.bindToModel(localDairy, "routes", Route.class, "getCode", newJournalPage,
 					DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE.getName());
 			route.setSelection(localDairy.getRoutes().get(0));
 		} catch (Exception e) {
