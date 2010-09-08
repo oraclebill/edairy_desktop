@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.LinkedList;
@@ -18,6 +19,8 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -54,6 +57,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo routeCombo;
 	private CCombo sessionCombo;
 	private CCombo vehicleCombo;
+	private List<Employee> drivers;
+	private List<Vehicle> vehicles;
 
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
@@ -145,7 +150,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
 
-		Dairy localDairy = dairyRepository.getLocalDairy();
+		final Dairy localDairy = dairyRepository.getLocalDairy();
 
 		try {
 			route.bindToModel(localDairy, "routes", Route.class, "getCode", newJournalPage,
@@ -156,8 +161,12 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		}
 
 		try {
-			vehicle.bindToModel(localDairy, "vehicles", Vehicle.class, "getRegistrationNumber", newJournalPage, 
-					DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE.getName());
+			vehicles = new ArrayList<Vehicle>(localDairy.getVehicles());
+			
+			vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber", 
+					PojoObservables.observeValue(newJournalPage, 
+							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE.getName()));
+			
 			vehicle.setSelection(localDairy.getVehicles().get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -176,7 +185,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		}
 
 		try {
-			List<Employee> drivers = createEmployeeList(localDairy);
+			drivers = createEmployeeList(localDairy);
 			driver.bindToModel(
 					new WritableList(drivers, Employee.class),
 					Employee.class,
@@ -198,6 +207,34 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		session.updateFromModel();
 		driver.updateFromModel();
 
+		/*
+		route.addSelectionListener(new ISelectionListener() {
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				vehicles.clear();
+				newJournalPage.setVehicle(null);
+				
+				for (Vehicle v: localDairy.getVehicles()) {
+					
+				}
+				
+				vehicle.updateFromModel();
+				
+			}
+		});
+		*/
+		
+		vehicle.addSelectionListener(new ISelectionListener() {
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				Vehicle vehicle = newJournalPage.getVehicle();
+				
+				if (vehicle != null && vehicle.getDriver() != null) {
+					newJournalPage.setDriver(vehicle.getDriver());
+					driver.updateFromModel();
+				}
+			}
+		});
 	}
 
 	private List<Employee> createEmployeeList(Dairy dairy) {
