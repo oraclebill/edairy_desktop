@@ -146,6 +146,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/entryCount"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/suspendedCount"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/rejectedCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalNumber"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Route">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/Id"/>

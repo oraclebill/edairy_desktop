@@ -86,31 +86,6 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(dateText);
 		addUIControl(dateText, ViewWidgetId.calendarDate);
 		dateText.addTraverseListener(traverseListener);
-// 		calendarButton = UIControlsFactory.createButton(group);
-
-// 		Image calendarButtonImage = new Image(parent.getDisplay(), calendar.getImageData().scaledTo(16, 16));
-//		if (!Beans.isDesignTime()) {
-//			final Image calendar = Activator.getImage(ImageRegistry.calendar);
-//			calendarButton.setImage(calendar);
-//		}
-		// addUIControl(calendarButton,ViewWidgetId.calendarButton);
-
-//		calendarButton.addSelectionListener(new SelectionAdapter() {
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-//				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-//						dateText.getText());
-//
-//				if (calDialog.open() == AbstractWindowController.OK) {
-//					final Date selectedDate = (Date) calDialog.getController().getContext(
-//							SimpleFormattedDateBean.DATE_PROR);
-//					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-//					bean.setDate(selectedDate);
-//					dateText.setText(bean.getFormattedDate());
-//				}
-//			}
-//		});
 
 		final Label padComposite = FieldUtil.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1).applyTo(padComposite);
@@ -132,10 +107,6 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo2);
 		addUIControl(combo2, ViewWidgetId.sessionCombo);
 		combo2.addTraverseListener(traverseListener);
-
-//		Composite pane = UIControlsFactory.createComposite(group);
-//		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(4).applyTo(pane);
-//		GridDataFactory.fillDefaults().grab(true, false).span(7, 1).applyTo(pane);
 
 		final Label vehicleLabel = FieldUtil.createLabel(group, VEHICLE_LABEL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
@@ -172,6 +143,16 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 			factory.applyTo(journalText);
 			addUIControl(journalText, ViewWidgetId.journalText);
 			journalText.addTraverseListener(traverseListener);
+		}
+		{
+			final Label journalNumberLabel = FieldUtil.createLabel(group, "Journal No:");
+			GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1)
+					.applyTo(journalNumberLabel);
+
+			final Text journalNumberText = UIControlsFactory.createText(group, SWT.BORDER);
+			factory.applyTo(journalNumberText);
+			addUIControl(journalNumberText, ViewWidgetId.journalNumberText);
+			journalNumberText.addTraverseListener(traverseListener);
 		}
 		{
 			final Label journalTotalLabel = FieldUtil.createLabel(group, JOURNAL_TOTAL_LABEL);

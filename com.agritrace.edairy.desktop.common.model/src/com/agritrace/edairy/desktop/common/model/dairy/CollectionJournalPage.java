@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount <em>Entry Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -439,5 +440,32 @@ public interface CollectionJournalPage extends EObject {
 	 * @generated
 	 */
 	void setRejectedCount(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Journal Number</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Journal Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Journal Number</em>' attribute.
+	 * @see #setJournalNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalNumber()
+	 * @model default=""
+	 * @generated
+	 */
+	String getJournalNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Journal Number</em>' attribute.
+	 * @see #getJournalNumber()
+	 * @generated
+	 */
+	void setJournalNumber(String value);
 
 } // CollectionJournalPage

@@ -45,6 +45,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	//
 	// bottom panel ridgets
 	//
+	private ITextRidget referenceNumber;
 	private ITextRidget journalNumber;
 	private IDecimalTextRidget driverTotalText;
 
@@ -77,7 +78,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 
 	@Override
 	public boolean isHeaderValid() {
-		if (journalNumber != null && journalNumber.isDisableMandatoryMarker() && driverTotalText != null
+		if (referenceNumber != null && referenceNumber.isDisableMandatoryMarker() && driverTotalText != null
 				&& driverTotalText.isDisableMandatoryMarker()) {
 			return true;
 		}
@@ -111,7 +112,11 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	}
 
 	private void configureVariableRidgets() {
-		journalNumber = getRidget(ITextRidget.class, ViewWidgetId.journalText);
+		referenceNumber = getRidget(ITextRidget.class, ViewWidgetId.journalText);
+		referenceNumber.setMandatory(true);
+		referenceNumber.addPropertyChangeListener("text", validationListener);
+
+		journalNumber = getRidget(ITextRidget.class, ViewWidgetId.journalNumberText);
 		journalNumber.setMandatory(true);
 		journalNumber.addPropertyChangeListener("text", validationListener);
 
@@ -130,7 +135,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	@Override
 	public void requestFocus() {
 		super.requestFocus();
-		journalNumber.requestFocus();
+		referenceNumber.requestFocus();
 	}
 
 	
@@ -140,7 +145,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		statusRidget.setOutputOnly(true);
 		boolean enabled = isEnabled();
 		driverTotalText.setOutputOnly(!enabled && !driverTotalEditable);
-		journalNumber.setOutputOnly(!enabled);
+		referenceNumber.setOutputOnly(!enabled);
 	}
 	
 	public void forceDriverTotalEditable() {
@@ -150,21 +155,14 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 
 	@Override
 	public void bindToModel(CollectionJournalPage newModel) {
-		
 		dateRidget.bindToModel(newModel, "journalDate");
-
 		routeRidget.bindToModel(newModel, "route.code");
-
 		sessionRidget.bindToModel(newModel, "session");
-
 		vehicleRidget.bindToModel(newModel, "vehicle.registrationNumber");
-
 		driverRidget.bindToModel(newModel, "driver.familyName");
-
-		journalNumber.bindToModel(newModel, "referenceNumber");
-
+		referenceNumber.bindToModel(newModel, "referenceNumber");
+		journalNumber.bindToModel(newModel, "journalNumber");
 		driverTotalText.bindToModel(newModel, "driverTotal");
-		
 		statusRidget.bindToModel(newModel, "status");
 		statusRidget.setOutputOnly(true);
 	}

@@ -1109,6 +1109,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCollectionJournalPage_JournalNumber() {
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRoute() {
 		return routeEClass;
 	}
@@ -2291,6 +2300,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__ENTRY_COUNT);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
+		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER);
 
 		routeEClass = createEClass(ROUTE);
 		createEAttribute(routeEClass, ROUTE__ID);
@@ -2565,6 +2575,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionJournalPage_EntryCount(), ecorePackage.getEInt(), "entryCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_SuspendedCount(), ecorePackage.getEInt(), "suspendedCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_RejectedCount(), ecorePackage.getEInt(), "rejectedCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionJournalPage_JournalNumber(), ecorePackage.getEString(), "journalNumber", "", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

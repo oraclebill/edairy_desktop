@@ -78,6 +78,7 @@ public class ViewWidgetId {
 	public static final String FARM_TABLE = "FarmTable";
 
 	public static final String journalText = "journalText";
+	public static final String journalNumberText = "journalNumberText";
 
 	public static final String journalTotalText = "journalTotalText";
 

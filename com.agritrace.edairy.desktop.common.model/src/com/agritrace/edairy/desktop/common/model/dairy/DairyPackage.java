@@ -1125,13 +1125,22 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 14;
 
 	/**
+	 * The feature id for the '<em><b>Journal Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER = 15;
+
+	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 15;
+	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 16;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -3571,6 +3580,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCollectionJournalPage_RejectedCount();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Journal Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EAttribute getCollectionJournalPage_JournalNumber();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Route <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5553,6 +5573,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = eINSTANCE.getCollectionJournalPage_RejectedCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Journal Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER = eINSTANCE.getCollectionJournalPage_JournalNumber();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.

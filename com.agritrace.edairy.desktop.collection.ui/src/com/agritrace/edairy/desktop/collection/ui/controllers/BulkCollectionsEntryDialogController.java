@@ -54,6 +54,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -644,6 +645,9 @@ public class BulkCollectionsEntryDialogController extends
 	 */
 	private boolean doSave() {
 		boolean doSave = true;
+		
+		if (!ContainerValidator.validateContainer(this.journalHeaderRidget).isEmpty())
+			return false;
 
 		CollectionJournalPage workingJournal = getContextJournalPage();
 		IStatus validationResult = validateJournal(workingJournal);

@@ -56,6 +56,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getEntryCount <em>Entry Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSuspendedCount <em>Suspended Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRejectedCount <em>Rejected Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalNumber <em>Journal Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -321,6 +322,26 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected int rejectedCount = REJECTED_COUNT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getJournalNumber() <em>Journal Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String JOURNAL_NUMBER_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getJournalNumber() <em>Journal Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJournalNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String journalNumber = JOURNAL_NUMBER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -703,6 +724,27 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getJournalNumber() {
+		return journalNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJournalNumber(String newJournalNumber) {
+		String oldJournalNumber = journalNumber;
+		journalNumber = newJournalNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER, oldJournalNumber, journalNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -768,6 +810,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return getSuspendedCount();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
 				return getRejectedCount();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
+				return getJournalNumber();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -827,6 +871,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
 				setRejectedCount((Integer)newValue);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
+				setJournalNumber((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -884,6 +931,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
 				setRejectedCount(REJECTED_COUNT_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
+				setJournalNumber(JOURNAL_NUMBER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -926,6 +976,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return suspendedCount != SUSPENDED_COUNT_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT:
 				return rejectedCount != REJECTED_COUNT_EDEFAULT;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
+				return JOURNAL_NUMBER_EDEFAULT == null ? journalNumber != null : !JOURNAL_NUMBER_EDEFAULT.equals(journalNumber);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -962,6 +1014,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		result.append(suspendedCount);
 		result.append(", rejectedCount: ");
 		result.append(rejectedCount);
+		result.append(", journalNumber: ");
+		result.append(journalNumber);
 		result.append(')');
 		return result.toString();
 	}
