@@ -2,11 +2,9 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import java.util.Arrays;
 
-import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -17,21 +15,27 @@ import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfi
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
+import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 
 public class CustomerDialogController extends RecordDialogController<Customer> {
 	public static String[] CUSTOMER_TYPES = { "Milk Processor", "Milk Bar", "Other" };
 
+	private ITextRidget phone;
+	
 	@Override
 	public void configureUserRidgets() {
 		Customer editCustomer = null;
-		ITextRidget customerId;
 		IProfilePhotoRidget profilePhoto;
 
 		// ensure model available
 		editCustomer = getWorkingCopy();
 		assert (null != editCustomer);
 
+		phone = getRidget(ITextRidget.class,CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
+		phone.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
+		phone.setDirectWriting(true);
+		
 		addTextMap(CustomerBindingConstants.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
 		addTextMap(CustomerBindingConstants.BIND_ID_PHONE_NUMBER, ModelPackage.Literals.COMPANY__PHONE_NUMBER);
 		addTextMap(CustomerBindingConstants.BIND_ID_LEGAL_NAME, ModelPackage.Literals.COMPANY__LEGAL_NAME);
