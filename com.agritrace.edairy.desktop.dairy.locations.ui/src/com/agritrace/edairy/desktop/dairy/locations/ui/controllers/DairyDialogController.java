@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
+import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -18,14 +17,15 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
-import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 
 public class DairyDialogController extends RecordDialogController<DairyLocation> {
 	private DairyLocation editLocation = null;
-	private IDateTimeRidget dateOpened;
+	//private IDateTimeRidget dateOpened;
 	private IMultipleChoiceRidget functions;
-	private IComboRidget routeCombo;
+	//private IComboRidget routeCombo;
+	private ITextRidget phone;
 
 	@Override
 	public void configureUserRidgets() {
@@ -35,6 +35,9 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		assert (null != editLocation);
 
 
+		phone = getRidget(ITextRidget.class,DairyLocationUIConstants.RIDGET_ID_PHONE);
+		phone.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
+		phone.setDirectWriting(true);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_NAME, DairyPackage.Literals.DAIRY_LOCATION__NAME);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DESCRIPTION, DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
