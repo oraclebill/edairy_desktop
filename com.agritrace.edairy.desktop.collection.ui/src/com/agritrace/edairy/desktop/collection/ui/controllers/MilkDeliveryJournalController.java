@@ -109,9 +109,13 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 
 	@Override
 	protected List<DeliveryJournal> getFilteredResult() {
+		Calendar cld = Calendar.getInstance();
+		cld.setTime(filterBean.getMaxDate());
+		cld.add(Calendar.DAY_OF_MONTH, 1);
+		
 		return dairyRepo.getDeliveryJournals(
 				filterBean.getMinDate(), 
-				filterBean.getMaxDate(), 
+				cld.getTime(), 
 				filterBean.getRoute(), 
 				filterBean.getCustomer());
 	}
