@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;

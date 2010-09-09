@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
@@ -499,6 +500,24 @@ public class BulkCollectionsEntryDialogController extends
 
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(
 				workingJournalPage.getJournalEntries(), "Collection Journal"));
+		
+		final MilkCollectionJournalLineRepository repository = new MilkCollectionJournalLineRepository();
+		
+		collectionLineRidget.addValidator(new IValidator() {
+			@Override
+			public IStatus validate(Object value) {
+				final CollectionJournalLine line = (CollectionJournalLine) value;
+				final Membership member = line.getValidatedMember();
+				final Route route = getContextJournalPage().getRoute();
+				final Date date = getContextJournalPage().getJournalDate();
+				
+				if (repository.countByMemberRouteDate(member, route, date) > 0) {
+					return ValidationStatus.error("Another entry for this member, route and date already exists");
+				} else {
+					return ValidationStatus.ok();
+				}
+			}
+		});
 
 	}
 
