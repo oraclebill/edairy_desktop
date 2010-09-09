@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -189,7 +190,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			// We need to compare it with the day after, to get records for today as well
 			Calendar cld = Calendar.getInstance();
 			cld.setTime(bean.getEndDate());
-			cld.set(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+			cld = new GregorianCalendar(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
 			cld.add(Calendar.DAY_OF_MONTH, 1);
 			
 			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0)
@@ -282,7 +283,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected void resetFilterConditions() {
 		Calendar cal = Calendar.getInstance();
-		cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
+		cal = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
 		startDate.setDate(cal.getTime());
 		endDate.setDate(new Date());
 		route.setSelection(null);

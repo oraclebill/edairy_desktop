@@ -1,5 +1,8 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -93,9 +96,11 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 
 	@Override
 	protected void resetFilterConditions() {
+		Calendar cal = Calendar.getInstance();
+		cal = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
+		filterBean.setMinDate(cal.getTime());
+		filterBean.setMaxDate(new Date());
 		filterBean.setCustomer(null);
-		filterBean.setMaxDate(null);
-		filterBean.setMinDate(null);
 		filterBean.setRoute(null);
 		
 		updateAllRidgetsFromModel();
