@@ -130,7 +130,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 
 	protected Composite createSubHeaderGroup(Composite parent) {
 		final Group group = createGroup(parent, MILK_BOOK_GROUP_TITLE, ViewWidgetId.milkGroup);
-		GridLayoutFactory.fillDefaults().margins(4, 2).numColumns(7).applyTo(group);
+		GridLayoutFactory.fillDefaults().margins(4, 2).numColumns(5).applyTo(group);
 		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.hint(MINIMUM_LABEL_WIDTH, -1).grab(true, false);
 
@@ -143,6 +143,12 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 			factory.applyTo(journalText);
 			addUIControl(journalText, ViewWidgetId.journalText);
 			journalText.addTraverseListener(traverseListener);
+		}
+		// filler
+		{
+			final Label label = new Label(group, SWT.NONE);
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH * 2, -1)
+					.span(1, 2).applyTo(label);
 		}
 		{
 			final Label journalNumberLabel = FieldUtil.createLabel(group, "Journal No:");
@@ -163,12 +169,6 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 			factory.applyTo(journalTotalText);
 			journalTotalText.addTraverseListener(traverseListener);
 			addUIControl(journalTotalText, ViewWidgetId.journalTotalText);
-		}
-		// filler
-		{
-			final Label label = new Label(group, SWT.NONE);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH * 2, -1)
-					.applyTo(label);
 		}
 		{
 			final Label label = FieldUtil.createLabel(group, "Status: ");
