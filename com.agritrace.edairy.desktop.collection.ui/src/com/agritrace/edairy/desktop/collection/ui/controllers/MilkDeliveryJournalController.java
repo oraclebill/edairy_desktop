@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.collection.ui.controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -78,8 +79,12 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 		endDateRidget = getRidget(IDateTimeRidget.class, DeliveryJournalFilterBean.END_DATE);
 		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, "maxDate"));
 		
+		final List<Route> routes = new ArrayList<Route>();
+		routes.add(null);
+		routes.addAll(dairyRepo.allRoutes());
+		
 		routeRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.ROUTE);
-		final IObservableList routeList = Observables.staticObservableList(dairyRepo.allRoutes());		
+		final IObservableList routeList = Observables.staticObservableList(routes);		
 		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, "route"));
 		
 		customerRidget = getRidget(IComboRidget.class, DeliveryJournalFilterBean.CUSTOMER);
@@ -109,13 +114,9 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 
 	@Override
 	protected List<DeliveryJournal> getFilteredResult() {
-		Calendar cld = Calendar.getInstance();
-		cld.setTime(filterBean.getMaxDate());
-		cld.add(Calendar.DAY_OF_MONTH, 1);
-		
 		return dairyRepo.getDeliveryJournals(
 				filterBean.getMinDate(), 
-				cld.getTime(), 
+				filterBean.getMaxDate(), 
 				filterBean.getRoute(), 
 				filterBean.getCustomer());
 	}

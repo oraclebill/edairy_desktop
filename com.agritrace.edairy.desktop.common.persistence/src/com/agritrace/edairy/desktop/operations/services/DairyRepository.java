@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -22,6 +23,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.osgi.service.log.LogService;
@@ -543,18 +545,28 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			Date maxDate, Route route, Customer customer) {
 		Session session = PersistenceManager.getDefault().getSession();
 		Criteria djCriteria = session.createCriteria("DeliveryJournal");
+		
 		if (minDate != null) {
 			djCriteria.add(Restrictions.ge("date", minDate));
 		}
+		
 		if (maxDate != null) {
-			djCriteria.add(Restrictions.le("date", maxDate));
+			Calendar cld = Calendar.getInstance();
+			cld.setTime(maxDate);
+			cld.add(Calendar.DAY_OF_MONTH, 1);
+			djCriteria.add(Restrictions.lt("date", cld.getTime()));
 		}
+		
 		if (route != null) {
 			djCriteria.add(Restrictions.eq("route", route));
 		}
+		
 		if (customer != null) {
 			djCriteria.add(Restrictions.eq("customer", customer));
 		}
+		
+		djCriteria.addOrder(Order.asc("route"));
+		djCriteria.addOrder(Order.asc("date"));
 		return djCriteria.list();
 	}
 
