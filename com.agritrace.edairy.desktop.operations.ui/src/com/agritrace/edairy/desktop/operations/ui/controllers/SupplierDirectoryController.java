@@ -116,7 +116,11 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 		companyText.setText("");
 		categoryList.setSelection((Object) null);
 		statusCombo.setSelection(statusCombo.getEmptySelectionItem());
-		refreshTableContents();
 	}
 
+	@Override
+	protected void handleResetFilterAction() {
+		resetFilterConditions();
+		refreshTableContents();
+	}
 }
