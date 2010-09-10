@@ -95,7 +95,8 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 		final List<DairyLocation> allLocations =  dairyLocationRepo.all();
 		System.err.println("allLocations: " + allLocations);
 		for (final DairyLocation c : allLocations) {
-			if (searchBean.getRouteSearchValue() == null || MatchUtil.matchEquals(searchBean.getRouteSearchValue().getCode(), c.getRoute().getCode())){
+			String cCode = (c.getRoute() == null)?"":c.getRoute().getCode();
+			if (searchBean.getRouteSearchValue() == null || MatchUtil.matchEquals(searchBean.getRouteSearchValue().getCode(), cCode)){
 				List<DairyFunction> filterFunctions = searchBean.getFunctionSearchValues();
 				List<DairyFunction> functions = c.getFunctions();
 				boolean found = true;
