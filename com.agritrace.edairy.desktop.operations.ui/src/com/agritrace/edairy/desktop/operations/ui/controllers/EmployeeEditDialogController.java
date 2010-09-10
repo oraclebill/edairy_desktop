@@ -67,7 +67,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
 		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__ID));
 		employeeId.setOutputOnly(false);
-		employeeId.setFocusable(false);
+		employeeId.setMandatory(true);
+		
 		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
 			employeeId.updateFromModel();
 		}
