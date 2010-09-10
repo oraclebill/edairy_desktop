@@ -89,8 +89,6 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 
 	@Override
 	protected List<Supplier> getFilteredResult() {
-		System.out.println("-- getFilteredResult called");
-		Thread.dumpStack();
 		final List<Supplier> allSuppliers = repository.allWithCollections();
 		final List<Supplier> filteredSuppliers = new ArrayList<Supplier>();
 
