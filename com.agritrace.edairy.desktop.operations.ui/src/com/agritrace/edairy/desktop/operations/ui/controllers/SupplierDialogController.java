@@ -48,6 +48,7 @@ public class SupplierDialogController extends RecordDialogController<Supplier> {
 
 		final ITextRidget supplierId = getRidget(ITextRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_NUM);
 		supplierId.setOutputOnly(false);
+		supplierId.setMandatory(true);
 		supplierId.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__ID.getName());
 		supplierId.updateFromModel();
 		

@@ -21,13 +21,14 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.operations.services.supplier.ISupplierRepository;
 import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 
 @PermissionRequired(Permission.VIEW_SUPPLIERS)
 public class SupplierDirectoryController extends BasicDirectoryController<Supplier> {
-
+	private ISupplierRepository repository;
 	private IListRidget categoryList;
 	private ITextRidget companyText;
 	// filter bean
@@ -39,7 +40,7 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 	public SupplierDirectoryController() {
 		super();
 
-		setRepository(new SupplierRepository());
+		setRepository(repository = new SupplierRepository());
 		// setEntityClass(Supplier.class);
 		setEClass(DairyPackage.Literals.SUPPLIER);
 
@@ -88,7 +89,9 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 
 	@Override
 	protected List<Supplier> getFilteredResult() {
-		final List<Supplier> allSuppliers = getRepository().all();
+		System.out.println("-- getFilteredResult called");
+		Thread.dumpStack();
+		final List<Supplier> allSuppliers = repository.allWithCollections();
 		final List<Supplier> filteredSuppliers = new ArrayList<Supplier>();
 
 		for (final Supplier s : allSuppliers) {

@@ -7,12 +7,16 @@ import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsExc
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 
-public class SupplierRepository extends HibernateRepository<Supplier> {
-
+public class SupplierRepository extends HibernateRepository<Supplier> implements ISupplierRepository {
 	@Override
 	public List<Supplier> all() {
 		// TODO Auto-generated method stub
 		return super.all();
+	}
+
+	@Override
+	public List<Supplier> allWithCollections() {
+		return super.allWithEagerFetch("categories", "contacts", "contactMethods");
 	}
 
 	@Override
