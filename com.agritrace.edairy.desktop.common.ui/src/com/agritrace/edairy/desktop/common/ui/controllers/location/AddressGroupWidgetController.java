@@ -6,18 +6,23 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.core.util.ListenerList;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
+import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 
 public class AddressGroupWidgetController implements WidgetController<PostalLocation>, ISelectionListener {
+	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private ITextRidget addressTxt;
 	private IRidgetContainer container;
@@ -45,6 +50,21 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		if (container == null) {
 			return;
 		}
+		
+		final IFocusListener listener = new IFocusListener() {
+			@Override
+			public void focusGained(FocusEvent event) {
+				// Do nothing
+			}
+
+			@Override
+			public void focusLost(FocusEvent event) {
+				for (IDataChangeListener listener: listeners.getListeners()) {
+					listener.dataChanged();
+				}
+			}
+		};
+
 		addressTxt = container.getRidget(ITextRidget.class, ViewWidgetId.ADDRESS_TXT);
 		sectionTxt = container.getRidget(ITextRidget.class, ViewWidgetId.SECTION_TXT);
 		estateTxt = container.getRidget(ITextRidget.class, ViewWidgetId.ESTATE_TXT);
@@ -53,9 +73,19 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		villageTxt = container.getRidget(ITextRidget.class, ViewWidgetId.VILLAGE_TXT);
 		divisionTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIVISION_TXT);
 		districtTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DISTRICT_TXT);
-//		provinceTxt=getRidget(ITextRidget.class,ViewWidgetId.PROVINCE_TXT);
 		postalCodeTxt = container.getRidget(ITextRidget.class, ViewWidgetId.POSTAL_CODE_TXT);
 		provinceComo = container.getRidget(IComboRidget.class, ViewWidgetId.PROVINCE_TXT);
+
+		addressTxt.addFocusListener(listener);
+		sectionTxt.addFocusListener(listener);
+		estateTxt.addFocusListener(listener);
+		locationTxt.addFocusListener(listener);
+		subLocationTxt.addFocusListener(listener);
+		villageTxt.addFocusListener(listener);
+		divisionTxt.addFocusListener(listener);
+		districtTxt.addFocusListener(listener);
+		postalCodeTxt.addFocusListener(listener);
+		provinceComo.addFocusListener(listener);
 
 		addressTxt.setMandatory(true);
 		addressTxt.setDirectWriting(true);
@@ -151,6 +181,14 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 				ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 		postalCodeTxt.updateFromModel();
 
+	}
+
+	public void addDataChangeListener(IDataChangeListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeDataChangeListener(IDataChangeListener listener) {
+		listeners.remove(listener);
 	}
 
 }

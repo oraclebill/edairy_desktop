@@ -11,7 +11,11 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.riena.core.util.ListenerList;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -19,19 +23,28 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeTableRidget;
 import org.eclipse.riena.ui.ridgets.IRowRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 import com.agritrace.edairy.desktop.common.model.base.Contactable;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 
 /**
  * @author oraclebill
  * 
  */
 public class ContactMethodsGroupRidget extends AbstractCompositeRidget implements IContactMethodsGroupRidget {
+	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
+	private void fireDataChanged() {
+		for (IDataChangeListener listener: listeners.getListeners()) {
+			listener.dataChanged();
+		}
+	}
+	
 	private final class DeleteAllContactsAction implements IActionListener {
 		@Override
 		public void callback() {
@@ -40,6 +53,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 					boundContacts.clear();
 					contactTable.updateFromModel();
 					updateButtonStatus();
+					fireDataChanged();
 				}
 			}
 			else {
@@ -58,6 +72,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 				}
 				contactTable.updateFromModel();
 				updateButtonStatus();
+				fireDataChanged();
 			}
 			else {
 				System.err.println("ERR: null model during attempt to delete selected contacts");
@@ -76,6 +91,8 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 				contactTable.updateFromModel();
 				updateButtonStatus();
 				System.err.println("adding new contact");
+				fireDataChanged();
+				imbue(method);
 			}
 		}
 	}
@@ -157,9 +174,15 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 	 */
 	public void bindToModel(List<ContactMethod> contacts) {		
 		this.boundContacts = contacts;
+		
 		if (contacts == null) {
 			throw new IllegalArgumentException("Null model");
 		}
+		
+		for (ContactMethod cm: contacts) {
+			imbue(cm);
+		}
+		
 		contactTable.bindToModel(new WritableList(boundContacts, ContactMethod.class), ContactMethod.class, RowRidget.class);
 	}
 	
@@ -176,5 +199,42 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 	private void updateButtonStatus() {
 //		this.deleteBtn.setEnabled(contactTable.getSelectionIndex() > -1);
 //		this.deleteAllBtn.setEnabled(boundContacts != null && boundContacts.size() > 0);
+	}
+
+	@Override
+	public void addDataChangeListener(IDataChangeListener listener) {
+		listeners.add(listener);
+	}
+
+	@Override
+	public void removeDataChangeListener(IDataChangeListener listener) {
+		listeners.remove(listener);
+	}
+	
+	private void imbue(ContactMethod cm) {
+		cm.eAdapters().add(new Adapter() {
+			@Override
+			public Notifier getTarget() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public boolean isAdapterForType(Object arg0) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public void setTarget(Notifier arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void notifyChanged(Notification arg0) {
+				fireDataChanged();
+			}
+		});
 	}
 }

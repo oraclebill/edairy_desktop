@@ -6,9 +6,9 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 
 public class LocationProfileWidgetController implements WidgetController<Location> {
-
 	private final AddressGroupWidgetController addressGroup;
 	private final IRidgetContainer controller;
 
@@ -74,6 +74,18 @@ public class LocationProfileWidgetController implements WidgetController<Locatio
 			directionGroup.setInputModel(dLocation);
 
 		}
+	}
+
+	public void addDataChangeListener(IDataChangeListener listener) {
+		addressGroup.addDataChangeListener(listener);
+		directionGroup.addDataChangeListener(listener);
+		mapGroup.addDataChangeListener(listener);
+	}
+
+	public void removeDataChangeListener(IDataChangeListener listener) {
+		addressGroup.removeDataChangeListener(listener);
+		directionGroup.removeDataChangeListener(listener);
+		mapGroup.removeDataChangeListener(listener);
 	}
 
 }

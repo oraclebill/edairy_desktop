@@ -1,23 +1,25 @@
 package com.agritrace.edairy.desktop.common.ui.controllers.location;
 
 import org.eclipse.core.databinding.conversion.NumberToStringConverter;
+import org.eclipse.riena.core.util.ListenerList;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
+import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.ui.validators.DoubleNumberValidator;
 
 public class MapGroupController implements WidgetController<MapLocation> {
+	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private IRidgetContainer container;
-
 	private IDecimalTextRidget latituteTxt;
-
 	private IDecimalTextRidget longtituteTxt;
 	private MapLocation map;
 
@@ -28,15 +30,31 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 	@Override
 	public void configure() {
+		final IFocusListener listener = new IFocusListener() {
+			@Override
+			public void focusGained(FocusEvent event) {
+				// Do nothing
+			}
+
+			@Override
+			public void focusLost(FocusEvent event) {
+				for (IDataChangeListener listener: listeners.getListeners()) {
+					listener.dataChanged();
+				}
+			}
+		};
+		
 		latituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LATITUDE_TEXT);
 		latituteTxt.setPrecision(4);
 		latituteTxt.setSigned(true);
 		latituteTxt.setMarkNegative(false);
+		latituteTxt.addFocusListener(listener);
 		
 		longtituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
 		longtituteTxt.setPrecision(4);
 		longtituteTxt.setSigned(true);
 		longtituteTxt.setMarkNegative(false);
+		longtituteTxt.addFocusListener(listener);
 		
 		final DoubleNumberValidator validator = new DoubleNumberValidator();
 		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
@@ -82,5 +100,13 @@ public class MapGroupController implements WidgetController<MapLocation> {
 			latituteTxt.setText("");
 			longtituteTxt.setText("");
 		}
+	}
+
+	public void addDataChangeListener(IDataChangeListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeDataChangeListener(IDataChangeListener listener) {
+		listeners.remove(listener);
 	}
 }

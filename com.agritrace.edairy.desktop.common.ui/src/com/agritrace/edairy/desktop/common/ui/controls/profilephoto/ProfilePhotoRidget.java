@@ -14,6 +14,7 @@ import org.eclipse.core.databinding.observable.value.IValueChangeListener;
 import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.core.util.ListenerList;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ILinkRidget;
@@ -44,6 +45,7 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
  * 
  */
 public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProfilePhotoRidget {
+	private ListenerList<ISelectionListener> listeners = new ListenerList<ISelectionListener>(ISelectionListener.class);
 
 	private final class LinkSelected implements ISelectionListener {
 		@Override
@@ -54,6 +56,10 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 				if (imageData != null) {
 					updateModel();
 					updateDisplay();
+					
+					for (ISelectionListener listener : listeners.getListeners()) {
+						listener.ridgetSelected(event);
+					}
 				} else {
 					log(LogService.LOG_WARNING, "Null returned from readImageData. File not found?");
 				}
@@ -292,4 +298,13 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
+	@Override
+	public void addLinkSelectionListener(ISelectionListener listener) {
+		listeners.add(listener);
+	}
+
+	@Override
+	public void removeLinkSelectionListener(ISelectionListener listener) {
+		listeners.remove(listener);
+	}
 }

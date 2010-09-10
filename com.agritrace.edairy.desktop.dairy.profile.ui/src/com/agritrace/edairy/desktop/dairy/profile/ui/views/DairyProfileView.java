@@ -96,6 +96,7 @@ public class DairyProfileView extends SubModuleView {
 		return addressGroup;
 	}
 
+	/*
 	private Composite createDairyButtonPanel(Composite parent) {
 		final Composite buttonComposite = UIControlsFactory.createComposite(parent);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(buttonComposite);
@@ -109,6 +110,7 @@ public class DairyProfileView extends SubModuleView {
 		addUIControl(cancelButton, DairyProfileViewWidgetID.DAIRY_CANCEL);
 		return buttonComposite;
 	}
+		*/
 
 	private Composite createDairyImagePanel(Composite parent) {
 		final Group imageGroup = UIControlsFactory.createGroup(parent, DAIRY_IMAGE_GROUP_HEADER);
@@ -320,7 +322,7 @@ public class DairyProfileView extends SubModuleView {
 
 		// third row contains save and cancel buttons
 		final Composite row3 = UIControlsFactory.createComposite(parent);
-		createDairyButtonPanel(row3);
+		// createDairyButtonPanel(row3);
 		GridLayoutFactory.swtDefaults().numColumns(1).generateLayout(row3);
 
 		// layout the panel

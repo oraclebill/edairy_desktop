@@ -1,15 +1,20 @@
 package com.agritrace.edairy.desktop.common.ui.controllers.location;
 
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.riena.core.util.ListenerList;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
+import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
+import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 
 public class DirectionGroupController implements WidgetController<DescriptiveLocation> {
+	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private IRidgetContainer container;
 	private ITextRidget directionsTxt;
@@ -27,9 +32,25 @@ public class DirectionGroupController implements WidgetController<DescriptiveLoc
 		if (container == null) {
 			return;
 		}
-		landmarkTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LANDMARK_TEXT);
-		directionsTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIRECTIONS_TEXT);
 
+		final IFocusListener listener = new IFocusListener() {
+			@Override
+			public void focusGained(FocusEvent event) {
+				// Do nothing
+			}
+
+			@Override
+			public void focusLost(FocusEvent event) {
+				for (IDataChangeListener listener: listeners.getListeners()) {
+					listener.dataChanged();
+				}
+			}
+		};
+		
+		landmarkTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LANDMARK_TEXT);
+		landmarkTxt.addFocusListener(listener);
+		directionsTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIRECTIONS_TEXT);
+		directionsTxt.addFocusListener(listener);
 	}
 
 	@Override
@@ -70,6 +91,14 @@ public class DirectionGroupController implements WidgetController<DescriptiveLoc
 			directionsTxt.updateFromModel();
 		}
 
+	}
+
+	public void addDataChangeListener(IDataChangeListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeDataChangeListener(IDataChangeListener listener) {
+		listeners.remove(listener);
 	}
 
 }
