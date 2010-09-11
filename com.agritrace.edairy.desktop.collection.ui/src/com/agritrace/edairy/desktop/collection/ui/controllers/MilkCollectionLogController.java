@@ -64,12 +64,18 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				switch (status) {
 				case NEW:
 				case PENDING:
-					return String.valueOf(page.getDriverTotal());
-				case SUSPENDED:
-					if (page.getRecordTotal() != null)
+					if(page.getRecordTotal() != null){
 						return String.valueOf(page.getRecordTotal());
+					}
+					return "ERR";
+				case SUSPENDED:
+					
+					String result = "";
+					if (page.getRecordTotal() != null)
+						result =  String.valueOf(page.getRecordTotal());
 					else
-						return String.valueOf(page.getDriverTotal());
+						result =  "ERR";// means there was an error getting the proper result - see #273					
+					return result;
 				case COMPLETE:
 				case ARCHIVED:
 					return String.valueOf(page.getRecordTotal());
@@ -114,8 +120,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("Route", "route.code", String.class);
 		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
 		addTableColumn("Status", "status.name", String.class);
-		addTableColumn("Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());
-		addTableColumn("Entry Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
+		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());
+		addTableColumn("Initial Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
 		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT);
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);

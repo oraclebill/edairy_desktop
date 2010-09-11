@@ -674,6 +674,22 @@ public class BulkCollectionsEntryDialogController extends
 		}
 		return ret;
 	}
+	
+	
+	
+	private void displayActuallyPendingNote() {
+		StringBuffer message = new StringBuffer();
+		Formatter formatter = new Formatter(message);
+		try {
+			formatter
+					.format("\n\n NOTE the journal will be set to status PENDING, not SUSPENDED, due to empty list of entries");
+			MessageDialog.openInformation(getShell(),
+					"Pending Confirmation", message.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(message.toString());
+		}
+	}
 
 	/**
 	 * 
@@ -708,6 +724,7 @@ public class BulkCollectionsEntryDialogController extends
 			}
 		} else if (workingJournal.getDriverTotal() != null
 				&& workingJournal.getDriverTotal().compareTo(BigDecimal.ZERO) > 0) {
+			displayActuallyPendingNote();
 			workingJournal.setStatus(JournalStatus.PENDING);
 		} else {
 			log(LogService.LOG_WARNING, "doSave: saving questionable journal: "
