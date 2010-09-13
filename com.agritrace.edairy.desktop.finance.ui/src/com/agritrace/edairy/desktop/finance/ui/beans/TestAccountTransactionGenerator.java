@@ -65,12 +65,12 @@ public class TestAccountTransactionGenerator {
 	AccountTransaction createTestAccountTransaction(Account acct, int seq) {
 		final AccountTransaction temp = AccountFactory.eINSTANCE.createAccountTransaction();
 		temp.setAccount(acct);
-		temp.setAmount(new BigDecimal(new Long(12)));
+		temp.setAmount(new BigDecimal(rand.nextInt()));
 		temp.setDescription("test account transaction # " + seq);
 		temp.setSource(randomSource());
 		temp.setTransactionId(rand.nextLong());
 		temp.setTransactionType(randomTransactionType());
-		temp.setTransactionDate(new Date());
+		temp.setTransactionDate(new Date(System.currentTimeMillis()));
 		return temp;
 	}
 

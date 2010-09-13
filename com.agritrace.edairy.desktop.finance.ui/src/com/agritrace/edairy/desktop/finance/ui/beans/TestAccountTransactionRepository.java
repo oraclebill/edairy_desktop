@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
@@ -26,7 +28,8 @@ import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 public class TestAccountTransactionRepository{
 
 	private IRepository<AccountTransaction> myRepo;
-	
+	private List<AccountTransaction> transactionList;
+	public static final int BATCH_SIZE = 300;
 	
 	static class TransactionMemberEqualPredicate implements Predicate {
 		final private Membership testMember;
@@ -73,14 +76,14 @@ public class TestAccountTransactionRepository{
 
 	@After
 	public void tearDown() throws Exception {
-		myRepo = null;
+	
 	}
 	
 	@Test
 	public void testHandleBatchEntryAction(){
-		final ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
+		this.transactionList = new ArrayList<AccountTransaction>();
 		createBatchAccountTransactions(transactionList);
-		
+		long start = System.currentTimeMillis();
 		for (final AccountTransaction tx : transactionList) {
 			try{
 				getRepository().saveNew(tx);
@@ -90,14 +93,15 @@ public class TestAccountTransactionRepository{
 				fail("Exception is: "+t);				
 			}			
 		}
+		System.err.println("batch entries creation completed in "+(System.currentTimeMillis()-start)+"ms.");
 		
 	}
 	
 	private void createBatchAccountTransactions(
-			ArrayList<AccountTransaction> transactionList) {
+			List<AccountTransaction> transactionList) {
 		TestAccountTransactionGenerator tg = new TestAccountTransactionGenerator();
 		
-		List<AccountTransaction> transactions = tg.createTransactions(300);
+		List<AccountTransaction> transactions = tg.createTransactions(BATCH_SIZE);
 		
 		transactionList.addAll(transactions);
 		
@@ -105,6 +109,7 @@ public class TestAccountTransactionRepository{
 
 	@Test
 	public void testHandleFilterPredicate(){
+		long start = System.currentTimeMillis();
 		final List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
 		final Predicate filterPredicate = buildFilterPredicate();
 		try {
@@ -113,18 +118,50 @@ public class TestAccountTransactionRepository{
 					filtered.add(tx);
 				}
 			}
+			System.err.println("NOTE: filtering test completed in "+(System.currentTimeMillis()-start)+"ms.");
+			Assert.assertTrue(filtered.size() > 0);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+			System.err.println("NOTE: filtering test FAILED in "+(System.currentTimeMillis()-start)+"ms.");
+			fail("error evaluating the filters on ALL transactional entries");
+		}		
 	}
 
+	@Test
+	public void testDropBatchEntry(){
+		this.transactionList = getRepository().all();
+		if(this.transactionList != null){
+			long start = System.currentTimeMillis();
+			try{
+				int count = BATCH_SIZE;
+				for(AccountTransaction tr:this.transactionList){
+					getRepository().delete(tr);
+					if(--count < 0){
+						break;
+					}
+				}
+			}
+			catch(Throwable t){
+				t.printStackTrace();
+				fail("faled to drop test account transactions!");
+			}
+			this.transactionList = null;
+			System.err.println("NOTE account transaction batch drop was completed in "+(System.currentTimeMillis()-start)+"ms.");
+			
+		}
+		else{
+			fail("transaction list must not be empty!");
+		}
+	}
+	
+	
 	private Predicate buildFilterPredicate() {
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 		Predicate returnPredicate;
 
 		Date date;
 
-		date = new Date(System.currentTimeMillis() - 30*24*60*60*1000);
+		date = new Date(System.currentTimeMillis() + 30*24*60*60*1000);
 		if (date != null) {
 			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateAfterPredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
 		}
