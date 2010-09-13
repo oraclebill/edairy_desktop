@@ -90,7 +90,7 @@ public class XMemberDirectoryView extends SubModuleView {
 		final TableColumn columnName = new TableColumn(table, SWT.LEFT);
 		columnName.setText("Name");
 		final TableColumn columnRoute = new TableColumn(table, SWT.LEFT);
-		columnRoute.setText("Route");
+		columnRoute.setText("Transport Route");
 		final TableColumn columnStatus = new TableColumn(table, SWT.LEFT);
 		columnStatus.setText("Status");
 		final TableColumn columnPhone = new TableColumn(table, SWT.LEFT);

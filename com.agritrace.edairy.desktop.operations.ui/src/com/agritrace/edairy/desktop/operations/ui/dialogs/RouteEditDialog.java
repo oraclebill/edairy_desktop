@@ -22,7 +22,7 @@ public class RouteEditDialog extends RecordDialog<Route> {
 
 	public RouteEditDialog(Shell parentShell) {
 		super(parentShell);
-		setTitle("Route");
+		setTitle("Transport Route");
 		setShellStyle(SWT.RESIZE | SWT.TITLE);
 	}
 

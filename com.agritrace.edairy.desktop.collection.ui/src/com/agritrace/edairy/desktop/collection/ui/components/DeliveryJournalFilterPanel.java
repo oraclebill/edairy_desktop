@@ -29,7 +29,7 @@ public class DeliveryJournalFilterPanel extends Composite {
 		FieldUtil fieldUtil = new FieldUtil();
 		fieldUtil.addLabeledDateField(group, "Start Date", "filter-min-date");
 		fieldUtil.addLabeledDateField(group, "End Date", "filter-max-date");
-		fieldUtil.addLabeledComboField(group, "Route", "filter-route");
+		fieldUtil.addLabeledComboField(group, "Transport Route", "filter-route");
 		fieldUtil.addLabeledComboField(group, "Customer", "filter-customer");
 
 		final Control filler = UIControlsFactory.createLabel(group, "");

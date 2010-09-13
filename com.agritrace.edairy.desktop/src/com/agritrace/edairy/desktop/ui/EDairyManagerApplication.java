@@ -344,9 +344,9 @@ public class EDairyManagerApplication extends SwtApplication {
 		}
 		{
 			final IModuleNode moduleRoutes = NodeFactory.createModule(MODULE_OPERATIONS_ROUTES,
-					"Routes", moduleGroupNode); //$NON-NLS-1$ 
+					"Transport Routes", moduleGroupNode); //$NON-NLS-1$ 
 			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_ROUTES,
-					"Routes", moduleRoutes, RouteDirectoryView.ID, RouteListController.class); //$NON-NLS-1$ 
+					"Transport Routes", moduleRoutes, RouteDirectoryView.ID, RouteListController.class); //$NON-NLS-1$ 
 		}
 
 		//

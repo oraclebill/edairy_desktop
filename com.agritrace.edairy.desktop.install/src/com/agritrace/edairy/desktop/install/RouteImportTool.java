@@ -70,7 +70,7 @@ public class RouteImportTool extends AbstractImportTool {
 		super.validateRecord(values);
 		Object route = routeCache.get(values[ROUTE_CODE]);
 		if (route instanceof Route) {
-			throw new ValidationException("Route exists in database.");
+			throw new ValidationException("Transport Route exists in database.");
 		}
 		if (route instanceof String[]) {
 			throw new ValidationException("Duplicate route during import.");

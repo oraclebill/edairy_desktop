@@ -69,7 +69,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 		public boolean runJob(IProgressMonitor monitor) {
 			InputStream input = null;
 			try {
-				monitor.beginTask("Routes Import", lineCount);
+				monitor.beginTask("Transport Routes Import", lineCount);
 				monitor.subTask("Reading input file...");
 
 				input = new BufferedInputStream(new FileInputStream(importFile));

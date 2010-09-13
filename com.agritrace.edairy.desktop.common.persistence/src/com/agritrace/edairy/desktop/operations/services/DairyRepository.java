@@ -326,7 +326,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			save(localDairy);
 
 		} else {
-			throw new RepositoryException("Route not found!");
+			throw new RepositoryException("Transport Route not found!");
 		}
 	}
 

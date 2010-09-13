@@ -48,7 +48,7 @@ public class CJWizardStartPage extends WizardPage {
 		lblDatePrintedOn.setLayoutData(gd_lblDatePrintedOn);
 		lblDatePrintedOn.setText("The date to enter collection data for");
 		
-		UIControlsFactory.createLabel(composite, "Route");
+		UIControlsFactory.createLabel(composite, "Transport Route");
 		
 		CCombo combo = UIControlsFactory.createCCombo(composite, "session");
 		GridData gd_combo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);

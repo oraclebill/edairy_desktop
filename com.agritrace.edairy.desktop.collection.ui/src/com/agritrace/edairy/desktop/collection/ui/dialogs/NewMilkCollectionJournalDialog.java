@@ -276,7 +276,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Control contents = super.createContents(parent);
 		configureRidgets();
 		setTitle("Create New Collections Journal File");
-		setMessage("Please enter the date, session, and route for this set of collections records.");
+		setMessage("Please enter the date, session, and transport route for this set of collections records.");
 		return contents;
 	}
 	
@@ -290,13 +290,13 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		final Composite buffer = (Composite) super.createDialogArea(parent);
 		final Composite workArea = UIControlsFactory.createComposite(buffer);
-		workArea.setLayout(new GridLayout(3, false));
+		GridLayoutFactory.swtDefaults().numColumns(2).spacing(8, 8).generateLayout(workArea);
 		workArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		final int widgetWidth = 250;
 		
 		{
-			final Composite panel = UIControlsFactory.createComposite(workArea);
+			final Composite panel = workArea;
 			{
 				final Label label = UIControlsFactory.createLabel(panel, "Date");
 				GridDataFactory.swtDefaults().hint(80, -1).applyTo(label);
@@ -309,7 +309,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(sessionCombo);
 			}
 			{
-				UIControlsFactory.createLabel(panel, "Route");
+				UIControlsFactory.createLabel(panel, "Transport Route");
 				routeCombo = UIControlsFactory.createCCombo(panel, ViewConstants.ROUTE);
 				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(routeCombo);
 			}
@@ -319,10 +319,10 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			// ViewConstants.REFERENCE_NUMBER);
 			// GridDataFactory.swtDefaults().hint(100, -1).applyTo(fileNumber);
 			// }
-			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
+			// GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
 		{
-			final Composite panel = UIControlsFactory.createComposite(workArea);
+			final Composite panel = workArea;
 			{
 				UIControlsFactory.createLabel(panel, "Driver");
 				driverCombo = UIControlsFactory.createCCombo(panel, ViewConstants.DRIVER);
@@ -334,9 +334,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				vehicleCombo = UIControlsFactory.createCCombo(panel, ViewConstants.VEHICLE);
 				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(vehicleCombo);
 			}
-			GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
+			// GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(panel);
 		}
-		GridLayoutFactory.swtDefaults().numColumns(1).spacing(8, 8).generateLayout(workArea);
 
 		return buffer;
 	}

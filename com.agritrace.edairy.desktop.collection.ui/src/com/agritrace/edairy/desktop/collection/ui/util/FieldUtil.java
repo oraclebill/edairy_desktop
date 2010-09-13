@@ -45,12 +45,12 @@ public class FieldUtil {
 
 	public FieldUtil(int labelWidth, int fieldWidth) {
 		// SWT.DEFAULT == -1
-		if (labelWidth<0) labelWidth = MINIMUM_LABEL_WIDTH;
-		if (fieldWidth<0) labelWidth = STD_FIELD_WIDTH;
+		if (labelWidth < 0) labelWidth = MINIMUM_LABEL_WIDTH;
+		if (fieldWidth < 0) labelWidth = STD_FIELD_WIDTH;
 		
 		comboGDF = GridDataFactory.fillDefaults().minSize(fieldWidth, -1).grab(true, false);
 		fieldGDF = GridDataFactory.fillDefaults().minSize(fieldWidth, -1).grab(true, false).align(SWT.END, SWT.FILL);
-		labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(labelWidth, -1);
+		labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).minSize(labelWidth, -1);
 
 	}
 

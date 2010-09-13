@@ -31,7 +31,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	private static final String JOURNAL_TOTAL_LABEL = "Driver Total:";
 	private static final String MILK_BOOK_GROUP_TITLE = "Journal Page";
 	private static final String MILK_JOURNAL_BOOK_GROUP_TITLE = "Journal Book / Collection Details";
-	private static final String ROUTE_LABEL = "Route:";
+	private static final String ROUTE_LABEL = "Transport Route:";
 	private static final String SECTION_LABEL = "Session:";
 
 	private static final String VEHICLE_LABEL = "Truck:";

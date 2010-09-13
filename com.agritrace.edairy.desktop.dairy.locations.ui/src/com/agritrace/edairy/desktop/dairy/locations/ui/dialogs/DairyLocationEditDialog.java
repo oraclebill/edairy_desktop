@@ -71,7 +71,7 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(functionsChoice);
 		
 		//route
-		UIControlsFactory.createLabel(composite, "Route", SWT.LEFT);
+		UIControlsFactory.createLabel(composite, "Transport Route", SWT.LEFT);
 		final CCombo combo = UIControlsFactory.createCCombo(composite, DairyLocationUIConstants.RIDGET_ID_ROUTE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(combo);
 		createContactGroup(comonComp);

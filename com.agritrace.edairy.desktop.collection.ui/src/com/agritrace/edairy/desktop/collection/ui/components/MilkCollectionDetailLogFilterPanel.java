@@ -77,7 +77,7 @@ public class MilkCollectionDetailLogFilterPanel extends Composite {
 				ViewConstants.COLLECTION_DETAIL_EDIT_BTN);
 		btnEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 
-		UIControlsFactory.createLabel(composite, "Route:");
+		UIControlsFactory.createLabel(composite, "Transport Route:");
 
 		textRoute = UIControlsFactory.createText(composite, SWT.READ_ONLY, FILTER_ROUTE_TXT);
 		textRoute.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));

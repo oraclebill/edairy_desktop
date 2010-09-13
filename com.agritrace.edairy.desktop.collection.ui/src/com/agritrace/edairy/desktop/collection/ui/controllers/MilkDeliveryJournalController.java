@@ -55,7 +55,7 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 		setRepository(RepositoryFactory.getRepository(DeliveryJournal.class));
 
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
-		addTableColumn("Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE, new DJColumnFormatter() {
+		addTableColumn("Transport Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE, new DJColumnFormatter() {
 			@Override public String getFormattedText(DeliveryJournal element) {
 				return element.getRoute().getName();
 			}

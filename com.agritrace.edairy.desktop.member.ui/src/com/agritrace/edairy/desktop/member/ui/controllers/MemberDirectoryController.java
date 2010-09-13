@@ -128,11 +128,11 @@ public class MemberDirectoryController extends SubModuleController {
 
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	public static final String DELETE_DIALOG_TITLE = "Delete Member";
-	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Route", "Status", "Phone", "Milk Collection",
-			"Monthly Credit Sales", "Credit Balance" };
+	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Transport Route",
+			"Status", "Phone", "Milk Collection", "Monthly Credit Sales", "Credit Balance" };
 
-	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName", "defaultRoute.code", "status", "member.phoneNumber", "account", "account",
-			"account" };
+	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
+			"defaultRoute.code", "status", "member.phoneNumber", "account", "account", "account" };
 
 	private final ILabelRidget[] searchLabels;
 	private ITextRidget searchText;

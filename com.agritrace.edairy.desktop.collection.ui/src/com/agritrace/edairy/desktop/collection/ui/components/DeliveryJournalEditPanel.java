@@ -148,7 +148,7 @@ public class DeliveryJournalEditPanel extends Composite {
 		fd_sessionCombo.left = new FormAttachment(0, 109);
 		sessionCombo.setLayoutData(fd_sessionCombo);
 
-		final Label lblRoute = UIControlsFactory.createLabel(parent, "Route");
+		final Label lblRoute = UIControlsFactory.createLabel(parent, "Transport Route");
 		FormData fd_lblRoute = new FormData();
 		fd_lblRoute.left = new FormAttachment(lblDate, 0, SWT.LEFT);
 		lblRoute.setLayoutData(fd_lblRoute);

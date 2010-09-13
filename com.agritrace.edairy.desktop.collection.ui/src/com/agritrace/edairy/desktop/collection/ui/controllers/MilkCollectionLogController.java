@@ -119,7 +119,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		setRepository(journalRepo);
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
-		addTableColumn("Route", "route.code", String.class);
+		addTableColumn("Transport Route", "route.code", String.class);
 		addTableColumn("Session", "session.code", String.class);
 		addTableColumn("Status", "status.name", String.class);
 		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());

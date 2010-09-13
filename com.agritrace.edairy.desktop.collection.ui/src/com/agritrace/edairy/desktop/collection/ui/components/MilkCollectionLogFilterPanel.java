@@ -69,7 +69,7 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(routeCombo,
 				ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
 
-		final Label lblRoute = UIControlsFactory.createLabel(grpSearch, "Route");
+		final Label lblRoute = UIControlsFactory.createLabel(grpSearch, "Transport Route");
 		fd_routeCombo.right = new FormAttachment(lblRoute, 136, SWT.RIGHT);
 		fd_routeCombo.left = new FormAttachment(lblRoute, 6);
 		FormData fd_lblRoute = new FormData();
