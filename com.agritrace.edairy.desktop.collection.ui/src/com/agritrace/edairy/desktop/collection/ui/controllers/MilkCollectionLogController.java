@@ -7,10 +7,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -26,14 +26,16 @@ import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterB
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.SessionEditDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -118,7 +120,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
 		addTableColumn("Route", "route.code", String.class);
-		addTableColumn("Session", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION);
+		addTableColumn("Session", "session.code", String.class);
 		addTableColumn("Status", "status.name", String.class);
 		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());
 		addTableColumn("Initial Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
@@ -136,8 +138,13 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	public void afterBind() {
 		super.afterBind();
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
-
 		getRidget(IActionRidget.class, "import-file-button").addListener(new ScaleImportAction(this));
+		getRidget(IActionRidget.class, "edit-sessions").addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				handleEditSessions();
+			}
+		});
 	}
 
 	@Override
@@ -165,13 +172,13 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				BeansObservables.observeValue(filterBean, "status"));
 
 		
-		List<Session> sessions = new ArrayList<Session>();
+		List<CollectionSession> sessions = new ArrayList<CollectionSession>();
 		sessions.add(null); // Do not filter by status
-		sessions.addAll(Observables.staticObservableList(Session.VALUES));
+		sessions.addAll(RepositoryFactory.getRepository(CollectionSession.class).all());
 		session.bindToModel(
-				new WritableList(sessions, Session.class),
-				Session.class,
-				"getName",
+				new WritableList(sessions, CollectionSession.class),
+				CollectionSession.class,
+				"getCode",
 				BeansObservables.observeValue(filterBean, "session"));
 		
 		mprMissing.bindToModel(filterBean, "mprMissing");
@@ -209,7 +216,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus())
 			return false;
 		
-		if (bean.getSession() != null && cj.getSession() != bean.getSession())
+		if (bean.getSession() != null && (cj.getSession() == null || !cj.getSession().getId().equals(bean.getSession().getId())))
 			return false;
 		
 		if (bean.isSuspended() && cj.getSuspendedCount() == 0)
@@ -254,6 +261,11 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		throw new UnsupportedOperationException("unsupported");
 	}
 
+	private void handleEditSessions() {
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		new SessionEditDialog(shell).open();
+	}
+
 	@Override
 	protected void handleNewItemAction() {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
@@ -285,7 +297,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		}
 	
 	}
-
+	
 	@Override
 	protected void resetFilterConditions() {
 		Calendar cal = Calendar.getInstance();

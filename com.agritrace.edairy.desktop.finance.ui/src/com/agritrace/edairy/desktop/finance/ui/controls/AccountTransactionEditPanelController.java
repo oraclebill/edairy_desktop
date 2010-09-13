@@ -12,7 +12,6 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
@@ -26,6 +25,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDetailPanelController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -41,7 +41,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
  * @author oraclebill
  * 
  */
-public class AccountTransactionEditPanelController {
+public class AccountTransactionEditPanelController extends AbstractDetailPanelController<AccountTransaction> {
 
 	public class TransactionSourceSelectionListener implements ISelectionListener {
 		@Override
@@ -57,59 +57,32 @@ public class AccountTransactionEditPanelController {
 
 	}
 
-	private IRidgetContainer container;
 	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
-	private BindingHelper<AccountTransaction> mapper;
 	AccountTransaction model;
 	private IComboRidget storeLocation;
 	private ITextRidget memberName;
 
-	public AccountTransactionEditPanelController() {
-		;
-		;
-	}
-
-	public void checkValid() {
-
-	}
-
-	/**
-	 * 
-	 */
+	@Override
 	public void configureAndBind() {
-		if (container == null) {
-			throw new IllegalStateException("RidgetContainer must be set before configureAndBind");
-		}
-		if (model == null) {
-			throw new IllegalStateException("Model must be set before configureAndBind");
-		}
-		createMapper();
-		mapFieldsToModel();
-		bindMappedRidgets();
-		bindConfiguredRidgets();
+		super.configureAndBind();
 		updateWidgetsForSource(model.getSource());
 	}
 
-	/**
-	 * 
-	 * @param tx
-	 */
-	public void setModel(AccountTransaction tx) {
-		this.model = tx;
-	}
+	@Override
+	protected void bindRidgets() {
+		BindingHelper<AccountTransaction> mapper = getMapper();
+		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DATE,
+				AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
+		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
+				AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
+		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT,
+				AccountPackage.Literals.TRANSACTION__DESCRIPTION);
+		mapper.addMapping(FinanceBindingConstants.ID_CHECK_NUMBER_TEXT,
+				AccountPackage.Literals.ACCOUNT_TRANSACTION__CHECK_NUMBER);
+		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
+				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
 
-	/**
-	 * 
-	 * @param container
-	 */
-	public void setRidgetContainer(IRidgetContainer container) {
-		this.container = container;
-	}
-
-	/**
-	 * 
-	 */
-	private void bindConfiguredRidgets() {
+		IRidgetContainer container = getRidgetContainer();
 
 		// configure and bind transaction source
 		final ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
@@ -157,7 +130,7 @@ public class AccountTransactionEditPanelController {
 		storeLocation.updateFromModel();
 
 	}
-
+	
 	private void setSelectedMember(Membership selectedMember) {
 		Account memberAccount = selectedMember.getAccount();
 		if (memberAccount == null) {
@@ -168,56 +141,17 @@ public class AccountTransactionEditPanelController {
 		memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
 	}
 
-	private void bindMappedRidgets() {
-		mapper.configureRidgets();
-	}
-
-	private void createMapper() {
-		mapper = new BindingHelper<AccountTransaction>(container, model);
-	}
-
-	private void mapFieldsToModel() {
-
-		// addMapping(FinanceBindingConstants.ID_TRANSACTION_CHOICE,
-		// AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
-
-		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DATE,
-				AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
-
-		// mapper.addMapping(FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO,
-		// Observables.staticObservableList(dairyRepo.getLocalDairyLocations()),
-		// AccountPackage.Literals.TRANSACTION__RELATED_LOCATION);
-
-		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
-				AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
-
-		// addMapping(FinanceBindingConstants.ID_MEMBER_NAME_TEXT,
-		// AccountPackage.Literals.TRANSACTION__ACCOUNT,
-		// AccountPackage.Literals.ACCOUNT__MEMBER,
-		// DairyPackage.Literals.MEMBERSHIP__MEMBER,
-		// ModelPackage.Literals.PERSON__FAMILY_NAME);
-
-		// addMapping(FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT,
-		// AccountPackage.Literals.TRANSACTION__AMOUNT);
-
-		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT,
-				AccountPackage.Literals.TRANSACTION__DESCRIPTION);
-
-		mapper.addMapping(FinanceBindingConstants.ID_CHECK_NUMBER_TEXT,
-				AccountPackage.Literals.ACCOUNT_TRANSACTION__CHECK_NUMBER);
-
-		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
-				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
-	}
-
-	private void updateWidgetsForSource(TransactionSource source) {
+	void updateWidgetsForSource(TransactionSource source) {
+		IRidgetContainer container = getRidgetContainer();
 		boolean showStoreLocation = false, showCheckNo = false, showSignedBy = false;
+		
 		if (source == TransactionSource.CASH_PAYMENT) {
 			showCheckNo = true;
 			showSignedBy = true;
 		} else if (source == TransactionSource.STORE_CREDIT) {
 			showStoreLocation = true;
 		}
+		
 		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT),
 				showCheckNo);
 		enableMandatoryRidget(
@@ -233,20 +167,6 @@ public class AccountTransactionEditPanelController {
 		enableMandatoryRidget(
 				container.getRidget(ILabelRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL),
 				showStoreLocation);
-	}
-
-	private void enableMandatoryRidget(IRidget ridget, boolean enabled) {
-		ridget.setEnabled(enabled);
-		if (ridget instanceof ITextRidget) {
-			ITextRidget editable = (ITextRidget) ridget;
-			editable.setMandatory(enabled);
-		} else if (ridget instanceof IComboRidget) {
-			IComboRidget editable = (IComboRidget) ridget;
-			editable.setMandatory(enabled);
-		}
-		// else if (ridget instanceof ILabelRidget) {
-		// ILabelRidget editable = (ILabelRidget) ridget;
-		// }
 	}
 
 }

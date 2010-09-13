@@ -145,8 +145,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//JournalStatus" defaultValueLiteral="NEW"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" lowerBound="1"
-        eType="#//Session" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"
         eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
@@ -166,6 +164,7 @@
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//CollectionSession"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JournalStatus">
     <eLiterals name="NEW"/>
@@ -462,6 +461,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="PermissionT" instanceClassName="com.agritrace.edairy.desktop.common.model.dairy.security.Permission"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionSession">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="teneo.jpa">
+        <details key="appinfo" value="@Column(unique=&quot;true&quot;)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeOfDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
   <eSubpackages name="account" nsURI="http://com.agritrace.edairy.desktop.common.model/account"
       nsPrefix="account">
     <eClassifiers xsi:type="ecore:EClass" name="Account">

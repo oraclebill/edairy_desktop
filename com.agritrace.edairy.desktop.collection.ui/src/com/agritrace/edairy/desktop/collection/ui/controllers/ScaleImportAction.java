@@ -27,6 +27,7 @@ import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -34,7 +35,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -417,7 +417,9 @@ final class ScaleImportAction implements IActionListener {
 		return null;
 	}
 
-	private Session getSessionForCode(String sessionCode) {
+	private CollectionSession getSessionForCode(String sessionCode) {
+		// TODO: Get feedback
+		/*
 		if (sessionCode != null) {
 			if (sessionCode.equals("AM")) {
 				return Session.MORNING;
@@ -425,6 +427,7 @@ final class ScaleImportAction implements IActionListener {
 				return Session.EVENING1;
 			}
 		}
+		*/
 		return null;
 	}
 

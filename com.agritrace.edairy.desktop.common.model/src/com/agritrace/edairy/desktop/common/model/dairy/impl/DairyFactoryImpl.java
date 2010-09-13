@@ -83,6 +83,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.ROLE: return createRole();
 			case DairyPackage.PERMISSION_NAMESPACE: return createPermissionNamespace();
 			case DairyPackage.PERMISSION: return createPermission();
+			case DairyPackage.COLLECTION_SESSION: return createCollectionSession();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -364,6 +365,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	public Permission createPermission() {
 		PermissionImpl permission = new PermissionImpl();
 		return permission;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession createCollectionSession() {
+		CollectionSessionImpl collectionSession = new CollectionSessionImpl();
+		return collectionSession;
 	}
 
 	/**

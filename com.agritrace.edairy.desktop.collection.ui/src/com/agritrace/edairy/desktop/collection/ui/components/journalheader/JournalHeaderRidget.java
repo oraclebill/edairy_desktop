@@ -157,7 +157,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	public void bindToModel(CollectionJournalPage newModel) {
 		dateRidget.bindToModel(newModel, "journalDate");
 		routeRidget.bindToModel(newModel, "route.code");
-		sessionRidget.bindToModel(newModel, "session");
+		sessionRidget.bindToModel(newModel, "session.code");
 		vehicleRidget.bindToModel(newModel, "vehicle.registrationNumber");
 		driverRidget.bindToModel(newModel, "driver.familyName");
 		referenceNumber.bindToModel(newModel, "referenceNumber");

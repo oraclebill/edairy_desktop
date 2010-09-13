@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute <em>Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
@@ -38,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -173,34 +173,30 @@ public interface CollectionJournalPage extends EObject {
 	void setStatus(JournalStatus value);
 
 	/**
-	 * Returns the value of the '<em><b>Session</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.Session}.
+	 * Returns the value of the '<em><b>Session</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Session</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Session</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
-	 * @see #setSession(Session)
+	 * @return the value of the '<em>Session</em>' reference.
+	 * @see #setSession(CollectionSession)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Session()
-	 * @model default="0" required="true"
+	 * @model
 	 * @generated
 	 */
-	Session getSession();
+	CollectionSession getSession();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Session</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
+	 * @param value the new value of the '<em>Session</em>' reference.
 	 * @see #getSession()
 	 * @generated
 	 */
-	void setSession(Session value);
+	void setSession(CollectionSession value);
 
 	/**
 	 * Returns the value of the '<em><b>Driver</b></em>' reference.

@@ -89,7 +89,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		date.setDate(currentJournalPage.getJournalDate());
 		date.setOutputOnly(true);
 
-		session.setText(currentJournalPage.getSession().getName());
+		session.setText(currentJournalPage.getSession().getCode());
 		session.setOutputOnly(true);
 
 		route.setText(currentJournalPage.getRoute().getName());

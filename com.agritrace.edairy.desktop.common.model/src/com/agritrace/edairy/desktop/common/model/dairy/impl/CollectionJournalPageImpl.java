@@ -8,6 +8,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
@@ -45,7 +46,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalDate <em>Journal Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getStatus <em>Status</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRoute <em>Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getVehicle <em>Vehicle</em>}</li>
@@ -57,6 +57,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSuspendedCount <em>Suspended Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getRejectedCount <em>Rejected Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getJournalNumber <em>Journal Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl#getSession <em>Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -142,26 +143,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * @ordered
 	 */
 	protected JournalStatus status = STATUS_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSession() <em>Session</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSession()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Session SESSION_EDEFAULT = Session.EARLY_MORNING;
-
-	/**
-	 * The cached value of the '{@link #getSession() <em>Session</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSession()
-	 * @generated
-	 * @ordered
-	 */
-	protected Session session = SESSION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDriver() <em>Driver</em>}' reference.
@@ -344,6 +325,16 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	protected String journalNumber = JOURNAL_NUMBER_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getSession() <em>Session</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected CollectionSession session;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -463,7 +454,15 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Session getSession() {
+	public CollectionSession getSession() {
+		if (session != null && session.eIsProxy()) {
+			InternalEObject oldSession = (InternalEObject)session;
+			session = (CollectionSession)eResolveProxy(oldSession);
+			if (session != oldSession) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION, oldSession, session));
+			}
+		}
 		return session;
 	}
 
@@ -472,9 +471,18 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSession(Session newSession) {
-		Session oldSession = session;
-		session = newSession == null ? SESSION_EDEFAULT : newSession;
+	public CollectionSession basicGetSession() {
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSession(CollectionSession newSession) {
+		CollectionSession oldSession = session;
+		session = newSession;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION, oldSession, session));
 	}
@@ -785,8 +793,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return getJournalDate();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
 				return getStatus();
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
-				return getSession();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				if (resolve) return getDriver();
 				return basicGetDriver();
@@ -812,6 +818,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return getRejectedCount();
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
 				return getJournalNumber();
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
+				if (resolve) return getSession();
+				return basicGetSession();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -836,9 +845,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
 				setStatus((JournalStatus)newValue);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
-				setSession((Session)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				setDriver((Employee)newValue);
@@ -874,6 +880,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
 				setJournalNumber((String)newValue);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
+				setSession((CollectionSession)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -897,9 +906,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
 				setStatus(STATUS_EDEFAULT);
-				return;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
-				setSession(SESSION_EDEFAULT);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				setDriver((Employee)null);
@@ -934,6 +940,9 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
 				setJournalNumber(JOURNAL_NUMBER_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
+				setSession((CollectionSession)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -954,8 +963,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return JOURNAL_DATE_EDEFAULT == null ? journalDate != null : !JOURNAL_DATE_EDEFAULT.equals(journalDate);
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__STATUS:
 				return status != STATUS_EDEFAULT;
-			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
-				return session != SESSION_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__DRIVER:
 				return driver != null;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__ROUTE:
@@ -978,6 +985,8 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 				return rejectedCount != REJECTED_COUNT_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER:
 				return JOURNAL_NUMBER_EDEFAULT == null ? journalNumber != null : !JOURNAL_NUMBER_EDEFAULT.equals(journalNumber);
+			case DairyPackage.COLLECTION_JOURNAL_PAGE__SESSION:
+				return session != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1000,8 +1009,6 @@ public class CollectionJournalPageImpl extends EObjectImpl implements Collection
 		result.append(journalDate);
 		result.append(", status: ");
 		result.append(status);
-		result.append(", session: ");
-		result.append(session);
 		result.append(", driverTotal: ");
 		result.append(driverTotal);
 		result.append(", recordTotal: ");

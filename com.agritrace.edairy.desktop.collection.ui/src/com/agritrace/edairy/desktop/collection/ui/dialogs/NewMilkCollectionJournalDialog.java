@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -44,6 +45,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
@@ -173,13 +175,14 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		}
 
 		try {
+			List<CollectionSession> sessions = RepositoryFactory.getRepository(CollectionSession.class).all();
+			
 			session.bindToModel(
-					Observables.staticObservableList(Session.VALUES),
-					Session.class,
-					"getName",
+					new WritableList(sessions, CollectionSession.class),
+					CollectionSession.class,
+					"getCode",
 					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION.getName()));
-			session.setSelection(Session.VALUES.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

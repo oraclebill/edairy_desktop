@@ -235,6 +235,12 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DairyPackage.COLLECTION_SESSION: {
+				CollectionSession collectionSession = (CollectionSession)theEObject;
+				T result = caseCollectionSession(collectionSession);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -566,6 +572,21 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public T casePermission(Permission object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Session</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Session</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionSession(CollectionSession object) {
 		return null;
 	}
 

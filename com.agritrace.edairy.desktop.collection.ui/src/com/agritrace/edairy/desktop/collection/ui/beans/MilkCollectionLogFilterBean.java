@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.riena.beans.common.AbstractBean;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Session;
@@ -29,7 +30,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	private Date startDate;
 	private boolean suspended;
 	private JournalStatus status;
-	private Session session;
+	private CollectionSession session;
 
 	public Date getEndDate() {
 		return endDate;
@@ -63,7 +64,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 		return status;
 	}
 
-	public Session getSession() {
+	public CollectionSession getSession() {
 		return session;
 	}
 
@@ -115,7 +116,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 		firePropertyChanged(STATUS, oldVal, status);
 	}
 	
-	public void setSession(Session session) {
+	public void setSession(CollectionSession session) {
 		final Object oldVal = getSession();
 		this.session = session;
 		firePropertyChanged(SESSION, oldVal, this.session);
