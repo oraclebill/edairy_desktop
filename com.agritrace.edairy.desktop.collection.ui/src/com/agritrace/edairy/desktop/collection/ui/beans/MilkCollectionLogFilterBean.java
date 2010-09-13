@@ -8,7 +8,6 @@ import org.eclipse.riena.beans.common.AbstractBean;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 
 public class MilkCollectionLogFilterBean extends AbstractBean {
 	public static final String END_DATE = "END_DATE";

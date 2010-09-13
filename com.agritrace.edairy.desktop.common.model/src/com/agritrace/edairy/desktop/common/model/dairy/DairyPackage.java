@@ -1308,22 +1308,13 @@ public interface DairyPackage extends EPackage {
 	int DELIVERY_JOURNAL__ROUTE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Session</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DELIVERY_JOURNAL__SESSION = 3;
-
-	/**
 	 * The feature id for the '<em><b>Customer</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL__CUSTOMER = 4;
+	int DELIVERY_JOURNAL__CUSTOMER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Driver</b></em>' reference.
@@ -1332,7 +1323,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL__DRIVER = 5;
+	int DELIVERY_JOURNAL__DRIVER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
@@ -1341,7 +1332,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL__VEHICLE = 6;
+	int DELIVERY_JOURNAL__VEHICLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Lines</b></em>' containment reference list.
@@ -1350,7 +1341,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL__LINES = 7;
+	int DELIVERY_JOURNAL__LINES = 6;
 
 	/**
 	 * The feature id for the '<em><b>Total</b></em>' attribute.
@@ -1359,7 +1350,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL__TOTAL = 8;
+	int DELIVERY_JOURNAL__TOTAL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Session</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DELIVERY_JOURNAL__SESSION = 8;
 
 	/**
 	 * The number of structural features of the '<em>Delivery Journal</em>' class.
@@ -2665,16 +2665,6 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP_STATUS = 24;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSession()
-	 * @generated
-	 */
-	int SESSION = 25;
-
-	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2682,7 +2672,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 26;
+	int VENDOR_STATUS = 25;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2692,7 +2682,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 27;
+	int DAIRY_FUNCTION = 26;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod <em>Milk Price Period</em>}' enum.
@@ -2702,7 +2692,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPricePeriod()
 	 * @generated
 	 */
-	int MILK_PRICE_PERIOD = 28;
+	int MILK_PRICE_PERIOD = 27;
 
 
 	/**
@@ -2713,7 +2703,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceType()
 	 * @generated
 	 */
-	int PREFERENCE_TYPE = 29;
+	int PREFERENCE_TYPE = 28;
 
 
 	/**
@@ -2724,7 +2714,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
 	 * @generated
 	 */
-	int PERMISSION_T = 30;
+	int PERMISSION_T = 29;
 
 
 	/**
@@ -3819,15 +3809,15 @@ public interface DairyPackage extends EPackage {
 	EReference getDeliveryJournal_Route();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Session</em>'.
+	 * @return the meta object for the reference '<em>Session</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession()
 	 * @see #getDeliveryJournal()
 	 * @generated
 	 */
-	EAttribute getDeliveryJournal_Session();
+	EReference getDeliveryJournal_Session();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getCustomer <em>Customer</em>}'.
@@ -4925,16 +4915,6 @@ public interface DairyPackage extends EPackage {
 	EEnum getMembershipStatus();
 
 	/**
-	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Session</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
-	 * @generated
-	 */
-	EEnum getSession();
-
-	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5826,12 +5806,12 @@ public interface DairyPackage extends EPackage {
 		EReference DELIVERY_JOURNAL__ROUTE = eINSTANCE.getDeliveryJournal_Route();
 
 		/**
-		 * The meta object literal for the '<em><b>Session</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Session</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DELIVERY_JOURNAL__SESSION = eINSTANCE.getDeliveryJournal_Session();
+		EReference DELIVERY_JOURNAL__SESSION = eINSTANCE.getDeliveryJournal_Session();
 
 		/**
 		 * The meta object literal for the '<em><b>Customer</b></em>' reference feature.
@@ -6672,16 +6652,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MEMBERSHIP_STATUS = eINSTANCE.getMembershipStatus();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.Session <em>Session</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSession()
-		 * @generated
-		 */
-		EEnum SESSION = eINSTANCE.getSession();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.

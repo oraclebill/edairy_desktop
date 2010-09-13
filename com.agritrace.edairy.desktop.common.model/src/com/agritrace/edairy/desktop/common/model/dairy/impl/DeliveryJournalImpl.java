@@ -6,13 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
 import java.math.BigDecimal;
@@ -44,12 +44,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getDate <em>Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getCustomer <em>Customer</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getLines <em>Lines</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getTotal <em>Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getSession <em>Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,26 +105,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @ordered
 	 */
 	protected Route route;
-
-	/**
-	 * The default value of the '{@link #getSession() <em>Session</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSession()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Session SESSION_EDEFAULT = Session.EARLY_MORNING;
-
-	/**
-	 * The cached value of the '{@link #getSession() <em>Session</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSession()
-	 * @generated
-	 * @ordered
-	 */
-	protected Session session = SESSION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getCustomer() <em>Customer</em>}' reference.
@@ -185,6 +165,16 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @ordered
 	 */
 	protected BigDecimal total = TOTAL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSession() <em>Session</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected CollectionSession session;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -290,7 +280,15 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Session getSession() {
+	public CollectionSession getSession() {
+		if (session != null && session.eIsProxy()) {
+			InternalEObject oldSession = (InternalEObject)session;
+			session = (CollectionSession)eResolveProxy(oldSession);
+			if (session != oldSession) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
+			}
+		}
 		return session;
 	}
 
@@ -299,9 +297,18 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSession(Session newSession) {
-		Session oldSession = session;
-		session = newSession == null ? SESSION_EDEFAULT : newSession;
+	public CollectionSession basicGetSession() {
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSession(CollectionSession newSession) {
+		CollectionSession oldSession = session;
+		session = newSession;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
 	}
@@ -482,8 +489,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
 				if (resolve) return getRoute();
 				return basicGetRoute();
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
-				return getSession();
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
 				if (resolve) return getCustomer();
 				return basicGetCustomer();
@@ -497,6 +502,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return getLines();
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				return getTotal();
+			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+				if (resolve) return getSession();
+				return basicGetSession();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -519,9 +527,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
 				setRoute((Route)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
-				setSession((Session)newValue);
-				return;
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
 				setCustomer((Customer)newValue);
 				return;
@@ -537,6 +542,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				setTotal((BigDecimal)newValue);
+				return;
+			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+				setSession((CollectionSession)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -559,9 +567,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
 				setRoute((Route)null);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
-				setSession(SESSION_EDEFAULT);
-				return;
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
 				setCustomer((Customer)null);
 				return;
@@ -576,6 +581,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				setTotal(TOTAL_EDEFAULT);
+				return;
+			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+				setSession((CollectionSession)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -595,8 +603,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
 				return route != null;
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
-				return session != SESSION_EDEFAULT;
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
 				return customer != null;
 			case DairyPackage.DELIVERY_JOURNAL__DRIVER:
@@ -607,6 +613,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return lines != null && !lines.isEmpty();
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				return TOTAL_EDEFAULT == null ? total != null : !TOTAL_EDEFAULT.equals(total);
+			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+				return session != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -625,8 +633,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 		result.append(referenceNumber);
 		result.append(", date: ");
 		result.append(date);
-		result.append(", session: ");
-		result.append(session);
 		result.append(", total: ");
 		result.append(total);
 		result.append(')');

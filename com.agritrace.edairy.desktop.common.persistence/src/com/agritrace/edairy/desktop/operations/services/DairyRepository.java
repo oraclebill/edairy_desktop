@@ -33,6 +33,7 @@ import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -591,9 +592,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public List<CollectionJournalLine> getMemberCollectionsForSession(
-			com.agritrace.edairy.desktop.common.model.dairy.Session session,
-			Membership value) {
+	public List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value) {
 		// TODO: implement
 		return null;
 	}

@@ -101,8 +101,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createJournalStatusFromString(eDataType, initialValue);
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return createMembershipStatusFromString(eDataType, initialValue);
-			case DairyPackage.SESSION:
-				return createSessionFromString(eDataType, initialValue);
 			case DairyPackage.VENDOR_STATUS:
 				return createVendorStatusFromString(eDataType, initialValue);
 			case DairyPackage.DAIRY_FUNCTION:
@@ -130,8 +128,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertJournalStatusToString(eDataType, instanceValue);
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return convertMembershipStatusToString(eDataType, instanceValue);
-			case DairyPackage.SESSION:
-				return convertSessionToString(eDataType, instanceValue);
 			case DairyPackage.VENDOR_STATUS:
 				return convertVendorStatusToString(eDataType, instanceValue);
 			case DairyPackage.DAIRY_FUNCTION:
@@ -414,26 +410,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertMembershipStatusToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Session createSessionFromString(EDataType eDataType, String initialValue) {
-		Session result = Session.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertSessionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

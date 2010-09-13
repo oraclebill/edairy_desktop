@@ -13,7 +13,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
 import java.math.BigDecimal;

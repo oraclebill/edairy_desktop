@@ -39,7 +39,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Trip;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -247,13 +246,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum membershipStatusEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum sessionEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1270,8 +1262,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournal_Session() {
-		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(3);
+	public EReference getDeliveryJournal_Session() {
+		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1280,7 +1272,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getDeliveryJournal_Customer() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(4);
+		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1289,7 +1281,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getDeliveryJournal_Driver() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(5);
+		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1298,7 +1290,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getDeliveryJournal_Vehicle() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(6);
+		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1307,7 +1299,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getDeliveryJournal_Lines() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(7);
+		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1316,7 +1308,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getDeliveryJournal_Total() {
-		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2188,15 +2180,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getSession() {
-		return sessionEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getVendorStatus() {
 		return vendorStatusEEnum;
 	}
@@ -2373,12 +2356,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__REFERENCE_NUMBER);
 		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__DATE);
 		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__ROUTE);
-		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__SESSION);
 		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__CUSTOMER);
 		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__DRIVER);
 		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__VEHICLE);
 		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__LINES);
 		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__TOTAL);
+		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__SESSION);
 
 		deliveryJournalLineEClass = createEClass(DELIVERY_JOURNAL_LINE);
 		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__LINE_NUMBER);
@@ -2491,7 +2474,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		// Create enums
 		journalStatusEEnum = createEEnum(JOURNAL_STATUS);
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
-		sessionEEnum = createEEnum(SESSION);
 		vendorStatusEEnum = createEEnum(VENDOR_STATUS);
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 		milkPricePeriodEEnum = createEEnum(MILK_PRICE_PERIOD);
@@ -2654,12 +2636,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getDeliveryJournal_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeliveryJournal_Date(), ecorePackage.getEDate(), "date", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Route(), this.getRoute(), null, "route", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeliveryJournal_Session(), this.getSession(), "session", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Customer(), this.getCustomer(), null, "customer", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Driver(), this.getEmployee(), null, "driver", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Lines(), this.getDeliveryJournalLine(), null, "lines", null, 1, -1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeliveryJournal_Total(), ecorePackage.getEBigDecimal(), "total", "0.0", 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeliveryJournal_Session(), this.getCollectionSession(), null, "session", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deliveryJournalLineEClass, DeliveryJournalLine.class, "DeliveryJournalLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeliveryJournalLine_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2788,14 +2770,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(membershipStatusEEnum, MembershipStatus.INACTIVE);
 		addEEnumLiteral(membershipStatusEEnum, MembershipStatus.DORMANT);
 		addEEnumLiteral(membershipStatusEEnum, MembershipStatus.DELETED);
-
-		initEEnum(sessionEEnum, Session.class, "Session");
-		addEEnumLiteral(sessionEEnum, Session.EARLY_MORNING);
-		addEEnumLiteral(sessionEEnum, Session.MORNING);
-		addEEnumLiteral(sessionEEnum, Session.EARLY_AFTERNOON);
-		addEEnumLiteral(sessionEEnum, Session.AFTERNOON);
-		addEEnumLiteral(sessionEEnum, Session.EVENING1);
-		addEEnumLiteral(sessionEEnum, Session.EVENING2);
 
 		initEEnum(vendorStatusEEnum, VendorStatus.class, "VendorStatus");
 		addEEnumLiteral(vendorStatusEEnum, VendorStatus.PENDING);

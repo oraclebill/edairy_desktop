@@ -214,8 +214,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="session" lowerBound="1"
-        eType="#//Session"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
         eType="#//Customer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
@@ -224,6 +222,7 @@
         eType="#//DeliveryJournalLine" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//CollectionSession"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournalLine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber" lowerBound="1"
@@ -337,14 +336,6 @@
         <details key="appinfo" value="@Embedded"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Session">
-    <eLiterals name="EarlyMorning"/>
-    <eLiterals name="Morning" value="1"/>
-    <eLiterals name="EarlyAfternoon" value="2"/>
-    <eLiterals name="Afternoon" value="3"/>
-    <eLiterals name="Evening1" value="4"/>
-    <eLiterals name="Evening2" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="common.ecore#//Company">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="categories" upperBound="-1"

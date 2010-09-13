@@ -34,7 +34,6 @@ import com.agritrace.edairy.desktop.collection.ui.controllers.BulkCollectionsEnt
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 

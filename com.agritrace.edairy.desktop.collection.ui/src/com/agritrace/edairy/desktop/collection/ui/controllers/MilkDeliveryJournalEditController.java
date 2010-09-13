@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.collection.ui.controllers;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,12 +20,13 @@ import org.eclipse.riena.ui.ridgets.IRowRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.Session;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -118,7 +118,8 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 		addTextMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 
-		addComboMap(DeliveryJournalEditBindContants.SESSION_COMBO, Arrays.asList(Session.values()), "getName",
+		List<CollectionSession> sessions = RepositoryFactory.getRepository(CollectionSession.class).all();
+		addComboMap(DeliveryJournalEditBindContants.SESSION_COMBO, sessions, "getCode",
 				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
 
 		addComboMap(DeliveryJournalEditBindContants.ROUTE_COMBO, dairyRepo.allRoutes(), "getName",

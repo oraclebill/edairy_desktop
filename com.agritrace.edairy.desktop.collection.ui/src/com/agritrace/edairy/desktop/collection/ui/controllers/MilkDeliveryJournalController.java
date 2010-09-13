@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.beans.DeliveryJournalFilterBean;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.DeliveryJournalEditDialog;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
@@ -60,7 +61,12 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 				return element.getRoute().getName();
 			}
 		});
-		addTableColumn("Session", DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
+		addTableColumn("Session", DairyPackage.Literals.DELIVERY_JOURNAL__SESSION, new DJColumnFormatter() {
+			@Override public String getFormattedText(DeliveryJournal element) {
+				CollectionSession session = element.getSession();
+				return session == null ? "" : session.getCode();
+			}
+		});
 		addTableColumn("Customer", DairyPackage.Literals.DELIVERY_JOURNAL__CUSTOMER, new DJColumnFormatter() {
 			@Override public String getFormattedText(DeliveryJournal element) {
 				return element.getCustomer().getCompanyName();

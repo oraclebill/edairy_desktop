@@ -25,12 +25,12 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getDate <em>Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getCustomer <em>Customer</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getLines <em>Lines</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getTotal <em>Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}</li>
  * </ul>
  * </p>
  *
@@ -118,33 +118,30 @@ public interface DeliveryJournal extends EObject {
 	void setRoute(Route value);
 
 	/**
-	 * Returns the value of the '<em><b>Session</b></em>' attribute.
-	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.Session}.
+	 * Returns the value of the '<em><b>Session</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Session</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Session</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
-	 * @see #setSession(Session)
+	 * @return the value of the '<em>Session</em>' reference.
+	 * @see #setSession(CollectionSession)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Session()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
-	Session getSession();
+	CollectionSession getSession();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Session</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Session
+	 * @param value the new value of the '<em>Session</em>' reference.
 	 * @see #getSession()
 	 * @generated
 	 */
-	void setSession(Session value);
+	void setSession(CollectionSession value);
 
 	/**
 	 * Returns the value of the '<em><b>Customer</b></em>' reference.
