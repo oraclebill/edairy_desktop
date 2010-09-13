@@ -44,7 +44,7 @@ public class TestAccountTransactionGenerator {
 	public List<AccountTransaction> createTransactions(int count) {
 		final List<AccountTransaction> txList = new ArrayList<AccountTransaction>();
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < count; i++) {
 			txList.add(createTestAccountTransaction(i));
 		}
 

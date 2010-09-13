@@ -83,10 +83,14 @@ public class TestAccountTransactionRepository{
 	public void testHandleBatchEntryAction(){
 		this.transactionList = new ArrayList<AccountTransaction>();
 		createBatchAccountTransactions(transactionList);
+		System.err.println("NOTE: created a list of fake account transactions, size="+this.transactionList.size());
 		long start = System.currentTimeMillis();
+		//int count = 0;
 		for (final AccountTransaction tx : transactionList) {
 			try{
 				getRepository().saveNew(tx);
+				//count++;
+				//System.out.println(""+count);
 			}
 			catch(Throwable t){
 				t.printStackTrace();
@@ -136,7 +140,9 @@ public class TestAccountTransactionRepository{
 				int count = BATCH_SIZE;
 				for(AccountTransaction tr:this.transactionList){
 					getRepository().delete(tr);
-					if(--count < 0){
+					count--;
+					//System.out.println(""+count);
+					if(count <= 0){
 						break;
 					}
 				}
