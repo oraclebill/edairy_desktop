@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -34,10 +35,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getStops <em>Stops</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl#getVehicle <em>Vehicle</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,26 +64,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * @ordered
 	 */
 	protected Long id = ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getCode() <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCode()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String CODE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getCode() <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCode()
-	 * @generated
-	 * @ordered
-	 */
-	protected String code = CODE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -133,6 +114,16 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVehicle() <em>Vehicle</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVehicle()
+	 * @generated
+	 * @ordered
+	 */
+	protected Vehicle vehicle;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -212,27 +203,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCode() {
-		return code;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCode(String newCode) {
-		String oldCode = code;
-		code = newCode;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__CODE, oldCode, code));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getDescription() {
 		return description;
 	}
@@ -247,6 +217,44 @@ public class RouteImpl extends EObjectImpl implements Route {
 		description = newDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Vehicle getVehicle() {
+		if (vehicle != null && vehicle.eIsProxy()) {
+			InternalEObject oldVehicle = (InternalEObject)vehicle;
+			vehicle = (Vehicle)eResolveProxy(oldVehicle);
+			if (vehicle != oldVehicle) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.ROUTE__VEHICLE, oldVehicle, vehicle));
+			}
+		}
+		return vehicle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Vehicle basicGetVehicle() {
+		return vehicle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVehicle(Vehicle newVehicle) {
+		Vehicle oldVehicle = vehicle;
+		vehicle = newVehicle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__VEHICLE, oldVehicle, vehicle));
 	}
 
 	/**
@@ -288,14 +296,15 @@ public class RouteImpl extends EObjectImpl implements Route {
 		switch (featureID) {
 			case DairyPackage.ROUTE__ID:
 				return getId();
-			case DairyPackage.ROUTE__CODE:
-				return getCode();
 			case DairyPackage.ROUTE__NAME:
 				return getName();
 			case DairyPackage.ROUTE__STOPS:
 				return getStops();
 			case DairyPackage.ROUTE__DESCRIPTION:
 				return getDescription();
+			case DairyPackage.ROUTE__VEHICLE:
+				if (resolve) return getVehicle();
+				return basicGetVehicle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -312,9 +321,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 			case DairyPackage.ROUTE__ID:
 				setId((Long)newValue);
 				return;
-			case DairyPackage.ROUTE__CODE:
-				setCode((String)newValue);
-				return;
 			case DairyPackage.ROUTE__NAME:
 				setName((String)newValue);
 				return;
@@ -324,6 +330,9 @@ public class RouteImpl extends EObjectImpl implements Route {
 				return;
 			case DairyPackage.ROUTE__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case DairyPackage.ROUTE__VEHICLE:
+				setVehicle((Vehicle)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -340,9 +349,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 			case DairyPackage.ROUTE__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case DairyPackage.ROUTE__CODE:
-				setCode(CODE_EDEFAULT);
-				return;
 			case DairyPackage.ROUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -351,6 +357,9 @@ public class RouteImpl extends EObjectImpl implements Route {
 				return;
 			case DairyPackage.ROUTE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case DairyPackage.ROUTE__VEHICLE:
+				setVehicle((Vehicle)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -366,14 +375,14 @@ public class RouteImpl extends EObjectImpl implements Route {
 		switch (featureID) {
 			case DairyPackage.ROUTE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case DairyPackage.ROUTE__CODE:
-				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case DairyPackage.ROUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DairyPackage.ROUTE__STOPS:
 				return stops != null && !stops.isEmpty();
 			case DairyPackage.ROUTE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case DairyPackage.ROUTE__VEHICLE:
+				return vehicle != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -390,8 +399,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (Id: ");
 		result.append(id);
-		result.append(", code: ");
-		result.append(code);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", description: ");

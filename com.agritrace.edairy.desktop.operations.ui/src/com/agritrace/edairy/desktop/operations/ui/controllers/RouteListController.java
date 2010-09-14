@@ -7,10 +7,12 @@ import java.util.List;
 
 import org.eclipse.riena.beans.common.AbstractBean;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -64,14 +66,17 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	public RouteListController() {
 		setRepository(new RouteRepository());
 		setEClass(DairyPackage.Literals.ROUTE);
-		// setEntityClass(Route.class);
 
-		// addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
-		addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);
+		// addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);
 		addTableColumn("Name", DairyPackage.Literals.ROUTE__NAME);
+		addTableColumn("Vehicle", DairyPackage.Literals.ROUTE__VEHICLE, new ColumnFormatter() {
+			@Override
+			public String getText(Object element) {
+				Vehicle vehicle = ((Route) element).getVehicle();
+				return vehicle == null ? "" : vehicle.getRegistrationNumber();
+			}
+		});
 		addTableColumn("Description", DairyPackage.Literals.ROUTE__DESCRIPTION);
-		// addTableColumn("ID", DairyPackage.Literals.ROUTE__ID);
-
 	}
 
 	@Override

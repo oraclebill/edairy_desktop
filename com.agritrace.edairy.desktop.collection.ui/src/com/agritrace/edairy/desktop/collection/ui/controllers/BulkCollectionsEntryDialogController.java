@@ -48,6 +48,7 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberLookupProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -472,19 +473,21 @@ public class BulkCollectionsEntryDialogController extends
 		// page relative config
 		//
 		CollectionJournalPage workingJournalPage = getContextJournalPage();
-		final Route currentRoute = workingJournalPage.getRoute();
+		// final Route currentRoute = workingJournalPage.getRoute();
 		final IMemberInfoProvider lookupProvider = new MemberLookupProvider(dairyRepo);
 
 		collectionLineRidget.clearValidators();
 		collectionLineRidget.addValidator(new MandatoryFieldsCheck(
 				collectionLineRidget));
-		collectionLineRidget.setRouteValidator(new RouteMatchValidator(
-				workingJournalPage.getRoute()));
+		// TODO: RouteMatchValidator
+		// collectionLineRidget.setRouteValidator(new RouteMatchValidator(
+		//		workingJournalPage.getRoute()));
 
 		// too slow??
 		collectionLineRidget.addValidator(new MemberLookupValidator(
 				lookupProvider));
 
+		/*
 		if (currentRoute != null) {
 			// collectionLineRidget.setBinList(dairyRepo.getBinsForRoute(currentRoute));
 			// // todo;
@@ -492,9 +495,10 @@ public class BulkCollectionsEntryDialogController extends
 //					new MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)));
 			collectionLineRidget.setMemberInfoProvider( new GenericMemberInfo(currentRoute, lookupProvider));
 					
-		} else {
+		} else { */
 			collectionLineRidget.setMemberInfoProvider(lookupProvider);
-		}
+		// }
+		
 		collectionLineRidget.setBinList(dairyRepo.getLocalDairy()
 				.getDairyBins());
 
@@ -508,11 +512,11 @@ public class BulkCollectionsEntryDialogController extends
 			public IStatus validate(Object value) {
 				final CollectionJournalLine line = (CollectionJournalLine) value;
 				final Membership member = line.getValidatedMember();
-				final Route route = getContextJournalPage().getRoute();
+				final DairyLocation center = getContextJournalPage().getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
 				
-				if (repository.countByMemberRouteDate(member, route, date) > 0) {
-					return ValidationStatus.error("Another entry for this member, route and date already exists");
+				if (repository.countByMemberCenterDate(member, center, date) > 0) {
+					return ValidationStatus.error("Another entry for this member, center and date already exists");
 				} else {
 					return ValidationStatus.ok();
 				}
@@ -769,7 +773,7 @@ public class BulkCollectionsEntryDialogController extends
 		// copy some of the old stuff to the new guy
 		EStructuralFeature[] transferFeatures = new EStructuralFeature[] {
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE,
+				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE,
 				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER, };

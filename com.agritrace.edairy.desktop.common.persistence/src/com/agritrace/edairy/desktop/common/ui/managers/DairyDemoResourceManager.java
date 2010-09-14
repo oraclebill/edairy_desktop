@@ -642,7 +642,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 		route.setId(id);
 		route.setName(name);
-		route.setCode(code);
+		// route.setCode(code);
 		route.setDescription(description);
 		route.getStops().addAll(stops);
 

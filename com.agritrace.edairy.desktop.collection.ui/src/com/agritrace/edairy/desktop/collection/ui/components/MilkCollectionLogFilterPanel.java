@@ -61,22 +61,22 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(endDate,
 				ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
 
-		final CCombo routeCombo = UIControlsFactory.createCCombo(grpSearch);
-		FormData fd_routeCombo = new FormData();
-		fd_routeCombo.width = 120;
-		fd_routeCombo.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
-		routeCombo.setLayoutData(fd_routeCombo);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(routeCombo,
-				ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
+		final CCombo centerCombo = UIControlsFactory.createCCombo(grpSearch);
+		FormData fd_centerCombo = new FormData();
+		fd_centerCombo.width = 120;
+		fd_centerCombo.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
+		centerCombo.setLayoutData(fd_centerCombo);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(centerCombo,
+				ViewConstants.COLLECTION_FILTER_CENTER_COMBO);
 
-		final Label lblRoute = UIControlsFactory.createLabel(grpSearch, "Transport Route");
-		fd_routeCombo.right = new FormAttachment(lblRoute, 136, SWT.RIGHT);
-		fd_routeCombo.left = new FormAttachment(lblRoute, 6);
-		FormData fd_lblRoute = new FormData();
-		fd_lblRoute.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
-		fd_lblRoute.left = new FormAttachment(endDate, 6);
-		fd_lblRoute.left = new FormAttachment(endDate, 23);
-		lblRoute.setLayoutData(fd_lblRoute);
+		final Label lblCenter = UIControlsFactory.createLabel(grpSearch, "Collection Center");
+		fd_centerCombo.right = new FormAttachment(lblCenter, 136, SWT.RIGHT);
+		fd_centerCombo.left = new FormAttachment(lblCenter, 6);
+		FormData fd_lblCenter = new FormData();
+		fd_lblCenter.top = new FormAttachment(lblStartDate, 0, SWT.TOP);
+		fd_lblCenter.left = new FormAttachment(endDate, 6);
+		fd_lblCenter.left = new FormAttachment(endDate, 23);
+		lblCenter.setLayoutData(fd_lblCenter);
 
 		final Button btnSearch = UIControlsFactory.createButton(grpSearch);
 		FormData fd_btnSearch = new FormData();
@@ -151,7 +151,7 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		
 		CCombo statusCombo = UIControlsFactory.createCCombo(this, ViewConstants.COLLECTION_FILTER_STATUS_COMBO);
 		FormData fd_statusCombo = new FormData();
-		fd_statusCombo.right = new FormAttachment(routeCombo, 0, SWT.RIGHT);
+		fd_statusCombo.right = new FormAttachment(centerCombo, 0, SWT.RIGHT);
 		fd_statusCombo.width = 120;
 		fd_statusCombo.top = new FormAttachment(lblMprMissing, 0, SWT.TOP);
 		fd_statusCombo.left = new FormAttachment(lblStatus, 4);

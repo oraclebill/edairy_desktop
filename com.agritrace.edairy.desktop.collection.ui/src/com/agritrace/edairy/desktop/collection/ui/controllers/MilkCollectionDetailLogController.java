@@ -83,7 +83,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 			throw new IllegalStateException("Journal editor requires context setting 'JOURNAL_PAGE' with current page");
 		}
 
-		book.setText(currentJournalPage.getRoute().getName());
+		// book.setText(currentJournalPage.getRoute().getName());
 		book.setOutputOnly(true);
 
 		date.setDate(currentJournalPage.getJournalDate());
@@ -92,7 +92,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		session.setText(currentJournalPage.getSession().getCode());
 		session.setOutputOnly(true);
 
-		route.setText(currentJournalPage.getRoute().getName());
+		// route.setText(currentJournalPage.getRoute().getName());
 		route.setOutputOnly(true);
 
 		driver.setText(currentJournalPage.getDriver().getFamilyName());

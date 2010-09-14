@@ -69,7 +69,13 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(functionsChoice);
-		
+
+		// code
+		UIControlsFactory.createLabel(composite, "Code");
+		final Text txtCode = UIControlsFactory.createText(composite);
+		txtCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
+		addUIControl(txtCode, DairyLocationUIConstants.RIDGET_ID_CODE);
+
 		//route
 		UIControlsFactory.createLabel(composite, "Transport Route", SWT.LEFT);
 		final CCombo combo = UIControlsFactory.createCCombo(composite, DairyLocationUIConstants.RIDGET_ID_ROUTE);

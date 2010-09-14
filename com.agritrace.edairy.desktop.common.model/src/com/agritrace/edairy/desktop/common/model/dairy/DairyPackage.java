@@ -1035,22 +1035,13 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_PAGE__DRIVER = 4;
 
 	/**
-	 * The feature id for the '<em><b>Route</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_JOURNAL_PAGE__ROUTE = 5;
-
-	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__VEHICLE = 6;
+	int COLLECTION_JOURNAL_PAGE__VEHICLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Driver Total</b></em>' attribute.
@@ -1059,7 +1050,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 7;
+	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Record Total</b></em>' attribute.
@@ -1068,7 +1059,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 8;
+	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Journal Entries</b></em>' containment reference list.
@@ -1077,7 +1068,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 9;
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 8;
 
 	/**
 	 * The feature id for the '<em><b>Suspended</b></em>' attribute.
@@ -1086,7 +1077,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 10;
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 9;
 
 	/**
 	 * The feature id for the '<em><b>Entry Count</b></em>' attribute.
@@ -1095,7 +1086,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 11;
+	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Count</b></em>' attribute.
@@ -1104,7 +1095,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 12;
+	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Rejected Count</b></em>' attribute.
@@ -1113,7 +1104,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 13;
+	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Journal Number</b></em>' attribute.
@@ -1122,7 +1113,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER = 14;
+	int COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Session</b></em>' reference.
@@ -1131,7 +1122,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SESSION = 15;
+	int COLLECTION_JOURNAL_PAGE__SESSION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Collection Center</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER = 15;
 
 	/**
 	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
@@ -1162,22 +1162,13 @@ public interface DairyPackage extends EPackage {
 	int ROUTE__ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROUTE__CODE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__NAME = 2;
+	int ROUTE__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Stops</b></em>' reference list.
@@ -1186,7 +1177,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__STOPS = 3;
+	int ROUTE__STOPS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1195,7 +1186,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__DESCRIPTION = 4;
+	int ROUTE__DESCRIPTION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUTE__VEHICLE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Route</em>' class.
@@ -3526,6 +3526,17 @@ public interface DairyPackage extends EPackage {
 	EReference getCollectionJournalPage_Session();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter <em>Collection Center</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Collection Center</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter()
+	 * @see #getCollectionJournalPage()
+	 * @generated
+	 */
+	EReference getCollectionJournalPage_CollectionCenter();
+
+	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3535,17 +3546,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCollectionJournalPage_Driver();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute <em>Route</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Route</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute()
-	 * @see #getCollectionJournalPage()
-	 * @generated
-	 */
-	EReference getCollectionJournalPage_Route();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}'.
@@ -3679,17 +3679,6 @@ public interface DairyPackage extends EPackage {
 	EReference getRoute_Stops();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getCode <em>Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Code</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getCode()
-	 * @see #getRoute()
-	 * @generated
-	 */
-	EAttribute getRoute_Code();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3699,6 +3688,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRoute_Description();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getVehicle <em>Vehicle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Vehicle</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getVehicle()
+	 * @see #getRoute()
+	 * @generated
+	 */
+	EReference getRoute_Vehicle();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Trip <em>Trip</em>}'.
@@ -5592,20 +5592,20 @@ public interface DairyPackage extends EPackage {
 		EReference COLLECTION_JOURNAL_PAGE__SESSION = eINSTANCE.getCollectionJournalPage_Session();
 
 		/**
+		 * The meta object literal for the '<em><b>Collection Center</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER = eINSTANCE.getCollectionJournalPage_CollectionCenter();
+
+		/**
 		 * The meta object literal for the '<em><b>Driver</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference COLLECTION_JOURNAL_PAGE__DRIVER = eINSTANCE.getCollectionJournalPage_Driver();
-
-		/**
-		 * The meta object literal for the '<em><b>Route</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COLLECTION_JOURNAL_PAGE__ROUTE = eINSTANCE.getCollectionJournalPage_Route();
 
 		/**
 		 * The meta object literal for the '<em><b>Vehicle</b></em>' reference feature.
@@ -5706,20 +5706,20 @@ public interface DairyPackage extends EPackage {
 		EReference ROUTE__STOPS = eINSTANCE.getRoute_Stops();
 
 		/**
-		 * The meta object literal for the '<em><b>Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROUTE__CODE = eINSTANCE.getRoute_Code();
-
-		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute ROUTE__DESCRIPTION = eINSTANCE.getRoute_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Vehicle</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROUTE__VEHICLE = eINSTANCE.getRoute_Vehicle();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl <em>Trip</em>}' class.

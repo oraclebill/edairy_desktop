@@ -65,7 +65,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 			"Status", "Phone", "Milk Collection", "Monthly Credit Sales", "Credit Balance" };
 
 	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
-			"defaultRoute.code", "status.name", "member.phoneNumber" }; // "account",
+			"defaultRoute.name", "status.name", "member.phoneNumber" }; // "account",
 																		// "account",
 	// "account" };
 

@@ -984,7 +984,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getCollectionJournalPage_JournalEntries() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(9);
+		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1020,6 +1020,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getCollectionJournalPage_Session() {
+		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionJournalPage_CollectionCenter() {
 		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -1037,7 +1046,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_Route() {
+	public EReference getCollectionJournalPage_Vehicle() {
 		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1046,17 +1055,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_Vehicle() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getCollectionJournalPage_DriverTotal() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1065,7 +1065,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getCollectionJournalPage_RecordTotal() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1074,7 +1074,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getCollectionJournalPage_Suspended() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1083,7 +1083,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getCollectionJournalPage_EntryCount() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1092,7 +1092,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getCollectionJournalPage_SuspendedCount() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1101,7 +1101,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getCollectionJournalPage_RejectedCount() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(13);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1110,7 +1110,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getCollectionJournalPage_JournalNumber() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1137,24 +1137,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getRoute_Name() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getRoute_Stops() {
-		return (EReference)routeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRoute_Code() {
 		return (EAttribute)routeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1163,8 +1145,26 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRoute_Stops() {
+		return (EReference)routeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getRoute_Description() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)routeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoute_Vehicle() {
+		return (EReference)routeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -2326,7 +2326,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__STATUS);
 		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__DRIVER);
-		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__ROUTE);
 		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__VEHICLE);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__RECORD_TOTAL);
@@ -2337,13 +2336,14 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
 		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER);
 		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__SESSION);
+		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER);
 
 		routeEClass = createEClass(ROUTE);
 		createEAttribute(routeEClass, ROUTE__ID);
-		createEAttribute(routeEClass, ROUTE__CODE);
 		createEAttribute(routeEClass, ROUTE__NAME);
 		createEReference(routeEClass, ROUTE__STOPS);
 		createEAttribute(routeEClass, ROUTE__DESCRIPTION);
+		createEReference(routeEClass, ROUTE__VEHICLE);
 
 		tripEClass = createEClass(TRIP);
 		createEReference(tripEClass, TRIP__COLLECTIONS);
@@ -2606,7 +2606,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionJournalPage_JournalDate(), ecorePackage.getEDate(), "journalDate", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_Status(), this.getJournalStatus(), "status", "NEW", 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalPage_Driver(), this.getEmployee(), null, "driver", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalPage_Route(), this.getRoute(), null, "route", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalPage_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_DriverTotal(), ecorePackage.getEBigDecimal(), "driverTotal", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -2617,13 +2616,14 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionJournalPage_RejectedCount(), ecorePackage.getEInt(), "rejectedCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalPage_JournalNumber(), ecorePackage.getEString(), "journalNumber", "", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalPage_Session(), this.getCollectionSession(), null, "session", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionJournalPage_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRoute_Code(), ecorePackage.getEString(), "code", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRoute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoute_Stops(), this.getDairyLocation(), this.getDairyLocation_Route(), "stops", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRoute_Description(), ecorePackage.getEString(), "description", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoute_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tripEClass, Trip.class, "Trip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTrip_Collections(), this.getCollectionJournalPage(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

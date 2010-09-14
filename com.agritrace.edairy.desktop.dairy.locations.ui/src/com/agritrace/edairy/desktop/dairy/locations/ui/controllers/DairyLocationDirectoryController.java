@@ -29,7 +29,8 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 
 @PermissionRequired(Permission.VIEW_DAIRY_LOCATIONS)
-public class DairyLocationDirectoryController extends BasicDirectoryController<DairyLocation> {
+public class DairyLocationDirectoryController extends
+		BasicDirectoryController<DairyLocation> {
 	private IMultipleChoiceRidget functions;
 	private IComboRidget routeTypeSearchCombo;
 	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
@@ -39,10 +40,11 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 
 	private final DairyRepository dairyRepo = DairyRepository.getInstance();
 	private final Dairy localDairy = dairyRepo.getLocalDairy();
+
 	@Override
 	protected void deleteEntity(DairyLocation deletableEntity) {
-		if(deletableEntity != null){
-			dairyRepo.deleteBranchLocation(deletableEntity);	
+		if (deletableEntity != null) {
+			dairyRepo.deleteBranchLocation(deletableEntity);
 		}
 	}
 
@@ -54,25 +56,30 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 		addTableColumn("Name", DairyPackage.Literals.DAIRY_LOCATION__NAME);
 		addTableColumn("Phone", DairyPackage.Literals.DAIRY_LOCATION__PHONE);
 		addTableColumn("Functions", DairyPackage.Literals.DAIRY_LOCATION__FUNCTIONS);
-		addTableColumn("Route", DairyPackage.Literals.DAIRY_LOCATION__ROUTE, new DairyLocationRouteFormatter());
+		addTableColumn("Code", DairyPackage.Literals.DAIRY_LOCATION__CODE);
+		addTableColumn("Transport Route", DairyPackage.Literals.DAIRY_LOCATION__ROUTE,
+				new DairyLocationRouteFormatter());
 		addTableColumn("Description", DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
 
 	}
 
 	@Override
 	protected void configureFilterRidgets() {
-		functions= getRidget(IMultipleChoiceRidget.class,
+		functions = getRidget(IMultipleChoiceRidget.class,
 				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
-		final IObservableList optionValues = new WritableList(Arrays.asList(DairyFunction.values()),
-				DairyFunction.class);
-		final IObservableList selectionValues = new WritableList(searchBean.getFunctionSearchValues(), DairyFunction.class);
+		final IObservableList optionValues = new WritableList(Arrays
+				.asList(DairyFunction.values()), DairyFunction.class);
+		final IObservableList selectionValues = new WritableList(searchBean
+				.getFunctionSearchValues(), DairyFunction.class);
 		functions.bindToModel(optionValues, selectionValues);
 		functions.updateFromModel();
 
 		//
-		routeTypeSearchCombo = getRidget(IComboRidget.class,DairyLocationUIConstants.RIDGET_ID_ROUTE);
-		routeTypeSearchCombo.bindToModel(new WritableList(dairyLocationRepo.getRoutes(), Route.class), Route.class, "getName",
-				BeansObservables.observeValue(searchBean,"routeSearchValue"));
+		routeTypeSearchCombo = getRidget(IComboRidget.class,
+				DairyLocationUIConstants.RIDGET_ID_ROUTE);
+		routeTypeSearchCombo.bindToModel(new WritableList(dairyLocationRepo
+				.getRoutes(), Route.class), Route.class, "getName",
+				BeansObservables.observeValue(searchBean, "routeSearchValue"));
 		routeTypeSearchCombo.updateFromModel();
 
 	}
@@ -84,7 +91,8 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	 */
 	@Override
 	protected DairyLocation createNewModel() {
-		final DairyLocation dairyLocation = DairyFactory.eINSTANCE.createDairyLocation();
+		final DairyLocation dairyLocation = DairyFactory.eINSTANCE
+				.createDairyLocation();
 		EMFUtil.populate(dairyLocation);
 		return dairyLocation;
 	}
@@ -92,21 +100,26 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	@Override
 	protected List<DairyLocation> getFilteredResult() {
 		final List<DairyLocation> filtered = new ArrayList<DairyLocation>();
-		final List<DairyLocation> allLocations =  dairyLocationRepo.all();
+		final List<DairyLocation> allLocations = dairyLocationRepo.all();
 		System.err.println("allLocations: " + allLocations);
 		for (final DairyLocation c : allLocations) {
-			String cCode = (c.getRoute() == null)?"":c.getRoute().getCode();
-			if (searchBean.getRouteSearchValue() == null || MatchUtil.matchEquals(searchBean.getRouteSearchValue().getCode(), cCode)){
-				List<DairyFunction> filterFunctions = searchBean.getFunctionSearchValues();
+			String cName = (c.getRoute() == null) ? "" : c.getRoute().getName();
+			if (searchBean.getRouteSearchValue() == null
+					|| MatchUtil.matchEquals(searchBean.getRouteSearchValue().getName(), cName)) {
+				
+				List<DairyFunction> filterFunctions = searchBean
+						.getFunctionSearchValues();
 				List<DairyFunction> functions = c.getFunctions();
+				
 				boolean found = true;
-				for(DairyFunction f : filterFunctions){
-					if(!functions.contains(f)){
+				for (DairyFunction f : filterFunctions) {
+					if (!functions.contains(f)) {
 						found = false;
 						break;
 					}
 				}
-				if(found){
+				
+				if (found) {
 					filtered.add(c);
 				}
 			}
@@ -118,7 +131,8 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	@Override
 	protected RecordDialog<DairyLocation> getRecordDialog(Shell shell) {
 		DairyLocationEditDialog dialog = new DairyLocationEditDialog(shell);
-		dialog.getController().setContext("routes", dairyLocationRepo.getRoutes());
+		dialog.getController().setContext("routes",
+				dairyLocationRepo.getRoutes());
 		dialog.setTitle("Edit Dairy Location");
 		return dialog;
 	}
@@ -126,7 +140,8 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 	@Override
 	protected void resetFilterConditions() {
 		functions.setSelection(null);
-		routeTypeSearchCombo.setSelection(routeTypeSearchCombo.getEmptySelectionItem());
+		routeTypeSearchCombo.setSelection(routeTypeSearchCombo
+				.getEmptySelectionItem());
 	}
 
 }

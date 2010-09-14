@@ -56,7 +56,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
 		for (Route route : dairy.getRoutes()) {
-			routeCache.put(route.getCode(), route);
+			routeCache.put(route.getName(), route);
 		}
 		for (Membership member : dairy.getMemberships()) {
 			memberCache.put(member.getMemberNumber(), member);

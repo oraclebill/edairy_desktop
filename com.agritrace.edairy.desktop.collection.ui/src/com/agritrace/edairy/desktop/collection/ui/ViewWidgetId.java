@@ -129,6 +129,7 @@ public class ViewWidgetId {
 	public static final String quantityText = "quantityText";
 	public static final String rejectedCombo = "Rejected";
 	public static final String routeCombo = "routeCombo";
+	public static final String collectionCenterCombo = "routeCombo";
 	public static final String saveButton = "saveButton";
 	public static final String SECTION_TXT = "Section";
 	public static final String sessionCombo = "sessionCombo";

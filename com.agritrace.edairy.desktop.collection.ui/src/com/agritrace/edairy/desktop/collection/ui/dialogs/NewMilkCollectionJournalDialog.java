@@ -38,6 +38,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
@@ -45,6 +46,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
@@ -53,7 +55,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private CCombo driverCombo;
 	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
 
-	private CCombo routeCombo;
+	private CCombo centerCombo;
 	private CCombo sessionCombo;
 	private CCombo vehicleCombo;
 	private List<Employee> drivers;
@@ -75,7 +77,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		
 		// create/configure ridgets
 		final IDateTimeRidget dateTime = (IDateTimeRidget) SwtRidgetFactory.createRidget(datePicker);
-		final IComboRidget route = (IComboRidget) SwtRidgetFactory.createRidget(routeCombo);
+		final IComboRidget center = (IComboRidget) SwtRidgetFactory.createRidget(centerCombo);
 		final IComboRidget vehicle = (IComboRidget) SwtRidgetFactory.createRidget(vehicleCombo);
 		final IComboRidget session = (IComboRidget) SwtRidgetFactory.createRidget(sessionCombo);
 		final IComboRidget driver = (IComboRidget) SwtRidgetFactory.createRidget(driverCombo);
@@ -86,8 +88,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				final boolean isValid = 
-					newJournalPage.getRoute() != null 
-					&& newJournalPage.getSession() != null
+					/* newJournalPage.getRoute() != null 
+					&& */ newJournalPage.getSession() != null
 					&& newJournalPage.getDriver() != null
 					&& newJournalPage.getJournalDate() != null
 					&& newJournalPage.getVehicle() != null;
@@ -130,9 +132,9 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.addPropertyChangeListener(fileNumberUpdateListener);
 		dateTime.addPropertyChangeListener(validationListener);
 
-		route.setMandatory(true);
-		route.addPropertyChangeListener(fileNumberUpdateListener);
-		route.addPropertyChangeListener(validationListener);
+		center.setMandatory(true);
+		center.addPropertyChangeListener(fileNumberUpdateListener);
+		center.addPropertyChangeListener(validationListener);
 
 
 		vehicle.setMandatory(true);
@@ -152,9 +154,12 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Dairy localDairy = dairyRepository.getLocalDairy();
 
 		try {
-			route.bindToModel(localDairy, "routes", Route.class, "getCode", newJournalPage,
-					DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ROUTE.getName());
-			route.setSelection(localDairy.getRoutes().get(0));
+			final IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
+			List<DairyLocation> centers = repo.allCollectionCenters();
+			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode", 
+					PojoObservables.observeValue( newJournalPage,
+							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER.getName()));
+			center.setSelection(localDairy.getRoutes().get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -174,10 +179,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		try {
 			List<CollectionSession> sessions = RepositoryFactory.getRepository(CollectionSession.class).all();
 			
-			session.bindToModel(
-					new WritableList(sessions, CollectionSession.class),
-					CollectionSession.class,
-					"getCode",
+			session.bindToModel(new WritableList(sessions, CollectionSession.class),
+					CollectionSession.class, "getCode",
 					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION.getName()));
 		} catch (Exception e) {
@@ -202,27 +205,23 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		newJournalPage.setJournalDate(new Date());
 		
 		dateTime.updateFromModel();
-		route.updateFromModel();
+		center.updateFromModel();
 		vehicle.updateFromModel();
 		session.updateFromModel();
 		driver.updateFromModel();
 
-		/*
-		route.addSelectionListener(new ISelectionListener() {
+		center.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
-				vehicles.clear();
-				newJournalPage.setVehicle(null);
+				DairyLocation loc = newJournalPage.getCollectionCenter();
+				Route route = loc.getRoute();
 				
-				for (Vehicle v: localDairy.getVehicles()) {
-					
+				if (route != null && route.getVehicle() != null) {
+					newJournalPage.setVehicle(route.getVehicle());
+					vehicle.updateFromModel();
 				}
-				
-				vehicle.updateFromModel();
-				
 			}
 		});
-		*/
 		
 		vehicle.addSelectionListener(new ISelectionListener() {
 			@Override
@@ -287,7 +286,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		final Composite buffer = (Composite) super.createDialogArea(parent);
 		final Composite workArea = UIControlsFactory.createComposite(buffer);
-		GridLayoutFactory.swtDefaults().numColumns(2).spacing(8, 8).generateLayout(workArea);
+		GridLayoutFactory.swtDefaults().numColumns(2).spacing(8, 8).margins(6, 6).generateLayout(workArea);
 		workArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		final int widgetWidth = 250;
@@ -306,9 +305,9 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(sessionCombo);
 			}
 			{
-				UIControlsFactory.createLabel(panel, "Transport Route");
-				routeCombo = UIControlsFactory.createCCombo(panel, ViewConstants.ROUTE);
-				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(routeCombo);
+				UIControlsFactory.createLabel(panel, "Collection Center");
+				centerCombo = UIControlsFactory.createCCombo(panel, ViewConstants.COLLECTION_CENTER);
+				GridDataFactory.swtDefaults().hint(widgetWidth, -1).applyTo(centerCombo);
 			}
 			// {
 			// UIControlsFactory.createLabel(panel, "Reference Number");

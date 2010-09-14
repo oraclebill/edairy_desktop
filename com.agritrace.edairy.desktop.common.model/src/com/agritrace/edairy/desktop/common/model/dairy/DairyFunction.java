@@ -30,7 +30,7 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MILK_COLLECTION(0, "MilkCollection", "Milk Collection"),
+	MILK_COLLECTION(0, "MilkCollection", "Collection Center"),
 
 	/**
 	 * The '<em><b>Milk Storage</b></em>' literal object.
@@ -81,7 +81,7 @@ public enum DairyFunction implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MILK_COLLECTION
-	 * @model name="MilkCollection" literal="Milk Collection"
+	 * @model name="MilkCollection" literal="Collection Center"
 	 * @generated
 	 * @ordered
 	 */

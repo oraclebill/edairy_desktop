@@ -1,19 +1,18 @@
 package com.agritrace.edairy.desktop.collection.ui.beans;
 
 import java.util.Date;
-import java.util.List;
 
 import org.eclipse.riena.beans.common.AbstractBean;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 
 public class MilkCollectionLogFilterBean extends AbstractBean {
 	public static final String END_DATE = "END_DATE";
 	public static final String MPR_MISSING = "MPR_MISSING";
 	public static final String REJECTED = "REJECTED";
-	public static final String ROUTE = "ROUTE";
+	public static final String COLLECTION_CENTER = "COLLECTION_CENTER";
 	public static final String START_DATE = "START_DATE";
 	public static final String SUSPENDED = "SUSPENDED";
 	public static final String STATUS = "STATUS";
@@ -24,23 +23,18 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	private Date endDate;
 	private boolean mprMissing;
 	private boolean rejected;
-	private Route route;
-	private List<Route> routes;
 	private Date startDate;
 	private boolean suspended;
 	private JournalStatus status;
 	private CollectionSession session;
+	private DairyLocation collectionCenter;
 
 	public Date getEndDate() {
 		return endDate;
 	}
 
-	public Route getRoute() {
-		return route;
-	}
-
-	public List<Route> getRoutes() {
-		return this.routes;
+	public DairyLocation getCollectionCenter() {
+		return collectionCenter;
 	}
 
 	public Date getStartDate() {
@@ -85,16 +79,10 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 		firePropertyChanged(REJECTED, oldVal, rejected);
 	}
 
-	public void setRoute(Route route) {
-		final Object oldVal = getRoute();
-		this.route = route;
-		firePropertyChanged(ROUTE, oldVal, route);
-	}
-
-	public void setRoutes(List<Route> routes) {
-		final Object oldVal = getRoutes();
-		this.routes = routes;
-		firePropertyChanged(ROUTES, oldVal, rejected);
+	public void setCollectionCenter(DairyLocation center) {
+		final Object oldVal = getCollectionCenter();
+		this.collectionCenter = center;
+		firePropertyChanged(COLLECTION_CENTER, oldVal, center);
 	}
 
 	public void setStartDate(Date startDate) {

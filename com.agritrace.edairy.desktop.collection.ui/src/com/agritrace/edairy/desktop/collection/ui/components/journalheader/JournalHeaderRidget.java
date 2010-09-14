@@ -36,7 +36,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	// top panel ridgets
 	//
 	private ITextRidget dateRidget;
-	private ITextRidget routeRidget;
+	private ITextRidget centerRidget;
 	private ITextRidget sessionRidget;
 	private ITextRidget vehicleRidget;
 	private ITextRidget driverRidget;
@@ -93,9 +93,9 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		dateRidget.setOutputOnly(true);
 		dateRidget.setFocusable(false);
 
-		routeRidget = getRidget(ITextRidget.class, ViewWidgetId.routeCombo);
-		routeRidget.setOutputOnly(true);
-		routeRidget.setFocusable(false);
+		centerRidget = getRidget(ITextRidget.class, ViewWidgetId.collectionCenterCombo);
+		centerRidget.setOutputOnly(true);
+		centerRidget.setFocusable(false);
 
 		sessionRidget = getRidget(ITextRidget.class, ViewWidgetId.sessionCombo);
 		sessionRidget.setOutputOnly(true);
@@ -156,7 +156,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	@Override
 	public void bindToModel(CollectionJournalPage newModel) {
 		dateRidget.bindToModel(newModel, "journalDate");
-		routeRidget.bindToModel(newModel, "route.code");
+		centerRidget.bindToModel(newModel, "collectionCenter.code");
 		sessionRidget.bindToModel(newModel, "session.code");
 		vehicleRidget.bindToModel(newModel, "vehicle.registrationNumber");
 		driverRidget.bindToModel(newModel, "driver.familyName");

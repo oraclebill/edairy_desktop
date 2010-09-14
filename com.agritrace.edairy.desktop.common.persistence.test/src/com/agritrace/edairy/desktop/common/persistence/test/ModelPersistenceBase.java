@@ -150,7 +150,7 @@ public class ModelPersistenceBase {
 		Formatter formatter = new Formatter();
 		formatter.format("Member: %s, Account: %s, Farmer: %s, Route: %s\n",
 				membership.getApplicationDate(), a.getEstablished(),
-				f.getFamilyName(), r.getCode());
+				f.getFamilyName(), r.getName());
 		if (count % 100 == 0)
 			System.out.print('.');
 		if (count % 800 == 0)

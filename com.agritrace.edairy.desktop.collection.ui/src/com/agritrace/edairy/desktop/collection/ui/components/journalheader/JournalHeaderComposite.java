@@ -31,7 +31,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	private static final String JOURNAL_TOTAL_LABEL = "Driver Total:";
 	private static final String MILK_BOOK_GROUP_TITLE = "Journal Page";
 	private static final String MILK_JOURNAL_BOOK_GROUP_TITLE = "Journal Book / Collection Details";
-	private static final String ROUTE_LABEL = "Transport Route:";
+	private static final String COLLECTION_CENTER_LABEL = "Collection Center:";
 	private static final String SECTION_LABEL = "Session:";
 
 	private static final String VEHICLE_LABEL = "Truck:";
@@ -90,13 +90,13 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		final Label padComposite = FieldUtil.createLabel(group, "");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1).applyTo(padComposite);
 
-		final Label routeLabel = FieldUtil.createLabel(group, ROUTE_LABEL);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).hint(MINIMUM_LABEL_WIDTH, -1).applyTo(routeLabel);
+		final Label centerLabel = FieldUtil.createLabel(group, COLLECTION_CENTER_LABEL);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING).minSize(MINIMUM_LABEL_WIDTH, -1).applyTo(centerLabel);
 
 		// Combo combo = new Combo(group, SWT.BORDER|SWT.DROP_DOWN);
 		final Control combo = UIControlsFactory.createText(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo);
-		addUIControl(combo, ViewWidgetId.routeCombo);
+		addUIControl(combo, ViewWidgetId.collectionCenterCombo);
 		combo.addTraverseListener(traverseListener);
 
 		final Label sectionLabel = FieldUtil.createLabel(group, SECTION_LABEL);

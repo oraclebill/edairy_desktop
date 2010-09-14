@@ -132,7 +132,7 @@ public class MemberDirectoryController extends SubModuleController {
 			"Status", "Phone", "Milk Collection", "Monthly Credit Sales", "Credit Balance" };
 
 	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
-			"defaultRoute.code", "status", "member.phoneNumber", "account", "account", "account" };
+			"defaultRoute.name", "status", "member.phoneNumber", "account", "account", "account" };
 
 	private final ILabelRidget[] searchLabels;
 	private ITextRidget searchText;

@@ -126,8 +126,8 @@ final class ScaleImportAction implements IActionListener {
 					Membership memberInfo = getMemberById(scaleRecord.getMemberNumber());
 					if (memberInfo != null) {
 						importRecord.setValidatedMember(memberInfo);
-						importRecord.setOffRoute(memberInfo.getDefaultRoute() != journalPage.getRoute()); // TODO:
-																											// calculate
+						//importRecord.setOffRoute(memberInfo.getDefaultRoute() != journalPage.getRoute()); // TODO:
+						//																					// calculate
 						importRecord.setFrom(null); // TODO: calculate (how?)
 						importRecord.setFarmContainer(null); // don't seem to
 						// get one fromm
@@ -211,8 +211,8 @@ final class ScaleImportAction implements IActionListener {
 			
 			for (CollectionJournalPage page : pageMap.values()) {
 				allEntries += page.getEntryCount();
-				msgList.add(++i, String.format("- Driver name: %s, route name: %s, journal date: %tF",
-						MemberUtil.formattedMemberName(page.getDriver()), page.getRoute().getName(), page.getJournalDate()));
+				msgList.add(++i, String.format("- Driver name: %s, journal date: %tF",
+						MemberUtil.formattedMemberName(page.getDriver()), page.getJournalDate()));
 			}
 		}
 
@@ -389,10 +389,10 @@ final class ScaleImportAction implements IActionListener {
 			page.setDriver(getDriverByCode(record.getOperatorCode()));
 			page.setJournalDate(record.getValidDate());
 			page.setSession(getSessionForCode(record.getSessionCode()));
-			page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
+			// page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
 			
 			if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
-					|| page.getRoute() == null) {
+					/* || page.getRoute() == null */) {
 				// TODO: add suspension reason
 				page.setSuspended(true);
 				this.milkCollectionLogController.log(LogService.LOG_INFO, "Suspending " + key
@@ -406,6 +406,8 @@ final class ScaleImportAction implements IActionListener {
 	}
 
 	private Route getRouteForRouteCode(String routeNumber) {
+		// TODO: Get feedback
+		/*
 		if (routeNumber != null) {
 			if (localDairy == null)
 				localDairy = dairyRepo.getLocalDairy();
@@ -414,6 +416,7 @@ final class ScaleImportAction implements IActionListener {
 					return route;
 			}
 		}
+		*/
 		return null;
 	}
 

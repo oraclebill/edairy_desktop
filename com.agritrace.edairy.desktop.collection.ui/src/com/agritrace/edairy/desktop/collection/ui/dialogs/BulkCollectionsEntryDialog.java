@@ -88,7 +88,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 			journal.setJournalDate(new Date());
 			// journal.setSession(Session.EARLY_MORNING);
-			journal.setRoute(dairy.getRoutes().get(0));
+			// journal.setRoute(dairy.getRoutes().get(0));
 			journal.setDriver(dairy.getEmployees().get(0));
 
 			journal.setReferenceNumber("r001");

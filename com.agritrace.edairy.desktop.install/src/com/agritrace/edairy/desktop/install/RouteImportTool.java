@@ -27,17 +27,16 @@ import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 public class RouteImportTool extends AbstractImportTool {
 
 	public static final int BASE = 0;
-	public static final int ROUTE_CODE = BASE;
-	public static final int ROUTE_NAME = BASE + 1;
-	public static final int ROUTE_DESCRIPTION = BASE + 2;
+	public static final int ROUTE_NAME = BASE;
+	public static final int ROUTE_DESCRIPTION = BASE + 1;
 
 	private static final Entry[] fieldMap = {
-			new Entry(ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE),
+			// new Entry(ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE),
 			new Entry(ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME),
 			new Entry(ROUTE_DESCRIPTION,
 					DairyPackage.Literals.ROUTE__DESCRIPTION), };
 
-	private static final int[] mandatoryFields = { ROUTE_CODE, ROUTE_NAME };
+	private static final int[] mandatoryFields = { ROUTE_NAME };
 
 	private Collection<Route> routes;
 	private Map<String, List<String[]>> failedRecords;
@@ -56,26 +55,29 @@ public class RouteImportTool extends AbstractImportTool {
 		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
 		routeCache = new HashMap<String, Object>();
 		for (Route route : dairy.getRoutes()) {
-			routeCache.put(route.getCode(), route);
+			routeCache.put(route.getName(), route);
 		}
 		
 	}
 	
 	@Override
 	protected String[] getExpectedHeaders() {
-		return new String[] { "code", "name", null, null, "scale", null };
+		return new String[] { "name", null, null, "scale", null };
 	}
 
 	protected void validateRecord(String[] values) {
 		super.validateRecord(values);
-		Object route = routeCache.get(values[ROUTE_CODE]);
+		Object route = routeCache.get(values[ROUTE_NAME]);
+		
 		if (route instanceof Route) {
 			throw new ValidationException("Transport Route exists in database.");
 		}
+		
 		if (route instanceof String[]) {
 			throw new ValidationException("Duplicate route during import.");
 		}
-		routeCache.put(values[ROUTE_CODE], values);
+		
+		routeCache.put(values[ROUTE_NAME], values);
 	}
 	
 	protected int[] getMandatoryFieldIndexes() {

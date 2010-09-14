@@ -147,7 +147,6 @@
         eType="#//JournalStatus" defaultValueLiteral="NEW"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"
         eType="#//Employee"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
@@ -165,6 +164,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//CollectionSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionCenter" eType="#//DairyLocation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JournalStatus">
     <eLiterals name="NEW"/>
@@ -184,11 +184,11 @@
         <details key="appinfo" value="@Id&#xA;@GeneratedValue"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stops" upperBound="-1"
         eType="#//DairyLocation" eOpposite="#//DairyLocation/route"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trip">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collections" lowerBound="1"
@@ -364,7 +364,7 @@
     <eLiterals name="Other" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DairyFunction">
-    <eLiterals name="MilkCollection" literal="Milk Collection"/>
+    <eLiterals name="MilkCollection" literal="Collection Center"/>
     <eLiterals name="MilkStorage" value="1" literal="Milk Storage"/>
     <eLiterals name="StoreSales" value="2" literal="Store Sales"/>
     <eLiterals name="Warehouse" value="3"/>

@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getName <em>Name</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getStops <em>Stops</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getVehicle <em>Vehicle</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,32 +104,6 @@ public interface Route extends EObject {
 	EList<DairyLocation> getStops();
 
 	/**
-	 * Returns the value of the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Code</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Code</em>' attribute.
-	 * @see #setCode(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Code()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getCode();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getCode <em>Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Code</em>' attribute.
-	 * @see #getCode()
-	 * @generated
-	 */
-	void setCode(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -154,5 +128,31 @@ public interface Route extends EObject {
 	 * @generated
 	 */
 	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Vehicle</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Vehicle</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Vehicle</em>' reference.
+	 * @see #setVehicle(Vehicle)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Vehicle()
+	 * @model
+	 * @generated
+	 */
+	Vehicle getVehicle();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getVehicle <em>Vehicle</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Vehicle</em>' reference.
+	 * @see #getVehicle()
+	 * @generated
+	 */
+	void setVehicle(Vehicle value);
 
 } // Route

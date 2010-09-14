@@ -127,7 +127,7 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 		long count = 0;
 		for (Membership member : members) {
 			EList<BalancePoint> sum = member.getAccount().getBalances();
-			String code = member.getDefaultRoute().getCode();
+			String code = member.getDefaultRoute().getName();
 			code += code;
 			if (++count % 100 == 0)
 				System.out.print('.');

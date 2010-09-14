@@ -428,17 +428,6 @@ public class DairyUtil {
 		return referenceAnimalTYpe;
 	}
 
-	public static Route createRoute(long id, String name, String code, String description) {
-		final Route route = DairyFactory.eINSTANCE.createRoute();
-
-		route.setId(id);
-		route.setName(name);
-		route.setCode(code);
-		route.setDescription(description);
-
-		return route;
-	}
-
 	public static Supplier createSupplier(long id, String companyName, String legalName, VendorStatus status,
 			Date expirationDate) throws ParseException {
 		return createSupplier(id, companyName, legalName, status, expirationDate, NO_CATEGORIES, NO_PERSONS,

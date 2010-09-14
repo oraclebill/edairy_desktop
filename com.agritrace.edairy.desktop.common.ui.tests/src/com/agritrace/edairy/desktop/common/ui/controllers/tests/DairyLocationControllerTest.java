@@ -57,7 +57,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 		final Route route = DairyFactory.eINSTANCE.createRoute();
 		route.setName("testroutename");
 		route.setDescription("testroutedesc");
-		route.setCode("BLUE");
+		// route.setCode("BLUE");
 
 		dairyLocation.setRoute(route);
 		final Location location = ModelFactory.eINSTANCE.createLocation();

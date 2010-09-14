@@ -10,6 +10,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -23,7 +24,7 @@ public class MilkCollectionJournalLineRepository extends HibernateRepository<Col
 		return CollectionJournalLine.class;
 	}
 
-	public int countByMemberRouteDate(final Membership member, final Route route, final Date date) {
+	public int countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date) {
 		SessionRunnable<Integer> runnable = new SessionRunnable<Integer>() {
 			@Override
 			public void run(Session session) {
@@ -31,7 +32,7 @@ public class MilkCollectionJournalLineRepository extends HibernateRepository<Col
 				crit.add(Restrictions.eq("validatedMember", member));
 				
 				Criteria subcrit = crit.createCriteria("collectionJournal");
-				subcrit.add(Restrictions.eq("route", route));
+				subcrit.add(Restrictions.eq("collectionCenter", center));
 				
 				Calendar cld = Calendar.getInstance();
 				cld.setTime(date);

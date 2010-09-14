@@ -30,9 +30,9 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.SessionEditDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
@@ -41,6 +41,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 @PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
@@ -100,7 +101,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	private IDateTimeRidget startDate;
 	private IDateTimeRidget endDate;
-	private IComboRidget route;
+	private IComboRidget collectionCenter;
 	private IComboRidget status;
 	private IComboRidget session;
 	private IToggleButtonRidget suspended;
@@ -111,6 +112,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final List<CollectionJournalPage> allJournals = DairyRepository.getInstance().allCollectionJournalPages();
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
+	private List<DairyLocation> collectionCenters;
 
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
@@ -119,7 +121,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		setRepository(journalRepo);
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
-		addTableColumn("Transport Route", "route.code", String.class);
+		addTableColumn("Collection Center", "collectionCenter.code", String.class);
 		addTableColumn("Session", "session.code", String.class);
 		addTableColumn("Status", "status.name", String.class);
 		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());
@@ -128,10 +130,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
 
-		List<Route> routes = new ArrayList<Route>();
-		routes.add(null); // First, empty entry - means "show all"
-		routes.addAll(DairyRepository.getInstance().allRoutes());
-		filterBean.setRoutes(routes);
+		final IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
+		collectionCenters = new ArrayList<DairyLocation>();
+		collectionCenters.add(null); // First, empty entry - means "show all"
+		collectionCenters.addAll(repo.allCollectionCenters());
 	}
 
 	@Override
@@ -151,7 +153,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	protected void configureFilterRidgets() {
 		startDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
 		endDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
-		route = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_ROUTE_COMBO);
+		collectionCenter = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_CENTER_COMBO);
 		status = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_STATUS_COMBO);
 		session = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_SESSION_COMBO);
 		mprMissing = getRidget(IToggleButtonRidget.class, ViewConstants.COLLECTION_FILTER_MPR_MISSING_CHK);
@@ -161,8 +163,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		startDate.bindToModel(filterBean, "startDate");
 		endDate.bindToModel(filterBean, "endDate");
 
-		route.bindToModel(new WritableList(filterBean.getRoutes(), Route.class), Route.class,
-				"getCode", BeansObservables.observeValue(filterBean, "route"));
+		collectionCenter.bindToModel(new WritableList(collectionCenters, DairyLocation.class), DairyLocation.class,
+				"getCode", BeansObservables.observeValue(filterBean, "collectionCenter"));
 
 		List<JournalStatus> statuses = new ArrayList<JournalStatus>();
 		statuses.add(null); // Do not filter by status
@@ -210,8 +212,9 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				return false;
 		}
 		
-		if (bean.getRoute() != null && !cj.getRoute().getId().equals(bean.getRoute().getId()))
-			return false;
+		if (bean.getCollectionCenter() != null && (cj.getCollectionCenter() == null ||
+				cj.getCollectionCenter().getId() != bean.getCollectionCenter().getId()))
+		 	return false;
 		
 		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus())
 			return false;
@@ -304,7 +307,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		cal = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
 		startDate.setDate(cal.getTime());
 		endDate.setDate(new Date());
-		route.setSelection(null);
+		collectionCenter.setSelection(null);
 		status.setSelection(null);
 		session.setSelection(null);
 		mprMissing.setSelected(false);

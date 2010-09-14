@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
 
 /**
@@ -43,6 +45,19 @@ public abstract class RepositoryFactory {
 			return repo;
 		}
 	}
+	
+	public static <T extends IRepository<?>> T getRegisteredRepository(final Class<T> klass) {
+		synchronized (repositories) {
+			for (Object repo: repositories.values()) {
+				if (klass.isInstance(repo)) {
+					return klass.cast(repo);
+				}
+			}
+		}
+		
+		// In a correct program we should never reach this
+		throw new AssertionError();
+	}
 
 	/**
 	 * 
@@ -78,6 +93,7 @@ public abstract class RepositoryFactory {
 //		addRepository(Membership.class, new MembershipRepository());
 //		addRepository(Dairy.class, DairyRepository.getInstance());
 		addRepository(Employee.class, new EmployeeRepository());
+		addRepository(DairyLocation.class, new DairyLocationRepository());
 	}
 	
 	/**

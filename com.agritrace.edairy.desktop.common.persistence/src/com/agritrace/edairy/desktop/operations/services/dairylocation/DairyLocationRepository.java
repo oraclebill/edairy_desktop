@@ -2,15 +2,17 @@ package com.agritrace.edairy.desktop.operations.services.dairylocation;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 
-public class DairyLocationRepository extends HibernateRepository<DairyLocation> {
+public class DairyLocationRepository extends HibernateRepository<DairyLocation> implements IDairyLocationRepository {
 
 	class RoutesQuery extends SessionRunnable<Object> {
 		List<Route> routes;
@@ -26,8 +28,22 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	}
 
 	@Override
-	public List<DairyLocation> all() {
-		return super.all();
+	public final List<DairyLocation> allCollectionCenters() {
+		final SessionRunnable<List<DairyLocation>> runnable = new SessionRunnable<List<DairyLocation>>() {
+			@Override
+			public void run(final Session session) {
+				final Query query = session.createQuery(
+						"SELECT DISTINCT dl FROM DairyLocation dl LEFT JOIN dl.functions func WHERE func = :func");
+				query.setParameter("func", DairyFunction.MILK_COLLECTION);
+				
+				@SuppressWarnings("unchecked")
+				final List<DairyLocation> result = query.list();
+				setResult(result);
+			}
+		};
+		
+		runWithTransaction(runnable);
+		return runnable.getResult();
 	}
 
 	

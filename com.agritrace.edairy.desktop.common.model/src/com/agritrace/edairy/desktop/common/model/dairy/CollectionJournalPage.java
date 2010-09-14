@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute <em>Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}</li>
@@ -38,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter <em>Collection Center</em>}</li>
  * </ul>
  * </p>
  *
@@ -199,6 +199,32 @@ public interface CollectionJournalPage extends EObject {
 	void setSession(CollectionSession value);
 
 	/**
+	 * Returns the value of the '<em><b>Collection Center</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Collection Center</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Collection Center</em>' reference.
+	 * @see #setCollectionCenter(DairyLocation)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_CollectionCenter()
+	 * @model
+	 * @generated
+	 */
+	DairyLocation getCollectionCenter();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter <em>Collection Center</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Collection Center</em>' reference.
+	 * @see #getCollectionCenter()
+	 * @generated
+	 */
+	void setCollectionCenter(DairyLocation value);
+
+	/**
 	 * Returns the value of the '<em><b>Driver</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -223,32 +249,6 @@ public interface CollectionJournalPage extends EObject {
 	 * @generated
 	 */
 	void setDriver(Employee value);
-
-	/**
-	 * Returns the value of the '<em><b>Route</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Route</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Route</em>' reference.
-	 * @see #setRoute(Route)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Route()
-	 * @model required="true"
-	 * @generated
-	 */
-	Route getRoute();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRoute <em>Route</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Route</em>' reference.
-	 * @see #getRoute()
-	 * @generated
-	 */
-	void setRoute(Route value);
 
 	/**
 	 * Returns the value of the '<em><b>Vehicle</b></em>' reference.

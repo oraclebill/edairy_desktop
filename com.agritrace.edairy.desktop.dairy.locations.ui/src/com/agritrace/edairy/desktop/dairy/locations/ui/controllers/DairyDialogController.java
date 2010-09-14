@@ -8,6 +8,8 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -41,6 +43,9 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_NAME, DairyPackage.Literals.DAIRY_LOCATION__NAME);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DESCRIPTION, DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
+		addTextMap(DairyLocationUIConstants.RIDGET_ID_CODE, DairyPackage.Literals.DAIRY_LOCATION__CODE);
+		
+		final ITextRidget txtCode = getRidget(ITextRidget.class, DairyLocationUIConstants.RIDGET_ID_CODE);
 		
 		//functions
 		functions = getRidget(IMultipleChoiceRidget.class,DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
@@ -48,9 +53,17 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 				DairyFunction.class);
 		final IObservableList selectionValues = new WritableList(editLocation.getFunctions(), DairyFunction.class);
 		functions.bindToModel(optionValues, selectionValues);
+
+		functions.addSelectionListener(new ISelectionListener() {
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				txtCode.setMandatory(editLocation.getFunctions().contains(DairyFunction.MILK_COLLECTION));
+			}
+		});
+		
 		functions.updateFromModel();
 		
-		addTextMap(DairyLocationUIConstants.RIDGET_ID_DATEOPENED,DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED);
+		addTextMap(DairyLocationUIConstants.RIDGET_ID_DATEOPENED, DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED);
 		addComboMap(DairyLocationUIConstants.RIDGET_ID_ROUTE, getRoutes(), "getName", DairyPackage.Literals.DAIRY_LOCATION__ROUTE);
 
 		// Configure address group
