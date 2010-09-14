@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.services.customer;
+package com.agritrace.edairy.desktop.internal.operations.services.customer;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.operations.services.customer.ICustomerRepository;
 
 public class CustomerRepository extends HibernateRepository<Customer> implements ICustomerRepository {
 

@@ -81,4 +81,7 @@ public interface IDairyRepository {
 	
 	void deleteRoute(final Route object);
 
+	void save();
+
+	List<CollectionJournalPage> allCollectionJournalPages();
 }

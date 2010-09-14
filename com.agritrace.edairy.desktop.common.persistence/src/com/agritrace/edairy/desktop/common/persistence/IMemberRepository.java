@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.common.persistence;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 
 public interface IMemberRepository {
@@ -26,6 +27,10 @@ public interface IMemberRepository {
 	public void delete(Membership selectedMember);
 
 	public void saveNew(Membership selectedMember);
+
+	public List<Account> allAccounts();
+
+	public Account findAccountByMemberNo(String memberNo);
 
 	// /**
 	// * Return a list of all farms owned by members of the specified dairy.

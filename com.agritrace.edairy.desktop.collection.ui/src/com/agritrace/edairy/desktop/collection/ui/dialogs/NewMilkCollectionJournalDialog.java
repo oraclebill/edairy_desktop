@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
@@ -44,13 +45,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
-	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
 	private DateTime datePicker;
 	private CCombo driverCombo;
 	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();

@@ -26,12 +26,12 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
-import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -64,7 +64,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
 
 	public ContainerListViewController() {
-		farmRepository = new FarmRepository();
+		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
 		setEClass(TrackingPackage.Literals.CONTAINER);
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);

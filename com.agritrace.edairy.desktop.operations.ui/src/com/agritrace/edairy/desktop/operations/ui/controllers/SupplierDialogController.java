@@ -9,8 +9,8 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.ridgets.IListRidget;
-import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;

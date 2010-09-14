@@ -26,14 +26,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequir
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 @PermissionRequired(Permission.VIEW_MILK_DELIVERIES)
 public class MilkDeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
 
 	private IComboRidget customerRidget;
-	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 
 	private IDateTimeRidget endDateRidget;
 	private DeliveryJournalFilterBean filterBean = null;

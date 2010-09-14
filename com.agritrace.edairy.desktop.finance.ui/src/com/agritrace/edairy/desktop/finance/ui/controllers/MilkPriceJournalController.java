@@ -31,7 +31,6 @@ import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidge
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.MilkPriceEditDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 @PermissionRequired(Permission.VIEW_MILK_PRICES)
@@ -95,7 +94,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 		}
 	}
 	
-	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private final FilterBean filterBean = new FilterBean();
 	private ILabelRidget currentPriceLabel;
 	private IDateRangeRidget dateRange;
@@ -224,7 +223,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 
 	@Override
 	protected void createEntity(MilkPrice newEntity) {
-		DairyRepository.getInstance().getLocalDairy().getPriceHistory().add(newEntity);
+		RepositoryFactory.getDairyRepository().getLocalDairy().getPriceHistory().add(newEntity);
 		super.createEntity(newEntity);
 	}
 
@@ -232,7 +231,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	 * FIXME
 	 */
 	private Employee getDefaultUser() {
-		Employee defaultEmp = DairyRepository.getInstance().getLocalDairy().getEmployees().get(0);
+		Employee defaultEmp = RepositoryFactory.getDairyRepository().getLocalDairy().getEmployees().get(0);
 		return defaultEmp;
 	}
 

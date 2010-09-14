@@ -16,8 +16,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 
 public class RouteEditDialogController extends RecordDialogController<Route> {
@@ -33,7 +33,7 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 		addTextMap(ViewConstants.ID_TXT_ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME);
 		addTextMap(ViewConstants.ID_TXT_ROUTE_DESCRIPTION, DairyPackage.Literals.ROUTE__DESCRIPTION);
 
-		final Dairy localDairy = DairyRepository.getInstance().getLocalDairy();
+		final Dairy localDairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 		final List<Vehicle> vehicles = new ArrayList<Vehicle>();
 		vehicles.add(null);
 		vehicles.addAll(localDairy.getVehicles());

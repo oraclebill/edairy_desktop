@@ -15,6 +15,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
@@ -22,24 +24,24 @@ import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.util.MatchUtil;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.dialogs.VehicleEditDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.services.vehicle.VehicleRepository;
 
 @PermissionRequired(Permission.VIEW_VEHICLES)
 public class VehicleLogDirectoryViewController extends BasicDirectoryController<Vehicle>{
 
 	private final VehicleSearchBean searchBean = new VehicleSearchBean();
-	private VehicleRepository vehicleRepository = new VehicleRepository();
-	private final IDairyRepository dairyRepository =  DairyRepository.getInstance();
-	private final Dairy localDairy = dairyRepository.getLocalDairy();
+	private IRepository<Vehicle> vehicleRepository;
+	private final IDairyRepository dairyRepository;
+	private final Dairy localDairy;
 	private IComboRidget vehicleTypeCombo;
 	private IComboRidget driverCombo;
 
 	public VehicleLogDirectoryViewController() {
 		super();
+		dairyRepository = RepositoryFactory.getDairyRepository();
+		localDairy = dairyRepository.getLocalDairy();
 		setEClass(DairyPackage.Literals.VEHICLE);
-		setRepository(vehicleRepository);
+		setRepository(vehicleRepository = RepositoryFactory.getRepository(Vehicle.class));
 	
 		addTableColumn("Log Book Number", DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER);
 		addTableColumn("VIN Nubmer", DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER);

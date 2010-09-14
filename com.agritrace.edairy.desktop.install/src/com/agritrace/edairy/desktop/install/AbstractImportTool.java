@@ -12,10 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.equinox.log.Logger;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
 import org.osgi.service.log.LogService;
 

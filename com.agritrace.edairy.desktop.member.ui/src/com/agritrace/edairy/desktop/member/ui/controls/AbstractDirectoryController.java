@@ -23,7 +23,6 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-//import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 
 /**

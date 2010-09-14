@@ -19,11 +19,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
-import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 
@@ -35,14 +35,14 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	private ITextRidget nameSearchText;
 	private IComboRidget positionSearchCombo;
 
-	private final DairyRepository dairyRepo = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private final Dairy localDairy = dairyRepo.getLocalDairy();
 	private final List<Employee> allEmployees = dairyRepo.getLocalDairy().getEmployees();
 	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
 
 	public EmployeeDirectoryController() {
 		super();
-		setRepository(new EmployeeRepository());
+		setRepository(RepositoryFactory.getRepository(Employee.class));
 		setEClass(DairyPackage.Literals.EMPLOYEE);
 		// setEntityClass(Employee.class);
 

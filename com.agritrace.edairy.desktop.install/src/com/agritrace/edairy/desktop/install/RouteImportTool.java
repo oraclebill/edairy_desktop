@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -52,7 +52,7 @@ public class RouteImportTool extends AbstractImportTool {
 		this.routes = routes;
 		this.failedRecords = errors;
 
-		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 		routeCache = new HashMap<String, Object>();
 		for (Route route : dairy.getRoutes()) {
 			routeCache.put(route.getName(), route);

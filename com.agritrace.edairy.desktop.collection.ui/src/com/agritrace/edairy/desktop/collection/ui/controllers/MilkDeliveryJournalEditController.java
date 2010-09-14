@@ -28,7 +28,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class MilkDeliveryJournalEditController extends RecordDialogController<DeliveryJournal> {
@@ -55,7 +54,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 //			binList = dairyRepo.getBinsByRoute(journalRoute);
 			// until we have an association between bins and routes (or locations), cache all bins statically
 			if (binList == null) {
-				binList = DairyRepository.getInstance().allDairyContainers();
+				binList = RepositoryFactory.getDairyRepository().allDairyContainers();
 			}
 		}
 
@@ -91,7 +90,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 		}		
 	}
 
-	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private ICompositeTableRidget lineItemsRidget;
 
 	public MilkDeliveryJournalEditController() {

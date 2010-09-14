@@ -19,9 +19,9 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.VehicleImportTool;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -110,9 +110,9 @@ public class ImportVehiclesHandler extends HandlerBase {
 		}
 
 		private void saveVehicles(List<Vehicle> successes2) {
-			DairyRepository.getInstance().getLocalDairy().getVehicles()
+			RepositoryFactory.getDairyRepository().getLocalDairy().getVehicles()
 					.addAll(successes2);
-			DairyRepository.getInstance().save();
+			RepositoryFactory.getDairyRepository().save();
 		}
 
 	}	/**

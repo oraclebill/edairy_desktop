@@ -28,12 +28,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class MemberDirectoryController extends SubModuleController {
 
@@ -148,9 +148,9 @@ public class MemberDirectoryController extends SubModuleController {
 	public MemberDirectoryController() {
 		membershipList 	= new ArrayList<Membership>();
 		searchLabels 	= new ILabelRidget[27];
-		repository 		= DairyRepository.getInstance();
+		repository 		= RepositoryFactory.getMemberRepository();
 //		farmRepository 	= new FarmRepository();
-		localDairy 		= DairyRepository.getInstance().getLocalDairy(); 
+		localDairy 		= RepositoryFactory.getDairyRepository().getLocalDairy(); 
 		allMembers 		= localDairy.getMemberships();
 	}
 

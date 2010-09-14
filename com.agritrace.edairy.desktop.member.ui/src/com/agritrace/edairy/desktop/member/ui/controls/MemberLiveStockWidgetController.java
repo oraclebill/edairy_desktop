@@ -22,11 +22,11 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -50,7 +50,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 
 	public MemberLiveStockWidgetController(IController controller) {
 		this.controller = controller;
-		farmRepository = new FarmRepository();
+		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
 		for (int i = 0; i < liveStockPropertyNames.length; i++) {
 			addTableColumn(liveStockColumnHeaders[i], liveStockPropertyNames[i], String.class);

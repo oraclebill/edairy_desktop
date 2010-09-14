@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.services.dairylocation;
+package com.agritrace.edairy.desktop.internal.operations.services.dairylocation;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 public class DairyLocationRepository extends HibernateRepository<DairyLocation> implements IDairyLocationRepository {
-
-	class RoutesQuery extends SessionRunnable<Object> {
+	private class RoutesQuery extends SessionRunnable<Object> {
 		List<Route> routes;
 
 		public List<Route> getResults() {
@@ -23,7 +23,9 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 
 		@Override
 		public void run(Session session) {
-			routes = session.createQuery("FROM Route").list();
+			@SuppressWarnings("unchecked")
+			List<Route> result = session.createQuery("FROM Route").list();
+			routes = result;
 		}
 	}
 
@@ -72,29 +74,12 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		});
 	}
 
-//	@Override
-//	public List<DairyLocation> find(String rawQuery) {
-//		return super.find(rawQuery);
-//	}
-//
-//	@Override
-//	public List<DairyLocation> find(String query, Object[] args) {
-//		return super.find(query, args);
-//	}
-
 	@Override
 	public DairyLocation findByKey(long key) {
 		return super.findByKey(key);
 	}
 
-//	public DairyLocation getByName(String name) {
-//		final List<DairyLocation> list = find("FROM DairyLocation where name='" + name + "'");
-//		if (list.size() > 0) {
-//			return list.get(0);
-//		}
-//		return null;
-//	}
-
+	@Override
 	public List<Route> getRoutes() {
 		final RoutesQuery routesQuery = new RoutesQuery();
 		runWithTransaction(routesQuery);

@@ -19,9 +19,10 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
@@ -38,13 +39,13 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 	private final List<Container> containers = new ArrayList<Container>();
 
 	// private IComboRidget farmFilterCombo;
-	private final FarmRepository farmRepository;
+	private final IFarmRepository farmRepository;
 	private final List<Farm> farms = new ArrayList<Farm>();
 	private Object inputModel;
 
 	public MemberContainerWidgetController(IController controller) {
 		this.controller = controller;
-		farmRepository = new FarmRepository();
+		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
 		setEClass(TrackingPackage.Literals.CONTAINER);
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);

@@ -17,12 +17,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.SupplierCategory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.supplier.ISupplierRepository;
-import com.agritrace.edairy.desktop.operations.services.supplier.SupplierRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 
@@ -40,7 +40,7 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 	public SupplierDirectoryController() {
 		super();
 
-		setRepository(repository = new SupplierRepository());
+		setRepository(repository = RepositoryFactory.getRegisteredRepository(ISupplierRepository.class));
 		// setEntityClass(Supplier.class);
 		setEClass(DairyPackage.Literals.SUPPLIER);
 

@@ -18,7 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.csvreader.CsvReader;
 
 /**
@@ -70,7 +70,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 
 		reader = new BufferedReader(new InputStreamReader(input));
 		
-		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 		employeeCache = new HashMap<String, Object>();
 		for (Employee member : dairy.getEmployees()) {
 			employeeCache.put(member.getId(), member);

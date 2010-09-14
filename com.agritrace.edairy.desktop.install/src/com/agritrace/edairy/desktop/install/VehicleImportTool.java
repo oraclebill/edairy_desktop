@@ -20,8 +20,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -102,7 +102,7 @@ public class VehicleImportTool extends AbstractImportTool {
 		this.vehicles = vehicles;
 		this.failedRecords = errors;
 
-		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 		vehicleCache = new HashMap<String, Object>();
 		for (Vehicle vehicle : dairy.getVehicles()) {
 			vehicleCache.put(vehicle.getLogBookNumber(), vehicle);

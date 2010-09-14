@@ -8,6 +8,7 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 
 public class LocationTabFolder extends CompositePanel {

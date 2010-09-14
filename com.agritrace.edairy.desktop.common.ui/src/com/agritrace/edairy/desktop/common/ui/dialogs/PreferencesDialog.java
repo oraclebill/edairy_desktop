@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.hibernate.cfg.Environment;
 
-import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SiteSettingsController;
+import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 
 /**
  * Preferences dialog invoked from the Preference menu, with two pages.

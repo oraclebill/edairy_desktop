@@ -12,13 +12,14 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
-import com.agritrace.edairy.desktop.operations.services.customer.CustomerRepository;
 
 /**
  * Test case for supplier list controller
@@ -44,7 +45,8 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 		// start with a new db
 		System.setProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY, "true");
 		PersistenceManager.reset(new HsqldbMemoryPersistenceManager());
-		CustomerRepository customerRepo = new CustomerRepository();		
+		IRepository<Customer> customerRepo = RepositoryFactory.getRepository(Customer.class);
+		
 		for (int i = 0; i < 10; i++) {
 			customerRepo.saveNew(createTestCustomer());
 		}

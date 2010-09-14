@@ -24,7 +24,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.FileDialog;
@@ -33,8 +32,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
+import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
 import com.agritrace.edairy.desktop.common.ui.activator.Activator;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * An ImageWidget is a combination of a Label and a Link. The Label is used to
@@ -68,7 +67,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	}
 
 	public static final long MAX_IMAGE_SIZE = 128 * 1024;
-	private static final ImageData BLANK_IMAGE_DATA = new ImageData(150, 200, 8, new PaletteData(0, -1, 255));
+	// private static final ImageData BLANK_IMAGE_DATA = new ImageData(150, 200, 8, new PaletteData(0, -1, 255));
 
 	private String id;
 	private ImageData imageData;
@@ -103,7 +102,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 				currentKey = null;
 			} else if (!key.equals(currentKey)) {
 				currentKey = key;
-				imageData = DairyRepository.getInstance().getImageData(currentKey);
+				imageData = ImageDataUtil.getImageData(currentKey);
 			}
 		}
 		updateDisplay();
@@ -251,7 +250,8 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			imageRefKey = UUID.randomUUID().toString();
 			modelObj.setValue(imageRefKey);
 		}
-		DairyRepository.getInstance().saveImageData(imageRefKey, imageData);
+		
+		ImageDataUtil.saveImageData(imageRefKey, imageData);
 	}
 
 	private void updateDisplay() {

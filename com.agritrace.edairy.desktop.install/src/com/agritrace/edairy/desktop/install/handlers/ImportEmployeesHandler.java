@@ -19,10 +19,10 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.EmployeeImportTool;
 import com.agritrace.edairy.desktop.install.ValidationException;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -113,9 +113,9 @@ public class ImportEmployeesHandler extends HandlerBase {
 		}
 		
 		private void saveEmployees(List<Employee> successes2) {
-			DairyRepository.getInstance().getLocalDairy().getEmployees()
+			RepositoryFactory.getDairyRepository().getLocalDairy().getEmployees()
 					.addAll(successes2);
-			DairyRepository.getInstance().save();
+			RepositoryFactory.getDairyRepository().save();
 		}
 
 

@@ -40,7 +40,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 @PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
@@ -52,8 +51,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		@Override
 		public void saveJournal(CollectionJournalPage journal) {
-			DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(journal);
-			DairyRepository.getInstance().save(DairyRepository.getInstance().getLocalDairy());
+			RepositoryFactory.getDairyRepository().getLocalDairy().getCollectionJournals().add(journal);
+			RepositoryFactory.getDairyRepository().save(RepositoryFactory.getDairyRepository().getLocalDairy());
 			MilkCollectionLogController.this.refreshTableContents();
 		}
 	}
@@ -109,7 +108,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IToggleButtonRidget rejected;
 
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	private final List<CollectionJournalPage> allJournals = DairyRepository.getInstance().allCollectionJournalPages();
+	private final List<CollectionJournalPage> allJournals = RepositoryFactory.getDairyRepository().allCollectionJournalPages();
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
 	private List<DairyLocation> collectionCenters;

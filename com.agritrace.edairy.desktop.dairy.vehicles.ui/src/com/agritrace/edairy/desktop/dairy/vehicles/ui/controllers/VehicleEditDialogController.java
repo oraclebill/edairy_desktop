@@ -9,11 +9,11 @@ import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class VehicleEditDialogController  extends RecordDialogController<Vehicle> {
 	private Vehicle editVehicle = null;
@@ -45,7 +45,7 @@ public class VehicleEditDialogController  extends RecordDialogController<Vehicle
 		addTextMap(VehicleLogDetailBindConstants.BIND_ID_LOG_NUM, DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER);
 		
 		addComboMap(VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME, 
-				new WritableList(DairyRepository.getInstance().employeesByPosition("Driver"), Employee.class),
+				new WritableList(RepositoryFactory.getDairyRepository().employeesByPosition("Driver"), Employee.class),
 				"getFamilyName", 
 				DairyPackage.Literals.VEHICLE__DRIVER);
 		

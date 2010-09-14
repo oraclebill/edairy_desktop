@@ -35,10 +35,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 final class ScaleImportAction implements IActionListener {
@@ -181,8 +181,9 @@ final class ScaleImportAction implements IActionListener {
 					System.err.printf("  page %d: %s\n", i, page);
 					// }
 					try {
-						DairyRepository.getInstance().getLocalDairy().getCollectionJournals().add(page);
-						DairyRepository.getInstance().save();
+						IDairyRepository repo = RepositoryFactory.getDairyRepository();
+						repo.getLocalDairy().getCollectionJournals().add(page);
+						repo.save();
 					} catch (Exception e) {
 						e.getMessage();
 					}
@@ -316,7 +317,7 @@ final class ScaleImportAction implements IActionListener {
 		 * 
 		 */
 	private final MilkCollectionLogController milkCollectionLogController;
-	private IDairyRepository dairyRepo = DairyRepository.getInstance();
+	private IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private Map<String, CollectionJournalPage> pageMap = new HashMap<String, CollectionJournalPage>();
 	Dairy localDairy;
 

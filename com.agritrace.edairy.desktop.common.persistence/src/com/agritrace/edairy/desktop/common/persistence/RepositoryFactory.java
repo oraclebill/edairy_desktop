@@ -5,11 +5,19 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.DairyLocationRepository;
-import com.agritrace.edairy.desktop.operations.services.employee.EmployeeRepository;
+import com.agritrace.edairy.desktop.internal.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
+import com.agritrace.edairy.desktop.internal.operations.services.dairylocation.DairyLocationRepository;
+import com.agritrace.edairy.desktop.internal.operations.services.employee.EmployeeRepository;
+import com.agritrace.edairy.desktop.internal.operations.services.supplier.SupplierRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 /**
  * A factory for IRepositories.
@@ -91,11 +99,24 @@ public abstract class RepositoryFactory {
 	 */
 	private static void initRepositoryMap() {
 //		addRepository(Membership.class, new MembershipRepository());
-//		addRepository(Dairy.class, DairyRepository.getInstance());
-		addRepository(Employee.class, new EmployeeRepository());
+//		addRepository(Dairy.class, RepositoryFactory.getDairyRepository());
+		addRepository(Customer.class, new CustomerRepository());
 		addRepository(DairyLocation.class, new DairyLocationRepository());
+		addRepository(Employee.class, new EmployeeRepository());
+		addRepository(Farm.class, new FarmRepository());
+		addRepository(Supplier.class, new SupplierRepository());
 	}
 	
+	@Deprecated
+	public static IDairyRepository getDairyRepository() {
+		return DairyRepository.getInstance();
+	}
+	
+	@Deprecated
+	public static IMemberRepository getMemberRepository() {
+		return DairyRepository.getInstance();
+	}
+		
 	/**
 	 * 
 	 * @param newRepository

@@ -13,7 +13,6 @@ import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.riena.navigation.ISubModuleNode;
-import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
@@ -22,11 +21,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 public class AdjustmentTransactionJournalController extends TransactionJournalController<AdjustmentTransaction> {
 
@@ -62,10 +59,10 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		}
 	}
 
-	private final IMemberRepository memberRepo = DairyRepository.getInstance();
+	// private final IMemberRepository memberRepo = RepositoryFactory.getMemberRepository();
 	private IMultipleChoiceRidget typeSetRidget;
 
-	private ICompositeRidget sourceRow;
+	// private ICompositeRidget sourceRow;
 
 	public AdjustmentTransactionJournalController() {
 		this(null);
@@ -110,7 +107,7 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		super.configureFilterRidgets();
 		
 		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);		
-		sourceRow = getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_SOURCE_ROW);
+		// sourceRow = getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_SOURCE_ROW);
 	}
 
 

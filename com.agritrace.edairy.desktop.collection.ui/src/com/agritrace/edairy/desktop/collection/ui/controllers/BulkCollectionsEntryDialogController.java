@@ -20,8 +20,8 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
-import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
 import org.eclipse.riena.ui.ridgets.listener.ClickEvent;
 import org.eclipse.riena.ui.ridgets.listener.IClickListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
@@ -55,12 +55,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class BulkCollectionsEntryDialogController extends
@@ -169,7 +169,7 @@ public class BulkCollectionsEntryDialogController extends
 	 */
 	public BulkCollectionsEntryDialogController() {
 		super();
-		dairyRepo = DairyRepository.getInstance();
+		dairyRepo = RepositoryFactory.getDairyRepository();
 		journalPageValidators = new ValidatorCollection();
 		addJournalValidator(new BasicJournalValidator());
 		// drivers = dairyRepo.employeesByPosition("Driver");

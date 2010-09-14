@@ -18,6 +18,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.nebula.widgets.compositetable.AbstractNativeHeader;
 import org.eclipse.swt.nebula.widgets.compositetable.CompositeTable;
 import org.eclipse.swt.nebula.widgets.compositetable.ResizableGridRowLayout;
@@ -29,7 +30,6 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
 import com.swtdesigner.SWTResourceManager;
-import org.eclipse.swt.layout.RowLayout;
 
 public class DeliveryJournalEditPanel extends Composite {
 		

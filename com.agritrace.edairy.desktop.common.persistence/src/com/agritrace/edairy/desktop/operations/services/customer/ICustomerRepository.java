@@ -5,6 +5,8 @@ import java.util.List;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 
+@Deprecated
+// Apparently unused?
 public interface ICustomerRepository extends IRepository<Customer> {
 
 	@Override

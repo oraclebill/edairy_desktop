@@ -28,6 +28,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -35,7 +36,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
-import com.agritrace.edairy.desktop.member.services.farm.FarmRepository;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidgetController;
@@ -52,7 +53,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	private final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose", "LiveStock Name", "Species", "Breed", "Acquisition Date", "Status" };
 
-	private final FarmRepository farmRepository;
+	private final IFarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;
 	private final List<LiveStockListViewTableNode> listTableInput = new ArrayList<LiveStockListViewTableNode>();
 
@@ -66,7 +67,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	private Membership selectedMember;
 
 	public LiveStockListController() {
-		farmRepository = new FarmRepository();
+		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
 		
 		for (int i = 0; i < propertyNames.length; i++) {

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.services.vehicle;
+package com.agritrace.edairy.desktop.internal.operations.services.vehicle;
 
 import java.util.List;
 

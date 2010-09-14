@@ -8,10 +8,8 @@ import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.OwnershipGroup;
 

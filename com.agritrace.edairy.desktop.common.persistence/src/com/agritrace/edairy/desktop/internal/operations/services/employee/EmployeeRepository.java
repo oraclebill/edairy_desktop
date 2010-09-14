@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.services.employee;
+package com.agritrace.edairy.desktop.internal.operations.services.employee;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +14,7 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
 
 public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee> {
 

@@ -19,9 +19,9 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.RouteImportTool;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -111,9 +111,9 @@ public class ImportRoutesHandler extends HandlerBase {
 		}
 
 		private void saveRoutes(List<Route> successes2) {
-			DairyRepository.getInstance().getLocalDairy().getRoutes()
+			RepositoryFactory.getDairyRepository().getLocalDairy().getRoutes()
 					.addAll(successes2);
-			DairyRepository.getInstance().save();
+			RepositoryFactory.getDairyRepository().save();
 		}
 
 	}

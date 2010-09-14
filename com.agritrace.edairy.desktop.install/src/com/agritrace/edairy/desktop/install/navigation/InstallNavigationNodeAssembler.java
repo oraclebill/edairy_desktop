@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.eclipse.riena.navigation.AbstractNavigationAssembler;
 import org.eclipse.riena.navigation.IModuleGroupNode;
-import org.eclipse.riena.navigation.IModuleNode;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubApplicationNode;
 import org.eclipse.riena.navigation.NavigationArgument;
@@ -15,8 +14,6 @@ import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
-
-import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 
 public class InstallNavigationNodeAssembler extends AbstractNavigationAssembler {
 	// FINANCE

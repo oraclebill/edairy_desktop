@@ -40,7 +40,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 public class MemberSearchDialog extends TitleAreaDialog {
 
@@ -179,7 +179,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	 */
 	public MemberSearchDialog(Shell shell) {
 		super(shell);
-		memberRepo = DairyRepository.getInstance();
+		memberRepo = RepositoryFactory.getMemberRepository();
 		memberList = memberRepo.all();
 	}
 

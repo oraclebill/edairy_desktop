@@ -5,19 +5,14 @@ import java.beans.PropertyChangeListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.riena.navigation.INavigationNode;
-import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IEditableRidget;
-import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.INumericTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
 import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
@@ -28,13 +23,13 @@ import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 /**
@@ -137,7 +132,7 @@ public class DairyProfileViewController extends SubModuleController {
 	 */
 	public DairyProfileViewController() {
 		super();
-		dairyRepository = DairyRepository.getInstance();
+		dairyRepository = RepositoryFactory.getDairyRepository();
 		localDairy = dairyRepository.getLocalDairy();
 	}
 

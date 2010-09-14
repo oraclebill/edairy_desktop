@@ -13,11 +13,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
@@ -35,7 +35,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 		}
 
 	};
-	private final IDairyRepository dairyRepository = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
 
 	private ITextRidget trackingText;
 

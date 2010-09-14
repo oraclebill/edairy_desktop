@@ -1,14 +1,14 @@
 package com.agritrace.edairy.desktop.collection.ui.wizards;
 
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Label;
 
 public class CJWizardStartPage extends WizardPage {
 

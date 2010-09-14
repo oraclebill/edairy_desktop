@@ -23,7 +23,6 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.MemberTransactionImportTool;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -117,7 +116,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 			for (AccountTransaction newEntity : transactions) {
 				accountRepo.saveNew(newEntity);
 			}
-//			DairyRepository.getInstance().save();
+//			RepositoryFactory.getDairyRepository().save();
 		}
 
 	}

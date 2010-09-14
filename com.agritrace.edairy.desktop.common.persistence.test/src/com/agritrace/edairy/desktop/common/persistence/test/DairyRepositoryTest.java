@@ -5,13 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 public class DairyRepositoryTest {
 
 	@Test
 	public void testAccountForMemberNoQuery() throws Exception {
-		DairyRepository repo = DairyRepository.getInstance();
+		IMemberRepository repo = RepositoryFactory.getMemberRepository();
 		System.err.println("RUNNING");
 		Account account = repo.findAccountByMemberNo("00022");
 		assertNotNull(account);

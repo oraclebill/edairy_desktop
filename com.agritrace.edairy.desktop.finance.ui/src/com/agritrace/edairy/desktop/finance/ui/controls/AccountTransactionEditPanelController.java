@@ -25,12 +25,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDetailPanelController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 /**
@@ -57,7 +57,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 
 	}
 
-	private final IDairyRepository dairyRepo = DairyRepository.getInstance();
+	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	AccountTransaction model;
 	private IComboRidget storeLocation;
 	private ITextRidget memberName;

@@ -26,7 +26,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 public class MemberImportTool extends AbstractImportTool {
 	private static final Date DEFAULT_IMPORT_DATE = getDefaultDate();
@@ -54,7 +54,7 @@ public class MemberImportTool extends AbstractImportTool {
 		this.memberCollection = memberCollection;
 		this.failedRecords = failedRecords;
 
-		Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 		for (Route route : dairy.getRoutes()) {
 			routeCache.put(route.getName(), route);
 		}

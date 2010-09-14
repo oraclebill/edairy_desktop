@@ -20,9 +20,9 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -111,9 +111,9 @@ public class ImportMembersHandler extends HandlerBase {
 		}
 		
 		private void saveMembers(List<Membership> successes2) {
-			DairyRepository.getInstance().getLocalDairy().getMemberships()
+			RepositoryFactory.getDairyRepository().getLocalDairy().getMemberships()
 					.addAll(successes2);
-			DairyRepository.getInstance().save();
+			RepositoryFactory.getDairyRepository().save();
 		}
 	}
 	

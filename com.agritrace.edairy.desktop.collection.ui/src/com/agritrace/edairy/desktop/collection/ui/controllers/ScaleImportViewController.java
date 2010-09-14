@@ -11,9 +11,9 @@ import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
@@ -22,9 +22,9 @@ import com.agritrace.edairy.desktop.collection.ui.components.journalheader.Journ
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class ScaleImportViewController extends SubModuleController {
@@ -61,7 +61,7 @@ public class ScaleImportViewController extends SubModuleController {
 	 */
 	public ScaleImportViewController() {
 		super();
-		dairyRepo = DairyRepository.getInstance();
+		dairyRepo = RepositoryFactory.getDairyRepository();
 //		bins = dairyRepo.allDairyContainers();
 		// drivers = dairyRepo.employeesByPosition("Driver");
 		// vehicles = dairyRepo.allVehicles();

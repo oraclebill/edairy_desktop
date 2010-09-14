@@ -23,6 +23,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
@@ -31,7 +32,6 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 @PermissionRequired(Permission.VIEW_MEMBER_LIST)
 public class MemberDirectoryController2 extends BasicDirectoryController<Membership> {
@@ -74,8 +74,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private IMemberRepository repository;
 
 	public MemberDirectoryController2() {
-		repository = DairyRepository.getInstance();
-		localDairy = DairyRepository.getInstance().getLocalDairy();
+		repository = RepositoryFactory.getMemberRepository();
+		localDairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 
 		setEClass(DairyPackage.Literals.MEMBERSHIP);
 

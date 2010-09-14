@@ -34,8 +34,8 @@ import com.agritrace.edairy.desktop.collection.ui.controllers.BulkCollectionsEnt
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * 
@@ -83,7 +83,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		}
 
 		private static CollectionJournalPage createCollectionJournal() {
-			Dairy dairy = DairyRepository.getInstance().getLocalDairy();
+			Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 			CollectionJournalPage journal = DairyFactory.eINSTANCE.createCollectionJournalPage();
 
 			journal.setJournalDate(new Date());

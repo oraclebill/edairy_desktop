@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.operations.services.supplier;
+package com.agritrace.edairy.desktop.internal.operations.services.supplier;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.operations.services.supplier.ISupplierRepository;
 
 public class SupplierRepository extends HibernateRepository<Supplier> implements ISupplierRepository {
 	@Override

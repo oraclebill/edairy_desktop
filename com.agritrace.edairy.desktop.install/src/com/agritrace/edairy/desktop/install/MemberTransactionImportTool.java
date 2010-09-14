@@ -24,7 +24,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
-import com.agritrace.edairy.desktop.operations.services.DairyRepository;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -76,12 +75,12 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		this.transactions = transactions;
 		this.failedRecords = errors;
 		this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		for (DairyLocation location : DairyRepository.getInstance().getLocalDairyLocations()) {
+		for (DairyLocation location : RepositoryFactory.getDairyRepository().getLocalDairyLocations()) {
 			locationCache.put(location.getCode(), location);
 		}
 		
 		//List<Account> accounts = RepositoryFactory.getRepository(Account.class).all();
-		List<Account> accounts = DairyRepository.getInstance().allAccounts();
+		List<Account> accounts = RepositoryFactory.getMemberRepository().allAccounts();
 		System.err.println("======== retrieved allaccounts ============");
 		for (Account account : accounts) {
 			memberAccountCache.put(account.getAccountNumber().substring(1), account);
@@ -106,7 +105,7 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		String memberNo = values[TX_MEMBERNO];		
 		Account account = memberAccountCache.get(memberNo);
 		if (account == null) {
-//			account = DairyRepository.getInstance().findAccountByMemberNo(memberNo);
+//			account = RepositoryFactory.getDairyRepository().findAccountByMemberNo(memberNo);
 //			if ( account != null ) {
 //				memberAccountCache.put(memberNo, account);
 //			}
