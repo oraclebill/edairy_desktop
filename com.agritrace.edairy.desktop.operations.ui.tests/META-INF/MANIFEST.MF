@@ -13,4 +13,3 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  com.ibm.icu;bundle-version="4.2.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: com.agritrace.edairy.desktop.operations.services.customer

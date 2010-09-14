@@ -8,9 +8,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
-import com.agritrace.edairy.desktop.operations.services.customer.ICustomerRepository;
 
-public class CustomerRepository extends HibernateRepository<Customer> implements ICustomerRepository {
+public class CustomerRepository extends HibernateRepository<Customer> {
 
 	class RunLoad extends SessionRunnable<Object> {
 		Customer myObj;
@@ -50,18 +49,6 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 		super.delete(deletableEntity);
 	}
 
-//	@Override
-//	public List<Customer> find(String rawQuery) {
-//		// TODO Auto-generated method stub
-//		return super.find(rawQuery);
-//	}
-//
-//	@Override
-//	public List<Customer> find(String query, Object[] args) {
-//		// TODO Auto-generated method stub
-//		return super.find(query, args);
-//	}
-
 	@Override
 	public Customer findByKey(long key) {
 		// TODO Auto-generated method stub
@@ -70,11 +57,6 @@ public class CustomerRepository extends HibernateRepository<Customer> implements
 
 	@Override
 	public void merge(Customer updateableEntity) {
-		runWithTransaction(new RunMerge(updateableEntity));
-	}
-
-	@Override
-	public void restore(Customer updateableEntity) {
 		runWithTransaction(new RunMerge(updateableEntity));
 	}
 
