@@ -20,11 +20,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 
@@ -82,7 +82,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 
 	@Override
 	public void configureFilterRidgets() {
-
 		dateRangeRidget = getRidget(IDateRangeRidget.class, FinanceBindingConstants.FILTER_DATE_RANGE);
 
 		memberNameRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_MEMBER_LOOKUP_TXT);
@@ -93,14 +92,9 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 			@Override
 			protected void callback(Membership selectedMember) {
 				filterBean.setMember(selectedMember);
+				memberNameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
 			}
 		});
-
-		// referenceNumberRidget = getRidget(ITextRidget.class,
-		// FinanceBindingConstants.FILTER_TXT_REF_NO);
-
-		// transactionSourceRidget = getRidget(ISingleChoiceRidget.class,
-		// FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 	}
 
 	@Override
@@ -109,14 +103,6 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 
 		dateRangeRidget.bindToModel(BeansObservables.observeValue(filterBean, "startDate"),
 				BeansObservables.observeValue(filterBean, "endDate"));
-
-		memberNameRidget.bindToModel(filterBean, "member");
-		memberNameRidget.updateFromModel();
-
-		// referenceNumberRidget.bindToModel(filterBean, "referenceNumber");
-
-		// transactionSourceRidget.bindToModel(filterBean, "sourceOptions",
-		// filterBean, "transactionSource");
 	}
 
 	protected Predicate buildFilterPredicate() {
@@ -187,6 +173,7 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	@Override
 	protected void resetFilterConditions() {
 		filterBean.clear();
+		memberNameRidget.setText("");
 		updateAllRidgetsFromModel();
 	}
 }

@@ -33,4 +33,8 @@ public final class EmployeePrincipal implements IPrincipal {
 		return role == null ? false : role.getPermissions().contains(perm);
 	}
 
+	public final Employee getEmployee() {
+		return employee;
+	}
+
 }

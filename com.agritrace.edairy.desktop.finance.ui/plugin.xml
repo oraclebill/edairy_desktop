@@ -27,6 +27,13 @@
             allowMultiple="true"
             name="Milk Price Log">
       </view>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.finance.ui"
+            class="com.agritrace.edairy.desktop.finance.ui.views.AdjustmentTransactionJournalView"
+            id="adjustment.journal"
+            name="Adjustment Register">
+      </view>
    </extension>
    <extension
          point="org.eclipse.help.contexts">

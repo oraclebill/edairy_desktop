@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui;
 
 public interface FinanceBindingConstants {
-
 	static final String DESC_TEXT = "descText";
 	static final String RECORD_ID_TEXT = "recordIdText";
 	static final String FILTER_CHOICE_TX_TYPE = "FILTER_CHOICE_TX_TYPE";
@@ -47,6 +46,8 @@ public interface FinanceBindingConstants {
 	String ID_SHARE_DEDUCTION_CHOICEBTN = "SHARE_DEDUCTION_BTN";
 	String ID_SIGNED_BY_TEXT = "SIGNED_BY_TEXT";
 	String ID_STORE_SALE_CHOICEBTN = "STORE_SALE_BTN";
+	String ID_TRANSACTION_WRAPPER_FRAME = "TRANSACTION_WRAPPER_FRAME";
+	String ID_TRANSACTION_ALERT_FRAME = "TRANSACTION_ALERT_FRAME";
 	String ID_TRANSACTION_AMOUNT_TEXT = "TRANSACTION_AMOUNT_TEXT";
 	// member transaction edit panel
 	String ID_TRANSACTION_CHOICE = "TRANSACTION_CHOICE";

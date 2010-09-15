@@ -58,14 +58,13 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 	}
 
 	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
-	AccountTransaction model;
 	private IComboRidget storeLocation;
 	private ITextRidget memberName;
 
 	@Override
 	public void configureAndBind() {
 		super.configureAndBind();
-		updateWidgetsForSource(model.getSource());
+		updateWidgetsForSource(getModel().getSource());
 	}
 
 	@Override
@@ -83,6 +82,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
 
 		IRidgetContainer container = getRidgetContainer();
+		AccountTransaction model = getModel();
 
 		// configure and bind transaction source
 		final ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
@@ -137,7 +137,8 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 			memberAccount = AccountFactory.eINSTANCE.createAccount();
 			selectedMember.setAccount(memberAccount);
 		}
-		model.setAccount(memberAccount);
+		
+		getModel().setAccount(memberAccount);
 		memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
 	}
 
@@ -145,11 +146,13 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 		IRidgetContainer container = getRidgetContainer();
 		boolean showStoreLocation = false, showCheckNo = false, showSignedBy = false;
 		
-		if (source == TransactionSource.CASH_PAYMENT) {
-			showCheckNo = true;
-			showSignedBy = true;
-		} else if (source == TransactionSource.STORE_CREDIT) {
-			showStoreLocation = true;
+		if (container.getRidget(FinanceBindingConstants.ID_TRANSACTION_CHOICE).isEnabled()) {
+			if (source == TransactionSource.CASH_PAYMENT) {
+				showCheckNo = true;
+				showSignedBy = true;
+			} else if (source == TransactionSource.STORE_CREDIT) {
+				showStoreLocation = true;
+			}
 		}
 		
 		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT),

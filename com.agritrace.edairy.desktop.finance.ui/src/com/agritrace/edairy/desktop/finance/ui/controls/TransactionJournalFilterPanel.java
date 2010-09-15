@@ -144,39 +144,6 @@ public class TransactionJournalFilterPanel extends Composite {
 	//
 	public void addSourceFilter() {
 		final Composite rowComposite = new TransactionSourceComposite(this, true, "Transaction Source");
-		// SWTBindingPropertyLocator.getInstance().setBindingProperty(rowComposite,
-		// FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
-
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(rowComposite);
 	}
-
-	/**
-	 * 
-	 * // alternate fourth row: type choices // { final Composite rowComposite =
-	 * UIControlsFactory.createComposite(this); SWTBindingPropertyLocator
-	 * .getInstance().setBindingProperty(rowComposite,
-	 * FinanceBindingConstants.FILTER_TYPE_ROW);
-	 * 
-	 * final FormLayout rowLayout = new FormLayout(); rowLayout.marginWidth =
-	 * rowLayout.marginHeight = 10; rowComposite.setLayout(rowLayout);
-	 * 
-	 * final String labelString = "Type:"; final Label lblType =
-	 * UIControlsFactory.createLabel(rowComposite, "Type"); final FormData
-	 * fd_lblType = new FormData(); fd_lblType.width = 140 ; fd_lblType.top =
-	 * new FormAttachment(0, 0); fd_lblType.left = new FormAttachment(0, 0);
-	 * lblType.setLayoutData(fd_lblType);
-	 * 
-	 * Composite typeCodeChoice =
-	 * UIControlsFactory.createChoiceComposite(rowComposite, SWT.BORDER, true,
-	 * FinanceBindingConstants.FILTER_CHOICE_TX_TYPE); FillLayout fillLayout =
-	 * (FillLayout) typeCodeChoice.getLayout(); fillLayout.type =
-	 * SWT.HORIZONTAL;
-	 * 
-	 * final FormData fieldLayoutData = new FormData(); fieldLayoutData.right =
-	 * new FormAttachment(100, -8); fieldLayoutData.width = 300;
-	 * fieldLayoutData.left = new FormAttachment(lblType, 6);
-	 * fieldLayoutData.top = new FormAttachment(0, 0);
-	 * typeCodeChoice.setLayoutData(fieldLayoutData); }
-	 **/
-
 }

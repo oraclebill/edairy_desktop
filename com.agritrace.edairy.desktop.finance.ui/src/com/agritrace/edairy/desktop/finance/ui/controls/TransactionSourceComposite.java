@@ -13,19 +13,8 @@ import org.eclipse.swt.widgets.Label;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionSourceComposite extends Composite {
-
-	public static final String CHOICE_COMPOSITE 		= "CHOICE_COMPOSITE";
-	public static final String CHOICE_CASH_PAYMENT 		= "CHOICE_COMPOSITE-CHOICE_CASH_PAYMENT";
-	public static final String CHOICE_CLINICAL_SVC 		= "CHOICE_COMPOSITE-CHOICE_CLINICAL_SVC";
-	public static final String CHOICE_SHARE_DEDUCTION 	= "CHOICE_COMPOSITE-CHOICE_SHARE_DEDUCTION";
-	public static final String CHOICE_STORE_CREDIT 		= "CHOICE_COMPOSITE-CHOICE_STORE_CREDIT";
-	public static final String LABEL 					= "transaction-type-compsite.label";
-	public static final String DEFAULT_LABEL_TEXT 		= "Transaction Source";
+	private static final String DEFAULT_LABEL_TEXT = "Transaction Source";
 	
-	
-//	public static final LnFUpdater LNF_UPDATER = new LnFUpdater();
-
-	// private final ChoiceComposite txypeCodeChoice;
 	private final boolean isMultipleChoice;
 	private final Label label;
 
@@ -66,28 +55,7 @@ public class TransactionSourceComposite extends Composite {
 		fieldLayoutData.top = new FormAttachment(0, 0);
 		fieldLayoutData.left = new FormAttachment(label, 6, SWT.RIGHT);
 		fieldLayoutData.right = new FormAttachment(100, -8);
-//		fieldLayoutData.bottom = new FormAttachment(100, 100, 5);
 		typeCodeChoice.setLayoutData(fieldLayoutData);
-		// typeCodeChoice.setOrientation(SWT.HORIZONTAL);
-
-		// btnStoreCredit = UIControlsFactory.createButtonRadio(typeCodeChoice);
-		// btnStoreCredit.setText("Store Credits");
-		// btnStoreCredit.setToolTipText("Account deductions for store purchases using account credit.");
-		//
-		// btnClinicalServices =
-		// UIControlsFactory.createButtonRadio(typeCodeChoice);
-		// btnClinicalServices.setText("Veterinary Services ");
-		// btnClinicalServices
-		// .setToolTipText("Account deductions for vet and animal services purchased with account credit.");
-		//
-		// btnPayments = UIControlsFactory.createButtonRadio(typeCodeChoice);
-		// btnPayments.setText("Cash Payments");
-		// btnPayments.setToolTipText("Account deductions for cash payments to member from members' account.");
-		//
-		// btnShareDeductions =
-		// UIControlsFactory.createButtonRadio(typeCodeChoice);
-		// btnShareDeductions.setText("Share Deductions");
-		// btnShareDeductions.setToolTipText("Account deductions for recoupment of member shares.");
 	}
 
 	public TransactionSourceComposite(Composite parent, String labelString) {

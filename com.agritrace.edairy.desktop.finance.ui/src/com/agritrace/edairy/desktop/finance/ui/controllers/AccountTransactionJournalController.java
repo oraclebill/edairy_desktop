@@ -99,11 +99,6 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		referenceNumRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
 		sourceListRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
-		
-//		ICompositeRidget typeRow = 
-//			getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_TYPE_ROW);
-//		typeRow.setEnabled(false);
-//		typeRow.setVisible(false);
 	}
 
 

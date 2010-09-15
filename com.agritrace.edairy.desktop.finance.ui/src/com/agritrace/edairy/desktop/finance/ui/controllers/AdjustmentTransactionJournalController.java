@@ -8,10 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
-import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
@@ -21,11 +18,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
-public class AdjustmentTransactionJournalController extends TransactionJournalController<AdjustmentTransaction> {
+public final class AdjustmentTransactionJournalController extends TransactionJournalController<AdjustmentTransaction> {
 
 	static class TransactionTypeMatchPredicate implements Predicate {
 		final private Set<TransactionType> testSources = new HashSet<TransactionType>();
@@ -72,12 +69,7 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		super(node);
 		
 		setEClass(AccountPackage.Literals.ADJUSTMENT_TRANSACTION);
-		setRepository(new HibernateRepository<AdjustmentTransaction>() {
-			@Override
-			protected Class<?> getClassType() {
-				return AdjustmentTransaction.class;
-			}			
-		});
+		setRepository(RepositoryFactory.getRepository(AdjustmentTransaction.class));
 
 		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
@@ -98,6 +90,7 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 			}
 
 		});
+		
 		this.addTableColumn("Type", AccountPackage.Literals.TRANSACTION__TRANSACTION_TYPE);
 		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
 	}
@@ -106,8 +99,7 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 	public void configureFilterRidgets() {
 		super.configureFilterRidgets();
 		
-		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);		
-		// sourceRow = getRidget(ICompositeRidget.class, FinanceBindingConstants.FILTER_SOURCE_ROW);
+		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 	}
 
 
@@ -115,9 +107,9 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 	public void afterBind() {
 		super.afterBind();
 
-		typeSetRidget.bindToModel(Observables.staticObservableList(TransactionType.VALUES, TransactionType.class),
-				BeansObservables.observeList(filterBean, "typeOptions"));
-	
+		List<String> optionValues = Arrays.asList("Credit Adjustment", "Debit Adjustment");
+		typeSetRidget.bindToModel(TransactionType.VALUES, optionValues, filterBean, "typeSelections");
+		typeSetRidget.updateFromModel();
 	}
 
 	
@@ -125,20 +117,11 @@ public class AdjustmentTransactionJournalController extends TransactionJournalCo
 		Predicate superPredicate = super.buildFilterPredicate();
 		
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
-
 		predicateList.add(superPredicate);
-		
-		predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(filterBean.getReferenceNumber())));
+		predicateList.add(NullIsTruePredicate.getInstance(
+				new TransactionTypeMatchPredicate(filterBean.getTypeOptions())));
 
-		predicateList.add(NullIsTruePredicate.getInstance(new TransactionTypeMatchPredicate(filterBean
-				.getTypeOptions())));
-
-		final Predicate[] predicates = new Predicate[predicateList.size()];
-		for (int i = 0; i < predicates.length; i++) {
-			predicates[i] = predicateList.get(i);
-		}
-		
-		return new AllPredicate(predicates);
+		return new AllPredicate(predicateList.toArray(new Predicate[predicateList.size()]));
 	}
 
 
