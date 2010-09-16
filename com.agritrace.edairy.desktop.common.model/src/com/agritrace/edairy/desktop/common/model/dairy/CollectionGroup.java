@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalNumber <em>Journal Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter <em>Collection Center</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -223,6 +224,36 @@ public interface CollectionGroup extends EObject {
 	 * @generated
 	 */
 	void setCollectionCenter(DairyLocation value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The default value is <code>"ScaleGroup"</code>.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+	 * @see #setType(CollectionGroupType)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Type()
+	 * @model default="ScaleGroup" required="true"
+	 * @generated
+	 */
+	CollectionGroupType getType();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(CollectionGroupType value);
 
 	/**
 	 * Returns the value of the '<em><b>Driver</b></em>' reference.

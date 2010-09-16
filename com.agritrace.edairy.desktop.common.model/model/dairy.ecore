@@ -165,6 +165,8 @@
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//CollectionSession"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionCenter" eType="#//DairyLocation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CollectionGroupType"
+        defaultValueLiteral="ScaleGroup"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JournalStatus">
     <eLiterals name="NEW"/>
@@ -462,6 +464,10 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeOfDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CollectionGroupType">
+    <eLiterals name="ScaleGroup"/>
+    <eLiterals name="JournalGroup" value="1"/>
   </eClassifiers>
   <eSubpackages name="account" nsURI="http://com.agritrace.edairy.desktop.common.model/account"
       nsPrefix="account">

@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -53,7 +54,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
 	private DateTime datePicker;
 	private CCombo driverCombo;
-	private final CollectionGroup newJournalPage = DairyFactory.eINSTANCE.createCollectionGroup();
+	private final CollectionGroup newJournalPage;
 
 	private CCombo centerCombo;
 	private CCombo sessionCombo;
@@ -63,13 +64,17 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	public NewMilkCollectionJournalDialog(Shell parentShell) {
 		super(parentShell);
+		newJournalPage = DairyFactory.eINSTANCE.createCollectionGroup();
+		newJournalPage.setType(CollectionGroupType.JOURNAL_GROUP);
 	}
 
 	public CollectionGroup getNewJournalPage() {
 		final String refNum = newJournalPage.getReferenceNumber();
+		
 		if (refNum == null || refNum.trim().length() == 0) {
 			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); 
 		}
+		
 		return newJournalPage;
 	}
 

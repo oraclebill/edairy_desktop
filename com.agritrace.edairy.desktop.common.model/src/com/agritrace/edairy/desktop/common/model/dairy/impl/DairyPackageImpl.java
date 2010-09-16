@@ -13,6 +13,7 @@ import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -274,6 +275,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum preferenceTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum collectionGroupTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1030,6 +1038,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EReference getCollectionGroup_CollectionCenter() {
 		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCollectionGroup_Type() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -2216,6 +2233,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getCollectionGroupType() {
+		return collectionGroupTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPermissionT() {
 		return permissionTEDataType;
 	}
@@ -2337,6 +2363,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_NUMBER);
 		createEReference(collectionGroupEClass, COLLECTION_GROUP__SESSION);
 		createEReference(collectionGroupEClass, COLLECTION_GROUP__COLLECTION_CENTER);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__TYPE);
 
 		routeEClass = createEClass(ROUTE);
 		createEAttribute(routeEClass, ROUTE__ID);
@@ -2478,6 +2505,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 		milkPricePeriodEEnum = createEEnum(MILK_PRICE_PERIOD);
 		preferenceTypeEEnum = createEEnum(PREFERENCE_TYPE);
+		collectionGroupTypeEEnum = createEEnum(COLLECTION_GROUP_TYPE);
 
 		// Create data types
 		permissionTEDataType = createEDataType(PERMISSION_T);
@@ -2617,6 +2645,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionGroup_JournalNumber(), ecorePackage.getEString(), "journalNumber", "", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionGroup_Session(), this.getCollectionSession(), null, "session", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionGroup_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_Type(), this.getCollectionGroupType(), "type", "ScaleGroup", 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2799,6 +2828,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.LONG);
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.FLOAT);
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.DOUBLE);
+
+		initEEnum(collectionGroupTypeEEnum, CollectionGroupType.class, "CollectionGroupType");
+		addEEnumLiteral(collectionGroupTypeEEnum, CollectionGroupType.SCALE_GROUP);
+		addEEnumLiteral(collectionGroupTypeEEnum, CollectionGroupType.JOURNAL_GROUP);
 
 		// Initialize data types
 		initEDataType(permissionTEDataType, com.agritrace.edairy.desktop.common.model.dairy.security.Permission.class, "PermissionT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

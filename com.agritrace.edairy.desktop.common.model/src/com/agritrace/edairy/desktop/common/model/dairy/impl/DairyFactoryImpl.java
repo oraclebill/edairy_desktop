@@ -109,6 +109,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createMilkPricePeriodFromString(eDataType, initialValue);
 			case DairyPackage.PREFERENCE_TYPE:
 				return createPreferenceTypeFromString(eDataType, initialValue);
+			case DairyPackage.COLLECTION_GROUP_TYPE:
+				return createCollectionGroupTypeFromString(eDataType, initialValue);
 			case DairyPackage.PERMISSION_T:
 				return createPermissionTFromString(eDataType, initialValue);
 			default:
@@ -136,6 +138,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertMilkPricePeriodToString(eDataType, instanceValue);
 			case DairyPackage.PREFERENCE_TYPE:
 				return convertPreferenceTypeToString(eDataType, instanceValue);
+			case DairyPackage.COLLECTION_GROUP_TYPE:
+				return convertCollectionGroupTypeToString(eDataType, instanceValue);
 			case DairyPackage.PERMISSION_T:
 				return convertPermissionTToString(eDataType, instanceValue);
 			default:
@@ -490,6 +494,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertPreferenceTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionGroupType createCollectionGroupTypeFromString(EDataType eDataType, String initialValue) {
+		CollectionGroupType result = CollectionGroupType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCollectionGroupTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

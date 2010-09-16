@@ -1134,13 +1134,22 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_GROUP__COLLECTION_CENTER = 15;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_GROUP__TYPE = 16;
+
+	/**
 	 * The number of structural features of the '<em>Collection Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_GROUP_FEATURE_COUNT = 16;
+	int COLLECTION_GROUP_FEATURE_COUNT = 17;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -2707,6 +2716,16 @@ public interface DairyPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType <em>Collection Group Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionGroupType()
+	 * @generated
+	 */
+	int COLLECTION_GROUP_TYPE = 29;
+
+	/**
 	 * The meta object id for the '<em>Permission T</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2714,7 +2733,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
 	 * @generated
 	 */
-	int PERMISSION_T = 29;
+	int PERMISSION_T = 30;
 
 
 	/**
@@ -3535,6 +3554,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCollectionGroup_CollectionCenter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getType()
+	 * @see #getCollectionGroup()
+	 * @generated
+	 */
+	EAttribute getCollectionGroup_Type();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriver <em>Driver</em>}'.
@@ -4955,6 +4985,16 @@ public interface DairyPackage extends EPackage {
 	EEnum getPreferenceType();
 
 	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType <em>Collection Group Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Collection Group Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+	 * @generated
+	 */
+	EEnum getCollectionGroupType();
+
+	/**
 	 * Returns the meta object for data type '{@link com.agritrace.edairy.desktop.common.model.dairy.security.Permission <em>Permission T</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5670,6 +5710,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COLLECTION_GROUP__COLLECTION_CENTER = eINSTANCE.getCollectionGroup_CollectionCenter();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_GROUP__TYPE = eINSTANCE.getCollectionGroup_Type();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -6692,6 +6740,16 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum PREFERENCE_TYPE = eINSTANCE.getPreferenceType();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType <em>Collection Group Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionGroupType()
+		 * @generated
+		 */
+		EEnum COLLECTION_GROUP_TYPE = eINSTANCE.getCollectionGroupType();
 
 		/**
 		 * The meta object literal for the '<em>Permission T</em>' data type.
