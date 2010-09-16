@@ -30,7 +30,7 @@ import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class PersistenceManager {
+public class PersistenceManager implements Provider<Session> {
 
 	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(Activator.getDefault(),
 			PersistenceManager.class);
@@ -59,6 +59,7 @@ public class PersistenceManager {
 		return PROVIDER.get();
 	}
 
+	// TODO: Make tests inject PersistenceManager
 	@Deprecated
 	public static void reset(PersistenceManager pm) {
 		if (!"true".equals(System.getProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY))) {
@@ -104,9 +105,7 @@ public class PersistenceManager {
 	}
 
 	private final HbDataStore hbds;
-
 	private Session session;
-
 	private final SessionFactory sessionFactory;
 
 	protected PersistenceManager() {
@@ -140,15 +139,14 @@ public class PersistenceManager {
 		return hbds;
 	}
 
+	/**
+	 * Deprecated. Inject a <code>Provider&lt;Session&gt;</code> instead.
+	 * 
+	 * @return New Hibernate session
+	 */
+	@Deprecated
 	public Session getSession() {
-		if (null == session) {
-			session = sessionFactory.openSession();
-			LOG.log(LogService.LOG_DEBUG, "--> created session: " + session);
-		} else if (!session.isConnected()) {
-			session = sessionFactory.openSession();
-			LOG.log(LogService.LOG_DEBUG, "--> creatied session: " + session);
-		}
-		return session;
+		return get();
 	}
 
 	protected Properties getDatastoreProperties() {
@@ -230,5 +228,17 @@ public class PersistenceManager {
 	 */
 	void resetDefault() {
 		INSTANCE = null;
+	}
+
+	@Override
+	public Session get() {
+		if (null == session) {
+			session = sessionFactory.openSession();
+			LOG.log(LogService.LOG_DEBUG, "--> created session: " + session);
+		} else if (!session.isConnected()) {
+			session = sessionFactory.openSession();
+			LOG.log(LogService.LOG_DEBUG, "--> creatied session: " + session);
+		}
+		return session;
 	}
 }

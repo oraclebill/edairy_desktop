@@ -20,15 +20,30 @@ import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Scopes;
 
 public class PersistenceManagerTest {
-	PersistenceManager testPM;
-	Session testSession;
+	@Inject
+	private Session testSession;
+	@Inject
+	private PersistenceManager testPM;
 	
 	@Before
 	public void setUp() throws Exception {
-		testPM = new HsqldbMemoryPersistenceManager();
-		testSession = testPM.getSession();
+		Injector injector = Guice.createInjector(new AbstractModule() {
+			@Override
+			protected void configure() {
+				bind(Session.class).toProvider(HsqlDbPersistenceManager.class);
+				bind(PersistenceManager.class).to(HsqlDbPersistenceManager.class);
+				bind(HsqlDbPersistenceManager.class).in(Scopes.SINGLETON);
+			}
+		});
+		
+		injector.injectMembers(this);
 	}
 
 	@After

@@ -28,17 +28,16 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
  * @author oraclebill
  *
  */
-public abstract class RepositoryFactory {
-	
+public final class RepositoryFactory {
 	private final static Map<String, Object> repositories;
+	
 	static {
 		repositories = new HashMap<String, Object>();
 		initRepositoryMap();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <X extends EObject> IRepository<X> getRepository(
-			final Class<X> repoClass) {
+	public static <X extends EObject> IRepository<X> getRepository(final Class<X> repoClass) {
 		synchronized (repositories) {
 			String repoName = repoClass.getName();
 			IRepository<X> repo = (IRepository<X>) repositories.get(repoName);
@@ -49,7 +48,7 @@ public abstract class RepositoryFactory {
 						return repoClass;
 					}
 				};
-				configureRepository(repo);
+
 				addRepository(repoClass, repo);
 			}
 			return repo;
@@ -120,14 +119,6 @@ public abstract class RepositoryFactory {
 		return DairyRepository.getInstance();
 	}
 		
-	/**
-	 * 
-	 * @param newRepository
-	 */
-	private static void configureRepository(IRepository<?> newRepository) {
-		// TODO: 
-	}
-
 	private RepositoryFactory() {
 		// don't really wan't to instantiate this - it's here for the statics..
 	}
