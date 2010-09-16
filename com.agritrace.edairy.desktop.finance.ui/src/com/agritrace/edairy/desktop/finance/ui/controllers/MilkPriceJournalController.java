@@ -11,10 +11,6 @@ import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.swt.widgets.Shell;
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -22,9 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
@@ -66,32 +60,6 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 			firePropertyChanged(END_DATE, oldValue, endDate);
 		}
 
-	}
-
-	abstract static class Repo extends HibernateRepository<MilkPrice> implements IRepository<MilkPrice> {
-		class LatestMilkPriceQuery extends SessionRunnable<MilkPrice> {
-			public void run(Session session) {
-				final DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice").setProjection(
-						Property.forName("priceDate").max());
-				setResult((MilkPrice) session.createCriteria("MilkPrice")
-						.add(Property.forName("priceDate").eq(maxDate)).uniqueResult());
-			}
-		}
-
-		class MilkPriceDateRangeQuery extends SessionRunnable<List<MilkPrice>> {
-			private final Date startDate, endDate;
-
-			public MilkPriceDateRangeQuery(Date startDate, Date endDate) {
-				this.startDate = startDate;
-				this.endDate = endDate;
-			}
-
-			@SuppressWarnings("unchecked")
-			public void run(Session session) {
-				setResult((List<MilkPrice>) session.createCriteria("MilkPrice")
-						.add(Restrictions.between("priceDate", startDate, endDate)).list());
-			}
-		}
 	}
 	
 	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();

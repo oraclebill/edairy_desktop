@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
@@ -43,7 +44,6 @@ import com.agritrace.edairy.desktop.collection.ui.components.validators.Duplicat
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MandatoryFieldsCheck;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MemberLookupValidator;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberCacheProvider;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberLookupProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -52,7 +52,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
@@ -66,6 +65,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 public class BulkCollectionsEntryDialogController extends
 		BaseDialogController<CollectionGroup> {
 
+	/*
 	private final class GenericMemberInfo implements IMemberInfoProvider {
 		// private final Route currentRoute;
 		private final IMemberInfoProvider lookupProvider;
@@ -103,7 +103,7 @@ public class BulkCollectionsEntryDialogController extends
 		}
 	}
 
-	public class RouteMatchValidator implements IValidator {
+	private class RouteMatchValidator implements IValidator {
 		Route route;
 
 		RouteMatchValidator(Route route) {
@@ -124,6 +124,7 @@ public class BulkCollectionsEntryDialogController extends
 		}
 
 	}
+	*/
 
 	public static final String CONTEXT_JOURNAL_PAGE = "CONTEXT_JOURNAL_PAGE";
 	public static final String CONTEXT_PERSISTENCE_DELEGATE = "CONTEXT_PERSISTENCE_DELEGATE";
@@ -505,7 +506,8 @@ public class BulkCollectionsEntryDialogController extends
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(
 				workingJournalPage.getJournalEntries(), "Collection Journal"));
 		
-		final MilkCollectionJournalLineRepository repository = new MilkCollectionJournalLineRepository();
+		final ICollectionJournalLineRepository repository =
+			RepositoryFactory.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		
 		collectionLineRidget.addValidator(new IValidator() {
 			@Override

@@ -18,8 +18,10 @@ import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
 
@@ -52,7 +54,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	public MilkCollectionDetailLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_LINE);
 		// setEntityClass(CollectionJournalLine.class);
-		setRepository(new MilkCollectionJournalLineRepository());
+		setRepository(RepositoryFactory.getRegisteredRepository(ICollectionJournalLineRepository.class));
 
 		addTableColumn("Page", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
 		addTableColumn("Line", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__LINE_NUMBER);

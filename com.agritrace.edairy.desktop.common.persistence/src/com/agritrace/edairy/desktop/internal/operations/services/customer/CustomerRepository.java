@@ -6,8 +6,8 @@ import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 
 public class CustomerRepository extends HibernateRepository<Customer> {
 

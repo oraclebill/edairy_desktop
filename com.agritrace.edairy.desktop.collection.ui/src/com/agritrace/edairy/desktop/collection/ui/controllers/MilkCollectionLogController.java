@@ -35,6 +35,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -118,7 +119,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	public MilkCollectionLogController() {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		
-		ICollectionJournalRepository journalRepo = new  MilkCollectionJournalRepository();		
+		final IRepository<CollectionGroup> journalRepo = RepositoryFactory.getRepository(CollectionGroup.class);
 		setRepository(journalRepo);
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);

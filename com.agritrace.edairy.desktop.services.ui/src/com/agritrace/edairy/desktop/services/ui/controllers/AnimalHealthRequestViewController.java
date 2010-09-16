@@ -41,13 +41,13 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
-import com.agritrace.edairy.desktop.services.ui.AnimalHealthRequestRepository;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 
@@ -108,13 +108,17 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
 	private IActionRidget memberLookupButton;
 	private ITextRidget memberText;
-	private final IAnimalHealthRequestRepository myDairy = new AnimalHealthRequestRepository();
-	private AnimalHealthRequestRepository myRepo;
+	private IRepository<AnimalHealthRequest> myRepo;
 
 	private IDateTimeRidget startDateText;
 
 	private IToggleButtonRidget vertRidget;
 
+	public AnimalHealthRequestViewController() {
+		super();
+		setRepository(myRepo = RepositoryFactory.getRepository(AnimalHealthRequest.class));
+	}
+	
 	@Override
 	public void configureTableRidget() {
 		masterTable = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
@@ -182,15 +186,6 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	}
 
 	@Override
-	public IRepository<AnimalHealthRequest> getRepository() {
-		if (this.myRepo == null) {
-			myRepo = new AnimalHealthRequestRepository();
-			return new AnimalHealthRequestRepository();
-		}
-		return myRepo;
-	}
-
-	@Override
 	protected void configureFilterRidgets() {
 
 		this.condtionsBean.setStartDate(DateTimeUtils.getFirstDayOfMonth(Calendar.getInstance().getTime()));
@@ -251,8 +246,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 	@Override
 	protected List<AnimalHealthRequest> getFilteredResult() {
-
-		final List<AnimalHealthRequest> requests = myDairy.allRequests();
+		final List<AnimalHealthRequest> requests = myRepo.all();
 
 		// shortcut if no requests to filter.
 		if (requests.size() == 0) {

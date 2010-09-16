@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +16,9 @@ import org.hibernate.metadata.ClassMetadata;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
+import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {

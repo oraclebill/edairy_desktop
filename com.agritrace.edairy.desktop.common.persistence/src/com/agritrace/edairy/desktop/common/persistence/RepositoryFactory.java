@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
@@ -100,6 +102,7 @@ public abstract class RepositoryFactory {
 	private static void initRepositoryMap() {
 //		addRepository(Membership.class, new MembershipRepository());
 //		addRepository(Dairy.class, RepositoryFactory.getDairyRepository());
+		addRepository(CollectionJournalLine.class, new MilkCollectionJournalLineRepository());
 		addRepository(Customer.class, new CustomerRepository());
 		addRepository(DairyLocation.class, new DairyLocationRepository());
 		addRepository(Employee.class, new EmployeeRepository());

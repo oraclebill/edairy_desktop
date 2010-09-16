@@ -3,7 +3,7 @@ package com.agritrace.edairy.desktop.internal.member.services.farm;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 
 public class FarmRepository extends HibernateRepository<Farm> implements IFarmRepository {

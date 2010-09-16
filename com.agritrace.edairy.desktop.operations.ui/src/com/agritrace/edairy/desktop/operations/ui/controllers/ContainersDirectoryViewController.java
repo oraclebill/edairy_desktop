@@ -13,8 +13,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -26,15 +26,7 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
 public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer> {
 
 	private final ContainerSearchBean searchBean = new ContainerSearchBean();
-
-	private final HibernateRepository<DairyContainer> containerRepository = new HibernateRepository<DairyContainer>() {
-
-		@Override
-		protected Class<?> getClassType() {
-			return DairyContainer.class;
-		}
-
-	};
+	private final IRepository<DairyContainer> containerRepository;
 	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
 
 	private ITextRidget trackingText;
@@ -42,6 +34,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	public ContainersDirectoryViewController() {
 		super();
 		setEClass(DairyPackage.Literals.DAIRY_CONTAINER);
+		containerRepository = RepositoryFactory.getRepository(DairyContainer.class);
 		setRepository(containerRepository);
 
 		addTableColumn("ID", TrackingPackage.Literals.CONTAINER__CONTAINER_ID);

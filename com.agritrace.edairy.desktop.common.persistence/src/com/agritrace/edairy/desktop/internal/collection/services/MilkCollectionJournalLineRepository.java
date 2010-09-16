@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.ui.controllers;
+package com.agritrace.edairy.desktop.internal.collection.services;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,20 +9,23 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.HibernateRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 
 public class MilkCollectionJournalLineRepository extends HibernateRepository<CollectionJournalLine> implements
-		IRepository<CollectionJournalLine> {
+		ICollectionJournalLineRepository {
 
 	@Override
 	protected Class<CollectionJournalLine> getClassType() {
 		return CollectionJournalLine.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.internal.collection.services.ICollectionJournalLineRepository#countByMemberCenterDate(com.agritrace.edairy.desktop.common.model.dairy.Membership, com.agritrace.edairy.desktop.common.model.dairy.DairyLocation, java.util.Date)
+	 */
 	public int countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date) {
 		SessionRunnable<Integer> runnable = new SessionRunnable<Integer>() {
 			@Override

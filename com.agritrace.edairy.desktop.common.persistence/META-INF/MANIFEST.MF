@@ -21,7 +21,8 @@ Import-Package: com.mysql.jdbc,
  org.hibernate.dialect;version="3.3.2",
  org.hsqldb;version="1.8.1",
  org.hsqldb.jdbc;version="1.8.1"
-Export-Package: com.agritrace.edairy.desktop.common.persistence;
+Export-Package: com.agritrace.edairy.desktop.collection.services,
+ com.agritrace.edairy.desktop.common.persistence;
   uses:="com.agritrace.edairy.desktop.common.model.requests,
    com.agritrace.edairy.desktop.common.model.tracking,
    com.agritrace.edairy.desktop.common.model.dairy,

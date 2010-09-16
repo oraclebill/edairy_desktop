@@ -64,7 +64,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	private final SearchBean searchBean = new SearchBean();
 
 	public RouteListController() {
-		setRepository(new RouteRepository());
+		setRepository(RepositoryFactory.getRepository(Route.class));
 		setEClass(DairyPackage.Literals.ROUTE);
 
 		// addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);
